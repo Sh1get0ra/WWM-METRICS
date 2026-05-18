@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>風燕伝 ダメージ計算ツール</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Yu Gothic UI', 'Hiragino Sans', 'Noto Sans JP', 'Noto Sans SC', 'Noto Sans KR', sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.container { max-width: 1120px; margin: 0 auto; padding: 16px; }
+
+header {
+  background:
+    linear-gradient(to right, rgba(10,24,50,0.88) 35%, rgba(15,39,68,0.55) 100%),
+    url('https://media.discordapp.net/attachments/1311569308651884564/1505835347194413157/logo.jpg?ex=6a0c11f3&is=6a0ac073&hm=cc416bb6b5f151dc1ab26b7104ba6b379d5f131daaa04c85f4dea47fa81805aa&=&format=webp') center / cover no-repeat;
+  color: white;
+  padding: 22px 28px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 84px;
+  overflow: hidden;
+}
+header .icon { font-size: 32px; flex-shrink: 0; }
+header .header-text { flex: 1; }
+header h1 { font-size: 20px; font-weight: 700; letter-spacing: 0.05em; }
+header p  { font-size: 11px; opacity: 0.75; margin-top: 3px; }
+
+.lang-switcher { display: flex; gap: 5px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
+.lang-btn {
+  padding: 5px 10px; border: 1.5px solid rgba(255,255,255,0.4);
+  background: transparent; color: rgba(255,255,255,0.75);
+  border-radius: 5px; font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+}
+.lang-btn:hover  { background: rgba(255,255,255,0.15); color: white; }
+.lang-btn.active { background: rgba(255,255,255,0.25); color: white; border-color: white; }
+
+.legend {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  background: white; border-radius: 8px; padding: 10px 14px;
+  margin-bottom: 14px; border: 1px solid #e2e8f0; font-size: 12px;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; color: #475569; }
+.legend-dot   { width: 12px; height: 12px; border-radius: 3px; }
+.dot-input  { background: #eff6ff; border: 1.5px solid #93c5fd; }
+.dot-auto   { background: #f0fdf4; border: 1.5px solid #86efac; }
+.dot-result { background: #fefce8; border: 1.5px solid #fde047; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+@media (max-width: 740px) { .grid-2 { grid-template-columns: 1fr; } }
+
+.card {
+  background: white; border-radius: 10px;
+  padding: 14px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+  border: 1px solid #e8edf3; overflow: hidden;
+}
+.card-title {
+  font-family: 'Rajdhani', 'Yu Gothic UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  font-weight: 700; font-size: 15px; letter-spacing: 0.14em;
+  text-align: center; text-transform: uppercase;
+  color: #fff;
+  margin: -14px -16px 12px;
+  padding: 10px 16px;
+  border-radius: 0;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+  position: relative;
+}
+.card-title::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+}
+
+/* ── Card title colors ───────────────────────────────────────────── */
+.ct-blue   { background: linear-gradient(135deg, #0c2340 0%, #2563eb 100%); }
+.ct-purple { background: linear-gradient(135deg, #1e1b4b 0%, #7c3aed 100%); }
+.ct-red    { background: linear-gradient(135deg, #3b0a0a 0%, #dc2626 100%); }
+.ct-teal   { background: linear-gradient(135deg, #042f2e 0%, #0891b2 100%); }
+.ct-green  { background: linear-gradient(135deg, #052e16 0%, #059669 100%); }
+.ct-slate  { background: linear-gradient(135deg, #111827 0%, #4b5563 100%); }
+
+.field-row {
+  display: flex; align-items: center;
+  margin-bottom: 5px; gap: 6px; min-height: 26px;
+}
+.field-label { flex: 1; font-size: 12px; color: #475569; min-width: 0; }
+.field-input {
+  width: 86px; padding: 3px 7px;
+  border: 1.5px solid #93c5fd; border-radius: 5px;
+  font-size: 12px; text-align: right;
+  background: #eff6ff; color: #1e40af; font-weight: 600;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.field-input:focus {
+  outline: none; border-color: #3b82f6;
+  box-shadow: 0 0 0 2.5px rgba(59,130,246,0.2);
+}
+.field-auto {
+  width: 86px; padding: 3px 7px; font-size: 12px; text-align: right;
+  background: #f0fdf4; color: #166534;
+  border: 1.5px solid #86efac; border-radius: 5px; font-weight: 600;
+}
+.field-auto-label { font-size: 10px; color: #94a3b8; white-space: nowrap; }
+.pct-unit { font-size: 11px; color: #6b7280; font-weight: 600; width: 14px; text-align: center; flex-shrink: 0; }
+.pct-gap  { width: 14px; flex-shrink: 0; }
+
+.judge-grid {
+  display: grid;
+  grid-template-columns: 1fr 80px 14px 76px;
+  gap: 5px 6px;
+  align-items: center;
+}
+.jg-head { font-size: 10px; color: #94a3b8; text-align: right; padding-bottom: 2px; }
+.jg-head:first-child { text-align: left; }
+
+select.field-input { text-align: left; cursor: pointer; width: 108px; }
+
+/* Results */
+.results-card {
+  background: white; border-radius: 10px;
+  padding: 14px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+  border: 1px solid #fde68a; margin-bottom: 12px; overflow: hidden;
+}
+.results-title {
+  font-family: 'Rajdhani', 'Yu Gothic UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  font-weight: 700; font-size: 15px; letter-spacing: 0.14em;
+  text-align: center; text-transform: uppercase; color: #fff;
+  margin: -14px -16px 14px; padding: 10px 16px;
+  background: linear-gradient(135deg, #292400 0%, #d97706 100%);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.35); position: relative;
+}
+.results-title::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+}
+
+.prob-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.prob-item {
+  flex: 1; min-width: 90px; border-radius: 10px;
+  padding: 12px 10px; text-align: center; border: 1.5px solid;
+}
+.prob-item-crit     { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border-color: #fca5a5; }
+.prob-item-sympathy { background: linear-gradient(135deg, #faf5ff 0%, #ede9fe 100%); border-color: #c4b5fd; }
+.prob-item-graze    { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border-color: #fdba74; }
+.prob-item-normal   { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-color: #86efac; }
+.prob-label { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+.prob-item-crit     .prob-label { color: #991b1b; }
+.prob-item-sympathy .prob-label { color: #5b21b6; }
+.prob-item-graze    .prob-label { color: #9a3412; }
+.prob-item-normal   .prob-label { color: #166534; }
+.prob-value { font-size: 22px; font-weight: 800; }
+.prob-crit     { color: #dc2626; }
+.prob-sympathy { color: #7c3aed; }
+.prob-graze    { color: #ea580c; }
+.prob-normal   { color: #16a34a; }
+
+.results-table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 640px; }
+.results-table th {
+  background: #fef3c7; padding: 5px 8px;
+  border: 1px solid #fde68a; text-align: center;
+  font-size: 11px; font-weight: 700; color: #78350f;
+}
+.results-table td { padding: 5px 8px; border: 1px solid #e2e8f0; text-align: right; }
+.results-table td.lbl {
+  text-align: center; font-weight: 700;
+  background: #f8fafc; color: #334155; font-size: 11px; white-space: nowrap;
+}
+.results-table tr.expected td { background: #fefce8; font-weight: 800; color: #b45309; }
+.results-table tr.expected td.lbl { color: #92400e; }
+.results-table .na { text-align: center; color: #cbd5e1; }
+
+/* Intermediate */
+.inter-section {
+  background: white; border-radius: 10px;
+  border: 1px solid #e2e8f0; overflow: hidden; margin-bottom: 12px;
+}
+.inter-section summary {
+  cursor: pointer; font-weight: 600; font-size: 13px; color: #64748b;
+  padding: 12px 16px; list-style: none; display: flex; align-items: center; gap: 8px;
+  user-select: none;
+}
+.inter-section summary::before { content: '▶'; font-size: 10px; color: #94a3b8; transition: transform 0.2s; }
+details[open] summary::before { transform: rotate(90deg); }
+.inter-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  gap: 6px; padding: 0 16px 16px;
+}
+.inter-item { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 5px; padding: 6px 10px; }
+.inter-label { font-size: 10px; color: #64748b; }
+.inter-value { font-size: 13px; font-weight: 700; color: #334155; text-align: right; }
+
+footer { text-align: center; font-size: 11px; color: #94a3b8; padding: 16px 0 8px; }
+
+/* ── Presets ─────────────────────────────────────────────────────── */
+.preset-bar {
+  background: white; border-radius: 8px; padding: 10px 14px;
+  margin-bottom: 14px; border: 1px solid #e2e8f0;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.preset-bar-title { font-size: 12px; font-weight: 700; color: #475569; flex-shrink: 0; }
+.preset-slots { display: flex; gap: 8px; flex-wrap: wrap; flex: 1; }
+.preset-slot {
+  display: flex; align-items: center; gap: 4px;
+  background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 7px;
+  padding: 5px 8px; flex: 1; min-width: 190px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.preset-slot.has-data { border-color: #93c5fd; background: #eff6ff; }
+.preset-slot-num { font-size: 10px; color: #94a3b8; font-weight: 700; flex-shrink: 0; margin-right: 2px; }
+.preset-name-input {
+  flex: 1; border: none; background: transparent; font-size: 12px;
+  color: #1e40af; font-weight: 600; min-width: 0; outline: none; cursor: text;
+}
+.preset-slot:not(.has-data) .preset-name-input { color: #334155; }
+.preset-name-input::placeholder { color: #cbd5e1; font-weight: 400; }
+.preset-btn {
+  padding: 3px 7px; border-radius: 4px; font-size: 11px; font-weight: 700;
+  cursor: pointer; border: 1.5px solid; transition: all 0.12s; white-space: nowrap; line-height: 1.4;
+}
+.preset-save { background: #dbeafe; border-color: #93c5fd; color: #1e40af; }
+.preset-save:hover { background: #bfdbfe; border-color: #60a5fa; }
+.preset-load { background: #d1fae5; border-color: #6ee7b7; color: #065f46; }
+.preset-load:hover:not(:disabled) { background: #a7f3d0; border-color: #34d399; }
+.preset-del  { background: #fee2e2; border-color: #fca5a5; color: #991b1b; font-size: 10px; padding: 3px 6px; }
+.preset-del:hover:not(:disabled) { background: #fecaca; border-color: #f87171; }
+.preset-load:disabled, .preset-del:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* ── Dark Mode ───────────────────────────────────────────────────── */
+.dark-toggle {
+  padding: 5px 9px; border: 1.5px solid rgba(255,255,255,0.4);
+  background: transparent; color: rgba(255,255,255,0.75);
+  border-radius: 5px; font-size: 14px; cursor: pointer;
+  transition: all 0.15s; line-height: 1;
+}
+.dark-toggle:hover { background: rgba(255,255,255,0.15); color: white; }
+
+html[data-theme="dark"] body          { background: #0f172a; color: #e2e8f0; }
+html[data-theme="dark"] .legend       { background: #1e293b; border-color: #334155; }
+html[data-theme="dark"] .legend-item  { color: #94a3b8; }
+html[data-theme="dark"] .dot-input    { background: #172554; border-color: #1e40af; }
+html[data-theme="dark"] .dot-auto     { background: #052e16; border-color: #166534; }
+html[data-theme="dark"] .dot-result   { background: #292013; border-color: #92400e; }
+
+html[data-theme="dark"] .card         { background: #1e293b; border-color: #334155; box-shadow: 0 1px 4px rgba(0,0,0,0.4); }
+html[data-theme="dark"] .card-title   { color: #f1f5f9; }
+html[data-theme="dark"] .field-label  { color: #94a3b8; }
+html[data-theme="dark"] .field-input  { background: #172554; border-color: #1e40af; color: #93c5fd; }
+html[data-theme="dark"] .field-input:focus { border-color: #3b82f6; box-shadow: 0 0 0 2.5px rgba(59,130,246,0.3); }
+html[data-theme="dark"] select.field-input option { background: #1e293b; color: #e2e8f0; }
+html[data-theme="dark"] .field-auto   { background: #052e16; border-color: #166534; color: #4ade80; }
+html[data-theme="dark"] .pct-unit     { color: #64748b; }
+html[data-theme="dark"] .jg-head      { color: #475569; }
+
+html[data-theme="dark"] .results-card  { background: #1e293b; border-color: #92400e; }
+html[data-theme="dark"] .prob-item-crit     { background: linear-gradient(135deg, #3b0a0a 0%, #450a0a 100%); border-color: #7f1d1d; }
+html[data-theme="dark"] .prob-item-sympathy { background: linear-gradient(135deg, #2e1065 0%, #3b0764 100%); border-color: #4c1d95; }
+html[data-theme="dark"] .prob-item-graze    { background: linear-gradient(135deg, #431407 0%, #7c2d12 100%); border-color: #9a3412; }
+html[data-theme="dark"] .prob-item-normal   { background: linear-gradient(135deg, #052e16 0%, #14532d 100%); border-color: #166534; }
+html[data-theme="dark"] .prob-item-crit     .prob-label { color: #fca5a5; }
+html[data-theme="dark"] .prob-item-sympathy .prob-label { color: #c4b5fd; }
+html[data-theme="dark"] .prob-item-graze    .prob-label { color: #fdba74; }
+html[data-theme="dark"] .prob-item-normal   .prob-label { color: #86efac; }
+html[data-theme="dark"] .prob-crit     { color: #f87171; }
+html[data-theme="dark"] .prob-sympathy { color: #c084fc; }
+html[data-theme="dark"] .prob-graze    { color: #fb923c; }
+html[data-theme="dark"] .prob-normal   { color: #4ade80; }
+
+html[data-theme="dark"] .results-table th           { background: #292013; border-color: #78350f; color: #fcd34d; }
+html[data-theme="dark"] .results-table td           { border-color: #334155; color: #cbd5e1; }
+html[data-theme="dark"] .results-table td.lbl       { background: #293548; color: #94a3b8; }
+html[data-theme="dark"] .results-table tr.expected td     { background: #1e1608; color: #fbbf24; }
+html[data-theme="dark"] .results-table tr.expected td.lbl { color: #f59e0b; }
+html[data-theme="dark"] .results-table .na          { color: #475569; }
+
+html[data-theme="dark"] .inter-section         { background: #1e293b; border-color: #334155; }
+html[data-theme="dark"] .inter-section summary { color: #64748b; }
+html[data-theme="dark"] .inter-section summary::before { color: #475569; }
+html[data-theme="dark"] .inter-item            { background: #293548; border-color: #3d4f66; }
+html[data-theme="dark"] .inter-label           { color: #64748b; }
+html[data-theme="dark"] .inter-value           { color: #cbd5e1; }
+html[data-theme="dark"] #enemyPresetBox        { background: #1a2535 !important; color: #64748b; }
+html[data-theme="dark"] #enemyPresetBox b      { color: #94a3b8 !important; }
+
+html[data-theme="dark"] footer { color: #475569; }
+
+html[data-theme="dark"] .preset-bar               { background: #1e293b; border-color: #334155; }
+html[data-theme="dark"] .preset-bar-title          { color: #64748b; }
+html[data-theme="dark"] .preset-slot               { background: #293548; border-color: #3d4f66; }
+html[data-theme="dark"] .preset-slot.has-data      { background: #172554; border-color: #1e40af; }
+html[data-theme="dark"] .preset-slot-num           { color: #475569; }
+html[data-theme="dark"] .preset-name-input         { color: #93c5fd; }
+html[data-theme="dark"] .preset-slot:not(.has-data) .preset-name-input { color: #94a3b8; }
+html[data-theme="dark"] .preset-name-input::placeholder { color: #334155; }
+html[data-theme="dark"] .preset-save               { background: #172554; border-color: #1e40af; color: #93c5fd; }
+html[data-theme="dark"] .preset-save:hover         { background: #1e3a8a; border-color: #3b82f6; }
+html[data-theme="dark"] .preset-load               { background: #052e16; border-color: #166534; color: #4ade80; }
+html[data-theme="dark"] .preset-load:hover:not(:disabled) { background: #14532d; border-color: #16a34a; }
+html[data-theme="dark"] .preset-del                { background: #3b0a0a; border-color: #7f1d1d; color: #fca5a5; }
+html[data-theme="dark"] .preset-del:hover:not(:disabled)  { background: #450a0a; border-color: #991b1b; }
+
+/* ── Efficiency Table ────────────────────────────────────────────── */
+.eff-card {
+  background: white; border-radius: 10px; overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.09); border: 1px solid #e8edf3;
+  margin-bottom: 12px;
+}
+.eff-title {
+  font-family: 'Rajdhani', 'Yu Gothic UI', sans-serif;
+  font-weight: 700; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase;
+  text-align: center; color: #fff; padding: 10px 16px;
+  background: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.35); position: relative;
+}
+.eff-title::after {
+  content: ''; position: absolute; left:0; right:0; bottom:0; height:2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+}
+.eff-note { font-size: 11px; color: #64748b; padding: 8px 16px 0; }
+.eff-table-wrap { overflow-x: auto; padding: 10px 16px 16px; }
+.eff-table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 540px; }
+.eff-table th {
+  background: #1e1b4b; color: #c4b5fd; padding: 6px 10px;
+  border: 1px solid #312e81; text-align: center; font-size: 11px; white-space: nowrap;
+}
+.eff-table th:first-child { text-align: left; }
+.eff-table td { padding: 5px 10px; border: 1px solid #e2e8f0; text-align: right; white-space: nowrap; }
+.eff-table td:first-child { text-align: left; font-weight: 600; color: #334155; }
+.eff-table tr.sep td { padding: 2px; background: #f1f5f9; border: none; }
+.eff-table tr:hover td { background: #f8fafc; }
+.eff-table tr.sep:hover td { background: #f1f5f9; }
+.badge { display:inline-block; padding: 2px 7px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.badge-fire   { background: #fee2e2; color: #991b1b; }
+.badge-star   { background: #dbeafe; color: #1e40af; }
+.badge-good   { background: #d1fae5; color: #065f46; }
+.badge-low    { background: #f1f5f9; color: #64748b; }
+.score-bar-wrap { display:flex; align-items:center; gap:6px; justify-content:flex-end; }
+.score-bar { height:6px; border-radius:3px; background:#e2e8f0; min-width:60px; max-width:120px; flex:1; }
+.score-fill { height:100%; border-radius:3px; transition: width 0.3s; }
+.eff-max-input {
+  width: 68px; padding: 2px 5px; border: 1.5px solid #c7d2fe; border-radius: 4px;
+  font-size: 11px; text-align: right; background: #eef2ff; color: #3730a3; font-weight: 600;
+}
+.eff-max-input:focus { outline: none; border-color: #6366f1; box-shadow: 0 0 0 2px rgba(99,102,241,0.2); }
+/* X値セルの揃え：input + 単位ラベルを常に同幅の flex で配置 */
+.eff-max-wrap { display: inline-flex; align-items: center; justify-content: center; gap: 2px; }
+.eff-max-unit { font-size: 10px; color: #6366f1; font-weight: 700; width: 10px; text-align: left; flex-shrink: 0; }
+
+html[data-theme="dark"] .eff-max-unit { color: #818cf8; }
+html[data-theme="dark"] .eff-max-input { background: #1e1b4b; border-color: #3730a3; color: #a5b4fc; }
+html[data-theme="dark"] .eff-max-input:focus { border-color: #818cf8; box-shadow: 0 0 0 2px rgba(129,140,248,0.25); }
+
+html[data-theme="dark"] .eff-card     { background: #1e293b; border-color: #334155; }
+html[data-theme="dark"] .eff-note     { color: #475569; }
+html[data-theme="dark"] .eff-table th { background: #1e1b4b; border-color: #2e2a7a; }
+html[data-theme="dark"] .eff-table td { border-color: #334155; color: #cbd5e1; }
+html[data-theme="dark"] .eff-table td:first-child { color: #94a3b8; }
+html[data-theme="dark"] .eff-table tr.sep td { background: #293548; }
+html[data-theme="dark"] .eff-table tr:hover td { background: #293548; }
+html[data-theme="dark"] .score-bar    { background: #334155; }
+html[data-theme="dark"] .badge-fire   { background: #450a0a; color: #fca5a5; }
+html[data-theme="dark"] .badge-star   { background: #172554; color: #93c5fd; }
+html[data-theme="dark"] .badge-good   { background: #052e16; color: #4ade80; }
+html[data-theme="dark"] .badge-low    { background: #293548; color: #64748b; }
+
+/* ── 画像出力ボタン ──────────────────────────────────────────────── */
+.export-btn {
+  padding: 4px 10px;
+  border-radius: 5px;
+  border: 1.5px solid #f59e0b;
+  background: rgba(245,158,11,0.12);
+  color: #f59e0b;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.export-btn:hover { background: #f59e0b; color: #1a1400; }
+.export-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+#export-card {
+  display: none;
+  position: fixed;
+  top: -9999px;
+  left: -9999px;
+}
+
+/* ── Toast通知 ───────────────────────────────────────────────────── */
+#toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: #1e293b;
+  color: #f1f5f9;
+  padding: 11px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+#toast.show { opacity: 1; transform: translateY(0); }
+html[data-theme="dark"] #toast { background: #334155; color: #e2e8f0; }
+
+/* ── Sticky header ───────────────────────────────────────────────── */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: #f1f5f9;
+  padding-bottom: 2px;
+  margin-bottom: 12px;
+}
+.sticky-header header { margin-bottom: 8px; }
+.sticky-header .preset-bar { margin-bottom: 0; }
+html[data-theme="dark"] .sticky-header { background: #0f172a; }
+</style>
+</head>
+<body>
+<div class="container">
+<div class="sticky-header">
+<header>
+  <div class="icon"><img src="https://media.discordapp.net/attachments/1311569308651884564/1505835347194413157/logo.jpg?ex=6a0c11f3&is=6a0ac073&hm=cc416bb6b5f151dc1ab26b7104ba6b379d5f131daaa04c85f4dea47fa81805aa&=&format=webp" alt="logo" style="width:48px;height:48px;border-radius:8px;object-fit:cover;display:block;"></div>
+  <div class="header-text">
+    <h1 data-i18n="headerTitle">風燕伝　ダメージ計算ツール</h1>
+    <p data-i18n="headerSub">スキル・ステータスを入力してリアルタイムでダメージを計算します</p>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('ja')">日本語</button>
+    <button class="lang-btn"        onclick="setLang('en')">EN</button>
+    <button class="lang-btn"        onclick="setLang('zh')">中文</button>
+    <button class="lang-btn"        onclick="setLang('ko')">한국어</button>
+    <button class="export-btn"      id="exportBtn"  onclick="exportImage()">📷 Export</button>
+    <button class="dark-toggle"     id="darkToggle" onclick="toggleDark()" title="Dark mode">🌙</button>
+  </div>
+</header>
+
+<!-- Presets -->
+<div class="preset-bar">
+  <span class="preset-bar-title" data-i18n="presetTitle">💾 プリセット</span>
+  <div class="preset-slots">
+    <div class="preset-slot" id="presetSlot0">
+      <span class="preset-slot-num">1</span>
+      <input class="preset-name-input" id="presetName0" type="text" maxlength="20">
+      <button class="preset-btn preset-save" onclick="savePreset(0)" data-i18n="presetSave">保存</button>
+      <button class="preset-btn preset-load" id="presetLoadBtn0" onclick="loadPreset(0)" data-i18n="presetLoad" disabled>読込</button>
+      <button class="preset-btn preset-del"  id="presetDelBtn0"  onclick="deletePreset(0)" disabled>✕</button>
+    </div>
+    <div class="preset-slot" id="presetSlot1">
+      <span class="preset-slot-num">2</span>
+      <input class="preset-name-input" id="presetName1" type="text" maxlength="20">
+      <button class="preset-btn preset-save" onclick="savePreset(1)" data-i18n="presetSave">保存</button>
+      <button class="preset-btn preset-load" id="presetLoadBtn1" onclick="loadPreset(1)" data-i18n="presetLoad" disabled>読込</button>
+      <button class="preset-btn preset-del"  id="presetDelBtn1"  onclick="deletePreset(1)" disabled>✕</button>
+    </div>
+    <div class="preset-slot" id="presetSlot2">
+      <span class="preset-slot-num">3</span>
+      <input class="preset-name-input" id="presetName2" type="text" maxlength="20">
+      <button class="preset-btn preset-save" onclick="savePreset(2)" data-i18n="presetSave">保存</button>
+      <button class="preset-btn preset-load" id="presetLoadBtn2" onclick="loadPreset(2)" data-i18n="presetLoad" disabled>読込</button>
+      <button class="preset-btn preset-del"  id="presetDelBtn2"  onclick="deletePreset(2)" disabled>✕</button>
+    </div>
+  </div>
+</div>
+</div><!-- /sticky-header -->
+
+<!-- Row 1: ①基本ステータス + ④スキルステータス -->
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title ct-blue" data-i18n="sec1">基本ステータス</div>
+    <div class="field-row"><span class="field-label" data-i18n="minPhysATK">最小物理ATK</span>
+      <input class="field-input" id="minPhysATK" type="number" value="1388" step="1"></div>
+    <div class="field-row"><span class="field-label" data-i18n="maxPhysATK">最大物理ATK</span>
+      <input class="field-input" id="maxPhysATK" type="number" value="2100" step="1"></div>
+    <div class="field-row"><span class="field-label" data-i18n="minElemMain">最小属性ATK（主）</span>
+      <input class="field-input" id="minElemMain" type="number" value="409" step="1"></div>
+    <div class="field-row"><span class="field-label" data-i18n="maxElemMain">最大属性ATK（主）</span>
+      <input class="field-input" id="maxElemMain" type="number" value="685" step="1"></div>
+    <div class="field-row"><span class="field-label" data-i18n="minElemSub">最小属性ATK（副）</span>
+      <input class="field-input" id="minElemSub" type="number" value="34" step="1"></div>
+    <div class="field-row"><span class="field-label" data-i18n="maxElemSub">最大属性ATK（副）</span>
+      <input class="field-input" id="maxElemSub" type="number" value="34" step="1"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title ct-teal" data-i18n="sec4">スキルステータス</div>
+    <div class="field-row"><span class="field-label" data-i18n="outerCoeff">外功係数</span>
+      <input class="field-input" id="outerCoeff" type="number" value="247.56" step="0.01">
+      <span class="pct-unit">%</span></div>
+    <div class="field-row"><span class="field-label" data-i18n="statusCoeff">ステータス攻撃係数</span>
+      <input class="field-input" id="statusCoeff" type="number" value="371.34" step="0.01">
+      <span class="pct-unit">%</span></div>
+    <div class="field-row"><span class="field-label" data-i18n="outerAdd">外功付加</span>
+      <input class="field-input" id="outerAdd" type="number" value="572" step="1">
+      <span class="pct-gap"></span></div>
+  </div>
+</div>
+
+<!-- Row 2: ②判定確率 + ⑤その他ステータス -->
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title ct-purple" data-i18n="sec2">判定確率</div>
+    <div class="judge-grid">
+      <div class="jg-head"></div>
+      <div class="jg-head" data-i18n="jgInputVal">入力値</div>
+      <div class="jg-head"></div>
+      <div class="jg-head" style="text-align:center;" data-i18n="jgApplied">適用値</div>
+
+      <span class="field-label" data-i18n="hitRate">命中率</span>
+      <input class="field-input" id="hitRate" type="number" value="112.6" step="0.1">
+      <span class="pct-unit">%</span>
+      <div class="field-auto" id="dispHitRate">—</div>
+
+      <span class="field-label" data-i18n="critRate">会心率</span>
+      <input class="field-input" id="critRate" type="number" value="106.6" step="0.1">
+      <span class="pct-unit">%</span>
+      <div class="field-auto" id="dispCritRate">—</div>
+
+      <span class="field-label" data-i18n="sympathyRate">会意率</span>
+      <input class="field-input" id="sympathyRate" type="number" value="22.2" step="0.1">
+      <span class="pct-unit">%</span>
+      <div class="field-auto" id="dispSympathyRate">—</div>
+
+      <span class="field-label" data-i18n="addCritRate">付加会心率</span>
+      <input class="field-input" id="addCritRate" type="number" value="4.6" step="0.1">
+      <span class="pct-unit">%</span>
+      <div></div>
+
+      <span class="field-label" data-i18n="addSympathyRate">付加会意率</span>
+      <input class="field-input" id="addSympathyRate" type="number" value="0" step="0.1">
+      <span class="pct-unit">%</span>
+      <div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title ct-green" data-i18n="sec5">その他ステータス</div>
+    <div class="field-row"><span class="field-label" data-i18n="worldLv">大世界等級（Lv）</span>
+      <input class="field-input" id="worldLv" type="number" value="14" step="1" min="0">
+      <span class="pct-gap"></span></div>
+    <div class="field-row"><span class="field-label" data-i18n="martialLv">武学等級（Lv）</span>
+      <input class="field-input" id="martialLv" type="number" value="95" step="1" min="0">
+      <span class="pct-gap"></span></div>
+    <div class="field-row"><span class="field-label" data-i18n="elemBoostMain">属性強化（主）</span>
+      <input class="field-input" id="elemBoostMain" type="number" value="1.5" step="0.01">
+      <span class="pct-gap"></span></div>
+    <div class="field-row"><span class="field-label" data-i18n="elemBoostSub">属性強化（副）</span>
+      <input class="field-input" id="elemBoostSub" type="number" value="1.0" step="0.01">
+      <span class="pct-gap"></span></div>
+    <div class="field-row"><span class="field-label" data-i18n="enemyDebuff">デバフ（敵）</span>
+      <input class="field-input" id="enemyDebuff" type="number" value="0" step="0.1">
+      <span class="pct-unit">%</span></div>
+  </div>
+</div>
+
+<!-- Row 3: ③ダメージボーナス + ⑥エネミーデータ -->
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title ct-red" data-i18n="sec3">ダメージ増加効果</div>
+    <div class="field-row"><span class="field-label" data-i18n="critBoost">会心攻撃強化</span>
+      <input class="field-input" id="critBoost" type="number" value="54.4" step="0.1">
+      <span class="pct-unit">%</span></div>
+    <div class="field-row"><span class="field-label" data-i18n="sympathyBoost">会意攻撃強化</span>
+      <input class="field-input" id="sympathyBoost" type="number" value="35.0" step="0.1">
+      <span class="pct-unit">%</span></div>
+    <div class="field-row"><span class="field-label" data-i18n="outerPen">外功貫通</span>
+      <input class="field-input" id="outerPen" type="number" value="37" step="1">
+      <span class="pct-gap"></span></div>
+    <div class="field-row"><span class="field-label" data-i18n="weaponBonus">外功ダメージ強化</span>
+      <input class="field-input" id="weaponBonus" type="number" value="0" step="0.1">
+      <span class="pct-unit">%</span></div>
+    <div class="field-row"><span class="field-label" data-i18n="elemPen">属性貫通</span>
+      <input class="field-input" id="elemPen" type="number" value="24" step="1">
+      <span class="pct-gap"></span></div>
+    <div class="field-row"><span class="field-label" data-i18n="elemAtkBoost">属性攻撃強化</span>
+      <input class="field-input" id="elemAtkBoost" type="number" value="0" step="0.1">
+      <span class="pct-unit">%</span></div>
+    <div class="field-row"><span class="field-label" data-i18n="allMartialBoost">全武術効果増加</span>
+      <input class="field-input" id="allMartialBoost" type="number" value="0" step="0.1">
+      <span class="pct-unit">%</span></div>
+    <div class="field-row"><span class="field-label" data-i18n="bossBoost">首領ダメージ増加</span>
+      <input class="field-input" id="bossBoost" type="number" value="2.4" step="0.1">
+      <span class="pct-unit">%</span></div>
+    <div class="field-row"><span class="field-label" data-i18n="specMartialBoost">指定武術効果強化</span>
+      <input class="field-input" id="specMartialBoost" type="number" value="0" step="0.1">
+      <span class="pct-unit">%</span></div>
+
+  </div>
+
+  <div class="card">
+    <div class="card-title ct-slate" data-i18n="sec6">エネミーデータ</div>
+    <div class="field-row">
+      <span class="field-label" data-i18n="enemyLevel">エネミーレベル</span>
+      <select class="field-input" id="enemyLevel">
+        <option value="Lv16">Lv16</option>
+        <option value="Lv51">Lv51</option>
+        <option value="Lv81">Lv81</option>
+        <option value="Lv86">Lv86</option>
+        <option value="Lv91" selected>Lv91</option>
+        <option value="Lv96">Lv96</option>
+        <option value="Lv100">Lv100</option>
+        <option value="manual" data-i18n-opt="manualInput">手動入力</option>
+      </select>
+    </div>
+    <div class="field-row"><span class="field-label" data-i18n="physDef">物理防御力</span>
+      <div class="field-auto" id="dispPhysDef">350</div>
+      <input class="field-input" id="manPhysDef" type="number" value="350" step="1" style="display:none;"></div>
+    <div class="field-row"><span class="field-label" data-i18n="judgeRes">審判耐性</span>
+      <div class="field-auto" id="dispJudgeRes">1.45</div>
+      <input class="field-input" id="manJudgeRes" type="number" value="1.45" step="0.01" style="display:none;"></div>
+    <div class="field-row"><span class="field-label" data-i18n="physRes">物理耐性値</span>
+      <div class="field-auto" id="dispPhysRes">0</div>
+      <input class="field-input" id="manPhysRes" type="number" value="0" step="1" style="display:none;"></div>
+    <div class="field-row"><span class="field-label" data-i18n="elemRes">属性耐性値</span>
+      <div class="field-auto" id="dispElemRes">0</div>
+      <input class="field-input" id="manElemRes" type="number" value="0" step="1" style="display:none;"></div>
+    <div class="field-row" style="margin-top:6px;padding-top:6px;border-top:1px dashed #e2e8f0;">
+      <span class="field-label" data-i18n="dmgReduce1">ダメージ軽減１</span>
+      <input class="field-input" id="dmgReduce1" type="number" value="0" step="0.1">
+      <span class="pct-unit">%</span></div>
+    <div class="field-row"><span class="field-label" data-i18n="dmgReduce2">ダメージ軽減２</span>
+      <input class="field-input" id="dmgReduce2" type="number" value="0" step="0.1">
+      <span class="pct-unit">%</span></div>
+    <div id="enemyPresetBox" style="margin-top:10px;padding:10px;background:#f8fafc;border-radius:6px;font-size:11px;color:#64748b;line-height:1.6;">
+      <b style="color:#475569;" data-i18n="enemyPresetTitle">エネミーデータ（プリセット）</b><br>
+      Lv16: DEF 10 / JR 1.0　Lv51: DEF 29 / JR 1.0<br>
+      Lv81: DEF 270 / JR 1.15　Lv86: DEF 307 / JR 1.3<br>
+      Lv91: DEF 350 / JR 1.45　Lv96: DEF 405 / JR 1.65<br>
+      Lv100: DEF 498 / JR 1.85
+    </div>
+  </div>
+</div>
+
+<!-- Results -->
+<div class="results-card">
+  <div class="results-title" data-i18n="resultTitle">最終ダメージ期待値</div>
+  <div class="prob-row">
+    <div class="prob-item prob-item-crit">
+      <div class="prob-label" data-i18n="probCrit">🎯 会心（P）</div>
+      <div class="prob-value prob-crit" id="pCrit">—</div>
+    </div>
+    <div class="prob-item prob-item-sympathy">
+      <div class="prob-label" data-i18n="probSympathy">💜 会意（P）</div>
+      <div class="prob-value prob-sympathy" id="pSympathy">—</div>
+    </div>
+    <div class="prob-item prob-item-graze">
+      <div class="prob-label" data-i18n="probGraze">🍂 かすり（P）</div>
+      <div class="prob-value prob-graze" id="pGraze">—</div>
+    </div>
+    <div class="prob-item prob-item-normal">
+      <div class="prob-label" data-i18n="probNormal">✅ 通常（P）</div>
+      <div class="prob-value prob-normal" id="pNormal">—</div>
+    </div>
+  </div>
+  <div style="overflow-x:auto;">
+    <table class="results-table">
+      <thead id="resultsHead">
+        <tr>
+          <th rowspan="2" style="width:80px;" data-i18n="thHitType">ヒット種</th>
+          <th colspan="3" data-i18n="thAvgATK">平均ATK</th>
+          <th colspan="3" data-i18n="thMinATK">最小ATK</th>
+          <th colspan="3" data-i18n="thMaxATK">最大ATK</th>
+          <th rowspan="2" data-i18n="thPhysPct">物理%</th>
+          <th rowspan="2" data-i18n="thElemPct">属性%</th>
+        </tr>
+        <tr>
+          <th data-i18n="thTotal">合計</th><th data-i18n="thPhys">物理</th><th data-i18n="thElem">属性</th>
+          <th data-i18n="thTotal">合計</th><th data-i18n="thPhys">物理</th><th data-i18n="thElem">属性</th>
+          <th data-i18n="thTotal">合計</th><th data-i18n="thPhys">物理</th><th data-i18n="thElem">属性</th>
+        </tr>
+      </thead>
+      <tbody id="tbodyResults"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Intermediate (hidden) -->
+<div id="interGrid" style="display:none;"></div>
+
+<!-- Efficiency Analysis -->
+<div class="eff-card">
+  <div class="eff-title" data-i18n="effTitle">ステータス効率分析</div>
+  <div class="eff-note" data-i18n="effNote">各ステータス＋装備1個あたりの期待DMG増加量。現在の入力値を基準に自動計算。</div>
+  <div class="eff-table-wrap">
+    <table class="eff-table">
+      <thead>
+        <tr>
+          <th data-i18n="effThStat">ステータス</th>
+          <th data-i18n="effThMax">X値</th>
+          <th data-i18n="effThBase">基準期待値</th>
+          <th data-i18n="effThAfter">+x後期待値</th>
+          <th data-i18n="effThDelta">増加量(+x)</th>
+          <th data-i18n="effThPer1">+1あたり</th>
+          <th data-i18n="effThScore">スコア</th>
+          <th data-i18n="effThRating">評価</th>
+        </tr>
+      </thead>
+      <tbody id="effTbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<footer>Created by <strong>Shigetora</strong></footer>
+</div>
+
+<script>
+// ── 翻訳辞書 ────────────────────────────────────────────────────
+const TRANSLATIONS = {
+  ja: {
+    pageTitle:'WWM DMG CALC', headerTitle:'風燕伝　ダメージ計算ツール',
+    headerSub:'スキル・ステータスを入力してリアルタイムでダメージを計算します',
+    legendInput:'入力セル', legendAuto:'自動計算（参照）', legendResult:'最終結果',
+    sec1:'基本ステータス', sec2:'判定確率', sec3:'ダメージ増加効果',
+    sec4:'スキルステータス', sec5:'その他ステータス', sec6:'エネミーデータ',
+    minPhysATK:'最小物理ATK', maxPhysATK:'最大物理ATK',
+    minElemMain:'最小属性ATK（主）', maxElemMain:'最大属性ATK（主）',
+    minElemSub:'最小属性ATK（副）', maxElemSub:'最大属性ATK（副）',
+    jgInputVal:'入力値', jgApplied:'適用値',
+    hitRate:'命中率', critRate:'会心率', sympathyRate:'会意率',
+    addCritRate:'付加会心率', addSympathyRate:'付加会意率',
+    critBoost:'会心攻撃強化', allMartialBoost:'全武術効果増加',
+    sympathyBoost:'会意攻撃強化', specMartialBoost:'指定武術効果強化',
+    outerPen:'外功貫通', bossBoost:'首領ダメージ増加',
+    elemPen:'属性貫通', elemAtkBoost:'属性攻撃強化',
+    dmgReduce1:'ダメージ軽減１', dmgReduce2:'ダメージ軽減２',
+    weaponBonus:'外功ダメージ強化',    outerCoeff:'外功係数', statusCoeff:'ステータス攻撃係数',
+    outerAdd:'外功付加', enemyDebuff:'デバフ（敵）',
+    worldLv:'大世界等級（Lv）', martialLv:'武学等級（Lv）',
+    elemBoostMain:'属性強化（主）', elemBoostSub:'属性強化（副）',
+    enemyLevel:'エネミーレベル', physDef:'物理防御力', judgeRes:'審判耐性',
+    physRes:'物理耐性値', elemRes:'属性耐性値',
+    manualInput:'手動入力', enemyPresetTitle:'エネミーデータ（プリセット）',
+    resultTitle:'最終ダメージ期待値',
+    probCrit:'🎯 会心（P）', probSympathy:'💜 会意（P）',
+    probGraze:'🍂 かすり（P）', probNormal:'✅ 通常（P）',
+    thHitType:'ヒット種', thAvgATK:'平均ATK', thMinATK:'最小ATK', thMaxATK:'最大ATK',
+    thPhysPct:'物理%', thElemPct:'属性%', thTotal:'合計', thPhys:'物理', thElem:'属性',
+    rowNormal:'通常DMG', rowCrit:'会心DMG', rowSympathy:'会意DMG',
+    rowSympathySub:'最大ATK', rowGraze:'かすりDMG', rowGrazeSub:'最小ATK', rowExpected:'DMG期待値',
+    interTitle:'★ 中間計算（自動）',
+    interHidden:'隠しボーナス（大世界+武学+1）', interPhysPen:'物理貫通ゾーン補正',
+    interElemPen:'属性貫通ゾーン補正', interPhysBonus:'物理ダメボゾーン（共通）',
+    interElemBonus:'属性ダメボゾーン（+属性攻撃強化）', interReduction:'軽減ゾーン',
+    interAppliedHit:'適用命中率', interAppliedCrit:'適用会心率', interAppliedSympathy:'適用会意率',
+    interPCrit:'P（会心）', interPSympathy:'P（会意）', interPGraze:'P（かすり）', interPNormal:'P（通常）',
+    interBaseAvg:'ベースDMG（平均ATK）', interBaseMax:'ベースDMG（最大ATK）', interBaseMin:'ベースDMG（最小ATK）',
+    presetTitle:'💾 プリセット', presetSave:'保存', presetLoad:'読込', presetNamePlaceholder:'プリセット {n}',
+    effTitle:'ステータス効率分析',
+    effNote:'各ステータス＋装備1個あたりの期待DMG増加量。現在の入力値を基準に自動計算。',
+    effThStat:'ステータス', effThMax:'X値', effThBase:'基準期待値',
+    effThAfter:'+x後期待値', effThDelta:'増加量(+x)', effThPer1:'+1あたり',
+    effThScore:'スコア', effThRating:'評価',
+    effRateFire:'🔥 最優先', effRateStar:'⭐ 優先', effRateGood:'✅ 良好', effRateLow:'⬇ 低効率',
+    effMinPhysATK:'最小物理ATK', effMaxPhysATK:'最大物理ATK',
+    effMinElemATK:'最小属性ATK', effMaxElemATK:'最大属性ATK',
+    effCritRate:'会心率', effSympathy:'会意率', effHitRate:'命中率',
+    effAgility:'速 (Agility)', effPower:'会 (Power)', effStrength:'力 (Strength)',
+    effBossBoost:'ダメージ増加', effPhysPen:'物理貫通', effElemPen:'属性貫通',
+    toastSaved:'プリセット「{name}」を保存しました', toastLoaded:'プリセット「{name}」を読み込みました', toastDeleted:'プリセット「{name}」を削除しました', toastExported:'画像を出力しました',
+    locale:'ja-JP',
+  },
+  en: {
+    // ── Where Winds Meet (EN) official in-game terminology ──
+    pageTitle:'WWM DMG CALC', headerTitle:'Where Winds Meet — Damage Calculator',
+    headerSub:'Enter skills and stats to calculate damage in real time',
+    legendInput:'Input', legendAuto:'Auto (ref)', legendResult:'Result',
+    sec1:'Base Stats', sec2:'Hit Probability', sec3:'DMG Increase Effects',
+    sec4:'Skill Stats', sec5:'Other Stats', sec6:'Enemy Data',
+    minPhysATK:'Min Physical ATK', maxPhysATK:'Max Physical ATK',
+    minElemMain:'Min Elemental ATK (Main)', maxElemMain:'Max Elemental ATK (Main)',
+    minElemSub:'Min Elemental ATK (Sub)', maxElemSub:'Max Elemental ATK (Sub)',
+    jgInputVal:'Input', jgApplied:'Applied',
+    hitRate:'Hit Rate', critRate:'Critical Rate', sympathyRate:'Affinity Rate',
+    addCritRate:'Added Critical Rate', addSympathyRate:'Added Affinity Rate',
+    critBoost:'Critical DMG Bonus', allMartialBoost:'All Martial Arts Effect +',
+    sympathyBoost:'Affinity DMG Bonus', specMartialBoost:'Designated Martial Arts Effect +',
+    outerPen:'Outer Force Penetration', bossBoost:'Elite DMG Bonus',
+    elemPen:'Elemental Penetration', elemAtkBoost:'Elemental ATK Boost',
+    dmgReduce1:'DMG Reduction 1', dmgReduce2:'DMG Reduction 2',
+    weaponBonus:'Outer Force DMG Boost',    outerCoeff:'Outer Force Coeff.', statusCoeff:'Stat ATK Coeff.',
+    outerAdd:'Outer Force Bonus', enemyDebuff:'Enemy Debuff',
+    worldLv:'Open World Level (Lv)', martialLv:'Martial Level (Lv)',
+    elemBoostMain:'Elemental Enhancement (Main)', elemBoostSub:'Elemental Enhancement (Sub)',
+    enemyLevel:'Enemy Level', physDef:'Physical Defense', judgeRes:'Judgment Resistance',
+    physRes:'Physical Resistance', elemRes:'Elemental Resistance',
+    manualInput:'Manual Input', enemyPresetTitle:'Enemy Data (Preset)',
+    resultTitle:'Expected Final Damage',
+    probCrit:'🎯 Critical (P)', probSympathy:'💜 Affinity (P)',
+    probGraze:'🍂 Glancing (P)', probNormal:'✅ Normal (P)',
+    thHitType:'Hit Type', thAvgATK:'Avg ATK', thMinATK:'Min ATK', thMaxATK:'Max ATK',
+    thPhysPct:'Physical%', thElemPct:'Elemental%', thTotal:'Total', thPhys:'Physical', thElem:'Elemental',
+    rowNormal:'Normal DMG', rowCrit:'Critical DMG', rowSympathy:'Affinity DMG',
+    rowSympathySub:'Max ATK', rowGraze:'Glancing DMG', rowGrazeSub:'Min ATK', rowExpected:'Expected DMG',
+    interTitle:'★ Intermediate Calculations (Auto)',
+    interHidden:'Hidden Bonus (World+Martial+1)', interPhysPen:'Phys Pen Zone',
+    interElemPen:'Elem Pen Zone', interPhysBonus:'Phys DMG Bonus Zone (Common)',
+    interElemBonus:'Elem DMG Bonus Zone (+Elem ATK Boost)', interReduction:'Reduction Zone',
+    interAppliedHit:'Applied Hit Rate', interAppliedCrit:'Applied Critical Rate', interAppliedSympathy:'Applied Affinity Rate',
+    interPCrit:'P (Critical)', interPSympathy:'P (Affinity)', interPGraze:'P (Glancing)', interPNormal:'P (Normal)',
+    interBaseAvg:'Base DMG (Avg ATK)', interBaseMax:'Base DMG (Max ATK)', interBaseMin:'Base DMG (Min ATK)',
+    presetTitle:'💾 Presets', presetSave:'Save', presetLoad:'Load', presetNamePlaceholder:'Preset {n}',
+    effTitle:'Stat Efficiency Analysis',
+    effNote:'Expected DMG increase per +x from one equipment piece. Auto-calculated from current inputs.',
+    effThStat:'Stat', effThMax:'X Value', effThBase:'Base Expected',
+    effThAfter:'+x Expected', effThDelta:'Delta(+x)', effThPer1:'Per +1',
+    effThScore:'Score', effThRating:'Rating',
+    effRateFire:'🔥 Top', effRateStar:'⭐ Priority', effRateGood:'✅ Good', effRateLow:'⬇ Low',
+    effMinPhysATK:'Min Physical ATK', effMaxPhysATK:'Max Physical ATK',
+    effMinElemATK:'Min Elemental ATK', effMaxElemATK:'Max Elemental ATK',
+    effCritRate:'Critical Rate', effSympathy:'Affinity Rate', effHitRate:'Hit Rate',
+    effAgility:'Agility (速)', effPower:'Power (会)', effStrength:'Strength (力)',
+    effBossBoost:'DMG Bonus', effPhysPen:'Physical Penetration', effElemPen:'Elemental Penetration',
+    toastSaved:'Preset "{name}" saved', toastLoaded:'Preset "{name}" loaded', toastDeleted:'Preset "{name}" deleted', toastExported:'Image exported',
+    locale:'en-US',
+  },
+  zh: {
+    // ── 风燕传（ZH）游戏内正式术语 ──
+    pageTitle:'WWM DMG CALC', headerTitle:'风燕传　伤害计算器',
+    headerSub:'输入技能和属性，实时计算伤害',
+    legendInput:'输入格', legendAuto:'自动计算（引用）', legendResult:'最终结果',
+    sec1:'基础属性', sec2:'判定概率', sec3:'伤害增加效果',
+    sec4:'技能属性', sec5:'其他属性', sec6:'怪物数据',
+    minPhysATK:'最小物理ATK', maxPhysATK:'最大物理ATK',
+    minElemMain:'最小属性ATK（主）', maxElemMain:'最大属性ATK（主）',
+    minElemSub:'最小属性ATK（副）', maxElemSub:'最大属性ATK（副）',
+    jgInputVal:'输入值', jgApplied:'适用值',
+    hitRate:'命中率', critRate:'会心率', sympathyRate:'会意率',
+    addCritRate:'附加会心率', addSympathyRate:'附加会意率',
+    critBoost:'会心伤害加成', allMartialBoost:'全武学技能效果增加',
+    sympathyBoost:'会意伤害加成', specMartialBoost:'指定武学技能效果增加',
+    outerPen:'外功穿透', bossBoost:'首领伤害增加',
+    elemPen:'属性穿透', elemAtkBoost:'属性攻击强化',
+    dmgReduce1:'伤害减免１', dmgReduce2:'伤害减免２',
+    weaponBonus:'外功伤害强化',    outerCoeff:'外功系数', statusCoeff:'属性攻击系数',
+    outerAdd:'外功附加', enemyDebuff:'减益（敌）',
+    worldLv:'大世界等级（Lv）', martialLv:'武学等级（Lv）',
+    elemBoostMain:'属性强化（主）', elemBoostSub:'属性强化（副）',
+    enemyLevel:'怪物等级', physDef:'物理防御', judgeRes:'审判耐性',
+    physRes:'物理耐性', elemRes:'属性耐性',
+    manualInput:'手动输入', enemyPresetTitle:'怪物数据（预设）',
+    resultTitle:'最终伤害期望值',
+    probCrit:'🎯 会心（P）', probSympathy:'💜 会意（P）',
+    probGraze:'🍂 擦击（P）', probNormal:'✅ 普通（P）',
+    thHitType:'命中类型', thAvgATK:'平均ATK', thMinATK:'最小ATK', thMaxATK:'最大ATK',
+    thPhysPct:'物理%', thElemPct:'属性%', thTotal:'合计', thPhys:'物理', thElem:'属性',
+    rowNormal:'普通伤害', rowCrit:'会心伤害', rowSympathy:'会意伤害',
+    rowSympathySub:'最大ATK', rowGraze:'擦击伤害', rowGrazeSub:'最小ATK', rowExpected:'期望伤害',
+    interTitle:'★ 中间计算（自动）',
+    interHidden:'隐藏加成（大世界+武学+1）', interPhysPen:'物理穿透区间修正',
+    interElemPen:'属性穿透区间修正', interPhysBonus:'物理伤害加成区间（通用）',
+    interElemBonus:'属性伤害加成区间（+属性攻击强化）', interReduction:'减免区间',
+    interAppliedHit:'适用命中率', interAppliedCrit:'适用会心率', interAppliedSympathy:'适用会意率',
+    interPCrit:'P（会心）', interPSympathy:'P（会意）', interPGraze:'P（擦击）', interPNormal:'P（普通）',
+    interBaseAvg:'基础伤害（平均ATK）', interBaseMax:'基础伤害（最大ATK）', interBaseMin:'基础伤害（最小ATK）',
+    presetTitle:'💾 预设', presetSave:'保存', presetLoad:'读取', presetNamePlaceholder:'预设 {n}',
+    effTitle:'属性效率分析',
+    effNote:'每件装备+x数值带来的期望伤害增量。基于当前输入值自动计算。',
+    effThStat:'属性', effThMax:'X值', effThBase:'基准期望值',
+    effThAfter:'+x后期望值', effThDelta:'增加量(+x)', effThPer1:'每+1',
+    effThScore:'评分', effThRating:'评价',
+    effRateFire:'🔥 最优先', effRateStar:'⭐ 优先', effRateGood:'✅ 良好', effRateLow:'⬇ 低效',
+    effMinPhysATK:'最小物理ATK', effMaxPhysATK:'最大物理ATK',
+    effMinElemATK:'最小属性ATK', effMaxElemATK:'最大属性ATK',
+    effCritRate:'会心率', effSympathy:'会意率', effHitRate:'命中率',
+    effAgility:'速 (Agility)', effPower:'会 (Power)', effStrength:'力 (Strength)',
+    effBossBoost:'伤害增加', effPhysPen:'物理穿透', effElemPen:'属性穿透',
+    toastSaved:'预设「{name}」已保存', toastLoaded:'预设「{name}」已读取', toastDeleted:'预设「{name}」已删除', toastExported:'图片已导出',
+    locale:'zh-CN',
+  },
+  ko: {
+    // ── 풍연전（KR）게임 내 공식 용어 ──
+    pageTitle:'WWM DMG CALC', headerTitle:'풍연전　대미지 계산기',
+    headerSub:'스킬 및 스탯을 입력하여 실시간으로 대미지를 계산합니다',
+    legendInput:'입력 셀', legendAuto:'자동 계산（참조）', legendResult:'최종 결과',
+    sec1:'기본 스탯', sec2:'판정 확률', sec3:'대미지 증가 효과',
+    sec4:'스킬 스탯', sec5:'기타 스탯', sec6:'적 데이터',
+    minPhysATK:'최소 물리 ATK', maxPhysATK:'최대 물리 ATK',
+    minElemMain:'최소 속성 ATK（주）', maxElemMain:'최대 속성 ATK（주）',
+    minElemSub:'최소 속성 ATK（부）', maxElemSub:'최대 속성 ATK（부）',
+    jgInputVal:'입력값', jgApplied:'적용값',
+    hitRate:'명중률', critRate:'회심률', sympathyRate:'친화율',
+    addCritRate:'부가 회심률', addSympathyRate:'부가 친화율',
+    critBoost:'회심 대미지 보너스', allMartialBoost:'전체 무학 기술 효과 증가',
+    sympathyBoost:'친화 대미지 보너스', specMartialBoost:'지정 무학 기술 효과 증가',
+    outerPen:'외공 관통', bossBoost:'수령 대미지 증가',
+    elemPen:'속성 관통', elemAtkBoost:'속성 공격 강화',
+    dmgReduce1:'대미지 경감 1', dmgReduce2:'대미지 경감 2',
+    weaponBonus:'외공 대미지 강화',    outerCoeff:'외공 계수', statusCoeff:'스탯 공격 계수',
+    outerAdd:'외공 부가', enemyDebuff:'디버프（적）',
+    worldLv:'대세계 등급（Lv）', martialLv:'무학 등급（Lv）',
+    elemBoostMain:'속성 강화（주）', elemBoostSub:'속성 강화（부）',
+    enemyLevel:'적 레벨', physDef:'물리 방어력', judgeRes:'심판 내성',
+    physRes:'물리 내성', elemRes:'속성 내성',
+    manualInput:'수동 입력', enemyPresetTitle:'적 데이터（프리셋）',
+    resultTitle:'최종 대미지 기대치',
+    probCrit:'🎯 회심（P）', probSympathy:'💜 친화（P）',
+    probGraze:'🍂 스침（P）', probNormal:'✅ 일반（P）',
+    thHitType:'히트 유형', thAvgATK:'평균 ATK', thMinATK:'최소 ATK', thMaxATK:'최대 ATK',
+    thPhysPct:'물리%', thElemPct:'속성%', thTotal:'합계', thPhys:'물리', thElem:'속성',
+    rowNormal:'일반 대미지', rowCrit:'회심 대미지', rowSympathy:'친화 대미지',
+    rowSympathySub:'최대 ATK', rowGraze:'스침 대미지', rowGrazeSub:'최소 ATK', rowExpected:'기대 대미지',
+    interTitle:'★ 중간 계산（자동）',
+    interHidden:'숨겨진 보너스（대세계+무학+1）', interPhysPen:'물리 관통 구간 보정',
+    interElemPen:'속성 관통 구간 보정', interPhysBonus:'물리 대미지 보너스 구간（공통）',
+    interElemBonus:'속성 대미지 보너스 구간（+속성 공격 강화）', interReduction:'경감 구간',
+    interAppliedHit:'적용 명중률', interAppliedCrit:'적용 회심률', interAppliedSympathy:'적용 친화율',
+    interPCrit:'P（회심）', interPSympathy:'P（친화）', interPGraze:'P（스침）', interPNormal:'P（일반）',
+    interBaseAvg:'기본 대미지（평균 ATK）', interBaseMax:'기본 대미지（최대 ATK）', interBaseMin:'기본 대미지（최소 ATK）',
+    presetTitle:'💾 프리셋', presetSave:'저장', presetLoad:'불러오기', presetNamePlaceholder:'프리셋 {n}',
+    effTitle:'스탯 효율 분석',
+    effNote:'장비 1개의 +x 수치당 기대 대미지 증가량. 현재 입력값 기준으로 자동 계산.',
+    effThStat:'스탯', effThMax:'X값', effThBase:'기준 기대치',
+    effThAfter:'+x 후 기대치', effThDelta:'증가량(+x)', effThPer1:'+1당',
+    effThScore:'점수', effThRating:'평가',
+    effRateFire:'🔥 최우선', effRateStar:'⭐ 우선', effRateGood:'✅ 양호', effRateLow:'⬇ 저효율',
+    effMinPhysATK:'최소 물리 ATK', effMaxPhysATK:'최대 물리 ATK',
+    effMinElemATK:'최소 속성 ATK', effMaxElemATK:'최대 속성 ATK',
+    effCritRate:'회심률', effSympathy:'친화율', effHitRate:'명중률',
+    effAgility:'속 (Agility)', effPower:'회 (Power)', effStrength:'력 (Strength)',
+    effBossBoost:'대미지 증가', effPhysPen:'물리 관통', effElemPen:'속성 관통',
+    toastSaved:'프리셋 「{name}」 저장됨', toastLoaded:'프리셋 「{name}」 불러옴', toastDeleted:'프리셋 「{name}」 삭제됨', toastExported:'이미지 내보내기 완료',
+    locale:'ko-KR',
+  },
+};
+
+let currentLang = 'ja';
+let T = TRANSLATIONS.ja;
+
+function setLang(lang) {
+  currentLang = lang;
+  T = TRANSLATIONS[lang];
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang === 'ko' ? 'ko' : lang;
+  document.title = T.pageTitle;
+
+  // ボタンのアクティブ状態
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+
+  // data-i18n 属性で静的テキスト更新
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (T[key] !== undefined) el.textContent = T[key];
+  });
+
+  // select の手動入力オプション
+  document.querySelector('[data-i18n-opt="manualInput"]').textContent = T.manualInput;
+
+  // プリセットのプレースホルダー更新
+  renderPresetSlots();
+  // 動的生成コンテンツを再描画
+  calculate();
+}
+
+// ── エネミーデータ ────────────────────────────────────────────────
+const ENEMY_PRESET = {
+  Lv16:  { physDef: 10,  judgeRes: 1.0,  physRes: 0, elemRes: 0 },
+  Lv51:  { physDef: 29,  judgeRes: 1.0,  physRes: 0, elemRes: 0 },
+  Lv81:  { physDef: 270, judgeRes: 1.15, physRes: 0, elemRes: 0 },
+  Lv86:  { physDef: 307, judgeRes: 1.3,  physRes: 0, elemRes: 0 },
+  Lv91:  { physDef: 350, judgeRes: 1.45, physRes: 0, elemRes: 0 },
+  Lv96:  { physDef: 405, judgeRes: 1.65, physRes: 0, elemRes: 0 },
+  Lv100: { physDef: 498, judgeRes: 1.85, physRes: 0, elemRes: 0 },
+};
+
+function v(id)  { return parseFloat(document.getElementById(id).value) || 0; }
+function vp(id) { return (parseFloat(document.getElementById(id).value) || 0) / 100; }
+
+// ── 効率分析：純粋関数 ────────────────────────────────────────────
+// p はすべての rate が小数（vp変換済み）のパラメータオブジェクト
+function computeExpected(p) {
+  const hiddenBonus  = p.worldLv + p.martialLv + 1;
+  const physPenDiff  = p.outerPen - p.physRes;
+  const physPenZone  = physPenDiff > 0 ? physPenDiff / 100 : physPenDiff / 200;
+  const elemPenDiff  = p.elemPen - p.elemRes;
+  const elemPenZone  = elemPenDiff > 0 ? elemPenDiff / 100 : elemPenDiff / 200;
+  const physDmgBonus = 1 + p.allMartialBoost + p.specMartialBoost + p.weaponBonus + p.bossBoost + p.enemyDebuff;
+  const elemDmgBonus = physDmgBonus + p.elemAtkBoost;
+  const reductionZone= (1 - p.dmgReduce1) * (1 - p.dmgReduce2);
+
+  const sympathyRateAdj = p.judgeRes === 0 ? p.sympathyRate : p.sympathyRate / p.judgeRes;
+  const critRateAdj     = p.judgeRes === 0 ? p.critRate     : p.critRate     / p.judgeRes;
+  const appliedSympathy = Math.min(0.4, sympathyRateAdj + p.addSympathyRate);
+  const appliedCrit     = Math.min(0.8, 1 - appliedSympathy, critRateAdj + p.addCritRate);
+  const appliedHit      = p.judgeRes === 0 ? Math.min(1, p.hitRate) : Math.min(1, 0.65 + (p.hitRate - 0.65) / p.judgeRes);
+  const pCrit     = Math.min(appliedHit, appliedCrit);
+  const pSympathy = appliedSympathy;
+  const pGraze    = (1 - appliedHit) * (1 - sympathyRateAdj);
+  const pNormal   = 1 - pCrit - pSympathy - pGraze;
+
+  function physPart(atk) { return Math.max(0, atk - p.physDef) * p.outerCoeff + p.outerAdd; }
+  function elemPart(m, s) {
+    return (m + hiddenBonus) * p.elemBoostMain * p.statusCoeff
+         + (s + hiddenBonus) * p.elemBoostSub  * p.statusCoeff;
+  }
+  function dmg(pa, em, es, mul) {
+    mul = mul || 1;
+    return physPart(pa) * (1 + physPenZone) * physDmgBonus * reductionZone * mul
+         + elemPart(em, es) * (1 + elemPenZone) * elemDmgBonus * reductionZone * mul;
+  }
+
+  const avgPhys = (p.minPhysATK + p.maxPhysATK) / 2;
+  const avgMain = (p.minElemMain + p.maxElemMain) / 2;
+  const avgSub  = (p.minElemSub  + p.maxElemSub)  / 2;
+
+  return dmg(avgPhys, avgMain, avgSub)          * pNormal
+       + dmg(avgPhys, avgMain, avgSub, 1 + p.critBoost) * pCrit
+       + dmg(p.maxPhysATK, p.maxElemMain, p.maxElemSub, 1 + p.sympathyBoost) * pSympathy
+       + dmg(p.minPhysATK, p.minElemMain, p.minElemSub) * pGraze;
+}
+
+// ── 効率分析：各ステータス行の定義 ───────────────────────────────
+const EFF_ROWS = [
+  { key:'effMinPhysATK',  maxVal:64,    isPct:false, mod:(p,x)=>({...p, minPhysATK:p.minPhysATK+x}) },
+  { key:'effMaxPhysATK',  maxVal:64,    isPct:false, mod:(p,x)=>({...p, maxPhysATK:p.maxPhysATK+x}) },
+  { key:'effMinElemATK',  maxVal:34,    isPct:false, mod:(p,x)=>({...p, minElemMain:p.minElemMain+x}) },
+  { key:'effMaxElemATK',  maxVal:34,    isPct:false, mod:(p,x)=>({...p, maxElemMain:p.maxElemMain+x}) },
+  { key:'effCritRate',    maxVal:0.07,  isPct:true,  mod:(p,x)=>({...p, critRate:p.critRate+x}) },
+  { key:'effSympathy',    maxVal:0.034, isPct:true,  mod:(p,x)=>({...p, sympathyRate:p.sympathyRate+x}) },
+  { key:'effHitRate',     maxVal:0.06,  isPct:true,  mod:(p,x)=>({...p, hitRate:p.hitRate+x}) },
+  { key:'effAgility',     maxVal:40,    isPct:false, mod:(p,x)=>({...p, minPhysATK:p.minPhysATK+x*0.9, critRate:p.critRate+x*0.00076}) },
+  { key:'effPower',       maxVal:40,    isPct:false, mod:(p,x)=>({...p, maxPhysATK:p.maxPhysATK+x*0.9, sympathyRate:p.sympathyRate+x*0.00038}) },
+  { key:'effStrength',    maxVal:40,    isPct:false, mod:(p,x)=>({...p, minPhysATK:p.minPhysATK+x*0.225, maxPhysATK:p.maxPhysATK+x*1.36}) },
+  { key:'effBossBoost',   maxVal:0.025, isPct:true,  mod:(p,x)=>({...p, bossBoost:p.bossBoost+x}) },
+  { key:'effPhysPen',     maxVal:9,     isPct:false, mod:(p,x)=>({...p, outerPen:p.outerPen+x}) },
+  { key:'effElemPen',     maxVal:10.4,  isPct:false, mod:(p,x)=>({...p, elemPen:p.elemPen+x}) },
+];
+
+// ── 効率分析：装備最大値の可変管理 ───────────────────────────────
+let effMaxVals = null;
+let _lastEffParams = null;
+let _lastBaseExpected = 0;
+const EFF_MAX_STORAGE = 'wwm_eff_max_v1';
+
+function initEffMaxVals() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(EFF_MAX_STORAGE));
+    if (Array.isArray(saved) && saved.length === EFF_ROWS.length) {
+      effMaxVals = saved;
+      return;
+    }
+  } catch(e) {}
+  effMaxVals = EFF_ROWS.map(function(r) { return r.maxVal; });
+}
+
+function saveEffMaxVals() {
+  try { localStorage.setItem(EFF_MAX_STORAGE, JSON.stringify(effMaxVals)); } catch(e) {}
+}
+
+// ── 効率分析テーブル描画 ──────────────────────────────────────────
+function buildEfficiencyTable(p, baseExpected) {
+  // refDelta は effMaxVals[0]（最小物理ATK）を基準にする
+  const refDelta = computeExpected(EFF_ROWS[0].mod(p, effMaxVals[0])) - baseExpected;
+  function fmt(n) { return Math.round(n).toLocaleString(T.locale); }
+  function fmtD(n, d) { return n.toFixed(d !== undefined ? d : 2); }
+
+  const rows = EFF_ROWS.map(function(row, idx) {
+    const curMax   = effMaxVals[idx];
+    const afterExp = computeExpected(row.mod(p, curMax));
+    const delta    = afterExp - baseExpected;
+    // per1: for pct stats show per 1 game-% (=0.01); for int stats show per 1 unit
+    const per1     = row.isPct ? delta / (curMax * 100) : delta / curMax;
+    const score    = refDelta > 0 ? delta / refDelta * 100 : 0;
+    const statName = T[row.key] || row.key;
+
+    // 装備最大値 入力フィールド（pct は %表示、それ以外はそのまま）
+    const dispVal = row.isPct ? +(curMax * 100).toFixed(4) : curMax;
+    const step    = row.isPct ? '0.1' : (row.maxVal % 1 === 0 ? '1' : '0.1');
+    const maxInput = '<input type="number" class="eff-max-input"'
+      + ' data-idx="' + idx + '" data-ispct="' + row.isPct + '"'
+      + ' value="' + dispVal + '" step="' + step + '" min="0"'
+      + (row.isPct ? ' title="%"' : '') + '>';
+
+    var badgeClass, badgeText;
+    if      (score >= 250) { badgeClass = 'badge-fire'; badgeText = T.effRateFire; }
+    else if (score >= 100) { badgeClass = 'badge-star'; badgeText = T.effRateStar; }
+    else if (score >= 50)  { badgeClass = 'badge-good'; badgeText = T.effRateGood; }
+    else                   { badgeClass = 'badge-low';  badgeText = T.effRateLow;  }
+
+    const scoreColor = score >= 250 ? '#dc2626' : score >= 100 ? '#3b82f6' : score >= 50 ? '#10b981' : '#94a3b8';
+    const scoreWidth = Math.min(100, score / 5).toFixed(1);
+
+    return '<tr>'
+      + '<td>' + statName + '</td>'
+      + '<td style="text-align:center;padding:3px 8px;"><div class="eff-max-wrap">' + maxInput + '<span class="eff-max-unit">' + (row.isPct ? '%' : '') + '</span></div></td>'
+      + '<td>' + fmt(baseExpected) + '</td>'
+      + '<td>' + fmt(afterExp) + '</td>'
+      + '<td>+' + fmt(delta) + '</td>'
+      + '<td>' + fmtD(per1) + '</td>'
+      + '<td><div class="score-bar-wrap">'
+        + '<div class="score-bar"><div class="score-fill" style="width:' + scoreWidth + '%;background:' + scoreColor + ';"></div></div>'
+        + '<span style="font-weight:700;color:' + scoreColor + ';min-width:38px;text-align:right;font-size:12px;">' + fmtD(score, 1) + '</span>'
+      + '</div></td>'
+      + '<td style="text-align:center;"><span class="badge ' + badgeClass + '">' + badgeText + '</span></td>'
+      + '</tr>';
+  });
+
+  document.getElementById('effTbody').innerHTML = rows.join('');
+}
+
+function calculate() {
+  const minPhysATK = v('minPhysATK'), maxPhysATK = v('maxPhysATK');
+  const minElemMain = v('minElemMain'), maxElemMain = v('maxElemMain');
+  const minElemSub  = v('minElemSub'),  maxElemSub  = v('maxElemSub');
+  const outerCoeff  = vp('outerCoeff'), statusCoeff = vp('statusCoeff');
+  const outerAdd    = v('outerAdd'),    enemyDebuff = vp('enemyDebuff');
+  const hitRate     = vp('hitRate'),    critRate    = vp('critRate');
+  const sympathyRate= vp('sympathyRate'), addCritRate = vp('addCritRate');
+  const addSympathyRate = vp('addSympathyRate');
+  const worldLv     = v('worldLv'),     martialLv   = v('martialLv');
+  const elemBoostMain = v('elemBoostMain'), elemBoostSub = v('elemBoostSub');
+  const critBoost       = vp('critBoost'),   allMartialBoost = vp('allMartialBoost');
+  const sympathyBoost   = vp('sympathyBoost'), specMartialBoost = vp('specMartialBoost');
+  const outerPen        = v('outerPen'),     bossBoost       = vp('bossBoost');
+  const elemPen         = v('elemPen'),      elemAtkBoost    = vp('elemAtkBoost');
+  const dmgReduce1      = vp('dmgReduce1'),  dmgReduce2      = vp('dmgReduce2');
+  const weaponBonus     = vp('weaponBonus');
+
+  const sel = document.getElementById('enemyLevel').value;
+  let physDef, judgeRes, physRes, elemRes;
+  if (sel === 'manual') {
+    physDef = v('manPhysDef'); judgeRes = v('manJudgeRes');
+    physRes = v('manPhysRes'); elemRes  = v('manElemRes');
+  } else {
+    const e = ENEMY_PRESET[sel];
+    physDef = e.physDef; judgeRes = e.judgeRes; physRes = e.physRes; elemRes = e.elemRes;
+    document.getElementById('dispPhysDef').textContent  = physDef;
+    document.getElementById('dispJudgeRes').textContent = judgeRes;
+    document.getElementById('dispPhysRes').textContent  = physRes;
+    document.getElementById('dispElemRes').textContent  = elemRes;
+  }
+
+  const hiddenBonus   = worldLv + martialLv + 1;
+  const physPenDiff   = outerPen - physRes;
+  const physPenZone   = physPenDiff > 0 ? physPenDiff / 100 : physPenDiff / 200;
+  const elemPenDiff   = elemPen - elemRes;
+  const elemPenZone   = elemPenDiff > 0 ? elemPenDiff / 100 : elemPenDiff / 200;
+  const physDmgBonus  = 1 + allMartialBoost + specMartialBoost + weaponBonus + bossBoost + enemyDebuff;
+  const elemDmgBonus  = physDmgBonus + elemAtkBoost;
+  const reductionZone = (1 - dmgReduce1) * (1 - dmgReduce2);
+
+  const sympathyRateAdj = judgeRes === 0 ? sympathyRate : sympathyRate / judgeRes;
+  const critRateAdj     = judgeRes === 0 ? critRate     : critRate     / judgeRes;
+  const appliedSympathy = Math.min(0.4, sympathyRateAdj + addSympathyRate);
+  const appliedCrit     = Math.min(0.8, 1 - appliedSympathy, critRateAdj + addCritRate);
+  const appliedHit      = judgeRes === 0 ? Math.min(1, hitRate) : Math.min(1, 0.65 + (hitRate - 0.65) / judgeRes);
+  const pCrit     = Math.min(appliedHit, appliedCrit);
+  const pSympathy = appliedSympathy;
+  const pGraze    = (1 - appliedHit) * (1 - sympathyRateAdj);
+  const pNormal   = 1 - pCrit - pSympathy - pGraze;
+
+  document.getElementById('dispHitRate').textContent      = (appliedHit      * 100).toFixed(2) + '%';
+  document.getElementById('dispCritRate').textContent     = (appliedCrit     * 100).toFixed(2) + '%';
+  document.getElementById('dispSympathyRate').textContent = (appliedSympathy * 100).toFixed(2) + '%';
+
+  function physPart(atk) { return Math.max(0, atk - physDef) * outerCoeff + outerAdd; }
+  function elemPart(m, s) {
+    return (m + hiddenBonus) * elemBoostMain * statusCoeff
+         + (s + hiddenBonus) * elemBoostSub  * statusCoeff;
+  }
+  function dmg(pa, em, es, mul = 1) {
+    const p = physPart(pa) * (1 + physPenZone) * physDmgBonus * reductionZone * mul;
+    const e = elemPart(em, es) * (1 + elemPenZone) * elemDmgBonus * reductionZone * mul;
+    return { total: p + e, phys: p, elem: e };
+  }
+
+  const avgPhys = (minPhysATK + maxPhysATK) / 2;
+  const avgMain = (minElemMain + maxElemMain) / 2;
+  const avgSub  = (minElemSub  + maxElemSub)  / 2;
+
+  const normalAvg = dmg(avgPhys, avgMain, avgSub);
+  const normalMin = dmg(minPhysATK, minElemMain, minElemSub);
+  const normalMax = dmg(maxPhysATK, maxElemMain, maxElemSub);
+  const critAvg   = dmg(avgPhys, avgMain, avgSub, 1 + critBoost);
+  const critMin   = dmg(minPhysATK, minElemMain, minElemSub, 1 + critBoost);
+  const critMax   = dmg(maxPhysATK, maxElemMain, maxElemSub, 1 + critBoost);
+  const sympathyDmg = dmg(maxPhysATK, maxElemMain, maxElemSub, 1 + sympathyBoost);
+  const grazeDmg    = dmg(minPhysATK, minElemMain, minElemSub);
+  const expected = {
+    total: normalAvg.total*pNormal + critAvg.total*pCrit + sympathyDmg.total*pSympathy + grazeDmg.total*pGraze,
+    phys:  normalAvg.phys *pNormal + critAvg.phys *pCrit + sympathyDmg.phys *pSympathy + grazeDmg.phys *pGraze,
+    elem:  normalAvg.elem *pNormal + critAvg.elem *pCrit + sympathyDmg.elem *pSympathy + grazeDmg.elem *pGraze,
+  };
+
+  document.getElementById('pCrit').textContent     = pct(pCrit);
+  document.getElementById('pSympathy').textContent = pct(pSympathy);
+  document.getElementById('pGraze').textContent    = pct(pGraze);
+  document.getElementById('pNormal').textContent   = pct(pNormal);
+
+  function pct(n)   { return (n * 100).toFixed(2) + '%'; }
+  function fmt(n)   { return Math.round(n).toLocaleString(T.locale); }
+  function ppct(d)  { return d.total > 0 ? pct(d.phys / d.total) : '—'; }
+  function epct(d)  { return d.total > 0 ? pct(d.elem / d.total) : '—'; }
+
+  function row(label, avg, mn, mx, cls) {
+    const na = '<td class="na" colspan="3">—</td>';
+    return `<tr class="${cls||''}">
+      <td class="lbl">${label}</td>
+      <td>${fmt(avg.total)}</td><td>${fmt(avg.phys)}</td><td>${fmt(avg.elem)}</td>
+      ${mn ? `<td>${fmt(mn.total)}</td><td>${fmt(mn.phys)}</td><td>${fmt(mn.elem)}</td>` : na}
+      ${mx ? `<td>${fmt(mx.total)}</td><td>${fmt(mx.phys)}</td><td>${fmt(mx.elem)}</td>` : na}
+      <td style="text-align:center;">${ppct(avg)}</td>
+      <td style="text-align:center;">${epct(avg)}</td>
+    </tr>`;
+  }
+
+  const sympathyLabel = `${T.rowSympathy}<br><small style="font-weight:400;color:#94a3b8;">${T.rowSympathySub}</small>`;
+  const grazeLabel    = `${T.rowGraze}<br><small style="font-weight:400;color:#94a3b8;">${T.rowGrazeSub}</small>`;
+
+  document.getElementById('tbodyResults').innerHTML =
+    row(T.rowNormal,   normalAvg, normalMin,   normalMax) +
+    row(T.rowCrit,     critAvg,   critMin,      critMax) +
+    row(sympathyLabel, sympathyDmg, null, null) +
+    row(grazeLabel,    grazeDmg,    null, null) +
+    row(T.rowExpected, expected,    null, null, 'expected');
+
+  const items = [
+    [T.interHidden,          hiddenBonus],
+    [T.interPhysPen,         physPenZone.toFixed(4)],
+    [T.interElemPen,         elemPenZone.toFixed(4)],
+    [T.interPhysBonus,       physDmgBonus.toFixed(4)],
+    [T.interElemBonus,       elemDmgBonus.toFixed(4)],
+    [T.interReduction,       reductionZone.toFixed(4)],
+    [T.interAppliedHit,      appliedHit.toFixed(6)],
+    [T.interAppliedCrit,     appliedCrit.toFixed(6)],
+    [T.interAppliedSympathy, appliedSympathy.toFixed(6)],
+    [T.interPCrit,           pCrit.toFixed(6)],
+    [T.interPSympathy,       pSympathy.toFixed(6)],
+    [T.interPGraze,          pGraze.toFixed(6)],
+    [T.interPNormal,         pNormal.toFixed(6)],
+    [T.interBaseAvg,         fmt(normalAvg.total)],
+    [T.interBaseMax,         fmt(normalMax.total)],
+    [T.interBaseMin,         fmt(normalMin.total)],
+  ];
+  document.getElementById('interGrid').innerHTML = items.map(([k, val]) =>
+    `<div class="inter-item"><div class="inter-label">${k}</div><div class="inter-value">${val}</div></div>`
+  ).join('');
+
+  // ── 効率分析テーブル呼び出し ─────────────────────────────────────
+  const effParams = {
+    minPhysATK, maxPhysATK, minElemMain, maxElemMain, minElemSub, maxElemSub,
+    outerCoeff, statusCoeff, outerAdd, enemyDebuff,
+    hitRate, critRate, sympathyRate, addCritRate, addSympathyRate,
+    worldLv, martialLv, elemBoostMain, elemBoostSub,
+    critBoost, allMartialBoost, sympathyBoost, specMartialBoost,
+    outerPen, bossBoost, elemPen, elemAtkBoost,
+    dmgReduce1, dmgReduce2, weaponBonus,
+    physDef, judgeRes, physRes, elemRes
+  };
+  _lastEffParams = effParams;
+  _lastBaseExpected = expected.total;
+  buildEfficiencyTable(effParams, expected.total);
+}
+
+document.getElementById('enemyLevel').addEventListener('change', function() {
+  const isManual = this.value === 'manual';
+  ['PhysDef','JudgeRes','PhysRes','ElemRes'].forEach(f => {
+    document.getElementById('disp' + f).style.display = isManual ? 'none' : '';
+    document.getElementById('man'  + f).style.display = isManual ? ''     : 'none';
+  });
+  if (!isManual) {
+    const e = ENEMY_PRESET[this.value];
+    document.getElementById('manPhysDef').value  = e.physDef;
+    document.getElementById('manJudgeRes').value = e.judgeRes;
+    document.getElementById('manPhysRes').value  = e.physRes;
+    document.getElementById('manElemRes').value  = e.elemRes;
+  }
+  calculate();
+});
+
+// ── ダークモード ──────────────────────────────────────────────────
+function toggleDark() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  setDark(!isDark);
+}
+function setDark(dark) {
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  document.getElementById('darkToggle').textContent = dark ? '☀️' : '🌙';
+  try { localStorage.setItem('wwm_theme', dark ? 'dark' : 'light'); } catch(e) {}
+}
+(function initTheme() {
+  try {
+    const saved = localStorage.getItem('wwm_theme');
+    if (saved === 'dark') setDark(true);
+  } catch(e) {}
+})();
+
+// ── トースト通知 ──────────────────────────────────────────────────
+let _toastTimer = null;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(function() { el.classList.remove('show'); }, 2500);
+}
+
+// ── 画像エクスポート ──────────────────────────────────────────────
+function exportImage() {
+  if (typeof html2canvas === 'undefined') {
+    showToast('html2canvas が読み込まれていません（オンライン環境が必要です）');
+    return;
+  }
+  const btn = document.getElementById('exportBtn');
+  const origText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '⏳';
+
+  const now = new Date();
+  const dateStr = now.getFullYear() + '/' + String(now.getMonth()+1).padStart(2,'0') + '/' + String(now.getDate()).padStart(2,'0');
+
+  function fv(id) { return document.getElementById(id).value; }
+  const minP = v('minPhysATK'), maxP = v('maxPhysATK');
+  const minEM = v('minElemMain'), maxEM = v('maxElemMain');
+  const pCritTxt   = document.getElementById('pCrit').textContent;
+  const pSympTxt   = document.getElementById('pSympathy').textContent;
+  const pGrazeTxt  = document.getElementById('pGraze').textContent;
+  const pNormTxt   = document.getElementById('pNormal').textContent;
+  const expDmg     = Math.round(_lastBaseExpected).toLocaleString(T.locale);
+
+  const enemySel   = document.getElementById('enemyLevel').value;
+  const isManual   = enemySel === 'manual';
+  const physDefVal = isManual ? fv('manPhysDef') : document.getElementById('dispPhysDef').textContent;
+  const judgeResVal= isManual ? fv('manJudgeRes') : document.getElementById('dispJudgeRes').textContent;
+
+  function row(label, val, unit) {
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.06);">'
+      + '<span style="color:#94a3b8;font-size:11px;">' + label + '</span>'
+      + '<span style="color:#e2e8f0;font-size:12px;font-weight:700;">' + val + (unit||'') + '</span>'
+      + '</div>';
+  }
+  function section(title) {
+    return '<div style="color:#a78bfa;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin:12px 0 6px;">' + title + '</div>';
+  }
+  function probPanel(emoji, label, val, bg, border, textColor) {
+    return '<div style="background:' + bg + ';border:1px solid ' + border + ';border-radius:7px;padding:8px 6px;text-align:center;">'
+      + '<div style="color:' + textColor + ';font-size:10px;font-weight:700;">' + emoji + ' ' + label + '</div>'
+      + '<div style="color:#fff;font-size:17px;font-weight:800;margin-top:3px;">' + val + '</div>'
+      + '</div>';
+  }
+
+  const logoSrc = document.querySelector('.icon img') ? document.querySelector('.icon img').src : '';
+  const logoTag = logoSrc
+    ? '<img src="' + logoSrc + '" style="width:36px;height:36px;border-radius:6px;object-fit:cover;vertical-align:middle;margin-right:10px;">'
+    : '';
+
+  // 適用値
+  const appliedHit  = document.getElementById('dispHitRate').textContent;
+  const appliedCrit = document.getElementById('dispCritRate').textContent;
+  const appliedSymp = document.getElementById('dispSympathyRate').textContent;
+
+  // 入力値＋適用値を並べて表示する行
+  function rowApplied(label, inputVal, appliedVal) {
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.06);">'
+      + '<span style="color:#94a3b8;font-size:11px;">' + label + '</span>'
+      + '<span style="font-size:11px;font-weight:700;">'
+      + '<span style="color:#e2e8f0;">' + inputVal + '%</span>'
+      + '<span style="color:#475569;margin:0 4px;">&#8594;</span>'
+      + '<span style="color:#7dd3fc;">' + appliedVal + '</span>'
+      + '</span>'
+      + '</div>';
+  }
+
+  const card = document.getElementById('export-card');
+  card.innerHTML =
+    '<div style="width:900px;background:linear-gradient(135deg,#0f172a 0%,#1a2540 100%);border-radius:12px;overflow:hidden;font-family:Yu Gothic UI,Hiragino Sans,sans-serif;">'
+    // Header
+    + '<div style="background:linear-gradient(135deg,#1a1400 0%,#b45309 60%,#d97706 100%);padding:13px 22px;display:flex;justify-content:space-between;align-items:center;">'
+    +   '<div style="color:#fff;font-size:18px;font-weight:800;letter-spacing:0.1em;display:flex;align-items:center;">' + logoTag + 'WWM DMG CALC</div>'
+    +   '<div style="color:rgba(255,255,255,0.65);font-size:11px;">' + dateStr + '</div>'
+    + '</div>'
+    // Body - 3 columns
+    + '<div style="display:flex;">'
+
+    // Column 1: 基本ステータス + 判定確率
+    + '<div style="flex:1;padding:16px 16px;border-right:1px solid rgba(255,255,255,0.07);">'
+    +   section('基本ステータス')
+    +   row('最小物理ATK', Math.round(v('minPhysATK')).toLocaleString(T.locale))
+    +   row('最大物理ATK', Math.round(v('maxPhysATK')).toLocaleString(T.locale))
+    +   row('最小属性ATK（主）', fv('minElemMain'))
+    +   row('最大属性ATK（主）', fv('maxElemMain'))
+    +   row('最小属性ATK（副）', fv('minElemSub'))
+    +   row('最大属性ATK（副）', fv('maxElemSub'))
+    +   row('外功係数', fv('outerCoeff'), '%')
+    +   row('ステータス攻撃係数', fv('statusCoeff'), '%')
+    +   row('外功付加', fv('outerAdd'))
+    +   section('判定確率')
+    +   rowApplied('命中率',   fv('hitRate'),      appliedHit)
+    +   rowApplied('会心率',   fv('critRate'),     appliedCrit)
+    +   rowApplied('会意率',   fv('sympathyRate'), appliedSymp)
+    +   row('付加会心率', fv('addCritRate'), '%')
+    +   row('付加会意率', fv('addSympathyRate'), '%')
+    + '</div>'
+
+    // Column 2: ダメージ増加効果 + エネミー
+    + '<div style="flex:1;padding:16px 16px;border-right:1px solid rgba(255,255,255,0.07);">'
+    +   section('ダメージ増加効果')
+    +   row('会心攻撃強化',     fv('critBoost'), '%')
+    +   row('会意攻撃強化',     fv('sympathyBoost'), '%')
+    +   row('外功貫通',         fv('outerPen'))
+    +   row('外功ダメージ強化', fv('weaponBonus'), '%')
+    +   row('属性貫通',         fv('elemPen'))
+    +   row('属性攻撃強化',     fv('elemAtkBoost'), '%')
+    +   row('全武術効果増加',   fv('allMartialBoost'), '%')
+    +   row('首領ダメージ増加', fv('bossBoost'), '%')
+    +   row('指定武術効果強化', fv('specMartialBoost'), '%')
+    +   section('ENEMY — ' + (isManual ? 'Manual' : enemySel))
+    +   row('物理防御力', physDefVal)
+    +   row('審判耐性',   judgeResVal)
+    + '</div>'
+
+    // Column 3: 判定確率パネル + 期待値
+    + '<div style="flex:1;padding:16px 16px;">'
+    +   section('HIT PROBABILITY')
+    +   '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px;">'
+    +     probPanel('&#127919;', '会心',   pCritTxt,  'rgba(220,38,38,0.18)',  'rgba(220,38,38,0.4)',  '#fca5a5')
+    +     probPanel('&#128156;', '会意',   pSympTxt,  'rgba(139,92,246,0.18)', 'rgba(139,92,246,0.4)', '#c4b5fd')
+    +     probPanel('&#127810;', 'かすり', pGrazeTxt, 'rgba(234,88,12,0.18)',  'rgba(234,88,12,0.4)',  '#fdba74')
+    +     probPanel('&#9989;',   '通常',   pNormTxt,  'rgba(22,163,74,0.18)',  'rgba(22,163,74,0.4)',  '#86efac')
+    +   '</div>'
+    +   section('EXPECTED DAMAGE')
+    +   '<div style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.05));border:1px solid rgba(245,158,11,0.35);border-radius:8px;padding:18px 12px;text-align:center;">'
+    +     '<div style="color:#fbbf24;font-size:30px;font-weight:800;letter-spacing:0.02em;">' + expDmg + '</div>'
+    +   '</div>'
+    + '</div>'
+
+    + '</div>'
+    // Footer
+    + '<div style="padding:7px 20px;border-top:1px solid rgba(255,255,255,0.07);text-align:right;">'
+    +   '<span style="color:#475569;font-size:10px;">Created by <strong style="color:#64748b;">Shigetora</strong></span>'
+    + '</div>'
+    + '</div>';
+
+  card.style.display = 'block';
+
+  html2canvas(card.firstElementChild, {
+    scale: 2,
+    logging: false,
+    backgroundColor: null,
+    useCORS: true,
+  }).then(function(canvas) {
+    card.style.display = 'none';
+    btn.disabled = false;
+    btn.innerHTML = origText;
+    const link = document.createElement('a');
+    link.download = 'wwm_dmg_calc_' + dateStr.replace(/\//g, '') + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    showToast(T.toastExported);
+  }).catch(function(err) {
+    card.style.display = 'none';
+    btn.disabled = false;
+    btn.innerHTML = origText;
+    console.error('Export error:', err);
+  });
+}
+
+// ── プリセット ────────────────────────────────────────────────────
+const PRESET_KEY = 'wwm_presets_v1';
+let presets = [null, null, null];
+
+function renderPresetSlots() {
+  for (let i = 0; i < 3; i++) {
+    const slot     = document.getElementById('presetSlot' + i);
+    const nameInp  = document.getElementById('presetName' + i);
+    const loadBtn  = document.getElementById('presetLoadBtn' + i);
+    const delBtn   = document.getElementById('presetDelBtn' + i);
+    const p = presets[i];
+    if (p) {
+      slot.classList.add('has-data');
+      nameInp.value = p.name;
+      loadBtn.disabled = false;
+      delBtn.disabled  = false;
+    } else {
+      slot.classList.remove('has-data');
+      nameInp.value = '';
+      nameInp.placeholder = T.presetNamePlaceholder.replace('{n}', i + 1);
+      loadBtn.disabled = true;
+      delBtn.disabled  = true;
+    }
+  }
+}
+
+function savePreset(i) {
+  const nameInp = document.getElementById('presetName' + i);
+  const name = nameInp.value.trim() || T.presetNamePlaceholder.replace('{n}', i + 1);
+  const data = {};
+  document.querySelectorAll('input[id], select[id]').forEach(el => {
+    if (el.id.startsWith('presetName')) return;
+    data[el.id] = el.value;
+  });
+  presets[i] = { name, data };
+  try { localStorage.setItem(PRESET_KEY, JSON.stringify(presets)); } catch(e) {}
+  renderPresetSlots();
+  showToast(T.toastSaved.replace('{name}', name));
+}
+
+function loadPreset(i) {
+  const p = presets[i];
+  if (!p) return;
+  document.querySelectorAll('input[id], select[id]').forEach(el => {
+    if (el.id.startsWith('presetName')) return;
+    if (p.data[el.id] !== undefined) el.value = p.data[el.id];
+  });
+  // enemyLevel 表示切替を再適用
+  const sel = document.getElementById('enemyLevel').value;
+  const isManual = sel === 'manual';
+  ['PhysDef','JudgeRes','PhysRes','ElemRes'].forEach(f => {
+    document.getElementById('disp' + f).style.display = isManual ? 'none' : '';
+    document.getElementById('man'  + f).style.display = isManual ? ''     : 'none';
+  });
+  if (!isManual) {
+    const e = ENEMY_PRESET[sel];
+    document.getElementById('dispPhysDef').textContent  = e.physDef;
+    document.getElementById('dispJudgeRes').textContent = e.judgeRes;
+    document.getElementById('dispPhysRes').textContent  = e.physRes;
+    document.getElementById('dispElemRes').textContent  = e.elemRes;
+  }
+  saveInputs();
+  calculate();
+  showToast(T.toastLoaded.replace('{name}', p.name));
+}
+
+function deletePreset(i) {
+  const name = presets[i] ? presets[i].name : T.presetNamePlaceholder.replace('{n}', i + 1);
+  presets[i] = null;
+  try { localStorage.setItem(PRESET_KEY, JSON.stringify(presets)); } catch(e) {}
+  renderPresetSlots();
+  showToast(T.toastDeleted.replace('{name}', name));
+}
+
+function initPresets() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(PRESET_KEY));
+    if (Array.isArray(saved)) presets = saved;
+  } catch(e) {}
+  renderPresetSlots();
+}
+
+// ── localStorage 保存・復元 ────────────────────────────────────────
+const STORAGE_KEY = 'wwm_calc_v1';
+
+function saveInputs() {
+  const data = {};
+  document.querySelectorAll('input[id], select[id]').forEach(el => {
+    data[el.id] = el.value;
+  });
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+function loadInputs() {
+  let data;
+  try { data = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch(e) {}
+  if (!data) return;
+  document.querySelectorAll('input[id], select[id]').forEach(el => {
+    if (data[el.id] !== undefined) el.value = data[el.id];
+  });
+  // enemyLevel の表示切替を再適用
+  const sel = document.getElementById('enemyLevel').value;
+  const isManual = sel === 'manual';
+  ['PhysDef','JudgeRes','PhysRes','ElemRes'].forEach(f => {
+    document.getElementById('disp' + f).style.display = isManual ? 'none' : '';
+    document.getElementById('man'  + f).style.display = isManual ? ''     : 'none';
+  });
+  if (!isManual) {
+    const e = ENEMY_PRESET[sel];
+    document.getElementById('dispPhysDef').textContent  = e.physDef;
+    document.getElementById('dispJudgeRes').textContent = e.judgeRes;
+    document.getElementById('dispPhysRes').textContent  = e.physRes;
+    document.getElementById('dispElemRes').textContent  = e.elemRes;
+  }
+}
+
+document.querySelectorAll('input, select').forEach(el => {
+  el.addEventListener('input',  () => { calculate(); saveInputs(); });
+  el.addEventListener('change', () => { calculate(); saveInputs(); });
+});
+
+loadInputs();
+initEffMaxVals();
+initPresets();
+calculate();
+
+// 効率分析テーブルの装備最大値入力変更リスナー（イベント委譲）
+document.getElementById('effTbody').addEventListener('change', function(e) {
+  const inp = e.target;
+  if (!inp.classList.contains('eff-max-input')) return;
+  const idx   = parseInt(inp.dataset.idx, 10);
+  const isPct = inp.dataset.ispct === 'true';
+  const val   = parseFloat(inp.value);
+  if (isNaN(val) || val < 0) return;
+  effMaxVals[idx] = isPct ? val / 100 : val;
+  saveEffMaxVals();
+  if (_lastEffParams !== null) buildEfficiencyTable(_lastEffParams, _lastBaseExpected);
+});
+
+// ── 数値入力フィールド：不正文字の入力をブロック ─────────────────
+// type="number" でも e/E/+ は指数表記として通過するためキーダウンで阻止
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName !== 'INPUT' || e.target.type !== 'number') return;
+  if (e.key === 'e' || e.key === 'E' || e.key === '+') e.preventDefault();
+});
+// ペーストなどで不正値が混入した場合はフィールドをクリア（badInput 検知）
+document.addEventListener('input', function(e) {
+  if (e.target.tagName !== 'INPUT' || e.target.type !== 'number') return;
+  if (e.target.validity && e.target.validity.badInput) e.target.value = '';
+});
+</script>
+<div id="toast"></div>
+<div id="export-card"></div>
+</body>
+</html>
