@@ -304,7 +304,9 @@ function exportImage() {
     +       '<div style="width:22px;height:1px;background:#c9a45a;"></div>EXPECTED · 期待値</div>'
     +     '<div style="font-family:\'Cinzel\',serif;font-weight:800;font-size:72px;color:#f0d28a;line-height:0.95;margin-top:8px;letter-spacing:-0.02em;text-shadow:0 0 30px rgba(240,210,138,0.25);">' + expDmg + '</div>'
     +     '<div style="display:flex;gap:24px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(232,215,180,0.1);">'
-    +       '<div><div style="font-family:\'Rajdhani\',monospace;font-size:9px;color:#8b8170;letter-spacing:0.18em;">PHYSICAL</div><div style="font-family:\'Rajdhani\',monospace;font-size:16px;font-weight:700;color:#e8513a;margin-top:2px;">' + Math.round((expDmg.replace(/,/g,'')|0) * 0).toLocaleString() + '</div></div>'
+    +       '<div><div style="font-family:\'Rajdhani\',monospace;font-size:9px;color:#8b8170;letter-spacing:0.18em;">PHYSICAL</div><div style="font-family:\'Rajdhani\',monospace;font-size:16px;font-weight:700;color:#e8513a;margin-top:2px;">' + document.getElementById('hbPhys').textContent + '</div></div>'
+    +       '<div><div style="font-family:\'Rajdhani\',monospace;font-size:9px;color:#8b8170;letter-spacing:0.18em;">ELEMENTAL</div><div style="font-family:\'Rajdhani\',monospace;font-size:16px;font-weight:700;color:#a8d4b4;margin-top:2px;">' + document.getElementById('hbElem').textContent + '</div></div>'
+    +       '<div><div style="font-family:\'Rajdhani\',monospace;font-size:9px;color:#8b8170;letter-spacing:0.18em;">EXPECTED</div><div style="font-family:\'Rajdhani\',monospace;font-size:16px;font-weight:700;color:#ede4d0;margin-top:2px;">' + document.getElementById('hbExp').textContent + '</div></div>'
     +     '</div>'
     +   '</div>'
     +   '<div style="width:340px;padding:22px 24px;display:flex;align-items:center;gap:16px;border-left:1px solid rgba(232,215,180,0.12);background:rgba(0,0,0,0.3);">'
@@ -360,9 +362,14 @@ function exportImage() {
     +     row(T.martialLv, fv('martialLv'))
     +     row(T.elemBoostMain, fv('elemBoostMain'))
     +     row(T.elemBoostSub, fv('elemBoostSub'))
+    +     row(T.enemyDebuff, fv('enemyDebuff'), '%')
     +     section(T.sec6 + ' · ' + (isManual ? 'Manual' : enemySel))
     +     row(T.physDef, physDefVal)
     +     row(T.judgeRes, judgeResVal)
+    +     row(T.physRes, isManual ? fv('manPhysRes') : document.getElementById('dispPhysRes').textContent)
+    +     row(T.elemRes, isManual ? fv('manElemRes') : document.getElementById('dispElemRes').textContent)
+    +     row(T.dmgReduce1, fv('dmgReduce1'), '%')
+    +     row(T.dmgReduce2, fv('dmgReduce2'), '%')
     +   '</div>'
     + '</div>'
 
