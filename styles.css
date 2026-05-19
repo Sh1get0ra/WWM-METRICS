@@ -312,9 +312,8 @@ header.topbar::after {
 .hero--collapsed .hero-label-jp,
 .hero--collapsed .hero-nums,
 .hero--collapsed .hero-breakdown { display: none; }
-.hero--collapsed { grid-template-columns: 1fr !important; }
-.hero--collapsed .hero-right { display: none; }
-.hero--collapsed .hero-left { border-right: none; padding-bottom: 10px; }
+.hero--collapsed .hero-left { padding-top: 14px; padding-bottom: 14px; justify-content: center; }
+.hero--collapsed .hero-right { padding-top: 10px; padding-bottom: 10px; }
 .hero-eyebrow::before {
   content: ''; width: 22px; height: 1px; background: var(--gold);
 }
