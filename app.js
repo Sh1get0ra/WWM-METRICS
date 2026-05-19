@@ -307,7 +307,6 @@ function exportImage() {
     +       '<div style="padding-left:20px;border-left:1px solid rgba(232,215,180,0.18);padding-bottom:12px;">'
     +         '<div style="font-family:\'Rajdhani\',monospace;font-size:9px;font-weight:700;color:#7fa88a;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:4px;">STATUS SCORE</div>'
     +         '<div style="font-family:\'Cinzel\',serif;font-weight:800;font-size:42px;color:#a8d4b4;line-height:1;letter-spacing:-0.02em;text-shadow:0 0 18px rgba(168,212,180,0.2);">' + Math.round(parseFloat(document.getElementById('heroScore').textContent.replace(/,/g,''))).toLocaleString(T.locale) + '</div>'
-    +         '<div style="font-family:\'Rajdhani\',monospace;font-size:9px;color:#6a6053;letter-spacing:0.06em;margin-top:4px;">外功100% · 技能150% · 付加230</div>'
     +       '</div>'
     +     '</div>'
     +     '<div style="display:flex;gap:24px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(232,215,180,0.1);">'
