@@ -54,6 +54,9 @@ function computeExpected(p) {
        + dmg(p.minPhysATK, p.minElemMain, p.minElemSub) * pGraze;
 }
 
+// ── STATUS SCORE 固定スキルパラメータ ────────────────────────────
+const SCORE_FIXED = { outerCoeff: 1.0, statusCoeff: 1.5, outerAdd: 230 };
+
 // ── 効率分析：各ステータス行の定義 ───────────────────────────────
 const EFF_ROWS = [
   { key:'effMinPhysATK',  maxVal:64,    isPct:false, mod:(p,x)=>({...p, minPhysATK:p.minPhysATK+x}) },
@@ -218,6 +221,10 @@ function calculate() {
     phys:  normalAvg.phys *pNormal + critAvg.phys *pCrit + sympathyDmg.phys *pSympathy + grazeDmg.phys *pGraze,
     elem:  normalAvg.elem *pNormal + critAvg.elem *pCrit + sympathyDmg.elem *pSympathy + grazeDmg.elem *pGraze,
   };
+
+  // ── STATUS SCORE（固定スキル係数で計算） ─────────────────────
+  const scoreExpected = computeExpected({...effParams, ...SCORE_FIXED});
+  countUp('heroScore', scoreExpected, 0);
 
   // ── ヒーロー：期待値カウントアップ＆内訳 ──────────────────────
   countUp('heroExpected', expected.total, 0);
