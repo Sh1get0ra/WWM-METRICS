@@ -923,6 +923,56 @@ select.field-input option { background: var(--bg-2); color: var(--paper); }
   border-color: rgba(139,129,112,0.26);
 }
 
+/* ── スキルプリセット ─────────────────────────────────────── */
+.skill-preset-bar {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px dashed var(--ink-2);
+}
+.skill-preset-title {
+  font-family: var(--f-mono); font-weight: 700; font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold-bright);
+  flex-basis: 100%;
+}
+.skill-preset-select {
+  flex: 1; min-width: 100px;
+  background: var(--input-bg); color: var(--input-text);
+  border: 1px solid var(--ink-3); border-radius: 2px;
+  font-family: var(--f-mono); font-size: 12px;
+  padding: 4px 6px;
+}
+.skill-preset-name {
+  flex: 1; min-width: 90px;
+  background: var(--input-bg); color: var(--input-text);
+  border: 1px solid var(--ink-3); border-radius: 2px;
+  font-family: var(--f-mono); font-size: 12px;
+  padding: 4px 6px;
+}
+.skill-preset-btn {
+  background: rgba(200,60,43,0.15);
+  color: var(--vermilion-bright);
+  border: 1px solid rgba(232,81,58,0.5);
+  border-radius: 2px;
+  font-family: var(--f-mono); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.skill-preset-btn:hover { background: rgba(200,60,43,0.28); border-color: var(--vermilion-bright); }
+.skill-preset-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.skill-preset-del { background: rgba(0,0,0,0.3); color: var(--paper-mute); border-color: var(--ink-3); }
+.skill-preset-del:hover:not(:disabled) { background: rgba(200,60,43,0.18); color: var(--vermilion-bright); border-color: var(--vermilion); }
+
+html[data-theme="light"] .skill-preset-select,
+html[data-theme="light"] .skill-preset-name {
+  background: var(--input-bg); color: var(--input-text);
+  border-color: var(--ink-2);
+}
+
 /* ── prefers-reduced-motion: 動きの軽減 ─────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .tier-SS, .tier-S { animation: none !important; }

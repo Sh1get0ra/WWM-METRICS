@@ -16,8 +16,13 @@ function setLang(lang) {
   document.querySelectorAll('[data-i18n-opt="manualInput"]').forEach(el => {
     el.textContent = T.manualInput;
   });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const k = el.getAttribute('data-i18n-ph');
+    if (T[k] !== undefined) el.setAttribute('placeholder', T[k]);
+  });
 
   renderPresetSlots();
+  renderSkillPresetSelect();
   calculate();
 }
 
@@ -205,6 +210,86 @@ function initPresets() {
     if (Array.isArray(saved)) presets = saved;
   } catch(e) {}
   renderPresetSlots();
+}
+
+// ── スキルプリセット（4番パネル専用・無制限スロット） ────────────
+const SKILL_PRESET_KEY = 'wwm_skill_presets_v2';
+const SKILL_PRESET_FIELDS = ['outerCoeff', 'outerAdd', 'statusCoeff'];
+let skillPresets = [];
+
+function renderSkillPresetSelect() {
+  const sel = document.getElementById('skillPresetSelect');
+  if (!sel) return;
+  const cur = sel.value;
+  const ph = (T && T.skillPresetPlaceholder) || '— 選択 —';
+  let html = '<option value="">' + ph + '</option>';
+  skillPresets.forEach(function(p) {
+    html += '<option value="' + encodeURIComponent(p.name) + '">' + p.name + '</option>';
+  });
+  sel.innerHTML = html;
+  if (cur && skillPresets.some(function(p) { return encodeURIComponent(p.name) === cur; })) {
+    sel.value = cur;
+  }
+  const delBtn = document.getElementById('skillPresetDelBtn');
+  if (delBtn) delBtn.disabled = !sel.value;
+}
+function saveSkillPreset() {
+  const nameInp = document.getElementById('skillPresetName');
+  const name = (nameInp.value || '').trim();
+  if (!name) { showToast((T && T.skillPresetNeedName) || '名前を入力してください'); return; }
+  const data = {};
+  SKILL_PRESET_FIELDS.forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) data[id] = el.value;
+  });
+  const idx = skillPresets.findIndex(function(p) { return p.name === name; });
+  if (idx >= 0) skillPresets[idx] = { name: name, data: data };
+  else           skillPresets.push({ name: name, data: data });
+  try { localStorage.setItem(SKILL_PRESET_KEY, JSON.stringify(skillPresets)); } catch(e) {}
+  renderSkillPresetSelect();
+  const sel = document.getElementById('skillPresetSelect');
+  if (sel) sel.value = encodeURIComponent(name);
+  const delBtn = document.getElementById('skillPresetDelBtn');
+  if (delBtn) delBtn.disabled = false;
+  nameInp.value = '';
+  showToast(((T && T.toastSaved) || '{name} を保存しました').replace('{name}', name));
+}
+function loadSkillPresetByName(name) {
+  const p = skillPresets.find(function(x) { return x.name === name; });
+  if (!p) return;
+  SKILL_PRESET_FIELDS.forEach(function(id) {
+    if (p.data[id] !== undefined) {
+      const el = document.getElementById(id);
+      if (el) el.value = p.data[id];
+    }
+  });
+  saveInputs();
+  calculate();
+  showToast(((T && T.toastLoaded) || '{name} を読み込みました').replace('{name}', name));
+}
+function deleteSkillPreset() {
+  const sel = document.getElementById('skillPresetSelect');
+  if (!sel || !sel.value) return;
+  const name = decodeURIComponent(sel.value);
+  skillPresets = skillPresets.filter(function(p) { return p.name !== name; });
+  try { localStorage.setItem(SKILL_PRESET_KEY, JSON.stringify(skillPresets)); } catch(e) {}
+  renderSkillPresetSelect();
+  showToast(((T && T.toastDeleted) || '{name} を削除しました').replace('{name}', name));
+}
+function initSkillPresets() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(SKILL_PRESET_KEY));
+    if (Array.isArray(saved)) skillPresets = saved;
+  } catch(e) {}
+  renderSkillPresetSelect();
+  const sel = document.getElementById('skillPresetSelect');
+  if (sel) {
+    sel.addEventListener('change', function() {
+      const delBtn = document.getElementById('skillPresetDelBtn');
+      if (delBtn) delBtn.disabled = !sel.value;
+      if (sel.value) loadSkillPresetByName(decodeURIComponent(sel.value));
+    });
+  }
 }
 
 // ── 入力の保存・復元 ──────────────────────────────────────────────
@@ -433,6 +518,7 @@ function init() {
   loadInputs();
   initEffMaxVals();
   initPresets();
+  initSkillPresets();
   bindEnemySelect();
 
   document.querySelectorAll('input, select').forEach(el => {

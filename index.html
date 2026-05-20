@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;900&family=Noto+Serif+JP:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<link rel="stylesheet" href="styles.css?v=11">
+<link rel="stylesheet" href="styles.css?v=12">
 </head>
 <body>
 <div class="container">
@@ -251,6 +251,15 @@
     <div class="field-row"><span class="field-label" data-i18n="statusCoeff">ステータス攻撃係数</span>
       <input class="field-input" id="statusCoeff" type="number" value="371.34" step="0.01">
       <span class="pct-unit">%</span></div>
+    <div class="skill-preset-bar">
+      <span class="skill-preset-title" data-i18n="skillPresetTitle">スキルプリセット</span>
+      <select id="skillPresetSelect" class="skill-preset-select" aria-label="スキルプリセット選択">
+        <option value="" data-i18n="skillPresetPlaceholder">— 選択 —</option>
+      </select>
+      <input id="skillPresetName" class="skill-preset-name" type="text" maxlength="24" data-i18n-ph="skillPresetNamePh" placeholder="名前を入力">
+      <button class="skill-preset-btn skill-preset-save" onclick="saveSkillPreset()" data-i18n="skillPresetSave">保存</button>
+      <button class="skill-preset-btn skill-preset-del" id="skillPresetDelBtn" onclick="deleteSkillPreset()" disabled>✕</button>
+    </div>
   </div>
 
   <div class="card tone-green">
