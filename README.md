@@ -2,7 +2,7 @@
 ### Where Winds Meet — Damage Calculator / 风燕传伤害计算器 / 풍연전 대미지 계산기
 
 [![GitHub Pages](https://img.shields.io/badge/Live-GitHub%20Pages-brightgreen)](https://sh1get0ra.github.io/WWM-DMGCALC/)
-<img src="https://img.shields.io/badge/Lang-JP%20%7C%20EN%20%7C%20CN%20%7C%20KR-blue" alt="Languages">
+`JP` `EN` `中文` `한국어`
 
 🔗 **ツール URL**: https://sh1get0ra.github.io/WWM-DMGCALC/
 
