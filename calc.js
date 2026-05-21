@@ -87,6 +87,14 @@ const SET_EFFECTS = {
   'sway-75':      { allMartialBoost: 0.10 },
 };
 
+// ── 心法効果データ ──────────────────────────────────────────────
+// outerPenAdd は外功貫通の絶対値加算（%ではない）
+const XINFA_EFFECTS = {
+  'none':          {},
+  'yishui-5':      { outerPenAdd: 10, allMartialBoost: 0.05 },
+  'yishui-5-cc':   { outerPenAdd: 10, allMartialBoost: 0.10 },
+};
+
 // ── 効率分析：各ステータス行の定義 ───────────────────────────────
 const EFF_ROWS = [
   { key:'effMinPhysATK',  maxVal:64,    isPct:false, mod:(p,x)=>({...p, minPhysATK:p.minPhysATK+x}) },
@@ -184,7 +192,8 @@ function calculate() {
   let allMartialBoost   = vp('allMartialBoost');
   let sympathyBoost     = vp('sympathyBoost');
   let specMartialBoost  = vp('specMartialBoost');
-  const outerPen        = v('outerPen'),     bossBoost       = vp('bossBoost');
+  let outerPen          = v('outerPen');
+  const bossBoost       = vp('bossBoost');
   const elemPen         = v('elemPen');
   let elemAtkBoost      = vp('elemAtkBoost');
   const dmgReduce1      = vp('dmgReduce1'),  dmgReduce2      = vp('dmgReduce2');
@@ -205,6 +214,13 @@ function calculate() {
     minPhysATK *= (1 + eff.outerAtkBoost);
     maxPhysATK *= (1 + eff.outerAtkBoost);
   }
+
+  // ── 心法効果 適用 ──
+  const xinfaEl = document.getElementById('xinfa');
+  const xinfaKey = xinfaEl ? xinfaEl.value : 'none';
+  const xeff = XINFA_EFFECTS[xinfaKey] || {};
+  if (xeff.outerPenAdd)      outerPen          += xeff.outerPenAdd;
+  if (xeff.allMartialBoost)  allMartialBoost   += xeff.allMartialBoost;
 
   const sel = document.getElementById('enemyLevel').value;
   let physDef, judgeRes, physRes, elemRes;
