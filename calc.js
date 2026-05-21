@@ -199,6 +199,15 @@ function calculate() {
   const dmgReduce1      = vp('dmgReduce1'),  dmgReduce2      = vp('dmgReduce2');
   const weaponBonus     = vp('weaponBonus');
 
+  // ── セット/心法適用前の raw 値スナップショット（STATUS SCORE用） ──
+  const _raw = {
+    minPhysATK: minPhysATK, maxPhysATK: maxPhysATK,
+    critRate: critRate, critBoost: critBoost,
+    sympathyBoost: sympathyBoost, addSympathyRate: addSympathyRate,
+    allMartialBoost: allMartialBoost, specMartialBoost: specMartialBoost,
+    elemAtkBoost: elemAtkBoost, outerPen: outerPen,
+  };
+
   // ── セット効果 適用（既存フィールド非改変・内部加算のみ） ──
   const setEl = document.getElementById('setEffect');
   const setKey = setEl ? setEl.value : 'none';
@@ -360,9 +369,25 @@ function calculate() {
   _lastEffParams = effParams;
   _lastBaseExpected = expected.total;
 
-  // ── STATUS SCORE（固定スキル係数で計算） ─────────────────────
+  // ── STATUS SCORE（固定スキル係数で計算・セット/心法効果除外） ─
   (function() {
     var sc = SCORE_FIXED;
+    // raw 値で各種ゾーン・確率を再計算（セット/心法の影響を排除）
+    var rPhysPenDiff = _raw.outerPen - physRes;
+    var rPhysPenZone = rPhysPenDiff > 0 ? rPhysPenDiff / 100 : rPhysPenDiff / 200;
+    var rPhysDmgBonus = 1 + _raw.allMartialBoost + _raw.specMartialBoost + weaponBonus + bossBoost + enemyDebuff;
+    var rElemDmgBonus = rPhysDmgBonus + _raw.elemAtkBoost;
+    var rSympathyAdj  = judgeRes === 0 ? sympathyRate : sympathyRate / judgeRes;
+    var rCritAdj      = judgeRes === 0 ? _raw.critRate : _raw.critRate / judgeRes;
+    var rAppliedSymp  = Math.min(0.4, rSympathyAdj + _raw.addSympathyRate);
+    var rAppliedCrit  = Math.min(0.8, 1 - rAppliedSymp, rCritAdj + addCritRate);
+    var rAppliedHit   = judgeRes === 0 ? Math.min(1, hitRate) : Math.min(1, 0.65 + (hitRate - 0.65) / judgeRes);
+    var rPCrit  = Math.min(rAppliedHit, rAppliedCrit);
+    var rPSymp  = rAppliedSymp;
+    var rPGraze = (1 - rAppliedHit) * (1 - rSympathyAdj);
+    var rPNorm  = 1 - rPCrit - rPSymp - rPGraze;
+    var rAvgPhys = (_raw.minPhysATK + _raw.maxPhysATK) / 2;
+
     function sp(atk) { return Math.max(0, atk - physDef) * sc.outerCoeff + sc.outerAdd; }
     function se(m, s) {
       return (m + hiddenBonus) * elemBoostMain * sc.statusCoeff
@@ -370,13 +395,13 @@ function calculate() {
     }
     function sd(pa, em, es, mul) {
       mul = mul || 1;
-      return sp(pa) * (1 + physPenZone) * physDmgBonus * reductionZone * mul
-           + se(em, es) * (1 + elemPenZone) * elemDmgBonus * reductionZone * mul;
+      return sp(pa) * (1 + rPhysPenZone) * rPhysDmgBonus * reductionZone * mul
+           + se(em, es) * (1 + elemPenZone) * rElemDmgBonus * reductionZone * mul;
     }
-    var s = sd(avgPhys, avgMain, avgSub)                    * pNormal
-          + sd(avgPhys, avgMain, avgSub, 1 + critBoost)     * pCrit
-          + sd(maxPhysATK, maxElemMain, maxElemSub, 1 + sympathyBoost) * pSympathy
-          + sd(minPhysATK, minElemMain, minElemSub)         * pGraze;
+    var s = sd(rAvgPhys, avgMain, avgSub)                                  * rPNorm
+          + sd(rAvgPhys, avgMain, avgSub, 1 + _raw.critBoost)              * rPCrit
+          + sd(_raw.maxPhysATK, maxElemMain, maxElemSub, 1 + _raw.sympathyBoost) * rPSymp
+          + sd(_raw.minPhysATK, minElemMain, minElemSub)                   * rPGraze;
     countUp('heroScore', s, 0);
     var _cd = document.getElementById('heroCompactDmg');
     var _cs = document.getElementById('heroCompactScore');
