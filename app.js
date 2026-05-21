@@ -544,14 +544,41 @@ function init() {
     if (_lastEffParams !== null) buildEfficiencyTable(_lastEffParams, _lastBaseExpected);
   });
 
-  // 数値入力フィールド：不正文字ブロック
-  document.addEventListener('keydown', function(e) {
-    if (e.target.tagName !== 'INPUT' || e.target.type !== 'number') return;
-    if (e.key === 'e' || e.key === 'E' || e.key === '+') e.preventDefault();
-  });
+  // 数値入力フィールド：全角→半角自動変換 + 数字以外ブロック
+  function isNumericField(el) {
+    return el && el.tagName === 'INPUT' && el.getAttribute('inputmode') === 'decimal';
+  }
+  function normalizeNumericValue(val) {
+    if (!val) return '';
+    // 全角数字・全角ピリオド・全角マイナスを半角化
+    var s = val.replace(/[０-９]/g, function(c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
+               .replace(/[．。]/g, '.')
+               .replace(/[ー－−―]/g, '-');
+    // 数字・ピリオド・マイナス以外を除去
+    s = s.replace(/[^0-9.\-]/g, '');
+    // マイナスは先頭のみ許容
+    var neg = s.charAt(0) === '-';
+    s = s.replace(/-/g, '');
+    if (neg) s = '-' + s;
+    // ピリオドは1つだけ
+    var firstDot = s.indexOf('.');
+    if (firstDot !== -1) s = s.slice(0, firstDot + 1) + s.slice(firstDot + 1).replace(/\./g, '');
+    return s;
+  }
   document.addEventListener('input', function(e) {
-    if (e.target.tagName !== 'INPUT' || e.target.type !== 'number') return;
-    if (e.target.validity && e.target.validity.badInput) e.target.value = '';
+    if (!isNumericField(e.target)) return;
+    var raw = e.target.value;
+    var norm = normalizeNumericValue(raw);
+    if (raw !== norm) {
+      var pos = e.target.selectionStart;
+      e.target.value = norm;
+      try { e.target.setSelectionRange(pos, pos); } catch (err) {}
+    }
+  });
+  document.addEventListener('compositionend', function(e) {
+    if (!isNumericField(e.target)) return;
+    e.target.value = normalizeNumericValue(e.target.value);
+    e.target.dispatchEvent(new Event('input', { bubbles: true }));
   });
 
   calculate();

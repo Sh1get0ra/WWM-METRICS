@@ -146,7 +146,7 @@ function buildEfficiencyTable(p, baseExpected) {
 
     const dispVal = row.isPct ? +(curMax * 100).toFixed(4) : curMax;
     const step    = row.isPct ? '0.1' : (row.maxVal % 1 === 0 ? '1' : '0.1');
-    const maxInput = '<input type="number" class="eff-max-input"'
+    const maxInput = '<input type="text" inputmode="decimal" class="eff-max-input"'
       + ' data-idx="' + idx + '" data-ispct="' + row.isPct + '"'
       + ' value="' + dispVal + '" step="' + step + '" min="0"'
       + (row.isPct ? ' title="%"' : '') + '>';
