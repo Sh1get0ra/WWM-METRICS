@@ -409,7 +409,7 @@ function calculate() {
     if (_cs) _cs.textContent = Math.round(s).toLocaleString(T.locale);
 
     // ── Tier 判定（大世界Lv のみ） ────────────────────────────
-    var ssThr = 7800 * Math.pow(0.8, 14 - worldLv);
+    var ssThr = 7700 * Math.pow(0.8, 14 - worldLv);
     var tier;
     if      (s >= ssThr)           tier = 'SS';
     else if (s >= ssThr * 0.9)     tier = 'S';
