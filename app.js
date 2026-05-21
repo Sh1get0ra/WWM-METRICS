@@ -550,36 +550,46 @@ function init() {
   }
   function normalizeNumericValue(val) {
     if (!val) return '';
-    // 全角数字・全角ピリオド・全角マイナスを半角化
     var s = val.replace(/[０-９]/g, function(c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
                .replace(/[．。]/g, '.')
                .replace(/[ー－−―]/g, '-');
-    // 数字・ピリオド・マイナス以外を除去
     s = s.replace(/[^0-9.\-]/g, '');
-    // マイナスは先頭のみ許容
     var neg = s.charAt(0) === '-';
     s = s.replace(/-/g, '');
     if (neg) s = '-' + s;
-    // ピリオドは1つだけ
     var firstDot = s.indexOf('.');
     if (firstDot !== -1) s = s.slice(0, firstDot + 1) + s.slice(firstDot + 1).replace(/\./g, '');
     return s;
   }
+  var _imeComposing = new WeakSet();
+  document.addEventListener('compositionstart', function(e) {
+    if (isNumericField(e.target)) _imeComposing.add(e.target);
+  });
+  document.addEventListener('compositionend', function(e) {
+    if (!isNumericField(e.target)) return;
+    _imeComposing.delete(e.target);
+    var norm = normalizeNumericValue(e.target.value);
+    if (e.target.value !== norm) e.target.value = norm;
+    // 確定後の正規化結果で calc を1回だけ走らせる
+    e.target.dispatchEvent(new Event('input', { bubbles: true }));
+  }, true);
   document.addEventListener('input', function(e) {
     if (!isNumericField(e.target)) return;
+    if (_imeComposing.has(e.target)) {
+      // IME 確定前は何もしない（value も書き換えない・calc も走らせない）
+      e.stopImmediatePropagation();
+      return;
+    }
     var raw = e.target.value;
     var norm = normalizeNumericValue(raw);
     if (raw !== norm) {
       var pos = e.target.selectionStart;
+      var diff = raw.length - norm.length;
       e.target.value = norm;
-      try { e.target.setSelectionRange(pos, pos); } catch (err) {}
+      var newPos = Math.max(0, (pos || 0) - diff);
+      try { e.target.setSelectionRange(newPos, newPos); } catch (err) {}
     }
-  });
-  document.addEventListener('compositionend', function(e) {
-    if (!isNumericField(e.target)) return;
-    e.target.value = normalizeNumericValue(e.target.value);
-    e.target.dispatchEvent(new Event('input', { bubbles: true }));
-  });
+  }, true);
 
   calculate();
 }
