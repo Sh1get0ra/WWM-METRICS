@@ -25,8 +25,9 @@ function computeExpected(p) {
 
   const sympathyRateAdj = p.judgeRes === 0 ? p.sympathyRate : p.sympathyRate / p.judgeRes;
   const critRateAdj     = p.judgeRes === 0 ? p.critRate     : p.critRate     / p.judgeRes;
-  const appliedSympathy = Math.min(0.4, sympathyRateAdj + p.addSympathyRate);
-  const appliedCrit     = Math.min(0.8, 1 - appliedSympathy, critRateAdj + p.addCritRate);
+  // 付加会心率/共鳴率は基本値の上限(40%/80%)を突破可能。会心+共鳴の100%制限は維持。
+  const appliedSympathy = Math.min(0.4, sympathyRateAdj) + p.addSympathyRate;
+  const appliedCrit     = Math.min(1 - appliedSympathy, Math.min(0.8, critRateAdj) + p.addCritRate);
   const appliedHit      = p.judgeRes === 0 ? Math.min(1, p.hitRate) : Math.min(1, 0.65 + (p.hitRate - 0.65) / p.judgeRes);
   const pCrit     = Math.min(appliedHit, appliedCrit);
   const pSympathy = appliedSympathy;
@@ -256,8 +257,9 @@ function calculate() {
 
   const sympathyRateAdj = judgeRes === 0 ? sympathyRate : sympathyRate / judgeRes;
   const critRateAdj     = judgeRes === 0 ? critRate     : critRate     / judgeRes;
-  const appliedSympathy = Math.min(0.4, sympathyRateAdj + addSympathyRate);
-  const appliedCrit     = Math.min(0.8, 1 - appliedSympathy, critRateAdj + addCritRate);
+  // 付加会心率/共鳴率は基本値の上限(40%/80%)を突破可能。会心+共鳴の100%制限は維持。
+  const appliedSympathy = Math.min(0.4, sympathyRateAdj) + addSympathyRate;
+  const appliedCrit     = Math.min(1 - appliedSympathy, Math.min(0.8, critRateAdj) + addCritRate);
   const appliedHit      = judgeRes === 0 ? Math.min(1, hitRate) : Math.min(1, 0.65 + (hitRate - 0.65) / judgeRes);
   const pCrit     = Math.min(appliedHit, appliedCrit);
   const pSympathy = appliedSympathy;
@@ -388,8 +390,9 @@ function calculate() {
     var rElemDmgBonus = rPhysDmgBonus + _raw.elemAtkBoost;
     var rSympathyAdj  = judgeRes === 0 ? sympathyRate : sympathyRate / judgeRes;
     var rCritAdj      = judgeRes === 0 ? _raw.critRate : _raw.critRate / judgeRes;
-    var rAppliedSymp  = Math.min(0.4, rSympathyAdj + _raw.addSympathyRate);
-    var rAppliedCrit  = Math.min(0.8, 1 - rAppliedSymp, rCritAdj + addCritRate);
+    // 付加会心率/共鳴率は基本値の上限(40%/80%)を突破可能。会心+共鳴の100%制限は維持。
+    var rAppliedSymp  = Math.min(0.4, rSympathyAdj) + _raw.addSympathyRate;
+    var rAppliedCrit  = Math.min(1 - rAppliedSymp, Math.min(0.8, rCritAdj) + addCritRate);
     var rAppliedHit   = judgeRes === 0 ? Math.min(1, hitRate) : Math.min(1, 0.65 + (hitRate - 0.65) / judgeRes);
     var rPCrit  = Math.min(rAppliedHit, rAppliedCrit);
     var rPSymp  = rAppliedSymp;
