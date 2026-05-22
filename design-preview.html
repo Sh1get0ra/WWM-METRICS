@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<title>WWM-DMGCALC Design Tokens Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Noto+Sans+JP:wght@400;700;900&family=Noto+Serif+JP:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-0: #07060a; --bg-1: #0f0c0e; --bg-raised: #1a1410;
+  --vermilion: #c83c2b; --vermilion-deep: #8a1f17; --vermilion-bright: #e8513a;
+  --gold: #c9a45a; --gold-bright: #f0d28a; --gold-deep: #8a6f30;
+  --jade: #7fa88a; --jade-bright: #a8d4b4;
+  --bone: #c9b88a; --bone-dim: #9c8a6a;
+  --paper: #ede4d0; --paper-2: #c8bda6; --paper-dim: #8b8170; --paper-mute: #6a6053;
+  --ink-1: rgba(232,215,180,0.06); --ink-2: rgba(232,215,180,0.12); --ink-3: rgba(232,215,180,0.22);
+  --chart-crit: #f0d28a; --chart-sympathy: #e8513a; --chart-graze: #6a6053; --chart-normal: #ede4d0;
+  --f-display: 'Noto Serif JP', serif;
+  --f-body: 'Noto Sans JP', sans-serif;
+  --f-latin: 'Cinzel', serif;
+  --f-mono: 'Rajdhani', monospace;
+}
+html[data-theme="light"] {
+  --bg-0: #ede2c8; --bg-1: #e6dabd; --bg-raised: #d4c69b;
+  --vermilion-bright: #c83c2b;
+  --gold: #8a6a20; --gold-bright: #5e4310; --gold-deep: #c9a45a;
+  --jade: #4a7a5a; --jade-bright: #2d5a3a;
+  --paper: #2a1c12; --paper-2: #4a3422; --paper-dim: #6a5236; --paper-mute: #8a7350;
+  --ink-1: rgba(40,25,18,0.10); --ink-2: rgba(40,25,18,0.20); --ink-3: rgba(40,25,18,0.35);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg-0); color: var(--paper);
+  font-family: var(--f-body); padding: 40px;
+  transition: background 0.2s, color 0.2s;
+}
+header {
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--ink-2); padding-bottom: 20px; margin-bottom: 40px;
+}
+h1 {
+  font-family: var(--f-display); font-weight: 900;
+  margin: 0; letter-spacing: 0.12em; font-size: 28px;
+}
+h1 .accent { color: var(--vermilion-bright); }
+.theme-toggle {
+  background: var(--bg-raised); color: var(--paper); border: 1px solid var(--ink-3);
+  padding: 8px 16px; cursor: pointer; font-family: var(--f-mono); font-weight: 700;
+  letter-spacing: 0.1em;
+}
+section { margin-bottom: 50px; }
+h2 {
+  font-family: var(--f-mono); font-size: 14px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin: 0 0 20px;
+  border-left: 3px solid var(--vermilion); padding-left: 12px;
+}
+.grid { display: grid; gap: 16px; }
+.grid-colors { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+.grid-type { grid-template-columns: 1fr; gap: 8px; }
+.grid-space { grid-template-columns: 1fr; gap: 12px; }
+.swatch { border: 1px solid var(--ink-2); padding: 12px; background: var(--bg-1); }
+.swatch-color { width: 100%; height: 80px; margin-bottom: 10px; border: 1px solid var(--ink-1); }
+.swatch-name { font-family: var(--f-mono); font-size: 11px; font-weight: 700; color: var(--paper); margin-bottom: 4px; }
+.swatch-val { font-family: var(--f-mono); font-size: 10px; color: var(--paper-dim); }
+.type-row {
+  display: flex; align-items: baseline; gap: 20px;
+  padding: 12px; border: 1px solid var(--ink-1); background: var(--bg-1);
+}
+.type-label { font-family: var(--f-mono); font-size: 10px; color: var(--paper-dim); letter-spacing: 0.18em; text-transform: uppercase; min-width: 100px; }
+.type-sample { color: var(--paper); }
+.type-val { font-family: var(--f-mono); font-size: 10px; color: var(--paper-mute); margin-left: auto; }
+.space-row { display: flex; align-items: center; gap: 20px; padding: 8px 12px; border: 1px solid var(--ink-1); background: var(--bg-1); }
+.space-bar { height: 8px; background: var(--vermilion-bright); }
+.space-label { font-family: var(--f-mono); font-size: 11px; color: var(--paper); min-width: 80px; }
+.font-stack { padding: 16px; border: 1px solid var(--ink-2); background: var(--bg-1); margin-bottom: 12px; }
+.font-stack-name { font-family: var(--f-mono); font-size: 11px; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
+.font-stack-sample { font-size: 18px; color: var(--paper); }
+.component-demo { padding: 20px; border: 1px solid var(--ink-2); background: var(--bg-1); display: flex; flex-direction: column; gap: 16px; }
+.demo-input {
+  background: rgba(0,0,0,0.5); color: var(--gold-bright);
+  border: 1px solid var(--ink-3); padding: 8px 12px;
+  font-family: var(--f-mono); font-size: 13px; font-weight: 700;
+  width: 200px;
+}
+html[data-theme="light"] .demo-input { background: rgba(255,250,235,0.85); color: #5e3a14; }
+.tier-badges { display: flex; gap: 12px; }
+.tier-badge {
+  font-family: var(--f-latin); font-weight: 800; font-size: 20px;
+  width: 48px; height: 48px; display: grid; place-items: center;
+  border: 2px solid; letter-spacing: -0.02em;
+}
+.tier-ss { color: var(--gold-bright); border-color: var(--gold-bright); box-shadow: 0 0 16px var(--gold); }
+.tier-s  { color: var(--gold); border-color: var(--gold); box-shadow: 0 0 10px rgba(201,164,90,0.4); }
+.tier-a  { color: var(--jade-bright); border-color: var(--jade-bright); }
+.tier-b  { color: var(--paper-2); border-color: var(--paper-2); }
+.tier-c  { color: var(--paper-mute); border-color: var(--paper-mute); }
+.donut-demo {
+  width: 140px; height: 140px; border-radius: 50%;
+  background: conic-gradient(
+    var(--chart-crit) 0% 25%,
+    var(--chart-sympathy) 25% 55%,
+    var(--chart-graze) 55% 75%,
+    var(--chart-normal) 75% 100%
+  );
+}
+footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--ink-2); text-align: center; color: var(--paper-dim); font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.15em; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>WWM <span class="accent">DESIGN TOKENS</span></h1>
+  <button class="theme-toggle" onclick="toggleTheme()">☀ / ☾</button>
+</header>
+
+<section>
+  <h2>Colors — Vermilion</h2>
+  <div class="grid grid-colors">
+    <div class="swatch"><div class="swatch-color" style="background:var(--vermilion)"></div><div class="swatch-name">--vermilion</div><div class="swatch-val">#c83c2b</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--vermilion-bright)"></div><div class="swatch-name">--vermilion-bright</div><div class="swatch-val">#e8513a</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--vermilion-deep)"></div><div class="swatch-name">--vermilion-deep</div><div class="swatch-val">#8a1f17</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Colors — Gold</h2>
+  <div class="grid grid-colors">
+    <div class="swatch"><div class="swatch-color" style="background:var(--gold)"></div><div class="swatch-name">--gold</div><div class="swatch-val">#c9a45a</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--gold-bright)"></div><div class="swatch-name">--gold-bright</div><div class="swatch-val">#f0d28a</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--gold-deep)"></div><div class="swatch-name">--gold-deep</div><div class="swatch-val">#8a6f30</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Colors — Jade & Bone</h2>
+  <div class="grid grid-colors">
+    <div class="swatch"><div class="swatch-color" style="background:var(--jade)"></div><div class="swatch-name">--jade</div><div class="swatch-val">#7fa88a</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--jade-bright)"></div><div class="swatch-name">--jade-bright</div><div class="swatch-val">#a8d4b4</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--bone)"></div><div class="swatch-name">--bone</div><div class="swatch-val">#c9b88a</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--bone-dim)"></div><div class="swatch-name">--bone-dim</div><div class="swatch-val">#9c8a6a</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Colors — Paper</h2>
+  <div class="grid grid-colors">
+    <div class="swatch"><div class="swatch-color" style="background:var(--paper)"></div><div class="swatch-name">--paper</div><div class="swatch-val">#ede4d0</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--paper-2)"></div><div class="swatch-name">--paper-2</div><div class="swatch-val">#c8bda6</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--paper-dim)"></div><div class="swatch-name">--paper-dim</div><div class="swatch-val">#8b8170</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:var(--paper-mute)"></div><div class="swatch-name">--paper-mute</div><div class="swatch-val">#6a6053</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Chart Palette</h2>
+  <div class="component-demo" style="display:flex;flex-direction:row;align-items:center;gap:30px;">
+    <div class="donut-demo"></div>
+    <div style="flex:1;">
+      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--ink-2);"><span><span style="display:inline-block;width:12px;height:12px;background:var(--chart-crit);margin-right:8px;vertical-align:middle;"></span>クリティカル</span><span style="color:var(--chart-crit);font-family:var(--f-mono);font-weight:700;">25.0%</span></div>
+      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--ink-2);"><span><span style="display:inline-block;width:12px;height:12px;background:var(--chart-sympathy);margin-right:8px;vertical-align:middle;"></span>共鳴</span><span style="color:var(--chart-sympathy);font-family:var(--f-mono);font-weight:700;">30.0%</span></div>
+      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--ink-2);"><span><span style="display:inline-block;width:12px;height:12px;background:var(--chart-graze);margin-right:8px;vertical-align:middle;"></span>かすり</span><span style="color:var(--chart-graze);font-family:var(--f-mono);font-weight:700;">20.0%</span></div>
+      <div style="display:flex;justify-content:space-between;padding:8px 0;"><span><span style="display:inline-block;width:12px;height:12px;background:var(--chart-normal);margin-right:8px;vertical-align:middle;"></span>通常</span><span style="color:var(--chart-normal);font-family:var(--f-mono);font-weight:700;">25.0%</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Typography — Font Stacks</h2>
+  <div class="font-stack">
+    <div class="font-stack-name">--f-display</div>
+    <div class="font-stack-sample" style="font-family:var(--f-display);font-weight:900;">風燕伝　ダメージ計算ツール</div>
+  </div>
+  <div class="font-stack">
+    <div class="font-stack-name">--f-body</div>
+    <div class="font-stack-sample" style="font-family:var(--f-body);">高負荷時 高速 動作 確認</div>
+  </div>
+  <div class="font-stack">
+    <div class="font-stack-name">--f-latin</div>
+    <div class="font-stack-sample" style="font-family:var(--f-latin);font-weight:800;font-size:32px;color:var(--gold-bright);">123,456</div>
+  </div>
+  <div class="font-stack">
+    <div class="font-stack-name">--f-mono</div>
+    <div class="font-stack-sample" style="font-family:var(--f-mono);font-weight:700;letter-spacing:0.1em;">STATUS · 8500 · SS</div>
+  </div>
+</section>
+
+<section>
+  <h2>Typography Scale (8段)</h2>
+  <div class="grid grid-type">
+    <div class="type-row"><span class="type-label">--text-2xs</span><span class="type-sample" style="font-size:8px;">武侠 武侠 ABCDEFG 123</span><span class="type-val">8px</span></div>
+    <div class="type-row"><span class="type-label">--text-xs</span><span class="type-sample" style="font-size:10px;">武侠 武侠 ABCDEFG 123</span><span class="type-val">10px</span></div>
+    <div class="type-row"><span class="type-label">--text-sm</span><span class="type-sample" style="font-size:11px;">武侠 武侠 ABCDEFG 123</span><span class="type-val">11px</span></div>
+    <div class="type-row"><span class="type-label">--text-md</span><span class="type-sample" style="font-size:13px;">武侠 武侠 ABCDEFG 123</span><span class="type-val">13px</span></div>
+    <div class="type-row"><span class="type-label">--text-lg</span><span class="type-sample" style="font-size:16px;">武侠 武侠 ABCDEFG 123</span><span class="type-val">16px</span></div>
+    <div class="type-row"><span class="type-label">--text-xl</span><span class="type-sample" style="font-size:22px;">武侠 武侠 ABCDEFG 123</span><span class="type-val">22px</span></div>
+    <div class="type-row"><span class="type-label">--text-2xl</span><span class="type-sample" style="font-size:28px;">武侠 武侠 ABCDEFG 123</span><span class="type-val">28px</span></div>
+    <div class="type-row"><span class="type-label">--text-hero</span><span class="type-sample" style="font-size:92px;font-family:var(--f-latin);font-weight:800;color:var(--gold-bright);line-height:1;">123</span><span class="type-val">92px</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Spacing Scale</h2>
+  <div class="grid grid-space">
+    <div class="space-row"><span class="space-label">--space-1</span><div class="space-bar" style="width:4px;"></div><span class="type-val">4px</span></div>
+    <div class="space-row"><span class="space-label">--space-2</span><div class="space-bar" style="width:8px;"></div><span class="type-val">8px</span></div>
+    <div class="space-row"><span class="space-label">--space-3</span><div class="space-bar" style="width:12px;"></div><span class="type-val">12px</span></div>
+    <div class="space-row"><span class="space-label">--space-4</span><div class="space-bar" style="width:16px;"></div><span class="type-val">16px</span></div>
+    <div class="space-row"><span class="space-label">--space-5</span><div class="space-bar" style="width:20px;"></div><span class="type-val">20px</span></div>
+    <div class="space-row"><span class="space-label">--space-6</span><div class="space-bar" style="width:24px;"></div><span class="type-val">24px</span></div>
+    <div class="space-row"><span class="space-label">--space-7</span><div class="space-bar" style="width:32px;"></div><span class="type-val">32px</span></div>
+    <div class="space-row"><span class="space-label">--space-8</span><div class="space-bar" style="width:40px;"></div><span class="type-val">40px</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Components — Tier Badges</h2>
+  <div class="component-demo">
+    <div class="tier-badges">
+      <div class="tier-badge tier-ss">SS</div>
+      <div class="tier-badge tier-s">S</div>
+      <div class="tier-badge tier-a">A</div>
+      <div class="tier-badge tier-b">B</div>
+      <div class="tier-badge tier-c">C</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Components — Input Fields</h2>
+  <div class="component-demo">
+    <input class="demo-input" type="text" value="9750" inputmode="decimal">
+    <input class="demo-input" type="text" value="0.0" inputmode="decimal">
+  </div>
+</section>
+
+<footer>WWM-DMGCALC · Design Tokens Preview v1.0.0 · SHIGETORA</footer>
+
+<script>
+function toggleTheme() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+}
+</script>
+</body>
+</html>

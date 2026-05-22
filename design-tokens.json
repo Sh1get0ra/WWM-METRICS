@@ -1,0 +1,143 @@
+{
+  "$schema": "https://design-tokens.org/schema.json",
+  "name": "WWM-DMGCALC Design Tokens",
+  "version": "1.0.0",
+  "description": "武侠HUD theme design tokens for 風燕伝 ダメージ計算ツール",
+  "themes": {
+    "dark": {
+      "color": {
+        "bg": {
+          "0": "#07060a",
+          "1": "#0f0c0e",
+          "2": "#16110f",
+          "3": "#1d1714",
+          "raised": "#1a1410"
+        },
+        "vermilion": {
+          "base": "#c83c2b",
+          "deep": "#8a1f17",
+          "bright": "#e8513a",
+          "tint": "rgba(200,60,43,0.10)",
+          "soft": "rgba(200,60,43,0.15)",
+          "mid": "rgba(200,60,43,0.30)",
+          "glow": "rgba(232, 81, 58, 0.5)"
+        },
+        "gold": {
+          "base": "#c9a45a",
+          "bright": "#f0d28a",
+          "deep": "#8a6f30",
+          "glow": "rgba(240, 210, 138, 0.4)"
+        },
+        "jade": {
+          "base": "#7fa88a",
+          "bright": "#a8d4b4"
+        },
+        "bone": {
+          "base": "#c9b88a",
+          "dim": "#9c8a6a"
+        },
+        "paper": {
+          "base": "#ede4d0",
+          "2": "#c8bda6",
+          "dim": "#8b8170",
+          "mute": "#6a6053"
+        },
+        "chart": {
+          "crit": "#f0d28a",
+          "sympathy": "#e8513a",
+          "graze": "#6a6053",
+          "normal": "#ede4d0"
+        },
+        "ink": {
+          "1": "rgba(232, 215, 180, 0.06)",
+          "2": "rgba(232, 215, 180, 0.12)",
+          "3": "rgba(232, 215, 180, 0.22)"
+        },
+        "surface": {
+          "shade": "rgba(0,0,0,0.25)",
+          "shade-2": "rgba(0,0,0,0.4)",
+          "shade-3": "rgba(0,0,0,0.55)"
+        }
+      }
+    },
+    "light": {
+      "color": {
+        "bg": {
+          "0": "#ede2c8",
+          "1": "#e6dabd",
+          "2": "#ddd0ad",
+          "3": "#d4c69b"
+        },
+        "vermilion": {
+          "bright": "#c83c2b",
+          "glow": "rgba(200, 60, 43, 0.35)"
+        },
+        "gold": {
+          "base": "#8a6a20",
+          "bright": "#5e4310",
+          "deep": "#c9a45a",
+          "glow": "rgba(138, 106, 32, 0.3)"
+        },
+        "jade": {
+          "base": "#4a7a5a",
+          "bright": "#2d5a3a"
+        },
+        "bone": {
+          "base": "#6a5236",
+          "dim": "#8a7350"
+        },
+        "paper": {
+          "base": "#2a1c12",
+          "2": "#4a3422",
+          "dim": "#6a5236",
+          "mute": "#8a7350"
+        },
+        "ink": {
+          "1": "rgba(40, 25, 18, 0.10)",
+          "2": "rgba(40, 25, 18, 0.20)",
+          "3": "rgba(40, 25, 18, 0.35)"
+        },
+        "surface": {
+          "shade": "rgba(58, 38, 22, 0.06)",
+          "shade-2": "rgba(58, 38, 22, 0.10)",
+          "shade-3": "rgba(58, 38, 22, 0.14)"
+        }
+      }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "display": "'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif",
+      "body": "'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic UI', sans-serif",
+      "latin": "'Cinzel', 'Cormorant Garamond', 'Noto Serif JP', serif",
+      "mono": "'Rajdhani', 'JetBrains Mono', monospace"
+    },
+    "fontSize": {
+      "2xs": "8px",
+      "xs": "10px",
+      "sm": "11px",
+      "md": "13px",
+      "lg": "16px",
+      "xl": "22px",
+      "2xl": "28px",
+      "hero": "92px"
+    }
+  },
+  "spacing": {
+    "1": "4px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px",
+    "5": "20px",
+    "6": "24px",
+    "7": "32px",
+    "8": "40px"
+  },
+  "borderRadius": {
+    "sharp": "1px",
+    "default": "2px"
+  },
+  "breakpoints": {
+    "mobile": "600px"
+  }
+}
