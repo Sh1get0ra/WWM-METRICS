@@ -20,8 +20,10 @@ function computeExpected(p) {
   const physPenZone  = physPenDiff >= 0 ? physPenDiff / 200 : physPenDiff / 100;
   const elemPenDiff  = p.elemPen - p.elemRes;
   const elemPenZone  = elemPenDiff >= 0 ? elemPenDiff / 200 : elemPenDiff / 100;
-  const physDmgBonus = 1 + p.allMartialBoost + p.specMartialBoost + p.weaponBonus + p.bossBoost + p.enemyDebuff;
-  const elemDmgBonus = physDmgBonus + p.elemAtkBoost;
+  // 増伤レイヤー分離: 内側(外功/属性別の伤害加成) と 外側(全体増伤、加算合計)
+  const innerPhys    = 1 + p.weaponBonus;
+  const innerElem    = 1 + p.elemAtkBoost;
+  const outerBoost   = 1 + p.allMartialBoost + p.specMartialBoost + p.bossBoost + p.enemyDebuff;
   const reductionZone= (1 - p.dmgReduce1) * (1 - p.dmgReduce2);
 
   const sympathyRateAdj = p.judgeRes === 0 ? p.sympathyRate : p.sympathyRate / p.judgeRes;
@@ -42,8 +44,9 @@ function computeExpected(p) {
   }
   function dmg(pa, em, es, mul) {
     mul = mul || 1;
-    return physPart(pa) * (1 + physPenZone) * physDmgBonus * reductionZone * mul
-         + elemPart(em, es) * (1 + elemPenZone) * elemDmgBonus * reductionZone * mul;
+    const pp = physPart(pa) * (1 + physPenZone) * innerPhys;
+    const ee = elemPart(em, es) * (1 + elemPenZone) * innerElem;
+    return (pp + ee) * outerBoost * reductionZone * mul;
   }
 
   const avgPhys = (p.minPhysATK + p.maxPhysATK) / 2;
@@ -253,8 +256,10 @@ function calculate() {
   const physPenZone   = physPenDiff >= 0 ? physPenDiff / 200 : physPenDiff / 100;
   const elemPenDiff   = elemPen - elemRes;
   const elemPenZone   = elemPenDiff >= 0 ? elemPenDiff / 200 : elemPenDiff / 100;
-  const physDmgBonus  = 1 + allMartialBoost + specMartialBoost + weaponBonus + bossBoost + enemyDebuff;
-  const elemDmgBonus  = physDmgBonus + elemAtkBoost;
+  // 増伤レイヤー分離: 内側(外功/属性別の伤害加成) と 外側(全体増伤、加算合計)
+  const innerPhys     = 1 + weaponBonus;
+  const innerElem     = 1 + elemAtkBoost;
+  const outerBoost    = 1 + allMartialBoost + specMartialBoost + bossBoost + enemyDebuff;
   const reductionZone = (1 - dmgReduce1) * (1 - dmgReduce2);
 
   const sympathyRateAdj = judgeRes === 0 ? sympathyRate : sympathyRate / judgeRes;
@@ -278,8 +283,11 @@ function calculate() {
          + (s + hiddenBonus) * elemBoostSub  * statusCoeff;
   }
   function dmg(pa, em, es, mul = 1) {
-    const p = physPart(pa) * (1 + physPenZone) * physDmgBonus * reductionZone * mul;
-    const e = elemPart(em, es) * (1 + elemPenZone) * elemDmgBonus * reductionZone * mul;
+    const pp = physPart(pa) * (1 + physPenZone) * innerPhys;
+    const ee = elemPart(em, es) * (1 + elemPenZone) * innerElem;
+    const factor = outerBoost * reductionZone * mul;
+    const p = pp * factor;
+    const e = ee * factor;
     return { total: p + e, phys: p, elem: e };
   }
 
@@ -388,8 +396,10 @@ function calculate() {
     // raw 値で各種ゾーン・確率を再計算（セット/心法の影響を排除）
     var rPhysPenDiff = _raw.outerPen - physRes;
     var rPhysPenZone = rPhysPenDiff >= 0 ? rPhysPenDiff / 200 : rPhysPenDiff / 100;
-    var rPhysDmgBonus = 1 + _raw.allMartialBoost + _raw.specMartialBoost + weaponBonus + bossBoost + enemyDebuff;
-    var rElemDmgBonus = rPhysDmgBonus + _raw.elemAtkBoost;
+    // 増伤レイヤー分離: 内側(外功/属性別の伤害加成) と 外側(全体増伤、加算合計)
+    var rInnerPhys    = 1 + weaponBonus;
+    var rInnerElem    = 1 + _raw.elemAtkBoost;
+    var rOuterBoost   = 1 + _raw.allMartialBoost + _raw.specMartialBoost + bossBoost + enemyDebuff;
     var rSympathyAdj  = judgeRes === 0 ? sympathyRate : sympathyRate / judgeRes;
     var rCritAdj      = judgeRes === 0 ? _raw.critRate : _raw.critRate / judgeRes;
     // 付加会心率/共鳴率は基本値の上限(40%/80%)を突破可能。会心+共鳴の100%制限は維持。
@@ -409,8 +419,9 @@ function calculate() {
     }
     function sd(pa, em, es, mul) {
       mul = mul || 1;
-      return sp(pa) * (1 + rPhysPenZone) * rPhysDmgBonus * reductionZone * mul
-           + se(em, es) * (1 + elemPenZone) * rElemDmgBonus * reductionZone * mul;
+      var pp = sp(pa) * (1 + rPhysPenZone) * rInnerPhys;
+      var ee = se(em, es) * (1 + elemPenZone) * rInnerElem;
+      return (pp + ee) * rOuterBoost * reductionZone * mul;
     }
     var s = sd(rAvgPhys, avgMain, avgSub)                                  * rPNorm
           + sd(rAvgPhys, avgMain, avgSub, 1 + _raw.critBoost)              * rPCrit
