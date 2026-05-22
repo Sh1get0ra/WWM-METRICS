@@ -154,7 +154,7 @@ function buildEfficiencyTable(p, baseExpected) {
       + (row.isPct ? ' title="%"' : '') + '>';
 
     let badgeClass, badgeText, scoreColor;
-    if      (score >= 250) { badgeClass = 'badge-fire'; badgeText = T.effRateFire; scoreColor = 'var(--vermilion-bright)'; }
+    if      (score >= 200) { badgeClass = 'badge-fire'; badgeText = T.effRateFire; scoreColor = 'var(--vermilion-bright)'; }
     else if (score >= 100) { badgeClass = 'badge-star'; badgeText = T.effRateStar; scoreColor = 'var(--gold-bright)'; }
     else if (score >= 50)  { badgeClass = 'badge-good'; badgeText = T.effRateGood; scoreColor = 'var(--jade-bright)'; }
     else                   { badgeClass = 'badge-low';  badgeText = T.effRateLow;  scoreColor = 'var(--paper-mute)'; }
