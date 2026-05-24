@@ -26,7 +26,19 @@
   },
   "20601": { "names": { "ja": "千紅の傘",   "en": "Crimson Umbrella",        "zh": "九重春色",   "ko": "" }, "weaponType": "umbrella",     "effects": {}, "description": "傘武術。九重春色。" },
   "20602": { "names": { "ja": "誘魂の傘",   "en": "Soulbinding Umbrella",    "zh": "千香引魂蛊", "ko": "" }, "weaponType": "umbrella",     "effects": {}, "description": "誘魂の傘。Silkbind - Deluge path。" },
-  "20603": { "names": { "ja": "醉夢の傘",   "en": "Drunken Dream Umbrella",  "zh": "醉梦游春",   "ko": "" }, "weaponType": "umbrella",     "effects": {}, "description": "醉夢遊春。Silkbind系。" },
+  "20603": {
+    "names": { "ja": "醉夢の傘", "en": "Drunken Dream Umbrella", "zh": "醉梦游春", "ko": "" },
+    "weaponType": "umbrella",
+    "effects": {
+      "minElemMainAdd": 80,
+      "maxElemMainAdd": 160
+    },
+    "derived": [
+      { "from": "agility",     "thresholdValue": 225, "maxBoost": 59.4, "appliesTo": "minPhysATK", "formula": "linear_capped" },
+      { "from": "minElemMain", "thresholdValue": 268, "maxBoost": 18.0, "appliesTo": "elemPen",    "formula": "linear_capped" }
+    ],
+    "description": "酔夢の傘 (傘・遠距離攻撃・瞬嵐塵)。瞬嵐ステータス上昇 (固定 +80~160) + 瞬嵐貫通 (cap 18.0) + 外功攻撃上昇 (cap 59.4)。完璧キャッチ強化/回旋傘ダメ強化/属性ダメ強化は未実装。"
+  },
   "20701": {
     "names": { "ja": "浮塵の縄", "en": "Mortal Rope Dart", "zh": "粟子游尘", "ko": "" },
     "weaponType": "rope_dart",
@@ -40,5 +52,17 @@
     ],
     "description": "浮塵の縄 (縄鏢)。瞬嵐ステータス上昇 (固定 +80~160) + 瞬嵐ダメージ上昇 (最小瞬嵐攻撃力依存・cap 9.0%) + 会心率上昇 (速依存・cap 6.8%)。蝕骨状態強化/ねずみダメ強化/属性ダメ強化は未実装。"
   },
-  "20702": { "names": { "ja": "浮雲の縄",   "en": "Cloudborne Rope Dart",    "zh": "粟子行云",   "ko": "" }, "weaponType": "rope_dart",    "effects": {}, "description": "縄鏢。浮雲。" }
+  "20702": {
+    "names": { "ja": "浮雲の縄", "en": "Cloudborne Rope Dart", "zh": "粟子行云", "ko": "" },
+    "weaponType": "rope_dart",
+    "effects": {
+      "minElemMainAdd": 80,
+      "maxElemMainAdd": 160
+    },
+    "derived": [
+      { "from": "agility",     "thresholdValue": 225, "maxBoost": 0.068, "appliesTo": "critRate",     "formula": "linear_capped" },
+      { "from": "minElemMain", "thresholdValue": 268, "maxBoost": 0.09,  "appliesTo": "elemAtkBoost", "formula": "linear_capped" }
+    ],
+    "description": "浮雲の縄 (縄鏢・遠距離攻撃・瞬嵐塵)。瞬嵐ステータス上昇 (固定 +80~160) + 瞬嵐ダメージ上昇 (cap 9.0%) + 会心率上昇 (cap 6.8%)。溜め連撃強化/失魂会心上昇/属性ダメ強化は未実装。"
+  }
 }
