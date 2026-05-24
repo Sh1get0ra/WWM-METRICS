@@ -195,10 +195,20 @@ header.topbar::after {
 .icon-btn:hover { color: var(--gold-bright); border-color: var(--gold-deep); background: rgba(201,164,90,0.1); }
 a.icon-btn { text-decoration: none; }
 .icon-btn-x svg { display: block; }
-.icon-btn.export-btn {
+.icon-btn.export-btn,
+.icon-btn.import-btn {
   width: auto; padding: 0 12px;
-  color: var(--vermilion-bright); border-color: rgba(200,60,43,0.5);
   font-family: var(--f-mono); font-weight: 700; font-size: var(--text-sm); letter-spacing: 0.12em;
+}
+.icon-btn.export-btn {
+  color: var(--vermilion-bright); border-color: rgba(200,60,43,0.5);
+}
+.icon-btn.import-btn {
+  color: var(--gold-bright); border-color: var(--gold-deep);
+}
+.icon-btn.import-btn:hover {
+  background: var(--gold); color: var(--bg-0); border-color: var(--gold);
+  box-shadow: 0 0 16px var(--gold-glow);
 }
 .icon-btn.export-btn:hover {
   background: var(--vermilion); color: var(--bg-0); border-color: var(--vermilion);
@@ -1190,6 +1200,8 @@ html[data-theme="light"] .icon-btn { color: var(--paper-dim); }
 html[data-theme="light"] .icon-btn:hover { color: var(--vermilion); border-color: var(--vermilion); background: var(--vermilion-faint); }
 html[data-theme="light"] .icon-btn.export-btn { color: var(--vermilion); border-color: var(--vermilion); }
 html[data-theme="light"] .icon-btn.export-btn:hover { background: var(--vermilion); color: #fff; }
+html[data-theme="light"] .icon-btn.import-btn { color: var(--gold-bright); border-color: var(--gold); }
+html[data-theme="light"] .icon-btn.import-btn:hover { background: var(--gold); color: #fff; }
 
 html[data-theme="light"] .preset-bar-title { color: var(--gold-bright); }
 html[data-theme="light"] .preset-slot-num { color: var(--paper-mute); }
@@ -1373,7 +1385,8 @@ html[data-theme="light"] .tier-C { color: var(--paper-mute);  background: rgba(5
   .lang-switcher { flex: 1; min-width: 0; }
   .lang-btn { padding: 7px 0; font-size: var(--text-xs); flex: 1; text-align: center; min-width: 0; }
   .icon-btn { width: 36px; height: 36px; flex-shrink: 0; }
-  .icon-btn.export-btn { width: auto; height: 36px; padding: 0 10px; font-size: var(--text-xs); flex-shrink: 0; }
+  .icon-btn.export-btn,
+  .icon-btn.import-btn { width: auto; height: 36px; padding: 0 10px; font-size: var(--text-xs); flex-shrink: 0; }
 
   /* ─────────────────────────────────────────────────────────────────
      PRESET BAR
