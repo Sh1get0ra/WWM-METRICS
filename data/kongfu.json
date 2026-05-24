@@ -11,7 +11,19 @@
   "10302": { "names": { "ja": "青山執筆",   "en": "Qingshan Writing Brush",  "zh": "青山执笔",   "ko": "" }, "weaponType": "fan",          "effects": {}, "description": "扇武術。青山執筆。" },
   "20103": { "names": { "ja": "嵐雷の槍",   "en": "Stormbreaker Spear",      "zh": "八方风雷枪", "ko": "" }, "weaponType": "spear",        "effects": {}, "description": "八方風雷槍。Bamboocut - Wind path。" },
   "20401": { "names": { "ja": "断魂の刀",   "en": "Thundercry Blade",        "zh": "嗟夫刀法",   "ko": "" }, "weaponType": "mo_blade",     "effects": {}, "description": "陌刀 (大刀) 武術。Bellstrike系。" },
-  "20501": { "names": { "ja": "獄炎の双剣", "en": "Infernal Twinblades",     "zh": "泥犁三垢",   "ko": "윤회의 가르침" }, "weaponType": "dual_blades", "effects": {}, "description": "獄炎の双剣 (双刃)。Blazing Wrath バースト、最高峰の近距離 DPS。" },
+  "20501": {
+    "names": { "ja": "獄炎の双剣", "en": "Infernal Twinblades", "zh": "泥犁三垢", "ko": "윤회의 가르침" },
+    "weaponType": "dual_blades",
+    "effects": {
+      "minElemMainAdd": 80,
+      "maxElemMainAdd": 160
+    },
+    "derived": [
+      { "from": "agility",      "thresholdValue": 225, "maxBoost": 59.4, "appliesTo": "minPhysATK", "formula": "linear_capped" },
+      { "from": "minElemMain",  "thresholdValue": 268, "maxBoost": 18.0, "appliesTo": "elemPen",    "formula": "linear_capped" }
+    ],
+    "description": "獄炎の双剣 (双刃)。瞬嵐ステータス上昇 (固定 +80~160) + 瞬嵐貫通 (最小瞬嵐攻撃力依存・線形・cap 18.0) + 外功攻撃上昇 (速依存・線形・cap 59.4)。怒炎ダメ強化/完全回避強化/属性ダメ強化は未実装。"
+  },
   "20601": { "names": { "ja": "千紅の傘",   "en": "Crimson Umbrella",        "zh": "九重春色",   "ko": "" }, "weaponType": "umbrella",     "effects": {}, "description": "傘武術。九重春色。" },
   "20602": { "names": { "ja": "誘魂の傘",   "en": "Soulbinding Umbrella",    "zh": "千香引魂蛊", "ko": "" }, "weaponType": "umbrella",     "effects": {}, "description": "誘魂の傘。Silkbind - Deluge path。" },
   "20603": { "names": { "ja": "醉夢の傘",   "en": "Drunken Dream Umbrella",  "zh": "醉梦游春",   "ko": "" }, "weaponType": "umbrella",     "effects": {}, "description": "醉夢遊春。Silkbind系。" },
