@@ -139,8 +139,10 @@
         "needsManualInput": false,
         "statType": "Max Physical Attack",
         "raw": "Max Physical Attack (Solo Mode Level scaled, rank=blue)",
-        "effects": {},
-        "needsValueData": true
+        "effects": {
+          "maxPhysATKAdd": 51.12
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -164,10 +166,13 @@
     "description": "morph 状態時 sprint/jump Endurance 削減。ダメージ非影響。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Physical Defense",
+        "raw": "Physical Defense (Solo Mode Level scaled, rank=blue)",
+        "effects": {},
+        "category": "defensive"
       },
       "tier5": {
         "permanent": true,
@@ -321,8 +326,10 @@
         "needsManualInput": false,
         "statType": "Max Physical Attack",
         "raw": "Max Physical Attack (Solo Mode Level scaled, rank=purple)",
-        "effects": {},
-        "needsValueData": true
+        "effects": {
+          "maxPhysATKAdd": 57.51
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -358,6 +365,68 @@
         "permanent": true,
         "effects": {},
         "raw": "Physical DMG Reduction +2.5%",
+        "category": "defensive"
+      }
+    },
+    "rank": "purple"
+  },
+  "47": {
+    "names": {
+      "ja": "和光同塵",
+      "en": "",
+      "zh": "",
+      "ko": ""
+    },
+    "modes": {},
+    "defaultMode": "default",
+    "description": "和光同塵 (Universal、ID 47 roleInfo経由確定 2026-05-25)",
+    "attributeBuff": {
+      "tier2": {
+        "permanent": true,
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Physical Attack",
+        "raw": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+        "effects": {
+          "minPhysATKAdd": 19.17,
+          "maxPhysATKAdd": 38.25
+        },
+        "derivedFromGold": true
+      },
+      "tier5": {
+        "permanent": true,
+        "effects": {
+          "outerPenAdd": 5.1
+        },
+        "raw": "外功貫通 +5.1"
+      }
+    },
+    "rank": "purple"
+  },
+  "48": {
+    "names": {
+      "ja": "赤心筆",
+      "en": "",
+      "zh": "",
+      "ko": ""
+    },
+    "modes": {},
+    "defaultMode": "default",
+    "description": "赤心筆 (Universal、ID 48 roleInfo経由確定 2026-05-25)",
+    "attributeBuff": {
+      "tier2": {
+        "permanent": true,
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Max HP",
+        "raw": "Max HP (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "category": "defensive"
+      },
+      "tier5": {
+        "permanent": true,
+        "effects": {},
+        "raw": "外功ダメージ軽減 +2.5%",
         "category": "defensive"
       }
     },
@@ -555,8 +624,10 @@
         "needsManualInput": false,
         "statType": "Max Physical Attack",
         "raw": "Max Physical Attack (Solo Mode Level scaled, rank=gold)",
-        "effects": {},
-        "needsValueData": true
+        "effects": {
+          "maxPhysATKAdd": 63.9
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -681,8 +752,10 @@
         "needsManualInput": false,
         "statType": "Max Physical Attack",
         "raw": "Max Physical Attack (Solo Mode Level scaled, rank=gold)",
-        "effects": {},
-        "needsValueData": true
+        "effects": {
+          "maxPhysATKAdd": 63.9
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -1223,10 +1296,15 @@
     "description": "1st および 3rd throw で Phantom 召喚、catch で Resonance トリガー。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Critical Rate",
+        "raw": "Critical Rate (Solo Mode Level scaled, rank=gold)",
+        "effects": {
+          "critRate": 0.074
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -1250,10 +1328,14 @@
     "description": "+50 Tokens after Soul Sweep / 2 stack Soulbreak per hit。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Min Bamboocut Attack",
+        "raw": "Min Bamboocut Attack (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "weaponSpecific": "bamboocut",
+        "pendingImplementation": true
       },
       "tier5": {
         "permanent": true,
@@ -1277,10 +1359,15 @@
     "description": "5 stack max、敵デバフ -4% Move Speed / +2% damage taken per stack → 敵被ダメ +10% 最大。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Min Physical Attack",
+        "raw": "Min Physical Attack (Solo Mode Level scaled, rank=purple)",
+        "effects": {
+          "minPhysATKAdd": 57.51
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -1308,10 +1395,13 @@
     "description": "5 stack max、+2% Critical Damage or +2% Life Drain per stack (capped 2.5% Max HP/sec)。最大 +10% 会心ダメ。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Precision Rate",
+        "raw": "Precision Rate (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "needsValueData": true
       },
       "tier5": {
         "permanent": true,
@@ -1445,7 +1535,7 @@
   "_schema": "ID → 心法名 + モード別ステータス影響値マッピング。modes 配下に default/maxStack/ccBuff 等を定義。description は人間向け説明。effects はダメージ計算に影響する数値のみ。",
   "_lastUpdated": "2026-05-23",
   "_source": "wherewindsmeetgame.com app.js 抽出 + Game8 / Fextralife wiki",
-  "_note": "全データ Claude 抽出版 (verified: false)。ユーザー検証 → 訂正フェーズ。HP回復/シールド/Endurance 系等、ダメージ計算非影響の効果は modes 空。心法 Lv MAX 前提で計測 (roleInfo に Lv フィールドなし、別 API 全 605)。 | Tier5 attributeBuff: CookieLips v1.2 sheet 由来 (verified: false)。Tier2 大世界Lv14値ユーザー手動入力待ち。ID 6/501/502/503/504 は v1.2 sheet 未掲載。 | Tier2 attributeBuff 装備中4心法 (41/81/451/452) 大世界Lv14値 in-game 観測 (2026-05-25)。 | Tier5 残5件 (6/501/502/503/504) in-game 観測 (2026-05-25)。 | rank フィールド追加 (2026-05-25): gold=金 (9件確定、霜天白夜は新ID未確定)、blue=青 (6件基礎)、purple=紫 (残り)。同rank・同ステータス → Tier5値共通。 | 新心法4件追加 (551-554, 砕岩path, 2026-05-25)。赤心筆/和光同塵 ID未取得。 | Tier2 追加 3件 (551/552/553) 大世界Lv14値 in-game 観測 (2026-05-25)。553 砕岩攻撃力 = path-specific (stonesplit)。 | Tier2 ステ種別 CSV(CookieLips v1.2) 反映 + rank係数(gold=1.0/purple=0.9/blue=0.8)で派生 (2026-05-25)。",
+  "_note": "全データ Claude 抽出版 (verified: false)。ユーザー検証 → 訂正フェーズ。HP回復/シールド/Endurance 系等、ダメージ計算非影響の効果は modes 空。心法 Lv MAX 前提で計測 (roleInfo に Lv フィールドなし、別 API 全 605)。 | Tier5 attributeBuff: CookieLips v1.2 sheet 由来 (verified: false)。Tier2 大世界Lv14値ユーザー手動入力待ち。ID 6/501/502/503/504 は v1.2 sheet 未掲載。 | Tier2 attributeBuff 装備中4心法 (41/81/451/452) 大世界Lv14値 in-game 観測 (2026-05-25)。 | Tier5 残5件 (6/501/502/503/504) in-game 観測 (2026-05-25)。 | rank フィールド追加 (2026-05-25): gold=金 (9件確定、霜天白夜は新ID未確定)、blue=青 (6件基礎)、purple=紫 (残り)。同rank・同ステータス → Tier5値共通。 | 新心法4件追加 (551-554, 砕岩path, 2026-05-25)。赤心筆/和光同塵 ID未取得。 | Tier2 追加 3件 (551/552/553) 大世界Lv14値 in-game 観測 (2026-05-25)。553 砕岩攻撃力 = path-specific (stonesplit)。 | Tier2 ステ種別 CSV(CookieLips v1.2) 反映 + rank係数(gold=1.0/purple=0.9/blue=0.8)で派生 (2026-05-25)。 | Tier2 ステ種別 CSV(CookieLips v1.2) 反映 + rank係数(gold=1.0/purple=0.9/blue=0.8)で派生 (2026-05-25)。 | Tier2 ステ種別 CSV(CookieLips v1.2) 反映 + rank係数(gold=1.0/purple=0.9/blue=0.8)で派生 (2026-05-25)。 | 47/48 心法追加 (2026-05-25 統合)。 | Tier2 ステ種別 CSV(CookieLips v1.2) 反映 + rank係数(gold=1.0/purple=0.9/blue=0.8)で派生 (2026-05-25)。",
   "_example": {
     "81_example": {
       "names": {
