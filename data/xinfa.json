@@ -11,10 +11,13 @@
     "description": "-40% Endurance dash cost / +30% Movement (3s) / +1% Max HP +1000 HP per kill。ダメージ計算非影響。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Max HP",
+        "raw": "Max HP (Solo Mode Level scaled, rank=blue)",
+        "effects": {},
+        "category": "defensive"
       },
       "tier5": {
         "permanent": true,
@@ -37,10 +40,13 @@
     "description": "-3% HP +600 HP/sec restore (4s, CD 300s)。HP回復のみ。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Max HP",
+        "raw": "Max HP (Solo Mode Level scaled, rank=blue)",
+        "effects": {},
+        "category": "defensive"
       },
       "tier5": {
         "permanent": true,
@@ -63,10 +69,13 @@
     "description": "Higher stagger resistance (敵数に応じ)。被ダメ影響不明。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Physical Defense",
+        "raw": "Physical Defense (Solo Mode Level scaled, rank=blue)",
+        "effects": {},
+        "category": "defensive"
       },
       "tier5": {
         "permanent": true,
@@ -93,10 +102,15 @@
     "description": "+1.5m range / +10% damage / +10% damage as HP restore",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Min Physical Attack",
+        "raw": "Min Physical Attack (Solo Mode Level scaled, rank=blue)",
+        "effects": {
+          "minPhysATKAdd": 51.12
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -120,10 +134,13 @@
     "description": "10% chance Weeping Blood (5 stack max、貫通ダメ)。条件不明確で effects 空。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Max Physical Attack",
+        "raw": "Max Physical Attack (Solo Mode Level scaled, rank=blue)",
+        "effects": {},
+        "needsValueData": true
       },
       "tier5": {
         "permanent": true,
@@ -211,10 +228,13 @@
     "description": "10% chance -0.6% Phys Def (5s poison, 5 stack max → -3% 期待値)。確率系。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Precision Rate",
+        "raw": "Precision Rate (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "needsValueData": true
       },
       "tier5": {
         "permanent": true,
@@ -238,10 +258,13 @@
     "description": "+8% damage dealt as HP restore。吸血のみ、ダメージ非影響。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Max HP",
+        "raw": "Max HP (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "category": "defensive"
       },
       "tier5": {
         "permanent": true,
@@ -264,10 +287,13 @@
     "description": "50% chance +1 bonus Vitality from recovery。リソース系。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Physical Defense",
+        "raw": "Physical Defense (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "category": "defensive"
       },
       "tier5": {
         "permanent": true,
@@ -290,10 +316,13 @@
     "description": "Random effect (10s, 30s CD) on perfect deflection。確率系。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Max Physical Attack",
+        "raw": "Max Physical Attack (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "needsValueData": true
       },
       "tier5": {
         "permanent": true,
@@ -317,10 +346,13 @@
     "description": "50% chance -100% Endurance cost after Perfect Dodge。Endurance のみ。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Precision Rate",
+        "raw": "Precision Rate (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "needsValueData": true
       },
       "tier5": {
         "permanent": true,
@@ -383,10 +415,16 @@
     "description": "Dual-weapon skill triggers random effect。ランダム発動、effects 不明。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Physical Attack",
+        "raw": "Physical Attack (Solo Mode Level scaled, rank=gold)",
+        "effects": {
+          "minPhysATKAdd": 21.3,
+          "maxPhysATKAdd": 42.5
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -410,10 +448,14 @@
     "description": "+20% Endurance cost reduction (5s)。Endurance のみ。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Bellstrike Attack",
+        "raw": "Bellstrike Attack (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "weaponSpecific": "bellstrike",
+        "pendingImplementation": true
       },
       "tier5": {
         "permanent": true,
@@ -437,10 +479,16 @@
     "description": "+3.5% Endurance refund。Endurance のみ。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Physical Attack",
+        "raw": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+        "effects": {
+          "minPhysATKAdd": 19.17,
+          "maxPhysATKAdd": 38.25
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -468,10 +516,13 @@
     "description": "+10% Charged Skill damage vs bosses。蓄力 + 対 Boss 条件。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Affinity Rate",
+        "raw": "Affinity Rate (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "needsValueData": true
       },
       "tier5": {
         "permanent": true,
@@ -499,10 +550,13 @@
     "description": "up to +20% damage from Endurance consumption。最大時 +20%。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Max Physical Attack",
+        "raw": "Max Physical Attack (Solo Mode Level scaled, rank=gold)",
+        "effects": {},
+        "needsValueData": true
       },
       "tier5": {
         "permanent": true,
@@ -526,10 +580,13 @@
     "description": "Combo 5/10 → 4/8 短縮。Bleed stack ごと 60-100% 確率。combo 系。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Affinity Rate",
+        "raw": "Affinity Rate (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "needsValueData": true
       },
       "tier5": {
         "permanent": true,
@@ -553,10 +610,14 @@
     "description": "6/10/20s cooldowns by weapon type。CD 系。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Max Bellstrike Attack",
+        "raw": "Max Bellstrike Attack (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "weaponSpecific": "bellstrike",
+        "pendingImplementation": true
       },
       "tier5": {
         "permanent": true,
@@ -584,10 +645,14 @@
     "description": "+10% Affinity (共鳴) DMG / 5% chance -40% damage taken",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Bellstrike Attack",
+        "raw": "Bellstrike Attack (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "weaponSpecific": "bellstrike",
+        "pendingImplementation": true
       },
       "tier5": {
         "permanent": true,
@@ -611,10 +676,13 @@
     "description": "5 stack Bleed 消費で高ダメバースト。条件付。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Max Physical Attack",
+        "raw": "Max Physical Attack (Solo Mode Level scaled, rank=gold)",
+        "effects": {},
+        "needsValueData": true
       },
       "tier5": {
         "permanent": true,
@@ -638,10 +706,13 @@
     "description": "+2 charges / +3s CD penalty。charges 系。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Precision Rate",
+        "raw": "Precision Rate (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "needsValueData": true
       },
       "tier5": {
         "permanent": true,
@@ -669,10 +740,16 @@
     "description": "15m 移動で 3 stack (15s CD)。+15% HP damage per stack → 最大 +45% (対 Boss?)",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Physical Attack",
+        "raw": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+        "effects": {
+          "minPhysATKAdd": 19.17,
+          "maxPhysATKAdd": 38.25
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -703,10 +780,16 @@
     "description": "+5% Phys Attack (8s max)、空中時 +10%。物理外功 か weaponBonus 不明。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Physical Attack",
+        "raw": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+        "effects": {
+          "minPhysATKAdd": 19.17,
+          "maxPhysATKAdd": 38.25
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -730,10 +813,15 @@
     "description": "2 stack max、+10% damage taken from Ballistic Skills (10s)。被ダメ系。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Critical Rate",
+        "raw": "Critical Rate (Solo Mode Level scaled, rank=gold)",
+        "effects": {
+          "critRate": 0.074
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -757,10 +845,15 @@
     "description": "+10% healing / +3 Dew +2 Essence。HP回復のみ。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Min Physical Attack",
+        "raw": "Min Physical Attack (Solo Mode Level scaled, rank=gold)",
+        "effects": {
+          "minPhysATKAdd": 63.9
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -784,10 +877,14 @@
     "description": "3 stack +2% healing received (3s)。HP回復のみ。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Min Silkbind Attack",
+        "raw": "Min Silkbind Attack (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "weaponSpecific": "silkbind",
+        "pendingImplementation": true
       },
       "tier5": {
         "permanent": true,
@@ -810,10 +907,15 @@
     "description": "+50% healing on revived target。HP回復のみ。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Critical Rate",
+        "raw": "Critical Rate (Solo Mode Level scaled, rank=purple)",
+        "effects": {
+          "critRate": 0.0666
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -836,10 +938,16 @@
     "description": "+5 Dew restored / +10% Max HP healing per 100 Dew。HP回復のみ。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Physical Attack",
+        "raw": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+        "effects": {
+          "minPhysATKAdd": 19.17,
+          "maxPhysATKAdd": 38.25
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -862,10 +970,15 @@
     "description": "Tier 3 Heavy Attack counter (10s CD)。条件付バースト。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Critical Rate",
+        "raw": "Critical Rate (Solo Mode Level scaled, rank=gold)",
+        "effects": {
+          "critRate": 0.074
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -889,10 +1002,13 @@
     "description": "30% Max HP shield (4s, CD 300s) HP<30% 時。shield のみ。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Max HP",
+        "raw": "Max HP (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "category": "defensive"
       },
       "tier5": {
         "permanent": true,
@@ -915,10 +1031,14 @@
     "description": "+4s shield duration。shield のみ。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Rock Splitting Attack",
+        "raw": "Rock Splitting Attack (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "weaponSpecific": "stonesplit",
+        "pendingImplementation": true
       },
       "tier5": {
         "permanent": true,
@@ -942,10 +1062,13 @@
     "description": "+20% DMG Reduction vs boss taunt / +5% non-boss (20% cap) / -10% outgoing damage。被ダメ軽減 + 与ダメペナルティ。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Max HP",
+        "raw": "Max HP (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "category": "defensive"
       },
       "tier5": {
         "permanent": true,
@@ -1005,8 +1128,9 @@
         "permanent": true,
         "worldLv": 14,
         "needsManualInput": false,
+        "statType": "Min Bamboocut Attack",
+        "raw": "Min Bamboocut Attack (Solo Mode Level scaled, rank=purple)",
         "effects": {},
-        "raw": "Min Bamboocut Attack +32.6",
         "weaponSpecific": "bamboocut",
         "pendingImplementation": true
       },
@@ -1037,10 +1161,13 @@
     "description": "3 stack max × (+5 物理貫通, +5% 会心ダメ, 3s)。最大時 +15 貫通/+15% 会心ダメ。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Precision Rate",
+        "raw": "Precision Rate (Solo Mode Level scaled, rank=purple)",
+        "effects": {},
+        "needsValueData": true
       },
       "tier5": {
         "permanent": true,
@@ -1064,10 +1191,15 @@
     "description": "-1s cooldown (once per 10s)。CD 系。",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (大世界Lv依存・Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Min Physical Attack",
+        "raw": "Min Physical Attack (Solo Mode Level scaled, rank=purple)",
+        "effects": {
+          "minPhysATKAdd": 57.51
+        },
+        "derivedFromGold": true
       },
       "tier5": {
         "permanent": true,
@@ -1313,7 +1445,7 @@
   "_schema": "ID → 心法名 + モード別ステータス影響値マッピング。modes 配下に default/maxStack/ccBuff 等を定義。description は人間向け説明。effects はダメージ計算に影響する数値のみ。",
   "_lastUpdated": "2026-05-23",
   "_source": "wherewindsmeetgame.com app.js 抽出 + Game8 / Fextralife wiki",
-  "_note": "全データ Claude 抽出版 (verified: false)。ユーザー検証 → 訂正フェーズ。HP回復/シールド/Endurance 系等、ダメージ計算非影響の効果は modes 空。心法 Lv MAX 前提で計測 (roleInfo に Lv フィールドなし、別 API 全 605)。 | Tier5 attributeBuff: CookieLips v1.2 sheet 由来 (verified: false)。Tier2 大世界Lv14値ユーザー手動入力待ち。ID 6/501/502/503/504 は v1.2 sheet 未掲載。 | Tier2 attributeBuff 装備中4心法 (41/81/451/452) 大世界Lv14値 in-game 観測 (2026-05-25)。 | Tier5 残5件 (6/501/502/503/504) in-game 観測 (2026-05-25)。 | rank フィールド追加 (2026-05-25): gold=金 (9件確定、霜天白夜は新ID未確定)、blue=青 (6件基礎)、purple=紫 (残り)。同rank・同ステータス → Tier5値共通。 | 新心法4件追加 (551-554, 砕岩path, 2026-05-25)。赤心筆/和光同塵 ID未取得。 | Tier2 追加 3件 (551/552/553) 大世界Lv14値 in-game 観測 (2026-05-25)。553 砕岩攻撃力 = path-specific (stonesplit)。",
+  "_note": "全データ Claude 抽出版 (verified: false)。ユーザー検証 → 訂正フェーズ。HP回復/シールド/Endurance 系等、ダメージ計算非影響の効果は modes 空。心法 Lv MAX 前提で計測 (roleInfo に Lv フィールドなし、別 API 全 605)。 | Tier5 attributeBuff: CookieLips v1.2 sheet 由来 (verified: false)。Tier2 大世界Lv14値ユーザー手動入力待ち。ID 6/501/502/503/504 は v1.2 sheet 未掲載。 | Tier2 attributeBuff 装備中4心法 (41/81/451/452) 大世界Lv14値 in-game 観測 (2026-05-25)。 | Tier5 残5件 (6/501/502/503/504) in-game 観測 (2026-05-25)。 | rank フィールド追加 (2026-05-25): gold=金 (9件確定、霜天白夜は新ID未確定)、blue=青 (6件基礎)、purple=紫 (残り)。同rank・同ステータス → Tier5値共通。 | 新心法4件追加 (551-554, 砕岩path, 2026-05-25)。赤心筆/和光同塵 ID未取得。 | Tier2 追加 3件 (551/552/553) 大世界Lv14値 in-game 観測 (2026-05-25)。553 砕岩攻撃力 = path-specific (stonesplit)。 | Tier2 ステ種別 CSV(CookieLips v1.2) 反映 + rank係数(gold=1.0/purple=0.9/blue=0.8)で派生 (2026-05-25)。",
   "_example": {
     "81_example": {
       "names": {
