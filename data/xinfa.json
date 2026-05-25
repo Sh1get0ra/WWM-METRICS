@@ -1203,10 +1203,13 @@
     "description": "霜天白夜 (砕岩path新心法、ID 551 roleInfo経由確定 2026-05-25)",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "effects": {
+          "minPhysATKAdd": 63.9
+        },
+        "raw": "最小外功攻撃 +63.9"
       },
       "tier5": {
         "permanent": true,
@@ -1230,10 +1233,13 @@
     "description": "孤忠不辞 (砕岩path新心法、ID 552 roleInfo経由確定 2026-05-25)",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "effects": {
+          "critRate": 0.066
+        },
+        "raw": "会心率 +6.6%"
       },
       "tier5": {
         "permanent": true,
@@ -1257,10 +1263,15 @@
     "description": "穿喉の訣 (砕岩path新心法、ID 553 roleInfo経由確定 2026-05-25)",
     "attributeBuff": {
       "tier2": {
-        "effects": {},
         "permanent": true,
-        "raw": "TBD (Lv14ゲーム内値要収集)",
-        "needsManualInput": true
+        "worldLv": 14,
+        "needsManualInput": false,
+        "effects": {},
+        "raw": "砕岩攻撃力 +10.9 ~ +21.7",
+        "weaponSpecific": "stonesplit",
+        "pendingImplementation": true,
+        "minPathATK": 10.9,
+        "maxPathATK": 21.7
       },
       "tier5": {
         "permanent": true,
@@ -1302,7 +1313,7 @@
   "_schema": "ID → 心法名 + モード別ステータス影響値マッピング。modes 配下に default/maxStack/ccBuff 等を定義。description は人間向け説明。effects はダメージ計算に影響する数値のみ。",
   "_lastUpdated": "2026-05-23",
   "_source": "wherewindsmeetgame.com app.js 抽出 + Game8 / Fextralife wiki",
-  "_note": "全データ Claude 抽出版 (verified: false)。ユーザー検証 → 訂正フェーズ。HP回復/シールド/Endurance 系等、ダメージ計算非影響の効果は modes 空。心法 Lv MAX 前提で計測 (roleInfo に Lv フィールドなし、別 API 全 605)。 | Tier5 attributeBuff: CookieLips v1.2 sheet 由来 (verified: false)。Tier2 大世界Lv14値ユーザー手動入力待ち。ID 6/501/502/503/504 は v1.2 sheet 未掲載。 | Tier2 attributeBuff 装備中4心法 (41/81/451/452) 大世界Lv14値 in-game 観測 (2026-05-25)。 | Tier5 残5件 (6/501/502/503/504) in-game 観測 (2026-05-25)。 | rank フィールド追加 (2026-05-25): gold=金 (9件確定、霜天白夜は新ID未確定)、blue=青 (6件基礎)、purple=紫 (残り)。同rank・同ステータス → Tier5値共通。 | 新心法4件追加 (551-554, 砕岩path, 2026-05-25)。赤心筆/和光同塵 ID未取得。",
+  "_note": "全データ Claude 抽出版 (verified: false)。ユーザー検証 → 訂正フェーズ。HP回復/シールド/Endurance 系等、ダメージ計算非影響の効果は modes 空。心法 Lv MAX 前提で計測 (roleInfo に Lv フィールドなし、別 API 全 605)。 | Tier5 attributeBuff: CookieLips v1.2 sheet 由来 (verified: false)。Tier2 大世界Lv14値ユーザー手動入力待ち。ID 6/501/502/503/504 は v1.2 sheet 未掲載。 | Tier2 attributeBuff 装備中4心法 (41/81/451/452) 大世界Lv14値 in-game 観測 (2026-05-25)。 | Tier5 残5件 (6/501/502/503/504) in-game 観測 (2026-05-25)。 | rank フィールド追加 (2026-05-25): gold=金 (9件確定、霜天白夜は新ID未確定)、blue=青 (6件基礎)、purple=紫 (残り)。同rank・同ステータス → Tier5値共通。 | 新心法4件追加 (551-554, 砕岩path, 2026-05-25)。赤心筆/和光同塵 ID未取得。 | Tier2 追加 3件 (551/552/553) 大世界Lv14値 in-game 観測 (2026-05-25)。553 砕岩攻撃力 = path-specific (stonesplit)。",
   "_example": {
     "81_example": {
       "names": {

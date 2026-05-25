@@ -13,4 +13,5 @@ data/apply_tier5_missing.js
 data/apply_path.js
 data/apply_rank.js
 data/apply_new_ids.js
+data/apply_tier2_3ids.js
 data/xinfa_attribute_buff_template.csv
