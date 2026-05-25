@@ -91,9 +91,29 @@
       "ko": "탄식의 검기"
     },
     "weaponType": "mo_blade",
-    "effects": {},
-    "description": "断魂の刀 (陌刀)。",
-    "path": "stonesplit"
+    "effects": {
+      "minStonesplitAdd": 80,
+      "maxStonesplitAdd": 160
+    },
+    "description": "断魂の刀 (陌刀、Thundercry Blade)。砕岩攻撃力 +80~160 (固定) + 力依存 会心率上昇 (cap 6.8%) + 最小砕岩依存 砕岩貫通上昇 (cap 18.0)。in-game 観測 2026-05-25。",
+    "path": "stonesplit",
+    "derived": [
+      {
+        "from": "power",
+        "thresholdValue": 225,
+        "maxBoost": 0.068,
+        "appliesTo": "critRate",
+        "formula": "linear_capped"
+      },
+      {
+        "from": "minStonesplit",
+        "thresholdValue": 268,
+        "maxBoost": 18,
+        "appliesTo": "stonesplitPen",
+        "formula": "linear_capped",
+        "weaponSpecific": "stonesplit"
+      }
+    ]
   },
   "20402": {
     "names": {
@@ -123,8 +143,8 @@
       {
         "from": "agility",
         "thresholdValue": 225,
-        "maxBoost": 59.4,
-        "appliesTo": "minPhysATK",
+        "maxBoost": 0.068,
+        "appliesTo": "critRate",
         "formula": "linear_capped"
       },
       {
@@ -135,7 +155,7 @@
         "formula": "linear_capped"
       }
     ],
-    "description": "獄炎の双剣 (双刃)。瞬嵐ステータス上昇 (固定 +80~160) + 瞬嵐貫通 (最小瞬嵐攻撃力依存・線形・cap 18.0) + 外功攻撃上昇 (速依存・線形・cap 59.4)。怒炎ダメ強化/完全回避強化/属性ダメ強化は未実装。",
+    "description": "獄炎の双剣 (双刃、Infernal Twinblades)。瞬嵐攻撃力 +80~160 (固定) + 速依存 会心率上昇 (cap 6.8%) + 最小瞬嵐依存 瞬嵐貫通上昇 (cap 18.0)。in-game 観測 2026-05-25 (旧 minPhys cap 訂正)。",
     "path": "bamboocut"
   },
   "20601": {
@@ -221,7 +241,7 @@
         "formula": "linear_capped"
       }
     ],
-    "description": "浮塵の縄 (縄鏢)。瞬嵐ステータス上昇 (固定 +80~160) + 瞬嵐ダメージ上昇 (最小瞬嵐攻撃力依存・cap 9.0%) + 会心率上昇 (速依存・cap 6.8%)。蝕骨状態強化/ねずみダメ強化/属性ダメ強化は未実装。",
+    "description": "浮塵の縄 (縄鏢、Mortal Rope Dart)。瞬嵐攻撃力 +80~160 (固定) + 速依存 会心率上昇 (cap 6.8%) + 最小瞬嵐依存 瞬嵐ダメ上昇 (cap 9.0%)。in-game 観測 2026-05-25。",
     "path": "bamboocut"
   },
   "20702": {
@@ -270,5 +290,5 @@
   "_schema": "ID → 武術名 + 武器タイプ + 説明。武術自体は直接 effects 値を持たず、武術ツリー進行度 (xiuWeiKungFu) と武器ボーナスに集約される。",
   "_lastUpdated": "2026-05-25",
   "_source": "wherewindsmeetgame.com app.js 抽出 + Game8 / Epiccarry",
-  "_note": "全データ Claude 抽出版 (verified: false)。ユーザー検証 → 訂正フェーズ。 | path フィールド追加 (2026-05-25): bellstrike=鋼鳴/stonesplit=砕岩/silkbind=糸操/bamboocut=瞬嵐。formless=無相 は使用中武学に応じ動的、武術固定ではない。"
+  "_note": "全データ Claude 抽出版 (verified: false)。ユーザー検証 → 訂正フェーズ。 | path フィールド追加 (2026-05-25): bellstrike=鋼鳴/stonesplit=砕岩/silkbind=糸操/bamboocut=瞬嵐。formless=無相 は使用中武学に応じ動的、武術固定ではない。 | 20401/20501/20701 derived 訂正・追加 (in-game 観測 2026-05-25)。"
 }
