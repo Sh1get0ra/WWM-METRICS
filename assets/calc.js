@@ -23,7 +23,9 @@ function computeExpected(p) {
   // 増伤レイヤー分離: 内側(外功/属性別の伤害加成) と 外側(全体増伤、加算合計)
   const innerPhys    = 1 + p.weaponBonus;
   const innerElem    = 1 + p.elemAtkBoost;
-  const outerBoost   = 1 + p.allMartialBoost + p.specMartialBoost + p.bossBoost + p.enemyDebuff;
+  // 奇術ダメは重み 0.2 で寄与 (発動頻度想定30%未満)
+  const mysticContrib = ((p.stMysticDmg || 0) + (p.areaMysticDmg || 0)) * 0.2;
+  const outerBoost   = 1 + p.allMartialBoost + p.specMartialBoost + p.bossBoost + (p.playerBoost || 0) + mysticContrib + p.enemyDebuff;
   const reductionZone= (1 - p.dmgReduce1) * (1 - p.dmgReduce2);
 
   const sympathyRateAdj = p.judgeRes === 0 ? p.sympathyRate : p.sympathyRate / p.judgeRes;
@@ -448,3 +450,6 @@ function calculate() {
   })();
   buildEfficiencyTable(effParams, expected.total);
 }
+
+// 新 import flow から呼出のため window 公開
+window.computeExpected = computeExpected;

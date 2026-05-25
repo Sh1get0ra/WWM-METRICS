@@ -4265,7 +4265,7 @@
   },
   "270703": {
     "internal": 392,
-    "statKey": "silkbindPen"
+    "statKey": "voidPen"
   },
   "279901": {
     "internal": 400,
@@ -9191,5 +9191,6 @@
   "_lastUpdated": "2026-05-25",
   "_source": "Where Winds Math obfuscated app.js + jsdom抽出",
   "_stats": 119,
-  "_total": 2297
+  "_total": 2297,
+  "_note": " | 270703 set affix statKey: silkbindPen→voidPen 修正 (帰燕 set 表示名 無相貫通)"
 }

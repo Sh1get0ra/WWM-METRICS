@@ -373,7 +373,7 @@ const _STAT_LABELS = {
   lightAtkDmg: '軽撃ダメ強化', heavyAtkDmg: '重撃ダメ強化',
   airborneLightAtkDmg: '空中軽撃ダメ強化', jumpStrikeDmg: '跳躍撃ダメ強化',
   dualWeaponSkillDmg: '双武器技ダメ強化', executionDmg: '処刑ダメ強化', dashDmg: '突進ダメ強化',
-  bossDmg: '首領ダメ', playerUnitDmg: '対PCダメ',
+  bossDmg: 'BOSSダメージ', playerUnitDmg: 'PvPダメージ',
   stMysticDmg: '単体奇術ダメ', stBurstMysticDmg: '単体爆発奇術ダメ',
   stControlMysticDmg: '単体制御奇術ダメ強化', areaMysticDmg: '範囲奇術ダメ強化',
   areaDmgMysticDmg: '範囲ダメ奇術強化', areaDebuffMysticDmg: '範囲弱体奇術強化',
@@ -433,7 +433,7 @@ const _AFFIX_LABELS = {
   '9293025': '武器種武学ダメ増加',
   '9293028': '全武学効果増加',
   '9293032': '単体爆発奇術ダメ',
-  '9293033': '首領ダメ',
+  '9293033': 'BOSSダメージ',
   // 防具 main affix
   '9243003': '命中率強化',
   '9243005': '会意率強化',
@@ -551,10 +551,18 @@ function getLastImportSummary() {
 // ── Apply: data + 観音/武庫 state を localStorage 保存 + 計算ツール 反映 ─
 function applyImport(data, importedAt, state) {
   _saveStored(data, importedAt, state);
-  // 次回インポートで引き継ぐため state を別keyに保存
   try { localStorage.setItem(IMPORT_STATE_KEY, JSON.stringify(state)); } catch(e) {}
   console.log('[WWM Import] applied:', { data, state });
-  // Phase 2: roleInfo + state → form fields マッピング (今後実装)
+  // stat params 構築 + sidebar 描画
+  if (window.WWMStats && window.WWMSidebar) {
+    window.WWMStats.buildStatParams(data, state).then(params => {
+      window.__WWM_PARAMS = params;
+      window.__WWM_ROLEINFO = data;
+      window.WWMSidebar.render(params);
+      if (window.WWMGear) window.WWMGear.render(data);
+      if (window.WWMHero) window.WWMHero.update(params);
+    }).catch(e => console.error('[WWM] stats build failed:', e));
+  }
   if (typeof window.calculate === 'function') window.calculate();
 }
 
@@ -622,10 +630,35 @@ window.WWMImport = {
   getLastImport: getLastImportSummary
 };
 
+// page load 時: hash がなければ最後の import を localStorage から auto-load。
+// データ無い場合も sidebar は placeholder で描画。
+function _autoLoadLastImport() {
+  if ((location.hash || '').startsWith(IMPORT_HASH_PREFIX)) return;  // hash flow が処理
+  const stored = _loadStored();
+  if (!stored?.data) {
+    // データ無 → sidebar placeholder のみ描画
+    if (window.WWMSidebar) window.WWMSidebar.render(null);
+    return;
+  }
+  if (window.WWMStats && window.WWMSidebar) {
+    window.WWMStats.buildStatParams(stored.data, stored.state).then(params => {
+      window.__WWM_PARAMS = params;
+      window.__WWM_ROLEINFO = stored.data;
+      window.WWMSidebar.render(params);
+      if (window.WWMGear) window.WWMGear.render(stored.data);
+      if (window.WWMHero) window.WWMHero.update(params);
+    }).catch(e => console.error('[WWM] auto-load failed:', e));
+  }
+}
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', handleHashOnLoad);
+  document.addEventListener('DOMContentLoaded', () => {
+    handleHashOnLoad();
+    _autoLoadLastImport();
+  });
 } else {
   handleHashOnLoad();
+  _autoLoadLastImport();
 }
 // 既存タブ再利用時 (タブ名 wwm-dmgcalc で window.open される) は full reload せず
 // hash のみ変更されるため hashchange でも検知する

@@ -1,0 +1,53 @@
+{
+  "_schema": "Lv95 大世界14 キャラクター基礎ステータス。装備/affix/心法/観音/武庫 全外し時の値。WW Math 由来。",
+  "_lastUpdated": "2026-05-25",
+  "_source": "Where Winds Math app.js `Uc` global (v=aad303b7、jsdom抽出)",
+  "_lv": 95,
+  "_worldLv": 14,
+  "_note": "stats は装備/affix 加算前の素値。5行ステ 129 はユーザー in-game 確認済。43 stat。",
+
+  "stats": {
+    "body": 129,
+    "power": 129,
+    "agility": 129,
+    "momentum": 129,
+    "defense": 129,
+
+    "maxHp": 76454,
+    "minPhys": 680.68,
+    "maxPhys": 1230.34,
+    "physDef": 22.7,
+
+    "precision": 0.92,
+    "crit": 0.25844,
+    "affinity": 0.12922,
+    "directCrit": 0,
+    "directAffinity": 0,
+    "critDmgBonus": 0.5,
+    "affinityDmgBonus": 0.35,
+
+    "physPen": 0,
+    "attrDmgBonus": 0,
+    "physDmgBonus": 0,
+    "allWeaponDmg": 0,
+    "bossDmg": 0,
+    "playerUnitDmg": 0,
+    "lightAtkDmg": 0,
+    "heavyAtkDmg": 0,
+    "executionDmg": 0,
+
+    "stMysticDmg": 0,
+    "stControlMysticDmg": 0,
+    "stBurstMysticDmg": 0,
+    "areaMysticDmg": 0,
+
+    "minSilkbind": 0, "maxSilkbind": 0,
+    "minBellstrike": 0, "maxBellstrike": 0,
+    "minStonesplit": 0, "maxStonesplit": 0,
+    "minBamboocut": 0, "maxBamboocut": 0,
+    "minVoid": 0, "maxVoid": 0,
+
+    "_minPrimaryAttr": 274,
+    "_maxPrimaryAttr": 549
+  }
+}

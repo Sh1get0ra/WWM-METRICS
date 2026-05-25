@@ -1227,20 +1227,19 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Min Bamboocut Attack",
-        "raw": "Min Bamboocut Attack (Solo Mode Level scaled, rank=purple)",
-        "effects": {},
-        "weaponSpecific": "bamboocut",
-        "pendingImplementation": true,
-        "minPathATK": 32.6,
-        "maxPathATK": 32.6,
-        "derivedFromGold": true
+        "raw": "Min Bamboocut Attack +32.6 (rank=purple)",
+        "effects": {
+          "minBamboocut": 32.6
+        },
+        "weaponSpecific": "bamboocut"
       },
       "tier5": {
         "permanent": true,
-        "effects": {},
-        "raw": "Bamboocut Penetration +6",
-        "weaponSpecific": "bamboocut",
-        "pendingImplementation": true
+        "effects": {
+          "bamboocutPen": 6
+        },
+        "raw": "Bamboocut Penetration +6.0",
+        "weaponSpecific": "bamboocut"
       }
     },
     "rank": "purple"

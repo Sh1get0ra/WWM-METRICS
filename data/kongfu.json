@@ -306,6 +306,13 @@
         "formula": "linear_capped"
       },
       {
+        "from": "agility",
+        "thresholdValue": 225,
+        "maxBoost": 59.4,
+        "appliesTo": "minPhys",
+        "formula": "linear_capped"
+      },
+      {
         "from": "minElemMain",
         "thresholdValue": 268,
         "maxBoost": 18,
