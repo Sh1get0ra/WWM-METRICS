@@ -22,7 +22,7 @@ function _fmt(val, format) {
   return Math.round(val).toLocaleString();
 }
 
-function _fmtItem(item, params) {
+function _fmtItemValue(item, params) {
   if (!params) return '-';
   if (item.format === 'range') {
     const keys = Array.isArray(item.calcKey) ? item.calcKey : [item.calcKey];
@@ -39,19 +39,27 @@ function _fmtItem(item, params) {
   }
   return _fmt(params[item.calcKey], item.format);
 }
+// baseline と current で値違えば "baseline ▶ current" 表示
+function _fmtItem(item, params, baseParams) {
+  const cur = _fmtItemValue(item, params);
+  if (!baseParams || baseParams === params) return cur;
+  const base = _fmtItemValue(item, baseParams);
+  if (base === cur) return cur;
+  return `<span class="wwm-sb-baseline">${base}</span> <span class="wwm-sb-arrow">▶</span> ${cur}`;
+}
 
-function _renderItem(item, params, depth) {
+function _renderItem(item, params, depth, baseParams) {
   depth = depth || 0;
   const cls = depth > 0 ? ' wwm-sb-sub' : '';
   let html = `
     <div class="wwm-sb-row${cls}" data-item-key="${item.key}">
       <span class="wwm-sb-label">${_label(item.label, item.key)}</span>
-      <span class="wwm-sb-value">${_fmtItem(item, params)}</span>
+      <span class="wwm-sb-value">${_fmtItem(item, params, baseParams)}</span>
     </div>
   `;
   if (item.expandable && item.subItems) {
     html += `<div class="wwm-sb-sub-group wwm-sb-collapsed" data-parent="${item.key}">`;
-    for (const sub of item.subItems) html += _renderItem(sub, params, depth + 1);
+    for (const sub of item.subItems) html += _renderItem(sub, params, depth + 1, baseParams);
     html += `</div>`;
   }
   return html;
@@ -66,8 +74,8 @@ function _saveCollapsed(set) {
   try { localStorage.setItem(_COLLAPSE_KEY, JSON.stringify([...set])); } catch(e) {}
 }
 
-function _renderSection(section, params, collapsedSet) {
-  const items = section.items.map(it => _renderItem(it, params, 0)).join('');
+function _renderSection(section, params, collapsedSet, baseParams) {
+  const items = section.items.map(it => _renderItem(it, params, 0, baseParams)).join('');
   const isCollapsed = collapsedSet.has(section.key);
   return `
     <section class="wwm-sb-section${isCollapsed ? ' wwm-sb-collapsed-sec' : ''}" data-section-key="${section.key}">
@@ -106,8 +114,18 @@ async function renderSidebar(params) {
     </div>
   `;
   const collapsedSet = _getCollapsedSet();
+  // baseline params (original roleInfo) — virtual ある時のみ算出
+  const hasVirtual = (window.__WWM_VIRTUAL && Object.keys(window.__WWM_VIRTUAL).length) ||
+                     (window.__WWM_VIRTUAL_KONGFU && Object.keys(window.__WWM_VIRTUAL_KONGFU).length);
+  let baseParams = null;
+  if (hasVirtual && ri && window.WWMStats?.buildStatParams) {
+    try {
+      const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+      baseParams = await window.WWMStats.buildStatParams(ri, state);
+    } catch (e) {}
+  }
   const sections = params
-    ? (cfg.sections || []).map(s => _renderSection(s, params, collapsedSet)).join('')
+    ? (cfg.sections || []).map(s => _renderSection(s, params, collapsedSet, baseParams)).join('')
     : `<div class="wwm-sb-empty">
          <p class="wwm-muted" style="text-align:center;padding:24px 12px;">
            まだインポートデータがありません。<br>
@@ -161,6 +179,13 @@ const _GEAR_SLOT_ORDER = ['1', '2', '3', '4', '21', '10', '11', '5', '8', '9'];
 const _GEAR_SLOT_LABELS = {
   '1': '主武器', '2': '副武器', '3': '冠', '4': '胸当て', '21': '弓矢',
   '10': '環', '11': '佩び物', '5': '膝鎧', '8': '小手', '9': '射玦'
+};
+// rail 縦書き専用 中国語表記 (武侠雰囲気)
+const _GEAR_RAIL_ZH = {
+  '1': '主武器', '2': '副武器',
+  '3': '冠胄', '4': '胸甲', '5': '膝甲', '8': '腕甲',
+  '10': '環', '11': '佩',
+  '21': '弓箭', '9': '射玦'
 };
 // slot/weaponType → アイコンファイル名 (assets/icons/<name>.svg)
 const _GEAR_SLOT_ICON = {
@@ -233,21 +258,364 @@ function renderGearGrid(roleInfo) {
     }
     const iconName = _gearIcon(slot, roleInfo);
     const iconHtml = iconName ? `<img class="wwm-equip-icon" src="assets/icons/${iconName}.svg" alt="">` : '';
-    const editable = !['9', '21'].includes(slot);
+    const railLabel = _GEAR_RAIL_ZH[slot] || label;
     return `
-      <div class="wwm-equip-slot${editable?'':' wwm-equip-noedit'}" data-slot="${slot}"${editable?` onclick="WWMGear.openEdit('${slot}')"`:''}>
+      <div class="wwm-equip-slot" data-slot="${slot}" onclick="WWMGear.openEdit('${slot}')">
+        <div class="wwm-equip-rail"><span class="wwm-equip-rail-text">${railLabel}</span></div>
         ${iconHtml}
         <div class="wwm-equip-slot-inner">
-          <div class="wwm-equip-slot-header"><b>${label}</b>${setName ? ` <span class="wwm-muted">- ${setName}</span>` : ''}</div>
+          <div class="wwm-equip-slot-header">${setName ? `<span class="wwm-equip-setname">${setName}</span>` : ''}</div>
           <div class="wwm-equip-slot-body">
             ${kongfuLine}
-            <span class="wwm-equip-card-score">Score <b>${score}</b></span>
+            <span class="wwm-equip-card-score" data-card-score="${slot}"><b>...</b></span>
           </div>
         </div>
       </div>
     `;
   }).join('');
   root.innerHTML = cards;
+  // Phase 3: slot 寄与差分を 非同期計算 → カード更新
+  _computeGearCardScores(roleInfo);
+}
+
+// 4-set 固定ボーナス (防具セット 除外 — damage 非影響)
+const _SET4_BONUS = 100;
+function _isOffensiveSet(sfx) {
+  const sets = window.WWM_SETS || {};
+  return !!(sets.weaponSets?.[sfx] || sets.bowSets?.[sfx]);
+}
+function _set4Bonus(roleInfo) {
+  const eqDet = roleInfo?.wearEquipsDetailed || {};
+  const counts = {};
+  for (const eq of Object.values(eqDet)) {
+    const sfx = eq?.exVo?.suffix;
+    if (sfx !== undefined) counts[sfx] = (counts[sfx]||0)+1;
+  }
+  let bonus = 0;
+  for (const [sfx, c] of Object.entries(counts)) {
+    if (c >= 4 && _isOffensiveSet(sfx)) bonus += _SET4_BONUS;
+  }
+  return bonus;
+}
+// 共通: compute + 4-set bonus
+function _scoreWithBonus(roleInfo) {
+  const base = window.__WWM_LAST_RESULT?.statusScore || 0;
+  return base + _set4Bonus(roleInfo);
+}
+window.__WWM_SET4_BONUS_OF = _set4Bonus;
+
+// 装備カード Score = (現状 全装備) - (該当 slot 外し) + セット効果均等分配
+async function _computeSlotContributions(roleInfo, slots, suffixSlots, set4Map) {
+  if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return null;
+  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  // base
+  let baseScore = 0;
+  try {
+    const baseParams = await window.WWMStats.buildStatParams(roleInfo, state);
+    window.computeExpected(baseParams);
+    baseScore = _scoreWithBonus(roleInfo);
+  } catch (e) { return null; }
+  // set 2pc share map
+  const setShare = {};
+  for (const [sfx, members] of Object.entries(suffixSlots)) {
+    if (members.length < 2) continue;
+    try {
+      const ri = JSON.parse(JSON.stringify(roleInfo));
+      for (const s of members) {
+        if (ri.wearEquipsDetailed[s]?.exVo) ri.wearEquipsDetailed[s].exVo.suffix = -999;
+      }
+      const p = await window.WWMStats.buildStatParams(ri, state);
+      window.computeExpected(p);
+      const noSet = _scoreWithBonus(ri);
+      const eff = baseScore - noSet;
+      const share = eff * (members.length - 1) / members.length;
+      for (const s of members) setShare[s] = share;
+    } catch (e) {}
+  }
+  // 各 slot 寄与
+  const result = {};
+  for (const slot of slots) {
+    try {
+      const ri = JSON.parse(JSON.stringify(roleInfo));
+      delete ri.wearEquipsDetailed[slot];
+      const p = await window.WWMStats.buildStatParams(ri, state);
+      window.computeExpected(p);
+      const noSlot = _scoreWithBonus(ri);
+      let delta = baseScore - noSlot;
+      if (setShare[slot]) delta -= setShare[slot];
+      if (set4Map[slot]) delta -= set4Map[slot];
+      result[slot] = Math.round(delta);
+    } catch (e) { result[slot] = 0; }
+  }
+  return result;
+}
+
+async function _computeGearCardScores(roleInfo) {
+  if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return;
+  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const origRi = window.__WWM_ROLEINFO;
+  const effRi = roleInfo;  // 既に effective が渡される想定 (renderGearGrid から呼ばれる)
+  const eqDet = effRi?.wearEquipsDetailed || {};
+  const slots = _GEAR_SLOT_ORDER.filter(s => eqDet[s]);
+  // effective 用 suffix map + set4 map
+  const suffixSlots = {};
+  for (const s of slots) {
+    const sfx = eqDet[s]?.exVo?.suffix;
+    if (sfx !== undefined) {
+      if (!suffixSlots[sfx]) suffixSlots[sfx] = [];
+      suffixSlots[sfx].push(s);
+    }
+  }
+  const set4Map = {};
+  for (const [sfx, members] of Object.entries(suffixSlots)) {
+    if (members.length < 4 || !_isOffensiveSet(sfx)) continue;
+    const share = _SET4_BONUS * (members.length - 1) / members.length;
+    for (const s of members) set4Map[s] = share;
+  }
+  // effective 寄与算出
+  const effContrib = await _computeSlotContributions(effRi, slots, suffixSlots, set4Map) || {};
+  // baseline (origRi) 寄与算出 (slot に virtual ある場合のみ表示用)
+  let origContrib = {};
+  const hasVirtual = (window.__WWM_VIRTUAL && Object.keys(window.__WWM_VIRTUAL).length) ||
+                     (window.__WWM_VIRTUAL_KONGFU && Object.keys(window.__WWM_VIRTUAL_KONGFU).length);
+  if (hasVirtual && origRi && origRi !== effRi) {
+    const origEqDet = origRi.wearEquipsDetailed || {};
+    const origSlots = _GEAR_SLOT_ORDER.filter(s => origEqDet[s]);
+    const origSuffixSlots = {};
+    for (const s of origSlots) {
+      const sfx = origEqDet[s]?.exVo?.suffix;
+      if (sfx !== undefined) {
+        if (!origSuffixSlots[sfx]) origSuffixSlots[sfx] = [];
+        origSuffixSlots[sfx].push(s);
+      }
+    }
+    const origSet4Map = {};
+    for (const [sfx, members] of Object.entries(origSuffixSlots)) {
+      if (members.length < 4 || !_isOffensiveSet(sfx)) continue;
+      const share = _SET4_BONUS * (members.length - 1) / members.length;
+      for (const s of members) origSet4Map[s] = share;
+    }
+    origContrib = await _computeSlotContributions(origRi, origSlots, origSuffixSlots, origSet4Map) || {};
+  }
+  // 描画
+  for (const slot of slots) {
+    const el = document.querySelector(`[data-card-score="${slot}"]`);
+    if (!el) continue;
+    const curScore = effContrib[slot] || 0;
+    const isModified = hasVirtual && (
+      window.__WWM_VIRTUAL?.[slot] ||
+      (slot === '1' && window.__WWM_VIRTUAL_KONGFU?.kongfuMain) ||
+      (slot === '2' && window.__WWM_VIRTUAL_KONGFU?.kongfuSub)
+    );
+    if (isModified && origContrib[slot] != null && origContrib[slot] !== curScore) {
+      el.innerHTML = `<b>${origContrib[slot].toLocaleString()}</b><span class="wwm-equip-arrow">▶</span><b>${curScore.toLocaleString()}</b>`;
+    } else {
+      el.innerHTML = `<b>${curScore.toLocaleString()}</b>`;
+    }
+  }
+  // DOM 状態復元
+  try {
+    const finalParams = await window.WWMStats.buildStatParams(effRi, state);
+    window.computeExpected(finalParams);
+  } catch (e) {}
+}
+
+// ── Xinfa Grid (心法パネル) ─────────────────────────────────
+function renderXinfaGrid(roleInfo) {
+  const root = document.getElementById('wwmXinfaGrid');
+  if (!root) return;
+  const passive = roleInfo?.passiveSlots || [];
+  const lang = _curLang();
+  const xinfaMap = window.WWM_XINFA || {};
+  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const tiers = state?.xinfaTiers || {};
+  const xinfaIcons = window.__WWM_ROLEINFO?._xinfaIcons || roleInfo?._xinfaIcons || [];
+  const origPassive = window.__WWM_ROLEINFO?.passiveSlots || [];
+  const cards = [0,1,2,3].map(i => {
+    const xid = passive[i];
+    const xinfa = xid ? xinfaMap[xid] : null;
+    const name = xinfa ? (xinfa.names?.[lang] || xinfa.names?.ja || `心法ID ${xid}`) : '(空)';
+    const tier = tiers[i] ?? tiers[String(i)] ?? 6;
+    // icon: swap されてない (元と同じ xid) 場合のみ表示
+    const iconUrl = (xid === origPassive[i]) ? xinfaIcons[i] : null;
+    const iconHtml = iconUrl ? `<img class="wwm-xinfa-icon" src="${iconUrl}" alt="">` : '';
+    return `
+      <div class="wwm-xinfa-slot" data-xinfa-slot="${i}" onclick="WWMXinfa.openEdit(${i})">
+        <div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法${['一','二','三','四'][i]}</span></div>
+        ${iconHtml}
+        <div class="wwm-xinfa-inner">
+          <div class="wwm-xinfa-header"><b>${name}</b><span class="wwm-xinfa-tier">Tier ${tier}</span></div>
+        </div>
+        <span class="wwm-xinfa-card-score" data-xinfa-score="${i}"><b>...</b></span>
+      </div>
+    `;
+  }).join('');
+  root.innerHTML = cards;
+  _computeXinfaCardScores(roleInfo);
+}
+
+async function _computeXinfaCardScores(roleInfo) {
+  if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return;
+  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  // base score
+  let baseScore = 0;
+  try {
+    const baseParams = await window.WWMStats.buildStatParams(roleInfo, state);
+    window.computeExpected(baseParams);
+    baseScore = _scoreWithBonus(roleInfo);
+  } catch (e) { return; }
+  // 各 xinfa slot → tier 0 で再算出 = その心法寄与
+  for (let i = 0; i < 4; i++) {
+    try {
+      const altState = JSON.parse(JSON.stringify(state || {}));
+      if (!altState.xinfaTiers) altState.xinfaTiers = {};
+      altState.xinfaTiers[i] = 0;
+      altState.xinfaTiers[String(i)] = 0;
+      const p = await window.WWMStats.buildStatParams(roleInfo, altState);
+      window.computeExpected(p);
+      const noXinfa = _scoreWithBonus(roleInfo);
+      const delta = Math.round(baseScore - noXinfa);
+      const el = document.querySelector(`[data-xinfa-score="${i}"]`);
+      if (el) el.innerHTML = `<b>${delta.toLocaleString()}</b>`;
+    } catch (e) {}
+  }
+  // 復元
+  try {
+    const finalParams = await window.WWMStats.buildStatParams(roleInfo, state);
+    window.computeExpected(finalParams);
+  } catch (e) {}
+}
+
+// ── Xinfa Edit modal ───────────────────────────────────────────
+function openXinfaEdit(slotIdx) {
+  const origRi = window.__WWM_ROLEINFO;
+  if (!origRi) return;
+  const lang = _curLang();
+  const xinfaMap = window.WWM_XINFA || {};
+  const passive = (window.__WWM_VIRTUAL_XINFA?.passive) || origRi.passiveSlots || [];
+  const origPassive = origRi.passiveSlots || [];
+  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const origTier = (state?.xinfaTiers?.[slotIdx] ?? state?.xinfaTiers?.[String(slotIdx)] ?? 6);
+  const virtTier = window.__WWM_VIRTUAL_XINFA?.tiers?.[slotIdx] ?? origTier;
+  let newXinfaId = passive[slotIdx] || origPassive[slotIdx];
+  let newTier = virtTier;
+  const _xName = (id) => id ? (xinfaMap[id]?.names?.[lang] || xinfaMap[id]?.names?.ja || `心法ID ${id}`) : '(空)';
+  function _xinfaOptions(selectedId) {
+    return Object.entries(xinfaMap)
+      .filter(([k]) => /^\d+$/.test(k))
+      .map(([id, x]) => `<option value="${id}" ${String(id)===String(selectedId)?'selected':''}>${x.names?.[lang]||x.names?.ja||id}</option>`)
+      .join('');
+  }
+  function _effectsText(id, tier) {
+    if (!id) return '';
+    const x = xinfaMap[id];
+    if (!x?.attributeBuff) return '';
+    if (typeof window._xinfaEffectsText === 'function') return window._xinfaEffectsText(x, tier);
+    const parts = [];
+    if (tier >= 2 && x.attributeBuff.tier2?.effects) parts.push('T2: ' + Object.entries(x.attributeBuff.tier2.effects).map(([k,v])=>`${k}+${v}`).join(', '));
+    if (tier >= 5 && x.attributeBuff.tier5?.effects) parts.push('T5: ' + Object.entries(x.attributeBuff.tier5.effects).map(([k,v])=>`${k}+${v}`).join(', '));
+    return parts.join(' / ');
+  }
+  const origName = _xName(origPassive[slotIdx]);
+  const m = document.createElement('div');
+  m.className = 'wwm-modal-backdrop';
+  m.innerHTML = `
+    <div class="wwm-modal wwm-modal-wide wwm-modal-square">
+      <div class="wwm-modal-header">
+        <h2>心法${['一','二','三','四'][slotIdx]} - Xinfa Compare</h2>
+        <button class="wwm-modal-close" aria-label="Close">×</button>
+      </div>
+      <div class="wwm-modal-body">
+        <div class="wwm-cmp-grid">
+          <div class="wwm-cmp-col wwm-cmp-current">
+            <h3 class="wwm-cmp-title">現在の心法</h3>
+            <div class="wwm-cmp-kongfu-header">${origName}</div>
+            <div class="wwm-cmp-set-header">Tier ${origTier}<div class="wwm-cmp-set-effect">${_effectsText(origPassive[slotIdx], origTier)}</div></div>
+          </div>
+          <div class="wwm-cmp-col wwm-cmp-new" id="wwmCmpXinfaNewCol">
+            <h3 class="wwm-cmp-title">新しい心法</h3>
+            <select class="wwm-cmp-kongfu-select" id="wwmCmpXinfaSel">${_xinfaOptions(newXinfaId)}</select>
+            <select class="wwm-cmp-set-select" id="wwmCmpXinfaTierSel">${[0,1,2,3,4,5,6].map(t => `<option value="${t}" ${t===newTier?'selected':''}>Tier ${t}</option>`).join('')}</select>
+            <div class="wwm-cmp-set-effect" id="wwmCmpXinfaEffect">${_effectsText(newXinfaId, newTier)}</div>
+          </div>
+        </div>
+        <div class="wwm-cmp-preview" id="wwmCmpPreview">
+          <span class="wwm-cmp-preview-label">Δ Score:</span>
+          <span class="wwm-cmp-preview-value" id="wwmCmpPreviewDelta">計算中...</span>
+        </div>
+        <div class="wwm-btn-row" style="margin-top:12px;">
+          <button class="wwm-btn-primary" id="wwmXinfaApply">適用 (sidebar反映)</button>
+          <button class="wwm-btn-secondary" id="wwmXinfaReset">元に戻す</button>
+          <button class="wwm-btn-secondary" id="wwmXinfaCancel">キャンセル</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(m);
+  m.querySelector('.wwm-modal-close').addEventListener('click', () => m.remove());
+  m.querySelector('#wwmXinfaCancel').addEventListener('click', () => m.remove());
+
+  let _t = null;
+  function _schedule() { if (_t) clearTimeout(_t); _t = setTimeout(_runPreview, 250); }
+  async function _runPreview() {
+    const el = m.querySelector('#wwmCmpPreviewDelta');
+    if (!el) return;
+    try {
+      // baseline = effective (現状適用済)
+      const baseRi = _getEffectiveRoleInfo() || origRi;
+      const baseState = JSON.parse(JSON.stringify(state || {}));
+      if (!baseState.xinfaTiers) baseState.xinfaTiers = {};
+      const baseParams = await window.WWMStats.buildStatParams(baseRi, baseState);
+      window.computeExpected(baseParams);
+      const baseScore = _scoreWithBonus(baseRi);
+      // virtual ri + state
+      const vRi = JSON.parse(JSON.stringify(baseRi));
+      if (!vRi.passiveSlots) vRi.passiveSlots = [];
+      vRi.passiveSlots[slotIdx] = parseInt(newXinfaId, 10);
+      const vState = JSON.parse(JSON.stringify(baseState));
+      vState.xinfaTiers[slotIdx] = newTier;
+      vState.xinfaTiers[String(slotIdx)] = newTier;
+      const vParams = await window.WWMStats.buildStatParams(vRi, vState);
+      window.computeExpected(vParams);
+      const vScore = _scoreWithBonus(vRi);
+      const delta = Math.round(vScore - baseScore);
+      const sign = delta > 0 ? '+' : '';
+      el.textContent = `${sign}${delta.toLocaleString()} (${Math.round(vScore).toLocaleString()})`;
+      el.className = 'wwm-cmp-preview-value ' + (delta > 0 ? 'pos' : delta < 0 ? 'neg' : 'zero');
+    } catch (e) { el.textContent = 'error'; }
+  }
+
+  const xSel = m.querySelector('#wwmCmpXinfaSel');
+  xSel.addEventListener('change', () => {
+    newXinfaId = parseInt(xSel.value, 10);
+    const eff = m.querySelector('#wwmCmpXinfaEffect');
+    if (eff) eff.textContent = _effectsText(newXinfaId, newTier);
+    _schedule();
+  });
+  const tSel = m.querySelector('#wwmCmpXinfaTierSel');
+  tSel.addEventListener('change', () => {
+    newTier = parseInt(tSel.value, 10);
+    const eff = m.querySelector('#wwmCmpXinfaEffect');
+    if (eff) eff.textContent = _effectsText(newXinfaId, newTier);
+    _schedule();
+  });
+  _schedule();
+
+  m.querySelector('#wwmXinfaApply').addEventListener('click', () => {
+    if (!window.__WWM_VIRTUAL_XINFA) window.__WWM_VIRTUAL_XINFA = { passive: [...origPassive], tiers: {} };
+    if (!window.__WWM_VIRTUAL_XINFA.passive) window.__WWM_VIRTUAL_XINFA.passive = [...origPassive];
+    if (!window.__WWM_VIRTUAL_XINFA.tiers) window.__WWM_VIRTUAL_XINFA.tiers = {};
+    window.__WWM_VIRTUAL_XINFA.passive[slotIdx] = parseInt(newXinfaId, 10);
+    window.__WWM_VIRTUAL_XINFA.tiers[slotIdx] = newTier;
+    m.remove();
+    _refreshAll();
+  });
+  m.querySelector('#wwmXinfaReset').addEventListener('click', () => {
+    if (window.__WWM_VIRTUAL_XINFA?.passive) window.__WWM_VIRTUAL_XINFA.passive[slotIdx] = origPassive[slotIdx];
+    if (window.__WWM_VIRTUAL_XINFA?.tiers) delete window.__WWM_VIRTUAL_XINFA.tiers[slotIdx];
+    m.remove();
+    _refreshAll();
+  });
 }
 
 // ── Virtual gear state (Edit modal適用結果) ─────────────────────
@@ -263,6 +631,22 @@ function _getEffectiveRoleInfo() {
   }
   if (vkf.kongfuMain) merged.kongfuMain = vkf.kongfuMain;
   if (vkf.kongfuSub) merged.kongfuSub = vkf.kongfuSub;
+  // xinfa virtual
+  const vxi = window.__WWM_VIRTUAL_XINFA;
+  if (vxi?.passive) merged.passiveSlots = [...vxi.passive];
+  return merged;
+}
+// effective state (xinfa tier virtual 込み)
+function _getEffectiveState() {
+  const base = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const vxi = window.__WWM_VIRTUAL_XINFA;
+  if (!vxi?.tiers || !Object.keys(vxi.tiers).length) return base;
+  const merged = JSON.parse(JSON.stringify(base || {}));
+  if (!merged.xinfaTiers) merged.xinfaTiers = {};
+  for (const [k, v] of Object.entries(vxi.tiers)) {
+    merged.xinfaTiers[k] = v;
+    merged.xinfaTiers[String(k)] = v;
+  }
   return merged;
 }
 window.__WWM_GET_EFFECTIVE_ROLEINFO = _getEffectiveRoleInfo;
@@ -270,14 +654,13 @@ window.__WWM_GET_EFFECTIVE_ROLEINFO = _getEffectiveRoleInfo;
 function _refreshAll() {
   const ri = _getEffectiveRoleInfo();
   if (!ri) return;
-  const state = (() => {
-    try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; }
-  })();
+  const state = _getEffectiveState();
   if (window.WWMStats) {
     window.WWMStats.buildStatParams(ri, state).then(params => {
       window.__WWM_PARAMS = params;
       window.WWMSidebar.render(params);
       window.WWMGear.render(ri);
+      if (window.WWMXinfa) window.WWMXinfa.render(ri);
       if (window.WWMHero) window.WWMHero.update(params);
     }).catch(e => console.error('[WWM] refresh failed:', e));
   }
@@ -410,6 +793,76 @@ const _SLOT6_WEAPON_LIKE = new Set(['1', '2', '10', '11']);
 const _SLOT6_ARMOR = new Set(['3', '4', '5', '8']);
 const _SLOT6_PEN_STATS = ['physPen', 'voidPen', 'physResist'];
 
+// equip_max.json 読込 + max 取得
+let _EQUIP_MAX = null;
+async function _loadEquipMax() {
+  if (_EQUIP_MAX) return _EQUIP_MAX;
+  try { _EQUIP_MAX = await fetch('data/equip_max.json').then(r=>r.json()); } catch(e){}
+  return _EQUIP_MAX;
+}
+// 装備Lv → tier 関数 (equip_max.json _schema 由来)
+function _lvToTier(lv) {
+  lv = lv || 95;
+  if (lv < 71) return '61';
+  if (lv < 81) return '71';
+  if (lv < 86) return '81';
+  if (lv < 91) return '86';
+  if (lv < 96) return '91';
+  return '96';
+}
+// statKey → equip_max table key
+const _STAT_TO_MAX_KEY = {
+  // 外功
+  minPhys: 'maxPhys', maxPhys: 'maxPhys',
+  // 5path 系 (min/max 共通 cap)
+  minBellstrike: 'pathSingle', maxBellstrike: 'pathSingle',
+  minStonesplit: 'pathSingle', maxStonesplit: 'pathSingle',
+  minSilkbind: 'pathSingle', maxSilkbind: 'pathSingle',
+  minBamboocut: 'pathSingle', maxBamboocut: 'pathSingle',
+  minVoid: 'pathSingle', maxVoid: 'pathSingle',
+  // 確率系
+  precision: 'precision', crit: 'crit', affinity: 'affinity',
+  // 5行 (body/defense/agility/power/momentum)
+  body: 'stat5', defense: 'stat5', agility: 'stat5', power: 'stat5', momentum: 'stat5',
+  // 貫通: 外功貫通 = outerPen / 無相+5path貫通 = attrPen
+  physPen: 'outerPen',
+  bellstrikePen: 'attrPen', stonesplitPen: 'attrPen',
+  silkbindPen: 'attrPen', bamboocutPen: 'attrPen',
+  voidPen: 'attrPen', attrPen: 'attrPen',
+  // 防具
+  maxHp: 'maxHp', physDef: 'physDef', physResist: 'physDef',
+  // ダメ強化
+  physDmgBonus: 'physDmgBoost', attrDmgBonus: 'physDmgBoost',
+  critDmgBonus: 'physDmgBoost', affinityDmgBonus: 'physDmgBoost',
+  allWeaponDmg: 'allWeaponDmg', bossDmg: 'bossDmg', playerUnitDmg: 'bossDmg',
+  // 武学ダメ (atkType)
+  swordDmg: 'atkTypeDmg', spearDmg: 'atkTypeDmg', fanDmg: 'atkTypeDmg',
+  moBladeDmg: 'atkTypeDmg', dualBladesDmg: 'atkTypeDmg', umbrellaDmg: 'atkTypeDmg',
+  ropeDartDmg: 'atkTypeDmg', hengBladeDmg: 'atkTypeDmg',
+  lightAtkDmg: 'atkTypeDmg', heavyAtkDmg: 'atkTypeDmg', executionDmg: 'atkTypeDmg',
+  airborneLightAtkDmg: 'atkTypeDmg', jumpStrikeDmg: 'atkTypeDmg',
+  dualWeaponSkillDmg: 'atkTypeDmg', dashDmg: 'atkTypeDmg',
+  // 奇術ダメ + 武学固有
+  stMysticDmg: 'mysticDmg', stBurstMysticDmg: 'mysticDmg', stControlMysticDmg: 'mysticDmg',
+  areaMysticDmg: 'mysticDmg', areaDmgMysticDmg: 'mysticDmg', areaDebuffMysticDmg: 'mysticDmg',
+  // 武学固有 (default → mysticDmg)
+  directCrit: 'attunement', directAffinity: 'attunement'
+};
+function _getAffixMax(statKey, lv) {
+  if (!_EQUIP_MAX || !statKey) return null;
+  const tier = _lvToTier(lv);
+  const t = _EQUIP_MAX.tiers?.[tier];
+  if (!t) return null;
+  let mapKey = _STAT_TO_MAX_KEY[statKey];
+  // 武学固有 affix (xxxQ, xxxCharged, xxxSpecial, bleed 等) → mysticDmg
+  if (!mapKey && /Q$|Charged$|Special$|Drone$|Light$|Healing$|Shield$|Rodent$|VariedCombo$|^bleed$/.test(statKey)) {
+    mapKey = 'mysticDmg';
+  }
+  if (!mapKey) return null;
+  const v = t[mapKey];
+  return (typeof v === 'number') ? v : null;
+}
+
 // affix 種別変更 option list: 現 affix と同じ prefix2 のもの → statKey で dedup
 // slot/idx 指定で 6番目限定処理 + idx 1-4 重複不可 (affix0 のみ重複可)
 function _getAffixOptions(currentAffixId, slot, idx, allAffixes) {
@@ -452,6 +905,9 @@ function openGearEdit(slot) {
   const origEq = origRi?.wearEquipsDetailed?.[slot];
   if (!origEq) { alert('装備データなし: slot ' + slot); return; }
   const label = _GEAR_SLOT_LABELS[slot] || slot;
+  // equip_max.json 確実 load (await不要、初回 null fallback)
+  _loadEquipMax();
+  const charLv = origRi?.level || 95;
   // 背景アイコン (slot/武器type に対応)
   const bgIconName = _gearIcon(slot, origRi);
   const bgIconUrl = bgIconName ? `url('assets/icons/${bgIconName}.svg')` : 'none';
@@ -465,11 +921,15 @@ function openGearEdit(slot) {
   let newKongfuId = origKongfuId;
   const kongfuLabel = origKongfuId ? _kfName(origKongfuId) : '';
   const kongfuHtml = kongfuLabel ? `<span class="wwm-cmp-kongfu">${kongfuLabel}</span>` : '';
-  // セット (weaponSets: slot 1/2/10/11)
+  // セット系 slot: 武器/環/佩び物 = weaponSets / 弓矢/射玦 = bowSets
   const isWeaponSetSlot = ['1','2','10','11'].includes(String(slot));
+  const isBowSetSlot = ['9','21'].includes(String(slot));
+  const isSetEditable = isWeaponSetSlot || isBowSetSlot;
   const origSuffix = origEq.exVo?.suffix;
   let newSuffix = origSuffix;
-  const setsMap = window.WWM_SETS?.weaponSets || {};
+  const setsMap = isBowSetSlot
+    ? (window.WWM_SETS?.bowSets || {})
+    : (window.WWM_SETS?.weaponSets || {});
   const _setName = (s) => setsMap[s]?.names?.[lang] || setsMap[s]?.names?.ja || (s ? `Set ${s}` : '');
   const _setRaw = (s) => setsMap[s]?.pieces2?.raw || '';
   function _setOptions(selectedId) {
@@ -477,6 +937,8 @@ function openGearEdit(slot) {
       .map(([id, s]) => `<option value="${id}" ${String(id)===String(selectedId)?'selected':''}>${s.names?.[lang]||s.names?.ja||id}</option>`)
       .join('');
   }
+  // slot 9/21: affix 編集不可
+  const isAffixEditable = !isBowSetSlot;
   // 全 kongfu option list (slot1/2 編集用)
   function _kongfuOptions(selectedId) {
     return Object.entries(kfMap)
@@ -548,10 +1010,15 @@ function openGearEdit(slot) {
         ? (needsMul ? (val*100).toFixed(1) : val.toFixed(1))
         : (typeof val === 'number' ? val.toFixed(2).replace(/\.00$/,'') : val);
       const step = isPct ? '0.1' : '0.01';
-      // max 値算出 (原データ val/ratio)
-      const oVal = origEq.exVo?.baseAffixes?.[idx]?.equipmentDetails?.[1];
-      const oRatio = origEq.exVo?.baseAffixes?.[idx]?.equipmentDetails?.[2];
-      const maxInternal = (oVal != null && oRatio > 0) ? (oVal / oRatio) : null;
+      // max 値算出: equip_max.json (Lv → tier) ベース。fallback: orig val/ratio (sameStat時)
+      let maxInternal = _getAffixMax(sk, charLv);
+      if (maxInternal == null) {
+        const origDet = origEq.exVo?.baseAffixes?.[idx]?.equipmentDetails;
+        const origInfo = origDet?.[0] != null ? window.WWM_AFFIX?.[origDet[0]] : null;
+        if (origInfo?.statKey === sk && origDet?.[1] != null && origDet?.[2] > 0) {
+          maxInternal = origDet[1] / origDet[2];
+        }
+      }
       const maxAttr = maxInternal != null
         ? `max="${isPct ? (needsMul ? (maxInternal*100).toFixed(1) : maxInternal.toFixed(1)) : maxInternal.toFixed(2)}"`
         : '';
@@ -578,9 +1045,9 @@ function openGearEdit(slot) {
     ? `<select class="wwm-cmp-kongfu-select" id="wwmCmpKongfuSel">${_kongfuOptions(newKongfuId)}</select>`
     : '';
   // panel 内 set header HTML
-  const curSetHeader = isWeaponSetSlot && origSuffix
+  const curSetHeader = isSetEditable && origSuffix
     ? `<div class="wwm-cmp-set-header" title="${_setRaw(origSuffix)}">${_setName(origSuffix)}<div class="wwm-cmp-set-effect">${_setRaw(origSuffix)}</div></div>` : '';
-  const newSetHeader = isWeaponSetSlot
+  const newSetHeader = isSetEditable
     ? `<select class="wwm-cmp-set-select" id="wwmCmpSetSel">${_setOptions(newSuffix)}</select><div class="wwm-cmp-set-effect" id="wwmCmpSetEffect">${_setRaw(newSuffix)}</div>` : '';
   m.innerHTML = `
     <div class="wwm-modal wwm-modal-wide wwm-modal-square">
@@ -590,22 +1057,26 @@ function openGearEdit(slot) {
       </div>
       <div class="wwm-modal-body">
         <div class="wwm-cmp-grid">
-          <div class="wwm-cmp-col wwm-cmp-current">
+          <div class="wwm-cmp-col wwm-cmp-current${isBowSetSlot?' wwm-cmp-bow':''}">
             ${bgIconHtml}
             <h3 class="wwm-cmp-title">現在の装備</h3>
             ${curKongfuHeader}
             ${curSetHeader}
-            <div class="wwm-cmp-rows">${renderCurrentRows()}</div>
+            ${isAffixEditable ? `<div class="wwm-cmp-rows">${renderCurrentRows()}</div>` : ''}
           </div>
-          <div class="wwm-cmp-col wwm-cmp-new" id="wwmCmpNewCol">
+          <div class="wwm-cmp-col wwm-cmp-new${isBowSetSlot?' wwm-cmp-bow':''}" id="wwmCmpNewCol">
             ${bgIconHtml}
             <h3 class="wwm-cmp-title">新しい装備</h3>
             ${newKongfuHeader}
             ${newSetHeader}
-            <div class="wwm-cmp-rows" id="wwmCmpNewRows">${renderNewRows()}</div>
+            ${isAffixEditable ? `<div class="wwm-cmp-rows" id="wwmCmpNewRows">${renderNewRows()}</div>` : ''}
           </div>
         </div>
-        <div class="wwm-btn-row" style="margin-top:16px;">
+        <div class="wwm-cmp-preview" id="wwmCmpPreview">
+          <span class="wwm-cmp-preview-label">Δ Score:</span>
+          <span class="wwm-cmp-preview-value" id="wwmCmpPreviewDelta">計算中...</span>
+        </div>
+        <div class="wwm-btn-row" style="margin-top:12px;">
           <button class="wwm-btn-primary" id="wwmEditApply">適用 (sidebar反映)</button>
           <button class="wwm-btn-secondary" id="wwmEditReset">元に戻す</button>
           <button class="wwm-btn-secondary" id="wwmEditCancel">キャンセル</button>
@@ -618,6 +1089,54 @@ function openGearEdit(slot) {
   // backdrop クリック閉じ 抑止 (×/キャンセルボタンのみ閉じ)
   m.querySelector('#wwmEditCancel').addEventListener('click', () => m.remove());
 
+  // ── Phase 2: preview Δ Score (debounced) ─────────────────
+  let _previewTimer = null;
+  function _schedulePreview() {
+    if (_previewTimer) clearTimeout(_previewTimer);
+    _previewTimer = setTimeout(_runPreview, 250);
+  }
+  async function _runPreview() {
+    const el = m.querySelector('#wwmCmpPreviewDelta');
+    if (!el) return;
+    if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') {
+      el.textContent = 'N/A'; return;
+    }
+    try {
+      // 仮想 roleInfo 構築: 他 slot の適用済 virtual を含む effective base から
+      const baseRi = _getEffectiveRoleInfo() || origRi;
+      const vRi = JSON.parse(JSON.stringify(baseRi));
+      if (!vRi.wearEquipsDetailed) vRi.wearEquipsDetailed = {};
+      const vEq = JSON.parse(JSON.stringify(origEq));
+      vEq.exVo.baseAffixes = newAffixes;
+      if (isSetEditable && newSuffix != null) vEq.exVo.suffix = parseInt(newSuffix, 10);
+      vRi.wearEquipsDetailed[slot] = vEq;
+      if (isWeaponSlot && newKongfuId) {
+        if (slot === '1') vRi.kongfuMain = parseInt(newKongfuId, 10);
+        else if (slot === '2') vRi.kongfuSub = parseInt(newKongfuId, 10);
+      }
+      const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+      // virtual compute
+      const vParams = await window.WWMStats.buildStatParams(vRi, state);
+      window.computeExpected(vParams);
+      const vScore = (window.__WWM_LAST_RESULT?.statusScore || 0) + _set4Bonus(vRi);
+      // baseline 取得 (現状 effective roleInfo)
+      const origParams = window.__WWM_PARAMS;
+      const effBaseRi = _getEffectiveRoleInfo() || origRi;
+      let baseScore = 0;
+      if (origParams) {
+        window.computeExpected(origParams);
+        baseScore = (window.__WWM_LAST_RESULT?.statusScore || 0) + _set4Bonus(effBaseRi);
+      }
+      const delta = Math.round(vScore - baseScore);
+      const sign = delta > 0 ? '+' : '';
+      el.textContent = `${sign}${delta.toLocaleString()} (${Math.round(vScore).toLocaleString()})`;
+      el.className = 'wwm-cmp-preview-value ' + (delta > 0 ? 'pos' : delta < 0 ? 'neg' : 'zero');
+    } catch (e) {
+      console.error('[Preview]', e);
+      el.textContent = 'error';
+    }
+  }
+
   // セット変更 (新パネル)
   const setSel = m.querySelector('#wwmCmpSetSel');
   if (setSel) {
@@ -625,6 +1144,7 @@ function openGearEdit(slot) {
       newSuffix = parseInt(setSel.value, 10);
       const eff = m.querySelector('#wwmCmpSetEffect');
       if (eff) eff.textContent = _setRaw(newSuffix);
+      _schedulePreview();
     });
   }
 
@@ -641,8 +1161,11 @@ function openGearEdit(slot) {
       const newIcon = _gearIcon(slot, _virtRi(newKongfuId));
       const bgEl = m.querySelector('#wwmCmpNewCol > .wwm-cmp-bg-icon');
       if (bgEl && newIcon) bgEl.style.backgroundImage = `url('assets/icons/${newIcon}.svg')`;
+      _schedulePreview();
     });
   }
+  // 初回 preview
+  _schedulePreview();
 
   // 新装備 入力 change
   function _refreshRowUI(row, idx) {
@@ -661,6 +1184,21 @@ function openGearEdit(slot) {
       valInp.dataset.pct = isPct ? '1' : '0';
       valInp.dataset.pctmul = _pctNeedsMul(sk) ? '1' : '0';
       valInp.step = isPct ? '0.1' : '0.01';
+      // max 属性 更新 (equip_max table 優先 / fallback orig val/ratio)
+      let maxInt = _getAffixMax(sk, (origRi?.level || 95));
+      if (maxInt == null) {
+        const origDet2 = origEq.exVo?.baseAffixes?.[idx]?.equipmentDetails;
+        const origInfo2 = origDet2?.[0] != null ? window.WWM_AFFIX?.[origDet2[0]] : null;
+        if (origInfo2?.statKey === sk && origDet2?.[1] != null && origDet2?.[2] > 0) {
+          maxInt = origDet2[1] / origDet2[2];
+        }
+      }
+      const needsMul2 = _pctNeedsMul(sk);
+      if (maxInt != null) {
+        valInp.max = isPct ? (needsMul2 ? (maxInt*100).toFixed(1) : maxInt.toFixed(1)) : maxInt.toFixed(2);
+      } else {
+        valInp.removeAttribute('max');
+      }
     }
     const unitEl = row.querySelector('[data-unit-el]');
     if (unitEl) unitEl.textContent = isPct ? '%' : '';
@@ -703,10 +1241,16 @@ function openGearEdit(slot) {
           const needsMul = el.dataset.pctmul === '1';
           const raw = parseFloat(el.value) || 0;
           let internal = (isPct && needsMul) ? raw / 100 : raw;
-          const origVal = origEq.exVo?.baseAffixes?.[idx]?.equipmentDetails?.[1] ?? internal;
-          const origRatio = origEq.exVo?.baseAffixes?.[idx]?.equipmentDetails?.[2] ?? 1;
-          const max = origRatio > 0 ? (origVal / origRatio) : null;
-          // 最大値クランプ
+          const curSk = window.WWM_AFFIX?.[d[0]]?.statKey;
+          let max = _getAffixMax(curSk, charLv);
+          if (max == null) {
+            const origDet = origEq.exVo?.baseAffixes?.[idx]?.equipmentDetails;
+            const origInfoVal = origDet?.[0] != null ? window.WWM_AFFIX?.[origDet[0]] : null;
+            if (origInfoVal?.statKey === curSk && origDet?.[1] != null && origDet?.[2] > 0) {
+              max = origDet[1] / origDet[2];
+            }
+          }
+          // 最大値クランプ (max既知時のみ)
           if (max && max > 0 && internal > max) {
             internal = max;
             const displayMax = (isPct && needsMul) ? (max*100).toFixed(1)
@@ -720,6 +1264,7 @@ function openGearEdit(slot) {
             _refreshRowUI(row, idx);
           }
         }
+        _schedulePreview();
       });
     });
   });
@@ -731,7 +1276,7 @@ function openGearEdit(slot) {
     if (!window.__WWM_VIRTUAL_KONGFU) window.__WWM_VIRTUAL_KONGFU = {};
     const vEq = JSON.parse(JSON.stringify(origEq));
     vEq.exVo.baseAffixes = newAffixes;
-    if (isWeaponSetSlot && newSuffix != null) vEq.exVo.suffix = parseInt(newSuffix, 10);
+    if (isSetEditable && newSuffix != null) vEq.exVo.suffix = parseInt(newSuffix, 10);
     window.__WWM_VIRTUAL[slot] = vEq;
     if (isWeaponSlot && newKongfuId && newKongfuId !== origKongfuId) {
       if (slot === '1') window.__WWM_VIRTUAL_KONGFU.kongfuMain = newKongfuId;
@@ -755,15 +1300,92 @@ function openGearEdit(slot) {
 // ── Hero block 更新 ────────────────────────────────────────────
 function updateHero(params) {
   if (!params || typeof window.computeExpected !== 'function') return;
-  const total = window.computeExpected(params) || 0;
-  const statusScore = Math.round(total / 2.5);
+  const result = window.computeExpected(params) || window.__WWM_LAST_RESULT || {};
+  const total = result.expected || 0;
+  const effRi = _getEffectiveRoleInfo();
+  const statusScore = Math.round((result.statusScore || 0) + _set4Bonus(effRi));
   const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
   setText('heroExpected', Math.round(total).toLocaleString());
   setText('hbExp', Math.round(total).toLocaleString());
-  setText('heroScore', statusScore.toLocaleString());
+  // countUp 経由 (calc.js calculate() の countUp 上書き 上書し直し)
+  if (typeof window.countUp === 'function') {
+    window.countUp('heroScore', statusScore, 0);
+    window.countUp('heroCompactScore', statusScore, 0);
+  } else {
+    setText('heroScore', statusScore.toLocaleString());
+    setText('heroCompactScore', statusScore.toLocaleString());
+  }
+  // current tier badge (compute 由来 tier 反映 — calc.js DOM 由来上書き 修正)
+  const wl2 = effRi?.worldLv || 14;
+  const thr2 = 6700 * Math.pow(0.8, 14 - wl2);
+  const curTier = statusScore >= thr2 ? 'SS'
+                : statusScore >= thr2*0.9 ? 'S'
+                : statusScore >= thr2*0.8 ? 'A'
+                : statusScore >= thr2*0.6 ? 'B' : 'C';
+  const tbCur = document.getElementById('heroTierBadge');
+  if (tbCur) { tbCur.textContent = curTier; tbCur.className = 'tier-badge tier-' + curTier; }
+  // tier に応じたスコア色
+  const TIER_COLOR = { SS: '#ffd970', S: '#ff6b50', A: '#a8d4b4', B: '#c9b88a', C: 'rgba(232,215,180,0.55)' };
+  const TIER_SHADOW = {
+    SS: '0 0 12px rgba(255,217,112,0.95), 0 0 28px rgba(255,180,40,0.7), 0 0 60px rgba(255,100,20,0.55), 0 0 100px rgba(200,60,43,0.4)',
+    S:  '0 0 18px rgba(255,107,80,0.55), 0 0 36px rgba(255,107,80,0.28)',
+    A:  '0 0 18px rgba(168,212,180,0.45), 0 0 36px rgba(168,212,180,0.25)',
+    B:  '0 0 14px rgba(201,184,138,0.45), 0 0 28px rgba(201,184,138,0.22)',
+    C:  '0 0 10px rgba(232,215,180,0.18)'
+  };
+  const numEl = document.getElementById('heroScore');
+  if (numEl && TIER_COLOR[curTier]) {
+    numEl.style.color = TIER_COLOR[curTier];
+    numEl.style.textShadow = TIER_SHADOW[curTier];
+  }
+  // compact tier badge: 廃止 (heroCompactTierBadge hidden)
   setText('heroCompactDmg', Math.round(total).toLocaleString());
-  setText('heroCompactScore', statusScore.toLocaleString());
   setText('heroCompactExp', Math.round(total).toLocaleString());
+  // baseline 表示 + Δ vs baseline
+  const baseline = window.__WWM_BASELINE;
+  const baseEl = document.getElementById('heroScoreBaseline');
+  const dEl = document.getElementById('heroScoreDelta');
+  if (baseline && typeof baseline.statusScore === 'number') {
+    const baseScore = Math.round(baseline.statusScore);
+    if (baseEl) baseEl.textContent = baseScore.toLocaleString();
+    if (dEl) {
+      const delta = statusScore - baseScore;
+      const sign = delta > 0 ? '+' : '';
+      dEl.textContent = `Δ${sign}${delta.toLocaleString()}`;
+      dEl.className = 'wwm-hero-delta hero-delta-inline ' + (delta > 0 ? 'pos' : delta < 0 ? 'neg' : 'zero');
+    }
+    // baseline tier badge (tier 未保存 baseline 用 fallback)
+    const blTb = document.getElementById('heroBaselineTierBadge');
+    if (blTb) {
+      let bTier = baseline.tier;
+      if (!bTier) {
+        const wl = window.__WWM_ROLEINFO?.worldLv || 14;
+        const thr = 6700 * Math.pow(0.8, 14 - wl);
+        bTier = baseScore >= thr ? 'SS'
+              : baseScore >= thr * 0.9 ? 'S'
+              : baseScore >= thr * 0.8 ? 'A'
+              : baseScore >= thr * 0.6 ? 'B' : 'C';
+      }
+      blTb.textContent = bTier;
+      blTb.className = 'tier-badge tier-badge-baseline tier-' + bTier;
+      const TIER_COLOR_B = { SS: '#ffd970', S: '#ff6b50', A: '#a8d4b4', B: '#c9b88a', C: 'rgba(232,215,180,0.55)' };
+      const TIER_SHADOW_B = {
+        SS: '0 0 12px rgba(255,217,112,0.95), 0 0 28px rgba(255,180,40,0.7), 0 0 60px rgba(255,100,20,0.55), 0 0 100px rgba(200,60,43,0.4)',
+        S:  '0 0 18px rgba(255,107,80,0.55), 0 0 36px rgba(255,107,80,0.28)',
+        A:  '0 0 18px rgba(168,212,180,0.45), 0 0 36px rgba(168,212,180,0.25)',
+        B:  '0 0 14px rgba(201,184,138,0.45), 0 0 28px rgba(201,184,138,0.22)',
+        C:  '0 0 10px rgba(232,215,180,0.18)'
+      };
+      if (baseEl && TIER_COLOR_B[bTier]) {
+        baseEl.style.color = TIER_COLOR_B[bTier];
+        baseEl.style.opacity = '1';
+        baseEl.style.textShadow = TIER_SHADOW_B[bTier];
+      }
+    }
+  } else {
+    if (baseEl) baseEl.textContent = statusScore.toLocaleString();
+    if (dEl) dEl.textContent = '';
+  }
 }
 
 // Header/Footer 実高さ → CSS 変数で sidebar top/bottom 動的調整
@@ -902,6 +1524,10 @@ window.WWMSidebar = {
 window.WWMGear = {
   render: renderGearGrid,
   openEdit: openGearEdit
+};
+window.WWMXinfa = {
+  render: renderXinfaGrid,
+  openEdit: openXinfaEdit
 };
 window.WWMHero = {
   update: updateHero

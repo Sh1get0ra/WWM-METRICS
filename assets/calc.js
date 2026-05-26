@@ -55,10 +55,65 @@ function computeExpected(p) {
   const avgMain = (p.minElemMain + p.maxElemMain) / 2;
   const avgSub  = (p.minElemSub  + p.maxElemSub)  / 2;
 
-  return dmg(avgPhys, avgMain, avgSub)          * pNormal
+  const expectedTotal =
+         dmg(avgPhys, avgMain, avgSub)          * pNormal
        + dmg(avgPhys, avgMain, avgSub, 1 + p.critBoost) * pCrit
        + dmg(p.maxPhysATK, p.maxElemMain, p.maxElemSub, 1 + p.sympathyBoost) * pSympathy
        + dmg(p.minPhysATK, p.minElemMain, p.minElemSub) * pGraze;
+
+  // ── STATUS SCORE (固定 SCORE_FIXED 係数で再計算) ─────────────
+  const sc = SCORE_FIXED;
+  function sPhys(atk) { return Math.max(0, atk - p.physDef) * sc.outerCoeff + sc.outerAdd; }
+  function sElem(m, s) {
+    return (m + hiddenBonus) * p.elemBoostMain * sc.statusCoeff
+         + (s + hiddenBonus) * p.elemBoostSub  * sc.statusCoeff;
+  }
+  function sDmg(pa, em, es, mul) {
+    mul = mul || 1;
+    const pp = sPhys(pa) * (1 + physPenZone) * innerPhys;
+    const ee = sElem(em, es) * (1 + elemPenZone) * innerElem;
+    return (pp + ee) * outerBoost * reductionZone * mul;
+  }
+  const statusScore =
+        sDmg(avgPhys, avgMain, avgSub) * pNormal
+      + sDmg(avgPhys, avgMain, avgSub, 1 + p.critBoost) * pCrit
+      + sDmg(p.maxPhysATK, p.maxElemMain, p.maxElemSub, 1 + p.sympathyBoost) * pSympathy
+      + sDmg(p.minPhysATK, p.minElemMain, p.minElemSub) * pGraze;
+
+  // tier 判定
+  const worldLv = p.worldLv || 1;
+  const ssThr = 6700 * Math.pow(0.8, 14 - worldLv);
+  let tier;
+  if      (statusScore >= ssThr)        tier = 'SS';
+  else if (statusScore >= ssThr * 0.9)  tier = 'S';
+  else if (statusScore >= ssThr * 0.8)  tier = 'A';
+  else if (statusScore >= ssThr * 0.6)  tier = 'B';
+  else                                  tier = 'C';
+
+  const result = { expected: expectedTotal, statusScore: statusScore, tier: tier };
+  window.__WWM_LAST_RESULT = result;
+
+  // ── donut / 寄与率 DOM 更新 (import 後の effective params 反映) ──
+  try {
+    const normT = dmg(avgPhys, avgMain, avgSub);
+    const critT = dmg(avgPhys, avgMain, avgSub, 1 + p.critBoost);
+    const sympT = dmg(p.maxPhysATK, p.maxElemMain, p.maxElemSub, 1 + p.sympathyBoost);
+    const grazT = dmg(p.minPhysATK, p.minElemMain, p.minElemSub);
+    const cCrit = critT * pCrit, cSymp = sympT * pSympathy, cGraz = grazT * pGraze, cNorm = normT * pNormal;
+    const cTotal = cCrit + cSymp + cGraz + cNorm;
+    if (cTotal > 0) {
+      const dCrit = cCrit / cTotal, dSymp = cSymp / cTotal, dGraz = cGraz / cTotal, dNorm = cNorm / cTotal;
+      if (typeof updateDonut === 'function') updateDonut(dCrit, dSymp, dGraz, dNorm, 'donutDmgSeg');
+      const pctStr = n => (n * 100).toFixed(2) + '%';
+      const setT = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+      setT('dmgCritVal', pctStr(dCrit));
+      setT('dmgSympathyVal', pctStr(dSymp));
+      setT('dmgGrazeVal', pctStr(dGraz));
+      setT('dmgNormalVal', pctStr(dNorm));
+    }
+  } catch(e) {}
+
+  return result;
 }
 
 // ── STATUS SCORE 固定スキルパラメータ ────────────────────────────
@@ -347,11 +402,14 @@ function calculate() {
   var dSymp  = contribTotal > 0 ? contribSymp  / contribTotal : 0;
   var dGraze = contribTotal > 0 ? contribGraze / contribTotal : 0;
   var dNorm  = contribTotal > 0 ? contribNorm  / contribTotal : 0;
-  updateDonut(dCrit, dSymp, dGraze, dNorm, 'donutDmgSeg');
-  document.getElementById('dmgCritVal').textContent     = pctStr(dCrit);
-  document.getElementById('dmgSympathyVal').textContent = pctStr(dSymp);
-  document.getElementById('dmgGrazeVal').textContent    = pctStr(dGraze);
-  document.getElementById('dmgNormalVal').textContent   = pctStr(dNorm);
+  // effective params あれば donut は computeExpected 側に委譲 (DOM 値と効果不一致回避)
+  if (!window.__WWM_PARAMS) {
+    updateDonut(dCrit, dSymp, dGraze, dNorm, 'donutDmgSeg');
+    document.getElementById('dmgCritVal').textContent     = pctStr(dCrit);
+    document.getElementById('dmgSympathyVal').textContent = pctStr(dSymp);
+    document.getElementById('dmgGrazeVal').textContent    = pctStr(dGraze);
+    document.getElementById('dmgNormalVal').textContent   = pctStr(dNorm);
+  }
 
   // ── 詳細テーブル ──────────────────────────────────────────────
   function fmt(n) { return Math.round(n).toLocaleString(T.locale); }
@@ -429,11 +487,14 @@ function calculate() {
           + sd(rAvgPhys, avgMain, avgSub, 1 + _raw.critBoost)              * rPCrit
           + sd(_raw.maxPhysATK, maxElemMain, maxElemSub, 1 + _raw.sympathyBoost) * rPSymp
           + sd(_raw.minPhysATK, minElemMain, minElemSub)                   * rPGraze;
-    countUp('heroScore', s, 0);
-    var _cd = document.getElementById('heroCompactDmg');
-    var _cs = document.getElementById('heroCompactScore');
-    if (_cd) _cd.textContent = Math.round(expected.total).toLocaleString(T.locale);
-    if (_cs) _cs.textContent = Math.round(s).toLocaleString(T.locale);
+    // effective params (import 済) → DOM上書き skip (computeExpected 側担当)
+    if (!window.__WWM_PARAMS) {
+      countUp('heroScore', s, 0);
+      var _cd = document.getElementById('heroCompactDmg');
+      var _cs = document.getElementById('heroCompactScore');
+      if (_cd) _cd.textContent = Math.round(expected.total).toLocaleString(T.locale);
+      if (_cs) _cs.textContent = Math.round(s).toLocaleString(T.locale);
+    }
 
     // ── Tier 判定（大世界Lv のみ） ────────────────────────────
     var ssThr = 6700 * Math.pow(0.8, 14 - worldLv);
@@ -443,12 +504,21 @@ function calculate() {
     else if (s >= ssThr * 0.8)     tier = 'A';
     else if (s >= ssThr * 0.6)     tier = 'B';
     else                           tier = 'C';
-    var _tb  = document.getElementById('heroTierBadge');
-    var _ctb = document.getElementById('heroCompactTierBadge');
-    if (_tb)  { _tb.textContent  = tier; _tb.className  = 'tier-badge tier-' + tier; }
-    if (_ctb) { _ctb.textContent = tier; _ctb.className = 'tier-badge tier-badge-compact tier-' + tier; }
+    if (!window.__WWM_PARAMS) {
+      var _tb  = document.getElementById('heroTierBadge');
+      var _ctb = document.getElementById('heroCompactTierBadge');
+      if (_tb)  { _tb.textContent  = tier; _tb.className  = 'tier-badge tier-' + tier; }
+      if (_ctb) { _ctb.textContent = tier; _ctb.className = 'tier-badge tier-badge-compact tier-' + tier; }
+      // pure-ish 戻り値用 cache (effective なしの DOM 計算結果)
+      window.__WWM_LAST_RESULT = {
+        expected: expected.total,
+        statusScore: s,
+        tier: tier
+      };
+    }
   })();
   buildEfficiencyTable(effParams, expected.total);
+  return window.__WWM_LAST_RESULT;
 }
 
 // 新 import flow から呼出のため window 公開

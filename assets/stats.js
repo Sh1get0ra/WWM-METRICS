@@ -118,13 +118,13 @@ async function buildStatParams(roleInfo, state) {
   }
 
   // 5. 心法 (state.xinfaTiers の Tier値で適用、Tier>=2 で tier2、Tier>=5 で tier5)
-  const tiers = state?.xinfaTiers || { 0:5, 1:5, 2:5, 3:5 };
+  const tiers = state?.xinfaTiers || { 0:6, 1:6, 2:6, 3:6 };
   const passive = roleInfo?.passiveSlots || [];
   for (let i = 0; i < passive.length; i++) {
     const xinfaId = passive[i];
     const x = window.WWM_XINFA?.[xinfaId];
     if (!x?.attributeBuff) continue;
-    const tier = tiers[i] ?? tiers[String(i)] ?? 5;
+    const tier = tiers[i] ?? tiers[String(i)] ?? 6;
     const apply = (tk) => {
       const eff = x.attributeBuff[tk]?.effects || {};
       for (const [k, v] of Object.entries(eff)) {
@@ -275,17 +275,37 @@ async function buildStatParams(roleInfo, state) {
 
   r.maxPhysATK = r.maxPhys;
   r.minPhysATK = r.minPhys;
-  r.judgeRes   = 1;
+  // 敵Lv 自動: charLv 95→91, 96-100→96 (アップデートに追加可)
+  const charLv = roleInfo?.level || 95;
+  let enemyLv;
+  if (charLv >= 96) enemyLv = 96;
+  else enemyLv = 91;
+  // 敵Lv テーブル (DEF / 審判耐性)
+  const ENEMY_TABLE = {
+    16:  { def: 10,  jr: 1.0 },
+    51:  { def: 29,  jr: 1.0 },
+    81:  { def: 270, jr: 1.15 },
+    86:  { def: 307, jr: 1.3 },
+    91:  { def: 350, jr: 1.45 },
+    96:  { def: 405, jr: 1.65 },
+    100: { def: 498, jr: 1.85 }
+  };
+  const eRow = ENEMY_TABLE[enemyLv] || ENEMY_TABLE[91];
+  r.physDef    = eRow.def;
+  r.judgeRes   = eRow.jr;
   r.physRes    = 0;
   r.elemRes    = 0;
   r.enemyDebuff= 0;
   r.dmgReduce1 = 0;
   r.dmgReduce2 = 0;
   r.worldLv    = 14;
-  r.martialLv  = 5;
+  r.martialLv  = charLv;  // キャラLvと同一
   r.outerCoeff = 1.0;
   r.statusCoeff= 1.5;
   r.outerAdd   = 230;
+  // 属性強化 (主) = active path 適用 1.5、副 = 1.0
+  r.elemBoostMain = 1.5;
+  r.elemBoostSub  = 1.0;
 
   return r;
 }

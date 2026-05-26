@@ -71,7 +71,7 @@ function openSetupModal() {
 
   function renderWizard() {
     const calcUrl = location.origin + location.pathname.replace(/[^/]*$/, '');
-    const bmSrc = "(async()=>{const C='" + calcUrl + "',H='www.wherewindsmeetgame.com',A='https://s2.easebar.com/78ae9d90792a3e9b/role/roleInfo',T=10000;if(location.host!==H){alert('公式ツール ('+H+') で実行してください');return;}const t=document.createElement('div');t.style.cssText='position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#000c;color:#fff;padding:12px 20px;border-radius:6px;z-index:99999;font:14px sans-serif';t.textContent='WWM-DMGCALC: 読込中...';document.body.appendChild(t);try{const k=(document.cookie.match(/(?:^|;\\s*)token=([^;]+)/)||[])[1];if(!k)throw new Error('未ログインです');const c=new AbortController,d=setTimeout(()=>c.abort(),T);const r=await fetch(A,{headers:{access_token:k},credentials:'include',signal:c.signal});clearTimeout(d);if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();if(!j.data)throw new Error(j.msg||'API err');try{const av=document.querySelector('img[src*=\"head/images\"]')?.src;if(av)j.data._avatarUrl=av;}catch(_){}const s=JSON.stringify(j.data),b=btoa(unescape(encodeURIComponent(s))).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');t.textContent='転送中...';window.open(C+'#import='+b,'_blank');t.textContent='完了';setTimeout(()=>{t.remove();try{window.close();}catch(_){}},800);}catch(e){t.textContent='エラー: '+e.message;t.style.background='#c00';setTimeout(()=>t.remove(),5000);}})();";
+    const bmSrc = "(async()=>{const C='" + calcUrl + "',H='www.wherewindsmeetgame.com',A='https://s2.easebar.com/78ae9d90792a3e9b/role/roleInfo',T=10000;if(location.host!==H){alert('公式ツール ('+H+') で実行してください');return;}const t=document.createElement('div');t.style.cssText='position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#000c;color:#fff;padding:12px 20px;border-radius:6px;z-index:99999;font:14px sans-serif';t.textContent='WWM-DMGCALC: 読込中...';document.body.appendChild(t);try{const k=(document.cookie.match(/(?:^|;\\s*)token=([^;]+)/)||[])[1];if(!k)throw new Error('未ログインです');const c=new AbortController,d=setTimeout(()=>c.abort(),T);const r=await fetch(A,{headers:{access_token:k},credentials:'include',signal:c.signal});clearTimeout(d);if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();if(!j.data)throw new Error(j.msg||'API err');try{const av=document.querySelector('img[src*=\"head/images\"]')?.src;if(av)j.data._avatarUrl=av;}catch(_){}try{const xi=[...document.querySelectorAll('.icon-item .icon img.icon')].map(i=>i.src).filter(s=>s&&s.includes('xinfa/images'));if(xi.length)j.data._xinfaIcons=xi;}catch(_){}const s=JSON.stringify(j.data),b=btoa(unescape(encodeURIComponent(s))).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');t.textContent='転送中...';window.open(C+'#import='+b,'_blank');t.textContent='完了';setTimeout(()=>{t.remove();try{window.close();}catch(_){}},800);}catch(e){t.textContent='エラー: '+e.message;t.style.background='#c00';setTimeout(()=>t.remove(),5000);}})();";
     const bmUrl = 'javascript:' + encodeURIComponent(bmSrc);
     const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
     body.innerHTML = `
@@ -128,7 +128,7 @@ async function openPreviewModal(data, importedAt, savedState) {
   // ステップ間で状態維持。優先度: 引数 savedState > localStorage(IMPORT_STATE_KEY) > default
   const defaultState = {
     enhance: { 1: 50, 2: 50, 10: 50, 11: 50 },
-    xinfaTiers: { 0: 5, 1: 5, 2: 5, 3: 5 },
+    xinfaTiers: { 0: 6, 1: 6, 2: 6, 3: 6 },
     arsenal: {
       path: 'bamboocut',
       tiers: {
@@ -289,7 +289,7 @@ function renderEnhanceArsenalForm(state, roleInfo) {
   const xinfaRows = [0,1,2,3].map(i => {
     const xid = passive[i];
     const xname = xid ? (xinfa[xid]?.names?.ja || `心法ID ${xid}`) : '(空)';
-    const curTier = state.xinfaTiers?.[i] ?? 5;
+    const curTier = state.xinfaTiers?.[i] ?? 6;
     const opts = [0,1,2,3,4,5,6].map(t => `<option value="${t}"${t===curTier?' selected':''}>Tier ${t}</option>`).join('');
     const effText = xid ? _xinfaEffectsText(xinfa[xid], curTier) : '';
     return `
@@ -353,12 +353,12 @@ function renderEnhanceArsenalForm(state, roleInfo) {
 
 function _attachEnhanceArsenalEvents(root, state) {
   // 心法 Tier 変更
-  if (!state.xinfaTiers) state.xinfaTiers = { 0: 5, 1: 5, 2: 5, 3: 5 };
+  if (!state.xinfaTiers) state.xinfaTiers = { 0: 6, 1: 6, 2: 6, 3: 6 };
   root.querySelectorAll('[data-xinfa-slot]').forEach(sel => {
     sel.addEventListener('change', e => {
       const slot = e.target.dataset.xinfaSlot;
       const v = parseInt(e.target.value, 10);
-      state.xinfaTiers[slot] = isNaN(v) ? 5 : v;
+      state.xinfaTiers[slot] = isNaN(v) ? 6 : v;
       // 効果テキスト更新
       const row = e.target.closest('[data-xinfa-row]');
       const effEl = row?.querySelector('.wwm-xinfa-effect');
@@ -660,14 +660,9 @@ function renderPreviewDetail(s, d) {
     </div>
     ${s.wearEquipsDetailed ? `
       <div class="wwm-equip-section">
-        <h3 style="margin:12px 0 6px 0;font-size:14px;">装備詳細</h3>
         ${_SLOT_ORDER.filter(slot => s.wearEquipsDetailed[slot]).map(slot => _renderEquipSlot(slot, s.wearEquipsDetailed[slot])).join('')}
       </div>
     ` : ''}
-    <details class="wwm-raw-details">
-      <summary>生 JSON データ表示</summary>
-      <pre class="wwm-pre">${JSON.stringify(d, null, 2)}</pre>
-    </details>
   `;
 }
 
@@ -707,10 +702,23 @@ function applyImport(data, importedAt, state) {
       window.__WWM_ROLEINFO = data;
       window.WWMSidebar.render(params);
       if (window.WWMGear) window.WWMGear.render(data);
+      if (window.WWMXinfa) window.WWMXinfa.render(data);
       if (window.WWMHero) window.WWMHero.update(params);
+      // calc.js の calculate() (DOM 由来) 先に実行 → donut DOM 上書きされる
+      if (typeof window.calculate === 'function') window.calculate();
+      // computeExpected 再実行で effective params で donut 上書き戻す
+      if (window.WWMHero) window.WWMHero.update(params);
+      // Phase 1: import 直後 baseline score 保存
+      const res = window.__WWM_LAST_RESULT;
+      if (res) {
+        const bonus = (typeof window.__WWM_SET4_BONUS_OF === 'function')
+          ? window.__WWM_SET4_BONUS_OF(data) : 0;
+        window.__WWM_BASELINE = { expected: res.expected, statusScore: res.statusScore + bonus, tier: res.tier, ts: Date.now() };
+        try { localStorage.setItem('wwm_baseline_score_v1', JSON.stringify(window.__WWM_BASELINE)); } catch(e) {}
+        if (window.WWMHero) window.WWMHero.update(params);
+      }
     }).catch(e => console.error('[WWM] stats build failed:', e));
   }
-  if (typeof window.calculate === 'function') window.calculate();
 }
 
 // ── BroadcastChannel リレー ─────────────────────────────────────
@@ -783,6 +791,11 @@ window._AFFIX_DISPLAY_LABELS = _STAT_LABELS;
 // データ無い場合も sidebar は placeholder で描画。
 function _autoLoadLastImport() {
   if ((location.hash || '').startsWith(IMPORT_HASH_PREFIX)) return;  // hash flow が処理
+  // baseline 復元
+  try {
+    const bl = localStorage.getItem('wwm_baseline_score_v1');
+    if (bl) window.__WWM_BASELINE = JSON.parse(bl);
+  } catch(e) {}
   const stored = _loadStored();
   if (!stored?.data) {
     // データ無 → sidebar placeholder のみ描画
@@ -795,7 +808,17 @@ function _autoLoadLastImport() {
       window.__WWM_ROLEINFO = stored.data;
       window.WWMSidebar.render(params);
       if (window.WWMGear) window.WWMGear.render(stored.data);
+      if (window.WWMXinfa) window.WWMXinfa.render(stored.data);
       if (window.WWMHero) window.WWMHero.update(params);
+      // baseline 自動生成 (未保存 or tier 欠落の場合)
+      const res = window.__WWM_LAST_RESULT;
+      const bl = window.__WWM_BASELINE;
+      if (res && (!bl || typeof bl.statusScore !== 'number' || !bl.tier)) {
+        const bonus = (typeof window.__WWM_SET4_BONUS_OF === 'function') ? window.__WWM_SET4_BONUS_OF(stored.data) : 0;
+        window.__WWM_BASELINE = { expected: res.expected, statusScore: res.statusScore + bonus, tier: res.tier, ts: Date.now() };
+        try { localStorage.setItem('wwm_baseline_score_v1', JSON.stringify(window.__WWM_BASELINE)); } catch(e) {}
+        if (window.WWMHero) window.WWMHero.update(params);
+      }
     }).catch(e => console.error('[WWM] auto-load failed:', e));
   }
 }
