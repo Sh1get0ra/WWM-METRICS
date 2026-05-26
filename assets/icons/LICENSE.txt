@@ -1,0 +1,25 @@
+Icons from game-icons.net
+Licensed under CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+Artists:
+- delapouite: samurai-helmet, chest-armor, gauntlet, ring, rope-dart, glaive, katana, handheld-fan, quiver, leg-armor
+- lorc: gem-pendant, pocket-bow, crossed-swords, relic-blade, spears, umbrella
+
+Mapping:
+- helmet.svg       = delapouite/samurai-helmet
+- chest.svg        = delapouite/chest-armor
+- legs.svg         = delapouite/leg-armor
+- hands.svg        = delapouite/gauntlet
+- ring.svg         = delapouite/ring
+- pendant.svg      = lorc/gem-pendant
+- bow.svg          = lorc/pocket-bow
+- archer-disc.svg  = delapouite/quiver
+- dual-blades.svg  = lorc/crossed-swords
+- rope-dart.svg    = delapouite/rope-dart
+- glaive.svg       = delapouite/glaive
+- katana.svg       = delapouite/katana
+- sword.svg        = lorc/relic-blade
+- spear.svg        = lorc/spears
+- fan.svg          = delapouite/handheld-fan
+- umbrella.svg     = lorc/umbrella

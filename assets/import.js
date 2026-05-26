@@ -29,43 +29,95 @@ function _createModal(id, titleKey, contentHtml) {
     </div>`;
   document.body.appendChild(m);
   m.querySelector('.wwm-modal-close').addEventListener('click', () => m.remove());
-  m.addEventListener('click', e => { if (e.target === m) m.remove(); });
+  // backdrop クリック閉じ 抑止 (× ボタンのみ)
   return m;
 }
 
-// ── Setup Modal (Import button → このmodal) ─────────────────────
+// ── Setup Modal (Import button → このmodal、2-step inline) ───────
 function openSetupModal() {
-  const setupUrl = (location.pathname.replace(/[^/]*$/, '') + 'setup.html');
-  const last = getLastImportSummary();
-  const lastHtml = last
-    ? `<div class="wwm-last-import">
-         <strong data-i18n="importLastLabel">${(window.T && T.importLastLabel) || '直前のインポート'}:</strong>
-         <div>${last.roleName} (Lv ${last.level}) — ${last.importedAt}</div>
-         <button class="wwm-btn-secondary" id="wwmReapplyBtn" data-i18n="importReapply">${(window.T && T.importReapply) || '再適用'}</button>
-       </div>`
-    : `<p class="wwm-muted" data-i18n="importNoHistory">${(window.T && T.importNoHistory) || '直前のインポートはありません'}</p>`;
   const officialUrl = 'https://www.wherewindsmeetgame.com/m/2025h5sjgj/jp/';
-  const html = `
-    <p data-i18n="importSetupIntro">${(window.T && T.importSetupIntro) || '公式データツールのデータをこの計算ツールに取り込むには、ブックマークレットの設定が必要です。'}</p>
-    <div class="wwm-btn-row">
-      <button type="button" class="wwm-btn-primary" id="wwmOpenOfficialBtn" data-i18n="importOpenOfficial">${(window.T && T.importOpenOfficial) || '公式データツールを開く'}</button>
-      <a href="${setupUrl}" target="wwm-setup" rel="noopener" class="wwm-btn-secondary" data-i18n="importOpenSetup">${(window.T && T.importOpenSetup) || 'セットアップページを開く'}</a>
-    </div>
-    <hr>
-    <p class="wwm-muted" data-i18n="importUsageHint">${(window.T && T.importUsageHint) || '設定完了後: 公式ツールを開いてブックマークレットをクリックしてください。'}</p>
-    ${lastHtml}
-  `;
-  const m = _createModal('wwmSetupModal', 'importSetupTitle', html);
-  const reBtn = m.querySelector('#wwmReapplyBtn');
-  if (reBtn) reBtn.addEventListener('click', () => {
-    const stored = _loadStored();
-    if (stored) { m.remove(); openPreviewModal(stored.data, stored.importedAt, stored.state); }
-  });
-  const offBtn = m.querySelector('#wwmOpenOfficialBtn');
-  if (offBtn) offBtn.addEventListener('click', () => {
-    // window.open() で開く → bookmarklet 実行後の自己 close を許可するため
-    window.open(officialUrl, 'wwm-official');
-  });
+  const m = _createModal('wwmSetupModal', 'importSetupTitle', '<div id="wwmSetupBody"></div>');
+  const body = m.querySelector('#wwmSetupBody');
+
+  function renderIntro() {
+    const last = getLastImportSummary();
+    const lastHtml = last
+      ? `<div class="wwm-last-import">
+           <strong data-i18n="importLastLabel">${(window.T && T.importLastLabel) || '直前のインポート'}:</strong>
+           <div>${last.roleName} (Lv ${last.level}) — ${last.importedAt}</div>
+           <div class="wwm-reapply-row">
+             <button class="wwm-btn-secondary" id="wwmReapplyBtn" data-i18n="importReapply">${(window.T && T.importReapply) || '再適用'}</button>
+             <span class="wwm-reapply-note">前回データをそのまま再インポート。<br>最新装備で取り込むには 公式データツール から再度ブックマークレット実行。</span>
+           </div>
+         </div>`
+      : `<p class="wwm-muted" data-i18n="importNoHistory">${(window.T && T.importNoHistory) || '直前のインポートはありません'}</p>`;
+    body.innerHTML = `
+      <p data-i18n="importSetupIntro">${(window.T && T.importSetupIntro) || '公式データツールのデータをこの計算ツールに取り込むには、ブックマークレットの設定が必要です。'}</p>
+      <p data-i18n="importUsageHint">${(window.T && T.importUsageHint) || '設定完了後: 公式ツールを開いてブックマークレットをクリックしてください。'}</p>
+      <div class="wwm-btn-row" style="margin-top:16px;margin-bottom:16px;">
+        <button type="button" class="wwm-btn-primary" id="wwmOpenOfficialBtn" data-i18n="importOpenOfficial">${(window.T && T.importOpenOfficial) || '公式データツールを開く'}</button>
+        <button type="button" class="wwm-btn-secondary" id="wwmOpenSetupBtn" data-i18n="importOpenSetup">${(window.T && T.importOpenSetup) || 'ブックマークレット設定'}</button>
+      </div>
+      ${lastHtml}
+    `;
+    const re = body.querySelector('#wwmReapplyBtn');
+    if (re) re.addEventListener('click', () => {
+      const stored = _loadStored();
+      if (stored) { m.remove(); openPreviewModal(stored.data, stored.importedAt, stored.state); }
+    });
+    body.querySelector('#wwmOpenOfficialBtn').addEventListener('click', () => window.open(officialUrl, 'wwm-official'));
+    body.querySelector('#wwmOpenSetupBtn').addEventListener('click', renderWizard);
+  }
+
+  function renderWizard() {
+    const calcUrl = location.origin + location.pathname.replace(/[^/]*$/, '');
+    const bmSrc = "(async()=>{const C='" + calcUrl + "',H='www.wherewindsmeetgame.com',A='https://s2.easebar.com/78ae9d90792a3e9b/role/roleInfo',T=10000;if(location.host!==H){alert('公式ツール ('+H+') で実行してください');return;}const t=document.createElement('div');t.style.cssText='position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#000c;color:#fff;padding:12px 20px;border-radius:6px;z-index:99999;font:14px sans-serif';t.textContent='WWM-DMGCALC: 読込中...';document.body.appendChild(t);try{const k=(document.cookie.match(/(?:^|;\\s*)token=([^;]+)/)||[])[1];if(!k)throw new Error('未ログインです');const c=new AbortController,d=setTimeout(()=>c.abort(),T);const r=await fetch(A,{headers:{access_token:k},credentials:'include',signal:c.signal});clearTimeout(d);if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();if(!j.data)throw new Error(j.msg||'API err');try{const av=document.querySelector('img[src*=\"head/images\"]')?.src;if(av)j.data._avatarUrl=av;}catch(_){}const s=JSON.stringify(j.data),b=btoa(unescape(encodeURIComponent(s))).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');t.textContent='転送中...';window.open(C+'#import='+b,'_blank');t.textContent='完了';setTimeout(()=>{t.remove();try{window.close();}catch(_){}},800);}catch(e){t.textContent='エラー: '+e.message;t.style.background='#c00';setTimeout(()=>t.remove(),5000);}})();";
+    const bmUrl = 'javascript:' + encodeURIComponent(bmSrc);
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    body.innerHTML = `
+      <div class="wwm-setup-tabs">
+        <button type="button" class="wwm-setup-tab${isMobile?'':' active'}" data-tab="pc">PC</button>
+        <button type="button" class="wwm-setup-tab${isMobile?' active':''}" data-tab="mobile">モバイル</button>
+      </div>
+      <div class="wwm-setup-panel" data-panel="pc" ${isMobile?'hidden':''}>
+        <ol class="wwm-setup-steps">
+          <li>ブックマークバー表示 (Chrome/Edge: <code>Ctrl+Shift+B</code>)</li>
+          <li>下のボタンを<b>ドラッグ</b>してブックマークバーへ:<br><a class="wwm-bm-link" id="wwmBmLink" href="${bmUrl}">📥 WWM-DMGCALC インポート</a></li>
+          <li>下部「戻る」ボタンを押下 → 「公式データツールを開く」 → ログイン後、登録したブックマークをクリック</li>
+        </ol>
+      </div>
+      <div class="wwm-setup-panel" data-panel="mobile" ${isMobile?'':'hidden'}>
+        <ol class="wwm-setup-steps">
+          <li>下のコードをコピー:<br><textarea class="wwm-bm-code" id="wwmBmCode" readonly>${bmUrl}</textarea><br><button class="wwm-btn-secondary" id="wwmCopyBtn">コピー</button></li>
+          <li>公式ツールをブックマーク登録</li>
+          <li>ブックマーク編集 → URL をコピーしたコードに置換 → 名前「WWM インポート」</li>
+          <li>公式ツール開いた状態で アドレスバーに「WWM」入力 → 候補タップ</li>
+        </ol>
+      </div>
+      <div class="wwm-btn-row" style="margin-top:16px;">
+        <button type="button" class="wwm-btn-secondary" id="wwmBackBtn">${(window.T && T.importBackBtn) || '戻る'}</button>
+      </div>
+    `;
+    body.querySelectorAll('.wwm-setup-tab').forEach(t => {
+      t.addEventListener('click', () => {
+        const tab = t.dataset.tab;
+        body.querySelectorAll('.wwm-setup-tab').forEach(x => x.classList.toggle('active', x.dataset.tab === tab));
+        body.querySelectorAll('.wwm-setup-panel').forEach(p => p.hidden = (p.dataset.panel !== tab));
+      });
+    });
+    body.querySelector('#wwmBackBtn').addEventListener('click', renderIntro);
+    const cp = body.querySelector('#wwmCopyBtn');
+    if (cp) cp.addEventListener('click', () => {
+      const ta = body.querySelector('#wwmBmCode');
+      ta.select(); ta.setSelectionRange(0, 99999);
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch(e) {}
+      if (navigator.clipboard) navigator.clipboard.writeText(ta.value).then(() => { cp.textContent = 'コピー完了 ✓'; setTimeout(() => cp.textContent = 'コピー', 2000); }).catch(()=>{});
+      else if (ok) { cp.textContent = 'コピー完了 ✓'; setTimeout(() => cp.textContent = 'コピー', 2000); }
+    });
+  }
+
+  renderIntro();
 }
 
 // ── Preview Modal (2-step: card1=preview, card2=enhance/arsenal) ─
@@ -76,6 +128,7 @@ async function openPreviewModal(data, importedAt, savedState) {
   // ステップ間で状態維持。優先度: 引数 savedState > localStorage(IMPORT_STATE_KEY) > default
   const defaultState = {
     enhance: { 1: 50, 2: 50, 10: 50, 11: 50 },
+    xinfaTiers: { 0: 5, 1: 5, 2: 5, 3: 5 },
     arsenal: {
       path: 'bamboocut',
       tiers: {
@@ -115,7 +168,7 @@ async function openPreviewModal(data, importedAt, savedState) {
   }
 
   function renderStep2() {
-    body.innerHTML = renderEnhanceArsenalForm(state);
+    body.innerHTML = renderEnhanceArsenalForm(state, data);
     _attachEnhanceArsenalEvents(body, state);
     body.querySelector('#wwmBackBtn').addEventListener('click', renderStep1);
     body.querySelector('#wwmCancelBtn').addEventListener('click', () => m.remove());
@@ -163,15 +216,90 @@ const _ENHANCE_SLOTS = [
   { id: '11', label: '佩び物' }
 ];
 
-function renderEnhanceArsenalForm(state) {
+// calc.js param名 → 日本語ラベル (game準拠)
+const _XINFA_EFFECT_LABELS_JA = {
+  critRate: '会心率', critRateAdj: '会心率', crit: '会心率',
+  sympathyRate: '会意率', sympathyRateAdj: '会意率', affinity: '会意率',
+  hitRate: '命中率', precision: '命中率',
+  addCritRate: '付加会心率', addSympathyRate: '付加会意率',
+  directCrit: '付加会心率', directAffinity: '付加会意率',
+  critBoost: '会心攻撃強化', critDmgBonus: '会心攻撃強化',
+  sympathyBoost: '会意攻撃強化', affinityDmgBonus: '会意攻撃強化',
+  elemAtkBoost: '属性攻撃強化', attrDmgBonus: '属性攻撃強化',
+  elemPenAdd: '属性貫通', attrPen: '属性貫通',
+  minPhysATKAdd: '最小外功攻撃', maxPhysATKAdd: '最大外功攻撃',
+  minPhys: '最小外功攻撃', maxPhys: '最大外功攻撃',
+  outerPenAdd: '外功貫通', physPen: '外功貫通',
+  physDmgBoost: '外功ダメージ強化', physDmgBonus: '外功ダメージ強化',
+  allMartialBoost: '全武術効果増加', allWeaponDmg: '全武術効果増加',
+  specMartialBoost: '指定武術効果強化',
+  bossBoost: 'BOSSダメージ', bossDmg: 'BOSSダメージ',
+  playerBoost: 'PvPダメージ', playerUnitDmg: 'PvPダメージ',
+  enemyDebuff: '敵デバフ',
+  // path別 min/max攻撃
+  minBellstrike: '最小鋼鳴攻撃', maxBellstrike: '最大鋼鳴攻撃', bellstrikePen: '鋼鳴貫通',
+  minStonesplit: '最小砕岩攻撃', maxStonesplit: '最大砕岩攻撃', stonesplitPen: '砕岩貫通',
+  minSilkbind: '最小糸操攻撃', maxSilkbind: '最大糸操攻撃', silkbindPen: '糸操貫通',
+  minBamboocut: '最小瞬嵐攻撃', maxBamboocut: '最大瞬嵐攻撃', bamboocutPen: '瞬嵐貫通',
+  minVoid: '最小無相攻撃', maxVoid: '最大無相攻撃', voidPen: '無相貫通',
+  // 防御系
+  maxHp: '気血最大値', physDef: '外功防御',
+  // 奇術
+  stMysticDmg: '単体奇術ダメ', stBurstMysticDmg: '単体爆発奇術ダメ',
+  stControlMysticDmg: '単体制御奇術ダメ', areaMysticDmg: '範囲奇術ダメ',
+  areaDmgMysticDmg: '範囲ダメ奇術', areaDebuffMysticDmg: '範囲弱体奇術'
+};
+function _fmtXinfaVal(val) {
+  if (typeof val !== 'number') return String(val);
+  if (val > 0 && val < 1) return '+' + (val * 100).toFixed(1) + '%';
+  return '+' + val.toFixed(1).replace(/\.0$/, '');
+}
+function _xinfaTierEffectsJa(eff) {
+  if (!eff) return '';
+  const parts = [];
+  for (const [k, v] of Object.entries(eff)) {
+    if (typeof v !== 'number') continue;
+    const label = _XINFA_EFFECT_LABELS_JA[k] || k;
+    parts.push(`${label} ${_fmtXinfaVal(v)}`);
+  }
+  return parts.join(', ');
+}
+function _xinfaEffectsText(xinfa, tier) {
+  if (!xinfa?.attributeBuff || tier < 2) return '<span class="wwm-muted">効果なし</span>';
+  const lang = _curLang();
+  const parts = [];
+  const t2eff = xinfa.attributeBuff.tier2?.effects;
+  const t5eff = xinfa.attributeBuff.tier5?.effects;
+  if (tier >= 2 && t2eff && Object.keys(t2eff).length) {
+    if (lang === 'ja') parts.push('T2: ' + _xinfaTierEffectsJa(t2eff));
+    else parts.push('T2: ' + (xinfa.attributeBuff.tier2.raw || ''));
+  }
+  if (tier >= 5 && t5eff && Object.keys(t5eff).length) {
+    if (lang === 'ja') parts.push('T5: ' + _xinfaTierEffectsJa(t5eff));
+    else parts.push('T5: ' + (xinfa.attributeBuff.tier5.raw || ''));
+  }
+  return parts.length ? parts.join(' / ') : '<span class="wwm-muted">効果なし</span>';
+}
+
+function renderEnhanceArsenalForm(state, roleInfo) {
   const T0 = window.T || {};
-  const enhanceRows = _ENHANCE_SLOTS.map(s => `
-    <div class="wwm-enhance-cell">
-      <span class="wwm-enhance-label">${s.label}</span>
-      <input type="number" min="0" max="50" value="${state.enhance[s.id]}"
-             class="wwm-num-input" data-enhance-slot="${s.id}">
-    </div>
-  `).join('');
+  // 心法 4スロット Tier 選択
+  const passive = roleInfo?.passiveSlots || [];
+  const xinfa = window.WWM_XINFA || {};
+  const xinfaRows = [0,1,2,3].map(i => {
+    const xid = passive[i];
+    const xname = xid ? (xinfa[xid]?.names?.ja || `心法ID ${xid}`) : '(空)';
+    const curTier = state.xinfaTiers?.[i] ?? 5;
+    const opts = [0,1,2,3,4,5,6].map(t => `<option value="${t}"${t===curTier?' selected':''}>Tier ${t}</option>`).join('');
+    const effText = xid ? _xinfaEffectsText(xinfa[xid], curTier) : '';
+    return `
+      <div class="wwm-xinfa-cell" data-xinfa-row="${i}">
+        <span class="wwm-xinfa-label">${i+1}. ${xname}</span>
+        <select class="wwm-xinfa-tier" data-xinfa-slot="${i}" ${xid?'':'disabled'}>${opts}</select>
+        <span class="wwm-xinfa-effect">${effText}</span>
+      </div>
+    `;
+  }).join('');
   const pathRadios = _ARSENAL_PATHS.map(p => `
     <label class="wwm-radio-label">
       <input type="radio" name="wwmArsenalPath" value="${p.key}" ${state.arsenal.path === p.key ? 'checked' : ''}>
@@ -204,9 +332,9 @@ function renderEnhanceArsenalForm(state) {
   }).join('');
   return `
     <div class="wwm-step2">
-      <h3 class="wwm-step2-section-title">${T0.importEnhanceTitle || '観音 (Enhance)'}</h3>
-      <p class="wwm-muted" style="font-size:12px;margin:4px 0 8px;">各スロットの強化レベル (0-50)</p>
-      <div class="wwm-enhance-grid">${enhanceRows}</div>
+      <h3 class="wwm-step2-section-title">心法 Tier</h3>
+      <p class="wwm-muted" style="font-size:12px;margin:4px 0 8px;">各心法の到達Tier (1-5)。Tier2 で Tier2効果、Tier5 で Tier5効果 加算。</p>
+      <div class="wwm-xinfa-grid">${xinfaRows}</div>
 
       <h3 class="wwm-step2-section-title" style="margin-top:16px;">${T0.importArsenalTitle || '武庫 (Arsenal)'}</h3>
       <div class="wwm-arsenal-paths">
@@ -224,11 +352,22 @@ function renderEnhanceArsenalForm(state) {
 }
 
 function _attachEnhanceArsenalEvents(root, state) {
-  // 観音 Lv変更
-  root.querySelectorAll('[data-enhance-slot]').forEach(inp => {
-    inp.addEventListener('input', e => {
-      const v = Math.max(0, Math.min(50, parseInt(e.target.value || '0', 10)));
-      state.enhance[e.target.dataset.enhanceSlot] = v;
+  // 心法 Tier 変更
+  if (!state.xinfaTiers) state.xinfaTiers = { 0: 5, 1: 5, 2: 5, 3: 5 };
+  root.querySelectorAll('[data-xinfa-slot]').forEach(sel => {
+    sel.addEventListener('change', e => {
+      const slot = e.target.dataset.xinfaSlot;
+      const v = parseInt(e.target.value, 10);
+      state.xinfaTiers[slot] = isNaN(v) ? 5 : v;
+      // 効果テキスト更新
+      const row = e.target.closest('[data-xinfa-row]');
+      const effEl = row?.querySelector('.wwm-xinfa-effect');
+      if (effEl) {
+        const passive = window.__WWM_ROLEINFO?.passiveSlots || [];
+        const xid = passive[parseInt(slot,10)];
+        const xinfa = window.WWM_XINFA?.[xid];
+        effEl.innerHTML = xinfa ? _xinfaEffectsText(xinfa, state.xinfaTiers[slot]) : '';
+      }
     });
   });
   // 武庫 path 変更 → tier rows 再描画 (stat label 更新)
@@ -363,7 +502,7 @@ const _STAT_LABELS = {
   minStonesplit: '最小砕岩攻撃', maxStonesplit: '最大砕岩攻撃', stonesplitPen: '砕岩貫通',
   minSilkbind: '最小糸操攻撃', maxSilkbind: '最大糸操攻撃', silkbindPen: '糸操貫通',
   minBamboocut: '最小瞬嵐攻撃', maxBamboocut: '最大瞬嵐攻撃', bamboocutPen: '瞬嵐貫通',
-  minVoid: '最小無相攻撃', maxVoid: '最大無相攻撃',
+  minVoid: '最小無相攻撃', maxVoid: '最大無相攻撃', voidPen: '無相貫通',
   precision: '命中率', crit: '会心率', affinity: '会意率',
   allWeaponDmg: '全武学ダメ',
   swordDmg: '剣ダメ強化', spearDmg: '槍ダメ強化', moBladeDmg: '墨刀ダメ強化',
@@ -377,25 +516,33 @@ const _STAT_LABELS = {
   stMysticDmg: '単体奇術ダメ', stBurstMysticDmg: '単体爆発奇術ダメ',
   stControlMysticDmg: '単体制御奇術ダメ強化', areaMysticDmg: '範囲奇術ダメ強化',
   areaDmgMysticDmg: '範囲ダメ奇術強化', areaDebuffMysticDmg: '範囲弱体奇術強化',
-  bleed: '出血ダメ強化', moBladeShield: '墨刀盾',
-  panaceaFanHealing: '薬扇治癒',
-  // 武学固有 (各種Q/Charged/Special)
-  swordQ: '剣Q強化', swordCharged: '剣チャージ強化', swordSpecial: '剣特殊強化',
-  namelessSwordQ: '無銘剣Q強化', namelessSwordCharged: '無銘剣チャージ強化', namelessSwordSpecial: '無銘剣特殊強化',
-  spearQ: '槍Q強化', spearCharged: '槍チャージ強化', spearSpecial: '槍特殊強化',
-  namelessSpearQ: '無銘槍Q強化', namelessSpearCharged: '無銘槍チャージ強化', namelessSpearSpecial: '無銘槍特殊強化',
-  fanQ: '扇Q強化', fanCharged: '扇チャージ強化', fanSpecial: '扇特殊強化',
-  panaceaFanQ: '薬扇Q強化', panaceaFanSpecial: '薬扇特殊強化',
-  moBladeCharged: '墨刀チャージ強化', moBladeSpecial: '墨刀特殊強化',
-  stormbreakerQ: '嵐雷Q強化', stormbreakerCharged: '嵐雷チャージ強化', stormbreakerSpecial: '嵐雷特殊強化',
-  phalanxbaneQ: '破陣Q強化', phalanxbaneCharged: '破陣チャージ強化',
-  infernalTwinbladesQ: '獄炎双剣Q強化', infernalTwinbladesSpecial: '獄炎双剣特殊強化', infernalTwinbladesLight: '獄炎双剣軽撃強化',
-  umbQ: '傘Q強化', umbCharged: '傘チャージ強化', umbDrone: '傘ドローン強化',
-  soulshadeUmbQ: '誘魂傘Q強化', soulshadeUmbCharged: '誘魂傘チャージ強化', soulshadeUmbSpecial: '誘魂傘特殊強化',
-  everspringUmbQ: '千紅傘Q強化', everspringUmbCharged: '千紅傘チャージ強化', everspringUmbSpecial: '千紅傘特殊強化',
-  mortalRopeDartQ: '浮塵縄Q強化', mortalRopeDartCharged: '浮塵縄チャージ強化', mortalRopeDartRodent: '浮塵縄・鼠強化',
-  unfetteredRopeDartQ: '飛縄Q強化', unfetteredRopeDartCharged: '飛縄チャージ強化', unfetteredRopeDartSpecial: '飛縄特殊強化',
-  snowpartingQ: '斬雪Q強化', snowpartingCharged: '斬雪チャージ強化', snowpartingVariedCombo: '斬雪コンボ強化'
+  bleed: '九変の剣 出血ダメ強化',
+  moBladeShield: '断魂の刀 墨刀盾',
+  panaceaFanHealing: '薬川の扇 治癒',
+  // 武学固有 (各種Q/Charged/Special) — 武学名で disambiguate
+  // 剣系
+  swordQ: '九変の剣 Q強化', swordCharged: '九変の剣 チャージ強化', swordSpecial: '九変の剣 特殊強化',
+  namelessSwordQ: '無銘の剣 Q強化', namelessSwordCharged: '無銘の剣 チャージ強化', namelessSwordSpecial: '無銘の剣 特殊強化',
+  // 槍系
+  spearQ: '蛇神の槍 Q強化', spearCharged: '蛇神の槍 チャージ強化', spearSpecial: '蛇神の槍 特殊強化',
+  namelessSpearQ: '無銘の槍 Q強化', namelessSpearCharged: '無銘の槍 チャージ強化', namelessSpearSpecial: '無銘の槍 特殊強化',
+  stormbreakerQ: '嵐雷の槍 Q強化', stormbreakerCharged: '嵐雷の槍 チャージ強化', stormbreakerSpecial: '嵐雷の槍 特殊強化',
+  // 扇系
+  fanQ: '墨筆の扇 Q強化', fanCharged: '墨筆の扇 チャージ強化', fanSpecial: '墨筆の扇 特殊強化',
+  panaceaFanQ: '薬川の扇 Q強化', panaceaFanSpecial: '薬川の扇 特殊強化',
+  // 刀系
+  moBladeCharged: '断魂の刀 チャージ強化', moBladeSpecial: '断魂の刀 特殊強化',
+  phalanxbaneQ: '破陣の刀 Q強化', phalanxbaneCharged: '破陣の刀 チャージ強化',
+  snowpartingQ: '斬雪の刀 Q強化', snowpartingCharged: '斬雪の刀 チャージ強化', snowpartingVariedCombo: '斬雪の刀 軽重撃コンボ強化',
+  // 双剣
+  infernalTwinbladesQ: '獄炎の双剣 Q強化', infernalTwinbladesSpecial: '獄炎の双剣 特殊強化', infernalTwinbladesLight: '獄炎の双剣 軽撃強化',
+  // 傘系
+  umbQ: '千紅の傘 Q強化', umbCharged: '千紅の傘 チャージ強化', umbDrone: '千紅の傘 ドローン強化',
+  soulshadeUmbQ: '誘魂の傘 Q強化', soulshadeUmbCharged: '誘魂の傘 チャージ強化', soulshadeUmbSpecial: '誘魂の傘 特殊強化',
+  everspringUmbQ: '醉夢の傘 Q強化', everspringUmbCharged: '醉夢の傘 チャージ強化', everspringUmbSpecial: '醉夢の傘 特殊強化',
+  // 縄鏢
+  mortalRopeDartQ: '浮塵の縄 Q強化', mortalRopeDartCharged: '浮塵の縄 チャージ強化', mortalRopeDartRodent: '浮塵の縄 鼠強化',
+  unfetteredRopeDartQ: '浮雲の縄 Q強化', unfetteredRopeDartCharged: '浮雲の縄 チャージ強化', unfetteredRopeDartSpecial: '浮雲の縄 特殊強化'
 };
 
 // 弓系 internal ID → 日本語名 (Zb() null返却分の補完)
@@ -629,6 +776,8 @@ window.WWMImport = {
   handleHashOnLoad: handleHashOnLoad,
   getLastImport: getLastImportSummary
 };
+// sidebar.js (Edit modal) から statKey → 日本語ラベル参照用
+window._AFFIX_DISPLAY_LABELS = _STAT_LABELS;
 
 // page load 時: hash がなければ最後の import を localStorage から auto-load。
 // データ無い場合も sidebar は placeholder で描画。

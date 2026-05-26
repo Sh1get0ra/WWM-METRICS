@@ -117,16 +117,22 @@ async function buildStatParams(roleInfo, state) {
     if (ef.maxElemMainAdd) _acc(r, kKeys.max, ef.maxElemMainAdd);
   }
 
-  // 5. 心法 (Tier2 + Tier5 effects 加算、Step2でTier選択追加するまで全Tier max仮)
-  for (const xinfaId of (roleInfo?.passiveSlots || [])) {
+  // 5. 心法 (state.xinfaTiers の Tier値で適用、Tier>=2 で tier2、Tier>=5 で tier5)
+  const tiers = state?.xinfaTiers || { 0:5, 1:5, 2:5, 3:5 };
+  const passive = roleInfo?.passiveSlots || [];
+  for (let i = 0; i < passive.length; i++) {
+    const xinfaId = passive[i];
     const x = window.WWM_XINFA?.[xinfaId];
     if (!x?.attributeBuff) continue;
-    for (const tierKey of ['tier2', 'tier5']) {
-      const eff = x.attributeBuff[tierKey]?.effects || {};
+    const tier = tiers[i] ?? tiers[String(i)] ?? 5;
+    const apply = (tk) => {
+      const eff = x.attributeBuff[tk]?.effects || {};
       for (const [k, v] of Object.entries(eff)) {
         if (typeof v === 'number') _accMapped(r, k, v);
       }
-    }
+    };
+    if (tier >= 2) apply('tier2');
+    if (tier >= 5) apply('tier5');
   }
 
   // 6. セット pieces2 (suffix が 2個以上で発動)
