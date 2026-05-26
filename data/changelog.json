@@ -1,0 +1,35 @@
+{
+  "current": "1.5.0",
+  "entries": [
+    {
+      "version": "1.5.0",
+      "date": "2026-05-26",
+      "items": [
+        "心法パネル追加 (Edit modal で心法/Tier 切替 + Δ Score preview)",
+        "心法アイコン取得 (bookmarklet 拡張)",
+        "STATUS SCORE 計算式 整備 (martialLv=charLv, elemBoostMain=1.5, 敵Lv自動 + DEF/JR table)",
+        "4-set bonus +100 (weapon/bow セット限定、装備に均等配賦)",
+        "Hero panel 刷新 (STATUS SCORE 大型化、baseline ▶ current Δ 表示、tier 連動色 + グロウ)",
+        "装備カード rail デザイン (縦書き武侠表記 + slot 色分け)",
+        "装備カード Score 数値のみ表示、編集時 'xxx ▶ yyy'",
+        "Sidebar 各 stat 値も baseline ▶ current 表示",
+        "Donut 寄与率を横並びコンパクト化",
+        "ヘッダー/フッター/main max-width 1280 中央寄せ",
+        "Esc キーで modal 閉じる",
+        "更新内容ポップアップ追加"
+      ]
+    },
+    {
+      "version": "1.4.0",
+      "date": "2026-05-25",
+      "items": [
+        "Gear Compare modal 大幅拡張 (正方形化、背景アイコン、武学/セット切替)",
+        "affix 種別変更 + %表示 + 重複ルール (idx1 制限なし/idx2-5 重複不可)",
+        "👍 自動判定強化 (武学固有強化 affix → 該当 kongfu 装備時のみ)",
+        "affix ラベル disambiguate (武学名 prefix 付き)",
+        "心法 Tier 初期値 5→6",
+        "backdrop click modal閉じ 抑止"
+      ]
+    }
+  ]
+}

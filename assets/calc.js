@@ -24,7 +24,7 @@ function computeExpected(p) {
   const innerPhys    = 1 + p.weaponBonus;
   const innerElem    = 1 + p.elemAtkBoost;
   // 奇術ダメは重み 0.2 で寄与 (発動頻度想定30%未満)
-  const mysticContrib = ((p.stMysticDmg || 0) + (p.areaMysticDmg || 0)) * 0.2;
+  const mysticContrib = ((p.stMysticDmg || 0) + (p.areaMysticDmg || 0)) * 0.1;
   const outerBoost   = 1 + p.allMartialBoost + p.specMartialBoost + p.bossBoost + (p.playerBoost || 0) + mysticContrib + p.enemyDebuff;
   const reductionZone= (1 - p.dmgReduce1) * (1 - p.dmgReduce2);
 
@@ -34,10 +34,14 @@ function computeExpected(p) {
   const appliedSympathy = Math.min(0.4, sympathyRateAdj) + p.addSympathyRate;
   const appliedCrit     = Math.min(1 - appliedSympathy, Math.min(0.8, critRateAdj) + p.addCritRate);
   const appliedHit      = p.judgeRes === 0 ? Math.min(1, p.hitRate) : Math.min(1, 0.65 + (p.hitRate - 0.65) / p.judgeRes);
-  const pCrit     = Math.min(appliedHit, appliedCrit);
+  // B案: 会意優先順位モデル
+  //   会意 (精確不問・全体枠) → appliedCrit は line 35 で 1-pSym 上限clamp済み
+  //   会心 = 精確命中時のみ発生  → pHit × appliedCrit
+  //   擦り傷 = 非精確命中 かつ 非会意
   const pSympathy = appliedSympathy;
-  const pGraze    = (1 - appliedHit) * (1 - sympathyRateAdj);
-  const pNormal   = 1 - pCrit - pSympathy - pGraze;
+  const pCrit     = appliedHit * appliedCrit;
+  const pGraze    = (1 - appliedHit) * (1 - pSympathy);
+  const pNormal   = Math.max(0, 1 - pCrit - pSympathy - pGraze);
 
   function physPart(atk) { return Math.max(0, atk - p.physDef) * p.outerCoeff + p.outerAdd; }
   function elemPart(m, s) {
@@ -117,7 +121,7 @@ function computeExpected(p) {
 }
 
 // ── STATUS SCORE 固定スキルパラメータ ────────────────────────────
-const SCORE_FIXED = { outerCoeff: 1.0, statusCoeff: 1.5, outerAdd: 230 };
+const SCORE_FIXED = { outerCoeff: 1.5, statusCoeff: 1.5, outerAdd: 230 };
 
 // ── セット効果データ ────────────────────────────────────────────
 // 各項目は対応パラメータへの加算量（outerAtkBoostのみminPhysATK/maxPhysATKに乗算）
@@ -325,10 +329,11 @@ function calculate() {
   const appliedSympathy = Math.min(0.4, sympathyRateAdj) + addSympathyRate;
   const appliedCrit     = Math.min(1 - appliedSympathy, Math.min(0.8, critRateAdj) + addCritRate);
   const appliedHit      = judgeRes === 0 ? Math.min(1, hitRate) : Math.min(1, 0.65 + (hitRate - 0.65) / judgeRes);
-  const pCrit     = Math.min(appliedHit, appliedCrit);
+  // B案: 会意優先順位モデル (会心=精確命中時のみ, 擦り傷=非精確かつ非会意)
   const pSympathy = appliedSympathy;
-  const pGraze    = (1 - appliedHit) * (1 - sympathyRateAdj);
-  const pNormal   = 1 - pCrit - pSympathy - pGraze;
+  const pCrit     = appliedHit * appliedCrit;
+  const pGraze    = (1 - appliedHit) * (1 - pSympathy);
+  const pNormal   = Math.max(0, 1 - pCrit - pSympathy - pGraze);
 
   document.getElementById('dispHitRate').textContent      = (appliedHit      * 100).toFixed(2) + '%';
   document.getElementById('dispCritRate').textContent     = (appliedCrit     * 100).toFixed(2) + '%';

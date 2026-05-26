@@ -66,7 +66,7 @@
         ]},
         { "key": "elemAtkBoost",     "label": { "ja": "属性攻撃強化",              "en": "Elem ATK Boost",       "zh": "属性攻击强化",       "ko": "속성 공격 강화" },       "format": "pct",   "calcKey": "elemAtkBoost" },
         { "key": "allMartialBoost",  "label": { "ja": "全武術効果増加",            "en": "All Martial Boost",    "zh": "全武术效果增加",     "ko": "전 무술 효과 증가" },     "format": "pct",   "calcKey": "allMartialBoost" },
-        { "key": "specMartialBoost", "label": { "ja": "指定武術効果強化",          "en": "Spec Martial Boost",   "zh": "指定武术效果强化",   "ko": "지정 무술 효과 강화" },   "format": "pct",   "calcKey": "specMartialBoost", "expandable": true, "subItems": [
+        { "key": "specMartialBoost", "label": { "ja": "指定武術効果強化",          "en": "Spec Martial Boost",   "zh": "指定武术效果强化",   "ko": "지정 무술 효과 강화" },   "format": "pct",   "calcKey": "_specMartialBoostMax", "expandable": true, "subItems": [
           { "key": "swordDmg",      "label": { "ja": "剣武術ダメ",     "en": "Sword DMG",       "zh": "剑武术伤害",     "ko": "검 무술" },        "format": "pct", "calcKey": "swordDmg" },
           { "key": "spearDmg",      "label": { "ja": "槍武術ダメ",     "en": "Spear DMG",       "zh": "枪武术伤害",     "ko": "창 무술" },        "format": "pct", "calcKey": "spearDmg" },
           { "key": "fanDmg",        "label": { "ja": "扇武術ダメ",     "en": "Fan DMG",         "zh": "扇武术伤害",     "ko": "부채 무술" },      "format": "pct", "calcKey": "fanDmg" },

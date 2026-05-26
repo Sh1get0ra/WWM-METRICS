@@ -226,14 +226,76 @@ async function buildStatParams(roleInfo, state) {
   // weaponType の表記: "dual_blades"等 → camelCase 変換
   const camelize = s => s.replace(/_([a-z])/g, (_,c)=>c.toUpperCase());
   const activeClassKeys = [...activeClasses].map(camelize);
-  let specBoost = 0;
-  for (const cls of activeClassKeys) {
+  // weaponDmg 系 (指定武術効果強化、武器オプション)
+  //  - 同 weapon class 内: 重複不可 → max
+  //  - 異 weapon class (主/副 異種): 各 max を sum / 2 (2武器持ち、各50%発動想定)
+  const perClassMax = [...activeClassKeys].map(cls => {
+    let m = 0;
     for (const k of (WEAPON_CLASS_MAP[cls] || [])) {
       const v = r[k];
-      if (typeof v === 'number') specBoost = Math.max(specBoost, v);
+      if (typeof v === 'number') m = Math.max(m, v);
+    }
+    return m;
+  });
+  // score 計算用: 異 class なら平均 (N/2)
+  const weaponClassEffScore = perClassMax.length > 1
+    ? perClassMax.reduce((a,b) => a+b, 0) / 2
+    : (perClassMax[0] || 0);
+  // sidebar 表示用: max のみ (ゲーム画面準拠)
+  const weaponClassEffDisplay = perClassMax.length ? Math.max(...perClassMax) : 0;
+  let specBoost = weaponClassEffScore;
+  let specBoostBaseDisplay = weaponClassEffDisplay;
+  // 9.5 武学固有 affix (xxxQ/Charged/Special/Light/Rodent/Drone/Healing/Shield/bleed/VariedCombo)
+  //     → active kongfuMain/Sub と一致時のみ specMartialBoost に統合 (max)
+  const KONGFU_SPECIFIC_PREFIXES = [
+    { prefix: 'namelessSword', kongfus: [10102] },
+    { prefix: 'namelessSpear', kongfus: [10202] },
+    { prefix: 'sword',         kongfus: [10101] },
+    { prefix: 'spear',         kongfus: [10201] },
+    { prefix: 'bleed',         kongfus: [10101] },
+    { prefix: 'panaceaFan',    kongfus: [10301] },
+    { prefix: 'fan',           kongfus: [10302] },
+    { prefix: 'stormbreaker',  kongfus: [20103] },
+    { prefix: 'phalanxbane',   kongfus: [20402] },
+    { prefix: 'moBlade',       kongfus: [20401] },
+    { prefix: 'infernalTwinblades', kongfus: [20501] },
+    { prefix: 'everspringUmb', kongfus: [20603] },
+    { prefix: 'soulshadeUmb',  kongfus: [20602] },
+    { prefix: 'umb',           kongfus: [20601] },
+    { prefix: 'mortalRopeDart',kongfus: [20701] },
+    { prefix: 'unfetteredRopeDart', kongfus: [20702] },
+    { prefix: 'snowparting',   kongfus: [20801] }
+  ];
+  const activeKongfus = new Set([roleInfo?.kongfuMain, roleInfo?.kongfuSub].filter(Boolean).map(Number));
+  const sortedPrefixes = [...KONGFU_SPECIFIC_PREFIXES].sort((a,b) => b.prefix.length - a.prefix.length);
+  // display版 = 防具 slot 3/4/5/8 idx 5 除外 (sidebar 表示用)
+  // score版 = 全 affix 加算 (calc.js / damage 計算用)
+  const ARMOR_SLOTS = new Set(['3','4','5','8']);
+  let specBoostDisplay = specBoostBaseDisplay;
+  let specBoostScore = specBoost;
+  for (const [slot, eq] of Object.entries(eqDet)) {
+    const affixes = eq?.exVo?.baseAffixes || [];
+    for (let i = 0; i < affixes.length; i++) {
+      const d = affixes[i]?.equipmentDetails;
+      if (!d) continue;
+      const info = window.WWM_AFFIX?.[d[0]];
+      const sk = info?.statKey;
+      if (!sk || typeof d[1] !== 'number') continue;
+      for (const def of sortedPrefixes) {
+        if (sk.startsWith(def.prefix)) {
+          if (def.kongfus.some(id => activeKongfus.has(id))) {
+            specBoostScore += d[1];
+            if (!(ARMOR_SLOTS.has(String(slot)) && i === 5)) {
+              specBoostDisplay += d[1];
+            }
+          }
+          break;
+        }
+      }
     }
   }
-  r._specMartialBoostMax = specBoost;
+  r._specMartialBoostMax = specBoostDisplay;  // sidebar 表示用 (防具 idx 5 除外)
+  r._specMartialBoostScore = specBoostScore;  // calc.js / score 用 (全 加算)
 
   // 10. 属性増強 = 全 5path 貫通の合計 (sidebar表示用、calc.js elemBoostMain と別key)
   r.attrBoostSum = (r.bellstrikePen||0) + (r.stonesplitPen||0) + (r.silkbindPen||0) + (r.bamboocutPen||0) + (r.voidPen||0);
@@ -244,7 +306,13 @@ async function buildStatParams(roleInfo, state) {
 
   // 12. 適用値 (game UI 表示準拠: 命中率 = capped、会心/会意 = raw/1.45)
   const judgeResApplied = 1.45;
-  r.appliedHit       = Math.min(1, r.precision || 0);
+  // 命中率 applied: judgeRes 経由式 (ゲーム画面表記準拠)
+  // raw < 0.65 → そのまま、>= 0.65 → 0.65 + (raw-0.65)/judgeRes、cap 1.0
+  {
+    const _raw = r.precision || 0;
+    const _jr = r.judgeRes || 1.45;
+    r.appliedHit = _raw < 0.65 ? _raw : Math.min(1, 0.65 + (_raw - 0.65) / _jr);
+  }
   r.appliedCrit      = (r.crit || 0) / judgeResApplied;
   r.appliedSympathy  = (r.affinity || 0) / judgeResApplied;
 
@@ -261,13 +329,19 @@ async function buildStatParams(roleInfo, state) {
   r.critBoost       = r.critDmgBonus     || 0;
   r.sympathyBoost   = r.affinityDmgBonus || 0;
   r.outerPen        = r.physPen        || 0;
-  r.elemPen         = r.attrPen        || 0;
+  // elemPen = active path Pen + 無相貫通 + attrPen
+  const _activePathPen = (() => {
+    const m = { bellstrike:'bellstrikePen', stonesplit:'stonesplitPen', silkbind:'silkbindPen', bamboocut:'bamboocutPen', voidPath:'voidPen' };
+    const k = m[activePath];
+    return k ? (r[k] || 0) : 0;
+  })();
+  r.elemPen         = (r.attrPen || 0) + _activePathPen + (activePath !== 'voidPath' ? (r.voidPen || 0) : 0);
   r.weaponBonus     = r.physDmgBonus   || 0;
   r.elemBoostMain   = 1;
   r.elemBoostSub    = 1;
   r.elemAtkBoost    = r.attrDmgBonus   || 0;
   r.allMartialBoost  = r.allWeaponDmg  || 0;
-  r.specMartialBoost = r._specMartialBoostMax || 0;
+  r.specMartialBoost = r._specMartialBoostScore || 0;
   r.bossBoost       = r.bossDmg        || 0;
   r.playerBoost     = r.playerUnitDmg  || 0;
   r.stMysticDmg     = (r.stControlMysticDmg||0) + (r.stBurstMysticDmg||0) + (r.stMysticDmg||0);
@@ -300,7 +374,7 @@ async function buildStatParams(roleInfo, state) {
   r.dmgReduce2 = 0;
   r.worldLv    = 14;
   r.martialLv  = charLv;  // キャラLvと同一
-  r.outerCoeff = 1.0;
+  r.outerCoeff = 1.5;
   r.statusCoeff= 1.5;
   r.outerAdd   = 230;
   // 属性強化 (主) = active path 適用 1.5、副 = 1.0

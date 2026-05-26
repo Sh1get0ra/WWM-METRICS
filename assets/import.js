@@ -703,6 +703,10 @@ function applyImport(data, importedAt, state) {
       window.WWMSidebar.render(params);
       if (window.WWMGear) window.WWMGear.render(data);
       if (window.WWMXinfa) window.WWMXinfa.render(data);
+      if (window.WWMDiag) window.WWMDiag.render(data, params);
+      if (window.WWMTierLadder) window.WWMTierLadder.render(data, params);
+      if (window.WWMRanking) window.WWMRanking.render(data, params);
+      if (window.WWMOpt) window.WWMOpt.render(data, params);
       if (window.WWMHero) window.WWMHero.update(params);
       // calc.js の calculate() (DOM 由来) 先に実行 → donut DOM 上書きされる
       if (typeof window.calculate === 'function') window.calculate();
@@ -809,6 +813,10 @@ function _autoLoadLastImport() {
       window.WWMSidebar.render(params);
       if (window.WWMGear) window.WWMGear.render(stored.data);
       if (window.WWMXinfa) window.WWMXinfa.render(stored.data);
+      if (window.WWMDiag) window.WWMDiag.render(stored.data, params);
+      if (window.WWMTierLadder) window.WWMTierLadder.render(stored.data, params);
+      if (window.WWMRanking) window.WWMRanking.render(stored.data, params);
+      if (window.WWMOpt) window.WWMOpt.render(stored.data, params);
       if (window.WWMHero) window.WWMHero.update(params);
       // baseline 自動生成 (未保存 or tier 欠落の場合)
       const res = window.__WWM_LAST_RESULT;
