@@ -993,16 +993,19 @@ select.field-select-wide { width: 100%; max-width: 100%; min-width: 140px; font-
   justify-content: center;
   font-family: var(--f-latin);
   font-weight: 800;
-  font-size: clamp(14px, calc(-46.6px + 6.30vw), 30px);
+  font-size: clamp(14px, calc(-34.4px + 5.03vw), 30px);
   letter-spacing: 0.08em;
-  padding: clamp(1px, calc(-10.35px + 1.18vw), 4px) clamp(8px, calc(-37.4px + 4.72vw), 20px);
+  padding: clamp(1px, calc(-8.07px + 0.94vw), 4px) clamp(8px, calc(-28.3px + 3.77vw), 20px);
   border-radius: 2px;
   vertical-align: baseline;
-  margin-left: 12px;
+  margin-left: 8px;
   line-height: 1;
   border: 1px solid transparent;
   position: relative;
   overflow: hidden;
+}
+.tier-badge.tier-SS {
+  padding: clamp(1px, calc(-8.07px + 0.94vw), 4px) clamp(6px, calc(-24.25px + 3.14vw), 16px);
 }
 .tier-badge-compact {
   font-size: var(--text-sm);
@@ -2126,6 +2129,7 @@ body.wwm-layout-active .wwm-app-body .container {
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--gold-deep) transparent;
+  scrollbar-gutter: stable;
 }
 body.wwm-layout-active .wwm-app-body .container::-webkit-scrollbar { width: 6px; }
 body.wwm-layout-active .wwm-app-body .container::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
@@ -2472,7 +2476,7 @@ body.wwm-layout-active .wwm-footer {
 .tier-badge-baseline { /* baseline は current と同等表示 */ }
 .hero-score-baseline,
 .hero-score-num {
-  font-size: clamp(24px, calc(-82px + 11.02vw), 52px);
+  font-size: clamp(24px, calc(-60.7px + 8.81vw), 52px);
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.02em;

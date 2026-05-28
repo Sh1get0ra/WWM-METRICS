@@ -75,7 +75,7 @@ function exportImage() {
   const roleName = ri.roleName || 'unknown';
   const safeName = roleName.replace(/[^\w一-鿿぀-ヿ]/g, '_');
   const level = ri.level || 0;
-  const avatar = ri._avatarUrl || '';
+  const avatar = ri._avatarBase64 || ri._avatarUrl || '';
 
   const baseEl = document.getElementById('heroScoreBaseline');
   const curEl = document.getElementById('heroScore');
@@ -114,7 +114,7 @@ function exportImage() {
     const ico = _expGearIcon(slot, ri);
     if (ico) allIconUrls.push('assets/icons/' + ico + '.svg');
   });
-  const xinfaIcons = ri._xinfaIcons || [];
+  const xinfaIcons = (ri._xinfaIcons || []).map((u, i) => (ri._xinfaIconsBase64 && ri._xinfaIconsBase64[i]) || u);
   xinfaIcons.forEach(u => { if (u) allIconUrls.push(u); });
 
   // SVG inline 化 (各装備のiconName取得)

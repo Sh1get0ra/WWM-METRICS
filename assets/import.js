@@ -975,16 +975,22 @@ function _autoLoadLastImport() {
         if (window.WWMHero) window.WWMHero.update(params);
       }).catch(e => console.error('[WWM] auto-load failed:', e));
     }
-    // baseline 自動生成 (未保存 or tier 欠落)
-    setTimeout(() => {
-      const res = window.__WWM_LAST_RESULT;
-      const bl = window.__WWM_BASELINE;
-      if (res && (!bl || typeof bl.statusScore !== 'number' || !bl.tier)) {
-        const bonus = (typeof window.__WWM_SET4_BONUS_OF === 'function') ? window.__WWM_SET4_BONUS_OF(stored.data) : 0;
-        window.__WWM_BASELINE = { expected: res.expected, statusScore: res.statusScore + bonus, tier: res.tier, ts: Date.now() };
-        try { localStorage.setItem('wwm_baseline_score_v1', JSON.stringify(window.__WWM_BASELINE)); } catch(e) {}
-        if (window.WWMHero && window.__WWM_PARAMS) window.WWMHero.update(window.__WWM_PARAMS);
-      }
+    // baseline 強制再計算 (schema変更/心法effects更新で 旧baselineと乖離 → 現schemaで再生成)
+    // orig data + orig state で計算 (virtual装備変動とのΔ表示用 baseline)
+    setTimeout(async () => {
+      try {
+        const origParams = await window.WWMStats.buildStatParams(stored.data, stored.state);
+        window.computeExpected(origParams);
+        const res = window.__WWM_LAST_RESULT;
+        if (res) {
+          const bonus = (typeof window.__WWM_SET4_BONUS_OF === 'function') ? window.__WWM_SET4_BONUS_OF(stored.data) : 0;
+          window.__WWM_BASELINE = { expected: res.expected, statusScore: res.statusScore + bonus, tier: res.tier, ts: Date.now() };
+          try { localStorage.setItem('wwm_baseline_score_v1', JSON.stringify(window.__WWM_BASELINE)); } catch(e) {}
+          // current params で再描画 (computeExpected が __WWM_LAST_RESULT 上書きしたので戻す)
+          if (window.__WWM_PARAMS) window.computeExpected(window.__WWM_PARAMS);
+          if (window.WWMHero && window.__WWM_PARAMS) window.WWMHero.update(window.__WWM_PARAMS);
+        }
+      } catch(e) { console.warn('[WWM] baseline recalc failed:', e); }
     }, 200);
   }
 }

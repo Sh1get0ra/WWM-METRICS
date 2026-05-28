@@ -1083,7 +1083,8 @@ async function renderSidebar(params) {
   const ri = window.__WWM_ROLEINFO;
   if (ri?.xiuWeiKungFu) totalPower = ri.xiuWeiKungFu.toLocaleString();
   else if (ri?.maxXiuWeiKungFu) totalPower = ri.maxXiuWeiKungFu.toLocaleString();
-  const avatar = ri?._avatarUrl ? `<img class="wwm-sb-avatar" src="${ri._avatarUrl}" alt="avatar">` : '';
+  const _avSrc = ri?._avatarBase64 || ri?._avatarUrl || '';
+  const avatar = _avSrc ? `<img class="wwm-sb-avatar" src="${_avSrc}" alt="avatar">` : '';
   const charName = ri?.roleName ? `${ri.roleName} <span class="wwm-muted">Lv${ri.level||'?'}</span>` : '';
   const importBtnLabel = (window.T && window.T.importBtn) || 'IMPORT';
   const powerLabel = _label(cfg.header?.title, '総合武力');
@@ -1421,9 +1422,11 @@ function renderXinfaGrid(roleInfo) {
   const passive = roleInfo?.passiveSlots || [];
   const lang = _curLang();
   const xinfaMap = window.WWM_XINFA || {};
-  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const state = (typeof _getEffectiveState === 'function') ? _getEffectiveState() : (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
   const tiers = state?.xinfaTiers || {};
-  const xinfaIcons = window.__WWM_ROLEINFO?._xinfaIcons || roleInfo?._xinfaIcons || [];
+  const xinfaIconsRaw = window.__WWM_ROLEINFO?._xinfaIcons || roleInfo?._xinfaIcons || [];
+  const xinfaIconsB64 = window.__WWM_ROLEINFO?._xinfaIconsBase64 || roleInfo?._xinfaIconsBase64 || [];
+  const xinfaIcons = xinfaIconsRaw.map((u, i) => xinfaIconsB64[i] || u);
   const origPassive = window.__WWM_ROLEINFO?.passiveSlots || [];
   const cards = [0,1,2,3].map(i => {
     const xid = passive[i];
@@ -1614,20 +1617,28 @@ function openXinfaEdit(slotIdx) {
       // labelOverride: tier毎に effects key → 表示label の上書き (i18n対応)
       const lang = (typeof _curLang === 'function') ? _curLang() : 'ja';
       const labelOv = def.labelOverride || null;
-      const effStr = hasEff
-        ? Object.entries(effects).map(([k,v]) => {
-            if (labelOv && labelOv[k]) {
-              const ovLabel = labelOv[k][lang] || labelOv[k].ja || labelOv[k].en || k;
-              // 値整形は通常通り
-              const _def = (typeof _XINFA_EFFECT_LABEL !== 'undefined') ? _XINFA_EFFECT_LABEL[k] : null;
-              if (_def?.scoreCustom) return `${ovLabel} +${v || '?'}`;
-              const isPct = _def?.pct;
-              const valStr = isPct ? `${(Math.abs(v) < 1 ? v*100 : v).toFixed(1)}%` : String(v);
-              return `${ovLabel} +${valStr}`;
-            }
-            return _xinfaFmtEffect(k, v);
-          }).join(', ')
-        : (def.raw || '-');
+      // T2/T5 = effects key+値表示 (ゲーム ステ画面準拠、 fixedScoreBonus 単独時は raw)
+      // 他Tier = raw のみ表示 (ゲーム原文説明、 effects/fixedScoreBonus ラベル非表示、 裏で計算反映)
+      let effStr;
+      if (isTwoFive) {
+        // fixedScoreBonus 以外の effects のみ表示
+        const visibleEntries = Object.entries(effects).filter(([k]) => k !== 'fixedScoreBonus');
+        effStr = visibleEntries.length > 0
+          ? visibleEntries.map(([k,v]) => {
+              if (labelOv && labelOv[k]) {
+                const ovLabel = labelOv[k][lang] || labelOv[k].ja || labelOv[k].en || k;
+                const _def = (typeof _XINFA_EFFECT_LABEL !== 'undefined') ? _XINFA_EFFECT_LABEL[k] : null;
+                if (_def?.scoreCustom) return `${ovLabel} +${v || '?'}`;
+                const isPct = _def?.pct;
+                const valStr = isPct ? `${(Math.abs(v) < 1 ? v*100 : v).toFixed(1)}%` : String(v);
+                return `${ovLabel} +${valStr}`;
+              }
+              return _xinfaFmtEffect(k, v);
+            }).join(', ')
+          : (def.raw || '-');
+      } else {
+        effStr = def.raw || '-';
+      }
       let cls = 'wwm-tier-active';
       let warn = '';
       if (!isActive) { cls = 'wwm-tier-unrel'; warn = ' <span class="wwm-tier-warn" title="未解放">⏳</span>'; }
@@ -1648,7 +1659,7 @@ function openXinfaEdit(slotIdx) {
       <div class="wwm-modal-body">
         <div class="wwm-cmp-grid">
           <div class="wwm-cmp-col wwm-cmp-current">
-            ${origRi?._xinfaIcons?.[slotIdx] ? `<div class="wwm-cmp-bg-icon" style="background-image: url('${origRi._xinfaIcons[slotIdx]}');"></div>` : ''}
+            ${(() => { const _ic = origRi?._xinfaIconsBase64?.[slotIdx] || origRi?._xinfaIcons?.[slotIdx]; return _ic ? `<div class="wwm-cmp-bg-icon" style="background-image: url('${_ic}');"></div>` : ''; })()}
             <h3 class="wwm-cmp-title">現在の心法</h3>
             <div class="wwm-cmp-kongfu-header">${origName}</div>
             <div class="wwm-cmp-set-header">Tier ${origTier}<div class="wwm-cmp-set-effect">${_effectsText(origPassive[slotIdx], origTier)}</div></div>
@@ -1745,15 +1756,16 @@ function _getEffectiveRoleInfo() {
   if (!orig) return null;
   const vmap = window.__WWM_VIRTUAL || {};
   const vkf = window.__WWM_VIRTUAL_KONGFU || {};
-  if (!Object.keys(vmap).length && !Object.keys(vkf).length) return orig;
+  const vxi = window.__WWM_VIRTUAL_XINFA;
+  const hasVxiPassive = vxi?.passive && vxi.passive.length;
+  if (!Object.keys(vmap).length && !Object.keys(vkf).length && !hasVxiPassive) return orig;
   const merged = { ...orig, wearEquipsDetailed: { ...(orig.wearEquipsDetailed || {}) } };
   for (const [slot, vEq] of Object.entries(vmap)) {
     if (vEq) merged.wearEquipsDetailed[slot] = vEq;
   }
   if (vkf.kongfuMain) merged.kongfuMain = vkf.kongfuMain;
   if (vkf.kongfuSub) merged.kongfuSub = vkf.kongfuSub;
-  // xinfa virtual
-  const vxi = window.__WWM_VIRTUAL_XINFA;
+  // xinfa virtual (vxi は上で取得済)
   if (vxi?.passive) merged.passiveSlots = [...vxi.passive];
   return merged;
 }

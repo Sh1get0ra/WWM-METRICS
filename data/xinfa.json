@@ -6,24 +6,61 @@
       "zh": "生龙活虎",
       "ko": "맹호의 질주"
     },
-    "modes": {},
-    "defaultMode": "default",
-    "description": "-40% Endurance dash cost / +30% Movement (3s) / +1% Max HP +1000 HP per kill。ダメージ計算非影響。",
+    "description": "-40% Endurance dash cost / +30% Movement (3s) / +1% Max HP +1000 HP per kill。汎用 移動/回復系。",
     "attributeBuff": {
+      "tier0": {
+        "permanent": true,
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "飛燕再翔 突進 気力-10%、 非対人 着地後3s 移動+30%、 撃破で気血回復 (1%+1000)"
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "飛燕再翔 突進 気力減 10%→20%"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
         "raw": "Max HP (Solo Mode Level scaled, rank=blue)",
-        "effects": {},
+        "effects": {
+          "fixedScoreBonus": 50
+        },
         "category": "defensive"
+      },
+      "tier3": {
+        "permanent": true,
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "飛燕再翔 突進速度+30%"
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "撃破時 追加回復 固定気血 max 1000→2400"
       },
       "tier5": {
         "permanent": true,
-        "effects": {},
+        "effects": {
+          "fixedScoreBonus": 50
+        },
         "raw": "Physical DMG Reduction +2.2%",
         "category": "defensive"
+      },
+      "tier6": {
+        "permanent": true,
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "飛燕再翔 突進終了後 3s 全気力消費-10% (非対人 -30%)"
       }
     },
     "rank": "blue"
@@ -35,25 +72,15 @@
       "zh": "晚雪间",
       "ko": "설한의 균열"
     },
-    "modes": {},
-    "defaultMode": "default",
-    "description": "-3% HP +600 HP/sec restore (4s, CD 300s)。HP回復のみ。",
+    "description": "戦闘開始後12s 気血60%未満で 4s雪見効果、 毎秒気血 2%+600回復 (300s CD)。 汎用 回復系。",
     "attributeBuff": {
-      "tier2": {
-        "permanent": true,
-        "worldLv": 14,
-        "needsManualInput": false,
-        "statType": "Max HP",
-        "raw": "Max HP (Solo Mode Level scaled, rank=blue)",
-        "effects": {},
-        "category": "defensive"
-      },
-      "tier5": {
-        "permanent": true,
-        "effects": {},
-        "raw": "Physical Resistance +4.5",
-        "category": "defensive"
-      }
+      "tier0": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "戦闘開始12s以内 気血60%未満で 4s雪見、 毎秒気血2%+600回復 (300s CD)" },
+      "tier1": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "回復値 毎秒3%+600 に上昇" },
+      "tier2": { "permanent": true, "worldLv": 14, "needsManualInput": false, "statType": "Max HP", "raw": "Max HP (Solo Mode Level scaled, rank=blue)", "effects": { "fixedScoreBonus": 50 }, "category": "defensive" },
+      "tier3": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "雪見中 与ダメ10% を気血回復" },
+      "tier4": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "発動間隔 50%短縮 (300s→150s)" },
+      "tier5": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "外功耐性 +4.5", "category": "defensive" },
+      "tier6": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "雪見中 次2回の技 必ず会心効果獲得" }
     },
     "rank": "blue"
   },
@@ -64,25 +91,15 @@
       "zh": "铁身诀",
       "ko": "철포삼"
     },
-    "modes": {},
-    "defaultMode": "default",
-    "description": "Higher stagger resistance (敵数に応じ)。被ダメ影響不明。",
+    "description": "攻撃を受ける時 硬直が出にくくなる (首領/プレイヤー攻撃では非発動)。 汎用 行動妨害軽減系。",
     "attributeBuff": {
-      "tier2": {
-        "permanent": true,
-        "worldLv": 14,
-        "needsManualInput": false,
-        "statType": "Physical Defense",
-        "raw": "Physical Defense (Solo Mode Level scaled, rank=blue)",
-        "effects": {},
-        "category": "defensive"
-      },
-      "tier5": {
-        "permanent": true,
-        "effects": {},
-        "raw": "Physical Resistance +4.5",
-        "category": "defensive"
-      }
+      "tier0": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "攻撃被ダメ時 硬直発生減少 (首領/プレイヤー攻撃 非発動)" },
+      "tier1": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "硬直耐性 周囲敵数に応じ上昇" },
+      "tier2": { "permanent": true, "worldLv": 14, "needsManualInput": false, "statType": "Physical Defense", "raw": "Physical Defense (Solo Mode Level scaled, rank=blue)", "effects": { "fixedScoreBonus": 50 }, "category": "defensive" },
+      "tier3": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "攻撃被ダメ毎 10%確率 5s 外功防御+2% max5stack" },
+      "tier4": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "硬直耐性 ボス戦も有効化" },
+      "tier5": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "外功耐性 +4.5", "category": "defensive" },
+      "tier6": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "烈心効果 反撃ダメ (敵気血max 0.2%相当)、 30s毎1回 5s持続" }
     },
     "rank": "blue"
   },
@@ -93,32 +110,15 @@
       "zh": "山月无影",
       "ko": "월하의 섬광"
     },
-    "modes": {
-      "default": {
-        "allMartialBoost": 0.1
-      }
-    },
-    "defaultMode": "default",
-    "description": "+1.5m range / +10% damage / +10% damage as HP restore",
+    "description": "命門一閃 奇襲距離+1.5m + 与ダメ+10%、 奇襲成功で気血5%回復。 汎用。",
     "attributeBuff": {
-      "tier2": {
-        "permanent": true,
-        "worldLv": 14,
-        "needsManualInput": false,
-        "statType": "Min Physical Attack",
-        "raw": "Min Physical Attack (Solo Mode Level scaled, rank=blue)",
-        "effects": {
-          "minPhysATKAdd": 51.12
-        },
-        "derivedFromGold": true
-      },
-      "tier5": {
-        "permanent": true,
-        "effects": {
-          "physDmgBoost": 0.022
-        },
-        "raw": "Physical DMG Bonus +2.2%"
-      }
+      "tier0": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "命門一閃 奇襲距離+1.5m / 与ダメ+10% / 奇襲成功で気血5%回復" },
+      "tier1": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "奇襲時 回復量 5%→10% に上昇" },
+      "tier2": { "permanent": true, "worldLv": 14, "needsManualInput": false, "statType": "Min Physical Attack", "raw": "Min Physical Attack (Solo Mode Level scaled, rank=blue)", "effects": { "minPhysATKAdd": 51.12 }, "derivedFromGold": true },
+      "tier3": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "奇襲成功 対象から ランダム戦利品+1 確率向上" },
+      "tier4": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "奇襲可能 最大距離 +2.5m" },
+      "tier5": { "permanent": true, "effects": { "physDmgBoost": 0.022 }, "raw": "Physical DMG Bonus +2.2%" },
+      "tier6": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "奇襲成功 すぐ潜伏状態、 20s毎1回発動" }
     },
     "rank": "blue"
   },
@@ -129,28 +129,15 @@
       "zh": "极乐泣血",
       "ko": "핏빛 찬가"
     },
-    "modes": {},
-    "defaultMode": "default",
-    "description": "10% chance Weeping Blood (5 stack max、貫通ダメ)。条件不明確で effects 空。",
+    "description": "10%確率で泣血付与、 5stack蓄積→刺傷ダメ。 汎用攻撃系 (少し強め)。",
     "attributeBuff": {
-      "tier2": {
-        "permanent": true,
-        "worldLv": 14,
-        "needsManualInput": false,
-        "statType": "Max Physical Attack",
-        "raw": "Max Physical Attack (Solo Mode Level scaled, rank=blue)",
-        "effects": {
-          "maxPhysATKAdd": 51.12
-        },
-        "derivedFromGold": true
-      },
-      "tier5": {
-        "permanent": true,
-        "effects": {
-          "critBoost": 0.035
-        },
-        "raw": "Crit DMG Bonus +3.5%"
-      }
+      "tier0": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "10%確率1stack泣血、 5s持続、 1秒毎ダメ、 max5stack、 5stack時解除→刺傷ダメ1回" },
+      "tier1": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "与刺傷ダメ +100%" },
+      "tier2": { "permanent": true, "worldLv": 14, "needsManualInput": false, "statType": "Max Physical Attack", "raw": "Max Physical Attack (Solo Mode Level scaled, rank=blue)", "effects": { "maxPhysATKAdd": 51.12 }, "derivedFromGold": true },
+      "tier3": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "泣血持続終了 5stack未満でも 20%確率 すぐ刺傷ダメ1回" },
+      "tier4": { "permanent": true, "effects": { "globalDmgBoost": 0.005 }, "raw": "泣血付与確率 10%→15%" },
+      "tier5": { "permanent": true, "effects": { "critBoost": 0.035 }, "raw": "Crit DMG Bonus +3.5%" },
+      "tier6": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "刺傷で全泣血解除時 必ず1-2stack残存" }
     },
     "rank": "blue"
   },
@@ -161,25 +148,15 @@
       "zh": "沙摆尾",
       "ko": "사막의 춤"
     },
-    "modes": {},
-    "defaultMode": "default",
-    "description": "morph 状態時 sprint/jump Endurance 削減。ダメージ非影響。",
+    "description": "鱗舞追月 ニシキゴイ変身中 突進/跳躍消費-50%、 形態終了で気血シールド1生成。 汎用。",
     "attributeBuff": {
-      "tier2": {
-        "permanent": true,
-        "worldLv": 14,
-        "needsManualInput": false,
-        "statType": "Physical Defense",
-        "raw": "Physical Defense (Solo Mode Level scaled, rank=blue)",
-        "effects": {},
-        "category": "defensive"
-      },
-      "tier5": {
-        "permanent": true,
-        "effects": {},
-        "raw": "外功ダメージ軽減 +2.2%",
-        "category": "defensive"
-      }
+      "tier0": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "鱗舞追月 ニシキゴイ変身中 突進/跳躍 消費-50%、 形態終了で気血シールド1生成" },
+      "tier1": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "ニシキゴイ形態解除時 気血max 30% 吸収シールド (最大10s、 30s毎1回)" },
+      "tier2": { "permanent": true, "worldLv": 14, "needsManualInput": false, "statType": "Physical Defense", "raw": "Physical Defense (Solo Mode Level scaled, rank=blue)", "effects": { "fixedScoreBonus": 50 }, "category": "defensive" },
+      "tier3": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "ニシキゴイ形態+戦闘離脱状態で 気血/精力 持続回復、 彩砂環境同時で 回復+100%" },
+      "tier4": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "ニシキゴイ形態で 突進/跳躍 持久力消費なし" },
+      "tier5": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "外功ダメージ軽減 +2.2%", "category": "defensive" },
+      "tier6": { "permanent": true, "effects": { "fixedScoreBonus": 50 }, "raw": "ニシキゴイ形態 採集時 30%確率 報酬2倍 (美食採集クリと重複可)" }
     },
     "rank": "blue"
   },
@@ -334,7 +311,7 @@
       "tier5": {
         "permanent": true,
         "effects": {},
-        "raw": "Physical Resistance +5.1",
+        "raw": "外功耐性 +5.1",
         "category": "defensive"
       }
     },
@@ -536,10 +513,22 @@
       "zh": "四时无常",
       "ko": "계절의 순환"
     },
-    "modes": {},
-    "defaultMode": "default",
-    "description": "Dual-weapon skill triggers random effect。ランダム発動、effects 不明。",
+    "description": "武変技発動完了時 春/夏/秋/冬 1効果ランダム獲得、 30s/10s稼働",
     "attributeBuff": {
+      "tier0": {
+        "permanent": true,
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "武変技後 春/夏/秋/冬 1効果ランダム獲得 (10s持続、 30s CD)"
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "ステ上昇効果 持続時間 10s→12s"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -552,12 +541,33 @@
         },
         "derivedFromGold": true
       },
+      "tier3": {
+        "permanent": true,
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "30%確率 効果2個ランダム獲得"
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "武変技ダメ/回復成功時もランダム発動、 春/冬確率大幅減"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
           "physDmgBoost": 0.028
         },
         "raw": "Physical Damage Bonus +2.8%"
+      },
+      "tier6": {
+        "permanent": true,
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "15%確率 3個獲得、 5%確率 4個全部獲得 (5m未満 冬非獲得)"
       }
     },
     "rank": "gold"
@@ -672,14 +682,24 @@
       "zh": "无名心法",
       "ko": "무명 심법"
     },
-    "modes": {
-      "maxConsume": {
-        "allMartialBoost": 0.2
-      }
-    },
-    "defaultMode": "default",
-    "description": "up to +20% damage from Endurance consumption。最大時 +20%。",
+    "description": "無銘の剣 専用心法。 複数剣気 + 気湧効果。",
     "attributeBuff": {
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [10102],
+        "effects": {
+          "globalDmgBoost": 0.1
+        },
+        "raw": "家無き者 2段溜め完了で複数剣気、 気力消費でダメ+1.5%/pt max30%"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [10102],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "非戦闘 退路の道剣気5s 真気シールドなしで複数剣気発射可"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -691,12 +711,36 @@
         },
         "derivedFromGold": true
       },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [10102],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "力尽き対象命中時 軽傷化なし + 非プレイヤー力尽き 第三剣気必ず会意"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [10102],
+        "effects": {
+          "globalDmgBoost": 0.05
+        },
+        "raw": "溜め技 複数剣気5s 連発可"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
           "addSympathyRate": 0.023
         },
         "raw": "Direct Affinity Rate +2.3%"
+      },
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [10102],
+        "effects": {
+          "globalDmgBoost": 0.1
+        },
+        "raw": "複数剣気後 気湧獲得 (気力+20、 5s即発射1回、 CD 20s -1s/首領命中 max-8s)"
       }
     },
     "rank": "gold"
@@ -811,10 +855,24 @@
       "zh": "剑气斩波",
       "ko": "광풍의 검기"
     },
-    "modes": {},
-    "defaultMode": "default",
-    "description": "5 stack Bleed 消費で高ダメバースト。条件付。",
+    "description": "九変の剣 専用心法。 縦横の剣追撃 + 流血バースト。",
     "attributeBuff": {
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [10101],
+        "effects": {
+          "globalDmgBoost": 0.1
+        },
+        "raw": "武術/特殊/溜め技後 納刀中完璧タイミング再押→縦横の剣追撃、 5stack流血で大流血ダメ"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [10101],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "縦横剣発動成功で気力+8"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -826,12 +884,36 @@
         },
         "derivedFromGold": true
       },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [10101],
+        "effects": {
+          "globalDmgBoost": 0.05
+        },
+        "raw": "大量流血で縦横剣意蓄積、 最大時 次大量流血必ず会意"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [10101],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "縦横剣意状態中 大量出血ダメ +15%"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
           "addSympathyRate": 0.023
         },
         "raw": "Direct Affinity Rate +2.3%"
+      },
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [10101],
+        "effects": {
+          "globalDmgBoost": 0.1
+        },
+        "raw": "縦横剣意中 大量流血で流血+2stack保持、 蓄積最大→会意後 20pt剣意保持で蓄積継続"
       }
     },
     "rank": "gold"
@@ -952,10 +1034,24 @@
       "zh": "花上月令",
       "ko": "월광의 계율"
     },
-    "modes": {},
-    "defaultMode": "default",
-    "description": "2 stack max、+10% damage taken from Ballistic Skills (10s)。被ダメ系。",
+    "description": "千紅の傘 専用心法。 春恨み連続命中効果 + 弾道技ダメ強化。",
     "attributeBuff": {
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [20601],
+        "effects": {
+          "globalDmgBoost": 0.1
+        },
+        "raw": "春恨み 2stack 連続命中効果付与、 弾道技ダメ+10% 10s持続"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [20601],
+        "effects": {
+          "globalDmgBoost": 0.05
+        },
+        "raw": "連続命中効果 弾道技ダメ 10%→20% (差分+10%)"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -967,12 +1063,36 @@
         },
         "derivedFromGold": true
       },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [20601],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "春恨み発動速度+30%、 連続命中効果持続+15s延長"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [20601],
+        "effects": {
+          "globalDmgBoost": 0.1
+        },
+        "raw": "対人戦以外 春風飛舞 連続命中対象命中で 与ダメ+10%、 拡散対象 3→5"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
           "critBoost": 0.044
         },
         "raw": "Critical DMG Bonus +4.4%"
+      },
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [20601],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "春恨み max 3stack、 連続命中対象命中→ CD即-5s、 繁花+25 (スキル1回毎1回発動)"
       }
     },
     "rank": "gold"
@@ -984,10 +1104,24 @@
       "zh": "君臣药",
       "ko": "군신의 묘약"
     },
-    "modes": {},
-    "defaultMode": "default",
-    "description": "+10% healing / +3 Dew +2 Essence。HP回復のみ。",
+    "description": "薬川の扇 専用心法。 ヒーラー支援/回復系。",
     "attributeBuff": {
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [10301],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "雲起の座 水人治療+10%、 範囲内自身いれば毎回露水+1"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [10301],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "召喚水人治療受け時 追加露水+2"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -999,12 +1133,36 @@
         },
         "derivedFromGold": true
       },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [10301],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "白雲無尽発動後 自身+治療対象に 6s持続治療"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [10301],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "白雲無尽 発動条件 露水50消費に変更"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
           "addCritRate": 0.046
         },
         "raw": "Direct Critical Rate +4.6%"
+      },
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [10301],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "薬川装備時 非プレイヤー被ダメ-20%、 重傷時 7s復活水人召喚 (CD 120s、 軽減効果120s無効)"
       }
     },
     "rank": "gold"
@@ -1112,10 +1270,24 @@
       "zh": "山河绝韵",
       "ko": "지축의 분노"
     },
-    "modes": {},
-    "defaultMode": "default",
-    "description": "Tier 3 Heavy Attack counter (10s CD)。条件付バースト。",
+    "description": "断魂の刀 専用心法。 防御カウンター + 重撃溜め技バースト。",
     "attributeBuff": {
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [20401],
+        "effects": {
+          "globalDmgBoost": 0.1
+        },
+        "raw": "断魂刀防御成功→特殊カウンター + 溜め不要3段重撃溜め技 (10s CD)、 マルチ首領防御で15s絶韻stack"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [20401],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "防御成功 20%確率 戦意+1追加、 対人戦 気力自然回復速度上昇"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -1127,12 +1299,36 @@
         },
         "derivedFromGold": true
       },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [20401],
+        "effects": {
+          "globalDmgBoost": 0.05
+        },
+        "raw": "免蓄重撃溜め技 威力 1→3段階"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [20401],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "防御成功で 特殊カウンター技 発動間隔 -50% (10→5s)"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
           "critBoost": 0.044
         },
         "raw": "Critical DMG Bonus +4.4%"
+      },
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [20401],
+        "effects": {
+          "globalDmgBoost": 0.1
+        },
+        "raw": "三段階軽重撃/派生 戦意1消費でダメ+25% (軽重撃 2マスで+50%)"
       }
     },
     "rank": "gold"
@@ -1160,7 +1356,7 @@
       "tier5": {
         "permanent": true,
         "effects": {},
-        "raw": "Physical Resistance +5.1",
+        "raw": "外功耐性 +5.1",
         "category": "defensive"
       }
     },
@@ -1458,10 +1654,24 @@
       "zh": "千军的咆哮",
       "ko": "천군의 함성"
     },
-    "modes": {},
-    "defaultMode": "default",
-    "description": "1st および 3rd throw で Phantom 召喚、catch で Resonance トリガー。",
+    "description": "醉夢の傘 専用心法。 紅綃香断 幻影傘召喚+共鳴ダメ。",
     "attributeBuff": {
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [20603],
+        "effects": {
+          "globalDmgBoost": 0.1
+        },
+        "raw": "紅綃香断 最初投げ→幻影傘召喚、 3回毎1本召喚、 完璧キャッチ/召喚時 共鳴範囲ダメ"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [20603],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "完全防御 傘受け成功で 残紅+10回復"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -1473,12 +1683,36 @@
         },
         "derivedFromGold": true
       },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [20603],
+        "effects": {
+          "outerPen": 10
+        },
+        "raw": "共鳴ダメ受敵 幻鳴 (5s) 外功耐性-2 max5stack (=自分outerPen+10 ×0.5実効+5)"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [20603],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "共鳴ダメ+20%、 周囲敵引き寄せ (首領無効、 20s CD)"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
           "physDmgBoost": 0.028
         },
         "raw": "外功攻撃強化 +2.8%"
+      },
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [20603],
+        "effects": {
+          "globalDmgBoost": 0.1
+        },
+        "raw": "紅綃香断 投げ毎回 幻影傘召喚、 召喚瞬間 共鳴1回発生"
       }
     },
     "rank": "gold"
@@ -1592,10 +1826,24 @@
       "zh": "霜天白夜",
       "ko": "서리 백야"
     },
-    "modes": {},
-    "defaultMode": "default",
-    "description": "霜天白夜 (砕岩path新心法、ID 551 roleInfo経由確定 2026-05-25)",
+    "description": "斬雪の刀 専用心法。 受け流し→雪払いバースト + 忘機効果。",
     "attributeBuff": {
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [20801],
+        "effects": {
+          "globalDmgBoost": 0.1
+        },
+        "raw": "斬雪刀 受け流し→雪払い発動、 刀勢-1で素早斬撃 (強靭)、 非プレイヤー命中で+36%気血ダメ (2s毎)"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [20801],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "鉄衣戌魂中 撥雪尋春命中→横刀安西軍追撃"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -1605,12 +1853,36 @@
         },
         "raw": "最小外功攻撃 +63.9"
       },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [20801],
+        "effects": {
+          "fixedScoreBonus": 50
+        },
+        "raw": "塚上の霜/横刀武変 完全使用後 雪払い発動可、 命中で刀勢0.5還元"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [20801],
+        "effects": {
+          "globalDmgBoost": 0.1
+        },
+        "raw": "飛鴻踏雪 熱血冷め難し 4stack、 雪払い1消費で非プレイヤー気血ダメ+40%"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
           "addCritRate": 0.046
         },
         "raw": "付加会心率 +4.6%"
+      },
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [20801],
+        "effects": {
+          "globalDmgBoost": 0.05
+        },
+        "raw": "雪払いダメ+10%、 忘機 (3s塚上霜1回 雪払いCD解除)、 力尽き首領命中で 熱血冷め難し追加UP + 忘機CD解除"
       }
     },
     "rank": "gold"
