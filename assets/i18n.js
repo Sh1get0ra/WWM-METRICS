@@ -66,7 +66,7 @@ const TRANSLATIONS = {
     importEnhanceTitle:'観音 (Enhance)', importArsenalTitle:'武庫 (Arsenal)',
     importArsenalPath:'武庫種別', importArsenalPeaked:'頂点',
     importConfirmMsg:'現在設定されている数値がインポートデータに差し変わりますがよろしいですか？', importDone:'インポート完了',
-    affixRankingTab:'調律/定音期待値', affixRankingTitle:'調律/定音期待値ランキング',
+    affixRankingTab:'調律/定音番付', affixRankingTitle:'調律/定音番付',
     optimizationTitle:'装備最適化提案',
     diagTitle:'弱点指摘 / Diagnostics',
     diagHitOver:'命中率過多 (現 {0}% / cap {1}% / 超過 +{2}%)',
@@ -105,7 +105,7 @@ const TRANSLATIONS = {
     penPhys:'外功貫通', penVoid:'無相貫通', penPhysShort:'外功', penVoidShort:'無相', penOther:'他',
     pathPhys:'汎用', pathBellstrike:'鋼鳴', pathStonesplit:'砕岩', pathSilkbind:'糸操', pathBamboocut:'瞬嵐',
     martialIndex:'武格指数', martialHistoryTab:'武格履歴', historyEmpty:'まだ履歴がありません。インポート時に自動記録されます。', qualityTab:'ロール品質', qualityEmpty:'インポート後 装備データから品質を表示', minElemSub:'最小属性攻撃(副)', maxElemSub:'最大属性攻撃(副)',
-    effectUnset:'未代入', globalDmgBoost:'全ダメージ強化',
+    effectUnset:'未代入', globalDmgBoost:'全ダメージ強化', effAnalysisTitle:'調律/定音効率分析',
     locale:'ja-JP',
   },
   en: {
@@ -213,7 +213,7 @@ const TRANSLATIONS = {
     penPhys:'Phys Pen', penVoid:'Void Pen', penPhysShort:'Phys', penVoidShort:'Void', penOther:'other',
     pathPhys:'Universal', pathBellstrike:'Bellstrike', pathStonesplit:'Stonesplit', pathSilkbind:'Silkbind', pathBamboocut:'Bamboocut',
     martialIndex:'Martial Index', martialHistoryTab:'Martial Record', historyEmpty:'No history yet. Will auto-record on import.', qualityTab:'Roll Quality', qualityEmpty:'Quality will display after import', minElemSub:'Sub Elem ATK Min', maxElemSub:'Sub Elem ATK Max',
-    effectUnset:'Unset', globalDmgBoost:'Total DMG Boost',
+    effectUnset:'Unset', globalDmgBoost:'Total DMG Boost', effAnalysisTitle:'Stat Efficiency Analysis',
     locale:'en-US',
   },
   zh: {
@@ -321,7 +321,7 @@ const TRANSLATIONS = {
     penPhys:'外功穿透', penVoid:'无相穿透', penPhysShort:'外功', penVoidShort:'无相', penOther:'其他',
     pathPhys:'通用', pathBellstrike:'钢鸣', pathStonesplit:'碎岩', pathSilkbind:'丝操', pathBamboocut:'瞬岚',
     martialIndex:'武格指数', martialHistoryTab:'武格履历', historyEmpty:'暂无记录。导入时将自动记录。', qualityTab:'装备品质', qualityEmpty:'导入后从装备数据显示品质', minElemSub:'最小属性攻击(副)', maxElemSub:'最大属性攻击(副)',
-    effectUnset:'未填', globalDmgBoost:'全伤害强化',
+    effectUnset:'未填', globalDmgBoost:'全伤害强化', effAnalysisTitle:'状态效率分析',
     locale:'zh-CN',
   },
   ko: {
@@ -429,7 +429,7 @@ const TRANSLATIONS = {
     penPhys:'외공 관통', penVoid:'무상 관통', penPhysShort:'외공', penVoidShort:'무상', penOther:'기타',
     pathPhys:'범용', pathBellstrike:'명금', pathStonesplit:'열석', pathSilkbind:'견사', pathBamboocut:'파죽',
     martialIndex:'무격 지수', martialHistoryTab:'무격 이력', historyEmpty:'아직 기록이 없습니다. 가져오기 시 자동 기록됩니다.', qualityTab:'롤 품질', qualityEmpty:'가져오기 후 장비 데이터로 품질 표시', minElemSub:'최소 속성 공격(부)', maxElemSub:'최대 속성 공격(부)',
-    effectUnset:'미입력', globalDmgBoost:'전체 피해 증가',
+    effectUnset:'미입력', globalDmgBoost:'전체 피해 증가', effAnalysisTitle:'스탯 효율 분석',
     locale:'ko-KR',
   },
 };

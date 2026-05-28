@@ -168,6 +168,8 @@ function setTheme(theme) {
   const tog = document.getElementById('themeToggle');
   if (tog) tog.textContent = theme === 'light' ? '☾' : '☀';
   try { localStorage.setItem('wwm_theme', theme); } catch(e) {}
+  // theme切替時 hero score色 (TIER_COLOR) 再適用
+  if (window.WWMHero && window.__WWM_PARAMS) window.WWMHero.update(window.__WWM_PARAMS);
 }
 function initTheme() {
   let saved;

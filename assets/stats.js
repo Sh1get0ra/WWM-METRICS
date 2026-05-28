@@ -27,6 +27,7 @@ async function _ensureDicts() {
   if (!window.WWM_XINFA)     tasks.push(fetch('data/xinfa.json').then(r=>r.json()).then(d=>window.WWM_XINFA=d).catch(()=>{}));
   if (!window.WWM_SETS)      tasks.push(fetch('data/sets.json').then(r=>r.json()).then(d=>window.WWM_SETS=d).catch(()=>{}));
   if (!window.WWM_AFFIX)     tasks.push(fetch('data/affix.json').then(r=>r.json()).then(d=>window.WWM_AFFIX=d).catch(()=>{}));
+  if (!window.WWM_EQUIP_BASE_BY_LV) tasks.push(fetch('data/equip_base_by_lv.json').then(r=>r.json()).then(d=>window.WWM_EQUIP_BASE_BY_LV=d).catch(()=>{}));
   await Promise.all(tasks);
 }
 
@@ -67,6 +68,21 @@ function _accMapped(r, key, val) {
   _acc(r, _CALCJS_TO_WWM[key] || key, val);
 }
 
+// 装備 slot + baseAttrs から 装備個別Lv 逆引き
+function _inferEquipLv(slot, eq) {
+  if (!eq?.exVo?.baseAttrs) return null;
+  const tbl = window.WWM_EQUIP_BASE_BY_LV?.slots?.[String(slot)];
+  if (!tbl) return null;
+  const lvList = window.WWM_EQUIP_BASE_BY_LV?._lvList || [91, 86, 81, 71];
+  for (const lv of lvList) {
+    const ref = tbl[String(lv)];
+    if (!ref) continue;
+    const match = Object.entries(ref).every(([k, v]) => eq.exVo.baseAttrs[k] === v);
+    if (match) return lv;
+  }
+  return null;
+}
+
 async function buildStatParams(roleInfo, state) {
   await _ensureDicts();
   const base = window.WWM_LV95_BASE?.stats || {};
@@ -76,8 +92,13 @@ async function buildStatParams(roleInfo, state) {
     if (typeof roleInfo?.[k] === 'number') r[k] = roleInfo[k];
   }
 
-  // 1. 装備 baseAttrs
+  // 1. 装備 baseAttrs (+ 装備個別Lv 逆引き)
   const eqDet = roleInfo?.wearEquipsDetailed || {};
+  for (const [slot, eq] of Object.entries(eqDet)) {
+    if (eq?.exVo && eq.exVo._inferredLv == null) {
+      eq.exVo._inferredLv = _inferEquipLv(slot, eq);
+    }
+  }
   for (const eq of Object.values(eqDet)) {
     const ba = eq?.exVo?.baseAttrs || {};
     if (ba.MIN_W_ATK) _acc(r, 'minPhys', ba.MIN_W_ATK);

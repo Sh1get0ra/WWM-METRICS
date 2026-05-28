@@ -474,13 +474,83 @@ async function renderAffixRanking(roleInfo, params) {
       <span class="wwm-rank-delta">+${r.delta.toFixed(1)}</span>
     </div>
   `).join('');
+  // 効率分析: 各 target を input可能化、 入力値から Δ即時再計算
+  const _STAT_META = {
+    'minPhysATK':       { lbl: SL.minPhys || '最小外功攻撃',        pct: false, step: '0.1' },
+    'maxPhysATK':       { lbl: SL.maxPhys || '最大外功攻撃',        pct: false, step: '0.1' },
+    'minElemMain':      { lbl: pathKeys[0] ? (SL[pathKeys[0]] || pathKeys[0]) : '最小属性ATK', pct: false, step: '0.1' },
+    'maxElemMain':      { lbl: pathKeys[1] ? (SL[pathKeys[1]] || pathKeys[1]) : '最大属性ATK', pct: false, step: '0.1' },
+    'minElemSub':       { lbl: (window.T && T.minElemSub) || '最小属性攻撃(副)', pct: false, step: '0.1' },
+    'maxElemSub':       { lbl: (window.T && T.maxElemSub) || '最大属性攻撃(副)', pct: false, step: '0.1' },
+    'critRate':         { lbl: SL.crit || '会心率',           pct: true,  step: '0.1' },
+    'sympathyRate':     { lbl: SL.affinity || '会意率',       pct: true,  step: '0.1' },
+    'hitRate':          { lbl: SL.precision || '命中率',      pct: true,  step: '0.1' },
+    'outerPen':         { lbl: (window.T && T.penPhys) || '外功貫通',  pct: false, step: '0.1' },
+    'elemPen':          { lbl: (window.T && T.penVoid) || '無相貫通',  pct: false, step: '0.1' },
+    '_momentum':        { lbl: SL.momentum || '力',           pct: false, step: '1' },
+    '_agility':         { lbl: SL.agility || '速',            pct: false, step: '1' },
+    '_power':           { lbl: SL.power || '会',              pct: false, step: '1' },
+    'stMysticDmg':      { lbl: SL.stMysticDmg || '奇術ダメ',  pct: true,  step: '0.1' },
+    'allMartialBoost':  { lbl: SL.allWeaponDmg || '全武学効果', pct: true, step: '0.1' }
+  };
+  const effRows = targets.map(t => {
+    const meta = _STAT_META[t.key] || { lbl: t.key, pct: false, step: '0.1' };
+    const dispVal = meta.pct ? ((t.delta || 0) * 100).toFixed(1) : (t.delta || 0).toFixed(1);
+    const r0 = results.find(r => r.label === t.label);
+    return `
+      <div class="wwm-eff-row" data-eff-key="${t.key}">
+        <span class="wwm-eff-label">${meta.lbl}</span>
+        <span class="wwm-eff-input-wrap">
+          <input class="wwm-eff-input" type="number" step="${meta.step}" value="${dispVal}" data-key="${t.key}" data-pct="${meta.pct?'1':'0'}"${t.statKey?` data-statkey="${t.statKey}"`:''}>${meta.pct?'<span class="wwm-eff-pct">%</span>':''}
+        </span>
+        <span class="wwm-eff-delta" data-delta-for="${t.key}">+${(r0?.delta || 0).toFixed(1)}</span>
+      </div>
+    `;
+  }).join('');
   root.innerHTML = `
-    <div class="wwm-analysis-card wwm-modal-square">
+    <div class="wwm-analysis-card wwm-modal-square wwm-rank-grid">
       <div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/scales.svg');"></div>
-      <div class="wwm-analysis-header"><h3>${(window.T&&T.affixRankingTitle)||'調律/定音期待値ランキング'}</h3></div>
-      <div class="wwm-rank-body">${rows}</div>
+      <div class="wwm-rank-col">
+        <div class="wwm-analysis-header"><h3>${(window.T&&T.affixRankingTitle)||'調律/定音期待値ランキング'}</h3></div>
+        <div class="wwm-rank-body">${rows}</div>
+      </div>
+      <div class="wwm-eff-col">
+        <div class="wwm-analysis-header"><h3>${(window.T&&T.effAnalysisTitle)||'ステータス効率分析'}</h3></div>
+        <div class="wwm-eff-body">${effRows}</div>
+      </div>
     </div>
   `;
+  // input change → 該当 stat patch → ΔScore更新 (debounce 250ms)
+  const _effDebounce = {};
+  root.querySelectorAll('.wwm-eff-input').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const k = inp.dataset.key;
+      if (_effDebounce[k]) clearTimeout(_effDebounce[k]);
+      _effDebounce[k] = setTimeout(async () => {
+        const raw = parseFloat(inp.value);
+        if (isNaN(raw)) return;
+        const isPct = inp.dataset.pct === '1';
+        const delta = isPct ? raw / 100 : raw;
+        const statKey = inp.dataset.statkey || null;
+        try {
+          let p2;
+          if (statKey) {
+            const base5 = window.WWM_LV95_BASE?.stats?.[statKey] || 129;
+            const riPatched = JSON.parse(JSON.stringify(roleInfo));
+            riPatched[statKey] = (riPatched[statKey] || base5) + delta;
+            p2 = await window.WWMStats.buildStatParams(riPatched, state);
+          } else {
+            p2 = await window.WWMStats.buildStatParams(roleInfo, state);
+            p2[k] = (p2[k] || 0) + delta;
+          }
+          window.computeExpected(p2);
+          const newScore = (window.__WWM_LAST_RESULT?.statusScore || 0) + _set4Bonus(roleInfo);
+          const dEl = root.querySelector(`[data-delta-for="${k}"]`);
+          if (dEl) dEl.textContent = `+${(newScore - baseScore).toFixed(1)}`;
+        } catch(e) {}
+      }, 250);
+    });
+  });
   // 復元
   try {
     const p3 = await window.WWMStats.buildStatParams(roleInfo, state);
@@ -2285,8 +2355,9 @@ function openGearEdit(slot) {
         ? (needsMul ? (val*100).toFixed(1) : val.toFixed(1))
         : (typeof val === 'number' ? val.toFixed(2).replace(/\.00$/,'') : val);
       const step = isPct ? '0.1' : '0.01';
-      // max 値算出: equip_max.json (Lv → tier) ベース。fallback: orig val/ratio (sameStat時)
-      let maxInternal = _getAffixMax(sk, charLv);
+      // max 値算出: 装備個別Lv基準 → equip_max.json (Lv → tier) ベース。fallback: orig val/ratio (sameStat時)
+      const _eqLv = (window.__WWM_VIRTUAL?.[slot]?.exVo?._inferredLv) ?? origEq?.exVo?._inferredLv ?? charLv;
+      let maxInternal = _getAffixMax(sk, _eqLv);
       if (maxInternal == null) {
         const origDet = origEq.exVo?.baseAffixes?.[idx]?.equipmentDetails;
         const origInfo = origDet?.[0] != null ? window.WWM_AFFIX?.[origDet[0]] : null;
@@ -2345,14 +2416,21 @@ function openGearEdit(slot) {
         <div class="wwm-cmp-grid">
           <div class="wwm-cmp-col wwm-cmp-current${isBowSetSlot?' wwm-cmp-bow':''}">
             ${bgIconHtml}
-            <h3 class="wwm-cmp-title">現在の装備</h3>
+            <h3 class="wwm-cmp-title">現在の装備${origEq?.exVo?._inferredLv ? ` <span class="wwm-cmp-lv">Lv${origEq.exVo._inferredLv}</span>` : ''}</h3>
             ${curKongfuHeader}
             ${curSetHeader}
             ${isAffixEditable ? `<div class="wwm-cmp-rows">${renderCurrentRows()}</div>` : ''}
           </div>
           <div class="wwm-cmp-col wwm-cmp-new${isBowSetSlot?' wwm-cmp-bow':''}" id="wwmCmpNewCol">
             ${bgIconHtml}
-            <h3 class="wwm-cmp-title">新しい装備</h3>
+            <h3 class="wwm-cmp-title">新しい装備${(() => {
+              const _curLv = window.__WWM_VIRTUAL?.[slot]?.exVo?._inferredLv ?? origEq?.exVo?._inferredLv;
+              const _lvList = window.WWM_EQUIP_BASE_BY_LV?._lvList || [91, 86, 81, 71];
+              const _hasTbl = !!window.WWM_EQUIP_BASE_BY_LV?.slots?.[String(slot)];
+              if (!_curLv || !_hasTbl) return _curLv ? ` <span class="wwm-cmp-lv">Lv${_curLv}</span>` : '';
+              const _opts = _lvList.map(lv => `<option value="${lv}" ${lv===_curLv?'selected':''}>Lv${lv}</option>`).join('');
+              return ` <select id="wwmCmpNewLvSel" class="wwm-cmp-lv-select">${_opts}</select>`;
+            })()}</h3>
             ${newKongfuHeader}
             ${newSetHeader}
             ${isAffixEditable ? `<div class="wwm-cmp-rows" id="wwmCmpNewRows">${renderNewRows()}</div>` : ''}
@@ -2392,7 +2470,8 @@ function openGearEdit(slot) {
       const baseRi = _getEffectiveRoleInfo() || origRi;
       const vRi = JSON.parse(JSON.stringify(baseRi));
       if (!vRi.wearEquipsDetailed) vRi.wearEquipsDetailed = {};
-      const vEq = JSON.parse(JSON.stringify(origEq));
+      // virtual装備 (Lv変更で baseAttrs 更新済) 優先、 fallback origEq
+      const vEq = JSON.parse(JSON.stringify(window.__WWM_VIRTUAL?.[slot] || origEq));
       vEq.exVo.baseAffixes = newAffixes;
       if (isSetEditable && newSuffix != null) vEq.exVo.suffix = parseInt(newSuffix, 10);
       vRi.wearEquipsDetailed[slot] = vEq;
@@ -2447,6 +2526,53 @@ function openGearEdit(slot) {
       const newIcon = _gearIcon(slot, _virtRi(newKongfuId));
       const bgEl = m.querySelector('#wwmCmpNewCol > .wwm-cmp-bg-icon');
       if (bgEl && newIcon) bgEl.style.backgroundImage = `url('assets/icons/${newIcon}.svg')`;
+      _schedulePreview();
+    });
+  }
+  // 新装備 Lv 変更 → base値 + affix値 (新Lv MAX×0.94) 自動更新
+  const lvSel = m.querySelector('#wwmCmpNewLvSel');
+  if (lvSel) {
+    lvSel.addEventListener('change', async () => {
+      const newLv = parseInt(lvSel.value, 10);
+      await _loadEquipMax();
+      // virtual eq 作成 (origEq deep clone)
+      if (!window.__WWM_VIRTUAL) window.__WWM_VIRTUAL = {};
+      const vEq = JSON.parse(JSON.stringify(window.__WWM_VIRTUAL[slot] || origEq));
+      if (!vEq.exVo) vEq.exVo = {};
+      // base値 (baseAttrs) 新Lv
+      const refBase = window.WWM_EQUIP_BASE_BY_LV?.slots?.[String(slot)]?.[String(newLv)];
+      if (refBase) {
+        if (!vEq.exVo.baseAttrs) vEq.exVo.baseAttrs = {};
+        for (const [k, v] of Object.entries(refBase)) vEq.exVo.baseAttrs[k] = v;
+      }
+      vEq.exVo._inferredLv = newLv;
+      // 各affix 値 新Lv MAX × 0.94
+      const tier = _lvToTier(newLv);
+      const maxTbl = _EQUIP_MAX?.tiers?.[tier] || {};
+      if (Array.isArray(vEq.exVo.baseAffixes)) {
+        for (const aff of vEq.exVo.baseAffixes) {
+          const d = aff.equipmentDetails;
+          if (!Array.isArray(d) || d.length < 2) continue;
+          const info = window.WWM_AFFIX?.[d[0]];
+          const sk = info?.statKey;
+          const maxKey = _STAT_TO_MAX_KEY[sk] || sk;
+          const maxVal = maxTbl[maxKey];
+          if (maxVal != null) {
+            d[1] = +(maxVal * 0.94).toFixed(4);
+            d[2] = 0.94;
+          }
+        }
+      }
+      window.__WWM_VIRTUAL[slot] = vEq;
+      if (typeof window._saveVirtuals === 'function') window._saveVirtuals();
+      // newAffixes (modal display source) を in-place 上書き
+      const newAffixData = JSON.parse(JSON.stringify(vEq.exVo?.baseAffixes || []));
+      newAffixes.length = 0;
+      for (const a of newAffixData) newAffixes.push(a);
+      // affix row 部分再描画
+      const rowsEl = m.querySelector('#wwmCmpNewRows');
+      if (rowsEl) rowsEl.innerHTML = renderNewRows();
+      _bindRowEvents();
       _schedulePreview();
     });
   }

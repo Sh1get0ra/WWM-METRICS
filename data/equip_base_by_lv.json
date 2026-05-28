@@ -1,0 +1,89 @@
+{
+  "_schema": "装備 slot 別 Lv → baseAttrs 値表。 import data の baseAttrs から逆引きで 装備個別Lv 推定 + edit modal で Lv変更時 base値更新用。",
+  "_lastUpdated": "2026-05-29",
+  "_source": "Where Winds Math (Ruricon) + ユーザー実機画像",
+  "_lvList": [91, 86, 81, 71],
+
+  "slots": {
+    "1": {
+      "_label": "主武器",
+      "_keys": ["MIN_W_ATK", "MAX_W_ATK"],
+      "91": { "MIN_W_ATK": 53, "MAX_W_ATK": 124 },
+      "86": { "MIN_W_ATK": 46, "MAX_W_ATK": 106 },
+      "81": { "MIN_W_ATK": 39, "MAX_W_ATK": 91 },
+      "71": { "MIN_W_ATK": 33, "MAX_W_ATK": 76 }
+    },
+    "2": {
+      "_label": "副武器",
+      "_keys": ["MIN_W_ATK", "MAX_W_ATK"],
+      "91": { "MIN_W_ATK": 53, "MAX_W_ATK": 124 },
+      "86": { "MIN_W_ATK": 46, "MAX_W_ATK": 106 },
+      "81": { "MIN_W_ATK": 39, "MAX_W_ATK": 91 },
+      "71": { "MIN_W_ATK": 33, "MAX_W_ATK": 76 }
+    },
+    "3": {
+      "_label": "冠",
+      "_keys": ["HP_MAX", "W_DEF"],
+      "91": { "HP_MAX": 4614, "W_DEF": 18 },
+      "86": { "HP_MAX": 3896, "W_DEF": 16 },
+      "81": { "HP_MAX": 3295, "W_DEF": 13 },
+      "71": { "HP_MAX": 2732, "W_DEF": 11 }
+    },
+    "4": {
+      "_label": "胸当",
+      "_keys": ["HP_MAX", "W_DEF"],
+      "91": { "HP_MAX": 9227, "W_DEF": 18 },
+      "86": { "HP_MAX": 7791, "W_DEF": 16 },
+      "81": { "HP_MAX": 6589, "W_DEF": 13 },
+      "71": { "HP_MAX": 5464, "W_DEF": 11 }
+    },
+    "5": {
+      "_label": "膝鎧",
+      "_keys": ["HP_MAX", "W_DEF"],
+      "91": { "HP_MAX": 4614, "W_DEF": 36 },
+      "86": { "HP_MAX": 3896, "W_DEF": 31 },
+      "81": { "HP_MAX": 3295, "W_DEF": 26 },
+      "71": { "HP_MAX": 2732, "W_DEF": 22 }
+    },
+    "8": {
+      "_label": "小手",
+      "_keys": ["HP_MAX", "W_DEF"],
+      "91": { "HP_MAX": 4614, "W_DEF": 18 },
+      "86": { "HP_MAX": 3896, "W_DEF": 16 },
+      "81": { "HP_MAX": 3295, "W_DEF": 13 },
+      "71": { "HP_MAX": 2732, "W_DEF": 11 }
+    },
+    "9": {
+      "_label": "射玦",
+      "_keys": ["ARCHER_WEAKPOINT_DAMAGE"],
+      "91": { "ARCHER_WEAKPOINT_DAMAGE": 286 },
+      "86": { "ARCHER_WEAKPOINT_DAMAGE": 250 },
+      "81": { "ARCHER_WEAKPOINT_DAMAGE": 218 },
+      "71": { "ARCHER_WEAKPOINT_DAMAGE": 176 }
+    },
+    "10": {
+      "_label": "環",
+      "_keys": ["MIN_W_ATK"],
+      "91": { "MIN_W_ATK": 71 },
+      "86": { "MIN_W_ATK": 61 },
+      "81": { "MIN_W_ATK": 52 },
+      "71": { "MIN_W_ATK": 44 }
+    },
+    "11": {
+      "_label": "佩",
+      "_keys": ["MAX_W_ATK"],
+      "91": { "MAX_W_ATK": 106 },
+      "86": { "MAX_W_ATK": 91 },
+      "81": { "MAX_W_ATK": 78 },
+      "71": { "MAX_W_ATK": 65 }
+    },
+    "21": {
+      "_label": "弓矢",
+      "_keys": ["ARCHER_DAMAGE"],
+      "91": { "ARCHER_DAMAGE": 286 },
+      "86": { "ARCHER_DAMAGE": 250 },
+      "81": { "ARCHER_DAMAGE": 218 },
+      "71": { "ARCHER_DAMAGE": 176 }
+    }
+  }
+}
