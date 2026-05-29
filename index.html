@@ -367,6 +367,8 @@
 </div>
 <script>
 window.showImportToast = function(e) {
+  // import済なら何もしない (装備カード/心法カードクリック時の誤発火防止)
+  if (window.__WWM_ROLEINFO) return;
   const t = document.getElementById('toast');
   if (!t) return;
   const T = window.T || {};
