@@ -276,7 +276,7 @@ html[data-theme="light"] .wwm-brand-sub { color: var(--vermilion-bright); opacit
 /* Top right controls */
 .top-controls { display: flex; align-items: center; gap: var(--space-1-5); flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
 
-/* 2行レイアウト (lang 2x2 + controls 1行目/2行目) */
+/* 2行レイアウト (lang 2x2 + controls 1行目/2行目)、各btn幅統一 */
 .top-controls-2row {
   display: flex;
   flex-direction: column;
@@ -289,7 +289,15 @@ html[data-theme="light"] .wwm-brand-sub { color: var(--vermilion-bright); opacit
   gap: var(--space-1-5);
   justify-content: flex-end;
 }
-.lang-switcher-row { display: flex; gap: 0; }
+/* 同幅化: lang-switcher 両行とも同width、各テキストiconBtn 同min-width */
+.top-controls-2row .lang-switcher-row { width: 96px; }
+.top-controls-2row .lang-switcher-row .lang-btn { flex: 1; padding: 4px 0; text-align: center; }
+.top-controls-2row .topbar-row .icon-btn:not(.icon-btn-x):not(#themeToggle) {
+  min-width: 88px;
+  padding: 0 var(--space-2);
+  justify-content: center;
+  text-align: center;
+}
 .icon-btn.reset-btn,
 .icon-btn.note-btn {
   width: auto; padding: 0 12px;
