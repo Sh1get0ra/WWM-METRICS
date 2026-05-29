@@ -2014,15 +2014,16 @@ html[data-theme="light"] .wwm-sb-mini-hero-ink {
   padding: 0 !important;
   z-index: 1;
 }
-/* sections wrapper (border は mini-hero card と統一) */
+/* sections wrapper */
 .wwm-sb-rest {
   background: linear-gradient(180deg, var(--surf-1), var(--surf-2));
-  border: 1px solid var(--gold-deep);
+  border: 1px solid var(--ink-1);
   padding: 10px 12px 12px;
   display: flex; flex-direction: column; gap: 4px;
 }
 html[data-theme="light"] .wwm-sb-rest {
   background: linear-gradient(180deg, #f5ead0, #ede0c0);
+  border-color: rgba(40,25,18,0.15);
 }
 /* #wwmSidebar 本体の border を透明 (内側 mini-hero / rest が枠を持つ) */
 #wwmSidebar { border-color: transparent !important; }
