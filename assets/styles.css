@@ -2742,9 +2742,11 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
   align-items: center !important;
   gap: 6px !important;
   padding: 4px 6px !important;
-  border-bottom: 1px dashed rgba(201,164,90,0.12) !important;
+  border: none !important;
+  border-bottom: 1px dashed rgba(201,164,90,0.1) !important;
   font-size: 12px !important;
   background: transparent !important;
+  box-shadow: none !important;
 }
 .wwm-cmp-modal-a .wwm-cmp-name,
 .wwm-cmp-modal-a .wwm-cmp-stat-select {
@@ -2842,12 +2844,51 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
   border-bottom: 1px solid rgba(201,164,90,0.25) !important;
 }
 .wwm-cmp-modal-a .wwm-modal-header h2 {
-  font-family: var(--f-display, 'Noto Serif JP') !important;
+  margin: 0 !important;
   font-weight: 900 !important;
-  font-size: 18px !important;
-  letter-spacing: 0.18em !important;
+  display: flex; align-items: center; gap: 8px;
+}
+.wwm-cmp-modal-a .wwm-cmp-title-ja {
+  font-family: var(--f-display, 'Noto Serif JP');
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  color: var(--paper);
+}
+.wwm-cmp-modal-a .wwm-cmp-title-en {
+  font-family: var(--f-latin, 'Cinzel');
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.32em;
+  margin-left: 4px;
+}
+/* 背景の赤いradial-gradient を消す */
+.wwm-cmp-modal-a {
+  background: linear-gradient(180deg, var(--surf-1), var(--surf-2)) !important;
+}
+/* ボタン: サンプルA 揃え (radius 0、 padding 7px 16px) */
+.wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-primary {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold)) !important;
+  border: 1px solid var(--gold-bright) !important;
+  border-radius: 0 !important;
+  color: #2a1810 !important;
+  padding: 7px 18px !important;
+  font-size: 12px !important;
+  box-shadow: none !important;
+}
+.wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
+  background: transparent !important;
+  border: 1px solid var(--paper-mute) !important;
+  border-radius: 0 !important;
   color: var(--paper) !important;
-  display: flex; align-items: center;
+  padding: 7px 18px !important;
+  font-size: 12px !important;
+  box-shadow: none !important;
+}
+.wwm-cmp-modal-a #wwmEditCancel {
+  border-color: var(--ink-1) !important;
+  color: var(--paper-mute) !important;
 }
 /* affix行: name 1fr / select 1fr / val 50px / % 38px の固定で詰める */
 .wwm-cmp-modal-a .wwm-cmp-row {

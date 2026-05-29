@@ -2572,7 +2572,7 @@ function openGearEdit(slot) {
       <span class="wwm-cmp-l-bracket-tl"></span><span class="wwm-cmp-l-bracket-tr"></span>
       <span class="wwm-cmp-l-bracket-bl"></span><span class="wwm-cmp-l-bracket-br"></span>
       <div class="wwm-modal-header">
-        <h2>${(window.T&&T.gearCompareTitle)||'武具対照 / COMPARISON'} <span class="wwm-cmp-seal">比</span></h2>
+        <h2><span class="wwm-cmp-title-ja">${(window.T&&T.cmpTitleJa)||'武具対照'}</span><span class="wwm-cmp-title-en">${(window.T&&T.cmpTitleEn)||'COMPARISON'}</span><span class="wwm-cmp-seal">比</span></h2>
         <button class="wwm-modal-close" aria-label="Close">×</button>
       </div>
       <div class="wwm-modal-body">
