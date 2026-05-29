@@ -36,8 +36,9 @@ function _computeCoreLayer(p) {
   const sympathyRateAdj = judgeRes === 0 ? (p.sympathyRate || 0) : (p.sympathyRate || 0) / judgeRes;
   const critRateAdj     = judgeRes === 0 ? (p.critRate || 0)     : (p.critRate || 0)     / judgeRes;
   // 付加会心率/共鳴率は基本値の上限(40%/80%)を突破可能。会心+共鳴の100%制限は維持。
-  const appliedSympathy = Math.min(0.4, sympathyRateAdj) + (p.addSympathyRate || 0);
-  const appliedCrit     = Math.min(1 - appliedSympathy, Math.min(0.8, critRateAdj) + (p.addCritRate || 0));
+  // appliedSympathy が1超過するケースに備え 0..1 にclamp。appliedCrit も負値防止。
+  const appliedSympathy = Math.min(1, Math.min(0.4, sympathyRateAdj) + (p.addSympathyRate || 0));
+  const appliedCrit     = Math.max(0, Math.min(1 - appliedSympathy, Math.min(0.8, critRateAdj) + (p.addCritRate || 0)));
   const appliedHit      = judgeRes === 0 ? Math.min(1, p.hitRate || 0) : Math.min(1, 0.65 + ((p.hitRate || 0) - 0.65) / judgeRes);
   // B案: 会意優先順位モデル
   //   会意 (精確不問・全体枠) → appliedCrit は 1-pSym 上限clamp済み
@@ -184,7 +185,9 @@ const EFF_MAX_STORAGE = 'wwm_eff_max_v1';
 function initEffMaxVals() {
   try {
     const saved = JSON.parse(localStorage.getItem(EFF_MAX_STORAGE));
-    if (Array.isArray(saved) && saved.length === EFF_ROWS.length) {
+    // 型検証: 全要素が有限数値であること (NaN/string/null 混入時はdefault復帰)
+    if (Array.isArray(saved) && saved.length === EFF_ROWS.length
+        && saved.every(v => typeof v === 'number' && Number.isFinite(v))) {
       effMaxVals = saved; return;
     }
   } catch(e) {}

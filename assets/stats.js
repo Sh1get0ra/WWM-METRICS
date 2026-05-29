@@ -45,7 +45,7 @@ function _acc(r, key, val) {
 // calc.js / xinfa / sets が使う key → WWM display key 変換
 const _CALCJS_TO_WWM = {
   critRate:        'crit',
-  critRateAdj:     'crit',
+  // critRateAdj は judgeRes適用後の中間値のため心法effects非対象 → マップ削除 (誤マップ防止)
   sympathyRate:    'affinity',
   hitRate:         'precision',
   minPhysATKAdd:   'minPhys',
@@ -505,8 +505,7 @@ async function buildStatParams(roleInfo, state) {
   })();
   r.elemPen         = (r.attrPen || 0) + _activePathPen + (activePath !== 'voidPath' ? (r.voidPen || 0) : 0);
   r.weaponBonus     = r.physDmgBonus   || 0;
-  r.elemBoostMain   = 1;
-  r.elemBoostSub    = 1;
+  // elemBoostMain/Sub は L549-550 で 1.5/1.0 に上書きされる (旧 1/1 dead代入削除)
   r.elemAtkBoost    = r.attrDmgBonus   || 0;
   r.allMartialBoost  = r.allWeaponDmg  || 0;
   r.specMartialBoost = r._specMartialBoostScore || 0;
