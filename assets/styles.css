@@ -3927,8 +3927,8 @@ html[data-theme="light"] .hero-wuxia .luopan-center-label {
 html[data-theme="light"] .hero-wuxia .judge-name {
   color: var(--ink-1);
 }
-/* 朱墨筆を弱める (paper地で目立ちすぎ防止) */
-html[data-theme="light"] .hero-wuxia .ink-stroke { opacity: .5; }
+/* 朱墨筆 light: dark時より控えめ程度 */
+html[data-theme="light"] .hero-wuxia .ink-stroke { opacity: .75; }
 /* 4隅L字 gold-deep (paper地でcontrast) */
 html[data-theme="light"] .hero-wuxia .l-bracket {
   border-color: var(--gold-deep) !important;
