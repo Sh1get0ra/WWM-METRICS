@@ -309,6 +309,8 @@ html[lang="ko"] .top-controls-2row .icon-btn {
   font-size: 10px;
   letter-spacing: 0.04em;
 }
+/* en mode: hero-label の ja「武格指数」非表示 (MARTIAL INDEXのみで重複回避) */
+html[lang="en"] .hero-wuxia .hero-label .ja { display: none; }
 /* NOTE = X+☀ width相当 - 3px */
 .top-controls-2row .topbar-row .icon-btn.note-btn {
   width: 66px;

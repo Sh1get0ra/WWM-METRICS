@@ -1315,8 +1315,8 @@ const _GEAR_SLOT_I18N_KEY = {
 };
 const _GEAR_SLOT_LABELS = new Proxy({}, {
   get: (_, slot) => {
-    const key = _GEAR_SLOT_I18N_KEY[slot];
-    return (key && window.T?.[key]) || _GEAR_SLOT_LABELS_JA[slot];
+    // 装備カードラベルは全言語 ja固定 (ユーザー指定)
+    return _GEAR_SLOT_LABELS_JA[slot];
   }
 });
 // rail 縦書き専用 中国語表記 (武侠雰囲気)
