@@ -3685,13 +3685,13 @@ html[data-theme="light"] {
 .hero-wuxia .hero-label .ja {
   font-family: var(--f-display);
   font-weight: var(--fw-bold);
-  font-size: clamp(20px, 2.4vw, 32px);
+  font-size: 30px;
   letter-spacing: .18em;
   color: var(--gold-bright);
 }
 .hero-wuxia .hero-label .en {
   font-family: var(--f-mono);
-  font-size: clamp(11px, 1.1vw, 15px);
+  font-size: 14px;
   letter-spacing: .28em;
   color: var(--paper-mute);
 }
@@ -3705,7 +3705,7 @@ html[data-theme="light"] {
 .hero-wuxia .hero-number {
   font-family: var(--f-latin);
   font-weight: var(--fw-black);
-  font-size: clamp(56px, 7.5vw, 102px);
+  font-size: 96px;
   line-height: .88;
   letter-spacing: -.02em;
   color: var(--paper);  /* 古紙白 #ede4d0 */
@@ -3715,7 +3715,7 @@ html[data-theme="light"] {
 .hero-wuxia .hero-tier.tier-badge {
   position: relative;
   font-family: var(--f-latin);
-  font-size: clamp(15px, 1.8vw, 24px);
+  font-size: 22px;
   font-weight: var(--fw-black);
   letter-spacing: .12em;
   padding: 5px 16px;
@@ -3818,7 +3818,7 @@ html[data-theme="light"] {
 .hero-wuxia .hero-next-val {
   font-family: var(--f-latin);
   font-weight: var(--fw-extra);
-  font-size: clamp(28px, 3.8vw, 52px);
+  font-size: 48px;
   color: var(--bone-dim);
   line-height: .88;
   letter-spacing: -.01em;
