@@ -2918,6 +2918,22 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
   font-size: 11px; color: var(--paper-mute);
 }
 .wwm-cmp-modal-a .wwm-cmp-bg-icon { opacity: 0 !important; }
+/* 新装備アイコン modal全体背景化 */
+.wwm-cmp-modal-bg-icon {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%; height: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: 0;
+  filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(240,210,138,0.4));
+}
+.wwm-cmp-modal-a .wwm-modal-body { position: relative; }
+.wwm-cmp-modal-a .wwm-cmp-grid { position: relative; z-index: 1; }
 /* 案E Good icon — 親指SVG + 朱赤タイル */
 .wwm-good-icon {
   display: inline-flex; align-items: center; justify-content: center;

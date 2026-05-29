@@ -2577,9 +2577,9 @@ function openGearEdit(slot) {
         <button class="wwm-modal-close" aria-label="Close">×</button>
       </div>
       <div class="wwm-modal-body">
+        ${bgIconHtml ? bgIconHtml.replace('class="wwm-cmp-bg-icon"', 'class="wwm-cmp-modal-bg-icon"') : ''}
         <div class="wwm-cmp-grid">
           <div class="wwm-cmp-col wwm-cmp-current${isBowSetSlot?' wwm-cmp-bow':''}">
-            ${bgIconHtml}
             <h3 class="wwm-cmp-title" data-seal="${(window.T&&T.cmpCurrent)||'現有'}"><span class="wwm-cmp-title-text">${(window.T&&T.cmpCurrent)||'現有'}</span>${origEq?.exVo?._inferredLv ? `<span class="wwm-cmp-lv">Lv${origEq.exVo._inferredLv}</span>` : ''}</h3>
             ${curKongfuHeader}
             ${curSetHeader}
@@ -2587,7 +2587,6 @@ function openGearEdit(slot) {
           </div>
           <div class="wwm-cmp-divider"></div>
           <div class="wwm-cmp-col wwm-cmp-new${isBowSetSlot?' wwm-cmp-bow':''}" id="wwmCmpNewCol">
-            ${bgIconHtml}
             <h3 class="wwm-cmp-title" data-seal="${(window.T&&T.cmpNew)||'新置'}"><span class="wwm-cmp-title-text">${(window.T&&T.cmpNew)||'新置'}</span>${(() => {
               const _curLv = window.__WWM_VIRTUAL?.[slot]?.exVo?._inferredLv ?? origEq?.exVo?._inferredLv;
               const _lvList = window.WWM_EQUIP_BASE_BY_LV?._lvList || [91, 86, 81, 71];
@@ -2694,7 +2693,7 @@ function openGearEdit(slot) {
       _bindRowEvents();
       // 新パネル bg icon 更新
       const newIcon = _gearIcon(slot, _virtRi(newKongfuId));
-      const bgEl = m.querySelector('#wwmCmpNewCol > .wwm-cmp-bg-icon');
+      const bgEl = m.querySelector('.wwm-cmp-modal-bg-icon');
       if (bgEl && newIcon) bgEl.style.backgroundImage = `url('assets/icons/${newIcon}.svg')`;
       _schedulePreview();
     });
