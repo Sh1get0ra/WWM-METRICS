@@ -4008,13 +4008,23 @@ html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS {
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS::before {
   content: '' !important;
   position: absolute !important;
-  inset: 0 !important;
-  background: linear-gradient(105deg, transparent 25%, rgba(255,250,220,0.85) 50%, transparent 75%) !important;
-  background-size: 250% 100% !important;
-  background-repeat: no-repeat !important;
-  animation: tier-ss-shimmer 2.8s linear infinite !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: -150% !important;
+  right: auto !important;
+  width: 80% !important;
+  height: 100% !important;
+  background: linear-gradient(110deg, transparent 0%, rgba(255,250,220,0.95) 50%, transparent 100%) !important;
+  background-size: 100% 100% !important;
+  background-position: 0 0 !important;
+  animation: tier-ss-shimmer-light 2.8s linear infinite !important;
   pointer-events: none !important;
   z-index: 1 !important;
+}
+@keyframes tier-ss-shimmer-light {
+  0%   { left: -150%; }
+  60%  { left: 150%; }
+  100% { left: 150%; }
 }
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-S {
   background: linear-gradient(135deg, #f4a89a 0%, #e87862 50%, #c83c2b 100%);
