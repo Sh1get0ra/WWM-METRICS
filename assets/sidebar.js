@@ -2883,12 +2883,16 @@ function updateHero(params) {
   // compact tier badge: 廃止 (heroCompactTierBadge hidden)
   setText('heroCompactDmg', Math.round(total).toLocaleString());
   setText('heroCompactExp', Math.round(total).toLocaleString());
-  // NEXT 側 = 仮想装備込みの statusScore (新装備プレビュー)
+  // NEXT 側 = 仮想装備込みの statusScore (新装備プレビュー、countUp で変動アニメ)
   const baseline = window.__WWM_BASELINE;
   const baseEl = document.getElementById('heroScoreBaseline');
   if (baseline && typeof baseline.statusScore === 'number') {
     const baseScore = statusScore; // NEXT = 仮想装備込み
-    if (baseEl) baseEl.textContent = baseScore.toLocaleString();
+    if (typeof window.countUp === 'function') {
+      window.countUp('heroScoreBaseline', baseScore, 0);
+    } else if (baseEl) {
+      baseEl.textContent = baseScore.toLocaleString();
+    }
     // baseline tier badge (tier 未保存 baseline 用 fallback)
     const blTb = document.getElementById('heroBaselineTierBadge');
     if (blTb) {
@@ -2924,7 +2928,8 @@ function updateHero(params) {
       }
     }
   } else {
-    if (baseEl) baseEl.textContent = currentScore.toLocaleString();
+    if (typeof window.countUp === 'function') window.countUp('heroScoreBaseline', currentScore, 0);
+    else if (baseEl) baseEl.textContent = currentScore.toLocaleString();
   }
 }
 

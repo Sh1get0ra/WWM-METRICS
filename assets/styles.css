@@ -3767,34 +3767,20 @@ html[data-theme="light"] {
   padding: 5px 16px !important;
 }
 
-/* SS — gold (静的、伸縮アニメ削除) */
-.hero-wuxia .hero-tier.tier-SS,
-.hero-wuxia .hero-tier.tier-SS::before,
-.hero-wuxia .hero-tier.tier-SS::after {
-  animation: none !important;
-}
+/* SS — gold (アニメ継承、静的部のみ override) */
 .hero-wuxia .hero-tier.tier-SS {
   color: #f0d28a;
   background: linear-gradient(135deg, rgba(180,40,28,.48) 0%, rgba(100,20,14,.38) 50%, rgba(180,40,28,.48) 100%);
   border-color: rgba(240,210,138,.65);
   text-shadow: 0 0 18px rgba(240,210,138,.95), 0 0 36px rgba(232,81,58,.6);
-  box-shadow: 0 0 20px rgba(200,60,43,.6), 0 0 45px rgba(232,81,58,.35), inset 0 1px 0 rgba(240,210,138,.28), inset 0 -1px 0 rgba(0,0,0,.45);
 }
-.hero-wuxia .hero-tier.tier-SS::before { display: none !important; }
-.hero-wuxia .hero-tier.tier-SS::after  { display: none !important; }
 
-/* S — vermilion (静的) */
-.hero-wuxia .hero-tier.tier-S,
-.hero-wuxia .hero-tier.tier-S::before,
-.hero-wuxia .hero-tier.tier-S::after {
-  animation: none !important;
-}
+/* S — vermilion (アニメ継承) */
 .hero-wuxia .hero-tier.tier-S {
   color: #ff6b50;
   background: linear-gradient(135deg, rgba(138,31,23,.42) 0%, rgba(60,15,10,.32) 50%, rgba(138,31,23,.42) 100%);
   border-color: rgba(232,81,58,.7);
   text-shadow: 0 0 14px rgba(232,81,58,.85), 0 0 28px rgba(200,60,43,.45);
-  box-shadow: 0 0 14px rgba(200,60,43,.45), 0 0 30px rgba(232,81,58,.22), inset 0 1px 0 rgba(232,81,58,.25), inset 0 -1px 0 rgba(0,0,0,.4);
 }
 
 /* A — jade calm */
