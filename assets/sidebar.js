@@ -2764,7 +2764,7 @@ function openGearEdit(slot) {
     if (valInp) {
       valInp.dataset.pct = isPct ? '1' : '0';
       valInp.dataset.pctmul = _pctNeedsMul(sk) ? '1' : '0';
-      valInp.step = isPct ? '0.1' : '0.01';
+      valInp.step = '0.1';
       // max 属性 更新 (equip_max table 優先 / fallback orig val/ratio)
       let maxInt = _getAffixMax(sk, (origRi?.level || 95));
       if (maxInt == null) {
@@ -2776,7 +2776,7 @@ function openGearEdit(slot) {
       }
       const needsMul2 = _pctNeedsMul(sk);
       if (maxInt != null) {
-        valInp.max = isPct ? (needsMul2 ? (maxInt*100).toFixed(1) : maxInt.toFixed(1)) : maxInt.toFixed(2);
+        valInp.max = isPct ? (needsMul2 ? (maxInt*100).toFixed(1) : maxInt.toFixed(1)) : maxInt.toFixed(1);
       } else {
         valInp.removeAttribute('max');
       }
@@ -2888,8 +2888,7 @@ function openGearEdit(slot) {
           // 最大値クランプ (max既知時のみ)
           if (max && max > 0 && internal > max) {
             internal = max;
-            const displayMax = (isPct && needsMul) ? (max*100).toFixed(1)
-              : (isPct ? max.toFixed(1) : max.toFixed(2).replace(/\.00$/,''));
+            const displayMax = (isPct && needsMul) ? (max*100).toFixed(1) : max.toFixed(1);
             el.value = displayMax;
           }
           d[1] = internal;
