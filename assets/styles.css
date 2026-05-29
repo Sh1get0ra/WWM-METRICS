@@ -2853,6 +2853,22 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
   color: var(--vermilion) !important;
   border-color: rgba(232,81,58,0.4) !important;
 }
+/* MAX% rank別配色 (ゲーム準拠 金>紫>青、 閾値 0.85 / 0.70) */
+.wwm-cmp-modal-a .wwm-cmp-ratio.rank-gold {
+  background: rgba(212,175,55,0.18) !important;
+  color: #d4af37 !important;
+  border-color: rgba(212,175,55,0.55) !important;
+}
+.wwm-cmp-modal-a .wwm-cmp-ratio.rank-purple {
+  background: rgba(195,137,255,0.18) !important;
+  color: #c389ff !important;
+  border-color: rgba(195,137,255,0.55) !important;
+}
+.wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue {
+  background: rgba(74,158,255,0.18) !important;
+  color: #4a9eff !important;
+  border-color: rgba(74,158,255,0.55) !important;
+}
 .wwm-cmp-modal-a .wwm-cmp-grid {
   grid-template-columns: 1fr 1px 1fr !important;
   gap: 16px !important;
