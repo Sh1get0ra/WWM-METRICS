@@ -646,8 +646,17 @@ async function renderOptimization(roleInfo, params, opts) {
     return await _renderOptimizationInner(roleInfo, params, opts, root);
   } finally {
     window.__WWM_OPT_RUNNING = false;
-    // 最終 donut/score を確実に反映 (suppress中に動いていない可能性)
-    try { if (window.WWMHero) window.WWMHero.update(params); } catch(_) {}
+    // 最終 donut/score を確実に反映 (suppress中アニメ途中で凍結対策)
+    try {
+      // donut transition 一旦無効化 → reflow → 再有効化 で transition cancel + target即時反映
+      const dsegs = ['Crit','Sympathy','Graze','Normal']
+        .map(k => document.getElementById('donutDmgSeg'+k)).filter(Boolean);
+      dsegs.forEach(el => { el.style.transition = 'none'; });
+      if (window.WWMHero) window.WWMHero.update(params);
+      // reflow
+      dsegs.forEach(el => { void el.getBoundingClientRect().width; });
+      dsegs.forEach(el => { el.style.transition = ''; });
+    } catch(_) {}
   }
 }
 async function _renderOptimizationInner(roleInfo, params, opts, root) {
