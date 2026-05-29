@@ -222,6 +222,18 @@ function exportImage() {
   if (sbEl) {
     const clone = sbEl.cloneNode(true);
     clone.querySelectorAll('.icon-btn, .wwm-overlay-ctrl, .preset-btn, .wwm-sb-top').forEach(el => el.remove());
+    // 現在装備のみ表示: ▶以降 (仮想装備込み値) を削除し baseline値を露出
+    clone.querySelectorAll('.wwm-sb-baseline').forEach(el => {
+      let next = el.nextSibling;
+      while (next) {
+        const toRemove = next;
+        next = next.nextSibling;
+        toRemove.remove();
+      }
+      el.classList.remove('wwm-sb-baseline');
+    });
+    // 孤立 arrow 除去
+    clone.querySelectorAll('.wwm-sb-arrow, .wwm-equip-arrow').forEach(el => el.remove());
     clone.querySelectorAll('*').forEach(el => {
       el.style.backgroundImage = 'none';
       el.style.boxShadow = 'none';
