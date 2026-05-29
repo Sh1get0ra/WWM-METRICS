@@ -2584,6 +2584,65 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
 .wwm-edit-affix-useful { font-size: var(--text-12); cursor: pointer; }
 
 /* ── Gear Compare modal (2-column) ──────────────────────────── */
+/* ── 案A 武具対照 装飾 ── */
+.wwm-cmp-modal-a { position: relative; }
+.wwm-cmp-modal-a .wwm-cmp-l-bracket-tl,
+.wwm-cmp-modal-a .wwm-cmp-l-bracket-tr,
+.wwm-cmp-modal-a .wwm-cmp-l-bracket-bl,
+.wwm-cmp-modal-a .wwm-cmp-l-bracket-br {
+  position: absolute; width: 14px; height: 14px;
+  border: 1.5px solid var(--gold-deep);
+  pointer-events: none; z-index: 5;
+}
+.wwm-cmp-modal-a .wwm-cmp-l-bracket-tl { top: 6px; left: 6px; border-right: none; border-bottom: none; }
+.wwm-cmp-modal-a .wwm-cmp-l-bracket-tr { top: 6px; right: 6px; border-left: none; border-bottom: none; }
+.wwm-cmp-modal-a .wwm-cmp-l-bracket-bl { bottom: 6px; left: 6px; border-right: none; border-top: none; }
+.wwm-cmp-modal-a .wwm-cmp-l-bracket-br { bottom: 6px; right: 6px; border-left: none; border-top: none; }
+.wwm-cmp-seal {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  background: var(--vermilion);
+  color: #fff;
+  font-family: var(--f-display, 'Noto Serif JP'); font-weight: 900; font-size: 16px;
+  border: 2px solid rgba(255,255,255,0.5);
+  border-radius: 2px;
+  transform: rotate(-6deg);
+  margin-left: 8px;
+  vertical-align: middle;
+  box-shadow: 0 0 8px rgba(232,81,58,0.6);
+}
+.wwm-cmp-modal-a .wwm-modal-header { position: relative; }
+.wwm-cmp-modal-a .wwm-modal-header::after {
+  content: ''; position: absolute; bottom: 0; left: 16px; right: 16px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--vermilion), transparent);
+  opacity: 0.5; pointer-events: none;
+}
+.wwm-cmp-modal-a .wwm-cmp-set-header { text-shadow: 0 0 6px rgba(240,210,138,0.4) !important; }
+.wwm-cmp-modal-a .wwm-cmp-preview {
+  border-top: 1px solid rgba(201,164,90,0.2);
+  padding-top: 12px;
+}
+.wwm-cmp-modal-a .wwm-cmp-preview-value {
+  font-family: var(--f-latin, 'Cinzel') !important;
+  font-size: 22px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.04em;
+}
+.wwm-cmp-modal-a .wwm-cmp-preview-value.pos {
+  color: var(--jade-bright, #b8e0c4) !important;
+  text-shadow: 0 0 14px rgba(168,212,180,0.55);
+}
+.wwm-cmp-modal-a .wwm-cmp-preview-value.neg {
+  color: var(--vermilion) !important;
+  text-shadow: 0 0 14px rgba(232,81,58,0.55);
+}
+.wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-primary,
+.wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
+  font-family: var(--f-display, 'Noto Serif JP');
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
 .wwm-cmp-grid {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: var(--space-4);

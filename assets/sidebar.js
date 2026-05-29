@@ -2568,9 +2568,11 @@ function openGearEdit(slot) {
   const newSetHeader = isSetEditable
     ? `<select class="wwm-cmp-set-select" id="wwmCmpSetSel">${_setOptions(newSuffix)}</select><div class="wwm-cmp-set-effect" id="wwmCmpSetEffect">${_setRaw(newSuffix)}</div>` : '';
   m.innerHTML = `
-    <div class="wwm-modal wwm-modal-square">
+    <div class="wwm-modal wwm-modal-square wwm-cmp-modal-a">
+      <span class="wwm-cmp-l-bracket-tl"></span><span class="wwm-cmp-l-bracket-tr"></span>
+      <span class="wwm-cmp-l-bracket-bl"></span><span class="wwm-cmp-l-bracket-br"></span>
       <div class="wwm-modal-header">
-        <h2>${(window.T&&T.gearCompareTitle)||'装備比較 / COMPARISON'}</h2>
+        <h2>${(window.T&&T.gearCompareTitle)||'武具対照 / COMPARISON'} <span class="wwm-cmp-seal">比</span></h2>
         <button class="wwm-modal-close" aria-label="Close">×</button>
       </div>
       <div class="wwm-modal-body">
@@ -2601,10 +2603,10 @@ function openGearEdit(slot) {
           <span class="wwm-cmp-preview-label">Δ Score:</span>
           <span class="wwm-cmp-preview-value" id="wwmCmpPreviewDelta">計算中...</span>
         </div>
-        <div class="wwm-btn-row" style="margin-top:12px;">
-          <button class="wwm-btn-primary" id="wwmEditApply">適用 (sidebar反映)</button>
-          <button class="wwm-btn-secondary" id="wwmEditReset">元に戻す</button>
-          <button class="wwm-btn-secondary" id="wwmEditCancel">キャンセル</button>
+        <div class="wwm-btn-row wwm-cmp-btn-row" style="margin-top:12px;">
+          <button class="wwm-btn-primary" id="wwmEditApply">${(window.T&&T.cmpApply)||'採用'}</button>
+          <button class="wwm-btn-secondary" id="wwmEditReset">${(window.T&&T.cmpReset)||'復元'}</button>
+          <button class="wwm-btn-secondary" id="wwmEditCancel">${(window.T&&T.cmpCancel)||'離脱'}</button>
         </div>
       </div>
     </div>
