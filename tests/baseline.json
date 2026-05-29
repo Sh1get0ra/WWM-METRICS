@@ -1,0 +1,27 @@
+{
+  "base_naked": {
+    "expected": 1246.7296373365043,
+    "statusScore": 1246.7296373365043,
+    "tier": "C"
+  },
+  "with_globalDmgBoost_purple_5tiers": {
+    "expected": 1309.0661192033297,
+    "statusScore": 1309.0661192033297,
+    "tier": "C"
+  },
+  "with_physDmgBoost_T5": {
+    "expected": 1254.3201991676576,
+    "statusScore": 1254.3201991676576,
+    "tier": "C"
+  },
+  "with_outerPen_high": {
+    "expected": 1322.6352556480383,
+    "statusScore": 1322.6352556480383,
+    "tier": "C"
+  },
+  "with_outerPen_low": {
+    "expected": 1186.0051426872772,
+    "statusScore": 1186.0051426872772,
+    "tier": "C"
+  }
+}
