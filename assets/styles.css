@@ -306,7 +306,8 @@ html[data-theme="light"] .wwm-brand-sub { color: var(--vermilion-bright); opacit
   vertical-align: middle;
   overflow: hidden;
 }
-.top-controls-2row .topbar-row { min-height: 32px; max-height: 32px; }
+.top-controls-2row .topbar-row { height: 32px; min-height: 32px; max-height: 32px; flex: 0 0 32px; }
+.top-controls-2row { height: 72px; min-height: 72px; max-height: 72px; flex: 0 0 auto; }
 /* 同幅化: lang-switcher 両行とも同width、各テキストiconBtn 同min-width */
 .top-controls-2row .lang-switcher-row { width: 96px; }
 .top-controls-2row .lang-switcher-row .lang-btn { flex: 1; padding: 4px 0; text-align: center; }
