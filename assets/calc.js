@@ -80,6 +80,13 @@ function computeExpected(pIn) {
     const ee = elemPart(em, es) * (1 + elemPenZone) * innerElem;
     return (pp + ee) * outerBoost * reductionZone * mul;
   }
+  // 物理/属性 内訳分離 (外周リング arc 用、pp+ee は dmg と一致)
+  function dmgParts(pa, em, es, mul) {
+    mul = mul || 1;
+    const pp = physPart(pa) * (1 + physPenZone) * innerPhys * outerBoost * reductionZone * mul;
+    const ee = elemPart(em, es) * (1 + elemPenZone) * innerElem * outerBoost * reductionZone * mul;
+    return { pp, ee };
+  }
 
   const avgPhys = (p.minPhysATK + p.maxPhysATK) / 2;
   const avgMain = (p.minElemMain + p.maxElemMain) / 2;
@@ -90,6 +97,17 @@ function computeExpected(pIn) {
        + dmg(avgPhys, avgMain, avgSub, 1 + p.critBoost) * pCrit
        + dmg(p.maxPhysATK, p.maxElemMain, p.maxElemSub, 1 + p.sympathyBoost) * pSympathy
        + dmg(p.minPhysATK, p.minElemMain, p.minElemSub) * pGraze;
+
+  // 物理/属性 期待値 (各シナリオの pp/ee を確率加重で集計)
+  const _pNorm = dmgParts(avgPhys, avgMain, avgSub);
+  const _pCritP = dmgParts(avgPhys, avgMain, avgSub, 1 + p.critBoost);
+  const _pSymp = dmgParts(p.maxPhysATK, p.maxElemMain, p.maxElemSub, 1 + p.sympathyBoost);
+  const _pGraz = dmgParts(p.minPhysATK, p.minElemMain, p.minElemSub);
+  const physExp = _pNorm.pp*pNormal + _pCritP.pp*pCrit + _pSymp.pp*pSympathy + _pGraz.pp*pGraze;
+  const elemExp = _pNorm.ee*pNormal + _pCritP.ee*pCrit + _pSymp.ee*pSympathy + _pGraz.ee*pGraze;
+  const _ptot = physExp + elemExp;
+  const physRatio = _ptot > 0 ? physExp / _ptot : 0;
+  const elemRatio = _ptot > 0 ? elemExp / _ptot : 0;
 
   // ── STATUS SCORE (固定 SCORE_FIXED 係数で再計算) ─────────────
   const sc = SCORE_FIXED;
@@ -121,7 +139,7 @@ function computeExpected(pIn) {
   else if (statusScore >= ssThr * 0.6)  tier = 'B';
   else                                  tier = 'C';
 
-  const result = { expected: expectedTotal, statusScore: statusScore, tier: tier };
+  const result = { expected: expectedTotal, statusScore: statusScore, tier: tier, physRatio: physRatio, elemRatio: elemRatio };
   window.__WWM_LAST_RESULT = result;
 
   // ── donut / 寄与率 DOM 更新 (debounce 16ms化、 連続computeExpected呼出時 最後の値のみ反映)
@@ -139,6 +157,8 @@ function computeExpected(pIn) {
       // donut 反映 (最適化計算中はsuppress、 ちらつき抑止)
       if (!window.__WWM_OPT_RUNNING) {
         if (typeof updateDonut === 'function') updateDonut(dCrit, dSymp, dGraz, dNorm, 'donutDmgSeg');
+        // 外周リング arc (物理/属性 比率)
+        if (typeof updateLuopanArc === 'function') updateLuopanArc(physRatio, elemRatio);
         const pctStr = n => (n * 100).toFixed(2) + '%';
         const setT = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
         setT('dmgCritVal', pctStr(dCrit));

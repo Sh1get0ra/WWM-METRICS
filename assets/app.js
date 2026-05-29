@@ -164,6 +164,23 @@ function updateDonut(pCrit, pSympathy, pGraze, pNormal, prefix) {
   });
 }
 
+// ── 外周リング（物理/属性 比率）arcPhys/arcElem ───────────────────
+function updateLuopanArc(physRatio, elemRatio) {
+  if (window.__WWM_OPT_RUNNING) return; // 最適化中 skip
+  const aP = document.getElementById('arcPhys');
+  const aE = document.getElementById('arcElem');
+  if (!aP || !aE) return;
+  const r = parseFloat(aP.getAttribute('r')) || 68;
+  const C = 2 * Math.PI * r;
+  const lp = Math.max(0, physRatio) * C;
+  const le = Math.max(0, elemRatio) * C;
+  aP.setAttribute('stroke-dasharray', lp + ' ' + (C - lp));
+  aP.setAttribute('stroke-dashoffset', 0);
+  aE.setAttribute('stroke-dasharray', le + ' ' + (C - le));
+  aE.setAttribute('stroke-dashoffset', -lp);
+}
+window.updateLuopanArc = updateLuopanArc;
+
 // ── エネミー切替 ──────────────────────────────────────────────────
 function bindEnemySelect() {
   document.getElementById('enemyLevel').addEventListener('change', function() {
