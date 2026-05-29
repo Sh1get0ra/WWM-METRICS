@@ -3961,8 +3961,9 @@ html[data-theme="light"] .hero-wuxia .hero-label .en {
   opacity: .8;
 }
 html[data-theme="light"] .hero-wuxia .hero-number {
-  color: #3a2a20;  /* 濃茶 (墨黒より明るめ) */
-  text-shadow: none;
+  color: #3a2a20 !important;  /* 濃茶 (墨黒より明るめ) */
+  text-shadow: none !important;
+  filter: none !important;
 }
 html[data-theme="light"] .hero-wuxia .hero-next-val {
   color: var(--gold-deep);
@@ -4056,7 +4057,11 @@ html[data-theme="light"] .hero-wuxia .hero-tier.tier-C {
 }
 html[data-theme="light"] .hero-wuxia .ink-stroke {
   opacity: 1;
-  filter: saturate(3.2) brightness(.65) contrast(1.9) hue-rotate(-10deg);
+  filter: none;
+}
+/* light: SVG path stroke を gradient (alpha 0.35 上限) から濃朱単色に置換 */
+html[data-theme="light"] .hero-wuxia .ink-stroke path {
+  stroke: rgba(160,28,18,0.78) !important;
 }
 /* 4隅L字 gold-deep (paper地でcontrast) */
 html[data-theme="light"] .hero-wuxia .l-bracket {
