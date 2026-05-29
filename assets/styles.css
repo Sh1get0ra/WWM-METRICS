@@ -2616,6 +2616,9 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
   border-left: 1px solid var(--gold-deep) !important;
   border-top: 1px solid var(--gold-deep) !important;
 }
+/* base .wwm-modal の右上 装飾 (::before glow + ::after 小L字) を非表示 (案A 4隅L字とダブる) */
+.wwm-cmp-modal-a::before,
+.wwm-cmp-modal-a::after { display: none !important; }
 .wwm-cmp-modal-a .wwm-modal-header {
   position: relative;
   background: #1a1410 !important;
