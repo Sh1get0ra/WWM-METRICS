@@ -3645,15 +3645,11 @@ html[data-theme="light"] {
   font-size: 96px;
   line-height: .88;
   letter-spacing: -.02em;
-  background: linear-gradient(180deg, #fff7d8 0%, #f9ecc4 18%, #f0d28a 42%, #c9a45a 70%, #8a6f30 100%);
+  background: linear-gradient(180deg, #f9ecc4, #f0d28a 45%, #c9a45a);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter:
-    drop-shadow(0 1px 0 rgba(255,247,216,.4))
-    drop-shadow(0 2px 1px rgba(0,0,0,.55))
-    drop-shadow(0 6px 8px rgba(0,0,0,.5))
-    drop-shadow(0 0 24px rgba(240,210,138,.25));
+  filter: drop-shadow(0 2px 1px rgba(0,0,0,.6));
 }
 .hero-wuxia .hero-tier.tier-badge {
   position: relative;
