@@ -2014,16 +2014,12 @@ html[data-theme="light"] .wwm-sb-mini-hero-ink {
   padding: 0 !important;
   z-index: 1;
 }
-/* sections wrapper (質素) */
+/* sections wrapper (枠なし、 mini-hero header の続きとして配置) */
 .wwm-sb-rest {
-  background: linear-gradient(180deg, var(--surf-1), var(--surf-2));
-  border: 1px solid var(--ink-1);
-  padding: 10px 12px 12px;
+  background: transparent;
+  border: none;
+  padding: 0 2px;
   display: flex; flex-direction: column; gap: 4px;
-}
-html[data-theme="light"] .wwm-sb-rest {
-  background: linear-gradient(180deg, #f5ead0, #ede0c0);
-  border-color: rgba(40,25,18,0.15);
 }
 
 .wwm-sb-top {
