@@ -2285,17 +2285,21 @@ body.wwm-layout-active .wwm-footer {
   border-top: 1px dashed var(--ink-2);
 }
 .wwm-xinfa-effect br + * { margin-top: 2px; }
-.wwm-sb-notice {
-  margin-top: 12px; padding: 8px 10px;
-  background: rgba(200,60,43,0.15);
-  border: 1px solid rgba(200,60,43,0.5);
+/* notice base (sb=sidebar弱点 / cl=changelog 共通) */
+.wwm-sb-notice, .wwm-cl-notice {
   border-radius: 4px;
   font-size: var(--text-12);
+}
+.wwm-sb-notice {
+  margin-top: var(--space-3); padding: var(--space-2) var(--space-2-5);
+  background: var(--vermilion-soft);
+  border: 1px solid var(--vermilion-strong);
   color: #ffb39e;
   cursor: pointer;
   text-align: center;
 }
-.wwm-sb-notice:hover { background: rgba(200,60,43,0.3); }
+.wwm-sb-notice:hover { background: var(--vermilion-mid); }
+html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); background: var(--vermilion-tint); }
 
 /* ── Edit modal (gear card affix編集) ───────────────────────── */
 .wwm-edit-affixes {
@@ -3498,15 +3502,19 @@ html[data-theme="light"] .wwm-diag-modal .wwm-modal-bg-icon {
 
 /* ── changelog notice (lang制限注記) ───────────────────────── */
 .wwm-cl-notice {
-  padding: 8px 12px;
-  margin-bottom: 12px;
+  padding: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-3);
   background: rgba(201,164,90,0.08);
   border-left: 3px solid var(--gold);
-  font-size: var(--text-xs);
   color: var(--paper-dim);
-  border-radius: 4px;
 }
 html[data-theme="light"] .wwm-cl-notice {
   background: rgba(201,164,90,0.12);
   color: var(--paper-mute);
+}
+
+/* ── light theme chart override (paper bg で見え難い色を補正) ─── */
+html[data-theme="light"] {
+  --chart-graze: #8b8170;
+  --chart-normal: #c8bda6;
 }
