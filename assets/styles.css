@@ -3642,6 +3642,7 @@ html[data-theme="light"] {
   overflow: hidden;
   position: relative;
   height: 195px;
+  z-index: 5;  /* sidebar/preset被り防止 */
   /* sidebar越え左端まで延伸 (negative margin trick) */
   margin-left: calc(-300px - var(--space-4));
   width: calc(100% + 300px + var(--space-4));
