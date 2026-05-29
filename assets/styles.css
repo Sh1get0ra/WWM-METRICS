@@ -4061,7 +4061,7 @@ html[data-theme="light"] .hero-wuxia .ink-stroke {
 }
 /* light: SVG path stroke を gradient (alpha 0.35 上限) から濃朱単色に置換 */
 html[data-theme="light"] .hero-wuxia .ink-stroke path {
-  stroke: rgba(160,28,18,0.78) !important;
+  stroke: rgba(160,28,18,0.5) !important;
 }
 /* 4隅L字 gold-deep (paper地でcontrast) */
 html[data-theme="light"] .hero-wuxia .l-bracket {
