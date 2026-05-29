@@ -2260,7 +2260,6 @@ html.wwm-view-sidebar .wwm-sb-power b,
 html.wwm-view-sidebar .wwm-stat-val { color: var(--overlay-text-2) !important; }
 html.wwm-view-sidebar .wwm-sb-section-title,
 html.wwm-view-sidebar .wwm-sb-header-value { color: var(--overlay-accent) !important; }
-html.wwm-view-sidebar .wwm-sb-section-title { background-color: rgba(0,0,0,0) !important; }
 /* OBS view: rest 背景は overlay透明前提 (濃帯化防止) */
 html.wwm-view-sidebar .wwm-sb-rest {
   background: transparent !important;
