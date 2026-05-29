@@ -2027,6 +2027,11 @@ html[data-theme="light"] .wwm-sb-rest {
 }
 /* #wwmSidebar 本体の border を透明 (内側 mini-hero / rest が枠を持つ) */
 #wwmSidebar { border-color: transparent !important; }
+/* サイドパネル 全体 Noto Serif JP に統一 */
+#wwmSidebar,
+#wwmSidebar * {
+  font-family: var(--f-display, 'Noto Serif JP'), serif !important;
+}
 
 .wwm-sb-top {
   display: flex; align-items: center; gap: var(--space-2-5);
