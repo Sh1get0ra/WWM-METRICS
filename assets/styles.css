@@ -3761,6 +3761,7 @@ html[data-theme="light"] {
 /* Tier badge 共通 base */
 .hero-wuxia .hero-tier.tier-badge {
   position: relative;
+  z-index: 2;
   font-family: var(--f-latin);
   font-size: 22px !important;
   font-weight: var(--fw-black);
@@ -3990,6 +3991,45 @@ html[data-theme="light"] .hero-wuxia .judge-dot-phys { border-color: #8a2418; bo
 html[data-theme="light"] .hero-wuxia .judge-dot-elem { border-color: #2d5a3a; box-shadow: 0 0 4px rgba(45,90,58,0.45); }
 html[data-theme="light"] .hero-wuxia .judge-row-sep { border-top-color: rgba(40,25,18,0.2); }
 /* 朱墨筆 light: ダーク同等に見えるよう更に濃化 */
+/* light: Tier badge は不透明化して ink-stroke の透け抜けを防止 */
+html[data-theme="light"] .hero-wuxia .hero-tier.tier-badge {
+  background: linear-gradient(180deg, #f4e8cc, #e8dab8);
+  color: #5a4226;
+  border-color: rgba(122,90,32,.6);
+  text-shadow: 0 0 2px rgba(244,232,204,0.9);
+}
+html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS {
+  background: linear-gradient(135deg, #f4d97a 0%, #e8c548 50%, #d4a930 100%);
+  color: #5a3a0a;
+  border-color: rgba(184,134,11,0.9);
+  text-shadow: 0 0 2px rgba(255,255,255,0.55);
+  box-shadow: 0 0 12px rgba(184,134,11,0.45), inset 0 1px 0 rgba(255,255,255,0.5), inset 0 -1px 0 rgba(90,42,10,0.3);
+}
+html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS::before {
+  background: linear-gradient(105deg, transparent 25%, rgba(255,250,220,0.7) 50%, transparent 75%) !important;
+}
+html[data-theme="light"] .hero-wuxia .hero-tier.tier-S {
+  background: linear-gradient(135deg, #f4a89a 0%, #e87862 50%, #c83c2b 100%);
+  color: #4a1410;
+  border-color: rgba(200,60,43,0.9);
+  text-shadow: 0 0 2px rgba(255,255,255,0.4);
+  box-shadow: 0 0 12px rgba(200,60,43,0.4), inset 0 1px 0 rgba(255,255,255,0.4), inset 0 -1px 0 rgba(60,10,8,0.3);
+}
+html[data-theme="light"] .hero-wuxia .hero-tier.tier-A {
+  background: linear-gradient(135deg, #c8e0c8 0%, #88b894 50%, #5a8868 100%);
+  color: #1a3a24;
+  border-color: rgba(45,90,58,0.85);
+}
+html[data-theme="light"] .hero-wuxia .hero-tier.tier-B {
+  background: linear-gradient(135deg, #e8d4a8 0%, #c4a868 50%, #8a7030 100%);
+  color: #3a2810;
+  border-color: rgba(122,90,32,0.85);
+}
+html[data-theme="light"] .hero-wuxia .hero-tier.tier-C {
+  background: linear-gradient(135deg, #d8ccb4 0%, #a89880 50%, #786850 100%);
+  color: #2a2010;
+  border-color: rgba(90,66,38,0.85);
+}
 html[data-theme="light"] .hero-wuxia .ink-stroke {
   opacity: 1;
   filter: saturate(2.2) brightness(.55) contrast(1.6);
