@@ -302,8 +302,8 @@ html[data-theme="light"] .wwm-brand-sub { color: var(--vermilion-bright); opacit
 /* zh = 2字短訳 余裕、 ko = 4字長め なので 個別調整 */
 html[lang="zh"] .top-controls-2row .icon-btn,
 html[lang="zh-CN"] .top-controls-2row .icon-btn {
-  font-size: 14px;
-  letter-spacing: 0.08em;
+  font-size: 9px;
+  letter-spacing: 0.06em;
 }
 html[lang="ko"] .top-controls-2row .icon-btn {
   font-size: 10px;
