@@ -1942,7 +1942,7 @@
         "effects": {
           "physDmgBoost": 0.025
         },
-        "raw": "滞骨付与で外功攻撃力+5% (8s 1s毎更新)、浮遊で+10% [維持不可で半減、physDmgBoost 0.025]"
+        "raw": "滞骨付与で外功攻撃力+5% (8s 1s毎更新)、浮遊で+10%"
       },
       "tier1": {
         "permanent": true,
@@ -1959,7 +1959,7 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Attack",
-        "raw": "Physical Attack (Solo Mode Level scaled, rank=purple) + T0効果CT=効果時間で5%維持→加算分physDmgBoost 0.025",
+        "raw": "Physical Attack (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "minPhysATKAdd": 19.17,
           "maxPhysATKAdd": 38.25,
@@ -2002,7 +2002,7 @@
         "effects": {
           "physDmgBoost": 0.025
         },
-        "raw": "浮遊/滞骨対象 — 自気血>75%で与ダメ+3%、≤75%で与ダメ10%気血回復 [physDmgBoost 0.025]"
+        "raw": "浮遊/滞骨対象 — 自気血>75%で与ダメ+3%、≤75%で与ダメ10%気血回復"
       }
     },
     "rank": "purple"
