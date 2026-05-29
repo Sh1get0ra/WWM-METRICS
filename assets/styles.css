@@ -2265,6 +2265,10 @@ html.wwm-view-sidebar .wwm-sb-rest {
   background: transparent !important;
   border-color: transparent !important;
 }
+/* OBS view: section title背景を URL param --overlay-label-bg で制御 */
+html.wwm-view-sidebar .wwm-sb-section-title {
+  background-color: var(--overlay-label-bg, #d4af37) !important;
+}
 /* 透明度 slider (右上 fixed) */
 .wwm-overlay-ctrl {
   position: fixed; top: 8px; right: 8px;

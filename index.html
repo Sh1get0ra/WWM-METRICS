@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;900&family=Noto+Serif+JP:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Yuji+Mai&family=Yuji+Boku&family=Ma+Shan+Zheng&family=ZCOOL+QingKe+HuangYou&family=Kaisei+Decol:wght@700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<link rel="stylesheet" href="assets/styles.css?v=408">
+<link rel="stylesheet" href="assets/styles.css?v=409">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DFYB6MKMMY"></script>
 <script>
@@ -60,6 +60,7 @@
     setColor('--overlay-text-1',  params.get('t1'), 'e8d9b8');
     setColor('--overlay-text-2',  params.get('t2'), 'f0d28a');
     setColor('--overlay-accent',  params.get('ac'), 'c9a45a');
+    setColor('--overlay-label-bg', params.get('lbg'), 'd4af37');
     // 他タブ からの更新 listen
     window.addEventListener('storage', (e) => {
       if (e.key === 'wwm_overlay_opacity_v1' && e.newValue) applyOpacity(e.newValue);
