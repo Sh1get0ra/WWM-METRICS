@@ -4012,9 +4012,9 @@ html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS::before {
   bottom: 0 !important;
   left: 0 !important;
   right: auto !important;
-  width: 60% !important;
+  width: 120% !important;
   height: 100% !important;
-  background: linear-gradient(105deg, transparent 25%, rgba(255,255,255,0.30) 50%, transparent 75%) !important;
+  background: linear-gradient(105deg, transparent 10%, rgba(255,255,255,0.30) 50%, transparent 90%) !important;
   transform: translateX(-200%);
   animation: tier-ss-shimmer-light 1.6s linear infinite !important;
   pointer-events: none !important;
