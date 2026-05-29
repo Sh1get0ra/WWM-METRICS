@@ -1962,7 +1962,7 @@ html[data-theme="light"] .tier-C { color: var(--paper-mute);  background: rgba(5
 }
 .wwm-sidebar-test::-webkit-scrollbar { display: none; }  /* Chrome/Safari */
 .wwm-sidebar-test:empty { display: none; }
-/* ── mini-hero header card (案C武侠化、 sticky固定) ────────────── */
+/* ── mini-hero header card (案C武侠化、 sticky固定、 枠透明) ────────────── */
 .wwm-sb-mini-hero-card {
   position: sticky;
   top: 0;
@@ -1970,7 +1970,7 @@ html[data-theme="light"] .tier-C { color: var(--paper-mute);  background: rgba(5
   background:
     radial-gradient(ellipse at top right, rgba(240,210,138,0.06), transparent 55%),
     linear-gradient(180deg, var(--surf-1), var(--surf-2));
-  border: 1px solid var(--gold-deep);
+  border: 1px solid transparent;
   padding: 12px 14px;
   margin-bottom: 10px;
   overflow: hidden;
@@ -2014,15 +2014,16 @@ html[data-theme="light"] .wwm-sb-mini-hero-ink {
   padding: 0 !important;
   z-index: 1;
 }
-/* sections wrapper (borderless、 bgのみで領域明示) */
+/* sections wrapper (枠あり、 mini-hero card が枠透明なのでこちらだけ枠表示) */
 .wwm-sb-rest {
   background: linear-gradient(180deg, var(--surf-1), var(--surf-2));
-  border: none;
+  border: 1px solid var(--ink-1);
   padding: 10px 12px 12px;
   display: flex; flex-direction: column; gap: 4px;
 }
 html[data-theme="light"] .wwm-sb-rest {
   background: linear-gradient(180deg, #f5ead0, #ede0c0);
+  border-color: rgba(40,25,18,0.15);
 }
 
 .wwm-sb-top {
