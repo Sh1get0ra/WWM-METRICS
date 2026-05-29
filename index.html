@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;900&family=Noto+Serif+JP:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<link rel="stylesheet" href="assets/styles.css?v=321">
+<link rel="stylesheet" href="assets/styles.css?v=322">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DFYB6MKMMY"></script>
 <script>
@@ -333,8 +333,34 @@
 </script>
 
 <!-- WWM Gear Grid (新レイアウト) -->
-<div class="wwm-gear-grid" id="wwmGearGrid"></div>
-<div class="wwm-xinfa-grid" id="wwmXinfaGrid"></div>
+<div class="wwm-gear-grid wwm-placeholder-grid" id="wwmGearGrid" onclick="showImportToast(event)">
+  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot-label="主武器"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">主武器</span></div></div>
+  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot-label="副武器"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">副武器</span></div></div>
+  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot-label="頭"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">頭</span></div></div>
+  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot-label="上衣"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">上衣</span></div></div>
+  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot-label="下衣"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">下衣</span></div></div>
+  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot-label="腰"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">腰</span></div></div>
+  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot-label="装飾"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">装飾</span></div></div>
+  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot-label="副装飾"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">副装飾</span></div></div>
+</div>
+<div class="wwm-xinfa-grid wwm-placeholder-grid" id="wwmXinfaGrid" onclick="showImportToast(event)">
+  <div class="wwm-xinfa-slot wwm-placeholder-slot"><div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法一</span></div></div>
+  <div class="wwm-xinfa-slot wwm-placeholder-slot"><div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法二</span></div></div>
+  <div class="wwm-xinfa-slot wwm-placeholder-slot"><div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法三</span></div></div>
+  <div class="wwm-xinfa-slot wwm-placeholder-slot"><div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法四</span></div></div>
+  <div class="wwm-xinfa-slot wwm-arsenal-slot wwm-placeholder-slot"><div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">武庫</span></div></div>
+</div>
+<script>
+window.showImportToast = function(e) {
+  const t = document.getElementById('toast');
+  if (!t) return;
+  const T = window.T || {};
+  t.textContent = T.importPrompt || '上部「IMPORT」ボタンからデータを取り込んでください';
+  t.classList.add('show');
+  if (window._toastTimer) clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+};
+</script>
 <div class="wwm-diagnostics" id="wwmDiagnostics" hidden></div>
 <div class="wwm-analysis-tabs" id="wwmAnalysisTabs">
   <button type="button" class="wwm-analysis-tab" data-analysis-tab="rank" data-i18n="affixRankingTab">調律/定音期待値</button>

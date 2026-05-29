@@ -3593,6 +3593,23 @@ html[data-theme="light"] .wwm-diag-modal .wwm-modal-bg-icon {
 .wwm-equip-affix .wwm-rank-gold   { color: #d4af37; }
 .wwm-affix-useful { color: var(--ratio-ok); font-weight: var(--fw-bold); cursor: help; }
 
+/* placeholder grid (import前) */
+.wwm-placeholder-grid { cursor: pointer; }
+.wwm-placeholder-slot {
+  position: relative;
+  min-height: 80px;
+  background: rgba(0,0,0,0.25);
+  border: 1px dashed var(--ink-2);
+  display: grid;
+  place-items: center;
+  color: var(--paper-mute);
+  transition: border-color 0.15s, background 0.15s;
+}
+.wwm-placeholder-grid:hover .wwm-placeholder-slot {
+  border-color: var(--gold-deep);
+  background: var(--gold-faint);
+}
+
 /* ── changelog notice (lang制限注記) ───────────────────────── */
 .wwm-cl-notice {
   padding: var(--space-2) var(--space-3);
