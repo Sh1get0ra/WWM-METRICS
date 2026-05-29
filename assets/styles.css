@@ -269,6 +269,7 @@ header.topbar::after {
   border: 1.5px solid rgba(255,255,255,0.55);
   border-radius: 5%;
 }
+html[data-theme="light"] .wwm-brand-seal { opacity: 0.6; }
 html[data-theme="light"] .wwm-brand-vert { color: var(--vermilion); border-color: var(--gold); }
 html[data-theme="light"] .wwm-brand-en { color: var(--gold); opacity: 0.75; }
 html[data-theme="light"] .wwm-brand-sub { color: var(--vermilion-bright); opacity: 0.85; }
