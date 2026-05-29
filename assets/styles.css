@@ -3708,11 +3708,8 @@ html[data-theme="light"] {
   font-size: clamp(56px, 7.5vw, 102px);
   line-height: .88;
   letter-spacing: -.02em;
-  background: linear-gradient(180deg, #f9ecc4, #f0d28a 45%, #c9a45a);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 2px 1px rgba(0,0,0,.6));
+  color: var(--paper);  /* 古紙白 #ede4d0 */
+  text-shadow: 0 2px 1px rgba(0,0,0,.6), 0 4px 12px rgba(0,0,0,.4);
 }
 /* Tier badge 共通 base */
 .hero-wuxia .hero-tier.tier-badge {
