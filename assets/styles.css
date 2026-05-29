@@ -2338,6 +2338,13 @@ body.wwm-layout-active .wwm-sidebar-test {
   border-left: none !important;
   background: transparent !important;
   padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+/* rest を残り高さ全部使う (タブパネル同様 footer まで) */
+body.wwm-layout-active .wwm-sb-rest {
+  flex: 1 1 auto;
+  min-height: 0;
 }
 body.wwm-layout-active .wwm-sidebar-test::-webkit-scrollbar { width: 6px; }
 body.wwm-layout-active .wwm-sidebar-test::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
