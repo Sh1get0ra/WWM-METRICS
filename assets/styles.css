@@ -2033,9 +2033,13 @@ html[data-theme="light"] .wwm-sb-rest {
 }
 /* #wwmSidebar 本体の border を透明 (内側 mini-hero / rest が枠を持つ) */
 #wwmSidebar { border-color: transparent !important; }
-/* サイドパネル 全体 Noto Serif JP に統一 */
+/* サイドパネル + 装備/心法カード 全体 Noto Serif JP に統一 */
 #wwmSidebar,
-#wwmSidebar * {
+#wwmSidebar *,
+#wwmGearGrid,
+#wwmGearGrid *,
+#wwmXinfaGrid,
+#wwmXinfaGrid * {
   font-family: var(--f-display, 'Noto Serif JP'), serif !important;
 }
 
