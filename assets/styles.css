@@ -4005,7 +4005,8 @@ html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS {
   text-shadow: 0 0 2px rgba(255,255,255,0.55);
   box-shadow: 0 0 12px rgba(184,134,11,0.45), inset 0 1px 0 rgba(255,255,255,0.5), inset 0 -1px 0 rgba(90,42,10,0.3);
 }
-html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS::before {
+html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS::before,
+html[data-theme="light"] .wwm-sb-tier-badge.tier-SS::before {
   content: '' !important;
   position: absolute !important;
   top: 0 !important;
@@ -4019,6 +4020,13 @@ html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS::before {
   animation: tier-ss-shimmer-light 1.6s linear infinite !important;
   pointer-events: none !important;
   z-index: 1 !important;
+}
+/* sidebar 側 SS badge 本体も light 不透明化 (ink-stroke 等の透け回避) */
+html[data-theme="light"] .wwm-sb-tier-badge.tier-SS {
+  background: linear-gradient(135deg, #f4d97a 0%, #e8c548 50%, #d4a930 100%) !important;
+  color: #5a3a0a !important;
+  border-color: rgba(184,134,11,0.9) !important;
+  text-shadow: 0 0 2px rgba(255,255,255,0.55) !important;
 }
 @keyframes tier-ss-shimmer-light {
   0%   { transform: translateX(-200%); }
