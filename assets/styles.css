@@ -2259,9 +2259,10 @@ body.wwm-layout-active .wwm-sidebar-test {
   left: auto !important;
   bottom: auto !important;
   width: 100% !important;
-  height: 100% !important;
+  height: calc(100% - 16px) !important;
   max-height: none !important;
   min-height: 0 !important;
+  margin-bottom: 16px;
   overflow-y: auto !important;
   grid-area: sidebar;
   z-index: auto;
