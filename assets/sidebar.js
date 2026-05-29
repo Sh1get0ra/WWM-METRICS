@@ -83,9 +83,14 @@ async function _checkChangelog() {
     const cl = await fetch('data/changelog.json').then(r => r.json());
     if (!cl?.current) return;
     const seen = localStorage.getItem(_CHANGELOG_KEY);
-    if (seen && _semver(seen, cl.current) >= 0) return;
+    // 初回起動 (seen無し): modal出さず current版を保存 → 以降差分のみ
+    if (!seen) {
+      localStorage.setItem(_CHANGELOG_KEY, cl.current);
+      return;
+    }
+    if (_semver(seen, cl.current) >= 0) return;
     // 差分: seen より新しい entries
-    const entries = (cl.entries || []).filter(e => !seen || _semver(e.version, seen) > 0);
+    const entries = (cl.entries || []).filter(e => _semver(e.version, seen) > 0);
     if (!entries.length) {
       localStorage.setItem(_CHANGELOG_KEY, cl.current);
       return;
