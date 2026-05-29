@@ -1009,13 +1009,14 @@ function _shareBuildUrl() {
     b64 = btoa(unescape(encodeURIComponent(json))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
     url = location.origin + location.pathname + '#build=' + b64;
   } catch (e) { alert('URL 生成失敗: ' + e.message); return; }
-  // OBS URL は 透明度+背景色+文字色 込みで動的生成
-  const buildObsUrl = (opPct, bgHex, t1Hex, t2Hex, acHex) => {
+  // OBS URL は 透明度+背景色+文字色+ラベル背景 込みで動的生成
+  const buildObsUrl = (opPct, bgHex, t1Hex, t2Hex, acHex, lbgHex) => {
     const bg = (bgHex || '#0a0a0a').replace('#','');
     const t1 = (t1Hex || '#e8d9b8').replace('#','');
     const t2 = (t2Hex || '#f0d28a').replace('#','');
     const ac = (acHex || '#c9a45a').replace('#','');
-    return location.origin + location.pathname + '?view=sidebar&op=' + opPct + '&bg=' + bg + '&t1=' + t1 + '&t2=' + t2 + '&ac=' + ac + '#build=' + b64;
+    const lbg = (lbgHex || '#d4af37').replace('#','');
+    return location.origin + location.pathname + '?view=sidebar&op=' + opPct + '&bg=' + bg + '&t1=' + t1 + '&t2=' + t2 + '&ac=' + ac + '&lbg=' + lbg + '#build=' + b64;
   };
   // 過去の overlay 設定 復元
   const OVL_KEY = 'wwm_overlay_settings_v1';
@@ -1026,7 +1027,8 @@ function _shareBuildUrl() {
   const initT1 = saved.t1 || '#e8d9b8';
   const initT2 = saved.t2 || '#f0d28a';
   const initAc = saved.ac || '#c9a45a';
-  let obsUrl = buildObsUrl(initOp, initBg, initT1, initT2, initAc);
+  const initLbg = saved.lbg || '#d4af37';
+  let obsUrl = buildObsUrl(initOp, initBg, initT1, initT2, initAc, initLbg);
   // modal で表示 + clipboard コピー
   const m = document.createElement('div');
   m.className = 'wwm-modal-backdrop';
@@ -1063,8 +1065,11 @@ function _shareBuildUrl() {
           <label style="display:flex;align-items:center;gap:6px;">文字色2
             <input type="color" id="wwmObsT2" value="${initT2}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
           </label>
-          <label style="display:flex;align-items:center;gap:6px;">ラベル色
+          <label style="display:flex;align-items:center;gap:6px;">ラベル文字
             <input type="color" id="wwmObsAc" value="${initAc}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;">ラベル背景
+            <input type="color" id="wwmObsLbg" value="${initLbg}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
           </label>
         </div>
         <textarea class="wwm-share-url" id="wwmShareUrlObs" readonly>${obsUrl}</textarea>
@@ -1096,19 +1101,21 @@ function _shareBuildUrl() {
   const t1Picker = m.querySelector('#wwmObsT1');
   const t2Picker = m.querySelector('#wwmObsT2');
   const acPicker = m.querySelector('#wwmObsAc');
+  const lbgPicker = m.querySelector('#wwmObsLbg');
   const obsTa = m.querySelector('#wwmShareUrlObs');
   const refreshObs = () => {
     const pct = parseInt(opSlider.value, 10);
     opVal.textContent = pct + '%';
-    obsUrl = buildObsUrl(pct, bgPicker.value, t1Picker.value, t2Picker.value, acPicker.value);
+    obsUrl = buildObsUrl(pct, bgPicker.value, t1Picker.value, t2Picker.value, acPicker.value, lbgPicker.value);
     obsTa.value = obsUrl;
-    try { localStorage.setItem(OVL_KEY, JSON.stringify({ op: pct, bg: bgPicker.value, t1: t1Picker.value, t2: t2Picker.value, ac: acPicker.value })); } catch(_) {}
+    try { localStorage.setItem(OVL_KEY, JSON.stringify({ op: pct, bg: bgPicker.value, t1: t1Picker.value, t2: t2Picker.value, ac: acPicker.value, lbg: lbgPicker.value })); } catch(_) {}
   };
   opSlider.addEventListener('input', refreshObs);
   bgPicker.addEventListener('input', refreshObs);
   t1Picker.addEventListener('input', refreshObs);
   t2Picker.addEventListener('input', refreshObs);
   acPicker.addEventListener('input', refreshObs);
+  lbgPicker.addEventListener('input', refreshObs);
 }
 // hash で build 受信時 復元
 function _loadSharedBuild() {
