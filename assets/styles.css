@@ -2697,23 +2697,27 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
   color: #1a3a24;
   box-shadow: 0 0 8px rgba(168,212,180,0.6);
 }
-/* 本来 title内のテキスト「現有/新置」は朱印で表現するので隠す。 Lv バッジは残す */
-.wwm-cmp-modal-a .wwm-cmp-title { color: transparent !important; font-size: 0 !important; }
-.wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv {
+/* 本来 title内のテキスト「現有/新置」は朱印で表現するので隠す。 Lv/select は残す */
+.wwm-cmp-modal-a .wwm-cmp-title-text { display: none !important; }
+.wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv,
+.wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
   color: var(--paper) !important;
   font-family: var(--f-mono, 'Rajdhani') !important;
-  font-size: 15px !important;
+  font-size: 17px !important;
   font-weight: 700 !important;
   letter-spacing: 0.08em !important;
   border: 1.5px solid var(--gold-deep) !important;
-  padding: 4px 10px !important;
+  padding: 4px 12px !important;
   border-radius: 2px !important;
   background: #1a1410 !important;
   line-height: 1 !important;
-  min-height: 24px !important;
+  min-height: 26px !important;
   display: inline-flex !important;
   align-items: center !important;
   box-shadow: 0 0 6px rgba(201,164,90,0.25) !important;
+}
+.wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
+  cursor: pointer !important;
 }
 .wwm-cmp-modal-a .wwm-cmp-col {
   margin-top: 4px;
