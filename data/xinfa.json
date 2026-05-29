@@ -28,9 +28,7 @@
         "needsManualInput": false,
         "statType": "Max HP",
         "raw": "Max HP (Solo Mode Level scaled, rank=blue)",
-        "effects": {
-          "globalDmgBoost": 0.0065
-        },
+        "effects": {},
         "category": "defensive"
       },
       "tier3": {
@@ -49,9 +47,7 @@
       },
       "tier5": {
         "permanent": true,
-        "effects": {
-          "globalDmgBoost": 0.0065
-        },
+        "effects": {},
         "raw": "Physical DMG Reduction +2.2%",
         "category": "defensive"
       },
@@ -74,13 +70,56 @@
     },
     "description": "戦闘開始後12s 気血60%未満で 4s雪見効果、 毎秒気血 2%+600回復 (300s CD)。 汎用 回復系。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "戦闘開始12s以内 気血60%未満で 4s雪見、 毎秒気血2%+600回復 (300s CD)" },
-      "tier1": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "回復値 毎秒3%+600 に上昇" },
-      "tier2": { "permanent": true, "worldLv": 14, "needsManualInput": false, "statType": "Max HP", "raw": "Max HP (Solo Mode Level scaled, rank=blue)", "effects": { "globalDmgBoost": 0.0065 }, "category": "defensive" },
-      "tier3": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "雪見中 与ダメ10% を気血回復" },
-      "tier4": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "発動間隔 50%短縮 (300s→150s)" },
-      "tier5": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "外功耐性 +4.5", "category": "defensive" },
-      "tier6": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "雪見中 次2回の技 必ず会心効果獲得" }
+      "tier0": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "戦闘開始12s以内 気血60%未満で 4s雪見、 毎秒気血2%+600回復 (300s CD)"
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "回復値 毎秒3%+600 に上昇"
+      },
+      "tier2": {
+        "permanent": true,
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Max HP",
+        "raw": "Max HP (Solo Mode Level scaled, rank=blue)",
+        "effects": {},
+        "category": "defensive"
+      },
+      "tier3": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "雪見中 与ダメ10% を気血回復"
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "発動間隔 50%短縮 (300s→150s)"
+      },
+      "tier5": {
+        "permanent": true,
+        "effects": {},
+        "raw": "外功耐性 +4.5",
+        "category": "defensive"
+      },
+      "tier6": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "雪見中 次2回の技 必ず会心効果獲得"
+      }
     },
     "rank": "blue"
   },
@@ -93,13 +132,56 @@
     },
     "description": "攻撃を受ける時 硬直が出にくくなる (首領/プレイヤー攻撃では非発動)。 汎用 行動妨害軽減系。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "攻撃被ダメ時 硬直発生減少 (首領/プレイヤー攻撃 非発動)" },
-      "tier1": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "硬直耐性 周囲敵数に応じ上昇" },
-      "tier2": { "permanent": true, "worldLv": 14, "needsManualInput": false, "statType": "Physical Defense", "raw": "Physical Defense (Solo Mode Level scaled, rank=blue)", "effects": { "globalDmgBoost": 0.0065 }, "category": "defensive" },
-      "tier3": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "攻撃被ダメ毎 10%確率 5s 外功防御+2% max5stack" },
-      "tier4": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "硬直耐性 ボス戦も有効化" },
-      "tier5": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "外功耐性 +4.5", "category": "defensive" },
-      "tier6": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "烈心効果 反撃ダメ (敵気血max 0.2%相当)、 30s毎1回 5s持続" }
+      "tier0": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "攻撃被ダメ時 硬直発生減少 (首領/プレイヤー攻撃 非発動)"
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "硬直耐性 周囲敵数に応じ上昇"
+      },
+      "tier2": {
+        "permanent": true,
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Physical Defense",
+        "raw": "Physical Defense (Solo Mode Level scaled, rank=blue)",
+        "effects": {},
+        "category": "defensive"
+      },
+      "tier3": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "攻撃被ダメ毎 10%確率 5s 外功防御+2% max5stack"
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "硬直耐性 ボス戦も有効化"
+      },
+      "tier5": {
+        "permanent": true,
+        "effects": {},
+        "raw": "外功耐性 +4.5",
+        "category": "defensive"
+      },
+      "tier6": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "烈心効果 反撃ダメ (敵気血max 0.2%相当)、 30s毎1回 5s持続"
+      }
     },
     "rank": "blue"
   },
@@ -112,13 +194,59 @@
     },
     "description": "命門一閃 奇襲距離+1.5m + 与ダメ+10%、 奇襲成功で気血5%回復。 汎用。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "命門一閃 奇襲距離+1.5m / 与ダメ+10% / 奇襲成功で気血5%回復" },
-      "tier1": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "奇襲時 回復量 5%→10% に上昇" },
-      "tier2": { "permanent": true, "worldLv": 14, "needsManualInput": false, "statType": "Min Physical Attack", "raw": "Min Physical Attack (Solo Mode Level scaled, rank=blue)", "effects": { "minPhysATKAdd": 51.12 }, "derivedFromGold": true },
-      "tier3": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "奇襲成功 対象から ランダム戦利品+1 確率向上" },
-      "tier4": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "奇襲可能 最大距離 +2.5m" },
-      "tier5": { "permanent": true, "effects": { "physDmgBoost": 0.022 }, "raw": "Physical DMG Bonus +2.2%" },
-      "tier6": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "奇襲成功 すぐ潜伏状態、 20s毎1回発動" }
+      "tier0": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "命門一閃 奇襲距離+1.5m / 与ダメ+10% / 奇襲成功で気血5%回復"
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "奇襲時 回復量 5%→10% に上昇"
+      },
+      "tier2": {
+        "permanent": true,
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Min Physical Attack",
+        "raw": "Min Physical Attack (Solo Mode Level scaled, rank=blue)",
+        "effects": {
+          "minPhysATKAdd": 51.12
+        },
+        "derivedFromGold": true
+      },
+      "tier3": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "奇襲成功 対象から ランダム戦利品+1 確率向上"
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "奇襲可能 最大距離 +2.5m"
+      },
+      "tier5": {
+        "permanent": true,
+        "effects": {
+          "physDmgBoost": 0.022
+        },
+        "raw": "Physical DMG Bonus +2.2%"
+      },
+      "tier6": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "奇襲成功 すぐ潜伏状態、 20s毎1回発動"
+      }
     },
     "rank": "blue"
   },
@@ -131,13 +259,59 @@
     },
     "description": "10%確率で泣血付与、 5stack蓄積→刺傷ダメ。 汎用攻撃系 (少し強め)。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "10%確率1stack泣血、 5s持続、 1秒毎ダメ、 max5stack、 5stack時解除→刺傷ダメ1回" },
-      "tier1": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "与刺傷ダメ +100%" },
-      "tier2": { "permanent": true, "worldLv": 14, "needsManualInput": false, "statType": "Max Physical Attack", "raw": "Max Physical Attack (Solo Mode Level scaled, rank=blue)", "effects": { "maxPhysATKAdd": 51.12 }, "derivedFromGold": true },
-      "tier3": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "泣血持続終了 5stack未満でも 20%確率 すぐ刺傷ダメ1回" },
-      "tier4": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "泣血付与確率 10%→15%" },
-      "tier5": { "permanent": true, "effects": { "critBoost": 0.035 }, "raw": "Crit DMG Bonus +3.5%" },
-      "tier6": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "刺傷で全泣血解除時 必ず1-2stack残存" }
+      "tier0": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "10%確率1stack泣血、 5s持続、 1秒毎ダメ、 max5stack、 5stack時解除→刺傷ダメ1回"
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "与刺傷ダメ +100%"
+      },
+      "tier2": {
+        "permanent": true,
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Max Physical Attack",
+        "raw": "Max Physical Attack (Solo Mode Level scaled, rank=blue)",
+        "effects": {
+          "maxPhysATKAdd": 51.12
+        },
+        "derivedFromGold": true
+      },
+      "tier3": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "泣血持続終了 5stack未満でも 20%確率 すぐ刺傷ダメ1回"
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "泣血付与確率 10%→15%"
+      },
+      "tier5": {
+        "permanent": true,
+        "effects": {
+          "critBoost": 0.035
+        },
+        "raw": "Crit DMG Bonus +3.5%"
+      },
+      "tier6": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "刺傷で全泣血解除時 必ず1-2stack残存"
+      }
     },
     "rank": "blue"
   },
@@ -150,13 +324,56 @@
     },
     "description": "鱗舞追月 ニシキゴイ変身中 突進/跳躍消費-50%、 形態終了で気血シールド1生成。 汎用。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "鱗舞追月 ニシキゴイ変身中 突進/跳躍 消費-50%、 形態終了で気血シールド1生成" },
-      "tier1": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "ニシキゴイ形態解除時 気血max 30% 吸収シールド (最大10s、 30s毎1回)" },
-      "tier2": { "permanent": true, "worldLv": 14, "needsManualInput": false, "statType": "Physical Defense", "raw": "Physical Defense (Solo Mode Level scaled, rank=blue)", "effects": { "globalDmgBoost": 0.0065 }, "category": "defensive" },
-      "tier3": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "ニシキゴイ形態+戦闘離脱状態で 気血/精力 持続回復、 彩砂環境同時で 回復+100%" },
-      "tier4": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "ニシキゴイ形態で 突進/跳躍 持久力消費なし" },
-      "tier5": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "外功ダメージ軽減 +2.2%", "category": "defensive" },
-      "tier6": { "permanent": true, "effects": { "globalDmgBoost": 0.0065 }, "raw": "ニシキゴイ形態 採集時 30%確率 報酬2倍 (美食採集クリと重複可)" }
+      "tier0": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "鱗舞追月 ニシキゴイ変身中 突進/跳躍 消費-50%、 形態終了で気血シールド1生成"
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "ニシキゴイ形態解除時 気血max 30% 吸収シールド (最大10s、 30s毎1回)"
+      },
+      "tier2": {
+        "permanent": true,
+        "worldLv": 14,
+        "needsManualInput": false,
+        "statType": "Physical Defense",
+        "raw": "Physical Defense (Solo Mode Level scaled, rank=blue)",
+        "effects": {},
+        "category": "defensive"
+      },
+      "tier3": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "ニシキゴイ形態+戦闘離脱状態で 気血/精力 持続回復、 彩砂環境同時で 回復+100%"
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "ニシキゴイ形態で 突進/跳躍 持久力消費なし"
+      },
+      "tier5": {
+        "permanent": true,
+        "effects": {},
+        "raw": "外功ダメージ軽減 +2.2%",
+        "category": "defensive"
+      },
+      "tier6": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.0065
+        },
+        "raw": "ニシキゴイ形態 採集時 30%確率 報酬2倍 (美食採集クリと重複可)"
+      }
     },
     "rank": "blue"
   },
@@ -232,8 +449,20 @@
     },
     "description": "毒スタック → 敵 外功防御/耐性 デバフ。 汎用。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "10%確率 毒1stack付与 (5s、1秒毎ダメ)、 毒獲得で敵 外功防御-0.6%/stack max5 (-3%)" },
-      "tier1": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "毒1stackあたり 外功防御減 -0.6%→-1.2%" },
+      "tier0": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "10%確率 毒1stack付与 (5s、1秒毎ダメ)、 毒獲得で敵 外功防御-0.6%/stack max5 (-3%)"
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "毒1stackあたり 外功防御減 -0.6%→-1.2%"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -245,8 +474,20 @@
         },
         "derivedFromGold": true
       },
-      "tier3": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "被攻撃時 10%確率 攻撃者に毒1stack付与" },
-      "tier4": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "毒付与確率 10%→15%" },
+      "tier3": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "被攻撃時 10%確率 攻撃者に毒1stack付与"
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "毒付与確率 10%→15%"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
@@ -254,7 +495,13 @@
         },
         "raw": "Physical DMG Bonus +2.5%"
       },
-      "tier6": { "permanent": true, "effects": { "outerPen": 5 }, "raw": "毒5stack時 追加で敵 外功耐性-10 (デバフ → 実効 外功貫通+5)" }
+      "tier6": {
+        "permanent": true,
+        "effects": {
+          "outerPen": 5
+        },
+        "raw": "毒5stack時 追加で敵 外功耐性-10 (デバフ → 実効 外功貫通+5)"
+      }
     },
     "rank": "purple"
   },
@@ -267,8 +514,20 @@
     },
     "description": "とどめ技で 与ダメ基準 気血回復。 汎用 (吸血/真気系)。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "気絶とどめ技で 与ダメ8% 気血回復" },
-      "tier1": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "力尽きとどめ技 回復 8%→12%" },
+      "tier0": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "気絶とどめ技で 与ダメ8% 気血回復"
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "力尽きとどめ技 回復 8%→12%"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -278,15 +537,33 @@
         "effects": {},
         "category": "defensive"
       },
-      "tier3": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "力尽きとどめ技で 追加 真気値+10回復" },
-      "tier4": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "力尽きとどめ技 追加ダメ+5%" },
+      "tier3": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "力尽きとどめ技で 追加 真気値+10回復"
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "力尽きとどめ技 追加ダメ+5%"
+      },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "Physical DMG Reduction +2.5%",
         "category": "defensive"
       },
-      "tier6": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "力尽き対象攻撃で とどめ技以外も 与ダメ30% 気血回復" }
+      "tier6": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "力尽き対象攻撃で とどめ技以外も 与ダメ30% 気血回復"
+      }
     },
     "rank": "purple"
   },
@@ -301,8 +578,20 @@
     "defaultMode": "default",
     "description": "奇術精気リソース系 (精気回復/獲得)。 汎用。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "指定回復行動後 50%確率 精気1獲得 (攻撃/被撃/受け流しで精気獲得時は追加回復なし)" },
-      "tier1": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "撃破/暗殺/ジャスト回避/矢が弱点ヒットで精気獲得時 必ず精気+1" },
+      "tier0": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "指定回復行動後 50%確率 精気1獲得 (攻撃/被撃/受け流しで精気獲得時は追加回復なし)"
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "撃破/暗殺/ジャスト回避/矢が弱点ヒットで精気獲得時 必ず精気+1"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -312,15 +601,33 @@
         "effects": {},
         "category": "defensive"
       },
-      "tier3": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "攻撃 or 被攻撃で精気獲得時 10%確率 追加+1" },
-      "tier4": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "受け流し成功で精気獲得時 必ず追加+1" },
+      "tier3": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "攻撃 or 被攻撃で精気獲得時 10%確率 追加+1"
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "受け流し成功で精気獲得時 必ず追加+1"
+      },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "外功耐性 +5.1",
         "category": "defensive"
       },
-      "tier6": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "奇術技発動後5秒以内 消費精気30%返還 (1回max10)" }
+      "tier6": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "奇術技発動後5秒以内 消費精気30%返還 (1回max10)"
+      }
     },
     "rank": "purple"
   },
@@ -335,8 +642,20 @@
     "defaultMode": "default",
     "description": "受け流し成功で長生バフ (与ダメ+10%/確定会心/確定会意 1択、10s、30sCD)。 汎用。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "受け流し成功で長生バフ獲得 (導き/心/意 1択、10s、30sCD)" },
-      "tier1": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "受け流し成功時 真気値+5追加回復 (発動間隔制限なし)" },
+      "tier0": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "受け流し成功で長生バフ獲得 (導き/心/意 1択、10s、30sCD)"
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "受け流し成功時 真気値+5追加回復 (発動間隔制限なし)"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -348,8 +667,20 @@
         },
         "derivedFromGold": true
       },
-      "tier3": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "受け流し成功後5秒以内 次の被ダメ-10%" },
-      "tier4": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "効果の発動間隔-20% (30s→24s)" },
+      "tier3": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "受け流し成功後5秒以内 次の被ダメ-10%"
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "効果の発動間隔-20% (30s→24s)"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
@@ -357,7 +688,13 @@
         },
         "raw": "Physical Penetration +5.1"
       },
-      "tier6": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "受け流し成功後 必ず長生の導き効果 + 長生の心/意 1つ獲得 (24sCD)" }
+      "tier6": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "受け流し成功後 必ず長生の導き効果 + 長生の心/意 1つ獲得 (24sCD)"
+      }
     },
     "rank": "purple"
   },
@@ -372,8 +709,20 @@
     "defaultMode": "default",
     "description": "完全回避で消費気力返還/被ダメ減/回避強化。 汎用。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "完全回避時 50%確率 消費気力100%返還" },
-      "tier1": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "回避消費気力返還 一定確率70%上昇" },
+      "tier0": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "完全回避時 50%確率 消費気力100%返還"
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "回避消費気力返還 一定確率70%上昇"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -385,15 +734,33 @@
         },
         "derivedFromGold": true
       },
-      "tier3": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "回避消費気力-20% / 回避中被ダメ-20%" },
-      "tier4": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "完全回避後 最大気血0.5%追加回復" },
+      "tier3": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "回避消費気力-20% / 回避中被ダメ-20%"
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "完全回避後 最大気血0.5%追加回復"
+      },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "Physical DMG Reduction +2.5%",
         "category": "defensive"
       },
-      "tier6": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "回避無敵時間+20%" }
+      "tier6": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "回避無敵時間+20%"
+      }
     },
     "rank": "purple"
   },
@@ -408,8 +775,20 @@
     "defaultMode": "default",
     "description": "帰義/鏖戦 効果 (直接ダメ+/被ダメ- + 敵/自気血欠損で追加上昇)。 汎用。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "帰義効果 与直接ダメ+3% + 敵気血20%減毎+0.5% max+2%" },
-      "tier1": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "鏖戦効果 被直接ダメ-3%/与回復+3% + 自気血20%減毎+0.5% max+2%" },
+      "tier0": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "帰義効果 与直接ダメ+3% + 敵気血20%減毎+0.5% max+2%"
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "鏖戦効果 被直接ダメ-3%/与回復+3% + 自気血20%減毎+0.5% max+2%"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -422,8 +801,20 @@
         },
         "derivedFromGold": true
       },
-      "tier3": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "帰義/鏖戦 気血欠損加算刻み 20%→15% (max上昇は不変)" },
-      "tier4": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "明/晦 各5層 (5s) — 明1層で帰義+10% max50%、晦1層で鏖戦+10% max50%" },
+      "tier3": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "帰義/鏖戦 気血欠損加算刻み 20%→15% (max上昇は不変)"
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "明/晦 各5層 (5s) — 明1層で帰義+10% max50%、晦1層で鏖戦+10% max50%"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
@@ -431,7 +822,13 @@
         },
         "raw": "外功貫通 +5.1"
       },
-      "tier6": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "明/晦廃止、帰義 +3→+5%/敵気血15%減毎+1% max+4%、鏖戦 -3→-5%/+3→+5%/自気血15%減毎+1% max+4%" }
+      "tier6": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "明/晦廃止、帰義 +3→+5%/敵気血15%減毎+1% max+4%、鏖戦 -3→-5%/+3→+5%/自気血15%減毎+1% max+4%"
+      }
     },
     "rank": "purple"
   },
@@ -446,8 +843,20 @@
     "defaultMode": "default",
     "description": "気血<30%で警戒/惕心バフ (回復+被ダメ減)、詰問デバフで敵与ダメ減。 汎用。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "気血<30%で警戒発動 — 気血20%回復 + 10s 被ダメ-20% (120sCD max1回)" },
-      "tier1": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "惕心発動間隔 120s→90s短縮" },
+      "tier0": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "気血<30%で警戒発動 — 気血20%回復 + 10s 被ダメ-20% (120sCD max1回)"
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "惕心発動間隔 120s→90s短縮"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -457,15 +866,33 @@
         "effects": {},
         "category": "defensive"
       },
-      "tier3": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "惕心中 与/被ダメで気血2%回復 (1s毎max1回)" },
-      "tier4": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "惕心中 被ダメで攻撃者に齟刺ダメ (1s毎max1回) + 詰問付与 (相手与ダメ-1.5%、5s、max5stack)" },
+      "tier3": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "惕心中 与/被ダメで気血2%回復 (1s毎max1回)"
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "惕心中 被ダメで攻撃者に齟刺ダメ (1s毎max1回) + 詰問付与 (相手与ダメ-1.5%、5s、max5stack)"
+      },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "外功ダメージ軽減 +2.5%",
         "category": "defensive"
       },
-      "tier6": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "詰問被ダメ軽減 1.5%→3% + 惕心中 与ダメでも齟刺/詰問発動 (発動間隔不変)" }
+      "tier6": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "詰問被ダメ軽減 1.5%→3% + 惕心中 与ダメでも齟刺/詰問発動 (発動間隔不変)"
+      }
     },
     "rank": "purple"
   },
@@ -610,8 +1037,26 @@
     "defaultMode": "default",
     "description": "無銘の槍専用 — 乾坤定/長風効果強化、山移/真気不均衡 関連。 紫。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "kongfuRequired": [10202], "effects": { "globalDmgBoost": 0.01 }, "raw": "乾坤定使用中 長風効果持続10s、気力消費-20% (疾走/溜め技 さらに-10%)" },
-      "tier1": { "permanent": true, "kongfuRequired": [10202], "effects": { "globalDmgBoost": 0.01 }, "raw": "鋼鳴/虹流儀武術技 首領命中で真気不均衡付与可能" },
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [
+          10202
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "乾坤定使用中 長風効果持続10s、気力消費-20% (疾走/溜め技 さらに-10%)"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [
+          10202
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "鋼鳴/虹流儀武術技 首領命中で真気不均衡付与可能"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -625,8 +1070,26 @@
         "maxPathATK": 21.7,
         "derivedFromGold": true
       },
-      "tier3": { "permanent": true, "kongfuRequired": [10202], "effects": { "globalDmgBoost": 0.01 }, "raw": "乾坤定 気力回復+100% (回復値60)" },
-      "tier4": { "permanent": true, "kongfuRequired": [10202], "effects": { "addSympathyRate": 0.03 }, "raw": "長風中 付加会意率+1.5% (対首領 追加+1.5%、合計+3%採用)" },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [
+          10202
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "乾坤定 気力回復+100% (回復値60)"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [
+          10202
+        ],
+        "effects": {
+          "addSympathyRate": 0.03
+        },
+        "raw": "長風中 付加会意率+1.5% (対首領 追加+1.5%、合計+3%採用)"
+      },
       "tier5": {
         "permanent": true,
         "effects": {},
@@ -634,7 +1097,16 @@
         "weaponSpecific": "bellstrike",
         "pendingImplementation": true
       },
-      "tier6": { "permanent": true, "kongfuRequired": [10202], "effects": { "globalDmgBoost": 0.01 }, "raw": "非首領命中で山移付与(12s)、溜め技が山移/真気不均衡対象に命中で気力4or8回復 (2s毎max1)" }
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [
+          10202
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "非首領命中で山移付与(12s)、溜め技が山移/真気不均衡対象に命中で気力4or8回復 (2s毎max1)"
+      }
     },
     "rank": "purple"
   },
@@ -649,8 +1121,20 @@
     "defaultMode": "default",
     "description": "気力消費返還/星火スタック。 汎用扱い (kongfuRequiredなし)。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "気力消費時 3.5%返還" },
-      "tier1": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "気力消費返還 3.5%→5.0%" },
+      "tier0": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "気力消費時 3.5%返還"
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "気力消費返還 3.5%→5.0%"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -663,8 +1147,20 @@
         },
         "derivedFromGold": true
       },
-      "tier3": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "気力合計消費50で即10返還 (30sCD)" },
-      "tier4": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "気力消費返還 5.0%→7.0%" },
+      "tier3": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "気力合計消費50で即10返還 (30sCD)"
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "気力消費返還 5.0%→7.0%"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
@@ -672,7 +1168,13 @@
         },
         "raw": "Physical DMG Bonus +2.5%"
       },
-      "tier6": { "permanent": true, "effects": { "globalDmgBoost": 0.01 }, "raw": "気力変動>10で星火1stack獲得 (10s 気力回復速度+1%、max10stack)" }
+      "tier6": {
+        "permanent": true,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "気力変動>10で星火1stack獲得 (10s 気力回復速度+1%、max10stack)"
+      }
     },
     "rank": "purple"
   },
@@ -691,8 +1193,34 @@
     "defaultMode": "default",
     "description": "溜め技ダメ強化 (対Boss/低気力プレイヤー)。無銘の剣/断魂の刀/破陣の刀で100%、他武器で50%。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "synergyKongfu": [10102, 20401, 20402], "synergyMultiplier": 1, "synergyMissingMultiplier": 0.5, "effects": { "globalDmgBoost": 0.01 }, "raw": "溜め技 対全Boss 与ダメ+10%" },
-      "tier1": { "permanent": true, "synergyKongfu": [10102, 20401, 20402], "synergyMultiplier": 1, "synergyMissingMultiplier": 0.5, "effects": { "globalDmgBoost": 0.01 }, "raw": "溜め技 全敵 (気力<60%プレイヤー含) 与ダメ+10%" },
+      "tier0": {
+        "permanent": true,
+        "synergyKongfu": [
+          10102,
+          20401,
+          20402
+        ],
+        "synergyMultiplier": 1,
+        "synergyMissingMultiplier": 0.5,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "溜め技 対全Boss 与ダメ+10%"
+      },
+      "tier1": {
+        "permanent": true,
+        "synergyKongfu": [
+          10102,
+          20401,
+          20402
+        ],
+        "synergyMultiplier": 1,
+        "synergyMissingMultiplier": 0.5,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "溜め技 全敵 (気力<60%プレイヤー含) 与ダメ+10%"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -704,8 +1232,34 @@
         },
         "derivedFromGold": true
       },
-      "tier3": { "permanent": true, "synergyKongfu": [10102, 20401, 20402], "synergyMultiplier": 1, "synergyMissingMultiplier": 0.5, "effects": { "globalDmgBoost": 0.01 }, "raw": "溜め技 会心/会意時 vs プレイヤー気力-10 / vs 首領 自気力+10 (12sCD)" },
-      "tier4": { "permanent": true, "synergyKongfu": [10102, 20401, 20402], "synergyMultiplier": 1, "synergyMissingMultiplier": 0.5, "effects": { "globalDmgBoost": 0.01 }, "raw": "溜め技 与ダメ 10%→15% + 気力消費+10%" },
+      "tier3": {
+        "permanent": true,
+        "synergyKongfu": [
+          10102,
+          20401,
+          20402
+        ],
+        "synergyMultiplier": 1,
+        "synergyMissingMultiplier": 0.5,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "溜め技 会心/会意時 vs プレイヤー気力-10 / vs 首領 自気力+10 (12sCD)"
+      },
+      "tier4": {
+        "permanent": true,
+        "synergyKongfu": [
+          10102,
+          20401,
+          20402
+        ],
+        "synergyMultiplier": 1,
+        "synergyMissingMultiplier": 0.5,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "溜め技 与ダメ 10%→15% + 気力消費+10%"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
@@ -713,7 +1267,20 @@
         },
         "raw": "Affinity DMG Bonus +5.2%"
       },
-      "tier6": { "permanent": true, "synergyKongfu": [10102, 20401, 20402], "synergyMultiplier": 1, "synergyMissingMultiplier": 0.5, "effects": { "globalDmgBoost": 0.01 }, "raw": "溜め技 追加ダメ — vs プレイヤー 気力差10毎+2% max10% / vs Boss 自消費気力10%毎+2% max10%" }
+      "tier6": {
+        "permanent": true,
+        "synergyKongfu": [
+          10102,
+          20401,
+          20402
+        ],
+        "synergyMultiplier": 1,
+        "synergyMissingMultiplier": 0.5,
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "溜め技 追加ダメ — vs プレイヤー 気力差10毎+2% max10% / vs Boss 自消費気力10%毎+2% max10%"
+      }
     },
     "rank": "purple"
   },
@@ -728,7 +1295,9 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [10102],
+        "kongfuRequired": [
+          10102
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -736,7 +1305,9 @@
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [10102],
+        "kongfuRequired": [
+          10102
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -755,7 +1326,9 @@
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [10102],
+        "kongfuRequired": [
+          10102
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -763,7 +1336,9 @@
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [10102],
+        "kongfuRequired": [
+          10102
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -778,7 +1353,9 @@
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [10102],
+        "kongfuRequired": [
+          10102
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -798,8 +1375,26 @@
     "defaultMode": "default",
     "description": "蛇神の槍専用 — 六酔槍連撃数短縮 + 無愁酒/急流バフ + 呪い酒デバフ。 紫。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "kongfuRequired": [10201], "effects": { "globalDmgBoost": 0.01 }, "raw": "六酔槍 連撃数5/10→4/8、流血対象命中で流血stack依存 60-100%確率 連撃+1" },
-      "tier1": { "permanent": true, "kongfuRequired": [10201], "effects": { "globalDmgBoost": 0.01 }, "raw": "六酔槍連撃バフ持続15s延長" },
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [
+          10201
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "六酔槍 連撃数5/10→4/8、流血対象命中で流血stack依存 60-100%確率 連撃+1"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [
+          10201
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "六酔槍連撃バフ持続15s延長"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -811,8 +1406,26 @@
         },
         "derivedFromGold": true
       },
-      "tier3": { "permanent": true, "kongfuRequired": [10201], "effects": { "globalDmgBoost": 0.01 }, "raw": "無愁酒 ダメ+10% + 発動中 強靱化/被ダメ-60%" },
-      "tier4": { "permanent": true, "kongfuRequired": [10201], "effects": { "globalDmgBoost": 0.01 }, "raw": "無愁酒連撃10で急流効果 ダメ+25% + 千軍一掃で気血20%回復+追加流血ダメ (12sCD)" },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [
+          10201
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "無愁酒 ダメ+10% + 発動中 強靱化/被ダメ-60%"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [
+          10201
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "無愁酒連撃10で急流効果 ダメ+25% + 千軍一掃で気血20%回復+追加流血ダメ (12sCD)"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
@@ -820,7 +1433,16 @@
         },
         "raw": "Affinity DMG Bonus +5.2%"
       },
-      "tier6": { "permanent": true, "kongfuRequired": [10201], "effects": { "globalDmgBoost": 0.01 }, "raw": "六酔槍 神脅し対象命中で+1stack、3s内同一対象5回命中で呪い酒付与 (15s 付与元被ダメ+5%)" }
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [
+          10201
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "六酔槍 神脅し対象命中で+1stack、3s内同一対象5回命中で呪い酒付与 (15s 付与元被ダメ+5%)"
+      }
     },
     "rank": "purple"
   },
@@ -835,8 +1457,42 @@
     "defaultMode": "default",
     "description": "近接武器(剣/槍/双剣/斬馬刀/横刀)武芸効果 + 武変技強化。 紫。 ※横刀IDは未マッピングのため除外。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "kongfuRequired": [10101,10102,10201,10202,20103,20401,20402,20501,20801], "effects": { "globalDmgBoost": 0.01 }, "raw": "武器別武芸 (剣=会意で流血付与/槍=外功防御無視12.5%/双剣=完全回避後8s次武術技+25%/斬馬刀=溜め技/反撃の会心ダメ+20%/横刀=受け流し後5s 軽重撃・派生+5%)" },
-      "tier1": { "permanent": true, "kongfuRequired": [10101,10102,10201,10202,20103,20401,20402,20501,20801], "effects": { "globalDmgBoost": 0.01 }, "raw": "武変技ダメ+30%" },
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [
+          10101,
+          10102,
+          10201,
+          10202,
+          20103,
+          20401,
+          20402,
+          20501,
+          20801
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "武器別武芸 (剣=会意で流血付与/槍=外功防御無視12.5%/双剣=完全回避後8s次武術技+25%/斬馬刀=溜め技/反撃の会心ダメ+20%/横刀=受け流し後5s 軽重撃・派生+5%)"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [
+          10101,
+          10102,
+          10201,
+          10202,
+          20103,
+          20401,
+          20402,
+          20501,
+          20801
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "武変技ダメ+30%"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -850,8 +1506,42 @@
         "maxPathATK": 32.6,
         "derivedFromGold": true
       },
-      "tier3": { "permanent": true, "kongfuRequired": [10101,10102,10201,10202,20103,20401,20402,20501,20801], "effects": { "globalDmgBoost": 0.01 }, "raw": "武変技命中で自移動速度+20%/対象-20% (4s)" },
-      "tier4": { "permanent": true, "kongfuRequired": [10101,10102,10201,10202,20103,20401,20402,20501,20801], "effects": { "globalDmgBoost": 0.01 }, "raw": "武変技発動時 気力+10回復" },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [
+          10101,
+          10102,
+          10201,
+          10202,
+          20103,
+          20401,
+          20402,
+          20501,
+          20801
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "武変技命中で自移動速度+20%/対象-20% (4s)"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [
+          10101,
+          10102,
+          10201,
+          10202,
+          20103,
+          20401,
+          20402,
+          20501,
+          20801
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "武変技発動時 気力+10回復"
+      },
       "tier5": {
         "permanent": true,
         "effects": {},
@@ -859,7 +1549,24 @@
         "weaponSpecific": "bellstrike",
         "pendingImplementation": true
       },
-      "tier6": { "permanent": true, "kongfuRequired": [10101,10102,10201,10202,20103,20401,20402,20501,20801], "effects": { "globalDmgBoost": 0.01 }, "raw": "武変技発動時 元武芸効果残存 (10s後消失)" }
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [
+          10101,
+          10102,
+          10201,
+          10202,
+          20103,
+          20401,
+          20402,
+          20501,
+          20801
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "武変技発動時 元武芸効果残存 (10s後消失)"
+      }
     },
     "rank": "purple"
   },
@@ -878,8 +1585,32 @@
     "defaultMode": "default",
     "description": "鋼鳴系剣/槍専用 — 会意で集中値→看破状態 (会意ダメ+/被ダメ-/付加会意率+/持続ダメ+)。 紫。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "kongfuRequired": [10101,10102,10201,10202], "effects": { "globalDmgBoost": 0.01 }, "raw": "会意ダメで集中値、max時看破状態 — 会意ダメ+10%、5%確率で被ダメ-40% (10s)" },
-      "tier1": { "permanent": true, "kongfuRequired": [10101,10102,10201,10202], "effects": { "globalDmgBoost": 0.01 }, "raw": "看破中 — 自気血>75%で与ダメ+1.5%、≤75%で与ダメ1.5%相当 気血回復" },
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [
+          10101,
+          10102,
+          10201,
+          10202
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "会意ダメで集中値、max時看破状態 — 会意ダメ+10%、5%確率で被ダメ-40% (10s)"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [
+          10101,
+          10102,
+          10201,
+          10202
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "看破中 — 自気血>75%で与ダメ+1.5%、≤75%で与ダメ1.5%相当 気血回復"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -892,8 +1623,32 @@
         },
         "derivedFromGold": true
       },
-      "tier3": { "permanent": true, "kongfuRequired": [10101,10102,10201,10202], "effects": { "addSympathyRate": 0.03 }, "raw": "看破中 付加会意率+1.5% (気血割合上で追加+1.5%、合計+3%採用、対象外武器0)" },
-      "tier4": { "permanent": true, "kongfuRequired": [10101,10102,10201,10202], "effects": { "globalDmgBoost": 0.01 }, "raw": "集中値累積効率+50%" },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [
+          10101,
+          10102,
+          10201,
+          10202
+        ],
+        "effects": {
+          "addSympathyRate": 0.03
+        },
+        "raw": "看破中 付加会意率+1.5% (気血割合上で追加+1.5%、合計+3%採用、対象外武器0)"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [
+          10101,
+          10102,
+          10201,
+          10202
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "集中値累積効率+50%"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
@@ -901,7 +1656,19 @@
         },
         "raw": "Physical Penetration +5.1 (post 5/28 patch: Bellstrike Pen→外功貫通)"
       },
-      "tier6": { "permanent": true, "kongfuRequired": [10101,10102,10201,10202], "effects": { "globalDmgBoost": 0.01 }, "raw": "看破中 持続系ダメ及び強化効果ダメ+10% (大量流血/血涙不止/刺傷)" }
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [
+          10101,
+          10102,
+          10201,
+          10202
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "看破中 持続系ダメ及び強化効果ダメ+10% (大量流血/血涙不止/刺傷)"
+      }
     },
     "rank": "purple"
   },
@@ -916,7 +1683,9 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [10101],
+        "kongfuRequired": [
+          10101
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -924,7 +1693,9 @@
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [10101],
+        "kongfuRequired": [
+          10101
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -943,7 +1714,9 @@
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [10101],
+        "kongfuRequired": [
+          10101
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -951,7 +1724,9 @@
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [10101],
+        "kongfuRequired": [
+          10101
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -966,7 +1741,9 @@
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [10101],
+        "kongfuRequired": [
+          10101
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -986,8 +1763,26 @@
     "defaultMode": "default",
     "description": "墨筆の扇専用 — 春尽山空 CD/ダメ強化、無頼の浮名 連携。 紫。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "kongfuRequired": [10302], "effects": { "globalDmgBoost": 0.01 }, "raw": "春尽山空 2stackチャージ可 (CD+3s)" },
-      "tier1": { "permanent": true, "kongfuRequired": [10302], "effects": { "globalDmgBoost": 0.01 }, "raw": "春尽山空で水人帰還時 CD-3s、移動速度+20%" },
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [
+          10302
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "春尽山空 2stackチャージ可 (CD+3s)"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [
+          10302
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "春尽山空で水人帰還時 CD-3s、移動速度+20%"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -999,8 +1794,26 @@
         },
         "derivedFromGold": true
       },
-      "tier3": { "permanent": true, "kongfuRequired": [10302], "effects": { "globalDmgBoost": 0.01 }, "raw": "春尽山空 対象浮遊なしでCD3s返還 + 15s 次の春尽山空ダメ+30%" },
-      "tier4": { "permanent": true, "kongfuRequired": [10302], "effects": { "globalDmgBoost": 0.01 }, "raw": "春尽山空帰還で3s 無頼の浮名 溜め速度+50%/竜巻移動速度+50%" },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [
+          10302
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "春尽山空 対象浮遊なしでCD3s返還 + 15s 次の春尽山空ダメ+30%"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [
+          10302
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "春尽山空帰還で3s 無頼の浮名 溜め速度+50%/竜巻移動速度+50%"
+      },
       "tier5": {
         "permanent": true,
         "effects": {},
@@ -1008,7 +1821,16 @@
         "weaponSpecific": "silkbind",
         "pendingImplementation": true
       },
-      "tier6": { "permanent": true, "kongfuRequired": [10302], "effects": { "globalDmgBoost": 0.01 }, "raw": "春尽山空 浮遊/滞骨命中で CD2s返還+春月増華CDリセット、3s 重撃追撃で春尽山空CD-3s (1s毎1回)" }
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [
+          10302
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "春尽山空 浮遊/滞骨命中で CD2s返還+春月増華CDリセット、3s 重撃追撃で春尽山空CD-3s (1s毎1回)"
+      }
     },
     "rank": "purple"
   },
@@ -1027,8 +1849,28 @@
     "defaultMode": "default",
     "description": "墨筆の扇/千紅の傘専用 — 武術技後 春雷stack (重/重追/軽/弾道 +15%気血ダメ消費)。 紫。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "kongfuRequired": [10302, 20601], "effects": { "globalDmgBoost": 0.01 }, "raw": "武術技発動終了で春雷3stack獲得 (15sCD、12s持続)、重撃/重撃追撃/軽撃/弾道技で1stack消費 → その技と次の1sの気血ダメ+15%" },
-      "tier1": { "permanent": true, "kongfuRequired": [10302, 20601], "effects": { "globalDmgBoost": 0.01 }, "raw": "春雷stack 3→4" },
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [
+          10302,
+          20601
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "武術技発動終了で春雷3stack獲得 (15sCD、12s持続)、重撃/重撃追撃/軽撃/弾道技で1stack消費 → その技と次の1sの気血ダメ+15%"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [
+          10302,
+          20601
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "春雷stack 3→4"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -1041,8 +1883,28 @@
         },
         "derivedFromGold": true
       },
-      "tier3": { "permanent": true, "kongfuRequired": [10302, 20601], "effects": { "globalDmgBoost": 0.01 }, "raw": "春雷1消費毎 気血ダメ強化持続 1s→2s延長" },
-      "tier4": { "permanent": true, "kongfuRequired": [10302, 20601], "effects": { "globalDmgBoost": 0.01 }, "raw": "春雷stack 4→5" },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [
+          10302,
+          20601
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "春雷1消費毎 気血ダメ強化持続 1s→2s延長"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [
+          10302,
+          20601
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "春雷stack 4→5"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
@@ -1050,7 +1912,17 @@
         },
         "raw": "Physical DMG Bonus +2.5%"
       },
-      "tier6": { "permanent": true, "kongfuRequired": [10302, 20601], "effects": { "globalDmgBoost": 0.01 }, "raw": "春雷中 重/重追/軽/弾道 が真気<30%or気竭対象命中で春雷1回復 (2s毎1回)" }
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [
+          10302,
+          20601
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "春雷中 重/重追/軽/弾道 が真気<30%or気竭対象命中で春雷1回復 (2s毎1回)"
+      }
     },
     "rank": "purple"
   },
@@ -1072,8 +1944,26 @@
     "defaultMode": "default",
     "description": "墨筆の扇専用 — 滞骨/浮遊で外功攻撃力上昇 (条件分岐多)。 紫。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "kongfuRequired": [10302], "effects": { "globalDmgBoost": 0.01 }, "raw": "滞骨付与で外功攻撃力+5% (8s 1s毎更新)、浮遊で+10%" },
-      "tier1": { "permanent": true, "kongfuRequired": [10302], "effects": { "globalDmgBoost": 0.01 }, "raw": "滞骨5→7.5%、浮遊10→15%" },
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [
+          10302
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "滞骨付与で外功攻撃力+5% (8s 1s毎更新)、浮遊で+10%"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [
+          10302
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "滞骨5→7.5%、浮遊10→15%"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -1086,8 +1976,26 @@
         },
         "derivedFromGold": true
       },
-      "tier3": { "permanent": true, "kongfuRequired": [10302], "effects": { "globalDmgBoost": 0.01 }, "raw": "対象 真気<30%or力尽き時 滞骨15%/浮遊25%に追加上昇" },
-      "tier4": { "permanent": true, "kongfuRequired": [10302], "effects": { "globalDmgBoost": 0.01 }, "raw": "外功攻撃力上昇 持続8s→12s" },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [
+          10302
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "対象 真気<30%or力尽き時 滞骨15%/浮遊25%に追加上昇"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [
+          10302
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "外功攻撃力上昇 持続8s→12s"
+      },
       "tier5": {
         "permanent": true,
         "effects": {
@@ -1095,7 +2003,16 @@
         },
         "raw": "Physical Penetration +5.1"
       },
-      "tier6": { "permanent": true, "kongfuRequired": [10302], "effects": { "globalDmgBoost": 0.01 }, "raw": "浮遊/滞骨対象 — 自気血>75%で与ダメ+3%、≤75%で与ダメ10%気血回復" }
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [
+          10302
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "浮遊/滞骨対象 — 自気血>75%で与ダメ+3%、≤75%で与ダメ10%気血回復"
+      }
     },
     "rank": "purple"
   },
@@ -1110,7 +2027,9 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [20601],
+        "kongfuRequired": [
+          20601
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1118,7 +2037,9 @@
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [20601],
+        "kongfuRequired": [
+          20601
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1137,7 +2058,9 @@
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [20601],
+        "kongfuRequired": [
+          20601
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1145,7 +2068,9 @@
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [20601],
+        "kongfuRequired": [
+          20601
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1160,7 +2085,9 @@
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [20601],
+        "kongfuRequired": [
+          20601
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1180,7 +2107,9 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [10301],
+        "kongfuRequired": [
+          10301
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1188,7 +2117,9 @@
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [10301],
+        "kongfuRequired": [
+          10301
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1207,7 +2138,9 @@
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [10301],
+        "kongfuRequired": [
+          10301
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1215,7 +2148,9 @@
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [10301],
+        "kongfuRequired": [
+          10301
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1230,7 +2165,9 @@
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [10301],
+        "kongfuRequired": [
+          10301
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1250,8 +2187,28 @@
     "defaultMode": "default",
     "description": "薬川の扇/誘魂の傘専用 — 会心治療で養心/凝心 (治療量+)。 紫。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "kongfuRequired": [10301, 20602], "effects": { "globalDmgBoost": 0.01 }, "raw": "会心治療で対象に養心1stack付与 (6s) — 受治療+2%、max3" },
-      "tier1": { "permanent": true, "kongfuRequired": [10301, 20602], "effects": { "globalDmgBoost": 0.01 }, "raw": "養心持続 6s→10s延長" },
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [
+          10301,
+          20602
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "会心治療で対象に養心1stack付与 (6s) — 受治療+2%、max3"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [
+          10301,
+          20602
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "養心持続 6s→10s延長"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -1265,15 +2222,45 @@
         "maxPathATK": 32.6,
         "derivedFromGold": true
       },
-      "tier3": { "permanent": true, "kongfuRequired": [10301, 20602], "effects": { "globalDmgBoost": 0.01 }, "raw": "会心治療で自身に凝心1stack (10s) — 治療量+2%、max3" },
-      "tier4": { "permanent": true, "kongfuRequired": [10301, 20602], "effects": { "globalDmgBoost": 0.01 }, "raw": "養心/凝心 max3→6" },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [
+          10301,
+          20602
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "会心治療で自身に凝心1stack (10s) — 治療量+2%、max3"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [
+          10301,
+          20602
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "養心/凝心 max3→6"
+      },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "Critical Healing Bonus +4%",
         "category": "healing"
       },
-      "tier6": { "permanent": true, "kongfuRequired": [10301, 20602], "effects": { "globalDmgBoost": 0.01 }, "raw": "最大気血<30%対象に会心治療で 養心/凝心 2stackずつ獲得" }
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [
+          10301,
+          20602
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "最大気血<30%対象に会心治療で 養心/凝心 2stackずつ獲得"
+      }
     },
     "rank": "purple"
   },
@@ -1288,8 +2275,26 @@
     "defaultMode": "default",
     "description": "薬川の扇専用 — 復活感知技 (貴き朝玉) 強化 (回復+/被ダメ-/分担)。 紫。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "kongfuRequired": [10301], "effects": { "globalDmgBoost": 0.01 }, "raw": "貴き朝玉復活対象の治療気血回復+50%" },
-      "tier1": { "permanent": true, "kongfuRequired": [10301], "effects": { "globalDmgBoost": 0.01 }, "raw": "復活対象 回復量 +50→+75%" },
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [
+          10301
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "貴き朝玉復活対象の治療気血回復+50%"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [
+          10301
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "復活対象 回復量 +50→+75%"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -1301,15 +2306,42 @@
         },
         "derivedFromGold": true
       },
-      "tier3": { "permanent": true, "kongfuRequired": [10301], "effects": { "globalDmgBoost": 0.01 }, "raw": "復活後3s 対象被ダメ-30%" },
-      "tier4": { "permanent": true, "kongfuRequired": [10301], "effects": { "globalDmgBoost": 0.01 }, "raw": "復活後 対象/自身に持続回復付与" },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [
+          10301
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "復活後3s 対象被ダメ-30%"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [
+          10301
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "復活後 対象/自身に持続回復付与"
+      },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "Critical Healing Bonus +4%",
         "category": "healing"
       },
-      "tier6": { "permanent": true, "kongfuRequired": [10301], "effects": { "globalDmgBoost": 0.01 }, "raw": "8s 復活対象ダメ30%分担 (対象死亡で自最大気血25%回復)" }
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [
+          10301
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "8s 復活対象ダメ30%分担 (対象死亡で自最大気血25%回復)"
+      }
     },
     "rank": "purple"
   },
@@ -1324,8 +2356,26 @@
     "defaultMode": "default",
     "description": "誘魂の傘専用 — 千水余韻 露水リソース回復/治療強化。 紫。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "kongfuRequired": [20602], "effects": { "globalDmgBoost": 0.01 }, "raw": "千水余韻発動後 露+5、露100消費毎 自最大気血10%追加回復" },
-      "tier1": { "permanent": true, "kongfuRequired": [20602], "effects": { "globalDmgBoost": 0.01 }, "raw": "千水余韻 CD 1sまで短縮" },
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [
+          20602
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "千水余韻発動後 露+5、露100消費毎 自最大気血10%追加回復"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [
+          20602
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "千水余韻 CD 1sまで短縮"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -1338,15 +2388,42 @@
         },
         "derivedFromGold": true
       },
-      "tier3": { "permanent": true, "kongfuRequired": [20602], "effects": { "globalDmgBoost": 0.01 }, "raw": "累計露水50消費で自最大気血10%治療" },
-      "tier4": { "permanent": true, "kongfuRequired": [20602], "effects": { "globalDmgBoost": 0.01 }, "raw": "千水余韻 気血最低味方検知範囲+50%" },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [
+          20602
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "累計露水50消費で自最大気血10%治療"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [
+          20602
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "千水余韻 気血最低味方検知範囲+50%"
+      },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "Physical Healing Bonus +2.5%",
         "category": "healing"
       },
-      "tier6": { "permanent": true, "kongfuRequired": [20602], "effects": { "globalDmgBoost": 0.01 }, "raw": "千水余韻で自身+近傍気血割合最低味方を同時治療" }
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [
+          20602
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "千水余韻で自身+近傍気血割合最低味方を同時治療"
+      }
     },
     "rank": "purple"
   },
@@ -1361,7 +2438,9 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [20401],
+        "kongfuRequired": [
+          20401
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1369,7 +2448,9 @@
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [20401],
+        "kongfuRequired": [
+          20401
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1388,7 +2469,9 @@
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [20401],
+        "kongfuRequired": [
+          20401
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1396,7 +2479,9 @@
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [20401],
+        "kongfuRequired": [
+          20401
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1411,7 +2496,9 @@
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [20401],
+        "kongfuRequired": [
+          20401
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1431,8 +2518,26 @@
     "defaultMode": "default",
     "description": "断魂の刀専用 — 気血<30%でシールド (困獣の闘い)。 紫。",
     "attributeBuff": {
-      "tier0": { "permanent": true, "kongfuRequired": [20401], "effects": { "globalDmgBoost": 0.01 }, "raw": "気血<30%で困獣の闘い — 気血上限30%吸収シールド (4s、300sCD)" },
-      "tier1": { "permanent": true, "kongfuRequired": [20401], "effects": { "globalDmgBoost": 0.01 }, "raw": "シールド量 気血上限30%→40%" },
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [
+          20401
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "気血<30%で困獣の闘い — 気血上限30%吸収シールド (4s、300sCD)"
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [
+          20401
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "シールド量 気血上限30%→40%"
+      },
       "tier2": {
         "permanent": true,
         "worldLv": 14,
@@ -1442,15 +2547,42 @@
         "effects": {},
         "category": "defensive"
       },
-      "tier3": { "permanent": true, "kongfuRequired": [20401], "effects": { "globalDmgBoost": 0.01 }, "raw": "シールド中 受治療/薬使用効果上昇" },
-      "tier4": { "permanent": true, "kongfuRequired": [20401], "effects": { "globalDmgBoost": 0.01 }, "raw": "発動間隔-40% (300s→180s)" },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [
+          20401
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "シールド中 受治療/薬使用効果上昇"
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [
+          20401
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "発動間隔-40% (300s→180s)"
+      },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "外功耐性 +5.1",
         "category": "defensive"
       },
-      "tier6": { "permanent": true, "kongfuRequired": [20401], "effects": { "globalDmgBoost": 0.01 }, "raw": "シールド持続中破壊で CD即-120s" }
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [
+          20401
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
+        "raw": "シールド持続中破壊で CD即-120s"
+      }
     },
     "rank": "purple"
   },
@@ -1467,7 +2599,9 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [20401],
+        "kongfuRequired": [
+          20401
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1475,7 +2609,9 @@
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [20401],
+        "kongfuRequired": [
+          20401
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1496,7 +2632,9 @@
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [20401],
+        "kongfuRequired": [
+          20401
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1504,7 +2642,9 @@
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [20401],
+        "kongfuRequired": [
+          20401
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1519,7 +2659,9 @@
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [20401],
+        "kongfuRequired": [
+          20401
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1541,7 +2683,9 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [20103],
+        "kongfuRequired": [
+          20103
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1549,7 +2693,9 @@
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [20103],
+        "kongfuRequired": [
+          20103
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1566,7 +2712,9 @@
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [20103],
+        "kongfuRequired": [
+          20103
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1574,7 +2722,9 @@
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [20103],
+        "kongfuRequired": [
+          20103
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1588,7 +2738,9 @@
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [20103],
+        "kongfuRequired": [
+          20103
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1614,7 +2766,9 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [20501],
+        "kongfuRequired": [
+          20501
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1622,7 +2776,9 @@
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [20501],
+        "kongfuRequired": [
+          20501
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1639,7 +2795,9 @@
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [20501],
+        "kongfuRequired": [
+          20501
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1647,7 +2805,9 @@
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [20501],
+        "kongfuRequired": [
+          20501
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1662,7 +2822,9 @@
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [20501],
+        "kongfuRequired": [
+          20501
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1682,7 +2844,9 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [20701],
+        "kongfuRequired": [
+          20701
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1690,7 +2854,9 @@
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [20701],
+        "kongfuRequired": [
+          20701
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1709,17 +2875,23 @@
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [20701],
+        "kongfuRequired": [
+          20701
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "synergyKongfu": [20501],
+        "synergyKongfu": [
+          20501
+        ],
         "synergyMissingMultiplier": 0.5,
         "raw": "鼠ダメージの30%追加ダメージ (20s時限、 獄炎同装備時 鼠ダメ倍 → 獄炎なしで効果半減)"
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [20701],
+        "kongfuRequired": [
+          20701
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1734,11 +2906,15 @@
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [20701],
+        "kongfuRequired": [
+          20701
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "synergyKongfu": [20501],
+        "synergyKongfu": [
+          20501
+        ],
         "synergyMissingMultiplier": 0.5,
         "raw": "鼠ダメージ+30% (獄炎同装備時 鼠ダメ倍 → 獄炎なしで効果半減)"
       }
@@ -1830,7 +3006,11 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [20701, 10302, 20601],
+        "kongfuRequired": [
+          20701,
+          10302,
+          20601
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1838,7 +3018,11 @@
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [20701, 10302, 20601],
+        "kongfuRequired": [
+          20701,
+          10302,
+          20601
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1857,7 +3041,11 @@
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [20701, 10302, 20601],
+        "kongfuRequired": [
+          20701,
+          10302,
+          20601
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1865,7 +3053,11 @@
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [20701, 10302, 20601],
+        "kongfuRequired": [
+          20701,
+          10302,
+          20601
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1881,7 +3073,11 @@
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [20701, 10302, 20601],
+        "kongfuRequired": [
+          20701,
+          10302,
+          20601
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1901,7 +3097,9 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [20603],
+        "kongfuRequired": [
+          20603
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1909,7 +3107,9 @@
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [20603],
+        "kongfuRequired": [
+          20603
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1928,7 +3128,9 @@
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [20603],
+        "kongfuRequired": [
+          20603
+        ],
         "effects": {
           "outerPen": 5
         },
@@ -1936,7 +3138,9 @@
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [20603],
+        "kongfuRequired": [
+          20603
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1951,7 +3155,9 @@
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [20603],
+        "kongfuRequired": [
+          20603
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -1973,7 +3179,9 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [20702],
+        "kongfuRequired": [
+          20702
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -1981,7 +3189,9 @@
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [20702],
+        "kongfuRequired": [
+          20702
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -2002,7 +3212,9 @@
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [20702],
+        "kongfuRequired": [
+          20702
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -2010,7 +3222,9 @@
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [20702],
+        "kongfuRequired": [
+          20702
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -2025,7 +3239,9 @@
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [20702],
+        "kongfuRequired": [
+          20702
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -2118,7 +3334,9 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [20602],
+        "kongfuRequired": [
+          20602
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -2126,7 +3344,9 @@
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [20602],
+        "kongfuRequired": [
+          20602
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -2145,7 +3365,9 @@
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [20602],
+        "kongfuRequired": [
+          20602
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -2153,7 +3375,9 @@
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [20602],
+        "kongfuRequired": [
+          20602
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -2168,7 +3392,9 @@
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [20602],
+        "kongfuRequired": [
+          20602
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -2188,7 +3414,9 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [20801],
+        "kongfuRequired": [
+          20801
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -2196,7 +3424,9 @@
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [20801],
+        "kongfuRequired": [
+          20801
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -2213,7 +3443,9 @@
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [20801],
+        "kongfuRequired": [
+          20801
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -2221,7 +3453,9 @@
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [20801],
+        "kongfuRequired": [
+          20801
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -2236,7 +3470,9 @@
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [20801],
+        "kongfuRequired": [
+          20801
+        ],
         "effects": {
           "globalDmgBoost": 0.013
         },
@@ -2258,7 +3494,9 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [20402],
+        "kongfuRequired": [
+          20402
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -2266,7 +3504,9 @@
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [20402],
+        "kongfuRequired": [
+          20402
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -2283,7 +3523,9 @@
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [20402],
+        "kongfuRequired": [
+          20402
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -2291,7 +3533,9 @@
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [20402],
+        "kongfuRequired": [
+          20402
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -2306,7 +3550,9 @@
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [20402],
+        "kongfuRequired": [
+          20402
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -2328,8 +3574,15 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [20801, 20401, 10302, 20601],
-        "synergyKongfu": [20801],
+        "kongfuRequired": [
+          20801,
+          20401,
+          10302,
+          20601
+        ],
+        "synergyKongfu": [
+          20801
+        ],
         "synergyMultiplier": 1,
         "synergyMissingMultiplier": 0.5,
         "effects": {
@@ -2339,8 +3592,15 @@
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [20801, 20401, 10302, 20601],
-        "synergyKongfu": [20801],
+        "kongfuRequired": [
+          20801,
+          20401,
+          10302,
+          20601
+        ],
+        "synergyKongfu": [
+          20801
+        ],
         "synergyMultiplier": 1,
         "synergyMissingMultiplier": 0.5,
         "effects": {
@@ -2361,8 +3621,15 @@
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [20801, 20401, 10302, 20601],
-        "synergyKongfu": [20801],
+        "kongfuRequired": [
+          20801,
+          20401,
+          10302,
+          20601
+        ],
+        "synergyKongfu": [
+          20801
+        ],
         "synergyMultiplier": 1,
         "synergyMissingMultiplier": 0.5,
         "effects": {
@@ -2372,8 +3639,15 @@
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [20801, 20401, 10302, 20601],
-        "synergyKongfu": [20801],
+        "kongfuRequired": [
+          20801,
+          20401,
+          10302,
+          20601
+        ],
+        "synergyKongfu": [
+          20801
+        ],
         "synergyMultiplier": 1,
         "synergyMissingMultiplier": 0.5,
         "effects": {
@@ -2390,8 +3664,15 @@
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [20801, 20401, 10302, 20601],
-        "synergyKongfu": [20801],
+        "kongfuRequired": [
+          20801,
+          20401,
+          10302,
+          20601
+        ],
+        "synergyKongfu": [
+          20801
+        ],
         "synergyMultiplier": 1,
         "synergyMissingMultiplier": 0.5,
         "effects": {
