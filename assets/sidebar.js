@@ -2870,10 +2870,11 @@ function updateHero(params) {
         B:  '0 0 14px rgba(201,184,138,0.45), 0 0 28px rgba(201,184,138,0.22)',
         C:  '0 0 10px rgba(232,215,180,0.18)'
       };
+  // heroScore Tier別変色 廃止 (paper固定)
   const numEl = document.getElementById('heroScore');
-  if (numEl && TIER_COLOR[curTier]) {
-    numEl.style.color = TIER_COLOR[curTier];
-    numEl.style.textShadow = TIER_SHADOW[curTier];
+  if (numEl) {
+    numEl.style.color = '';
+    numEl.style.textShadow = '';
   }
   // compact tier badge: 廃止 (heroCompactTierBadge hidden)
   setText('heroCompactDmg', Math.round(total).toLocaleString());
@@ -2887,6 +2888,9 @@ function updateHero(params) {
     // baseline tier badge (tier 未保存 baseline 用 fallback)
     const blTb = document.getElementById('heroBaselineTierBadge');
     if (blTb) {
+      // NEXT 横の baseline tier badge は表示しない
+      blTb.hidden = true;
+      blTb.textContent = '';
       let bTier = baseline.tier;
       if (!bTier) {
         const wl = window.__WWM_ROLEINFO?.worldLv || 14;
@@ -2896,8 +2900,6 @@ function updateHero(params) {
               : baseScore >= thr * 0.8 ? 'A'
               : baseScore >= thr * 0.6 ? 'B' : 'C';
       }
-      blTb.textContent = bTier;
-      blTb.className = 'tier-badge tier-badge-baseline tier-' + bTier;
       const TIER_COLOR_B = _isLight
         ? { SS: '#b8860b', S: '#c83c2b', A: '#2d5a3a', B: '#7a5a20', C: '#5a4226' }
         : { SS: '#ffd970', S: '#ff6b50', A: '#a8d4b4', B: '#c9b88a', C: 'rgba(232,215,180,0.55)' };
@@ -2910,10 +2912,11 @@ function updateHero(params) {
             B:  '0 0 14px rgba(201,184,138,0.45), 0 0 28px rgba(201,184,138,0.22)',
             C:  '0 0 10px rgba(232,215,180,0.18)'
           };
-      if (baseEl && TIER_COLOR_B[bTier]) {
-        baseEl.style.color = TIER_COLOR_B[bTier];
-        baseEl.style.opacity = '1';
-        baseEl.style.textShadow = TIER_SHADOW_B[bTier];
+      // hero-next-val Tier別変色 廃止
+      if (baseEl) {
+        baseEl.style.color = '';
+        baseEl.style.opacity = '';
+        baseEl.style.textShadow = '';
       }
     }
   } else {
