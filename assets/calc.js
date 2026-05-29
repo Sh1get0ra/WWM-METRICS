@@ -12,6 +12,47 @@ const ENEMY_PRESET = {
 function v(id)  { const el = document.getElementById(id); return el ? (parseFloat(el.value) || 0) : 0; }
 function vp(id) { const el = document.getElementById(id); return el ? ((parseFloat(el.value) || 0) / 100) : 0; }
 
+// ── 共通計算層 (両経路共有) ────────────────────────────────────
+// params object から innerPhys/outerBoost/各確率を計算。
+// 新effects key 追加時はここ1箇所に追加すれば両経路反映。
+function _computeCoreLayer(p) {
+  const physPenDiff  = (p.outerPen || 0) - (p.physRes || 0);
+  // 穿透 ≥ 抗性: overflow は /200 (半減)、< の場合: 不足分は /100 (フル軽減)
+  const physPenZone  = physPenDiff >= 0 ? physPenDiff / 200 : physPenDiff / 100;
+  const elemPenDiff  = (p.elemPen || 0) - (p.elemRes || 0);
+  const elemPenZone  = elemPenDiff >= 0 ? elemPenDiff / 200 : elemPenDiff / 100;
+  // 増伤レイヤー分離: 内側(外功/属性別の伤害加成) と 外側(全体増伤、加算合計)
+  // physDmgBoost (心法経由) を innerPhys に合流
+  const innerPhys    = 1 + (p.weaponBonus || 0) + (p.physDmgBoost || 0);
+  const innerElem    = 1 + (p.elemAtkBoost || 0);
+  // 奇術ダメは重み 0.1 で寄与 (発動頻度想定30%未満)
+  const mysticContrib = ((p.stMysticDmg || 0) + (p.areaMysticDmg || 0)) * 0.1;
+  const outerBoost   = 1 + (p.allMartialBoost || 0) + (p.specMartialBoost || 0)
+                     + (p.bossBoost || 0) + (p.playerBoost || 0) + mysticContrib
+                     + (p.enemyDebuff || 0) + (p.globalDmgBoost || 0);
+  const reductionZone= (1 - (p.dmgReduce1 || 0)) * (1 - (p.dmgReduce2 || 0));
+
+  const judgeRes = p.judgeRes || 0;
+  const sympathyRateAdj = judgeRes === 0 ? (p.sympathyRate || 0) : (p.sympathyRate || 0) / judgeRes;
+  const critRateAdj     = judgeRes === 0 ? (p.critRate || 0)     : (p.critRate || 0)     / judgeRes;
+  // 付加会心率/共鳴率は基本値の上限(40%/80%)を突破可能。会心+共鳴の100%制限は維持。
+  const appliedSympathy = Math.min(0.4, sympathyRateAdj) + (p.addSympathyRate || 0);
+  const appliedCrit     = Math.min(1 - appliedSympathy, Math.min(0.8, critRateAdj) + (p.addCritRate || 0));
+  const appliedHit      = judgeRes === 0 ? Math.min(1, p.hitRate || 0) : Math.min(1, 0.65 + ((p.hitRate || 0) - 0.65) / judgeRes);
+  // B案: 会意優先順位モデル
+  //   会意 (精確不問・全体枠) → appliedCrit は 1-pSym 上限clamp済み
+  //   会心 = 精確命中時のみ発生  → pHit × appliedCrit
+  //   擦り傷 = 非精確命中 かつ 非会意
+  const pSympathy = appliedSympathy;
+  const pCrit     = appliedHit * appliedCrit;
+  const pGraze    = (1 - appliedHit) * (1 - pSympathy);
+  const pNormal   = Math.max(0, 1 - pCrit - pSympathy - pGraze);
+
+  return { physPenZone, elemPenZone, innerPhys, innerElem, outerBoost, reductionZone,
+           pSympathy, pCrit, pGraze, pNormal, critRateAdj, sympathyRateAdj };
+}
+window._computeCoreLayer = _computeCoreLayer;
+
 // ── 純粋関数：期待ダメージ ────────────────────────────────────────
 function computeExpected(pIn) {
   // 裏加算 merge (xinfa T0/T1/T3/T4/T6 等、ステ表示反映せず計算寄与のみ)
@@ -23,34 +64,9 @@ function computeExpected(pIn) {
     }
   }
   const hiddenBonus  = p.worldLv + p.martialLv + 1;
-  const physPenDiff  = p.outerPen - p.physRes;
-  // 穿透 ≥ 抗性: overflow は /200 (半減)、< の場合: 不足分は /100 (フル軽減)
-  const physPenZone  = physPenDiff >= 0 ? physPenDiff / 200 : physPenDiff / 100;
-  const elemPenDiff  = p.elemPen - p.elemRes;
-  const elemPenZone  = elemPenDiff >= 0 ? elemPenDiff / 200 : elemPenDiff / 100;
-  // 増伤レイヤー分離: 内側(外功/属性別の伤害加成) と 外側(全体増伤、加算合計)
-  // physDmgBoost (心法経由) を innerPhys に合流
-  const innerPhys    = 1 + p.weaponBonus + (p.physDmgBoost || 0);
-  const innerElem    = 1 + p.elemAtkBoost;
-  // 奇術ダメは重み 0.2 で寄与 (発動頻度想定30%未満)
-  const mysticContrib = ((p.stMysticDmg || 0) + (p.areaMysticDmg || 0)) * 0.1;
-  const outerBoost   = 1 + p.allMartialBoost + p.specMartialBoost + p.bossBoost + (p.playerBoost || 0) + mysticContrib + p.enemyDebuff + (p.globalDmgBoost || 0);
-  const reductionZone= (1 - p.dmgReduce1) * (1 - p.dmgReduce2);
-
-  const sympathyRateAdj = p.judgeRes === 0 ? p.sympathyRate : p.sympathyRate / p.judgeRes;
-  const critRateAdj     = p.judgeRes === 0 ? p.critRate     : p.critRate     / p.judgeRes;
-  // 付加会心率/共鳴率は基本値の上限(40%/80%)を突破可能。会心+共鳴の100%制限は維持。
-  const appliedSympathy = Math.min(0.4, sympathyRateAdj) + p.addSympathyRate;
-  const appliedCrit     = Math.min(1 - appliedSympathy, Math.min(0.8, critRateAdj) + p.addCritRate);
-  const appliedHit      = p.judgeRes === 0 ? Math.min(1, p.hitRate) : Math.min(1, 0.65 + (p.hitRate - 0.65) / p.judgeRes);
-  // B案: 会意優先順位モデル
-  //   会意 (精確不問・全体枠) → appliedCrit は line 35 で 1-pSym 上限clamp済み
-  //   会心 = 精確命中時のみ発生  → pHit × appliedCrit
-  //   擦り傷 = 非精確命中 かつ 非会意
-  const pSympathy = appliedSympathy;
-  const pCrit     = appliedHit * appliedCrit;
-  const pGraze    = (1 - appliedHit) * (1 - pSympathy);
-  const pNormal   = Math.max(0, 1 - pCrit - pSympathy - pGraze);
+  const core = _computeCoreLayer(p);
+  const { physPenZone, elemPenZone, innerPhys, innerElem, outerBoost, reductionZone,
+          pSympathy, pCrit, pGraze, pNormal } = core;
 
   function physPart(atk) { return Math.max(0, atk - p.physDef) * p.outerCoeff + p.outerAdd; }
   function elemPart(m, s) {
