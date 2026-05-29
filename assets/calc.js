@@ -156,43 +156,8 @@ function computeExpected(pIn) {
 // ── STATUS SCORE 固定スキルパラメータ ────────────────────────────
 const SCORE_FIXED = { outerCoeff: 1.5, statusCoeff: 1.5, outerAdd: 230 };
 
-// ── セット効果データ ────────────────────────────────────────────
-// 各項目は対応パラメータへの加算量（outerAtkBoostのみminPhysATK/maxPhysATKに乗算）
-const SET_EFFECTS = {
-  'none':         {},
-  'jadeware-1':   { sympathyBoost: 0.10 },
-  'jadeware-2':   { sympathyBoost: 0.10, addSympathyRate: 0.075 },
-  'hawkwing-1':   { outerAtkBoost: 0.02 },
-  'hawkwing-2':   { outerAtkBoost: 0.04 },
-  'hawkwing-3':   { outerAtkBoost: 0.06 },
-  'hawkwing-4':   { outerAtkBoost: 0.08 },
-  'hawkwing-5':   { outerAtkBoost: 0.10 },
-  'rainwhisper-1':{ critBoost: 0.10 },
-  'rainwhisper-2':{ critBoost: 0.25 },
-  'swallow-1':    { allMartialBoost: 0.12 },
-  'swallow-2':    { elemAtkBoost: 0.10 },
-  'swallow-3':    { allMartialBoost: 0.12, elemAtkBoost: 0.10 },
-  'mountain-1':   { allMartialBoost: 0.05 },
-  'mountain-2':   { allMartialBoost: 0.10 },
-  'willow-1':     { specMartialBoost: 0.12 },
-  'willow-2':     { specMartialBoost: 0.12 },
-  'willow-3':     { specMartialBoost: 0.12 },
-  'ivory-1':      { critRate: 0.05, critBoost: 0.15 },
-  'sway-50':      { allMartialBoost: 0.05 },
-  'sway-55':      { allMartialBoost: 0.06 },
-  'sway-60':      { allMartialBoost: 0.07 },
-  'sway-65':      { allMartialBoost: 0.08 },
-  'sway-70':      { allMartialBoost: 0.09 },
-  'sway-75':      { allMartialBoost: 0.10 },
-};
-
-// ── 心法効果データ ──────────────────────────────────────────────
-// outerPenAdd は外功貫通の絶対値加算（%ではない）
-const XINFA_EFFECTS = {
-  'none':          {},
-  'yishui-5':      { outerPenAdd: 10, allMartialBoost: 0.05 },
-  'yishui-5-cc':   { outerPenAdd: 10, allMartialBoost: 0.10 },
-};
+// ── (旧UI) SET_EFFECTS / XINFA_EFFECTS は import経路移行で削除済 ──
+// セット/心法効果は data/sets.json / data/xinfa.json + stats.js buildStatParams 経由で適用
 
 // ── 効率分析：各ステータス行の定義 ───────────────────────────────
 const EFF_ROWS = [
@@ -299,38 +264,7 @@ function calculate() {
   const dmgReduce1      = vp('dmgReduce1'),  dmgReduce2      = vp('dmgReduce2');
   const weaponBonus     = vp('weaponBonus');
 
-  // ── セット/心法適用前の raw 値スナップショット（STATUS SCORE用） ──
-  const _raw = {
-    minPhysATK: minPhysATK, maxPhysATK: maxPhysATK,
-    critRate: critRate, critBoost: critBoost,
-    sympathyBoost: sympathyBoost, addSympathyRate: addSympathyRate,
-    allMartialBoost: allMartialBoost, specMartialBoost: specMartialBoost,
-    elemAtkBoost: elemAtkBoost, outerPen: outerPen,
-  };
-
-  // ── セット効果 適用（既存フィールド非改変・内部加算のみ） ──
-  const setEl = document.getElementById('setEffect');
-  const setKey = setEl ? setEl.value : 'none';
-  const eff = SET_EFFECTS[setKey] || {};
-  if (eff.sympathyBoost)     sympathyBoost     += eff.sympathyBoost;
-  if (eff.addSympathyRate)   addSympathyRate   += eff.addSympathyRate;
-  if (eff.critBoost)         critBoost         += eff.critBoost;
-  if (eff.critRate)          critRate          += eff.critRate;
-  if (eff.allMartialBoost)   allMartialBoost   += eff.allMartialBoost;
-  if (eff.specMartialBoost)  specMartialBoost  += eff.specMartialBoost;
-  if (eff.elemAtkBoost)      elemAtkBoost      += eff.elemAtkBoost;
-  if (eff.outerAtkBoost) {
-    minPhysATK *= (1 + eff.outerAtkBoost);
-    maxPhysATK *= (1 + eff.outerAtkBoost);
-  }
-
-  // ── 心法効果 適用 ──
-  const xinfaEl = document.getElementById('xinfa');
-  const xinfaKey = xinfaEl ? xinfaEl.value : 'none';
-  const xeff = XINFA_EFFECTS[xinfaKey] || {};
-  if (xeff.outerPenAdd)      outerPen          += xeff.outerPenAdd;
-  if (xeff.allMartialBoost)  allMartialBoost   += xeff.allMartialBoost;
-
+  // (旧UI) set/xinfa DOM 適用ロジック削除済 — import経路で stats.js が処理
   const sel = document.getElementById('enemyLevel').value;
   let physDef, judgeRes, physRes, elemRes;
   if (sel === 'manual') {
@@ -490,73 +424,8 @@ function calculate() {
   _lastEffParams = effParams;
   _lastBaseExpected = expected.total;
 
-  // ── STATUS SCORE（固定スキル係数で計算・セット/心法効果除外） ─
-  (function() {
-    var sc = SCORE_FIXED;
-    // raw 値で各種ゾーン・確率を再計算（セット/心法の影響を排除）
-    var rPhysPenDiff = _raw.outerPen - physRes;
-    var rPhysPenZone = rPhysPenDiff >= 0 ? rPhysPenDiff / 200 : rPhysPenDiff / 100;
-    // 増伤レイヤー分離: 内側(外功/属性別の伤害加成) と 外側(全体増伤、加算合計)
-    var rInnerPhys    = 1 + weaponBonus;
-    var rInnerElem    = 1 + _raw.elemAtkBoost;
-    var rOuterBoost   = 1 + _raw.allMartialBoost + _raw.specMartialBoost + bossBoost + enemyDebuff;
-    var rSympathyAdj  = judgeRes === 0 ? sympathyRate : sympathyRate / judgeRes;
-    var rCritAdj      = judgeRes === 0 ? _raw.critRate : _raw.critRate / judgeRes;
-    // 付加会心率/共鳴率は基本値の上限(40%/80%)を突破可能。会心+共鳴の100%制限は維持。
-    var rAppliedSymp  = Math.min(0.4, rSympathyAdj) + _raw.addSympathyRate;
-    var rAppliedCrit  = Math.min(1 - rAppliedSymp, Math.min(0.8, rCritAdj) + addCritRate);
-    var rAppliedHit   = judgeRes === 0 ? Math.min(1, hitRate) : Math.min(1, 0.65 + (hitRate - 0.65) / judgeRes);
-    var rPCrit  = Math.min(rAppliedHit, rAppliedCrit);
-    var rPSymp  = rAppliedSymp;
-    var rPGraze = (1 - rAppliedHit) * (1 - rSympathyAdj);
-    var rPNorm  = 1 - rPCrit - rPSymp - rPGraze;
-    var rAvgPhys = (_raw.minPhysATK + _raw.maxPhysATK) / 2;
-
-    function sp(atk) { return Math.max(0, atk - physDef) * sc.outerCoeff + sc.outerAdd; }
-    function se(m, s) {
-      return (m + hiddenBonus) * elemBoostMain * sc.statusCoeff
-           + (s + hiddenBonus) * elemBoostSub  * sc.statusCoeff;
-    }
-    function sd(pa, em, es, mul) {
-      mul = mul || 1;
-      var pp = sp(pa) * (1 + rPhysPenZone) * rInnerPhys;
-      var ee = se(em, es) * (1 + elemPenZone) * rInnerElem;
-      return (pp + ee) * rOuterBoost * reductionZone * mul;
-    }
-    var s = sd(rAvgPhys, avgMain, avgSub)                                  * rPNorm
-          + sd(rAvgPhys, avgMain, avgSub, 1 + _raw.critBoost)              * rPCrit
-          + sd(_raw.maxPhysATK, maxElemMain, maxElemSub, 1 + _raw.sympathyBoost) * rPSymp
-          + sd(_raw.minPhysATK, minElemMain, minElemSub)                   * rPGraze;
-    // effective params (import 済) → DOM上書き skip (computeExpected 側担当)
-    if (!window.__WWM_PARAMS) {
-      countUp('heroScore', s, 0);
-      var _cd = document.getElementById('heroCompactDmg');
-      var _cs = document.getElementById('heroCompactScore');
-      if (_cd) _cd.textContent = Math.round(expected.total).toLocaleString(T.locale);
-      if (_cs) _cs.textContent = Math.round(s).toLocaleString(T.locale);
-    }
-
-    // ── Tier 判定（大世界Lv のみ） ────────────────────────────
-    var ssThr = 6700 * Math.pow(0.8, 14 - worldLv);
-    var tier;
-    if      (s >= ssThr)           tier = 'SS';
-    else if (s >= ssThr * 0.9)     tier = 'S';
-    else if (s >= ssThr * 0.8)     tier = 'A';
-    else if (s >= ssThr * 0.6)     tier = 'B';
-    else                           tier = 'C';
-    if (!window.__WWM_PARAMS) {
-      var _tb  = document.getElementById('heroTierBadge');
-      var _ctb = document.getElementById('heroCompactTierBadge');
-      if (_tb)  { _tb.textContent  = tier; _tb.className  = 'tier-badge tier-' + tier; }
-      if (_ctb) { _ctb.textContent = tier; _ctb.className = 'tier-badge tier-badge-compact tier-' + tier; }
-      // pure-ish 戻り値用 cache (effective なしの DOM 計算結果)
-      window.__WWM_LAST_RESULT = {
-        expected: expected.total,
-        statusScore: s,
-        tier: tier
-      };
-    }
-  })();
+  // (旧UI) STATUS SCORE 再計算block 削除済 — import経路では computeExpected line124 で
+  // __WWM_LAST_RESULT セット済。DOM経路時のheroScore等表示は廃止。
   buildEfficiencyTable(effParams, expected.total);
   return window.__WWM_LAST_RESULT;
 }
