@@ -2806,16 +2806,26 @@ function openGearEdit(slot) {
   function _bindRowEvents() {
   m.querySelectorAll('.wwm-cmp-edit-row').forEach(row => {
     const idx = parseInt(row.dataset.affixIdx, 10);
-    // val input: blur時に小数第1位丸め
+    // val input: 矢印キー操作後/blur時に小数第1位丸め (浮動小数点誤差吸収)
     const valEl = row.querySelector('.wwm-cmp-val-input');
     if (valEl) {
-      valEl.addEventListener('blur', () => {
+      const roundFirstDecimal = () => {
         if (valEl.value === '') return;
         const v = parseFloat(valEl.value);
         if (isNaN(v)) return;
-        const rounded = Math.round(v * 10) / 10;
-        valEl.value = rounded.toFixed(1);
-        // input event 発火で再計算
+        valEl.value = (Math.round(v * 10) / 10).toFixed(1);
+      };
+      valEl.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+          // ブラウザ default の step 増減後、 次tick で正規化 + input再発火
+          setTimeout(() => {
+            roundFirstDecimal();
+            valEl.dispatchEvent(new Event('input'));
+          }, 0);
+        }
+      });
+      valEl.addEventListener('blur', () => {
+        roundFirstDecimal();
         valEl.dispatchEvent(new Event('input'));
       });
     }
