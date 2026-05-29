@@ -165,6 +165,8 @@ function computeExpected(pIn) {
         setT('dmgSympathyVal', pctStr(dSymp));
         setT('dmgGrazeVal', pctStr(dGraz));
         setT('dmgNormalVal', pctStr(dNorm));
+        setT('dmgPhysVal', pctStr(physRatio));
+        setT('dmgElemVal', pctStr(elemRatio));
       }
     }
   } catch(e) {}

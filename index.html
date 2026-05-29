@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;900&family=Noto+Serif+JP:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<link rel="stylesheet" href="assets/styles.css?v=353">
+<link rel="stylesheet" href="assets/styles.css?v=354">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DFYB6MKMMY"></script>
 <script>
@@ -285,6 +285,16 @@
         <span class="judge-dot" style="background:var(--chart-graze);"></span>
         <span class="judge-name" data-i18n="probGraze">かすり</span>
         <span class="num judge-val" id="dmgGrazeVal" style="color:var(--chart-graze);">—</span>
+      </div>
+      <div class="judge-row judge-row-sep">
+        <span class="judge-dot judge-dot-diamond judge-dot-phys"></span>
+        <span class="judge-name" data-i18n="probPhys">物理</span>
+        <span class="num judge-val" id="dmgPhysVal" style="color:#e8513a;">—</span>
+      </div>
+      <div class="judge-row">
+        <span class="judge-dot judge-dot-diamond judge-dot-elem"></span>
+        <span class="judge-name" data-i18n="probElem">属性</span>
+        <span class="num judge-val" id="dmgElemVal" style="color:#a8d4b4;">—</span>
       </div>
     </div>
   </div>
@@ -684,8 +694,8 @@ window.showImportToast = function(e) {
 <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 <div id="export-card"></div>
 
-<script src="assets/i18n.js?v=39"></script>
-<script src="assets/calc.js?v=32"></script>
+<script src="assets/i18n.js?v=40"></script>
+<script src="assets/calc.js?v=33"></script>
 <script src="assets/app.js?v=27"></script>
 <script src="assets/export.js?v=41"></script>
 <script src="assets/stats.js?v=49"></script>

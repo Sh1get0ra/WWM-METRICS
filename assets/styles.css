@@ -3933,6 +3933,11 @@ html[data-theme="light"] {
   white-space: nowrap;
 }
 .hero-wuxia .judge-dot { width: 7px; height: 7px; flex-shrink: 0; }
+/* 物理/属性 行: 区切り線 + 菱形マーカー (◇物理=朱outline / ◆属性=翠fill) */
+.hero-wuxia .judge-row-sep { margin-top: 5px; padding-top: 6px; border-top: 1px solid rgba(232,215,180,0.12); }
+.hero-wuxia .judge-dot-diamond { width: 8px; height: 8px; border-radius: 0; transform: rotate(45deg); }
+.hero-wuxia .judge-dot-phys { background: transparent; border: 1.6px solid #e8513a; box-shadow: 0 0 6px rgba(232,81,58,0.55); }
+.hero-wuxia .judge-dot-elem { background: #a8d4b4; box-shadow: 0 0 7px rgba(168,212,180,0.65); }
 .hero-wuxia .judge-name { font-weight: var(--fw-semibold); color: var(--paper-2); }
 .hero-wuxia .judge-val {
   font-family: var(--f-mono);
