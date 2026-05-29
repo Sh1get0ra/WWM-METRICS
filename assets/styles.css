@@ -3927,8 +3927,11 @@ html[data-theme="light"] .hero-wuxia .luopan-center-label {
 html[data-theme="light"] .hero-wuxia .judge-name {
   color: var(--ink-1);
 }
-/* 朱墨筆 light: フル不透明 + filter saturate濃化 */
-html[data-theme="light"] .hero-wuxia .ink-stroke { opacity: 1; filter: saturate(1.4) brightness(.85); }
+/* 朱墨筆 light: ダーク同等に見えるよう更に濃化 */
+html[data-theme="light"] .hero-wuxia .ink-stroke {
+  opacity: 1;
+  filter: saturate(2.2) brightness(.55) contrast(1.6);
+}
 /* 4隅L字 gold-deep (paper地でcontrast) */
 html[data-theme="light"] .hero-wuxia .l-bracket {
   border-color: var(--gold-deep) !important;
