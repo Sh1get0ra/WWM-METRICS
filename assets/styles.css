@@ -2918,7 +2918,7 @@ html[data-theme="light"] .wwm-opt-loading {
   gap: var(--space-4);
 }
 .wwm-rank-grid > .wwm-modal-bg-icon { grid-column: 1 / -1; }
-.wwm-eff-col { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+.wwm-rank-col, .wwm-eff-col { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
 .wwm-eff-body {
   display: flex; flex-direction: column;
   gap: 0;
@@ -3031,7 +3031,7 @@ html[data-theme="light"] .wwm-opt-loading {
 }
 .wwm-ladder-next b { color: var(--gold-bright); font-family: var(--f-latin); font-size: var(--text-14); }
 /* Affix ranking */
-.wwm-rank-body { display: flex; flex-direction: column; gap: 3px; overflow-y: auto; max-height: 320px; scrollbar-width: thin; }
+.wwm-rank-body { display: flex; flex-direction: column; gap: 3px; overflow-y: auto; max-height: 100%; flex: 1 1 auto; min-height: 0; scrollbar-width: thin; }
 .wwm-rank-body::-webkit-scrollbar { width: 6px; }
 .wwm-rank-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
 .wwm-rank-row {
