@@ -428,7 +428,7 @@ const TRANSLATIONS = {
     importStep2XinfaTitle:'심법 Tier', importStep2XinfaHint:'각 심법의 도달 Tier (1-5). Tier2는 Tier2 효과, Tier5는 Tier5 효과 추가.',
     penPhys:'외공 관통', penVoid:'무상 관통', penPhysShort:'외공', penVoidShort:'무상', penOther:'기타',
     pathPhys:'범용', pathBellstrike:'명금', pathStonesplit:'열석', pathSilkbind:'견사', pathBamboocut:'파죽',
-    martialIndex:'무격 지수', martialIndexSub:'무격 지수', sbEmptyTitle:'아직 가져온 데이터가 없습니다.', sbEmptyHint:'상단의 「IMPORT」 버튼을 사용해 주세요.', martialHistoryTab:'무격 이력', historyEmpty:'아직 기록이 없습니다. 가져오기 시 자동 기록됩니다.', qualityTab:'롤 품질', qualityEmpty:'가져오기 후 장비 데이터로 품질 표시', minElemSub:'최소 속성 공격(부)', maxElemSub:'최대 속성 공격(부)',
+    martialIndex:'무격 지수', martialIndexSub:'무격 지수', sbEmptyTitle:'아직 가져온 데이터가 없습니다.', sbEmptyHint:'상단의 「가져오기」 버튼을 사용해 주세요.', martialHistoryTab:'무격 이력', historyEmpty:'아직 기록이 없습니다. 가져오기 시 자동 기록됩니다.', qualityTab:'롤 품질', qualityEmpty:'가져오기 후 장비 데이터로 품질 표시', minElemSub:'최소 속성 공격(부)', maxElemSub:'최대 속성 공격(부)',
     effectUnset:'미입력', globalDmgBoost:'전체 피해 증가', effAnalysisTitle:'스탯 효율 분석',
     locale:'ko-KR',
   },
