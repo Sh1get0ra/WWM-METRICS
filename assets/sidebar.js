@@ -734,10 +734,9 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
   // 計算中表示
   root.innerHTML = `<div class="wwm-analysis-card wwm-modal-square"><div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/anvil-impact.svg');"></div>${headerHtml}<div class="wwm-opt-loading">計算中...</div></div>`;
   _bindControls();
-  const setProgress = (iter, max) => {
-    const el = root.querySelector('#wwmOptProgress');
-    if (el) el.textContent = max ? `計算中 ${iter}/${max}...` : `計算中 ${iter}...`;
-  };
+  // progress表示 簡素化: 初期1回のみ「計算中...」、 以降 noop (頻繁更新ちらつき抑止)
+  (() => { const el = root.querySelector('#wwmOptProgress'); if (el) el.textContent = '計算中...'; })();
+  const setProgress = () => {};
   const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
   await _loadEquipMax();
   const charLv = roleInfo?.level || 95;
