@@ -298,9 +298,9 @@ html[data-theme="light"] .wwm-brand-sub { color: var(--vermilion-bright); opacit
   justify-content: center;
   text-align: center;
 }
-/* NOTE = X+☀ trailing wide (1行目末尾の組合せ幅と同等) */
+/* NOTE = X+☀ width相当 (gapなし、両アイコン合計) */
 .top-controls-2row .topbar-row .icon-btn.note-btn {
-  width: calc(36px + var(--space-1-5) + 36px);
+  width: 72px;
   min-width: 0;
   padding: 0 var(--space-2);
   justify-content: center;
