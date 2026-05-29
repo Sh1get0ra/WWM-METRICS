@@ -2393,6 +2393,17 @@ body.wwm-layout-active .wwm-footer {
   opacity: 0.75;
   vertical-align: middle;
 }
+.wwm-equip-delta {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
+  margin-left: 3px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.wwm-equip-delta-pos { color: var(--jade-bright, #a8d4b4); text-shadow: 0 0 4px rgba(168,212,180,0.4); }
+.wwm-equip-delta-neg { color: var(--vermilion, #e8513a); text-shadow: 0 0 4px rgba(232,81,58,0.4); }
+html[data-theme="light"] .wwm-equip-delta-pos { color: #2d5a3a; text-shadow: none; }
+html[data-theme="light"] .wwm-equip-delta-neg { color: #8a2418; text-shadow: none; }
 .wwm-equip-kongfu {
   display: block;
   font-size: var(--text-sm);

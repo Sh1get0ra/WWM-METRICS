@@ -1564,7 +1564,10 @@ async function _computeGearCardScores(roleInfo) {
       (slot === '2' && window.__WWM_VIRTUAL_KONGFU?.kongfuSub)
     );
     if (isModified && origContrib[slot] != null && origContrib[slot] !== curScore) {
-      el.innerHTML = `<b>${origContrib[slot].toLocaleString()}</b><span class="wwm-equip-arrow">▶</span><b>${curScore.toLocaleString()}</b>`;
+      const delta = curScore - origContrib[slot];
+      const sign = delta > 0 ? '+' : '';
+      const cls = delta > 0 ? 'wwm-equip-delta-pos' : 'wwm-equip-delta-neg';
+      el.innerHTML = `<b>${origContrib[slot].toLocaleString()}</b> <span class="wwm-equip-delta ${cls}">${sign}${delta.toLocaleString()}</span>`;
     } else {
       el.innerHTML = `<b>${curScore.toLocaleString()}</b>`;
     }
