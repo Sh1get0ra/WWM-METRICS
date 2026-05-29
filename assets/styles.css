@@ -2667,19 +2667,41 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
   border: 1px solid var(--ink-1) !important;
 }
 .wwm-cmp-modal-a .wwm-cmp-title {
-  font-family: var(--f-display, 'Noto Serif JP') !important;
-  font-weight: 900 !important;
-  font-size: 11px !important;
-  letter-spacing: 0.32em !important;
   position: absolute !important;
-  top: -8px !important; left: 12px !important;
-  background: #1a1410 !important;
-  padding: 0 8px !important;
+  top: -14px !important; left: 12px !important;
+  padding: 0 !important;
   margin: 0 !important;
   z-index: 4;
-  display: flex; align-items: center; gap: 6px;
-  text-transform: uppercase;
-  line-height: 1.4;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent !important;
+  line-height: 1;
+}
+/* 「現有 / 新置」 を朱印化 (比 と同じ装飾) */
+.wwm-cmp-modal-a .wwm-cmp-title::before {
+  content: attr(data-seal);
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 36px; height: 24px;
+  padding: 0 8px;
+  background: var(--vermilion);
+  color: #fff;
+  font-family: var(--f-display, 'Noto Serif JP');
+  font-weight: 900; font-size: 13px;
+  letter-spacing: 0.12em;
+  border: 2px solid rgba(255,255,255,0.5);
+  border-radius: 2px;
+  transform: rotate(-4deg);
+  box-shadow: 0 0 8px rgba(232,81,58,0.6);
+}
+.wwm-cmp-modal-a .wwm-cmp-new .wwm-cmp-title::before {
+  background: var(--jade);
+  color: #1a3a24;
+  box-shadow: 0 0 8px rgba(168,212,180,0.6);
+}
+/* 本来 title内のテキスト「現有/新置」は朱印で表現するので隠す。 Lv バッジは残す */
+.wwm-cmp-modal-a .wwm-cmp-title { color: transparent !important; font-size: 0 !important; }
+.wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv {
+  color: var(--paper-mute) !important;
+  font-size: 10px !important;
 }
 .wwm-cmp-modal-a .wwm-cmp-col {
   margin-top: 4px;

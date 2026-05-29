@@ -2580,7 +2580,7 @@ function openGearEdit(slot) {
         <div class="wwm-cmp-grid">
           <div class="wwm-cmp-col wwm-cmp-current${isBowSetSlot?' wwm-cmp-bow':''}">
             ${bgIconHtml}
-            <h3 class="wwm-cmp-title">${(window.T&&T.cmpCurrent)||'現有'}${origEq?.exVo?._inferredLv ? ` <span class="wwm-cmp-lv">Lv${origEq.exVo._inferredLv}</span>` : ''}</h3>
+            <h3 class="wwm-cmp-title" data-seal="${(window.T&&T.cmpCurrent)||'現有'}">${(window.T&&T.cmpCurrent)||'現有'}${origEq?.exVo?._inferredLv ? ` <span class="wwm-cmp-lv">Lv${origEq.exVo._inferredLv}</span>` : ''}</h3>
             ${curKongfuHeader}
             ${curSetHeader}
             ${isAffixEditable ? `<div class="wwm-cmp-rows">${renderCurrentRows()}</div>` : ''}
@@ -2588,7 +2588,7 @@ function openGearEdit(slot) {
           <div class="wwm-cmp-divider"></div>
           <div class="wwm-cmp-col wwm-cmp-new${isBowSetSlot?' wwm-cmp-bow':''}" id="wwmCmpNewCol">
             ${bgIconHtml}
-            <h3 class="wwm-cmp-title">${(window.T&&T.cmpNew)||'新置'}${(() => {
+            <h3 class="wwm-cmp-title" data-seal="${(window.T&&T.cmpNew)||'新置'}">${(window.T&&T.cmpNew)||'新置'}${(() => {
               const _curLv = window.__WWM_VIRTUAL?.[slot]?.exVo?._inferredLv ?? origEq?.exVo?._inferredLv;
               const _lvList = window.WWM_EQUIP_BASE_BY_LV?._lvList || [91, 86, 81, 71];
               const _hasTbl = !!window.WWM_EQUIP_BASE_BY_LV?.slots?.[String(slot)];
