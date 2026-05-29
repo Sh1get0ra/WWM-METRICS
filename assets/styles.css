@@ -2018,9 +2018,15 @@ html[data-theme="light"] .wwm-sb-mini-hero-ink {
 .wwm-sb-rest {
   background: linear-gradient(180deg, var(--surf-1), var(--surf-2));
   border: 1px solid var(--ink-1);
-  padding: 10px 12px 12px;
+  padding: 10px 18px 12px 12px;
   display: flex; flex-direction: column; gap: 4px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-deep) transparent;
+  scrollbar-gutter: stable;
 }
+.wwm-sb-rest::-webkit-scrollbar { width: 6px; }
+.wwm-sb-rest::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
 html[data-theme="light"] .wwm-sb-rest {
   background: linear-gradient(180deg, #f5ead0, #ede0c0);
   border-color: rgba(40,25,18,0.15);
@@ -2363,6 +2369,12 @@ body.wwm-layout-active .wwm-sidebar-test {
 body.wwm-layout-active .wwm-sb-rest {
   flex: 1 1 auto;
   min-height: 0;
+  overflow-y: auto;
+}
+/* sidebar 本体 scroll は rest が引き受ける (枠内 scrollbar) */
+body.wwm-layout-active .wwm-sidebar-test {
+  overflow-y: hidden !important;
+  scrollbar-gutter: auto !important;
 }
 body.wwm-layout-active .wwm-sidebar-test::-webkit-scrollbar { width: 6px; }
 body.wwm-layout-active .wwm-sidebar-test::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
