@@ -246,7 +246,7 @@ async function _evalPenSpecialization(roleInfo) {
     window.computeExpected(p2);
     const dElemPer1 = _scoreWithBonus(roleInfo) - baseScore;
     window.computeExpected(baseP);
-    return { dPhysPer1, dElemPer1, maxPhysPen, maxElemPen };
+    return { dPhysPer1, dElemPer1, maxPhysPen, maxElemPen, baseScore };
   } catch (e) { return null; }
 }
 // 武器系 (slot 1/2/10/11) affix6 判定:
@@ -322,9 +322,12 @@ function _updateDiagBadge(items) {
   if (!badge) return;
   if (warns.length > 0) {
     badge.hidden = false;
+    badge.style.display = '';
     if (cnt) cnt.textContent = warns.length;
   } else {
     badge.hidden = true;
+    badge.style.display = 'none';
+    if (cnt) cnt.textContent = '';
   }
 }
 function _openDiagPopup() {
@@ -367,10 +370,14 @@ async function renderDiagnostics(roleInfo, params) {
   ]);
   const T_ = window.T || {};
   let merged = items.slice();
-  if (penEval && penEval.dPhysPer1 < 22 && penEval.dElemPer1 < 18) {
+  // 閾値 baseScore比 動的化 (基準: 武格指数10945時 外功26/属性21 → 割合固定 → Lv強化で自動追従)
+  const _penBase = penEval?.baseScore || 10945;
+  const _physThr = _penBase * (26 / 10945);
+  const _elemThr = _penBase * (21 / 10945);
+  if (penEval && penEval.dPhysPer1 < _physThr && penEval.dElemPer1 < _elemThr) {
     merged = merged.filter(it => it.type !== 'good').concat([{
       type: 'warn',
-      text: _tpl(T_.diagPenBoth || '外功/属性 どちらにも特化なし → 片方に特化推奨 (外功貫通+1={0} / 属性貫通+1={1} / 推奨 外功≥22 or 属性≥18)', penEval.dPhysPer1.toFixed(2), penEval.dElemPer1.toFixed(2))
+      text: _tpl(T_.diagPenBoth || '外功/属性 どちらにも特化なし → 片方に特化推奨 (外功貫通+1={0} / 属性貫通+1={1} / 推奨 外功≥{2} or 属性≥{3})', penEval.dPhysPer1.toFixed(2), penEval.dElemPer1.toFixed(2), _physThr.toFixed(1), _elemThr.toFixed(1))
     }]);
   }
   if (penEval) {

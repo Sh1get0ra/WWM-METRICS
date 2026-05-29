@@ -9,8 +9,8 @@ const ENEMY_PRESET = {
   Lv100: { physDef: 498, judgeRes: 1.85, physRes: 0, elemRes: 0 },
 };
 
-function v(id)  { return parseFloat(document.getElementById(id).value) || 0; }
-function vp(id) { return (parseFloat(document.getElementById(id).value) || 0) / 100; }
+function v(id)  { const el = document.getElementById(id); return el ? (parseFloat(el.value) || 0) : 0; }
+function vp(id) { const el = document.getElementById(id); return el ? ((parseFloat(el.value) || 0) / 100) : 0; }
 
 // ── 純粋関数：期待ダメージ ────────────────────────────────────────
 function computeExpected(pIn) {
