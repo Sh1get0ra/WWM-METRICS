@@ -2821,21 +2821,25 @@ function updateHero(params) {
   const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
   setText('heroExpected', Math.round(total).toLocaleString());
   setText('hbExp', Math.round(total).toLocaleString());
-  // countUp 経由 (calc.js calculate() の countUp 上書き 上書し直し)
+  // hero-current = 現在装備 (baseline.statusScore があればそれ、なければ statusScore)
+  const _baseline = window.__WWM_BASELINE;
+  const currentScore = (_baseline && typeof _baseline.statusScore === 'number')
+    ? Math.round(_baseline.statusScore)
+    : statusScore;
   if (typeof window.countUp === 'function') {
-    window.countUp('heroScore', statusScore, 0);
-    window.countUp('heroCompactScore', statusScore, 0);
+    window.countUp('heroScore', currentScore, 0);
+    window.countUp('heroCompactScore', currentScore, 0);
   } else {
-    setText('heroScore', statusScore.toLocaleString());
-    setText('heroCompactScore', statusScore.toLocaleString());
+    setText('heroScore', currentScore.toLocaleString());
+    setText('heroCompactScore', currentScore.toLocaleString());
   }
-  // current tier badge (compute 由来 tier 反映 — calc.js DOM 由来上書き 修正)
+  // current tier badge — 現在装備 (baseline) 基準
   const wl2 = effRi?.worldLv || 14;
   const thr2 = 6700 * Math.pow(0.8, 14 - wl2);
-  const curTier = statusScore >= thr2 ? 'SS'
-                : statusScore >= thr2*0.9 ? 'S'
-                : statusScore >= thr2*0.8 ? 'A'
-                : statusScore >= thr2*0.6 ? 'B' : 'C';
+  const curTier = currentScore >= thr2 ? 'SS'
+                : currentScore >= thr2*0.9 ? 'S'
+                : currentScore >= thr2*0.8 ? 'A'
+                : currentScore >= thr2*0.6 ? 'B' : 'C';
   const tbCur = document.getElementById('heroTierBadge');
   if (tbCur) { tbCur.textContent = curTier; tbCur.className = 'hero-tier tier-badge tier-' + curTier; }
   // sidebar 武格指数行 tier badge + score — 現在の装備 (baseline) 基準
@@ -2879,11 +2883,11 @@ function updateHero(params) {
   // compact tier badge: 廃止 (heroCompactTierBadge hidden)
   setText('heroCompactDmg', Math.round(total).toLocaleString());
   setText('heroCompactExp', Math.round(total).toLocaleString());
-  // baseline 表示 (Δ は廃止、baseline ▶ current で視覚化)
+  // NEXT 側 = 仮想装備込みの statusScore (新装備プレビュー)
   const baseline = window.__WWM_BASELINE;
   const baseEl = document.getElementById('heroScoreBaseline');
   if (baseline && typeof baseline.statusScore === 'number') {
-    const baseScore = Math.round(baseline.statusScore);
+    const baseScore = statusScore; // NEXT = 仮想装備込み
     if (baseEl) baseEl.textContent = baseScore.toLocaleString();
     // baseline tier badge (tier 未保存 baseline 用 fallback)
     const blTb = document.getElementById('heroBaselineTierBadge');
@@ -2920,7 +2924,7 @@ function updateHero(params) {
       }
     }
   } else {
-    if (baseEl) baseEl.textContent = statusScore.toLocaleString();
+    if (baseEl) baseEl.textContent = currentScore.toLocaleString();
   }
 }
 
