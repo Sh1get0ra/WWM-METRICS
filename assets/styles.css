@@ -293,7 +293,8 @@ html[data-theme="light"] .wwm-brand-sub { color: var(--vermilion-bright); opacit
 .top-controls-2row .lang-switcher-row { width: 96px; }
 .top-controls-2row .lang-switcher-row .lang-btn { flex: 1; padding: 4px 0; text-align: center; }
 .top-controls-2row .topbar-row .icon-btn:not(.icon-btn-x):not(#themeToggle):not(.note-btn) {
-  min-width: 88px;
+  min-width: 66px;
+  width: 66px;
   padding: 0 var(--space-2);
   justify-content: center;
   text-align: center;
