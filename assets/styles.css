@@ -2002,7 +2002,7 @@ html[data-theme="light"] .wwm-sb-mini-hero-card {
   background: linear-gradient(180deg, #f4e8cc, #ede0c0);
 }
 html[data-theme="light"] .wwm-sb-mini-hero-ink {
-  background: linear-gradient(90deg, rgba(160,28,18,0), rgba(160,28,18,0.22), rgba(160,28,18,0));
+  background: linear-gradient(90deg, rgba(184,134,11,0), rgba(184,134,11,0.16), rgba(184,134,11,0));
 }
 /* mini-hero card 内の sb-top: sticky/border 解除 */
 .wwm-sb-mini-hero-card .wwm-sb-top {
