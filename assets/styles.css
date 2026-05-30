@@ -2183,8 +2183,8 @@ html[data-theme="light"] .wwm-sb-top { background: #f5ead0; }
   padding: 2px 6px; align-items: baseline;
 }
 .wwm-sb-row.wwm-sb-sub { padding-left: 18px; opacity: 0.85; font-size: var(--text-sm); }
-.wwm-sb-label { opacity: 0.75; }
-.wwm-sb-value { font-weight: var(--fw-semibold); }
+.wwm-sb-label { opacity: 0.75; white-space: nowrap; flex-shrink: 0; }
+.wwm-sb-value { font-weight: var(--fw-semibold); text-align: right; min-width: 0; }
 .wwm-sb-warn {
   display: inline-block;
   color: var(--vermilion-bright, #ff6b4a);
