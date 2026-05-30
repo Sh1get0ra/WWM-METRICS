@@ -857,7 +857,6 @@ function applyImport(data, importedAt, state) {
       if (window.WWMXinfa) window.WWMXinfa.render(data);
       if (window.WWMDiag) window.WWMDiag.render(data, params);
       if (window.WWMRanking) window.WWMRanking.render(data, params);
-      if (window.WWMOpt) window.WWMOpt.render(data, params);
       if (window.WWMHero) window.WWMHero.update(params);
       // calc.js の calculate() (DOM 由来) 先に実行 → donut DOM 上書きされる
       if (typeof window.calculate === 'function') window.calculate();
@@ -873,6 +872,13 @@ function applyImport(data, importedAt, state) {
         else { try { localStorage.setItem('wwm_baseline_score_v1', JSON.stringify(window.__WWM_BASELINE)); } catch(e) {} }
         if (window.WWMHero) window.WWMHero.update(params);
         if (window.WWMHistory) window.WWMHistory.record(data, { statusScore: res.statusScore + bonus, expected: res.expected, tier: res.tier });
+      }
+      // 重い最適化(数秒)は 初期描画(mini-hero/score)を阻害しないよう await せず 2フレーム後に遅延起動。
+      // (opt前に置くと opt の setTimeout(0) yield では paint が starve し score が opt完了まで見えない)
+      if (window.WWMOpt) {
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          window.WWMOpt.render(data, params).catch(e => console.error('[WWM] opt failed:', e));
+        }));
       }
     }).catch(e => console.error('[WWM] stats build failed:', e));
   }

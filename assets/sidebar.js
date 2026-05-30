@@ -663,6 +663,11 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
   // abort token: 新しい render 開始時、前回 loop を打切
   const myToken = (window._OPT_TOKEN = (window._OPT_TOKEN || 0) + 1);
   const _aborted = () => window._OPT_TOKEN !== myToken;
+  // ★ 重い最適化ループの前に 1 paint を確実に挟む (rAF→setTimeout)。
+  //   どの呼出経路 (import/_refreshAll/auto-load) でも、import直後の mini-hero/score/sidebar を
+  //   最適化(数秒)が starve する前に描画させる。継続が paint後のmacrotaskで走るのが肝。
+  await new Promise(r => requestAnimationFrame(() => setTimeout(r, 0)));
+  if (_aborted()) return;
   // 保存された ratio (slider 値) 取得
   const savedRatio = parseFloat(localStorage.getItem('wwm_opt_target_ratio_v1')) || 0.94;
   const TARGET_RATIO = opts.ratio ?? savedRatio;
@@ -1305,6 +1310,10 @@ async function renderSidebar(params) {
   const charName = ri?.roleName ? `${ri.roleName} <span class="wwm-muted">Lv${ri.level||'?'}</span>` : '';
   const importBtnLabel = (window.T && window.T.importBtn) || 'IMPORT';
   const powerLabel = _label(cfg.header?.title, '総合武力');
+  // 再render時に score が "-" に消えないよう baseline から直接埋め込む (updateHero タイミング非依存)
+  const _bl = window.__WWM_BASELINE;
+  const martialScoreStr = (_bl && typeof _bl.statusScore === 'number') ? Math.round(_bl.statusScore).toLocaleString() : '-';
+  const martialTier = (_bl && _bl.tier) ? _bl.tier : '';
   const header = `
     <div class="wwm-sb-mini-hero-card">
       <span class="wwm-sb-l-bl"></span><span class="wwm-sb-l-br"></span>
@@ -1314,7 +1323,7 @@ async function renderSidebar(params) {
         <div class="wwm-sb-info">
           ${charName ? `<div class="wwm-sb-charname">${charName}</div>` : ''}
           <div class="wwm-sb-power"><span class="wwm-muted">${powerLabel}</span> <b>${totalPower}</b></div>
-          <div class="wwm-sb-martial"><span class="wwm-muted">${(window.T&&T.martialIndex)||'武格指数'}</span> <b id="wwmSbMartialScore">-</b> <span class="wwm-sb-tier-badge" id="wwmSbTierBadge"></span></div>
+          <div class="wwm-sb-martial"><span class="wwm-muted">${(window.T&&T.martialIndex)||'武格指数'}</span> <b id="wwmSbMartialScore">${martialScoreStr}</b> <span class="wwm-sb-tier-badge tier-${martialTier}" id="wwmSbTierBadge">${martialTier}</span></div>
         </div>
       </div>
     </div>
@@ -2129,12 +2138,16 @@ function _refreshAll() {
       if (window.WWMXinfa) window.WWMXinfa.render(ri);
       if (window.WWMDiag) window.WWMDiag.render(ri, params);
       if (window.WWMRanking) window.WWMRanking.render(ri, params);
-      // 1tick 譲ってブラウザに paint 機会を与えてから重い最適化
-      await new Promise(r => requestAnimationFrame(() => r()));
-      // flag/donut snap は renderOptimization 内で一元管理 (await して flag衝突回避)
-      if (window.WWMOpt) await window.WWMOpt.render(ri, params);
       _autoFitText();
       _saveVirtuals();
+      // 重い最適化(数秒)は await せず 2フレーム後に遅延起動 (初期描画を阻害しない)。
+      if (window.WWMOpt) {
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          window.WWMOpt.render(ri, params)
+            .then(() => _autoFitText())
+            .catch(e => console.error('[WWM] opt failed:', e));
+        }));
+      }
     }).catch(e => console.error('[WWM] refresh failed:', e));
   }
 }
