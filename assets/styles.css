@@ -2195,7 +2195,7 @@ html[data-theme="light"] .wwm-sb-top { background: #f5ead0; }
 }
 .wwm-sb-expandable { cursor: pointer; }
 .wwm-sb-sub-group.wwm-sb-collapsed { display: none; }
-.wwm-sb-applied { color: #d4af37; opacity: 0.85; font-size: var(--text-sm); margin-left: 4px; }
+.wwm-sb-applied { color: #d4af37; opacity: 0.85; font-size: 0.78em; margin-left: 4px; }
 /* light: sidebar 適用値 (判定確率の括弧内) を濃amberに (cream上で gold が低コントラストのため) */
 html[data-theme="light"] .wwm-sb-applied { color: #8a5212; opacity: 1; }
 .wwm-sb-baseline { color: var(--paper-mute); opacity: 0.7; font-weight: var(--fw-medium); }

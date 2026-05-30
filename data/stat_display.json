@@ -40,7 +40,7 @@
       "title": { "ja": "判定確率", "en": "Judgment Rates", "zh": "判定概率", "ko": "판정 속성" },
       "items": [
         { "key": "hitRate",         "label": { "ja": "命中率",     "en": "Precision",       "zh": "命中率",     "ko": "정확도" },         "format": "rateApplied", "calcKey": "hitRate",      "appliedCalcKey": "appliedHit" },
-        { "key": "critRate",        "label": { "ja": "会心率",     "en": "Crit Rate",       "zh": "会心率",     "ko": "치명타 확률" },         "format": "rateApplied", "calcKey": "critRate",     "appliedCalcKey": "appliedCrit" },
+        { "key": "critRate",        "label": { "ja": "会心率",     "en": "Crit",            "zh": "会心率",     "ko": "치명타 확률" },         "format": "rateApplied", "calcKey": "critRate",     "appliedCalcKey": "appliedCrit" },
         { "key": "sympathyRate",    "label": { "ja": "会意率",     "en": "Affinity",        "zh": "会意率",     "ko": "각성 확률" },         "format": "rateApplied", "calcKey": "sympathyRate", "appliedCalcKey": "appliedSympathy" },
         { "key": "addCritRate",     "label": { "ja": "付加会心率", "en": "Add Crit",        "zh": "附加会心率", "ko": "추가 치명타 확률" },     "format": "pct", "calcKey": "addCritRate" },
         { "key": "addSympathyRate", "label": { "ja": "付加会意率", "en": "Add Affinity",    "zh": "附加会意率", "ko": "추가 각성 확률" },     "format": "pct", "calcKey": "addSympathyRate" },
