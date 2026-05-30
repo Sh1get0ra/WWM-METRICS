@@ -1109,54 +1109,68 @@ function _shareBuildUrl() {
   m.className = 'wwm-modal-backdrop';
   m.innerHTML = `
     <div class="wwm-modal wwm-modal-wide">
+      <div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/share.svg');background-position:calc(100% + 40px) calc(100% + 140px);background-size:70%;"></div>
       <div class="wwm-modal-header">
-        <h2>Build 共有 URL</h2>
+        <h2>${(window.T?.shareTitle) ?? '飛簡 / BUILD SHARE'}</h2>
         <button class="wwm-modal-close" aria-label="Close">×</button>
       </div>
       <div class="wwm-modal-body">
-        <p style="font-size:12px;color:var(--paper-mute);margin:0 0 12px;">この URL を共有すると、相手の WWM-METRICS で同じ build が表示される。</p>
-        <div style="font-size:11px;color:var(--gold-bright);font-weight:700;letter-spacing:0.1em;margin-bottom:4px;">通常 URL</div>
+        <!-- セクション1: ビルド共有 -->
+        <div style="font-size:13px;color:var(--gold-bright);font-weight:700;letter-spacing:0.12em;margin-bottom:6px;">${(window.T?.shareSect1Heading) ?? '▍ビルド共有'}</div>
+        <p style="font-size:12px;color:var(--paper);opacity:0.92;margin:0 0 10px;line-height:1.6;">${(window.T?.shareSect1Desc) ?? ''}</p>
         <textarea class="wwm-share-url" id="wwmShareUrlNormal" readonly>${url}</textarea>
         <div class="wwm-btn-row" style="margin-top:6px;">
-          <button class="wwm-btn-secondary" id="wwmShareCopyNormal">通常 URL コピー</button>
+          <button class="wwm-btn-secondary" id="wwmShareCopyNormal">${(window.T?.shareCopyUrl) ?? 'URL コピー'}</button>
         </div>
-        <div style="font-size:11px;color:var(--gold-bright);font-weight:700;letter-spacing:0.1em;margin:18px 0 4px;">OBS Browser Source URL</div>
-        <p style="font-size:11px;color:var(--paper-mute);margin:0 0 6px;">OBS の Browser Source に貼り付け。Build変更時は再度コピー&Source URL更新で反映。</p>
-        <div style="display:flex;align-items:center;gap:12px;font-size:11px;color:var(--paper-mute);margin-bottom:8px;flex-wrap:wrap;">
+
+        <!-- セクション2: OBS Browser Source -->
+        <div style="font-size:13px;color:var(--gold-bright);font-weight:700;letter-spacing:0.12em;margin:22px 0 6px;">${(window.T?.shareSect2Heading) ?? '▍OBS 配信用 URL'}</div>
+        <p style="font-size:12px;color:var(--paper);opacity:0.92;margin:0 0 8px;line-height:1.6;">${(window.T?.shareSect2Desc) ?? ''}</p>
+        <details style="margin:0 0 10px;font-size:12px;color:var(--paper);">
+          <summary style="cursor:pointer;color:var(--gold-bright);letter-spacing:0.05em;font-weight:700;">${(window.T?.shareObsSetup) ?? 'OBS への設定方法'}</summary>
+          <ol style="margin:6px 0 0;padding-left:20px;line-height:1.7;opacity:0.92;">
+            <li>${(window.T?.shareObsStep1) ?? ''}</li>
+            <li>${(window.T?.shareObsStep2) ?? ''}</li>
+            <li>${(window.T?.shareObsStep3) ?? ''}</li>
+            <li>${(window.T?.shareObsStep4) ?? ''}</li>
+            <li>${(window.T?.shareObsStep5) ?? ''}</li>
+          </ol>
+        </details>
+        <div style="display:flex;align-items:center;gap:12px;font-size:12px;color:var(--paper);margin-bottom:8px;flex-wrap:wrap;">
           <label style="display:flex;align-items:center;gap:6px;">
-            背景色
+            ${(window.T?.shareLabelBg) ?? '背景色'}
             <input type="color" id="wwmObsBg" value="${initBg}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
           </label>
           <label style="display:flex;align-items:center;gap:6px;">
-            不透明度
+            ${(window.T?.shareLabelOpacity) ?? '不透明度'}
             <input type="range" id="wwmObsOpacity" min="0" max="100" step="1" value="${initOp}" style="width:130px;accent-color:var(--gold);">
             <span id="wwmObsOpacityVal" style="font-family:var(--f-mono);color:var(--gold-bright);min-width:36px;">${initOp}%</span>
           </label>
         </div>
-        <div style="display:flex;align-items:center;gap:12px;font-size:11px;color:var(--paper-mute);margin-bottom:8px;flex-wrap:wrap;">
-          <label style="display:flex;align-items:center;gap:6px;">文字色1
+        <div style="display:flex;align-items:center;gap:12px;font-size:12px;color:var(--paper);margin-bottom:8px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:6px;">${(window.T?.shareLabelText1) ?? '文字色1'}
             <input type="color" id="wwmObsT1" value="${initT1}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
           </label>
-          <label style="display:flex;align-items:center;gap:6px;">文字色2
+          <label style="display:flex;align-items:center;gap:6px;">${(window.T?.shareLabelText2) ?? '文字色2'}
             <input type="color" id="wwmObsT2" value="${initT2}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
           </label>
-          <label style="display:flex;align-items:center;gap:6px;">ラベル文字
+          <label style="display:flex;align-items:center;gap:6px;">${(window.T?.shareLabelAcText) ?? 'ラベル文字'}
             <input type="color" id="wwmObsAc" value="${initAc}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
           </label>
-          <label style="display:flex;align-items:center;gap:6px;">ラベル背景
+          <label style="display:flex;align-items:center;gap:6px;">${(window.T?.shareLabelAcBg) ?? 'ラベル背景'}
             <input type="color" id="wwmObsLbg" value="${initLbg}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
           </label>
         </div>
         <textarea class="wwm-share-url" id="wwmShareUrlObs" readonly>${obsUrl}</textarea>
         <div class="wwm-btn-row" style="margin-top:6px;">
-          <button class="wwm-btn-primary" id="wwmShareCopyObs">OBS URL コピー</button>
-          <button class="wwm-btn-secondary" id="wwmShareTogglePreview">プレビュー表示</button>
-          <button class="wwm-btn-secondary" id="wwmShareClose">閉じる</button>
+          <button class="wwm-btn-primary" id="wwmShareCopyObs">${(window.T?.shareCopyObs) ?? 'OBS URL コピー'}</button>
+          <button class="wwm-btn-secondary" id="wwmShareTogglePreview">${(window.T?.sharePreviewBtn) ?? 'プレビュー表示'}</button>
+          <button class="wwm-btn-secondary" id="wwmShareClose">${(window.T?.shareCloseBtn) ?? '閉じる'}</button>
         </div>
         <div id="wwmSharePreviewWrap" style="display:none;margin-top:12px;">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-            <div style="font-size:11px;color:var(--gold-bright);font-weight:700;letter-spacing:0.1em;">プレビュー (内部 640×900 を縮小表示)</div>
-            <label style="font-size:11px;color:var(--paper-mute);display:flex;align-items:center;gap:6px;">縮尺
+            <div style="font-size:11px;color:var(--gold-bright);font-weight:700;letter-spacing:0.1em;">${(window.T?.sharePreviewTitle) ?? 'プレビュー'}</div>
+            <label style="font-size:11px;color:var(--paper-mute);display:flex;align-items:center;gap:6px;">${(window.T?.sharePreviewScaleLabel) ?? '縮尺'}
               <input type="range" id="wwmSharePreviewScale" min="30" max="100" step="5" value="50" style="width:120px;accent-color:var(--gold);">
               <span id="wwmSharePreviewScaleVal" style="font-family:var(--f-mono);color:var(--gold-bright);min-width:36px;">50%</span>
             </label>
@@ -1178,9 +1192,10 @@ function _shareBuildUrl() {
   const copyTo = async (text, label) => {
     try {
       await navigator.clipboard.writeText(text);
-      m.querySelector('#wwmShareMsg').textContent = `✓ ${label} コピー完了`;
+      const tpl = (window.T?.shareMsgCopyOK) ?? '✓ {label} コピー完了';
+      m.querySelector('#wwmShareMsg').textContent = tpl.replace('{label}', label);
     } catch (e) {
-      m.querySelector('#wwmShareMsg').textContent = '手動でコピーしてください';
+      m.querySelector('#wwmShareMsg').textContent = (window.T?.shareMsgCopyManual) ?? '手動でコピーしてください';
     }
   };
   m.querySelector('#wwmShareCopyNormal').addEventListener('click', () => copyTo(url, '通常URL'));
@@ -1214,7 +1229,7 @@ function _shareBuildUrl() {
   togglePreviewBtn.addEventListener('click', () => {
     previewOn = !previewOn;
     previewWrap.style.display = previewOn ? 'block' : 'none';
-    togglePreviewBtn.textContent = previewOn ? 'プレビュー閉じる' : 'プレビュー表示';
+    togglePreviewBtn.textContent = previewOn ? ((window.T?.sharePreviewClose) ?? 'プレビュー閉じる') : ((window.T?.sharePreviewBtn) ?? 'プレビュー表示');
     if (previewOn) previewFrame.src = obsUrl;
     else previewFrame.src = 'about:blank';
   });
