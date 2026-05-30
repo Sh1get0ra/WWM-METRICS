@@ -2870,12 +2870,12 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
 .wwm-cmp-modal-a .wwm-cmp-ratio {
   font-family: var(--f-mono, 'Rajdhani') !important;
   font-size: 10px !important;
-  padding: 1px 5px !important;
+  padding: 1px 3px !important;
   border-radius: 2px !important;
   background: rgba(168,212,180,0.18) !important;
   color: var(--jade-bright, #b8e0c4) !important;
   border: 1px solid rgba(168,212,180,0.4) !important;
-  min-width: 36px !important;
+  min-width: 30px !important;
   text-align: center !important;
   display: inline-block !important;
   margin-left: 0 !important;
@@ -3090,10 +3090,10 @@ html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-val-input { color: #ffae8a !im
 /* 新置列 (編集): select + useful + val-wrap */
 .wwm-cmp-modal-a .wwm-cmp-new .wwm-cmp-row.wwm-cmp-edit-row {
   display: grid !important;
-  grid-template-columns: minmax(70px, 1.2fr) 22px minmax(60px, 1fr) !important;
+  grid-template-columns: minmax(78px, 1fr) 20px minmax(92px, 1.15fr) !important;
 }
 .wwm-cmp-modal-a .wwm-cmp-new .wwm-cmp-val-wrap {
-  display: flex; align-items: center; gap: 6px;
+  display: flex; align-items: center; gap: 4px;
   min-width: 0;
 }
 .wwm-cmp-modal-a .wwm-cmp-stat-select {
