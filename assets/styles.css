@@ -5063,6 +5063,11 @@ html[data-theme="light"] .wwm-error-banner {
 @media (prefers-reduced-motion: reduce) {
   .wwm-score-update-banner, .wwm-score-update-icon, .wwm-score-update-btn, .wwm-score-update-arrow { animation: none !important; }
 }
+
+/* PvP定音ロック行 (武具対照 affix6): val 入力欄を非表示 (編集不可、行レイアウト維持) */
+.wwm-cmp-modal-a .wwm-cmp-pvp-locked .wwm-cmp-val-input,
+.wwm-cmp-modal-a .wwm-cmp-pvp-locked .wwm-cmp-unit,
+.wwm-cmp-modal-a .wwm-cmp-pvp-locked .wwm-cmp-ratio { visibility: hidden !important; }
 html[data-theme="light"] .wwm-score-update-banner {
   background: var(--vermilion-tint);
   color: var(--vermilion-deep);

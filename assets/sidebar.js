@@ -2153,10 +2153,14 @@ function _refreshAll() {
 }
 
 // ── Affix 統計 ラベル取得 (import.js の _STAT_LABELS 利用) ────
-function _affixDisplayName(id) {
+function _affixDisplayName(id, idx) {
   const info = window.WWM_AFFIX?.[id];
   const key = info?.statKey;
-  if (!key) return 'オプション#' + id;
+  if (!key) {
+    // affix6 (idx===5) の未登録 ID = PvP専用定音 (sentinel 含む)
+    if (idx === 5) return (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
+    return 'オプション#' + id;
+  }
   // _STAT_LABELS は import.js 内 const、 fallback で key そのまま
   return (window._AFFIX_DISPLAY_LABELS?.[key]) || key;
 }
@@ -2409,8 +2413,15 @@ function _isWeaponDmgMatch(statKey, slot, roleInfo) {
 
 // affix 種別変更 option list: 現 affix と同じ prefix2 のもの → statKey で dedup
 // slot/idx 指定で 6番目限定処理 + idx 1-4 重複不可 (affix0 のみ重複可)
+// PvP専用定音 sentinel ID (WWM_AFFIX に存在しない固定値、計算寄与ゼロ、表示は affix6 fallback で「PvP専用定音」)
+const _PVP_AFFIX_SENTINEL = 999999;
 function _getAffixOptions(currentAffixId, slot, idx, allAffixes) {
   const all = window.WWM_AFFIX || {};
+  // affix6 + 現在 ID が未登録 (PvP定音) → 変更不可、PvP option のみ返す (全スロット共通)
+  if (idx === 5 && !all[currentAffixId]) {
+    const pvpName = (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
+    return [{ id: _PVP_AFFIX_SENTINEL, statKey: '__pvp__', name: pvpName }];
+  }
   const cur = String(currentAffixId);
   const prefix = cur.substring(0, 2);
   const slotS = String(slot);
@@ -2460,6 +2471,7 @@ function _getAffixOptions(currentAffixId, slot, idx, allAffixes) {
     opts.push({ id, statKey: sk, name: (window._AFFIX_DISPLAY_LABELS?.[sk]) || sk });
   }
   opts.sort((a, b) => a.name.localeCompare(b.name, 'ja'));
+  // PvE→PvP切替は不可 (上の早期return で逆方向 PvP→PvE も不可。PvE装備と PvP装備の壁を維持)
   return opts;
 }
 
@@ -2535,12 +2547,12 @@ function openGearEdit(slot) {
 
   function renderCurrentRows() {
     const affs = origEq.exVo?.baseAffixes || [];
-    return affs.map(a => {
+    return affs.map((a, idx) => {
       const d = a.equipmentDetails || [];
       const [id, val, ratio, rank, useful] = d;
       const info = window.WWM_AFFIX?.[id];
       const sk = info?.statKey;
-      const name = _affixDisplayName(id);
+      const name = _affixDisplayName(id, idx);
       const rkCls = rank===3?'gold':rank===2?'purple':'blue';
       const usefulAuto = _isUsefulAffix(id, origRi);
       const pct = (ratio != null) ? (ratio * 100).toFixed(0) : null;
@@ -2572,8 +2584,12 @@ function openGearEdit(slot) {
       const r = _deriveRank(ratio);
       const rkCls = r===3?'gold':r===2?'purple':'blue';
       const opts = _getAffixOptions(id, slot, idx, newAffixes);
-      // selected は statKey 一致で判定 (実 ID と代表 ID 異なる可能性)
-      const optsHtml = opts.map(o => `<option value="${o.id}" data-stat="${o.statKey}" ${o.statKey===sk?'selected':''}>${o.name}</option>`).join('');
+      // selected: 通常は statKey 一致、affix6 で未登録ID(PvP定音含む) なら __pvp__ option
+      const isPvpSlot6 = (idx === 5) && !info;
+      const optsHtml = opts.map(o => {
+        const sel = isPvpSlot6 ? (o.statKey === '__pvp__') : (o.statKey === sk);
+        return `<option value="${o.id}" data-stat="${o.statKey}" ${sel?'selected':''}>${o.name}</option>`;
+      }).join('');
       const isPct = _isPctStat(sk);
       const needsMul = _pctNeedsMul(sk);
       const displayVal = isPct
@@ -2598,8 +2614,9 @@ function openGearEdit(slot) {
         ? Math.min(1, val / maxInternal) : null;
       const initPct = initRatio != null ? (initRatio * 100).toFixed(0) : '';
       const initColor = _ratioColor(initRatio);
+      // PvP定音 (idx=5 + 未登録): wwm-cmp-pvp-locked クラスで val/unit/ratio を visibility:hidden (編集不可)
       return `
-        <div class="wwm-cmp-row wwm-cmp-edit-row" data-affix-idx="${idx}" data-max-internal="${maxInternal||''}">
+        <div class="wwm-cmp-row wwm-cmp-edit-row${isPvpSlot6?' wwm-cmp-pvp-locked':''}" data-affix-idx="${idx}" data-max-internal="${maxInternal||''}">
           <select class="wwm-cmp-stat-select wwm-rank-${rkCls}" data-field="stat" data-stat-el>${optsHtml}</select>
           <div class="wwm-cmp-useful-mark" data-useful-el>${useful?'<span class="wwm-good-icon"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13.17 1 7.59 6.59C7.22 6.95 7 7.45 7 8v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1z"/></svg></span>':''}</div>
           <div class="wwm-cmp-val-wrap">
@@ -2817,6 +2834,9 @@ function openGearEdit(slot) {
     const cls = rk===3?'gold':rk===2?'purple':'blue';
     const sel = row.querySelector('[data-stat-el]');
     if (sel) sel.className = 'wwm-cmp-stat-select wwm-rank-' + cls;
+    // PvP定音 (idx=5 + 未登録/sentinel): wwm-cmp-pvp-locked クラスで val/unit/ratio を visibility:hidden
+    const isPvp = idx === 5 && !info;
+    row.classList.toggle('wwm-cmp-pvp-locked', isPvp);
     const usefulEl = row.querySelector('[data-useful-el]');
     if (usefulEl) usefulEl.innerHTML = d[4] ? '<span class="wwm-good-icon"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13.17 1 7.59 6.59C7.22 6.95 7 7.45 7 8v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1z"/></svg></span>' : '';
     const valInp = row.querySelector('.wwm-cmp-val-input');
@@ -2901,6 +2921,16 @@ function openGearEdit(slot) {
         if (f === 'stat') {
           const newId = parseInt(el.value, 10);
           d[0] = newId;
+          // PvP専用定音 sentinel: val=1/ratio=1.0/rank=3/useful=0 固定 (計算寄与ゼロ、編集不可)
+          if (newId === _PVP_AFFIX_SENTINEL) {
+            d[1] = 1; d[2] = 1.0; d[3] = 3; d[4] = 0;
+            // input 値も明示書込 (前 affix の val が残らないように)
+            const inpPvp = row.querySelector('.wwm-cmp-val-input');
+            if (inpPvp) { inpPvp.value = '1.0'; inpPvp.removeAttribute('max'); inpPvp.dataset.pct = '0'; inpPvp.dataset.pctmul = '0'; }
+            _refreshRowUI(row, idx);
+            _schedulePreview();
+            return;
+          }
           // useful 再判定 (newKongfu 基準)
           d[4] = _isUsefulAffix(newId, _virtRi(newKongfuId));
           // 初期値 = MAX × 0.9 (新 stat の max から)

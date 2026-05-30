@@ -437,13 +437,13 @@ function _renderEquipSlot(slot, eq) {
   const baseAttrsHtml = isBow ? '' : Object.entries(ex.baseAttrs || {}).map(([k,v]) =>
     `<li><span class="wwm-stat-name">${_BASE_ATTR_LABELS[k] || k}</span><span class="wwm-stat-val">${v}</span></li>`
   ).join('');
-  const affixHtml = isBow ? '' : (ex.baseAffixes || []).map(a => {
+  const affixHtml = isBow ? '' : (ex.baseAffixes || []).map((a, idx) => {
     const d = a.equipmentDetails || [];
     const [id, val, ratio, rank, useful] = d;
     const rclass = _RANK_CLASSES[rank] || '';
     const pct = ratio !== undefined ? `<span class="wwm-stat-pct"> (${(ratio*100).toFixed(0)}%)</span>` : '';
     const star = useful ? ' <span class="wwm-affix-useful" title="ゲーム内 👍 マーク (火力寄与)"><span class="wwm-good-icon"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13.17 1 7.59 6.59C7.22 6.95 7 7.45 7 8v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1z"/></svg></span></span>' : '';
-    return `<li class="${rclass}"><span class="wwm-stat-name">${_affixName(id)}${star}</span><span class="wwm-stat-val">${_fmtAffixVal(val)}${pct}</span></li>`;
+    return `<li class="${rclass}"><span class="wwm-stat-name">${_affixName(id, idx)}${star}</span><span class="wwm-stat-val">${_fmtAffixVal(val)}${pct}</span></li>`;
   }).join('');
   const slotLabel = _SLOT_LABELS[slot] || ('slot ' + slot);
   return `
@@ -753,7 +753,7 @@ const _AFFIX_LABELS = new Proxy({}, {
 });
 const _RANK_LABELS = { 1: '青', 2: '紫', 3: '金' };
 const _RANK_CLASSES = { 1: 'wwm-rank-blue', 2: 'wwm-rank-purple', 3: 'wwm-rank-gold' };
-function _affixName(id) {
+function _affixName(id, idx) {
   // 1) ハードコード優先 (旧 _AFFIX_LABELS で覆ったもの — 微調整用)
   if (_AFFIX_LABELS[id]) return _AFFIX_LABELS[id];
   // 2) WWM_AFFIX (data/affix.json) から statKey 解決
@@ -764,6 +764,8 @@ function _affixName(id) {
     if (a.internal && _BOW_INTERNAL_LABELS[a.internal]) return _BOW_INTERNAL_LABELS[a.internal];
     if (a.internal) return 'internal#' + a.internal;
   }
+  // 3) affix6 スロット (idx===5) の未登録 ID = PvP専用定音 (ユーザー仕様)。計算寄与は元々ゼロで安全弁にもなる。
+  if (idx === 5) return (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
   return 'affix#' + id;
 }
 function _setName(suffix, slot) {
