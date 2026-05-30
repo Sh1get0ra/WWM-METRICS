@@ -240,7 +240,7 @@ header.topbar::after {
 }
 .wwm-brand-right { display: flex; flex-direction: column; gap: var(--space-half); }
 .wwm-brand-en {
-  font-family: var(--f-display, 'Cinzel'), serif;
+  font-family: var(--f-latin), serif;
   font-weight: var(--fw-extra); font-size: var(--text-20); letter-spacing: 0.22em;
   color: var(--paper);
 }
@@ -2431,6 +2431,29 @@ body.wwm-layout-active .wwm-app-body .container > .wwm-analysis-grid > div {
   flex: 1 1 0;
   min-height: 0;
 }
+/* 新構造 .wwm-anlz をフッターまで伸縮 (旧 .wwm-analysis-grid と同パターン) */
+body.wwm-layout-active .wwm-app-body .container > .wwm-anlz {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+body.wwm-layout-active .wwm-anlz > .wwm-anlz-body {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+body.wwm-layout-active .wwm-anlz-body > .wwm-analysis-grid {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+body.wwm-layout-active .wwm-anlz-body > .wwm-analysis-grid > div {
+  flex: 1 1 0;
+  min-height: 0;
+}
 body.wwm-layout-active #wwmAffixRanking .wwm-analysis-card,
 body.wwm-layout-active #wwmOptimization .wwm-analysis-card,
 body.wwm-layout-active #wwmHistory .wwm-analysis-card,
@@ -3578,9 +3601,16 @@ html[data-theme="light"] .wwm-opt-loading {
 .wwm-opt-row {
   display: grid; grid-template-columns: 24px 90px 1fr max-content max-content max-content;
   gap: var(--space-2-5); align-items: center;
-  padding: 4px 6px; border-radius: 3px;
+  padding: 7px 10px;
   font-size: var(--text-12);
-  background: var(--surf-shade);
+  border-bottom: 1px solid rgba(240,210,138,0.12);
+  border-left: 3px solid rgba(212,175,55,0.22);
+  transition: background .15s, border-color .15s;
+}
+.wwm-opt-row:nth-child(odd) { background: rgba(240,210,138,0.05); }
+.wwm-opt-row:hover {
+  background: var(--gold-bright-faint);
+  border-left-color: var(--gold-bright, #f0d28a);
 }
 .wwm-opt-tierup {
   font-family: var(--f-latin); font-weight: var(--fw-bold); font-size: var(--text-sm);
@@ -3611,8 +3641,9 @@ html[data-theme="light"] .wwm-opt-loading {
 .wwm-opt-from { color: var(--paper-mute); text-decoration: line-through; opacity: 0.7; }
 .wwm-opt-to { color: var(--gold-bright); font-weight: var(--fw-semibold); }
 .wwm-opt-delta {
-  font-family: var(--f-latin); font-weight: var(--fw-bold);
+  font-family: var(--f-latin); font-weight: var(--fw-extra);
   color: var(--jade-bright); font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 .wwm-rank-body, .wwm-ladder-body {
   display: flex; flex-direction: column;
@@ -3640,32 +3671,51 @@ html[data-theme="light"] .wwm-opt-loading {
   grid-template-columns: 1fr 90px 70px;
   align-items: center;
   gap: var(--space-2);
-  padding: 6px 8px;
+  padding: 7px 10px;
   font-size: var(--text-12);
-  border-bottom: 1px solid rgba(240,210,138,0.06);
+  border-bottom: 1px solid rgba(240,210,138,0.12);
+  border-left: 3px solid transparent;
+  transition: background .15s, border-color .15s;
 }
-.wwm-eff-row:nth-child(odd) { background: rgba(240,210,138,0.03); }
-.wwm-eff-row:hover { background: var(--gold-bright-faint); }
-.wwm-eff-label { color: var(--paper); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.wwm-eff-input-wrap { display: inline-flex; align-items: center; gap: var(--space-half); }
+.wwm-eff-row:nth-child(odd) { background: rgba(240,210,138,0.05); }
+.wwm-eff-row:hover {
+  background: var(--gold-bright-faint);
+  border-left-color: var(--gold-bright, #f0d28a);
+}
+.wwm-eff-label { color: var(--paper); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wwm-eff-input-wrap {
+  display: grid;
+  grid-template-columns: 68px 14px;  /* input | % (% 無くても列は確保→揃う) */
+  align-items: center;
+  gap: 2px;
+  justify-self: end;
+  padding-right: 2px;
+}
 .wwm-eff-input {
-  width: 64px;
-  padding: 2px 4px;
+  width: 100%;
+  padding: 3px 6px;
   background: var(--overlay-soft);
-  border: 1px solid var(--ink-2);
+  border: 1px solid var(--gold-deep, #5a4220);
   color: var(--gold-bright);
   font-family: var(--f-mono);
   font-size: var(--text-12);
   text-align: right;
-  border-radius: 2px;
+  border-radius: 3px;
+  transition: border-color .15s, box-shadow .15s;
 }
-.wwm-eff-input:focus { outline: 1px solid var(--gold-bright); border-color: var(--gold-bright); }
-.wwm-eff-pct { font-size: var(--text-sm); color: var(--paper-mute); }
+.wwm-eff-input:hover { border-color: var(--gold, #d4af37); }
+.wwm-eff-input:focus {
+  outline: none;
+  border-color: var(--gold-bright, #f0d28a);
+  box-shadow: 0 0 0 2px rgba(212,175,55,.18);
+}
+.wwm-eff-pct { font-size: var(--text-sm); color: var(--paper-mute); text-align: left; }
 .wwm-eff-delta {
-  font-family: var(--f-mono);
-  font-weight: var(--fw-bold);
+  font-family: var(--f-latin);
+  font-weight: var(--fw-extra);
   color: var(--jade-bright);
   text-align: right;
+  letter-spacing: -0.01em;
 }
 @media (max-width: 900px) {
   .wwm-rank-grid { grid-template-columns: 1fr; }
@@ -3742,18 +3792,26 @@ html[data-theme="light"] .wwm-opt-loading {
 .wwm-rank-row {
   display: grid; grid-template-columns: 18px 1fr max-content;
   gap: var(--space-2); align-items: center;
-  padding: 3px 6px; border-radius: 3px;
+  padding: 7px 10px;
   font-size: var(--text-12);
-  background: var(--surf-shade);
+  border-bottom: 1px solid rgba(240,210,138,0.12);
+  border-left: 3px solid rgba(212,175,55,0.22);
+  transition: background .15s, border-color .15s;
 }
+.wwm-rank-row:nth-child(odd) { background: rgba(240,210,138,0.05); }
+.wwm-rank-row:hover {
+  background: var(--gold-bright-faint);
+  border-left-color: var(--gold-bright, #f0d28a);
+}
+.wwm-rank-label { color: var(--paper); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .wwm-rank-pos {
   font-family: var(--f-latin); font-weight: var(--fw-extra);
   color: var(--gold); text-align: center;
 }
-.wwm-rank-label { color: var(--paper-2); }
 .wwm-rank-delta {
-  font-family: var(--f-latin); font-weight: var(--fw-bold);
+  font-family: var(--f-latin); font-weight: var(--fw-extra);
   color: var(--jade-bright); font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 @media (max-width: 768px) {
   .wwm-analysis-grid { grid-template-columns: 1fr; }
@@ -3958,13 +4016,26 @@ html[data-theme="light"] .wwm-opt-loading {
 html[data-theme="light"] .wwm-cmp-col,
 html[data-theme="light"] .wwm-edit-affix-row,
 html[data-theme="light"] .wwm-equip-noedit:hover,
-html[data-theme="light"] .wwm-rank-row,
-html[data-theme="light"] .wwm-opt-row,
 html[data-theme="light"] .wwm-cmp-row,
 html[data-theme="light"] .wwm-share-url,
 html[data-theme="light"] .wwm-bm-code {
   background: var(--surf-shade) !important;
   border-color: var(--ink-2) !important;
+}
+/* ライト rank/opt: zebra + 常時アクセント + hover を統一 */
+html[data-theme="light"] .wwm-rank-row,
+html[data-theme="light"] .wwm-opt-row {
+  border-left: 3px solid rgba(120,60,20,0.28) !important;
+  border-bottom: 1px solid rgba(120,60,20,0.16) !important;
+}
+html[data-theme="light"] .wwm-rank-row:nth-child(odd),
+html[data-theme="light"] .wwm-opt-row:nth-child(odd) {
+  background: rgba(120,60,20,0.05);
+}
+html[data-theme="light"] .wwm-rank-row:hover,
+html[data-theme="light"] .wwm-opt-row:hover {
+  background: rgba(212,175,55,0.16) !important;
+  border-left-color: #b8861a !important;
 }
 html[data-theme="light"] .wwm-eff-row {
   border-bottom: 1px solid var(--ink-2);
@@ -5150,6 +5221,301 @@ html:not([data-theme="light"]) .wwm-step2 .wwm-arsenal-tier {
 html[data-theme="light"] .wwm-sb-label {
   font-weight: 500 !important;
   opacity: 0.95 !important;
+}
+
+/* ============================================================
+   分析パネル (右下) — 案30 (古紙テクスチャ + bamboo SVG)
+   ============================================================ */
+.wwm-anlz {
+  --anlz-header-bg: #0a0806;
+  --anlz-content-bg: #1c1814;
+  --anlz-line: rgba(212,175,55,.32);
+  margin-top: 16px;
+}
+html[data-theme="light"] .wwm-anlz {
+  --anlz-header-bg: #f0e8d2;
+  --anlz-content-bg: #faf3df;
+  --anlz-line: rgba(120,60,20,.32);
+}
+
+/* ── ヘッダー (古紙黒テクスチャ + bamboo SVG 半透明) ── */
+.wwm-anlz-header {
+  position: relative;
+  background: var(--anlz-header-bg);
+  border: 1px solid var(--anlz-line);
+  padding: 12px 26px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(0,0,0,.45);
+}
+html[data-theme="light"] .wwm-anlz-header {
+  box-shadow: 0 6px 18px rgba(120,60,20,.18);
+}
+/* 古紙テクスチャ (SVG turbulence) */
+.wwm-anlz-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.85  0 0 0 0 0.6  0 0 0 0.22 0'/></filter><rect width='220' height='220' filter='url(%23f)'/></svg>");
+  opacity: 0.55;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+html[data-theme="light"] .wwm-anlz-header::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 0.4  0 0 0 0 0.25  0 0 0 0 0.1  0 0 0 0.22 0'/></filter><rect width='220' height='220' filter='url(%23f)'/></svg>");
+  mix-blend-mode: multiply;
+}
+/* 微かな筆跡 */
+.wwm-anlz-header::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, transparent 18%, rgba(255,255,255,.025) 19%, rgba(255,255,255,.025) 20%, transparent 21%),
+    linear-gradient(180deg, transparent 60%, rgba(255,255,255,.015) 61%, transparent 62%);
+  pointer-events: none;
+}
+html[data-theme="light"] .wwm-anlz-header::after {
+  background:
+    linear-gradient(180deg, transparent 18%, rgba(0,0,0,.04) 19%, rgba(0,0,0,.04) 20%, transparent 21%),
+    linear-gradient(180deg, transparent 60%, rgba(0,0,0,.025) 61%, transparent 62%);
+}
+
+/* bamboo SVG (game-icons.net delapouite CC-BY 3.0、 半透明背景) */
+.wwm-anlz-bamboo {
+  position: absolute;
+  right: -45px; top: -55px;
+  width: 280px; height: 280px;
+  opacity: 0.10;
+  pointer-events: none;
+  z-index: 0;
+  transform: rotate(35deg);
+  transform-origin: center;
+}
+html[data-theme="light"] .wwm-anlz-bamboo { opacity: 0.13; }
+.wwm-anlz-bamboo svg { width: 100%; height: 100%; display: block; }
+
+.wwm-anlz-header-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.wwm-anlz-title-block { display: flex; align-items: baseline; gap: 14px; flex-shrink: 0; }
+.wwm-anlz-title {
+  font-family: 'Ma Shan Zheng', 'Noto Serif JP', serif;
+  font-size: 48px;
+  color: #f5e8c0;
+  letter-spacing: 0.05em;
+  margin: 0;
+  line-height: 1;
+  font-weight: 900;
+  /* 墨が紙に滲んだリアル感 (光らせず、 同色で段階的に近距離まで広がる + 左右微オフセット) */
+  text-shadow:
+    0 0 0.5px rgba(245,232,192,.85),
+    0 0 1.5px rgba(232,217,184,.55),
+    0 0 3px   rgba(232,217,184,.35),
+    0.6px 0 1.2px rgba(232,217,184,.3),
+    -0.6px 0 1.2px rgba(232,217,184,.25),
+    0 0.5px 1.5px rgba(232,217,184,.22);
+}
+html[data-theme="light"] .wwm-anlz .wwm-anlz-title {
+  color: #2a1610 !important;
+  text-shadow:
+    0 0 0.5px rgba(42,22,16,.6),
+    0 0 1.5px rgba(74,40,20,.35),
+    0 0 3px   rgba(106,62,22,.18),
+    0.6px 0 1.2px rgba(42,22,16,.25),
+    -0.6px 0 1.2px rgba(42,22,16,.22),
+    0 0.5px 1.5px rgba(74,40,20,.14) !important;
+}
+html[data-theme="light"] .wwm-anlz-title {
+  color: #1a0e08;
+  text-shadow: 0 1px 0 rgba(255,255,255,.4);
+}
+.wwm-anlz-goldline {
+  width: 90px; height: 2px;
+  background: linear-gradient(90deg, var(--gold-deep, #c89a2e), transparent);
+  margin: 3px 0;
+  position: relative;
+}
+.wwm-anlz-goldline::after {
+  content: '';
+  position: absolute;
+  left: 0; top: -2px;
+  width: 6px; height: 6px;
+  background: var(--gold-deep, #c89a2e);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--gold-deep, #c89a2e);
+}
+.wwm-anlz-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 0.4em;
+  color: var(--gold-deep, #c89a2e);
+  opacity: 0.75;
+  line-height: 1;
+}
+html[data-theme="light"] .wwm-anlz .wwm-anlz-subtitle {
+  color: #6a3e16 !important;
+  opacity: 0.9;
+}
+
+/* タブ列 (右側) — 既存 wwm-analysis-tab を案30 風に上書き */
+#wwmAnalysisTabs.wwm-anlz-tabs {
+  display: flex !important;
+  gap: 18px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+#wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
+  padding: 6px 4px 9px !important;
+  background: transparent !important;
+  border: none !important;
+  color: var(--paper, #e8d9b8) !important;
+  font-family: 'Ma Shan Zheng', 'Noto Serif JP', serif !important;
+  font-size: 15px !important;
+  letter-spacing: 0.18em !important;
+  cursor: pointer;
+  position: relative;
+  opacity: 0.65;
+  transition: opacity .15s;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+html[data-theme="light"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
+  color: #2a1810 !important;
+}
+#wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab:hover { opacity: 1; }
+#wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab.active {
+  color: #f0d28a !important;
+  opacity: 1;
+  font-weight: 900 !important;
+}
+html[data-theme="light"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab.active {
+  color: #8a5a14 !important;
+}
+html[lang="en"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
+  font-family: 'Cinzel', serif !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase;
+}
+/* ja: Ma Shan Zheng は日本漢字非対応 → Noto Serif JP */
+html[lang="ja"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
+  font-family: 'Noto Serif JP', serif !important;
+}
+/* ko: Noto Serif KR (fallback Noto Serif JP) */
+html[lang="ko"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
+  font-family: 'Noto Serif KR', 'Noto Serif JP', serif !important;
+}
+/* en時: modal の主タイトル / 各パネルの主タイトル を Cinzel に統一 */
+html[lang="en"] .wwm-modal-header h2,
+html[lang="en"] .wwm-modal-header h2 *,
+html[lang="en"] .wwm-cmp-title-ja,
+html[lang="en"] .wwm-cmp-title-en {
+  font-family: 'Cinzel', serif !important;
+  letter-spacing: 0.15em !important;
+}
+#wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab.active::after {
+  content: '';
+  position: absolute;
+  left: -4px; right: -4px; bottom: -2px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c89a2e 50%, transparent);
+  box-shadow: 0 0 6px rgba(212,175,55,.6);
+}
+
+/* ── ギャップ ── */
+.wwm-anlz-gap { height: 14px; }
+
+/* ── 本文 (異なるテクスチャ: 革風 暗茶) ── */
+.wwm-anlz-body {
+  position: relative;
+  background: var(--anlz-content-bg);
+  border: 1px solid var(--anlz-line);
+  padding: 24px 32px 30px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(0,0,0,.45);
+}
+html[data-theme="light"] .wwm-anlz-body {
+  box-shadow: 0 6px 18px rgba(120,60,20,.18);
+}
+.wwm-anlz-body::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='2.2' numOctaves='2' seed='13'/><feColorMatrix values='0 0 0 0 0.4  0 0 0 0 0.3  0 0 0 0 0.2  0 0 0 0.15 0'/></filter><rect width='180' height='180' filter='url(%23g)'/></svg>");
+  opacity: 0.5;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+html[data-theme="light"] .wwm-anlz-body::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='2.2' numOctaves='2' seed='13'/><feColorMatrix values='0 0 0 0 0.6  0 0 0 0 0.45  0 0 0 0 0.25  0 0 0 0.18 0'/></filter><rect width='180' height='180' filter='url(%23g)'/></svg>");
+  mix-blend-mode: multiply;
+}
+.wwm-anlz-body::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 24px, rgba(212,175,55,.025) 24px 25px),
+    repeating-linear-gradient(-45deg, transparent 0 24px, rgba(0,0,0,.05) 24px 25px);
+  pointer-events: none;
+}
+html[data-theme="light"] .wwm-anlz-body::after {
+  background:
+    repeating-linear-gradient(45deg, transparent 0 24px, rgba(120,60,20,.04) 24px 25px),
+    repeating-linear-gradient(-45deg, transparent 0 24px, rgba(184,134,11,.04) 24px 25px);
+}
+.wwm-anlz-body > * { position: relative; z-index: 1; }
+
+/* 内側 .wwm-analysis-card 系の独自枠を除去 (二重枠回避) */
+.wwm-anlz-body .wwm-analysis-card,
+.wwm-anlz-body .wwm-modal-square {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  position: relative;
+  z-index: 1;
+}
+/* 各 inner card の旧 bg-icon は非表示 → .wwm-anlz-body 共通の背景に統一 */
+.wwm-anlz-body .wwm-modal-bg-icon { display: none !important; }
+/* パネル全体の背景アイコン (旧 .wwm-modal-bg-icon と同位置/サイズ/透明度) */
+.wwm-anlz-bgicon {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: calc(100% + 40px) calc(100% + 40px);
+  background-size: 60%;
+  opacity: 0.28;
+  filter:
+    brightness(0)
+    drop-shadow(0 0 5px rgba(28,24,20,.4))
+    drop-shadow(0 0 14px rgba(18,16,14,.22));
+  pointer-events: none;
+  z-index: 0;
+}
+html[data-theme="light"] .wwm-anlz-bgicon {
+  opacity: 0.22;
+  filter:
+    brightness(0)
+    drop-shadow(0 0 6px rgba(138,106,32,0.45))
+    drop-shadow(0 0 14px rgba(138,106,32,0.25));
+}
+/* タブ別 背景画像 (fallback: 装備最適化の anvil) — CSS 基準パスで icons/ 直下 */
+.wwm-anlz-bgicon { background-image: url('icons/anvil-impact.svg'); }
+.wwm-anlz[data-active-tab="opt"]     .wwm-anlz-bgicon { background-image: url('icons/anvil-impact.svg'); }
+.wwm-anlz[data-active-tab="rank"]    .wwm-anlz-bgicon { background-image: url('icons/scales.svg'); }
+.wwm-anlz[data-active-tab="history"] .wwm-anlz-bgicon { background-image: url('icons/mountain-road.svg'); }
+/* 旧 角装飾 (擬似要素) も無効化 */
+.wwm-anlz-body .wwm-analysis-card::before,
+.wwm-anlz-body .wwm-analysis-card::after,
+.wwm-anlz-body .wwm-modal-square::before,
+.wwm-anlz-body .wwm-modal-square::after {
+  display: none !important;
 }
 
 /* PvP定音ロック行 (武具対照 affix6): val 入力欄を非表示 (編集不可、行レイアウト維持) */
