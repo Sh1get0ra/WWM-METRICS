@@ -2967,6 +2967,18 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
 .wwm-cmp-modal-a .wwm-cmp-rows {
   background: rgba(0,0,0,0.12) !important;
 }
+/* ── ダーク: select border を subtle gold に統一 (gold-deep/ink-2 バラつき解消) + rows を暗inset で差別化 ── */
+html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select,
+html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-set-select,
+html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select,
+html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-stat-select,
+html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-val-input {
+  border-color: rgba(201,164,90,0.28) !important;
+}
+html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-rows {
+  background: rgba(0,0,0,0.3) !important;
+  border: 1px solid rgba(201,164,90,0.12) !important;
+}
 /* 案E Good icon — 親指SVG + 朱赤タイル */
 .wwm-good-icon {
   display: inline-flex; align-items: center; justify-content: center;
