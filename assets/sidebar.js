@@ -109,59 +109,79 @@ function _ghIssueUrl(kind) {
     + '&body=' + encodeURIComponent('## 要望内容\n\n## 理由 / ユースケース\n');
 }
 function _specHtml() {
+  // 4言語対応: T.noteSpec を参照 (i18n.js に各言語の仕様文を保持)。fallback は ja 同等の埋め込み。
+  if (window.T && window.T.noteSpec) return window.T.noteSpec;
   return `
     <div class="wwm-note-section">
-      <h3 class="wwm-note-h3">概要</h3>
-      <p class="wwm-note-p">武格指数は装備/心法/武学/セットを総合してダメージ期待値を <b>固定係数</b> で算出した指標。装備変更や心法 swap の影響を一元的に比較可。</p>
+      <h3 class="wwm-note-h3">ツール概要</h3>
+      <p class="wwm-note-p">風燕伝 (Where Winds Meet) 装備強度の比較・最適化ツール。<b>武格指数</b> を中心に、装備/調律・定音オプション/武術/心法/装備一式効果を統合してダメージ期待値を算出し、装備改善方針を提示する。</p>
     </div>
     <div class="wwm-note-section">
-      <h3 class="wwm-note-h3">固定係数 (全プレイヤー共通)</h3>
+      <h3 class="wwm-note-h3">データ取得 (前提)</h3>
+      <p class="wwm-note-p">本ツールは <b>公式データツール拡張</b> からインポートしたデータを元に動作する。インポートするまで装備情報・スコアは表示されない。インポートデータはブラウザの localStorage に保存され、再起動後も保持される。</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">武格指数 (Martial Index) とは</h3>
+      <p class="wwm-note-p">装備/調律・定音オプション/武術/心法/装備一式効果を全て込みで、<b>全プレイヤー共通の固定係数</b> でダメージ期待値を算出した指標。世界等級や敵側パラメータの個人差を排除しているため、装備の絶対強度を比較できる。</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">Tier 判定基準</h3>
+      <p class="wwm-note-p"><b>装備最適化提案を全て適用した時の最大スコア</b> を 100% として、現在の武格指数の比率で判定。インポート時に基準確定、再インポートで更新。</p>
       <ul class="wwm-note-list">
-        <li><b>外功攻撃係数:</b> 1.0 (100%)</li>
-        <li><b>ステータス攻撃係数:</b> 1.5 (150%)</li>
+        <li><b>SS:</b> 最大の 95% 以上</li>
+        <li><b>S:</b> 90% 以上</li>
+        <li><b>A:</b> 80% 以上</li>
+        <li><b>B:</b> 65% 以上</li>
+        <li><b>C:</b> 未満</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">計算に反映される効果</h3>
+      <ul class="wwm-note-list">
+        <li>装備 基本ステータス (外功攻撃力/属性攻撃力 等)</li>
+        <li>調律/定音オプション (調律1〜5、 定音1〜5)</li>
+        <li>武術才能効果 (会心率上限 +Δ、 path 別 攻撃/貫通/属性ダメ 強化 等)</li>
+        <li>心法 Tier 効果 (Tier2/5 表示反映 + Tier0/1/3/4/6 裏加算)</li>
+        <li>装備二点一式効果 (2点装備で発動する加算系)</li>
+        <li>装備四点一式効果 (4点装備で +100 固定ボーナス、 各装備に均等配賦)</li>
+        <li>基礎値 (体/力/防/速/会) → 派生 (基本ステータス・判定確率)</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">計算に反映されない効果</h3>
+      <ul class="wwm-note-list">
+        <li>装備四点一式効果の条件付効果 (気血/真気/受流/重撃 トリガー等) — 一律 +100 固定で代替</li>
+        <li>観音 (ゲーム内ステータス非影響と判明、 ステ画面に反映されないため計算対象外)</li>
+        <li>PvP 専用定音 (定音6枠) — 表示のみ、 計算寄与なし</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">計算前提値 (固定)</h3>
+      <ul class="wwm-note-list">
+        <li><b>外功攻撃係数:</b> ×1.5</li>
+        <li><b>ステータス攻撃係数:</b> ×1.5</li>
         <li><b>付加外功:</b> +230</li>
-        <li><b>属性強化 (主):</b> ×1.5 (主属性のみ)</li>
+        <li><b>属性強化 (主):</b> ×1.5</li>
         <li><b>属性強化 (副):</b> ×1.0</li>
-        <li><b>大世界等級:</b> 14 固定</li>
-        <li><b>武学等級:</b> キャラクター Lv と同一</li>
+        <li><b>大世界等級:</b> 現在のアップデート状況に応じた上限値 (グローバル基準)</li>
+        <li><b>武術等級:</b> キャラクター Lv と同一</li>
+        <li><b>敵パラメータ:</b> charLv ≥ 96 → 敵Lv96 (DEF 405 / 審判耐性 1.65)、 未満 → 敵Lv91 (DEF 350 / 審判耐性 1.45)</li>
+        <li><b>キャラクター基本ステータス:</b> キャラクター才能/シングルプレイレベル ボーナス/五音太平楽 を含むステータス加算値を <b>振り切れているもの</b> として算出</li>
       </ul>
     </div>
     <div class="wwm-note-section">
-      <h3 class="wwm-note-h3">敵パラメータ (キャラ Lv 自動連動)</h3>
-      <ul class="wwm-note-list">
-        <li>Lv 95: 敵 Lv 91 (DEF 350 / 審判耐性 1.45)</li>
-        <li>Lv 96-100: 敵 Lv 96 (DEF 405 / 審判耐性 1.65)</li>
-        <li>物理耐性/属性耐性/軽減/デバフ: 0</li>
-      </ul>
+      <h3 class="wwm-note-h3">データバージョン管理</h3>
+      <p class="wwm-note-p">ゲーム側のバランス調整などでツール側の計算式が更新された際、既存の武格指数 (baseline) は破棄され、最上部に <b>再インポート促しバナー</b> が表示される。再インポート後、新しい計算式で武格指数が再算出される。</p>
     </div>
     <div class="wwm-note-section">
-      <h3 class="wwm-note-h3">反映される効果</h3>
+      <h3 class="wwm-note-h3">主要機能</h3>
       <ul class="wwm-note-list">
-        <li>装備 base stat (外功攻撃/属性攻撃 等)</li>
-        <li>装備 オプション (副ステ)</li>
-        <li>武学 effects + derived (会心率上限 +Δ 等)</li>
-        <li>心法 Tier 効果 (Tier ≥ 2 で Tier2 効果、Tier ≥ 5 で Tier5 効果)</li>
-        <li>セット効果 pieces2 (2 個装備で発動)</li>
-        <li>セット効果 pieces4 (4 個装備で +100 score 固定ボーナス、各装備に均等配賦)</li>
-        <li>5行ステ (体/力/防/速/会) → derived (会心率 / 会意率 等)</li>
-        <li>武器固有 derived (主武器/副武器 weaponType 連動)</li>
-      </ul>
-    </div>
-    <div class="wwm-note-section">
-      <h3 class="wwm-note-h3">反映されない効果</h3>
-      <ul class="wwm-note-list">
-        <li>セット効果 pieces4 の条件付効果 (気血/真気/受流/重撃 トリガー等) — 一律 +100 固定</li>
-        <li>観音 (game stat 非影響と判明)</li>
-      </ul>
-    </div>
-    <div class="wwm-note-section">
-      <h3 class="wwm-note-h3">Tier 判定</h3>
-      <ul class="wwm-note-list">
-        <li><b>SS:</b> 6700 以上</li>
-        <li><b>S:</b> 6030 以上 (SS閾値の 90%)</li>
-        <li><b>A:</b> 5360 以上 (80%)</li>
-        <li><b>B:</b> 4020 以上 (60%)</li>
-        <li><b>C:</b> それ未満</li>
+        <li><b>武具対照:</b> 現在装備と新規装備の affix 差分シミュレーション。スコア変動を即時プレビュー</li>
+        <li><b>心法対照:</b> 心法の差替えシミュレーション。Tier 別効果と発動条件を比較</li>
+        <li><b>装備最適化提案:</b> affix の理想配分を逆算し、 現在からの改善ステップを順に提示</li>
+        <li><b>プリセット保存:</b> 試行中の装備構成を保存・呼出し可能</li>
+        <li><b>OBS Share:</b> サイドバーのみ表示する配信用 URL を生成 (透明背景・色調カスタム対応)</li>
+        <li><b>4言語対応 (日/英/中/韓) + ライト/ダーク切替</b></li>
       </ul>
     </div>
     <div class="wwm-note-section">
@@ -171,40 +191,11 @@ function _specHtml() {
          + sympathyDmg × pSympathy
          + grazeDmg × pGraze
 
-各 dmg = (物理 + 属性) × 全武術ダメ × 外功増伤 × ...
-statusScore = expected (固定係数で再計算)
-finalScore = statusScore + 4-set bonus (該当時)</pre>
-    </div>
-    <div class="wwm-note-section">
-      <h3 class="wwm-note-h3">Tier 判定基準 (動的)</h3>
-      <p class="wwm-note-p">最適化提案を全部適用した時の<b>最大スコア</b>を 100% として、現在の武格指数の比率で判定。</p>
-      <ul class="wwm-note-list">
-        <li><b>SS:</b> 最大の 95% 以上</li>
-        <li><b>S:</b> 90% 以上</li>
-        <li><b>A:</b> 80% 以上</li>
-        <li><b>B:</b> 65% 以上</li>
-        <li><b>C:</b> 未満</li>
-      </ul>
-      <pre class="wwm-note-pre" id="wwmNoteTierLive">読込中...</pre>
+各 dmg = (物理 + 属性) × 全武術ダメ × 外功増伤 × 軽減
+statusScore = expected を固定係数で再計算したもの
+finalScore  = statusScore + 4-set bonus (4個セット発動時)</pre>
     </div>
   `;
-}
-// 仕様タブ ライブ Tier 値更新 (open時 / opt完了時に呼ぶ)
-function _updateNoteTierLive() {
-  const el = document.getElementById('wwmNoteTierLive');
-  if (!el) return;
-  const baseline = window.__WWM_BASELINE?.statusScore;
-  const best = window.__WWM_OPT_BEST?.end;
-  if (best == null) {
-    el.textContent = '最適化が未完了です。最適化提案の生成後に最大スコアが確定します。';
-    return;
-  }
-  const cur = (typeof baseline === 'number') ? Math.round(baseline) : null;
-  const ratio = cur != null ? (cur / best * 100).toFixed(1) : '-';
-  el.textContent =
-    '現在の武格指数:  ' + (cur != null ? cur.toLocaleString() : '-') + '\n' +
-    '最大想定スコア:  ' + best.toLocaleString() + '\n' +
-    '比率:            ' + ratio + '%';
 }
 function _changelogHtml(entries) {
   return entries.map(e => `
@@ -271,10 +262,8 @@ function _showNoteModal(opts) {
       const tab = t.dataset.tab;
       m.querySelector('#wwmNoteTabSpec').style.display      = tab==='spec'     ? 'block' : 'none';
       m.querySelector('#wwmNoteTabChangelog').style.display = tab==='changelog'? 'block' : 'none';
-      if (tab === 'spec') _updateNoteTierLive();
     });
   });
-  _updateNoteTierLive();
 }
 async function _showAllChangelogs() {
   try {
@@ -1008,8 +997,6 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
   // ルーレット停止 + 静的 tier 描画
   if (typeof _stopTierRoulette === 'function') _stopTierRoulette();
   if (window.WWMHero && window.__WWM_PARAMS) { try { window.WWMHero.update(window.__WWM_PARAMS); } catch(_) {} }
-  // NOTE modal が開いてればライブ表示も更新
-  if (typeof _updateNoteTierLive === 'function') _updateNoteTierLive();
   root.innerHTML = `
     <div class="wwm-analysis-card wwm-modal-square">
       <div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/anvil-impact.svg');"></div>

@@ -18,7 +18,7 @@ const TRANSLATIONS = {
     dmgReduce1:'ダメージ軽減１', dmgReduce2:'ダメージ軽減２',
     weaponBonus:'外功ダメージ強化', outerCoeff:'外功係数', statusCoeff:'ステータス攻撃係数',
     outerAdd:'外功付加', enemyDebuff:'デバフ（敵）',
-    worldLv:'大世界等級（Lv）', martialLv:'武学等級（Lv）',
+    worldLv:'大世界等級（Lv）', martialLv:'武術等級（Lv）',
     elemBoostMain:'属性強化（主）', elemBoostSub:'属性強化（副）',
     enemyLevel:'エネミーレベル', physDef:'物理防御力', judgeRes:'審判耐性',
     physRes:'物理耐性値', elemRes:'属性耐性値',
@@ -107,6 +107,90 @@ const TRANSLATIONS = {
     importReapplyNote:'前回データをそのまま再インポート。<br>最新装備で取り込むには 公式データツール から再度ブックマークレット実行。',
     importLabelUID:'UID', importLabelCharName:'キャラ名', importLabelMainKf:'主武術', importLabelSubKf:'副武術', importLabelXinfa:'心法', importLabelXiuwei:'武術進度',
     importBaseStats:'基本ステータス', importSubStats:'副ステータス', pvpExclusiveAffix:'PvP専用定音',
+    noteSpec: `
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">ツール概要</h3>
+      <p class="wwm-note-p">風燕伝 (Where Winds Meet) 装備強度の比較・最適化ツール。<b>武格指数</b> を中心に、装備/調律・定音オプション/武術/心法/装備一式効果を統合してダメージ期待値を算出し、装備改善方針を提示する。</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">データ取得 (前提)</h3>
+      <p class="wwm-note-p">本ツールは <b>風燕伝公式・データツール</b> からインポートしたデータを元に動作する。インポートするまで装備情報・スコアは表示されない。インポートデータはブラウザの localStorage に保存され、再起動後も保持される。</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">武格指数 (Martial Index) とは</h3>
+      <p class="wwm-note-p">装備/調律・定音オプション/武術/心法/装備一式効果を全て込みで、<b>全プレイヤー共通の固定係数</b> でダメージ期待値を算出した指標。大世界等級や敵側パラメータの個人差を排除しているため、装備の絶対強度を比較できる。</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">Tier 判定基準</h3>
+      <p class="wwm-note-p"><b>装備最適化提案を全て適用した時の最大スコア</b> を 100% として、現在の武格指数の比率で判定。インポート時に基準確定、再インポートで更新。</p>
+      <ul class="wwm-note-list">
+        <li><b>SS:</b> 最大の 95% 以上</li>
+        <li><b>S:</b> 90% 以上</li>
+        <li><b>A:</b> 80% 以上</li>
+        <li><b>B:</b> 65% 以上</li>
+        <li><b>C:</b> 未満</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">計算に反映される効果</h3>
+      <ul class="wwm-note-list">
+        <li>装備 基本ステータス (外功攻撃力/属性攻撃力 等)</li>
+        <li>調律/定音オプション (調律1〜5、 定音1〜5)</li>
+        <li>武術才能効果 (会心率上限 +Δ、 武術属性別 攻撃/貫通/属性ダメ 強化 等)</li>
+        <li>心法 Tier 効果 (Tier2/5 表示反映 + Tier0/1/3/4/6 裏加算)</li>
+        <li>装備二点一式効果 (2点装備で発動する加算系)</li>
+        <li>装備四点一式効果 (4点装備で +100 固定ボーナス、 各装備に均等配賦)</li>
+        <li>基礎値 (体/力/防/速/会) → 派生 (基本ステータス・判定確率)</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">計算に反映されない効果</h3>
+      <ul class="wwm-note-list">
+        <li>装備四点一式効果の条件付効果 (気血/真気/受流/重撃 トリガー等) — 一律 +100 固定で代替</li>
+        <li>観音 (ゲーム内ステータス非影響と判明、 ステ画面に反映されないため計算対象外)</li>
+        <li>PvP 専用定音 (定音6枠) — 表示のみ、 計算寄与なし</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">計算前提値 (固定)</h3>
+      <ul class="wwm-note-list">
+        <li><b>外功攻撃係数:</b> ×1.5</li>
+        <li><b>ステータス攻撃係数:</b> ×1.5</li>
+        <li><b>付加外功:</b> +230</li>
+        <li><b>属性強化 (主):</b> ×1.5</li>
+        <li><b>属性強化 (副):</b> ×1.0</li>
+        <li><b>大世界等級:</b> 現在のアップデート状況に応じた上限値 (グローバル基準)</li>
+        <li><b>武術等級:</b> キャラクター Lv と同一</li>
+        <li><b>敵パラメータ:</b> charLv ≥ 96 → 敵Lv96 (DEF 405 / 審判耐性 1.65)、 未満 → 敵Lv91 (DEF 350 / 審判耐性 1.45)</li>
+        <li><b>キャラクター基本ステータス:</b> キャラクター才能/シングルプレイレベル ボーナス/五音太平楽 を含むステータス加算値を <b>振り切れているもの</b> として算出</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">データバージョン管理</h3>
+      <p class="wwm-note-p">ゲーム側のバランス調整などでツール側の計算式が更新された際、既存の武格指数 (baseline) は破棄され、最上部に <b>再インポート促しバナー</b> が表示される。再インポート後、新しい計算式で武格指数が再算出される。</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">主要機能</h3>
+      <ul class="wwm-note-list">
+        <li><b>武具対照:</b> 現在装備と新規装備の調律/定音差分シミュレーション。スコア変動を即時プレビュー</li>
+        <li><b>心法対照:</b> 心法の差替えシミュレーション。Tier 別効果と発動条件を比較</li>
+        <li><b>装備最適化提案:</b> 調律/定音の理想配分を逆算し、 現在からの改善ステップを順に提示</li>
+        <li><b>プリセット保存:</b> 試行中の装備構成を保存・呼出し可能</li>
+        <li><b>OBS Share:</b> サイドバーのみ表示する配信用 URL を生成 (透明背景・色調カスタム対応)</li>
+        <li><b>4言語対応 (日/英/中/韓) + ライト/ダーク切替</b></li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">計算式 (要約)</h3>
+      <pre class="wwm-note-pre">expected = normalAvg × pNormal
+         + critAvg × pCrit
+         + sympathyDmg × pSympathy
+         + grazeDmg × pGraze
+
+各 dmg = (物理 + 属性) × 全武術ダメ × 外功増伤 × 軽減
+statusScore = expected を固定係数で再計算したもの
+finalScore  = statusScore + 4-set bonus (4点一式効果発動時)</pre>
+    </div>`,
     importStep2XinfaTitle:'心法 Tier', importStep2XinfaHint:'各心法の到達Tier (1-5)。Tier2 で Tier2効果、Tier5 で Tier5効果 加算。',
     penPhys:'外功貫通', penVoid:'無相貫通', penPhysShort:'外功', penVoidShort:'無相', penOther:'他',
     pathPhys:'汎用', pathBellstrike:'鋼鳴', pathStonesplit:'砕岩', pathSilkbind:'糸操', pathBamboocut:'瞬嵐',
@@ -221,6 +305,90 @@ const TRANSLATIONS = {
     importReapplyNote:'Re-import the previous data as-is.<br>To pull the latest gear, run the bookmarklet again from the official tool.',
     importLabelUID:'UID', importLabelCharName:'Character', importLabelMainKf:'Main Martial', importLabelSubKf:'Sub Martial', importLabelXinfa:'Inner Way', importLabelXiuwei:'Martial Progress',
     importBaseStats:'Base Stats', importSubStats:'Sub Stats', pvpExclusiveAffix:'PvP-Exclusive Engraving',
+    noteSpec: `
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">Tool Overview</h3>
+      <p class="wwm-note-p">A comparison and optimization tool for Where Winds Meet equipment. Centered on the <b>Martial Index</b>, integrates equipment / tuning &amp; engravings / martial arts / xinfa / set effects to compute expected damage and propose improvement directions.</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">Data Required (Prerequisite)</h3>
+      <p class="wwm-note-p">This tool runs on data imported from the <b>Where Winds Meet - Official Data Tool</b>. Equipment info and scores are not displayed until import. Imported data is saved in your browser's localStorage and persists across restarts.</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">What is Martial Index</h3>
+      <p class="wwm-note-p">An indicator that computes expected damage using <b>fixed coefficients common to all players</b>, including equipment / tuning &amp; engravings / martial arts talents / xinfa / set effects. It removes individual differences in Open World Level and enemy parameters, allowing absolute equipment strength comparison.</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">Tier Criteria</h3>
+      <p class="wwm-note-p">Judged by ratio of the current Martial Index against <b>the maximum score achievable when all optimization suggestions are applied</b>. Locked at import time, updated on re-import.</p>
+      <ul class="wwm-note-list">
+        <li><b>SS:</b> 95% or more of max</li>
+        <li><b>S:</b> 90% or more</li>
+        <li><b>A:</b> 80% or more</li>
+        <li><b>B:</b> 65% or more</li>
+        <li><b>C:</b> below</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">Reflected in Calculation</h3>
+      <ul class="wwm-note-list">
+        <li>Equipment base stats (Outer ATK / Elemental ATK etc.)</li>
+        <li>Tuning / Engraving options (Tuning 1-5, Engraving 1-5)</li>
+        <li>Martial Arts Talents effects (crit cap +Δ, Martial Element-specific ATK/penetration/elem boost, etc.)</li>
+        <li>Xinfa Tier effects (Tier 2/5 visible reflection + Tier 0/1/3/4/6 hidden additive)</li>
+        <li>2 Pieces set bonus (additive when 2 pieces equipped)</li>
+        <li>4 Pieces set bonus (+100 fixed when 4 pieces equipped, distributed evenly)</li>
+        <li>Base stats (Body/Power/Defense/Agility/Awareness) → derived (Base Stats / Judgment Rates)</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">Not Reflected in Calculation</h3>
+      <ul class="wwm-note-list">
+        <li>4 Pieces conditional effects (HP/Inner Energy/Parry/Heavy triggers etc.) — replaced with flat +100</li>
+        <li>Enhance (confirmed not to affect game stats, so excluded from calculation)</li>
+        <li>PvP-Exclusive Engraving (Engraving slot 6) — display only, no contribution</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">Fixed Calculation Presets</h3>
+      <ul class="wwm-note-list">
+        <li><b>Outer ATK Coefficient:</b> ×1.5</li>
+        <li><b>Status ATK Coefficient:</b> ×1.5</li>
+        <li><b>Additional Outer:</b> +230</li>
+        <li><b>Elem Enhancement (Main):</b> ×1.5</li>
+        <li><b>Elem Enhancement (Sub):</b> ×1.0</li>
+        <li><b>Open World Level:</b> capped at the current update version (global standard)</li>
+        <li><b>Martial Level:</b> same as Character Lv</li>
+        <li><b>Enemy parameters:</b> charLv ≥ 96 → Enemy Lv96 (DEF 405 / Judgment Res 1.65), below → Enemy Lv91 (DEF 350 / 1.45)</li>
+        <li><b>Character base stats:</b> assumed maxed out, including Character Talents / Solo Mode Level bonus / Melodies of Peace stat gains</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">Data Version Management</h3>
+      <p class="wwm-note-p">When the tool's calculation logic is updated due to game balance changes, the existing Martial Index (baseline) is invalidated and a <b>re-import prompt banner</b> appears at the top. After re-import, the Martial Index is recalculated with the new logic.</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">Main Features</h3>
+      <ul class="wwm-note-list">
+        <li><b>Equipment Compare:</b> Simulates tuning/engraving differences between current and new equipment with instant score preview</li>
+        <li><b>Xinfa Compare:</b> Simulates xinfa swaps, comparing Tier effects and activation conditions</li>
+        <li><b>Optimization Proposal:</b> Computes ideal tuning/engraving allocation and suggests step-by-step improvements</li>
+        <li><b>Preset Save:</b> Save and recall in-progress equipment configurations</li>
+        <li><b>OBS Share:</b> Generates a streaming URL showing only the sidebar (transparent background, color customizable)</li>
+        <li><b>4 languages (ja/en/zh/ko) + Light/Dark theme switching</b></li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">Formula (Summary)</h3>
+      <pre class="wwm-note-pre">expected = normalAvg × pNormal
+         + critAvg × pCrit
+         + sympathyDmg × pSympathy
+         + grazeDmg × pGraze
+
+each dmg = (phys + elem) × all-martial-boost × outer-boost × reduction
+statusScore = expected recomputed with fixed coefficients
+finalScore  = statusScore + 4-set bonus (when 4 Pieces active)</pre>
+    </div>`,
     importStep2XinfaTitle:'Inner Way Tier', importStep2XinfaHint:'Tier reached for each Inner Way (1-5). Tier2 adds Tier2 effect, Tier5 adds Tier5 effect.',
     penPhys:'Phys Pen', penVoid:'Void Pen', penPhysShort:'Phys', penVoidShort:'Void', penOther:'other',
     pathPhys:'Universal', pathBellstrike:'Bellstrike', pathStonesplit:'Stonesplit', pathSilkbind:'Silkbind', pathBamboocut:'Bamboocut',
@@ -335,6 +503,90 @@ const TRANSLATIONS = {
     importReapplyNote:'按原样重新导入上次数据。<br>如需获取最新装备,请从官方工具再次执行书签。',
     importLabelUID:'UID', importLabelCharName:'角色名', importLabelMainKf:'主武术', importLabelSubKf:'副武术', importLabelXinfa:'心法', importLabelXiuwei:'武术进度',
     importBaseStats:'基础属性', importSubStats:'副属性', pvpExclusiveAffix:'PvP专用定音',
+    noteSpec: `
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">工具概览</h3>
+      <p class="wwm-note-p">《燕雲十六聲》装备强度比较与优化工具。以 <b>武格指数</b> 为核心，将装备/调律·定音/武学/心法/装备一式效果综合计算伤害期望值，提出装备改进方向。</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">数据获取 (前提)</h3>
+      <p class="wwm-note-p">本工具基于 <b>《燕雲十六聲》官方數據小工具</b> 导入的数据运行。在导入之前不显示装备信息和分数。导入数据保存在浏览器 localStorage 中，重启后保留。</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">武格指数 (Martial Index) 是什么</h3>
+      <p class="wwm-note-p">包含装备/调律·定音/武学/心法/装备一式效果，使用 <b>所有玩家通用的固定系数</b> 计算伤害期望值的指标。排除了大世界等级和敌方参数的个体差异，因此可比较装备的绝对强度。</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">Tier 判定基准</h3>
+      <p class="wwm-note-p">以 <b>装备最优化方案全部应用后的最大分数</b> 为 100%，按当前武格指数的比率判定。导入时确定基准，重新导入时更新。</p>
+      <ul class="wwm-note-list">
+        <li><b>SS:</b> 最大值的 95% 以上</li>
+        <li><b>S:</b> 90% 以上</li>
+        <li><b>A:</b> 80% 以上</li>
+        <li><b>B:</b> 65% 以上</li>
+        <li><b>C:</b> 以下</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">计算中反映的效果</h3>
+      <ul class="wwm-note-list">
+        <li>装备基础属性 (外功攻击力/属性攻击力 等)</li>
+        <li>调律/定音 (调律 1~5、定音 1~5)</li>
+        <li>武学天赋效果 (会心率上限 +Δ、 武学属性别 攻击/穿透/属性伤强化 等)</li>
+        <li>心法 Tier 效果 (Tier 2/5 显示反映 + Tier 0/1/3/4/6 隐藏加算)</li>
+        <li>二件套效果 (2件装备发动的加算系)</li>
+        <li>四件套效果 (4件装备 +100 固定加成、 各装备均分)</li>
+        <li>基础值 (体/力/防/速/会) → 派生 (基础属性·判定概率)</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">计算中未反映的效果</h3>
+      <ul class="wwm-note-list">
+        <li>四件套效果中的条件效果 (气血/真气/受流/重击 触发等) — 统一以 +100 固定代替</li>
+        <li>观音 (证实不影响游戏内属性，角色面板不反映故不纳入计算)</li>
+        <li>PvP 专用定音 (定音 6 槽) — 仅显示，不参与计算</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">计算前提值 (固定)</h3>
+      <ul class="wwm-note-list">
+        <li><b>外功攻击系数:</b> ×1.5</li>
+        <li><b>属性攻击系数:</b> ×1.5</li>
+        <li><b>附加外功:</b> +230</li>
+        <li><b>属性强化 (主):</b> ×1.5</li>
+        <li><b>属性强化 (副):</b> ×1.0</li>
+        <li><b>大世界等级:</b> 按当前版本更新上限 (全局基准)</li>
+        <li><b>武学等级:</b> 与角色 Lv 相同</li>
+        <li><b>敌方参数:</b> charLv ≥ 96 → 敌Lv96 (DEF 405 / 判定抗性 1.65)、 以下 → 敌Lv91 (DEF 350 / 1.45)</li>
+        <li><b>角色基础属性:</b> 角色天赋/单人模式等级奖励/五音启太平 等所有属性加成值 视为 <b>已满</b> 进行计算</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">数据版本管理</h3>
+      <p class="wwm-note-p">当游戏侧平衡调整等导致本工具计算公式更新时，现有武格指数 (baseline) 被废弃，顶部显示 <b>重新导入提示横幅</b>。重新导入后以新公式重新计算武格指数。</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">主要功能</h3>
+      <ul class="wwm-note-list">
+        <li><b>武具对照:</b> 当前装备与新装备的调律/定音差异模拟。分数变动即时预览</li>
+        <li><b>心法对照:</b> 心法替换模拟。比较 Tier 别效果和发动条件</li>
+        <li><b>装备最适化提案:</b> 反向算出调律/定音的理想配置，按改进步骤逐项呈现</li>
+        <li><b>预设保存:</b> 保存和呼出试行中的装备配置</li>
+        <li><b>OBS Share:</b> 生成仅显示侧栏的直播用 URL (透明背景·色调自定义对应)</li>
+        <li><b>4 语言对应 (日/英/中/韩) + 浅色/深色 切换</b></li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">计算公式 (摘要)</h3>
+      <pre class="wwm-note-pre">expected = normalAvg × pNormal
+         + critAvg × pCrit
+         + sympathyDmg × pSympathy
+         + grazeDmg × pGraze
+
+各 dmg = (物理 + 属性) × 全武学伤害 × 外功增伤 × 减伤
+statusScore = expected 用固定系数重新计算后的值
+finalScore  = statusScore + 4-set bonus (四件套效果发动时)</pre>
+    </div>`,
     importStep2XinfaTitle:'心法 Tier', importStep2XinfaHint:'各心法达到的 Tier (1-5)。Tier2 加 Tier2 效果,Tier5 加 Tier5 效果。',
     penPhys:'外功穿透', penVoid:'无相穿透', penPhysShort:'外功', penVoidShort:'无相', penOther:'其他',
     pathPhys:'通用', pathBellstrike:'钢鸣', pathStonesplit:'碎岩', pathSilkbind:'丝操', pathBamboocut:'瞬岚',
@@ -449,6 +701,90 @@ const TRANSLATIONS = {
     importReapplyNote:'이전 데이터를 그대로 재가져옵니다.<br>최신 장비를 가져오려면 공식 데이터 도구에서 북마크릿을 다시 실행하세요.',
     importLabelUID:'UID', importLabelCharName:'캐릭터명', importLabelMainKf:'주 무술', importLabelSubKf:'부 무술', importLabelXinfa:'심법', importLabelXiuwei:'무술 진도',
     importBaseStats:'기본 스탯', importSubStats:'부 스탯', pvpExclusiveAffix:'PvP 전용 정음',
+    noteSpec: `
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">도구 개요</h3>
+      <p class="wwm-note-p">연운 (Where Winds Meet) 장비 강도 비교·최적화 도구. <b>무격 지수</b> 를 중심으로 장비/조율·정음/무술/심법/장비 세트 효과를 통합하여 데미지 기댓값을 산출하고 장비 개선 방향을 제시합니다.</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">데이터 취득 (전제)</h3>
+      <p class="wwm-note-p">본 도구는 <b>&lt;연운&gt; 공식-데이터 툴</b> 에서 가져온 데이터를 기반으로 동작합니다. 가져오기 전까지는 장비 정보·점수가 표시되지 않습니다. 가져온 데이터는 브라우저 localStorage 에 저장되어 재시작 후에도 유지됩니다.</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">무격 지수 (Martial Index) 란</h3>
+      <p class="wwm-note-p">장비/조율·정음/무술/심법/장비 세트 효과를 모두 포함하여, <b>모든 플레이어 공통의 고정 계수</b> 로 데미지 기댓값을 산출한 지표. 대세계 등급과 적측 파라미터의 개인차를 배제하여 장비의 절대 강도를 비교할 수 있습니다.</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">Tier 판정 기준</h3>
+      <p class="wwm-note-p"><b>장비 최적화 제안을 모두 적용했을 때의 최대 점수</b> 를 100%로 하여, 현재 무격 지수의 비율로 판정합니다. 가져오기 시 기준 확정, 다시 가져오기 시 갱신됩니다.</p>
+      <ul class="wwm-note-list">
+        <li><b>SS:</b> 최대의 95% 이상</li>
+        <li><b>S:</b> 90% 이상</li>
+        <li><b>A:</b> 80% 이상</li>
+        <li><b>B:</b> 65% 이상</li>
+        <li><b>C:</b> 미만</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">계산에 반영되는 효과</h3>
+      <ul class="wwm-note-list">
+        <li>장비 기본 스탯 (외공 공격력/속성 공격력 등)</li>
+        <li>조율/정음 (조율 1~5, 정음 1~5)</li>
+        <li>무술 천부 효과 (회심률 상한 +Δ, 무술 속성별 공격/관통/속성 데미지 강화 등)</li>
+        <li>심법 Tier 효과 (Tier 2/5 표시 반영 + Tier 0/1/3/4/6 숨겨진 가산)</li>
+        <li>2세트 효과 (2개 장비로 발동하는 가산계)</li>
+        <li>4세트 효과 (4개 장비로 +100 고정 보너스, 각 장비에 균등 배분)</li>
+        <li>기본 스탯 (체/력/방/속/회) → 파생 (기본 스탯·판정 확률)</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">계산에 반영되지 않는 효과</h3>
+      <ul class="wwm-note-list">
+        <li>4세트 효과의 조건부 효과 (기혈/진기/받아넘기/중타 트리거 등) — 일률 +100 고정으로 대체</li>
+        <li>첩음 (게임 내 스탯에 영향 없음으로 판명, 스탯 화면에 반영되지 않으므로 계산 대상 외)</li>
+        <li>PvP 전용 정음 (정음 6 슬롯) — 표시만, 계산 기여 없음</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">계산 전제값 (고정)</h3>
+      <ul class="wwm-note-list">
+        <li><b>외공 공격 계수:</b> ×1.5</li>
+        <li><b>스탯 공격 계수:</b> ×1.5</li>
+        <li><b>부가 외공:</b> +230</li>
+        <li><b>속성 강화 (주):</b> ×1.5</li>
+        <li><b>속성 강화 (부):</b> ×1.0</li>
+        <li><b>대세계 등급:</b> 현재 업데이트 상태에 따른 상한값 (글로벌 기준)</li>
+        <li><b>무술 등급:</b> 캐릭터 Lv 와 동일</li>
+        <li><b>적 파라미터:</b> charLv ≥ 96 → 적Lv96 (DEF 405 / 판정 저항 1.65), 미만 → 적Lv91 (DEF 350 / 1.45)</li>
+        <li><b>캐릭터 기본 스탯:</b> 캐릭터 천부/싱글 모드 레벨 보너스/오음지태평 을 포함한 모든 스탯 가산값을 <b>최대치까지 도달한 것</b> 으로 산출</li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">데이터 버전 관리</h3>
+      <p class="wwm-note-p">게임 측 밸런스 조정 등으로 본 도구의 계산식이 갱신되면, 기존 무격 지수 (baseline) 가 무효화되어 상단에 <b>다시 가져오기 안내 배너</b> 가 표시됩니다. 다시 가져오기 후 새 계산식으로 무격 지수가 재산출됩니다.</p>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">주요 기능</h3>
+      <ul class="wwm-note-list">
+        <li><b>무구 대조:</b> 현재 장비와 신규 장비의 조율/정음 차분 시뮬레이션. 점수 변동을 즉시 프리뷰</li>
+        <li><b>심법 대조:</b> 심법 교체 시뮬레이션. Tier 별 효과와 발동 조건을 비교</li>
+        <li><b>장비 최적화 제안:</b> 조율/정음의 이상적 배분을 역산해, 현재로부터의 개선 스텝을 순차 제시</li>
+        <li><b>프리셋 저장:</b> 시행 중인 장비 구성을 저장·호출 가능</li>
+        <li><b>OBS Share:</b> 사이드바만 표시하는 방송용 URL 을 생성 (투명 배경·색조 커스텀 대응)</li>
+        <li><b>4언어 대응 (일/영/중/한) + 라이트/다크 전환</b></li>
+      </ul>
+    </div>
+    <div class="wwm-note-section">
+      <h3 class="wwm-note-h3">계산식 (요약)</h3>
+      <pre class="wwm-note-pre">expected = normalAvg × pNormal
+         + critAvg × pCrit
+         + sympathyDmg × pSympathy
+         + grazeDmg × pGraze
+
+각 dmg = (물리 + 속성) × 전 무술 데미지 × 외공 증댐 × 경감
+statusScore = expected 를 고정 계수로 재계산한 값
+finalScore  = statusScore + 4-set bonus (4세트 효과 발동 시)</pre>
+    </div>`,
     importStep2XinfaTitle:'심법 Tier', importStep2XinfaHint:'각 심법의 도달 Tier (1-5). Tier2는 Tier2 효과, Tier5는 Tier5 효과 추가.',
     penPhys:'외공 관통', penVoid:'무상 관통', penPhysShort:'외공', penVoidShort:'무상', penOther:'기타',
     pathPhys:'범용', pathBellstrike:'명금', pathStonesplit:'열석', pathSilkbind:'견사', pathBamboocut:'파죽',
