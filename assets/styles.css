@@ -4013,6 +4013,86 @@ html[data-theme="light"] .wwm-cmp-bg-icon {
   filter: brightness(0) drop-shadow(0 0 4px rgba(138,106,32,0.4));
   opacity: 0.2;
 }
+/* ── ライト: 武具対照 (案A) paper化 — design-sample-compare.html 案A 準拠 ── */
+html[data-theme="light"] .wwm-cmp-modal-a {
+  background: linear-gradient(180deg, #f4e8cc, #ede0c0) !important;
+  border-color: var(--gold-deep) !important;
+  color: #2a1810 !important;
+}
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-header { background: transparent !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title-ja { color: #2a1810 !important; text-shadow: none !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title-en { color: #5a3a20 !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-close { color: #2a1810 !important; }
+/* cols (現有/新置 パネル) */
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-col,
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-current,
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-new {
+  background: rgba(255,255,255,0.4) !important;
+  border-color: rgba(40,25,18,0.18) !important;
+}
+/* kongfu / set ヘッダ */
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-header { color: #2a1810 !important; background: rgba(201,164,90,0.28) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-header { color: #8a1f17 !important; text-shadow: none !important; background: linear-gradient(90deg, rgba(232,81,58,0.20), rgba(232,81,58,0.05)) !important; }
+/* 新置側 select も現有ヘッダと同 tint に揃える (武術=tan / セット=赤grad) */
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select { background: rgba(201,164,90,0.28) !important; color: #2a1810 !important; border-color: rgba(40,25,18,0.25) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-select { background: linear-gradient(90deg, rgba(232,81,58,0.20), rgba(232,81,58,0.05)) !important; color: #8a1f17 !important; border-color: rgba(40,25,18,0.25) !important; }
+/* 名称 / 値 */
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-name { color: #2a1810 !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val,
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val-input { color: #8a1f17 !important; }
+/* フォーム (select / input) 紙化 — kongfu/set-select は tint 維持のため除外 */
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-stat-select,
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val-input {
+  background: rgba(255,255,255,0.55) !important;
+  color: #2a1810 !important;
+  border-color: rgba(40,25,18,0.25) !important;
+}
+/* Lv chip */
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv,
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
+  background: rgba(255,255,255,0.5) !important;
+  color: #5a3a20 !important;
+  border-color: #8a7350 !important;
+}
+/* MAX% バッジ rank別 (light: 濃色文字で可読化) */
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-gold { background: rgba(138,106,32,0.14) !important; color: #7a5a12 !important; border-color: rgba(138,106,32,0.5) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.13) !important; color: #6f3a9a !important; border-color: rgba(120,60,160,0.5) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.13) !important; color: #2a5aa0 !important; border-color: rgba(40,90,160,0.5) !important; }
+/* フッタ / delta / 副ボタン */
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-footer-a { border-color: rgba(40,25,18,0.18) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-delta-label { color: #5a3a20 !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-delta-base { color: #8a7350 !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-preview-value.zero { color: #8a7350 !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
+  color: #2a1810 !important; border-color: #8a7350 !important; background: rgba(255,255,255,0.4) !important;
+}
+/* 背景アイコン: ライトは main (.wwm-modal-bg-icon) 同様 黒シルエット(=紙上グレー)化 + 視認性UP。dark の invert(1)白は cream で不可視のため */
+html[data-theme="light"] .wwm-cmp-modal-bg-icon {
+  filter: brightness(0) drop-shadow(0 0 6px rgba(138,106,32,0.4)) !important;
+  opacity: 0.22 !important;
+}
+/* ドロップダウン (option) 紙化 — dark の #1a1410 黒は light で開くと黒popup化のため */
+html[data-theme="light"] .wwm-cmp-modal-a select option {
+  background: #f4e8cc !important;
+  color: #2a1810 !important;
+}
+html[data-theme="light"] .wwm-cmp-modal-a select option:checked {
+  background: #e0cfa0 !important;
+  color: #2a1810 !important;
+}
+/* Lv select option は dark側が高specificity (.title .lv-select option) のため同等以上で上書き */
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select option {
+  background: #f4e8cc !important;
+  color: #2a1810 !important;
+}
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select option:checked {
+  background: #e0cfa0 !important;
+  color: #2a1810 !important;
+}
+/* Lv select の閉状態 background-color 紙化 (開く瞬間の黒フラッシュ防止)。kongfu/set は tint 維持のため除外 */
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
+  background-color: rgba(255,255,255,0.55) !important;
+}
 html[data-theme="light"] .wwm-brand-sub {
   color: var(--gold-bright);
   text-shadow: 0 0 4px rgba(138,106,32,0.25);
