@@ -498,7 +498,7 @@ async function _loadDicts() {
 // statKey → 4言語ラベル (WW Math 由来 statKey)
 const _STAT_LABELS_I18N = {
   ja: {
-    body: '体', power: '会', agility: '速', momentum: '力', defense: '防御',
+    body: '体', momentum: '会', agility: '速', power: '力', defense: '防御',
     maxHp: '気血最大値', minPhys: '最小外功攻撃', maxPhys: '最大外功攻撃',
     physDef: '外功防御', physPen: '外功貫通', physResist: '外功耐性',
     minBellstrike: '最小鋼鳴攻撃', maxBellstrike: '最大鋼鳴攻撃', bellstrikePen: '鋼鳴貫通',
@@ -540,7 +540,7 @@ const _STAT_LABELS_I18N = {
     unfetteredRopeDartQ: '浮雲の縄 Q強化', unfetteredRopeDartCharged: '浮雲の縄 チャージ強化', unfetteredRopeDartSpecial: '浮雲の縄 特殊強化'
   },
   en: {
-    body: 'Body', power: 'Momentum', agility: 'Agi', momentum: 'Power', defense: 'Def',
+    body: 'Body', momentum: 'Momentum', agility: 'Agi', power: 'Power', defense: 'Def',
     maxHp: 'HP Max', minPhys: 'Phys ATK Min', maxPhys: 'Phys ATK Max',
     physDef: 'Phys DEF', physPen: 'Phys Pen', physResist: 'Phys Res',
     minBellstrike: 'Bell ATK Min', maxBellstrike: 'Bell ATK Max', bellstrikePen: 'Bell Pen',
@@ -582,7 +582,7 @@ const _STAT_LABELS_I18N = {
     unfetteredRopeDartQ: 'Cloudborne RD Q', unfetteredRopeDartCharged: 'Cloudborne RD Ch', unfetteredRopeDartSpecial: 'Cloudborne RD Sp'
   },
   zh: {
-    body: '体', power: '会', agility: '速', momentum: '力', defense: '防御',
+    body: '体', momentum: '会', agility: '速', power: '力', defense: '防御',
     maxHp: '气血最大值', minPhys: '最小外功攻击', maxPhys: '最大外功攻击',
     physDef: '外功防御', physPen: '外功穿透', physResist: '外功抗性',
     minBellstrike: '最小钢鸣攻击', maxBellstrike: '最大钢鸣攻击', bellstrikePen: '钢鸣穿透',
@@ -624,7 +624,7 @@ const _STAT_LABELS_I18N = {
     unfetteredRopeDartQ: '浮云绳镖 Q强化', unfetteredRopeDartCharged: '浮云绳镖 蓄力强化', unfetteredRopeDartSpecial: '浮云绳镖 特殊强化'
   },
   ko: {
-    body: '체력', power: '기세', agility: '민첩', momentum: '내공', defense: '방어',
+    body: '체력', momentum: '기세', agility: '민첩', power: '내공', defense: '방어',
     maxHp: '최대 체력', minPhys: '최소 외공 공격', maxPhys: '최대 외공 공격',
     physDef: '외공 방어', physPen: '외공 관통', physResist: '외공 저항',
     minBellstrike: '최소 명금 공격', maxBellstrike: '최대 명금 공격', bellstrikePen: '명금 관통',

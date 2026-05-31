@@ -88,12 +88,12 @@ async function buildStatParams(roleInfo, state) {
   const base = window.WWM_LV95_BASE?.stats || {};
   const r = Object.assign({}, base);
   // roleInfo の 5行ステ override (ranking 力/速/会 シミュ用)
-  // ゲーム公式 roleInfo API では momentum ↔ power が ゲーム内表示 (力/会) と逆で返るため取り込み時に swap
-  for (const k of ['body','defense','agility']) {
+  // 内部 key は ゲーム公式 roleInfo API key 名と完全一致 (momentum=会、 power=力):
+  //   - momentum (内部) = 会 = Momentum (en) = roleInfo.momentum
+  //   - power    (内部) = 力 = Power    (en) = roleInfo.power
+  for (const k of ['body','defense','agility','momentum','power']) {
     if (typeof roleInfo?.[k] === 'number') r[k] = roleInfo[k];
   }
-  if (typeof roleInfo?.momentum === 'number') r.power    = roleInfo.momentum;
-  if (typeof roleInfo?.power    === 'number') r.momentum = roleInfo.power;
 
   // 1. 装備 baseAttrs (+ 装備個別Lv 逆引き)
   const eqDet = roleInfo?.wearEquipsDetailed || {};
@@ -228,12 +228,12 @@ async function buildStatParams(roleInfo, state) {
   }
 
   // 7. 5行 derived (装備で増えた分のみ補正)
-  const baseFive = { body: 129, defense: 129, agility: 129, power: 129, momentum: 129 };
+  const baseFive = { body: 129, defense: 129, agility: 129, momentum: 129, power: 129 };
   const dBody     = (r.body     || 0) - baseFive.body;
   const dDefense  = (r.defense  || 0) - baseFive.defense;
   const dAgility  = (r.agility  || 0) - baseFive.agility;
-  const dPower    = (r.power    || 0) - baseFive.power;
-  const dMomentum = (r.momentum || 0) - baseFive.momentum;
+  const dPower    = (r.momentum    || 0) - baseFive.momentum;
+  const dMomentum = (r.power || 0) - baseFive.power;
 
   _acc(r, 'maxHp',    dBody*60 + dDefense*17);
   _acc(r, 'physDef',  dDefense*0.5);
@@ -278,7 +278,7 @@ async function buildStatParams(roleInfo, state) {
       const wwmKey = _CALCJS_TO_WWM[d.appliesTo] || d.appliesTo;
       // 重複防止 (例: 主・副 両方の agility→crit 重複)
       if (derivedDedupKeys.has(wwmKey) && derivedSeen.has(wwmKey)) continue;
-      // d.from 解析: 'momentum'/'body'/単純key or 'max(a,b)' 形式
+      // d.from 解析: 'power'/'body'/単純key or 'max(a,b)' 形式
       const _parseFromVal = (from) => {
         if (from === 'minElemMain') return r.minElemMain || 0;
         if (from === 'maxElemMain') return r.maxElemMain || 0;
@@ -311,7 +311,7 @@ async function buildStatParams(roleInfo, state) {
 
   // 8.6 cap警告 (5行ステ derived cap未到達)
   r._capWarnings = {};
-  const _fiveKeys = new Set(['body','momentum','defense','agility','power']);
+  const _fiveKeys = new Set(['body','power','defense','agility','momentum']);
   for (const kid of [roleInfo?.kongfuMain, roleInfo?.kongfuSub]) {
     const kf = window.WWM_KONGFU?.[kid];
     if (!kf?.derived) continue;

@@ -6,7 +6,7 @@
 
   "header": {
     "title": { "ja": "総合武力", "en": "Total Power", "zh": "总合武力", "ko": "총합 무력" },
-    "key": "totalPower"
+    "key": "totalMartial"
   },
 
   "sections": [
@@ -15,10 +15,10 @@
       "title": { "ja": "基礎値", "en": "Base Stats", "zh": "基础值", "ko": "5대 속성" },
       "items": [
         { "key": "body",     "label": { "ja": "体", "en": "Body",     "zh": "体", "ko": "체력" }, "format": "int", "calcKey": "body" },
-        { "key": "momentum", "label": { "ja": "力", "en": "Power",    "zh": "力", "ko": "내공" }, "format": "int", "calcKey": "momentum" },
+        { "key": "power", "label": { "ja": "力", "en": "Power",    "zh": "力", "ko": "내공" }, "format": "int", "calcKey": "power" },
         { "key": "defense",  "label": { "ja": "防", "en": "Defense",  "zh": "防", "ko": "방어" }, "format": "int", "calcKey": "defense" },
         { "key": "agility",  "label": { "ja": "速", "en": "Agility",  "zh": "速", "ko": "민첩" }, "format": "int", "calcKey": "agility" },
-        { "key": "power",    "label": { "ja": "会", "en": "Momentum", "zh": "会", "ko": "기세" }, "format": "int", "calcKey": "power" }
+        { "key": "momentum",    "label": { "ja": "会", "en": "Momentum", "zh": "会", "ko": "기세" }, "format": "int", "calcKey": "momentum" }
       ]
     },
     {

@@ -1,8 +1,8 @@
 {
-  "_schema": "WW Math (wherewindsmath.pages.dev) app.js mn={} object から抽出した武術 pamBonuses 式。武術 stat 入力 (例 agility/power/minSilkbind) を cap で頭打ち → 乗数で出力 stat に変換。kongfu.json derived フィールドと同形式。",
+  "_schema": "WW Math (wherewindsmath.pages.dev) app.js mn={} object から抽出した武術 pamBonuses 式。武術 stat 入力 (例 agility/momentum/minSilkbind) を cap で頭打ち → 乗数で出力 stat に変換。kongfu.json derived フィールドと同形式。",
   "_lastUpdated": "2026-05-25",
   "_source": "Where Winds Math app.js (難読化解除 + 手動マッピング)",
-  "_note": "13武術抽出済 (WW Math 掲載分)。kongfu.json 未マッピング3件: infernal_twinblades(20501)/mortal_rope_dart(20701)/thundercry_blade(20401 = mo_blade 同等?)。mo_blade entry あるが Thundercry 武術名で出ているため要確認。caps: 0xe1=225 (agility/power 系), 0x10c=268 (path min系), 0x218=536, 0x233=563, 0x64=100。",
+  "_note": "13武術抽出済 (WW Math 掲載分)。kongfu.json 未マッピング3件: infernal_twinblades(20501)/mortal_rope_dart(20701)/thundercry_blade(20401 = mo_blade 同等?)。mo_blade entry あるが Thundercry 武術名で出ているため要確認。caps: 0xe1=225 (agility/momentum 系), 0x10c=268 (path min系), 0x218=536, 0x233=563, 0x64=100。",
 
   "kongfuMap": {
     "vernal_umbrella":      { "kongfuId": "20601", "ja": "千紅の傘", "weaponType": "Umbrella", "path": "silkbind", "damageStatKey": "umbrellaDmg" },
@@ -51,7 +51,7 @@
       { "fromStat": "maxBellstrike",   "cap": 563, "multiplier": 0.03197158081705151, "toStat": "bellstrikePen", "maxBoost": 18.0 }
     ],
     "heavenquaker_spear": [
-      { "fromStat": "power",         "cap": 225, "multiplier": 0.264,                 "toStat": "minPhys",        "maxBoost": 59.4 },
+      { "fromStat": "momentum",         "cap": 225, "multiplier": 0.264,                 "toStat": "minPhys",        "maxBoost": 59.4 },
       { "fromStat": "(path stat)",   "cap": 536, "multiplier": 0.00016791044776119402,"toStat": "(bonus key)",    "maxBoost": 0.09, "_note": "key2 不明、attrDmgBonus 系の可能性" }
     ],
     "nameless_sword": [
@@ -79,7 +79,7 @@
   },
 
   "_capConstants": {
-    "0xe1 (225)": "agility/power 系 (5行ステ)",
+    "0xe1 (225)": "agility/momentum 系 (5行ステ)",
     "0x10c (268)": "minSilkbind/minStonesplit/minBamboocut 系 (path min ATK)",
     "0x218 (536)": "maxBellstrike/maxStonesplit 系? (path max ATK?)",
     "0x233 (563)": "maxBellstrike 系?",

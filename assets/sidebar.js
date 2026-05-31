@@ -572,9 +572,9 @@ async function renderAffixRanking(roleInfo, params) {
     { key: 'hitRate',      delta: maxTbl.precision, label: `${SL.precision||'命中率'} +${((maxTbl.precision||0)*100).toFixed(1)}%` },
     { key: 'outerPen',     delta: maxTbl.outerPen, label: `${(window.T&&T.penPhys)||'外功貫通'} +${maxTbl.outerPen}` },
     { key: 'elemPen',      delta: maxTbl.attrPen,  label: `${(window.T&&T.penVoid)||'無相貫通'} +${maxTbl.attrPen}` },
-    { key: '_momentum',  delta: maxTbl.stat5, label: `${SL.momentum||'力'} +${maxTbl.stat5?.toFixed(1)}`, statKey: 'momentum' },
+    { key: '_power',  delta: maxTbl.stat5, label: `${SL.power||'力'} +${maxTbl.stat5?.toFixed(1)}`, statKey: 'power' },
     { key: '_agility',   delta: maxTbl.stat5, label: `${SL.agility||'速'} +${maxTbl.stat5?.toFixed(1)}`, statKey: 'agility' },
-    { key: '_power',     delta: maxTbl.stat5, label: `${SL.power||'会'} +${maxTbl.stat5?.toFixed(1)}`, statKey: 'power' },
+    { key: '_momentum',     delta: maxTbl.stat5, label: `${SL.momentum||'会'} +${maxTbl.stat5?.toFixed(1)}`, statKey: 'momentum' },
     { key: 'stMysticDmg',  delta: maxTbl.mysticDmg, label: `${SL.stMysticDmg||'奇術ダメ'} +${((maxTbl.mysticDmg||0)*100).toFixed(1)}%` },
     { key: 'allMartialBoost', delta: maxTbl.allWeaponDmg, label: `${SL.allWeaponDmg||'全武学効果'} +${((maxTbl.allWeaponDmg||0)*100).toFixed(1)}%` }
   ].filter(t => t && t.delta != null && t.delta > 0);
@@ -622,9 +622,9 @@ async function renderAffixRanking(roleInfo, params) {
     'hitRate':          { lbl: SL.precision || '命中率',      pct: true,  step: '0.1' },
     'outerPen':         { lbl: (window.T && T.penPhys) || '外功貫通',  pct: false, step: '0.1' },
     'elemPen':          { lbl: (window.T && T.penVoid) || '無相貫通',  pct: false, step: '0.1' },
-    '_momentum':        { lbl: SL.momentum || '力',           pct: false, step: '1' },
+    '_power':        { lbl: SL.power || '力',           pct: false, step: '1' },
     '_agility':         { lbl: SL.agility || '速',            pct: false, step: '1' },
-    '_power':           { lbl: SL.power || '会',              pct: false, step: '1' },
+    '_momentum':           { lbl: SL.momentum || '会',              pct: false, step: '1' },
     'stMysticDmg':      { lbl: SL.stMysticDmg || '奇術ダメ',  pct: true,  step: '0.1' },
     'allMartialBoost':  { lbl: SL.allWeaponDmg || '全武学効果', pct: true, step: '0.1' }
   };
@@ -1394,15 +1394,15 @@ async function renderSidebar(params) {
   if (!root) return;
   _CURRENT_PARAMS = params;
   // 総合武力 = roleInfo.xiuWeiKungFu (現在値)
-  let totalPower = '-';
+  let totalMartial = '-';
   const ri = window.__WWM_ROLEINFO;
-  if (ri?.xiuWeiKungFu) totalPower = ri.xiuWeiKungFu.toLocaleString();
-  else if (ri?.maxXiuWeiKungFu) totalPower = ri.maxXiuWeiKungFu.toLocaleString();
+  if (ri?.xiuWeiKungFu) totalMartial = ri.xiuWeiKungFu.toLocaleString();
+  else if (ri?.maxXiuWeiKungFu) totalMartial = ri.maxXiuWeiKungFu.toLocaleString();
   const _avSrc = ri?._avatarBase64 || ri?._avatarUrl || '';
   const avatar = _avSrc ? `<img class="wwm-sb-avatar" src="${_avSrc}" alt="avatar">` : '';
   const charName = ri?.roleName ? `${ri.roleName} <span class="wwm-muted">Lv${ri.level||'?'}</span>` : '';
   const importBtnLabel = (window.T && window.T.importBtn) || 'IMPORT';
-  const powerLabel = _label(cfg.header?.title, '総合武力');
+  const titleLabel = _label(cfg.header?.title, '総合武力');
   // 再render時に score が "-" に消えないよう baseline から直接埋め込む (updateHero タイミング非依存)
   const _bl = window.__WWM_BASELINE;
   const martialScoreStr = (_bl && typeof _bl.statusScore === 'number') ? Math.round(_bl.statusScore).toLocaleString() : '-';
@@ -1416,7 +1416,7 @@ async function renderSidebar(params) {
         ${avatar}
         <div class="wwm-sb-info">
           ${charName ? `<div class="wwm-sb-charname">${charName}</div>` : ''}
-          <div class="wwm-sb-power"><span class="wwm-muted">${powerLabel}</span> <b>${totalPower}</b></div>
+          <div class="wwm-sb-totalmartial"><span class="wwm-muted">${titleLabel}</span> <b>${totalMartial}</b></div>
           <div class="wwm-sb-martial"><span class="wwm-muted">${(window.T&&T.martialIndex)||'武格指数'}</span> <b id="wwmSbMartialScore">${martialScoreStr}</b> <span class="wwm-sb-tier-badge tier-${martialTier}" id="wwmSbTierBadge">${martialTier}</span></div>
         </div>
       </div>
@@ -2295,7 +2295,7 @@ const _USEFUL_KEYS = new Set([
   // 武術攻撃強化系 (装備限定 → 出れば確定 useful)
   'lightAtkDmg', 'heavyAtkDmg', 'executionDmg',
   'airborneLightAtkDmg', 'jumpStrikeDmg', 'dualWeaponSkillDmg', 'dashDmg',
-  'agility', 'power', 'momentum'
+  'agility', 'momentum', 'power'
 ]);
 // 会意率 useful 対象 kongfu (九変の剣/無銘の剣/蛇神の槍/無銘の槍)
 const _AFFINITY_USEFUL_KONGFU = new Set([10101, 10102, 10201, 10202, '10101', '10102', '10201', '10202']);
@@ -2440,8 +2440,8 @@ const _STAT_TO_MAX_KEY = {
   minVoid: 'pathSingle', maxVoid: 'pathSingle',
   // 確率系
   precision: 'precision', crit: 'crit', affinity: 'affinity',
-  // 5行 (body/defense/agility/power/momentum)
-  body: 'stat5', defense: 'stat5', agility: 'stat5', power: 'stat5', momentum: 'stat5',
+  // 5行 (body/defense/agility/momentum/power)
+  body: 'stat5', defense: 'stat5', agility: 'stat5', momentum: 'stat5', power: 'stat5',
   // 貫通: 外功貫通 = outerPen / 無相+5path貫通 = attrPen
   physPen: 'outerPen',
   bellstrikePen: 'attrPen', stonesplitPen: 'attrPen',

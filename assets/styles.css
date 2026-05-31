@@ -1581,9 +1581,9 @@ html[data-theme="light"] .wwm-sb-mini-hero-ink {
   background: linear-gradient(90deg, rgba(184,134,11,0), rgba(184,134,11,0.16), rgba(184,134,11,0));
 }
 /* light mini-hero: 総合武力/武格指数 の label/値を濃色化 (cream上で gold/muted が低コントラストのため) */
-html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-power b,
+html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-totalmartial b,
 html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial b { color: #8a5212 !important; text-shadow: none !important; }
-html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-power .wwm-muted,
+html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-totalmartial .wwm-muted,
 html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial .wwm-muted { color: #5a4326 !important; opacity: 0.85 !important; }
 /* mini-hero card 内の sb-top: sticky/border 解除 */
 .wwm-sb-mini-hero-card .wwm-sb-top {
@@ -1640,14 +1640,14 @@ html[data-theme="light"] .wwm-sb-top { background: #f5ead0; }
   display: flex; flex-direction: column;
   gap: var(--space-half);
 }
-.wwm-sb-power, .wwm-sb-martial {
+.wwm-sb-totalmartial, .wwm-sb-martial {
   font-size: var(--text-sm);
   display: flex; align-items: center;
   line-height: 1.25;
 }
 /* 武格指数 row: SSバッジ縮小 + 中央揃え (base) で row を上げ、3行を等間隔に。top:0 で -2px浮き解除 */
 .wwm-sb-martial .wwm-sb-tier-badge { font-size: 13px; padding: 0 6px; top: 0; }
-.wwm-sb-power b, .wwm-sb-martial b { color: var(--accent, #d4af37); font-weight: var(--fw-bold); margin-left: 4px; }
+.wwm-sb-totalmartial b, .wwm-sb-martial b { color: var(--accent, #d4af37); font-weight: var(--fw-bold); margin-left: 4px; }
 .wwm-sb-import-btn {
   flex-shrink: 0;
   padding: 6px 10px;
@@ -1851,11 +1851,11 @@ html.wwm-view-sidebar .wwm-overlay-ctrl {
 /* overlay モード: 文字色 / ラベル色 カスタマイズ */
 html.wwm-view-sidebar .wwm-sb-label,
 html.wwm-view-sidebar .wwm-sb-charname,
-html.wwm-view-sidebar .wwm-sb-power,
+html.wwm-view-sidebar .wwm-sb-totalmartial,
 html.wwm-view-sidebar .wwm-stat-name,
 html.wwm-view-sidebar .wwm-sb-sub { color: var(--overlay-text-1) !important; }
 html.wwm-view-sidebar .wwm-sb-value,
-html.wwm-view-sidebar .wwm-sb-power b,
+html.wwm-view-sidebar .wwm-sb-totalmartial b,
 html.wwm-view-sidebar .wwm-stat-val { color: var(--overlay-text-2) !important; }
 html.wwm-view-sidebar .wwm-sb-section-title,
 html.wwm-view-sidebar .wwm-sb-header-value { color: var(--overlay-accent) !important; }

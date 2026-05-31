@@ -401,7 +401,7 @@
   },
   "130102": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "130103": {
     "internal": 6,
@@ -413,7 +413,7 @@
   },
   "130105": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "130106": {
     "internal": 9,
@@ -509,7 +509,7 @@
   },
   "130202": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "130203": {
     "internal": 6,
@@ -521,7 +521,7 @@
   },
   "130205": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "130206": {
     "internal": 9,
@@ -617,7 +617,7 @@
   },
   "130302": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "130303": {
     "internal": 6,
@@ -629,7 +629,7 @@
   },
   "130305": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "130306": {
     "internal": 9,
@@ -725,7 +725,7 @@
   },
   "130402": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "130403": {
     "internal": 6,
@@ -737,7 +737,7 @@
   },
   "130405": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "130406": {
     "internal": 9,
@@ -865,7 +865,7 @@
   },
   "140102": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "140103": {
     "internal": 6,
@@ -877,7 +877,7 @@
   },
   "140105": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "140106": {
     "internal": 9,
@@ -981,7 +981,7 @@
   },
   "140202": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "140203": {
     "internal": 6,
@@ -993,7 +993,7 @@
   },
   "140205": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "140206": {
     "internal": 9,
@@ -1097,7 +1097,7 @@
   },
   "140302": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "140303": {
     "internal": 6,
@@ -1109,7 +1109,7 @@
   },
   "140305": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "140306": {
     "internal": 9,
@@ -1213,7 +1213,7 @@
   },
   "140402": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "140403": {
     "internal": 6,
@@ -1225,7 +1225,7 @@
   },
   "140405": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "140406": {
     "internal": 9,
@@ -1997,7 +1997,7 @@
   },
   "161902": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "161903": {
     "internal": 6,
@@ -2009,7 +2009,7 @@
   },
   "161905": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "161906": {
     "internal": 9,
@@ -2105,7 +2105,7 @@
   },
   "162002": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "162003": {
     "internal": 6,
@@ -2117,7 +2117,7 @@
   },
   "162005": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "162006": {
     "internal": 9,
@@ -2449,7 +2449,7 @@
   },
   "166702": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "166703": {
     "internal": 6,
@@ -2461,7 +2461,7 @@
   },
   "166705": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "166706": {
     "internal": 9,
@@ -2557,7 +2557,7 @@
   },
   "166802": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "166803": {
     "internal": 6,
@@ -2569,7 +2569,7 @@
   },
   "166805": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "166806": {
     "internal": 9,
@@ -2673,7 +2673,7 @@
   },
   "166902": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "166903": {
     "internal": 6,
@@ -2685,7 +2685,7 @@
   },
   "166905": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "166906": {
     "internal": 9,
@@ -2781,7 +2781,7 @@
   },
   "167002": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "167003": {
     "internal": 6,
@@ -2793,7 +2793,7 @@
   },
   "167005": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "167006": {
     "internal": 9,
@@ -4817,7 +4817,7 @@
   },
   "8211012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "8211013": {
     "internal": 323,
@@ -4877,7 +4877,7 @@
   },
   "8212012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "8212013": {
     "internal": 323,
@@ -4937,7 +4937,7 @@
   },
   "8213012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "8221001": {
     "internal": 15,
@@ -4985,7 +4985,7 @@
   },
   "8221012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "8221013": {
     "internal": 323,
@@ -5045,7 +5045,7 @@
   },
   "8222012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "8222013": {
     "internal": 323,
@@ -5105,7 +5105,7 @@
   },
   "8223012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "8231001": {
     "internal": 15,
@@ -5361,7 +5361,7 @@
   },
   "8251007": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "8251008": {
     "internal": 323,
@@ -5401,7 +5401,7 @@
   },
   "8252007": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "8252008": {
     "internal": 323,
@@ -5441,7 +5441,7 @@
   },
   "8253007": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "8271001": {
     "internal": 290,
@@ -5609,7 +5609,7 @@
   },
   "8293002": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "8293003": {
     "internal": 6,
@@ -5621,7 +5621,7 @@
   },
   "8293005": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "8293006": {
     "internal": 9,
@@ -5757,7 +5757,7 @@
   },
   "8294002": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "8294003": {
     "internal": 6,
@@ -5769,7 +5769,7 @@
   },
   "8294005": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "8294006": {
     "internal": 9,
@@ -5945,7 +5945,7 @@
   },
   "8711012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "8711013": {
     "internal": 323,
@@ -6005,7 +6005,7 @@
   },
   "8712012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "8712013": {
     "internal": 323,
@@ -6065,7 +6065,7 @@
   },
   "8713012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "8721001": {
     "internal": 15,
@@ -6113,7 +6113,7 @@
   },
   "8721012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "8721013": {
     "internal": 323,
@@ -6173,7 +6173,7 @@
   },
   "8722012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "8722013": {
     "internal": 323,
@@ -6233,7 +6233,7 @@
   },
   "8723012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "8731001": {
     "internal": 15,
@@ -6489,7 +6489,7 @@
   },
   "8751007": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "8751008": {
     "internal": 323,
@@ -6529,7 +6529,7 @@
   },
   "8752007": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "8752008": {
     "internal": 323,
@@ -6569,7 +6569,7 @@
   },
   "8753007": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "8771001": {
     "internal": 290,
@@ -6737,7 +6737,7 @@
   },
   "8793002": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "8793003": {
     "internal": 6,
@@ -6749,7 +6749,7 @@
   },
   "8793005": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "8793006": {
     "internal": 9,
@@ -6885,7 +6885,7 @@
   },
   "8794002": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "8794003": {
     "internal": 6,
@@ -6897,7 +6897,7 @@
   },
   "8794005": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "8794006": {
     "internal": 9,
@@ -7073,7 +7073,7 @@
   },
   "9211012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "9211013": {
     "internal": 323,
@@ -7133,7 +7133,7 @@
   },
   "9212012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "9212013": {
     "internal": 323,
@@ -7193,7 +7193,7 @@
   },
   "9213012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "9221001": {
     "internal": 15,
@@ -7241,7 +7241,7 @@
   },
   "9221012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "9221013": {
     "internal": 323,
@@ -7301,7 +7301,7 @@
   },
   "9222012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "9222013": {
     "internal": 323,
@@ -7361,7 +7361,7 @@
   },
   "9223012": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "9231001": {
     "internal": 15,
@@ -7617,7 +7617,7 @@
   },
   "9251007": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "9251008": {
     "internal": 323,
@@ -7657,7 +7657,7 @@
   },
   "9252007": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "9252008": {
     "internal": 323,
@@ -7697,7 +7697,7 @@
   },
   "9253007": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "9271001": {
     "internal": 290,
@@ -7865,7 +7865,7 @@
   },
   "9293002": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "9293003": {
     "internal": 6,
@@ -7877,7 +7877,7 @@
   },
   "9293005": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "9293006": {
     "internal": 9,
@@ -8005,7 +8005,7 @@
   },
   "9294002": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "9294003": {
     "internal": 6,
@@ -8017,7 +8017,7 @@
   },
   "9294005": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "9294006": {
     "internal": 9,
@@ -8161,7 +8161,7 @@
   },
   "9711006": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "9711007": {
     "internal": 323,
@@ -8229,7 +8229,7 @@
   },
   "9712006": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "9712007": {
     "internal": 323,
@@ -8297,7 +8297,7 @@
   },
   "9713006": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "9713007": {
     "internal": 134,
@@ -8489,7 +8489,7 @@
   },
   "9751007": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "9751008": {
     "internal": 323,
@@ -8529,7 +8529,7 @@
   },
   "9752007": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "9752008": {
     "internal": 323,
@@ -8569,7 +8569,7 @@
   },
   "9753007": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "9771001": {
     "internal": 290,
@@ -8737,7 +8737,7 @@
   },
   "9793002": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "9793003": {
     "internal": 6,
@@ -8749,7 +8749,7 @@
   },
   "9793005": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "9793006": {
     "internal": 9,
@@ -8857,7 +8857,7 @@
   },
   "9793102": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "9793103": {
     "internal": 6,
@@ -8869,7 +8869,7 @@
   },
   "9793105": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "9793106": {
     "internal": 9,
@@ -8965,7 +8965,7 @@
   },
   "9794002": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "9794003": {
     "internal": 6,
@@ -8977,7 +8977,7 @@
   },
   "9794005": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "9794006": {
     "internal": 9,
@@ -9085,7 +9085,7 @@
   },
   "9794102": {
     "internal": 2,
-    "statKey": "power"
+    "statKey": "momentum"
   },
   "9794103": {
     "internal": 6,
@@ -9097,7 +9097,7 @@
   },
   "9794105": {
     "internal": 5,
-    "statKey": "momentum"
+    "statKey": "power"
   },
   "9794106": {
     "internal": 9,

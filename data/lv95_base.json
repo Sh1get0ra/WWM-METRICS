@@ -8,9 +8,9 @@
 
   "stats": {
     "body": 129,
-    "power": 129,
-    "agility": 129,
     "momentum": 129,
+    "agility": 129,
+    "power": 129,
     "defense": 129,
 
     "maxHp": 76454,
