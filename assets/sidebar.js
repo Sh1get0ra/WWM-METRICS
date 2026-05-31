@@ -1557,14 +1557,26 @@ function renderGearGrid(roleInfo) {
     const isBow = slot === '9' || slot === '21';
     const isArmor = ['3','4','5','8'].includes(slot);
     const setsCat = isBow ? sets.bowSets : (isArmor ? sets.defensiveSets : sets.weaponSets);
-    const setName = setsCat?.[suffix]?.names?.[lang] || setsCat?.[suffix]?.names?.ja || setsCat?.[suffix]?.names?.en || '';
+    let setName = setsCat?.[suffix]?.names?.[lang] || setsCat?.[suffix]?.names?.ja || setsCat?.[suffix]?.names?.en || '';
+    if (lang === 'en' && setName) setName = setName.replace(/\s+Set$/i, '');
     const score = calcCardScore(eq);
+    const shortKf = (n) => {
+      if (!n || lang !== 'en') return n;
+      return n
+        .replace(/\s+Rope Dart$/i, ' RD')
+        .replace(/\s+Twinblades$/i, ' TB')
+        .replace(/\s+Sword$/i, ' SD')
+        .replace(/\s+Spear$/i, ' SP')
+        .replace(/\s+Blade$/i, ' BL')
+        .replace(/\s+Umbrella$/i, ' UM')
+        .replace(/\s+Fan$/i, ' FN');
+    };
     let kongfuLine = '';
     if (slot === '1' && roleInfo?.kongfuMain) {
-      const n = kfName(roleInfo.kongfuMain);
+      const n = shortKf(kfName(roleInfo.kongfuMain));
       if (n) kongfuLine = `<span class="wwm-equip-kongfu">${n}</span>`;
     } else if (slot === '2' && roleInfo?.kongfuSub) {
-      const n = kfName(roleInfo.kongfuSub);
+      const n = shortKf(kfName(roleInfo.kongfuSub));
       if (n) kongfuLine = `<span class="wwm-equip-kongfu">${n}</span>`;
     }
     const iconName = _gearIcon(slot, roleInfo);
@@ -1760,8 +1772,10 @@ function renderXinfaGrid(roleInfo) {
     // icon: swap されてない (元と同じ xid) 場合のみ表示
     const iconUrl = (xid === origPassive[i]) ? xinfaIcons[i] : null;
     const iconHtml = iconUrl ? `<img class="wwm-xinfa-icon" src="${iconUrl}" alt="">` : '';
+    const tierChip = (xid && tier >= 1 && tier <= 5) ? `<div class="wwm-xinfa-tier-chip">T${tier}</div>` : '';
     return `
       <div class="wwm-xinfa-slot" data-xinfa-slot="${i}" onclick="WWMXinfa.openEdit(${i})">
+        ${tierChip}
         <div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法${['一','二','三','四'][i]}</span></div>
         ${iconHtml}
         <div class="wwm-xinfa-inner">
@@ -2643,7 +2657,7 @@ function openGearEdit(slot) {
       const usefulAuto = _isUsefulAffix(id, origRi);
       const pct = (ratio != null) ? (ratio * 100).toFixed(0) : null;
       const pctColor = _ratioColor(ratio);
-      const pctRankCls = ratio != null ? (ratio > 0.85 ? ' rank-gold' : ratio > 0.70 ? ' rank-purple' : ' rank-blue') : '';
+      const pctRankCls = ratio != null ? (ratio >= 0.999 ? ' rank-max' : ratio > 0.85 ? ' rank-gold' : ratio > 0.70 ? ' rank-purple' : ' rank-blue') : '';
       const pctHtml = pct != null ? `<span class="wwm-cmp-ratio${pctRankCls}" style="color:${pctColor};">${pct}%</span>` : '';
       return `
         <div class="wwm-cmp-row">
@@ -2708,7 +2722,7 @@ function openGearEdit(slot) {
           <div class="wwm-cmp-val-wrap">
             <input type="number" class="wwm-num-input wwm-cmp-val-input" step="${step}" min="0" ${maxAttr} value="${displayVal}" data-field="val" data-pct="${isPct?1:0}" data-pctmul="${needsMul?1:0}">
             <span class="wwm-cmp-unit" data-unit-el>${isPct?'%':''}</span>
-            <span class="wwm-cmp-ratio${initRatio != null ? (initRatio > 0.85 ? ' rank-gold' : initRatio > 0.70 ? ' rank-purple' : ' rank-blue') : ''}" data-ratio-el style="color:${initColor};">${initPct?initPct+'%':''}</span>
+            <span class="wwm-cmp-ratio${initRatio != null ? (initRatio >= 0.999 ? ' rank-max' : initRatio > 0.85 ? ' rank-gold' : initRatio > 0.70 ? ' rank-purple' : ' rank-blue') : ''}" data-ratio-el style="color:${initColor};">${initPct?initPct+'%':''}</span>
           </div>
         </div>
       `;
@@ -2964,8 +2978,8 @@ function openGearEdit(slot) {
     const pct = (ratio * 100).toFixed(0);
     el.textContent = pct + '%';
     el.style.color = _ratioColor(ratio);
-    el.classList.remove('rank-gold', 'rank-purple', 'rank-blue');
-    el.classList.add(ratio > 0.85 ? 'rank-gold' : ratio > 0.70 ? 'rank-purple' : 'rank-blue');
+    el.classList.remove('rank-max', 'rank-gold', 'rank-purple', 'rank-blue');
+    el.classList.add(ratio >= 0.999 ? 'rank-max' : ratio > 0.85 ? 'rank-gold' : ratio > 0.70 ? 'rank-purple' : 'rank-blue');
   }
 
   function _bindRowEvents() {

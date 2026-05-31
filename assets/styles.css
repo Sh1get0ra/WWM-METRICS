@@ -1576,16 +1576,24 @@ html[data-theme="light"] .tier-S {
   background: linear-gradient(135deg, var(--vermilion-soft), rgba(138,31,23,0.12));
   border-color: var(--vermilion-strong);
   text-shadow: 0 0 10px var(--vermilion-mid-2);
-  box-shadow: 0 0 12px var(--vermilion-mid), inset 0 1px 0 rgba(255,200,180,0.25);
+  box-shadow:
+    0 0 14px rgba(200,60,43,0.34),
+    0 0 28px rgba(200,60,43,0.10),
+    inset 0 1px 0 rgba(255,200,180,0.30);
   animation: tier-s-pulse-light 2.2s ease-in-out infinite;
 }
 @keyframes tier-s-pulse-light {
   0%, 100% {
-    box-shadow: 0 0 12px var(--vermilion-mid), inset 0 1px 0 rgba(255,200,180,0.25);
+    box-shadow:
+      0 0 14px rgba(200,60,43,0.34),
+      0 0 28px rgba(200,60,43,0.10),
+      inset 0 1px 0 rgba(255,200,180,0.30);
   }
   50% {
-    box-shadow: 0 0 22px rgba(200,60,43,0.52), 0 0 38px var(--vermilion-tint),
-                inset 0 1px 0 rgba(255,200,180,0.45);
+    box-shadow:
+      0 0 22px rgba(200,60,43,0.50),
+      0 0 40px rgba(200,60,43,0.18),
+      inset 0 1px 0 rgba(255,200,180,0.45);
   }
 }
 html[data-theme="light"] .tier-A { color: var(--jade-bright); background: rgba(74,122,90,0.12); border-color: rgba(74,122,90,0.42); text-shadow: none; box-shadow: 0 0 8px rgba(74,122,90,0.18); }
@@ -2512,7 +2520,7 @@ body.wwm-layout-active .wwm-footer {
 }
 .wwm-equip-icon {
   position: absolute;
-  right: -8px; top: 50%;
+  right: -14px; top: 62%;
   transform: translateY(-50%);
   width: 80px; height: 80px;
   opacity: 0.15;
@@ -2561,7 +2569,8 @@ html[data-theme="light"] .wwm-equip-delta-neg { color: #8a2418; text-shadow: non
 .wwm-equip-kongfu {
   display: block;
   font-size: var(--text-sm);
-  color: var(--paper-dim);
+  color: var(--paper);
+  font-weight: 600;
   letter-spacing: 0.05em;
   margin-bottom: 2px;
 }
@@ -2932,6 +2941,30 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
   background: rgba(74,158,255,0.18) !important;
   color: #4a9eff !important;
   border-color: rgba(74,158,255,0.55) !important;
+}
+/* MAX到達 (100%) 虹色 — 色相回転 hue-rotate アニメ (両テーマ共通)
+   注: background-color / box-shadow は keyframes が動かすため !important つけない (つけると keyframes が負けてアニメ無効化) */
+.wwm-cmp-modal-a .wwm-cmp-ratio.rank-max {
+  background-image: none !important;
+  color: #ffffff !important;
+  border-color: rgba(255,255,255,0.65) !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 4px rgba(0,0,0,0.55), 0 1px 0 rgba(0,0,0,0.4) !important;
+  background-color: hsl(0, 80%, 55%);
+  box-shadow: 0 0 9px hsla(0, 90%, 60%, 0.55), inset 0 1px 0 rgba(255,255,255,0.25);
+  animation: cmp-ratio-rainbow 3.5s linear infinite;
+}
+@keyframes cmp-ratio-rainbow {
+  0%   { background-color: hsl(  0, 80%, 55%); box-shadow: 0 0 9px hsla(  0, 90%, 60%, 0.55), inset 0 1px 0 rgba(255,255,255,0.25); }
+  17%  { background-color: hsl( 45, 90%, 55%); box-shadow: 0 0 9px hsla( 45, 90%, 60%, 0.55), inset 0 1px 0 rgba(255,255,255,0.25); }
+  33%  { background-color: hsl(120, 65%, 48%); box-shadow: 0 0 9px hsla(120, 75%, 55%, 0.55), inset 0 1px 0 rgba(255,255,255,0.25); }
+  50%  { background-color: hsl(180, 70%, 50%); box-shadow: 0 0 9px hsla(180, 80%, 55%, 0.55), inset 0 1px 0 rgba(255,255,255,0.25); }
+  67%  { background-color: hsl(220, 75%, 58%); box-shadow: 0 0 9px hsla(220, 85%, 62%, 0.55), inset 0 1px 0 rgba(255,255,255,0.25); }
+  83%  { background-color: hsl(285, 70%, 58%); box-shadow: 0 0 9px hsla(285, 80%, 62%, 0.55), inset 0 1px 0 rgba(255,255,255,0.25); }
+  100% { background-color: hsl(360, 80%, 55%); box-shadow: 0 0 9px hsla(360, 90%, 60%, 0.55), inset 0 1px 0 rgba(255,255,255,0.25); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wwm-cmp-modal-a .wwm-cmp-ratio.rank-max { animation: none; }
 }
 .wwm-cmp-modal-a .wwm-cmp-grid {
   grid-template-columns: 1fr 1px 1fr !important;
@@ -4140,11 +4173,17 @@ html[data-theme="light"] .wwm-btn-secondary {
 html[data-theme="light"] .wwm-btn-secondary:hover {
   background: var(--surf-shade-3);
 }
-/* ライト: 装備比較 セット効果 (赤系title) glow弱 */
+/* ライト: 装備比較 セット効果 (赤系title) glow弱 — 副情報 (セット名) 濃朱 統一 */
 html[data-theme="light"] .wwm-equip-setname,
 html[data-theme="light"] .wwm-cmp-set-header {
-  color: var(--vermilion-bright);
-  text-shadow: 0 0 4px var(--vermilion-soft-2);
+  color: var(--vermilion-deep);
+  text-shadow: none;
+}
+/* ライト: 装備カード 武術名 + 心法カード 心法名 (主情報) — ライト主文字色 + 太字 統一 */
+html[data-theme="light"] .wwm-equip-kongfu,
+html[data-theme="light"] .wwm-xinfa-header b {
+  color: var(--paper);
+  font-weight: 600;
 }
 /* ライト: equip-icon (装備カード白アイコン) は既対応、cmp内icon もinvert解除 */
 html[data-theme="light"] .wwm-cmp-bg-icon {
@@ -4389,7 +4428,7 @@ html[data-theme="light"] .wwm-diag-modal .wwm-modal-bg-icon {
   display: flex; align-items: center; gap: var(--space-2);
 }
 .wwm-xinfa-header { flex-wrap: wrap; }
-.wwm-xinfa-header b { font-size: var(--text-md); color: var(--paper-dim); }
+.wwm-xinfa-header b { font-size: var(--text-md); color: var(--paper); font-weight: 600; }
 .wwm-xinfa-tier {
   font-family: var(--f-mono);
   font-size: var(--text-xs);
@@ -4403,7 +4442,7 @@ html[data-theme="light"] .wwm-diag-modal .wwm-modal-bg-icon {
 }
 .wwm-xinfa-icon {
   position: absolute;
-  right: -6px; top: 50%;
+  right: -12px; top: 62%;
   transform: translateY(-50%);
   width: 88px; height: 88px;
   opacity: 0.15;
@@ -4487,7 +4526,8 @@ html[data-theme="light"] .wwm-diag-modal .wwm-modal-bg-icon {
 }
 .wwm-equip-setname {
   font-size: var(--text-sm);
-  color: var(--paper-dim);
+  color: var(--vermilion-bright);
+  text-shadow: 0 0 6px rgba(232,81,58,0.35);
   letter-spacing: 0.05em;
 }
 .wwm-equip-slot-header { font-size: var(--text-md); padding: 0; margin-bottom: 2px; }
@@ -4509,6 +4549,111 @@ html[data-theme="light"] .wwm-diag-modal .wwm-modal-bg-icon {
 .wwm-equip-affix .wwm-rank-purple { color: #c389ff; }
 .wwm-equip-affix .wwm-rank-gold   { color: #d4af37; }
 .wwm-affix-useful { color: var(--ratio-ok); font-weight: var(--fw-bold); cursor: help; }
+
+/* ============================================================
+   装備カード / 心法カード 案A改 追加レイヤー
+   - 古紙 turbulence (rail除外 left:30px 開始)
+   - rail 上下端 中央加重 赤グラデ線 (対称)
+   - hover 朱化 (border朱 + 朱shadow)
+   - 心法 tier chip (朱赤、 sidebar.js で注入)
+   ============================================================ */
+/* 古紙 turbulence (装備カード) */
+.wwm-gear-grid .wwm-equip-slot::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 30px;
+  pointer-events: none;
+  z-index: 0;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.8' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.6  0 0 0 0 0.5  0 0 0 0 0.3  0 0 0 0.06 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  opacity: 0.55;
+  mix-blend-mode: overlay;
+}
+/* 古紙 turbulence (心法カード) */
+.wwm-xinfa-slot::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 30px;
+  pointer-events: none;
+  z-index: 0;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.8' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.6  0 0 0 0 0.5  0 0 0 0 0.3  0 0 0 0.06 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  opacity: 0.55;
+  mix-blend-mode: overlay;
+}
+/* rail 上下端 赤グラデ線 (装備) */
+.wwm-equip-rail::before,
+.wwm-equip-rail::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--vermilion-bright), transparent);
+  opacity: 0.65;
+}
+.wwm-equip-rail::before { top: 6px; }
+.wwm-equip-rail::after  { bottom: 6px; }
+/* rail 上下端 赤グラデ線 (心法) */
+.wwm-xinfa-rail::before,
+.wwm-xinfa-rail::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--vermilion-bright), transparent);
+  opacity: 0.65;
+}
+.wwm-xinfa-rail::before { top: 6px; }
+.wwm-xinfa-rail::after  { bottom: 6px; }
+/* hover 朱化 (装備) — 既存 gold hover を override */
+.wwm-gear-grid .wwm-equip-slot[data-slot]:hover {
+  border-color: var(--vermilion-bright);
+  box-shadow: 0 4px 14px rgba(232,81,58,0.28);
+}
+/* hover 朱化 (心法) — 既存 gold hover を override */
+.wwm-xinfa-slot:hover {
+  border-color: var(--vermilion-bright);
+  box-shadow: 0 4px 14px rgba(232,81,58,0.28);
+}
+/* 心法カード内 tier chip (sidebar.js renderXinfaGrid で注入) */
+.wwm-xinfa-tier-chip {
+  position: absolute;
+  top: 5px; right: 8px;
+  z-index: 3;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: var(--fw-bold);
+  color: var(--vermilion-bright);
+  padding: 1px 6px;
+  border: 1px solid rgba(232,81,58,0.50);
+  background: rgba(200,60,43,0.14);
+  letter-spacing: 0.08em;
+  border-radius: 1px;
+  pointer-events: none;
+}
+/* ライトモード tier chip */
+html[data-theme="light"] .wwm-xinfa-tier-chip {
+  color: var(--vermilion-deep);
+  border-color: rgba(138,31,23,0.55);
+  background: rgba(232,81,58,0.18);
+}
+/* ライトモード 古紙 (overlay→multiply で 紙感薄く) */
+html[data-theme="light"] .wwm-gear-grid .wwm-equip-slot::before,
+html[data-theme="light"] .wwm-xinfa-slot::before {
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+}
+/* カード 非アクティブ border 微強化 (ほんのすこし目立つ) */
+.wwm-gear-grid .wwm-equip-slot,
+.wwm-xinfa-slot {
+  border-color: rgba(232,215,180,0.20);
+}
+html[data-theme="light"] .wwm-gear-grid .wwm-equip-slot,
+html[data-theme="light"] .wwm-xinfa-slot {
+  border-color: rgba(40,25,18,0.30);
+}
 
 /* placeholder grid (import前) */
 .wwm-placeholder-grid { cursor: pointer; }
@@ -4893,6 +5038,31 @@ html[data-theme="light"] .wwm-sb-tier-badge.tier-SS {
   color: #5a3a0a !important;
   border-color: rgba(184,134,11,0.9) !important;
   text-shadow: 0 0 2px rgba(255,255,255,0.55) !important;
+}
+/* sidebar 側 S/A/B/C も hero ライト と同じ gradient + 色 + border に統一 (SS と同パターン) */
+html[data-theme="light"] .wwm-sb-tier-badge.tier-S {
+  background: linear-gradient(135deg, #f4a89a 0%, #e87862 50%, #c83c2b 100%) !important;
+  color: #4a1410 !important;
+  border-color: rgba(200,60,43,0.9) !important;
+  text-shadow: 0 0 2px rgba(255,255,255,0.4) !important;
+}
+html[data-theme="light"] .wwm-sb-tier-badge.tier-A {
+  background: linear-gradient(135deg, #c8e0c8 0%, #88b894 50%, #5a8868 100%) !important;
+  color: #1a3a24 !important;
+  border-color: rgba(45,90,58,0.85) !important;
+  text-shadow: none !important;
+}
+html[data-theme="light"] .wwm-sb-tier-badge.tier-B {
+  background: linear-gradient(135deg, #e8d4a8 0%, #c4a868 50%, #8a7030 100%) !important;
+  color: #3a2810 !important;
+  border-color: rgba(122,90,32,0.85) !important;
+  text-shadow: none !important;
+}
+html[data-theme="light"] .wwm-sb-tier-badge.tier-C {
+  background: linear-gradient(135deg, #d8ccb4 0%, #a89880 50%, #786850 100%) !important;
+  color: #2a2010 !important;
+  border-color: rgba(90,66,38,0.85) !important;
+  text-shadow: none !important;
 }
 @keyframes tier-ss-shimmer-light {
   0%   { transform: translateX(-200%); }
