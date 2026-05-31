@@ -1104,7 +1104,10 @@ function _shareBuildUrl() {
   const riLight = { ...ri };
   delete riLight._avatarBase64;
   delete riLight._xinfaIconsBase64;
-  const payload = { v: 1, data: riLight, state: state || null };
+  // OBS view 武格指数 / Tier badge 表示用に baseline + opt_best 同梱 (数百バイト、 URL長影響軽微)
+  const baseline = window.__WWM_BASELINE || null;
+  const optBest  = window.__WWM_OPT_BEST || null;
+  const payload = { v: 1, data: riLight, state: state || null, baseline, optBest };
   let url, b64;
   try {
     const json = JSON.stringify(payload);
@@ -1292,6 +1295,13 @@ function _loadSharedBuild() {
     if (payload?.data) {
       localStorage.setItem('wwm_last_import_v1', JSON.stringify({ ts: Date.now(), data: payload.data }));
       if (payload.state) localStorage.setItem('wwm_last_state_v1', JSON.stringify(payload.state));
+      // OBS view 武格指数 / Tier 表示用に baseline + opt_best も復元 (送信側で同梱)
+      if (payload.baseline) {
+        try { localStorage.setItem('wwm_baseline_score_v1', JSON.stringify(payload.baseline)); } catch(_) {}
+      }
+      if (payload.optBest) {
+        try { localStorage.setItem('wwm_opt_best_v1', JSON.stringify(payload.optBest)); } catch(_) {}
+      }
       history.replaceState(null, '', location.pathname);
       return true;
     }
