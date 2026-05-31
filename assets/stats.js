@@ -473,21 +473,22 @@ async function buildStatParams(roleInfo, state) {
   r.maxQi = 100;
   r.grazeConvert = 0;
 
-  // 12. 適用値 (game UI 表示準拠: 命中率 = capped、会心/会意 = raw/1.45)
+  // 12. 適用値 (game UI 表示準拠: 命中率 = capped、会心 = cap 80%、会意 = cap 40%)
+  // ユーザー仕様: sidebar 適用値 (カッコ内) は最大 80%/40% で頭打ち表示。
   const judgeResApplied = 1.45;
   // 命中率 applied: judgeRes 経由式 (ゲーム画面表記準拠)
-  // raw < 0.65 → そのまま、>= 0.65 → 0.65 + (raw-0.65)/judgeRes、cap 1.0
+  // raw < 0.65 → そのまま、>= 0.65 → 0.65 + (raw-0.65)/judgeRes、0..1 clamp
   {
     const _raw = r.precision || 0;
     const _jr = r.judgeRes || 1.45;
-    r.appliedHit = _raw < 0.65 ? _raw : Math.min(1, 0.65 + (_raw - 0.65) / _jr);
+    r.appliedHit = Math.max(0, Math.min(1, _raw < 0.65 ? _raw : 0.65 + (_raw - 0.65) / _jr));
   }
-  r.appliedCrit      = (r.crit || 0) / judgeResApplied;
-  r.appliedSympathy  = (r.affinity || 0) / judgeResApplied;
+  r.appliedCrit      = Math.min(0.8, (r.crit || 0) / judgeResApplied);
+  r.appliedSympathy  = Math.min(0.4, (r.affinity || 0) / judgeResApplied);
 
-  // 13. 最終会心率/会意率 (calc.js式準拠: cap内 + directCrit/Affinity 加算)
-  r.finalSympathy = Math.min(0.4, r.appliedSympathy) + (r.directAffinity || 0);
-  r.finalCrit     = Math.min(1 - r.finalSympathy, Math.min(0.8, r.appliedCrit) + (r.directCrit || 0));
+  // 13. 最終会心率/会意率 (calc.js _computeCoreLayer式準拠: cap内 + directCrit/Affinity 加算、 0..1 clamp)
+  r.finalSympathy = Math.min(1, r.appliedSympathy + (r.directAffinity || 0));
+  r.finalCrit     = Math.max(0, Math.min(1 - r.finalSympathy, r.appliedCrit + (r.directCrit || 0)));
   // 最終発動率 (calc.js pCrit/pSympathy/pGraze/pNormal 同等)
   r.pSympathy = r.finalSympathy;
   r.pCrit     = r.appliedHit * r.finalCrit;
