@@ -198,10 +198,18 @@ finalScore  = statusScore + 4-set bonus (4個セット発動時)</pre>
   `;
 }
 function _changelogHtml(entries) {
+  const lang = _curLang();
+  // item は string (旧) or object {ja,en,zh,ko,featured?} (多言語+強調)
+  const _itemHtml = (it) => {
+    if (typeof it === 'string') return `<li>${it}</li>`;
+    const txt = it[lang] || it.ja || it.en || '';
+    if (it.featured) return `<li class="wwm-note-cl-featured">${txt}</li>`;
+    return `<li>${txt}</li>`;
+  };
   return entries.map(e => `
     <div class="wwm-note-cl-entry">
       <div><span class="wwm-note-cl-ver">v${e.version}</span><span class="wwm-note-cl-date">${e.date || ''}</span></div>
-      <ul class="wwm-note-cl-items">${(e.items||[]).map(it => `<li>${it}</li>`).join('')}</ul>
+      <ul class="wwm-note-cl-items">${(e.items||[]).map(_itemHtml).join('')}</ul>
     </div>
   `).join('');
 }

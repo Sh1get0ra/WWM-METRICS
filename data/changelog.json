@@ -1,6 +1,121 @@
 {
-  "current": "1.5.0",
+  "current": "2.0.0",
   "entries": [
+    {
+      "version": "2.0.0",
+      "date": "2026-05-31",
+      "items": [
+        {
+          "featured": true,
+          "ja": "【データインポート 完全刷新】 旧版の手動ステ入力を廃止。 ゲーム公式データツール (拡張) から ワンクリックで 装備10点 / 調律・定音オプション / 心法 / 武術 / キャラクター情報 を一括取得 → 自動計算へ。 手入力ゼロで 武格指数を瞬時表示。 詳細手順は [仕様] タブ参照。",
+          "en": "[Data Import — Complete Overhaul] Manual stat entry has been removed. Pull all gear (10 slots), tune/attune affixes, inner ways (xinfa), martial arts, and character info from the official roleInfo tool with a single click → instant auto-calculation. Zero manual input required. See the [Specs] tab for the import procedure.",
+          "zh": "【数据导入 全面刷新】 移除旧版手动输入界面。 通过游戏官方数据工具 (扩展)、 一键导入装备10件 / 调律·定音词条 / 心法 / 武学 / 角色信息 → 自动计算。 零手动输入、 武格指数即时显示。 详细步骤请参阅 [说明] 标签。",
+          "ko": "【데이터 임포트 전면 개편】 구버전의 수동 입력 방식을 폐지. 게임 공식 데이터 도구 (확장) 에서 원클릭으로 장비 10개 / 조율·정음 옵션 / 심법 / 무술 / 캐릭터 정보를 일괄 임포트 → 자동 계산. 수동 입력 없이 무격지수를 즉시 표시. 자세한 절차는 [사양] 탭 참조."
+        },
+        {
+          "ja": "【UI 全面刷新】 武侠水墨デザインへ移行。 サイドバー (キャラクター情報+装備サマリ)、 hero パネル (朱筆/羅盤/donut)、 装備カード/心法カード (rail縦書き+朱印+古紙テクスチャ+武術属性別色)、 格析パネル (タブ式) を新規実装。",
+          "en": "[UI Overhaul] Migrated to wuxia ink design. New sidebar (character info + gear summary), hero panel (vermilion brush / luopan / donut), gear/xinfa cards (vertical rail + seals + paper texture + martial-element color coding), and tabbed Analysis panel.",
+          "zh": "【UI 全面刷新】 移植到武侠水墨设计。 全新侧边栏 (角色信息+装备摘要)、 hero 面板 (朱笔/罗盘/环形图)、 装备卡/心法卡 (竖排标签+朱印+古纸纹理+武学属性配色)、 标签式格析面板。",
+          "ko": "【UI 전면 개편】 무협 수묵 디자인으로 이행. 새 사이드바 (캐릭터 정보+장비 요약)、 hero 패널 (붉은 붓/나반/도넛)、 장비/심법 카드 (세로 레일+인장+종이 텍스처+무술 속성 색 구분)、 탭식 분석 패널을 신규 구현."
+        },
+        {
+          "ja": "【計算ロジック改善】 穿透公式 修正 (overflow を /200 で半減、 不足は /100 でフル軽減)、 付加会心率/付加会意率 上限 (80%/40%) 突破対応、 増伤レイヤーを 内側 (外功/属性別) と 外側 (全武術) に分離、 心法 5武術属性 別計算 (鋼鳴/砕岩/糸操/瞬嵐/無相)、 属性攻撃強化 武術属性別ルート、 判定確率 0..1 clamp 強化、 武格指数 固定スキル係数化 (装備比較の公平性)、 Tier 判定 動的閾値化 (最適化最大スコア比 95/90/80/65%)。",
+          "en": "[Calc Logic Improvements] Penetration formula fixed (/200 halved overflow, /100 full mitigation when short). Direct Crit/Affinity caps (80%/40%) now correctly bypass-able. Damage boost layers split into inner (per phys/elem) and outer (universal). Per-element xinfa calculation across all 5 martial elements (Bellstrike/Stonesplit/Silkbind/Bamboocut/Formless). Affinity DMG Bonus routed by element. Probability values clamped to 0..1. Martial Index now uses fixed skill coefficients for fair gear comparison. Dynamic Tier thresholds (95/90/80/65% of optimized max score).",
+          "zh": "【计算逻辑改进】 穿透公式修正 (overflow÷200半减、 不足÷100全减)、 直接暴击/会意率 (80%/40%) 上限突破支持、 增伤层分离为内层 (外功/属性别) 与外层 (全武学)、 心法 5武学属性别计算 (钢鸣/碎岩/丝操/瞬岚/无相)、 属性攻击强化按武学属性路由、 判定概率 0..1 clamp 强化、 武格指数固定技能系数化 (装备比较公平)、 Tier 判定动态阈值化 (最优化最大分数比 95/90/80/65%)。",
+          "ko": "【계산 로직 개선】 관통 공식 수정 (overflow÷200 반감、 부족÷100 전감)、 부가 치명타/각성률 (80%/40%) 상한 돌파 대응、 증상 레이어를 내부 (외공/속성별) 와 외부 (전 무술) 로 분리、 심법 5무술 속성 별 계산 (강명/쇄암/사조/순람/무상)、 속성 공격 강화 무술 속성별 라우팅、 판정 확률 0..1 clamp 강화、 무격지수 고정 스킬 계수화 (장비 비교 공평성)、 Tier 판정 동적 임계값 (최적화 최대 점수 비 95/90/80/65%)."
+        },
+        {
+          "ja": "【装備比較 modal】 巻物UI (4隅L字bracket+中央朱印「比」+古紙+朱赤グラデ下線+Δ大字 glow)、 MAX% rank別配色 (gold/purple/blue)、 100%到達時 虹色 hue回転アニメ、 PvP専用定音 (定音6枠) 対応、 装備Lv上限を キャラクターLvに制限。",
+          "en": "[Gear Compare Modal] Scroll UI (corner L-brackets + central seal '比' + paper + crimson gradient underline + large Δ score with glow). MAX% rank colors (gold/purple/blue). Rainbow hue-rotate animation when reaching 100%. PvP-only Attune slot (Attune 6) support. New gear Lv capped at character Lv.",
+          "zh": "【装备对照 modal】 卷轴UI (四角L形括号+中央朱印「比」+古纸+朱红渐变下划线+Δ大字 glow)、 MAX% rank 别配色 (金/紫/蓝)、 达到100%时彩虹色相旋转动画、 PvP专用定音 (定音6) 支持、 新置装备等级上限为角色等级。",
+          "ko": "【장비 비교 modal】 두루마리 UI (네 모서리 L-bracket+중앙 인장「比」+종이+주홍 그라데이션 밑줄+Δ 큰 글자 glow)、 MAX% 등급별 색상 (금/보라/파랑)、 100% 도달 시 무지개 색조 회전 애니메이션、 PvP 전용 정음 (정음 6) 대응、 신규 장비 레벨 상한을 캐릭터 레벨로 제한."
+        },
+        {
+          "ja": "【心法 modal】 装備比較UIに統一 (4隅bracket+朱印+Δscore+採用/復元/離脱)、 Tier 効果リスト (T0〜T6)、 武術属性専用心法 の effects 値補完 (T2攻撃/T5貫通/DMG)。",
+          "en": "[Xinfa Modal] Unified with Gear Compare UI (corner brackets + seals + Δ score + Apply/Restore/Cancel). Tier effect list (T0–T6). Filled in effects values for element-specific xinfa (T2 ATK / T5 Pen / DMG).",
+          "zh": "【心法 modal】 统一为装备对照UI (四角括号+朱印+Δ分数+采用/恢复/取消)、 Tier 效果列表 (T0〜T6)、 武学属性专用心法 effects 值补全 (T2攻击/T5穿透/伤害)。",
+          "ko": "【심법 modal】 장비 비교 UI 로 통일 (네 모서리 bracket+인장+Δ score+채용/복원/취소)、 Tier 효과 리스트 (T0〜T6)、 무술 속성 전용 심법 effects 값 보완 (T2 공격/T5 관통/DMG)."
+        },
+        {
+          "ja": "【格析タブ】 期待値ランキング (調律/定音) / ステータス効率分析 (装備1個分 Δ評価) / 装備最適化 (全体最適化) / 履歴 をタブ式で統合。",
+          "en": "[Analysis Tab] Tabbed integration of Affix Expected Value Ranking (Tune/Attune), Stat Efficiency Analysis (per-gear Δ), Gear Optimization (global), and History.",
+          "zh": "【格析标签】 期望值排行 (调律/定音) / 状态效率分析 (单装备 Δ评估) / 装备最优化 (整体最优化) / 历史记录 标签式整合。",
+          "ko": "【격석 탭】 기댓값 랭킹 (조율/정음) / 스테이터스 효율 분석 (장비 1개당 Δ 평가) / 장비 최적화 (전체 최적화) / 이력 을 탭식 통합."
+        },
+        {
+          "ja": "【飛簡 (BUILD SHARE) modal】 巻物UI、 ビルド共有URL + OBS配信用URL (5ステップ手順)。",
+          "en": "[Build Share Modal] Scroll UI with build-sharing URL + OBS streaming URL (5-step setup).",
+          "zh": "【飞简 (BUILD SHARE) modal】 卷轴UI、 配置共享URL + OBS直播URL (5步骤设置)。",
+          "ko": "【비간 (BUILD SHARE) modal】 두루마리 UI、 빌드 공유 URL + OBS 송출용 URL (5단계 설정)."
+        },
+        {
+          "ja": "【NOTE modal 統合】 仕様タブ + 更新履歴タブ (巻物UI)、 右上 バグ報告 / 追加要望 (GitHub Issues 直リンク)。",
+          "en": "[NOTE Modal] Specs tab + Changelog tab unified (scroll UI). Top-right Bug Report / Feature Request (direct GitHub Issues links).",
+          "zh": "【NOTE modal 整合】 说明标签 + 更新记录标签 (卷轴UI)、 右上角错误报告 / 功能请求 (GitHub Issues 直接链接)。",
+          "ko": "【NOTE modal 통합】 사양 탭 + 변경 이력 탭 (두루마리 UI)、 우상단 버그 보고 / 기능 요청 (GitHub Issues 직접 링크)."
+        },
+        {
+          "ja": "【スコア鮮度管理】 計算式バージョン (WWM_SCORE_VERSION) を導入。 基準値 (baseline) にバージョン刻印、 不一致時は自動破棄 + 再インポート促しバナー表示。 OBS view では基準値書込抑止。",
+          "en": "[Score Freshness] Introduced WWM_SCORE_VERSION. Baseline is version-stamped; on mismatch it's auto-discarded and a re-import banner is shown. OBS view suppresses baseline writes to keep displayed score stable.",
+          "zh": "【分数新鲜度管理】 引入计算公式版本 (WWM_SCORE_VERSION)。 基准值 (baseline) 标记版本、 不匹配时自动废弃 + 重新导入提示横幅。 OBS view 抑制基准值写入。",
+          "ko": "【점수 신선도 관리】 계산식 버전 (WWM_SCORE_VERSION) 도입. 기준값 (baseline) 에 버전 각인、 불일치 시 자동 폐기 + 재 임포트 안내 배너 표시. OBS view 에서는 기준값 기입 억제."
+        },
+        {
+          "ja": "【基準値 (baseline) 仕組み】 インポート時固定 (drift源排除)、 Base64+djb2 checksum (localStorage 改竄抑止)、 装備比較・心法変更時の基準値不変保証、 NEXT (仮想装備込) と現在 同時表示。",
+          "en": "[Baseline Mechanism] Locked at import (eliminates drift), Base64 + djb2 checksum (localStorage tamper-resistance), baseline immutable during gear/xinfa compare previews, NEXT (with virtual gear) and current shown side by side.",
+          "zh": "【基准值 (baseline) 机制】 导入时固定 (排除 drift 源)、 Base64+djb2 校验 (localStorage 防篡改)、 装备对照·心法变更时基准值不变保证、 NEXT (虚拟装备含) 与当前同时显示。",
+          "ko": "【기준값 (baseline) 구조】 임포트 시 고정 (drift 원인 배제)、 Base64+djb2 체크섬 (localStorage 변조 억제)、 장비 비교·심법 변경 시 기준값 불변 보장、 NEXT (가상 장비 포함) 와 현재 동시 표시."
+        },
+        {
+          "ja": "【装備データ駆動】 外部インポート → 装備カード/心法カード 自動描画、 装備Lv tier 別 調律・定音 上限値テーブル (equip_max.json) 反映、 PvP専用定音 (定音6枠) 表示対応、 武術/セット 切替対応。",
+          "en": "[Gear-Driven Rendering] External import auto-renders gear/xinfa cards. Tier-based Tune/Attune max values (equip_max.json). PvP-only Attune slot (Attune 6) display. Martial arts / set switching in compare mode.",
+          "zh": "【装备数据驱动】 外部导入 → 装备卡/心法卡自动渲染、 装备等级 tier 别 调律·定音上限表 (equip_max.json) 反映、 PvP专用定音 (定音6) 显示对应、 武学/装备一式切换。",
+          "ko": "【장비 데이터 구동】 외부 임포트 → 장비/심법 카드 자동 렌더링、 장비 레벨 tier 별 조율·정음 상한 테이블 (equip_max.json) 반영、 PvP 전용 정음 (정음 6) 표시 대응、 무술/장비 한 식 전환 대응."
+        },
+        {
+          "ja": "【プリセット】 複数スロット 保存/読込/削除、 インポートスナップ + state + 仮想装備 + 基準値 を同梱、 過去バージョンの基準値は自動破棄 (drift 回避)。",
+          "en": "[Presets] Multi-slot save/load/delete. Each preset bundles import snapshot, state, virtual gear, and baseline. Old-version baselines auto-discarded (drift avoidance).",
+          "zh": "【预设】 多槽位保存/读取/删除、 导入快照+state+虚拟装备+基准值同捆、 旧版本基准值自动废弃 (避免 drift)。",
+          "ko": "【프리셋】 멀티 슬롯 저장/읽기/삭제、 임포트 스냅샷+state+가상 장비+기준값 동봉、 구버전 기준값 자동 폐기 (drift 회피)."
+        },
+        {
+          "ja": "【多言語 4言語化】 日本語 / 英語 / 中国語 (簡体) / 韓国語 を全UI・データに対応。 武術 英短縮表記 (Sword→SD / Spear→SP / Blade→BL / Twinblades→TB / Umbrella→UM / Fan→FN / Rope Dart→RD)、 セット効果名 末尾 ' Set' 削除 (英表記)、 旧名→新名統一 (Change SD→Strategic SD 等)。",
+          "en": "[Localization — 4 Languages] Japanese / English / Chinese (Simplified) / Korean for all UI and data. Martial arts abbreviated in English (Sword→SD / Spear→SP / Blade→BL / Twinblades→TB / Umbrella→UM / Fan→FN / Rope Dart→RD). Set name suffix ' Set' removed in English. Legacy aliases unified (Change SD → Strategic SD, etc.).",
+          "zh": "【多语言 4语言对应】 日语 / 英语 / 简体中文 / 韩语 全UI·数据对应。 武学英文缩写 (Sword→SD / Spear→SP / Blade→BL / Twinblades→TB / Umbrella→UM / Fan→FN / Rope Dart→RD)、 装备一式效果名末尾 ' Set' 删除 (英语)、 旧名→新名统一 (Change SD→Strategic SD 等)。",
+          "ko": "【다국어 4언어화】 일본어 / 영어 / 중국어 (간체) / 한국어 를 전 UI·데이터에 대응. 무술 영어 약식 표기 (Sword→SD / Spear→SP / Blade→BL / Twinblades→TB / Umbrella→UM / Fan→FN / Rope Dart→RD)、 장비 한 식 효과명 말미 ' Set' 삭제 (영어)、 구명→신명 통일 (Change SD → Strategic SD 등)."
+        },
+        {
+          "ja": "【ライトモード】 主文字色 / 適用値 (濃amber 統一) / hero 朱筆 maskフェード / 竹SVG 視認UP / インポート modal コントラスト改善 / S Tier アニメ滑らか化 / mini-hero S・A・B・C デザイン hero と統一。",
+          "en": "[Light Mode] Main text color, applied-value (unified deep amber), hero brush mask-fade, bamboo SVG visibility, import modal contrast, smoother S-tier animation, and mini-hero S/A/B/C design synced with hero panel.",
+          "zh": "【浅色模式】 主文字色 / 适用值 (统一深 amber) / hero 朱笔 mask 渐变 / 竹 SVG 可视性提升 / 导入 modal 对比度改善 / S Tier 动画平滑化 / mini-hero S·A·B·C 设计与 hero 统一。",
+          "ko": "【라이트 모드】 주문자색 / 적용값 (통일 진한 amber) / hero 붓 mask 페이드 / 대나무 SVG 가시성 향상 / 임포트 modal 대비 개선 / S Tier 애니메이션 매끄럽게 / mini-hero S·A·B·C 디자인 hero 통일."
+        },
+        {
+          "ja": "【データ拡張】 心法 Tier5 全42件反映、 武術 derived (基礎値→ステータス変換) 反映、 武術属性 (鋼鳴/砕岩/糸操/瞬嵐) 追加、 心法 ID 551-554 (砕岩武術属性 新心法) 追加、 心法 553「穿喉の訣」 effects + シナジー 3段階倍率化 (斬雪・断魂30%/墨筆・千紅15%/他0%)。",
+          "en": "[Data Expansion] All 42 Tier 5 xinfa effects applied, martial-arts derived stats (base→derived) implemented, martial elements added (Bellstrike/Stonesplit/Silkbind/Bamboocut), new Stonesplit-element xinfa added (IDs 551-554), xinfa 553 'Throat-Piercing Art' effects + 3-tier synergy multipliers (Snowparting/Thundercry 30% / Inkwell/Crimson 15% / others 0%).",
+          "zh": "【数据扩展】 心法 Tier5 全42件反映、 武学 derived (基础值→属性变换) 反映、 武学属性 (钢鸣/碎岩/丝操/瞬岚) 添加、 心法 ID 551-554 (碎岩武学属性新心法) 添加、 心法 553「穿喉诀」 effects + 协同 3段倍率化 (斩雪·嗟夫30%/青山·九重15%/其他0%)。",
+          "ko": "【데이터 확장】 심법 Tier5 전 42건 반영、 무술 derived (기초값→스테이터스 변환) 반영、 무술 속성 (강명/쇄암/사조/순람) 추가、 심법 ID 551-554 (쇄암 무술 속성 신심법) 추가、 심법 553「관목결」 effects + 시너지 3단계 배율화 (만설·탄식 30% / 청산·봄의 선율 15% / 기타 0%)."
+        },
+        {
+          "ja": "【OBS Share】 配信用 URL生成 + 表示専用モード (wwm-view-sidebar)、 OBS view では基準値書込抑止、 カラーカスタマイズ 6項目。",
+          "en": "[OBS Share] Streaming URL generation + display-only mode (wwm-view-sidebar). Baseline writes suppressed in OBS view. 6 color customization options.",
+          "zh": "【OBS Share】 直播URL生成 + 显示专用模式 (wwm-view-sidebar)、 OBS view 抑制基准值写入、 颜色自定义 6项。",
+          "ko": "【OBS Share】 송출용 URL 생성 + 표시 전용 모드 (wwm-view-sidebar)、 OBS view 에서는 기준값 기입 억제、 색상 커스터마이즈 6항목."
+        },
+        {
+          "ja": "【旧UI 完全駆除】 旧 手動入力UI / 関連 JS 関数群 / 旧 詳細table / 効率分析table / hidden span / 関連CSS 削除。 累計 -1,189行。",
+          "en": "[Legacy UI Removal] Old manual input UI, associated JS functions, legacy detail table, efficiency table, hidden spans, and related CSS removed. Total -1,189 lines.",
+          "zh": "【旧UI 完全清除】 旧手动输入UI / 关联JS函数 / 旧详细表 / 效率分析表 / 隐藏 span / 关联CSS 删除。 累计 -1,189 行。",
+          "ko": "【구 UI 완전 제거】 구 수동 입력 UI / 관련 JS 함수군 / 구 상세 table / 효율 분석 table / hidden span / 관련 CSS 삭제. 누계 -1,189 라인."
+        },
+        {
+          "ja": "【バグ修正】 donut/arc DOM ちらつき / mini-hero 武格指数 表示遅延 / 装備比較復元時 NEXT 表示遅延 / 基準値 drift / 判定確率 clamp 不足 / 武具対照 新置入力box 見切れ / sidebar 英ラベル折返し / input 浮動小数誤差 (step 0.01→0.1 統一) / インポート促し誤発火 / その他多数。",
+          "en": "[Bug Fixes] Donut/arc DOM flicker, mini-hero Martial Index delay, restore-button NEXT display lag, baseline drift, probability clamp gaps, gear-compare new-value input clipping, sidebar English label wrapping, input floating-point errors (step 0.01→0.1 unified), spurious import-prompt toasts, and many more.",
+          "zh": "【错误修复】 donut/arc DOM 闪烁 / mini-hero 武格指数显示延迟 / 装备对照恢复时 NEXT 显示延迟 / 基准值 drift / 判定概率 clamp 不足 / 武具对照新置输入框被裁 / sidebar 英文标签换行 / input 浮点误差 (step 0.01→0.1 统一) / 导入提示误触 / 其他多项。",
+          "ko": "【버그 수정】 donut/arc DOM 깜빡임 / mini-hero 무격지수 표시 지연 / 장비 비교 복원 시 NEXT 표시 지연 / 기준값 drift / 판정 확률 clamp 부족 / 장비 대조 신규 입력 box 잘림 / sidebar 영문 라벨 줄바꿈 / input 부동소수점 오차 (step 0.01→0.1 통일) / 임포트 안내 오발화 / 기타 다수."
+        }
+      ]
+    },
     {
       "version": "1.5.0",
       "date": "2026-05-26",
