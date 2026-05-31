@@ -3555,7 +3555,7 @@
     },
     "modes": {},
     "defaultMode": "default",
-    "description": "斬雪100%/断魂・墨筆・千紅50%/他0% — 軽重撃派生で穿喉8s/最大3 (T4で5)、stack毎 outerRes無視2/critBoost+2%",
+    "description": "斬雪・断魂30%/墨筆・千紅15%/他0% — 軽重撃派生で穿喉8s/最大3 (T4で5)、stack毎 outerRes無視2/critBoost+2%",
     "attributeBuff": {
       "tier0": {
         "permanent": true,
@@ -3566,10 +3566,11 @@
           20601
         ],
         "synergyKongfu": [
-          20801
+          20801,
+          20401
         ],
-        "synergyMultiplier": 1,
-        "synergyMissingMultiplier": 0.5,
+        "synergyMultiplier": 0.3,
+        "synergyMissingMultiplier": 0.15,
         "effects": {
           "globalDmgBoost": 0.01
         },
@@ -3584,14 +3585,16 @@
           20601
         ],
         "synergyKongfu": [
-          20801
+          20801,
+          20401
         ],
-        "synergyMultiplier": 1,
-        "synergyMissingMultiplier": 0.5,
+        "synergyMultiplier": 0.3,
+        "synergyMissingMultiplier": 0.15,
         "effects": {
-          "globalDmgBoost": 0.01
+          "outerPen": 6,
+          "critBoost": 0.06
         },
-        "raw": "穿喉持続15秒延長"
+        "raw": "穿喉持続15秒延長 (3stack時 外功貫通+6 / 会心ダメ+6%)"
       },
       "tier2": {
         "permanent": true,
@@ -3613,14 +3616,16 @@
           20601
         ],
         "synergyKongfu": [
-          20801
+          20801,
+          20401
         ],
-        "synergyMultiplier": 1,
-        "synergyMissingMultiplier": 0.5,
+        "synergyMultiplier": 0.3,
+        "synergyMissingMultiplier": 0.15,
         "effects": {
-          "globalDmgBoost": 0.01
+          "outerPen": 3,
+          "critBoost": 0.03
         },
-        "raw": "穿喉強化: 外功耐性無視3/会心ダメ+3%へ"
+        "raw": "穿喉強化: 外功耐性無視3/会心ダメ+3%へ (差分3stack時 外功貫通+3 / 会心ダメ+3%)"
       },
       "tier4": {
         "permanent": true,
@@ -3631,14 +3636,16 @@
           20601
         ],
         "synergyKongfu": [
-          20801
+          20801,
+          20401
         ],
-        "synergyMultiplier": 1,
-        "synergyMissingMultiplier": 0.5,
+        "synergyMultiplier": 0.3,
+        "synergyMissingMultiplier": 0.15,
         "effects": {
-          "globalDmgBoost": 0.01
+          "outerPen": 6,
+          "critBoost": 0.06
         },
-        "raw": "穿喉最大5stackへ"
+        "raw": "穿喉最大5stackへ (+2stack分 外功貫通+6 / 会心ダメ+6%)"
       },
       "tier5": {
         "permanent": true,
@@ -3656,10 +3663,11 @@
           20601
         ],
         "synergyKongfu": [
-          20801
+          20801,
+          20401
         ],
-        "synergyMultiplier": 1,
-        "synergyMissingMultiplier": 0.5,
+        "synergyMultiplier": 0.3,
+        "synergyMissingMultiplier": 0.15,
         "effects": {
           "globalDmgBoost": 0.01
         },

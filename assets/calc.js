@@ -1,7 +1,7 @@
 // ── 計算バージョン ──────────────────────────────────────────────
 // スコア計算に影響する変更 (xinfa/kongfu 付与量, calc/stats の式, equip_base 等) を入れた時だけ +1。
 // UI/色/i18n/レイアウト変更では上げない。baseline の鮮度判定に使う (古い→再import 促しバナー)。
-window.WWM_SCORE_VERSION = 3;
+window.WWM_SCORE_VERSION = 4;
 
 // ── 共通計算層 ────────────────────────────────────────────────
 // params object から innerPhys/outerBoost/各確率を計算。
