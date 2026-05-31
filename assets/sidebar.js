@@ -1098,7 +1098,13 @@ function _shareBuildUrl() {
   const ri = window.__WWM_ROLEINFO;
   if (!ri) { alert('build データなし。先に import してください。'); return; }
   const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
-  const payload = { v: 1, data: ri, state: state || null };
+  // payload 軽量化: base64画像 (avatar / xinfaIcons) を除外。
+  // 巨大 base64 (100KB超) で URL長 OBS browser source 上限超え → hash truncate → JSON parse 失敗バグ防止。
+  // OBS view では _avatarUrl / 静的アイコン fallback で代用可能。
+  const riLight = { ...ri };
+  delete riLight._avatarBase64;
+  delete riLight._xinfaIconsBase64;
+  const payload = { v: 1, data: riLight, state: state || null };
   let url, b64;
   try {
     const json = JSON.stringify(payload);
