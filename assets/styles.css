@@ -3180,6 +3180,7 @@ html[data-theme="light"] .wwm-opt-loading {
   font-family: var(--f-mono);
   font-size: var(--text-sm); font-weight: var(--fw-bold);
   letter-spacing: 0.08em;
+  white-space: nowrap; /* ヘッダ高さズレ防止: en「Apply Selected」 等で2行wrap 起きないように */
 }
 .wwm-opt-btn:hover {
   background: rgba(212,175,55,0.1); border-color: var(--gold);
