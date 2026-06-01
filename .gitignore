@@ -5,6 +5,7 @@ docs/
 DESIGN.md
 design-tokens.json
 design-preview.html
+score-stamp-preview.html
 data/inner_way_tier_data_raw.csv
 data/extract_tier5.js
 data/apply_tier5.js
