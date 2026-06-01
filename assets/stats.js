@@ -156,6 +156,36 @@ async function buildStatParams(roleInfo, state) {
     if (ef[maxAddKey]) _acc(r, kKeys.max, ef[maxAddKey]);
   }
 
+  // 4.6 武術 (kongfu) synergyEffects: 主×副 ペア成立時のみ発動する effects (順序不問)
+  // 例: 断魂(20401)×嵐雷(20103) → bonusCritRate +0.24 (judgeRes不影響/cap内、 心法のsynergyMultiplierとは別系統)
+  // 重複発火防止: 同一 synergyEffect entry を 主・副ループ両方で読まないよう Set 管理
+  {
+    const equippedKfSet = new Set(
+      [roleInfo?.kongfuMain, roleInfo?.kongfuSub].filter(Boolean).map(String)
+    );
+    const seenSynergyKeys = new Set();
+    for (const kid of [roleInfo?.kongfuMain, roleInfo?.kongfuSub]) {
+      const kf = window.WWM_KONGFU?.[kid];
+      if (!kf || !Array.isArray(kf.synergyEffects)) continue;
+      for (let i = 0; i < kf.synergyEffects.length; i++) {
+        const synEntry = kf.synergyEffects[i];
+        if (!synEntry || !Array.isArray(synEntry.with) || !synEntry.effects) continue;
+        // 重複発火防止 key (kid+index、 主・副ループで同一 entry再読防止)
+        const dedupKey = String(kid) + '#' + i;
+        if (seenSynergyKeys.has(dedupKey)) continue;
+        // with配列全要素が装備中 kongfu set に含まれるか check (順序不問)
+        const allMet = synEntry.with.every(w =>
+          equippedKfSet.has(String(w)) || equippedKfSet.has(String(Number(w)))
+        );
+        if (!allMet) continue;
+        seenSynergyKeys.add(dedupKey);
+        for (const [k, v] of Object.entries(synEntry.effects)) {
+          if (typeof v === 'number') _acc(r, k, v);
+        }
+      }
+    }
+  }
+
   // 5. 心法 (state.xinfaTiers の Tier値で適用、tier0-6 順次解放)
   //   T2/T5 = 武器条件なし常時、 他Tier = kongfuRequired あれば 主or副 一致必要
   const tiers = state?.xinfaTiers || { 0:6, 1:6, 2:6, 3:6 };
@@ -232,15 +262,15 @@ async function buildStatParams(roleInfo, state) {
   const dBody     = (r.body     || 0) - baseFive.body;
   const dDefense  = (r.defense  || 0) - baseFive.defense;
   const dAgility  = (r.agility  || 0) - baseFive.agility;
-  const dPower    = (r.momentum    || 0) - baseFive.momentum;
-  const dMomentum = (r.power || 0) - baseFive.power;
+  const dMomentum = (r.momentum || 0) - baseFive.momentum;  // 会の増加分 (8199224 全swap後: 内部 momentum=会)
+  const dPower    = (r.power    || 0) - baseFive.power;     // 力の増加分 (8199224 全swap後: 内部 power=力)
 
   _acc(r, 'maxHp',    dBody*60 + dDefense*17);
   _acc(r, 'physDef',  dDefense*0.5);
-  _acc(r, 'minPhys',  dAgility*0.9 + dMomentum*0.225);
-  _acc(r, 'maxPhys',  dPower*0.9   + dMomentum*1.36);
-  _acc(r, 'crit',     dAgility*0.00076);  // 速 → 会心率 only
-  _acc(r, 'affinity', dPower*0.00038);    // 会 → 会意率 only
+  _acc(r, 'minPhys',  dAgility*0.9 + dPower*0.225);          // 速*0.9 + 力*0.225
+  _acc(r, 'maxPhys',  dMomentum*0.9 + dPower*1.36);          // 会*0.9 + 力*1.36
+  _acc(r, 'crit',     dAgility*0.00076);   // 速 → 会心率 only
+  _acc(r, 'affinity', dMomentum*0.00038);  // 会 → 会意率 only
 
   // 8. active path → minElemMain/maxElemMain
   const activePath = _resolvePath(roleInfo?.kongfuMain);
@@ -486,12 +516,16 @@ async function buildStatParams(roleInfo, state) {
     const _jr = r.judgeRes || 1.45;
     r.appliedHit = Math.max(0, Math.min(1, _raw < 0.65 ? _raw : 0.65 + (_raw - 0.65) / _jr));
   }
+  // appliedCrit: ゲーム実機の会心率表記用 (bonusCritRate 抜き、 judgeRes割込み + cap 80%)。 サイドパネル「会心率」 行の (applied) はこの値。
+  // critRateBoosted: 実効会心率 (bonusCritRate 込み、 cap 80%)。 hiddenStat 表示用 + 後段 finalCrit / 期待値ダメージ計算で参照。
   r.appliedCrit      = Math.min(0.8, (r.crit || 0) / judgeResApplied);
+  r.critRateBoosted  = Math.min(0.8, r.appliedCrit + (r.bonusCritRate || 0));
   r.appliedSympathy  = Math.min(0.4, (r.affinity || 0) / judgeResApplied);
 
   // 13. 最終会心率/会意率 (calc.js _computeCoreLayer式準拠: cap内 + directCrit/Affinity 加算、 0..1 clamp)
+  // finalCrit は critRateBoosted (bonusCritRate込み) 参照 → 実ダメージ (期待値) と一致。 appliedCrit (bonus抜き、 ゲーム実機表記) ではない。
   r.finalSympathy = Math.min(1, r.appliedSympathy + (r.directAffinity || 0));
-  r.finalCrit     = Math.max(0, Math.min(1 - r.finalSympathy, r.appliedCrit + (r.directCrit || 0)));
+  r.finalCrit     = Math.max(0, Math.min(1 - r.finalSympathy, r.critRateBoosted + (r.directCrit || 0)));
   // 最終発動率 (calc.js pCrit/pSympathy/pGraze/pNormal 同等)
   r.pSympathy = r.finalSympathy;
   r.pCrit     = r.appliedHit * r.finalCrit;

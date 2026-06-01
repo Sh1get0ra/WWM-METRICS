@@ -1,6 +1,19 @@
 {
-  "current": "2.0.0",
+  "current": "2.0.1",
   "entries": [
+    {
+      "version": "2.0.1",
+      "date": "2026-06-01",
+      "items": [
+        {
+          "featured": true,
+          "ja": "【ボーナス会心率 追加】 断魂の刀と嵐雷の槍をセットで登録した場合、 会心率を24%上昇させる仕様設計にした。 サイドパネルの 会心率行 を展開すると 「実効会心率(ボーナス込み)」 を内部値色 (スレート青) で確認可能。 ゲーム実機表記の会心率には反映されないが、 実ダメージ計算/期待値/装備最適化 すべてで考慮済。",
+          "en": "[Bonus Crit Rate Added] When Thundercry Blade and Stormbreaker Spear are equipped together as a set, Crit Rate is increased by 24% by design. Expanding the Crit Rate row in the sidebar reveals 'Effective Crit (with Bonus)' in the internal-value color (slate blue). It does not show on the game's native Crit Rate display, but is fully accounted for in actual damage / expected value / gear optimization.",
+          "zh": "【奖励会心率 追加】 嗟夫刀法与八方风雷枪同时装备时, 会心率提升 24% 的设计规格。 展开侧边栏的会心率行可查看「实效会心率(含奖励)」, 以内部值颜色 (石板蓝) 显示。 不会反映在游戏原生会心率显示中, 但实际伤害 / 期望值 / 装备优化 已完全考量。",
+          "ko": "【보너스 치명타 확률 추가】 탄식의 검기와 풍뢰의 징표를 세트로 등록할 경우, 치명타 확률을 24% 상승시키는 사양으로 설계. 사이드 패널의 치명타 확률 행을 펼치면 「실효 치명타 확률(보너스 포함)」 을 내부값 색상 (슬레이트 블루) 으로 확인 가능. 게임 내 치명타 확률 표시에는 반영되지 않지만, 실제 데미지 / 기댓값 / 장비 최적화 에는 모두 반영됨."
+        }
+      ]
+    },
     {
       "version": "2.0.0",
       "date": "2026-05-31",

@@ -1770,6 +1770,11 @@ html[data-theme="light"] .wwm-sb-top { background: #f5ead0; }
 .wwm-sb-applied { color: #d4af37; opacity: 0.85; font-size: 0.78em; margin-left: 4px; }
 /* light: sidebar 適用値 (判定確率の括弧内) を濃amberに (cream上で gold が低コントラストのため) */
 html[data-theme="light"] .wwm-sb-applied { color: #8a5212; opacity: 1; }
+/* hiddenStat: ゲーム実機で見えない内部値 (例 critRateBoosted = ボーナス会心率込みの実効会心率) → スレート青で区別 */
+.wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-label,
+.wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-value { color: #7a93b0; }
+html[data-theme="light"] .wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-label,
+html[data-theme="light"] .wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-value { color: #3d5266; }
 .wwm-sb-baseline { color: var(--paper-mute); opacity: 0.7; font-weight: var(--fw-medium); }
 .wwm-sb-arrow {
   color: var(--gold); margin: 0 3px; opacity: 0.7;

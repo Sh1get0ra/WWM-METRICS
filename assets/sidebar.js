@@ -1371,6 +1371,8 @@ function _fmtItem(item, params, baseParams) {
 function _renderItem(item, params, depth, baseParams) {
   depth = depth || 0;
   const cls = depth > 0 ? ' wwm-sb-sub' : '';
+  // hiddenStat: ゲーム実機で見えない内部値 (例 critRateBoosted) → 色差別化
+  const hiddenCls = item.hiddenStat ? ' wwm-sb-hidden-stat' : '';
   // cap未到達 / 無駄属性ATK 警告
   const cw = params?._capWarnings?.[item.key];
   const ww = params?._wasteWarnings?.[item.key];
@@ -1381,7 +1383,7 @@ function _renderItem(item, params, depth, baseParams) {
     warnIcon = ` <span class="wwm-sb-warn" title="${wTitle}">⚠</span>`;
   }
   let html = `
-    <div class="wwm-sb-row${cls}" data-item-key="${item.key}">
+    <div class="wwm-sb-row${cls}${hiddenCls}" data-item-key="${item.key}">
       <span class="wwm-sb-label">${_label(item.label, item.key)}${warnIcon}</span>
       <span class="wwm-sb-value">${_fmtItem(item, params, baseParams)}</span>
     </div>

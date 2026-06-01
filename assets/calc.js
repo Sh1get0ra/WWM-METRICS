@@ -1,7 +1,7 @@
 // ── 計算バージョン ──────────────────────────────────────────────
 // スコア計算に影響する変更 (xinfa/kongfu 付与量, calc/stats の式, equip_base 等) を入れた時だけ +1。
 // UI/色/i18n/レイアウト変更では上げない。baseline の鮮度判定に使う (古い→再import 促しバナー)。
-window.WWM_SCORE_VERSION = 8;
+window.WWM_SCORE_VERSION = 9;
 
 // ── 共通計算層 ────────────────────────────────────────────────
 // params object から innerPhys/outerBoost/各確率を計算。
@@ -28,8 +28,10 @@ function _computeCoreLayer(p) {
   const critRateAdj     = judgeRes === 0 ? (p.critRate || 0)     : (p.critRate || 0)     / judgeRes;
   // 付加会心率/共鳴率は基本値の上限(40%/80%)を突破可能。会心+共鳴の100%制限は維持。
   // appliedSympathy が1超過するケースに備え 0..1 にclamp。appliedCrit も負値防止。
+  // bonusCritRate (新): kongfu synergyEffects 経由 (断魂×嵐雷 等)。 judgeRes 不影響、 critRate と加算後 cap内 (80%)。 addCritRate は cap突破可で 別レイヤー維持。
   const appliedSympathy = Math.min(1, Math.min(0.4, sympathyRateAdj) + (p.addSympathyRate || 0));
-  const appliedCrit     = Math.max(0, Math.min(1 - appliedSympathy, Math.min(0.8, critRateAdj) + (p.addCritRate || 0)));
+  const critRateBoosted = Math.min(0.8, critRateAdj + (p.bonusCritRate || 0));
+  const appliedCrit     = Math.max(0, Math.min(1 - appliedSympathy, critRateBoosted + (p.addCritRate || 0)));
   // appliedHit 下限 0 clamp: judgeRes < 1 (manual モード極端設定) で hitRate < 0.65 のとき
   // 0.65 + (負) / judgeRes が負値化 → (1-appliedHit) > 1 で pGraze 破綻するのを防止。
   const appliedHit      = judgeRes === 0 ? Math.max(0, Math.min(1, p.hitRate || 0)) : Math.max(0, Math.min(1, 0.65 + ((p.hitRate || 0) - 0.65) / judgeRes));
@@ -43,7 +45,7 @@ function _computeCoreLayer(p) {
   const pNormal   = Math.max(0, 1 - pCrit - pSympathy - pGraze);
 
   return { physPenZone, elemPenZone, innerPhys, innerElem, outerBoost, reductionZone,
-           pSympathy, pCrit, pGraze, pNormal, critRateAdj, sympathyRateAdj };
+           pSympathy, pCrit, pGraze, pNormal, critRateAdj, sympathyRateAdj, critRateBoosted };
 }
 window._computeCoreLayer = _computeCoreLayer;
 

@@ -250,6 +250,13 @@
         "formula": "linear_capped",
         "weaponSpecific": "stonesplit"
       }
+    ],
+    "synergyEffects": [
+      {
+        "with": [20103],
+        "effects": { "bonusCritRate": 0.24 },
+        "raw": "断魂×嵐雷ペア時 ボーナス会心率+24% (本来 断魂チャージ専用効果、 嵐雷とのセット活用時 全体反映の設計判断、 内部 bonusCritRate 経由: judgeRes不影響/cap内加算/レベルキャップ上昇で増加可能性)"
+      }
     ]
   },
   "20402": {
