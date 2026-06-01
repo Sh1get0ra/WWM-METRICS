@@ -1899,7 +1899,8 @@ body.wwm-layout-active {
   display: block !important;
 }
 body.wwm-layout-active .sticky-header {
-  position: fixed; top: 0; left: 0; right: 0;
+  position: sticky; top: 0; /* fixed → sticky: body横scrollと連動して動く */
+  min-width: 1010px; /* 圧縮停止: wwm-app-body と同じ threshold */
   height: 135px;
   z-index: var(--z-overlay);
   background: transparent;
@@ -1914,7 +1915,7 @@ body.wwm-layout-active .sticky-header > .preset-bar {
 body.wwm-layout-active .wwm-footer { display: block; }
 body.wwm-layout-active .wwm-app-body {
   height: calc(100vh - 135px - 32px);
-  margin: 135px auto 0;
+  margin: 0 auto; /* sticky-header が in-flow になったため margin-top 135 不要 */
   max-width: 1280px;
   min-width: 1010px; /* 圧縮停止ライン: window 1010px 以下で body横スクロール発生、 各panel内部レイアウト崩壊防止 */
   width: 100%;
