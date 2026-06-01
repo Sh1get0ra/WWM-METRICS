@@ -135,9 +135,7 @@ async function buildStatParams(roleInfo, state) {
       if (tier.max) { _acc(r, keys.max, tier.max); _arsMaxSum += tier.max; }
     }
   }
-  r._arsMinSum = _arsMinSum;
-  r._arsMaxSum = _arsMaxSum;
-  // NOTE: r._arsPath は read 0件で死コードのため削除済 (2026-06-01)。 state.arsenal.path 必要時は state から直接読む。
+  // NOTE: r._arsMinSum / r._arsMaxSum / r._arsPath は read 0件で死コードのため削除済 (2026-06-01)。 武庫合計値が必要な L289-290 (副属性枠) は local 変数 `_arsMinSum`/`_arsMaxSum` を直接使用、 state.arsenal.path 必要時は state から直接読む。
 
   // 4.5 武術 (kongfu) effects: 主+副 の minElemMainAdd/maxElemMainAdd → path-specific min/max のみ
   for (const kid of [roleInfo?.kongfuMain, roleInfo?.kongfuSub]) {
