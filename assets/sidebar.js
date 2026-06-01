@@ -1603,14 +1603,16 @@ function renderGearGrid(roleInfo) {
     const score = calcCardScore(eq);
     const shortKf = (n) => {
       if (!n || lang !== 'en') return n;
+      // 武器種類サフィックス (Sword/Spear/Blade/Twinblades/Umbrella/Fan/Rope Dart) を完全削除。
+      // 前詞 (Stormbreaker / Thundercry 等) で ユーザーは武術判別可能、 武器種類は装備カードの slot label (主武器/副武器) で示唆済のため冗長。
       return n
-        .replace(/\s+Rope Dart$/i, ' RD')
-        .replace(/\s+Twinblades$/i, ' TB')
-        .replace(/\s+Sword$/i, ' SD')
-        .replace(/\s+Spear$/i, ' SP')
-        .replace(/\s+Blade$/i, ' BL')
-        .replace(/\s+Umbrella$/i, ' UM')
-        .replace(/\s+Fan$/i, ' FN');
+        .replace(/\s+Rope Dart$/i, '')
+        .replace(/\s+Twinblades$/i, '')
+        .replace(/\s+Sword$/i, '')
+        .replace(/\s+Spear$/i, '')
+        .replace(/\s+Blade$/i, '')
+        .replace(/\s+Umbrella$/i, '')
+        .replace(/\s+Fan$/i, '');
     };
     let kongfuLine = '';
     if (slot === '1' && roleInfo?.kongfuMain) {
