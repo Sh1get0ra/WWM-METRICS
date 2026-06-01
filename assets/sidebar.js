@@ -701,6 +701,57 @@ window.WWMRanking = { render: renderAffixRanking };
 // ── 装備最適化提案 (Greedy 全体最適化) ────────────────────────
 let _OPT_LAST_STEPS = null;
 let _OPT_LAST_SCORES = null;
+
+// 装備部位 sort用 order map (renderOptimization + _OPT_resortRows 共通)
+const _OPT_SLOT_ORDER = { '1':0,'2':1,'3':2,'4':3,'5':4,'8':5,'10':6,'11':7,'9,21':99,'9':99,'21':99 };
+
+// sort切替時 再計算なしで rows DOM だけ即時並び替え (checked状態保持)
+function _OPT_resortRows(sortBy) {
+  if (!_OPT_LAST_STEPS || !_OPT_LAST_STEPS.length) return;
+  const body = document.querySelector('.wwm-opt-body');
+  if (!body) return;
+  // checked状態 snapshot (sort後も保持)
+  const checkedIdxs = new Set(
+    Array.from(body.querySelectorAll('.wwm-opt-check'))
+      .filter(cb => cb.checked)
+      .map(cb => parseInt(cb.dataset.optStep, 10))
+  );
+  // _OPT_LAST_STEPS に _origIdx 付与 + sort適用
+  const indexed = _OPT_LAST_STEPS.map((s, i) => ({ ...s, _origIdx: i }));
+  let view = indexed;
+  if (sortBy === 'slot') {
+    view = [...indexed].sort((a, b) => {
+      const sa = _OPT_SLOT_ORDER[String(a.slot)] ?? 50;
+      const sb = _OPT_SLOT_ORDER[String(b.slot)] ?? 50;
+      if (sa !== sb) return sa - sb;
+      return (a.idx || 0) - (b.idx || 0);
+    });
+  }
+  // rows再描画 (renderOptimization内 行構築と同形式)
+  const T = window.T || {};
+  const _fmtFromTo = (name, val, ratio, key) => {
+    const v = _fmtAffixVal(val, key);
+    const pct = ratio != null ? `(${Math.round(ratio*100)}%)` : '';
+    return `${name} ${v}${pct}`;
+  };
+  body.innerHTML = view.map((s) => {
+    const isBow = s.kind === 'bowSet';
+    const slotCol = isBow ? s.slotLabel : `${s.slotLabel}#${s.idx+1}`;
+    const changeCol = isBow
+      ? `<span class="wwm-opt-from">${s.fromName||'(未装着)'}</span> ▶ <span class="wwm-opt-to">${s.toName}</span>`
+      : `<span class="wwm-opt-from">${_fmtFromTo(s.fromName, s.fromVal, s.fromRatio, s.fromKey)}</span> ▶ <span class="wwm-opt-to">${_fmtFromTo(s.toName, s.toVal, s.toRatio, s.toKey)}</span>`;
+    const isChecked = checkedIdxs.size ? checkedIdxs.has(s._origIdx) : true;
+    return `
+    <div class="wwm-opt-row">
+      <span class="wwm-opt-pos">${s._origIdx+1}</span>
+      <span class="wwm-opt-slot">${slotCol}</span>
+      <span class="wwm-opt-change">${changeCol}</span>
+      <span class="wwm-opt-delta">+${Math.round(s.delta).toLocaleString()}</span>
+      ${s.tierUp ? `<span class="wwm-opt-tierup">★ ${s.tierUp}</span>` : '<span></span>'}
+      <label class="wwm-opt-check-wrap" title="${T.optSelectOne||'選択'}"><input type="checkbox" class="wwm-opt-check" data-opt-step="${s._origIdx}" ${isChecked?'checked':''}></label>
+    </div>
+  `;}).join('');
+}
 async function renderOptimization(roleInfo, params, opts) {
   const root = document.getElementById('wwmOptimization');
   if (!root || !roleInfo || !window.WWMStats?.buildStatParams) return;
@@ -803,7 +854,10 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
         const v = btn.dataset.sortVal;
         if (!v || v === sortEl.dataset.sort) return;
         localStorage.setItem('wwm_opt_sort_v1', v);
-        renderOptimization(roleInfo, params, { sortBy: v });
+        sortEl.dataset.sort = v;
+        sortEl.querySelectorAll('.wwm-opt-sort-btn').forEach(b => b.classList.toggle('active', b.dataset.sortVal === v));
+        // 再計算なしで rows DOM だけ即時並び替え (checked状態保持)
+        _OPT_resortRows(v);
       });
     });
     const tgEl = root.querySelector('#wwmOptToggleAll');
@@ -980,13 +1034,13 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
   };
   // sort: default (= greedy iter順=最大Δ優先) / slot (装備部位順、 弓セットは最後)
   // ※ 内部index (i+1) は元の改善順を保持表示するため、 sort前に原index 付与
-  const _slotOrder = { '1':0,'2':1,'3':2,'4':3,'5':4,'8':5,'10':6,'11':7,'9,21':99,'9':99,'21':99 };
+  // ※ _OPT_SLOT_ORDER は module-level (_OPT_resortRows と共有)
   const stepsIndexed = steps.map((s, i) => ({ ...s, _origIdx: i }));
   let stepsView = stepsIndexed;
   if (savedSort === 'slot') {
     stepsView = [...stepsIndexed].sort((a, b) => {
-      const sa = _slotOrder[String(a.slot)] ?? 50;
-      const sb = _slotOrder[String(b.slot)] ?? 50;
+      const sa = _OPT_SLOT_ORDER[String(a.slot)] ?? 50;
+      const sb = _OPT_SLOT_ORDER[String(b.slot)] ?? 50;
       if (sa !== sb) return sa - sb;
       return (a.idx || 0) - (b.idx || 0);
     });
