@@ -414,7 +414,7 @@ async function _findWastedAffixes(roleInfo) {
   const eqDet = roleInfo?.wearEquipsDetailed || {};
   for (const [slot, eq] of Object.entries(eqDet)) {
     if (['9', '21'].includes(String(slot))) continue;
-    const slotLabel = _GEAR_SLOT_LABELS[slot] || slot;
+    const slotLabel = _slotLabelI18n(slot);
     const affixes = eq?.exVo?.baseAffixes || [];
     for (let i = 0; i < affixes.length; i++) {
       const d = affixes[i]?.equipmentDetails;
@@ -896,7 +896,7 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
             const delta = newScore - curScore;
             if (delta > 0 && (!best || delta > best.delta)) {
               best = {
-                slot, slotLabel: _GEAR_SLOT_LABELS[slot] || slot, idx,
+                slot, slotLabel: _slotLabelI18n(slot), idx,
                 fromKey: curStatKey, fromName: _affixDisplayName(cur[0]),
                 fromVal: cur[1], fromRatio: cur[2],
                 toName: opt.name, toId: parseInt(opt.id, 10),
@@ -931,7 +931,7 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
             const newName = window.WWM_SETS.bowSets[sfxInt]?.names?.[lang] || window.WWM_SETS.bowSets[sfxInt]?.names?.ja || '';
             best = {
               kind: 'bowSet',
-              slot: '9,21', slotLabel: '弓矢/射玦',
+              slot: '9,21', slotLabel: _slotLabelI18n('21') + '/' + _slotLabelI18n('9'),
               fromName: oldName, fromSuffix: curBowSuffix,
               toName: newName, toSuffix: sfxInt,
               delta, newScore
@@ -1532,6 +1532,11 @@ const _GEAR_SLOT_LABELS = new Proxy({}, {
     return _GEAR_SLOT_LABELS_JA[slot];
   }
 });
+// 装備最適化/Affix Rankingなど装備カード以外で使う i18n 装備slot ラベル
+function _slotLabelI18n(slot) {
+  const key = _GEAR_SLOT_I18N_KEY[slot];
+  return (key && window.T && window.T[key]) || _GEAR_SLOT_LABELS_JA[slot] || slot;
+}
 // rail 縦書き専用 中国語表記 (武侠雰囲気)
 const _GEAR_RAIL_ZH = {
   '1': '主武器', '2': '副武器',
