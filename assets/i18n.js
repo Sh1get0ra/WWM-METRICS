@@ -320,7 +320,7 @@ finalScore  = statusScore + 4-set bonus (4点一式効果発動時)</pre>
     sharePreviewTitle:'Preview (640×900 scaled down)', sharePreviewScaleLabel:'Scale',
     shareMsgCopyOK:'✓ {label} copied', shareMsgCopyManual:'Please copy manually',
     optSlotAll:'All Gear', optSlotWeapon:'Main/Sub Weapon', optSlotAccessory:'Ring/Pendant', optSlotArmor:'Armor',
-    optApplyAll:'Apply All', optApplyOne:'Apply', optApplySelected:'Apply Selected', optRecalc:'Recalc', optTargetRatio:'Target',
+    optApplyAll:'Apply All', optApplyOne:'Apply', optApplySelected:'Apply', optRecalc:'Recalc', optTargetRatio:'Target',
     railOpt:'OPT', railRank:'RANK', railDiag:'DIAG',
     slotMain:'Main Weapon', slotSub:'Sub Weapon', slotHelm:'Helm', slotChest:'Chest', slotLegs:'Greaves', slotHands:'Gauntlets', slotRing:'Ring', slotPendant:'Pendant', slotBow:'Bow', slotDisc:'Archer Disc',
     importStep1Title:'Step 1: Bookmarklet Initial Setup (open only if not yet registered)',
