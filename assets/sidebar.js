@@ -1627,10 +1627,12 @@ function renderGearGrid(roleInfo) {
       <div class="wwm-equip-slot" data-slot="${slot}" onclick="WWMGear.openEdit('${slot}')">
         <div class="wwm-equip-rail"><span class="wwm-equip-rail-text">${railLabel}</span></div>
         ${iconHtml}
-        <span class="wwm-equip-stamp" data-card-score="${slot}"><span class="wwm-equip-stamp-score">…</span></span>
-        <div class="wwm-equip-slot-body">
-          ${kongfuLine}
-          ${setName ? `<span class="wwm-equip-setname">${setName}</span>` : ''}
+        <div class="wwm-equip-slot-inner">
+          <div class="wwm-equip-slot-header">${setName ? `<span class="wwm-equip-setname">${setName}</span>` : ''}</div>
+          <div class="wwm-equip-slot-body">
+            ${kongfuLine}
+            <span class="wwm-equip-card-score" data-card-score="${slot}"><b>...</b></span>
+          </div>
         </div>
       </div>
     `;
@@ -1772,15 +1774,15 @@ async function _computeGearCardScores(roleInfo) {
     if (isModified && origContrib[slot] != null && origContrib[slot] !== curScore) {
       const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
       if (isObs) {
-        el.innerHTML = `<span class="wwm-equip-stamp-score">${origContrib[slot].toLocaleString()}</span>`;
+        el.innerHTML = `<b>${origContrib[slot].toLocaleString()}</b>`;
       } else {
         const delta = curScore - origContrib[slot];
         const sign = delta > 0 ? '+' : '';
         const cls = delta > 0 ? 'wwm-equip-delta-pos' : 'wwm-equip-delta-neg';
-        el.innerHTML = `<span class="wwm-equip-stamp-score">${origContrib[slot].toLocaleString()}</span><span class="wwm-equip-stamp-delta ${cls}">${sign}${delta.toLocaleString()}</span>`;
+        el.innerHTML = `<b>${origContrib[slot].toLocaleString()}</b> <span class="wwm-equip-delta ${cls}">${sign}${delta.toLocaleString()}</span>`;
       }
     } else {
-      el.innerHTML = `<span class="wwm-equip-stamp-score">${curScore.toLocaleString()}</span>`;
+      el.innerHTML = `<b>${curScore.toLocaleString()}</b>`;
     }
   }
   // DOM 状態復元
@@ -1817,10 +1819,10 @@ function renderXinfaGrid(roleInfo) {
         ${tierChip}
         <div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法${['一','二','三','四'][i]}</span></div>
         ${iconHtml}
-        <span class="wwm-xinfa-stamp" data-xinfa-score="${i}"><span class="wwm-xinfa-stamp-score">…</span></span>
-        <div class="wwm-xinfa-slot-body">
-          <span class="wwm-xinfa-name">${name}</span>
+        <div class="wwm-xinfa-inner">
+          <div class="wwm-xinfa-header"><b>${name}</b></div>
         </div>
+        <span class="wwm-xinfa-card-score" data-xinfa-score="${i}"><b>...</b></span>
       </div>
     `;
   }).join('');
@@ -1834,10 +1836,10 @@ function renderXinfaGrid(roleInfo) {
     <div class="wwm-xinfa-slot wwm-arsenal-slot" data-arsenal-slot onclick="WWMXinfa.openArsenalEdit()">
       <div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">武庫</span></div>
       <img class="wwm-xinfa-icon" src="assets/icons/open-treasure-chest.svg" alt="">
-      <span class="wwm-xinfa-stamp" data-arsenal-score><span class="wwm-xinfa-stamp-score">…</span></span>
-      <div class="wwm-xinfa-slot-body">
-        <span class="wwm-xinfa-name">${pathName}</span>
+      <div class="wwm-xinfa-inner">
+        <div class="wwm-xinfa-header"><b>${pathName}</b></div>
       </div>
+      <span class="wwm-xinfa-card-score" data-arsenal-score><b>...</b></span>
     </div>
   `;
   root.innerHTML = cards + arsenalCard;
@@ -1860,8 +1862,8 @@ async function _computeArsenalCardScore(roleInfo) {
     window.computeExpected(noArsParams);
     const noArsScore = _scoreWithBonus(roleInfo);
     const contrib = Math.round(baseScore - noArsScore);
-    const el = document.querySelector('[data-arsenal-score]');
-    if (el) el.innerHTML = `<span class="wwm-xinfa-stamp-score">${contrib.toLocaleString()}</span>`;
+    const el = document.querySelector('[data-arsenal-score] b');
+    if (el) el.textContent = contrib.toLocaleString();
     // base 復元
     window.computeExpected(baseParams);
   } catch(e) {}
@@ -1896,7 +1898,7 @@ async function _computeXinfaCardScores(roleInfo) {
       const noXinfa = _scoreWithBonus(ri);
       const delta = Math.round(baseScore - noXinfa);
       const el = document.querySelector(`[data-xinfa-score="${i}"]`);
-      if (el) el.innerHTML = `<span class="wwm-xinfa-stamp-score">${delta.toLocaleString()}</span>`;
+      if (el) el.innerHTML = `<b>${delta.toLocaleString()}</b>`;
     } catch (e) {}
   }
   // 復元

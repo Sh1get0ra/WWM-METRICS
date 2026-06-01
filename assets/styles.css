@@ -3966,66 +3966,15 @@ html[data-theme="light"] .wwm-diag-modal .wwm-modal-bg-icon {
 }
 .wwm-xinfa-slot {
   position: relative;
-  padding: 6px 10px 6px 40px;
+  padding: 2px 10px 24px 40px;
   background: linear-gradient(180deg, var(--surf-1), var(--surf-2));
   border: 1px solid var(--ink-2);
   border-radius: 2px;
-  min-height: 88px;
-  overflow: visible; /* 木札 stamp はみ出し許可 */
+  min-height: 70px;
+  overflow: hidden;
   cursor: pointer;
   transition: transform 0.1s, box-shadow 0.1s;
-  display: flex; flex-direction: column;
 }
-/* 木札 stamp + 下詰めテキスト layout: 心法カード + 武庫カード 共通 */
-.wwm-xinfa-slot-body {
-  display: flex; flex-direction: column;
-  margin-top: auto;
-  padding-left: 2px;
-  z-index: 1; position: relative;
-}
-.wwm-xinfa-name {
-  display: block;
-  font-size: var(--text-md); color: var(--paper);
-  font-weight: 700; letter-spacing: 0.04em;
-  line-height: 1.2;
-}
-/* 木札 score stamp (左上、 rail直右) — 武器カード と同形状で統一感 */
-.wwm-xinfa-stamp {
-  position: absolute; top: -16px; left: 38px;
-  background: linear-gradient(180deg, #6a4628, #4a2e1a);
-  border: 1.5px solid var(--gold-deep, #8a6428);
-  border-radius: 2px;
-  padding: 6px 7px 4px;
-  min-width: 50px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.5);
-  z-index: 5;
-  text-align: center;
-  pointer-events: none;
-}
-.wwm-xinfa-stamp::before {
-  content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
-  width: 1px; height: 8px;
-  background: linear-gradient(180deg, var(--gold-deep, #8a6428), var(--gold));
-}
-.wwm-xinfa-stamp::after {
-  content: ''; position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
-  width: 5px; height: 5px;
-  background: var(--gold); border-radius: 50%;
-  box-shadow: 0 0 4px var(--gold-bright);
-}
-.wwm-xinfa-stamp-score {
-  display: block;
-  font-family: var(--f-latin); font-size: var(--text-md); font-weight: 800;
-  color: var(--gold-bright); letter-spacing: 0.02em;
-  text-shadow: 0 0 3px rgba(0,0,0,0.7);
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-}
-html[data-theme="light"] .wwm-xinfa-stamp {
-  background: linear-gradient(180deg, #5a3a20, #3a2410);
-  border-color: var(--gold-deep, #8a6428);
-}
-html[data-theme="light"] .wwm-xinfa-stamp-score { color: var(--gold-bright, #f0d28a); }
 .wwm-xinfa-slot:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(212,175,55,0.3);
@@ -4103,81 +4052,15 @@ html[data-theme="light"] .wwm-xinfa-stamp-score { color: var(--gold-bright, #f0d
 .wwm-equip-slot[data-slot="21"] { grid-column: 5; grid-row: 1; }
 .wwm-equip-slot[data-slot="9"]  { grid-column: 5; grid-row: 2; }
 .wwm-gear-grid .wwm-equip-slot {
-  margin: 0; padding: 6px 10px 6px 40px;
+  margin: 0; padding: 2px 10px 32px 40px;
   background: linear-gradient(180deg, var(--surf-1), var(--surf-2));
   border-radius: 2px; border: 1px solid var(--ink-2);
   min-width: 0;
   display: flex; flex-direction: column;
-  overflow: visible; /* 木札 stamp はみ出し許可 (旧 hidden で重なりバグ発生) */
-  min-height: 90px;
+  overflow: hidden;
+  min-height: 80px;
   position: relative;
 }
-/* 木札 stamp + 下詰めテキスト layout: 主武/副武/環/佩び物 等 全装備カード共通 */
-.wwm-gear-grid .wwm-equip-slot-body {
-  display: flex; flex-direction: column;
-  margin-top: auto; /* テキストを下端に押す */
-  padding-left: 2px;
-  z-index: 1; position: relative;
-}
-.wwm-gear-grid .wwm-equip-kongfu {
-  display: block;
-  font-size: var(--text-sm); color: var(--paper);
-  font-weight: 700; letter-spacing: 0.04em;
-  line-height: 1.2; margin-bottom: 1px;
-}
-.wwm-gear-grid .wwm-equip-setname {
-  display: block;
-  font-size: var(--text-xs); color: var(--vermilion-bright);
-  font-weight: 700; letter-spacing: 0.06em;
-  line-height: 1.2;
-  text-shadow: 0 0 6px rgba(232,81,58,0.35);
-}
-/* 木札 score stamp (左上、 rail直右、 吊り紐付き) */
-.wwm-equip-stamp {
-  position: absolute; top: -16px; left: 38px;
-  background: linear-gradient(180deg, #6a4628, #4a2e1a);
-  border: 1.5px solid var(--gold-deep, #8a6428);
-  border-radius: 2px;
-  padding: 6px 7px 4px;
-  min-width: 50px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.5);
-  z-index: 5;
-  text-align: center;
-  pointer-events: none;
-}
-.wwm-equip-stamp::before {
-  content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
-  width: 1px; height: 8px;
-  background: linear-gradient(180deg, var(--gold-deep, #8a6428), var(--gold));
-}
-.wwm-equip-stamp::after {
-  content: ''; position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
-  width: 5px; height: 5px;
-  background: var(--gold); border-radius: 50%;
-  box-shadow: 0 0 4px var(--gold-bright);
-}
-.wwm-equip-stamp-score {
-  display: block;
-  font-family: var(--f-latin); font-size: var(--text-md); font-weight: 800;
-  color: var(--gold-bright); letter-spacing: 0.02em;
-  text-shadow: 0 0 3px rgba(0,0,0,0.7);
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-}
-.wwm-equip-stamp-delta {
-  display: block;
-  font-size: var(--text-xs); font-weight: 800;
-  margin-top: 2px;
-  text-shadow: 0 0 3px rgba(0,0,0,0.7);
-  font-variant-numeric: tabular-nums;
-}
-.wwm-equip-stamp-delta.wwm-equip-delta-pos { color: var(--jade-bright); }
-.wwm-equip-stamp-delta.wwm-equip-delta-neg { color: #ffb0a8; }
-html[data-theme="light"] .wwm-equip-stamp {
-  background: linear-gradient(180deg, #5a3a20, #3a2410);
-  border-color: var(--gold-deep, #8a6428);
-}
-html[data-theme="light"] .wwm-equip-stamp-score { color: var(--gold-bright, #f0d28a); }
 .wwm-equip-rail {
   position: absolute; left: 0; top: 0; bottom: 0; width: 30px;
   background: var(--rail-grad);
