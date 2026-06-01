@@ -1,11 +1,11 @@
 # 풍연전 무격지수 도구
 ### Where Winds Meet — 데미지 계산 도구 / 風燕伝 ダメージ計算ツール / 风燕传 武格指数工具
 
-[![GitHub Pages](https://img.shields.io/badge/Live-GitHub%20Pages-brightgreen)](https://sh1get0ra.github.io/WWM-DMGCALC/)
+[![GitHub Pages](https://img.shields.io/badge/Live-GitHub%20Pages-brightgreen)](https://sh1get0ra.github.io/WWM-METRICS/)
 
 **Language**: [日本語](README.md) · [English](README.en.md) · [简体中文](README.zh-CN.md) · [한국어](README.ko.md)
 
-🔗 **도구 URL**: https://sh1get0ra.github.io/WWM-DMGCALC/
+🔗 **도구 URL**: https://sh1get0ra.github.io/WWM-METRICS/
 
 ---
 
@@ -99,7 +99,7 @@
 
 ## 사용법
 
-1. **도구 열기** → https://sh1get0ra.github.io/WWM-DMGCALC/
+1. **도구 열기** → https://sh1get0ra.github.io/WWM-METRICS/
 2. 우상단 **「IMPORT」** 버튼 → 공식 데이터 도구 (확장) 에서 데이터 임포트
 3. 장비 카드 / 심법 카드에 자동 반영
 4. 장비 카드 클릭 → **장비 비교 modal** 에서 무술·장비 한 식·조율/정음 변경 → Δ Score 프리뷰

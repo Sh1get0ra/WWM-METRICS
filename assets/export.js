@@ -1,5 +1,5 @@
 // ── 画像エクスポート (自前カード構築版 / html2canvas安定) ──────
-const WWM_SITE_URL = 'https://wwm-dmgcalc.example.com';
+const WWM_SITE_URL = 'https://wwm-metrics.example.com';
 
 const _EXP_SLOT_ICON = {
   '3': 'helmet', '4': 'chest', '5': 'legs', '8': 'hands',

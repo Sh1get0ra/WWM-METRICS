@@ -1,5 +1,5 @@
-// WWM-DMGCALC Service Worker
-const CACHE_NAME = 'wwm-dmgcalc-v2';
+// WWM-METRICS Service Worker
+const CACHE_NAME = 'wwm-metrics-v3';
 const CORE_ASSETS = [
   './',
   './index.html',

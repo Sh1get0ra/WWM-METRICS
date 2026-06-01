@@ -1,4 +1,4 @@
-// ── WWM-DMGCALC Sidebar ─────────────────────────────────────────
+// ── WWM-METRICS Sidebar ─────────────────────────────────────────
 let _STAT_CONFIG = null;
 let _CURRENT_PARAMS = null;
 
@@ -100,7 +100,7 @@ async function _checkChangelog() {
 }
 // ── NOTE modal (巻物 UI、 仕様 + 更新履歴 タブ統合) ──────────
 function _ghIssueUrl(kind) {
-  const base = 'https://github.com/Sh1get0ra/WWM-DMGCALC/issues/new?';
+  const base = 'https://github.com/Sh1get0ra/WWM-METRICS/issues/new?';
   if (kind === 'bug') {
     return base + 'labels=bug&title=' + encodeURIComponent('[bug] ')
       + '&body=' + encodeURIComponent('## 現象\n\n## 再現手順\n\n## 期待動作\n\n## 環境 (OS / ブラウザ / 言語)\n');
@@ -1033,7 +1033,7 @@ function _exportOptSteps() {
   if (!_OPT_LAST_STEPS || !_OPT_LAST_SCORES) { alert('まず計算してください'); return; }
   const s = _OPT_LAST_SCORES;
   const lines = [
-    `WWM-DMGCALC 装備最適化提案 (目標 ${Math.round(s.ratio*100)}%)`,
+    `WWM-METRICS 装備最適化提案 (目標 ${Math.round(s.ratio*100)}%)`,
     `現状: ${s.start.toLocaleString()} → 最適化後: ${s.end.toLocaleString()} (Δ+${s.delta.toLocaleString()})`,
     '',
     ..._OPT_LAST_STEPS.map((step, i) => {
@@ -3428,7 +3428,7 @@ function openUnknownReport() {
   lines.push('### 補足情報 (画像/詳細などあれば追記)');
   lines.push('');
   const body = lines.join('\n');
-  const githubUrl = 'https://github.com/Sh1get0ra/WWM-DMGCALC/issues/new?title=' +
+  const githubUrl = 'https://github.com/Sh1get0ra/WWM-METRICS/issues/new?title=' +
     encodeURIComponent('[Data] 未対応ID報告 (kongfu/xinfa/affix)') +
     '&body=' + encodeURIComponent(body);
 
