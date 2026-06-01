@@ -3216,6 +3216,33 @@ html[data-theme="light"] .wwm-opt-loading {
   letter-spacing: 0.05em;
 }
 /* .wwm-opt-select 削除済 (2026-06-01): slot filter selectbox 廃止 (デフォルト全部位以外の用途なし) */
+/* sort select (改善順/部位順) — テーマに馴染む dark 系 */
+.wwm-opt-sort-select {
+  background: var(--surf-shade, #1a1410);
+  color: var(--paper);
+  border: 1px solid var(--ink-2);
+  border-radius: 3px;
+  padding: 2px 6px;
+  font-family: var(--f-mono);
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  outline: none;
+  margin-left: 4px;
+}
+.wwm-opt-sort-select:focus,
+.wwm-opt-sort-select:hover {
+  border-color: var(--gold);
+}
+html[data-theme="light"] .wwm-opt-sort-select {
+  background: rgba(245,236,217,0.85);
+  color: #2a1810;
+  border-color: rgba(120,60,20,0.35);
+}
+html[data-theme="light"] .wwm-opt-sort-select:focus,
+html[data-theme="light"] .wwm-opt-sort-select:hover {
+  border-color: #b8862a;
+}
 .wwm-opt-reason {
   margin-top: 8px; padding-top: 6px;
   border-top: 1px dashed var(--ink-2);

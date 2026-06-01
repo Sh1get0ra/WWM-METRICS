@@ -281,7 +281,7 @@ finalScore  = statusScore + 4-set bonus (4点一式効果発動時)</pre>
     importArsenalPath:'Arsenal Type', importArsenalPeaked:'Peak',
     importConfirmMsg:'Current values will be replaced by the imported data. Continue?', importDone:'Import complete',
     affixRankingTab:'Tune/Attune Value', affixRankingTitle:'Tune/Attune Ranking',
-    optimizationTitle:'Gear Optimization',
+    optimizationTitle:'Gear Optimize',
     diagTitle:'Diagnostics',
     diagHitOver:'Precision overflow (cur {0}% / cap {1}% / +{2}% over)',
     diagHitUnder:'Precision low (cur {0}% / cap {1}% / {2}% remaining)',
