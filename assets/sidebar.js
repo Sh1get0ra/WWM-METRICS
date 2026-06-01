@@ -748,10 +748,17 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
   }
   // header controls
   const T_ = window.T || {};
+  const savedSort = opts.sortBy ?? (localStorage.getItem('wwm_opt_sort_v1') || 'default');
   const headerHtml = `
     <div class="wwm-analysis-header">
       <h3>${T_.optimizationTitle||'装備最適化提案'}</h3>
       <div class="wwm-opt-controls">
+        <label class="wwm-opt-ratio-label">${T_.optSortLabel||'並び'}
+          <select class="wwm-opt-sort-select" id="wwmOptSort">
+            <option value="default" ${savedSort==='default'?'selected':''}>${T_.optSortDefault||'改善順'}</option>
+            <option value="slot" ${savedSort==='slot'?'selected':''}>${T_.optSortBySlot||'部位順'}</option>
+          </select>
+        </label>
         <label class="wwm-opt-ratio-label">${T_.optTargetRatio||'目標'} <span id="wwmOptRatioVal">${Math.round(TARGET_RATIO*100)}%</span>
           <input type="range" id="wwmOptRatio" min="90" max="100" step="1" value="${Math.round(TARGET_RATIO*100)}">
         </label>
@@ -792,6 +799,11 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
       const sel = (_OPT_LAST_STEPS || []).filter((_, i) => checkedIdxs.includes(i));
       _applyOptSteps(sel);
     });
+    const sortEl = root.querySelector('#wwmOptSort');
+    if (sortEl) sortEl.addEventListener('change', () => {
+      localStorage.setItem('wwm_opt_sort_v1', sortEl.value);
+      renderOptimization(roleInfo, params, { sortBy: sortEl.value });
+    });
     const tgEl = root.querySelector('#wwmOptToggleAll');
     if (tgEl) tgEl.addEventListener('click', () => {
       const cbs = root.querySelectorAll('.wwm-opt-check');
@@ -805,7 +817,7 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
   _bindControls();
   // 計算中: ヘッダ入力 (目標ratio / minDelta / slotFilter / 再計算) を一時 disable
   // → 中間状態で別ratio入力 → 結果startScoreがズレる/baseline壊れる バグ防止
-  ['#wwmOptRatio', '#wwmOptMinDelta', '#wwmOptApplyAll', '#wwmOptToggleAll'].forEach(sel => {
+  ['#wwmOptRatio', '#wwmOptMinDelta', '#wwmOptSort', '#wwmOptApplyAll', '#wwmOptToggleAll'].forEach(sel => {
     const el = root.querySelector(sel);
     if (el) { el.disabled = true; el.classList.add('wwm-opt-busy'); }
   });
@@ -831,7 +843,7 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
   // tier 表示用 SS閾値 (worldLv 由来)
   const wl = params?.worldLv || 14;
   const ssThr = 6700 * Math.pow(0.8, 14 - wl);
-  let stopReason = null;
+  // stopReason 廃止 (2026-06-01): 「N回で収束」 reason UI 削除に伴い不要化
   let lastBestNull = false;
   // iter=0 は弓セット swap のみ評価 (他affixより先に確定)
   // iter>=1 は affix swap (弓セットも再評価)
@@ -922,14 +934,10 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
     if (!best) {
       // iter=0 (弓セット評価) で改善なし → affix最適化に進む (continue)
       if (iter === 0) continue;
-      stopReason = `${iter}回 改善後、追加改善なし`;
       break;
     }
     // 微改善で早期収束 (Δ<閾値) — push せずに break
-    if (best.delta < window._OPT_MIN_DELTA && iter > 0) {
-      stopReason = `${iter}回で収束 (微改善Δ<${window._OPT_MIN_DELTA} で打切)`;
-      break;
-    }
+    if (best.delta < window._OPT_MIN_DELTA && iter > 0) break;
     // 採用: working state 更新
     if (best.kind === 'bowSet') {
       working.wearEquipsDetailed['9'].exVo.suffix = best.toSuffix;
@@ -966,7 +974,20 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
     const pct = ratio != null ? `(${Math.round(ratio*100)}%)` : '';
     return `${name} ${v}${pct}`;
   };
-  const rows = steps.length ? steps.map((s, i) => {
+  // sort: default (= greedy iter順=最大Δ優先) / slot (装備部位順、 弓セットは最後)
+  // ※ 内部index (i+1) は元の改善順を保持表示するため、 sort前に原index 付与
+  const _slotOrder = { '1':0,'2':1,'3':2,'4':3,'5':4,'8':5,'10':6,'11':7,'9,21':99,'9':99,'21':99 };
+  const stepsIndexed = steps.map((s, i) => ({ ...s, _origIdx: i }));
+  let stepsView = stepsIndexed;
+  if (savedSort === 'slot') {
+    stepsView = [...stepsIndexed].sort((a, b) => {
+      const sa = _slotOrder[String(a.slot)] ?? 50;
+      const sb = _slotOrder[String(b.slot)] ?? 50;
+      if (sa !== sb) return sa - sb;
+      return (a.idx || 0) - (b.idx || 0);
+    });
+  }
+  const rows = stepsView.length ? stepsView.map((s) => {
     const isBow = s.kind === 'bowSet';
     const slotCol = isBow ? s.slotLabel : `${s.slotLabel}#${s.idx+1}`;
     const changeCol = isBow
@@ -974,15 +995,14 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
       : `<span class="wwm-opt-from">${_fmtFromTo(s.fromName, s.fromVal, s.fromRatio, s.fromKey)}</span> ▶ <span class="wwm-opt-to">${_fmtFromTo(s.toName, s.toVal, s.toRatio, s.toKey)}</span>`;
     return `
     <div class="wwm-opt-row">
-      <span class="wwm-opt-pos">${i+1}</span>
+      <span class="wwm-opt-pos">${s._origIdx+1}</span>
       <span class="wwm-opt-slot">${slotCol}</span>
       <span class="wwm-opt-change">${changeCol}</span>
       <span class="wwm-opt-delta">+${Math.round(s.delta).toLocaleString()}</span>
       ${s.tierUp ? `<span class="wwm-opt-tierup">★ ${s.tierUp}</span>` : '<span></span>'}
-      <label class="wwm-opt-check-wrap" title="${(window.T&&T.optSelectOne)||'選択'}"><input type="checkbox" class="wwm-opt-check" data-opt-step="${i}" checked></label>
+      <label class="wwm-opt-check-wrap" title="${(window.T&&T.optSelectOne)||'選択'}"><input type="checkbox" class="wwm-opt-check" data-opt-step="${s._origIdx}" checked></label>
     </div>
-  `;}).join('') : `<div class="wwm-opt-empty">${stopReason || '改善余地なし'}</div>`;
-  const reasonHtml = stopReason && steps.length ? `<div class="wwm-opt-reason">${stopReason}</div>` : '';
+  `;}).join('') : `<div class="wwm-opt-empty">${(window.T&&window.T.optNoImprovement)||'改善余地なし'}</div>`;
   // 結果 cache (export 用)
   _OPT_LAST_STEPS = steps;
   _OPT_LAST_SCORES = { start: Math.round(startScore), end: Math.round(curScore), delta: totalDelta, ratio: TARGET_RATIO };
@@ -1003,7 +1023,6 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
       ${headerHtml.replace('<div class="wwm-opt-progress" id="wwmOptProgress"></div>', '')}
       <div class="wwm-opt-summary">${summary}</div>
       <div class="wwm-opt-body">${rows}</div>
-      ${reasonHtml}
     </div>
   `;
   _bindControls();
