@@ -1628,6 +1628,22 @@ function _gearIcon(slot, roleInfo) {
   return _GEAR_SLOT_ICON[slot] || null;
 }
 
+// 3段階 fallback で gear icon URL 解決 (1武器: kongfu→slot_icon→SVG / 防具系: slot_icon→SVG)
+function _gearIconResolve(slot, roleInfo) {
+  // 武器: kongfu icon dict 最優先
+  if (slot === '1' || slot === '2') {
+    const kid = slot === '1' ? roleInfo?.kongfuMain : roleInfo?.kongfuSub;
+    const kfIcon = window.WWM_KONGFU_ICONS?.[kid]?.pic_url;
+    if (kfIcon) return kfIcon;
+  }
+  // 公式 slot_icon (シルエット風統一)
+  const slotIcon = window.WWM_GEAR_SLOT_ICONS?.[slot]?.icon_url;
+  if (slotIcon) return slotIcon;
+  // 既存 SVG fallback (失効/未load時)
+  const svgName = _gearIcon(slot, roleInfo);
+  return svgName ? `assets/icons/${svgName}.svg` : null;
+}
+
 function renderGearGrid(roleInfo) {
   const root = document.getElementById('wwmGearGrid');
   if (!root) return;
@@ -1683,8 +1699,10 @@ function renderGearGrid(roleInfo) {
       const n = shortKf(kfName(roleInfo.kongfuSub));
       if (n) kongfuLine = `<span class="wwm-equip-kongfu">${n}</span>`;
     }
-    const iconName = _gearIcon(slot, roleInfo);
-    const iconHtml = iconName ? `<img class="wwm-equip-icon" src="assets/icons/${iconName}.svg" alt="">` : '';
+    const iconUrl = _gearIconResolve(slot, roleInfo);
+    const isWeaponSlotIcon = (slot === '1' || slot === '2');
+    const iconCls = 'wwm-equip-icon' + (isWeaponSlotIcon ? ' wwm-equip-icon-weapon' : '');
+    const iconHtml = iconUrl ? `<img class="${iconCls}" src="${iconUrl}" alt="">` : '';
     const railLabel = _GEAR_RAIL_ZH[slot] || label;
     return `
       <div class="wwm-equip-slot" data-slot="${slot}" onclick="WWMGear.openEdit('${slot}')">
@@ -2134,7 +2152,11 @@ function openXinfaEdit(slotIdx) {
   const m = document.createElement('div');
   m.className = 'wwm-modal-backdrop';
   const _T = window.T || {};
-  const _bgIc = origRi?._xinfaIconsBase64?.[slotIdx] || origRi?._xinfaIcons?.[slotIdx] || window.WWM_XINFA_ICONS?.[origPassive[slotIdx]]?.icon_url || null;
+  // virtual swap 反映: panel 再open時に最新心法 icon 表示
+  const effXidForBg = window.__WWM_VIRTUAL_XINFA?.passive?.[slotIdx] ?? origPassive[slotIdx];
+  const _bgIc = (effXidForBg === origPassive[slotIdx])
+    ? (origRi?._xinfaIconsBase64?.[slotIdx] || origRi?._xinfaIcons?.[slotIdx] || window.WWM_XINFA_ICONS?.[effXidForBg]?.icon_url || null)
+    : (window.WWM_XINFA_ICONS?.[effXidForBg]?.icon_url || null);
   const _bgIconHtml = _bgIc ? `<div class="wwm-cmp-modal-bg-icon" style="background-image: url('${_bgIc}');"></div>` : '';
   m.innerHTML = `
     <div class="wwm-modal wwm-modal-square wwm-cmp-modal-a">
@@ -2691,9 +2713,11 @@ function openGearEdit(slot) {
   // equip_max.json 確実 load (await不要、初回 null fallback)
   _loadEquipMax();
   const charLv = origRi?.level || 95;
-  // 背景アイコン (slot/武器type に対応)
-  const bgIconName = _gearIcon(slot, origRi);
-  const bgIconUrl = bgIconName ? `url('assets/icons/${bgIconName}.svg')` : 'none';
+  // 背景アイコン (slot/武器type に対応): kongfu→slot_icon→SVG 3段階fallback
+  // virtual swap 反映 (panel 再open時に最新 kongfu icon 表示)
+  const effRiForBg = (typeof _getEffectiveRoleInfo === 'function') ? (_getEffectiveRoleInfo() || origRi) : origRi;
+  const bgIconResolvedUrl = _gearIconResolve(slot, effRiForBg);
+  const bgIconUrl = bgIconResolvedUrl ? `url('${bgIconResolvedUrl}')` : 'none';
   // kongfu 名称 (主武器/副武器)
   const lang = _curLang();
   const kfMap = window.WWM_KONGFU || {};
@@ -2839,7 +2863,7 @@ function openGearEdit(slot) {
 
   const m = document.createElement('div');
   m.className = 'wwm-modal-backdrop';
-  const bgIconHtml = bgIconName ? `<div class="wwm-cmp-bg-icon" style="background-image: url('assets/icons/${bgIconName}.svg');"></div>` : '';
+  const bgIconHtml = bgIconResolvedUrl ? `<div class="wwm-cmp-bg-icon" style="background-image: url('${bgIconResolvedUrl}');"></div>` : '';
   // panel 内 kongfu header HTML
   const curKongfuHeader = isWeaponSlot && origKongfuId
     ? `<div class="wwm-cmp-kongfu-header">${_kfName(origKongfuId)}</div>` : '';
@@ -2860,7 +2884,7 @@ function openGearEdit(slot) {
         <button class="wwm-modal-close" aria-label="Close">×</button>
       </div>
       <div class="wwm-modal-body">
-        ${bgIconHtml ? bgIconHtml.replace('class="wwm-cmp-bg-icon"', 'class="wwm-cmp-modal-bg-icon"') : ''}
+        ${bgIconHtml ? bgIconHtml.replace('class="wwm-cmp-bg-icon"', 'class="wwm-cmp-modal-bg-icon wwm-cmp-modal-bg-icon-gear' + ((slot === '9' || slot === '21') ? ' wwm-cmp-modal-bg-icon-gear-small' : (slot === '1' || slot === '2') ? ' wwm-cmp-modal-bg-icon-gear-weapon' : ' wwm-cmp-modal-bg-icon-gear-armor') + '"') : ''}
         <div class="wwm-cmp-grid">
           <div class="wwm-cmp-col wwm-cmp-current${isBowSetSlot?' wwm-cmp-bow':''}">
             <h3 class="wwm-cmp-title" data-seal="${(window.T&&T.cmpCurrent)||'現有'}"><span class="wwm-cmp-title-text">${(window.T&&T.cmpCurrent)||'現有'}</span>${origEq?.exVo?._inferredLv ? `<span class="wwm-cmp-lv">Lv${origEq.exVo._inferredLv}</span>` : ''}</h3>
@@ -2975,10 +2999,10 @@ function openGearEdit(slot) {
       const rowsEl = m.querySelector('#wwmCmpNewRows');
       if (rowsEl) rowsEl.innerHTML = renderNewRows();
       _bindRowEvents();
-      // 新パネル bg icon 更新
-      const newIcon = _gearIcon(slot, _virtRi(newKongfuId));
+      // 新パネル bg icon 更新 (kongfu icon dict 優先 → fallback)
+      const newIconUrl = _gearIconResolve(slot, _virtRi(newKongfuId));
       const bgEl = m.querySelector('.wwm-cmp-modal-bg-icon');
-      if (bgEl && newIcon) bgEl.style.backgroundImage = `url('assets/icons/${newIcon}.svg')`;
+      if (bgEl && newIconUrl) bgEl.style.backgroundImage = `url('${newIconUrl}')`;
       _schedulePreview();
     });
   }

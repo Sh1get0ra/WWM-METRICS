@@ -2104,9 +2104,9 @@ body.wwm-layout-active .wwm-footer {
 }
 .wwm-equip-icon {
   position: absolute;
-  right: -14px; top: 62%;
-  transform: translateY(-50%);
-  width: 80px; height: 80px;
+  right: -29px; top: 62%;
+  transform: translateY(calc(-50% + 5px));
+  width: 120px; height: 120px;
   opacity: 0.15;
   filter:
     drop-shadow(0 0 3px rgba(212,175,55,0.5))
@@ -2114,6 +2114,11 @@ body.wwm-layout-active .wwm-footer {
     drop-shadow(0 0 16px rgba(212,175,55,0.2));
   pointer-events: none;
   z-index: 0;
+}
+/* 武器 (slot 1/2): 武術アイコン用. 装備系より +10px だけ右シフト、 下シフトなし */
+.wwm-equip-icon-weapon {
+  right: -24px;
+  transform: translateY(-50%);
 }
 .wwm-equip-slot-inner { z-index: 1; display: flex; flex-direction: column; }
 .wwm-equip-card-score {
@@ -2599,7 +2604,7 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
   font-size: 11px; color: var(--paper-mute);
 }
 .wwm-cmp-modal-a .wwm-cmp-bg-icon { opacity: 0 !important; }
-/* 新装備アイコン modal全体背景化 — 右下から見切れる大きさ */
+/* 新装備アイコン modal全体背景化 — 右下から見切れる大きさ (元サイズ、 心法対照 で使用) */
 .wwm-cmp-modal-bg-icon {
   position: absolute;
   right: -12%; bottom: -18%;
@@ -2611,6 +2616,25 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
   pointer-events: none;
   z-index: 0;
   filter: brightness(0) invert(1) drop-shadow(0 0 14px rgba(240,210,138,0.5));
+}
+/* 武具対照のみ 50% UP + 右下寄せ */
+.wwm-cmp-modal-bg-icon-gear {
+  right: -30%; bottom: -45%;
+  width: 165%; height: 165%;
+}
+/* 武器系 (slot 1/2): 武術アイコン用 — サイズ 10% 縮小 + 左20px・上15px シフト */
+.wwm-cmp-modal-bg-icon-gear-weapon {
+  width: 148.5%; height: 148.5%;
+  right: calc(-30% + 40px);
+  bottom: calc(-45% + 35px);
+}
+/* 防具系 (slot 3/4/5/8/10/11): 武器系より 25px 左シフト */
+.wwm-cmp-modal-bg-icon-gear-armor {
+  right: calc(-30% + 25px);
+}
+/* 弓/射玦 (slot 9/21) は modal が小さい → 別調整 */
+.wwm-cmp-modal-bg-icon-gear-small {
+  right: -40px;
 }
 .wwm-cmp-modal-a .wwm-modal-body { position: relative; overflow: hidden !important; }
 .wwm-cmp-modal-a .wwm-cmp-grid { position: relative; z-index: 1; }

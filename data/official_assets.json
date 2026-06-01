@@ -1,0 +1,142 @@
+{
+  "_meta": {
+    "source": "公式ツール bundle (Vite content hash 化) + master data から抽出",
+    "extracted_at": "2026-06-01",
+    "bundle_base": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/",
+    "data_base": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/",
+    "note": "デザイン参考用 URL dict. 直接URL参照前提 (hot-linking、 二次配布せず). 失効時 scout 再実行で hash 更新可能.",
+    "license": "NetEase official"
+  },
+
+  "logos": {
+    "_note": "言語別 logo (en/jp/kr/tw/zh). 一部 default logo あり",
+    "main_default": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/logo-27b7acd2.png",
+    "footer_default": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/logo-f7457958.png",
+    "footer_ever": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/logo-ever-ab4d7a7c.png",
+    "en_main": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/icon-logo-3b9b6e4d.png",
+    "jp_main": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/icon-logo-c415c67a.png",
+    "kr_main": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/icon-logo-a806b977.png",
+    "kr_alt2": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/icon-logo2-73f1942e.png",
+    "kr_alt3": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/icon-logo3-415dbebe.png",
+    "small_default": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/icon-logo-s-09c51c23.png",
+    "small_alt1": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/icon-logo1-s-219eaa90.png",
+    "alt1": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/icon-logo1-c048deb0.png"
+  },
+
+  "backgrounds": {
+    "_note": "ホーム/sjpm/ニュース/popup の背景画像",
+    "home_main": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg-b74e3a33.png",
+    "sjpm_top": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg-2fa0afb7.png",
+    "sjpm_main": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg-11508760.png",
+    "sjpm_avatar": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg-avatar-7ffb6ed8.png",
+    "sjpm_usercard": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg_usercard2-e8900864.png",
+    "news_detail": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/detail_bg-e45ec55b.png",
+    "news_detail_header": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/detail_bg_header-cd353c2a.png",
+    "news_index": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/index_bg-09c1c648.png",
+    "news_index_header": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/index_bg_header-bdcf218d.png",
+    "popup_default": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_bg-262d13e9.png",
+    "popup_rules": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/pop_rules_bg-ae46c6e1.png"
+  },
+
+  "quality_borders": {
+    "_note": "装備品質枠 (1=灰 / 2=緑 / 3=青 / 4=紫 / 5=金) × 3 size",
+    "tier1": {
+      "big":    "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/1_big-1bac704e.png",
+      "medium": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/1_medium-399ee85e.png",
+      "small":  "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/1_small-525c94d9.png"
+    },
+    "tier2": {
+      "big":    "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/2_big-99bb426c.png",
+      "medium": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/2_medium-4d3ba4c0.png",
+      "small":  "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/2_small-4e039aea.png"
+    },
+    "tier3": {
+      "big":    "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/3_big-c3e1ce14.png",
+      "medium": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/3_medium-2da10a85.png",
+      "small":  "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/3_small-f07732cd.png"
+    },
+    "tier4": {
+      "big":    "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/4_big-c8200afa.png",
+      "medium": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/4_medium-03d49a61.png",
+      "small":  "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/4_small-aa258af3.png"
+    },
+    "tier5": {
+      "big":    "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/5_big-d00990c4.png",
+      "medium": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/5_medium-f7171b37.png",
+      "small":  "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/5_small-0e3df6bf.png"
+    },
+    "default": {
+      "big":    "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/big-e2b9da0d.png",
+      "medium": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/medium-2dbd6418.png",
+      "small":  "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/small-ec02b17b.png"
+    }
+  },
+
+  "section_backgrounds": {
+    "_note": "心法 (xf) / 武器 (wq) / 奇術 (qs) セクションの背景画像",
+    "xinfa_bg":          "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png",
+    "xinfa_bg_empty":    "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-empty-600c28f9.png",
+    "xinfa_list_empty":  "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-list-empty-befb20a9.png",
+    "weapon_bg":         "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/wq-bg-99758f80.png",
+    "weapon_bg_bef":     "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/wq-bg-bef-6e0ffc1a.png",
+    "weapon_bg_empty":   "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/wq-bg-empty-7637e582.png",
+    "qishu_bg":          "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/qs-bg-32d6898d.png",
+    "qishu_list_empty":  "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/qs-list-empty-728699b0.png",
+    "qishu_list_empty2": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/qs-list-empty2-a1440e50.png"
+  },
+
+  "ui_buttons": {
+    "login": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/login-btn-bad0ff22.png",
+    "btn_lang": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/btn-lang-e01e61ad.png",
+    "btn_sign": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/btn-sign-1b183491.png",
+    "btn_default": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/btn-2545717f.png",
+    "popup_btn_cancel_alt1": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_cancel-9a52642a.png",
+    "popup_btn_cancel_alt2": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_cancel-6bcfd8b8.png",
+    "popup_btn_confirm_alt1": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_confirm-48cfa7e2.png",
+    "popup_btn_confirm_alt2": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_confirm-292f7edd.png",
+    "popup_btn_close": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_close-4b2f7fc8.png",
+    "popup_cta": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_cta_btn-d29e34f8.png",
+    "popup_mascot": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_mascot-70a6ceec.png",
+    "popup_center_lg": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_center_lg-d7c9364f.png",
+    "popup_center_sm": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_center_sm-fcb18ffa.png",
+    "popup_bottom_bg": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_bottom_bg-54cc67a4.png",
+    "popup_text_placeholder": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_text_placeholder-c8fa909c.png",
+    "lang_item_active": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/lang_item_active-3b2b0ff7.png",
+    "lang_item_default": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/lang_item_default-98dc8a66.png",
+    "lang_select_bg": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/lang_select_bg-3acb2d2b.png",
+    "btn_account_bg": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/btn_account_bg-e765626c.png",
+    "section_bg": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/section_bg-66d4d3cb.png",
+    "tabbar_bg": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/tabbar_bg-de9d9b00.png"
+  },
+
+  "social_icons": {
+    "_note": "SNS連携アイコン (footer)",
+    "tv": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/icon-tv-0ece252a.png",
+    "twitch": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/icon-twitch-92985c12.png"
+  },
+
+  "feature_banners": {
+    "_note": "言語別 feature バナー",
+    "v1": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/feature-c75362b5.png",
+    "v2": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/feature-4f024415.png",
+    "v3": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/feature-9d9a49be.png",
+    "v4": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/feature-8113672e.png",
+    "v5": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/feature-b4bc4552.png"
+  },
+
+  "title_decorations": {
+    "_note": "タイトル装飾 (言語別 connect/faq 等)",
+    "connect_en": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/title-connect-427a25c5.png",
+    "connect2_en": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/title-connect2-0019b8d4.png",
+    "faq_en": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/title-faq-40ef7a1d.png",
+    "connect_jp": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/title-connect-9c1642f4.png",
+    "connect2_jp": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/title-connect2-4429afc1.png",
+    "faq_jp": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/title-faq-f180b1cc.png",
+    "connect_kr": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/title-connect-86519226.png",
+    "connect2_kr": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/title-connect2-a4517562.png",
+    "faq_kr": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/title-faq-8fe10710.png",
+    "connect_tw": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/title-connect-8292bf37.png",
+    "connect2_tw": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/title-connect2-58121aae.png",
+    "faq_tw": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/title-faq-5fe7d702.png"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "_meta": {
+    "source": "公式ツール bundle (index-76a5ce60.js) Vite content hash 抽出",
+    "extracted_at": "2026-06-01",
+    "official_bundle_path": "/m/zt/20251121182818/img/",
+    "original_path": "assets/img/sjpm/slot_icon/<N>.png",
+    "note": "8 部位代表アイコン + 武器主/副. game-icons.net 風 SVG 置換用. 失効時 既存 SVG にfallback.",
+    "size": "252x252 px",
+    "license": "NetEase official, hot-linking 利用 (直接URL参照、 二次配布せず)"
+  },
+  "1":  { "name": "武器主",      "icon_url": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/1-2afed542.png" },
+  "2":  { "name": "武器副",      "icon_url": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/2-44449e50.png" },
+  "3":  { "name": "頭 (helmet)",  "icon_url": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/3-022f76b6.png" },
+  "4":  { "name": "胴 (chest)",   "icon_url": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/4-53a077db.png" },
+  "5":  { "name": "脚 (legs)",    "icon_url": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/5-378a1e43.png" },
+  "8":  { "name": "手 (hands)",   "icon_url": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/8-8bef14c0.png" },
+  "9":  { "name": "玦 (archer-disc)", "icon_url": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/9-851262e9.png" },
+  "10": { "name": "環 (ring)",    "icon_url": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/10-925cc424.png" },
+  "11": { "name": "佩 (pendant)", "icon_url": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/11-6faf98b4.png" },
+  "21": { "name": "弓 (bow)",     "icon_url": "https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/21-faea7fce.png" }
+}
