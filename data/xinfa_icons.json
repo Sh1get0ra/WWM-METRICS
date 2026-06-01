@@ -1,0 +1,250 @@
+{
+  "_meta": {
+    "source": "公式データツール (xinfa.txt) decode (subStrNum=99, base64 reverse + random char strip)",
+    "extracted_at": "2026-06-01",
+    "official_build_path": "/pc/qt/20251203102905/",
+    "total_count": 48,
+    "fields": "icon_url (心法アイコン), bg_icon_url (背景), liupai_pic_url (流派)",
+    "note": "心法swap時 icon resolve 用. sidebar.js / export.js から WWM_XINFA_ICONS[xid] で参照."
+  },
+  "1": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623b5337b5a3926c8372mP6YrHJ805.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c9ef32828f2e2e586omDirtLo05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tongyong_small_oversea.png"
+  },
+  "2": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623b018e50861fdb6e9azimzddfM05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c9ef32828f2e2e586omDirtLo05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tongyong_small_oversea.png"
+  },
+  "3": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c3c9c2a5ae7962539uG8vo4A905.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c9ef32828f2e2e586omDirtLo05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tongyong_small_oversea.png"
+  },
+  "4": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c39114391bd96afceoRxVWUUG05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c9ef32828f2e2e586omDirtLo05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tongyong_small_oversea.png"
+  },
+  "5": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623cce50988c127740274Gixfv2605.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c9ef32828f2e2e586omDirtLo05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tongyong_small_oversea.png"
+  },
+  "6": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/681b3780caea6df6344d1647xM3hrvsv06.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c9ef32828f2e2e586omDirtLo05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tongyong_small_oversea.png"
+  },
+  "41": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623984227bfab4059697dD0bYktd05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tongyong_small_oversea.png"
+  },
+  "42": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/67336239e29076979cd0dedd1BVEMDIP05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tongyong_small_oversea.png"
+  },
+  "43": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/67336239a415902e17396ee1j49aWXGL05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tongyong_small_oversea.png"
+  },
+  "44": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623906d7ecb577743937u9tlb5QX05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tongyong_small_oversea.png"
+  },
+  "45": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623a50f43898b2b237c9IRwSDlgo05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tongyong_small_oversea.png"
+  },
+  "46": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623b6d3f23b2273749b9F48vJ4R605.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tongyong_small_oversea.png"
+  },
+  "47": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6842973463e2dc663d1a59ffsGjDpyWa06.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tongyong_small_oversea.png"
+  },
+  "48": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/68429735334f9e1dd6a265f2EXkEm5Sg06.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tongyong_small_oversea.png"
+  },
+  "81": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623bd0736c6e9cf48bc1vCH6zJrC05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623cd6633eadacf704b9SzGt9NYp05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tongyong_small_oversea.png"
+  },
+  "82": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623bce50988c12774025dmgMtrlX05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623cd6633eadacf704b9SzGt9NYp05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tongyong_small_oversea.png"
+  },
+  "101": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/67336236045985a8447c7a4cSsDvRRkT05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tianquan_small_1_oversea.png"
+  },
+  "102": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/673362365e3cfed97860217eo4USRVUL05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tianquan_small_1_oversea.png"
+  },
+  "103": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/673362366bd39c5112ef0ad1ac6MISp505.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tianquan_small_1_oversea.png"
+  },
+  "104": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623718ecd43d445f7e985R0g7y1N05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623cd6633eadacf704b9SzGt9NYp05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tianquan_small_1_oversea.png"
+  },
+  "151": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623750f413ccc07fab19OSO1MCiA05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tianquan_small_2_oversea.png"
+  },
+  "152": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/67336237b9dffb0fa08810257DsAF0U205.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tianquan_small_2_oversea.png"
+  },
+  "153": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/67336237fa1c1734705756edfoY4MuDW05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tianquan_small_2_oversea.png"
+  },
+  "154": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/67336237276b672de212a571lTEauoUI05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623cd6633eadacf704b9SzGt9NYp05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/tianquan_small_2_oversea.png"
+  },
+  "301": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/67336237e0f31d543d67493e91IscdSc05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/qingxi_small_1_oversea.png"
+  },
+  "302": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/673362373060136ccecab60fQiOsU8yc05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/qingxi_small_1_oversea.png"
+  },
+  "303": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/673362383370b99a14539588aUvjwaWf05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/qingxi_small_1_oversea.png"
+  },
+  "304": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/673362387e174f015d55d7f3m0CNN6Gv05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623cd6633eadacf704b9SzGt9NYp05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/qingxi_small_1_oversea.png"
+  },
+  "351": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/673362383370b99a1453958esi5xWdjl05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623cd6633eadacf704b9SzGt9NYp05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/qingxi_small_2_oversea.png"
+  },
+  "352": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/673362387bf68b490e8bb65ewVe0j9JP05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/qingxi_small_2_oversea.png"
+  },
+  "353": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/673362387552a395ce42950dtdRXlKYr05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/qingxi_small_2_oversea.png"
+  },
+  "354": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/673362383373bf861b06b4a1U1sUJpOi05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/qingxi_small_2_oversea.png"
+  },
+  "401": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/67336238fb3140b124b3687cRFVwOiIz05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623cd6633eadacf704b9SzGt9NYp05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/kuanglan_small_2_oversea.png"
+  },
+  "402": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/67336238fc057a61e3bf68d2kzIlxPwg05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/kuanglan_small_2_oversea.png"
+  },
+  "403": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/67336239b87e22b2f8fff09a2ie70jM005.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/kuanglan_small_2_oversea.png"
+  },
+  "404": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/673362393ed7225686fec37fkuu6zMxX05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/kuanglan_small_2_oversea.png"
+  },
+  "451": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623a3c4a28cdf52717b9yQwDaOVC05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623cd6633eadacf704b9SzGt9NYp05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/guyun_small_1_oversea.png"
+  },
+  "452": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623a8a746c10ca84a56dARuDqEY105.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/guyun_small_1_oversea.png"
+  },
+  "453": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623a3ed7225686fec3850GWzZGUW05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/guyun_small_1_oversea.png"
+  },
+  "454": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623a1a8b8ce0ff3fe3b9PV250c5G05.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/guyun_small_1_oversea.png"
+  },
+  "501": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/67eb623186b689796ac98fb5rAYtkG9706.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623cd6633eadacf704b9SzGt9NYp05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/guyun_small_2_oversea.png"
+  },
+  "502": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/67eb62324368228b4324e9eeRDaTub5006.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/guyun_small_2_oversea.png"
+  },
+  "503": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/67eb62334368228b4324e9f2D7GrihSd06.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/guyun_small_2_oversea.png"
+  },
+  "504": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/67eb6234e4d95b3428e1e889RXastNai06.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/guyun_small_2_oversea.png"
+  },
+  "551": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6889e1756f435e2894c182655VEp07Bp06.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623cd6633eadacf704b9SzGt9NYp05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/kuanglan_small_1_oversea.png"
+  },
+  "552": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6889e17548e668b9f8cf1617wuTRpcXd06.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/kuanglan_small_1_oversea.png"
+  },
+  "553": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6889e175b82a77c540b10804ya3Ro9tU06.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/kuanglan_small_1_oversea.png"
+  },
+  "554": {
+    "icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6889e175ab42837ab07d1ec74RgJl0iN06.png",
+    "bg_icon_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/xinfa/images/6733623c6faf31b88f5cb354x7wR0PcK05.png",
+    "liupai_pic_url": "https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/kuanglan_small_1_oversea.png"
+  }
+}

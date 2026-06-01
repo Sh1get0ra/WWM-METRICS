@@ -1873,8 +1873,8 @@ function renderXinfaGrid(roleInfo) {
     const xinfa = xid ? xinfaMap[xid] : null;
     const name = xinfa ? (xinfa.names?.[lang] || xinfa.names?.ja || `心法ID ${xid}`) : '(空)';
     const tier = tiers[i] ?? tiers[String(i)] ?? 6;
-    // icon: swap されてない (元と同じ xid) 場合のみ表示
-    const iconUrl = (xid === origPassive[i]) ? xinfaIcons[i] : null;
+    // icon: 元と同じ xid なら base64/URL、 swap 後は dict から URL fallback
+    const iconUrl = (xid === origPassive[i]) ? xinfaIcons[i] : (window.WWM_XINFA_ICONS?.[xid]?.icon_url || null);
     const iconHtml = iconUrl ? `<img class="wwm-xinfa-icon" src="${iconUrl}" alt="">` : '';
     const tierChip = (xid && tier >= 1 && tier <= 5) ? `<div class="wwm-xinfa-tier-chip">T${tier}</div>` : '';
     return `
@@ -2134,7 +2134,7 @@ function openXinfaEdit(slotIdx) {
   const m = document.createElement('div');
   m.className = 'wwm-modal-backdrop';
   const _T = window.T || {};
-  const _bgIc = origRi?._xinfaIconsBase64?.[slotIdx] || origRi?._xinfaIcons?.[slotIdx];
+  const _bgIc = origRi?._xinfaIconsBase64?.[slotIdx] || origRi?._xinfaIcons?.[slotIdx] || window.WWM_XINFA_ICONS?.[origPassive[slotIdx]]?.icon_url || null;
   const _bgIconHtml = _bgIc ? `<div class="wwm-cmp-modal-bg-icon" style="background-image: url('${_bgIc}');"></div>` : '';
   m.innerHTML = `
     <div class="wwm-modal wwm-modal-square wwm-cmp-modal-a">
@@ -2217,6 +2217,10 @@ function openXinfaEdit(slotIdx) {
     newXinfaId = parseInt(xSel.value, 10);
     const eff = m.querySelector('#wwmCmpXinfaEffect');
     if (eff) eff.innerHTML = _effectsText(newXinfaId, newTier);
+    // 武具対照と同仕様: 新置 心法 select 変更で modal 背景アイコンを動的切替
+    const newIconUrl = window.WWM_XINFA_ICONS?.[newXinfaId]?.icon_url;
+    const bgEl = m.querySelector('.wwm-cmp-modal-bg-icon');
+    if (bgEl && newIconUrl) bgEl.style.backgroundImage = `url('${newIconUrl}')`;
     _schedule();
   });
   const tSel = m.querySelector('#wwmCmpXinfaTierSel');
