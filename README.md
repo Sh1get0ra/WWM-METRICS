@@ -1,11 +1,13 @@
-# 風燕伝 ダメージ計算ツール
-### Where Winds Meet — Martial Index Tool / 风燕传 武格指数工具 / 풍연전 무격지수 도구
+# 風燕計 | WWMETRICS
+### Where Winds Metrics / 燕云计 / 연운계
 
-[![GitHub Pages](https://img.shields.io/badge/Live-GitHub%20Pages-brightgreen)](https://sh1get0ra.github.io/WWM-METRICS/)
+[![Cloudflare Pages](https://img.shields.io/badge/Live-Cloudflare%20Pages-orange)](https://wwm-metrics.pages.dev)
 
 **Language**: [日本語](README.md) · [English](README.en.md) · [简体中文](README.zh-CN.md) · [한국어](README.ko.md)
 
-🔗 **ツール URL**: https://sh1get0ra.github.io/WWM-METRICS/
+🔗 **ツール URL**: https://wwm-metrics.pages.dev
+
+> ⚠ **移転のお知らせ**: 旧URL `https://sh1get0ra.github.io/WWM-METRICS/` は 2026-06-08 頃 停止予定。 ブックマーク等の更新お願いします。
 
 ---
 
@@ -99,7 +101,7 @@
 
 ## 使い方
 
-1. **ツールを開く** → https://sh1get0ra.github.io/WWM-METRICS/
+1. **ツールを開く** → https://wwm-metrics.pages.dev
 2. 右上 **「IMPORT」** ボタン → 公式データツール (拡張) からデータ取込
 3. 装備カード / 心法カードに自動反映
 4. 装備カードクリック → **装備比較 modal** で 武術・セット・調律/定音 変更 → Δ Score プレビュー

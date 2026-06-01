@@ -1,11 +1,13 @@
-# Where Winds Meet — Damage Calculator
-### 風燕伝 ダメージ計算ツール / 风燕传 武格指数工具 / 풍연전 무격지수 도구
+# Where Winds Metrics | WWMETRICS
+### 風燕計 / 燕云计 / 연운계
 
-[![GitHub Pages](https://img.shields.io/badge/Live-GitHub%20Pages-brightgreen)](https://sh1get0ra.github.io/WWM-METRICS/)
+[![Cloudflare Pages](https://img.shields.io/badge/Live-Cloudflare%20Pages-orange)](https://wwm-metrics.pages.dev)
 
 **Language**: [日本語](README.md) · [English](README.en.md) · [简体中文](README.zh-CN.md) · [한국어](README.ko.md)
 
-🔗 **Tool URL**: https://sh1get0ra.github.io/WWM-METRICS/
+🔗 **Tool URL**: https://wwm-metrics.pages.dev
+
+> ⚠ **Migration Notice**: The old URL `https://sh1get0ra.github.io/WWM-METRICS/` will be retired around 2026-06-08. Please update your bookmarks.
 
 ---
 
@@ -99,7 +101,7 @@ The Tier is determined by your current Martial Index relative to the **maximum s
 
 ## Usage
 
-1. **Open the tool** → https://sh1get0ra.github.io/WWM-METRICS/
+1. **Open the tool** → https://wwm-metrics.pages.dev
 2. Click **IMPORT** (top right) → pull data from the official data tool (extension).
 3. Gear and xinfa cards populate automatically.
 4. Click a gear card → **Gear Compare Modal** → change martial art / set / tune-attune → preview Δ Score.

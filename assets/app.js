@@ -79,6 +79,23 @@ function setLang(lang) {
     if (T[k] !== undefined) el.setAttribute('placeholder', T[k]);
   });
 
+  // 移転バナー: 旧URL (sh1get0ra.github.io) 検出時のみ表示。 メッセージは <strong> 含むため innerHTML 経路。
+  try {
+    const migBanner = document.getElementById('wwmMigrationBanner');
+    if (migBanner) {
+      const isOldDomain = location.hostname === 'sh1get0ra.github.io';
+      if (isOldDomain) {
+        const msgEl = migBanner.querySelector('.wwm-migration-msg');
+        if (msgEl && T.migrationMsg) msgEl.innerHTML = T.migrationMsg;
+        const btnEl = migBanner.querySelector('.wwm-migration-btn');
+        if (btnEl && T.migrationBtn) btnEl.textContent = T.migrationBtn;
+        migBanner.style.display = 'flex';
+      } else {
+        migBanner.style.display = 'none';
+      }
+    }
+  } catch(_) {}
+
   try { localStorage.setItem('wwm_lang', lang); } catch(e) {}
   renderPresetSlots();
   if (typeof window._refreshAll === 'function') window._refreshAll();
