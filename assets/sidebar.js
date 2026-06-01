@@ -1157,6 +1157,7 @@ function _shareBuildUrl() {
         <!-- セクション2: OBS Browser Source -->
         <div style="font-size:13px;color:var(--gold-bright);font-weight:700;letter-spacing:0.12em;margin:22px 0 6px;">${(window.T?.shareSect2Heading) ?? '▍OBS 配信用 URL'}</div>
         <p style="font-size:12px;color:var(--paper);opacity:0.92;margin:0 0 8px;line-height:1.6;">${(window.T?.shareSect2Desc) ?? ''}</p>
+        <div style="font-size:12px;color:#e8a04a;background:rgba(232,160,74,0.10);border-left:3px solid #e8a04a;padding:8px 10px;margin:0 0 10px;line-height:1.6;border-radius:2px;">⚠ ${(window.T?.shareObsCacheWarn) ?? 'OBSキャッシュの影響で正常に表示されない場合は、ブラウザソースの作り直し or OBS再起動が必要'}</div>
         <details style="margin:0 0 10px;font-size:12px;color:var(--paper);">
           <summary style="cursor:pointer;color:var(--gold-bright);letter-spacing:0.05em;font-weight:700;">${(window.T?.shareObsSetup) ?? 'OBS への設定方法'}</summary>
           <ol style="margin:6px 0 0;padding-left:20px;line-height:1.7;opacity:0.92;">

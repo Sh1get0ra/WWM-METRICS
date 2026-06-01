@@ -108,8 +108,7 @@ async function buildStatParams(roleInfo, state) {
     if (ba.MAX_W_ATK) _acc(r, 'maxPhys', ba.MAX_W_ATK);
     if (ba.W_DEF)     _acc(r, 'physDef', ba.W_DEF);
     if (ba.HP_MAX)    _acc(r, 'maxHp',   ba.HP_MAX);
-    if (ba.ARCHER_DAMAGE)            _acc(r, '_archerDmg',     ba.ARCHER_DAMAGE);
-    if (ba.ARCHER_WEAKPOINT_DAMAGE)  _acc(r, '_archerWeakDmg', ba.ARCHER_WEAKPOINT_DAMAGE);
+    // NOTE: ba.ARCHER_DAMAGE / ARCHER_WEAKPOINT_DAMAGE は装備Lv推定 (_inferEquipLv) で baseAttrs 直接読みで使用。 ここでの累積は read 0件で死コードのため削除済 (2026-06-01)。
   }
 
   // 2. 装備 affix
@@ -138,7 +137,7 @@ async function buildStatParams(roleInfo, state) {
   }
   r._arsMinSum = _arsMinSum;
   r._arsMaxSum = _arsMaxSum;
-  r._arsPath = state?.arsenal?.path || null;
+  // NOTE: r._arsPath は read 0件で死コードのため削除済 (2026-06-01)。 state.arsenal.path 必要時は state から直接読む。
 
   // 4.5 武術 (kongfu) effects: 主+副 の minElemMainAdd/maxElemMainAdd → path-specific min/max のみ
   for (const kid of [roleInfo?.kongfuMain, roleInfo?.kongfuSub]) {
