@@ -3215,11 +3215,7 @@ html[data-theme="light"] .wwm-opt-loading {
   padding: 1px 6px; border-radius: 2px;
   letter-spacing: 0.05em;
 }
-.wwm-opt-select {
-  background: var(--bg-1); color: var(--paper-2);
-  border: 1px solid var(--ink-3); border-radius: 2px;
-  padding: 2px 4px; font-size: var(--text-sm);
-}
+/* .wwm-opt-select 削除済 (2026-06-01): slot filter selectbox 廃止 (デフォルト全部位以外の用途なし) */
 .wwm-opt-reason {
   margin-top: 8px; padding-top: 6px;
   border-top: 1px dashed var(--ink-2);

@@ -747,21 +747,11 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
     try { window._OPT_MIN_DELTA = parseInt(localStorage.getItem('wwm_opt_min_delta_v1'), 10) || 5; } catch(_) { window._OPT_MIN_DELTA = 5; }
   }
   // header controls
-  const savedSlot = opts.slotFilter ?? (localStorage.getItem('wwm_opt_slot_filter_v1') || 'all');
   const T_ = window.T || {};
-  const SLOT_FILTERS = {
-    all: T_.optSlotAll || '全装備',
-    weapon: T_.optSlotWeapon || '主/副武器',
-    accessory: T_.optSlotAccessory || '環/佩び物',
-    armor: T_.optSlotArmor || '防具'
-  };
   const headerHtml = `
     <div class="wwm-analysis-header">
       <h3>${T_.optimizationTitle||'装備最適化提案'}</h3>
       <div class="wwm-opt-controls">
-        <select class="wwm-opt-select" id="wwmOptSlot" title="対象 slot">
-          ${Object.entries(SLOT_FILTERS).map(([k,v]) => `<option value="${k}" ${k===savedSlot?'selected':''}>${v}</option>`).join('')}
-        </select>
         <label class="wwm-opt-ratio-label">${T_.optTargetRatio||'目標'} <span id="wwmOptRatioVal">${Math.round(TARGET_RATIO*100)}%</span>
           <input type="range" id="wwmOptRatio" min="90" max="100" step="1" value="${Math.round(TARGET_RATIO*100)}">
         </label>
@@ -772,14 +762,8 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
     </div>
     <div class="wwm-opt-progress" id="wwmOptProgress"></div>
   `;
-  // 対象 slot filter mapping
-  const SLOT_GROUPS = {
-    all: ['1','2','3','4','5','8','10','11'],
-    weapon: ['1','2'],
-    accessory: ['10','11'],
-    armor: ['3','4','5','8']
-  };
-  const slotsAllowed = new Set(SLOT_GROUPS[savedSlot] || SLOT_GROUPS.all);
+  // 装備 slot は常に全部位 ('1','2','3','4','5','8','10','11')。 slot filter selectbox は 2026-06-01 廃止 (デフォルト全部位以外の選択用途なし)。
+  const slotsAllowed = new Set(['1','2','3','4','5','8','10','11']);
   function _bindControls() {
     const rEl = root.querySelector('#wwmOptRatio');
     const rVal = root.querySelector('#wwmOptRatioVal');
@@ -815,18 +799,13 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
       cbs.forEach(cb => { cb.checked = anyUnchecked; });
       tgEl.textContent = anyUnchecked ? '☐' : '☑';
     });
-    const slEl = root.querySelector('#wwmOptSlot');
-    if (slEl) slEl.addEventListener('change', () => {
-      localStorage.setItem('wwm_opt_slot_filter_v1', slEl.value);
-      renderOptimization(roleInfo, params, { slotFilter: slEl.value });
-    });
   }
   // 計算中表示
   root.innerHTML = `<div class="wwm-analysis-card wwm-modal-square"><div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/anvil-impact.svg');"></div>${headerHtml}<div class="wwm-opt-loading">計算中...</div></div>`;
   _bindControls();
   // 計算中: ヘッダ入力 (目標ratio / minDelta / slotFilter / 再計算) を一時 disable
   // → 中間状態で別ratio入力 → 結果startScoreがズレる/baseline壊れる バグ防止
-  ['#wwmOptRatio', '#wwmOptMinDelta', '#wwmOptSlot', '#wwmOptApplyAll', '#wwmOptToggleAll'].forEach(sel => {
+  ['#wwmOptRatio', '#wwmOptMinDelta', '#wwmOptApplyAll', '#wwmOptToggleAll'].forEach(sel => {
     const el = root.querySelector(sel);
     if (el) { el.disabled = true; el.classList.add('wwm-opt-busy'); }
   });
