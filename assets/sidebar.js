@@ -1434,7 +1434,7 @@ function _renderItem(item, params, depth, baseParams) {
   const cw = params?._capWarnings?.[item.key];
   const ww = params?._wasteWarnings?.[item.key];
   let warnIcon = '';
-  if (cw) warnIcon = ` <span class="wwm-sb-warn" title="cap未到達: ${cw.current}/${cw.threshold}">⚠</span>`;
+  if (cw) warnIcon = ` <span class="wwm-sb-warn" title="${(window.T&&window.T.tipCapNotReached)||'cap未到達'}: ${cw.current}/${cw.threshold}">⚠</span>`;
   else if (ww != null) {
     const wTitle = typeof ww === 'string' ? ww : `active path以外の属性ATK (合計 ${ww})`;
     warnIcon = ` <span class="wwm-sb-warn" title="${wTitle}">⚠</span>`;
@@ -2124,8 +2124,8 @@ function openXinfaEdit(slotIdx) {
       }
       let cls = 'wwm-tier-active';
       let warn = '';
-      if (!isActive) { cls = 'wwm-tier-unrel'; warn = ' <span class="wwm-tier-warn" title="未解放">⏳</span>'; }
-      else if (needsKf && !kfOk) { cls = 'wwm-tier-kfmiss'; warn = ' <span class="wwm-tier-warn" title="武器条件未満">⚠</span>'; }
+      if (!isActive) { cls = 'wwm-tier-unrel'; warn = ` <span class="wwm-tier-warn" title="${(window.T&&window.T.tipTierUnreleased)||'未解放'}">⏳</span>`; }
+      else if (needsKf && !kfOk) { cls = 'wwm-tier-kfmiss'; warn = ` <span class="wwm-tier-warn" title="${(window.T&&window.T.tipTierKfMissing)||'武器条件未満'}">⚠</span>`; }
       lines.push(`<div class="wwm-cmp-tier-row ${cls}"><span class="wwm-cmp-tier-num">T${t}</span><span class="wwm-cmp-tier-eff">${effStr}${warn}</span></div>`);
     }
     return lines.join('');

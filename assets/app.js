@@ -78,6 +78,11 @@ function setLang(lang) {
     const k = el.getAttribute('data-i18n-ph');
     if (T[k] !== undefined) el.setAttribute('placeholder', T[k]);
   });
+  // tooltip (title) i18n: data-i18n-title="<key>" で title属性 多言語化
+  document.querySelectorAll('[data-i18n-title]').forEach(el => {
+    const k = el.getAttribute('data-i18n-title');
+    if (T[k] !== undefined) el.setAttribute('title', T[k]);
+  });
   // 移転バナー: 言語切替毎に多言語msg再適用 (旧URL検出時のみ DOM 表示)
   if (typeof _initMigrationBanner === 'function') _initMigrationBanner();
 
