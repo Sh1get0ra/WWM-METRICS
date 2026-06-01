@@ -78,23 +78,8 @@ function setLang(lang) {
     const k = el.getAttribute('data-i18n-ph');
     if (T[k] !== undefined) el.setAttribute('placeholder', T[k]);
   });
-
-  // 移転バナー: 旧URL (sh1get0ra.github.io) 検出時のみ表示。 メッセージは <strong> 含むため innerHTML 経路。
-  try {
-    const migBanner = document.getElementById('wwmMigrationBanner');
-    if (migBanner) {
-      const isOldDomain = location.hostname === 'sh1get0ra.github.io';
-      if (isOldDomain) {
-        const msgEl = migBanner.querySelector('.wwm-migration-msg');
-        if (msgEl && T.migrationMsg) msgEl.innerHTML = T.migrationMsg;
-        const btnEl = migBanner.querySelector('.wwm-migration-btn');
-        if (btnEl && T.migrationBtn) btnEl.textContent = T.migrationBtn;
-        migBanner.style.display = 'flex';
-      } else {
-        migBanner.style.display = 'none';
-      }
-    }
-  } catch(_) {}
+  // 移転バナー: 言語切替毎に多言語msg再適用 (旧URL検出時のみ DOM 表示)
+  if (typeof _initMigrationBanner === 'function') _initMigrationBanner();
 
   try { localStorage.setItem('wwm_lang', lang); } catch(e) {}
   renderPresetSlots();
@@ -104,6 +89,22 @@ function setLang(lang) {
     try { window.WWMSidebar.render(null); } catch(_) {}
   }
 }
+// 移転バナー: 旧URL (sh1get0ra.github.io) 検出時のみ表示。 メッセージは <strong> 含むため innerHTML 経路。 setLang 内 + init() の2箇所から呼ばれる (init = ja 初期表示でも必ず実行、 setLang = 言語切替時に msg多言語反映)。
+function _initMigrationBanner() {
+  try {
+    const migBanner = document.getElementById('wwmMigrationBanner');
+    if (!migBanner) return;
+    const isOldDomain = location.hostname === 'sh1get0ra.github.io';
+    if (!isOldDomain) { migBanner.style.display = 'none'; return; }
+    const T_ = window.T || {};
+    const msgEl = migBanner.querySelector('.wwm-migration-msg');
+    if (msgEl && T_.migrationMsg) msgEl.innerHTML = T_.migrationMsg;
+    const btnEl = migBanner.querySelector('.wwm-migration-btn');
+    if (btnEl && T_.migrationBtn) btnEl.textContent = T_.migrationBtn;
+    migBanner.style.display = 'flex';
+  } catch(_) {}
+}
+
 function _loadSavedLang() {
   try {
     // OBS view (?view=sidebar): URL paramの lang を優先、 picker は表示しない (独立ブラウザインスタンス想定)
@@ -416,6 +417,7 @@ function init() {
   initTheme();
   initHeroCollapse();
   _loadSavedLang();
+  _initMigrationBanner();
   initPresets();
 
   // 数値入力フィールド：全角→半角自動変換 + 数字以外ブロック
