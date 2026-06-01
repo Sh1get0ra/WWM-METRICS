@@ -4,7 +4,7 @@ https://creativecommons.org/licenses/by/3.0/
 
 Artists:
 - delapouite: samurai-helmet, chest-armor, gauntlet, ring, rope-dart, glaive, katana, handheld-fan, quiver, leg-armor
-- lorc: gem-pendant, pocket-bow, crossed-swords, relic-blade, spears, umbrella
+- lorc: gem-pendant, pocket-bow, crossed-swords, relic-blade, spears, umbrella, mailed-fist
 
 Mapping:
 - helmet.svg       = delapouite/samurai-helmet
@@ -23,3 +23,4 @@ Mapping:
 - spear.svg        = lorc/spears
 - fan.svg          = delapouite/handheld-fan
 - umbrella.svg     = lorc/umbrella
+- mailed-fist.svg  = lorc/mailed-fist (天志の拳 / gauntlet 武術用、 2026-06-01追加)

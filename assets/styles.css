@@ -834,10 +834,28 @@ a.icon-btn { text-decoration: none; }
   text-shadow: 0 0 4px rgba(240,210,138,0.6) !important;
 }
 .wwm-sb-tier-badge.tier-S {
-  box-shadow:
-    0 0 4px rgba(255,107,80,0.5),
-    inset 0 1px 0 rgba(255,140,100,0.25) !important;
+  /* box-shadow !important 削除 → base .tier-S の tier-s-pulse keyframe アニメ 継承 (hero badge と同 効果) */
   text-shadow: 0 0 3px rgba(255,107,80,0.55) !important;
+}
+/* light mode mini hero S: 通常 hero と同じglow + さらに強化 (cream bg上で目立たせる) */
+html[data-theme="light"] .wwm-sb-tier-badge.tier-S {
+  animation: tier-s-pulse-light-mini 2.2s ease-in-out infinite !important;
+}
+@keyframes tier-s-pulse-light-mini {
+  0%, 100% {
+    box-shadow:
+      0 0 24px rgba(200,60,43,0.85),
+      0 0 42px rgba(200,60,43,0.45),
+      inset 0 1px 0 rgba(255,230,210,0.55),
+      inset 0 -1px 0 rgba(60,10,5,0.40);
+  }
+  50% {
+    box-shadow:
+      0 0 36px rgba(200,60,43,1),
+      0 0 62px rgba(232,81,58,0.60),
+      inset 0 1px 0 rgba(255,230,210,0.75),
+      inset 0 -1px 0 rgba(60,10,5,0.40);
+  }
 }
 .tier-badge {
   display: inline-flex;
@@ -1166,29 +1184,33 @@ html[data-theme="light"] .tier-SS::before {
   0%, 100% { box-shadow: 0 0 12px var(--vermilion-mid), inset 0 1px 0 rgba(255,200,180,0.3); }
   50%       { box-shadow: 0 0 22px var(--vermilion-strong), inset 0 1px 0 rgba(255,200,180,0.5); }
 }
+/* light mode tier-S: cream bg上で 視認性UP (solid red bg + white text + 強pulse) */
 html[data-theme="light"] .tier-S {
-  color: #c83c2b;
-  background: linear-gradient(135deg, var(--vermilion-soft), rgba(138,31,23,0.12));
-  border-color: var(--vermilion-strong);
-  text-shadow: 0 0 10px var(--vermilion-mid-2);
+  color: #fff8e8;
+  background: linear-gradient(135deg, #c83c2b 0%, #a02818 100%);
+  border-color: #6a1810;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.45), 0 0 8px rgba(255,200,180,0.4);
   box-shadow:
-    0 0 14px rgba(200,60,43,0.34),
-    0 0 28px rgba(200,60,43,0.10),
-    inset 0 1px 0 rgba(255,200,180,0.30);
+    0 0 18px rgba(200,60,43,0.65),
+    0 0 32px rgba(200,60,43,0.25),
+    inset 0 1px 0 rgba(255,230,210,0.45),
+    inset 0 -1px 0 rgba(60,10,5,0.35);
   animation: tier-s-pulse-light 2.2s ease-in-out infinite;
 }
 @keyframes tier-s-pulse-light {
   0%, 100% {
     box-shadow:
-      0 0 14px rgba(200,60,43,0.34),
-      0 0 28px rgba(200,60,43,0.10),
-      inset 0 1px 0 rgba(255,200,180,0.30);
+      0 0 18px rgba(200,60,43,0.65),
+      0 0 32px rgba(200,60,43,0.25),
+      inset 0 1px 0 rgba(255,230,210,0.45),
+      inset 0 -1px 0 rgba(60,10,5,0.35);
   }
   50% {
     box-shadow:
-      0 0 22px rgba(200,60,43,0.50),
-      0 0 40px rgba(200,60,43,0.18),
-      inset 0 1px 0 rgba(255,200,180,0.45);
+      0 0 28px rgba(200,60,43,0.95),
+      0 0 50px rgba(232,81,58,0.40),
+      inset 0 1px 0 rgba(255,230,210,0.65),
+      inset 0 -1px 0 rgba(60,10,5,0.35);
   }
 }
 html[data-theme="light"] .tier-A { color: var(--jade-bright); background: rgba(74,122,90,0.12); border-color: rgba(74,122,90,0.42); text-shadow: none; box-shadow: 0 0 8px rgba(74,122,90,0.18); }

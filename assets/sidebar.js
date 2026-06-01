@@ -1609,7 +1609,7 @@ const _GEAR_SLOT_ICON = {
 const _WEAPON_TYPE_ICON = {
   sword: 'sword', spear: 'spear', fan: 'fan', umbrella: 'umbrella',
   moBlade: 'glaive', dualBlades: 'dual-blades', ropeDart: 'rope-dart',
-  hengBlade: 'katana',
+  hengBlade: 'katana', gauntlet: 'mailed-fist',
   // raw kongfu.json weaponType (snake)
   mo_blade: 'glaive', dual_blades: 'dual-blades', rope_dart: 'rope-dart',
   heng_blade: 'katana'
