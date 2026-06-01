@@ -3229,6 +3229,7 @@ html[data-theme="light"] .wwm-opt-loading {
   cursor: pointer;
   outline: none;
   margin-left: 4px;
+  color-scheme: dark; /* native option popup を dark に強制 (Chrome/Edge等) */
 }
 .wwm-opt-sort-select:focus,
 .wwm-opt-sort-select:hover {
@@ -3243,6 +3244,7 @@ html[data-theme="light"] .wwm-opt-sort-select {
   background: rgba(245,236,217,0.85);
   color: #2a1810;
   border-color: rgba(120,60,20,0.35);
+  color-scheme: light;
 }
 html[data-theme="light"] .wwm-opt-sort-select:focus,
 html[data-theme="light"] .wwm-opt-sort-select:hover {
