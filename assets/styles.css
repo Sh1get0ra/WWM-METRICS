@@ -1978,6 +1978,7 @@ body.wwm-layout-active .wwm-app-body .container {
   padding: 0 6px 16px 0;
   box-sizing: border-box;
   overflow-y: auto;
+  overflow-x: auto; /* 内部panel min-width 超過時 横スクロール許可 (圧縮で崩壊するより明示scroll が良い) */
   scrollbar-width: thin;
   scrollbar-color: var(--gold-deep) transparent;
   scrollbar-gutter: stable;
@@ -2063,11 +2064,12 @@ body.wwm-layout-active .wwm-footer {
 /* ── Gear Grid Container (main 下部) ───────────────────────── */
 .wwm-gear-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(5, minmax(125px, 1fr));
   grid-template-rows: 1fr 1fr;
   gap: var(--space-2);
   margin: 16px 0;
   align-items: stretch;
+  min-width: 650px; /* 圧縮防止: 5列 × 125px + gap */
 }
 .wwm-gear-grid .wwm-equip-slot[data-slot] { cursor: pointer; transition: transform 0.1s, box-shadow 0.1s; }
 .wwm-gear-grid .wwm-equip-slot[data-slot]:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(212,175,55,0.3); }
@@ -3959,7 +3961,8 @@ html[data-theme="light"] .wwm-diag-modal .wwm-modal-bg-icon {
 }
 /* sidebar 心法カードは 横1列 (4 心法 + 1 武庫 = 5列) で表示 */
 #wwmXinfaGrid {
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(125px, 1fr));
+  min-width: 650px; /* 圧縮防止: 5列 × 125px + gap */
 }
 .wwm-xinfa-slot {
   position: relative;
@@ -4393,6 +4396,7 @@ html[data-theme="light"] {
   overflow: hidden;
   position: relative;
   height: 195px;
+  min-width: 600px; /* 圧縮防止: 左 score + tier + next 右 luopan + judge list 同居最小 */
 }
 .hero-wuxia .l-bracket {
   position: absolute;
@@ -5136,6 +5140,7 @@ html[data-theme="light"] .wwm-sb-label {
   --anlz-content-bg: #1c1814;
   --anlz-line: rgba(212,175,55,.32);
   margin-top: 16px;
+  min-width: 580px; /* 圧縮防止: タブ + content 同居最小 */
 }
 html[data-theme="light"] .wwm-anlz {
   --anlz-header-bg: #f0e8d2;

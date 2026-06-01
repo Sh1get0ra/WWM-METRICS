@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<title>WWM-METRICS Score Stamp 印章スタイル サンプル</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Noto+Sans+JP:wght@400;700;900&family=Noto+Serif+JP:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-0: #07060a; --bg-1: #0f0c0e;
+  --vermilion: #c83c2b; --vermilion-bright: #e8513a; --vermilion-strong: #ad2c1e;
+  --gold: #c9a45a; --gold-bright: #f0d28a; --gold-deep: #8a6428;
+  --jade-bright: #a8d4b4;
+  --paper: #e8d7b4; --paper-mute: #b8a884;
+  --ink-2: #2a1f1a; --surf-1: #1a1410; --surf-2: #221a14;
+  --text-12: 12px; --text-13: 13px; --text-lg: 18px;
+  --fw-bold: 700; --space-2: 8px;
+  --f-latin: 'Cinzel', serif; --f-mono: 'Rajdhani', monospace;
+}
+html[data-theme="light"] {
+  --bg-0: #f5ecd9; --bg-1: #f0e4c8;
+  --paper: #2a1810; --paper-mute: #5a4838;
+  --ink-2: #d4c4a0; --surf-1: #f8efd8; --surf-2: #f3e8c8;
+  --gold-bright: #b8862a;
+}
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--bg-0); color: var(--paper);
+  margin: 0; padding: 24px;
+  line-height: 1.5;
+}
+.controls {
+  position: fixed; top: 12px; right: 12px; z-index: 100;
+  background: var(--surf-1); padding: 10px 14px; border: 1px solid var(--ink-2); border-radius: 4px;
+  display: flex; gap: 12px; align-items: center;
+}
+.controls button {
+  padding: 6px 14px; background: var(--vermilion); color: #fff; border: none; border-radius: 3px; cursor: pointer; font-weight: 700;
+}
+h1 { color: var(--gold-bright); font-family: var(--f-latin); letter-spacing: 0.08em; margin-bottom: 8px; }
+h2 { color: var(--gold-bright); border-bottom: 1px solid var(--gold-deep); padding-bottom: 6px; margin-top: 32px; }
+.note { font-size: 13px; opacity: 0.85; margin-bottom: 16px; }
+
+/* ── 共通カードベース (実装の .wwm-equip-slot を再現) ── */
+.gear-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.equip-slot {
+  background: linear-gradient(180deg, var(--surf-1), var(--surf-2));
+  border: 1px solid var(--ink-2);
+  border-left: 3px solid var(--vermilion);
+  border-radius: 2px;
+  padding: 10px 12px;
+  position: relative;
+  /* overflow: hidden を OVERRIDE して印章はみ出し許可 */
+  overflow: visible;
+  min-height: 75px;
+}
+.equip-rail {
+  position: absolute; left: -2px; top: 8px;
+  writing-mode: vertical-rl; text-orientation: upright;
+  font-size: 10px; color: var(--vermilion-bright); font-weight: 700;
+  letter-spacing: 0.15em; padding: 0 2px;
+  background: rgba(0,0,0,0.3);
+}
+.equip-icon {
+  position: absolute; right: -14px; top: 62%;
+  transform: translateY(-50%);
+  width: 64px; height: 64px; opacity: 0.15;
+  pointer-events: none;
+}
+.equip-inner { display: flex; flex-direction: column; position: relative; z-index: 1; }
+.equip-setname { font-size: 10px; color: var(--vermilion-bright); font-weight: 700; }
+.equip-kongfu {
+  display: block; font-size: 13px; color: var(--paper);
+  font-weight: 700; letter-spacing: 0.04em; margin: 2px 0;
+}
+/* 実装の絶対配置 score (重なりバグ原因) */
+.equip-card-score-old {
+  position: absolute; left: 40px; bottom: 8px;
+  font-family: var(--f-latin); font-size: var(--text-lg);
+  font-weight: var(--fw-bold);
+  color: var(--gold-bright);
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 6px rgba(240,210,138,0.55);
+}
+.equip-card-score-old .delta-pos { color: var(--jade-bright); font-size: 11px; margin-left: 4px; font-weight: 700; }
+
+/* ============================================ */
+/* 案A: 右上 四角金縁 (中華印鑑風)              */
+/* ============================================ */
+.stamp-a {
+  position: absolute; top: -10px; right: -8px;
+  background: linear-gradient(180deg, #2a1810, #1a0e08);
+  border: 2px solid var(--gold);
+  border-radius: 2px;
+  padding: 4px 9px 3px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5), inset 0 0 8px rgba(201,164,90,0.15);
+  z-index: 5;
+  text-align: center;
+  min-width: 56px;
+}
+.stamp-a .score {
+  display: block;
+  font-family: var(--f-latin); font-size: 16px; font-weight: 800;
+  color: var(--gold-bright); letter-spacing: 0.02em;
+  text-shadow: 0 0 4px rgba(240,210,138,0.6);
+  line-height: 1.1;
+}
+.stamp-a .delta {
+  display: block;
+  font-size: 10px; font-weight: 700;
+  margin-top: 1px;
+}
+.stamp-a .delta.pos { color: var(--jade-bright); }
+.stamp-a .delta.neg { color: var(--vermilion-bright); }
+
+/* ============================================ */
+/* 案B: 上辺中央 円形朱印 (赤地金文字)          */
+/* ============================================ */
+.stamp-b {
+  position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+  width: 48px; height: 48px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--vermilion-bright), var(--vermilion-strong) 70%, #6a1810);
+  border: 2px solid var(--gold);
+  box-shadow: 0 3px 10px rgba(200,60,43,0.5), inset 0 0 8px rgba(255,255,255,0.1);
+  z-index: 5;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+}
+.stamp-b .score {
+  font-family: var(--f-latin); font-size: 13px; font-weight: 800;
+  color: var(--gold-bright); letter-spacing: 0.02em;
+  text-shadow: 0 0 3px rgba(0,0,0,0.6);
+  line-height: 1;
+}
+.stamp-b-delta {
+  position: absolute; top: 36px; left: 50%; transform: translateX(-50%);
+  font-size: 10px; font-weight: 800; white-space: nowrap;
+  text-shadow: 0 0 4px rgba(0,0,0,0.8);
+  z-index: 6;
+}
+.stamp-b-delta.pos { color: var(--jade-bright); }
+.stamp-b-delta.neg { color: var(--vermilion-bright); }
+
+/* ============================================ */
+/* 案C: 左上 リボン (角折り紙風)                */
+/* ============================================ */
+.stamp-c {
+  position: absolute; top: 0; left: 0;
+  background: linear-gradient(135deg, var(--vermilion-strong), var(--vermilion-bright));
+  color: var(--gold-bright);
+  padding: 3px 12px 3px 8px;
+  font-family: var(--f-latin); font-size: 14px; font-weight: 800;
+  letter-spacing: 0.02em;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 50%, 100% 100%, 0 100%);
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+  z-index: 5;
+  text-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+.stamp-c .delta {
+  font-size: 10px; font-weight: 700;
+  margin-left: 4px;
+}
+.stamp-c .delta.pos { color: var(--jade-bright); }
+.stamp-c .delta.neg { color: #ffd0c8; }
+
+/* ============================================ */
+/* 案D: 縦長右上スタンプ (印鑑+下垂金チェーン風) */
+/* ============================================ */
+.stamp-d {
+  position: absolute; top: -10px; right: 12px;
+  background: linear-gradient(180deg, var(--vermilion), var(--vermilion-strong));
+  border: 1.5px solid var(--gold);
+  border-radius: 2px;
+  padding: 5px 8px 4px;
+  box-shadow: 0 3px 8px rgba(200,60,43,0.4);
+  z-index: 5;
+  text-align: center;
+  min-width: 52px;
+}
+.stamp-d .score {
+  display: block;
+  font-family: var(--f-latin); font-size: 15px; font-weight: 800;
+  color: var(--gold-bright); letter-spacing: 0.02em;
+  text-shadow: 0 0 3px rgba(0,0,0,0.6);
+  line-height: 1;
+}
+.stamp-d .delta {
+  display: block;
+  font-size: 9px; font-weight: 700;
+  margin-top: 2px;
+  color: rgba(255,255,255,0.85);
+}
+.stamp-d .delta.pos { color: var(--jade-bright); }
+.stamp-d::before {
+  content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 6px; background: var(--gold); opacity: 0.6;
+}
+
+/* ============================================ */
+/* 案E: 左上 朱印鑑 縦書き (rail直右に配置)    */
+/* ============================================ */
+.stamp-e {
+  position: absolute; top: -8px; left: 14px;
+  background: radial-gradient(circle at 30% 30%, var(--vermilion-bright), var(--vermilion-strong) 75%, #5a1408);
+  border: 2px solid var(--gold);
+  border-radius: 3px;
+  padding: 5px 5px 4px;
+  box-shadow: 0 3px 8px rgba(200,60,43,0.5);
+  z-index: 5;
+  text-align: center;
+  min-width: 32px;
+}
+.stamp-e .score {
+  display: block;
+  font-family: var(--f-latin); font-size: 13px; font-weight: 800;
+  color: var(--gold-bright); letter-spacing: 0.01em;
+  text-shadow: 0 0 3px rgba(0,0,0,0.6);
+  line-height: 1;
+}
+.stamp-e .delta {
+  display: block;
+  font-size: 9px; font-weight: 800; margin-top: 2px;
+  text-shadow: 0 0 3px rgba(0,0,0,0.6);
+}
+.stamp-e .delta.pos { color: var(--jade-bright); }
+.stamp-e .delta.neg { color: #ffd0c8; }
+
+/* ============================================ */
+/* 案F: 上辺全幅 横長バンド (巻軸風)            */
+/* ============================================ */
+.stamp-f {
+  position: absolute; top: -10px; left: 8px; right: 8px;
+  background: linear-gradient(90deg, transparent 0%, var(--vermilion-strong) 15%, var(--vermilion) 50%, var(--vermilion-strong) 85%, transparent 100%);
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  padding: 3px 8px;
+  display: flex; justify-content: space-between; align-items: center;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+.stamp-f .score {
+  font-family: var(--f-latin); font-size: 15px; font-weight: 800;
+  color: var(--gold-bright); letter-spacing: 0.05em;
+  text-shadow: 0 0 4px rgba(0,0,0,0.6);
+}
+.stamp-f .delta {
+  font-size: 11px; font-weight: 800;
+  text-shadow: 0 0 3px rgba(0,0,0,0.6);
+}
+.stamp-f .delta.pos { color: var(--jade-bright); }
+.stamp-f .delta.neg { color: #ffd0c8; }
+
+/* ============================================ */
+/* 案G: 下端 横帯バンド (フッター風)            */
+/* ============================================ */
+.equip-slot.with-g { padding-bottom: 22px; }
+.stamp-g {
+  position: absolute; bottom: -2px; left: 8px; right: 8px;
+  background: linear-gradient(180deg, transparent, rgba(201,164,90,0.15) 40%, rgba(201,164,90,0.25));
+  border-top: 1px dashed var(--gold);
+  padding: 3px 8px;
+  display: flex; justify-content: space-between; align-items: baseline;
+  z-index: 4;
+}
+.stamp-g .score {
+  font-family: var(--f-latin); font-size: 16px; font-weight: 800;
+  color: var(--gold-bright); letter-spacing: 0.02em;
+  text-shadow: 0 0 5px rgba(240,210,138,0.6);
+}
+.stamp-g .delta {
+  font-size: 11px; font-weight: 800;
+}
+.stamp-g .delta.pos { color: var(--jade-bright); }
+.stamp-g .delta.neg { color: var(--vermilion-bright); }
+
+/* ============================================ */
+/* 案H: 右上 大型 角丸朱印 (B の角寄せ版)       */
+/* ============================================ */
+.stamp-h {
+  position: absolute; top: -12px; right: -12px;
+  width: 54px; height: 54px;
+  background: radial-gradient(circle at 30% 30%, var(--vermilion-bright), var(--vermilion-strong) 70%, #5a1408);
+  border: 2.5px solid var(--gold);
+  border-radius: 6px;
+  transform: rotate(8deg);
+  box-shadow: 0 4px 12px rgba(200,60,43,0.5);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  z-index: 5;
+  text-align: center;
+}
+.stamp-h .score {
+  font-family: var(--f-latin); font-size: 14px; font-weight: 800;
+  color: var(--gold-bright); letter-spacing: 0.01em;
+  text-shadow: 0 0 3px rgba(0,0,0,0.6);
+  line-height: 1;
+  transform: rotate(-8deg);
+}
+.stamp-h .delta {
+  font-size: 9px; font-weight: 800;
+  margin-top: 1px;
+  text-shadow: 0 0 3px rgba(0,0,0,0.6);
+  transform: rotate(-8deg);
+}
+.stamp-h .delta.pos { color: var(--jade-bright); }
+.stamp-h .delta.neg { color: #ffd0c8; }
+
+/* ============================================ */
+/* 案I: 左上 木札風 縦長タグ (吊り紐付き)       */
+/* ============================================ */
+.stamp-i {
+  position: absolute; top: -16px; left: 16px;
+  background: linear-gradient(180deg, #6a4628, #4a2e1a);
+  border: 1.5px solid var(--gold-deep);
+  border-radius: 2px;
+  padding: 6px 5px 4px;
+  width: 42px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+  z-index: 5;
+  text-align: center;
+}
+.stamp-i::before {
+  content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 8px;
+  background: linear-gradient(180deg, var(--gold-deep), var(--gold));
+}
+.stamp-i::after {
+  content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+  width: 4px; height: 4px;
+  background: var(--gold); border-radius: 50%;
+  box-shadow: 0 0 4px var(--gold-bright);
+}
+.stamp-i .score {
+  display: block;
+  font-family: var(--f-latin); font-size: 13px; font-weight: 800;
+  color: var(--gold-bright); letter-spacing: 0.01em;
+  text-shadow: 0 0 3px rgba(0,0,0,0.7);
+  line-height: 1;
+}
+.stamp-i .delta {
+  display: block;
+  font-size: 9px; font-weight: 800; margin-top: 2px;
+  text-shadow: 0 0 3px rgba(0,0,0,0.7);
+}
+.stamp-i .delta.pos { color: var(--jade-bright); }
+.stamp-i .delta.neg { color: #ffb0a8; }
+
+/* ============================================ */
+/* 採用案: 木札風 (案I) + テキスト下詰め layout */
+/* ============================================ */
+.equip-slot.adopt {
+  min-height: 88px;
+  display: flex; flex-direction: column;
+}
+.equip-slot.adopt .equip-inner-bottom {
+  display: flex; flex-direction: column;
+  margin-top: auto; /* 下詰め */
+  padding-left: 8px; /* rail分の余白 */
+}
+.equip-slot.adopt .equip-kongfu-name {
+  display: block; font-size: 13px; color: var(--paper);
+  font-weight: 700; letter-spacing: 0.04em; margin-bottom: 1px;
+  line-height: 1.2;
+}
+.equip-slot.adopt .equip-set-name {
+  display: block; font-size: 11px; color: var(--vermilion-bright);
+  font-weight: 700; letter-spacing: 0.08em; opacity: 0.9;
+  line-height: 1.2;
+}
+.equip-slot.adopt .equip-xinfa-name {
+  display: block; font-size: 13px; color: var(--paper);
+  font-weight: 700; letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <button onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'">テーマ切替 (現: dark)</button>
+  <span style="font-size:12px;opacity:0.7;">window縦伸縮で重なりテスト可</span>
+</div>
+
+<h1>WWM-METRICS Score Stamp Preview</h1>
+<p class="note">装備カード上の score表示 を 印章スタイルに変更する 4案。 縮小時 重なり問題を物理的に解消。</p>
+
+<h2>現状 (重なりバグあり、 比較用)</h2>
+<div class="gear-grid">
+  <div class="equip-slot">
+    <div class="equip-rail">主武</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">断魂の刀</span>
+    </div>
+    <span class="equip-card-score-old"><b>1,104</b><span class="delta-pos">+153</span></span>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">副武</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">嵐雷の槍</span>
+    </div>
+    <span class="equip-card-score-old"><b>1,072</b><span class="delta-pos">+135</span></span>
+  </div>
+</div>
+
+<h2>案A: 右上 四角金縁 (中華印鑑風)</h2>
+<div class="gear-grid">
+  <div class="equip-slot">
+    <div class="equip-rail">主武</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">断魂の刀</span>
+    </div>
+    <div class="stamp-a"><span class="score">1,104</span><span class="delta pos">+153</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">副武</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">嵐雷の槍</span>
+    </div>
+    <div class="stamp-a"><span class="score">1,072</span><span class="delta pos">+135</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">環</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">霊耀環</span>
+    </div>
+    <div class="stamp-a"><span class="score">807</span><span class="delta neg">-54</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">佩</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">玉佩</span>
+    </div>
+    <div class="stamp-a"><span class="score">970</span><span class="delta pos">+10</span></div>
+  </div>
+</div>
+
+<h2>案B: 上辺中央 円形朱印 (赤地金文字)</h2>
+<div class="gear-grid">
+  <div class="equip-slot">
+    <div class="equip-rail">主武</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">断魂の刀</span>
+    </div>
+    <div class="stamp-b"><span class="score">1,104</span></div>
+    <span class="stamp-b-delta pos">+153</span>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">副武</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">嵐雷の槍</span>
+    </div>
+    <div class="stamp-b"><span class="score">1,072</span></div>
+    <span class="stamp-b-delta pos">+135</span>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">環</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">霊耀環</span>
+    </div>
+    <div class="stamp-b"><span class="score">807</span></div>
+    <span class="stamp-b-delta neg">-54</span>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">佩</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">玉佩</span>
+    </div>
+    <div class="stamp-b"><span class="score">970</span></div>
+    <span class="stamp-b-delta pos">+10</span>
+  </div>
+</div>
+
+<h2>案C: 左上 リボン (角折り紙風)</h2>
+<div class="gear-grid">
+  <div class="equip-slot">
+    <div class="equip-rail" style="left:auto;right:-2px;">主武</div>
+    <div class="equip-inner" style="margin-top:18px;">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">断魂の刀</span>
+    </div>
+    <div class="stamp-c">1,104<span class="delta pos">+153</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail" style="left:auto;right:-2px;">副武</div>
+    <div class="equip-inner" style="margin-top:18px;">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">嵐雷の槍</span>
+    </div>
+    <div class="stamp-c">1,072<span class="delta pos">+135</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail" style="left:auto;right:-2px;">環</div>
+    <div class="equip-inner" style="margin-top:18px;">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">霊耀環</span>
+    </div>
+    <div class="stamp-c">807<span class="delta neg">-54</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail" style="left:auto;right:-2px;">佩</div>
+    <div class="equip-inner" style="margin-top:18px;">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">玉佩</span>
+    </div>
+    <div class="stamp-c">970<span class="delta pos">+10</span></div>
+  </div>
+</div>
+
+<h2>案D: 右上 縦小 朱印鑑+下垂金チェーン (B/A 中間)</h2>
+<div class="gear-grid">
+  <div class="equip-slot">
+    <div class="equip-rail">主武</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">断魂の刀</span>
+    </div>
+    <div class="stamp-d"><span class="score">1,104</span><span class="delta pos">+153</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">副武</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">嵐雷の槍</span>
+    </div>
+    <div class="stamp-d"><span class="score">1,072</span><span class="delta pos">+135</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">環</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">霊耀環</span>
+    </div>
+    <div class="stamp-d"><span class="score">807</span><span class="delta neg">-54</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">佩</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">玉佩</span>
+    </div>
+    <div class="stamp-d"><span class="score">970</span><span class="delta pos">+10</span></div>
+  </div>
+</div>
+
+<h2>案E: 左上 朱印鑑 縦書き (rail直右に配置)</h2>
+<div class="gear-grid">
+  <div class="equip-slot">
+    <div class="equip-rail">主武</div>
+    <div class="equip-inner" style="margin-top:14px;">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">断魂の刀</span>
+    </div>
+    <div class="stamp-e"><span class="score">1,104</span><span class="delta pos">+153</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">副武</div>
+    <div class="equip-inner" style="margin-top:14px;">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">嵐雷の槍</span>
+    </div>
+    <div class="stamp-e"><span class="score">1,072</span><span class="delta pos">+135</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">環</div>
+    <div class="equip-inner" style="margin-top:14px;">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">霊耀環</span>
+    </div>
+    <div class="stamp-e"><span class="score">807</span><span class="delta neg">-54</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">佩</div>
+    <div class="equip-inner" style="margin-top:14px;">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">玉佩</span>
+    </div>
+    <div class="stamp-e"><span class="score">970</span><span class="delta pos">+10</span></div>
+  </div>
+</div>
+
+<h2>案F: 上辺全幅 横長バンド (巻軸風)</h2>
+<div class="gear-grid">
+  <div class="equip-slot">
+    <div class="equip-rail">主武</div>
+    <div class="equip-inner" style="margin-top:14px;">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">断魂の刀</span>
+    </div>
+    <div class="stamp-f"><span class="score">1,104</span><span class="delta pos">+153</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">副武</div>
+    <div class="equip-inner" style="margin-top:14px;">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">嵐雷の槍</span>
+    </div>
+    <div class="stamp-f"><span class="score">1,072</span><span class="delta pos">+135</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">環</div>
+    <div class="equip-inner" style="margin-top:14px;">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">霊耀環</span>
+    </div>
+    <div class="stamp-f"><span class="score">807</span><span class="delta neg">-54</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">佩</div>
+    <div class="equip-inner" style="margin-top:14px;">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">玉佩</span>
+    </div>
+    <div class="stamp-f"><span class="score">970</span><span class="delta pos">+10</span></div>
+  </div>
+</div>
+
+<h2>案G: 下端 横帯バンド (フッター風)</h2>
+<div class="gear-grid">
+  <div class="equip-slot with-g">
+    <div class="equip-rail">主武</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">断魂の刀</span>
+    </div>
+    <div class="stamp-g"><span class="score">1,104</span><span class="delta pos">+153</span></div>
+  </div>
+  <div class="equip-slot with-g">
+    <div class="equip-rail">副武</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">嵐雷の槍</span>
+    </div>
+    <div class="stamp-g"><span class="score">1,072</span><span class="delta pos">+135</span></div>
+  </div>
+  <div class="equip-slot with-g">
+    <div class="equip-rail">環</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">霊耀環</span>
+    </div>
+    <div class="stamp-g"><span class="score">807</span><span class="delta neg">-54</span></div>
+  </div>
+  <div class="equip-slot with-g">
+    <div class="equip-rail">佩</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">玉佩</span>
+    </div>
+    <div class="stamp-g"><span class="score">970</span><span class="delta pos">+10</span></div>
+  </div>
+</div>
+
+<h2>案H: 右上 大型 角丸朱印 (傾き角)</h2>
+<div class="gear-grid">
+  <div class="equip-slot">
+    <div class="equip-rail">主武</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">断魂の刀</span>
+    </div>
+    <div class="stamp-h"><span class="score">1,104</span><span class="delta pos">+153</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">副武</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">嵐雷の槍</span>
+    </div>
+    <div class="stamp-h"><span class="score">1,072</span><span class="delta pos">+135</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">環</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">霊耀環</span>
+    </div>
+    <div class="stamp-h"><span class="score">807</span><span class="delta neg">-54</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">佩</div>
+    <div class="equip-inner">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">玉佩</span>
+    </div>
+    <div class="stamp-h"><span class="score">970</span><span class="delta pos">+10</span></div>
+  </div>
+</div>
+
+<h2>案I: 左上 木札風 縦長タグ (吊り紐付き)</h2>
+<div class="gear-grid">
+  <div class="equip-slot">
+    <div class="equip-rail">主武</div>
+    <div class="equip-inner" style="margin-top:12px;">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">断魂の刀</span>
+    </div>
+    <div class="stamp-i"><span class="score">1,104</span><span class="delta pos">+153</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">副武</div>
+    <div class="equip-inner" style="margin-top:12px;">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">嵐雷の槍</span>
+    </div>
+    <div class="stamp-i"><span class="score">1,072</span><span class="delta pos">+135</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">環</div>
+    <div class="equip-inner" style="margin-top:12px;">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">霊耀環</span>
+    </div>
+    <div class="stamp-i"><span class="score">807</span><span class="delta neg">-54</span></div>
+  </div>
+  <div class="equip-slot">
+    <div class="equip-rail">佩</div>
+    <div class="equip-inner" style="margin-top:12px;">
+      <span class="equip-setname">帰燕一式</span>
+      <span class="equip-kongfu">玉佩</span>
+    </div>
+    <div class="stamp-i"><span class="score">970</span><span class="delta pos">+10</span></div>
+  </div>
+</div>
+
+<h2 style="color:var(--gold-bright);border-bottom:2px solid var(--vermilion-bright);">★ 採用案: 木札風 (案I) + テキスト下詰め layout</h2>
+<p class="note">木札 stamp = 上部左寄り、 テキスト = カード下端に配置 (武術名 → setname の順、 下が setname)。 心法カードは setname なしで 心法名のみ。</p>
+
+<h3 style="color:var(--gold-bright);font-size:14px;margin-top:18px;">武器カード (主武/副武/環/佩)</h3>
+<div class="gear-grid">
+  <div class="equip-slot adopt">
+    <div class="equip-rail">主武</div>
+    <div class="equip-inner-bottom">
+      <span class="equip-kongfu-name">断魂の刀</span>
+      <span class="equip-set-name">帰燕一式</span>
+    </div>
+    <div class="stamp-i"><span class="score">1,104</span><span class="delta pos">+153</span></div>
+  </div>
+  <div class="equip-slot adopt">
+    <div class="equip-rail">副武</div>
+    <div class="equip-inner-bottom">
+      <span class="equip-kongfu-name">嵐雷の槍</span>
+      <span class="equip-set-name">帰燕一式</span>
+    </div>
+    <div class="stamp-i"><span class="score">1,072</span><span class="delta pos">+135</span></div>
+  </div>
+  <div class="equip-slot adopt">
+    <div class="equip-rail">環</div>
+    <div class="equip-inner-bottom">
+      <span class="equip-set-name">帰燕一式</span>
+    </div>
+    <div class="stamp-i"><span class="score">807</span><span class="delta neg">-54</span></div>
+  </div>
+  <div class="equip-slot adopt">
+    <div class="equip-rail">佩</div>
+    <div class="equip-inner-bottom">
+      <span class="equip-set-name">帰燕一式</span>
+    </div>
+    <div class="stamp-i"><span class="score">970</span><span class="delta pos">+10</span></div>
+  </div>
+</div>
+
+<h3 style="color:var(--gold-bright);font-size:14px;margin-top:18px;">心法カード (心法一/心法二)</h3>
+<div class="gear-grid">
+  <div class="equip-slot adopt" style="border-left-color:var(--gold);">
+    <div class="equip-rail" style="color:var(--gold-bright);">心法一</div>
+    <div class="equip-inner-bottom">
+      <span class="equip-xinfa-name">忘川絶響</span>
+    </div>
+    <div class="stamp-i"><span class="score">356</span><span class="delta pos">+22</span></div>
+  </div>
+  <div class="equip-slot adopt" style="border-left-color:var(--gold);">
+    <div class="equip-rail" style="color:var(--gold-bright);">心法二</div>
+    <div class="equip-inner-bottom">
+      <span class="equip-xinfa-name">易水の歌</span>
+    </div>
+    <div class="stamp-i"><span class="score">802</span><span class="delta pos">+47</span></div>
+  </div>
+</div>
+
+<h2>選定基準</h2>
+<ul style="font-size:13px;line-height:1.7;">
+  <li><b>A (右上 四角金縁印鑑)</b>: 落ち着き / 識別容易 / 既存テーマと馴染む / score+delta 横並びでコンパクト</li>
+  <li><b>B (上辺中央 円形朱印)</b>: 装飾的 / 中華風強い / delta 下に分離して若干視線移動が要る</li>
+  <li><b>C (左上 リボン)</b>: モダン / 角折り紙的 / 軽快 / kongfu名と垂直重ね注意 (rail位置移動必要)</li>
+  <li><b>D (右上 朱印鑑 縦小+チェーン)</b>: A+B 折衷 / 中華要素強 / 視認性高い</li>
+  <li><b>E (左上 朱印鑑 縦書き)</b>: rail直右に配置 / コンパクト / 朱色印鑑強調</li>
+  <li><b>F (上辺全幅 横長バンド)</b>: 巻軸風 / score+delta 横並び / カード上部 余白消費</li>
+  <li><b>G (下端 横帯バンド)</b>: フッター風 / 落ち着き / カード本文と明確分離 / 下端拡張</li>
+  <li><b>H (右上 大型角丸朱印 傾き)</b>: 手で押した印鑑風 / 動き感 / 中華要素最強</li>
+  <li><b>I (左上 木札風 縦長タグ 吊り紐)</b>: 古文書/巻物風 / 質感あり / 装飾豊か</li>
+</ul>
+<p class="note">window 縦伸縮で 重なりが起きないこと確認可。 全案で overflow: visible 必須。</p>
+
+</body>
+</html>
