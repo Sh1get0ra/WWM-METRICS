@@ -1893,7 +1893,8 @@ html, body { height: 100%; margin: 0; overflow: hidden; }
 body.wwm-layout-active {
   margin: 0 !important;
   height: 100vh !important;
-  overflow: hidden !important;
+  overflow-x: auto !important; /* window < 1010 で .wwm-app-body 横スクロール許可 */
+  overflow-y: hidden !important;
   box-sizing: border-box;
   display: block !important;
 }
@@ -1915,6 +1916,7 @@ body.wwm-layout-active .wwm-app-body {
   height: calc(100vh - 135px - 32px);
   margin: 135px auto 0;
   max-width: 1280px;
+  min-width: 1010px; /* 圧縮停止ライン: window 1010px 以下で body横スクロール発生、 各panel内部レイアウト崩壊防止 */
   width: 100%;
   display: grid;
   grid-template-columns: 300px minmax(0, 1fr);
