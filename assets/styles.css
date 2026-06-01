@@ -3216,44 +3216,37 @@ html[data-theme="light"] .wwm-opt-loading {
   letter-spacing: 0.05em;
 }
 /* .wwm-opt-select 削除済 (2026-06-01): slot filter selectbox 廃止 (デフォルト全部位以外の用途なし) */
-/* sort select (改善順/部位順) — テーマに馴染む dark 系 */
-.wwm-opt-sort-select {
-  background: var(--surf-shade, #1a1410);
-  color: var(--paper);
+/* sort toggle (改善順/部位順) — native select の popup styling不可問題回避のため button group化 */
+.wwm-opt-sort-group {
+  display: inline-flex;
+  gap: 0;
   border: 1px solid var(--ink-2);
   border-radius: 3px;
-  padding: 2px 6px;
+  overflow: hidden;
+}
+.wwm-opt-sort-btn {
+  background: transparent;
+  color: var(--paper-mute, #b8a884);
+  border: none;
+  padding: 2px 8px;
   font-family: var(--f-mono);
   font-size: var(--text-sm);
   letter-spacing: 0.04em;
   cursor: pointer;
-  outline: none;
-  margin-left: 4px;
-  color-scheme: dark; /* native option popup を dark に強制 (Chrome/Edge等) */
+  transition: background 0.12s, color 0.12s;
 }
-.wwm-opt-sort-select:focus,
-.wwm-opt-sort-select:hover {
-  border-color: var(--gold);
-}
-/* dropdown 展開時 option も dark系で揃える (browser default は白bgのため dark themeで埋もれる) */
-.wwm-opt-sort-select option {
-  background: var(--surf-shade, #1a1410);
+.wwm-opt-sort-btn:hover { background: rgba(212,175,55,0.08); color: var(--paper); }
+.wwm-opt-sort-btn.active {
+  background: var(--gold-deep, #8a6428);
   color: var(--paper);
+  font-weight: var(--fw-bold);
 }
-html[data-theme="light"] .wwm-opt-sort-select {
-  background: rgba(245,236,217,0.85);
-  color: #2a1810;
-  border-color: rgba(120,60,20,0.35);
-  color-scheme: light;
-}
-html[data-theme="light"] .wwm-opt-sort-select:focus,
-html[data-theme="light"] .wwm-opt-sort-select:hover {
-  border-color: #b8862a;
-}
-html[data-theme="light"] .wwm-opt-sort-select option {
-  background: #f8efd8;
-  color: #2a1810;
-}
+.wwm-opt-sort-btn + .wwm-opt-sort-btn { border-left: 1px solid var(--ink-2); }
+html[data-theme="light"] .wwm-opt-sort-group { border-color: rgba(120,60,20,0.35); }
+html[data-theme="light"] .wwm-opt-sort-btn { color: #5a4838; }
+html[data-theme="light"] .wwm-opt-sort-btn:hover { background: rgba(184,134,42,0.12); color: #2a1810; }
+html[data-theme="light"] .wwm-opt-sort-btn.active { background: #b8862a; color: #fff8e8; }
+html[data-theme="light"] .wwm-opt-sort-btn + .wwm-opt-sort-btn { border-left-color: rgba(120,60,20,0.35); }
 .wwm-opt-reason {
   margin-top: 8px; padding-top: 6px;
   border-top: 1px dashed var(--ink-2);

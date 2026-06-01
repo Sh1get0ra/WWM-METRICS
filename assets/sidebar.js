@@ -753,12 +753,10 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
     <div class="wwm-analysis-header">
       <h3>${T_.optimizationTitle||'装備最適化提案'}</h3>
       <div class="wwm-opt-controls">
-        <label class="wwm-opt-ratio-label">${T_.optSortLabel||'並び'}
-          <select class="wwm-opt-sort-select" id="wwmOptSort">
-            <option value="default" ${savedSort==='default'?'selected':''}>${T_.optSortDefault||'改善順'}</option>
-            <option value="slot" ${savedSort==='slot'?'selected':''}>${T_.optSortBySlot||'部位順'}</option>
-          </select>
-        </label>
+        <span class="wwm-opt-sort-group" id="wwmOptSort" data-sort="${savedSort}">
+          <button type="button" class="wwm-opt-sort-btn ${savedSort==='default'?'active':''}" data-sort-val="default">${T_.optSortDefault||'改善順'}</button>
+          <button type="button" class="wwm-opt-sort-btn ${savedSort==='slot'?'active':''}" data-sort-val="slot">${T_.optSortBySlot||'部位順'}</button>
+        </span>
         <label class="wwm-opt-ratio-label">${T_.optTargetRatio||'目標'} <span id="wwmOptRatioVal">${Math.round(TARGET_RATIO*100)}%</span>
           <input type="range" id="wwmOptRatio" min="90" max="100" step="1" value="${Math.round(TARGET_RATIO*100)}">
         </label>
@@ -800,9 +798,13 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
       _applyOptSteps(sel);
     });
     const sortEl = root.querySelector('#wwmOptSort');
-    if (sortEl) sortEl.addEventListener('change', () => {
-      localStorage.setItem('wwm_opt_sort_v1', sortEl.value);
-      renderOptimization(roleInfo, params, { sortBy: sortEl.value });
+    if (sortEl) sortEl.querySelectorAll('.wwm-opt-sort-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const v = btn.dataset.sortVal;
+        if (!v || v === sortEl.dataset.sort) return;
+        localStorage.setItem('wwm_opt_sort_v1', v);
+        renderOptimization(roleInfo, params, { sortBy: v });
+      });
     });
     const tgEl = root.querySelector('#wwmOptToggleAll');
     if (tgEl) tgEl.addEventListener('click', () => {
@@ -817,10 +819,12 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
   _bindControls();
   // 計算中: ヘッダ入力 (目標ratio / minDelta / slotFilter / 再計算) を一時 disable
   // → 中間状態で別ratio入力 → 結果startScoreがズレる/baseline壊れる バグ防止
-  ['#wwmOptRatio', '#wwmOptMinDelta', '#wwmOptSort', '#wwmOptApplyAll', '#wwmOptToggleAll'].forEach(sel => {
+  ['#wwmOptRatio', '#wwmOptMinDelta', '#wwmOptApplyAll', '#wwmOptToggleAll'].forEach(sel => {
     const el = root.querySelector(sel);
     if (el) { el.disabled = true; el.classList.add('wwm-opt-busy'); }
   });
+  // sort buttons (group span 内の各btn) も disable
+  root.querySelectorAll('#wwmOptSort .wwm-opt-sort-btn').forEach(btn => { btn.disabled = true; btn.classList.add('wwm-opt-busy'); });
   // progress表示は .wwm-opt-loading に一本化 (#wwmOptProgress は使わず二重回避)
   const setProgress = (label) => {
     const el = root.querySelector('.wwm-opt-loading');
