@@ -3426,6 +3426,18 @@ function updateHero(params) {
     if (typeof window.countUp === 'function') window.countUp('heroScoreBaseline', currentScore, 0);
     else if (baseEl) baseEl.textContent = currentScore.toLocaleString();
   }
+  // NEXT 表示制御: 確定 (baseline) と 仮想計算 (statusScore) が 丸め後同値なら NEXT行 非表示。
+  // = 装備変更なし時の 「9,027 ▶ 9,027」 同値表示を排除、 装備対照/最適化で仮想変更時のみ NEXT 表示。
+  // currentScore null (baseline 未取得) 時も 隠す (NEXT 意味なし)。
+  const heroNextEl = document.querySelector('.hero-next-inline');
+  if (heroNextEl) {
+    if (currentScore === null) {
+      heroNextEl.hidden = true;
+    } else {
+      const nextRounded = Math.round(statusScore);
+      heroNextEl.hidden = (nextRounded === currentScore);
+    }
+  }
 }
 
 // Header/Footer 実高さ → CSS 変数で sidebar top/bottom 動的調整
