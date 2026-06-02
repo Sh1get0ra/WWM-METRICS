@@ -1916,7 +1916,7 @@ function renderXinfaGrid(roleInfo) {
   const arsenalCard = `
     <div class="wwm-xinfa-slot wwm-arsenal-slot" data-arsenal-slot onclick="WWMXinfa.openArsenalEdit()">
       <div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">武庫</span></div>
-      <img class="wwm-xinfa-icon" src="assets/icons/open-treasure-chest.svg" alt="">
+      <img class="wwm-xinfa-icon" src="https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/kongfu/images/673361fe92bef95db34510429KLQLykS05.png" alt="">
       <div class="wwm-xinfa-inner">
         <div class="wwm-xinfa-header"><b>${pathName}</b></div>
       </div>
@@ -3610,7 +3610,7 @@ function openArsenalEdit() {
       const valTxt = peaked
         ? `<span style="color:var(--gold-bright);">頂点 ✓</span> <span style="color:var(--gold-bright);font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`
         : `<span style="color:var(--paper-mute);">未突破</span> <span style="color:var(--gold-bright);font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`;
-      return `<div class="wwm-cmp-row" style="grid-template-columns:50px 1fr;"><span style="font-family:var(--f-mono);font-weight:700;">Lv${lv}</span><span>${valTxt}</span></div>`;
+      return `<div class="wwm-cmp-row" style="grid-template-columns:50px 1fr;align-items:center;"><span style="font-family:var(--f-mono);font-weight:700;">Lv${lv}</span><span>${valTxt}</span></div>`;
     }).join('');
   }
   function _newRows(ars) {
@@ -3622,14 +3622,14 @@ function openArsenalEdit() {
       const minV = t.min ?? preset.min;
       const maxV = t.max ?? preset.max;
       const inputArea = peaked
-        ? `<span style="color:var(--gold-bright);font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`
-        : `<span style="display:inline-flex;gap:6px;font-size:11px;color:var(--gold-bright);align-items:center;">
-             <span>${sL.min}</span><input type="number" class="wwm-num-input" data-tier-min="${lv}" min="0" max="${preset.min}" step="1" value="${minV}" style="width:50px;">
-             <span>${sL.max}</span><input type="number" class="wwm-num-input" data-tier-max="${lv}" min="0" max="${preset.max}" step="1" value="${maxV}" style="width:50px;">
+        ? `<span style="color:var(--gold-bright);font-size:11px;white-space:nowrap;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`
+        : `<span style="display:inline-flex;gap:4px;font-size:11px;color:var(--gold-bright);align-items:center;flex-wrap:nowrap;white-space:nowrap;">
+             <span>${sL.min}</span><input type="number" class="wwm-num-input" data-tier-min="${lv}" min="0" max="${preset.min}" step="1" value="${minV}" style="width:42px;height:20px;padding:0 4px;">
+             <span>${sL.max}</span><input type="number" class="wwm-num-input" data-tier-max="${lv}" min="0" max="${preset.max}" step="1" value="${maxV}" style="width:42px;height:20px;padding:0 4px;">
            </span>`;
       return `<div class="wwm-cmp-row" style="grid-template-columns:50px 1fr;align-items:center;"><span style="font-family:var(--f-mono);font-weight:700;">Lv${lv}</span>
-        <span style="display:flex;flex-direction:column;gap:2px;">
-          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" data-tier="${lv}" ${peaked?'checked':''}> <span>頂点</span></label>
+        <span style="display:flex;align-items:center;gap:10px;flex-wrap:nowrap;white-space:nowrap;">
+          <label style="display:inline-flex;align-items:center;gap:4px;cursor:pointer;white-space:nowrap;"><span>頂点</span> <input type="checkbox" data-tier="${lv}" ${peaked?'checked':''}></label>
           ${inputArea}
         </span>
       </div>`;
@@ -3639,30 +3639,39 @@ function openArsenalEdit() {
     return PATHS.map(p => `<label class="wwm-radio-label" style="display:inline-flex;align-items:center;gap:4px;margin-right:8px;cursor:pointer;"><input type="radio" name="wwmArsenalEditPath" value="${p.key}" ${p.key===curKey?'checked':''}>${pathLabel(p.key)}</label>`).join('');
   }
   m.innerHTML = `
-    <div class="wwm-modal wwm-modal-wide wwm-modal-square">
-      <div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/open-treasure-chest.svg');"></div>
+    <div class="wwm-modal wwm-modal-square wwm-cmp-modal-a wwm-arsenal-modal">
+      <span class="wwm-cmp-l-bracket-tl"></span><span class="wwm-cmp-l-bracket-tr"></span>
+      <span class="wwm-cmp-l-bracket-bl"></span><span class="wwm-cmp-l-bracket-br"></span>
       <div class="wwm-modal-header">
-        <h2>武庫編集 / ARSENAL</h2>
+        <h2><span class="wwm-cmp-title-ja">武庫</span><span class="wwm-cmp-title-en">ARSENAL</span><span class="wwm-cmp-seal">庫</span></h2>
         <button class="wwm-modal-close" aria-label="Close">×</button>
       </div>
       <div class="wwm-modal-body">
+        <div class="wwm-cmp-modal-bg-icon wwm-cmp-modal-bg-icon-gear wwm-cmp-modal-bg-icon-arsenal" style="background-image:url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/kongfu/images/673361fe92bef95db34510429KLQLykS05.png');"></div>
         <div class="wwm-cmp-grid">
           <div class="wwm-cmp-col wwm-cmp-current">
-            <div class="wwm-cmp-title">現在の武庫</div>
-            <div class="wwm-cmp-kongfu-header" style="margin-bottom:8px;">${pathLabel(origArsenal.path)}</div>
+            <h3 class="wwm-cmp-title" data-seal="現有"><span class="wwm-cmp-title-text">現有</span></h3>
+            <div class="wwm-cmp-kongfu-header">${pathLabel(origArsenal.path)}</div>
             <div class="wwm-cmp-rows">${_curRows(origArsenal)}</div>
           </div>
+          <div class="wwm-cmp-divider"></div>
           <div class="wwm-cmp-col wwm-cmp-new">
-            <div class="wwm-cmp-title">新しい武庫</div>
-            <div style="margin-bottom:8px;flex-wrap:wrap;display:flex;" id="wwmArsenalEditPaths">${_pathRadios(newArsenal.path)}</div>
+            <h3 class="wwm-cmp-title" data-seal="新置"><span class="wwm-cmp-title-text">新置</span></h3>
+            <div class="wwm-cmp-kongfu-header" id="wwmArsenalEditPaths" style="display:flex;flex-wrap:nowrap;gap:6px;justify-content:space-between;">${_pathRadios(newArsenal.path)}</div>
             <div class="wwm-cmp-rows" id="wwmArsenalEditRows">${_newRows(newArsenal)}</div>
           </div>
         </div>
-        <div class="wwm-cmp-delta-row" id="wwmArsenalEditDelta" style="margin-top:12px;"></div>
-        <div class="wwm-btn-row" style="margin-top:16px;">
-          <button class="wwm-btn-primary" id="wwmArsenalEditApply">適用 (sidebar反映)</button>
-          <button class="wwm-btn-secondary" id="wwmArsenalEditReset">元に戻す</button>
-          <button class="wwm-btn-secondary" id="wwmArsenalEditCancel">キャンセル</button>
+        <div class="wwm-cmp-footer-a">
+          <div class="wwm-cmp-delta-block">
+            <span class="wwm-cmp-delta-label">武格変動</span>
+            <span class="wwm-cmp-preview-value" id="wwmArsenalEditDelta">+0</span>
+            <span class="wwm-cmp-delta-base" id="wwmArsenalEditBase">—</span>
+          </div>
+          <div class="wwm-btn-row wwm-cmp-btn-row">
+            <button class="wwm-btn-primary" id="wwmArsenalEditApply">採用</button>
+            <button class="wwm-btn-secondary" id="wwmArsenalEditReset">復元</button>
+            <button class="wwm-btn-secondary" id="wwmArsenalEditCancel">離脱</button>
+          </div>
         </div>
       </div>
     </div>
@@ -3750,10 +3759,12 @@ function openArsenalEdit() {
       const delta = Math.round(newScore - baseScore);
       const deltaEl = m.querySelector('#wwmArsenalEditDelta');
       if (deltaEl) {
-        const sign = delta >= 0 ? '+' : '';
-        const color = delta > 0 ? 'var(--jade-bright,#a8d4b4)' : delta < 0 ? 'var(--vermilion-bright,#e8513a)' : 'var(--paper-mute)';
-        deltaEl.innerHTML = `<span style="font-size:12px;color:var(--paper-mute);">Δ Score: </span><span style="font-family:var(--f-mono);font-weight:700;color:${color};">${sign}${delta.toLocaleString()}</span> <span style="color:var(--paper-mute);">(${Math.round(newScore).toLocaleString()})</span>`;
+        const sign = delta > 0 ? '+' : '';
+        deltaEl.textContent = `${sign}${delta.toLocaleString()}`;
+        deltaEl.className = 'wwm-cmp-preview-value ' + (delta > 0 ? 'pos' : delta < 0 ? 'neg' : 'zero');
       }
+      const baseEl = m.querySelector('#wwmArsenalEditBase');
+      if (baseEl) baseEl.textContent = `${Math.round(baseScore).toLocaleString()} → ${Math.round(newScore).toLocaleString()}`;
       // 復元
       window.computeExpected(p1);
     } catch(e) {}
