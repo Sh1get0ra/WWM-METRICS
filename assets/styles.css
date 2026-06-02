@@ -1875,6 +1875,8 @@ html.wwm-view-sidebar .wwm-app-body {
   padding: 8px !important;
   margin: 0 !important;
   max-width: none !important;
+  min-width: 0 !important; /* OBSキャンバス幅 < 1010 で右はみ出し防止 */
+  width: 100% !important;
 }
 html.wwm-view-sidebar .wwm-sidebar-test {
   position: relative !important;
