@@ -1304,7 +1304,16 @@ function _shareBuildUrl() {
   const refreshPreviewSrc = () => {
     if (!previewOn) return;
     if (previewDebounce) clearTimeout(previewDebounce);
-    previewDebounce = setTimeout(() => { previewFrame.src = obsUrl; }, 250);
+    previewDebounce = setTimeout(() => {
+      // cache buster で 旧版iframe強制再load
+      const sep = obsUrl.includes('?') ? '&' : '?';
+      const bustParam = sep + '_t=' + Date.now();
+      // hash#build の前に bustParam 挿入
+      const hashIdx = obsUrl.indexOf('#');
+      previewFrame.src = hashIdx >= 0
+        ? obsUrl.slice(0, hashIdx) + bustParam + obsUrl.slice(hashIdx)
+        : obsUrl + bustParam;
+    }, 250);
   };
   const refreshObs = () => {
     const pct = parseInt(opSlider.value, 10);
@@ -1318,8 +1327,17 @@ function _shareBuildUrl() {
     previewOn = !previewOn;
     previewWrap.style.display = previewOn ? 'block' : 'none';
     togglePreviewBtn.textContent = previewOn ? ((window.T?.sharePreviewClose) ?? 'プレビュー閉じる') : ((window.T?.sharePreviewBtn) ?? 'プレビュー表示');
-    if (previewOn) previewFrame.src = obsUrl;
-    else previewFrame.src = 'about:blank';
+    if (previewOn) {
+      // cache buster で 旧版iframe強制再load
+      const sep = obsUrl.includes('?') ? '&' : '?';
+      const bustParam = sep + '_t=' + Date.now();
+      const hashIdx = obsUrl.indexOf('#');
+      previewFrame.src = hashIdx >= 0
+        ? obsUrl.slice(0, hashIdx) + bustParam + obsUrl.slice(hashIdx)
+        : obsUrl + bustParam;
+    } else {
+      previewFrame.src = 'about:blank';
+    }
   });
   const scaleSlider = m.querySelector('#wwmSharePreviewScale');
   const scaleVal = m.querySelector('#wwmSharePreviewScaleVal');
