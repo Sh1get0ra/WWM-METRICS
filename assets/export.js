@@ -58,6 +58,9 @@ function _fetchImgDataUrl(url) {
 }
 
 function exportImage() {
+  // ── 工事中: 一時的に EXPORT 機能停止 (ブラッシュアップ中) ──
+  showToast('🚧 工事中 (ブラッシュアップ中)。 しばらくお待ちください。');
+  return;
   if (typeof html2canvas === 'undefined') {
     showToast('html2canvas not loaded (needs online)'); return;
   }
