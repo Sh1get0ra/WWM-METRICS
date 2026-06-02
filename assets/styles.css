@@ -1958,7 +1958,7 @@ body.wwm-layout-active {
 }
 body.wwm-layout-active .sticky-header {
   position: sticky; top: 0; /* fixed → sticky: body横scrollと連動して動く */
-  min-width: 1010px; /* 圧縮停止: wwm-app-body と同じ threshold */
+  min-width: 980px; /* 圧縮停止: wwm-app-body と同じ threshold */
   height: 135px;
   z-index: var(--z-overlay);
   background: transparent;
@@ -1975,7 +1975,7 @@ body.wwm-layout-active .wwm-app-body {
   height: calc(100vh - 135px - 32px);
   margin: 0 auto; /* sticky-header が in-flow になったため margin-top 135 不要 */
   max-width: 1280px;
-  min-width: 1010px; /* 圧縮停止ライン: window 1010px 以下で body横スクロール発生、 各panel内部レイアウト崩壊防止 */
+  min-width: 980px; /* 圧縮停止ライン: window 980px 以下で body横スクロール発生、 各panel内部レイアウト崩壊防止 */
   width: 100%;
   display: grid;
   grid-template-columns: 300px minmax(0, 1fr);
