@@ -3,7 +3,11 @@
 
 [![Cloudflare Pages](https://img.shields.io/badge/Live-Cloudflare%20Pages-orange)](https://wwm-metrics.pages.dev)
 
-**Language**: [日本語](README.md) · [English](README.en.md) · [简体中文](README.zh-CN.md) · [한국어](README.ko.md)
+**Language**:
+[![日本語](https://img.shields.io/badge/-日本語-c9a45a?style=for-the-badge)](README.md)
+[![English](https://img.shields.io/badge/-English-c9a45a?style=for-the-badge)](README.en.md)
+[![简体中文](https://img.shields.io/badge/-简体中文-c83c2b?style=for-the-badge)](README.zh-CN.md)
+[![한국어](https://img.shields.io/badge/-한국어-c9a45a?style=for-the-badge)](README.ko.md)
 
 🔗 **工具地址**: https://wwm-metrics.pages.dev
 
@@ -13,7 +17,7 @@
 
 ## 概述
 
-**风燕传 (Where Winds Meet)** 装备强度·最优化分析工具。
+**燕云十六声 (Where Winds Meet)** 装备强度·最优化分析工具。
 基于游戏官方数据工具 (扩展) 导入的角色数据、 以 **武格指数 (Martial Index)** 为核心、 整合装备 / 调律·定音词条 / 武学 / 心法 / 装备一式效果 计算伤害期望值。
 
 > v2.0.0 已废除旧版手动输入界面、 全面迁移至装备数据驱动的新 UI。
@@ -119,4 +123,4 @@
 
 ## 关键词
 
-`风燕传` `Where Winds Meet` `WWM` `武格指数` `Martial Index` `伤害计算` `期望值` `装备最优化` `调律` `定音` `心法` `武学才能效果` `风燕传攻略` `風燕伝` `풍연전`
+`燕云十六声` `Where Winds Meet` `WWM` `武格指数` `Martial Index` `伤害计算` `期望值` `装备最优化` `调律` `定音` `心法` `武学才能效果` `燕云十六声攻略` `風燕伝` `풍연전`

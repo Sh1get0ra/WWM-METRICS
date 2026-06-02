@@ -3,7 +3,11 @@
 
 [![Cloudflare Pages](https://img.shields.io/badge/Live-Cloudflare%20Pages-orange)](https://wwm-metrics.pages.dev)
 
-**Language**: [日本語](README.md) · [English](README.en.md) · [简体中文](README.zh-CN.md) · [한국어](README.ko.md)
+**Language**:
+[![日本語](https://img.shields.io/badge/-日本語-c9a45a?style=for-the-badge)](README.md)
+[![English](https://img.shields.io/badge/-English-c9a45a?style=for-the-badge)](README.en.md)
+[![简体中文](https://img.shields.io/badge/-简体中文-c9a45a?style=for-the-badge)](README.zh-CN.md)
+[![한국어](https://img.shields.io/badge/-한국어-c83c2b?style=for-the-badge)](README.ko.md)
 
 🔗 **도구 URL**: https://wwm-metrics.pages.dev
 
@@ -119,4 +123,4 @@
 
 ## 키워드
 
-`풍연전` `Where Winds Meet` `WWM` `무격지수` `Martial Index` `데미지 계산` `기댓값` `장비 최적화` `조율` `정음` `심법` `무술 재능 효과` `풍연전 공략` `風燕伝` `风燕传`
+`풍연전` `Where Winds Meet` `WWM` `무격지수` `Martial Index` `데미지 계산` `기댓값` `장비 최적화` `조율` `정음` `심법` `무술 재능 효과` `풍연전 공략` `風燕伝` `燕云十六声`

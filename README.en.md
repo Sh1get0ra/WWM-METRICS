@@ -3,7 +3,11 @@
 
 [![Cloudflare Pages](https://img.shields.io/badge/Live-Cloudflare%20Pages-orange)](https://wwm-metrics.pages.dev)
 
-**Language**: [日本語](README.md) · [English](README.en.md) · [简体中文](README.zh-CN.md) · [한국어](README.ko.md)
+**Language**:
+[![日本語](https://img.shields.io/badge/-日本語-c9a45a?style=for-the-badge)](README.md)
+[![English](https://img.shields.io/badge/-English-c83c2b?style=for-the-badge)](README.en.md)
+[![简体中文](https://img.shields.io/badge/-简体中文-c9a45a?style=for-the-badge)](README.zh-CN.md)
+[![한국어](https://img.shields.io/badge/-한국어-c9a45a?style=for-the-badge)](README.ko.md)
 
 🔗 **Tool URL**: https://wwm-metrics.pages.dev
 
@@ -119,4 +123,4 @@ The Tier is determined by your current Martial Index relative to the **maximum s
 
 ## Keywords
 
-`Where Winds Meet` `WWM` `Martial Index` `damage calculator` `expected value` `gear optimization` `tune` `attune` `xinfa` `inner way` `martial arts talents` `風燕伝` `武格指数` `风燕传` `풍연전`
+`Where Winds Meet` `WWM` `Martial Index` `damage calculator` `expected value` `gear optimization` `tune` `attune` `xinfa` `inner way` `martial arts talents` `風燕伝` `武格指数` `燕云十六声` `풍연전`
