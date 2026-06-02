@@ -23,7 +23,8 @@
         "raw": "武術技発動後 碧玉効果 → 会意ダメ+10%、真気値<対象 or <40%でダメ与時 付加会意率+5% 3秒",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "tianquan_1"
     },
     "3": {
       "names": {
@@ -44,7 +45,8 @@
         "raw": "ダメ → 会意発生時 飛鳥効果 → 5秒 外功攻撃 +2% 最大5stack",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "tianquan_2"
     },
     "7": {
       "names": {
@@ -65,7 +67,8 @@
         "raw": "会心ダメ/治療 +10%、気血シールド時 +15%",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "kuanglan_2"
     },
     "9": {
       "names": {
@@ -86,7 +89,8 @@
         "raw": "Airborne Heavy Attack +10% + ノックダウン (10s once)",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "tongyong"
     },
     "11": {
       "names": {
@@ -107,7 +111,8 @@
         "raw": "対象気血≥50%で与ダメ+5%、気血+5%毎+1%、最大+10%",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "tongyong"
     },
     "23": {
       "names": {
@@ -128,7 +133,8 @@
         "raw": "軽撃/軽撃発動効果(鼠等)気血ダメ+12%、真気値<40%対象 瞬嵐ダメ+10%",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "guyun_1"
     },
     "25": {
       "names": {
@@ -149,7 +155,8 @@
         "raw": "重撃/重撃追撃命中 → 軽撃/弾道ダメ+12% 15秒 (逆も同様、両同時で霧柳重撃)",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "qingxi_1"
     },
     "29": {
       "names": {
@@ -170,7 +177,8 @@
         "raw": "気血最大時 5%確率で会心治療/会心ダメ + 効果+15%",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "qingxi_2"
     },
     "34": {
       "names": {
@@ -191,7 +199,8 @@
         "raw": "2体以上同時命中+首領/Player命中で 連星 1stack 獲得 5秒 (武術技ダメ強化)",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "guyun_2"
     },
     "50": {
       "names": {
@@ -212,7 +221,8 @@
         "raw": "受流成功 or 首領命中 → 5秒 斬岳効果 気血ダメ+5% (軽撃/重撃派生/協戦発動技)",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "kuanglan_1"
     }
   },
   "bowSets": {
@@ -231,7 +241,8 @@
         },
         "raw": "命中率 +3.3%"
       },
-      "_note": "suffix予想 (連番仮説 44/45/46)、未装備未検証"
+      "_note": "suffix予想 (連番仮説 44/45/46)、未装備未検証",
+      "liupaiId": "tongyong"
     },
     "45": {
       "names": {
@@ -246,7 +257,8 @@
           "critRate": 0.037
         },
         "raw": "会心率 +3.7%"
-      }
+      },
+      "liupaiId": "tongyong"
     },
     "46": {
       "names": {
@@ -261,7 +273,8 @@
           "sympathyRate": 0.018
         },
         "raw": "会意率 +1.8%"
-      }
+      },
+      "liupaiId": "tongyong"
     }
   },
   "defensiveSets": {
@@ -279,7 +292,8 @@
         "raw": "自身が発動するシールド持続時間+2秒。真気値≥85% or 真気ダメ無効化シールド持続中 受気血ダメ-20%",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "tianquan_1"
     },
     "4": {
       "names": {
@@ -295,7 +309,8 @@
         "raw": "持続ダメ/治療毎に1stack鷹揚効果。10秒被ダメ-1.2% max5stack。最大時 鷹護:10秒以内攻撃ダメ-90% (首領半減)、30秒1回",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "tianquan_2"
     },
     "8": {
       "names": {
@@ -311,7 +326,8 @@
         "raw": "防御中攻撃受時 30%確率で気血上限10%シールド20秒。既存シールド有時 気血値2%回復。60秒1回",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "kuanglan_2"
     },
     "10": {
       "names": {
@@ -327,7 +343,8 @@
         "raw": "受流成功時 次2秒間 受ダメ-20% max3stack",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "tongyong"
     },
     "12": {
       "names": {
@@ -343,7 +360,8 @@
         "raw": "被ダメ-5%。気血<60%で10%失う毎 追加-1% max5stack",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "tongyong"
     },
     "24": {
       "names": {
@@ -352,7 +370,8 @@
         "zh": "江凝一式",
         "ko": "정수 세트"
       },
-      "_note": "防具セット。slot 3/4/5/8 (冠/胸当て/膝鎧/小手)。set affix: 270502=獄炎の双剣・軽撃ダメ増加, 270505=浮塵の縄・鼠ダメ増加。ダメ計算非影響でスルー対象。"
+      "_note": "防具セット。slot 3/4/5/8 (冠/胸当て/膝鎧/小手)。set affix: 270502=獄炎の双剣・軽撃ダメ増加, 270505=浮塵の縄・鼠ダメ増加。ダメ計算非影響でスルー対象。",
+      "liupaiId": "guyun_1"
     },
     "26": {
       "names": {
@@ -368,7 +387,8 @@
         "raw": "戦闘状態に入ってから10秒間ダメージを受けないと不知寒効果獲得。次にダメージ受時 2秒間 受ダメ-40%。戦闘離脱で解除",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "qingxi_1"
     },
     "30": {
       "names": {
@@ -384,7 +404,8 @@
         "raw": "1回の被ダメが気血最大値40%超 or 気血<20% → 5秒次回の治療で+25% (60秒1回)",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "qingxi_2"
     },
     "35": {
       "names": {
@@ -400,7 +421,8 @@
         "raw": "1秒以内に6m以上移動で抱玉獲得 → 5秒間 受気血/真気ダメ-15% (20秒1回)",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "guyun_2"
     },
     "51": {
       "names": {
@@ -416,7 +438,8 @@
         "raw": "強靭状態時 受気血ダメ-5%。強靭で被撃時 玄甲効果 5秒max5stack 会心ダメ確率-2%/会意ダメ確率-1%",
         "conditional": true,
         "pendingImplementation": true
-      }
+      },
+      "liupaiId": "kuanglan_1"
     }
   }
 }

@@ -1644,6 +1644,71 @@ function _gearIconResolve(slot, roleInfo) {
   return svgName ? `assets/icons/${svgName}.svg` : null;
 }
 
+// 武器 slot (1/2) の 流派 (liupai) アイコン URL 解決。 該当無し時 null
+function _kongfuLiupaiResolve(slot, roleInfo) {
+  if (slot !== '1' && slot !== '2') return null;
+  const kid = slot === '1' ? roleInfo?.kongfuMain : roleInfo?.kongfuSub;
+  return window.WWM_KONGFU_ICONS?.[kid]?.liupai_pic_url || null;
+}
+
+// URL から 流派 pinyin 抽出 (例: ".../liupai_pic/tianquan_small_1_oversea.png" → "tianquan")
+function _liupaiPinyinFromUrl(url) {
+  if (!url) return '';
+  const m = String(url).match(/\/liupai_pic\/([a-z]+)_/);
+  return m ? m[1] : '';
+}
+
+// 流派 ID (pinyin形式) → 公式 liupai_pic URL (small_oversea 固定、 tongyong は variant 無し)
+const _LIUPAI_BASE = 'https://www.wherewindsmeetgame.com/pc/qt/20251203102905/resource/liupai_pic/';
+function _liupaiUrlById(liupaiId) {
+  if (!liupaiId) return null;
+  if (liupaiId === 'tongyong') return _LIUPAI_BASE + 'tongyong_small_oversea.png';
+  // 形式: {pinyin}_{n} → {pinyin}_small_{n}_oversea.png
+  const m = String(liupaiId).match(/^([a-z]+)_(\d+)$/);
+  if (!m) return null;
+  return _LIUPAI_BASE + m[1] + '_small_' + m[2] + '_oversea.png';
+}
+
+// 武庫 path → 流派 pinyin
+const _ARSENAL_PATH_TO_PINYIN = {
+  bellstrike: 'tianquan',
+  stonesplit: 'kuanglan',
+  silkbind:   'qingxi',
+  bamboocut:  'guyun',
+  phys:       'tongyong',
+  voidPath:   'tongyong'
+};
+// 武庫の流派バッジ URL 解決:
+//   主武器 path と 武庫 path が一致 → 主武器 kongfu の liupai_pic_url (variant反映)
+//   不一致 → {pinyin}_small_1_oversea.png (基本 variant 1)、 phys/voidPath は tongyong (variant無)
+function _arsenalLiupaiResolve(roleInfo, arsenalPath) {
+  const pinyin = _ARSENAL_PATH_TO_PINYIN[arsenalPath];
+  if (!pinyin) return null;
+  // 主武器 path 一致なら kongfu.liupai_pic_url
+  const kid = roleInfo?.kongfuMain;
+  const kMainPath = window.WWM_KONGFU?.[kid]?.path;
+  if (kMainPath === arsenalPath) {
+    const url = window.WWM_KONGFU_ICONS?.[kid]?.liupai_pic_url;
+    if (url) return url;
+  }
+  // 不一致 → 基本 variant 1
+  if (pinyin === 'tongyong') return _LIUPAI_BASE + 'tongyong_small_oversea.png';
+  return _LIUPAI_BASE + pinyin + '_small_1_oversea.png';
+}
+
+// セット (装備) 経由の 流派バッジ URL 解決 (非武器 slot 向け、 sets.json の liupaiId を URL 化)
+// slot 分類は renderGearGrid と一致: isBow={9,21} / isArmor={3,4,5,8} / それ以外 (環/佩=10,11等) は weaponSets
+function _setLiupaiResolve(slot, eq, sets) {
+  if (slot === '1' || slot === '2') return null; // 武器は kongfu経由
+  const suffix = eq?.exVo?.suffix;
+  if (suffix == null) return null;
+  const isBow = slot === '9' || slot === '21';
+  const isArmor = ['3','4','5','8'].includes(String(slot));
+  const cat = isBow ? sets?.bowSets : (isArmor ? sets?.defensiveSets : sets?.weaponSets);
+  const liupaiId = cat?.[suffix]?.liupaiId;
+  return _liupaiUrlById(liupaiId);
+}
+
 function renderGearGrid(roleInfo) {
   const root = document.getElementById('wwmGearGrid');
   if (!root) return;
@@ -1703,11 +1768,18 @@ function renderGearGrid(roleInfo) {
     const isWeaponSlotIcon = (slot === '1' || slot === '2');
     const iconCls = 'wwm-equip-icon' + (isWeaponSlotIcon ? ' wwm-equip-icon-weapon' : '');
     const iconHtml = iconUrl ? `<img class="${iconCls}" src="${iconUrl}" alt="">` : '';
+    // 流派バッジ overlay: 武器 slot は kongfu経由、 非武器 slot は セット (sets.liupaiId) 経由
+    const liupaiUrl = ((slot === '1' || slot === '2')
+      ? _kongfuLiupaiResolve(slot, roleInfo)
+      : _setLiupaiResolve(slot, eq, sets));
+    const liupaiHtml = liupaiUrl ? `<img class="wwm-equip-liupai-badge" src="${liupaiUrl}" alt="" loading="lazy">` : '';
+    const liupaiPinyin = _liupaiPinyinFromUrl(liupaiUrl);
     const railLabel = _GEAR_RAIL_ZH[slot] || label;
     return `
-      <div class="wwm-equip-slot" data-slot="${slot}" onclick="WWMGear.openEdit('${slot}')">
+      <div class="wwm-equip-slot" data-slot="${slot}"${liupaiPinyin ? ` data-liupai-pinyin="${liupaiPinyin}"` : ''} onclick="WWMGear.openEdit('${slot}')">
+        ${liupaiHtml}
         <div class="wwm-equip-rail"><span class="wwm-equip-rail-text">${railLabel}</span></div>
-        ${iconHtml}
+        ${iconHtml ? `<div class="wwm-equip-icon-wrap">${iconHtml}</div>` : ''}
         <div class="wwm-equip-slot-inner">
           <div class="wwm-equip-slot-header">${setName ? `<span class="wwm-equip-setname">${setName}</span>` : ''}</div>
           <div class="wwm-equip-slot-body">
@@ -1895,11 +1967,16 @@ function renderXinfaGrid(roleInfo) {
     const iconUrl = (xid === origPassive[i]) ? xinfaIcons[i] : (window.WWM_XINFA_ICONS?.[xid]?.icon_url || null);
     const iconHtml = iconUrl ? `<img class="wwm-xinfa-icon" src="${iconUrl}" alt="">` : '';
     const tierChip = (xid && tier >= 1 && tier <= 5) ? `<div class="wwm-xinfa-tier-chip">T${tier}</div>` : '';
+    // 流派バッジ (心法に紐づく liupai)
+    const liupaiUrl = xid ? (window.WWM_XINFA_ICONS?.[xid]?.liupai_pic_url || null) : null;
+    const liupaiHtml = liupaiUrl ? `<img class="wwm-xinfa-liupai-badge" src="${liupaiUrl}" alt="" loading="lazy">` : '';
+    const liupaiPinyin = _liupaiPinyinFromUrl(liupaiUrl);
     return `
-      <div class="wwm-xinfa-slot" data-xinfa-slot="${i}" onclick="WWMXinfa.openEdit(${i})">
+      <div class="wwm-xinfa-slot" data-xinfa-slot="${i}"${liupaiPinyin ? ` data-liupai-pinyin="${liupaiPinyin}"` : ''} onclick="WWMXinfa.openEdit(${i})">
         ${tierChip}
+        ${liupaiHtml}
         <div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法${['一','二','三','四'][i]}</span></div>
-        ${iconHtml}
+        ${iconHtml ? `<div class="wwm-xinfa-icon-wrap">${iconHtml}</div>` : ''}
         <div class="wwm-xinfa-inner">
           <div class="wwm-xinfa-header"><b>${name}</b></div>
         </div>
@@ -1913,10 +1990,15 @@ function renderXinfaGrid(roleInfo) {
   const pathKey = arsenalState?.path || 'phys';
   const pathLabelMap = { phys: 'pathPhys', bellstrike: 'pathBellstrike', stonesplit: 'pathStonesplit', silkbind: 'pathSilkbind', bamboocut: 'pathBamboocut' };
   const pathName = (window.T && window.T[pathLabelMap[pathKey]]) || pathKey;
+  // 武庫流派バッジ: 主武器path と 武庫path 一致 → 主武器の variant、 不一致 → variant 1
+  const arsenalLiupaiUrl = _arsenalLiupaiResolve(roleInfo, pathKey);
+  const arsenalLiupaiHtml = arsenalLiupaiUrl ? `<img class="wwm-xinfa-liupai-badge" src="${arsenalLiupaiUrl}" alt="" loading="lazy">` : '';
+  const arsenalLiupaiPinyin = _liupaiPinyinFromUrl(arsenalLiupaiUrl);
   const arsenalCard = `
-    <div class="wwm-xinfa-slot wwm-arsenal-slot" data-arsenal-slot onclick="WWMXinfa.openArsenalEdit()">
+    <div class="wwm-xinfa-slot wwm-arsenal-slot" data-arsenal-slot${arsenalLiupaiPinyin ? ` data-liupai-pinyin="${arsenalLiupaiPinyin}"` : ''} onclick="WWMXinfa.openArsenalEdit()">
+      ${arsenalLiupaiHtml}
       <div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">武庫</span></div>
-      <img class="wwm-xinfa-icon" src="https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/kongfu/images/673361fe92bef95db34510429KLQLykS05.png" alt="">
+      <div class="wwm-xinfa-icon-wrap"><img class="wwm-xinfa-icon" src="https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/kongfu/images/673361fe92bef95db34510429KLQLykS05.png" alt=""></div>
       <div class="wwm-xinfa-inner">
         <div class="wwm-xinfa-header"><b>${pathName}</b></div>
       </div>
@@ -3655,7 +3737,7 @@ function openArsenalEdit() {
       <span class="wwm-cmp-l-bracket-tl"></span><span class="wwm-cmp-l-bracket-tr"></span>
       <span class="wwm-cmp-l-bracket-bl"></span><span class="wwm-cmp-l-bracket-br"></span>
       <div class="wwm-modal-header">
-        <h2><span class="wwm-cmp-title-ja">武庫</span><span class="wwm-cmp-title-en">ARSENAL</span><span class="wwm-cmp-seal">庫</span></h2>
+        <h2><span class="wwm-cmp-title-ja">武庫対照</span><span class="wwm-cmp-title-en">COMPARISON</span><span class="wwm-cmp-seal">庫</span></h2>
         <button class="wwm-modal-close" aria-label="Close">×</button>
       </div>
       <div class="wwm-modal-body">
