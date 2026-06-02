@@ -1151,6 +1151,9 @@ window.WWMOpt = { render: renderOptimization };
 
 // ── Build Sharing URL ──────────────────────────────────────────
 function _shareBuildUrl() {
+  // 一時停止中: 受信側で localStorage 浸食する問題対応のため、 read-only mode 実装まで機能停止
+  alert('🚧 ビルドSHARE 一時停止中 (ローカルデータ保護のため改修中)。 しばらくお待ちください。');
+  return;
   const ri = window.__WWM_ROLEINFO;
   if (!ri) { alert('build データなし。先に import してください。'); return; }
   const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
@@ -1358,29 +1361,13 @@ function _shareBuildUrl() {
   acPicker.addEventListener('input', refreshObs);
   lbgPicker.addEventListener('input', refreshObs);
 }
-// hash で build 受信時 復元
+// hash で build 受信時 復元 — 一時停止中 (localStorage 浸食問題、 完全read-only mode 実装まで)
+// 既配布 URL クリックされても hash 消去のみで ignore = 自データ保護
 function _loadSharedBuild() {
   const hash = location.hash || '';
-  const m = hash.match(/#build=([^&]+)/);
-  if (!m) return false;
-  try {
-    const b64 = m[1].replace(/-/g,'+').replace(/_/g,'/');
-    const json = decodeURIComponent(escape(atob(b64)));
-    const payload = JSON.parse(json);
-    if (payload?.data) {
-      localStorage.setItem('wwm_last_import_v1', JSON.stringify({ ts: Date.now(), data: payload.data }));
-      if (payload.state) localStorage.setItem('wwm_last_state_v1', JSON.stringify(payload.state));
-      // OBS view 武格指数 / Tier 表示用に baseline + opt_best も復元 (送信側で同梱)
-      if (payload.baseline) {
-        try { localStorage.setItem('wwm_baseline_score_v1', JSON.stringify(payload.baseline)); } catch(_) {}
-      }
-      if (payload.optBest) {
-        try { localStorage.setItem('wwm_opt_best_v1', JSON.stringify(payload.optBest)); } catch(_) {}
-      }
-      history.replaceState(null, '', location.pathname);
-      return true;
-    }
-  } catch (e) { console.error('[ShareBuild] 復元失敗:', e); }
+  if (hash.startsWith('#build=')) {
+    history.replaceState(null, '', location.pathname);
+  }
   return false;
 }
 // 起動時 hash チェック
