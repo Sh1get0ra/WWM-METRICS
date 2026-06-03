@@ -156,18 +156,29 @@ function _showLangPicker() {
   });
 }
 function _showImportHint() {
-  const btn = document.getElementById('importBtn');
+  // mobile時 IMPORT button は drawer内 hidden → ハンバーガー (≡) をtargetに切替
+  const isMobile = window.matchMedia('(max-width: 480px)').matches;
+  const btn = isMobile
+    ? (document.getElementById('wwmMobileHamburger') || document.getElementById('importBtn'))
+    : document.getElementById('importBtn');
   if (!btn || document.getElementById('wwmImportHint')) return;
   const r = btn.getBoundingClientRect();
+  if (r.width === 0 && r.height === 0) return;
   const o = document.createElement('div');
   o.id = 'wwmImportHint';
   o.className = 'wwm-import-hint';
-  o.style.left = (r.left + r.width/2) + 'px';
+  // btn 中心 = ▲が指すべき位置 / label は viewport内に clamp
+  const btnCx = r.left + r.width/2;
+  const vw = window.innerWidth;
+  const ESTIMATED_HALF = 70;
+  const labelCx = Math.min(vw - ESTIMATED_HALF - 4, Math.max(ESTIMATED_HALF + 4, btnCx));
+  o.style.left = labelCx + 'px';
   o.style.top  = (r.bottom + 12) + 'px';
   const T_ = window.T || {};
   const label = T_.importHintLabel || 'まずここからインポート';
+  const arrowOffset = btnCx - labelCx + (isMobile ? 24 : 0); // mobile時 ▲ をさらに右寄せ (ハンバーガー直下指す)
   o.innerHTML = `
-    <div class="wwm-import-hint-arrow" aria-hidden="true">▲</div>
+    <div class="wwm-import-hint-arrow" aria-hidden="true" style="margin-left:${arrowOffset}px;">▲</div>
     <div class="wwm-import-hint-label">${label}</div>
   `;
   document.body.appendChild(o);
