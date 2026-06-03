@@ -76,7 +76,7 @@ function openSetupModal() {
           </div>
           <div class="wwm-setup-panel" data-panel="mobile" ${isMobile?'':'hidden'}>
             <ol class="wwm-setup-steps">
-              <li>${(window.T && T.importMobStep1) || '下のコードをコピー:'}<br><textarea class="wwm-bm-code" id="wwmBmCode" readonly>${bmUrl}</textarea><br><button class="wwm-btn-secondary" id="wwmCopyBtn">${(window.T && T.importCopy) || 'コピー'}</button></li>
+              <li>${(window.T && T.importMobStep1) || '下のコードをコピー:'}<br><div style="font-size:10px;color:#0f0;background:#000;padding:2px 6px;border-radius:2px;display:inline-block;margin-bottom:4px;">BM v106 (popup fallback対応)</div><br><textarea class="wwm-bm-code" id="wwmBmCode" readonly>${bmUrl}</textarea><br><button class="wwm-btn-secondary" id="wwmCopyBtn">${(window.T && T.importCopy) || 'コピー'}</button></li>
               <li>${(window.T && T.importMobStep2) || '公式ツールをブックマーク登録'}</li>
               <li>${(window.T && T.importMobStep3) || 'ブックマーク編集 → URL をコピーしたコードに置換 → 名前「WWM インポート」'}</li>
               <li>${(window.T && T.importMobStep4) || '公式ツール開いた状態で アドレスバーに「WWM」入力 → 候補タップ'}</li>
