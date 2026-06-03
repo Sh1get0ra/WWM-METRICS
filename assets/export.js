@@ -58,6 +58,11 @@ function _fetchImgDataUrl(url) {
 }
 
 function exportImage() {
+  // SHARE Build mode 中は EXPORT 抑止 (他人ビルドの 画像 拡散回避)
+  if (window.__WWM_SHARED_BUILD) {
+    alert((window.T?.sharedBuildExportBlocked) ?? '閲覧モード中: EXPORT は無効化されています (他人のビルド画像 拡散できません)');
+    return;
+  }
   // ── 工事中: 一時的に EXPORT 機能停止 (ブラッシュアップ中) ──
   showToast('🚧 工事中 (ブラッシュアップ中)。 しばらくお待ちください。');
   return;

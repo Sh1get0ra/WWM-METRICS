@@ -408,6 +408,11 @@ function initPresets() {
 
 // ── データインポート ──────────────────────────────────────────────
 function importData() {
+  // SHARE Build mode 中は IMPORT 無効化 (受信した他人ビルドを上書きしないよう localStorage 保護)
+  if (window.__WWM_SHARED_BUILD) {
+    alert((window.T?.sharedBuildImportBlocked) ?? '閲覧モード中: IMPORT は無効化されています (自データに戻すには リロード/F5)');
+    return;
+  }
   if (window.WWMImport && typeof window.WWMImport.openSetup === 'function') {
     window.WWMImport.openSetup();
   } else {

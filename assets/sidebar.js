@@ -756,6 +756,11 @@ async function renderOptimization(roleInfo, params, opts) {
   const root = document.getElementById('wwmOptimization');
   if (!root || !roleInfo || !window.WWMStats?.buildStatParams) return;
   opts = opts || {};
+  // SHARE Build mode: 最適化計算 skip (panel = SHARE payload の opt_best表示のみ、 自データ書込み回避)
+  if (window.__WWM_SHARED_BUILD) {
+    root.innerHTML = `<div class="wwm-analysis-card wwm-modal-square"><div class="wwm-opt-loading" style="text-align:center;padding:24px;color:var(--paper-mute)">${(window.T?.sharedBuildOptDisabled) ?? '閲覧モード中: 装備最適化は無効化されています'}</div></div>`;
+    return;
+  }
   // 最適化中 donut/score の中間更新を suppress
   window.__WWM_OPT_RUNNING = true;
   const tokenBefore = window._OPT_TOKEN || 0;
@@ -1151,9 +1156,12 @@ window.WWMOpt = { render: renderOptimization };
 
 // ── Build Sharing URL ──────────────────────────────────────────
 function _shareBuildUrl() {
-  // 一時停止中: 受信側で localStorage 浸食する問題対応のため、 read-only mode 実装まで機能停止
-  alert('🚧 ビルドSHARE 一時停止中 (ローカルデータ保護のため改修中)。 しばらくお待ちください。');
-  return;
+  // SHARE Build mode 中は 他人ビルドの再配布回避のため SHARE生成 禁止
+  if (window.__WWM_SHARED_BUILD) {
+    alert((window.T?.sharedBuildShareBlocked) ?? '閲覧モード中: SHARE URL 生成は無効化されています (他人のビルドを再配布できません)');
+    return;
+  }
+  // 受信側は index.html inline script で memory-only mode 処理 (localStorage 浸食回避)
   const ri = window.__WWM_ROLEINFO;
   if (!ri) { alert('build データなし。先に import してください。'); return; }
   const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
@@ -1361,14 +1369,10 @@ function _shareBuildUrl() {
   acPicker.addEventListener('input', refreshObs);
   lbgPicker.addEventListener('input', refreshObs);
 }
-// hash で build 受信時 復元 — 一時停止中 (localStorage 浸食問題、 完全read-only mode 実装まで)
-// 既配布 URL クリックされても hash 消去のみで ignore = 自データ保護
+// hash で build 受信時 復元 — 処理は index.html inline script (memory-only mode、 早期実行)
+// sidebar.js 読込時点で 既に hash 消去 + window.__WWM_SHARED_BUILD セット済
 function _loadSharedBuild() {
-  const hash = location.hash || '';
-  if (hash.startsWith('#build=')) {
-    history.replaceState(null, '', location.pathname);
-  }
-  return false;
+  return !!window.__WWM_SHARED_BUILD;
 }
 // 起動時 hash チェック
 if (_loadSharedBuild()) {
