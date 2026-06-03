@@ -140,7 +140,8 @@
       return;
     }
     window.__WWM_SHARED_BUILD = payload;
-    // SHARE mode: baseline / opt_best を 明示的に window へ注入 (scoreVer差 無視で表示優先)
+    // SHARE mode: roleInfo / baseline / opt_best を 明示的に window へ注入 (scoreVer差 無視で表示優先)
+    window.__WWM_ROLEINFO = payload.data;
     if (payload.baseline) window.__WWM_BASELINE = payload.baseline;
     if (payload.optBest)  window.__WWM_OPT_BEST = payload.optBest;
     document.documentElement.classList.add('wwm-shared-build-mode');
