@@ -782,9 +782,6 @@ async function renderOptimization(roleInfo, params, opts) {
     const wasAborted = (window._OPT_TOKEN || 0) !== (tokenBefore + 1);
     if (!wasAborted) {
       try {
-        // transition 強制無効化 (即時スナップ) は廃止 → 進行中の donut アニメを途中で
-        // ブツ切りにし、ちらつきの原因になっていた。updateHero を普通に呼ぶだけにして
-        // CSS transition を尊重 (同値再セット時は transition 発火せず、滑らかに完走)。
         if (window.WWMHero) window.WWMHero.update(window.__WWM_PARAMS || params);
       } catch(_) {}
     }
@@ -833,7 +830,6 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
     </div>
     <div class="wwm-opt-progress" id="wwmOptProgress"></div>
   `;
-  // 装備 slot は常に全部位 ('1','2','3','4','5','8','10','11')。 slot filter selectbox は 2026-06-01 廃止 (デフォルト全部位以外の選択用途なし)。
   const slotsAllowed = new Set(['1','2','3','4','5','8','10','11']);
   function _bindControls() {
     const rEl = root.querySelector('#wwmOptRatio');
@@ -916,7 +912,6 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
   // tier 表示用 SS閾値 (worldLv 由来)
   const wl = params?.worldLv || 14;
   const ssThr = 6700 * Math.pow(0.8, 14 - wl);
-  // stopReason 廃止 (2026-06-01): 「N回で収束」 reason UI 削除に伴い不要化
   let lastBestNull = false;
   // iter=0 は弓セット swap のみ評価 (他affixより先に確定)
   // iter>=1 は affix swap (弓セットも再評価)
