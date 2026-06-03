@@ -1214,11 +1214,17 @@ function _shareBuildUrl() {
     const sState = JSON.stringify(payload.state || {}).length;
     const sBaseline = JSON.stringify(payload.baseline || {}).length;
     const sOpt = JSON.stringify(payload.optBest || {}).length;
-    // ri内 大field 探査
+    // ri内 全field size列挙 (不要field探査用)
     const riKeys = Object.keys(riLight);
-    const bigFields = riKeys.map(k => ({ k, sz: JSON.stringify(riLight[k] || null).length }))
-      .sort((a, b) => b.sz - a.sz).slice(0, 5);
-    _dbgInfo = `[DBG] json=${sJson} / data=${sData} state=${sState} bl=${sBaseline} opt=${sOpt}\nri top5: ${bigFields.map(f => f.k + '=' + f.sz).join(', ')}`;
+    const allFields = riKeys.map(k => ({ k, sz: JSON.stringify(riLight[k] === undefined ? null : riLight[k]).length }))
+      .sort((a, b) => b.sz - a.sz);
+    _dbgInfo = `[DBG] json=${sJson} / data=${sData} state=${sState} bl=${sBaseline} opt=${sOpt}\nri ALL (${riKeys.length}): ${allFields.map(f => f.k + '=' + f.sz).join(', ')}`;
+    // state 内訳
+    if (payload.state && typeof payload.state === 'object') {
+      const stKeys = Object.keys(payload.state);
+      const stSizes = stKeys.map(k => k + '=' + JSON.stringify(payload.state[k]).length).join(', ');
+      _dbgInfo += `\nstate keys: ${stSizes}`;
+    }
     // wearEquipsDetailed の slot別 + 1slot内 keys詳細
     const wd = riLight.wearEquipsDetailed;
     if (wd && typeof wd === 'object') {
