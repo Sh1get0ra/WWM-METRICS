@@ -11,7 +11,7 @@
 
 🔗 **工具地址**: https://wwm-metrics.pages.dev
 
-> 🚧 **移动端显示优化进行中** (推荐使用PC访问)。 手机/平板可能存在布局问题。
+> 📱 **移动端适配完成** (iPhone SE 375px 起 / Android 各尺寸)。 PC/移动端 均支持。
 
 > ⚠ **迁移通知**: 旧地址 `https://sh1get0ra.github.io/WWM-METRICS/` 将于 2026-06-08 前后停用。 请更新书签。
 

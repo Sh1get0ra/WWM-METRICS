@@ -54,7 +54,7 @@ function openSetupModal() {
          </div>`
       : `<p class="wwm-muted" data-i18n="importNoHistory">${(window.T && T.importNoHistory) || '直前のインポートはありません'}</p>`;
     const calcUrl = location.origin + location.pathname.replace(/[^/]*$/, '');
-    const bmSrc = "(async()=>{const C='" + calcUrl + "',H='www.wherewindsmeetgame.com',A='https://s2.easebar.com/78ae9d90792a3e9b/role/roleInfo',T=10000;if(location.host!==H){alert('公式ツール ('+H+') で実行してください');return;}const t=document.createElement('div');t.style.cssText='position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#000c;color:#fff;padding:12px 20px;border-radius:6px;z-index:99999;font:14px sans-serif';t.textContent='WWM-METRICS: 読込中...';document.body.appendChild(t);const i2b=async u=>{try{const r=await fetch(u);const bl=await r.blob();return await new Promise(rs=>{const f=new FileReader();f.onload=()=>rs(f.result);f.onerror=()=>rs('');f.readAsDataURL(bl);});}catch(_){return '';}};try{const k=(document.cookie.match(/(?:^|;\\s*)token=([^;]+)/)||[])[1];if(!k)throw new Error('未ログインです');const c=new AbortController,d=setTimeout(()=>c.abort(),T);const r=await fetch(A,{headers:{access_token:k},credentials:'include',signal:c.signal});clearTimeout(d);if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();if(!j.data)throw new Error(j.msg||'API err');try{const av=document.querySelector('img[src*=\"head/images\"]')?.src;if(av){j.data._avatarUrl=av;t.textContent='アバター取得中...';const b64=await i2b(av);if(b64)j.data._avatarBase64=b64;}}catch(_){}try{const xi=[...document.querySelectorAll('.icon-item .icon img.icon')].map(i=>i.src).filter(s=>s&&s.includes('xinfa/images'));if(xi.length){j.data._xinfaIcons=xi;t.textContent='心法アイコン取得中...';j.data._xinfaIconsBase64=await Promise.all(xi.map(u=>i2b(u)));}}catch(_){}const s=JSON.stringify(j.data),b=btoa(unescape(encodeURIComponent(s))).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');t.textContent='転送中...';window.open(C+'#import='+b,'_blank');t.textContent='完了';setTimeout(()=>{t.remove();try{window.close();}catch(_){}},800);}catch(e){t.textContent='エラー: '+e.message;t.style.background='#c00';setTimeout(()=>t.remove(),5000);}})();";
+    const bmSrc = "(async()=>{const C='" + calcUrl + "',H='www.wherewindsmeetgame.com',A='https://s2.easebar.com/78ae9d90792a3e9b/role/roleInfo',T=10000;if(location.host!==H){alert('公式ツール ('+H+') で実行してください');return;}const t=document.createElement('div');t.style.cssText='position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#000c;color:#fff;padding:12px 20px;border-radius:6px;z-index:99999;font:14px sans-serif';t.textContent='WWM-METRICS: 読込中...';document.body.appendChild(t);const i2b=async u=>{try{const r=await fetch(u);const bl=await r.blob();return await new Promise(rs=>{const f=new FileReader();f.onload=()=>rs(f.result);f.onerror=()=>rs('');f.readAsDataURL(bl);});}catch(_){return '';}};try{const k=(document.cookie.match(/(?:^|;\\s*)token=([^;]+)/)||[])[1];if(!k)throw new Error('未ログインです');const c=new AbortController,d=setTimeout(()=>c.abort(),T);const r=await fetch(A,{headers:{access_token:k},credentials:'include',signal:c.signal});clearTimeout(d);if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();if(!j.data)throw new Error(j.msg||'API err');try{const av=document.querySelector('img[src*=\"head/images\"]')?.src;if(av){j.data._avatarUrl=av;t.textContent='アバター取得中...';const b64=await i2b(av);if(b64)j.data._avatarBase64=b64;}}catch(_){}try{const xi=[...document.querySelectorAll('.icon-item .icon img.icon')].map(i=>i.src).filter(s=>s&&s.includes('xinfa/images'));if(xi.length){j.data._xinfaIcons=xi;t.textContent='心法アイコン取得中...';j.data._xinfaIconsBase64=await Promise.all(xi.map(u=>i2b(u)));}}catch(_){}const s=JSON.stringify(j.data),b=btoa(unescape(encodeURIComponent(s))).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');t.textContent='転送中...';var u=C+'#import='+b;if(/Mobi|Android|iPhone|iPad|iPod|Touch/i.test(navigator.userAgent)||screen.width<700){location.href=u;return;}window.open(u,'_blank')||(location.href=u);t.textContent='完了';setTimeout(()=>{t.remove();try{window.close();}catch(_){}},800);}catch(e){t.textContent='エラー: '+e.message;t.style.background='#c00';setTimeout(()=>t.remove(),5000);}})();";
     const bmUrl = 'javascript:' + encodeURIComponent(bmSrc);
     const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
     body.innerHTML = `
@@ -94,7 +94,15 @@ function openSetupModal() {
       const stored = _loadStored();
       if (stored) { m.remove(); openPreviewModal(stored.data, stored.importedAt, stored.state); }
     });
-    body.querySelector('#wwmOpenOfficialBtn').addEventListener('click', () => window.open(officialUrl, 'wwm-official'));
+    body.querySelector('#wwmOpenOfficialBtn').addEventListener('click', () => {
+      const isMobile = /Mobi|Android|iPhone|iPad|iPod|Touch/i.test(navigator.userAgent) || window.matchMedia('(max-width: 480px)').matches;
+      if (isMobile) {
+        // mobile: 自タブ遷移 → bookmarklet実行で計算ツールpreviewへ再遷移 = 1タブ完結
+        location.href = officialUrl;
+      } else {
+        window.open(officialUrl, 'wwm-official');
+      }
+    });
     body.querySelectorAll('.wwm-setup-tab').forEach(t => {
       t.addEventListener('click', () => {
         const tab = t.dataset.tab;
@@ -480,16 +488,17 @@ function _xinfaName(id) {
   return '心法ID ' + id;
 }
 async function _loadDicts() {
-  if (window.WWM_KONGFU && window.WWM_XINFA && window.WWM_SETS && window.WWM_AFFIX && window.WWM_XINFA_ICONS && window.WWM_KONGFU_ICONS && window.WWM_GEAR_SLOT_ICONS) return;
+  if (window.WWM_KONGFU && window.WWM_XINFA && window.WWM_SETS && window.WWM_AFFIX && window.WWM_XINFA_ICONS && window.WWM_KONGFU_ICONS && window.WWM_GEAR_SLOT_ICONS && window.WWM_AVATAR_ICONS) return;
   try {
-    const [kr, xr, sr, ar, xi, ki, gsi] = await Promise.all([
+    const [kr, xr, sr, ar, xi, ki, gsi, av] = await Promise.all([
       window.WWM_KONGFU ? Promise.resolve(window.WWM_KONGFU) : fetch('data/kongfu.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()),
       window.WWM_XINFA  ? Promise.resolve(window.WWM_XINFA)  : fetch('data/xinfa.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()),
       window.WWM_SETS   ? Promise.resolve(window.WWM_SETS)   : fetch('data/sets.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()),
       window.WWM_AFFIX  ? Promise.resolve(window.WWM_AFFIX)  : fetch('data/affix.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()),
       window.WWM_XINFA_ICONS ? Promise.resolve(window.WWM_XINFA_ICONS) : fetch('data/xinfa_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()).catch(()=>({})),
       window.WWM_KONGFU_ICONS ? Promise.resolve(window.WWM_KONGFU_ICONS) : fetch('data/kongfu_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()).catch(()=>({})),
-      window.WWM_GEAR_SLOT_ICONS ? Promise.resolve(window.WWM_GEAR_SLOT_ICONS) : fetch('data/gear_slot_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()).catch(()=>({}))
+      window.WWM_GEAR_SLOT_ICONS ? Promise.resolve(window.WWM_GEAR_SLOT_ICONS) : fetch('data/gear_slot_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()).catch(()=>({})),
+      window.WWM_AVATAR_ICONS ? Promise.resolve(window.WWM_AVATAR_ICONS) : fetch('data/avatar_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()).catch(()=>({}))
     ]);
     window.WWM_KONGFU = kr;
     window.WWM_XINFA = xr;
@@ -498,6 +507,7 @@ async function _loadDicts() {
     window.WWM_XINFA_ICONS = xi;
     window.WWM_KONGFU_ICONS = ki;
     window.WWM_GEAR_SLOT_ICONS = gsi;
+    window.WWM_AVATAR_ICONS = av;
   } catch(e) { console.warn('[WWM Import] dict load failed:', e); }
 }
 
@@ -960,7 +970,9 @@ function handleHashOnLoad() {
 }
 
 function _relayOrShow(data) {
-  if (!_bc) { openPreviewModal(data); return; }
+  // mobile: window.close 効かない (user gesture 制限) → BC relay skip して 自タブで直接 preview表示
+  const isMobile = window.matchMedia('(max-width: 480px)').matches;
+  if (isMobile || !_bc) { openPreviewModal(data); return; }
   const id = Math.random().toString(36).slice(2);
   let acked = false;
   const ackHandler = (e) => {

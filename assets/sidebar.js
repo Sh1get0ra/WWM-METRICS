@@ -1181,15 +1181,74 @@ function _shareBuildUrl() {
   const riLight = { ...ri };
   delete riLight._avatarBase64;
   delete riLight._xinfaIconsBase64;
+  // 心法icon URL配列も削除 → 受信側で WWM_XINFA_ICONS (data/xinfa_icons.json) fallback で復元
+  delete riLight._xinfaIcons;
+  // avatar URL も削除 → 受信側で roleAvatar ID → WWM_AVATAR_ICONS (data/avatar_icons.json) で復元
+  delete riLight._avatarUrl;
+  // 表示・計算に不要な field を削除 (privacy + 文字数削減)
+  delete riLight.battleQs;       // 戦闘 quest
+  delete riLight.createTime;     // キャラ作成日時
+  delete riLight.onlineTime;     // 直近online
+  delete riLight.crDay;          // 不明、計算未使用
+  delete riLight.roleId;         // ユーザID = privacy
+  delete riLight.scores58;       // 用途不明、計算未使用
+  delete riLight.scores59;
+  delete riLight.scores60;
+  delete riLight.fashionScore;   // ファッション、計算無関係
+  delete riLight.bg;             // 背景
+  delete riLight.bodyType;       // キャラ体型
+  delete riLight.school;         // debug log のみ使用、 表示不要
   // OBS view 武格指数 / Tier badge 表示用に baseline + opt_best 同梱 (数百バイト、 URL長影響軽微)
   const baseline = window.__WWM_BASELINE || null;
   const optBest  = window.__WWM_OPT_BEST || null;
-  const payload = { v: 1, data: riLight, state: state || null, baseline, optBest };
+  // baseAffixes slim化: {equipmentDetails:[id,val,ratio,rank,useful]} → [id,val,ratio,rank,useful]
+  //   + ratio 小数3桁丸め、 boolean→0/1 で 50%程縮小。 受信側 inline script で復元。
+  //   ※元 ri 共有を避けるため wearEquipsDetailed は deep clone してから slim化
+  try {
+    const wd = riLight.wearEquipsDetailed;
+    if (wd && typeof wd === 'object') {
+      const wdCloned = JSON.parse(JSON.stringify(wd));
+      Object.values(wdCloned).forEach(eq => {
+        if (eq?.exVo?.baseAffixes && Array.isArray(eq.exVo.baseAffixes)) {
+          eq.exVo.baseAffixes = eq.exVo.baseAffixes.map(a => {
+            const d = a?.equipmentDetails;
+            if (!Array.isArray(d)) return a;
+            return [d[0], d[1], d[2], d[3], d[4]?1:0];
+          });
+        }
+      });
+      riLight.wearEquipsDetailed = wdCloned;
+    }
+  } catch(_) {}
+  // state.arsenal slim化 (v3): {path, tiers:{lv:{peaked,min,max}}} → {p,t:[[peaked,min,max],...]} (Tier固定順)
+  let stateSlim = state;
+  try {
+    if (state?.arsenal && typeof state.arsenal === 'object') {
+      stateSlim = JSON.parse(JSON.stringify(state)); // deep clone
+      const ARS_TIERS = [41, 51, 56, 61, 71, 81, 86];
+      const tiers = stateSlim.arsenal.tiers || {};
+      stateSlim.arsenal = {
+        p: stateSlim.arsenal.path,
+        t: ARS_TIERS.map(lv => {
+          const t = tiers[lv] || {};
+          return [t.peaked ? 1 : 0, t.min ?? 0, t.max ?? 0];
+        })
+      };
+    }
+  } catch(_) {}
+  const payload = { v: 3, data: riLight, state: stateSlim || null, baseline, optBest, lang: _curLang() };
   let url, b64;
   try {
     const json = JSON.stringify(payload);
+    // OBS URL 用 base64 (旧形式維持 → 既存 OBS browser source設定 互換)
     b64 = btoa(unescape(encodeURIComponent(json))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-    url = location.origin + location.pathname + '#build=' + b64;
+    // SHARE URL: LZ圧縮 + query (?b=) → X t.co短縮対象 + URL短縮 (50-70%減)
+    if (window.LZString) {
+      const lz = LZString.compressToEncodedURIComponent(json);
+      url = location.origin + location.pathname + '?b=' + lz;
+    } else {
+      url = location.origin + location.pathname + '#build=' + b64;
+    }
   } catch (e) { alert('URL 生成失敗: ' + e.message); return; }
   // OBS URL は 透明度+背景色+文字色+ラベル背景 込みで動的生成
   const buildObsUrl = (opPct, bgHex, t1Hex, t2Hex, acHex, lbgHex) => {
@@ -1231,7 +1290,8 @@ function _shareBuildUrl() {
           <button class="wwm-btn-secondary" id="wwmShareCopyNormal">${(window.T?.shareCopyUrl) ?? 'URL コピー'}</button>
         </div>
 
-        <!-- セクション2: OBS Browser Source -->
+        <!-- セクション2: OBS Browser Source (mobile時 hidden) -->
+        <div class="wwm-share-obs-block">
         <div style="font-size:13px;color:var(--gold-bright);font-weight:700;letter-spacing:0.12em;margin:22px 0 6px;">${(window.T?.shareSect2Heading) ?? '▍OBS 配信用 URL'}</div>
         <p style="font-size:12px;color:var(--paper);opacity:0.92;margin:0 0 8px;line-height:1.6;">${(window.T?.shareSect2Desc) ?? ''}</p>
         <div style="font-size:12px;color:#e8a04a;background:rgba(232,160,74,0.10);border-left:3px solid #e8a04a;padding:8px 10px;margin:0 0 10px;line-height:1.6;border-radius:2px;">⚠ ${(window.T?.shareObsCacheWarn) ?? 'OBSキャッシュの影響で正常に表示されない場合は、ブラウザソースの作り直し or OBS再起動が必要'}</div>
@@ -1290,6 +1350,7 @@ function _shareBuildUrl() {
             </div>
           </div>
         </div>
+        </div><!-- /wwm-share-obs-block -->
         <div id="wwmShareMsg" style="margin-top:8px;font-size:12px;color:var(--jade-bright);"></div>
       </div>
     </div>
@@ -1506,7 +1567,7 @@ async function renderSidebar(params) {
   const ri = window.__WWM_ROLEINFO;
   if (ri?.xiuWeiKungFu) totalMartial = ri.xiuWeiKungFu.toLocaleString();
   else if (ri?.maxXiuWeiKungFu) totalMartial = ri.maxXiuWeiKungFu.toLocaleString();
-  const _avSrc = ri?._avatarBase64 || ri?._avatarUrl || '';
+  const _avSrc = ri?._avatarBase64 || ri?._avatarUrl || (ri?.roleAvatar && window.WWM_AVATAR_ICONS?.[ri.roleAvatar]) || '';
   const avatar = _avSrc ? `<img class="wwm-sb-avatar" src="${_avSrc}" alt="avatar">` : '';
   const charName = ri?.roleName ? `${ri.roleName} <span class="wwm-muted">Lv${ri.level||'?'}</span>` : '';
   const importBtnLabel = (window.T && window.T.importBtn) || 'IMPORT';
@@ -1982,8 +2043,8 @@ function renderXinfaGrid(roleInfo) {
     const xinfa = xid ? xinfaMap[xid] : null;
     const name = xinfa ? (xinfa.names?.[lang] || xinfa.names?.ja || `心法ID ${xid}`) : '(空)';
     const tier = tiers[i] ?? tiers[String(i)] ?? 6;
-    // icon: 元と同じ xid なら base64/URL、 swap 後は dict から URL fallback
-    const iconUrl = (xid === origPassive[i]) ? xinfaIcons[i] : (window.WWM_XINFA_ICONS?.[xid]?.icon_url || null);
+    // icon: 元と同じ xid なら base64/URL、 swap 後 or 配列が空(SHARE mode等) は dict から URL fallback
+    const iconUrl = (xid === origPassive[i] && xinfaIcons[i]) ? xinfaIcons[i] : (window.WWM_XINFA_ICONS?.[xid]?.icon_url || null);
     const iconHtml = iconUrl ? `<img class="wwm-xinfa-icon" src="${iconUrl}" alt="">` : '';
     const tierChip = (xid && tier >= 1 && tier <= 5) ? `<div class="wwm-xinfa-tier-chip">T${tier}</div>` : '';
     // 流派バッジ (心法に紐づく liupai)
@@ -3749,7 +3810,8 @@ function openArsenalEdit() {
     }).join('');
   }
   function _pathRadios(curKey) {
-    return PATHS.map(p => `<label class="wwm-radio-label" style="display:inline-flex;align-items:center;gap:4px;margin-right:8px;cursor:pointer;"><input type="radio" name="wwmArsenalEditPath" value="${p.key}" ${p.key===curKey?'checked':''}>${pathLabel(p.key)}</label>`).join('');
+    const opts = PATHS.map(p => `<option value="${p.key}" ${p.key===curKey?'selected':''}>${pathLabel(p.key)}</option>`).join('');
+    return `<select id="wwmArsenalEditPathSel" class="wwm-cmp-set-select" name="wwmArsenalEditPath">${opts}</select>`;
   }
   m.innerHTML = `
     <div class="wwm-modal wwm-modal-square wwm-cmp-modal-a wwm-arsenal-modal">

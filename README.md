@@ -11,7 +11,7 @@
 
 🔗 **ツール URL**: https://wwm-metrics.pages.dev
 
-> 🚧 **モバイル表示最適化 作業中** (PC からのご利用を推奨)。 スマホ/タブレットでは表示崩れの可能性あり。
+> 📱 **モバイル版対応完了** (iPhone SE 375px〜 / Android 各サイズ)。 PC/モバイル両対応。
 
 > ⚠ **移転のお知らせ**: 旧URL `https://sh1get0ra.github.io/WWM-METRICS/` は 2026-06-08 頃 停止予定。 ブックマーク等の更新お願いします。
 
