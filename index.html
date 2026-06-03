@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;900&family=Noto+Serif+JP:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Yuji+Mai&family=Yuji+Boku&family=Ma+Shan+Zheng&family=ZCOOL+QingKe+HuangYou&family=Kaisei+Decol:wght@700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<link rel="stylesheet" href="assets/styles.css?v=680">
+<link rel="stylesheet" href="assets/styles.css?v=692">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DFYB6MKMMY"></script>
 <script>
@@ -168,6 +168,179 @@
       const btn = e.target.closest('.wwm-mobile-drawer-btn');
       if (btn) setTimeout(close, 100);
     });
+
+    // ── Phase 7: Mobile Stat FAB + 全画面 stat overlay ──
+    const fab = document.getElementById('wwmMobileStatFab');
+    const fabAvatar = document.getElementById('wwmMobileStatFabAvatar');
+    const fabFallback = document.getElementById('wwmMobileStatFabFallback');
+    const statOverlay = document.getElementById('wwmMobileStatOverlay');
+    const statBackdrop = document.getElementById('wwmMobileStatOverlayBackdrop');
+    const statClose = document.getElementById('wwmMobileStatOverlayClose');
+    const statBody = document.getElementById('wwmMobileStatOverlayBody');
+    const isMobile = () => window.matchMedia('(max-width: 480px)').matches;
+    // avatar 同期 (sidebar render 後 / mobile時のみ FAB 表示)
+    const syncFab = () => {
+      if (!fab) return;
+      if (!isMobile()) { fab.hidden = true; return; }
+      const ri = window.__WWM_ROLEINFO;
+      const src = ri?._avatarBase64 || ri?._avatarUrl || '';
+      if (fabAvatar) {
+        if (src) { fabAvatar.src = src; fabAvatar.style.display = ''; if (fabFallback) fabFallback.style.display = 'none'; }
+        else { fabAvatar.removeAttribute('src'); fabAvatar.style.display = 'none'; if (fabFallback) fabFallback.style.display = ''; }
+      }
+      // データ未importでも FAB は表示 (tap で stat overlay = importガイドに)
+      fab.hidden = false;
+    };
+    // sidebar element 自体を overlay 内に move (clone だと event listener 失う + import前 空問題)
+    let _sbOrigParent = null, _sbOrigNext = null;
+    const openStat = () => {
+      if (!statOverlay || !statBody) return;
+      const sb = document.getElementById('wwmSidebar');
+      if (sb && sb.parentNode !== statBody) {
+        _sbOrigParent = sb.parentNode;
+        _sbOrigNext = sb.nextSibling;
+        statBody.appendChild(sb);
+        sb.classList.add('wwm-sidebar-in-overlay');
+      }
+      // import前 等で sidebar 空なら案内表示
+      if (sb && !sb.innerHTML.trim()) {
+        sb.innerHTML = '<div style="padding:24px;text-align:center;color:var(--paper-mute);font-size:13px;">データ未インポート<br><br>ハンバーガー → IMPORT で読み込み</div>';
+      }
+      statOverlay.hidden = false;
+      if (statBackdrop) statBackdrop.hidden = false;
+      document.body.style.overflow = 'hidden';
+    };
+    const closeStat = () => {
+      const sb = document.getElementById('wwmSidebar');
+      if (sb && _sbOrigParent) {
+        sb.classList.remove('wwm-sidebar-in-overlay');
+        if (_sbOrigNext && _sbOrigNext.parentNode === _sbOrigParent) {
+          _sbOrigParent.insertBefore(sb, _sbOrigNext);
+        } else {
+          _sbOrigParent.appendChild(sb);
+        }
+        _sbOrigParent = null; _sbOrigNext = null;
+      }
+      if (statOverlay) statOverlay.hidden = true;
+      if (statBackdrop) statBackdrop.hidden = true;
+      document.body.style.overflow = '';
+    };
+    // ── Phase 7-b: FAB ドラッグ位置移動 (localStorage で永続化) ──
+    const FAB_POS_KEY = 'wwmMobileStatFabPos';
+    const FAB_SIZE = 56, DRAG_THRESHOLD = 6;
+    let _fabDragging = false, _fabMoved = false;
+    let _fabPtrStartX = 0, _fabPtrStartY = 0, _fabStartX = 0, _fabStartY = 0;
+    const _clampPos = (x, y) => {
+      const vw = window.innerWidth, vh = window.innerHeight, m = 4;
+      return {
+        x: Math.max(m, Math.min(vw - FAB_SIZE - m, x)),
+        y: Math.max(m, Math.min(vh - FAB_SIZE - m, y))
+      };
+    };
+    const _applyFabPos = (x, y) => {
+      if (!fab) return;
+      const p = _clampPos(x, y);
+      fab.style.left = p.x + 'px';
+      fab.style.top = p.y + 'px';
+      fab.style.right = 'auto';
+      fab.style.bottom = 'auto';
+    };
+    const _saveFabPos = () => {
+      if (!fab) return;
+      const r = fab.getBoundingClientRect();
+      try { localStorage.setItem(FAB_POS_KEY, JSON.stringify({ x: r.left, y: r.top })); } catch {}
+    };
+    const _restoreFabPos = () => {
+      try {
+        const raw = localStorage.getItem(FAB_POS_KEY);
+        if (!raw) return;
+        const p = JSON.parse(raw);
+        if (typeof p?.x === 'number' && typeof p?.y === 'number') _applyFabPos(p.x, p.y);
+      } catch {}
+    };
+    fab?.addEventListener('pointerdown', (e) => {
+      _fabDragging = true; _fabMoved = false;
+      _fabPtrStartX = e.clientX; _fabPtrStartY = e.clientY;
+      const r = fab.getBoundingClientRect();
+      _fabStartX = r.left; _fabStartY = r.top;
+      try { fab.setPointerCapture(e.pointerId); } catch {}
+    });
+    fab?.addEventListener('pointermove', (e) => {
+      if (!_fabDragging) return;
+      const dx = e.clientX - _fabPtrStartX, dy = e.clientY - _fabPtrStartY;
+      if (!_fabMoved && Math.hypot(dx, dy) > DRAG_THRESHOLD) _fabMoved = true;
+      if (_fabMoved) { e.preventDefault(); _applyFabPos(_fabStartX + dx, _fabStartY + dy); }
+    });
+    const _endFabDrag = (e) => {
+      if (!_fabDragging) return;
+      _fabDragging = false;
+      if (_fabMoved) _saveFabPos();
+    };
+    fab?.addEventListener('pointerup', _endFabDrag);
+    fab?.addEventListener('pointercancel', _endFabDrag);
+    // click より先に登録: 移動有なら openStat 抑止 (1回限り)
+    fab?.addEventListener('click', (e) => {
+      if (_fabMoved) { e.preventDefault(); e.stopImmediatePropagation(); _fabMoved = false; }
+    }, true);
+    // viewport resize時 はみ出し補正
+    window.addEventListener('resize', () => {
+      if (!fab || fab.hidden) return;
+      const r = fab.getBoundingClientRect();
+      _applyFabPos(r.left, r.top);
+    });
+    _restoreFabPos();
+
+    fab?.addEventListener('click', openStat);
+    statClose?.addEventListener('click', closeStat);
+    statBackdrop?.addEventListener('click', closeStat);
+
+    // ── Phase 8: 📈格析 全画面 overlay ──
+    const anlzBtn = document.getElementById('wwmMobileAnlzBtn');
+    const anlzOverlay = document.getElementById('wwmMobileAnlzOverlay');
+    const anlzBackdrop = document.getElementById('wwmMobileAnlzOverlayBackdrop');
+    const anlzClose = document.getElementById('wwmMobileAnlzOverlayClose');
+    const anlzBody = document.getElementById('wwmMobileAnlzOverlayBody');
+    let _anlzOrigParent = null, _anlzOrigNext = null;
+    const openAnlz = () => {
+      if (!anlzOverlay || !anlzBody) return;
+      const anlz = document.querySelector('.wwm-anlz');
+      if (anlz && anlz.parentNode !== anlzBody) {
+        _anlzOrigParent = anlz.parentNode;
+        _anlzOrigNext = anlz.nextSibling;
+        anlzBody.appendChild(anlz);
+        anlz.classList.add('wwm-anlz-in-overlay');
+      }
+      anlzOverlay.hidden = false;
+      if (anlzBackdrop) anlzBackdrop.hidden = false;
+      document.body.style.overflow = 'hidden';
+    };
+    const closeAnlz = () => {
+      const anlz = document.querySelector('.wwm-anlz');
+      if (anlz && _anlzOrigParent) {
+        anlz.classList.remove('wwm-anlz-in-overlay');
+        if (_anlzOrigNext && _anlzOrigNext.parentNode === _anlzOrigParent) {
+          _anlzOrigParent.insertBefore(anlz, _anlzOrigNext);
+        } else {
+          _anlzOrigParent.appendChild(anlz);
+        }
+        _anlzOrigParent = null; _anlzOrigNext = null;
+      }
+      if (anlzOverlay) anlzOverlay.hidden = true;
+      if (anlzBackdrop) anlzBackdrop.hidden = true;
+      document.body.style.overflow = '';
+    };
+    anlzBtn?.addEventListener('click', openAnlz);
+    anlzClose?.addEventListener('click', closeAnlz);
+    anlzBackdrop?.addEventListener('click', closeAnlz);
+    window.addEventListener('resize', syncFab);
+    // sidebar render後 avatar 取れる → 軽く polling (一度確定したら interval停止)
+    let _fabSyncTries = 0;
+    const _fabSyncInterval = setInterval(() => {
+      syncFab();
+      _fabSyncTries++;
+      if (_fabSyncTries > 60 || window.__WWM_ROLEINFO?._avatarBase64) clearInterval(_fabSyncInterval);
+    }, 500);
+    syncFab();
   });
 </script>
 </head>
@@ -258,6 +431,30 @@
       </button>
     </div>
   </div>
+
+  <!-- Mobile Stat FAB (PC時 hidden、 mobile時のみ表示 / tap でステ overlay open) -->
+  <button type="button" class="wwm-mobile-stat-fab" id="wwmMobileStatFab" aria-label="ステ表示" hidden>
+    <img class="wwm-mobile-stat-fab-avatar" id="wwmMobileStatFabAvatar" alt="" loading="lazy">
+    <span class="wwm-mobile-stat-fab-fallback" id="wwmMobileStatFabFallback">ステ</span>
+  </button>
+  <div class="wwm-mobile-stat-overlay-backdrop" id="wwmMobileStatOverlayBackdrop" hidden></div>
+  <aside class="wwm-mobile-stat-overlay" id="wwmMobileStatOverlay" hidden aria-label="ステ詳細">
+    <div class="wwm-mobile-stat-overlay-header">
+      <span class="wwm-mobile-stat-overlay-title">STATS</span>
+      <button type="button" class="wwm-mobile-stat-overlay-close" id="wwmMobileStatOverlayClose" aria-label="閉じる">×</button>
+    </div>
+    <div class="wwm-mobile-stat-overlay-body" id="wwmMobileStatOverlayBody"></div>
+  </aside>
+
+  <!-- Mobile Analysis Overlay (📈格析 全画面 / PC時 hidden、 mobile時のみ表示) -->
+  <div class="wwm-mobile-anlz-overlay-backdrop" id="wwmMobileAnlzOverlayBackdrop" hidden></div>
+  <aside class="wwm-mobile-anlz-overlay" id="wwmMobileAnlzOverlay" hidden aria-label="格析パネル">
+    <div class="wwm-mobile-anlz-overlay-header">
+      <span class="wwm-mobile-anlz-overlay-title" data-i18n="anlzTitle">格析</span>
+      <button type="button" class="wwm-mobile-anlz-overlay-close" id="wwmMobileAnlzOverlayClose" aria-label="閉じる">×</button>
+    </div>
+    <div class="wwm-mobile-anlz-overlay-body" id="wwmMobileAnlzOverlayBody"></div>
+  </aside>
 
   <!-- スコア計算更新バナー: baseline 鮮度切れ (scoreVer 不一致) 時のみ表示。再import促し。OBS view 非表示。 -->
   <div id="wwmScoreUpdateBanner" class="wwm-score-update-banner" style="display:none;">
