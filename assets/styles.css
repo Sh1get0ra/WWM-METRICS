@@ -6978,7 +6978,6 @@ html[data-theme="light"] .wwm-mobile-drawer * { color: var(--vermilion-deep); }
   }
   html[data-theme="light"] .wwm-mobile-anlz-overlay-title { color: var(--vermilion-deep); }
   html[data-theme="light"] .wwm-mobile-anlz-overlay-close { color: var(--vermilion-deep); }
-}
 
 /* PC時 FAB / overlay 完全 hidden (mobile @media 外でも) */
 .wwm-mobile-stat-fab,
