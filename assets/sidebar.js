@@ -1181,6 +1181,8 @@ function _shareBuildUrl() {
   const riLight = { ...ri };
   delete riLight._avatarBase64;
   delete riLight._xinfaIconsBase64;
+  // 心法icon URL配列も削除 → 受信側で WWM_XINFA_ICONS (data/xinfa_icons.json) fallback で復元
+  delete riLight._xinfaIcons;
   // OBS view 武格指数 / Tier badge 表示用に baseline + opt_best 同梱 (数百バイト、 URL長影響軽微)
   const baseline = window.__WWM_BASELINE || null;
   const optBest  = window.__WWM_OPT_BEST || null;
