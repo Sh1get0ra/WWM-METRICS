@@ -1018,7 +1018,6 @@ window._hideScoreBanner = _hideScoreBanner;
 // page load 時: hash がなければ最後の import を localStorage から auto-load。
 // データ無い場合も sidebar は placeholder で描画。
 function _autoLoadLastImport() {
-  if (window.__WWM_SHARED_BUILD) return;  // SHARE mode: inline script で __WWM_BASELINE/__WWM_OPT_BEST 注入済、上書き禁止
   if ((location.hash || '').startsWith(IMPORT_HASH_PREFIX)) return;  // hash flow が処理
   // baseline 復元 + 鮮度チェック (scoreVer)
   try {
