@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;900&family=Noto+Serif+JP:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Yuji+Mai&family=Yuji+Boku&family=Ma+Shan+Zheng&family=ZCOOL+QingKe+HuangYou&family=Kaisei+Decol:wght@700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
-<link rel="stylesheet" href="assets/styles.css?v=695">
+<link rel="stylesheet" href="assets/styles.css?v=696">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DFYB6MKMMY"></script>
 <script>
@@ -149,7 +149,8 @@
       'wwm_last_state_v1':     () => payload.state    ? JSON.stringify(payload.state)    : null,
       'wwm_baseline_score_v1': () => payload.baseline ? JSON.stringify(payload.baseline) : null,
       'wwm_opt_best_v1':       () => payload.optBest  ? JSON.stringify(payload.optBest)  : null,
-      'wwm_lang':              () => payload.lang || null
+      'wwm_lang':              () => payload.lang || null,
+      'wwm_virtual_v1':        () => null  // SHARE mode = 自データの virtual装備混入回避 (純粋 SHARE元データのみ)
     };
     localStorage.getItem = function(k) {
       if (READ_MAP[k]) return READ_MAP[k]();
