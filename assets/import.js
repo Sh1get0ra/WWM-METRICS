@@ -1018,7 +1018,6 @@ window._hideScoreBanner = _hideScoreBanner;
 // page load 時: hash がなければ最後の import を localStorage から auto-load。
 // データ無い場合も sidebar は placeholder で描画。
 function _autoLoadLastImport() {
-  if (window.__WWM_SHARED_BUILD) return;  // SHARE mode: inline script で __WWM_BASELINE/__WWM_OPT_BEST 注入済、上書き禁止
   if ((location.hash || '').startsWith(IMPORT_HASH_PREFIX)) return;  // hash flow が処理
   // baseline 復元 + 鮮度チェック (scoreVer)
   try {
@@ -1027,7 +1026,8 @@ function _autoLoadLastImport() {
       : JSON.parse(localStorage.getItem('wwm_baseline_score_v1') || 'null');
     if (bl) {
       const curVer = window.WWM_SCORE_VERSION || 1;
-      if (bl.scoreVer === curVer) {
+      // SHARE mode: scoreVer差 無視で表示優先 (他人ビルド閲覧)
+      if (bl.scoreVer === curVer || window.__WWM_SHARED_BUILD) {
         window.__WWM_BASELINE = bl;
       } else {
         // scoreVer 不一致 (無し=機能導入前 含む) → baseline 無効化 (再計算せず破棄=drift回避) + 再import促しバナー。
@@ -1043,7 +1043,8 @@ function _autoLoadLastImport() {
       if (obRaw) {
         const ob = JSON.parse(obRaw);
         const curVer = window.WWM_SCORE_VERSION || 1;
-        if (ob && ob.scoreVer === curVer && typeof ob.end === 'number') {
+        // SHARE mode: scoreVer差 無視
+        if (ob && (ob.scoreVer === curVer || window.__WWM_SHARED_BUILD) && typeof ob.end === 'number') {
           window.__WWM_OPT_BEST = ob;
           window.__WWM_OPT_BEST_LOCKED = true;
         } else {
