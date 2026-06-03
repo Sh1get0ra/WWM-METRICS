@@ -1053,11 +1053,7 @@ function _autoLoadLastImport() {
       }
     } catch(_) {}
   } catch(e) {}
-  let stored = _loadStored();
-  // SHARE mode: localStorage monkey patch失敗時の fallback (inline script で注入済の __WWM_ROLEINFO 利用)
-  if (!stored?.data && window.__WWM_SHARED_BUILD && window.__WWM_ROLEINFO) {
-    stored = { ts: 0, data: window.__WWM_ROLEINFO, state: window.__WWM_SHARED_BUILD.state || null };
-  }
+  const stored = _loadStored();
   if (!stored?.data) {
     // データ無 → sidebar placeholder のみ描画
     if (window.WWMSidebar) window.WWMSidebar.render(null);
