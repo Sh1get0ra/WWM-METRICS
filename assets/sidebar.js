@@ -3749,7 +3749,8 @@ function openArsenalEdit() {
     }).join('');
   }
   function _pathRadios(curKey) {
-    return PATHS.map(p => `<label class="wwm-radio-label" style="display:inline-flex;align-items:center;gap:4px;margin-right:8px;cursor:pointer;"><input type="radio" name="wwmArsenalEditPath" value="${p.key}" ${p.key===curKey?'checked':''}>${pathLabel(p.key)}</label>`).join('');
+    const opts = PATHS.map(p => `<option value="${p.key}" ${p.key===curKey?'selected':''}>${pathLabel(p.key)}</option>`).join('');
+    return `<select id="wwmArsenalEditPathSel" class="wwm-cmp-set-select" name="wwmArsenalEditPath">${opts}</select>`;
   }
   m.innerHTML = `
     <div class="wwm-modal wwm-modal-square wwm-cmp-modal-a wwm-arsenal-modal">
