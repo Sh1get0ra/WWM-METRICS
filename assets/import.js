@@ -960,7 +960,9 @@ function handleHashOnLoad() {
 }
 
 function _relayOrShow(data) {
-  if (!_bc) { openPreviewModal(data); return; }
+  // mobile: window.close 効かない (user gesture 制限) → BC relay skip して 自タブで直接 preview表示
+  const isMobile = window.matchMedia('(max-width: 480px)').matches;
+  if (isMobile || !_bc) { openPreviewModal(data); return; }
   const id = Math.random().toString(36).slice(2);
   let acked = false;
   const ackHandler = (e) => {
