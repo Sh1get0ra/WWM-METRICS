@@ -327,23 +327,33 @@ function _diagnose(roleInfo, params) {
     const need = ((hitCapThreshold - params.hitRate) * 100).toFixed(1);
     out.push({ type: 'info', text: _tpl(T_.diagHitUnder || '命中率不足 (現 {0}% / cap {1}% / 残 {2}%)', (params.hitRate*100).toFixed(1), (hitCapThreshold*100).toFixed(1), need) });
   }
-  // 会心率過多
+  // 会心率: calc.js _computeCoreLayer と同式で 実効値計算
+  //   critRateAdj      = critRate / judgeRes
+  //   critRateBoosted  = min(0.8, critRateAdj + bonusCritRate)    ← bonusCritRate (心法 synergy) も cap内
+  //   appliedCrit      = max(0, min(1 - appliedSympathy, critRateBoosted + addCritRate))  ← addCritRate は cap突破可
   const critAdj = params.critRate / jr;
-  const critOverPct = (critAdj - 0.8) * 100;
-  if (critOverPct >= 3) {
-    out.push({ type: 'warn', text: _tpl(T_.diagCritOver || '会心率過多 (適用 {0}% / cap 80% / 超過 +{1}%)', (critAdj*100).toFixed(1), critOverPct.toFixed(1)) });
-  }
-  // 会意率過多
+  const bonusCrit = params.bonusCritRate || 0;
+  const critRawSum = critAdj + bonusCrit;
+  const critRateBoosted = Math.min(0.8, critRawSum);
+  const addCrit = params.addCritRate || 0;
+  // 会意率
   const symAdj = params.sympathyRate / jr;
+  const appliedSym = Math.min(1, Math.min(0.4, symAdj) + (params.addSympathyRate || 0));
+  // 実効会心率 (cap + addCrit + 会意による上限)
+  const appliedCrit = Math.max(0, Math.min(1 - appliedSym, critRateBoosted + addCrit));
+  // 会心率過多 (cap前 合計 > 80% = bonusCrit 含む)
+  const critOverPct = (critRawSum - 0.8) * 100;
+  if (critOverPct >= 3) {
+    out.push({ type: 'warn', text: _tpl(T_.diagCritOver || '会心率過多 (適用 {0}% / cap 80% / 超過 +{1}%)', (critRawSum*100).toFixed(1), critOverPct.toFixed(1)) });
+  }
+  // 会意率過多 (cap前 > 40%)
   const symOverPct = (symAdj - 0.4) * 100;
   if (symOverPct >= 3) {
     out.push({ type: 'warn', text: _tpl(T_.diagSymOver || '会意率過多 (適用 {0}% / cap 40% / 超過 +{1}%)', (symAdj*100).toFixed(1), symOverPct.toFixed(1)) });
   }
-  // 会心率不足
-  const appliedCritFinal = Math.min(0.8, critAdj) + (params.addCritRate || 0);
-  const appliedSymFinal = Math.min(0.4, symAdj) + (params.addSympathyRate || 0);
-  if (critAdj <= 0.70 && (appliedCritFinal + appliedSymFinal) < 1.0) {
-    out.push({ type: 'warn', text: _tpl(T_.diagCritUnder || '会心率不足 (適用 {0}% / 最終会心+会意 {1}%)', (critAdj*100).toFixed(1), ((appliedCritFinal+appliedSymFinal)*100).toFixed(1)) });
+  // 会心率不足: cap飽和してない (critRateBoosted < 0.8) かつ 最終会心+会意 < 100% の時のみ
+  if (critRateBoosted < 0.8 && (appliedCrit + appliedSym) < 1.0) {
+    out.push({ type: 'warn', text: _tpl(T_.diagCritUnder || '会心率不足 (実効 {0}% / 最終会心+会意 {1}%)', (appliedCrit*100).toFixed(1), ((appliedCrit+appliedSym)*100).toFixed(1)) });
   }
   // 良好メッセ
   if (!out.filter(x => x.type==='warn').length) {

@@ -11,6 +11,8 @@
 
 🔗 **Tool URL**: https://wwm-metrics.pages.dev
 
+> 🚧 **Mobile display optimization in progress** (PC viewing recommended). Layout may be broken on smartphones/tablets.
+
 > ⚠ **Migration Notice**: The old URL `https://sh1get0ra.github.io/WWM-METRICS/` will be retired around 2026-06-08. Please update your bookmarks.
 
 ---
