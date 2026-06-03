@@ -1213,7 +1213,7 @@ function _shareBuildUrl() {
           eq.exVo.baseAffixes = eq.exVo.baseAffixes.map(a => {
             const d = a?.equipmentDetails;
             if (!Array.isArray(d)) return a;
-            return [d[0], Math.round(d[1]*100)/100, Math.round(d[2]*1000)/1000, d[3], d[4]?1:0];
+            return [d[0], d[1], d[2], d[3], d[4]?1:0];
           });
         }
       });
