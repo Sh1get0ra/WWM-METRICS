@@ -1211,6 +1211,9 @@ function _shareBuildUrl() {
         if (sample.exVo && typeof sample.exVo === 'object') {
           const evs = Object.keys(sample.exVo).map(k => k + '=' + JSON.stringify(sample.exVo[k]).length).sort((a,b) => parseInt(b.split('=')[1]) - parseInt(a.split('=')[1]));
           _dbgInfo += `\nexVo keys: ${evs.join(' ')}`;
+          if (Array.isArray(sample.exVo.baseAffixes) && sample.exVo.baseAffixes[0]) {
+            _dbgInfo += `\nbaseAffixes len=${sample.exVo.baseAffixes.length} sample[0]=${JSON.stringify(sample.exVo.baseAffixes[0]).slice(0,200)}`;
+          }
         }
       }
     }
