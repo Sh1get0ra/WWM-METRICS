@@ -1185,6 +1185,21 @@ function _shareBuildUrl() {
   const baseline = window.__WWM_BASELINE || null;
   const optBest  = window.__WWM_OPT_BEST || null;
   const payload = { v: 1, data: riLight, state: state || null, baseline, optBest };
+  // ── debug: payload size 内訳 (後で削除) ──
+  let _dbgInfo = '';
+  try {
+    const sJson = JSON.stringify(payload).length;
+    const sData = JSON.stringify(payload.data).length;
+    const sState = JSON.stringify(payload.state || {}).length;
+    const sBaseline = JSON.stringify(payload.baseline || {}).length;
+    const sOpt = JSON.stringify(payload.optBest || {}).length;
+    // ri内 大field 探査
+    const riKeys = Object.keys(riLight);
+    const bigFields = riKeys.map(k => ({ k, sz: JSON.stringify(riLight[k] || null).length }))
+      .sort((a, b) => b.sz - a.sz).slice(0, 5);
+    _dbgInfo = `[DBG] json=${sJson} / data=${sData} state=${sState} bl=${sBaseline} opt=${sOpt}\nri top5: ${bigFields.map(f => f.k + '=' + f.sz).join(', ')}`;
+  } catch(_) {}
+  window.__WWM_SHARE_DBG = _dbgInfo;
   let url, b64;
   try {
     const json = JSON.stringify(payload);
@@ -1193,9 +1208,12 @@ function _shareBuildUrl() {
     // SHARE URL: LZ圧縮 + query (?b=) → X t.co短縮対象 + URL短縮 (50-70%減)
     if (window.LZString) {
       const lz = LZString.compressToEncodedURIComponent(json);
+      _dbgInfo += `\nLZ=${lz.length} / b64=${b64.length}`;
+      window.__WWM_SHARE_DBG = _dbgInfo;
       url = location.origin + location.pathname + '?b=' + lz;
     } else {
-      // LZ-string load失敗時 fallback: 旧形式 (hash + base64)
+      _dbgInfo += '\nLZString NOT LOADED → fallback base64';
+      window.__WWM_SHARE_DBG = _dbgInfo;
       url = location.origin + location.pathname + '#build=' + b64;
     }
   } catch (e) { alert('URL 生成失敗: ' + e.message); return; }
@@ -1234,6 +1252,7 @@ function _shareBuildUrl() {
         <!-- セクション1: ビルド共有 -->
         <div style="font-size:13px;color:var(--gold-bright);font-weight:700;letter-spacing:0.12em;margin-bottom:6px;">${(window.T?.shareSect1Heading) ?? '▍ビルド共有'}</div>
         <p style="font-size:12px;color:var(--paper);opacity:0.92;margin:0 0 10px;line-height:1.6;">${(window.T?.shareSect1Desc) ?? ''}</p>
+        <div style="font-size:10px;color:#0f0;background:#000;padding:4px 6px;border-radius:2px;margin-bottom:4px;white-space:pre-wrap;font-family:monospace;">${(window.__WWM_SHARE_DBG || '').replace(/</g,'&lt;')}\nURL長=${url.length}</div>
         <textarea class="wwm-share-url" id="wwmShareUrlNormal" readonly>${url}</textarea>
         <div class="wwm-btn-row" style="margin-top:6px;">
           <button class="wwm-btn-secondary" id="wwmShareCopyNormal">${(window.T?.shareCopyUrl) ?? 'URL コピー'}</button>
