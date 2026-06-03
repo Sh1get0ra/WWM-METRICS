@@ -1183,6 +1183,8 @@ function _shareBuildUrl() {
   delete riLight._xinfaIconsBase64;
   // 心法icon URL配列も削除 → 受信側で WWM_XINFA_ICONS (data/xinfa_icons.json) fallback で復元
   delete riLight._xinfaIcons;
+  // avatar URL も削除 → 受信側で roleAvatar ID → WWM_AVATAR_ICONS (data/avatar_icons.json) で復元
+  delete riLight._avatarUrl;
   // OBS view 武格指数 / Tier badge 表示用に baseline + opt_best 同梱 (数百バイト、 URL長影響軽微)
   const baseline = window.__WWM_BASELINE || null;
   const optBest  = window.__WWM_OPT_BEST || null;
@@ -1587,7 +1589,7 @@ async function renderSidebar(params) {
   const ri = window.__WWM_ROLEINFO;
   if (ri?.xiuWeiKungFu) totalMartial = ri.xiuWeiKungFu.toLocaleString();
   else if (ri?.maxXiuWeiKungFu) totalMartial = ri.maxXiuWeiKungFu.toLocaleString();
-  const _avSrc = ri?._avatarBase64 || ri?._avatarUrl || '';
+  const _avSrc = ri?._avatarBase64 || ri?._avatarUrl || (ri?.roleAvatar && window.WWM_AVATAR_ICONS?.[ri.roleAvatar]) || '';
   const avatar = _avSrc ? `<img class="wwm-sb-avatar" src="${_avSrc}" alt="avatar">` : '';
   const charName = ri?.roleName ? `${ri.roleName} <span class="wwm-muted">Lv${ri.level||'?'}</span>` : '';
   const importBtnLabel = (window.T && window.T.importBtn) || 'IMPORT';
