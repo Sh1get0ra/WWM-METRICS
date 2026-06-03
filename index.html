@@ -15,6 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;900&family=Noto+Serif+JP:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Yuji+Mai&family=Yuji+Boku&family=Ma+Shan+Zheng&family=ZCOOL+QingKe+HuangYou&family=Kaisei+Decol:wght@700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
 <link rel="stylesheet" href="assets/styles.css?v=694">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DFYB6MKMMY"></script>
@@ -91,16 +92,27 @@
   })();
 </script>
 <script>
-  // ── SHARE Build mode: hash#build= 受信時 メモリ展開のみ (localStorage 浸食回避) ──
+  // ── SHARE Build mode: ?b= (LZ圧縮、 t.co短縮対象) または #build= (旧、 base64) 受信時 メモリ展開のみ ──
   //   他人のビルドは見るだけ、 自データに混ぜない。 ページ閉じれば消える。
   //   localStorage 関連 key は monkey patch で memory-first read / write block。
   (function() {
-    const m = (location.hash || '').match(/#build=([^&]+)/);
-    if (!m) return;
-    let payload;
+    // 新形式: ?b=<LZ圧縮> (query = X t.co短縮対象 = 投稿可能)
+    const qb = new URLSearchParams(location.search).get('b');
+    // 旧形式: #build=<base64url> (互換維持)
+    const hm = (location.hash || '').match(/#build=([^&]+)/);
+    if (!qb && !hm) return;
+    let payload, isQuery = !!qb;
     try {
-      const b64 = m[1].replace(/-/g, '+').replace(/_/g, '/');
-      const json = decodeURIComponent(escape(atob(b64)));
+      let json;
+      if (qb && window.LZString) {
+        json = LZString.decompressFromEncodedURIComponent(qb);
+        if (!json) throw new Error('LZ decompress empty');
+      } else if (hm) {
+        const b64 = hm[1].replace(/-/g, '+').replace(/_/g, '/');
+        json = decodeURIComponent(escape(atob(b64)));
+      } else {
+        return;
+      }
       payload = JSON.parse(json);
       if (!payload || !payload.data) return;
     } catch (e) {
@@ -133,7 +145,7 @@
       console.warn('[ShareBuild] localStorage remove blocked (view-only mode):', k);
       return;
     };
-    // hash 消去 (個人情報含む URL を bar に残さない)
+    // hash/query 消去 (個人情報含む URL を bar に残さない)
     history.replaceState(null, '', location.pathname);
   })();
 </script>
@@ -801,7 +813,7 @@ window.showImportToast = function(e) {
 <script src="assets/app.js?v=43"></script>
 <script src="assets/export.js?v=44"></script>
 <script src="assets/stats.js?v=61"></script>
-<script src="assets/sidebar.js?v=381"></script>
+<script src="assets/sidebar.js?v=382"></script>
 <script src="assets/import.js?v=112"></script>
 </body>
 </html>

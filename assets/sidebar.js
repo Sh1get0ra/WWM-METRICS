@@ -1188,8 +1188,16 @@ function _shareBuildUrl() {
   let url, b64;
   try {
     const json = JSON.stringify(payload);
+    // OBS URL 用 base64 (旧形式維持 → 既存 OBS browser source設定 互換)
     b64 = btoa(unescape(encodeURIComponent(json))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-    url = location.origin + location.pathname + '#build=' + b64;
+    // SHARE URL: LZ圧縮 + query (?b=) → X t.co短縮対象 + URL短縮 (50-70%減)
+    if (window.LZString) {
+      const lz = LZString.compressToEncodedURIComponent(json);
+      url = location.origin + location.pathname + '?b=' + lz;
+    } else {
+      // LZ-string load失敗時 fallback: 旧形式 (hash + base64)
+      url = location.origin + location.pathname + '#build=' + b64;
+    }
   } catch (e) { alert('URL 生成失敗: ' + e.message); return; }
   // OBS URL は 透明度+背景色+文字色+ラベル背景 込みで動的生成
   const buildObsUrl = (opPct, bgHex, t1Hex, t2Hex, acHex, lbgHex) => {
