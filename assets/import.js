@@ -94,7 +94,15 @@ function openSetupModal() {
       const stored = _loadStored();
       if (stored) { m.remove(); openPreviewModal(stored.data, stored.importedAt, stored.state); }
     });
-    body.querySelector('#wwmOpenOfficialBtn').addEventListener('click', () => window.open(officialUrl, 'wwm-official'));
+    body.querySelector('#wwmOpenOfficialBtn').addEventListener('click', () => {
+      const isMobile = /Mobi|Android|iPhone|iPad|iPod|Touch/i.test(navigator.userAgent) || window.matchMedia('(max-width: 480px)').matches;
+      if (isMobile) {
+        // mobile: 自タブ遷移 → bookmarklet実行で計算ツールpreviewへ再遷移 = 1タブ完結
+        location.href = officialUrl;
+      } else {
+        window.open(officialUrl, 'wwm-official');
+      }
+    });
     body.querySelectorAll('.wwm-setup-tab').forEach(t => {
       t.addEventListener('click', () => {
         const tab = t.dataset.tab;
