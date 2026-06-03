@@ -1198,6 +1198,18 @@ function _shareBuildUrl() {
     const bigFields = riKeys.map(k => ({ k, sz: JSON.stringify(riLight[k] || null).length }))
       .sort((a, b) => b.sz - a.sz).slice(0, 5);
     _dbgInfo = `[DBG] json=${sJson} / data=${sData} state=${sState} bl=${sBaseline} opt=${sOpt}\nri top5: ${bigFields.map(f => f.k + '=' + f.sz).join(', ')}`;
+    // wearEquipsDetailed の slot別 + 1slot内 keys詳細
+    const wd = riLight.wearEquipsDetailed;
+    if (wd && typeof wd === 'object') {
+      const slots = Object.keys(wd);
+      const slotSizes = slots.map(s => s + '=' + JSON.stringify(wd[s] || null).length).join(' ');
+      _dbgInfo += `\nwearEquipsDetailed slots: ${slotSizes}`;
+      const sample = wd[slots[0]];
+      if (sample && typeof sample === 'object') {
+        const kvs = Object.keys(sample).map(k => k + '=' + JSON.stringify(sample[k]).length).sort((a,b) => parseInt(b.split('=')[1]) - parseInt(a.split('=')[1]));
+        _dbgInfo += `\nslot[${slots[0]}] keys: ${kvs.join(' ')}`;
+      }
+    }
   } catch(_) {}
   window.__WWM_SHARE_DBG = _dbgInfo;
   let url, b64;
