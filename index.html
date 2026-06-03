@@ -140,6 +140,9 @@
       return;
     }
     window.__WWM_SHARED_BUILD = payload;
+    // SHARE mode: baseline/opt_best を 明示注入 (hero中央 current score 表示用、 scoreVer差 無視)
+    if (payload.baseline) window.__WWM_BASELINE = payload.baseline;
+    if (payload.optBest)  window.__WWM_OPT_BEST = payload.optBest;
     document.documentElement.classList.add('wwm-shared-build-mode');
     // localStorage monkey patch
     const origGet = localStorage.getItem.bind(localStorage);
@@ -835,6 +838,6 @@ window.showImportToast = function(e) {
 <script src="assets/export.js?v=44"></script>
 <script src="assets/stats.js?v=62"></script>
 <script src="assets/sidebar.js?v=394"></script>
-<script src="assets/import.js?v=117"></script>
+<script src="assets/import.js?v=118"></script>
 </body>
 </html>
