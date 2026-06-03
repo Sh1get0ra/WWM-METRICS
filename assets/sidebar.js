@@ -1258,7 +1258,7 @@ function _shareBuildUrl() {
   // 過去の overlay 設定 復元
   const OVL_KEY = 'wwm_overlay_settings_v1';
   let saved = {};
-  saved = WWMHelpers.storage.loadJSON(OVL_KEY, {});
+  try { saved = JSON.parse(localStorage.getItem(OVL_KEY) || '{}'); } catch(_) {}
   const initOp = Number.isFinite(saved.op) ? saved.op : 0;
   const initBg = saved.bg || '#0a0a0a';
   const initT1 = saved.t1 || '#e8d9b8';
@@ -1530,7 +1530,8 @@ function _renderItem(item, params, depth, baseParams) {
 
 const _COLLAPSE_KEY = 'wwm_sidebar_collapsed_v1';
 function _getCollapsedSet() {
-  return new Set(WWMHelpers.storage.loadJSON(_COLLAPSE_KEY, []));
+  try { return new Set(JSON.parse(localStorage.getItem(_COLLAPSE_KEY) || '[]')); }
+  catch(e) { return new Set(); }
 }
 function _saveCollapsed(set) {
   try { localStorage.setItem(_COLLAPSE_KEY, JSON.stringify([...set])); } catch(e) {}
@@ -3900,7 +3901,7 @@ const _HIST_KEY = 'wwm_score_history_v1';
 const _HIST_MAX = 365;
 const _HIST_COLORS = ['#c9a45a','#a8d4b4','#e8a87c','#7ec4cf','#d4a5d0','#f0d28a','#c8786b','#b8d09c'];
 function _histLoad() {
-  return WWMHelpers.storage.loadJSON(_HIST_KEY, []);
+  try { return JSON.parse(localStorage.getItem(_HIST_KEY) || '[]'); } catch(_) { return []; }
 }
 function _histSave(arr) {
   try { localStorage.setItem(_HIST_KEY, JSON.stringify(arr)); } catch(_) {}
