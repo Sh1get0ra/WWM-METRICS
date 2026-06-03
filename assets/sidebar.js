@@ -364,7 +364,7 @@ function _diagnose(roleInfo, params) {
 // 外功貫通/属性貫通 +1 あたり Δscore 取得 (固定閾値判定 + mismatchは max比正規化)
 async function _evalPenSpecialization(roleInfo) {
   if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return null;
-  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   await _loadEquipMax();
   const charLv = roleInfo?.level || 95;
   const tier = _lvToTier(charLv);
@@ -412,7 +412,7 @@ function _checkAffix6PenMismatch(roleInfo, dPhys, dElem) {
 }
 async function _findWastedAffixes(roleInfo) {
   if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return [];
-  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   // base score
   let baseScore = 0;
   try {
@@ -548,7 +548,7 @@ window.WWMDiag = { render: renderDiagnostics, openPopup: _openDiagPopup };
 async function renderAffixRanking(roleInfo, params) {
   const root = document.getElementById('wwmAffixRanking');
   if (!root || !roleInfo || !window.WWMStats?.buildStatParams) return;
-  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   // baseline score
   let baseScore = 0;
   try {
@@ -782,9 +782,6 @@ async function renderOptimization(roleInfo, params, opts) {
     const wasAborted = (window._OPT_TOKEN || 0) !== (tokenBefore + 1);
     if (!wasAborted) {
       try {
-        // transition 強制無効化 (即時スナップ) は廃止 → 進行中の donut アニメを途中で
-        // ブツ切りにし、ちらつきの原因になっていた。updateHero を普通に呼ぶだけにして
-        // CSS transition を尊重 (同値再セット時は transition 発火せず、滑らかに完走)。
         if (window.WWMHero) window.WWMHero.update(window.__WWM_PARAMS || params);
       } catch(_) {}
     }
@@ -833,7 +830,6 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
     </div>
     <div class="wwm-opt-progress" id="wwmOptProgress"></div>
   `;
-  // 装備 slot は常に全部位 ('1','2','3','4','5','8','10','11')。 slot filter selectbox は 2026-06-01 廃止 (デフォルト全部位以外の選択用途なし)。
   const slotsAllowed = new Set(['1','2','3','4','5','8','10','11']);
   function _bindControls() {
     const rEl = root.querySelector('#wwmOptRatio');
@@ -900,7 +896,7 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
     if (el) el.textContent = label || '計算中...';
   };
   setProgress('計算中...');
-  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   await _loadEquipMax();
   const charLv = roleInfo?.level || 95;
   // 作業用 roleInfo clone
@@ -916,7 +912,6 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
   // tier 表示用 SS閾値 (worldLv 由来)
   const wl = params?.worldLv || 14;
   const ssThr = 6700 * Math.pow(0.8, 14 - wl);
-  // stopReason 廃止 (2026-06-01): 「N回で収束」 reason UI 削除に伴い不要化
   let lastBestNull = false;
   // iter=0 は弓セット swap のみ評価 (他affixより先に確定)
   // iter>=1 は affix swap (弓セットも再評価)
@@ -1174,7 +1169,7 @@ function _shareBuildUrl() {
   // 受信側は index.html inline script で memory-only mode 処理 (localStorage 浸食回避)
   const ri = window.__WWM_ROLEINFO;
   if (!ri) { alert('build データなし。先に import してください。'); return; }
-  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   // payload 軽量化: base64画像 (avatar / xinfaIcons) を除外。
   // 巨大 base64 (100KB超) で URL長 OBS browser source 上限超え → hash truncate → JSON parse 失敗バグ防止。
   // OBS view では _avatarUrl / 静的アイコン fallback で代用可能。
@@ -1263,7 +1258,7 @@ function _shareBuildUrl() {
   // 過去の overlay 設定 復元
   const OVL_KEY = 'wwm_overlay_settings_v1';
   let saved = {};
-  try { saved = JSON.parse(localStorage.getItem(OVL_KEY) || '{}'); } catch(_) {}
+  saved = WWMHelpers.storage.loadJSON(OVL_KEY, {});
   const initOp = Number.isFinite(saved.op) ? saved.op : 0;
   const initBg = saved.bg || '#0a0a0a';
   const initT1 = saved.t1 || '#e8d9b8';
@@ -1535,8 +1530,7 @@ function _renderItem(item, params, depth, baseParams) {
 
 const _COLLAPSE_KEY = 'wwm_sidebar_collapsed_v1';
 function _getCollapsedSet() {
-  try { return new Set(JSON.parse(localStorage.getItem(_COLLAPSE_KEY) || '[]')); }
-  catch(e) { return new Set(); }
+  return new Set(WWMHelpers.storage.loadJSON(_COLLAPSE_KEY, []));
 }
 function _saveCollapsed(set) {
   try { localStorage.setItem(_COLLAPSE_KEY, JSON.stringify([...set])); } catch(e) {}
@@ -1598,7 +1592,7 @@ async function renderSidebar(params) {
   let baseParams = null;
   if (hasVirtual && ri && window.WWMStats?.buildStatParams) {
     try {
-      const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+      const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
       baseParams = await window.WWMStats.buildStatParams(ri, state);
     } catch (e) {}
   }
@@ -1904,7 +1898,7 @@ window.__WWM_SET4_BONUS_OF = _set4Bonus;
 // 装備カード Score = (現状 全装備) - (該当 slot 外し) + セット効果均等分配
 async function _computeSlotContributions(roleInfo, slots, suffixSlots, set4Map) {
   if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return null;
-  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   // base
   let baseScore = 0;
   try {
@@ -1949,7 +1943,7 @@ async function _computeSlotContributions(roleInfo, slots, suffixSlots, set4Map) 
 
 async function _computeGearCardScores(roleInfo) {
   if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return;
-  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   const origRi = window.__WWM_ROLEINFO;
   const effRi = roleInfo;  // 既に effective が渡される想定 (renderGearGrid から呼ばれる)
   const eqDet = effRi?.wearEquipsDetailed || {};
@@ -2032,7 +2026,7 @@ function renderXinfaGrid(roleInfo) {
   const passive = roleInfo?.passiveSlots || [];
   const lang = _curLang();
   const xinfaMap = window.WWM_XINFA || {};
-  const state = (typeof _getEffectiveState === 'function') ? _getEffectiveState() : (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const state = (typeof _getEffectiveState === 'function') ? _getEffectiveState() : WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   const tiers = state?.xinfaTiers || {};
   const xinfaIconsRaw = window.__WWM_ROLEINFO?._xinfaIcons || roleInfo?._xinfaIcons || [];
   const xinfaIconsB64 = window.__WWM_ROLEINFO?._xinfaIconsBase64 || roleInfo?._xinfaIconsBase64 || [];
@@ -2092,7 +2086,7 @@ function renderXinfaGrid(roleInfo) {
 
 async function _computeArsenalCardScore(roleInfo) {
   if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return;
-  const state = (typeof _getEffectiveState === 'function') ? _getEffectiveState() : (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const state = (typeof _getEffectiveState === 'function') ? _getEffectiveState() : WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   try {
     // base = 武庫込
     const baseParams = await window.WWMStats.buildStatParams(roleInfo, state);
@@ -2121,7 +2115,7 @@ async function _computeXinfaCardScores(roleInfo) {
   // virtual xinfa tiers (Edit modal適用結果) を反映するため _getEffectiveState() 使用
   const state = (typeof _getEffectiveState === 'function')
     ? _getEffectiveState()
-    : (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+    : WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   // base score
   let baseScore = 0;
   try {
@@ -2159,7 +2153,7 @@ function openXinfaEdit(slotIdx) {
   const xinfaMap = window.WWM_XINFA || {};
   const passive = (window.__WWM_VIRTUAL_XINFA?.passive) || origRi.passiveSlots || [];
   const origPassive = origRi.passiveSlots || [];
-  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   const origTier = (state?.xinfaTiers?.[slotIdx] ?? state?.xinfaTiers?.[String(slotIdx)] ?? 6);
   const virtTier = window.__WWM_VIRTUAL_XINFA?.tiers?.[slotIdx] ?? origTier;
   let newXinfaId = passive[slotIdx] || origPassive[slotIdx];
@@ -2454,7 +2448,7 @@ function _getEffectiveRoleInfo() {
 }
 // effective state (xinfa tier virtual + arsenal virtual 込み)
 function _getEffectiveState() {
-  const base = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const base = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   const vxi = window.__WWM_VIRTUAL_XINFA;
   const vAr = window.__WWM_VIRTUAL_ARSENAL;
   const hasVxi = vxi?.tiers && Object.keys(vxi.tiers).length;
@@ -3116,7 +3110,7 @@ function openGearEdit(slot) {
         if (slot === '1') vRi.kongfuMain = parseInt(newKongfuId, 10);
         else if (slot === '2') vRi.kongfuSub = parseInt(newKongfuId, 10);
       }
-      const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+      const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
       // virtual compute
       const vParams = await window.WWMStats.buildStatParams(vRi, state);
       window.computeExpected(vParams);
@@ -3466,7 +3460,7 @@ function updateHero(params) {
   const total = result.expected || 0;
   const effRi = _getEffectiveRoleInfo();
   const statusScore = Math.round((result.statusScore || 0) + _set4Bonus(effRi));
-  const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  const setText = window.WWMHelpers?.dom?.setText || ((id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; });
   // hero-current = baseline (import時固定) または statusScore (baseline未取得時)
   const _baseline = window.__WWM_BASELINE;
   // baseline (import時固定) があればそれ。無効/未取得時は null → 武格指数 "-" (再import促し)。
@@ -3513,33 +3507,6 @@ function updateHero(params) {
     const baselineScore = window.__WWM_BASELINE?.statusScore;
     sbMs.textContent = (typeof baselineScore === 'number') ? Math.round(baselineScore).toLocaleString() : '-';
   }
-  // tier に応じたスコア色 (theme別)
-  const _isLight = document.documentElement.getAttribute('data-theme') === 'light';
-  const TIER_COLOR = _isLight
-    ? { SS: '#b8860b', S: '#c83c2b', A: '#2d5a3a', B: '#7a5a20', C: '#5a4226' }
-    : { SS: '#ffd970', S: '#ff6b50', A: '#a8d4b4', B: '#c9b88a', C: 'rgba(232,215,180,0.55)' };
-  const TIER_SHADOW = _isLight
-    ? {
-        SS: '0 0 8px rgba(184,134,11,0.6), 0 0 18px rgba(184,134,11,0.35)',
-        S:  '0 0 8px rgba(200,60,43,0.5), 0 0 16px rgba(200,60,43,0.25)',
-        A:  '0 0 8px rgba(45,90,58,0.5), 0 0 16px rgba(45,90,58,0.25)',
-        B:  '0 0 6px rgba(122,90,32,0.4)',
-        C:  '0 0 4px rgba(90,66,38,0.3)'
-      }
-    : {
-        SS: '0 0 12px rgba(255,217,112,0.95), 0 0 28px rgba(255,180,40,0.7), 0 0 60px rgba(255,100,20,0.55), 0 0 100px rgba(200,60,43,0.4)',
-        S:  '0 0 18px rgba(255,107,80,0.55), 0 0 36px rgba(255,107,80,0.28)',
-        A:  '0 0 18px rgba(168,212,180,0.45), 0 0 36px rgba(168,212,180,0.25)',
-        B:  '0 0 14px rgba(201,184,138,0.45), 0 0 28px rgba(201,184,138,0.22)',
-        C:  '0 0 10px rgba(232,215,180,0.18)'
-      };
-  // heroScore Tier別変色 廃止 (paper固定)
-  const numEl = document.getElementById('heroScore');
-  if (numEl) {
-    numEl.style.color = '';
-    numEl.style.textShadow = '';
-  }
-  // compact tier badge: 廃止 (heroCompactTierBadge hidden)
   // NEXT 側 = 仮想装備込みの statusScore (即時反映 + countUp再同期)
   const baseline = window.__WWM_BASELINE;
   const baseEl = document.getElementById('heroScoreBaseline');
@@ -3549,40 +3516,6 @@ function updateHero(params) {
     if (baseEl) baseEl.textContent = Math.round(baseScore).toLocaleString();
     if (typeof window.countUp === 'function') {
       window.countUp('heroScoreBaseline', baseScore, 0);
-    }
-    // baseline tier badge (tier 未保存 baseline 用 fallback)
-    const blTb = document.getElementById('heroBaselineTierBadge');
-    if (blTb) {
-      // NEXT 横の baseline tier badge は表示しない
-      blTb.hidden = true;
-      blTb.textContent = '';
-      let bTier = baseline.tier;
-      if (!bTier) {
-        const wl = window.__WWM_ROLEINFO?.worldLv || 14;
-        const thr = 6700 * Math.pow(0.8, 14 - wl);
-        bTier = baseScore >= thr ? 'SS'
-              : baseScore >= thr * 0.9 ? 'S'
-              : baseScore >= thr * 0.8 ? 'A'
-              : baseScore >= thr * 0.6 ? 'B' : 'C';
-      }
-      const TIER_COLOR_B = _isLight
-        ? { SS: '#b8860b', S: '#c83c2b', A: '#2d5a3a', B: '#7a5a20', C: '#5a4226' }
-        : { SS: '#ffd970', S: '#ff6b50', A: '#a8d4b4', B: '#c9b88a', C: 'rgba(232,215,180,0.55)' };
-      const TIER_SHADOW_B = _isLight
-        ? { SS:'0 0 8px rgba(184,134,11,0.5)', S:'0 0 8px rgba(200,60,43,0.4)', A:'0 0 8px rgba(45,90,58,0.4)', B:'0 0 6px rgba(122,90,32,0.3)', C:'0 0 4px rgba(90,66,38,0.25)' }
-        : {
-            SS: '0 0 12px rgba(255,217,112,0.95), 0 0 28px rgba(255,180,40,0.7), 0 0 60px rgba(255,100,20,0.55), 0 0 100px rgba(200,60,43,0.4)',
-            S:  '0 0 18px rgba(255,107,80,0.55), 0 0 36px rgba(255,107,80,0.28)',
-            A:  '0 0 18px rgba(168,212,180,0.45), 0 0 36px rgba(168,212,180,0.25)',
-            B:  '0 0 14px rgba(201,184,138,0.45), 0 0 28px rgba(201,184,138,0.22)',
-            C:  '0 0 10px rgba(232,215,180,0.18)'
-          };
-      // hero-next-val Tier別変色 廃止
-      if (baseEl) {
-        baseEl.style.color = '';
-        baseEl.style.opacity = '';
-        baseEl.style.textShadow = '';
-      }
     }
   } else {
     if (typeof window.countUp === 'function') window.countUp('heroScoreBaseline', currentScore, 0);
@@ -3746,7 +3679,7 @@ window.WWMXinfa = {
 };
 function openArsenalEdit() {
   const T_ = window.T || {};
-  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   const origArsenal = state?.arsenal || { path: 'phys', tiers: {} };
   const virtArsenal = window.__WWM_VIRTUAL_ARSENAL;
   // 新側 初期値 = virtual あれば virtual、なければ orig コピー
@@ -3916,11 +3849,11 @@ function openArsenalEdit() {
   async function _runPreview() {
     const ri = (typeof _getEffectiveRoleInfo === 'function') ? _getEffectiveRoleInfo() : window.__WWM_ROLEINFO;
     if (!ri || !window.WWMStats?.buildStatParams) return;
-    const baseState = (typeof _getEffectiveState === 'function') ? _getEffectiveState() : (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+    const baseState = (typeof _getEffectiveState === 'function') ? _getEffectiveState() : WWMHelpers.storage.loadJSON('wwm_last_state_v1');
     try {
       // 現 (virtual_arsenal 無視 = 元 arsenal)
       const baseStateNoVirtArs = JSON.parse(JSON.stringify(baseState || {}));
-      const origState = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
+      const origState = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
       if (origState?.arsenal) baseStateNoVirtArs.arsenal = origState.arsenal;
       const p1 = await window.WWMStats.buildStatParams(ri, baseStateNoVirtArs);
       window.computeExpected(p1);
@@ -3967,7 +3900,7 @@ const _HIST_KEY = 'wwm_score_history_v1';
 const _HIST_MAX = 365;
 const _HIST_COLORS = ['#c9a45a','#a8d4b4','#e8a87c','#7ec4cf','#d4a5d0','#f0d28a','#c8786b','#b8d09c'];
 function _histLoad() {
-  try { return JSON.parse(localStorage.getItem(_HIST_KEY) || '[]'); } catch(_) { return []; }
+  return WWMHelpers.storage.loadJSON(_HIST_KEY, []);
 }
 function _histSave(arr) {
   try { localStorage.setItem(_HIST_KEY, JSON.stringify(arr)); } catch(_) {}

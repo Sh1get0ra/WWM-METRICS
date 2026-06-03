@@ -24,3 +24,8 @@ data/xinfa_attribute_buff_template.csv
 server.js
 .playwright-mcp/
 tools/
+
+# Vite (Phase 7.1)
+node_modules/
+dist/
+.vite/
