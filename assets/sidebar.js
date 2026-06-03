@@ -2057,8 +2057,8 @@ function renderXinfaGrid(roleInfo) {
     const xinfa = xid ? xinfaMap[xid] : null;
     const name = xinfa ? (xinfa.names?.[lang] || xinfa.names?.ja || `心法ID ${xid}`) : '(空)';
     const tier = tiers[i] ?? tiers[String(i)] ?? 6;
-    // icon: 元と同じ xid なら base64/URL、 swap 後は dict から URL fallback
-    const iconUrl = (xid === origPassive[i]) ? xinfaIcons[i] : (window.WWM_XINFA_ICONS?.[xid]?.icon_url || null);
+    // icon: 元と同じ xid なら base64/URL、 swap 後 or 配列が空(SHARE mode等) は dict から URL fallback
+    const iconUrl = (xid === origPassive[i] && xinfaIcons[i]) ? xinfaIcons[i] : (window.WWM_XINFA_ICONS?.[xid]?.icon_url || null);
     const iconHtml = iconUrl ? `<img class="wwm-xinfa-icon" src="${iconUrl}" alt="">` : '';
     const tierChip = (xid && tier >= 1 && tier <= 5) ? `<div class="wwm-xinfa-tier-chip">T${tier}</div>` : '';
     // 流派バッジ (心法に紐づく liupai)
