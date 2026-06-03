@@ -1184,7 +1184,26 @@ function _shareBuildUrl() {
   // OBS view 武格指数 / Tier badge 表示用に baseline + opt_best 同梱 (数百バイト、 URL長影響軽微)
   const baseline = window.__WWM_BASELINE || null;
   const optBest  = window.__WWM_OPT_BEST || null;
-  const payload = { v: 1, data: riLight, state: state || null, baseline, optBest };
+  // baseAffixes slim化: {equipmentDetails:[id,val,ratio,rank,useful]} → [id,val,ratio,rank,useful]
+  //   + ratio 小数3桁丸め、 boolean→0/1 で 50%程縮小。 受信側 inline script で復元。
+  //   ※元 ri 共有を避けるため wearEquipsDetailed は deep clone してから slim化
+  try {
+    const wd = riLight.wearEquipsDetailed;
+    if (wd && typeof wd === 'object') {
+      const wdCloned = JSON.parse(JSON.stringify(wd));
+      Object.values(wdCloned).forEach(eq => {
+        if (eq?.exVo?.baseAffixes && Array.isArray(eq.exVo.baseAffixes)) {
+          eq.exVo.baseAffixes = eq.exVo.baseAffixes.map(a => {
+            const d = a?.equipmentDetails;
+            if (!Array.isArray(d)) return a;
+            return [d[0], Math.round(d[1]*100)/100, Math.round(d[2]*1000)/1000, d[3], d[4]?1:0];
+          });
+        }
+      });
+      riLight.wearEquipsDetailed = wdCloned;
+    }
+  } catch(_) {}
+  const payload = { v: 2, data: riLight, state: state || null, baseline, optBest };
   // ── debug: payload size 内訳 (後で削除) ──
   let _dbgInfo = '';
   try {

@@ -115,6 +115,16 @@
       }
       payload = JSON.parse(json);
       if (!payload || !payload.data) return;
+      // v2+: baseAffixes slim配列 [id,val,ratio,rank,useful] → {equipmentDetails:[...]} 復元
+      if ((payload.v || 1) >= 2 && payload.data.wearEquipsDetailed) {
+        Object.values(payload.data.wearEquipsDetailed).forEach(eq => {
+          if (Array.isArray(eq?.exVo?.baseAffixes)) {
+            eq.exVo.baseAffixes = eq.exVo.baseAffixes.map(a =>
+              Array.isArray(a) ? { equipmentDetails: [a[0], a[1], a[2], a[3], !!a[4]] } : a
+            );
+          }
+        });
+      }
     } catch (e) {
       console.error('[ShareBuild] 復元失敗:', e);
       return;
@@ -813,7 +823,7 @@ window.showImportToast = function(e) {
 <script src="assets/app.js?v=43"></script>
 <script src="assets/export.js?v=44"></script>
 <script src="assets/stats.js?v=61"></script>
-<script src="assets/sidebar.js?v=386"></script>
+<script src="assets/sidebar.js?v=387"></script>
 <script src="assets/import.js?v=112"></script>
 </body>
 </html>
