@@ -1233,8 +1233,14 @@ function _shareBuildUrl() {
           if (Array.isArray(sample.exVo.baseAffixes) && sample.exVo.baseAffixes[0]) {
             _dbgInfo += `\nbaseAffixes len=${sample.exVo.baseAffixes.length} sample[0]=${JSON.stringify(sample.exVo.baseAffixes[0]).slice(0,200)}`;
           }
+          if (sample.exVo.baseAttrs) {
+            _dbgInfo += `\nbaseAttrs sample=${JSON.stringify(sample.exVo.baseAttrs).slice(0,200)}`;
+          }
         }
       }
+    }
+    if (riLight.wearEquips) {
+      _dbgInfo += `\nwearEquips=${JSON.stringify(riLight.wearEquips).slice(0,250)}`;
     }
   } catch(_) {}
   window.__WWM_SHARE_DBG = _dbgInfo;
