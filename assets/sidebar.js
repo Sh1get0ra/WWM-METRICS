@@ -1208,6 +1208,10 @@ function _shareBuildUrl() {
       if (sample && typeof sample === 'object') {
         const kvs = Object.keys(sample).map(k => k + '=' + JSON.stringify(sample[k]).length).sort((a,b) => parseInt(b.split('=')[1]) - parseInt(a.split('=')[1]));
         _dbgInfo += `\nslot[${slots[0]}] keys: ${kvs.join(' ')}`;
+        if (sample.exVo && typeof sample.exVo === 'object') {
+          const evs = Object.keys(sample.exVo).map(k => k + '=' + JSON.stringify(sample.exVo[k]).length).sort((a,b) => parseInt(b.split('=')[1]) - parseInt(a.split('=')[1]));
+          _dbgInfo += `\nexVo keys: ${evs.join(' ')}`;
+        }
       }
     }
   } catch(_) {}
