@@ -1185,6 +1185,19 @@ function _shareBuildUrl() {
   delete riLight._xinfaIcons;
   // avatar URL も削除 → 受信側で roleAvatar ID → WWM_AVATAR_ICONS (data/avatar_icons.json) で復元
   delete riLight._avatarUrl;
+  // 表示・計算に不要な field を削除 (privacy + 文字数削減)
+  delete riLight.battleQs;       // 戦闘 quest
+  delete riLight.createTime;     // キャラ作成日時
+  delete riLight.onlineTime;     // 直近online
+  delete riLight.crDay;          // 不明、計算未使用
+  delete riLight.roleId;         // ユーザID = privacy
+  delete riLight.scores58;       // 用途不明、計算未使用
+  delete riLight.scores59;
+  delete riLight.scores60;
+  delete riLight.fashionScore;   // ファッション、計算無関係
+  delete riLight.bg;             // 背景
+  delete riLight.bodyType;       // キャラ体型
+  delete riLight.school;         // debug log のみ使用、 表示不要
   // OBS view 武格指数 / Tier badge 表示用に baseline + opt_best 同梱 (数百バイト、 URL長影響軽微)
   const baseline = window.__WWM_BASELINE || null;
   const optBest  = window.__WWM_OPT_BEST || null;
@@ -1207,7 +1220,23 @@ function _shareBuildUrl() {
       riLight.wearEquipsDetailed = wdCloned;
     }
   } catch(_) {}
-  const payload = { v: 2, data: riLight, state: state || null, baseline, optBest };
+  // state.arsenal slim化 (v3): {path, tiers:{lv:{peaked,min,max}}} → {p,t:[[peaked,min,max],...]} (Tier固定順)
+  let stateSlim = state;
+  try {
+    if (state?.arsenal && typeof state.arsenal === 'object') {
+      stateSlim = JSON.parse(JSON.stringify(state)); // deep clone
+      const ARS_TIERS = [41, 51, 56, 61, 71, 81, 86];
+      const tiers = stateSlim.arsenal.tiers || {};
+      stateSlim.arsenal = {
+        p: stateSlim.arsenal.path,
+        t: ARS_TIERS.map(lv => {
+          const t = tiers[lv] || {};
+          return [t.peaked ? 1 : 0, t.min ?? 0, t.max ?? 0];
+        })
+      };
+    }
+  } catch(_) {}
+  const payload = { v: 3, data: riLight, state: stateSlim || null, baseline, optBest };
   // ── debug: payload size 内訳 (後で削除) ──
   let _dbgInfo = '';
   try {

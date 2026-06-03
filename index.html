@@ -125,6 +125,16 @@
           }
         });
       }
+      // v3+: state.arsenal slim {p, t:[[peaked,min,max],...]} → {path, tiers:{lv:{peaked,min,max}}} 復元
+      if ((payload.v || 1) >= 3 && payload.state?.arsenal && Array.isArray(payload.state.arsenal.t)) {
+        const ARS_TIERS = [41, 51, 56, 61, 71, 81, 86];
+        const tiersObj = {};
+        payload.state.arsenal.t.forEach((arr, i) => {
+          const lv = ARS_TIERS[i];
+          if (lv && Array.isArray(arr)) tiersObj[lv] = { peaked: !!arr[0], min: arr[1], max: arr[2] };
+        });
+        payload.state.arsenal = { path: payload.state.arsenal.p, tiers: tiersObj };
+      }
     } catch (e) {
       console.error('[ShareBuild] 復元失敗:', e);
       return;
@@ -823,7 +833,7 @@ window.showImportToast = function(e) {
 <script src="assets/app.js?v=43"></script>
 <script src="assets/export.js?v=44"></script>
 <script src="assets/stats.js?v=62"></script>
-<script src="assets/sidebar.js?v=392"></script>
+<script src="assets/sidebar.js?v=393"></script>
 <script src="assets/import.js?v=113"></script>
 </body>
 </html>
