@@ -114,6 +114,21 @@
         return;
       }
       payload = JSON.parse(json);
+      // ── debug (後で削除) ──
+      window.__WWM_DBG_RX = {
+        hasPayload: !!payload,
+        hasData: !!payload?.data,
+        v: payload?.v,
+        keys: payload ? Object.keys(payload) : [],
+        dataKeys: payload?.data ? Object.keys(payload.data).slice(0,10) : [],
+        wedCount: payload?.data?.wearEquipsDetailed ? Object.keys(payload.data.wearEquipsDetailed).length : 0,
+        firstAffix: (() => {
+          const wd = payload?.data?.wearEquipsDetailed;
+          if (!wd) return null;
+          const first = wd[Object.keys(wd)[0]];
+          return first?.exVo?.baseAffixes?.[0] || null;
+        })()
+      };
       if (!payload || !payload.data) return;
       // v2+: baseAffixes slim配列 [id,val,ratio,rank,useful] → {equipmentDetails:[...]} 復元
       if ((payload.v || 1) >= 2 && payload.data.wearEquipsDetailed) {
@@ -141,6 +156,16 @@
     }
     window.__WWM_SHARED_BUILD = payload;
     document.documentElement.classList.add('wwm-shared-build-mode');
+    // ── debug表示 (banner置換、 後で削除) ──
+    document.addEventListener('DOMContentLoaded', () => {
+      const banner = document.querySelector('.wwm-shared-build-text');
+      if (banner) {
+        const d = window.__WWM_DBG_RX || {};
+        banner.style.fontFamily = 'monospace';
+        banner.style.fontSize = '10px';
+        banner.textContent = `[DBG RX] v=${d.v} keys=${(d.keys||[]).join(',')} wedCount=${d.wedCount} firstAffix=${JSON.stringify(d.firstAffix)}`;
+      }
+    });
     // localStorage monkey patch
     const origGet = localStorage.getItem.bind(localStorage);
     const origSet = localStorage.setItem.bind(localStorage);
