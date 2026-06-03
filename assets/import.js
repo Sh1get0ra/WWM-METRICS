@@ -76,7 +76,7 @@ function openSetupModal() {
           </div>
           <div class="wwm-setup-panel" data-panel="mobile" ${isMobile?'':'hidden'}>
             <ol class="wwm-setup-steps">
-              <li>${(window.T && T.importMobStep1) || '下のコードをコピー:'}<br><div style="font-size:10px;color:#0f0;background:#000;padding:2px 6px;border-radius:2px;display:inline-block;margin-bottom:4px;">BM v110 / ${bmUrl.length}文字 / UA="${navigator.userAgent.slice(0,80)}"</div><br><textarea class="wwm-bm-code" id="wwmBmCode" readonly>${bmUrl}</textarea><br><button class="wwm-btn-secondary" id="wwmCopyBtn">${(window.T && T.importCopy) || 'コピー'}</button></li>
+              <li>${(window.T && T.importMobStep1) || '下のコードをコピー:'}<br><textarea class="wwm-bm-code" id="wwmBmCode" readonly>${bmUrl}</textarea><br><button class="wwm-btn-secondary" id="wwmCopyBtn">${(window.T && T.importCopy) || 'コピー'}</button></li>
               <li>${(window.T && T.importMobStep2) || '公式ツールをブックマーク登録'}</li>
               <li>${(window.T && T.importMobStep3) || 'ブックマーク編集 → URL をコピーしたコードに置換 → 名前「WWM インポート」'}</li>
               <li>${(window.T && T.importMobStep4) || '公式ツール開いた状態で アドレスバーに「WWM」入力 → 候補タップ'}</li>
@@ -953,26 +953,16 @@ if (_bc) {
 // ── Hash 検知 (page load 時自動実行) ────────────────────────────
 function handleHashOnLoad() {
   const h = location.hash || '';
-  // ── debug (mobile preview出ない問題調査用、 後で削除) ──
-  if (window.matchMedia('(max-width: 480px)').matches) {
-    alert('[DBG] handleHashOnLoad. hash长=' + h.length + ' / starts#import=' + h.startsWith(IMPORT_HASH_PREFIX));
-  }
   if (!h.startsWith(IMPORT_HASH_PREFIX)) return;
   const b64 = h.slice(IMPORT_HASH_PREFIX.length);
   try {
     const json = _b64urlDecode(b64);
     const data = JSON.parse(json);
     history.replaceState(null, '', location.pathname + location.search);
-    if (window.matchMedia('(max-width: 480px)').matches) {
-      alert('[DBG] decoded OK. roleName=' + (data?.roleName || '?'));
-    }
     // 他の計算ツールタブが存在するか BroadcastChannel で ping
     _relayOrShow(data);
   } catch(e) {
     console.error('[WWM Import] hash decode failed:', e);
-    if (window.matchMedia('(max-width: 480px)').matches) {
-      alert('[DBG] decode FAIL: ' + e.message);
-    }
     if (window.showToast) showToast('インポートデータ解析失敗: ' + e.message);
   }
 }
@@ -980,10 +970,6 @@ function handleHashOnLoad() {
 function _relayOrShow(data) {
   // mobile: window.close 効かない (user gesture 制限) → BC relay skip して 自タブで直接 preview表示
   const isMobile = window.matchMedia('(max-width: 480px)').matches;
-  // ── debug (mobile preview出ない問題調査用、 後で削除) ──
-  if (window.matchMedia('(max-width: 480px)').matches) {
-    alert('[DBG] _relayOrShow called. isMobile=' + isMobile + ' / _bc=' + !!_bc + ' / data=' + (data?.roleName || '?'));
-  }
   if (isMobile || !_bc) { openPreviewModal(data); return; }
   const id = Math.random().toString(36).slice(2);
   let acked = false;
