@@ -2,7 +2,7 @@
 <html lang="ja" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>風燕計 | WWMETRICS</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#c9a45a">
@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;900&family=Noto+Serif+JP:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Yuji+Mai&family=Yuji+Boku&family=Ma+Shan+Zheng&family=ZCOOL+QingKe+HuangYou&family=Kaisei+Decol:wght@700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<link rel="stylesheet" href="assets/styles.css?v=623">
+<link rel="stylesheet" href="assets/styles.css?v=677">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DFYB6MKMMY"></script>
 <script>
@@ -137,6 +137,39 @@
     history.replaceState(null, '', location.pathname);
   })();
 </script>
+<script>
+  // ── Mobile hero collapse: tap で hero-right (donut) 展開/折りたたみ ──
+  document.addEventListener('DOMContentLoaded', () => {
+    const hero = document.querySelector('section.hero.hero-wuxia');
+    if (hero) hero.addEventListener('click', (e) => {
+      if (e.target.closest('button, input, select, textarea, a, label')) return;
+      if (window.matchMedia('(max-width: 480px)').matches) hero.classList.toggle('hero--expanded');
+    });
+    // ── Mobile Hamburger Drawer toggle ──
+    const ham = document.getElementById('wwmMobileHamburger');
+    const drawer = document.getElementById('wwmMobileDrawer');
+    const backdrop = document.getElementById('wwmMobileDrawerBackdrop');
+    const closeBtn = document.getElementById('wwmMobileDrawerClose');
+    const open = () => {
+      drawer.hidden = false; backdrop.hidden = false;
+      requestAnimationFrame(() => { drawer.classList.add('open'); backdrop.classList.add('open'); });
+      ham?.setAttribute('aria-expanded', 'true');
+    };
+    const close = () => {
+      drawer.classList.remove('open'); backdrop.classList.remove('open');
+      ham?.setAttribute('aria-expanded', 'false');
+      setTimeout(() => { drawer.hidden = true; backdrop.hidden = true; }, 250);
+    };
+    ham?.addEventListener('click', () => drawer.classList.contains('open') ? close() : open());
+    closeBtn?.addEventListener('click', close);
+    backdrop?.addEventListener('click', close);
+    // drawer内 button click 後も close (lang切替等は除く: 即時 update したい)
+    drawer?.addEventListener('click', (e) => {
+      const btn = e.target.closest('.wwm-mobile-drawer-btn');
+      if (btn) setTimeout(close, 100);
+    });
+  });
+</script>
 </head>
 <body class="wwm-layout-active">
 <div class="sticky-header">
@@ -177,6 +210,54 @@
       </div>
     </div>
   </header>
+
+  <!-- Mobile Hamburger Drawer (PC時 hidden、 mobile時 ≡ tap で slide-in) -->
+  <div class="wwm-mobile-drawer-backdrop" id="wwmMobileDrawerBackdrop" hidden></div>
+  <aside class="wwm-mobile-drawer" id="wwmMobileDrawer" hidden aria-label="メニュー">
+    <div class="wwm-mobile-drawer-header">
+      <span class="wwm-mobile-drawer-title">MENU</span>
+      <button type="button" class="wwm-mobile-drawer-close" id="wwmMobileDrawerClose" aria-label="閉じる">×</button>
+    </div>
+    <div class="wwm-mobile-drawer-body">
+      <div class="wwm-mobile-drawer-section">
+        <div class="wwm-mobile-drawer-section-title">言語 / Language</div>
+        <div class="wwm-mobile-drawer-langs">
+          <button class="lang-btn" data-lang="ja" onclick="setLang('ja')">日本語</button>
+          <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+          <button class="lang-btn" data-lang="ko" onclick="setLang('ko')">한국어</button>
+        </div>
+      </div>
+      <div class="wwm-mobile-drawer-section">
+        <button type="button" class="wwm-mobile-drawer-btn" onclick="toggleTheme()">
+          <span>🌓</span><span data-i18n="themeToggleLabel">ライト/ダーク切替</span>
+        </button>
+        <button type="button" class="wwm-mobile-drawer-btn" onclick="importData()" data-i18n="importBtn">📥 IMPORT</button>
+        <button type="button" class="wwm-mobile-drawer-btn" onclick="WWMShare.shareUrl()" data-i18n="shareBtn">🔗 SHARE</button>
+        <button type="button" class="wwm-mobile-drawer-btn" onclick="WWMChangelog.showAll()" data-i18n="noteBtn">📝 NOTE</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile TopBar (PC時 hidden、 mobile時のみ表示 / TITLE + 📈格析 + ≡) -->
+  <div class="wwm-mobile-topbar" aria-label="モバイル用 上部バー">
+    <div class="wwm-brand wwm-mobile-brand">
+      <h1 class="wwm-brand-vert" data-i18n="brandVert">風燕計</h1>
+      <div class="wwm-brand-right">
+        <div class="wwm-brand-en">WHERE WINDS METRICS</div>
+        <div class="wwm-brand-sub">WWM-REAL-TIME-METRICS</div>
+      </div>
+      <div class="wwm-brand-seal" aria-hidden="true">燕</div>
+    </div>
+    <div class="wwm-mobile-topbar-actions">
+      <button type="button" class="wwm-mobile-top-reset" id="wwmMobileTopReset" onclick="WWMHelp.resetAllVirtuals()" data-i18n-title="virtResetTip" data-i18n="resetBtn" aria-label="装備/心法リセット" title="新装備/心法 全リセット">RESET</button>
+      <button type="button" class="wwm-mobile-hamburger" id="wwmMobileHamburger" aria-label="メニュー" aria-expanded="false" title="メニュー">
+        <span class="wwm-mobile-hamburger-bar"></span>
+        <span class="wwm-mobile-hamburger-bar"></span>
+        <span class="wwm-mobile-hamburger-bar"></span>
+      </button>
+    </div>
+  </div>
 
   <!-- スコア計算更新バナー: baseline 鮮度切れ (scoreVer 不一致) 時のみ表示。再import促し。OBS view 非表示。 -->
   <div id="wwmScoreUpdateBanner" class="wwm-score-update-banner" style="display:none;">
@@ -228,6 +309,10 @@
         <button class="preset-btn preset-del"  id="presetDelBtn2"  onclick="deletePreset(2)" disabled aria-label="プリセット03削除">✕</button>
       </div>
     </div>
+    <button type="button" class="wwm-mobile-anlz-btn" id="wwmMobileAnlzBtn" aria-label="格析パネルを開く" title="格析パネル">
+      <span class="wwm-mobile-anlz-icon" aria-hidden="true">📈</span>
+      <span class="wwm-mobile-anlz-text" data-i18n="anlzTitle">格析</span>
+    </button>
   </div>
 </div>
 
