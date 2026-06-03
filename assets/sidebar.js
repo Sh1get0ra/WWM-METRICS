@@ -3461,7 +3461,7 @@ function updateHero(params) {
   const total = result.expected || 0;
   const effRi = _getEffectiveRoleInfo();
   const statusScore = Math.round((result.statusScore || 0) + _set4Bonus(effRi));
-  const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  const setText = window.WWMHelpers?.dom?.setText || ((id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; });
   // hero-current = baseline (import時固定) または statusScore (baseline未取得時)
   const _baseline = window.__WWM_BASELINE;
   // baseline (import時固定) があればそれ。無効/未取得時は null → 武格指数 "-" (再import促し)。
