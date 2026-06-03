@@ -140,9 +140,6 @@
       return;
     }
     window.__WWM_SHARED_BUILD = payload;
-    // SHARE mode: baseline / opt_best を 明示的に window へ注入 (scoreVer差 無視で表示優先)
-    if (payload.baseline) window.__WWM_BASELINE = payload.baseline;
-    if (payload.optBest)  window.__WWM_OPT_BEST = payload.optBest;
     document.documentElement.classList.add('wwm-shared-build-mode');
     // localStorage monkey patch
     const origGet = localStorage.getItem.bind(localStorage);
