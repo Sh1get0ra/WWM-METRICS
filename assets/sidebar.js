@@ -364,7 +364,7 @@ function _diagnose(roleInfo, params) {
 // 外功貫通/属性貫通 +1 あたり Δscore 取得 (固定閾値判定 + mismatchは max比正規化)
 async function _evalPenSpecialization(roleInfo) {
   if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return null;
-  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
   await _loadEquipMax();
   const charLv = roleInfo?.level || 95;
   const tier = _lvToTier(charLv);
@@ -412,7 +412,7 @@ function _checkAffix6PenMismatch(roleInfo, dPhys, dElem) {
 }
 async function _findWastedAffixes(roleInfo) {
   if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return [];
-  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
   // base score
   let baseScore = 0;
   try {
@@ -548,7 +548,7 @@ window.WWMDiag = { render: renderDiagnostics, openPopup: _openDiagPopup };
 async function renderAffixRanking(roleInfo, params) {
   const root = document.getElementById('wwmAffixRanking');
   if (!root || !roleInfo || !window.WWMStats?.buildStatParams) return;
-  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
   // baseline score
   let baseScore = 0;
   try {
@@ -896,7 +896,7 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
     if (el) el.textContent = label || '計算中...';
   };
   setProgress('計算中...');
-  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
   await _loadEquipMax();
   const charLv = roleInfo?.level || 95;
   // 作業用 roleInfo clone
@@ -1169,7 +1169,7 @@ function _shareBuildUrl() {
   // 受信側は index.html inline script で memory-only mode 処理 (localStorage 浸食回避)
   const ri = window.__WWM_ROLEINFO;
   if (!ri) { alert('build データなし。先に import してください。'); return; }
-  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
   // payload 軽量化: base64画像 (avatar / xinfaIcons) を除外。
   // 巨大 base64 (100KB超) で URL長 OBS browser source 上限超え → hash truncate → JSON parse 失敗バグ防止。
   // OBS view では _avatarUrl / 静的アイコン fallback で代用可能。
@@ -1593,7 +1593,7 @@ async function renderSidebar(params) {
   let baseParams = null;
   if (hasVirtual && ri && window.WWMStats?.buildStatParams) {
     try {
-      const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+      const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
       baseParams = await window.WWMStats.buildStatParams(ri, state);
     } catch (e) {}
   }
@@ -1899,7 +1899,7 @@ window.__WWM_SET4_BONUS_OF = _set4Bonus;
 // 装備カード Score = (現状 全装備) - (該当 slot 外し) + セット効果均等分配
 async function _computeSlotContributions(roleInfo, slots, suffixSlots, set4Map) {
   if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return null;
-  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
   // base
   let baseScore = 0;
   try {
@@ -1944,7 +1944,7 @@ async function _computeSlotContributions(roleInfo, slots, suffixSlots, set4Map) 
 
 async function _computeGearCardScores(roleInfo) {
   if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return;
-  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
   const origRi = window.__WWM_ROLEINFO;
   const effRi = roleInfo;  // 既に effective が渡される想定 (renderGearGrid から呼ばれる)
   const eqDet = effRi?.wearEquipsDetailed || {};
@@ -2027,7 +2027,7 @@ function renderXinfaGrid(roleInfo) {
   const passive = roleInfo?.passiveSlots || [];
   const lang = _curLang();
   const xinfaMap = window.WWM_XINFA || {};
-  const state = (typeof _getEffectiveState === 'function') ? _getEffectiveState() : WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+  const state = (typeof _getEffectiveState === 'function') ? _getEffectiveState() : (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
   const tiers = state?.xinfaTiers || {};
   const xinfaIconsRaw = window.__WWM_ROLEINFO?._xinfaIcons || roleInfo?._xinfaIcons || [];
   const xinfaIconsB64 = window.__WWM_ROLEINFO?._xinfaIconsBase64 || roleInfo?._xinfaIconsBase64 || [];
@@ -2087,7 +2087,7 @@ function renderXinfaGrid(roleInfo) {
 
 async function _computeArsenalCardScore(roleInfo) {
   if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return;
-  const state = (typeof _getEffectiveState === 'function') ? _getEffectiveState() : WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+  const state = (typeof _getEffectiveState === 'function') ? _getEffectiveState() : (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
   try {
     // base = 武庫込
     const baseParams = await window.WWMStats.buildStatParams(roleInfo, state);
@@ -2116,7 +2116,7 @@ async function _computeXinfaCardScores(roleInfo) {
   // virtual xinfa tiers (Edit modal適用結果) を反映するため _getEffectiveState() 使用
   const state = (typeof _getEffectiveState === 'function')
     ? _getEffectiveState()
-    : WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+    : (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
   // base score
   let baseScore = 0;
   try {
@@ -2154,7 +2154,7 @@ function openXinfaEdit(slotIdx) {
   const xinfaMap = window.WWM_XINFA || {};
   const passive = (window.__WWM_VIRTUAL_XINFA?.passive) || origRi.passiveSlots || [];
   const origPassive = origRi.passiveSlots || [];
-  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
   const origTier = (state?.xinfaTiers?.[slotIdx] ?? state?.xinfaTiers?.[String(slotIdx)] ?? 6);
   const virtTier = window.__WWM_VIRTUAL_XINFA?.tiers?.[slotIdx] ?? origTier;
   let newXinfaId = passive[slotIdx] || origPassive[slotIdx];
@@ -2449,7 +2449,7 @@ function _getEffectiveRoleInfo() {
 }
 // effective state (xinfa tier virtual + arsenal virtual 込み)
 function _getEffectiveState() {
-  const base = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+  const base = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
   const vxi = window.__WWM_VIRTUAL_XINFA;
   const vAr = window.__WWM_VIRTUAL_ARSENAL;
   const hasVxi = vxi?.tiers && Object.keys(vxi.tiers).length;
@@ -3111,7 +3111,7 @@ function openGearEdit(slot) {
         if (slot === '1') vRi.kongfuMain = parseInt(newKongfuId, 10);
         else if (slot === '2') vRi.kongfuSub = parseInt(newKongfuId, 10);
       }
-      const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+      const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
       // virtual compute
       const vParams = await window.WWMStats.buildStatParams(vRi, state);
       window.computeExpected(vParams);
@@ -3680,7 +3680,7 @@ window.WWMXinfa = {
 };
 function openArsenalEdit() {
   const T_ = window.T || {};
-  const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+  const state = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
   const origArsenal = state?.arsenal || { path: 'phys', tiers: {} };
   const virtArsenal = window.__WWM_VIRTUAL_ARSENAL;
   // 新側 初期値 = virtual あれば virtual、なければ orig コピー
@@ -3850,11 +3850,11 @@ function openArsenalEdit() {
   async function _runPreview() {
     const ri = (typeof _getEffectiveRoleInfo === 'function') ? _getEffectiveRoleInfo() : window.__WWM_ROLEINFO;
     if (!ri || !window.WWMStats?.buildStatParams) return;
-    const baseState = (typeof _getEffectiveState === 'function') ? _getEffectiveState() : WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+    const baseState = (typeof _getEffectiveState === 'function') ? _getEffectiveState() : (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
     try {
       // 現 (virtual_arsenal 無視 = 元 arsenal)
       const baseStateNoVirtArs = JSON.parse(JSON.stringify(baseState || {}));
-      const origState = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+      const origState = (() => { try { return JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) { return null; } })();
       if (origState?.arsenal) baseStateNoVirtArs.arsenal = origState.arsenal;
       const p1 = await window.WWMStats.buildStatParams(ri, baseStateNoVirtArs);
       window.computeExpected(p1);
