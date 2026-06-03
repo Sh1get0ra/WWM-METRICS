@@ -3513,33 +3513,6 @@ function updateHero(params) {
     const baselineScore = window.__WWM_BASELINE?.statusScore;
     sbMs.textContent = (typeof baselineScore === 'number') ? Math.round(baselineScore).toLocaleString() : '-';
   }
-  // tier に応じたスコア色 (theme別)
-  const _isLight = document.documentElement.getAttribute('data-theme') === 'light';
-  const TIER_COLOR = _isLight
-    ? { SS: '#b8860b', S: '#c83c2b', A: '#2d5a3a', B: '#7a5a20', C: '#5a4226' }
-    : { SS: '#ffd970', S: '#ff6b50', A: '#a8d4b4', B: '#c9b88a', C: 'rgba(232,215,180,0.55)' };
-  const TIER_SHADOW = _isLight
-    ? {
-        SS: '0 0 8px rgba(184,134,11,0.6), 0 0 18px rgba(184,134,11,0.35)',
-        S:  '0 0 8px rgba(200,60,43,0.5), 0 0 16px rgba(200,60,43,0.25)',
-        A:  '0 0 8px rgba(45,90,58,0.5), 0 0 16px rgba(45,90,58,0.25)',
-        B:  '0 0 6px rgba(122,90,32,0.4)',
-        C:  '0 0 4px rgba(90,66,38,0.3)'
-      }
-    : {
-        SS: '0 0 12px rgba(255,217,112,0.95), 0 0 28px rgba(255,180,40,0.7), 0 0 60px rgba(255,100,20,0.55), 0 0 100px rgba(200,60,43,0.4)',
-        S:  '0 0 18px rgba(255,107,80,0.55), 0 0 36px rgba(255,107,80,0.28)',
-        A:  '0 0 18px rgba(168,212,180,0.45), 0 0 36px rgba(168,212,180,0.25)',
-        B:  '0 0 14px rgba(201,184,138,0.45), 0 0 28px rgba(201,184,138,0.22)',
-        C:  '0 0 10px rgba(232,215,180,0.18)'
-      };
-  // heroScore Tier別変色 廃止 (paper固定)
-  const numEl = document.getElementById('heroScore');
-  if (numEl) {
-    numEl.style.color = '';
-    numEl.style.textShadow = '';
-  }
-  // compact tier badge: 廃止 (heroCompactTierBadge hidden)
   // NEXT 側 = 仮想装備込みの statusScore (即時反映 + countUp再同期)
   const baseline = window.__WWM_BASELINE;
   const baseEl = document.getElementById('heroScoreBaseline');
@@ -3549,40 +3522,6 @@ function updateHero(params) {
     if (baseEl) baseEl.textContent = Math.round(baseScore).toLocaleString();
     if (typeof window.countUp === 'function') {
       window.countUp('heroScoreBaseline', baseScore, 0);
-    }
-    // baseline tier badge (tier 未保存 baseline 用 fallback)
-    const blTb = document.getElementById('heroBaselineTierBadge');
-    if (blTb) {
-      // NEXT 横の baseline tier badge は表示しない
-      blTb.hidden = true;
-      blTb.textContent = '';
-      let bTier = baseline.tier;
-      if (!bTier) {
-        const wl = window.__WWM_ROLEINFO?.worldLv || 14;
-        const thr = 6700 * Math.pow(0.8, 14 - wl);
-        bTier = baseScore >= thr ? 'SS'
-              : baseScore >= thr * 0.9 ? 'S'
-              : baseScore >= thr * 0.8 ? 'A'
-              : baseScore >= thr * 0.6 ? 'B' : 'C';
-      }
-      const TIER_COLOR_B = _isLight
-        ? { SS: '#b8860b', S: '#c83c2b', A: '#2d5a3a', B: '#7a5a20', C: '#5a4226' }
-        : { SS: '#ffd970', S: '#ff6b50', A: '#a8d4b4', B: '#c9b88a', C: 'rgba(232,215,180,0.55)' };
-      const TIER_SHADOW_B = _isLight
-        ? { SS:'0 0 8px rgba(184,134,11,0.5)', S:'0 0 8px rgba(200,60,43,0.4)', A:'0 0 8px rgba(45,90,58,0.4)', B:'0 0 6px rgba(122,90,32,0.3)', C:'0 0 4px rgba(90,66,38,0.25)' }
-        : {
-            SS: '0 0 12px rgba(255,217,112,0.95), 0 0 28px rgba(255,180,40,0.7), 0 0 60px rgba(255,100,20,0.55), 0 0 100px rgba(200,60,43,0.4)',
-            S:  '0 0 18px rgba(255,107,80,0.55), 0 0 36px rgba(255,107,80,0.28)',
-            A:  '0 0 18px rgba(168,212,180,0.45), 0 0 36px rgba(168,212,180,0.25)',
-            B:  '0 0 14px rgba(201,184,138,0.45), 0 0 28px rgba(201,184,138,0.22)',
-            C:  '0 0 10px rgba(232,215,180,0.18)'
-          };
-      // hero-next-val Tier別変色 廃止
-      if (baseEl) {
-        baseEl.style.color = '';
-        baseEl.style.opacity = '';
-        baseEl.style.textShadow = '';
-      }
     }
   } else {
     if (typeof window.countUp === 'function') window.countUp('heroScoreBaseline', currentScore, 0);
