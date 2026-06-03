@@ -425,6 +425,9 @@ a.icon-btn { text-decoration: none; }
 /* SHARE Build mode: preset-bar 非表示 + 閲覧モードバナー表示 */
 .wwm-shared-build-banner { display: none; }
 html.wwm-shared-build-mode .preset-bar { display: none !important; }
+/* SHARE Build: 装備変更不可 → NEXT (装備変更時予測) は無意味 → 非表示 */
+html.wwm-shared-build-mode .hero-next-label,
+html.wwm-shared-build-mode .hero-next-row { display: none !important; }
 html.wwm-shared-build-mode .wwm-shared-build-banner {
   display: flex;
   align-items: center;
