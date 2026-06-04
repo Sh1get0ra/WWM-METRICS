@@ -4373,10 +4373,10 @@ html[data-theme="light"] .hero.hero-wuxia {
   position: relative;
   z-index: 2;
   font-family: var(--f-latin);
-  font-size: var(--text-xl) !important;
+  font-size: var(--text-xl);
   font-weight: var(--fw-black);
   letter-spacing: .12em;
-  padding: 5px 16px !important;
+  padding: 5px 16px;
   align-self: flex-end;
   margin-bottom: var(--space-3-5);
   overflow: hidden;
@@ -4392,8 +4392,8 @@ html[data-theme="light"] .hero.hero-wuxia {
 .hero-wuxia .hero-tier.tier-badge.tier-A,
 .hero-wuxia .hero-tier.tier-badge.tier-B,
 .hero-wuxia .hero-tier.tier-badge.tier-C {
-  font-size: var(--text-xl) !important;
-  padding: 5px 16px !important;
+  font-size: var(--text-xl);
+  padding: 5px 16px;
 }
 
 /* SS — gold (アニメ継承、静的部のみ override) */
@@ -5329,17 +5329,17 @@ html[data-theme="light"] .wwm-anlz-bgicon {
 /* ── Tier badge ルーレット (opt実行中 演出、 sidebar + heroパネル 共通) ─────── */
 .wwm-sb-tier-badge.tier-rolling,
 .hero-tier.tier-rolling {
-  background: linear-gradient(180deg, #2a1a0c 0%, #0a0402 100%) !important;
-  color: #f5d970 !important;
-  border: 1px solid var(--accent) !important;
+  background: linear-gradient(180deg, #2a1a0c 0%, #0a0402 100%);
+  color: #f5d970;
+  border: 1px solid var(--accent);
   text-align: center;
   box-sizing: border-box;
 }
 /* ルーレット中の幅は静的時と同じ (min-width 既に static 側で 28px、 hero は元から十分) */
 .wwm-sb-tier-badge.tier-rolling,
 .hero-tier.tier-rolling {
-  text-shadow: 0 0 4px #ffd970, 0 0 10px #ff9a30 !important;
-  font-weight: 900 !important;
+  text-shadow: 0 0 4px #ffd970, 0 0 10px #ff9a30;
+  font-weight: 900;
   filter: brightness(1.15);
   animation:
     wwm-tier-shake 0.08s linear infinite,
