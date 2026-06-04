@@ -94,6 +94,8 @@ html[data-theme="light"] {
   --c-text-warm:               #5a3a20;  /* modal-a 系 secondary text 統一色 */
   --c-border-soft-warm:        rgba(40,25,18,0.18);  /* 暖色系 soft border (modal-a, mobile overlay) */
   --c-border-mid-warm:         rgba(40,25,18,0.25);  /* 暖色系 mid border (modal-a select/input) */
+  --c-gold-rich:               #b8860b;              /* lv-select / section-title 用 rich gold (light のみ) */
+  --c-cream-pale:              #f5e6c8;              /* lv-select bg 用 淡 cream (light のみ) */
 }
 
 html[data-theme="light"] body {
@@ -387,18 +389,18 @@ html[data-theme="light"] .wwm-sb-section-title {
   background: rgba(122,90,32,0.18);
   border-left: 3px solid var(--gold-deep);
   padding-left: var(--space-2);
-  color: #b8860b;
+  color: var(--c-gold-rich);
 }
 
 html[data-theme="light"] .wwm-cmp-lv-select {
-  background: #f5e6c8;
-  color: #b8860b;
-  border-color: #b8860b;
+  background: var(--c-cream-pale);
+  color: var(--c-gold-rich);
+  border-color: var(--c-gold-rich);
 }
 
 html[data-theme="light"] .wwm-cmp-lv-select option {
-  background: #f5e6c8;
-  color: #b8860b;
+  background: var(--c-cream-pale);
+  color: var(--c-gold-rich);
 }
 
 html[data-theme="light"] .wwm-modal,
