@@ -99,13 +99,16 @@ html[data-theme="light"] {
   --c-overlay-cream:           rgba(255,248,225,0.40); /* header bg blend overlay film */
   --c-vermilion-fade-end:      rgba(232,81,58,0.05); /* vermilion gradient 透明側 endpoint */
   --c-fg-cream-bright:         #fff8e8;              /* accent bg 上 cream text (tier-S, opt-sort-btn.active) */
+  --c-gold-deep-faint:         var(--c-gold-deep-faint); /* light theme dark-gold scale: faint (bg glow) */
+  --c-gold-deep-mid:           var(--c-gold-deep-mid); /* light theme dark-gold scale: mid (drop-shadow wide) */
+  --c-gold-deep-strong:        var(--c-gold-deep-strong);  /* light theme dark-gold scale: strong (border, drop-shadow tight) */
 }
 
 html[data-theme="light"] body {
   background:
     radial-gradient(ellipse 60% 35% at 50% 0%, var(--vermilion-soft-2), transparent 65%),
-    radial-gradient(ellipse 50% 25% at 0% 0%, rgba(138,106,32,0.14), transparent 70%),
-    radial-gradient(ellipse 50% 25% at 100% 0%, rgba(138,106,32,0.14), transparent 70%),
+    radial-gradient(ellipse 50% 25% at 0% 0%, var(--c-gold-deep-faint), transparent 70%),
+    radial-gradient(ellipse 50% 25% at 100% 0%, var(--c-gold-deep-faint), transparent 70%),
     radial-gradient(ellipse 60% 70% at 100% 100%, rgba(138,106,32,0.10), transparent 55%),
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n1'><feTurbulence type='fractalNoise' baseFrequency='0.45' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.25  0 0 0 0 0.12  0 0 0 0.14 0'/></filter><filter id='n2'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.4  0 0 0 0 0.28  0 0 0 0 0.14  0 0 0 0.10 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n1)'/><rect width='100%25' height='100%25' filter='url(%23n2)'/></svg>"),
     linear-gradient(rgba(245,236,209,0.85), rgba(245,236,209,0.85)),
@@ -174,7 +177,7 @@ html[data-theme="light"] .preset-name-input { color: var(--paper); }
 
 html[data-theme="light"] .preset-name-input::placeholder { color: var(--paper-mute); }
 
-html[data-theme="light"] .preset-save { color: var(--gold-bright); border-color: rgba(138,106,32,0.5); }
+html[data-theme="light"] .preset-save { color: var(--gold-bright); border-color: var(--c-gold-deep-strong); }
 
 html[data-theme="light"] .preset-save:hover { background: var(--gold-bright); color: #fff5dc; }
 
@@ -528,7 +531,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
   border-color: var(--bone-dim) !important;
 }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-gold { background: rgba(138,106,32,0.14) !important; color: #7a5a12 !important; border-color: rgba(138,106,32,0.5) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-gold { background: var(--c-gold-deep-faint) !important; color: #7a5a12 !important; border-color: var(--c-gold-deep-strong) !important; }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.13) !important; color: #6f3a9a !important; border-color: rgba(120,60,160,0.5) !important; }
 
@@ -575,7 +578,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
 
 html[data-theme="light"] .wwm-brand-sub {
   color: var(--gold-bright);
-  text-shadow: 0 0 4px rgba(138,106,32,0.25);
+  text-shadow: 0 0 4px var(--c-gold-deep-mid);
 }
 
 html[data-theme="light"] .wwm-modal-bg-icon {
@@ -583,7 +586,7 @@ html[data-theme="light"] .wwm-modal-bg-icon {
   filter:
     brightness(0)
     drop-shadow(0 0 6px rgba(138,106,32,0.45))
-    drop-shadow(0 0 14px rgba(138,106,32,0.25));
+    drop-shadow(0 0 14px var(--c-gold-deep-mid));
 }
 
 html[data-theme="light"] .wwm-equip-icon,
@@ -591,7 +594,7 @@ html[data-theme="light"] .wwm-xinfa-icon {
   opacity: 0.22;
   filter:
     brightness(0)
-    drop-shadow(0 0 3px rgba(138,106,32,0.5))
+    drop-shadow(0 0 3px var(--c-gold-deep-strong))
     drop-shadow(0 0 8px var(--gold-glow));
 }
 
@@ -1010,7 +1013,7 @@ html[data-theme="light"] .wwm-anlz-bgicon {
   filter:
     brightness(0)
     drop-shadow(0 0 6px rgba(138,106,32,0.45))
-    drop-shadow(0 0 14px rgba(138,106,32,0.25));
+    drop-shadow(0 0 14px var(--c-gold-deep-mid));
 }
 
 html[data-theme="light"] .wwm-note-cl-items li.wwm-note-cl-featured {
