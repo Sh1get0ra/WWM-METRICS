@@ -141,6 +141,10 @@ html[data-theme="light"] {
   --c-vermilion-glow-soft:     rgba(200,60,43,0.25); /* seal / tier-S outer glow (light theme) */
   --c-tier-ss-text-halo:       rgba(255,255,255,0.55); /* tier-SS badge text 白 halo (hero + sb-badge) */
 
+  /* mobile overlay header + card bg film (B17) */
+  --c-mobile-overlay-header-bg: linear-gradient(180deg, rgba(248,238,210,0.95), rgba(235,222,188,0.92)); /* mobile stat/anlz overlay header gradient */
+  --c-card-bg-overlay-film:    rgba(255,250,235,0.55); /* equip/xinfa-slot 背景 film (solid overlay layer) */
+
   /* misc text + glow (B13) */
   --c-text-brown-bright:       #8a5212;              /* sb-mini-hero totalmartial / sb-applied */
   --c-text-brown-dim:          #6a4220;              /* equip stat-pct / step2 muted */
@@ -671,7 +675,7 @@ html[data-theme="light"] .wwm-gear-grid .wwm-equip-slot,
 html[data-theme="light"] .wwm-xinfa-slot {
   border-color: rgba(40,25,18,0.30);
   background-image:
-    linear-gradient(rgba(255,250,235,0.55), rgba(255,250,235,0.55)),
+    linear-gradient(var(--c-card-bg-overlay-film), var(--c-card-bg-overlay-film)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg_usercard2-e8900864.png"),
     linear-gradient(180deg, #fff3da, #fce0bc);
   background-position: 0 0, center, 0 0;
@@ -1093,7 +1097,7 @@ html[data-theme="light"] .wwm-mobile-stat-overlay {
   }
 
 html[data-theme="light"] .wwm-mobile-stat-overlay-header {
-    background: linear-gradient(180deg, rgba(248,238,210,0.95), rgba(235,222,188,0.92));
+    background: var(--c-mobile-overlay-header-bg);
     border-bottom-color: var(--c-border-soft-warm);
   }
 
@@ -1106,7 +1110,7 @@ html[data-theme="light"] .wwm-mobile-anlz-overlay {
   }
 
 html[data-theme="light"] .wwm-mobile-anlz-overlay-header {
-    background: linear-gradient(180deg, rgba(248,238,210,0.95), rgba(235,222,188,0.92));
+    background: var(--c-mobile-overlay-header-bg);
     border-bottom-color: var(--c-border-soft-warm);
   }
 
