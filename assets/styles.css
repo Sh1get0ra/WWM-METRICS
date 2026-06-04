@@ -50,20 +50,7 @@
    ╚═══════════════════════════════════════════════════════════════════╝ */
 
 
-/* SECTION 01 (DESIGN TOKENS) は assets/styles-tokens.css に切出 (Tier 3 Step 1) */
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-html, body {
-  background: var(--bg-0);
-  color: var(--paper);
-  font-family: var(--f-body);
-  font-size: var(--text-md);
-  line-height: 1.55;
-  font-feature-settings: 'palt';
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
+/* SECTION 01 (DESIGN TOKENS) → styles-tokens.css、 SECTION 02 (BODY & BRAND HEADER) + reset/typography → styles-base.css に切出 (Tier 3 Step 1/5) */
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
      SECTION 03 — SHARE / WEAKNESS BADGE

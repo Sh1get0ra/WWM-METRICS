@@ -1,7 +1,21 @@
 /* ╔═══════════════════════════════════════════════════════════════════╗
-     BASE — body / header / footer / toast / a11y / utilities / banner / hint — 集約 (Tier 3 Step 3)
-     styles.css から切出。 cascade: tokens → animations → ... → styles → dark → light
+     BASE — body / header / footer / toast / a11y / utilities / banner / hint — 集約 (Tier 3 Step 5)
+     styles.css から切出。 cascade: tokens → animations → base → styles → modals → responsive → dark → light
    ╚═══════════════════════════════════════════════════════════════════╝ */
+
+/* ── Global reset + typography (元 styles.css L255-267、 Step 1 残置分) ── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-0);
+  color: var(--paper);
+  font-family: var(--f-body);
+  font-size: var(--text-md);
+  line-height: 1.55;
+  font-feature-settings: 'palt';
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
      SECTION 02 — BODY & BRAND HEADER
