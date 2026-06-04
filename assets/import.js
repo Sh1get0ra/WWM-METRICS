@@ -208,7 +208,7 @@ function _arsenalStatLabels(pathKey) {
   };
 }
 function _tierLabel(lv) {
-  const lang = _curLang();
+  const lang = _curLangImport();
   if (lang === 'en') return `Tier ${lv} Arsenal`;
   if (lang === 'zh') return `Lv.${lv}武库`;
   if (lang === 'ko') return `Lv.${lv} 무고`;
@@ -272,7 +272,7 @@ function _xinfaTierEffectsJa(eff) {
 }
 function _xinfaEffectsText(xinfa, tier) {
   if (!xinfa?.attributeBuff || tier < 2) return '<span class="wwm-muted">効果なし</span>';
-  const lang = _curLang();
+  const lang = _curLangImport();
   const parts = [];
   const t2eff = xinfa.attributeBuff.tier2?.effects;
   const t5eff = xinfa.attributeBuff.tier5?.effects;
@@ -460,12 +460,12 @@ function _renderEquipSlot(slot, eq) {
   `;
 }
 
-function _curLang() {
+function _curLangImport() {
   return (window.currentLang) || (document.documentElement.lang) || 'ja';
 }
 function _pickName(names, fallback) {
   if (!names) return fallback;
-  const lang = _curLang();
+  const lang = _curLangImport();
   return names[lang] || names.ja || names.en || fallback;
 }
 function _kongfuName(id) {
