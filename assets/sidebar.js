@@ -75,22 +75,7 @@ function _ratioColor(r) {
 }
 
 // (Phase 3.1: modal a11y / changelog / NOTE modal は assets/sidebar/modal-helpers.js に切出)
-function _resetAllVirtuals() {
-  const hasV = (WWMState.virtual.gear && Object.keys(WWMState.virtual.gear).length)
-            || (WWMState.virtual.kongfu && Object.keys(WWMState.virtual.kongfu).length)
-            || (WWMState.virtual.xinfa && ((WWMState.virtual.xinfa.passive&&WWMState.virtual.xinfa.passive.length) || Object.keys(WWMState.virtual.xinfa.tiers||{}).length))
-            || WWMState.virtual.arsenal;
-  if (!hasV) { alert('リセット対象なし'); return; }
-  if (!confirm('新装備/心法/武術/武庫 全てを現装備値に戻す。よろしい?')) return;
-  WWMState.virtual.gear = {};
-  WWMState.virtual.kongfu = {};
-  WWMState.virtual.xinfa = null;
-  WWMState.virtual.arsenal = null;
-  try { localStorage.removeItem('wwm_virtual_v1'); } catch(_) {}
-  if (typeof window._refreshAll === 'function') window._refreshAll();
-}
-window.WWMHelp = window.WWMHelp || {};
-window.WWMHelp.resetAllVirtuals = _resetAllVirtuals;
+// (Phase 3.9f: _resetAllVirtuals は assets/sidebar/virtual.js に切出 — window.WWMHelp.resetAllVirtuals expose)
 
 // ── 弱点指摘 / Diagnostics ──────────────────────────────────────
 // (Phase 3.3: assets/sidebar/diag.js に切出 — _diagnose / _evalPenSpecialization /
@@ -135,43 +120,12 @@ if (!document.documentElement.classList.contains('wwm-view-sidebar')) {
 // (本体は assets/sidebar/xinfa.js)
 
 // ── Virtual gear state (Edit modal適用結果) ─────────────────────
-function _getEffectiveRoleInfo() {
-  const orig = WWMState.roleInfo;
-  if (!orig) return null;
-  const vmap = WWMState.virtual.gear || {};
-  const vkf = WWMState.virtual.kongfu || {};
-  const vxi = WWMState.virtual.xinfa;
-  const hasVxiPassive = vxi?.passive && vxi.passive.length;
-  if (!Object.keys(vmap).length && !Object.keys(vkf).length && !hasVxiPassive) return orig;
-  const merged = { ...orig, wearEquipsDetailed: { ...(orig.wearEquipsDetailed || {}) } };
-  for (const [slot, vEq] of Object.entries(vmap)) {
-    if (vEq) merged.wearEquipsDetailed[slot] = vEq;
-  }
-  if (vkf.kongfuMain) merged.kongfuMain = vkf.kongfuMain;
-  if (vkf.kongfuSub) merged.kongfuSub = vkf.kongfuSub;
-  // xinfa virtual (vxi は上で取得済)
-  if (vxi?.passive) merged.passiveSlots = [...vxi.passive];
-  return merged;
-}
-// effective state (xinfa tier virtual + arsenal virtual 込み)
-function _getEffectiveState() {
-  const base = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
-  const vxi = WWMState.virtual.xinfa;
-  const vAr = WWMState.virtual.arsenal;
-  const hasVxi = vxi?.tiers && Object.keys(vxi.tiers).length;
-  if (!hasVxi && !vAr) return base;
-  const merged = JSON.parse(JSON.stringify(base || {}));
-  if (hasVxi) {
-    if (!merged.xinfaTiers) merged.xinfaTiers = {};
-    for (const [k, v] of Object.entries(vxi.tiers)) {
-      merged.xinfaTiers[k] = v;
-      merged.xinfaTiers[String(k)] = v;
-    }
-  }
-  if (vAr) merged.arsenal = JSON.parse(JSON.stringify(vAr));
-  return merged;
-}
-window.__WWM_GET_EFFECTIVE_ROLEINFO = _getEffectiveRoleInfo;
+// (Phase 3.9f: assets/sidebar/virtual.js に切出 — _getEffectiveRoleInfo /
+//             _getEffectiveState / _VIRTUAL_KEY / _saveVirtuals / _loadVirtuals /
+//             _resetAllVirtuals / window._getEffectiveRoleInfo / _getEffectiveState /
+//             __WWM_GET_EFFECTIVE_ROLEINFO / _saveVirtuals / _loadVirtuals /
+//             WWMHelp.resetAllVirtuals / WWMSidebar.virtual)
+// (本体は assets/sidebar/virtual.js — 起動時 _loadVirtuals() を IIFE 内で即時実行)
 
 function _autoFitText(root) {
   (root || document).querySelectorAll('.wwm-equip-setname, .wwm-equip-kongfu, .wwm-xinfa-header b').forEach(el => {
@@ -184,43 +138,12 @@ function _autoFitText(root) {
 }
 window._autoFitText = _autoFitText;
 
-// ── virtual装備 永続化 (gear/kongfu/xinfa) ───────────────────
-const _VIRTUAL_KEY = 'wwm_virtual_v1';
-function _saveVirtuals() {
-  try {
-    const data = {
-      gear:    WWMState.virtual.gear || null,
-      kongfu:  WWMState.virtual.kongfu || null,
-      xinfa:   WWMState.virtual.xinfa || null,
-      arsenal: WWMState.virtual.arsenal || null
-    };
-    const empty = (!data.gear || !Object.keys(data.gear).length)
-               && (!data.kongfu || !Object.keys(data.kongfu).length)
-               && (!data.xinfa || (!(data.xinfa.passive&&data.xinfa.passive.length) && !Object.keys(data.xinfa.tiers||{}).length))
-               && (!data.arsenal);
-    if (empty) localStorage.removeItem(_VIRTUAL_KEY);
-    else localStorage.setItem(_VIRTUAL_KEY, JSON.stringify(data));
-  } catch(_) {}
-}
-function _loadVirtuals() {
-  try {
-    const raw = localStorage.getItem(_VIRTUAL_KEY);
-    if (!raw) return;
-    const d = JSON.parse(raw);
-    if (d.gear)    WWMState.virtual.gear = d.gear;
-    if (d.kongfu)  WWMState.virtual.kongfu = d.kongfu;
-    if (d.xinfa)   WWMState.virtual.xinfa = d.xinfa;
-    if (d.arsenal) WWMState.virtual.arsenal = d.arsenal;
-  } catch(_) {}
-}
-window._saveVirtuals = _saveVirtuals;
-window._loadVirtuals = _loadVirtuals;
-_loadVirtuals();
+// (Phase 3.9f: _VIRTUAL_KEY / _saveVirtuals / _loadVirtuals は assets/sidebar/virtual.js に切出)
 
 function _refreshAll() {
-  const ri = _getEffectiveRoleInfo();
+  const ri = window._getEffectiveRoleInfo();
   if (!ri) return;
-  const state = _getEffectiveState();
+  const state = window._getEffectiveState();
   if (window.WWMStats) {
     window.WWMStats.buildStatParams(ri, state).then(async params => {
       WWMState.params = params;
@@ -232,7 +155,7 @@ function _refreshAll() {
       if (window.WWMDiag) window.WWMDiag.render(ri, params);
       if (window.WWMRanking) window.WWMRanking.render(ri, params);
       _autoFitText();
-      _saveVirtuals();
+      window._saveVirtuals();
       // 重い最適化(数秒)は await せず 2フレーム後に遅延起動 (初期描画を阻害しない)。
       if (window.WWMOpt) {
         requestAnimationFrame(() => requestAnimationFrame(() => {
