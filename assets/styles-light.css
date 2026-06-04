@@ -98,6 +98,7 @@ html[data-theme="light"] {
   --c-cream-pale:              #f5e6c8;              /* lv-select bg 用 淡 cream (light のみ) */
   --c-overlay-cream:           rgba(255,248,225,0.40); /* header bg blend overlay film */
   --c-vermilion-fade-end:      rgba(232,81,58,0.05); /* vermilion gradient 透明側 endpoint */
+  --c-fg-cream-bright:         #fff8e8;              /* accent bg 上 cream text (tier-S, opt-sort-btn.active) */
 }
 
 html[data-theme="light"] body {
@@ -224,7 +225,7 @@ html[data-theme="light"] .tier-SS::before {
 }
 
 html[data-theme="light"] .tier-S {
-  color: #fff8e8;
+  color: var(--c-fg-cream-bright);
   background: linear-gradient(135deg, var(--vermilion) 0%, #a02818 100%);
   border-color: #6a1810;
   text-shadow: 0 1px 2px var(--overlay-soft-2), 0 0 8px rgba(255,200,180,0.4);
@@ -325,7 +326,7 @@ html[data-theme="light"] .wwm-opt-sort-btn { color: #5a4838; }
 
 html[data-theme="light"] .wwm-opt-sort-btn:hover { background: rgba(184,134,42,0.12); color: var(--brown-1); }
 
-html[data-theme="light"] .wwm-opt-sort-btn.active { background: #b8862a; color: #fff8e8; }
+html[data-theme="light"] .wwm-opt-sort-btn.active { background: #b8862a; color: var(--c-fg-cream-bright); }
 
 html[data-theme="light"] .wwm-opt-sort-btn + .wwm-opt-sort-btn { border-left-color: rgba(120,60,20,0.35); }
 
@@ -708,7 +709,7 @@ html[data-theme="light"] .hero-wuxia .judge-dot-elem { border-color: var(--jade-
 html[data-theme="light"] .hero-wuxia .judge-row-sep { border-top-color: rgba(40,25,18,0.2); }
 
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-badge {
-  background: linear-gradient(180deg, #f4e8cc, #e8dab8);
+  background: linear-gradient(180deg, var(--c-surf-warm-1), #e8dab8);
   color: var(--paper-dim);
   border-color: rgba(122,90,32,.6);
   text-shadow: 0 0 2px rgba(244,232,204,0.9);
