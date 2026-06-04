@@ -125,11 +125,13 @@ function parseRules(src) {
     if (i >= len) break;
     if (src[i] === ';') { i++; continue; }
     i++; // consume '{'
+    const bodyStartLine = line; // line that contains the '{' (and possibly first declaration on same line)
     const body = readBody();
     const trimmed = prelude.trim();
     rules.push({
       prelude: trimmed,
       body,
+      bodyStartLine,
       startLine: ruleStartLine,
       atRule: /^\s*@/.test(trimmed) ? trimmed.match(/^@[a-z-]+/i)?.[0] || '@?' : null
     });
@@ -253,23 +255,32 @@ function canonCompound(compound) {
   ].join('');
 }
 
-// Parse declarations in a rule body. Skip nested at-rules.
-function parseDeclarations(body) {
+// Parse declarations in a rule body, tracking the line number of each.
+// `bodyStartLine` is the 1-based file line that contains the rule's '{'.
+// Body characters begin at column AFTER the '{', so the first content might
+// already be on bodyStartLine (single-line rule case).
+function parseDeclarations(body, bodyStartLine) {
   const out = [];
   let i = 0;
   let depth = 0;
   let inStr = null;
   let buf = '';
+  let line = bodyStartLine;
+  let bufStartLine = line; // line where current decl buffer started
   while (i < body.length) {
     const ch = body[i];
     if (inStr) {
       if (ch === inStr && body[i - 1] !== '\\') inStr = null;
+      if (ch === '\n') line++;
       buf += ch; i++; continue;
     }
     if (ch === '"' || ch === "'") { inStr = ch; buf += ch; i++; continue; }
     if (ch === '/' && body[i + 1] === '*') {
       i += 2;
-      while (i < body.length && !(body[i] === '*' && body[i + 1] === '/')) i++;
+      while (i < body.length && !(body[i] === '*' && body[i + 1] === '/')) {
+        if (body[i] === '\n') line++;
+        i++;
+      }
       i += 2;
       continue;
     }
@@ -282,11 +293,25 @@ function parseDeclarations(body) {
         if (colon > 0 && !decl.startsWith('--')) {
           const prop = decl.slice(0, colon).trim().toLowerCase();
           const val = decl.slice(colon + 1).trim();
-          out.push({ prop, val, hasImportant: /!important\b/i.test(val) });
+          // Decl's line = where the prop name first appears. bufStartLine is a
+          // close approximation: it's the line where the buffer began collecting.
+          // Skip leading whitespace/newlines: find first non-ws char's line.
+          let scanLine = bufStartLine;
+          for (let k = 0; k < buf.length; k++) {
+            if (buf[k] === '\n') { scanLine++; continue; }
+            if (buf[k] === ' ' || buf[k] === '\t' || buf[k] === '\r') continue;
+            break;
+          }
+          out.push({ prop, val, hasImportant: /!important\b/i.test(val), line: scanLine });
         }
       }
-      buf = ''; i++; continue;
+      buf = '';
+      // After ';', next decl starts on current line (or next).
+      bufStartLine = line;
+      i++; continue;
     }
+    if (buf.length === 0 && /\S/.test(ch)) bufStartLine = line;
+    if (ch === '\n') line++;
     buf += ch; i++;
   }
   // Tail (no trailing semicolon).
@@ -296,33 +321,16 @@ function parseDeclarations(body) {
     if (colon > 0 && !decl.startsWith('--')) {
       const prop = decl.slice(0, colon).trim().toLowerCase();
       const val = decl.slice(colon + 1).trim();
-      out.push({ prop, val, hasImportant: /!important\b/i.test(val) });
+      let scanLine = bufStartLine;
+      for (let k = 0; k < buf.length; k++) {
+        if (buf[k] === '\n') { scanLine++; continue; }
+        if (buf[k] === ' ' || buf[k] === '\t' || buf[k] === '\r') continue;
+        break;
+      }
+      out.push({ prop, val, hasImportant: /!important\b/i.test(val), line: scanLine });
     }
   }
   return out;
-}
-
-// Estimate declaration line within file: scan body for `prop:` from rule.startLine.
-function declLineFor(rule, prop, occurrenceIndex) {
-  // occurrenceIndex: 0-based which match within this rule (rules may set same prop twice in cascade rolls).
-  let seen = 0;
-  const startIdx = rule.startLine - 1;
-  // Search forward — body extends until matching `}` but we don't have endLine here.
-  // Approximate: scan up to next "}" at column 0 or end of file.
-  const re = new RegExp(`^\\s*${prop.replace(/[-]/g, '\\-')}\\s*:`, 'i');
-  let depth = 1;
-  for (let i = startIdx + 1; i < lines.length; i++) {
-    // Trivial brace tracker.
-    const opens = (lines[i].match(/\{/g) || []).length;
-    const closes = (lines[i].match(/\}/g) || []).length;
-    if (re.test(lines[i])) {
-      if (seen === occurrenceIndex) return i + 1;
-      seen++;
-    }
-    depth += opens - closes;
-    if (depth <= 0) break;
-  }
-  return rule.startLine;
 }
 
 // === Build signature index ===
@@ -330,16 +338,13 @@ const sigIndex = new Map(); // sig → [{ruleLine, selectorRaw, finalCanon, prop
 let bangTotal = 0;
 
 for (const r of allRules) {
-  const decls = parseDeclarations(r.body);
+  const decls = parseDeclarations(r.body, r.bodyStartLine);
   const selectors = splitSelectors(r.prelude);
   for (const sel of selectors) {
     const fc = finalCompound(sel);
     const canon = canonCompound(fc);
     if (!canon) continue; // tag-only or anomalous — skip from comparison (won't dedupe)
-    const propCounts = new Map();
     for (const d of decls) {
-      const occ = propCounts.get(d.prop) || 0;
-      propCounts.set(d.prop, occ + 1);
       const sig = canon + '|' + d.prop + (r.mediaContext ? '|' + r.mediaContext : '');
       const entry = {
         ruleLine: r.startLine,
@@ -348,7 +353,7 @@ for (const r of allRules) {
         prop: d.prop,
         valSample: d.val.replace(/!important\b/i, '').trim().slice(0, 60),
         hasImportant: d.hasImportant,
-        declLine: declLineFor(r, d.prop, occ),
+        declLine: d.line,
         mediaContext: r.mediaContext || '',
       };
       if (d.hasImportant) bangTotal++;

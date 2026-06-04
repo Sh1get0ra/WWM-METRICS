@@ -68,9 +68,11 @@ const previews = [];
 for (const t of toApply) {
   const idx = t.line - 1;
   const line = lines[idx];
-  // Match `prop : value !important` — handle whitespace around prop.
+  // Match `prop: value !important` — handle single-line rules where prop
+  // appears mid-line after `{`. Use a negative lookbehind for alphanumerics to
+  // avoid matching `min-${prop}` etc.
   const propEsc = t.prop.replace(/[-]/g, '\\-');
-  const re = new RegExp(`(^\\s*${propEsc}\\s*:[^;]*?)\\s*!important\\b`, 'i');
+  const re = new RegExp(`((?<![a-zA-Z0-9_-])${propEsc}\\s*:[^;}]*?)\\s*!important\\b`, 'i');
   if (!re.test(line)) {
     errors.push(`L${t.line} "${t.prop}": pattern not found in line "${line.slice(0, 80)}..."`);
     continue;

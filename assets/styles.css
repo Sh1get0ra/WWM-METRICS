@@ -28,25 +28,25 @@
      SECTION 19 — COMPARE MODAL (武具対照)                   L 2323
      SECTION 20 — XINFA TIER EFFECTS LIST                L 2986
      SECTION 21 — ANALYSIS GRID (Tier + Affix)           L 3017
-     SECTION 22 — DIAGNOSTICS PANEL                      L 3420
-     SECTION 23 — CHANGELOG MODAL                        L 3482
-     SECTION 24 — LIGHT THEME — Modal/Card               L 3597
-     SECTION 25 — XINFA GRID                             L 3927
-     SECTION 26 — GEAR/XINFA CARD 案A LAYER               L 4132
-     SECTION 27 — NOTICES + LIGHT CHART                  L 4270
-     SECTION 28 — HERO TIER BADGE (full)                 L 4368
-     SECTION 29 — LIGHT THEME — Hero/Compass             L 4550
-     SECTION 30 — IMPORT POSITION HINT                   L 4725
-     SECTION 31 — POLISH PRIMITIVES                      L 4775
-     SECTION 32 — SCORE UPDATE BANNER                    L 4820
-     SECTION 33 — MIGRATION BANNER                       L 4889
-     SECTION 34 — DATA IMPORT — Light Contrast           L 4937
-     SECTION 35 — ANALYSIS PANEL 右下 (案30)                L 5023
-     SECTION 36 — FONT FAMILY + ANLZ BODY                L 5228
-     SECTION 37 — TIER BADGE ROULETTE                    L 5326
-     SECTION 38 — NOTE MODAL (巻物)                        L 5370
-     SECTION 39 — A11Y :focus-visible (global)           L 5613
-     SECTION 40 — MOBILE RESPONSIVE                      L 5629
+     SECTION 22 — DIAGNOSTICS PANEL                      L 3410
+     SECTION 23 — CHANGELOG MODAL                        L 3472
+     SECTION 24 — LIGHT THEME — Modal/Card               L 3587
+     SECTION 25 — XINFA GRID                             L 3917
+     SECTION 26 — GEAR/XINFA CARD 案A LAYER               L 4122
+     SECTION 27 — NOTICES + LIGHT CHART                  L 4260
+     SECTION 28 — HERO TIER BADGE (full)                 L 4358
+     SECTION 29 — LIGHT THEME — Hero/Compass             L 4540
+     SECTION 30 — IMPORT POSITION HINT                   L 4715
+     SECTION 31 — POLISH PRIMITIVES                      L 4765
+     SECTION 32 — SCORE UPDATE BANNER                    L 4810
+     SECTION 33 — MIGRATION BANNER                       L 4879
+     SECTION 34 — DATA IMPORT — Light Contrast           L 4927
+     SECTION 35 — ANALYSIS PANEL 右下 (案30)                L 5013
+     SECTION 36 — FONT FAMILY + ANLZ BODY                L 5218
+     SECTION 37 — TIER BADGE ROULETTE                    L 5316
+     SECTION 38 — NOTE MODAL (巻物)                        L 5360
+     SECTION 39 — A11Y :focus-visible (global)           L 5603
+     SECTION 40 — MOBILE RESPONSIVE                      L 5619
    ╚═══════════════════════════════════════════════════════════════════╝ */
 
 
@@ -743,13 +743,13 @@ html[data-theme="light"] .wwm-footer-logo { filter: brightness(0) saturate(100%)
 .hero--collapsed .hero-left { padding-top: var(--space-2-5); padding-bottom: var(--space-2-5); justify-content: center; }
 /* 折りたたみ時は常に2カラム維持 + hero-right を強制表示 */
 .hero--collapsed {
-  grid-template-columns: 1fr 280px !important;
+  grid-template-columns: 1fr 280px;
 }
 .hero--collapsed .hero-right {
   display: flex !important;
   padding: var(--space-2) var(--space-4);
   border-left: 1px solid var(--ink-2);
-  border-top: none !important;
+  border-top: none;
 }
 .hero--collapsed .donut-wrap { flex-direction: row; align-items: center; gap: var(--space-2-5); width: auto; }
 .hero--collapsed .donut-block { flex-direction: row; align-items: center; gap: var(--space-2-5); width: auto; }
@@ -757,14 +757,14 @@ html[data-theme="light"] .wwm-footer-logo { filter: brightness(0) saturate(100%)
 .hero--collapsed .donut-center-label { font-size: 7px; }
 .hero--collapsed .donut-center-val { font-size: var(--text-sm); margin-top: 1px; }
 .hero--collapsed .prob-legend {
-  display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 2px 4px;
   align-content: center;
   min-width: 0;
 }
-.hero--collapsed .prob-row { padding: var(--space-half) 0; gap: var(--space-1); border-bottom: none !important; min-width: 0; }
-.hero--collapsed .prob-dot { width: 6px !important; height: 6px !important; flex-shrink: 0; }
+.hero--collapsed .prob-row { padding: var(--space-half) 0; gap: var(--space-1); border-bottom: none; min-width: 0; }
+.hero--collapsed .prob-dot { width: 6px; height: 6px; flex-shrink: 0; }
 .hero--collapsed .pname { font-size: var(--text-2xs); min-width: 0; overflow: hidden; }
 .hero--collapsed .pval { font-size: var(--text-xs); }
 
@@ -1579,8 +1579,8 @@ html[data-theme="light"] .tier-C { color: var(--paper-mute);  background: rgba(5
   overflow: hidden;
   /* ヘッダー部分は内部要素 (tier badge ルーレット等) で揺れないよう固定高 */
   height: 84px !important;
-  min-height: 84px !important;
-  max-height: 84px !important;
+  min-height: 84px;
+  max-height: 84px;
   box-sizing: border-box;
 }
 .wwm-sb-mini-hero-card::before,
@@ -1645,7 +1645,7 @@ html[data-theme="light"] .wwm-sb-rest {
   border-color: rgba(40,25,18,0.15);
 }
 /* #wwmSidebar 本体の border を透明 (内側 mini-hero / rest が枠を持つ) */
-#wwmSidebar { border-color: transparent !important; }
+#wwmSidebar { border-color: transparent; }
 /* サイドパネル + 装備/心法カード 全体 Noto Serif JP に統一 */
 #wwmSidebar,
 #wwmSidebar *,
@@ -1653,7 +1653,7 @@ html[data-theme="light"] .wwm-sb-rest {
 #wwmGearGrid *,
 #wwmXinfaGrid,
 #wwmXinfaGrid * {
-  font-family: var(--f-display, 'Noto Serif JP'), serif !important;
+  font-family: var(--f-display, 'Noto Serif JP'), serif;
 }
 
 .wwm-sb-top {
@@ -1919,10 +1919,10 @@ html, body { height: 100%; margin: 0; overflow: hidden; }
 body.wwm-layout-active {
   margin: 0 !important;
   height: 100vh !important;
-  overflow-x: auto !important; /* window < 1010 で .wwm-app-body 横スクロール許可 */
-  overflow-y: hidden !important;
+  overflow-x: auto; /* window < 1010 で .wwm-app-body 横スクロール許可 */
+  overflow-y: hidden;
   box-sizing: border-box;
-  display: block !important;
+  display: block;
 }
 body.wwm-layout-active .sticky-header {
   position: sticky; top: 0; /* fixed → sticky: body横scrollと連動して動く */
@@ -1964,12 +1964,12 @@ body.wwm-layout-active .wwm-sidebar-test {
   position: relative !important;
   top: auto !important;
   right: auto !important;
-  left: auto !important;
-  bottom: auto !important;
+  left: auto;
+  bottom: auto;
   width: 100% !important;
   height: calc(100% - 16px) !important;
   max-height: none !important;
-  min-height: 0 !important;
+  min-height: 0;
   margin-bottom: var(--space-4);
   overflow-y: auto !important;
   grid-area: sidebar;
@@ -1981,7 +1981,7 @@ body.wwm-layout-active .wwm-sidebar-test {
   background: transparent !important;
   padding: 0 !important;
   display: flex !important;
-  flex-direction: column !important;
+  flex-direction: column;
 }
 /* rest を残り高さ全部使う (タブパネル同様 footer まで) */
 body.wwm-layout-active .wwm-sb-rest {
@@ -2987,7 +2987,7 @@ html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-val-input { color: #ffae8a !im
    ╚═══════════════════════════════════════════════════════════════════╝ */
 
 /* ── 心法 Tier効果 を 武具対照 row 風リスト化 (T番号chip + 効果, dashed区切り) ── */
-.wwm-cmp-modal-a .wwm-cmp-xinfa-rows { padding: 2px 6px 3px !important; display: block !important; }
+.wwm-cmp-modal-a .wwm-cmp-xinfa-rows { padding: 2px 6px 3px; display: block; }
 .wwm-cmp-tier-row {
   display: flex; align-items: center; gap: 8px;
   padding: 3px 2px;
@@ -3265,7 +3265,7 @@ html[data-theme="light"] .wwm-opt-check {
   accent-color: var(--vermilion);
 }
 /* 計算中: ヘッダ操作 disable 視覚化 */
-.wwm-opt-busy { opacity: 0.4; cursor: wait !important; pointer-events: none; }
+.wwm-opt-busy { opacity: 0.4; cursor: wait; pointer-events: none; }
 .wwm-opt-btn-apply { color: var(--jade-bright); border-color: var(--jade-bright-mid); }
 .wwm-opt-btn-apply:hover { background: rgba(168,212,180,0.1); border-color: var(--jade-bright); }
 .wwm-opt-pos { font-family: var(--f-latin); font-weight: var(--fw-extra); color: var(--gold); text-align: center; }
@@ -3375,16 +3375,6 @@ html[data-theme="light"] .wwm-opt-check {
   text-transform: uppercase;
   text-shadow: 0 0 10px var(--gold-bright-soft);
 }
-/* Tier ladder (SS 上 → C 下) */
-.wwm-ladder-row.reached { opacity: 0.85; }
-.wwm-ladder-row.current { opacity: 1; background: var(--accent-faint); border-left: 2px solid var(--gold); padding-left: var(--space-1); }
-/* Tier ladder 内 badge は装飾 → animation / 大きい shadow 抑制 */
-.wwm-ladder-tier.tier-SS,
-.wwm-ladder-tier.tier-S {
-  animation: none !important;
-  box-shadow: none !important;
-}
-.wwm-ladder-tier.tier-SS::before { display: none !important; }
 /* Affix ranking */
 .wwm-rank-body { display: flex; flex-direction: column; gap: 3px; overflow-y: auto; max-height: 100%; flex: 1 1 auto; min-height: 0; scrollbar-width: thin; }
 .wwm-rank-body::-webkit-scrollbar { width: 6px; }
@@ -3580,7 +3570,7 @@ html[data-theme="light"] .wwm-opt-check {
   overflow: hidden;
 }
 .wwm-modal-bg-icon {
-  position: absolute !important;
+  position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   background-repeat: no-repeat;
   background-position: calc(100% + 40px) calc(100% + 40px);
