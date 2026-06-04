@@ -448,7 +448,7 @@ function _renderEquipSlot(slot, eq) {
     const rclass = _RANK_CLASSES[rank] || '';
     const pct = ratio !== undefined ? `<span class="wwm-stat-pct"> (${(ratio*100).toFixed(0)}%)</span>` : '';
     const star = useful ? ` <span class="wwm-affix-useful" title="${(window.T && window.T.tipAffixUseful) || 'ゲーム内 👍 マーク (火力寄与)'}"><span class="wwm-good-icon"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13.17 1 7.59 6.59C7.22 6.95 7 7.45 7 8v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1z"/></svg></span></span>` : '';
-    return `<li class="${rclass}"><span class="wwm-stat-name">${_affixName(id, idx)}${star}</span><span class="wwm-stat-val">${_fmtAffixVal(val)}${pct}</span></li>`;
+    return `<li class="${rclass}"><span class="wwm-stat-name">${_affixName(id, idx)}${star}</span><span class="wwm-stat-val">${_fmtAffixValShort(val)}${pct}</span></li>`;
   }).join('');
   const slotLabel = _SLOT_LABELS[slot] || ('slot ' + slot);
   return `
@@ -794,8 +794,9 @@ function _setName(suffix, slot) {
   }
   return '';
 }
-function _fmtAffixVal(v) {
-  // 0-1 range → %、それ以外 → 小数1桁
+// import.js preview 用 簡易 fmt (statKey 未参照、 0-1 range で % 推定)。
+// sidebar.js 側 _fmtAffixVal (statKey 必須、 affix-utils.js) と 衝突回避のため rename。
+function _fmtAffixValShort(v) {
   if (typeof v !== 'number') return String(v);
   if (v > 0 && v < 1) return (v * 100).toFixed(1) + '%';
   return v.toFixed(1);
