@@ -210,12 +210,14 @@ setTimeout(_syncLayoutVars, 500);
 // (Phase 3.9a: openUnknownReport は assets/sidebar/unknown.js に切出 — window.WWMSidebar.unknown.openReport)
 const openUnknownReport = window.WWMSidebar.unknown.openReport;
 
-window.WWMSidebar = {
+// merge 必須: 各 sidebar/*.js が事前に attach した submodule (gear/xinfa/hero/etc) を保存
+window.WWMSidebar = window.WWMSidebar || {};
+Object.assign(window.WWMSidebar, {
   render: renderSidebar,
   refresh: () => { const p = _getCurrentParams(); return p && renderSidebar(p); },
   syncLayout: _syncLayoutVars,
   openUnknownReport
-};
+});
 // (Phase 3.6: window.WWMGear は assets/sidebar/gear.js 内で expose 済)
 // (Phase 3.7: window.WWMXinfa は assets/sidebar/xinfa.js 内で expose 済)
 // (Phase 3.8: openArsenalEdit は assets/sidebar/arsenal.js に切出 — window.WWMArsenal expose)
