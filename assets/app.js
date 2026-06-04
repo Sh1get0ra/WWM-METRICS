@@ -351,9 +351,9 @@ function savePreset(i) {
   const importSnap = WWMHelpers.storage.loadJSON('wwm_last_import_v1');
   const stateSnap = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   const virtual = {
-    gear:   window.__WWM_VIRTUAL || null,
-    kongfu: window.__WWM_VIRTUAL_KONGFU || null,
-    xinfa:  window.__WWM_VIRTUAL_XINFA || null
+    gear:   WWMState.virtual.gear || null,
+    kongfu: WWMState.virtual.kongfu || null,
+    xinfa:  WWMState.virtual.xinfa || null
   };
   const baseline = WWMState.baseline || null;
   presets[i] = { name, importSnap, stateSnap, virtual, baseline };
@@ -368,9 +368,9 @@ function loadPreset(i) {
     if (p.importSnap) WWMHelpers.storage.saveJSON('wwm_last_import_v1', p.importSnap);
     if (p.stateSnap)  WWMHelpers.storage.saveJSON('wwm_last_state_v1',  p.stateSnap);
     if (p.virtual) {
-      window.__WWM_VIRTUAL        = p.virtual.gear   || null;
-      window.__WWM_VIRTUAL_KONGFU = p.virtual.kongfu || null;
-      window.__WWM_VIRTUAL_XINFA  = p.virtual.xinfa  || null;
+      WWMState.virtual.gear        = p.virtual.gear   || null;
+      WWMState.virtual.kongfu = p.virtual.kongfu || null;
+      WWMState.virtual.xinfa  = p.virtual.xinfa  || null;
     }
     if (p.baseline) {
       const curVer = window.WWM_SCORE_VERSION || 1;

@@ -860,16 +860,16 @@ function applyImport(data, importedAt, state) {
   WWMHelpers.storage.remove('wwm_opt_best_v1');
   // import時 自動リセット (2026-06-01〜): 前回 import後 user が編集した 新装備データ (virtual全部) を強制クリア。
   // 「現装備 = 新装備」 状態でスタート → 装備差分のノイズ排除、 操作性向上。 sentinel問題も同時解消。
-  window.__WWM_VIRTUAL = {};
-  window.__WWM_VIRTUAL_KONGFU = {};
-  window.__WWM_VIRTUAL_XINFA = null;
-  delete window.__WWM_VIRTUAL_ARSENAL;
+  WWMState.virtual.gear = {};
+  WWMState.virtual.kongfu = {};
+  WWMState.virtual.xinfa = null;
+  WWMState.virtual.arsenal = null;
   WWMHelpers.storage.remove('wwm_virtual_v1');
   // virtual に PvP sentinel (999999) 残骸があれば、その slot の affix6 のみ origEq の affix6 で復元 (他 affix は維持)。
   // 経緯: 前回 PvP装備で affix6 を sentinel にした virtual が PvE再import 後も残り「変更不可」になる事象を解消。
   try {
     const PVP_SENTINEL = 999999;
-    const v = window.__WWM_VIRTUAL;
+    const v = WWMState.virtual.gear;
     if (v && typeof v === 'object') {
       let touched = false;
       for (const [slot, vEq] of Object.entries(v)) {

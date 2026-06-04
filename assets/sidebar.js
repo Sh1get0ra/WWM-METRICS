@@ -288,16 +288,16 @@ function _showScoreFormula() {
   _showAllChangelogs();
 }
 function _resetAllVirtuals() {
-  const hasV = (window.__WWM_VIRTUAL && Object.keys(window.__WWM_VIRTUAL).length)
-            || (window.__WWM_VIRTUAL_KONGFU && Object.keys(window.__WWM_VIRTUAL_KONGFU).length)
-            || (window.__WWM_VIRTUAL_XINFA && ((window.__WWM_VIRTUAL_XINFA.passive&&window.__WWM_VIRTUAL_XINFA.passive.length) || Object.keys(window.__WWM_VIRTUAL_XINFA.tiers||{}).length))
-            || window.__WWM_VIRTUAL_ARSENAL;
+  const hasV = (WWMState.virtual.gear && Object.keys(WWMState.virtual.gear).length)
+            || (WWMState.virtual.kongfu && Object.keys(WWMState.virtual.kongfu).length)
+            || (WWMState.virtual.xinfa && ((WWMState.virtual.xinfa.passive&&WWMState.virtual.xinfa.passive.length) || Object.keys(WWMState.virtual.xinfa.tiers||{}).length))
+            || WWMState.virtual.arsenal;
   if (!hasV) { alert('リセット対象なし'); return; }
   if (!confirm('新装備/心法/武術/武庫 全てを現装備値に戻す。よろしい?')) return;
-  window.__WWM_VIRTUAL = {};
-  window.__WWM_VIRTUAL_KONGFU = {};
-  window.__WWM_VIRTUAL_XINFA = null;
-  delete window.__WWM_VIRTUAL_ARSENAL;
+  WWMState.virtual.gear = {};
+  WWMState.virtual.kongfu = {};
+  WWMState.virtual.xinfa = null;
+  WWMState.virtual.arsenal = null;
   try { localStorage.removeItem('wwm_virtual_v1'); } catch(_) {}
   if (typeof window._refreshAll === 'function') window._refreshAll();
 }
@@ -1122,17 +1122,17 @@ function _applyOptSteps(stepsToApply) {
   if (!stepsToApply || !stepsToApply.length) { alert('適用する swap なし'); return; }
   const origRi = WWMState.roleInfo;
   if (!origRi) return;
-  if (!window.__WWM_VIRTUAL) window.__WWM_VIRTUAL = {};
+  if (!WWMState.virtual.gear) WWMState.virtual.gear = {};
   for (const step of stepsToApply) {
     if (step.kind === 'bowSet') {
       // 弓セット suffix 変更 (slot 9 + 21)
       ['9','21'].forEach(s => {
-        let vEq = window.__WWM_VIRTUAL[s];
+        let vEq = WWMState.virtual.gear[s];
         if (!vEq) {
           const orig = origRi.wearEquipsDetailed?.[s];
           if (!orig) return;
           vEq = JSON.parse(JSON.stringify(orig));
-          window.__WWM_VIRTUAL[s] = vEq;
+          WWMState.virtual.gear[s] = vEq;
         }
         if (vEq.exVo) vEq.exVo.suffix = step.toSuffix;
       });
@@ -1140,12 +1140,12 @@ function _applyOptSteps(stepsToApply) {
     }
     const slot = step.slot;
     // 既存 virtual or original の clone を取得/初期化
-    let vEq = window.__WWM_VIRTUAL[slot];
+    let vEq = WWMState.virtual.gear[slot];
     if (!vEq) {
       const orig = origRi.wearEquipsDetailed?.[slot];
       if (!orig) continue;
       vEq = JSON.parse(JSON.stringify(orig));
-      window.__WWM_VIRTUAL[slot] = vEq;
+      WWMState.virtual.gear[slot] = vEq;
     }
     const d = vEq.exVo?.baseAffixes?.[step.idx]?.equipmentDetails;
     if (!d) continue;
@@ -1584,8 +1584,8 @@ async function renderSidebar(params) {
   `;
   const collapsedSet = _getCollapsedSet();
   // baseline params (original roleInfo) — virtual ある時のみ算出
-  const hasVirtual = (window.__WWM_VIRTUAL && Object.keys(window.__WWM_VIRTUAL).length) ||
-                     (window.__WWM_VIRTUAL_KONGFU && Object.keys(window.__WWM_VIRTUAL_KONGFU).length);
+  const hasVirtual = (WWMState.virtual.gear && Object.keys(WWMState.virtual.gear).length) ||
+                     (WWMState.virtual.kongfu && Object.keys(WWMState.virtual.kongfu).length);
   let baseParams = null;
   if (hasVirtual && ri && window.WWMStats?.buildStatParams) {
     try {
@@ -1964,8 +1964,8 @@ async function _computeGearCardScores(roleInfo) {
   const effContrib = await _computeSlotContributions(effRi, slots, suffixSlots, set4Map) || {};
   // baseline (origRi) 寄与算出 (slot に virtual ある場合のみ表示用)
   let origContrib = {};
-  const hasVirtual = (window.__WWM_VIRTUAL && Object.keys(window.__WWM_VIRTUAL).length) ||
-                     (window.__WWM_VIRTUAL_KONGFU && Object.keys(window.__WWM_VIRTUAL_KONGFU).length);
+  const hasVirtual = (WWMState.virtual.gear && Object.keys(WWMState.virtual.gear).length) ||
+                     (WWMState.virtual.kongfu && Object.keys(WWMState.virtual.kongfu).length);
   if (hasVirtual && origRi && origRi !== effRi) {
     const origEqDet = origRi.wearEquipsDetailed || {};
     const origSlots = _GEAR_SLOT_ORDER.filter(s => origEqDet[s]);
@@ -1991,9 +1991,9 @@ async function _computeGearCardScores(roleInfo) {
     if (!el) continue;
     const curScore = effContrib[slot] || 0;
     const isModified = hasVirtual && (
-      window.__WWM_VIRTUAL?.[slot] ||
-      (slot === '1' && window.__WWM_VIRTUAL_KONGFU?.kongfuMain) ||
-      (slot === '2' && window.__WWM_VIRTUAL_KONGFU?.kongfuSub)
+      WWMState.virtual.gear?.[slot] ||
+      (slot === '1' && WWMState.virtual.kongfu?.kongfuMain) ||
+      (slot === '2' && WWMState.virtual.kongfu?.kongfuSub)
     );
     if (isModified && origContrib[slot] != null && origContrib[slot] !== curScore) {
       const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
@@ -2148,11 +2148,11 @@ function openXinfaEdit(slotIdx) {
   if (!origRi) return;
   const lang = _curLang();
   const xinfaMap = window.WWM_XINFA || {};
-  const passive = (window.__WWM_VIRTUAL_XINFA?.passive) || origRi.passiveSlots || [];
+  const passive = (WWMState.virtual.xinfa?.passive) || origRi.passiveSlots || [];
   const origPassive = origRi.passiveSlots || [];
   const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   const origTier = (state?.xinfaTiers?.[slotIdx] ?? state?.xinfaTiers?.[String(slotIdx)] ?? 6);
-  const virtTier = window.__WWM_VIRTUAL_XINFA?.tiers?.[slotIdx] ?? origTier;
+  const virtTier = WWMState.virtual.xinfa?.tiers?.[slotIdx] ?? origTier;
   let newXinfaId = passive[slotIdx] || origPassive[slotIdx];
   let newTier = virtTier;
   const _xName = (id) => id ? (xinfaMap[id]?.names?.[lang] || xinfaMap[id]?.names?.ja || `心法ID ${id}`) : '(空)';
@@ -2306,7 +2306,7 @@ function openXinfaEdit(slotIdx) {
   m.className = 'wwm-modal-backdrop';
   const _T = window.T || {};
   // virtual swap 反映: panel 再open時に最新心法 icon 表示
-  const effXidForBg = window.__WWM_VIRTUAL_XINFA?.passive?.[slotIdx] ?? origPassive[slotIdx];
+  const effXidForBg = WWMState.virtual.xinfa?.passive?.[slotIdx] ?? origPassive[slotIdx];
   const _bgIc = (effXidForBg === origPassive[slotIdx])
     ? (origRi?._xinfaIconsBase64?.[slotIdx] || origRi?._xinfaIcons?.[slotIdx] || window.WWM_XINFA_ICONS?.[effXidForBg]?.icon_url || null)
     : (window.WWM_XINFA_ICONS?.[effXidForBg]?.icon_url || null);
@@ -2408,17 +2408,17 @@ function openXinfaEdit(slotIdx) {
   _schedule();
 
   m.querySelector('#wwmXinfaApply').addEventListener('click', () => {
-    if (!window.__WWM_VIRTUAL_XINFA) window.__WWM_VIRTUAL_XINFA = { passive: [...origPassive], tiers: {} };
-    if (!window.__WWM_VIRTUAL_XINFA.passive) window.__WWM_VIRTUAL_XINFA.passive = [...origPassive];
-    if (!window.__WWM_VIRTUAL_XINFA.tiers) window.__WWM_VIRTUAL_XINFA.tiers = {};
-    window.__WWM_VIRTUAL_XINFA.passive[slotIdx] = parseInt(newXinfaId, 10);
-    window.__WWM_VIRTUAL_XINFA.tiers[slotIdx] = newTier;
+    if (!WWMState.virtual.xinfa) WWMState.virtual.xinfa = { passive: [...origPassive], tiers: {} };
+    if (!WWMState.virtual.xinfa.passive) WWMState.virtual.xinfa.passive = [...origPassive];
+    if (!WWMState.virtual.xinfa.tiers) WWMState.virtual.xinfa.tiers = {};
+    WWMState.virtual.xinfa.passive[slotIdx] = parseInt(newXinfaId, 10);
+    WWMState.virtual.xinfa.tiers[slotIdx] = newTier;
     m.remove();
     _refreshAll();
   });
   m.querySelector('#wwmXinfaReset').addEventListener('click', () => {
-    if (window.__WWM_VIRTUAL_XINFA?.passive) window.__WWM_VIRTUAL_XINFA.passive[slotIdx] = origPassive[slotIdx];
-    if (window.__WWM_VIRTUAL_XINFA?.tiers) delete window.__WWM_VIRTUAL_XINFA.tiers[slotIdx];
+    if (WWMState.virtual.xinfa?.passive) WWMState.virtual.xinfa.passive[slotIdx] = origPassive[slotIdx];
+    if (WWMState.virtual.xinfa?.tiers) delete WWMState.virtual.xinfa.tiers[slotIdx];
     m.remove();
     _refreshAll();
   });
@@ -2428,9 +2428,9 @@ function openXinfaEdit(slotIdx) {
 function _getEffectiveRoleInfo() {
   const orig = WWMState.roleInfo;
   if (!orig) return null;
-  const vmap = window.__WWM_VIRTUAL || {};
-  const vkf = window.__WWM_VIRTUAL_KONGFU || {};
-  const vxi = window.__WWM_VIRTUAL_XINFA;
+  const vmap = WWMState.virtual.gear || {};
+  const vkf = WWMState.virtual.kongfu || {};
+  const vxi = WWMState.virtual.xinfa;
   const hasVxiPassive = vxi?.passive && vxi.passive.length;
   if (!Object.keys(vmap).length && !Object.keys(vkf).length && !hasVxiPassive) return orig;
   const merged = { ...orig, wearEquipsDetailed: { ...(orig.wearEquipsDetailed || {}) } };
@@ -2446,8 +2446,8 @@ function _getEffectiveRoleInfo() {
 // effective state (xinfa tier virtual + arsenal virtual 込み)
 function _getEffectiveState() {
   const base = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
-  const vxi = window.__WWM_VIRTUAL_XINFA;
-  const vAr = window.__WWM_VIRTUAL_ARSENAL;
+  const vxi = WWMState.virtual.xinfa;
+  const vAr = WWMState.virtual.arsenal;
   const hasVxi = vxi?.tiers && Object.keys(vxi.tiers).length;
   if (!hasVxi && !vAr) return base;
   const merged = JSON.parse(JSON.stringify(base || {}));
@@ -2479,10 +2479,10 @@ const _VIRTUAL_KEY = 'wwm_virtual_v1';
 function _saveVirtuals() {
   try {
     const data = {
-      gear:    window.__WWM_VIRTUAL || null,
-      kongfu:  window.__WWM_VIRTUAL_KONGFU || null,
-      xinfa:   window.__WWM_VIRTUAL_XINFA || null,
-      arsenal: window.__WWM_VIRTUAL_ARSENAL || null
+      gear:    WWMState.virtual.gear || null,
+      kongfu:  WWMState.virtual.kongfu || null,
+      xinfa:   WWMState.virtual.xinfa || null,
+      arsenal: WWMState.virtual.arsenal || null
     };
     const empty = (!data.gear || !Object.keys(data.gear).length)
                && (!data.kongfu || !Object.keys(data.kongfu).length)
@@ -2497,10 +2497,10 @@ function _loadVirtuals() {
     const raw = localStorage.getItem(_VIRTUAL_KEY);
     if (!raw) return;
     const d = JSON.parse(raw);
-    if (d.gear)    window.__WWM_VIRTUAL = d.gear;
-    if (d.kongfu)  window.__WWM_VIRTUAL_KONGFU = d.kongfu;
-    if (d.xinfa)   window.__WWM_VIRTUAL_XINFA = d.xinfa;
-    if (d.arsenal) window.__WWM_VIRTUAL_ARSENAL = d.arsenal;
+    if (d.gear)    WWMState.virtual.gear = d.gear;
+    if (d.kongfu)  WWMState.virtual.kongfu = d.kongfu;
+    if (d.xinfa)   WWMState.virtual.xinfa = d.xinfa;
+    if (d.arsenal) WWMState.virtual.arsenal = d.arsenal;
   } catch(_) {}
 }
 window._saveVirtuals = _saveVirtuals;
@@ -2878,8 +2878,8 @@ function openGearEdit(slot) {
   const isWeaponSlot = slot === '1' || slot === '2';
   const origKongfuId = slot === '1' ? origRi?.kongfuMain : (slot === '2' ? origRi?.kongfuSub : null);
   // 編集中 kongfu state (新パネル用) — virtual あれば virtual優先
-  const virtKongfu = slot === '1' ? window.__WWM_VIRTUAL_KONGFU?.kongfuMain
-                   : slot === '2' ? window.__WWM_VIRTUAL_KONGFU?.kongfuSub : null;
+  const virtKongfu = slot === '1' ? WWMState.virtual.kongfu?.kongfuMain
+                   : slot === '2' ? WWMState.virtual.kongfu?.kongfuSub : null;
   let newKongfuId = virtKongfu ?? origKongfuId;
   const kongfuLabel = origKongfuId ? _kfName(origKongfuId) : '';
   const kongfuHtml = kongfuLabel ? `<span class="wwm-cmp-kongfu">${kongfuLabel}</span>` : '';
@@ -2889,7 +2889,7 @@ function openGearEdit(slot) {
   const isSetEditable = isWeaponSetSlot || isBowSetSlot;
   const origSuffix = origEq.exVo?.suffix;
   // virtual あれば virtual優先
-  let newSuffix = window.__WWM_VIRTUAL?.[slot]?.exVo?.suffix ?? origSuffix;
+  let newSuffix = WWMState.virtual.gear?.[slot]?.exVo?.suffix ?? origSuffix;
   const setsMap = isBowSetSlot
     ? (window.WWM_SETS?.bowSets || {})
     : (window.WWM_SETS?.weaponSets || {});
@@ -2918,7 +2918,7 @@ function openGearEdit(slot) {
     return r;
   }
   // 新装備 = virtual あれば virtual、なければ original コピー
-  const virtualEq = window.__WWM_VIRTUAL?.[slot];
+  const virtualEq = WWMState.virtual.gear?.[slot];
   const newAffixes = JSON.parse(JSON.stringify((virtualEq || origEq).exVo?.baseAffixes || []));
   // <span class="wwm-good-icon"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13.17 1 7.59 6.59C7.22 6.95 7 7.45 7 8v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1z"/></svg></span> 自動判定で d[4] 上書き (newKongfu 基準)
   function _recalcUseful() {
@@ -2982,7 +2982,7 @@ function openGearEdit(slot) {
         : (typeof val === 'number' ? val.toFixed(1) : val);
       const step = '0.1';
       // max 値算出: 装備個別Lv基準 → equip_max.json (Lv → tier) ベース。fallback: orig val/ratio (sameStat時)
-      const _eqLv = (window.__WWM_VIRTUAL?.[slot]?.exVo?._inferredLv) ?? origEq?.exVo?._inferredLv ?? charLv;
+      const _eqLv = (WWMState.virtual.gear?.[slot]?.exVo?._inferredLv) ?? origEq?.exVo?._inferredLv ?? charLv;
       let maxInternal = _getAffixMax(sk, _eqLv);
       if (maxInternal == null) {
         const origDet = origEq.exVo?.baseAffixes?.[idx]?.equipmentDetails;
@@ -3048,7 +3048,7 @@ function openGearEdit(slot) {
           <div class="wwm-cmp-divider"></div>
           <div class="wwm-cmp-col wwm-cmp-new${isBowSetSlot?' wwm-cmp-bow':''}" id="wwmCmpNewCol">
             <h3 class="wwm-cmp-title" data-seal="${(window.T&&T.cmpNew)||'新置'}"><span class="wwm-cmp-title-text">${(window.T&&T.cmpNew)||'新置'}</span>${(() => {
-              const _curLv = window.__WWM_VIRTUAL?.[slot]?.exVo?._inferredLv ?? origEq?.exVo?._inferredLv;
+              const _curLv = WWMState.virtual.gear?.[slot]?.exVo?._inferredLv ?? origEq?.exVo?._inferredLv;
               // 装備レベルは charLv (import時のキャラレベル) 以下のみ選択可。未所持の高Lv装備での皮算用を防ぐ。
               const _lvList = (window.WWM_EQUIP_BASE_BY_LV?._lvList || [91, 86, 81, 71]).filter(lv => lv <= charLv);
               const _hasTbl = !!window.WWM_EQUIP_BASE_BY_LV?.slots?.[String(slot)];
@@ -3099,7 +3099,7 @@ function openGearEdit(slot) {
       const vRi = JSON.parse(JSON.stringify(baseRi));
       if (!vRi.wearEquipsDetailed) vRi.wearEquipsDetailed = {};
       // virtual装備 (Lv変更で baseAttrs 更新済) 優先、 fallback origEq
-      const vEq = JSON.parse(JSON.stringify(window.__WWM_VIRTUAL?.[slot] || origEq));
+      const vEq = JSON.parse(JSON.stringify(WWMState.virtual.gear?.[slot] || origEq));
       vEq.exVo.baseAffixes = newAffixes;
       if (isSetEditable && newSuffix != null) vEq.exVo.suffix = parseInt(newSuffix, 10);
       vRi.wearEquipsDetailed[slot] = vEq;
@@ -3166,8 +3166,8 @@ function openGearEdit(slot) {
       const newLv = parseInt(lvSel.value, 10);
       await _loadEquipMax();
       // virtual eq 作成 (origEq deep clone)
-      if (!window.__WWM_VIRTUAL) window.__WWM_VIRTUAL = {};
-      const vEq = JSON.parse(JSON.stringify(window.__WWM_VIRTUAL[slot] || origEq));
+      if (!WWMState.virtual.gear) WWMState.virtual.gear = {};
+      const vEq = JSON.parse(JSON.stringify(WWMState.virtual.gear[slot] || origEq));
       if (!vEq.exVo) vEq.exVo = {};
       // base値 (baseAttrs) 新Lv
       const refBase = window.WWM_EQUIP_BASE_BY_LV?.slots?.[String(slot)]?.[String(newLv)];
@@ -3193,7 +3193,7 @@ function openGearEdit(slot) {
           }
         }
       }
-      window.__WWM_VIRTUAL[slot] = vEq;
+      WWMState.virtual.gear[slot] = vEq;
       if (typeof window._saveVirtuals === 'function') window._saveVirtuals();
       // newAffixes (modal display source) を in-place 上書き
       const newAffixData = JSON.parse(JSON.stringify(vEq.exVo?.baseAffixes || []));
@@ -3381,20 +3381,20 @@ function openGearEdit(slot) {
   _bindRowEvents();
 
   m.querySelector('#wwmEditApply').addEventListener('click', () => {
-    if (!window.__WWM_VIRTUAL) window.__WWM_VIRTUAL = {};
-    if (!window.__WWM_VIRTUAL_KONGFU) window.__WWM_VIRTUAL_KONGFU = {};
+    if (!WWMState.virtual.gear) WWMState.virtual.gear = {};
+    if (!WWMState.virtual.kongfu) WWMState.virtual.kongfu = {};
     const vEq = JSON.parse(JSON.stringify(origEq));
     vEq.exVo.baseAffixes = newAffixes;
     if (isSetEditable && newSuffix != null) vEq.exVo.suffix = parseInt(newSuffix, 10);
-    window.__WWM_VIRTUAL[slot] = vEq;
+    WWMState.virtual.gear[slot] = vEq;
     if (isWeaponSlot) {
       if (newKongfuId && newKongfuId !== origKongfuId) {
-        if (slot === '1') window.__WWM_VIRTUAL_KONGFU.kongfuMain = newKongfuId;
-        else if (slot === '2') window.__WWM_VIRTUAL_KONGFU.kongfuSub = newKongfuId;
+        if (slot === '1') WWMState.virtual.kongfu.kongfuMain = newKongfuId;
+        else if (slot === '2') WWMState.virtual.kongfu.kongfuSub = newKongfuId;
       } else {
         // 元に戻す: virtual から削除
-        if (slot === '1') delete window.__WWM_VIRTUAL_KONGFU.kongfuMain;
-        else if (slot === '2') delete window.__WWM_VIRTUAL_KONGFU.kongfuSub;
+        if (slot === '1') delete WWMState.virtual.kongfu.kongfuMain;
+        else if (slot === '2') delete WWMState.virtual.kongfu.kongfuSub;
       }
     }
     m.remove();
@@ -3402,10 +3402,10 @@ function openGearEdit(slot) {
   });
 
   m.querySelector('#wwmEditReset').addEventListener('click', () => {
-    if (window.__WWM_VIRTUAL) delete window.__WWM_VIRTUAL[slot];
-    if (window.__WWM_VIRTUAL_KONGFU) {
-      if (slot === '1') delete window.__WWM_VIRTUAL_KONGFU.kongfuMain;
-      else if (slot === '2') delete window.__WWM_VIRTUAL_KONGFU.kongfuSub;
+    if (WWMState.virtual.gear) delete WWMState.virtual.gear[slot];
+    if (WWMState.virtual.kongfu) {
+      if (slot === '1') delete WWMState.virtual.kongfu.kongfuMain;
+      else if (slot === '2') delete WWMState.virtual.kongfu.kongfuSub;
     }
     m.remove();
     _refreshAll();
@@ -3678,7 +3678,7 @@ function openArsenalEdit() {
   const T_ = window.T || {};
   const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   const origArsenal = state?.arsenal || { path: 'phys', tiers: {} };
-  const virtArsenal = window.__WWM_VIRTUAL_ARSENAL;
+  const virtArsenal = WWMState.virtual.arsenal;
   // 新側 初期値 = virtual あれば virtual、なければ orig コピー
   const newArsenal = virtArsenal
     ? JSON.parse(JSON.stringify(virtArsenal))
@@ -3876,13 +3876,13 @@ function openArsenalEdit() {
   }
   _schedulePreview();
   m.querySelector('#wwmArsenalEditApply').addEventListener('click', () => {
-    window.__WWM_VIRTUAL_ARSENAL = newArsenal;
+    WWMState.virtual.arsenal = newArsenal;
     if (typeof window._saveVirtuals === 'function') window._saveVirtuals();
     close();
     if (typeof window._refreshAll === 'function') window._refreshAll();
   });
   m.querySelector('#wwmArsenalEditReset').addEventListener('click', () => {
-    delete window.__WWM_VIRTUAL_ARSENAL;
+    WWMState.virtual.arsenal = null;
     if (typeof window._saveVirtuals === 'function') window._saveVirtuals();
     close();
     if (typeof window._refreshAll === 'function') window._refreshAll();
