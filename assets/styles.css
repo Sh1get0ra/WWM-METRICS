@@ -3314,7 +3314,7 @@ body.wwm-layout-active .wwm-footer {
   overflow: hidden;
 }
 .wwm-modal-bg-icon {
-  position: absolute;
+  position: absolute !important;  /* .wwm-modal > * { position: relative } (L1295) に勝つため必須 — Phase 5.1-b で誤って削除されていた */
   top: 0; left: 0; right: 0; bottom: 0;
   background-repeat: no-repeat;
   background-position: calc(100% + 40px) calc(100% + 40px);
