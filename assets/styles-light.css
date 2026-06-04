@@ -117,6 +117,13 @@ html[data-theme="light"] {
   --c-tier-b-fg:        #3a2810;  --c-tier-b-border:    rgba(122,90,32,0.85);
   --c-tier-c-grad-1:    #d8ccb4;  --c-tier-c-grad-2:    #a89880;  --c-tier-c-grad-3:    #786850;
   --c-tier-c-fg:        #2a2010;  --c-tier-c-border:    rgba(90,66,38,0.85);
+
+  /* misc component-local pairs (B10) */
+  --c-header-cream-top:        #ffeac4;  /* header.topbar + .wwm-anlz-header gradient 上 */
+  --c-header-cream-bot:        #fcd5a8;  /* 同 gradient 下 */
+  --c-modal-a-option-checked:  #e0cfa0;  /* modal-a select option:checked bg */
+  --c-migration-accent:        #2d5a8a;  /* migration banner accent (青) */
+  --c-orange-deep:             #b85a14;  /* light theme 暗オレンジ accent (share warn / rank-gold val) */
 }
 
 html[data-theme="light"] body {
@@ -139,7 +146,7 @@ html[data-theme="light"] header.topbar {
   background:
     linear-gradient(var(--c-overlay-cream), var(--c-overlay-cream)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/wq-bg-99758f80.png") center / cover no-repeat,
-    linear-gradient(180deg, #ffeac4, #fcd5a8);
+    linear-gradient(180deg, var(--c-header-cream-top), var(--c-header-cream-bot));
   background-blend-mode: normal, difference, normal;
 }
 
@@ -356,7 +363,7 @@ html[data-theme="light"] .wwm-opt-btn-apply:hover { background: rgba(168,212,180
 html[data-theme="light"] .wwm-share-warn {
   background: rgba(184,100,28,0.22) !important;
   color: #6a3a14 !important;
-  border-left-color: #b85a14 !important;
+  border-left-color: var(--c-orange-deep) !important;
 }
 
 html[data-theme="light"] .wwm-opt-check {
@@ -574,7 +581,7 @@ html[data-theme="light"] .wwm-cmp-modal-a select option {
 }
 
 html[data-theme="light"] .wwm-cmp-modal-a select option:checked {
-  background: #e0cfa0 !important;
+  background: var(--c-modal-a-option-checked) !important;
   color: var(--brown-1) !important;
 }
 
@@ -583,7 +590,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select opti
 }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select option:checked {
-  background: #e0cfa0 !important;
+  background: var(--c-modal-a-option-checked) !important;
   color: var(--brown-1) !important;
 }
 
@@ -860,13 +867,13 @@ html[data-theme="light"] .wwm-last-import {
 
 html[data-theme="light"] .wwm-migration-banner {
   background: rgba(60, 100, 180, 0.12);
-  border-bottom-color: #2d5a8a;
+  border-bottom-color: var(--c-migration-accent);
   color: #1a3a66;
 }
 
 html[data-theme="light"] .wwm-migration-msg strong { color: #0e2c52; }
 
-html[data-theme="light"] .wwm-migration-btn { background: #2d5a8a; }
+html[data-theme="light"] .wwm-migration-btn { background: var(--c-migration-accent); }
 
 html[data-theme="light"] .wwm-equip-section,
 html[data-theme="light"] .wwm-equip-section .wwm-equip-slot,
@@ -900,7 +907,7 @@ html[data-theme="light"] .wwm-equip-section .wwm-stat-pct {
 html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-gold,
 html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-gold .wwm-stat-name,
 html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-gold .wwm-stat-val {
-  color: #b85a14 !important; /* 暗オレンジ */
+  color: var(--c-orange-deep) !important; /* 暗オレンジ */
 }
 
 html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-purple,
@@ -959,7 +966,7 @@ html[data-theme="light"] .wwm-anlz-header {
   background:
     linear-gradient(var(--c-overlay-cream), var(--c-overlay-cream)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/section_bg-66d4d3cb.png") center / cover no-repeat,
-    linear-gradient(180deg, #ffeac4, #fcd5a8);
+    linear-gradient(180deg, var(--c-header-cream-top), var(--c-header-cream-bot));
   background-blend-mode: normal, difference, normal;
   box-shadow: 0 6px 18px rgba(120,60,20,.18);
 }
