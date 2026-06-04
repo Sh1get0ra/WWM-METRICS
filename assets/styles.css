@@ -6988,3 +6988,38 @@ html[data-theme="light"] .wwm-mobile-drawer * { color: var(--vermilion-deep); }
 @media (max-width: 768px) {
   /* tablet 暫定対応 (Phase 後半 で詰める) */
 }
+
+/* ── OBS view (?view=sidebar) × mobile breakpoint guard ───────────────
+   OBS browser source 幅 ≤480px で mobile @media が hero/topbar/drawer/FAB を
+   復活させる + sidebar 自体も hide される (mobile UI = FAB前提) 問題の抑止。
+   OBS view では幅問わず sidebar のみ表示が正。
+   source order 後出 + 高 specificity で mobile @media 内 rule を全 override。 */
+@media (max-width: 480px) {
+  /* mobile @media で hide される sidebar / app-body を強制復帰 */
+  html.wwm-view-sidebar body.wwm-layout-active .wwm-sidebar-test {
+    display: block !important;
+    position: relative !important;
+    top: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+  }
+  /* mobile @media で hidden になる hero / 装備/心法 panel / 各種 mobile UI を OBS view では 全 hide */
+  html.wwm-view-sidebar section.hero.hero-wuxia,
+  html.wwm-view-sidebar .hero,
+  html.wwm-view-sidebar .hero-wuxia,
+  html.wwm-view-sidebar .ink-stroke,
+  html.wwm-view-sidebar body.wwm-layout-active .wwm-mobile-topbar,
+  html.wwm-view-sidebar .wwm-mobile-top-reset,
+  html.wwm-view-sidebar .wwm-mobile-hero-reset,
+  html.wwm-view-sidebar .wwm-mobile-anlz-btn,
+  html.wwm-view-sidebar .wwm-mobile-drawer,
+  html.wwm-view-sidebar .wwm-mobile-drawer-backdrop,
+  html.wwm-view-sidebar body.wwm-layout-active .wwm-mobile-stat-fab,
+  html.wwm-view-sidebar .wwm-mobile-stat-overlay-backdrop,
+  html.wwm-view-sidebar .wwm-mobile-stat-overlay,
+  html.wwm-view-sidebar .wwm-mobile-anlz-overlay-backdrop,
+  html.wwm-view-sidebar .wwm-mobile-anlz-overlay {
+    display: none !important;
+  }
+}
