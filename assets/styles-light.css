@@ -316,6 +316,17 @@ html[data-theme="light"] .wwm-opt-sort-btn.active { background: #b8862a; color: 
 
 html[data-theme="light"] .wwm-opt-sort-btn + .wwm-opt-sort-btn { border-left-color: rgba(120,60,20,0.35); }
 
+html[data-theme="light"] .wwm-opt-btn { color: #5a4220; border-color: rgba(120,60,20,0.4); }
+html[data-theme="light"] .wwm-opt-btn:hover { background: rgba(184,134,42,0.12); border-color: rgba(120,60,20,0.7); }
+html[data-theme="light"] .wwm-opt-btn-apply { color: #2d5a3a; border-color: rgba(45,90,58,0.4); }
+html[data-theme="light"] .wwm-opt-btn-apply:hover { background: rgba(168,212,180,0.25); border-color: rgba(45,90,58,0.7); }
+
+html[data-theme="light"] .wwm-share-warn {
+  background: rgba(184,100,28,0.22) !important;
+  color: #6a3a14 !important;
+  border-left-color: #b85a14 !important;
+}
+
 html[data-theme="light"] .wwm-opt-check {
   accent-color: var(--vermilion);
 }
