@@ -135,12 +135,12 @@ function computeExpected(pIn) {
   else                                  tier = 'C';
 
   const result = { expected: expectedTotal, statusScore: statusScore, tier: tier, physRatio: physRatio, elemRatio: elemRatio };
-  window.__WWM_LAST_RESULT = result;
+  WWMState.lastResult = result;
 
   // ── donut / 寄与率 DOM 更新 (debounce 16ms化、 連続computeExpected呼出時 最後の値のみ反映)
   // import前 (__WWM_ROLEINFO 未存在) は更新 skip → '—' のまま保持
   try {
-    if (!window.__WWM_ROLEINFO) throw 'NO_IMPORT';
+    if (!WWMState.roleInfo) throw 'NO_IMPORT';
     const normT = dmg(avgPhys, avgMain, avgSub);
     const critT = dmg(avgPhys, avgMain, avgSub, 1 + p.critBoost);
     const sympT = dmg(p.maxPhysATK, p.maxElemMain, p.maxElemSub, 1 + p.sympathyBoost);
@@ -153,7 +153,7 @@ function computeExpected(pIn) {
       // computeExpected は装備カードスコア試算/最適化/プレビュー等から多数呼ばれ、
       // 以前は それら全てが donut DOM を上書きしてちらつき発生。__WWM_ALLOW_DONUT で
       // 唯一の表示経路(updateHero)に書込みをゲートする。
-      if (window.__WWM_ALLOW_DONUT) {
+      if (WWMState.allowDonut) {
         if (typeof updateDonut === 'function') updateDonut(dCrit, dSymp, dGraz, dNorm, 'donutDmgSeg');
         // 外周リング arc (物理/属性 比率)
         if (typeof updateLuopanArc === 'function') updateLuopanArc(physRatio, elemRatio);

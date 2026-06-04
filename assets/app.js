@@ -86,11 +86,11 @@ function setLang(lang) {
   // 移転バナー: 言語切替毎に多言語msg再適用 (旧URL検出時のみ DOM 表示)
   if (typeof _initMigrationBanner === 'function') _initMigrationBanner();
 
-  try { localStorage.setItem('wwm_lang', lang); } catch(e) {}
+  WWMHelpers.storage.saveStr('wwm_lang', lang);
   renderPresetSlots();
   if (typeof window._refreshAll === 'function') window._refreshAll();
   // import前でも sidebar empty state を再render (翻訳反映)
-  if (window.WWMSidebar?.render && !window.__WWM_ROLEINFO) {
+  if (window.WWMSidebar?.render && !WWMState.roleInfo) {
     try { window.WWMSidebar.render(null); } catch(_) {}
   }
 }
@@ -119,7 +119,7 @@ function _loadSavedLang() {
       if (urlLang && ['ja','en','zh','ko'].includes(urlLang) && urlLang !== 'ja') setLang(urlLang);
       return;
     }
-    const saved = localStorage.getItem('wwm_lang');
+    const saved = WWMHelpers.storage.loadStr('wwm_lang');
     if (saved && ['ja','en','zh','ko'].includes(saved) && saved !== 'ja') setLang(saved);
     else if (!saved) _showLangPicker();
   } catch(e) {}
@@ -148,7 +148,7 @@ function _showLangPicker() {
       m.remove();
       // 言語選択直後にIMPORT位置ヒント表示 (一度のみ)
       try {
-        if (!localStorage.getItem('wwm_import_hinted')) {
+        if (!WWMHelpers.storage.loadStr('wwm_import_hinted')) {
           setTimeout(_showImportHint, 250);
         }
       } catch(_) {}
@@ -185,7 +185,7 @@ function _showImportHint() {
   const dismiss = () => {
     o.classList.add('wwm-import-hint-out');
     setTimeout(() => o.remove(), 350);
-    try { localStorage.setItem('wwm_import_hinted', '1'); } catch(_) {}
+    WWMHelpers.storage.saveStr('wwm_import_hinted', '1');
     document.removeEventListener('click', dismiss, true);
   };
   setTimeout(() => document.addEventListener('click', dismiss, true), 50);
@@ -226,7 +226,7 @@ function formatNum(n, decimals) {
 // ── ドーナツ（SVG） ──────────────────────────────────────────────
 function updateDonut(pCrit, pSympathy, pGraze, pNormal, prefix) {
   // 最適化計算中は hero donut (donutDmgSeg) の更新を完全block (ちらつき根絶)
-  if (window.__WWM_OPT_RUNNING && (prefix === 'donutDmgSeg')) return;
+  if (WWMState.opt.running && (prefix === 'donutDmgSeg')) return;
   const p = prefix || 'donutSeg';
   const segs = [
     { id: p + 'Crit',     val: pCrit },
@@ -254,7 +254,7 @@ function updateDonut(pCrit, pSympathy, pGraze, pNormal, prefix) {
 
 // ── 外周リング（物理/属性 比率）arcPhys/arcElem ───────────────────
 function updateLuopanArc(physRatio, elemRatio) {
-  if (window.__WWM_OPT_RUNNING) return; // 最適化中 skip
+  if (WWMState.opt.running) return; // 最適化中 skip
   const aP = document.getElementById('arcPhys');
   const aE = document.getElementById('arcElem');
   if (!aP || !aE) return;
@@ -275,13 +275,13 @@ function toggleHero() {
   if (!hero) return;
   var collapsed = hero.classList.toggle('hero--collapsed');
   hero.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-  try { localStorage.setItem('wwm_hero_collapsed', collapsed ? '1' : '0'); } catch(e) {}
+  WWMHelpers.storage.saveStr('wwm_hero_collapsed', collapsed ? '1' : '0');
 }
 function initHeroCollapse() {
   var hero = document.querySelector('.hero');
   if (!hero) return;
   try {
-    if (localStorage.getItem('wwm_hero_collapsed') === '1') {
+    if (WWMHelpers.storage.loadStr('wwm_hero_collapsed') === '1') {
       hero.classList.add('hero--collapsed');
       hero.setAttribute('aria-expanded', 'false');
     } else {
@@ -300,13 +300,12 @@ function setTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   const tog = document.getElementById('themeToggle');
   if (tog) tog.textContent = theme === 'light' ? '☾' : '☀';
-  try { localStorage.setItem('wwm_theme', theme); } catch(e) {}
+  WWMHelpers.storage.saveStr('wwm_theme', theme);
   // theme切替時 hero score色 (TIER_COLOR) 再適用
-  if (window.WWMHero && window.__WWM_PARAMS) window.WWMHero.update(window.__WWM_PARAMS);
+  if (window.WWMHero && WWMState.params) window.WWMHero.update(WWMState.params);
 }
 function initTheme() {
-  let saved;
-  try { saved = localStorage.getItem('wwm_theme'); } catch(e) {}
+  const saved = WWMHelpers.storage.loadStr('wwm_theme');
   setTheme(saved === 'light' ? 'light' : 'dark');
 }
 
@@ -349,18 +348,16 @@ function savePreset(i) {
   const nameInp = document.getElementById('presetName' + i);
   const name = nameInp.value.trim() || T.presetNamePlaceholder.replace('{n}', i + 1);
   // 新レイアウト: 装備情報を保存 (roleInfo / state / virtual / baseline)
-  let importSnap = null;
-  try { importSnap = JSON.parse(localStorage.getItem('wwm_last_import_v1') || 'null'); } catch(_) {}
-  let stateSnap = null;
-  try { stateSnap = JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) {}
+  const importSnap = WWMHelpers.storage.loadJSON('wwm_last_import_v1');
+  const stateSnap = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   const virtual = {
-    gear:   window.__WWM_VIRTUAL || null,
-    kongfu: window.__WWM_VIRTUAL_KONGFU || null,
-    xinfa:  window.__WWM_VIRTUAL_XINFA || null
+    gear:   WWMState.virtual.gear || null,
+    kongfu: WWMState.virtual.kongfu || null,
+    xinfa:  WWMState.virtual.xinfa || null
   };
-  const baseline = window.__WWM_BASELINE || null;
+  const baseline = WWMState.baseline || null;
   presets[i] = { name, importSnap, stateSnap, virtual, baseline };
-  try { localStorage.setItem(PRESET_KEY, JSON.stringify(presets)); } catch(e) {}
+  WWMHelpers.storage.saveJSON(PRESET_KEY, presets);
   renderPresetSlots();
   showToast(T.toastSaved.replace('{name}', name));
 }
@@ -368,35 +365,35 @@ function loadPreset(i) {
   const p = presets[i];
   if (!p) return;
   try {
-    if (p.importSnap) localStorage.setItem('wwm_last_import_v1', JSON.stringify(p.importSnap));
-    if (p.stateSnap)  localStorage.setItem('wwm_last_state_v1',  JSON.stringify(p.stateSnap));
+    if (p.importSnap) WWMHelpers.storage.saveJSON('wwm_last_import_v1', p.importSnap);
+    if (p.stateSnap)  WWMHelpers.storage.saveJSON('wwm_last_state_v1',  p.stateSnap);
     if (p.virtual) {
-      window.__WWM_VIRTUAL        = p.virtual.gear   || null;
-      window.__WWM_VIRTUAL_KONGFU = p.virtual.kongfu || null;
-      window.__WWM_VIRTUAL_XINFA  = p.virtual.xinfa  || null;
+      WWMState.virtual.gear        = p.virtual.gear   || null;
+      WWMState.virtual.kongfu = p.virtual.kongfu || null;
+      WWMState.virtual.xinfa  = p.virtual.xinfa  || null;
     }
     if (p.baseline) {
       const curVer = window.WWM_SCORE_VERSION || 1;
       if (p.baseline.scoreVer === curVer) {
         // 現行バージョンのプリセット baseline → 採用
-        window.__WWM_BASELINE = p.baseline;
+        WWMState.baseline = p.baseline;
         // OBS view (表示専用) では baseline を書き込まない (読込のみ)。
         if (!document.documentElement.classList.contains('wwm-view-sidebar')) {
           if (window.WWMBaseline) window.WWMBaseline.save(p.baseline);
-          else { try { localStorage.setItem('wwm_baseline_score_v1', JSON.stringify(p.baseline)); } catch(_) {} }
+          else { WWMHelpers.storage.saveJSON('wwm_baseline_score_v1', p.baseline); }
         }
       } else {
         // 古いバージョン (scoreVer無し含む) のプリセット baseline → 無効化 + 再import促しバナー。
         // プリセットは過去スナップで現行 json 計算の保証なし → 安全側で破棄 (再計算せず drift回避)。
-        window.__WWM_BASELINE = null;
-        try { localStorage.removeItem('wwm_baseline_score_v1'); } catch(_) {}
+        WWMState.baseline = null;
+        WWMHelpers.storage.remove('wwm_baseline_score_v1');
         if (typeof window._showScoreBanner === 'function') window._showScoreBanner();
       }
     }
   } catch(_) {}
   if (p.importSnap?.data) {
     try {
-      window.__WWM_ROLEINFO = p.importSnap.data;
+      WWMState.roleInfo = p.importSnap.data;
       if (typeof window._refreshAll === 'function') window._refreshAll();
     } catch(_) {}
   }
@@ -405,25 +402,20 @@ function loadPreset(i) {
 function deletePreset(i) {
   const name = presets[i] ? presets[i].name : T.presetNamePlaceholder.replace('{n}', i + 1);
   presets[i] = null;
-  try { localStorage.setItem(PRESET_KEY, JSON.stringify(presets)); } catch(e) {}
+  WWMHelpers.storage.saveJSON(PRESET_KEY, presets);
   renderPresetSlots();
   showToast(T.toastDeleted.replace('{name}', name));
 }
 function initPresets() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(PRESET_KEY));
-    if (Array.isArray(saved)) presets = saved;
-  } catch(e) {}
+  const saved = WWMHelpers.storage.loadJSON(PRESET_KEY);
+  if (Array.isArray(saved)) presets = saved;
   renderPresetSlots();
 }
 
 // ── データインポート ──────────────────────────────────────────────
 function importData() {
   // SHARE Build mode 中は IMPORT 無効化 (受信した他人ビルドを上書きしないよう localStorage 保護)
-  if (window.__WWM_SHARED_BUILD) {
-    alert((window.T?.sharedBuildImportBlocked) ?? '閲覧モード中: IMPORT は無効化されています (自データに戻すには リロード/F5)');
-    return;
-  }
+  if (WWMState.blockIfShared((window.T?.sharedBuildImportBlocked) ?? '閲覧モード中: IMPORT は無効化されています (自データに戻すには リロード/F5)')) return;
   if (window.WWMImport && typeof window.WWMImport.openSetup === 'function') {
     window.WWMImport.openSetup();
   } else {

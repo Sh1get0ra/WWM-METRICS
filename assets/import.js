@@ -152,10 +152,7 @@ async function openPreviewModal(data, importedAt, savedState) {
   };
   let stateSrc = savedState;
   if (!stateSrc) {
-    try {
-      const s = localStorage.getItem(IMPORT_STATE_KEY);
-      if (s) stateSrc = JSON.parse(s);
-    } catch(e) {}
+    stateSrc = WWMHelpers.storage.loadJSON(IMPORT_STATE_KEY);
   }
   const state = stateSrc ? JSON.parse(JSON.stringify(stateSrc)) : defaultState;
   const m = _createModal('wwmPreviewModal', 'importPreviewTitle', '<div id="wwmCardBody"></div>', 'assets/icons/scroll-quill.svg');
@@ -372,7 +369,7 @@ function _attachEnhanceArsenalEvents(root, state) {
       const row = e.target.closest('[data-xinfa-row]');
       const effEl = row?.querySelector('.wwm-xinfa-effect');
       if (effEl) {
-        const passive = window.__WWM_ROLEINFO?.passiveSlots || [];
+        const passive = WWMState.roleInfo?.passiveSlots || [];
         const xid = passive[parseInt(slot,10)];
         const xinfa = window.WWM_XINFA?.[xid];
         effEl.innerHTML = xinfa ? _xinfaEffectsText(xinfa, state.xinfaTiers[slot]) : '';
@@ -451,7 +448,7 @@ function _renderEquipSlot(slot, eq) {
     const rclass = _RANK_CLASSES[rank] || '';
     const pct = ratio !== undefined ? `<span class="wwm-stat-pct"> (${(ratio*100).toFixed(0)}%)</span>` : '';
     const star = useful ? ` <span class="wwm-affix-useful" title="${(window.T && window.T.tipAffixUseful) || 'ゲーム内 👍 マーク (火力寄与)'}"><span class="wwm-good-icon"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13.17 1 7.59 6.59C7.22 6.95 7 7.45 7 8v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1z"/></svg></span></span>` : '';
-    return `<li class="${rclass}"><span class="wwm-stat-name">${_affixName(id, idx)}${star}</span><span class="wwm-stat-val">${_fmtAffixVal(val)}${pct}</span></li>`;
+    return `<li class="${rclass}"><span class="wwm-stat-name">${_affixName(id, idx)}${star}</span><span class="wwm-stat-val">${_fmtAffixValShort(val)}${pct}</span></li>`;
   }).join('');
   const slotLabel = _SLOT_LABELS[slot] || ('slot ' + slot);
   return `
@@ -488,26 +485,24 @@ function _xinfaName(id) {
   return '心法ID ' + id;
 }
 async function _loadDicts() {
-  if (window.WWM_KONGFU && window.WWM_XINFA && window.WWM_SETS && window.WWM_AFFIX && window.WWM_XINFA_ICONS && window.WWM_KONGFU_ICONS && window.WWM_GEAR_SLOT_ICONS && window.WWM_AVATAR_ICONS) return;
+  const dictMap = {
+    WWM_KONGFU: 'kongfu',
+    WWM_XINFA: 'xinfa',
+    WWM_SETS: 'sets',
+    WWM_AFFIX: 'affix',
+    WWM_XINFA_ICONS: 'xinfa_icons',
+    WWM_KONGFU_ICONS: 'kongfu_icons',
+    WWM_GEAR_SLOT_ICONS: 'gear_slot_icons',
+    WWM_AVATAR_ICONS: 'avatar_icons'
+  };
+  const tasks = [];
+  for (const [winKey, fileName] of Object.entries(dictMap)) {
+    if (!window[winKey]) {
+      tasks.push(WWMHelpers.fetch.loadDict(fileName).then(d => { window[winKey] = d; }));
+    }
+  }
   try {
-    const [kr, xr, sr, ar, xi, ki, gsi, av] = await Promise.all([
-      window.WWM_KONGFU ? Promise.resolve(window.WWM_KONGFU) : fetch('data/kongfu.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()),
-      window.WWM_XINFA  ? Promise.resolve(window.WWM_XINFA)  : fetch('data/xinfa.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()),
-      window.WWM_SETS   ? Promise.resolve(window.WWM_SETS)   : fetch('data/sets.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()),
-      window.WWM_AFFIX  ? Promise.resolve(window.WWM_AFFIX)  : fetch('data/affix.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()),
-      window.WWM_XINFA_ICONS ? Promise.resolve(window.WWM_XINFA_ICONS) : fetch('data/xinfa_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()).catch(()=>({})),
-      window.WWM_KONGFU_ICONS ? Promise.resolve(window.WWM_KONGFU_ICONS) : fetch('data/kongfu_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()).catch(()=>({})),
-      window.WWM_GEAR_SLOT_ICONS ? Promise.resolve(window.WWM_GEAR_SLOT_ICONS) : fetch('data/gear_slot_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()).catch(()=>({})),
-      window.WWM_AVATAR_ICONS ? Promise.resolve(window.WWM_AVATAR_ICONS) : fetch('data/avatar_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()).catch(()=>({}))
-    ]);
-    window.WWM_KONGFU = kr;
-    window.WWM_XINFA = xr;
-    window.WWM_SETS = sr;
-    window.WWM_AFFIX = ar;
-    window.WWM_XINFA_ICONS = xi;
-    window.WWM_KONGFU_ICONS = ki;
-    window.WWM_GEAR_SLOT_ICONS = gsi;
-    window.WWM_AVATAR_ICONS = av;
+    await Promise.all(tasks);
   } catch(e) { console.warn('[WWM Import] dict load failed:', e); }
 }
 
@@ -799,8 +794,9 @@ function _setName(suffix, slot) {
   }
   return '';
 }
-function _fmtAffixVal(v) {
-  // 0-1 range → %、それ以外 → 小数1桁
+// import.js preview 用 簡易 fmt (statKey 未参照、 0-1 range で % 推定)。
+// sidebar.js 側 _fmtAffixVal (statKey 必須、 affix-utils.js) と 衝突回避のため rename。
+function _fmtAffixValShort(v) {
   if (typeof v !== 'number') return String(v);
   if (v > 0 && v < 1) return (v * 100).toFixed(1) + '%';
   return v.toFixed(1);
@@ -838,16 +834,10 @@ function renderPreviewDetail(s, d) {
 
 // ── localStorage 永続化 ─────────────────────────────────────────
 function _saveStored(data, importedAt, state) {
-  try {
-    localStorage.setItem(IMPORT_STORAGE_KEY, JSON.stringify({ data, importedAt, state }));
-  } catch(e) { console.warn('import storage failed:', e); }
+  WWMHelpers.storage.saveJSON(IMPORT_STORAGE_KEY, { data, importedAt, state });
 }
 function _loadStored() {
-  try {
-    const s = localStorage.getItem(IMPORT_STORAGE_KEY);
-    if (!s) return null;
-    return JSON.parse(s);
-  } catch(e) { return null; }
+  return WWMHelpers.storage.loadJSON(IMPORT_STORAGE_KEY);
 }
 function getLastImportSummary() {
   const s = _loadStored();
@@ -863,24 +853,24 @@ function getLastImportSummary() {
 // ── Apply: data + 観音/武庫 state を localStorage 保存 + 計算ツール 反映 ─
 function applyImport(data, importedAt, state) {
   _saveStored(data, importedAt, state);
-  try { localStorage.setItem(IMPORT_STATE_KEY, JSON.stringify(state)); } catch(e) {}
+  WWMHelpers.storage.saveJSON(IMPORT_STATE_KEY, state);
   console.log('[WWM Import] applied:', { data, state });
   // Tier 基準値 (__WWM_OPT_BEST) を再 import 時にリセット → 直後の opt 完了で再確定。
-  window.__WWM_OPT_BEST = null;
-  window.__WWM_OPT_BEST_LOCKED = false;
-  try { localStorage.removeItem('wwm_opt_best_v1'); } catch(_) {}
+  WWMState.opt.best = null;
+  WWMState.opt.locked = false;
+  WWMHelpers.storage.remove('wwm_opt_best_v1');
   // import時 自動リセット (2026-06-01〜): 前回 import後 user が編集した 新装備データ (virtual全部) を強制クリア。
   // 「現装備 = 新装備」 状態でスタート → 装備差分のノイズ排除、 操作性向上。 sentinel問題も同時解消。
-  window.__WWM_VIRTUAL = {};
-  window.__WWM_VIRTUAL_KONGFU = {};
-  window.__WWM_VIRTUAL_XINFA = null;
-  delete window.__WWM_VIRTUAL_ARSENAL;
-  try { localStorage.removeItem('wwm_virtual_v1'); } catch(_) {}
+  WWMState.virtual.gear = {};
+  WWMState.virtual.kongfu = {};
+  WWMState.virtual.xinfa = null;
+  WWMState.virtual.arsenal = null;
+  WWMHelpers.storage.remove('wwm_virtual_v1');
   // virtual に PvP sentinel (999999) 残骸があれば、その slot の affix6 のみ origEq の affix6 で復元 (他 affix は維持)。
   // 経緯: 前回 PvP装備で affix6 を sentinel にした virtual が PvE再import 後も残り「変更不可」になる事象を解消。
   try {
     const PVP_SENTINEL = 999999;
-    const v = window.__WWM_VIRTUAL;
+    const v = WWMState.virtual.gear;
     if (v && typeof v === 'object') {
       let touched = false;
       for (const [slot, vEq] of Object.entries(v)) {
@@ -899,8 +889,8 @@ function applyImport(data, importedAt, state) {
   // stat params 構築 + sidebar 描画
   if (window.WWMStats && window.WWMSidebar) {
     window.WWMStats.buildStatParams(data, state).then(params => {
-      window.__WWM_PARAMS = params;
-      window.__WWM_ROLEINFO = data;
+      WWMState.params = params;
+      WWMState.roleInfo = data;
       window.WWMSidebar.render(params);
       if (window.WWMGear) window.WWMGear.render(data);
       if (window.WWMXinfa) window.WWMXinfa.render(data);
@@ -908,17 +898,17 @@ function applyImport(data, importedAt, state) {
       if (window.WWMRanking) window.WWMRanking.render(data, params);
       if (window.WWMHero) window.WWMHero.update(params);
       // Phase 1: import 直後 baseline score 保存
-      const res = window.__WWM_LAST_RESULT;
+      const res = WWMState.lastResult;
       if (res) {
         const bonus = (typeof window.__WWM_SET4_BONUS_OF === 'function')
           ? window.__WWM_SET4_BONUS_OF(data) : 0;
-        window.__WWM_BASELINE = { expected: res.expected, statusScore: res.statusScore + bonus, tier: res.tier, ts: Date.now(), scoreVer: window.WWM_SCORE_VERSION || 1 };
+        WWMState.baseline = { expected: res.expected, statusScore: res.statusScore + bonus, tier: res.tier, ts: Date.now(), scoreVer: window.WWM_SCORE_VERSION || 1 };
         // 再import 成功 → 計算更新バナーがあれば消す
         if (typeof window._hideScoreBanner === 'function') window._hideScoreBanner();
         // OBS view (表示専用) では baseline を書き込まない (読込のみ)。スコアは変動しないので保存不要、汚染源を断つ。
         if (!document.documentElement.classList.contains('wwm-view-sidebar')) {
-          if (window.WWMBaseline) window.WWMBaseline.save(window.__WWM_BASELINE);
-          else { try { localStorage.setItem('wwm_baseline_score_v1', JSON.stringify(window.__WWM_BASELINE)); } catch(e) {} }
+          if (window.WWMBaseline) window.WWMBaseline.save(WWMState.baseline);
+          else { WWMHelpers.storage.saveJSON('wwm_baseline_score_v1', WWMState.baseline); }
         }
         if (window.WWMHero) window.WWMHero.update(params);
         if (window.WWMHistory) window.WWMHistory.record(data, { statusScore: res.statusScore + bonus, expected: res.expected, tier: res.tier });
@@ -1023,33 +1013,30 @@ function _autoLoadLastImport() {
   try {
     let bl = window.WWMBaseline
       ? window.WWMBaseline.load()
-      : JSON.parse(localStorage.getItem('wwm_baseline_score_v1') || 'null');
+      : WWMHelpers.storage.loadJSON('wwm_baseline_score_v1');
     if (bl) {
       const curVer = window.WWM_SCORE_VERSION || 1;
       if (bl.scoreVer === curVer) {
-        window.__WWM_BASELINE = bl;
+        WWMState.baseline = bl;
       } else {
         // scoreVer 不一致 (無し=機能導入前 含む) → baseline 無効化 (再計算せず破棄=drift回避) + 再import促しバナー。
         // ※マイグレ(無し→現行付与)は廃止: baseline は未リリース(Alpha限定)で旧データ救済不要。loadPreset と挙動統一。
-        window.__WWM_BASELINE = null;
-        try { localStorage.removeItem('wwm_baseline_score_v1'); } catch(_) {}
+        WWMState.baseline = null;
+        WWMHelpers.storage.remove('wwm_baseline_score_v1');
         if (typeof window._showScoreBanner === 'function') window._showScoreBanner();
       }
     }
     // opt_best 復元 (baseline と同じ scoreVer ルール、不一致なら破棄して再 import 時の opt で再確定)
-    try {
-      const obRaw = localStorage.getItem('wwm_opt_best_v1');
-      if (obRaw) {
-        const ob = JSON.parse(obRaw);
-        const curVer = window.WWM_SCORE_VERSION || 1;
-        if (ob && ob.scoreVer === curVer && typeof ob.end === 'number') {
-          window.__WWM_OPT_BEST = ob;
-          window.__WWM_OPT_BEST_LOCKED = true;
-        } else {
-          localStorage.removeItem('wwm_opt_best_v1');
-        }
+    const ob = WWMHelpers.storage.loadJSON('wwm_opt_best_v1');
+    if (ob) {
+      const curVer = window.WWM_SCORE_VERSION || 1;
+      if (ob.scoreVer === curVer && typeof ob.end === 'number') {
+        WWMState.opt.best = ob;
+        WWMState.opt.locked = true;
+      } else {
+        WWMHelpers.storage.remove('wwm_opt_best_v1');
       }
-    } catch(_) {}
+    }
   } catch(e) {}
   const stored = _loadStored();
   if (!stored?.data) {
@@ -1058,13 +1045,13 @@ function _autoLoadLastImport() {
     return;
   }
   if (window.WWMStats && window.WWMSidebar) {
-    window.__WWM_ROLEINFO = stored.data;
+    WWMState.roleInfo = stored.data;
     // virtual反映付き refresh (effective ri 使用)
     if (typeof window._refreshAll === 'function') {
       window._refreshAll();
     } else {
       window.WWMStats.buildStatParams(stored.data, stored.state).then(params => {
-        window.__WWM_PARAMS = params;
+        WWMState.params = params;
         window.WWMSidebar.render(params);
         if (window.WWMGear) window.WWMGear.render(stored.data);
         if (window.WWMXinfa) window.WWMXinfa.render(stored.data);

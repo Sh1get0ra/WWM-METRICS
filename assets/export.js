@@ -192,7 +192,7 @@ function exportImage() {
 
   let historyHtml = '';
   try {
-    const hist = JSON.parse(localStorage.getItem('wwm_score_history_v1') || '[]');
+    const hist = WWMHelpers.storage.loadJSON('wwm_score_history_v1', []);
     if (hist.length >= 1) {
       const minTs = Math.min.apply(null, hist.map(e=>e.ts));
       const maxTs = Math.max.apply(null, hist.map(e=>e.ts));

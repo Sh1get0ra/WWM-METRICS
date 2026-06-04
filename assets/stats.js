@@ -21,17 +21,24 @@ const _ENHANCE_MAX = {
 };
 
 async function _ensureDicts() {
+  const dictMap = {
+    WWM_LV95_BASE: 'lv95_base',
+    WWM_KONGFU: 'kongfu',
+    WWM_XINFA: 'xinfa',
+    WWM_XINFA_ICONS: 'xinfa_icons',
+    WWM_KONGFU_ICONS: 'kongfu_icons',
+    WWM_AVATAR_ICONS: 'avatar_icons',
+    WWM_GEAR_SLOT_ICONS: 'gear_slot_icons',
+    WWM_SETS: 'sets',
+    WWM_AFFIX: 'affix',
+    WWM_EQUIP_BASE_BY_LV: 'equip_base_by_lv'
+  };
   const tasks = [];
-  if (!window.WWM_LV95_BASE) tasks.push(fetch('data/lv95_base.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r=>r.json()).then(d=>window.WWM_LV95_BASE=d).catch(()=>{}));
-  if (!window.WWM_KONGFU)    tasks.push(fetch('data/kongfu.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r=>r.json()).then(d=>window.WWM_KONGFU=d).catch(()=>{}));
-  if (!window.WWM_XINFA)     tasks.push(fetch('data/xinfa.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r=>r.json()).then(d=>window.WWM_XINFA=d).catch(()=>{}));
-  if (!window.WWM_XINFA_ICONS) tasks.push(fetch('data/xinfa_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r=>r.json()).then(d=>window.WWM_XINFA_ICONS=d).catch(()=>{}));
-  if (!window.WWM_KONGFU_ICONS) tasks.push(fetch('data/kongfu_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r=>r.json()).then(d=>window.WWM_KONGFU_ICONS=d).catch(()=>{}));
-  if (!window.WWM_AVATAR_ICONS) tasks.push(fetch('data/avatar_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r=>r.json()).then(d=>window.WWM_AVATAR_ICONS=d).catch(()=>{}));
-  if (!window.WWM_GEAR_SLOT_ICONS) tasks.push(fetch('data/gear_slot_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r=>r.json()).then(d=>window.WWM_GEAR_SLOT_ICONS=d).catch(()=>{}));
-  if (!window.WWM_SETS)      tasks.push(fetch('data/sets.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r=>r.json()).then(d=>window.WWM_SETS=d).catch(()=>{}));
-  if (!window.WWM_AFFIX)     tasks.push(fetch('data/affix.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r=>r.json()).then(d=>window.WWM_AFFIX=d).catch(()=>{}));
-  if (!window.WWM_EQUIP_BASE_BY_LV) tasks.push(fetch('data/equip_base_by_lv.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r=>r.json()).then(d=>window.WWM_EQUIP_BASE_BY_LV=d).catch(()=>{}));
+  for (const [winKey, fileName] of Object.entries(dictMap)) {
+    if (!window[winKey]) {
+      tasks.push(WWMHelpers.fetch.loadDict(fileName).then(d => { window[winKey] = d; }));
+    }
+  }
   await Promise.all(tasks);
 }
 
