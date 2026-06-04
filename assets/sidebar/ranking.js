@@ -187,6 +187,4 @@
 
   window.WWMSidebar = window.WWMSidebar || {};
   window.WWMSidebar.ranking = { render };
-  // 後方互換 (sidebar.js _refreshAll / import.js が参照)
-  window.WWMRanking = { render };
 })();

@@ -149,17 +149,17 @@ function _refreshAll() {
       WWMState.params = params;
       await window.WWMSidebar.render(params);
       // donut/hero を最適化前に先行反映 (opt前なので通常更新)
-      if (window.WWMHero) window.WWMHero.update(params);
-      window.WWMGear.render(ri);
-      if (window.WWMXinfa) window.WWMXinfa.render(ri);
-      if (window.WWMDiag) window.WWMDiag.render(ri, params);
-      if (window.WWMRanking) window.WWMRanking.render(ri, params);
+      if (window.WWMSidebar?.hero) window.WWMSidebar.hero.update(params);
+      window.WWMSidebar.gear.render(ri);
+      if (window.WWMSidebar?.xinfa) window.WWMSidebar.xinfa.render(ri);
+      if (window.WWMSidebar?.diag) window.WWMSidebar.diag.render(ri, params);
+      if (window.WWMSidebar?.ranking) window.WWMSidebar.ranking.render(ri, params);
       _autoFitText();
       window._saveVirtuals();
       // 重い最適化(数秒)は await せず 2フレーム後に遅延起動 (初期描画を阻害しない)。
-      if (window.WWMOpt) {
+      if (window.WWMSidebar?.opt) {
         requestAnimationFrame(() => requestAnimationFrame(() => {
-          window.WWMOpt.render(ri, params)
+          window.WWMSidebar.opt.render(ri, params)
             .then(() => _autoFitText())
             .catch(e => console.error('[WWM] opt failed:', e));
         }));

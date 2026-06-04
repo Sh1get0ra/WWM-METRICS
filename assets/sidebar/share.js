@@ -292,7 +292,6 @@
   }
 
   // ── expose ───────────────────────────────────────────────
-  window.WWMShare = { shareUrl: _shareBuildUrl };
   window.WWMSidebar = window.WWMSidebar || {};
   window.WWMSidebar.share = {
     shareUrl: _shareBuildUrl,

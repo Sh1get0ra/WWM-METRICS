@@ -6,8 +6,7 @@
 //   - localStorage 'wwm_score_history_v1'
 // 公開:
 //   - window.WWMSidebar.history = { record, render }
-//   - 後方互換: window.WWMHistory = { record, render }
-//     (import.js: WWMHistory.record / index.html タブ切替: WWMHistory.render)
+//   呼出: import.js / index.html タブ切替 (history タブ render trigger)
 (function () {
   'use strict';
 
@@ -156,6 +155,4 @@
 
   window.WWMSidebar = window.WWMSidebar || {};
   window.WWMSidebar.history = { record, render };
-  // 後方互換 (import.js / index.html タブ切替 が直接参照)
-  window.WWMHistory = { record, render };
 })();

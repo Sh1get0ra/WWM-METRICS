@@ -93,7 +93,7 @@
       const wasAborted = (window._OPT_TOKEN || 0) !== (tokenBefore + 1);
       if (!wasAborted) {
         try {
-          if (window.WWMHero) window.WWMHero.update(WWMState.params || params);
+          if (window.WWMSidebar?.hero) window.WWMSidebar.hero.update(WWMState.params || params);
         } catch(_) {}
       }
     }
@@ -396,7 +396,7 @@
     }
     // ルーレット停止 + 静的 tier 描画
     _stopTierRoulette();
-    if (window.WWMHero && WWMState.params) { try { window.WWMHero.update(WWMState.params); } catch(_) {} }
+    if (window.WWMSidebar?.hero && WWMState.params) { try { window.WWMSidebar.hero.update(WWMState.params); } catch(_) {} }
     root.innerHTML = `
       <div class="wwm-analysis-card wwm-modal-square">
         <div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/anvil-impact.svg');"></div>
@@ -480,6 +480,4 @@
     applySteps: _applyOptSteps,
     resortRows: _OPT_resortRows,
   };
-  // 後方互換
-  window.WWMOpt = { render: renderOptimization };
 })();

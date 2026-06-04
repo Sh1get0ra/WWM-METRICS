@@ -103,7 +103,7 @@
       const liupaiPinyin = _liupaiPinyinFromUrl(liupaiUrl);
       const railLabel = _GEAR_RAIL_ZH[slot] || label;
       return `
-        <div class="wwm-equip-slot" data-slot="${slot}"${liupaiPinyin ? ` data-liupai-pinyin="${liupaiPinyin}"` : ''} onclick="WWMGear.openEdit('${slot}')">
+        <div class="wwm-equip-slot" data-slot="${slot}"${liupaiPinyin ? ` data-liupai-pinyin="${liupaiPinyin}"` : ''} onclick="WWMSidebar.gear.openEdit('${slot}')">
           ${liupaiHtml}
           <div class="wwm-equip-rail"><span class="wwm-equip-rail-text">${railLabel}</span></div>
           ${iconHtml ? `<div class="wwm-equip-icon-wrap">${iconHtml}</div>` : ''}
@@ -837,8 +837,7 @@
     GEAR_SLOT_ORDER: _GEAR_SLOT_ORDER,
     SET4_BONUS: _SET4_BONUS,
   };
-  // 後方互換 + diag.js / opt.js / sidebar.js残部 から参照
-  window.WWMGear = { render: renderGearGrid, openEdit: openGearEdit };
+  // 他 module への source of truth expose (calc 連携用、 backward compat ではない)
   window.__WWM_SET4_BONUS_OF = _set4Bonus;
   window.__WWM_SCORE_WITH_BONUS = _scoreWithBonus;
 })();

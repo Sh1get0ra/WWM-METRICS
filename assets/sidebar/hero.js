@@ -139,9 +139,7 @@
 
   window.WWMSidebar = window.WWMSidebar || {};
   window.WWMSidebar.hero = { update, startRoulette, stopRoulette };
-  // 後方互換
-  window.WWMHero = { update };
-  // opt.js が call-time で参照
+  // opt.js が call-time で参照 (call-time arrow wrapper 経由のため window 直接 expose 必要)
   window._startTierRoulette = startRoulette;
   window._stopTierRoulette  = stopRoulette;
 })();

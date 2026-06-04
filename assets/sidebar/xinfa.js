@@ -41,7 +41,7 @@
       const liupaiHtml = liupaiUrl ? `<img class="wwm-xinfa-liupai-badge" src="${liupaiUrl}" alt="" loading="lazy">` : '';
       const liupaiPinyin = _liupaiPinyinFromUrl(liupaiUrl);
       return `
-        <div class="wwm-xinfa-slot" data-xinfa-slot="${i}"${liupaiPinyin ? ` data-liupai-pinyin="${liupaiPinyin}"` : ''} onclick="WWMXinfa.openEdit(${i})">
+        <div class="wwm-xinfa-slot" data-xinfa-slot="${i}"${liupaiPinyin ? ` data-liupai-pinyin="${liupaiPinyin}"` : ''} onclick="WWMSidebar.xinfa.openEdit(${i})">
           ${tierChip}
           ${liupaiHtml}
           <div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法${['一','二','三','四'][i]}</span></div>
@@ -64,7 +64,7 @@
     const arsenalLiupaiHtml = arsenalLiupaiUrl ? `<img class="wwm-xinfa-liupai-badge" src="${arsenalLiupaiUrl}" alt="" loading="lazy">` : '';
     const arsenalLiupaiPinyin = _liupaiPinyinFromUrl(arsenalLiupaiUrl);
     const arsenalCard = `
-      <div class="wwm-xinfa-slot wwm-arsenal-slot" data-arsenal-slot${arsenalLiupaiPinyin ? ` data-liupai-pinyin="${arsenalLiupaiPinyin}"` : ''} onclick="WWMXinfa.openArsenalEdit()">
+      <div class="wwm-xinfa-slot wwm-arsenal-slot" data-arsenal-slot${arsenalLiupaiPinyin ? ` data-liupai-pinyin="${arsenalLiupaiPinyin}"` : ''} onclick="WWMSidebar.arsenal.openEdit()">
         ${arsenalLiupaiHtml}
         <div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">武庫</span></div>
         <div class="wwm-xinfa-icon-wrap"><img class="wwm-xinfa-icon" src="https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/kongfu/images/673361fe92bef95db34510429KLQLykS05.png" alt=""></div>
@@ -425,15 +425,5 @@
     openEdit: openXinfaEdit,
     computeCardScores: _computeXinfaCardScores,
     computeArsenalCardScore: _computeArsenalCardScore,
-  };
-  // 後方互換 (sidebar.js / onclick からの参照)
-  // openArsenalEdit は Phase 3.8 で arsenal.js に切出予定、 それまで sidebar.js global を call
-  window.WWMXinfa = {
-    render: renderXinfaGrid,
-    openEdit: openXinfaEdit,
-    openArsenalEdit: () => {
-      if (window.WWMArsenal?.openEdit) return window.WWMArsenal.openEdit();
-      if (typeof window.openArsenalEdit === 'function') return window.openArsenalEdit();
-    },
   };
 })();

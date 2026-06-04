@@ -226,8 +226,4 @@
   // ── expose ───────────────────────────────────────────────
   window.WWMSidebar = window.WWMSidebar || {};
   window.WWMSidebar.arsenal = { openEdit: openArsenalEdit };
-  // 後方互換 (xinfa.js / sidebar.js残部 から参照)
-  window.WWMArsenal = { openEdit: openArsenalEdit };
-  // sidebar.js global function だった expose を window. に維持
-  window.openArsenalEdit = openArsenalEdit;
 })();

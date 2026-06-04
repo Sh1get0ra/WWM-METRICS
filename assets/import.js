@@ -892,11 +892,11 @@ function applyImport(data, importedAt, state) {
       WWMState.params = params;
       WWMState.roleInfo = data;
       window.WWMSidebar.render(params);
-      if (window.WWMGear) window.WWMGear.render(data);
-      if (window.WWMXinfa) window.WWMXinfa.render(data);
-      if (window.WWMDiag) window.WWMDiag.render(data, params);
-      if (window.WWMRanking) window.WWMRanking.render(data, params);
-      if (window.WWMHero) window.WWMHero.update(params);
+      if (window.WWMSidebar?.gear) window.WWMSidebar.gear.render(data);
+      if (window.WWMSidebar?.xinfa) window.WWMSidebar.xinfa.render(data);
+      if (window.WWMSidebar?.diag) window.WWMSidebar.diag.render(data, params);
+      if (window.WWMSidebar?.ranking) window.WWMSidebar.ranking.render(data, params);
+      if (window.WWMSidebar?.hero) window.WWMSidebar.hero.update(params);
       // Phase 1: import 直後 baseline score 保存
       const res = WWMState.lastResult;
       if (res) {
@@ -910,14 +910,14 @@ function applyImport(data, importedAt, state) {
           if (window.WWMBaseline) window.WWMBaseline.save(WWMState.baseline);
           else { WWMHelpers.storage.saveJSON('wwm_baseline_score_v1', WWMState.baseline); }
         }
-        if (window.WWMHero) window.WWMHero.update(params);
-        if (window.WWMHistory) window.WWMHistory.record(data, { statusScore: res.statusScore + bonus, expected: res.expected, tier: res.tier });
+        if (window.WWMSidebar?.hero) window.WWMSidebar.hero.update(params);
+        if (window.WWMSidebar?.history) window.WWMSidebar.history.record(data, { statusScore: res.statusScore + bonus, expected: res.expected, tier: res.tier });
       }
       // 重い最適化(数秒)は 初期描画(mini-hero/score)を阻害しないよう await せず 2フレーム後に遅延起動。
       // (opt前に置くと opt の setTimeout(0) yield では paint が starve し score が opt完了まで見えない)
-      if (window.WWMOpt) {
+      if (window.WWMSidebar?.opt) {
         requestAnimationFrame(() => requestAnimationFrame(() => {
-          window.WWMOpt.render(data, params).catch(e => console.error('[WWM] opt failed:', e));
+          window.WWMSidebar.opt.render(data, params).catch(e => console.error('[WWM] opt failed:', e));
         }));
       }
     }).catch(e => console.error('[WWM] stats build failed:', e));
@@ -1053,12 +1053,12 @@ function _autoLoadLastImport() {
       window.WWMStats.buildStatParams(stored.data, stored.state).then(params => {
         WWMState.params = params;
         window.WWMSidebar.render(params);
-        if (window.WWMGear) window.WWMGear.render(stored.data);
-        if (window.WWMXinfa) window.WWMXinfa.render(stored.data);
-        if (window.WWMDiag) window.WWMDiag.render(stored.data, params);
-        if (window.WWMRanking) window.WWMRanking.render(stored.data, params);
-        if (window.WWMOpt) window.WWMOpt.render(stored.data, params);
-        if (window.WWMHero) window.WWMHero.update(params);
+        if (window.WWMSidebar?.gear) window.WWMSidebar.gear.render(stored.data);
+        if (window.WWMSidebar?.xinfa) window.WWMSidebar.xinfa.render(stored.data);
+        if (window.WWMSidebar?.diag) window.WWMSidebar.diag.render(stored.data, params);
+        if (window.WWMSidebar?.ranking) window.WWMSidebar.ranking.render(stored.data, params);
+        if (window.WWMSidebar?.opt) window.WWMSidebar.opt.render(stored.data, params);
+        if (window.WWMSidebar?.hero) window.WWMSidebar.hero.update(params);
       }).catch(e => console.error('[WWM] auto-load failed:', e));
     }
     // baseline はlocalStorage値で固定 (page load後の自動再計算 撤回 = drift源排除)

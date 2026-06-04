@@ -262,6 +262,4 @@
     evalPen: _evalPenSpecialization,
     checkAffix6Mismatch: _checkAffix6PenMismatch,
   };
-  // 後方互換 (sidebar.js / index.html inline から呼ばれる可能性)
-  window.WWMDiag = { render: renderDiagnostics, openPopup: _openDiagPopup };
 })();
