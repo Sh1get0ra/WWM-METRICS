@@ -302,7 +302,7 @@ function setTheme(theme) {
   if (tog) tog.textContent = theme === 'light' ? '☾' : '☀';
   WWMHelpers.storage.saveStr('wwm_theme', theme);
   // theme切替時 hero score色 (TIER_COLOR) 再適用
-  if (window.WWMHero && WWMState.params) window.WWMHero.update(WWMState.params);
+  if (window.WWMSidebar?.hero && WWMState.params) window.WWMSidebar.hero.update(WWMState.params);
 }
 function initTheme() {
   const saved = WWMHelpers.storage.loadStr('wwm_theme');

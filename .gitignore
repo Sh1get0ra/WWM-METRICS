@@ -29,3 +29,7 @@ tools/
 node_modules/
 dist/
 .vite/
+
+# scripts/ artifacts (regenerable; cjs scripts themselves ARE tracked)
+scripts/.*.json
+scripts/.*.md

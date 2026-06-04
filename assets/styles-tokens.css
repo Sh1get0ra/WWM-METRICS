@@ -1,0 +1,210 @@
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     DESIGN TOKENS — WWM DMG CALC
+     Phase 5.3 後 styles.css から切出 (Tier 3 Step 1)
+     cascade: tokens.css → styles.css → styles-dark.css → styles-light.css
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+
+:root {
+  /* Sumi base */
+  --bg-0:        #07060a;
+  --bg-1:        #0f0c0e;
+  --bg-2:        #16110f;
+  --bg-3:        #1d1714;
+  --bg-raised:   #1a1410;
+
+  /* Panel surfaces (theme-swappable) */
+  --surf-1:      rgba(26,20,16,0.7);
+  --surf-2:      rgba(15,12,14,0.85);
+  --surf-shade:  rgba(0,0,0,0.25);
+  --surf-shade-2:rgba(0,0,0,0.4);
+  --surf-shade-3:rgba(0,0,0,0.55);
+  --rail-grad:   linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.5));
+  --input-bg:    rgba(0,0,0,0.5);
+  --input-text:  var(--gold-bright);
+  --header-grad: linear-gradient(180deg, rgba(26,20,16,0.85), rgba(15,12,14,0.85));
+  --hero-grad:   radial-gradient(ellipse 70% 100% at 0% 50%, var(--vermilion-tint), transparent 60%),
+                 linear-gradient(180deg, rgba(26,20,16,0.9), rgba(15,12,14,0.95));
+  --hero-num:    var(--gold-bright);
+  --hero-num-shadow: 0 0 30px rgba(240,210,138,0.25), 0 2px 0 rgba(0,0,0,0.5);
+  --donut-track: rgba(232, 215, 180, 0.06);
+
+  /* Ink lines */
+  --ink-1:       rgba(232, 215, 180, 0.06);
+  --ink-2:       rgba(232, 215, 180, 0.12);
+  --ink-3:       rgba(232, 215, 180, 0.22);
+
+  /* Accents */
+  --vermilion:        #c83c2b;
+  --vermilion-deep:   #8a1f17;
+  --vermilion-bright: #e8513a;
+  --vermilion-glow:   rgba(232, 81, 58, 0.5);
+  /* vermilion 派生 (rgba 集約用) — 不透明度連続スケール */
+  --vermilion-trace:       rgba(200,60,43,0.05);
+  --vermilion-faint:       rgba(200,60,43,0.08);
+  --vermilion-tint:        rgba(200,60,43,0.10);
+  --vermilion-soft:        rgba(200,60,43,0.15);
+  --vermilion-soft-light:  rgba(200,60,43,0.18);
+  --vermilion-soft-2:      rgba(200,60,43,0.20);
+  --vermilion-mid:         rgba(200,60,43,0.30);
+  --vermilion-mid-2:       rgba(200,60,43,0.35);
+  --vermilion-mid-strong:  rgba(200,60,43,0.40);
+  --vermilion-strong:      rgba(200,60,43,0.55);
+  --vermilion-bright-trace:rgba(232,81,58,0.15);
+  --vermilion-bright-tint: rgba(232,81,58,0.18);
+  --vermilion-bright-soft: rgba(232,81,58,0.25);
+  --vermilion-bright-soft-mid: rgba(232,81,58,0.40);
+  --vermilion-bright-mid:  rgba(232,81,58,0.45);
+  --vermilion-bright-mid-2: rgba(232,81,58,0.55);
+  --vermilion-bright-glow: rgba(232,81,58,0.60);
+  --vermilion-bright-strong: rgba(232,81,58,0.70);
+
+  --gold:        #c9a45a;
+  --gold-bright: #f0d28a;
+  --gold-deep:   #8a6f30;
+  --gold-glow:   rgba(240, 210, 138, 0.4);
+  /* gold/gold-bright 派生 (rgba集約) */
+  --gold-trace:        rgba(201,164,90,0.05);
+  --gold-faint:        rgba(201,164,90,0.08);
+  --gold-tint:         rgba(201,164,90,0.12);
+  --gold-soft:         rgba(201,164,90,0.20);
+  --gold-mid:          rgba(201,164,90,0.30);
+  --gold-strong:       rgba(201,164,90,0.50);
+  --gold-bright-faint: rgba(240,210,138,0.08);
+  --gold-bright-tint:  rgba(240,210,138,0.12);
+  --gold-bright-soft:  rgba(240,210,138,0.25);
+  --gold-bright-mid-2: rgba(240,210,138,0.40);
+  --gold-bright-mid:   rgba(240,210,138,0.50);
+  --gold-bright-strong:rgba(240,210,138,0.70);
+  /* overlay (暗/明オーバーレイ) */
+  --overlay-trace:     rgba(0,0,0,0.15);
+  --overlay-tint:      rgba(0,0,0,0.25);
+  --overlay-soft:      rgba(0,0,0,0.30);
+  --overlay-soft-mid:  rgba(0,0,0,0.40);
+  --overlay-soft-2:    rgba(0,0,0,0.45);
+  --overlay-mid:       rgba(0,0,0,0.50);
+  --overlay-mid-2:     rgba(0,0,0,0.55);
+  --overlay-heavy:     rgba(0,0,0,0.60);
+  --hover-trace:       rgba(255,255,255,0.03);
+  --hover-soft:        rgba(255,255,255,0.10);
+  --hover-mid:         rgba(255,255,255,0.25);
+  --hover-mid-2:       rgba(255,255,255,0.40);
+  --hover-strong:      rgba(255,255,255,0.50);
+
+  --jade:        #7fa88a;
+  --jade-bright: #a8d4b4;
+  /* jade-bright 派生 (rgba constant, light theme でも値変化なし) */
+  --jade-bright-mid:    rgba(168,212,180,0.40);
+  --jade-bright-strong: rgba(168,212,180,0.55);
+
+  /* 特殊用途 constant tokens */
+  --select-bg:      #1a1a1a;  /* <select> option neutral gray bg (warm bg-raised と区別) */
+  --vermilion-note: #b8321f;  /* NOTE modal 巻物 accent (--vermilion より暗 saturated) */
+
+  /* Phase 4.4c: 旧 var(--accent) fallback の実体定義 + 共通色 family */
+  --accent:         #d4af37;                  /* 旧 fallback の実体、 dark/light 両 constant gold */
+  --accent-faint:   rgba(212,175,55,0.08);
+  --accent-mid:     rgba(212,175,55,0.30);
+  --amber-glow:     rgba(255,200,80,0.40);   /* 暖橙 glow (drop-shadow 用) */
+  --liupai-guyun:   #c389ff;                  /* 流派: 瞬嵐 (guyun) 紫 */
+
+  /* light theme 暗茶 scale (1=最暗, 6=中暗) — light selector で 装飾 dark accent 用 */
+  --brown-1:        #2a1810;
+  --brown-2:        #3a2010;
+  --brown-3:        #5a1e10;
+  --brown-4:        #5a3320;
+  --brown-5:        #6a3e16;
+  --brown-6:        #8a5a30;
+
+  --bone:        #c9b88a;
+  --bone-dim:    #9c8a6a;
+
+  /* チャート色（テーマ統合: 金/朱/骨/紙） */
+  --chart-crit:     #f0d28a;  /* gold-bright */
+  --chart-sympathy: #e8513a;  /* vermilion-bright */
+  --chart-graze:    #6a6053;  /* paper-mute 寄り */
+  --chart-normal:   #ede4d0;  /* paper */
+
+  /* Paper text */
+  --paper:       #ede4d0;
+  --paper-2:     #c8bda6;
+  --paper-dim:   #8b8170;
+  --paper-mute:  #7a7060;  /* AA contrast対応 (旧 #6a6053 から +0.3:1) */
+
+  /* Type */
+  --f-display: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+  --f-body:    'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+  --f-latin:   'Cinzel', 'Cormorant Garamond', 'Noto Serif JP', serif;
+  --f-mono:    'Rajdhani', 'JetBrains Mono', monospace;
+
+  /* Spacing scale (4px base) */
+  --space-half: 2px;     /* badge内余白等 */
+  --space-1:    4px;
+  --space-1-5:  6px;     /* 4-8間中間、最頻 */
+  --space-2:    8px;
+  --space-2-5:  10px;    /* 中間 */
+  --space-3:    12px;
+  --space-3-5:  14px;    /* 中間 */
+  --space-4:    16px;
+  --space-5:    20px;
+  --space-6:    24px;
+  --space-7:    32px;
+  --space-8:    40px;
+
+  /* Typography scale — 既存 font-size 値の段階集約 */
+  --text-2xs:   8px;   /* アイコンラベル */
+  --text-xs:    10px;  /* 補助ラベル・HUDメタ (9pxも統合) */
+  --text-sm:    11px;  /* 本文・入力ラベル */
+  --text-12:    12px;  /* 中間 (最頻、UIラベル多用) */
+  --text-md:    13px;  /* 本文 base */
+  --text-14:    14px;  /* 中間 (やや強調) */
+  --text-15:    15px;  /* compact見出し */
+  --text-lg:    16px;  /* 強調 */
+  --text-18:    18px;  /* セクション小見出し */
+  --text-20:    20px;  /* 中型見出し */
+  --text-xl:    22px;  /* パネル見出し */
+  --text-24:    24px;  /* 大型見出し */
+  --text-2xl:   28px;  /* breakdown数値 */
+  --text-hero:  92px;  /* EXPECTED ヒーロー */
+
+  /* Font weight scale */
+  --fw-normal:   400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-extra:    800;
+  --fw-black:    900;
+
+  /* Z-index scale */
+  --z-base:      0;
+  --z-raise:     1;
+  --z-elevated:  5;
+  --z-sticky:    50;
+  --z-floating:  100;
+  --z-overlay:   200;
+  --z-modal:     9999;
+  --z-toast:     10000;
+  --z-tooltip:   99999;
+
+  /* Ratio gradient (パフォーマンス指示色、ratio→色マップ用) */
+  --ratio-excellent: #4caf50;  /* >= 0.9 */
+  --ratio-good:      #8bc34a;  /* >= 0.75 */
+  --ratio-ok:        #ffc107;  /* >= 0.6 */
+  --ratio-warn:      #ff9800;  /* >= 0.4 */
+  --ratio-bad:       #e74c3c;  /* < 0.4 */
+
+  /* ─── Phase 5.3-B: Semantic component tokens ───
+   * dark→light mapping を 1 か所に集約。 component 用途意図を token 名で表現。
+   * light override は styles-light.css の html[data-theme="light"] block に。
+   */
+  --c-surf-warm-1:        var(--surf-1);    /* warm card/modal bg gradient 上 */
+  --c-surf-warm-2:        var(--surf-2);    /* warm card/modal bg gradient 下 */
+  --c-toast-bg:           var(--bg-1);      /* toast notification bg */
+  --c-modal-a-option-bg:  var(--bg-raised); /* compare modal A select option bg */
+  --c-rail-bg:            linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.25) 60%, rgba(40,30,20,0.45)); /* 装備/心法 rail 縦 gradient (light override 別値) */
+
+  /* Safe Area inset utility (Phase 1 base) */
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left:   env(safe-area-inset-left, 0px);
+  --safe-right:  env(safe-area-inset-right, 0px);
+}
