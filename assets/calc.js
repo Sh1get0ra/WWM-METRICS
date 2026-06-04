@@ -153,7 +153,7 @@ function computeExpected(pIn) {
       // computeExpected は装備カードスコア試算/最適化/プレビュー等から多数呼ばれ、
       // 以前は それら全てが donut DOM を上書きしてちらつき発生。__WWM_ALLOW_DONUT で
       // 唯一の表示経路(updateHero)に書込みをゲートする。
-      if (window.__WWM_ALLOW_DONUT) {
+      if (WWMState.allowDonut) {
         if (typeof updateDonut === 'function') updateDonut(dCrit, dSymp, dGraz, dNorm, 'donutDmgSeg');
         // 外周リング arc (物理/属性 比率)
         if (typeof updateLuopanArc === 'function') updateLuopanArc(physRatio, elemRatio);

@@ -772,12 +772,12 @@ async function renderOptimization(roleInfo, params, opts) {
     return;
   }
   // 最適化中 donut/score の中間更新を suppress
-  window.__WWM_OPT_RUNNING = true;
+  WWMState.opt.running = true;
   const tokenBefore = window._OPT_TOKEN || 0;
   try {
     return await _renderOptimizationInner(roleInfo, params, opts, root);
   } finally {
-    window.__WWM_OPT_RUNNING = false;
+    WWMState.opt.running = false;
     // abort後 (新optimization が起動し token が進んだ) → donut/hero 操作スキップ (フリッカー防止)
     const wasAborted = (window._OPT_TOKEN || 0) !== (tokenBefore + 1);
     if (!wasAborted) {
@@ -803,7 +803,7 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
   // best 確定中 (LOCKED未) は ratio=0.94 強制 (= 承音システムの全OP育成 max値、 現実的な装備上限)。
   // ratio=1.0 (= OP 100%×6種) は ゲーム仕様上 ほぼ不可能 → best基準厳しすぎる。
   // ユーザーが ratio=0.9 設定後 再import すると best が低い値で固定され、 Tier判定が緩くなるバグ防止。
-  const TARGET_RATIO = window.__WWM_OPT_BEST_LOCKED ? (opts.ratio ?? savedRatio) : 0.94;
+  const TARGET_RATIO = WWMState.opt.locked ? (opts.ratio ?? savedRatio) : 0.94;
   const MAX_ITER = 20; // best=null で自動停止、上限保険
   // 微改善打切閾値 (localStorage 永続化、UI で変更可)
   if (typeof window._OPT_MIN_DELTA === 'undefined' || window._OPT_MIN_DELTA == null) {
@@ -1076,11 +1076,11 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
   _OPT_LAST_SCORES = { start: Math.round(startScore), end: Math.round(curScore), delta: totalDelta, ratio: TARGET_RATIO };
   // Tier 基準: 最適化最大スコア (= curScore) は import 時に1回だけ確定保存。以降の opt 再計算では値を更新しない。
   // ※ applyImport で localStorage 削除 + LOCKED 解除 → 再 import で再確定する。
-  if (!window.__WWM_OPT_BEST_LOCKED) {
+  if (!WWMState.opt.locked) {
     const ver = window.WWM_SCORE_VERSION || 1;
-    window.__WWM_OPT_BEST = { end: Math.round(curScore), ts: Date.now(), scoreVer: ver };
-    window.__WWM_OPT_BEST_LOCKED = true;
-    try { localStorage.setItem('wwm_opt_best_v1', JSON.stringify(window.__WWM_OPT_BEST)); } catch(_) {}
+    WWMState.opt.best = { end: Math.round(curScore), ts: Date.now(), scoreVer: ver };
+    WWMState.opt.locked = true;
+    try { localStorage.setItem('wwm_opt_best_v1', JSON.stringify(WWMState.opt.best)); } catch(_) {}
   }
   // ルーレット停止 + 静的 tier 描画
   if (typeof _stopTierRoulette === 'function') _stopTierRoulette();
@@ -1192,7 +1192,7 @@ function _shareBuildUrl() {
   delete riLight.school;         // debug log のみ使用、 表示不要
   // OBS view 武格指数 / Tier badge 表示用に baseline + opt_best 同梱 (数百バイト、 URL長影響軽微)
   const baseline = WWMState.baseline || null;
-  const optBest  = window.__WWM_OPT_BEST || null;
+  const optBest  = WWMState.opt.best || null;
   // baseAffixes slim化: {equipmentDetails:[id,val,ratio,rank,useful]} → [id,val,ratio,rank,useful]
   //   + ratio 小数3桁丸め、 boolean→0/1 で 50%程縮小。 受信側 inline script で復元。
   //   ※元 ri 共有を避けるため wearEquipsDetailed は deep clone してから slim化
@@ -3421,7 +3421,7 @@ const _ROULETTE_GLYPHS = [
 ];
 function _startTierRoulette() {
   // best 既に確定済 (LOCKED=true、 reload復元含む) → tier 固定値が即出るので演出不要。スキップ。
-  if (window.__WWM_OPT_BEST_LOCKED) return;
+  if (WWMState.opt.locked) return;
   const sbTb   = document.getElementById('wwmSbTierBadge');
   const heroTb = document.getElementById('heroTierBadge');
   if (!sbTb && !heroTb) return;
@@ -3447,12 +3447,12 @@ function updateHero(params) {
   if (!params || typeof window.computeExpected !== 'function') return;
   // donut/arc DOM 書込みは このcomputeExpected (表示更新) のみ許可。
   // 他経路 (スコア試算/最適化/プレビュー) の computeExpected は ALLOW=false で donut を触らない。
-  window.__WWM_ALLOW_DONUT = true;
+  WWMState.allowDonut = true;
   let result;
   try {
     result = window.computeExpected(params) || WWMState.lastResult || {};
   } finally {
-    window.__WWM_ALLOW_DONUT = false;
+    WWMState.allowDonut = false;
   }
   const total = result.expected || 0;
   const effRi = _getEffectiveRoleInfo();
@@ -3474,7 +3474,7 @@ function updateHero(params) {
   // Tier 判定: 最適化最大スコア (__WWM_OPT_BEST.end、 import時固定) に対する比率で判定。opt未完了/best 無い時は空。
   // 仮閾値: SS>=95% / S>=90% / A>=80% / B>=65% (確定までに調整予定)
   const _tierFromBest = (score) => {
-    const best = window.__WWM_OPT_BEST?.end;
+    const best = WWMState.opt.best?.end;
     if (!best || score == null) return '';
     const r = score / best;
     if (r >= 0.95) return 'SS';
@@ -3486,7 +3486,7 @@ function updateHero(params) {
   const curTier = _tierFromBest(currentScore);
   const tbCur = document.getElementById('heroTierBadge');
   // opt実行中はルーレット演出に任せ、updateHero は tier badge を上書きしない (両 badge 共通)
-  if (tbCur && !window.__WWM_OPT_RUNNING) {
+  if (tbCur && !WWMState.opt.running) {
     tbCur.textContent = curTier;
     tbCur.className = 'hero-tier tier-badge tier-' + curTier;
   }
@@ -3494,7 +3494,7 @@ function updateHero(params) {
   const sbTb = document.getElementById('wwmSbTierBadge');
   const sbMs = document.getElementById('wwmSbMartialScore');
   // opt実行中はルーレット演出に任せて、updateHero は tier を上書きしない。
-  if (sbTb && !window.__WWM_OPT_RUNNING) {
+  if (sbTb && !WWMState.opt.running) {
     const baselineScore = WWMState.baseline?.statusScore;
     const baselineTier = _tierFromBest(typeof baselineScore === 'number' ? baselineScore : null);
     sbTb.textContent = baselineTier;

@@ -226,7 +226,7 @@ function formatNum(n, decimals) {
 // ── ドーナツ（SVG） ──────────────────────────────────────────────
 function updateDonut(pCrit, pSympathy, pGraze, pNormal, prefix) {
   // 最適化計算中は hero donut (donutDmgSeg) の更新を完全block (ちらつき根絶)
-  if (window.__WWM_OPT_RUNNING && (prefix === 'donutDmgSeg')) return;
+  if (WWMState.opt.running && (prefix === 'donutDmgSeg')) return;
   const p = prefix || 'donutSeg';
   const segs = [
     { id: p + 'Crit',     val: pCrit },
@@ -254,7 +254,7 @@ function updateDonut(pCrit, pSympathy, pGraze, pNormal, prefix) {
 
 // ── 外周リング（物理/属性 比率）arcPhys/arcElem ───────────────────
 function updateLuopanArc(physRatio, elemRatio) {
-  if (window.__WWM_OPT_RUNNING) return; // 最適化中 skip
+  if (WWMState.opt.running) return; // 最適化中 skip
   const aP = document.getElementById('arcPhys');
   const aE = document.getElementById('arcElem');
   if (!aP || !aE) return;

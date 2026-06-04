@@ -855,8 +855,8 @@ function applyImport(data, importedAt, state) {
   WWMHelpers.storage.saveJSON(IMPORT_STATE_KEY, state);
   console.log('[WWM Import] applied:', { data, state });
   // Tier 基準値 (__WWM_OPT_BEST) を再 import 時にリセット → 直後の opt 完了で再確定。
-  window.__WWM_OPT_BEST = null;
-  window.__WWM_OPT_BEST_LOCKED = false;
+  WWMState.opt.best = null;
+  WWMState.opt.locked = false;
   WWMHelpers.storage.remove('wwm_opt_best_v1');
   // import時 自動リセット (2026-06-01〜): 前回 import後 user が編集した 新装備データ (virtual全部) を強制クリア。
   // 「現装備 = 新装備」 状態でスタート → 装備差分のノイズ排除、 操作性向上。 sentinel問題も同時解消。
@@ -1030,8 +1030,8 @@ function _autoLoadLastImport() {
     if (ob) {
       const curVer = window.WWM_SCORE_VERSION || 1;
       if (ob.scoreVer === curVer && typeof ob.end === 'number') {
-        window.__WWM_OPT_BEST = ob;
-        window.__WWM_OPT_BEST_LOCKED = true;
+        WWMState.opt.best = ob;
+        WWMState.opt.locked = true;
       } else {
         WWMHelpers.storage.remove('wwm_opt_best_v1');
       }
