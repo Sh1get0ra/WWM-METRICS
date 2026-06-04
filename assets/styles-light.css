@@ -91,7 +91,9 @@ html[data-theme="light"] {
   --c-surf-warm-2:        #ede0c0;
   --c-toast-bg:           #fff8e8;
   --c-modal-a-option-bg:  #f4e8cc;
-  --c-text-warm:          #5a3a20;  /* modal-a 系 secondary text 統一色 */
+  --c-text-warm:               #5a3a20;  /* modal-a 系 secondary text 統一色 */
+  --c-border-soft-warm:        rgba(40,25,18,0.18);  /* 暖色系 soft border (modal-a, mobile overlay) */
+  --c-border-mid-warm:         rgba(40,25,18,0.25);  /* 暖色系 mid border (modal-a select/input) */
 }
 
 html[data-theme="light"] body {
@@ -491,16 +493,16 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-col,
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-current,
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-new {
   background: var(--hover-mid-2) !important;
-  border-color: rgba(40,25,18,0.18) !important;
+  border-color: var(--c-border-soft-warm) !important;
 }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-header { color: var(--brown-1) !important; background: var(--gold-mid) !important; }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-header { color: var(--vermilion-deep) !important; text-shadow: none !important; background: linear-gradient(90deg, var(--vermilion-bright-tint), rgba(232,81,58,0.05)) !important; }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select { background: var(--gold-mid) !important; color: var(--brown-1) !important; border-color: rgba(40,25,18,0.25) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select { background: var(--gold-mid) !important; color: var(--brown-1) !important; border-color: var(--c-border-mid-warm) !important; }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-select { background: linear-gradient(90deg, var(--vermilion-bright-tint), rgba(232,81,58,0.05)) !important; color: var(--vermilion-deep) !important; border-color: rgba(40,25,18,0.25) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-select { background: linear-gradient(90deg, var(--vermilion-bright-tint), rgba(232,81,58,0.05)) !important; color: var(--vermilion-deep) !important; border-color: var(--c-border-mid-warm) !important; }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-name { color: var(--brown-1) !important; }
 
@@ -509,9 +511,9 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val-input { color: var(--verm
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-stat-select,
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val-input {
-  background: rgba(255,255,255,0.55) !important;
+  background: var(--hover-strong) !important;
   color: var(--brown-1) !important;
-  border-color: rgba(40,25,18,0.25) !important;
+  border-color: var(--c-border-mid-warm) !important;
 }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv,
@@ -527,7 +529,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-purple { backgroun
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.13) !important; color: #2a5aa0 !important; border-color: rgba(40,90,160,0.5) !important; }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-footer-a { border-color: rgba(40,25,18,0.18) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-footer-a { border-color: var(--c-border-soft-warm) !important; }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-delta-label { color: var(--c-text-warm) !important; }
 
@@ -563,7 +565,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select opti
 }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
-  background-color: rgba(255,255,255,0.55) !important;
+  background-color: var(--hover-strong) !important;
 }
 
 html[data-theme="light"] .wwm-brand-sub {
@@ -1044,7 +1046,7 @@ html[data-theme="light"] .wwm-mobile-stat-overlay {
 
 html[data-theme="light"] .wwm-mobile-stat-overlay-header {
     background: linear-gradient(180deg, rgba(248,238,210,0.95), rgba(235,222,188,0.92));
-    border-bottom-color: rgba(40,25,18,0.18);
+    border-bottom-color: var(--c-border-soft-warm);
   }
 
 html[data-theme="light"] .wwm-mobile-stat-overlay-title { color: var(--vermilion); }
@@ -1057,7 +1059,7 @@ html[data-theme="light"] .wwm-mobile-anlz-overlay {
 
 html[data-theme="light"] .wwm-mobile-anlz-overlay-header {
     background: linear-gradient(180deg, rgba(248,238,210,0.95), rgba(235,222,188,0.92));
-    border-bottom-color: rgba(40,25,18,0.18);
+    border-bottom-color: var(--c-border-soft-warm);
   }
 
 html[data-theme="light"] .wwm-mobile-anlz-overlay-title { color: var(--vermilion-deep); }
