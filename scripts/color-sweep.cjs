@@ -30,38 +30,69 @@ const colorMap = {
   },
   // rgba constants — key: "r,g,b,alpha" where alpha is normalized parseFloat string.
   rgba: {
+    // vermilion (rgb 200,60,43) 派生
     '200,60,43,0.05': '--vermilion-trace',
     '200,60,43,0.08': '--vermilion-faint',
     '200,60,43,0.1':  '--vermilion-tint',
     '200,60,43,0.15': '--vermilion-soft',
+    '200,60,43,0.18': '--vermilion-soft-light',
     '200,60,43,0.2':  '--vermilion-soft-2',
     '200,60,43,0.3':  '--vermilion-mid',
     '200,60,43,0.35': '--vermilion-mid-2',
+    '200,60,43,0.4':  '--vermilion-mid-strong',
     '200,60,43,0.55': '--vermilion-strong',
+    // vermilion-bright (rgb 232,81,58) 派生
     '232,81,58,0.15': '--vermilion-bright-trace',
+    '232,81,58,0.18': '--vermilion-bright-tint',
     '232,81,58,0.25': '--vermilion-bright-soft',
+    '232,81,58,0.4':  '--vermilion-bright-soft-mid',
     '232,81,58,0.45': '--vermilion-bright-mid',
+    '232,81,58,0.55': '--vermilion-bright-mid-2',
+    '232,81,58,0.6':  '--vermilion-bright-glow',
     '232,81,58,0.7':  '--vermilion-bright-strong',
+    // gold (rgb 201,164,90) 派生
     '201,164,90,0.05': '--gold-trace',
     '201,164,90,0.08': '--gold-faint',
     '201,164,90,0.12': '--gold-tint',
     '201,164,90,0.2':  '--gold-soft',
     '201,164,90,0.3':  '--gold-mid',
     '201,164,90,0.5':  '--gold-strong',
+    // gold-bright (rgb 240,210,138) 派生
     '240,210,138,0.08': '--gold-bright-faint',
+    '240,210,138,0.12': '--gold-bright-tint',
     '240,210,138,0.25': '--gold-bright-soft',
+    '240,210,138,0.4':  '--gold-bright-mid-2',
     '240,210,138,0.5':  '--gold-bright-mid',
     '240,210,138,0.7':  '--gold-bright-strong',
+    // overlay (rgb 0,0,0) 派生
     '0,0,0,0.15': '--overlay-trace',
+    '0,0,0,0.25': '--overlay-tint',
     '0,0,0,0.3':  '--overlay-soft',
+    '0,0,0,0.4':  '--overlay-soft-mid',
+    '0,0,0,0.45': '--overlay-soft-2',
     '0,0,0,0.5':  '--overlay-mid',
+    '0,0,0,0.55': '--overlay-mid-2',
     '0,0,0,0.6':  '--overlay-heavy',
+    // hover (rgb 255,255,255) 派生
     '255,255,255,0.03': '--hover-trace',
     '255,255,255,0.1':  '--hover-soft',
+    '255,255,255,0.25': '--hover-mid',
+    '255,255,255,0.4':  '--hover-mid-2',
+    '255,255,255,0.5':  '--hover-strong',
+    // jade-bright (rgb 168,212,180) 派生 (constant — light で値変化なし)
+    '168,212,180,0.4':  '--jade-bright-mid',
+    '168,212,180,0.55': '--jade-bright-strong',
   },
 };
 
-const stats = { hex: 0, rgba: 0, skippedDeclLines: 0 };
+// Tokens defined in styles.css (built dynamically below).
+// Used for fallback-strip: var(--X, raw) -> var(--X) if X is defined.
+const definedTokens = new Set();
+// Token-name prefixes to EXCLUDE from fallback-strip (font / safe-area might
+// legitimately want fallback for older browsers).
+const STRIP_EXCLUDE_PREFIXES = ['--f-', '--safe-'];
+
+const stats = { hex: 0, rgba: 0, skippedDeclLines: 0, fallbackStripped: 0 };
 
 function expandHex(h) {
   // #abc -> #aabbcc, #aabbcc -> #aabbcc
@@ -83,6 +114,12 @@ function normAlpha(a) {
 
 let content = fs.readFileSync(path, 'utf8');
 const lines = content.split('\n');
+
+// Pass 0: build definedTokens set from --name: declarations.
+for (const line of lines) {
+  const m = line.match(/^\s*(--[a-zA-Z0-9-]+)\s*:/);
+  if (m) definedTokens.add(m[1]);
+}
 
 for (let i = 0; i < lines.length; i++) {
   let line = lines[i];
@@ -121,8 +158,21 @@ for (let i = 0; i < lines.length; i++) {
     }
   );
 
+  // Fallback-strip: var(--name, <fallback>) -> var(--name).
+  // Fallback must be paren-free (skips nested var() — handled separately).
+  // Token must be defined AND not in STRIP_EXCLUDE_PREFIXES.
+  line = line.replace(
+    /var\((--[a-zA-Z0-9-]+),\s*[^()]+?\)/g,
+    (m, name) => {
+      if (!definedTokens.has(name)) return m;
+      if (STRIP_EXCLUDE_PREFIXES.some((p) => name.startsWith(p))) return m;
+      stats.fallbackStripped++;
+      return `var(${name})`;
+    }
+  );
+
   lines[i] = line;
 }
 
 fs.writeFileSync(path, lines.join('\n'), 'utf8');
-console.log(`[color-sweep] hex=${stats.hex} rgba=${stats.rgba} skipped-decl-lines=${stats.skippedDeclLines}`);
+console.log(`[color-sweep] hex=${stats.hex} rgba=${stats.rgba} fallback-stripped=${stats.fallbackStripped} skipped-decl-lines=${stats.skippedDeclLines}`);
