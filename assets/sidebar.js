@@ -605,7 +605,7 @@ async function renderAffixRanking(roleInfo, params) {
         p2[t.key] = (p2[t.key] || 0) + t.delta;
       }
       window.computeExpected(p2);
-      const newScore = (window.__WWM_LAST_RESULT?.statusScore || 0) + _set4Bonus(roleInfo);
+      const newScore = (WWMState.lastResult?.statusScore || 0) + _set4Bonus(roleInfo);
       results.push({ label: t.label, delta: newScore - baseScore });
     } catch (e) {}
   }
@@ -690,12 +690,12 @@ async function renderAffixRanking(roleInfo, params) {
             p2[k] = (p2[k] || 0) + delta;
           }
           window.computeExpected(p2);
-          const newScore = (window.__WWM_LAST_RESULT?.statusScore || 0) + _set4Bonus(roleInfo);
+          const newScore = (WWMState.lastResult?.statusScore || 0) + _set4Bonus(roleInfo);
           const dEl = root.querySelector(`[data-delta-for="${k}"]`);
           if (dEl) dEl.textContent = `+${(newScore - baseScore).toFixed(1)}`;
           // 復元 (base params で 1回再計算 → DOM正常化)
           window._SILENT_COMPUTE = false;
-          if (window.__WWM_PARAMS) window.computeExpected(window.__WWM_PARAMS);
+          if (WWMState.params) window.computeExpected(WWMState.params);
         } catch(e) { window._SILENT_COMPUTE = false; }
       }, 250);
     });
@@ -782,7 +782,7 @@ async function renderOptimization(roleInfo, params, opts) {
     const wasAborted = (window._OPT_TOKEN || 0) !== (tokenBefore + 1);
     if (!wasAborted) {
       try {
-        if (window.WWMHero) window.WWMHero.update(window.__WWM_PARAMS || params);
+        if (window.WWMHero) window.WWMHero.update(WWMState.params || params);
       } catch(_) {}
     }
   }
@@ -1084,7 +1084,7 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
   }
   // ルーレット停止 + 静的 tier 描画
   if (typeof _stopTierRoulette === 'function') _stopTierRoulette();
-  if (window.WWMHero && window.__WWM_PARAMS) { try { window.WWMHero.update(window.__WWM_PARAMS); } catch(_) {} }
+  if (window.WWMHero && WWMState.params) { try { window.WWMHero.update(WWMState.params); } catch(_) {} }
   root.innerHTML = `
     <div class="wwm-analysis-card wwm-modal-square">
       <div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/anvil-impact.svg');"></div>
@@ -1120,7 +1120,7 @@ function _exportOptSteps() {
 }
 function _applyOptSteps(stepsToApply) {
   if (!stepsToApply || !stepsToApply.length) { alert('適用する swap なし'); return; }
-  const origRi = window.__WWM_ROLEINFO;
+  const origRi = WWMState.roleInfo;
   if (!origRi) return;
   if (!window.__WWM_VIRTUAL) window.__WWM_VIRTUAL = {};
   for (const step of stepsToApply) {
@@ -1164,7 +1164,7 @@ function _shareBuildUrl() {
   // SHARE Build mode 中は 他人ビルドの再配布回避のため SHARE生成 禁止
   if (WWMState.blockIfShared((window.T?.sharedBuildShareBlocked) ?? '閲覧モード中: SHARE URL 生成は無効化されています (他人のビルドを再配布できません)')) return;
   // 受信側は index.html inline script で memory-only mode 処理 (localStorage 浸食回避)
-  const ri = window.__WWM_ROLEINFO;
+  const ri = WWMState.roleInfo;
   if (!ri) { alert('build データなし。先に import してください。'); return; }
   const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   // payload 軽量化: base64画像 (avatar / xinfaIcons) を除外。
@@ -1191,7 +1191,7 @@ function _shareBuildUrl() {
   delete riLight.bodyType;       // キャラ体型
   delete riLight.school;         // debug log のみ使用、 表示不要
   // OBS view 武格指数 / Tier badge 表示用に baseline + opt_best 同梱 (数百バイト、 URL長影響軽微)
-  const baseline = window.__WWM_BASELINE || null;
+  const baseline = WWMState.baseline || null;
   const optBest  = window.__WWM_OPT_BEST || null;
   // baseAffixes slim化: {equipmentDetails:[id,val,ratio,rank,useful]} → [id,val,ratio,rank,useful]
   //   + ratio 小数3桁丸め、 boolean→0/1 で 50%程縮小。 受信側 inline script で復元。
@@ -1555,7 +1555,7 @@ async function renderSidebar(params) {
   _CURRENT_PARAMS = params;
   // 総合武力 = roleInfo.xiuWeiKungFu (現在値)
   let totalMartial = '-';
-  const ri = window.__WWM_ROLEINFO;
+  const ri = WWMState.roleInfo;
   if (ri?.xiuWeiKungFu) totalMartial = ri.xiuWeiKungFu.toLocaleString();
   else if (ri?.maxXiuWeiKungFu) totalMartial = ri.maxXiuWeiKungFu.toLocaleString();
   const _avSrc = ri?._avatarBase64 || ri?._avatarUrl || (ri?.roleAvatar && window.WWM_AVATAR_ICONS?.[ri.roleAvatar]) || '';
@@ -1564,7 +1564,7 @@ async function renderSidebar(params) {
   const importBtnLabel = (window.T && window.T.importBtn) || 'IMPORT';
   const titleLabel = _label(cfg.header?.title, '総合武力');
   // 再render時に score が "-" に消えないよう baseline から直接埋め込む (updateHero タイミング非依存)
-  const _bl = window.__WWM_BASELINE;
+  const _bl = WWMState.baseline;
   const martialScoreStr = (_bl && typeof _bl.statusScore === 'number') ? Math.round(_bl.statusScore).toLocaleString() : '-';
   // tier は __WWM_OPT_BEST 確定後に updateHero で再評価 (opt未完了時 空)。初期 render は空にしておく。
   const martialTier = '';
@@ -1887,7 +1887,7 @@ function _set4Bonus(roleInfo) {
 }
 // 共通: compute + 4-set bonus
 function _scoreWithBonus(roleInfo) {
-  const base = window.__WWM_LAST_RESULT?.statusScore || 0;
+  const base = WWMState.lastResult?.statusScore || 0;
   return base + _set4Bonus(roleInfo);
 }
 window.__WWM_SET4_BONUS_OF = _set4Bonus;
@@ -1941,7 +1941,7 @@ async function _computeSlotContributions(roleInfo, slots, suffixSlots, set4Map) 
 async function _computeGearCardScores(roleInfo) {
   if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return;
   const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
-  const origRi = window.__WWM_ROLEINFO;
+  const origRi = WWMState.roleInfo;
   const effRi = roleInfo;  // 既に effective が渡される想定 (renderGearGrid から呼ばれる)
   const eqDet = effRi?.wearEquipsDetailed || {};
   const slots = _GEAR_SLOT_ORDER.filter(s => eqDet[s]);
@@ -2025,10 +2025,10 @@ function renderXinfaGrid(roleInfo) {
   const xinfaMap = window.WWM_XINFA || {};
   const state = (typeof _getEffectiveState === 'function') ? _getEffectiveState() : WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   const tiers = state?.xinfaTiers || {};
-  const xinfaIconsRaw = window.__WWM_ROLEINFO?._xinfaIcons || roleInfo?._xinfaIcons || [];
-  const xinfaIconsB64 = window.__WWM_ROLEINFO?._xinfaIconsBase64 || roleInfo?._xinfaIconsBase64 || [];
+  const xinfaIconsRaw = WWMState.roleInfo?._xinfaIcons || roleInfo?._xinfaIcons || [];
+  const xinfaIconsB64 = WWMState.roleInfo?._xinfaIconsBase64 || roleInfo?._xinfaIconsBase64 || [];
   const xinfaIcons = xinfaIconsRaw.map((u, i) => xinfaIconsB64[i] || u);
-  const origPassive = window.__WWM_ROLEINFO?.passiveSlots || [];
+  const origPassive = WWMState.roleInfo?.passiveSlots || [];
   const cards = [0,1,2,3].map(i => {
     const xid = passive[i];
     const xinfa = xid ? xinfaMap[xid] : null;
@@ -2144,7 +2144,7 @@ async function _computeXinfaCardScores(roleInfo) {
 
 // ── Xinfa Edit modal ───────────────────────────────────────────
 function openXinfaEdit(slotIdx) {
-  const origRi = window.__WWM_ROLEINFO;
+  const origRi = WWMState.roleInfo;
   if (!origRi) return;
   const lang = _curLang();
   const xinfaMap = window.WWM_XINFA || {};
@@ -2249,7 +2249,7 @@ function openXinfaEdit(slotIdx) {
     if (!id) return '';
     const x = xinfaMap[id];
     if (!x?.attributeBuff) return '';
-    const effRi = (typeof _getEffectiveRoleInfo === 'function') ? _getEffectiveRoleInfo() : (window.__WWM_ROLEINFO || {});
+    const effRi = (typeof _getEffectiveRoleInfo === 'function') ? _getEffectiveRoleInfo() : (WWMState.roleInfo || {});
     const myKfs = [effRi?.kongfuMain, effRi?.kongfuSub].filter(Boolean).map(v => String(v));
     const lines = [];
     for (let t = 0; t <= 6; t++) {
@@ -2426,7 +2426,7 @@ function openXinfaEdit(slotIdx) {
 
 // ── Virtual gear state (Edit modal適用結果) ─────────────────────
 function _getEffectiveRoleInfo() {
-  const orig = window.__WWM_ROLEINFO;
+  const orig = WWMState.roleInfo;
   if (!orig) return null;
   const vmap = window.__WWM_VIRTUAL || {};
   const vkf = window.__WWM_VIRTUAL_KONGFU || {};
@@ -2513,7 +2513,7 @@ function _refreshAll() {
   const state = _getEffectiveState();
   if (window.WWMStats) {
     window.WWMStats.buildStatParams(ri, state).then(async params => {
-      window.__WWM_PARAMS = params;
+      WWMState.params = params;
       await window.WWMSidebar.render(params);
       // donut/hero を最適化前に先行反映 (opt前なので通常更新)
       if (window.WWMHero) window.WWMHero.update(params);
@@ -2833,7 +2833,7 @@ function _getAffixOptions(currentAffixId, slot, idx, allAffixes) {
     if (blockedKeys.has(sk)) continue;
     // slot 別 出現ルール
     if (!_isAffixAllowedInSlot(sk, slot)) continue;
-    if (!_isWeaponDmgMatch(sk, slot, window.__WWM_ROLEINFO)) continue;
+    if (!_isWeaponDmgMatch(sk, slot, WWMState.roleInfo)) continue;
     // idx 0 はダメ増加系/武学固有 出現不可
     if (idx === 0 && !_isAffixAllowedAtIdx0(sk)) continue;
     // 防具 idx 0 は外功攻撃 / 各属性攻撃 出現不可
@@ -2859,7 +2859,7 @@ function _getAffixOptions(currentAffixId, slot, idx, allAffixes) {
 }
 
 function openGearEdit(slot) {
-  const origRi = window.__WWM_ROLEINFO;
+  const origRi = WWMState.roleInfo;
   const origEq = origRi?.wearEquipsDetailed?.[slot];
   if (!origEq) { alert('装備データなし: slot ' + slot); return; }
   const label = _GEAR_SLOT_LABELS[slot] || slot;
@@ -3111,14 +3111,14 @@ function openGearEdit(slot) {
       // virtual compute
       const vParams = await window.WWMStats.buildStatParams(vRi, state);
       window.computeExpected(vParams);
-      const vScore = (window.__WWM_LAST_RESULT?.statusScore || 0) + _set4Bonus(vRi);
+      const vScore = (WWMState.lastResult?.statusScore || 0) + _set4Bonus(vRi);
       // baseline 取得 (現状 effective roleInfo)
-      const origParams = window.__WWM_PARAMS;
+      const origParams = WWMState.params;
       const effBaseRi = _getEffectiveRoleInfo() || origRi;
       let baseScore = 0;
       if (origParams) {
         window.computeExpected(origParams);
-        baseScore = (window.__WWM_LAST_RESULT?.statusScore || 0) + _set4Bonus(effBaseRi);
+        baseScore = (WWMState.lastResult?.statusScore || 0) + _set4Bonus(effBaseRi);
       }
       const delta = Math.round(vScore - baseScore);
       const sign = delta > 0 ? '+' : '';
@@ -3450,7 +3450,7 @@ function updateHero(params) {
   window.__WWM_ALLOW_DONUT = true;
   let result;
   try {
-    result = window.computeExpected(params) || window.__WWM_LAST_RESULT || {};
+    result = window.computeExpected(params) || WWMState.lastResult || {};
   } finally {
     window.__WWM_ALLOW_DONUT = false;
   }
@@ -3459,7 +3459,7 @@ function updateHero(params) {
   const statusScore = Math.round((result.statusScore || 0) + _set4Bonus(effRi));
   const setText = window.WWMHelpers?.dom?.setText || ((id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; });
   // hero-current = baseline (import時固定) または statusScore (baseline未取得時)
-  const _baseline = window.__WWM_BASELINE;
+  const _baseline = WWMState.baseline;
   // baseline (import時固定) があればそれ。無効/未取得時は null → 武格指数 "-" (再import促し)。
   // ※現在 statusScore へフォールバックしない (古い基準と新計算の混在を避ける)。
   const _hasBaseline = _baseline && typeof _baseline.statusScore === 'number';
@@ -3495,17 +3495,17 @@ function updateHero(params) {
   const sbMs = document.getElementById('wwmSbMartialScore');
   // opt実行中はルーレット演出に任せて、updateHero は tier を上書きしない。
   if (sbTb && !window.__WWM_OPT_RUNNING) {
-    const baselineScore = window.__WWM_BASELINE?.statusScore;
+    const baselineScore = WWMState.baseline?.statusScore;
     const baselineTier = _tierFromBest(typeof baselineScore === 'number' ? baselineScore : null);
     sbTb.textContent = baselineTier;
     sbTb.className = 'wwm-sb-tier-badge tier-' + baselineTier;
   }
   if (sbMs) {
-    const baselineScore = window.__WWM_BASELINE?.statusScore;
+    const baselineScore = WWMState.baseline?.statusScore;
     sbMs.textContent = (typeof baselineScore === 'number') ? Math.round(baselineScore).toLocaleString() : '-';
   }
   // NEXT 側 = 仮想装備込みの statusScore (即時反映 + countUp再同期)
-  const baseline = window.__WWM_BASELINE;
+  const baseline = WWMState.baseline;
   const baseEl = document.getElementById('heroScoreBaseline');
   if (baseline && typeof baseline.statusScore === 'number') {
     const baseScore = statusScore; // NEXT = 仮想装備込み
@@ -3583,7 +3583,7 @@ function _detectUnknown(roleInfo) {
 }
 
 function openUnknownReport() {
-  const ri = window.__WWM_ROLEINFO;
+  const ri = WWMState.roleInfo;
   if (!ri) return;
   const u = _detectUnknown(ri);
   const total = u.kongfu.length + u.xinfa.length + u.affix.length;
@@ -3844,7 +3844,7 @@ function openArsenalEdit() {
     previewTimer = setTimeout(_runPreview, 150);
   }
   async function _runPreview() {
-    const ri = (typeof _getEffectiveRoleInfo === 'function') ? _getEffectiveRoleInfo() : window.__WWM_ROLEINFO;
+    const ri = (typeof _getEffectiveRoleInfo === 'function') ? _getEffectiveRoleInfo() : WWMState.roleInfo;
     if (!ri || !window.WWMStats?.buildStatParams) return;
     const baseState = (typeof _getEffectiveState === 'function') ? _getEffectiveState() : WWMHelpers.storage.loadJSON('wwm_last_state_v1');
     try {
@@ -4054,7 +4054,7 @@ function _qualRender() {
   const root = document.getElementById('wwmQuality');
   if (!root) return;
   const T_ = window.T || {};
-  const ri = window.__WWM_ROLEINFO;
+  const ri = WWMState.roleInfo;
   if (!ri || !ri.wearEquipsDetailed) {
     root.innerHTML = '<div class="wwm-analysis-card wwm-modal-square">'
       + '<div class="wwm-analysis-header"><h3>'+(T_.qualityTab||'ロール品質')+'</h3></div>'

@@ -135,12 +135,12 @@ function computeExpected(pIn) {
   else                                  tier = 'C';
 
   const result = { expected: expectedTotal, statusScore: statusScore, tier: tier, physRatio: physRatio, elemRatio: elemRatio };
-  window.__WWM_LAST_RESULT = result;
+  WWMState.lastResult = result;
 
   // ── donut / 寄与率 DOM 更新 (debounce 16ms化、 連続computeExpected呼出時 最後の値のみ反映)
   // import前 (__WWM_ROLEINFO 未存在) は更新 skip → '—' のまま保持
   try {
-    if (!window.__WWM_ROLEINFO) throw 'NO_IMPORT';
+    if (!WWMState.roleInfo) throw 'NO_IMPORT';
     const normT = dmg(avgPhys, avgMain, avgSub);
     const critT = dmg(avgPhys, avgMain, avgSub, 1 + p.critBoost);
     const sympT = dmg(p.maxPhysATK, p.maxElemMain, p.maxElemSub, 1 + p.sympathyBoost);

@@ -90,7 +90,7 @@ function setLang(lang) {
   renderPresetSlots();
   if (typeof window._refreshAll === 'function') window._refreshAll();
   // import前でも sidebar empty state を再render (翻訳反映)
-  if (window.WWMSidebar?.render && !window.__WWM_ROLEINFO) {
+  if (window.WWMSidebar?.render && !WWMState.roleInfo) {
     try { window.WWMSidebar.render(null); } catch(_) {}
   }
 }
@@ -302,7 +302,7 @@ function setTheme(theme) {
   if (tog) tog.textContent = theme === 'light' ? '☾' : '☀';
   WWMHelpers.storage.saveStr('wwm_theme', theme);
   // theme切替時 hero score色 (TIER_COLOR) 再適用
-  if (window.WWMHero && window.__WWM_PARAMS) window.WWMHero.update(window.__WWM_PARAMS);
+  if (window.WWMHero && WWMState.params) window.WWMHero.update(WWMState.params);
 }
 function initTheme() {
   const saved = WWMHelpers.storage.loadStr('wwm_theme');
@@ -355,7 +355,7 @@ function savePreset(i) {
     kongfu: window.__WWM_VIRTUAL_KONGFU || null,
     xinfa:  window.__WWM_VIRTUAL_XINFA || null
   };
-  const baseline = window.__WWM_BASELINE || null;
+  const baseline = WWMState.baseline || null;
   presets[i] = { name, importSnap, stateSnap, virtual, baseline };
   WWMHelpers.storage.saveJSON(PRESET_KEY, presets);
   renderPresetSlots();
@@ -376,7 +376,7 @@ function loadPreset(i) {
       const curVer = window.WWM_SCORE_VERSION || 1;
       if (p.baseline.scoreVer === curVer) {
         // 現行バージョンのプリセット baseline → 採用
-        window.__WWM_BASELINE = p.baseline;
+        WWMState.baseline = p.baseline;
         // OBS view (表示専用) では baseline を書き込まない (読込のみ)。
         if (!document.documentElement.classList.contains('wwm-view-sidebar')) {
           if (window.WWMBaseline) window.WWMBaseline.save(p.baseline);
@@ -385,7 +385,7 @@ function loadPreset(i) {
       } else {
         // 古いバージョン (scoreVer無し含む) のプリセット baseline → 無効化 + 再import促しバナー。
         // プリセットは過去スナップで現行 json 計算の保証なし → 安全側で破棄 (再計算せず drift回避)。
-        window.__WWM_BASELINE = null;
+        WWMState.baseline = null;
         WWMHelpers.storage.remove('wwm_baseline_score_v1');
         if (typeof window._showScoreBanner === 'function') window._showScoreBanner();
       }
@@ -393,7 +393,7 @@ function loadPreset(i) {
   } catch(_) {}
   if (p.importSnap?.data) {
     try {
-      window.__WWM_ROLEINFO = p.importSnap.data;
+      WWMState.roleInfo = p.importSnap.data;
       if (typeof window._refreshAll === 'function') window._refreshAll();
     } catch(_) {}
   }

@@ -369,7 +369,7 @@ function _attachEnhanceArsenalEvents(root, state) {
       const row = e.target.closest('[data-xinfa-row]');
       const effEl = row?.querySelector('.wwm-xinfa-effect');
       if (effEl) {
-        const passive = window.__WWM_ROLEINFO?.passiveSlots || [];
+        const passive = WWMState.roleInfo?.passiveSlots || [];
         const xid = passive[parseInt(slot,10)];
         const xinfa = window.WWM_XINFA?.[xid];
         effEl.innerHTML = xinfa ? _xinfaEffectsText(xinfa, state.xinfaTiers[slot]) : '';
@@ -888,8 +888,8 @@ function applyImport(data, importedAt, state) {
   // stat params 構築 + sidebar 描画
   if (window.WWMStats && window.WWMSidebar) {
     window.WWMStats.buildStatParams(data, state).then(params => {
-      window.__WWM_PARAMS = params;
-      window.__WWM_ROLEINFO = data;
+      WWMState.params = params;
+      WWMState.roleInfo = data;
       window.WWMSidebar.render(params);
       if (window.WWMGear) window.WWMGear.render(data);
       if (window.WWMXinfa) window.WWMXinfa.render(data);
@@ -897,17 +897,17 @@ function applyImport(data, importedAt, state) {
       if (window.WWMRanking) window.WWMRanking.render(data, params);
       if (window.WWMHero) window.WWMHero.update(params);
       // Phase 1: import 直後 baseline score 保存
-      const res = window.__WWM_LAST_RESULT;
+      const res = WWMState.lastResult;
       if (res) {
         const bonus = (typeof window.__WWM_SET4_BONUS_OF === 'function')
           ? window.__WWM_SET4_BONUS_OF(data) : 0;
-        window.__WWM_BASELINE = { expected: res.expected, statusScore: res.statusScore + bonus, tier: res.tier, ts: Date.now(), scoreVer: window.WWM_SCORE_VERSION || 1 };
+        WWMState.baseline = { expected: res.expected, statusScore: res.statusScore + bonus, tier: res.tier, ts: Date.now(), scoreVer: window.WWM_SCORE_VERSION || 1 };
         // 再import 成功 → 計算更新バナーがあれば消す
         if (typeof window._hideScoreBanner === 'function') window._hideScoreBanner();
         // OBS view (表示専用) では baseline を書き込まない (読込のみ)。スコアは変動しないので保存不要、汚染源を断つ。
         if (!document.documentElement.classList.contains('wwm-view-sidebar')) {
-          if (window.WWMBaseline) window.WWMBaseline.save(window.__WWM_BASELINE);
-          else { WWMHelpers.storage.saveJSON('wwm_baseline_score_v1', window.__WWM_BASELINE); }
+          if (window.WWMBaseline) window.WWMBaseline.save(WWMState.baseline);
+          else { WWMHelpers.storage.saveJSON('wwm_baseline_score_v1', WWMState.baseline); }
         }
         if (window.WWMHero) window.WWMHero.update(params);
         if (window.WWMHistory) window.WWMHistory.record(data, { statusScore: res.statusScore + bonus, expected: res.expected, tier: res.tier });
@@ -1016,11 +1016,11 @@ function _autoLoadLastImport() {
     if (bl) {
       const curVer = window.WWM_SCORE_VERSION || 1;
       if (bl.scoreVer === curVer) {
-        window.__WWM_BASELINE = bl;
+        WWMState.baseline = bl;
       } else {
         // scoreVer 不一致 (無し=機能導入前 含む) → baseline 無効化 (再計算せず破棄=drift回避) + 再import促しバナー。
         // ※マイグレ(無し→現行付与)は廃止: baseline は未リリース(Alpha限定)で旧データ救済不要。loadPreset と挙動統一。
-        window.__WWM_BASELINE = null;
+        WWMState.baseline = null;
         WWMHelpers.storage.remove('wwm_baseline_score_v1');
         if (typeof window._showScoreBanner === 'function') window._showScoreBanner();
       }
@@ -1044,13 +1044,13 @@ function _autoLoadLastImport() {
     return;
   }
   if (window.WWMStats && window.WWMSidebar) {
-    window.__WWM_ROLEINFO = stored.data;
+    WWMState.roleInfo = stored.data;
     // virtual反映付き refresh (effective ri 使用)
     if (typeof window._refreshAll === 'function') {
       window._refreshAll();
     } else {
       window.WWMStats.buildStatParams(stored.data, stored.state).then(params => {
-        window.__WWM_PARAMS = params;
+        WWMState.params = params;
         window.WWMSidebar.render(params);
         if (window.WWMGear) window.WWMGear.render(stored.data);
         if (window.WWMXinfa) window.WWMXinfa.render(stored.data);
