@@ -241,6 +241,15 @@
   --ratio-ok:        #ffc107;  /* >= 0.6 */
   --ratio-warn:      #ff9800;  /* >= 0.4 */
   --ratio-bad:       #e74c3c;  /* < 0.4 */
+
+  /* ─── Phase 5.3-B: Semantic component tokens ───
+   * dark→light mapping を 1 か所に集約。 component 用途意図を token 名で表現。
+   * light override は styles-light.css の html[data-theme="light"] block に。
+   */
+  --c-surf-warm-1:        var(--surf-1);    /* warm card/modal bg gradient 上 */
+  --c-surf-warm-2:        var(--surf-2);    /* warm card/modal bg gradient 下 */
+  --c-toast-bg:           var(--bg-1);      /* toast notification bg */
+  --c-modal-a-option-bg:  var(--bg-raised); /* compare modal A select option bg */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1007,7 +1016,7 @@ footer strong { color: var(--gold); }
 
 #toast {
   position: fixed; bottom: 28px; right: 28px;
-  background: var(--bg-1); color: var(--paper);
+  background: var(--c-toast-bg); color: var(--paper);
   padding: 11px 18px;
   border: 1px solid var(--gold-deep); border-left: 3px solid var(--gold);
   font-family: var(--f-body); font-size: var(--text-12); font-weight: var(--fw-semibold);
@@ -1404,7 +1413,7 @@ footer strong { color: var(--gold); }
   z-index: 10;
   background:
     radial-gradient(ellipse at top right, var(--gold-bright-faint), transparent 55%),
-    linear-gradient(180deg, var(--surf-1), var(--surf-2));
+    linear-gradient(180deg, var(--c-surf-warm-1), var(--c-surf-warm-2));
   border: 1px solid var(--gold-deep);
   padding: var(--space-3) var(--space-3-5);
   margin-bottom: var(--space-2-5);
@@ -2288,7 +2297,7 @@ body.wwm-layout-active .wwm-footer {
   font-size: var(--text-md) !important;
   font-family: var(--f-display, 'Noto Serif JP') !important;
   font-weight: 700 !important;
-  background: var(--bg-raised) !important;
+  background: var(--c-modal-a-option-bg) !important;
   color: var(--paper) !important;
 }
 .wwm-cmp-modal-a .wwm-cmp-stat-select option {
@@ -2557,7 +2566,7 @@ body.wwm-layout-active .wwm-footer {
 .wwm-cmp-modal-a .wwm-modal-header h2 { align-items: flex-end !important; }
 /* 背景の赤いradial-gradient を消す */
 .wwm-cmp-modal-a {
-  background: linear-gradient(180deg, var(--surf-1), var(--surf-2)) !important;
+  background: linear-gradient(180deg, var(--c-surf-warm-1), var(--c-surf-warm-2)) !important;
 }
 /* ボタン: サンプルA 揃え (radius 0、 padding 7px 16px) */
 .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-primary {
