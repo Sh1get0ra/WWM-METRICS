@@ -124,6 +124,12 @@ html[data-theme="light"] {
   --c-modal-a-option-checked:  #e0cfa0;  /* modal-a select option:checked bg */
   --c-migration-accent:        #2d5a8a;  /* migration banner accent (青) */
   --c-orange-deep:             #b85a14;  /* light theme 暗オレンジ accent (share warn / rank-gold val) */
+
+  /* opt-* button cluster: 暖橙 scale (B11) */
+  --c-opt-border-soft:         rgba(120,60,20,0.35); /* opt-sort group/divider border */
+  --c-opt-border-mid:          rgba(120,60,20,0.4);  /* opt-btn border */
+  --c-opt-border-strong:       rgba(120,60,20,0.7);  /* opt-btn:hover border */
+  --c-opt-hover-bg:            rgba(184,134,42,0.12);/* opt-sort/opt-btn hover bg */
 }
 
 html[data-theme="light"] body {
@@ -345,18 +351,18 @@ html[data-theme="light"] .wwm-opt-loading {
   text-shadow: 0 0 8px rgba(168,120,40,0.3);
 }
 
-html[data-theme="light"] .wwm-opt-sort-group { border-color: rgba(120,60,20,0.35); }
+html[data-theme="light"] .wwm-opt-sort-group { border-color: var(--c-opt-border-soft); }
 
 html[data-theme="light"] .wwm-opt-sort-btn { color: #5a4838; }
 
-html[data-theme="light"] .wwm-opt-sort-btn:hover { background: rgba(184,134,42,0.12); color: var(--brown-1); }
+html[data-theme="light"] .wwm-opt-sort-btn:hover { background: var(--c-opt-hover-bg); color: var(--brown-1); }
 
 html[data-theme="light"] .wwm-opt-sort-btn.active { background: #b8862a; color: var(--c-fg-cream-bright); }
 
-html[data-theme="light"] .wwm-opt-sort-btn + .wwm-opt-sort-btn { border-left-color: rgba(120,60,20,0.35); }
+html[data-theme="light"] .wwm-opt-sort-btn + .wwm-opt-sort-btn { border-left-color: var(--c-opt-border-soft); }
 
-html[data-theme="light"] .wwm-opt-btn { color: #5a4220; border-color: rgba(120,60,20,0.4); }
-html[data-theme="light"] .wwm-opt-btn:hover { background: rgba(184,134,42,0.12); border-color: rgba(120,60,20,0.7); }
+html[data-theme="light"] .wwm-opt-btn { color: #5a4220; border-color: var(--c-opt-border-mid); }
+html[data-theme="light"] .wwm-opt-btn:hover { background: var(--c-opt-hover-bg); border-color: var(--c-opt-border-strong); }
 html[data-theme="light"] .wwm-opt-btn-apply { color: var(--jade-bright); border-color: rgba(45,90,58,0.4); }
 html[data-theme="light"] .wwm-opt-btn-apply:hover { background: rgba(168,212,180,0.25); border-color: rgba(45,90,58,0.7); }
 
