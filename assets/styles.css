@@ -95,6 +95,10 @@
   --jade-bright-mid:    rgba(168,212,180,0.40);
   --jade-bright-strong: rgba(168,212,180,0.55);
 
+  /* 特殊用途 constant tokens */
+  --select-bg:      #1a1a1a;  /* <select> option neutral gray bg (warm bg-raised と区別) */
+  --vermilion-note: #b8321f;  /* NOTE modal 巻物 accent (--vermilion より暗 saturated) */
+
   --bone:        #c9b88a;
   --bone-dim:    #9c8a6a;
 
@@ -194,7 +198,7 @@ body {
     radial-gradient(ellipse 50% 25% at 100% 0%, var(--gold-faint), transparent 70%),
     radial-gradient(ellipse 60% 70% at 100% 100%, var(--gold-trace), transparent 55%),
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n1'><feTurbulence type='fractalNoise' baseFrequency='0.45' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.85  0 0 0 0 0.65  0 0 0 0.08 0'/></filter><filter id='n2'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.9  0 0 0 0 0.8  0 0 0 0 0.6  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n1)'/><rect width='100%25' height='100%25' filter='url(%23n2)'/></svg>"),
-    linear-gradient(rgba(7,6,10,0.55), rgba(7,6,10,0.55)),
+    linear-gradient(var(--overlay-mid-2), var(--overlay-mid-2)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg-b74e3a33.png") center top / cover no-repeat fixed,
     var(--bg-0);
   min-height: 100vh;
@@ -2324,7 +2328,7 @@ html[data-theme="light"] .wwm-equip-liupai-badge {
 .wwm-equip-delta-pos { color: var(--jade-bright); text-shadow: 0 0 4px var(--jade-bright-mid); }
 .wwm-equip-delta-neg { color: var(--vermilion); text-shadow: 0 0 4px var(--vermilion-bright-soft-mid); }
 html[data-theme="light"] .wwm-equip-delta-pos { color: #2d5a3a; text-shadow: none; }
-html[data-theme="light"] .wwm-equip-delta-neg { color: #8a2418; text-shadow: none; }
+html[data-theme="light"] .wwm-equip-delta-neg { color: var(--vermilion-deep); text-shadow: none; }
 .wwm-equip-kongfu {
   display: block;
   font-size: var(--text-sm);
@@ -2364,7 +2368,7 @@ html[data-theme="light"] .wwm-equip-delta-neg { color: #8a2418; text-shadow: non
 .wwm-xinfa-cell > .wwm-xinfa-tier {
   grid-area: tier;
   padding: var(--space-half) var(--space-1-5);
-  background: #1a1a1a; color: inherit;
+  background: var(--select-bg); color: inherit;
   border: 1px solid #444; border-radius: 4px;
   font-size: var(--text-12);
 }
@@ -2410,7 +2414,7 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
 .wwm-edit-affix-val { font-size: var(--text-12); text-align: right; }
 .wwm-edit-affix-rank {
   padding: var(--space-half) var(--space-1); font-size: var(--text-12);
-  background: #1a1a1a; color: inherit;
+  background: var(--select-bg); color: inherit;
   border: 1px solid #444; border-radius: 4px;
 }
 .wwm-edit-affix-useful { font-size: var(--text-12); cursor: pointer; }
@@ -2821,7 +2825,7 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
 .wwm-cmp-modal-a .wwm-cmp-grid { position: relative; z-index: 1; }
 /* col / affix-rows 透過化 (背景icon 透けさせる) */
 .wwm-cmp-modal-a .wwm-cmp-col {
-  background: rgba(13,10,8,0.60) !important;
+  background: var(--overlay-heavy) !important;
 }
 .wwm-cmp-modal-a .wwm-cmp-rows {
   background: var(--overlay-trace) !important;
@@ -3027,7 +3031,7 @@ html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-val-input { color: #ffae8a !im
 }
 .wwm-cmp-kongfu-select {
   width: 100%;
-  background: #1a1a1a;
+  background: var(--select-bg);
   border: 1px solid #d4af37;
   border-radius: 4px;
   color: #d4af37;
@@ -3052,7 +3056,7 @@ html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-val-input { color: #ffae8a !im
 }
 .wwm-cmp-set-select {
   width: 100%;
-  background: #1a1a1a;
+  background: var(--select-bg);
   border: 1px solid #c389ff;
   border-radius: 4px;
   color: #c389ff;
@@ -3783,7 +3787,7 @@ html[data-theme="light"] .wwm-opt-check {
   grid-template-columns: 1fr 20px 110px;
 }
 .wwm-cmp-stat-select {
-  background: #1a1a1a;
+  background: var(--select-bg);
   border: 1px solid #444;
   border-radius: 4px;
   padding: var(--space-half) var(--space-1);
@@ -3807,7 +3811,7 @@ html[data-theme="light"] .wwm-opt-check {
 .wwm-cmp-val  { font-weight: var(--fw-bold); text-align: right; }
 .wwm-cmp-rank-sel {
   padding: var(--space-half) var(--space-1); font-size: var(--text-sm);
-  background: #1a1a1a; color: inherit;
+  background: var(--select-bg); color: inherit;
   border: 1px solid #444; border-radius: 4px;
 }
 .wwm-cmp-val-input { font-size: var(--text-sm); text-align: right; }
@@ -3824,7 +3828,7 @@ html[data-theme="light"] .wwm-opt-check {
 .wwm-enhance-label { font-weight: var(--fw-semibold); min-width: 50px; }
 .wwm-num-input {
   width: 60px; padding: var(--space-half) var(--space-1-5);
-  background: #1a1a1a; color: inherit;
+  background: var(--select-bg); color: inherit;
   border: 1px solid #444; border-radius: 4px;
   font-size: var(--text-md); text-align: right;
 }
@@ -4885,9 +4889,9 @@ html[data-theme="light"] .hero-wuxia .judge-val {
   text-shadow: 0 0 2px rgba(255,250,235,0.7);
 }
 /* 物理/属性 行は固定色なので個別調整 */
-html[data-theme="light"] .hero-wuxia #dmgPhysVal { color: #8a2418 !important; filter: none; }
+html[data-theme="light"] .hero-wuxia #dmgPhysVal { color: var(--vermilion-deep) !important; filter: none; }
 html[data-theme="light"] .hero-wuxia #dmgElemVal { color: #2d5a3a !important; filter: none; }
-html[data-theme="light"] .hero-wuxia .judge-dot-phys { border-color: #8a2418; box-shadow: 0 0 4px rgba(138,36,24,0.45); }
+html[data-theme="light"] .hero-wuxia .judge-dot-phys { border-color: var(--vermilion-deep); box-shadow: 0 0 4px rgba(138,36,24,0.45); }
 html[data-theme="light"] .hero-wuxia .judge-dot-elem { border-color: #2d5a3a; box-shadow: 0 0 4px rgba(45,90,58,0.45); }
 html[data-theme="light"] .hero-wuxia .judge-row-sep { border-top-color: rgba(40,25,18,0.2); }
 /* 朱墨筆 light: ダーク同等に見えるよう更に濃化 */
@@ -5759,7 +5763,7 @@ html[data-theme="light"] .wwm-anlz-bgicon {
 .wwm-note-seal {
   width: 36px; height: 36px;
   display: flex; align-items: center; justify-content: center;
-  background: #b8321f;
+  background: var(--vermilion-note);
   color: #f5e6c8;
   font-family: 'Noto Serif JP', serif;
   font-size: var(--text-lg); font-weight: 900;
@@ -5773,7 +5777,7 @@ html[data-theme="light"] .wwm-anlz-bgicon {
 }
 .wwm-note-btn {
   padding: 7px 14px;
-  background: linear-gradient(180deg, #b8321f 0%, #8a1f10 100%);
+  background: linear-gradient(180deg, var(--vermilion-note) 0%, #8a1f10 100%);
   color: #f5e6c8;
   border: 1px solid #5a1208;
   border-radius: 4px;
@@ -5788,7 +5792,7 @@ html[data-theme="light"] .wwm-anlz-bgicon {
   transition: filter .15s, transform .15s;
 }
 .wwm-note-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
-.wwm-note-btn-gh    { background: linear-gradient(180deg, #4a3a2a 0%, #2a1f14 100%); border-color: #1a0e08; }
+.wwm-note-btn-gh    { background: linear-gradient(180deg, #4a3a2a 0%, #2a1f14 100%); border-color: var(--bg-raised); }
 .wwm-note-btn-close { background: linear-gradient(180deg, #8a6f3a 0%, #5a4220 100%); border-color: #3a2810; }
 .wwm-note-btn svg { width: 12px; height: 12px; }
 
@@ -5804,7 +5808,7 @@ html[data-theme="light"] .wwm-anlz-bgicon {
   left: 50%; top: 50%;
   transform: translate(-50%, -50%);
   background: #d4b87c;
-  color: #b8321f;
+  color: var(--vermilion-note);
   padding: 0 var(--space-2);
   font-size: 9px;
 }
@@ -5856,7 +5860,7 @@ html[data-theme="light"] .wwm-anlz-bgicon {
   color: #5a1e10;
   margin: 0 0 var(--space-2);
   padding-left: var(--space-2-5);
-  border-left: 4px solid #b8321f;
+  border-left: 4px solid var(--vermilion-note);
   letter-spacing: 0.05em;
 }
 .wwm-note-list { margin: 0 0 var(--space-2) 0; padding-left: 22px; list-style: none; }
@@ -5864,7 +5868,7 @@ html[data-theme="light"] .wwm-anlz-bgicon {
 .wwm-note-list li::before {
   content: '・';
   position: absolute; left: -14px;
-  color: #b8321f; font-weight: 900;
+  color: var(--vermilion-note); font-weight: 900;
 }
 .wwm-note-list li b { color: #5a1e10; font-weight: 700; }
 .wwm-note-p { margin: 0 0 var(--space-2-5); }
@@ -5887,7 +5891,7 @@ html[data-theme="light"] .wwm-anlz-bgicon {
 .wwm-note-cl-date { font-size: var(--text-sm); color: #7a4220; margin-left: var(--space-2-5); font-weight: 400; }
 .wwm-note-cl-items { margin: var(--space-1-5) 0 0 0; padding-left: 22px; list-style: none; }
 .wwm-note-cl-items li { position: relative; margin-bottom: 3px; padding-left: var(--space-1); }
-.wwm-note-cl-items li::before { content: '・'; position: absolute; left: -14px; color: #b8321f; font-weight: 900; }
+.wwm-note-cl-items li::before { content: '・'; position: absolute; left: -14px; color: var(--vermilion-note); font-weight: 900; }
 .wwm-note-cl-items li.wwm-note-cl-featured {
   background: linear-gradient(90deg, var(--vermilion-soft), var(--vermilion-trace));
   border-left: 3px solid var(--vermilion);
@@ -6715,7 +6719,7 @@ html[data-theme="light"] .wwm-mobile-drawer * { color: var(--vermilion-deep); }
     z-index: 20 !important;
     margin: -8px -10px 8px !important;
     padding: var(--space-2-5) var(--space-3) !important;
-    background: #14100c !important;
+    background: var(--bg-raised) !important;
     border: 1px solid var(--gold-deep) !important;
     box-shadow: 0 6px 14px var(--overlay-mid) !important;
   }
@@ -6952,7 +6956,7 @@ html[data-theme="light"] .wwm-mobile-drawer * { color: var(--vermilion-deep); }
   .wwm-note-btn-close {
     background: var(--vermilion) !important;
     color: #fff !important;
-    border-color: #8a2818 !important;
+    border-color: var(--vermilion-deep) !important;
     font-weight: 700 !important;
   }
   .wwm-note-divider { display: none !important; }
