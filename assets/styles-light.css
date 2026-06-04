@@ -130,6 +130,11 @@ html[data-theme="light"] {
   --c-opt-border-mid:          rgba(120,60,20,0.4);  /* opt-btn border */
   --c-opt-border-strong:       rgba(120,60,20,0.7);  /* opt-btn:hover border */
   --c-opt-hover-bg:            rgba(184,134,42,0.12);/* opt-sort/opt-btn hover bg */
+
+  /* additional gold-deep glow scale + vermilion-deep mid (B12) */
+  --c-gold-deep-glow-1:        rgba(138,106,32,0.4); /* compare modal bg-icon drop-shadow */
+  --c-gold-deep-glow-2:        rgba(138,106,32,0.45);/* regular modal bg-icon drop-shadow (PC+mobile) */
+  --c-vermilion-deep-mid:      rgba(138,31,23,0.55); /* tier-SS / xinfa-tier-chip border */
 }
 
 html[data-theme="light"] body {
@@ -244,7 +249,7 @@ html[data-theme="light"] #toast { border-left-color: var(--gold-bright); }
 html[data-theme="light"] .tier-SS {
   color: var(--vermilion-deep);
   background: linear-gradient(135deg, var(--vermilion-soft-2), rgba(138,31,23,0.14));
-  border-color: rgba(138,31,23,0.55);
+  border-color: var(--c-vermilion-deep-mid);
   text-shadow: 0 0 10px rgba(200,60,43,0.45);
   box-shadow: 0 0 12px var(--vermilion-mid), inset 0 1px 0 rgba(255,200,180,0.3);
   animation: tier-ss-glow-light 2.2s ease-in-out infinite;
@@ -499,7 +504,7 @@ html[data-theme="light"] .wwm-xinfa-header b {
 }
 
 html[data-theme="light"] .wwm-cmp-bg-icon {
-  filter: brightness(0) drop-shadow(0 0 4px rgba(138,106,32,0.4));
+  filter: brightness(0) drop-shadow(0 0 4px var(--c-gold-deep-glow-1));
   opacity: 0.2;
 }
 
@@ -578,7 +583,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
 }
 
 html[data-theme="light"] .wwm-cmp-modal-bg-icon {
-  filter: brightness(0) drop-shadow(0 0 6px rgba(138,106,32,0.4)) !important;
+  filter: brightness(0) drop-shadow(0 0 6px var(--c-gold-deep-glow-1)) !important;
   opacity: 0.22 !important;
 }
 
@@ -613,7 +618,7 @@ html[data-theme="light"] .wwm-modal-bg-icon {
   opacity: 0.22;
   filter:
     brightness(0)
-    drop-shadow(0 0 6px rgba(138,106,32,0.45))
+    drop-shadow(0 0 6px var(--c-gold-deep-glow-2))
     drop-shadow(0 0 14px var(--c-gold-deep-mid));
 }
 
@@ -640,7 +645,7 @@ html[data-theme="light"] .wwm-xinfa-liupai-badge {
 
 html[data-theme="light"] .wwm-xinfa-tier-chip {
   color: var(--vermilion-deep);
-  border-color: rgba(138,31,23,0.55);
+  border-color: var(--c-vermilion-deep-mid);
   background: var(--vermilion-bright-tint);
 }
 
@@ -1040,7 +1045,7 @@ html[data-theme="light"] .wwm-anlz-bgicon {
   opacity: 0.22;
   filter:
     brightness(0)
-    drop-shadow(0 0 6px rgba(138,106,32,0.45))
+    drop-shadow(0 0 6px var(--c-gold-deep-glow-2))
     drop-shadow(0 0 14px var(--c-gold-deep-mid));
 }
 
