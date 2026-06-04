@@ -250,6 +250,7 @@
   --c-surf-warm-2:        var(--surf-2);    /* warm card/modal bg gradient 下 */
   --c-toast-bg:           var(--bg-1);      /* toast notification bg */
   --c-modal-a-option-bg:  var(--bg-raised); /* compare modal A select option bg */
+  --c-rail-bg:            linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.25) 60%, rgba(40,30,20,0.45)); /* 装備/心法 rail 縦 gradient (light override 別値) */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -3506,7 +3507,7 @@ body.wwm-layout-active .wwm-footer {
 }
 .wwm-xinfa-rail {
   position: absolute; left: 0; top: 0; bottom: 0; width: 30px;
-  background: linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.25) 60%, rgba(40,30,20,0.45));
+  background: var(--c-rail-bg);
   border-right: 1px solid var(--ink-2);
   display: flex; align-items: center; justify-content: center;
   padding: var(--space-2) 0;
@@ -3593,7 +3594,7 @@ body.wwm-layout-active .wwm-footer {
 }
 .wwm-equip-rail {
   position: absolute; left: 0; top: 0; bottom: 0; width: 30px;
-  background: linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.25) 60%, rgba(40,30,20,0.45));
+  background: var(--c-rail-bg);
   border-right: 1px solid var(--ink-2);
   display: flex; align-items: center; justify-content: center;
   padding: var(--space-2) 0;

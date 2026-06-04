@@ -91,6 +91,7 @@ html[data-theme="light"] {
   --c-surf-warm-2:        #ede0c0;
   --c-toast-bg:           #fff8e8;
   --c-modal-a-option-bg:  #f4e8cc;
+  --c-rail-bg:            linear-gradient(180deg, rgba(58,38,22,0.10), rgba(58,38,22,0.04) 60%, rgba(58,38,22,0.08)); /* light theme rail gradient (brown alpha scale) */
   --c-text-warm:               #5a3a20;  /* modal-a 系 secondary text 統一色 */
   --c-border-soft-warm:        rgba(40,25,18,0.18);  /* 暖色系 soft border (modal-a, mobile overlay) */
   --c-border-mid-warm:         rgba(40,25,18,0.25);  /* 暖色系 mid border (modal-a select/input) */
@@ -660,11 +661,6 @@ html[data-theme="light"] .wwm-gear-grid .wwm-equip-slot::before,
 html[data-theme="light"] .wwm-xinfa-slot::before {
   opacity: 0;
   mix-blend-mode: multiply;
-}
-
-html[data-theme="light"] .wwm-equip-rail,
-html[data-theme="light"] .wwm-xinfa-rail {
-  background: linear-gradient(180deg, var(--surf-shade-2), rgba(58,38,22,0.04) 60%, rgba(58,38,22,0.08));
 }
 
 html[data-theme="light"] .wwm-gear-grid .wwm-equip-slot,
