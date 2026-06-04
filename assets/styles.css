@@ -444,7 +444,7 @@ html.wwm-shared-build-mode .wwm-shared-build-icon {
   filter: drop-shadow(0 0 4px var(--vermilion-bright));
 }
 html[data-theme="light"].wwm-shared-build-mode .wwm-shared-build-banner {
-  background: linear-gradient(90deg, rgba(200,60,43,0.18), rgba(200,60,43,0.08));
+  background: linear-gradient(90deg, rgba(200,60,43,0.18), var(--vermilion-faint));
   color: var(--vermilion-deep);
   border-color: var(--vermilion);
 }
@@ -1147,7 +1147,7 @@ html[data-theme="light"] {
 
 html[data-theme="light"] body {
   background:
-    radial-gradient(ellipse 60% 35% at 50% 0%, rgba(200,60,43,0.20), transparent 65%),
+    radial-gradient(ellipse 60% 35% at 50% 0%, var(--vermilion-soft-2), transparent 65%),
     radial-gradient(ellipse 50% 25% at 0% 0%, rgba(138,106,32,0.14), transparent 70%),
     radial-gradient(ellipse 50% 25% at 100% 0%, rgba(138,106,32,0.14), transparent 70%),
     radial-gradient(ellipse 60% 70% at 100% 100%, rgba(138,106,32,0.10), transparent 55%),
@@ -1237,7 +1237,7 @@ html[data-theme="light"] footer strong { color: var(--vermilion); }
 html[data-theme="light"] #toast { background: #fff8e8; color: var(--paper); border-color: var(--gold-deep); border-left-color: var(--gold-bright); }
 
 html[data-theme="light"] .tier-SS {
-  color: #8a1f17;
+  color: var(--vermilion-deep);
   background: linear-gradient(135deg, var(--vermilion-soft-2), rgba(138,31,23,0.14));
   border-color: rgba(138,31,23,0.55);
   text-shadow: 0 0 10px rgba(200,60,43,0.45);
@@ -1255,7 +1255,7 @@ html[data-theme="light"] .tier-SS::before {
 /* light mode tier-S: cream bg上で 視認性UP (solid red bg + white text + 強pulse) */
 html[data-theme="light"] .tier-S {
   color: #fff8e8;
-  background: linear-gradient(135deg, #c83c2b 0%, #a02818 100%);
+  background: linear-gradient(135deg, var(--vermilion) 0%, #a02818 100%);
   border-color: #6a1810;
   text-shadow: 0 1px 2px rgba(0,0,0,0.45), 0 0 8px rgba(255,200,180,0.4);
   box-shadow:
@@ -1717,7 +1717,7 @@ html[data-theme="light"] .wwm-sb-rest {
   border-bottom: 1px solid rgba(212,175,55,0.3);
   position: sticky;
   top: -12px;
-  background: #1a1410;
+  background: var(--bg-raised);
   z-index: 5;
 }
 html[data-theme="light"] .wwm-sb-top { background: #f5ead0; }
@@ -1934,7 +1934,7 @@ html.wwm-view-sidebar .wwm-sb-top {
 html.wwm-view-sidebar .wwm-sb-mini-hero-card {
   background-color: rgba(var(--overlay-bg-rgb), var(--overlay-bg-alpha)) !important;
   background-image:
-    radial-gradient(ellipse at top right, rgba(240,210,138,0.08), transparent 55%) !important;
+    radial-gradient(ellipse at top right, var(--gold-bright-faint), transparent 55%) !important;
 }
 /* overlay モード: IMPORT button / 透明度 slider 非表示 */
 html.wwm-view-sidebar .wwm-sb-import-btn,
@@ -2426,7 +2426,7 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
   box-shadow: 0 0 8px rgba(232,81,58,0.6);
 }
 .wwm-cmp-modal-a {
-  background: #1a1410 !important;
+  background: var(--bg-raised) !important;
   border: 1px solid var(--gold-deep) !important;
   border-radius: 0 !important;
 }
@@ -2435,7 +2435,7 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
 .wwm-cmp-modal-a::after { display: none !important; }
 .wwm-cmp-modal-a .wwm-modal-header {
   position: relative;
-  background: #1a1410 !important;
+  background: var(--bg-raised) !important;
 }
 .wwm-cmp-modal-a .wwm-modal-header::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; width: auto; height: 2px;
@@ -2444,7 +2444,7 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
 }
 .wwm-cmp-modal-a .wwm-cmp-set-header { text-shadow: 0 0 6px rgba(240,210,138,0.4) !important; }
 .wwm-cmp-modal-a .wwm-cmp-preview {
-  border-top: 1px solid rgba(201,164,90,0.2);
+  border-top: 1px solid var(--gold-soft);
   padding-top: var(--space-3);
 }
 .wwm-cmp-modal-a .wwm-cmp-preview-value {
@@ -2523,7 +2523,7 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
   border: 1px solid var(--gold-deep) !important;
   padding: 0 var(--space-2-5) !important;
   border-radius: 2px !important;
-  background: #1a1410 !important;
+  background: var(--bg-raised) !important;
   line-height: 26px !important;
   height: 26px !important;
   display: inline-flex !important;
@@ -2541,14 +2541,14 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
   background-position: calc(100% - 12px) 50%, calc(100% - 8px) 50% !important;
   background-size: 4px 4px, 4px 4px !important;
   background-repeat: no-repeat !important;
-  background-color: #1a1410 !important;
+  background-color: var(--bg-raised) !important;
   cursor: pointer !important;
 }
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select option {
   font-size: var(--text-14) !important;
   font-family: var(--f-mono, 'Rajdhani') !important;
   font-weight: 700 !important;
-  background: #1a1410 !important;
+  background: var(--bg-raised) !important;
   color: var(--paper) !important;
 }
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
@@ -2581,12 +2581,12 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
   margin-bottom: var(--space-2) !important;
   margin-top: var(--space-1-5) !important;
 }
-/* select内 option を統一 (paper bg + #1a1410 / hover青) */
+/* select内 option を統一 (paper bg + var(--bg-raised) / hover青) */
 .wwm-cmp-modal-a select option {
   font-size: var(--text-md) !important;
   font-family: var(--f-display, 'Noto Serif JP') !important;
   font-weight: 700 !important;
-  background: #1a1410 !important;
+  background: var(--bg-raised) !important;
   color: var(--paper) !important;
 }
 .wwm-cmp-modal-a .wwm-cmp-stat-select option {
@@ -2742,7 +2742,7 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
 .wwm-cmp-footer-a {
   margin-top: var(--space-4);
   padding: var(--space-3-5) 0 var(--space-1);
-  border-top: 1px solid rgba(201,164,90,0.2);
+  border-top: 1px solid var(--gold-soft);
   display: flex; align-items: center; justify-content: space-between;
   gap: 12px;
 }
@@ -2778,7 +2778,7 @@ html[data-theme="light"] .wwm-sb-notice { color: var(--vermilion-deep); backgrou
   opacity: 0.1;
   pointer-events: none;
   z-index: 0;
-  filter: brightness(0) invert(1) drop-shadow(0 0 14px rgba(240,210,138,0.5));
+  filter: brightness(0) invert(1) drop-shadow(0 0 14px var(--gold-bright-mid));
 }
 /* 武具対照のみ 50% UP + 右下寄せ */
 .wwm-cmp-modal-bg-icon-gear {
@@ -2817,9 +2817,9 @@ html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-val-input {
   border-color: rgba(201,164,90,0.28) !important;
 }
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-rows {
-  background: rgba(0,0,0,0.5) !important;
+  background: var(--overlay-mid) !important;
   border: 1px solid rgba(201,164,90,0.25) !important;
-  box-shadow: inset 0 1px 6px rgba(0,0,0,0.6) !important;
+  box-shadow: inset 0 1px 6px var(--overlay-heavy) !important;
   padding: var(--space-1) var(--space-1-5) !important;
 }
 /* ── ダーク 配色: 案B 黒檀朱 (近黒ebony + 朱主役・金従)。border系は現状維持 (col/rows/select 不変) ── */
@@ -2844,7 +2844,7 @@ html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-val-input { color: #ffae8a !im
   display: inline-flex; align-items: center; justify-content: center;
   width: 16px; height: 16px;
   background: linear-gradient(135deg, var(--vermilion-deep, #8a1f17), var(--vermilion, #e8513a));
-  border: 1px solid rgba(240,210,138,0.5);
+  border: 1px solid var(--gold-bright-mid);
   border-radius: 2px;
   box-shadow: 0 0 4px rgba(232,81,58,0.5);
   flex-shrink: 0;
@@ -2986,8 +2986,8 @@ html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-val-input { color: #ffae8a !im
 /* 現在の装備: 朱赤グロウ */
 .wwm-cmp-current .wwm-cmp-bg-icon {
   filter:
-    drop-shadow(0 0 6px rgba(232,81,58,0.7))
-    drop-shadow(0 0 14px rgba(232,81,58,0.45));
+    drop-shadow(0 0 6px var(--vermilion-bright-strong))
+    drop-shadow(0 0 14px var(--vermilion-bright-mid));
 }
 /* 新しい装備: 緑グロウ */
 .wwm-cmp-new .wwm-cmp-bg-icon {
@@ -3921,14 +3921,14 @@ html[data-theme="light"] .wwm-sb-section-title {
   font-weight: var(--fw-semibold);
   margin-left: var(--space-1-5);
   padding: var(--space-half) var(--space-2);
-  background: #1a1410;
+  background: var(--bg-raised);
   border: 1px solid var(--gold-deep);
   border-radius: 2px;
   vertical-align: middle;
   cursor: pointer;
 }
 .wwm-cmp-lv-select option {
-  background: #1a1410;
+  background: var(--bg-raised);
   color: var(--gold-bright);
   font-family: var(--f-mono);
 }
@@ -4031,14 +4031,14 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-new {
 }
 /* kongfu / set ヘッダ */
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-header { color: #2a1810 !important; background: rgba(201,164,90,0.28) !important; }
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-header { color: #8a1f17 !important; text-shadow: none !important; background: linear-gradient(90deg, rgba(232,81,58,0.20), rgba(232,81,58,0.05)) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-header { color: var(--vermilion-deep) !important; text-shadow: none !important; background: linear-gradient(90deg, rgba(232,81,58,0.20), rgba(232,81,58,0.05)) !important; }
 /* 新置側 select も現有ヘッダと同 tint に揃える (武術=tan / セット=赤grad) */
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select { background: rgba(201,164,90,0.28) !important; color: #2a1810 !important; border-color: rgba(40,25,18,0.25) !important; }
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-select { background: linear-gradient(90deg, rgba(232,81,58,0.20), rgba(232,81,58,0.05)) !important; color: #8a1f17 !important; border-color: rgba(40,25,18,0.25) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-select { background: linear-gradient(90deg, rgba(232,81,58,0.20), rgba(232,81,58,0.05)) !important; color: var(--vermilion-deep) !important; border-color: rgba(40,25,18,0.25) !important; }
 /* 名称 / 値 */
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-name { color: #2a1810 !important; }
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val,
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val-input { color: #8a1f17 !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val-input { color: var(--vermilion-deep) !important; }
 /* フォーム (select / input) 紙化 — kongfu/set-select は tint 維持のため除外 */
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-stat-select,
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val-input {
@@ -4070,7 +4070,7 @@ html[data-theme="light"] .wwm-cmp-modal-bg-icon {
   filter: brightness(0) drop-shadow(0 0 6px rgba(138,106,32,0.4)) !important;
   opacity: 0.22 !important;
 }
-/* ドロップダウン (option) 紙化 — dark の #1a1410 黒は light で開くと黒popup化のため */
+/* ドロップダウン (option) 紙化 — dark の var(--bg-raised) 黒は light で開くと黒popup化のため */
 html[data-theme="light"] .wwm-cmp-modal-a select option {
   background: #f4e8cc !important;
   color: #2a1810 !important;
@@ -4558,7 +4558,7 @@ html[data-theme="light"] {
     linear-gradient(180deg, rgba(30,23,17,0.50), rgba(16,12,11,0.58)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") center / cover no-repeat;
   border: 1px solid var(--gold-deep);
-  box-shadow: inset 0 0 60px rgba(0,0,0,.5);
+  box-shadow: inset 0 0 60px var(--overlay-mid);
   overflow: hidden;
   position: relative;
   height: 195px;
@@ -4631,7 +4631,7 @@ html[data-theme="light"] .hero.hero-wuxia {
   line-height: .88;
   letter-spacing: -.02em;
   color: var(--paper);  /* 古紙白 #ede4d0 */
-  text-shadow: 0 2px 1px rgba(0,0,0,.6), 0 4px 12px rgba(0,0,0,.4);
+  text-shadow: 0 2px 1px var(--overlay-heavy), 0 4px 12px rgba(0,0,0,.4);
 }
 /* Tier badge 共通 base */
 .hero-wuxia .hero-tier.tier-badge {
@@ -4673,7 +4673,7 @@ html[data-theme="light"] .hero.hero-wuxia {
 .hero-wuxia .hero-tier.tier-S {
   color: #ff6b50;
   background: linear-gradient(135deg, rgba(138,31,23,.42) 0%, rgba(60,15,10,.32) 50%, rgba(138,31,23,.42) 100%);
-  border-color: rgba(232,81,58,.7);
+  border-color: var(--vermilion-bright-strong);
   text-shadow: 0 0 14px rgba(232,81,58,.85), 0 0 28px rgba(200,60,43,.45);
 }
 
@@ -4692,7 +4692,7 @@ html[data-theme="light"] .hero.hero-wuxia {
   background: linear-gradient(135deg, rgba(122,90,32,.38) 0%, rgba(50,38,16,.3) 50%, rgba(122,90,32,.38) 100%);
   border-color: rgba(201,184,138,.5);
   text-shadow: 0 0 10px rgba(201,184,138,.55);
-  box-shadow: 0 0 8px rgba(122,90,32,.3), inset 0 1px 0 rgba(201,184,138,.18), inset 0 -1px 0 rgba(0,0,0,.3);
+  box-shadow: 0 0 8px rgba(122,90,32,.3), inset 0 1px 0 rgba(201,184,138,.18), inset 0 -1px 0 var(--overlay-soft);
 }
 
 /* C — muted */
@@ -4709,8 +4709,8 @@ html[data-theme="light"] .hero.hero-wuxia {
   50%    { box-shadow: 0 0 32px rgba(200,60,43,.85), 0 0 70px rgba(232,81,58,.5), inset 0 1px 0 rgba(240,210,138,.42), inset 0 -1px 0 rgba(0,0,0,.55); }
 }
 @keyframes hero-tier-glow-s {
-  0%,100% { box-shadow: 0 0 14px rgba(200,60,43,.45), 0 0 30px rgba(232,81,58,.22), inset 0 1px 0 rgba(232,81,58,.25), inset 0 -1px 0 rgba(0,0,0,.4); }
-  50%    { box-shadow: 0 0 22px rgba(200,60,43,.7), 0 0 48px rgba(232,81,58,.35), inset 0 1px 0 rgba(232,81,58,.4), inset 0 -1px 0 rgba(0,0,0,.5); }
+  0%,100% { box-shadow: 0 0 14px rgba(200,60,43,.45), 0 0 30px rgba(232,81,58,.22), inset 0 1px 0 var(--vermilion-bright-soft), inset 0 -1px 0 rgba(0,0,0,.4); }
+  50%    { box-shadow: 0 0 22px rgba(200,60,43,.7), 0 0 48px rgba(232,81,58,.35), inset 0 1px 0 rgba(232,81,58,.4), inset 0 -1px 0 var(--overlay-mid); }
 }
 @keyframes hero-tier-shimmer {
   0%   { left: -150%; }
@@ -4912,7 +4912,7 @@ html[data-theme="light"] .wwm-sb-tier-badge.tier-SS {
 }
 /* sidebar 側 S/A/B/C も hero ライト と同じ gradient + 色 + border に統一 (SS と同パターン) */
 html[data-theme="light"] .wwm-sb-tier-badge.tier-S {
-  background: linear-gradient(135deg, #f4a89a 0%, #e87862 50%, #c83c2b 100%) !important;
+  background: linear-gradient(135deg, #f4a89a 0%, #e87862 50%, var(--vermilion) 100%) !important;
   color: #4a1410 !important;
   border-color: rgba(200,60,43,0.9) !important;
   text-shadow: 0 0 2px rgba(255,255,255,0.4) !important;
@@ -4940,7 +4940,7 @@ html[data-theme="light"] .wwm-sb-tier-badge.tier-C {
   100% { transform: translateX(200%); }
 }
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-S {
-  background: linear-gradient(135deg, #f4a89a 0%, #e87862 50%, #c83c2b 100%);
+  background: linear-gradient(135deg, #f4a89a 0%, #e87862 50%, var(--vermilion) 100%);
   color: #4a1410;
   border-color: rgba(200,60,43,0.9);
   text-shadow: 0 0 2px rgba(255,255,255,0.4);
@@ -5023,7 +5023,7 @@ html[data-theme="light"] .hero-wuxia .luopan-inner svg circle[stroke^="rgba(232,
   font-weight: var(--fw-bold);
   letter-spacing: .05em;
   white-space: nowrap;
-  box-shadow: 0 4px 18px rgba(0,0,0,.5), 0 0 24px rgba(232,81,58,.4);
+  box-shadow: 0 4px 18px var(--overlay-mid), 0 0 24px rgba(232,81,58,.4);
 }
 .wwm-import-hint-out { animation: wwm-hint-out 0.3s forwards; }
 @keyframes wwm-hint-bounce {
@@ -5140,7 +5140,7 @@ html[data-theme="light"] .wwm-error-banner {
   flex: 0 0 auto;
   font-size: var(--text-15);
   color: var(--vermilion-bright);
-  text-shadow: 0 0 10px rgba(232,81,58,.7);
+  text-shadow: 0 0 10px var(--vermilion-bright-strong);
   animation: wwm-banner-arrow-bounce 1.1s ease-in-out infinite;
 }
 .wwm-score-update-msg  { flex: 1 1 auto; line-height: 1.4; }
@@ -5165,7 +5165,7 @@ html[data-theme="light"] .wwm-error-banner {
 }
 @keyframes wwm-banner-glow {
   0%,100% { box-shadow: 0 0 0 rgba(232,81,58,0); }
-  50%     { box-shadow: 0 2px 18px rgba(232,81,58,.45); }
+  50%     { box-shadow: 0 2px 18px var(--vermilion-bright-mid); }
 }
 @keyframes wwm-banner-icon-pulse {
   0%,100% { transform: scale(1);   opacity: .8; }
@@ -5684,7 +5684,7 @@ html[data-theme="light"] .wwm-anlz-bgicon {
   width: 30px; height: 30px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #f0d28a 0%, #c8932e 40%, #6a3e16 100%);
-  box-shadow: 0 2px 6px rgba(0,0,0,.6), inset 0 0 4px rgba(0,0,0,.4);
+  box-shadow: 0 2px 6px var(--overlay-heavy), inset 0 0 4px rgba(0,0,0,.4);
   border: 1px solid #3a2210;
 }
 .wwm-note-rod::before { left: -10px; }
@@ -5746,7 +5746,7 @@ html[data-theme="light"] .wwm-anlz-bgicon {
   font-family: 'Noto Serif JP', serif;
   font-size: var(--text-lg); font-weight: 900;
   border-radius: 3px;
-  box-shadow: 0 0 0 1px #5a1208, 1px 1px 0 rgba(0,0,0,.3);
+  box-shadow: 0 0 0 1px #5a1208, 1px 1px 0 var(--overlay-soft);
   transform: rotate(-3deg);
 }
 .wwm-note-header-actions {
@@ -5950,7 +5950,7 @@ html[data-theme="light"] :where(button, [role="button"], a, input, select, texta
 /* drawer 本体 CSS (mobile時 表示、 hidden属性 解除 + slide-in アニメ) */
 .wwm-mobile-drawer-backdrop {
   position: fixed; inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: var(--overlay-mid);
   z-index: 9998;
   opacity: 0; transition: opacity 0.25s ease;
 }
@@ -6024,7 +6024,7 @@ html[data-theme="light"] .wwm-mobile-drawer * { color: var(--vermilion-deep); }
   cursor: pointer;
 }
 .wwm-mobile-drawer-langs .lang-btn.active {
-  background: linear-gradient(180deg, rgba(232,81,58,0.30), rgba(232,81,58,0.15));
+  background: linear-gradient(180deg, rgba(232,81,58,0.30), var(--vermilion-bright-trace));
   border-color: var(--vermilion);
   color: var(--vermilion-bright);
 }
@@ -6172,7 +6172,7 @@ html[data-theme="light"] .wwm-mobile-drawer * { color: var(--vermilion-deep); }
     cursor: pointer;
   }
   html[data-theme="light"] .wwm-mobile-top-reset {
-    background: linear-gradient(180deg, rgba(200,60,43,0.18), rgba(200,60,43,0.08));
+    background: linear-gradient(180deg, rgba(200,60,43,0.18), var(--vermilion-faint));
     color: var(--vermilion-deep);
   }
   .wwm-mobile-hamburger {
@@ -6699,7 +6699,7 @@ html[data-theme="light"] .wwm-mobile-drawer * { color: var(--vermilion-deep); }
     padding: var(--space-2-5) var(--space-3) !important;
     background: #14100c !important;
     border: 1px solid var(--gold-deep) !important;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.5) !important;
+    box-shadow: 0 6px 14px var(--overlay-mid) !important;
   }
   html[data-theme="light"] body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sb-mini-hero-card {
     background: #f4e8c8 !important;
@@ -6932,7 +6932,7 @@ html[data-theme="light"] .wwm-mobile-drawer * { color: var(--vermilion-deep); }
     padding: 3px 8px !important;
   }
   .wwm-note-btn-close {
-    background: #c83c2b !important;
+    background: var(--vermilion) !important;
     color: #fff !important;
     border-color: #8a2818 !important;
     font-weight: 700 !important;
@@ -6955,7 +6955,7 @@ html[data-theme="light"] .wwm-mobile-drawer * { color: var(--vermilion-deep); }
   html[data-theme="light"] body.wwm-layout-active .wwm-mobile-stat-fab {
     background: linear-gradient(180deg, rgba(248,238,210,0.96), rgba(235,222,188,0.96));
     border-color: var(--vermilion);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.25), 0 0 12px rgba(200,60,43,0.35);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25), 0 0 12px var(--vermilion-mid-2);
   }
   html[data-theme="light"] .wwm-mobile-stat-fab-fallback { color: var(--vermilion); }
   html[data-theme="light"] .wwm-mobile-stat-overlay {
