@@ -116,8 +116,9 @@ function _diagnose(roleInfo, params) {
   if (symOverPct >= 3) {
     out.push({ type: 'warn', text: _tpl(T_.diagSymOver || '会意率過多 (適用 {0}% / cap 40% / 超過 +{1}%)', (symAdj*100).toFixed(1), symOverPct.toFixed(1)) });
   }
-  // 会心率不足: cap飽和してない (critRateBoosted < 0.8) かつ 最終会心+会意 < 100% の時のみ
-  if (critRateBoosted < 0.8 && (appliedCrit + appliedSym) < 1.0) {
+  // 会心率不足: critRateBoosted < 0.68 かつ 最終会心+会意 < 100% の時のみ
+  // (0.8 cap は (1-appliedSym) cap でさらに頭打ち、 実効 84% 程度で飽和。 0.68 = 当初設計値、 ratio系 まだ余地ある時のみ警告)
+  if (critRateBoosted < 0.68 && (appliedCrit + appliedSym) < 1.0) {
     out.push({ type: 'warn', text: _tpl(T_.diagCritUnder || '会心率不足 (実効 {0}% / 最終会心+会意 {1}%)', (appliedCrit*100).toFixed(1), ((appliedCrit+appliedSym)*100).toFixed(1)) });
   }
   // 良好メッセ
