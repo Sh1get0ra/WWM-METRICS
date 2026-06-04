@@ -96,6 +96,8 @@ html[data-theme="light"] {
   --c-border-mid-warm:         rgba(40,25,18,0.25);  /* 暖色系 mid border (modal-a select/input) */
   --c-gold-rich:               #b8860b;              /* lv-select / section-title 用 rich gold (light のみ) */
   --c-cream-pale:              #f5e6c8;              /* lv-select bg 用 淡 cream (light のみ) */
+  --c-overlay-cream:           rgba(255,248,225,0.40); /* header bg blend overlay film */
+  --c-vermilion-fade-end:      rgba(232,81,58,0.05); /* vermilion gradient 透明側 endpoint */
 }
 
 html[data-theme="light"] body {
@@ -116,7 +118,7 @@ html[data-theme="light"] .sticky-header {
 
 html[data-theme="light"] header.topbar {
   background:
-    linear-gradient(rgba(255,248,225,0.40), rgba(255,248,225,0.40)),
+    linear-gradient(var(--c-overlay-cream), var(--c-overlay-cream)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/wq-bg-99758f80.png") center / cover no-repeat,
     linear-gradient(180deg, #ffeac4, #fcd5a8);
   background-blend-mode: normal, difference, normal;
@@ -500,11 +502,11 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-new {
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-header { color: var(--brown-1) !important; background: var(--gold-mid) !important; }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-header { color: var(--vermilion-deep) !important; text-shadow: none !important; background: linear-gradient(90deg, var(--vermilion-bright-tint), rgba(232,81,58,0.05)) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-header { color: var(--vermilion-deep) !important; text-shadow: none !important; background: linear-gradient(90deg, var(--vermilion-bright-tint), var(--c-vermilion-fade-end)) !important; }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select { background: var(--gold-mid) !important; color: var(--brown-1) !important; border-color: var(--c-border-mid-warm) !important; }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-select { background: linear-gradient(90deg, var(--vermilion-bright-tint), rgba(232,81,58,0.05)) !important; color: var(--vermilion-deep) !important; border-color: var(--c-border-mid-warm) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-select { background: linear-gradient(90deg, var(--vermilion-bright-tint), var(--c-vermilion-fade-end)) !important; color: var(--vermilion-deep) !important; border-color: var(--c-border-mid-warm) !important; }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-name { color: var(--brown-1) !important; }
 
@@ -936,7 +938,7 @@ html[data-theme="light"] .wwm-anlz {
 
 html[data-theme="light"] .wwm-anlz-header {
   background:
-    linear-gradient(rgba(255,248,225,0.40), rgba(255,248,225,0.40)),
+    linear-gradient(var(--c-overlay-cream), var(--c-overlay-cream)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/section_bg-66d4d3cb.png") center / cover no-repeat,
     linear-gradient(180deg, #ffeac4, #fcd5a8);
   background-blend-mode: normal, difference, normal;
@@ -1011,7 +1013,7 @@ html[data-theme="light"] .wwm-anlz-bgicon {
 }
 
 html[data-theme="light"] .wwm-note-cl-items li.wwm-note-cl-featured {
-  background: linear-gradient(90deg, var(--vermilion-bright-trace), rgba(232,81,58,0.05));
+  background: linear-gradient(90deg, var(--vermilion-bright-trace), var(--c-vermilion-fade-end));
   border-left-color: var(--vermilion-deep);
   color: var(--brown-1);
 }
