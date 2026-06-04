@@ -27,6 +27,15 @@ const colorMap = {
     '#ffc107': '--ratio-ok',
     '#ff9800': '--ratio-warn',
     '#e74c3c': '--ratio-bad',
+    // Phase 4.4c additions
+    '#d4af37': '--accent',
+    '#c389ff': '--liupai-guyun',
+    '#2a1810': '--brown-1',
+    '#3a2010': '--brown-2',
+    '#5a1e10': '--brown-3',
+    '#5a3320': '--brown-4',
+    '#6a3e16': '--brown-5',
+    '#8a5a30': '--brown-6',
   },
   // rgba constants — key: "r,g,b,alpha" where alpha is normalized parseFloat string.
   rgba: {
@@ -82,6 +91,10 @@ const colorMap = {
     // jade-bright (rgb 168,212,180) 派生 (constant — light で値変化なし)
     '168,212,180,0.4':  '--jade-bright-mid',
     '168,212,180,0.55': '--jade-bright-strong',
+    // Phase 4.4c additions
+    '212,175,55,0.08': '--accent-faint',
+    '212,175,55,0.3':  '--accent-mid',
+    '255,200,80,0.4':  '--amber-glow',
   },
 };
 
