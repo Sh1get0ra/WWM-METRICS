@@ -880,7 +880,7 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
     });
   }
   // 計算中表示
-  root.innerHTML = `<div class="wwm-analysis-card wwm-modal-square"><div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/anvil-impact.svg');"></div>${headerHtml}<div class="wwm-opt-loading">計算中...</div></div>`;
+  root.innerHTML = `<div class="wwm-analysis-card wwm-modal-square"><div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/anvil-impact.svg');"></div>${headerHtml}<div class="wwm-opt-loading">${(window.T?.optComputing) || '計算中...'}</div></div>`;
   _bindControls();
   // 計算中: ヘッダ入力 (目標ratio / minDelta / slotFilter / 再計算) を一時 disable
   // → 中間状態で別ratio入力 → 結果startScoreがズレる/baseline壊れる バグ防止
@@ -893,9 +893,9 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
   // progress表示は .wwm-opt-loading に一本化 (#wwmOptProgress は使わず二重回避)
   const setProgress = (label) => {
     const el = root.querySelector('.wwm-opt-loading');
-    if (el) el.textContent = label || '計算中...';
+    if (el) el.textContent = label || (window.T?.optComputing) || '計算中...';
   };
-  setProgress('計算中...');
+  setProgress();
   const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   await _loadEquipMax();
   const charLv = roleInfo?.level || 95;
@@ -919,7 +919,7 @@ async function _renderOptimizationInner(roleInfo, params, opts, root) {
     if (_aborted()) return;
     await new Promise(r => setTimeout(r, 0)); // UI応答性確保
     if (_aborted()) return;
-    setProgress(`計算中... (${iter + 1}回目)`);
+    setProgress(((window.T?.optComputingIter) || '計算中... ({0}回目)').replace('{0}', iter + 1));
     const eqDet = working.wearEquipsDetailed || {};
     const slots = ['1','2','3','4','5','8','10','11'].filter(s => eqDet[s] && slotsAllowed.has(s));
     let best = null;
