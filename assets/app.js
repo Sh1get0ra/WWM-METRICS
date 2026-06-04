@@ -86,7 +86,7 @@ function setLang(lang) {
   // 移転バナー: 言語切替毎に多言語msg再適用 (旧URL検出時のみ DOM 表示)
   if (typeof _initMigrationBanner === 'function') _initMigrationBanner();
 
-  try { localStorage.setItem('wwm_lang', lang); } catch(e) {}
+  WWMHelpers.storage.saveStr('wwm_lang', lang);
   renderPresetSlots();
   if (typeof window._refreshAll === 'function') window._refreshAll();
   // import前でも sidebar empty state を再render (翻訳反映)
@@ -119,7 +119,7 @@ function _loadSavedLang() {
       if (urlLang && ['ja','en','zh','ko'].includes(urlLang) && urlLang !== 'ja') setLang(urlLang);
       return;
     }
-    const saved = localStorage.getItem('wwm_lang');
+    const saved = WWMHelpers.storage.loadStr('wwm_lang');
     if (saved && ['ja','en','zh','ko'].includes(saved) && saved !== 'ja') setLang(saved);
     else if (!saved) _showLangPicker();
   } catch(e) {}
@@ -148,7 +148,7 @@ function _showLangPicker() {
       m.remove();
       // 言語選択直後にIMPORT位置ヒント表示 (一度のみ)
       try {
-        if (!localStorage.getItem('wwm_import_hinted')) {
+        if (!WWMHelpers.storage.loadStr('wwm_import_hinted')) {
           setTimeout(_showImportHint, 250);
         }
       } catch(_) {}
@@ -185,7 +185,7 @@ function _showImportHint() {
   const dismiss = () => {
     o.classList.add('wwm-import-hint-out');
     setTimeout(() => o.remove(), 350);
-    try { localStorage.setItem('wwm_import_hinted', '1'); } catch(_) {}
+    WWMHelpers.storage.saveStr('wwm_import_hinted', '1');
     document.removeEventListener('click', dismiss, true);
   };
   setTimeout(() => document.addEventListener('click', dismiss, true), 50);
@@ -275,13 +275,13 @@ function toggleHero() {
   if (!hero) return;
   var collapsed = hero.classList.toggle('hero--collapsed');
   hero.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-  try { localStorage.setItem('wwm_hero_collapsed', collapsed ? '1' : '0'); } catch(e) {}
+  WWMHelpers.storage.saveStr('wwm_hero_collapsed', collapsed ? '1' : '0');
 }
 function initHeroCollapse() {
   var hero = document.querySelector('.hero');
   if (!hero) return;
   try {
-    if (localStorage.getItem('wwm_hero_collapsed') === '1') {
+    if (WWMHelpers.storage.loadStr('wwm_hero_collapsed') === '1') {
       hero.classList.add('hero--collapsed');
       hero.setAttribute('aria-expanded', 'false');
     } else {
@@ -300,13 +300,12 @@ function setTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   const tog = document.getElementById('themeToggle');
   if (tog) tog.textContent = theme === 'light' ? '☾' : '☀';
-  try { localStorage.setItem('wwm_theme', theme); } catch(e) {}
+  WWMHelpers.storage.saveStr('wwm_theme', theme);
   // theme切替時 hero score色 (TIER_COLOR) 再適用
   if (window.WWMHero && window.__WWM_PARAMS) window.WWMHero.update(window.__WWM_PARAMS);
 }
 function initTheme() {
-  let saved;
-  try { saved = localStorage.getItem('wwm_theme'); } catch(e) {}
+  const saved = WWMHelpers.storage.loadStr('wwm_theme');
   setTheme(saved === 'light' ? 'light' : 'dark');
 }
 
@@ -349,10 +348,8 @@ function savePreset(i) {
   const nameInp = document.getElementById('presetName' + i);
   const name = nameInp.value.trim() || T.presetNamePlaceholder.replace('{n}', i + 1);
   // 新レイアウト: 装備情報を保存 (roleInfo / state / virtual / baseline)
-  let importSnap = null;
-  try { importSnap = JSON.parse(localStorage.getItem('wwm_last_import_v1') || 'null'); } catch(_) {}
-  let stateSnap = null;
-  try { stateSnap = JSON.parse(localStorage.getItem('wwm_last_state_v1') || 'null'); } catch(_) {}
+  const importSnap = WWMHelpers.storage.loadJSON('wwm_last_import_v1');
+  const stateSnap = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
   const virtual = {
     gear:   window.__WWM_VIRTUAL || null,
     kongfu: window.__WWM_VIRTUAL_KONGFU || null,
@@ -360,7 +357,7 @@ function savePreset(i) {
   };
   const baseline = window.__WWM_BASELINE || null;
   presets[i] = { name, importSnap, stateSnap, virtual, baseline };
-  try { localStorage.setItem(PRESET_KEY, JSON.stringify(presets)); } catch(e) {}
+  WWMHelpers.storage.saveJSON(PRESET_KEY, presets);
   renderPresetSlots();
   showToast(T.toastSaved.replace('{name}', name));
 }
@@ -368,8 +365,8 @@ function loadPreset(i) {
   const p = presets[i];
   if (!p) return;
   try {
-    if (p.importSnap) localStorage.setItem('wwm_last_import_v1', JSON.stringify(p.importSnap));
-    if (p.stateSnap)  localStorage.setItem('wwm_last_state_v1',  JSON.stringify(p.stateSnap));
+    if (p.importSnap) WWMHelpers.storage.saveJSON('wwm_last_import_v1', p.importSnap);
+    if (p.stateSnap)  WWMHelpers.storage.saveJSON('wwm_last_state_v1',  p.stateSnap);
     if (p.virtual) {
       window.__WWM_VIRTUAL        = p.virtual.gear   || null;
       window.__WWM_VIRTUAL_KONGFU = p.virtual.kongfu || null;
@@ -383,13 +380,13 @@ function loadPreset(i) {
         // OBS view (表示専用) では baseline を書き込まない (読込のみ)。
         if (!document.documentElement.classList.contains('wwm-view-sidebar')) {
           if (window.WWMBaseline) window.WWMBaseline.save(p.baseline);
-          else { try { localStorage.setItem('wwm_baseline_score_v1', JSON.stringify(p.baseline)); } catch(_) {} }
+          else { WWMHelpers.storage.saveJSON('wwm_baseline_score_v1', p.baseline); }
         }
       } else {
         // 古いバージョン (scoreVer無し含む) のプリセット baseline → 無効化 + 再import促しバナー。
         // プリセットは過去スナップで現行 json 計算の保証なし → 安全側で破棄 (再計算せず drift回避)。
         window.__WWM_BASELINE = null;
-        try { localStorage.removeItem('wwm_baseline_score_v1'); } catch(_) {}
+        WWMHelpers.storage.remove('wwm_baseline_score_v1');
         if (typeof window._showScoreBanner === 'function') window._showScoreBanner();
       }
     }
@@ -405,15 +402,13 @@ function loadPreset(i) {
 function deletePreset(i) {
   const name = presets[i] ? presets[i].name : T.presetNamePlaceholder.replace('{n}', i + 1);
   presets[i] = null;
-  try { localStorage.setItem(PRESET_KEY, JSON.stringify(presets)); } catch(e) {}
+  WWMHelpers.storage.saveJSON(PRESET_KEY, presets);
   renderPresetSlots();
   showToast(T.toastDeleted.replace('{name}', name));
 }
 function initPresets() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(PRESET_KEY));
-    if (Array.isArray(saved)) presets = saved;
-  } catch(e) {}
+  const saved = WWMHelpers.storage.loadJSON(PRESET_KEY);
+  if (Array.isArray(saved)) presets = saved;
   renderPresetSlots();
 }
 
