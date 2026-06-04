@@ -105,6 +105,18 @@ html[data-theme="light"] {
   --c-shadow-light:            rgba(0,0,0,0.35);      /* light theme element shadow (drop-shadow / inset) */
   --c-mobile-overlay-top:      rgba(248,238,210,0.98);/* mobile drawer/overlay gradient top */
   --c-mobile-overlay-bot:      rgba(235,222,188,0.98);/* mobile drawer/overlay gradient bottom */
+
+  /* tier badge palettes (hero-wuxia .hero-tier + .wwm-sb-tier-badge ペア) */
+  --c-tier-ss-grad-1:   #f4d97a;  --c-tier-ss-grad-2:   #e8c548;  --c-tier-ss-grad-3:   #d4a930;
+  --c-tier-ss-fg:       #5a3a0a;  --c-tier-ss-border:   rgba(184,134,11,0.9);
+  --c-tier-s-grad-1:    #f4a89a;  --c-tier-s-grad-2:    #e87862;
+  --c-tier-s-fg:        #4a1410;  --c-tier-s-border:    rgba(200,60,43,0.9);
+  --c-tier-a-grad-1:    #c8e0c8;  --c-tier-a-grad-2:    #88b894;  --c-tier-a-grad-3:    #5a8868;
+  --c-tier-a-fg:        #1a3a24;  --c-tier-a-border:    rgba(45,90,58,0.85);
+  --c-tier-b-grad-1:    #e8d4a8;  --c-tier-b-grad-2:    #c4a868;  --c-tier-b-grad-3:    #8a7030;
+  --c-tier-b-fg:        #3a2810;  --c-tier-b-border:    rgba(122,90,32,0.85);
+  --c-tier-c-grad-1:    #d8ccb4;  --c-tier-c-grad-2:    #a89880;  --c-tier-c-grad-3:    #786850;
+  --c-tier-c-fg:        #2a2010;  --c-tier-c-border:    rgba(90,66,38,0.85);
 }
 
 html[data-theme="light"] body {
@@ -722,9 +734,9 @@ html[data-theme="light"] .hero-wuxia .hero-tier.tier-badge {
 }
 
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS {
-  background: linear-gradient(135deg, #f4d97a 0%, #e8c548 50%, #d4a930 100%);
-  color: #5a3a0a;
-  border-color: rgba(184,134,11,0.9);
+  background: linear-gradient(135deg, var(--c-tier-ss-grad-1) 0%, var(--c-tier-ss-grad-2) 50%, var(--c-tier-ss-grad-3) 100%);
+  color: var(--c-tier-ss-fg);
+  border-color: var(--c-tier-ss-border);
   text-shadow: 0 0 2px rgba(255,255,255,0.55);
   box-shadow: 0 0 12px rgba(184,134,11,0.45), inset 0 1px 0 var(--hover-strong), inset 0 -1px 0 rgba(90,42,10,0.3);
 }
@@ -747,64 +759,64 @@ html[data-theme="light"] .wwm-sb-tier-badge.tier-SS::before {
 }
 
 html[data-theme="light"] .wwm-sb-tier-badge.tier-SS {
-  background: linear-gradient(135deg, #f4d97a 0%, #e8c548 50%, #d4a930 100%) !important;
-  color: #5a3a0a !important;
-  border-color: rgba(184,134,11,0.9) !important;
+  background: linear-gradient(135deg, var(--c-tier-ss-grad-1) 0%, var(--c-tier-ss-grad-2) 50%, var(--c-tier-ss-grad-3) 100%) !important;
+  color: var(--c-tier-ss-fg) !important;
+  border-color: var(--c-tier-ss-border) !important;
   text-shadow: 0 0 2px rgba(255,255,255,0.55) !important;
 }
 
 html[data-theme="light"] .wwm-sb-tier-badge.tier-S {
-  background: linear-gradient(135deg, #f4a89a 0%, #e87862 50%, var(--vermilion) 100%) !important;
-  color: #4a1410 !important;
-  border-color: rgba(200,60,43,0.9) !important;
+  background: linear-gradient(135deg, var(--c-tier-s-grad-1) 0%, var(--c-tier-s-grad-2) 50%, var(--vermilion) 100%) !important;
+  color: var(--c-tier-s-fg) !important;
+  border-color: var(--c-tier-s-border) !important;
   text-shadow: 0 0 2px var(--hover-mid-2) !important;
 }
 
 html[data-theme="light"] .wwm-sb-tier-badge.tier-A {
-  background: linear-gradient(135deg, #c8e0c8 0%, #88b894 50%, #5a8868 100%) !important;
-  color: #1a3a24 !important;
-  border-color: rgba(45,90,58,0.85) !important;
+  background: linear-gradient(135deg, var(--c-tier-a-grad-1) 0%, var(--c-tier-a-grad-2) 50%, var(--c-tier-a-grad-3) 100%) !important;
+  color: var(--c-tier-a-fg) !important;
+  border-color: var(--c-tier-a-border) !important;
   text-shadow: none !important;
 }
 
 html[data-theme="light"] .wwm-sb-tier-badge.tier-B {
-  background: linear-gradient(135deg, #e8d4a8 0%, #c4a868 50%, #8a7030 100%) !important;
-  color: #3a2810 !important;
-  border-color: rgba(122,90,32,0.85) !important;
+  background: linear-gradient(135deg, var(--c-tier-b-grad-1) 0%, var(--c-tier-b-grad-2) 50%, var(--c-tier-b-grad-3) 100%) !important;
+  color: var(--c-tier-b-fg) !important;
+  border-color: var(--c-tier-b-border) !important;
   text-shadow: none !important;
 }
 
 html[data-theme="light"] .wwm-sb-tier-badge.tier-C {
-  background: linear-gradient(135deg, #d8ccb4 0%, #a89880 50%, #786850 100%) !important;
-  color: #2a2010 !important;
-  border-color: rgba(90,66,38,0.85) !important;
+  background: linear-gradient(135deg, var(--c-tier-c-grad-1) 0%, var(--c-tier-c-grad-2) 50%, var(--c-tier-c-grad-3) 100%) !important;
+  color: var(--c-tier-c-fg) !important;
+  border-color: var(--c-tier-c-border) !important;
   text-shadow: none !important;
 }
 
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-S {
-  background: linear-gradient(135deg, #f4a89a 0%, #e87862 50%, var(--vermilion) 100%);
-  color: #4a1410;
-  border-color: rgba(200,60,43,0.9);
+  background: linear-gradient(135deg, var(--c-tier-s-grad-1) 0%, var(--c-tier-s-grad-2) 50%, var(--vermilion) 100%);
+  color: var(--c-tier-s-fg);
+  border-color: var(--c-tier-s-border);
   text-shadow: 0 0 2px var(--hover-mid-2);
   box-shadow: 0 0 12px var(--vermilion-mid-strong), inset 0 1px 0 var(--hover-mid-2), inset 0 -1px 0 rgba(60,10,8,0.3);
 }
 
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-A {
-  background: linear-gradient(135deg, #c8e0c8 0%, #88b894 50%, #5a8868 100%);
-  color: #1a3a24;
-  border-color: rgba(45,90,58,0.85);
+  background: linear-gradient(135deg, var(--c-tier-a-grad-1) 0%, var(--c-tier-a-grad-2) 50%, var(--c-tier-a-grad-3) 100%);
+  color: var(--c-tier-a-fg);
+  border-color: var(--c-tier-a-border);
 }
 
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-B {
-  background: linear-gradient(135deg, #e8d4a8 0%, #c4a868 50%, #8a7030 100%);
-  color: #3a2810;
-  border-color: rgba(122,90,32,0.85);
+  background: linear-gradient(135deg, var(--c-tier-b-grad-1) 0%, var(--c-tier-b-grad-2) 50%, var(--c-tier-b-grad-3) 100%);
+  color: var(--c-tier-b-fg);
+  border-color: var(--c-tier-b-border);
 }
 
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-C {
-  background: linear-gradient(135deg, #d8ccb4 0%, #a89880 50%, #786850 100%);
-  color: #2a2010;
-  border-color: rgba(90,66,38,0.85);
+  background: linear-gradient(135deg, var(--c-tier-c-grad-1) 0%, var(--c-tier-c-grad-2) 50%, var(--c-tier-c-grad-3) 100%);
+  color: var(--c-tier-c-fg);
+  border-color: var(--c-tier-c-border);
 }
 
 html[data-theme="light"] .hero-wuxia .ink-stroke {
