@@ -485,26 +485,24 @@ function _xinfaName(id) {
   return '心法ID ' + id;
 }
 async function _loadDicts() {
-  if (window.WWM_KONGFU && window.WWM_XINFA && window.WWM_SETS && window.WWM_AFFIX && window.WWM_XINFA_ICONS && window.WWM_KONGFU_ICONS && window.WWM_GEAR_SLOT_ICONS && window.WWM_AVATAR_ICONS) return;
+  const dictMap = {
+    WWM_KONGFU: 'kongfu',
+    WWM_XINFA: 'xinfa',
+    WWM_SETS: 'sets',
+    WWM_AFFIX: 'affix',
+    WWM_XINFA_ICONS: 'xinfa_icons',
+    WWM_KONGFU_ICONS: 'kongfu_icons',
+    WWM_GEAR_SLOT_ICONS: 'gear_slot_icons',
+    WWM_AVATAR_ICONS: 'avatar_icons'
+  };
+  const tasks = [];
+  for (const [winKey, fileName] of Object.entries(dictMap)) {
+    if (!window[winKey]) {
+      tasks.push(WWMHelpers.fetch.loadDict(fileName).then(d => { window[winKey] = d; }));
+    }
+  }
   try {
-    const [kr, xr, sr, ar, xi, ki, gsi, av] = await Promise.all([
-      window.WWM_KONGFU ? Promise.resolve(window.WWM_KONGFU) : fetch('data/kongfu.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()),
-      window.WWM_XINFA  ? Promise.resolve(window.WWM_XINFA)  : fetch('data/xinfa.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()),
-      window.WWM_SETS   ? Promise.resolve(window.WWM_SETS)   : fetch('data/sets.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()),
-      window.WWM_AFFIX  ? Promise.resolve(window.WWM_AFFIX)  : fetch('data/affix.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()),
-      window.WWM_XINFA_ICONS ? Promise.resolve(window.WWM_XINFA_ICONS) : fetch('data/xinfa_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()).catch(()=>({})),
-      window.WWM_KONGFU_ICONS ? Promise.resolve(window.WWM_KONGFU_ICONS) : fetch('data/kongfu_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()).catch(()=>({})),
-      window.WWM_GEAR_SLOT_ICONS ? Promise.resolve(window.WWM_GEAR_SLOT_ICONS) : fetch('data/gear_slot_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()).catch(()=>({})),
-      window.WWM_AVATAR_ICONS ? Promise.resolve(window.WWM_AVATAR_ICONS) : fetch('data/avatar_icons.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json()).catch(()=>({}))
-    ]);
-    window.WWM_KONGFU = kr;
-    window.WWM_XINFA = xr;
-    window.WWM_SETS = sr;
-    window.WWM_AFFIX = ar;
-    window.WWM_XINFA_ICONS = xi;
-    window.WWM_KONGFU_ICONS = ki;
-    window.WWM_GEAR_SLOT_ICONS = gsi;
-    window.WWM_AVATAR_ICONS = av;
+    await Promise.all(tasks);
   } catch(e) { console.warn('[WWM Import] dict load failed:', e); }
 }
 
