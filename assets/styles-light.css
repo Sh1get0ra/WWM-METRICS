@@ -135,6 +135,12 @@ html[data-theme="light"] {
   --c-gold-deep-glow-1:        rgba(138,106,32,0.4); /* compare modal bg-icon drop-shadow */
   --c-gold-deep-glow-2:        rgba(138,106,32,0.45);/* regular modal bg-icon drop-shadow (PC+mobile) */
   --c-vermilion-deep-mid:      rgba(138,31,23,0.55); /* tier-SS / xinfa-tier-chip border */
+
+  /* misc text + glow (B13) */
+  --c-text-brown-bright:       #8a5212;              /* sb-mini-hero totalmartial / sb-applied */
+  --c-text-brown-dim:          #6a4220;              /* equip stat-pct / step2 muted */
+  --c-tier-ss-glow-pink:       rgba(255,200,180,0.4);/* tier-SS inset/text glow (pink) */
+  --c-anlz-shadow-orange:      rgba(120,60,20,.18);  /* anlz-header / anlz-body box-shadow */
 }
 
 html[data-theme="light"] body {
@@ -168,7 +174,7 @@ html[data-theme="light"] .preset-bar {
 html[data-theme="light"] .seal {
   /* keep red seal but tone the gold inside a bit darker so it pops on paper */
   box-shadow:
-    inset 0 0 0 1px rgba(255,200,180,0.4),
+    inset 0 0 0 1px var(--c-tier-ss-glow-pink),
     inset 0 -8px 14px var(--c-shadow-light),
     0 0 24px rgba(200, 60, 43, 0.25),
     0 1px 4px var(--overlay-tint);
@@ -264,7 +270,7 @@ html[data-theme="light"] .tier-S {
   color: var(--c-fg-cream-bright);
   background: linear-gradient(135deg, var(--vermilion) 0%, #a02818 100%);
   border-color: #6a1810;
-  text-shadow: 0 1px 2px var(--overlay-soft-2), 0 0 8px rgba(255,200,180,0.4);
+  text-shadow: 0 1px 2px var(--overlay-soft-2), 0 0 8px var(--c-tier-ss-glow-pink);
   box-shadow:
     0 0 18px rgba(200,60,43,0.65),
     0 0 32px rgba(200,60,43,0.25),
@@ -288,7 +294,7 @@ html[data-theme="light"] .wwm-sb-mini-hero-ink {
 }
 
 html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-totalmartial b,
-html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial b { color: #8a5212 !important; text-shadow: none !important; }
+html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial b { color: var(--c-text-brown-bright) !important; text-shadow: none !important; }
 
 html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-totalmartial .wwm-muted,
 html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial .wwm-muted { color: #5a4326 !important; opacity: 0.85 !important; }
@@ -300,7 +306,7 @@ html[data-theme="light"] .wwm-sb-rest {
 
 html[data-theme="light"] .wwm-sb-top { background: #f5ead0; }
 
-html[data-theme="light"] .wwm-sb-applied { color: #8a5212; opacity: 1; }
+html[data-theme="light"] .wwm-sb-applied { color: var(--c-text-brown-bright); opacity: 1; }
 
 html[data-theme="light"] .wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-label,
 html[data-theme="light"] .wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-value { color: #3d5266; }
@@ -911,7 +917,7 @@ html[data-theme="light"] .wwm-step2 .wwm-radio-label {
 }
 
 html[data-theme="light"] .wwm-equip-section .wwm-stat-pct {
-  color: #6a4220 !important;
+  color: var(--c-text-brown-dim) !important;
   opacity: 1 !important;
 }
 
@@ -939,7 +945,7 @@ html[data-theme="light"] .wwm-step2 .wwm-step2-section-title {
 }
 
 html[data-theme="light"] .wwm-step2 .wwm-muted {
-  color: #6a4220 !important;
+  color: var(--c-text-brown-dim) !important;
   opacity: 0.95 !important;
 }
 
@@ -979,7 +985,7 @@ html[data-theme="light"] .wwm-anlz-header {
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/section_bg-66d4d3cb.png") center / cover no-repeat,
     linear-gradient(180deg, var(--c-header-cream-top), var(--c-header-cream-bot));
   background-blend-mode: normal, difference, normal;
-  box-shadow: 0 6px 18px rgba(120,60,20,.18);
+  box-shadow: 0 6px 18px var(--c-anlz-shadow-orange);
 }
 
 html[data-theme="light"] .wwm-anlz-header::before {
@@ -1027,7 +1033,7 @@ html[data-theme="light"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab.active
 }
 
 html[data-theme="light"] .wwm-anlz-body {
-  box-shadow: 0 6px 18px rgba(120,60,20,.18);
+  box-shadow: 0 6px 18px var(--c-anlz-shadow-orange);
 }
 
 html[data-theme="light"] .wwm-anlz-body::before {
