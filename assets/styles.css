@@ -2117,8 +2117,7 @@ body.wwm-layout-active .wwm-anlz-body > .wwm-analysis-grid > div {
 }
 body.wwm-layout-active #wwmAffixRanking .wwm-analysis-card,
 body.wwm-layout-active #wwmOptimization .wwm-analysis-card,
-body.wwm-layout-active #wwmHistory .wwm-analysis-card,
-body.wwm-layout-active #wwmQuality .wwm-analysis-card {
+body.wwm-layout-active #wwmHistory .wwm-analysis-card {
   height: 100% !important;
   min-height: 0 !important;
 }
@@ -3270,8 +3269,7 @@ html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-val-input { color: #ffae8a !im
 .wwm-analysis-card > * { position: relative; z-index: 1; }
 #wwmAffixRanking .wwm-analysis-card,
 #wwmOptimization .wwm-analysis-card,
-#wwmHistory .wwm-analysis-card,
-#wwmQuality .wwm-analysis-card {
+#wwmHistory .wwm-analysis-card {
   height: 570px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
