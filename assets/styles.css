@@ -503,7 +503,7 @@ a.icon-btn { text-decoration: none; }
 .preset-bar {
   display: flex; align-items: center; gap: var(--space-3);
   padding: var(--space-2) var(--space-3-5); margin-top: var(--space-2);
-  background: rgba(15,12,14,0.85);
+  background: var(--surf-2);
   border: 1px solid var(--ink-2);
   border-radius: 2px;
 }
@@ -941,7 +941,7 @@ html.wwm-shared-build-mode #exportBtn {
 
 /* A — jade glow */
 .tier-A {
-  color: #a8d4b4;
+  color: var(--jade-bright);
   background: linear-gradient(135deg, rgba(168,212,180,0.20), rgba(127,168,138,0.15));
   border-color: var(--jade-bright-strong);
   text-shadow: 0 0 12px rgba(168,212,180,0.60);
@@ -950,7 +950,7 @@ html.wwm-shared-build-mode #exportBtn {
 
 /* B — bone warm glow */
 .tier-B {
-  color: #c9b88a;
+  color: var(--bone);
   background: linear-gradient(135deg, rgba(201,184,138,0.20), rgba(160,140,100,0.15));
   border-color: rgba(201,184,138,0.48);
   text-shadow: 0 0 10px rgba(201,184,138,0.45);
@@ -1703,7 +1703,7 @@ html.wwm-view-sidebar .wwm-sb-rest {
 }
 /* OBS view: section title背景を URL param --overlay-label-bg で制御 */
 html.wwm-view-sidebar .wwm-sb-section-title {
-  background-color: var(--overlay-label-bg, #d4af37) !important;
+  background-color: var(--overlay-label-bg, var(--accent)) !important;
 }
 /* 透明度 slider (右上 fixed) */
 .wwm-overlay-ctrl {
@@ -2519,7 +2519,7 @@ body.wwm-layout-active .wwm-footer {
   background: linear-gradient(135deg, var(--vermilion-deep), var(--vermilion));
   border: 1px solid var(--gold-bright-mid);
   border-radius: 2px;
-  box-shadow: 0 0 4px rgba(232,81,58,0.5);
+  box-shadow: 0 0 4px var(--vermilion-glow);
   flex-shrink: 0;
   vertical-align: middle;
   margin: 0 var(--space-half);
@@ -3895,7 +3895,7 @@ body.wwm-layout-active .wwm-footer {
 
 /* A — jade calm */
 .hero-wuxia .hero-tier.tier-A {
-  color: #a8d4b4;
+  color: var(--jade-bright);
   background: linear-gradient(135deg, rgba(45,90,58,.42) 0%, rgba(20,40,28,.32) 50%, rgba(45,90,58,.42) 100%);
   border-color: var(--jade-bright-strong);
   text-shadow: 0 0 12px rgba(168,212,180,.7), 0 0 24px rgba(127,168,138,.35);
@@ -3904,7 +3904,7 @@ body.wwm-layout-active .wwm-footer {
 
 /* B — bone copper */
 .hero-wuxia .hero-tier.tier-B {
-  color: #c9b88a;
+  color: var(--bone);
   background: linear-gradient(135deg, rgba(122,90,32,.38) 0%, rgba(50,38,16,.3) 50%, rgba(122,90,32,.38) 100%);
   border-color: rgba(201,184,138,.5);
   text-shadow: 0 0 10px rgba(201,184,138,.55);
@@ -3994,7 +3994,7 @@ body.wwm-layout-active .wwm-footer {
   font-size: 30px;
   font-weight: var(--fw-extra);
   letter-spacing: .18em;
-  background: linear-gradient(180deg, var(--chart-crit) 0%, #c9a45a 55%, #8a6f30 100%);
+  background: linear-gradient(180deg, var(--chart-crit) 0%, var(--gold) 55%, var(--gold-deep) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -4015,10 +4015,10 @@ body.wwm-layout-active .wwm-footer {
 }
 .hero-wuxia .judge-dot { width: 7px; height: 7px; flex-shrink: 0; }
 /* 物理/属性 行: 区切り線 + 菱形マーカー (◇物理=朱outline / ◆属性=翠fill) */
-.hero-wuxia .judge-row-sep { margin-top: 5px; padding-top: var(--space-1-5); border-top: 1px solid rgba(232,215,180,0.12); }
+.hero-wuxia .judge-row-sep { margin-top: 5px; padding-top: var(--space-1-5); border-top: 1px solid var(--ink-2); }
 .hero-wuxia .judge-dot-diamond { width: 8px; height: 8px; border-radius: 0; transform: rotate(45deg); }
 .hero-wuxia .judge-dot-phys { background: transparent; border: 1.6px solid var(--chart-sympathy); box-shadow: 0 0 6px var(--vermilion-bright-mid-2); }
-.hero-wuxia .judge-dot-elem { background: transparent; border: 1.6px solid #a8d4b4; box-shadow: 0 0 6px var(--jade-bright-strong); }
+.hero-wuxia .judge-dot-elem { background: transparent; border: 1.6px solid var(--jade-bright); box-shadow: 0 0 6px var(--jade-bright-strong); }
 .hero-wuxia .judge-name { font-weight: var(--fw-semibold); color: var(--paper-2); }
 .hero-wuxia .judge-val {
   font-family: var(--f-mono);
