@@ -137,6 +137,10 @@ html[data-theme="light"] {
   --c-gold-deep-glow-2:        rgba(138,106,32,0.45);/* regular modal bg-icon drop-shadow (PC+mobile) */
   --c-vermilion-deep-mid:      rgba(138,31,23,0.55); /* tier-SS / xinfa-tier-chip border */
 
+  /* vermilion + tier-SS halo (B16) */
+  --c-vermilion-glow-soft:     rgba(200,60,43,0.25); /* seal / tier-S outer glow (light theme) */
+  --c-tier-ss-text-halo:       rgba(255,255,255,0.55); /* tier-SS badge text 白 halo (hero + sb-badge) */
+
   /* misc text + glow (B13) */
   --c-text-brown-bright:       #8a5212;              /* sb-mini-hero totalmartial / sb-applied */
   --c-text-brown-dim:          #6a4220;              /* equip stat-pct / step2 muted */
@@ -178,7 +182,7 @@ html[data-theme="light"] .seal {
   box-shadow:
     inset 0 0 0 1px var(--c-tier-ss-glow-pink),
     inset 0 -8px 14px var(--c-shadow-light),
-    0 0 24px rgba(200, 60, 43, 0.25),
+    0 0 24px var(--c-vermilion-glow-soft),
     0 1px 4px var(--overlay-tint);
 }
 
@@ -275,7 +279,7 @@ html[data-theme="light"] .tier-S {
   text-shadow: 0 1px 2px var(--overlay-soft-2), 0 0 8px var(--c-tier-ss-glow-pink);
   box-shadow:
     0 0 18px rgba(200,60,43,0.65),
-    0 0 32px rgba(200,60,43,0.25),
+    0 0 32px var(--c-vermilion-glow-soft),
     inset 0 1px 0 rgba(255,230,210,0.45),
     inset 0 -1px 0 rgba(60,10,5,0.35);
   animation: tier-s-pulse-light 2.2s ease-in-out infinite;
@@ -758,7 +762,7 @@ html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS {
   background: linear-gradient(135deg, var(--c-tier-ss-grad-1) 0%, var(--c-tier-ss-grad-2) 50%, var(--c-tier-ss-grad-3) 100%);
   color: var(--c-tier-ss-fg);
   border-color: var(--c-tier-ss-border);
-  text-shadow: 0 0 2px rgba(255,255,255,0.55);
+  text-shadow: 0 0 2px var(--c-tier-ss-text-halo);
   box-shadow: 0 0 12px rgba(184,134,11,0.45), inset 0 1px 0 var(--hover-strong), inset 0 -1px 0 rgba(90,42,10,0.3);
 }
 
@@ -783,7 +787,7 @@ html[data-theme="light"] .wwm-sb-tier-badge.tier-SS {
   background: linear-gradient(135deg, var(--c-tier-ss-grad-1) 0%, var(--c-tier-ss-grad-2) 50%, var(--c-tier-ss-grad-3) 100%) !important;
   color: var(--c-tier-ss-fg) !important;
   border-color: var(--c-tier-ss-border) !important;
-  text-shadow: 0 0 2px rgba(255,255,255,0.55) !important;
+  text-shadow: 0 0 2px var(--c-tier-ss-text-halo) !important;
 }
 
 html[data-theme="light"] .wwm-sb-tier-badge.tier-S {
