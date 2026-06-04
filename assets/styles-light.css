@@ -141,6 +141,7 @@ html[data-theme="light"] {
   --c-text-brown-dim:          #6a4220;              /* equip stat-pct / step2 muted */
   --c-tier-ss-glow-pink:       rgba(255,200,180,0.4);/* tier-SS inset/text glow (pink) */
   --c-anlz-shadow-orange:      rgba(120,60,20,.18);  /* anlz-header / anlz-body box-shadow */
+  --c-sb-top-bg:               #f5ead0;              /* sidebar wwm-sb-top + sb-rest gradient 上 */
 }
 
 html[data-theme="light"] body {
@@ -300,11 +301,11 @@ html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-totalmartial .wwm-muted,
 html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial .wwm-muted { color: #5a4326 !important; opacity: 0.85 !important; }
 
 html[data-theme="light"] .wwm-sb-rest {
-  background: linear-gradient(180deg, #f5ead0, #ede0c0);
+  background: linear-gradient(180deg, var(--c-sb-top-bg), var(--c-surf-warm-2));
   border-color: rgba(40,25,18,0.15);
 }
 
-html[data-theme="light"] .wwm-sb-top { background: #f5ead0; }
+html[data-theme="light"] .wwm-sb-top { background: var(--c-sb-top-bg); }
 
 html[data-theme="light"] .wwm-sb-applied { color: var(--c-text-brown-bright); opacity: 1; }
 
