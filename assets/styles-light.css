@@ -1,5 +1,4 @@
 @layer light {
-
 /* AUTO-EXTRACTED from styles.css — LIGHT theme rules.
    Loaded AFTER styles.css for natural cascade override.
    Regenerate with: node scripts/theme-extract.cjs --apply
@@ -15,7 +14,7 @@ html[data-theme="light"] .wwm-brand-vert { color: var(--vermilion); border-color
 
 html[data-theme="light"] .wwm-brand-en { color: var(--gold); opacity: 0.75; }
 
-html[data-theme="light"] .wwm-brand-sub { color: var(--vermilion-bright); opacity: 0.85; }
+html[data-theme="light"] .wwm-brand-sub { color: var(--vermilion-bright); }
 
 html[data-theme="light"].wwm-shared-build-mode .wwm-shared-build-banner {
   background: linear-gradient(90deg, var(--vermilion-soft-light), var(--vermilion-faint));
@@ -172,10 +171,6 @@ html[data-theme="light"] body {
     var(--bg-0);
 }
 
-html[data-theme="light"] .sticky-header {
-  background: transparent;
-}
-
 html[data-theme="light"] header.topbar {
   background:
     linear-gradient(var(--c-overlay-cream), var(--c-overlay-cream)),
@@ -196,8 +191,6 @@ html[data-theme="light"] .seal {
     0 0 24px var(--c-vermilion-glow-soft),
     0 1px 4px var(--overlay-tint);
 }
-
-html[data-theme="light"] .title-block h1 { color: var(--paper); }
 
 html[data-theme="light"] .title-block h1 .accent { color: var(--vermilion); }
 
@@ -234,10 +227,6 @@ html[data-theme="light"] .preset-slot.has-data { background: rgba(255,246,220,0.
 
 html[data-theme="light"] .preset-slot.has-data .preset-slot-num { color: var(--vermilion); }
 
-html[data-theme="light"] .preset-name-input { color: var(--paper); }
-
-html[data-theme="light"] .preset-name-input::placeholder { color: var(--paper-mute); }
-
 html[data-theme="light"] .preset-save { color: var(--gold-bright); border-color: var(--c-gold-deep-strong); }
 
 html[data-theme="light"] .preset-save:hover { background: var(--gold-bright); color: #fff5dc; }
@@ -246,9 +235,9 @@ html[data-theme="light"] .preset-load { color: var(--jade-bright); border-color:
 
 html[data-theme="light"] .preset-load:hover:not(:disabled) { background: var(--jade-bright); color: #fff; }
 
-html[data-theme="light"] .preset-del { color: var(--vermilion); border-color: var(--vermilion-strong); }
+html[data-theme="light"] .preset-del { color: var(--vermilion); }
 
-html[data-theme="light"] .preset-del:hover:not(:disabled) { background: var(--vermilion); color: #fff; }
+html[data-theme="light"] .preset-del:hover:not(:disabled) {  color: #fff; }
 
 html[data-theme="light"] .hero-number .unit { color: var(--gold-bright); border-bottom-color: var(--gold-bright); }
 
@@ -267,8 +256,6 @@ html[data-theme="light"] .hcb-pct.elem { color: var(--jade-bright); }
 html[data-theme="light"] .hcb-val.phys { color: var(--vermilion); }
 
 html[data-theme="light"] .hcb-val.elem { color: var(--jade-bright); }
-
-html[data-theme="light"] footer { color: var(--paper-mute); }
 
 html[data-theme="light"] footer strong { color: var(--vermilion); }
 
@@ -373,7 +360,7 @@ html[data-theme="light"] .wwm-equip-liupai-badge {
   filter: drop-shadow(0 1px 2px var(--c-shadow-light));
 }
 
-html[data-theme="light"] .wwm-equip-delta-pos { color: var(--jade-bright); text-shadow: none; }
+html[data-theme="light"] .wwm-equip-delta-pos {  text-shadow: none; }
 
 html[data-theme="light"] .wwm-equip-delta-neg { color: var(--vermilion-deep); text-shadow: none; }
 
@@ -396,7 +383,7 @@ html[data-theme="light"] .wwm-opt-sort-btn + .wwm-opt-sort-btn { border-left-col
 
 html[data-theme="light"] .wwm-opt-btn { color: #5a4220; border-color: var(--c-opt-border-mid); }
 html[data-theme="light"] .wwm-opt-btn:hover { background: var(--c-opt-hover-bg); border-color: var(--c-opt-border-strong); }
-html[data-theme="light"] .wwm-opt-btn-apply { color: var(--jade-bright); border-color: rgba(45,90,58,0.4); }
+html[data-theme="light"] .wwm-opt-btn-apply {  border-color: rgba(45,90,58,0.4); }
 html[data-theme="light"] .wwm-opt-btn-apply:hover { background: rgba(168,212,180,0.25); border-color: rgba(45,90,58,0.7); }
 
 html[data-theme="light"] .wwm-share-warn {
@@ -554,11 +541,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-close { color: var(--brown-
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-header { border-bottom-color: transparent; }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-header::after {
-  position: absolute;
-  left: 0; right: 0; width: auto;
-  height: 2px;
   background: linear-gradient(90deg, transparent 0%, transparent 30%, rgba(232,81,58,0.85) 50%, transparent 70%, transparent 100%);
-  opacity: 1;
 }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-col,
@@ -679,7 +662,6 @@ html[data-theme="light"] .wwm-xinfa-tier-chip {
 
 html[data-theme="light"] .wwm-gear-grid .wwm-equip-slot::before,
 html[data-theme="light"] .wwm-xinfa-slot::before {
-  opacity: 0;
   mix-blend-mode: multiply;
 }
 
@@ -701,7 +683,6 @@ html[data-theme="light"] .wwm-xinfa-slot {
 html[data-theme="light"] .wwm-xinfa-slot:hover,
 html[data-theme="light"] .wwm-gear-grid .wwm-equip-slot[data-slot]:hover {
   border-color: var(--vermilion-bright);
-  box-shadow: 0 4px 14px rgba(232,81,58,0.28);
 }
 
 html[data-theme="light"] {
@@ -729,7 +710,6 @@ html[data-theme="light"] .hero-wuxia .hero-label .ja {
 }
 
 html[data-theme="light"] .hero-wuxia .hero-label .en {
-  color: var(--paper-mute);
   opacity: .8;
 }
 
@@ -1145,5 +1125,4 @@ html[data-theme="light"] .wwm-mobile-anlz-overlay-header {
 html[data-theme="light"] .wwm-mobile-anlz-overlay-title { color: var(--vermilion-deep); }
 
 html[data-theme="light"] .wwm-mobile-anlz-overlay-close { color: var(--vermilion-deep); }
-
 } /* end @layer light */
