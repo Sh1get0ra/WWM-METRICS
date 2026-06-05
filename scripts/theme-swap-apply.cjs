@@ -79,6 +79,7 @@ if (MODE_PAIRS) {
 
   const tokenDefsRoot = [];   // tokens.css :root 追加分
   const tokenDefsLight = [];  // light.css token block 追加分
+  const inserts = [];         // S2-f: base rule 末尾 decl 挿入 { file, ruleStart, prop, value }
 
   for (const g of plan) {
     // retoken: 既存 token の root default (tokens.css) を書換え — base / light block 無変更
@@ -100,6 +101,9 @@ if (MODE_PAIRS) {
       if (t.light && !selfRef) tokenDefsLight.push(`  ${t.name}: ${t.light};${g.note ? `  /* ${g.note} */` : ''}`);
     }
     const baseValue = g.baseValue || `var(${g.token})`;
+
+    // S2-f insert op: base rule 末尾へ decl 追加 (splice は全 in-place 編集後に一括)
+    if (g.insert) inserts.push({ file: g.insert.file, ruleStart: g.insert.ruleStart, prop: g.insert.prop, value: baseValue });
 
     for (const d of g.decls) {
       // base 置換 (baseFile null = light 削除のみの decl)
@@ -123,6 +127,48 @@ if (MODE_PAIRS) {
     const kept = lines.filter((l, i) => !(marked.has(i) && /^[ \t]*\r?$/.test(l)));
     lines.length = 0;
     lines.push(...kept);
+  }
+
+  // S2-f insert: rule 末尾 (閉じ brace 直前) へ decl 挿入。
+  // base file は in-place 編集のみ (行番号不変) なので元 ruleStart で位置特定可。
+  // 同一 file 内は ruleStart 降順で splice (先行 splice が後続位置をずらさない)
+  const byInsFile = new Map();
+  for (const ins of inserts) {
+    if (!byInsFile.has(ins.file)) byInsFile.set(ins.file, []);
+    byInsFile.get(ins.file).push(ins);
+  }
+  for (const [f, list] of byInsFile) {
+    const lines = load(f);
+    list.sort((a, b) => b.ruleStart - a.ruleStart);
+    for (const ins of list) {
+      // ruleStart 行から '{' を探し、 対応する '}' まで depth 走査
+      let i = ins.ruleStart - 1, depth = 0, opened = false, closeIdx = -1, closePos = -1;
+      outer: for (; i < lines.length; i++) {
+        for (let c = 0; c < lines[i].length; c++) {
+          const ch = lines[i][c];
+          if (ch === '{') { depth++; opened = true; }
+          else if (ch === '}') {
+            depth--;
+            if (opened && depth === 0) { closeIdx = i; closePos = c; break outer; }
+          }
+        }
+      }
+      if (closeIdx === -1) { console.error(`[FAIL] insert ${f}:${ins.ruleStart} rule 終端 不在`); process.exit(1); }
+      // rule 内に同 prop 既存なら異常 (audit P 前提崩れ)
+      const ruleText = lines.slice(ins.ruleStart - 1, closeIdx + 1).join('\n');
+      if (new RegExp(`(^|;|\\{)\\s*${ins.prop.replace(/[-]/g, '\\-')}\\s*:`, 'm').test(ruleText)) {
+        console.error(`[FAIL] insert ${f}:${ins.ruleStart} ${ins.prop} 既存`); process.exit(1);
+      }
+      const eol = lines[closeIdx].endsWith('\r') ? '\r' : '';
+      if (/^[ \t]*\}/.test(lines[closeIdx])) {
+        // 閉じ brace 行 (先頭) → 直前に新行挿入
+        lines.splice(closeIdx, 0, `  ${ins.prop}: ${ins.value};${eol}`);
+      } else {
+        // single-line rule 等 → '}' 直前に inline 挿入
+        lines[closeIdx] = lines[closeIdx].slice(0, closePos) + `${ins.prop}: ${ins.value}; ` + lines[closeIdx].slice(closePos);
+      }
+      if (DRY) console.log(`[DRY] insert ${f}:${ins.ruleStart} + ${ins.prop}: ${ins.value}`);
+    }
   }
 
   // tokens.css :root 末尾 (--safe-top 行の手前の「Safe Area」 コメント前) に挿入

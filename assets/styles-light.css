@@ -4,16 +4,7 @@
    Regenerate with: node scripts/theme-extract.cjs --apply
  */
 
-html[data-theme="light"] .wwm-brand-seal { opacity: 0.8; }
-
 html[data-theme="light"] .wwm-brand-vert {  border-color: var(--gold); }
-
-html[data-theme="light"] .wwm-brand-en {  opacity: 0.75; }
-
-html[data-theme="light"].wwm-shared-build-mode .wwm-shared-build-banner {
-
-  border-color: var(--vermilion);
-}
 
 html[data-theme="light"] .hero {
   background:
@@ -29,16 +20,10 @@ html[data-theme="light"] .wwm-sb-tier-badge.tier-S {
 }
 
 /* S2-d split: safe 組 (lang/preset) と unsafe 組 (icon-btn hover 競合 / hero box-shadow 競合) を分離 */
-html[data-theme="light"] .lang-btn:focus-visible,
-html[data-theme="light"] .preset-btn:focus-visible,
-html[data-theme="light"] .preset-name-input:focus-visible {
-  outline-color: var(--vermilion);
-
-}
 
 html[data-theme="light"] .icon-btn:focus-visible,
 html[data-theme="light"] .hero:focus-visible {
-  outline-color: var(--vermilion);
+
   box-shadow: 0 0 0 4px var(--vermilion-bright-soft);
 }
 
@@ -155,6 +140,39 @@ html[data-theme="light"] {
   --c-tier-ss-glow-pink:       rgba(255,200,180,0.4);/* tier-SS inset/text glow (pink) */
   --c-anlz-shadow-orange:      rgba(120,60,20,.18);  /* anlz-header / anlz-body box-shadow */
   --c-sb-top-bg:               #f5ead0;              /* sidebar wwm-sb-top + sb-rest gradient 上 */
+
+  /* ─── @layer Step 2-f: theme-swap tokens (light 値) ─── */
+  --c-brand-seal-opacity: 0.8;
+  --c-brand-en-opacity: 0.75;
+  --c-shared-build-mode--shared-build-banner-border: var(--vermilion);
+  --c-lang-btn-focus-outline: var(--vermilion);
+  --c-hero-focus-outline: var(--vermilion);
+  --c-hero-number--unit-border-bot: var(--gold-bright);
+  --c-tier-C-shadow: none;
+  --c-sb-rest-border: rgba(40,25,18,0.15);
+  --c-opt-sort-group-border: var(--c-opt-border-soft);
+  --c-sb-section-title-border-left: 3px solid var(--gold-deep);
+  --c-sb-section-title-pad-left: var(--space-2);
+  --c-cmp-modal-a--cmp-title-ja-text-shadow: none;
+  --c-brand-sub-text-shadow: 0 0 4px var(--c-gold-deep-mid);
+  --c-diag-modal--modal-bg-icon-opacity: 0.22;
+  --c-xinfa-tier-chip-border: var(--c-vermilion-deep-mid);
+  --c-hero-label--en-opacity: .8;
+  --c-hero-wuxia--hero-next-val-text-shadow: 0 0 2px rgba(255,250,235,0.6);
+  --c-hero-wuxia--judge-name-text-shadow: 0 0 1px var(--hover-mid-2);
+  --c-hero-wuxia--judge-val-text-shadow: 0 0 2px rgba(255,250,235,0.7);
+  --c-hero-wuxia--judge-dot-phys-border: var(--vermilion-deep);
+  --c-hero-wuxia--hero-tier-tier-SS-shadow: 0 0 12px rgba(184,134,11,0.45), inset 0 1px 0 var(--hover-strong), inset 0 -1px 0 rgba(90,42,10,0.3);
+  --c-hero-wuxia--hero-tier-tier-S-shadow: 0 0 12px var(--vermilion-mid-strong), inset 0 1px 0 var(--hover-mid-2), inset 0 -1px 0 rgba(60,10,8,0.3);
+  --c-migration-banner-border-bot: var(--c-migration-accent);
+  --c-sb-label-fw: 500;
+  --c-note-cl-items--note-cl-featured-border-left: var(--vermilion-deep);
+  --c-note-cl-items--note-cl-featured-fg: var(--brown-1);
+  --c-mobile-drawer-border-left: var(--vermilion);
+  --c-cmp-modal-a--cmp-rows-border: initial;
+  --c-cmp-modal-a--cmp-rows-shadow: initial;
+  --c-cmp-modal-a--cmp-current-border: initial;
+  --c-cmp-modal-a--cmp-col-border: initial;
 
   /* ─── @layer Step 2-e: theme-swap tokens (light 値) ─── */
   --c-modal-a-rows-bg: var(--overlay-trace);
@@ -392,8 +410,6 @@ html[data-theme="light"] .icon-btn.import-btn { color: var(--gold-bright); borde
 
 html[data-theme="light"] .icon-btn.import-btn:hover { background: var(--gold); color: #fff; }
 
-html[data-theme="light"] .hero-number .unit {  border-bottom-color: var(--gold-bright); }
-
 html[data-theme="light"] .hcb-pct.phys { color: rgba(200,60,43,0.7); }
 
 html[data-theme="light"] .hcb-pct.elem { color: var(--jade-bright); }
@@ -414,7 +430,7 @@ html[data-theme="light"] .tier-S {
   animation: tier-s-pulse-light 2.2s ease-in-out infinite;
 }
 
-html[data-theme="light"] .tier-C {       text-shadow: none; box-shadow: none; }
+html[data-theme="light"] .tier-C {       text-shadow: none;  }
 
 html[data-theme="light"] .wwm-sb-mini-hero-card {
   background: linear-gradient(180deg, var(--c-surf-warm-1), var(--c-surf-warm-2));
@@ -425,11 +441,6 @@ html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial b { color: var(-
 
 html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-totalmartial .wwm-muted,
 html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial .wwm-muted { color: #5a4326; opacity: 0.85; }
-
-html[data-theme="light"] .wwm-sb-rest {
-
-  border-color: rgba(40,25,18,0.15);
-}
 
 /* .wwm-sb-top light bg override は削除 (2026-06-05 pre-existing bug fix):
    sb-top は mini-hero card 内のみ存在 (anlz.js)、 card 側が背景を持ち sb-top は
@@ -478,8 +489,6 @@ html[data-theme="light"] .wwm-equip-liupai-badge {
 
 html[data-theme="light"] .wwm-sb-notice {  background: var(--vermilion-tint); }
 
-html[data-theme="light"] .wwm-opt-sort-group { border-color: var(--c-opt-border-soft); }
-
 html[data-theme="light"] .wwm-opt-sort-btn + .wwm-opt-sort-btn { border-left-color: var(--c-opt-border-soft); }
 
 html[data-theme="light"] .wwm-opt-btn {  border-color: var(--c-opt-border-mid); }
@@ -506,13 +515,6 @@ html[data-theme="light"] .wwm-eff-row {
 html[data-theme="light"] .wwm-eff-input {
 
   border-color: var(--ink-2);
-
-}
-
-html[data-theme="light"] .wwm-sb-section-title {
-
-  border-left: 3px solid var(--gold-deep);
-  padding-left: var(--space-2);
 
 }
 
@@ -591,8 +593,6 @@ html[data-theme="light"] .wwm-cmp-modal-a {
   color: var(--brown-1);
 }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title-ja {  text-shadow: none; }
-
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-close { color: var(--brown-1); }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-header { border-bottom-color: transparent; }
@@ -670,11 +670,6 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
   background-color: var(--hover-strong);
 }
 
-html[data-theme="light"] .wwm-brand-sub {
-
-  text-shadow: 0 0 4px var(--c-gold-deep-mid);
-}
-
 html[data-theme="light"] .wwm-modal-bg-icon {
 
   filter:
@@ -697,17 +692,11 @@ html[data-theme="light"] .wwm-diag-modal .wwm-modal-bg-icon {
     brightness(0)
     drop-shadow(0 0 6px var(--vermilion-strong))
     drop-shadow(0 0 14px var(--vermilion-mid));
-  opacity: 0.22;
+
 }
 
 html[data-theme="light"] .wwm-xinfa-liupai-badge {
   filter: drop-shadow(0 1px 2px var(--c-shadow-light));
-}
-
-html[data-theme="light"] .wwm-xinfa-tier-chip {
-
-  border-color: var(--c-vermilion-deep-mid);
-
 }
 
 html[data-theme="light"] .wwm-gear-grid .wwm-equip-slot::before,
@@ -751,41 +740,22 @@ html[data-theme="light"] .hero.hero-wuxia {
   box-shadow: inset 0 0 40px rgba(122,90,32,.18);
 }
 
-html[data-theme="light"] .hero-wuxia .hero-label .en {
-  opacity: .8;
-}
-
 html[data-theme="light"] .hero-wuxia .hero-number {
   color: var(--paper) !important;  /* 濃茶 (墨黒より明るめ) */
 
   filter: none;
 }
 
-html[data-theme="light"] .hero-wuxia .hero-next-val {
-
-  text-shadow: 0 0 2px rgba(255,250,235,0.6);
-}
-
 /* S2-d split: label = pair 同値 (削除可) / arrow = pair 値違い (token 化) → 分離 */
-
-html[data-theme="light"] .hero-wuxia .judge-name {
-
-  text-shadow: 0 0 1px var(--hover-mid-2);
-}
 
 html[data-theme="light"] .hero-wuxia .judge-val {
   filter: brightness(0.38) saturate(1.8);
 
-  text-shadow: 0 0 2px rgba(255,250,235,0.7);
 }
 
 html[data-theme="light"] .hero-wuxia #dmgPhysVal { color: var(--vermilion-deep) !important; filter: none; }
 
 html[data-theme="light"] .hero-wuxia #dmgElemVal { color: var(--jade-bright) !important; filter: none; }
-
-html[data-theme="light"] .hero-wuxia .judge-dot-phys { border-color: var(--vermilion-deep);  }
-
-html[data-theme="light"] .hero-wuxia .judge-dot-elem { border-color: var(--jade-bright);  }
 
 html[data-theme="light"] .hero-wuxia .judge-row-sep { border-top-color: rgba(40,25,18,0.2); }
 
@@ -797,7 +767,7 @@ html[data-theme="light"] .hero-wuxia .hero-tier.tier-badge {
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS {
 
   text-shadow: 0 0 2px var(--c-tier-ss-text-halo);
-  box-shadow: 0 0 12px rgba(184,134,11,0.45), inset 0 1px 0 var(--hover-strong), inset 0 -1px 0 rgba(90,42,10,0.3);
+
 }
 
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS::before,
@@ -855,7 +825,7 @@ html[data-theme="light"] .wwm-sb-tier-badge.tier-C {
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-S {
 
   text-shadow: 0 0 2px var(--hover-mid-2);
-  box-shadow: 0 0 12px var(--vermilion-mid-strong), inset 0 1px 0 var(--hover-mid-2), inset 0 -1px 0 rgba(60,10,8,0.3);
+
 }
 
 /* tier-A/B/C の shadow: dark 用 glow (components.css) が spec 抑圧で漏れ出ていた調整漏れを
@@ -911,12 +881,6 @@ html[data-theme="light"] .hero-wuxia .luopan-arc circle[stroke^="rgba(232,215,18
 html[data-theme="light"] .hero-wuxia .luopan-inner svg circle.donut-bg,
 html[data-theme="light"] .hero-wuxia .luopan-inner svg circle[stroke^="rgba(232,215,180"] {
   stroke: rgba(122,90,32,.5) !important;
-}
-
-html[data-theme="light"] .wwm-migration-banner {
-
-  border-bottom-color: var(--c-migration-accent);
-
 }
 
 html[data-theme="light"] .wwm-equip-section,
@@ -995,11 +959,6 @@ html[data-theme="light"] .wwm-step2 .wwm-arsenal-tier {
   background: rgba(255,240,210,0.4);
 }
 
-html[data-theme="light"] .wwm-sb-label {
-  font-weight: 500;
-
-}
-
 html[data-theme="light"] .wwm-anlz {
   --anlz-header-bg: #f0e8d2;
   --anlz-content-bg: #faf3df;
@@ -1051,25 +1010,8 @@ html[data-theme="light"] .wwm-anlz-bgicon {
     drop-shadow(0 0 14px var(--c-gold-deep-mid));
 }
 
-html[data-theme="light"] .wwm-note-cl-items li.wwm-note-cl-featured {
-
-  border-left-color: var(--vermilion-deep);
-  color: var(--brown-1);
-}
-
-html[data-theme="light"] .wwm-score-update-banner {
-
-  border-bottom-color: var(--vermilion-strong);
-}
-
 html[data-theme="light"] :where(button, [role="button"], a, input, select, textarea, summary, [tabindex]):focus-visible {
   outline-color: var(--vermilion);
-}
-
-html[data-theme="light"] .wwm-mobile-drawer {
-
-  border-left-color: var(--vermilion);
-
 }
 
 html[data-theme="light"] .wwm-mobile-drawer * { color: var(--vermilion-deep); }

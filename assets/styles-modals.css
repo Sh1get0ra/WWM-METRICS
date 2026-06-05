@@ -234,6 +234,8 @@
   padding: var(--space-half) var(--space-1-5);
   background: var(--c-sb-section-title-bg);
   border-radius: 3px;
+  border-left: var(--c-sb-section-title-border-left);
+  padding-left: var(--c-sb-section-title-pad-left);
 }
 .wwm-sb-items { display: flex; flex-direction: column; gap: var(--space-half); }
 /* 折り畳み state (components.css から移動 2026-06-05 @layer Step 1 — 基本 rule との file 分裂解消) */
@@ -243,7 +245,7 @@
   padding: var(--space-half) var(--space-1-5); align-items: baseline;
 }
 .wwm-sb-row.wwm-sb-sub { padding-left: 18px; opacity: 0.85; font-size: var(--text-sm); }
-.wwm-sb-label { opacity: var(--c-sb-label-opacity); white-space: nowrap; flex-shrink: 0; }
+.wwm-sb-label { opacity: var(--c-sb-label-opacity); white-space: nowrap; flex-shrink: 0; font-weight: var(--c-sb-label-fw); }
 .wwm-sb-value { font-weight: var(--fw-semibold); text-align: right; min-width: 0; }
 .wwm-sb-warn {
   display: inline-block;
@@ -362,6 +364,7 @@
 .wwm-cmp-modal-a .wwm-cmp-current,
 .wwm-cmp-modal-a .wwm-cmp-new {
   border: 1px solid var(--ink-1);
+  border-color: var(--c-cmp-modal-a--cmp-current-border);
 }
 .wwm-cmp-col > .wwm-cmp-title,
 .wwm-cmp-col > .wwm-cmp-rows,
@@ -688,9 +691,12 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 /* col / affix-rows 透過化 (背景icon 透けさせる) */
 .wwm-cmp-modal-a .wwm-cmp-col {
   background: var(--c-modal-a-col-bg);
+  border-color: var(--c-cmp-modal-a--cmp-col-border);
 }
 .wwm-cmp-modal-a .wwm-cmp-rows {
   background: var(--c-modal-a-rows-bg);
+  border: var(--c-cmp-modal-a--cmp-rows-border);
+  box-shadow: var(--c-cmp-modal-a--cmp-rows-shadow);
 }
 /* ── ダーク: select border を subtle gold に統一 (gold-deep/ink-2 バラつき解消) + rows を暗inset で差別化 ── */
 /* ── ダーク 配色: 案B 黒檀朱 (近黒ebony + 朱主役・金従)。border系は現状維持 (col/rows/select 不変) ── */
@@ -725,6 +731,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   font-weight: 900;
   letter-spacing: 0.18em;
   color: var(--c-modal-a-title-ja-fg);
+  text-shadow: var(--c-cmp-modal-a--cmp-title-ja-text-shadow);
 }
 .wwm-cmp-modal-a .wwm-cmp-title-en {
   font-family: var(--f-latin, 'Cinzel');
@@ -1238,6 +1245,8 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   font-size: 1.02em;
   line-height: 1.7;
   border-radius: 0 4px 4px 0;
+  border-left-color: var(--c-note-cl-items--note-cl-featured-border-left);
+  color: var(--c-note-cl-items--note-cl-featured-fg);
 }
 .wwm-note-cl-items li.wwm-note-cl-featured::before { display: none; }
 
@@ -1280,6 +1289,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
     brightness(0) invert(1)
     drop-shadow(0 0 10px rgba(255,107,74,0.7))
     drop-shadow(0 0 22px rgba(200,60,43,0.45));
+  opacity: var(--c-diag-modal--modal-bg-icon-opacity);
 }
 
 

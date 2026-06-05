@@ -394,6 +394,41 @@
   --c-modal-a-name-fg: #ecdfd6;
   --c-modal-a-val-fg: #ffae8a;
 
+  /* ─── @layer Step 2-f: theme-swap tokens (dark default) ─── */
+  --c-brand-seal-opacity: initial;
+  --c-brand-en-opacity: initial;
+  --c-shared-build-mode--shared-build-banner-border: var(--vermilion-strong);
+  --c-lang-btn-focus-outline: var(--gold-bright);
+  --c-hero-focus-outline: var(--gold-bright);
+  --c-hero-number--unit-border-bot: var(--gold-deep);
+  --c-tier-C-shadow: initial;
+  --c-sb-rest-border: var(--ink-1);
+  --c-opt-sort-group-border: var(--ink-2);
+  --c-sb-section-title-border-left: initial;
+  --c-sb-section-title-pad-left: var(--space-1-5);
+  --c-cmp-modal-a--cmp-title-ja-text-shadow: 0 0 10px rgba(232,81,58,0.3);
+  --c-brand-sub-text-shadow: initial;
+  --c-diag-modal--modal-bg-icon-opacity: var(--c-modal-bg-icon-opacity);
+  --c-xinfa-tier-chip-border: rgba(232,81,58,0.50);
+  --c-hero-label--en-opacity: initial;
+  --c-hero-wuxia--hero-next-val-text-shadow: initial;
+  --c-hero-wuxia--judge-name-text-shadow: initial;
+  --c-hero-wuxia--judge-val-text-shadow: initial;
+  --c-hero-wuxia--judge-dot-phys-border: var(--chart-sympathy);
+  --c-hero-wuxia--judge-dot-elem-border: var(--jade-bright);
+  --c-hero-wuxia--hero-tier-tier-SS-shadow: var(--c-tier-chip-ss-shadow);
+  --c-hero-wuxia--hero-tier-tier-S-shadow: var(--c-tier-chip-s-shadow);
+  --c-migration-banner-border-bot: #4a78b8;
+  --c-sb-label-fw: initial;
+  --c-note-cl-items--note-cl-featured-border-left: var(--vermilion);
+  --c-note-cl-items--note-cl-featured-fg: initial;
+  --c-score-update-banner-border-bot: var(--vermilion-strong);
+  --c-mobile-drawer-border-left: var(--gold-deep);
+  --c-cmp-modal-a--cmp-rows-border: 1px solid rgba(201,164,90,0.25);
+  --c-cmp-modal-a--cmp-rows-shadow: inset 0 1px 6px var(--overlay-heavy);
+  --c-cmp-modal-a--cmp-current-border: rgba(232,81,58,0.30);
+  --c-cmp-modal-a--cmp-col-border: rgba(232,81,58,0.30);
+
   /* Safe Area inset utility (Phase 1 base) */
   --safe-top:    env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
