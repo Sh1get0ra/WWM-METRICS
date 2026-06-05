@@ -8,7 +8,7 @@ html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-set-select,
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select,
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-stat-select,
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-val-input {
-  border-color: var(--gold-mid) !important;
+  border-color: var(--gold-mid);
 }
 
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-rows {
@@ -30,7 +30,7 @@ html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-col { background: var(--hover-
 
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-current,
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-new,
-html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-col { border-color: rgba(232,81,58,0.30) !important; }
+html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-col { border-color: rgba(232,81,58,0.30); }
 
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-kongfu-header,
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select { background: var(--gold-faint) !important; color: #e6d6b8 !important; }

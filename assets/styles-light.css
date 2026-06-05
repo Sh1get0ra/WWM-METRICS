@@ -582,7 +582,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv,
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
   background: var(--hover-strong) !important;
   color: var(--c-text-warm) !important;
-  border-color: var(--bone-dim) !important;
+  border-color: var(--bone-dim);
 }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-gold { background: var(--c-gold-deep-faint) !important; color: #7a5a12 !important; border-color: var(--c-gold-deep-strong) !important; }
@@ -795,43 +795,43 @@ html[data-theme="light"] .wwm-sb-tier-badge.tier-SS::before {
   height: 100%;
   background: linear-gradient(105deg, transparent 10%, rgba(255,255,255,0.30) 50%, transparent 90%) !important;
   transform: translateX(-200%);
-  animation: tier-ss-shimmer-light 1.6s linear infinite !important;
+  animation: tier-ss-shimmer-light 1.6s linear infinite;
   pointer-events: none;
   z-index: 1;
 }
 
 html[data-theme="light"] .wwm-sb-tier-badge.tier-SS {
-  background: linear-gradient(135deg, var(--c-tier-ss-grad-1) 0%, var(--c-tier-ss-grad-2) 50%, var(--c-tier-ss-grad-3) 100%) !important;
-  color: var(--c-tier-ss-fg) !important;
-  border-color: var(--c-tier-ss-border) !important;
+  background: linear-gradient(135deg, var(--c-tier-ss-grad-1) 0%, var(--c-tier-ss-grad-2) 50%, var(--c-tier-ss-grad-3) 100%);
+  color: var(--c-tier-ss-fg);
+  border-color: var(--c-tier-ss-border);
   text-shadow: 0 0 2px var(--c-tier-ss-text-halo) !important;
 }
 
 html[data-theme="light"] .wwm-sb-tier-badge.tier-S {
-  background: linear-gradient(135deg, var(--c-tier-s-grad-1) 0%, var(--c-tier-s-grad-2) 50%, var(--vermilion) 100%) !important;
-  color: var(--c-tier-s-fg) !important;
-  border-color: var(--c-tier-s-border) !important;
+  background: linear-gradient(135deg, var(--c-tier-s-grad-1) 0%, var(--c-tier-s-grad-2) 50%, var(--vermilion) 100%);
+  color: var(--c-tier-s-fg);
+  border-color: var(--c-tier-s-border);
   text-shadow: 0 0 2px var(--hover-mid-2) !important;
 }
 
 html[data-theme="light"] .wwm-sb-tier-badge.tier-A {
-  background: linear-gradient(135deg, var(--c-tier-a-grad-1) 0%, var(--c-tier-a-grad-2) 50%, var(--c-tier-a-grad-3) 100%) !important;
-  color: var(--c-tier-a-fg) !important;
-  border-color: var(--c-tier-a-border) !important;
+  background: linear-gradient(135deg, var(--c-tier-a-grad-1) 0%, var(--c-tier-a-grad-2) 50%, var(--c-tier-a-grad-3) 100%);
+  color: var(--c-tier-a-fg);
+  border-color: var(--c-tier-a-border);
   text-shadow: none !important;
 }
 
 html[data-theme="light"] .wwm-sb-tier-badge.tier-B {
-  background: linear-gradient(135deg, var(--c-tier-b-grad-1) 0%, var(--c-tier-b-grad-2) 50%, var(--c-tier-b-grad-3) 100%) !important;
-  color: var(--c-tier-b-fg) !important;
-  border-color: var(--c-tier-b-border) !important;
+  background: linear-gradient(135deg, var(--c-tier-b-grad-1) 0%, var(--c-tier-b-grad-2) 50%, var(--c-tier-b-grad-3) 100%);
+  color: var(--c-tier-b-fg);
+  border-color: var(--c-tier-b-border);
   text-shadow: none !important;
 }
 
 html[data-theme="light"] .wwm-sb-tier-badge.tier-C {
-  background: linear-gradient(135deg, var(--c-tier-c-grad-1) 0%, var(--c-tier-c-grad-2) 50%, var(--c-tier-c-grad-3) 100%) !important;
-  color: var(--c-tier-c-fg) !important;
-  border-color: var(--c-tier-c-border) !important;
+  background: linear-gradient(135deg, var(--c-tier-c-grad-1) 0%, var(--c-tier-c-grad-2) 50%, var(--c-tier-c-grad-3) 100%);
+  color: var(--c-tier-c-fg);
+  border-color: var(--c-tier-c-border);
   text-shadow: none !important;
 }
 
@@ -878,7 +878,7 @@ html[data-theme="light"] .hero-wuxia .l-bracket {
 }
 
 html[data-theme="light"] .hero-wuxia .luopan-ticks line {
-  stroke: rgba(122,90,32,.8) !important;
+  stroke: rgba(122,90,32,.8);
   stroke-opacity: 1;
 }
 
@@ -1029,7 +1029,7 @@ html[data-theme="light"] .wwm-anlz .wwm-anlz-title {
     0 0 3px   rgba(106,62,22,.18),
     0.6px 0 1.2px rgba(42,22,16,.25),
     -0.6px 0 1.2px rgba(42,22,16,.22),
-    0 0.5px 1.5px rgba(74,40,20,.14) !important;
+    0 0.5px 1.5px rgba(74,40,20,.14);
 }
 
 html[data-theme="light"] .wwm-anlz-title {
