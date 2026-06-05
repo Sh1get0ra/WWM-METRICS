@@ -309,7 +309,7 @@ html[data-theme="light"] .wwm-sb-mini-hero-ink {
 }
 
 html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-totalmartial b,
-html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial b { color: var(--c-text-brown-bright) !important; text-shadow: none !important; }
+html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial b { color: var(--c-text-brown-bright) !important; text-shadow: none; }
 
 html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-totalmartial .wwm-muted,
 html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial .wwm-muted { color: #5a4326 !important; opacity: 0.85 !important; }
@@ -535,7 +535,7 @@ html[data-theme="light"] .wwm-cmp-modal-a {
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-header { background: transparent !important; }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title-ja { color: var(--brown-1) !important; text-shadow: none !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title-ja { color: var(--brown-1) !important; text-shadow: none; }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title-en { color: var(--c-text-warm) !important; }
 
@@ -591,7 +591,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-purple { backgroun
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.13) !important; color: #2a5aa0 !important; border-color: rgba(40,90,160,0.5) !important; }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-footer-a { border-color: var(--c-border-soft-warm) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-footer-a { border-color: var(--c-border-soft-warm); }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-delta-label { color: var(--c-text-warm) !important; }
 
@@ -604,8 +604,8 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
 }
 
 html[data-theme="light"] .wwm-cmp-modal-bg-icon {
-  filter: brightness(0) drop-shadow(0 0 6px var(--c-gold-deep-glow-1)) !important;
-  opacity: 0.22 !important;
+  filter: brightness(0) drop-shadow(0 0 6px var(--c-gold-deep-glow-1));
+  opacity: 0.22;
 }
 
 html[data-theme="light"] .wwm-cmp-modal-a select option {
@@ -728,7 +728,7 @@ html[data-theme="light"] .hero-wuxia .hero-label .en {
 
 html[data-theme="light"] .hero-wuxia .hero-number {
   color: var(--paper) !important;  /* 濃茶 (墨黒より明るめ) */
-  text-shadow: none !important;
+  text-shadow: none;
   filter: none !important;
 }
 
@@ -785,19 +785,19 @@ html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS {
 
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS::before,
 html[data-theme="light"] .wwm-sb-tier-badge.tier-SS::before {
-  content: '' !important;
-  position: absolute !important;
+  content: '';
+  position: absolute;
   top: 0 !important;
   bottom: 0 !important;
   left: 0 !important;
   right: auto !important;
-  width: 120% !important;
-  height: 100% !important;
+  width: 120%;
+  height: 100%;
   background: linear-gradient(105deg, transparent 10%, rgba(255,255,255,0.30) 50%, transparent 90%) !important;
   transform: translateX(-200%);
   animation: tier-ss-shimmer-light 1.6s linear infinite !important;
-  pointer-events: none !important;
-  z-index: 1 !important;
+  pointer-events: none;
+  z-index: 1;
 }
 
 html[data-theme="light"] .wwm-sb-tier-badge.tier-SS {
@@ -870,11 +870,11 @@ html[data-theme="light"] .hero-wuxia .ink-stroke {
 }
 
 html[data-theme="light"] .hero-wuxia .ink-stroke path {
-  stroke: rgba(160,28,18,0.6) !important;
+  stroke: rgba(160,28,18,0.6);
 }
 
 html[data-theme="light"] .hero-wuxia .l-bracket {
-  border-color: var(--gold-deep) !important;
+  border-color: var(--gold-deep);
 }
 
 html[data-theme="light"] .hero-wuxia .luopan-ticks line {
@@ -987,8 +987,8 @@ html[data-theme="light"] .wwm-step2 .wwm-arsenal-tier {
 }
 
 html[data-theme="light"] .wwm-sb-label {
-  font-weight: 500 !important;
-  opacity: 0.95 !important;
+  font-weight: 500;
+  opacity: 0.95;
 }
 
 html[data-theme="light"] .wwm-anlz {
@@ -1019,7 +1019,7 @@ html[data-theme="light"] .wwm-anlz-header::after {
 
 html[data-theme="light"] .wwm-anlz-bamboo { opacity: 0.28; }
 
-html[data-theme="light"] .wwm-anlz-bamboo svg path { fill: var(--brown-5) !important; }
+html[data-theme="light"] .wwm-anlz-bamboo svg path { fill: var(--brown-5); }
 
 html[data-theme="light"] .wwm-anlz .wwm-anlz-title {
   color: #2a1610 !important;
