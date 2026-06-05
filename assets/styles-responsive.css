@@ -14,6 +14,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* ⚠ !important keep 確定 (Batch M): light.css の tier-SS/S animation 復活防止 (a11y)。
+     light.css が cascade 最終 file のため natural では負ける — @layer 移行まで維持 */
   .tier-SS, .tier-S { animation: none !important; }
   .tier-SS::before  { animation: none; }
   .donut-seg        { transition: none; }
@@ -245,7 +247,7 @@
   .wwm-anlz-header::before,
   .wwm-anlz-body::before,
   .wwm-footer::after {
-    opacity: 0 !important;
+    opacity: 0;
   }
 
   /* PC topbar (sticky-header > .topbar) 非表示 + Mobile TopBar 表示 */
@@ -388,7 +390,7 @@
   body.wwm-layout-active .wwm-app-body {
     min-width: 0;  /* PC用 980 制約 解除 */
     /* grid 解除 = flex column で 自然 縦並び (PC layout grid-area 構造 mobile時 無効化) */
-    display: flex !important;
+    display: flex;
     flex-direction: column;
     grid-template-columns: none;
     grid-template-rows: none;
@@ -396,8 +398,8 @@
     gap: var(--space-2);
     max-width: none;
     /* 内部 scroll container = sticky-header の下、 footer 高さも引いて footer常時表示確保 */
-    height: calc(100vh - var(--wwm-header-h, 103px) - var(--wwm-footer-h, 32px)) !important;
-    height: calc(100dvh - var(--wwm-header-h, 103px) - var(--wwm-footer-h, 32px)) !important;
+    height: calc(100vh - var(--wwm-header-h, 103px) - var(--wwm-footer-h, 32px));
+    height: calc(100dvh - var(--wwm-header-h, 103px) - var(--wwm-footer-h, 32px));
     max-height: none;
     overflow-y: auto;
     overflow-x: hidden;
@@ -512,7 +514,7 @@
   section.hero.hero-wuxia {
     padding: var(--space-3) var(--space-3-5);
     margin: var(--space-1) 0;
-    display: flex !important;          /* grid解除、 flex column で縦並び明示 */
+    display: flex;          /* grid解除、 flex column で縦並び明示 */
     flex-direction: column;
     grid-template-columns: none;
     grid-template-rows: none;
@@ -592,7 +594,7 @@
 
   /* hero 新layout: 上半=情報+donut (Tier右に小)、 下半=tap時 内訳1行 */
   section.hero.hero-wuxia {
-    display: grid !important;
+    display: grid;
     grid-template-columns: 1fr auto;
     grid-template-areas:
       "info luopan"
@@ -640,10 +642,10 @@
     margin: 0;
     padding: 0;
     white-space: nowrap;
-    border: none !important;
+    border: none ;
   }
   .hero-right .judge-row-sep {
-    border: none !important;
+    border: none ;
     padding: 0;
     margin: 0;
   }
@@ -854,7 +856,9 @@
   }
   .wwm-mobile-stat-overlay-body::-webkit-scrollbar { width: 6px; }
   .wwm-mobile-stat-overlay-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
-  /* overlay内で sidebar 自体を move して表示 — 元 mobile時 display:none を上書き */
+  /* overlay内で sidebar 自体を move して表示 — 元 mobile時 display:none を上書き
+     ⚠ !important keep 確定 (Batch M): components.css の sidebar-test layout rule
+     (desktop !important) + OBS rule との 3つ巴。 @layer modes 移行まで維持 */
   body.wwm-layout-active .wwm-sidebar-test.wwm-sidebar-in-overlay,
   body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sidebar-test {
     display: block;
@@ -1142,7 +1146,8 @@
 }
 
 @media (max-width: 480px) {
-  /* mobile @media で hide される sidebar / app-body を強制復帰 */
+  /* mobile @media で hide される sidebar / app-body を強制復帰
+     ⚠ !important keep 確定 (Batch M): OBS × mobile 文脈交差 — @layer modes 移行まで維持 */
   html.wwm-view-sidebar body.wwm-layout-active .wwm-sidebar-test {
     display: block;
     position: relative !important;
@@ -1167,7 +1172,7 @@
   html.wwm-view-sidebar .wwm-mobile-stat-overlay,
   html.wwm-view-sidebar .wwm-mobile-anlz-overlay-backdrop,
   html.wwm-view-sidebar .wwm-mobile-anlz-overlay {
-    display: none !important;
+    display: none;
   }
 }
 

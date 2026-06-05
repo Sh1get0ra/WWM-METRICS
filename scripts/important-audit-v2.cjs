@@ -259,6 +259,7 @@ function soloStrippable(d, groupDecls) {
     if (!propsConflict(g.prop, d.prop)) continue;                      // 別 longhand = 無競合
     const ctxG = themeContext(g.selector);
     if (ctxD !== 'both' && ctxG !== 'both' && ctxG !== ctxD) continue; // theme 排他
+    if (exclusiveDisjoint(d.selector, g.selector)) continue;           // class 排他 group
     if (g.prop === d.prop && g.value === d.value) continue;            // 同値 = 無害
     if (g.important) return false;  // 他 important → strip 後 d 負け得る
     const sg = specificity(g.selector);
@@ -562,7 +563,10 @@ function selectorClassesInJs(selector, jsSrcByFile, jsFiles) {
 
 // specificity (a=id, b=class/attr/pseudo-class, c=element/pseudo-element)
 function specificity(sel) {
-  const safe = sel.replace(/\[[^\]]*\]/g, '[ATTR]');
+  let safe = sel.replace(/\[[^\]]*\]/g, '[ATTR]');
+  // :nth-child(odd) 等の引数を空に — 中身 ('odd' 等) が element 誤カウントされる bug 対策
+  // (:not/:is/:has は中身が spec に寄与するため対象外 — conservative)
+  safe = safe.replace(/:(nth-[\w-]+|lang|dir)\(([^)]*)\)/g, ':$1()');
   let a = 0, b = 0, c = 0;
   for (const m of safe.matchAll(/#[\w-]+/g)) a++;
   for (const m of safe.matchAll(/\.[\w-]+|\[ATTR\]|:(?!:)[\w-]+(\([^)]*\))?/g)) {
@@ -616,6 +620,28 @@ function mediaOverlap(ma, mb) {
 function themeOverlap(p, q) {
   const tp = themeContext(p.selector), tq = themeContext(q.selector);
   return !(tp !== 'both' && tq !== 'both' && tp !== tq);
+}
+
+// ── 相互排他 class group (JS 付与ロジックで排他が証明済のもののみ登録) ──
+// rank-*: gear.js:359/424 単一 ternary + :680-681 remove全→add1 = 同時付与不可能。
+// 同 subject に異 member を要求する selector pair = context 非重複 (phantom pair 排除)
+const EXCLUSIVE_CLASS_GROUPS = [
+  ['rank-max', 'rank-gold', 'rank-purple', 'rank-blue']
+];
+function subjectClassSet(sel) {
+  const safe = sel.replace(/\[[^\]]*\]/g, '[]');
+  const parts = safe.split(/\s*[>+~]\s*|\s+/).filter(Boolean);
+  const last = parts[parts.length - 1] || safe;
+  return new Set((last.match(/\.[\w-]+/g) || []).map(c => c.slice(1)));
+}
+function exclusiveDisjoint(selA, selB) {
+  const a = subjectClassSet(selA), b = subjectClassSet(selB);
+  for (const group of EXCLUSIVE_CLASS_GROUPS) {
+    const ra = group.filter(m => a.has(m));
+    const rb = group.filter(m => b.has(m));
+    if (ra.length && rb.length && !ra.some(m => rb.includes(m))) return true;
+  }
+  return false;
 }
 
 // selector 正規化: theme prefix 除去 + 空白圧縮 (pair 判定用)
@@ -849,6 +875,7 @@ while (changed) {
         if (q.file === p.file && q.line === p.line && q.prop === p.prop) continue; // 自分の別 split
         if (!propsConflict(q.prop, p.prop)) continue;                              // 別 longhand = 無競合
         if (!themeOverlap(p, q) || !mediaOverlap(p.media, q.media)) continue;
+        if (exclusiveDisjoint(p.selector, q.selector)) continue;                   // class 排他 group
         if (q.prop === p.prop && q.value === p.value) continue;
         const pWins = naturalWins(p, q);
         if (!q.important) {
@@ -897,17 +924,20 @@ console.log('\n→ scripts/.important-v2.json');
 
 // ── --simulate plan.json: 構造変更の仮想検証 ─────────────────────────
 // plan = [{op:'resel', file, headerFrom, headerTo, lineMin?, lineMax?},
-//         {op:'strip', file, line, prop}]
+//         {op:'strip', file, line, prop},
+//         {op:'move', file, anchorLine, afterLine}]
 // resel: headerFrom (comma 区切り selector 群) に一致する decl の selector を headerTo へ。
 //        subject (右端 compound) 不変が前提 (bucket 安定のため assert)
 // strip: 指定 decl の !important を外す
+// move:  anchorLine の decl が属する rule を 同 file 内 afterLine 直後へ移動
+//        (simulate は line を fractional 化して相対順序のみ変更、 apply は実テキスト移動)
 // 全 bucket の全 pair で head-to-head 勝者が orig と mod で flip しないか検査 (値同一 pair は無視)
 const simArg = process.argv.find(a => a.startsWith('--simulate='));
 if (simArg) {
   const plan = JSON.parse(fs.readFileSync(simArg.slice(11), 'utf8'));
-  // mod decls 構築 (orig と 1:1、 selector/important のみ差替え)
+  // mod decls 構築 (orig と 1:1、 selector/important/line のみ差替え)
   const mods = allDecls.map(d => ({ ...d, origRef: d }));
-  let reselCount = 0, stripCount = 0;
+  let reselCount = 0, stripCount = 0, moveCount = 0;
   for (const op of plan) {
     if (op.op === 'resel') {
       const fromSet = new Set(op.headerFrom.split(',').map(s => s.replace(/\s+/g, ' ').trim()));
@@ -939,9 +969,23 @@ if (simArg) {
           stripCount++;
         }
       }
+    } else if (op.op === 'move') {
+      const ruleIds = new Set(mods.filter(m => m.file === op.file && m.line === op.anchorLine).map(m => m.ruleId));
+      if (ruleIds.size === 0) { console.warn(`[WARN] move: anchorLine ${op.file}:${op.anchorLine} に decl 不在`); continue; }
+      const members = mods.filter(m => m.file === op.file && ruleIds.has(m.ruleId));
+      const minLine = Math.min(...members.map(m => m.ruleStart));
+      const maxLine = Math.max(...members.map(m => m.line));
+      if (op.afterLine >= minLine && op.afterLine <= maxLine) {
+        console.warn(`[WARN] move: afterLine ${op.afterLine} が rule 自身 (${minLine}-${maxLine}) の内側 — skip`);
+        continue;
+      }
+      for (const m of members) {
+        m.line = op.afterLine + 0.5 + (m.line - minLine) * 1e-6; // 相対順序維持の fractional 化
+      }
+      moveCount += members.length;
     }
   }
-  console.log(`simulate: resel ${reselCount} decl / strip ${stripCount} decl`);
+  console.log(`simulate: resel ${reselCount} decl / strip ${stripCount} decl / move ${moveCount} decl`);
 
   // orig / mod 両 index 構築 → 全 pair flip check
   const hh = (x, y, useSel, useImp) => {
@@ -954,9 +998,19 @@ if (simArg) {
     if (fx !== fy) return fx > fy;
     return x.line > y.line;
   };
+  // bucket 登録は coMap (DOM 共起 class/id) 展開込み —
+  // 単一 class 同士 (.bg-icon-arsenal vs .bg-icon-gear 等) の same-element 戦争を
+  // classification (searchKeys) と同基準で pair 化する (素 keys だけだと見落とす)
   const modIndex = new Map();
   for (const m of mods) {
+    const expKeys = new Set(m.keys);
     for (const k of m.keys) {
+      const km = k.match(/^([.#][\w-]+)(::.+)?$/);
+      if (!km) continue;
+      const pseudoEl = km[2] || '';
+      for (const co of (coMap.get(km[1]) || [])) expKeys.add(co + pseudoEl);
+    }
+    for (const k of expKeys) {
       const key = `${k}|${propGroup(m.prop)}`;
       if (!modIndex.has(key)) modIndex.set(key, []);
       modIndex.get(key).push(m);
@@ -972,12 +1026,13 @@ if (simArg) {
         const pairId = [`${x.file}:${x.line}:${x.prop}:${x.origRef.selector}`, `${y.file}:${y.line}:${y.prop}:${y.origRef.selector}`].sort().join('||');
         if (seen.has(pairId)) continue;
         seen.add(pairId);
-        // 変更が絡まない pair は不変
-        const xChanged = x.selector !== x.origRef.selector || x.important !== x.origRef.important;
-        const yChanged = y.selector !== y.origRef.selector || y.important !== y.origRef.important;
+        // 変更が絡まない pair は不変 (move = line 変更も対象)
+        const xChanged = x.selector !== x.origRef.selector || x.important !== x.origRef.important || x.line !== x.origRef.line;
+        const yChanged = y.selector !== y.origRef.selector || y.important !== y.origRef.important || y.line !== y.origRef.line;
         if (!xChanged && !yChanged) continue;
         if (!propsConflict(x.prop, y.prop)) continue;
         if (!themeOverlap(x, y) || !mediaOverlap(x.media, y.media)) continue;
+        if (exclusiveDisjoint(x.origRef.selector, y.origRef.selector)) continue;
         if (x.prop === y.prop && x.value === y.value) continue;
         const before = (() => {
           const a = x.origRef, b = y.origRef;
@@ -1035,6 +1090,89 @@ if (simArg) {
         fs.writeFileSync(file, src);
         console.log(`${file}: ${applied} selector 書換え`);
       }
+
+      // ── move 物理適用 (resel 書込後に fresh read) ──
+      // rule 直上の連続コメント行も一緒に移動 (SECTION banner ╔═ は吸収しない)。
+      // 行番号は plan 時点 (= parse 時点) 基準 — resel は行数を変えない前提
+      const moveOps = plan.filter(o => o.op === 'move');
+      const movesByFile = new Map();
+      for (const op of moveOps) {
+        if (!movesByFile.has(op.file)) movesByFile.set(op.file, []);
+        movesByFile.get(op.file).push(op);
+      }
+      for (const [file, ops] of movesByFile) {
+        const src = fs.readFileSync(file, 'utf8');
+        const eol = src.includes('\r\n') ? '\r\n' : '\n';
+        const lines = src.split(/\r?\n/); // lines[i] = line i+1
+        const isBanner = (s) => /[╔═╚]|SECTION/.test(s);
+
+        // rule 終端: ruleStart から brace balance (comment/string skip) で確定
+        const findRuleEnd = (startLine) => {
+          let depth = 0, opened = false, inCmt = false, inStr = null;
+          for (let li = startLine; li <= lines.length; li++) {
+            const s = lines[li - 1];
+            for (let ci = 0; ci < s.length; ci++) {
+              const ch = s[ci];
+              if (inCmt) { if (ch === '*' && s[ci+1] === '/') { inCmt = false; ci++; } continue; }
+              if (inStr) { if (ch === inStr && s[ci-1] !== '\\') inStr = null; continue; }
+              if (ch === '/' && s[ci+1] === '*') { inCmt = true; ci++; continue; }
+              if (ch === '"' || ch === "'") { inStr = ch; continue; }
+              if (ch === '{') { depth++; opened = true; }
+              if (ch === '}') { depth--; if (opened && depth === 0) return li; }
+            }
+          }
+          return null;
+        };
+        // rule 直上 コメント吸収 (単行 /* */ の連続、 multi-line comment は閉端→開端遡り)
+        const absorbComments = (startLine) => {
+          let s = startLine;
+          while (s > 1) {
+            const above = lines[s - 2].trim();
+            if (above.startsWith('/*') && above.endsWith('*/') && !isBanner(above)) { s--; continue; }
+            if (above.endsWith('*/') && !isBanner(above)) {
+              // multi-line comment: 開端 (行頭 /*) を遡る
+              let open = s - 1;
+              while (open > 1 && !lines[open - 1].trim().startsWith('/*')) open--;
+              const seg = lines.slice(open - 1, s - 1).map(x => x.trim());
+              if (lines[open - 1].trim().startsWith('/*') && !seg.some(isBanner)) { s = open; continue; }
+            }
+            break;
+          }
+          return s;
+        };
+
+        const blocks = [];
+        for (const op of ops) {
+          const anchorDecls = allDecls.filter(d => d.file === file && d.line === op.anchorLine);
+          if (anchorDecls.length === 0) { console.warn(`[WARN] move apply: ${file}:${op.anchorLine} decl 不在`); continue; }
+          const ruleStart = Math.min(...anchorDecls.map(d => d.ruleStart));
+          const ruleEnd = findRuleEnd(ruleStart);
+          if (!ruleEnd) { console.warn(`[WARN] move apply: ${file}:${ruleStart} rule 終端不明`); continue; }
+          const blockStart = absorbComments(ruleStart);
+          blocks.push({ startLine: blockStart, endLine: ruleEnd, insertAfter: op.afterLine, text: lines.slice(blockStart - 1, ruleEnd) });
+        }
+        // 検証: block 重複 / insertAfter が削除域内
+        const removed = new Array(lines.length + 2).fill(false);
+        let bad = false;
+        for (const b of blocks) {
+          for (let i = b.startLine; i <= b.endLine; i++) {
+            if (removed[i]) { console.warn(`[WARN] move apply: block 重複 ${file}:${i}`); bad = true; }
+            removed[i] = true;
+          }
+        }
+        for (const b of blocks) {
+          if (removed[b.insertAfter]) { console.warn(`[WARN] move apply: insertAfter ${b.insertAfter} が削除域内`); bad = true; }
+        }
+        if (bad) { console.warn(`[WARN] ${file}: move apply 中止`); continue; }
+
+        const out = [];
+        for (let i = 1; i <= lines.length; i++) {
+          if (!removed[i]) out.push(lines[i - 1]);
+          for (const b of blocks) if (b.insertAfter === i) out.push(...b.text);
+        }
+        fs.writeFileSync(file, out.join(eol));
+        console.log(`${file}: ${blocks.length} rule 移動`);
+      }
     }
   } else {
     console.log(`❌ flip ${flips.length}件:`);
@@ -1064,6 +1202,7 @@ if (process.argv.includes('--layer-impact')) {
         seenPair.add(pid);
         if (!propsConflict(x.prop, y.prop)) continue;
         if (!themeOverlap(x, y) || !mediaOverlap(x.media, y.media)) continue;
+        if (exclusiveDisjoint(x.selector, y.selector)) continue;
         if (x.prop === y.prop && x.value === y.value) continue;
         const fx = FILE_ORDER.get(x.file) ?? 99, fy = FILE_ORDER.get(y.file) ?? 99;
         // 現状勝者
@@ -1111,6 +1250,7 @@ if (process.argv.includes('--diag')) {
       if (q.file === p.file && q.line === p.line && q.prop === p.prop) continue;
       if (!propsConflict(q.prop, p.prop)) continue;
       if (!themeOverlap(p, q) || !mediaOverlap(p.media, q.media)) continue;
+      if (exclusiveDisjoint(p.selector, q.selector)) continue;
       if (q.prop === p.prop && q.value === p.value) continue;
       const pWins = naturalWins(p, q);
       if (!q.important) {
