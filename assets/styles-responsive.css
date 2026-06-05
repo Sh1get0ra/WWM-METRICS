@@ -711,7 +711,7 @@
     width: 100vw;
     min-width: 0;
     margin: 0;
-    border-radius: 0 !important;
+    border-radius: 0;
     max-height: 100dvh;
     height: 100dvh;
     display: flex;
@@ -889,12 +889,12 @@
     z-index: 20;
     margin: -8px -10px 8px;
     padding: var(--space-2-5) var(--space-3);
-    background: var(--bg-raised) !important;
+    background: var(--bg-raised);
     border: 1px solid var(--gold-deep);
     box-shadow: 0 6px 14px var(--overlay-mid);
   }
   html[data-theme="light"] body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sb-mini-hero-card {
-    background: #f4e8c8 !important;
+    background: #f4e8c8;
     border-color: rgba(120,60,20,0.35);
     box-shadow: 0 6px 14px var(--overlay-trace);
   }

@@ -2392,7 +2392,7 @@ html[lang="en"] .wwm-cmp-title-en {
 .wwm-anlz-body .wwm-analysis-card,
 .wwm-anlz-body .wwm-modal-square {
   background: transparent;
-  border: none !important;
+  border: none;
   box-shadow: none;
   padding: 0 !important;
   position: relative;

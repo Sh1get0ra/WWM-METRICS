@@ -572,7 +572,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-header { color: var(--
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-header { color: var(--vermilion-deep); text-shadow: none; background: linear-gradient(90deg, var(--vermilion-bright-tint), var(--c-vermilion-fade-end)); }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select { background: var(--gold-mid) !important; color: var(--brown-1); border-color: var(--c-border-mid-warm); }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select { background: var(--gold-mid); color: var(--brown-1); border-color: var(--c-border-mid-warm); }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-select { background: linear-gradient(90deg, var(--vermilion-bright-tint), var(--c-vermilion-fade-end)); color: var(--vermilion-deep); border-color: var(--c-border-mid-warm); }
 
@@ -583,7 +583,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val-input { color: var(--verm
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-stat-select,
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val-input {
-  background: var(--hover-strong) !important;
+  background: var(--hover-strong);
   color: var(--brown-1);
   border-color: var(--c-border-mid-warm);
 }
@@ -984,7 +984,7 @@ html[data-theme="light"] .wwm-step2 .wwm-muted {
 
 html[data-theme="light"] .wwm-step2 .wwm-num-input {
   color: var(--brown-2);
-  background: var(--hover-strong) !important;
+  background: var(--hover-strong);
 }
 
 html[data-theme="light"] .wwm-step2 .wwm-step2-section-title {
