@@ -6,7 +6,7 @@
 html[data-theme="light"] .wwm-brand-seal { opacity: 0.8; }
 
 html[data-theme="light"] .hero::before {
-  color: rgba(160,28,18,0.18) !important;
+  color: rgba(160,28,18,0.18);
 }
 
 html[data-theme="light"] .wwm-brand-vert { color: var(--vermilion); border-color: var(--gold); }
@@ -312,7 +312,7 @@ html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-totalmartial b,
 html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial b { color: var(--c-text-brown-bright) !important; text-shadow: none; }
 
 html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-totalmartial .wwm-muted,
-html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial .wwm-muted { color: #5a4326 !important; opacity: 0.85; }
+html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial .wwm-muted { color: #5a4326; opacity: 0.85; }
 
 html[data-theme="light"] .wwm-sb-rest {
   background: linear-gradient(180deg, var(--c-sb-top-bg), var(--c-surf-warm-2));
@@ -530,16 +530,16 @@ html[data-theme="light"] .wwm-cmp-bg-icon {
 }
 
 html[data-theme="light"] .wwm-cmp-modal-a {
-  color: var(--brown-1) !important;
+  color: var(--brown-1);
 }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-header { background: transparent; }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title-ja { color: var(--brown-1) !important; text-shadow: none; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title-ja { color: var(--brown-1); text-shadow: none; }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title-en { color: var(--c-text-warm) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title-en { color: var(--c-text-warm); }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-close { color: var(--brown-1) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-close { color: var(--brown-1); }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-header { border-bottom-color: transparent; }
 
@@ -558,7 +558,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-new {
   border-color: var(--c-border-soft-warm);
 }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-header { color: var(--brown-1) !important; background: var(--gold-mid) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-header { color: var(--brown-1); background: var(--gold-mid) !important; }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-header { color: var(--vermilion-deep) !important; text-shadow: none !important; background: linear-gradient(90deg, var(--vermilion-bright-tint), var(--c-vermilion-fade-end)) !important; }
 
@@ -566,7 +566,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select { background: v
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-select { background: linear-gradient(90deg, var(--vermilion-bright-tint), var(--c-vermilion-fade-end)) !important; color: var(--vermilion-deep) !important; border-color: var(--c-border-mid-warm); }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-name { color: var(--brown-1) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-name { color: var(--brown-1); }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val,
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val-input { color: var(--vermilion-deep) !important; }
@@ -581,7 +581,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val-input {
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv,
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
   background: var(--hover-strong);
-  color: var(--c-text-warm) !important;
+  color: var(--c-text-warm);
   border-color: var(--bone-dim);
 }
 
@@ -593,14 +593,14 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-footer-a { border-color: var(--c-border-soft-warm); }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-delta-label { color: var(--c-text-warm) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-delta-label { color: var(--c-text-warm); }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-delta-base { color: var(--bone-dim) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-delta-base { color: var(--bone-dim); }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-preview-value.zero { color: var(--bone-dim) !important; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-preview-value.zero { color: var(--bone-dim); }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
-  color: var(--brown-1) !important; border-color: var(--bone-dim); background: var(--hover-mid-2) !important;
+  color: var(--brown-1); border-color: var(--bone-dim); background: var(--hover-mid-2) !important;
 }
 
 html[data-theme="light"] .wwm-cmp-modal-bg-icon {
@@ -935,7 +935,7 @@ html[data-theme="light"] .wwm-step2 .wwm-radio-label {
 }
 
 html[data-theme="light"] .wwm-equip-section .wwm-stat-pct {
-  color: var(--c-text-brown-dim) !important;
+  color: var(--c-text-brown-dim);
   opacity: 1;
 }
 
@@ -963,7 +963,7 @@ html[data-theme="light"] .wwm-step2 .wwm-step2-section-title {
 }
 
 html[data-theme="light"] .wwm-step2 .wwm-muted {
-  color: var(--c-text-brown-dim) !important;
+  color: var(--c-text-brown-dim);
   opacity: 0.95;
 }
 
@@ -1022,7 +1022,7 @@ html[data-theme="light"] .wwm-anlz-bamboo { opacity: 0.28; }
 html[data-theme="light"] .wwm-anlz-bamboo svg path { fill: var(--brown-5); }
 
 html[data-theme="light"] .wwm-anlz .wwm-anlz-title {
-  color: #2a1610 !important;
+  color: #2a1610;
   text-shadow:
     0 0 0.5px rgba(42,22,16,.6),
     0 0 1.5px rgba(74,40,20,.35),
@@ -1038,16 +1038,16 @@ html[data-theme="light"] .wwm-anlz-title {
 }
 
 html[data-theme="light"] .wwm-anlz .wwm-anlz-subtitle {
-  color: var(--brown-5) !important;
+  color: var(--brown-5);
   opacity: 0.9;
 }
 
 html[data-theme="light"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
-  color: var(--brown-1) !important;
+  color: var(--brown-1);
 }
 
 html[data-theme="light"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab.active {
-  color: #8a5a14 !important;
+  color: #8a5a14;
 }
 
 html[data-theme="light"] .wwm-anlz-body {

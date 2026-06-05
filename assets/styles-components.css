@@ -2388,7 +2388,7 @@ body.wwm-layout-active .wwm-footer {
   padding: 6px 4px 9px;
   background: transparent;
   border: none;
-  color: var(--paper) !important;
+  color: var(--paper);
   font-family: 'Ma Shan Zheng', 'Noto Serif JP', serif;
   font-size: var(--text-15);
   letter-spacing: 0.18em;
@@ -2401,7 +2401,7 @@ body.wwm-layout-active .wwm-footer {
 }
 #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab:hover { opacity: 1; }
 #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab.active {
-  color: var(--chart-crit) !important;
+  color: var(--chart-crit);
   opacity: 1;
   font-weight: 900;
 }

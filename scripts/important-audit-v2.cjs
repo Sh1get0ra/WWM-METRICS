@@ -266,6 +266,14 @@ function collectJsSources() {
 
 const camelToKebab = (s) => s.replace(/[A-Z]/g, c => '-' + c.toLowerCase());
 
+// template literal 式 ${...} を空白化 (式中の > < が tag regex を破壊するのを防ぐ)。
+// 3回 loop で 1段 nest まで吸収
+function sanitizeTpl(src) {
+  let s = src;
+  for (let i = 0; i < 3; i++) s = s.replace(/\$\{[^{}]*\}/g, ' ');
+  return s;
+}
+
 // selector の subject (右端 compound) の class/id token のみ抽出
 function subjectTokens(sel) {
   const safe = sel.replace(/\[[^\]]*\]/g, '[]');
@@ -298,6 +306,9 @@ function buildInlineIndex(jsSources) {
   const elemInlineExact = new Map(); // exact prop → Set<token> (background-image 等の精密判定用)
   const fileWildcard = new Map();
   const addElem = (g, tokens, exactProp) => {
+    if (process.env.DBG_UNIV && tokens.includes('__universal__')) {
+      console.error('[UNIV]', 'group=' + g, 'exact=' + (exactProp || '?'), 'file=' + (addElem._file || '?'));
+    }
     if (!elemInline.has(g)) elemInline.set(g, new Set());
     for (const t of tokens) elemInline.get(g).add(t);
     if (exactProp) {
@@ -317,7 +328,7 @@ function buildInlineIndex(jsSources) {
     if (attrCache.has(attrName)) return attrCache.get(attrName);
     const out = new Set();
     for (const { src } of jsSources) {
-      for (const m of src.matchAll(new RegExp(`<(\\w+)([^<>]{0,500}?)\\b${attrName}[=\\s>]`, 'g'))) {
+      for (const m of sanitizeTpl(src).matchAll(new RegExp(`<(\\w+)([^<>]{0,500}?)\\b${attrName}[=\\s>]`, 'g'))) {
         const tag = m[1].toLowerCase(), attrs = m[2];
         const idM = attrs.match(/\bid="([\w-]+)"|\bid='([\w-]+)'/);
         const clsM = attrs.match(/\bclass="([^"]{1,300})"|\bclass='([^']{1,300})'/);
@@ -410,8 +421,10 @@ function buildInlineIndex(jsSources) {
   }
 
   for (const { file, src } of jsSources) {
+    addElem._file = file; // debug 用
     // 1. template/HTML <tag ... style="..."> — tag 単位で token と prop を対応付け
-    for (const m of src.matchAll(/<(\w+)([^<>]{0,500}?)>/g)) {
+    // (sanitizeTpl: ${...} 内の > が tag 境界を誤検出させるのを防止)
+    for (const m of sanitizeTpl(src).matchAll(/<(\w+)([^<>]{0,500}?)>/g)) {
       const tagName = m[1].toLowerCase();
       const attrs = m[2];
       const styleM = attrs.match(/style="([^"]{1,400})"|style='([^']{1,400})'/);
@@ -481,8 +494,8 @@ function buildCoOccurrence(jsSources) {
     coMap.get(a).add(b);
   };
   for (const src of sources) {
-    // 1 tag 内の id + class 共起 (template literal 断片含む)
-    for (const m of src.matchAll(/<\w+([^<>]{0,500}?)>/g)) {
+    // 1 tag 内の id + class 共起 (template literal 断片含む、 ${...} は空白 sanitize)
+    for (const m of src.replace(/\$\{[^{}]*\}/g, ' ').replace(/\$\{[^{}]*\}/g, ' ').matchAll(/<\w+([^<>]{0,500}?)>/g)) {
       const attrs = m[1];
       const idM = attrs.match(/\bid="([\w-]+)"|\bid='([\w-]+)'/);
       const clsM = attrs.match(/\bclass="([^"]{1,300})"|\bclass='([^']{1,300})'/);

@@ -586,7 +586,7 @@
     justify-self: center !important;
   }
   .hero-next-inline[hidden] { display: none !important; }
-  .hero-next-label { font-size: var(--text-xs) !important; letter-spacing: 0.08em !important; padding: 0 !important; color: var(--paper-mute) !important; }
+  .hero-next-label { font-size: var(--text-xs) !important; letter-spacing: 0.08em !important; padding: 0 !important; color: var(--paper-mute); }
   .hero-next-row { font-size: var(--text-sm); display: inline-flex !important; align-items: center !important; gap: 2px !important; }
   .hero-next-val { font-size: var(--text-md) !important; font-weight: var(--fw-bold) !important; }
 
