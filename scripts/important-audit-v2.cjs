@@ -266,32 +266,123 @@ function collectJsSources() {
 
 const camelToKebab = (s) => s.replace(/[A-Z]/g, c => '-' + c.toLowerCase());
 
-function buildInlinePropMap(jsSources) {
-  // prop(kebab) → Set<jsFile>
-  const map = new Map();
+// selector の subject (右端 compound) の class/id token のみ抽出
+function subjectTokens(sel) {
+  const safe = sel.replace(/\[[^\]]*\]/g, '[]');
+  const parts = safe.split(/\s*[>+~]\s*|\s+/).filter(Boolean);
+  const last = parts[parts.length - 1] || safe;
+  return last.match(/\.[\w-]+|#[\w-]+/g) || [];
+}
+
+// ── inline style 調査 v3: element 粒度 ──────────────────────────────
+//
+// v2 までは file 粒度 (「file が当該 prop を inline 書込」+「file 内に selector の
+// class 文字列出現」で競合扱い) → .donut 等で大量偽陽性 (file 内の無関係 element への
+// inline width で .donut の width !important が C 送りされる)。
+//
+// v3 は style 書込先 element の class/id token を特定して selector subject と突合:
+//   1. template/HTML の <tag ... style="..."> → 同 tag の class=/id= token (精密)
+//      - class/id token ゼロの tag → file wildcard (旧動作 fallback)
+//      - class="a ${x}" 動的断片は静的 token のみ採用 (VRT + 目視が backstop)
+//   2. receiver.style.prop = / .style.cssText = → receiver 変数を file 内 def 逆引きで解決
+//      - NAME = ...getElementById('X') / querySelector('SEL') / closest('SEL') /
+//        querySelectorAll('SEL').forEach(NAME ...) を探す
+//      - 解決不能 → file wildcard (conservative)
+//   3. setProperty('--xxx') = CSS 変数 → 対象外。 documentElement/document 直書きも skip
+//
+// 出力:
+//   elemInline:   propGroup → Set<token>  (token = '.cls' | '#id'、 group '*' = 全 prop)
+//   fileWildcard: propGroup → Set<file>   (group '*' = 全 prop)
+function buildInlineIndex(jsSources) {
+  const elemInline = new Map();
+  const fileWildcard = new Map();
+  const addElem = (g, tokens) => {
+    if (!elemInline.has(g)) elemInline.set(g, new Set());
+    for (const t of tokens) elemInline.get(g).add(t);
+  };
+  const addWild = (g, file) => {
+    if (!fileWildcard.has(g)) fileWildcard.set(g, new Set());
+    fileWildcard.get(g).add(file);
+  };
+
+  // receiver 変数 → element token 解決
+  function resolveReceiver(name, src) {
+    if (name === 'document' || name === 'documentElement' || name === 'window') return ['__skip__'];
+    const tokens = [];
+    let sawDef = false;
+    const reDef = new RegExp(`(?:^|[^\\w$.])${name}\\s*=\\s*([^;\\n]{1,200})`, 'g');
+    for (const m of src.matchAll(reDef)) {
+      const rhs = m[1];
+      if (new RegExp(`^${name}\\s*[.+]`).test(rhs)) continue; // 自己代入 (el.style 等) は def でない
+      sawDef = true;
+      let t;
+      if ((t = rhs.match(/getElementById\(\s*['"]([\w-]+)['"]/))) tokens.push('#' + t[1]);
+      else if ((t = rhs.match(/(?:querySelector(?:All)?|closest)\(\s*['"]([^'"]+)['"]/))) tokens.push(...subjectTokens(t[1]));
+      else tokens.push('__unresolved__');
+    }
+    // forEach / for-of の loop 変数
+    const reEach = new RegExp(`querySelectorAll\\(\\s*['"]([^'"]+)['"]\\s*\\)[^\\n]{0,40}?(?:forEach\\(\\s*\\(?|of\\s+)\\s*${name}\\b`);
+    let m2;
+    if ((m2 = src.match(reEach))) { sawDef = true; tokens.push(...subjectTokens(m2[1])); }
+    const reFor = new RegExp(`(?:const|let|var)\\s+${name}\\s+of\\s+[^\\n]{0,80}querySelectorAll\\(\\s*['"]([^'"]+)['"]`);
+    if ((m2 = src.match(reFor))) { sawDef = true; tokens.push(...subjectTokens(m2[1])); }
+    if (!sawDef || tokens.includes('__unresolved__')) return null; // 解決不能
+    return tokens.filter(t => t !== '__skip__');
+  }
+
   for (const { file, src } of jsSources) {
-    // element.style.fontSize = ...
-    for (const m of src.matchAll(/\.style\.([a-zA-Z]+)\s*=/g)) {
-      const prop = camelToKebab(m[1]);
-      if (!map.has(prop)) map.set(prop, new Set());
-      map.get(prop).add(file);
-    }
-    // cssText → 全 prop 不明 = file 全体を wildcard 扱い
-    if (/\.style\.cssText\s*=/.test(src)) {
-      if (!map.has('*')) map.set('*', new Set());
-      map.get('*').add(file);
-    }
-    // template literal / string 内 style="..." / style='...' の prop
-    for (const m of src.matchAll(/style="([^"]{2,300})"|style='([^']{2,300})'/g)) {
-      const body = m[1] || m[2];
-      for (const pm of body.matchAll(/(?:^|;)\s*([a-z-]+)\s*:/g)) {
-        const prop = pm[1];
-        if (!map.has(prop)) map.set(prop, new Set());
-        map.get(prop).add(file);
+    // 1. template/HTML <tag ... style="..."> — tag 単位で token と prop を対応付け
+    for (const m of src.matchAll(/<\w+([^<>]{0,500}?)>/g)) {
+      const attrs = m[1];
+      const styleM = attrs.match(/style="([^"]{1,400})"|style='([^']{1,400})'/);
+      if (!styleM) continue;
+      const body = styleM[1] || styleM[2];
+      const idM = attrs.match(/\bid="([\w-]+)"|\bid='([\w-]+)'/);
+      const clsM = attrs.match(/\bclass="([^"]{1,300})"|\bclass='([^']{1,300})'/);
+      const tokens = [];
+      if (idM) tokens.push('#' + (idM[1] || idM[2]));
+      if (clsM) for (const c of (clsM[1] || clsM[2]).split(/\s+/)) {
+        if (/^[\w-]+$/.test(c)) tokens.push('.' + c);
+      }
+      const props = [...body.matchAll(/(?:^|;)\s*([a-z-]+)\s*:/g)].map(p => p[1]);
+      if (tokens.length === 0) {
+        // 無名 tag (class/id なし) — file wildcard fallback
+        if (props.length === 0) addWild('*', file);
+        for (const p of props) addWild(propGroup(p), file);
+      } else {
+        if (props.length === 0) addElem('*', tokens); // style="${...}" 全動的
+        for (const p of props) addElem(propGroup(p), tokens);
       }
     }
+    // 2. receiver.style.prop = / cssText / setProperty
+    for (const m of src.matchAll(/([\w$]+)\.style\.([a-zA-Z]+)\s*=|([\w$]+)\.style\.setProperty\(\s*['"]([^'"]+)['"]/g)) {
+      const name = m[1] || m[3];
+      let prop = m[2] ? camelToKebab(m[2]) : m[4];
+      if (prop && prop.startsWith('--')) continue; // CSS 変数 → 対象外
+      const tokens = resolveReceiver(name, src);
+      if (m[2] === 'cssText') {
+        // 代入 literal 内のみから prop 抽出 (object literal 等の誤 capture 防止)。
+        // 動的 concat / 非 literal → prop 不明 = 全 prop 扱い
+        const after = src.slice(m.index, m.index + 600);
+        const litM = after.match(/cssText\s*=\s*(['"`])([\s\S]{0,500}?)\1/);
+        const props = litM
+          ? [...litM[2].matchAll(/(?:^|;)\s*([a-z-]+)\s*:/g)].map(p => p[1]).filter(p => !p.startsWith('--'))
+          : [];
+        if (tokens === null) {
+          if (props.length === 0) addWild('*', file);
+          for (const p of props) addWild(propGroup(p), file);
+        } else if (tokens.length) {
+          if (props.length === 0) addElem('*', tokens);
+          for (const p of props) addElem(propGroup(p), tokens);
+        }
+        continue;
+      }
+      if (!prop) continue;
+      if (tokens === null) addWild(propGroup(prop), file);
+      else if (tokens.length) addElem(propGroup(prop), tokens);
+    }
   }
-  return map;
+  return { elemInline, fileWildcard };
 }
 
 // DOM 共起 class/id map
@@ -417,8 +508,7 @@ for (const f of CSS_FILES) {
 
 const jsSources = collectJsSources();
 const jsSrcByFile = new Map(jsSources.map(s => [s.file, s.src]));
-const inlineProps = buildInlinePropMap(jsSources);
-const cssTextFiles = inlineProps.get('*') || new Set();
+const { elemInline, fileWildcard } = buildInlineIndex(jsSources);
 
 // index: compoundKey|propGroup → decls (multi-key = 1 decl が複数 key に登録)
 const index = new Map();
@@ -477,15 +567,28 @@ function pairedThemeStrippable(d, groupDecls) {
   return true;
 }
 
-// inline prop も group 正規化して突合
-const inlineGroupMap = new Map();
-for (const [p, files] of inlineProps) {
-  const g = p === '*' ? '*' : propGroup(p);
-  if (!inlineGroupMap.has(g)) inlineGroupMap.set(g, new Set());
-  for (const f of files) inlineGroupMap.get(g).add(f);
-}
-
 const coMap = buildCoOccurrence(jsSources);
+
+// inline 競合判定 v3 (element 粒度):
+//   selector subject の class/id token (+ 同 element 共起 class) が
+//   inline 書込先 element token と交差 → 競合。
+//   subject に class/id が無い selector は判定不能 → 当該 group の inline 書込が
+//   存在するだけで conservative 競合。 wildcard file 分は旧 file 粒度 check fallback。
+function inlineConflictV3(d) {
+  const g = propGroup(d.prop);
+  const inlineTokens = new Set([...(elemInline.get(g) || []), ...(elemInline.get('*') || [])]);
+  const subj = subjectTokens(d.selector);
+  if (subj.length === 0) {
+    if (inlineTokens.size > 0) return true;
+  } else {
+    const cand = new Set(subj);
+    for (const t of subj) for (const co of (coMap.get(t) || [])) cand.add(co);
+    for (const t of cand) if (inlineTokens.has(t)) return true;
+  }
+  const wfiles = new Set([...(fileWildcard.get(g) || []), ...(fileWildcard.get('*') || [])]);
+  if (wfiles.size > 0 && selectorClassesInJs(d.selector, jsSrcByFile, wfiles)) return true;
+  return false;
+}
 
 const catMap = new Map();    // decl → 'A'|'B'|'K'|'C'
 const compMap = new Map();   // decl → competitors (decl[])
@@ -515,13 +618,8 @@ for (const d of importants) {
       }
     }
   }
-  // inline style 競合チェック (group 単位) — A/B 共通で strip 不可条件
-  const jsWithProp = new Set([
-    ...(inlineGroupMap.get(propGroup(d.prop)) || []),
-    ...cssTextFiles
-  ]);
-  const inlineConflict = jsWithProp.size > 0 &&
-    selectorClassesInJs(d.selector, jsSrcByFile, jsWithProp);
+  // inline style 競合チェック (v3: element 粒度) — A/B 共通で strip 不可条件
+  const inlineConflict = inlineConflictV3(d);
 
   compMap.set(d, [...groupSet].filter(x => x !== d));
   inlineMap.set(d, inlineConflict);

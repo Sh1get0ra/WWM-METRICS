@@ -108,7 +108,7 @@
   .hero--collapsed .hero-right {
     padding: var(--space-1-5) var(--space-2-5) !important;
   }
-  .hero--collapsed .donut { width: 56px !important; height: 56px !important; }
+  .hero--collapsed .donut { width: 56px; height: 56px; }
   .hero--collapsed .donut-wrap { gap: var(--space-2); }
 
   .hero-left { padding: var(--space-3) var(--space-3) var(--space-2-5); }
@@ -205,7 +205,7 @@
     grid-template-rows: auto;
   }
   .wwm-equip-slot[data-slot] {
-    grid-column: 1 !important; grid-row: auto !important;
+    grid-column: 1; grid-row: auto;
   }
 }
 
@@ -249,7 +249,7 @@
   }
 
   /* PC topbar (sticky-header > .topbar) 非表示 + Mobile TopBar 表示 */
-  body.wwm-layout-active header.topbar { display: none !important; }
+  body.wwm-layout-active header.topbar { display: none; }
   body.wwm-layout-active .wwm-mobile-topbar {
     display: flex;
     align-items: center;
@@ -322,7 +322,7 @@
   }
   /* 📈格析 button: preset-bar 末尾 (mobile時のみ表示) */
   .wwm-mobile-anlz-btn {
-    display: inline-flex !important; align-items: center; gap: 3px;
+    display: inline-flex; align-items: center; gap: 3px;
     min-height: 26px;
     padding: var(--space-half) var(--space-1-5);
     background: linear-gradient(180deg, var(--vermilion-bright-tint), rgba(232,81,58,0.10));
@@ -339,7 +339,7 @@
   .wwm-mobile-anlz-icon { font-size: var(--text-12); }
   /* RESET button: TopBar 右側 (mobile時のみ表示) */
   .wwm-mobile-top-reset {
-    display: inline-flex !important; align-items: center; justify-content: center;
+    display: inline-flex; align-items: center; justify-content: center;
     min-height: 36px;
     padding: var(--space-1) var(--space-2-5);
     background: linear-gradient(180deg, var(--vermilion-bright-tint), rgba(232,81,58,0.10));
@@ -383,7 +383,7 @@
   /* sticky-header 親自体は維持 (preset-bar / banner用)、 余白だけ調整 */
   body.wwm-layout-active .sticky-header {
     min-width: 0;  /* PC用 1010 制約 解除 */
-    height: auto !important;
+    height: auto;
   }
   body.wwm-layout-active .wwm-app-body {
     min-width: 0 !important;  /* PC用 980 制約 解除 */
@@ -407,7 +407,7 @@
   /* footer 常時下部固定 (PC同様) */
   body.wwm-layout-active .wwm-footer {
     position: fixed;
-    bottom: 0 !important; left: 0 !important; right: 0 !important;
+    bottom: 0; left: 0; right: 0;
     z-index: 100;
     padding: calc(4px + var(--safe-bottom, 0px)) 12px 4px !important;
   }
@@ -434,7 +434,7 @@
 
   /* ─── Phase 3: preset-bar (弱点+プリセット) 1行横スクロール強制 ─── */
   .preset-bar {
-    display: flex !important;
+    display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
     padding: var(--space-1-5) var(--space-2-5) !important;
@@ -447,7 +447,7 @@
   }
   .preset-bar::-webkit-scrollbar { height: 4px; }
   .preset-bar::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 2px; }
-  .preset-bar-title { display: none !important; }
+  .preset-bar-title { display: none; }
   .wwm-diag-badge {
     flex: 0 0 auto;
     min-height: 32px;
@@ -455,7 +455,7 @@
     font-size: var(--text-xs);
   }
   .preset-slots {
-    display: flex !important;
+    display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
     gap: var(--space-1-5);
@@ -465,13 +465,13 @@
     flex: 0 0 auto;
     width: auto;
     min-width: 0;
-    display: flex !important;
+    display: flex;
     flex-direction: row;
     align-items: center;
     gap: 4px;
   }
-  .preset-slot-num { display: none !important; }
-  .preset-name-input { display: none !important; }
+  .preset-slot-num { display: none; }
+  .preset-name-input { display: none; }
   .preset-btn {
     min-height: 26px;
     padding: 1px 4px !important;
@@ -515,8 +515,8 @@
     display: flex !important;          /* grid解除、 flex column で縦並び明示 */
     flex-direction: column !important;
     grid-template-columns: none !important;
-    grid-template-rows: none !important;
-    grid-template-areas: none !important;
+    grid-template-rows: none;
+    grid-template-areas: none;
     gap: 8px !important;
     min-height: 0 !important;
     height: auto !important;
@@ -596,7 +596,7 @@
     grid-template-columns: 1fr auto !important;
     grid-template-areas:
       "info luopan"
-      "judges judges" !important;
+      "judges judges";
     gap: 4px 10px !important;
     align-items: center !important;
     cursor: pointer;
@@ -613,17 +613,17 @@
   .hero-right .luopan-inner {
     width: 85%; height: 85%;
     position: absolute;
-    top: 50% !important; left: 50% !important;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
   }
   .hero-right .luopan-inner svg { width: 100%; height: 100%; }
   .hero-right .luopan-center-label { font-size: var(--text-xs) !important; }
   /* 朱色 筆 SVG 削除 */
-  .hero-wuxia .ink-stroke { display: none !important; }
+  .hero-wuxia .ink-stroke { display: none; }
   /* judge-list: default hidden、 hero--expanded 時 hero下に 1行 横並び (wrap可) */
   .hero-right .judge-list {
     grid-area: judges;
-    display: none !important;
+    display: none;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 4px 10px;
@@ -633,7 +633,7 @@
     display: flex !important;
   }
   .hero-right .judge-row {
-    display: inline-flex !important;
+    display: inline-flex;
     align-items: center;
     gap: 3px;
     font-size: var(--text-sm) !important;
@@ -657,20 +657,20 @@
     gap: var(--space-2);
   }
   .wwm-gear-grid .wwm-equip-slot {
-    grid-column: auto !important;
-    grid-row: auto !important;
+    grid-column: auto;
+    grid-row: auto;
   }
   /* 装備カード 並び順: 主武器→副武器→環→佩→冠胄→胸冑→膝冑→腕冑→弓箭→射玦 */
-  .wwm-gear-grid .wwm-equip-slot[data-slot="1"]  { order: 1 !important; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="2"]  { order: 2 !important; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="10"] { order: 3 !important; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="11"] { order: 4 !important; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="3"]  { order: 5 !important; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="4"]  { order: 6 !important; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="5"]  { order: 7 !important; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="8"]  { order: 8 !important; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="21"] { order: 9 !important; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="9"]  { order: 10 !important; }
+  .wwm-gear-grid .wwm-equip-slot[data-slot="1"]  { order: 1; }
+  .wwm-gear-grid .wwm-equip-slot[data-slot="2"]  { order: 2; }
+  .wwm-gear-grid .wwm-equip-slot[data-slot="10"] { order: 3; }
+  .wwm-gear-grid .wwm-equip-slot[data-slot="11"] { order: 4; }
+  .wwm-gear-grid .wwm-equip-slot[data-slot="3"]  { order: 5; }
+  .wwm-gear-grid .wwm-equip-slot[data-slot="4"]  { order: 6; }
+  .wwm-gear-grid .wwm-equip-slot[data-slot="5"]  { order: 7; }
+  .wwm-gear-grid .wwm-equip-slot[data-slot="8"]  { order: 8; }
+  .wwm-gear-grid .wwm-equip-slot[data-slot="21"] { order: 9; }
+  .wwm-gear-grid .wwm-equip-slot[data-slot="9"]  { order: 10; }
 
   /* 心法 grid: 2列 stack、 武庫 心法直下 1枚 (parent grid 確認後 後 phase で 微調整) */
   .wwm-xinfa-grid,
@@ -712,14 +712,14 @@
   .wwm-share-obs-block { display: none !important; }
   /* 対照 grid: 現有 / divider / 新置 を 縦stack */
   .wwm-cmp-modal-a .wwm-cmp-grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
     gap: 10px !important;
   }
   /* divider 縦線 → 横線 */
   .wwm-cmp-modal-a .wwm-cmp-divider {
-    width: 100% !important; height: 1px !important;
-    background: linear-gradient(90deg, transparent, var(--gold-deep), transparent) !important;
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-deep), transparent);
   }
   .wwm-cmp-modal-a .wwm-cmp-divider::before,
   .wwm-cmp-modal-a .wwm-cmp-divider::after {
@@ -742,7 +742,7 @@
   .wwm-arsenal-modal .wwm-arsenal-paths {
     flex-wrap: wrap !important;
     gap: 6px 10px !important;
-    width: 100% !important;
+    width: 100%;
   }
   .wwm-arsenal-modal .wwm-arsenal-paths .wwm-radio-label {
     font-size: var(--text-12) !important;
@@ -768,7 +768,7 @@
 
   /* ─── Phase 7: ステFAB + 全画面 stat overlay ─── */
   body.wwm-layout-active .wwm-mobile-stat-fab {
-    display: inline-flex !important;
+    display: inline-flex;
     align-items: center; justify-content: center;
     position: fixed;
     right: calc(12px + var(--safe-right, 0px));
@@ -787,7 +787,7 @@
     -webkit-user-select: none;
     -webkit-touch-callout: none;
   }
-  body.wwm-layout-active .wwm-mobile-stat-fab[hidden] { display: none !important; }
+  body.wwm-layout-active .wwm-mobile-stat-fab[hidden] { display: none; }
   .wwm-mobile-stat-fab-avatar {
     width: 100%; height: 100%;
     object-fit: cover;
@@ -817,12 +817,12 @@
     inset: 0;
     background: linear-gradient(180deg, rgba(20,15,12,0.98), rgba(10,8,9,0.98));
     z-index: 1300;
-    display: flex !important;
+    display: flex;
     flex-direction: column;
     padding-top: var(--safe-top, 0px);
     padding-bottom: var(--safe-bottom, 0px);
   }
-  .wwm-mobile-stat-overlay[hidden] { display: none !important; }
+  .wwm-mobile-stat-overlay[hidden] { display: none; }
   .wwm-mobile-stat-overlay-header {
     display: flex; align-items: center; justify-content: space-between;
     padding: var(--space-2) var(--space-3);
@@ -866,7 +866,7 @@
     border: 0 !important;
     padding: 0 !important;
     margin: 0 !important;
-    visibility: visible !important;
+    visibility: visible;
     opacity: 1 !important;
   }
   /* mini-hero-card 上部固定: overlay-body 直下に出して sticky 復活 (sidebar-test 内では効かない場合の保険として padding 構造合わせ) */
@@ -878,18 +878,18 @@
   }
   body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sb-mini-hero-card {
     position: sticky;
-    top: -8px !important;
+    top: -8px;
     z-index: 20;
     margin: -8px -10px 8px;
     padding: var(--space-2-5) var(--space-3) !important;
     background: var(--bg-raised) !important;
     border: 1px solid var(--gold-deep);
-    box-shadow: 0 6px 14px var(--overlay-mid) !important;
+    box-shadow: 0 6px 14px var(--overlay-mid);
   }
   html[data-theme="light"] body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sb-mini-hero-card {
     background: #f4e8c8 !important;
     border-color: rgba(120,60,20,0.35);
-    box-shadow: 0 6px 14px var(--overlay-trace) !important;
+    box-shadow: 0 6px 14px var(--overlay-trace);
   }
 
   /* ─── Phase 8: 📈格析 全画面 overlay ─── */
@@ -904,12 +904,12 @@
     inset: 0;
     background: linear-gradient(180deg, rgba(20,15,12,0.98), rgba(10,8,9,0.98));
     z-index: 1300;
-    display: flex !important;
+    display: flex;
     flex-direction: column;
     padding-top: var(--safe-top, 0px);
     padding-bottom: var(--safe-bottom, 0px);
   }
-  .wwm-mobile-anlz-overlay[hidden] { display: none !important; }
+  .wwm-mobile-anlz-overlay[hidden] { display: none; }
   .wwm-mobile-anlz-overlay-header {
     display: flex; align-items: center; justify-content: space-between;
     padding: var(--space-2) var(--space-3);
@@ -971,7 +971,7 @@
   }
   /* overlay内 flex chain 復元 → 中身が overlay body 高 いっぱい使う */
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body {
-    display: flex !important;
+    display: flex;
     flex-direction: column;
     overflow: hidden !important;
   }
@@ -982,7 +982,7 @@
     min-height: 0;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-anlz-body {
-    display: flex !important;
+    display: flex;
     flex-direction: column;
     flex: 1 1 0;
     min-height: 0;
@@ -1021,7 +1021,7 @@
     letter-spacing: 0.12em;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-controls {
-    display: flex !important;
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 4px 8px;
@@ -1056,7 +1056,7 @@
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-change {
     grid-area: change;
     font-size: var(--text-xs) !important;
-    display: flex !important;
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 4px;
@@ -1065,7 +1065,7 @@
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-from,
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-to {
-    display: inline !important;
+    display: inline;
     white-space: normal;
   }
 
@@ -1081,10 +1081,10 @@
     min-height: 100dvh;
     margin: 0;
     padding: 0;
-    display: flex !important;
+    display: flex;
     flex-direction: column;
   }
-  .wwm-note-rod { display: none !important; }
+  .wwm-note-rod { display: none; }
   .wwm-note-paper {
     flex: 1 1 auto;
     max-height: none;
@@ -1092,7 +1092,7 @@
     border-radius: 0;
     margin: 0;
     padding: 0;
-    display: flex !important;
+    display: flex;
     flex-direction: column;
   }
   .wwm-note-header {
@@ -1122,7 +1122,7 @@
     border-color: var(--vermilion-deep);
     font-weight: 700;
   }
-  .wwm-note-divider { display: none !important; }
+  .wwm-note-divider { display: none; }
   .wwm-note-tabs {
     position: sticky;
     top: 0; /* note-header の sticky の下に position計算で重なる→ JSで分離不要、tabs を header の直後で sticky 2段 */
