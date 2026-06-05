@@ -383,9 +383,9 @@ html.wwm-shared-build-mode #exportBtn {
   position: relative;
   overflow: hidden;
 }
-.tier-badge.tier-SS {
-  padding: clamp(1px, calc(-8.07px + 0.94vw), 4px) clamp(6px, calc(-24.25px + 3.14vw), 16px);
-}
+/* (削除 2026-06-05) .tier-badge.tier-SS padding clamp — 実効対象が
+   #heroBaselineTierBadge (JS 参照ゼロ・永続 hidden の死に要素) のみ。
+   hero badge は .hero-tier 付き 0,4,0 rule で無効化済だった (その rule も同時削除) */
 .tier-badge-compact {
   font-size: var(--text-sm);
   padding: 1px 6px;
@@ -2091,15 +2091,8 @@ body.wwm-layout-active .wwm-footer {
   color: var(--paper-mute);
   border-color: var(--paper-mute);
 }
-/* tier-SS 個別 padding clamp override も無効化 */
-.hero-wuxia .hero-tier.tier-badge.tier-SS,
-.hero-wuxia .hero-tier.tier-badge.tier-S,
-.hero-wuxia .hero-tier.tier-badge.tier-A,
-.hero-wuxia .hero-tier.tier-badge.tier-B,
-.hero-wuxia .hero-tier.tier-badge.tier-C {
-  font-size: var(--text-xl);
-  padding: 5px 16px;
-}
+/* (削除 2026-06-05) tier-X 別 0,4,0 重複 rule — 値は base .hero-tier.tier-badge と
+   完全同一。 .tier-badge.tier-SS padding clamp (同時削除) への対抗専用だった */
 
 /* SS — gold (アニメ継承、静的部のみ override) */
 .hero-wuxia .hero-tier.tier-SS {

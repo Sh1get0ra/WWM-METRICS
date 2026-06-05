@@ -545,9 +545,9 @@
     font-size: 60px;  /* current score 大字 */
     line-height: 1;
   }
-  .hero-wuxia .hero-tier {
-    font-size: var(--text-lg) !important;
-    padding: var(--space-1) var(--space-2) !important;
+  .hero-wuxia .hero-tier.tier-badge {
+    font-size: var(--text-lg);
+    padding: var(--space-1) var(--space-2);
   }
   /* hero-score-row grid: 左=score (2行跨)、 右上=NEXT、 右下=Tier badge (両方 中央揃え) */
   .hero-wuxia .hero-score-row {
@@ -563,12 +563,12 @@
     flex-wrap: nowrap;
   }
   .hero-current { grid-area: score; }
-  .hero-wuxia .hero-tier {
+  .hero-wuxia .hero-tier.tier-badge {
     grid-area: tier;
-    font-size: var(--text-xl) !important;  /* 旧 main mobile 同等 (base .hero-wuxia .hero-tier.tier-badge と同じ 22px) */
-    padding: 5px 16px !important;          /* 旧 main mobile 同等 */
+    font-size: var(--text-xl);  /* 旧 main mobile 同等 (base .hero-wuxia .hero-tier.tier-badge と同じ 22px) */
+    padding: 5px 16px;          /* 旧 main mobile 同等 */
     min-height: auto;
-    align-self: start !important;
+    align-self: start;
     justify-self: center;
     text-align: center;
   }
@@ -1179,9 +1179,9 @@
   }
   /* hero-tier badge: 480px @media で var(--text-xl)=22px に拡大したが、 320-359px では
      grid "score | next/tier" 領域に 22px badge が収まらず NEXT/donut と重なる。 中間サイズに縮小。 */
-  .hero-wuxia .hero-tier {
-    font-size: var(--text-lg) !important;  /* 16px */
-    padding: 3px 10px !important;
-    letter-spacing: 0.05em !important;
+  .hero-wuxia .hero-tier.tier-badge {
+    font-size: var(--text-lg);  /* 16px */
+    padding: 3px 10px;
+    letter-spacing: 0.05em;
   }
 }
