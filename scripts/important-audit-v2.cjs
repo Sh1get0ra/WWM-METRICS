@@ -27,7 +27,8 @@ const CSS_FILES = [
   'assets/styles-modals.css',
   'assets/styles-responsive.css',
   'assets/styles-dark.css',
-  'assets/styles-light.css'
+  'assets/styles-light.css',
+  'assets/styles-obs.css'
 ];
 
 const JS_GLOBS = ['assets', 'assets/sidebar', 'assets/helpers'];
@@ -88,6 +89,8 @@ function parseCss(src, file) {
       i++;
       if (head.startsWith('@media') || head.startsWith('@supports')) {
         parseBlockBody(head); // nest 1段 (media context 付け替え)
+      } else if (head.startsWith('@layer')) {
+        parseBlockBody(media); // @layer block は透過 (file=layer 前提、 media 維持)
       } else if (head.startsWith('@keyframes') || head.startsWith('@font-face') || head.startsWith('@')) {
         // keyframes 等 — 中身 skip (decl 対象外)
         let depth = 1;
@@ -145,6 +148,8 @@ function parseCss(src, file) {
     i++; // '{'
     if (head.startsWith('@media') || head.startsWith('@supports')) {
       parseBlockBody(head);
+    } else if (head.startsWith('@layer')) {
+      parseBlockBody(null); // @layer wrap 透過 (file=layer 前提)
     } else if (head.startsWith('@keyframes') || head.startsWith('@font-face') || (head.startsWith('@') && !head.startsWith('@media'))) {
       let depth = 1;
       while (i < len && depth > 0) {
@@ -208,7 +213,8 @@ function propGroup(prop) {
   if (/^flex(-flow|-direction|-wrap|-grow|-shrink|-basis)?$/.test(p)) return 'flex';
   if (/^grid-(area|row|column)/.test(p)) return 'grid-place';
   if (/^overflow(-|$)/.test(p)) return 'overflow';
-  if (/^border/.test(p)) return 'border';      // border-radius 含む (conservative)
+  if (/^border(-(top|bottom)-(left|right))?-radius/.test(p)) return 'border-radius'; // border shorthand は radius を reset しない (CSS 仕様)
+  if (/^border/.test(p)) return 'border';
   if (/^background(-|$)/.test(p)) return 'background';
   if (/^font(-|$)/.test(p)) return 'font';     // font-size/family/weight 同 group (conservative)
   if (/^(gap|row-gap|column-gap)$/.test(p)) return 'gap';
@@ -626,7 +632,17 @@ function themeOverlap(p, q) {
 // rank-*: gear.js:359/424 単一 ternary + :680-681 remove全→add1 = 同時付与不可能。
 // 同 subject に異 member を要求する selector pair = context 非重複 (phantom pair 排除)
 const EXCLUSIVE_CLASS_GROUPS = [
-  ['rank-max', 'rank-gold', 'rank-purple', 'rank-blue']
+  ['rank-max', 'rank-gold', 'rank-purple', 'rank-blue'],
+  // icon-btn variant: index.html:408-423 静的、 各 button に variant class は高々1つ
+  ['reset-btn', 'note-btn', 'export-btn', 'import-btn', 'share-btn', 'icon-btn-x'],
+  // 無関係 widget の同名 state class (.active 等) 同居防止: 別 widget = 同 element 非共存
+  ['wwm-analysis-tab', 'lang-btn', 'wwm-opt-sort-btn', 'preset-btn', 'wwm-setup-tab', 'wwm-note-tab'],
+  // tier badge host: hero badge / sidebar badge / baseline badge は別 element (index.html 静的)
+  ['hero-tier', 'wwm-sb-tier-badge', 'tier-badge-baseline'],
+  // tier rank: hero.js:96/106 className 単一代入 (全置換) = 同時付与不可能
+  ['tier-SS', 'tier-S', 'tier-A', 'tier-B', 'tier-C'],
+  // modal 種別: 1 modal element に 1 種別 class (wwm-modal-square 等の共通 class は入れるな)
+  ['wwm-cmp-modal-a', 'wwm-diag-modal', 'wwm-lang-picker'],
 ];
 function subjectClassSet(sel) {
   const safe = sel.replace(/\[[^\]]*\]/g, '[]');
@@ -634,12 +650,36 @@ function subjectClassSet(sel) {
   const last = parts[parts.length - 1] || safe;
   return new Set((last.match(/\.[\w-]+/g) || []).map(c => c.slice(1)));
 }
+// ── 相互排他 container group (DOM 静的構造で排他が証明済のもののみ登録) ──
+// [setA, setB]: selA が setA の class を、selB が setB の class を compound に要求 → 別 element 確定。
+// topbar (index.html:401-425) と mobile drawer (:430-454) は兄弟 subtree = 同 element が両方に属せない
+const EXCLUSIVE_ANCESTOR_GROUPS = [
+  [['top-controls-2row', 'topbar-row', 'lang-switcher-row'],
+   ['wwm-mobile-drawer', 'wwm-mobile-drawer-langs', 'wwm-mobile-drawer-body']],
+  // 別 widget subtree (同名 tag 子要素 svg/b/input/h2 の phantom pair 防止、 DOM 静的検証済)
+  [['luopan-inner', 'luopan', 'hero-wuxia'], ['wwm-good-icon', 'wwm-note-btn', 'wwm-note-list']],
+  [['wwm-equip-section'], ['wwm-note-list', 'wwm-note-tab']],
+  [['wwm-overlay-ctrl'], ['wwm-arsenal-custom', 'wwm-arsenal-modal', 'wwm-mobile-anlz-overlay-body']],
+  [['wwm-opt-ratio-label'], ['wwm-arsenal-custom', 'wwm-arsenal-modal']],
+  // OBS view では mobile stat overlay 全 hidden (responsive.css OBS block) = 同時成立不可
+  [['wwm-view-sidebar'], ['wwm-sidebar-in-overlay', 'wwm-mobile-stat-overlay-body', 'wwm-mobile-stat-overlay']],
+];
+function allClassSet(sel) {
+  const safe = sel.replace(/\[[^\]]*\]/g, '[]');
+  return new Set((safe.match(/\.[\w-]+/g) || []).map(c => c.slice(1)));
+}
 function exclusiveDisjoint(selA, selB) {
   const a = subjectClassSet(selA), b = subjectClassSet(selB);
   for (const group of EXCLUSIVE_CLASS_GROUPS) {
     const ra = group.filter(m => a.has(m));
     const rb = group.filter(m => b.has(m));
     if (ra.length && rb.length && !ra.some(m => rb.includes(m))) return true;
+  }
+  const fa = allClassSet(selA), fb = allClassSet(selB);
+  for (const [setA, setB] of EXCLUSIVE_ANCESTOR_GROUPS) {
+    const aInA = setA.some(m => fa.has(m)), aInB = setB.some(m => fa.has(m));
+    const bInA = setA.some(m => fb.has(m)), bInB = setB.some(m => fb.has(m));
+    if ((aInA && !aInB && bInB && !bInA) || (aInB && !aInA && bInA && !bInB)) return true;
   }
   return false;
 }
@@ -1190,6 +1230,188 @@ if (simArg) {
 // !important は layer 順反転 (先 layer の important が勝つ)。
 // flip = 現状勝者 ≠ layer 後勝者 となる pair (値同一は無害なので除外)
 if (process.argv.includes('--layer-impact')) {
+  // 今 cascade で a が b に勝つか (imp > spec > file順 > line)
+  const winsNow = (a, b) => {
+    if (a.important !== b.important) return a.important;
+    const sa = specificity(a.selector), sb = specificity(b.selector);
+    if (sa !== sb) return sa > sb;
+    const fa = FILE_ORDER.get(a.file) ?? 99, fb = FILE_ORDER.get(b.file) ?? 99;
+    return fa !== fb ? fa > fb : a.line > b.line;
+  };
+  // layer 後 cascade で a が b に勝つか (imp diff 不変 / 両imp = layer 逆転 / 両 normal = 後 layer、同 layer 内 spec→line)
+  const winsLayer = (a, b) => {
+    const fa = FILE_ORDER.get(a.file) ?? 99, fb = FILE_ORDER.get(b.file) ?? 99;
+    if (a.important !== b.important) return a.important;
+    if (a.important && b.important) {
+      if (fa !== fb) return fa < fb;
+    } else if (fa !== fb) return fa > fb;
+    const sa = specificity(a.selector), sb = specificity(b.selector);
+    return sa !== sb ? sa > sb : a.line > b.line;
+  };
+  // 全 compound の pseudo-class state 集合 (ancestor の :hover 等も state 軸)
+  const pseudoAll = sel => new Set(
+    (sel.replace(/\[[^\]]*\]/g, '[]').match(/:(hover|focus-visible|focus-within|focus|active)\b/g) || []).map(s => s.slice(1))
+  );
+  // ── 静的 DOM 知識 (index.html 検証済、 JS toggle なし) ──
+  // ALWAYS_ON: body 静的常時 class → selector match 集合に影響しない (index.html:388)
+  const ALWAYS_ON_CLASSES = new Set(['wwm-layout-active']);
+  // SUBTREE_ONLY: class → 専属 ancestor class。 子 class element はその subtree 内のみ出現
+  // (hero 系 = index.html:559-660 静的、 hero-wuxia は section 静的 class)
+  const SUBTREE_ONLY = {
+    'hero-left': 'hero-wuxia', 'hero-right': 'hero-wuxia', 'hero-number': 'hero-wuxia',
+    'hero-label': 'hero-wuxia', 'hero-tier': 'hero-wuxia', 'hero-score-row': 'hero-wuxia',
+    'donut': 'hero-wuxia', 'donut-wrap': 'hero-wuxia', 'donut-center-label': 'hero-wuxia',
+    'luopan': 'hero-wuxia', 'luopan-inner': 'hero-wuxia', 'luopan-ticks': 'hero-wuxia',
+  };
+  // selector → 正規化 token 集合 (match 集合の包含判定用)
+  const normTokenSet = sel => {
+    const s = stripThemePrefix(sel);
+    const tokens = new Set();
+    for (const m of s.match(/\[[^\]]*\]/g) || []) tokens.add(m);
+    const noAttr = s.replace(/\[[^\]]*\]/g, '');
+    for (const m of noAttr.match(/\.[\w-]+/g) || []) {
+      const c = m.slice(1);
+      if (!ALWAYS_ON_CLASSES.has(c)) tokens.add('.' + c);
+    }
+    for (const m of noAttr.match(/#[\w-]+/g) || []) tokens.add(m);
+    for (const m of noAttr.match(/(^|[\s>+~])([a-zA-Z][\w-]*)/g) || []) {
+      const t = m.replace(/^[\s>+~]+/, '');
+      if (t !== 'html' && t !== 'body') tokens.add('<' + t + '>');
+    }
+    for (const [child, anc] of Object.entries(SUBTREE_ONLY)) {
+      if (tokens.has('.' + child)) tokens.delete('.' + anc); // 専属 ancestor は冗長 token
+    }
+    return tokens;
+  };
+  // box shorthand 展開 (padding/margin のみ)
+  const expandBox = (prop, val) => {
+    const m = prop.match(/^(padding|margin)(?:-(top|right|bottom|left))?$/);
+    if (!m) return null;
+    if (m[2]) return { [m[2]]: val.trim() };
+    const p = val.trim().split(/\s+/);
+    if (p.length < 1 || p.length > 4) return null;
+    return { top: p[0], right: p[1] ?? p[0], bottom: p[2] ?? p[0], left: p[3] ?? p[1] ?? p[0] };
+  };
+  // JS で on/off される state class (mode 軸)。 これらを含む competitor は
+  // state on/off の 2 context に分割して invariance を再帰評価する
+  const MODE_TOKENS = new Set([
+    '.wwm-view-sidebar', '.wwm-shared-build-mode', '.hero--collapsed',
+    '.has-data', '.active', '.wwm-sidebar-in-overlay', '.wwm-sb-collapsed-sec',
+  ]);
+  // progressive-enhancement fallback: a の rule 内に同 prop で b と同値の後続 decl
+  // → a は自 rule 内で b 値に上書き済 (値同一文字列 = parse 可否も同一) = pair 無害
+  const fallbackShadowed = (a, b, group) => a.prop === b.prop && group.some(z =>
+    z !== a && z.file === a.file && z.selector === a.selector && z.media === a.media &&
+    z.prop === a.prop && z.line >= a.line && z.value === b.value);
+  // 区間群演算 (media 分割用)
+  const ivIntersect = (A, B) => {
+    const out = [];
+    for (const [al, ah] of A) for (const [bl, bh] of B) {
+      const lo = Math.max(al, bl), hi = Math.min(ah, bh);
+      if (lo <= hi) out.push([lo, hi]);
+    }
+    return out;
+  };
+  const ivSubtract = (A, B) => {
+    let cur = A.map(iv => [...iv]);
+    for (const [bl, bh] of B) {
+      const next = [];
+      for (const [al, ah] of cur) {
+        if (bh < al || bl > ah) { next.push([al, ah]); continue; }
+        if (al < bl) next.push([al, Math.min(ah, bl - 0.02)]);
+        if (ah > bh) next.push([Math.max(al, bh + 0.02), ah]);
+      }
+      cur = next;
+    }
+    return cur;
+  };
+  // ── context-winner invariance: pair (x,y) の観測 context での group 勝者値が
+  //    layer 移行前後で不変なら、 この pair の flip は最終 cascade 値に現れない = 無害。
+  //    競合の theme / media 区間 / JS state class はみ出しは context 分割して再帰評価 ──
+  const contextWinnerInvariant = (x, y, group, opts = {}) => {
+    const { extraTokens = new Set(), excluded = new Set(), depth = 0, themeOv = null, obsIvOv = null, extraPseudo = new Set() } = opts;
+    const obsPseudo = new Set([...pseudoAll(x.selector), ...pseudoAll(y.selector), ...extraPseudo]);
+    const tx = themeContext(x.selector), ty = themeContext(y.selector);
+    const obsTheme = themeOv ?? (tx === 'both' ? ty : tx); // theme 交差 (overlap 前提)
+    const ivx = widthIntervals(x.media), ivy = widthIntervals(y.media);
+    const obsIv = obsIvOv ?? ((ivx && ivy) ? ivIntersect(ivx, ivy) : null);
+    if (obsIv && obsIv.length === 0) return true; // 観測区間が空 = この context は実在しない
+    const xyTokens = new Set([...normTokenSet(x.selector), ...normTokenSet(y.selector), ...extraTokens]);
+    // class → tag 含意 (class はその tag の element にのみ付く、 DOM 静的検証済)
+    const CLASS_IMPLIES_TAG = { 'wwm-cmp-lv-select': '<select>', 'wwm-cmp-stat-select': '<select>' };
+    for (const t of [...xyTokens]) {
+      if (t.startsWith('.') && CLASS_IMPLIES_TAG[t.slice(1)]) xyTokens.add(CLASS_IMPLIES_TAG[t.slice(1)]);
+    }
+    const D = [x, y];
+    for (const d of group) {
+      if (d === x || d === y || excluded.has(d)) continue;
+      if (!propsConflict(d.prop, x.prop) && !propsConflict(d.prop, y.prop)) continue;
+      // 観測 element は x∩y 両 match → どちらか一方と排他証明できれば d は当たらない
+      if (exclusiveDisjoint(d.selector, x.selector) || exclusiveDisjoint(d.selector, y.selector)) continue;
+      // x,y どちらにも今も後も勝てない decl は勝者に影響しない
+      if (!winsNow(d, x) && !winsNow(d, y) && !winsLayer(d, x) && !winsLayer(d, y)) continue;
+      const td = themeContext(d.selector);
+      if (obsTheme !== 'both' && td !== 'both' && td !== obsTheme) continue; // 観測 theme に当たらない
+      const themeCover = td === 'both' || (obsTheme !== 'both' && td === obsTheme);
+      // media: 観測区間との関係 (包含 / 非交差 / 部分重なり)
+      const dIv = widthIntervals(d.media);
+      let mediaCover, dObsInter = null;
+      if (!obsIv || !dIv) {
+        mediaCover = d.media === null || d.media === x.media || d.media === y.media;
+      } else {
+        dObsInter = ivIntersect(dIv, obsIv);
+        if (dObsInter.length === 0) continue; // 観測区間に当たらない
+        mediaCover = ivSubtract(obsIv, dIv).length === 0; // d 区間 ⊇ 観測区間
+      }
+      const pseudoCover = [...pseudoAll(d.selector)].every(p => obsPseudo.has(p));
+      const dTokens = [...normTokenSet(d.selector)];
+      const tokenCover = dTokens.every(t => xyTokens.has(t));
+      if (themeCover && mediaCover && pseudoCover && tokenCover) { D.push(d); continue; }
+      if (depth < 8) {
+        // theme はみ出し (観測 both × 片 theme competitor) → light/dark 両 context で評価
+        if (!themeCover && obsTheme === 'both') {
+          return contextWinnerInvariant(x, y, group, { ...opts, depth: depth + 1, themeOv: 'light' })
+              && contextWinnerInvariant(x, y, group, { ...opts, depth: depth + 1, themeOv: 'dark' });
+        }
+        // media 部分重なり → d 区間内 / 区間外に分割評価
+        if (themeCover && !mediaCover && dObsInter) {
+          return contextWinnerInvariant(x, y, group, { ...opts, depth: depth + 1, obsIvOv: dObsInter })
+              && contextWinnerInvariant(x, y, group, { ...opts, depth: depth + 1, obsIvOv: ivSubtract(obsIv, dIv) });
+        }
+        // はみ出しが JS state class のみ → state on/off の両 context で評価
+        const extra = dTokens.filter(t => !xyTokens.has(t));
+        if (themeCover && mediaCover && pseudoCover && extra.length && extra.every(t => MODE_TOKENS.has(t))) {
+          return contextWinnerInvariant(x, y, group, { ...opts, depth: depth + 1, extraTokens: new Set([...extraTokens, ...extra]) })
+              && contextWinnerInvariant(x, y, group, { ...opts, depth: depth + 1, excluded: new Set([...excluded, d]) });
+        }
+        // pseudo state はみ出し (:hover 等) → state on/off の両 context で評価
+        if (themeCover && mediaCover && !pseudoCover && tokenCover) {
+          const extraP = [...pseudoAll(d.selector)].filter(p => !obsPseudo.has(p));
+          return contextWinnerInvariant(x, y, group, { ...opts, depth: depth + 1, extraPseudo: new Set([...extraPseudo, ...extraP]) })
+              && contextWinnerInvariant(x, y, group, { ...opts, depth: depth + 1, excluded: new Set([...excluded, d]) });
+        }
+      }
+      return false; // 勝ちうるが co-apply 保証できない competitor → 断念 (保守)
+    }
+    const top = cmp => D.reduce((a, b) => (cmp(a, b) ? a : b));
+    // box shorthand group: 成分別 winner 値比較 (pair が両方触る side のみ —
+    // 片方しか触らない side は pair (x,y) の flip と無関係)
+    const boxBase = (x.prop.match(/^(padding|margin)/) || [])[1];
+    if (boxBase && D.every(d => expandBox(d.prop, d.value))) {
+      const ex = expandBox(x.prop, x.value), ey = expandBox(y.prop, y.value);
+      for (const side of ['top', 'right', 'bottom', 'left']) {
+        if (ex[side] === undefined || ey[side] === undefined) continue;
+        const Ds = D.filter(d => expandBox(d.prop, d.value)[side] !== undefined);
+        const topOf = cmp => Ds.reduce((a, b) => (cmp(a, b) ? a : b));
+        const nw = topOf(winsNow), lw = topOf(winsLayer);
+        if (expandBox(nw.prop, nw.value)[side] !== expandBox(lw.prop, lw.value)[side]) return false;
+      }
+      return true;
+    }
+    const nw = top(winsNow), lw = top(winsLayer);
+    if (nw === lw) return true;                      // 勝者不変
+    return nw.prop === lw.prop && nw.value === lw.value; // 勝者交代でも値同一
+  };
   const flips = [];
   const seenPair = new Set();
   for (const [key, group] of index) {
@@ -1218,7 +1440,12 @@ if (process.argv.includes('--layer-impact')) {
         else if (x.important && y.important) layerXWins = fx < fy; // 両 imp = layer 順反転
         else layerXWins = fx > fy;                                  // 両 normal = 後 layer 勝ち
         if (nowXWins !== layerXWins) {
-          flips.push({ key, loser: nowXWins ? y : x, nowWinner: nowXWins ? x : y });
+          if (fallbackShadowed(x, y, group) || fallbackShadowed(y, x, group)) continue; // fallback 自己上書き = 無害
+          // 蘇生側が prefers-reduced-motion の motion 殺し → a11y 改善方向 = 採用 (今は imp が a11y を破ってる)
+          const loser = nowXWins ? y : x;
+          if (loser.media && /prefers-reduced-motion/.test(loser.media) && /^(animation|transition)/.test(loser.prop)) continue;
+          if (contextWinnerInvariant(x, y, group)) continue; // 観測 context の勝者値不変 = 無害
+          flips.push({ key, loser, nowWinner: nowXWins ? x : y });
         }
       }
     }
@@ -1236,6 +1463,13 @@ if (process.argv.includes('--layer-impact')) {
     console.log(`   今勝: ${f.nowWinner.file}:${f.nowWinner.line} ${f.nowWinner.selector} { ${f.nowWinner.prop}: ${f.nowWinner.value} }`);
     console.log(`   蘇生: ${f.loser.file}:${f.loser.line} ${f.loser.selector} { ${f.loser.prop}: ${f.loser.value} }`);
   }
+  // 全 flip JSON dump (cluster 分析用)
+  fs.writeFileSync('scripts/.layer-flips.json', JSON.stringify(flips.map(f => ({
+    key: f.key,
+    win: { file: f.nowWinner.file, line: f.nowWinner.line, sel: f.nowWinner.selector, prop: f.nowWinner.prop, val: f.nowWinner.value, imp: f.nowWinner.important, media: f.nowWinner.media || null },
+    rev: { file: f.loser.file, line: f.loser.line, sel: f.loser.selector, prop: f.loser.prop, val: f.loser.value, imp: f.loser.important, media: f.loser.media || null }
+  })), null, 1));
+  console.log('\n→ scripts/.layer-flips.json (全件)');
   process.exit(0);
 }
 
