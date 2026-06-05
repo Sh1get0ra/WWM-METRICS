@@ -383,9 +383,9 @@ html.wwm-shared-build-mode #exportBtn {
   position: relative;
   overflow: hidden;
 }
-.tier-badge.tier-SS {
-  padding: clamp(1px, calc(-8.07px + 0.94vw), 4px) clamp(6px, calc(-24.25px + 3.14vw), 16px);
-}
+/* (削除 2026-06-05) .tier-badge.tier-SS padding clamp — 実効対象が
+   #heroBaselineTierBadge (JS 参照ゼロ・永続 hidden の死に要素) のみ。
+   hero badge は .hero-tier 付き 0,4,0 rule で無効化済だった (その rule も同時削除) */
 .tier-badge-compact {
   font-size: var(--text-sm);
   padding: 1px 6px;
@@ -529,7 +529,7 @@ html.wwm-shared-build-mode #exportBtn {
   margin-bottom: var(--space-2-5);
   overflow: hidden;
   /* ヘッダー部分は内部要素 (tier badge ルーレット等) で揺れないよう固定高 */
-  height: 84px !important;
+  height: 84px;
   min-height: 84px;
   max-height: 84px;
   box-sizing: border-box;
@@ -560,12 +560,12 @@ html.wwm-shared-build-mode #exportBtn {
 /* light mini-hero: 総合武力/武格指数 の label/値を濃色化 (cream上で gold/muted が低コントラストのため) */
 /* mini-hero card 内の sb-top: sticky/border 解除 */
 .wwm-sb-mini-hero-card .wwm-sb-top {
-  position: relative !important;
-  top: auto !important;
+  position: relative;
+  top: auto;
   background: none !important;
-  border-bottom: none !important;
-  margin-bottom: 0 !important;
-  padding: 0 !important;
+  border-bottom: none;
+  margin-bottom: 0;
+  padding: 0;
   z-index: 1;
 }
 /* sections wrapper */
@@ -638,17 +638,17 @@ html.wwm-shared-build-mode #exportBtn {
 html.wwm-view-sidebar {
   --overlay-bg-alpha: 0;
   --overlay-bg-rgb: 10,10,10;
-  background: transparent !important;
-  background-color: transparent !important;
+  background: transparent;
+  background-color: transparent;
 }
 html.wwm-view-sidebar body,
 html.wwm-view-sidebar body.wwm-layout-active {
   background-color: rgba(var(--overlay-bg-rgb), var(--overlay-bg-alpha)) !important;
   background-image: none !important;
-  height: 100vh !important;
+  height: 100vh;
   overflow: hidden !important;
-  padding: 0 !important;
-  margin: 0 !important;
+  padding: 0;
+  margin: 0;
 }
 html.wwm-view-sidebar .sticky-header,
 html.wwm-view-sidebar .wwm-app-body .container,
@@ -664,16 +664,16 @@ html.wwm-view-sidebar .ink-stroke {
 html.wwm-view-sidebar .wwm-app-body {
   display: block !important;
   height: 100vh !important;
-  max-height: 100vh !important;
+  max-height: 100vh;
   padding: var(--space-2) !important;
   margin: 0 !important;
   max-width: none !important;
   min-width: 0 !important; /* OBSキャンバス幅 < 1010 で右はみ出し防止 */
-  width: 100% !important;
+  width: 100%;
 }
 html.wwm-view-sidebar .wwm-sidebar-test {
   position: relative !important;
-  top: auto !important;
+  top: auto;
   width: 100% !important;
   height: 100% !important;
   max-height: 100% !important;
@@ -686,8 +686,8 @@ html.wwm-view-sidebar .wwm-sidebar-test {
 /* sb-top: sticky 上部 (avatar+総合武力) のみユーザー alpha で背景 */
 html.wwm-view-sidebar .wwm-sb-top {
   background: transparent !important;
-  position: relative !important;
-  top: auto !important;
+  position: relative;
+  top: auto;
 }
 /* OBS view: 背景は mini-hero-card 側に持たせて朱墨ink維持 */
 html.wwm-view-sidebar .wwm-sb-mini-hero-card {
@@ -698,7 +698,7 @@ html.wwm-view-sidebar .wwm-sb-mini-hero-card {
 /* overlay モード: IMPORT button / 透明度 slider 非表示 */
 html.wwm-view-sidebar .wwm-sb-import-btn,
 html.wwm-view-sidebar .wwm-overlay-ctrl {
-  display: none !important;
+  display: none;
 }
 /* overlay モード: 文字色 / ラベル色 カスタマイズ */
 html.wwm-view-sidebar .wwm-sb-label,
@@ -747,7 +747,7 @@ html.wwm-view-sidebar .wwm-sb-section-title {
 html, body { height: 100%; margin: 0; overflow: hidden; }
 body.wwm-layout-active {
   margin: 0;
-  height: 100vh !important;
+  height: 100vh;
   overflow-x: auto; /* window < 1010 で .wwm-app-body 横スクロール許可 */
   overflow-y: hidden;
   box-sizing: border-box;
@@ -791,8 +791,8 @@ body.wwm-layout-active .wwm-app-body > script { display: none; }
 /* 大画面でも main column が無限に広がらないよう max-width 制限 */
 body.wwm-layout-active .wwm-sidebar-test {
   position: relative !important;
-  top: auto !important;
-  right: auto !important;
+  top: auto;
+  right: auto;
   left: auto;
   bottom: auto;
   width: 100% !important;
@@ -809,7 +809,7 @@ body.wwm-layout-active .wwm-sidebar-test {
   border-left: none !important;
   background: transparent !important;
   padding: 0 !important;
-  display: flex !important;
+  display: flex;
   flex-direction: column;
 }
 /* rest を残り高さ全部使う (タブパネル同様 footer まで) */
@@ -881,8 +881,8 @@ body.wwm-layout-active .wwm-anlz-body > .wwm-analysis-grid > div {
 body.wwm-layout-active #wwmAffixRanking .wwm-analysis-card,
 body.wwm-layout-active #wwmOptimization .wwm-analysis-card,
 body.wwm-layout-active #wwmHistory .wwm-analysis-card {
-  height: 100% !important;
-  min-height: 0 !important;
+  height: 100%;
+  min-height: 0;
 }
 body.wwm-layout-active .wwm-app-body .container::-webkit-scrollbar { width: 6px; }
 body.wwm-layout-active .wwm-app-body .container::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
@@ -1170,9 +1170,10 @@ body.wwm-layout-active .wwm-footer {
   pointer-events: none;
 }
 .wwm-analysis-card > * { position: relative; z-index: 1; }
-#wwmAffixRanking .wwm-analysis-card,
-#wwmOptimization .wwm-analysis-card,
-#wwmHistory .wwm-analysis-card {
+/* anlz tab 3 card 共通 (旧 ID 三連 selector — .wwm-analysis-card は常に
+   #wwmAffixRanking/#wwmOptimization/#wwmHistory 配下 = 等価。
+   spec 降格で responsive override の !important 不要化、 simulate 検証済) */
+.wwm-analysis-card {
   height: 570px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -1616,8 +1617,8 @@ body.wwm-layout-active .wwm-footer {
   background: radial-gradient(ellipse at top right, var(--vermilion-soft-light), transparent 65%) !important;
 }
 .wwm-diag-modal::after {
-  border-top-color: var(--vermilion) !important;
-  border-right-color: var(--vermilion) !important;
+  border-top-color: var(--vermilion);
+  border-right-color: var(--vermilion);
 }
 .wwm-diag-modal .wwm-modal-header { border-bottom-color: var(--vermilion-mid); }
 .wwm-diag-modal .wwm-modal-header::after {
@@ -1625,7 +1626,7 @@ body.wwm-layout-active .wwm-footer {
   box-shadow: 0 0 8px var(--vermilion-strong);
 }
 .wwm-diag-modal .wwm-modal-header h2 {
-  color: var(--vermilion-bright) !important;
+  color: var(--vermilion-bright);
   text-shadow: 0 0 10px var(--vermilion-mid-strong) !important;
 }
 .wwm-diag-modal .wwm-modal-bg-icon {
@@ -2090,15 +2091,8 @@ body.wwm-layout-active .wwm-footer {
   color: var(--paper-mute);
   border-color: var(--paper-mute);
 }
-/* tier-SS 個別 padding clamp override も無効化 */
-.hero-wuxia .hero-tier.tier-badge.tier-SS,
-.hero-wuxia .hero-tier.tier-badge.tier-S,
-.hero-wuxia .hero-tier.tier-badge.tier-A,
-.hero-wuxia .hero-tier.tier-badge.tier-B,
-.hero-wuxia .hero-tier.tier-badge.tier-C {
-  font-size: var(--text-xl);
-  padding: 5px 16px;
-}
+/* (削除 2026-06-05) tier-X 別 0,4,0 重複 rule — 値は base .hero-tier.tier-badge と
+   完全同一。 .tier-badge.tier-SS padding clamp (同時削除) への対抗専用だった */
 
 /* SS — gold (アニメ継承、静的部のみ override) */
 .hero-wuxia .hero-tier.tier-SS {
@@ -2381,16 +2375,16 @@ body.wwm-layout-active .wwm-footer {
   align-items: flex-end;
   background: none;
   border: none;
-  padding: 0 !important;
+  padding: 0;
   margin: 0;
 }
 #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
-  padding: 6px 4px 9px !important;
+  padding: 6px 4px 9px;
   background: transparent;
   border: none;
-  color: var(--paper) !important;
-  font-family: 'Ma Shan Zheng', 'Noto Serif JP', serif !important;
-  font-size: var(--text-15) !important;
+  color: var(--paper);
+  font-family: 'Ma Shan Zheng', 'Noto Serif JP', serif;
+  font-size: var(--text-15);
   letter-spacing: 0.18em;
   cursor: pointer;
   position: relative;
@@ -2401,22 +2395,22 @@ body.wwm-layout-active .wwm-footer {
 }
 #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab:hover { opacity: 1; }
 #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab.active {
-  color: var(--chart-crit) !important;
+  color: var(--chart-crit);
   opacity: 1;
-  font-weight: 900 !important;
+  font-weight: 900;
 }
 html[lang="en"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
-  font-family: 'Cinzel', serif !important;
+  font-family: 'Cinzel', serif;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 /* ja: Ma Shan Zheng は日本漢字非対応 → Noto Serif JP */
 html[lang="ja"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
-  font-family: 'Noto Serif JP', serif !important;
+  font-family: 'Noto Serif JP', serif;
 }
 /* ko: Noto Serif KR (fallback Noto Serif JP) */
 html[lang="ko"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
-  font-family: 'Noto Serif KR', 'Noto Serif JP', serif !important;
+  font-family: 'Noto Serif KR', 'Noto Serif JP', serif;
 }
 /* en時: modal の主タイトル / 各パネルの主タイトル を Cinzel に統一 */
 html[lang="en"] .wwm-modal-header h2,
@@ -2472,7 +2466,7 @@ html[lang="en"] .wwm-cmp-title-en {
 /* 内側 .wwm-analysis-card 系の独自枠を除去 (二重枠回避) */
 .wwm-anlz-body .wwm-analysis-card,
 .wwm-anlz-body .wwm-modal-square {
-  background: transparent !important;
+  background: transparent;
   border: none !important;
   box-shadow: none;
   padding: 0 !important;
@@ -2480,7 +2474,7 @@ html[lang="en"] .wwm-cmp-title-en {
   z-index: 1;
 }
 /* 各 inner card の旧 bg-icon は非表示 → .wwm-anlz-body 共通の背景に統一 */
-.wwm-anlz-body .wwm-modal-bg-icon { display: none !important; }
+.wwm-anlz-body .wwm-modal-bg-icon { display: none; }
 /* パネル全体の背景アイコン (旧 .wwm-modal-bg-icon と同位置/サイズ/透明度) */
 .wwm-anlz-bgicon {
   position: absolute;
@@ -2506,7 +2500,7 @@ html[lang="en"] .wwm-cmp-title-en {
 .wwm-anlz-body .wwm-analysis-card::after,
 .wwm-anlz-body .wwm-modal-square::before,
 .wwm-anlz-body .wwm-modal-square::after {
-  display: none !important;
+  display: none;
 }
 
 /* PvP定音ロック行 (武具対照 affix6): val 入力欄を非表示 (編集不可、行レイアウト維持) */

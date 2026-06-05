@@ -8,7 +8,7 @@
 }
 
 @media (max-width: 600px) {
-  .hero--collapsed .pname { display: none !important; }
+  .hero--collapsed .pname { display: none; }
   .hero--collapsed .pval { font-size: var(--text-xs); }
   .hero--collapsed .prob-row { gap: 3px; }
 }
@@ -106,7 +106,7 @@
     grid-template-columns: 1fr 190px;
   }
   .hero--collapsed .hero-right {
-    padding: var(--space-1-5) var(--space-2-5) !important;
+    padding: var(--space-1-5) var(--space-2-5);
   }
   .hero--collapsed .donut { width: 56px; height: 56px; }
   .hero--collapsed .donut-wrap { gap: var(--space-2); }
@@ -181,7 +181,7 @@
   .wwm-sidebar-test {
     position: relative !important;
     width: 100% !important;
-    left: 0 !important; top: auto !important;
+    left: 0 !important; top: auto;
     max-height: 50vh !important;
   }
   body.wwm-layout-active .container { padding-left: 0; }
@@ -234,8 +234,8 @@
   /* root scroll 抑止 (白scrollbar削除)、 wwm-app-body 内部のみscroll (金色scrollbar) */
   html, body, body.wwm-layout-active {
     overflow: hidden !important;
-    height: 100vh !important;
-    height: 100dvh !important;
+    height: 100vh;
+    height: 100dvh;
   }
   /* mobile時 SVG feTurbulence noise overlay (mix-blend-mode: overlay) 全削除。
      これが「砂フィルタが装備カード上に被ってる」 視覚効果の正体。 hero/格析/footer の
@@ -278,11 +278,11 @@
     overflow: hidden;
   }
   .wwm-mobile-topbar .wwm-brand-vert {
-    font-size: var(--text-md) !important;
+    font-size: var(--text-md);
     letter-spacing: 0.14em;
-    padding: 1px 2px !important;
-    border-left-width: 1px !important;
-    border-right-width: 1px !important;
+    padding: 1px 2px;
+    border-left-width: 1px;
+    border-right-width: 1px;
     flex: 0 0 auto;
   }
   .wwm-mobile-topbar .wwm-brand-right {
@@ -291,14 +291,14 @@
     overflow: hidden;
   }
   .wwm-mobile-topbar .wwm-brand-en {
-    font-size: var(--text-sm) !important;
+    font-size: var(--text-sm);
     letter-spacing: 0.14em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .wwm-mobile-topbar .wwm-brand-sub {
-    font-size: var(--text-2xs) !important;
+    font-size: var(--text-2xs);
     letter-spacing: 0.18em;
     white-space: nowrap;
     overflow: hidden;
@@ -306,7 +306,7 @@
   }
   .wwm-mobile-topbar .wwm-brand-seal {
     width: 28px; height: 28px;
-    font-size: var(--text-lg) !important;
+    font-size: var(--text-lg);
     border-width: 2px;
     box-shadow: 0 0 10px var(--vermilion-strong);
     flex: 0 0 auto;
@@ -386,7 +386,7 @@
     height: auto;
   }
   body.wwm-layout-active .wwm-app-body {
-    min-width: 0 !important;  /* PC用 980 制約 解除 */
+    min-width: 0;  /* PC用 980 制約 解除 */
     /* grid 解除 = flex column で 自然 縦並び (PC layout grid-area 構造 mobile時 無効化) */
     display: flex !important;
     flex-direction: column;
@@ -394,13 +394,13 @@
     grid-template-rows: none;
     grid-template-areas: none;
     gap: var(--space-2);
-    max-width: none !important;
+    max-width: none;
     /* 内部 scroll container = sticky-header の下、 footer 高さも引いて footer常時表示確保 */
     height: calc(100vh - var(--wwm-header-h, 103px) - var(--wwm-footer-h, 32px)) !important;
     height: calc(100dvh - var(--wwm-header-h, 103px) - var(--wwm-footer-h, 32px)) !important;
-    max-height: none !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
+    max-height: none;
+    overflow-y: auto;
+    overflow-x: hidden;
     scrollbar-width: thin;
     scrollbar-color: var(--gold-deep) transparent;
   }
@@ -409,7 +409,7 @@
     position: fixed;
     bottom: 0; left: 0; right: 0;
     z-index: 100;
-    padding: calc(4px + var(--safe-bottom, 0px)) 12px 4px !important;
+    padding: calc(4px + var(--safe-bottom, 0px)) 12px 4px;
   }
   /* 格析section mobile時 hidden (📈格析 tap で 全画面modal表示 Phase 8 で実装) */
   body.wwm-layout-active .wwm-analysis-tabs,
@@ -424,12 +424,12 @@
   body.wwm-layout-active .wwm-app-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
   body.wwm-layout-active .wwm-app-body::-webkit-scrollbar-track { background: transparent; }
   /* mobile時 sidebar (sb) パネル 非表示 → 内容は FAB (Phase 7) で 全画面表示 */
-  body.wwm-layout-active .wwm-sidebar-test { display: none !important; }
+  body.wwm-layout-active .wwm-sidebar-test { display: none; }
   /* mobile時 footer は normal flow に戻す (PC は position:fixed で 画面下常駐) */
   body.wwm-layout-active .wwm-footer {
     position: static;
     z-index: auto;
-    padding: calc(8px + var(--safe-bottom)) 12px 8px !important;
+    padding: calc(8px + var(--safe-bottom)) 12px 8px;
   }
 
   /* ─── Phase 3: preset-bar (弱点+プリセット) 1行横スクロール強制 ─── */
@@ -440,8 +440,8 @@
     padding: var(--space-1-5) var(--space-2-5) !important;
     margin-top: var(--space-1) !important;
     gap: var(--space-2);
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
+    overflow-x: auto;
+    overflow-y: hidden;
     scrollbar-width: thin;
     -webkit-overflow-scrolling: touch;
   }
@@ -474,18 +474,18 @@
   .preset-name-input { display: none; }
   .preset-btn {
     min-height: 26px;
-    padding: 1px 4px !important;
-    font-size: 0 !important;  /* 元テキスト 非表示、 ::before でアイコン */
+    padding: 1px 4px;
+    font-size: 0;  /* 元テキスト 非表示、 ::before でアイコン */
     letter-spacing: 0;
-    flex: 0 0 auto !important;
-    min-width: 0 !important;
+    flex: 0 0 auto;
+    min-width: 0;
   }
   .preset-save::before { content: '💾'; font-size: var(--text-md); }
   .preset-load::before { content: '📂'; font-size: var(--text-md); }
   .preset-del::before  { content: '✕';  font-size: var(--text-md); }
   .preset-slot {
     gap: 1px;
-    padding: 0 !important;
+    padding: 0;
     border: 1px solid var(--ink-2);
     border-radius: 2px;
     width: auto;       /* L1368 width:100% 解除 */
@@ -499,7 +499,7 @@
     flex-direction: row; /* L1365 column 解除 */
   }
   .preset-bar { gap: 3px; padding: var(--space-1) var(--space-1) !important; flex-direction: row; }
-  .preset-btn { padding: 1px 3px !important; }
+  .preset-btn { padding: 1px 3px; }
   /* 弱点バッジも横幅節約 */
   .wwm-diag-badge {
     min-height: 26px;
@@ -510,95 +510,95 @@
 
   /* ─── Phase 4: hero compact + mobile RESET 内蔵 ─── */
   section.hero.hero-wuxia {
-    padding: var(--space-3) var(--space-3-5) !important;
-    margin: var(--space-1) 0 !important;
+    padding: var(--space-3) var(--space-3-5);
+    margin: var(--space-1) 0;
     display: flex !important;          /* grid解除、 flex column で縦並び明示 */
-    flex-direction: column !important;
-    grid-template-columns: none !important;
+    flex-direction: column;
+    grid-template-columns: none;
     grid-template-rows: none;
     grid-template-areas: none;
-    gap: 8px !important;
-    min-height: 0 !important;
-    height: auto !important;
-    overflow: hidden !important;       /* 装飾はみ出し抑止 ( hero内に「斬」+ink-stroke 残し ) */
-    flex: 0 0 auto !important;
-    min-height: 90px !important;       /* 折りたたみ時 最小確保 */
+    gap: 8px;
+    min-height: 0;
+    height: auto;
+    overflow: hidden;       /* 装飾はみ出し抑止 ( hero内に「斬」+ink-stroke 残し ) */
+    flex: 0 0 auto;
+    min-height: 90px;       /* 折りたたみ時 最小確保 */
   }
   /* hero拡張時 = 自然 contents 高さで fit (余白なし、 donut + ラベル ピッタリ) */
   section.hero.hero-wuxia.hero--expanded {
-    min-height: 0 !important;
+    min-height: 0;
   }
-  .hero-left {
-    gap: 4px !important;
-    padding: 0 !important;
-    overflow: visible !important;  /* PC overflow:hidden 解除、 子のはみ出し回避 */
+  .hero-wuxia .hero-left {
+    gap: 4px;
+    padding: 0;
+    overflow: visible;  /* PC overflow:hidden 解除、 子のはみ出し回避 */
     width: 100%;
   }
-  .hero-wuxia .hero-label .ja { font-size: var(--text-md) !important; }
-  .hero-wuxia .hero-label .en { font-size: var(--text-2xs) !important; }
-  .hero-score-row {
+  .hero-wuxia .hero-label .ja { font-size: var(--text-md); }
+  .hero-wuxia .hero-label .en { font-size: var(--text-2xs); }
+  .hero-wuxia .hero-score-row {
     flex-wrap: wrap;
-    gap: 8px !important;
-    align-items: center !important;
+    gap: 8px;
+    align-items: center;
   }
-  .hero-number {
-    font-size: 60px !important;  /* current score 大字 */
-    line-height: 1 !important;
+  .hero-wuxia .hero-number {
+    font-size: 60px;  /* current score 大字 */
+    line-height: 1;
   }
-  .hero-tier {
-    font-size: var(--text-lg) !important;
-    padding: var(--space-1) var(--space-2) !important;
+  .hero-wuxia .hero-tier.tier-badge {
+    font-size: var(--text-lg);
+    padding: var(--space-1) var(--space-2);
   }
   /* hero-score-row grid: 左=score (2行跨)、 右上=NEXT、 右下=Tier badge (両方 中央揃え) */
-  .hero-score-row {
-    display: grid !important;
+  .hero-wuxia .hero-score-row {
+    display: grid;
     grid-template-columns: auto auto;  /* score自然幅 + stack自然幅 = 詰める */
     grid-template-areas:
       "score next"
       "score tier";
-    column-gap: 4px !important;
-    row-gap: 0 !important;
-    justify-content: start !important;  /* 全体左寄せ、 score+stack 近接 */
-    align-items: center !important;
+    column-gap: 4px;
+    row-gap: 0;
+    justify-content: start;  /* 全体左寄せ、 score+stack 近接 */
+    align-items: center;
     flex-wrap: nowrap;
   }
   .hero-current { grid-area: score; }
-  .hero-tier {
+  .hero-wuxia .hero-tier.tier-badge {
     grid-area: tier;
-    font-size: var(--text-xl) !important;  /* 旧 main mobile 同等 (base .hero-wuxia .hero-tier.tier-badge と同じ 22px) */
-    padding: 5px 16px !important;          /* 旧 main mobile 同等 */
+    font-size: var(--text-xl);  /* 旧 main mobile 同等 (base .hero-wuxia .hero-tier.tier-badge と同じ 22px) */
+    padding: 5px 16px;          /* 旧 main mobile 同等 */
     min-height: auto;
-    align-self: start !important;
-    justify-self: center !important;
-    text-align: center !important;
+    align-self: start;
+    justify-self: center;
+    text-align: center;
   }
-  .hero-next-inline {
+  .hero-wuxia .hero-next-inline {
     grid-area: next;
     display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 3px !important;
-    font-size: var(--text-xs) !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    align-self: end !important;
-    justify-self: center !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    font-size: var(--text-xs);
+    margin: 0;
+    padding: 0;
+    align-self: end;
+    justify-self: center;
   }
   .hero-next-inline[hidden] { display: none !important; }
-  .hero-next-label { font-size: var(--text-xs) !important; letter-spacing: 0.08em !important; padding: 0 !important; color: var(--paper-mute) !important; }
-  .hero-next-row { font-size: var(--text-sm) !important; display: inline-flex !important; align-items: center !important; gap: 2px !important; }
-  .hero-next-val { font-size: var(--text-md) !important; font-weight: var(--fw-bold) !important; }
+  .hero-wuxia .hero-next-label { font-size: var(--text-xs); letter-spacing: 0.08em; padding: 0; color: var(--paper-mute); }
+  .hero-wuxia .hero-next-row { font-size: var(--text-sm); display: inline-flex; align-items: center; gap: 2px; }
+  .hero-wuxia .hero-next-val { font-size: var(--text-md); font-weight: var(--fw-bold); }
 
   /* hero 新layout: 上半=情報+donut (Tier右に小)、 下半=tap時 内訳1行 */
   section.hero.hero-wuxia {
     display: grid !important;
-    grid-template-columns: 1fr auto !important;
+    grid-template-columns: 1fr auto;
     grid-template-areas:
       "info luopan"
       "judges judges";
-    gap: 4px 10px !important;
-    align-items: center !important;
+    gap: 4px 10px;
+    align-items: center;
     cursor: pointer;
   }
   .hero-left { grid-area: info; }
@@ -617,7 +617,7 @@
     transform: translate(-50%, -50%);
   }
   .hero-right .luopan-inner svg { width: 100%; height: 100%; }
-  .hero-right .luopan-center-label { font-size: var(--text-xs) !important; }
+  .hero-right .luopan-center-label { font-size: var(--text-xs); }
   /* 朱色 筆 SVG 削除 */
   .hero-wuxia .ink-stroke { display: none; }
   /* judge-list: default hidden、 hero--expanded 時 hero下に 1行 横並び (wrap可) */
@@ -630,21 +630,21 @@
     width: 100%;
   }
   section.hero.hero-wuxia.hero--expanded .hero-right .judge-list {
-    display: flex !important;
+    display: flex;
   }
   .hero-right .judge-row {
     display: inline-flex;
     align-items: center;
     gap: 3px;
-    font-size: var(--text-sm) !important;
+    font-size: var(--text-sm);
     margin: 0;
-    padding: 0 !important;
+    padding: 0;
     white-space: nowrap;
     border: none !important;
   }
   .hero-right .judge-row-sep {
     border: none !important;
-    padding: 0 !important;
+    padding: 0;
     margin: 0;
   }
   section.hero.hero-wuxia.hero--expanded::after { content: '▲ tap'; }
@@ -675,46 +675,46 @@
   /* 心法 grid: 2列 stack、 武庫 心法直下 1枚 (parent grid 確認後 後 phase で 微調整) */
   .wwm-xinfa-grid,
   #wwmXinfaGrid {
-    display: grid !important;
+    display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: var(--space-2) !important;
+    gap: var(--space-2);
   }
   .wwm-xinfa-slot[data-arsenal-slot] {
     grid-column: 1 / -1;  /* 武庫 横全幅で 心法直下 */
   }
 
   /* ─── Phase 9: 装備/心法/武庫 対照 modal + SHARE modal 全画面化 ─── */
-  .wwm-modal.wwm-modal-square,
+  .wwm-modal.wwm-modal-square.wwm-modal-square,
   .wwm-modal.wwm-modal-square.wwm-modal-wide,
   .wwm-modal.wwm-modal-square.wwm-arsenal-modal,
-  .wwm-modal.wwm-modal-wide {
-    max-width: 100vw !important;
-    width: 100vw !important;
-    min-width: 0 !important;
-    margin: 0 !important;
+  .wwm-modal.wwm-modal-wide.wwm-modal-wide {
+    max-width: 100vw;
+    width: 100vw;
+    min-width: 0;
+    margin: 0;
     border-radius: 0 !important;
-    max-height: 100dvh !important;
-    height: 100dvh !important;
-    display: flex !important;
-    flex-direction: column !important;
+    max-height: 100dvh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
   }
   /* 武具/心法/武庫 対照 modal: mobile では modal-body が overflow-y:auto (L701) で scroll container 化、
      bg-icon (absolute, bottom:-18%/-45%, height:110%/165%) が scroll content として下方に伸び viewport にはみ出す。
      mobile では装飾より使い勝手優先 → bg-icon 自体を非表示。 desktop の装飾は維持。 */
-  .wwm-modal.wwm-modal-square.wwm-cmp-modal-a .wwm-cmp-modal-bg-icon { display: none !important; }
+  .wwm-modal.wwm-modal-square.wwm-cmp-modal-a .wwm-cmp-modal-bg-icon { display: none; }
   .wwm-modal.wwm-modal-square .wwm-modal-body,
   .wwm-modal.wwm-modal-wide .wwm-modal-body {
-    flex: 1 1 auto !important;
-    overflow-y: auto !important;
-    padding: var(--space-3) !important;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: var(--space-3);
   }
   /* SHARE modal OBS section mobile時 hidden (OBSは PC専用機能) */
-  .wwm-share-obs-block { display: none !important; }
+  .wwm-share-obs-block { display: none; }
   /* 対照 grid: 現有 / divider / 新置 を 縦stack */
   .wwm-cmp-modal-a .wwm-cmp-grid {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
-    gap: 10px !important;
+    gap: 10px;
   }
   /* divider 縦線 → 横線 */
   .wwm-cmp-modal-a .wwm-cmp-divider {
@@ -730,23 +730,23 @@
   .wwm-cmp-modal-a .wwm-cmp-divider::after  { left: 70%; }
   /* footer (delta + button row) 縦stack */
   .wwm-cmp-footer-a {
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 8px !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
   }
-  .wwm-cmp-btn-row { justify-content: stretch !important; }
+  .wwm-cmp-btn-row { justify-content: stretch; }
   .wwm-cmp-btn-row .wwm-btn-primary,
-  .wwm-cmp-btn-row .wwm-btn-secondary { flex: 1 1 auto !important; }
+  .wwm-cmp-btn-row .wwm-btn-secondary { flex: 1 1 auto; }
 
   /* 武庫modal path選択: EN版で長ラベル 横溢れ → wrap強制 + 縮小 */
   .wwm-arsenal-modal .wwm-arsenal-paths {
-    flex-wrap: wrap !important;
-    gap: 6px 10px !important;
+    flex-wrap: wrap;
+    gap: 6px 10px;
     width: 100%;
   }
   .wwm-arsenal-modal .wwm-arsenal-paths .wwm-radio-label {
-    font-size: var(--text-12) !important;
-    white-space: nowrap !important;
+    font-size: var(--text-12);
+    white-space: nowrap;
   }
   /* 武庫modal Tier行: 頂点off時 input溢れ → 縮小 + wrap許可 */
   .wwm-arsenal-modal .wwm-cmp-row { grid-template-columns: 40px 1fr !important; }
@@ -763,7 +763,7 @@
   }
   .wwm-arsenal-modal .wwm-cmp-row .wwm-num-input {
     width: 36px !important;
-    font-size: var(--text-xs) !important;
+    font-size: var(--text-xs);
   }
 
   /* ─── Phase 7: ステFAB + 全画面 stat overlay ─── */
@@ -857,7 +857,7 @@
   /* overlay内で sidebar 自体を move して表示 — 元 mobile時 display:none を上書き */
   body.wwm-layout-active .wwm-sidebar-test.wwm-sidebar-in-overlay,
   body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sidebar-test {
-    display: block !important;
+    display: block;
     position: static !important;
     width: 100% !important;
     height: auto !important;
@@ -865,9 +865,9 @@
     background: transparent !important;
     border: 0 !important;
     padding: 0 !important;
-    margin: 0 !important;
+    margin: 0;
     visibility: visible;
-    opacity: 1 !important;
+    opacity: 1;
   }
   /* mini-hero-card 上部固定: overlay-body 直下に出して sticky 復活 (sidebar-test 内では効かない場合の保険として padding 構造合わせ) */
   body.wwm-layout-active .wwm-mobile-stat-overlay-body {
@@ -881,7 +881,7 @@
     top: -8px;
     z-index: 20;
     margin: -8px -10px 8px;
-    padding: var(--space-2-5) var(--space-3) !important;
+    padding: var(--space-2-5) var(--space-3);
     background: var(--bg-raised) !important;
     border: 1px solid var(--gold-deep);
     box-shadow: 0 6px 14px var(--overlay-mid);
@@ -973,7 +973,7 @@
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body {
     display: flex;
     flex-direction: column;
-    overflow: hidden !important;
+    overflow: hidden;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-anlz {
     display: flex !important;
@@ -1001,23 +1001,23 @@
     flex-direction: column !important;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-card {
-    height: 100% !important;
-    min-height: 0 !important;
-    flex: 1 1 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
+    height: 100%;
+    min-height: 0;
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
   }
   /* OPT header: 横並びだと h3が1文字wrapで縦書き化 → 縦stackに */
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-header {
     flex-direction: column;
-    align-items: stretch !important;
-    gap: 6px !important;
-    margin-bottom: var(--space-2) !important;
-    padding-bottom: var(--space-1-5) !important;
+    align-items: stretch;
+    gap: 6px;
+    margin-bottom: var(--space-2);
+    padding-bottom: var(--space-1-5);
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-card h3 {
     white-space: nowrap;
-    font-size: var(--text-12) !important;
+    font-size: var(--text-12);
     letter-spacing: 0.12em;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-controls {
@@ -1027,16 +1027,16 @@
     gap: 4px 8px;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-ratio-label {
-    font-size: var(--text-sm) !important;
+    font-size: var(--text-sm);
     white-space: nowrap;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-ratio-label input[type="range"] {
-    width: 90px !important;
+    width: 90px;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-sort-btn,
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-btn {
-    font-size: var(--text-sm) !important;
-    padding: var(--space-half) var(--space-1-5) !important;
+    font-size: var(--text-sm);
+    padding: var(--space-half) var(--space-1-5);
   }
   /* OPT row: 2行 grid (pos|slot|delta|check 上行 / change 下行全幅) */
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-row {
@@ -1045,23 +1045,23 @@
       "pos slot delta tier check"
       "change change change change change";
     gap: 2px 6px;
-    padding: var(--space-1-5) var(--space-2) !important;
-    font-size: var(--text-sm) !important;
+    padding: var(--space-1-5) var(--space-2);
+    font-size: var(--text-sm);
   }
-  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-pos { grid-area: pos; font-size: var(--text-sm) !important; }
-  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-slot { grid-area: slot; font-size: var(--text-sm) !important; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; }
-  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-delta { grid-area: delta; font-size: var(--text-12) !important; }
-  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-tierup { grid-area: tier; font-size: var(--text-xs) !important; padding: 0 var(--space-1) !important; }
-  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-check-wrap { grid-area: check; padding: 0 var(--space-half) !important; }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-pos { grid-area: pos; font-size: var(--text-sm); }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-slot { grid-area: slot; font-size: var(--text-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-delta { grid-area: delta; font-size: var(--text-12); }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-tierup { grid-area: tier; font-size: var(--text-xs); padding: 0 var(--space-1); }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-check-wrap { grid-area: check; padding: 0 var(--space-half); }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-change {
     grid-area: change;
-    font-size: var(--text-xs) !important;
+    font-size: var(--text-xs);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 4px;
     line-height: 1.4;
-    padding-top: var(--space-half) !important;
+    padding-top: var(--space-half);
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-from,
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-to {
@@ -1071,9 +1071,9 @@
 
   /* ─── NOTE modal mobile 全画面 + close sticky (履歴/筆記 閉じれない問題対策) ─── */
   .wwm-modal-backdrop {
-    overflow-y: auto !important;
-    padding: 0 !important;
-    align-items: flex-start !important;
+    overflow-y: auto;
+    padding: 0;
+    align-items: flex-start;
   }
   .wwm-note-modal-a {
     width: 100vw;
@@ -1144,9 +1144,9 @@
 @media (max-width: 480px) {
   /* mobile @media で hide される sidebar / app-body を強制復帰 */
   html.wwm-view-sidebar body.wwm-layout-active .wwm-sidebar-test {
-    display: block !important;
+    display: block;
     position: relative !important;
-    top: auto !important;
+    top: auto;
     width: 100% !important;
     height: 100% !important;
     max-height: 100% !important;
@@ -1174,14 +1174,14 @@
 /* ─── extra-small mobile (320-359px、 iPhone SE / 小型 Android) ─── */
 @media (max-width: 359px) {
   /* hero-number: 480px @media で 60px だが 320px だと score 領域が広すぎて NEXT/tier 圧迫 */
-  .hero-number {
-    font-size: 44px !important;
+  .hero-wuxia .hero-number {
+    font-size: 44px;
   }
   /* hero-tier badge: 480px @media で var(--text-xl)=22px に拡大したが、 320-359px では
      grid "score | next/tier" 領域に 22px badge が収まらず NEXT/donut と重なる。 中間サイズに縮小。 */
-  .hero-tier {
-    font-size: var(--text-lg) !important;  /* 16px */
-    padding: 3px 10px !important;
-    letter-spacing: 0.05em !important;
+  .hero-wuxia .hero-tier.tier-badge {
+    font-size: var(--text-lg);  /* 16px */
+    padding: 3px 10px;
+    letter-spacing: 0.05em;
   }
 }
