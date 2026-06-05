@@ -16,7 +16,7 @@ const fs = require('fs');
 const DRY = process.argv.includes('--dry');
 const catArg = (process.argv.find(a => a.startsWith('--cat=')) || '--cat=A,B').slice(6);
 const cats = new Set(catArg.split(','));
-const { A, B = [], K, C } = JSON.parse(fs.readFileSync('scripts/.important-v2.json', 'utf8'));
+const { A, B = [], G = [], K, C } = JSON.parse(fs.readFileSync('scripts/.important-v2.json', 'utf8'));
 
 const keyOf = (d) => `${d.file}|${d.line}|${d.prop}`;
 
@@ -24,7 +24,7 @@ const keyOf = (d) => `${d.file}|${d.line}|${d.prop}`;
 const blocked = new Set([...K, ...C].map(keyOf));
 
 // 対象 category の declaration 単位 unique 化 + blocked 除外
-const pool = [...(cats.has('A') ? A : []), ...(cats.has('B') ? B : [])];
+const pool = [...(cats.has('A') ? A : []), ...(cats.has('B') ? B : []), ...(cats.has('G') ? G : [])];
 const targets = new Map();
 for (const d of pool) {
   const key = keyOf(d);
@@ -53,9 +53,20 @@ for (const [file, list] of byFile) {
     const line = lines[idx];
     // prop: ... !important を厳密 match (line 内 該当 prop のみ)
     const re = new RegExp(`(${d.prop}\\s*:[^;{}]*?)\\s*!\\s*important`, 'i');
-    if (!re.test(line)) { console.warn(`[WARN] ${file}:${d.line} "${d.prop}" !important 不在 (line ずれ?)`); continue; }
-    lines[idx] = line.replace(re, '$1');
-    count++;
+    if (re.test(line)) {
+      lines[idx] = line.replace(re, '$1');
+      count++;
+    } else {
+      // multi-line 宣言 (値が複数行に跨り !important が後続行) — 宣言開始行から
+      // ; / } までの window を joined で match → 行へ書き戻し
+      const span = Math.min(idx + 10, lines.length);
+      const window = lines.slice(idx, span).join('\n');
+      const reMl = new RegExp(`(${d.prop}\\s*:[^;{}]*?)\\s*!\\s*important`, 'i');
+      if (!reMl.test(window)) { console.warn(`[WARN] ${file}:${d.line} "${d.prop}" !important 不在 (line ずれ?)`); continue; }
+      const replaced = window.replace(reMl, '$1').split('\n');
+      for (let j = 0; j < replaced.length; j++) lines[idx + j] = replaced[j];
+      count++;
+    }
     if (DRY) console.log(`  ${file}:${d.line} ${d.prop} | ${d.selector}`);
   }
   if (!DRY && count > 0) fs.writeFileSync(file, lines.join(eol));

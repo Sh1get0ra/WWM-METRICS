@@ -286,8 +286,8 @@
 }
 .wwm-cmp-modal-a {
   background: var(--bg-raised) !important;
-  border: 1px solid var(--gold-deep) !important;
-  border-radius: 0 !important;
+  border: 1px solid var(--gold-deep);
+  border-radius: 0;
 }
 /* base .wwm-modal の右上 装飾 (::before glow + ::after 小L字) を非表示 (案A 4隅L字とダブる) */
 .wwm-cmp-modal-a::before,
@@ -329,19 +329,19 @@
 /* ── 完全A化: col / title / kongfu / rows / pct ── */
 .wwm-cmp-modal-a .wwm-cmp-col {
   background: #0d0a08 !important;
-  border: 1px solid var(--ink-1) !important;
-  border-radius: 0 !important;
+  border: 1px solid var(--ink-1);
+  border-radius: 0;
   padding: var(--space-4) var(--space-3-5) var(--space-3-5) !important;
   position: relative;
   overflow: visible;
 }
 .wwm-cmp-modal-a .wwm-cmp-current,
 .wwm-cmp-modal-a .wwm-cmp-new {
-  border: 1px solid var(--ink-1) !important;
+  border: 1px solid var(--ink-1);
 }
 .wwm-cmp-modal-a .wwm-cmp-title {
   position: absolute !important;
-  top: -14px !important; left: 12px !important;
+  top: -14px; left: 12px;
   padding: 0 !important;
   margin: 0;
   z-index: 4;
@@ -379,9 +379,9 @@
   font-size: var(--text-14) !important;
   font-weight: 700 !important;
   letter-spacing: 0.08em;
-  border: 1px solid var(--gold-deep) !important;
+  border: 1px solid var(--gold-deep);
   padding: 0 var(--space-2-5) !important;
-  border-radius: 2px !important;
+  border-radius: 2px;
   background: var(--bg-raised) !important;
   line-height: 26px;
   height: 26px !important;
@@ -424,21 +424,21 @@
   font-size: var(--text-md) !important;
   color: var(--paper) !important;
   background: var(--gold-tint) !important;
-  border: none !important;
-  border-radius: 0 !important;
+  border: none;
+  border-radius: 0;
   padding: var(--space-1-5) var(--space-2) !important;
-  margin-bottom: var(--space-2) !important;
-  margin-top: var(--space-1-5) !important;
+  margin-bottom: var(--space-2);
+  margin-top: var(--space-1-5);
 }
 .wwm-cmp-modal-a .wwm-cmp-kongfu-select {
   background: var(--gold-tint) !important;
-  border: 1px solid var(--gold-deep) !important;
-  border-radius: 0 !important;
+  border: 1px solid var(--gold-deep);
+  border-radius: 0;
   color: var(--paper) !important;
   font-family: var(--f-display, 'Noto Serif JP') !important;
   font-weight: 700 !important;
-  margin-bottom: var(--space-2) !important;
-  margin-top: var(--space-1-5) !important;
+  margin-bottom: var(--space-2);
+  margin-top: var(--space-1-5);
 }
 /* select内 option を統一 (paper bg + var(--bg-raised) / hover青) */
 .wwm-cmp-modal-a select option {
@@ -456,15 +456,15 @@
 .wwm-cmp-modal-a .wwm-cmp-set-header,
 .wwm-cmp-modal-a .wwm-cmp-set-select {
   background: linear-gradient(90deg, var(--vermilion-bright-soft), transparent) !important;
-  border: none !important;
-  border-radius: 0 !important;
+  border: none;
+  border-radius: 0;
   color: var(--vermilion-bright) !important;
   text-shadow: 0 0 6px var(--vermilion-bright-soft-mid) !important;
   padding: var(--space-1-5) var(--space-2) !important;
-  margin-bottom: var(--space-2) !important;
+  margin-bottom: var(--space-2);
 }
 .wwm-cmp-modal-a .wwm-cmp-set-select {
-  border: 1px solid var(--gold-deep) !important;
+  border: 1px solid var(--gold-deep);
 }
 .wwm-cmp-modal-a .wwm-cmp-rows {
   display: flex !important;
@@ -476,8 +476,8 @@
   align-items: center !important;
   gap: 6px !important;
   padding: var(--space-1) var(--space-1-5) !important;
-  border: none !important;
-  border-bottom: 1px dashed var(--gold-faint) !important;
+  border: none;
+  border-bottom: 1px dashed var(--gold-faint);
   font-size: var(--text-12) !important;
   background: transparent !important;
   box-shadow: none;
@@ -488,8 +488,8 @@
 }
 .wwm-cmp-modal-a .wwm-cmp-stat-select {
   background: var(--overlay-soft-mid) !important;
-  border: 1px solid var(--ink-2) !important;
-  border-radius: 0 !important;
+  border: 1px solid var(--ink-2);
+  border-radius: 0;
   font-size: var(--text-sm) !important;
 }
 .wwm-cmp-modal-a .wwm-cmp-val,
@@ -501,8 +501,8 @@
 }
 .wwm-cmp-modal-a .wwm-cmp-val-input {
   background: var(--overlay-soft-mid) !important;
-  border: 1px solid var(--ink-2) !important;
-  border-radius: 0 !important;
+  border: 1px solid var(--ink-2);
+  border-radius: 0;
 }
 .wwm-cmp-modal-a .wwm-cmp-pct,
 .wwm-cmp-modal-a .wwm-cmp-row .wwm-cmp-pct,
@@ -510,10 +510,10 @@
   font-family: var(--f-mono, 'Rajdhani') !important;
   font-size: var(--text-xs) !important;
   padding: 1px 3px !important;
-  border-radius: 2px !important;
+  border-radius: 2px;
   background: rgba(168,212,180,0.18) !important;
   color: var(--jade-bright) !important;
-  border: 1px solid var(--jade-bright-mid) !important;
+  border: 1px solid var(--jade-bright-mid);
   min-width: 30px !important;
   text-align: center;
   display: inline-block !important;
@@ -777,7 +777,7 @@
 .wwm-cmp-modal-a .wwm-cmp-set-header,
 .wwm-cmp-modal-a .wwm-cmp-set-select {
   padding: 5px 8px !important;
-  margin-bottom: var(--space-1-5) !important;
+  margin-bottom: var(--space-1-5);
   font-size: var(--text-12) !important;
 }
 

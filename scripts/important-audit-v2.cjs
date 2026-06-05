@@ -9,6 +9,8 @@
 //
 // 分類 (conservative — 迷ったら keep 側):
 //   A — 競合ゼロ + inline style 形跡なし → strip 安全候補
+//   B — paired theme override / solo natural 勝者 → strip 可
+//   G — Batch C: pairwise cascade order invariance fixpoint で strip 可と証明された旧 C
 //   K — inline style 競合可能性 (同 prop を書く JS に selector class が出現) → keep
 //   C — 同 finalCompound+prop に他 decl あり → 保留 (手動 review)
 //
@@ -361,6 +363,43 @@ function themeContext(sel) {
   return 'both';
 }
 
+// ── Batch C (G category) 用: context 重複判定 ──────────────────────
+// media query → viewport width 区間群 ([lo, hi] の union)
+// width 以外の feature / not 含み → null (= 判定不能 → conservative に overlap 扱い)
+function widthIntervals(media) {
+  if (!media) return [[0, Infinity]];
+  if (/\bnot\b/i.test(media)) return null;
+  const body = media.replace(/^@(media|supports)/i, '').trim();
+  if (/^@supports/i.test(media)) return null; // supports は width と無関係 → 判定不能
+  const ivs = [];
+  for (const part of body.split(/\s*,\s*/)) {
+    let lo = 0, hi = Infinity;
+    const feats = part.match(/\([^)]*\)/g) || [];
+    for (const f of feats) {
+      let m;
+      if ((m = f.match(/^\(\s*max-width\s*:\s*([\d.]+)px\s*\)$/i))) hi = Math.min(hi, parseFloat(m[1]));
+      else if ((m = f.match(/^\(\s*min-width\s*:\s*([\d.]+)px\s*\)$/i))) lo = Math.max(lo, parseFloat(m[1]));
+      else return null; // width 以外 (hover/orientation/prefers-* 等) → 判定不能
+    }
+    if (lo <= hi) ivs.push([lo, hi]);
+  }
+  return ivs.length ? ivs : null;
+}
+
+function mediaOverlap(ma, mb) {
+  const A = widthIntervals(ma), B = widthIntervals(mb);
+  if (!A || !B) return true; // 判定不能 = conservative overlap
+  for (const [al, ah] of A) for (const [bl, bh] of B) {
+    if (al <= bh && bl <= ah) return true;
+  }
+  return false;
+}
+
+function themeOverlap(p, q) {
+  const tp = themeContext(p.selector), tq = themeContext(q.selector);
+  return !(tp !== 'both' && tq !== 'both' && tp !== tq);
+}
+
 // selector 正規化: theme prefix 除去 + 空白圧縮 (pair 判定用)
 function stripThemePrefix(sel) {
   return sel
@@ -448,6 +487,10 @@ for (const [p, files] of inlineProps) {
 
 const coMap = buildCoOccurrence(jsSources);
 
+const catMap = new Map();    // decl → 'A'|'B'|'K'|'C'
+const compMap = new Map();   // decl → competitors (decl[])
+const inlineMap = new Map(); // decl → inlineConflict bool
+
 for (const d of importants) {
   // どれかの key で他 decl が居れば競合 (same-element 可能性 = conservative)
   // 共起 class/id (同 element に同時付与され得る token) の key も検索対象
@@ -480,21 +523,95 @@ for (const d of importants) {
   const inlineConflict = jsWithProp.size > 0 &&
     selectorClassesInJs(d.selector, jsSrcByFile, jsWithProp);
 
+  compMap.set(d, [...groupSet].filter(x => x !== d));
+  inlineMap.set(d, inlineConflict);
+
   if (hasCompetitor) {
     if (!inlineConflict &&
         (pairedThemeStrippable(d, [...groupSet]) || soloStrippable(d, [...groupSet]))) {
-      B.push(d);
+      B.push(d); catMap.set(d, 'B');
     } else {
-      C.push(d);
+      C.push(d); catMap.set(d, 'C');
     }
     continue;
   }
   if (inlineConflict) {
-    K.push(d);
+    K.push(d); catMap.set(d, 'K');
     continue;
   }
-  A.push(d);
+  A.push(d); catMap.set(d, 'A');
 }
+
+// ── Batch C: G category (pairwise cascade order invariance fixpoint) ──
+//
+// 原理: strip は physical decl (file|line|prop) 単位。 strip set S の各 C-split p と
+// bucket 共有競合 q の全 pair で勝敗順位が strip 前後で不変なら、 全 element の
+// cascade 結果が不変 = 視覚同一。
+//   - context 非重複 (theme 排他 / media width 区間非交差) → pair 無視
+//   - 同 prop + 同 value → 無害 (winner 変わっても視覚同一)
+//   - q non-important: 前 = p (important) 必勝 → 後も natural で p 勝ち必要
+//   - q important で S 外 (= keep 残留): 後 = q 必勝 → 前も natural で q 勝ちだった必要
+//   - q important で S 内 (= 同時 strip): natural 比較不変 → 常に OK
+// 違反 p の physical decl を S から除外 → fixpoint まで反復 (除外が新た​な flip を生むため)
+function naturalWins(p, q) {
+  const sp = specificity(p.selector), sq = specificity(q.selector);
+  if (sp !== sq) return sp > sq;
+  const fp = FILE_ORDER.get(p.file) ?? 99, fq = FILE_ORDER.get(q.file) ?? 99;
+  if (fp !== fq) return fp > fq;
+  return p.line > q.line;
+}
+
+const physKeyOf = (d) => `${d.file}|${d.line}|${d.prop}`;
+const physMap = new Map(); // physKey → splits (importants のみ)
+for (const d of importants) {
+  const k = physKeyOf(d);
+  if (!physMap.has(k)) physMap.set(k, []);
+  physMap.get(k).push(d);
+}
+
+// 初期 S: 全 split が strip 可能候補 (A / B / inline 競合なし C) の physical decl
+const physS = new Set();
+for (const [k, splits] of physMap) {
+  const ok = splits.every(s => {
+    const c = catMap.get(s);
+    return c === 'A' || c === 'B' || (c === 'C' && !inlineMap.get(s));
+  });
+  if (ok) physS.add(k);
+}
+
+let changed = true;
+while (changed) {
+  changed = false;
+  for (const k of [...physS]) {
+    const cSplits = physMap.get(k).filter(s => catMap.get(s) === 'C');
+    let ok = true;
+    for (const p of cSplits) {
+      for (const q of compMap.get(p)) {
+        if (q.file === p.file && q.line === p.line && q.prop === p.prop) continue; // 自分の別 split
+        if (!themeOverlap(p, q) || !mediaOverlap(p.media, q.media)) continue;
+        if (q.prop === p.prop && q.value === p.value) continue;
+        const pWins = naturalWins(p, q);
+        if (!q.important) {
+          if (!pWins) { ok = false; break; }       // strip 後 p 負け = flip
+        } else if (!physS.has(physKeyOf(q))) {
+          if (pWins) { ok = false; break; }        // 前 p 勝ち → 後 q (keep important) 勝ち = flip
+        }
+      }
+      if (!ok) break;
+    }
+    if (!ok) { physS.delete(k); changed = true; }
+  }
+}
+
+// G = physS に属する C split。 C から除外 (apply の blocked 判定整合)
+const G = [];
+const C2 = [];
+for (const d of C) {
+  if (physS.has(physKeyOf(d))) G.push(d);
+  else C2.push(d);
+}
+C.length = 0;
+C.push(...C2);
 
 // summary
 function byFile(list) {
@@ -508,10 +625,12 @@ console.log(`\nA (strip 安全候補 — 競合ゼロ + inline 形跡なし): ${
 console.table(byFile(A));
 console.log(`B (paired theme override — 一括 strip で winner 不変): ${B.length}`);
 console.table(byFile(B));
+console.log(`G (pairwise order invariance — fixpoint 証明済 strip 可): ${G.length}`);
+console.table(byFile(G));
 console.log(`K (inline style 競合可能性 → keep): ${K.length}`);
 console.table(byFile(K));
 console.log(`C (同 compound+prop 競合あり → 保留): ${C.length}`);
 console.table(byFile(C));
 
-fs.writeFileSync('scripts/.important-v2.json', JSON.stringify({ A, B, K, C }, null, 2));
+fs.writeFileSync('scripts/.important-v2.json', JSON.stringify({ A, B, G, K, C }, null, 2));
 console.log('\n→ scripts/.important-v2.json');
