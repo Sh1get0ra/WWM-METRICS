@@ -1,3 +1,5 @@
+@layer dark {
+
 /* AUTO-EXTRACTED from styles.css — DARK theme rules.
    Loaded AFTER styles.css for natural cascade override.
    Regenerate with: node scripts/theme-extract.cjs --apply
@@ -36,7 +38,7 @@ html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-kongfu-header,
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select { background: var(--gold-faint); color: #e6d6b8; }
 
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-set-header,
-html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-set-select { background: linear-gradient(90deg, rgba(232,81,58,0.30), transparent) !important; color: #ff6b4a; text-shadow: 0 0 6px var(--vermilion-bright-soft-mid) !important; }
+html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-set-select { background: linear-gradient(90deg, rgba(232,81,58,0.30), transparent); color: #ff6b4a; text-shadow: 0 0 6px var(--vermilion-bright-soft-mid); }
 
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-name { color: #ecdfd6; }
 
@@ -48,3 +50,5 @@ html:not([data-theme="light"]) .wwm-step2 .wwm-arsenal-tier {
   border: 1px solid rgba(212,175,55,0.25);
   background: rgba(40,28,16,0.55);
 }
+
+} /* end @layer dark */

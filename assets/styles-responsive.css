@@ -1,3 +1,5 @@
+@layer responsive {
+
 /* ╔═══════════════════════════════════════════════════════════════════╗
      RESPONSIVE — @media 集約 (Tier 3 Step 4)
      styles.css から切出。 cascade: tokens → animations → styles → modals → responsive → dark → light
@@ -24,13 +26,14 @@
 
 @media (max-width: 600px) {
 
-  /* ── 横スクロール完全防止 ── */
-  html, body { overflow-x: hidden; }
-  .container {
-    padding: 0 10px 30px;
-    overflow-x: hidden;
-    max-width: 100vw;
-  }
+  /* ── 横スクロール完全防止 ──
+     body 成分は削除済 (2026-06-05 @layer Step 1): body.wwm-layout-active { overflow-x: auto }
+     (components.css、 PC layout min-width 980 の横 scroll) に spec 負けで dead だった。
+     481-600px は PC layout 縮小表示 = 横 scroll 必須、 hidden 復活させるな */
+  html { overflow-x: hidden; }
+  /* .container mobile rule は削除済 (2026-06-05 @layer Step 1):
+     components.css の body.wwm-layout-active .wwm-app-body .container (spec 0,3,1) に
+     全 decl spec 負けで dead だった (container は wwm-app-body 内 1個のみ)。 復活させるな */
 
   /* ── iOS: 入力フォーカス時の自動ズーム防止 (font-size ≥ 16px 必須) ── */
   .preset-name-input { font-size: var(--text-lg); }
@@ -39,8 +42,9 @@
      STICKY: topbar のみ固定。preset bar・hero はスクロールさせる
      ───────────────────────────────────────────────────────────────── */
   .sticky-header {
-    position: static;
-    background: none;
+    /* position/background は削除済 (2026-06-05 @layer Step 1):
+       components.css の body.wwm-layout-active .sticky-header (sticky/transparent) に
+       spec 負けで dead だった。 復活させるな (layer flip 源) */
     padding: 0;
     margin-bottom: 0;
   }
@@ -51,7 +55,10 @@
     background: var(--bg-0);
     border-bottom: 1px solid var(--ink-2);
     flex-wrap: wrap;
-    padding: var(--space-2) var(--space-2-5);
+    /* padding left/right 成分は削除済 (2026-06-05 @layer Step 1):
+       components.css の .sticky-header > .topbar (padding-left/right: space-4) に spec 負けで dead */
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-2);
     gap: var(--space-1-5);
     margin-bottom: 0;
   }
@@ -61,19 +68,10 @@
   .title-block h1 { font-size: var(--text-15); letter-spacing: 0.05em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .title-block p { display: none; }
 
-  /* ── 右側コントロール: タイトルの下に全幅で並べる ── */
-  .top-controls {
-    width: 100%;
-    justify-content: space-between;
-    gap: var(--space-1);
-    flex-wrap: nowrap;
-  }
-  .lang-switcher { flex: 1; min-width: 0; }
-  /* a11y mobile tap target ≥36px (WCAG 2.5.5 推奨) */
-  .lang-btn { padding: 9px 0; font-size: var(--text-xs); flex: 1; text-align: center; min-width: 0; min-height: 36px; }
-  .icon-btn { width: 36px; height: 36px; flex-shrink: 0; }
-  .icon-btn.export-btn,
-  .icon-btn.import-btn { width: auto; height: 36px; padding: 0 var(--space-2-5); font-size: var(--text-xs); flex-shrink: 0; }
+  /* 旧 topbar 内 controls 用 mobile rule は削除済 (2026-06-05 @layer Step 1):
+     mobile では body.wwm-layout-active header.topbar { display:none } (本 file 後方) で
+     desktop topbar 全体が不可視 = .top-controls / .lang-switcher / topbar .lang-btn / .icon-btn 系 dead。
+     mobile UI は .wwm-mobile-topbar + .wwm-mobile-drawer (44px tap target 確保済) */
   .wwm-modal-close { width: 36px; height: 36px; }
   .preset-btn { min-height: 32px; }
 
@@ -83,9 +81,11 @@
   .preset-bar {
     flex-direction: column;
     gap: var(--space-1-5);
-    padding: var(--space-2) var(--space-2-5);
-    margin-top: var(--space-1-5);
-    margin-bottom: var(--space-2-5);
+    /* padding left/right + margin-top/bottom は削除済 (2026-06-05 @layer Step 1):
+       components.css の .sticky-header > .preset-bar (padding-left/right: space-4 / margin: 0 auto)
+       に spec 負けで dead だった */
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-2);
   }
   .preset-bar-title { font-size: var(--text-xs); flex-shrink: 0; }
   .preset-slots { flex-direction: column; gap: 5px; width: 100%; }
@@ -112,9 +112,18 @@
   }
   .hero--collapsed .donut { width: 56px; height: 56px; }
   .hero--collapsed .donut-wrap { gap: var(--space-2); }
+  /* @layer Step 1 複製 (2026-06-05): components.css の collapsed/縮小 rule が
+     本 block の汎用 rule に layer 移行後負けるため、 同値を此処で再宣言して優先維持 */
+  .hero--collapsed .hero-left { padding-top: var(--space-2-5); }
+  .hero--collapsed .donut-center-label { font-size: 7px; }
 
-  .hero-left { padding: var(--space-3) var(--space-3) var(--space-2-5); }
-  .hero-right { padding: var(--space-2-5) var(--space-3) var(--space-3); }
+  /* hero-left padding right 成分は削除済 (.hero-wuxia .hero-left { padding-right: 18px } が常勝)。
+     hero-right rule は削除済 (.hero-wuxia .hero-right padding 全成分常勝で dead) — 2026-06-05 @layer Step 1 */
+  .hero-left {
+    padding-top: var(--space-3);
+    padding-bottom: var(--space-2-5);
+    padding-left: var(--space-3);
+  }
   .hero-eyebrow { font-size: var(--text-xs); gap: var(--space-1-5); }
   .hero-eyebrow::before { width: 10px; }
   .hero-label-jp { font-size: var(--text-xs); letter-spacing: 0.14em; margin-top: 3px; }
@@ -126,7 +135,8 @@
     gap: var(--space-2);
     margin-top: var(--space-1-5);
   }
-  .hero-number { font-size: 52px; }
+  /* .hero-number font-size は削除済 (2026-06-05 @layer Step 1):
+     .hero-wuxia .hero-number (96px) に spec 負けで dead。 ≤480 は本 file 後方 block が担当 */
   .hero-number .unit { font-size: var(--text-xs); padding-bottom: var(--space-2); letter-spacing: 0.2em; }
 
   /* STATUS SCORE: 横一行コンパクト表示 */
@@ -174,8 +184,10 @@
 
 @media (max-width: 768px) {
   body.wwm-layout-active .wwm-app-body { flex-direction: column; padding: 0; }
+  /* max-height 40vh/50vh (旧 tablet 暫定) は削除済 (2026-06-05 @layer Step 1):
+     components.css の max-height: none (旧 !important、 strip 済) が意図 — tablet 本対応は TODO #14 */
   body.wwm-layout-active .wwm-sidebar-test {
-    position: relative; width: 100%; max-height: 40vh;
+    position: relative; width: 100%;
   }
 }
 
@@ -184,7 +196,6 @@
     position: relative !important;
     width: 100% !important;
     left: 0 !important; top: auto;
-    max-height: 50vh !important;
   }
   body.wwm-layout-active .container { padding-left: 0; }
 }
@@ -447,6 +458,9 @@
     scrollbar-width: thin;
     -webkit-overflow-scrolling: touch;
   }
+  /* @layer Step 1 複製 (2026-06-05): SHARE read-only mode の preset-bar 隠し防御。
+     components.css の同 rule が layer 移行後 上の display:flex に負けるため此処で再宣言 */
+  html.wwm-shared-build-mode .preset-bar { display: none; }
   .preset-bar::-webkit-scrollbar { height: 4px; }
   .preset-bar::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 2px; }
   .preset-bar-title { display: none; }
@@ -494,6 +508,9 @@
     min-width: 0;
     flex: 0 0 auto;    /* L1369 flex:none も併せて 上書き */
   }
+  /* @layer Step 1 複製 (2026-06-05): components.css の .preset-slot.has-data border-color が
+     layer 移行後 上の border (ink-2) に負けるため同値を此処で再宣言。 順序: 上 rule の直後必須 */
+  .preset-slot.has-data { border-color: rgba(201,164,90,0.4); }
   .preset-slots {
     gap: 3px;
     width: auto;       /* L1365 width:100% 解除 */
@@ -864,10 +881,10 @@
     display: block;
     position: static !important;
     width: 100% !important;
-    height: auto !important;
+    height: auto;
     max-height: none !important;
     background: transparent !important;
-    border: 0 !important;
+    border: 0;
     padding: 0 !important;
     margin: 0;
     visibility: visible;
@@ -878,7 +895,7 @@
     position: relative;
   }
   body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sidebar-test {
-    overflow: visible !important;
+    overflow: visible;
   }
   body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sb-mini-hero-card {
     position: sticky;
@@ -1145,36 +1162,7 @@
   /* tablet 暫定対応 (Phase 後半 で詰める) */
 }
 
-@media (max-width: 480px) {
-  /* mobile @media で hide される sidebar / app-body を強制復帰
-     ⚠ !important keep 確定 (Batch M): OBS × mobile 文脈交差 — @layer modes 移行まで維持 */
-  html.wwm-view-sidebar body.wwm-layout-active .wwm-sidebar-test {
-    display: block;
-    position: relative !important;
-    top: auto;
-    width: 100% !important;
-    height: 100% !important;
-    max-height: 100% !important;
-  }
-  /* mobile @media で hidden になる hero / 装備/心法 panel / 各種 mobile UI を OBS view では 全 hide */
-  html.wwm-view-sidebar section.hero.hero-wuxia,
-  html.wwm-view-sidebar .hero,
-  html.wwm-view-sidebar .hero-wuxia,
-  html.wwm-view-sidebar .ink-stroke,
-  html.wwm-view-sidebar body.wwm-layout-active .wwm-mobile-topbar,
-  html.wwm-view-sidebar .wwm-mobile-top-reset,
-  html.wwm-view-sidebar .wwm-mobile-hero-reset,
-  html.wwm-view-sidebar .wwm-mobile-anlz-btn,
-  html.wwm-view-sidebar .wwm-mobile-drawer,
-  html.wwm-view-sidebar .wwm-mobile-drawer-backdrop,
-  html.wwm-view-sidebar body.wwm-layout-active .wwm-mobile-stat-fab,
-  html.wwm-view-sidebar .wwm-mobile-stat-overlay-backdrop,
-  html.wwm-view-sidebar .wwm-mobile-stat-overlay,
-  html.wwm-view-sidebar .wwm-mobile-anlz-overlay-backdrop,
-  html.wwm-view-sidebar .wwm-mobile-anlz-overlay {
-    display: none;
-  }
-}
+/* OBS × mobile block は styles-obs.css へ移動済 (2026-06-05 @layer Step 1 mode 軸分離) */
 
 /* ─── extra-small mobile (320-359px、 iPhone SE / 小型 Android) ─── */
 @media (max-width: 359px) {
@@ -1190,3 +1178,5 @@
     letter-spacing: 0.05em;
   }
 }
+
+} /* end @layer responsive */

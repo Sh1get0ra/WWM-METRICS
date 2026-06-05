@@ -1,3 +1,5 @@
+@layer components {
+
 /* =================================================================
    WWM DMG CALC — 武侠水墨 HUD
    Black sumi · Vermilion (朱) · Gold (金) · Jade (青) accents
@@ -159,7 +161,9 @@ html.wwm-shared-build-mode #exportBtn {
 .preset-name-input {
   flex: 1; border: none; background: transparent;
   font-family: var(--f-body); font-size: var(--text-12); font-weight: var(--fw-semibold);
-  color: var(--paper); min-width: 0; outline: none;
+  color: var(--paper); min-width: 0;
+  /* outline:none は削除済 (2026-06-05 @layer Step 1): input は focus = :focus-visible 常時 match
+     = base.css の a11y gold ring が常勝で dead だった。復活させるな (a11y + layer flip 源) */
 }
 .preset-name-input::placeholder { color: var(--paper-mute); font-weight: var(--fw-normal); }
 
@@ -358,11 +362,11 @@ html.wwm-shared-build-mode #exportBtn {
     0 0 5px var(--vermilion-strong),
     0 0 10px rgba(240,210,138,0.35),
     inset 0 1px 0 var(--gold-bright-soft) !important;
-  text-shadow: 0 0 4px rgba(240,210,138,0.6) !important;
+  text-shadow: 0 0 4px rgba(240,210,138,0.6);
 }
 .wwm-sb-tier-badge.tier-S {
   /* box-shadow !important 削除 → base .tier-S の tier-s-pulse keyframe アニメ 継承 (hero badge と同 効果) */
-  text-shadow: 0 0 3px rgba(255,107,80,0.55) !important;
+  text-shadow: 0 0 3px rgba(255,107,80,0.55);
 }
 /* light mode mini hero S: 通常 hero と同じglow + さらに強化 (cream bg上で目立たせる) */
 .tier-badge {
@@ -627,102 +631,11 @@ html.wwm-shared-build-mode #exportBtn {
   vertical-align: middle;
   transition: transform 0.15s;
 }
-.wwm-sb-collapsed-sec .wwm-sb-items { display: none; }
+/* .wwm-sb-collapsed-sec .wwm-sb-items は modals.css の .wwm-sb-items 本体直後へ移動済
+   (2026-06-05 @layer Step 1: 基本 rule と state rule の file 分裂解消) */
 
-/* ╔═══════════════════════════════════════════════════════════════════╗
-     SECTION 14 — OBS OVERLAY MODE
-   ╚═══════════════════════════════════════════════════════════════════╝ */
-
-/* ⚠ この SECTION の !important は keep 確定 (2026-06-05 Batch M 判定):
-   OBS mode は light/dark theme (light.css = cascade 最終 file) +
-   mobile @media (responsive.css、 OBS キャンバス幅は任意) +
-   mobile-stat-overlay の 3軸と文脈交差する。 natural cascade では
-   後 file の theme/responsive rule に負けるため !important が必須。
-   根治は CSS 全面再設計の @layer modes (最終 layer) 移行 — TODO.md 参照 */
-
-/* ── OBS overlay モード (?view=sidebar) ─────────────────────────── */
-html.wwm-view-sidebar {
-  --overlay-bg-alpha: 0;
-  --overlay-bg-rgb: 10,10,10;
-  background: transparent;
-  background-color: transparent;
-}
-html.wwm-view-sidebar body,
-html.wwm-view-sidebar body.wwm-layout-active {
-  background-color: rgba(var(--overlay-bg-rgb), var(--overlay-bg-alpha)) !important;
-  background-image: none !important;
-  height: 100vh;
-  overflow: hidden !important;
-  padding: 0;
-  margin: 0;
-}
-html.wwm-view-sidebar .wwm-sidebar-test {
-  position: relative !important;
-  top: auto;
-  width: 100% !important;
-  height: 100% !important;
-  max-height: 100% !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-  border: 1px solid var(--accent-mid) !important;
-  border-left: 3px solid var(--vermilion) !important;
-}
-/* sb-top: sticky 上部 (avatar+総合武力) のみユーザー alpha で背景 */
-html.wwm-view-sidebar .wwm-sb-top {
-  background: transparent !important;
-  position: relative;
-  top: auto;
-}
-/* OBS view: 背景は mini-hero-card 側に持たせて朱墨ink維持 */
-html.wwm-view-sidebar .wwm-sb-mini-hero-card {
-  background-color: rgba(var(--overlay-bg-rgb), var(--overlay-bg-alpha)) !important;
-  background-image:
-    radial-gradient(ellipse at top right, var(--gold-bright-faint), transparent 55%) !important;
-}
-/* overlay モード: IMPORT button / 透明度 slider 非表示 */
-html.wwm-view-sidebar .wwm-sb-import-btn,
-html.wwm-view-sidebar .wwm-overlay-ctrl {
-  display: none;
-}
-/* overlay モード: 文字色 / ラベル色 カスタマイズ */
-html.wwm-view-sidebar .wwm-sb-label,
-html.wwm-view-sidebar .wwm-sb-charname,
-html.wwm-view-sidebar .wwm-sb-totalmartial,
-html.wwm-view-sidebar .wwm-stat-name,
-html.wwm-view-sidebar .wwm-sb-sub { color: var(--overlay-text-1) !important; }
-html.wwm-view-sidebar .wwm-sb-value,
-html.wwm-view-sidebar .wwm-sb-totalmartial b,
-html.wwm-view-sidebar .wwm-stat-val { color: var(--overlay-text-2) !important; }
-html.wwm-view-sidebar .wwm-sb-section-title,
-html.wwm-view-sidebar .wwm-sb-header-value { color: var(--overlay-accent) !important; }
-/* OBS view: rest 背景は overlay透明前提 (濃帯化防止) */
-html.wwm-view-sidebar .wwm-sb-rest {
-  background: transparent !important;
-  border-color: transparent !important;
-}
-/* OBS view: section title背景を URL param --overlay-label-bg で制御 */
-html.wwm-view-sidebar .wwm-sb-section-title {
-  background-color: var(--overlay-label-bg, var(--accent)) !important;
-}
-/* 透明度 slider (右上 fixed) */
-.wwm-overlay-ctrl {
-  position: fixed; top: 8px; right: 8px;
-  z-index: var(--z-tooltip);
-  background: var(--overlay-heavy);
-  border: 1px solid var(--gold-deep);
-  border-radius: 3px;
-  padding: var(--space-1-5) var(--space-2-5);
-  font-family: var(--f-mono); font-size: var(--text-sm);
-  color: var(--gold-bright);
-  display: flex; align-items: center; gap: var(--space-2);
-  opacity: 0.25;
-  transition: opacity 0.2s;
-}
-.wwm-overlay-ctrl:hover { opacity: 1; }
-.wwm-overlay-ctrl input[type=range] {
-  width: 100px; accent-color: var(--gold);
-}
+/* SECTION 14 — OBS OVERLAY MODE は styles-obs.css へ移動済 (2026-06-05 @layer Step 1 mode 軸分離。
+   OBS rule は cascade 最終 file 配置で theme/responsive に !important なしで勝てる) */
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
      SECTION 15 — APP LAYOUT
@@ -732,7 +645,8 @@ html.wwm-view-sidebar .wwm-sb-section-title {
 html, body { height: 100%; margin: 0; overflow: hidden; }
 body.wwm-layout-active {
   margin: 0;
-  height: 100vh;
+  height: 100vh;  /* fallback: dvh 非対応 browser 用 */
+  height: 100dvh; /* desktop で vh と同値。 responsive.css mobile rule と同値化 (@layer flip 解消) */
   overflow-x: auto; /* window < 1010 で .wwm-app-body 横スクロール許可 */
   overflow-y: hidden;
   box-sizing: border-box;
@@ -775,24 +689,24 @@ body.wwm-layout-active .wwm-app-body > script + script,
 body.wwm-layout-active .wwm-app-body > script { display: none; }
 /* 大画面でも main column が無限に広がらないよう max-width 制限 */
 body.wwm-layout-active .wwm-sidebar-test {
-  position: relative !important;
+  position: relative;
   top: auto;
   right: auto;
   left: auto;
   bottom: auto;
   width: 100% !important;
-  height: calc(100% - 16px) !important;
-  max-height: none !important;
+  height: calc(100% - 16px);
+  max-height: none;
   min-height: 0;
   margin-bottom: var(--space-4);
-  overflow-y: auto !important;
+  overflow-y: auto;
   grid-area: sidebar;
   z-index: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--gold-deep) transparent;
   scrollbar-gutter: stable;
-  border-left: none !important;
-  background: transparent !important;
+  border-left: none;
+  background: transparent;
   padding: 0 !important;
   display: flex;
   flex-direction: column;
@@ -805,7 +719,7 @@ body.wwm-layout-active .wwm-sb-rest {
 }
 /* sidebar 本体 scroll は rest が引き受ける (枠内 scrollbar) */
 body.wwm-layout-active .wwm-sidebar-test {
-  overflow-y: hidden !important;
+  overflow-y: hidden;
   scrollbar-gutter: auto;
 }
 body.wwm-layout-active .wwm-sidebar-test::-webkit-scrollbar { width: 6px; }
@@ -1618,35 +1532,9 @@ html.wwm-view-sidebar .wwm-app-body {
 .wwm-modal-square > .wwm-modal-header,
 .wwm-modal-square > .wwm-modal-body { position: relative; z-index: 1; }
 .wwm-modal-square > * { position: relative; z-index: 1; }
-/* 弱点指摘 modal: アクセント赤 + 小型icon */
-.wwm-diag-modal {
-  border-top-color: var(--vermilion) !important;
-  border-left-color: var(--vermilion) !important;
-}
-.wwm-diag-modal::before {
-  background: radial-gradient(ellipse at top right, var(--vermilion-soft-light), transparent 65%) !important;
-}
-.wwm-diag-modal::after {
-  border-top-color: var(--vermilion);
-  border-right-color: var(--vermilion);
-}
-.wwm-diag-modal .wwm-modal-header { border-bottom-color: var(--vermilion-mid); }
-.wwm-diag-modal .wwm-modal-header::after {
-  background: linear-gradient(90deg, var(--vermilion-bright), transparent) !important;
-  box-shadow: 0 0 8px var(--vermilion-strong);
-}
-.wwm-diag-modal .wwm-modal-header h2 {
-  color: var(--vermilion-bright);
-  text-shadow: 0 0 10px var(--vermilion-mid-strong) !important;
-}
-.wwm-diag-modal .wwm-modal-bg-icon {
-  background-size: 30% !important;
-  background-position: calc(100% - 12px) calc(100% + 30px) !important;
-  filter:
-    brightness(0) invert(1)
-    drop-shadow(0 0 10px rgba(255,107,74,0.7))
-    drop-shadow(0 0 22px rgba(200,60,43,0.45));
-}
+/* 弱点指摘 modal アクセント装飾は modals.css 末尾へ移動済
+   (2026-06-05 @layer Step 1: 汎用 modal rule との file 分裂解消 — layer 移行で
+   modals.css が後 layer になり、 components.css 残置だと spec 勝ちが order 負けに反転するため) */
 .wwm-cmp-kongfu {
   font-size: var(--text-12); color: var(--accent);
   font-weight: var(--fw-semibold); margin-left: var(--space-2);
@@ -2679,3 +2567,5 @@ html[lang="en"] .wwm-cmp-title-en {
    復活させる + sidebar 自体も hide される (mobile UI = FAB前提) 問題の抑止。
    OBS view では幅問わず sidebar のみ表示が正。
    source order 後出 + 高 specificity で mobile @media 内 rule を全 override。 */
+
+} /* end @layer components */

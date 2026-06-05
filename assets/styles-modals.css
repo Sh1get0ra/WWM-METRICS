@@ -1,3 +1,5 @@
+@layer modals {
+
 /* ╔═══════════════════════════════════════════════════════════════════╗
      MODAL CLUSTER (import / setup / edit / compare / changelog / note) — 集約 (Tier 3 Step 3)
      styles.css から切出。 cascade: tokens → animations → ... → styles → dark → light
@@ -234,6 +236,8 @@
   border-radius: 3px;
 }
 .wwm-sb-items { display: flex; flex-direction: column; gap: var(--space-half); }
+/* 折り畳み state (components.css から移動 2026-06-05 @layer Step 1 — 基本 rule との file 分裂解消) */
+.wwm-sb-collapsed-sec .wwm-sb-items { display: none; }
 .wwm-sb-row {
   display: flex; justify-content: space-between;
   padding: var(--space-half) var(--space-1-5); align-items: baseline;
@@ -321,7 +325,7 @@
   background: linear-gradient(90deg, transparent 0%, transparent 28%, rgba(232,81,58,0.75) 50%, transparent 72%, transparent 100%);
   opacity: 1; pointer-events: none;
 }
-.wwm-cmp-modal-a .wwm-cmp-set-header { text-shadow: 0 0 6px var(--gold-bright-mid-2) !important; }
+.wwm-cmp-modal-a .wwm-cmp-set-header { text-shadow: 0 0 6px var(--gold-bright-mid-2); }
 .wwm-cmp-modal-a .wwm-cmp-preview {
   border-top: 1px solid var(--gold-soft);
   padding-top: var(--space-3);
@@ -478,11 +482,11 @@
 }
 .wwm-cmp-modal-a .wwm-cmp-set-header,
 .wwm-cmp-modal-a .wwm-cmp-set-select {
-  background: linear-gradient(90deg, var(--vermilion-bright-soft), transparent) !important;
+  background: linear-gradient(90deg, var(--vermilion-bright-soft), transparent);
   border: none;
   border-radius: 0;
   color: var(--vermilion-bright) ;
-  text-shadow: 0 0 6px var(--vermilion-bright-soft-mid) !important;
+  text-shadow: 0 0 6px var(--vermilion-bright-soft-mid);
   padding: var(--space-1-5) var(--space-2);
   margin-bottom: var(--space-2);
 }
@@ -533,14 +537,15 @@
   padding: 1px 3px;
   border-radius: 2px;
   background: rgba(168,212,180,0.18) ;
-  color: var(--jade-bright) !important;
+  color: var(--jade-bright) !important; /* K: gear.js:679 el.style.color (inline) 対抗 — strip するな */
   border: 1px solid var(--jade-bright-mid);
   min-width: 30px;
   text-align: center;
   display: inline-block;
   margin-left: 0;
 }
-/* MAX% rank別配色 (ゲーム準拠 金>紫>青、 閾値 0.85 / 0.70) */
+/* MAX% rank別配色 (ゲーム準拠 金>紫>青、 閾値 0.85 / 0.70)
+   color の !important は K (gear.js:679 inline color 対抗) — strip するな */
 .wwm-cmp-modal-a .wwm-cmp-ratio.rank-gold {
   background: rgba(212,175,55,0.18);
   color: var(--accent) !important;
@@ -556,6 +561,11 @@
   color: #4a9eff !important;
   border-color: rgba(74,158,255,0.55);
 }
+/* light theme の rank別 color (旧 styles-light.css から co-locate move 2026-06-05 @layer Step 1:
+   inline 対抗 imp 同士は spec 比較 = file 位置無関係、 同 file 化で layer 反転 flip を根治) */
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-gold { background: var(--c-gold-deep-faint); color: #7a5a12 !important; border-color: var(--c-gold-deep-strong); }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.13); color: #6f3a9a !important; border-color: rgba(120,60,160,0.5); }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.13); color: #2a5aa0 !important; border-color: rgba(40,90,160,0.5); }
 /* MAX到達 (100%) 虹色 — 色相回転 hue-rotate アニメ (両テーマ共通)
    注: background-color / box-shadow は keyframes が動かすため !important つけない (つけると keyframes が負けてアニメ無効化) */
 .wwm-cmp-modal-a .wwm-cmp-ratio.rank-max {
@@ -736,7 +746,7 @@
 .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
   background:
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_cancel-9a52642a.png") center / 100% 100% no-repeat,
-    transparent !important;
+    transparent;
   border: 1px solid var(--paper-mute);
   border-radius: 0;
   color: var(--brown-1);
@@ -1227,6 +1237,42 @@
   .wwm-note-header-actions { margin-left: 0; width: 100%; flex-wrap: wrap; }
   .wwm-note-btn { font-size: var(--text-sm); padding: var(--space-1-5) var(--space-2-5); }
 }
-/* OBS view (表示専用) では常に非表示 */
-html.wwm-view-sidebar .wwm-score-update-banner { display: none !important; }
+/* OBS view banner hide は styles-obs.css へ移動済 (2026-06-05 @layer Step 1) */
 
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     弱点指摘 (diag) modal: アクセント赤 + 小型icon
+     (components.css から移動 2026-06-05 @layer Step 1 — 汎用 modal rule との
+      file 分裂解消。 本 file 末尾 = 汎用 .wwm-modal-header / .wwm-modal-bg-icon
+      より後 = order でも勝つ位置。 前方へ動かすな)
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+.wwm-diag-modal {
+  border-top-color: var(--vermilion) !important;
+  border-left-color: var(--vermilion) !important;
+}
+.wwm-diag-modal::before {
+  background: radial-gradient(ellipse at top right, var(--vermilion-soft-light), transparent 65%) !important;
+}
+.wwm-diag-modal::after {
+  border-top-color: var(--vermilion);
+  border-right-color: var(--vermilion);
+}
+.wwm-diag-modal .wwm-modal-header { border-bottom-color: var(--vermilion-mid); }
+.wwm-diag-modal .wwm-modal-header::after {
+  background: linear-gradient(90deg, var(--vermilion-bright), transparent);
+  box-shadow: 0 0 8px var(--vermilion-strong);
+}
+.wwm-diag-modal .wwm-modal-header h2 {
+  color: var(--vermilion-bright);
+  text-shadow: 0 0 10px var(--vermilion-mid-strong) !important;
+}
+.wwm-diag-modal .wwm-modal-bg-icon {
+  background-size: 30% !important;
+  background-position: calc(100% - 12px) calc(100% + 30px) !important;
+  filter:
+    brightness(0) invert(1)
+    drop-shadow(0 0 10px rgba(255,107,74,0.7))
+    drop-shadow(0 0 22px rgba(200,60,43,0.45));
+}
+
+
+} /* end @layer modals */
