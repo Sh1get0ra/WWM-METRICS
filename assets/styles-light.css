@@ -431,7 +431,10 @@ html[data-theme="light"] .wwm-sb-rest {
   border-color: rgba(40,25,18,0.15);
 }
 
-html[data-theme="light"] .wwm-sb-top { background: var(--c-sb-top-bg); }
+/* .wwm-sb-top light bg override は削除 (2026-06-05 pre-existing bug fix):
+   sb-top は mini-hero card 内のみ存在 (anlz.js)、 card 側が背景を持ち sb-top は
+   components の .wwm-sb-mini-hero-card .wwm-sb-top { background: none } が正。
+   theme layer からの撃ち抜きで light のみ cream 背景が復活していた */
 
 html[data-theme="light"] [data-liupai-pinyin="tianquan"] .wwm-equip-icon,
 html[data-theme="light"] [data-liupai-pinyin="tianquan"] .wwm-xinfa-icon {
