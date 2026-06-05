@@ -729,7 +729,7 @@ html[data-theme="light"] .hero-wuxia .hero-label .en {
 html[data-theme="light"] .hero-wuxia .hero-number {
   color: var(--paper) !important;  /* 濃茶 (墨黒より明るめ) */
   text-shadow: none !important;
-  filter: none;
+  filter: none !important;
 }
 
 html[data-theme="light"] .hero-wuxia .hero-next-val {
@@ -758,9 +758,9 @@ html[data-theme="light"] .hero-wuxia .judge-val {
   text-shadow: 0 0 2px rgba(255,250,235,0.7);
 }
 
-html[data-theme="light"] .hero-wuxia #dmgPhysVal { color: var(--vermilion-deep); filter: none; }
+html[data-theme="light"] .hero-wuxia #dmgPhysVal { color: var(--vermilion-deep) !important; filter: none; }
 
-html[data-theme="light"] .hero-wuxia #dmgElemVal { color: var(--jade-bright); filter: none; }
+html[data-theme="light"] .hero-wuxia #dmgElemVal { color: var(--jade-bright) !important; filter: none; }
 
 html[data-theme="light"] .hero-wuxia .judge-dot-phys { border-color: var(--vermilion-deep); box-shadow: 0 0 4px rgba(138,36,24,0.45); }
 

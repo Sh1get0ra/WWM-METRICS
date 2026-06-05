@@ -61,6 +61,16 @@ const SCENES = [
     setup: async () => {}
   },
   {
+    // hero close-up — donut % / 武格指数 等 小領域の色/文字変化は fullPage の
+    // diff threshold (0.1%) に埋もれる (実例: #dmgPhysVal light色 regression 見逃し
+    // 2026-06-05) → element 限定撮影で感度確保
+    name: 'hero-closeup',
+    element: '.hero-wuxia',
+    setup: async (page, ctx) => {
+      await resetModals(page, ctx);
+    }
+  },
+  {
     name: 'anlz-opt',
     // mobile overlay = position:fixed = fullPage 撮影と相性悪 → viewport のみ
     fullPage: (ctx) => !ctx.isMobile,

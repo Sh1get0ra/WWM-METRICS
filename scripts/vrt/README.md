@@ -134,6 +134,7 @@ baseline は `.vrt/baseline/` ごと削除して再撮影が安全。
 | scene | 内容 | viewport |
 |---|---|---|
 | main-top | top page (overlay 閉) | mobile のみ (desktop は anlz-opt fullPage が兼ねる) |
+| hero-closeup | hero section element 限定 (donut % / 武格指数 の小領域変化 感度確保) | 全 |
 | anlz-opt / anlz-rank / anlz-history | 格析 tab 3種 (mobile = overlay 内) | 全 |
 | modal-gear-edit | 武具対照 (slot 1 = 武器) | 全 |
 | modal-xinfa-edit | 心法対照 (slot 0) | 全 |

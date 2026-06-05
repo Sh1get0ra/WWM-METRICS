@@ -123,11 +123,19 @@ async function checkServer() {
           ? scene.fullPage(ctx2)
           : (scene.fullPage !== false);
         const filename = `${scene.name}__${vp.name}__${theme}.png`;
-        await page.screenshot({
-          path: path.join(ROOT, filename),
-          fullPage,
-          animations: 'disabled'
-        });
+        const outPath = path.join(ROOT, filename);
+        if (scene.element) {
+          // element close-up — 小領域変化 (donut % 文字色等) が fullPage threshold に
+          // 埋もれる盲点対策。 領域限定 = 同変化の diff% が桁違いに大きく出る
+          const el = page.locator(scene.element).first();
+          await el.screenshot({ path: outPath, animations: 'disabled' });
+        } else {
+          await page.screenshot({
+            path: outPath,
+            fullPage,
+            animations: 'disabled'
+          });
+        }
         count++;
         console.log(`[${String(count).padStart(2, ' ')}/${total}] ${filename}`);
       }

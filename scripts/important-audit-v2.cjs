@@ -226,7 +226,12 @@ function collectJsSources() {
       if (f.endsWith('.js')) files.push(path.join(dir, f));
     }
   }
-  return files.map(f => ({ file: f, src: fs.readFileSync(f, 'utf8') }));
+  const sources = files.map(f => ({ file: f, src: fs.readFileSync(f, 'utf8') }));
+  // Batch A 第4失敗教訓 (2026-06-05): index.html 直書き inline style="color:..."
+  // (#dmgPhysVal 等) を見ておらず !important strip → light theme 色 regression。
+  // index.html も inline style 検出対象に含める
+  sources.push({ file: 'index.html', src: fs.readFileSync('index.html', 'utf8') });
+  return sources;
 }
 
 const camelToKebab = (s) => s.replace(/[A-Z]/g, c => '-' + c.toLowerCase());
