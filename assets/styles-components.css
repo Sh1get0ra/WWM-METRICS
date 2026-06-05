@@ -58,7 +58,7 @@
 
 /* SHARE Build mode: preset-bar 非表示 + 閲覧モードバナー表示 */
 .wwm-shared-build-banner { display: none; }
-html.wwm-shared-build-mode .preset-bar { display: none !important; }
+html.wwm-shared-build-mode .preset-bar { display: none; }
 html.wwm-shared-build-mode .wwm-shared-build-banner {
   display: flex;
   align-items: center;
@@ -821,7 +821,7 @@ body.wwm-layout-active .wwm-sb-rest {
 /* sidebar 本体 scroll は rest が引き受ける (枠内 scrollbar) */
 body.wwm-layout-active .wwm-sidebar-test {
   overflow-y: hidden !important;
-  scrollbar-gutter: auto !important;
+  scrollbar-gutter: auto;
 }
 body.wwm-layout-active .wwm-sidebar-test::-webkit-scrollbar { width: 6px; }
 body.wwm-layout-active .wwm-sidebar-test::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
@@ -1622,7 +1622,7 @@ body.wwm-layout-active .wwm-footer {
 .wwm-diag-modal .wwm-modal-header { border-bottom-color: var(--vermilion-mid); }
 .wwm-diag-modal .wwm-modal-header::after {
   background: linear-gradient(90deg, var(--vermilion-bright), transparent) !important;
-  box-shadow: 0 0 8px var(--vermilion-strong) !important;
+  box-shadow: 0 0 8px var(--vermilion-strong);
 }
 .wwm-diag-modal .wwm-modal-header h2 {
   color: var(--vermilion-bright) !important;
@@ -2379,14 +2379,14 @@ body.wwm-layout-active .wwm-footer {
   gap: 18px;
   flex-wrap: wrap;
   align-items: flex-end;
-  background: none !important;
+  background: none;
   border: none;
   padding: 0 !important;
   margin: 0;
 }
 #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
   padding: 6px 4px 9px !important;
-  background: transparent !important;
+  background: transparent;
   border: none;
   color: var(--paper) !important;
   font-family: 'Ma Shan Zheng', 'Noto Serif JP', serif !important;
@@ -2397,7 +2397,7 @@ body.wwm-layout-active .wwm-footer {
   opacity: 0.65;
   transition: opacity .15s;
   border-radius: 0;
-  box-shadow: none !important;
+  box-shadow: none;
 }
 #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab:hover { opacity: 1; }
 #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab.active {
@@ -2474,7 +2474,7 @@ html[lang="en"] .wwm-cmp-title-en {
 .wwm-anlz-body .wwm-modal-square {
   background: transparent !important;
   border: none !important;
-  box-shadow: none !important;
+  box-shadow: none;
   padding: 0 !important;
   position: relative;
   z-index: 1;
