@@ -34,8 +34,8 @@ const JS_GLOBS = ['assets', 'assets/sidebar', 'assets/helpers'];
 
 // ── CSS parse (top-level + @media/@supports 1段 nest) ──────────────
 function parseCss(src, file) {
-  const decls = []; // {file, line, selector, finalCompound, prop, value, important, media}
-  let i = 0, line = 1;
+  const decls = []; // {file, line, selector, finalCompound, prop, value, important, media, ruleId}
+  let i = 0, line = 1, ruleSeq = 0;
   const len = src.length;
 
   function skipWsCmt() {
@@ -106,6 +106,7 @@ function parseCss(src, file) {
   }
 
   function parseDecls(selector, selLine, media) {
+    const ruleId = ++ruleSeq;
     while (i < len) {
       skipWsCmt();
       if (i >= len || src[i] === '}') { i++; return; }
@@ -125,7 +126,8 @@ function parseCss(src, file) {
           decls.push({
             file, line: declLine, selector: s,
             keys: compoundKeys(s),
-            prop, value: value.trim(), important, media: media || null
+            prop, value: value.trim(), important, media: media || null,
+            ruleId, ruleStart: selLine
           });
         }
       }
@@ -219,6 +221,15 @@ function propGroup(prop) {
   return p;
 }
 
+// prop pair が実際に競合するか (cascade 上 同じ longhand を触るか):
+//   - 同一 prop
+//   - 片方が group shorthand (margin が margin-top を set する 等)
+// font-family vs font-size のような同 group 別 longhand は競合しない
+// (group bucket は競合 candidate の索引、 実競合判定はこちら)
+function propsConflict(a, b) {
+  return a === b || a === propGroup(b) || b === propGroup(a);
+}
+
 // 単独 strip 判定: d の !important を外しても、 d が適用される context で
 // d が全競合に natural cascade (specificity → file order → line) で勝つなら strip 可
 //
@@ -232,6 +243,7 @@ function soloStrippable(d, groupDecls) {
   const fd = FILE_ORDER.get(d.file) ?? 99;
   for (const g of groupDecls) {
     if (g === d) continue;
+    if (!propsConflict(g.prop, d.prop)) continue;                      // 別 longhand = 無競合
     const ctxG = themeContext(g.selector);
     if (ctxD !== 'both' && ctxG !== 'both' && ctxG !== ctxD) continue; // theme 排他
     if (g.prop === d.prop && g.value === d.value) continue;            // 同値 = 無害
@@ -739,7 +751,9 @@ for (const d of importants) {
     const siblings = index.get(`${k}|${propGroup(d.prop)}`);
     if (siblings) {
       for (const s of siblings) {
-        if (s !== d) hasCompetitor = true;
+        if (s === d) continue;
+        if (!propsConflict(s.prop, d.prop)) continue; // 別 longhand = 競合でない
+        hasCompetitor = true;
         groupSet.add(s);
       }
     }
@@ -812,6 +826,7 @@ while (changed) {
     for (const p of cSplits) {
       for (const q of compMap.get(p)) {
         if (q.file === p.file && q.line === p.line && q.prop === p.prop) continue; // 自分の別 split
+        if (!propsConflict(q.prop, p.prop)) continue;                              // 別 longhand = 無競合
         if (!themeOverlap(p, q) || !mediaOverlap(p.media, q.media)) continue;
         if (q.prop === p.prop && q.value === p.value) continue;
         const pWins = naturalWins(p, q);
@@ -859,6 +874,158 @@ console.table(byFile(C));
 fs.writeFileSync('scripts/.important-v2.json', JSON.stringify({ A, B, G, K, C }, null, 2));
 console.log('\n→ scripts/.important-v2.json');
 
+// ── --simulate plan.json: 構造変更の仮想検証 ─────────────────────────
+// plan = [{op:'resel', file, headerFrom, headerTo, lineMin?, lineMax?},
+//         {op:'strip', file, line, prop}]
+// resel: headerFrom (comma 区切り selector 群) に一致する decl の selector を headerTo へ。
+//        subject (右端 compound) 不変が前提 (bucket 安定のため assert)
+// strip: 指定 decl の !important を外す
+// 全 bucket の全 pair で head-to-head 勝者が orig と mod で flip しないか検査 (値同一 pair は無視)
+const simArg = process.argv.find(a => a.startsWith('--simulate='));
+if (simArg) {
+  const plan = JSON.parse(fs.readFileSync(simArg.slice(11), 'utf8'));
+  // mod decls 構築 (orig と 1:1、 selector/important のみ差替え)
+  const mods = allDecls.map(d => ({ ...d, origRef: d }));
+  let reselCount = 0, stripCount = 0;
+  for (const op of plan) {
+    if (op.op === 'resel') {
+      const fromSet = new Set(op.headerFrom.split(',').map(s => s.replace(/\s+/g, ' ').trim()));
+      // anchorLine 指定時: その行の decl が属する rule の decl のみ対象 (rule 単位 scope)
+      let targetRuleIds = null;
+      if (op.anchorLine) {
+        targetRuleIds = new Set(mods.filter(m => m.file === op.file && m.line === op.anchorLine).map(m => m.ruleId));
+        if (targetRuleIds.size === 0) console.warn(`[WARN] anchorLine ${op.file}:${op.anchorLine} に decl 不在`);
+      }
+      for (const m of mods) {
+        if (m.file !== op.file) continue;
+        if (targetRuleIds && !targetRuleIds.has(m.ruleId)) continue;
+        if (op.lineMin && m.line < op.lineMin) continue;
+        if (op.lineMax && m.line > op.lineMax) continue;
+        if (!fromSet.has(m.selector.replace(/\s+/g, ' ').trim())) continue;
+        const newKeys = compoundKeys(op.headerTo);
+        const subjOld = JSON.stringify([...m.keys].sort());
+        m.selector = op.headerTo;
+        m.keys = newKeys;
+        if (JSON.stringify([...newKeys].sort()) !== subjOld) {
+          console.warn(`[WARN] resel で subject keys 変化: ${op.file}:${m.line} ${op.headerTo} (bucket 移動 — 検証は新 bucket で実施)`);
+        }
+        reselCount++;
+      }
+    } else if (op.op === 'strip') {
+      for (const m of mods) {
+        if (m.file === op.file && m.line === op.line && m.prop === op.prop && m.important) {
+          m.important = false;
+          stripCount++;
+        }
+      }
+    }
+  }
+  console.log(`simulate: resel ${reselCount} decl / strip ${stripCount} decl`);
+
+  // orig / mod 両 index 構築 → 全 pair flip check
+  const hh = (x, y, useSel, useImp) => {
+    // x が y に勝つか (cascade: important > specificity > file順 > line)
+    if (useImp && x.important !== y.important) return x.important;
+    const sx = specificity(useSel ? x.selector : x.origRef ? x.origRef.selector : x.selector);
+    const sy = specificity(useSel ? y.selector : y.origRef ? y.origRef.selector : y.selector);
+    if (sx !== sy) return sx > sy;
+    const fx = FILE_ORDER.get(x.file) ?? 99, fy = FILE_ORDER.get(y.file) ?? 99;
+    if (fx !== fy) return fx > fy;
+    return x.line > y.line;
+  };
+  const modIndex = new Map();
+  for (const m of mods) {
+    for (const k of m.keys) {
+      const key = `${k}|${propGroup(m.prop)}`;
+      if (!modIndex.has(key)) modIndex.set(key, []);
+      modIndex.get(key).push(m);
+    }
+  }
+  const flips = [];
+  const seen = new Set();
+  for (const [key, group] of modIndex) {
+    for (let i = 0; i < group.length; i++) {
+      for (let j = i + 1; j < group.length; j++) {
+        const x = group[i], y = group[j];
+        if (x.origRef === y.origRef) continue;
+        const pairId = [`${x.file}:${x.line}:${x.prop}:${x.origRef.selector}`, `${y.file}:${y.line}:${y.prop}:${y.origRef.selector}`].sort().join('||');
+        if (seen.has(pairId)) continue;
+        seen.add(pairId);
+        // 変更が絡まない pair は不変
+        const xChanged = x.selector !== x.origRef.selector || x.important !== x.origRef.important;
+        const yChanged = y.selector !== y.origRef.selector || y.important !== y.origRef.important;
+        if (!xChanged && !yChanged) continue;
+        if (!propsConflict(x.prop, y.prop)) continue;
+        if (!themeOverlap(x, y) || !mediaOverlap(x.media, y.media)) continue;
+        if (x.prop === y.prop && x.value === y.value) continue;
+        const before = (() => {
+          const a = x.origRef, b = y.origRef;
+          if (a.important !== b.important) return a.important;
+          const sa = specificity(a.selector), sb = specificity(b.selector);
+          if (sa !== sb) return sa > sb;
+          const fa = FILE_ORDER.get(a.file) ?? 99, fb = FILE_ORDER.get(b.file) ?? 99;
+          if (fa !== fb) return fa > fb;
+          return a.line > b.line;
+        })();
+        const after = (() => {
+          if (x.important !== y.important) return x.important;
+          const sa = specificity(x.selector), sb = specificity(y.selector);
+          if (sa !== sb) return sa > sb;
+          const fa = FILE_ORDER.get(x.file) ?? 99, fb = FILE_ORDER.get(y.file) ?? 99;
+          if (fa !== fb) return fa > fb;
+          return x.line > y.line;
+        })();
+        if (before !== after) {
+          flips.push({ winnerChange: true, key,
+            x: `${x.file}:${x.line} ${x.origRef.selector} { ${x.prop}: ${x.value}${x.origRef.important ? ' !important' : ''} }`,
+            y: `${y.file}:${y.line} ${y.origRef.selector} { ${y.prop}: ${y.value}${y.origRef.important ? ' !important' : ''} }`,
+            beforeWinner: before ? 'x' : 'y', afterWinner: after ? 'x' : 'y' });
+        }
+      }
+    }
+  }
+  if (flips.length === 0) {
+    console.log('✅ flip ゼロ — plan は視覚同一 (cascade 等価)');
+    // --apply: 実 CSS file へ selector 書換え適用 (rule header 内の該当 selector を text 置換)
+    if (process.argv.includes('--apply')) {
+      const edits = new Map(); // file → [{ruleStart, from, to}]
+      for (const m of mods) {
+        if (m.selector === m.origRef.selector) continue;
+        const key = `${m.file}|${m.ruleId}|${m.origRef.selector}`;
+        if (!edits.has(m.file)) edits.set(m.file, new Map());
+        edits.get(m.file).set(key, { ruleStart: m.ruleStart, from: m.origRef.selector, to: m.selector });
+      }
+      for (const [file, fileEdits] of edits) {
+        let src = fs.readFileSync(file, 'utf8');
+        const eol = src.includes('\r\n') ? '\r\n' : '\n';
+        // 下から (ruleStart 降順) 適用で位置ずれ回避
+        const list = [...fileEdits.values()].sort((a, b) => b.ruleStart - a.ruleStart);
+        let applied = 0;
+        for (const e of list) {
+          let pos = 0, ln = 1;
+          while (ln < e.ruleStart && pos !== 0xFFFFFFFF) { pos = src.indexOf('\n', pos) + 1; ln++; if (pos === 0) break; }
+          const span = src.slice(pos, pos + 400);
+          const flex = e.from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\s+/g, '\\s+');
+          const re = new RegExp(flex);
+          if (!re.test(span)) { console.warn(`[WARN] apply 失敗: ${file}:${e.ruleStart} "${e.from}" 不在`); continue; }
+          src = src.slice(0, pos) + span.replace(re, e.to) + src.slice(pos + 400);
+          applied++;
+        }
+        fs.writeFileSync(file, src);
+        console.log(`${file}: ${applied} selector 書換え`);
+      }
+    }
+  } else {
+    console.log(`❌ flip ${flips.length}件:`);
+    for (const f of flips.slice(0, 30)) {
+      console.log(`  [${f.key}] before=${f.beforeWinner} after=${f.afterWinner}`);
+      console.log(`    x: ${f.x}`);
+      console.log(`    y: ${f.y}`);
+    }
+  }
+  process.exit(flips.length === 0 ? 0 : 1);
+}
+
 // ── --diag: C category のブロック理由 診断 ──────────────────────────
 // 各 C decl について「なぜ strip 不可か」を pair 単位で記録 + cluster 集計
 if (process.argv.includes('--diag')) {
@@ -868,6 +1035,7 @@ if (process.argv.includes('--diag')) {
     if (inlineMap.get(p)) reasons.push({ type: 'inline', cause: String(inlineMap.get(p)) });
     for (const q of compMap.get(p)) {
       if (q.file === p.file && q.line === p.line && q.prop === p.prop) continue;
+      if (!propsConflict(q.prop, p.prop)) continue;
       if (!themeOverlap(p, q) || !mediaOverlap(p.media, q.media)) continue;
       if (q.prop === p.prop && q.value === p.value) continue;
       const pWins = naturalWins(p, q);

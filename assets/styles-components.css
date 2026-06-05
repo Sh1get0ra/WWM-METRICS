@@ -673,7 +673,7 @@ html.wwm-view-sidebar .wwm-app-body {
 }
 html.wwm-view-sidebar .wwm-sidebar-test {
   position: relative !important;
-  top: auto !important;
+  top: auto;
   width: 100% !important;
   height: 100% !important;
   max-height: 100% !important;
@@ -791,8 +791,8 @@ body.wwm-layout-active .wwm-app-body > script { display: none; }
 /* 大画面でも main column が無限に広がらないよう max-width 制限 */
 body.wwm-layout-active .wwm-sidebar-test {
   position: relative !important;
-  top: auto !important;
-  right: auto !important;
+  top: auto;
+  right: auto;
   left: auto;
   bottom: auto;
   width: 100% !important;
@@ -881,8 +881,8 @@ body.wwm-layout-active .wwm-anlz-body > .wwm-analysis-grid > div {
 body.wwm-layout-active #wwmAffixRanking .wwm-analysis-card,
 body.wwm-layout-active #wwmOptimization .wwm-analysis-card,
 body.wwm-layout-active #wwmHistory .wwm-analysis-card {
-  height: 100% !important;
-  min-height: 0 !important;
+  height: 100%;
+  min-height: 0;
 }
 body.wwm-layout-active .wwm-app-body .container::-webkit-scrollbar { width: 6px; }
 body.wwm-layout-active .wwm-app-body .container::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
@@ -1170,9 +1170,10 @@ body.wwm-layout-active .wwm-footer {
   pointer-events: none;
 }
 .wwm-analysis-card > * { position: relative; z-index: 1; }
-#wwmAffixRanking .wwm-analysis-card,
-#wwmOptimization .wwm-analysis-card,
-#wwmHistory .wwm-analysis-card {
+/* anlz tab 3 card 共通 (旧 ID 三連 selector — .wwm-analysis-card は常に
+   #wwmAffixRanking/#wwmOptimization/#wwmHistory 配下 = 等価。
+   spec 降格で responsive override の !important 不要化、 simulate 検証済) */
+.wwm-analysis-card {
   height: 570px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -1616,8 +1617,8 @@ body.wwm-layout-active .wwm-footer {
   background: radial-gradient(ellipse at top right, var(--vermilion-soft-light), transparent 65%) !important;
 }
 .wwm-diag-modal::after {
-  border-top-color: var(--vermilion) !important;
-  border-right-color: var(--vermilion) !important;
+  border-top-color: var(--vermilion);
+  border-right-color: var(--vermilion);
 }
 .wwm-diag-modal .wwm-modal-header { border-bottom-color: var(--vermilion-mid); }
 .wwm-diag-modal .wwm-modal-header::after {

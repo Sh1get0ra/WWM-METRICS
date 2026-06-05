@@ -181,7 +181,7 @@
   .wwm-sidebar-test {
     position: relative !important;
     width: 100% !important;
-    left: 0 !important; top: auto !important;
+    left: 0 !important; top: auto;
     max-height: 50vh !important;
   }
   body.wwm-layout-active .container { padding-left: 0; }
@@ -281,8 +281,8 @@
     font-size: var(--text-md);
     letter-spacing: 0.14em;
     padding: 1px 2px;
-    border-left-width: 1px !important;
-    border-right-width: 1px !important;
+    border-left-width: 1px;
+    border-right-width: 1px;
     flex: 0 0 auto;
   }
   .wwm-mobile-topbar .wwm-brand-right {
@@ -528,67 +528,67 @@
   section.hero.hero-wuxia.hero--expanded {
     min-height: 0;
   }
-  .hero-left {
-    gap: 4px !important;
-    padding: 0 !important;
+  .hero-wuxia .hero-left {
+    gap: 4px;
+    padding: 0;
     overflow: visible !important;  /* PC overflow:hidden 解除、 子のはみ出し回避 */
     width: 100%;
   }
   .hero-wuxia .hero-label .ja { font-size: var(--text-md); }
   .hero-wuxia .hero-label .en { font-size: var(--text-2xs); }
-  .hero-score-row {
+  .hero-wuxia .hero-score-row {
     flex-wrap: wrap;
-    gap: 8px !important;
-    align-items: center !important;
+    gap: 8px;
+    align-items: center;
   }
-  .hero-number {
-    font-size: 60px !important;  /* current score 大字 */
-    line-height: 1 !important;
+  .hero-wuxia .hero-number {
+    font-size: 60px;  /* current score 大字 */
+    line-height: 1;
   }
-  .hero-tier {
+  .hero-wuxia .hero-tier {
     font-size: var(--text-lg) !important;
     padding: var(--space-1) var(--space-2) !important;
   }
   /* hero-score-row grid: 左=score (2行跨)、 右上=NEXT、 右下=Tier badge (両方 中央揃え) */
-  .hero-score-row {
-    display: grid !important;
+  .hero-wuxia .hero-score-row {
+    display: grid;
     grid-template-columns: auto auto;  /* score自然幅 + stack自然幅 = 詰める */
     grid-template-areas:
       "score next"
       "score tier";
-    column-gap: 4px !important;
-    row-gap: 0 !important;
-    justify-content: start !important;  /* 全体左寄せ、 score+stack 近接 */
-    align-items: center !important;
+    column-gap: 4px;
+    row-gap: 0;
+    justify-content: start;  /* 全体左寄せ、 score+stack 近接 */
+    align-items: center;
     flex-wrap: nowrap;
   }
   .hero-current { grid-area: score; }
-  .hero-tier {
+  .hero-wuxia .hero-tier {
     grid-area: tier;
     font-size: var(--text-xl) !important;  /* 旧 main mobile 同等 (base .hero-wuxia .hero-tier.tier-badge と同じ 22px) */
     padding: 5px 16px !important;          /* 旧 main mobile 同等 */
     min-height: auto;
     align-self: start !important;
-    justify-self: center !important;
+    justify-self: center;
     text-align: center;
   }
-  .hero-next-inline {
+  .hero-wuxia .hero-next-inline {
     grid-area: next;
     display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 3px !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
     font-size: var(--text-xs);
-    margin: 0 !important;
+    margin: 0;
     padding: 0;
-    align-self: end !important;
-    justify-self: center !important;
+    align-self: end;
+    justify-self: center;
   }
   .hero-next-inline[hidden] { display: none !important; }
-  .hero-next-label { font-size: var(--text-xs) !important; letter-spacing: 0.08em !important; padding: 0 !important; color: var(--paper-mute); }
-  .hero-next-row { font-size: var(--text-sm); display: inline-flex !important; align-items: center !important; gap: 2px !important; }
-  .hero-next-val { font-size: var(--text-md) !important; font-weight: var(--fw-bold) !important; }
+  .hero-wuxia .hero-next-label { font-size: var(--text-xs); letter-spacing: 0.08em; padding: 0; color: var(--paper-mute); }
+  .hero-wuxia .hero-next-row { font-size: var(--text-sm); display: inline-flex; align-items: center; gap: 2px; }
+  .hero-wuxia .hero-next-val { font-size: var(--text-md); font-weight: var(--fw-bold); }
 
   /* hero 新layout: 上半=情報+donut (Tier右に小)、 下半=tap時 内訳1行 */
   section.hero.hero-wuxia {
@@ -693,8 +693,8 @@
     min-width: 0 !important;
     margin: 0;
     border-radius: 0 !important;
-    max-height: 100dvh !important;
-    height: 100dvh !important;
+    max-height: 100dvh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
   }
@@ -1001,8 +1001,8 @@
     flex-direction: column !important;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-card {
-    height: 100% !important;
-    min-height: 0 !important;
+    height: 100%;
+    min-height: 0;
     flex: 1 1 0;
     display: flex;
     flex-direction: column;
@@ -1146,7 +1146,7 @@
   html.wwm-view-sidebar body.wwm-layout-active .wwm-sidebar-test {
     display: block;
     position: relative !important;
-    top: auto !important;
+    top: auto;
     width: 100% !important;
     height: 100% !important;
     max-height: 100% !important;
@@ -1174,12 +1174,12 @@
 /* ─── extra-small mobile (320-359px、 iPhone SE / 小型 Android) ─── */
 @media (max-width: 359px) {
   /* hero-number: 480px @media で 60px だが 320px だと score 領域が広すぎて NEXT/tier 圧迫 */
-  .hero-number {
-    font-size: 44px !important;
+  .hero-wuxia .hero-number {
+    font-size: 44px;
   }
   /* hero-tier badge: 480px @media で var(--text-xl)=22px に拡大したが、 320-359px では
      grid "score | next/tier" 領域に 22px badge が収まらず NEXT/donut と重なる。 中間サイズに縮小。 */
-  .hero-tier {
+  .hero-wuxia .hero-tier {
     font-size: var(--text-lg) !important;  /* 16px */
     padding: 3px 10px !important;
     letter-spacing: 0.05em !important;
