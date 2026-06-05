@@ -565,9 +565,9 @@
   .hero-current { grid-area: score; }
   .hero-tier {
     grid-area: tier !important;
-    font-size: var(--text-sm) !important;
-    padding: 1px 8px !important;
-    min-height: 20px !important;
+    font-size: var(--text-xl) !important;  /* 旧 main mobile 同等 (base .hero-wuxia .hero-tier.tier-badge と同じ 22px) */
+    padding: 5px 16px !important;          /* 旧 main mobile 同等 */
+    min-height: auto !important;
     align-self: start !important;
     justify-self: center !important;
     text-align: center !important;
@@ -698,6 +698,10 @@
     display: flex !important;
     flex-direction: column !important;
   }
+  /* 武具/心法/武庫 対照 modal: mobile では modal-body が overflow-y:auto (L701) で scroll container 化、
+     bg-icon (absolute, bottom:-18%/-45%, height:110%/165%) が scroll content として下方に伸び viewport にはみ出す。
+     mobile では装飾より使い勝手優先 → bg-icon 自体を非表示。 desktop の装飾は維持。 */
+  .wwm-modal.wwm-modal-square.wwm-cmp-modal-a .wwm-cmp-modal-bg-icon { display: none !important; }
   .wwm-modal.wwm-modal-square .wwm-modal-body,
   .wwm-modal.wwm-modal-wide .wwm-modal-body {
     flex: 1 1 auto !important;
@@ -1164,5 +1168,20 @@
   html.wwm-view-sidebar .wwm-mobile-anlz-overlay-backdrop,
   html.wwm-view-sidebar .wwm-mobile-anlz-overlay {
     display: none !important;
+  }
+}
+
+/* ─── extra-small mobile (320-359px、 iPhone SE / 小型 Android) ─── */
+@media (max-width: 359px) {
+  /* hero-number: 480px @media で 60px だが 320px だと score 領域が広すぎて NEXT/tier 圧迫 */
+  .hero-number {
+    font-size: 44px !important;
+  }
+  /* hero-tier badge: 480px @media で var(--text-xl)=22px に拡大したが、 320-359px では
+     grid "score | next/tier" 領域に 22px badge が収まらず NEXT/donut と重なる。 中間サイズに縮小。 */
+  .hero-tier {
+    font-size: var(--text-lg) !important;  /* 16px */
+    padding: 3px 10px !important;
+    letter-spacing: 0.05em !important;
   }
 }
