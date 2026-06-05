@@ -67,10 +67,10 @@ html.wwm-shared-build-mode .wwm-shared-build-banner {
   gap: var(--space-3);
   padding: var(--space-2) var(--space-3-5);
   margin-top: var(--space-2);
-  background: linear-gradient(90deg, var(--vermilion-soft-2), var(--vermilion-tint));
+  background: var(--c-shared-banner-bg);
   border: 1px solid var(--vermilion-strong);
   border-radius: 2px;
-  color: var(--paper);
+  color: var(--c-shared-banner-fg);
   font-family: var(--f-display);
   font-size: var(--text-sm);
   letter-spacing: 0.08em;
@@ -149,7 +149,7 @@ html.wwm-shared-build-mode #exportBtn {
 }
 .preset-slot.has-data {
   border-color: rgba(201,164,90,0.4);
-  background: rgba(40, 30, 18, 0.6);
+  background: var(--c-preset-slot-has-data-bg);
   box-shadow: inset 0 0 14px var(--gold-trace);
 }
 .preset-slot-num {
@@ -174,10 +174,10 @@ html.wwm-shared-build-mode #exportBtn {
   border-radius: 2px; cursor: pointer; transition: all 0.12s;
   white-space: nowrap;
 }
-.preset-save { border-color: var(--gold-strong); color: var(--gold); }
+.preset-save { border-color: var(--c-preset-save-border); color: var(--gold); }
 .preset-save:hover { background: var(--c-fg-gold-label); color: var(--bg-0); }
-.preset-load { border-color: rgba(127,168,138,0.5); color: var(--jade-bright); }
-.preset-load:hover:not(:disabled) { background: var(--jade); color: var(--bg-0); }
+.preset-load { border-color: var(--c-preset-load-border); color: var(--jade-bright); }
+.preset-load:hover:not(:disabled) { background: var(--c-preset-load-hover-bg); color: var(--bg-0); }
 .preset-del  { border-color: var(--vermilion-strong); color: var(--vermilion-bright); padding: 3px 6px; }
 .preset-del:hover:not(:disabled) { background: var(--vermilion); color: var(--bg-0); }
 .preset-load:disabled, .preset-del:disabled { opacity: 0.3; cursor: not-allowed; }
@@ -209,7 +209,7 @@ html.wwm-shared-build-mode #exportBtn {
   content: '斬'; position: absolute; right: -10px; bottom: -40px;
   font-family: var(--f-display);
   font-weight: var(--fw-black);
-  font-size: 260px; color: var(--vermilion-bright-trace);
+  font-size: 260px; color: var(--c-hero-before-fg);
   pointer-events: none; line-height: 1;
 }
 /* 古紙テクスチャ overlay (SVG turbulence + blend) — テスト用に強度UP */
@@ -225,7 +225,7 @@ html.wwm-shared-build-mode #exportBtn {
 /* hero::after ノイズ overlay を 半透明化 (xinfa_bg 見せるため) */
 .hero::after { opacity: 0.35; }
 .wwm-footer { position: relative; overflow: hidden; }
-.wwm-footer-logo { height: 18px; vertical-align: middle; margin-right: var(--space-2); opacity: 0.75; }
+.wwm-footer-logo { height: 18px; vertical-align: middle; margin-right: var(--space-2); opacity: var(--c-footer-logo-opacity); }
 
 .hero-left {
   padding: 18px 24px 12px;
@@ -554,7 +554,7 @@ html.wwm-shared-build-mode #exportBtn {
 .wwm-sb-mini-hero-ink {
   position: absolute; bottom: -15px; left: -20px;
   width: 200px; height: 60px;
-  background: linear-gradient(90deg, rgba(232,81,58,0), var(--vermilion-bright-tint), rgba(232,81,58,0));
+  background: var(--c-sb-mini-hero-ink-bg);
   filter: blur(8px);
   border-radius: 50%;
   pointer-events: none;
@@ -573,7 +573,7 @@ html.wwm-shared-build-mode #exportBtn {
 }
 /* sections wrapper */
 .wwm-sb-rest {
-  background: linear-gradient(180deg, var(--surf-1), var(--surf-2));
+  background: var(--c-sb-rest-bg);
   border: 1px solid var(--ink-1);
   padding: 10px 18px 12px 12px;
   display: flex; flex-direction: column; gap: 4px;
@@ -971,8 +971,8 @@ html.wwm-view-sidebar .wwm-app-body {
   vertical-align: middle;
   white-space: nowrap;
 }
-.wwm-equip-delta-pos { color: var(--jade-bright); text-shadow: 0 0 4px var(--jade-bright-mid); }
-.wwm-equip-delta-neg { color: var(--vermilion); text-shadow: 0 0 4px var(--vermilion-bright-soft-mid); }
+.wwm-equip-delta-pos { color: var(--jade-bright); text-shadow: var(--c-equip-delta-pos-text-shadow); }
+.wwm-equip-delta-neg { color: var(--c-equip-delta-neg-fg); text-shadow: var(--c-equip-delta-neg-text-shadow); }
 .wwm-equip-kongfu {
   display: block;
   font-size: var(--text-sm);
@@ -1034,7 +1034,7 @@ html.wwm-view-sidebar .wwm-app-body {
   margin-top: var(--space-3); padding: var(--space-2) var(--space-2-5);
   background: var(--vermilion-soft);
   border: 1px solid var(--vermilion-strong);
-  color: #ffb39e;
+  color: var(--c-sb-notice-fg);
   cursor: pointer;
   text-align: center;
 }
@@ -1194,12 +1194,12 @@ html.wwm-view-sidebar .wwm-app-body {
 }
 .wwm-opt-loading {
   padding: var(--space-5);
-  color: var(--gold-bright);
+  color: var(--c-opt-loading-fg);
   font-size: var(--text-18);
   font-weight: var(--fw-bold);
   letter-spacing: 0.1em;
   text-align: center;
-  text-shadow: 0 0 12px rgba(232,200,120,0.45);
+  text-shadow: var(--c-opt-loading-text-shadow);
   animation: wwm-opt-loading-pulse 1.2s ease-in-out infinite;
 }
 .wwm-opt-empty { padding: var(--space-5); color: var(--paper-mute); font-size: var(--text-12); text-align: center; }
@@ -1230,7 +1230,7 @@ html.wwm-view-sidebar .wwm-app-body {
 }
 .wwm-opt-btn {
   background: transparent; border: 1px solid var(--ink-3);
-  color: var(--gold); padding: 3px 10px;
+  color: var(--c-opt-btn-fg); padding: 3px 10px;
   border-radius: 2px; cursor: pointer;
   font-family: var(--f-mono);
   font-size: var(--text-sm); font-weight: var(--fw-bold);
@@ -1238,7 +1238,7 @@ html.wwm-view-sidebar .wwm-app-body {
   white-space: nowrap; /* ヘッダ高さズレ防止: en「Apply Selected」 等で2行wrap 起きないように */
 }
 .wwm-opt-btn:hover {
-  background: rgba(212,175,55,0.1); border-color: var(--gold);
+  background: var(--c-opt-btn-hover-bg); border-color: var(--gold);
 }
 .wwm-opt-progress {
   padding: var(--space-1-5) var(--space-2); color: var(--paper-mute);
@@ -1310,7 +1310,7 @@ html.wwm-view-sidebar .wwm-app-body {
 /* 計算中: ヘッダ操作 disable 視覚化 */
 .wwm-opt-busy { opacity: 0.4; cursor: wait; pointer-events: none; }
 .wwm-opt-btn-apply { color: var(--jade-bright); border-color: var(--jade-bright-mid); }
-.wwm-opt-btn-apply:hover { background: rgba(168,212,180,0.1); border-color: var(--jade-bright); }
+.wwm-opt-btn-apply:hover { background: var(--c-opt-btn-apply-hover-bg); border-color: var(--jade-bright); }
 .wwm-opt-pos { font-family: var(--f-latin); font-weight: var(--fw-extra); color: var(--gold); text-align: center; }
 .wwm-opt-slot { color: var(--paper-2); font-size: var(--text-12); }
 .wwm-opt-change { color: var(--paper-2); }
@@ -1370,9 +1370,9 @@ html.wwm-view-sidebar .wwm-app-body {
 .wwm-eff-input {
   width: 100%;
   padding: 3px 6px;
-  background: var(--overlay-soft);
+  background: var(--c-eff-input-bg);
   border: 1px solid var(--gold-deep);
-  color: var(--gold-bright);
+  color: var(--c-eff-input-fg);
   font-family: var(--f-mono);
   font-size: var(--text-12);
   text-align: right;
@@ -1875,7 +1875,7 @@ html.wwm-view-sidebar .wwm-app-body {
   color: var(--c-fg-vermilion-strong);
   padding: 1px 6px;
   border: 1px solid rgba(232,81,58,0.50);
-  background: var(--vermilion-soft);
+  background: var(--c-xinfa-tier-chip-bg);
   letter-spacing: 0.08em;
   border-radius: 1px;
   pointer-events: none;
@@ -1946,7 +1946,7 @@ html.wwm-view-sidebar .wwm-app-body {
   position: absolute;
   left: 0; top: 52px;
   width: 520px; height: 120px;
-  opacity: .85;
+  opacity: var(--c-ink-stroke-opacity);
   pointer-events: none;
   z-index: 0;
 }
@@ -1992,7 +1992,7 @@ html.wwm-view-sidebar .wwm-app-body {
   line-height: .88;
   letter-spacing: -.02em;
   color: var(--paper);  /* 古紙白 #ede4d0 */
-  text-shadow: 0 2px 1px var(--overlay-heavy), 0 4px 12px var(--overlay-soft-mid);
+  text-shadow: var(--c-hero-number-text-shadow);
 }
 /* ╔═══════════════════════════════════════════════════════════════════╗
      SECTION 28 — HERO TIER BADGE (full)
@@ -2041,7 +2041,7 @@ html.wwm-view-sidebar .wwm-app-body {
   background: linear-gradient(135deg, rgba(45,90,58,.42) 0%, rgba(20,40,28,.32) 50%, rgba(45,90,58,.42) 100%);
   border-color: var(--jade-bright-strong);
   text-shadow: 0 0 12px rgba(168,212,180,.7), 0 0 24px rgba(127,168,138,.35);
-  box-shadow: 0 0 10px rgba(127,168,138,.35), inset 0 1px 0 rgba(168,212,180,.2), inset 0 -1px 0 rgba(0,0,0,.35);
+  box-shadow: var(--c-tier-a-hero-shadow);
 }
 
 /* B — bone copper */
@@ -2050,7 +2050,7 @@ html.wwm-view-sidebar .wwm-app-body {
   background: linear-gradient(135deg, rgba(122,90,32,.38) 0%, rgba(50,38,16,.3) 50%, rgba(122,90,32,.38) 100%);
   border-color: rgba(201,184,138,.5);
   text-shadow: 0 0 10px rgba(201,184,138,.55);
-  box-shadow: 0 0 8px rgba(122,90,32,.3), inset 0 1px 0 rgba(201,184,138,.18), inset 0 -1px 0 var(--overlay-soft);
+  box-shadow: var(--c-tier-b-hero-shadow);
 }
 
 /* C — muted */
@@ -2059,7 +2059,7 @@ html.wwm-view-sidebar .wwm-app-body {
   background: linear-gradient(135deg, rgba(60,50,40,.3) 0%, rgba(25,20,16,.25) 50%, rgba(60,50,40,.3) 100%);
   border-color: rgba(122,112,96,.45);
   text-shadow: 0 0 6px rgba(122,112,96,.4);
-  box-shadow: 0 0 4px rgba(90,66,38,.2), inset 0 1px 0 rgba(122,112,96,.15);
+  box-shadow: var(--c-tier-c-hero-shadow);
 }
 
 .hero-wuxia .hero-next-inline {
@@ -2086,7 +2086,7 @@ html.wwm-view-sidebar .wwm-app-body {
   font-family: var(--f-latin);
   font-weight: var(--fw-extra);
   font-size: 48px;
-  color: var(--bone-dim);
+  color: var(--c-hero-next-val-fg);
   line-height: .88;
   letter-spacing: -.01em;
 }
@@ -2139,7 +2139,7 @@ html.wwm-view-sidebar .wwm-app-body {
   background: linear-gradient(180deg, var(--chart-crit) 0%, var(--gold) 55%, var(--gold-deep) 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: var(--c-luopan-center-label-fg);
   filter: drop-shadow(0 1px 1px var(--overlay-mid-2));
 }
 .hero-wuxia .judge-list {
@@ -2159,13 +2159,13 @@ html.wwm-view-sidebar .wwm-app-body {
 /* 物理/属性 行: 区切り線 + 菱形マーカー (◇物理=朱outline / ◆属性=翠fill) */
 .hero-wuxia .judge-row-sep { margin-top: 5px; padding-top: var(--space-1-5); border-top: 1px solid var(--ink-2); }
 .hero-wuxia .judge-dot-diamond { width: 8px; height: 8px; border-radius: 0; transform: rotate(45deg); }
-.hero-wuxia .judge-dot-phys { background: transparent; border: 1.6px solid var(--chart-sympathy); box-shadow: 0 0 6px var(--vermilion-bright-mid-2); }
-.hero-wuxia .judge-dot-elem { background: transparent; border: 1.6px solid var(--jade-bright); box-shadow: 0 0 6px var(--jade-bright-strong); }
-.hero-wuxia .judge-name { font-weight: var(--fw-semibold); color: var(--paper-2); }
+.hero-wuxia .judge-dot-phys { background: transparent; border: 1.6px solid var(--chart-sympathy); box-shadow: var(--c-judge-dot-phys-shadow); }
+.hero-wuxia .judge-dot-elem { background: transparent; border: 1.6px solid var(--jade-bright); box-shadow: var(--c-judge-dot-elem-shadow); }
+.hero-wuxia .judge-name { font-weight: var(--c-judge-name-fw); color: var(--c-judge-name-fg); }
 .hero-wuxia .judge-val {
   font-family: var(--f-mono);
   font-size: var(--text-sm);
-  font-weight: var(--fw-bold);
+  font-weight: var(--c-judge-val-fw);
   margin-left: auto;
 }
 
@@ -2236,9 +2236,7 @@ html.wwm-view-sidebar .wwm-app-body {
 .wwm-anlz-header::after {
   content: '';
   position: absolute; inset: 0;
-  background:
-    linear-gradient(180deg, transparent 18%, var(--hover-trace) 19%, var(--hover-trace) 20%, transparent 21%),
-    linear-gradient(180deg, transparent 60%, var(--hover-trace) 61%, transparent 62%);
+  background: var(--c-anlz-header-after-bg);
   pointer-events: none;
 }
 
@@ -2247,7 +2245,7 @@ html.wwm-view-sidebar .wwm-app-body {
   position: absolute;
   right: -45px; top: -55px;
   width: 280px; height: 280px;
-  opacity: 0.10;
+  opacity: var(--c-anlz-bamboo-opacity);
   pointer-events: none;
   z-index: 0;
   transform: rotate(35deg);
@@ -2381,9 +2379,7 @@ html[lang="en"] .wwm-cmp-title-en {
 .wwm-anlz-body::after {
   content: '';
   position: absolute; inset: 0;
-  background:
-    repeating-linear-gradient(45deg, transparent 0 24px, rgba(212,175,55,.025) 24px 25px),
-    repeating-linear-gradient(-45deg, transparent 0 24px, rgba(0,0,0,.05) 24px 25px);
+  background: var(--c-anlz-body-after-bg);
   pointer-events: none;
 }
 .wwm-anlz-body > * { position: relative; z-index: 1; }
@@ -2407,7 +2403,7 @@ html[lang="en"] .wwm-cmp-title-en {
   background-repeat: no-repeat;
   background-position: calc(100% + 40px) calc(100% + 40px);
   background-size: 60%;
-  opacity: 0.28;
+  opacity: var(--c-anlz-bgicon-opacity);
   filter:
     brightness(0)
     drop-shadow(0 0 5px rgba(28,24,20,.4))
@@ -2500,7 +2496,7 @@ html[lang="en"] .wwm-cmp-title-en {
   position: fixed;
   top: 0; right: 0; bottom: 0;
   width: min(85vw, 320px);
-  background: linear-gradient(180deg, var(--bg-raised), rgba(15,12,14,0.98));
+  background: var(--c-mobile-drawer-bg);
   border-left: 2px solid var(--gold-deep);
   z-index: 9999;
   transform: translateX(100%);
@@ -2508,7 +2504,7 @@ html[lang="en"] .wwm-cmp-title-en {
   display: flex; flex-direction: column;
   padding-top: var(--safe-top, 0);
   padding-bottom: var(--safe-bottom, 0);
-  color: var(--paper);
+  color: var(--c-mobile-drawer-fg);
   overflow-y: auto;
 }
 .wwm-mobile-drawer.open { transform: translateX(0); }

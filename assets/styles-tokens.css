@@ -221,6 +221,76 @@
   --c-mobile-overlay-bot: rgba(10,8,9,0.98);  /* mobile overlay bg (dark default 追加で base を token 参照化) */
   --c-mobile-overlay-header-bg: linear-gradient(180deg, rgba(26,20,16,0.95), rgba(15,12,14,0.92));  /* mobile overlay header bg (dark default 追加) */
 
+  /* ─── @layer Step 2-c: theme-swap tokens (dark default) ─── */
+  --c-hero-before-fg: var(--vermilion-bright-trace);
+  --c-brand-en-fg: var(--paper);
+  --c-brand-sub-fg: var(--c-fg-gold-label);
+  --c-shared-banner-bg: linear-gradient(90deg, var(--vermilion-soft-2), var(--vermilion-tint));
+  --c-shared-banner-fg: var(--paper);
+  --c-footer-logo-opacity: 0.75;
+  --c-preset-bar-bg: var(--surf-2);
+  --c-h1-accent-fg: var(--vermilion-bright);
+  --c-h1-sub-fg: var(--paper-mute);
+  --c-icon-btn-export-btn-border: var(--vermilion-strong);
+  --c-preset-slot-has-data-bg: rgba(40, 30, 18, 0.6);
+  --c-preset-slot-has-data-border: rgba(201,164,90,0.4);
+  --c-preset-save-border: var(--gold-strong);
+  --c-preset-load-border: rgba(127,168,138,0.5);
+  --c-preset-load-hover-bg: var(--jade);
+  --c-sb-mini-hero-ink-bg: linear-gradient(90deg, rgba(232,81,58,0), var(--vermilion-bright-tint), rgba(232,81,58,0));
+  --c-sb-rest-bg: linear-gradient(180deg, var(--surf-1), var(--surf-2));
+  --c-sb-applied-fg: var(--accent);
+  --c-sb-applied-opacity: 0.85;
+  --c-equip-delta-pos-text-shadow: 0 0 4px var(--jade-bright-mid);
+  --c-equip-delta-neg-fg: var(--vermilion);
+  --c-equip-delta-neg-text-shadow: 0 0 4px var(--vermilion-bright-soft-mid);
+  --c-sb-notice-fg: #ffb39e;
+  --c-opt-loading-fg: var(--gold-bright);
+  --c-opt-loading-text-shadow: 0 0 12px rgba(232,200,120,0.45);
+  --c-opt-btn-fg: var(--gold);
+  --c-opt-btn-hover-bg: rgba(212,175,55,0.1);
+  --c-opt-btn-apply-hover-bg: rgba(168,212,180,0.1);
+  --c-eff-input-bg: var(--overlay-soft);
+  --c-eff-input-fg: var(--gold-bright);
+  --c-sb-section-title-bg: var(--accent-faint);
+  --c-sb-section-title-fg: var(--accent);
+  --c-modal-fg: var(--text, #fff);
+  --c-cmp-modal-a--modal-header-bg: var(--bg-raised);
+  --c-cmp-title-en-fg: var(--gold);
+  --c-cmp-set-header-text-shadow: 0 0 6px var(--vermilion-bright-soft-mid);
+  --c-cmp-preview-zero-fg: var(--paper-mute);
+  --c-cmp-modal-bg-icon-opacity: 0.1;
+  --c-modal-bg-icon-opacity: 0.18;
+  --c-xinfa-tier-chip-bg: var(--vermilion-soft);
+  --c-hero-number-text-shadow: 0 2px 1px var(--overlay-heavy), 0 4px 12px var(--overlay-soft-mid);
+  --c-hero-next-val-fg: var(--bone-dim);
+  --c-luopan-center-label-fg: transparent;
+  --c-judge-name-fg: var(--paper-2);
+  --c-judge-name-fw: var(--fw-semibold);
+  --c-judge-val-fw: var(--fw-bold);
+  --c-judge-dot-phys-shadow: 0 0 6px var(--vermilion-bright-mid-2);
+  --c-judge-dot-elem-shadow: 0 0 6px var(--jade-bright-strong);
+  --c-tier-a-hero-shadow: 0 0 10px rgba(127,168,138,.35), inset 0 1px 0 rgba(168,212,180,.2), inset 0 -1px 0 rgba(0,0,0,.35);
+  --c-tier-b-hero-shadow: 0 0 8px rgba(122,90,32,.3), inset 0 1px 0 rgba(201,184,138,.18), inset 0 -1px 0 var(--overlay-soft);
+  --c-tier-c-hero-shadow: 0 0 4px rgba(90,66,38,.2), inset 0 1px 0 rgba(122,112,96,.15);
+  --c-ink-stroke-opacity: .85;
+  --c-last-import-bg: var(--hover-trace);
+  --c-migration-banner-bg: rgba(60, 100, 180, 0.18);
+  --c-migration-banner-fg: #cfe0f5;
+  --c-migration-btn-bg: #4a78b8;
+  --c-sb-label-opacity: 0.75;
+  --c-anlz-header-after-bg: linear-gradient(180deg, transparent 18%, var(--hover-trace) 19%, var(--hover-trace) 20%, transparent 21%), linear-gradient(180deg, transparent 60%, var(--hover-trace) 61%, transparent 62%);
+  --c-anlz-bamboo-opacity: 0.10;
+  --c-anlz-body-after-bg: repeating-linear-gradient(45deg, transparent 0 24px, rgba(212,175,55,.025) 24px 25px), repeating-linear-gradient(-45deg, transparent 0 24px, rgba(0,0,0,.05) 24px 25px);
+  --c-anlz-bgicon-opacity: 0.28;
+  --c-note-cl-featured-bg: linear-gradient(90deg, var(--vermilion-soft), var(--vermilion-trace));
+  --c-score-update-banner-bg: var(--vermilion-soft);
+  --c-score-update-banner-fg: #ffd9cc;
+  --c-mobile-drawer-bg: linear-gradient(180deg, var(--bg-raised), rgba(15,12,14,0.98));
+  --c-mobile-drawer-fg: var(--paper);
+  --c-mobile-fab-bg: linear-gradient(180deg, rgba(26,20,16,0.96), rgba(15,12,14,0.96));
+  --c-mobile-fab-shadow: 0 4px 16px var(--overlay-soft-2), 0 0 12px rgba(212,175,55,0.4);
+
   /* Safe Area inset utility (Phase 1 base) */
   --safe-top:    env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);

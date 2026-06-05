@@ -510,7 +510,7 @@
   }
   /* @layer Step 1 複製 (2026-06-05): components.css の .preset-slot.has-data border-color が
      layer 移行後 上の border (ink-2) に負けるため同値を此処で再宣言。 順序: 上 rule の直後必須 */
-  .preset-slot.has-data { border-color: rgba(201,164,90,0.4); }
+  .preset-slot.has-data { border-color: var(--c-preset-slot-has-data-border); }
   .preset-slots {
     gap: 3px;
     width: auto;       /* L1365 width:100% 解除 */
@@ -794,10 +794,10 @@
     bottom: calc(48px + var(--safe-bottom, 0px));
     width: 56px; height: 56px;
     padding: 0;
-    background: linear-gradient(180deg, rgba(26,20,16,0.96), rgba(15,12,14,0.96));
+    background: var(--c-mobile-fab-bg);
     border: 2px solid var(--gold);
     border-radius: 50%;
-    box-shadow: 0 4px 16px var(--overlay-soft-2), 0 0 12px rgba(212,175,55,0.4);
+    box-shadow: var(--c-mobile-fab-shadow);
     cursor: pointer;
     z-index: 1100;
     overflow: hidden;

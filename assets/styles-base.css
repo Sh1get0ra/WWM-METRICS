@@ -78,9 +78,9 @@ header.topbar::after {
   font-weight: var(--fw-black); font-size: var(--text-xl); letter-spacing: 0.12em;
   color: var(--paper); line-height: 1.1;
 }
-.title-block h1 .accent { color: var(--vermilion-bright); }
+.title-block h1 .accent { color: var(--c-h1-accent-fg); }
 .title-block p {
-  font-size: var(--text-sm); color: var(--paper-mute);
+  font-size: var(--text-sm); color: var(--c-h1-sub-fg);
   letter-spacing: 0.08em; margin-top: var(--space-1);
   text-transform: uppercase; font-family: var(--f-mono); font-weight: var(--fw-medium);
 }
@@ -103,11 +103,11 @@ header.topbar::after {
 .wwm-brand-en {
   font-family: var(--f-latin), serif;
   font-weight: var(--fw-extra); font-size: var(--text-20); letter-spacing: 0.22em;
-  color: var(--paper);
+  color: var(--c-brand-en-fg);
 }
 .wwm-brand-sub {
   font-family: var(--f-mono);
-  font-size: var(--text-sm); color: var(--c-fg-gold-label);
+  font-size: var(--text-sm); color: var(--c-brand-sub-fg);
   letter-spacing: 0.3em; opacity: 0.85;
 }
 .wwm-brand-seal {
@@ -235,7 +235,7 @@ a.icon-btn { text-decoration: none; }
   font-family: var(--f-mono); font-weight: var(--fw-bold); font-size: var(--text-sm); letter-spacing: 0.12em;
 }
 .icon-btn.export-btn {
-  color: var(--vermilion-bright); border-color: var(--vermilion-strong);
+  color: var(--vermilion-bright); border-color: var(--c-icon-btn-export-btn-border);
   opacity: 0.55;
   cursor: not-allowed;
   position: relative;
@@ -266,7 +266,7 @@ a.icon-btn { text-decoration: none; }
 .preset-bar {
   display: flex; align-items: center; gap: var(--space-3);
   padding: var(--space-2) var(--space-3-5); margin-top: var(--space-2);
-  background: var(--surf-2);
+  background: var(--c-preset-bar-bg);
   border: 1px solid var(--ink-2);
   border-radius: 2px;
 }
@@ -414,9 +414,9 @@ footer strong { color: var(--gold); }
   width: 100%;
   box-sizing: border-box;
   padding: var(--space-2) var(--space-4);
-  background: var(--vermilion-soft);
+  background: var(--c-score-update-banner-bg);
   border-bottom: 1px solid var(--vermilion-strong);
-  color: #ffd9cc;
+  color: var(--c-score-update-banner-fg);
   font-size: var(--text-13, 13px);
   position: relative;
   z-index: 50;
@@ -459,9 +459,9 @@ footer strong { color: var(--gold); }
   width: 100%;
   box-sizing: border-box;
   padding: var(--space-2) var(--space-4);
-  background: rgba(60, 100, 180, 0.18);
+  background: var(--c-migration-banner-bg);
   border-bottom: 1px solid #4a78b8;
-  color: #cfe0f5;
+  color: var(--c-migration-banner-fg);
   font-size: var(--text-13, 13px);
   position: relative;
   z-index: 50;
@@ -474,7 +474,7 @@ footer strong { color: var(--gold); }
 .wwm-migration-btn {
   flex: 0 0 auto;
   padding: var(--space-1-5) var(--space-4);
-  background: #4a78b8;
+  background: var(--c-migration-btn-bg);
   color: #fff;
   border: none;
   border-radius: 4px;

@@ -21,6 +21,8 @@ const fs = require('fs');
 const DRY = process.argv.includes('--dry');
 const MODE_SAME = process.argv.includes('--same-value');
 const pairsIdx = process.argv.indexOf('--pairs');
+const labelIdx = process.argv.indexOf('--label');
+const LABEL = labelIdx !== -1 ? process.argv[labelIdx + 1] : 'Step 2-b';
 const MODE_PAIRS = pairsIdx !== -1;
 if (!MODE_SAME && !MODE_PAIRS) { console.error('mode 指定必須: --same-value | --pairs <plan.json>'); process.exit(1); }
 
@@ -36,10 +38,51 @@ if (MODE_PAIRS) {
   };
   const declRe = (prop) => new RegExp(`(^|;|\\{)(\\s*)(${prop.replace(/[-]/g, '\\-')})\\s*:\\s*([^;{}]*?)(;|(?=\\s*\\}))`);
 
+  // multi-line 編集で空文字化した行 (file → Set<idx>)。 全編集後に filter 除去
+  const blankedLines = new Map();
+  const markBlank = (lines, idx) => {
+    if (!blankedLines.has(lines)) blankedLines.set(lines, new Set());
+    blankedLines.get(lines).add(idx);
+  };
+
+  // multi-line 宣言対応 decl 編集 (行数不変: 中間行は空文字化、 行番号 plan を保護)
+  // mode: 'replace' = 値を newValue に / 'delete' = decl 除去。 成功 true
+  const editDecl = (lines, line1, prop, mode, newValue) => {
+    const idx = line1 - 1;
+    const re = declRe(prop);
+    if (re.test(lines[idx])) {
+      lines[idx] = mode === 'replace'
+        ? lines[idx].replace(re, (m, pre, ws, p) => `${pre}${ws}${p}: ${newValue};`)
+        : lines[idx].replace(re, (m, pre, ws) => pre + ws).replace(/[ \t]+(\r?)$/, '$1');
+      return true;
+    }
+    // multi-line: 開始行に `prop:` があり ';' '}' が無い → ';' 終端行まで走査
+    const startRe = new RegExp(`(^|;|\\{)(\\s*)(${prop.replace(/[-]/g, '\\-')})\\s*:\\s*(.*?)\\r?$`);
+    const m0 = lines[idx].match(startRe);
+    if (!m0 || /[;}]/.test(m0[4])) return false;
+    let end = -1;
+    for (let j = idx + 1; j < Math.min(idx + 12, lines.length); j++) {
+      if (/;/.test(lines[j])) { end = j; break; }
+      if (/[{}]/.test(lines[j])) return false; // rule 境界 = 想定外
+    }
+    if (end === -1) return false;
+    const eol = lines[idx].endsWith('\r') ? '\r' : '';
+    const tail = lines[end].replace(/^[^;]*;/, ''); // 終端行の ; 後残り
+    lines[idx] = mode === 'replace'
+      ? lines[idx].replace(startRe, (m, pre, ws, p) => `${pre}${ws}${p}: ${newValue};`) + tail.replace(/\r?$/, '') + eol
+      : (m0[1] === '{' ? lines[idx].slice(0, lines[idx].indexOf(m0[3])) + tail.replace(/\r?$/, '') + eol
+                       : lines[idx].replace(startRe, (m, pre, ws) => pre + ws).replace(/[ \t]+$/, '') + tail.replace(/\r?$/, '') + eol);
+    for (let j = idx + 1; j <= end; j++) { lines[j] = eol; markBlank(lines, j); }
+    if (mode === 'delete' && /^[ \t]*\r?$/.test(lines[idx])) markBlank(lines, idx);
+    return true;
+  };
+
   const tokenDefsRoot = [];   // tokens.css :root 追加分
   const tokenDefsLight = [];  // light.css token block 追加分
 
   for (const g of plan) {
+    // existing: true = 既存 token 再利用 (定義追加 skip、 base 置換 + light 削除のみ)
+    if (!g.existing)
     // tokens: [{name, dark, light?}] — light 省略 = light block 既定義 (Phase 5.3 light-only token)
     for (const t of (g.tokens || [{ name: g.token, dark: g.dark, light: g.light }])) {
       const selfRef = t.light && new RegExp(`^var\\(\\s*${t.name.replace(/[-]/g, '\\-')}\\s*\\)$`).test(t.light.trim());
@@ -51,16 +94,21 @@ if (MODE_PAIRS) {
     for (const d of g.decls) {
       // base 置換
       const bl = load(d.baseFile);
-      const bre = declRe(d.prop);
-      if (!bre.test(bl[d.baseLine - 1])) { console.warn(`[SKIP] base ${d.baseFile}:${d.baseLine} ${d.prop} 不一致`); continue; }
-      bl[d.baseLine - 1] = bl[d.baseLine - 1].replace(bre, (m, pre, ws, p) => `${pre}${ws}${p}: ${baseValue};`);
+      if (!editDecl(bl, d.baseLine, d.prop, 'replace', baseValue)) { console.warn(`[SKIP] base ${d.baseFile}:${d.baseLine} ${d.prop} 不一致`); continue; }
       // light 削除
       const ll = load(d.lightFile);
-      const lre = declRe(d.prop);
-      if (!lre.test(ll[d.lightLine - 1])) { console.warn(`[SKIP] light ${d.lightFile}:${d.lightLine} ${d.prop} 不一致`); continue; }
-      ll[d.lightLine - 1] = ll[d.lightLine - 1].replace(lre, (m, pre, ws) => pre + ws).replace(/[ \t]+(\r?)$/, '$1');
+      if (!editDecl(ll, d.lightLine, d.prop, 'delete')) { console.warn(`[SKIP] light ${d.lightFile}:${d.lightLine} ${d.prop} 不一致`); continue; }
       if (DRY) console.log(`[DRY] ${g.token || g.tokens[0].name}: base ${d.baseFile}:${d.baseLine} → ${baseValue} / light ${d.lightFile}:${d.lightLine} 削除`);
     }
+  }
+
+  // multi-line 編集の空文字化行を除去 (全 decl 編集後 = 行番号参照終了後、 splice 挿入前)
+  for (const [f, lines] of fileLines) {
+    const marked = blankedLines.get(lines);
+    if (!marked) continue;
+    const kept = lines.filter((l, i) => !(marked.has(i) && /^[ \t]*\r?$/.test(l)));
+    lines.length = 0;
+    lines.push(...kept);
   }
 
   // tokens.css :root 末尾 (--safe-top 行の手前の「Safe Area」 コメント前) に挿入
@@ -69,7 +117,7 @@ if (MODE_PAIRS) {
   if (anchorIdx === -1) { console.error('tokens.css anchor 不在'); process.exit(1); }
   const eol = tl[anchorIdx].endsWith('\r') ? '\r' : '';
   const rootBlock = [
-    `  /* ─── @layer Step 2-b: theme-swap pair tokens (dark default) ─── */${eol}`,
+    `  /* ─── @layer ${LABEL}: theme-swap tokens (dark default) ─── */${eol}`,
     ...tokenDefsRoot.map(l => l + eol), '' + eol,
   ];
   tl.splice(anchorIdx, 0, ...rootBlock);
@@ -79,7 +127,7 @@ if (MODE_PAIRS) {
   const lightAnchor = ll2.findIndex(l => l.includes('--c-sb-top-bg'));
   if (lightAnchor === -1) { console.error('light.css anchor 不在'); process.exit(1); }
   const eol2 = ll2[lightAnchor].endsWith('\r') ? '\r' : '';
-  ll2.splice(lightAnchor + 1, 0, `${eol2}`, `  /* ─── @layer Step 2-b: theme-swap pair tokens (light 値) ─── */${eol2}`, ...tokenDefsLight.map(l => l + eol2));
+  ll2.splice(lightAnchor + 1, 0, `${eol2}`, `  /* ─── @layer ${LABEL}: theme-swap tokens (light 値) ─── */${eol2}`, ...tokenDefsLight.map(l => l + eol2));
 
   if (!DRY) {
     for (const [f, lines] of fileLines) {
