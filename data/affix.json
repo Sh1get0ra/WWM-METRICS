@@ -9187,7 +9187,7 @@
     "internal": 398,
     "statKey": "maxVoid"
   },
-  "_schema": "affix ID -> {statKey, internal}. WW Math app.js (v=aad303b7) 由来。null statKey は弓矢関連 (WW Mathでも未対応)。",
+  "_schema": "affix ID -> {statKey, internal}. WW Math app.js (v=aad303b7) 由来。null statKey は弓矢関連。",
   "_lastUpdated": "2026-05-25",
   "_source": "Where Winds Math obfuscated app.js + jsdom抽出",
   "_stats": 119,

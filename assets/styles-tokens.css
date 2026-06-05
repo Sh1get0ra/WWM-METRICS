@@ -208,6 +208,192 @@
   --c-modal-a-option-bg:  var(--bg-raised); /* compare modal A select option bg */
   --c-rail-bg:            linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.25) 60%, rgba(40,30,20,0.45)); /* 装備/心法 rail 縦 gradient (light override 別値) */
 
+  /* ─── @layer Step 2-b: theme-swap pair tokens (dark default) ─── */
+  --c-fg-accent: var(--gold-bright);  /* アクセント前景 (dark 明金 / light 朱) */
+  --c-fg-gold-label: var(--gold);  /* 金ラベル前景 (light は暗金) */
+  --c-fg-hidden-stat: #7a93b0;  /* 隠しステ行 青灰 */
+  --c-modal-a-fg: var(--paper);  /* compare modal A 主文字色 */
+  --c-icon-dim-opacity: 0.15;  /* equip/xinfa icon 背景透かし opacity */
+  --c-fg-vermilion-strong: var(--vermilion-bright);  /* 朱前景 強調 (light は深朱) */
+  --c-fg-emphasis: var(--gold-bright);  /* 見出し強調 (hero label ja / cmp-val-input) */
+  --c-anlz-shadow: 0 8px 22px var(--overlay-soft-2);  /* anlz header/body 浮き shadow */
+  --c-mobile-overlay-top: rgba(20,15,12,0.98);  /* mobile overlay bg (dark default 追加で base を token 参照化) */
+  --c-mobile-overlay-bot: rgba(10,8,9,0.98);  /* mobile overlay bg (dark default 追加で base を token 参照化) */
+  --c-mobile-overlay-header-bg: linear-gradient(180deg, rgba(26,20,16,0.95), rgba(15,12,14,0.92));  /* mobile overlay header bg (dark default 追加) */
+
+  /* ─── @layer Step 2-c: theme-swap tokens (dark default) ─── */
+  --c-hero-before-fg: var(--vermilion-bright-trace);
+  --c-brand-en-fg: var(--paper);
+  --c-brand-sub-fg: var(--c-fg-gold-label);
+  --c-shared-banner-bg: linear-gradient(90deg, var(--vermilion-soft-2), var(--vermilion-tint));
+  --c-shared-banner-fg: var(--paper);
+  --c-footer-logo-opacity: 0.75;
+  --c-preset-bar-bg: var(--surf-2);
+  --c-h1-accent-fg: var(--vermilion-bright);
+  --c-h1-sub-fg: var(--paper-mute);
+  --c-icon-btn-export-btn-border: var(--vermilion-strong);
+  --c-preset-slot-has-data-bg: rgba(40, 30, 18, 0.6);
+  --c-preset-slot-has-data-border: rgba(201,164,90,0.4);
+  --c-preset-save-border: var(--gold-strong);
+  --c-preset-load-border: rgba(127,168,138,0.5);
+  --c-preset-load-hover-bg: var(--jade);
+  --c-sb-mini-hero-ink-bg: linear-gradient(90deg, rgba(232,81,58,0), var(--vermilion-bright-tint), rgba(232,81,58,0));
+  --c-sb-rest-bg: linear-gradient(180deg, var(--surf-1), var(--surf-2));
+  --c-sb-applied-fg: var(--accent);
+  --c-sb-applied-opacity: 0.85;
+  --c-equip-delta-pos-text-shadow: 0 0 4px var(--jade-bright-mid);
+  --c-equip-delta-neg-fg: var(--vermilion);
+  --c-equip-delta-neg-text-shadow: 0 0 4px var(--vermilion-bright-soft-mid);
+  --c-sb-notice-fg: #ffb39e;
+  --c-opt-loading-fg: var(--gold-bright);
+  --c-opt-loading-text-shadow: 0 0 12px rgba(232,200,120,0.45);
+  --c-opt-btn-fg: var(--gold);
+  --c-opt-btn-hover-bg: rgba(212,175,55,0.1);
+  --c-opt-btn-apply-hover-bg: rgba(168,212,180,0.1);
+  --c-eff-input-bg: var(--overlay-soft);
+  --c-eff-input-fg: var(--gold-bright);
+  --c-sb-section-title-bg: var(--accent-faint);
+  --c-sb-section-title-fg: var(--accent);
+  --c-modal-fg: var(--text, #fff);
+  --c-cmp-modal-a--modal-header-bg: var(--bg-raised);
+  --c-cmp-title-en-fg: var(--chart-sympathy);
+  --c-cmp-set-header-text-shadow: 0 0 6px var(--vermilion-bright-soft-mid);
+  --c-cmp-preview-zero-fg: var(--paper-mute);
+  --c-cmp-modal-bg-icon-opacity: 0.1;
+  --c-modal-bg-icon-opacity: 0.18;
+  --c-xinfa-tier-chip-bg: var(--vermilion-soft);
+  --c-hero-number-text-shadow: 0 2px 1px var(--overlay-heavy), 0 4px 12px var(--overlay-soft-mid);
+  --c-hero-next-val-fg: var(--bone-dim);
+  --c-luopan-center-label-fg: transparent;
+  --c-judge-name-fg: var(--paper-2);
+  --c-judge-name-fw: var(--fw-semibold);
+  --c-judge-val-fw: var(--fw-bold);
+  --c-judge-dot-phys-shadow: 0 0 6px var(--vermilion-bright-mid-2);
+  --c-judge-dot-elem-shadow: 0 0 6px var(--jade-bright-strong);
+  --c-tier-a-hero-shadow: 0 0 10px rgba(127,168,138,.35), inset 0 1px 0 rgba(168,212,180,.2), inset 0 -1px 0 rgba(0,0,0,.35);
+  --c-tier-b-hero-shadow: 0 0 8px rgba(122,90,32,.3), inset 0 1px 0 rgba(201,184,138,.18), inset 0 -1px 0 var(--overlay-soft);
+  --c-tier-c-hero-shadow: 0 0 4px rgba(90,66,38,.2), inset 0 1px 0 rgba(122,112,96,.15);
+  --c-ink-stroke-opacity: .85;
+  --c-last-import-bg: var(--hover-trace);
+  --c-migration-banner-bg: rgba(60, 100, 180, 0.18);
+  --c-migration-banner-fg: #cfe0f5;
+  --c-migration-btn-bg: #4a78b8;
+  --c-sb-label-opacity: 0.75;
+  --c-anlz-header-after-bg: linear-gradient(180deg, transparent 18%, var(--hover-trace) 19%, var(--hover-trace) 20%, transparent 21%), linear-gradient(180deg, transparent 60%, var(--hover-trace) 61%, transparent 62%);
+  --c-anlz-bamboo-opacity: 0.10;
+  --c-anlz-body-after-bg: repeating-linear-gradient(45deg, transparent 0 24px, rgba(212,175,55,.025) 24px 25px), repeating-linear-gradient(-45deg, transparent 0 24px, rgba(0,0,0,.05) 24px 25px);
+  --c-anlz-bgicon-opacity: 0.28;
+  --c-note-cl-featured-bg: linear-gradient(90deg, var(--vermilion-soft), var(--vermilion-trace));
+  --c-score-update-banner-bg: var(--vermilion-soft);
+  --c-score-update-banner-fg: #ffd9cc;
+  --c-mobile-drawer-bg: linear-gradient(180deg, var(--bg-raised), rgba(15,12,14,0.98));
+  --c-mobile-drawer-fg: var(--paper);
+  --c-mobile-fab-bg: linear-gradient(180deg, rgba(26,20,16,0.96), rgba(15,12,14,0.96));
+  --c-mobile-fab-shadow: 0 4px 16px var(--overlay-soft-2), 0 0 12px rgba(212,175,55,0.4);
+
+  /* ─── @layer Step 2-d r1: theme-swap tokens (dark default) ─── */
+  --c-tier-chip-ss-shadow: 0 0 20px rgba(200,60,43,0.6), 0 0 45px var(--vermilion-soft-2), inset 0 1px 0 rgba(240,210,138,0.28), inset 0 -1px 0 var(--overlay-soft-2);
+  --c-tier-chip-ss-sheen: linear-gradient( 105deg, transparent 25%, rgba(240,210,138,0.30) 50%, transparent 75% );
+  --c-tier-chip-s-shadow: 0 0 18px var(--vermilion-strong), 0 0 40px var(--vermilion-soft), inset 0 1px 0 rgba(255,130,110,0.20), inset 0 -1px 0 var(--overlay-soft-mid);
+  --c-tier-chip-a-shadow: 0 0 11px rgba(168,212,180,0.28), inset 0 1px 0 rgba(168,212,180,0.18);
+  --c-tier-chip-b-shadow: 0 0 8px rgba(201,184,138,0.22), inset 0 1px 0 rgba(201,184,138,0.14);
+  --c-modal-a-option-fg: var(--paper);
+  --c-anlz-title-fg: #f5e8c0;
+  --c-anlz-title-text-shadow: 0 0 0.5px rgba(245,232,192,.85), 0 0 1.5px rgba(232,217,184,.55), 0 0 3px rgba(232,217,184,.35), 0.6px 0 1.2px rgba(232,217,184,.3), -0.6px 0 1.2px rgba(232,217,184,.25), 0 0.5px 1.5px rgba(232,217,184,.22);
+
+  /* ─── @layer Step 2-d r2: theme-swap tokens (dark default) ─── */
+  --c-preset-slot-num-fg: var(--gold);
+  --c-preset-save-fg: var(--gold);
+  --c-preset-save-hover-fg: var(--bg-0);
+  --c-preset-load-hover-fg: var(--bg-0);
+  --c-preset-del-hover-fg: var(--bg-0);
+  --c-hb-pct-phys-fg: var(--vermilion-bright-glow);
+  --c-hb-pct-elem-fg: rgba(168,212,180,0.6);
+  --c-footer-strong-fg: var(--gold);
+  --c-tier-chip-ss-fg: var(--chart-crit);
+  --c-tier-chip-ss-bg: linear-gradient(135deg, rgba(180,40,28,0.48) 0%, rgba(100,20,14,0.38) 50%, rgba(180,40,28,0.48) 100%);
+  --c-tier-chip-ss-border: rgba(240,210,138,0.65);
+  --c-tier-chip-ss-text-shadow: 0 0 18px rgba(240,210,138,0.95), 0 0 36px var(--vermilion-strong);
+  --c-tier-chip-s-fg: #ff6b50;
+  --c-tier-chip-s-bg: linear-gradient(135deg, var(--vermilion-mid-2), rgba(138,31,23,0.30));
+  --c-tier-chip-s-border: var(--vermilion-bright-strong);
+  --c-tier-chip-s-text-shadow: 0 0 14px rgba(232,81,58,0.85);
+  --c-tier-chip-a-bg: linear-gradient(135deg, rgba(168,212,180,0.20), rgba(127,168,138,0.15));
+  --c-tier-chip-a-border: var(--jade-bright-strong);
+  --c-tier-chip-a-text-shadow: 0 0 12px rgba(168,212,180,0.60);
+  --c-tier-chip-b-fg: var(--bone);
+  --c-tier-chip-b-bg: linear-gradient(135deg, rgba(201,184,138,0.20), rgba(160,140,100,0.15));
+  --c-tier-chip-b-border: rgba(201,184,138,0.48);
+  --c-tier-chip-b-text-shadow: 0 0 10px rgba(201,184,138,0.45);
+  --c-tier-chip-c-bg: rgba(139,129,112,0.10);
+  --c-tier-chip-c-border: rgba(139,129,112,0.26);
+  --c-opt-sort-btn-fg: var(--paper-mute);
+  --c-opt-sort-btn-hover-bg: var(--accent-faint);
+  --c-opt-sort-btn-hover-fg: var(--paper);
+  --c-opt-sort-btn-active-bg: var(--gold-deep);
+  --c-opt-sort-btn-active-fg: var(--paper);
+  --c-opt-btn-apply-border: var(--jade-bright-mid);
+  --c-opt-btn-apply-hover-border: var(--jade-bright);
+  --c-rank-row-border-left: 3px solid rgba(212,175,55,0.22);
+  --c-rank-row-border-bot: 1px solid var(--gold-bright-tint);
+  --c-rank-row-odd-bg: var(--gold-bright-faint);
+  --c-rank-row-hover-bg: var(--gold-bright-faint);
+  --c-rank-row-hover-border-left: var(--gold-bright);
+  --c-eff-row-odd-bg: var(--gold-bright-faint);
+  --c-eff-row-hover-bg: var(--gold-bright-faint);
+  --c-cmp-lv-select-fg: var(--gold-bright);
+  --c-cmp-stat-select-bg: var(--select-bg);
+  --c-btn-secondary-bg: transparent;
+  --c-btn-secondary-fg: var(--text, #fff);
+  --c-btn-secondary-hover-bg: var(--hover-soft);
+  --c-modal-a-kongfu-select-bg: var(--gold-faint);
+  --c-modal-a-set-select-bg: linear-gradient(90deg, rgba(232,81,58,0.30), transparent);
+  --c-modal-a-stat-select-bg: var(--overlay-soft-mid);
+  --c-modal-a-lv-fg: var(--paper);
+  --c-modal-a-btn-secondary-bg: url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_cancel-9a52642a.png") center / 100% 100% no-repeat, transparent;
+  --c-slot-border: rgba(232,215,180,0.20);
+  --c-tier-badge-hero-bg: linear-gradient(135deg, rgba(60,40,30,.45) 0%, rgba(30,20,15,.35) 50%, rgba(60,40,30,.45) 100%);
+  --c-tier-badge-hero-fg: var(--paper-mute);
+  --c-tier-badge-hero-border: var(--paper-mute);
+  --c-tier-ss-hero-bg: linear-gradient(135deg, rgba(180,40,28,.48) 0%, rgba(100,20,14,.38) 50%, rgba(180,40,28,.48) 100%);
+  --c-tier-ss-hero-fg: var(--chart-crit);
+  --c-tier-ss-hero-border: rgba(240,210,138,.65);
+  --c-tier-s-hero-bg: linear-gradient(135deg, rgba(138,31,23,.42) 0%, rgba(60,15,10,.32) 50%, rgba(138,31,23,.42) 100%);
+  --c-tier-s-hero-fg: #ff6b50;
+  --c-tier-s-hero-border: var(--vermilion-bright-strong);
+  --c-tier-a-hero-bg: linear-gradient(135deg, rgba(45,90,58,.42) 0%, rgba(20,40,28,.32) 50%, rgba(45,90,58,.42) 100%);
+  --c-tier-a-hero-fg: var(--jade-bright);
+  --c-tier-a-hero-border: var(--jade-bright-strong);
+  --c-tier-b-hero-bg: linear-gradient(135deg, rgba(122,90,32,.38) 0%, rgba(50,38,16,.3) 50%, rgba(122,90,32,.38) 100%);
+  --c-tier-b-hero-fg: var(--bone);
+  --c-tier-b-hero-border: rgba(201,184,138,.5);
+  --c-tier-c-hero-bg: linear-gradient(135deg, rgba(60,50,40,.3) 0%, rgba(25,20,16,.25) 50%, rgba(60,50,40,.3) 100%);
+  --c-tier-c-hero-fg: var(--paper-mute);
+  --c-tier-c-hero-border: rgba(122,112,96,.45);
+  --c-migration-strong-fg: #a8d0ff;
+  --c-anlz-tab-fg: var(--paper);
+  --c-anlz-tab-active-fg: var(--chart-crit);
+
+  /* ─── @layer Step 2-d r3: theme-swap tokens (dark default) ─── */
+  --c-focus-ring-shadow: 0 0 0 4px rgba(240,210,138,0.18);
+  --c-equip-setname-fg: var(--vermilion-bright);
+  --c-equip-setname-text-shadow: 0 0 6px rgba(232,81,58,0.35);
+  --c-cmp-set-header-fg: var(--gold-bright);
+  --c-modal-a-val-input-fg: #ffae8a;
+  --c-modal-a-lv-bg: var(--bg-raised);
+  --c-hero-next-arrow-fg: var(--gold-deep);
+
+  /* ─── @layer Step 2-e: theme-swap tokens (dark default) ─── */
+  --c-modal-a-rows-bg: var(--overlay-mid);
+  --c-modal-a-title-ja-fg: #f3e3d4;
+  --c-modal-a-col-bg: var(--hover-trace);
+  --c-modal-a-kongfu-header-bg: var(--gold-faint);
+  --c-modal-a-kongfu-header-fg: #e6d6b8;
+  --c-modal-a-kongfu-select-fg: #e6d6b8;
+  --c-modal-a-set-fg: #ff6b4a;
+  --c-modal-a-name-fg: #ecdfd6;
+  --c-modal-a-val-fg: #ffae8a;
+
   /* Safe Area inset utility (Phase 1 base) */
   --safe-top:    env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);

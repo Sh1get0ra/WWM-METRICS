@@ -510,7 +510,7 @@
   }
   /* @layer Step 1 複製 (2026-06-05): components.css の .preset-slot.has-data border-color が
      layer 移行後 上の border (ink-2) に負けるため同値を此処で再宣言。 順序: 上 rule の直後必須 */
-  .preset-slot.has-data { border-color: rgba(201,164,90,0.4); }
+  .preset-slot.has-data { border-color: var(--c-preset-slot-has-data-border); }
   .preset-slots {
     gap: 3px;
     width: auto;       /* L1365 width:100% 解除 */
@@ -711,7 +711,7 @@
     width: 100vw;
     min-width: 0;
     margin: 0;
-    border-radius: 0 !important;
+    border-radius: 0;
     max-height: 100dvh;
     height: 100dvh;
     display: flex;
@@ -794,10 +794,10 @@
     bottom: calc(48px + var(--safe-bottom, 0px));
     width: 56px; height: 56px;
     padding: 0;
-    background: linear-gradient(180deg, rgba(26,20,16,0.96), rgba(15,12,14,0.96));
+    background: var(--c-mobile-fab-bg);
     border: 2px solid var(--gold);
     border-radius: 50%;
-    box-shadow: 0 4px 16px var(--overlay-soft-2), 0 0 12px rgba(212,175,55,0.4);
+    box-shadow: var(--c-mobile-fab-shadow);
     cursor: pointer;
     z-index: 1100;
     overflow: hidden;
@@ -818,7 +818,7 @@
     font-family: var(--f-display);
     font-weight: var(--fw-black);
     font-size: var(--text-14);
-    color: var(--gold-bright);
+    color: var(--c-fg-accent);
     letter-spacing: 0.08em;
   }
   .wwm-mobile-stat-fab-avatar[src]:not([src=""]) + .wwm-mobile-stat-fab-fallback { display: none; }
@@ -834,7 +834,7 @@
   .wwm-mobile-stat-overlay {
     position: fixed;
     inset: 0;
-    background: linear-gradient(180deg, rgba(20,15,12,0.98), rgba(10,8,9,0.98));
+    background: linear-gradient(180deg, var(--c-mobile-overlay-top), var(--c-mobile-overlay-bot));
     z-index: 1300;
     display: flex;
     flex-direction: column;
@@ -846,7 +846,7 @@
     display: flex; align-items: center; justify-content: space-between;
     padding: var(--space-2) var(--space-3);
     border-bottom: 1px solid var(--ink-2);
-    background: linear-gradient(180deg, rgba(26,20,16,0.95), rgba(15,12,14,0.92));
+    background: var(--c-mobile-overlay-header-bg);
     flex: 0 0 auto;
   }
   .wwm-mobile-stat-overlay-title {
@@ -854,14 +854,14 @@
     font-weight: var(--fw-black);
     font-size: var(--text-14);
     letter-spacing: 0.18em;
-    color: var(--gold-bright);
+    color: var(--c-fg-accent);
   }
   .wwm-mobile-stat-overlay-close {
     width: 36px; height: 36px;
     background: transparent;
     border: 1px solid var(--ink-2);
     border-radius: 3px;
-    color: var(--gold-bright);
+    color: var(--c-fg-accent);
     font-size: var(--text-xl); line-height: 1;
     cursor: pointer;
   }
@@ -889,12 +889,12 @@
     z-index: 20;
     margin: -8px -10px 8px;
     padding: var(--space-2-5) var(--space-3);
-    background: var(--bg-raised) !important;
+    background: var(--bg-raised);
     border: 1px solid var(--gold-deep);
     box-shadow: 0 6px 14px var(--overlay-mid);
   }
   html[data-theme="light"] body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sb-mini-hero-card {
-    background: #f4e8c8 !important;
+    background: #f4e8c8;
     border-color: rgba(120,60,20,0.35);
     box-shadow: 0 6px 14px var(--overlay-trace);
   }
@@ -909,7 +909,7 @@
   .wwm-mobile-anlz-overlay {
     position: fixed;
     inset: 0;
-    background: linear-gradient(180deg, rgba(20,15,12,0.98), rgba(10,8,9,0.98));
+    background: linear-gradient(180deg, var(--c-mobile-overlay-top), var(--c-mobile-overlay-bot));
     z-index: 1300;
     display: flex;
     flex-direction: column;
@@ -921,7 +921,7 @@
     display: flex; align-items: center; justify-content: space-between;
     padding: var(--space-2) var(--space-3);
     border-bottom: 1px solid var(--ink-2);
-    background: linear-gradient(180deg, rgba(26,20,16,0.95), rgba(15,12,14,0.92));
+    background: var(--c-mobile-overlay-header-bg);
     flex: 0 0 auto;
   }
   .wwm-mobile-anlz-overlay-title {
@@ -929,14 +929,14 @@
     font-weight: var(--fw-black);
     font-size: var(--text-14);
     letter-spacing: 0.18em;
-    color: var(--vermilion-bright);
+    color: var(--c-fg-vermilion-strong);
   }
   .wwm-mobile-anlz-overlay-close {
     width: 36px; height: 36px;
     background: transparent;
     border: 1px solid var(--ink-2);
     border-radius: 3px;
-    color: var(--vermilion-bright);
+    color: var(--c-fg-vermilion-strong);
     font-size: var(--text-xl); line-height: 1;
     cursor: pointer;
   }

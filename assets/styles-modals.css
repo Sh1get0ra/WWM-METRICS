@@ -22,7 +22,7 @@
   background:
     radial-gradient(ellipse at top right, var(--gold-bright-faint), transparent 55%),
     linear-gradient(180deg, var(--surf-1), var(--surf-2));
-  color: var(--text, #fff);
+  color: var(--c-modal-fg);
   border-radius: 0 0 2px 2px;
   max-width: 600px; width: 100%;
   max-height: 90vh;
@@ -124,17 +124,17 @@
 }
 .wwm-btn-primary:hover { opacity: 0.85; }
 .wwm-btn-secondary {
-  background: transparent;
-  color: var(--text, #fff);
+  background: var(--c-btn-secondary-bg);
+  color: var(--c-btn-secondary-fg);
   border: 1px solid rgba(255,255,255,0.3);
 }
-.wwm-btn-secondary:hover { background: var(--hover-soft); }
+.wwm-btn-secondary:hover { background: var(--c-btn-secondary-hover-bg); }
 .wwm-list { margin: 0; padding-left: 18px; }
 .wwm-list li { margin: var(--space-half) 0; }
 .wwm-muted { opacity: 0.6; font-size: var(--text-12); }
 .wwm-last-import {
   margin-top: var(--space-4); padding: var(--space-2-5);
-  background: var(--hover-trace);
+  background: var(--c-last-import-bg);
   border-radius: 6px;
   border-left: 3px solid var(--accent);
 }
@@ -230,9 +230,9 @@
 .wwm-sb-section { margin-bottom: var(--space-3); }
 .wwm-sb-section-title {
   font-size: var(--text-12); margin: 0 0 var(--space-1);
-  color: var(--accent);
+  color: var(--c-sb-section-title-fg);
   padding: var(--space-half) var(--space-1-5);
-  background: var(--accent-faint);
+  background: var(--c-sb-section-title-bg);
   border-radius: 3px;
 }
 .wwm-sb-items { display: flex; flex-direction: column; gap: var(--space-half); }
@@ -243,7 +243,7 @@
   padding: var(--space-half) var(--space-1-5); align-items: baseline;
 }
 .wwm-sb-row.wwm-sb-sub { padding-left: 18px; opacity: 0.85; font-size: var(--text-sm); }
-.wwm-sb-label { opacity: 0.75; white-space: nowrap; flex-shrink: 0; }
+.wwm-sb-label { opacity: var(--c-sb-label-opacity); white-space: nowrap; flex-shrink: 0; }
 .wwm-sb-value { font-weight: var(--fw-semibold); text-align: right; min-width: 0; }
 .wwm-sb-warn {
   display: inline-block;
@@ -255,11 +255,11 @@
 }
 .wwm-sb-expandable { cursor: pointer; }
 .wwm-sb-sub-group.wwm-sb-collapsed { display: none; }
-.wwm-sb-applied { color: var(--accent); opacity: 0.85; font-size: 0.78em; margin-left: var(--space-1); }
+.wwm-sb-applied { color: var(--c-sb-applied-fg); opacity: var(--c-sb-applied-opacity); font-size: 0.78em; margin-left: var(--space-1); }
 /* light: sidebar 適用値 (判定確率の括弧内) を濃amberに (cream上で gold が低コントラストのため) */
 /* hiddenStat: ゲーム実機で見えない内部値 (例 critRateBoosted = ボーナス会心率込みの実効会心率) → スレート青で区別 */
 .wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-label,
-.wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-value { color: #7a93b0; }
+.wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-value { color: var(--c-fg-hidden-stat); }
 .wwm-sb-baseline { color: var(--paper-mute); opacity: 0.7; font-weight: var(--fw-medium); }
 .wwm-sb-arrow {
   color: var(--gold); margin: 0 3px; opacity: 0.7;
@@ -318,7 +318,7 @@
 .wwm-cmp-modal-a::after { display: none; }
 .wwm-cmp-modal-a .wwm-modal-header {
   position: relative;
-  background: var(--bg-raised);
+  background: var(--c-cmp-modal-a--modal-header-bg);
 }
 .wwm-cmp-modal-a .wwm-modal-header::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; width: auto; height: 2px;
@@ -401,7 +401,7 @@
 .wwm-cmp-modal-a .wwm-cmp-title-text { display: none; }
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv,
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
-  color: var(--paper);
+  color: var(--c-modal-a-lv-fg);
   font-family: var(--f-mono, 'Rajdhani');
   font-size: var(--text-14);
   font-weight: 700;
@@ -409,7 +409,7 @@
   border: 1px solid var(--gold-deep);
   padding: 0 var(--space-2-5);
   border-radius: 2px;
-  background: var(--bg-raised);
+  background: var(--c-modal-a-lv-bg);
   line-height: 26px;
   height: 26px;
   display: inline-flex;
@@ -435,7 +435,7 @@
   font-family: var(--f-mono, 'Rajdhani');
   font-weight: 700;
   background: var(--bg-raised);
-  color: var(--paper);
+  color: var(--c-modal-a-fg);
 }
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
   cursor: pointer;
@@ -449,8 +449,8 @@
   font-family: var(--f-display, 'Noto Serif JP');
   font-weight: 700;
   font-size: var(--text-md);
-  color: var(--paper);
-  background: var(--gold-tint) ;
+  color: var(--c-modal-a-kongfu-header-fg);
+  background: var(--c-modal-a-kongfu-header-bg);
   border: none;
   border-radius: 0;
   padding: var(--space-1-5) var(--space-2);
@@ -458,10 +458,10 @@
   margin-top: var(--space-1-5);
 }
 .wwm-cmp-modal-a .wwm-cmp-kongfu-select {
-  background: var(--gold-tint);
+  background: var(--c-modal-a-kongfu-select-bg);
   border: 1px solid var(--gold-deep);
   border-radius: 0;
-  color: var(--paper);
+  color: var(--c-modal-a-kongfu-select-fg);
   font-family: var(--f-display, 'Noto Serif JP');
   font-weight: 700;
   margin-bottom: var(--space-2);
@@ -473,7 +473,7 @@
   font-family: var(--f-display, 'Noto Serif JP');
   font-weight: 700;
   background: var(--c-modal-a-option-bg) ;
-  color: var(--paper) ;
+  color: var(--c-modal-a-option-fg);
 }
 .wwm-cmp-modal-a .wwm-cmp-stat-select option {
   font-size: var(--text-12);
@@ -482,11 +482,11 @@
 }
 .wwm-cmp-modal-a .wwm-cmp-set-header,
 .wwm-cmp-modal-a .wwm-cmp-set-select {
-  background: linear-gradient(90deg, var(--vermilion-bright-soft), transparent);
+  background: var(--c-modal-a-set-select-bg);
   border: none;
   border-radius: 0;
-  color: var(--vermilion-bright) ;
-  text-shadow: 0 0 6px var(--vermilion-bright-soft-mid);
+  color: var(--c-modal-a-set-fg);
+  text-shadow: var(--c-cmp-set-header-text-shadow);
   padding: var(--space-1-5) var(--space-2);
   margin-bottom: var(--space-2);
 }
@@ -509,25 +509,35 @@
   background: transparent ;
   box-shadow: none;
 }
-.wwm-cmp-modal-a .wwm-cmp-name,
-.wwm-cmp-modal-a .wwm-cmp-stat-select {
-  color: var(--paper);
+/* S2-e split: name は dark 側 token 化対象、 stat-select は対象外 → 分離 (base 側道連れ防止) */
+.wwm-cmp-modal-a .wwm-cmp-name {
+  color: var(--c-modal-a-name-fg);
 }
 .wwm-cmp-modal-a .wwm-cmp-stat-select {
-  background: var(--overlay-soft-mid);
+  color: var(--c-modal-a-fg);
+}
+.wwm-cmp-modal-a .wwm-cmp-stat-select {
+  background: var(--c-modal-a-stat-select-bg);
   border: 1px solid var(--ink-2);
   border-radius: 0;
   font-size: var(--text-sm);
 }
-.wwm-cmp-modal-a .wwm-cmp-val,
-.wwm-cmp-modal-a .wwm-cmp-val-input {
+/* S2-d: val (現有列 readonly) と val-input (新置列 input) で light 配色が異なる → rule 分離
+   (val = fg-emphasis 維持、 val-input = token swap 済) */
+.wwm-cmp-modal-a .wwm-cmp-val {
   font-family: var(--f-mono, 'Rajdhani');
   font-weight: 700;
-  color: var(--gold-bright) ;
+  color: var(--c-modal-a-val-fg);
   font-size: var(--text-md);
 }
 .wwm-cmp-modal-a .wwm-cmp-val-input {
-  background: var(--overlay-soft-mid);
+  font-family: var(--f-mono, 'Rajdhani');
+  font-weight: 700;
+  color: var(--c-modal-a-val-input-fg);
+  font-size: var(--text-md);
+}
+.wwm-cmp-modal-a .wwm-cmp-val-input {
+  background: var(--c-modal-a-stat-select-bg);
   border: 1px solid var(--ink-2);
   border-radius: 0;
 }
@@ -629,7 +639,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 }
 .wwm-cmp-modal-a .wwm-cmp-preview-value.pos { color: var(--jade-bright); text-shadow: 0 0 18px rgba(168,212,180,0.6) !important; }
 .wwm-cmp-modal-a .wwm-cmp-preview-value.neg { color: var(--vermilion); text-shadow: 0 0 18px var(--vermilion-bright-glow) !important; }
-.wwm-cmp-modal-a .wwm-cmp-preview-value.zero { color: var(--paper-mute); text-shadow: none !important; }
+.wwm-cmp-modal-a .wwm-cmp-preview-value.zero { color: var(--c-cmp-preview-zero-fg); text-shadow: none !important; }
 .wwm-cmp-delta-base {
   font-family: var(--f-mono, 'Rajdhani');
   font-size: var(--text-sm); color: var(--paper-mute);
@@ -643,7 +653,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: contain;
-  opacity: 0.1;
+  opacity: var(--c-cmp-modal-bg-icon-opacity);
   pointer-events: none;
   z-index: 0;
   filter: brightness(0) invert(1) drop-shadow(0 0 14px var(--gold-bright-mid));
@@ -677,10 +687,10 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-cmp-modal-a .wwm-cmp-grid { position: relative; z-index: 1; }
 /* col / affix-rows 透過化 (背景icon 透けさせる) */
 .wwm-cmp-modal-a .wwm-cmp-col {
-  background: var(--overlay-heavy);
+  background: var(--c-modal-a-col-bg);
 }
 .wwm-cmp-modal-a .wwm-cmp-rows {
-  background: var(--overlay-trace);
+  background: var(--c-modal-a-rows-bg);
 }
 /* ── ダーク: select border を subtle gold に統一 (gold-deep/ink-2 バラつき解消) + rows を暗inset で差別化 ── */
 /* ── ダーク 配色: 案B 黒檀朱 (近黒ebony + 朱主役・金従)。border系は現状維持 (col/rows/select 不変) ── */
@@ -714,13 +724,13 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   font-size: var(--text-18);
   font-weight: 900;
   letter-spacing: 0.18em;
-  color: var(--paper);
+  color: var(--c-modal-a-title-ja-fg);
 }
 .wwm-cmp-modal-a .wwm-cmp-title-en {
   font-family: var(--f-latin, 'Cinzel');
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--gold);
+  color: var(--c-cmp-title-en-fg);
   letter-spacing: 0.32em;
   margin-left: var(--space-1);
   align-self: flex-end;
@@ -744,9 +754,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   box-shadow: none;
 }
 .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
-  background:
-    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_cancel-9a52642a.png") center / 100% 100% no-repeat,
-    transparent;
+  background: var(--c-modal-a-btn-secondary-bg);
   border: 1px solid var(--paper-mute);
   border-radius: 0;
   color: var(--brown-1);
@@ -845,7 +853,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 }
 .wwm-cmp-kongfu-select {
   width: 100%;
-  background: var(--select-bg);
+  background: var(--c-cmp-stat-select-bg);
   border: 1px solid var(--accent);
   border-radius: 4px;
   color: var(--accent);
@@ -859,7 +867,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-cmp-col > .wwm-cmp-set-select,
 .wwm-cmp-col > .wwm-cmp-set-effect { position: relative; z-index: 1; }
 .wwm-cmp-set-header {
-  font-size: var(--text-sm); color: var(--gold-bright);
+  font-size: var(--text-sm); color: var(--c-cmp-set-header-fg);
   font-weight: var(--fw-bold);
   margin-bottom: var(--space-1-5);
   padding: var(--space-1) var(--space-1-5);
@@ -870,7 +878,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 }
 .wwm-cmp-set-select {
   width: 100%;
-  background: var(--select-bg);
+  background: var(--c-cmp-stat-select-bg);
   border: 1px solid var(--liupai-guyun);
   border-radius: 4px;
   color: var(--liupai-guyun);
@@ -925,7 +933,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   grid-template-columns: 1fr 20px 110px;
 }
 .wwm-cmp-stat-select {
-  background: var(--select-bg);
+  background: var(--c-cmp-stat-select-bg);
   border: 1px solid #444;
   border-radius: 4px;
   padding: var(--space-half) var(--space-1);
@@ -955,7 +963,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 }
 .wwm-num-input {
   width: 60px; padding: var(--space-half) var(--space-1-5);
-  background: var(--select-bg); color: inherit;
+  background: var(--c-cmp-stat-select-bg); color: inherit;
   border: 1px solid #444; border-radius: 4px;
   font-size: var(--text-md); text-align: right;
 }
@@ -999,7 +1007,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   background-repeat: no-repeat;
   background-position: calc(100% + 40px) calc(100% + 40px);
   background-size: 60%;
-  opacity: 0.18;
+  opacity: var(--c-modal-bg-icon-opacity);
   filter:
     brightness(0) invert(1)
     drop-shadow(0 0 10px var(--gold-bright-strong))
@@ -1222,7 +1230,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-note-cl-items li { position: relative; margin-bottom: 3px; padding-left: var(--space-1); }
 .wwm-note-cl-items li::before { content: '・'; position: absolute; left: -14px; color: var(--vermilion-note); font-weight: 900; }
 .wwm-note-cl-items li.wwm-note-cl-featured {
-  background: linear-gradient(90deg, var(--vermilion-soft), var(--vermilion-trace));
+  background: var(--c-note-cl-featured-bg);
   border-left: 3px solid var(--vermilion);
   padding: var(--space-2-5) var(--space-3);
   margin: 8px 0 12px -18px;

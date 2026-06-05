@@ -78,9 +78,9 @@ header.topbar::after {
   font-weight: var(--fw-black); font-size: var(--text-xl); letter-spacing: 0.12em;
   color: var(--paper); line-height: 1.1;
 }
-.title-block h1 .accent { color: var(--vermilion-bright); }
+.title-block h1 .accent { color: var(--c-h1-accent-fg); }
 .title-block p {
-  font-size: var(--text-sm); color: var(--paper-mute);
+  font-size: var(--text-sm); color: var(--c-h1-sub-fg);
   letter-spacing: 0.08em; margin-top: var(--space-1);
   text-transform: uppercase; font-family: var(--f-mono); font-weight: var(--fw-medium);
 }
@@ -92,7 +92,7 @@ header.topbar::after {
   writing-mode: vertical-rl;
   text-orientation: upright;
   font-size: var(--text-18); letter-spacing: 0.18em;
-  color: var(--gold-bright);
+  color: var(--c-fg-accent);
   padding: var(--space-half) var(--space-1);
   border-left: 2px solid var(--gold);
   border-right: 2px solid var(--gold);
@@ -103,11 +103,11 @@ header.topbar::after {
 .wwm-brand-en {
   font-family: var(--f-latin), serif;
   font-weight: var(--fw-extra); font-size: var(--text-20); letter-spacing: 0.22em;
-  color: var(--paper);
+  color: var(--c-brand-en-fg);
 }
 .wwm-brand-sub {
   font-family: var(--f-mono);
-  font-size: var(--text-sm); color: var(--gold);
+  font-size: var(--text-sm); color: var(--c-brand-sub-fg);
   letter-spacing: 0.3em; opacity: 0.85;
 }
 .wwm-brand-seal {
@@ -235,7 +235,7 @@ a.icon-btn { text-decoration: none; }
   font-family: var(--f-mono); font-weight: var(--fw-bold); font-size: var(--text-sm); letter-spacing: 0.12em;
 }
 .icon-btn.export-btn {
-  color: var(--vermilion-bright); border-color: var(--vermilion-strong);
+  color: var(--vermilion-bright); border-color: var(--c-icon-btn-export-btn-border);
   opacity: 0.55;
   cursor: not-allowed;
   position: relative;
@@ -266,7 +266,7 @@ a.icon-btn { text-decoration: none; }
 .preset-bar {
   display: flex; align-items: center; gap: var(--space-3);
   padding: var(--space-2) var(--space-3-5); margin-top: var(--space-2);
-  background: var(--surf-2);
+  background: var(--c-preset-bar-bg);
   border: 1px solid var(--ink-2);
   border-radius: 2px;
 }
@@ -284,7 +284,7 @@ a.icon-btn { text-decoration: none; }
 .hero:focus-visible {
   outline: 2px solid var(--gold-bright);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(240,210,138,0.18);
+  box-shadow: var(--c-focus-ring-shadow);
 }
 .hero:focus-visible { outline-offset: -2px; }
 
@@ -302,7 +302,7 @@ footer {
   font-family: var(--f-mono); font-size: var(--text-xs);
   color: var(--paper-mute); letter-spacing: 0.2em; text-transform: uppercase;
 }
-footer strong { color: var(--gold); }
+footer strong { color: var(--c-footer-strong-fg); }
 
 #toast {
   position: fixed; bottom: 28px; right: 28px;
@@ -414,9 +414,9 @@ footer strong { color: var(--gold); }
   width: 100%;
   box-sizing: border-box;
   padding: var(--space-2) var(--space-4);
-  background: var(--vermilion-soft);
+  background: var(--c-score-update-banner-bg);
   border-bottom: 1px solid var(--vermilion-strong);
-  color: #ffd9cc;
+  color: var(--c-score-update-banner-fg);
   font-size: var(--text-13, 13px);
   position: relative;
   z-index: 50;
@@ -459,9 +459,9 @@ footer strong { color: var(--gold); }
   width: 100%;
   box-sizing: border-box;
   padding: var(--space-2) var(--space-4);
-  background: rgba(60, 100, 180, 0.18);
+  background: var(--c-migration-banner-bg);
   border-bottom: 1px solid #4a78b8;
-  color: #cfe0f5;
+  color: var(--c-migration-banner-fg);
   font-size: var(--text-13, 13px);
   position: relative;
   z-index: 50;
@@ -470,11 +470,11 @@ footer strong { color: var(--gold); }
 .wwm-migration-icon { flex: 0 0 auto; font-size: var(--text-lg); }
 .wwm-migration-arrow { flex: 0 0 auto; font-size: var(--text-15); color: #7fb0e8; animation: wwm-banner-arrow-bounce 1.1s ease-in-out infinite; }
 .wwm-migration-msg { flex: 1 1 auto; line-height: 1.4; }
-.wwm-migration-msg strong { color: #a8d0ff; font-weight: 700; }
+.wwm-migration-msg strong { color: var(--c-migration-strong-fg); font-weight: 700; }
 .wwm-migration-btn {
   flex: 0 0 auto;
   padding: var(--space-1-5) var(--space-4);
-  background: #4a78b8;
+  background: var(--c-migration-btn-bg);
   color: #fff;
   border: none;
   border-radius: 4px;
