@@ -689,6 +689,14 @@ html[data-theme="light"] .wwm-xinfa-slot {
   background-blend-mode: normal, difference, normal;
 }
 
+/* hover 朱化 復活 — light の non-hover override (specificity 0,2,1) が dark の :hover (0,2,0) に勝ってしまうため、
+   light でも :hover で border accent (朱) を確実に出すよう同 specificity tier で再宣言 */
+html[data-theme="light"] .wwm-xinfa-slot:hover,
+html[data-theme="light"] .wwm-gear-grid .wwm-equip-slot[data-slot]:hover {
+  border-color: var(--vermilion-bright);
+  box-shadow: 0 4px 14px rgba(232,81,58,0.28);
+}
+
 html[data-theme="light"] {
   --chart-graze: #8b8170;
   --chart-normal: #c8bda6;
