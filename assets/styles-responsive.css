@@ -234,8 +234,8 @@
   /* root scroll 抑止 (白scrollbar削除)、 wwm-app-body 内部のみscroll (金色scrollbar) */
   html, body, body.wwm-layout-active {
     overflow: hidden !important;
-    height: 100vh !important;
-    height: 100dvh !important;
+    height: 100vh;
+    height: 100dvh;
   }
   /* mobile時 SVG feTurbulence noise overlay (mix-blend-mode: overlay) 全削除。
      これが「砂フィルタが装備カード上に被ってる」 視覚効果の正体。 hero/格析/footer の
@@ -278,7 +278,7 @@
     overflow: hidden;
   }
   .wwm-mobile-topbar .wwm-brand-vert {
-    font-size: var(--text-md) !important;
+    font-size: var(--text-md);
     letter-spacing: 0.14em;
     padding: 1px 2px;
     border-left-width: 1px !important;
@@ -291,14 +291,14 @@
     overflow: hidden;
   }
   .wwm-mobile-topbar .wwm-brand-en {
-    font-size: var(--text-sm) !important;
+    font-size: var(--text-sm);
     letter-spacing: 0.14em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .wwm-mobile-topbar .wwm-brand-sub {
-    font-size: var(--text-2xs) !important;
+    font-size: var(--text-2xs);
     letter-spacing: 0.18em;
     white-space: nowrap;
     overflow: hidden;
@@ -306,7 +306,7 @@
   }
   .wwm-mobile-topbar .wwm-brand-seal {
     width: 28px; height: 28px;
-    font-size: var(--text-lg) !important;
+    font-size: var(--text-lg);
     border-width: 2px;
     box-shadow: 0 0 10px var(--vermilion-strong);
     flex: 0 0 auto;
@@ -474,11 +474,11 @@
   .preset-name-input { display: none; }
   .preset-btn {
     min-height: 26px;
-    padding: 1px 4px !important;
-    font-size: 0 !important;  /* 元テキスト 非表示、 ::before でアイコン */
+    padding: 1px 4px;
+    font-size: 0;  /* 元テキスト 非表示、 ::before でアイコン */
     letter-spacing: 0;
     flex: 0 0 auto;
-    min-width: 0 !important;
+    min-width: 0;
   }
   .preset-save::before { content: '💾'; font-size: var(--text-md); }
   .preset-load::before { content: '📂'; font-size: var(--text-md); }
@@ -499,7 +499,7 @@
     flex-direction: row; /* L1365 column 解除 */
   }
   .preset-bar { gap: 3px; padding: var(--space-1) var(--space-1) !important; flex-direction: row; }
-  .preset-btn { padding: 1px 3px !important; }
+  .preset-btn { padding: 1px 3px; }
   /* 弱点バッジも横幅節約 */
   .wwm-diag-badge {
     min-height: 26px;
@@ -518,15 +518,15 @@
     grid-template-rows: none;
     grid-template-areas: none;
     gap: 8px;
-    min-height: 0 !important;
-    height: auto !important;
+    min-height: 0;
+    height: auto;
     overflow: hidden !important;       /* 装飾はみ出し抑止 ( hero内に「斬」+ink-stroke 残し ) */
     flex: 0 0 auto;
-    min-height: 90px !important;       /* 折りたたみ時 最小確保 */
+    min-height: 90px;       /* 折りたたみ時 最小確保 */
   }
   /* hero拡張時 = 自然 contents 高さで fit (余白なし、 donut + ラベル ピッタリ) */
   section.hero.hero-wuxia.hero--expanded {
-    min-height: 0 !important;
+    min-height: 0;
   }
   .hero-left {
     gap: 4px !important;
@@ -579,7 +579,7 @@
     align-items: center !important;
     justify-content: center !important;
     gap: 3px !important;
-    font-size: var(--text-xs) !important;
+    font-size: var(--text-xs);
     margin: 0 !important;
     padding: 0;
     align-self: end !important;
@@ -587,7 +587,7 @@
   }
   .hero-next-inline[hidden] { display: none !important; }
   .hero-next-label { font-size: var(--text-xs) !important; letter-spacing: 0.08em !important; padding: 0 !important; color: var(--paper-mute) !important; }
-  .hero-next-row { font-size: var(--text-sm) !important; display: inline-flex !important; align-items: center !important; gap: 2px !important; }
+  .hero-next-row { font-size: var(--text-sm); display: inline-flex !important; align-items: center !important; gap: 2px !important; }
   .hero-next-val { font-size: var(--text-md) !important; font-weight: var(--fw-bold) !important; }
 
   /* hero 新layout: 上半=情報+donut (Tier右に小)、 下半=tap時 内訳1行 */
@@ -617,7 +617,7 @@
     transform: translate(-50%, -50%);
   }
   .hero-right .luopan-inner svg { width: 100%; height: 100%; }
-  .hero-right .luopan-center-label { font-size: var(--text-xs) !important; }
+  .hero-right .luopan-center-label { font-size: var(--text-xs); }
   /* 朱色 筆 SVG 削除 */
   .hero-wuxia .ink-stroke { display: none; }
   /* judge-list: default hidden、 hero--expanded 時 hero下に 1行 横並び (wrap可) */
@@ -636,7 +636,7 @@
     display: inline-flex;
     align-items: center;
     gap: 3px;
-    font-size: var(--text-sm) !important;
+    font-size: var(--text-sm);
     margin: 0;
     padding: 0;
     white-space: nowrap;
@@ -1017,7 +1017,7 @@
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-card h3 {
     white-space: nowrap;
-    font-size: var(--text-12) !important;
+    font-size: var(--text-12);
     letter-spacing: 0.12em;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-controls {
@@ -1027,15 +1027,15 @@
     gap: 4px 8px;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-ratio-label {
-    font-size: var(--text-sm) !important;
+    font-size: var(--text-sm);
     white-space: nowrap;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-ratio-label input[type="range"] {
-    width: 90px !important;
+    width: 90px;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-sort-btn,
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-btn {
-    font-size: var(--text-sm) !important;
+    font-size: var(--text-sm);
     padding: var(--space-half) var(--space-1-5);
   }
   /* OPT row: 2行 grid (pos|slot|delta|check 上行 / change 下行全幅) */
@@ -1046,16 +1046,16 @@
       "change change change change change";
     gap: 2px 6px;
     padding: var(--space-1-5) var(--space-2);
-    font-size: var(--text-sm) !important;
+    font-size: var(--text-sm);
   }
-  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-pos { grid-area: pos; font-size: var(--text-sm) !important; }
-  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-slot { grid-area: slot; font-size: var(--text-sm) !important; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; }
-  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-delta { grid-area: delta; font-size: var(--text-12) !important; }
-  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-tierup { grid-area: tier; font-size: var(--text-xs) !important; padding: 0 var(--space-1); }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-pos { grid-area: pos; font-size: var(--text-sm); }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-slot { grid-area: slot; font-size: var(--text-sm); white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-delta { grid-area: delta; font-size: var(--text-12); }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-tierup { grid-area: tier; font-size: var(--text-xs); padding: 0 var(--space-1); }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-check-wrap { grid-area: check; padding: 0 var(--space-half); }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-change {
     grid-area: change;
-    font-size: var(--text-xs) !important;
+    font-size: var(--text-xs);
     display: flex;
     flex-wrap: wrap;
     align-items: center;

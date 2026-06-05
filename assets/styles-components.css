@@ -560,12 +560,12 @@ html.wwm-shared-build-mode #exportBtn {
 /* light mini-hero: 総合武力/武格指数 の label/値を濃色化 (cream上で gold/muted が低コントラストのため) */
 /* mini-hero card 内の sb-top: sticky/border 解除 */
 .wwm-sb-mini-hero-card .wwm-sb-top {
-  position: relative !important;
+  position: relative;
   top: auto;
   background: none !important;
-  border-bottom: none !important;
+  border-bottom: none;
   margin-bottom: 0;
-  padding: 0 !important;
+  padding: 0;
   z-index: 1;
 }
 /* sections wrapper */
@@ -645,10 +645,10 @@ html.wwm-view-sidebar body,
 html.wwm-view-sidebar body.wwm-layout-active {
   background-color: rgba(var(--overlay-bg-rgb), var(--overlay-bg-alpha)) !important;
   background-image: none !important;
-  height: 100vh !important;
+  height: 100vh;
   overflow: hidden !important;
   padding: 0 !important;
-  margin: 0 !important;
+  margin: 0;
 }
 html.wwm-view-sidebar .sticky-header,
 html.wwm-view-sidebar .wwm-app-body .container,
@@ -747,7 +747,7 @@ html.wwm-view-sidebar .wwm-sb-section-title {
 html, body { height: 100%; margin: 0; overflow: hidden; }
 body.wwm-layout-active {
   margin: 0;
-  height: 100vh !important;
+  height: 100vh;
   overflow-x: auto; /* window < 1010 で .wwm-app-body 横スクロール許可 */
   overflow-y: hidden;
   box-sizing: border-box;
@@ -2389,8 +2389,8 @@ body.wwm-layout-active .wwm-footer {
   background: transparent;
   border: none;
   color: var(--paper) !important;
-  font-family: 'Ma Shan Zheng', 'Noto Serif JP', serif !important;
-  font-size: var(--text-15) !important;
+  font-family: 'Ma Shan Zheng', 'Noto Serif JP', serif;
+  font-size: var(--text-15);
   letter-spacing: 0.18em;
   cursor: pointer;
   position: relative;

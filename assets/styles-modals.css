@@ -307,9 +307,9 @@
   padding-top: var(--space-3);
 }
 .wwm-cmp-modal-a .wwm-cmp-preview-value {
-  font-family: var(--f-latin, 'Cinzel') !important;
-  font-size: var(--text-xl) !important;
-  font-weight: 900 !important;
+  font-family: var(--f-latin, 'Cinzel');
+  font-size: var(--text-xl);
+  font-weight: 900;
   letter-spacing: 0.04em;
 }
 .wwm-cmp-modal-a .wwm-cmp-preview-value.pos {
@@ -375,9 +375,9 @@
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv,
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
   color: var(--paper) !important;
-  font-family: var(--f-mono, 'Rajdhani') !important;
-  font-size: var(--text-14) !important;
-  font-weight: 700 !important;
+  font-family: var(--f-mono, 'Rajdhani');
+  font-size: var(--text-14);
+  font-weight: 700;
   letter-spacing: 0.08em;
   border: 1px solid var(--gold-deep);
   padding: 0 var(--space-2-5);
@@ -404,9 +404,9 @@
   cursor: pointer;
 }
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select option {
-  font-size: var(--text-14) !important;
-  font-family: var(--f-mono, 'Rajdhani') !important;
-  font-weight: 700 !important;
+  font-size: var(--text-14);
+  font-family: var(--f-mono, 'Rajdhani');
+  font-weight: 700;
   background: var(--bg-raised) !important;
   color: var(--paper) !important;
 }
@@ -419,9 +419,9 @@
 .wwm-cmp-modal-a .wwm-cmp-current .wwm-cmp-title { color: var(--vermilion) !important; }
 .wwm-cmp-modal-a .wwm-cmp-new     .wwm-cmp-title { color: var(--jade-bright) !important; }
 .wwm-cmp-modal-a .wwm-cmp-kongfu-header {
-  font-family: var(--f-display, 'Noto Serif JP') !important;
-  font-weight: 700 !important;
-  font-size: var(--text-md) !important;
+  font-family: var(--f-display, 'Noto Serif JP');
+  font-weight: 700;
+  font-size: var(--text-md);
   color: var(--paper) !important;
   background: var(--gold-tint) !important;
   border: none;
@@ -435,23 +435,23 @@
   border: 1px solid var(--gold-deep);
   border-radius: 0;
   color: var(--paper) !important;
-  font-family: var(--f-display, 'Noto Serif JP') !important;
-  font-weight: 700 !important;
+  font-family: var(--f-display, 'Noto Serif JP');
+  font-weight: 700;
   margin-bottom: var(--space-2);
   margin-top: var(--space-1-5);
 }
 /* select内 option を統一 (paper bg + var(--bg-raised) / hover青) */
 .wwm-cmp-modal-a select option {
-  font-size: var(--text-md) !important;
-  font-family: var(--f-display, 'Noto Serif JP') !important;
-  font-weight: 700 !important;
+  font-size: var(--text-md);
+  font-family: var(--f-display, 'Noto Serif JP');
+  font-weight: 700;
   background: var(--c-modal-a-option-bg) !important;
   color: var(--paper) !important;
 }
 .wwm-cmp-modal-a .wwm-cmp-stat-select option {
-  font-size: var(--text-12) !important;
-  font-family: var(--f-sans, 'Noto Sans JP') !important;
-  font-weight: 600 !important;
+  font-size: var(--text-12);
+  font-family: var(--f-sans, 'Noto Sans JP');
+  font-weight: 600;
 }
 .wwm-cmp-modal-a .wwm-cmp-set-header,
 .wwm-cmp-modal-a .wwm-cmp-set-select {
@@ -478,7 +478,7 @@
   padding: var(--space-1) var(--space-1-5);
   border: none;
   border-bottom: 1px dashed var(--gold-faint);
-  font-size: var(--text-12) !important;
+  font-size: var(--text-12);
   background: transparent !important;
   box-shadow: none;
 }
@@ -490,14 +490,14 @@
   background: var(--overlay-soft-mid);
   border: 1px solid var(--ink-2);
   border-radius: 0;
-  font-size: var(--text-sm) !important;
+  font-size: var(--text-sm);
 }
 .wwm-cmp-modal-a .wwm-cmp-val,
 .wwm-cmp-modal-a .wwm-cmp-val-input {
-  font-family: var(--f-mono, 'Rajdhani') !important;
-  font-weight: 700 !important;
+  font-family: var(--f-mono, 'Rajdhani');
+  font-weight: 700;
   color: var(--gold-bright) !important;
-  font-size: var(--text-md) !important;
+  font-size: var(--text-md);
 }
 .wwm-cmp-modal-a .wwm-cmp-val-input {
   background: var(--overlay-soft-mid);
@@ -507,8 +507,8 @@
 .wwm-cmp-modal-a .wwm-cmp-pct,
 .wwm-cmp-modal-a .wwm-cmp-row .wwm-cmp-pct,
 .wwm-cmp-modal-a .wwm-cmp-ratio {
-  font-family: var(--f-mono, 'Rajdhani') !important;
-  font-size: var(--text-xs) !important;
+  font-family: var(--f-mono, 'Rajdhani');
+  font-size: var(--text-xs);
   padding: 1px 3px;
   border-radius: 2px;
   background: rgba(168,212,180,0.18) !important;
@@ -548,7 +548,7 @@
   background-image: none !important;
   color: #ffffff !important;
   border-color: rgba(255,255,255,0.65) !important;
-  font-weight: 700 !important;
+  font-weight: 700;
   text-shadow: 0 0 4px var(--overlay-mid-2), 0 1px 0 var(--overlay-soft-mid);
   background-color: hsl(0, 80%, 55%);
   box-shadow: 0 0 9px hsla(0, 90%, 60%, 0.55), inset 0 1px 0 var(--hover-mid);
@@ -606,7 +606,7 @@
   letter-spacing: 0.32em;
 }
 .wwm-cmp-modal-a .wwm-cmp-preview-value {
-  font-size: var(--text-2xl) !important;
+  font-size: var(--text-2xl);
   line-height: 1;
 }
 .wwm-cmp-modal-a .wwm-cmp-preview-value.pos { color: var(--jade-bright) !important; text-shadow: 0 0 18px rgba(168,212,180,0.6) !important; }
@@ -702,7 +702,7 @@
   align-self: flex-end;
   padding-bottom: var(--space-half);
 }
-.wwm-cmp-modal-a .wwm-modal-header h2 { align-items: flex-end !important; }
+.wwm-cmp-modal-a .wwm-modal-header h2 { align-items: flex-end; }
 /* 背景の赤いradial-gradient を消す */
 .wwm-cmp-modal-a {
   background: linear-gradient(180deg, var(--c-surf-warm-1), var(--c-surf-warm-2));
@@ -754,20 +754,20 @@
 .wwm-cmp-modal-a .wwm-cmp-stat-select {
   width: 100%;
   padding: var(--space-half) var(--space-1);
-  font-size: var(--text-sm) !important;
+  font-size: var(--text-sm);
 }
 .wwm-cmp-modal-a .wwm-cmp-val-input {
   width: 100% !important;
   padding: var(--space-half) var(--space-1) !important;
-  font-size: var(--text-12) !important;
+  font-size: var(--text-12);
   text-align: right;
 }
 .wwm-cmp-modal-a .wwm-cmp-val {
   text-align: right;
-  font-size: var(--text-md) !important;
+  font-size: var(--text-md);
 }
 .wwm-cmp-modal-a .wwm-cmp-pct {
-  font-size: var(--text-xs) !important;
+  font-size: var(--text-xs);
   padding: 1px 4px;
   text-align: center;
 }
@@ -778,7 +778,7 @@
 .wwm-cmp-modal-a .wwm-cmp-set-select {
   padding: 5px 8px;
   margin-bottom: var(--space-1-5);
-  font-size: var(--text-12) !important;
+  font-size: var(--text-12);
 }
 
 .wwm-cmp-grid {

@@ -306,13 +306,19 @@ function buildInlineIndex(jsSources) {
   };
 
   // selector 文字列 (comma list 可) → subject token 群。
-  // class/id を持たない部分 (element/'*') は '__universal__' (全 selector と競合扱い)
+  // class/id 無し部分は element 名 token '%tag' (同 element 名 subject の selector とのみ競合)、
+  // 真の '*' のみ '__universal__'
   function selectorArgTokens(selArg) {
     const out = [];
     for (const part of selArg.split(',')) {
-      const t = subjectTokens(part.trim());
-      if (t.length) out.push(...t);
-      else out.push('__universal__');
+      const p = part.trim();
+      const t = subjectTokens(p);
+      if (t.length) { out.push(...t); continue; }
+      const safe = p.replace(/\[[^\]]*\]/g, '[]');
+      const parts = safe.split(/\s*[>+~]\s*|\s+/).filter(Boolean);
+      const last = (parts[parts.length - 1] || safe).replace(/::?[\w-]+(\([^)]*\))?/g, '');
+      const em = last.match(/^[a-zA-Z][\w-]*/);
+      out.push(em ? '%' + em[0].toLowerCase() : '__universal__');
     }
     return out;
   }
@@ -331,6 +337,11 @@ function buildInlineIndex(jsSources) {
       let t;
       if ((t = rhs.match(/getElementById\(\s*['"]([\w-]+)['"]/))) defs.push({ idx: m.index, tokens: ['#' + t[1]] });
       else if ((t = rhs.match(/(?:querySelector(?:All)?|closest)\(\s*['"]([^'"]+)['"]/))) defs.push({ idx: m.index, tokens: selectorArgTokens(t[1]) });
+      else if ((t = rhs.match(/^([\w$]+)\.cloneNode\(/))) {
+        // clone = X.cloneNode(...) → X の token を継承 (subtree 全体は X subject で代表)
+        const inner = resolveReceiver(t[1], src, m.index);
+        defs.push({ idx: m.index, tokens: inner === null ? null : inner });
+      }
       else if (/document\.createElement\(/.test(rhs)) {
         // createElement → 直後の NAME.className/id/classList.add から token 収集
         const after = src.slice(m.index, m.index + 600);
@@ -365,8 +376,9 @@ function buildInlineIndex(jsSources) {
 
   for (const { file, src } of jsSources) {
     // 1. template/HTML <tag ... style="..."> — tag 単位で token と prop を対応付け
-    for (const m of src.matchAll(/<\w+([^<>]{0,500}?)>/g)) {
-      const attrs = m[1];
+    for (const m of src.matchAll(/<(\w+)([^<>]{0,500}?)>/g)) {
+      const tagName = m[1].toLowerCase();
+      const attrs = m[2];
       const styleM = attrs.match(/style="([^"]{1,400})"|style='([^']{1,400})'/);
       if (!styleM) continue;
       const body = styleM[1] || styleM[2];
@@ -380,10 +392,9 @@ function buildInlineIndex(jsSources) {
       const props = [...body.matchAll(/(?:^|;)\s*([a-z-]+)\s*:/g)].map(p => p[1]);
       if (tokens.length === 0) {
         // 無名 tag (class/id なし) — class/id selector はこの element に当たらない。
-        // pure element/universal selector (subject token なし) のみ conservative 競合
-        // → '__anon__' marker (inlineTokens.size>0 経路でだけ効く)
-        if (props.length === 0) addElem('*', ['__anon__']);
-        for (const p of props) addElem(propGroup(p), ['__anon__']);
+        // element 名 token '%tag' で登録 (同 element 名 subject の selector とのみ競合)
+        if (props.length === 0) addElem('*', ['%' + tagName]);
+        for (const p of props) addElem(propGroup(p), ['%' + tagName]);
       } else {
         if (props.length === 0) addElem('*', tokens); // style="${...}" 全動的
         for (const p of props) addElem(propGroup(p), tokens);
@@ -609,21 +620,33 @@ const coMap = buildCoOccurrence(jsSources);
 //   inline 書込先 element token と交差 → 競合。
 //   subject に class/id が無い selector は判定不能 → 当該 group の inline 書込が
 //   存在するだけで conservative 競合。 wildcard file 分は旧 file 粒度 check fallback。
+// selector subject の element 名 ('div' 等)。 明示 element が無ければ null
+function subjectElementName(sel) {
+  const safe = sel.replace(/\[[^\]]*\]/g, '[]');
+  const parts = safe.split(/\s*[>+~]\s*|\s+/).filter(Boolean);
+  const last = (parts[parts.length - 1] || safe).replace(/::?[\w-]+(\([^)]*\))?/g, '');
+  const em = last.match(/^[a-zA-Z][\w-]*/);
+  return em ? em[0].toLowerCase() : null;
+}
+
 function inlineConflictV3(d) {
   const g = propGroup(d.prop);
   const inlineTokens = new Set([...(elemInline.get(g) || []), ...(elemInline.get('*') || [])]);
-  // '__universal__' = querySelectorAll('*') 等への inline 書込 → 全 selector と競合
-  if (inlineTokens.has('__universal__')) return true;
+  // '__universal__' = querySelectorAll('*') への inline 書込 → 全 selector と競合
+  if (inlineTokens.has('__universal__')) return `universal(${g})`;
+  // subject の明示 element 名 vs '%tag' token (class 有無に関わらず常時 check)
+  const elName = subjectElementName(d.selector);
+  if (elName && inlineTokens.has('%' + elName)) return `elem(%${elName}|${g})`;
   const subj = subjectTokens(d.selector);
   if (subj.length === 0) {
-    if (inlineTokens.size > 0) return true;
+    if (!elName && inlineTokens.size > 0) return `no-subject(${g})`; // '*' / [attr] のみ subject
   } else {
     const cand = new Set(subj);
     for (const t of subj) for (const co of (coMap.get(t) || [])) cand.add(co);
-    for (const t of cand) if (inlineTokens.has(t)) return true;
+    for (const t of cand) if (inlineTokens.has(t)) return `token(${t}|${g})`;
   }
   const wfiles = new Set([...(fileWildcard.get(g) || []), ...(fileWildcard.get('*') || [])]);
-  if (wfiles.size > 0 && selectorClassesInJs(d.selector, jsSrcByFile, wfiles)) return true;
+  if (wfiles.size > 0 && selectorClassesInJs(d.selector, jsSrcByFile, wfiles)) return `wildcard(${[...wfiles].join(',')}|${g})`;
   return false;
 }
 
@@ -776,7 +799,7 @@ if (process.argv.includes('--diag')) {
   const diag = [];
   for (const p of C) {
     const reasons = [];
-    if (inlineMap.get(p)) reasons.push({ type: 'inline' });
+    if (inlineMap.get(p)) reasons.push({ type: 'inline', cause: String(inlineMap.get(p)) });
     for (const q of compMap.get(p)) {
       if (q.file === p.file && q.line === p.line && q.prop === p.prop) continue;
       if (!themeOverlap(p, q) || !mediaOverlap(p.media, q.media)) continue;
@@ -801,7 +824,7 @@ if (process.argv.includes('--diag')) {
   for (const d of diag) {
     for (const r of d.reasons) {
       let key;
-      if (r.type === 'inline') key = `inline | ${d.file}`;
+      if (r.type === 'inline') key = `inline ${r.cause} | ${d.file}`;
       else if (r.type === 'nat-loss') {
         const rel = r.specQ > (r.specP ?? 0) ? 'spec負け' : '後順負け';
         key = `nat-loss(${rel}) | ${d.file} ← ${r.qFile}`;

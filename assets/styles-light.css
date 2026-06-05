@@ -883,7 +883,7 @@ html[data-theme="light"] .hero-wuxia .luopan-ticks line {
 }
 
 html[data-theme="light"] .hero-wuxia .luopan-ticks line[stroke-width="1.5"] {
-  stroke: var(--vermilion-deep) !important;
+  stroke: var(--vermilion-deep);
   stroke-opacity: 1;
 }
 
