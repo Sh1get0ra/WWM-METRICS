@@ -1,0 +1,136 @@
+@layer obs {
+
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     OBS OVERLAY MODE (?view=sidebar) — mode 軸分離 file (2026-06-05 @layer Step 1)
+     link 順 = 最終 (light の後)。 OBS mode rule は theme (dark/light) ×
+     viewport (responsive) × JS state の全軸に「mode が最優先」 で勝つ必要があり、
+     cascade 最終 file に置くことで !important 依存を排除する。
+     旧所在: styles-components.css SECTION 14 / styles-responsive.css OBS block /
+             styles-base.css・styles-modals.css banner hide
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+
+/* ── OBS overlay モード (?view=sidebar) ─────────────────────────── */
+html.wwm-view-sidebar {
+  --overlay-bg-alpha: 0;
+  --overlay-bg-rgb: 10,10,10;
+  background: transparent;
+  background-color: transparent;
+}
+html.wwm-view-sidebar body,
+html.wwm-view-sidebar body.wwm-layout-active {
+  /* K: OBS browser source はデフォルトで body { background-color: rgba(0,0,0,0) } を
+     unlayered 注入する。 layered normal は unlayered に負けるため !important 必須
+     (important では layered > unlayered に逆転)。 strip すると OBS の透明度
+     (?op= / ?bg=) が死ぬ — 2026-06-05 Step 1 で strip して実際に発生した事故 */
+  background-color: rgba(var(--overlay-bg-rgb), var(--overlay-bg-alpha)) !important;
+  background-image: none;
+  height: 100vh;  /* fallback: OBS 旧 Chromium (dvh 非対応) 用 */
+  height: 100dvh; /* dvh 対応 browser: responsive.css mobile rule と同値化 (@layer flip 解消) */
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+html.wwm-view-sidebar .wwm-sidebar-test {
+  position: relative;
+  top: auto;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  background: transparent;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid var(--accent-mid);
+  border-left: 3px solid var(--vermilion);
+}
+/* sb-top: sticky 上部 (avatar+総合武力) のみユーザー alpha で背景 */
+html.wwm-view-sidebar .wwm-sb-top {
+  background: transparent;
+  position: relative;
+  top: auto;
+}
+/* OBS view: 背景は mini-hero-card 側に持たせて朱墨ink維持 */
+html.wwm-view-sidebar .wwm-sb-mini-hero-card {
+  background-color: rgba(var(--overlay-bg-rgb), var(--overlay-bg-alpha));
+  background-image:
+    radial-gradient(ellipse at top right, var(--gold-bright-faint), transparent 55%);
+}
+/* overlay モード: IMPORT button / 透明度 slider 非表示 */
+html.wwm-view-sidebar .wwm-sb-import-btn,
+html.wwm-view-sidebar .wwm-overlay-ctrl {
+  display: none;
+}
+/* overlay モード: 文字色 / ラベル色 カスタマイズ */
+html.wwm-view-sidebar .wwm-sb-label,
+html.wwm-view-sidebar .wwm-sb-charname,
+html.wwm-view-sidebar .wwm-sb-totalmartial,
+html.wwm-view-sidebar .wwm-stat-name,
+html.wwm-view-sidebar .wwm-sb-sub { color: var(--overlay-text-1) !important; }
+html.wwm-view-sidebar .wwm-sb-value,
+html.wwm-view-sidebar .wwm-sb-totalmartial b,
+html.wwm-view-sidebar .wwm-stat-val { color: var(--overlay-text-2) !important; }
+html.wwm-view-sidebar .wwm-sb-section-title,
+html.wwm-view-sidebar .wwm-sb-header-value { color: var(--overlay-accent); }
+/* OBS view: rest 背景は overlay透明前提 (濃帯化防止) */
+html.wwm-view-sidebar .wwm-sb-rest {
+  background: transparent;
+  border-color: transparent;
+}
+/* OBS view: section title背景を URL param --overlay-label-bg で制御 */
+html.wwm-view-sidebar .wwm-sb-section-title {
+  background-color: var(--overlay-label-bg, var(--accent));
+}
+/* 透明度 slider (右上 fixed) — OBS 機能セット (通常 view で表示、 OBS view で hidden) */
+.wwm-overlay-ctrl {
+  position: fixed; top: 8px; right: 8px;
+  z-index: var(--z-tooltip);
+  background: var(--overlay-heavy);
+  border: 1px solid var(--gold-deep);
+  border-radius: 3px;
+  padding: var(--space-1-5) var(--space-2-5);
+  font-family: var(--f-mono); font-size: var(--text-sm);
+  color: var(--gold-bright);
+  display: flex; align-items: center; gap: var(--space-2);
+  opacity: 0.25;
+  transition: opacity 0.2s;
+}
+.wwm-overlay-ctrl:hover { opacity: 1; }
+.wwm-overlay-ctrl input[type=range] {
+  width: 100px; accent-color: var(--gold);
+}
+
+/* ── OBS × mobile 文脈交差 (旧 responsive.css OBS block) ─────────── */
+@media (max-width: 480px) {
+  /* mobile @media で hide される sidebar / app-body を強制復帰 */
+  html.wwm-view-sidebar body.wwm-layout-active .wwm-sidebar-test {
+    display: block;
+    position: relative;
+    top: auto;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+  }
+  /* mobile @media で hidden になる hero / 装備/心法 panel / 各種 mobile UI を OBS view では 全 hide */
+  html.wwm-view-sidebar section.hero.hero-wuxia,
+  html.wwm-view-sidebar .hero,
+  html.wwm-view-sidebar .hero-wuxia,
+  html.wwm-view-sidebar .ink-stroke,
+  html.wwm-view-sidebar body.wwm-layout-active .wwm-mobile-topbar,
+  html.wwm-view-sidebar .wwm-mobile-top-reset,
+  html.wwm-view-sidebar .wwm-mobile-hero-reset,
+  html.wwm-view-sidebar .wwm-mobile-anlz-btn,
+  html.wwm-view-sidebar .wwm-mobile-drawer,
+  html.wwm-view-sidebar .wwm-mobile-drawer-backdrop,
+  html.wwm-view-sidebar body.wwm-layout-active .wwm-mobile-stat-fab,
+  html.wwm-view-sidebar .wwm-mobile-stat-overlay-backdrop,
+  html.wwm-view-sidebar .wwm-mobile-stat-overlay,
+  html.wwm-view-sidebar .wwm-mobile-anlz-overlay-backdrop,
+  html.wwm-view-sidebar .wwm-mobile-anlz-overlay {
+    display: none;
+  }
+}
+
+/* ── OBS view: バナー類 常時非表示 (旧 base.css / modals.css) ─────── */
+html.wwm-view-sidebar .wwm-migration-banner { display: none; }
+html.wwm-view-sidebar .wwm-score-update-banner { display: none; }
+
+} /* end @layer obs */

@@ -1,3 +1,9 @@
+/* @layer 宣言順 = cascade 優先順 (後勝ち)。 layer 間は宣言順 > specificity。
+   本宣言は全 CSS の先頭 (tokens.css = 最初に読まれる file) に置くこと */
+@layer tokens, animations, base, components, modals, responsive, dark, light, obs;
+
+@layer tokens {
+
 /* ╔═══════════════════════════════════════════════════════════════════╗
      DESIGN TOKENS — WWM DMG CALC
      Phase 5.3 後 styles.css から切出 (Tier 3 Step 1)
@@ -208,3 +214,5 @@
   --safe-left:   env(safe-area-inset-left, 0px);
   --safe-right:  env(safe-area-inset-right, 0px);
 }
+
+} /* end @layer tokens */

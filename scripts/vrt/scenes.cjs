@@ -42,6 +42,23 @@ async function gotoAnlzTab(page, ctx, tab) {
   if (ctx.isMobile) await openMobileAnlz(page);
   await page.click(`[data-analysis-tab="${tab}"]`);
   await page.waitForTimeout(300);
+  // bgicon の svg load race 対策 (2026-06-05 発覚): bg-image swap 時、 新 svg の
+  // load 完了まで browser は旧 image を表示し続ける → 前 tab の icon が焼き込まれる。
+  // Image() は Chromium の image cache を共有 → onload 後 RAF×2 で paint 反映を待つ
+  await page.evaluate(async () => {
+    const el = document.querySelector('.wwm-anlz-bgicon');
+    if (el) {
+      const m = getComputedStyle(el).backgroundImage.match(/url\("([^"]+)"\)/);
+      if (m) await new Promise(res => {
+        const im = new Image();
+        im.onload = im.onerror = res;
+        im.src = m[1];
+        if (im.complete) res();
+      });
+    }
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+  });
+  await page.waitForTimeout(200);
 }
 
 // modal scene 前の cleanup: 開いてる modal/overlay 全部閉じる

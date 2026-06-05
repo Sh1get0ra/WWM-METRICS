@@ -1,3 +1,5 @@
+@layer base {
+
 /* ╔═══════════════════════════════════════════════════════════════════╗
      BASE — body / header / footer / toast / a11y / utilities / banner / hint — 集約 (Tier 3 Step 5)
      styles.css から切出。 cascade: tokens → animations → base → styles → modals → responsive → dark → light
@@ -484,7 +486,7 @@ footer strong { color: var(--gold); }
   transition: filter .15s;
 }
 .wwm-migration-btn:hover { filter: brightness(1.15); }
-html.wwm-view-sidebar .wwm-migration-banner { display: none !important; }
+/* OBS view banner hide は styles-obs.css へ移動済 (2026-06-05 @layer Step 1) */
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
      SECTION 39 — A11Y :focus-visible (global)
@@ -499,3 +501,5 @@ html.wwm-view-sidebar .wwm-migration-banner { display: none !important; }
   outline-offset: 2px;
 }
 
+
+} /* end @layer base */
