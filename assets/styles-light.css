@@ -28,10 +28,15 @@ html[data-theme="light"] .wwm-sb-tier-badge.tier-S {
   animation: tier-s-pulse-light-mini 2.2s ease-in-out infinite !important;
 }
 
+/* S2-d split: safe 組 (lang/preset) と unsafe 組 (icon-btn hover 競合 / hero box-shadow 競合) を分離 */
 html[data-theme="light"] .lang-btn:focus-visible,
 html[data-theme="light"] .preset-btn:focus-visible,
+html[data-theme="light"] .preset-name-input:focus-visible {
+  outline-color: var(--vermilion);
+
+}
+
 html[data-theme="light"] .icon-btn:focus-visible,
-html[data-theme="light"] .preset-name-input:focus-visible,
 html[data-theme="light"] .hero:focus-visible {
   outline-color: var(--vermilion);
   box-shadow: 0 0 0 4px var(--vermilion-bright-soft);
@@ -150,6 +155,98 @@ html[data-theme="light"] {
   --c-tier-ss-glow-pink:       rgba(255,200,180,0.4);/* tier-SS inset/text glow (pink) */
   --c-anlz-shadow-orange:      rgba(120,60,20,.18);  /* anlz-header / anlz-body box-shadow */
   --c-sb-top-bg:               #f5ead0;              /* sidebar wwm-sb-top + sb-rest gradient 上 */
+
+  /* ─── @layer Step 2-d r3: theme-swap tokens (light 値) ─── */
+  --c-focus-ring-shadow: 0 0 0 4px var(--vermilion-bright-soft);
+  --c-equip-setname-fg: var(--vermilion-deep);
+  --c-equip-setname-text-shadow: none;
+  --c-cmp-set-header-fg: var(--vermilion-deep);
+  --c-modal-a-val-input-fg: var(--brown-1);
+  --c-modal-a-lv-bg: var(--hover-strong);
+  --c-hero-next-arrow-fg: var(--paper-mute);
+
+  /* ─── @layer Step 2-d r2: theme-swap tokens (light 値) ─── */
+  --c-preset-slot-num-fg: var(--vermilion);
+  --c-preset-save-fg: var(--gold-bright);
+  --c-preset-save-hover-fg: #fff5dc;
+  --c-preset-load-hover-fg: #fff;
+  --c-preset-del-hover-fg: #fff;
+  --c-hb-pct-phys-fg: rgba(200,60,43,0.75);
+  --c-hb-pct-elem-fg: var(--jade-bright);
+  --c-footer-strong-fg: var(--vermilion);
+  --c-tier-chip-ss-fg: var(--vermilion-deep);
+  --c-tier-chip-ss-bg: linear-gradient(135deg, var(--vermilion-soft-2), rgba(138,31,23,0.14));
+  --c-tier-chip-ss-border: var(--c-vermilion-deep-mid);
+  --c-tier-chip-ss-text-shadow: 0 0 10px rgba(200,60,43,0.45);
+  --c-tier-chip-s-fg: var(--c-fg-cream-bright);
+  --c-tier-chip-s-bg: linear-gradient(135deg, var(--vermilion) 0%, #a02818 100%);
+  --c-tier-chip-s-border: #6a1810;
+  --c-tier-chip-s-text-shadow: 0 1px 2px var(--overlay-soft-2), 0 0 8px var(--c-tier-ss-glow-pink);
+  --c-tier-chip-a-bg: rgba(74,122,90,0.12);
+  --c-tier-chip-a-border: rgba(74,122,90,0.42);
+  --c-tier-chip-a-text-shadow: none;
+  --c-tier-chip-b-fg: var(--bone-dim);
+  --c-tier-chip-b-bg: rgba(106,82,54,0.10);
+  --c-tier-chip-b-border: rgba(106,82,54,0.35);
+  --c-tier-chip-b-text-shadow: none;
+  --c-tier-chip-c-bg: var(--surf-shade);
+  --c-tier-chip-c-border: rgba(58,38,22,0.20);
+  --c-opt-sort-btn-fg: #5a4838;
+  --c-opt-sort-btn-hover-bg: var(--c-opt-hover-bg);
+  --c-opt-sort-btn-hover-fg: var(--brown-1);
+  --c-opt-sort-btn-active-bg: #b8862a;
+  --c-opt-sort-btn-active-fg: var(--c-fg-cream-bright);
+  --c-opt-btn-apply-border: rgba(45,90,58,0.4);
+  --c-opt-btn-apply-hover-border: rgba(45,90,58,0.7);
+  --c-rank-row-border-left: 3px solid rgba(120,60,20,0.28);
+  --c-rank-row-border-bot: 1px solid rgba(120,60,20,0.16);
+  --c-rank-row-odd-bg: rgba(120,60,20,0.05);
+  --c-rank-row-hover-bg: rgba(212,175,55,0.16);
+  --c-rank-row-hover-border-left: #b8861a;
+  --c-eff-row-odd-bg: var(--surf-shade);
+  --c-eff-row-hover-bg: var(--surf-shade-2);
+  --c-cmp-lv-select-fg: var(--c-gold-rich);
+  --c-cmp-stat-select-bg: var(--surf-shade);
+  --c-btn-secondary-bg: var(--surf-shade-2);
+  --c-btn-secondary-fg: var(--paper);
+  --c-btn-secondary-hover-bg: var(--surf-shade-3);
+  --c-modal-a-kongfu-select-bg: var(--gold-mid);
+  --c-modal-a-set-select-bg: linear-gradient(90deg, var(--vermilion-bright-tint), var(--c-vermilion-fade-end));
+  --c-modal-a-stat-select-bg: var(--hover-strong);
+  --c-modal-a-lv-fg: var(--c-text-warm);
+  --c-modal-a-btn-secondary-bg: var(--hover-mid-2);
+  --c-slot-border: rgba(40,25,18,0.30);
+  --c-tier-badge-hero-bg: linear-gradient(180deg, var(--c-surf-warm-1), #e8dab8);
+  --c-tier-badge-hero-fg: var(--paper-dim);
+  --c-tier-badge-hero-border: rgba(122,90,32,.6);
+  --c-tier-ss-hero-bg: linear-gradient(135deg, var(--c-tier-ss-grad-1) 0%, var(--c-tier-ss-grad-2) 50%, var(--c-tier-ss-grad-3) 100%);
+  --c-tier-ss-hero-fg: var(--c-tier-ss-fg);
+  --c-tier-ss-hero-border: var(--c-tier-ss-border);
+  --c-tier-s-hero-bg: linear-gradient(135deg, var(--c-tier-s-grad-1) 0%, var(--c-tier-s-grad-2) 50%, var(--vermilion) 100%);
+  --c-tier-s-hero-fg: var(--c-tier-s-fg);
+  --c-tier-s-hero-border: var(--c-tier-s-border);
+  --c-tier-a-hero-bg: linear-gradient(135deg, var(--c-tier-a-grad-1) 0%, var(--c-tier-a-grad-2) 50%, var(--c-tier-a-grad-3) 100%);
+  --c-tier-a-hero-fg: var(--c-tier-a-fg);
+  --c-tier-a-hero-border: var(--c-tier-a-border);
+  --c-tier-b-hero-bg: linear-gradient(135deg, var(--c-tier-b-grad-1) 0%, var(--c-tier-b-grad-2) 50%, var(--c-tier-b-grad-3) 100%);
+  --c-tier-b-hero-fg: var(--c-tier-b-fg);
+  --c-tier-b-hero-border: var(--c-tier-b-border);
+  --c-tier-c-hero-bg: linear-gradient(135deg, var(--c-tier-c-grad-1) 0%, var(--c-tier-c-grad-2) 50%, var(--c-tier-c-grad-3) 100%);
+  --c-tier-c-hero-fg: var(--c-tier-c-fg);
+  --c-tier-c-hero-border: var(--c-tier-c-border);
+  --c-migration-strong-fg: #0e2c52;
+  --c-anlz-tab-fg: var(--brown-1);
+  --c-anlz-tab-active-fg: #8a5a14;
+
+  /* ─── @layer Step 2-d r1: theme-swap tokens (light 値) ─── */
+  --c-tier-chip-ss-shadow: 0 0 12px var(--vermilion-mid), inset 0 1px 0 rgba(255,200,180,0.3);
+  --c-tier-chip-ss-sheen: linear-gradient(105deg, transparent 25%, rgba(255,180,150,0.22) 50%, transparent 75%);
+  --c-tier-chip-s-shadow: 0 0 18px rgba(200,60,43,0.65), 0 0 32px var(--c-vermilion-glow-soft), inset 0 1px 0 rgba(255,230,210,0.45), inset 0 -1px 0 rgba(60,10,5,0.35);
+  --c-tier-chip-a-shadow: 0 0 8px rgba(74,122,90,0.18);
+  --c-tier-chip-b-shadow: none;
+  --c-modal-a-option-fg: var(--brown-1);
+  --c-anlz-title-fg: #1a0e08;
+  --c-anlz-title-text-shadow: 0 1px 0 var(--hover-mid-2);
 
   /* ─── @layer Step 2-c: theme-swap tokens (light 値) ─── */
   --c-hero-before-fg: rgba(160,28,18,0.18);
@@ -284,31 +381,7 @@ html[data-theme="light"] .icon-btn.import-btn { color: var(--gold-bright); borde
 
 html[data-theme="light"] .icon-btn.import-btn:hover { background: var(--gold); color: #fff; }
 
-html[data-theme="light"] .preset-slot-num { color: var(--paper-mute); }
-
-html[data-theme="light"] .preset-slot.has-data .preset-slot-num { color: var(--vermilion); }
-
-html[data-theme="light"] .preset-save { color: var(--gold-bright);  }
-
-html[data-theme="light"] .preset-save:hover {  color: #fff5dc; }
-
-html[data-theme="light"] .preset-load { color: var(--jade-bright);  }
-
-html[data-theme="light"] .preset-load:hover:not(:disabled) {  color: #fff; }
-
-html[data-theme="light"] .preset-del { color: var(--vermilion); }
-
-html[data-theme="light"] .preset-del:hover:not(:disabled) {  color: #fff; }
-
 html[data-theme="light"] .hero-number .unit {  border-bottom-color: var(--gold-bright); }
-
-html[data-theme="light"] .hb-value.phys { color: var(--vermilion); }
-
-html[data-theme="light"] .hb-value.elem { color: var(--jade-bright); }
-
-html[data-theme="light"] .hb-pct.phys { color: rgba(200,60,43,0.75); }
-
-html[data-theme="light"] .hb-pct.elem { color: var(--jade-bright); }
 
 html[data-theme="light"] .hcb-pct.phys { color: rgba(200,60,43,0.7); }
 
@@ -318,42 +391,19 @@ html[data-theme="light"] .hcb-val.phys { color: var(--vermilion); }
 
 html[data-theme="light"] .hcb-val.elem { color: var(--jade-bright); }
 
-html[data-theme="light"] footer strong { color: var(--vermilion); }
-
 html[data-theme="light"] #toast { border-left-color: var(--gold-bright); }
 
 html[data-theme="light"] .tier-SS {
-  color: var(--vermilion-deep);
-  background: linear-gradient(135deg, var(--vermilion-soft-2), rgba(138,31,23,0.14));
-  border-color: var(--c-vermilion-deep-mid);
-  text-shadow: 0 0 10px rgba(200,60,43,0.45);
-  box-shadow: 0 0 12px var(--vermilion-mid), inset 0 1px 0 rgba(255,200,180,0.3);
+
   animation: tier-ss-glow-light 2.2s ease-in-out infinite;
 }
 
-html[data-theme="light"] .tier-SS::before {
-  background: linear-gradient(105deg, transparent 25%, rgba(255,180,150,0.22) 50%, transparent 75%);
-  background-size: 250% 100%;
-}
-
 html[data-theme="light"] .tier-S {
-  color: var(--c-fg-cream-bright);
-  background: linear-gradient(135deg, var(--vermilion) 0%, #a02818 100%);
-  border-color: #6a1810;
-  text-shadow: 0 1px 2px var(--overlay-soft-2), 0 0 8px var(--c-tier-ss-glow-pink);
-  box-shadow:
-    0 0 18px rgba(200,60,43,0.65),
-    0 0 32px var(--c-vermilion-glow-soft),
-    inset 0 1px 0 rgba(255,230,210,0.45),
-    inset 0 -1px 0 rgba(60,10,5,0.35);
+
   animation: tier-s-pulse-light 2.2s ease-in-out infinite;
 }
 
-html[data-theme="light"] .tier-A { color: var(--jade-bright); background: rgba(74,122,90,0.12); border-color: rgba(74,122,90,0.42); text-shadow: none; box-shadow: 0 0 8px rgba(74,122,90,0.18); }
-
-html[data-theme="light"] .tier-B { color: var(--bone-dim);    background: rgba(106,82,54,0.10); border-color: rgba(106,82,54,0.35); text-shadow: none; box-shadow: none; }
-
-html[data-theme="light"] .tier-C { color: var(--paper-mute);  background: var(--surf-shade);  border-color: rgba(58,38,22,0.20);  text-shadow: none; box-shadow: none; }
+html[data-theme="light"] .tier-C {       text-shadow: none; box-shadow: none; }
 
 html[data-theme="light"] .wwm-sb-mini-hero-card {
   background: linear-gradient(180deg, var(--c-surf-warm-1), var(--c-surf-warm-2));
@@ -416,18 +466,10 @@ html[data-theme="light"] .wwm-sb-notice {  background: var(--vermilion-tint); }
 
 html[data-theme="light"] .wwm-opt-sort-group { border-color: var(--c-opt-border-soft); }
 
-html[data-theme="light"] .wwm-opt-sort-btn { color: #5a4838; }
-
-html[data-theme="light"] .wwm-opt-sort-btn:hover { background: var(--c-opt-hover-bg); color: var(--brown-1); }
-
-html[data-theme="light"] .wwm-opt-sort-btn.active { background: #b8862a; color: var(--c-fg-cream-bright); }
-
 html[data-theme="light"] .wwm-opt-sort-btn + .wwm-opt-sort-btn { border-left-color: var(--c-opt-border-soft); }
 
 html[data-theme="light"] .wwm-opt-btn {  border-color: var(--c-opt-border-mid); }
 html[data-theme="light"] .wwm-opt-btn:hover {  border-color: var(--c-opt-border-strong); }
-html[data-theme="light"] .wwm-opt-btn-apply {  border-color: rgba(45,90,58,0.4); }
-html[data-theme="light"] .wwm-opt-btn-apply:hover {  border-color: rgba(45,90,58,0.7); }
 
 html[data-theme="light"] .wwm-share-warn {
   background: rgba(184,100,28,0.22) !important;
@@ -443,33 +485,8 @@ html[data-theme="light"] .wwm-bm-code {
   border-color: var(--ink-2);
 }
 
-html[data-theme="light"] .wwm-rank-row,
-html[data-theme="light"] .wwm-opt-row {
-  border-left: 3px solid rgba(120,60,20,0.28);
-  border-bottom: 1px solid rgba(120,60,20,0.16);
-}
-
-html[data-theme="light"] .wwm-rank-row:nth-child(odd),
-html[data-theme="light"] .wwm-opt-row:nth-child(odd) {
-  background: rgba(120,60,20,0.05);
-}
-
-html[data-theme="light"] .wwm-rank-row:hover,
-html[data-theme="light"] .wwm-opt-row:hover {
-  background: rgba(212,175,55,0.16);
-  border-left-color: #b8861a;
-}
-
 html[data-theme="light"] .wwm-eff-row {
   border-bottom: 1px solid var(--ink-2);
-}
-
-html[data-theme="light"] .wwm-eff-row:nth-child(odd) {
-  background: var(--surf-shade);
-}
-
-html[data-theme="light"] .wwm-eff-row:hover {
-  background: var(--surf-shade-2);
 }
 
 html[data-theme="light"] .wwm-eff-input {
@@ -487,7 +504,7 @@ html[data-theme="light"] .wwm-sb-section-title {
 
 html[data-theme="light"] .wwm-cmp-lv-select {
   background: var(--c-cream-pale);
-  color: var(--c-gold-rich);
+
   border-color: var(--c-gold-rich);
 }
 
@@ -518,35 +535,34 @@ html[data-theme="light"] .wwm-cmp-current .wwm-cmp-set-header {
 }
 
 html[data-theme="light"] .wwm-cmp-stat-select,
+/* S2-d split: safe 組と unsafe 組 (set-select modal 競合 / xinfa-tier cell 競合) を分離 */
 html[data-theme="light"] .wwm-cmp-kongfu-select,
-html[data-theme="light"] .wwm-cmp-set-select,
 html[data-theme="light"] .wwm-num-input,
-html[data-theme="light"] .wwm-xinfa-cell > .wwm-xinfa-tier,
+html[data-theme="light"] .wwm-xinfa-cell > .wwm-xinfa-tier {
+  color: var(--paper);
+  border-color: var(--ink-2);
+}
+
+html[data-theme="light"] .wwm-cmp-set-select,
 html[data-theme="light"] .wwm-xinfa-tier,
 html[data-theme="light"] select.wwm-num-input,
 html[data-theme="light"] input.wwm-num-input {
-  background: var(--surf-shade);
   color: var(--paper);
   border-color: var(--ink-2);
 }
 
 html[data-theme="light"] .wwm-btn-secondary {
-  background: var(--surf-shade-2);
-  color: var(--paper);
+
   border-color: var(--ink-2);
 }
 
-html[data-theme="light"] .wwm-btn-secondary:hover {
-  background: var(--surf-shade-3);
-}
+/* S2-d split: cmp-set-header / xinfa-header b は modal/equip-base 競合で unsafe → 分離 */
 
-html[data-theme="light"] .wwm-equip-setname,
 html[data-theme="light"] .wwm-cmp-set-header {
-  color: var(--vermilion-deep);
+
   text-shadow: none;
 }
 
-html[data-theme="light"] .wwm-equip-kongfu,
 html[data-theme="light"] .wwm-xinfa-header b {
   color: var(--paper);
   font-weight: 600;
@@ -582,21 +598,29 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-header { color: var(--
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-header { color: var(--vermilion-deep);  background: linear-gradient(90deg, var(--vermilion-bright-tint), var(--c-vermilion-fade-end)); }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select { background: var(--gold-mid); color: var(--brown-1); border-color: var(--c-border-mid-warm); }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select {  color: var(--brown-1); border-color: var(--c-border-mid-warm); }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-select { background: linear-gradient(90deg, var(--vermilion-bright-tint), var(--c-vermilion-fade-end)); color: var(--vermilion-deep); border-color: var(--c-border-mid-warm); }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-select {  color: var(--vermilion-deep); border-color: var(--c-border-mid-warm); }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-stat-select,
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val-input {
-  background: var(--hover-strong);
+/* S2-d split: stat-select は L524 組と競合残置 → val-input と分離 */
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-stat-select {
   color: var(--brown-1);
   border-color: var(--c-border-mid-warm);
 }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv,
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val-input {
+
+  border-color: var(--c-border-mid-warm);
+}
+
+/* S2-d split: cmp-lv-select は単独 light rule 競合残置 → cmp-lv と分離 */
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv {
+
+  border-color: var(--bone-dim);
+}
+
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
   background: var(--hover-strong);
-  color: var(--c-text-warm);
   border-color: var(--bone-dim);
 }
 
@@ -610,16 +634,12 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-delta-label { color: var(--c-
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-delta-base { color: var(--bone-dim); }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
-  color: var(--brown-1); border-color: var(--bone-dim); background: var(--hover-mid-2);
+   border-color: var(--bone-dim);
 }
 
 html[data-theme="light"] .wwm-cmp-modal-bg-icon {
   filter: brightness(0) drop-shadow(0 0 6px var(--c-gold-deep-glow-1));
 
-}
-
-html[data-theme="light"] .wwm-cmp-modal-a select option {
-  color: var(--brown-1);
 }
 
 html[data-theme="light"] .wwm-cmp-modal-a select option:checked {
@@ -683,7 +703,7 @@ html[data-theme="light"] .wwm-xinfa-slot::before {
 
 html[data-theme="light"] .wwm-gear-grid .wwm-equip-slot,
 html[data-theme="light"] .wwm-xinfa-slot {
-  border-color: rgba(40,25,18,0.30);
+
   background-image:
     linear-gradient(var(--c-card-bg-overlay-film), var(--c-card-bg-overlay-film)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg_usercard2-e8900864.png"),
@@ -696,10 +716,6 @@ html[data-theme="light"] .wwm-xinfa-slot {
 
 /* hover 朱化 復活 — light の non-hover override (specificity 0,2,1) が dark の :hover (0,2,0) に勝ってしまうため、
    light でも :hover で border accent (朱) を確実に出すよう同 specificity tier で再宣言 */
-html[data-theme="light"] .wwm-xinfa-slot:hover,
-html[data-theme="light"] .wwm-gear-grid .wwm-equip-slot[data-slot]:hover {
-  border-color: var(--vermilion-bright);
-}
 
 html[data-theme="light"] {
   --chart-graze: #8b8170;
@@ -736,10 +752,7 @@ html[data-theme="light"] .hero-wuxia .hero-next-val {
   text-shadow: 0 0 2px rgba(255,250,235,0.6);
 }
 
-html[data-theme="light"] .hero-wuxia .hero-next-label,
-html[data-theme="light"] .hero-wuxia .hero-next-arrow {
-  color: var(--paper-mute);
-}
+/* S2-d split: label = pair 同値 (削除可) / arrow = pair 値違い (token 化) → 分離 */
 
 html[data-theme="light"] .hero-wuxia .judge-name {
 
@@ -763,16 +776,12 @@ html[data-theme="light"] .hero-wuxia .judge-dot-elem { border-color: var(--jade-
 html[data-theme="light"] .hero-wuxia .judge-row-sep { border-top-color: rgba(40,25,18,0.2); }
 
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-badge {
-  background: linear-gradient(180deg, var(--c-surf-warm-1), #e8dab8);
-  color: var(--paper-dim);
-  border-color: rgba(122,90,32,.6);
+
   text-shadow: 0 0 2px rgba(244,232,204,0.9);
 }
 
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS {
-  background: linear-gradient(135deg, var(--c-tier-ss-grad-1) 0%, var(--c-tier-ss-grad-2) 50%, var(--c-tier-ss-grad-3) 100%);
-  color: var(--c-tier-ss-fg);
-  border-color: var(--c-tier-ss-border);
+
   text-shadow: 0 0 2px var(--c-tier-ss-text-halo);
   box-shadow: 0 0 12px rgba(184,134,11,0.45), inset 0 1px 0 var(--hover-strong), inset 0 -1px 0 rgba(90,42,10,0.3);
 }
@@ -830,9 +839,7 @@ html[data-theme="light"] .wwm-sb-tier-badge.tier-C {
 }
 
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-S {
-  background: linear-gradient(135deg, var(--c-tier-s-grad-1) 0%, var(--c-tier-s-grad-2) 50%, var(--vermilion) 100%);
-  color: var(--c-tier-s-fg);
-  border-color: var(--c-tier-s-border);
+
   text-shadow: 0 0 2px var(--hover-mid-2);
   box-shadow: 0 0 12px var(--vermilion-mid-strong), inset 0 1px 0 var(--hover-mid-2), inset 0 -1px 0 rgba(60,10,8,0.3);
 }
@@ -840,25 +847,19 @@ html[data-theme="light"] .hero-wuxia .hero-tier.tier-S {
 /* tier-A/B/C の shadow: dark 用 glow (components.css) が spec 抑圧で漏れ出ていた調整漏れを
    汎用 light tier 調整 (.tier-A/B/C) と同値に明記修正 (2026-06-05 @layer Step 1、 兄貴目視対象) */
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-A {
-  background: linear-gradient(135deg, var(--c-tier-a-grad-1) 0%, var(--c-tier-a-grad-2) 50%, var(--c-tier-a-grad-3) 100%);
-  color: var(--c-tier-a-fg);
-  border-color: var(--c-tier-a-border);
+
   text-shadow: none;
 
 }
 
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-B {
-  background: linear-gradient(135deg, var(--c-tier-b-grad-1) 0%, var(--c-tier-b-grad-2) 50%, var(--c-tier-b-grad-3) 100%);
-  color: var(--c-tier-b-fg);
-  border-color: var(--c-tier-b-border);
+
   text-shadow: none;
 
 }
 
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-C {
-  background: linear-gradient(135deg, var(--c-tier-c-grad-1) 0%, var(--c-tier-c-grad-2) 50%, var(--c-tier-c-grad-3) 100%);
-  color: var(--c-tier-c-fg);
-  border-color: var(--c-tier-c-border);
+
   text-shadow: none;
 
 }
@@ -903,8 +904,6 @@ html[data-theme="light"] .wwm-migration-banner {
   border-bottom-color: var(--c-migration-accent);
 
 }
-
-html[data-theme="light"] .wwm-migration-msg strong { color: #0e2c52; }
 
 html[data-theme="light"] .wwm-equip-section,
 html[data-theme="light"] .wwm-equip-section .wwm-equip-slot,
@@ -1020,22 +1019,9 @@ html[data-theme="light"] .wwm-anlz .wwm-anlz-title {
     0 0.5px 1.5px rgba(74,40,20,.14);
 }
 
-html[data-theme="light"] .wwm-anlz-title {
-  color: #1a0e08;
-  text-shadow: 0 1px 0 var(--hover-mid-2);
-}
-
 html[data-theme="light"] .wwm-anlz .wwm-anlz-subtitle {
   color: var(--brown-5);
   opacity: 0.9;
-}
-
-html[data-theme="light"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
-  color: var(--brown-1);
-}
-
-html[data-theme="light"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab.active {
-  color: #8a5a14;
 }
 
 html[data-theme="light"] .wwm-anlz-body::before {

@@ -81,8 +81,9 @@ if (MODE_PAIRS) {
   const tokenDefsLight = [];  // light.css token block 追加分
 
   for (const g of plan) {
+    // deleteOnly: same-value group — light decl 削除のみ (token / base 置換 不要)
     // existing: true = 既存 token 再利用 (定義追加 skip、 base 置換 + light 削除のみ)
-    if (!g.existing)
+    if (!g.existing && !g.deleteOnly)
     // tokens: [{name, dark, light?}] — light 省略 = light block 既定義 (Phase 5.3 light-only token)
     for (const t of (g.tokens || [{ name: g.token, dark: g.dark, light: g.light }])) {
       const selfRef = t.light && new RegExp(`^var\\(\\s*${t.name.replace(/[-]/g, '\\-')}\\s*\\)$`).test(t.light.trim());
@@ -92,13 +93,17 @@ if (MODE_PAIRS) {
     const baseValue = g.baseValue || `var(${g.token})`;
 
     for (const d of g.decls) {
-      // base 置換
-      const bl = load(d.baseFile);
-      if (!editDecl(bl, d.baseLine, d.prop, 'replace', baseValue)) { console.warn(`[SKIP] base ${d.baseFile}:${d.baseLine} ${d.prop} 不一致`); continue; }
-      // light 削除
-      const ll = load(d.lightFile);
-      if (!editDecl(ll, d.lightLine, d.prop, 'delete')) { console.warn(`[SKIP] light ${d.lightFile}:${d.lightLine} ${d.prop} 不一致`); continue; }
-      if (DRY) console.log(`[DRY] ${g.token || g.tokens[0].name}: base ${d.baseFile}:${d.baseLine} → ${baseValue} / light ${d.lightFile}:${d.lightLine} 削除`);
+      // base 置換 (baseFile null = light 削除のみの decl)
+      if (d.baseFile && !g.deleteOnly) {
+        const bl = load(d.baseFile);
+        if (!editDecl(bl, d.baseLine, d.prop, 'replace', baseValue)) { console.warn(`[SKIP] base ${d.baseFile}:${d.baseLine} ${d.prop} 不一致`); continue; }
+      }
+      // light 削除 (lightFile null = base 置換のみの decl — multi-split 異 pair)
+      if (d.lightFile) {
+        const ll = load(d.lightFile);
+        if (!editDecl(ll, d.lightLine, d.prop, 'delete')) { console.warn(`[SKIP] light ${d.lightFile}:${d.lightLine} ${d.prop} 不一致`); continue; }
+      }
+      if (DRY) console.log(`[DRY] ${g.deleteOnly ? 'DEL' : (g.token || g.tokens[0].name)}: ${d.baseFile ? `base ${d.baseFile}:${d.baseLine} → ${baseValue}` : ''} ${d.lightFile ? `/ light ${d.lightFile}:${d.lightLine} 削除` : ''}`);
     }
   }
 
