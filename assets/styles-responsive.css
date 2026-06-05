@@ -510,7 +510,7 @@
 
   /* ─── Phase 4: hero compact + mobile RESET 内蔵 ─── */
   section.hero.hero-wuxia {
-    padding: var(--space-3) var(--space-3-5) !important;
+    padding: var(--space-3) var(--space-3-5);
     margin: var(--space-1) 0;
     display: flex !important;          /* grid解除、 flex column で縦並び明示 */
     flex-direction: column;
@@ -534,8 +534,8 @@
     overflow: visible !important;  /* PC overflow:hidden 解除、 子のはみ出し回避 */
     width: 100%;
   }
-  .hero-wuxia .hero-label .ja { font-size: var(--text-md) !important; }
-  .hero-wuxia .hero-label .en { font-size: var(--text-2xs) !important; }
+  .hero-wuxia .hero-label .ja { font-size: var(--text-md); }
+  .hero-wuxia .hero-label .en { font-size: var(--text-2xs); }
   .hero-score-row {
     flex-wrap: wrap;
     gap: 8px !important;
@@ -706,7 +706,7 @@
   .wwm-modal.wwm-modal-wide .wwm-modal-body {
     flex: 1 1 auto;
     overflow-y: auto;
-    padding: var(--space-3) !important;
+    padding: var(--space-3);
   }
   /* SHARE modal OBS section mobile時 hidden (OBSは PC専用機能) */
   .wwm-share-obs-block { display: none; }
@@ -745,7 +745,7 @@
     width: 100%;
   }
   .wwm-arsenal-modal .wwm-arsenal-paths .wwm-radio-label {
-    font-size: var(--text-12) !important;
+    font-size: var(--text-12);
     white-space: nowrap;
   }
   /* 武庫modal Tier行: 頂点off時 input溢れ → 縮小 + wrap許可 */
@@ -763,7 +763,7 @@
   }
   .wwm-arsenal-modal .wwm-cmp-row .wwm-num-input {
     width: 36px !important;
-    font-size: var(--text-xs) !important;
+    font-size: var(--text-xs);
   }
 
   /* ─── Phase 7: ステFAB + 全画面 stat overlay ─── */
@@ -1072,7 +1072,7 @@
   /* ─── NOTE modal mobile 全画面 + close sticky (履歴/筆記 閉じれない問題対策) ─── */
   .wwm-modal-backdrop {
     overflow-y: auto;
-    padding: 0 !important;
+    padding: 0;
     align-items: flex-start;
   }
   .wwm-note-modal-a {

@@ -638,8 +638,8 @@ html.wwm-shared-build-mode #exportBtn {
 html.wwm-view-sidebar {
   --overlay-bg-alpha: 0;
   --overlay-bg-rgb: 10,10,10;
-  background: transparent !important;
-  background-color: transparent !important;
+  background: transparent;
+  background-color: transparent;
 }
 html.wwm-view-sidebar body,
 html.wwm-view-sidebar body.wwm-layout-active {
@@ -647,7 +647,7 @@ html.wwm-view-sidebar body.wwm-layout-active {
   background-image: none !important;
   height: 100vh;
   overflow: hidden !important;
-  padding: 0 !important;
+  padding: 0;
   margin: 0;
 }
 html.wwm-view-sidebar .sticky-header,
@@ -686,8 +686,8 @@ html.wwm-view-sidebar .wwm-sidebar-test {
 /* sb-top: sticky 上部 (avatar+総合武力) のみユーザー alpha で背景 */
 html.wwm-view-sidebar .wwm-sb-top {
   background: transparent !important;
-  position: relative !important;
-  top: auto !important;
+  position: relative;
+  top: auto;
 }
 /* OBS view: 背景は mini-hero-card 側に持たせて朱墨ink維持 */
 html.wwm-view-sidebar .wwm-sb-mini-hero-card {
@@ -2403,20 +2403,20 @@ body.wwm-layout-active .wwm-footer {
 #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab.active {
   color: var(--chart-crit) !important;
   opacity: 1;
-  font-weight: 900 !important;
+  font-weight: 900;
 }
 html[lang="en"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
-  font-family: 'Cinzel', serif !important;
+  font-family: 'Cinzel', serif;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 /* ja: Ma Shan Zheng は日本漢字非対応 → Noto Serif JP */
 html[lang="ja"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
-  font-family: 'Noto Serif JP', serif !important;
+  font-family: 'Noto Serif JP', serif;
 }
 /* ko: Noto Serif KR (fallback Noto Serif JP) */
 html[lang="ko"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
-  font-family: 'Noto Serif KR', 'Noto Serif JP', serif !important;
+  font-family: 'Noto Serif KR', 'Noto Serif JP', serif;
 }
 /* en時: modal の主タイトル / 各パネルの主タイトル を Cinzel に統一 */
 html[lang="en"] .wwm-modal-header h2,
@@ -2472,7 +2472,7 @@ html[lang="en"] .wwm-cmp-title-en {
 /* 内側 .wwm-analysis-card 系の独自枠を除去 (二重枠回避) */
 .wwm-anlz-body .wwm-analysis-card,
 .wwm-anlz-body .wwm-modal-square {
-  background: transparent !important;
+  background: transparent;
   border: none !important;
   box-shadow: none;
   padding: 0 !important;

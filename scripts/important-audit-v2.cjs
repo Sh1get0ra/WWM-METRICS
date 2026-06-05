@@ -295,15 +295,44 @@ function subjectTokens(sel) {
 //   fileWildcard: propGroup → Set<file>   (group '*' = 全 prop)
 function buildInlineIndex(jsSources) {
   const elemInline = new Map();
+  const elemInlineExact = new Map(); // exact prop → Set<token> (background-image 等の精密判定用)
   const fileWildcard = new Map();
-  const addElem = (g, tokens) => {
+  const addElem = (g, tokens, exactProp) => {
     if (!elemInline.has(g)) elemInline.set(g, new Set());
     for (const t of tokens) elemInline.get(g).add(t);
+    if (exactProp) {
+      if (!elemInlineExact.has(exactProp)) elemInlineExact.set(exactProp, new Set());
+      for (const t of tokens) elemInlineExact.get(exactProp).add(t);
+    }
   };
   const addWild = (g, file) => {
     if (!fileWildcard.has(g)) fileWildcard.set(g, new Set());
     fileWildcard.get(g).add(file);
   };
+
+  // attr-only selector ('[data-ratio-el]' 等) → template 内で同 attr を持つ tag の
+  // class/id token (無ければ '%tag') へ解決。 template に見つからない → null (universal 行き)
+  const attrCache = new Map();
+  function attrTokens(attrName) {
+    if (attrCache.has(attrName)) return attrCache.get(attrName);
+    const out = new Set();
+    for (const { src } of jsSources) {
+      for (const m of src.matchAll(new RegExp(`<(\\w+)([^<>]{0,500}?)\\b${attrName}[=\\s>]`, 'g'))) {
+        const tag = m[1].toLowerCase(), attrs = m[2];
+        const idM = attrs.match(/\bid="([\w-]+)"|\bid='([\w-]+)'/);
+        const clsM = attrs.match(/\bclass="([^"]{1,300})"|\bclass='([^']{1,300})'/);
+        let any = false;
+        if (idM) { out.add('#' + (idM[1] || idM[2])); any = true; }
+        if (clsM) for (const c of (clsM[1] || clsM[2]).split(/\s+/)) {
+          if (/^[\w-]+$/.test(c)) { out.add('.' + c); any = true; }
+        }
+        if (!any) out.add('%' + tag);
+      }
+    }
+    const res = out.size ? [...out] : null;
+    attrCache.set(attrName, res);
+    return res;
+  }
 
   // selector 文字列 (comma list 可) → subject token 群。
   // class/id 無し部分は element 名 token '%tag' (同 element 名 subject の selector とのみ競合)、
@@ -318,7 +347,12 @@ function buildInlineIndex(jsSources) {
       const parts = safe.split(/\s*[>+~]\s*|\s+/).filter(Boolean);
       const last = (parts[parts.length - 1] || safe).replace(/::?[\w-]+(\([^)]*\))?/g, '');
       const em = last.match(/^[a-zA-Z][\w-]*/);
-      out.push(em ? '%' + em[0].toLowerCase() : '__universal__');
+      if (em) { out.push('%' + em[0].toLowerCase()); continue; }
+      // attr-only subject ('[data-x]' 等) → template から逆引き
+      const rawLast = p.split(/\s*[>+~]\s*|\s+/).filter(Boolean).pop() || p;
+      const attrM = rawLast.match(/\[([\w-]+)/);
+      const at = attrM ? attrTokens(attrM[1]) : null;
+      out.push(...(at || ['__universal__']));
     }
     return out;
   }
@@ -342,8 +376,9 @@ function buildInlineIndex(jsSources) {
         const inner = resolveReceiver(t[1], src, m.index);
         defs.push({ idx: m.index, tokens: inner === null ? null : inner });
       }
-      else if (/document\.createElement\(/.test(rhs)) {
-        // createElement → 直後の NAME.className/id/classList.add から token 収集
+      else if ((t = rhs.match(/document\.createElement\(\s*['"](\w+)['"]/))) {
+        // createElement → 直後の NAME.className/id/classList.add から token 収集。
+        // class/id 付与なし → 無名 element = '%tag' (bookmarklet 文字列内 toast 等)
         const after = src.slice(m.index, m.index + 600);
         const tk = [];
         let am;
@@ -354,7 +389,7 @@ function buildInlineIndex(jsSources) {
         for (const cm of after.matchAll(new RegExp(`${name}\\.classList\\.add\\(([^)]{1,100})\\)`, 'g'))) {
           for (const lit of cm[1].matchAll(/['"]([\w-]+)['"]/g)) tk.push('.' + lit[1]);
         }
-        defs.push({ idx: m.index, tokens: tk.length ? tk : null });
+        defs.push({ idx: m.index, tokens: tk.length ? tk : ['%' + t[1].toLowerCase()] });
       }
       else defs.push({ idx: m.index, tokens: null }); // 解決不能 def
     }
@@ -394,10 +429,10 @@ function buildInlineIndex(jsSources) {
         // 無名 tag (class/id なし) — class/id selector はこの element に当たらない。
         // element 名 token '%tag' で登録 (同 element 名 subject の selector とのみ競合)
         if (props.length === 0) addElem('*', ['%' + tagName]);
-        for (const p of props) addElem(propGroup(p), ['%' + tagName]);
+        for (const p of props) addElem(propGroup(p), ['%' + tagName], p);
       } else {
         if (props.length === 0) addElem('*', tokens); // style="${...}" 全動的
-        for (const p of props) addElem(propGroup(p), tokens);
+        for (const p of props) addElem(propGroup(p), tokens, p);
       }
     }
     // 2. receiver.style.prop = / cssText / setProperty
@@ -419,16 +454,16 @@ function buildInlineIndex(jsSources) {
           for (const p of props) addWild(propGroup(p), file);
         } else if (tokens.length) {
           if (props.length === 0) addElem('*', tokens);
-          for (const p of props) addElem(propGroup(p), tokens);
+          for (const p of props) addElem(propGroup(p), tokens, p);
         }
         continue;
       }
       if (!prop) continue;
       if (tokens === null) addWild(propGroup(prop), file);
-      else if (tokens.length) addElem(propGroup(prop), tokens);
+      else if (tokens.length) addElem(propGroup(prop), tokens, prop);
     }
   }
-  return { elemInline, fileWildcard };
+  return { elemInline, elemInlineExact, fileWildcard };
 }
 
 // DOM 共起 class/id map
@@ -554,7 +589,7 @@ for (const f of CSS_FILES) {
 
 const jsSources = collectJsSources();
 const jsSrcByFile = new Map(jsSources.map(s => [s.file, s.src]));
-const { elemInline, fileWildcard } = buildInlineIndex(jsSources);
+const { elemInline, elemInlineExact, fileWildcard } = buildInlineIndex(jsSources);
 
 // index: compoundKey|propGroup → decls (multi-key = 1 decl が複数 key に登録)
 const index = new Map();
@@ -629,21 +664,39 @@ function subjectElementName(sel) {
   return em ? em[0].toLowerCase() : null;
 }
 
+// background group 精密化: token への background 系 inline 書込が background-image のみ
+// (export clone の backgroundImage='none' 等) で、 CSS 側 decl が image 成分を持たない
+// (background-color / image なし shorthand) なら無害。
+//   - shorthand `background: red` は image を implicit none に reset = inline 'none' と同値
+function bgImageOnlySafe(token, d, g) {
+  if (g !== 'background') return false;
+  const dImg = d.prop === 'background-image' ||
+    (d.prop === 'background' && /url\(|gradient\(/i.test(d.value));
+  if (dImg) return false;
+  let sawAny = false;
+  for (const [e, set] of elemInlineExact) {
+    if (propGroup(e) !== 'background' || !set.has(token)) continue;
+    sawAny = true;
+    if (e !== 'background-image') return false; // image 以外の background 書込あり → 競合
+  }
+  return sawAny; // background-image のみ → safe
+}
+
 function inlineConflictV3(d) {
   const g = propGroup(d.prop);
   const inlineTokens = new Set([...(elemInline.get(g) || []), ...(elemInline.get('*') || [])]);
   // '__universal__' = querySelectorAll('*') への inline 書込 → 全 selector と競合
-  if (inlineTokens.has('__universal__')) return `universal(${g})`;
+  if (inlineTokens.has('__universal__') && !bgImageOnlySafe('__universal__', d, g)) return `universal(${g})`;
   // subject の明示 element 名 vs '%tag' token (class 有無に関わらず常時 check)
   const elName = subjectElementName(d.selector);
-  if (elName && inlineTokens.has('%' + elName)) return `elem(%${elName}|${g})`;
+  if (elName && inlineTokens.has('%' + elName) && !bgImageOnlySafe('%' + elName, d, g)) return `elem(%${elName}|${g})`;
   const subj = subjectTokens(d.selector);
   if (subj.length === 0) {
     if (!elName && inlineTokens.size > 0) return `no-subject(${g})`; // '*' / [attr] のみ subject
   } else {
     const cand = new Set(subj);
     for (const t of subj) for (const co of (coMap.get(t) || [])) cand.add(co);
-    for (const t of cand) if (inlineTokens.has(t)) return `token(${t}|${g})`;
+    for (const t of cand) if (inlineTokens.has(t) && !bgImageOnlySafe(t, d, g)) return `token(${t}|${g})`;
   }
   const wfiles = new Set([...(fileWildcard.get(g) || []), ...(fileWildcard.get('*') || [])]);
   if (wfiles.size > 0 && selectorClassesInJs(d.selector, jsSrcByFile, wfiles)) return `wildcard(${[...wfiles].join(',')}|${g})`;
