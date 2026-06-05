@@ -33,15 +33,15 @@ html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-new,
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-col { border-color: rgba(232,81,58,0.30); }
 
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-kongfu-header,
-html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select { background: var(--gold-faint) !important; color: #e6d6b8; }
+html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select { background: var(--gold-faint); color: #e6d6b8; }
 
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-set-header,
-html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-set-select { background: linear-gradient(90deg, rgba(232,81,58,0.30), transparent) !important; color: #ff6b4a !important; text-shadow: 0 0 6px var(--vermilion-bright-soft-mid) !important; }
+html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-set-select { background: linear-gradient(90deg, rgba(232,81,58,0.30), transparent) !important; color: #ff6b4a; text-shadow: 0 0 6px var(--vermilion-bright-soft-mid) !important; }
 
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-name { color: #ecdfd6; }
 
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-val,
-html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-val-input { color: #ffae8a !important; }
+html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-val-input { color: #ffae8a; }
 
 html[data-theme="dark"] .wwm-step2 .wwm-arsenal-tier,
 html:not([data-theme="light"]) .wwm-step2 .wwm-arsenal-tier {

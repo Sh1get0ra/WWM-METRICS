@@ -563,7 +563,10 @@ function selectorClassesInJs(selector, jsSrcByFile, jsFiles) {
 
 // specificity (a=id, b=class/attr/pseudo-class, c=element/pseudo-element)
 function specificity(sel) {
-  const safe = sel.replace(/\[[^\]]*\]/g, '[ATTR]');
+  let safe = sel.replace(/\[[^\]]*\]/g, '[ATTR]');
+  // :nth-child(odd) 等の引数を空に — 中身 ('odd' 等) が element 誤カウントされる bug 対策
+  // (:not/:is/:has は中身が spec に寄与するため対象外 — conservative)
+  safe = safe.replace(/:(nth-[\w-]+|lang|dir)\(([^)]*)\)/g, ':$1()');
   let a = 0, b = 0, c = 0;
   for (const m of safe.matchAll(/#[\w-]+/g)) a++;
   for (const m of safe.matchAll(/\.[\w-]+|\[ATTR\]|:(?!:)[\w-]+(\([^)]*\))?/g)) {

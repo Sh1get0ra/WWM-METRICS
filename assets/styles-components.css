@@ -561,7 +561,7 @@ html.wwm-shared-build-mode #exportBtn {
 .wwm-sb-mini-hero-card .wwm-sb-top {
   position: relative;
   top: auto;
-  background: none !important;
+  background: none ;
   border-bottom: none;
   margin-bottom: 0;
   padding: 0;
@@ -1645,7 +1645,7 @@ html.wwm-view-sidebar .wwm-app-body {
   filter:
     brightness(0) invert(1)
     drop-shadow(0 0 10px rgba(255,107,74,0.7))
-    drop-shadow(0 0 22px rgba(200,60,43,0.45)) !important;
+    drop-shadow(0 0 22px rgba(200,60,43,0.45));
 }
 .wwm-cmp-kongfu {
   font-size: var(--text-12); color: var(--accent);

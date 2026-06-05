@@ -14,6 +14,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* ⚠ !important keep 確定 (Batch M): light.css の tier-SS/S animation 復活防止 (a11y)。
+     light.css が cascade 最終 file のため natural では負ける — @layer 移行まで維持 */
   .tier-SS, .tier-S { animation: none !important; }
   .tier-SS::before  { animation: none; }
   .donut-seg        { transition: none; }
@@ -640,10 +642,10 @@
     margin: 0;
     padding: 0;
     white-space: nowrap;
-    border: none !important;
+    border: none ;
   }
   .hero-right .judge-row-sep {
-    border: none !important;
+    border: none ;
     padding: 0;
     margin: 0;
   }
