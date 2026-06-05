@@ -245,7 +245,7 @@
   .wwm-anlz-header::before,
   .wwm-anlz-body::before,
   .wwm-footer::after {
-    opacity: 0 !important;
+    opacity: 0;
   }
 
   /* PC topbar (sticky-header > .topbar) 非表示 + Mobile TopBar 表示 */
@@ -388,7 +388,7 @@
   body.wwm-layout-active .wwm-app-body {
     min-width: 0;  /* PC用 980 制約 解除 */
     /* grid 解除 = flex column で 自然 縦並び (PC layout grid-area 構造 mobile時 無効化) */
-    display: flex !important;
+    display: flex;
     flex-direction: column;
     grid-template-columns: none;
     grid-template-rows: none;
@@ -396,8 +396,8 @@
     gap: var(--space-2);
     max-width: none;
     /* 内部 scroll container = sticky-header の下、 footer 高さも引いて footer常時表示確保 */
-    height: calc(100vh - var(--wwm-header-h, 103px) - var(--wwm-footer-h, 32px)) !important;
-    height: calc(100dvh - var(--wwm-header-h, 103px) - var(--wwm-footer-h, 32px)) !important;
+    height: calc(100vh - var(--wwm-header-h, 103px) - var(--wwm-footer-h, 32px));
+    height: calc(100dvh - var(--wwm-header-h, 103px) - var(--wwm-footer-h, 32px));
     max-height: none;
     overflow-y: auto;
     overflow-x: hidden;
@@ -512,7 +512,7 @@
   section.hero.hero-wuxia {
     padding: var(--space-3) var(--space-3-5);
     margin: var(--space-1) 0;
-    display: flex !important;          /* grid解除、 flex column で縦並び明示 */
+    display: flex;          /* grid解除、 flex column で縦並び明示 */
     flex-direction: column;
     grid-template-columns: none;
     grid-template-rows: none;
@@ -592,7 +592,7 @@
 
   /* hero 新layout: 上半=情報+donut (Tier右に小)、 下半=tap時 内訳1行 */
   section.hero.hero-wuxia {
-    display: grid !important;
+    display: grid;
     grid-template-columns: 1fr auto;
     grid-template-areas:
       "info luopan"
@@ -1167,7 +1167,7 @@
   html.wwm-view-sidebar .wwm-mobile-stat-overlay,
   html.wwm-view-sidebar .wwm-mobile-anlz-overlay-backdrop,
   html.wwm-view-sidebar .wwm-mobile-anlz-overlay {
-    display: none !important;
+    display: none;
   }
 }
 

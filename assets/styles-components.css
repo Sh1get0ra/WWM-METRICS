@@ -199,8 +199,6 @@ html.wwm-shared-build-mode #exportBtn {
      SECTION 04 — HERO PANEL
    ╚═══════════════════════════════════════════════════════════════════╝ */
 
-/* hero::after ノイズ overlay を 半透明化 (xinfa_bg 見せるため) */
-.hero::after { opacity: 0.35 !important; }
 /* ライト hero: 紙色 overlay で公式 xinfa 背景を 透かす */
 .hero::before {
   /* corner kanji watermark — 明朝 (Noto Serif JP black) */
@@ -220,6 +218,8 @@ html.wwm-shared-build-mode #exportBtn {
   opacity: 0.85;
   pointer-events: none;
 }
+/* hero::after ノイズ overlay を 半透明化 (xinfa_bg 見せるため) */
+.hero::after { opacity: 0.35; }
 .wwm-footer { position: relative; overflow: hidden; }
 .wwm-footer-logo { height: 18px; vertical-align: middle; margin-right: var(--space-2); opacity: 0.75; }
 
@@ -244,7 +244,6 @@ html.wwm-shared-build-mode #exportBtn {
   transition: transform 0.25s ease, top 0.25s ease, opacity 0.15s;
   pointer-events: none;
 }
-.hero:hover::after { opacity: 0.9; }
 .hero--collapsed::after {
   transform: rotate(-135deg);
   top: 18px;
@@ -650,27 +649,6 @@ html.wwm-view-sidebar body.wwm-layout-active {
   padding: 0;
   margin: 0;
 }
-html.wwm-view-sidebar .sticky-header,
-html.wwm-view-sidebar .wwm-app-body .container,
-html.wwm-view-sidebar .wwm-footer,
-html.wwm-view-sidebar #wwmAffixRanking,
-html.wwm-view-sidebar #wwmOptimization,
-html.wwm-view-sidebar .wwm-analysis-tabs,
-html.wwm-view-sidebar .hero,
-html.wwm-view-sidebar .hero-wuxia,
-html.wwm-view-sidebar .ink-stroke {
-  display: none !important;
-}
-html.wwm-view-sidebar .wwm-app-body {
-  display: block !important;
-  height: 100vh !important;
-  max-height: 100vh;
-  padding: var(--space-2) !important;
-  margin: 0 !important;
-  max-width: none !important;
-  min-width: 0 !important; /* OBSキャンバス幅 < 1010 で右はみ出し防止 */
-  width: 100%;
-}
 html.wwm-view-sidebar .wwm-sidebar-test {
   position: relative !important;
   top: auto;
@@ -902,6 +880,31 @@ body.wwm-layout-active .wwm-footer {
   border-top: 1px solid var(--ink-2);
 }
 .wwm-sidebar-test:empty { display: block; }
+/* ── OBS overlay (SECTION 14) の layout 上書き 2 rule ──
+   body.wwm-layout-active は index.html 静的付与 = OBS mode と常時同時成立。
+   APP LAYOUT (上記) に natural cascade で勝つため ここ (後順) に配置 — SECTION 14 に戻すと負ける。
+   padding の !important は responsive.css mobile rule 対抗で維持 (Batch M move) */
+html.wwm-view-sidebar .sticky-header,
+html.wwm-view-sidebar .wwm-app-body .container,
+html.wwm-view-sidebar .wwm-footer,
+html.wwm-view-sidebar #wwmAffixRanking,
+html.wwm-view-sidebar #wwmOptimization,
+html.wwm-view-sidebar .wwm-analysis-tabs,
+html.wwm-view-sidebar .hero,
+html.wwm-view-sidebar .hero-wuxia,
+html.wwm-view-sidebar .ink-stroke {
+  display: none;
+}
+html.wwm-view-sidebar .wwm-app-body {
+  display: block;
+  height: 100vh;
+  max-height: 100vh;
+  padding: var(--space-2) !important;
+  margin: 0;
+  max-width: none;
+  min-width: 0; /* OBSキャンバス幅 < 1010 で右はみ出し防止 */
+  width: 100%;
+}
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
      SECTION 16 — GEAR GRID

@@ -359,12 +359,15 @@
 .wwm-cmp-modal-a .wwm-cmp-new {
   border: 1px solid var(--ink-1);
 }
+.wwm-cmp-col > .wwm-cmp-title,
+.wwm-cmp-col > .wwm-cmp-rows,
+.wwm-cmp-col > .wwm-cmp-kongfu-header,
+.wwm-cmp-col > .wwm-cmp-kongfu-select { position: relative; z-index: 1; }
 .wwm-cmp-modal-a .wwm-cmp-title {
-  position: absolute !important;
+  position: absolute;
   top: -14px; left: 12px;
   padding: 0;
   margin: 0;
-  z-index: 4;
   display: inline-flex; align-items: center; gap: 8px;
   background: transparent;
   line-height: 1;
@@ -524,8 +527,6 @@
   border: 1px solid var(--ink-2);
   border-radius: 0;
 }
-.wwm-cmp-modal-a .wwm-cmp-pct,
-.wwm-cmp-modal-a .wwm-cmp-row .wwm-cmp-pct,
 .wwm-cmp-modal-a .wwm-cmp-ratio {
   font-family: var(--f-mono, 'Rajdhani');
   font-size: var(--text-xs);
@@ -538,13 +539,6 @@
   text-align: center;
   display: inline-block;
   margin-left: 0;
-}
-.wwm-cmp-modal-a .wwm-cmp-pct.low,
-.wwm-cmp-modal-a .wwm-cmp-row .wwm-cmp-pct.low,
-.wwm-cmp-modal-a .wwm-cmp-ratio.low {
-  background: var(--vermilion-bright-tint) !important;
-  color: var(--vermilion) !important;
-  border-color: var(--vermilion-bright-soft-mid);
 }
 /* MAX% rank別配色 (ゲーム準拠 金>紫>青、 閾値 0.85 / 0.70) */
 .wwm-cmp-modal-a .wwm-cmp-ratio.rank-gold {
@@ -585,12 +579,6 @@
 .wwm-cmp-modal-a.wwm-modal-square { overflow: visible; }
 /* 武庫modal: path 5個横並び収容のため広め */
 .wwm-modal.wwm-modal-square.wwm-arsenal-modal { max-width: 820px; }
-/* 武庫modal bg-icon: -gear のサイズ30%減 + 位置調整 */
-.wwm-cmp-modal-bg-icon-arsenal {
-  width: 115.5% !important; height: 115.5% !important;
-  right: calc(-30% + 140px) !important;
-  bottom: calc(-45% + 90px) !important;
-}
 /* 武庫modal: row 高さ統一 + ゆとり (checkbox表示で row 押し広げ防止) */
 .wwm-arsenal-modal .wwm-cmp-row { min-height: 38px; }
 .wwm-arsenal-modal .wwm-cmp-row input[type="checkbox"] { width: 14px; height: 14px; margin: 0; }
@@ -668,6 +656,12 @@
 /* 弓/射玦 (slot 9/21) は modal が小さい → 別調整 */
 .wwm-cmp-modal-bg-icon-gear-small {
   right: -40px;
+}
+/* 武庫modal bg-icon: -gear のサイズ30%減 + 位置調整 */
+.wwm-cmp-modal-bg-icon-arsenal {
+  width: 115.5%; height: 115.5%;
+  right: calc(-30% + 140px);
+  bottom: calc(-45% + 90px);
 }
 .wwm-cmp-modal-a .wwm-modal-body { position: relative; overflow: hidden; }
 .wwm-cmp-modal-a .wwm-cmp-grid { position: relative; z-index: 1; }
@@ -786,11 +780,6 @@
   text-align: right;
   font-size: var(--text-md);
 }
-.wwm-cmp-modal-a .wwm-cmp-pct {
-  font-size: var(--text-xs);
-  padding: 1px 4px;
-  text-align: center;
-}
 /* kongfu / set padding スリム */
 .wwm-cmp-modal-a .wwm-cmp-kongfu-header,
 .wwm-cmp-modal-a .wwm-cmp-kongfu-select,
@@ -836,10 +825,6 @@
     drop-shadow(0 0 6px rgba(168,212,180,0.7))
     drop-shadow(0 0 14px rgba(168,212,180,0.45));
 }
-.wwm-cmp-col > .wwm-cmp-title,
-.wwm-cmp-col > .wwm-cmp-rows,
-.wwm-cmp-col > .wwm-cmp-kongfu-header,
-.wwm-cmp-col > .wwm-cmp-kongfu-select { position: relative; z-index: 1; }
 .wwm-cmp-kongfu-header {
   font-size: var(--text-12); color: var(--accent);
   font-weight: var(--fw-bold);
