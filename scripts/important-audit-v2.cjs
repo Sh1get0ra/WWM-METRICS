@@ -461,11 +461,19 @@ function buildInlineIndex(jsSources) {
       }
     }
     // 2. receiver.style.prop = / cssText / setProperty
-    for (const m of src.matchAll(/([\w$]+)\.style\.([a-zA-Z]+)\s*=|([\w$]+)\.style\.setProperty\(\s*['"]([^'"]+)['"]/g)) {
-      const name = m[1] || m[3];
+    for (const m of src.matchAll(/((?:document\.)?[\w$]+)\.style\.([a-zA-Z]+)\s*=|((?:document\.)?[\w$]+)\.style\.setProperty\(\s*['"]([^'"]+)['"]/g)) {
+      const rawName = m[1] || m[3];
       let prop = m[2] ? camelToKebab(m[2]) : m[4];
       if (prop && prop.startsWith('--')) continue; // CSS 変数 → 対象外
-      const tokens = resolveReceiver(name, src, m.index);
+      // document.body / document.documentElement 直書き → element 名 token
+      let tokens;
+      let name = rawName;
+      if (rawName === 'document.body') tokens = ['%body'];
+      else if (rawName === 'document.documentElement') tokens = ['%html'];
+      else {
+        name = rawName.replace(/^document\./, '');
+        tokens = resolveReceiver(name, src, m.index);
+      }
       if (m[2] === 'cssText') {
         // 代入 literal 内のみから prop 抽出 (object literal 等の誤 capture 防止)。
         // 動的 concat / 非 literal → prop 不明 = 全 prop 扱い

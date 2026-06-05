@@ -399,8 +399,8 @@
     height: calc(100vh - var(--wwm-header-h, 103px) - var(--wwm-footer-h, 32px)) !important;
     height: calc(100dvh - var(--wwm-header-h, 103px) - var(--wwm-footer-h, 32px)) !important;
     max-height: none !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
+    overflow-y: auto;
+    overflow-x: hidden;
     scrollbar-width: thin;
     scrollbar-color: var(--gold-deep) transparent;
   }
@@ -440,8 +440,8 @@
     padding: var(--space-1-5) var(--space-2-5) !important;
     margin-top: var(--space-1) !important;
     gap: var(--space-2);
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
+    overflow-x: auto;
+    overflow-y: hidden;
     scrollbar-width: thin;
     -webkit-overflow-scrolling: touch;
   }
@@ -520,7 +520,7 @@
     gap: 8px;
     min-height: 0;
     height: auto;
-    overflow: hidden !important;       /* 装飾はみ出し抑止 ( hero内に「斬」+ink-stroke 残し ) */
+    overflow: hidden;       /* 装飾はみ出し抑止 ( hero内に「斬」+ink-stroke 残し ) */
     flex: 0 0 auto;
     min-height: 90px;       /* 折りたたみ時 最小確保 */
   }
@@ -531,7 +531,7 @@
   .hero-wuxia .hero-left {
     gap: 4px;
     padding: 0;
-    overflow: visible !important;  /* PC overflow:hidden 解除、 子のはみ出し回避 */
+    overflow: visible;  /* PC overflow:hidden 解除、 子のはみ出し回避 */
     width: 100%;
   }
   .hero-wuxia .hero-label .ja { font-size: var(--text-md); }
@@ -973,7 +973,7 @@
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body {
     display: flex;
     flex-direction: column;
-    overflow: hidden !important;
+    overflow: hidden;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-anlz {
     display: flex !important;
@@ -1049,7 +1049,7 @@
     font-size: var(--text-sm);
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-pos { grid-area: pos; font-size: var(--text-sm); }
-  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-slot { grid-area: slot; font-size: var(--text-sm); white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-slot { grid-area: slot; font-size: var(--text-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-delta { grid-area: delta; font-size: var(--text-12); }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-tierup { grid-area: tier; font-size: var(--text-xs); padding: 0 var(--space-1); }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-check-wrap { grid-area: check; padding: 0 var(--space-half); }

@@ -130,13 +130,13 @@ function _showLangPicker() {
   m.className = 'wwm-modal-backdrop';
   m.id = 'wwmLangPicker';
   m.innerHTML = `
-    <div class="wwm-modal" style="max-width:480px;text-align:center;padding:32px 28px;">
-      <h2 style="margin:0 0 18px;font-family:Cinzel,serif;font-size:18px;letter-spacing:0.18em;color:var(--gold-bright);">SELECT LANGUAGE</h2>
-      <div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;">
-        <button class="wwm-btn-secondary" data-lang-pick="ja" style="min-width:90px;">日本語</button>
-        <button class="wwm-btn-secondary" data-lang-pick="en" style="min-width:90px;">English</button>
-        <button class="wwm-btn-secondary" data-lang-pick="zh" style="min-width:90px;">中文</button>
-        <button class="wwm-btn-secondary" data-lang-pick="ko" style="min-width:90px;">한국어</button>
+    <div class="wwm-modal wwm-lang-picker">
+      <h2>SELECT LANGUAGE</h2>
+      <div class="wwm-lang-picker-btns">
+        <button class="wwm-btn-secondary" data-lang-pick="ja">日本語</button>
+        <button class="wwm-btn-secondary" data-lang-pick="en">English</button>
+        <button class="wwm-btn-secondary" data-lang-pick="zh">中文</button>
+        <button class="wwm-btn-secondary" data-lang-pick="ko">한국어</button>
       </div>
     </div>
   `;

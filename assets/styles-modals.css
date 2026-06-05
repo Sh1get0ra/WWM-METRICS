@@ -32,6 +32,26 @@
     inset 0 1px 0 var(--gold-bright-faint),
     0 12px 40px var(--overlay-heavy);
 }
+/* lang picker (app.js _showLangPicker — 旧 inline style から class 化 2026-06-05) */
+.wwm-modal.wwm-lang-picker {
+  max-width: 480px;
+  text-align: center;
+  padding: 32px 28px;
+}
+.wwm-lang-picker h2 {
+  margin: 0 0 18px;
+  font-family: Cinzel, serif;
+  font-size: 18px;
+  letter-spacing: 0.18em;
+  color: var(--gold-bright);
+}
+.wwm-lang-picker-btns {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.wwm-lang-picker-btns .wwm-btn-secondary { min-width: 90px; }
 .wwm-modal::before {
   content: '';
   position: absolute;
@@ -681,8 +701,8 @@
   border-bottom: 1px solid transparent;
 }
 .wwm-cmp-modal-a .wwm-modal-header h2 {
-  margin: 0 !important;
-  font-weight: 900 !important;
+  margin: 0;
+  font-weight: 900;
   display: flex; align-items: center; gap: 8px;
 }
 .wwm-cmp-modal-a .wwm-cmp-title-ja {
