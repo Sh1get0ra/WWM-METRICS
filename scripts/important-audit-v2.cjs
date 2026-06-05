@@ -850,6 +850,9 @@ for (const d of importants) {
 
   compMap.set(d, [...groupSet].filter(x => x !== d));
   inlineMap.set(d, inlineConflict);
+  // JSON 出力にも inline 競合 flag を残す — 手組み strip plan は K だけでなく
+  // 「inline: true の C」 も除外必須 (2026-06-05 sidebar height strip 事故の教訓)
+  d.inline = !!inlineConflict;
 
   if (hasCompetitor) {
     if (!inlineConflict &&

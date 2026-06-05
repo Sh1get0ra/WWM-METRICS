@@ -436,8 +436,8 @@
   body.wwm-layout-active .wwm-app-body::-webkit-scrollbar { width: 6px; }
   body.wwm-layout-active .wwm-app-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
   body.wwm-layout-active .wwm-app-body::-webkit-scrollbar-track { background: transparent; }
-  /* mobile時 sidebar (sb) パネル 非表示 → 内容は FAB (Phase 7) で 全画面表示 */
-  body.wwm-layout-active .wwm-sidebar-test { display: none; }
+  /* mobile時 sidebar 非表示 rule は styles-components.css の overlay rule 直前へ
+     co-locate move 済 (2026-06-05 Step 1 hotfix: overlay display:block との layer flip 根治) */
   /* mobile時 footer は normal flow に戻す (PC は position:fixed で 画面下常駐) */
   body.wwm-layout-active .wwm-footer {
     position: static;
@@ -873,23 +873,9 @@
   }
   .wwm-mobile-stat-overlay-body::-webkit-scrollbar { width: 6px; }
   .wwm-mobile-stat-overlay-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
-  /* overlay内で sidebar 自体を move して表示 — 元 mobile時 display:none を上書き
-     ⚠ !important keep 確定 (Batch M): components.css の sidebar-test layout rule
-     (desktop !important) + OBS rule との 3つ巴。 @layer modes 移行まで維持 */
-  body.wwm-layout-active .wwm-sidebar-test.wwm-sidebar-in-overlay,
-  body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sidebar-test {
-    display: block;
-    position: static !important;
-    width: 100% !important;
-    height: auto;
-    max-height: none !important;
-    background: transparent !important;
-    border: 0;
-    padding: 0 !important;
-    margin: 0;
-    visibility: visible;
-    opacity: 1;
-  }
+  /* overlay 内 sidebar 表示 rule は styles-components.css の PC sidebar rule 直後へ
+     co-locate move 済 (2026-06-05 Step 1 hotfix): 両者 imp の layer 反転 flip 根治。
+     imp 同士は spec 比較 = file 位置無関係で現 cascade 不変 */
   /* mini-hero-card 上部固定: overlay-body 直下に出して sticky 復活 (sidebar-test 内では効かない場合の保険として padding 構造合わせ) */
   body.wwm-layout-active .wwm-mobile-stat-overlay-body {
     position: relative;
