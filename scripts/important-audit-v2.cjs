@@ -796,6 +796,14 @@ function bgImageOnlySafe(token, d, g) {
 
 function inlineConflictV3(d) {
   const g = propGroup(d.prop);
+  // OBS browser source 注入 CSS (repo 外 unlayered):
+  //   body { background-color: rgba(0,0,0,0); margin: 0px auto; overflow: hidden; }
+  // layered normal は unlayered に負ける → OBS context の body 該当 prop は imp 必須 = K
+  // (2026-06-05 Step 1 で bg-color imp を strip し OBS 透明度が死んだ事故の再発防止)
+  if (/wwm-view-sidebar/.test(d.selector) && /(^|\s)body(\.|$|\s|,)/.test(d.selector + ' ') &&
+      ['background', 'margin', 'overflow'].includes(g)) {
+    return `obs-injected(body|${g})`;
+  }
   const inlineTokens = new Set([...(elemInline.get(g) || []), ...(elemInline.get('*') || [])]);
   // '__universal__' = querySelectorAll('*') への inline 書込 → 全 selector と競合
   if (inlineTokens.has('__universal__') && !bgImageOnlySafe('__universal__', d, g)) return `universal(${g})`;

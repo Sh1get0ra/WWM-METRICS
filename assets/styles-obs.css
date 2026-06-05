@@ -18,7 +18,11 @@ html.wwm-view-sidebar {
 }
 html.wwm-view-sidebar body,
 html.wwm-view-sidebar body.wwm-layout-active {
-  background-color: rgba(var(--overlay-bg-rgb), var(--overlay-bg-alpha));
+  /* K: OBS browser source はデフォルトで body { background-color: rgba(0,0,0,0) } を
+     unlayered 注入する。 layered normal は unlayered に負けるため !important 必須
+     (important では layered > unlayered に逆転)。 strip すると OBS の透明度
+     (?op= / ?bg=) が死ぬ — 2026-06-05 Step 1 で strip して実際に発生した事故 */
+  background-color: rgba(var(--overlay-bg-rgb), var(--overlay-bg-alpha)) !important;
   background-image: none;
   height: 100vh;  /* fallback: OBS 旧 Chromium (dvh 非対応) 用 */
   height: 100dvh; /* dvh 対応 browser: responsive.css mobile rule と同値化 (@layer flip 解消) */
