@@ -13,8 +13,8 @@ html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-val-input {
 
 html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-rows {
   background: var(--overlay-mid) !important;
-  border: 1px solid rgba(201,164,90,0.25) !important;
-  box-shadow: inset 0 1px 6px var(--overlay-heavy) !important;
+  border: 1px solid rgba(201,164,90,0.25);
+  box-shadow: inset 0 1px 6px var(--overlay-heavy);
   padding: var(--space-1) var(--space-1-5) !important;
 }
 
