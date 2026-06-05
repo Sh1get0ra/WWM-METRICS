@@ -92,7 +92,7 @@ header.topbar::after {
   writing-mode: vertical-rl;
   text-orientation: upright;
   font-size: var(--text-18); letter-spacing: 0.18em;
-  color: var(--gold-bright);
+  color: var(--c-fg-accent);
   padding: var(--space-half) var(--space-1);
   border-left: 2px solid var(--gold);
   border-right: 2px solid var(--gold);
@@ -107,7 +107,7 @@ header.topbar::after {
 }
 .wwm-brand-sub {
   font-family: var(--f-mono);
-  font-size: var(--text-sm); color: var(--gold);
+  font-size: var(--text-sm); color: var(--c-fg-gold-label);
   letter-spacing: 0.3em; opacity: 0.85;
 }
 .wwm-brand-seal {

@@ -259,7 +259,7 @@
 /* light: sidebar 適用値 (判定確率の括弧内) を濃amberに (cream上で gold が低コントラストのため) */
 /* hiddenStat: ゲーム実機で見えない内部値 (例 critRateBoosted = ボーナス会心率込みの実効会心率) → スレート青で区別 */
 .wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-label,
-.wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-value { color: #7a93b0; }
+.wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-value { color: var(--c-fg-hidden-stat); }
 .wwm-sb-baseline { color: var(--paper-mute); opacity: 0.7; font-weight: var(--fw-medium); }
 .wwm-sb-arrow {
   color: var(--gold); margin: 0 3px; opacity: 0.7;
@@ -435,7 +435,7 @@
   font-family: var(--f-mono, 'Rajdhani');
   font-weight: 700;
   background: var(--bg-raised);
-  color: var(--paper);
+  color: var(--c-modal-a-fg);
 }
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
   cursor: pointer;
@@ -714,7 +714,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   font-size: var(--text-18);
   font-weight: 900;
   letter-spacing: 0.18em;
-  color: var(--paper);
+  color: var(--c-modal-a-fg);
 }
 .wwm-cmp-modal-a .wwm-cmp-title-en {
   font-family: var(--f-latin, 'Cinzel');

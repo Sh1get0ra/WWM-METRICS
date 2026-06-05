@@ -10,7 +10,7 @@ html[data-theme="light"] .hero::before {
   color: rgba(160,28,18,0.18);
 }
 
-html[data-theme="light"] .wwm-brand-vert { color: var(--vermilion); border-color: var(--gold); }
+html[data-theme="light"] .wwm-brand-vert {  border-color: var(--gold); }
 
 html[data-theme="light"] .wwm-brand-en { color: var(--gold); opacity: 0.75; }
 
@@ -157,6 +157,16 @@ html[data-theme="light"] {
   --c-tier-ss-glow-pink:       rgba(255,200,180,0.4);/* tier-SS inset/text glow (pink) */
   --c-anlz-shadow-orange:      rgba(120,60,20,.18);  /* anlz-header / anlz-body box-shadow */
   --c-sb-top-bg:               #f5ead0;              /* sidebar wwm-sb-top + sb-rest gradient 上 */
+
+  /* ─── @layer Step 2-b: theme-swap pair tokens (light 値) ─── */
+  --c-fg-accent: var(--vermilion);  /* アクセント前景 (dark 明金 / light 朱) */
+  --c-fg-gold-label: var(--gold-bright);  /* 金ラベル前景 (light は暗金) */
+  --c-fg-hidden-stat: #3d5266;  /* 隠しステ行 青灰 */
+  --c-modal-a-fg: var(--brown-1);  /* compare modal A 主文字色 */
+  --c-icon-dim-opacity: 0.22;  /* equip/xinfa icon 背景透かし opacity */
+  --c-fg-vermilion-strong: var(--vermilion-deep);  /* 朱前景 強調 (light は深朱) */
+  --c-fg-emphasis: var(--vermilion-deep);  /* 見出し強調 (hero label ja / cmp-val-input) */
+  --c-anlz-shadow: 0 6px 18px var(--c-anlz-shadow-orange);  /* anlz header/body 浮き shadow */
 }
 
 html[data-theme="light"] body {
@@ -219,8 +229,6 @@ html[data-theme="light"] .icon-btn.import-btn { color: var(--gold-bright); borde
 
 html[data-theme="light"] .icon-btn.import-btn:hover { background: var(--gold); color: #fff; }
 
-html[data-theme="light"] .preset-bar-title { color: var(--gold-bright); }
-
 html[data-theme="light"] .preset-slot-num { color: var(--paper-mute); }
 
 html[data-theme="light"] .preset-slot.has-data { background: rgba(255,246,220,0.7); border-color: var(--vermilion-mid-strong); }
@@ -229,7 +237,7 @@ html[data-theme="light"] .preset-slot.has-data .preset-slot-num { color: var(--v
 
 html[data-theme="light"] .preset-save { color: var(--gold-bright); border-color: var(--c-gold-deep-strong); }
 
-html[data-theme="light"] .preset-save:hover { background: var(--gold-bright); color: #fff5dc; }
+html[data-theme="light"] .preset-save:hover {  color: #fff5dc; }
 
 html[data-theme="light"] .preset-load { color: var(--jade-bright); border-color: rgba(74,122,90,0.5); }
 
@@ -239,7 +247,7 @@ html[data-theme="light"] .preset-del { color: var(--vermilion); }
 
 html[data-theme="light"] .preset-del:hover:not(:disabled) {  color: #fff; }
 
-html[data-theme="light"] .hero-number .unit { color: var(--gold-bright); border-bottom-color: var(--gold-bright); }
+html[data-theme="light"] .hero-number .unit {  border-bottom-color: var(--gold-bright); }
 
 html[data-theme="light"] .hb-value.phys { color: var(--vermilion); }
 
@@ -317,9 +325,6 @@ html[data-theme="light"] .wwm-sb-top { background: var(--c-sb-top-bg); }
 
 html[data-theme="light"] .wwm-sb-applied { color: var(--c-text-brown-bright); opacity: 1; }
 
-html[data-theme="light"] .wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-label,
-html[data-theme="light"] .wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-value { color: #3d5266; }
-
 html[data-theme="light"] [data-liupai-pinyin="tianquan"] .wwm-equip-icon,
 html[data-theme="light"] [data-liupai-pinyin="tianquan"] .wwm-xinfa-icon {
   filter:
@@ -390,10 +395,6 @@ html[data-theme="light"] .wwm-share-warn {
   background: rgba(184,100,28,0.22) !important;
   color: #6a3a14 !important;
   border-left-color: var(--c-orange-deep) !important;
-}
-
-html[data-theme="light"] .wwm-opt-check {
-  accent-color: var(--vermilion);
 }
 
 html[data-theme="light"] .wwm-cmp-col,
@@ -532,7 +533,7 @@ html[data-theme="light"] .wwm-cmp-modal-a {
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-header { background: transparent; }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title-ja { color: var(--brown-1); text-shadow: none; }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title-ja {  text-shadow: none; }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title-en { color: var(--c-text-warm); }
 
@@ -607,10 +608,6 @@ html[data-theme="light"] .wwm-cmp-modal-a select option:checked {
   color: var(--brown-1);
 }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select option {
-  color: var(--brown-1);
-}
-
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select option:checked {
   background: var(--c-modal-a-option-checked);
   color: var(--brown-1);
@@ -621,7 +618,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
 }
 
 html[data-theme="light"] .wwm-brand-sub {
-  color: var(--gold-bright);
+
   text-shadow: 0 0 4px var(--c-gold-deep-mid);
 }
 
@@ -635,7 +632,7 @@ html[data-theme="light"] .wwm-modal-bg-icon {
 
 html[data-theme="light"] .wwm-equip-icon,
 html[data-theme="light"] .wwm-xinfa-icon {
-  opacity: 0.22;
+
   filter:
     brightness(0)
     drop-shadow(0 0 3px var(--c-gold-deep-strong))
@@ -655,7 +652,7 @@ html[data-theme="light"] .wwm-xinfa-liupai-badge {
 }
 
 html[data-theme="light"] .wwm-xinfa-tier-chip {
-  color: var(--vermilion-deep);
+
   border-color: var(--c-vermilion-deep-mid);
   background: var(--vermilion-bright-tint);
 }
@@ -703,10 +700,6 @@ html[data-theme="light"] .hero.hero-wuxia {
   background-blend-mode: difference, normal;
   border-color: var(--gold-deep);
   box-shadow: inset 0 0 40px rgba(122,90,32,.18);
-}
-
-html[data-theme="light"] .hero-wuxia .hero-label .ja {
-  color: var(--vermilion-deep);
 }
 
 html[data-theme="light"] .hero-wuxia .hero-label .en {
@@ -998,7 +991,7 @@ html[data-theme="light"] .wwm-anlz-header {
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/section_bg-66d4d3cb.png") center / cover no-repeat,
     linear-gradient(180deg, var(--c-header-cream-top), var(--c-header-cream-bot));
   background-blend-mode: normal, difference, normal;
-  box-shadow: 0 6px 18px var(--c-anlz-shadow-orange);
+
 }
 
 html[data-theme="light"] .wwm-anlz-header::before {
@@ -1043,10 +1036,6 @@ html[data-theme="light"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
 
 html[data-theme="light"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab.active {
   color: #8a5a14;
-}
-
-html[data-theme="light"] .wwm-anlz-body {
-  box-shadow: 0 6px 18px var(--c-anlz-shadow-orange);
 }
 
 html[data-theme="light"] .wwm-anlz-body::before {
@@ -1098,31 +1087,14 @@ html[data-theme="light"] body.wwm-layout-active .wwm-mobile-stat-fab {
     box-shadow: 0 4px 16px var(--overlay-tint), 0 0 12px var(--vermilion-mid-2);
   }
 
-html[data-theme="light"] .wwm-mobile-stat-fab-fallback { color: var(--vermilion); }
-
-html[data-theme="light"] .wwm-mobile-stat-overlay {
-    background: linear-gradient(180deg, var(--c-mobile-overlay-top), var(--c-mobile-overlay-bot));
-  }
-
 html[data-theme="light"] .wwm-mobile-stat-overlay-header {
-    background: var(--c-mobile-overlay-header-bg);
+
     border-bottom-color: var(--c-border-soft-warm);
-  }
-
-html[data-theme="light"] .wwm-mobile-stat-overlay-title { color: var(--vermilion); }
-
-html[data-theme="light"] .wwm-mobile-stat-overlay-close { color: var(--vermilion); }
-
-html[data-theme="light"] .wwm-mobile-anlz-overlay {
-    background: linear-gradient(180deg, var(--c-mobile-overlay-top), var(--c-mobile-overlay-bot));
   }
 
 html[data-theme="light"] .wwm-mobile-anlz-overlay-header {
-    background: var(--c-mobile-overlay-header-bg);
+
     border-bottom-color: var(--c-border-soft-warm);
   }
 
-html[data-theme="light"] .wwm-mobile-anlz-overlay-title { color: var(--vermilion-deep); }
-
-html[data-theme="light"] .wwm-mobile-anlz-overlay-close { color: var(--vermilion-deep); }
 } /* end @layer light */

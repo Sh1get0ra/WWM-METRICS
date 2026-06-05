@@ -208,6 +208,19 @@
   --c-modal-a-option-bg:  var(--bg-raised); /* compare modal A select option bg */
   --c-rail-bg:            linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.25) 60%, rgba(40,30,20,0.45)); /* 装備/心法 rail 縦 gradient (light override 別値) */
 
+  /* ─── @layer Step 2-b: theme-swap pair tokens (dark default) ─── */
+  --c-fg-accent: var(--gold-bright);  /* アクセント前景 (dark 明金 / light 朱) */
+  --c-fg-gold-label: var(--gold);  /* 金ラベル前景 (light は暗金) */
+  --c-fg-hidden-stat: #7a93b0;  /* 隠しステ行 青灰 */
+  --c-modal-a-fg: var(--paper);  /* compare modal A 主文字色 */
+  --c-icon-dim-opacity: 0.15;  /* equip/xinfa icon 背景透かし opacity */
+  --c-fg-vermilion-strong: var(--vermilion-bright);  /* 朱前景 強調 (light は深朱) */
+  --c-fg-emphasis: var(--gold-bright);  /* 見出し強調 (hero label ja / cmp-val-input) */
+  --c-anlz-shadow: 0 8px 22px var(--overlay-soft-2);  /* anlz header/body 浮き shadow */
+  --c-mobile-overlay-top: rgba(20,15,12,0.98);  /* mobile overlay bg (dark default 追加で base を token 参照化) */
+  --c-mobile-overlay-bot: rgba(10,8,9,0.98);  /* mobile overlay bg (dark default 追加で base を token 参照化) */
+  --c-mobile-overlay-header-bg: linear-gradient(180deg, rgba(26,20,16,0.95), rgba(15,12,14,0.92));  /* mobile overlay header bg (dark default 追加) */
+
   /* Safe Area inset utility (Phase 1 base) */
   --safe-top:    env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);

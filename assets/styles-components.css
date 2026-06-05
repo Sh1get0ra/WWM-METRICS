@@ -89,7 +89,7 @@ html.wwm-shared-build-mode #exportBtn {
 }
 .preset-bar-title {
   font-family: var(--f-mono); font-size: var(--text-sm); font-weight: var(--fw-bold);
-  color: var(--gold); letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--c-fg-gold-label); letter-spacing: 0.16em; text-transform: uppercase;
   flex-shrink: 0;
 }
 /* 弱点バッジ (Preset bar 横) */
@@ -175,7 +175,7 @@ html.wwm-shared-build-mode #exportBtn {
   white-space: nowrap;
 }
 .preset-save { border-color: var(--gold-strong); color: var(--gold); }
-.preset-save:hover { background: var(--gold); color: var(--bg-0); }
+.preset-save:hover { background: var(--c-fg-gold-label); color: var(--bg-0); }
 .preset-load { border-color: rgba(127,168,138,0.5); color: var(--jade-bright); }
 .preset-load:hover:not(:disabled) { background: var(--jade); color: var(--bg-0); }
 .preset-del  { border-color: var(--vermilion-strong); color: var(--vermilion-bright); padding: 3px 6px; }
@@ -309,7 +309,7 @@ html.wwm-shared-build-mode #exportBtn {
 }
 .hero-number .unit {
   font-family: var(--f-mono); font-size: var(--text-md); font-weight: var(--fw-bold);
-  color: var(--gold); letter-spacing: 0.32em;
+  color: var(--c-fg-gold-label); letter-spacing: 0.32em;
   padding-bottom: var(--space-3);
   border-bottom: 1px solid var(--gold-deep);
   padding-left: var(--space-half); padding-right: var(--space-half);
@@ -886,7 +886,7 @@ html.wwm-view-sidebar .wwm-app-body {
   right: -29px; top: 62%;
   transform: translateY(calc(-50% + 5px));
   width: 120px; height: 120px;
-  opacity: 0.15;
+  opacity: var(--c-icon-dim-opacity);
   filter:
     drop-shadow(0 0 3px rgba(212,175,55,0.5))
     drop-shadow(0 0 8px var(--accent-mid))
@@ -1304,7 +1304,7 @@ html.wwm-view-sidebar .wwm-app-body {
 .wwm-opt-check {
   width: 16px; height: 16px;
   cursor: pointer;
-  accent-color: var(--gold-bright);
+  accent-color: var(--c-fg-accent);
   margin: 0;
 }
 /* 計算中: ヘッダ操作 disable 視覚化 */
@@ -1694,7 +1694,7 @@ html.wwm-view-sidebar .wwm-app-body {
   right: -12px; top: 62%;
   transform: translateY(-50%);
   width: 88px; height: 88px;
-  opacity: 0.15;
+  opacity: var(--c-icon-dim-opacity);
   filter:
     drop-shadow(0 0 3px var(--gold-bright-mid))
     drop-shadow(0 0 8px rgba(240,210,138,0.3))
@@ -1872,7 +1872,7 @@ html.wwm-view-sidebar .wwm-app-body {
   font-family: var(--f-mono);
   font-size: var(--text-xs);
   font-weight: var(--fw-bold);
-  color: var(--vermilion-bright);
+  color: var(--c-fg-vermilion-strong);
   padding: 1px 6px;
   border: 1px solid rgba(232,81,58,0.50);
   background: var(--vermilion-soft);
@@ -1970,7 +1970,7 @@ html.wwm-view-sidebar .wwm-app-body {
   font-weight: var(--fw-bold);
   font-size: 30px;
   letter-spacing: .18em;
-  color: var(--gold-bright);
+  color: var(--c-fg-emphasis);
 }
 .hero-wuxia .hero-label .en {
   font-family: var(--f-mono);
@@ -2221,7 +2221,7 @@ html.wwm-view-sidebar .wwm-app-body {
   border: 1px solid var(--anlz-line);
   padding: 12px 26px;
   overflow: hidden;
-  box-shadow: 0 8px 22px var(--overlay-soft-2);
+  box-shadow: var(--c-anlz-shadow);
 }
 /* 古紙テクスチャ (SVG turbulence) */
 .wwm-anlz-header::before {
@@ -2368,7 +2368,7 @@ html[lang="en"] .wwm-cmp-title-en {
   border: 1px solid var(--anlz-line);
   padding: 24px 32px 30px;
   overflow: hidden;
-  box-shadow: 0 8px 22px var(--overlay-soft-2);
+  box-shadow: var(--c-anlz-shadow);
 }
 .wwm-anlz-body::before {
   content: '';

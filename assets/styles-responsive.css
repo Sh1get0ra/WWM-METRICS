@@ -818,7 +818,7 @@
     font-family: var(--f-display);
     font-weight: var(--fw-black);
     font-size: var(--text-14);
-    color: var(--gold-bright);
+    color: var(--c-fg-accent);
     letter-spacing: 0.08em;
   }
   .wwm-mobile-stat-fab-avatar[src]:not([src=""]) + .wwm-mobile-stat-fab-fallback { display: none; }
@@ -834,7 +834,7 @@
   .wwm-mobile-stat-overlay {
     position: fixed;
     inset: 0;
-    background: linear-gradient(180deg, rgba(20,15,12,0.98), rgba(10,8,9,0.98));
+    background: linear-gradient(180deg, var(--c-mobile-overlay-top), var(--c-mobile-overlay-bot));
     z-index: 1300;
     display: flex;
     flex-direction: column;
@@ -846,7 +846,7 @@
     display: flex; align-items: center; justify-content: space-between;
     padding: var(--space-2) var(--space-3);
     border-bottom: 1px solid var(--ink-2);
-    background: linear-gradient(180deg, rgba(26,20,16,0.95), rgba(15,12,14,0.92));
+    background: var(--c-mobile-overlay-header-bg);
     flex: 0 0 auto;
   }
   .wwm-mobile-stat-overlay-title {
@@ -854,14 +854,14 @@
     font-weight: var(--fw-black);
     font-size: var(--text-14);
     letter-spacing: 0.18em;
-    color: var(--gold-bright);
+    color: var(--c-fg-accent);
   }
   .wwm-mobile-stat-overlay-close {
     width: 36px; height: 36px;
     background: transparent;
     border: 1px solid var(--ink-2);
     border-radius: 3px;
-    color: var(--gold-bright);
+    color: var(--c-fg-accent);
     font-size: var(--text-xl); line-height: 1;
     cursor: pointer;
   }
@@ -909,7 +909,7 @@
   .wwm-mobile-anlz-overlay {
     position: fixed;
     inset: 0;
-    background: linear-gradient(180deg, rgba(20,15,12,0.98), rgba(10,8,9,0.98));
+    background: linear-gradient(180deg, var(--c-mobile-overlay-top), var(--c-mobile-overlay-bot));
     z-index: 1300;
     display: flex;
     flex-direction: column;
@@ -921,7 +921,7 @@
     display: flex; align-items: center; justify-content: space-between;
     padding: var(--space-2) var(--space-3);
     border-bottom: 1px solid var(--ink-2);
-    background: linear-gradient(180deg, rgba(26,20,16,0.95), rgba(15,12,14,0.92));
+    background: var(--c-mobile-overlay-header-bg);
     flex: 0 0 auto;
   }
   .wwm-mobile-anlz-overlay-title {
@@ -929,14 +929,14 @@
     font-weight: var(--fw-black);
     font-size: var(--text-14);
     letter-spacing: 0.18em;
-    color: var(--vermilion-bright);
+    color: var(--c-fg-vermilion-strong);
   }
   .wwm-mobile-anlz-overlay-close {
     width: 36px; height: 36px;
     background: transparent;
     border: 1px solid var(--ink-2);
     border-radius: 3px;
-    color: var(--vermilion-bright);
+    color: var(--c-fg-vermilion-strong);
     font-size: var(--text-xl); line-height: 1;
     cursor: pointer;
   }
