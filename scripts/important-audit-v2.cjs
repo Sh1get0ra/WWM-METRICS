@@ -1047,6 +1047,59 @@ if (simArg) {
   process.exit(flips.length === 0 ? 0 : 1);
 }
 
+// ── --layer-impact: @layer 移行 (file = layer、 現 link 順) した場合の flip 全列挙 ──
+// layer 化後の cascade: cross-file は後 layer が無条件勝ち (normal)。
+// !important は layer 順反転 (先 layer の important が勝つ)。
+// flip = 現状勝者 ≠ layer 後勝者 となる pair (値同一は無害なので除外)
+if (process.argv.includes('--layer-impact')) {
+  const flips = [];
+  const seenPair = new Set();
+  for (const [key, group] of index) {
+    for (let i = 0; i < group.length; i++) {
+      for (let j = i + 1; j < group.length; j++) {
+        const x = group[i], y = group[j];
+        if (x.file === y.file) continue; // 同 layer 内 = spec/line のまま不変
+        const pid = [`${x.file}:${x.line}:${x.prop}:${x.selector}`, `${y.file}:${y.line}:${y.prop}:${y.selector}`].sort().join('||');
+        if (seenPair.has(pid)) continue;
+        seenPair.add(pid);
+        if (!propsConflict(x.prop, y.prop)) continue;
+        if (!themeOverlap(x, y) || !mediaOverlap(x.media, y.media)) continue;
+        if (x.prop === y.prop && x.value === y.value) continue;
+        const fx = FILE_ORDER.get(x.file) ?? 99, fy = FILE_ORDER.get(y.file) ?? 99;
+        // 現状勝者
+        let nowXWins;
+        if (x.important !== y.important) nowXWins = x.important;
+        else {
+          const sx = specificity(x.selector), sy = specificity(y.selector);
+          nowXWins = sx !== sy ? sx > sy : fx > fy;
+        }
+        // layer 後勝者
+        let layerXWins;
+        if (x.important !== y.important) layerXWins = x.important; // imp > normal は不変
+        else if (x.important && y.important) layerXWins = fx < fy; // 両 imp = layer 順反転
+        else layerXWins = fx > fy;                                  // 両 normal = 後 layer 勝ち
+        if (nowXWins !== layerXWins) {
+          flips.push({ key, loser: nowXWins ? y : x, nowWinner: nowXWins ? x : y });
+        }
+      }
+    }
+  }
+  console.log(`\n@layer 移行 flip pair: ${flips.length}`);
+  const byFile = {};
+  for (const f of flips) {
+    const k = `${f.nowWinner.file.replace('assets/styles-','')} が今勝ち → 負けに`;
+    byFile[k] = (byFile[k] || 0) + 1;
+  }
+  console.table(byFile);
+  // 蘇生する「現状 dead」 decl (今負けてる側が layer 後勝つ) 上位 sample
+  for (const f of flips.slice(0, 15)) {
+    console.log(` [${f.key}]`);
+    console.log(`   今勝: ${f.nowWinner.file}:${f.nowWinner.line} ${f.nowWinner.selector} { ${f.nowWinner.prop}: ${f.nowWinner.value} }`);
+    console.log(`   蘇生: ${f.loser.file}:${f.loser.line} ${f.loser.selector} { ${f.loser.prop}: ${f.loser.value} }`);
+  }
+  process.exit(0);
+}
+
 // ── --diag: C category のブロック理由 診断 ──────────────────────────
 // 各 C decl について「なぜ strip 不可か」を pair 単位で記録 + cluster 集計
 if (process.argv.includes('--diag')) {
