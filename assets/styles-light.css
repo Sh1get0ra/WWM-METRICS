@@ -548,7 +548,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-header::after {
   left: 0 !important; right: 0 !important; width: auto;
   height: 2px;
   background: linear-gradient(90deg, transparent 0%, transparent 30%, rgba(232,81,58,0.85) 50%, transparent 70%, transparent 100%) !important;
-  opacity: 1 !important;
+  opacity: 1;
 }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-col,
@@ -657,7 +657,7 @@ html[data-theme="light"] .wwm-diag-modal .wwm-modal-bg-icon {
     brightness(0)
     drop-shadow(0 0 6px var(--vermilion-strong))
     drop-shadow(0 0 14px var(--vermilion-mid)) !important;
-  opacity: 0.22 !important;
+  opacity: 0.22;
 }
 
 html[data-theme="light"] .wwm-xinfa-liupai-badge {

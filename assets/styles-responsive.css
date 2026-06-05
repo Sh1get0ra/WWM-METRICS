@@ -8,7 +8,7 @@
 }
 
 @media (max-width: 600px) {
-  .hero--collapsed .pname { display: none !important; }
+  .hero--collapsed .pname { display: none; }
   .hero--collapsed .pval { font-size: var(--text-xs); }
   .hero--collapsed .prob-row { gap: 3px; }
 }
@@ -106,7 +106,7 @@
     grid-template-columns: 1fr 190px;
   }
   .hero--collapsed .hero-right {
-    padding: var(--space-1-5) var(--space-2-5) !important;
+    padding: var(--space-1-5) var(--space-2-5);
   }
   .hero--collapsed .donut { width: 56px; height: 56px; }
   .hero--collapsed .donut-wrap { gap: var(--space-2); }
@@ -280,7 +280,7 @@
   .wwm-mobile-topbar .wwm-brand-vert {
     font-size: var(--text-md) !important;
     letter-spacing: 0.14em;
-    padding: 1px 2px !important;
+    padding: 1px 2px;
     border-left-width: 1px !important;
     border-right-width: 1px !important;
     flex: 0 0 auto;
@@ -409,7 +409,7 @@
     position: fixed;
     bottom: 0; left: 0; right: 0;
     z-index: 100;
-    padding: calc(4px + var(--safe-bottom, 0px)) 12px 4px !important;
+    padding: calc(4px + var(--safe-bottom, 0px)) 12px 4px;
   }
   /* 格析section mobile時 hidden (📈格析 tap で 全画面modal表示 Phase 8 で実装) */
   body.wwm-layout-active .wwm-analysis-tabs,
@@ -424,12 +424,12 @@
   body.wwm-layout-active .wwm-app-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
   body.wwm-layout-active .wwm-app-body::-webkit-scrollbar-track { background: transparent; }
   /* mobile時 sidebar (sb) パネル 非表示 → 内容は FAB (Phase 7) で 全画面表示 */
-  body.wwm-layout-active .wwm-sidebar-test { display: none !important; }
+  body.wwm-layout-active .wwm-sidebar-test { display: none; }
   /* mobile時 footer は normal flow に戻す (PC は position:fixed で 画面下常駐) */
   body.wwm-layout-active .wwm-footer {
     position: static;
     z-index: auto;
-    padding: calc(8px + var(--safe-bottom)) 12px 8px !important;
+    padding: calc(8px + var(--safe-bottom)) 12px 8px;
   }
 
   /* ─── Phase 3: preset-bar (弱点+プリセット) 1行横スクロール強制 ─── */
@@ -477,7 +477,7 @@
     padding: 1px 4px !important;
     font-size: 0 !important;  /* 元テキスト 非表示、 ::before でアイコン */
     letter-spacing: 0;
-    flex: 0 0 auto !important;
+    flex: 0 0 auto;
     min-width: 0 !important;
   }
   .preset-save::before { content: '💾'; font-size: var(--text-md); }
@@ -485,7 +485,7 @@
   .preset-del::before  { content: '✕';  font-size: var(--text-md); }
   .preset-slot {
     gap: 1px;
-    padding: 0 !important;
+    padding: 0;
     border: 1px solid var(--ink-2);
     border-radius: 2px;
     width: auto;       /* L1368 width:100% 解除 */
@@ -511,17 +511,17 @@
   /* ─── Phase 4: hero compact + mobile RESET 内蔵 ─── */
   section.hero.hero-wuxia {
     padding: var(--space-3) var(--space-3-5) !important;
-    margin: var(--space-1) 0 !important;
+    margin: var(--space-1) 0;
     display: flex !important;          /* grid解除、 flex column で縦並び明示 */
-    flex-direction: column !important;
-    grid-template-columns: none !important;
+    flex-direction: column;
+    grid-template-columns: none;
     grid-template-rows: none;
     grid-template-areas: none;
-    gap: 8px !important;
+    gap: 8px;
     min-height: 0 !important;
     height: auto !important;
     overflow: hidden !important;       /* 装飾はみ出し抑止 ( hero内に「斬」+ink-stroke 残し ) */
-    flex: 0 0 auto !important;
+    flex: 0 0 auto;
     min-height: 90px !important;       /* 折りたたみ時 最小確保 */
   }
   /* hero拡張時 = 自然 contents 高さで fit (余白なし、 donut + ラベル ピッタリ) */
@@ -570,7 +570,7 @@
     min-height: auto;
     align-self: start !important;
     justify-self: center !important;
-    text-align: center !important;
+    text-align: center;
   }
   .hero-next-inline {
     grid-area: next;
@@ -581,7 +581,7 @@
     gap: 3px !important;
     font-size: var(--text-xs) !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 0;
     align-self: end !important;
     justify-self: center !important;
   }
@@ -593,12 +593,12 @@
   /* hero 新layout: 上半=情報+donut (Tier右に小)、 下半=tap時 内訳1行 */
   section.hero.hero-wuxia {
     display: grid !important;
-    grid-template-columns: 1fr auto !important;
+    grid-template-columns: 1fr auto;
     grid-template-areas:
       "info luopan"
       "judges judges";
-    gap: 4px 10px !important;
-    align-items: center !important;
+    gap: 4px 10px;
+    align-items: center;
     cursor: pointer;
   }
   .hero-left { grid-area: info; }
@@ -630,7 +630,7 @@
     width: 100%;
   }
   section.hero.hero-wuxia.hero--expanded .hero-right .judge-list {
-    display: flex !important;
+    display: flex;
   }
   .hero-right .judge-row {
     display: inline-flex;
@@ -638,13 +638,13 @@
     gap: 3px;
     font-size: var(--text-sm) !important;
     margin: 0;
-    padding: 0 !important;
+    padding: 0;
     white-space: nowrap;
     border: none !important;
   }
   .hero-right .judge-row-sep {
     border: none !important;
-    padding: 0 !important;
+    padding: 0;
     margin: 0;
   }
   section.hero.hero-wuxia.hero--expanded::after { content: '▲ tap'; }
@@ -675,9 +675,9 @@
   /* 心法 grid: 2列 stack、 武庫 心法直下 1枚 (parent grid 確認後 後 phase で 微調整) */
   .wwm-xinfa-grid,
   #wwmXinfaGrid {
-    display: grid !important;
+    display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: var(--space-2) !important;
+    gap: var(--space-2);
   }
   .wwm-xinfa-slot[data-arsenal-slot] {
     grid-column: 1 / -1;  /* 武庫 横全幅で 心法直下 */
@@ -691,30 +691,30 @@
     max-width: 100vw !important;
     width: 100vw !important;
     min-width: 0 !important;
-    margin: 0 !important;
+    margin: 0;
     border-radius: 0 !important;
     max-height: 100dvh !important;
     height: 100dvh !important;
-    display: flex !important;
-    flex-direction: column !important;
+    display: flex;
+    flex-direction: column;
   }
   /* 武具/心法/武庫 対照 modal: mobile では modal-body が overflow-y:auto (L701) で scroll container 化、
      bg-icon (absolute, bottom:-18%/-45%, height:110%/165%) が scroll content として下方に伸び viewport にはみ出す。
      mobile では装飾より使い勝手優先 → bg-icon 自体を非表示。 desktop の装飾は維持。 */
-  .wwm-modal.wwm-modal-square.wwm-cmp-modal-a .wwm-cmp-modal-bg-icon { display: none !important; }
+  .wwm-modal.wwm-modal-square.wwm-cmp-modal-a .wwm-cmp-modal-bg-icon { display: none; }
   .wwm-modal.wwm-modal-square .wwm-modal-body,
   .wwm-modal.wwm-modal-wide .wwm-modal-body {
-    flex: 1 1 auto !important;
-    overflow-y: auto !important;
+    flex: 1 1 auto;
+    overflow-y: auto;
     padding: var(--space-3) !important;
   }
   /* SHARE modal OBS section mobile時 hidden (OBSは PC専用機能) */
-  .wwm-share-obs-block { display: none !important; }
+  .wwm-share-obs-block { display: none; }
   /* 対照 grid: 現有 / divider / 新置 を 縦stack */
   .wwm-cmp-modal-a .wwm-cmp-grid {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
-    gap: 10px !important;
+    gap: 10px;
   }
   /* divider 縦線 → 横線 */
   .wwm-cmp-modal-a .wwm-cmp-divider {
@@ -730,23 +730,23 @@
   .wwm-cmp-modal-a .wwm-cmp-divider::after  { left: 70%; }
   /* footer (delta + button row) 縦stack */
   .wwm-cmp-footer-a {
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 8px !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
   }
-  .wwm-cmp-btn-row { justify-content: stretch !important; }
+  .wwm-cmp-btn-row { justify-content: stretch; }
   .wwm-cmp-btn-row .wwm-btn-primary,
-  .wwm-cmp-btn-row .wwm-btn-secondary { flex: 1 1 auto !important; }
+  .wwm-cmp-btn-row .wwm-btn-secondary { flex: 1 1 auto; }
 
   /* 武庫modal path選択: EN版で長ラベル 横溢れ → wrap強制 + 縮小 */
   .wwm-arsenal-modal .wwm-arsenal-paths {
-    flex-wrap: wrap !important;
-    gap: 6px 10px !important;
+    flex-wrap: wrap;
+    gap: 6px 10px;
     width: 100%;
   }
   .wwm-arsenal-modal .wwm-arsenal-paths .wwm-radio-label {
     font-size: var(--text-12) !important;
-    white-space: nowrap !important;
+    white-space: nowrap;
   }
   /* 武庫modal Tier行: 頂点off時 input溢れ → 縮小 + wrap許可 */
   .wwm-arsenal-modal .wwm-cmp-row { grid-template-columns: 40px 1fr !important; }
@@ -857,7 +857,7 @@
   /* overlay内で sidebar 自体を move して表示 — 元 mobile時 display:none を上書き */
   body.wwm-layout-active .wwm-sidebar-test.wwm-sidebar-in-overlay,
   body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sidebar-test {
-    display: block !important;
+    display: block;
     position: static !important;
     width: 100% !important;
     height: auto !important;
@@ -865,9 +865,9 @@
     background: transparent !important;
     border: 0 !important;
     padding: 0 !important;
-    margin: 0 !important;
+    margin: 0;
     visibility: visible;
-    opacity: 1 !important;
+    opacity: 1;
   }
   /* mini-hero-card 上部固定: overlay-body 直下に出して sticky 復活 (sidebar-test 内では効かない場合の保険として padding 構造合わせ) */
   body.wwm-layout-active .wwm-mobile-stat-overlay-body {
@@ -881,7 +881,7 @@
     top: -8px;
     z-index: 20;
     margin: -8px -10px 8px;
-    padding: var(--space-2-5) var(--space-3) !important;
+    padding: var(--space-2-5) var(--space-3);
     background: var(--bg-raised) !important;
     border: 1px solid var(--gold-deep);
     box-shadow: 0 6px 14px var(--overlay-mid);
@@ -1003,17 +1003,17 @@
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-card {
     height: 100% !important;
     min-height: 0 !important;
-    flex: 1 1 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
   }
   /* OPT header: 横並びだと h3が1文字wrapで縦書き化 → 縦stackに */
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-header {
     flex-direction: column;
-    align-items: stretch !important;
-    gap: 6px !important;
-    margin-bottom: var(--space-2) !important;
-    padding-bottom: var(--space-1-5) !important;
+    align-items: stretch;
+    gap: 6px;
+    margin-bottom: var(--space-2);
+    padding-bottom: var(--space-1-5);
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-card h3 {
     white-space: nowrap;
@@ -1036,7 +1036,7 @@
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-sort-btn,
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-btn {
     font-size: var(--text-sm) !important;
-    padding: var(--space-half) var(--space-1-5) !important;
+    padding: var(--space-half) var(--space-1-5);
   }
   /* OPT row: 2行 grid (pos|slot|delta|check 上行 / change 下行全幅) */
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-row {
@@ -1045,14 +1045,14 @@
       "pos slot delta tier check"
       "change change change change change";
     gap: 2px 6px;
-    padding: var(--space-1-5) var(--space-2) !important;
+    padding: var(--space-1-5) var(--space-2);
     font-size: var(--text-sm) !important;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-pos { grid-area: pos; font-size: var(--text-sm) !important; }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-slot { grid-area: slot; font-size: var(--text-sm) !important; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-delta { grid-area: delta; font-size: var(--text-12) !important; }
-  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-tierup { grid-area: tier; font-size: var(--text-xs) !important; padding: 0 var(--space-1) !important; }
-  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-check-wrap { grid-area: check; padding: 0 var(--space-half) !important; }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-tierup { grid-area: tier; font-size: var(--text-xs) !important; padding: 0 var(--space-1); }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-check-wrap { grid-area: check; padding: 0 var(--space-half); }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-change {
     grid-area: change;
     font-size: var(--text-xs) !important;
@@ -1061,7 +1061,7 @@
     align-items: center;
     gap: 4px;
     line-height: 1.4;
-    padding-top: var(--space-half) !important;
+    padding-top: var(--space-half);
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-from,
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-to {
@@ -1071,9 +1071,9 @@
 
   /* ─── NOTE modal mobile 全画面 + close sticky (履歴/筆記 閉じれない問題対策) ─── */
   .wwm-modal-backdrop {
-    overflow-y: auto !important;
+    overflow-y: auto;
     padding: 0 !important;
-    align-items: flex-start !important;
+    align-items: flex-start;
   }
   .wwm-note-modal-a {
     width: 100vw;
@@ -1144,7 +1144,7 @@
 @media (max-width: 480px) {
   /* mobile @media で hide される sidebar / app-body を強制復帰 */
   html.wwm-view-sidebar body.wwm-layout-active .wwm-sidebar-test {
-    display: block !important;
+    display: block;
     position: relative !important;
     top: auto !important;
     width: 100% !important;

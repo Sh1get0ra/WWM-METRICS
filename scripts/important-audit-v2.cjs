@@ -305,29 +305,62 @@ function buildInlineIndex(jsSources) {
     fileWildcard.get(g).add(file);
   };
 
-  // receiver 変数 → element token 解決
-  function resolveReceiver(name, src) {
+  // selector 文字列 (comma list 可) → subject token 群。
+  // class/id を持たない部分 (element/'*') は '__universal__' (全 selector と競合扱い)
+  function selectorArgTokens(selArg) {
+    const out = [];
+    for (const part of selArg.split(',')) {
+      const t = subjectTokens(part.trim());
+      if (t.length) out.push(...t);
+      else out.push('__universal__');
+    }
+    return out;
+  }
+
+  // receiver 変数 → element token 解決 (v3.1)
+  //   - usage 位置から「最近接 preceding def」 のみ採用 (el 等の汎用名の file 内衝突対策)
+  //   - arrow `=>` を代入と誤認しない
+  //   - createElement + className/id 代入 pattern 対応
+  function resolveReceiver(name, src, usageIdx) {
     if (name === 'document' || name === 'documentElement' || name === 'window') return ['__skip__'];
-    const tokens = [];
-    let sawDef = false;
-    const reDef = new RegExp(`(?:^|[^\\w$.])${name}\\s*=\\s*([^;\\n]{1,200})`, 'g');
+    const defs = []; // {idx, tokens|null}
+    const reDef = new RegExp(`(?:^|[^\\w$.])${name}\\s*=\\s*(?!>)([^;\\n]{1,200})`, 'g');
     for (const m of src.matchAll(reDef)) {
       const rhs = m[1];
-      if (new RegExp(`^${name}\\s*[.+]`).test(rhs)) continue; // 自己代入 (el.style 等) は def でない
-      sawDef = true;
+      if (new RegExp(`^${name}\\s*[.+]`).test(rhs)) continue; // 自己代入は def でない
       let t;
-      if ((t = rhs.match(/getElementById\(\s*['"]([\w-]+)['"]/))) tokens.push('#' + t[1]);
-      else if ((t = rhs.match(/(?:querySelector(?:All)?|closest)\(\s*['"]([^'"]+)['"]/))) tokens.push(...subjectTokens(t[1]));
-      else tokens.push('__unresolved__');
+      if ((t = rhs.match(/getElementById\(\s*['"]([\w-]+)['"]/))) defs.push({ idx: m.index, tokens: ['#' + t[1]] });
+      else if ((t = rhs.match(/(?:querySelector(?:All)?|closest)\(\s*['"]([^'"]+)['"]/))) defs.push({ idx: m.index, tokens: selectorArgTokens(t[1]) });
+      else if (/document\.createElement\(/.test(rhs)) {
+        // createElement → 直後の NAME.className/id/classList.add から token 収集
+        const after = src.slice(m.index, m.index + 600);
+        const tk = [];
+        let am;
+        if ((am = after.match(new RegExp(`${name}\\.id\\s*=\\s*['"]([\\w-]+)['"]`)))) tk.push('#' + am[1]);
+        if ((am = after.match(new RegExp(`${name}\\.className\\s*=\\s*['"]([^'"]+)['"]`)))) {
+          for (const c of am[1].split(/\s+/)) if (/^[\w-]+$/.test(c)) tk.push('.' + c);
+        }
+        for (const cm of after.matchAll(new RegExp(`${name}\\.classList\\.add\\(([^)]{1,100})\\)`, 'g'))) {
+          for (const lit of cm[1].matchAll(/['"]([\w-]+)['"]/g)) tk.push('.' + lit[1]);
+        }
+        defs.push({ idx: m.index, tokens: tk.length ? tk : null });
+      }
+      else defs.push({ idx: m.index, tokens: null }); // 解決不能 def
     }
-    // forEach / for-of の loop 変数
-    const reEach = new RegExp(`querySelectorAll\\(\\s*['"]([^'"]+)['"]\\s*\\)[^\\n]{0,40}?(?:forEach\\(\\s*\\(?|of\\s+)\\s*${name}\\b`);
-    let m2;
-    if ((m2 = src.match(reEach))) { sawDef = true; tokens.push(...subjectTokens(m2[1])); }
-    const reFor = new RegExp(`(?:const|let|var)\\s+${name}\\s+of\\s+[^\\n]{0,80}querySelectorAll\\(\\s*['"]([^'"]+)['"]`);
-    if ((m2 = src.match(reFor))) { sawDef = true; tokens.push(...subjectTokens(m2[1])); }
-    if (!sawDef || tokens.includes('__unresolved__')) return null; // 解決不能
-    return tokens.filter(t => t !== '__skip__');
+    // forEach / for-of の loop 変数 (複数 site 可 → 全部 def 扱い)
+    const reEach = new RegExp(`querySelectorAll\\(\\s*['"]([^'"]+)['"]\\s*\\)[\\s\\S]{0,60}?(?:forEach\\(\\s*\\(?|of\\s+)\\s*${name}\\b`, 'g');
+    for (const m of src.matchAll(reEach)) defs.push({ idx: m.index, tokens: selectorArgTokens(m[1]) });
+    const reFor = new RegExp(`(?:const|let|var)\\s+${name}\\s+of\\s+[\\s\\S]{0,80}?querySelectorAll\\(\\s*['"]([^'"]+)['"]`, 'g');
+    for (const m of src.matchAll(reFor)) defs.push({ idx: m.index, tokens: selectorArgTokens(m[1]) });
+
+    if (defs.length === 0) return null;
+    // 最近接 preceding def。 preceding が無ければ最近接 following (hoist/順序逆転ケア)
+    defs.sort((a, b) => a.idx - b.idx);
+    let best = null;
+    for (const d of defs) { if (d.idx <= usageIdx) best = d; else break; }
+    if (!best) best = defs[0];
+    if (best.tokens === null) return null;
+    return best.tokens.filter(t => t !== '__skip__');
   }
 
   for (const { file, src } of jsSources) {
@@ -346,9 +379,11 @@ function buildInlineIndex(jsSources) {
       }
       const props = [...body.matchAll(/(?:^|;)\s*([a-z-]+)\s*:/g)].map(p => p[1]);
       if (tokens.length === 0) {
-        // 無名 tag (class/id なし) — file wildcard fallback
-        if (props.length === 0) addWild('*', file);
-        for (const p of props) addWild(propGroup(p), file);
+        // 無名 tag (class/id なし) — class/id selector はこの element に当たらない。
+        // pure element/universal selector (subject token なし) のみ conservative 競合
+        // → '__anon__' marker (inlineTokens.size>0 経路でだけ効く)
+        if (props.length === 0) addElem('*', ['__anon__']);
+        for (const p of props) addElem(propGroup(p), ['__anon__']);
       } else {
         if (props.length === 0) addElem('*', tokens); // style="${...}" 全動的
         for (const p of props) addElem(propGroup(p), tokens);
@@ -359,7 +394,7 @@ function buildInlineIndex(jsSources) {
       const name = m[1] || m[3];
       let prop = m[2] ? camelToKebab(m[2]) : m[4];
       if (prop && prop.startsWith('--')) continue; // CSS 変数 → 対象外
-      const tokens = resolveReceiver(name, src);
+      const tokens = resolveReceiver(name, src, m.index);
       if (m[2] === 'cssText') {
         // 代入 literal 内のみから prop 抽出 (object literal 等の誤 capture 防止)。
         // 動的 concat / 非 literal → prop 不明 = 全 prop 扱い
@@ -577,6 +612,8 @@ const coMap = buildCoOccurrence(jsSources);
 function inlineConflictV3(d) {
   const g = propGroup(d.prop);
   const inlineTokens = new Set([...(elemInline.get(g) || []), ...(elemInline.get('*') || [])]);
+  // '__universal__' = querySelectorAll('*') 等への inline 書込 → 全 selector と競合
+  if (inlineTokens.has('__universal__')) return true;
   const subj = subjectTokens(d.selector);
   if (subj.length === 0) {
     if (inlineTokens.size > 0) return true;
@@ -732,3 +769,51 @@ console.table(byFile(C));
 
 fs.writeFileSync('scripts/.important-v2.json', JSON.stringify({ A, B, G, K, C }, null, 2));
 console.log('\n→ scripts/.important-v2.json');
+
+// ── --diag: C category のブロック理由 診断 ──────────────────────────
+// 各 C decl について「なぜ strip 不可か」を pair 単位で記録 + cluster 集計
+if (process.argv.includes('--diag')) {
+  const diag = [];
+  for (const p of C) {
+    const reasons = [];
+    if (inlineMap.get(p)) reasons.push({ type: 'inline' });
+    for (const q of compMap.get(p)) {
+      if (q.file === p.file && q.line === p.line && q.prop === p.prop) continue;
+      if (!themeOverlap(p, q) || !mediaOverlap(p.media, q.media)) continue;
+      if (q.prop === p.prop && q.value === p.value) continue;
+      const pWins = naturalWins(p, q);
+      if (!q.important) {
+        if (!pWins) reasons.push({
+          type: 'nat-loss', qFile: q.file, qSel: q.selector, qLine: q.line, qProp: q.prop, qVal: q.value,
+          specP: specificity(p.selector), specQ: specificity(q.selector)
+        });
+      } else if (!physS.has(physKeyOf(q))) {
+        if (pWins) reasons.push({
+          type: 'flip-vs-kept-imp', qFile: q.file, qSel: q.selector, qLine: q.line, qProp: q.prop,
+          qCat: catMap.get(q) || '?', qInline: !!inlineMap.get(q)
+        });
+      }
+    }
+    diag.push({ file: p.file, line: p.line, selector: p.selector, prop: p.prop, value: p.value, media: p.media, reasons });
+  }
+  // cluster 集計
+  const clusters = {};
+  for (const d of diag) {
+    for (const r of d.reasons) {
+      let key;
+      if (r.type === 'inline') key = `inline | ${d.file}`;
+      else if (r.type === 'nat-loss') {
+        const rel = r.specQ > (r.specP ?? 0) ? 'spec負け' : '後順負け';
+        key = `nat-loss(${rel}) | ${d.file} ← ${r.qFile}`;
+      } else key = `flip-vs-kept-imp(${r.qCat}${r.qInline ? '/inline' : ''}) | ${d.file} ← ${r.qFile}`;
+      clusters[key] = (clusters[key] || 0) + 1;
+    }
+    if (d.reasons.length === 0) clusters['no-reason (fixpoint 連鎖除外)'] = (clusters['no-reason (fixpoint 連鎖除外)'] || 0) + 1;
+  }
+  console.log('\n── C diag clusters (pair 件数) ──');
+  for (const [k, n] of Object.entries(clusters).sort((a, b) => b[1] - a[1])) {
+    console.log(String(n).padStart(5), k);
+  }
+  fs.writeFileSync('scripts/.important-c-diag.json', JSON.stringify(diag, null, 1));
+  console.log('\n→ scripts/.important-c-diag.json');
+}

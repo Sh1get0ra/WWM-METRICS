@@ -291,7 +291,7 @@
 }
 /* base .wwm-modal の右上 装飾 (::before glow + ::after 小L字) を非表示 (案A 4隅L字とダブる) */
 .wwm-cmp-modal-a::before,
-.wwm-cmp-modal-a::after { display: none !important; }
+.wwm-cmp-modal-a::after { display: none; }
 .wwm-cmp-modal-a .wwm-modal-header {
   position: relative;
   background: var(--bg-raised) !important;
@@ -371,7 +371,7 @@
   box-shadow: 0 0 8px rgba(168,212,180,0.6);
 }
 /* 本来 title内のテキスト「現有/新置」は朱印で表現するので隠す。 Lv/select は残す */
-.wwm-cmp-modal-a .wwm-cmp-title-text { display: none !important; }
+.wwm-cmp-modal-a .wwm-cmp-title-text { display: none; }
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv,
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
   color: var(--paper) !important;
@@ -385,8 +385,8 @@
   background: var(--bg-raised);
   line-height: 26px;
   height: 26px;
-  display: inline-flex !important;
-  align-items: center !important;
+  display: inline-flex;
+  align-items: center;
   box-shadow: none;
   box-sizing: border-box;
   vertical-align: middle;
@@ -401,7 +401,7 @@
   background-size: 4px 4px, 4px 4px;
   background-repeat: no-repeat;
   background-color: var(--bg-raised);
-  cursor: pointer !important;
+  cursor: pointer;
 }
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select option {
   font-size: var(--text-14) !important;
@@ -411,7 +411,7 @@
   color: var(--paper) !important;
 }
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
-  cursor: pointer !important;
+  cursor: pointer;
 }
 .wwm-cmp-modal-a .wwm-cmp-col {
   margin-top: var(--space-1);
@@ -467,14 +467,14 @@
   border: 1px solid var(--gold-deep);
 }
 .wwm-cmp-modal-a .wwm-cmp-rows {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 .wwm-cmp-modal-a .wwm-cmp-row {
-  display: grid !important;
+  display: grid;
   align-items: center !important;
-  gap: 6px !important;
+  gap: 6px;
   padding: var(--space-1) var(--space-1-5);
   border: none;
   border-bottom: 1px dashed var(--gold-faint);
@@ -516,7 +516,7 @@
   border: 1px solid var(--jade-bright-mid);
   min-width: 30px;
   text-align: center;
-  display: inline-block !important;
+  display: inline-block;
   margin-left: 0;
 }
 .wwm-cmp-modal-a .wwm-cmp-pct.low,
@@ -559,9 +559,9 @@
 }
 .wwm-cmp-modal-a .wwm-cmp-grid {
   grid-template-columns: 1fr 1px 1fr;
-  gap: 16px !important;
+  gap: 16px;
 }
-.wwm-cmp-modal-a .wwm-modal-body { padding: var(--space-5) var(--space-5) var(--space-4) !important; overflow: visible !important; }
+.wwm-cmp-modal-a .wwm-modal-body { padding: var(--space-5) var(--space-5) var(--space-4) !important; overflow: visible; }
 .wwm-cmp-modal-a.wwm-modal-square { overflow: visible; }
 /* 武庫modal: path 5個横並び収容のため広め */
 .wwm-modal.wwm-modal-square.wwm-arsenal-modal { max-width: 820px; }
@@ -649,7 +649,7 @@
 .wwm-cmp-modal-bg-icon-gear-small {
   right: -40px;
 }
-.wwm-cmp-modal-a .wwm-modal-body { position: relative; overflow: hidden !important; }
+.wwm-cmp-modal-a .wwm-modal-body { position: relative; overflow: hidden; }
 .wwm-cmp-modal-a .wwm-cmp-grid { position: relative; z-index: 1; }
 /* col / affix-rows 透過化 (背景icon 透けさせる) */
 .wwm-cmp-modal-a .wwm-cmp-col {
@@ -674,7 +674,7 @@
 }
 .wwm-good-icon svg { width: 10px; height: 10px; fill: var(--chart-crit); }
 /* セット効果テキスト (最小外功攻撃+64等) はサンプルに無いので非表示 */
-.wwm-cmp-modal-a .wwm-cmp-set-effect { display: none !important; }
+.wwm-cmp-modal-a .wwm-cmp-set-effect { display: none; }
 /* ヘッダ padding スリム */
 .wwm-cmp-modal-a .wwm-modal-header {
   padding: var(--space-3) var(--space-5) !important;
@@ -732,19 +732,19 @@
 }
 /* affix行 共通 */
 .wwm-cmp-modal-a .wwm-cmp-row {
-  display: flex !important;
+  display: flex;
   align-items: center !important;
-  gap: 8px !important;
+  gap: 8px;
   padding: 5px 6px;
 }
 /* 現有列 (display専用): name 1fr + val (val+ratio inline) */
 .wwm-cmp-modal-a .wwm-cmp-current .wwm-cmp-row .wwm-cmp-name { flex: 1 1 auto; min-width: 0; }
 .wwm-cmp-modal-a .wwm-cmp-current .wwm-cmp-row .wwm-cmp-val {
-  display: inline-flex !important; align-items: center !important; gap: 8px !important;
+  display: inline-flex; align-items: center; gap: 8px;
 }
 /* 新置列 (編集): select + useful + val-wrap */
 .wwm-cmp-modal-a .wwm-cmp-new .wwm-cmp-row.wwm-cmp-edit-row {
-  display: grid !important;
+  display: grid;
   grid-template-columns: minmax(78px, 1fr) 20px minmax(92px, 1.15fr) !important;
 }
 .wwm-cmp-modal-a .wwm-cmp-new .wwm-cmp-val-wrap {

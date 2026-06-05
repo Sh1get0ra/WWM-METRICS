@@ -561,10 +561,10 @@ html.wwm-shared-build-mode #exportBtn {
 /* mini-hero card 内の sb-top: sticky/border 解除 */
 .wwm-sb-mini-hero-card .wwm-sb-top {
   position: relative !important;
-  top: auto !important;
+  top: auto;
   background: none !important;
   border-bottom: none !important;
-  margin-bottom: 0 !important;
+  margin-bottom: 0;
   padding: 0 !important;
   z-index: 1;
 }
@@ -698,7 +698,7 @@ html.wwm-view-sidebar .wwm-sb-mini-hero-card {
 /* overlay モード: IMPORT button / 透明度 slider 非表示 */
 html.wwm-view-sidebar .wwm-sb-import-btn,
 html.wwm-view-sidebar .wwm-overlay-ctrl {
-  display: none !important;
+  display: none;
 }
 /* overlay モード: 文字色 / ラベル色 カスタマイズ */
 html.wwm-view-sidebar .wwm-sb-label,
@@ -809,7 +809,7 @@ body.wwm-layout-active .wwm-sidebar-test {
   border-left: none !important;
   background: transparent !important;
   padding: 0 !important;
-  display: flex !important;
+  display: flex;
   flex-direction: column;
 }
 /* rest を残り高さ全部使う (タブパネル同様 footer まで) */
@@ -2381,11 +2381,11 @@ body.wwm-layout-active .wwm-footer {
   align-items: flex-end;
   background: none;
   border: none;
-  padding: 0 !important;
+  padding: 0;
   margin: 0;
 }
 #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
-  padding: 6px 4px 9px !important;
+  padding: 6px 4px 9px;
   background: transparent;
   border: none;
   color: var(--paper) !important;
@@ -2480,7 +2480,7 @@ html[lang="en"] .wwm-cmp-title-en {
   z-index: 1;
 }
 /* 各 inner card の旧 bg-icon は非表示 → .wwm-anlz-body 共通の背景に統一 */
-.wwm-anlz-body .wwm-modal-bg-icon { display: none !important; }
+.wwm-anlz-body .wwm-modal-bg-icon { display: none; }
 /* パネル全体の背景アイコン (旧 .wwm-modal-bg-icon と同位置/サイズ/透明度) */
 .wwm-anlz-bgicon {
   position: absolute;
@@ -2506,7 +2506,7 @@ html[lang="en"] .wwm-cmp-title-en {
 .wwm-anlz-body .wwm-analysis-card::after,
 .wwm-anlz-body .wwm-modal-square::before,
 .wwm-anlz-body .wwm-modal-square::after {
-  display: none !important;
+  display: none;
 }
 
 /* PvP定音ロック行 (武具対照 affix6): val 入力欄を非表示 (編集不可、行レイアウト維持) */
