@@ -854,7 +854,9 @@
   }
   .wwm-mobile-stat-overlay-body::-webkit-scrollbar { width: 6px; }
   .wwm-mobile-stat-overlay-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
-  /* overlay内で sidebar 自体を move して表示 — 元 mobile時 display:none を上書き */
+  /* overlay内で sidebar 自体を move して表示 — 元 mobile時 display:none を上書き
+     ⚠ !important keep 確定 (Batch M): components.css の sidebar-test layout rule
+     (desktop !important) + OBS rule との 3つ巴。 @layer modes 移行まで維持 */
   body.wwm-layout-active .wwm-sidebar-test.wwm-sidebar-in-overlay,
   body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sidebar-test {
     display: block;
@@ -1142,7 +1144,8 @@
 }
 
 @media (max-width: 480px) {
-  /* mobile @media で hide される sidebar / app-body を強制復帰 */
+  /* mobile @media で hide される sidebar / app-body を強制復帰
+     ⚠ !important keep 確定 (Batch M): OBS × mobile 文脈交差 — @layer modes 移行まで維持 */
   html.wwm-view-sidebar body.wwm-layout-active .wwm-sidebar-test {
     display: block;
     position: relative !important;

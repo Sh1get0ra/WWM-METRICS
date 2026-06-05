@@ -633,6 +633,13 @@ html.wwm-shared-build-mode #exportBtn {
      SECTION 14 — OBS OVERLAY MODE
    ╚═══════════════════════════════════════════════════════════════════╝ */
 
+/* ⚠ この SECTION の !important は keep 確定 (2026-06-05 Batch M 判定):
+   OBS mode は light/dark theme (light.css = cascade 最終 file) +
+   mobile @media (responsive.css、 OBS キャンバス幅は任意) +
+   mobile-stat-overlay の 3軸と文脈交差する。 natural cascade では
+   後 file の theme/responsive rule に負けるため !important が必須。
+   根治は CSS 全面再設計の @layer modes (最終 layer) 移行 — TODO.md 参照 */
+
 /* ── OBS overlay モード (?view=sidebar) ─────────────────────────── */
 html.wwm-view-sidebar {
   --overlay-bg-alpha: 0;
