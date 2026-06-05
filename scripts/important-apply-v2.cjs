@@ -14,22 +14,25 @@
 const fs = require('fs');
 
 const DRY = process.argv.includes('--dry');
-const { A, K, C } = JSON.parse(fs.readFileSync('scripts/.important-v2.json', 'utf8'));
+const catArg = (process.argv.find(a => a.startsWith('--cat=')) || '--cat=A,B').slice(6);
+const cats = new Set(catArg.split(','));
+const { A, B = [], K, C } = JSON.parse(fs.readFileSync('scripts/.important-v2.json', 'utf8'));
 
 const keyOf = (d) => `${d.file}|${d.line}|${d.prop}`;
 
 // C/K に同 declaration が居る = strip 不可
 const blocked = new Set([...K, ...C].map(keyOf));
 
-// A の declaration 単位 unique 化 + blocked 除外
+// 対象 category の declaration 単位 unique 化 + blocked 除外
+const pool = [...(cats.has('A') ? A : []), ...(cats.has('B') ? B : [])];
 const targets = new Map();
-for (const d of A) {
+for (const d of pool) {
   const key = keyOf(d);
   if (blocked.has(key)) continue;
   targets.set(key, d);
 }
 
-console.log(`A raw: ${A.length} / blocked (A+C混在): ${A.filter(d => blocked.has(keyOf(d))).length} / strip 対象 decl: ${targets.size}`);
+console.log(`cat=${[...cats].join(',')} pool: ${pool.length} / blocked (C/K 混在): ${pool.filter(d => blocked.has(keyOf(d))).length} / strip 対象 decl: ${targets.size}`);
 
 // file ごとに line 編集
 const byFile = new Map();

@@ -746,7 +746,7 @@ html.wwm-view-sidebar .wwm-sb-section-title {
 /* ── 新 app-layout: fixed header + 左右独立scroll ───── */
 html, body { height: 100%; margin: 0; overflow: hidden; }
 body.wwm-layout-active {
-  margin: 0 !important;
+  margin: 0;
   height: 100vh !important;
   overflow-x: auto; /* window < 1010 で .wwm-app-body 横スクロール許可 */
   overflow-y: hidden;
@@ -2380,9 +2380,9 @@ body.wwm-layout-active .wwm-footer {
   flex-wrap: wrap;
   align-items: flex-end;
   background: none !important;
-  border: none !important;
+  border: none;
   padding: 0 !important;
-  margin: 0 !important;
+  margin: 0;
 }
 #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
   padding: 6px 4px 9px !important;

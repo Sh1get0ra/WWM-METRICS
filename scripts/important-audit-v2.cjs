@@ -217,6 +217,34 @@ function propGroup(prop) {
   return p;
 }
 
+// 単独 strip 判定: d の !important を外しても、 d が適用される context で
+// d が全競合に natural cascade (specificity → file order → line) で勝つなら strip 可
+//
+// conservative 条件:
+//   - 競合に他 !important が居たら不可 (strip 後 d 確実に負け)
+//   - 同値競合は無害 (winner 変わっても視覚同一)
+//   - theme 排他 (light vs dark) は干渉なし扱い
+function soloStrippable(d, groupDecls) {
+  const ctxD = themeContext(d.selector);
+  const sd = specificity(d.selector);
+  const fd = FILE_ORDER.get(d.file) ?? 99;
+  for (const g of groupDecls) {
+    if (g === d) continue;
+    const ctxG = themeContext(g.selector);
+    if (ctxD !== 'both' && ctxG !== 'both' && ctxG !== ctxD) continue; // theme 排他
+    if (g.prop === d.prop && g.value === d.value) continue;            // 同値 = 無害
+    if (g.important) return false;  // 他 important → strip 後 d 負け得る
+    const sg = specificity(g.selector);
+    if (sg > sd) return false;
+    if (sg === sd) {
+      const fg = FILE_ORDER.get(g.file) ?? 99;
+      if (fg > fd) return false;
+      if (fg === fd && g.line > d.line) return false;
+    }
+  }
+  return true;
+}
+
 // ── JS inline style 調査 ─────────────────────────────────────────
 function collectJsSources() {
   const files = [];
@@ -312,6 +340,35 @@ function selectorClassesInJs(selector, jsSrcByFile, jsFiles) {
   return false;
 }
 
+// specificity (a=id, b=class/attr/pseudo-class, c=element/pseudo-element)
+function specificity(sel) {
+  const safe = sel.replace(/\[[^\]]*\]/g, '[ATTR]');
+  let a = 0, b = 0, c = 0;
+  for (const m of safe.matchAll(/#[\w-]+/g)) a++;
+  for (const m of safe.matchAll(/\.[\w-]+|\[ATTR\]|:(?!:)[\w-]+(\([^)]*\))?/g)) {
+    if (/^:(not|is|where|has)/.test(m[0])) continue; // 中身は別途 (簡易: where=0, not/is は中身 — conservative に +1)
+    b++;
+  }
+  for (const m of safe.matchAll(/(^|[\s>+~(])([a-zA-Z][\w-]*)/g)) c++;
+  for (const m of safe.matchAll(/::[\w-]+/g)) c++;
+  return a * 10000 + b * 100 + c;
+}
+
+// theme context: selector が特定 theme 限定か
+function themeContext(sel) {
+  if (/\[data-theme="?light"?\]/.test(sel)) return 'light';
+  if (/\[data-theme="?dark"?\]/.test(sel)) return 'dark';
+  return 'both';
+}
+
+// selector 正規化: theme prefix 除去 + 空白圧縮 (pair 判定用)
+function stripThemePrefix(sel) {
+  return sel
+    .replace(/^html\[data-theme="?(light|dark)"?\]\s*/, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 // ── main ──────────────────────────────────────────────────────────
 const allDecls = [];
 for (const f of CSS_FILES) {
@@ -335,7 +392,51 @@ for (const d of allDecls) {
 }
 
 const importants = allDecls.filter(d => d.important);
-const A = [], K = [], C = [];
+const A = [], B = [], K = [], C = [];
+
+const FILE_ORDER = new Map(CSS_FILES.map((f, i) => [f, i]));
+
+// Batch B: paired theme override 判定
+// 競合が 「同 selector の theme variant のみ」 で、 全 variant !important を
+// 同時 strip しても各 theme context の winner value が不変なら strip 可
+function pairedThemeStrippable(d, groupDecls) {
+  // 自分と同じ base selector (theme prefix 除去後) + 同 prop の decl 群
+  const base = stripThemePrefix(d.selector);
+  const peers = groupDecls.filter(g =>
+    g.prop === d.prop && stripThemePrefix(g.selector) === base
+  );
+  // 競合が peers で閉じてない (別 selector の競合あり) → 対象外
+  if (peers.length !== groupDecls.length) return false;
+  // media 付き混在は第1弾 skip (context 爆発回避)
+  if (peers.some(p => p.media)) return false;
+  // 全 important でないと 「一括 strip で natural cascade 化」 が成立しない
+  if (!peers.every(p => p.important)) return false;
+
+  const winner = (applicable, useImportant) => {
+    if (applicable.length === 0) return null;
+    return applicable.reduce((w, p) => {
+      if (!w) return p;
+      if (useImportant && p.important !== w.important) return p.important ? p : w;
+      const sp = specificity(p.selector), sw = specificity(w.selector);
+      if (sp !== sw) return sp > sw ? p : w;
+      const fp = FILE_ORDER.get(p.file) ?? 99, fw = FILE_ORDER.get(w.file) ?? 99;
+      if (fp !== fw) return fp > fw ? p : w;   // 後 file 勝ち
+      return p.line >= w.line ? p : w;          // 後 line 勝ち
+    }, null);
+  };
+
+  for (const ctx of ['light', 'dark']) {
+    const applicable = peers.filter(p => {
+      const t = themeContext(p.selector);
+      return t === 'both' || t === ctx;
+    });
+    const before = winner(applicable, true);
+    const after = winner(applicable, false);
+    // winner の value が変わる → 視覚変化リスク → 不可
+    if ((before?.value || null) !== (after?.value || null)) return false;
+  }
+  return true;
+}
 
 // inline prop も group 正規化して突合
 const inlineGroupMap = new Map();
@@ -361,20 +462,34 @@ for (const d of importants) {
     }
   }
   let hasCompetitor = false;
+  const groupSet = new Set([d]);
   for (const k of searchKeys) {
     const siblings = index.get(`${k}|${propGroup(d.prop)}`);
-    if (siblings && siblings.some(s => s !== d)) { hasCompetitor = true; break; }
+    if (siblings) {
+      for (const s of siblings) {
+        if (s !== d) hasCompetitor = true;
+        groupSet.add(s);
+      }
+    }
   }
-  if (hasCompetitor) {
-    C.push(d);
-    continue;
-  }
-  // inline style 競合チェック (group 単位)
+  // inline style 競合チェック (group 単位) — A/B 共通で strip 不可条件
   const jsWithProp = new Set([
     ...(inlineGroupMap.get(propGroup(d.prop)) || []),
     ...cssTextFiles
   ]);
-  if (jsWithProp.size > 0 && selectorClassesInJs(d.selector, jsSrcByFile, jsWithProp)) {
+  const inlineConflict = jsWithProp.size > 0 &&
+    selectorClassesInJs(d.selector, jsSrcByFile, jsWithProp);
+
+  if (hasCompetitor) {
+    if (!inlineConflict &&
+        (pairedThemeStrippable(d, [...groupSet]) || soloStrippable(d, [...groupSet]))) {
+      B.push(d);
+    } else {
+      C.push(d);
+    }
+    continue;
+  }
+  if (inlineConflict) {
     K.push(d);
     continue;
   }
@@ -391,10 +506,12 @@ function byFile(list) {
 console.log(`total !important: ${importants.length}`);
 console.log(`\nA (strip 安全候補 — 競合ゼロ + inline 形跡なし): ${A.length}`);
 console.table(byFile(A));
+console.log(`B (paired theme override — 一括 strip で winner 不変): ${B.length}`);
+console.table(byFile(B));
 console.log(`K (inline style 競合可能性 → keep): ${K.length}`);
 console.table(byFile(K));
 console.log(`C (同 compound+prop 競合あり → 保留): ${C.length}`);
 console.table(byFile(C));
 
-fs.writeFileSync('scripts/.important-v2.json', JSON.stringify({ A, K, C }, null, 2));
+fs.writeFileSync('scripts/.important-v2.json', JSON.stringify({ A, B, K, C }, null, 2));
 console.log('\n→ scripts/.important-v2.json');
