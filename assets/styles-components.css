@@ -74,6 +74,7 @@ html.wwm-shared-build-mode .wwm-shared-build-banner {
   font-family: var(--f-display);
   font-size: var(--text-sm);
   letter-spacing: 0.08em;
+  border-color: var(--c-shared-build-mode--shared-build-banner-border);
 }
 html.wwm-shared-build-mode .wwm-shared-build-icon {
   font-size: var(--text-lg);
@@ -313,6 +314,7 @@ html.wwm-shared-build-mode #exportBtn {
   padding-bottom: var(--space-3);
   border-bottom: 1px solid var(--gold-deep);
   padding-left: var(--space-half); padding-right: var(--space-half);
+  border-bottom-color: var(--c-hero-number--unit-border-bot);
 }
 
 .hb-value.phys { color: var(--vermilion-bright); }
@@ -449,6 +451,7 @@ html.wwm-shared-build-mode #exportBtn {
   color: var(--paper-mute);
   background: var(--c-tier-chip-c-bg);
   border-color: var(--c-tier-chip-c-border);
+  box-shadow: var(--c-tier-C-shadow);
 }
 
 
@@ -568,6 +571,7 @@ html.wwm-shared-build-mode #exportBtn {
   scrollbar-width: thin;
   scrollbar-color: var(--gold-deep) transparent;
   scrollbar-gutter: stable;
+  border-color: var(--c-sb-rest-border);
 }
 .wwm-sb-rest::-webkit-scrollbar { width: 6px; }
 .wwm-sb-rest::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
@@ -1265,6 +1269,7 @@ html.wwm-view-sidebar .wwm-app-body {
   border: 1px solid var(--ink-2);
   border-radius: 3px;
   overflow: hidden;
+  border-color: var(--c-opt-sort-group-border);
 }
 .wwm-opt-sort-btn {
   background: transparent;
@@ -1866,6 +1871,7 @@ html.wwm-view-sidebar .wwm-app-body {
   letter-spacing: 0.08em;
   border-radius: 1px;
   pointer-events: none;
+  border-color: var(--c-xinfa-tier-chip-border);
 }
 /* ライトモード tier chip */
 /* ライトモード 古紙 (overlay→multiply で 紙感薄く) */
@@ -1964,6 +1970,7 @@ html.wwm-view-sidebar .wwm-app-body {
   font-size: var(--text-14);
   letter-spacing: .28em;
   color: var(--paper-mute);
+  opacity: var(--c-hero-label--en-opacity);
 }
 .hero-wuxia .hero-score-row {
   display: flex;
@@ -2012,6 +2019,7 @@ html.wwm-view-sidebar .wwm-app-body {
   background: var(--c-tier-ss-hero-bg);
   border-color: var(--c-tier-ss-hero-border);
   text-shadow: 0 0 18px rgba(240,210,138,.95), 0 0 36px var(--vermilion-bright-glow);
+  box-shadow: var(--c-hero-wuxia--hero-tier-tier-SS-shadow);
 }
 
 /* S — vermilion (アニメ継承) */
@@ -2020,6 +2028,7 @@ html.wwm-view-sidebar .wwm-app-body {
   background: var(--c-tier-s-hero-bg);
   border-color: var(--c-tier-s-hero-border);
   text-shadow: 0 0 14px rgba(232,81,58,.85), 0 0 28px rgba(200,60,43,.45);
+  box-shadow: var(--c-hero-wuxia--hero-tier-tier-S-shadow);
 }
 
 /* A — jade calm */
@@ -2076,6 +2085,7 @@ html.wwm-view-sidebar .wwm-app-body {
   color: var(--c-hero-next-val-fg);
   line-height: .88;
   letter-spacing: -.01em;
+  text-shadow: var(--c-hero-wuxia--hero-next-val-text-shadow);
 }
 .hero-wuxia .hero-right {
   position: relative;
@@ -2146,14 +2156,15 @@ html.wwm-view-sidebar .wwm-app-body {
 /* 物理/属性 行: 区切り線 + 菱形マーカー (◇物理=朱outline / ◆属性=翠fill) */
 .hero-wuxia .judge-row-sep { margin-top: 5px; padding-top: var(--space-1-5); border-top: 1px solid var(--ink-2); }
 .hero-wuxia .judge-dot-diamond { width: 8px; height: 8px; border-radius: 0; transform: rotate(45deg); }
-.hero-wuxia .judge-dot-phys { background: transparent; border: 1.6px solid var(--chart-sympathy); box-shadow: var(--c-judge-dot-phys-shadow); }
-.hero-wuxia .judge-dot-elem { background: transparent; border: 1.6px solid var(--jade-bright); box-shadow: var(--c-judge-dot-elem-shadow); }
-.hero-wuxia .judge-name { font-weight: var(--c-judge-name-fw); color: var(--c-judge-name-fg); }
+.hero-wuxia .judge-dot-phys { background: transparent; border: 1.6px solid var(--chart-sympathy); box-shadow: var(--c-judge-dot-phys-shadow); border-color: var(--c-hero-wuxia--judge-dot-phys-border); }
+.hero-wuxia .judge-dot-elem { background: transparent; border: 1.6px solid var(--jade-bright); box-shadow: var(--c-judge-dot-elem-shadow); border-color: var(--c-hero-wuxia--judge-dot-elem-border); }
+.hero-wuxia .judge-name { font-weight: var(--c-judge-name-fw); color: var(--c-judge-name-fg); text-shadow: var(--c-hero-wuxia--judge-name-text-shadow); }
 .hero-wuxia .judge-val {
   font-family: var(--f-mono);
   font-size: var(--text-sm);
   font-weight: var(--c-judge-val-fw);
   margin-left: auto;
+  text-shadow: var(--c-hero-wuxia--judge-val-text-shadow);
 }
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
@@ -2487,6 +2498,7 @@ html[lang="en"] .wwm-cmp-title-en {
   padding-bottom: var(--safe-bottom, 0);
   color: var(--c-mobile-drawer-fg);
   overflow-y: auto;
+  border-left-color: var(--c-mobile-drawer-border-left);
 }
 .wwm-mobile-drawer.open { transform: translateX(0); }
 
