@@ -156,6 +156,17 @@ html[data-theme="light"] {
   --c-anlz-shadow-orange:      rgba(120,60,20,.18);  /* anlz-header / anlz-body box-shadow */
   --c-sb-top-bg:               #f5ead0;              /* sidebar wwm-sb-top + sb-rest gradient 上 */
 
+  /* ─── @layer Step 2-e: theme-swap tokens (light 値) ─── */
+  --c-modal-a-rows-bg: var(--overlay-trace);
+  --c-modal-a-title-ja-fg: var(--c-modal-a-fg);
+  --c-modal-a-col-bg: var(--overlay-heavy);
+  --c-modal-a-kongfu-header-bg: var(--gold-tint);
+  --c-modal-a-kongfu-header-fg: var(--paper);
+  --c-modal-a-kongfu-select-fg: var(--paper);
+  --c-modal-a-set-fg: var(--vermilion-bright);
+  --c-modal-a-name-fg: var(--c-modal-a-fg);
+  --c-modal-a-val-fg: var(--c-fg-emphasis);
+
   /* ─── @layer Step 2-d r3: theme-swap tokens (light 値) ─── */
   --c-focus-ring-shadow: 0 0 0 4px var(--vermilion-bright-soft);
   --c-equip-setname-fg: var(--vermilion-deep);

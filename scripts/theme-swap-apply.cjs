@@ -81,6 +81,15 @@ if (MODE_PAIRS) {
   const tokenDefsLight = [];  // light.css token block 追加分
 
   for (const g of plan) {
+    // retoken: 既存 token の root default (tokens.css) を書換え — base / light block 無変更
+    if (g.retoken) {
+      const tl = load('assets/styles-tokens.css');
+      const idx = tl.findIndex(l => new RegExp(`^\\s*${g.retoken.replace(/[-]/g, '\\-')}\\s*:`).test(l));
+      if (idx === -1) { console.error(`[FAIL] retoken ${g.retoken} 定義 不在`); process.exit(1); }
+      if (!editDecl(tl, idx + 1, g.retoken, 'replace', g.dark)) { console.error(`[FAIL] retoken ${g.retoken} 書換え失敗`); process.exit(1); }
+      if (DRY) console.log(`[DRY] retoken ${g.retoken} → ${g.dark}`);
+      continue;
+    }
     // deleteOnly: same-value group — light decl 削除のみ (token / base 置換 不要)
     // existing: true = 既存 token 再利用 (定義追加 skip、 base 置換 + light 削除のみ)
     if (!g.existing && !g.deleteOnly)
@@ -137,7 +146,7 @@ if (MODE_PAIRS) {
   if (!DRY) {
     for (const [f, lines] of fileLines) {
       let src = lines.join('\n');
-      if (f.endsWith('styles-light.css')) {
+      if (f.endsWith('styles-light.css') || f.endsWith('styles-dark.css')) {
         // 空 rule 削除 — multi-line selector (カンマ終端の前行) も一括 (selector 浮き事故防止)
         src = src.replace(/(?:^[ \t]*[^@{}\/\r\n][^{}\r\n]*,[ \t]*\r?\n)*^[ \t]*[^@{}\/\r\n][^{}\r\n]*\{\s*\}[ \t]*\r?\n?/gm, '');
         src = src.replace(/(\r?\n)(?:[ \t]*\r?\n){2,}/g, '$1$1');

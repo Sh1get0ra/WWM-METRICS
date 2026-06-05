@@ -449,8 +449,8 @@
   font-family: var(--f-display, 'Noto Serif JP');
   font-weight: 700;
   font-size: var(--text-md);
-  color: var(--paper);
-  background: var(--gold-tint) ;
+  color: var(--c-modal-a-kongfu-header-fg);
+  background: var(--c-modal-a-kongfu-header-bg);
   border: none;
   border-radius: 0;
   padding: var(--space-1-5) var(--space-2);
@@ -461,7 +461,7 @@
   background: var(--c-modal-a-kongfu-select-bg);
   border: 1px solid var(--gold-deep);
   border-radius: 0;
-  color: var(--paper);
+  color: var(--c-modal-a-kongfu-select-fg);
   font-family: var(--f-display, 'Noto Serif JP');
   font-weight: 700;
   margin-bottom: var(--space-2);
@@ -485,7 +485,7 @@
   background: var(--c-modal-a-set-select-bg);
   border: none;
   border-radius: 0;
-  color: var(--vermilion-bright) ;
+  color: var(--c-modal-a-set-fg);
   text-shadow: var(--c-cmp-set-header-text-shadow);
   padding: var(--space-1-5) var(--space-2);
   margin-bottom: var(--space-2);
@@ -509,7 +509,10 @@
   background: transparent ;
   box-shadow: none;
 }
-.wwm-cmp-modal-a .wwm-cmp-name,
+/* S2-e split: name は dark 側 token 化対象、 stat-select は対象外 → 分離 (base 側道連れ防止) */
+.wwm-cmp-modal-a .wwm-cmp-name {
+  color: var(--c-modal-a-name-fg);
+}
 .wwm-cmp-modal-a .wwm-cmp-stat-select {
   color: var(--c-modal-a-fg);
 }
@@ -524,7 +527,7 @@
 .wwm-cmp-modal-a .wwm-cmp-val {
   font-family: var(--f-mono, 'Rajdhani');
   font-weight: 700;
-  color: var(--c-fg-emphasis);
+  color: var(--c-modal-a-val-fg);
   font-size: var(--text-md);
 }
 .wwm-cmp-modal-a .wwm-cmp-val-input {
@@ -684,10 +687,10 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-cmp-modal-a .wwm-cmp-grid { position: relative; z-index: 1; }
 /* col / affix-rows 透過化 (背景icon 透けさせる) */
 .wwm-cmp-modal-a .wwm-cmp-col {
-  background: var(--overlay-heavy);
+  background: var(--c-modal-a-col-bg);
 }
 .wwm-cmp-modal-a .wwm-cmp-rows {
-  background: var(--overlay-trace);
+  background: var(--c-modal-a-rows-bg);
 }
 /* ── ダーク: select border を subtle gold に統一 (gold-deep/ink-2 バラつき解消) + rows を暗inset で差別化 ── */
 /* ── ダーク 配色: 案B 黒檀朱 (近黒ebony + 朱主役・金従)。border系は現状維持 (col/rows/select 不変) ── */
@@ -721,7 +724,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   font-size: var(--text-18);
   font-weight: 900;
   letter-spacing: 0.18em;
-  color: var(--c-modal-a-fg);
+  color: var(--c-modal-a-title-ja-fg);
 }
 .wwm-cmp-modal-a .wwm-cmp-title-en {
   font-family: var(--f-latin, 'Cinzel');

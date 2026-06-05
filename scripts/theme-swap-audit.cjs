@@ -282,26 +282,32 @@ for (const f of BASE_FILES) baseDecls.push(...parseCss(fs.readFileSync(f, 'utf8'
 const themeDecls = [];
 for (const f of THEME_FILES) themeDecls.push(...parseCss(fs.readFileSync(f, 'utf8'), f));
 
-// ── S2-d: light context token map + var() 解決 (値の意味比較用) ──
-// tokens.css :root 定義 → light.css html[data-theme=light] token block で上書き
-const lightTokens = new Map();
+// ── S2-d/e: theme context token map + var() 解決 (値の意味比較用) ──
+// tokens.css :root 定義 → 当該 theme file の token block で上書き
+const themeTokenMaps = { light: new Map(), dark: new Map() };
 for (const d of parseCss(fs.readFileSync('assets/styles-tokens.css', 'utf8'), 'assets/styles-tokens.css')) {
-  if (d.prop.startsWith('--')) lightTokens.set(d.prop, d.value);
+  if (!d.prop.startsWith('--')) continue;
+  themeTokenMaps.light.set(d.prop, d.value);
+  themeTokenMaps.dark.set(d.prop, d.value);
 }
 for (const d of themeDecls) {
-  if (d.file === 'assets/styles-light.css' && d.prop.startsWith('--')) lightTokens.set(d.prop, d.value);
+  if (!d.prop.startsWith('--')) continue;
+  if (d.file === 'assets/styles-light.css') themeTokenMaps.light.set(d.prop, d.value);
+  if (d.file === 'assets/styles-dark.css') themeTokenMaps.dark.set(d.prop, d.value);
 }
-function resolveLight(value) {
+function resolveCtx(value, ctx) {
+  const map = themeTokenMaps[ctx];
   let v = value;
   for (let i = 0; i < 10; i++) {
     const next = v
-      .replace(/var\(\s*(--[\w-]+)\s*\)/g, (m, n) => lightTokens.has(n) ? lightTokens.get(n) : m)
-      .replace(/var\(\s*(--[\w-]+)\s*,\s*([^()]+)\)/g, (m, n, fb) => lightTokens.has(n) ? lightTokens.get(n) : fb);
+      .replace(/var\(\s*(--[\w-]+)\s*\)/g, (m, n) => map.has(n) ? map.get(n) : m)
+      .replace(/var\(\s*(--[\w-]+)\s*,\s*([^()]+)\)/g, (m, n, fb) => map.has(n) ? map.get(n) : fb);
     if (next === v) break;
     v = next;
   }
   return v.replace(/\s+/g, ' ').trim().toLowerCase();
 }
+const resolveLight = (v) => resolveCtx(v, 'light');
 
 // base index: selector(norm) → decls
 const baseBySel = new Map();
@@ -340,12 +346,13 @@ for (const d of winnerPool) {
 //   afterGWins ∧ !beforeGWins → blocker (d 勝ち element が g に奪われる)
 //   g.important → before も after も d/pair に常勝 (d は non-imp 限定) = 無害
 // 返値: [{...g, beforeGWins}] — afterGWins true のみ。 fixpoint で batch 解決
-function pairWinnerBlockers(d) {
+function pairWinnerBlockers(d, ctx) {
   const pairSel = d.baseSel;
   const sp = specificity(pairSel);
   const sd = specificity(d.selector);
   const pL = LAYER_ORDER.get(d.pair.file) ?? 99;
   const dL = LAYER_ORDER.get(d.file) ?? 99;
+  const otherTheme = ctx === 'light' ? 'dark' : 'light';
   const blockers = [];
   const seen = new Set();
   for (const key of compoundKeys(pairSel)) {
@@ -357,9 +364,9 @@ function pairWinnerBlockers(d) {
       if (norm(g.selector) === pairSel && (g.media || null) === (d.media || null)) continue;
       if (norm(g.selector) === norm(d.selector)) continue;   // d 自身の rule (theme prefix 同 selector)
       if (!propsConflict(g.prop, d.prop)) continue;
-      if (themeContext(g.selector) === 'dark') continue;     // light 表示に無関係
+      if (themeContext(g.selector) === otherTheme) continue; // 当該 theme 表示に無関係
       if (exclusiveDisjoint(pairSel, g.selector)) continue;
-      if (g.prop === d.prop && resolveLight(g.value) === resolveLight(d.value)) continue; // light 表示で同値 = 無害 (var 解決込)
+      if (g.prop === d.prop && resolveCtx(g.value, ctx) === resolveCtx(d.value, ctx)) continue; // 当該 theme 表示で同値 = 無害 (var 解決込)
       if (g.important) continue;                              // imp は before/after 共 常勝 = 表示不変
       const gL = LAYER_ORDER.get(g.file) ?? 99;
       // after: g vs pair
@@ -411,18 +418,18 @@ for (const d of themeDecls) {
       // 後勝ち = 最後の decl を pair とみなす (同 layer source order)
       const winner = sameProp[sameProp.length - 1];
       entry.pair = { file: winner.file, line: winner.line, value: winner.value, important: winner.important, candidates: sameProp.length };
-      // light decl のみ winner 検証 (dark.css M は別 batch)
-      if (d.file === 'assets/styles-light.css' && !d.important && !winner.important) {
-        const blockers = pairWinnerBlockers(entry);
+      entry.ctx = d.file === 'assets/styles-dark.css' ? 'dark' : 'light';
+      if (!d.important && !winner.important) {
+        const blockers = pairWinnerBlockers(entry, entry.ctx);
         // 静的 safe: blocker 全てが beforeGWins (= before/after 共 g 勝ち → 表示不変)
         entry.safe = blockers.every(b => b.beforeGWins);
         entry.blockersRaw = blockers;
         if (!entry.safe) entry.blockers = blockers.filter(b => !b.beforeGWins).slice(0, 3).map(b => `${b.file}:${b.line} ${b.selector} { ${b.prop} }`);
       } else {
         entry.safe = false;
-        entry.blockers = ['theme-imp-or-dark'];
+        entry.blockers = ['theme-imp'];
       }
-      entry.sameValue = resolveLight(entry.pair.value) === resolveLight(d.value); // light 表示同値 (var 解決込)
+      entry.sameValue = resolveCtx(entry.pair.value, entry.ctx) === resolveCtx(d.value, entry.ctx); // 当該 theme 表示同値 (var 解決込)
       out.M.push(entry);
     } else {
       entry.mediaOnlyPair = baseRule.some(b => b.prop === d.prop); // prop は @media 内のみ存在
@@ -431,11 +438,12 @@ for (const d of themeDecls) {
   }
 }
 
-// ── S2-d: batch fixpoint ──
-// blocker g が同 batch で swap される場合: 「before 勝敗 (light layer 内) == after 勝敗 (pair 同士 base layer)」
+// ── S2-d/e: batch fixpoint (light/dark 両 theme) ──
+// blocker g が同 batch で swap される場合: 「before 勝敗 (theme layer 内) == after 勝敗 (pair 同士 base layer)」
 // なら override 関係が pair+token 経由で保存される → blocker 解除。
 // 物理 decl gate も fixpoint 内で強制 (gate 落ち decl の削除前提を他 decl が持たないように)。
 const LIGHT_FILE = 'assets/styles-light.css';
+const THEME_FILE_SET = new Set(THEME_FILES);
 const keyOf = (e) => `${e.file}|${e.line}|${norm(e.selector)}|${e.prop}`;
 const mIndex = new Map();
 for (const e of out.M) mIndex.set(keyOf(e), e);
@@ -449,7 +457,7 @@ const BATCH_EXCLUDE = new Set([
 
 const inBatch = new Set();
 for (const e of out.M) {
-  if (e.file !== LIGHT_FILE || e.important || !e.pair || e.pair.important || !e.blockersRaw) continue;
+  if (!THEME_FILE_SET.has(e.file) || e.important || !e.pair || e.pair.important || !e.blockersRaw) continue;
   if (BATCH_EXCLUDE.has(`${e.baseSel} | ${e.prop}`)) continue;
   // CSS-wide keyword は custom property 値に不可 (--tok: inherit は token 自身の継承になる) → token swap 不能
   if (!e.sameValue && /^(inherit|initial|unset|revert|revert-layer)$/i.test(norm(e.pair.value))) continue;
@@ -459,14 +467,14 @@ for (const e of out.M) {
 // 物理 decl group (multi-selector split)
 const physGroups = new Map();
 for (const e of out.M) {
-  if (e.file !== LIGHT_FILE) continue;
+  if (!THEME_FILE_SET.has(e.file)) continue;
   const k = `${e.file}|${e.line}|${e.prop}`;
   if (!physGroups.has(k)) physGroups.set(k, []);
   physGroups.get(k).push(e);
 }
 
 // base 物理 decl の selector 集合 (file|line|prop → Set<selector>)。
-// base 側物理 gate 用: pair rule が multi-selector の場合、 全 selector が同 batch 同値 light decl で
+// base 側物理 gate 用: pair rule が multi-selector の場合、 全 selector が同 batch 同値 theme decl で
 // cover されてないと base 置換が対象外 selector を道連れ変更する (.wwm-cmp-val regression 2026-06-05 実例)
 const basePhysSels = new Map();
 for (const b of baseDecls) {
@@ -476,20 +484,20 @@ for (const b of baseDecls) {
 }
 const byPairPhys = new Map();
 for (const e of out.M) {
-  if (e.file !== LIGHT_FILE || !e.pair || e.sameValue) continue; // sameValue = base 無変更 → 対象外
+  if (!THEME_FILE_SET.has(e.file) || !e.pair || e.sameValue) continue; // sameValue = base 無変更 → 対象外
   const k = `${e.pair.file}|${e.pair.line}|${e.prop}`;
   if (!byPairPhys.has(k)) byPairPhys.set(k, []);
   byPairPhys.get(k).push(e);
 }
 
-// same-selector shield index: light.css 全 decl (M/P/N/S 問わず) を stripTheme(selector)|prop で索引。
-// hard blocker g に対し 同一 selector の light rule g' が残置されるなら、 g' が g を before/after 共に遮蔽
-// (g' = light layer > base layers 常勝、 match(g') == match(g) ⊇ overlap(d,g)) → g 無害。
-// 条件: g' が d にも勝つ (spec/line) か light 表示同値 (どちらが勝っても値同一)
+// same-selector shield index: theme file 全 decl (M/P/N/S 問わず) を file|stripTheme(selector)|prop で索引。
+// hard blocker g に対し 同一 selector の theme rule g' が残置されるなら、 g' が g を before/after 共に遮蔽
+// (g' = theme layer > base layers 常勝、 match(g') == match(g) ⊇ overlap(d,g)) → g 無害。
+// 条件: g' が d にも勝つ (spec/line) か当該 theme 表示同値 (どちらが勝っても値同一)
 const shieldIndex = new Map();
 for (const d of themeDecls) {
-  if (d.file !== LIGHT_FILE || d.prop.startsWith('--')) continue;
-  const k = `${stripTheme(d.selector)}|${d.prop}`;
+  if (!THEME_FILE_SET.has(d.file) || d.prop.startsWith('--')) continue;
+  const k = `${d.file}|${stripTheme(d.selector)}|${d.prop}`;
   if (!shieldIndex.has(k)) shieldIndex.set(k, []);
   shieldIndex.get(k).push(d);
 }
@@ -519,12 +527,12 @@ while (changed) {
       if (!gRemovable) {
         // g 残置: beforeGWins なら before/after 共 g 勝ち = 表示不変
         if (!g.beforeGWins) {
-          // same-selector shield: light rule g' (同 selector ∧ 同 prop) が g を遮蔽するか
-          //   g' 残置 → g' が before/after 共 g に常勝 (light layer > base)
-          //   g' が同 batch swap でも g が g'.pair そのものなら → swap 後 g が token で g' の light 値保持
-          // どちらも条件: g' が d に勝つ (spec/line) or light 表示同値
+          // same-selector shield: 同 theme rule g' (同 selector ∧ 同 prop) が g を遮蔽するか
+          //   g' 残置 → g' が before/after 共 g に常勝 (theme layer > base)
+          //   g' が同 batch swap でも g が g'.pair そのものなら → swap 後 g が token で g' の theme 値保持
+          // どちらも条件: g' が d に勝つ (spec/line) or 当該 theme 表示同値
           const sd = specificity(e.selector);
-          const shielded = (shieldIndex.get(`${stripTheme(g.selector)}|${g.prop}`) || []).some(s => {
+          const shielded = (shieldIndex.get(`${e.file}|${stripTheme(g.selector)}|${g.prop}`) || []).some(s => {
             const sK = `${s.file}|${s.line}|${norm(s.selector)}|${s.prop}`;
             if (sK === k) return false; // d 自身
             if (inBatch.has(sK)) {
@@ -533,12 +541,12 @@ while (changed) {
             }
             const ss = specificity(s.selector);
             return ss > sd || (ss === sd && s.line > e.line) ||
-              resolveLight(s.value) === resolveLight(e.value); // g' が d に勝つ or light 表示同値
+              resolveCtx(s.value, e.ctx) === resolveCtx(e.value, e.ctx); // g' が d に勝つ or theme 表示同値
           });
           if (!shielded) { dropSelf = true; break; }
         }
       } else {
-        const valEq = g.prop === e.prop && resolveLight(g.value) === resolveLight(e.value);
+        const valEq = g.prop === e.prop && resolveCtx(g.value, e.ctx) === resolveCtx(e.value, e.ctx);
         if (valEq) continue; // light 表示同値 → どちらが勝っても不変
         const afterGWins = cmpBaseGWins(e, gE);
         const okDir = afterGWins === null ? false : afterGWins === g.beforeGWins;
@@ -565,16 +573,19 @@ while (changed) {
       for (const s of splits) if (inBatch.delete(keyOf(s))) changed = true;
     }
   }
-  // base 側物理 gate: pair rule の全 selector が同 batch 同 light 値 entry で cover 必須
+  // base 側物理 gate (theme 別・独立判定): pair rule の全 selector cover ∧ 値均一。
+  // theme T 側 entry ゼロ = token T 値に base 現値が入り T 表示不変 → coverage 不要。
+  // 違反は当該 theme 側のみ drop (他 theme 側は独立して有効)
   for (const [pk, ents] of byPairPhys) {
-    const inB = ents.filter(x => inBatch.has(keyOf(x)));
-    if (!inB.length) continue;
     const sels = basePhysSels.get(pk) || new Set();
-    const covered = new Set(inB.map(x => x.baseSel));
-    const lightVals = new Set(inB.map(x => resolveLight(x.value)));
-    const ok = [...sels].every(S => covered.has(S)) && lightVals.size === 1;
-    if (!ok) {
-      for (const x of inB) if (inBatch.delete(keyOf(x))) changed = true;
+    for (const ctx of ['light', 'dark']) {
+      const side = ents.filter(x => x.ctx === ctx && inBatch.has(keyOf(x)));
+      if (!side.length) continue;
+      const covered = new Set(side.map(x => x.baseSel));
+      const vals = new Set(side.map(x => resolveCtx(x.value, ctx)));
+      if (![...sels].every(S => covered.has(S)) || vals.size !== 1) {
+        for (const x of side) if (inBatch.delete(keyOf(x))) changed = true;
+      }
     }
   }
 }
