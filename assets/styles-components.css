@@ -529,7 +529,7 @@ html.wwm-shared-build-mode #exportBtn {
   margin-bottom: var(--space-2-5);
   overflow: hidden;
   /* ヘッダー部分は内部要素 (tier badge ルーレット等) で揺れないよう固定高 */
-  height: 84px !important;
+  height: 84px;
   min-height: 84px;
   max-height: 84px;
   box-sizing: border-box;
@@ -664,12 +664,12 @@ html.wwm-view-sidebar .ink-stroke {
 html.wwm-view-sidebar .wwm-app-body {
   display: block !important;
   height: 100vh !important;
-  max-height: 100vh !important;
+  max-height: 100vh;
   padding: var(--space-2) !important;
   margin: 0 !important;
   max-width: none !important;
   min-width: 0 !important; /* OBSキャンバス幅 < 1010 で右はみ出し防止 */
-  width: 100% !important;
+  width: 100%;
 }
 html.wwm-view-sidebar .wwm-sidebar-test {
   position: relative !important;

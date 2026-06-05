@@ -226,8 +226,21 @@ function propGroup(prop) {
 //   - 片方が group shorthand (margin が margin-top を set する 等)
 // font-family vs font-size のような同 group 別 longhand は競合しない
 // (group bucket は競合 candidate の索引、 実競合判定はこちら)
+// 真の shorthand (member longhand を set する prop)。
+// width/height は group 名と同名の longhand が居るが min/max-* を set しない → 除外
+const REAL_SHORTHANDS = new Set([
+  'margin', 'padding', 'flex', 'flex-flow', 'overflow', 'border', 'background',
+  'font', 'gap', 'inset', 'animation', 'transition', 'text-decoration', 'grid-area',
+  // 中間 shorthand (同 group 内で member を set する)
+  'border-top', 'border-right', 'border-bottom', 'border-left',
+  'border-width', 'border-style', 'border-color', 'border-radius',
+  'grid-row', 'grid-column', 'place-items', 'place-content', 'place-self'
+]);
 function propsConflict(a, b) {
-  return a === b || a === propGroup(b) || b === propGroup(a);
+  if (a === b) return true;
+  if (REAL_SHORTHANDS.has(a) && propGroup(a) === propGroup(b)) return true;
+  if (REAL_SHORTHANDS.has(b) && propGroup(b) === propGroup(a)) return true;
+  return false;
 }
 
 // 単独 strip 判定: d の !important を外しても、 d が適用される context で

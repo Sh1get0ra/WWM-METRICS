@@ -386,7 +386,7 @@
     height: auto;
   }
   body.wwm-layout-active .wwm-app-body {
-    min-width: 0 !important;  /* PC用 980 制約 解除 */
+    min-width: 0;  /* PC用 980 制約 解除 */
     /* grid 解除 = flex column で 自然 縦並び (PC layout grid-area 構造 mobile時 無効化) */
     display: flex !important;
     flex-direction: column;
@@ -394,11 +394,11 @@
     grid-template-rows: none;
     grid-template-areas: none;
     gap: var(--space-2);
-    max-width: none !important;
+    max-width: none;
     /* 内部 scroll container = sticky-header の下、 footer 高さも引いて footer常時表示確保 */
     height: calc(100vh - var(--wwm-header-h, 103px) - var(--wwm-footer-h, 32px)) !important;
     height: calc(100dvh - var(--wwm-header-h, 103px) - var(--wwm-footer-h, 32px)) !important;
-    max-height: none !important;
+    max-height: none;
     overflow-y: auto;
     overflow-x: hidden;
     scrollbar-width: thin;
@@ -684,13 +684,13 @@
   }
 
   /* ─── Phase 9: 装備/心法/武庫 対照 modal + SHARE modal 全画面化 ─── */
-  .wwm-modal.wwm-modal-square,
+  .wwm-modal.wwm-modal-square.wwm-modal-square,
   .wwm-modal.wwm-modal-square.wwm-modal-wide,
   .wwm-modal.wwm-modal-square.wwm-arsenal-modal,
-  .wwm-modal.wwm-modal-wide {
-    max-width: 100vw !important;
-    width: 100vw !important;
-    min-width: 0 !important;
+  .wwm-modal.wwm-modal-wide.wwm-modal-wide {
+    max-width: 100vw;
+    width: 100vw;
+    min-width: 0;
     margin: 0;
     border-radius: 0 !important;
     max-height: 100dvh;
