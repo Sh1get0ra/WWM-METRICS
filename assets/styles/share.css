@@ -229,14 +229,15 @@ html.wwm-shared-build-mode #exportBtn {
   .preset-slot-num { display: none; }
   .preset-name-input { display: none; }
   .preset-btn {
-    /* critique P2 / TODO #14 (2026-06-06): touch target 26→44px (WCAG 2.5.8 AAA / HIG)。
-       icon 化意匠は維持、 bar 高のみ +18px */
+    /* critique P2 / TODO #14 (2026-06-06): touch target 縦 44px (WCAG 2.5.8 / HIG)。
+       横は自然幅 (~28px) — min-width 44 だと iPhone SE (375px) で bar 横 scroll 発生
+       (兄貴指摘 2026-06-06) → 縦 44 + 横 24+ (AA spacing 要件) で横 scroll 根絶を優先 */
     min-height: 44px;
-    min-width: 44px;
-    padding: 1px 4px;
+    padding: 1px 6px;
     font-size: 0;  /* 元テキスト 非表示、 ::before でアイコン */
     letter-spacing: 0;
     flex: 0 0 auto;
+    min-width: 0;
   }
   .preset-save::before { content: '💾'; font-size: var(--text-md); }
   .preset-load::before { content: '📂'; font-size: var(--text-md); }
