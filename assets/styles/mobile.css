@@ -226,16 +226,19 @@ html[data-theme="light"] .wwm-share-warn {
     min-width: 0;
     overflow: hidden;
   }
+  /* 兄貴指摘 (2026-06-06): SE 級で title 見切れ (320 = 必要 171px vs 可用 124px) →
+     fluid font + tracking 圧縮で全幅 fit (320: ~8.3px / 375: ~9.8px / 上限 11px)。
+     ellipsis は Safari 字幅差の保険で残置 */
   .wwm-mobile-topbar .wwm-brand-en {
-    font-size: var(--text-sm);
-    letter-spacing: 0.14em;
+    font-size: clamp(8px, 2.6vw, 11px);
+    letter-spacing: 0.06em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .wwm-mobile-topbar .wwm-brand-sub {
-    font-size: var(--text-2xs);
-    letter-spacing: 0.18em;
+    font-size: clamp(7px, 2.2vw, 8px);
+    letter-spacing: 0.14em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
