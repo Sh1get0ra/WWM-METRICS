@@ -80,8 +80,11 @@ if (MODE_PAIRS) {
   const tokenDefsRoot = [];   // tokens.css :root 追加分
   const tokenDefsLight = [];  // light.css token block 追加分
   const inserts = [];         // S2-f: base rule 末尾 decl 挿入 { file, ruleStart, prop, value }
+  const ruleInserts = [];     // S2-g: target file 末尾へ rule 丸ごと append { file, header, selectors, decls }
 
   for (const g of plan) {
+    // S2-g newRules: component file 末尾 (end @layer 前) へ rule append
+    if (g.newRules) { ruleInserts.push(...g.rules); continue; }
     // retoken: 既存 token の root default (tokens.css) を書換え — base / light block 無変更
     if (g.retoken) {
       const tl = load('assets/styles-tokens.css');
@@ -169,6 +172,32 @@ if (MODE_PAIRS) {
       }
       if (DRY) console.log(`[DRY] insert ${f}:${ins.ruleStart} + ${ins.prop}: ${ins.value}`);
     }
+  }
+
+  // S2-g newRule: target file 末尾 `} /* end @layer X */` 直前へ rule block 追加 (plan 順 = vLine 昇順)
+  const byRuleFile = new Map();
+  for (const nr of ruleInserts) {
+    if (!byRuleFile.has(nr.file)) byRuleFile.set(nr.file, []);
+    byRuleFile.get(nr.file).push(nr);
+  }
+  for (const [f, list] of byRuleFile) {
+    const lines = load(f);
+    let anchor = -1;
+    for (let i = lines.length - 1; i >= 0; i--) {
+      if (/^\s*\}\s*\/\*\s*end @layer/.test(lines[i])) { anchor = i; break; }
+    }
+    if (anchor === -1) { console.error(`[FAIL] newRule anchor (end @layer) 不在 ${f}`); process.exit(1); }
+    const eol = lines[anchor].endsWith('\r') ? '\r' : '';
+    const block = [];
+    for (const nr of list) {
+      block.push(eol);
+      block.push(nr.header + eol);
+      nr.selectors.forEach((s, i) => block.push(s + (i < nr.selectors.length - 1 ? ',' : ' {') + eol));
+      for (const d of nr.decls) block.push(`  ${d.prop}: ${d.value}${d.imp ? ' !important' : ''};` + eol);
+      block.push('}' + eol);
+      if (DRY) console.log(`[DRY] newRule ${f} ← ${nr.selectors[0]} (${nr.decls.length} decls${nr.decls.some(d => d.imp) ? ', imp' : ''})`);
+    }
+    lines.splice(anchor, 0, ...block);
   }
 
   // tokens.css :root 末尾 (--safe-top 行の手前の「Safe Area」 コメント前) に挿入

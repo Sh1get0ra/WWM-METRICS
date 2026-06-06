@@ -429,6 +429,37 @@
   --c-cmp-modal-a--cmp-current-border: rgba(232,81,58,0.30);
   --c-cmp-modal-a--cmp-col-border: rgba(232,81,58,0.30);
 
+  /* ─── @layer Step 2-g: theme-swap tokens (dark default) ─── */
+  --c-sb-totalmartial--b-text-shadow: initial;  /* S2-g sb-totalmartial--b */
+  --c-sb-totalmartial--muted-fg: initial;  /* S2-g sb-totalmartial--muted */
+  --c-sb-totalmartial--muted-opacity: 0.6;  /* S2-g sb-totalmartial--muted */
+  --c-cmp-modal-a--cmp-delta-label-fg: var(--paper-mute);  /* S2-g cmp-modal-a--cmp-delta-label */
+  --c-cmp-modal-a--cmp-delta-base-fg: var(--paper-mute);  /* S2-g cmp-modal-a--cmp-delta-base */
+  --c-hero-wuxia--hero-tier-tier-SS-before-position: absolute;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
+  --c-hero-wuxia--hero-tier-tier-SS-before-top: 0;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
+  --c-hero-wuxia--hero-tier-tier-SS-before-bottom: 0;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
+  --c-hero-wuxia--hero-tier-tier-SS-before-left: 0;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
+  --c-hero-wuxia--hero-tier-tier-SS-before-right: 0;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
+  --c-hero-wuxia--hero-tier-tier-SS-before-width: initial;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
+  --c-hero-wuxia--hero-tier-tier-SS-before-height: initial;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
+  --c-hero-wuxia--hero-tier-tier-SS-before-transform: initial;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
+  --c-hero-wuxia--hero-tier-tier-SS-before-pe: none;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
+  --c-hero-wuxia--hero-tier-tier-SS-before-z: initial;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
+  --c-hero-wuxia--hero-tier-tier-SS-before-content: '';  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
+  --c-equip-section--stat-pct-opacity: 0.65;  /* S2-g equip-section--stat-pct */
+  --c-step2-section-title-fw: initial;  /* S2-g step2-section-title */
+  --c-step2--muted-opacity: 0.6;  /* S2-g step2--muted */
+  --c-step2--num-input-bg: var(--c-cmp-stat-select-bg);  /* S2-g step2--num-input */
+  --c-step2-section-title-border-bot: var(--accent-mid);  /* S2-g step2-section-title */
+  --c-step2--xinfa-cell-border-bot: 1px solid var(--ink-2);  /* S2-g step2--xinfa-cell */
+  --c-step2--xinfa-cell-pad-bot: var(--space-2);  /* S2-g step2--xinfa-cell */
+  --c-step2--arsenal-tier-border: 1px solid rgba(212,175,55,0.25);  /* S2-g step2--arsenal-tier */
+  --c-step2--arsenal-tier-bg: rgba(40,28,16,0.55);  /* S2-g step2--arsenal-tier */
+  --c-anlz-title-fg-n2: var(--c-anlz-title-fg);  /* S2-g anlz-title */
+  --c-anlz-title-text-shadow-n2: var(--c-anlz-title-text-shadow);  /* S2-g anlz-title */
+  --c-anlz-subtitle-fg: var(--gold-deep);  /* S2-g anlz-subtitle */
+  --c-anlz-subtitle-opacity: 0.75;  /* S2-g anlz-subtitle */
+
   /* Safe Area inset utility (Phase 1 base) */
   --safe-top:    env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);

@@ -141,6 +141,31 @@ html[data-theme="light"] {
   --c-anlz-shadow-orange:      rgba(120,60,20,.18);  /* anlz-header / anlz-body box-shadow */
   --c-sb-top-bg:               #f5ead0;              /* sidebar wwm-sb-top + sb-rest gradient 上 */
 
+  /* ─── @layer Step 2-g: theme-swap tokens (light 値) ─── */
+  --c-sb-totalmartial--b-text-shadow: none;  /* S2-g sb-totalmartial--b */
+  --c-sb-totalmartial--muted-fg: #5a4326;  /* S2-g sb-totalmartial--muted */
+  --c-sb-totalmartial--muted-opacity: 0.85;  /* S2-g sb-totalmartial--muted */
+  --c-cmp-modal-a--cmp-delta-label-fg: var(--c-text-warm);  /* S2-g cmp-modal-a--cmp-delta-label */
+  --c-cmp-modal-a--cmp-delta-base-fg: var(--bone-dim);  /* S2-g cmp-modal-a--cmp-delta-base */
+  --c-hero-wuxia--hero-tier-tier-SS-before-right: auto;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
+  --c-hero-wuxia--hero-tier-tier-SS-before-width: 120%;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
+  --c-hero-wuxia--hero-tier-tier-SS-before-height: 100%;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
+  --c-hero-wuxia--hero-tier-tier-SS-before-transform: translateX(-200%);  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
+  --c-hero-wuxia--hero-tier-tier-SS-before-z: 1;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
+  --c-equip-section--stat-pct-opacity: 1;  /* S2-g equip-section--stat-pct */
+  --c-step2-section-title-fw: 900;  /* S2-g step2-section-title */
+  --c-step2--muted-opacity: 0.95;  /* S2-g step2--muted */
+  --c-step2--num-input-bg: var(--hover-strong);  /* S2-g step2--num-input */
+  --c-step2-section-title-border-bot: rgba(120,60,20,0.45);  /* S2-g step2-section-title */
+  --c-step2--xinfa-cell-border-bot: 1px dashed rgba(120,60,20,0.25);  /* S2-g step2--xinfa-cell */
+  --c-step2--xinfa-cell-pad-bot: var(--space-1);  /* S2-g step2--xinfa-cell */
+  --c-step2--arsenal-tier-border: 1px solid rgba(120,60,20,0.3);  /* S2-g step2--arsenal-tier */
+  --c-step2--arsenal-tier-bg: rgba(255,240,210,0.4);  /* S2-g step2--arsenal-tier */
+  --c-anlz-title-fg-n2: #2a1610;  /* S2-g anlz-title */
+  --c-anlz-title-text-shadow-n2: 0 0 0.5px rgba(42,22,16,.6), 0 0 1.5px rgba(74,40,20,.35), 0 0 3px rgba(106,62,22,.18), 0.6px 0 1.2px rgba(42,22,16,.25), -0.6px 0 1.2px rgba(42,22,16,.22), 0 0.5px 1.5px rgba(74,40,20,.14);  /* S2-g anlz-title */
+  --c-anlz-subtitle-fg: var(--brown-5);  /* S2-g anlz-subtitle */
+  --c-anlz-subtitle-opacity: 0.9;  /* S2-g anlz-subtitle */
+
   /* ─── @layer Step 2-f: theme-swap tokens (light 値) ─── */
   --c-brand-seal-opacity: 0.8;
   --c-brand-en-opacity: 0.75;
@@ -380,11 +405,6 @@ html[data-theme="light"] header.topbar {
 
 html[data-theme="light"] .seal {
   /* keep red seal but tone the gold inside a bit darker so it pops on paper */
-  box-shadow:
-    inset 0 0 0 1px var(--c-tier-ss-glow-pink),
-    inset 0 -8px 14px var(--c-shadow-light),
-    0 0 24px var(--c-vermilion-glow-soft),
-    0 1px 4px var(--overlay-tint);
 }
 
 html[data-theme="light"] .lang-btn { color: var(--paper-dim); }
@@ -435,12 +455,6 @@ html[data-theme="light"] .tier-C {       text-shadow: none;  }
 html[data-theme="light"] .wwm-sb-mini-hero-card {
   background: linear-gradient(180deg, var(--c-surf-warm-1), var(--c-surf-warm-2));
 }
-
-html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-totalmartial b,
-html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial b { color: var(--c-text-brown-bright) !important; text-shadow: none; }
-
-html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-totalmartial .wwm-muted,
-html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial .wwm-muted { color: #5a4326; opacity: 0.85; }
 
 /* .wwm-sb-top light bg override は削除 (2026-06-05 pre-existing bug fix):
    sb-top は mini-hero card 内のみ存在 (anlz.js)、 card 側が背景を持ち sb-top は
@@ -493,12 +507,6 @@ html[data-theme="light"] .wwm-opt-sort-btn + .wwm-opt-sort-btn { border-left-col
 
 html[data-theme="light"] .wwm-opt-btn {  border-color: var(--c-opt-border-mid); }
 html[data-theme="light"] .wwm-opt-btn:hover {  border-color: var(--c-opt-border-strong); }
-
-html[data-theme="light"] .wwm-share-warn {
-  background: rgba(184,100,28,0.22) !important;
-  color: #6a3a14 !important;
-  border-left-color: var(--c-orange-deep) !important;
-}
 
 html[data-theme="light"] .wwm-cmp-col,
 html[data-theme="light"] .wwm-cmp-row,
@@ -643,10 +651,6 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-footer-a { border-color: var(--c-border-soft-warm); }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-delta-label { color: var(--c-text-warm); }
-
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-delta-base { color: var(--bone-dim); }
-
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
    border-color: var(--bone-dim);
 }
@@ -753,9 +757,9 @@ html[data-theme="light"] .hero-wuxia .judge-val {
 
 }
 
-html[data-theme="light"] .hero-wuxia #dmgPhysVal { color: var(--vermilion-deep) !important; filter: none; }
+html[data-theme="light"] .hero-wuxia #dmgPhysVal {  filter: none; }
 
-html[data-theme="light"] .hero-wuxia #dmgElemVal { color: var(--jade-bright) !important; filter: none; }
+html[data-theme="light"] .hero-wuxia #dmgElemVal {  filter: none; }
 
 html[data-theme="light"] .hero-wuxia .judge-row-sep { border-top-color: rgba(40,25,18,0.2); }
 
@@ -772,19 +776,11 @@ html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS {
 
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-SS::before,
 html[data-theme="light"] .wwm-sb-tier-badge.tier-SS::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: auto;
-  width: 120%;
-  height: 100%;
+
   background: linear-gradient(105deg, transparent 10%, rgba(255,255,255,0.30) 50%, transparent 90%);
-  transform: translateX(-200%);
+
   animation: tier-ss-shimmer-light 1.6s linear infinite;
-  pointer-events: none;
-  z-index: 1;
+
 }
 
 html[data-theme="light"] .wwm-sb-tier-badge.tier-SS {
@@ -805,21 +801,21 @@ html[data-theme="light"] .wwm-sb-tier-badge.tier-A {
   background: linear-gradient(135deg, var(--c-tier-a-grad-1) 0%, var(--c-tier-a-grad-2) 50%, var(--c-tier-a-grad-3) 100%);
   color: var(--c-tier-a-fg);
   border-color: var(--c-tier-a-border);
-  text-shadow: none !important;
+
 }
 
 html[data-theme="light"] .wwm-sb-tier-badge.tier-B {
   background: linear-gradient(135deg, var(--c-tier-b-grad-1) 0%, var(--c-tier-b-grad-2) 50%, var(--c-tier-b-grad-3) 100%);
   color: var(--c-tier-b-fg);
   border-color: var(--c-tier-b-border);
-  text-shadow: none !important;
+
 }
 
 html[data-theme="light"] .wwm-sb-tier-badge.tier-C {
   background: linear-gradient(135deg, var(--c-tier-c-grad-1) 0%, var(--c-tier-c-grad-2) 50%, var(--c-tier-c-grad-3) 100%);
   color: var(--c-tier-c-fg);
   border-color: var(--c-tier-c-border);
-  text-shadow: none !important;
+
 }
 
 html[data-theme="light"] .hero-wuxia .hero-tier.tier-S {
@@ -856,107 +852,31 @@ html[data-theme="light"] .hero-wuxia .ink-stroke {
   mask: linear-gradient(90deg, transparent 0%, #000 30%, #000 70%, transparent 100%);
 }
 
-html[data-theme="light"] .hero-wuxia .ink-stroke path {
-  stroke: rgba(160,28,18,0.6);
-}
-
 html[data-theme="light"] .hero-wuxia .l-bracket {
   border-color: var(--gold-deep);
-}
-
-html[data-theme="light"] .hero-wuxia .luopan-ticks line {
-  stroke: rgba(122,90,32,.8);
-  stroke-opacity: 1;
-}
-
-html[data-theme="light"] .hero-wuxia .luopan-ticks line[stroke-width="1.5"] {
-  stroke: var(--vermilion-deep);
-  stroke-opacity: 1;
-}
-
-html[data-theme="light"] .hero-wuxia .luopan-arc circle[stroke^="rgba(232,215,180"] {
-  stroke: rgba(122,90,32,.55) !important;
-}
-
-html[data-theme="light"] .hero-wuxia .luopan-inner svg circle.donut-bg,
-html[data-theme="light"] .hero-wuxia .luopan-inner svg circle[stroke^="rgba(232,215,180"] {
-  stroke: rgba(122,90,32,.5) !important;
-}
-
-html[data-theme="light"] .wwm-equip-section,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-slot,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-slot-header,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-base,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-affix,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-base b,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-affix b,
-html[data-theme="light"] .wwm-equip-section .wwm-stat-name,
-html[data-theme="light"] .wwm-equip-section .wwm-stat-val,
-html[data-theme="light"] .wwm-step2,
-html[data-theme="light"] .wwm-step2 .wwm-step2-section-title,
-html[data-theme="light"] .wwm-step2 .wwm-xinfa-cell,
-html[data-theme="light"] .wwm-step2 .wwm-xinfa-label,
-html[data-theme="light"] .wwm-step2 .wwm-xinfa-effect,
-html[data-theme="light"] .wwm-step2 .wwm-arsenal-tier,
-html[data-theme="light"] .wwm-step2 .wwm-arsenal-lv,
-html[data-theme="light"] .wwm-step2 .wwm-arsenal-peaked-label,
-html[data-theme="light"] .wwm-step2 .wwm-arsenal-preset,
-html[data-theme="light"] .wwm-step2 .wwm-arsenal-custom,
-html[data-theme="light"] .wwm-step2 .wwm-stat-label,
-html[data-theme="light"] .wwm-step2 .wwm-radio-label {
-  color: var(--brown-2) !important;
-}
-
-html[data-theme="light"] .wwm-equip-section .wwm-stat-pct {
-  color: var(--c-text-brown-dim);
-  opacity: 1;
 }
 
 html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-gold,
 html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-gold .wwm-stat-name,
 html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-gold .wwm-stat-val {
-  color: var(--c-orange-deep) !important; /* 暗オレンジ */
+   /* 暗オレンジ */
 }
 
 html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-purple,
 html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-purple .wwm-stat-name,
 html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-purple .wwm-stat-val {
-  color: #6a2e8a !important; /* 暗紫 */
+   /* 暗紫 */
 }
 
 html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-blue,
 html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-blue .wwm-stat-name,
 html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-blue .wwm-stat-val {
-  color: #1e5a9e !important; /* 暗青 */
-}
-
-html[data-theme="light"] .wwm-step2 .wwm-step2-section-title {
-  color: var(--brown-3) !important;
-  font-weight: 900;
-}
-
-html[data-theme="light"] .wwm-step2 .wwm-muted {
-  color: var(--c-text-brown-dim);
-  opacity: 0.95;
+   /* 暗青 */
 }
 
 html[data-theme="light"] .wwm-step2 .wwm-num-input {
   color: var(--brown-2);
-  background: var(--hover-strong);
-}
 
-html[data-theme="light"] .wwm-step2 .wwm-step2-section-title {
-  border-bottom-color: rgba(120,60,20,0.45);
-}
-
-html[data-theme="light"] .wwm-step2 .wwm-xinfa-cell {
-  border-bottom: 1px dashed rgba(120,60,20,0.25);
-  padding-bottom: var(--space-1);
-}
-
-html[data-theme="light"] .wwm-step2 .wwm-arsenal-tier {
-  border: 1px solid rgba(120,60,20,0.3);
-  background: rgba(255,240,210,0.4);
 }
 
 html[data-theme="light"] .wwm-anlz {
@@ -977,24 +897,6 @@ html[data-theme="light"] .wwm-anlz-header {
 html[data-theme="light"] .wwm-anlz-header::before {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 0.4  0 0 0 0 0.25  0 0 0 0 0.1  0 0 0 0.22 0'/></filter><rect width='220' height='220' filter='url(%23f)'/></svg>");
   mix-blend-mode: multiply;
-}
-
-html[data-theme="light"] .wwm-anlz-bamboo svg path { fill: var(--brown-5); }
-
-html[data-theme="light"] .wwm-anlz .wwm-anlz-title {
-  color: #2a1610;
-  text-shadow:
-    0 0 0.5px rgba(42,22,16,.6),
-    0 0 1.5px rgba(74,40,20,.35),
-    0 0 3px   rgba(106,62,22,.18),
-    0.6px 0 1.2px rgba(42,22,16,.25),
-    -0.6px 0 1.2px rgba(42,22,16,.22),
-    0 0.5px 1.5px rgba(74,40,20,.14);
-}
-
-html[data-theme="light"] .wwm-anlz .wwm-anlz-subtitle {
-  color: var(--brown-5);
-  opacity: 0.9;
 }
 
 html[data-theme="light"] .wwm-anlz-body::before {

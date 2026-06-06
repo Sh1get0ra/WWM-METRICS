@@ -2584,4 +2584,181 @@ html[lang="en"] .wwm-cmp-title-en {
    OBS view では幅問わず sidebar のみ表示が正。
    source order 後出 + 高 specificity で mobile @media 内 rule を全 override。 */
 
+
+/* S2-g co-locate (T): light#9 L381 */
+.seal {
+  box-shadow: inset 0 0 0 1px var(--c-tier-ss-glow-pink), inset 0 -8px 14px var(--c-shadow-light), 0 0 24px var(--c-vermilion-glow-soft), 0 1px 4px var(--overlay-tint);
+}
+
+/* S2-g co-locate (T): light#29 L439 */
+.wwm-sb-mini-hero-card .wwm-sb-totalmartial b,
+.wwm-sb-mini-hero-card .wwm-sb-martial b {
+  text-shadow: var(--c-sb-totalmartial--b-text-shadow);
+}
+
+/* S2-g co-locate (B / K-type): light#29 L439 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-totalmartial b,
+html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial b {
+  color: var(--c-text-brown-bright) !important;
+}
+
+/* S2-g co-locate (B / K-type): light#40 L497 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .wwm-share-warn {
+  background: rgba(184,100,28,0.22) !important;
+  color: #6a3a14 !important;
+  border-left-color: var(--c-orange-deep) !important;
+}
+
+/* S2-g co-locate (B / K-type): light#88 L756 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .hero-wuxia #dmgPhysVal {
+  color: var(--vermilion-deep) !important;
+}
+
+/* S2-g co-locate (B / K-type): light#89 L758 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .hero-wuxia #dmgElemVal {
+  color: var(--jade-bright) !important;
+}
+
+/* S2-g co-locate (T): light#93 L773 */
+.hero-wuxia .hero-tier.tier-SS::before,
+.wwm-sb-tier-badge.tier-SS::before {
+  position: var(--c-hero-wuxia--hero-tier-tier-SS-before-position);
+  top: var(--c-hero-wuxia--hero-tier-tier-SS-before-top);
+  bottom: var(--c-hero-wuxia--hero-tier-tier-SS-before-bottom);
+  left: var(--c-hero-wuxia--hero-tier-tier-SS-before-left);
+  right: var(--c-hero-wuxia--hero-tier-tier-SS-before-right);
+  width: var(--c-hero-wuxia--hero-tier-tier-SS-before-width);
+  height: var(--c-hero-wuxia--hero-tier-tier-SS-before-height);
+  transform: var(--c-hero-wuxia--hero-tier-tier-SS-before-transform);
+  pointer-events: var(--c-hero-wuxia--hero-tier-tier-SS-before-pe);
+  z-index: var(--c-hero-wuxia--hero-tier-tier-SS-before-z);
+  content: var(--c-hero-wuxia--hero-tier-tier-SS-before-content);
+}
+
+/* S2-g co-locate (B / K-type): light#96 L804 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .wwm-sb-tier-badge.tier-A {
+  text-shadow: none !important;
+}
+
+/* S2-g co-locate (B / K-type): light#97 L811 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .wwm-sb-tier-badge.tier-B {
+  text-shadow: none !important;
+}
+
+/* S2-g co-locate (B / K-type): light#98 L818 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .wwm-sb-tier-badge.tier-C {
+  text-shadow: none !important;
+}
+
+/* S2-g co-locate (B / K-type): light#104 L859 — theme gate 維持で other theme 影響ゼロ。 svg presentation attr 保護 (token unset 不可) */
+html[data-theme="light"] .hero-wuxia .ink-stroke path {
+  stroke: rgba(160,28,18,0.6);
+}
+
+/* S2-g co-locate (B / K-type): light#106 L867 — theme gate 維持で other theme 影響ゼロ。 svg presentation attr 保護 (token unset 不可) */
+html[data-theme="light"] .hero-wuxia .luopan-ticks line {
+  stroke: rgba(122,90,32,.8);
+  stroke-opacity: 1;
+}
+
+/* S2-g co-locate (B / K-type): light#107 L872 — theme gate 維持で other theme 影響ゼロ。 svg presentation attr 保護 (token unset 不可) */
+html[data-theme="light"] .hero-wuxia .luopan-ticks line[stroke-width="1.5"] {
+  stroke: var(--vermilion-deep);
+  stroke-opacity: 1;
+}
+
+/* S2-g co-locate (B / K-type): light#108 L877 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .hero-wuxia .luopan-arc circle[stroke^="rgba(232,215,180"] {
+  stroke: rgba(122,90,32,.55) !important;
+}
+
+/* S2-g co-locate (B / K-type): light#109 L881 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .hero-wuxia .luopan-inner svg circle.donut-bg,
+html[data-theme="light"] .hero-wuxia .luopan-inner svg circle[stroke^="rgba(232,215,180"] {
+  stroke: rgba(122,90,32,.5) !important;
+}
+
+/* S2-g co-locate (B / K-type): light#110 L886 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .wwm-equip-section .wwm-stat-name,
+html[data-theme="light"] .wwm-equip-section .wwm-stat-val,
+html[data-theme="light"] .wwm-step2 .wwm-step2-section-title,
+html[data-theme="light"] .wwm-step2 .wwm-xinfa-cell,
+html[data-theme="light"] .wwm-step2 .wwm-xinfa-label,
+html[data-theme="light"] .wwm-step2 .wwm-xinfa-effect,
+html[data-theme="light"] .wwm-step2 .wwm-arsenal-tier,
+html[data-theme="light"] .wwm-step2 .wwm-arsenal-lv,
+html[data-theme="light"] .wwm-step2 .wwm-arsenal-peaked-label,
+html[data-theme="light"] .wwm-step2 .wwm-arsenal-preset,
+html[data-theme="light"] .wwm-step2 .wwm-arsenal-custom,
+html[data-theme="light"] .wwm-step2 .wwm-stat-label,
+html[data-theme="light"] .wwm-step2 .wwm-radio-label,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-base b,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix b,
+html[data-theme="light"] .wwm-equip-section,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-slot,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-slot-header,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-base,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix,
+html[data-theme="light"] .wwm-step2 {
+  color: var(--brown-2) !important;
+}
+
+/* S2-g co-locate (B / K-type): light#112 L915 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-gold,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-gold .wwm-stat-name,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-gold .wwm-stat-val {
+  color: var(--c-orange-deep) !important;
+}
+
+/* S2-g co-locate (B / K-type): light#113 L921 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-purple,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-purple .wwm-stat-name,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-purple .wwm-stat-val {
+  color: #6a2e8a !important;
+}
+
+/* S2-g co-locate (B / K-type): light#114 L927 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-blue,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-blue .wwm-stat-name,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-blue .wwm-stat-val {
+  color: #1e5a9e !important;
+}
+
+/* S2-g co-locate (T): light#115 L933 */
+.wwm-step2 .wwm-step2-section-title {
+  font-weight: var(--c-step2-section-title-fw);
+}
+
+/* S2-g co-locate (B / K-type): light#115 L933 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .wwm-step2 .wwm-step2-section-title {
+  color: var(--brown-3) !important;
+}
+
+/* S2-g co-locate (T): light#118 L948 */
+.wwm-step2 .wwm-step2-section-title {
+  border-bottom-color: var(--c-step2-section-title-border-bot);
+}
+
+/* S2-g co-locate (T): light#119 L952 */
+.wwm-step2 .wwm-xinfa-cell {
+  border-bottom: var(--c-step2--xinfa-cell-border-bot);
+  padding-bottom: var(--c-step2--xinfa-cell-pad-bot);
+}
+
+/* S2-g co-locate (B / K-type): light#124 L982 — theme gate 維持で other theme 影響ゼロ。 svg presentation attr 保護 (token unset 不可) */
+html[data-theme="light"] .wwm-anlz-bamboo svg path {
+  fill: var(--brown-5);
+}
+
+/* S2-g co-locate (T): light#125 L984 */
+.wwm-anlz .wwm-anlz-title {
+  color: var(--c-anlz-title-fg-n2);
+  text-shadow: var(--c-anlz-title-text-shadow-n2);
+}
+
+/* S2-g co-locate (T): light#126 L995 */
+.wwm-anlz .wwm-anlz-subtitle {
+  color: var(--c-anlz-subtitle-fg);
+  opacity: var(--c-anlz-subtitle-opacity);
+}
 } /* end @layer components */
