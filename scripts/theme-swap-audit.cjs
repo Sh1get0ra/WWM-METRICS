@@ -226,12 +226,29 @@ const REAL_SHORTHANDS = new Set([
   'grid-row', 'grid-column', 'place-items', 'place-content', 'place-self',
   'outline'
 ]);
+// SVG presentation attribute 穴 (S2-g VRT 検出): stroke/fill 等は継承 prop →
+// IACVT unset = inherit ≠ 「decl 不在」(不在なら element の presentation attribute が勝つ)。
+// SVG 系 subject × presentational prop で other 側が unset 経路 (initial token / dark-invalid literal)
+// になる場合は token 化不可 → Mode B (theme prefix 維持 relocate) へ降格 (N) / pSafe false (P)
+const SVG_SUBJECT_RE = /(^|[\s>+~])(svg|path|line|circle|rect|polygon|polyline|ellipse|g|text|tspan|use)(?![\w-])[^\s>+~]*$/;
+const SVG_PRESENTATION_RE = /^(stroke|stroke-[\w-]+|fill|fill-[\w-]+|opacity|stop-[\w-]+|marker[\w-]*|color)$/;
+// 継承 prop (token 'initial' → IACVT → unset = inherit になる prop 群)
+const INHERITED_PROPS = new Set([
+  'color', 'font', 'font-family', 'font-size', 'font-weight', 'font-style', 'font-variant',
+  'line-height', 'letter-spacing', 'word-spacing', 'text-align', 'text-indent', 'text-transform',
+  'text-shadow', 'white-space', 'visibility', 'cursor', 'direction', 'quotes', 'tab-size',
+  'list-style', 'list-style-type', 'list-style-position', 'list-style-image',
+  'caption-side', 'border-collapse', 'border-spacing', 'empty-cells', 'word-break', 'overflow-wrap',
+]);
 function propsConflict(a, b) {
   if (a === b) return true;
   if (REAL_SHORTHANDS.has(a) && propGroup(a) === propGroup(b)) return true;
   if (REAL_SHORTHANDS.has(b) && propGroup(b) === propGroup(a)) return true;
   return false;
 }
+// S2-j: dp が ep を完全に遮蔽するか (同 prop or ep の全成分を reset する祖先 shorthand)
+// 例: border ⊇ border-color ✓ / border-top ⊉ border-color ✗ ('border-color'.startsWith('border-top-') = false)
+const shadowProp = (dp, ep) => dp === ep || (REAL_SHORTHANDS.has(dp) && ep.startsWith(dp + '-') && propGroup(dp) === propGroup(ep));
 
 const EXCLUSIVE_CLASS_GROUPS = [
   ['rank-max', 'rank-gold', 'rank-purple', 'rank-blue'],
@@ -585,6 +602,20 @@ function cmpBaseGWins(e, gE) {
   return gE.pair.line > e.pair.line;
 }
 
+// drop-gate 計測 (S2-i): fixpoint で batch から落ちた「最初の」理由を記録 (後続は連鎖)
+const dropGate = (e, gate, detail) => { if (!e.dropGate) { e.dropGate = gate; if (detail) e.dropDetail = detail; } };
+
+// ── S2-j: M/P 横断方向検証用の base 最終位置比較 ──
+// M entry の swap 後位置 = pair decl (値が var(--tok) になるだけで位置不変)
+// P entry の insert 後位置 = target rule 末尾 (lastLine + 0.5 — 整数 line と衝突しない全順序)
+function finalPosM(mE) { return { layer: LAYER_ORDER.get(mE.pair.file) ?? 99, spec: specificity(mE.baseSel), line: mE.pair.line }; }
+function finalPosP(pE) { return { layer: LAYER_ORDER.get(pE.insert.file) ?? 99, spec: specificity(pE.baseSel), line: pE.insert.lastLine + 0.5 }; }
+function posBeats(a, b) {
+  if (a.layer !== b.layer) return a.layer > b.layer;
+  if (a.spec !== b.spec) return a.spec > b.spec;
+  return a.line > b.line;
+}
+
 function mFixpoint() {
 let changed = true;
 while (changed) {
@@ -598,6 +629,14 @@ while (changed) {
       const gE = mIndex.get(gK);
       const gRemovable = gE && inBatch.has(gK);
       if (!gRemovable) {
+        // S2-j (A): g が P batch で base へ移動 (insert + theme decl 削除) なら「残置」でない →
+        // 方向検証: after 勝者 (e.pair vs g.insert) == before 勝者 (beforeGWins) で保存
+        const pgE = pIndex.get(gK); // 宣言は後方だが mFixpoint 初回呼出は outer loop (宣言後) → TDZ 安全
+        if (pgE && pBatch.has(gK)) {
+          const eWins = posBeats(finalPosM(e), finalPosP(pgE));
+          if (eWins !== !g.beforeGWins) { dropSelf = true; dropGate(e, 'm-pdir', `${g.file}:${g.line} ${g.selector} { ${g.prop} }`); break; }
+          continue; // 方向保存 = blocker 解除
+        }
         // g 残置: beforeGWins なら before/after 共 g 勝ち = 表示不変
         if (!g.beforeGWins) {
           // same-selector shield: 同 theme rule g' (同 selector ∧ 同 prop) が g を遮蔽するか
@@ -616,7 +655,7 @@ while (changed) {
             return ss > sd || (ss === sd && s.line > e.line) ||
               resolveCtx(s.value, e.ctx) === resolveCtx(e.value, e.ctx); // g' が d に勝つ or theme 表示同値
           });
-          if (!shielded) { dropSelf = true; break; }
+          if (!shielded) { dropSelf = true; dropGate(e, 'm-blocker', `${g.file}:${g.line} ${g.selector} { ${g.prop} }`); break; }
         }
       } else {
         const valEq = g.prop === e.prop && resolveCtx(g.value, e.ctx) === resolveCtx(e.value, e.ctx);
@@ -626,9 +665,9 @@ while (changed) {
         if (!okDir) {
           if (g.beforeGWins) {
             // g を残せば harmless → blocker 側を batch から外す (依存を道連れにしない)
-            inBatch.delete(gK); changed = true;
+            if (inBatch.delete(gK)) { changed = true; dropGate(gE, 'm-dep-evict', `dep of ${e.file}:${e.line}`); }
           } else {
-            dropSelf = true; break;
+            dropSelf = true; dropGate(e, 'm-dir', `${g.file}:${g.line} ${g.selector} { ${g.prop} }`); break;
           }
         }
       }
@@ -643,7 +682,7 @@ while (changed) {
     const k0 = `${norm(splits[0].pair.value)} || ${norm(splits[0].value)} || ${splits[0].sameValue}`;
     const uniform = splits.every(s => `${norm(s.pair.value)} || ${norm(s.value)} || ${s.sameValue}` === k0);
     if (!allIn || !uniform) {
-      for (const s of splits) if (inBatch.delete(keyOf(s))) changed = true;
+      for (const s of splits) if (inBatch.delete(keyOf(s))) { changed = true; dropGate(s, 'm-phys', pk); }
     }
   }
   // base 側物理 gate (theme 別・独立判定): pair rule の全 selector cover ∧ 値均一。
@@ -657,7 +696,7 @@ while (changed) {
       const covered = new Set(side.map(x => x.baseSel));
       const vals = new Set(side.map(x => resolveCtx(x.value, ctx)));
       if (![...sels].every(S => covered.has(S)) || vals.size !== 1) {
-        for (const x of side) if (inBatch.delete(keyOf(x))) changed = true;
+        for (const x of side) if (inBatch.delete(keyOf(x))) { changed = true; dropGate(x, 'm-base-phys', pk); }
       }
     }
   }
@@ -682,18 +721,26 @@ for (const b of baseDecls) {
   if (b.line > r.lastLine) r.lastLine = b.line;
 }
 
-function pInsertTarget(baseSel, media) {
-  // 同 selector ∧ 同 media の base rule 群 → cascade 最後 (layer → ruleStart) = 挿入先
-  // (最後を選ぶ事で同 selector base rule は全て A に負ける = pairWinnerBlockers の同 selector 除外と整合)
-  let best = null;
+function pInsertCandidates(baseSel, media) {
+  // 同 selector ∧ 同 media の base rule 群 → cascade 降順 (layer → ruleStart)。
+  // [0] = cascade 最後 = 従来の pInsertTarget (同 selector base rule 全てに A 勝ち =
+  // pairWinnerBlockers の同 selector 除外と整合)。 [1..] = retry 候補 (S2-i) —
+  // 採用時は後続 same-selector rule との propsConflict 再検証必須 (validatePTarget)
+  const seen = new Set();
+  const cands = [];
   for (const b of baseDecls) {
     if (norm(b.selector) !== baseSel || (b.media || null) !== (media || null)) continue;
-    const r = baseByRule.get(`${b.file}|${b.ruleId}`);
-    if (!best) { best = r; continue; }
-    const lb = LAYER_ORDER.get(best.file) ?? 99, lr = LAYER_ORDER.get(r.file) ?? 99;
-    if (lr > lb || (lr === lb && r.ruleStart > best.ruleStart)) best = r;
+    const k = `${b.file}|${b.ruleId}`;
+    if (seen.has(k)) continue;
+    seen.add(k);
+    cands.push(baseByRule.get(k));
   }
-  return best;
+  cands.sort((a, b) => {
+    const la = LAYER_ORDER.get(a.file) ?? 99, lb = LAYER_ORDER.get(b.file) ?? 99;
+    if (la !== lb) return lb - la;
+    return b.ruleStart - a.ruleStart;
+  });
+  return cands;
 }
 
 // other theme で A (挿入 decl) が現 winner から element を奪う競合列挙 + 残置 theme 競合
@@ -786,6 +833,36 @@ function extractForProp(val, fromProp, toProp) {
   return null;
 }
 
+// ── S2-h: DOM 包含知識 (grep 検証済の構造的事実、 cover 証明にのみ使用) ──
+// DOM_CONTAINMENT: class X の element は常に class A の element の子孫。
+//   .wwm-cmp-current = xinfa.js:319 / gear.js:456 / arsenal.js:91 の 3 出現のみ、
+//   全て .wwm-cmp-modal-a template 内部 + classList 動的付与なし (2026-06-06 grep 証明)
+const DOM_CONTAINMENT = new Map([
+  ['.wwm-cmp-current', ['.wwm-cmp-modal-a']],
+  // 対照 modal 専用 control 群 — gear.js (419/422/438/444/457/469/471) / xinfa.js (328/329) /
+  // arsenal.js (78) の template 変数は全て .wwm-cmp-modal-a の innerHTML 内 interpolate (2026-06-06 検証)
+  ['.wwm-cmp-kongfu-select', ['.wwm-cmp-modal-a']],
+  ['.wwm-cmp-set-select', ['.wwm-cmp-modal-a']],
+  ['.wwm-cmp-stat-select', ['.wwm-cmp-modal-a']],
+  ['.wwm-cmp-val-input', ['.wwm-cmp-modal-a']],
+  ['.wwm-cmp-lv-select', ['.wwm-cmp-modal-a']],
+  ['.wwm-cmp-lv', ['.wwm-cmp-modal-a']],
+  // S2-j: .wwm-cmp-new = gear.js:463 / xinfa.js:326 / arsenal.js:97 の 3 出現のみ、
+  // 全て "wwm-cmp-col wwm-cmp-new" で .wwm-cmp-current と同じ cmp-modal-a template 内 (2026-06-06 grep 証明)
+  ['.wwm-cmp-new', ['.wwm-cmp-modal-a']],
+]);
+// SUBJECT_IMPLICATION: class X を持つ element は常に class A も併せ持つ (同 element)。
+//   .wwm-cmp-modal-a の 3 出現は全て class="wwm-modal wwm-modal-square wwm-cmp-modal-a..."
+const SUBJECT_IMPLICATION = new Map([
+  ['.wwm-cmp-modal-a', ['.wwm-modal', '.wwm-modal-square']],
+]);
+// compound token set → SUBJECT_IMPLICATION で拡張 (element が必ず持つ class を追加)
+function expandCompound(set) {
+  const out = new Set(set);
+  for (const t of set) for (const a of (SUBJECT_IMPLICATION.get(t) || [])) out.add(a);
+  return out;
+}
+
 // selector 包含 (保守近似): g の全 compound 制約が sel の compound 列に順序保存で含まれる
 // → g は sel の match element を全て match (g ⊇ sel)。 子/隣接 combinator・:not 等は bail
 function selCovers(gSel, sel) {
@@ -799,11 +876,13 @@ function selCovers(gSel, sel) {
     return selCovers(gSel.replace(/::?[\w-]+\s*$/, ''), sel.replace(/::?[\w-]+\s*$/, ''));
   }
   if (/[>+~]|::|:not|:is|:where|:has/.test(gSel)) return false;
+  // sel 側 sibling combinator は祖先弱化不可 (A + B の A は兄弟 ≠ 祖先) → norm 同一以外 bail (S2-h)
+  if (/[+~]/.test(sel)) return false;
   const split = (s) => s.split(/\s+/).filter(Boolean).map(part =>
     new Set(part.match(/(\.[\w-]+|#[\w-]+|\[[^\]]*\]|:[\w-]+(\([^)]*\))?|[a-zA-Z][\w-]*|\*)/g) || [part]));
-  const gParts = split(norm(gSel)), sParts = split(norm(sel).replace(/\s*[>+~]\s*/g, ' '));
+  const gParts = split(norm(gSel)), sParts = split(norm(sel).replace(/\s*>\s*/g, ' ')).map(expandCompound);
   if (!gParts.length || !sParts.length) return false;
-  // subject (末尾) 同士: g の subject 制約 ⊆ sel の subject 制約
+  // subject (末尾) 同士: g の subject 制約 ⊆ sel の subject 制約 (implication 込)
   const subset = (a, b) => [...a].every(t => b.has(t));
   if (!subset(gParts[gParts.length - 1], sParts[sParts.length - 1])) return false;
   // 残り ancestor compound: 順序保存 subsequence
@@ -813,6 +892,22 @@ function selCovers(gSel, sel) {
     for (; si >= 0; si--) {
       if (subset(gParts[gi], sParts[si])) { found = true; si--; break; }
     }
+    if (!found && gi === 0) {
+      // S2-h DOM 包含: g 最上位 compound を sel 内 class の既知祖先 (DOM_CONTAINMENT) で充足。
+      // 位置安全条件: virtual 祖先は implier compound の直上にいる事だけが既知 (他 compound との
+      // 上下関係は不明) → g に既 match 済 ancestor がある場合は未走査域 (index ≤ si、 = 既 match
+      // より上の implier) のみ許可。 g 単独 ancestor なら implier は subject 含む全域可
+      const limit = (gParts.length - 2 > 0) ? si : sParts.length - 1;
+      for (let idx = 0; idx <= limit && !found; idx++) {
+        const implied = new Set();
+        for (const t of sParts[idx]) for (const a of (DOM_CONTAINMENT.get(t) || [])) {
+          implied.add(a);
+          for (const a2 of (SUBJECT_IMPLICATION.get(a) || [])) implied.add(a2);
+        }
+        if (implied.size && subset(gParts[0], implied)) found = true;
+      }
+      if (found) { si = -1; break; }
+    }
     if (!found) return false;
   }
   return true;
@@ -820,6 +915,79 @@ function selCovers(gSel, sel) {
 
 const tIndex = new Map(); // 全 theme decl: gid → decl (kept dep の selector/value 参照用)
 for (const d of themeDecls) tIndex.set(`${d.file}|${d.line}|${norm(d.selector)}|${d.prop}`, d);
+
+// S2-j (D): hardNonTheme blocker b の theme-shadow 候補 —
+// 同 ctx theme decl t で selCovers(t.baseSel ⊇ b.selector) ∧ shadowProp(t.prop ⊇ e.prop) ∧
+// t が e (theme layer 内 spec/line) に勝つ → overlap(e,b) の winner は before も t。
+// t 残置なら after も t (theme layer 常勝) = b 無害。 t が batch 移動する場合は pFixpoint で方向検証
+// (t.final が b と e.insert の両方に勝つ要 — t.pair === b 特例は b 自身が token 化 = t 支配で成立)
+function themeShadowsFor(e, b) {
+  const keys = [];
+  const sd = specificity(e.selector);
+  for (const t of themeDecls) {
+    if (t.prop.startsWith('--') || t.important) continue; // imp t は batch 候補外 — 解析単純化のため非 imp 限定 (保守的)
+    const tCtx = t.file === 'assets/styles-dark.css' ? 'dark' : 'light';
+    if (tCtx !== e.ctx) continue;
+    if ((t.media || null) !== (e.media || null)) continue;
+    if (t.file === e.file && t.line === e.line) continue; // e 自身 (同物理 decl の split 含む)
+    if (!shadowProp(t.prop, e.prop)) continue;
+    if (!selCovers(stripTheme(t.selector), b.selector)) continue;
+    const st = specificity(t.selector);
+    if (!(st > sd || (st === sd && t.line > e.line))) continue; // t が e に勝つ (before 勝者 ≠ e の保証)
+    keys.push(`${t.file}|${t.line}|${norm(t.selector)}|${t.prop}`);
+  }
+  return keys;
+}
+
+// target 1 つに対する P 静的検証 (S2-i で関数化 — coverage retry が別候補で再検証する)
+// laterRules = 採用 target より cascade 後の same-selector rule 群。 そこに propsConflict decl が
+// あると挿入 decl A は同 specificity 後 rule に敗北 (= 従来「最後の rule 固定」が担保していた前提の補完検査)
+function validatePTarget(e, target, laterRules) {
+  for (const r of laterRules) {
+    const conflict = baseDecls.some(b => b.file === r.file && b.line >= r.ruleStart && b.line <= r.lastLine &&
+      norm(b.selector) === e.baseSel && !b.prop.startsWith('--') && propsConflict(b.prop, e.prop));
+    if (conflict) return { ok: false, reason: 'later-conflict' };
+  }
+  const ins = { file: target.file, ruleStart: target.ruleStart, lastLine: target.lastLine, ruleSels: [...target.sels] };
+  // ctx 側: 挿入 decl = synthetic pair (token ctx 値 = e.value で表示値保存)。
+  // hard blocker (beforeGWins=false) は同 batch P theme decl なら fixpoint で方向検証 → ここでは不可判定しない
+  const synth = { ...e, pair: { file: target.file, line: target.lastLine + 1 } };
+  // 挿入先 rule 内 decl は A (末尾挿入) が rule 内順序で常勝 → blocker から除外
+  const blockers = pairWinnerBlockers(synth, e.ctx)
+    .filter(b => !(b.file === target.file && b.line >= target.ruleStart && b.line <= target.lastLine));
+  const hardNonTheme = blockers.filter(b => !b.beforeGWins && !THEME_FILE_SET.has(b.file));
+  // S2-j (D): hard blocker に theme-shadow 候補があれば fixpoint 繰延、 無ければ従来通り ctx-blocker
+  const shadowDeps = [];
+  const stillHard = [];
+  for (const b of hardNonTheme) {
+    const tKeys = themeShadowsFor(e, b);
+    if (tKeys.length) shadowDeps.push({ b: { file: b.file, line: b.line, selector: b.selector, prop: b.prop }, tKeys });
+    else stillHard.push(b);
+  }
+  if (stillHard.length) return { ok: false, reason: 'ctx-blocker', hardNonTheme: stillHard, blockers };
+  // other 側 (rescue は rescueBeaten 共用 — S2-h で winning-cover + inherit 特例 + CSS-wide 拒否)
+  const { beaten, keptTheme } = otherSideScan(e, target);
+  let otherVal;
+  if (beaten.length && !e.hasOpp) {
+    const rescue = rescueBeaten(e, beaten);
+    if (rescue === null) return { ok: false, reason: 'other-beaten', beaten, blockers, keptTheme };
+    if (!rescue.useInitial) otherVal = rescue.value; // raw 値 (token default は使用点で theme 解決)
+  }
+  // unset 経路 (opp 無し ∧ rescue 値無し = token 'initial') の SVG presentation attr 穴 (S2-g 知見の P 適用)
+  if (!e.hasOpp && !otherVal && svgAttrRisk(e.baseSel, e.prop)) return { ok: false, reason: 'svg-unset', blockers, keptTheme };
+  return { ok: true, insert: ins, blockers, keptTheme, otherVal, shadowDeps };
+}
+function adoptPTarget(e, v) {
+  e.insert = v.insert;
+  // S2-j (D): theme-shadow 繰延した hard blocker は pBlockers から除外
+  // (fixpoint の hard branch は theme blocker 前提 — 非 theme key は pIndex/mIndex 不在で誤 drop する。
+  //  shadowed b の検証は pShadowDeps check が担当)
+  const shadowed = new Set((v.shadowDeps || []).map(d => `${d.b.file}|${d.b.line}|${d.b.selector}|${d.b.prop}`));
+  e.pBlockers = v.blockers.filter(b => !shadowed.has(`${b.file}|${b.line}|${b.selector}|${b.prop}`));
+  e.pKeptTheme = v.keptTheme;
+  e.pOtherVal = v.otherVal; // undefined = token 'initial'
+  e.pShadowDeps = v.shadowDeps && v.shadowDeps.length ? v.shadowDeps : undefined; // S2-j (D)
+}
 
 for (const e of out.P) {
   e.ctx = e.file === 'assets/styles-dark.css' ? 'dark' : 'light';
@@ -829,42 +997,32 @@ for (const e of out.P) {
   e.hasOpp = !!opp;
   if (opp) e.oppKey = `${opp.file}|${opp.line}|${norm(opp.selector)}|${opp.prop}`;
   if (e.important) { e.pSafe = false; e.pReason = 'imp'; continue; }
-  const target = pInsertTarget(e.baseSel, e.media);
-  if (!target) { e.pSafe = false; e.pReason = 'no-same-media-rule'; continue; }
-  e.insert = { file: target.file, ruleStart: target.ruleStart, lastLine: target.lastLine, ruleSels: [...target.sels] };
-  // ctx 側: 挿入 decl = synthetic pair (token ctx 値 = e.value で表示値保存)。
-  // hard blocker (beforeGWins=false) は同 batch P theme decl なら fixpoint で方向検証 → ここでは不可判定しない
-  const synth = { ...e, pair: { file: target.file, line: target.lastLine + 1 } };
-  // 挿入先 rule 内 decl は A (末尾挿入) が rule 内順序で常勝 → blocker から除外
-  const blockers = pairWinnerBlockers(synth, e.ctx)
-    .filter(b => !(b.file === target.file && b.line >= target.ruleStart && b.line <= target.lastLine));
-  e.pBlockers = blockers;
-  const hardNonTheme = blockers.filter(b => !b.beforeGWins && !THEME_FILE_SET.has(b.file));
-  if (hardNonTheme.length) {
-    e.pSafe = false; e.pReason = 'ctx-blocker';
-    e.pBlockerList = hardNonTheme.slice(0, 3).map(b => `${b.file}:${b.line} ${b.selector} { ${b.prop} }`);
+  e.pCands = pInsertCandidates(e.baseSel, e.media);
+  e.pCandIdx = 0;
+  if (!e.pCands.length) { e.pSafe = false; e.pReason = 'no-same-media-rule'; continue; }
+  const v = validatePTarget(e, e.pCands[0], []);
+  if (!v.ok) {
+    e.pSafe = false; e.pReason = v.reason;
+    if (v.hardNonTheme) e.pBlockerList = v.hardNonTheme.slice(0, 3).map(b => `${b.file}:${b.line} ${b.selector} { ${b.prop} }`);
+    if (v.beaten) e.pBeatenList = v.beaten.slice(0, 3).map(g => `${g.file}:${g.line} ${g.selector} { ${g.prop} }`);
     continue;
   }
-  // other 側
-  const { beaten, keptTheme } = otherSideScan(e, target);
-  e.pKeptTheme = keptTheme;
-  if (beaten.length && !e.hasOpp) {
-    // rescue: beaten が全て同 other 解決値 v ∧ baseSel 全 element を cover する g* 存在
-    //   → token other 値 = v (奪っても表示同値)。 g.prop が shorthand なら e.prop 該当成分を抽出。
-    //   cover 不在 / 値不一致 / 抽出不能なら unsafe
-    const other = e.ctx === 'light' ? 'dark' : 'light';
-    const exts = beaten.map(g => ({ g, ext: extractForProp(g.value, g.prop, e.prop) }));
-    const vals = new Set(exts.map(x => x.ext === null ? '__NG__' : resolveCtx(x.ext, other)));
-    const cover = exts.find(x => x.ext !== null && selCovers(x.g.selector, e.baseSel));
-    if (vals.size === 1 && !vals.has('__NG__') && cover) {
-      e.pOtherVal = cover.ext; // raw 値 (token default は使用点で theme 解決)
-    } else {
-      e.pSafe = false; e.pReason = 'other-beaten';
-      e.pBeatenList = beaten.slice(0, 3).map(g => `${g.file}:${g.line} ${g.selector} { ${g.prop} }`);
-      continue;
-    }
-  }
+  adoptPTarget(e, v);
   e.pSafe = true;
+}
+
+// coverage fail 時の insert target retry (S2-i): 次候補 (cascade 前方の same-selector rule) を
+// validatePTarget で再検証 → 成功なら insert 差替えて batch 残留 (multi-selector rule 巻添えの正当 drop を回避)。
+// pCandIdx 単調増加 + 候補有限 → fixpoint 停止保証
+function retryPTarget(e) {
+  while (e.pCandIdx + 1 < e.pCands.length) {
+    e.pCandIdx++;
+    const target = e.pCands[e.pCandIdx];
+    const later = e.pCands.slice(0, e.pCandIdx); // 降順 list = 前方 index が cascade 後続 rule
+    const v = validatePTarget(e, target, later);
+    if (v.ok) { adoptPTarget(e, v); e.pRetried = e.pCandIdx; return true; }
+  }
+  return false;
 }
 
 // P batch fixpoint — gate 3 種
@@ -878,6 +1036,30 @@ for (const e of out.P) {
   if (!pPhysGroups.has(k)) pPhysGroups.set(k, []);
   pPhysGroups.get(k).push(e);
 }
+// S2-j (C): 挿入先 rule の selector S に対する static base shadow —
+// 同 selector S ∧ 同 media ∧ shadowProp の既存 base decl が挿入位置より cascade 後 (同 spec → layer/line) に
+// あれば、 挿入 decl A は S の表示に関与不能 (常敗) = S は cover 不要。 theme 残置 decl は theme layer 常勝で
+// 元々無害。 guard: S 上の batch entry (M/P) の final 位置が挿入位置に負けるなら不成立 (移動で A が浮上)
+function coverageShadow(S, e) {
+  const insPos = { layer: LAYER_ORDER.get(e.insert.file) ?? 99, spec: specificity(S), line: e.insert.lastLine + 0.5 };
+  const hasShadow = (baseBySel.get(S) || []).some(d =>
+    (d.media || null) === (e.media || null) &&
+    !d.prop.startsWith('--') && !d.important &&
+    shadowProp(d.prop, e.prop) &&
+    !(d.file === e.insert.file && d.line >= e.insert.ruleStart && d.line <= e.insert.lastLine) && // 挿入 rule 内 decl は A (末尾) に敗北
+    posBeats({ layer: LAYER_ORDER.get(d.file) ?? 99, spec: specificity(S), line: d.line }, insPos));
+  if (!hasShadow) return false;
+  for (const x of out.M) {
+    if (!inBatch.has(keyOf(x))) continue;
+    if (x.baseSel === S && (x.media || null) === (e.media || null) && propsConflict(x.prop, e.prop) && !posBeats(finalPosM(x), insPos)) return false;
+  }
+  for (const x of out.P) {
+    if (x === e || !x.insert || !pBatch.has(pKeyOf(x))) continue;
+    if (x.baseSel === S && (x.media || null) === (e.media || null) && propsConflict(x.prop, e.prop) && !posBeats(finalPosP(x), insPos)) return false;
+  }
+  return true;
+}
+
 // dep entry (g) も batch 移動する場合の方向検証: 移動後 g insert が e insert に勝ち続けるか
 function depStillWins(gE, e) {
   if (!gE.insert || !e.insert) return false;
@@ -907,12 +1089,45 @@ while (pchg) {
         if (inB && bE) {
           // 同一 insert 物理 decl (同 rule + 同 prop) は coverage gate が値均一保証 → 方向不問
           const sameIns = bE.insert && e.insert && bE.insert.file === e.insert.file && bE.insert.ruleStart === e.insert.ruleStart && bE.prop === e.prop;
-          if (!sameIns && !depStillWins(bE, e)) { drop = true; break; }
+          if (!sameIns && !depStillWins(bE, e)) { drop = true; dropGate(e, 'p-dir', bk); break; }
+        } else {
+          // S2-j (B): b が M batch で base へ swap → 残置でない。 before b 勝ち → swap 後 b.pair も e.insert に勝ち続ける要
+          const mbE = mIndex.get(bk);
+          if (mbE && inBatch.has(bk) && !posBeats(finalPosM(mbE), finalPosP(e))) { drop = true; dropGate(e, 'p-mdir', bk); break; }
         }
       } else {
-        if (!inB || !bE) { drop = true; break; }            // theme hard blocker 残置 = 常勝 → 不可
+        if (!inB || !bE) {
+          // S2-j (B): b が M batch で base へ swap されるなら残置でない — before e 勝ち → e.insert が b.pair に勝つ要
+          const mbE = mIndex.get(bk);
+          if (mbE && inBatch.has(bk)) {
+            if (posBeats(finalPosP(e), finalPosM(mbE))) continue;
+            drop = true; dropGate(e, 'p-mdir', bk); break;
+          }
+          drop = true; dropGate(e, 'p-hard-stay', bk); break; // theme hard blocker 残置 = 常勝 → 不可
+        }
         const sameIns = bE.insert && e.insert && bE.insert.file === e.insert.file && bE.insert.ruleStart === e.insert.ruleStart && bE.prop === e.prop;
-        if (!sameIns && depStillWins(bE, e)) { drop = true; break; } // 移動後 g 勝ち = before (e 勝ち) と逆転 → 不可
+        if (!sameIns && depStillWins(bE, e)) { drop = true; dropGate(e, 'p-dir', bk); break; } // 移動後 g 勝ち = before (e 勝ち) と逆転 → 不可
+      }
+    }
+    // S2-j (D): theme-shadow 依存 — t 残置なら theme layer 常勝で成立。
+    // t が batch 移動なら t.final が blocker b と e.insert の両方に勝つ要。
+    // t.pair === b 特例: b 自身が var(--tTok) 化 = b の表示は t 支配 → b への勝ちは自明、 e.insert への勝ちのみ検査
+    if (!drop) {
+      for (const dep of e.pShadowDeps || []) {
+        const ok = dep.tKeys.some(tk => {
+          const tM = mIndex.get(tk), tP = pIndex.get(tk);
+          const tInM = tM && inBatch.has(tk), tInP = tP && pBatch.has(tk);
+          if (!tInM && !tInP) return true; // 残置 = theme layer 常勝
+          const bPos = { layer: LAYER_ORDER.get(dep.b.file) ?? 99, spec: specificity(dep.b.selector), line: dep.b.line };
+          if (tInM) {
+            const tIsB = tM.pair.file === dep.b.file && tM.pair.line === dep.b.line && tM.prop === dep.b.prop;
+            const tPos = tIsB ? bPos : finalPosM(tM);
+            return (tIsB || posBeats(tPos, bPos)) && posBeats(tPos, finalPosP(e));
+          }
+          const tPos = finalPosP(tP);
+          return posBeats(tPos, bPos) && posBeats(tPos, finalPosP(e));
+        });
+        if (!ok) { drop = true; dropGate(e, 'p-shadow-dir', `${dep.b.file}:${dep.b.line}`); break; }
       }
     }
     // other 残置勝者 (keptTheme): before 勝者 (g vs opp) に応じて方向要件が変わる
@@ -928,17 +1143,17 @@ while (pchg) {
         const g = tIndex.get(d);
         const gE = pIndex.get(d);
         const gMoves = gE && pBatch.has(d);
-        if (!g) { drop = true; break; }
+        if (!g) { drop = true; dropGate(e, 'p-kept', d); break; }
         if (!oppE) {
-          if (gMoves && !depStillWins(gE, e)) { drop = true; break; } // g 勝ち維持必須
+          if (gMoves && !depStillWins(gE, e)) { drop = true; dropGate(e, 'p-kept', d); break; } // g 勝ち維持必須
         } else {
           if (resolveCtx(g.value, other) === resolveCtx(oppE.value, other)) continue; // 同値 = 方向不問
           const sg = specificity(g.selector), so = specificity(oppE.selector);
           const gWonBefore = sg > so || (sg === so && g.line > oppE.line);
           if (gWonBefore) {
-            if (gMoves && !depStillWins(gE, e)) { drop = true; break; }
+            if (gMoves && !depStillWins(gE, e)) { drop = true; dropGate(e, 'p-kept', d); break; }
           } else {
-            if (!gMoves || depStillWins(gE, e)) { drop = true; break; } // g 残置 or 移動後勝ち = opp 値喪失
+            if (!gMoves || depStillWins(gE, e)) { drop = true; dropGate(e, 'p-kept', d); break; } // g 残置 or 移動後勝ち = opp 値喪失
           }
         }
       }
@@ -946,10 +1161,10 @@ while (pchg) {
     if (drop) { pBatch.delete(k); pchg = true; }
   }
   // 物理 theme decl gate: 全 selector split が batch 内、 さもなくば全 drop
-  for (const [, splits] of pPhysGroups) {
+  for (const [pk, splits] of pPhysGroups) {
     const states = splits.map(s => pBatch.has(pKeyOf(s)));
     if (states.some(Boolean) && !states.every(Boolean)) {
-      for (const s of splits) if (pBatch.delete(pKeyOf(s))) pchg = true;
+      for (const s of splits) if (pBatch.delete(pKeyOf(s))) { pchg = true; dropGate(s, 'p-phys', pk); }
     }
   }
   // 挿入先 rule coverage gate (theme 別): rule の全 selector が当該 ctx の batch entry
@@ -975,7 +1190,9 @@ while (pchg) {
         const v0 = [...vals][0];
         for (const S of sels) {
           const cover = batchBySelProp.get(`${S}|${side[0].prop}|${side[0].media || ''}|${ctx}`);
-          if (!cover || resolveCtx(cover.value, ctx) !== v0) { ok = false; break; }
+          if (cover && resolveCtx(cover.value, ctx) === v0) continue;
+          if (coverageShadow(S, side[0])) continue; // S2-j (C): 挿入 decl が S に cascade 常敗 = 無害 → cover 不要
+          ok = false; break;
         }
       }
       // other 側 token 値 (pOtherVal ?? initial) も side 内で均一要 (token は group に 1 つ)
@@ -984,7 +1201,12 @@ while (pchg) {
         if (otherVals.size > 1) ok = false;
       }
       if (!ok) {
-        for (const x of side) if (pBatch.delete(pKeyOf(x))) pchg = true;
+        for (const x of side) {
+          if (!pBatch.has(pKeyOf(x))) continue;
+          if (retryPTarget(x)) { pchg = true; continue; } // 別 target で batch 残留 → group 再編成は次 iteration
+          pBatch.delete(pKeyOf(x)); pchg = true;
+          dropGate(x, 'p-coverage', `${x.insert.file}:${x.insert.ruleStart} sels=${x.insert.ruleSels.length}`);
+        }
       }
     }
   }
@@ -1008,13 +1230,14 @@ while (outerChg) {
   outerChg = false;
   mFixpoint();
   pFixpoint();
-  for (const [, splits] of allPhys) {
+  for (const [pk, splits] of allPhys) {
     const deletable = (s) => s.cat === 'M' ? inBatch.has(s.key) : s.cat === 'P' ? pBatch.has(s.key) : false;
     const states = splits.map(deletable);
     if (states.some(Boolean) && !states.every(Boolean)) {
       for (const s of splits) {
-        if (s.cat === 'M' && inBatch.delete(s.key)) outerChg = true;
-        if (s.cat === 'P' && pBatch.delete(s.key)) outerChg = true;
+        const eAll = (s.cat === 'M' ? out.M : out.P).find(x => `${x.file}|${x.line}|${norm(x.selector)}|${x.prop}` === s.key);
+        if (s.cat === 'M' && inBatch.delete(s.key)) { outerChg = true; if (eAll) dropGate(eAll, 'xphys', pk); }
+        if (s.cat === 'P' && pBatch.delete(s.key)) { outerChg = true; if (eAll) dropGate(eAll, 'xphys', pk); }
       }
     }
   }
@@ -1069,12 +1292,6 @@ function valueInvalidIn(value, theme) {
   return false;
 }
 
-// SVG presentation attribute 穴 (S2-g VRT 検出): stroke/fill 等は継承 prop →
-// IACVT unset = inherit ≠ 「decl 不在」(不在なら element の presentation attribute が勝つ)。
-// SVG 系 subject × presentational prop で other 側が unset 経路 (initial token / dark-invalid literal)
-// になる場合は token 化不可 → Mode B (theme prefix 維持 relocate) へ降格
-const SVG_SUBJECT_RE = /(^|[\s>+~])(svg|path|line|circle|rect|polygon|polyline|ellipse|g|text|tspan|use)(?![\w-])[^\s>+~]*$/;
-const SVG_PRESENTATION_RE = /^(stroke|stroke-[\w-]+|fill|fill-[\w-]+|opacity|stop-[\w-]+|marker[\w-]*|color)$/;
 function svgAttrRisk(baseSel, prop) {
   return SVG_SUBJECT_RE.test(norm(baseSel)) && SVG_PRESENTATION_RE.test(prop);
 }
@@ -1120,15 +1337,39 @@ function relocateBlockers(e, targetFile, vLine) {
   return res;
 }
 
-// beaten rescue (P と同一 logic を関数化)。 CSS-wide keyword は custom property 値に不可 → 不可
+// beaten 同士の cascade 勝敗 (normal decl のみ — otherSideScan は imp 除外済)
+function beatenWins(a, b) {
+  const aL = LAYER_ORDER.get(a.file) ?? 99, bL = LAYER_ORDER.get(b.file) ?? 99;
+  if (aL !== bL) return aL > bL;
+  const sa = specificity(a.selector), sb = specificity(b.selector);
+  if (sa !== sb) return sa > sb;
+  return a.line > b.line;
+}
+// beaten rescue (N / P 共用)。 返値: { value } | { useInitial: true } | null
+//   旧 path: 全 beaten 同値 ∧ cover 存在
+//   S2-h: cascade-max cover — cover g* が他 beaten 全てに cascade 勝ち
+//     → baseSel の任意 element で「beaten 内 pre-insert winner」 = g* (max が element 不問で g*)
+//     → token other 値 = g* の e.prop 成分で表示再現
+//   inherit 特例 (S2-h): g* 成分 'inherit' ∧ 継承 prop ∧ 非 SVG presentation
+//     → token 'initial' (IACVT→unset=inherit) が g* と同値 = rescue 値不要
+//   他 CSS-wide keyword は custom property 値に不可 → null
 function rescueBeaten(e, beaten) {
   const other = e.ctx === 'light' ? 'dark' : 'light';
   const exts = beaten.map(g => ({ g, ext: extractForProp(g.value, g.prop, e.prop) }));
   const vals = new Set(exts.map(x => x.ext === null ? '__NG__' : resolveCtx(x.ext, other)));
-  const cover = exts.find(x => x.ext !== null && selCovers(x.g.selector, e.baseSel));
-  if (vals.size === 1 && !vals.has('__NG__') && cover &&
-    !/^(inherit|initial|unset|revert|revert-layer)$/i.test(norm(cover.ext))) return cover.ext;
-  return null;
+  const covers = exts.filter(x => x.ext !== null && selCovers(x.g.selector, e.baseSel));
+  let pick = null;
+  if (vals.size === 1 && !vals.has('__NG__') && covers.length) pick = covers[0];
+  else for (const c of covers) {
+    if (exts.every(x => x === c || beatenWins(c.g, x.g))) { pick = c; break; }
+  }
+  if (!pick) return null;
+  const v = norm(pick.ext);
+  if (/^(inherit|initial|unset|revert|revert-layer)$/i.test(v)) {
+    if (/^inherit$/i.test(v) && INHERITED_PROPS.has(e.prop) && !svgAttrRisk(e.baseSel, e.prop)) return { useInitial: true };
+    return null;
+  }
+  return { value: pick.ext };
 }
 
 // rule group 構築 (N + 同 rule の S 同乗)
@@ -1273,7 +1514,7 @@ function verifyRuleAt(r, target) {
             e.nBeatenList = beaten.slice(0, 4).map(g => `${g.file}:${g.line} ${g.selector} { ${g.prop}: ${g.value.slice(0, 40)} }`);
             continue;
           }
-          e.nOtherVal = rescue;
+          if (!rescue.useInitial) e.nOtherVal = rescue.value; // useInitial = unset≡inherit 再現 → initial 経路続行
         }
         if (!e.nOtherVal) {
           // other 側 = unset 経路。 SVG presentation attr 穴 → Mode B 降格 (theme gate 維持 = other 影響ゼロ)
@@ -1414,12 +1655,68 @@ out.NRULES = [...nRules.values()].map(r => ({
     important: !!e.important, ctx: e.ctx, nMode: e.nMode || null, nVLine: e.nVLine || null,
     nBatch: !!e.nBatch, nOk: !!e.nOk, nReason: e.nReason || null,
     nOppKey: e.nOppKey || null, nOppStays: !!e.nOppStays, nOtherVal: e.nOtherVal || null,
-    nLiteralOk: !!e.nLiteralOk, nRide: !!e.nRide,
+    nLiteralOk: !!e.nLiteralOk, nRide: !!e.nRide, nBeatenList: e.nBeatenList || null,
   })),
 }));
 
+// ── S2-h: shadowed dead theme decl 検出 ──
+// 同 theme file 内の rule d2 (同 prop ∧ 同 media) が d の全 match element を cover
+// (selCovers = DOM 包含込) し cascade 常勝 → d はどの element でも winner になれない = dead。
+// 値不問 (d2 常勝なら d の値は表示に乗らない) → 削除は表示不変。
+// fixpoint: shadower が全て同時削除されると d が蘇生し得る → 生存 shadower 必須
+{
+  const isShadowedBy = (d, d2) => {
+    if (d2 === d || d2.prop.startsWith('--')) return false;
+    if (d2.file !== d.file || d2.prop !== d.prop) return false;
+    if (d2.line === d.line) return false; // 同 物理 decl の selector split (削除道連れ)
+    if ((d2.media || null) !== (d.media || null)) return false;
+    if (d.important && !d2.important) return false;
+    if (!selCovers(stripTheme(d2.selector), stripTheme(d.selector))) return false;
+    if (!d.important && d2.important) return true; // 同 layer imp > normal
+    const sd = specificity(d.selector), s2 = specificity(d2.selector);
+    return s2 > sd || (s2 === sd && d2.line > d.line);
+  };
+  const shadowers = new Map(); // declRef → [d2,...]
+  for (const d of themeDecls) {
+    if (d.prop.startsWith('--')) continue;
+    const base = stripTheme(d.selector);
+    if (base === 'html' || base === '') continue;
+    const hits = themeDecls.filter(d2 => isShadowedBy(d, d2));
+    if (hits.length) shadowers.set(d, hits);
+  }
+  // fixpoint: 生存 shadower を最低 1 つ持つもののみ dead
+  let dead = new Set(shadowers.keys());
+  let chg = true;
+  while (chg) {
+    chg = false;
+    for (const d of [...dead]) {
+      if (!shadowers.get(d).some(d2 => !dead.has(d2))) { dead.delete(d); chg = true; }
+    }
+  }
+  // 物理 decl gate: 全 selector split が dead の時のみ削除可
+  const physDead = new Map();
+  for (const d of themeDecls) {
+    if (d.prop.startsWith('--')) continue;
+    const k = `${d.file}|${d.line}|${d.prop}`;
+    if (!physDead.has(k)) physDead.set(k, []);
+    physDead.get(k).push(d);
+  }
+  out.DEAD = [];
+  for (const [k, splits] of physDead) {
+    if (!splits.every(s => dead.has(s))) continue;
+    const d = splits[0];
+    const sh = shadowers.get(d)[0];
+    out.DEAD.push({ file: d.file, line: d.line, prop: d.prop, selector: norm(d.selector),
+      shadower: `${sh.file}:${sh.line} ${norm(sh.selector)}` });
+  }
+}
+
 const cnt = (a) => a.length;
 console.log(`theme decls: ${themeDecls.length} (TOKEN ${cnt(out.TOKEN)} / M ${cnt(out.M)} / P ${cnt(out.P)} / N ${cnt(out.N)} / S ${cnt(out.S)})`);
+if (out.DEAD.length) {
+  console.log(`DEAD (shadowed、 削除可): ${out.DEAD.length} 物理 decl`);
+  for (const d of out.DEAD) console.log(`  [DEAD] ${d.file.replace('assets/styles-', '')}:${d.line} ${d.selector.slice(0, 60)} { ${d.prop} } ← ${d.shadower.replace('assets/styles-', '').slice(0, 80)}`);
+}
 const safeM = out.M.filter(d => d.safe);
 console.log(`M safe (静的): ${safeM.length} / ${out.M.length}  (うち same-value redundant: ${safeM.filter(d => d.sameValue).length})`);
 const batchM = out.M.filter(d => d.batchSafe);
@@ -1451,6 +1748,13 @@ for (const d of out.P) {
   pReasons[r] = (pReasons[r] || 0) + 1;
 }
 console.log(`P 非 batch 内訳: ${Object.entries(pReasons).map(([k, v]) => `${k} ${v}`).join(' / ')}`);
+// drop-gate 計測 (fixpoint 初回 drop 理由 — 後続連鎖と区別)
+for (const cat of ['M', 'P']) {
+  const gated = out[cat].filter(d => d.dropGate);
+  if (!gated.length) continue;
+  console.log(`${cat} drop-gate 内訳:`);
+  for (const d of gated) console.log(`  [${d.dropGate}] ${d.file}:${d.line} ${d.baseSel} { ${d.prop} }${d.dropDetail ? ` ← ${d.dropDetail}` : ''}`);
+}
 
 const byFileCat = {};
 for (const cat of ['M', 'P', 'N', 'S']) {
@@ -1469,5 +1773,6 @@ if (process.argv.includes('--pairs')) {
   }
 }
 
+for (const e of out.P) delete e.pCands; // rule object (sels:Set) は非 serializable — pCandIdx/pRetried は残す
 fs.writeFileSync('scripts/.theme-swap.json', JSON.stringify(out, null, 1));
 console.log('→ scripts/.theme-swap.json');

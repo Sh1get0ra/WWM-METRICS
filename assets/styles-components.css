@@ -452,6 +452,7 @@ html.wwm-shared-build-mode #exportBtn {
   background: var(--c-tier-chip-c-bg);
   border-color: var(--c-tier-chip-c-border);
   box-shadow: var(--c-tier-C-shadow);
+  text-shadow: var(--c-tier-C-text-shadow);
 }
 
 
@@ -1006,6 +1007,7 @@ html.wwm-view-sidebar .wwm-app-body {
   background: var(--c-cmp-stat-select-bg); color: inherit;
   border: 1px solid #444; border-radius: 4px;
   font-size: var(--text-12);
+  border-color: var(--c-xinfa-cell--xinfa-tier-border);
 }
 .wwm-xinfa-effect {
   grid-area: effect;
@@ -1288,7 +1290,7 @@ html.wwm-view-sidebar .wwm-app-body {
   color: var(--c-opt-sort-btn-active-fg);
   font-weight: var(--fw-bold);
 }
-.wwm-opt-sort-btn + .wwm-opt-sort-btn { border-left: 1px solid var(--ink-2); }
+.wwm-opt-sort-btn + .wwm-opt-sort-btn { border-left: 1px solid var(--ink-2); border-left-color: var(--c-opt-sort-btn-border-left); }
 .wwm-opt-check-wrap {
   display: inline-flex; align-items: center; justify-content: center;
   cursor: pointer; padding: var(--space-half) var(--space-1-5);
@@ -1493,6 +1495,7 @@ html.wwm-view-sidebar .wwm-app-body {
   border: 1px solid var(--ink-2); border-radius: 4px;
   padding: var(--space-2) var(--space-2-5); resize: vertical;
   word-break: break-all;
+  border-color: var(--c-share-url-border);
 }
 /* ╔═══════════════════════════════════════════════════════════════════╗
      SECTION 24 — LIGHT THEME — Modal/Card
@@ -1523,13 +1526,13 @@ html.wwm-view-sidebar .wwm-app-body {
   border-radius: 2px;
   vertical-align: middle;
   cursor: pointer;
+  border-color: var(--c-cmp-lv-select-border);
 }
 .wwm-cmp-lv-select option {
   background: var(--bg-raised);
   color: var(--gold-bright);
   font-family: var(--f-mono);
 }
-.wwm-cmp-lv-select:focus { outline: 1px solid var(--gold-bright); border-color: var(--gold-bright); }
 /* ライト: select/input 黒背景 → 紙系 */
 /* ライト: 装備比較 セット効果 (赤系title) glow弱 — 副情報 (セット名) 濃朱 統一 */
 /* ライト: 装備カード 武術名 + 心法カード 心法名 (主情報) — ライト主文字色 + 太字 統一 */
@@ -1673,7 +1676,7 @@ html.wwm-view-sidebar .wwm-app-body {
 .wwm-xinfa-tier {
   font-family: var(--f-mono);
   font-size: var(--text-xs);
-  color: var(--paper-mute);
+  color: var(--c-xinfa-tier-fg);
   padding: 1px 5px;
   border: 1px solid var(--ink-2);
   border-radius: 2px;
@@ -1922,6 +1925,7 @@ html.wwm-view-sidebar .wwm-app-body {
   position: relative;
   height: 195px;
   /* min-width 削除: 圧縮停止は親 .wwm-app-body min-width:1010 で一元管理 (個別min は alignment 崩しの原因だった) */
+  border-color: var(--c-hero-wuxia-border);
 }
 /* ライト hero-wuxia: 紙色 overlay + xinfa 公式背景 */
 .hero-wuxia .l-bracket {

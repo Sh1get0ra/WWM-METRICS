@@ -45,6 +45,8 @@ function selSlug(sel) {
 // 命名手動補正 (機械 slug → semantic)
 const RENAME = {
   '--c-wherebutton-outline': '--c-focus-ring',
+  '--c-focus-visible-focus-outline': '--c-focus-ring',
+  '--c-hero-hero-wuxia-border': '--c-hero-wuxia-border',
 };
 
 const cands = P.filter(d => d.pBatch);

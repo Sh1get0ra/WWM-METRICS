@@ -141,6 +141,54 @@ html[data-theme="light"] {
   --c-anlz-shadow-orange:      rgba(120,60,20,.18);  /* anlz-header / anlz-body box-shadow */
   --c-sb-top-bg:               #f5ead0;              /* sidebar wwm-sb-top + sb-rest gradient 上 */
 
+  /* ─── @layer S2-j: theme-swap tokens (light 値) ─── */
+  --c-tier-C-text-shadow: none;
+  --c-cmp-col-border: var(--ink-2);
+  --c-cmp-lv-select-border: var(--c-gold-rich);
+  --c-num-input-border: var(--ink-2);
+  --c-btn-secondary-border: var(--ink-2);
+  --c-cmp-title--cmp-lv-border: var(--bone-dim);
+  --c-cmp-btn-row--btn-secondary-border: var(--bone-dim);
+
+  /* ─── @layer Step 2-i: theme-swap tokens (light 値) ─── */
+  --c-cmp-modal-a--cmp-kongfu-select-border: var(--c-border-mid-warm);
+  --c-cmp-modal-a--cmp-set-select-border: var(--c-border-mid-warm);
+  --c-cmp-title--cmp-lv-select-border: var(--bone-dim);
+  --c-cmp-modal-a--cmp-val-input-border: initial;
+
+  /* ─── @layer Step 2-h: theme-swap tokens (light 値) ─── */
+  --c-cmp-modal-a--cmp-stat-select-border: var(--c-border-mid-warm);
+
+  /* ─── @layer Step 2-h: theme-swap tokens (light 値) ─── */
+
+  /* ─── @layer Step 2-h: theme-swap tokens (light 値) ─── */
+
+  /* ─── @layer Step 2-h: theme-swap tokens (light 値) ─── */
+  --c-bm-code-border: var(--ink-2);
+  --c-xinfa-cell--xinfa-tier-border: var(--ink-2);
+
+  /* ─── @layer Step 2-h: theme-swap tokens (light 値) ─── */
+  --c-cmp-kongfu-select-fg: var(--paper);
+  --c-cmp-set-select-fg: var(--paper);
+  --c-xinfa-tier-fg: var(--paper);
+
+  /* ─── @layer Step 2-h: theme-swap tokens (light 値) ─── */
+  --c-cmp-current--cmp-row-bg: var(--surf-shade-2);  /* S2-g cmp-current--cmp-row */
+  --c-cmp-current--cmp-kongfu-header-fg: var(--paper);  /* S2-g cmp-current--cmp-kongfu-header */
+  --c-cmp-current--cmp-kongfu-header-bg: var(--surf-shade-2);  /* S2-g cmp-current--cmp-kongfu-header */
+  --c-cmp-current--cmp-set-header-fg: var(--paper);  /* S2-g cmp-current--cmp-set-header */
+  --c-cmp-current--cmp-set-header-bg: var(--surf-shade-2);  /* S2-g cmp-current--cmp-set-header */
+  --c-cmp-modal-a--modal-close-fg: var(--brown-1);  /* S2-g cmp-modal-a--modal-close */
+  --c-cmp-modal-a--optionchecked-checked-fg: var(--brown-1);  /* S2-g cmp-modal-a--optionchecked-checked */
+  --c-cmp-lv-select--optionchecked-checked-fg: var(--brown-1);  /* S2-g cmp-lv-select--optionchecked-checked */
+
+  /* ─── @layer Step 2-h: theme-swap tokens (light 値) ─── */
+  --c-opt-sort-btn-border-left: var(--c-opt-border-soft);
+  --c-cmp-modal-a-fg: var(--brown-1);
+
+  /* ─── @layer Step 2-h: theme-swap tokens (light 値) ─── */
+  --c-focus-ring: var(--vermilion);
+
   /* ─── @layer Step 2-g: theme-swap tokens (light 値) ─── */
   --c-sb-totalmartial--b-text-shadow: none;  /* S2-g sb-totalmartial--b */
   --c-sb-totalmartial--muted-fg: #5a4326;  /* S2-g sb-totalmartial--muted */
@@ -196,8 +244,8 @@ html[data-theme="light"] {
   --c-mobile-drawer-border-left: var(--vermilion);
   --c-cmp-modal-a--cmp-rows-border: initial;
   --c-cmp-modal-a--cmp-rows-shadow: initial;
-  --c-cmp-modal-a--cmp-current-border: initial;
-  --c-cmp-modal-a--cmp-col-border: initial;
+  --c-cmp-modal-a--cmp-current-border: var(--c-border-soft-warm);
+  --c-cmp-modal-a--cmp-col-border: var(--c-border-soft-warm);
 
   /* ─── @layer Step 2-e: theme-swap tokens (light 値) ─── */
   --c-modal-a-rows-bg: var(--overlay-trace);
@@ -205,7 +253,7 @@ html[data-theme="light"] {
   --c-modal-a-col-bg: var(--overlay-heavy);
   --c-modal-a-kongfu-header-bg: var(--gold-tint);
   --c-modal-a-kongfu-header-fg: var(--paper);
-  --c-modal-a-kongfu-select-fg: var(--paper);
+  --c-modal-a-kongfu-select-fg: var(--brown-1);
   --c-modal-a-set-fg: var(--vermilion-bright);
   --c-modal-a-name-fg: var(--c-modal-a-fg);
   --c-modal-a-val-fg: var(--c-fg-emphasis);
@@ -450,8 +498,6 @@ html[data-theme="light"] .tier-S {
   animation: tier-s-pulse-light 2.2s ease-in-out infinite;
 }
 
-html[data-theme="light"] .tier-C {       text-shadow: none;  }
-
 html[data-theme="light"] .wwm-sb-mini-hero-card {
   background: linear-gradient(180deg, var(--c-surf-warm-1), var(--c-surf-warm-2));
 }
@@ -503,17 +549,24 @@ html[data-theme="light"] .wwm-equip-liupai-badge {
 
 html[data-theme="light"] .wwm-sb-notice {  background: var(--vermilion-tint); }
 
-html[data-theme="light"] .wwm-opt-sort-btn + .wwm-opt-sort-btn { border-left-color: var(--c-opt-border-soft); }
-
 html[data-theme="light"] .wwm-opt-btn {  border-color: var(--c-opt-border-mid); }
 html[data-theme="light"] .wwm-opt-btn:hover {  border-color: var(--c-opt-border-strong); }
 
-html[data-theme="light"] .wwm-cmp-col,
-html[data-theme="light"] .wwm-cmp-row,
+/* S2-h split: cmp-col/row (modals dashed border 真競合 = stay) と share-url/bm-code を分離
+   S2-j split: col / row を分離 (cascade-neutral 隣接 + 同 decl) — row は modals:513/514 真競合で stay、
+   col は theme-shadow (light .wwm-cmp-modal-a .wwm-cmp-col/new) で解錠可のため物理 decl を独立化 */
+html[data-theme="light"] .wwm-cmp-col {
+  background: var(--surf-shade) !important;
+
+}
+html[data-theme="light"] .wwm-cmp-row {
+  background: var(--surf-shade) !important;
+  border-color: var(--ink-2);
+}
 html[data-theme="light"] .wwm-share-url,
 html[data-theme="light"] .wwm-bm-code {
   background: var(--surf-shade) !important;
-  border-color: var(--ink-2);
+
 }
 
 html[data-theme="light"] .wwm-eff-row {
@@ -529,7 +582,6 @@ html[data-theme="light"] .wwm-eff-input {
 html[data-theme="light"] .wwm-cmp-lv-select {
   background: var(--c-cream-pale);
 
-  border-color: var(--c-gold-rich);
 }
 
 /* 2本目 selector は modals.css の高 spec rule (.wwm-cmp-modal-a .wwm-cmp-title ...) 対抗
@@ -540,10 +592,6 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select opti
   background: var(--c-cream-pale);
 }
 
-html[data-theme="light"] .wwm-cmp-current .wwm-cmp-row {
-  background: var(--surf-shade-2);
-}
-
 html[data-theme="light"] .wwm-cmp-current .wwm-cmp-title {
   color: #1a6ad6;
 }
@@ -552,31 +600,26 @@ html[data-theme="light"] .wwm-cmp-new .wwm-cmp-title {
   color: #1a8d52;
 }
 
-html[data-theme="light"] .wwm-cmp-current .wwm-cmp-kongfu-header,
-html[data-theme="light"] .wwm-cmp-current .wwm-cmp-set-header {
+/* S2-h split: mixed-cat (M/P/N split 同居) を per-selector rule 化 — cascade-neutral (隣接 + 同 decl) */
+html[data-theme="light"] .wwm-num-input {
   color: var(--paper);
-  background: var(--surf-shade-2);
-}
 
-html[data-theme="light"] .wwm-cmp-stat-select,
-/* S2-d split: safe 組と unsafe 組 (set-select modal 競合 / xinfa-tier cell 競合) を分離 */
-html[data-theme="light"] .wwm-cmp-kongfu-select,
-html[data-theme="light"] .wwm-num-input,
+}
 html[data-theme="light"] .wwm-xinfa-cell > .wwm-xinfa-tier {
   color: var(--paper);
-  border-color: var(--ink-2);
+
 }
 
-html[data-theme="light"] .wwm-cmp-set-select,
-html[data-theme="light"] .wwm-xinfa-tier,
-html[data-theme="light"] select.wwm-num-input,
-html[data-theme="light"] input.wwm-num-input {
+html[data-theme="light"] .wwm-xinfa-tier {
+
+  border-color: var(--ink-2);
+}
+html[data-theme="light"] select.wwm-num-input {
   color: var(--paper);
   border-color: var(--ink-2);
 }
-
-html[data-theme="light"] .wwm-btn-secondary {
-
+html[data-theme="light"] input.wwm-num-input {
+  color: var(--paper);
   border-color: var(--ink-2);
 }
 
@@ -597,38 +640,31 @@ html[data-theme="light"] .wwm-cmp-bg-icon {
   opacity: 0.2;
 }
 
-html[data-theme="light"] .wwm-cmp-modal-a {
-  color: var(--brown-1);
-}
-
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-close { color: var(--brown-1); }
-
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-header { border-bottom-color: transparent; }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-header::after {
   background: linear-gradient(90deg, transparent 0%, transparent 30%, rgba(232,81,58,0.85) 50%, transparent 70%, transparent 100%);
 }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-col,
+/* S2-j split: col と current/new は pair が別 token (modals:698 col-border / modals:368 current-border)
+   → m-phys uniformity 不可のため物理 decl 分離 (cascade-neutral: 隣接 + 同 decl、 current/new は col 併持で後 rule 勝ち同値) */
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-col {
+  background: var(--hover-mid-2) !important;
+
+}
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-current,
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-new {
   background: var(--hover-mid-2) !important;
-  border-color: var(--c-border-soft-warm);
+
 }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-header { color: var(--brown-1); background: var(--gold-mid); }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-header { color: var(--vermilion-deep);  background: linear-gradient(90deg, var(--vermilion-bright-tint), var(--c-vermilion-fade-end)); }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select {  color: var(--brown-1); border-color: var(--c-border-mid-warm); }
-
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-select {  color: var(--vermilion-deep); border-color: var(--c-border-mid-warm); }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-select {  color: var(--vermilion-deep);  }
 
 /* S2-d split: stat-select は L524 組と競合残置 → val-input と分離 */
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-stat-select {
-  color: var(--brown-1);
-  border-color: var(--c-border-mid-warm);
-}
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val-input {
 
@@ -636,24 +672,16 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val-input {
 }
 
 /* S2-d split: cmp-lv-select は単独 light rule 競合残置 → cmp-lv と分離 */
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv {
-
-  border-color: var(--bone-dim);
-}
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
   background: var(--hover-strong);
-  border-color: var(--bone-dim);
+
 }
 
 /* .wwm-cmp-ratio rank別 light color は styles-modals.css へ co-locate move 済
    (2026-06-05 @layer Step 1: inline 対抗 imp の layer 反転 flip 根治) */
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-footer-a { border-color: var(--c-border-soft-warm); }
-
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
-   border-color: var(--bone-dim);
-}
 
 html[data-theme="light"] .wwm-cmp-modal-bg-icon {
   filter: brightness(0) drop-shadow(0 0 6px var(--c-gold-deep-glow-1));
@@ -662,12 +690,12 @@ html[data-theme="light"] .wwm-cmp-modal-bg-icon {
 
 html[data-theme="light"] .wwm-cmp-modal-a select option:checked {
   background: var(--c-modal-a-option-checked);
-  color: var(--brown-1);
+
 }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select option:checked {
   background: var(--c-modal-a-option-checked);
-  color: var(--brown-1);
+
 }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
@@ -731,16 +759,10 @@ html[data-theme="light"] {
 
 html[data-theme="light"] .hero.hero-wuxia {
   background:
-    linear-gradient(180deg, var(--surf-2), rgba(232,218,184,0.80)),
-    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") center / cover no-repeat;
-}
-
-html[data-theme="light"] .hero.hero-wuxia {
-  background:
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") center / cover no-repeat,
     linear-gradient(180deg, #fff5dc, #fde0c0);
   background-blend-mode: difference, normal;
-  border-color: var(--gold-deep);
+
   box-shadow: inset 0 0 40px rgba(122,90,32,.18);
 }
 
@@ -910,10 +932,6 @@ html[data-theme="light"] .wwm-anlz-bgicon {
     brightness(0)
     drop-shadow(0 0 6px var(--c-gold-deep-glow-2))
     drop-shadow(0 0 14px var(--c-gold-deep-mid));
-}
-
-html[data-theme="light"] :where(button, [role="button"], a, input, select, textarea, summary, [tabindex]):focus-visible {
-  outline-color: var(--vermilion);
 }
 
 html[data-theme="light"] .wwm-mobile-drawer * { color: var(--vermilion-deep); }

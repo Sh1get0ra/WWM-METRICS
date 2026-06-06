@@ -85,6 +85,21 @@ if (MODE_PAIRS) {
   for (const g of plan) {
     // S2-g newRules: component file 末尾 (end @layer 前) へ rule append
     if (g.newRules) { ruleInserts.push(...g.rules); continue; }
+    // retokenLight (S2-h): 既存 token の light 値を light token block へ追加 — root / base 無変更。
+    // rewrite = 既存 light 定義の値書換え (theme decl が唯一消費点を shadow していた stale 値の更新)
+    if (g.retokenLight) {
+      if (g.rewrite) {
+        const ll = load('assets/styles-light.css');
+        const idx = ll.findIndex(l => new RegExp(`^\\s*${g.retokenLight.replace(/[-]/g, '\\-')}\\s*:`).test(l));
+        if (idx === -1) { console.error(`[FAIL] retokenLight ${g.retokenLight} light 定義 不在`); process.exit(1); }
+        if (!editDecl(ll, idx + 1, g.retokenLight, 'replace', g.light)) { console.error(`[FAIL] retokenLight ${g.retokenLight} 書換え失敗`); process.exit(1); }
+        if (DRY) console.log(`[DRY] retokenLight ${g.retokenLight} light → ${g.light}`);
+      } else {
+        tokenDefsLight.push(`  ${g.retokenLight}: ${g.light};${g.note ? `  /* ${g.note} */` : ''}`);
+        if (DRY) console.log(`[DRY] retokenLight ${g.retokenLight} light += ${g.light}`);
+      }
+      continue;
+    }
     // retoken: 既存 token の root default (tokens.css) を書換え — base / light block 無変更
     if (g.retoken) {
       const tl = load('assets/styles-tokens.css');
