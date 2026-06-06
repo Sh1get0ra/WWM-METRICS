@@ -3,6 +3,7 @@ CLAUDE.md
 .claudeignore
 docs/
 DESIGN.md
+PRODUCT.md
 design-tokens.json
 design-preview.html
 score-stamp-preview.html
