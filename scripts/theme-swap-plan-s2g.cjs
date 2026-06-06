@@ -45,7 +45,8 @@ function selSlug(sel) {
 
 // 既存 token 名 (衝突回避): tokens.css + light/dark.css の定義
 const existingTokens = new Set();
-for (const f of ['assets/styles-tokens.css', 'assets/styles-light.css', 'assets/styles-dark.css']) {
+const { pathOf } = require('./css-files.cjs');
+for (const f of [pathOf('tokens'), pathOf('light'), pathOf('dark')]) {
   for (const m of fs.readFileSync(f, 'utf8').matchAll(/^\s*(--[\w-]+)\s*:/gm)) existingTokens.add(m[1]);
 }
 const nameCount = new Map();

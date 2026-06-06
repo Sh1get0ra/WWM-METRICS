@@ -92,9 +92,10 @@ for (const d of cands) {
 
 // retoken 判定: base 値が 1-of-1 token への単独 var() 参照 (base files 内 唯一使用) なら
 // 新 token chain でなく既存 token の root default を dark 値に書換え (base/light block 無変更)
-const baseCss = ['assets/styles-base.css', 'assets/styles-components.css', 'assets/styles-modals.css', 'assets/styles-responsive.css']
+const { filesOfLayer, pathOf } = require('./css-files.cjs');
+const baseCss = [...filesOfLayer('base'), ...filesOfLayer('components'), ...filesOfLayer('modals'), ...filesOfLayer('responsive')]
   .map(f => fs.readFileSync(f, 'utf8')).join('\n');
-const lightCss = fs.readFileSync('assets/styles-light.css', 'utf8');
+const lightCss = fs.readFileSync(pathOf('light'), 'utf8');
 function retokenName(pt) {
   if (pt.lightVal !== undefined) return null; // light 側 entry あり = light 値変更要 → 通常 token
   const m = pt.baseVal.match(/^var\((--c-[\w-]+)\)$/);
@@ -110,7 +111,7 @@ function retokenName(pt) {
 // → light token block の定義追加 or 既存 light 定義の書換えだけで完結 (root/base 無変更、 新 token chain 回避)。
 // 既存 light 定義がある場合 = theme decl が唯一の消費点を常時 shadow していた stale 値 → rewrite。
 // slug 衝突 (--c-modal-a-kongfu-select-fg 循環参照 plan 事故 2026-06-06) の根治でもある
-const tokenFilesCss = ['assets/styles-tokens.css', 'assets/styles-dark.css'].map(f => fs.readFileSync(f, 'utf8')).join('\n') + '\n' + lightCss;
+const tokenFilesCss = [pathOf('tokens'), pathOf('dark')].map(f => fs.readFileSync(f, 'utf8')).join('\n') + '\n' + lightCss;
 function retokenLightName(pt) {
   if (pt.darkVal !== undefined || pt.lightVal === undefined) return null;
   const m = pt.baseVal.match(/^var\((--c-[\w-]+)\)$/);

@@ -17,7 +17,8 @@ const parseSrc = auditSrc.slice(auditSrc.indexOf('function parseCss'), auditSrc.
 const parseCss = eval(`(${parseSrc.replace(/^function parseCss/, 'function')})`);
 
 const norm = (s) => s.replace(/\s+/g, ' ').trim();
-const FILES = ['assets/styles-base.css', 'assets/styles-components.css', 'assets/styles-modals.css', 'assets/styles-responsive.css'];
+const { filesOfLayer, pathOf } = require('./css-files.cjs');
+const FILES = [...filesOfLayer('base'), ...filesOfLayer('components'), ...filesOfLayer('modals'), ...filesOfLayer('responsive')];
 
 const sig = (d) => `${norm(d.selector)}|${d.prop}|${norm(d.value)}|${d.important ? 1 : 0}|${norm(d.media || '')}`;
 function multiset(getText) {
@@ -61,7 +62,7 @@ for (const m of plan.moves) {
   }
 }
 
-const remain = parseCss(fs.readFileSync('assets/styles-responsive.css', 'utf8'), 'r').length;
+const remain = parseCss(fs.readFileSync(pathOf('responsive'), 'utf8'), 'r').length;
 console.log(`verify: multiset diff ${diff} | dest missing ${missing} | responsive 残 decl ${remain}`);
 if (diff || missing) process.exit(1);
 console.log('VERIFY OK — decl 内容無変化 + 全 move 所在確認');

@@ -19,17 +19,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const CSS_FILES = [
-  'assets/styles-tokens.css',
-  'assets/styles-animations.css',
-  'assets/styles-base.css',
-  'assets/styles-components.css',
-  'assets/styles-modals.css',
-  'assets/styles-responsive.css',
-  'assets/styles-dark.css',
-  'assets/styles-light.css',
-  'assets/styles-obs.css'
-];
+// CSS file 構成 = scripts/css-files.cjs が単一真実 (Step 4: 複数 file = 同 layer 対応)
+const { CSS_FILES: CSS_FILE_DEFS, FILE_LAYER } = require('./css-files.cjs');
+const CSS_FILES = CSS_FILE_DEFS.map(f => f.path);
 
 const JS_GLOBS = ['assets', 'assets/sidebar', 'assets/helpers'];
 
@@ -1249,15 +1241,18 @@ if (process.argv.includes('--layer-impact')) {
     const fa = FILE_ORDER.get(a.file) ?? 99, fb = FILE_ORDER.get(b.file) ?? 99;
     return fa !== fb ? fa > fb : a.line > b.line;
   };
-  // layer 後 cascade で a が b に勝つか (imp diff 不変 / 両imp = layer 逆転 / 両 normal = 後 layer、同 layer 内 spec→line)
+  // layer 後 cascade で a が b に勝つか (imp diff 不変 / 両imp = layer 逆転 / 両 normal = 後 layer、
+  //  同 layer 内 spec → file 読込順 (seq) → line。 Step 4 以降 複数 file = 同 layer のため FILE_LAYER で判定)
   const winsLayer = (a, b) => {
-    const fa = FILE_ORDER.get(a.file) ?? 99, fb = FILE_ORDER.get(b.file) ?? 99;
+    const la = FILE_LAYER.get(a.file) ?? 99, lb = FILE_LAYER.get(b.file) ?? 99;
     if (a.important !== b.important) return a.important;
     if (a.important && b.important) {
-      if (fa !== fb) return fa < fb;
-    } else if (fa !== fb) return fa > fb;
+      if (la !== lb) return la < lb;
+    } else if (la !== lb) return la > lb;
     const sa = specificity(a.selector), sb = specificity(b.selector);
-    return sa !== sb ? sa > sb : a.line > b.line;
+    if (sa !== sb) return sa > sb;
+    const fa = FILE_ORDER.get(a.file) ?? 99, fb = FILE_ORDER.get(b.file) ?? 99;
+    return fa !== fb ? fa > fb : a.line > b.line;
   };
   // 全 compound の pseudo-class state 集合 (ancestor の :hover 等も state 軸)
   const pseudoAll = sel => new Set(
@@ -1429,7 +1424,8 @@ if (process.argv.includes('--layer-impact')) {
     for (let i = 0; i < group.length; i++) {
       for (let j = i + 1; j < group.length; j++) {
         const x = group[i], y = group[j];
-        if (x.file === y.file) continue; // 同 layer 内 = spec/line のまま不変
+        // 同 layer 内 pair は natural / layer 後 とも spec→seq→line で不変 (同 file に限らず)
+        if ((FILE_LAYER.get(x.file) ?? 99) === (FILE_LAYER.get(y.file) ?? 99)) continue;
         const pid = [`${x.file}:${x.line}:${x.prop}:${x.selector}`, `${y.file}:${y.line}:${y.prop}:${y.selector}`].sort().join('||');
         if (seenPair.has(pid)) continue;
         seenPair.add(pid);
@@ -1438,6 +1434,7 @@ if (process.argv.includes('--layer-impact')) {
         if (exclusiveDisjoint(x.selector, y.selector)) continue;
         if (x.prop === y.prop && x.value === y.value) continue;
         const fx = FILE_ORDER.get(x.file) ?? 99, fy = FILE_ORDER.get(y.file) ?? 99;
+        const lx = FILE_LAYER.get(x.file) ?? 99, ly = FILE_LAYER.get(y.file) ?? 99; // 同 layer は上で skip 済 → lx ≠ ly
         // 現状勝者
         let nowXWins;
         if (x.important !== y.important) nowXWins = x.important;
@@ -1448,8 +1445,8 @@ if (process.argv.includes('--layer-impact')) {
         // layer 後勝者
         let layerXWins;
         if (x.important !== y.important) layerXWins = x.important; // imp > normal は不変
-        else if (x.important && y.important) layerXWins = fx < fy; // 両 imp = layer 順反転
-        else layerXWins = fx > fy;                                  // 両 normal = 後 layer 勝ち
+        else if (x.important && y.important) layerXWins = lx < ly; // 両 imp = layer 順反転
+        else layerXWins = lx > ly;                                  // 両 normal = 後 layer 勝ち
         if (nowXWins !== layerXWins) {
           if (fallbackShadowed(x, y, group) || fallbackShadowed(y, x, group)) continue; // fallback 自己上書き = 無害
           // 蘇生側が prefers-reduced-motion の motion 殺し → a11y 改善方向 = 採用 (今は imp が a11y を破ってる)

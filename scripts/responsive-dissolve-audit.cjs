@@ -20,6 +20,9 @@
 const fs = require('fs');
 const path = require('path');
 
+// CSS file 構成 + 同 layer 内全順序座標 (Step 4: 複数 file = 同 layer 対応) — scripts/css-files.cjs が単一真実
+const { FILE_LAYER, LAYER_IDX, ordOf, filesOfLayer, pathOf } = require('./css-files.cjs');
+
 /* ── parseCss (theme-swap-audit.cjs 同系 + rule extent 記録) ── */
 function parseCss(src, file, rulesOut) {
   const decls = [];
@@ -412,31 +415,31 @@ function mediaCoversIntersection(hM, aM, bM) {
   return H.min <= Math.max(A.min, B.min) && H.max >= Math.min(A.max, B.max);
 }
 
-/* ── pool: flip 可能域 = layer 0..3 のみ (header コメント参照) ── */
-const LAYER_ORDER = new Map([
-  ['assets/styles-base.css', 0],
-  ['assets/styles-components.css', 1],
-  ['assets/styles-modals.css', 2],
-  ['assets/styles-responsive.css', 3],
-]);
-const SRC_FILE = 'assets/styles-responsive.css';
-const DEST_FILES = ['assets/styles-base.css', 'assets/styles-components.css', 'assets/styles-modals.css'];
+/* ── pool: flip 可能域 = base..responsive layer のみ (header コメント参照)。
+ * Step 4 以降 複数 file = 同 layer — layer index は FILE_LAYER (global 番号、 相対順のみ意味)、
+ * 同 layer 内 order は ordOf (file seq × line) ── */
+const LAYER_ORDER = FILE_LAYER;
+const L_RESP = LAYER_IDX.get('responsive');
+const SRC_FILE = pathOf('responsive');
+const POOL_FILES = [...filesOfLayer('base'), ...filesOfLayer('components'), ...filesOfLayer('modals'), SRC_FILE];
+const DEST_FILES = [...filesOfLayer('base'), ...filesOfLayer('components'), ...filesOfLayer('modals')];
 
 const ruleMeta = new Map(); // SRC_FILE のみ extent 記録
 const pool = [];
-for (const f of LAYER_ORDER.keys()) {
+for (const f of POOL_FILES) {
   pool.push(...parseCss(fs.readFileSync(f, 'utf8'), f, f === SRC_FILE ? ruleMeta : null));
 }
 const rDecls = pool.filter(d => d.file === SRC_FILE);
 
 /* token map (値同値判定の var() 解決用 — 両 theme で同値なら harmless) */
 const themeTokenMaps = { light: new Map(), dark: new Map() };
-for (const d of parseCss(fs.readFileSync('assets/styles-tokens.css', 'utf8'), 'assets/styles-tokens.css')) {
+const TOKENS_CSS = pathOf('tokens');
+for (const d of parseCss(fs.readFileSync(TOKENS_CSS, 'utf8'), TOKENS_CSS)) {
   if (!d.prop.startsWith('--')) continue;
   themeTokenMaps.light.set(d.prop, d.value);
   themeTokenMaps.dark.set(d.prop, d.value);
 }
-for (const f of ['assets/styles-light.css', 'assets/styles-dark.css']) {
+for (const f of [pathOf('light'), pathOf('dark')]) {
   for (const d of parseCss(fs.readFileSync(f, 'utf8'), f)) {
     if (!d.prop.startsWith('--')) continue;
     themeTokenMaps[f.includes('light') ? 'light' : 'dark'].set(d.prop, d.value);
@@ -533,7 +536,7 @@ function componentTargetFile(sels) {
   }
   // mobile-only class (base rule 無し、 例 .wwm-mobile-* / .flash-pulse) → components fallback
   // (theme-swap-audit componentTargetFile と同方針。 Step 4 で mobile-overlay file へ再分割)
-  return best || 'assets/styles-components.css';
+  return best || filesOfLayer('components').at(-1); // fallback = components layer 最終 file
 }
 
 /* ── rule 群構築 ── */
@@ -566,22 +569,22 @@ for (const [ruleId, meta] of ruleMeta) {
 const ruleById = new Map(rules.map(r => [r.ruleId, r]));
 
 /* ── fixpoint: 移動候補 rule の全 decl が flip 0 になるまで drop ── */
-const BIG = 1e6;
+const VEND = 5e5; // dest file 内仮想末尾 offset (ordOf stride 1e6 の半分 — 物理行と衝突せず file band 内に収まる)
 function posOf(d) {
-  // d が SRC_FILE 所属で当該 rule が batch (move) → final = dest layer / 末尾 (BIG + 元 line: 源順保存)
+  // d が SRC_FILE 所属で当該 rule が batch (move) → final = dest layer / dest file 末尾 (VEND + 元 line: 源順保存)
   if (d.file === SRC_FILE) {
     const r = ruleById.get(d.ruleId);
-    if (r && r.status === 'move') return { L: LAYER_ORDER.get(r.dest), s: specificity(d.selector), l: BIG + d.line };
-    return { L: 3, s: specificity(d.selector), l: d.line };
+    if (r && r.status === 'move') return { L: LAYER_ORDER.get(r.dest), s: specificity(d.selector), l: ordOf(r.dest, VEND + d.line) };
+    return { L: L_RESP, s: specificity(d.selector), l: ordOf(d.file, d.line) };
   }
-  return { L: LAYER_ORDER.get(d.file), s: specificity(d.selector), l: d.line };
+  return { L: LAYER_ORDER.get(d.file), s: specificity(d.selector), l: ordOf(d.file, d.line) };
 }
 function win(a, b, imp) {
   if (a.L !== b.L) return imp ? a.L < b.L : a.L > b.L;
   if (a.s !== b.s) return a.s > b.s;
   return a.l > b.l;
 }
-function posBefore(d) { return { L: LAYER_ORDER.get(d.file), s: specificity(d.selector), l: d.line }; }
+function posBefore(d) { return { L: LAYER_ORDER.get(d.file), s: specificity(d.selector), l: ordOf(d.file, d.line) }; }
 
 /* ── dominator 推論 (S2-h cascade-max cover 同型) ──
  * flip(e,g) でも、 第三 decl h が:
@@ -634,8 +637,8 @@ while (changed) {
     if (r.status !== 'move') continue;
     outer:
     for (const e of r.decls) {
-      const before = { L: 3, s: specificity(e.selector), l: e.line };
-      const after = { L: LAYER_ORDER.get(r.dest), s: before.s, l: BIG + e.line };
+      const before = { L: L_RESP, s: specificity(e.selector), l: ordOf(e.file, e.line) };
+      const after = { L: LAYER_ORDER.get(r.dest), s: before.s, l: ordOf(r.dest, VEND + e.line) };
       const seen = new Set();
       for (const key of expandKeys(compoundKeys(e.selector))) {
         for (const g of byKey.get(key) || []) {
@@ -657,7 +660,7 @@ while (changed) {
             const ext = extractForProp(e.value, e.prop, g.prop);
             if (ext !== null && valuesEqBothThemes(ext, g.value)) continue;
           }
-          const gBefore = { L: LAYER_ORDER.get(g.file), s: specificity(g.selector), l: g.line };
+          const gBefore = { L: LAYER_ORDER.get(g.file), s: specificity(g.selector), l: ordOf(g.file, g.line) };
           const gAfter = posOf(g);
           const beforeEWins = win(before, gBefore, e.important);
           const afterEWins = win(after, gAfter, e.important);
