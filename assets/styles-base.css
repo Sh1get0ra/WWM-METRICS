@@ -509,4 +509,65 @@ footer strong { color: var(--c-footer-strong-fg); }
 }
 
 
+
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     RESPONSIVE — co-location (@layer Step 3, 2026-06-06)
+     styles-responsive.css から移設。 cascade 同値性は responsive-dissolve-audit.cjs で機械証明
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+
+@media (max-width: 600px) {
+  header.topbar {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-overlay);
+    background: var(--bg-0);
+    border-bottom: 1px solid var(--ink-2);
+    flex-wrap: wrap;
+    /* padding left/right 成分は削除済 (2026-06-05 @layer Step 1):
+       components.css の .sticky-header > .topbar (padding-left/right: space-4) に spec 負けで dead */
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-2);
+    gap: var(--space-1-5);
+    margin-bottom: 0;
+  }
+  header.topbar::after { display: none; }
+  /* ── タイトル ── */
+  .title-block h1 { font-size: var(--text-15); letter-spacing: 0.05em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .title-block p { display: none; }
+  /* ─────────────────────────────────────────────────────────────────
+     STAT CARDS
+     ───────────────────────────────────────────────────────────────── */
+  /* ─────────────────────────────────────────────────────────────────
+     TOAST
+     ───────────────────────────────────────────────────────────────── */
+  #toast {
+    bottom: 14px;
+    right: 10px;
+    left: 10px;
+    text-align: center;
+    white-space: normal;
+    font-size: var(--text-sm);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wwm-import-hint, .wwm-import-hint-arrow { animation: none; }
+  .wwm-score-update-banner, .wwm-score-update-icon, .wwm-score-update-btn, .wwm-score-update-arrow { animation: none; }
+  .wwm-migration-banner, .wwm-migration-icon, .wwm-migration-btn, .wwm-migration-arrow { animation: none; }
+}
+
+@media (max-width: 480px) {
+  .wwm-mobile-topbar .wwm-brand-seal {
+    width: 28px; height: 28px;
+    font-size: var(--text-lg);
+    border-width: 2px;
+    box-shadow: 0 0 10px var(--vermilion-strong);
+    flex: 0 0 auto;
+  }
+  .wwm-mobile-topbar .wwm-brand-seal::after {
+    inset: 2px;
+    border-width: 1px;
+  }
+}
+
 } /* end @layer base */

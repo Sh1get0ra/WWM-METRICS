@@ -1376,4 +1376,166 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select option:checked {
   color: var(--c-cmp-lv-select--optionchecked-checked-fg);
 }
+
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     RESPONSIVE — co-location (@layer Step 3, 2026-06-06)
+     styles-responsive.css から移設。 cascade 同値性は responsive-dissolve-audit.cjs で機械証明
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+
+@media (max-width: 600px) {
+  /* 旧 topbar 内 controls 用 mobile rule は削除済 (2026-06-05 @layer Step 1):
+     mobile では body.wwm-layout-active header.topbar { display:none } (本 file 後方) で
+     desktop topbar 全体が不可視 = .top-controls / .lang-switcher / topbar .lang-btn / .icon-btn 系 dead。
+     mobile UI は .wwm-mobile-topbar + .wwm-mobile-drawer (44px tap target 確保済) */
+  .wwm-modal-close { width: 36px; height: 36px; }
+}
+
+@media (max-width: 480px) {
+  /* ─── Phase 9: 装備/心法/武庫 対照 modal + SHARE modal 全画面化 ─── */
+  .wwm-modal.wwm-modal-square.wwm-modal-square,
+  .wwm-modal.wwm-modal-square.wwm-modal-wide,
+  .wwm-modal.wwm-modal-square.wwm-arsenal-modal,
+  .wwm-modal.wwm-modal-wide.wwm-modal-wide {
+    max-width: 100vw;
+    width: 100vw;
+    min-width: 0;
+    margin: 0;
+    border-radius: 0;
+    max-height: 100dvh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+  /* 武具/心法/武庫 対照 modal: mobile では modal-body が overflow-y:auto (L701) で scroll container 化、
+     bg-icon (absolute, bottom:-18%/-45%, height:110%/165%) が scroll content として下方に伸び viewport にはみ出す。
+     mobile では装飾より使い勝手優先 → bg-icon 自体を非表示。 desktop の装飾は維持。 */
+  .wwm-modal.wwm-modal-square.wwm-cmp-modal-a .wwm-cmp-modal-bg-icon { display: none; }
+  .wwm-modal.wwm-modal-square .wwm-modal-body,
+  .wwm-modal.wwm-modal-wide .wwm-modal-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: var(--space-3);
+  }
+  /* 対照 grid: 現有 / divider / 新置 を 縦stack */
+  .wwm-cmp-modal-a .wwm-cmp-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 10px;
+  }
+  /* divider 縦線 → 横線 */
+  .wwm-cmp-modal-a .wwm-cmp-divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-deep), transparent);
+  }
+  .wwm-cmp-modal-a .wwm-cmp-divider::before,
+  .wwm-cmp-modal-a .wwm-cmp-divider::after {
+    top: 50%; bottom: auto;
+    transform: translate(-50%, -50%);
+  }
+  .wwm-cmp-modal-a .wwm-cmp-divider::before { left: 30%; }
+  .wwm-cmp-modal-a .wwm-cmp-divider::after  { left: 70%; }
+  /* footer (delta + button row) 縦stack */
+  .wwm-cmp-footer-a {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .wwm-cmp-btn-row { justify-content: stretch; }
+  .wwm-cmp-btn-row .wwm-btn-primary,
+  .wwm-cmp-btn-row .wwm-btn-secondary { flex: 1 1 auto; }
+  /* 武庫modal path選択: EN版で長ラベル 横溢れ → wrap強制 + 縮小 */
+  .wwm-arsenal-modal .wwm-arsenal-paths {
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    width: 100%;
+  }
+  .wwm-arsenal-modal .wwm-arsenal-paths .wwm-radio-label {
+    font-size: var(--text-12);
+    white-space: nowrap;
+  }
+  /* 武庫modal Tier行: 頂点off時 input溢れ → 縮小 + wrap許可 */
+  .wwm-arsenal-modal .wwm-cmp-row { grid-template-columns: 40px 1fr !important; }
+  .wwm-arsenal-modal .wwm-cmp-row > span:last-child {
+    flex-wrap: wrap !important;
+    white-space: normal !important;
+    gap: 4px 6px !important;
+    font-size: var(--text-xs) !important;
+  }
+  .wwm-arsenal-modal .wwm-cmp-row label,
+  .wwm-arsenal-modal .wwm-cmp-row label > span {
+    white-space: nowrap !important;
+    font-size: var(--text-xs) !important;
+  }
+  .wwm-arsenal-modal .wwm-cmp-row .wwm-num-input {
+    width: 36px !important;
+    font-size: var(--text-xs);
+  }
+  /* ─── NOTE modal mobile 全画面 + close sticky (履歴/筆記 閉じれない問題対策) ─── */
+  .wwm-modal-backdrop {
+    overflow-y: auto;
+    padding: 0;
+    align-items: flex-start;
+  }
+  .wwm-note-modal-a {
+    width: 100vw;
+    max-width: 100vw;
+    min-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .wwm-note-rod { display: none; }
+  .wwm-note-paper {
+    flex: 1 1 auto;
+    max-height: none;
+    height: auto;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .wwm-note-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    margin: 0;
+    padding: var(--space-2-5) var(--space-3);
+    background: linear-gradient(180deg, #f4e8c8 0%, #ebd6a8 100%);
+    border-bottom: 2px solid var(--brown-6);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .wwm-note-header-actions {
+    margin-left: auto;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .wwm-note-btn {
+    font-size: var(--text-sm);
+    padding: 3px 8px;
+  }
+  .wwm-note-btn-close {
+    background: var(--vermilion);
+    color: #fff;
+    border-color: var(--vermilion-deep);
+    font-weight: 700;
+  }
+  .wwm-note-divider { display: none; }
+  .wwm-note-tabs {
+    position: sticky;
+    top: 0; /* note-header の sticky の下に position計算で重なる→ JSで分離不要、tabs を header の直後で sticky 2段 */
+    z-index: 15;
+    background: #f4e8c8;
+    padding: var(--space-1) var(--space-2);
+    border-bottom: 1px solid var(--brown-6);
+  }
+  .wwm-note-body {
+    flex: 1 1 auto;
+    padding: var(--space-3);
+  }
+}
+
 } /* end @layer modals */
