@@ -170,6 +170,6 @@ console.log(`plan: token ${tok.length} / delete ${groups.length - tok.length} �
 for (const g of groups) {
   if (g.retokenLight) console.log(`[RETOKEN-L${g.rewrite ? '/rewrite' : ''}] ${g.retokenLight} light ${g.rewrite ? '→' : '+='} ${g.light}    (${g.note})`);
   else if (g.retoken) console.log(`[RETOKEN] ${g.retoken} root default → ${g.dark}    (${g.note})`);
-  else if (g.deleteOnly) console.log(`[DEL${g.note ? ' =' : ''}] ${g.decls[0].baseSel} { ${g.decls[0].prop} } @${g.decls[0].lightFile.replace('assets/styles-', '')}:${g.decls[0].lightLine}`);
+  else if (g.deleteOnly) console.log(`[DEL${g.note ? ' =' : ''}] ${g.decls[0].baseSel} { ${g.decls[0].prop} } @${g.decls[0].lightFile.replace('assets/styles/', '').replace('assets/styles-', '')}:${g.decls[0].lightLine}`);
   else console.log(`${g.token}\n    dark : ${g.dark}\n    light: ${g.light ?? '(= dark)'}    (${g.decls[0].baseSel} { ${g.decls[0].prop} })`);
 }

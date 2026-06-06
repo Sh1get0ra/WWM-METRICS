@@ -1715,7 +1715,7 @@ const cnt = (a) => a.length;
 console.log(`theme decls: ${themeDecls.length} (TOKEN ${cnt(out.TOKEN)} / M ${cnt(out.M)} / P ${cnt(out.P)} / N ${cnt(out.N)} / S ${cnt(out.S)})`);
 if (out.DEAD.length) {
   console.log(`DEAD (shadowed、 削除可): ${out.DEAD.length} 物理 decl`);
-  for (const d of out.DEAD) console.log(`  [DEAD] ${d.file.replace('assets/styles-', '')}:${d.line} ${d.selector.slice(0, 60)} { ${d.prop} } ← ${d.shadower.replace('assets/styles-', '').slice(0, 80)}`);
+  for (const d of out.DEAD) console.log(`  [DEAD] ${d.file.replace('assets/styles/', '').replace('assets/styles-', '')}:${d.line} ${d.selector.slice(0, 60)} { ${d.prop} } ← ${d.shadower.replace('assets/styles/', '').replace('assets/styles-', '').slice(0, 80)}`);
 }
 const safeM = out.M.filter(d => d.safe);
 console.log(`M safe (静的): ${safeM.length} / ${out.M.length}  (うち same-value redundant: ${safeM.filter(d => d.sameValue).length})`);
@@ -1738,8 +1738,8 @@ for (const r of out.NRULES) {
   const part = !r.ok ? `NG ${r.reason}`
     : (tMv === tCnt && bMv === bCnt) ? 'OK'
     : `PARTIAL T ${tMv}/${tCnt} B ${bMv}/${bCnt}${stay ? ` (${stay.nReason})` : ''}`;
-  const tag = r.ok && r.mergeInto ? `${part} →merge(${r.mergeInto.replace('assets/styles-', '').replace('.css', '')})` : part;
-  console.log(`  [${r.modes}] ${r.key.replace('assets/styles-', '').replace('.css', '')} L${r.ruleStart} → ${(r.target || '?').replace('assets/styles-', '').replace('.css', '')} | ${r.sels[0].slice(0, 55)}${r.sels.length > 1 ? ` +${r.sels.length - 1}sel` : ''} | ${tag}`);
+  const tag = r.ok && r.mergeInto ? `${part} →merge(${r.mergeInto.replace('assets/styles/', '').replace('assets/styles-', '').replace('.css', '')})` : part;
+  console.log(`  [${r.modes}] ${r.key.replace('assets/styles/', '').replace('assets/styles-', '').replace('.css', '')} L${r.ruleStart} → ${(r.target || '?').replace('assets/styles/', '').replace('assets/styles-', '').replace('.css', '')} | ${r.sels[0].slice(0, 55)}${r.sels.length > 1 ? ` +${r.sels.length - 1}sel` : ''} | ${tag}`);
 }
 const pReasons = {};
 for (const d of out.P) {
@@ -1759,7 +1759,7 @@ for (const cat of ['M', 'P']) {
 const byFileCat = {};
 for (const cat of ['M', 'P', 'N', 'S']) {
   for (const d of out[cat]) {
-    const k = `${d.file.replace('assets/styles-', '').replace('.css', '')}.${cat}`;
+    const k = `${d.file.replace('assets/styles/', '').replace('assets/styles-', '').replace('.css', '')}.${cat}`;
     byFileCat[k] = (byFileCat[k] || 0) + 1;
   }
 }

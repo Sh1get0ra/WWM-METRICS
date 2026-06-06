@@ -1,18 +1,18 @@
 // WWM-METRICS Service Worker
-const CACHE_NAME = 'wwm-metrics-v10';
+const CACHE_NAME = 'wwm-metrics-v11';
 const CORE_ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './assets/styles-tokens.css',
-  './assets/styles-animations.css',
-  './assets/styles-base.css',
-  './assets/styles-components.css',
-  './assets/styles-modals.css',
-  './assets/styles-responsive.css',
-  './assets/styles-dark.css',
-  './assets/styles-light.css',
-  './assets/styles-obs.css',
+  './assets/styles/tokens.css',
+  './assets/styles/animations.css',
+  './assets/styles/base.css',
+  './assets/styles/components.css',
+  './assets/styles/modals.css',
+  './assets/styles/responsive-globals.css',
+  './assets/styles/dark.css',
+  './assets/styles/light.css',
+  './assets/styles/obs.css',
   './assets/calc.js',
   './assets/stats.js',
   './assets/sidebar.js',

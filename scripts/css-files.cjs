@@ -18,15 +18,15 @@ const LAYER_IDX = new Map(LAYER_NAMES.map((n, i) => [n, i]));
 
 // link 順 (index.html と一致必須)。 layer 内の file 分割時はここに追記
 const CSS_FILES = [
-  { path: 'assets/styles-tokens.css',      layer: 'tokens' },
-  { path: 'assets/styles-animations.css',  layer: 'animations' },
-  { path: 'assets/styles-base.css',        layer: 'base' },
-  { path: 'assets/styles-components.css',  layer: 'components' },
-  { path: 'assets/styles-modals.css',      layer: 'modals' },
-  { path: 'assets/styles-responsive.css',  layer: 'responsive' },
-  { path: 'assets/styles-dark.css',        layer: 'dark' },
-  { path: 'assets/styles-light.css',       layer: 'light' },
-  { path: 'assets/styles-obs.css',         layer: 'obs' },
+  { path: 'assets/styles/tokens.css',             layer: 'tokens' },
+  { path: 'assets/styles/animations.css',         layer: 'animations' },
+  { path: 'assets/styles/base.css',               layer: 'base' },
+  { path: 'assets/styles/components.css',         layer: 'components' },
+  { path: 'assets/styles/modals.css',             layer: 'modals' },
+  { path: 'assets/styles/responsive-globals.css', layer: 'responsive' },
+  { path: 'assets/styles/dark.css',               layer: 'dark' },
+  { path: 'assets/styles/light.css',              layer: 'light' },
+  { path: 'assets/styles/obs.css',                layer: 'obs' },
 ];
 
 const FILE_SEQ = new Map(CSS_FILES.map((f, i) => [f.path, i]));
