@@ -141,10 +141,19 @@ html[data-theme="light"] {
   --c-anlz-shadow-orange:      rgba(120,60,20,.18);  /* anlz-header / anlz-body box-shadow */
   --c-sb-top-bg:               #f5ead0;              /* sidebar wwm-sb-top + sb-rest gradient 上 */
 
+  /* ─── @layer S2-j: theme-swap tokens (light 値) ─── */
+  --c-tier-C-text-shadow: none;
+  --c-cmp-col-border: var(--ink-2);
+  --c-cmp-lv-select-border: var(--c-gold-rich);
+  --c-num-input-border: var(--ink-2);
+  --c-btn-secondary-border: var(--ink-2);
+  --c-cmp-title--cmp-lv-border: var(--bone-dim);
+  --c-cmp-btn-row--btn-secondary-border: var(--bone-dim);
+
   /* ─── @layer Step 2-i: theme-swap tokens (light 値) ─── */
   --c-cmp-modal-a--cmp-kongfu-select-border: var(--c-border-mid-warm);
   --c-cmp-modal-a--cmp-set-select-border: var(--c-border-mid-warm);
-  --c-cmp-title--cmp-lv-select-border: initial;
+  --c-cmp-title--cmp-lv-select-border: var(--bone-dim);
   --c-cmp-modal-a--cmp-val-input-border: initial;
 
   /* ─── @layer Step 2-h: theme-swap tokens (light 値) ─── */
@@ -235,8 +244,8 @@ html[data-theme="light"] {
   --c-mobile-drawer-border-left: var(--vermilion);
   --c-cmp-modal-a--cmp-rows-border: initial;
   --c-cmp-modal-a--cmp-rows-shadow: initial;
-  --c-cmp-modal-a--cmp-current-border: initial;
-  --c-cmp-modal-a--cmp-col-border: initial;
+  --c-cmp-modal-a--cmp-current-border: var(--c-border-soft-warm);
+  --c-cmp-modal-a--cmp-col-border: var(--c-border-soft-warm);
 
   /* ─── @layer Step 2-e: theme-swap tokens (light 値) ─── */
   --c-modal-a-rows-bg: var(--overlay-trace);
@@ -489,8 +498,6 @@ html[data-theme="light"] .tier-S {
   animation: tier-s-pulse-light 2.2s ease-in-out infinite;
 }
 
-html[data-theme="light"] .tier-C {       text-shadow: none;  }
-
 html[data-theme="light"] .wwm-sb-mini-hero-card {
   background: linear-gradient(180deg, var(--c-surf-warm-1), var(--c-surf-warm-2));
 }
@@ -545,8 +552,13 @@ html[data-theme="light"] .wwm-sb-notice {  background: var(--vermilion-tint); }
 html[data-theme="light"] .wwm-opt-btn {  border-color: var(--c-opt-border-mid); }
 html[data-theme="light"] .wwm-opt-btn:hover {  border-color: var(--c-opt-border-strong); }
 
-/* S2-h split: cmp-col/row (modals dashed border 真競合 = stay) と share-url/bm-code を分離 */
-html[data-theme="light"] .wwm-cmp-col,
+/* S2-h split: cmp-col/row (modals dashed border 真競合 = stay) と share-url/bm-code を分離
+   S2-j split: col / row を分離 (cascade-neutral 隣接 + 同 decl) — row は modals:513/514 真競合で stay、
+   col は theme-shadow (light .wwm-cmp-modal-a .wwm-cmp-col/new) で解錠可のため物理 decl を独立化 */
+html[data-theme="light"] .wwm-cmp-col {
+  background: var(--surf-shade) !important;
+
+}
 html[data-theme="light"] .wwm-cmp-row {
   background: var(--surf-shade) !important;
   border-color: var(--ink-2);
@@ -570,7 +582,6 @@ html[data-theme="light"] .wwm-eff-input {
 html[data-theme="light"] .wwm-cmp-lv-select {
   background: var(--c-cream-pale);
 
-  border-color: var(--c-gold-rich);
 }
 
 /* 2本目 selector は modals.css の高 spec rule (.wwm-cmp-modal-a .wwm-cmp-title ...) 対抗
@@ -592,7 +603,7 @@ html[data-theme="light"] .wwm-cmp-new .wwm-cmp-title {
 /* S2-h split: mixed-cat (M/P/N split 同居) を per-selector rule 化 — cascade-neutral (隣接 + 同 decl) */
 html[data-theme="light"] .wwm-num-input {
   color: var(--paper);
-  border-color: var(--ink-2);
+
 }
 html[data-theme="light"] .wwm-xinfa-cell > .wwm-xinfa-tier {
   color: var(--paper);
@@ -609,11 +620,6 @@ html[data-theme="light"] select.wwm-num-input {
 }
 html[data-theme="light"] input.wwm-num-input {
   color: var(--paper);
-  border-color: var(--ink-2);
-}
-
-html[data-theme="light"] .wwm-btn-secondary {
-
   border-color: var(--ink-2);
 }
 
@@ -640,11 +646,16 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-header::after {
   background: linear-gradient(90deg, transparent 0%, transparent 30%, rgba(232,81,58,0.85) 50%, transparent 70%, transparent 100%);
 }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-col,
+/* S2-j split: col と current/new は pair が別 token (modals:698 col-border / modals:368 current-border)
+   → m-phys uniformity 不可のため物理 decl 分離 (cascade-neutral: 隣接 + 同 decl、 current/new は col 併持で後 rule 勝ち同値) */
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-col {
+  background: var(--hover-mid-2) !important;
+
+}
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-current,
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-new {
   background: var(--hover-mid-2) !important;
-  border-color: var(--c-border-soft-warm);
+
 }
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-header { color: var(--brown-1); background: var(--gold-mid); }
@@ -661,24 +672,16 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-val-input {
 }
 
 /* S2-d split: cmp-lv-select は単独 light rule 競合残置 → cmp-lv と分離 */
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv {
-
-  border-color: var(--bone-dim);
-}
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
   background: var(--hover-strong);
-  border-color: var(--bone-dim);
+
 }
 
 /* .wwm-cmp-ratio rank別 light color は styles-modals.css へ co-locate move 済
    (2026-06-05 @layer Step 1: inline 対抗 imp の layer 反転 flip 根治) */
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-footer-a { border-color: var(--c-border-soft-warm); }
-
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
-   border-color: var(--bone-dim);
-}
 
 html[data-theme="light"] .wwm-cmp-modal-bg-icon {
   filter: brightness(0) drop-shadow(0 0 6px var(--c-gold-deep-glow-1));

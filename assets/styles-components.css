@@ -452,6 +452,7 @@ html.wwm-shared-build-mode #exportBtn {
   background: var(--c-tier-chip-c-bg);
   border-color: var(--c-tier-chip-c-border);
   box-shadow: var(--c-tier-C-shadow);
+  text-shadow: var(--c-tier-C-text-shadow);
 }
 
 
@@ -1525,6 +1526,7 @@ html.wwm-view-sidebar .wwm-app-body {
   border-radius: 2px;
   vertical-align: middle;
   cursor: pointer;
+  border-color: var(--c-cmp-lv-select-border);
 }
 .wwm-cmp-lv-select option {
   background: var(--bg-raised);

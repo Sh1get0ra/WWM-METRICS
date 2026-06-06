@@ -127,6 +127,7 @@
   background: var(--c-btn-secondary-bg);
   color: var(--c-btn-secondary-fg);
   border: 1px solid rgba(255,255,255,0.3);
+  border-color: var(--c-btn-secondary-border);
 }
 .wwm-btn-secondary:hover { background: var(--c-btn-secondary-hover-bg); }
 .wwm-list { margin: 0; padding-left: 18px; }
@@ -421,6 +422,7 @@
   box-shadow: none;
   box-sizing: border-box;
   vertical-align: middle;
+  border-color: var(--c-cmp-title--cmp-lv-border);
 }
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
   appearance: none;
@@ -773,6 +775,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   padding: 7px 18px;
   font-size: var(--text-12);
   box-shadow: none;
+  border-color: var(--c-cmp-btn-row--btn-secondary-border);
 }
 /* affix行 共通 */
 .wwm-cmp-modal-a .wwm-cmp-row {
@@ -833,6 +836,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   padding: var(--space-2-5);
   position: relative;
   overflow: hidden;
+  border-color: var(--c-cmp-col-border);
 }
 .wwm-cmp-bg-icon {
   position: absolute;
@@ -979,6 +983,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   background: var(--c-cmp-stat-select-bg); color: inherit;
   border: 1px solid #444; border-radius: 4px;
   font-size: var(--text-md); text-align: right;
+  border-color: var(--c-num-input-border);
 }
 .wwm-arsenal-paths {
   display: flex; gap: var(--space-3); flex-wrap: wrap;

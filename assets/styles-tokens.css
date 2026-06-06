@@ -501,6 +501,15 @@
   --c-cmp-title--cmp-lv-select-border: var(--gold-mid);
   --c-cmp-modal-a--cmp-val-input-border: var(--gold-mid);
 
+  /* ─── @layer S2-j: theme-swap tokens (dark default) ─── */
+  --c-tier-C-text-shadow: initial;
+  --c-cmp-col-border: var(--hover-soft);
+  --c-cmp-lv-select-border: var(--gold-deep);
+  --c-num-input-border: #444;
+  --c-btn-secondary-border: rgba(255,255,255,0.3);
+  --c-cmp-title--cmp-lv-border: var(--gold-deep);
+  --c-cmp-btn-row--btn-secondary-border: var(--paper-mute);
+
   /* Safe Area inset utility (Phase 1 base) */
   --safe-top:    env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);

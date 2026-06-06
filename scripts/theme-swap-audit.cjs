@@ -246,6 +246,9 @@ function propsConflict(a, b) {
   if (REAL_SHORTHANDS.has(b) && propGroup(b) === propGroup(a)) return true;
   return false;
 }
+// S2-j: dp が ep を完全に遮蔽するか (同 prop or ep の全成分を reset する祖先 shorthand)
+// 例: border ⊇ border-color ✓ / border-top ⊉ border-color ✗ ('border-color'.startsWith('border-top-') = false)
+const shadowProp = (dp, ep) => dp === ep || (REAL_SHORTHANDS.has(dp) && ep.startsWith(dp + '-') && propGroup(dp) === propGroup(ep));
 
 const EXCLUSIVE_CLASS_GROUPS = [
   ['rank-max', 'rank-gold', 'rank-purple', 'rank-blue'],
@@ -602,6 +605,17 @@ function cmpBaseGWins(e, gE) {
 // drop-gate 計測 (S2-i): fixpoint で batch から落ちた「最初の」理由を記録 (後続は連鎖)
 const dropGate = (e, gate, detail) => { if (!e.dropGate) { e.dropGate = gate; if (detail) e.dropDetail = detail; } };
 
+// ── S2-j: M/P 横断方向検証用の base 最終位置比較 ──
+// M entry の swap 後位置 = pair decl (値が var(--tok) になるだけで位置不変)
+// P entry の insert 後位置 = target rule 末尾 (lastLine + 0.5 — 整数 line と衝突しない全順序)
+function finalPosM(mE) { return { layer: LAYER_ORDER.get(mE.pair.file) ?? 99, spec: specificity(mE.baseSel), line: mE.pair.line }; }
+function finalPosP(pE) { return { layer: LAYER_ORDER.get(pE.insert.file) ?? 99, spec: specificity(pE.baseSel), line: pE.insert.lastLine + 0.5 }; }
+function posBeats(a, b) {
+  if (a.layer !== b.layer) return a.layer > b.layer;
+  if (a.spec !== b.spec) return a.spec > b.spec;
+  return a.line > b.line;
+}
+
 function mFixpoint() {
 let changed = true;
 while (changed) {
@@ -615,6 +629,14 @@ while (changed) {
       const gE = mIndex.get(gK);
       const gRemovable = gE && inBatch.has(gK);
       if (!gRemovable) {
+        // S2-j (A): g が P batch で base へ移動 (insert + theme decl 削除) なら「残置」でない →
+        // 方向検証: after 勝者 (e.pair vs g.insert) == before 勝者 (beforeGWins) で保存
+        const pgE = pIndex.get(gK); // 宣言は後方だが mFixpoint 初回呼出は outer loop (宣言後) → TDZ 安全
+        if (pgE && pBatch.has(gK)) {
+          const eWins = posBeats(finalPosM(e), finalPosP(pgE));
+          if (eWins !== !g.beforeGWins) { dropSelf = true; dropGate(e, 'm-pdir', `${g.file}:${g.line} ${g.selector} { ${g.prop} }`); break; }
+          continue; // 方向保存 = blocker 解除
+        }
         // g 残置: beforeGWins なら before/after 共 g 勝ち = 表示不変
         if (!g.beforeGWins) {
           // same-selector shield: 同 theme rule g' (同 selector ∧ 同 prop) が g を遮蔽するか
@@ -825,6 +847,9 @@ const DOM_CONTAINMENT = new Map([
   ['.wwm-cmp-val-input', ['.wwm-cmp-modal-a']],
   ['.wwm-cmp-lv-select', ['.wwm-cmp-modal-a']],
   ['.wwm-cmp-lv', ['.wwm-cmp-modal-a']],
+  // S2-j: .wwm-cmp-new = gear.js:463 / xinfa.js:326 / arsenal.js:97 の 3 出現のみ、
+  // 全て "wwm-cmp-col wwm-cmp-new" で .wwm-cmp-current と同じ cmp-modal-a template 内 (2026-06-06 grep 証明)
+  ['.wwm-cmp-new', ['.wwm-cmp-modal-a']],
 ]);
 // SUBJECT_IMPLICATION: class X を持つ element は常に class A も併せ持つ (同 element)。
 //   .wwm-cmp-modal-a の 3 出現は全て class="wwm-modal wwm-modal-square wwm-cmp-modal-a..."
@@ -891,6 +916,29 @@ function selCovers(gSel, sel) {
 const tIndex = new Map(); // 全 theme decl: gid → decl (kept dep の selector/value 参照用)
 for (const d of themeDecls) tIndex.set(`${d.file}|${d.line}|${norm(d.selector)}|${d.prop}`, d);
 
+// S2-j (D): hardNonTheme blocker b の theme-shadow 候補 —
+// 同 ctx theme decl t で selCovers(t.baseSel ⊇ b.selector) ∧ shadowProp(t.prop ⊇ e.prop) ∧
+// t が e (theme layer 内 spec/line) に勝つ → overlap(e,b) の winner は before も t。
+// t 残置なら after も t (theme layer 常勝) = b 無害。 t が batch 移動する場合は pFixpoint で方向検証
+// (t.final が b と e.insert の両方に勝つ要 — t.pair === b 特例は b 自身が token 化 = t 支配で成立)
+function themeShadowsFor(e, b) {
+  const keys = [];
+  const sd = specificity(e.selector);
+  for (const t of themeDecls) {
+    if (t.prop.startsWith('--') || t.important) continue; // imp t は batch 候補外 — 解析単純化のため非 imp 限定 (保守的)
+    const tCtx = t.file === 'assets/styles-dark.css' ? 'dark' : 'light';
+    if (tCtx !== e.ctx) continue;
+    if ((t.media || null) !== (e.media || null)) continue;
+    if (t.file === e.file && t.line === e.line) continue; // e 自身 (同物理 decl の split 含む)
+    if (!shadowProp(t.prop, e.prop)) continue;
+    if (!selCovers(stripTheme(t.selector), b.selector)) continue;
+    const st = specificity(t.selector);
+    if (!(st > sd || (st === sd && t.line > e.line))) continue; // t が e に勝つ (before 勝者 ≠ e の保証)
+    keys.push(`${t.file}|${t.line}|${norm(t.selector)}|${t.prop}`);
+  }
+  return keys;
+}
+
 // target 1 つに対する P 静的検証 (S2-i で関数化 — coverage retry が別候補で再検証する)
 // laterRules = 採用 target より cascade 後の same-selector rule 群。 そこに propsConflict decl が
 // あると挿入 decl A は同 specificity 後 rule に敗北 (= 従来「最後の rule 固定」が担保していた前提の補完検査)
@@ -908,7 +956,15 @@ function validatePTarget(e, target, laterRules) {
   const blockers = pairWinnerBlockers(synth, e.ctx)
     .filter(b => !(b.file === target.file && b.line >= target.ruleStart && b.line <= target.lastLine));
   const hardNonTheme = blockers.filter(b => !b.beforeGWins && !THEME_FILE_SET.has(b.file));
-  if (hardNonTheme.length) return { ok: false, reason: 'ctx-blocker', hardNonTheme, blockers };
+  // S2-j (D): hard blocker に theme-shadow 候補があれば fixpoint 繰延、 無ければ従来通り ctx-blocker
+  const shadowDeps = [];
+  const stillHard = [];
+  for (const b of hardNonTheme) {
+    const tKeys = themeShadowsFor(e, b);
+    if (tKeys.length) shadowDeps.push({ b: { file: b.file, line: b.line, selector: b.selector, prop: b.prop }, tKeys });
+    else stillHard.push(b);
+  }
+  if (stillHard.length) return { ok: false, reason: 'ctx-blocker', hardNonTheme: stillHard, blockers };
   // other 側 (rescue は rescueBeaten 共用 — S2-h で winning-cover + inherit 特例 + CSS-wide 拒否)
   const { beaten, keptTheme } = otherSideScan(e, target);
   let otherVal;
@@ -919,13 +975,18 @@ function validatePTarget(e, target, laterRules) {
   }
   // unset 経路 (opp 無し ∧ rescue 値無し = token 'initial') の SVG presentation attr 穴 (S2-g 知見の P 適用)
   if (!e.hasOpp && !otherVal && svgAttrRisk(e.baseSel, e.prop)) return { ok: false, reason: 'svg-unset', blockers, keptTheme };
-  return { ok: true, insert: ins, blockers, keptTheme, otherVal };
+  return { ok: true, insert: ins, blockers, keptTheme, otherVal, shadowDeps };
 }
 function adoptPTarget(e, v) {
   e.insert = v.insert;
-  e.pBlockers = v.blockers;
+  // S2-j (D): theme-shadow 繰延した hard blocker は pBlockers から除外
+  // (fixpoint の hard branch は theme blocker 前提 — 非 theme key は pIndex/mIndex 不在で誤 drop する。
+  //  shadowed b の検証は pShadowDeps check が担当)
+  const shadowed = new Set((v.shadowDeps || []).map(d => `${d.b.file}|${d.b.line}|${d.b.selector}|${d.b.prop}`));
+  e.pBlockers = v.blockers.filter(b => !shadowed.has(`${b.file}|${b.line}|${b.selector}|${b.prop}`));
   e.pKeptTheme = v.keptTheme;
   e.pOtherVal = v.otherVal; // undefined = token 'initial'
+  e.pShadowDeps = v.shadowDeps && v.shadowDeps.length ? v.shadowDeps : undefined; // S2-j (D)
 }
 
 for (const e of out.P) {
@@ -975,6 +1036,30 @@ for (const e of out.P) {
   if (!pPhysGroups.has(k)) pPhysGroups.set(k, []);
   pPhysGroups.get(k).push(e);
 }
+// S2-j (C): 挿入先 rule の selector S に対する static base shadow —
+// 同 selector S ∧ 同 media ∧ shadowProp の既存 base decl が挿入位置より cascade 後 (同 spec → layer/line) に
+// あれば、 挿入 decl A は S の表示に関与不能 (常敗) = S は cover 不要。 theme 残置 decl は theme layer 常勝で
+// 元々無害。 guard: S 上の batch entry (M/P) の final 位置が挿入位置に負けるなら不成立 (移動で A が浮上)
+function coverageShadow(S, e) {
+  const insPos = { layer: LAYER_ORDER.get(e.insert.file) ?? 99, spec: specificity(S), line: e.insert.lastLine + 0.5 };
+  const hasShadow = (baseBySel.get(S) || []).some(d =>
+    (d.media || null) === (e.media || null) &&
+    !d.prop.startsWith('--') && !d.important &&
+    shadowProp(d.prop, e.prop) &&
+    !(d.file === e.insert.file && d.line >= e.insert.ruleStart && d.line <= e.insert.lastLine) && // 挿入 rule 内 decl は A (末尾) に敗北
+    posBeats({ layer: LAYER_ORDER.get(d.file) ?? 99, spec: specificity(S), line: d.line }, insPos));
+  if (!hasShadow) return false;
+  for (const x of out.M) {
+    if (!inBatch.has(keyOf(x))) continue;
+    if (x.baseSel === S && (x.media || null) === (e.media || null) && propsConflict(x.prop, e.prop) && !posBeats(finalPosM(x), insPos)) return false;
+  }
+  for (const x of out.P) {
+    if (x === e || !x.insert || !pBatch.has(pKeyOf(x))) continue;
+    if (x.baseSel === S && (x.media || null) === (e.media || null) && propsConflict(x.prop, e.prop) && !posBeats(finalPosP(x), insPos)) return false;
+  }
+  return true;
+}
+
 // dep entry (g) も batch 移動する場合の方向検証: 移動後 g insert が e insert に勝ち続けるか
 function depStillWins(gE, e) {
   if (!gE.insert || !e.insert) return false;
@@ -1005,11 +1090,44 @@ while (pchg) {
           // 同一 insert 物理 decl (同 rule + 同 prop) は coverage gate が値均一保証 → 方向不問
           const sameIns = bE.insert && e.insert && bE.insert.file === e.insert.file && bE.insert.ruleStart === e.insert.ruleStart && bE.prop === e.prop;
           if (!sameIns && !depStillWins(bE, e)) { drop = true; dropGate(e, 'p-dir', bk); break; }
+        } else {
+          // S2-j (B): b が M batch で base へ swap → 残置でない。 before b 勝ち → swap 後 b.pair も e.insert に勝ち続ける要
+          const mbE = mIndex.get(bk);
+          if (mbE && inBatch.has(bk) && !posBeats(finalPosM(mbE), finalPosP(e))) { drop = true; dropGate(e, 'p-mdir', bk); break; }
         }
       } else {
-        if (!inB || !bE) { drop = true; dropGate(e, 'p-hard-stay', bk); break; } // theme hard blocker 残置 = 常勝 → 不可
+        if (!inB || !bE) {
+          // S2-j (B): b が M batch で base へ swap されるなら残置でない — before e 勝ち → e.insert が b.pair に勝つ要
+          const mbE = mIndex.get(bk);
+          if (mbE && inBatch.has(bk)) {
+            if (posBeats(finalPosP(e), finalPosM(mbE))) continue;
+            drop = true; dropGate(e, 'p-mdir', bk); break;
+          }
+          drop = true; dropGate(e, 'p-hard-stay', bk); break; // theme hard blocker 残置 = 常勝 → 不可
+        }
         const sameIns = bE.insert && e.insert && bE.insert.file === e.insert.file && bE.insert.ruleStart === e.insert.ruleStart && bE.prop === e.prop;
         if (!sameIns && depStillWins(bE, e)) { drop = true; dropGate(e, 'p-dir', bk); break; } // 移動後 g 勝ち = before (e 勝ち) と逆転 → 不可
+      }
+    }
+    // S2-j (D): theme-shadow 依存 — t 残置なら theme layer 常勝で成立。
+    // t が batch 移動なら t.final が blocker b と e.insert の両方に勝つ要。
+    // t.pair === b 特例: b 自身が var(--tTok) 化 = b の表示は t 支配 → b への勝ちは自明、 e.insert への勝ちのみ検査
+    if (!drop) {
+      for (const dep of e.pShadowDeps || []) {
+        const ok = dep.tKeys.some(tk => {
+          const tM = mIndex.get(tk), tP = pIndex.get(tk);
+          const tInM = tM && inBatch.has(tk), tInP = tP && pBatch.has(tk);
+          if (!tInM && !tInP) return true; // 残置 = theme layer 常勝
+          const bPos = { layer: LAYER_ORDER.get(dep.b.file) ?? 99, spec: specificity(dep.b.selector), line: dep.b.line };
+          if (tInM) {
+            const tIsB = tM.pair.file === dep.b.file && tM.pair.line === dep.b.line && tM.prop === dep.b.prop;
+            const tPos = tIsB ? bPos : finalPosM(tM);
+            return (tIsB || posBeats(tPos, bPos)) && posBeats(tPos, finalPosP(e));
+          }
+          const tPos = finalPosP(tP);
+          return posBeats(tPos, bPos) && posBeats(tPos, finalPosP(e));
+        });
+        if (!ok) { drop = true; dropGate(e, 'p-shadow-dir', `${dep.b.file}:${dep.b.line}`); break; }
       }
     }
     // other 残置勝者 (keptTheme): before 勝者 (g vs opp) に応じて方向要件が変わる
@@ -1072,7 +1190,9 @@ while (pchg) {
         const v0 = [...vals][0];
         for (const S of sels) {
           const cover = batchBySelProp.get(`${S}|${side[0].prop}|${side[0].media || ''}|${ctx}`);
-          if (!cover || resolveCtx(cover.value, ctx) !== v0) { ok = false; break; }
+          if (cover && resolveCtx(cover.value, ctx) === v0) continue;
+          if (coverageShadow(S, side[0])) continue; // S2-j (C): 挿入 decl が S に cascade 常敗 = 無害 → cover 不要
+          ok = false; break;
         }
       }
       // other 側 token 値 (pOtherVal ?? initial) も side 内で均一要 (token は group に 1 つ)
