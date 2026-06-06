@@ -617,7 +617,7 @@
 
 /* タブ列 (右側) — 既存 wwm-analysis-tab を案30 風に上書き */
 #wwmAnalysisTabs.wwm-anlz-tabs {
-  display: flex !important;
+  display: flex;
   gap: 18px;
   flex-wrap: wrap;
   align-items: flex-end;
@@ -722,7 +722,7 @@ html[lang="en"] .wwm-cmp-title-en {
   background: transparent;
   border: none;
   box-shadow: none;
-  padding: 0 !important;
+  padding: 0;
   position: relative;
   z-index: 1;
 }

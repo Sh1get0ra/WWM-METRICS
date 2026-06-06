@@ -517,7 +517,7 @@ html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-blue .wwm
   .wwm-xinfa-grid,
   #wwmXinfaGrid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-2);
   }
   .wwm-xinfa-slot[data-arsenal-slot] {

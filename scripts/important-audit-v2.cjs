@@ -654,7 +654,13 @@ const EXCLUSIVE_ANCESTOR_GROUPS = [
   [['wwm-overlay-ctrl'], ['wwm-arsenal-custom', 'wwm-arsenal-modal', 'wwm-mobile-anlz-overlay-body']],
   [['wwm-opt-ratio-label'], ['wwm-arsenal-custom', 'wwm-arsenal-modal']],
   // OBS view では mobile stat overlay 全 hidden (responsive.css OBS block) = 同時成立不可
-  [['wwm-view-sidebar'], ['wwm-sidebar-in-overlay', 'wwm-mobile-stat-overlay-body', 'wwm-mobile-stat-overlay']],
+  // Step 5 (2026-06-06) 追加: equip-section / step2 = import modal 内のみ (grep: assets/import.js のみ) —
+  // OBS view (sidebar 単独表示、 modal 到達 UI 無し) と同時成立不可
+  [['wwm-view-sidebar'], ['wwm-sidebar-in-overlay', 'wwm-mobile-stat-overlay-body', 'wwm-mobile-stat-overlay',
+    'wwm-equip-section', 'wwm-step2']],
+  // lang-picker modal = document.body.appendChild (app.js _showLangPicker) = body 直下 →
+  // .wwm-anlz-body 内に存在し得ない (Step 5 2026-06-06)
+  [['wwm-anlz-body'], ['wwm-lang-picker']],
 ];
 function allClassSet(sel) {
   const safe = sel.replace(/\[[^\]]*\]/g, '[]');
@@ -915,6 +921,19 @@ for (const d of importants) {
   physMap.get(k).push(d);
 }
 
+// ── sibling-split defense (Step 5 2026-06-06) ──
+// p の同 phys decl (= 同 rule 同 line の comma 別 selector) に q と同一 selector の
+// sibling s が居て s が q に natural 勝ち → q の文脈では s (= p と同値) が必ず勝つ =
+// pair (p,q) は到達不能。 例: mobile `.wwm-xinfa-grid, #wwmXinfaGrid { ... !important }`
+// の class split が PC `#wwmXinfaGrid` rule に spec 負け扱いされる phantom を解消。
+// q が important の場合は post-strip で q が s (normal) に勝つため防衛不成立 → 非 imp 限定
+const normSel = (s) => s.replace(/\s+/g, ' ').trim();
+function siblingDefends(p, q) {
+  if (q.important) return false;
+  const sibs = physMap.get(physKeyOf(p)) || [];
+  return sibs.some(s => s !== p && normSel(s.selector) === normSel(q.selector) && cmpNormal(s, q));
+}
+
 // 初期 S: 全 split が strip 可能候補 (A / B / inline 競合なし C) の physical decl
 const physS = new Set();
 for (const [k, splits] of physMap) {
@@ -939,7 +958,7 @@ while (changed) {
         if (exclusiveDisjoint(p.selector, q.selector)) continue;                   // class 排他 group
         if (q.prop === p.prop && q.value === p.value) continue;
         if (!q.important) {
-          if (!naturalWins(p, q)) { ok = false; break; } // strip 後 p 負け = flip
+          if (!naturalWins(p, q) && !siblingDefends(p, q)) { ok = false; break; } // strip 後 p 負け = flip (sibling 防衛除く)
         } else if (!physS.has(physKeyOf(q))) {
           // 前 = imp battle (layer 逆転)、 後 = q (keep important) 必勝 → 前 p 勝ちなら flip
           if (cmpImp(p, q)) { ok = false; break; }
@@ -1503,7 +1522,7 @@ if (process.argv.includes('--diag')) {
       if (exclusiveDisjoint(p.selector, q.selector)) continue;
       if (q.prop === p.prop && q.value === p.value) continue;
       if (!q.important) {
-        if (!naturalWins(p, q)) reasons.push({
+        if (!naturalWins(p, q) && !siblingDefends(p, q)) reasons.push({
           type: 'nat-loss', qFile: q.file, qSel: q.selector, qLine: q.line, qProp: q.prop, qVal: q.value,
           specP: specificity(p.selector), specQ: specificity(q.selector)
         });

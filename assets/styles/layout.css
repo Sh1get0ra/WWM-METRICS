@@ -152,7 +152,14 @@ body.wwm-layout-active .wwm-app-body .container {
 
 body.wwm-layout-active .wwm-app-body .container > * { flex-shrink: 0; }
 
-/* タブパネル wrap を container の余白に追従させる */
+/* タブパネル wrap を container の余白に追従させる
+   Step 5-b (2026-06-06): PC anlz flex chain を min-width 481 gate。
+   ≤480 では ①main flow = .wwm-anlz 系 display:none (下の 480 media) で全 decl moot
+   ②overlay = JS が overlay-body (body 直下 aside、 .container 外) へ DOM move →
+   `.container >` 系は不一致、 .wwm-anlz-body / .wwm-analysis-card 系は overlay rule
+   (497-522 相当) が同値 decl を保有 → gate は視覚 no-op。 gate により mobile hide/show
+   imp との media 重複が消え imp 戦争が解消する */
+@media (min-width: 481px) {
 body.wwm-layout-active .wwm-app-body .container > .wwm-analysis-grid {
   flex: 1 1 0;
   min-height: 0;
@@ -198,6 +205,7 @@ body.wwm-layout-active #wwmHistory .wwm-analysis-card {
   height: 100%;
   min-height: 0;
 }
+} /* end @media (min-width: 481px) — Step 5-b PC anlz flex chain gate */
 
 body.wwm-layout-active .wwm-app-body .container::-webkit-scrollbar { width: 6px; }
 
@@ -340,7 +348,7 @@ html.wwm-view-sidebar .wwm-app-body {
   body.wwm-layout-active #wwmScoreTimeline,
   body.wwm-layout-active .wwm-analysis-grid,
   body.wwm-layout-active .wwm-anlz {
-    display: none !important;
+    display: none;
   }
   body.wwm-layout-active .wwm-app-body::-webkit-scrollbar { width: 6px; }
   body.wwm-layout-active .wwm-app-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
@@ -459,7 +467,7 @@ html.wwm-view-sidebar .wwm-app-body {
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-anlz,
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-tabs,
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-grid {
-    display: block !important;
+    display: block;
     visibility: visible;
     opacity: 1;
   }
@@ -468,14 +476,14 @@ html.wwm-view-sidebar .wwm-app-body {
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body #wwmOptimization,
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body #wwmScoreTimeline,
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body #wwmHistory {
-    display: flex !important;
+    display: flex;
   }
   /* specificity を ID行 と等しくして 後勝ちで hidden 効かす */
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body #wwmAffixRanking[hidden],
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body #wwmOptimization[hidden],
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body #wwmScoreTimeline[hidden],
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body #wwmHistory[hidden] {
-    display: none !important;
+    display: none;
   }
   body.wwm-layout-active .wwm-anlz.wwm-anlz-in-overlay {
     width: 100%;
@@ -489,7 +497,7 @@ html.wwm-view-sidebar .wwm-app-body {
     overflow: hidden;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-anlz {
-    display: flex !important;
+    display: flex;
     flex-direction: column;
     flex: 1 1 0;
     min-height: 0;
@@ -501,7 +509,7 @@ html.wwm-view-sidebar .wwm-app-body {
     min-height: 0;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-grid {
-    display: flex !important;
+    display: flex;
     flex-direction: column;
     flex: 1 1 0;
     min-height: 0;
