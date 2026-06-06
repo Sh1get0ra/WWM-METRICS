@@ -236,6 +236,14 @@ const REAL_SHORTHANDS = new Set([
 ]);
 function propsConflict(a, b) {
   if (a === b) return true;
+  // flex 精密化 (Step 5 2026-06-06): flex shorthand = grow/shrink/basis のみ、
+  // flex-flow = direction/wrap のみ (CSS 仕様)。 旧実装は group 'flex' 一括で
+  // `flex: 1 1 0` vs `flex-direction: column` を偽競合扱い → C 誤 block
+  if (propGroup(a) === 'flex' && propGroup(b) === 'flex') {
+    const axis = p => (p === 'flex-flow' || /^flex-(direction|wrap)$/.test(p)) ? 'dw' : 'gsb';
+    if (axis(a) !== axis(b)) return false;                                // 別軸 = 不干渉
+    return /^(flex|flex-flow)$/.test(a) || /^(flex|flex-flow)$/.test(b);  // 同軸: shorthand 絡みのみ
+  }
   if (REAL_SHORTHANDS.has(a) && propGroup(a) === propGroup(b)) return true;
   if (REAL_SHORTHANDS.has(b) && propGroup(b) === propGroup(a)) return true;
   return false;
@@ -250,8 +258,6 @@ function propsConflict(a, b) {
 //   - theme 排他 (light vs dark) は干渉なし扱い
 function soloStrippable(d, groupDecls) {
   const ctxD = themeContext(d.selector);
-  const sd = specificity(d.selector);
-  const fd = FILE_ORDER.get(d.file) ?? 99;
   for (const g of groupDecls) {
     if (g === d) continue;
     if (!propsConflict(g.prop, d.prop)) continue;                      // 別 longhand = 無競合
@@ -260,13 +266,7 @@ function soloStrippable(d, groupDecls) {
     if (exclusiveDisjoint(d.selector, g.selector)) continue;           // class 排他 group
     if (g.prop === d.prop && g.value === d.value) continue;            // 同値 = 無害
     if (g.important) return false;  // 他 important → strip 後 d 負け得る
-    const sg = specificity(g.selector);
-    if (sg > sd) return false;
-    if (sg === sd) {
-      const fg = FILE_ORDER.get(g.file) ?? 99;
-      if (fg > fd) return false;
-      if (fg === fd && g.line > d.line) return false;
-    }
+    if (cmpNormal(g, d)) return false; // strip 後 g が natural cascade (layer-aware) で勝つ
   }
   return true;
 }
@@ -710,6 +710,31 @@ const A = [], B = [], K = [], C = [];
 
 const FILE_ORDER = new Map(CSS_FILES.map((f, i) => [f, i]));
 
+// ── cascade 比較 helper (@layer 実環境 — Step 1 で全 file @layer wrap 済) ──
+// Step 5 (2026-06-06): 旧 naturalWins は spec → file順 のみで layer 盲目だった。
+// CSS cascade は layer が specificity より優先:
+//   normal 同士:    後 layer 勝ち → spec → 同 layer 内 file 読込順 → line
+//   important 同士: layer 逆転 (先 layer 勝ち) → spec → file 読込順 → line
+// (--layer-impact の winsLayer と同 model。 同 layer pair は旧実装と完全同値)
+function cmpNormal(p, q) {
+  const lp = FILE_LAYER.get(p.file) ?? 99, lq = FILE_LAYER.get(q.file) ?? 99;
+  if (lp !== lq) return lp > lq;
+  const sp = specificity(p.selector), sq = specificity(q.selector);
+  if (sp !== sq) return sp > sq;
+  const fp = FILE_ORDER.get(p.file) ?? 99, fq = FILE_ORDER.get(q.file) ?? 99;
+  if (fp !== fq) return fp > fq;
+  return p.line > q.line;
+}
+function cmpImp(p, q) {
+  const lp = FILE_LAYER.get(p.file) ?? 99, lq = FILE_LAYER.get(q.file) ?? 99;
+  if (lp !== lq) return lp < lq; // 逆転: 先 layer の important 勝ち
+  const sp = specificity(p.selector), sq = specificity(q.selector);
+  if (sp !== sq) return sp > sq;
+  const fp = FILE_ORDER.get(p.file) ?? 99, fq = FILE_ORDER.get(q.file) ?? 99;
+  if (fp !== fq) return fp > fq;
+  return p.line > q.line;
+}
+
 // Batch B: paired theme override 判定
 // 競合が 「同 selector の theme variant のみ」 で、 全 variant !important を
 // 同時 strip しても各 theme context の winner value が不変なら strip 可
@@ -731,11 +756,8 @@ function pairedThemeStrippable(d, groupDecls) {
     return applicable.reduce((w, p) => {
       if (!w) return p;
       if (useImportant && p.important !== w.important) return p.important ? p : w;
-      const sp = specificity(p.selector), sw = specificity(w.selector);
-      if (sp !== sw) return sp > sw ? p : w;
-      const fp = FILE_ORDER.get(p.file) ?? 99, fw = FILE_ORDER.get(w.file) ?? 99;
-      if (fp !== fw) return fp > fw ? p : w;   // 後 file 勝ち
-      return p.line >= w.line ? p : w;          // 後 line 勝ち
+      const bothImp = useImportant && p.important && w.important;
+      return (bothImp ? cmpImp(p, w) : cmpNormal(p, w)) ? p : w; // layer-aware (imp 同士 = layer 逆転)
     }, null);
   };
 
@@ -882,11 +904,7 @@ for (const d of importants) {
 //   - q important で S 内 (= 同時 strip): natural 比較不変 → 常に OK
 // 違反 p の physical decl を S から除外 → fixpoint まで反復 (除外が新た​な flip を生むため)
 function naturalWins(p, q) {
-  const sp = specificity(p.selector), sq = specificity(q.selector);
-  if (sp !== sq) return sp > sq;
-  const fp = FILE_ORDER.get(p.file) ?? 99, fq = FILE_ORDER.get(q.file) ?? 99;
-  if (fp !== fq) return fp > fq;
-  return p.line > q.line;
+  return cmpNormal(p, q); // Step 5: layer-aware 化 (旧: spec → file順 のみ = layer 盲目)
 }
 
 const physKeyOf = (d) => `${d.file}|${d.line}|${d.prop}`;
@@ -920,11 +938,15 @@ while (changed) {
         if (!themeOverlap(p, q) || !mediaOverlap(p.media, q.media)) continue;
         if (exclusiveDisjoint(p.selector, q.selector)) continue;                   // class 排他 group
         if (q.prop === p.prop && q.value === p.value) continue;
-        const pWins = naturalWins(p, q);
         if (!q.important) {
-          if (!pWins) { ok = false; break; }       // strip 後 p 負け = flip
+          if (!naturalWins(p, q)) { ok = false; break; } // strip 後 p 負け = flip
         } else if (!physS.has(physKeyOf(q))) {
-          if (pWins) { ok = false; break; }        // 前 p 勝ち → 後 q (keep important) 勝ち = flip
+          // 前 = imp battle (layer 逆転)、 後 = q (keep important) 必勝 → 前 p 勝ちなら flip
+          if (cmpImp(p, q)) { ok = false; break; }
+        } else {
+          // 両方 strip set 内: 前 = imp battle (layer 逆転) / 後 = natural (layer 順)。
+          // 同 layer なら両比較同値 = 常 OK (旧実装の前提)、 cross-layer は勝者逆転 = flip
+          if (cmpImp(p, q) !== cmpNormal(p, q)) { ok = false; break; }
         }
       }
       if (!ok) break;
@@ -1031,11 +1053,12 @@ if (simArg) {
   console.log(`simulate: resel ${reselCount} decl / strip ${stripCount} decl / move ${moveCount} decl`);
 
   // orig / mod 両 index 構築 → 全 pair flip check
-  const hh = (x, y, useSel, useImp) => {
-    // x が y に勝つか (cascade: important > specificity > file順 > line)
-    if (useImp && x.important !== y.important) return x.important;
-    const sx = specificity(useSel ? x.selector : x.origRef ? x.origRef.selector : x.selector);
-    const sy = specificity(useSel ? y.selector : y.origRef ? y.origRef.selector : y.selector);
+  // x が y に勝つか (layer-aware: imp diff > layer (imp 同士は逆転) > spec > file順 > line)
+  const winsLA = (x, y, sel) => {
+    if (x.important !== y.important) return x.important;
+    const lx = FILE_LAYER.get(x.file) ?? 99, ly = FILE_LAYER.get(y.file) ?? 99;
+    if (lx !== ly) return x.important ? lx < ly : lx > ly;
+    const sx = specificity(sel(x)), sy = specificity(sel(y));
     if (sx !== sy) return sx > sy;
     const fx = FILE_ORDER.get(x.file) ?? 99, fy = FILE_ORDER.get(y.file) ?? 99;
     if (fx !== fy) return fx > fy;
@@ -1077,23 +1100,8 @@ if (simArg) {
         if (!themeOverlap(x, y) || !mediaOverlap(x.media, y.media)) continue;
         if (exclusiveDisjoint(x.origRef.selector, y.origRef.selector)) continue;
         if (x.prop === y.prop && x.value === y.value) continue;
-        const before = (() => {
-          const a = x.origRef, b = y.origRef;
-          if (a.important !== b.important) return a.important;
-          const sa = specificity(a.selector), sb = specificity(b.selector);
-          if (sa !== sb) return sa > sb;
-          const fa = FILE_ORDER.get(a.file) ?? 99, fb = FILE_ORDER.get(b.file) ?? 99;
-          if (fa !== fb) return fa > fb;
-          return a.line > b.line;
-        })();
-        const after = (() => {
-          if (x.important !== y.important) return x.important;
-          const sa = specificity(x.selector), sb = specificity(y.selector);
-          if (sa !== sb) return sa > sb;
-          const fa = FILE_ORDER.get(x.file) ?? 99, fb = FILE_ORDER.get(y.file) ?? 99;
-          if (fa !== fb) return fa > fb;
-          return x.line > y.line;
-        })();
+        const before = winsLA(x.origRef, y.origRef, d => d.selector);
+        const after = winsLA(x, y, d => d.selector);
         if (before !== after) {
           flips.push({ winnerChange: true, key,
             x: `${x.file}:${x.line} ${x.origRef.selector} { ${x.prop}: ${x.value}${x.origRef.important ? ' !important' : ''} }`,
@@ -1494,16 +1502,19 @@ if (process.argv.includes('--diag')) {
       if (!themeOverlap(p, q) || !mediaOverlap(p.media, q.media)) continue;
       if (exclusiveDisjoint(p.selector, q.selector)) continue;
       if (q.prop === p.prop && q.value === p.value) continue;
-      const pWins = naturalWins(p, q);
       if (!q.important) {
-        if (!pWins) reasons.push({
+        if (!naturalWins(p, q)) reasons.push({
           type: 'nat-loss', qFile: q.file, qSel: q.selector, qLine: q.line, qProp: q.prop, qVal: q.value,
           specP: specificity(p.selector), specQ: specificity(q.selector)
         });
       } else if (!physS.has(physKeyOf(q))) {
-        if (pWins) reasons.push({
+        if (cmpImp(p, q)) reasons.push({
           type: 'flip-vs-kept-imp', qFile: q.file, qSel: q.selector, qLine: q.line, qProp: q.prop,
           qCat: catMap.get(q) || '?', qInline: !!inlineMap.get(q)
+        });
+      } else if (cmpImp(p, q) !== cmpNormal(p, q)) {
+        reasons.push({
+          type: 'xlayer-pair', qFile: q.file, qSel: q.selector, qLine: q.line, qProp: q.prop
         });
       }
     }
@@ -1518,7 +1529,8 @@ if (process.argv.includes('--diag')) {
       else if (r.type === 'nat-loss') {
         const rel = r.specQ > (r.specP ?? 0) ? 'spec負け' : '後順負け';
         key = `nat-loss(${rel}) | ${d.file} ← ${r.qFile}`;
-      } else key = `flip-vs-kept-imp(${r.qCat}${r.qInline ? '/inline' : ''}) | ${d.file} ← ${r.qFile}`;
+      } else if (r.type === 'xlayer-pair') key = `xlayer-pair | ${d.file} ↔ ${r.qFile}`;
+      else key = `flip-vs-kept-imp(${r.qCat}${r.qInline ? '/inline' : ''}) | ${d.file} ← ${r.qFile}`;
       clusters[key] = (clusters[key] || 0) + 1;
     }
     if (d.reasons.length === 0) clusters['no-reason (fixpoint 連鎖除外)'] = (clusters['no-reason (fixpoint 連鎖除外)'] || 0) + 1;

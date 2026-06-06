@@ -447,8 +447,10 @@ html.wwm-view-sidebar .wwm-app-body {
     border: 1px solid var(--gold-deep);
     box-shadow: 0 6px 14px var(--overlay-mid);
   }
+  /* background は持たない (Step 5 dead decl 削除 2026-06-06): light theme の bg は
+     light.css .wwm-sb-mini-hero-card の surf-warm gradient が layer 順 (themes > components)
+     で常勝 = ここに書いても dead。 旧値 #f4e8c8 は gradient とほぼ同色 cream で視覚差なし */
   html[data-theme="light"] body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sb-mini-hero-card {
-    background: #f4e8c8;
     border-color: rgba(120,60,20,0.35);
     box-shadow: 0 6px 14px var(--overlay-trace);
   }
@@ -488,8 +490,8 @@ html.wwm-view-sidebar .wwm-app-body {
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-anlz {
     display: flex !important;
-    flex-direction: column !important;
-    flex: 1 1 0 !important;
+    flex-direction: column;
+    flex: 1 1 0;
     min-height: 0;
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-anlz-body {
@@ -500,8 +502,8 @@ html.wwm-view-sidebar .wwm-app-body {
   }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-grid {
     display: flex !important;
-    flex-direction: column !important;
-    flex: 1 1 0 !important;
+    flex-direction: column;
+    flex: 1 1 0;
     min-height: 0;
     grid-template-columns: none;
   }

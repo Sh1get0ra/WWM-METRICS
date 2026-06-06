@@ -1274,8 +1274,8 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
       より後 = order でも勝つ位置。 前方へ動かすな)
    ╚═══════════════════════════════════════════════════════════════════╝ */
 .wwm-diag-modal {
-  border-top-color: var(--vermilion) !important;
-  border-left-color: var(--vermilion) !important;
+  border-top-color: var(--vermilion);
+  border-left-color: var(--vermilion);
 }
 .wwm-diag-modal::before {
   background: radial-gradient(ellipse at top right, var(--vermilion-soft-light), transparent 65%) !important;

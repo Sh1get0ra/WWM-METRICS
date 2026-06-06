@@ -66,10 +66,10 @@ html.wwm-view-sidebar .wwm-sb-label,
 html.wwm-view-sidebar .wwm-sb-charname,
 html.wwm-view-sidebar .wwm-sb-totalmartial,
 html.wwm-view-sidebar .wwm-stat-name,
-html.wwm-view-sidebar .wwm-sb-sub { color: var(--overlay-text-1) !important; }
+html.wwm-view-sidebar .wwm-sb-sub { color: var(--overlay-text-1); }
 html.wwm-view-sidebar .wwm-sb-value,
 html.wwm-view-sidebar .wwm-sb-totalmartial b,
-html.wwm-view-sidebar .wwm-stat-val { color: var(--overlay-text-2) !important; }
+html.wwm-view-sidebar .wwm-stat-val { color: var(--overlay-text-2); }
 html.wwm-view-sidebar .wwm-sb-section-title,
 html.wwm-view-sidebar .wwm-sb-header-value { color: var(--overlay-accent); }
 /* OBS view: rest 背景は overlay透明前提 (濃帯化防止) */

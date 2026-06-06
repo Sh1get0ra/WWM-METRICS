@@ -16,7 +16,7 @@ html[data-theme="light"] .hero {
 html[data-theme="light"] .wwm-footer-logo { filter: brightness(0) saturate(100%) invert(35%) sepia(20%) saturate(800%) hue-rotate(15deg);  }
 
 html[data-theme="light"] .wwm-sb-tier-badge.tier-S {
-  animation: tier-s-pulse-light-mini 2.2s ease-in-out infinite !important;
+  animation: tier-s-pulse-light-mini 2.2s ease-in-out infinite;
 }
 
 /* S2-d split: safe 組 (lang/preset) と unsafe 組 (icon-btn hover 競合 / hero box-shadow 競合) を分離 */
@@ -556,16 +556,16 @@ html[data-theme="light"] .wwm-opt-btn:hover {  border-color: var(--c-opt-border-
    S2-j split: col / row を分離 (cascade-neutral 隣接 + 同 decl) — row は modals:513/514 真競合で stay、
    col は theme-shadow (light .wwm-cmp-modal-a .wwm-cmp-col/new) で解錠可のため物理 decl を独立化 */
 html[data-theme="light"] .wwm-cmp-col {
-  background: var(--surf-shade) !important;
+  background: var(--surf-shade);
 
 }
 html[data-theme="light"] .wwm-cmp-row {
-  background: var(--surf-shade) !important;
+  background: var(--surf-shade);
   border-color: var(--ink-2);
 }
 html[data-theme="light"] .wwm-share-url,
 html[data-theme="light"] .wwm-bm-code {
-  background: var(--surf-shade) !important;
+  background: var(--surf-shade);
 
 }
 
@@ -649,12 +649,12 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-modal-header::after {
 /* S2-j split: col と current/new は pair が別 token (modals:698 col-border / modals:368 current-border)
    → m-phys uniformity 不可のため物理 decl 分離 (cascade-neutral: 隣接 + 同 decl、 current/new は col 併持で後 rule 勝ち同値) */
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-col {
-  background: var(--hover-mid-2) !important;
+  background: var(--hover-mid-2);
 
 }
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-current,
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-new {
-  background: var(--hover-mid-2) !important;
+  background: var(--hover-mid-2);
 
 }
 
