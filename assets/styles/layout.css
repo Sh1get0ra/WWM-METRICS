@@ -397,7 +397,9 @@ html.wwm-view-sidebar body .wwm-app-body { padding: var(--space-2); }
   .preset-bar::-webkit-scrollbar { height: 4px; }
   .preset-bar::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 2px; }
   .preset-bar { gap: 3px; flex-direction: row; }
-  body.wwm-layout-active .sticky-header > .preset-bar { padding: var(--space-1) var(--space-1); }
+  /* 縦 padding 6px (critique P2 改): bar overflow-y hidden が btn ::after hit 拡張を clip するため、
+     bar 内に hit 余白を確保 — chip 28px + 上下 6px = 実効タップ 40px */
+  body.wwm-layout-active .sticky-header > .preset-bar { padding: var(--space-1-5) var(--space-1); }
   /* ─── Phase 4: hero compact + mobile RESET 内蔵 ─── */
   section.hero.hero-wuxia {
     padding: var(--space-3) var(--space-3-5);

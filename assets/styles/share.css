@@ -229,15 +229,27 @@ html.wwm-shared-build-mode #exportBtn {
   .preset-slot-num { display: none; }
   .preset-name-input { display: none; }
   .preset-btn {
-    /* critique P2 / TODO #14 (2026-06-06): touch target 縦 44px (WCAG 2.5.8 / HIG)。
-       横は自然幅 (~28px) — min-width 44 だと iPhone SE (375px) で bar 横 scroll 発生
-       (兄貴指摘 2026-06-06) → 縦 44 + 横 24+ (AA spacing 要件) で横 scroll 根絶を優先 */
-    min-height: 44px;
-    padding: 1px 6px;
+    /* critique P2 / TODO #14 改 (2026-06-06 兄貴指摘 2 回反映):
+       視覚 = 28×28 正方形 chip (縦長 26×44 は不格好 / 横 44 は SE 横 scroll) —
+       タップ実効領域は ::after の不可視拡張で 縦 44 (下) を確保。 鋭利で寡黙 */
+    min-height: 0;
+    width: 28px;
+    height: 28px;
+    min-width: 0;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 0;  /* 元テキスト 非表示、 ::before でアイコン */
     letter-spacing: 0;
     flex: 0 0 auto;
-    min-width: 0;
+    position: relative;
+  }
+  /* 不可視 hit 拡張: 縦 ±8px = 実効 44px、 横 ±2px (隣接 btn と被らない範囲) */
+  .preset-btn::after {
+    content: '';
+    position: absolute;
+    top: -8px; bottom: -8px; left: -2px; right: -2px;
   }
   .preset-save::before { content: '💾'; font-size: var(--text-md); }
   .preset-load::before { content: '📂'; font-size: var(--text-md); }
@@ -260,12 +272,17 @@ html.wwm-shared-build-mode #exportBtn {
     flex: 0 0 auto;
     flex-direction: row; /* L1365 column 解除 */
   }
-  .preset-btn { padding: 1px 3px; }
-  /* 弱点バッジも横幅節約 (touch target 44px — critique P2) */
+  /* 弱点バッジも横幅節約 — 視覚 32px + ::after hit 拡張で実効 44 (critique P2 改) */
   .wwm-diag-badge {
-    min-height: 44px;
+    min-height: 32px;
     padding: 1px 5px;
     font-size: var(--text-xs);
+    position: relative;
+  }
+  .wwm-diag-badge::after {
+    content: '';
+    position: absolute;
+    top: -6px; bottom: -6px; left: -2px; right: -2px;
   }
   .wwm-diag-badge-text { display: none; }
 }
