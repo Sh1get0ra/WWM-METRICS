@@ -158,6 +158,10 @@
   text-shadow: var(--c-opt-loading-text-shadow);
   animation: wwm-opt-loading-pulse 1.2s ease-in-out infinite;
 }
+/* audit P3 (2026-06-07): reduced-motion 唯一の漏れ — loading は静止表示で十分伝わる */
+@media (prefers-reduced-motion: reduce) {
+  .wwm-opt-loading { animation: none; }
+}
 
 .wwm-opt-empty { padding: var(--space-5); color: var(--paper-mute); font-size: var(--text-12); text-align: center; }
 
@@ -787,10 +791,11 @@ html[lang="en"] .wwm-cmp-title-en {
 .wwm-cmp-modal-a .wwm-cmp-pvp-locked .wwm-cmp-unit,
 .wwm-cmp-modal-a .wwm-cmp-pvp-locked .wwm-cmp-ratio { visibility: hidden; }
 
+/* critique P1 (2026-06-07): vermilion-bright on 朱tint 3.83:1 fail → lang-active token (朱影地金文字) */
 .wwm-mobile-drawer-langs .lang-btn.active {
-  background: linear-gradient(180deg, rgba(232,81,58,0.30), var(--vermilion-bright-trace));
+  background: var(--c-lang-active-bg);
   border-color: var(--vermilion);
-  color: var(--vermilion-bright);
+  color: var(--c-lang-active-fg);
 }
 
 /* S2-g co-locate (B / K-type): light#124 L982 — theme gate 維持で other theme 影響ゼロ。 svg presentation attr 保護 (token unset 不可) */

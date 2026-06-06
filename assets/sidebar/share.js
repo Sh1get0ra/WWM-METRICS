@@ -89,7 +89,11 @@
       } else {
         url = location.origin + location.pathname + '#build=' + b64;
       }
-    } catch (e) { alert('URL 生成失敗: ' + e.message); return; }
+    } catch (e) {
+      console.error('[WWM Share] URL build failed:', e);
+      if (window.showToast) showToast((window.T?.errShareUrlFail) ?? '共有URLの生成に失敗しました', { error: true });
+      return;
+    }
     // OBS URL は 透明度+背景色+文字色+ラベル背景 込みで動的生成
     const buildObsUrl = (opPct, bgHex, t1Hex, t2Hex, acHex, lbgHex) => {
       const bg = (bgHex || '#0a0a0a').replace('#','');

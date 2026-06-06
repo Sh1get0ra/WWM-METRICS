@@ -296,8 +296,7 @@ html[data-theme="light"] {
   --c-opt-sort-btn-fg: #5a4838;
   --c-opt-sort-btn-hover-bg: var(--c-opt-hover-bg);
   --c-opt-sort-btn-hover-fg: var(--brown-1);
-  --c-opt-sort-btn-active-bg: #b8862a;
-  --c-opt-sort-btn-active-fg: var(--c-fg-cream-bright);
+  /* audit P1 (2026-06-07): #b8862a + cream 3.06:1 fail → tokens.css の theme constant (金地墨字) に委譲、 override 撤去 */
   --c-opt-btn-apply-border: rgba(45,90,58,0.4);
   --c-opt-btn-apply-hover-border: rgba(45,90,58,0.7);
   --c-rank-row-border-left: 1px solid rgba(120,60,20,0.36); /* critique P3: side-stripe 3px→1px */
@@ -409,9 +408,9 @@ html[data-theme="light"] {
   --c-migration-btn-bg: var(--c-migration-accent);
   --c-sb-label-opacity: 0.95;
   --c-anlz-header-after-bg: linear-gradient(180deg, transparent 18%, var(--c-ink-line-faint) 19%, var(--c-ink-line-faint) 20%, transparent 21%), linear-gradient(180deg, transparent 60%, rgba(0,0,0,.025) 61%, transparent 62%);
-  --c-anlz-bamboo-opacity: 0.28;
+  --c-anlz-bamboo-opacity: 0.12; /* critique P2 (2026-06-07): 0.28 = 古紙上で泥灰の塊 → 墨絵の淡さへ */
   --c-anlz-body-after-bg: repeating-linear-gradient(45deg, transparent 0 24px, rgba(120,60,20,.04) 24px 25px), repeating-linear-gradient(-45deg, transparent 0 24px, rgba(184,134,11,.04) 24px 25px);
-  --c-anlz-bgicon-opacity: 0.22;
+  --c-anlz-bgicon-opacity: 0.09; /* critique P2 (2026-06-07): 0.22 = 古紙上で黒 silhouette が泥灰の塊 → 墨絵の淡さへ */
   --c-note-cl-featured-bg: linear-gradient(90deg, var(--vermilion-bright-trace), var(--c-vermilion-fade-end));
   --c-score-update-banner-bg: var(--vermilion-tint);
   --c-score-update-banner-fg: var(--vermilion-deep);
@@ -459,16 +458,18 @@ html[data-theme="light"] .lang-btn { color: var(--paper-dim); }
 
 html[data-theme="light"] .lang-btn:hover { color: var(--paper); }
 
-html[data-theme="light"] .lang-btn.active { color: var(--vermilion); background: var(--vermilion-tint); }
+/* critique P1 (2026-06-07): vermilion on vermilion-tint 2.09:1 fail → theme constant token (朱影地金文字 6.2:1)。
+   light:458 generic .lang-btn が layer 勝ちするため rule 削除不可 — token 置換で維持 */
+html[data-theme="light"] .lang-btn.active { color: var(--c-lang-active-fg); background: var(--c-lang-active-bg); }
 
-/* mobile drawer の active lang-btn: drawer は theme 不問 dark デザイン (components.css) のため
-   vermilion-bright を維持。 上の汎用 .lang-btn (paper-dim) に layer 移行後負けないよう明記
-   (2026-06-05 @layer Step 1 複製) */
-html[data-theme="light"] .wwm-mobile-drawer-langs .lang-btn.active { color: var(--vermilion-bright); }
+/* mobile drawer の active lang-btn: drawer は theme 不問 dark デザイン。
+   上の汎用 .lang-btn (paper-dim) に layer 移行後負けないよう明記 (2026-06-05 @layer Step 1 複製)
+   critique P1 (2026-06-07): vermilion-bright 3.94 fail → lang-active token */
+html[data-theme="light"] .wwm-mobile-drawer-langs .lang-btn.active { color: var(--c-lang-active-fg); }
 
 html[data-theme="light"] .icon-btn { color: var(--paper-dim); }
 
-html[data-theme="light"] .icon-btn:hover { color: var(--vermilion); border-color: var(--vermilion); background: var(--vermilion-faint); }
+html[data-theme="light"] .icon-btn:hover { color: var(--vermilion-deep); border-color: var(--vermilion); background: var(--vermilion-faint); } /* audit P2 (2026-06-07): vermilion 2.03 → deep ~9:1 */
 
 html[data-theme="light"] .icon-btn.export-btn { color: var(--vermilion);  }
 

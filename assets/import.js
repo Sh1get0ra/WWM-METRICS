@@ -920,7 +920,11 @@ function applyImport(data, importedAt, state) {
           window.WWMSidebar.opt.render(data, params).catch(e => console.error('[WWM] opt failed:', e));
         }));
       }
-    }).catch(e => console.error('[WWM] stats build failed:', e));
+    }).catch(e => {
+      console.error('[WWM] stats build failed:', e);
+      // audit P2 (2026-06-07): silent failure → user 可視化 (import 完了に見えて panel 空のままの謎を解消)
+      if (window.showToast) showToast((window.T?.errStatsBuild) ?? 'データの計算に失敗しました。再インポートをお試しください', { error: true });
+    });
   }
 }
 
@@ -955,7 +959,8 @@ function handleHashOnLoad() {
     _relayOrShow(data);
   } catch(e) {
     console.error('[WWM Import] hash decode failed:', e);
-    if (window.showToast) showToast('インポートデータ解析失敗: ' + e.message);
+    // audit P2 (2026-06-07): raw e.message (英語例外) → i18n 文言 + error 寿命。 詳細は console に残置
+    if (window.showToast) showToast((window.T?.errImportParse) ?? 'インポートデータの解析に失敗しました。公式ツールからもう一度実行してください', { error: true });
   }
 }
 
@@ -1059,7 +1064,10 @@ function _autoLoadLastImport() {
         if (window.WWMSidebar?.ranking) window.WWMSidebar.ranking.render(stored.data, params);
         if (window.WWMSidebar?.opt) window.WWMSidebar.opt.render(stored.data, params);
         if (window.WWMSidebar?.hero) window.WWMSidebar.hero.update(params);
-      }).catch(e => console.error('[WWM] auto-load failed:', e));
+      }).catch(e => {
+        console.error('[WWM] auto-load failed:', e);
+        if (window.showToast) showToast((window.T?.errStatsBuild) ?? 'データの計算に失敗しました。再インポートをお試しください', { error: true });
+      });
     }
     // baseline はlocalStorage値で固定 (page load後の自動再計算 撤回 = drift源排除)
   }

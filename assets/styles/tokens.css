@@ -301,12 +301,17 @@
   --c-anlz-title-fg: #f5e8c0;
   --c-anlz-title-text-shadow: 0 0 0.5px rgba(245,232,192,.85), 0 0 1.5px rgba(232,217,184,.55), 0 0 3px rgba(232,217,184,.35), 0.6px 0 1.2px rgba(232,217,184,.3), -0.6px 0 1.2px rgba(232,217,184,.25), 0 0.5px 1.5px rgba(232,217,184,.22);
 
+  /* ─── audit/critique 2026-06-07: state contrast tokens (両 theme constant) ─── */
+  --c-on-vermilion: #fff;            /* 朱地上の text — white 5.08:1 (gold/ink は朱地で AA 不能) */
+  --c-lang-active-bg: #8a1f17;       /* 言語 active = 朱影地金文字 (SS badge 語彙)。 literal = theme constant */
+  --c-lang-active-fg: #f0d28a;       /* 6.2:1 on vermilion-deep */
+
   /* ─── @layer Step 2-d r2: theme-swap tokens (dark default) ─── */
   --c-preset-slot-num-fg: var(--gold);
   --c-preset-save-fg: var(--gold);
   --c-preset-save-hover-fg: var(--bg-0);
   --c-preset-load-hover-fg: var(--bg-0);
-  --c-preset-del-hover-fg: var(--bg-0);
+  --c-preset-del-hover-fg: var(--c-on-vermilion); /* audit P2 (2026-06-07): bg-0 on vermilion 3.98 → white 5.08 */
   --c-hb-pct-phys-fg: var(--vermilion-bright-glow);
   --c-hb-pct-elem-fg: rgba(168,212,180,0.6);
   --c-footer-strong-fg: var(--gold);
@@ -329,9 +334,11 @@
   --c-tier-chip-c-border: rgba(139,129,112,0.26);
   --c-opt-sort-btn-fg: var(--paper-mute);
   --c-opt-sort-btn-hover-bg: var(--accent-faint);
-  --c-opt-sort-btn-hover-fg: var(--paper);
-  --c-opt-sort-btn-active-bg: var(--gold-deep);
-  --c-opt-sort-btn-active-fg: var(--paper);
+  --c-opt-sort-btn-hover-fg: var(--gold-bright); /* audit P1 (2026-06-07): paper → gold-bright (hover contrast 3.5→AA) */
+  /* audit P1 (2026-06-07): persistent sort state が 2.2-3.8:1 — 金地墨字 (button-primary 語彙) で 11:1 へ。
+     literal 固定 = 両 theme constant (--gold-bright は light で暗金 swap されるため var 参照不可) */
+  --c-opt-sort-btn-active-bg: #f0d28a;
+  --c-opt-sort-btn-active-fg: #2a1810;
   --c-opt-btn-apply-border: var(--jade-bright-mid);
   --c-opt-btn-apply-hover-border: var(--jade-bright);
   --c-rank-row-border-left: 1px solid rgba(212,175,55,0.30); /* critique P3: side-stripe 3px→1px (禁則解消、 不透明度で存在感補償) */

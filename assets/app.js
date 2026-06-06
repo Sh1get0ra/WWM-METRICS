@@ -60,11 +60,11 @@ function setLang(lang) {
     b.classList.remove('active');
     b.setAttribute('aria-pressed', 'false');
   });
-  const activeBtn = document.querySelector('.lang-btn[data-lang="' + lang + '"]');
-  if (activeBtn) {
-    activeBtn.classList.add('active');
-    activeBtn.setAttribute('aria-pressed', 'true');
-  }
+  // critique P1 (2026-06-07): querySelector 単数 → 全 surface (topbar 2 group + mobile drawer) に active 反映
+  document.querySelectorAll('.lang-btn[data-lang="' + lang + '"]').forEach(b => {
+    b.classList.add('active');
+    b.setAttribute('aria-pressed', 'true');
+  });
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
@@ -82,6 +82,11 @@ function setLang(lang) {
   document.querySelectorAll('[data-i18n-title]').forEach(el => {
     const k = el.getAttribute('data-i18n-title');
     if (T[k] !== undefined) el.setAttribute('title', T[k]);
+  });
+  // aria-label i18n: data-i18n-aria="<key>" (audit P2 2026-06-07: acc name 多言語化)
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    const k = el.getAttribute('data-i18n-aria');
+    if (T[k] !== undefined) el.setAttribute('aria-label', T[k]);
   });
   // 移転バナー: 言語切替毎に多言語msg再適用 (旧URL検出時のみ DOM 表示)
   if (typeof _initMigrationBanner === 'function') _initMigrationBanner();
@@ -311,12 +316,15 @@ function initTheme() {
 
 // ── トースト ──────────────────────────────────────────────────────
 let _toastTimer = null;
-function showToast(msg) {
+function showToast(msg, opts) {
   const el = document.getElementById('toast');
+  const isError = !!(opts && opts.error);
   el.textContent = msg;
+  el.classList.toggle('toast-error', isError);
   el.classList.add('show');
   clearTimeout(_toastTimer);
-  _toastTimer = setTimeout(() => el.classList.remove('show'), 2400);
+  // audit P2 (2026-06-07): error は成功 (2.4s) と同寿命では読み切れない → 7s
+  _toastTimer = setTimeout(() => el.classList.remove('show'), isError ? 7000 : 2400);
 }
 
 // ── プリセット ────────────────────────────────────────────────────
@@ -330,6 +338,8 @@ function renderPresetSlots() {
     const loadBtn  = document.getElementById('presetLoadBtn' + i);
     const delBtn   = document.getElementById('presetDelBtn' + i);
     const p = presets[i];
+    // audit P2 (2026-06-07): placeholder ≠ acc name — aria-label を常時付与 (i18n 追従)
+    nameInp.setAttribute('aria-label', T.presetNamePlaceholder.replace('{n}', i + 1));
     if (p) {
       slot.classList.add('has-data');
       nameInp.value = p.name;

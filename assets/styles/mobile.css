@@ -83,6 +83,13 @@
   border-radius: 3px;
   width: 36px; height: 36px;
   color: var(--paper); font-size: var(--text-20); cursor: pointer;
+  position: relative;
+}
+/* audit P3 (2026-06-07): 不可視 hit 拡張で実効 44px (preset chip と同手法) */
+.wwm-mobile-drawer-close::after {
+  content: '';
+  position: absolute;
+  top: -4px; bottom: -4px; left: -4px; right: -4px;
 }
 
 .wwm-mobile-drawer-body {

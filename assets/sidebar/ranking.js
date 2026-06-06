@@ -124,7 +124,7 @@
         <div class="wwm-eff-row" data-eff-key="${t.key}">
           <span class="wwm-eff-label">${meta.lbl}</span>
           <span class="wwm-eff-input-wrap">
-            <input class="wwm-eff-input" type="number" step="${meta.step}" value="${dispVal}" data-key="${t.key}" data-pct="${meta.pct ? '1' : '0'}"${t.statKey ? ` data-statkey="${t.statKey}"` : ''}>${meta.pct ? '<span class="wwm-eff-pct">%</span>' : ''}
+            <input class="wwm-eff-input" type="number" step="${meta.step}" value="${dispVal}" aria-label="${meta.lbl}" data-key="${t.key}" data-pct="${meta.pct ? '1' : '0'}"${t.statKey ? ` data-statkey="${t.statKey}"` : ''}>${meta.pct ? '<span class="wwm-eff-pct">%</span>' : ''}
           </span>
           <span class="wwm-eff-delta" data-delta-for="${t.key}">+${(r0?.delta || 0).toFixed(1)}</span>
         </div>

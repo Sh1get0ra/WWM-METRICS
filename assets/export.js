@@ -67,7 +67,7 @@ function exportImage() {
   showToast('🚧 工事中 (ブラッシュアップ中)。 しばらくお待ちください。');
   return;
   if (typeof html2canvas === 'undefined') {
-    showToast('html2canvas not loaded (needs online)'); return;
+    showToast((window.T?.errExportOffline) ?? '画像書き出しにはオンライン接続が必要です', { error: true }); return;
   }
   const btn = document.getElementById('exportBtn');
   const origText = btn.innerHTML;
@@ -366,7 +366,7 @@ function exportImage() {
         card.style.cssText = 'display:none;';
         btn.disabled = false; btn.innerHTML = origText;
         console.error('Export error:', err);
-        showToast('Export 失敗: ' + err.message);
+        showToast((window.T?.errExportFail) ?? '画像書き出しに失敗しました', { error: true });
       });
     }, 200);
   });

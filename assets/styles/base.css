@@ -217,11 +217,12 @@ html[lang="ko"] .top-controls-2row .icon-btn {
   transition: color 0.15s, background 0.15s;
 }
 .lang-btn:hover { color: var(--paper-2); }
-/* critique P2 / TODO #24: active 視認性強化 — 金下線 (inset shadow = layout 不変) + 濃度 up */
+/* critique P1 (2026-06-07): 旧 gold-bright on vermilion-mid ≈ 3.4-3.7:1 fail →
+   朱影地金文字 (SS badge 語彙、 6.2:1)。 token = theme constant で light 側 override 不要 */
 .lang-btn.active {
-  color: var(--gold-bright);
-  background: var(--vermilion-mid);
-  box-shadow: inset 0 -2px 0 var(--gold-bright);
+  color: var(--c-lang-active-fg);
+  background: var(--c-lang-active-bg);
+  box-shadow: inset 0 -2px 0 var(--c-lang-active-fg);
 }
 
 /* theme toggle: ☀/☾ 文字 glyph → SVG (font 依存の字形崩れ根治、 critique P2)。
@@ -270,7 +271,7 @@ a.icon-btn { text-decoration: none; }
   box-shadow: 0 0 16px var(--gold-glow);
 }
 .icon-btn.export-btn:hover {
-  background: var(--vermilion); color: var(--bg-0); border-color: var(--vermilion);
+  background: var(--vermilion); color: var(--c-on-vermilion); border-color: var(--vermilion); /* audit P2: bg-0 3.98 → white 5.08 */
   box-shadow: 0 0 16px var(--vermilion-glow);
 }
 
@@ -334,6 +335,12 @@ footer strong { color: var(--c-footer-strong-fg); }
   border-radius: 1px;
 }
 #toast.show { opacity: 1; transform: translateY(0); }
+/* audit P2 (2026-06-07): error toast 視覚区別 — 朱枠 (三彩分業: 朱 = 警告)。 寿命 7s は app.js showToast 側 */
+#toast.toast-error {
+  border-color: var(--vermilion); border-left-color: var(--vermilion-bright);
+  box-shadow: 0 8px 32px var(--overlay-heavy), 0 0 24px var(--vermilion-glow);
+  white-space: normal; max-width: min(420px, 80vw);
+}
 
 #export-card { display: none; position: fixed; top: -9999px; left: -9999px; }
 
