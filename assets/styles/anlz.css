@@ -1,0 +1,815 @@
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     anlz.css — ANALYSIS grid / tabs / opt / rank / diagnostics / anlz body+font
+     @layer Step 4 (2026-06-06): styles/components.css を per-component 分割。
+     cascade 同値性は component-split-audit.cjs で機械証明 (同 layer 内 順序保存)。
+     file 読込順 = index.html link 順 = scripts/css-files.cjs (単一真実) — 勝手に入替えるな
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+@layer components {
+
+/* Analysis grid (Tier ladder + Affix ranking) */
+.wwm-analysis-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: var(--space-2-5);
+}
+
+.wwm-analysis-card {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  background:
+    radial-gradient(ellipse at top right, var(--gold-bright-faint), transparent 55%),
+    linear-gradient(180deg, var(--surf-1), var(--surf-2));
+  border: 1px solid var(--ink-2);
+  border-top: 1px solid var(--gold-deep);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 0 2px 2px;
+  padding: var(--space-3-5) var(--space-4) var(--space-3);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow:
+    inset 0 1px 0 var(--gold-bright-faint),
+    0 1px 2px var(--overlay-soft);
+}
+
+.wwm-analysis-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 80px; height: 80px;
+  background: radial-gradient(ellipse at top right, rgba(240,210,138,0.18), transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wwm-analysis-card::after {
+  content: '';
+  position: absolute;
+  top: 6px; right: 6px;
+  width: 14px; height: 14px;
+  border-top: 1px solid var(--gold-deep);
+  border-right: 1px solid var(--gold-deep);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.wwm-analysis-card > * { position: relative; z-index: 1; }
+
+/* anlz tab 3 card 共通 (旧 ID 三連 selector — .wwm-analysis-card は常に
+   #wwmAffixRanking/#wwmOptimization/#wwmHistory 配下 = 等価。
+   spec 降格で responsive override の !important 不要化、 simulate 検証済) */
+.wwm-analysis-card {
+  height: 570px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+#wwmHistory .wwm-analysis-card > div:last-child {
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+#wwmOptimization .wwm-opt-body {
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+#wwmOptimization .wwm-opt-body::-webkit-scrollbar { width: 5px; }
+
+#wwmOptimization .wwm-opt-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 2px; }
+
+/* Analysis tab nav (洗練版: gold underline + glow active) */
+.wwm-analysis-tabs {
+  display: flex;
+  margin-top: var(--space-2-5);
+  border-bottom: 1px solid var(--ink-2);
+  position: relative;
+  gap: 0;
+}
+
+.wwm-analysis-tab {
+  position: relative;
+  flex: 0 0 auto;
+  padding: 12px 28px 10px;
+  background: transparent;
+  border: none;
+  color: var(--paper-mute);
+  font-family: var(--f-display, var(--f-mono));
+  font-size: var(--text-md); font-weight: var(--fw-bold);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+  transition: color 0.2s ease;
+}
+
+.wwm-analysis-tab + .wwm-analysis-tab::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 22%; bottom: 22%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--ink-2), transparent);
+}
+
+.wwm-analysis-tab::after {
+  content: '';
+  position: absolute;
+  left: 50%; right: 50%; bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold-bright) 30%, var(--gold-bright) 70%, transparent 100%);
+  transition: left 0.25s ease, right 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: none;
+}
+
+.wwm-analysis-tab:hover {
+  color: var(--gold-bright);
+}
+
+.wwm-analysis-tab:hover::after {
+  left: 30%; right: 30%;
+}
+
+.wwm-analysis-tab.active {
+  color: var(--gold-bright);
+  text-shadow: 0 0 14px var(--gold-bright-mid);
+}
+
+.wwm-analysis-tab.active::after {
+  left: 8%; right: 8%;
+  box-shadow: 0 0 12px rgba(240,210,138,0.6), 0 0 4px rgba(240,210,138,0.8);
+}
+
+.wwm-opt-loading {
+  padding: var(--space-5);
+  color: var(--c-opt-loading-fg);
+  font-size: var(--text-18);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-shadow: var(--c-opt-loading-text-shadow);
+  animation: wwm-opt-loading-pulse 1.2s ease-in-out infinite;
+}
+
+.wwm-opt-empty { padding: var(--space-5); color: var(--paper-mute); font-size: var(--text-12); text-align: center; }
+
+.wwm-opt-summary {
+  font-family: var(--f-latin); font-size: var(--text-18); font-weight: var(--fw-bold);
+  color: var(--gold-bright);
+  padding: var(--space-1-5) var(--space-2) var(--space-2-5);
+  border-bottom: 1px dashed var(--ink-2);
+  margin-bottom: var(--space-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.wwm-opt-totaldelta {
+  color: var(--jade-bright); margin-left: var(--space-2);
+}
+
+.wwm-opt-controls {
+  margin-left: auto; display: flex; align-items: center; gap: var(--space-2);
+}
+
+.wwm-opt-ratio-label {
+  font-size: var(--text-sm); color: var(--paper-mute);
+  display: flex; align-items: center; gap: 5px;
+}
+
+.wwm-opt-ratio-label input[type=range] {
+  width: 80px; accent-color: var(--gold);
+}
+
+#wwmOptRatioVal {
+  font-family: var(--f-mono); font-weight: var(--fw-bold);
+  color: var(--gold-bright); min-width: 32px;
+}
+
+.wwm-opt-btn {
+  background: transparent; border: 1px solid var(--ink-3);
+  color: var(--c-opt-btn-fg); padding: 3px 10px;
+  border-radius: 2px; cursor: pointer;
+  font-family: var(--f-mono);
+  font-size: var(--text-sm); font-weight: var(--fw-bold);
+  letter-spacing: 0.08em;
+  white-space: nowrap; /* ヘッダ高さズレ防止: en「Apply Selected」 等で2行wrap 起きないように */
+}
+
+.wwm-opt-btn:hover {
+  background: var(--c-opt-btn-hover-bg); border-color: var(--gold);
+}
+
+.wwm-opt-progress {
+  padding: var(--space-1-5) var(--space-2); color: var(--paper-mute);
+  font-size: var(--text-sm); font-family: var(--f-mono);
+  text-align: center;
+}
+
+.wwm-opt-progress:empty { display: none; }
+
+.wwm-opt-body {
+  display: flex; flex-direction: column; gap: 3px;
+}
+
+.wwm-opt-row {
+  display: grid; grid-template-columns: 24px 90px 1fr max-content max-content max-content;
+  gap: var(--space-2-5); align-items: center;
+  padding: 7px 10px;
+  font-size: var(--text-12);
+  border-bottom: var(--c-rank-row-border-bot);
+  border-left: var(--c-rank-row-border-left);
+  transition: background .15s, border-color .15s;
+}
+
+.wwm-opt-row:nth-child(odd) { background: var(--c-rank-row-odd-bg); }
+
+.wwm-opt-row:hover {
+  background: var(--c-rank-row-hover-bg);
+  border-left-color: var(--c-rank-row-hover-border-left);
+}
+
+.wwm-opt-tierup {
+  font-family: var(--f-latin); font-weight: var(--fw-bold); font-size: var(--text-sm);
+  color: var(--gold-bright);
+  background: rgba(212,175,55,0.12);
+  padding: 1px 6px; border-radius: 2px;
+  letter-spacing: 0.05em;
+}
+
+/* .wwm-opt-select 削除済 (2026-06-01): slot filter selectbox 廃止 (デフォルト全部位以外の用途なし) */
+/* sort toggle (改善順/部位順) — native select の popup styling不可問題回避のため button group化 */
+.wwm-opt-sort-group {
+  display: inline-flex;
+  gap: 0;
+  border: 1px solid var(--ink-2);
+  border-radius: 3px;
+  overflow: hidden;
+  border-color: var(--c-opt-sort-group-border);
+}
+
+.wwm-opt-sort-btn {
+  background: transparent;
+  color: var(--c-opt-sort-btn-fg);
+  border: none;
+  padding: var(--space-half) var(--space-2);
+  font-family: var(--f-mono);
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+
+.wwm-opt-sort-btn:hover { background: var(--c-opt-sort-btn-hover-bg); color: var(--c-opt-sort-btn-hover-fg); }
+
+.wwm-opt-sort-btn.active {
+  background: var(--c-opt-sort-btn-active-bg);
+  color: var(--c-opt-sort-btn-active-fg);
+  font-weight: var(--fw-bold);
+}
+
+.wwm-opt-sort-btn + .wwm-opt-sort-btn { border-left: 1px solid var(--ink-2); border-left-color: var(--c-opt-sort-btn-border-left); }
+
+.wwm-opt-check-wrap {
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer; padding: var(--space-half) var(--space-1-5);
+}
+
+.wwm-opt-check {
+  width: 16px; height: 16px;
+  cursor: pointer;
+  accent-color: var(--c-fg-accent);
+  margin: 0;
+}
+
+/* 計算中: ヘッダ操作 disable 視覚化 */
+.wwm-opt-busy { opacity: 0.4; cursor: wait; pointer-events: none; }
+
+.wwm-opt-btn-apply { color: var(--jade-bright); border-color: var(--c-opt-btn-apply-border); }
+
+.wwm-opt-btn-apply:hover { background: var(--c-opt-btn-apply-hover-bg); border-color: var(--c-opt-btn-apply-hover-border); }
+
+.wwm-opt-pos { font-family: var(--f-latin); font-weight: var(--fw-extra); color: var(--gold); text-align: center; }
+
+.wwm-opt-slot { color: var(--paper-2); font-size: var(--text-12); }
+
+.wwm-opt-change { color: var(--paper-2); }
+
+.wwm-opt-from { color: var(--paper-mute); text-decoration: line-through; opacity: 0.7; }
+
+.wwm-opt-to { color: var(--gold-bright); font-weight: var(--fw-semibold); }
+
+.wwm-opt-delta {
+  font-family: var(--f-latin); font-weight: var(--fw-extra);
+  color: var(--jade-bright); font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.wwm-rank-body {
+  display: flex; flex-direction: column;
+}
+
+.wwm-rank-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.wwm-rank-grid > .wwm-modal-bg-icon { grid-column: 1 / -1; }
+
+.wwm-rank-col, .wwm-eff-col { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+
+.wwm-eff-body {
+  display: flex; flex-direction: column;
+  gap: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-deep) transparent;
+  scrollbar-gutter: stable;
+  max-height: 100%;
+}
+
+.wwm-eff-body::-webkit-scrollbar { width: 6px; }
+
+.wwm-eff-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
+
+.wwm-eff-row {
+  display: grid;
+  grid-template-columns: 1fr 90px 70px;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 7px 10px;
+  font-size: var(--text-12);
+  border-bottom: 1px solid var(--gold-bright-tint);
+  border-left: 3px solid transparent;
+  transition: background .15s, border-color .15s;
+}
+
+.wwm-eff-row:nth-child(odd) { background: var(--c-eff-row-odd-bg); }
+
+.wwm-eff-row:hover {
+  background: var(--c-eff-row-hover-bg);
+  border-left-color: var(--gold-bright);
+}
+
+.wwm-eff-label { color: var(--paper); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.wwm-eff-input-wrap {
+  display: grid;
+  grid-template-columns: 68px 14px;  /* input | % (% 無くても列は確保→揃う) */
+  align-items: center;
+  gap: 2px;
+  justify-self: end;
+  padding-right: var(--space-half);
+}
+
+.wwm-eff-input {
+  width: 100%;
+  padding: 3px 6px;
+  background: var(--c-eff-input-bg);
+  border: 1px solid var(--gold-deep);
+  color: var(--c-eff-input-fg);
+  font-family: var(--f-mono);
+  font-size: var(--text-12);
+  text-align: right;
+  border-radius: 3px;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+.wwm-eff-input:hover { border-color: var(--gold); }
+
+.wwm-eff-input:focus {
+  outline: none;
+  border-color: var(--gold-bright);
+  box-shadow: 0 0 0 2px rgba(212,175,55,.18);
+}
+
+.wwm-eff-pct { font-size: var(--text-sm); color: var(--paper-mute); text-align: left; }
+
+.wwm-eff-delta {
+  font-family: var(--f-latin);
+  font-weight: var(--fw-extra);
+  color: var(--jade-bright);
+  text-align: right;
+  letter-spacing: -0.01em;
+}
+
+.wwm-analysis-header {
+  display: flex; align-items: center; gap: var(--space-3-5);
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--ink-2);
+  position: relative;
+}
+
+.wwm-analysis-header::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -1px;
+  width: 40px; height: 1px;
+  background: linear-gradient(90deg, var(--gold-bright), transparent);
+  box-shadow: 0 0 8px var(--gold-bright-mid-2);
+}
+
+.wwm-analysis-card h3 {
+  margin: 0; font-family: var(--f-display, var(--f-latin));
+  font-size: var(--text-14); font-weight: var(--fw-bold);
+  color: var(--gold-bright); letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px var(--gold-bright-soft);
+}
+
+/* Affix ranking */
+.wwm-rank-body { display: flex; flex-direction: column; gap: 3px; overflow-y: auto; max-height: 100%; flex: 1 1 auto; min-height: 0; scrollbar-width: thin; }
+
+.wwm-rank-body::-webkit-scrollbar { width: 6px; }
+
+.wwm-rank-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
+
+.wwm-rank-row {
+  display: grid; grid-template-columns: 18px 1fr max-content;
+  gap: var(--space-2); align-items: center;
+  padding: 7px 10px;
+  font-size: var(--text-12);
+  border-bottom: var(--c-rank-row-border-bot);
+  border-left: var(--c-rank-row-border-left);
+  transition: background .15s, border-color .15s;
+}
+
+.wwm-rank-row:nth-child(odd) { background: var(--c-rank-row-odd-bg); }
+
+.wwm-rank-row:hover {
+  background: var(--c-rank-row-hover-bg);
+  border-left-color: var(--c-rank-row-hover-border-left);
+}
+
+.wwm-rank-label { color: var(--paper); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.wwm-rank-pos {
+  font-family: var(--f-latin); font-weight: var(--fw-extra);
+  color: var(--gold); text-align: center;
+}
+
+.wwm-rank-delta {
+  font-family: var(--f-latin); font-weight: var(--fw-extra);
+  color: var(--jade-bright); font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Diagnostics panel */
+.wwm-diagnostics:empty { display: none; }
+
+.wwm-diagnostics {
+  margin-top: var(--space-3);
+  background: linear-gradient(180deg, var(--surf-1), var(--surf-2));
+  border: 1px solid var(--ink-2);
+  border-left: 3px solid var(--vermilion);
+  border-radius: 2px;
+  padding: var(--space-2-5) var(--space-3-5);
+  position: relative;
+  height: 120px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.wwm-diag-header {
+  display: flex; align-items: center; gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.wwm-diag-rail {
+  font-family: var(--f-display); font-weight: var(--fw-black);
+  font-size: var(--text-md); letter-spacing: 0.25em;
+  color: var(--vermilion-bright);
+  text-shadow: 0 0 10px var(--vermilion-bright-soft-mid);
+}
+
+.wwm-diag-title {
+  margin: 0; font-family: var(--f-latin);
+  font-size: var(--text-14); font-weight: var(--fw-bold);
+  color: var(--gold); letter-spacing: 0.12em;
+}
+
+.wwm-diag-body {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 6px 16px;
+}
+
+.wwm-diag-item {
+  display: flex; align-items: flex-start; gap: var(--space-2);
+  font-size: var(--text-12); line-height: 1.4;
+  padding: var(--space-1) var(--space-1-5);
+  border-radius: 3px;
+}
+
+.wwm-diag-icon { flex-shrink: 0; font-size: var(--text-md); line-height: 1.3; }
+
+.wwm-diag-text { color: var(--paper-2); }
+
+.wwm-diag-warn { background: rgba(232,81,58,0.06); }
+
+.wwm-diag-warn .wwm-diag-icon { color: var(--vermilion-bright); }
+
+.wwm-diag-info { background: var(--gold-trace); }
+
+.wwm-diag-info .wwm-diag-icon { color: var(--gold); }
+
+.wwm-diag-good { background: rgba(168,212,180,0.06); }
+
+.wwm-diag-good .wwm-diag-icon { color: var(--jade-bright); }
+
+.wwm-share-url {
+  width: 100%; min-height: 60px; box-sizing: border-box;
+  font-family: var(--f-mono); font-size: var(--text-sm);
+  background: var(--overlay-soft-mid); color: var(--paper-2);
+  border: 1px solid var(--ink-2); border-radius: 4px;
+  padding: var(--space-2) var(--space-2-5); resize: vertical;
+  word-break: break-all;
+  border-color: var(--c-share-url-border);
+}
+
+/* ============================================================
+   分析パネル (右下) — 案30 (古紙テクスチャ + bamboo SVG)
+   ============================================================ */
+.wwm-anlz {
+  --anlz-header-bg: #0a0806;
+  --anlz-content-bg: #1c1814;
+  --anlz-line: rgba(212,175,55,.32);
+  margin-top: var(--space-4);
+  /* min-width 削除: 親 .wwm-app-body min-width:1010 で一元管理 */
+}
+
+/* ── ヘッダー (古紙黒テクスチャ + bamboo SVG 半透明) ── */
+.wwm-anlz-header {
+  position: relative;
+  background:
+    linear-gradient(rgba(10,8,6,0.85), rgba(10,8,6,0.85)),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/section_bg-66d4d3cb.png") center / cover no-repeat;
+  border: 1px solid var(--anlz-line);
+  padding: 12px 26px;
+  overflow: hidden;
+  box-shadow: var(--c-anlz-shadow);
+}
+
+/* 古紙テクスチャ (SVG turbulence) */
+.wwm-anlz-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.85  0 0 0 0 0.6  0 0 0 0.22 0'/></filter><rect width='220' height='220' filter='url(%23f)'/></svg>");
+  opacity: 0.55;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* 微かな筆跡 */
+.wwm-anlz-header::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--c-anlz-header-after-bg);
+  pointer-events: none;
+}
+
+/* bamboo SVG (game-icons.net delapouite CC-BY 3.0、 半透明背景) */
+.wwm-anlz-bamboo {
+  position: absolute;
+  right: -45px; top: -55px;
+  width: 280px; height: 280px;
+  opacity: var(--c-anlz-bamboo-opacity);
+  pointer-events: none;
+  z-index: 0;
+  transform: rotate(35deg);
+  transform-origin: center;
+}
+
+.wwm-anlz-bamboo svg { width: 100%; height: 100%; display: block; }
+
+.wwm-anlz-header-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.wwm-anlz-title-block { display: flex; align-items: baseline; gap: 14px; flex-shrink: 0; }
+
+.wwm-anlz-title {
+  font-family: 'Ma Shan Zheng', 'Noto Serif JP', serif;
+  font-size: 48px;
+  color: var(--c-anlz-title-fg);
+  letter-spacing: 0.05em;
+  margin: 0;
+  line-height: 1;
+  font-weight: 900;
+  /* 墨が紙に滲んだリアル感 (光らせず、 同色で段階的に近距離まで広がる + 左右微オフセット) */
+  text-shadow: var(--c-anlz-title-text-shadow);
+}
+
+.wwm-anlz-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: var(--text-md);
+  letter-spacing: 0.4em;
+  color: var(--gold-deep);
+  opacity: 0.75;
+  line-height: 1;
+}
+
+/* タブ列 (右側) — 既存 wwm-analysis-tab を案30 風に上書き */
+#wwmAnalysisTabs.wwm-anlz-tabs {
+  display: flex !important;
+  gap: 18px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+#wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
+  padding: 6px 4px 9px;
+  background: transparent;
+  border: none;
+  color: var(--c-anlz-tab-fg);
+  font-family: 'Ma Shan Zheng', 'Noto Serif JP', serif;
+  font-size: var(--text-15);
+  letter-spacing: 0.18em;
+  cursor: pointer;
+  position: relative;
+  opacity: 0.65;
+  transition: opacity .15s;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab:hover { opacity: 1; }
+
+#wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab.active {
+  color: var(--c-anlz-tab-active-fg);
+  opacity: 1;
+  font-weight: 900;
+}
+
+html[lang="en"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ja: Ma Shan Zheng は日本漢字非対応 → Noto Serif JP */
+html[lang="ja"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
+  font-family: 'Noto Serif JP', serif;
+}
+
+/* ko: Noto Serif KR (fallback Noto Serif JP) */
+html[lang="ko"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
+  font-family: 'Noto Serif KR', 'Noto Serif JP', serif;
+}
+
+/* en時: modal の主タイトル / 各パネルの主タイトル を Cinzel に統一 */
+html[lang="en"] .wwm-modal-header h2,
+html[lang="en"] .wwm-modal-header h2 *,
+html[lang="en"] .wwm-cmp-title-ja,
+html[lang="en"] .wwm-cmp-title-en {
+  font-family: 'Cinzel', serif !important;
+  letter-spacing: 0.15em !important;
+}
+
+#wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab.active::after {
+  content: '';
+  position: absolute;
+  left: -4px; right: -4px; bottom: -2px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c89a2e 50%, transparent);
+  box-shadow: 0 0 6px rgba(212,175,55,.6);
+}
+
+/* ── ギャップ ── */
+.wwm-anlz-gap { height: 14px; }
+
+/* ── 本文 (異なるテクスチャ: 革風 暗茶) ── */
+.wwm-anlz-body {
+  position: relative;
+  background: var(--anlz-content-bg);
+  border: 1px solid var(--anlz-line);
+  padding: 24px 32px 30px;
+  overflow: hidden;
+  box-shadow: var(--c-anlz-shadow);
+}
+
+.wwm-anlz-body::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='2.2' numOctaves='2' seed='13'/><feColorMatrix values='0 0 0 0 0.4  0 0 0 0 0.3  0 0 0 0 0.2  0 0 0 0.15 0'/></filter><rect width='180' height='180' filter='url(%23g)'/></svg>");
+  opacity: 0.5;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.wwm-anlz-body::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--c-anlz-body-after-bg);
+  pointer-events: none;
+}
+
+.wwm-anlz-body > * { position: relative; z-index: 1; }
+
+/* 内側 .wwm-analysis-card 系の独自枠を除去 (二重枠回避) */
+.wwm-anlz-body .wwm-analysis-card,
+.wwm-anlz-body .wwm-modal-square {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0 !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* 各 inner card の旧 bg-icon は非表示 → .wwm-anlz-body 共通の背景に統一 */
+.wwm-anlz-body .wwm-modal-bg-icon { display: none; }
+
+/* パネル全体の背景アイコン (旧 .wwm-modal-bg-icon と同位置/サイズ/透明度) */
+.wwm-anlz-bgicon {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: calc(100% + 40px) calc(100% + 40px);
+  background-size: 60%;
+  opacity: var(--c-anlz-bgicon-opacity);
+  filter:
+    brightness(0)
+    drop-shadow(0 0 5px rgba(28,24,20,.4))
+    drop-shadow(0 0 14px rgba(18,16,14,.22));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* タブ別 背景画像 (fallback: 装備最適化の anvil) — CSS 基準パスで icons/ 直下 */
+.wwm-anlz-bgicon { background-image: url('../icons/anvil-impact.svg'); }
+
+.wwm-anlz[data-active-tab="opt"]     .wwm-anlz-bgicon { background-image: url('../icons/anvil-impact.svg'); }
+
+.wwm-anlz[data-active-tab="rank"]    .wwm-anlz-bgicon { background-image: url('../icons/scales.svg'); }
+
+.wwm-anlz[data-active-tab="history"] .wwm-anlz-bgicon { background-image: url('../icons/mountain-road.svg'); }
+
+/* 旧 角装飾 (擬似要素) も無効化 */
+.wwm-anlz-body .wwm-analysis-card::before,
+.wwm-anlz-body .wwm-analysis-card::after,
+.wwm-anlz-body .wwm-modal-square::before,
+.wwm-anlz-body .wwm-modal-square::after {
+  display: none;
+}
+
+/* PvP定音ロック行 (武具対照 affix6): val 入力欄を非表示 (編集不可、行レイアウト維持) */
+.wwm-cmp-modal-a .wwm-cmp-pvp-locked .wwm-cmp-val-input,
+.wwm-cmp-modal-a .wwm-cmp-pvp-locked .wwm-cmp-unit,
+.wwm-cmp-modal-a .wwm-cmp-pvp-locked .wwm-cmp-ratio { visibility: hidden; }
+
+.wwm-mobile-drawer-langs .lang-btn.active {
+  background: linear-gradient(180deg, rgba(232,81,58,0.30), var(--vermilion-bright-trace));
+  border-color: var(--vermilion);
+  color: var(--vermilion-bright);
+}
+
+/* S2-g co-locate (B / K-type): light#124 L982 — theme gate 維持で other theme 影響ゼロ。 svg presentation attr 保護 (token unset 不可) */
+html[data-theme="light"] .wwm-anlz-bamboo svg path {
+  fill: var(--brown-5);
+}
+
+/* S2-g co-locate (T): light#125 L984 */
+.wwm-anlz .wwm-anlz-title {
+  color: var(--c-anlz-title-fg-n2);
+  text-shadow: var(--c-anlz-title-text-shadow-n2);
+}
+
+/* S2-g co-locate (T): light#126 L995 */
+.wwm-anlz .wwm-anlz-subtitle {
+  color: var(--c-anlz-subtitle-fg);
+  opacity: var(--c-anlz-subtitle-opacity);
+}
+
+@media (max-width: 900px) {
+  .wwm-rank-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .wwm-diag-body { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  /* mobile時 SVG feTurbulence noise overlay (mix-blend-mode: overlay) 全削除。
+     これが「砂フィルタが装備カード上に被ってる」 視覚効果の正体。 hero/格析/footer の
+     ::before/::after に overlay blend で 隣接カードに 視覚的に被る。 */
+  .hero::after,
+  .hero-wuxia::after,
+  .wwm-anlz-header::before,
+  .wwm-anlz-body::before,
+  .wwm-footer::after {
+    opacity: 0;
+  }
+}
+
+} /* end @layer components */

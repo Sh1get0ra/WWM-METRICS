@@ -1,0 +1,343 @@
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     sidebar.css — SIDEBAR + mini-hero card + sb tier badge
+     @layer Step 4 (2026-06-06): styles/components.css を per-component 分割。
+     cascade 同値性は component-split-audit.cjs で機械証明 (同 layer 内 順序保存)。
+     file 読込順 = index.html link 順 = scripts/css-files.cjs (単一真実) — 勝手に入替えるな
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+@layer components {
+
+/* ── Tier バッジ ──────────────────────────────────────────── */
+.tier-badge:empty { display: none; }
+
+/* sidebar 総合武力 横 tier badge (グロウなしシンプル) — 1.5倍サイズ */
+.wwm-sb-tier-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--f-latin); font-weight: var(--fw-extra); font-size: 16.5px;
+  letter-spacing: 0.05em; padding: 1.5px 9px; margin-left: 9px;
+  border: 1px solid currentColor; border-radius: 2px; line-height: 1;
+  vertical-align: baseline;
+  position: relative; top: -2px; overflow: hidden;
+}
+
+/* 空時もレイアウト確保 (display:none だと初期render時に行高変動するため visibility:hidden で要素は残す) */
+.wwm-sb-tier-badge:empty { visibility: hidden; }
+
+.wwm-sb-tier-badge { min-width: 28px; box-sizing: border-box; }
+
+/* SS/S 拡散glow を sidebar 用に縮小 (box-shadow override) */
+.wwm-sb-tier-badge.tier-SS {
+  box-shadow:
+    0 0 5px var(--vermilion-strong),
+    0 0 10px rgba(240,210,138,0.35),
+    inset 0 1px 0 var(--gold-bright-soft) !important;
+  text-shadow: 0 0 4px rgba(240,210,138,0.6);
+}
+
+.wwm-sb-tier-badge.tier-S {
+  /* box-shadow !important 削除 → base .tier-S の tier-s-pulse keyframe アニメ 継承 (hero badge と同 効果) */
+  text-shadow: 0 0 3px rgba(255,107,80,0.55);
+}
+
+/* light mode mini hero S: 通常 hero と同じglow + さらに強化 (cream bg上で目立たせる) */
+.tier-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--f-latin);
+  font-weight: var(--fw-extra);
+  font-size: clamp(14px, calc(-34.4px + 5.03vw), 30px);
+  letter-spacing: 0.08em;
+  padding: clamp(1px, calc(-8.07px + 0.94vw), 4px) clamp(8px, calc(-28.3px + 3.77vw), 20px);
+  border-radius: 2px;
+  vertical-align: baseline;
+  margin-left: var(--space-2);
+  line-height: 1;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+/* (削除 2026-06-05) .tier-badge.tier-SS padding clamp — 実効対象が
+   #heroBaselineTierBadge (JS 参照ゼロ・永続 hidden の死に要素) のみ。
+   hero badge は .hero-tier 付き 0,4,0 rule で無効化済だった (その rule も同時削除) */
+.tier-badge-compact {
+  font-size: var(--text-sm);
+  padding: 1px 6px;
+  margin-left: 5px;
+  line-height: 1.4;
+}
+
+.tier-badge-compact::before { display: none; }
+
+/* SS — gold shimmer sweep + red pulse glow */
+.tier-SS {
+  color: var(--c-tier-chip-ss-fg);
+  background: var(--c-tier-chip-ss-bg);
+  border-color: var(--c-tier-chip-ss-border);
+  text-shadow: var(--c-tier-chip-ss-text-shadow);
+  box-shadow: var(--c-tier-chip-ss-shadow);
+  animation: tier-ss-glow 2.2s ease-in-out infinite;
+}
+
+.tier-SS::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--c-tier-chip-ss-sheen);
+  background-size: 250% 100%;
+  animation: tier-ss-shimmer 2.8s linear infinite;
+  pointer-events: none;
+}
+
+/* S — vermilion pulse glow (same style as SS, no shimmer) */
+.tier-S {
+  color: var(--c-tier-chip-s-fg);
+  background: var(--c-tier-chip-s-bg);
+  border-color: var(--c-tier-chip-s-border);
+  text-shadow: var(--c-tier-chip-s-text-shadow);
+  box-shadow: var(--c-tier-chip-s-shadow);
+  animation: tier-s-pulse 2.2s ease-in-out infinite;
+}
+
+/* A — jade glow */
+.tier-A {
+  color: var(--jade-bright);
+  background: var(--c-tier-chip-a-bg);
+  border-color: var(--c-tier-chip-a-border);
+  text-shadow: var(--c-tier-chip-a-text-shadow);
+  box-shadow: var(--c-tier-chip-a-shadow);
+}
+
+/* B — bone warm glow */
+.tier-B {
+  color: var(--c-tier-chip-b-fg);
+  background: var(--c-tier-chip-b-bg);
+  border-color: var(--c-tier-chip-b-border);
+  text-shadow: var(--c-tier-chip-b-text-shadow);
+  box-shadow: var(--c-tier-chip-b-shadow);
+}
+
+/* C — dim */
+.tier-C {
+  color: var(--paper-mute);
+  background: var(--c-tier-chip-c-bg);
+  border-color: var(--c-tier-chip-c-border);
+  box-shadow: var(--c-tier-C-shadow);
+  text-shadow: var(--c-tier-C-text-shadow);
+}
+
+/* ── Sidebar (テスト用 fixed) ────────────────────────────────── */
+.wwm-sidebar-test {
+  position: fixed;
+  top: 80px;
+  right: 12px;
+  width: 300px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  background: linear-gradient(180deg, var(--surf-1), var(--surf-2));
+  border: 1px solid var(--ink-2);
+  border-left: 3px solid var(--vermilion);
+  border-radius: 2px;
+  padding: var(--space-3);
+  font-size: var(--text-12);
+  z-index: var(--z-floating);
+  color: var(--paper);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.wwm-sidebar-test::-webkit-scrollbar { display: none; }  /* Chrome/Safari */
+
+.wwm-sidebar-test:empty { display: none; }
+
+/* ── mini-hero header card (案C武侠化、 sticky固定、 枠透明) ────────────── */
+.wwm-sb-mini-hero-card {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background:
+    radial-gradient(ellipse at top right, var(--gold-bright-faint), transparent 55%),
+    linear-gradient(180deg, var(--c-surf-warm-1), var(--c-surf-warm-2));
+  border: 1px solid var(--gold-deep);
+  padding: var(--space-3) var(--space-3-5);
+  margin-bottom: var(--space-2-5);
+  overflow: hidden;
+  /* ヘッダー部分は内部要素 (tier badge ルーレット等) で揺れないよう固定高 */
+  height: 84px;
+  min-height: 84px;
+  max-height: 84px;
+  box-sizing: border-box;
+}
+
+.wwm-sb-mini-hero-card::before,
+.wwm-sb-mini-hero-card::after,
+.wwm-sb-mini-hero-card .wwm-sb-l-bl,
+.wwm-sb-mini-hero-card .wwm-sb-l-br {
+  content: ''; position: absolute;
+  width: 10px; height: 10px;
+  border: 1.5px solid var(--gold-deep);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.wwm-sb-mini-hero-card::before { top: 4px; left: 4px; border-right: none; border-bottom: none; }
+
+.wwm-sb-mini-hero-card::after  { top: 4px; right: 4px; border-left: none; border-bottom: none; }
+
+.wwm-sb-mini-hero-card .wwm-sb-l-bl { bottom: 4px; left: 4px; border-right: none; border-top: none; }
+
+.wwm-sb-mini-hero-card .wwm-sb-l-br { bottom: 4px; right: 4px; border-left: none; border-top: none; }
+
+.wwm-sb-mini-hero-ink {
+  position: absolute; bottom: -15px; left: -20px;
+  width: 200px; height: 60px;
+  background: var(--c-sb-mini-hero-ink-bg);
+  filter: blur(8px);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* light mini-hero: 総合武力/武格指数 の label/値を濃色化 (cream上で gold/muted が低コントラストのため) */
+/* mini-hero card 内の sb-top: sticky/border 解除 */
+.wwm-sb-mini-hero-card .wwm-sb-top {
+  position: relative;
+  top: auto;
+  background: none ;
+  border-bottom: none;
+  margin-bottom: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+/* sections wrapper */
+.wwm-sb-rest {
+  background: var(--c-sb-rest-bg);
+  border: 1px solid var(--ink-1);
+  padding: 10px 18px 12px 12px;
+  display: flex; flex-direction: column; gap: 4px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-deep) transparent;
+  scrollbar-gutter: stable;
+  border-color: var(--c-sb-rest-border);
+}
+
+.wwm-sb-rest::-webkit-scrollbar { width: 6px; }
+
+.wwm-sb-rest::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
+
+/* #wwmSidebar 本体の border を透明 (内側 mini-hero / rest が枠を持つ) */
+#wwmSidebar { border-color: transparent; }
+
+/* サイドパネル + 装備/心法カード 全体 Noto Serif JP に統一 */
+#wwmSidebar,
+#wwmSidebar *,
+#wwmGearGrid,
+#wwmGearGrid *,
+#wwmXinfaGrid,
+#wwmXinfaGrid * {
+  font-family: var(--f-display, 'Noto Serif JP'), serif;
+}
+
+.wwm-sb-top {
+  display: flex; align-items: center; gap: var(--space-2-5);
+  padding: var(--space-2-5) 0 var(--space-2-5);
+  margin-bottom: var(--space-2);
+  border-bottom: 1px solid var(--accent-mid);
+  position: sticky;
+  top: -12px;
+  background: var(--bg-raised);
+  z-index: 5;
+}
+
+.wwm-sb-info {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column;
+  gap: var(--space-half);
+}
+
+.wwm-sb-totalmartial, .wwm-sb-martial {
+  font-size: var(--text-sm);
+  display: flex; align-items: center;
+  line-height: 1.25;
+}
+
+/* 武格指数 row: SSバッジ縮小 + 中央揃え (base) で row を上げ、3行を等間隔に。top:0 で -2px浮き解除 */
+.wwm-sb-martial .wwm-sb-tier-badge { font-size: var(--text-md); padding: 0 var(--space-1-5); top: 0; }
+
+.wwm-sb-totalmartial b, .wwm-sb-martial b { color: var(--accent); font-weight: var(--fw-bold); margin-left: var(--space-1); }
+
+.wwm-sb-section-title {
+  cursor: pointer;
+  user-select: none;
+}
+
+.wwm-sb-section-title:hover { opacity: 0.85; }
+
+.wwm-sb-sec-arrow {
+  display: inline-block;
+  font-size: var(--text-xs);
+  margin-right: var(--space-1);
+  vertical-align: middle;
+  transition: transform 0.15s;
+}
+
+/* ── Tier badge ルーレット (opt実行中 演出、 sidebar + heroパネル 共通) ─────── */
+.wwm-sb-tier-badge.tier-rolling,
+.hero-tier.tier-rolling {
+  background: linear-gradient(180deg, #2a1a0c 0%, #0a0402 100%);
+  color: #f5d970;
+  border: 1px solid var(--accent);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* ルーレット中の幅は静的時と同じ (min-width 既に static 側で 28px、 hero は元から十分) */
+.wwm-sb-tier-badge.tier-rolling,
+.hero-tier.tier-rolling {
+  text-shadow: 0 0 4px #ffd970, 0 0 10px #ff9a30;
+  font-weight: 900;
+  filter: brightness(1.15);
+  animation:
+    wwm-tier-shake 0.08s linear infinite,
+    wwm-tier-rainbow-glow 2.4s linear infinite;
+}
+
+/* S2-g co-locate (T): light#29 L439 */
+.wwm-sb-mini-hero-card .wwm-sb-totalmartial b,
+.wwm-sb-mini-hero-card .wwm-sb-martial b {
+  text-shadow: var(--c-sb-totalmartial--b-text-shadow);
+}
+
+/* S2-g co-locate (B / K-type): light#29 L439 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-totalmartial b,
+html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial b {
+  color: var(--c-text-brown-bright) !important;
+}
+
+/* S2-g co-locate (B / K-type): light#96 L804 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .wwm-sb-tier-badge.tier-A {
+  text-shadow: none !important;
+}
+
+/* S2-g co-locate (B / K-type): light#97 L811 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .wwm-sb-tier-badge.tier-B {
+  text-shadow: none !important;
+}
+
+/* S2-g co-locate (B / K-type): light#98 L818 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .wwm-sb-tier-badge.tier-C {
+  text-shadow: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* ⚠ !important keep 確定 (Batch M): light.css の tier-SS/S animation 復活防止 (a11y)。
+     light.css が cascade 最終 file のため natural では負ける — @layer 移行まで維持 */
+  .tier-SS, .tier-S { animation: none !important; }
+  .tier-SS::before  { animation: none; }
+  .wwm-sb-tier-badge.tier-rolling,
+  .hero-tier.tier-rolling { animation: none; filter: none; }
+}
+
+} /* end @layer components */

@@ -1,5 +1,5 @@
 // WWM-METRICS Service Worker
-const CACHE_NAME = 'wwm-metrics-v11';
+const CACHE_NAME = 'wwm-metrics-v12';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -7,7 +7,14 @@ const CORE_ASSETS = [
   './assets/styles/tokens.css',
   './assets/styles/animations.css',
   './assets/styles/base.css',
-  './assets/styles/components.css',
+  './assets/styles/share.css',
+  './assets/styles/hero.css',
+  './assets/styles/sidebar.css',
+  './assets/styles/layout.css',
+  './assets/styles/gear.css',
+  './assets/styles/xinfa.css',
+  './assets/styles/anlz.css',
+  './assets/styles/mobile.css',
   './assets/styles/modals.css',
   './assets/styles/responsive-globals.css',
   './assets/styles/dark.css',

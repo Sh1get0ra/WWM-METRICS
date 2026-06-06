@@ -21,7 +21,16 @@ const CSS_FILES = [
   { path: 'assets/styles/tokens.css',             layer: 'tokens' },
   { path: 'assets/styles/animations.css',         layer: 'animations' },
   { path: 'assets/styles/base.css',               layer: 'base' },
-  { path: 'assets/styles/components.css',         layer: 'components' },
+  // components layer — @layer Step 4 (2026-06-06) per-component 分割。 link 順 = 同 layer 内 cascade 順:
+  // 順序は component-split-audit.cjs が機械検証した前提 — 入替えは再 audit 必須
+  { path: 'assets/styles/share.css',              layer: 'components' },
+  { path: 'assets/styles/hero.css',               layer: 'components' },
+  { path: 'assets/styles/sidebar.css',            layer: 'components' },
+  { path: 'assets/styles/layout.css',             layer: 'components' },
+  { path: 'assets/styles/gear.css',               layer: 'components' },
+  { path: 'assets/styles/xinfa.css',              layer: 'components' },
+  { path: 'assets/styles/anlz.css',               layer: 'components' },
+  { path: 'assets/styles/mobile.css',             layer: 'components' },
   { path: 'assets/styles/modals.css',             layer: 'modals' },
   { path: 'assets/styles/responsive-globals.css', layer: 'responsive' },
   { path: 'assets/styles/dark.css',               layer: 'dark' },
