@@ -451,7 +451,10 @@
   margin-top: var(--space-1);
 }
 .wwm-cmp-modal-a .wwm-cmp-current .wwm-cmp-title { color: var(--vermilion) ; }
-.wwm-cmp-modal-a .wwm-cmp-new     .wwm-cmp-title { color: var(--jade-bright) !important; }
+/* imp strip (Step 5-d 2026-06-06): h3 の可視部 = ::before seal (独自色) + .wwm-cmp-lv (独自色)、
+   .wwm-cmp-title-text は display:none → この color は可視要素に届かない dead styling。
+   imp は何も守っていなかった relic (light.css #1a8d52 が strip 後勝つが同様に不可視)。 VRT 58/58 で確認済 */
+.wwm-cmp-modal-a .wwm-cmp-new     .wwm-cmp-title { color: var(--jade-bright); }
 .wwm-cmp-modal-a .wwm-cmp-kongfu-header {
   font-family: var(--f-display, 'Noto Serif JP');
   font-weight: 700;
@@ -509,7 +512,7 @@
 }
 .wwm-cmp-modal-a .wwm-cmp-row {
   display: grid;
-  align-items: center !important;
+  align-items: center !important; /* K: JS の row inline align 書込 対抗 — strip するな */
   gap: 6px;
   padding: var(--space-1) var(--space-1-5);
   border: none;
@@ -646,6 +649,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   font-size: var(--text-2xl);
   line-height: 1;
 }
+/* K ×3: export.js clone の inline text-shadow (universal 書込) 対抗 — strip するな (Step 5 確定) */
 .wwm-cmp-modal-a .wwm-cmp-preview-value.pos { color: var(--jade-bright); text-shadow: 0 0 18px rgba(168,212,180,0.6) !important; }
 .wwm-cmp-modal-a .wwm-cmp-preview-value.neg { color: var(--vermilion); text-shadow: 0 0 18px var(--vermilion-bright-glow) !important; }
 .wwm-cmp-modal-a .wwm-cmp-preview-value.zero { color: var(--c-cmp-preview-zero-fg); text-shadow: none !important; }
@@ -756,6 +760,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   color: var(--c-cmp-modal-a-fg);
 }
 /* ボタン: サンプルA 揃え (radius 0、 padding 7px 16px) */
+/* K: export.js clone の inline background (universal 書込) 対抗 — strip するな (Step 5 確定) */
 .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-primary {
   background:
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_confirm-48cfa7e2.png") center / 100% 100% no-repeat,
@@ -780,7 +785,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 /* affix行 共通 */
 .wwm-cmp-modal-a .wwm-cmp-row {
   display: flex;
-  align-items: center !important;
+  align-items: center !important; /* K: JS の row inline align 書込 対抗 — strip するな */
   gap: 8px;
   padding: 5px 6px;
 }
@@ -790,6 +795,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   display: inline-flex; align-items: center; gap: 8px;
 }
 /* 新置列 (編集): select + useful + val-wrap */
+/* K: JS の row inline grid-template-columns 書込 対抗 — strip するな (Step 5 確定) */
 .wwm-cmp-modal-a .wwm-cmp-new .wwm-cmp-row.wwm-cmp-edit-row {
   display: grid;
   grid-template-columns: minmax(78px, 1fr) 20px minmax(92px, 1.15fr) !important;
@@ -804,6 +810,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   font-size: var(--text-sm);
   border-color: var(--c-cmp-modal-a--cmp-stat-select-border);
 }
+/* K ×2: JS の num-input inline width/padding 書込 対抗 — strip するな (Step 5 確定) */
 .wwm-cmp-modal-a .wwm-cmp-val-input {
   width: 100% !important;
   padding: var(--space-half) var(--space-1) !important;
@@ -1278,7 +1285,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   border-left-color: var(--vermilion);
 }
 .wwm-diag-modal::before {
-  background: radial-gradient(ellipse at top right, var(--vermilion-soft-light), transparent 65%) !important;
+  background: radial-gradient(ellipse at top right, var(--vermilion-soft-light), transparent 65%) !important; /* K: export inline background 対抗 */
 }
 .wwm-diag-modal::after {
   border-top-color: var(--vermilion);
@@ -1291,8 +1298,9 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 }
 .wwm-diag-modal .wwm-modal-header h2 {
   color: var(--vermilion-bright);
-  text-shadow: 0 0 10px var(--vermilion-mid-strong) !important;
+  text-shadow: 0 0 10px var(--vermilion-mid-strong) !important; /* K: export inline text-shadow 対抗 */
 }
+/* K ×2: bg-icon の JS inline background 書込 対抗 — strip するな (Step 5 確定) */
 .wwm-diag-modal .wwm-modal-bg-icon {
   background-size: 30% !important;
   background-position: calc(100% - 12px) calc(100% + 30px) !important;
@@ -1454,6 +1462,8 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
     white-space: nowrap;
   }
   /* 武庫modal Tier行: 頂点off時 input溢れ → 縮小 + wrap許可 */
+  /* K cluster (1465-1478): JS の row/span/num-input inline style (grid-template-columns /
+     white-space / font-size / width) 書込 対抗 — strip するな (Step 5 確定) */
   .wwm-arsenal-modal .wwm-cmp-row { grid-template-columns: 40px 1fr !important; }
   .wwm-arsenal-modal .wwm-cmp-row > span:last-child {
     flex-wrap: wrap !important;

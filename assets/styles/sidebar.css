@@ -25,6 +25,7 @@
 .wwm-sb-tier-badge { min-width: 28px; box-sizing: border-box; }
 
 /* SS/S 拡散glow を sidebar 用に縮小 (box-shadow override) */
+/* K: export.js clone の inline box-shadow (universal 書込) 対抗 — strip するな (Step 5 確定) */
 .wwm-sb-tier-badge.tier-SS {
   box-shadow:
     0 0 5px var(--vermilion-strong),
@@ -329,8 +330,9 @@ html[data-theme="light"] .wwm-sb-tier-badge.tier-C {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  /* ⚠ !important keep 確定 (Batch M): light.css の tier-SS/S animation 復活防止 (a11y)。
-     light.css が cascade 最終 file のため natural では負ける — @layer 移行まで維持 */
+  /* ⚠ K: !important 恒久 keep (a11y kill-switch、 Step 5 確定 2026-06-06)。
+     light.css (後 layer) の tier-SS/S animation に components layer から確実に勝つには imp が必要。
+     「reduced-motion では全 theme/全状態で animation 殺す」 という意味論に imp が合致 — strip するな */
   .tier-SS, .tier-S { animation: none !important; }
   .tier-SS::before  { animation: none; }
   .wwm-sb-tier-badge.tier-rolling,

@@ -668,6 +668,8 @@ html[lang="ko"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
 }
 
 /* en時: modal の主タイトル / 各パネルの主タイトル を Cinzel に統一 */
+/* K: lang 軸 override — modals layer (後 layer) の letter-spacing/font 競合に components から
+   勝つ手段が imp のみ (lang 軸は layer 表現不能) + export inline font 対抗。 strip するな (Step 5 確定) */
 html[lang="en"] .wwm-modal-header h2,
 html[lang="en"] .wwm-modal-header h2 *,
 html[lang="en"] .wwm-cmp-title-ja,

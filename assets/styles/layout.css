@@ -68,8 +68,8 @@ body.wwm-layout-active .wwm-sidebar-test {
   left: auto;
   bottom: auto;
   width: 100% !important;
-  /* K: height/max-height の !important は sidebar.js _syncLayoutVars の inline
-     style.height/maxHeight (footerTop-heroTop 実測 px) 対抗で必須 — strip するな。
+  /* K: width/height/max-height/padding の !important は sidebar.js _syncLayoutVars の inline
+     style 書込 (footerTop-heroTop 実測 px 等) 対抗で必須 — strip するな。
      strip すると inline px が勝ち grid 行が膨張 → container が footer 裏に食い込む
      + スクロールバー出現遅れ (2026-06-05 Step 1 で strip して実際に発生した事故) */
   height: calc(100% - 16px) !important;
@@ -101,6 +101,8 @@ body.wwm-layout-active .wwm-sidebar-test {
   body.wwm-layout-active .wwm-sidebar-test.wwm-sidebar-in-overlay,
   body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sidebar-test {
     display: block;
+    /* K cluster: position/width/height/max-height/background/padding の imp は
+       sidebar.js _syncLayoutVars inline + PC rule imp との相互戦争 対抗 — strip するな */
     position: static !important;
     width: 100% !important;
     height: auto !important;
@@ -531,6 +533,7 @@ html.wwm-view-sidebar body .wwm-app-body { padding: var(--space-2); }
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-grid > div:not([hidden]) {
     flex: 1 1 0;
     min-height: 0;
+    /* K ×2: JS の panel div inline display/flex 書込 (anlz tab 切替系) 対抗 — strip するな */
     display: flex !important;
     flex-direction: column !important;
   }
