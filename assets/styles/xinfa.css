@@ -463,26 +463,9 @@
   background-color: var(--gold-faint);
 }
 
-/* S2-g co-locate (B / K-type): light#112 L915 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-gold,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-gold .wwm-stat-name,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-gold .wwm-stat-val {
-  color: var(--c-orange-deep) !important;
-}
-
-/* S2-g co-locate (B / K-type): light#113 L921 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-purple,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-purple .wwm-stat-name,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-purple .wwm-stat-val {
-  color: #6a2e8a !important;
-}
-
-/* S2-g co-locate (B / K-type): light#114 L927 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-blue,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-blue .wwm-stat-name,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-blue .wwm-stat-val {
-  color: #1e5a9e !important;
-}
+/* light rank色 override 3 rule は light.css 末尾へ再移動 (Step 5-c 2026-06-06):
+   modals.css .wwm-rank-* (modals layer = components より後) との競合は components 内では
+   imp でしか勝てない → theme layer (light) なら natural 常勝 = imp 不要。 勝者不変 */
 
 @media (max-width: 768px) {
   .wwm-equip-slot[data-slot] {

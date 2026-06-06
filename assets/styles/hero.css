@@ -85,11 +85,14 @@
 }
 
 .hero--collapsed .hero-right {
-  display: flex !important;
   padding: var(--space-2) var(--space-4);
   border-left: 1px solid var(--ink-2);
   border-top: none;
 }
+/* display は spec 300 で分離 (Step 5-c 2026-06-06): mobile ≤480 の
+   .hero-wuxia .hero-right { display: contents } に collapsed 時 flex で勝つ —
+   旧 imp 戦争 (200imp vs 100imp → flex) と同勝者を specificity で再現 */
+.hero-wuxia.hero--collapsed .hero-right { display: flex; }
 
 .hero--collapsed .donut-wrap { flex-direction: row; align-items: center; gap: var(--space-2-5); width: auto; }
 
@@ -621,9 +624,11 @@ html[data-theme="light"] .hero-wuxia .luopan-inner svg circle[stroke^="rgba(232,
     justify-self: center;
     text-align: center;
   }
+  /* display imp strip (Step 5-c 2026-06-06): hidden 状態 = 下行 [hidden] (200, 後順) と
+     PC 側 .hero-wuxia .hero-next-inline[hidden] (300) が none で常勝 = imp 有無で全状態勝者同値 */
   .hero-wuxia .hero-next-inline {
     grid-area: next;
-    display: flex !important;
+    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -634,13 +639,15 @@ html[data-theme="light"] .hero-wuxia .luopan-inner svg circle[stroke^="rgba(232,
     align-self: end;
     justify-self: center;
   }
-  .hero-next-inline[hidden] { display: none !important; }
+  .hero-next-inline[hidden] { display: none; }
   .hero-wuxia .hero-next-label { font-size: var(--text-xs); letter-spacing: 0.08em; padding: 0; color: var(--paper-mute); }
   .hero-wuxia .hero-next-row { font-size: var(--text-sm); display: inline-flex; align-items: center; gap: 2px; }
   .hero-wuxia .hero-next-val { font-size: var(--text-md); font-weight: var(--fw-bold); }
   .hero-left { grid-area: info; }
-  /* hero-right を grid container にinline化 → 子 luopan/judge-list が hero grid area参加 */
-  .hero-right { display: contents !important; }
+  /* hero-right を grid container にinline化 → 子 luopan/judge-list が hero grid area参加。
+     Step 5-c: spec 200 + 後順で PC rule (.hero-wuxia .hero-right flex、 同 200 前方) に
+     natural 勝ち — imp 不要化。 collapsed 時は .hero-wuxia.hero--collapsed .hero-right (300) が flex */
+  .hero-wuxia .hero-right { display: contents; }
   .hero-right .luopan {
     grid-area: luopan;
     width: 80px; height: 80px;

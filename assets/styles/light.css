@@ -952,4 +952,62 @@ html[data-theme="light"] .wwm-mobile-anlz-overlay-header {
     border-bottom-color: var(--c-border-soft-warm);
   }
 
+/* ── Step 5-c (2026-06-06): S2-g B-relocate 6 rule を theme layer へ再移動 ──
+   components layer 内では modals/light layer の同 subject 競合に imp でしか勝てなかった群。
+   light layer 末尾 = natural 常勝 (旧 imp と同勝者) → imp 不要化。
+   元位置: xinfa.css (rank 3) / mobile.css (step2 2) / sidebar.css (mini-hero 1) */
+
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-gold,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-gold .wwm-stat-name,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-gold .wwm-stat-val {
+  color: var(--c-orange-deep);
+}
+
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-purple,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-purple .wwm-stat-name,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-purple .wwm-stat-val {
+  color: #6a2e8a;
+}
+
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-blue,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-blue .wwm-stat-name,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix .wwm-rank-blue .wwm-stat-val {
+  color: #1e5a9e;
+}
+
+html[data-theme="light"] .wwm-equip-section .wwm-stat-name,
+html[data-theme="light"] .wwm-equip-section .wwm-stat-val,
+html[data-theme="light"] .wwm-step2 .wwm-step2-section-title,
+html[data-theme="light"] .wwm-step2 .wwm-xinfa-cell,
+html[data-theme="light"] .wwm-step2 .wwm-xinfa-label,
+html[data-theme="light"] .wwm-step2 .wwm-xinfa-effect,
+html[data-theme="light"] .wwm-step2 .wwm-arsenal-tier,
+html[data-theme="light"] .wwm-step2 .wwm-arsenal-lv,
+html[data-theme="light"] .wwm-step2 .wwm-arsenal-peaked-label,
+html[data-theme="light"] .wwm-step2 .wwm-arsenal-preset,
+html[data-theme="light"] .wwm-step2 .wwm-arsenal-custom,
+html[data-theme="light"] .wwm-step2 .wwm-stat-label,
+html[data-theme="light"] .wwm-step2 .wwm-radio-label,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-base b,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix b,
+html[data-theme="light"] .wwm-equip-section,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-slot,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-slot-header,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-base,
+html[data-theme="light"] .wwm-equip-section .wwm-equip-affix,
+html[data-theme="light"] .wwm-step2 {
+  color: var(--brown-2);
+}
+
+/* rank 色 rule (上) より後 = .wwm-stat-name/.wwm-stat-val の同 spec 競合に注意:
+   rank rule は .wwm-rank-* 付き = spec 上位で rank 行は rank 色が勝つ (旧 imp 同士の spec 順と同一) */
+html[data-theme="light"] .wwm-step2 .wwm-step2-section-title {
+  color: var(--brown-3);
+}
+
+html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-totalmartial b,
+html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial b {
+  color: var(--c-text-brown-bright);
+}
+
 } /* end @layer light */

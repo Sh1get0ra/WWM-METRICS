@@ -249,12 +249,15 @@ html.wwm-view-sidebar .wwm-app-body {
   display: block;
   height: 100vh;
   max-height: 100vh;
-  padding: var(--space-2) !important;
   margin: 0;
   max-width: none;
   min-width: 0; /* OBSキャンバス幅 < 1010 で右はみ出し防止 */
   width: 100%;
 }
+/* padding は spec 212 で分離 (Step 5-c 2026-06-06): ≤768 の
+   body.wwm-layout-active .wwm-app-body { padding: 0 } (211, 後順) に勝つ — 旧 imp と同勝者。
+   rule 全体の respec は ≤480 mobile rule との line 順勝敗を壊すため padding のみ分離 */
+html.wwm-view-sidebar body .wwm-app-body { padding: var(--space-2); }
 
 @media (max-width: 600px) {
   /* ─────────────────────────────────────────────────────────────────
@@ -289,9 +292,12 @@ html.wwm-view-sidebar .wwm-app-body {
     position: relative; width: 100%;
   }
   .wwm-sidebar-test {
+    /* K: position/width の imp は sidebar.js _syncLayoutVars inline 対抗で必須 — strip するな */
     position: relative !important;
     width: 100% !important;
-    left: 0 !important; top: auto;
+    /* left imp strip (Step 5-c 2026-06-06): strip 後は前方 PC rule の left: auto (201) が勝つが、
+       position: relative + 他 offset auto では left: 0 ≡ left: auto = 視覚同値 */
+    left: 0; top: auto;
   }
   body.wwm-layout-active .container { padding-left: 0; }
   .wwm-analysis-grid { grid-template-columns: 1fr; }
@@ -366,17 +372,24 @@ html.wwm-view-sidebar .wwm-app-body {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
-    padding: var(--space-1-5) var(--space-2-5) !important;
-    margin-top: var(--space-1) !important;
     gap: var(--space-2);
     overflow-x: auto;
     overflow-y: hidden;
     scrollbar-width: thin;
     -webkit-overflow-scrolling: touch;
   }
+  /* padding/margin-top は spec 301 で分離 (Step 5-c 2026-06-06): PC rule
+     .sticky-header > .preset-bar (301, 前方) の padding-left/right + margin: 0 auto に勝つ —
+     旧 imp と同勝者。 rule 全体 respec は display:flex が share.css の SHARE mode hide
+     (display:none, 201) を撃ち抜くため imp decl のみ分離 */
+  body.wwm-layout-active .sticky-header > .preset-bar {
+    padding: var(--space-1-5) var(--space-2-5);
+    margin-top: var(--space-1);
+  }
   .preset-bar::-webkit-scrollbar { height: 4px; }
   .preset-bar::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 2px; }
-  .preset-bar { gap: 3px; padding: var(--space-1) var(--space-1) !important; flex-direction: row; }
+  .preset-bar { gap: 3px; flex-direction: row; }
+  body.wwm-layout-active .sticky-header > .preset-bar { padding: var(--space-1) var(--space-1); }
   /* ─── Phase 4: hero compact + mobile RESET 内蔵 ─── */
   section.hero.hero-wuxia {
     padding: var(--space-3) var(--space-3-5);

@@ -157,35 +157,8 @@ html[data-theme="light"] .wwm-share-warn {
   border-left-color: var(--c-orange-deep) !important;
 }
 
-/* S2-g co-locate (B / K-type): light#110 L886 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .wwm-equip-section .wwm-stat-name,
-html[data-theme="light"] .wwm-equip-section .wwm-stat-val,
-html[data-theme="light"] .wwm-step2 .wwm-step2-section-title,
-html[data-theme="light"] .wwm-step2 .wwm-xinfa-cell,
-html[data-theme="light"] .wwm-step2 .wwm-xinfa-label,
-html[data-theme="light"] .wwm-step2 .wwm-xinfa-effect,
-html[data-theme="light"] .wwm-step2 .wwm-arsenal-tier,
-html[data-theme="light"] .wwm-step2 .wwm-arsenal-lv,
-html[data-theme="light"] .wwm-step2 .wwm-arsenal-peaked-label,
-html[data-theme="light"] .wwm-step2 .wwm-arsenal-preset,
-html[data-theme="light"] .wwm-step2 .wwm-arsenal-custom,
-html[data-theme="light"] .wwm-step2 .wwm-stat-label,
-html[data-theme="light"] .wwm-step2 .wwm-radio-label,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-base b,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-affix b,
-html[data-theme="light"] .wwm-equip-section,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-slot,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-slot-header,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-base,
-html[data-theme="light"] .wwm-equip-section .wwm-equip-affix,
-html[data-theme="light"] .wwm-step2 {
-  color: var(--brown-2) !important;
-}
-
-/* S2-g co-locate (B / K-type): light#115 L933 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .wwm-step2 .wwm-step2-section-title {
-  color: var(--brown-3) !important;
-}
+/* light step2/equip-section 文字色 2 rule は light.css 末尾へ再移動 (Step 5-c 2026-06-06):
+   sidebar/light layer の同 subject 競合 (phantom 含む) を theme layer natural 勝ちで解消 = imp 不要。 勝者不変 */
 
 @media (prefers-reduced-motion: reduce) {
   .flash-pulse      { animation: none; }
