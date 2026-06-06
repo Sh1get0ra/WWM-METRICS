@@ -23,7 +23,7 @@
     linear-gradient(180deg, var(--surf-1), var(--surf-2));
   border: 1px solid var(--ink-2);
   border-top: 1px solid var(--gold-deep);
-  border-left: 3px solid var(--gold);
+  border-left: 1px solid var(--gold); /* critique P3: side-stripe 3px→1px */
   border-radius: 0 0 2px 2px;
   padding: var(--space-3-5) var(--space-4) var(--space-3);
   box-sizing: border-box;
@@ -74,6 +74,13 @@
 #wwmOptimization .wwm-opt-body {
   overflow-y: auto;
   scrollbar-width: thin;
+}
+
+/* critique P1 fix (2026-06-06): opt list 最低 6 行可視保証 (兄貴 A 案承認) —
+   card chrome (header/controls/total ~100px) に食われても list が痩せない。
+   不足分は layout.css anlz min-height 320px + .container scroll が受ける。 PC のみ */
+@media (min-width: 481px) {
+  #wwmOptimization .wwm-opt-body { min-height: 240px; }
 }
 
 #wwmOptimization .wwm-opt-body::-webkit-scrollbar { width: 5px; }
@@ -340,7 +347,7 @@
   padding: 7px 10px;
   font-size: var(--text-12);
   border-bottom: 1px solid var(--gold-bright-tint);
-  border-left: 3px solid transparent;
+  border-left: 1px solid transparent; /* critique P3: side-stripe 3px→1px */
   transition: background .15s, border-color .15s;
 }
 
@@ -731,6 +738,16 @@ html[lang="en"] .wwm-cmp-title-en {
 
 /* 各 inner card の旧 bg-icon は非表示 → .wwm-anlz-body 共通の背景に統一 */
 .wwm-anlz-body .wwm-modal-bg-icon { display: none; }
+
+/* critique P3 (2026-06-06): import 前の格析 empty 案内 (index.html 静的 placeholder、
+   render の innerHTML 上書きで消滅) */
+.wwm-anlz-empty-hint {
+  text-align: center;
+  padding: var(--space-7) var(--space-3);
+  color: var(--paper-mute);
+  font-size: var(--text-md);
+  line-height: 1.9;
+}
 
 /* パネル全体の背景アイコン (旧 .wwm-modal-bg-icon と同位置/サイズ/透明度) */
 .wwm-anlz-bgicon {

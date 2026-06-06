@@ -248,7 +248,9 @@ html[data-theme="light"] .wwm-share-warn {
   /* 📈格析 button: preset-bar 末尾 (mobile時のみ表示) */
   .wwm-mobile-anlz-btn {
     display: inline-flex; align-items: center; gap: 3px;
-    min-height: 26px;
+    min-height: 44px; /* critique P2 / TODO #14: touch target 26→44px */
+    order: -1; /* critique P2 (2026-06-06): 44px 化で bar 内溢れ → 格析 (主要導線) を bar 先頭固定、
+                  preset 群側が横 scroll する。 DOM 順不変 = focus 順は preset 先のまま */
     padding: var(--space-half) var(--space-1-5);
     background: linear-gradient(180deg, var(--vermilion-bright-tint), rgba(232,81,58,0.10));
     border: 1px solid var(--vermilion-strong);
@@ -265,7 +267,7 @@ html[data-theme="light"] .wwm-share-warn {
   /* RESET button: TopBar 右側 (mobile時のみ表示) */
   .wwm-mobile-top-reset {
     display: inline-flex; align-items: center; justify-content: center;
-    min-height: 36px;
+    min-height: 44px; /* critique P2 / TODO #14: touch target 36→44px */
     padding: var(--space-1) var(--space-2-5);
     background: linear-gradient(180deg, var(--vermilion-bright-tint), rgba(232,81,58,0.10));
     border: 1px solid var(--vermilion-strong);

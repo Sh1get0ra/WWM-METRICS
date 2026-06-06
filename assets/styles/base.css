@@ -217,7 +217,19 @@ html[lang="ko"] .top-controls-2row .icon-btn {
   transition: color 0.15s, background 0.15s;
 }
 .lang-btn:hover { color: var(--paper-2); }
-.lang-btn.active { color: var(--gold-bright); background: var(--vermilion-soft-2); }
+/* critique P2 / TODO #24: active 視認性強化 — 金下線 (inset shadow = layout 不変) + 濃度 up */
+.lang-btn.active {
+  color: var(--gold-bright);
+  background: var(--vermilion-mid);
+  box-shadow: inset 0 -2px 0 var(--gold-bright);
+}
+
+/* theme toggle: ☀/☾ 文字 glyph → SVG (font 依存の字形崩れ根治、 critique P2)。
+   dark = sun (light へ行く) / light = moon (dark へ行く) — 行き先表示の従来慣例維持 */
+#themeToggle svg { display: block; }
+#themeToggle .tt-moon { display: none; }
+html[data-theme="light"] #themeToggle .tt-sun { display: none; }
+html[data-theme="light"] #themeToggle .tt-moon { display: block; }
 
 .icon-btn {
   width: 30px; height: 30px;
@@ -343,7 +355,7 @@ footer strong { color: var(--c-footer-strong-fg); }
   display: flex; flex-direction: column; align-items: center;
   z-index: var(--z-tooltip);
   pointer-events: none;
-  animation: wwm-hint-in 0.4s cubic-bezier(.2,1.4,.5,1);
+  animation: wwm-hint-in 0.4s cubic-bezier(.22,1,.36,1);
 }
 .wwm-import-hint-arrow {
   font-size: var(--text-2xl);
@@ -424,7 +436,7 @@ footer strong { color: var(--c-footer-strong-fg); }
   font-size: var(--text-13, 13px);
   position: relative;
   z-index: 50;
-  animation: wwm-banner-in .45s cubic-bezier(.2,1.4,.5,1), wwm-banner-glow 2.2s ease-in-out .45s infinite;
+  animation: wwm-banner-in .45s cubic-bezier(.22,1,.36,1), wwm-banner-glow 2.2s ease-in-out .45s infinite;
   border-bottom-color: var(--c-score-update-banner-border-bot);
 }
 .wwm-score-update-icon { flex: 0 0 auto; font-size: var(--text-lg); color: var(--vermilion-strong); animation: wwm-banner-icon-pulse 1.4s ease-in-out infinite; }
@@ -470,7 +482,7 @@ footer strong { color: var(--c-footer-strong-fg); }
   font-size: var(--text-13, 13px);
   position: relative;
   z-index: 50;
-  animation: wwm-banner-in .45s cubic-bezier(.2,1.4,.5,1);
+  animation: wwm-banner-in .45s cubic-bezier(.22,1,.36,1);
   border-bottom-color: var(--c-migration-banner-border-bot);
 }
 .wwm-migration-icon { flex: 0 0 auto; font-size: var(--text-lg); }

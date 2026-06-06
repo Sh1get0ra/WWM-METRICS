@@ -298,8 +298,8 @@ function toggleTheme() {
 }
 function setTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
-  const tog = document.getElementById('themeToggle');
-  if (tog) tog.textContent = theme === 'light' ? '☾' : '☀';
+  // themeToggle の glyph 切替は CSS (data-theme で SVG sun/moon 表示切替) に移譲 —
+  // textContent 書込は inline SVG を破壊するため廃止 (critique P2 2026-06-06)
   WWMHelpers.storage.saveStr('wwm_theme', theme);
   // theme切替時 hero score色 (TIER_COLOR) 再適用
   if (window.WWMSidebar?.hero && WWMState.params) window.WWMSidebar.hero.update(WWMState.params);

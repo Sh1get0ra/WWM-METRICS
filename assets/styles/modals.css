@@ -1548,4 +1548,19 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   }
 }
 
+/* ── critique P1 fix (2026-06-06): anlz panel card 内 scroll ──
+   .wwm-modal-square { overflow: hidden } (上 1025) を anlz 文脈のみ auto 化 —
+   layout.css の min-height 320px gate と対で、 panel 高 < 中身の時に全行アクセス可能にする。
+   card 内 bg-icon は display:none 済 (anlz-body 共通背景に統一) = 装飾巻込みなし。
+   同 layer 後順 + spec 300 で 1025 (100) に勝つ。 mobile overlay (≤480) は別機構のため min-width gate */
+@media (min-width: 481px) {
+  .wwm-anlz-body .wwm-analysis-card.wwm-modal-square {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-deep) transparent;
+  }
+  .wwm-anlz-body .wwm-analysis-card.wwm-modal-square::-webkit-scrollbar { width: 6px; }
+  .wwm-anlz-body .wwm-analysis-card.wwm-modal-square::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
+}
+
 } /* end @layer modals */

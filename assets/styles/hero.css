@@ -415,14 +415,13 @@
   text-align: center;
 }
 
+/* critique P3 fix (2026-06-06 兄貴承認): gradient-text (background-clip) → solid 金。
+   dark = token を transparent → gold-bright 化、 light は既存 vermilion-deep のまま */
 .hero-wuxia .luopan-center-label {
   font-family: var(--f-display);
   font-size: 30px;
   font-weight: var(--fw-extra);
   letter-spacing: .18em;
-  background: linear-gradient(180deg, var(--chart-crit) 0%, var(--gold) 55%, var(--gold-deep) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
   color: var(--c-luopan-center-label-fg);
   filter: drop-shadow(0 1px 1px var(--overlay-mid-2));
 }

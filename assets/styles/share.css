@@ -62,6 +62,10 @@ html.wwm-shared-build-mode #exportBtn {
   flex-shrink: 0;
 }
 
+/* critique P3 (2026-06-06): [hidden] が display:inline-flex (上 rule) に負けて
+   JS init 前の一瞬 badge (弱点 0) が露出していた — [hidden] 明示で根治 */
+.wwm-diag-badge[hidden] { display: none; }
+
 .wwm-diag-badge:hover {
   background: var(--vermilion-mid);
   box-shadow: 0 0 12px var(--vermilion-mid-strong);
@@ -171,7 +175,7 @@ html.wwm-shared-build-mode #exportBtn {
     linear-gradient(180deg, rgba(26,20,16,0.55), rgba(15,12,14,0.65)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") center / cover no-repeat;
   border: 1px solid var(--ink-2);
-  border-left: 3px solid var(--vermilion);
+  border-left: 1px solid var(--vermilion); /* critique P3: side-stripe 3px→1px */
   position: relative;
   overflow: hidden;
 }
@@ -179,7 +183,8 @@ html.wwm-shared-build-mode #exportBtn {
 @media (max-width: 600px) {
   /* ── iOS: 入力フォーカス時の自動ズーム防止 (font-size ≥ 16px 必須) ── */
   .preset-name-input { font-size: var(--text-lg); }
-  .preset-btn { min-height: 32px; }
+  /* critique P2 / TODO #14: touch target 44px (WCAG 2.5.8 / HIG)。 旧 32px */
+  .preset-btn { min-height: 44px; min-width: 44px; }
   .preset-bar-title { font-size: var(--text-xs); flex-shrink: 0; }
   .preset-slots { flex-direction: column; gap: 5px; width: 100%; }
   .preset-slot {
@@ -224,12 +229,14 @@ html.wwm-shared-build-mode #exportBtn {
   .preset-slot-num { display: none; }
   .preset-name-input { display: none; }
   .preset-btn {
-    min-height: 26px;
+    /* critique P2 / TODO #14 (2026-06-06): touch target 26→44px (WCAG 2.5.8 AAA / HIG)。
+       icon 化意匠は維持、 bar 高のみ +18px */
+    min-height: 44px;
+    min-width: 44px;
     padding: 1px 4px;
     font-size: 0;  /* 元テキスト 非表示、 ::before でアイコン */
     letter-spacing: 0;
     flex: 0 0 auto;
-    min-width: 0;
   }
   .preset-save::before { content: '💾'; font-size: var(--text-md); }
   .preset-load::before { content: '📂'; font-size: var(--text-md); }
@@ -253,9 +260,9 @@ html.wwm-shared-build-mode #exportBtn {
     flex-direction: row; /* L1365 column 解除 */
   }
   .preset-btn { padding: 1px 3px; }
-  /* 弱点バッジも横幅節約 */
+  /* 弱点バッジも横幅節約 (touch target 44px — critique P2) */
   .wwm-diag-badge {
-    min-height: 26px;
+    min-height: 44px;
     padding: 1px 5px;
     font-size: var(--text-xs);
   }

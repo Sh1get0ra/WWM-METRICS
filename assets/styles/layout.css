@@ -174,10 +174,14 @@ body.wwm-layout-active .wwm-app-body .container > .wwm-analysis-grid > div {
   min-height: 0;
 }
 
-/* 新構造 .wwm-anlz をフッターまで伸縮 (旧 .wwm-analysis-grid と同パターン) */
+/* 新構造 .wwm-anlz をフッターまで伸縮 (旧 .wwm-analysis-grid と同パターン)。
+   critique P1 fix (2026-06-06 兄貴 A 案承認): min-height 320px 保証 —
+   900px 高 viewport で 42px に圧潰し opt 13 行が不可視だった問題の根治。
+   不足分は .container (overflow-y: auto 既設) の縦 scroll に流れる。
+   tall viewport では従来通り footer まで fill (flex 1 1 0 維持) */
 body.wwm-layout-active .wwm-app-body .container > .wwm-anlz {
   flex: 1 1 0;
-  min-height: 0;
+  min-height: 320px;
   display: flex;
   flex-direction: column;
 }
@@ -201,6 +205,8 @@ body.wwm-layout-active .wwm-anlz-body > .wwm-analysis-grid > div {
   min-height: 0;
 }
 
+/* critique P1 fix: card 内 scroll 化は modals.css 末尾 (anlz card overflow override) 参照 —
+   .wwm-modal-square { overflow: hidden } (modals layer = components より後) に同 layer 内で勝つ必要があるため */
 body.wwm-layout-active #wwmAffixRanking .wwm-analysis-card,
 body.wwm-layout-active #wwmOptimization .wwm-analysis-card,
 body.wwm-layout-active #wwmHistory .wwm-analysis-card {

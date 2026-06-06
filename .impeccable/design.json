@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-06T19:40:00+09:00",
+  "title": "Design System: 風燕計 WWM-METRICS",
+  "extensions": {
+    "colorMeta": {
+      "vermilion":        { "role": "primary",  "displayName": "朱 Vermilion",        "canonical": "#c83c2b", "tonalRamp": ["#2e0d09", "#5c1a12", "#8a1f17", "#c83c2b", "#e8513a", "#f07a62", "#f8aa97", "#fcd9d0"] },
+      "gold-bright":      { "role": "secondary", "displayName": "金明 Gold Bright",   "canonical": "#f0d28a", "tonalRamp": ["#33260e", "#5c451c", "#8a6f30", "#c9a45a", "#f0d28a", "#f4dda4", "#f8e8c2", "#fcf4e1"] },
+      "jade-bright":      { "role": "tertiary", "displayName": "翡翠明 Jade Bright",  "canonical": "#a8d4b4", "tonalRamp": ["#16241a", "#2c4734", "#4a7355", "#7fa88a", "#a8d4b4", "#bedfc7", "#d5eadb", "#ebf5ee"] },
+      "sumi-bg-0":        { "role": "neutral",  "displayName": "墨 Sumi",             "canonical": "#07060a", "tonalRamp": ["#07060a", "#0f0c0e", "#16110f", "#1a1410", "#3a2f26", "#6a5c4c", "#a39483", "#d9cfc0"] },
+      "paper":            { "role": "neutral",  "displayName": "紙 Paper",            "canonical": "#ede4d0", "tonalRamp": ["#3a342a", "#5c5344", "#7a7060", "#8b8170", "#c8bda6", "#ede4d0", "#f3ecdd", "#faf6ee"] },
+      "kosho-bg-light":   { "role": "neutral",  "displayName": "古紙 Kosho (light)",  "canonical": "#ede2c8", "tonalRamp": ["#2a1c12", "#5a4326", "#8a6f44", "#bfa97a", "#ddd0ae", "#ede2c8", "#f4ecd9", "#faf6ec"] },
+      "liupai-guyun":     { "role": "tertiary", "displayName": "流派紫 Guyun",        "canonical": "#c389ff", "tonalRamp": ["#2a1640", "#4d2a78", "#7344ad", "#9b63d9", "#c389ff", "#d2a6ff", "#e1c4ff", "#f0e2ff"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display (Cinzel)",       "purpose": "EXPECTED 期待値ヒーロー 92px 専用。 特殊 48px STATUS SCORE / 320px 背景印章" },
+      "headline": { "displayName": "Headline (Noto Serif JP)", "purpose": "パネル見出し 22px。 明朝が武侠の品格" },
+      "body":     { "displayName": "Body (Noto Sans JP)",     "purpose": "本文 13px、 UI 最頻 11-12px" },
+      "label":    { "displayName": "Label (Rajdhani)",        "purpose": "HUD メタ 8-10px、 tracking 0.12em、 uppercase ≤4 語" }
+    },
+    "shadows": [
+      { "name": "tier-ss-glow",   "value": "0 0 20px rgba(200,60,43,0.6), 0 0 45px rgba(200,60,43,0.20), inset 0 1px 0 rgba(240,210,138,0.28)", "purpose": "Tier SS 階級の光 — SS/S/hero のみの特権" },
+      { "name": "hero-num-glow",  "value": "0 0 30px rgba(240,210,138,0.25), 0 2px 0 rgba(0,0,0,0.5)", "purpose": "期待値ヒーロー数値の金暈" },
+      { "name": "anlz-ambient",   "value": "0 8px 22px rgba(0,0,0,0.45)", "purpose": "anlz パネル/mobile FAB のみの浮上影" }
+    ],
+    "motion": [
+      { "name": "transition-standard", "value": "0.15s ease", "purpose": "全 state 遷移の既定" },
+      { "name": "tier-ss-shimmer", "value": "2.2s ease-in-out infinite", "purpose": "Tier SS shimmer + glow / S pulse。 prefers-reduced-motion で恒久 kill (!important 保証)" },
+      { "name": "rank-max-rainbow", "value": "cmp-ratio-rainbow 3.5s linear infinite", "purpose": "MAX% 100% 到達の虹色 hue-rotate" }
+    ],
+    "breakpoints": [
+      { "name": "mobile",     "value": "480px" },
+      { "name": "mobile-mid", "value": "600px" },
+      { "name": "tablet",     "value": "768px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (modal 確定)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "modal 主操作。 金 gradient + 墨茶文字、 radius 0、 鋭利で寡黙",
+      "html": "<button class=\"ds-btn-primary\">適用する</button>",
+      "css": ".ds-btn-primary { background: linear-gradient(180deg, var(--gold-bright, #f0d28a), var(--gold, #c9a45a)); color: #2a1c12; border: 1px solid var(--gold-bright, #f0d28a); border-radius: 0; padding: 7px 18px; font-size: 12px; font-weight: 700; cursor: pointer; transition: filter 0.15s ease; } .ds-btn-primary:hover { filter: brightness(1.08); } .ds-btn-primary:focus-visible { outline: 2px solid var(--gold-bright, #f0d28a); outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "modal 副操作。 transparent + 細枠",
+      "html": "<button class=\"ds-btn-secondary\">閉じる</button>",
+      "css": ".ds-btn-secondary { background: transparent; color: var(--paper, #ede4d0); border: 1px solid rgba(255,255,255,0.3); border-radius: 0; padding: 7px 18px; font-size: 12px; cursor: pointer; transition: background 0.15s ease; } .ds-btn-secondary:hover { background: rgba(255,255,255,0.10); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--gold-bright, #f0d28a); outline-offset: 2px; }"
+    },
+    {
+      "name": "Icon Button",
+      "kind": "button",
+      "refersTo": "icon-btn",
+      "description": "topbar 機能 btn。 hover で金が灯る",
+      "html": "<button class=\"ds-icon-btn\" aria-label=\"共有\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8\"/><polyline points=\"16 6 12 2 8 6\"/><line x1=\"12\" y1=\"2\" x2=\"12\" y2=\"15\"/></svg></button>",
+      "css": ".ds-icon-btn { background: transparent; color: var(--gold, #c9a45a); border: 1px solid rgba(232,215,180,0.12); border-radius: 2px; padding: 4px 8px; cursor: pointer; display: inline-flex; align-items: center; transition: background 0.15s ease, color 0.15s ease; } .ds-icon-btn:hover { background: rgba(201,164,90,0.12); color: var(--gold-bright, #f0d28a); } .ds-icon-btn:focus-visible { outline: 2px solid var(--gold-bright, #f0d28a); outline-offset: 1px; }"
+    },
+    {
+      "name": "Numeric Input",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "数値入力。 黒半透過 + 金明文字、 右寄せ mono",
+      "html": "<input class=\"ds-num-input\" type=\"text\" value=\"1284\" inputmode=\"decimal\">",
+      "css": ".ds-num-input { background: rgba(0,0,0,0.5); color: var(--gold-bright, #f0d28a); border: 1px solid rgba(232,215,180,0.12); border-radius: 1px; padding: 2px 4px; width: 72px; font-family: 'Rajdhani', monospace; font-size: 12px; text-align: right; transition: border-color 0.15s ease; } .ds-num-input:focus-visible { outline: none; border-color: var(--gold-bright, #f0d28a); box-shadow: 0 0 0 4px rgba(240,210,138,0.18); }"
+    },
+    {
+      "name": "Tier Badge SS",
+      "kind": "chip",
+      "refersTo": "tier-badge-ss",
+      "description": "signature — 階級章 SS。 朱地金文字 + glow (階級の光 Rule)",
+      "html": "<span class=\"ds-tier-ss\">SS</span>",
+      "css": ".ds-tier-ss { display: inline-block; background: linear-gradient(135deg, rgba(180,40,28,0.48) 0%, rgba(100,20,14,0.38) 50%, rgba(180,40,28,0.48) 100%); color: var(--gold-bright, #f0d28a); border: 1px solid rgba(240,210,138,0.65); border-radius: 2px; padding: 5px 16px; font-family: 'Cinzel', serif; font-weight: 800; font-size: 22px; letter-spacing: 0.06em; text-shadow: 0 0 18px rgba(240,210,138,0.95); box-shadow: 0 0 20px rgba(200,60,43,0.6), inset 0 1px 0 rgba(240,210,138,0.28); }"
+    },
+    {
+      "name": "Lang Nav",
+      "kind": "nav",
+      "refersTo": "icon-btn",
+      "description": "言語切替 4 btn 列。 active = 金明 + 朱 tint",
+      "html": "<nav class=\"ds-lang-nav\"><button class=\"ds-lang-btn active\">日本語</button><button class=\"ds-lang-btn\">EN</button><button class=\"ds-lang-btn\">中文</button><button class=\"ds-lang-btn\">한국어</button></nav>",
+      "css": ".ds-lang-nav { display: inline-flex; gap: 4px; } .ds-lang-btn { background: transparent; color: var(--paper-dim, #8b8170); border: 1px solid rgba(232,215,180,0.12); border-radius: 2px; padding: 3px 10px; font-size: 11px; cursor: pointer; transition: color 0.15s ease, background 0.15s ease; } .ds-lang-btn:hover { color: var(--paper, #ede4d0); } .ds-lang-btn.active { color: var(--gold-bright, #f0d28a); background: rgba(200,60,43,0.20); } .ds-lang-btn:focus-visible { outline: 2px solid var(--gold-bright, #f0d28a); outline-offset: 1px; }"
+    },
+    {
+      "name": "Δ Preview Value",
+      "kind": "custom",
+      "refersTo": "tier-badge-ss",
+      "description": "signature — 巻物対照 modal の Δ Score 即時 preview (正=翡翠 glow / 負=朱 glow)",
+      "html": "<div class=\"ds-preview\"><span class=\"ds-preview-pos\">+128</span><span class=\"ds-preview-neg\">-43</span></div>",
+      "css": ".ds-preview { display: inline-flex; gap: 16px; font-family: 'Rajdhani', monospace; font-size: 28px; font-weight: 700; } .ds-preview-pos { color: var(--jade-bright, #a8d4b4); text-shadow: 0 0 18px rgba(168,212,180,0.6); } .ds-preview-neg { color: var(--vermilion, #c83c2b); text-shadow: 0 0 18px rgba(232,81,58,0.60); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "朱墨軍議 (The Vermilion War Council)",
+    "overview": "軍議卓の如く数値が整列し、 朱印が階級を押す。 中華武侠美術 (朱・金・翡翠・墨・古紙) と軍用戦術 HUD (mono 数字、 高密度、 鋭利なエッジ) の融合。 これは計算ツール — デザインは機能に従属する。 ただし武侠世界観の見せ場 (hero 期待値 / Tier badge / 印章 / 巻物 modal) では演出を堂々と投下する。 双テーマは等価な一級市民: dark (墨) / light (古紙)、 theme = token swap。",
+    "keyCharacteristics": [
+      "高密度 — 計算ツールは余白より情報。 spacing rhythm (4px base) で整える",
+      "鋭利 — 角丸 1〜2px のみ",
+      "朱墨 — vermilion 基調、 金は数値・翡翠は良性・朱は警告と階級",
+      "数字が主役 — 武格指数・期待値・Δ が視覚階層の頂点",
+      "4 言語で崩れない"
+    ],
+    "rules": [
+      { "name": "朱印の節度 Rule", "body": "朱は基調であって面積ではない。 一画面の朱の面積は印章・警告・階級表示に限る。", "section": "colors" },
+      { "name": "三彩分業 Rule", "body": "金 = 数値と操作、 翡翠 = 良性、 朱 = 警告と階級。 役割を交差させない。", "section": "colors" },
+      { "name": "数字が主役 Rule", "body": "視覚階層の頂点は常に数値。 見出しが数字より目立ったらそれは誤り。", "section": "typography" },
+      { "name": "階級の光 Rule", "body": "glow/shadow は Tier 階級と hero の特権。 通常 component に光を与えるな — 光の希少性が階級の意味を保証する。", "section": "elevation" }
+    ],
+    "dos": [
+      "Do 数値を階層の頂点に置く",
+      "Do 角丸 1〜2px を守る",
+      "Do glow は Tier SS/S と hero のみ",
+      "Do 新色は semantic token (--c-*) 経由で dark/light 両 theme 同時定義",
+      "Do mobile (≤480px) で全機能が overlay/drawer 経由で到達可能",
+      "Do prefers-reduced-motion 代替を全 animation に用意"
+    ],
+    "donts": [
+      "Don't ネオン gamer UI (RGB/サイバー紫/グロー過剰)",
+      "Don't 汎用 SaaS dashboard (白カード + 角丸 8px+ + ドロップシャドウ)",
+      "Don't 和風に漂流するな — ここは中華武侠",
+      "Don't 角丸 8px 以上",
+      "Don't 通常 component に glow/shadow を足すな",
+      "Don't raw hex を component CSS に直書きするな — semantic token 経由",
+      "Don't 横スクロールを発生させるな (mobile)"
+    ]
+  }
+}
