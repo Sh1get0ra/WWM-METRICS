@@ -460,6 +460,41 @@
   --c-anlz-subtitle-fg: var(--gold-deep);  /* S2-g anlz-subtitle */
   --c-anlz-subtitle-opacity: 0.75;  /* S2-g anlz-subtitle */
 
+  /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
+  --c-focus-ring: var(--gold-bright);
+
+  /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
+  --c-opt-sort-btn-border-left: var(--ink-2);
+  --c-cmp-modal-a-fg: var(--c-modal-fg);
+  --c-hero-wuxia-border: var(--gold-deep);
+
+  /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
+  --c-cmp-current--cmp-row-bg: transparent;  /* S2-g cmp-current--cmp-row */
+  --c-cmp-current--cmp-kongfu-header-fg: var(--c-modal-a-kongfu-header-fg);  /* S2-g cmp-current--cmp-kongfu-header */
+  --c-cmp-current--cmp-kongfu-header-bg: var(--c-modal-a-kongfu-header-bg);  /* S2-g cmp-current--cmp-kongfu-header */
+  --c-cmp-current--cmp-set-header-fg: var(--c-modal-a-set-fg);  /* S2-g cmp-current--cmp-set-header */
+  --c-cmp-current--cmp-set-header-bg: var(--c-modal-a-set-select-bg);  /* S2-g cmp-current--cmp-set-header */
+  --c-cmp-modal-a--modal-close-fg: initial;  /* S2-g cmp-modal-a--modal-close */
+  --c-cmp-modal-a--optionchecked-checked-fg: var(--c-modal-a-option-fg);  /* S2-g cmp-modal-a--optionchecked-checked */
+  --c-cmp-lv-select--optionchecked-checked-fg: var(--c-modal-a-fg);  /* S2-g cmp-lv-select--optionchecked-checked */
+
+  /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
+  --c-cmp-kongfu-select-fg: var(--accent);
+  --c-cmp-set-select-fg: var(--liupai-guyun);
+  --c-xinfa-tier-fg: var(--paper-mute);
+
+  /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
+  --c-share-url-border: var(--ink-2);
+  --c-bm-code-border: #333;
+  --c-xinfa-cell--xinfa-tier-border: #444;
+
+  /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
+
+  /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
+
+  /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
+  --c-cmp-modal-a--cmp-stat-select-border: initial;
+
   /* Safe Area inset utility (Phase 1 base) */
   --safe-top:    env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);

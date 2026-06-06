@@ -207,6 +207,7 @@
   border: 1px solid #333; border-radius: 4px;
   padding: var(--space-1-5); word-break: break-all; resize: vertical;
   box-sizing: border-box;
+  border-color: var(--c-bm-code-border);
 }
 .wwm-reapply-row {
   display: flex; align-items: center; gap: var(--space-2-5);
@@ -747,6 +748,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 /* 背景の赤いradial-gradient を消す */
 .wwm-cmp-modal-a {
   background: linear-gradient(180deg, var(--c-surf-warm-1), var(--c-surf-warm-2));
+  color: var(--c-cmp-modal-a-fg);
 }
 /* ボタン: サンプルA 揃え (radius 0、 padding 7px 16px) */
 .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-primary {
@@ -794,6 +796,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   width: 100%;
   padding: var(--space-half) var(--space-1);
   font-size: var(--text-sm);
+  border-color: var(--c-cmp-modal-a--cmp-stat-select-border);
 }
 .wwm-cmp-modal-a .wwm-cmp-val-input {
   width: 100% !important;
@@ -863,7 +866,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   background: var(--c-cmp-stat-select-bg);
   border: 1px solid var(--accent);
   border-radius: 4px;
-  color: var(--accent);
+  color: var(--c-cmp-kongfu-select-fg);
   font-weight: var(--fw-bold);
   font-size: var(--text-12);
   padding: var(--space-1) var(--space-1-5);
@@ -888,7 +891,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   background: var(--c-cmp-stat-select-bg);
   border: 1px solid var(--liupai-guyun);
   border-radius: 4px;
-  color: var(--liupai-guyun);
+  color: var(--c-cmp-set-select-fg);
   font-weight: var(--fw-bold);
   font-size: var(--text-sm);
   padding: var(--space-1) var(--space-1-5);
@@ -1332,5 +1335,37 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-step2 .wwm-arsenal-tier {
   border: var(--c-step2--arsenal-tier-border);
   background: var(--c-step2--arsenal-tier-bg);
+}
+
+/* S2-g co-locate (T): light#42 L548 */
+.wwm-cmp-current .wwm-cmp-row {
+  background: var(--c-cmp-current--cmp-row-bg);
+}
+
+/* S2-g co-locate (T): light#45 L560 */
+.wwm-cmp-current .wwm-cmp-kongfu-header {
+  color: var(--c-cmp-current--cmp-kongfu-header-fg);
+  background: var(--c-cmp-current--cmp-kongfu-header-bg);
+}
+
+/* S2-g co-locate (T): light#45 L560 */
+.wwm-cmp-current .wwm-cmp-set-header {
+  color: var(--c-cmp-current--cmp-set-header-fg);
+  background: var(--c-cmp-current--cmp-set-header-bg);
+}
+
+/* S2-g co-locate (T): light#52 L605 */
+.wwm-cmp-modal-a .wwm-modal-close {
+  color: var(--c-cmp-modal-a--modal-close-fg);
+}
+
+/* S2-g co-locate (T): light#67 L664 */
+.wwm-cmp-modal-a select option:checked {
+  color: var(--c-cmp-modal-a--optionchecked-checked-fg);
+}
+
+/* S2-g co-locate (T): light#68 L669 */
+.wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select option:checked {
+  color: var(--c-cmp-lv-select--optionchecked-checked-fg);
 }
 } /* end @layer modals */

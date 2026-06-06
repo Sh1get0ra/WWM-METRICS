@@ -106,6 +106,24 @@ function retokenName(pt) {
   if (!new RegExp(`^\\s*${esc}\\s*:`, 'm').test(lightCss)) return null;
   return m[1];
 }
+// S2-h retokenLight 判定 (retoken の light 版): light 側 entry のみ ∧ base 値 = 1-of-1 token 単独参照
+// → light token block の定義追加 or 既存 light 定義の書換えだけで完結 (root/base 無変更、 新 token chain 回避)。
+// 既存 light 定義がある場合 = theme decl が唯一の消費点を常時 shadow していた stale 値 → rewrite。
+// slug 衝突 (--c-modal-a-kongfu-select-fg 循環参照 plan 事故 2026-06-06) の根治でもある
+const tokenFilesCss = ['assets/styles-tokens.css', 'assets/styles-dark.css'].map(f => fs.readFileSync(f, 'utf8')).join('\n') + '\n' + lightCss;
+function retokenLightName(pt) {
+  if (pt.darkVal !== undefined || pt.lightVal === undefined) return null;
+  const m = pt.baseVal.match(/^var\((--c-[\w-]+)\)$/);
+  if (!m) return null;
+  const esc = m[1].replace(/[-]/g, '\\-');
+  const uses = (baseCss.match(new RegExp(`var\\(\\s*${esc}\\s*[),]`, 'g')) || []).length;
+  if (uses !== 1) return null;
+  // token def chain (他 token 定義の値) からの参照があると書換えが波及 → 不可
+  const chainRefs = (tokenFilesCss.match(new RegExp(`var\\(\\s*${esc}\\s*[),]`, 'g')) || []).length;
+  if (chainRefs !== 0) return null;
+  const rewrite = new RegExp(`^\\s*${esc}\\s*:`, 'm').test(lightCss);
+  return { name: m[1], rewrite };
+}
 
 // groups 生成 (apply 互換 format)
 const groups = [];
@@ -116,6 +134,11 @@ for (const [tk, pt] of pairTokens) {
   const re = retokenName(pt);
   if (re) {
     groups.push({ retoken: re, dark, note: `S2-e: dark 側 override 吸収 (${pt.baseSel} { ${pt.prop} })` });
+    continue;
+  }
+  const reL = retokenLightName(pt);
+  if (reL) {
+    groups.push({ retokenLight: reL.name, rewrite: reL.rewrite, light, note: `S2-h: light 側 override 吸収 (${pt.baseSel} { ${pt.prop} })` });
     continue;
   }
   const propSlug = PROP_SLUG[pt.prop] || pt.prop;
@@ -144,7 +167,8 @@ fs.writeFileSync('scripts/.theme-swap-plan-s2e.json', JSON.stringify(groups, nul
 const tok = groups.filter(g => !g.deleteOnly);
 console.log(`plan: token ${tok.length} / delete ${groups.length - tok.length} → scripts/.theme-swap-plan-s2e.json`);
 for (const g of groups) {
-  if (g.retoken) console.log(`[RETOKEN] ${g.retoken} root default → ${g.dark}    (${g.note})`);
+  if (g.retokenLight) console.log(`[RETOKEN-L${g.rewrite ? '/rewrite' : ''}] ${g.retokenLight} light ${g.rewrite ? '→' : '+='} ${g.light}    (${g.note})`);
+  else if (g.retoken) console.log(`[RETOKEN] ${g.retoken} root default → ${g.dark}    (${g.note})`);
   else if (g.deleteOnly) console.log(`[DEL${g.note ? ' =' : ''}] ${g.decls[0].baseSel} { ${g.decls[0].prop} } @${g.decls[0].lightFile.replace('assets/styles-', '')}:${g.decls[0].lightLine}`);
   else console.log(`${g.token}\n    dark : ${g.dark}\n    light: ${g.light ?? '(= dark)'}    (${g.decls[0].baseSel} { ${g.decls[0].prop} })`);
 }

@@ -85,48 +85,57 @@ for (const r of movers) {
   // ── Mode T rule ──
   const tEnts = r.entries.filter(e => e.nMode === 'T' && e.nBatch);
   if (tEnts.length) {
-    // phys decl (line|prop) 単位に集約。 selector 群 = rule の全 baseSel (phys gate で均一保証)
-    const selectors = [...new Set(tEnts.map(e => e.baseSel))];
-    const byPhys = new Map();
+    for (const e of tEnts) addDelete(r.file, e.line, e.prop, `${e.ctx} ${e.baseSel}`);
+    // S2-h: selector ごとの decl signature (line|prop|value|other|literal|opp) で group 化。
+    // rescue (nOtherVal) が selector 別に異なる場合は rule/token を分離
+    // (#45 kongfu-header vs set-header — 同 phys decl でも other theme 再現値が別)。
+    // signature 同一の selector は 1 rule に統合 (旧挙動保存)
+    const bySel = new Map();
     for (const e of tEnts) {
-      const k = `${e.line}|${e.prop}`;
-      if (!byPhys.has(k)) byPhys.set(k, e); // split 同値 (物理 decl 共有)
-      addDelete(r.file, e.line, e.prop, `${e.ctx} ${e.baseSel}`);
+      if (!bySel.has(e.baseSel)) bySel.set(e.baseSel, []);
+      bySel.get(e.baseSel).push(e);
     }
-    if (tEnts.length !== selectors.length * byPhys.size) {
-      console.error(`[FAIL] T rule ${r.key}: sel×prop 不均一 (${tEnts.length} ≠ ${selectors.length}×${byPhys.size})`);
-      process.exit(1);
+    const sigOf = (ents) => ents.map(e =>
+      `${e.line}|${e.prop}|${norm(e.value)}|${e.nOtherVal ? norm(e.nOtherVal) : ''}|${e.nLiteralOk ? 1 : 0}|${e.nOppKey || ''}`
+    ).sort().join(' ;; ');
+    const sigGroups = new Map();
+    for (const [sel, ents] of bySel) {
+      const sig = sigOf(ents);
+      if (!sigGroups.has(sig)) sigGroups.set(sig, { sels: [], ents: [...ents].sort((a, b) => a.line - b.line) });
+      sigGroups.get(sig).sels.push(sel);
     }
-    const tokens = [];
-    const decls = [];
-    for (const [, e] of byPhys) {
-      const v = norm(e.value);
-      // opp merge: 反対 theme 値
-      let oppVal;
-      if (e.nOppKey && merged) {
-        const oppE = merged.entries.find(x => `${merged.file}|${x.line}|${x.selector}|${x.prop}` === e.nOppKey && x.nBatch);
-        if (oppE) {
-          oppVal = norm(oppE.value);
-          addDelete(merged.file, oppE.line, oppE.prop, `${oppE.ctx} ${oppE.baseSel} (merge)`);
+    for (const [, grp] of sigGroups) {
+      const tokens = [];
+      const decls = [];
+      for (const e of grp.ents) {
+        const v = norm(e.value);
+        // opp merge: 反対 theme 値
+        let oppVal;
+        if (e.nOppKey && merged) {
+          const oppE = merged.entries.find(x => `${merged.file}|${x.line}|${x.selector}|${x.prop}` === e.nOppKey && x.nBatch);
+          if (oppE) {
+            oppVal = norm(oppE.value);
+            addDelete(merged.file, oppE.line, oppE.prop, `${oppE.ctx} ${oppE.baseSel} (merge)`);
+          }
         }
+        if (e.nLiteralOk && !oppVal) {
+          decls.push({ prop: e.prop, value: v, imp: false }); // light-only token 参照 = other 側 IACVT 保証 → literal
+          continue;
+        }
+        const other = oppVal ?? (e.nOtherVal ? norm(e.nOtherVal) : 'initial');
+        const dark = e.ctx === 'light' ? other : v;
+        const light = e.ctx === 'light' ? v : other;
+        const name = tokenName(grp.sels[0], e.prop);
+        tokens.push({ name, dark, light: light === dark ? undefined : light });
+        decls.push({ prop: e.prop, value: `var(${name})`, imp: false });
       }
-      if (e.nLiteralOk && !oppVal) {
-        decls.push({ prop: e.prop, value: v, imp: false }); // light-only token 参照 = other 側 IACVT 保証 → literal
-        continue;
-      }
-      const other = oppVal ?? (e.nOtherVal ? norm(e.nOtherVal) : 'initial');
-      const dark = e.ctx === 'light' ? other : v;
-      const light = e.ctx === 'light' ? v : other;
-      const name = tokenName(selectors[0], e.prop);
-      tokens.push({ name, dark, light: light === dark ? undefined : light });
-      decls.push({ prop: e.prop, value: `var(${name})`, imp: false });
+      newRules.push({
+        file: r.target, vLine: r.vLine,
+        header: `/* S2-g co-locate (T): ${srcLabel}${merged ? ' + ' + merged.key.replace('assets/styles-', '').replace('.css', '') : ''} */`,
+        selectors: grp.sels, decls,
+      });
+      if (tokens.length) plan.push({ tokens, note: `S2-g ${selSlug(grp.sels[0])}`, decls: [] });
     }
-    newRules.push({
-      file: r.target, vLine: r.vLine,
-      header: `/* S2-g co-locate (T): ${srcLabel}${merged ? ' + ' + merged.key.replace('assets/styles-', '').replace('.css', '') : ''} */`,
-      selectors, decls,
-    });
-    if (tokens.length) plan.push({ tokens, note: `S2-g ${selSlug(selectors[0])}`, decls: [] });
   }
 
   // ── Mode B sibling rule (imp / svg 降格 → theme prefix 維持 K-type) ──

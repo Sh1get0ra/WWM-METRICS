@@ -226,6 +226,20 @@ const REAL_SHORTHANDS = new Set([
   'grid-row', 'grid-column', 'place-items', 'place-content', 'place-self',
   'outline'
 ]);
+// SVG presentation attribute 穴 (S2-g VRT 検出): stroke/fill 等は継承 prop →
+// IACVT unset = inherit ≠ 「decl 不在」(不在なら element の presentation attribute が勝つ)。
+// SVG 系 subject × presentational prop で other 側が unset 経路 (initial token / dark-invalid literal)
+// になる場合は token 化不可 → Mode B (theme prefix 維持 relocate) へ降格 (N) / pSafe false (P)
+const SVG_SUBJECT_RE = /(^|[\s>+~])(svg|path|line|circle|rect|polygon|polyline|ellipse|g|text|tspan|use)(?![\w-])[^\s>+~]*$/;
+const SVG_PRESENTATION_RE = /^(stroke|stroke-[\w-]+|fill|fill-[\w-]+|opacity|stop-[\w-]+|marker[\w-]*|color)$/;
+// 継承 prop (token 'initial' → IACVT → unset = inherit になる prop 群)
+const INHERITED_PROPS = new Set([
+  'color', 'font', 'font-family', 'font-size', 'font-weight', 'font-style', 'font-variant',
+  'line-height', 'letter-spacing', 'word-spacing', 'text-align', 'text-indent', 'text-transform',
+  'text-shadow', 'white-space', 'visibility', 'cursor', 'direction', 'quotes', 'tab-size',
+  'list-style', 'list-style-type', 'list-style-position', 'list-style-image',
+  'caption-side', 'border-collapse', 'border-spacing', 'empty-cells', 'word-break', 'overflow-wrap',
+]);
 function propsConflict(a, b) {
   if (a === b) return true;
   if (REAL_SHORTHANDS.has(a) && propGroup(a) === propGroup(b)) return true;
@@ -786,6 +800,33 @@ function extractForProp(val, fromProp, toProp) {
   return null;
 }
 
+// ── S2-h: DOM 包含知識 (grep 検証済の構造的事実、 cover 証明にのみ使用) ──
+// DOM_CONTAINMENT: class X の element は常に class A の element の子孫。
+//   .wwm-cmp-current = xinfa.js:319 / gear.js:456 / arsenal.js:91 の 3 出現のみ、
+//   全て .wwm-cmp-modal-a template 内部 + classList 動的付与なし (2026-06-06 grep 証明)
+const DOM_CONTAINMENT = new Map([
+  ['.wwm-cmp-current', ['.wwm-cmp-modal-a']],
+  // 対照 modal 専用 control 群 — gear.js (419/422/438/444/457/469/471) / xinfa.js (328/329) /
+  // arsenal.js (78) の template 変数は全て .wwm-cmp-modal-a の innerHTML 内 interpolate (2026-06-06 検証)
+  ['.wwm-cmp-kongfu-select', ['.wwm-cmp-modal-a']],
+  ['.wwm-cmp-set-select', ['.wwm-cmp-modal-a']],
+  ['.wwm-cmp-stat-select', ['.wwm-cmp-modal-a']],
+  ['.wwm-cmp-val-input', ['.wwm-cmp-modal-a']],
+  ['.wwm-cmp-lv-select', ['.wwm-cmp-modal-a']],
+  ['.wwm-cmp-lv', ['.wwm-cmp-modal-a']],
+]);
+// SUBJECT_IMPLICATION: class X を持つ element は常に class A も併せ持つ (同 element)。
+//   .wwm-cmp-modal-a の 3 出現は全て class="wwm-modal wwm-modal-square wwm-cmp-modal-a..."
+const SUBJECT_IMPLICATION = new Map([
+  ['.wwm-cmp-modal-a', ['.wwm-modal', '.wwm-modal-square']],
+]);
+// compound token set → SUBJECT_IMPLICATION で拡張 (element が必ず持つ class を追加)
+function expandCompound(set) {
+  const out = new Set(set);
+  for (const t of set) for (const a of (SUBJECT_IMPLICATION.get(t) || [])) out.add(a);
+  return out;
+}
+
 // selector 包含 (保守近似): g の全 compound 制約が sel の compound 列に順序保存で含まれる
 // → g は sel の match element を全て match (g ⊇ sel)。 子/隣接 combinator・:not 等は bail
 function selCovers(gSel, sel) {
@@ -799,11 +840,13 @@ function selCovers(gSel, sel) {
     return selCovers(gSel.replace(/::?[\w-]+\s*$/, ''), sel.replace(/::?[\w-]+\s*$/, ''));
   }
   if (/[>+~]|::|:not|:is|:where|:has/.test(gSel)) return false;
+  // sel 側 sibling combinator は祖先弱化不可 (A + B の A は兄弟 ≠ 祖先) → norm 同一以外 bail (S2-h)
+  if (/[+~]/.test(sel)) return false;
   const split = (s) => s.split(/\s+/).filter(Boolean).map(part =>
     new Set(part.match(/(\.[\w-]+|#[\w-]+|\[[^\]]*\]|:[\w-]+(\([^)]*\))?|[a-zA-Z][\w-]*|\*)/g) || [part]));
-  const gParts = split(norm(gSel)), sParts = split(norm(sel).replace(/\s*[>+~]\s*/g, ' '));
+  const gParts = split(norm(gSel)), sParts = split(norm(sel).replace(/\s*>\s*/g, ' ')).map(expandCompound);
   if (!gParts.length || !sParts.length) return false;
-  // subject (末尾) 同士: g の subject 制約 ⊆ sel の subject 制約
+  // subject (末尾) 同士: g の subject 制約 ⊆ sel の subject 制約 (implication 込)
   const subset = (a, b) => [...a].every(t => b.has(t));
   if (!subset(gParts[gParts.length - 1], sParts[sParts.length - 1])) return false;
   // 残り ancestor compound: 順序保存 subsequence
@@ -812,6 +855,22 @@ function selCovers(gSel, sel) {
     let found = false;
     for (; si >= 0; si--) {
       if (subset(gParts[gi], sParts[si])) { found = true; si--; break; }
+    }
+    if (!found && gi === 0) {
+      // S2-h DOM 包含: g 最上位 compound を sel 内 class の既知祖先 (DOM_CONTAINMENT) で充足。
+      // 位置安全条件: virtual 祖先は implier compound の直上にいる事だけが既知 (他 compound との
+      // 上下関係は不明) → g に既 match 済 ancestor がある場合は未走査域 (index ≤ si、 = 既 match
+      // より上の implier) のみ許可。 g 単独 ancestor なら implier は subject 含む全域可
+      const limit = (gParts.length - 2 > 0) ? si : sParts.length - 1;
+      for (let idx = 0; idx <= limit && !found; idx++) {
+        const implied = new Set();
+        for (const t of sParts[idx]) for (const a of (DOM_CONTAINMENT.get(t) || [])) {
+          implied.add(a);
+          for (const a2 of (SUBJECT_IMPLICATION.get(a) || [])) implied.add(a2);
+        }
+        if (implied.size && subset(gParts[0], implied)) found = true;
+      }
+      if (found) { si = -1; break; }
     }
     if (!found) return false;
   }
@@ -845,24 +904,21 @@ for (const e of out.P) {
     e.pBlockerList = hardNonTheme.slice(0, 3).map(b => `${b.file}:${b.line} ${b.selector} { ${b.prop} }`);
     continue;
   }
-  // other 側
+  // other 側 (rescue は rescueBeaten 共用 — S2-h で winning-cover + inherit 特例 + CSS-wide 拒否)
   const { beaten, keptTheme } = otherSideScan(e, target);
   e.pKeptTheme = keptTheme;
   if (beaten.length && !e.hasOpp) {
-    // rescue: beaten が全て同 other 解決値 v ∧ baseSel 全 element を cover する g* 存在
-    //   → token other 値 = v (奪っても表示同値)。 g.prop が shorthand なら e.prop 該当成分を抽出。
-    //   cover 不在 / 値不一致 / 抽出不能なら unsafe
-    const other = e.ctx === 'light' ? 'dark' : 'light';
-    const exts = beaten.map(g => ({ g, ext: extractForProp(g.value, g.prop, e.prop) }));
-    const vals = new Set(exts.map(x => x.ext === null ? '__NG__' : resolveCtx(x.ext, other)));
-    const cover = exts.find(x => x.ext !== null && selCovers(x.g.selector, e.baseSel));
-    if (vals.size === 1 && !vals.has('__NG__') && cover) {
-      e.pOtherVal = cover.ext; // raw 値 (token default は使用点で theme 解決)
-    } else {
+    const rescue = rescueBeaten(e, beaten);
+    if (rescue === null) {
       e.pSafe = false; e.pReason = 'other-beaten';
       e.pBeatenList = beaten.slice(0, 3).map(g => `${g.file}:${g.line} ${g.selector} { ${g.prop} }`);
       continue;
     }
+    if (!rescue.useInitial) e.pOtherVal = rescue.value; // raw 値 (token default は使用点で theme 解決)
+  }
+  // unset 経路 (opp 無し ∧ rescue 値無し = token 'initial') の SVG presentation attr 穴 (S2-g 知見の P 適用)
+  if (!e.hasOpp && !e.pOtherVal && svgAttrRisk(e.baseSel, e.prop)) {
+    e.pSafe = false; e.pReason = 'svg-unset'; continue;
   }
   e.pSafe = true;
 }
@@ -1069,12 +1125,6 @@ function valueInvalidIn(value, theme) {
   return false;
 }
 
-// SVG presentation attribute 穴 (S2-g VRT 検出): stroke/fill 等は継承 prop →
-// IACVT unset = inherit ≠ 「decl 不在」(不在なら element の presentation attribute が勝つ)。
-// SVG 系 subject × presentational prop で other 側が unset 経路 (initial token / dark-invalid literal)
-// になる場合は token 化不可 → Mode B (theme prefix 維持 relocate) へ降格
-const SVG_SUBJECT_RE = /(^|[\s>+~])(svg|path|line|circle|rect|polygon|polyline|ellipse|g|text|tspan|use)(?![\w-])[^\s>+~]*$/;
-const SVG_PRESENTATION_RE = /^(stroke|stroke-[\w-]+|fill|fill-[\w-]+|opacity|stop-[\w-]+|marker[\w-]*|color)$/;
 function svgAttrRisk(baseSel, prop) {
   return SVG_SUBJECT_RE.test(norm(baseSel)) && SVG_PRESENTATION_RE.test(prop);
 }
@@ -1120,15 +1170,39 @@ function relocateBlockers(e, targetFile, vLine) {
   return res;
 }
 
-// beaten rescue (P と同一 logic を関数化)。 CSS-wide keyword は custom property 値に不可 → 不可
+// beaten 同士の cascade 勝敗 (normal decl のみ — otherSideScan は imp 除外済)
+function beatenWins(a, b) {
+  const aL = LAYER_ORDER.get(a.file) ?? 99, bL = LAYER_ORDER.get(b.file) ?? 99;
+  if (aL !== bL) return aL > bL;
+  const sa = specificity(a.selector), sb = specificity(b.selector);
+  if (sa !== sb) return sa > sb;
+  return a.line > b.line;
+}
+// beaten rescue (N / P 共用)。 返値: { value } | { useInitial: true } | null
+//   旧 path: 全 beaten 同値 ∧ cover 存在
+//   S2-h: cascade-max cover — cover g* が他 beaten 全てに cascade 勝ち
+//     → baseSel の任意 element で「beaten 内 pre-insert winner」 = g* (max が element 不問で g*)
+//     → token other 値 = g* の e.prop 成分で表示再現
+//   inherit 特例 (S2-h): g* 成分 'inherit' ∧ 継承 prop ∧ 非 SVG presentation
+//     → token 'initial' (IACVT→unset=inherit) が g* と同値 = rescue 値不要
+//   他 CSS-wide keyword は custom property 値に不可 → null
 function rescueBeaten(e, beaten) {
   const other = e.ctx === 'light' ? 'dark' : 'light';
   const exts = beaten.map(g => ({ g, ext: extractForProp(g.value, g.prop, e.prop) }));
   const vals = new Set(exts.map(x => x.ext === null ? '__NG__' : resolveCtx(x.ext, other)));
-  const cover = exts.find(x => x.ext !== null && selCovers(x.g.selector, e.baseSel));
-  if (vals.size === 1 && !vals.has('__NG__') && cover &&
-    !/^(inherit|initial|unset|revert|revert-layer)$/i.test(norm(cover.ext))) return cover.ext;
-  return null;
+  const covers = exts.filter(x => x.ext !== null && selCovers(x.g.selector, e.baseSel));
+  let pick = null;
+  if (vals.size === 1 && !vals.has('__NG__') && covers.length) pick = covers[0];
+  else for (const c of covers) {
+    if (exts.every(x => x === c || beatenWins(c.g, x.g))) { pick = c; break; }
+  }
+  if (!pick) return null;
+  const v = norm(pick.ext);
+  if (/^(inherit|initial|unset|revert|revert-layer)$/i.test(v)) {
+    if (/^inherit$/i.test(v) && INHERITED_PROPS.has(e.prop) && !svgAttrRisk(e.baseSel, e.prop)) return { useInitial: true };
+    return null;
+  }
+  return { value: pick.ext };
 }
 
 // rule group 構築 (N + 同 rule の S 同乗)
@@ -1273,7 +1347,7 @@ function verifyRuleAt(r, target) {
             e.nBeatenList = beaten.slice(0, 4).map(g => `${g.file}:${g.line} ${g.selector} { ${g.prop}: ${g.value.slice(0, 40)} }`);
             continue;
           }
-          e.nOtherVal = rescue;
+          if (!rescue.useInitial) e.nOtherVal = rescue.value; // useInitial = unset≡inherit 再現 → initial 経路続行
         }
         if (!e.nOtherVal) {
           // other 側 = unset 経路。 SVG presentation attr 穴 → Mode B 降格 (theme gate 維持 = other 影響ゼロ)
@@ -1414,12 +1488,68 @@ out.NRULES = [...nRules.values()].map(r => ({
     important: !!e.important, ctx: e.ctx, nMode: e.nMode || null, nVLine: e.nVLine || null,
     nBatch: !!e.nBatch, nOk: !!e.nOk, nReason: e.nReason || null,
     nOppKey: e.nOppKey || null, nOppStays: !!e.nOppStays, nOtherVal: e.nOtherVal || null,
-    nLiteralOk: !!e.nLiteralOk, nRide: !!e.nRide,
+    nLiteralOk: !!e.nLiteralOk, nRide: !!e.nRide, nBeatenList: e.nBeatenList || null,
   })),
 }));
 
+// ── S2-h: shadowed dead theme decl 検出 ──
+// 同 theme file 内の rule d2 (同 prop ∧ 同 media) が d の全 match element を cover
+// (selCovers = DOM 包含込) し cascade 常勝 → d はどの element でも winner になれない = dead。
+// 値不問 (d2 常勝なら d の値は表示に乗らない) → 削除は表示不変。
+// fixpoint: shadower が全て同時削除されると d が蘇生し得る → 生存 shadower 必須
+{
+  const isShadowedBy = (d, d2) => {
+    if (d2 === d || d2.prop.startsWith('--')) return false;
+    if (d2.file !== d.file || d2.prop !== d.prop) return false;
+    if (d2.line === d.line) return false; // 同 物理 decl の selector split (削除道連れ)
+    if ((d2.media || null) !== (d.media || null)) return false;
+    if (d.important && !d2.important) return false;
+    if (!selCovers(stripTheme(d2.selector), stripTheme(d.selector))) return false;
+    if (!d.important && d2.important) return true; // 同 layer imp > normal
+    const sd = specificity(d.selector), s2 = specificity(d2.selector);
+    return s2 > sd || (s2 === sd && d2.line > d.line);
+  };
+  const shadowers = new Map(); // declRef → [d2,...]
+  for (const d of themeDecls) {
+    if (d.prop.startsWith('--')) continue;
+    const base = stripTheme(d.selector);
+    if (base === 'html' || base === '') continue;
+    const hits = themeDecls.filter(d2 => isShadowedBy(d, d2));
+    if (hits.length) shadowers.set(d, hits);
+  }
+  // fixpoint: 生存 shadower を最低 1 つ持つもののみ dead
+  let dead = new Set(shadowers.keys());
+  let chg = true;
+  while (chg) {
+    chg = false;
+    for (const d of [...dead]) {
+      if (!shadowers.get(d).some(d2 => !dead.has(d2))) { dead.delete(d); chg = true; }
+    }
+  }
+  // 物理 decl gate: 全 selector split が dead の時のみ削除可
+  const physDead = new Map();
+  for (const d of themeDecls) {
+    if (d.prop.startsWith('--')) continue;
+    const k = `${d.file}|${d.line}|${d.prop}`;
+    if (!physDead.has(k)) physDead.set(k, []);
+    physDead.get(k).push(d);
+  }
+  out.DEAD = [];
+  for (const [k, splits] of physDead) {
+    if (!splits.every(s => dead.has(s))) continue;
+    const d = splits[0];
+    const sh = shadowers.get(d)[0];
+    out.DEAD.push({ file: d.file, line: d.line, prop: d.prop, selector: norm(d.selector),
+      shadower: `${sh.file}:${sh.line} ${norm(sh.selector)}` });
+  }
+}
+
 const cnt = (a) => a.length;
 console.log(`theme decls: ${themeDecls.length} (TOKEN ${cnt(out.TOKEN)} / M ${cnt(out.M)} / P ${cnt(out.P)} / N ${cnt(out.N)} / S ${cnt(out.S)})`);
+if (out.DEAD.length) {
+  console.log(`DEAD (shadowed、 削除可): ${out.DEAD.length} 物理 decl`);
+  for (const d of out.DEAD) console.log(`  [DEAD] ${d.file.replace('assets/styles-', '')}:${d.line} ${d.selector.slice(0, 60)} { ${d.prop} } ← ${d.shadower.replace('assets/styles-', '').slice(0, 80)}`);
+}
 const safeM = out.M.filter(d => d.safe);
 console.log(`M safe (静的): ${safeM.length} / ${out.M.length}  (うち same-value redundant: ${safeM.filter(d => d.sameValue).length})`);
 const batchM = out.M.filter(d => d.batchSafe);
