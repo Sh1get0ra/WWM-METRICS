@@ -952,7 +952,6 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   width: 100%;
   cursor: pointer;
 }
-.wwm-cmp-stat-select:focus { outline: 1px solid var(--accent); }
 .wwm-cmp-useful-mark { font-size: var(--text-12); text-align: center; }
 .wwm-cmp-val-wrap {
   display: grid;

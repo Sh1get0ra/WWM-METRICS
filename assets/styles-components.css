@@ -1531,7 +1531,6 @@ html.wwm-view-sidebar .wwm-app-body {
   color: var(--gold-bright);
   font-family: var(--f-mono);
 }
-.wwm-cmp-lv-select:focus { outline: 1px solid var(--gold-bright); border-color: var(--gold-bright); }
 /* ライト: select/input 黒背景 → 紙系 */
 /* ライト: 装備比較 セット効果 (赤系title) glow弱 — 副情報 (セット名) 濃朱 統一 */
 /* ライト: 装備カード 武術名 + 心法カード 心法名 (主情報) — ライト主文字色 + 太字 統一 */
