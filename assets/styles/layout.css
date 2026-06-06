@@ -375,16 +375,18 @@ html.wwm-view-sidebar body .wwm-app-body { padding: var(--space-2); }
     z-index: auto;
     padding: calc(8px + var(--safe-bottom)) 12px 8px;
   }
-  /* ─── Phase 3: preset-bar (弱点+プリセット) 1行横スクロール強制 ─── */
+  /* ─── Phase 3 改 (critique P2 / 兄貴指摘 2026-06-06): preset-bar wrap 方式 ───
+     旧 = 1 行 + 横 scroll 強制。 弱点 badge 表示 build では SE 375px で 15px 溢れ →
+     横 scroll 発生 (badge 非表示 fixture では再現せず見落とした)。
+     flex-wrap: 溢れる時だけ slots 群 (単一 flex item) が 2 行目へ自動落ち —
+     1 行目 = 格析 + 弱点 badge (常時可視)、 横 scroll 恒久根絶。 badge 無し 375px は 1 行のまま */
   .preset-bar {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     flex-direction: row;
-    gap: var(--space-2);
-    overflow-x: auto;
+    gap: var(--space-1) var(--space-2);
+    overflow-x: hidden;
     overflow-y: hidden;
-    scrollbar-width: thin;
-    -webkit-overflow-scrolling: touch;
   }
   /* padding/margin-top は spec 301 で分離 (Step 5-c 2026-06-06): PC rule
      .sticky-header > .preset-bar (301, 前方) の padding-left/right + margin: 0 auto に勝つ —
