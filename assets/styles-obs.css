@@ -40,7 +40,9 @@ html.wwm-view-sidebar .wwm-sidebar-test {
   background-color: transparent;
   background-image: none;
   border: 1px solid var(--accent-mid);
-  border-left: 3px solid var(--vermilion);
+  /* border-left 3px 朱 は削除 (2026-06-06): OBS overlay で左に赤線が出る。
+     旧 SECTION 14 (7bafd72) 由来の指定で @layer regression ではない。
+     shorthand border が base の border-left vermilion も遮蔽 (obs layer 最終勝ち) */
 }
 /* sb-top: sticky 上部 (avatar+総合武力) のみユーザー alpha で背景 */
 html.wwm-view-sidebar .wwm-sb-top {
