@@ -34,6 +34,11 @@ dist/
 # VRT (visual regression test)
 .vrt/
 
+# impeccable (design context / critique snapshot — local 専用)
+.impeccable/
+# critique 作業スクショ (playwright 出力)
+crit-*.png
+
 # scripts/ artifacts (regenerable; cjs scripts themselves ARE tracked)
 scripts/.*.json
 scripts/.*.md
