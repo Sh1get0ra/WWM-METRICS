@@ -141,6 +141,12 @@ html[data-theme="light"] {
   --c-anlz-shadow-orange:      rgba(120,60,20,.18);  /* anlz-header / anlz-body box-shadow */
   --c-sb-top-bg:               #f5ead0;              /* sidebar wwm-sb-top + sb-rest gradient 上 */
 
+  /* ─── @layer Step 2-i: theme-swap tokens (light 値) ─── */
+  --c-cmp-modal-a--cmp-kongfu-select-border: var(--c-border-mid-warm);
+  --c-cmp-modal-a--cmp-set-select-border: var(--c-border-mid-warm);
+  --c-cmp-title--cmp-lv-select-border: initial;
+  --c-cmp-modal-a--cmp-val-input-border: initial;
+
   /* ─── @layer Step 2-h: theme-swap tokens (light 値) ─── */
   --c-cmp-modal-a--cmp-stat-select-border: var(--c-border-mid-warm);
 
@@ -645,9 +651,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-header { color: var(--
 
 html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-header { color: var(--vermilion-deep);  background: linear-gradient(90deg, var(--vermilion-bright-tint), var(--c-vermilion-fade-end)); }
 
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-kongfu-select {   border-color: var(--c-border-mid-warm); }
-
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-select {  color: var(--vermilion-deep); border-color: var(--c-border-mid-warm); }
+html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-set-select {  color: var(--vermilion-deep);  }
 
 /* S2-d split: stat-select は L524 組と競合残置 → val-input と分離 */
 

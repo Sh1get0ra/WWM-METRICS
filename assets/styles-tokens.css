@@ -493,7 +493,13 @@
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
 
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
-  --c-cmp-modal-a--cmp-stat-select-border: initial;
+  --c-cmp-modal-a--cmp-stat-select-border: var(--gold-mid);
+
+  /* ─── @layer Step 2-i: theme-swap tokens (dark default) ─── */
+  --c-cmp-modal-a--cmp-kongfu-select-border: var(--gold-mid);
+  --c-cmp-modal-a--cmp-set-select-border: var(--gold-mid);
+  --c-cmp-title--cmp-lv-select-border: var(--gold-mid);
+  --c-cmp-modal-a--cmp-val-input-border: var(--gold-mid);
 
   /* Safe Area inset utility (Phase 1 base) */
   --safe-top:    env(safe-area-inset-top, 0px);

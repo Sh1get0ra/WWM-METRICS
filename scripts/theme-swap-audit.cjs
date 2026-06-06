@@ -599,6 +599,9 @@ function cmpBaseGWins(e, gE) {
   return gE.pair.line > e.pair.line;
 }
 
+// drop-gate 計測 (S2-i): fixpoint で batch から落ちた「最初の」理由を記録 (後続は連鎖)
+const dropGate = (e, gate, detail) => { if (!e.dropGate) { e.dropGate = gate; if (detail) e.dropDetail = detail; } };
+
 function mFixpoint() {
 let changed = true;
 while (changed) {
@@ -630,7 +633,7 @@ while (changed) {
             return ss > sd || (ss === sd && s.line > e.line) ||
               resolveCtx(s.value, e.ctx) === resolveCtx(e.value, e.ctx); // g' が d に勝つ or theme 表示同値
           });
-          if (!shielded) { dropSelf = true; break; }
+          if (!shielded) { dropSelf = true; dropGate(e, 'm-blocker', `${g.file}:${g.line} ${g.selector} { ${g.prop} }`); break; }
         }
       } else {
         const valEq = g.prop === e.prop && resolveCtx(g.value, e.ctx) === resolveCtx(e.value, e.ctx);
@@ -640,9 +643,9 @@ while (changed) {
         if (!okDir) {
           if (g.beforeGWins) {
             // g を残せば harmless → blocker 側を batch から外す (依存を道連れにしない)
-            inBatch.delete(gK); changed = true;
+            if (inBatch.delete(gK)) { changed = true; dropGate(gE, 'm-dep-evict', `dep of ${e.file}:${e.line}`); }
           } else {
-            dropSelf = true; break;
+            dropSelf = true; dropGate(e, 'm-dir', `${g.file}:${g.line} ${g.selector} { ${g.prop} }`); break;
           }
         }
       }
@@ -657,7 +660,7 @@ while (changed) {
     const k0 = `${norm(splits[0].pair.value)} || ${norm(splits[0].value)} || ${splits[0].sameValue}`;
     const uniform = splits.every(s => `${norm(s.pair.value)} || ${norm(s.value)} || ${s.sameValue}` === k0);
     if (!allIn || !uniform) {
-      for (const s of splits) if (inBatch.delete(keyOf(s))) changed = true;
+      for (const s of splits) if (inBatch.delete(keyOf(s))) { changed = true; dropGate(s, 'm-phys', pk); }
     }
   }
   // base 側物理 gate (theme 別・独立判定): pair rule の全 selector cover ∧ 値均一。
@@ -671,7 +674,7 @@ while (changed) {
       const covered = new Set(side.map(x => x.baseSel));
       const vals = new Set(side.map(x => resolveCtx(x.value, ctx)));
       if (![...sels].every(S => covered.has(S)) || vals.size !== 1) {
-        for (const x of side) if (inBatch.delete(keyOf(x))) changed = true;
+        for (const x of side) if (inBatch.delete(keyOf(x))) { changed = true; dropGate(x, 'm-base-phys', pk); }
       }
     }
   }
@@ -696,18 +699,26 @@ for (const b of baseDecls) {
   if (b.line > r.lastLine) r.lastLine = b.line;
 }
 
-function pInsertTarget(baseSel, media) {
-  // 同 selector ∧ 同 media の base rule 群 → cascade 最後 (layer → ruleStart) = 挿入先
-  // (最後を選ぶ事で同 selector base rule は全て A に負ける = pairWinnerBlockers の同 selector 除外と整合)
-  let best = null;
+function pInsertCandidates(baseSel, media) {
+  // 同 selector ∧ 同 media の base rule 群 → cascade 降順 (layer → ruleStart)。
+  // [0] = cascade 最後 = 従来の pInsertTarget (同 selector base rule 全てに A 勝ち =
+  // pairWinnerBlockers の同 selector 除外と整合)。 [1..] = retry 候補 (S2-i) —
+  // 採用時は後続 same-selector rule との propsConflict 再検証必須 (validatePTarget)
+  const seen = new Set();
+  const cands = [];
   for (const b of baseDecls) {
     if (norm(b.selector) !== baseSel || (b.media || null) !== (media || null)) continue;
-    const r = baseByRule.get(`${b.file}|${b.ruleId}`);
-    if (!best) { best = r; continue; }
-    const lb = LAYER_ORDER.get(best.file) ?? 99, lr = LAYER_ORDER.get(r.file) ?? 99;
-    if (lr > lb || (lr === lb && r.ruleStart > best.ruleStart)) best = r;
+    const k = `${b.file}|${b.ruleId}`;
+    if (seen.has(k)) continue;
+    seen.add(k);
+    cands.push(baseByRule.get(k));
   }
-  return best;
+  cands.sort((a, b) => {
+    const la = LAYER_ORDER.get(a.file) ?? 99, lb = LAYER_ORDER.get(b.file) ?? 99;
+    if (la !== lb) return lb - la;
+    return b.ruleStart - a.ruleStart;
+  });
+  return cands;
 }
 
 // other theme で A (挿入 decl) が現 winner から element を奪う競合列挙 + 残置 theme 競合
@@ -880,6 +891,43 @@ function selCovers(gSel, sel) {
 const tIndex = new Map(); // 全 theme decl: gid → decl (kept dep の selector/value 参照用)
 for (const d of themeDecls) tIndex.set(`${d.file}|${d.line}|${norm(d.selector)}|${d.prop}`, d);
 
+// target 1 つに対する P 静的検証 (S2-i で関数化 — coverage retry が別候補で再検証する)
+// laterRules = 採用 target より cascade 後の same-selector rule 群。 そこに propsConflict decl が
+// あると挿入 decl A は同 specificity 後 rule に敗北 (= 従来「最後の rule 固定」が担保していた前提の補完検査)
+function validatePTarget(e, target, laterRules) {
+  for (const r of laterRules) {
+    const conflict = baseDecls.some(b => b.file === r.file && b.line >= r.ruleStart && b.line <= r.lastLine &&
+      norm(b.selector) === e.baseSel && !b.prop.startsWith('--') && propsConflict(b.prop, e.prop));
+    if (conflict) return { ok: false, reason: 'later-conflict' };
+  }
+  const ins = { file: target.file, ruleStart: target.ruleStart, lastLine: target.lastLine, ruleSels: [...target.sels] };
+  // ctx 側: 挿入 decl = synthetic pair (token ctx 値 = e.value で表示値保存)。
+  // hard blocker (beforeGWins=false) は同 batch P theme decl なら fixpoint で方向検証 → ここでは不可判定しない
+  const synth = { ...e, pair: { file: target.file, line: target.lastLine + 1 } };
+  // 挿入先 rule 内 decl は A (末尾挿入) が rule 内順序で常勝 → blocker から除外
+  const blockers = pairWinnerBlockers(synth, e.ctx)
+    .filter(b => !(b.file === target.file && b.line >= target.ruleStart && b.line <= target.lastLine));
+  const hardNonTheme = blockers.filter(b => !b.beforeGWins && !THEME_FILE_SET.has(b.file));
+  if (hardNonTheme.length) return { ok: false, reason: 'ctx-blocker', hardNonTheme, blockers };
+  // other 側 (rescue は rescueBeaten 共用 — S2-h で winning-cover + inherit 特例 + CSS-wide 拒否)
+  const { beaten, keptTheme } = otherSideScan(e, target);
+  let otherVal;
+  if (beaten.length && !e.hasOpp) {
+    const rescue = rescueBeaten(e, beaten);
+    if (rescue === null) return { ok: false, reason: 'other-beaten', beaten, blockers, keptTheme };
+    if (!rescue.useInitial) otherVal = rescue.value; // raw 値 (token default は使用点で theme 解決)
+  }
+  // unset 経路 (opp 無し ∧ rescue 値無し = token 'initial') の SVG presentation attr 穴 (S2-g 知見の P 適用)
+  if (!e.hasOpp && !otherVal && svgAttrRisk(e.baseSel, e.prop)) return { ok: false, reason: 'svg-unset', blockers, keptTheme };
+  return { ok: true, insert: ins, blockers, keptTheme, otherVal };
+}
+function adoptPTarget(e, v) {
+  e.insert = v.insert;
+  e.pBlockers = v.blockers;
+  e.pKeptTheme = v.keptTheme;
+  e.pOtherVal = v.otherVal; // undefined = token 'initial'
+}
+
 for (const e of out.P) {
   e.ctx = e.file === 'assets/styles-dark.css' ? 'dark' : 'light';
   // 反対 theme の同 baseSel+prop entry (opp)
@@ -888,39 +936,32 @@ for (const e of out.P) {
   e.hasOpp = !!opp;
   if (opp) e.oppKey = `${opp.file}|${opp.line}|${norm(opp.selector)}|${opp.prop}`;
   if (e.important) { e.pSafe = false; e.pReason = 'imp'; continue; }
-  const target = pInsertTarget(e.baseSel, e.media);
-  if (!target) { e.pSafe = false; e.pReason = 'no-same-media-rule'; continue; }
-  e.insert = { file: target.file, ruleStart: target.ruleStart, lastLine: target.lastLine, ruleSels: [...target.sels] };
-  // ctx 側: 挿入 decl = synthetic pair (token ctx 値 = e.value で表示値保存)。
-  // hard blocker (beforeGWins=false) は同 batch P theme decl なら fixpoint で方向検証 → ここでは不可判定しない
-  const synth = { ...e, pair: { file: target.file, line: target.lastLine + 1 } };
-  // 挿入先 rule 内 decl は A (末尾挿入) が rule 内順序で常勝 → blocker から除外
-  const blockers = pairWinnerBlockers(synth, e.ctx)
-    .filter(b => !(b.file === target.file && b.line >= target.ruleStart && b.line <= target.lastLine));
-  e.pBlockers = blockers;
-  const hardNonTheme = blockers.filter(b => !b.beforeGWins && !THEME_FILE_SET.has(b.file));
-  if (hardNonTheme.length) {
-    e.pSafe = false; e.pReason = 'ctx-blocker';
-    e.pBlockerList = hardNonTheme.slice(0, 3).map(b => `${b.file}:${b.line} ${b.selector} { ${b.prop} }`);
+  e.pCands = pInsertCandidates(e.baseSel, e.media);
+  e.pCandIdx = 0;
+  if (!e.pCands.length) { e.pSafe = false; e.pReason = 'no-same-media-rule'; continue; }
+  const v = validatePTarget(e, e.pCands[0], []);
+  if (!v.ok) {
+    e.pSafe = false; e.pReason = v.reason;
+    if (v.hardNonTheme) e.pBlockerList = v.hardNonTheme.slice(0, 3).map(b => `${b.file}:${b.line} ${b.selector} { ${b.prop} }`);
+    if (v.beaten) e.pBeatenList = v.beaten.slice(0, 3).map(g => `${g.file}:${g.line} ${g.selector} { ${g.prop} }`);
     continue;
   }
-  // other 側 (rescue は rescueBeaten 共用 — S2-h で winning-cover + inherit 特例 + CSS-wide 拒否)
-  const { beaten, keptTheme } = otherSideScan(e, target);
-  e.pKeptTheme = keptTheme;
-  if (beaten.length && !e.hasOpp) {
-    const rescue = rescueBeaten(e, beaten);
-    if (rescue === null) {
-      e.pSafe = false; e.pReason = 'other-beaten';
-      e.pBeatenList = beaten.slice(0, 3).map(g => `${g.file}:${g.line} ${g.selector} { ${g.prop} }`);
-      continue;
-    }
-    if (!rescue.useInitial) e.pOtherVal = rescue.value; // raw 値 (token default は使用点で theme 解決)
-  }
-  // unset 経路 (opp 無し ∧ rescue 値無し = token 'initial') の SVG presentation attr 穴 (S2-g 知見の P 適用)
-  if (!e.hasOpp && !e.pOtherVal && svgAttrRisk(e.baseSel, e.prop)) {
-    e.pSafe = false; e.pReason = 'svg-unset'; continue;
-  }
+  adoptPTarget(e, v);
   e.pSafe = true;
+}
+
+// coverage fail 時の insert target retry (S2-i): 次候補 (cascade 前方の same-selector rule) を
+// validatePTarget で再検証 → 成功なら insert 差替えて batch 残留 (multi-selector rule 巻添えの正当 drop を回避)。
+// pCandIdx 単調増加 + 候補有限 → fixpoint 停止保証
+function retryPTarget(e) {
+  while (e.pCandIdx + 1 < e.pCands.length) {
+    e.pCandIdx++;
+    const target = e.pCands[e.pCandIdx];
+    const later = e.pCands.slice(0, e.pCandIdx); // 降順 list = 前方 index が cascade 後続 rule
+    const v = validatePTarget(e, target, later);
+    if (v.ok) { adoptPTarget(e, v); e.pRetried = e.pCandIdx; return true; }
+  }
+  return false;
 }
 
 // P batch fixpoint — gate 3 種
@@ -963,12 +1004,12 @@ while (pchg) {
         if (inB && bE) {
           // 同一 insert 物理 decl (同 rule + 同 prop) は coverage gate が値均一保証 → 方向不問
           const sameIns = bE.insert && e.insert && bE.insert.file === e.insert.file && bE.insert.ruleStart === e.insert.ruleStart && bE.prop === e.prop;
-          if (!sameIns && !depStillWins(bE, e)) { drop = true; break; }
+          if (!sameIns && !depStillWins(bE, e)) { drop = true; dropGate(e, 'p-dir', bk); break; }
         }
       } else {
-        if (!inB || !bE) { drop = true; break; }            // theme hard blocker 残置 = 常勝 → 不可
+        if (!inB || !bE) { drop = true; dropGate(e, 'p-hard-stay', bk); break; } // theme hard blocker 残置 = 常勝 → 不可
         const sameIns = bE.insert && e.insert && bE.insert.file === e.insert.file && bE.insert.ruleStart === e.insert.ruleStart && bE.prop === e.prop;
-        if (!sameIns && depStillWins(bE, e)) { drop = true; break; } // 移動後 g 勝ち = before (e 勝ち) と逆転 → 不可
+        if (!sameIns && depStillWins(bE, e)) { drop = true; dropGate(e, 'p-dir', bk); break; } // 移動後 g 勝ち = before (e 勝ち) と逆転 → 不可
       }
     }
     // other 残置勝者 (keptTheme): before 勝者 (g vs opp) に応じて方向要件が変わる
@@ -984,17 +1025,17 @@ while (pchg) {
         const g = tIndex.get(d);
         const gE = pIndex.get(d);
         const gMoves = gE && pBatch.has(d);
-        if (!g) { drop = true; break; }
+        if (!g) { drop = true; dropGate(e, 'p-kept', d); break; }
         if (!oppE) {
-          if (gMoves && !depStillWins(gE, e)) { drop = true; break; } // g 勝ち維持必須
+          if (gMoves && !depStillWins(gE, e)) { drop = true; dropGate(e, 'p-kept', d); break; } // g 勝ち維持必須
         } else {
           if (resolveCtx(g.value, other) === resolveCtx(oppE.value, other)) continue; // 同値 = 方向不問
           const sg = specificity(g.selector), so = specificity(oppE.selector);
           const gWonBefore = sg > so || (sg === so && g.line > oppE.line);
           if (gWonBefore) {
-            if (gMoves && !depStillWins(gE, e)) { drop = true; break; }
+            if (gMoves && !depStillWins(gE, e)) { drop = true; dropGate(e, 'p-kept', d); break; }
           } else {
-            if (!gMoves || depStillWins(gE, e)) { drop = true; break; } // g 残置 or 移動後勝ち = opp 値喪失
+            if (!gMoves || depStillWins(gE, e)) { drop = true; dropGate(e, 'p-kept', d); break; } // g 残置 or 移動後勝ち = opp 値喪失
           }
         }
       }
@@ -1002,10 +1043,10 @@ while (pchg) {
     if (drop) { pBatch.delete(k); pchg = true; }
   }
   // 物理 theme decl gate: 全 selector split が batch 内、 さもなくば全 drop
-  for (const [, splits] of pPhysGroups) {
+  for (const [pk, splits] of pPhysGroups) {
     const states = splits.map(s => pBatch.has(pKeyOf(s)));
     if (states.some(Boolean) && !states.every(Boolean)) {
-      for (const s of splits) if (pBatch.delete(pKeyOf(s))) pchg = true;
+      for (const s of splits) if (pBatch.delete(pKeyOf(s))) { pchg = true; dropGate(s, 'p-phys', pk); }
     }
   }
   // 挿入先 rule coverage gate (theme 別): rule の全 selector が当該 ctx の batch entry
@@ -1040,7 +1081,12 @@ while (pchg) {
         if (otherVals.size > 1) ok = false;
       }
       if (!ok) {
-        for (const x of side) if (pBatch.delete(pKeyOf(x))) pchg = true;
+        for (const x of side) {
+          if (!pBatch.has(pKeyOf(x))) continue;
+          if (retryPTarget(x)) { pchg = true; continue; } // 別 target で batch 残留 → group 再編成は次 iteration
+          pBatch.delete(pKeyOf(x)); pchg = true;
+          dropGate(x, 'p-coverage', `${x.insert.file}:${x.insert.ruleStart} sels=${x.insert.ruleSels.length}`);
+        }
       }
     }
   }
@@ -1064,13 +1110,14 @@ while (outerChg) {
   outerChg = false;
   mFixpoint();
   pFixpoint();
-  for (const [, splits] of allPhys) {
+  for (const [pk, splits] of allPhys) {
     const deletable = (s) => s.cat === 'M' ? inBatch.has(s.key) : s.cat === 'P' ? pBatch.has(s.key) : false;
     const states = splits.map(deletable);
     if (states.some(Boolean) && !states.every(Boolean)) {
       for (const s of splits) {
-        if (s.cat === 'M' && inBatch.delete(s.key)) outerChg = true;
-        if (s.cat === 'P' && pBatch.delete(s.key)) outerChg = true;
+        const eAll = (s.cat === 'M' ? out.M : out.P).find(x => `${x.file}|${x.line}|${norm(x.selector)}|${x.prop}` === s.key);
+        if (s.cat === 'M' && inBatch.delete(s.key)) { outerChg = true; if (eAll) dropGate(eAll, 'xphys', pk); }
+        if (s.cat === 'P' && pBatch.delete(s.key)) { outerChg = true; if (eAll) dropGate(eAll, 'xphys', pk); }
       }
     }
   }
@@ -1581,6 +1628,13 @@ for (const d of out.P) {
   pReasons[r] = (pReasons[r] || 0) + 1;
 }
 console.log(`P 非 batch 内訳: ${Object.entries(pReasons).map(([k, v]) => `${k} ${v}`).join(' / ')}`);
+// drop-gate 計測 (fixpoint 初回 drop 理由 — 後続連鎖と区別)
+for (const cat of ['M', 'P']) {
+  const gated = out[cat].filter(d => d.dropGate);
+  if (!gated.length) continue;
+  console.log(`${cat} drop-gate 内訳:`);
+  for (const d of gated) console.log(`  [${d.dropGate}] ${d.file}:${d.line} ${d.baseSel} { ${d.prop} }${d.dropDetail ? ` ← ${d.dropDetail}` : ''}`);
+}
 
 const byFileCat = {};
 for (const cat of ['M', 'P', 'N', 'S']) {
@@ -1599,5 +1653,6 @@ if (process.argv.includes('--pairs')) {
   }
 }
 
+for (const e of out.P) delete e.pCands; // rule object (sels:Set) は非 serializable — pCandIdx/pRetried は残す
 fs.writeFileSync('scripts/.theme-swap.json', JSON.stringify(out, null, 1));
 console.log('→ scripts/.theme-swap.json');

@@ -443,6 +443,7 @@
 }
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
   cursor: pointer;
+  border-color: var(--c-cmp-title--cmp-lv-select-border);
 }
 .wwm-cmp-modal-a .wwm-cmp-col {
   margin-top: var(--space-1);
@@ -470,6 +471,7 @@
   font-weight: 700;
   margin-bottom: var(--space-2);
   margin-top: var(--space-1-5);
+  border-color: var(--c-cmp-modal-a--cmp-kongfu-select-border);
 }
 /* select内 option を統一 (paper bg + var(--bg-raised) / hover青) */
 .wwm-cmp-modal-a select option {
@@ -496,6 +498,7 @@
 }
 .wwm-cmp-modal-a .wwm-cmp-set-select {
   border: 1px solid var(--gold-deep);
+  border-color: var(--c-cmp-modal-a--cmp-set-select-border);
 }
 .wwm-cmp-modal-a .wwm-cmp-rows {
   display: flex;
@@ -803,6 +806,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   padding: var(--space-half) var(--space-1) !important;
   font-size: var(--text-12);
   text-align: right;
+  border-color: var(--c-cmp-modal-a--cmp-val-input-border);
 }
 .wwm-cmp-modal-a .wwm-cmp-val {
   text-align: right;
