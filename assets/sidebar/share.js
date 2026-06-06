@@ -39,44 +39,87 @@
     delete riLight.bodyType;       // キャラ体型
     delete riLight.school;         // debug log のみ使用、 表示不要
     // OBS view 武格指数 / Tier badge 表示用に baseline + opt_best 同梱 (数百バイト、 URL長影響軽微)
-    const baseline = WWMState.baseline || null;
-    const optBest  = WWMState.opt.best || null;
-    // baseAffixes slim化: {equipmentDetails:[id,val,ratio,rank,useful]} → [id,val,ratio,rank,useful]
-    //   + ratio 小数3桁丸め、 boolean→0/1 で 50%程縮小。 受信側 inline script で復元。
-    //   ※元 ri 共有を避けるため wearEquipsDetailed は deep clone してから slim化
+    //   v4: ts は受信側未使用 (scoreVer/end/score のみ参照) → 削除で短縮
+    const _b = WWMState.baseline || null;
+    const _o = WWMState.opt.best || null;
+    const baseline = _b ? { ..._b } : null; if (baseline) delete baseline.ts;
+    const optBest  = _o ? { ..._o } : null; if (optBest)  delete optBest.ts;
+    // ── v4 slim (2026-06-07、 Discord 2000字以下達成 — 実測 2705→1900付近) ──
+    // wearEquipsDetailed → slot別 positional 配列 [no, suffix, attrs, affixes, extra?]
+    //   attrs   = [[attrIdx|key, val], ...] (ATTR_KEYS index、 未知 key は文字列のまま = 前方互換)
+    //   affixes = [id, val, ratio, pack] (pack = rank*2 + useful01。 rank 異常時のみ 5 要素 [id,val,ratio,rank,u01])
+    //             ※val/ratio は丸め厳禁 = baseline 整合 (受信側 statusScore 再計算が完全一致する必要)
+    //   no      = 数値文字列なら number 化 (受信側で String 復元)
+    //   durability = 受信側消費ゼロ (grep 確認 2026-06-07) → 非送信
+    //   _inferredLv = 受信側 buildStatParams で再計算されるため非送信 (stats.js:112)
+    //   未知 field は extra ({eq:{...}, ex:{...}}) に退避 = import schema 拡張への安全弁
+    const ATTR_KEYS = ['MIN_W_ATK','MAX_W_ATK','HP_MAX','W_DEF','ARCHER_WEAKPOINT_DAMAGE','ARCHER_DAMAGE'];
     try {
       const wd = riLight.wearEquipsDetailed;
       if (wd && typeof wd === 'object') {
-        const wdCloned = JSON.parse(JSON.stringify(wd));
-        Object.values(wdCloned).forEach(eq => {
-          if (eq?.exVo?.baseAffixes && Array.isArray(eq.exVo.baseAffixes)) {
-            eq.exVo.baseAffixes = eq.exVo.baseAffixes.map(a => {
-              const d = a?.equipmentDetails;
-              if (!Array.isArray(d)) return a;
-              return [d[0], d[1], d[2], d[3], d[4]?1:0];
-            });
+        const wd4 = {};
+        for (const [slot, eq] of Object.entries(wd)) {
+          if (!eq || typeof eq !== 'object') { wd4[slot] = eq; continue; }
+          const ex = eq.exVo || {};
+          const attrs = Object.entries(ex.baseAttrs || {}).map(([k, v]) => {
+            const i = ATTR_KEYS.indexOf(k);
+            return [i >= 0 ? i : k, v];
+          });
+          const affixes = (ex.baseAffixes || []).map(a => {
+            const d = a?.equipmentDetails;
+            if (!Array.isArray(d)) return a;
+            const rank = d[3], u = d[4] ? 1 : 0;
+            if (Number.isInteger(rank) && rank >= 0 && rank < 100) return [d[0], d[1], d[2], rank * 2 + u];
+            return [d[0], d[1], d[2], rank, u];
+          });
+          const noNum = (typeof eq.no === 'string' && /^\d+$/.test(eq.no)) ? Number(eq.no) : eq.no;
+          const arr = [noNum, ex.suffix ?? null, attrs, affixes];
+          // 未知 field 退避
+          const eqExtra = {}; let hasEq = false;
+          for (const k of Object.keys(eq)) if (k !== 'no' && k !== 'exVo') { eqExtra[k] = eq[k]; hasEq = true; }
+          const exExtra = {}; let hasEx = false;
+          for (const k of Object.keys(ex)) if (!['durability','suffix','baseAttrs','baseAffixes','_inferredLv'].includes(k)) { exExtra[k] = ex[k]; hasEx = true; }
+          if (hasEq || hasEx) {
+            const extra = {};
+            if (hasEq) extra.eq = eqExtra;
+            if (hasEx) extra.ex = exExtra;
+            arr.push(JSON.parse(JSON.stringify(extra))); // 元 ri 参照切離し
           }
-        });
-        riLight.wearEquipsDetailed = wdCloned;
+          wd4[slot] = arr;
+        }
+        riLight.wearEquipsDetailed = wd4;
       }
     } catch(_) {}
-    // state.arsenal slim化 (v3): {path, tiers:{lv:{peaked,min,max}}} → {p,t:[[peaked,min,max],...]} (Tier固定順)
-    let stateSlim = state;
+    // state slim (v4): enhance/xinfaTiers → [[key,val],...] / arsenal → {p,t} (v3 同形) / 未知 key → _ 退避
+    let stateSlim = null;
     try {
-      if (state?.arsenal && typeof state.arsenal === 'object') {
-        stateSlim = JSON.parse(JSON.stringify(state)); // deep clone
-        const ARS_TIERS = [41, 51, 56, 61, 71, 81, 86];
-        const tiers = stateSlim.arsenal.tiers || {};
-        stateSlim.arsenal = {
-          p: stateSlim.arsenal.path,
-          t: ARS_TIERS.map(lv => {
-            const t = tiers[lv] || {};
-            return [t.peaked ? 1 : 0, t.min ?? 0, t.max ?? 0];
-          })
-        };
+      if (state && typeof state === 'object') {
+        stateSlim = {};
+        if (state.enhance)    stateSlim.e = Object.entries(state.enhance).map(([k, v]) => [+k, v]);
+        if (state.xinfaTiers) stateSlim.x = Object.entries(state.xinfaTiers).map(([k, v]) => [+k, v]);
+        if (state.arsenal && typeof state.arsenal === 'object') {
+          const ARS_TIERS = [41, 51, 56, 61, 71, 81, 86];
+          const PATH_DICT = ['bellstrike','stonesplit','silkbind','bamboocut','voidPath']; // 未知 path は raw 文字列 fallback
+          const tiers = state.arsenal.tiers || {};
+          const pi = PATH_DICT.indexOf(state.arsenal.path);
+          stateSlim.a = {
+            p: pi >= 0 ? pi : state.arsenal.path,
+            t: ARS_TIERS.map(lv => {
+              const t = tiers[lv] || {};
+              return [t.peaked ? 1 : 0, t.min ?? 0, t.max ?? 0];
+            })
+          };
+        }
+        for (const k of Object.keys(state)) {
+          if (!['enhance','xinfaTiers','arsenal'].includes(k)) {
+            stateSlim._ = stateSlim._ || {};
+            stateSlim._[k] = JSON.parse(JSON.stringify(state[k]));
+          }
+        }
       }
-    } catch(_) {}
-    const payload = { v: 3, data: riLight, state: stateSlim || null, baseline, optBest, lang: _curLang() };
+    } catch(_) { stateSlim = state; }
+    // v4 payload: top-level key 短縮 (d/s/b/o/l)。 受信側 index.html inline で正規化
+    const payload = { v: 4, d: riLight, s: stateSlim, b: baseline, o: optBest, l: _curLang() };
     let url, b64;
     try {
       const json = JSON.stringify(payload);

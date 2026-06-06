@@ -13,7 +13,8 @@
 <link rel="apple-touch-icon" href="assets/icons/pwa-icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;900&family=Noto+Serif+JP:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Yuji+Mai&family=Yuji+Boku&family=Ma+Shan+Zheng&family=ZCOOL+QingKe+HuangYou&family=Kaisei+Decol:wght@700&display=swap" rel="stylesheet">
+<!-- audit P3 (2026-06-07): 未使用 4 family (Yuji Mai / Yuji Boku / ZCOOL QingKe HuangYou / Kaisei Decol) 削除 — 使用中 = Cinzel / Noto Sans JP / Noto Serif JP / Rajdhani / Ma Shan Zheng (印章) -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;900&family=Noto+Serif+JP:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
 <!-- @layer Step 1 (2026-06-05): file = layer (各 file 内で @layer X { } 物理 wrap)、
@@ -132,7 +133,52 @@
         return;
       }
       payload = JSON.parse(json);
+      // v4+: top-level 短縮 key (d/s/b/o/l) → 旧 key 正規化 (以降の全コードは旧 key 参照のまま)
+      if (payload && (payload.v || 1) >= 4) {
+        payload.data     = payload.d ?? null;
+        payload.state    = payload.s ?? null;
+        payload.baseline = payload.b ?? null;
+        payload.optBest  = payload.o ?? null;
+        payload.lang     = payload.l ?? null;
+      }
       if (!payload || !payload.data) { _shareFail(new Error('payload.data missing')); return; }
+      // v4+: wearEquipsDetailed positional 配列 [no,suffix,attrs,affixes,extra?] → 完全形復元
+      //      affixes: 4要素 [id,val,ratio,pack(rank*2+u)] / 5要素 [id,val,ratio,rank,u01] → ここで完全復元 (v2 復元は素通り)
+      if ((payload.v || 1) >= 4) {
+        const ATTR_KEYS = ['MIN_W_ATK','MAX_W_ATK','HP_MAX','W_DEF','ARCHER_WEAKPOINT_DAMAGE','ARCHER_DAMAGE'];
+        const wd = payload.data.wearEquipsDetailed;
+        if (wd && typeof wd === 'object') {
+          for (const slot of Object.keys(wd)) {
+            const a = wd[slot];
+            if (!Array.isArray(a)) continue;
+            const ex = {};
+            if (a[1] != null) ex.suffix = a[1];
+            ex.baseAttrs = {};
+            (a[2] || []).forEach(p => { ex.baseAttrs[typeof p[0] === 'number' ? ATTR_KEYS[p[0]] : p[0]] = p[1]; });
+            ex.baseAffixes = (a[3] || []).map(d => {
+              if (!Array.isArray(d)) return d;
+              if (d.length === 4) return { equipmentDetails: [d[0], d[1], d[2], Math.floor(d[3] / 2), !!(d[3] % 2)] };
+              return { equipmentDetails: [d[0], d[1], d[2], d[3], !!d[4]] };
+            });
+            const extra = a[4] || null;
+            if (extra && extra.ex) Object.assign(ex, extra.ex);
+            const eq = { no: typeof a[0] === 'number' ? String(a[0]) : a[0], exVo: ex };
+            if (extra && extra.eq) Object.assign(eq, extra.eq);
+            wd[slot] = eq;
+          }
+        }
+        // state: e/x → enhance/xinfaTiers object 復元 / arsenal p = path dict idx → 文字列 ({p,t} 形は v3 復元が tiers 化)
+        const s = payload.state;
+        if (s && typeof s === 'object' && !s.enhance && (s.e || s.x || s.a || s._)) {
+          const PATH_DICT = ['bellstrike','stonesplit','silkbind','bamboocut','voidPath'];
+          const st = {};
+          if (s.e) { st.enhance = {};    s.e.forEach(p => { st.enhance[p[0]] = p[1]; }); }
+          if (s.x) { st.xinfaTiers = {}; s.x.forEach(p => { st.xinfaTiers[p[0]] = p[1]; }); }
+          if (s.a) { if (typeof s.a.p === 'number') s.a.p = PATH_DICT[s.a.p]; st.arsenal = s.a; }
+          if (s._) Object.assign(st, s._);
+          payload.state = st;
+        }
+      }
       // v2+: baseAffixes slim配列 [id,val,ratio,rank,useful] → {equipmentDetails:[...]} 復元
       if ((payload.v || 1) >= 2 && payload.data.wearEquipsDetailed) {
         Object.values(payload.data.wearEquipsDetailed).forEach(eq => {
@@ -890,7 +936,7 @@ window.showImportToast = function(e) {
 <script src="assets/sidebar/anlz.js?v=1"></script>
 <script src="assets/sidebar/diag.js?v=2"></script>
 <script src="assets/sidebar/opt.js?v=2"></script>
-<script src="assets/sidebar/share.js?v=4"></script>
+<script src="assets/sidebar/share.js?v=5"></script>
 <script src="assets/sidebar/gear.js?v=2"></script>
 <script src="assets/sidebar/xinfa.js?v=2"></script>
 <script src="assets/sidebar/arsenal.js?v=2"></script>
