@@ -1293,4 +1293,44 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 }
 
 
+
+/* S2-g co-locate (T): light#30 L442 */
+.wwm-sb-mini-hero-card .wwm-sb-totalmartial .wwm-muted,
+.wwm-sb-mini-hero-card .wwm-sb-martial .wwm-muted {
+  color: var(--c-sb-totalmartial--muted-fg);
+  opacity: var(--c-sb-totalmartial--muted-opacity);
+}
+
+/* S2-g co-locate (T): light#70 L646 */
+.wwm-cmp-modal-a .wwm-cmp-delta-label {
+  color: var(--c-cmp-modal-a--cmp-delta-label-fg);
+}
+
+/* S2-g co-locate (T): light#71 L648 */
+.wwm-cmp-modal-a .wwm-cmp-delta-base {
+  color: var(--c-cmp-modal-a--cmp-delta-base-fg);
+}
+
+/* S2-g co-locate (T): light#111 L910 */
+.wwm-equip-section .wwm-stat-pct {
+  color: var(--c-text-brown-dim);
+  opacity: var(--c-equip-section--stat-pct-opacity);
+}
+
+/* S2-g co-locate (T): light#116 L938 */
+.wwm-step2 .wwm-muted {
+  color: var(--c-text-brown-dim);
+  opacity: var(--c-step2--muted-opacity);
+}
+
+/* S2-g co-locate (T): light#117 L943 */
+.wwm-step2 .wwm-num-input {
+  background: var(--c-step2--num-input-bg);
+}
+
+/* S2-g co-locate (T): light#120 L957 + dark#4 */
+.wwm-step2 .wwm-arsenal-tier {
+  border: var(--c-step2--arsenal-tier-border);
+  background: var(--c-step2--arsenal-tier-bg);
+}
 } /* end @layer modals */

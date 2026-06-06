@@ -82,6 +82,22 @@ function parseCss(src, file) {
       }
     }
   }
+  // selector split: 引用符/括弧内の comma を無視 (S2-g で発覚 — attr selector
+  // `circle[stroke^="rgba(232,176,86..."]` が素朴 split(',') で断片化、 再出力時に CSS 全壊)
+  function splitSelectors(s) {
+    const out = [];
+    let cur = '', q = null, depth = 0;
+    for (const ch of s) {
+      if (q) { cur += ch; if (ch === q) q = null; continue; }
+      if (ch === '"' || ch === "'") { q = ch; cur += ch; continue; }
+      if (ch === '[' || ch === '(') depth++;
+      else if (ch === ']' || ch === ')') depth--;
+      if (ch === ',' && depth === 0) { out.push(cur); cur = ''; continue; }
+      cur += ch;
+    }
+    if (cur.trim()) out.push(cur);
+    return out;
+  }
   function parseDecls(selector, selLine, media) {
     const ruleId = ++ruleSeq;
     while (i < len) {
@@ -91,13 +107,14 @@ function parseCss(src, file) {
       const decl = readUntil(';}', true);
       const hasSemi = src[i] === ';';
       if (hasSemi) i++;
-      const m = decl.match(/^\s*([a-zA-Z-]+)\s*:\s*([\s\S]+?)\s*$/);
+      // prop 名: 数字含む custom property (--brown-5 等) 対応 (S2-g で発覚 — 旧 [a-zA-Z-]+ は数字で不一致)
+      const m = decl.match(/^\s*([a-zA-Z-][a-zA-Z0-9_-]*)\s*:\s*([\s\S]+?)\s*$/);
       if (m) {
         const prop = m[1].toLowerCase();
         let value = m[2];
         const important = /!\s*important\s*$/i.test(value);
         if (important) value = value.replace(/\s*!\s*important\s*$/i, '');
-        for (const sel of selector.split(',')) {
+        for (const sel of splitSelectors(selector)) {
           const s = sel.trim();
           if (!s) continue;
           decls.push({ file, line: declLine, selector: s, prop, value: value.trim(), important, media: media || null, ruleId, ruleStart: selLine });
@@ -238,6 +255,8 @@ const EXCLUSIVE_ANCESTOR_GROUPS = [
   [['wwm-overlay-ctrl'], ['wwm-arsenal-custom', 'wwm-arsenal-modal', 'wwm-mobile-anlz-overlay-body']],
   [['wwm-opt-ratio-label'], ['wwm-arsenal-custom', 'wwm-arsenal-modal']],
   [['wwm-view-sidebar'], ['wwm-sidebar-in-overlay', 'wwm-mobile-stat-overlay-body', 'wwm-mobile-stat-overlay']],
+  // S2-g: import modal step2 と 対照 modal は別 modal で DOM 非交差 (import.js:340 / gear|xinfa|arsenal.js)
+  [['wwm-step2'], ['wwm-cmp-modal-a']],
 ];
 function allClassSet(sel) {
   const safe = sel.replace(/\[[^\]]*\]/g, '[]');
@@ -755,6 +774,15 @@ function extractForProp(val, fromProp, toProp) {
     const [t, r = t, b = t, l = r] = p;
     return { top: t, right: r, bottom: b, left: l }[toProp.slice(8)];
   }
+  // inset shorthand → top/right/bottom/left (S2-g r93)
+  if (fromProp === 'inset' && /^(top|right|bottom|left)$/.test(toProp)) {
+    const p = splitTop(val);
+    if (p.length < 1 || p.length > 4) return null;
+    const [t, r = t, b = t, l = r] = p;
+    return { top: t, right: r, bottom: b, left: l }[toProp];
+  }
+  // border shorthand → border-side 全体 (全辺同値) (S2-g r119)
+  if (fromProp === 'border' && /^border-(top|right|bottom|left)$/.test(toProp)) return val;
   return null;
 }
 
@@ -762,6 +790,14 @@ function extractForProp(val, fromProp, toProp) {
 // → g は sel の match element を全て match (g ⊇ sel)。 子/隣接 combinator・:not 等は bail
 function selCovers(gSel, sel) {
   if (norm(gSel) === norm(sel)) return true; // 同一 selector (broken-split fragment 含む)
+  // pseudo-element: 両者同一 suffix なら strip して本体比較 (S2-g r93 .tier-SS::before cover)
+  const peOf = (s) => (s.match(/::?(before|after|placeholder|selection|first-line|first-letter)\s*$/) || [null])[0];
+  const gPe = peOf(gSel), sPe = peOf(sel);
+  if (gPe || sPe) {
+    const normPe = (x) => x && x.replace(/^:+/, '::');
+    if (normPe(gPe) !== normPe(sPe)) return false;
+    return selCovers(gSel.replace(/::?[\w-]+\s*$/, ''), sel.replace(/::?[\w-]+\s*$/, ''));
+  }
   if (/[>+~]|::|:not|:is|:where|:has/.test(gSel)) return false;
   const split = (s) => s.split(/\s+/).filter(Boolean).map(part =>
     new Set(part.match(/(\.[\w-]+|#[\w-]+|\[[^\]]*\]|:[\w-]+(\([^)]*\))?|[a-zA-Z][\w-]*|\*)/g) || [part]));
@@ -986,6 +1022,402 @@ while (outerChg) {
 for (const e of out.M) e.batchSafe = inBatch.has(keyOf(e));
 for (const e of out.P) e.pBatch = pBatch.has(pKeyOf(e));
 
+// ── S2-g: N (no-base) rule co-locate 機械検証 ──
+// rule 単位で component file へ移設 (同 rule の S decl は同乗)。
+//   Mode T (non-imp decl): 新 base rule `baseSel { prop: var(--tok) }` を target file 末尾へ + theme decl 削除。
+//     token = { ctx 値 = theme 値, other 値 = opp 値 | rescue | 'initial' (IACVT→unset = 未指定相当) }
+//     検証 = P と同一 (ctx: pairWinnerBlockers synthetic / other: otherSideScan + opp + rescue)
+//   Mode B (imp decl): theme prefix selector のまま rule を target file へ物理移動 (Step 1 K-type co-locate 前例)。
+//     other theme 側 risk ゼロ (theme gate 維持)。 検証 = 勝敗方向保存 (relocateBlockers):
+//     !important は @layer 順が逆転 (earlier layer imp 勝ち) → 移動で imp が「強くなる」 =
+//     移動先 layer T 〜 theme layer の競合 imp に対する before/after flip を検査
+//   opp (反対 theme N rule、 同 baseSel+prop): 両 rule 移動 → merge (token 両 theme 実値、 IACVT 不要)。
+//     片側 deferred → 残置 theme rule が other 側 layer 常勝で遮蔽 = solo 移動可 (token other='initial' は dead 値)
+//   前提: M/P batch = 0 (fixpoint 消化済)。 N 適用後に再 audit → M/P 解錠分は別 batch
+if (inBatch.size || pBatch.size) console.warn(`⚠ N 検証は M/P batch 0 前提 (現 M ${inBatch.size} / P ${pBatch.size}) — 先に M/P を apply せよ`);
+
+const N_TARGET_FILES = ['assets/styles-base.css', 'assets/styles-components.css', 'assets/styles-modals.css'];
+function componentTargetFile(sels) {
+  // baseSel 群の class/id token → base file 出現数 argmax (tie は後 layer)。 responsive は解体予定で対象外
+  const tokens = new Set();
+  for (const s of sels) for (const t of s.match(/[.#][\w-]+/g) || []) tokens.add(t);
+  if (!tokens.size) return null;
+  const res = [...tokens].map(t => new RegExp(t.replace(/[.[\]]/g, '\\$&') + '(?![\\w-])'));
+  const score = new Map();
+  const seenRule = new Set();
+  for (const b of baseDecls) {
+    if (!N_TARGET_FILES.includes(b.file)) continue;
+    const rk = `${b.file}|${b.ruleId}|${norm(b.selector)}`;
+    if (seenRule.has(rk)) continue;
+    seenRule.add(rk);
+    if (res.some(re => re.test(b.selector))) score.set(b.file, (score.get(b.file) || 0) + 1);
+  }
+  let best = null, bestN = 0;
+  for (const f of N_TARGET_FILES) {
+    const n = score.get(f) || 0;
+    if (n >= bestN && n > 0) { best = f; bestN = n; } // >= で tie は後 layer
+  }
+  return best || 'assets/styles-components.css';
+}
+
+// 値が other theme で IACVT 確定か (fallback 無し var() 参照が other 側 token map に無い)
+function valueInvalidIn(value, theme) {
+  const map = themeTokenMaps[theme];
+  for (const m of value.matchAll(/var\(\s*(--[\w-]+)\s*\)/g)) {
+    if (!map.has(m[1])) return true;
+  }
+  return false;
+}
+
+// SVG presentation attribute 穴 (S2-g VRT 検出): stroke/fill 等は継承 prop →
+// IACVT unset = inherit ≠ 「decl 不在」(不在なら element の presentation attribute が勝つ)。
+// SVG 系 subject × presentational prop で other 側が unset 経路 (initial token / dark-invalid literal)
+// になる場合は token 化不可 → Mode B (theme prefix 維持 relocate) へ降格
+const SVG_SUBJECT_RE = /(^|[\s>+~])(svg|path|line|circle|rect|polygon|polyline|ellipse|g|text|tspan|use)(?![\w-])[^\s>+~]*$/;
+const SVG_PRESENTATION_RE = /^(stroke|stroke-[\w-]+|fill|fill-[\w-]+|opacity|stop-[\w-]+|marker[\w-]*|color)$/;
+function svgAttrRisk(baseSel, prop) {
+  return SVG_SUBJECT_RE.test(norm(baseSel)) && SVG_PRESENTATION_RE.test(prop);
+}
+
+// Mode B: rule 丸ごと selector 不変で layer 移動 — 勝敗方向 flip 検査。
+// imp は layer 逆転 (earlier 勝ち)、 normal は通常 (later 勝ち)。 imp↔normal 間は不変で除外。
+// theme file 在住 g は migration で位置が変わり得る → 全件返却 (fixpoint で再計算)、 非 theme g は flip のみ
+function relocateBlockers(e, targetFile, vLine) {
+  const T = LAYER_ORDER.get(targetFile);
+  const eL = LAYER_ORDER.get(e.file);
+  const se = specificity(e.selector);
+  const other = e.ctx === 'light' ? 'dark' : 'light';
+  const res = [];
+  const seen = new Set();
+  const win = (aL, bL, sa, sb, la, lb, imp) => {
+    if (aL !== bL) return imp ? aL < bL : aL > bL;
+    if (sa !== sb) return sa > sb;
+    return la > lb;
+  };
+  for (const key of expandKeys(compoundKeys(e.selector))) {
+    for (const g of byKey.get(key) || []) {
+      if (g.prop.startsWith('--')) continue;
+      if (g.file === e.file && g.ruleId === e.ruleId) continue;     // 自 rule (丸ごと移動 = 内部順序不変)
+      if (!propsConflict(g.prop, e.prop)) continue;
+      if (themeContext(g.selector) === other) continue;
+      if (exclusiveDisjoint(e.baseSel, g.selector)) continue;
+      if (!!g.important !== !!e.important) continue;                // imp vs normal は移動不変
+      const gid = `${g.file}|${g.line}|${norm(g.selector)}|${g.prop}`;
+      if (seen.has(gid)) continue;
+      seen.add(gid);
+      if (g.prop === e.prop && resolveCtx(g.value, e.ctx) === resolveCtx(e.value, e.ctx)) continue;
+      const gL = LAYER_ORDER.get(g.file) ?? 99;
+      const sg = specificity(g.selector);
+      const beforeEWins = win(eL, gL, se, sg, e.line, g.line, e.important);
+      const afterEWins = win(T, gL, se, sg, vLine, g.line, e.important);
+      const isTheme = THEME_FILE_SET.has(g.file);
+      if (beforeEWins !== afterEWins || isTheme) {
+        res.push({ gid, file: g.file, line: g.line, selector: norm(g.selector), prop: g.prop,
+          beforeEWins, flip: beforeEWins !== afterEWins, isTheme, gL, sg, gImp: !!g.important, gLine: g.line, gRuleId: g.ruleId });
+      }
+    }
+  }
+  return res;
+}
+
+// beaten rescue (P と同一 logic を関数化)。 CSS-wide keyword は custom property 値に不可 → 不可
+function rescueBeaten(e, beaten) {
+  const other = e.ctx === 'light' ? 'dark' : 'light';
+  const exts = beaten.map(g => ({ g, ext: extractForProp(g.value, g.prop, e.prop) }));
+  const vals = new Set(exts.map(x => x.ext === null ? '__NG__' : resolveCtx(x.ext, other)));
+  const cover = exts.find(x => x.ext !== null && selCovers(x.g.selector, e.baseSel));
+  if (vals.size === 1 && !vals.has('__NG__') && cover &&
+    !/^(inherit|initial|unset|revert|revert-layer)$/i.test(norm(cover.ext))) return cover.ext;
+  return null;
+}
+
+// rule group 構築 (N + 同 rule の S 同乗)
+const nRules = new Map(); // file#ruleId → meta
+{
+  const sByRule = new Map();
+  for (const e of out.S) {
+    const k = `${e.file}#${e.ruleId}`;
+    if (!sByRule.has(k)) sByRule.set(k, []);
+    sByRule.get(k).push(e);
+  }
+  const mpByRule = new Map();
+  for (const arr of [out.M, out.P]) for (const e of arr) {
+    const k = `${e.file}#${e.ruleId}`;
+    if (!mpByRule.has(k)) mpByRule.set(k, []);
+    mpByRule.get(k).push(e);
+  }
+  for (const e of out.N) {
+    const k = `${e.file}#${e.ruleId}`;
+    if (!nRules.has(k)) nRules.set(k, { key: k, file: e.file, ruleId: e.ruleId, ruleStart: e.ruleStart, entries: [], ok: true, reason: null });
+    nRules.get(k).entries.push(e);
+  }
+  for (const [k, r] of nRules) {
+    // S 同乗 + 重複 split (theme prefix 変種で同 baseSel) dedupe
+    const rides = sByRule.get(k) || [];
+    for (const s of rides) { s.ctx = s.file === 'assets/styles-dark.css' ? 'dark' : 'light'; s.nRide = true; }
+    r.entries.push(...rides);
+    const seen = new Set();
+    r.entries = r.entries.filter(e => {
+      const gid = `${e.line}|${norm(e.selector)}|${e.prop}`;
+      if (seen.has(gid)) return false;
+      seen.add(gid); return true;
+    });
+    for (const e of r.entries) e.ctx = e.file === 'assets/styles-dark.css' ? 'dark' : 'light';
+    r.allImp = r.entries.every(e => e.important);
+    const mp = mpByRule.get(k) || [];
+    // defer 判定
+    if (r.entries.some(e => e.media)) { r.ok = false; r.reason = 'media'; continue; }
+    if (r.entries.some(e => /(^|[\s>+~])\*\s*$/.test(e.baseSel) || e.baseSel === '*')) { r.ok = false; r.reason = 'universal'; continue; }
+    if (mp.length && !(r.allImp && mp.every(x => x.important))) { r.ok = false; r.reason = 'mixed-cat'; continue; } // M/P split 同居 (全 imp なら B 丸ごと可)
+    if (mp.length) r.entries.push(...mp.map(x => ({ ...x, nRide: true, ctx: x.file === 'assets/styles-dark.css' ? 'dark' : 'light' })));
+    r.target = componentTargetFile([...new Set(r.entries.map(e => e.baseSel))]);
+    r.vLine = 500000 + r.ruleStart;
+  }
+  // opp merge: 同 baseSel 集合の反対 theme rule (両方 ok 候補) → 同 vLine (light 側) へ統合
+  const sig = (r) => [...new Set(r.entries.map(e => e.baseSel))].sort().join(',');
+  for (const [k, r] of nRules) {
+    if (!r.ok || r.file !== 'assets/styles-dark.css') continue;
+    for (const [k2, r2] of nRules) {
+      if (k2 === k || !r2.ok || r2.file !== 'assets/styles-light.css') continue;
+      if (sig(r) === sig(r2)) { r.mergeInto = k2; r.vLine = r2.vLine; r.target = r2.target; break;
+      }
+    }
+  }
+}
+
+// per-entry 検証 (T: synthetic pair + otherSideScan / B: relocateBlockers)
+// part 粒度: rule の T part (non-imp) / B part (imp) は独立可否 (片側 fail でも他側移設可。
+//   imp↔normal は cascade 不変なので part 間干渉なし)。 part 内は all-or-none。
+// target retry: scored target で static fail → 後 layer の candidate で再検証 (spec 勝ち化)
+const nIndex = new Map(); // gid → { e, r } (migration 中の theme decl 逆引き)
+for (const [, r] of nRules) {
+  if (!r.ok) continue;
+  for (const e of r.entries) nIndex.set(`${e.file}|${e.line}|${norm(e.selector)}|${e.prop}`, { e, r });
+}
+// T decl 粒度 gate: (a) 同 phys decl (line|prop) の selector split all-or-none
+//                   (b) 移動 T decl と残置 T decl の propGroup 競合禁止 (intra-rule shorthand 穴防止)
+function applyTGates(r) {
+  let any = false;
+  const tEnts = r.entries.filter(x => x.nMode === 'T');
+  let chg = true;
+  while (chg) {
+    chg = false;
+    const byPhys = new Map();
+    for (const x of tEnts) {
+      const k = `${x.line}|${x.prop}`;
+      if (!byPhys.has(k)) byPhys.set(k, []);
+      byPhys.get(k).push(x);
+    }
+    for (const [, sp] of byPhys) {
+      if (sp.some(x => x.nOk) && !sp.every(x => x.nOk)) {
+        for (const x of sp) if (x.nOk) { x.nOk = false; x.nReason = x.nReason || 'phys-split'; chg = true; }
+      }
+    }
+    for (const x of tEnts) {
+      if (!x.nOk) continue;
+      if (tEnts.some(k2 => !k2.nOk && k2 !== x && propsConflict(x.prop, k2.prop))) {
+        x.nOk = false; x.nReason = 'kept-conflict'; chg = true;
+      }
+    }
+    if (chg) any = true;
+  }
+  r.okT = tEnts.length === 0 || tEnts.some(x => x.nOk);
+  if (!r.okT) r.reasonT = (tEnts.find(x => x.nReason) || {}).nReason || null;
+  return any;
+}
+function verifyRuleAt(r, target) {
+  // T は decl 粒度 (e.nOk)、 B は part 粒度。 entry の n* state は target 前提で設定
+  const res = { okT: true, okB: true, reasonT: null, reasonB: null };
+  for (const e of r.entries) {
+    e.nMode = e.important ? 'B' : 'T';
+    e.nTarget = target;
+    e.nVLine = e.nMode === 'B' ? r.vLine + 0.5 : r.vLine;
+    e.nOk = e.nMode === 'T';
+    e.nReason = null;
+    e.nOppKey = null; e.nOppStays = undefined; e.nOtherVal = null; e.nLiteralOk = false;
+    e.nBlockers = null; e.nCtxBlockers = null; e.nKeptTheme = null; e.nBeatenList = null;
+    if (e.nMode === 'B') {
+      if (!res.okB) continue;
+      e.nBlockers = relocateBlockers(e, target, e.nVLine);
+      const hardFlip = e.nBlockers.filter(b => b.flip && !b.isTheme);
+      if (hardFlip.length) {
+        res.okB = false;
+        res.reasonB = `B-flip: ${hardFlip[0].file}:${hardFlip[0].line} ${hardFlip[0].selector} { ${hardFlip[0].prop} }${hardFlip[0].gImp ? ' !imp' : ''}`;
+      }
+    } else {
+      // opp: 反対 theme migration 候補内の同 baseSel+prop entry
+      const oppHit = [...nIndex.values()].find(x => x.e !== e && x.e.baseSel === e.baseSel && x.e.prop === e.prop &&
+        (x.e.media || null) === (e.media || null) && x.e.ctx !== e.ctx);
+      e.nOppKey = oppHit ? `${oppHit.e.file}|${oppHit.e.line}|${norm(oppHit.e.selector)}|${oppHit.e.prop}` : null;
+      // 反対 theme に残置される同 baseSel+prop theme decl (rule deferred / M / P) → other 側遮蔽
+      const oppStays = !oppHit && themeDecls.some(d2 => !d2.prop.startsWith('--') && d2.prop === e.prop &&
+        stripTheme(d2.selector) === e.baseSel && (d2.media || null) === (e.media || null) &&
+        (d2.file === 'assets/styles-dark.css' ? 'dark' : 'light') !== e.ctx);
+      const synth = { ...e, pair: { file: target, line: e.nVLine } };
+      const blockers = pairWinnerBlockers(synth, e.ctx);
+      e.nCtxBlockers = blockers;
+      const hardNonTheme = blockers.filter(b => !b.beforeGWins && !THEME_FILE_SET.has(b.file));
+      if (hardNonTheme.length) {
+        e.nOk = false;
+        e.nReason = `T-ctx: ${hardNonTheme[0].file}:${hardNonTheme[0].line} ${hardNonTheme[0].selector} { ${hardNonTheme[0].prop} }`;
+        continue;
+      }
+      if (!e.nOppKey && !oppStays) {
+        const { beaten, keptTheme } = otherSideScan(e, { file: target, ruleStart: e.nVLine, lastLine: e.nVLine });
+        e.nKeptTheme = keptTheme;
+        if (beaten.length) {
+          const rescue = rescueBeaten(e, beaten);
+          if (rescue === null) {
+            e.nOk = false;
+            e.nReason = `T-beaten: ${beaten[0].file}:${beaten[0].line} ${beaten[0].selector} { ${beaten[0].prop} }`;
+            e.nBeatenList = beaten.slice(0, 4).map(g => `${g.file}:${g.line} ${g.selector} { ${g.prop}: ${g.value.slice(0, 40)} }`);
+            continue;
+          }
+          e.nOtherVal = rescue;
+        }
+        if (!e.nOtherVal) {
+          // other 側 = unset 経路。 SVG presentation attr 穴 → Mode B 降格 (theme gate 維持 = other 影響ゼロ)
+          if (svgAttrRisk(e.baseSel, e.prop)) {
+            e.nMode = 'B'; e.nVLine = r.vLine + 0.5; e.nOk = false; e.nReason = 'svg→B';
+            e.nBlockers = relocateBlockers(e, target, e.nVLine);
+            const hardFlip = e.nBlockers.filter(b => b.flip && !b.isTheme);
+            if (hardFlip.length && res.okB) {
+              res.okB = false;
+              res.reasonB = `B-flip(svg): ${hardFlip[0].file}:${hardFlip[0].line} ${hardFlip[0].selector} { ${hardFlip[0].prop} }`;
+            }
+            continue;
+          }
+          // IACVT 確定値 (other-invalid token 参照) なら literal 移設可 (token 不要)
+          if (valueInvalidIn(e.value, e.ctx === 'light' ? 'dark' : 'light')) e.nLiteralOk = true;
+        }
+      } else {
+        e.nOppStays = oppStays || undefined;
+      }
+    }
+  }
+  applyTGates(r);
+  res.okT = r.okT;
+  res.reasonT = r.reasonT;
+  return res;
+}
+for (const [k, r] of nRules) {
+  if (!r.ok) continue;
+  const scored = r.target;
+  const cands = [scored, ...N_TARGET_FILES.filter(f => f !== scored &&
+    (LAYER_ORDER.get(f) ?? 0) > (LAYER_ORDER.get(scored) ?? 0))];
+  const moveScore = (v) => r.entries.filter(x => x.nMode === 'T' && x.nOk).length +
+    (v.okB ? r.entries.filter(x => x.nMode === 'B').length : 0);
+  let best = null;
+  for (const cand of cands) {
+    const v = verifyRuleAt(r, cand);
+    const s = moveScore(v);
+    if (!best || s > best.s) best = { cand, v, s };
+    if (v.okT && v.okB && r.entries.every(x => x.nMode === 'B' || x.nOk)) break; // 全 decl 移設 = 最良
+  }
+  const v = verifyRuleAt(r, best.cand); // entry state を best candidate で確定
+  r.target = best.cand;
+  r.okB = v.okB; r.reasonB = v.reasonB; // okT/reasonT は applyTGates が r に設定済
+  if (!r.okT && !r.okB) { r.ok = false; r.reason = r.reasonT || r.reasonB; }
+}
+
+// nFixpoint: 移動 rule 間の勝敗方向保存 (part 粒度)。 part fail → batch から除外 → 再評価
+function nAfterPos(x) { // migration 後の比較座標 { L, s, line }
+  return x.e.nMode === 'B'
+    ? { L: LAYER_ORDER.get(x.r.target), s: specificity(x.e.selector), line: x.e.nVLine }
+    : { L: LAYER_ORDER.get(x.r.target), s: specificity(x.e.baseSel), line: x.e.nVLine };
+}
+const winPos = (a, b, imp) => {
+  if (a.L !== b.L) return imp ? a.L < b.L : a.L > b.L;
+  if (a.s !== b.s) return a.s > b.s;
+  return a.line > b.line;
+};
+const partOk = (x) => !!(x.r.ok && (x.e.nMode === 'B' ? x.r.okB : x.e.nOk)); // mig entry が実際に移動するか
+let nChg = true;
+while (nChg) {
+  nChg = false;
+  for (const [k, r] of nRules) {
+    if (!r.ok) continue;
+    for (const e of r.entries) {
+      let fail = null;
+      if (e.nMode === 'B') {
+        if (!r.okB) continue;
+        for (const b of e.nBlockers || []) {
+          const mig = nIndex.get(b.gid);
+          const migOk = mig && partOk(mig);
+          if (!migOk) {
+            // g 残置: flip なら fail (非 theme flip は検証時 fail 済 — ここは theme g 残置分)
+            if (b.flip) { fail = `B-flip-kept: ${b.selector} { ${b.prop} }`; break; }
+          } else {
+            // g も移動 → after 再計算 (g の新位置)。 imp 同士のみ此処に来る (imp↔normal 除外済)
+            const after = winPos({ L: LAYER_ORDER.get(r.target), s: specificity(e.selector), line: e.nVLine }, nAfterPos(mig), e.important);
+            if (after !== b.beforeEWins) { fail = `B-dir: ${b.selector} { ${b.prop} } (co-migrate flip)`; break; }
+          }
+        }
+        if (fail) { r.okB = false; r.reasonB = fail; nChg = true; }
+      } else {
+        if (!e.nOk) continue;
+        for (const b of e.nCtxBlockers || []) {
+          if (!THEME_FILE_SET.has(b.file)) { if (!b.beforeGWins) { fail = `T-ctx: ${b.selector}`; break; } continue; }
+          const bid = `${b.file}|${b.line}|${b.selector}|${b.prop}`;
+          const mig = nIndex.get(bid);
+          const migOk = mig && partOk(mig);
+          if (b.beforeGWins) {
+            // g 勝ち維持要: 残置 (theme layer) なら常勝 OK / 移動なら再計算
+            if (migOk) {
+              const ePos = { L: LAYER_ORDER.get(r.target), s: specificity(e.baseSel), line: e.nVLine };
+              // imp g (B mode) は normal e に常勝 → OK
+              if (!mig.e.important && !winPos(nAfterPos(mig), ePos, false)) { fail = `T-dep-lost: ${b.selector} { ${b.prop} }`; break; }
+            }
+          } else {
+            // hard: e 勝ち維持要。 g 残置 (theme layer 常勝) = fail / g 移動 → e が勝つ要
+            if (!migOk) { fail = `T-hard-kept: ${b.selector} { ${b.prop} }`; break; }
+            if (mig.e.important) { fail = `T-hard-imp: ${b.selector}`; break; } // imp 残留 g は常勝
+            const ePos = { L: LAYER_ORDER.get(r.target), s: specificity(e.baseSel), line: e.nVLine };
+            if (winPos(nAfterPos(mig), ePos, false)) { fail = `T-hard-dir: ${b.selector} { ${b.prop} }`; break; }
+          }
+        }
+        // other 側 kept theme deps: g (反対 theme decl) が移動するなら e の挿入に勝ち続ける要
+        if (!fail) for (const gid of e.nKeptTheme || []) {
+          const mig = nIndex.get(gid);
+          if (!mig || !partOk(mig)) continue; // 残置 = theme layer 常勝 OK
+          if (mig.e.important) continue;      // imp は常勝維持
+          const ePos = { L: LAYER_ORDER.get(r.target), s: specificity(e.baseSel), line: e.nVLine };
+          if (!winPos(nAfterPos(mig), ePos, false)) { fail = `T-other-dep: ${mig.e.baseSel} { ${mig.e.prop} }`; break; }
+        }
+        // opp が fail したら solo 化 (oppStays 降格 — 残置 theme rule が other 側遮蔽)
+        if (!fail && e.nOppKey) {
+          const mig = nIndex.get(e.nOppKey);
+          if (!mig || !partOk(mig)) { e.nOppKey = null; e.nOppStays = true; }
+        }
+        if (fail) { e.nOk = false; e.nReason = fail; nChg = true; }
+      }
+    }
+    if (applyTGates(r)) nChg = true; // decl 落ちの波及 (phys split / propGroup 競合)
+    if (!r.okT && !r.okB) { r.ok = false; r.reason = r.reasonT || r.reasonB; }
+  }
+  // merge 整合: mergeInto 先 T part fail → solo 移動 (token other='initial'、 残置 rule が遮蔽)
+  for (const [, r] of nRules) {
+    if (!r.ok || !r.mergeInto) continue;
+    const tgt = nRules.get(r.mergeInto);
+    if (!tgt || !tgt.okT) { r.mergeInto = null; nChg = true; }
+  }
+}
+for (const [, r] of nRules) for (const e of r.entries) e.nBatch = !!(r.ok && (e.nMode === 'B' ? r.okB : e.nOk));
+out.NRULES = [...nRules.values()].map(r => ({
+  key: r.key, file: r.file, ruleId: r.ruleId, ruleStart: r.ruleStart, target: r.target, vLine: r.vLine,
+  ok: r.ok, reason: r.reason, okT: !!r.okT, okB: !!r.okB, reasonT: r.reasonT || null, reasonB: r.reasonB || null,
+  allImp: r.allImp, mergeInto: r.mergeInto || null,
+  modes: [...new Set(r.entries.map(e => e.nMode || '?'))].join(''),
+  sels: [...new Set(r.entries.map(e => e.baseSel))],
+  entries: r.entries.map(e => ({
+    line: e.line, selector: norm(e.selector), baseSel: e.baseSel, prop: e.prop, value: e.value,
+    important: !!e.important, ctx: e.ctx, nMode: e.nMode || null, nVLine: e.nVLine || null,
+    nBatch: !!e.nBatch, nOk: !!e.nOk, nReason: e.nReason || null,
+    nOppKey: e.nOppKey || null, nOppStays: !!e.nOppStays, nOtherVal: e.nOtherVal || null,
+    nLiteralOk: !!e.nLiteralOk, nRide: !!e.nRide,
+  })),
+}));
+
 const cnt = (a) => a.length;
 console.log(`theme decls: ${themeDecls.length} (TOKEN ${cnt(out.TOKEN)} / M ${cnt(out.M)} / P ${cnt(out.P)} / N ${cnt(out.N)} / S ${cnt(out.S)})`);
 const safeM = out.M.filter(d => d.safe);
@@ -995,6 +1427,23 @@ console.log(`M batchSafe (fixpoint): ${batchM.length}  (same-value: ${batchM.fil
 const safeP = out.P.filter(d => d.pSafe);
 const batchP = out.P.filter(d => d.pBatch);
 console.log(`P safe (静的): ${safeP.length} / ${out.P.length}  → pBatch (fixpoint+gate): ${batchP.length}`);
+const nOkRules = out.NRULES.filter(r => r.ok);
+const nOkDecls = out.N.filter(e => e.nBatch).length;
+const nMovT = out.NRULES.reduce((a, r) => a + r.entries.filter(x => x.nMode === 'T' && x.nBatch).length, 0);
+const nMovB = out.NRULES.reduce((a, r) => a + r.entries.filter(x => x.nMode === 'B' && x.nBatch).length, 0);
+console.log(`N rules: ${nOkRules.length} / ${out.NRULES.length} 移設可  (N decl ${nOkDecls} / ${out.N.length}、 移設 split T ${nMovT} / B ${nMovB})`);
+for (const r of out.NRULES) {
+  const tCnt = r.entries.filter(x => x.nMode === 'T').length;
+  const tMv = r.entries.filter(x => x.nMode === 'T' && x.nBatch).length;
+  const bCnt = r.entries.filter(x => x.nMode === 'B').length;
+  const bMv = r.entries.filter(x => x.nMode === 'B' && x.nBatch).length;
+  const stay = r.entries.find(x => x.nMode === 'T' && !x.nBatch && x.nReason);
+  const part = !r.ok ? `NG ${r.reason}`
+    : (tMv === tCnt && bMv === bCnt) ? 'OK'
+    : `PARTIAL T ${tMv}/${tCnt} B ${bMv}/${bCnt}${stay ? ` (${stay.nReason})` : ''}`;
+  const tag = r.ok && r.mergeInto ? `${part} →merge(${r.mergeInto.replace('assets/styles-', '').replace('.css', '')})` : part;
+  console.log(`  [${r.modes}] ${r.key.replace('assets/styles-', '').replace('.css', '')} L${r.ruleStart} → ${(r.target || '?').replace('assets/styles-', '').replace('.css', '')} | ${r.sels[0].slice(0, 55)}${r.sels.length > 1 ? ` +${r.sels.length - 1}sel` : ''} | ${tag}`);
+}
 const pReasons = {};
 for (const d of out.P) {
   if (d.pBatch) continue;

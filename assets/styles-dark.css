@@ -26,10 +26,4 @@ html[data-theme="dark"] .wwm-cmp-modal-a {
 
 /* S2-e split: val / val-input で base pair が別 decl → 分離 */
 
-html[data-theme="dark"] .wwm-step2 .wwm-arsenal-tier,
-html:not([data-theme="light"]) .wwm-step2 .wwm-arsenal-tier {
-  border: 1px solid rgba(212,175,55,0.25);
-  background: rgba(40,28,16,0.55);
-}
-
 } /* end @layer dark */
