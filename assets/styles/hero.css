@@ -1,0 +1,705 @@
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     hero.css — HERO パネル (武格指数 / donut / luopan / tier badge / roulette)
+     @layer Step 4 (2026-06-06): styles/components.css を per-component 分割。
+     cascade 同値性は component-split-audit.cjs で機械証明 (同 layer 内 順序保存)。
+     file 読込順 = index.html link 順 = scripts/css-files.cjs (単一真実) — 勝手に入替えるな
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+@layer components {
+
+/* ライト hero: 紙色 overlay で公式 xinfa 背景を 透かす */
+.hero::before {
+  /* corner kanji watermark — 明朝 (Noto Serif JP black) */
+  content: '斬'; position: absolute; right: -10px; bottom: -40px;
+  font-family: var(--f-display);
+  font-weight: var(--fw-black);
+  font-size: 260px; color: var(--c-hero-before-fg);
+  pointer-events: none; line-height: 1;
+}
+
+/* 古紙テクスチャ overlay (SVG turbulence + blend) — テスト用に強度UP */
+.hero::after, .wwm-footer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' seed='5'/><feColorMatrix values='0 0 0 0 0.6  0 0 0 0 0.45  0 0 0 0 0.25  0 0 0 0.85 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>");
+  mix-blend-mode: overlay;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* hero::after ノイズ overlay を 半透明化 (xinfa_bg 見せるため) */
+.hero::after { opacity: 0.35; }
+
+.wwm-footer { position: relative; overflow: hidden; }
+
+.wwm-footer-logo { height: 18px; vertical-align: middle; margin-right: var(--space-2); opacity: var(--c-footer-logo-opacity); }
+
+.hero-left {
+  padding: 18px 24px 12px;
+  display: flex; flex-direction: column; justify-content: flex-start;
+  position: relative; z-index: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* シェブロン (削除) */
+.hero::after-disabled {
+  content: '';
+  position: absolute;
+  top: 14px; right: 16px;
+  width: 8px; height: 8px;
+  border-right: 1.5px solid var(--paper-mute);
+  border-bottom: 1.5px solid var(--paper-mute);
+  transform: rotate(45deg);
+  opacity: 0.4;
+  transition: transform 0.25s ease, top 0.25s ease, opacity 0.15s;
+  pointer-events: none;
+}
+
+.hero--collapsed::after {
+  transform: rotate(-135deg);
+  top: 18px;
+}
+
+/* PC のみ表示する内訳ブロック */
+.hcb-val.phys { color: var(--vermilion-bright); }
+
+.hcb-val.elem { color: var(--jade-bright); }
+
+.hcb-pct.phys { color: var(--vermilion-bright-mid-2); }
+
+.hcb-pct.elem { color: var(--jade-bright-strong); }
+
+/* ── Collapsed state overrides ── */
+.hero--collapsed .hero-compact-bar { display: flex; }
+
+.hero--collapsed .hero-label-jp,
+.hero--collapsed .hero-nums,
+.hero--collapsed .hero-breakdown { display: none; }
+
+.hero--collapsed .hero-left { padding-top: var(--space-2-5); padding-bottom: var(--space-2-5); justify-content: center; }
+
+/* 折りたたみ時は常に2カラム維持 + hero-right を強制表示 */
+.hero--collapsed {
+  grid-template-columns: 1fr 280px;
+}
+
+.hero--collapsed .hero-right {
+  display: flex !important;
+  padding: var(--space-2) var(--space-4);
+  border-left: 1px solid var(--ink-2);
+  border-top: none;
+}
+
+.hero--collapsed .donut-wrap { flex-direction: row; align-items: center; gap: var(--space-2-5); width: auto; }
+
+.hero--collapsed .donut-block { flex-direction: row; align-items: center; gap: var(--space-2-5); width: auto; }
+
+.hero--collapsed .donut { width: 68px; height: 68px; }
+
+.hero--collapsed .donut-center-label { font-size: 7px; }
+
+.hero--collapsed .donut-center-val { font-size: var(--text-sm); margin-top: 1px; }
+
+.hero--collapsed .prob-legend {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px 4px;
+  align-content: center;
+  min-width: 0;
+}
+
+.hero--collapsed .prob-row { padding: var(--space-half) 0; gap: var(--space-1); border-bottom: none; min-width: 0; }
+
+.hero--collapsed .prob-dot { width: 6px; height: 6px; flex-shrink: 0; }
+
+.hero--collapsed .pname { font-size: var(--text-2xs); min-width: 0; overflow: hidden; }
+
+.hero--collapsed .pval { font-size: var(--text-xs); }
+
+/* モバイル: pname を非表示にしてドット+数値だけに絞る */
+.hero-number {
+  font-family: var(--f-latin);
+  font-weight: var(--fw-extra); font-size: clamp(48px, calc(-85.5px + 13.88vw), 92px); line-height: 0.95;
+  color: var(--hero-num);
+  letter-spacing: -0.02em;
+  margin-top: var(--space-1);
+  text-shadow: var(--hero-num-shadow);
+  font-variant-numeric: tabular-nums;
+  display: flex; align-items: flex-end; gap: var(--space-3);
+  position: relative;
+}
+
+.hero-number .unit {
+  font-family: var(--f-mono); font-size: var(--text-md); font-weight: var(--fw-bold);
+  color: var(--c-fg-gold-label); letter-spacing: 0.32em;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--gold-deep);
+  padding-left: var(--space-half); padding-right: var(--space-half);
+  border-bottom-color: var(--c-hero-number--unit-border-bot);
+}
+
+.hb-value.phys { color: var(--vermilion-bright); }
+
+.hb-value.elem { color: var(--jade-bright); }
+
+.hb-pct.phys { color: var(--c-hb-pct-phys-fg); }
+
+.hb-pct.elem { color: var(--c-hb-pct-elem-fg); }
+
+/* Donut on right */
+.hero-right {
+  padding: var(--space-2-5) var(--space-3-5);
+  display: flex; flex-direction: column;
+  border-left: 1px solid var(--ink-2);
+  background: var(--surf-shade);
+  position: relative; z-index: 1;
+  min-width: 0;
+}
+
+.donut {
+  width: 100px; height: 100px; flex-shrink: 0; position: relative;
+}
+
+.donut svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+
+.donut-bg { stroke: var(--donut-track); }
+
+.donut-seg { transition: stroke-dashoffset 0.6s cubic-bezier(.4,.2,.2,1); }
+
+#arcPhys, #arcElem { transition: stroke-dashoffset 0.6s cubic-bezier(.4,.2,.2,1), stroke-dasharray 0.6s cubic-bezier(.4,.2,.2,1); }
+
+/* ═══════════════════════════════════════════════════════════════
+   Hero 武侠デザイン (design-sample由来) — sidebar越え左端まで伸ばす
+   ═══════════════════════════════════════════════════════════════ */
+.hero.hero-wuxia {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: var(--space-4) var(--space-6);
+  background:
+    linear-gradient(180deg, rgba(30,23,17,0.50), rgba(16,12,11,0.58)),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") center / cover no-repeat;
+  border: 1px solid var(--gold-deep);
+  box-shadow: inset 0 0 60px var(--overlay-mid);
+  overflow: hidden;
+  position: relative;
+  height: 195px;
+  /* min-width 削除: 圧縮停止は親 .wwm-app-body min-width:1010 で一元管理 (個別min は alignment 崩しの原因だった) */
+  border-color: var(--c-hero-wuxia-border);
+}
+
+/* ライト hero-wuxia: 紙色 overlay + xinfa 公式背景 */
+.hero-wuxia .l-bracket {
+  position: absolute;
+  width: 32px; height: 32px;
+  box-shadow: 0 0 10px rgba(201,164,90,.35);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-wuxia .lb-tl { top: -1px; left: -1px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+
+.hero-wuxia .lb-tr { top: -1px; right: -1px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+
+.hero-wuxia .lb-bl { bottom: -1px; left: -1px; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+
+.hero-wuxia .lb-br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+
+.hero-wuxia .ink-stroke {
+  position: absolute;
+  left: 0; top: 52px;
+  width: 520px; height: 120px;
+  opacity: var(--c-ink-stroke-opacity);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-wuxia .hero-left {
+  position: relative;
+  z-index: 1;
+  padding-right: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.hero-wuxia .hero-label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 14px;
+  align-self: flex-start;
+}
+
+.hero-wuxia .hero-label .ja {
+  font-family: var(--f-display);
+  font-weight: var(--fw-bold);
+  font-size: 30px;
+  letter-spacing: .18em;
+  color: var(--c-fg-emphasis);
+}
+
+.hero-wuxia .hero-label .en {
+  font-family: var(--f-mono);
+  font-size: var(--text-14);
+  letter-spacing: .28em;
+  color: var(--paper-mute);
+  opacity: var(--c-hero-label--en-opacity);
+}
+
+.hero-wuxia .hero-score-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  position: relative;
+}
+
+.hero-wuxia .hero-current { display: flex; align-items: baseline; gap: var(--space-3); }
+
+.hero-wuxia .hero-number {
+  font-family: var(--f-latin);
+  font-weight: var(--fw-black);
+  font-size: 96px;
+  line-height: .88;
+  letter-spacing: -.02em;
+  color: var(--paper);  /* 古紙白 #ede4d0 */
+  text-shadow: var(--c-hero-number-text-shadow);
+}
+
+/* Tier badge 共通 base */
+.hero-wuxia .hero-tier.tier-badge {
+  position: relative;
+  z-index: 2;
+  font-family: var(--f-latin);
+  font-size: var(--text-xl);
+  font-weight: var(--fw-black);
+  letter-spacing: .12em;
+  padding: 5px 16px;
+  align-self: flex-end;
+  margin-bottom: var(--space-3-5);
+  overflow: hidden;
+  border-radius: 0;
+  border: 1px solid;
+  background: var(--c-tier-badge-hero-bg);
+  color: var(--c-tier-badge-hero-fg);
+  border-color: var(--c-tier-badge-hero-border);
+}
+
+/* SS — gold (アニメ継承、静的部のみ override) */
+.hero-wuxia .hero-tier.tier-SS {
+  color: var(--c-tier-ss-hero-fg);
+  background: var(--c-tier-ss-hero-bg);
+  border-color: var(--c-tier-ss-hero-border);
+  text-shadow: 0 0 18px rgba(240,210,138,.95), 0 0 36px var(--vermilion-bright-glow);
+  box-shadow: var(--c-hero-wuxia--hero-tier-tier-SS-shadow);
+}
+
+/* S — vermilion (アニメ継承) */
+.hero-wuxia .hero-tier.tier-S {
+  color: var(--c-tier-s-hero-fg);
+  background: var(--c-tier-s-hero-bg);
+  border-color: var(--c-tier-s-hero-border);
+  text-shadow: 0 0 14px rgba(232,81,58,.85), 0 0 28px rgba(200,60,43,.45);
+  box-shadow: var(--c-hero-wuxia--hero-tier-tier-S-shadow);
+}
+
+/* A — jade calm */
+.hero-wuxia .hero-tier.tier-A {
+  color: var(--c-tier-a-hero-fg);
+  background: var(--c-tier-a-hero-bg);
+  border-color: var(--c-tier-a-hero-border);
+  text-shadow: 0 0 12px rgba(168,212,180,.7), 0 0 24px rgba(127,168,138,.35);
+  box-shadow: var(--c-tier-a-hero-shadow);
+}
+
+/* B — bone copper */
+.hero-wuxia .hero-tier.tier-B {
+  color: var(--c-tier-b-hero-fg);
+  background: var(--c-tier-b-hero-bg);
+  border-color: var(--c-tier-b-hero-border);
+  text-shadow: 0 0 10px rgba(201,184,138,.55);
+  box-shadow: var(--c-tier-b-hero-shadow);
+}
+
+/* C — muted */
+.hero-wuxia .hero-tier.tier-C {
+  color: var(--c-tier-c-hero-fg);
+  background: var(--c-tier-c-hero-bg);
+  border-color: var(--c-tier-c-hero-border);
+  text-shadow: 0 0 6px rgba(122,112,96,.4);
+  box-shadow: var(--c-tier-c-hero-shadow);
+}
+
+.hero-wuxia .hero-next-inline {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  margin-top: -6px;
+}
+
+/* hidden 属性で確実に消す ( .hero-wuxia .hero-next-inline の specificity 勝ち防止) */
+.hero-wuxia .hero-next-inline[hidden] { display: none; }
+
+.hero-wuxia .hero-next-label {
+  font-family: var(--f-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
+  letter-spacing: .32em;
+  color: var(--paper-mute);
+  text-transform: uppercase;
+  padding-left: var(--space-half);
+}
+
+.hero-wuxia .hero-next-row { display: flex; align-items: baseline; gap: var(--space-1-5); }
+
+.hero-wuxia .hero-next-arrow { color: var(--c-hero-next-arrow-fg); font-size: var(--text-18); align-self: center; }
+
+.hero-wuxia .hero-next-val {
+  font-family: var(--f-latin);
+  font-weight: var(--fw-extra);
+  font-size: 48px;
+  color: var(--c-hero-next-val-fg);
+  line-height: .88;
+  letter-spacing: -.01em;
+  text-shadow: var(--c-hero-wuxia--hero-next-val-text-shadow);
+}
+
+.hero-wuxia .hero-right {
+  position: relative;
+  z-index: 1;
+  border-left: 1px solid var(--gold-deep);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3-5);
+  padding: 6px 0 6px 18px;
+  background: transparent;
+}
+
+.hero-wuxia .luopan {
+  position: relative;
+  width: 160px; height: 160px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.hero-wuxia .luopan-ticks,
+.hero-wuxia .luopan-arc {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+
+.hero-wuxia .luopan-inner {
+  position: relative;
+  width: 138px; height: 138px;
+}
+
+.hero-wuxia .luopan-inner svg {
+  width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+
+.hero-wuxia .luopan-center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.hero-wuxia .luopan-center-label {
+  font-family: var(--f-display);
+  font-size: 30px;
+  font-weight: var(--fw-extra);
+  letter-spacing: .18em;
+  background: linear-gradient(180deg, var(--chart-crit) 0%, var(--gold) 55%, var(--gold-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: var(--c-luopan-center-label-fg);
+  filter: drop-shadow(0 1px 1px var(--overlay-mid-2));
+}
+
+.hero-wuxia .judge-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.hero-wuxia .judge-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10.5px;
+  white-space: nowrap;
+}
+
+.hero-wuxia .judge-dot { width: 7px; height: 7px; flex-shrink: 0; }
+
+/* 物理/属性 行: 区切り線 + 菱形マーカー (◇物理=朱outline / ◆属性=翠fill) */
+.hero-wuxia .judge-row-sep { margin-top: 5px; padding-top: var(--space-1-5); border-top: 1px solid var(--ink-2); }
+
+.hero-wuxia .judge-dot-diamond { width: 8px; height: 8px; border-radius: 0; transform: rotate(45deg); }
+
+.hero-wuxia .judge-dot-phys { background: transparent; border: 1.6px solid var(--chart-sympathy); box-shadow: var(--c-judge-dot-phys-shadow); border-color: var(--c-hero-wuxia--judge-dot-phys-border); }
+
+.hero-wuxia .judge-dot-elem { background: transparent; border: 1.6px solid var(--jade-bright); box-shadow: var(--c-judge-dot-elem-shadow); border-color: var(--c-hero-wuxia--judge-dot-elem-border); }
+
+.hero-wuxia .judge-name { font-weight: var(--c-judge-name-fw); color: var(--c-judge-name-fg); text-shadow: var(--c-hero-wuxia--judge-name-text-shadow); }
+
+.hero-wuxia .judge-val {
+  font-family: var(--f-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--c-judge-val-fw);
+  margin-left: auto;
+  text-shadow: var(--c-hero-wuxia--judge-val-text-shadow);
+}
+
+/* S2-g co-locate (B / K-type): light#88 L756 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .hero-wuxia #dmgPhysVal {
+  color: var(--vermilion-deep) !important;
+}
+
+/* S2-g co-locate (B / K-type): light#89 L758 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .hero-wuxia #dmgElemVal {
+  color: var(--jade-bright) !important;
+}
+
+/* S2-g co-locate (T): light#93 L773 */
+.hero-wuxia .hero-tier.tier-SS::before,
+.wwm-sb-tier-badge.tier-SS::before {
+  position: var(--c-hero-wuxia--hero-tier-tier-SS-before-position);
+  top: var(--c-hero-wuxia--hero-tier-tier-SS-before-top);
+  bottom: var(--c-hero-wuxia--hero-tier-tier-SS-before-bottom);
+  left: var(--c-hero-wuxia--hero-tier-tier-SS-before-left);
+  right: var(--c-hero-wuxia--hero-tier-tier-SS-before-right);
+  width: var(--c-hero-wuxia--hero-tier-tier-SS-before-width);
+  height: var(--c-hero-wuxia--hero-tier-tier-SS-before-height);
+  transform: var(--c-hero-wuxia--hero-tier-tier-SS-before-transform);
+  pointer-events: var(--c-hero-wuxia--hero-tier-tier-SS-before-pe);
+  z-index: var(--c-hero-wuxia--hero-tier-tier-SS-before-z);
+  content: var(--c-hero-wuxia--hero-tier-tier-SS-before-content);
+}
+
+/* S2-g co-locate (B / K-type): light#104 L859 — theme gate 維持で other theme 影響ゼロ。 svg presentation attr 保護 (token unset 不可) */
+html[data-theme="light"] .hero-wuxia .ink-stroke path {
+  stroke: rgba(160,28,18,0.6);
+}
+
+/* S2-g co-locate (B / K-type): light#106 L867 — theme gate 維持で other theme 影響ゼロ。 svg presentation attr 保護 (token unset 不可) */
+html[data-theme="light"] .hero-wuxia .luopan-ticks line {
+  stroke: rgba(122,90,32,.8);
+  stroke-opacity: 1;
+}
+
+/* S2-g co-locate (B / K-type): light#107 L872 — theme gate 維持で other theme 影響ゼロ。 svg presentation attr 保護 (token unset 不可) */
+html[data-theme="light"] .hero-wuxia .luopan-ticks line[stroke-width="1.5"] {
+  stroke: var(--vermilion-deep);
+  stroke-opacity: 1;
+}
+
+/* S2-g co-locate (B / K-type): light#108 L877 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .hero-wuxia .luopan-arc circle[stroke^="rgba(232,215,180"] {
+  stroke: rgba(122,90,32,.55) !important;
+}
+
+/* S2-g co-locate (B / K-type): light#109 L881 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
+html[data-theme="light"] .hero-wuxia .luopan-inner svg circle.donut-bg,
+html[data-theme="light"] .hero-wuxia .luopan-inner svg circle[stroke^="rgba(232,215,180"] {
+  stroke: rgba(122,90,32,.5) !important;
+}
+
+@media (min-width: 601px) {
+  .hero--collapsed .hero-compact-breakdown { display: flex; }
+}
+
+@media (max-width: 600px) {
+  .hero--collapsed .pname { display: none; }
+  .hero--collapsed .pval { font-size: var(--text-xs); }
+  .hero--collapsed .prob-row { gap: 3px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .donut-seg        { transition: none; }
+}
+
+@media (max-width: 600px) {
+  /* ─────────────────────────────────────────────────────────────────
+     HERO — 縦積みレイアウト
+     ───────────────────────────────────────────────────────────────── */
+  /* モバイル折りたたみ: 右列を画面幅に収まるサイズに縮小 */
+  .hero--collapsed {
+    grid-template-columns: 1fr 190px;
+  }
+  .hero--collapsed .hero-right {
+    padding: var(--space-1-5) var(--space-2-5);
+  }
+  .hero--collapsed .donut { width: 56px; height: 56px; }
+  .hero--collapsed .donut-wrap { gap: var(--space-2); }
+  /* @layer Step 1 複製 (2026-06-05): components.css の collapsed/縮小 rule が
+     本 block の汎用 rule に layer 移行後負けるため、 同値を此処で再宣言して優先維持 */
+  .hero--collapsed .hero-left { padding-top: var(--space-2-5); }
+  .hero--collapsed .donut-center-label { font-size: 7px; }
+  .hero-left {
+    padding-top: var(--space-3);
+    padding-bottom: var(--space-2-5);
+    padding-left: var(--space-3);
+  }
+  .hero-label-jp { font-size: var(--text-xs); letter-spacing: 0.14em; margin-top: 3px; }
+  /* 期待値とSTATUS SCOREを縦積み */
+  .hero-nums {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin-top: var(--space-1-5);
+  }
+  /* .hero-number font-size は削除済 (2026-06-05 @layer Step 1):
+     .hero-wuxia .hero-number (96px) に spec 負けで dead。 ≤480 は本 file 後方 block が担当 */
+  .hero-number .unit { font-size: var(--text-xs); padding-bottom: var(--space-2); letter-spacing: 0.2em; }
+  .hero-breakdown { gap: var(--space-4); margin-top: var(--space-2-5); padding-top: var(--space-2); }
+  .hb-value { font-size: var(--text-14); }
+  /* ── ドーナツ ── */
+  .donut { width: 96px; height: 96px; }
+  .donut-wrap { gap: var(--space-3-5); }
+  .prob-row .pname { font-size: var(--text-xs); }
+  .prob-row .pval { font-size: var(--text-12); }
+  .donut-center-label { font-size: var(--text-2xs); letter-spacing: 0.12em; }
+  .donut-center-val { font-size: var(--text-sm); }
+}
+
+@media (max-width: 480px) {
+  /* hero拡張時 = 自然 contents 高さで fit (余白なし、 donut + ラベル ピッタリ) */
+  section.hero.hero-wuxia.hero--expanded {
+    min-height: 0;
+  }
+  .hero-wuxia .hero-left {
+    gap: 4px;
+    padding: 0;
+    overflow: visible;  /* PC overflow:hidden 解除、 子のはみ出し回避 */
+    width: 100%;
+  }
+  .hero-wuxia .hero-label .ja { font-size: var(--text-md); }
+  .hero-wuxia .hero-label .en { font-size: var(--text-2xs); }
+  .hero-wuxia .hero-score-row {
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .hero-wuxia .hero-number {
+    font-size: 60px;  /* current score 大字 */
+    line-height: 1;
+  }
+  .hero-wuxia .hero-tier.tier-badge {
+    font-size: var(--text-lg);
+    padding: var(--space-1) var(--space-2);
+  }
+  /* hero-score-row grid: 左=score (2行跨)、 右上=NEXT、 右下=Tier badge (両方 中央揃え) */
+  .hero-wuxia .hero-score-row {
+    display: grid;
+    grid-template-columns: auto auto;  /* score自然幅 + stack自然幅 = 詰める */
+    grid-template-areas:
+      "score next"
+      "score tier";
+    column-gap: 4px;
+    row-gap: 0;
+    justify-content: start;  /* 全体左寄せ、 score+stack 近接 */
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  .hero-current { grid-area: score; }
+  .hero-wuxia .hero-tier.tier-badge {
+    grid-area: tier;
+    font-size: var(--text-xl);  /* 旧 main mobile 同等 (base .hero-wuxia .hero-tier.tier-badge と同じ 22px) */
+    padding: 5px 16px;          /* 旧 main mobile 同等 */
+    min-height: auto;
+    align-self: start;
+    justify-self: center;
+    text-align: center;
+  }
+  .hero-wuxia .hero-next-inline {
+    grid-area: next;
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    font-size: var(--text-xs);
+    margin: 0;
+    padding: 0;
+    align-self: end;
+    justify-self: center;
+  }
+  .hero-next-inline[hidden] { display: none !important; }
+  .hero-wuxia .hero-next-label { font-size: var(--text-xs); letter-spacing: 0.08em; padding: 0; color: var(--paper-mute); }
+  .hero-wuxia .hero-next-row { font-size: var(--text-sm); display: inline-flex; align-items: center; gap: 2px; }
+  .hero-wuxia .hero-next-val { font-size: var(--text-md); font-weight: var(--fw-bold); }
+  .hero-left { grid-area: info; }
+  /* hero-right を grid container にinline化 → 子 luopan/judge-list が hero grid area参加 */
+  .hero-right { display: contents !important; }
+  .hero-right .luopan {
+    grid-area: luopan;
+    width: 80px; height: 80px;
+    flex: 0 0 auto;
+  }
+  /* 内側 donut = PC比率 (136/160 = 85%) */
+  .hero-right .luopan-inner {
+    width: 85%; height: 85%;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .hero-right .luopan-inner svg { width: 100%; height: 100%; }
+  .hero-right .luopan-center-label { font-size: var(--text-xs); }
+  /* 朱色 筆 SVG 削除 */
+  .hero-wuxia .ink-stroke { display: none; }
+  /* judge-list: default hidden、 hero--expanded 時 hero下に 1行 横並び (wrap可) */
+  .hero-right .judge-list {
+    grid-area: judges;
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    width: 100%;
+  }
+  section.hero.hero-wuxia.hero--expanded .hero-right .judge-list {
+    display: flex;
+  }
+  .hero-right .judge-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: var(--text-sm);
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    border: none ;
+  }
+  .hero-right .judge-row-sep {
+    border: none ;
+    padding: 0;
+    margin: 0;
+  }
+  section.hero.hero-wuxia.hero--expanded::after { content: '▲ tap'; }
+}
+
+@media (max-width: 359px) {
+  /* hero-number: 480px @media で 60px だが 320px だと score 領域が広すぎて NEXT/tier 圧迫 */
+  .hero-wuxia .hero-number {
+    font-size: 44px;
+  }
+
+  /* hero-tier badge: 480px @media で var(--text-xl)=22px に拡大したが、 320-359px では
+     grid "score | next/tier" 領域に 22px badge が収まらず NEXT/donut と重なる。 中間サイズに縮小。 */
+  .hero-wuxia .hero-tier.tier-badge {
+    font-size: var(--text-lg);  /* 16px */
+    padding: 3px 10px;
+    letter-spacing: 0.05em;
+  }
+}
+
+} /* end @layer components */

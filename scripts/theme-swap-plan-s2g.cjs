@@ -45,7 +45,8 @@ function selSlug(sel) {
 
 // 既存 token 名 (衝突回避): tokens.css + light/dark.css の定義
 const existingTokens = new Set();
-for (const f of ['assets/styles-tokens.css', 'assets/styles-light.css', 'assets/styles-dark.css']) {
+const { pathOf } = require('./css-files.cjs');
+for (const f of [pathOf('tokens'), pathOf('light'), pathOf('dark')]) {
   for (const m of fs.readFileSync(f, 'utf8').matchAll(/^\s*(--[\w-]+)\s*:/gm)) existingTokens.add(m[1]);
 }
 const nameCount = new Map();
@@ -80,7 +81,7 @@ const addDelete = (file, line, prop, label) => {
 for (const r of movers) {
   if (r.mergeInto) continue; // light 側で統合処理
   const merged = mergedFrom.get(r.key) || null;
-  const srcLabel = `${r.key.replace('assets/styles-', '').replace('.css', '')} L${r.ruleStart}`;
+  const srcLabel = `${r.key.replace('assets/styles/', '').replace('assets/styles-', '').replace('.css', '')} L${r.ruleStart}`;
 
   // ── Mode T rule ──
   const tEnts = r.entries.filter(e => e.nMode === 'T' && e.nBatch);
@@ -131,7 +132,7 @@ for (const r of movers) {
       }
       newRules.push({
         file: r.target, vLine: r.vLine,
-        header: `/* S2-g co-locate (T): ${srcLabel}${merged ? ' + ' + merged.key.replace('assets/styles-', '').replace('.css', '') : ''} */`,
+        header: `/* S2-g co-locate (T): ${srcLabel}${merged ? ' + ' + merged.key.replace('assets/styles/', '').replace('assets/styles-', '').replace('.css', '') : ''} */`,
         selectors: grp.sels, decls,
       });
       if (tokens.length) plan.push({ tokens, note: `S2-g ${selSlug(grp.sels[0])}`, decls: [] });
@@ -178,7 +179,7 @@ const tokGroups = plan.filter(g => g.tokens);
 const tokN = tokGroups.reduce((a, g) => a + g.tokens.length, 0);
 console.log(`plan: newRule ${newRules.length} (T ${newRules.filter(x => !x.decls.some(d => d.imp)).length} / B ${newRules.filter(x => x.decls.some(d => d.imp)).length}) / token ${tokN} / delete ${deletes.length} → scripts/.theme-swap-plan-s2g.json`);
 for (const nr of newRules) {
-  console.log(`[RULE→${nr.file.replace('assets/styles-', '').replace('.css', '')} @${nr.vLine}] ${nr.selectors[0].slice(0, 60)}${nr.selectors.length > 1 ? ` +${nr.selectors.length - 1}sel` : ''}`);
+  console.log(`[RULE→${nr.file.replace('assets/styles/', '').replace('assets/styles-', '').replace('.css', '')} @${nr.vLine}] ${nr.selectors[0].slice(0, 60)}${nr.selectors.length > 1 ? ` +${nr.selectors.length - 1}sel` : ''}`);
   for (const d of nr.decls) console.log(`    ${d.prop}: ${d.value.slice(0, 70)}${d.imp ? ' !important' : ''};`);
 }
 for (const g of tokGroups) for (const t of g.tokens) console.log(`TOKEN ${t.name}\n    dark : ${t.dark.slice(0, 70)}\n    light: ${(t.light ?? '(= dark)').slice(0, 70)}`);

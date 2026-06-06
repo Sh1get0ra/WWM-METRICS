@@ -17,4 +17,4 @@ const plan = DEAD.map(d => ({
 
 fs.writeFileSync('scripts/.theme-swap-plan-dead.json', JSON.stringify(plan, null, 1));
 console.log(`plan: delete ${plan.length} → scripts/.theme-swap-plan-dead.json`);
-for (const g of plan) console.log(`[DEL dead] ${g.decls[0].baseSel.slice(0, 110)} { ${g.decls[0].prop} } @${g.decls[0].lightFile.replace('assets/styles-', '')}:${g.decls[0].lightLine}`);
+for (const g of plan) console.log(`[DEL dead] ${g.decls[0].baseSel.slice(0, 110)} { ${g.decls[0].prop} } @${g.decls[0].lightFile.replace('assets/styles/', '').replace('assets/styles-', '')}:${g.decls[0].lightLine}`);

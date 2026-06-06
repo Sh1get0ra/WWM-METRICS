@@ -15,6 +15,11 @@
 const fs = require('fs');
 const path = require('path');
 
+// CSS file 構成 + 同 layer 内全順序座標 (Step 4: 複数 file = 同 layer 対応) — scripts/css-files.cjs が単一真実。
+// ordOf(file, line) = file 読込順 (seq) × 行番号 の全順序。 同 layer 内の order 比較は全て ordOf を通す事
+// (素の line 比較は file 跨ぎで無意味)。 layer 跨ぎは従来通り LAYER_ORDER (= FILE_LAYER) を先に比較。
+const { FILE_LAYER, ordOf, filesOfLayer, pathOf } = require('./css-files.cjs');
+
 // ── parseCss は audit v2 から流用 (require で関数 export してないため再実装最小) ──
 function parseCss(src, file) {
   const decls = [];
@@ -307,13 +312,15 @@ function stripTheme(sel) {
 
 const STRUCTURAL_RE = /url\(|animation|mask|content\s*:|blend-mode|-webkit-mask/i;
 
+// link 順 (= cascade 順) — layer 群が link 順で連続している事は css-files.cjs が保証
 const BASE_FILES = [
-  'assets/styles-base.css',
-  'assets/styles-components.css',
-  'assets/styles-modals.css',
-  'assets/styles-responsive.css',
+  ...filesOfLayer('base'),
+  ...filesOfLayer('components'),
+  ...filesOfLayer('modals'),
+  ...filesOfLayer('responsive'),
 ];
-const THEME_FILES = ['assets/styles-light.css', 'assets/styles-dark.css'];
+const DARK_CSS = pathOf('dark'), LIGHT_CSS = pathOf('light');
+const THEME_FILES = [LIGHT_CSS, DARK_CSS];
 
 const baseDecls = [];
 for (const f of BASE_FILES) baseDecls.push(...parseCss(fs.readFileSync(f, 'utf8'), f));
@@ -323,15 +330,16 @@ for (const f of THEME_FILES) themeDecls.push(...parseCss(fs.readFileSync(f, 'utf
 // ── S2-d/e: theme context token map + var() 解決 (値の意味比較用) ──
 // tokens.css :root 定義 → 当該 theme file の token block で上書き
 const themeTokenMaps = { light: new Map(), dark: new Map() };
-for (const d of parseCss(fs.readFileSync('assets/styles-tokens.css', 'utf8'), 'assets/styles-tokens.css')) {
+const TOKENS_CSS = pathOf('tokens');
+for (const d of parseCss(fs.readFileSync(TOKENS_CSS, 'utf8'), TOKENS_CSS)) {
   if (!d.prop.startsWith('--')) continue;
   themeTokenMaps.light.set(d.prop, d.value);
   themeTokenMaps.dark.set(d.prop, d.value);
 }
 for (const d of themeDecls) {
   if (!d.prop.startsWith('--')) continue;
-  if (d.file === 'assets/styles-light.css') themeTokenMaps.light.set(d.prop, d.value);
-  if (d.file === 'assets/styles-dark.css') themeTokenMaps.dark.set(d.prop, d.value);
+  if (d.file === LIGHT_CSS) themeTokenMaps.light.set(d.prop, d.value);
+  if (d.file === DARK_CSS) themeTokenMaps.dark.set(d.prop, d.value);
 }
 function resolveCtx(value, ctx) {
   const map = themeTokenMaps[ctx];
@@ -355,16 +363,9 @@ for (const d of baseDecls) {
   baseBySel.get(k).push(d);
 }
 
-// layer 順 (file = layer 前提、 tokens.css 先頭の @layer 宣言順)。
-// @layer cascade: normal decl は 後 layer 無条件勝ち > 同 layer 内 specificity > source order
-const LAYER_ORDER = new Map([
-  ['assets/styles-base.css', 0],
-  ['assets/styles-components.css', 1],
-  ['assets/styles-modals.css', 2],
-  ['assets/styles-responsive.css', 3],
-  ['assets/styles-dark.css', 4],
-  ['assets/styles-light.css', 5],
-]);
+// layer 順 (path → layer index、 css-files.cjs 由来。 Step 4 以降 複数 file = 同 layer)。
+// @layer cascade: normal decl は 後 layer 無条件勝ち > 同 layer 内 specificity > source order (= ordOf)
+const LAYER_ORDER = FILE_LAYER;
 
 // compound key index — light 表示の削除後 winner 候補。
 // light.css 自身も含める (light layer 内の他 rule は base より常勝 = 最重要競合源)
@@ -463,14 +464,14 @@ function pairWinnerBlockers(d, ctx) {
       if (gL !== pL) afterGWins = gL > pL;
       else {
         const sg = specificity(g.selector);
-        afterGWins = sg > sp || (sg === sp && g.line > d.pair.line);
+        afterGWins = sg > sp || (sg === sp && ordOf(g.file, g.line) > ordOf(d.pair.file, d.pair.line));
       }
       if (!afterGWins) continue;                              // pair 勝ち確定 = 無害
       // before: g vs d (d = light layer normal)
       let beforeGWins = false;
       if (gL === dL) {
         const sg = specificity(g.selector);
-        beforeGWins = sg > sd || (sg === sd && g.line > d.line);
+        beforeGWins = sg > sd || (sg === sd && ordOf(g.file, g.line) > ordOf(d.file, d.line));
       } // base layer normal は light layer に負ける → false
       seen.add(gid);
       blockers.push({ file: g.file, line: g.line, selector: norm(g.selector), prop: g.prop, value: norm(g.value), beforeGWins });
@@ -507,7 +508,7 @@ for (const d of themeDecls) {
       // 後勝ち = 最後の decl を pair とみなす (同 layer source order)
       const winner = sameProp[sameProp.length - 1];
       entry.pair = { file: winner.file, line: winner.line, value: winner.value, important: winner.important, candidates: sameProp.length };
-      entry.ctx = d.file === 'assets/styles-dark.css' ? 'dark' : 'light';
+      entry.ctx = d.file === DARK_CSS ? 'dark' : 'light';
       if (!d.important && !winner.important) {
         const blockers = pairWinnerBlockers(entry, entry.ctx);
         // 静的 safe: blocker 全てが beforeGWins (= before/after 共 g 勝ち → 表示不変)
@@ -531,7 +532,6 @@ for (const d of themeDecls) {
 // blocker g が同 batch で swap される場合: 「before 勝敗 (theme layer 内) == after 勝敗 (pair 同士 base layer)」
 // なら override 関係が pair+token 経由で保存される → blocker 解除。
 // 物理 decl gate も fixpoint 内で強制 (gate 落ち decl の削除前提を他 decl が持たないように)。
-const LIGHT_FILE = 'assets/styles-light.css';
 const THEME_FILE_SET = new Set(THEME_FILES);
 const keyOf = (e) => `${e.file}|${e.line}|${norm(e.selector)}|${e.prop}`;
 const mIndex = new Map();
@@ -599,7 +599,7 @@ function cmpBaseGWins(e, gE) {
   if (gL !== eL) return gL > eL;
   const se = specificity(e.baseSel), sg = specificity(gE.baseSel);
   if (sg !== se) return sg > se;
-  return gE.pair.line > e.pair.line;
+  return ordOf(gE.pair.file, gE.pair.line) > ordOf(e.pair.file, e.pair.line);
 }
 
 // drop-gate 計測 (S2-i): fixpoint で batch から落ちた「最初の」理由を記録 (後続は連鎖)
@@ -608,8 +608,8 @@ const dropGate = (e, gate, detail) => { if (!e.dropGate) { e.dropGate = gate; if
 // ── S2-j: M/P 横断方向検証用の base 最終位置比較 ──
 // M entry の swap 後位置 = pair decl (値が var(--tok) になるだけで位置不変)
 // P entry の insert 後位置 = target rule 末尾 (lastLine + 0.5 — 整数 line と衝突しない全順序)
-function finalPosM(mE) { return { layer: LAYER_ORDER.get(mE.pair.file) ?? 99, spec: specificity(mE.baseSel), line: mE.pair.line }; }
-function finalPosP(pE) { return { layer: LAYER_ORDER.get(pE.insert.file) ?? 99, spec: specificity(pE.baseSel), line: pE.insert.lastLine + 0.5 }; }
+function finalPosM(mE) { return { layer: LAYER_ORDER.get(mE.pair.file) ?? 99, spec: specificity(mE.baseSel), line: ordOf(mE.pair.file, mE.pair.line) }; }
+function finalPosP(pE) { return { layer: LAYER_ORDER.get(pE.insert.file) ?? 99, spec: specificity(pE.baseSel), line: ordOf(pE.insert.file, pE.insert.lastLine) + 0.5 }; }
 function posBeats(a, b) {
   if (a.layer !== b.layer) return a.layer > b.layer;
   if (a.spec !== b.spec) return a.spec > b.spec;
@@ -652,7 +652,7 @@ while (changed) {
               if (!sE || !sE.pair || sE.pair.file !== g.file || sE.pair.line !== g.line || sE.prop !== g.prop) return false;
             }
             const ss = specificity(s.selector);
-            return ss > sd || (ss === sd && s.line > e.line) ||
+            return ss > sd || (ss === sd && ordOf(s.file, s.line) > ordOf(e.file, e.line)) ||
               resolveCtx(s.value, e.ctx) === resolveCtx(e.value, e.ctx); // g' が d に勝つ or theme 表示同値
           });
           if (!shielded) { dropSelf = true; dropGate(e, 'm-blocker', `${g.file}:${g.line} ${g.selector} { ${g.prop} }`); break; }
@@ -738,7 +738,7 @@ function pInsertCandidates(baseSel, media) {
   cands.sort((a, b) => {
     const la = LAYER_ORDER.get(a.file) ?? 99, lb = LAYER_ORDER.get(b.file) ?? 99;
     if (la !== lb) return lb - la;
-    return b.ruleStart - a.ruleStart;
+    return ordOf(b.file, b.ruleStart) - ordOf(a.file, a.ruleStart);
   });
   return cands;
 }
@@ -769,7 +769,7 @@ function otherSideScan(e, target) {
       else if (gL !== aL) aWins = aL > gL;
       else {
         const sg = specificity(g.selector);
-        aWins = sa > sg || (sa === sg && target.lastLine + 1 > g.line);
+        aWins = sa > sg || (sa === sg && ordOf(target.file, target.lastLine) + 1 > ordOf(g.file, g.line));
       }
       if (!aWins) {
         // g 勝ち残置 = other 表示不変。 ただし g が theme file 在住 (= 同 batch で base へ移動し得る) なら依存記録。
@@ -926,14 +926,14 @@ function themeShadowsFor(e, b) {
   const sd = specificity(e.selector);
   for (const t of themeDecls) {
     if (t.prop.startsWith('--') || t.important) continue; // imp t は batch 候補外 — 解析単純化のため非 imp 限定 (保守的)
-    const tCtx = t.file === 'assets/styles-dark.css' ? 'dark' : 'light';
+    const tCtx = t.file === DARK_CSS ? 'dark' : 'light';
     if (tCtx !== e.ctx) continue;
     if ((t.media || null) !== (e.media || null)) continue;
     if (t.file === e.file && t.line === e.line) continue; // e 自身 (同物理 decl の split 含む)
     if (!shadowProp(t.prop, e.prop)) continue;
     if (!selCovers(stripTheme(t.selector), b.selector)) continue;
     const st = specificity(t.selector);
-    if (!(st > sd || (st === sd && t.line > e.line))) continue; // t が e に勝つ (before 勝者 ≠ e の保証)
+    if (!(st > sd || (st === sd && ordOf(t.file, t.line) > ordOf(e.file, e.line)))) continue; // t が e に勝つ (before 勝者 ≠ e の保証)
     keys.push(`${t.file}|${t.line}|${norm(t.selector)}|${t.prop}`);
   }
   return keys;
@@ -990,7 +990,7 @@ function adoptPTarget(e, v) {
 }
 
 for (const e of out.P) {
-  e.ctx = e.file === 'assets/styles-dark.css' ? 'dark' : 'light';
+  e.ctx = e.file === DARK_CSS ? 'dark' : 'light';
   // 反対 theme の同 baseSel+prop entry (opp)
   const opp = out.P.find(o => o !== e && o.baseSel === e.baseSel && o.prop === e.prop &&
     (o.media || null) === (e.media || null) && o.file !== e.file);
@@ -1041,13 +1041,13 @@ for (const e of out.P) {
 // あれば、 挿入 decl A は S の表示に関与不能 (常敗) = S は cover 不要。 theme 残置 decl は theme layer 常勝で
 // 元々無害。 guard: S 上の batch entry (M/P) の final 位置が挿入位置に負けるなら不成立 (移動で A が浮上)
 function coverageShadow(S, e) {
-  const insPos = { layer: LAYER_ORDER.get(e.insert.file) ?? 99, spec: specificity(S), line: e.insert.lastLine + 0.5 };
+  const insPos = { layer: LAYER_ORDER.get(e.insert.file) ?? 99, spec: specificity(S), line: ordOf(e.insert.file, e.insert.lastLine) + 0.5 };
   const hasShadow = (baseBySel.get(S) || []).some(d =>
     (d.media || null) === (e.media || null) &&
     !d.prop.startsWith('--') && !d.important &&
     shadowProp(d.prop, e.prop) &&
     !(d.file === e.insert.file && d.line >= e.insert.ruleStart && d.line <= e.insert.lastLine) && // 挿入 rule 内 decl は A (末尾) に敗北
-    posBeats({ layer: LAYER_ORDER.get(d.file) ?? 99, spec: specificity(S), line: d.line }, insPos));
+    posBeats({ layer: LAYER_ORDER.get(d.file) ?? 99, spec: specificity(S), line: ordOf(d.file, d.line) }, insPos));
   if (!hasShadow) return false;
   for (const x of out.M) {
     if (!inBatch.has(keyOf(x))) continue;
@@ -1068,7 +1068,7 @@ function depStillWins(gE, e) {
   if (gL !== eL) return gL > eL;
   const sg = specificity(gE.baseSel), se = specificity(e.baseSel);
   if (sg !== se) return sg > se;
-  return gE.insert.lastLine > e.insert.lastLine;
+  return ordOf(gE.insert.file, gE.insert.lastLine) > ordOf(e.insert.file, e.insert.lastLine);
 }
 function pFixpoint() {
 let pchg = true;
@@ -1118,7 +1118,7 @@ while (pchg) {
           const tM = mIndex.get(tk), tP = pIndex.get(tk);
           const tInM = tM && inBatch.has(tk), tInP = tP && pBatch.has(tk);
           if (!tInM && !tInP) return true; // 残置 = theme layer 常勝
-          const bPos = { layer: LAYER_ORDER.get(dep.b.file) ?? 99, spec: specificity(dep.b.selector), line: dep.b.line };
+          const bPos = { layer: LAYER_ORDER.get(dep.b.file) ?? 99, spec: specificity(dep.b.selector), line: ordOf(dep.b.file, dep.b.line) };
           if (tInM) {
             const tIsB = tM.pair.file === dep.b.file && tM.pair.line === dep.b.line && tM.prop === dep.b.prop;
             const tPos = tIsB ? bPos : finalPosM(tM);
@@ -1149,7 +1149,7 @@ while (pchg) {
         } else {
           if (resolveCtx(g.value, other) === resolveCtx(oppE.value, other)) continue; // 同値 = 方向不問
           const sg = specificity(g.selector), so = specificity(oppE.selector);
-          const gWonBefore = sg > so || (sg === so && g.line > oppE.line);
+          const gWonBefore = sg > so || (sg === so && ordOf(g.file, g.line) > ordOf(oppE.file, oppE.line));
           if (gWonBefore) {
             if (gMoves && !depStillWins(gE, e)) { drop = true; dropGate(e, 'p-kept', d); break; }
           } else {
@@ -1259,7 +1259,7 @@ for (const e of out.P) e.pBatch = pBatch.has(pKeyOf(e));
 //   前提: M/P batch = 0 (fixpoint 消化済)。 N 適用後に再 audit → M/P 解錠分は別 batch
 if (inBatch.size || pBatch.size) console.warn(`⚠ N 検証は M/P batch 0 前提 (現 M ${inBatch.size} / P ${pBatch.size}) — 先に M/P を apply せよ`);
 
-const N_TARGET_FILES = ['assets/styles-base.css', 'assets/styles-components.css', 'assets/styles-modals.css'];
+const N_TARGET_FILES = [...filesOfLayer('base'), ...filesOfLayer('components'), ...filesOfLayer('modals')];
 function componentTargetFile(sels) {
   // baseSel 群の class/id token → base file 出現数 argmax (tie は後 layer)。 responsive は解体予定で対象外
   const tokens = new Set();
@@ -1280,7 +1280,7 @@ function componentTargetFile(sels) {
     const n = score.get(f) || 0;
     if (n >= bestN && n > 0) { best = f; bestN = n; } // >= で tie は後 layer
   }
-  return best || 'assets/styles-components.css';
+  return best || filesOfLayer('components').at(-1); // fallback = components layer 最終 file
 }
 
 // 値が other theme で IACVT 確定か (fallback 無し var() 参照が other 側 token map に無い)
@@ -1325,8 +1325,8 @@ function relocateBlockers(e, targetFile, vLine) {
       if (g.prop === e.prop && resolveCtx(g.value, e.ctx) === resolveCtx(e.value, e.ctx)) continue;
       const gL = LAYER_ORDER.get(g.file) ?? 99;
       const sg = specificity(g.selector);
-      const beforeEWins = win(eL, gL, se, sg, e.line, g.line, e.important);
-      const afterEWins = win(T, gL, se, sg, vLine, g.line, e.important);
+      const beforeEWins = win(eL, gL, se, sg, ordOf(e.file, e.line), ordOf(g.file, g.line), e.important);
+      const afterEWins = win(T, gL, se, sg, ordOf(targetFile, vLine), ordOf(g.file, g.line), e.important);
       const isTheme = THEME_FILE_SET.has(g.file);
       if (beforeEWins !== afterEWins || isTheme) {
         res.push({ gid, file: g.file, line: g.line, selector: norm(g.selector), prop: g.prop,
@@ -1343,7 +1343,7 @@ function beatenWins(a, b) {
   if (aL !== bL) return aL > bL;
   const sa = specificity(a.selector), sb = specificity(b.selector);
   if (sa !== sb) return sa > sb;
-  return a.line > b.line;
+  return ordOf(a.file, a.line) > ordOf(b.file, b.line);
 }
 // beaten rescue (N / P 共用)。 返値: { value } | { useInitial: true } | null
 //   旧 path: 全 beaten 同値 ∧ cover 存在
@@ -1395,7 +1395,7 @@ const nRules = new Map(); // file#ruleId → meta
   for (const [k, r] of nRules) {
     // S 同乗 + 重複 split (theme prefix 変種で同 baseSel) dedupe
     const rides = sByRule.get(k) || [];
-    for (const s of rides) { s.ctx = s.file === 'assets/styles-dark.css' ? 'dark' : 'light'; s.nRide = true; }
+    for (const s of rides) { s.ctx = s.file === DARK_CSS ? 'dark' : 'light'; s.nRide = true; }
     r.entries.push(...rides);
     const seen = new Set();
     r.entries = r.entries.filter(e => {
@@ -1403,23 +1403,23 @@ const nRules = new Map(); // file#ruleId → meta
       if (seen.has(gid)) return false;
       seen.add(gid); return true;
     });
-    for (const e of r.entries) e.ctx = e.file === 'assets/styles-dark.css' ? 'dark' : 'light';
+    for (const e of r.entries) e.ctx = e.file === DARK_CSS ? 'dark' : 'light';
     r.allImp = r.entries.every(e => e.important);
     const mp = mpByRule.get(k) || [];
     // defer 判定
     if (r.entries.some(e => e.media)) { r.ok = false; r.reason = 'media'; continue; }
     if (r.entries.some(e => /(^|[\s>+~])\*\s*$/.test(e.baseSel) || e.baseSel === '*')) { r.ok = false; r.reason = 'universal'; continue; }
     if (mp.length && !(r.allImp && mp.every(x => x.important))) { r.ok = false; r.reason = 'mixed-cat'; continue; } // M/P split 同居 (全 imp なら B 丸ごと可)
-    if (mp.length) r.entries.push(...mp.map(x => ({ ...x, nRide: true, ctx: x.file === 'assets/styles-dark.css' ? 'dark' : 'light' })));
+    if (mp.length) r.entries.push(...mp.map(x => ({ ...x, nRide: true, ctx: x.file === DARK_CSS ? 'dark' : 'light' })));
     r.target = componentTargetFile([...new Set(r.entries.map(e => e.baseSel))]);
     r.vLine = 500000 + r.ruleStart;
   }
   // opp merge: 同 baseSel 集合の反対 theme rule (両方 ok 候補) → 同 vLine (light 側) へ統合
   const sig = (r) => [...new Set(r.entries.map(e => e.baseSel))].sort().join(',');
   for (const [k, r] of nRules) {
-    if (!r.ok || r.file !== 'assets/styles-dark.css') continue;
+    if (!r.ok || r.file !== DARK_CSS) continue;
     for (const [k2, r2] of nRules) {
-      if (k2 === k || !r2.ok || r2.file !== 'assets/styles-light.css') continue;
+      if (k2 === k || !r2.ok || r2.file !== LIGHT_CSS) continue;
       if (sig(r) === sig(r2)) { r.mergeInto = k2; r.vLine = r2.vLine; r.target = r2.target; break;
       }
     }
@@ -1493,7 +1493,7 @@ function verifyRuleAt(r, target) {
       // 反対 theme に残置される同 baseSel+prop theme decl (rule deferred / M / P) → other 側遮蔽
       const oppStays = !oppHit && themeDecls.some(d2 => !d2.prop.startsWith('--') && d2.prop === e.prop &&
         stripTheme(d2.selector) === e.baseSel && (d2.media || null) === (e.media || null) &&
-        (d2.file === 'assets/styles-dark.css' ? 'dark' : 'light') !== e.ctx);
+        (d2.file === DARK_CSS ? 'dark' : 'light') !== e.ctx);
       const synth = { ...e, pair: { file: target, line: e.nVLine } };
       const blockers = pairWinnerBlockers(synth, e.ctx);
       e.nCtxBlockers = blockers;
@@ -1564,8 +1564,8 @@ for (const [k, r] of nRules) {
 // nFixpoint: 移動 rule 間の勝敗方向保存 (part 粒度)。 part fail → batch から除外 → 再評価
 function nAfterPos(x) { // migration 後の比較座標 { L, s, line }
   return x.e.nMode === 'B'
-    ? { L: LAYER_ORDER.get(x.r.target), s: specificity(x.e.selector), line: x.e.nVLine }
-    : { L: LAYER_ORDER.get(x.r.target), s: specificity(x.e.baseSel), line: x.e.nVLine };
+    ? { L: LAYER_ORDER.get(x.r.target), s: specificity(x.e.selector), line: ordOf(x.r.target, x.e.nVLine) }
+    : { L: LAYER_ORDER.get(x.r.target), s: specificity(x.e.baseSel), line: ordOf(x.r.target, x.e.nVLine) };
 }
 const winPos = (a, b, imp) => {
   if (a.L !== b.L) return imp ? a.L < b.L : a.L > b.L;
@@ -1590,7 +1590,7 @@ while (nChg) {
             if (b.flip) { fail = `B-flip-kept: ${b.selector} { ${b.prop} }`; break; }
           } else {
             // g も移動 → after 再計算 (g の新位置)。 imp 同士のみ此処に来る (imp↔normal 除外済)
-            const after = winPos({ L: LAYER_ORDER.get(r.target), s: specificity(e.selector), line: e.nVLine }, nAfterPos(mig), e.important);
+            const after = winPos({ L: LAYER_ORDER.get(r.target), s: specificity(e.selector), line: ordOf(r.target, e.nVLine) }, nAfterPos(mig), e.important);
             if (after !== b.beforeEWins) { fail = `B-dir: ${b.selector} { ${b.prop} } (co-migrate flip)`; break; }
           }
         }
@@ -1605,7 +1605,7 @@ while (nChg) {
           if (b.beforeGWins) {
             // g 勝ち維持要: 残置 (theme layer) なら常勝 OK / 移動なら再計算
             if (migOk) {
-              const ePos = { L: LAYER_ORDER.get(r.target), s: specificity(e.baseSel), line: e.nVLine };
+              const ePos = { L: LAYER_ORDER.get(r.target), s: specificity(e.baseSel), line: ordOf(r.target, e.nVLine) };
               // imp g (B mode) は normal e に常勝 → OK
               if (!mig.e.important && !winPos(nAfterPos(mig), ePos, false)) { fail = `T-dep-lost: ${b.selector} { ${b.prop} }`; break; }
             }
@@ -1613,7 +1613,7 @@ while (nChg) {
             // hard: e 勝ち維持要。 g 残置 (theme layer 常勝) = fail / g 移動 → e が勝つ要
             if (!migOk) { fail = `T-hard-kept: ${b.selector} { ${b.prop} }`; break; }
             if (mig.e.important) { fail = `T-hard-imp: ${b.selector}`; break; } // imp 残留 g は常勝
-            const ePos = { L: LAYER_ORDER.get(r.target), s: specificity(e.baseSel), line: e.nVLine };
+            const ePos = { L: LAYER_ORDER.get(r.target), s: specificity(e.baseSel), line: ordOf(r.target, e.nVLine) };
             if (winPos(nAfterPos(mig), ePos, false)) { fail = `T-hard-dir: ${b.selector} { ${b.prop} }`; break; }
           }
         }
@@ -1622,7 +1622,7 @@ while (nChg) {
           const mig = nIndex.get(gid);
           if (!mig || !partOk(mig)) continue; // 残置 = theme layer 常勝 OK
           if (mig.e.important) continue;      // imp は常勝維持
-          const ePos = { L: LAYER_ORDER.get(r.target), s: specificity(e.baseSel), line: e.nVLine };
+          const ePos = { L: LAYER_ORDER.get(r.target), s: specificity(e.baseSel), line: ordOf(r.target, e.nVLine) };
           if (!winPos(nAfterPos(mig), ePos, false)) { fail = `T-other-dep: ${mig.e.baseSel} { ${mig.e.prop} }`; break; }
         }
         // opp が fail したら solo 化 (oppStays 降格 — 残置 theme rule が other 側遮蔽)
@@ -1715,7 +1715,7 @@ const cnt = (a) => a.length;
 console.log(`theme decls: ${themeDecls.length} (TOKEN ${cnt(out.TOKEN)} / M ${cnt(out.M)} / P ${cnt(out.P)} / N ${cnt(out.N)} / S ${cnt(out.S)})`);
 if (out.DEAD.length) {
   console.log(`DEAD (shadowed、 削除可): ${out.DEAD.length} 物理 decl`);
-  for (const d of out.DEAD) console.log(`  [DEAD] ${d.file.replace('assets/styles-', '')}:${d.line} ${d.selector.slice(0, 60)} { ${d.prop} } ← ${d.shadower.replace('assets/styles-', '').slice(0, 80)}`);
+  for (const d of out.DEAD) console.log(`  [DEAD] ${d.file.replace('assets/styles/', '').replace('assets/styles-', '')}:${d.line} ${d.selector.slice(0, 60)} { ${d.prop} } ← ${d.shadower.replace('assets/styles/', '').replace('assets/styles-', '').slice(0, 80)}`);
 }
 const safeM = out.M.filter(d => d.safe);
 console.log(`M safe (静的): ${safeM.length} / ${out.M.length}  (うち same-value redundant: ${safeM.filter(d => d.sameValue).length})`);
@@ -1738,8 +1738,8 @@ for (const r of out.NRULES) {
   const part = !r.ok ? `NG ${r.reason}`
     : (tMv === tCnt && bMv === bCnt) ? 'OK'
     : `PARTIAL T ${tMv}/${tCnt} B ${bMv}/${bCnt}${stay ? ` (${stay.nReason})` : ''}`;
-  const tag = r.ok && r.mergeInto ? `${part} →merge(${r.mergeInto.replace('assets/styles-', '').replace('.css', '')})` : part;
-  console.log(`  [${r.modes}] ${r.key.replace('assets/styles-', '').replace('.css', '')} L${r.ruleStart} → ${(r.target || '?').replace('assets/styles-', '').replace('.css', '')} | ${r.sels[0].slice(0, 55)}${r.sels.length > 1 ? ` +${r.sels.length - 1}sel` : ''} | ${tag}`);
+  const tag = r.ok && r.mergeInto ? `${part} →merge(${r.mergeInto.replace('assets/styles/', '').replace('assets/styles-', '').replace('.css', '')})` : part;
+  console.log(`  [${r.modes}] ${r.key.replace('assets/styles/', '').replace('assets/styles-', '').replace('.css', '')} L${r.ruleStart} → ${(r.target || '?').replace('assets/styles/', '').replace('assets/styles-', '').replace('.css', '')} | ${r.sels[0].slice(0, 55)}${r.sels.length > 1 ? ` +${r.sels.length - 1}sel` : ''} | ${tag}`);
 }
 const pReasons = {};
 for (const d of out.P) {
@@ -1759,7 +1759,7 @@ for (const cat of ['M', 'P']) {
 const byFileCat = {};
 for (const cat of ['M', 'P', 'N', 'S']) {
   for (const d of out[cat]) {
-    const k = `${d.file.replace('assets/styles-', '').replace('.css', '')}.${cat}`;
+    const k = `${d.file.replace('assets/styles/', '').replace('assets/styles-', '').replace('.css', '')}.${cat}`;
     byFileCat[k] = (byFileCat[k] || 0) + 1;
   }
 }

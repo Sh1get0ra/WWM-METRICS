@@ -1,0 +1,42 @@
+@layer responsive {
+
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     RESPONSIVE GLOBALS — html/body viewport/scroll 土台のみ (@layer Step 3, 2026-06-06)
+     component 別 @media は各 component file へ co-location 済
+     (styles-components / styles-modals / styles-base 末尾 RESPONSIVE section)。
+     cascade 同値性は scripts/responsive-dissolve-audit.cjs で機械証明
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+
+@media (max-width: 600px) {
+
+  /* ── 横スクロール完全防止 ──
+     body 成分は削除済 (2026-06-05 @layer Step 1): body.wwm-layout-active { overflow-x: auto }
+     (components.css、 PC layout min-width 980 の横 scroll) に spec 負けで dead だった。
+     481-600px は PC layout 縮小表示 = 横 scroll 必須、 hidden 復活させるな */
+  html { overflow-x: hidden; }
+  /* .container mobile rule は削除済 (2026-06-05 @layer Step 1):
+     components.css の body.wwm-layout-active .wwm-app-body .container (spec 0,3,1) に
+     全 decl spec 負けで dead だった (container は wwm-app-body 内 1個のみ)。 復活させるな */
+
+}
+
+@media (max-width: 480px) {
+  /* ─── mobile main breakpoint (TODO #14 Phase 2-5) ─── */
+
+  /* PC 全画面固定 (overflow:hidden) を解除 → mobile は normal scroll */
+  /* root scroll 抑止 (白scrollbar削除)、 wwm-app-body 内部のみscroll (金色scrollbar) */
+  html, body, body.wwm-layout-active {
+    overflow: hidden !important;
+    height: 100vh;
+    height: 100dvh;
+  }
+
+}
+
+@media (max-width: 768px) {
+  /* tablet 暫定対応 (Phase 後半 で詰める) */
+}
+
+/* OBS × mobile block は styles-obs.css へ移動済 (2026-06-05 @layer Step 1 mode 軸分離) */
+
+} /* end @layer responsive */

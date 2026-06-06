@@ -11,6 +11,8 @@
 //   node scripts/theme-swap-apply.cjs --same-value
 
 const fs = require('fs');
+const { pathOf } = require('./css-files.cjs');
+const LIGHT_CSS = pathOf('light'), TOKENS_CSS = pathOf('tokens');
 
 // mode --pairs <plan.json>: pair group token swap
 //   plan: [{ token, dark, light, decls:[{lightFile,lightLine,prop, baseFile,baseLine}] }]
@@ -89,7 +91,7 @@ if (MODE_PAIRS) {
     // rewrite = 既存 light 定義の値書換え (theme decl が唯一消費点を shadow していた stale 値の更新)
     if (g.retokenLight) {
       if (g.rewrite) {
-        const ll = load('assets/styles-light.css');
+        const ll = load(LIGHT_CSS);
         const idx = ll.findIndex(l => new RegExp(`^\\s*${g.retokenLight.replace(/[-]/g, '\\-')}\\s*:`).test(l));
         if (idx === -1) { console.error(`[FAIL] retokenLight ${g.retokenLight} light 定義 不在`); process.exit(1); }
         if (!editDecl(ll, idx + 1, g.retokenLight, 'replace', g.light)) { console.error(`[FAIL] retokenLight ${g.retokenLight} 書換え失敗`); process.exit(1); }
@@ -102,7 +104,7 @@ if (MODE_PAIRS) {
     }
     // retoken: 既存 token の root default (tokens.css) を書換え — base / light block 無変更
     if (g.retoken) {
-      const tl = load('assets/styles-tokens.css');
+      const tl = load(TOKENS_CSS);
       const idx = tl.findIndex(l => new RegExp(`^\\s*${g.retoken.replace(/[-]/g, '\\-')}\\s*:`).test(l));
       if (idx === -1) { console.error(`[FAIL] retoken ${g.retoken} 定義 不在`); process.exit(1); }
       if (!editDecl(tl, idx + 1, g.retoken, 'replace', g.dark)) { console.error(`[FAIL] retoken ${g.retoken} 書換え失敗`); process.exit(1); }
@@ -216,7 +218,7 @@ if (MODE_PAIRS) {
   }
 
   // tokens.css :root 末尾 (--safe-top 行の手前の「Safe Area」 コメント前) に挿入
-  const tl = load('assets/styles-tokens.css');
+  const tl = load(TOKENS_CSS);
   const anchorIdx = tl.findIndex(l => l.includes('Safe Area inset utility'));
   if (anchorIdx === -1) { console.error('tokens.css anchor 不在'); process.exit(1); }
   const eol = tl[anchorIdx].endsWith('\r') ? '\r' : '';
@@ -227,7 +229,7 @@ if (MODE_PAIRS) {
   tl.splice(anchorIdx, 0, ...rootBlock);
 
   // light.css token block: 「misc text + glow (B13)」 cluster 末尾 = --c-sb-top-bg 行の後に挿入
-  const ll2 = load('assets/styles-light.css');
+  const ll2 = load(LIGHT_CSS);
   const lightAnchor = ll2.findIndex(l => l.includes('--c-sb-top-bg'));
   if (lightAnchor === -1) { console.error('light.css anchor 不在'); process.exit(1); }
   const eol2 = ll2[lightAnchor].endsWith('\r') ? '\r' : '';

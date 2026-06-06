@@ -112,6 +112,6 @@ fs.writeFileSync('scripts/.theme-swap-plan-s2f.json', JSON.stringify(plan, null,
 const tok = plan.filter(g => !g.deleteOnly);
 console.log(`plan: token/insert ${tok.length} / delete ${plan.length - tok.length} → scripts/.theme-swap-plan-s2f.json`);
 for (const g of plan) {
-  if (g.deleteOnly) console.log(`[DEL] ${g.decls[0].baseSel} { ${g.decls[0].prop} } @${g.decls[0].lightFile.replace('assets/styles-', '')}:${g.decls[0].lightLine}`);
-  else console.log(`${g.token}\n    dark : ${g.dark}\n    light: ${g.light ?? '(= dark)'}\n    insert: ${g.insert.file.replace('assets/styles-', '')}:${g.insert.ruleStart} { ${g.insert.prop} }`);
+  if (g.deleteOnly) console.log(`[DEL] ${g.decls[0].baseSel} { ${g.decls[0].prop} } @${g.decls[0].lightFile.replace('assets/styles/', '').replace('assets/styles-', '')}:${g.decls[0].lightLine}`);
+  else console.log(`${g.token}\n    dark : ${g.dark}\n    light: ${g.light ?? '(= dark)'}\n    insert: ${g.insert.file.replace('assets/styles/', '').replace('assets/styles-', '')}:${g.insert.ruleStart} { ${g.insert.prop} }`);
 }

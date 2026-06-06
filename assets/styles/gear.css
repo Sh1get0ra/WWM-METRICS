@@ -1,0 +1,272 @@
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     gear.css — GEAR grid / equip card / equip-section / step2 form
+     @layer Step 4 (2026-06-06): styles/components.css を per-component 分割。
+     cascade 同値性は component-split-audit.cjs で機械証明 (同 layer 内 順序保存)。
+     file 読込順 = index.html link 順 = scripts/css-files.cjs (単一真実) — 勝手に入替えるな
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+@layer components {
+
+/* ── Gear Grid Container (main 下部) ───────────────────────── */
+.wwm-gear-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-rows: 1fr 1fr;
+  gap: var(--space-2);
+  margin: var(--space-4) 0;
+  align-items: stretch;
+  /* min-width 削除: 圧縮停止は親 .wwm-app-body min-width:1010 で一元管理 (minmax(0,1fr) = 完全flex、 親に従う) */
+}
+
+.wwm-gear-grid .wwm-equip-slot[data-slot] { cursor: pointer; transition: transform 0.1s, box-shadow 0.1s; }
+
+.wwm-gear-grid .wwm-equip-slot[data-slot]:hover { transform: translateY(-2px); box-shadow: 0 4px 12px var(--accent-mid); }
+
+.wwm-gear-grid .wwm-equip-slot {
+  position: relative;
+  overflow: visible; /* 流派バッジ 飛び出し許可 ( 武器アイコンは icon-wrap が個別 clip ) */
+}
+
+.wwm-equip-icon-wrap {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+.wwm-equip-icon {
+  position: absolute;
+  right: -29px; top: 62%;
+  transform: translateY(calc(-50% + 5px));
+  width: 120px; height: 120px;
+  opacity: var(--c-icon-dim-opacity);
+  filter:
+    drop-shadow(0 0 3px rgba(212,175,55,0.5))
+    drop-shadow(0 0 8px var(--accent-mid))
+    drop-shadow(0 0 16px rgba(212,175,55,0.2));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 武器 (slot 1/2): 武術アイコン用. 装備系より +10px だけ右シフト、 下シフトなし */
+.wwm-equip-icon-weapon {
+  right: -24px;
+  transform: translateY(-50%);
+}
+
+.wwm-equip-slot-inner { z-index: 1; display: flex; flex-direction: column; }
+
+.wwm-equip-card-score {
+  position: absolute;
+  left: 40px; bottom: 8px;
+  font-family: var(--f-latin);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-bold);
+  color: var(--gold-bright);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  text-shadow:
+    0 0 6px rgba(240,210,138,0.55),
+    0 0 14px rgba(240,210,138,0.30);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.wwm-equip-card-score b { font-weight: var(--fw-bold); }
+
+/* 流派 path 別 グロウ色 override (data-liupai-pinyin) — 装備/心法/武庫 共通 */
+/*   鋼鳴 (tianquan) = 青 / 砕岩 (kuanglan) = 赤 / 糸繰 (qingxi) = 緑 / 瞬嵐 (guyun) = 紫 / tongyong = default (金) */
+[data-liupai-pinyin="tianquan"] .wwm-equip-icon,
+[data-liupai-pinyin="tianquan"] .wwm-xinfa-icon {
+  filter:
+    drop-shadow(0 0 3px rgba(80,150,255,0.55))
+    drop-shadow(0 0 8px rgba(80,150,255,0.35))
+    drop-shadow(0 0 16px rgba(80,150,255,0.22));
+}
+
+[data-liupai-pinyin="kuanglan"] .wwm-equip-icon,
+[data-liupai-pinyin="kuanglan"] .wwm-xinfa-icon {
+  filter:
+    drop-shadow(0 0 3px var(--vermilion-bright-glow))
+    drop-shadow(0 0 8px var(--vermilion-bright-soft-mid))
+    drop-shadow(0 0 16px var(--vermilion-bright-soft));
+}
+
+[data-liupai-pinyin="qingxi"] .wwm-equip-icon,
+[data-liupai-pinyin="qingxi"] .wwm-xinfa-icon {
+  filter:
+    drop-shadow(0 0 3px rgba(110,220,140,0.55))
+    drop-shadow(0 0 8px rgba(110,220,140,0.35))
+    drop-shadow(0 0 16px rgba(110,220,140,0.22));
+}
+
+[data-liupai-pinyin="guyun"] .wwm-equip-icon,
+[data-liupai-pinyin="guyun"] .wwm-xinfa-icon {
+  filter:
+    drop-shadow(0 0 3px rgba(180,110,255,0.6))
+    drop-shadow(0 0 8px rgba(180,110,255,0.38))
+    drop-shadow(0 0 16px rgba(180,110,255,0.24));
+}
+
+/* light theme path別 (brightness(0) + 深色グロウ、 opacity UP で強調) */
+/* 武器 slot (1/2) 流派 (liupai) バッジ overlay: slot 左上 corner から 外側に飛び出し */
+.wwm-equip-liupai-badge {
+  position: absolute;
+  left: 9px; top: -13px;
+  width: 36px; height: 36px;
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.7));
+}
+
+/* 装備 rail label は center 維持 (badge は rail上端 / label は center で重なり回避) */
+.wwm-equip-arrow {
+  font-size: var(--text-xs);
+  margin: 0 5px;
+  color: var(--gold);
+  opacity: 0.75;
+  vertical-align: middle;
+}
+
+.wwm-equip-delta {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
+  margin-left: 3px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.wwm-equip-delta-pos { color: var(--jade-bright); text-shadow: var(--c-equip-delta-pos-text-shadow); }
+
+.wwm-equip-delta-neg { color: var(--c-equip-delta-neg-fg); text-shadow: var(--c-equip-delta-neg-text-shadow); }
+
+.wwm-equip-kongfu {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--paper);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-half);
+}
+
+.wwm-sb-sub-group { display: block; }
+
+/* ── Step2 form (観音/武庫) ─────────────────────────────────── */
+.wwm-step2 { font-size: var(--text-md); }
+
+.wwm-step2-section-title {
+  margin: var(--space-2) 0 var(--space-1-5); font-size: var(--text-14);
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent-mid); padding-bottom: 3px;
+}
+
+.wwm-xinfa-grid {
+  display: flex; flex-direction: column;
+  gap: var(--space-1-5);
+}
+
+.wwm-xinfa-cell {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-template-areas: "label tier" "effect effect";
+  gap: 4px 10px; align-items: center;
+  font-size: var(--text-md);
+  padding: var(--space-2) var(--space-2-5);
+  background: var(--surf-shade); border: 1px solid var(--ink-2);
+  border-radius: 3px;
+}
+
+.wwm-xinfa-label { font-weight: var(--fw-semibold); grid-area: label; }
+
+.wwm-xinfa-cell > .wwm-xinfa-tier {
+  grid-area: tier;
+  padding: var(--space-half) var(--space-1-5);
+  background: var(--c-cmp-stat-select-bg); color: inherit;
+  border: 1px solid #444; border-radius: 4px;
+  font-size: var(--text-12);
+  border-color: var(--c-xinfa-cell--xinfa-tier-border);
+}
+
+.wwm-xinfa-effect {
+  grid-area: effect;
+  font-size: var(--text-sm); opacity: 0.85;
+  line-height: 1.45;
+  min-width: 0;
+  padding-top: var(--space-1); margin-top: var(--space-half);
+  border-top: 1px dashed var(--ink-2);
+}
+
+.wwm-xinfa-effect br + * { margin-top: var(--space-half); }
+
+/* notice base (sb=sidebar弱点 / cl=changelog 共通) */
+.wwm-sb-notice {
+  border-radius: 4px;
+  font-size: var(--text-12);
+}
+
+.wwm-sb-notice {
+  margin-top: var(--space-3); padding: var(--space-2) var(--space-2-5);
+  background: var(--vermilion-soft);
+  border: 1px solid var(--vermilion-strong);
+  color: var(--c-sb-notice-fg);
+  cursor: pointer;
+  text-align: center;
+}
+
+.wwm-sb-notice:hover { background: var(--vermilion-mid); }
+
+.wwm-equip-section {
+  margin-top: var(--space-2);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: var(--space-2);
+  align-items: stretch;
+}
+
+.wwm-equip-section .wwm-equip-slot {
+  background: linear-gradient(180deg, var(--surf-1), var(--surf-2));
+  border: 1px solid var(--ink-2);
+  border-left: 3px solid var(--vermilion);
+  border-radius: 2px;
+  padding: var(--space-2) var(--space-2-5);
+}
+
+.wwm-equip-section .wwm-equip-slot-header {
+  font-size: var(--text-12);
+  padding-bottom: var(--space-1);
+  margin-bottom: var(--space-1);
+  border-bottom: 1px dashed var(--ink-2);
+}
+
+.wwm-equip-section .wwm-equip-base,
+.wwm-equip-section .wwm-equip-affix {
+  font-size: var(--text-sm);
+  margin-top: var(--space-1);
+}
+
+.wwm-equip-section .wwm-equip-base b,
+.wwm-equip-section .wwm-equip-affix b {
+  font-size: var(--text-xs);
+  color: var(--paper-mute);
+  letter-spacing: 0.05em;
+  font-weight: var(--fw-semibold);
+}
+
+/* S2-g co-locate (T): light#115 L933 */
+.wwm-step2 .wwm-step2-section-title {
+  font-weight: var(--c-step2-section-title-fw);
+}
+
+/* S2-g co-locate (T): light#118 L948 */
+.wwm-step2 .wwm-step2-section-title {
+  border-bottom-color: var(--c-step2-section-title-border-bot);
+}
+
+/* S2-g co-locate (T): light#119 L952 */
+.wwm-step2 .wwm-xinfa-cell {
+  border-bottom: var(--c-step2--xinfa-cell-border-bot);
+  padding-bottom: var(--c-step2--xinfa-cell-pad-bot);
+}
+
+} /* end @layer components */

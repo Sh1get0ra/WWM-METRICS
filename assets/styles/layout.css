@@ -1,0 +1,584 @@
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     layout.css — APP LAYOUT (container / app-body / sticky-header / OBS layout 上書き)
+     @layer Step 4 (2026-06-06): styles/components.css を per-component 分割。
+     cascade 同値性は component-split-audit.cjs で機械証明 (同 layer 内 順序保存)。
+     file 読込順 = index.html link 順 = scripts/css-files.cjs (単一真実) — 勝手に入替えるな
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+@layer components {
+
+/* ── 新 app-layout: fixed header + 左右独立scroll ───── */
+html, body { height: 100%; margin: 0; overflow: hidden; }
+
+body.wwm-layout-active {
+  margin: 0;
+  height: 100vh;  /* fallback: dvh 非対応 browser 用 */
+  height: 100dvh; /* desktop で vh と同値。 responsive.css mobile rule と同値化 (@layer flip 解消) */
+  overflow-x: auto; /* window < 1010 で .wwm-app-body 横スクロール許可 */
+  overflow-y: hidden;
+  box-sizing: border-box;
+  display: block;
+}
+
+body.wwm-layout-active .sticky-header {
+  position: sticky; top: 0; /* fixed → sticky: body横scrollと連動して動く */
+  min-width: 980px; /* 圧縮停止: wwm-app-body と同じ threshold */
+  height: 135px;
+  z-index: var(--z-overlay);
+  background: transparent;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.wwm-layout-active .sticky-header > .topbar,
+body.wwm-layout-active .sticky-header > .preset-bar {
+  max-width: 1280px; margin: 0 auto; width: 100%; box-sizing: border-box;
+  padding-left: var(--space-4); padding-right: var(--space-4);
+}
+
+body.wwm-layout-active .wwm-footer { display: block; }
+
+body.wwm-layout-active .wwm-app-body {
+  height: calc(100vh - 135px - 32px);
+  margin: 0 auto; /* sticky-header が in-flow になったため margin-top 135 不要 */
+  max-width: 1280px;
+  min-width: 980px; /* 圧縮停止ライン: window 980px 以下で body横スクロール発生、 各panel内部レイアウト崩壊防止 */
+  width: 100%;
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "hero hero"
+    "sidebar main";
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-4) 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+body.wwm-layout-active .wwm-app-body > .hero.hero-wuxia { grid-area: hero; }
+
+body.wwm-layout-active .wwm-app-body > script + script,
+body.wwm-layout-active .wwm-app-body > script { display: none; }
+
+/* 大画面でも main column が無限に広がらないよう max-width 制限 */
+body.wwm-layout-active .wwm-sidebar-test {
+  position: relative;
+  top: auto;
+  right: auto;
+  left: auto;
+  bottom: auto;
+  width: 100% !important;
+  /* K: height/max-height の !important は sidebar.js _syncLayoutVars の inline
+     style.height/maxHeight (footerTop-heroTop 実測 px) 対抗で必須 — strip するな。
+     strip すると inline px が勝ち grid 行が膨張 → container が footer 裏に食い込む
+     + スクロールバー出現遅れ (2026-06-05 Step 1 で strip して実際に発生した事故) */
+  height: calc(100% - 16px) !important;
+  max-height: none !important;
+  min-height: 0;
+  margin-bottom: var(--space-4);
+  overflow-y: auto;
+  grid-area: sidebar;
+  z-index: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-deep) transparent;
+  scrollbar-gutter: stable;
+  border-left: none;
+  background: transparent;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+}
+
+/* mobile stat overlay 内 sidebar 表示 (styles-responsive.css から co-locate move
+   2026-06-05 Step 1 hotfix)。 上の PC layout rule と同じ inline (sidebar.js
+   _syncLayoutVars) + 相互の imp 戦争を同 file 内 spec で解決 — 前方へ動かすな。
+   height/max-height の !important は inline px 対抗で必須 (strip するな) */
+
+@media (max-width: 480px) {
+  /* mobile時 sidebar パネル非表示 → 内容は FAB tap の stat overlay で全画面表示。
+     下の overlay rule (spec 0,3,1) が開時に display:block で上書き (同 file = layer 不問) */
+  body.wwm-layout-active .wwm-sidebar-test { display: none; }
+  body.wwm-layout-active .wwm-sidebar-test.wwm-sidebar-in-overlay,
+  body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sidebar-test {
+    display: block;
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    background: transparent !important;
+    border: 0;
+    padding: 0 !important;
+    margin: 0;
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+/* rest を残り高さ全部使う (タブパネル同様 footer まで) */
+body.wwm-layout-active .wwm-sb-rest {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* sidebar 本体 scroll は rest が引き受ける (枠内 scrollbar) */
+body.wwm-layout-active .wwm-sidebar-test {
+  overflow-y: hidden;
+  scrollbar-gutter: auto;
+}
+
+body.wwm-layout-active .wwm-sidebar-test::-webkit-scrollbar { width: 6px; }
+
+body.wwm-layout-active .wwm-sidebar-test::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
+
+body.wwm-layout-active .wwm-app-body .container {
+  grid-area: main;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 var(--space-1-5) var(--space-4) 0;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: auto; /* 内部panel min-width 超過時 横スクロール許可 (圧縮で崩壊するより明示scroll が良い) */
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-deep) transparent;
+  scrollbar-gutter: stable;
+  display: flex;
+  flex-direction: column;
+}
+
+body.wwm-layout-active .wwm-app-body .container > * { flex-shrink: 0; }
+
+/* タブパネル wrap を container の余白に追従させる */
+body.wwm-layout-active .wwm-app-body .container > .wwm-analysis-grid {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body.wwm-layout-active .wwm-app-body .container > .wwm-analysis-grid > div {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+/* 新構造 .wwm-anlz をフッターまで伸縮 (旧 .wwm-analysis-grid と同パターン) */
+body.wwm-layout-active .wwm-app-body .container > .wwm-anlz {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body.wwm-layout-active .wwm-anlz > .wwm-anlz-body {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body.wwm-layout-active .wwm-anlz-body > .wwm-analysis-grid {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body.wwm-layout-active .wwm-anlz-body > .wwm-analysis-grid > div {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+body.wwm-layout-active #wwmAffixRanking .wwm-analysis-card,
+body.wwm-layout-active #wwmOptimization .wwm-analysis-card,
+body.wwm-layout-active #wwmHistory .wwm-analysis-card {
+  height: 100%;
+  min-height: 0;
+}
+
+body.wwm-layout-active .wwm-app-body .container::-webkit-scrollbar { width: 6px; }
+
+body.wwm-layout-active .wwm-app-body .container::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
+
+body.wwm-layout-active .wwm-footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 32px;
+  z-index: var(--z-sticky);
+  max-width: 1280px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  text-align: center;
+  padding: var(--space-1-5) var(--space-4);
+  font-size: var(--text-sm);
+  opacity: 0.8;
+  background: var(--bg-2);
+  border-top: 1px solid var(--ink-2);
+}
+
+.wwm-sidebar-test:empty { display: block; }
+
+/* ── OBS overlay (SECTION 14) の layout 上書き 2 rule ──
+   body.wwm-layout-active は index.html 静的付与 = OBS mode と常時同時成立。
+   APP LAYOUT (上記) に natural cascade で勝つため ここ (後順) に配置 — SECTION 14 に戻すと負ける。
+   padding の !important は responsive.css mobile rule 対抗で維持 (Batch M move) */
+html.wwm-view-sidebar .sticky-header,
+html.wwm-view-sidebar .wwm-app-body .container,
+html.wwm-view-sidebar .wwm-footer,
+html.wwm-view-sidebar #wwmAffixRanking,
+html.wwm-view-sidebar #wwmOptimization,
+html.wwm-view-sidebar .wwm-analysis-tabs,
+html.wwm-view-sidebar .hero,
+html.wwm-view-sidebar .hero-wuxia,
+html.wwm-view-sidebar .ink-stroke {
+  display: none;
+}
+
+html.wwm-view-sidebar .wwm-app-body {
+  display: block;
+  height: 100vh;
+  max-height: 100vh;
+  padding: var(--space-2) !important;
+  margin: 0;
+  max-width: none;
+  min-width: 0; /* OBSキャンバス幅 < 1010 で右はみ出し防止 */
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  /* ─────────────────────────────────────────────────────────────────
+     STICKY: topbar のみ固定。preset bar・hero はスクロールさせる
+     ───────────────────────────────────────────────────────────────── */
+  .sticky-header {
+    /* position/background は削除済 (2026-06-05 @layer Step 1):
+       components.css の body.wwm-layout-active .sticky-header (sticky/transparent) に
+       spec 負けで dead だった。 復活させるな (layer flip 源) */
+    padding: 0;
+    margin-bottom: 0;
+  }
+  /* ─────────────────────────────────────────────────────────────────
+     PRESET BAR
+     ───────────────────────────────────────────────────────────────── */
+  .preset-bar {
+    flex-direction: column;
+    gap: var(--space-1-5);
+    /* padding left/right + margin-top/bottom は削除済 (2026-06-05 @layer Step 1):
+       components.css の .sticky-header > .preset-bar (padding-left/right: space-4 / margin: 0 auto)
+       に spec 負けで dead だった */
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-2);
+  }
+}
+
+@media (max-width: 768px) {
+  body.wwm-layout-active .wwm-app-body { flex-direction: column; padding: 0; }
+  /* max-height 40vh/50vh (旧 tablet 暫定) は削除済 (2026-06-05 @layer Step 1):
+     components.css の max-height: none (旧 !important、 strip 済) が意図 — tablet 本対応は TODO #14 */
+  body.wwm-layout-active .wwm-sidebar-test {
+    position: relative; width: 100%;
+  }
+  .wwm-sidebar-test {
+    position: relative !important;
+    width: 100% !important;
+    left: 0 !important; top: auto;
+  }
+  body.wwm-layout-active .container { padding-left: 0; }
+  .wwm-analysis-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  /* PC topbar (sticky-header > .topbar) 非表示 + Mobile TopBar 表示 */
+  body.wwm-layout-active header.topbar { display: none; }
+  body.wwm-layout-active .wwm-mobile-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding: calc(8px + var(--safe-top)) calc(12px + var(--safe-right)) 8px calc(12px + var(--safe-left));
+    background: linear-gradient(180deg, rgba(26,20,16,0.95), rgba(15,12,14,0.92));
+    border-bottom: 1px solid var(--ink-2);
+    min-height: 44px;
+  }
+  /* sticky-header 親自体は維持 (preset-bar / banner用)、 余白だけ調整 */
+  body.wwm-layout-active .sticky-header {
+    min-width: 0;  /* PC用 1010 制約 解除 */
+    height: auto;
+  }
+  body.wwm-layout-active .wwm-app-body {
+    min-width: 0;  /* PC用 980 制約 解除 */
+    /* grid 解除 = flex column で 自然 縦並び (PC layout grid-area 構造 mobile時 無効化) */
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: none;
+    grid-template-rows: none;
+    grid-template-areas: none;
+    gap: var(--space-2);
+    max-width: none;
+    /* 内部 scroll container = sticky-header の下、 footer 高さも引いて footer常時表示確保 */
+    height: calc(100vh - var(--wwm-header-h, 103px) - var(--wwm-footer-h, 32px));
+    height: calc(100dvh - var(--wwm-header-h, 103px) - var(--wwm-footer-h, 32px));
+    max-height: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-deep) transparent;
+  }
+  /* footer 常時下部固定 (PC同様) */
+  body.wwm-layout-active .wwm-footer {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: calc(4px + var(--safe-bottom, 0px)) 12px 4px;
+  }
+  /* 格析section mobile時 hidden (📈格析 tap で 全画面modal表示 Phase 8 で実装) */
+  body.wwm-layout-active .wwm-analysis-tabs,
+  body.wwm-layout-active #wwmAffixRanking,
+  body.wwm-layout-active #wwmOptimization,
+  body.wwm-layout-active #wwmScoreTimeline,
+  body.wwm-layout-active .wwm-analysis-grid,
+  body.wwm-layout-active .wwm-anlz {
+    display: none !important;
+  }
+  body.wwm-layout-active .wwm-app-body::-webkit-scrollbar { width: 6px; }
+  body.wwm-layout-active .wwm-app-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
+  body.wwm-layout-active .wwm-app-body::-webkit-scrollbar-track { background: transparent; }
+  /* mobile時 sidebar 非表示 rule は styles-components.css の overlay rule 直前へ
+     co-locate move 済 (2026-06-05 Step 1 hotfix: overlay display:block との layer flip 根治) */
+  /* mobile時 footer は normal flow に戻す (PC は position:fixed で 画面下常駐) */
+  body.wwm-layout-active .wwm-footer {
+    position: static;
+    z-index: auto;
+    padding: calc(8px + var(--safe-bottom)) 12px 8px;
+  }
+  /* ─── Phase 3: preset-bar (弱点+プリセット) 1行横スクロール強制 ─── */
+  .preset-bar {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    padding: var(--space-1-5) var(--space-2-5) !important;
+    margin-top: var(--space-1) !important;
+    gap: var(--space-2);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+  .preset-bar::-webkit-scrollbar { height: 4px; }
+  .preset-bar::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 2px; }
+  .preset-bar { gap: 3px; padding: var(--space-1) var(--space-1) !important; flex-direction: row; }
+  /* ─── Phase 4: hero compact + mobile RESET 内蔵 ─── */
+  section.hero.hero-wuxia {
+    padding: var(--space-3) var(--space-3-5);
+    margin: var(--space-1) 0;
+    display: flex;          /* grid解除、 flex column で縦並び明示 */
+    flex-direction: column;
+    grid-template-columns: none;
+    grid-template-rows: none;
+    grid-template-areas: none;
+    gap: 8px;
+    min-height: 0;
+    height: auto;
+    overflow: hidden;       /* 装飾はみ出し抑止 ( hero内に「斬」+ink-stroke 残し ) */
+    flex: 0 0 auto;
+    min-height: 90px;       /* 折りたたみ時 最小確保 */
+  }
+  /* hero 新layout: 上半=情報+donut (Tier右に小)、 下半=tap時 内訳1行 */
+  section.hero.hero-wuxia {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "info luopan"
+      "judges judges";
+    gap: 4px 10px;
+    align-items: center;
+    cursor: pointer;
+  }
+  /* ─── Phase 7: ステFAB + 全画面 stat overlay ─── */
+  body.wwm-layout-active .wwm-mobile-stat-fab {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    position: fixed;
+    right: calc(12px + var(--safe-right, 0px));
+    bottom: calc(48px + var(--safe-bottom, 0px));
+    width: 56px; height: 56px;
+    padding: 0;
+    background: var(--c-mobile-fab-bg);
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    box-shadow: var(--c-mobile-fab-shadow);
+    cursor: pointer;
+    z-index: 1100;
+    overflow: hidden;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+  body.wwm-layout-active .wwm-mobile-stat-fab[hidden] { display: none; }
+  body.wwm-layout-active .wwm-mobile-stat-fab:active { transform: scale(0.94); }
+  .wwm-mobile-stat-overlay-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: var(--space-2) var(--space-2-5) var(--space-4);
+    scrollbar-color: var(--gold-deep) transparent;
+  }
+  .wwm-mobile-stat-overlay-body::-webkit-scrollbar { width: 6px; }
+  .wwm-mobile-stat-overlay-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
+  /* overlay 内 sidebar 表示 rule は styles-components.css の PC sidebar rule 直後へ
+     co-locate move 済 (2026-06-05 Step 1 hotfix): 両者 imp の layer 反転 flip 根治。
+     imp 同士は spec 比較 = file 位置無関係で現 cascade 不変 */
+  /* mini-hero-card 上部固定: overlay-body 直下に出して sticky 復活 (sidebar-test 内では効かない場合の保険として padding 構造合わせ) */
+  body.wwm-layout-active .wwm-mobile-stat-overlay-body {
+    position: relative;
+  }
+  body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sidebar-test {
+    overflow: visible;
+  }
+  body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sb-mini-hero-card {
+    position: sticky;
+    top: -8px;
+    z-index: 20;
+    margin: -8px -10px 8px;
+    padding: var(--space-2-5) var(--space-3);
+    background: var(--bg-raised);
+    border: 1px solid var(--gold-deep);
+    box-shadow: 0 6px 14px var(--overlay-mid);
+  }
+  html[data-theme="light"] body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sb-mini-hero-card {
+    background: #f4e8c8;
+    border-color: rgba(120,60,20,0.35);
+    box-shadow: 0 6px 14px var(--overlay-trace);
+  }
+  /* overlay内で wwm-anlz 自体を move して表示 — 元 mobile時 display:none を上書き */
+  body.wwm-layout-active .wwm-anlz.wwm-anlz-in-overlay,
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-anlz,
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-tabs,
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-grid {
+    display: block !important;
+    visibility: visible;
+    opacity: 1;
+  }
+  /* ID個別 (#wwmAffixRanking 等) は hidden属性で JS が切替: 非hiddenは表示、hiddenは display:none */
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body #wwmAffixRanking,
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body #wwmOptimization,
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body #wwmScoreTimeline,
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body #wwmHistory {
+    display: flex !important;
+  }
+  /* specificity を ID行 と等しくして 後勝ちで hidden 効かす */
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body #wwmAffixRanking[hidden],
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body #wwmOptimization[hidden],
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body #wwmScoreTimeline[hidden],
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body #wwmHistory[hidden] {
+    display: none !important;
+  }
+  body.wwm-layout-active .wwm-anlz.wwm-anlz-in-overlay {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+  /* overlay内 flex chain 復元 → 中身が overlay body 高 いっぱい使う */
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-anlz {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 0 !important;
+    min-height: 0;
+  }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-anlz-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    min-height: 0;
+  }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 0 !important;
+    min-height: 0;
+    grid-template-columns: none;
+  }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-grid > div:not([hidden]) {
+    flex: 1 1 0;
+    min-height: 0;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-card {
+    height: 100%;
+    min-height: 0;
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+  }
+  /* OPT header: 横並びだと h3が1文字wrapで縦書き化 → 縦stackに */
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    margin-bottom: var(--space-2);
+    padding-bottom: var(--space-1-5);
+  }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-analysis-card h3 {
+    white-space: nowrap;
+    font-size: var(--text-12);
+    letter-spacing: 0.12em;
+  }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+  }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-ratio-label {
+    font-size: var(--text-sm);
+    white-space: nowrap;
+  }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-ratio-label input[type="range"] {
+    width: 90px;
+  }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-sort-btn,
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-btn {
+    font-size: var(--text-sm);
+    padding: var(--space-half) var(--space-1-5);
+  }
+  /* OPT row: 2行 grid (pos|slot|delta|check 上行 / change 下行全幅) */
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-row {
+    grid-template-columns: 20px 1fr auto auto auto;
+    grid-template-areas:
+      "pos slot delta tier check"
+      "change change change change change";
+    gap: 2px 6px;
+    padding: var(--space-1-5) var(--space-2);
+    font-size: var(--text-sm);
+  }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-pos { grid-area: pos; font-size: var(--text-sm); }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-slot { grid-area: slot; font-size: var(--text-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-delta { grid-area: delta; font-size: var(--text-12); }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-tierup { grid-area: tier; font-size: var(--text-xs); padding: 0 var(--space-1); }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-check-wrap { grid-area: check; padding: 0 var(--space-half); }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-change {
+    grid-area: change;
+    font-size: var(--text-xs);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    line-height: 1.4;
+    padding-top: var(--space-half);
+  }
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-from,
+  body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-opt-to {
+    display: inline;
+    white-space: normal;
+  }
+}
+
+} /* end @layer components */
