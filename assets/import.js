@@ -865,6 +865,72 @@ function getLastImportSummary() {
   };
 }
 
+// ── Import gate (Tier 判定中 全操作抑止 modal) ──────────────────
+// import 実行 → opt best 確定 (Tier 判定完了) まで 全クリック/キー操作 抑止。
+// EXPORT/SHARE 等の「Tier 判定前に押せてしまう」穴を 個別ガードでなく 1 ゲートに集約。
+// 半透明 backdrop = 背後の score 描画 + Tier ルーレット演出は見せる (先 paint 設計維持)。
+let _importGate = null; // { el, inerted, watchdog }
+function _importGateShow() {
+  // OBS view (表示専用) は opt 経路が別 = gate 不要
+  if (document.documentElement.classList.contains('wwm-view-sidebar')) return;
+  _importGateClose(false); // 残骸除去 (連続 import 防御)
+  const T = window.T || {};
+  const el = document.createElement('div');
+  el.id = 'wwmImportGate';
+  el.className = 'wwm-gate-backdrop';
+  el.innerHTML = `
+    <div class="wwm-modal wwm-gate-modal" role="dialog" aria-modal="true" aria-busy="true" aria-live="polite" tabindex="-1">
+      <h2 class="wwm-gate-title">${T.importingTitle ?? 'インポート処理中'}</h2>
+      <div class="wwm-gate-bar"><div class="wwm-gate-fill" id="wwmGateFill"></div></div>
+      <div class="wwm-gate-label" id="wwmGateLabel">${T.importingStats ?? 'ステータス計算中…'}</div>
+    </div>`;
+  document.body.appendChild(el);
+  // 背後 inert 化 (キーボード/フォーカス遮断。 pointer は backdrop が遮断)
+  const inerted = [];
+  document.querySelectorAll('body > *').forEach(n => {
+    if (n !== el && !n.inert) { n.inert = true; inerted.push(n); }
+  });
+  try { el.querySelector('.wwm-gate-modal').focus(); } catch(_) {}
+  // watchdog: opt が永久に終わらない異常時の強制解除 (全操作 永久ロック防止)
+  const watchdog = setTimeout(() => {
+    _importGateClose(false);
+    if (window.showToast) showToast((window.T?.errTierJudgeTimeout) ?? 'Tier 判定がタイムアウトしました。再インポートをお試しください', { error: true });
+  }, 30000);
+  _importGate = { el, inerted, watchdog };
+}
+function _importGateProgress(pct, label) {
+  if (!_importGate) return;
+  const f = _importGate.el.querySelector('#wwmGateFill');
+  if (f) f.style.width = Math.min(100, pct) + '%';
+  if (label) {
+    const l = _importGate.el.querySelector('#wwmGateLabel');
+    if (l) l.textContent = label;
+  }
+}
+// opt.js の反復ループから呼ばれる (greedy は minDelta 打切で総数不定 → 真の % 不可)。
+// 漸近式 15 + 80×(1-0.85^iter) = 常に前進、完了時 100% へ滑らか加速 (擬似 % の不自然さ回避)。
+function _importGateTick(iter) {
+  const pct = 15 + 80 * (1 - Math.pow(0.85, iter));
+  _importGateProgress(pct, (window.T?.importingTier) ?? 'Tier 判定中…');
+}
+function _importGateClose(ok) {
+  const g = _importGate;
+  if (!g) return;
+  _importGate = null;
+  clearTimeout(g.watchdog);
+  g.inerted.forEach(n => { try { n.inert = false; } catch(_) {} });
+  if (ok) {
+    // 100% 到達を見せてから fade out (backdrop transition の delay と連動)
+    const f = g.el.querySelector('#wwmGateFill');
+    if (f) { f.style.width = '100%'; f.classList.add('wwm-gate-fill-done'); }
+    g.el.classList.add('wwm-gate-out');
+    setTimeout(() => g.el.remove(), 500);
+  } else {
+    g.el.remove();
+  }
+}
+window.WWMImportGate = { tick: _importGateTick };
+
 // ── Apply: data + 観音/武庫 state を localStorage 保存 + 計算ツール 反映 ─
 function applyImport(data, importedAt, state) {
   _saveStored(data, importedAt, state);
@@ -903,6 +969,8 @@ function applyImport(data, importedAt, state) {
   } catch(_) {}
   // stat params 構築 + sidebar 描画
   if (window.WWMStats && window.WWMSidebar) {
+    // Tier 判定完了 (opt best 確定) まで 全操作抑止 gate (close は opt 完了/失敗/watchdog の 3 経路)
+    _importGateShow();
     window.WWMStats.buildStatParams(data, state).then(params => {
       WWMState.params = params;
       WWMState.roleInfo = data;
@@ -928,15 +996,23 @@ function applyImport(data, importedAt, state) {
         if (window.WWMSidebar?.hero) window.WWMSidebar.hero.update(params);
         if (window.WWMSidebar?.history) window.WWMSidebar.history.record(data, { statusScore: res.statusScore + bonus, expected: res.expected, tier: res.tier });
       }
+      // stats 構築 + 初期描画 完了 = gate 15% (以降は opt 反復 tick が前進させる)
+      _importGateProgress(15);
       // 重い最適化(数秒)は 初期描画(mini-hero/score)を阻害しないよう await せず 2フレーム後に遅延起動。
       // (opt前に置くと opt の setTimeout(0) yield では paint が starve し score が opt完了まで見えない)
       if (window.WWMSidebar?.opt) {
         requestAnimationFrame(() => requestAnimationFrame(() => {
-          window.WWMSidebar.opt.render(data, params).catch(e => console.error('[WWM] opt failed:', e));
+          window.WWMSidebar.opt.render(data, params)
+            // resolve でも best 未確定の経路あり (opt 内 silent return) → locked 時のみ 100% 演出
+            .then(() => _importGateClose(!!WWMState.opt.locked))
+            .catch(e => { console.error('[WWM] opt failed:', e); _importGateClose(false); });
         }));
+      } else {
+        _importGateClose(false); // opt 経路無し → gate 即解除 (deadlock 防止)
       }
     }).catch(e => {
       console.error('[WWM] stats build failed:', e);
+      _importGateClose(false);
       // audit P2 (2026-06-07): silent failure → user 可視化 (import 完了に見えて panel 空のままの謎を解消)
       if (window.showToast) showToast((window.T?.errStatsBuild) ?? 'データの計算に失敗しました。再インポートをお試しください', { error: true });
     });

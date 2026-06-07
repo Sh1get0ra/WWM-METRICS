@@ -2275,4 +2275,66 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-card-gungi .wwm-card-cell:last-child { margin-bottom: 0; }
 .wwm-card-gungi .wwm-card-brand-en { font-size: 13px; letter-spacing: 0.2em; }
 
+/* ════════════════════════════════════════════════════════════════
+   SECTION 39 — IMPORT GATE (Tier 判定中 全操作抑止 modal、 2026-06-07)
+   import 実行 → opt best 確定 (Tier 判定完了) まで 全クリック抑止。
+   半透明 backdrop = 背後の score 描画 + Tier ルーレット演出が透けて見える。
+   ════════════════════════════════════════════════════════════════ */
+.wwm-gate-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.45); /* 通常 modal (0.7) より薄く = 背後の構築を見せる */
+  display: flex; align-items: center; justify-content: center;
+  z-index: var(--z-toast);
+  padding: var(--space-4);
+  transition: opacity 0.2s ease 0.25s; /* 完了時 100% 到達を見せてから fade */
+}
+.wwm-gate-backdrop.wwm-gate-out { opacity: 0; }
+.wwm-gate-modal {
+  max-width: 340px;
+  padding: var(--space-4) var(--space-5);
+  text-align: center;
+  outline: none;
+}
+.wwm-gate-title {
+  margin: 0 0 var(--space-3);
+  font-family: var(--f-display, var(--f-latin));
+  font-size: var(--text-15); font-weight: var(--fw-bold);
+  color: var(--gold-bright);
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 10px var(--gold-bright-soft);
+}
+.wwm-gate-bar {
+  height: 6px;
+  background: var(--ink-2);
+  overflow: hidden;
+  margin: 0 0 var(--space-2);
+}
+.wwm-gate-fill {
+  position: relative;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--vermilion-deep), var(--vermilion-mid));
+  transition: width 0.35s ease;
+}
+.wwm-gate-fill::after { /* shimmer */
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  animation: wwm-gate-shimmer 1.4s linear infinite;
+}
+.wwm-gate-fill.wwm-gate-fill-done { background: var(--gold-bright); } /* 完了 = 金 (階級の光) */
+.wwm-gate-label {
+  font-size: var(--text-12);
+  color: var(--paper-mute);
+  letter-spacing: 0.05em;
+}
+@keyframes wwm-gate-shimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wwm-gate-fill::after { animation: none; }
+  .wwm-gate-fill { transition: none; }
+}
+
 } /* end @layer modals */

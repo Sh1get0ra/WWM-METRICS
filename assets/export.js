@@ -1023,6 +1023,13 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
       showToast(T.importPrompt ?? '上部「IMPORT」ボタンからデータを取り込んでください', { error: true });
       return;
     }
+    // Tier 判定前 (opt best 未確定) は EXPORT 抑止 — Tier 空欄カード防止。
+    // import 中は gate modal が全クリック抑止するが、 reload 時 scoreVer 不一致の再確定 window
+    // + watchdog 強制解除後 の抜け道をこの保険 guard が塞ぐ
+    if (!WWMState.opt.best?.end) {
+      showToast(T.tierPendingBlocked ?? 'Tier 判定中です。完了までお待ちください', { error: true });
+      return;
+    }
     if (document.querySelector('.wwm-card-modal')) return; // 二重起動 guard
     _openCardModal();
   };

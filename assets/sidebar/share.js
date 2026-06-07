@@ -14,6 +14,11 @@
     // 受信側は index.html inline script で memory-only mode 処理 (localStorage 浸食回避)
     const ri = WWMState.roleInfo;
     if (!ri) { alert('build データなし。先に import してください。'); return; }
+    // Tier 判定前 (opt best 未確定) は SHARE 抑止 — 受信側 Tier 無し URL の生成防止 (EXPORT と同じ保険 guard)
+    if (!WWMState.opt.best?.end) {
+      if (window.showToast) showToast((window.T?.tierPendingBlocked) ?? 'Tier 判定中です。完了までお待ちください', { error: true });
+      return;
+    }
     const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
     // payload 軽量化: base64画像 (avatar / xinfaIcons) を除外。
     // 巨大 base64 (100KB超) で URL長 OBS browser source 上限超え → hash truncate → JSON parse 失敗バグ防止。

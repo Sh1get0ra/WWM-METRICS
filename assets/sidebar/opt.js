@@ -232,6 +232,8 @@
       await new Promise(r => setTimeout(r, 0)); // UI応答性確保
       if (_aborted()) return;
       setProgress(((window.T?.optComputingIter) || '計算中... ({0}回目)').replace('{0}', iter + 1));
+      // import gate (Tier 判定中 modal) の擬似 % bar 前進 (gate 非表示時は no-op)
+      if (window.WWMImportGate) window.WWMImportGate.tick(iter + 1);
       const eqDet = working.wearEquipsDetailed || {};
       const slots = ['1','2','3','4','5','8','10','11'].filter(s => eqDet[s] && slotsAllowed.has(s));
       let best = null;
