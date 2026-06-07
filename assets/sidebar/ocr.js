@@ -256,7 +256,8 @@
     return c2;
   }
 
-  const _CJK_RE = /[一-龯ぁ-んァ-ヶ]/;
+  // 「名前らしい word」判定: CJK 漢字/かな + ハングル + Latin 2 文字以上 (ko/en の anchor 頑健化)
+  const _CJK_RE = /[一-龯ぁ-んァ-ヶ가-힣]|[A-Za-z]{2}/;
   const _NUMW_RE = /^[+＋]?[\d０-９.,]+[%％]?$/;
 
   // 行毎 OCR:
@@ -460,10 +461,12 @@
   function _normName(s) {
     let t = _applyConfusions(_norm(s)
       .replace(/[\[(（【「［][^\])）】」］]{0,3}[\])）】」］]/g, '')   // 短い括弧 token ([転] の誤読含む) 除去
-      .replace(/[・･]/g, ''));
+      .replace(/[・･·•]/g, ''));
     t = t.replace(/攻撃力(?=強化$|$)/, '攻撃');                       // 攻撃力 → 攻撃 (単独 stat「力」は温存)
+    t = t.replace(/攻击力(?=强化$|$)/, '攻击');                       // zh 簡体 同様
     for (let i = 0; i < 3; i++) {
-      const t2 = t.replace(/(強化|増加|ダメージ|ダメ|効果|アップ)$/, '');
+      // suffix 剥がし: ja + zh 簡体 + ko + en (ゲーム内表記の末尾修飾 — 辞書ラベルは短縮形)
+      const t2 = t.replace(/(強化|増加|ダメージ|ダメ|効果|アップ|强化|增加|伤害|效果|提升|강화|증가|피해|효과|boost|increase|damage|dmg)$/, '');
       if (t2 === t) break;
       if (t2.length < 3) break;                                       // over-strip 防止 (双剣ダメ→双剣 化で window 吸込み事故)
       t = t2;
@@ -494,9 +497,9 @@
   }
   // 武術固有 suffix (軽撃/Q/鼠/特殊/チャージ…) 用正規化 — 短語彙なので min ガードなしで剥がす
   function _normSuffixK(s) {
-    let t = _applyConfusions(_norm(s).replace(/[・･]/g, ''));
+    let t = _applyConfusions(_norm(s).replace(/[・･·•]/g, ''));
     for (let i = 0; i < 3; i++) {
-      const t2 = t.replace(/(強化|増加|ダメージ|ダメ|効果|アップ)$/, '');
+      const t2 = t.replace(/(強化|増加|ダメージ|ダメ|効果|アップ|强化|增加|伤害|效果|提升|강화|증가|피해|효과|boost|increase|damage|dmg)$/, '');
       if (t2 === t) break;
       t = t2;
     }
@@ -505,7 +508,7 @@
   // 武術固有行 (・付き): 「<武術名>・<種別>」を分割 match。種別 suffix は一意性が高く
   // 武術名部分 (icon glow 上) の誤読に頑健 (PoC 実測: ドクめ火のが知・軽撃 → 獄炎の双剣 軽撃強化)
   function _matchKongfuRow(parsedName, options) {
-    const parts = String(parsedName).split(/[・･]/);
+    const parts = String(parsedName).split(/[・･·•\-–—]/);   // 中黒 (ja) / · (zh) / ハイフン系 (en) 区切り対応
     if (parts.length < 2) return null;
     const qSuf = _normSuffixK(parts[parts.length - 1]);
     const qPre = _normName(parts.slice(0, -1).join(''));
@@ -528,9 +531,9 @@
   function _matchAffix(parsedName, options) {
     const q = _normName(parsedName);
     if (!q) return null;
-    // 中黒 (・) 持ち = 武術固有 affix (獄炎の双剣・軽撃 等) → window だと「軽撃ダメ」等の
+    // 中黒 (・/·) 持ち = 武術固有 affix (獄炎の双剣・軽撃 等) → window だと「軽撃ダメ」等の
     // 短い汎用候補が部分一致 1.0 で吸う → 全文 dice (長い固有候補が自然に勝つ) に切替
-    const isKongfuSpecific = /[・･]/.test(String(parsedName));
+    const isKongfuSpecific = /[・･·•]/.test(String(parsedName));
     // alias 直結 (正規化で吸収不能な系統差): q が alias を含む → 該当 statKey の option へ
     for (const [alias, sk] of Object.entries(_NAME_ALIASES)) {
       if (q.includes(alias)) {
