@@ -674,7 +674,7 @@ const _STAT_LABELS_I18N = {
     lightAtkDmg: '경격 피해 강화', heavyAtkDmg: '중격 피해 강화',
     airborneLightAtkDmg: '공중 경격 피해 강화', jumpStrikeDmg: '도약격 피해 강화',
     dualWeaponSkillDmg: '쌍무기 기술 피해 강화', executionDmg: '처형 피해 강화', dashDmg: '돌진 피해 강화',
-    bossDmg: 'BOSS 단위 피해 증가', playerUnitDmg: '플레이어 단위 피해 증가',
+    bossDmg: 'BOSS 유닛에 대한 피해 증가', playerUnitDmg: '플레이어 유닛에 대한 효과 증가',
     stMysticDmg: '단일류 비결 피해 증가', stBurstMysticDmg: '단일 폭발류 비결 피해 증가',
     stControlMysticDmg: '단일 제어류 비결 피해 증가', areaMysticDmg: '단체류 비결 피해 증가',
     areaDmgMysticDmg: '단체 피해류 비결 피해 증가', areaDebuffMysticDmg: '단체 약화류 비결 피해 증가',
