@@ -729,29 +729,57 @@
         //  基礎ステの小数誤読 71→71.0 等の混入対策 — 2026-06-07 EN 実測)
         let sec = affixes.filter(a => gfded(a));
         if (sec.length > 6) sec = sec.slice(-6);
+        // line × idx 全組合せ match → 厳密最適割当 (line/idx 各 1 回)。
+        // screenshot の装備と modal の装備 (現装備) は別 item が通常 = affix 並び順が違い、
+        // かつ idx 別候補 pool は偏在 (例: maxBamboocut = pool2 のみ)。位置固定や greedy だと
+        // pool 一意の affix が先に枠を奪われ同系弱 match に吸われる
+        //   (2026-06-07 実測: [转]最大破竹攻击 → 最小破竹攻击 0.60 誤吸収)。
+        // 高々 6 line × 6 idx = 720 経路 → 全列挙で ①割当数 max ②Σsim max ③Σ|i-j| min。
+        const optsCache = [];
+        for (let j = 0; j < 6; j++) optsCache.push(ctx.getOptions(j) || []);
+        const cand = [];
         for (let i = 0; i < sec.length && i < 6; i++) {
-          const a = sec[i];
-          let m = _matchAffix(a.name, ctx.getOptions(i) || []);
-          if (!m) {
-            for (let j = 0; j < 6; j++) {
-              if (j === i) continue;
-              const m2 = _matchAffix(a.name, ctx.getOptions(j) || []);
-              if (m2 && (!m || m2.sim > m.sim)) m = m2;
-            }
+          const arr = [];
+          for (let j = 0; j < 6; j++) {
+            const m = _matchAffix(sec[i].name, optsCache[j]);
+            if (m) arr.push({ j, m });
           }
-          if (!m) continue;
+          cand.push(arr);
+        }
+        let bestAsg = null;
+        const cur = [];
+        (function dfs(i, used, cnt, simSum, dist) {
+          if (i === cand.length) {
+            if (!bestAsg || cnt > bestAsg.cnt ||
+                (cnt === bestAsg.cnt && (simSum > bestAsg.simSum + 1e-9 ||
+                 (Math.abs(simSum - bestAsg.simSum) <= 1e-9 && dist < bestAsg.dist)))) {
+              bestAsg = { cnt, simSum, dist, asg: cur.slice() };
+            }
+            return;
+          }
+          for (const c of cand[i]) {
+            if (used & (1 << c.j)) continue;
+            cur.push({ i, j: c.j, m: c.m });
+            dfs(i + 1, used | (1 << c.j), cnt + 1, simSum + c.m.sim, dist + Math.abs(i - c.j));
+            cur.pop();
+          }
+          dfs(i + 1, used, cnt, simSum, dist);   // この行は未割当 (全 pool match 不能)
+        })(0, 0, 0, 0, 0);
+        for (const c of (bestAsg ? bestAsg.asg : [])) {
+          const a = sec[c.i];
           const numC = a.numConf != null ? a.numConf : a.conf;
           rows.push({
-            idx: i,
-            affixId: m.option.id,
-            statKey: m.option.statKey,
-            name: m.option.name,
+            idx: c.j,
+            affixId: c.m.option.id,
+            statKey: c.m.option.statKey,
+            name: c.m.option.name,
             value: a.value,
             isPct: a.isPct,
-            confidence: Math.min(a.conf, numC) * m.sim,
-            sim: m.sim
+            confidence: Math.min(a.conf, numC) * c.m.sim,
+            sim: c.m.sim
           });
         }
+        rows.sort((x, y) => x.idx - y.idx);
         // 安全弁: 小数行 <6 = 行欠落の疑い (値誤読で小数が落ちた等) → 全行要確認化
         if (sec.length < 6) {
           for (const r of rows) r.confidence = Math.min(r.confidence, 0.4);
