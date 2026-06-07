@@ -466,9 +466,13 @@
                 // 装備レベルは charLv (import時のキャラレベル) 以下のみ選択可。未所持の高Lv装備での皮算用を防ぐ。
                 const _lvList = (window.WWM_EQUIP_BASE_BY_LV?._lvList || [91, 86, 81, 71]).filter(lv => lv <= charLv);
                 const _hasTbl = !!window.WWM_EQUIP_BASE_BY_LV?.slots?.[String(slot)];
-                if (!_curLv || !_hasTbl) return _curLv ? ` <span class="wwm-cmp-lv">Lv${_curLv}</span>` : '';
+                // OCR 取込ボタン: Lv select の右隣 (適用先 = 新置の明示)。slot 9/21 (affix 編集不可) は非表示
+                const _ocrHtml = isAffixEditable
+                  ? `<button type="button" id="wwmCmpOcrBtn" class="wwm-ocr-btn" title="${(window.T&&T.ocrBtnTitle)||'スクショ取込 (OCR)'}" aria-label="${(window.T&&T.ocrBtnTitle)||'スクショ取込 (OCR)'}">📷</button><span id="wwmCmpOcrStatus" class="wwm-ocr-status" aria-live="polite"></span>`
+                  : '';
+                if (!_curLv || !_hasTbl) return (_curLv ? ` <span class="wwm-cmp-lv">Lv${_curLv}</span>` : '') + _ocrHtml;
                 const _opts = _lvList.map(lv => `<option value="${lv}" ${lv===_curLv?'selected':''}>Lv${lv}</option>`).join('');
-                return ` <select id="wwmCmpNewLvSel" class="wwm-cmp-lv-select">${_opts}</select>`;
+                return ` <select id="wwmCmpNewLvSel" class="wwm-cmp-lv-select">${_opts}</select>` + _ocrHtml;
               })()}</h3>
               ${newKongfuHeader}
               ${newSetHeader}
@@ -794,6 +798,127 @@
     });
     }
     _bindRowEvents();
+
+    // ── OCR スクショ取込 (TODO #16): 📷 / Ctrl+V / drop → 新置列へ直接投入 ──
+    const ocrBtn = m.querySelector('#wwmCmpOcrBtn');
+    if (ocrBtn && window.WWMSidebar.ocr) {
+      const ocrStatus = m.querySelector('#wwmCmpOcrStatus');
+      const _setStatus = (t) => { if (ocrStatus) ocrStatus.textContent = t || ''; };
+      let _lastImg = null;          // 言語 fallback の再実行用
+      let _ocrBusy = false;
+
+      const _applyOcr = async (imgSrc, langOverride) => {
+        if (_ocrBusy) return;
+        _ocrBusy = true;
+        _lastImg = imgSrc;
+        ocrBtn.disabled = true;
+        const _watchdog = setTimeout(() => { _ocrBusy = false; ocrBtn.disabled = false; _setStatus(''); }, 20000);
+        try {
+          const res = await window.WWMSidebar.ocr.run(imgSrc, {
+            lang: langOverride || (window.currentLang || 'ja'),
+            getOptions: (idx) => _getAffixOptions(newAffixes[idx]?.equipmentDetails?.[0], slot, idx, newAffixes),
+            onProgress: (stage, pct) => _setStatus(
+              stage === 'lang'
+                ? ((window.T&&T.ocrLangLoading)||'辞書取得中…') + ' ' + Math.round(pct*100) + '%'
+                : ((window.T&&T.ocrRecognizing)||'解析中…'))
+          });
+          // match 全滅 → 言語/部位違いの可能性 toast + 言語選択表示
+          if (!res.rows.length) {
+            window.showToast?.((window.T&&T.ocrNoMatch)||'読取できませんでした — スクショの言語/装備部位を確認してください', { error: true });
+            const ls = m.querySelector('#wwmCmpOcrLang');
+            if (ls) ls.hidden = false;
+            return;
+          }
+          // Lv 反映 (選択肢に存在する時のみ。_applyNewLv が MAX×0.94 で affix を上書きするため必ず先)
+          const lvSelEl = m.querySelector('#wwmCmpNewLvSel');
+          if (res.lv && lvSelEl && [...lvSelEl.options].some(o => +o.value === res.lv)) {
+            lvSelEl.value = String(res.lv);
+            await _applyNewLv(res.lv);
+          }
+          // affix 投入 (newAffixes 直接更新 → 一括再 render)
+          const warnIdx = [];
+          for (const r of res.rows) {
+            const d = newAffixes[r.idx]?.equipmentDetails;
+            if (!d) continue;
+            // PvP定音 row (idx5 + 未登録 ID) は編集不可 → skip
+            if (r.idx === 5 && !window.WWM_AFFIX?.[d[0]]) continue;
+            d[0] = parseInt(r.affixId, 10);
+            const sk = window.WWM_AFFIX?.[d[0]]?.statKey;
+            let internal = r.value;
+            if (_isPctStat(sk) && _pctNeedsMul(sk)) internal = r.value / 100;
+            const mx = _getAffixMax(sk, charLv);
+            const overMax = (mx != null && internal > mx);   // 論理検証: MAX 超過 = 誤読確定 (clamp せず朱枠で人に渡す)
+            d[1] = internal;
+            d[2] = (mx && mx > 0) ? Math.min(1, internal / mx) : 0.9;
+            d[3] = _deriveRank(d[2]);
+            d[4] = _isUsefulAffix(d[0], _virtRi(newKongfuId));
+            if (r.confidence < 0.7 || overMax) warnIdx.push(r.idx);   // 閾値 0.7 (PoC 較正値で更新可)
+          }
+          const rowsEl = m.querySelector('#wwmCmpNewRows');
+          if (rowsEl) { rowsEl.innerHTML = renderNewRows(); _bindRowEvents(); }
+          // 低確信行 = 朱枠。編集 (input/change) で解除
+          warnIdx.forEach(i => {
+            const row = m.querySelector(`.wwm-cmp-edit-row[data-affix-idx="${i}"]`);
+            if (!row) return;
+            row.classList.add('wwm-ocr-warn');
+            row.querySelectorAll('select,input').forEach(el => {
+              const ev = el.tagName === 'SELECT' ? 'change' : 'input';
+              el.addEventListener(ev, () => row.classList.remove('wwm-ocr-warn'), { once: true });
+            });
+          });
+          _schedulePreview();
+          window.showToast?.(warnIdx.length
+            ? ((window.T&&T.ocrAppliedWarn)||'読取完了 — 朱枠の行を確認してください')
+            : ((window.T&&T.ocrApplied)||'読取完了'));
+        } catch (err) {
+          console.error('[ocr]', err);
+          window.showToast?.((window.T&&T.ocrErrEngine)||'OCR エンジン取得失敗 (オフライン?)', { error: true });
+        } finally {
+          clearTimeout(_watchdog);
+          _ocrBusy = false;
+          ocrBtn.disabled = false;
+          _setStatus('');
+        }
+      };
+
+      // 📷 click → file picker
+      ocrBtn.addEventListener('click', () => {
+        const inp = document.createElement('input');
+        inp.type = 'file'; inp.accept = 'image/*';
+        inp.addEventListener('change', () => { if (inp.files[0]) _applyOcr(inp.files[0]); });
+        inp.click();
+      });
+      // 言語 fallback select (match 全滅時に表示)
+      const langSel = document.createElement('select');
+      langSel.id = 'wwmCmpOcrLang';
+      langSel.className = 'wwm-ocr-lang-sel';
+      langSel.hidden = true;
+      langSel.innerHTML = ['ja','en','zh','ko'].map(l => `<option value="${l}">${l}</option>`).join('');
+      langSel.value = window.currentLang || 'ja';
+      ocrBtn.insertAdjacentElement('afterend', langSel);
+      langSel.addEventListener('change', () => { if (_lastImg) _applyOcr(_lastImg, langSel.value); });
+      // Ctrl+V paste (modal 表示中。export.js と同 cleanup pattern)
+      const onPaste = (e) => {
+        const item = [...(e.clipboardData?.items || [])].find(i => i.type.startsWith('image/'));
+        if (item) { e.preventDefault(); _applyOcr(item.getAsFile()); }
+      };
+      window.addEventListener('paste', onPaste);
+      const moOcr = new MutationObserver(() => {
+        if (!document.body.contains(m)) { window.removeEventListener('paste', onPaste); moOcr.disconnect(); }
+      });
+      moOcr.observe(document.body, { childList: true });
+      // drag & drop (新置列)
+      const newCol = m.querySelector('#wwmCmpNewCol');
+      if (newCol) {
+        newCol.addEventListener('dragover', e => { e.preventDefault(); newCol.classList.add('wwm-ocr-dropping'); });
+        newCol.addEventListener('dragleave', () => newCol.classList.remove('wwm-ocr-dropping'));
+        newCol.addEventListener('drop', e => {
+          e.preventDefault(); newCol.classList.remove('wwm-ocr-dropping');
+          const f = [...(e.dataTransfer?.files || [])].find(x => x.type.startsWith('image/'));
+          if (f) _applyOcr(f);
+        });
+      }
+    }
 
     m.querySelector('#wwmEditApply').addEventListener('click', () => {
       if (!WWMState.virtual.gear) WWMState.virtual.gear = {};
