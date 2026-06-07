@@ -1012,4 +1012,38 @@ html[data-theme="light"] .wwm-sb-mini-hero-card .wwm-sb-martial b {
   color: var(--c-text-brown-bright);
 }
 
+
+/* ── EXPORT カード生成 modal: light theme control コントラスト調整 (2026-06-07 兄貴指摘 Image#9) ──
+   cream 地上で --paper-dim/--paper-2 系が薄い → 墨茶へ濃色化。 card artifact (.wwm-card 内) は対象外 */
+html[data-theme="light"] .wwm-card-stage-hint,
+html[data-theme="light"] .wwm-card-post-hint,
+html[data-theme="light"] .wwm-card-tpl-btn i,
+html[data-theme="light"] .wwm-card-play-label {
+  color: #6a5135;
+}
+html[data-theme="light"] .wwm-card-toggle,
+html[data-theme="light"] .wwm-card-zoom-row,
+html[data-theme="light"] .wwm-card-align-row {
+  color: #3a2a1a;
+}
+html[data-theme="light"] .wwm-card-tpl-btn,
+html[data-theme="light"] .wwm-card-play-chip {
+  color: #3a2a1a;
+  background: rgba(58,38,22,0.05);
+  border-color: rgba(40,25,18,0.32);
+}
+html[data-theme="light"] .wwm-card-tpl-btn b { color: #2a1c12; }
+html[data-theme="light"] .wwm-card-ctl-btn {
+  color: #5e4310;
+  border-color: rgba(94,67,16,0.55);
+}
+html[data-theme="light"] .wwm-card-tpl-btn.active,
+html[data-theme="light"] .wwm-card-play-chip.active,
+html[data-theme="light"] .wwm-card-align-btn.active {
+  color: #8a1f17;
+  border-color: #8a1f17;
+  background: rgba(200,60,43,0.08);
+}
+html[data-theme="light"] .wwm-card-tpl-btn.active b { color: #8a1f17; }
+
 } /* end @layer light */

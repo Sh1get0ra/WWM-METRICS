@@ -21,6 +21,12 @@
     const riLight = { ...ri };
     delete riLight._avatarBase64;
     delete riLight._xinfaIconsBase64;
+    // 武術/流派/奇術 icon base64 (2026-06-07 bookmarklet 拡張分) も除外 — 受信側はEXPORT 不可なので不要
+    delete riLight._kongfuIconsBase64;
+    delete riLight._liupaiIconsBase64;
+    delete riLight._qishuIcons;
+    delete riLight._qishuIconsBase64;
+    delete riLight._liupaiPicsBase64;
     // 心法icon URL配列も削除 → 受信側で WWM_XINFA_ICONS (data/xinfa_icons.json) fallback で復元
     delete riLight._xinfaIcons;
     // avatar URL も削除 → 受信側で roleAvatar ID → WWM_AVATAR_ICONS (data/avatar_icons.json) で復元

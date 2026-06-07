@@ -1,373 +1,1029 @@
-// ── 画像エクスポート (自前カード構築版 / html2canvas安定) ──────
-const WWM_SITE_URL = 'https://wwm-metrics.example.com';
+// ── キャラクターカード生成 (EXPORT v2 — card builder modal) ──────────
+// EXPORT btn → カード生成 modal: ①背景 (upload/paste/drag + zoom/pan)
+// ②テンプレ (武格/軍議) ③表示項目 toggle → Generate → PNG 1200×630 (×2 = 2400×1260)。
+// カードは「朱墨軍議」identity 固定 (theme 非連動の独立 artifact)。
+// Phase 2.8: window.__WWM_ROLEINFO/__WWM_BASELINE 直接参照 全廃 → WWMState 経由。
+const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
 
-const _EXP_SLOT_ICON = {
-  '3': 'helmet', '4': 'chest', '5': 'legs', '8': 'hands',
-  '10': 'ring', '11': 'pendant', '21': 'bow', '9': 'archer-disc'
-};
-const _EXP_WT_ICON = {
-  sword:'sword', spear:'spear', fan:'fan', umbrella:'umbrella',
-  moBlade:'glaive', dualBlades:'dual-blades', ropeDart:'rope-dart', hengBlade:'katana',
-  mo_blade:'glaive', dual_blades:'dual-blades', rope_dart:'rope-dart', heng_blade:'katana'
-};
-function _expGearIcon(slot, ri) {
-  if (slot === '1' || slot === '2') {
-    const kid = slot === '1' ? ri.kongfuMain : ri.kongfuSub;
-    const kf = window.WWM_KONGFU && window.WWM_KONGFU[kid];
-    const wt = kf && kf.weaponType;
-    if (wt) return _EXP_WT_ICON[wt] || _EXP_WT_ICON[wt.replace(/_([a-z])/g, (_,c)=>c.toUpperCase())] || 'sword';
-    return 'sword';
-  }
-  return _EXP_SLOT_ICON[slot] || '';
-}
+(function () {
+  'use strict';
 
-// 画像 preload (Promise resolve まで待つ)
-function _preloadImgs(urls) {
-  return Promise.all(urls.filter(u=>u).map(u => new Promise(resolve => {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = img.onerror = () => resolve();
-    img.src = u;
-    setTimeout(resolve, 3000);
-  })));
-}
+  const CARD_W = 1200, CARD_H = 630;
+  const _SETTINGS_KEY = 'wwm_card_settings_v1';
+  const _BG_MAX_BYTES = 12 * 1024 * 1024;   // 12MB
+  const _BG_MAX_EDGE  = 2600;               // px 超過時 canvas 縮小 (メモリ保護)
 
-// SVG fetch → inline マークアップ取得 (cache)
-const _SVG_CACHE = {};
-function _fetchSvgInline(path) {
-  if (_SVG_CACHE[path]) return Promise.resolve(_SVG_CACHE[path]);
-  return fetch(path).then(r => r.ok ? r.text() : '').then(txt => {
-    _SVG_CACHE[path] = txt;
-    return txt;
-  }).catch(() => '');
-}
-// 外部画像 → blob → dataURL (CORS bypass 試行)
-const _IMG_DATAURL_CACHE = {};
-function _fetchImgDataUrl(url) {
-  if (!url) return Promise.resolve('');
-  if (_IMG_DATAURL_CACHE[url]) return Promise.resolve(_IMG_DATAURL_CACHE[url]);
-  return fetch(url, { mode: 'cors' }).then(r => r.ok ? r.blob() : null).then(blob => {
-    if (!blob) return '';
-    return new Promise(resolve => {
-      const reader = new FileReader();
-      reader.onload = () => { _IMG_DATAURL_CACHE[url] = reader.result; resolve(reader.result); };
-      reader.onerror = () => resolve('');
-      reader.readAsDataURL(blob);
-    });
-  }).catch(() => '');
-}
-
-function exportImage() {
-  // SHARE Build mode 中は EXPORT 抑止 (他人ビルドの 画像 拡散回避)
-  if (window.__WWM_SHARED_BUILD) {
-    alert((window.T?.sharedBuildExportBlocked) ?? '閲覧モード中: EXPORT は無効化されています (他人のビルド画像 拡散できません)');
-    return;
-  }
-  // ── 工事中: 一時的に EXPORT 機能停止 (ブラッシュアップ中) ──
-  showToast('🚧 工事中 (ブラッシュアップ中)。 しばらくお待ちください。');
-  return;
-  if (typeof html2canvas === 'undefined') {
-    showToast((window.T?.errExportOffline) ?? '画像書き出しにはオンライン接続が必要です', { error: true }); return;
-  }
-  const btn = document.getElementById('exportBtn');
-  const origText = btn.innerHTML;
-  btn.disabled = true; btn.innerHTML = '⋯';
-
-  const now = new Date();
-  const pad = n => String(n).padStart(2,'0');
-  const ymd = now.getFullYear() + pad(now.getMonth()+1) + pad(now.getDate());
-  const hms = pad(now.getHours()) + pad(now.getMinutes()) + pad(now.getSeconds());
-  const dateStr = now.getFullYear() + '/' + pad(now.getMonth()+1) + '/' + pad(now.getDate()) + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes());
-
-  const ri = window.__WWM_ROLEINFO || {};
-  const roleName = ri.roleName || 'unknown';
-  const safeName = roleName.replace(/[^\w一-鿿぀-ヿ]/g, '_');
-  const level = ri.level || 0;
-  const avatar = ri._avatarBase64 || ri._avatarUrl || '';
-
-  const baseEl = document.getElementById('heroScoreBaseline');
-  const curEl = document.getElementById('heroScore');
-  const score = (baseEl && baseEl.textContent && baseEl.textContent !== '—')
-    ? baseEl.textContent.replace(/,/g, '')
-    : (curEl ? curEl.textContent.replace(/,/g, '') : '0');
-  const baselineObj = window.__WWM_BASELINE || {};
-  const tier = baselineObj.tier || (document.getElementById('heroTierBadge') ? document.getElementById('heroTierBadge').textContent : '?');
-
-  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-  const C = isLight
-    ? { bg:'#ede2c8', paper:'#3a2a20', dim:'#5a4226', mute:'#8a7350', gold:'#8a6a20', goldHi:'#5e4310', vermilion:'#c83c2b', jade:'#2d5a3a', border:'rgba(40,25,18,0.18)', rowBg:'rgba(58,38,22,0.06)', rowBg2:'rgba(58,38,22,0.10)', headerBg:'linear-gradient(180deg,#f4e8cc,#e8dab8)' }
-    : { bg:'#0a0608', paper:'#ede4d0', dim:'#8b8170', mute:'#6a6053', gold:'#c9a45a', goldHi:'#f0d28a', vermilion:'#e8513a', jade:'#a8d4b4', border:'rgba(232,215,180,0.12)', rowBg:'rgba(255,255,255,0.03)', rowBg2:'rgba(255,255,255,0.06)', headerBg:'linear-gradient(180deg,rgba(26,20,16,0.95),rgba(15,12,14,0.95))' };
-
-  const tierColor = isLight
-    ? { SS:'#b8860b', S:'#c83c2b', A:'#2d5a3a', B:'#7a5a20', C:'#5a4226' }
-    : { SS:'#ffd970', S:'#ff6b50', A:'#a8d4b4', B:'#c9b88a', C:'rgba(232,215,180,0.7)' };
-  const scoreColor = tierColor[tier] || C.goldHi;
-
-  const eqDet = ri.wearEquipsDetailed || {};
-  const SLOT_ORDER = ['1','2','3','4','21','10','11','5','8','9'];
-  const SLOT_NAME = { '1':'主武器','2':'副武器','3':'冠','4':'胸甲','5':'膝甲','8':'腕甲','9':'射玦','10':'環','11':'佩','21':'弓箭' };
-  const sets = window.WWM_SETS || {};
-  function setNameOf(suffix, slot) {
-    if (!suffix) return '';
-    const cat = (slot==='9'||slot==='21') ? sets.bowSets : (['3','4','5','8'].includes(slot) ? sets.defensiveSets : sets.weaponSets);
-    const e = cat && cat[suffix];
-    const lang = window.currentLang || 'ja';
-    return (e && e.names && (e.names[lang] || e.names.ja)) || '';
-  }
-
-  // 画像URLリスト preload
-  const allIconUrls = [];
-  if (avatar) allIconUrls.push(avatar);
-  SLOT_ORDER.forEach(slot => {
-    const ico = _expGearIcon(slot, ri);
-    if (ico) allIconUrls.push('assets/icons/' + ico + '.svg');
-  });
-  const xinfaIcons = (ri._xinfaIcons || []).map((u, i) => (ri._xinfaIconsBase64 && ri._xinfaIconsBase64[i]) || u);
-  xinfaIcons.forEach(u => { if (u) allIconUrls.push(u); });
-
-  // SVG inline 化 (各装備のiconName取得)
-  const gearIconNames = SLOT_ORDER.map(slot => _expGearIcon(slot, ri));
-  function gearIconWrap(svgTxt) {
-    if (!svgTxt) return '';
-    // viewBox保持 + サイズ強制
-    const styled = svgTxt.replace(/<svg([^>]*)>/, '<svg$1 width="60" height="60" style="width:60px;height:60px;display:block;">');
-    // glow halo: background radial-gradient で gold圏
-    return '<div style="width:80px;height:80px;position:absolute;right:-16px;top:50%;transform:translateY(-50%);pointer-events:none;background:radial-gradient(circle, rgba(212,175,55,0.22) 0%, rgba(212,175,55,0.08) 40%, transparent 70%);display:flex;align-items:center;justify-content:center;">'
-      + '<div style="width:60px;height:60px;opacity:'+(isLight?'0.65':'0.35')+';filter:brightness(0) '+(isLight?'sepia(1) hue-rotate(20deg) saturate(3)':'invert(1)')+';">' + styled + '</div>'
-      + '</div>';
-  }
-  const lang = window.currentLang || 'ja';
-  function kongfuNameOf(kid) {
-    const k = window.WWM_KONGFU && window.WWM_KONGFU[kid];
-    return (k && k.names && (k.names[lang] || k.names.ja)) || '';
-  }
-  // 武器系=朱色、防具系=金、弓=緑
-  const SLOT_ACCENT = {
-    '1': C.vermilion, '2': C.vermilion, '10': C.vermilion, '11': C.vermilion,
-    '3': C.gold, '4': C.gold, '5': C.gold, '8': C.gold,
-    '9': C.jade, '21': C.jade
+  // path 漢字 (HUD 表記、 4言語共通の武侠語彙)
+  const _PATH_KANJI = {
+    bellstrike: '鋼鳴', stonesplit: '砕岩', silkbind: '糸操',
+    bamboocut: '瞬嵐', formless: '無相'
   };
-  const buildGearHtml = (iconSvgs) => SLOT_ORDER.map((slot, i) => {
-    const eq = eqDet[slot];
-    const name = SLOT_NAME[slot] || slot;
-    const iconHtml = iconSvgs[i] ? gearIconWrap(iconSvgs[i]) : '';
-    const accent = SLOT_ACCENT[slot] || C.gold;
-    const railHtml = '<div style="width:24px;flex-shrink:0;background:rgba(0,0,0,0.45);border-right:1px solid '+C.border+';display:flex;align-items:center;justify-content:center;padding:4px 0;"><div style="writing-mode:vertical-rl;text-orientation:upright;font-family:Noto Serif JP,serif;font-weight:900;font-size:12px;letter-spacing:0.12em;color:'+accent+';line-height:1.05;text-shadow:0 0 4px '+accent+';transform:translate(2px,-3px);">'+name+'</div></div>';
-    if (!eq) return '<div style="position:relative;overflow:hidden;display:flex;background:'+C.rowBg+';border:1px solid '+C.border+';border-radius:3px;font-size:11px;color:'+C.dim+';min-height:56px;box-shadow:0 0 8px rgba(212,175,55,0.15);">'+railHtml+'<div style="flex:1;padding:6px 10px;display:flex;flex-direction:column;justify-content:center;"><span style="opacity:0.6;">—</span></div>'+iconHtml+'</div>';
-    const setN = setNameOf(eq.exVo && eq.exVo.suffix, slot);
-    let kfLine = '';
-    if (slot === '1' || slot === '2') {
-      const kid = slot === '1' ? ri.kongfuMain : ri.kongfuSub;
-      const kn = kongfuNameOf(kid);
-      if (kn) kfLine = '<div style="font-size:10px;color:'+C.paper+';margin-top:1px;position:relative;z-index:1;">' + kn + '</div>';
-    }
-    return '<div style="position:relative;overflow:hidden;display:flex;background:'+C.rowBg+';border:1px solid '+C.border+';border-radius:3px;font-size:11px;color:'+C.paper+';min-height:56px;box-shadow:0 0 10px rgba(212,175,55,0.25);">'
-      + railHtml
-      + '<div style="flex:1;padding:6px 10px;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;position:relative;z-index:1;min-width:0;transform:translate(-5px,-6px);">'
-      +   '<div style="font-weight:700;color:'+C.goldHi+';text-shadow:0 0 8px rgba(240,210,138,0.8), 0 0 16px rgba(240,210,138,0.4);">' + setN + '</div>'
-      +   kfLine
-      + '</div>'
-      + iconHtml
-      + '</div>';
-  }).join('');
+  const _XINFA_NUM = ['一', '二', '三', '四'];
 
-  const xinfa = window.WWM_XINFA || {};
-  const passive = ri.passiveSlots || [];
-  const xinfaHtml = [0,1,2,3].map(i => {
-    const xid = passive[i];
-    if (!xid) return '<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:'+C.rowBg+';border:1px solid '+C.border+';border-radius:3px;font-size:11px;color:'+C.dim+';min-height:40px;"><div style="flex:1;"><b>心法'+(i+1)+'</b><br><span style="opacity:0.6;">—</span></div></div>';
-    const lang = window.currentLang || 'ja';
-    const x = xinfa[xid];
-    const xname = (x && x.names && (x.names[lang] || x.names.ja)) || ('心法#'+xid);
-    const icoSrc = xinfaIcons[i] || '';
-    const icoImg = icoSrc ? '<img src="'+icoSrc+'" width="28" height="28" style="width:28px;height:28px;min-width:28px;max-width:28px;flex-shrink:0;opacity:0.9;border-radius:3px;display:block;" crossorigin="anonymous">' : '';
-    return '<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:'+C.rowBg+';border:1px solid '+C.border+';border-left:2px solid '+C.gold+';border-radius:3px;font-size:11px;color:'+C.paper+';min-height:40px;">'
-      + '<div style="flex:1;min-width:0;">'
-      +   '<div style="font-size:10px;color:'+C.dim+';margin-bottom:2px;">心法'+(i+1)+'</div>'
-      +   '<div style="font-weight:700;color:'+C.goldHi+';text-shadow:0 0 8px rgba(240,210,138,0.8), 0 0 16px rgba(240,210,138,0.4);">' + xname + '</div>'
-      + '</div>'
-      + icoImg
-      + '</div>';
-  }).join('');
-
-  let historyHtml = '';
-  try {
-    const hist = WWMHelpers.storage.loadJSON('wwm_score_history_v1', []);
-    if (hist.length >= 1) {
-      const minTs = Math.min.apply(null, hist.map(e=>e.ts));
-      const maxTs = Math.max.apply(null, hist.map(e=>e.ts));
-      const tsR = Math.max(1, maxTs-minTs);
-      const minS = Math.min.apply(null, hist.map(e=>e.statusScore));
-      const maxS = Math.max.apply(null, hist.map(e=>e.statusScore));
-      const sMin = Math.floor(minS*0.92/100)*100;
-      const sMax = Math.ceil(maxS*1.05/100)*100;
-      const sR = Math.max(1, sMax-sMin);
-      const W=600, H=120, PL=44, PR=8, PT=8, PB=20;
-      const iW=W-PL-PR, iH=H-PT-PB;
-      const byRole = {};
-      hist.forEach(e => { (byRole[e.roleId]=byRole[e.roleId]||[]).push(e); });
-      const colors = ['#c9a45a','#a8d4b4','#e8a87c','#7ec4cf'];
-      let lines = '';
-      Object.keys(byRole).forEach((rid,idx) => {
-        const pts = byRole[rid].sort((a,b)=>a.ts-b.ts);
-        const pp = pts.map(e => (PL+((e.ts-minTs)/tsR)*iW).toFixed(1)+','+(PT+(1-(e.statusScore-sMin)/sR)*iH).toFixed(1)).join(' ');
-        lines += '<polyline points="'+pp+'" fill="none" stroke="'+colors[idx%colors.length]+'" stroke-width="2"/>';
-        pts.forEach(e => { lines += '<circle cx="'+(PL+((e.ts-minTs)/tsR)*iW).toFixed(1)+'" cy="'+(PT+(1-(e.statusScore-sMin)/sR)*iH).toFixed(1)+'" r="3" fill="'+colors[idx%colors.length]+'"/>'; });
+  // ── 外部画像 → dataURL (CORS 安全化、 html2canvas taint 回避) ──────
+  const _IMG_DATAURL_CACHE = {};
+  function _fetchImgDataUrl(url) {
+    if (!url) return Promise.resolve('');
+    if (url.startsWith('data:')) return Promise.resolve(url);
+    // 同 origin (assets/ 等) はそのまま使える
+    if (!/^https?:\/\//.test(url) || url.startsWith(location.origin)) return Promise.resolve(url);
+    if (_IMG_DATAURL_CACHE[url]) return Promise.resolve(_IMG_DATAURL_CACHE[url]);
+    return fetch(url, { mode: 'cors' }).then(r => r.ok ? r.blob() : null).then(blob => {
+      if (!blob) return '';
+      return new Promise(resolve => {
+        const reader = new FileReader();
+        reader.onload = () => { _IMG_DATAURL_CACHE[url] = reader.result; resolve(reader.result); };
+        reader.onerror = () => resolve('');
+        reader.readAsDataURL(blob);
       });
-      historyHtml = '<div style="font-family:Rajdhani,monospace;font-size:10px;color:'+C.gold+';letter-spacing:0.2em;font-weight:700;margin:14px 0 8px;">MARTIAL RECORD</div>'
-        + '<div style="padding:8px;background:'+C.rowBg+';border:1px solid '+C.border+';border-radius:3px;display:flex;flex-direction:column;flex:1;min-height:0;">'
-        + '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" style="width:100%;flex:1;display:block;min-height:0;">'
-        + '<rect x="'+PL+'" y="'+PT+'" width="'+iW+'" height="'+iH+'" fill="rgba(0,0,0,0.1)" stroke="'+C.border+'"/>'
-        + '<text x="'+(PL-4)+'" y="'+(PT+10)+'" text-anchor="end" font-size="9" fill="'+C.mute+'">'+sMax+'</text>'
-        + '<text x="'+(PL-4)+'" y="'+(PT+iH)+'" text-anchor="end" font-size="9" fill="'+C.mute+'">'+sMin+'</text>'
-        + lines + '</svg></div>';
-    }
-  } catch(_) {}
-
-  // サイドパネル clone → 2列FIT
-  let sidebarHtml = '';
-  const sbEl = document.querySelector('.wwm-sidebar-test');
-  if (sbEl) {
-    const clone = sbEl.cloneNode(true);
-    clone.querySelectorAll('.icon-btn, .wwm-overlay-ctrl, .preset-btn, .wwm-sb-top').forEach(el => el.remove());
-    // 現在装備のみ表示: ▶以降 (仮想装備込み値) を削除し baseline値を露出
-    clone.querySelectorAll('.wwm-sb-baseline').forEach(el => {
-      let next = el.nextSibling;
-      while (next) {
-        const toRemove = next;
-        next = next.nextSibling;
-        toRemove.remove();
-      }
-      el.classList.remove('wwm-sb-baseline');
-    });
-    // 孤立 arrow 除去
-    clone.querySelectorAll('.wwm-sb-arrow, .wwm-equip-arrow').forEach(el => el.remove());
-    clone.querySelectorAll('*').forEach(el => {
-      el.style.backgroundImage = 'none';
-      el.style.boxShadow = 'none';
-      el.style.textShadow = 'none';
-    });
-    clone.style.cssText = 'position:static;width:100%;max-height:none;height:auto;overflow:visible;background:transparent;border:none;padding:0;font-size:10px;color:'+C.paper+';';
-    // wwm-sb-row を 2列grid化
-    clone.querySelectorAll('.wwm-sb-items').forEach(el => {
-      el.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:2px 10px;';
-    });
-    clone.querySelectorAll('.wwm-sb-section').forEach(el => {
-      el.style.marginBottom = '6px';
-    });
-    clone.querySelectorAll('.wwm-sb-section-title').forEach(el => {
-      el.style.cssText = 'grid-column:1 / -1;font-size:10px;color:'+C.gold+';font-weight:700;letter-spacing:0.1em;margin:6px 0 3px;border-bottom:1px solid '+C.border+';padding-bottom:2px;';
-    });
-    sidebarHtml = clone.outerHTML;
+    }).catch(() => '');
   }
 
-  // avatar
-  const avatarImg = avatar ? '<img src="'+avatar+'" style="width:56px;height:56px;border-radius:50%;border:2px solid '+C.gold+';" crossorigin="anonymous">' : '<div style="width:56px;height:56px;border-radius:50%;border:2px solid '+C.gold+';background:'+C.rowBg+';display:flex;align-items:center;justify-content:center;color:'+C.gold+';font-weight:800;font-size:22px;">'+(roleName[0]||'?')+'</div>';
+  // ── 武器 local SVG fallback (公式 CDN は CORS 不可 = dataURL 化できない) ──
+  const _WT_ICON = {
+    sword: 'sword', spear: 'spear', fan: 'fan', umbrella: 'umbrella',
+    moBlade: 'glaive', dualBlades: 'dual-blades', ropeDart: 'rope-dart',
+    hengBlade: 'katana', gauntlet: 'mailed-fist',
+    mo_blade: 'glaive', dual_blades: 'dual-blades', rope_dart: 'rope-dart',
+    heng_blade: 'katana'
+  };
+  const _SVG_GOLD_CACHE = {};
+  // assets/icons/*.svg (fill="#fff" 白 silhouette) → 金 recolor + data URL
+  async function _weaponIconSvgData(slot, ri) {
+    const kid = slot === '1' ? ri.kongfuMain : ri.kongfuSub;
+    const wt = window.WWM_KONGFU?.[kid]?.weaponType || '';
+    const name = _WT_ICON[wt] || _WT_ICON[wt.replace(/_([a-z])/g, (_, c) => c.toUpperCase())] || 'sword';
+    if (_SVG_GOLD_CACHE[name]) return _SVG_GOLD_CACHE[name];
+    try {
+      const txt = await fetch('assets/icons/' + name + '.svg').then(r => r.ok ? r.text() : '');
+      if (!txt) return '';
+      const gold = txt.replace(/fill="#fff"/g, 'fill="#c9a45a"');
+      const url = 'data:image/svg+xml,' + encodeURIComponent(gold);
+      _SVG_GOLD_CACHE[name] = url;
+      return url;
+    } catch (_) { return ''; }
+  }
 
-  // ヘッダー: 風燕計 縦書 + WHERE WINDS METRICS + 朱印「燕」 + 武格指数 大表示
-  const headerHtml = '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:'+C.headerBg+';border-bottom:1px solid '+C.border+';gap:16px;">'
-    + '<div style="display:flex;align-items:center;gap:14px;">'
-    +   '<div style="writing-mode:vertical-rl;text-orientation:upright;font-family:Noto Serif JP,serif;font-size:16px;font-weight:900;letter-spacing:0.1em;color:'+C.goldHi+';border-left:2px solid '+C.goldHi+';border-right:2px solid '+C.goldHi+';padding:0 4px 12px 9px;line-height:1.1;display:block;height:auto;text-shadow:0 0 8px rgba(240,210,138,0.8), 0 0 16px rgba(240,210,138,0.4);">風燕計</div>'
-    +   '<div>'
-    +     '<div style="font-family:Cinzel,serif;font-size:18px;letter-spacing:0.32em;color:'+C.paper+';font-weight:700;">WHERE WINDS METRICS</div>'
-    +     '<div style="font-family:Rajdhani,monospace;font-size:9px;letter-spacing:0.28em;color:'+C.gold+';margin-top:2px;font-weight:700;">WWM-REAL-TIME-METRICS</div>'
-    +   '</div>'
-    +   '<div style="width:36px;height:36px;background:'+C.vermilion+';color:#fff;display:flex;align-items:center;justify-content:center;font-family:Noto Serif JP,serif;font-size:20px;font-weight:900;transform:rotate(-6deg);border:2px solid rgba(255,255,255,0.7);border-radius:3px;">燕</div>'
-    + '</div>'
-    + '<div style="display:flex;align-items:center;gap:14px;">'
-    +   avatarImg
-    +   '<div style="text-align:right;">'
-    +     '<div style="font-size:13px;color:'+C.paper+';font-weight:700;">' + roleName + ' <span style="color:'+C.dim+';font-weight:400;">Lv' + level + '</span></div>'
-    +     '<div style="display:flex;align-items:flex-end;gap:8px;justify-content:flex-end;margin-top:4px;">'
-    +       '<span style="font-family:Noto Serif JP,serif;font-size:14px;color:'+C.goldHi+';font-weight:900;letter-spacing:0.08em;">武格指数</span>'
-    +       '<span style="font-family:Cinzel,serif;font-size:34px;font-weight:800;color:'+scoreColor+';line-height:0.9;">' + score + '</span>'
-    +       '<span style="padding:3px 10px;border:1.5px solid '+scoreColor+';border-radius:3px;color:'+scoreColor+';font-weight:700;font-size:14px;font-family:Cinzel,serif;">' + tier + '</span>'
-    +     '</div>'
-    +   '</div>'
-    + '</div>'
-    + '</div>';
+  // ── stat_display.json (4言語ラベル) cache ─────────────────────────
+  let _STAT_CFG = null;
+  async function _statCfg() {
+    if (_STAT_CFG) return _STAT_CFG;
+    try {
+      _STAT_CFG = await fetch('data/stat_display.json?v=' + (window.WWM_SCORE_VERSION || 9)).then(r => r.json());
+    } catch (_) { _STAT_CFG = null; }
+    return _STAT_CFG;
+  }
+  function _cfgItem(cfg, sectionKey, itemKey) {
+    const sec = (cfg?.sections || []).find(s => s.key === sectionKey);
+    return sec?.items?.find(i => i.key === itemKey) || null;
+  }
+  function _lbl(item, lang) {
+    return (item?.label && (item.label[lang] || item.label.ja)) || '';
+  }
 
-  const card = document.getElementById('export-card');
-  card.style.cssText = 'display:block;position:fixed;left:-9999px;top:0;width:1000px;';
-  function rebuildCardWithGearV2(gearHtml, hdrHtml, xinfaH) {
-    card.innerHTML = '<div style="width:1000px;background:'+C.bg+';color:'+C.paper+';font-family:Noto Sans JP,sans-serif;padding:0;border:1px solid '+C.border+';">'
-      + hdrHtml
-      + '<div style="display:grid;grid-template-columns:380px 1fr;gap:14px;padding:14px 20px;align-items:stretch;">'
-      +   '<div style="background:'+C.rowBg+';border:1px solid '+C.border+';border-left:2px solid '+C.vermilion+';border-radius:3px;padding:10px;">' + sidebarHtml + '</div>'
-      +   '<div style="display:flex;flex-direction:column;min-height:0;">'
-      +     '<div style="font-family:Rajdhani,monospace;font-size:10px;color:'+C.gold+';letter-spacing:0.2em;font-weight:700;margin-bottom:8px;">GEAR</div>'
-      +     '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:14px;">' + gearHtml + '</div>'
-      +     '<div style="font-family:Rajdhani,monospace;font-size:10px;color:'+C.gold+';letter-spacing:0.2em;font-weight:700;margin-bottom:8px;">INNER WAY</div>'
-      +     '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">' + xinfaH + '</div>'
-      +     historyHtml
-      +   '</div>'
-      + '</div>'
-      + '<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:'+C.rowBg+';border-top:1px solid '+C.border+';font-family:Rajdhani,monospace;font-size:10px;letter-spacing:0.14em;color:'+C.dim+';">'
-      +   '<span>' + dateStr + '</span>'
-      +   '<span style="color:'+C.gold+';font-weight:700;">' + WWM_SITE_URL.replace(/^https?:\/\//,'') + '</span>'
-      + '</div>'
+  // ── 表示 format helpers ───────────────────────────────────────────
+  const _pct = v => (Math.round((v || 0) * 1000) / 10) + '%';
+  const _int = v => Math.round(v || 0).toLocaleString();
+  const _range = (a, b) => Math.round(a || 0) + '–' + Math.round(b || 0);
+  function _esc(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+  }
+
+  // cover crop (html2canvas は object-fit 非対応 → canvas で事前 crop。 失敗時 元画像)
+  function _coverCrop(dataUrl, outW, outH) {
+    if (!dataUrl) return Promise.resolve('');
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = () => {
+        try {
+          const k = Math.max(outW / img.naturalWidth, outH / img.naturalHeight);
+          const sw = outW / k, sh = outH / k;
+          const sx = (img.naturalWidth - sw) / 2, sy = (img.naturalHeight - sh) / 2;
+          const cv = document.createElement('canvas');
+          cv.width = outW; cv.height = outH;
+          cv.getContext('2d').drawImage(img, sx, sy, sw, sh, 0, 0, outW, outH);
+          resolve(cv.toDataURL('image/png'));
+        } catch (_) { resolve(dataUrl); }
+      };
+      img.onerror = () => resolve(dataUrl);
+      img.src = dataUrl;
+    });
+  }
+
+  // 流派 badge dataURL 解決 (bookmarklet _liupaiPicsBase64 = filename keyed dict)
+  function _liupaiData(ri, url) {
+    if (!url) return '';
+    const fn = String(url).split('/').pop().split('?')[0];
+    return ri._liupaiPicsBase64?.[fn] || '';
+  }
+
+  // ── Tier 判定 (hero.js _tierFromBest と同閾値) ────────────────────
+  function _tierFromBest(score) {
+    const best = window.WWMState?.opt?.best?.end;
+    if (!best || score == null) return '';
+    const r = score / best;
+    if (r >= 0.95) return 'SS';
+    if (r >= 0.90) return 'S';
+    if (r >= 0.80) return 'A';
+    if (r >= 0.65) return 'B';
+    return 'C';
+  }
+
+  // ── カード data model 構築 (icon は dataURL 化済) ─────────────────
+  async function _buildCardModel() {
+    const ri = WWMState.roleInfo;
+    if (!ri) return null;
+    const lang = window.currentLang || 'ja';
+    const p = WWMState.params || {};
+    const last = WWMState.lastResult || {};
+    const baseline = WWMState.baseline || null;
+    const cfg = await _statCfg();
+
+    const score = (baseline && typeof baseline.statusScore === 'number') ? Math.round(baseline.statusScore) : null;
+    const tier = _tierFromBest(score);
+
+    // avatar (base64 優先 → URL → roleAvatar dict)。
+    // html2canvas は object-fit 非対応 → frame 比率に canvas 事前 crop (武格 portrait 136:160 / 軍議 46:56)
+    const avatarRaw = ri._avatarBase64 || ri._avatarUrl
+      || (ri.roleAvatar && window.WWM_AVATAR_ICONS?.[ri.roleAvatar]) || '';
+    const avatarSrc = await _fetchImgDataUrl(avatarRaw);
+    const avatar = await _coverCrop(avatarSrc, 272, 320);   // portrait 用 (2x)
+    const avatarSq = await _coverCrop(avatarSrc, 92, 112);  // 軍議 header 用 (2x)
+
+    // 武術 (主/副) — icon + 流派 badge + path
+    const icons = window.WWMSidebar?.icons;
+    const kongfu = [];
+    for (const slot of ['1', '2']) {
+      const kid = slot === '1' ? ri.kongfuMain : ri.kongfuSub;
+      if (!kid) continue;
+      const kf = window.WWM_KONGFU?.[kid];
+      const name = (kf?.names && (kf.names[lang] || kf.names.ja)) || '';
+      // 優先: import 時 base64 (bookmarklet 拡張 2026-06-07、 心法方式) → 公式 CDN は CORS 不可 → local SVG 金 recolor
+      let iconSrc = ri._kongfuIconsBase64?.[kid] || '';
+      if (!iconSrc) {
+        iconSrc = await _fetchImgDataUrl(icons?.gearIconResolve?.(slot, ri) || '');
+        if (!iconSrc || /^https?:/.test(iconSrc)) iconSrc = await _weaponIconSvgData(slot, ri);
+      }
+      // 流派 badge: kid-keyed dict (bookmarklet 第2弾) → filename dict (第4弾) の順。 無ければ skip
+      const liupaiSrc = ri._liupaiIconsBase64?.[kid]
+        || _liupaiData(ri, icons?.kongfuLiupaiResolve?.(slot, ri)) || '';
+      kongfu.push({ kid, name, iconSrc, liupaiSrc, path: _PATH_KANJI[kf?.path] || '', main: slot === '1' });
+    }
+
+    // 心法 4 枠 — icon + tier
+    const stateSnap = WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {};
+    const tiers = stateSnap.xinfaTiers || {};
+    const passive = ri.passiveSlots || [];
+    const xinfa = [];
+    for (let i = 0; i < 4; i++) {
+      const xid = passive[i];
+      if (!xid) { xinfa.push(null); continue; }
+      const x = window.WWM_XINFA?.[xid];
+      const name = (x?.names && (x.names[lang] || x.names.ja)) || ('#' + xid);
+      const iconRaw = ri._xinfaIconsBase64?.[i] || ri._xinfaIcons?.[i]
+        || window.WWM_XINFA_ICONS?.[xid]?.icon_url || '';
+      const iconSrc = await _fetchImgDataUrl(iconRaw);
+      const liupaiSrc = _liupaiData(ri, window.WWM_XINFA_ICONS?.[xid]?.liupai_pic_url);
+      xinfa.push({ xid, name, iconSrc, liupaiSrc, tier: tiers[i] ?? tiers[String(i)] ?? 6, rank: x?.rank || '' });
+    }
+
+    // 5行ステ (基礎値)
+    const stats5 = (() => {
+      const sec = (cfg?.sections || []).find(s => s.key === 'basicStats');
+      if (!sec) return [];
+      return sec.items.map(it => ({ label: _lbl(it, lang), value: _int(p[it.calcKey]) }));
+    })();
+
+    // 主要ステータス
+    const primary = [];
+    if (cfg) {
+      const phys = _cfgItem(cfg, 'primaryStats', 'physAtk');
+      const elem = _cfgItem(cfg, 'primaryStats', 'elemAtk');
+      const hit  = _cfgItem(cfg, 'probability', 'hitRate');
+      const crit = _cfgItem(cfg, 'probability', 'critRate');
+      const sym  = _cfgItem(cfg, 'probability', 'sympathyRate');
+      const cb   = _cfgItem(cfg, 'dmgBoost', 'critBoost');
+      const sb   = _cfgItem(cfg, 'dmgBoost', 'sympathyBoost');
+      primary.push(
+        { label: _lbl(phys, lang), value: _range(p.minPhysATK, p.maxPhysATK) },
+        { label: _lbl(elem, lang), value: _range(p.minElemDisp ?? p.minElemMain, p.maxElemDisp ?? p.maxElemMain) },
+        { label: _lbl(hit, lang),  value: _pct(p.appliedHit) },
+        { label: _lbl(crit, lang), value: _pct(p.appliedCrit) },
+        { label: _lbl(sym, lang),  value: _pct(p.appliedSympathy) },
+        { label: _lbl(cb, lang),   value: _pct(p.critBoost) },
+        { label: _lbl(sb, lang),   value: _pct(p.sympathyBoost) }
+      );
+    }
+
+    // 奇術 (装備中 8 枠、 bookmarklet DOM 取込分。 旧 import data には無い → 空配列)
+    const qishu = (ri._qishuIconsBase64 || []).filter(Boolean);
+
+    // 勁率 donut
+    const donut = {
+      pCrit: p.pCrit || 0, pSym: p.pSympathy || 0,
+      pGraze: p.pGraze || 0, pNormal: p.pNormal || 0,
+      physRatio: last.physRatio || 0, elemRatio: last.elemRatio || 0
+    };
+
+    // 総合武力 (sidebar 表示と同源 = roleInfo.xiuWeiKungFu、 必須表記 2026-06-07 兄貴指示)
+    const totalMartial = ri.xiuWeiKungFu || ri.maxXiuWeiKungFu || 0;
+    const totalMartialLabel = (cfg?.header?.title && (cfg.header.title[lang] || cfg.header.title.ja)) || '総合武力';
+
+    const now = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    return {
+      lang,
+      name: ri.roleName || 'unknown',
+      level: ri.level || 0,
+      totalMartial, totalMartialLabel,
+      avatar, avatarSq, score, tier, kongfu, xinfa, qishu, stats5, primary, donut,
+      dateStr: now.getFullYear() + '/' + pad(now.getMonth() + 1) + '/' + pad(now.getDate()),
+      fileStamp: '' + now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate())
+        + '-' + pad(now.getHours()) + pad(now.getMinutes()) + pad(now.getSeconds())
+    };
+  }
+
+  // ── 勁率 donut (静的 SVG、 hero luopan 直系)。 lp = 紙 panel 用配色 ──
+  function _donutSvg(d, size, lp) {
+    const C = 2 * Math.PI * 50; // viewBox 136, r 50
+    const segs = [
+      [d.pCrit,   lp ? '#c9a45a' : '#f0d28a'],   // 会心 = 金
+      [d.pSym,    lp ? '#c83c2b' : '#e8513a'],   // 会意 = 朱
+      [d.pGraze,  lp ? '#9c8a6a' : '#6a6053'],   // かすり = 灰
+      [d.pNormal, lp ? '#4a3526' : '#ede4d0']    // 通常 = 紙 (紙 panel では墨茶)
+    ];
+    let off = 0, circles = '';
+    for (const [v, color] of segs) {
+      const len = Math.max(0, Math.min(1, v || 0)) * C;
+      if (len > 0.2) {
+        circles += '<circle cx="68" cy="68" r="50" fill="none" stroke="' + color + '" stroke-width="15"'
+          + ' stroke-dasharray="' + len.toFixed(2) + ' ' + (C - len).toFixed(2) + '"'
+          + ' stroke-dashoffset="' + (-off).toFixed(2) + '" transform="rotate(-90 68 68)"/>';
+      }
+      off += len;
+    }
+    // 外周 phys/elem 比率 ring (r 64)
+    const C2 = 2 * Math.PI * 64;
+    const physLen = Math.max(0, Math.min(1, d.physRatio || 0)) * C2;
+    const track = lp ? 'rgba(40,25,18,0.10)' : 'rgba(232,215,180,0.10)';
+    const ring =
+      '<circle cx="68" cy="68" r="64" fill="none" stroke="' + track + '" stroke-width="2.5"/>'
+      + '<circle cx="68" cy="68" r="64" fill="none" stroke="' + (lp ? '#c83c2b' : '#e8513a') + '" stroke-width="2.5"'
+      + ' stroke-dasharray="' + physLen.toFixed(2) + ' ' + (C2 - physLen).toFixed(2) + '" transform="rotate(-90 68 68)"/>'
+      + '<circle cx="68" cy="68" r="64" fill="none" stroke="' + (lp ? '#2d5a3a' : '#a8d4b4') + '" stroke-width="2.5"'
+      + ' stroke-dasharray="' + (C2 - physLen).toFixed(2) + ' ' + physLen.toFixed(2) + '"'
+      + ' stroke-dashoffset="' + (-physLen).toFixed(2) + '" transform="rotate(-90 68 68)"/>';
+    const label = _esc(window.T?.donutDmgCenter ?? '勁率');
+    return '<svg viewBox="0 0 136 136" width="' + size + '" height="' + size + '" aria-hidden="true">'
+      + '<circle cx="68" cy="68" r="50" fill="none" stroke="' + (lp ? 'rgba(40,25,18,0.07)' : 'rgba(232,215,180,0.07)') + '" stroke-width="15"/>'
+      + circles + ring
+      + '<text x="68" y="73" text-anchor="middle" font-family="Noto Serif JP,serif" font-weight="700"'
+      + ' font-size="15" fill="' + (lp ? '#8a6a20' : '#c9a45a') + '" letter-spacing="2">' + label + '</text>'
+      + '</svg>';
+  }
+
+  function _judgeRows(d, T) {
+    // 色は --cd-* var 参照 — panel 墨/紙 切替に追従 (武格 float は CSS 側で墨値に局所固定)
+    const rows = [
+      [T?.probCrit ?? '会心', _pct(d.pCrit), 'var(--cd-gold, #f0d28a)'],
+      [T?.probSympathy ?? '会意', _pct(d.pSym), 'var(--cd-judge-sym, #e8513a)'],
+      [T?.probNormal ?? '通常', _pct(d.pNormal), 'var(--cd-judge-normal, #ede4d0)'],
+      [T?.probGraze ?? 'かすり', _pct(d.pGraze), 'var(--cd-mute, #8b8170)'],
+      [T?.probPhys ?? '物理', _pct(d.physRatio), 'var(--cd-judge-sym, #e8513a)'],
+      [T?.probElem ?? '属性', _pct(d.elemRatio), 'var(--cd-judge-elem, #a8d4b4)']
+    ];
+    return rows.map(([n, v, c], i) =>
+      '<div class="wwm-card-judge-row' + (i === 4 ? ' wwm-card-judge-sep' : '') + '">'
+      + '<span class="wwm-card-judge-dot" style="background:' + c + ';"></span>'
+      + '<span class="wwm-card-judge-name">' + _esc(n) + '</span>'
+      + '<span class="wwm-card-judge-val" style="color:' + c + ';">' + v + '</span>'
+      + '</div>').join('');
+  }
+
+  // ── カード部品 HTML ───────────────────────────────────────────────
+  // 縦長肖像画 frame (公式プロフィールカード踏襲: 金縁 + 四隅飾 + vignette)
+  function _portraitHtml(model) {
+    const img = model.avatar
+      ? '<img class="wwm-card-portrait-img" src="' + model.avatar + '" alt="">'
+      : '<span class="wwm-card-portrait-fb">' + _esc((model.name || '?')[0]) + '</span>';
+    return '<div class="wwm-card-portrait">'
+      + '<span class="wwm-card-pf pf-tl"></span><span class="wwm-card-pf pf-tr"></span>'
+      + '<span class="wwm-card-pf pf-bl"></span><span class="wwm-card-pf pf-br"></span>'
+      + img
       + '</div>';
   }
-
-  // SVG + 外部画像 fetch
-  Promise.all([
-    _preloadImgs(allIconUrls),
-    Promise.all(gearIconNames.map(n => n ? _fetchSvgInline('assets/icons/'+n+'.svg') : Promise.resolve(''))),
-    ri._avatarBase64 ? Promise.resolve(ri._avatarBase64) : _fetchImgDataUrl(avatar),
-    (ri._xinfaIconsBase64 && ri._xinfaIconsBase64.length)
-      ? Promise.resolve(ri._xinfaIconsBase64)
-      : Promise.all(xinfaIcons.map(u => _fetchImgDataUrl(u)))
-  ]).then(([_, iconSvgs, avatarData, xinfaData]) => {
-    // avatar / xinfa icon を dataURL化済みで rebuild
-    if (avatarData) {
-      card._avatarDataUrl = avatarData;
-    }
-    if (xinfaData && xinfaData.length) {
-      card._xinfaDataUrls = xinfaData;
-    }
-    const gearHtml = buildGearHtml(iconSvgs);
-    // headerHtml / xinfaHtml を dataURL 反映で再構築
-    const realAvatarImg = avatarData
-      ? '<img src="'+avatarData+'" style="width:56px;height:56px;border-radius:50%;border:2px solid '+C.gold+';">'
-      : avatarImg;
-    const XINFA_NUM = ['一','二','三','四'];
-    const realXinfaHtml = [0,1,2,3].map(i => {
-      const xid = passive[i];
-      const railHtml = '<div style="width:24px;flex-shrink:0;background:rgba(0,0,0,0.45);border-right:1px solid '+C.border+';display:flex;align-items:center;justify-content:center;padding:4px 0;"><div style="writing-mode:vertical-rl;text-orientation:upright;font-family:Noto Serif JP,serif;font-weight:900;font-size:12px;letter-spacing:0.12em;color:'+C.goldHi+';line-height:1.05;text-shadow:0 0 4px '+C.gold+';transform:translate(2px,-3px);">心法'+XINFA_NUM[i]+'</div></div>';
-      if (!xid) return '<div style="position:relative;overflow:hidden;display:flex;background:'+C.rowBg+';border:1px solid '+C.border+';border-radius:3px;font-size:11px;color:'+C.dim+';min-height:56px;box-shadow:0 0 8px rgba(212,175,55,0.15);">'+railHtml+'<div style="flex:1;padding:6px 10px;display:flex;align-items:center;"><span style="opacity:0.6;">—</span></div></div>';
-      const lang2 = window.currentLang || 'ja';
-      const x = xinfa[xid];
-      const xname = (x && x.names && (x.names[lang2] || x.names.ja)) || ('心法#'+xid);
-      const ico = xinfaData[i] || '';
-      const icoImg = ico ? '<div style="width:80px;height:80px;position:absolute;right:-16px;top:50%;transform:translateY(-50%);pointer-events:none;background:radial-gradient(circle, rgba(212,175,55,0.22) 0%, rgba(212,175,55,0.08) 40%, transparent 70%);display:flex;align-items:center;justify-content:center;"><img src="'+ico+'" width="56" height="56" style="width:56px;height:56px;opacity:0.6;border-radius:3px;display:block;"></div>' : '';
-      return '<div style="position:relative;overflow:hidden;display:flex;background:'+C.rowBg+';border:1px solid '+C.border+';border-radius:3px;font-size:11px;color:'+C.paper+';min-height:56px;box-shadow:0 0 10px rgba(212,175,55,0.25);">'
-        + railHtml
-        + '<div style="flex:1;padding:6px 10px;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;position:relative;z-index:1;min-width:0;transform:translate(-5px,-6px);">'
-        +   '<div style="font-weight:700;color:'+C.goldHi+';text-shadow:0 0 8px rgba(240,210,138,0.8), 0 0 16px rgba(240,210,138,0.4);">' + xname + '</div>'
-        + '</div>'
-        + icoImg
+  // Lv + 総合武力 行 (必須表記)
+  function _lvMartialHtml(model) {
+    return 'Lv' + model.level
+      + (model.totalMartial ? ' · ' + _esc(model.totalMartialLabel) + ' ' + _int(model.totalMartial) : '');
+  }
+  // 小型角形肖像 + 名前 (軍議 header 用)
+  function _idHtml(model) {
+    const av = model.avatarSq
+      ? '<img class="wwm-card-avatar" src="' + model.avatarSq + '" alt="">'
+      : '<span class="wwm-card-avatar wwm-card-avatar-fb">' + _esc((model.name || '?')[0]) + '</span>';
+    return '<div class="wwm-card-id">' + av
+      + '<span class="wwm-card-name">' + _esc(model.name)
+      + ' <small>' + _lvMartialHtml(model) + '</small></span>'
+      + '</div>';
+  }
+  // 心法 tile 列 (武格 info カラム用: icon + 名称 + T、 横いっぱい 4 列)
+  function _xinfaTileRow(model) {
+    return '<div class="wwm-card-xtiles">' + model.xinfa.map(x => {
+      if (!x) return '<span class="wwm-card-xtile wwm-card-xtile-empty">—</span>';
+      const ic = x.iconSrc ? '<img src="' + x.iconSrc + '" alt="">' : '';
+      const badge = x.liupaiSrc ? '<img class="wwm-card-liupai" src="' + x.liupaiSrc + '" alt="">' : '';
+      return '<span class="wwm-card-xtile">'
+        + '<span class="wwm-card-xtile-iconwrap">' + ic + badge + '</span>'
+        + '<span class="wwm-card-xtile-name">' + _esc(x.name) + '</span>'
+        + '<b>T' + x.tier + '</b></span>';
+    }).join('') + '</div>';
+  }
+  // 武術 compact cell (武格用: icon + 名称のみ、 2026-06-07 兄貴指示)
+  function _kongfuCompact(model) {
+    return model.kongfu.map(k => {
+      const badge = k.liupaiSrc ? '<img class="wwm-card-liupai" src="' + k.liupaiSrc + '" alt="">' : '';
+      const icon = k.iconSrc ? '<img class="wwm-card-cell-icon" src="' + k.iconSrc + '" alt="">' : '';
+      return '<div class="wwm-card-cell wwm-card-cell-kf wwm-card-kf-compact">'
+        + '<span class="wwm-card-cell-iconwrap">' + icon + badge + '</span>'
+        + '<span class="wwm-card-cell-name">' + _esc(k.name) + '</span>'
         + '</div>';
     }).join('');
-    // headerHtml の avatar 差し替え (簡易: 全置換)
-    const realHeader = headerHtml.replace(avatarImg, realAvatarImg);
-    rebuildCardWithGearV2(gearHtml, realHeader, realXinfaHtml);
-    setTimeout(function() {
-      html2canvas(card.firstElementChild, {
-        scale: 2, logging: false, backgroundColor: C.bg, useCORS: true, allowTaint: true, imageTimeout: 0
-      }).then(function(canvas) {
-        card.style.cssText = 'display:none;';
-        btn.disabled = false; btn.innerHTML = origText;
-        const link = document.createElement('a');
-        link.download = 'WWM-' + safeName + '-' + score + '-' + ymd + '-' + hms + '.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        if (typeof T !== 'undefined' && T.toastExported) showToast(T.toastExported);
-      }).catch(function(err) {
-        card.style.cssText = 'display:none;';
-        btn.disabled = false; btn.innerHTML = origText;
-        console.error('Export error:', err);
-        showToast((window.T?.errExportFail) ?? '画像書き出しに失敗しました', { error: true });
+  }
+  // 奇術 (装備中 8 枠) — ゲーム内準拠の十字 ×2 配置 (公式 qs-list-empty2 BG と同構造):
+  //   ⑥　　②
+  // ⑤　⑦　①　③   1 cluster = 4 円 slot (上/左/右/下) + 中央菱形飾り。
+  //   ⑧　　④      DOM 順 ①..⑧ → 右十字 (①左/②上/③右/④下) + 左十字 (⑤左/⑥上/⑦右/⑧下)
+  const _QISHU_POS = [
+    [1, 'left'], [1, 'top'], [1, 'right'], [1, 'bottom'],
+    [0, 'left'], [0, 'top'], [0, 'right'], [0, 'bottom']
+  ];
+  // 十字 slot 飾り BG (公式 qs-list-empty2 を SVG 自作再現 — 再配布回避 + 墨/紙 両対応)
+  // slot = 菱形タイル (公式準拠 2026-06-07 兄貴指示、 icon は正立のまま菱形上に乗る)
+  function _qishuBgSvg(lp) {
+    const line = lp ? 'rgba(40,25,18,0.34)' : 'rgba(232,215,180,0.30)';
+    const fill = lp ? 'rgba(40,25,18,0.06)' : 'rgba(232,215,180,0.07)';
+    const dia  = lp ? 'rgba(138,31,23,0.30)' : 'rgba(200,60,43,0.35)';
+    const s = (cx, cy) => '<rect x="' + (cx - 13.5) + '" y="' + (cy - 13.5)
+      + '" width="27" height="27" rx="3" fill="' + fill + '" stroke="' + line
+      + '" transform="rotate(45 ' + cx + ' ' + cy + ')"/>';
+    const d = (cx, cy) => '<rect x="' + (cx - 4) + '" y="' + (cy - 4) + '" width="8" height="8" fill="' + dia + '" transform="rotate(45 ' + cx + ' ' + cy + ')"/>';
+    return '<svg class="wwm-card-qishu-bg" viewBox="0 0 146 146" aria-hidden="true">'
+      + '<path d="M40 40 L58 58 M106 40 L88 58 M40 106 L58 88 M106 106 L88 88" stroke="' + line + '" stroke-width="1" fill="none"/>'
+      + s(73, 22) + s(22, 73) + s(124, 73) + s(73, 124)
+      + d(73, 61) + d(61, 73) + d(85, 73) + d(73, 85)
+      + '</svg>';
+  }
+  function _qishuRow(model, lp) {
+    if (!model.qishu.length) return '';
+    const cl = [[], []];
+    model.qishu.forEach((u, i) => {
+      const p = _QISHU_POS[i] || [1, 'left'];
+      cl[p[0]].push('<img class="q-' + p[1] + '" src="' + u + '" alt="">');
+    });
+    const bg = _qishuBgSvg(lp);
+    return '<div class="wwm-card-qishu">'
+      + '<div class="wwm-card-qishu-x">' + bg + cl[0].join('') + '</div>'
+      + '<div class="wwm-card-qishu-x">' + bg + cl[1].join('') + '</div>'
+      + '</div>';
+  }
+  // プレイ時間帯/スタイル chips (選択 0 = 非表示)
+  function _playChipsHtml(st, T) {
+    const picks = [];
+    (st.play?.time || []).forEach(k => { const l = T['cardTime_' + k]; if (l) picks.push(l); });
+    (st.play?.style || []).forEach(k => { const l = T['cardStyle_' + k]; if (l) picks.push(l); });
+    if (!picks.length) return '';
+    return '<div class="wwm-card-playchips">'
+      + picks.map(p => '<span class="wwm-card-chip">' + _esc(p) + '</span>').join('')
+      + '</div>';
+  }
+  function _tierHtml(tier, big) {
+    if (!tier) return '';
+    // class は wwm-ct-* — 既存 .tier-SS (sidebar.css 裸 selector、 shimmer/glow animation 付き) との衝突回避
+    return '<span class="wwm-card-tier' + (big ? ' wwm-card-tier-big' : '') + ' wwm-ct-' + tier + '">' + tier + '</span>';
+  }
+  function _kongfuCells(model) {
+    return model.kongfu.map(k => {
+      const badge = k.liupaiSrc ? '<img class="wwm-card-liupai" src="' + k.liupaiSrc + '" alt="">' : '';
+      const icon = k.iconSrc ? '<img class="wwm-card-cell-icon" src="' + k.iconSrc + '" alt="">' : '';
+      return '<div class="wwm-card-cell wwm-card-cell-kf">'
+        + '<span class="wwm-card-cell-iconwrap">' + icon + badge + '</span>'
+        + '<span class="wwm-card-cell-texts">'
+        + '<span class="wwm-card-cell-sub">' + (k.main ? '主' : '副') + (k.path ? ' · ' + k.path : '') + '</span>'
+        + '<span class="wwm-card-cell-name">' + _esc(k.name) + '</span>'
+        + '</span></div>';
+    }).join('');
+  }
+  function _xinfaCells(model) {
+    return model.xinfa.map((x, i) => {
+      if (!x) {
+        return '<div class="wwm-card-cell wwm-card-cell-xf wwm-card-cell-empty">'
+          + '<span class="wwm-card-cell-texts">'
+          + '<span class="wwm-card-cell-sub">心法' + _XINFA_NUM[i] + '</span>'
+          + '<span class="wwm-card-cell-name">—</span>'
+          + '</span></div>';
+      }
+      const icon = x.iconSrc ? '<img class="wwm-card-cell-icon wwm-card-cell-icon-xf" src="' + x.iconSrc + '" alt="">' : '';
+      const badge = x.liupaiSrc ? '<img class="wwm-card-liupai" src="' + x.liupaiSrc + '" alt="">' : '';
+      return '<div class="wwm-card-cell wwm-card-cell-xf">'
+        + '<span class="wwm-card-cell-iconwrap">' + icon + badge + '</span>'
+        + '<span class="wwm-card-cell-texts">'
+        + '<span class="wwm-card-cell-sub">心法' + _XINFA_NUM[i] + ' <b class="wwm-card-xf-tier">T' + x.tier + '</b></span>'
+        + '<span class="wwm-card-cell-name">' + _esc(x.name) + '</span>'
+        + '</span></div>';
+    }).join('');
+  }
+  function _footerHtml(model) {
+    // brand はここに集約 (兄貴指示 2026-06-07: タイトルは目立たせずフッターで URL と同居)
+    // 著作権表記 = ゲーム内 asset (icon/avatar) 使用のため必須 (兄貴指示 2026-06-07)
+    return '<div class="wwm-card-footer">'
+      + '<span class="wwm-card-footer-brand"><b class="wwm-card-footer-seal">燕</b>風燕計 <i>WHERE WINDS METRICS</i></span>'
+      + '<span class="wwm-card-footer-copy">© NetEase, Inc. All Rights Reserved. © Everstone Studio.</span>'
+      + '<span class="wwm-card-footer-meta">' + model.dateStr
+      +   ' · <span class="wwm-card-footer-url">' + WWM_SITE_URL.replace(/^https?:\/\//, '') + '</span></span>'
+      + '</div>';
+  }
+  function _scoreValHtml(model) {
+    return model.score == null ? '—' : model.score.toLocaleString();
+  }
+
+  // ── カード DOM 構築 (preview / capture 共用) ──────────────────────
+  function _buildCardEl(model, st) {
+    const T = window.T || {};
+    const el = document.createElement('div');
+    el.className = 'wwm-card wwm-card-' + st.tpl
+      + (st.tpl === 'bukaku' ? ' wwm-card-align-' + (st.align === 'right' ? 'right' : 'left') : '')
+      + (st.panel === 'light' ? ' wwm-card-panel-light' : '');
+    const it = st.items;
+
+    // 背景: ユーザー画像 or 朱墨軍議布地
+    let bgHtml;
+    if (st.bg.url) {
+      bgHtml = '<div class="wwm-card-bg"><img class="wwm-card-bgimg" src="' + st.bg.url + '" alt=""></div>';
+    } else {
+      bgHtml = '<div class="wwm-card-bg wwm-card-cloth"></div>';
+    }
+
+    let body = '';
+    if (st.tpl === 'bukaku') {
+      // 武格: FF14 キャラカ式 — 情報カラム (左右切替) + 写真素通し
+      const infoCol =
+        '<div class="wwm-card-info">'
+        + _portraitHtml(model)
+        + '<div class="wwm-card-info-name">' + _esc(model.name) + ' <small>' + _lvMartialHtml(model) + '</small></div>'
+        + '<div class="wwm-card-mi">'
+        +   '<div class="wwm-card-mi-label"><span class="ja">武格指数</span><span class="en">'
+        +     _esc(T.martialIndexSub ?? 'MARTIAL INDEX') + '</span></div>'
+        +   '<div class="wwm-card-mi-row">'
+        +     '<span class="wwm-card-mi-num">' + _scoreValHtml(model) + '</span>'
+        +     _tierHtml(model.tier, true)
+        +   '</div>'
+        + '</div>'
+        // 上段: 武術 (icon+名称 縦2) | 奇術パネル 横並び → 下段: 心法 4 列 tile (2026-06-07 兄貴レイアウト指示)
+        + (() => {
+          const kf = it.kongfu ? '<div class="wwm-card-info-arts">' + _kongfuCompact(model) + '</div>' : '';
+          const q = (it.qishu && model.qishu.length) ? _qishuRow(model, st.panel === 'light') : '';
+          const row = (kf && q) ? '<div class="wwm-card-info-row">' + kf + q + '</div>' : (kf + q);
+          return row + (it.xinfa ? _xinfaTileRow(model) : '');
+        })()
+        + _playChipsHtml(st, T)
+        + '</div>';
+      body =
+        '<div class="wwm-card-bukaku-body">'
+        + infoCol
+        + '<div class="wwm-card-photo-zone">'
+        +   (it.donut
+            ? '<div class="wwm-card-luopan wwm-card-luopan-float">' + _donutSvg(model.donut, 132, st.panel === 'light')
+              + '<div class="wwm-card-judges">' + _judgeRows(model.donut, T) + '</div></div>'
+            : '')
+        + '</div>'
+        + '</div>'
+        + _footerHtml(model);
+    } else {
+      // 軍議: データ濃いめ
+      const cols = [];
+      if (it.stats || it.primary) {
+        cols.push('<div class="wwm-card-gcol">'
+          + (it.stats
+            ? '<div class="wwm-card-gsec-title">BASE</div><div class="wwm-card-stats5">'
+              + model.stats5.map(s =>
+                  '<div class="wwm-card-stat5"><span class="wwm-card-stat5-l">' + _esc(s.label)
+                  + '</span><span class="wwm-card-stat5-v">' + s.value + '</span></div>').join('')
+              + '</div>'
+            : '')
+          + (it.primary
+            ? '<div class="wwm-card-gsec-title">STATS</div><div class="wwm-card-rows">'
+              + model.primary.map(s =>
+                  '<div class="wwm-card-row"><span class="wwm-card-row-l">' + _esc(s.label)
+                  + '</span><span class="wwm-card-row-v">' + s.value + '</span></div>').join('')
+              + '</div>'
+            : '')
+          + '</div>');
+      }
+      // MYSTIC は余白のある donut col へ同居 (donut OFF 時のみ col3 へ fallback)
+      const qishuBlock = (it.qishu && model.qishu.length)
+        ? '<div class="wwm-card-gsec-title">MYSTIC</div>' + _qishuRow(model, st.panel === 'light') : '';
+      if (it.donut) {
+        cols.push('<div class="wwm-card-gcol wwm-card-gcol-donut">'
+          + '<div class="wwm-card-gsec-title">RATIO</div>'
+          + _donutSvg(model.donut, 168, st.panel === 'light')
+          + '<div class="wwm-card-judges">' + _judgeRows(model.donut, T) + '</div>'
+          + qishuBlock
+          + '</div>');
+      }
+      if (it.kongfu || it.xinfa || (!it.donut && qishuBlock)) {
+        cols.push('<div class="wwm-card-gcol">'
+          + (it.kongfu ? '<div class="wwm-card-gsec-title">MARTIAL ARTS</div>' + _kongfuCells(model) : '')
+          + (it.xinfa ? '<div class="wwm-card-gsec-title">INNER WAY</div>' + _xinfaCells(model) : '')
+          + (!it.donut ? qishuBlock : '')
+          + '</div>');
+      }
+      const chips = _playChipsHtml(st, T);
+      body =
+        '<div class="wwm-card-ghead">'
+        +   _idHtml(model)
+        +   '<div class="wwm-card-ghead-score">'
+        +     '<span class="wwm-card-mi-label"><span class="ja">武格指数</span></span>'
+        +     '<span class="wwm-card-mi-num">' + _scoreValHtml(model) + '</span>'
+        +     _tierHtml(model.tier, false)
+        +   '</div>'
+        + '</div>'
+        + '<div class="wwm-card-gbody">' + cols.join('') + '</div>'
+        + (chips ? '<div class="wwm-card-gchips">' + chips + '</div>' : '')
+        + _footerHtml(model);
+    }
+
+    el.innerHTML = bgHtml + '<div class="wwm-card-scrim"></div>'
+      + '<div class="wwm-card-content">' + body + '</div>';
+
+    // 背景 transform 適用
+    if (st.bg.url) {
+      const img = el.querySelector('.wwm-card-bgimg');
+      _applyBgTransform(img, st);
+    }
+    return el;
+  }
+
+  function _applyBgTransform(img, st) {
+    if (!img || !st.bg.url) return;
+    const cover = Math.max(CARD_W / st.bg.w, CARD_H / st.bg.h);
+    img.style.width = (st.bg.w * cover) + 'px';
+    img.style.height = 'auto';
+    img.style.transform = 'translate(-50%,-50%) translate(' + st.bg.x + 'px,' + st.bg.y + 'px) scale(' + st.bg.scale + ')';
+  }
+
+  // ── 設定永続化 (背景画像は容量都合で非永続) ───────────────────────
+  function _loadSettings() {
+    const def = {
+      tpl: 'bukaku', align: 'left', panel: 'dark',
+      items: { donut: true, stats: true, primary: true, kongfu: true, xinfa: true, qishu: true },
+      play: { time: [], style: [] }
+    };
+    const s = WWMHelpers.storage.loadJSON(_SETTINGS_KEY);
+    if (!s) return def;
+    return {
+      tpl: (s.tpl === 'gungi') ? 'gungi' : 'bukaku',
+      align: (s.align === 'right') ? 'right' : 'left',
+      panel: (s.panel === 'light') ? 'light' : 'dark',
+      items: Object.assign(def.items, { qishu: true }, s.items || {}),
+      play: {
+        time: Array.isArray(s.play?.time) ? s.play.time : [],
+        style: Array.isArray(s.play?.style) ? s.play.style : []
+      }
+    };
+  }
+  function _saveSettings(st) {
+    WWMHelpers.storage.saveJSON(_SETTINGS_KEY, { tpl: st.tpl, align: st.align, panel: st.panel, items: st.items, play: st.play });
+  }
+
+  // プレイ時間帯 / スタイル 選択肢 (i18n key suffix)。
+  // スタイルは一般語彙 10 種 (2026-06-07 兄貴指定: PvE/PvP/共闘/探索/試練/演奏/ハウジング/SS勢/エンジョイ勢/ガチ勢)。
+  // 旧 key (encounter 等) が settings に残っていても T lookup 失敗で表示 skip = 安全
+  const _PLAY_TIME_KEYS = ['wdDay', 'wdNight', 'weDay', 'weNight', 'irregular'];
+  const _PLAY_STYLE_KEYS = ['pve', 'pvp', 'coop', 'explore', 'trial', 'music', 'housing', 'ss', 'enjoy', 'gachi'];
+
+  // ── 背景画像読込 (file/blob → 寸法計測 + 必要なら縮小) ────────────
+  function _readBgBlob(blob, st, onDone) {
+    const T = window.T || {};
+    if (!blob || !/^image\//.test(blob.type)) {
+      showToast(T.cardBgInvalid ?? '画像ファイルを読み込めませんでした', { error: true });
+      return;
+    }
+    if (blob.size > _BG_MAX_BYTES) {
+      showToast(T.cardBgTooLarge ?? '画像が大きすぎます (12MB まで)', { error: true });
+      return;
+    }
+    const objUrl = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = () => {
+      let { naturalWidth: w, naturalHeight: h } = img;
+      let url;
+      if (Math.max(w, h) > _BG_MAX_EDGE) {
+        const k = _BG_MAX_EDGE / Math.max(w, h);
+        const cv = document.createElement('canvas');
+        cv.width = Math.round(w * k); cv.height = Math.round(h * k);
+        cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+        url = cv.toDataURL('image/jpeg', 0.92);
+        w = cv.width; h = cv.height;
+      } else {
+        const reader = new FileReader();
+        reader.onload = () => {
+          URL.revokeObjectURL(objUrl);
+          st.bg = { url: reader.result, w, h, x: 0, y: 0, scale: 1 };
+          onDone();
+        };
+        reader.readAsDataURL(blob);
+        return;
+      }
+      URL.revokeObjectURL(objUrl);
+      st.bg = { url, w, h, x: 0, y: 0, scale: 1 };
+      onDone();
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(objUrl);
+      showToast(T.cardBgInvalid ?? '画像ファイルを読み込めませんでした', { error: true });
+    };
+    img.src = objUrl;
+  }
+
+  // X ポスト定型文 (2026-06-07 兄貴指定: URL + hashtag のみ、 文言は各々の趣向に任せる)
+  const _POST_TEXT = WWM_SITE_URL + '\n#風燕伝 #WhereWindsMeet #燕云十六声 #연운 #WWM';
+
+  // ── 生成コア (off-screen #export-card → html2canvas ×2 → canvas) ──
+  // 「画像を保存」「𝕏 にポスト」 の両 btn が共用 — どちらを押しても生成から実行 (2026-06-07 兄貴提案)
+  async function _renderCanvas(model, st) {
+    const holder = document.getElementById('export-card');
+    holder.style.cssText = 'display:block;position:fixed;left:-99999px;top:0;width:' + CARD_W + 'px;height:' + CARD_H + 'px;overflow:hidden;';
+    holder.innerHTML = '';
+    holder.appendChild(_buildCardEl(model, st));
+    try {
+      try { await document.fonts.ready; } catch (_) {}
+      await Promise.all([...holder.querySelectorAll('img')].map(im => im.decode().catch(() => {})));
+      await new Promise(r => setTimeout(r, 80));
+      return await html2canvas(holder.firstElementChild, {
+        scale: 2, logging: false, backgroundColor: '#07060a', useCORS: true, imageTimeout: 0
       });
-    }, 200);
-  });
-}
+    } finally {
+      holder.style.cssText = 'display:none;';
+      holder.innerHTML = '';
+    }
+  }
+  // btn busy 化 + 生成 + 後処理 (offline/error guard 共通)
+  async function _withCanvas(model, st, btn, after) {
+    const T = window.T || {};
+    if (typeof html2canvas === 'undefined') {
+      showToast(T.errExportOffline ?? '画像書き出しにはオンライン接続が必要です', { error: true });
+      return;
+    }
+    const orig = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = T.cardGenerating ?? '生成中…';
+    try {
+      const canvas = await _renderCanvas(model, st);
+      await after(canvas);
+    } catch (err) {
+      console.error('Export error:', err);
+      showToast(T.errExportFail ?? '画像書き出しに失敗しました', { error: true });
+    } finally {
+      btn.disabled = false;
+      btn.textContent = orig;
+    }
+  }
+  function _cardFileName(model) {
+    const safeName = String(model.name).replace(/[^\w一-鿿぀-ヿ]/g, '_');
+    return 'WWM-' + safeName + '-' + (model.score ?? 0) + '-' + model.fileStamp + '.png';
+  }
+
+  // ── カード生成 modal ──────────────────────────────────────────────
+  async function _openCardModal() {
+    const T = window.T || {};
+    const st = Object.assign(_loadSettings(), { bg: { url: '', w: 0, h: 0, x: 0, y: 0, scale: 1 } });
+    // mobile = share sheet で完結。 PC は canShare=true でも share sheet が X に繋がらないため常に intent 経路
+    const _isMobileUA = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)
+      || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform)); // iPadOS desktop 擬装
+
+    const m = document.createElement('div');
+    m.className = 'wwm-modal-backdrop';
+    m.innerHTML =
+      '<div class="wwm-modal wwm-card-modal">'
+      + '<div class="wwm-modal-header"><h2>' + _esc(T.cardModalTitle ?? 'キャラクターカード生成')
+      // EN は title 自体が英語 = sub 重複するため非表示
+      +   ((window.currentLang || 'ja') === 'en' ? '' : '<span class="wwm-card-modal-sub">CHARACTER CARD</span>') + '</h2>'
+      +   '<button class="wwm-modal-close" aria-label="' + _esc(T.close ?? '閉じる') + '">×</button></div>'
+      + '<div class="wwm-modal-body wwm-card-modal-body">'
+      +   '<div class="wwm-card-left">'
+      +     '<div class="wwm-card-stage" id="wwmCardStage"><div class="wwm-card-scalebox" id="wwmCardScale">'
+      +       '<div class="wwm-card wwm-card-loading-ph"><div class="wwm-card-bg wwm-card-cloth"></div></div>'
+      +     '</div></div>'
+      +     '<p class="wwm-card-stage-hint">' + _esc(T.cardBgHint ?? 'ドロップ / 貼り付け (Ctrl+V) / ドラッグで位置調整') + '</p>'
+      // 𝕏 Ctrl+V ガイドは preview 下に常設 (PC のみ — mobile は share sheet で完結)
+      +     (_isMobileUA ? '' : '<p class="wwm-card-stage-hint wwm-card-post-hint">'
+      +       _esc(T.cardPostHint ?? '𝕏 にポスト: ポスト画面が開いたら画像を Ctrl+V で貼り付け（自動コピーされます）') + '</p>')
+      +   '</div>'
+      +   '<div class="wwm-card-controls">'
+      +     '<div class="wwm-card-ctl-section" role="radiogroup" aria-label="' + _esc(T.cardTplSection ?? 'テンプレート') + '">'
+      +       '<div class="wwm-card-ctl-title">' + _esc(T.cardTplSection ?? 'テンプレート') + '</div>'
+      +       '<div class="wwm-card-tpl-row">'
+      +         '<button class="wwm-card-tpl-btn" data-tpl="bukaku" role="radio"><b>武格</b><i>'
+      +           _esc(T.cardTplBukaku ?? 'スコア大判') + '</i></button>'
+      +         '<button class="wwm-card-tpl-btn" data-tpl="gungi" role="radio"><b>軍議</b><i>'
+      +           _esc(T.cardTplGungi ?? 'データ詳細') + '</i></button>'
+      +       '</div>'
+      +       '<div class="wwm-card-align-row" id="wwmCardAlignRow" role="radiogroup" aria-label="'
+      +         _esc(T.cardAlignLabel ?? '情報の位置') + '">'
+      +         '<span>' + _esc(T.cardAlignLabel ?? '情報の位置') + '</span>'
+      +         '<button class="wwm-card-ctl-btn wwm-card-align-btn" data-align="left" role="radio">'
+      +           _esc(T.cardAlignLeft ?? '左') + '</button>'
+      +         '<button class="wwm-card-ctl-btn wwm-card-align-btn" data-align="right" role="radio">'
+      +           _esc(T.cardAlignRight ?? '右') + '</button>'
+      +       '</div>'
+      +       '<div class="wwm-card-align-row" role="radiogroup" aria-label="' + _esc(T.cardPanelLabel ?? 'パネル') + '">'
+      +         '<span>' + _esc(T.cardPanelLabel ?? 'パネル') + '</span>'
+      +         '<button class="wwm-card-ctl-btn wwm-card-panel-btn" data-panel="dark" role="radio">'
+      +           _esc(T.cardPanelDark ?? '墨') + '</button>'
+      +         '<button class="wwm-card-ctl-btn wwm-card-panel-btn" data-panel="light" role="radio">'
+      +           _esc(T.cardPanelLight ?? '紙') + '</button>'
+      +       '</div>'
+      +     '</div>'
+      +     '<div class="wwm-card-ctl-section">'
+      +       '<div class="wwm-card-ctl-title">' + _esc(T.cardBgSection ?? '背景') + '</div>'
+      +       '<div class="wwm-card-bg-row">'
+      +         '<button class="wwm-card-ctl-btn" id="wwmCardBgPick">' + _esc(T.cardBgPick ?? '画像を選ぶ') + '</button>'
+      +         '<button class="wwm-card-ctl-btn" id="wwmCardBgClear" disabled>' + _esc(T.cardBgClear ?? 'クリア') + '</button>'
+      +         '<input type="file" id="wwmCardBgFile" accept="image/*" hidden>'
+      +       '</div>'
+      +       '<label class="wwm-card-zoom-row"><span>' + _esc(T.cardBgZoom ?? 'ズーム') + '</span>'
+      +         '<input type="range" id="wwmCardBgZoom" min="1" max="3" step="0.05" value="1" disabled '
+      +           'aria-label="' + _esc(T.cardBgZoom ?? 'ズーム') + '"></label>'
+      +     '</div>'
+      +     '<div class="wwm-card-ctl-section">'
+      +       '<div class="wwm-card-ctl-title">' + _esc(T.cardItemsSection ?? '表示項目') + '</div>'
+      +       '<div class="wwm-card-toggles">'
+      +         _cardToggle('donut', T.donutDmgCenter ?? '勁率', st)
+      +         _cardToggle('stats', T.cardItemStats ?? '基礎値', st)
+      +         _cardToggle('primary', T.cardItemPrimary ?? '主要ステータス', st)
+      +         _cardToggle('kongfu', T.cardItemKongfu ?? '武術', st)
+      +         _cardToggle('xinfa', T.cardItemXinfa ?? '心法', st)
+      +         _cardToggle('qishu', T.cardItemQishu ?? '奇術', st)
+      +       '</div>'
+      +     '</div>'
+      +     '<div class="wwm-card-ctl-section">'
+      +       '<div class="wwm-card-ctl-title">' + _esc(T.cardPlaySection ?? 'プレイ情報') + '</div>'
+      +       '<div class="wwm-card-play-label">' + _esc(T.cardPlayTimeLabel ?? 'プレイ時間帯') + '</div>'
+      +       '<div class="wwm-card-play-chips" data-group="time">'
+      +         _PLAY_TIME_KEYS.map(k => _playChipBtn('time', k, T['cardTime_' + k] ?? k, st)).join('')
+      +       '</div>'
+      +       '<div class="wwm-card-play-label">' + _esc(T.cardPlayStyleLabel ?? 'プレイスタイル') + '</div>'
+      +       '<div class="wwm-card-play-chips" data-group="style">'
+      +         _PLAY_STYLE_KEYS.map(k => _playChipBtn('style', k, T['cardStyle_' + k] ?? k, st)).join('')
+      +       '</div>'
+      +     '</div>'
+      +     '<div class="wwm-card-actions">'
+      +       '<button class="wwm-card-generate" id="wwmCardGenerate" disabled>'
+      +         _esc(T.cardSave ?? '画像を保存') + '</button>'
+      +       '<button class="wwm-card-post-x" id="wwmCardPostX" disabled>'
+      +         _esc(T.cardPostX ?? '𝕏 にポスト') + '</button>'
+      +     '</div>'
+      +   '</div>'
+      + '</div></div>';
+    document.body.appendChild(m);
+
+    const stage = m.querySelector('#wwmCardStage');
+    const scaleBox = m.querySelector('#wwmCardScale');
+    const genBtn = m.querySelector('#wwmCardGenerate');
+    const zoomEl = m.querySelector('#wwmCardBgZoom');
+    const clearBtn = m.querySelector('#wwmCardBgClear');
+    const fileEl = m.querySelector('#wwmCardBgFile');
+
+    // ── close 経路 (×, backdrop, Esc は modal-helpers が backdrop remove) ──
+    const onPaste = (e) => {
+      const item = [...(e.clipboardData?.items || [])].find(i => i.type.startsWith('image/'));
+      if (item) { e.preventDefault(); _readBgBlob(item.getAsFile(), st, onBgChanged); }
+    };
+    const cleanup = () => window.removeEventListener('paste', onPaste);
+    const close = () => { cleanup(); m.remove(); };
+    m.querySelector('.wwm-modal-close').addEventListener('click', close);
+    m.addEventListener('click', e => { if (e.target === m) close(); });
+    // Esc 経路 (modal-helpers 全 backdrop 共通) は DOM remove のみ → paste listener を MutationObserver 任せにせず保険 cleanup
+    const mo = new MutationObserver(() => { if (!document.body.contains(m)) { cleanup(); mo.disconnect(); } });
+    mo.observe(document.body, { childList: true });
+    window.addEventListener('paste', onPaste);
+
+    // ── preview scale fit ──
+    const fit = () => {
+      const w = stage.clientWidth || 1;
+      scaleBox.style.transform = 'scale(' + (w / CARD_W) + ')';
+    };
+    const ro = new ResizeObserver(fit);
+    ro.observe(stage);
+    fit();
+
+    // ── model 構築 (icon dataURL 化込み) → 初回 render ──
+    const model = await _buildCardModel();
+    if (!document.body.contains(m)) return; // 構築中に閉じられた
+    if (!model) { close(); return; }
+
+    // bookmarklet 旧版検出 (_bmVer 刻印 < 現行) → 再登録案内 notice
+    if ((WWMState.roleInfo?._bmVer || 0) < (window.WWM_BM_VERSION || 1)) {
+      const ctl = m.querySelector('.wwm-card-controls');
+      const n = document.createElement('p');
+      n.className = 'wwm-bm-notice';
+      n.textContent = T.bmOutdatedNotice
+        ?? 'ブックマークレットが旧版です — 再登録 + 再インポートで武術・流派・奇術アイコンがカードに反映されます';
+      ctl.insertBefore(n, ctl.firstChild);
+    }
+
+    let cardEl = null;
+    const render = () => {
+      cardEl = _buildCardEl(model, st);
+      scaleBox.innerHTML = '';
+      scaleBox.appendChild(cardEl);
+      stage.classList.toggle('has-bg', !!st.bg.url);
+    };
+    const syncCtl = () => {
+      m.querySelectorAll('.wwm-card-tpl-btn').forEach(b => {
+        const on = b.dataset.tpl === st.tpl;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-checked', on ? 'true' : 'false');
+      });
+      // 情報位置 (align) は 武格のみ
+      const alignRow = m.querySelector('#wwmCardAlignRow');
+      if (alignRow) alignRow.hidden = st.tpl !== 'bukaku';
+      m.querySelectorAll('.wwm-card-align-btn').forEach(b => {
+        const on = b.dataset.align === st.align;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-checked', on ? 'true' : 'false');
+      });
+      m.querySelectorAll('.wwm-card-panel-btn').forEach(b => {
+        const on = b.dataset.panel === st.panel;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-checked', on ? 'true' : 'false');
+      });
+      // 武格 = 基礎値/主要ステ 非掲載、 奇術 = data 無し (旧 import) なら disable
+      m.querySelectorAll('.wwm-card-toggle input').forEach(inp => {
+        const k = inp.dataset.item;
+        const na = (st.tpl === 'bukaku' && (k === 'stats' || k === 'primary'))
+          || (k === 'qishu' && !model.qishu.length);
+        inp.disabled = na;
+        inp.closest('.wwm-card-toggle').classList.toggle('na', na);
+      });
+      m.querySelectorAll('.wwm-card-play-chip').forEach(b => {
+        const on = (st.play[b.dataset.group] || []).includes(b.dataset.key);
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      const hasBg = !!st.bg.url;
+      zoomEl.disabled = !hasBg;
+      clearBtn.disabled = !hasBg;
+      zoomEl.value = st.bg.scale;
+    };
+    const onBgChanged = () => { syncCtl(); render(); };
+    render(); syncCtl();
+    genBtn.disabled = false;
+    m.querySelector('#wwmCardPostX').disabled = false;
+
+    // ── controls ──
+    m.querySelectorAll('.wwm-card-tpl-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        st.tpl = b.dataset.tpl; _saveSettings(st); syncCtl(); render();
+      });
+    });
+    m.querySelectorAll('.wwm-card-align-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        st.align = b.dataset.align === 'right' ? 'right' : 'left';
+        _saveSettings(st); syncCtl(); render();
+      });
+    });
+    m.querySelectorAll('.wwm-card-panel-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        st.panel = b.dataset.panel === 'light' ? 'light' : 'dark';
+        _saveSettings(st); syncCtl(); render();
+      });
+    });
+    m.querySelectorAll('.wwm-card-play-chip').forEach(b => {
+      b.addEventListener('click', () => {
+        const arr = st.play[b.dataset.group] || (st.play[b.dataset.group] = []);
+        const i = arr.indexOf(b.dataset.key);
+        if (i >= 0) arr.splice(i, 1); else arr.push(b.dataset.key);
+        _saveSettings(st); syncCtl(); render();
+      });
+    });
+    m.querySelectorAll('.wwm-card-toggle input').forEach(inp => {
+      inp.checked = !!st.items[inp.dataset.item];
+      inp.addEventListener('change', () => {
+        st.items[inp.dataset.item] = inp.checked; _saveSettings(st); render();
+      });
+    });
+    m.querySelector('#wwmCardBgPick').addEventListener('click', () => fileEl.click());
+    fileEl.addEventListener('change', () => {
+      if (fileEl.files?.[0]) _readBgBlob(fileEl.files[0], st, onBgChanged);
+      fileEl.value = '';
+    });
+    clearBtn.addEventListener('click', () => {
+      st.bg = { url: '', w: 0, h: 0, x: 0, y: 0, scale: 1 };
+      onBgChanged();
+    });
+    zoomEl.addEventListener('input', () => {
+      st.bg.scale = parseFloat(zoomEl.value) || 1;
+      _applyBgTransform(cardEl?.querySelector('.wwm-card-bgimg'), st);
+    });
+
+    // drag & drop
+    stage.addEventListener('dragover', e => { e.preventDefault(); stage.classList.add('dropping'); });
+    stage.addEventListener('dragleave', () => stage.classList.remove('dropping'));
+    stage.addEventListener('drop', e => {
+      e.preventDefault(); stage.classList.remove('dropping');
+      const f = e.dataTransfer?.files?.[0];
+      if (f) _readBgBlob(f, st, onBgChanged);
+    });
+
+    // 背景 pan (pointer drag、 preview scale 換算で card px へ)
+    let drag = null;
+    stage.addEventListener('pointerdown', e => {
+      if (!st.bg.url) return;
+      e.preventDefault(); // native drag/text selection 抑止 (青選択バグ対策)
+      drag = { x: e.clientX, y: e.clientY, bx: st.bg.x, by: st.bg.y };
+      stage.classList.add('dragging');
+      stage.setPointerCapture(e.pointerId);
+    });
+    stage.addEventListener('pointermove', e => {
+      if (!drag) return;
+      const k = CARD_W / (stage.clientWidth || 1);
+      st.bg.x = drag.bx + (e.clientX - drag.x) * k;
+      st.bg.y = drag.by + (e.clientY - drag.y) * k;
+      _applyBgTransform(cardEl?.querySelector('.wwm-card-bgimg'), st);
+    });
+    const endDrag = () => { drag = null; stage.classList.remove('dragging'); };
+    stage.addEventListener('pointerup', endDrag);
+    stage.addEventListener('pointercancel', endDrag);
+    // wheel zoom (背景あり時のみ)
+    stage.addEventListener('wheel', e => {
+      if (!st.bg.url) return;
+      e.preventDefault();
+      st.bg.scale = Math.min(3, Math.max(1, st.bg.scale + (e.deltaY < 0 ? 0.08 : -0.08)));
+      zoomEl.value = st.bg.scale;
+      _applyBgTransform(cardEl?.querySelector('.wwm-card-bgimg'), st);
+    }, { passive: false });
+
+    // ── 保存 / 𝕏 ポスト — 両 btn とも押下で生成から実行 (DL 不要でポスト可) ──
+    const postBtn = m.querySelector('#wwmCardPostX');
+
+    // 画像を保存 = 生成 → PNG DL
+    genBtn.addEventListener('click', () => _withCanvas(model, st, genBtn, async (canvas) => {
+      const link = document.createElement('a');
+      link.download = _cardFileName(model);
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      if (T.toastExported) showToast(T.toastExported);
+    }));
+
+    // 𝕏 にポスト = 生成 → mobile: share sheet (画像添付) / PC: 画像コピー + intent
+    postBtn.addEventListener('click', () => _withCanvas(model, st, postBtn, async (canvas) => {
+      const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+      if (!blob) throw new Error('toBlob failed');
+      const file = new File([blob], _cardFileName(model), { type: 'image/png' });
+      if (_isMobileUA && navigator.canShare && navigator.canShare({ files: [file] })) {
+        try { await navigator.share({ files: [file], text: _POST_TEXT }); return; } catch (e) {
+          if (e && e.name === 'AbortError') return; // ユーザーキャンセル
+        }
+      }
+      // PC: 画像をクリップボードへ → intent (定型文入り) を開く → Ctrl+V 案内
+      let copied = false;
+      try {
+        await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+        copied = true;
+      } catch (_) {}
+      window.open('https://x.com/intent/post?text=' + encodeURIComponent(_POST_TEXT), '_blank', 'noopener');
+      showToast(copied
+        ? (T.cardPostCopied ?? '画像をコピーしました — 投稿欄に Ctrl+V で貼り付けてください')
+        : (T.cardPostCopyFail ?? '画像を自動コピーできませんでした — 「画像を保存」 した PNG を添付してください'),
+        copied ? undefined : { error: true });
+    }));
+  }
+
+  function _cardToggle(key, label, st) {
+    return '<label class="wwm-card-toggle"><input type="checkbox" data-item="' + key + '"'
+      + (st.items[key] ? ' checked' : '') + '><span>' + _esc(label) + '</span></label>';
+  }
+  function _playChipBtn(group, key, label, st) {
+    const on = (st.play?.[group] || []).includes(key);
+    return '<button class="wwm-card-play-chip' + (on ? ' active' : '') + '" data-group="' + group
+      + '" data-key="' + key + '" aria-pressed="' + (on ? 'true' : 'false') + '">' + _esc(label) + '</button>';
+  }
+
+  // ── entry (EXPORT btn onclick) ────────────────────────────────────
+  window.exportImage = function exportImage() {
+    const T = window.T || {};
+    // SHARE Build mode 中は EXPORT 抑止 (他人ビルドの画像拡散回避)
+    if (WWMState.isShared) {
+      showToast(T.sharedBuildExportBlocked ?? '閲覧モード中: EXPORT は無効化されています', { error: true });
+      return;
+    }
+    if (!WWMState.roleInfo) {
+      showToast(T.importPrompt ?? '上部「IMPORT」ボタンからデータを取り込んでください', { error: true });
+      return;
+    }
+    if (document.querySelector('.wwm-card-modal')) return; // 二重起動 guard
+    _openCardModal();
+  };
+})();

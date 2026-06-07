@@ -4,6 +4,10 @@
 const IMPORT_STORAGE_KEY = 'wwm_last_import_v1';
 const IMPORT_STATE_KEY = 'wwm_last_state_v1';
 const IMPORT_HASH_PREFIX = '#import=';
+// bookmarklet バージョン (bmSrc に _bmVer として刻印 — bookmarklet 拡張時 +1 すると旧版検出が自動で効く)
+// v1 = 2026-06-07: 武術/流派/奇術 icon base64 取込 対応版
+const WWM_BM_VERSION = 1;
+window.WWM_BM_VERSION = WWM_BM_VERSION;
 
 // ── base64url decode ────────────────────────────────────────────
 function _b64urlDecode(s) {
@@ -43,6 +47,11 @@ function openSetupModal() {
 
   function renderIntro() {
     const last = getLastImportSummary();
+    // 直前 import が旧 bookmarklet 産なら再登録案内 (新規ユーザーには出さない)
+    const storedVer = _loadStored()?.data?._bmVer || 0;
+    const bmNotice = (last && storedVer < WWM_BM_VERSION)
+      ? `<p class="wwm-bm-notice">${(window.T && T.bmOutdatedNotice) || 'ブックマークレットが旧版です — 再登録 + 再インポートで武術・流派・奇術アイコンがカードに反映されます'}</p>`
+      : '';
     const lastHtml = last
       ? `<div class="wwm-last-import">
            <strong data-i18n="importLastLabel">${(window.T && T.importLastLabel) || '直前のインポート'}:</strong>
@@ -54,10 +63,11 @@ function openSetupModal() {
          </div>`
       : `<p class="wwm-muted" data-i18n="importNoHistory">${(window.T && T.importNoHistory) || '直前のインポートはありません'}</p>`;
     const calcUrl = location.origin + location.pathname.replace(/[^/]*$/, '');
-    const bmSrc = "(async()=>{const C='" + calcUrl + "',H='www.wherewindsmeetgame.com',A='https://s2.easebar.com/78ae9d90792a3e9b/role/roleInfo',T=10000;if(location.host!==H){alert('公式ツール ('+H+') で実行してください');return;}const t=document.createElement('div');t.style.cssText='position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#000c;color:#fff;padding:12px 20px;border-radius:6px;z-index:99999;font:14px sans-serif';t.textContent='WWM-METRICS: 読込中...';document.body.appendChild(t);const i2b=async u=>{try{const r=await fetch(u);const bl=await r.blob();return await new Promise(rs=>{const f=new FileReader();f.onload=()=>rs(f.result);f.onerror=()=>rs('');f.readAsDataURL(bl);});}catch(_){return '';}};try{const k=(document.cookie.match(/(?:^|;\\s*)token=([^;]+)/)||[])[1];if(!k)throw new Error('未ログインです');const c=new AbortController,d=setTimeout(()=>c.abort(),T);const r=await fetch(A,{headers:{access_token:k},credentials:'include',signal:c.signal});clearTimeout(d);if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();if(!j.data)throw new Error(j.msg||'API err');try{const av=document.querySelector('img[src*=\"head/images\"]')?.src;if(av){j.data._avatarUrl=av;t.textContent='アバター取得中...';const b64=await i2b(av);if(b64)j.data._avatarBase64=b64;}}catch(_){}try{const xi=[...document.querySelectorAll('.icon-item .icon img.icon')].map(i=>i.src).filter(s=>s&&s.includes('xinfa/images'));if(xi.length){j.data._xinfaIcons=xi;t.textContent='心法アイコン取得中...';j.data._xinfaIconsBase64=await Promise.all(xi.map(u=>i2b(u)));}}catch(_){}const s=JSON.stringify(j.data),b=btoa(unescape(encodeURIComponent(s))).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');t.textContent='転送中...';var u=C+'#import='+b;if(/Mobi|Android|iPhone|iPad|iPod|Touch/i.test(navigator.userAgent)||screen.width<700){location.href=u;return;}window.open(u,'_blank')||(location.href=u);t.textContent='完了';setTimeout(()=>{t.remove();try{window.close();}catch(_){}},800);}catch(e){t.textContent='エラー: '+e.message;t.style.background='#c00';setTimeout(()=>t.remove(),5000);}})();";
+    const bmSrc = "(async()=>{const C='" + calcUrl + "',H='www.wherewindsmeetgame.com',A='https://s2.easebar.com/78ae9d90792a3e9b/role/roleInfo',T=10000;if(location.host!==H){alert('公式ツール ('+H+') で実行してください');return;}const t=document.createElement('div');t.style.cssText='position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#000c;color:#fff;padding:12px 20px;border-radius:6px;z-index:99999;font:14px sans-serif';t.textContent='WWM-METRICS: 読込中...';document.body.appendChild(t);const i2b=async u=>{try{const r=await fetch(u);const bl=await r.blob();return await new Promise(rs=>{const f=new FileReader();f.onload=()=>rs(f.result);f.onerror=()=>rs('');f.readAsDataURL(bl);});}catch(_){return '';}};const shr=async u=>{try{const rr=await fetch(u);const bl=await rr.blob();const im=await createImageBitmap(bl);const sc=Math.min(1,96/Math.max(im.width,im.height));const cv=document.createElement('canvas');cv.width=Math.round(im.width*sc);cv.height=Math.round(im.height*sc);cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);return cv.toDataURL('image/png');}catch(_){return await i2b(u);}};try{const k=(document.cookie.match(/(?:^|;\\s*)token=([^;]+)/)||[])[1];if(!k)throw new Error('未ログインです');const c=new AbortController,d=setTimeout(()=>c.abort(),T);const r=await fetch(A,{headers:{access_token:k},credentials:'include',signal:c.signal});clearTimeout(d);if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();if(!j.data)throw new Error(j.msg||'API err');j.data._bmVer=" + WWM_BM_VERSION + ";try{const av=document.querySelector('img[src*=\"head/images\"]')?.src;if(av){j.data._avatarUrl=av;t.textContent='アバター取得中...';const b64=await i2b(av);if(b64)j.data._avatarBase64=b64;}}catch(_){}try{const xi=[...document.querySelectorAll('.icon-item .icon img.icon')].map(i=>i.src).filter(s=>s&&s.includes('xinfa/images'));if(xi.length){j.data._xinfaIcons=xi;t.textContent='心法アイコン取得中...';j.data._xinfaIconsBase64=await Promise.all(xi.map(u=>i2b(u)));}}catch(_){}try{const kids=[j.data.kongfuMain,j.data.kongfuSub].filter(Boolean);if(kids.length){t.textContent='武術アイコン取得中...';let bp='/pc/qt/20251203102905/';try{const br=await fetch('/m/zt/20251121182818/js/index-76a5ce60.js');const bt=await br.text();const bm=bt.match(/\\/pc\\/qt\\/(\\d{14})\\//);if(bm)bp='/pc/qt/'+bm[1]+'/';}catch(_){}const dec=x=>{const rv=[...x].reverse().join('');let n='';for(let i=0;i<rv.length;i+=100){const c=rv.substr(i,100);n+=c.substr(0,c.length-1);}return atob(n);};const kj=JSON.parse(dec(await fetch(bp+'data/kongfu/kongfu.txt',{credentials:'omit'}).then(r=>r.text())));const ki={},li={};for(const kid of kids){const e=kj[kid]||{};if(e.pic_url){const b=await shr(e.pic_url);if(b)ki[kid]=b;}if(e.liupai_pic_url){const b=await i2b(e.liupai_pic_url);if(b)li[kid]=b;}}if(Object.keys(ki).length)j.data._kongfuIconsBase64=ki;if(Object.keys(li).length)j.data._liupaiIconsBase64=li;}}catch(_){}try{const qi=[...document.querySelectorAll('.qs-list img')].map(i=>i.src).filter(s=>s&&s.includes('qishu/images'));if(qi.length){t.textContent='奇術アイコン取得中...';j.data._qishuIcons=qi;j.data._qishuIconsBase64=await Promise.all(qi.map(u=>shr(u)));}}catch(_){}try{const lp={};document.querySelectorAll('img').forEach(i=>{const u=i.src||'';if(u.includes('/liupai_pic/')){const fn=u.split('/').pop().split('?')[0];if(!lp[fn])lp[fn]=u;}});const fns=Object.keys(lp);if(fns.length){t.textContent='流派バッジ取得中...';const lb={};for(const fn of fns){const b=await i2b(lp[fn]);if(b)lb[fn]=b;}j.data._liupaiPicsBase64=lb;}}catch(_){}const s=JSON.stringify(j.data),b=btoa(unescape(encodeURIComponent(s))).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');t.textContent='転送中...';var u=C+'#import='+b;if(/Mobi|Android|iPhone|iPad|iPod|Touch/i.test(navigator.userAgent)||screen.width<700){location.href=u;return;}window.open(u,'_blank')||(location.href=u);t.textContent='完了';setTimeout(()=>{t.remove();try{window.close();}catch(_){}},800);}catch(e){t.textContent='エラー: '+e.message;t.style.background='#c00';setTimeout(()=>t.remove(),5000);}})();";
     const bmUrl = 'javascript:' + encodeURIComponent(bmSrc);
     const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
     body.innerHTML = `
+      ${bmNotice}
       <p data-i18n="importSetupIntro">${(window.T && T.importSetupIntro) || '公式データツールのデータをこの計算ツールに取り込むには、ブックマークレットの設定が必要です。'}</p>
       <p data-i18n="importUsageHint">${(window.T && T.importUsageHint) || '設定完了後: 公式ツールを開いてブックマークレットをクリックしてください。'}</p>
       <details class="wwm-setup-collapse">
@@ -161,7 +171,12 @@ async function openPreviewModal(data, importedAt, savedState) {
 
   function renderStep1() {
     const detailHtml = renderPreviewDetail(summary, data);
+    // 受信 data が旧 bookmarklet 産なら preview にも再登録案内
+    const bmNotice = ((data?._bmVer || 0) < WWM_BM_VERSION)
+      ? `<p class="wwm-bm-notice">${(window.T && T.bmOutdatedNotice) || 'ブックマークレットが旧版です — 再登録 + 再インポートで武術・流派・奇術アイコンがカードに反映されます'}</p>`
+      : '';
     body.innerHTML = `
+      ${bmNotice}
       <div class="wwm-preview-summary">${detailHtml}</div>
       <div class="wwm-btn-row" style="margin-top:16px;">
         <button class="wwm-btn-primary" id="wwmNextBtn">${(window.T && T.importNextBtn) || '次へ'}</button>

@@ -252,16 +252,6 @@ a.icon-btn { text-decoration: none; }
 }
 .icon-btn.export-btn {
   color: var(--vermilion-bright); border-color: var(--c-icon-btn-export-btn-border);
-  opacity: 0.55;
-  cursor: not-allowed;
-  position: relative;
-}
-.icon-btn.export-btn::after {
-  content: '🚧';
-  position: absolute;
-  top: -6px; right: -4px;
-  font-size: var(--text-sm);
-  pointer-events: none;
 }
 .icon-btn.import-btn {
   color: var(--gold-bright); border-color: var(--gold-deep);
