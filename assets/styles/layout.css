@@ -369,10 +369,12 @@ html.wwm-view-sidebar body .wwm-app-body { padding: var(--space-2); }
   body.wwm-layout-active .wwm-app-body::-webkit-scrollbar-track { background: transparent; }
   /* mobile時 sidebar 非表示 rule は styles-components.css の overlay rule 直前へ
      co-locate move 済 (2026-06-05 Step 1 hotfix: overlay display:block との layer flip 根治) */
-  /* mobile時 footer は normal flow に戻す (PC は position:fixed で 画面下常駐) */
+  /* mobile時 footer は normal flow に戻す (PC は position:fixed で 画面下常駐)。
+     height auto = 著作権表記 (.wwm-footer-copy) の 2 行目を clip しない (2026-06-08) */
   body.wwm-layout-active .wwm-footer {
     position: static;
     z-index: auto;
+    height: auto;
     padding: calc(8px + var(--safe-bottom)) 12px 8px;
   }
   /* ─── Phase 3 改 (critique P2 / 兄貴指摘 2026-06-06): preset-bar wrap 方式 ───

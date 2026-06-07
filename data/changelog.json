@@ -1,6 +1,31 @@
 {
-  "current": "2.0.1",
+  "current": "2.0.2",
   "entries": [
+    {
+      "version": "2.0.2",
+      "date": "2026-06-08",
+      "items": [
+        {
+          "featured": true,
+          "ja": "【OCR取込 追加】 調律/定音オプションのOCR取込機能の追加 (4言語対応)。 武具対照パネルの 📷 ボタン / Ctrl+V 貼付け / ドラッグ&ドロップ で装備詳細画面のスクショから 装備Lv と調律/定音を自動入力。 使い方は 📷 横の ? ガイド参照。",
+          "en": "[OCR Import Added] Added OCR import for tune/attune affixes (all 4 languages). Use the 📷 button / Ctrl+V paste / drag & drop in the gear comparison panel to auto-fill equipment Lv and affixes from an equipment-detail screenshot. See the ? guide next to 📷.",
+          "zh": "【OCR导入 追加】 新增定音/调律词条的截图OCR导入功能 (支持4种语言)。 在武具对照面板使用 📷 按钮 / Ctrl+V 粘贴 / 拖放、 即可从装备详情截图自动填入装备等级与定音/调律。 用法参见 📷 旁的 ? 指南。",
+          "ko": "【OCR 가져오기 추가】 정음/조율 옵션의 스크린샷 OCR 가져오기 기능 추가 (4개 언어 지원). 무구대조 패널의 📷 버튼 / Ctrl+V 붙여넣기 / 드래그&드롭으로 장비 상세 화면 스크린샷에서 장비 레벨과 정음/조율을 자동 입력. 사용법은 📷 옆의 ? 가이드 참조."
+        },
+        {
+          "ja": "【キャラクターカード生成 追加】 EXPORT からキャラクターカード生成機能を追加。 背景画像/テンプレート2種 (武格・軍議)/墨・紙パネル/表示項目/プレイ情報 を選んで PNG 出力、 𝕏 ポスト対応。",
+          "en": "[Character Card Added] Added character card generation via EXPORT. Choose background image, 2 templates (Index / Detail), ink/paper panel, display items, and play info — output as PNG with X (Twitter) posting support.",
+          "zh": "【角色卡片生成 追加】 EXPORT 新增角色卡片生成功能。 可选择背景图片 / 2种模板 (武格·军议) / 墨·纸面板 / 显示项目 / 游玩信息、 输出 PNG 并支持发布到 𝕏。",
+          "ko": "【캐릭터 카드 생성 추가】 EXPORT 에서 캐릭터 카드 생성 기능 추가. 배경 이미지 / 템플릿 2종 (지수·상세) / 먹·종이 패널 / 표시 항목 / 플레이 정보를 선택해 PNG 출력, 𝕏 포스트 지원."
+        },
+        {
+          "ja": "【中国語/韓国語表記の修正】 ステータス/オプション名をゲーム内表記に統一 (鸣金/裂石/牵丝/破竹、 精准率、 武林造诣、 무림 조예、 찰과상 전환율 等)。",
+          "en": "[zh/ko Label Fixes] Unified stat/affix labels with in-game terminology (鸣金/裂石/牵丝/破竹, 精准率, 武林造诣, 무림 조예, 찰과상 전환율, etc.).",
+          "zh": "【中文/韩文表述修正】 状态/词条名称统一为游戏内表述 (鸣金/裂石/牵丝/破竹、 精准率、 武林造诣 等)。",
+          "ko": "【중국어/한국어 표기 수정】 스탯/옵션 명칭을 게임 내 표기로 통일 (명금/열석/견사/파죽, 정확도, 무림 조예, 찰과상 전환율 등)."
+        }
+      ]
+    },
     {
       "version": "2.0.1",
       "date": "2026-06-01",
@@ -35,7 +60,7 @@
           "ja": "【計算ロジック改善】 穿透公式 修正 (overflow を /200 で半減、 不足は /100 でフル軽減)、 付加会心率/付加会意率 上限 (80%/40%) 突破対応、 増伤レイヤーを 内側 (外功/属性別) と 外側 (全武術) に分離、 心法 5武術属性 別計算 (鋼鳴/砕岩/糸操/瞬嵐/無相)、 属性攻撃強化 武術属性別ルート、 判定確率 0..1 clamp 強化、 武格指数 固定スキル係数化 (装備比較の公平性)、 Tier 判定 動的閾値化 (最適化最大スコア比 95/90/80/65%)。",
           "en": "[Calc Logic Improvements] Penetration formula fixed (/200 halved overflow, /100 full mitigation when short). Direct Crit/Affinity caps (80%/40%) now correctly bypass-able. Damage boost layers split into inner (per phys/elem) and outer (universal). Per-element xinfa calculation across all 5 martial elements (Bellstrike/Stonesplit/Silkbind/Bamboocut/Formless). Affinity DMG Bonus routed by element. Probability values clamped to 0..1. Martial Index now uses fixed skill coefficients for fair gear comparison. Dynamic Tier thresholds (95/90/80/65% of optimized max score).",
           "zh": "【计算逻辑改进】 穿透公式修正 (overflow÷200半减、 不足÷100全减)、 直接暴击/会意率 (80%/40%) 上限突破支持、 增伤层分离为内层 (外功/属性别) 与外层 (全武学)、 心法 5武学属性别计算 (鸣金/裂石/牵丝/破竹/无相)、 属性攻击强化按武学属性路由、 判定概率 0..1 clamp 强化、 武格指数固定技能系数化 (装备比较公平)、 Tier 判定动态阈值化 (最优化最大分数比 95/90/80/65%)。",
-          "ko": "【계산 로직 개선】 관통 공식 수정 (overflow÷200 반감、 부족÷100 전감)、 부가 치명타/각성률 (80%/40%) 상한 돌파 대응、 증상 레이어를 내부 (외공/속성별) 와 외부 (전 무술) 로 분리、 심법 5무술 속성 별 계산 (강명/쇄암/사조/순람/무상)、 속성 공격 강화 무술 속성별 라우팅、 판정 확률 0..1 clamp 강화、 무격지수 고정 스킬 계수화 (장비 비교 공평성)、 Tier 판정 동적 임계값 (최적화 최대 점수 비 95/90/80/65%)."
+          "ko": "【계산 로직 개선】 관통 공식 수정 (overflow÷200 반감、 부족÷100 전감)、 부가 치명타/각성률 (80%/40%) 상한 돌파 대응、 증상 레이어를 내부 (외공/속성별) 와 외부 (전 무술) 로 분리、 심법 5무술 속성 별 계산 (명금/열석/견사/파죽/무상)、 속성 공격 강화 무술 속성별 라우팅、 판정 확률 0..1 clamp 강화、 무격지수 고정 스킬 계수화 (장비 비교 공평성)、 Tier 판정 동적 임계값 (최적화 최대 점수 비 95/90/80/65%)."
         },
         {
           "ja": "【装備比較 modal】 巻物UI (4隅L字bracket+中央朱印「比」+古紙+朱赤グラデ下線+Δ大字 glow)、 MAX% rank別配色 (gold/purple/blue)、 100%到達時 虹色 hue回転アニメ、 PvP専用定音 (定音6枠) 対応、 装備Lv上限を キャラクターLvに制限。",
@@ -107,7 +132,7 @@
           "ja": "【データ拡張】 心法 Tier5 全42件反映、 武術 derived (基礎値→ステータス変換) 反映、 武術属性 (鋼鳴/砕岩/糸操/瞬嵐) 追加、 心法 ID 551-554 (砕岩武術属性 新心法) 追加、 心法 553「穿喉の訣」 effects + シナジー 3段階倍率化 (斬雪・断魂30%/墨筆・千紅15%/他0%)。",
           "en": "[Data Expansion] All 42 Tier 5 xinfa effects applied, martial-arts derived stats (base→derived) implemented, martial elements added (Bellstrike/Stonesplit/Silkbind/Bamboocut), new Stonesplit-element xinfa added (IDs 551-554), xinfa 553 'Throat-Piercing Art' effects + 3-tier synergy multipliers (Snowparting/Thundercry 30% / Inkwell/Crimson 15% / others 0%).",
           "zh": "【数据扩展】 心法 Tier5 全42件反映、 武学 derived (基础值→属性变换) 反映、 武学属性 (鸣金/裂石/牵丝/破竹) 添加、 心法 ID 551-554 (裂石武学属性新心法) 添加、 心法 553「穿喉诀」 effects + 协同 3段倍率化 (斩雪·嗟夫30%/青山·九重15%/其他0%)。",
-          "ko": "【데이터 확장】 심법 Tier5 전 42건 반영、 무술 derived (기초값→스테이터스 변환) 반영、 무술 속성 (강명/쇄암/사조/순람) 추가、 심법 ID 551-554 (쇄암 무술 속성 신심법) 추가、 심법 553「관목결」 effects + 시너지 3단계 배율화 (만설·탄식 30% / 청산·봄의 선율 15% / 기타 0%)."
+          "ko": "【데이터 확장】 심법 Tier5 전 42건 반영、 무술 derived (기초값→스테이터스 변환) 반영、 무술 속성 (명금/열석/견사/파죽) 추가、 심법 ID 551-554 (열석 무술 속성 신심법) 추가、 심법 553「관목결」 effects + 시너지 3단계 배율화 (만설·탄식 30% / 청산·봄의 선율 15% / 기타 0%)."
         },
         {
           "ja": "【OBS Share】 配信用 URL生成 + 表示専用モード (wwm-view-sidebar)、 OBS view では基準値書込抑止、 カラーカスタマイズ 6項目。",
