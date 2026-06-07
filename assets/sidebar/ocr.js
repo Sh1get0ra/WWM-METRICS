@@ -1,4 +1,4 @@
-// WWM-METRICS - affix OCR 取込 (TODO #16)
+﻿// WWM-METRICS - affix OCR 取込 (TODO #16)
 // pipeline: 前処理 → 行切出し → Tesseract 行単位認識 → parse → 閉語彙 fuzzy match
 // engine 非依存設計: ENGINE section だけ差替えれば PaddleOCR 等へ移行可能
 //
@@ -282,8 +282,8 @@
       let text = (data.text || '').trim();
       // Lv 帯 rescue: "Lv" は読めたが数字が誤読 (gradient 帯/「承音 ·」prefix) →
       // "Lv" word の bbox 右側だけ crop して数字 whitelist 再認識 (帯全体だと CJK ノイズに負ける)
-      if (/lv/i.test(text) && !/lv\.?\s*\d/i.test(text)) {
-        const wLv = (data.words || []).find(wd => /lv/i.test(wd.text || ''));
+      if (/lv|tier/i.test(text) && !/(?:lv|tier)\.?\s*\d/i.test(text)) {   // EN = "Tier 91" 表記
+        const wLv = (data.words || []).find(wd => /lv|tier/i.test(wd.text || ''));
         let lvSrc = src;
         if (wLv && wLv.bbox && src.width - wLv.bbox.x0 > 16) {
           const cx = Math.max(0, wLv.bbox.x0 - 4);
@@ -295,11 +295,11 @@
           cctx.drawImage(src, cx, 0, cw, src.height, 0, 0, cw, src.height);
           lvSrc = cL;
         }
-        await worker.setParameters({ tessedit_char_whitelist: 'Lv.0123456789' });
+        await worker.setParameters({ tessedit_char_whitelist: 'LvTier.0123456789' });
         const rLv = await worker.recognize(lvSrc);
         await worker.setParameters({ tessedit_char_whitelist: '' });
         const tLv = (rLv.data.text || '').trim();
-        if (/lv\.?\s*\d/i.test(tLv)) text = tLv;
+        if (/(?:lv|tier)\.?\s*\d/i.test(tLv)) text = tLv;
       }
       let numConf = null, nameText = null, numText = null;
       const words = (data.words || []).filter(wd => (wd.text || '').trim());
@@ -320,7 +320,7 @@
       if (anchor > 0) {
         let end = anchor;
         while (end + 1 < words.length && _NUMW_RE.test(words[end + 1].text.trim())) end++;
-        nameText = words.slice(0, anchor).map(wd => wd.text).join('');
+        nameText = words.slice(0, anchor).map(wd => wd.text).join(' ');   // space 結合 (EN token 分割用。CJK は _norm が除去)
         numText = words.slice(anchor, end + 1).map(wd => wd.text).join('');
         // value 領域 2-pass (whitelist)
         const x0 = Math.max(0, words[anchor].bbox.x0 - 8);
@@ -386,7 +386,7 @@
     const affixes = [];
     for (const ln of merged) {
       // Lv 行 = 最初の affix より上 + '+' なし + 1..130 (位置規則で affix 名中の "Lv" 誤読を排除)
-      const lvM = ln.text.match(/Lv\.?\s*(\d{1,3})/i);
+      const lvM = ln.text.match(/(?:Lv|Tier)\.?\s*(\d{1,3})/i);
       if (lvM && !affixes.length && !/[+＋]/.test(ln.text)) {
         const v = parseInt(lvM[1], 10);
         if (v >= 1 && v <= 130) { lv = v; continue; }
@@ -460,7 +460,7 @@
   }
   function _normName(s) {
     let t = _applyConfusions(_norm(s)
-      .replace(/[\[(（【「［][^\])）】」］]{0,3}[\])）】」］]/g, '')   // 短い括弧 token ([転] の誤読含む) 除去
+      .replace(/[\[(（【「［][^\])）】」］]{0,6}[\])）】」］]/g, '')   // 短い括弧 token ([転]/[Turn] の誤読含む) 除去
       .replace(/[・･·•]/g, ''));
     t = t.replace(/攻撃力(?=強化$|$)/, '攻撃');                       // 攻撃力 → 攻撃 (単独 stat「力」は温存)
     t = t.replace(/攻击力(?=强化$|$)/, '攻击');                       // zh 簡体 同様
@@ -528,7 +528,45 @@
     }
     return best;
   }
+  // ── EN 専用 matcher: 辞書ラベルが語順違いの略称 (Maximum Bamboocut Attack vs Bam ATK Max)
+  //    → 単語 canon 化 + stopword 除去 + 複合略語 → token-set Dice (語順非依存)
+  const _EN_CANON = {
+    maximum: 'max', minimum: 'min', physical: 'phys', attack: 'atk', attacks: 'atk',
+    penetration: 'pen', critical: 'crit', bamboocut: 'bam', bellstrike: 'bell',
+    stonesplit: 'stone', silkbind: 'silk', twinblades: 'tb', damage: 'dmg', agility: 'agi'
+  };
+  const _EN_STOP = new Set(['rate', 'boost', 'increase', 'of', 'art', 'the', 'against', 'units', 'combat', 'skill', 'arts', 'to', 'dealt', 'turn']);
+  const _EN_COMPOUNDS = [[' rope dart ', ' rd '], [' light atk ', ' la '], [' single target ', ' st ']];
+  function _enTokens(s) {
+    const raw = String(s).toLowerCase()
+      .replace(/\[[^\]]{0,6}\]/g, ' ')
+      .split(/[^a-z0-9]+/).filter(Boolean);
+    const toks = raw.map(t => _EN_CANON[t] || t).filter(t => !_EN_STOP.has(t));
+    let j = ' ' + toks.join(' ') + ' ';
+    for (const [a, b] of _EN_COMPOUNDS) j = j.split(a).join(b);
+    return j.trim().split(/\s+/).filter(Boolean);
+  }
+  function _matchAffixEn(parsedName, options) {
+    const qt = _enTokens(parsedName);
+    if (!qt.length) return null;
+    const qset = new Set(qt);
+    let best = null;
+    for (const o of options) {
+      const ct = _enTokens(o.name);
+      if (!ct.length) continue;
+      const cset = new Set(ct);
+      let inter = 0;
+      for (const t of cset) if (qset.has(t)) inter++;
+      const sim = (2 * inter) / (qset.size + cset.size);
+      if (!best || sim > best.sim) best = { option: o, sim };
+    }
+    return (best && best.sim >= 0.4) ? best : null;
+  }
   function _matchAffix(parsedName, options) {
+    // Latin 主体の query (= EN スクショ) → token-set matcher へ (CJK 混在時は通常経路)
+    if (/[a-z]/i.test(String(parsedName)) && !/[一-龯ぁ-んァ-ヶ가-힣]/.test(String(parsedName))) {
+      return _matchAffixEn(parsedName, options);
+    }
     const q = _normName(parsedName);
     if (!q) return null;
     // 中黒 (・/·) 持ち = 武術固有 affix (獄炎の双剣・軽撃 等) → window だと「軽撃ダメ」等の
@@ -631,6 +669,11 @@
         confidence: Math.min(a.conf, numC) * m.sim,   // OCR conf × match 類似度
         sim: m.sim
       });
+    }
+    // 安全弁: parse 行数 < 6 = 行消失の疑い (折返し/glow 行の崩壊) → 位置 idx が無言シフトしうる
+    // → 全行を要確認扱いに落とす (ja は常時 6 行 parse = 影響なし。EN 折返し多発時の誤投入防止)
+    if (affixes.length < 6) {
+      for (const r of rows) r.confidence = Math.min(r.confidence, 0.4);
     }
     return { lv, rows, parsedCount: affixes.length };
   }
