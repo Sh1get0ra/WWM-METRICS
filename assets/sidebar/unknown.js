@@ -17,23 +17,24 @@
     const u = _detectUnknown(ri);
     const total = u.kongfu.length + u.xinfa.length + u.affix.length;
     if (!total) { alert((window.T && T.unknownNone) || '未対応データなし'); return; }
-    // 報告用 snippet 生成
-    const lines = ['## 未対応 ID 報告', ''];
+    // 報告用 snippet 生成 (UI 言語で出力 — Issue は ID 主体なので開発側はどの言語でも読める)
+    const T_ = window.T || {};
+    const lines = [(T_.unknownTplTitle || '## 未対応 ID 報告'), ''];
     if (u.kongfu.length) {
-      lines.push('### 武術 (kongfu) ' + u.kongfu.length + '件');
+      lines.push((T_.unknownTplKongfu || '### 武術 (kongfu) {0}件').replace('{0}', u.kongfu.length));
       for (const id of u.kongfu) {
-        const slot = ri.kongfuMain === id ? '主' : (ri.kongfuSub === id ? '副' : '');
+        const slot = ri.kongfuMain === id ? (T_.unknownTplMain || '主') : (ri.kongfuSub === id ? (T_.unknownTplSub || '副') : '');
         lines.push(`- ID: ${id} (${slot})`);
       }
       lines.push('');
     }
     if (u.xinfa.length) {
-      lines.push('### 心法 (xinfa) ' + u.xinfa.length + '件');
+      lines.push((T_.unknownTplXinfa || '### 心法 (xinfa) {0}件').replace('{0}', u.xinfa.length));
       for (const id of u.xinfa) lines.push(`- ID: ${id}`);
       lines.push('');
     }
     if (u.affix.length) {
-      lines.push('### 装備 affix ' + u.affix.length + '件');
+      lines.push((T_.unknownTplAffix || '### 装備 affix {0}件').replace('{0}', u.affix.length));
       const valSample = {};
       for (const eq of Object.values(ri.wearEquipsDetailed || {})) {
         for (const aff of (eq?.exVo?.baseAffixes || [])) {
@@ -47,14 +48,14 @@
       }
       lines.push('');
     }
-    lines.push('### キャラ情報');
+    lines.push(T_.unknownTplChar || '### キャラ情報');
     lines.push(`- Lv: ${ri.level}, school: ${ri.school}, kongfuMain: ${ri.kongfuMain}, kongfuSub: ${ri.kongfuSub}`);
     lines.push('');
-    lines.push('### 補足情報 (画像/詳細などあれば追記)');
+    lines.push(T_.unknownTplNotes || '### 補足情報 (画像/詳細などあれば追記)');
     lines.push('');
     const body = lines.join('\n');
     const githubUrl = 'https://github.com/Sh1get0ra/WWM-METRICS/issues/new?title=' +
-      encodeURIComponent('[Data] 未対応ID報告 (kongfu/xinfa/affix)') +
+      encodeURIComponent(T_.unknownIssueTitle || '[Data] 未対応ID報告 (kongfu/xinfa/affix)') +
       '&body=' + encodeURIComponent(body);
 
     // Modal表示
