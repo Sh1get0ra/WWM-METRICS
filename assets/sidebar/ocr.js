@@ -413,7 +413,7 @@
     // Lv pre-pass: 明示表記 (Lv.91 / Tier 91) を全行から先に探す —
     // integer fallback より優先 (装備詳細画面の「境地 ▼27」誤爆対策、2026-06-07 実測)
     let lv = null;
-    const lvRe = /(?:Lv|Tier)\.?\s*(\d{1,3})|(\d{1,3})\s*[阶级]/i;   // Lv.91 / Tier 91 / 91阶 (zh)
+    const lvRe = /(?:Lv|Tier)\.?\s*(\d{1,3})|(\d{1,3})\s*[阶级단]/i;   // Lv.91 / Tier 91 / 91阶·91级 (zh) / 91단 (ko)
     for (const ln of merged) {
       const m = ln.text.match(lvRe);
       if (m && !/[+＋]/.test(ln.text)) {
@@ -423,6 +423,8 @@
     }
     const affixes = [];
     let lastAffix = null;   // detailMode: 折返し名前尾の追記先
+    let lvFromLabel = null; // Lv label 行 (digits worker 正読値) — lvRe 値より優先
+    let lvLabelArm = false; // 「장비 레벨」等 label 単独行の直後の数値行を Lv とみなす arm
     for (const ln of merged) {
       // 明示 Lv 行は affix として解釈しない
       if (lvRe.test(ln.text) && !/[+＋]/.test(ln.text)) continue;
@@ -446,6 +448,8 @@
       if (name == null) {
         const numM = ln.text.match(/[+＋]?\s*(\d+(?:[.,]\d+)?)\s*([%％])?\s*$/);
         if (!numM) {
+          // Lv label 単独行 (장비 레벨 / Required Level / 穿戴等级…) → 次の数値行を Lv として採用 arm
+          if (/레벨|level|等级|等級|レベル/i.test(ln.text)) { lvLabelArm = true; continue; }
           // detailMode (装備詳細画面): 数値なし行 = 直前 affix の折返し名前尾
           // (「単体爆発系奇術ダメージ / 増加」「[Turn]Maximum / Bamboocut Attack」)。y 近接 (<22px) のみ
           if (detailMode && lastAffix && ln.y0 != null && lastAffix.y1 != null && (ln.y0 - lastAffix.y1) < 22) {
@@ -460,6 +464,15 @@
         rawNum = numM[1];
       }
       if (!name) continue;
+      // Lv label 行 (装備レベル/Required Level/穿戴等级/장비 레벨 + 整数値): digits worker が
+      // 正読した numText を Lv として最優先採用 (kor model が 91단 を 97 と誤読する事への対策)。
+      // label が前行単独だった場合 (arm) も同様 — bottom の「장비 레벨 / Lv.91」2 行構造
+      if ((lvLabelArm || /레벨|level|等级|等級|レベル/i.test(name)) && !/\d[.,]\d/.test(String(rawNum))) {
+        const lvV = parseInt(rawNum, 10);
+        lvLabelArm = false;
+        if (lvV >= 1 && lvV <= 130) { lvFromLabel = lvV; continue; }
+      }
+      lvLabelArm = false;
       // wrapped (折返し分割) 行の値は常に要確認扱い (3↔8 等の誤読難所、PoC 実測)
       let nc = ln.numConf != null ? ln.numConf / 100 : null;
       if (ln.wrapped) nc = Math.min(nc != null ? nc : (ln.conf || 0) / 100, 0.4);
@@ -476,7 +489,7 @@
       affixes.push(rec);
       lastAffix = rec;
     }
-    return { lv, affixes };
+    return { lv: lvFromLabel != null ? lvFromLabel : lv, affixes };
   }
 
   // ════════════════════════════════════════════════════════════
@@ -503,7 +516,8 @@
     ['記ダメ', '鼠ダメ'], ['和ダメ', '鼠ダメ'], ['基加', '増加'],
     ['破竹', '瞬岚'],   // zh 訳語差: ゲーム内=破竹 / 公式ツール由来 dict=瞬岚 (bamboocut)
     ['起学', '武学'],   // zh OCR: 武→起
-    ['筷筷', '鼠鼠']    // zh OCR: 鼠鼠→筷筷
+    ['筷筷', '鼠鼠'],   // zh OCR: 鼠鼠→筷筷
+    ['8055', 'boss'], ['피빼', '피해']   // ko OCR: BOSS→8055 / 피해→피빼
   ];
   function _applyConfusions(t) {
     for (const [bad, good] of _OCR_CONFUSIONS) t = t.split(bad).join(good);
@@ -513,7 +527,7 @@
     let t = _applyConfusions(_norm(s)
       .replace(/[\[(（【「［][^\])）】」］]{0,6}[\])）】」］]/g, '')   // 短い括弧 token ([転]/[Turn] の誤読含む) 除去
       .replace(/[・･·•]/g, ''));
-    t = t.replace(/[四加回のロ口|]+$/, '');                            // 末尾の badge(👍) 誤読文字 strip (四/加/回 等 — 実測群)
+    t = t.replace(/[四加回のロ口|컵캡켈법멀케맵팹]+$/, '');             // 末尾の badge(👍) 誤読文字 strip (四/加/캡 等 — 実測群)
     t = t.replace(/攻撃力(?=強化$|$)/, '攻撃');                       // 攻撃力 → 攻撃 (単独 stat「力」は温存)
     t = t.replace(/攻击力(?=强化$|$)/, '攻击');                       // zh 簡体 同様
     for (let i = 0; i < 3; i++) {
@@ -532,7 +546,8 @@
     '精准': 'precision',        // zh 訳語差: ゲーム内=精准率 / dict=命中率
     '敏': 'agility',            // zh 訳語差: ゲーム内=敏 / dict=速 (dict 語彙に 敏 は不在 = 誤爆なし)
     '全武術': 'allWeaponDmg',
-    '全武学': 'allWeaponDmg'
+    '全武学': 'allWeaponDmg',
+    '전체무술': 'allWeaponDmg'   // ko: 전체 무술 효과 증가
   };
   function _dice(a, b) {
     if (a === b) return 1;
@@ -552,7 +567,7 @@
   }
   // 武術固有 suffix (軽撃/Q/鼠/特殊/チャージ…) 用正規化 — 短語彙なので min ガードなしで剥がす
   function _normSuffixK(s) {
-    let t = _applyConfusions(_norm(s).replace(/[・･·•]/g, '')).replace(/[四加回のロ口|]+$/, '');
+    let t = _applyConfusions(_norm(s).replace(/[・･·•]/g, '')).replace(/[四加回のロ口|컵캡켈법멀케맵팹]+$/, '');
     for (let i = 0; i < 3; i++) {
       const t2 = t.replace(/(強化|増加|ダメージ|ダメ|効果|アップ|强化|增加|伤害|增伤|增效|效果|提升|강화|증가|피해|효과|boost|increase|damage|dmg)$/, '');
       if (t2 === t) break;
@@ -572,15 +587,21 @@
     for (const o of options) {
       const sp = String(o.name).split(/\s+/);
       if (sp.length < 2) continue;                 // 固有 label = 「<武術名> <種別>強化」形のみ対象
-      const cPre = _normName(sp.slice(0, -1).join(''));
-      const cSuf = _normSuffixK(sp[sp.length - 1]);
+      // 末尾語が 強化/강화 等の汎用 suffix で strip 後空になる label (「쥐 강화」二語形) は
+      // 1 つ前の語を種別 suffix とする (空 cSuf は includes('') が常 true になる罠 — 2026-06-07 実測)
+      let cSufIdx = sp.length - 1;
+      let cSuf = _normSuffixK(sp[cSufIdx]);
+      if (!cSuf && sp.length >= 3) { cSufIdx = sp.length - 2; cSuf = _normSuffixK(sp[cSufIdx]); }
+      const cPre = _normName(sp.slice(0, cSufIdx).join(''));
       let sufSim;
-      if (qSuf && qSuf === cSuf) sufSim = 1;
-      else if (qSuf && cSuf && (qSuf.includes(cSuf) || cSuf.includes(qSuf))) sufSim = 0.9;   // 鼠鼠⊃鼠 等 (zh 重ね言葉)
-      else if (qSuf.length < 2 || cSuf.length < 2) sufSim = 0;
+      if (qSuf && cSuf && qSuf === cSuf) sufSim = 1;
+      else if (qSuf && cSuf && (qSuf.startsWith(cSuf) || cSuf.startsWith(qSuf))) sufSim = 0.9;   // 鼠鼠⊃鼠 / 쥐기술⊃쥐 (種別語は先頭 — includes だと 기술 等の汎用語に吸われる)
+      else if (qSuf.length < 2 || cSuf.length < 1) sufSim = 0;
       else sufSim = _dice(qSuf, cSuf);
       const preSim = (qPre.length >= 2 && cPre.length >= 2) ? _dice(qPre, cPre) : 0;
-      const sim = 0.65 * sufSim + 0.35 * preSim;
+      // suffix 支配: 種別 (軽撃/鼠/쥐/Q…) は一意性が高い。suffix 不一致の候補は prefix が
+      // 完全一致でも採らない (kongfu 名は dict↔game で訳ブレあり — ko 浮塵/浮雲 実測)
+      const sim = sufSim > 0 ? (0.8 * sufSim + 0.2 * preSim) : 0;
       if (!best || sim > best.sim) best = { option: o, sim };
     }
     return best;
@@ -628,7 +649,7 @@
     if (!q) return null;
     // 中黒 (・/·) 持ち = 武術固有 affix (獄炎の双剣・軽撃 等) → window だと「軽撃ダメ」等の
     // 短い汎用候補が部分一致 1.0 で吸う → 全文 dice (長い固有候補が自然に勝つ) に切替
-    const isKongfuSpecific = /[・･·•]|[一-龯ぁ-んァ-ヶ]\s*[.．]\s*[一-龯ぁ-んァ-ヶ]/.test(String(parsedName));
+    const isKongfuSpecific = /[・･·•]|[一-龯ぁ-んァ-ヶ가-힣]\s*[-‐－.．]\s*[一-龯ぁ-んァ-ヶ가-힣]/.test(String(parsedName));
     // alias 直結 (正規化で吸収不能な系統差): q が alias を含む → 該当 statKey の option へ
     for (const [alias, sk] of Object.entries(_NAME_ALIASES)) {
       if (q.includes(alias)) {
@@ -639,11 +660,12 @@
     // ゲーム内「X武学(ダメージ増加)」 = 辞書「Xダメ」 (武器種ダメ系の系統差)
     const qAlt = q.replace(/武学$/, 'ダメ');
     const qAlt2 = q.replace(/武学$/, '伤害');   // zh: 绳镖武学(增伤) = dict 绳镖伤害
+    const qAlt3 = q.replace(/무술$/, '피해');   // ko: 승표 무술 (피해 증가) = dict 승표 피해
     let best = null;
     for (const o of options) {
       const c = _normName(o.name);
       let sim;
-      if (q === c || qAlt === c || qAlt2 === c) sim = q === c ? 1 : 0.95;
+      if (q === c || qAlt === c || qAlt2 === c || qAlt3 === c) sim = q === c ? 1 : 0.95;
       else if (q.length < 2) sim = c.includes(q) ? 0.9 : 0;   // `会` 等 1 文字 query 救済
       else if (c.length === 1 && q.length <= 2 && q[0] === c) sim = 0.55;   // 1 文字 stat + badge 誤読 (`速回`) — 弱め fallback (会意→会 吸込み防止)
       else if (c.length < 2) sim = 0;                          // 1 文字候補に長い query を吸わせない (会心準代→会 誤match 対策)
