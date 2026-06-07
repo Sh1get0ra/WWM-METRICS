@@ -105,6 +105,8 @@
       }
     }
     if (start >= 0 && h - start >= 8) bands.push({ y0: start, y1: h });
+    // (separator 線検出は panel 全面の gradient/texture に勝てず撤去 — 2026-06-07 実測。
+    //  画面種別は run() 側の name↔値 水平 gap 中央値で判別する)
     // 縦長 band = 折返し 2 行が融合 (PSM single-line が崩壊) → 内部の ink 谷で分割。
     // 分割後の band もまだ縦長なら再分割 (fixpoint、最大 4 pass — 谷 1 回では 2 行残ることがある)
     if (bands.length >= 2) {
@@ -129,7 +131,7 @@
         if (!didSplit) break;
       }
     }
-    return bands.map(b => {
+    const mapped = bands.map(b => {
       // pad は画像端で clamp (負の source 座標は drawImage が暗黙 clamp し crop がズレる)
       const padT = Math.min(4, b.y0);
       const padB = Math.min(4, h - b.y1);
@@ -162,6 +164,7 @@
       x2.drawImage(g1, trim.x0, 0, tw, srcH, 0, 0, tw * scale, srcH * scale);
       return { canvas: c2, y0: b.y0, y1: b.y1, wrapped: !!b.wrapped };
     });
+    return mapped;
   }
 
   // テキスト x 範囲特定 (二値 canvas 解析): 左端 icon 円 + 右端 👍badge を範囲外へ
@@ -301,7 +304,7 @@
         const tLv = (rLv.data.text || '').trim();
         if (/(?:lv|tier)\.?\s*\d/i.test(tLv)) text = tLv;
       }
-      let numConf = null, nameText = null, numText = null;
+      let numConf = null, nameText = null, numText = null, gapRatio = null;
       const words = (data.words || []).filter(wd => (wd.text || '').trim());
       // anchor: 直前 word が CJK の数値 word (行頭ゴミ数字を除外)。候補複数時は
       // +付き or 小数点付き (= ゲーム値書式) を優先、無ければ最後の候補 (値は行末にある)
@@ -321,6 +324,7 @@
         let end = anchor;
         while (end + 1 < words.length && _NUMW_RE.test(words[end + 1].text.trim())) end++;
         nameText = words.slice(0, anchor).map(wd => wd.text).join(' ');   // space 結合 (EN token 分割用。CJK は _norm が除去)
+        gapRatio = (words[anchor].bbox.x0 - words[anchor - 1].bbox.x1) / src.width;   // name↔値 距離 (画面種別判定用)
         numText = words.slice(anchor, end + 1).map(wd => wd.text).join('');
         // value 領域 2-pass (whitelist)
         const x0 = Math.max(0, words[anchor].bbox.x0 - 8);
@@ -331,19 +335,29 @@
           const ctx3 = c3.getContext('2d');
           ctx3.fillStyle = '#fff'; ctx3.fillRect(0, 0, c3.width, c3.height);
           ctx3.drawImage(src, x0, 0, c3.width, c3.height, 0, 0, c3.width, c3.height);
-          // gray + binary 両方で whitelist 認識 → ゲーム数値書式 (常に小数 1 桁 +X.Y[%]) 適合
+          // 第 3 候補: nearest-neighbor 2x (italic 金数字の 8↔9 混同対策 — エッジ保存拡大)
+          const c4 = document.createElement('canvas');
+          c4.width = c3.width * 2; c4.height = c3.height * 2;
+          const ctx4 = c4.getContext('2d');
+          ctx4.imageSmoothingEnabled = false;
+          ctx4.drawImage(c3, 0, 0, c4.width, c4.height);
+          // gray + binary + nearest2x で whitelist 認識 → ゲーム数値書式 (常に小数 1 桁 +X.Y[%]) 適合
           // かつ高確信の候補を採用 (8↔9/8↔6 混同の票決、PoC 実測で確定)
           await worker.setParameters({ tessedit_char_whitelist: '0123456789.+%' });
           const rA = await worker.recognize(c3);
           const rB = await worker.recognize(_binarizeCanvas(c3));
+          const rC = await worker.recognize(c4);
           await worker.setParameters({ tessedit_char_whitelist: '' });
           const gf = /^[+＋]?\d{1,3}[.,]\d[%％]?$/;
           const t1c = String(numText || '').replace(/\s+/g, '');
           const cands = [
             { t: (rA.data.text || '').trim().replace(/\s+/g, ''), cf: rA.data.confidence || 0 },
             { t: (rB.data.text || '').trim().replace(/\s+/g, ''), cf: rB.data.confidence || 0 },
+            { t: (rC.data.text || '').trim().replace(/\s+/g, ''), cf: rC.data.confidence || 0 },
             { t: t1c, cf: (data.confidence || 0) }
           ].filter(c => /\d/.test(c.t));
+          // 8↔9 等で候補が割れた時: 全候補一致なら確信維持、不一致なら採用しつつ要警戒側へ
+          // (多数決は誤読側に倒れる事があり不採用 — 2026-06-07 実測。残る誤差は app 側 MAX 超過 check が拾う)
           const fit = cands.filter(c => gf.test(c.t)).sort((a, b) => b.cf - a.cf);
           if (fit.length) {
             numText = fit[0].t; numConf = fit[0].cf;
@@ -355,7 +369,7 @@
           }
         }
       }
-      out.push({ text, conf: data.confidence, numConf, nameText, numText, wrapped: !!b.wrapped });
+      out.push({ text, conf: data.confidence, numConf, nameText, numText, gapRatio, wrapped: !!b.wrapped, y0: b.y0, y1: b.y1 });
     }
     return out;
   }
@@ -363,7 +377,7 @@
   // ════════════════════════════════════════════════════════════
   // parse: 折返し結合 → Lv 行 / affix 行 (名前 + 数値) 抽出
   // ════════════════════════════════════════════════════════════
-  function _parseLines(lines) {
+  function _parseLines(lines, detailMode) {
     const merged = [];
     for (const ln of lines) {
       const t = (ln.text || '').trim();
@@ -380,19 +394,27 @@
         }
         continue;   // 数値専用 + 前行完結 → 名前なし断片として破棄
       }
-      merged.push({ text: t, conf: ln.conf, numConf: ln.numConf, nameText: ln.nameText, numText: ln.numText, wrapped: ln.wrapped });
+      merged.push({ text: t, conf: ln.conf, numConf: ln.numConf, nameText: ln.nameText, numText: ln.numText, wrapped: ln.wrapped, y0: ln.y0, y1: ln.y1 });
     }
+    // Lv pre-pass: 明示表記 (Lv.91 / Tier 91) を全行から先に探す —
+    // integer fallback より優先 (装備詳細画面の「境地 ▼27」誤爆対策、2026-06-07 実測)
     let lv = null;
-    const affixes = [];
+    const lvRe = /(?:Lv|Tier)\.?\s*(\d{1,3})/i;
     for (const ln of merged) {
-      // Lv 行 = 最初の affix より上 + '+' なし + 1..130 (位置規則で affix 名中の "Lv" 誤読を排除)
-      const lvM = ln.text.match(/(?:Lv|Tier)\.?\s*(\d{1,3})/i);
-      if (lvM && !affixes.length && !/[+＋]/.test(ln.text)) {
-        const v = parseInt(lvM[1], 10);
-        if (v >= 1 && v <= 130) { lv = v; continue; }
+      const m = ln.text.match(lvRe);
+      if (m && !/[+＋]/.test(ln.text)) {
+        const v = parseInt(m[1], 10);
+        if (v >= 1 && v <= 130) { lv = v; break; }
       }
+    }
+    const affixes = [];
+    let lastAffix = null;   // detailMode: 折返し名前尾の追記先
+    for (const ln of merged) {
+      // 明示 Lv 行は affix として解釈しない
+      if (lvRe.test(ln.text) && !/[+＋]/.test(ln.text)) continue;
       // Lv fallback: 「Lv」自体が誤読された帯 (笛 icon + gradient) — affix より上 + 短い名前 +
       // 小数点なし整数 1..130 → Lv とみなす (実 affix 値は全て小数 1 桁表記 = 整数にならない)
+      // 明示 Lv が文書内に存在する場合は発動しない (pre-pass 優先)
       if (lv == null && !affixes.length) {
         const intM = ln.text.match(/(?:^|[^\d.,])(\d{1,3})(?![\d.,%％])\s*$/);
         if (intM) {
@@ -409,7 +431,15 @@
       }
       if (name == null) {
         const numM = ln.text.match(/[+＋]?\s*(\d+(?:[.,]\d+)?)\s*([%％])?\s*$/);
-        if (!numM) continue;
+        if (!numM) {
+          // detailMode (装備詳細画面): 数値なし行 = 直前 affix の折返し名前尾
+          // (「単体爆発系奇術ダメージ / 増加」「[Turn]Maximum / Bamboocut Attack」)。y 近接 (<22px) のみ
+          if (detailMode && lastAffix && ln.y0 != null && lastAffix.y1 != null && (ln.y0 - lastAffix.y1) < 22) {
+            const tail = ln.text.trim();
+            if (/[一-龯ぁ-んァ-ヶ가-힣]|[A-Za-z]{2}/.test(tail)) lastAffix.name += ' ' + tail;
+          }
+          continue;
+        }
         name = ln.text.slice(0, numM.index).trim();
         value = parseFloat(numM[1].replace(',', '.'));
         isPct = !!numM[2];
@@ -419,14 +449,18 @@
       // wrapped (折返し分割) 行の値は常に要確認扱い (3↔8 等の誤読難所、PoC 実測)
       let nc = ln.numConf != null ? ln.numConf / 100 : null;
       if (ln.wrapped) nc = Math.min(nc != null ? nc : (ln.conf || 0) / 100, 0.4);
-      affixes.push({
+      const rec = {
         name,
         value,
         isPct,
         rawNum,
+        y0: ln.y0,
+        y1: ln.y1,
         conf: (ln.conf || 0) / 100,
         numConf: nc
-      });
+      };
+      affixes.push(rec);
+      lastAffix = rec;
     }
     return { lv, affixes };
   }
@@ -452,7 +486,7 @@
     ['縄鐘', '縄鏢'], ['綿通', '貫通'], ['真通', '貫通'],
     ['獄半', '獄炎'], ['弘炎', '獄炎'], ['金武術', '全武術'],
     ['軽掌', '軽撃'], ['双多', '双剣'], ['御領', '首領'],
-    ['記ダメ', '鼠ダメ'], ['基加', '増加']
+    ['記ダメ', '鼠ダメ'], ['和ダメ', '鼠ダメ'], ['基加', '増加']
   ];
   function _applyConfusions(t) {
     for (const [bad, good] of _OCR_CONFUSIONS) t = t.split(bad).join(good);
@@ -587,6 +621,7 @@
       let sim;
       if (q === c || qAlt === c) sim = q === c ? 1 : 0.95;
       else if (q.length < 2) sim = c.includes(q) ? 0.9 : 0;   // `会` 等 1 文字 query 救済
+      else if (c.length === 1 && q.length <= 2 && q[0] === c) sim = 0.55;   // 1 文字 stat + badge 誤読 (`速回`) — 弱め fallback (会意→会 吸込み防止)
       else if (c.length < 2) sim = 0;                          // 1 文字候補に長い query を吸わせない (会心準代→会 誤match 対策)
       else sim = isKongfuSpecific ? _dice(q, c) : _bestWindowDice(q, c);
       if (!best || sim > best.sim) best = { option: o, sim };
@@ -632,7 +667,48 @@
     const pre = _preprocess(img);
     const bands = _segmentLines(pre);
     const lines = await _ocrLines(bands, tessLang, ctx.onProgress);
-    const { lv, affixes } = _parseLines(lines);
+    // detailMode = 装備詳細画面。判別 = name↔値 の水平 gap 中央値 (詳細画面は値が右端寄せ = gap 巨大、
+    // 旧 強化画面は値が名前直後 = gap 極小。言語非依存・separator/装飾に依存しない — 2026-06-07 実測)
+    const gaps = lines.map(l => l.gapRatio).filter(g => g != null);
+    const detailMode = gaps.filter(g => g >= 0.35).length >= 3;   // 巨大 gap (右端寄せ値) ≥3 行 = 詳細画面。旧画面の gap は max 0.03 — 実測
+    const { lv, affixes } = _parseLines(lines, detailMode);
+    if (detailMode) {
+      // ── 装備詳細画面: affix = 小数 1 桁値の行のみ (基礎ステ/セット効果/耐久度 = 整数 = 自然排除)。
+      //    行順 = idx。値誤読で小数が落ちた行は欠落 → <6 安全弁で全行要確認化
+      const gfded = (a) => /\d[.,]\d$/.test(String(a.rawNum || ''));
+      const rows = [];
+      {
+        const sec = affixes.filter(a => gfded(a));
+        for (let i = 0; i < sec.length && i < 6; i++) {
+          const a = sec[i];
+          let m = _matchAffix(a.name, ctx.getOptions(i) || []);
+          if (!m) {
+            for (let j = 0; j < 6; j++) {
+              if (j === i) continue;
+              const m2 = _matchAffix(a.name, ctx.getOptions(j) || []);
+              if (m2 && (!m || m2.sim > m.sim)) m = m2;
+            }
+          }
+          if (!m) continue;
+          const numC = a.numConf != null ? a.numConf : a.conf;
+          rows.push({
+            idx: i,
+            affixId: m.option.id,
+            statKey: m.option.statKey,
+            name: m.option.name,
+            value: a.value,
+            isPct: a.isPct,
+            confidence: Math.min(a.conf, numC) * m.sim,
+            sim: m.sim
+          });
+        }
+        // 安全弁: 小数行 <6 = 行欠落の疑い (値誤読で小数が落ちた等) → 全行要確認化
+        if (sec.length < 6) {
+          for (const r of rows) r.confidence = Math.min(r.confidence, 0.4);
+        }
+      }
+      return { lv, rows, parsedCount: affixes.length };
+    }
     // phantom 行除去: glow 等の幻 band は「全 idx で match 不成立 ∧ 値が非ゲーム書式 (整数等)」
     // — 残すと後続行の idx がズレる (PoC 実測: 外功貫通が idx6 落ちで消失)
     // ただし除去は parsed > 6 (= 幻行が確実に混入) の時だけ。≤6 なら garbage 行 = 実行の誤読
