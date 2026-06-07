@@ -1097,6 +1097,8 @@ window.WWMImport = {
 };
 // sidebar.js (Edit modal) から statKey → 日本語ラベル参照用
 window._AFFIX_DISPLAY_LABELS = _STAT_LABELS_PROXY;
+// OCR 言語 fallback 用: スクショ言語 ≠ UI 言語の場合に他言語 affix 名で fuzzy match する
+window._STAT_LABELS_I18N_ALL = _STAT_LABELS_I18N;
 
 // ── スコア計算更新バナー (baseline 鮮度切れ時に再import促し) ──
 function _showScoreBanner() {

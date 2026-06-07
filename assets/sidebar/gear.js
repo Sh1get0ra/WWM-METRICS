@@ -574,51 +574,52 @@
       });
     }
     // 新装備 Lv 変更 → base値 + affix値 (新Lv MAX×0.94) 自動更新
+    // OCR 取込からも呼ぶため関数化 (await 可能に)
     const lvSel = m.querySelector('#wwmCmpNewLvSel');
-    if (lvSel) {
-      lvSel.addEventListener('change', async () => {
-        const newLv = parseInt(lvSel.value, 10);
-        await _loadEquipMax();
-        // virtual eq 作成 (origEq deep clone)
-        if (!WWMState.virtual.gear) WWMState.virtual.gear = {};
-        const vEq = JSON.parse(JSON.stringify(WWMState.virtual.gear[slot] || origEq));
-        if (!vEq.exVo) vEq.exVo = {};
-        // base値 (baseAttrs) 新Lv
-        const refBase = window.WWM_EQUIP_BASE_BY_LV?.slots?.[String(slot)]?.[String(newLv)];
-        if (refBase) {
-          if (!vEq.exVo.baseAttrs) vEq.exVo.baseAttrs = {};
-          for (const [k, v] of Object.entries(refBase)) vEq.exVo.baseAttrs[k] = v;
-        }
-        vEq.exVo._inferredLv = newLv;
-        // 各affix 値 新Lv MAX × 0.94
-        const tier = _lvToTier(newLv);
-        const maxTbl = _getCachedEquipMax()?.tiers?.[tier] || {};
-        if (Array.isArray(vEq.exVo.baseAffixes)) {
-          for (const aff of vEq.exVo.baseAffixes) {
-            const d = aff.equipmentDetails;
-            if (!Array.isArray(d) || d.length < 2) continue;
-            const info = window.WWM_AFFIX?.[d[0]];
-            const sk = info?.statKey;
-            const maxKey = _STAT_TO_MAX_KEY[sk] || sk;
-            const maxVal = maxTbl[maxKey];
-            if (maxVal != null) {
-              d[1] = +(maxVal * 0.94).toFixed(4);
-              d[2] = 0.94;
-            }
+    async function _applyNewLv(newLv) {
+      await _loadEquipMax();
+      // virtual eq 作成 (origEq deep clone)
+      if (!WWMState.virtual.gear) WWMState.virtual.gear = {};
+      const vEq = JSON.parse(JSON.stringify(WWMState.virtual.gear[slot] || origEq));
+      if (!vEq.exVo) vEq.exVo = {};
+      // base値 (baseAttrs) 新Lv
+      const refBase = window.WWM_EQUIP_BASE_BY_LV?.slots?.[String(slot)]?.[String(newLv)];
+      if (refBase) {
+        if (!vEq.exVo.baseAttrs) vEq.exVo.baseAttrs = {};
+        for (const [k, v] of Object.entries(refBase)) vEq.exVo.baseAttrs[k] = v;
+      }
+      vEq.exVo._inferredLv = newLv;
+      // 各affix 値 新Lv MAX × 0.94
+      const tier = _lvToTier(newLv);
+      const maxTbl = _getCachedEquipMax()?.tiers?.[tier] || {};
+      if (Array.isArray(vEq.exVo.baseAffixes)) {
+        for (const aff of vEq.exVo.baseAffixes) {
+          const d = aff.equipmentDetails;
+          if (!Array.isArray(d) || d.length < 2) continue;
+          const info = window.WWM_AFFIX?.[d[0]];
+          const sk = info?.statKey;
+          const maxKey = _STAT_TO_MAX_KEY[sk] || sk;
+          const maxVal = maxTbl[maxKey];
+          if (maxVal != null) {
+            d[1] = +(maxVal * 0.94).toFixed(4);
+            d[2] = 0.94;
           }
         }
-        WWMState.virtual.gear[slot] = vEq;
-        if (typeof window._saveVirtuals === 'function') window._saveVirtuals();
-        // newAffixes (modal display source) を in-place 上書き
-        const newAffixData = JSON.parse(JSON.stringify(vEq.exVo?.baseAffixes || []));
-        newAffixes.length = 0;
-        for (const a of newAffixData) newAffixes.push(a);
-        // affix row 部分再描画
-        const rowsEl = m.querySelector('#wwmCmpNewRows');
-        if (rowsEl) rowsEl.innerHTML = renderNewRows();
-        _bindRowEvents();
-        _schedulePreview();
-      });
+      }
+      WWMState.virtual.gear[slot] = vEq;
+      if (typeof window._saveVirtuals === 'function') window._saveVirtuals();
+      // newAffixes (modal display source) を in-place 上書き
+      const newAffixData = JSON.parse(JSON.stringify(vEq.exVo?.baseAffixes || []));
+      newAffixes.length = 0;
+      for (const a of newAffixData) newAffixes.push(a);
+      // affix row 部分再描画
+      const rowsEl = m.querySelector('#wwmCmpNewRows');
+      if (rowsEl) rowsEl.innerHTML = renderNewRows();
+      _bindRowEvents();
+      _schedulePreview();
+    }
+    if (lvSel) {
+      lvSel.addEventListener('change', () => _applyNewLv(parseInt(lvSel.value, 10)));
     }
     // 初回 preview
     _schedulePreview();
