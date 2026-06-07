@@ -276,6 +276,11 @@
     const origRi = WWMState.roleInfo;
     const origEq = origRi?.wearEquipsDetailed?.[slot];
     if (!origEq) { alert('装備データなし: slot ' + slot); return; }
+    // virtual snapshot: 採用/復元を経ない close (離脱/誤操作) で巻き戻す。
+    // _applyNewLv (Lv select / OCR) が preview 用に virtual へ直書き + 保存するため、
+    // 破棄離脱でもスコア変動が残留していた (2026-06-08 兄貴報告 OCR -33 バグの根治)
+    const _virtSnapStr = JSON.stringify(WWMState.virtual.gear?.[slot] ?? null);
+    let _committed = false;
     const label = _GEAR_SLOT_LABELS[slot] || slot;
     // equip_max.json 確実 load (await不要、初回 null fallback)
     _loadEquipMax();
@@ -495,6 +500,20 @@
       </div>
     `;
     document.body.appendChild(m);
+    // modal 消滅監視: 採用/復元なしの close → virtual snapshot 復元 (差分時のみ refresh)
+    const moVirt = new MutationObserver(() => {
+      if (document.body.contains(m)) return;
+      moVirt.disconnect();
+      if (_committed) return;
+      const curStr = JSON.stringify(WWMState.virtual.gear?.[slot] ?? null);
+      if (curStr === _virtSnapStr) return;
+      const snap = JSON.parse(_virtSnapStr);
+      if (snap === null) { if (WWMState.virtual.gear) delete WWMState.virtual.gear[slot]; }
+      else { if (!WWMState.virtual.gear) WWMState.virtual.gear = {}; WWMState.virtual.gear[slot] = snap; }
+      if (typeof window._saveVirtuals === 'function') window._saveVirtuals();
+      if (typeof window._refreshAll === 'function') window._refreshAll();
+    });
+    moVirt.observe(document.body, { childList: true });
     m.querySelector('.wwm-modal-close').addEventListener('click', () => m.remove());
     // backdrop クリック閉じ 抑止 (×/キャンセルボタンのみ閉じ)
     m.querySelector('#wwmEditCancel').addEventListener('click', () => m.remove());
@@ -992,9 +1011,12 @@
     }
 
     m.querySelector('#wwmEditApply').addEventListener('click', () => {
+      _committed = true;
       if (!WWMState.virtual.gear) WWMState.virtual.gear = {};
       if (!WWMState.virtual.kongfu) WWMState.virtual.kongfu = {};
-      const vEq = JSON.parse(JSON.stringify(origEq));
+      // 起点 = 編集中 virtual 優先 (_applyNewLv の Lv 変更 baseAttrs/_inferredLv を保持)。
+      // origEq 固定だと Lv select / OCR の Lv 反映が採用時に消える既存バグがあった (2026-06-08)
+      const vEq = JSON.parse(JSON.stringify(WWMState.virtual.gear[slot] || origEq));
       vEq.exVo.baseAffixes = newAffixes;
       if (isSetEditable && newSuffix != null) vEq.exVo.suffix = parseInt(newSuffix, 10);
       WWMState.virtual.gear[slot] = vEq;
@@ -1013,6 +1035,7 @@
     });
 
     m.querySelector('#wwmEditReset').addEventListener('click', () => {
+      _committed = true;
       if (WWMState.virtual.gear) delete WWMState.virtual.gear[slot];
       if (WWMState.virtual.kongfu) {
         if (slot === '1') delete WWMState.virtual.kongfu.kongfuMain;
