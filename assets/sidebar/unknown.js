@@ -16,7 +16,7 @@
     if (!ri) return;
     const u = _detectUnknown(ri);
     const total = u.kongfu.length + u.xinfa.length + u.affix.length;
-    if (!total) { alert('未対応データなし'); return; }
+    if (!total) { alert((window.T && T.unknownNone) || '未対応データなし'); return; }
     // 報告用 snippet 生成
     const lines = ['## 未対応 ID 報告', ''];
     if (u.kongfu.length) {
@@ -63,15 +63,15 @@
     m.innerHTML = `
       <div class="wwm-modal">
         <div class="wwm-modal-header">
-          <h2>未対応データ報告 (${total}件)</h2>
+          <h2>${((window.T && T.unknownReportTitle) || '未対応データ報告 ({0}件)').replace('{0}', total)}</h2>
           <button class="wwm-modal-close" aria-label="Close">×</button>
         </div>
         <div class="wwm-modal-body">
-          <p>以下の内容をクリップボードコピー or GitHub Issue で報告してください。</p>
+          <p>${(window.T && T.unknownReportDesc) || '以下の内容をクリップボードコピー or GitHub Issue で報告してください。'}</p>
           <textarea class="wwm-bm-code" readonly style="min-height:200px;">${body.replace(/</g, '&lt;')}</textarea>
           <div class="wwm-btn-row" style="margin-top:12px;">
-            <button class="wwm-btn-primary" id="wwmCopyReport">クリップボードにコピー</button>
-            <a class="wwm-btn-secondary" href="${githubUrl}" target="_blank" rel="noopener">GitHub Issue を開く</a>
+            <button class="wwm-btn-primary" id="wwmCopyReport">${(window.T && T.unknownCopyBtn) || 'クリップボードにコピー'}</button>
+            <a class="wwm-btn-secondary" href="${githubUrl}" target="_blank" rel="noopener">${(window.T && T.unknownGithubBtn) || 'GitHub Issue を開く'}</a>
           </div>
         </div>
       </div>
@@ -83,8 +83,9 @@
       const ta = m.querySelector('textarea');
       ta.select(); ta.setSelectionRange(0, 99999);
       let ok = false; try { ok = document.execCommand('copy'); } catch (_) {}
-      if (navigator.clipboard) navigator.clipboard.writeText(body).then(() => { e.target.textContent = 'コピー完了 ✓'; }).catch(() => {});
-      else if (ok) { e.target.textContent = 'コピー完了 ✓'; }
+      const copiedLabel = (window.T && T.importCopied) || 'コピー完了 ✓';
+      if (navigator.clipboard) navigator.clipboard.writeText(body).then(() => { e.target.textContent = copiedLabel; }).catch(() => {});
+      else if (ok) { e.target.textContent = copiedLabel; }
     });
   }
 

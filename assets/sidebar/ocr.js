@@ -514,7 +514,7 @@
     ['獄半', '獄炎'], ['弘炎', '獄炎'], ['金武術', '全武術'],
     ['軽掌', '軽撃'], ['双多', '双剣'], ['御領', '首領'],
     ['記ダメ', '鼠ダメ'], ['和ダメ', '鼠ダメ'], ['基加', '増加'],
-    ['破竹', '瞬岚'],   // zh 訳語差: ゲーム内=破竹 / 公式ツール由来 dict=瞬岚 (bamboocut)
+    // ['破竹','瞬岚'] は 2026-06-07 dict zh 全面改訂 (ゲーム内訳=破竹 採用) で廃止 — 残すと正読を壊す
     ['起学', '武学'],   // zh OCR: 武→起
     ['筷筷', '鼠鼠'],   // zh OCR: 鼠鼠→筷筷
     ['8055', 'boss'], ['피빼', '피해']   // ko OCR: BOSS→8055 / 피해→피빼
@@ -542,10 +542,10 @@
   // 系統差が正規化で吸収できない別名 → statKey 直結 (ja。他言語は PoC 後に拡張)
   const _NAME_ALIASES = {
     '首領に与える': 'bossDmg',
-    '首领': 'bossDmg',          // zh: 对首领单位增伤
-    '精准': 'precision',        // zh 訳語差: ゲーム内=精准率 / dict=命中率
-    '敏': 'agility',            // zh 訳語差: ゲーム内=敏 / dict=速 (dict 語彙に 敏 は不在 = 誤爆なし)
+    '首领': 'bossDmg',          // zh: 对首领单位增伤 (dict 一致済だが誤読頑健性で維持)
+    // '精准'/'敏' alias は 2026-06-07 dict zh 改訂 (精准率/敏 採用) で廃止 — exact match が立つ
     '全武術': 'allWeaponDmg',
+    '全武术': 'allWeaponDmg',   // zh 簡体 (全武术增效 表記ブレ保険 — 実測は 全武学增效)
     '全武学': 'allWeaponDmg',
     '전체무술': 'allWeaponDmg'   // ko: 전체 무술 효과 증가
   };
@@ -600,7 +600,8 @@
       else sufSim = _dice(qSuf, cSuf);
       const preSim = (qPre.length >= 2 && cPre.length >= 2) ? _dice(qPre, cPre) : 0;
       // suffix 支配: 種別 (軽撃/鼠/쥐/Q…) は一意性が高い。suffix 不一致の候補は prefix が
-      // 完全一致でも採らない (kongfu 名は dict↔game で訳ブレあり — ko 浮塵/浮雲 実測)
+      // 完全一致でも採らない (kongfu 名は dict↔game で訳ブレあり — zh 粟子游尘 vs 浮尘绳镖 実測。
+      //  ko 縄 2 種 swap は 2026-06-07 dict 側修正済だが、 防御機構として suffix 支配は維持)
       const sim = sufSim > 0 ? (0.8 * sufSim + 0.2 * preSim) : 0;
       if (!best || sim > best.sim) best = { option: o, sim };
     }
@@ -659,7 +660,7 @@
     }
     // ゲーム内「X武学(ダメージ増加)」 = 辞書「Xダメ」 (武器種ダメ系の系統差)
     const qAlt = q.replace(/武学$/, 'ダメ');
-    const qAlt2 = q.replace(/武学$/, '伤害');   // zh: 绳镖武学(增伤) = dict 绳镖伤害
+    const qAlt2 = q.replace(/武学$/, '伤害');   // zh legacy: dict 改訂前 (X伤害) 互換。改訂後は exact match が先に立つ
     const qAlt3 = q.replace(/무술$/, '피해');   // ko: 승표 무술 (피해 증가) = dict 승표 피해
     let best = null;
     for (const o of options) {

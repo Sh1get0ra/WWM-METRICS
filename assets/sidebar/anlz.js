@@ -194,9 +194,10 @@
       const u = detectUnknown(ri);
       const total = u.kongfu.length + u.xinfa.length + u.affix.length;
       if (total) {
+        const noticeLabel = ((window.T && T.unknownNotice) || '⚠ 未対応データ {0}件 (click 報告)').replace('{0}', total);
         noticeHtml = `
           <div class="wwm-sb-notice" onclick="WWMSidebar.openUnknownReport()">
-            ⚠ 未対応データ ${total}件 (click 報告)
+            ${noticeLabel}
           </div>
         `;
       }

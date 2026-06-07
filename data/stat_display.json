@@ -1,97 +1,97 @@
 {
   "_schema": "Sidebar ステータス表示順 + 表示形式。ゲーム内表示順準拠。各 item は label (4言語) + format (int/pct/float/range) + calcKey (calc.js param 対応)。",
-  "_lastUpdated": "2026-05-25",
-  "_source": "ゲーム内ステータス画面 in-game observation (2026-05-25、4枚スクショ照合)",
-  "_note": "format: int=整数、pct=百分率、float=小数1桁、range=Min-Max。calcKey=calc.js computeExpected param key (未対応はnull)。expandable=サブ項目展開可。",
+  "_lastUpdated": "2026-06-07",
+  "_source": "ゲーム内ステータス画面 in-game observation (ja: 2026-05-25 4枚スクショ照合 / zh: 2026-06-07 5枚スクショ照合 — zh は原語。旧 zh 列は ja 直訳で誤りだった)",
+  "_note": "format: int=整数、pct=百分率、float=小数1桁、range=Min-Max。calcKey=calc.js computeExpected param key (未対応はnull)。expandable=サブ項目展開可。zh は 2026-06-07 裏ラベル (tooltip) 込み実測網羅: 穿透5/武学增伤8/最终生效4/header=武林造诣 全実証。残推定 = 伤害加成5 subItems のみ。ゲーム内に 手甲武学增伤 (拳) が存在するがツール未対応 key のため未掲載。",
 
   "header": {
-    "title": { "ja": "総合武力", "en": "Total Power", "zh": "总合武力", "ko": "총합 무력" },
+    "title": { "ja": "総合武力", "en": "Total Power", "zh": "武林造诣", "ko": "무림 조예" },
     "key": "totalMartial"
   },
 
   "sections": [
     {
       "key": "basicStats",
-      "title": { "ja": "基礎値", "en": "Base Stats", "zh": "基础值", "ko": "5대 속성" },
+      "title": { "ja": "基礎値", "en": "Base Stats", "zh": "五维属性", "ko": "5대 속성" },
       "items": [
         { "key": "body",     "label": { "ja": "体", "en": "Body",     "zh": "体", "ko": "체력" }, "format": "int", "calcKey": "body" },
-        { "key": "power", "label": { "ja": "力", "en": "Power",    "zh": "力", "ko": "내공" }, "format": "int", "calcKey": "power" },
-        { "key": "defense",  "label": { "ja": "防", "en": "Defense",  "zh": "防", "ko": "방어" }, "format": "int", "calcKey": "defense" },
-        { "key": "agility",  "label": { "ja": "速", "en": "Agility",  "zh": "速", "ko": "민첩" }, "format": "int", "calcKey": "agility" },
-        { "key": "momentum",    "label": { "ja": "会", "en": "Momentum", "zh": "会", "ko": "기세" }, "format": "int", "calcKey": "momentum" }
+        { "key": "power", "label": { "ja": "力", "en": "Power",    "zh": "劲", "ko": "내공" }, "format": "int", "calcKey": "power" },
+        { "key": "defense",  "label": { "ja": "防", "en": "Defense",  "zh": "御", "ko": "방어" }, "format": "int", "calcKey": "defense" },
+        { "key": "agility",  "label": { "ja": "速", "en": "Agility",  "zh": "敏", "ko": "민첩" }, "format": "int", "calcKey": "agility" },
+        { "key": "momentum",    "label": { "ja": "会", "en": "Momentum", "zh": "势", "ko": "기세" }, "format": "int", "calcKey": "momentum" }
       ]
     },
     {
       "key": "primaryStats",
-      "title": { "ja": "基本ステータス", "en": "Primary Stats", "zh": "基本属性", "ko": "기본 스탯" },
+      "title": { "ja": "基本ステータス", "en": "Primary Stats", "zh": "基础属性", "ko": "기초 속성" },
       "items": [
-        { "key": "physAtk",    "label": { "ja": "外功攻撃力", "en": "Physical ATK",    "zh": "外功攻击力", "ko": "외공 공격력" }, "format": "range", "calcKey": ["minPhysATK", "maxPhysATK"] },
+        { "key": "physAtk",    "label": { "ja": "外功攻撃力", "en": "Physical ATK",    "zh": "外功攻击", "ko": "외공 공격" }, "format": "range", "calcKey": ["minPhysATK", "maxPhysATK"] },
         { "key": "elemAtk",    "label": { "ja": "属性攻撃",   "en": "Elemental ATK",   "zh": "属性攻击",   "ko": "속성 공격" },     "format": "range", "calcKey": ["minElemDisp", "maxElemDisp"], "expandable": true, "subItems": [
-          { "key": "bellstrike", "label": { "ja": "鋼鳴攻撃力", "en": "Bellstrike ATK", "zh": "钢鸣攻击力", "ko": "명금 공격력" }, "format": "range", "calcKey": ["minBellstrike", "maxBellstrike"] },
-          { "key": "stonesplit", "label": { "ja": "砕岩攻撃力", "en": "Stonesplit ATK", "zh": "碎岩攻击力", "ko": "열석 공격력" }, "format": "range", "calcKey": ["minStonesplit", "maxStonesplit"] },
-          { "key": "silkbind",   "label": { "ja": "糸操攻撃力", "en": "Silkbind ATK",   "zh": "丝操攻击力", "ko": "견사 공격력" }, "format": "range", "calcKey": ["minSilkbind", "maxSilkbind"] },
-          { "key": "bamboocut",  "label": { "ja": "瞬嵐攻撃力", "en": "Bamboocut ATK",  "zh": "瞬岚攻击力", "ko": "파죽 공격력" }, "format": "range", "calcKey": ["minBamboocut", "maxBamboocut"] },
-          { "key": "voidAtk",    "label": { "ja": "無相攻撃力", "en": "Void ATK",       "zh": "无相攻击力", "ko": "무상 공격력" }, "format": "range", "calcKey": ["minVoid", "maxVoid"] }
+          { "key": "bellstrike", "label": { "ja": "鋼鳴攻撃力", "en": "Bellstrike ATK", "zh": "鸣金攻击", "ko": "명금 공격" }, "format": "range", "calcKey": ["minBellstrike", "maxBellstrike"] },
+          { "key": "stonesplit", "label": { "ja": "砕岩攻撃力", "en": "Stonesplit ATK", "zh": "裂石攻击", "ko": "열석 공격" }, "format": "range", "calcKey": ["minStonesplit", "maxStonesplit"] },
+          { "key": "silkbind",   "label": { "ja": "糸操攻撃力", "en": "Silkbind ATK",   "zh": "牵丝攻击", "ko": "견사 공격" }, "format": "range", "calcKey": ["minSilkbind", "maxSilkbind"] },
+          { "key": "bamboocut",  "label": { "ja": "瞬嵐攻撃力", "en": "Bamboocut ATK",  "zh": "破竹攻击", "ko": "파죽 공격" }, "format": "range", "calcKey": ["minBamboocut", "maxBamboocut"] },
+          { "key": "voidAtk",    "label": { "ja": "無相攻撃力", "en": "Void ATK",       "zh": "无相攻击", "ko": "무상 공격" }, "format": "range", "calcKey": ["minVoid", "maxVoid"] }
         ]}
       ]
     },
     {
       "key": "probability",
-      "title": { "ja": "判定確率", "en": "Judgment Rates", "zh": "判定概率", "ko": "판정 속성" },
+      "title": { "ja": "判定確率", "en": "Judgment Rates", "zh": "判定属性", "ko": "판정 속성" },
       "items": [
-        { "key": "hitRate",         "label": { "ja": "命中率",     "en": "Precision",       "zh": "命中率",     "ko": "정확도" },         "format": "rateApplied", "calcKey": "hitRate",      "appliedCalcKey": "appliedHit" },
+        { "key": "hitRate",         "label": { "ja": "命中率",     "en": "Precision",       "zh": "精准率",     "ko": "정확도" },         "format": "rateApplied", "calcKey": "hitRate",      "appliedCalcKey": "appliedHit" },
         { "key": "critRate",        "label": { "ja": "会心率",     "en": "Crit",            "zh": "会心率",     "ko": "치명타 확률" },         "format": "rateApplied", "calcKey": "critRate",     "appliedCalcKey": "appliedCrit", "expandable": true, "subItems": [
           { "key": "critRateBoosted", "label": { "ja": "実効会心率(ボーナス込み)", "en": "Effective Crit (with Bonus)", "zh": "实效会心率(含奖励)", "ko": "실효 치명타 확률(보너스 포함)" }, "format": "pct", "calcKey": "critRateBoosted", "hiddenStat": true }
         ]},
         { "key": "sympathyRate",    "label": { "ja": "会意率",     "en": "Affinity",        "zh": "会意率",     "ko": "각성 확률" },         "format": "rateApplied", "calcKey": "sympathyRate", "appliedCalcKey": "appliedSympathy" },
-        { "key": "addCritRate",     "label": { "ja": "付加会心率", "en": "Add Crit",        "zh": "附加会心率", "ko": "추가 치명타 확률" },     "format": "pct", "calcKey": "addCritRate" },
-        { "key": "addSympathyRate", "label": { "ja": "付加会意率", "en": "Add Affinity",    "zh": "附加会意率", "ko": "추가 각성 확률" },     "format": "pct", "calcKey": "addSympathyRate" },
-        { "key": "grazeConvert",    "label": { "ja": "軽傷転換率", "en": "Graze Convert",   "zh": "轻伤转化率", "ko": "경상 전환율" },         "format": "pct", "calcKey": "grazeConvert" },
-        { "key": "finalCritSym",    "label": { "ja": "最終会心会意率", "en": "Final Crit+Affinity", "zh": "最终会心会意率", "ko": "최종 치명타·각성" }, "format": "pct", "calcKey": "finalCritSym", "expandable": true, "subItems": [
-          { "key": "pCrit",    "label": { "ja": "最終発動会心率", "en": "Final Crit Rate",   "zh": "最终发动会心率", "ko": "최종 발동 치명타" }, "format": "pct", "calcKey": "pCrit" },
-          { "key": "pSym",     "label": { "ja": "最終発動会意率", "en": "Final Affinity Rate","zh": "最终发动会意率", "ko": "최종 발동 각성" },   "format": "pct", "calcKey": "pSympathy" },
-          { "key": "pGraze",   "label": { "ja": "最終発動軽傷率", "en": "Final Graze Rate",  "zh": "最终发动轻伤率", "ko": "최종 발동 경상" },   "format": "pct", "calcKey": "pGraze" },
-          { "key": "pNormal",  "label": { "ja": "最終発動並傷率", "en": "Final Normal Rate", "zh": "最终发动并伤率", "ko": "최종 발동 일반" },   "format": "pct", "calcKey": "pNormal" }
+        { "key": "addCritRate",     "label": { "ja": "付加会心率", "en": "Add Crit",        "zh": "直接会心率", "ko": "추가 치명타 확률" },     "format": "pct", "calcKey": "addCritRate" },
+        { "key": "addSympathyRate", "label": { "ja": "付加会意率", "en": "Add Affinity",    "zh": "直接会意率", "ko": "추가 각성 확률" },     "format": "pct", "calcKey": "addSympathyRate" },
+        { "key": "grazeConvert",    "label": { "ja": "軽傷転換率", "en": "Graze Convert",   "zh": "擦伤转化率", "ko": "찰과상 전환율" },         "format": "pct", "calcKey": "grazeConvert" },
+        { "key": "finalCritSym",    "label": { "ja": "最終会心会意率", "en": "Final Crit+Affinity", "zh": "最终会心会意率", "ko": "최종 치명타 각성 확률" }, "format": "pct", "calcKey": "finalCritSym", "expandable": true, "subItems": [
+          { "key": "pCrit",    "label": { "ja": "最終発動会心率", "en": "Final Crit Rate",   "zh": "最终生效会心概率", "ko": "최종 치명타 확률" }, "format": "pct", "calcKey": "pCrit" },
+          { "key": "pSym",     "label": { "ja": "最終発動会意率", "en": "Final Affinity Rate","zh": "最终生效会意概率", "ko": "최종 각성 확률" },   "format": "pct", "calcKey": "pSympathy" },
+          { "key": "pGraze",   "label": { "ja": "最終発動軽傷率", "en": "Final Graze Rate",  "zh": "最终生效擦伤概率", "ko": "최종 찰과상 확률" },   "format": "pct", "calcKey": "pGraze" },
+          { "key": "pNormal",  "label": { "ja": "最終発動並傷率", "en": "Final Normal Rate", "zh": "最终生效普伤概率", "ko": "최종 일반 피해 확률" },   "format": "pct", "calcKey": "pNormal" }
         ]}
       ]
     },
     {
       "key": "dmgBoost",
-      "title": { "ja": "ダメージ増加効果", "en": "Damage Boost", "zh": "伤害增加效果", "ko": "피해 증가 효과" },
+      "title": { "ja": "ダメージ増加効果", "en": "Damage Boost", "zh": "增伤效果", "ko": "피해 증가 효과" },
       "items": [
-        { "key": "critBoost",        "label": { "ja": "会心攻撃強化",              "en": "Crit DMG Boost",       "zh": "会心攻击强化",       "ko": "치명타 피해 보너스" },       "format": "pct",   "calcKey": "critBoost" },
-        { "key": "sympathyBoost",    "label": { "ja": "会意攻撃強化",              "en": "Affinity DMG Boost",   "zh": "会意攻击强化",       "ko": "각성 피해 보너스" },       "format": "pct",   "calcKey": "sympathyBoost" },
+        { "key": "critBoost",        "label": { "ja": "会心攻撃強化",              "en": "Crit DMG Boost",       "zh": "会心伤害加成",       "ko": "치명타 피해 보너스" },       "format": "pct",   "calcKey": "critBoost" },
+        { "key": "sympathyBoost",    "label": { "ja": "会意攻撃強化",              "en": "Affinity DMG Boost",   "zh": "会意伤害加成",       "ko": "각성 피해 보너스" },       "format": "pct",   "calcKey": "sympathyBoost" },
         { "key": "outerPen",         "label": { "ja": "外功貫通",                  "en": "Physical Pen",         "zh": "外功穿透",           "ko": "외공 관통" },             "format": "float", "calcKey": "outerPen" },
-        { "key": "weaponBonus",      "label": { "ja": "外功ダメージ強化",          "en": "Physical DMG Boost",   "zh": "外功伤害强化",       "ko": "외공 피해 보너스" },     "format": "pct",   "calcKey": "weaponBonus" },
-        { "key": "elemBoostMain",    "label": { "ja": "属性増強",                  "en": "Element Boost",        "zh": "属性增强",           "ko": "속성 증강" },             "format": "float", "calcKey": "attrBoostSum", "expandable": true, "subItems": [
-          { "key": "bellstrikePen", "label": { "ja": "鋼鳴貫通", "en": "Bellstrike Pen", "zh": "钢鸣穿透", "ko": "명금 관통" }, "format": "float", "calcKey": "bellstrikePen" },
-          { "key": "stonesplitPen", "label": { "ja": "砕岩貫通", "en": "Stonesplit Pen", "zh": "碎岩穿透", "ko": "열석 관통" }, "format": "float", "calcKey": "stonesplitPen" },
-          { "key": "silkbindPen",   "label": { "ja": "糸操貫通", "en": "Silkbind Pen",   "zh": "丝操穿透", "ko": "견사 관통" }, "format": "float", "calcKey": "silkbindPen" },
-          { "key": "bamboocutPen",  "label": { "ja": "瞬嵐貫通", "en": "Bamboocut Pen",  "zh": "瞬岚穿透", "ko": "파죽 관통" }, "format": "float", "calcKey": "bamboocutPen" },
+        { "key": "weaponBonus",      "label": { "ja": "外功ダメージ強化",          "en": "Physical DMG Boost",   "zh": "外功伤害加成",       "ko": "외공 피해 보너스" },     "format": "pct",   "calcKey": "weaponBonus" },
+        { "key": "elemBoostMain",    "label": { "ja": "属性増強",                  "en": "Element Boost",        "zh": "属攻穿透",           "ko": "속성 공격 관통" },             "format": "float", "calcKey": "attrBoostSum", "expandable": true, "subItems": [
+          { "key": "bellstrikePen", "label": { "ja": "鋼鳴貫通", "en": "Bellstrike Pen", "zh": "鸣金穿透", "ko": "명금 관통" }, "format": "float", "calcKey": "bellstrikePen" },
+          { "key": "stonesplitPen", "label": { "ja": "砕岩貫通", "en": "Stonesplit Pen", "zh": "裂石穿透", "ko": "열석 관통" }, "format": "float", "calcKey": "stonesplitPen" },
+          { "key": "silkbindPen",   "label": { "ja": "糸操貫通", "en": "Silkbind Pen",   "zh": "牵丝穿透", "ko": "견사 관통" }, "format": "float", "calcKey": "silkbindPen" },
+          { "key": "bamboocutPen",  "label": { "ja": "瞬嵐貫通", "en": "Bamboocut Pen",  "zh": "破竹穿透", "ko": "파죽 관통" }, "format": "float", "calcKey": "bamboocutPen" },
           { "key": "voidPen",       "label": { "ja": "無相貫通", "en": "Void Pen",       "zh": "无相穿透", "ko": "무상 관통" }, "format": "float", "calcKey": "voidPen" }
         ]},
-        { "key": "elemAtkBoost",     "label": { "ja": "属性攻撃強化",              "en": "Elem ATK Boost",       "zh": "属性攻击强化",       "ko": "속성 공격 피해 보너스" },       "format": "pct",   "calcKey": "elemAtkBoostDisp", "expandable": true, "subItems": [
-          { "key": "elemDmgBellstrike", "label": { "ja": "鋼鳴ダメージ上昇", "en": "Bellstrike DMG", "zh": "钢鸣伤害上升", "ko": "명금 피해 증가" }, "format": "pct", "calcKey": "elemDmgBellstrike" },
-          { "key": "elemDmgStonesplit", "label": { "ja": "砕岩ダメージ上昇", "en": "Stonesplit DMG", "zh": "碎岩伤害上升", "ko": "열석 피해 증가" }, "format": "pct", "calcKey": "elemDmgStonesplit" },
-          { "key": "elemDmgSilkbind",   "label": { "ja": "糸操ダメージ上昇", "en": "Silkbind DMG",   "zh": "丝操伤害上升", "ko": "견사 피해 증가" }, "format": "pct", "calcKey": "elemDmgSilkbind" },
-          { "key": "elemDmgBamboocut",  "label": { "ja": "瞬嵐ダメージ上昇", "en": "Bamboocut DMG",  "zh": "瞬岚伤害上升", "ko": "파죽 피해 증가" }, "format": "pct", "calcKey": "elemDmgBamboocut" },
-          { "key": "elemDmgVoid",       "label": { "ja": "無相ダメージ上昇", "en": "Void DMG",       "zh": "无相伤害上升", "ko": "무상 피해 증가" }, "format": "pct", "calcKey": "elemDmgVoid" }
+        { "key": "elemAtkBoost",     "label": { "ja": "属性攻撃強化",              "en": "Elem ATK Boost",       "zh": "属攻伤害加成",       "ko": "속성 공격 피해 보너스" },       "format": "pct",   "calcKey": "elemAtkBoostDisp", "expandable": true, "subItems": [
+          { "key": "elemDmgBellstrike", "label": { "ja": "鋼鳴ダメージ上昇", "en": "Bellstrike DMG", "zh": "鸣金伤害加成", "ko": "명금 피해 증가" }, "format": "pct", "calcKey": "elemDmgBellstrike" },
+          { "key": "elemDmgStonesplit", "label": { "ja": "砕岩ダメージ上昇", "en": "Stonesplit DMG", "zh": "裂石伤害加成", "ko": "열석 피해 증가" }, "format": "pct", "calcKey": "elemDmgStonesplit" },
+          { "key": "elemDmgSilkbind",   "label": { "ja": "糸操ダメージ上昇", "en": "Silkbind DMG",   "zh": "牵丝伤害加成", "ko": "견사 피해 증가" }, "format": "pct", "calcKey": "elemDmgSilkbind" },
+          { "key": "elemDmgBamboocut",  "label": { "ja": "瞬嵐ダメージ上昇", "en": "Bamboocut DMG",  "zh": "破竹伤害加成", "ko": "파죽 피해 증가" }, "format": "pct", "calcKey": "elemDmgBamboocut" },
+          { "key": "elemDmgVoid",       "label": { "ja": "無相ダメージ上昇", "en": "Void DMG",       "zh": "无相伤害加成", "ko": "무상 피해 증가" }, "format": "pct", "calcKey": "elemDmgVoid" }
         ]},
-        { "key": "allMartialBoost",  "label": { "ja": "全武術効果増加",            "en": "All Martial Boost",    "zh": "全武术效果增加",     "ko": "모든 무술의 효과 증가" },     "format": "pct",   "calcKey": "allMartialBoost" },
-        { "key": "specMartialBoost", "label": { "ja": "指定武術効果強化",          "en": "Spec Martial Boost",   "zh": "指定武术效果强化",   "ko": "특정 무술 효과 증가" },   "format": "pct",   "calcKey": "_specMartialBoostMax", "expandable": true, "subItems": [
-          { "key": "swordDmg",      "label": { "ja": "剣武術ダメ",     "en": "Sword DMG",       "zh": "剑武术伤害",     "ko": "검 무술" },        "format": "pct", "calcKey": "swordDmg" },
-          { "key": "spearDmg",      "label": { "ja": "槍武術ダメ",     "en": "Spear DMG",       "zh": "枪武术伤害",     "ko": "창 무술" },        "format": "pct", "calcKey": "spearDmg" },
-          { "key": "fanDmg",        "label": { "ja": "扇武術ダメ",     "en": "Fan DMG",         "zh": "扇武术伤害",     "ko": "부채 무술" },      "format": "pct", "calcKey": "fanDmg" },
-          { "key": "umbrellaDmg",   "label": { "ja": "傘武術ダメ",     "en": "Umbrella DMG",    "zh": "伞武术伤害",     "ko": "우산 무술" },      "format": "pct", "calcKey": "umbrellaDmg" },
-          { "key": "hengBladeDmg",  "label": { "ja": "横刀武術ダメ",   "en": "Heng Blade DMG",  "zh": "横刀武术伤害",   "ko": "횡도 무술" },      "format": "pct", "calcKey": "hengBladeDmg" },
-          { "key": "moBladeDmg",    "label": { "ja": "斬馬刀武術ダメ", "en": "Mo Blade DMG",    "zh": "斩马刀武术伤害", "ko": "참마도 무술" },    "format": "pct", "calcKey": "moBladeDmg" },
-          { "key": "dualBladesDmg", "label": { "ja": "双剣武術ダメ",   "en": "Dual Blades DMG", "zh": "双剑武术伤害",   "ko": "쌍검 무술" },      "format": "pct", "calcKey": "dualBladesDmg" },
-          { "key": "ropeDartDmg",   "label": { "ja": "縄鏢武術ダメ",   "en": "Rope Dart DMG",   "zh": "绳镖武术伤害",   "ko": "승표 무술" },      "format": "pct", "calcKey": "ropeDartDmg" }
+        { "key": "allMartialBoost",  "label": { "ja": "全武術効果増加",            "en": "All Martial Boost",    "zh": "全部武学增效",     "ko": "모든 무술의 효과 증가" },     "format": "pct",   "calcKey": "allMartialBoost" },
+        { "key": "specMartialBoost", "label": { "ja": "指定武術効果強化",          "en": "Spec Martial Boost",   "zh": "指定武学增效",   "ko": "특정 무술 효과 증가" },   "format": "pct",   "calcKey": "_specMartialBoostMax", "expandable": true, "subItems": [
+          { "key": "swordDmg",      "label": { "ja": "剣武術ダメ",     "en": "Sword DMG",       "zh": "剑武学增伤",     "ko": "검 무술 피해 증가" },        "format": "pct", "calcKey": "swordDmg" },
+          { "key": "spearDmg",      "label": { "ja": "槍武術ダメ",     "en": "Spear DMG",       "zh": "枪武学增伤",     "ko": "창 무술 피해 증가" },        "format": "pct", "calcKey": "spearDmg" },
+          { "key": "fanDmg",        "label": { "ja": "扇武術ダメ",     "en": "Fan DMG",         "zh": "扇武学增效",     "ko": "부채 무술 효과 증가" },      "format": "pct", "calcKey": "fanDmg" },
+          { "key": "umbrellaDmg",   "label": { "ja": "傘武術ダメ",     "en": "Umbrella DMG",    "zh": "伞武学增效",     "ko": "우산 무술 효과 증가" },      "format": "pct", "calcKey": "umbrellaDmg" },
+          { "key": "hengBladeDmg",  "label": { "ja": "横刀武術ダメ",   "en": "Heng Blade DMG",  "zh": "横刀武学增伤",   "ko": "횡도 무술 피해 증가" },      "format": "pct", "calcKey": "hengBladeDmg" },
+          { "key": "moBladeDmg",    "label": { "ja": "斬馬刀武術ダメ", "en": "Mo Blade DMG",    "zh": "陌刀武学增伤", "ko": "맥도 무술 피해 증가" },    "format": "pct", "calcKey": "moBladeDmg" },
+          { "key": "dualBladesDmg", "label": { "ja": "双剣武術ダメ",   "en": "Dual Blades DMG", "zh": "双刀武学增伤",   "ko": "쌍도 무술 피해 증가" },      "format": "pct", "calcKey": "dualBladesDmg" },
+          { "key": "ropeDartDmg",   "label": { "ja": "縄鏢武術ダメ",   "en": "Rope Dart DMG",   "zh": "绳镖武学增伤",   "ko": "승표 무술 피해 증가" },      "format": "pct", "calcKey": "ropeDartDmg" }
         ]},
-        { "key": "bossBoost",        "label": { "ja": "首領に与えるダメージ増加",  "en": "BOSS DMG Boost",       "zh": "对首领伤害增加",     "ko": "BOSS 데미지 증가" },     "format": "pct",   "calcKey": "bossBoost" },
-        { "key": "playerBoost",      "label": { "ja": "プレイヤーに与える効果強化","en": "PvP DMG Boost",        "zh": "对玩家效果强化",     "ko": "PvP 효과 강화" },         "format": "pct",   "calcKey": "playerBoost" },
-        { "key": "stMysticDmg",      "label": { "ja": "単体系奇術ダメージ増加",    "en": "ST Mystic DMG Boost",  "zh": "单体系奇术伤害增加", "ko": "단일계 기술 데미지 증가" }, "format": "pct", "calcKey": "stMysticDmg" },
-        { "key": "areaMysticDmg",    "label": { "ja": "範囲系奇術ダメージ増加",    "en": "AOE Mystic DMG Boost", "zh": "范围系奇术伤害增加", "ko": "범위계 기술 데미지 증가" }, "format": "pct", "calcKey": "areaMysticDmg" }
+        { "key": "bossBoost",        "label": { "ja": "首領に与えるダメージ増加",  "en": "BOSS DMG Boost",       "zh": "对首领单位增伤",     "ko": "BOSS 유닛에 대한 피해 증가" },     "format": "pct",   "calcKey": "bossBoost" },
+        { "key": "playerBoost",      "label": { "ja": "プレイヤーに与える効果強化","en": "PvP DMG Boost",        "zh": "对玩家单位增效",     "ko": "플레이어 유닛에 대한 효과 증가" },         "format": "pct",   "calcKey": "playerBoost" },
+        { "key": "stMysticDmg",      "label": { "ja": "単体系奇術ダメージ増加",    "en": "ST Mystic DMG Boost",  "zh": "单体类奇术增伤", "ko": "단일류 비결 피해 증가" }, "format": "pct", "calcKey": "stMysticDmg" },
+        { "key": "areaMysticDmg",    "label": { "ja": "範囲系奇術ダメージ増加",    "en": "AOE Mystic DMG Boost", "zh": "群体类奇术增伤", "ko": "단체류 비결 피해 증가" }, "format": "pct", "calcKey": "areaMysticDmg" }
       ]
     }
   ]
