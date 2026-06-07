@@ -162,7 +162,7 @@
       x2.imageSmoothingEnabled = true;
       x2.fillStyle = '#fff'; x2.fillRect(0, 0, c2.width, c2.height);
       x2.drawImage(g1, trim.x0, 0, tw, srcH, 0, 0, tw * scale, srcH * scale);
-      return { canvas: c2, y0: b.y0, y1: b.y1, wrapped: !!b.wrapped };
+      return { canvas: c2, y0: b.y0, y1: b.y1, wrapped: !!b.wrapped, trimX0: trim.x0, scale, origW: w };
     });
     return mapped;
   }
@@ -220,24 +220,37 @@
     });
     return _scriptP;
   }
-  let _worker = null, _workerLang = null;
+  // worker は言語別 cache (本文用 + 数値専用 eng の併存。jpn model は数字 8↔9 に弱く、
+  // 数値 2-pass は常に eng worker で行う — 同一画像で eng が正読する事を実測確認 2026-06-07)
+  const _workers = {};
   async function _getWorker(tessLang, onProgress) {
     await _loadScript();
-    if (_worker && _workerLang === tessLang) return _worker;
-    if (_worker) { try { await _worker.terminate(); } catch (e) {} _worker = null; _workerLang = null; }
+    if (_workers[tessLang]) return _workers[tessLang];
     try {
-      _worker = await window.Tesseract.createWorker(tessLang, 1, {
+      const wk = await window.Tesseract.createWorker(tessLang, 1, {
         logger: (m) => {
           if (m.status === 'loading language traineddata') onProgress?.('lang', m.progress || 0);
           else if (m.status === 'recognizing text') onProgress?.('rec', m.progress || 0);
         }
       });
-      _workerLang = tessLang;
+      _workers[tessLang] = wk;
+      return wk;
     } catch (e) {
-      _worker = null; _workerLang = null;   // 半端な worker を cache に残すと次回も即死する
+      delete _workers[tessLang];   // 半端な worker を cache に残すと次回も即死する
       throw e;
     }
-    return _worker;
+  }
+  // 数値専用 worker (eng の独立 instance + digits whitelist + PSM7 固定)。
+  // EN 本文用 eng worker と共有すると whitelist が本文認識を汚染するため必ず別 instance
+  async function _getDigitsWorker(onProgress) {
+    if (_workers.__digits) return _workers.__digits;
+    await _loadScript();
+    const wk = await window.Tesseract.createWorker('eng', 1, {
+      logger: (m) => { if (m.status === 'loading language traineddata') onProgress?.('lang', m.progress || 0); }
+    });
+    await wk.setParameters({ tessedit_pageseg_mode: '7', tessedit_char_whitelist: '0123456789.+%' });
+    _workers.__digits = wk;
+    return wk;
   }
 
   // canvas → 局所 Otsu 二値化 canvas (低確信 retry 用)
@@ -324,7 +337,9 @@
         let end = anchor;
         while (end + 1 < words.length && _NUMW_RE.test(words[end + 1].text.trim())) end++;
         nameText = words.slice(0, anchor).map(wd => wd.text).join(' ');   // space 結合 (EN token 分割用。CJK は _norm が除去)
-        gapRatio = (words[anchor].bbox.x0 - words[anchor - 1].bbox.x1) / src.width;   // name↔値 距離 (画面種別判定用)
+        // 値の絶対 x 位置 (元画像幅比)。詳細画面 = 右端寄せ列 (≥0.75)、強化画面 = 名前直後 (可変 <0.75)
+        // — badge word が name↔値間に読まれるため gap でなく絶対位置で測る (2026-06-07 実測)
+        gapRatio = ((b.trimX0 || 0) + words[anchor].bbox.x0 / (b.scale || 3)) / (b.origW || src.width);
         numText = words.slice(anchor, end + 1).map(wd => wd.text).join('');
         // value 領域 2-pass (whitelist)
         const x0 = Math.max(0, words[anchor].bbox.x0 - 8);
@@ -341,13 +356,12 @@
           const ctx4 = c4.getContext('2d');
           ctx4.imageSmoothingEnabled = false;
           ctx4.drawImage(c3, 0, 0, c4.width, c4.height);
-          // gray + binary + nearest2x で whitelist 認識 → ゲーム数値書式 (常に小数 1 桁 +X.Y[%]) 適合
-          // かつ高確信の候補を採用 (8↔9/8↔6 混同の票決、PoC 実測で確定)
-          await worker.setParameters({ tessedit_char_whitelist: '0123456789.+%' });
-          const rA = await worker.recognize(c3);
-          const rB = await worker.recognize(_binarizeCanvas(c3));
-          const rC = await worker.recognize(c4);
-          await worker.setParameters({ tessedit_char_whitelist: '' });
+          // gray + binary + nearest2x を digits 専用 worker (eng) で認識 → ゲーム数値書式適合 +
+          // 高確信の候補を採用 (jpn model は 8↔9 に弱い — digits は常に eng で読む、2026-06-07 実測)
+          const dWorker = await _getDigitsWorker(onProgress);
+          const rA = await dWorker.recognize(c3);
+          const rB = await dWorker.recognize(_binarizeCanvas(c3));
+          const rC = await dWorker.recognize(c4);
           const gf = /^[+＋]?\d{1,3}[.,]\d[%％]?$/;
           const t1c = String(numText || '').replace(/\s+/g, '');
           const cands = [
@@ -670,7 +684,7 @@
     // detailMode = 装備詳細画面。判別 = name↔値 の水平 gap 中央値 (詳細画面は値が右端寄せ = gap 巨大、
     // 旧 強化画面は値が名前直後 = gap 極小。言語非依存・separator/装飾に依存しない — 2026-06-07 実測)
     const gaps = lines.map(l => l.gapRatio).filter(g => g != null);
-    const detailMode = gaps.filter(g => g >= 0.35).length >= 3;   // 巨大 gap (右端寄せ値) ≥3 行 = 詳細画面。旧画面の gap は max 0.03 — 実測
+    const detailMode = gaps.filter(g => g >= 0.75).length >= 4;   // 値 x ≥75%幅 が 4 行以上 = 右端寄せ列 = 詳細画面 — 実測
     const { lv, affixes } = _parseLines(lines, detailMode);
     if (detailMode) {
       // ── 装備詳細画面: affix = 小数 1 桁値の行のみ (基礎ステ/セット効果/耐久度 = 整数 = 自然排除)。
@@ -678,7 +692,10 @@
       const gfded = (a) => /\d[.,]\d$/.test(String(a.rawNum || ''));
       const rows = [];
       {
-        const sec = affixes.filter(a => gfded(a));
+        // 最後の 6 小数行 = affix 区画 (基礎ステは常に上 = 先頭から溢れる方を捨てる。
+        //  基礎ステの小数誤読 71→71.0 等の混入対策 — 2026-06-07 EN 実測)
+        let sec = affixes.filter(a => gfded(a));
+        if (sec.length > 6) sec = sec.slice(-6);
         for (let i = 0; i < sec.length && i < 6; i++) {
           const a = sec[i];
           let m = _matchAffix(a.name, ctx.getOptions(i) || []);
