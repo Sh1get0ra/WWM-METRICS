@@ -2381,8 +2381,15 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 }
 /* drop hover (新置列) */
 .wwm-cmp-new.wwm-ocr-dropping { outline: 2px dashed var(--gold-deep); outline-offset: -2px; }
-/* ? ガイドボタン (📷 右隣) */
-.wwm-ocr-help-btn { min-width: 24px; font-weight: var(--fw-bold); }
+/* ? ガイドボタン (📷 右隣) — 朱地白文字 literal = 両 theme 共通で目立たせる (2026-06-08 兄貴指示) */
+.wwm-ocr-help-btn {
+  min-width: 24px;
+  font-weight: var(--fw-bold);
+  background: #c83c2b;
+  color: #fff;
+  border-color: #c83c2b;
+}
+.wwm-ocr-help-btn:hover { background: #e8513a; border-color: #e8513a; }
 /* 取込ガイド modal: 撮影例 mock = ゲーム詳細画面の HTML 再現 (実スクショ再配布回避)。
    ゲーム UI = 常時暗地 → theme 非連動の literal 色 (card artifact と同方針) */
 .wwm-ocr-guide { max-width: 440px; }
