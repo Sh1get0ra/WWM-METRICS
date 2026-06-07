@@ -83,8 +83,9 @@
     const { gray, w, h } = pre;
     const gth = _otsu(gray);                        // profile 用の全体閾値
     const inkTh = Math.max(2, w * 0.004);           // 黒 0.4% 以上 = テキスト行
-    const barRun = w * 0.35;                        // これ以上の連続 run = バー
+    const barRun = w * 0.35;                        // これ以上の連続 run = バー候補
     const bands = [];
+    const rowInk = new Array(h).fill(0);
     let start = -1;
     for (let y = 0; y < h; y++) {
       let c = 0, run = 0, maxRun = 0;
@@ -92,7 +93,11 @@
         if (gray[y * w + x] < gth) { c++; run++; if (run > maxRun) maxRun = run; }
         else run = 0;
       }
-      const isText = c >= inkTh && maxRun < barRun;
+      rowInk[y] = c;
+      // バー = 長い run かつ「run 以外の ink が少ない」(ベタ線 + 右端 badge ~4% を許容)。
+      // 装飾 (墨絵 swirl) 上の text 行は extra ink が大きい → 除外しない (PoC 実測: 下端行の消失対策)
+      const isBar = maxRun >= barRun && (c - maxRun) <= w * 0.06;
+      const isText = c >= inkTh && !isBar;
       if (isText && start < 0) start = y;
       if (!isText && start >= 0) {
         if (y - start >= 8) bands.push({ y0: start, y1: y });
@@ -100,6 +105,30 @@
       }
     }
     if (start >= 0 && h - start >= 8) bands.push({ y0: start, y1: h });
+    // 縦長 band = 折返し 2 行が融合 (PSM single-line が崩壊) → 内部の ink 谷で分割。
+    // 分割後の band もまだ縦長なら再分割 (fixpoint、最大 4 pass — 谷 1 回では 2 行残ることがある)
+    if (bands.length >= 2) {
+      const hs = bands.map(b => b.y1 - b.y0).sort((a, b) => a - b);
+      const medH = hs[Math.floor(hs.length / 2)];
+      for (let pass = 0; pass < 4; pass++) {
+        let didSplit = false;
+        for (let i = bands.length - 1; i >= 0; i--) {
+          const b = bands[i];
+          const bh = b.y1 - b.y0;
+          if (bh <= medH * 1.8 || bh < 24) continue;
+          let valley = -1, valleyInk = Infinity;
+          for (let y = b.y0 + Math.floor(bh * 0.25); y <= b.y0 + Math.ceil(bh * 0.75); y++) {
+            if (rowInk[y] < valleyInk) { valleyInk = rowInk[y]; valley = y; }
+          }
+          if (valley > b.y0 + 8 && b.y1 - valley >= 8) {
+            // wrapped flag: 折返し由来の行は値の信頼を下げる (3↔8 等の誤読が出やすい難所)
+            bands.splice(i, 1, { y0: b.y0, y1: valley, wrapped: true }, { y0: valley, y1: b.y1, wrapped: true });
+            didSplit = true;
+          }
+        }
+        if (!didSplit) break;
+      }
+    }
     return bands.map(b => {
       // pad は画像端で clamp (負の source 座標は drawImage が暗黙 clamp し crop がズレる)
       const padT = Math.min(4, b.y0);
@@ -131,7 +160,7 @@
       x2.imageSmoothingEnabled = true;
       x2.fillStyle = '#fff'; x2.fillRect(0, 0, c2.width, c2.height);
       x2.drawImage(g1, trim.x0, 0, tw, srcH, 0, 0, tw * scale, srcH * scale);
-      return { canvas: c2, y0: b.y0, y1: b.y1 };
+      return { canvas: c2, y0: b.y0, y1: b.y1, wrapped: !!b.wrapped };
     });
   }
 
@@ -250,10 +279,23 @@
         if ((r2.data.confidence || 0) > (data.confidence || 0)) { data = r2.data; src = binCv; }
       }
       let text = (data.text || '').trim();
-      // Lv 帯 rescue: "Lv" は読めたが数字が誤読 (gradient 帯) → 数字 whitelist で再認識
+      // Lv 帯 rescue: "Lv" は読めたが数字が誤読 (gradient 帯/「承音 ·」prefix) →
+      // "Lv" word の bbox 右側だけ crop して数字 whitelist 再認識 (帯全体だと CJK ノイズに負ける)
       if (/lv/i.test(text) && !/lv\.?\s*\d/i.test(text)) {
+        const wLv = (data.words || []).find(wd => /lv/i.test(wd.text || ''));
+        let lvSrc = src;
+        if (wLv && wLv.bbox && src.width - wLv.bbox.x0 > 16) {
+          const cx = Math.max(0, wLv.bbox.x0 - 4);
+          const cw = src.width - cx;
+          const cL = document.createElement('canvas');
+          cL.width = cw; cL.height = src.height;
+          const cctx = cL.getContext('2d');
+          cctx.fillStyle = '#fff'; cctx.fillRect(0, 0, cw, src.height);
+          cctx.drawImage(src, cx, 0, cw, src.height, 0, 0, cw, src.height);
+          lvSrc = cL;
+        }
         await worker.setParameters({ tessedit_char_whitelist: 'Lv.0123456789' });
-        const rLv = await worker.recognize(src);
+        const rLv = await worker.recognize(lvSrc);
         await worker.setParameters({ tessedit_char_whitelist: '' });
         const tLv = (rLv.data.text || '').trim();
         if (/lv\.?\s*\d/i.test(tLv)) text = tLv;
@@ -312,7 +354,7 @@
           }
         }
       }
-      out.push({ text, conf: data.confidence, numConf, nameText, numText });
+      out.push({ text, conf: data.confidence, numConf, nameText, numText, wrapped: !!b.wrapped });
     }
     return out;
   }
@@ -337,7 +379,7 @@
         }
         continue;   // 数値専用 + 前行完結 → 名前なし断片として破棄
       }
-      merged.push({ text: t, conf: ln.conf, numConf: ln.numConf, nameText: ln.nameText, numText: ln.numText });
+      merged.push({ text: t, conf: ln.conf, numConf: ln.numConf, nameText: ln.nameText, numText: ln.numText, wrapped: ln.wrapped });
     }
     let lv = null;
     const affixes = [];
@@ -373,13 +415,16 @@
         rawNum = numM[1];
       }
       if (!name) continue;
+      // wrapped (折返し分割) 行の値は常に要確認扱い (3↔8 等の誤読難所、PoC 実測)
+      let nc = ln.numConf != null ? ln.numConf / 100 : null;
+      if (ln.wrapped) nc = Math.min(nc != null ? nc : (ln.conf || 0) / 100, 0.4);
       affixes.push({
         name,
         value,
         isPct,
         rawNum,
         conf: (ln.conf || 0) / 100,
-        numConf: ln.numConf != null ? ln.numConf / 100 : null
+        numConf: nc
       });
     }
     return { lv, affixes };
@@ -405,13 +450,17 @@
     ['瞬風', '瞬嵐'], ['隊風', '瞬嵐'], ['隣風', '瞬嵐'],
     ['縄鐘', '縄鏢'], ['綿通', '貫通'], ['真通', '貫通'],
     ['獄半', '獄炎'], ['弘炎', '獄炎'], ['金武術', '全武術'],
-    ['軽掌', '軽撃'], ['双多', '双剣'], ['御領', '首領']
+    ['軽掌', '軽撃'], ['双多', '双剣'], ['御領', '首領'],
+    ['記ダメ', '鼠ダメ'], ['基加', '増加']
   ];
-  function _normName(s) {
-    let t = _norm(s)
-      .replace(/[\[(（【「［][^\])）】」］]{0,3}[\])）】」］]/g, '')   // 短い括弧 token ([転] の誤読含む) 除去
-      .replace(/[・･]/g, '');
+  function _applyConfusions(t) {
     for (const [bad, good] of _OCR_CONFUSIONS) t = t.split(bad).join(good);
+    return t;
+  }
+  function _normName(s) {
+    let t = _applyConfusions(_norm(s)
+      .replace(/[\[(（【「［][^\])）】」］]{0,3}[\])）】」］]/g, '')   // 短い括弧 token ([転] の誤読含む) 除去
+      .replace(/[・･]/g, ''));
     t = t.replace(/攻撃力(?=強化$|$)/, '攻撃');                       // 攻撃力 → 攻撃 (単独 stat「力」は温存)
     for (let i = 0; i < 3; i++) {
       const t2 = t.replace(/(強化|増加|ダメージ|ダメ|効果|アップ)$/, '');
@@ -443,6 +492,39 @@
     }
     return (2 * inter) / ((a.length - 1) + (b.length - 1));
   }
+  // 武術固有 suffix (軽撃/Q/鼠/特殊/チャージ…) 用正規化 — 短語彙なので min ガードなしで剥がす
+  function _normSuffixK(s) {
+    let t = _applyConfusions(_norm(s).replace(/[・･]/g, ''));
+    for (let i = 0; i < 3; i++) {
+      const t2 = t.replace(/(強化|増加|ダメージ|ダメ|効果|アップ)$/, '');
+      if (t2 === t) break;
+      t = t2;
+    }
+    return t;
+  }
+  // 武術固有行 (・付き): 「<武術名>・<種別>」を分割 match。種別 suffix は一意性が高く
+  // 武術名部分 (icon glow 上) の誤読に頑健 (PoC 実測: ドクめ火のが知・軽撃 → 獄炎の双剣 軽撃強化)
+  function _matchKongfuRow(parsedName, options) {
+    const parts = String(parsedName).split(/[・･]/);
+    if (parts.length < 2) return null;
+    const qSuf = _normSuffixK(parts[parts.length - 1]);
+    const qPre = _normName(parts.slice(0, -1).join(''));
+    let best = null;
+    for (const o of options) {
+      const sp = String(o.name).split(/\s+/);
+      if (sp.length < 2) continue;                 // 固有 label = 「<武術名> <種別>強化」形のみ対象
+      const cPre = _normName(sp.slice(0, -1).join(''));
+      const cSuf = _normSuffixK(sp[sp.length - 1]);
+      let sufSim;
+      if (qSuf && qSuf === cSuf) sufSim = 1;
+      else if (qSuf.length < 2 || cSuf.length < 2) sufSim = 0;
+      else sufSim = _dice(qSuf, cSuf);
+      const preSim = (qPre.length >= 2 && cPre.length >= 2) ? _dice(qPre, cPre) : 0;
+      const sim = 0.65 * sufSim + 0.35 * preSim;
+      if (!best || sim > best.sim) best = { option: o, sim };
+    }
+    return best;
+  }
   function _matchAffix(parsedName, options) {
     const q = _normName(parsedName);
     if (!q) return null;
@@ -467,6 +549,11 @@
       else if (c.length < 2) sim = 0;                          // 1 文字候補に長い query を吸わせない (会心準代→会 誤match 対策)
       else sim = isKongfuSpecific ? _dice(q, c) : _bestWindowDice(q, c);
       if (!best || sim > best.sim) best = { option: o, sim };
+    }
+    // 武術固有行は分割 match (suffix 重視) も試し、良い方を採用
+    if (isKongfuSpecific) {
+      const kr = _matchKongfuRow(parsedName, options);
+      if (kr && (!best || kr.sim > best.sim)) best = kr;
     }
     return (best && best.sim >= 0.4) ? best : null;
   }
