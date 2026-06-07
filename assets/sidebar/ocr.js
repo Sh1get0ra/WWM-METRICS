@@ -81,12 +81,16 @@
     }
     if (start >= 0 && h - start >= 8) bands.push({ y0: start, y1: h });
     return bands.map(b => {
-      const bh = (b.y1 - b.y0) + 8;
+      // pad は画像端で clamp (負の source 座標は drawImage が暗黙 clamp し crop がズレる)
+      const padT = Math.min(4, b.y0);
+      const padB = Math.min(4, h - b.y1);
+      const srcY = b.y0 - padT;
+      const srcH = (b.y1 - b.y0) + padT + padB;
       const c2 = document.createElement('canvas');
-      c2.width = w * 3; c2.height = bh * 3;
+      c2.width = w * 3; c2.height = srcH * 3;
       const x2 = c2.getContext('2d');
       x2.fillStyle = '#fff'; x2.fillRect(0, 0, c2.width, c2.height);
-      x2.drawImage(cv, 0, b.y0 - 4, w, bh, 0, 0, w * 3, bh * 3);
+      x2.drawImage(cv, 0, srcY, w, srcH, 0, 0, w * 3, srcH * 3);
       return { canvas: _trimIcon(c2), y0: b.y0, y1: b.y1 };
     });
   }
@@ -109,11 +113,13 @@
       const first = blobs[0];
       const gap = blobs[1].x0 - first.x1;
       if ((first.x1 - first.x0) <= h * 1.6 && gap >= h * 0.5) {
+        const srcX = Math.max(0, blobs[1].x0 - 8);   // 負座標 clamp
+        const dstW = w - srcX;
         const c2 = document.createElement('canvas');
-        c2.width = (w - blobs[1].x0) + 8; c2.height = h;
+        c2.width = dstW; c2.height = h;
         const ctx2 = c2.getContext('2d');
         ctx2.fillStyle = '#fff'; ctx2.fillRect(0, 0, c2.width, c2.height);
-        ctx2.drawImage(cv, blobs[1].x0 - 8, 0, c2.width, h, 0, 0, c2.width, h);
+        ctx2.drawImage(cv, srcX, 0, dstW, h, 0, 0, dstW, h);
         return c2;
       }
     }
@@ -142,14 +148,19 @@
   async function _getWorker(tessLang, onProgress) {
     await _loadScript();
     if (_worker && _workerLang === tessLang) return _worker;
-    if (_worker) { try { await _worker.terminate(); } catch (e) {} _worker = null; }
-    _worker = await window.Tesseract.createWorker(tessLang, 1, {
-      logger: (m) => {
-        if (m.status === 'loading language traineddata') onProgress?.('lang', m.progress || 0);
-        else if (m.status === 'recognizing text') onProgress?.('rec', m.progress || 0);
-      }
-    });
-    _workerLang = tessLang;
+    if (_worker) { try { await _worker.terminate(); } catch (e) {} _worker = null; _workerLang = null; }
+    try {
+      _worker = await window.Tesseract.createWorker(tessLang, 1, {
+        logger: (m) => {
+          if (m.status === 'loading language traineddata') onProgress?.('lang', m.progress || 0);
+          else if (m.status === 'recognizing text') onProgress?.('rec', m.progress || 0);
+        }
+      });
+      _workerLang = tessLang;
+    } catch (e) {
+      _worker = null; _workerLang = null;   // 半端な worker を cache に残すと次回も即死する
+      throw e;
+    }
     return _worker;
   }
 
@@ -199,9 +210,14 @@
       const t = (ln.text || '').trim();
       if (!t) continue;
       // 折返し断片 (% や数値のみで名前なし) → 直前行に結合 (兄貴画像の `+4.5` / `%` 分離対応)
+      // ただし前行が既に数値で完結している場合、% を含まない数値専用行は結合しない (別 affix 値の可能性)
       if (merged.length && /^[%％+＋\d.,\s]+$/.test(t)) {
-        merged[merged.length - 1].text += t;
-        continue;
+        const prevHasNum = /[\d０-９]\s*[%％]?\s*$/.test(merged[merged.length - 1].text);
+        if (/[%％]/.test(t) || !prevHasNum) {
+          merged[merged.length - 1].text += t;
+          continue;
+        }
+        continue;   // 数値専用 + 前行完結 → 名前なし断片として破棄
       }
       merged.push({ text: t, conf: ln.conf, numConf: ln.numConf });
     }
@@ -209,7 +225,7 @@
     const affixes = [];
     for (const ln of merged) {
       const lvM = ln.text.match(/Lv\.?\s*(\d{1,3})/i);
-      if (lvM && !/[+＋]/.test(ln.text)) { lv = parseInt(lvM[1], 10); continue; }
+      if (lvM && lvM.index < 4 && !/[+＋]/.test(ln.text)) { lv = parseInt(lvM[1], 10); continue; }
       const numM = ln.text.match(/[+＋]?\s*(\d+(?:[.,]\d+)?)\s*([%％])?\s*$/);
       if (!numM) continue;
       const name = ln.text.slice(0, numM.index).trim();
@@ -320,7 +336,7 @@
   window.WWMSidebar.ocr = {
     run,
     LANG_MAP,
-    // PoC / debug 用 internal 公開
+    // PoC / debug 用 internal 公開 (_ocrLines は共有 worker 使用 — 並行呼出し不可、本番は run() 経由)
     _internals: { _preprocess, _segmentLines, _trimIcon, _parseLines, _matchAffix, _norm, _dice, _ocrLines }
   };
 })();
