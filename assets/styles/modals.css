@@ -2380,5 +2380,31 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 }
 /* drop hover (新置列) */
 .wwm-cmp-new.wwm-ocr-dropping { outline: 2px dashed var(--gold-deep); outline-offset: -2px; }
+/* ? ガイドボタン (📷 右隣) */
+.wwm-ocr-help-btn { min-width: 24px; font-weight: var(--fw-bold); }
+/* 取込ガイド modal: 撮影例 mock = ゲーム詳細画面の HTML 再現 (実スクショ再配布回避)。
+   ゲーム UI = 常時暗地 → theme 非連動の literal 色 (card artifact と同方針) */
+.wwm-ocr-guide { max-width: 440px; }
+.wwm-ocr-guide-cap { margin: 0 0 6px; font-size: 12px; }
+.wwm-ocr-mock {
+  background: #16120d;
+  border: 1px solid #5a4a2a;
+  border-radius: 3px;
+  padding: 10px 14px;
+  margin: 0 0 10px;
+}
+.wwm-ocr-mock-name { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.wwm-ocr-mock-bar { width: 96px; height: 11px; background: #3a332a; border-radius: 2px; }
+.wwm-ocr-mock-name b { color: #ede4d0; font-size: 18px; font-style: italic; }
+.wwm-ocr-mock-row {
+  display: flex; justify-content: space-between;
+  font-size: 12px; line-height: 1.7;
+  color: #cfc4ab;
+}
+.wwm-ocr-mock-row b { color: #e89a4f; font-style: italic; font-weight: 600; }
+.wwm-ocr-mock-lv { border-bottom: 1px solid #3a332a; margin-bottom: 4px; padding-bottom: 2px; }
+.wwm-ocr-guide-steps { margin: 0 0 8px; padding-left: 20px; font-size: 12px; line-height: 1.7; }
+.wwm-ocr-guide-steps li { margin-bottom: 4px; }
+.wwm-ocr-guide-note { margin: 0; font-size: 11px; color: var(--paper-mute); }
 
 } /* end @layer modals */

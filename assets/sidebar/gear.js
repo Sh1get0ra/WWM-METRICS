@@ -468,7 +468,7 @@
                 const _hasTbl = !!window.WWM_EQUIP_BASE_BY_LV?.slots?.[String(slot)];
                 // OCR 取込ボタン: Lv select の右隣 (適用先 = 新置の明示)。slot 9/21 (affix 編集不可) は非表示
                 const _ocrHtml = isAffixEditable
-                  ? `<button type="button" id="wwmCmpOcrBtn" class="wwm-ocr-btn" title="${(window.T&&T.ocrBtnTitle)||'スクショ取込 (OCR)'}" aria-label="${(window.T&&T.ocrBtnTitle)||'スクショ取込 (OCR)'}">📷</button><span id="wwmCmpOcrStatus" class="wwm-ocr-status" aria-live="polite"></span>`
+                  ? `<button type="button" id="wwmCmpOcrBtn" class="wwm-ocr-btn" title="${(window.T&&T.ocrBtnTitle)||'スクショ取込 (OCR)'}" aria-label="${(window.T&&T.ocrBtnTitle)||'スクショ取込 (OCR)'}">📷</button><button type="button" id="wwmCmpOcrHelpBtn" class="wwm-ocr-btn wwm-ocr-help-btn" title="${(window.T&&T.ocrHelpTitle)||'スクショ取込ガイド'}" aria-label="${(window.T&&T.ocrHelpTitle)||'スクショ取込ガイド'}">?</button><span id="wwmCmpOcrStatus" class="wwm-ocr-status" aria-live="polite"></span>`
                   : '';
                 if (!_curLv || !_hasTbl) return (_curLv ? ` <span class="wwm-cmp-lv">Lv${_curLv}</span>` : '') + _ocrHtml;
                 const _opts = _lvList.map(lv => `<option value="${lv}" ${lv===_curLv?'selected':''}>Lv${lv}</option>`).join('');
@@ -887,6 +887,44 @@
         inp.type = 'file'; inp.accept = 'image/*';
         inp.addEventListener('change', () => { if (inp.files[0]) _applyOcr(inp.files[0]); });
         inp.click();
+      });
+      // ? click → 取込ガイド (撮影例 mock = ゲーム画像再配布回避の HTML 再現 + 手順 4 step)
+      const helpBtn = m.querySelector('#wwmCmpOcrHelpBtn');
+      if (helpBtn) helpBtn.addEventListener('click', () => {
+        const T_ = window.T || {};
+        const L = (window._STAT_LABELS_I18N_ALL || {})[window.currentLang || 'ja'] || {};
+        const mockRows = [
+          [L.affinity || '会意率', '2.7%'], [L.crit || '会心率', '7.2%'],
+          [L.maxBamboocut || '最大瞬嵐攻撃', '36.2'], [L.precision || '命中率', '6.2%'],
+          [L.agility || '速', '38.9'], [L.physPen || '外功貫通', '8.4']
+        ];
+        const g = document.createElement('div');
+        g.className = 'wwm-modal-backdrop';
+        g.innerHTML = `
+          <div class="wwm-modal wwm-ocr-guide">
+            <div class="wwm-modal-header">
+              <h2>${T_.ocrHelpTitle || 'スクショ取込ガイド'}</h2>
+              <button class="wwm-modal-close" aria-label="Close">×</button>
+            </div>
+            <div class="wwm-modal-body">
+              <p class="wwm-ocr-guide-cap">${T_.ocrHelpExample || '撮影例: 装備詳細画面 (値が右端に並ぶ画面)'}</p>
+              <div class="wwm-ocr-mock" aria-hidden="true">
+                <div class="wwm-ocr-mock-name"><span class="wwm-ocr-mock-bar"></span><b>798</b></div>
+                <div class="wwm-ocr-mock-row wwm-ocr-mock-lv"><span>${T_.ocrHelpMockLv || '装備レベル'}</span><b>91</b></div>
+                ${mockRows.map(r => `<div class="wwm-ocr-mock-row"><span>◆ ${r[0]}</span><b>${r[1]}</b></div>`).join('')}
+              </div>
+              <ol class="wwm-ocr-guide-steps">
+                <li>${T_.ocrHelpStep1 || ''}</li>
+                <li>${T_.ocrHelpStep2 || ''}</li>
+                <li>${T_.ocrHelpStep3 || ''}</li>
+                <li>${T_.ocrHelpStep4 || ''}</li>
+              </ol>
+              <p class="wwm-ocr-guide-note">${T_.ocrHelpLangNote || ''}</p>
+            </div>
+          </div>`;
+        document.body.appendChild(g);
+        g.querySelector('.wwm-modal-close').addEventListener('click', () => g.remove());
+        g.addEventListener('click', e => { if (e.target === g) g.remove(); });
       });
       // 言語 fallback select (match 全滅時に表示)
       const langSel = document.createElement('select');
