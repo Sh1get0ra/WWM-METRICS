@@ -2349,6 +2349,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   font-size: 13px;
   line-height: 1;
   background: var(--c-btn-secondary-bg); /* themed (dark=transparent / light=shade) */
+  color: inherit; /* ? の文字色 — UA default 黒だと墨 theme で不可視 (2026-06-08 兄貴指摘) */
   border: 1px solid var(--gold-deep);
   border-radius: 2px;
   cursor: pointer;

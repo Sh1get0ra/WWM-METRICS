@@ -816,7 +816,10 @@
         try {
           const res = await window.WWMSidebar.ocr.run(imgSrc, {
             lang: langOverride || (window.currentLang || 'ja'),
-            getOptions: (idx) => _getAffixOptions(newAffixes[idx]?.equipmentDetails?.[0], slot, idx, newAffixes),
+            // allAffixes=null = idx1-4 の使用中 statKey dedupe を無効化 (「全行ブランク」相当の素 pool)。
+            // 現装備の構成がスクショ affix の自然な枠を塞ぎ、並びがスクショ順にならない問題の根治
+            // (2026-06-08 兄貴提案)。書込後の表示 select は通常 dedupe pool で再構築 = 整合
+            getOptions: (idx) => _getAffixOptions(newAffixes[idx]?.equipmentDetails?.[0], slot, idx, null),
             onProgress: (stage, pct) => _setStatus(
               stage === 'lang'
                 ? ((window.T&&T.ocrLangLoading)||'辞書取得中…') + ' ' + Math.round(pct*100) + '%'
