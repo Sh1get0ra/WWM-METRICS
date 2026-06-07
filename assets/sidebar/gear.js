@@ -854,6 +854,16 @@
             d[4] = _isUsefulAffix(d[0], _virtRi(newKongfuId));
             if (r.confidence < 0.7 || overMax) warnIdx.push(r.idx);   // 閾値 0.7 (PoC 較正値で更新可)
           }
+          // OCR が埋められなかった行 (match 不能でスキップ) も朱枠 — _applyNewLv の MAX×0.94 値が
+          // 無言で残ると「正常に見える誤データ」になる (2026-06-07 兄貴実スクショ 力→カカ関 で実測)
+          const filledIdx = new Set(res.rows.map(r => r.idx));
+          for (let i = 0; i < 6; i++) {
+            if (filledIdx.has(i)) continue;
+            const d = newAffixes[i]?.equipmentDetails;
+            if (!d) continue;
+            if (i === 5 && !window.WWM_AFFIX?.[d[0]]) continue;   // PvP定音 row は対象外
+            warnIdx.push(i);
+          }
           const rowsEl = m.querySelector('#wwmCmpNewRows');
           if (rowsEl) { rowsEl.innerHTML = renderNewRows(); _bindRowEvents(); }
           // 低確信行 = 朱枠。編集 (input/change) で解除
