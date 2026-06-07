@@ -2337,4 +2337,48 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   .wwm-gate-fill { transition: none; }
 }
 
+/* ════════════════════════════════════════════════════════════════
+   SECTION 40 — AFFIX OCR 取込 (武具対照 modal、 2026-06-07 TODO #16)
+   📷 ボタン = 新置 h3 内 Lv select 右隣。token = lv-select と同系 (theme 追従)
+   ════════════════════════════════════════════════════════════════ */
+.wwm-ocr-btn {
+  margin-left: 6px;
+  padding: 1px 7px;
+  min-width: 28px;
+  min-height: 24px;
+  font-size: 13px;
+  line-height: 1;
+  background: var(--c-btn-secondary-bg); /* themed (dark=transparent / light=shade) */
+  border: 1px solid var(--gold-deep);
+  border-radius: 2px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+.wwm-ocr-btn:hover { border-color: var(--vermilion); }
+.wwm-ocr-btn:disabled { opacity: 0.5; cursor: progress; }
+.wwm-ocr-status {
+  margin-left: 6px;
+  font-size: 11px;
+  color: var(--paper-mute);
+  letter-spacing: 0.03em;
+  vertical-align: middle;
+}
+.wwm-ocr-lang-sel {
+  margin-left: 4px;
+  font-size: 11px;
+  font-family: var(--f-mono);
+  background: var(--c-btn-secondary-bg);
+  color: inherit;
+  border: 1px solid var(--gold-deep);
+  border-radius: 2px;
+  vertical-align: middle;
+}
+/* 低確信行: 朱枠 (編集で解除) */
+.wwm-cmp-edit-row.wwm-ocr-warn {
+  outline: 1.5px solid var(--vermilion);
+  outline-offset: 1px;
+}
+/* drop hover (新置列) */
+.wwm-cmp-new.wwm-ocr-dropping { outline: 2px dashed var(--gold-deep); outline-offset: -2px; }
+
 } /* end @layer modals */
