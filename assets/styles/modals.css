@@ -2390,19 +2390,34 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   background: #16120d;
   border: 1px solid #5a4a2a;
   border-radius: 3px;
-  padding: 10px 14px;
+  padding: 10px 16px 12px;
   margin: 0 0 10px;
 }
-.wwm-ocr-mock-name { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-.wwm-ocr-mock-bar { width: 96px; height: 11px; background: #3a332a; border-radius: 2px; }
-.wwm-ocr-mock-name b { color: #ede4d0; font-size: 18px; font-style: italic; }
+.wwm-ocr-mock-big {
+  color: #ede4d0;
+  font-size: 26px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.15;
+}
 .wwm-ocr-mock-row {
-  display: flex; justify-content: space-between;
-  font-size: 12px; line-height: 1.7;
-  color: #cfc4ab;
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 12px; line-height: 1.8;
+  color: #e8ddc8;
 }
 .wwm-ocr-mock-row b { color: #e89a4f; font-style: italic; font-weight: 600; }
-.wwm-ocr-mock-lv { border-bottom: 1px solid #3a332a; margin-bottom: 4px; padding-bottom: 2px; }
+.wwm-ocr-mock-head span { font-size: 13px; }
+.wwm-ocr-mock-plain { color: #ede4d0; font-style: italic; font-weight: 600; }
+.wwm-ocr-mock-gap { height: 10px; }
+.wwm-ocr-mock-dot { font-style: normal; color: #8a7a5e; font-size: 10px; }
+.wwm-ocr-mock-badge {
+  display: inline-block;
+  background: #8a6f30;
+  border-radius: 2px;
+  font-size: 9px; font-style: normal;
+  padding: 0 3px; line-height: 1.4;
+  vertical-align: 1px;
+}
 .wwm-ocr-guide-steps { margin: 0 0 8px; padding-left: 20px; font-size: 12px; line-height: 1.7; }
 .wwm-ocr-guide-steps li { margin-bottom: 4px; }
 .wwm-ocr-guide-note { margin: 0; font-size: 11px; color: var(--paper-mute); }

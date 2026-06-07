@@ -854,18 +854,30 @@
             d[4] = _isUsefulAffix(d[0], _virtRi(newKongfuId));
             if (r.confidence < 0.7 || overMax) warnIdx.push(r.idx);   // 閾値 0.7 (PoC 較正値で更新可)
           }
-          // OCR が埋められなかった行 (match 不能でスキップ) も朱枠 — _applyNewLv の MAX×0.94 値が
+          // OCR が埋められなかった行 (match 不能でスキップ) — _applyNewLv の MAX×0.94 値が
           // 無言で残ると「正常に見える誤データ」になる (2026-06-07 兄貴実スクショ 力→カカ関 で実測)
+          // → idx 0-4 は値ブランク化 + 朱枠 (兄貴指定: 読めなかった行は空欄が分かりやすい)。
+          //   idx5 (定音) は枠特殊のため朱枠のみ
           const filledIdx = new Set(res.rows.map(r => r.idx));
+          const blankIdx = [];
           for (let i = 0; i < 6; i++) {
             if (filledIdx.has(i)) continue;
             const d = newAffixes[i]?.equipmentDetails;
             if (!d) continue;
             if (i === 5 && !window.WWM_AFFIX?.[d[0]]) continue;   // PvP定音 row は対象外
+            if (i < 5) {
+              d[1] = 0; d[2] = 0; d[3] = 1;
+              blankIdx.push(i);
+            }
             warnIdx.push(i);
           }
           const rowsEl = m.querySelector('#wwmCmpNewRows');
           if (rowsEl) { rowsEl.innerHTML = renderNewRows(); _bindRowEvents(); }
+          // ブランク行: 値 input を空欄表示 (内部 d[1]=0 — 編集で通常入力に復帰)
+          blankIdx.forEach(i => {
+            const inp = m.querySelector(`.wwm-cmp-edit-row[data-affix-idx="${i}"] .wwm-cmp-val-input`);
+            if (inp) inp.value = '';
+          });
           // 低確信行 = 朱枠。編集 (input/change) で解除
           warnIdx.forEach(i => {
             const row = m.querySelector(`.wwm-cmp-edit-row[data-affix-idx="${i}"]`);
@@ -903,10 +915,16 @@
       if (helpBtn) helpBtn.addEventListener('click', () => {
         const T_ = window.T || {};
         const L = (window._STAT_LABELS_I18N_ALL || {})[window.currentLang || 'ja'] || {};
+        // mock = ゲーム装備詳細画面の再現 (2026-06-07 兄貴実スクショ準拠: 大数字/装備レベル Lv.91/
+        //  外功攻撃 53~124/・点 + 👍badge + 値右端オレンジ/末尾定音 = ❖)
+        const _bdg = '<i class="wwm-ocr-mock-badge">👍</i>';
         const mockRows = [
-          [L.affinity || '会意率', '2.7%'], [L.crit || '会心率', '7.2%'],
-          [L.maxBamboocut || '最大瞬嵐攻撃', '36.2'], [L.precision || '命中率', '6.2%'],
-          [L.agility || '速', '38.9'], [L.physPen || '外功貫通', '8.4']
+          ['・', L.maxPhys || '最大外功攻撃', _bdg, '53.4'],
+          ['・', L.affinity || '会意率', '', '3.3%'],
+          ['・', L.maxBamboocut || '最大瞬嵐攻撃', _bdg, '36.2'],
+          ['・', L.power || '力', _bdg, '39.6'],
+          ['・', L.crit || '会心率', _bdg, '7.0%'],
+          ['❖', L.physPen || '外功貫通', _bdg, '8.4']
         ];
         const g = document.createElement('div');
         g.className = 'wwm-modal-backdrop';
@@ -919,9 +937,11 @@
             <div class="wwm-modal-body">
               <p class="wwm-ocr-guide-cap">${T_.ocrHelpExample || '撮影例: 装備詳細画面 (値が右端に並ぶ画面)'}</p>
               <div class="wwm-ocr-mock" aria-hidden="true">
-                <div class="wwm-ocr-mock-name"><span class="wwm-ocr-mock-bar"></span><b>798</b></div>
-                <div class="wwm-ocr-mock-row wwm-ocr-mock-lv"><span>${T_.ocrHelpMockLv || '装備レベル'}</span><b>91</b></div>
-                ${mockRows.map(r => `<div class="wwm-ocr-mock-row"><span>◆ ${r[0]}</span><b>${r[1]}</b></div>`).join('')}
+                <div class="wwm-ocr-mock-big">811</div>
+                <div class="wwm-ocr-mock-row wwm-ocr-mock-head"><span>${T_.ocrHelpMockLv || '装備レベル'}</span><b>Lv.91</b></div>
+                <div class="wwm-ocr-mock-row wwm-ocr-mock-head"><span>${T_.ocrHelpMockAtk || '外功攻撃'}</span><span class="wwm-ocr-mock-plain">53~124</span></div>
+                <div class="wwm-ocr-mock-gap"></div>
+                ${mockRows.map(r => `<div class="wwm-ocr-mock-row"><span><em class="wwm-ocr-mock-dot">${r[0]}</em> ${r[1]} ${r[2]}</span><b>${r[3]}</b></div>`).join('')}
               </div>
               <ol class="wwm-ocr-guide-steps">
                 <li>${T_.ocrHelpStep1 || ''}</li>
