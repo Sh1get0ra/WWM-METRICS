@@ -21,6 +21,20 @@ function loadBuildLabels() {
 }
 const buildLabels = loadBuildLabels();
 
+// build-labels.js を fake window に load し WWMApplyPathLabels を実行 (注入挙動の検証用)。
+// applyPathLabels は global window を参照するため、eval〜呼出の間 globalThis.window を維持する。
+function loadAndApply(win) {
+  const code = fs.readFileSync(path.join(__dirname, '..', 'assets', 'build-labels.js'), 'utf8');
+  globalThis.window = win;
+  try {
+    (0, eval)(code);
+    win.WWMApplyPathLabels();
+  } finally {
+    delete globalThis.window;
+  }
+  return win;
+}
+
 test('lexicon.pathBase: 全 path × 全言語 が埋まっている', () => {
   for (const p of PATHS) {
     assert.ok(lexicon.pathBase[p], `pathBase.${p} 欠落`);
@@ -88,4 +102,31 @@ test('合成 path系 == 変換前 import dict (ja/zh/ko 厳密、en 新仕様 fu
   assert.equal(out.en.minBellstrike, 'Min Bellstrike ATK');
   assert.equal(out.en.maxBamboocut, 'Max Bamboocut ATK');
   assert.equal(out.en.voidPen, 'Void Pen');
+});
+
+// 回帰: WWMApplyPathLabels が i18n + import dict 両方へ注入 (保存ビルド経路の生キー fallback 再発防止)。
+// 生キー fallback (例 'maxBamboocut' がそのまま表示) は import dict 未注入が原因 → 両テーブル注入を必須化。
+test('WWMApplyPathLabels: i18n テーブル + import dict 両方へ path系を注入', () => {
+  const win = {
+    WWM_LEXICON: lexicon,
+    WWM_I18N: { ja: {}, en: {}, zh: {}, ko: {} },
+    _STAT_LABELS_I18N_ALL: { ja: {}, en: {}, zh: {}, ko: {} }
+  };
+  loadAndApply(win);
+  // import dict 形式 (arsenal/ranking affix ラベル源) — 生キーでなく合成ラベルが入る
+  assert.equal(win._STAT_LABELS_I18N_ALL.en.maxBamboocut, 'Max Bamboocut ATK');
+  assert.equal(win._STAT_LABELS_I18N_ALL.ja.minBellstrike, '最小鋼鳴攻撃');
+  assert.equal(win._STAT_LABELS_I18N_ALL.ko.voidPen, '무상 관통');
+  // import dict にメタキー (_i18n/_statDisplay) は混入しない
+  assert.equal(win._STAT_LABELS_I18N_ALL.ja._i18n, undefined);
+  // i18n T() 形式
+  assert.equal(win.WWM_I18N.ja.pathAtkBellstrike, '鋼鳴攻撃');
+  assert.equal(win.WWM_I18N.en.pathBellstrike, 'Bellstrike');
+});
+
+// 回帰: import dict 未公開でも i18n だけは注入される (片方欠落で全滅しない)
+test('WWMApplyPathLabels: _STAT_LABELS_I18N_ALL 欠落時も i18n は注入', () => {
+  const win = { WWM_LEXICON: lexicon, WWM_I18N: { ja: {} } };
+  loadAndApply(win);
+  assert.equal(win.WWM_I18N.ja.pathBellstrike, '鋼鳴');
 });

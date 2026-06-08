@@ -520,17 +520,9 @@ async function _loadDicts() {
   try {
     await Promise.all(tasks);
   } catch(e) { console.warn('[WWM Import] dict load failed:', e); }
-  // path系ラベルを lexicon から i18n テーブルへ合成注入 (静的定義廃止の代替)。
+  // path系ラベルを lexicon から i18n テーブル + import dict (_STAT_LABELS_I18N) へ合成注入。
+  // 静的定義廃止の代替。i18n/import dict 両方を WWMApplyPathLabels が単一地点で注入。
   if (typeof window.WWMApplyPathLabels === 'function') window.WWMApplyPathLabels();
-  // import dict (_STAT_LABELS_I18N) の path系 (min/max<Path>, <Path>Pen) も合成注入。
-  if (window.WWM_LEXICON && typeof window.WWMBuildLabels === 'function') {
-    const _built = window.WWMBuildLabels({ lexicon: window.WWM_LEXICON });
-    for (const L of ['ja', 'en', 'zh', 'ko']) {
-      if (!_STAT_LABELS_I18N[L]) continue;
-      const { _i18n, _statDisplay, ...pathDict } = _built[L];
-      Object.assign(_STAT_LABELS_I18N[L], pathDict);
-    }
-  }
 }
 
 // statKey → 4言語ラベル (WW Math 由来 statKey)

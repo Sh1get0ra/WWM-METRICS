@@ -40,11 +40,24 @@
   // データ非同期ロード (_loadDicts/_ensureDicts) 完了後に呼ぶ。冪等。
   function applyPathLabels() {
     if (typeof window === 'undefined') return;
-    if (!window.WWM_LEXICON || !window.WWM_I18N) return;
+    if (!window.WWM_LEXICON) return;
     const built = buildLabels({ lexicon: window.WWM_LEXICON });
-    for (const L of LANGS) {
-      if (!window.WWM_I18N[L]) continue;
-      Object.assign(window.WWM_I18N[L], built[L]._i18n);
+    // (1) i18n テーブル (TRANSLATIONS) へ T() 形式注入 (pathAtk*/pathPen*/pathDmg*/path<Path>)。
+    if (window.WWM_I18N) {
+      for (const L of LANGS) {
+        if (!window.WWM_I18N[L]) continue;
+        Object.assign(window.WWM_I18N[L], built[L]._i18n);
+      }
+    }
+    // (2) import dict (_STAT_LABELS_I18N, window 公開) へ import形式注入 (min/max<Path>, <Path>Pen)。
+    //     arsenal/ranking の affix ラベル源。保存/共有ビルド経路 (_ensureDicts のみ) でも生キー fallback を防ぐ。
+    const tbl = window._STAT_LABELS_I18N_ALL;
+    if (tbl) {
+      for (const L of LANGS) {
+        if (!tbl[L]) continue;
+        const { _i18n, _statDisplay, ...pathDict } = built[L];
+        Object.assign(tbl[L], pathDict);
+      }
     }
   }
 
