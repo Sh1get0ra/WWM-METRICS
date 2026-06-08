@@ -35,6 +35,22 @@
     return out;
   }
 
+  // i18n テーブル (TRANSLATIONS, window.WWM_I18N) へ path系合成ラベルを注入。
+  // path* (pathAtk/Pen/Dmg/path<Path>) は lexicon 唯一源 → i18n.js から静的定義削除済。
+  // データ非同期ロード (_loadDicts/_ensureDicts) 完了後に呼ぶ。冪等。
+  function applyPathLabels() {
+    if (typeof window === 'undefined') return;
+    if (!window.WWM_LEXICON || !window.WWM_I18N) return;
+    const built = buildLabels({ lexicon: window.WWM_LEXICON });
+    for (const L of LANGS) {
+      if (!window.WWM_I18N[L]) continue;
+      Object.assign(window.WWM_I18N[L], built[L]._i18n);
+    }
+  }
+
   root.buildLabels = buildLabels;
-  if (typeof window !== 'undefined') window.WWMBuildLabels = buildLabels;
+  if (typeof window !== 'undefined') {
+    window.WWMBuildLabels = buildLabels;
+    window.WWMApplyPathLabels = applyPathLabels;
+  }
 })(typeof window !== 'undefined' ? window : globalThis);

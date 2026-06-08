@@ -99,9 +99,7 @@ const TRANSLATIONS = {
     diagWastedMore:' 他{0}件',
     gearCompareTitle:'武具対照 / COMPARISON', cmpTitleJa:'武具対照', cmpTitleEn:'COMPARISON', cmpApply:'採用', cmpReset:'復元', cmpCancel:'離脱', cmpCurrent:'現有', cmpNew:'新置', cmpDeltaLabel:'武格変動',
     xinfaCompareTitle:'心法比較 / COMPARISON', xinfaTitleJa:'心法対照',
-    pathAtkBellstrike:'鋼鳴攻撃', pathAtkStonesplit:'砕岩攻撃', pathAtkSilkbind:'糸操攻撃', pathAtkBamboocut:'瞬嵐攻撃', pathAtkVoid:'無相攻撃',
-    pathPenBellstrike:'鋼鳴貫通', pathPenStonesplit:'砕岩貫通', pathPenSilkbind:'糸操貫通', pathPenBamboocut:'瞬嵐貫通', pathPenVoid:'無相貫通',
-    pathDmgBellstrike:'鋼鳴ダメージ強化', pathDmgStonesplit:'砕岩ダメージ強化', pathDmgSilkbind:'糸操ダメージ強化', pathDmgBamboocut:'瞬嵐ダメージ強化', pathDmgVoid:'無相ダメージ強化',
+    // path系 (pathAtk*/pathPen*/pathDmg*/path<Path>) は lexicon 合成注入 (WWMApplyPathLabels)。 静的定義は廃止。
     stMaxHp:'最大HP', stPhysDef:'外功防御', stCritHeal:'会心治癒',
     changelogTitle:'変更履歴', changelogLangNotice:'※ Changelog: Japanese only / 日本語のみ / 일본어 한정', close:'閉じる',
     noteTitleJa:'筆記', noteSeal:'記', noteTabSpec:'仕様', noteTabChangelog:'更新履歴', noteBugReport:'バグ報告', noteFeatureRequest:'追加要望',
@@ -225,7 +223,7 @@ finalScore  = statusScore + 4-set bonus (4点一式効果発動時)</pre>
     </div>`,
     importStep2XinfaTitle:'心法 Tier', importStep2XinfaHint:'各心法の到達Tier (1-5)。Tier2 で Tier2効果、Tier5 で Tier5効果 加算。',
     penPhys:'外功貫通', penVoid:'無相貫通', penPhysShort:'外功', penVoidShort:'無相', penOther:'他',
-    pathPhys:'汎用', pathBellstrike:'鋼鳴', pathStonesplit:'砕岩', pathSilkbind:'糸操', pathBamboocut:'瞬嵐',
+    pathPhys:'汎用',
     martialIndex:'武格指数', martialIndexSub:'MARTIAL INDEX', sbEmptyTitle:'まだインポートデータがありません。', sbEmptyHint:'上部「IMPORT」ボタンから取り込みできます。', martialHistoryTab:'武格履歴', historyEmpty:'まだ履歴がありません。インポート時に自動記録されます。', minElemSub:'最小属性攻撃(副)', maxElemSub:'最大属性攻撃(副)',
     effectUnset:'未代入', globalDmgBoost:'全ダメージ強化', effAnalysisTitle:'調律/定音効率分析',
     locale:'ja-JP',
@@ -329,9 +327,7 @@ finalScore  = statusScore + 4-set bonus (4点一式効果発動時)</pre>
     diagWastedMore:' +{0} more',
     gearCompareTitle:'COMPARISON', cmpTitleJa:'COMPARE', cmpTitleEn:'COMPARISON', cmpApply:'Apply', cmpReset:'Revert', cmpCancel:'Cancel', cmpCurrent:'CURRENT', cmpNew:'NEW', cmpDeltaLabel:'MARTIAL Δ',
     xinfaCompareTitle:'INNER WAY COMPARISON', xinfaTitleJa:'INNER WAY',
-    pathAtkBellstrike:'Bellstrike Atk', pathAtkStonesplit:'Stonesplit Atk', pathAtkSilkbind:'Silkbind Atk', pathAtkBamboocut:'Bamboocut Atk', pathAtkVoid:'Void Atk',
-    pathPenBellstrike:'Bellstrike Pen', pathPenStonesplit:'Stonesplit Pen', pathPenSilkbind:'Silkbind Pen', pathPenBamboocut:'Bamboocut Pen', pathPenVoid:'Void Pen',
-    pathDmgBellstrike:'Bellstrike DMG', pathDmgStonesplit:'Stonesplit DMG', pathDmgSilkbind:'Silkbind DMG', pathDmgBamboocut:'Bamboocut DMG', pathDmgVoid:'Void DMG',
+    // path系 は lexicon 合成注入 (WWMApplyPathLabels)。 静的定義廃止。 en は full+ATK 統一 (旧 'Bellstrike Atk' → 'Bellstrike ATK')。
     stMaxHp:'Max HP', stPhysDef:'Physical Defense', stCritHeal:'Critical Healing',
     changelogTitle:'Changelog', changelogLangNotice:'※ Changelog: Japanese only / 日本語のみ / 일본어 한정', close:'Close',
     noteTitleJa:'筆記', noteSeal:'NT', noteTabSpec:'Specs', noteTabChangelog:'Changelog', noteBugReport:'Report Bug', noteFeatureRequest:'Feature Req',
@@ -455,7 +451,7 @@ finalScore  = statusScore + 4-set bonus (when 4 Pieces active)</pre>
     </div>`,
     importStep2XinfaTitle:'Inner Way Tier', importStep2XinfaHint:'Tier reached for each Inner Way (1-5). Tier2 adds Tier2 effect, Tier5 adds Tier5 effect.',
     penPhys:'Phys Pen', penVoid:'Void Pen', penPhysShort:'Phys', penVoidShort:'Void', penOther:'other',
-    pathPhys:'Universal', pathBellstrike:'Bellstrike', pathStonesplit:'Stonesplit', pathSilkbind:'Silkbind', pathBamboocut:'Bamboocut',
+    pathPhys:'Universal',
     martialIndex:'Martial Index', martialIndexSub:'MARTIAL INDEX', sbEmptyTitle:'No imported data yet.', sbEmptyHint:'Use the IMPORT button at the top.', martialHistoryTab:'Martial Record', historyEmpty:'No history yet. Will auto-record on import.', minElemSub:'Sub Elem ATK Min', maxElemSub:'Sub Elem ATK Max',
     effectUnset:'Unset', globalDmgBoost:'Total DMG Boost', effAnalysisTitle:'Stat Efficiency',
     locale:'en-US',
@@ -559,9 +555,7 @@ finalScore  = statusScore + 4-set bonus (when 4 Pieces active)</pre>
     diagWastedMore:' 其余{0}项',
     gearCompareTitle:'武具对照 / COMPARISON', cmpTitleJa:'武具对照', cmpTitleEn:'COMPARISON', cmpApply:'采用', cmpReset:'还原', cmpCancel:'退出', cmpCurrent:'现有', cmpNew:'新置', cmpDeltaLabel:'武格变动',
     xinfaCompareTitle:'心法对比 / COMPARISON', xinfaTitleJa:'心法对照',
-    pathAtkBellstrike:'鸣金攻击', pathAtkStonesplit:'裂石攻击', pathAtkSilkbind:'牵丝攻击', pathAtkBamboocut:'破竹攻击', pathAtkVoid:'无相攻击',
-    pathPenBellstrike:'鸣金穿透', pathPenStonesplit:'裂石穿透', pathPenSilkbind:'牵丝穿透', pathPenBamboocut:'破竹穿透', pathPenVoid:'无相穿透',
-    pathDmgBellstrike:'鸣金伤害加成', pathDmgStonesplit:'裂石伤害加成', pathDmgSilkbind:'牵丝伤害加成', pathDmgBamboocut:'破竹伤害加成', pathDmgVoid:'无相伤害加成',
+    // path系 は lexicon 合成注入 (WWMApplyPathLabels)。 静的定義廃止。
     stMaxHp:'气血最大值', stPhysDef:'外功防御', stCritHeal:'会心治疗',
     changelogTitle:'更新记录', changelogLangNotice:'※ Changelog: Japanese only / 日本語のみ / 일본어 한정', close:'关闭',
     noteTitleJa:'笔记', noteSeal:'记', noteTabSpec:'规格', noteTabChangelog:'更新历史', noteBugReport:'错误报告', noteFeatureRequest:'功能请求',
@@ -685,7 +679,7 @@ finalScore  = statusScore + 4-set bonus (四件套效果发动时)</pre>
     </div>`,
     importStep2XinfaTitle:'心法 Tier', importStep2XinfaHint:'各心法达到的 Tier (1-5)。Tier2 加 Tier2 效果,Tier5 加 Tier5 效果。',
     penPhys:'外功穿透', penVoid:'无相穿透', penPhysShort:'外功', penVoidShort:'无相', penOther:'其他',
-    pathPhys:'通用', pathBellstrike:'鸣金', pathStonesplit:'裂石', pathSilkbind:'牵丝', pathBamboocut:'破竹',
+    pathPhys:'通用',
     martialIndex:'武格指数', martialIndexSub:'MARTIAL INDEX', sbEmptyTitle:'尚未导入数据。', sbEmptyHint:'请点击上方「导入」按钮加载。', martialHistoryTab:'武格历史', historyEmpty:'暂无记录。导入时将自动记录。', minElemSub:'最小属性攻击(副)', maxElemSub:'最大属性攻击(副)',
     effectUnset:'未填', globalDmgBoost:'全伤害强化', effAnalysisTitle:'状态效率分析',
     locale:'zh-CN',
@@ -789,9 +783,7 @@ finalScore  = statusScore + 4-set bonus (四件套效果发动时)</pre>
     diagWastedMore:' 외 {0}개',
     gearCompareTitle:'무구대조 / COMPARISON', cmpTitleJa:'무구대조', cmpTitleEn:'COMPARISON', cmpApply:'적용', cmpReset:'복원', cmpCancel:'취소', cmpCurrent:'현재', cmpNew:'신규', cmpDeltaLabel:'무격 변동',
     xinfaCompareTitle:'심법 비교 / COMPARISON', xinfaTitleJa:'심법 대조',
-    pathAtkBellstrike:'명금 공격', pathAtkStonesplit:'열석 공격', pathAtkSilkbind:'견사 공격', pathAtkBamboocut:'파죽 공격', pathAtkVoid:'무상 공격',
-    pathPenBellstrike:'명금 관통', pathPenStonesplit:'열석 관통', pathPenSilkbind:'견사 관통', pathPenBamboocut:'파죽 관통', pathPenVoid:'무상 관통',
-    pathDmgBellstrike:'명금 피해 증가', pathDmgStonesplit:'열석 피해 증가', pathDmgSilkbind:'견사 피해 증가', pathDmgBamboocut:'파죽 피해 증가', pathDmgVoid:'무상 피해 증가',
+    // path系 は lexicon 合成注入 (WWMApplyPathLabels)。 静的定義廃止。
     stMaxHp:'기혈 최대치', stPhysDef:'외공 방어', stCritHeal:'치명타 치유',
     changelogTitle:'변경 이력', changelogLangNotice:'※ Changelog: Japanese only / 日本語のみ / 일본어 한정', close:'닫기',
     noteTitleJa:'필기', noteSeal:'기', noteTabSpec:'사양', noteTabChangelog:'업데이트 내역', noteBugReport:'버그 신고', noteFeatureRequest:'기능 요청',
@@ -915,7 +907,7 @@ finalScore  = statusScore + 4-set bonus (4세트 효과 발동 시)</pre>
     </div>`,
     importStep2XinfaTitle:'심법 Tier', importStep2XinfaHint:'각 심법의 도달 Tier (1-5). Tier2는 Tier2 효과, Tier5는 Tier5 효과 추가.',
     penPhys:'외공 관통', penVoid:'무상 관통', penPhysShort:'외공', penVoidShort:'무상', penOther:'기타',
-    pathPhys:'범용', pathBellstrike:'명금', pathStonesplit:'열석', pathSilkbind:'견사', pathBamboocut:'파죽',
+    pathPhys:'범용',
     martialIndex:'무격 지수', martialIndexSub:'무격 지수', sbEmptyTitle:'아직 가져온 데이터가 없습니다.', sbEmptyHint:'상단의 「가져오기」 버튼을 사용해 주세요.', martialHistoryTab:'무격 이력', historyEmpty:'아직 기록이 없습니다. 가져오기 시 자동 기록됩니다.', minElemSub:'최소 속성 공격(부)', maxElemSub:'최대 속성 공격(부)',
     effectUnset:'미입력', globalDmgBoost:'전체 피해 증가', effAnalysisTitle:'스탯 효율 분석',
     locale:'ko-KR',
@@ -926,3 +918,5 @@ let currentLang = 'ja';
 let T = TRANSLATIONS.ja;
 window.T = T;
 window.currentLang = currentLang;
+// path系合成ラベル注入 (build-labels.js WWMApplyPathLabels) のため全言語テーブルを公開。
+window.WWM_I18N = TRANSLATIONS;

@@ -508,7 +508,8 @@ async function _loadDicts() {
     WWM_XINFA_ICONS: 'xinfa_icons',
     WWM_KONGFU_ICONS: 'kongfu_icons',
     WWM_GEAR_SLOT_ICONS: 'gear_slot_icons',
-    WWM_AVATAR_ICONS: 'avatar_icons'
+    WWM_AVATAR_ICONS: 'avatar_icons',
+    WWM_LEXICON: 'lexicon'
   };
   const tasks = [];
   for (const [winKey, fileName] of Object.entries(dictMap)) {
@@ -519,6 +520,8 @@ async function _loadDicts() {
   try {
     await Promise.all(tasks);
   } catch(e) { console.warn('[WWM Import] dict load failed:', e); }
+  // path系ラベルを lexicon から i18n テーブルへ合成注入 (静的定義廃止の代替)。
+  if (typeof window.WWMApplyPathLabels === 'function') window.WWMApplyPathLabels();
 }
 
 // statKey → 4言語ラベル (WW Math 由来 statKey)
