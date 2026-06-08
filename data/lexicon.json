@@ -1,0 +1,19 @@
+{
+  "_schema": "合成ラベル用 共通語彙。path基底 + 接辞。固有名 (武術/心法/セット) は per-domain json 側。言語追加時はここに lang 列を足すだけ。",
+  "_lastUpdated": "2026-06-08",
+  "pathBase": {
+    "bellstrike": { "ja": "鋼鳴", "en": "Bellstrike", "zh": "鸣金", "ko": "명금" },
+    "stonesplit": { "ja": "砕岩", "en": "Stonesplit", "zh": "裂石", "ko": "열석" },
+    "silkbind":   { "ja": "糸操", "en": "Silkbind", "zh": "牵丝", "ko": "견사" },
+    "bamboocut":  { "ja": "瞬嵐", "en": "Bamboocut", "zh": "破竹", "ko": "파죽" },
+    "void":       { "ja": "無相", "en": "Void", "zh": "无相", "ko": "무상" }
+  },
+  "affix": {
+    "min":     { "ja": "最小", "en": "Min", "zh": "最小", "ko": "최소" },
+    "max":     { "ja": "最大", "en": "Max", "zh": "最大", "ko": "최대" },
+    "atk":     { "ja": "攻撃", "en": " ATK", "zh": "攻击", "ko": " 공격" },
+    "atkStat": { "ja": "攻撃力", "en": " ATK", "zh": "攻击", "ko": " 공격" },
+    "pen":     { "ja": "貫通", "en": " Pen", "zh": "穿透", "ko": " 관통" },
+    "dmgUp":   { "ja": "ダメージ強化", "en": " DMG", "zh": "增伤", "ko": " 피해 강화" }
+  }
+}
