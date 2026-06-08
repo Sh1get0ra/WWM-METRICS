@@ -10,6 +10,9 @@ global.document = {
   querySelectorAll: () => [],
 };
 global.updateDonut = () => {};
+// calc.js が参照する WWMState (lastResult 書込 / roleInfo 読取 / allowDonut 読取) を stub。
+// allowDonut=false で DOM 副作用 (donut描画) 経路を skip。
+global.WWMState = { lastResult: null, roleInfo: {}, allowDonut: false };
 
 const code = fs.readFileSync(path.join(__dirname, '..', 'assets', 'calc.js'), 'utf8');
 // 名前空間汚染を避けるためindirect eval

@@ -8,7 +8,7 @@ const path = require('path');
 const { test } = require('node:test');
 const assert = require('node:assert');
 
-const { computeExpected } = require('./load-calc');
+const { computeExpected } = require('./load-calc.cjs');
 
 const baselinePath = path.join(__dirname, 'baseline.json');
 
