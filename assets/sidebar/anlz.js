@@ -24,6 +24,23 @@
     return labelObj[lang] || labelObj.ja || labelObj.en || fallback || '';
   }
 
+  // path系 attack subItem (鋼鳴攻撃力 等) は lexicon 合成を優先源とする (json label はフォールバック)。
+  // subItem key (voidAtk) → lexicon pathBase key (void) のマップ。
+  const _PATH_SUBITEM_TO_BASE = {
+    bellstrike: 'bellstrike', stonesplit: 'stonesplit', silkbind: 'silkbind',
+    bamboocut: 'bamboocut', voidAtk: 'void'
+  };
+  let _builtCache = null;
+  function _synthStatLabel(key) {
+    const base = _PATH_SUBITEM_TO_BASE[key];
+    if (!base) return null;
+    if (!_builtCache) {
+      if (!window.WWM_LEXICON || typeof window.WWMBuildLabels !== 'function') return null;
+      _builtCache = window.WWMBuildLabels({ lexicon: window.WWM_LEXICON });
+    }
+    return _builtCache[curLang()]?._statDisplay?.[base] || null;
+  }
+
   function _fmt(val, format) {
     if (val == null || isNaN(val)) return '-';
     if (format === 'pct') return (val * 100).toFixed(1) + '%';
@@ -78,7 +95,7 @@
     }
     let html = `
       <div class="wwm-sb-row${cls}${hiddenCls}" data-item-key="${item.key}">
-        <span class="wwm-sb-label">${_label(item.label, item.key)}${warnIcon}</span>
+        <span class="wwm-sb-label">${_synthStatLabel(item.key) || _label(item.label, item.key)}${warnIcon}</span>
         <span class="wwm-sb-value">${_fmtItem(item, params, baseParams)}</span>
       </div>
     `;

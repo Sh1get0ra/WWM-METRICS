@@ -522,6 +522,15 @@ async function _loadDicts() {
   } catch(e) { console.warn('[WWM Import] dict load failed:', e); }
   // path系ラベルを lexicon から i18n テーブルへ合成注入 (静的定義廃止の代替)。
   if (typeof window.WWMApplyPathLabels === 'function') window.WWMApplyPathLabels();
+  // import dict (_STAT_LABELS_I18N) の path系 (min/max<Path>, <Path>Pen) も合成注入。
+  if (window.WWM_LEXICON && typeof window.WWMBuildLabels === 'function') {
+    const _built = window.WWMBuildLabels({ lexicon: window.WWM_LEXICON });
+    for (const L of ['ja', 'en', 'zh', 'ko']) {
+      if (!_STAT_LABELS_I18N[L]) continue;
+      const { _i18n, _statDisplay, ...pathDict } = _built[L];
+      Object.assign(_STAT_LABELS_I18N[L], pathDict);
+    }
+  }
 }
 
 // statKey → 4言語ラベル (WW Math 由来 statKey)
@@ -530,11 +539,7 @@ const _STAT_LABELS_I18N = {
     body: '体', momentum: '会', agility: '速', power: '力', defense: '防御',
     maxHp: '気血最大値', minPhys: '最小外功攻撃', maxPhys: '最大外功攻撃',
     physDef: '外功防御', physPen: '外功貫通', physResist: '外功耐性',
-    minBellstrike: '最小鋼鳴攻撃', maxBellstrike: '最大鋼鳴攻撃', bellstrikePen: '鋼鳴貫通',
-    minStonesplit: '最小砕岩攻撃', maxStonesplit: '最大砕岩攻撃', stonesplitPen: '砕岩貫通',
-    minSilkbind: '最小糸操攻撃', maxSilkbind: '最大糸操攻撃', silkbindPen: '糸操貫通',
-    minBamboocut: '最小瞬嵐攻撃', maxBamboocut: '最大瞬嵐攻撃', bamboocutPen: '瞬嵐貫通',
-    minVoid: '最小無相攻撃', maxVoid: '最大無相攻撃', voidPen: '無相貫通',
+    // path系 (min/max<Path>, <Path>Pen × 5) は lexicon 合成注入 (_loadDicts 後)。 静的定義廃止。
     precision: '命中率', crit: '会心率', affinity: '会意率',
     allWeaponDmg: '全武学/PvP/BOSSダメ',
     swordDmg: '剣ダメ強化', spearDmg: '槍ダメ強化', moBladeDmg: '墨刀ダメ強化',
@@ -572,11 +577,7 @@ const _STAT_LABELS_I18N = {
     body: 'Body', momentum: 'Momentum', agility: 'Agi', power: 'Power', defense: 'Def',
     maxHp: 'HP Max', minPhys: 'Phys ATK Min', maxPhys: 'Phys ATK Max',
     physDef: 'Phys DEF', physPen: 'Phys Pen', physResist: 'Phys Res',
-    minBellstrike: 'Bell ATK Min', maxBellstrike: 'Bell ATK Max', bellstrikePen: 'Bell Pen',
-    minStonesplit: 'Stone ATK Min', maxStonesplit: 'Stone ATK Max', stonesplitPen: 'Stone Pen',
-    minSilkbind: 'Silk ATK Min', maxSilkbind: 'Silk ATK Max', silkbindPen: 'Silk Pen',
-    minBamboocut: 'Bam ATK Min', maxBamboocut: 'Bam ATK Max', bamboocutPen: 'Bam Pen',
-    minVoid: 'Void ATK Min', maxVoid: 'Void ATK Max', voidPen: 'Void Pen',
+    // path系 は lexicon 合成注入。 静的定義廃止 (旧 'Bam ATK Max' 等略記 → 'Max Bamboocut ATK' full化)。
     precision: 'Precision', crit: 'Crit', affinity: 'Affinity',
     allWeaponDmg: 'All Martial/PvP/BOSS DMG',
     swordDmg: 'Sword DMG', spearDmg: 'Spear DMG', moBladeDmg: 'Mo Blade DMG',
@@ -618,11 +619,7 @@ const _STAT_LABELS_I18N = {
     body: '体', momentum: '势', agility: '敏', power: '劲', defense: '御',
     maxHp: '气血最大值', minPhys: '最小外功攻击', maxPhys: '最大外功攻击',
     physDef: '外功防御', physPen: '外功穿透', physResist: '外功抗性',
-    minBellstrike: '最小鸣金攻击', maxBellstrike: '最大鸣金攻击', bellstrikePen: '鸣金穿透',
-    minStonesplit: '最小裂石攻击', maxStonesplit: '最大裂石攻击', stonesplitPen: '裂石穿透',
-    minSilkbind: '最小牵丝攻击', maxSilkbind: '最大牵丝攻击', silkbindPen: '牵丝穿透',
-    minBamboocut: '最小破竹攻击', maxBamboocut: '最大破竹攻击', bamboocutPen: '破竹穿透',
-    minVoid: '最小无相攻击', maxVoid: '最大无相攻击', voidPen: '无相穿透',
+    // path系 は lexicon 合成注入。 静的定義廃止。
     precision: '精准率', crit: '会心率', affinity: '会意率',
     allWeaponDmg: '全武学/PvP/BOSS增效',
     swordDmg: '剑武学增伤', spearDmg: '枪武学增伤', moBladeDmg: '陌刀武学增伤',
@@ -663,11 +660,7 @@ const _STAT_LABELS_I18N = {
     body: '체력', momentum: '기세', agility: '민첩', power: '내공', defense: '방어',
     maxHp: '기혈 최대치', minPhys: '최소 외공 공격', maxPhys: '최대 외공 공격',
     physDef: '외공 방어력', physPen: '외공 관통', physResist: '외공 저항',
-    minBellstrike: '최소 명금 공격', maxBellstrike: '최대 명금 공격', bellstrikePen: '명금 관통',
-    minStonesplit: '최소 열석 공격', maxStonesplit: '최대 열석 공격', stonesplitPen: '열석 관통',
-    minSilkbind: '최소 견사 공격', maxSilkbind: '최대 견사 공격', silkbindPen: '견사 관통',
-    minBamboocut: '최소 파죽 공격', maxBamboocut: '최대 파죽 공격', bamboocutPen: '파죽 관통',
-    minVoid: '최소 무상 공격', maxVoid: '최대 무상 공격', voidPen: '무상 관통',
+    // path系 は lexicon 合成注入。 静的定義廃止。
     precision: '정확도', crit: '치명타 확률', affinity: '각성 확률',
     allWeaponDmg: '모든 무술/PvP/BOSS 피해',
     swordDmg: '검 무술 피해 증가', spearDmg: '창 무술 피해 증가', moBladeDmg: '맥도 무술 피해 증가',

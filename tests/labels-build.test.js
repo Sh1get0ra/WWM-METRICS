@@ -69,3 +69,23 @@ test('buildLabels: i18n path dmg が i18n.js 現状訳と一致 (zh伤害加成 
   assert.equal(out.ko._i18n.pathDmgBellstrike, '명금 피해 증가');
   assert.equal(out.en._i18n.pathDmgBellstrike, 'Bellstrike DMG');
 });
+
+// 回帰: 合成 import dict path系 == 変換前 import.js (ja/zh/ko 厳密、en は略記廃止=新仕様)
+// fixtures/path-labels-baseline.json = 変換前 (lexicon 合成化以前) の凍結スナップショット。
+// import.js から path系静的定義を削除済 → poc/labels.json 再生成では取れないため独立 fixture を正とする。
+test('合成 path系 == 変換前 import dict (ja/zh/ko 厳密、en 新仕様 full+ATK)', () => {
+  const cur = JSON.parse(fs.readFileSync(path.join(__dirname, 'fixtures', 'path-labels-baseline.json'), 'utf8'));
+  const out = buildLabels({ lexicon });
+  const keys = [];
+  for (const p of PATHS) {
+    const C = p.charAt(0).toUpperCase() + p.slice(1);
+    keys.push('min' + C, 'max' + C, p + 'Pen');
+  }
+  for (const L of ['ja', 'zh', 'ko']) {
+    for (const k of keys) assert.equal(out[L][k], cur[L][k], `${L}.${k} 不一致`);
+  }
+  // en は略記 (Bell/Stone/Bam) 廃止で full+ATK に統一 (意図的変更)
+  assert.equal(out.en.minBellstrike, 'Min Bellstrike ATK');
+  assert.equal(out.en.maxBamboocut, 'Max Bamboocut ATK');
+  assert.equal(out.en.voidPen, 'Void Pen');
+});
