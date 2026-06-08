@@ -22,9 +22,9 @@
      flip 0 を important-audit-v2 --layer-impact で機械証明済。 @layer 未対応 (2022 以前) browser 切捨て済 -->
 <link rel="stylesheet" href="assets/styles/tokens.css?v=3">
 <link rel="stylesheet" href="assets/styles/animations.css?v=1">
-<link rel="stylesheet" href="assets/styles/base.css?v=4">
+<link rel="stylesheet" href="assets/styles/base.css?v=5">
 <link rel="stylesheet" href="assets/styles/share.css?v=6">
-<link rel="stylesheet" href="assets/styles/hero.css?v=4">
+<link rel="stylesheet" href="assets/styles/hero.css?v=5">
 <link rel="stylesheet" href="assets/styles/sidebar.css?v=3">
 <link rel="stylesheet" href="assets/styles/layout.css?v=9">
 <link rel="stylesheet" href="assets/styles/gear.css?v=1">
@@ -475,10 +475,7 @@
         </div>
         <button class="icon-btn import-btn" id="importBtn" onclick="importData()" data-i18n="importBtn">IMPORT</button>
         <button class="icon-btn export-btn" id="exportBtn" onclick="exportImage()" title="画像で書き出し" data-i18n-title="tipIconExport" aria-label="画像で書き出し" data-i18n="exportBtn">EXPORT</button>
-        <a class="icon-btn icon-btn-x" href="https://x.com/TORA_XIV" target="_blank" rel="noopener noreferrer" title="お問い合わせ (X / Twitter)" data-i18n-title="tipIconContact" aria-label="X (Twitter) で問い合わせ">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-        <button class="icon-btn" id="themeToggle" onclick="toggleTheme()" title="Theme" aria-label="ライト/ダーク切替"><svg class="tt-sun" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg><svg class="tt-moon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+        <span class="wwm-opt-sort-group wwm-theme-toggle" id="themeToggle" role="group" aria-label="ライト/ダーク切替"><button type="button" class="wwm-opt-sort-btn wwm-theme-btn" data-theme-set="light" onclick="setTheme('light')" title="ライト" data-i18n-title="themeLight" aria-label="ライト"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></button><button type="button" class="wwm-opt-sort-btn wwm-theme-btn" data-theme-set="dark" onclick="setTheme('dark')" title="ダーク" data-i18n-title="themeDark" aria-label="ダーク"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></span>
       </div>
       <!-- 2行目 -->
       <div class="topbar-row topbar-row-2">
@@ -913,7 +910,7 @@ window.showImportToast = function(e) {
 </main>
 </div>
 
-<footer class="wwm-footer"><img class="wwm-footer-logo" src="https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/logo-27b7acd2.png" alt="Where Winds Meet">Created by <strong>SHIGETORA</strong><span class="wwm-footer-copy">© NetEase, Inc. All Rights Reserved. © Everstone Studio.</span></footer>
+<footer class="wwm-footer"><img class="wwm-footer-logo" src="https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/logo-27b7acd2.png" alt="Where Winds Meet">Created by <strong>SHIGETORA</strong><a class="wwm-footer-x" href="https://x.com/TORA_XIV" target="_blank" rel="noopener noreferrer" title="お問い合わせ (X / Twitter)" data-i18n-title="tipIconContact" aria-label="X (Twitter) で問い合わせ"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><span class="wwm-footer-copy">© NetEase, Inc. All Rights Reserved. © Everstone Studio.</span></footer>
 
 <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 <div id="export-card"></div>
@@ -924,7 +921,7 @@ window.showImportToast = function(e) {
 <script src="assets/helpers/fetch.js?v=1"></script>
 <script src="assets/helpers/constants.js?v=1"></script>
 <script src="assets/helpers/state.js?v=3"></script>
-<script src="assets/i18n.js?v=94"></script>
+<script src="assets/i18n.js?v=95"></script>
 <script src="assets/helpers/i18n.js?v=1"></script>
 <script src="assets/calc.js?v=49"></script>
 <script src="assets/app.js?v=52"></script>

@@ -34,6 +34,11 @@
 
 .wwm-footer-logo { height: 18px; vertical-align: middle; margin-right: var(--space-2); opacity: var(--c-footer-logo-opacity); }
 
+/* X (Twitter) リンク — topbar から footer (SHIGETORA 横) に移設 (2026-06-08 兄貴指示)。 footer 文字色継承 + hover で金 */
+.wwm-footer-x { display: inline-flex; vertical-align: middle; margin: 0 var(--space-2); color: inherit; opacity: 0.85; transition: color 0.15s ease, opacity 0.15s ease; }
+.wwm-footer-x:hover { color: var(--gold-bright); opacity: 1; }
+.wwm-footer-x svg { display: block; }
+
 /* 著作権表記 (ゲーム内 asset 使用のため必須 — カード footer と同文言、2026-06-08 兄貴指示)
    mobile の height:auto 化は layout.css の footer mobile rule に co-locate (こちらは後勝ちで負ける) */
 .wwm-footer-copy { margin-left: var(--space-3); font-size: 9px; opacity: 0.7; letter-spacing: 0.02em; }
