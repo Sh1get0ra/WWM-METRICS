@@ -62,3 +62,10 @@ test('buildLabels: stat_display 形式 (語尾「力」)', () => {
   assert.equal(out.ja._statDisplay.bellstrike, '鋼鳴攻撃力');
   assert.equal(out.ko._statDisplay.bellstrike, '명금 공격');
 });
+
+test('buildLabels: i18n path dmg が i18n.js 現状訳と一致 (zh伤害加成 / ko피해증가)', () => {
+  const out = buildLabels({ lexicon });
+  assert.equal(out.zh._i18n.pathDmgBellstrike, '鸣金伤害加成');
+  assert.equal(out.ko._i18n.pathDmgBellstrike, '명금 피해 증가');
+  assert.equal(out.en._i18n.pathDmgBellstrike, 'Bellstrike DMG');
+});
