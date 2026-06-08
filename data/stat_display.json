@@ -90,8 +90,14 @@
         ]},
         { "key": "bossBoost",        "label": { "ja": "首領に与えるダメージ増加",  "en": "BOSS DMG Boost",       "zh": "对首领单位增伤",     "ko": "BOSS 유닛에 대한 피해 증가" },     "format": "pct",   "calcKey": "bossBoost" },
         { "key": "playerBoost",      "label": { "ja": "プレイヤーに与える効果強化","en": "PvP DMG Boost",        "zh": "对玩家单位增效",     "ko": "플레이어 유닛에 대한 효과 증가" },         "format": "pct",   "calcKey": "playerBoost" },
-        { "key": "stMysticDmg",      "label": { "ja": "単体系奇術ダメージ増加",    "en": "ST Mystic DMG Boost",  "zh": "单体类奇术增伤", "ko": "단일류 비결 피해 증가" }, "format": "pct", "calcKey": "stMysticDmg" },
-        { "key": "areaMysticDmg",    "label": { "ja": "範囲系奇術ダメージ増加",    "en": "AOE Mystic DMG Boost", "zh": "群体类奇术增伤", "ko": "단체류 비결 피해 증가" }, "format": "pct", "calcKey": "areaMysticDmg" }
+        { "key": "stMysticDmg",      "label": { "ja": "単体系奇術ダメージ増加",    "en": "ST Mystic DMG Boost",  "zh": "单体类奇术增伤", "ko": "단일류 비결 피해 증가" }, "format": "pct", "calcKey": "stMysticDmgDisp", "expandable": true, "subItems": [
+          { "key": "stControlMysticDmg", "label": { "ja": "単体制御系奇術ダメ", "en": "ST Control Mystic", "zh": "单体控制类奇术增伤", "ko": "단일 제어류 비결" }, "format": "pct", "calcKey": "stControlMysticDmg" },
+          { "key": "stBurstMysticDmg",   "label": { "ja": "単体爆発系奇術ダメ", "en": "ST Burst Mystic",   "zh": "单体爆发类奇术增伤", "ko": "단일 폭발류 비결" }, "format": "pct", "calcKey": "stBurstMysticDmg" }
+        ]},
+        { "key": "areaMysticDmg",    "label": { "ja": "範囲系奇術ダメージ増加",    "en": "AOE Mystic DMG Boost", "zh": "群体类奇术增伤", "ko": "단체류 비결 피해 증가" }, "format": "pct", "calcKey": "areaMysticDmgDisp", "expandable": true, "subItems": [
+          { "key": "areaDebuffMysticDmg", "label": { "ja": "範囲状態異常系奇術ダメ", "en": "Area Debuff Mystic", "zh": "群体异常类奇术增伤", "ko": "단체 이상류 비결" }, "format": "pct", "calcKey": "areaDebuffMysticDmg" },
+          { "key": "areaDmgMysticDmg",    "label": { "ja": "範囲攻撃系奇術ダメ",     "en": "Area DMG Mystic",    "zh": "群体伤害类奇术增伤", "ko": "단체 피해류 비결" }, "format": "pct", "calcKey": "areaDmgMysticDmg" }
+        ]}
       ]
     }
   ]

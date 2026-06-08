@@ -11,7 +11,7 @@
   async function _loadConfig() {
     if (_STAT_CONFIG) return _STAT_CONFIG;
     try {
-      _STAT_CONFIG = await fetch('data/stat_display.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json());
+      _STAT_CONFIG = await fetch('data/stat_display.json?v=' + (window.WWM_DISPLAY_VERSION || 10)).then(r => r.json());
     } catch (e) {}
     return _STAT_CONFIG;
   }

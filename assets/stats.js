@@ -584,8 +584,17 @@ async function buildStatParams(roleInfo, state) {
   r.specMartialBoost = r._specMartialBoostScore || 0;
   r.bossBoost       = r.bossDmg        || 0;
   r.playerBoost     = r.playerUnitDmg  || 0;
-  r.stMysticDmg     = (r.stControlMysticDmg||0) + (r.stBurstMysticDmg||0) + (r.stMysticDmg||0);
-  r.areaMysticDmg   = (r.areaDebuffMysticDmg||0) + (r.areaDmgMysticDmg||0) + (r.areaMysticDmg||0);
+  // 表示内訳の 0 埋め: 未定義の細分は sidebar で "-" 表記 → "0.0%" 統一 (areaDebuff/areaDmg は lv95_base 未定義だった)。
+  ['stControlMysticDmg','stBurstMysticDmg','areaDebuffMysticDmg','areaDmgMysticDmg'].forEach(k => { r[k] = r[k] || 0; });
+  // 奇術ダメ集約。 スコア用 (r.stMysticDmg/areaMysticDmg) = 全細分+汎用の SUM (calc.js mysticContrib 係数0.1、 据え置き)。
+  // 表示用 (*Disp) = 汎用 + MAX(細分2) = ゲーム実機ヘッダー一致 (属攻伤害加成 elemAtkBoostDisp と同じ MAX 表示原則)。
+  // 汎用 (stMysticDmg=internal412 / areaMysticDmg=internal411) は現状 UI ドロップダウン未対応 (冠/胸限定) = 実質0、 式には含め将来安全側。
+  const _genStMystic   = r.stMysticDmg   || 0;  // 汎用412 入力 (集約で上書き前に退避)
+  const _genAreaMystic = r.areaMysticDmg || 0;  // 汎用411 入力
+  r.stMysticDmgDisp   = _genStMystic   + Math.max(r.stControlMysticDmg||0, r.stBurstMysticDmg||0);
+  r.areaMysticDmgDisp = _genAreaMystic + Math.max(r.areaDebuffMysticDmg||0, r.areaDmgMysticDmg||0);
+  r.stMysticDmg     = (r.stControlMysticDmg||0) + (r.stBurstMysticDmg||0) + _genStMystic;
+  r.areaMysticDmg   = (r.areaDebuffMysticDmg||0) + (r.areaDmgMysticDmg||0) + _genAreaMystic;
 
   r.maxPhysATK = r.maxPhys;
   r.minPhysATK = r.minPhys;

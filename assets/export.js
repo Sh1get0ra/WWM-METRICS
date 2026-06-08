@@ -69,7 +69,7 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
   async function _statCfg() {
     if (_STAT_CFG) return _STAT_CFG;
     try {
-      _STAT_CFG = await fetch('data/stat_display.json?v=' + (window.WWM_SCORE_VERSION || 9)).then(r => r.json());
+      _STAT_CFG = await fetch('data/stat_display.json?v=' + (window.WWM_DISPLAY_VERSION || 10)).then(r => r.json());
     } catch (_) { _STAT_CFG = null; }
     return _STAT_CFG;
   }
