@@ -425,8 +425,11 @@ async function buildStatParams(roleInfo, state) {
     dualBlades:   ['dualBladesDmg'],
     umbrella:     ['umbrellaDmg'],
     ropeDart:     ['ropeDartDmg'],
-    hengBlade:    ['hengBladeDmg']
+    hengBlade:    ['hengBladeDmg'],
+    gauntlet:     ['gauntletDmg']    // 手甲 (天志拳系、 2026年7月武器実装予定)。 affix internal 未割当=値は武器実装後 scout、 現状 表示枠のみ
   };
+  // 指定武術ダメ各 key を 0 初期化 (subItems 表示で未装備武器種が "-" になるのを防ぎ "0.00%" 統一)。
+  Object.values(WEAPON_CLASS_MAP).flat().forEach(k => { r[k] = r[k] || 0; });
   const mainKf = window.WWM_KONGFU?.[roleInfo?.kongfuMain];
   const subKf = window.WWM_KONGFU?.[roleInfo?.kongfuSub];
   const activeClasses = new Set();

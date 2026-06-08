@@ -2,7 +2,7 @@
   "_schema": "Sidebar ステータス表示順 + 表示形式。ゲーム内表示順準拠。各 item は label (4言語) + format (int/pct/float/range) + calcKey (calc.js param 対応)。",
   "_lastUpdated": "2026-06-07",
   "_source": "ゲーム内ステータス画面 in-game observation (ja: 2026-05-25 4枚スクショ照合 / zh: 2026-06-07 5枚スクショ照合 — zh は原語。旧 zh 列は ja 直訳で誤りだった)",
-  "_note": "format: int=整数、pct=百分率、float=小数1桁、range=Min-Max。calcKey=calc.js computeExpected param key (未対応はnull)。expandable=サブ項目展開可。zh は 2026-06-07 裏ラベル (tooltip) 込み実測網羅: 穿透5/武学增伤8/最终生效4/header=武林造诣 全実証。残推定 = 伤害加成5 subItems のみ。ゲーム内に 手甲武学增伤 (拳) が存在するがツール未対応 key のため未掲載。",
+  "_note": "format: int=整数、pct=百分率、float=小数1桁、range=Min-Max。calcKey=calc.js computeExpected param key (未対応はnull)。expandable=サブ項目展開可。zh は 2026-06-07 裏ラベル (tooltip) 込み実測網羅: 穿透5/武学增伤8/最终生效4/header=武林造诣 全実証。残推定 = 伤害加成5 subItems のみ。手甲武学增伤 (拳=天志拳系) は表示枠追加済 (2026-06-08)、 affix internal は武器実装(2026年7月)後 scout 取得予定 (後期追加 internal は規則性なく推測不可)。",
 
   "header": {
     "title": { "ja": "総合武力", "en": "Total Power", "zh": "武林造诣", "ko": "무림 조예" },
@@ -86,7 +86,8 @@
           { "key": "hengBladeDmg",  "label": { "ja": "横刀武術ダメ",   "en": "Heng Blade DMG",  "zh": "横刀武学增伤",   "ko": "횡도 무술 피해 증가" },      "format": "pct", "calcKey": "hengBladeDmg" },
           { "key": "moBladeDmg",    "label": { "ja": "斬馬刀武術ダメ", "en": "Mo Blade DMG",    "zh": "陌刀武学增伤", "ko": "맥도 무술 피해 증가" },    "format": "pct", "calcKey": "moBladeDmg" },
           { "key": "dualBladesDmg", "label": { "ja": "双剣武術ダメ",   "en": "Dual Blades DMG", "zh": "双刀武学增伤",   "ko": "쌍도 무술 피해 증가" },      "format": "pct", "calcKey": "dualBladesDmg" },
-          { "key": "ropeDartDmg",   "label": { "ja": "縄鏢武術ダメ",   "en": "Rope Dart DMG",   "zh": "绳镖武学增伤",   "ko": "승표 무술 피해 증가" },      "format": "pct", "calcKey": "ropeDartDmg" }
+          { "key": "ropeDartDmg",   "label": { "ja": "縄鏢武術ダメ",   "en": "Rope Dart DMG",   "zh": "绳镖武学增伤",   "ko": "승표 무술 피해 증가" },      "format": "pct", "calcKey": "ropeDartDmg" },
+          { "key": "gauntletDmg",   "label": { "ja": "手甲武術ダメ",   "en": "Gauntlet DMG",    "zh": "手甲武学增伤",   "ko": "권갑 무술 피해 증가" },      "format": "pct", "calcKey": "gauntletDmg" }
         ]},
         { "key": "bossBoost",        "label": { "ja": "首領に与えるダメージ増加",  "en": "BOSS DMG Boost",       "zh": "对首领单位增伤",     "ko": "BOSS 유닛에 대한 피해 증가" },     "format": "pct",   "calcKey": "bossBoost" },
         { "key": "playerBoost",      "label": { "ja": "プレイヤーに与える効果強化","en": "PvP DMG Boost",        "zh": "对玩家单位增效",     "ko": "플레이어 유닛에 대한 효과 증가" },         "format": "pct",   "calcKey": "playerBoost" },
