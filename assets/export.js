@@ -157,7 +157,7 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
       const kid = slot === '1' ? ri.kongfuMain : ri.kongfuSub;
       if (!kid) continue;
       const kf = window.WWM_KONGFU?.[kid];
-      const name = (kf?.names && (kf.names[lang] || kf.names.ja)) || '';
+      const name = window.WWM_DS ? window.WWM_DS.name('kongfu', kid, lang) : ((kf?.names && (kf.names[lang] || kf.names.ja)) || '');
       // 優先: import 時 base64 (bookmarklet 拡張 2026-06-07、 心法方式) → 公式 CDN は CORS 不可 → local SVG 金 recolor
       let iconSrc = ri._kongfuIconsBase64?.[kid] || '';
       if (!iconSrc) {
@@ -179,7 +179,7 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
       const xid = passive[i];
       if (!xid) { xinfa.push(null); continue; }
       const x = window.WWM_XINFA?.[xid];
-      const name = (x?.names && (x.names[lang] || x.names.ja)) || ('#' + xid);
+      const name = window.WWM_DS ? window.WWM_DS.name('xinfa', xid, lang) : ((x?.names && (x.names[lang] || x.names.ja)) || ('#' + xid));
       const iconRaw = ri._xinfaIconsBase64?.[i] || ri._xinfaIcons?.[i]
         || window.WWM_XINFA_ICONS?.[xid]?.icon_url || '';
       const iconSrc = await _fetchImgDataUrl(iconRaw);
