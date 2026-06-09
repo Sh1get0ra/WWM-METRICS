@@ -1,0 +1,56 @@
+{
+  "sword": {
+    "ja": "剣",
+    "en": "Sword",
+    "zh": "剑",
+    "ko": "검"
+  },
+  "spear": {
+    "ja": "槍",
+    "en": "Spear",
+    "zh": "枪",
+    "ko": "창"
+  },
+  "fan": {
+    "ja": "扇",
+    "en": "Fan",
+    "zh": "扇",
+    "ko": "부채"
+  },
+  "umbrella": {
+    "ja": "傘",
+    "en": "Umbrella",
+    "zh": "伞",
+    "ko": "우산"
+  },
+  "mo_blade": {
+    "ja": "刀",
+    "en": "Blade",
+    "zh": "刀",
+    "ko": "도"
+  },
+  "dual_blades": {
+    "ja": "双刃",
+    "en": "Twinblades",
+    "zh": "双刃",
+    "ko": "쌍검"
+  },
+  "new_blade": {
+    "ja": "刀",
+    "en": "Blade",
+    "zh": "刀",
+    "ko": "도"
+  },
+  "rope_dart": {
+    "ja": "縄鏢",
+    "en": "Rope Dart",
+    "zh": "绳镖",
+    "ko": "승표"
+  },
+  "gauntlet": {
+    "ja": "手甲",
+    "en": "Gauntlet",
+    "zh": "拳套",
+    "ko": "권갑"
+  }
+}

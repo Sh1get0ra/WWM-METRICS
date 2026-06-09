@@ -24,21 +24,19 @@
     return labelObj[lang] || labelObj.ja || labelObj.en || fallback || '';
   }
 
-  // path系 attack subItem (鋼鳴攻撃力 等) は lexicon 合成を優先源とする (json label はフォールバック)。
-  // subItem key (voidAtk) → lexicon pathBase key (void) のマップ。
+  // path系 attack subItem (鋼鳴攻撃力 等) は DataStore 合成を優先源とする (json label はフォールバック)。
+  // subItem key (voidAtk) → path.pathBase key (void) のマップ。
   const _PATH_SUBITEM_TO_BASE = {
     bellstrike: 'bellstrike', stonesplit: 'stonesplit', silkbind: 'silkbind',
     bamboocut: 'bamboocut', voidAtk: 'void'
   };
-  let _builtCache = null;
   function _synthStatLabel(key) {
     const base = _PATH_SUBITEM_TO_BASE[key];
     if (!base) return null;
-    if (!_builtCache) {
-      if (!window.WWM_LEXICON || typeof window.WWMBuildLabels !== 'function') return null;
-      _builtCache = window.WWMBuildLabels({ lexicon: window.WWM_LEXICON });
-    }
-    return _builtCache[curLang()]?._statDisplay?.[base] || null;
+    if (!window.WWM_DS) return null;
+    const v = window.WWM_DS.name('path-statdisplay', base, curLang());
+    if (v && v.indexOf('[path-statdisplay:') !== 0) return v;
+    return null;
   }
 
   function _fmt(val, format) {

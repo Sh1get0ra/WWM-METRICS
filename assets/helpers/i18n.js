@@ -14,11 +14,16 @@
     },
 
     /**
-     * window.T (現言語dict) から key 取得。 ない場合 fallback。
+     * DataStore.t() 経由で翻訳key取得。 不在時 fallback。
+     * DataStore 未ロード時は window.T (旧 dict) を見る (race condition fallback、 Task 9 完了後は廃止)。
      * @param {string} key - 翻訳key
      * @param {string} [fallback=''] - 翻訳未定義時のテキスト
      */
     t(key, fallback = '') {
+      if (window.WWM_DS) {
+        const v = window.WWM_DS.t(key);
+        if (v !== key) return v; // DataStore は不在時 key そのまま返す → fallback 判定可能
+      }
       const T = window.T;
       if (T && T[key] !== undefined && T[key] !== null) return T[key];
       return fallback;

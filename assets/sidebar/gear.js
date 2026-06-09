@@ -43,7 +43,10 @@
     const sets = window.WWM_SETS || {};
     const kongfu = window.WWM_KONGFU || {};
     const lang = (window.currentLang) || 'ja';
-    const kfName = (id) => kongfu[id]?.names?.[lang] || kongfu[id]?.names?.ja || '';
+    const kfName = (id) => {
+      const n = window.WWM_DS.name('kongfu', id, lang);
+      return n.indexOf('[kongfu:') === 0 ? '' : n;
+    };
 
     // 装備カード Score = affix ratio 平均 × 100
     function calcCardScore(eq) {
@@ -67,7 +70,8 @@
       const isBow = slot === '9' || slot === '21';
       const isArmor = ['3','4','5','8'].includes(slot);
       const setsCat = isBow ? sets.bowSets : (isArmor ? sets.defensiveSets : sets.weaponSets);
-      let setName = setsCat?.[suffix]?.names?.[lang] || setsCat?.[suffix]?.names?.ja || setsCat?.[suffix]?.names?.en || '';
+      let setName = (window.WWM_DS && suffix) ? window.WWM_DS.name('sets', suffix, lang) : (setsCat?.[suffix]?.names?.[lang] || setsCat?.[suffix]?.names?.ja || setsCat?.[suffix]?.names?.en || '');
+      if (setName && setName.indexOf('[sets:') === 0) setName = '';
       if (lang === 'en' && setName) setName = setName.replace(/\s+Set$/i, '');
       const score = calcCardScore(eq);
       const shortKf = (n) => {
@@ -293,7 +297,10 @@
     // kongfu 名称 (主武器/副武器)
     const lang = _curLang();
     const kfMap = window.WWM_KONGFU || {};
-    const _kfName = (id) => kfMap[id]?.names?.[lang] || kfMap[id]?.names?.ja || '';
+    const _kfName = (id) => {
+      const n = window.WWM_DS.name('kongfu', id, lang);
+      return n.indexOf('[kongfu:') === 0 ? '' : n;
+    };
     const isWeaponSlot = slot === '1' || slot === '2';
     const origKongfuId = slot === '1' ? origRi?.kongfuMain : (slot === '2' ? origRi?.kongfuSub : null);
     // 編集中 kongfu state (新パネル用) — virtual あれば virtual優先
@@ -312,11 +319,19 @@
     const setsMap = isBowSetSlot
       ? (window.WWM_SETS?.bowSets || {})
       : (window.WWM_SETS?.weaponSets || {});
-    const _setName = (s) => setsMap[s]?.names?.[lang] || setsMap[s]?.names?.ja || (s ? `Set ${s}` : '');
+    const _setName = (s) => {
+      if (!s) return '';
+      const n = window.WWM_DS.name('sets', s, lang);
+      return (n.indexOf('[sets:') === 0) ? `Set ${s}` : n;
+    };
     const _setRaw = (s) => setsMap[s]?.pieces2?.raw || '';
     function _setOptions(selectedId) {
       return Object.entries(setsMap)
-        .map(([id, s]) => `<option value="${id}" ${String(id)===String(selectedId)?'selected':''}>${s.names?.[lang]||s.names?.ja||id}</option>`)
+        .map(([id]) => {
+          const n = window.WWM_DS.name('sets', id, lang);
+          const label = (n.indexOf('[sets:') === 0) ? id : n;
+          return `<option value="${id}" ${String(id)===String(selectedId)?'selected':''}>${label}</option>`;
+        })
         .join('');
     }
     // slot 9/21: affix 編集不可
@@ -325,7 +340,11 @@
     function _kongfuOptions(selectedId) {
       return Object.entries(kfMap)
         .filter(([k]) => /^\d+$/.test(k))
-        .map(([id, kf]) => `<option value="${id}" ${String(id)===String(selectedId)?'selected':''}>${kf.names?.[lang]||kf.names?.ja||id}</option>`)
+        .map(([id]) => {
+          const n = window.WWM_DS.name('kongfu', id, lang);
+          const label = (n.indexOf('[kongfu:') === 0) ? id : n;
+          return `<option value="${id}" ${String(id)===String(selectedId)?'selected':''}>${label}</option>`;
+        })
         .join('');
     }
     // 仮想 roleInfo (newKongfu を反映した useful 判定用)
@@ -936,7 +955,15 @@
       const helpBtn = m.querySelector('#wwmCmpOcrHelpBtn');
       if (helpBtn) helpBtn.addEventListener('click', () => {
         const T_ = window.T || {};
-        const L = (window._STAT_LABELS_I18N_ALL || {})[window.currentLang || 'ja'] || {};
+        // OCR mock label = DataStore.name('stat', key) 経由 (旧 _STAT_LABELS_I18N_ALL[lang] dict 廃止、 2026-06-09 i18n 一本化)
+        const _lang = window.currentLang || 'ja';
+        const L = new Proxy({}, {
+          get(_, k) {
+            if (typeof k !== 'string' || !window.WWM_DS) return undefined;
+            const v = window.WWM_DS.name('stat', k, _lang);
+            return (v && v.indexOf('[stat:') !== 0) ? v : undefined;
+          }
+        });
         // mock = ゲーム装備詳細画面の再現 (2026-06-07 兄貴実スクショ準拠: 大数字/装備レベル Lv.91/
         //  外功攻撃 53~124/・点 + 👍badge + 値右端オレンジ/末尾定音 = ❖)
         const _bdg = '<i class="wwm-ocr-mock-badge">👍</i>';

@@ -1,0 +1,530 @@
+{
+  "body": {
+    "ja": "体",
+    "en": "Body",
+    "zh": "体",
+    "ko": "체력"
+  },
+  "momentum": {
+    "ja": "会",
+    "en": "Momentum",
+    "zh": "势",
+    "ko": "기세"
+  },
+  "agility": {
+    "ja": "速",
+    "en": "Agi",
+    "zh": "敏",
+    "ko": "민첩"
+  },
+  "power": {
+    "ja": "力",
+    "en": "Power",
+    "zh": "劲",
+    "ko": "내공"
+  },
+  "defense": {
+    "ja": "防御",
+    "en": "Def",
+    "zh": "御",
+    "ko": "방어"
+  },
+  "maxHp": {
+    "ja": "気血最大値",
+    "en": "HP Max",
+    "zh": "气血最大值",
+    "ko": "기혈 최대치"
+  },
+  "minPhys": {
+    "ja": "最小外功攻撃",
+    "en": "Phys ATK Min",
+    "zh": "最小外功攻击",
+    "ko": "최소 외공 공격"
+  },
+  "maxPhys": {
+    "ja": "最大外功攻撃",
+    "en": "Phys ATK Max",
+    "zh": "最大外功攻击",
+    "ko": "최대 외공 공격"
+  },
+  "physDef": {
+    "ja": "外功防御",
+    "en": "Phys DEF",
+    "zh": "外功防御",
+    "ko": "외공 방어력"
+  },
+  "physPen": {
+    "ja": "外功貫通",
+    "en": "Phys Pen",
+    "zh": "外功穿透",
+    "ko": "외공 관통"
+  },
+  "physResist": {
+    "ja": "外功耐性",
+    "en": "Phys Res",
+    "zh": "外功抗性",
+    "ko": "외공 저항"
+  },
+  "precision": {
+    "ja": "命中率",
+    "en": "Precision",
+    "zh": "精准率",
+    "ko": "정확도"
+  },
+  "crit": {
+    "ja": "会心率",
+    "en": "Crit",
+    "zh": "会心率",
+    "ko": "치명타 확률"
+  },
+  "affinity": {
+    "ja": "会意率",
+    "en": "Affinity",
+    "zh": "会意率",
+    "ko": "각성 확률"
+  },
+  "allWeaponDmg": {
+    "ja": "全武学/PvP/BOSSダメ",
+    "en": "All Martial/PvP/BOSS DMG",
+    "zh": "全武学/PvP/BOSS增效",
+    "ko": "모든 무술/PvP/BOSS 피해"
+  },
+  "swordDmg": {
+    "ja": "剣ダメ強化",
+    "en": "Sword DMG",
+    "zh": "剑武学增伤",
+    "ko": "검 무술 피해 증가"
+  },
+  "spearDmg": {
+    "ja": "槍ダメ強化",
+    "en": "Spear DMG",
+    "zh": "枪武学增伤",
+    "ko": "창 무술 피해 증가"
+  },
+  "moBladeDmg": {
+    "ja": "墨刀ダメ強化",
+    "en": "Mo Blade DMG",
+    "zh": "陌刀武学增伤",
+    "ko": "맥도 무술 피해 증가"
+  },
+  "dualBladesDmg": {
+    "ja": "双剣ダメ強化",
+    "en": "Twinblades DMG",
+    "zh": "双刀武学增伤",
+    "ko": "쌍도 무술 피해 증가"
+  },
+  "fanDmg": {
+    "ja": "扇ダメ強化",
+    "en": "Fan DMG",
+    "zh": "扇武学增效",
+    "ko": "부채 무술 효과 증가"
+  },
+  "umbrellaDmg": {
+    "ja": "傘ダメ強化",
+    "en": "Umbrella DMG",
+    "zh": "伞武学增效",
+    "ko": "우산 무술 효과 증가"
+  },
+  "hengBladeDmg": {
+    "ja": "横刀ダメ",
+    "en": "Heng Blade DMG",
+    "zh": "横刀武学增伤",
+    "ko": "횡도 무술 피해 증가"
+  },
+  "ropeDartDmg": {
+    "ja": "縄鏢ダメ",
+    "en": "Rope Dart DMG",
+    "zh": "绳镖武学增伤",
+    "ko": "승표 무술 피해 증가"
+  },
+  "fanHealingBoost": {
+    "ja": "扇治癒強化",
+    "en": "Fan Heal+",
+    "zh": "扇治愈强化",
+    "ko": "부채 치유 강화"
+  },
+  "umbrellaHealingBoost": {
+    "ja": "傘治癒強化",
+    "en": "Umb Heal+",
+    "zh": "伞治愈强化",
+    "ko": "우산 치유 강화"
+  },
+  "lightAtkDmg": {
+    "ja": "軽撃ダメ強化",
+    "en": "LA",
+    "zh": "轻击增伤",
+    "ko": "경격 피해 강화"
+  },
+  "heavyAtkDmg": {
+    "ja": "重撃ダメ強化",
+    "en": "HA",
+    "zh": "重击增伤",
+    "ko": "중격 피해 강화"
+  },
+  "airborneLightAtkDmg": {
+    "ja": "空中軽撃ダメ強化",
+    "en": "Air LA",
+    "zh": "空中轻击增伤",
+    "ko": "공중 경격 피해 강화"
+  },
+  "jumpStrikeDmg": {
+    "ja": "跳躍撃ダメ強化",
+    "en": "Jump Strike",
+    "zh": "跃击增伤",
+    "ko": "도약격 피해 강화"
+  },
+  "dualWeaponSkillDmg": {
+    "ja": "双武器技ダメ強化",
+    "en": "Dual Skill",
+    "zh": "双武器技增伤",
+    "ko": "쌍무기 기술 피해 강화"
+  },
+  "executionDmg": {
+    "ja": "処刑ダメ強化",
+    "en": "Exec DMG",
+    "zh": "处决增伤",
+    "ko": "처형 피해 강화"
+  },
+  "dashDmg": {
+    "ja": "突進ダメ強化",
+    "en": "Dash DMG",
+    "zh": "冲刺增伤",
+    "ko": "돌진 피해 강화"
+  },
+  "bossDmg": {
+    "ja": "BOSSダメージ",
+    "en": "BOSS DMG",
+    "zh": "对首领单位增伤",
+    "ko": "BOSS 유닛에 대한 피해 증가"
+  },
+  "playerUnitDmg": {
+    "ja": "PvPダメージ",
+    "en": "PvP DMG",
+    "zh": "对玩家单位增伤",
+    "ko": "플레이어 유닛에 대한 효과 증가"
+  },
+  "stMysticDmg": {
+    "ja": "単体系奇術",
+    "en": "ST Mystic",
+    "zh": "单体类奇术增伤",
+    "ko": "단일류 비결 피해 증가"
+  },
+  "stBurstMysticDmg": {
+    "ja": "単体爆発系奇術",
+    "en": "ST Burst Mystic",
+    "zh": "单体爆发类奇术增伤",
+    "ko": "단일 폭발류 비결 피해 증가"
+  },
+  "stControlMysticDmg": {
+    "ja": "単体制御系奇術",
+    "en": "ST Ctrl Mystic",
+    "zh": "单体控制类奇术增伤",
+    "ko": "단일 제어류 비결 피해 증가"
+  },
+  "areaMysticDmg": {
+    "ja": "範囲系奇術",
+    "en": "AOE Mystic",
+    "zh": "群体类奇术增伤",
+    "ko": "단체류 비결 피해 증가"
+  },
+  "areaDmgMysticDmg": {
+    "ja": "範囲攻撃系奇術",
+    "en": "AOE DMG Mystic",
+    "zh": "群体伤害类奇术增伤",
+    "ko": "단체 피해류 비결 피해 증가"
+  },
+  "areaDebuffMysticDmg": {
+    "ja": "範囲状態異常系奇術",
+    "en": "AOE Debuff Mystic",
+    "zh": "群体异常类奇术增伤",
+    "ko": "단체 이상류 비결 피해 증가"
+  },
+  "bleed": {
+    "ja": "九変の剣 流血",
+    "en": "Strategic SD Bleed",
+    "zh": "积矩九剑 流血",
+    "ko": "구현의 검무 출혈"
+  },
+  "moBladeShield": {
+    "ja": "断魂の刀 シールド効果",
+    "en": "Thundercry MB Shield",
+    "zh": "嗟夫刀法 护盾增效",
+    "ko": "탄식의 검기 보호막 효과"
+  },
+  "panaceaFanHealing": {
+    "ja": "薬川の扇 重撃回復量",
+    "en": "Panacea FN Heal",
+    "zh": "明川药典 重击回复",
+    "ko": "천계의 수호 중격 회복"
+  },
+  "swordQ": {
+    "ja": "九変の剣 武術技",
+    "en": "Strategic SD Q",
+    "zh": "积矩九剑 武学技",
+    "ko": "구현의 검무 무술 스킬"
+  },
+  "swordCharged": {
+    "ja": "九変の剣 溜め技",
+    "en": "Strategic SD Ch",
+    "zh": "积矩九剑 蓄力技",
+    "ko": "구현의 검무 차지 스킬"
+  },
+  "swordSpecial": {
+    "ja": "九変の剣 特殊技",
+    "en": "Strategic SD Sp",
+    "zh": "积矩九剑 特殊技",
+    "ko": "구현의 검무 특수 스킬"
+  },
+  "namelessSwordQ": {
+    "ja": "無銘の剣 武術技",
+    "en": "Nameless SD Q",
+    "zh": "无名剑法 武学技",
+    "ko": "무명 검법 무술 스킬"
+  },
+  "namelessSwordCharged": {
+    "ja": "無銘の剣 溜め技",
+    "en": "Nameless SD Ch",
+    "zh": "无名剑法 蓄力技",
+    "ko": "무명 검법 차지 스킬"
+  },
+  "namelessSwordSpecial": {
+    "ja": "無銘の剣 特殊技",
+    "en": "Nameless SD Sp",
+    "zh": "无名剑法 特殊技",
+    "ko": "무명 검법 특수 스킬"
+  },
+  "spearQ": {
+    "ja": "蛇神の槍 武術技",
+    "en": "Heavenquaker SP Q",
+    "zh": "九曲惊神枪 武学技",
+    "ko": "격류의 파동 무술 스킬"
+  },
+  "spearCharged": {
+    "ja": "蛇神の槍 溜め技",
+    "en": "Heavenquaker SP Ch",
+    "zh": "九曲惊神枪 蓄力技",
+    "ko": "격류의 파동 차지 스킬"
+  },
+  "spearSpecial": {
+    "ja": "蛇神の槍 特殊技",
+    "en": "Heavenquaker SP Sp",
+    "zh": "九曲惊神枪 特殊技",
+    "ko": "격류의 파동 특수 스킬"
+  },
+  "namelessSpearQ": {
+    "ja": "無銘の槍 武術技",
+    "en": "Nameless SP Q",
+    "zh": "无名枪法 武学技",
+    "ko": "무명 창법 무술 스킬"
+  },
+  "namelessSpearCharged": {
+    "ja": "無銘の槍 溜め技",
+    "en": "Nameless SP Ch",
+    "zh": "无名枪法 蓄力技",
+    "ko": "무명 창법 차지 스킬"
+  },
+  "namelessSpearSpecial": {
+    "ja": "無銘の槍 特殊技",
+    "en": "Nameless SP Sp",
+    "zh": "无名枪法 特殊技",
+    "ko": "무명 창법 특수 스킬"
+  },
+  "stormbreakerQ": {
+    "ja": "嵐雷の槍 武術技",
+    "en": "Stormbreaker SP Q",
+    "zh": "八方风雷枪 武学技",
+    "ko": "풍뢰의 징표 무술 스킬"
+  },
+  "stormbreakerCharged": {
+    "ja": "嵐雷の槍 溜め技",
+    "en": "Stormbreaker SP Ch",
+    "zh": "八方风雷枪 蓄力技",
+    "ko": "풍뢰의 징표 차지 스킬"
+  },
+  "stormbreakerSpecial": {
+    "ja": "嵐雷の槍 特殊技",
+    "en": "Stormbreaker SP Sp",
+    "zh": "八方风雷枪 特殊技",
+    "ko": "풍뢰의 징표 특수 스킬"
+  },
+  "fanQ": {
+    "ja": "墨筆の扇 武術技",
+    "en": "Inkwell FN Q",
+    "zh": "青山执笔 武学技",
+    "ko": "청산의 정수 무술 스킬"
+  },
+  "fanCharged": {
+    "ja": "墨筆の扇 溜め技",
+    "en": "Inkwell FN Ch",
+    "zh": "青山执笔 蓄力技",
+    "ko": "청산의 정수 차지 스킬"
+  },
+  "fanSpecial": {
+    "ja": "墨筆の扇 特殊技",
+    "en": "Inkwell FN Sp",
+    "zh": "青山执笔 特殊技",
+    "ko": "청산의 정수 특수 스킬"
+  },
+  "panaceaFanQ": {
+    "ja": "薬川の扇 武術技",
+    "en": "Panacea FN Q",
+    "zh": "明川药典 武学技",
+    "ko": "천계의 수호 무술 스킬"
+  },
+  "panaceaFanSpecial": {
+    "ja": "薬川の扇 特殊技",
+    "en": "Panacea FN Sp",
+    "zh": "明川药典 特殊技",
+    "ko": "천계의 수호 특수 스킬"
+  },
+  "moBladeCharged": {
+    "ja": "断魂の刀 溜め技",
+    "en": "Thundercry MB Ch",
+    "zh": "嗟夫刀法 蓄力技",
+    "ko": "탄식의 검기 차지 스킬"
+  },
+  "moBladeSpecial": {
+    "ja": "断魂の刀 特殊技",
+    "en": "Thundercry MB Sp",
+    "zh": "嗟夫刀法 特殊技",
+    "ko": "탄식의 검기 특수 스킬"
+  },
+  "phalanxbaneQ": {
+    "ja": "破陣の刀 武術技",
+    "en": "Phalanxbane MB Q",
+    "zh": "十方破阵 武学技",
+    "ko": "십방파진 무술 스킬"
+  },
+  "phalanxbaneCharged": {
+    "ja": "破陣の刀 溜め技",
+    "en": "Phalanxbane MB Ch",
+    "zh": "十方破阵 蓄力技",
+    "ko": "십방파진 차지 스킬"
+  },
+  "snowpartingQ": {
+    "ja": "斬雪の刀 武術技",
+    "en": "Snowparting HB Q",
+    "zh": "斩雪刀法 武学技",
+    "ko": "만설의 참격 무술 스킬"
+  },
+  "snowpartingCharged": {
+    "ja": "斬雪の刀 溜め技",
+    "en": "Snowparting HB Ch",
+    "zh": "斩雪刀法 蓄力技",
+    "ko": "만설의 참격 차지 스킬"
+  },
+  "snowpartingVariedCombo": {
+    "ja": "斬雪の刀 軽重撃派生",
+    "en": "Snowparting HB LA/HC",
+    "zh": "斩雪刀法 轻重击派生",
+    "ko": "만설의 참격 경중격 파생"
+  },
+  "infernalTwinbladesQ": {
+    "ja": "獄炎の双剣 武術技",
+    "en": "Infernal TB Q",
+    "zh": "泥犁三垢 武学技",
+    "ko": "윤회의 가르침 무술 스킬"
+  },
+  "infernalTwinbladesSpecial": {
+    "ja": "獄炎の双剣 特殊技",
+    "en": "Infernal TB Sp",
+    "zh": "泥犁三垢 特殊技",
+    "ko": "윤회의 가르침 특수 스킬"
+  },
+  "infernalTwinbladesLight": {
+    "ja": "獄炎の双剣 軽撃",
+    "en": "Infernal TB LA",
+    "zh": "泥犁三垢 强效轻击",
+    "ko": "윤회의 가르침 강력한 약 공격"
+  },
+  "umbQ": {
+    "ja": "千紅の傘 武術技",
+    "en": "Vernal UM Q",
+    "zh": "九重春色 武学技",
+    "ko": "봄의 선율 무술 스킬"
+  },
+  "umbCharged": {
+    "ja": "千紅の傘 溜め技",
+    "en": "Vernal UM Ch",
+    "zh": "九重春色 蓄力技",
+    "ko": "봄의 선율 차지 스킬"
+  },
+  "umbDrone": {
+    "ja": "千紅の傘 特殊技",
+    "en": "Vernal UM Drone",
+    "zh": "九重春色 特殊技",
+    "ko": "봄의 선율 특수 스킬"
+  },
+  "soulshadeUmbQ": {
+    "ja": "誘魂の傘 武術技",
+    "en": "Soulshade UM Q",
+    "zh": "千香引魂蛊 武学技",
+    "ko": "소생의 향 무술 스킬"
+  },
+  "soulshadeUmbCharged": {
+    "ja": "誘魂の傘 溜め技",
+    "en": "Soulshade UM Ch",
+    "zh": "千香引魂蛊 蓄力技",
+    "ko": "소생의 향 차지 스킬"
+  },
+  "soulshadeUmbSpecial": {
+    "ja": "誘魂の傘 特殊技",
+    "en": "Soulshade UM Sp",
+    "zh": "千香引魂蛊 特殊技",
+    "ko": "소생의 향 특수 스킬"
+  },
+  "everspringUmbQ": {
+    "ja": "醉夢の傘 武術技",
+    "en": "Everspring UM Q",
+    "zh": "醉梦游春 武学技",
+    "ko": "일장춘몽 무술 스킬"
+  },
+  "everspringUmbCharged": {
+    "ja": "醉夢の傘 溜め技",
+    "en": "Everspring UM Ch",
+    "zh": "醉梦游春 蓄力技",
+    "ko": "일장춘몽 차지 스킬"
+  },
+  "everspringUmbSpecial": {
+    "ja": "醉夢の傘 特殊技",
+    "en": "Everspring UM Sp",
+    "zh": "醉梦游春 特殊技",
+    "ko": "일장춘몽 특수 스킬"
+  },
+  "mortalRopeDartQ": {
+    "ja": "浮塵の縄 武術技",
+    "en": "Mortal RD Q",
+    "zh": "粟子游尘 武学技",
+    "ko": "속세의 지혜 무술 스킬"
+  },
+  "mortalRopeDartCharged": {
+    "ja": "浮塵の縄 溜め技",
+    "en": "Mortal RD Ch",
+    "zh": "粟子游尘 蓄力技",
+    "ko": "속세의 지혜 차지 스킬"
+  },
+  "mortalRopeDartRodent": {
+    "ja": "浮塵の縄 鼠",
+    "en": "Mortal RD Rodent",
+    "zh": "粟子游尘 鼠鼠",
+    "ko": "속세의 지혜 쥐 기술"
+  },
+  "unfetteredRopeDartQ": {
+    "ja": "浮雲の縄 武術技",
+    "en": "Unfettered RD Q",
+    "zh": "粟子行云 武学技",
+    "ko": "운진의 궤적 무술 스킬"
+  },
+  "unfetteredRopeDartCharged": {
+    "ja": "浮雲の縄 溜め技",
+    "en": "Unfettered RD Ch",
+    "zh": "粟子行云 蓄力技",
+    "ko": "운진의 궤적 차지 스킬"
+  },
+  "unfetteredRopeDartSpecial": {
+    "ja": "浮雲の縄 特殊技",
+    "en": "Unfettered RD Sp",
+    "zh": "粟子行云 特殊技",
+    "ko": "운진의 궤적 특수 스킬"
+  }
+}

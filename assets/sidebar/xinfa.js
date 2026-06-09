@@ -30,7 +30,11 @@
     const cards = [0,1,2,3].map(i => {
       const xid = passive[i];
       const xinfa = xid ? xinfaMap[xid] : null;
-      const name = xinfa ? (xinfa.names?.[lang] || xinfa.names?.ja || `心法ID ${xid}`) : '(空)';
+      let name = '(空)';
+      if (xid) {
+        const n = window.WWM_DS.name('xinfa', xid, lang);
+        name = n.indexOf('[xinfa:') === 0 ? `心法ID ${xid}` : n;
+      }
       const tier = tiers[i] ?? tiers[String(i)] ?? 6;
       // icon: 元と同じ xid なら base64/URL、 swap 後 or 配列が空(SHARE mode等) は dict から URL fallback
       const iconUrl = (xid === origPassive[i] && xinfaIcons[i]) ? xinfaIcons[i] : (window.WWM_XINFA_ICONS?.[xid]?.icon_url || null);
@@ -149,11 +153,19 @@
     const virtTier = WWMState.virtual.xinfa?.tiers?.[slotIdx] ?? origTier;
     let newXinfaId = passive[slotIdx] || origPassive[slotIdx];
     let newTier = virtTier;
-    const _xName = (id) => id ? (xinfaMap[id]?.names?.[lang] || xinfaMap[id]?.names?.ja || `心法ID ${id}`) : '(空)';
+    const _xName = (id) => {
+      if (!id) return '(空)';
+      const n = window.WWM_DS.name('xinfa', id, lang);
+      return n.indexOf('[xinfa:') === 0 ? `心法ID ${id}` : n;
+    };
     function _xinfaOptions(selectedId) {
       return Object.entries(xinfaMap)
         .filter(([k]) => /^\d+$/.test(k))
-        .map(([id, x]) => `<option value="${id}" ${String(id)===String(selectedId)?'selected':''}>${x.names?.[lang]||x.names?.ja||id}</option>`)
+        .map(([id]) => {
+          const n = window.WWM_DS.name('xinfa', id, lang);
+          const label = n.indexOf('[xinfa:') === 0 ? id : n;
+          return `<option value="${id}" ${String(id)===String(selectedId)?'selected':''}>${label}</option>`;
+        })
         .join('');
     }
     // xinfa effects key → i18n key + 表示形式

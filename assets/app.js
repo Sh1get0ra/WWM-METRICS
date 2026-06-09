@@ -48,11 +48,15 @@
 })();
 
 // ── 言語切替 ──────────────────────────────────────────────────────
+// currentLang は app.js owned に変更 (旧 i18n.js TRANSLATIONS と一緒に廃止、 2026-06-09 i18n 一本化)。
+// 真実源 = window.currentLang (DataStore も DataStore.setLang() で内部に同期保持)。
+let currentLang = 'ja';
 function setLang(lang) {
   currentLang = lang;
-  T = TRANSLATIONS[lang];
-  window.T = T;
   window.currentLang = lang;
+  // DataStore に lang 同期 (window.T Proxy が DataStore.t() 委譲する前提)
+  if (window.WWM_DS && typeof window.WWM_DS.setLang === 'function') window.WWM_DS.setLang(lang);
+  // 旧: T = TRANSLATIONS[lang] / window.T = T → i18n.js Proxy で透過化、 ここでの代入は不要
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang === 'ko' ? 'ko' : lang;
   document.title = T.pageTitle;
 
@@ -436,7 +440,12 @@ function importData() {
 // exportImage は assets/export.js に分離
 
 // ── 起動 ──────────────────────────────────────────────────────────
-function init() {
+async function init() {
+  // DataStore eager load (全 i18n 揃ってから UI 初期化 → name()/t() 同期取得保証)
+  if (window.WWM_DS && window.WWM_DS.ready) {
+    try { await window.WWM_DS.ready(); }
+    catch (e) { console.error('DataStore.ready() failed', e); }
+  }
   initTheme();
   initHeroCollapse();
   _loadSavedLang();

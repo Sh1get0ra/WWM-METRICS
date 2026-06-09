@@ -309,7 +309,11 @@ function renderEnhanceArsenalForm(state, roleInfo) {
   const xinfa = window.WWM_XINFA || {};
   const xinfaRows = [0,1,2,3].map(i => {
     const xid = passive[i];
-    const xname = xid ? _pickName(xinfa[xid]?.names, `xinfa#${xid}`) : '—';
+    let xname = '—';
+    if (xid) {
+      const n = window.WWM_DS.name('xinfa', xid, _curLangImport());
+      xname = n.indexOf('[xinfa:') === 0 ? `xinfa#${xid}` : n;
+    }
     const curTier = state.xinfaTiers?.[i] ?? 6;
     const opts = [0,1,2,3,4,5,6].map(t => `<option value="${t}"${t===curTier?' selected':''}>Tier ${t}</option>`).join('');
     const effText = xid ? _xinfaEffectsText(xinfa[xid], curTier) : '';
@@ -485,19 +489,13 @@ function _pickName(names, fallback) {
 }
 function _kongfuName(id) {
   if (id === undefined || id === null || id === 0) return '—';
-  try {
-    const k = window.WWM_KONGFU;
-    if (k && k[id]) return _pickName(k[id].names, '武術ID ' + id);
-  } catch(e) {}
-  return '武術ID ' + id;
+  const n = window.WWM_DS.name('kongfu', id, _curLangImport());
+  return n.indexOf('[kongfu:') === 0 ? ('武術ID ' + id) : n;
 }
 function _xinfaName(id) {
   if (id === undefined || id === null || id === 0) return '—';
-  try {
-    const x = window.WWM_XINFA;
-    if (x && x[id]) return _pickName(x[id].names, '心法ID ' + id);
-  } catch(e) {}
-  return '心法ID ' + id;
+  const n = window.WWM_DS.name('xinfa', id, _curLangImport());
+  return n.indexOf('[xinfa:') === 0 ? ('心法ID ' + id) : n;
 }
 async function _loadDicts() {
   const dictMap = {
@@ -508,9 +506,7 @@ async function _loadDicts() {
     WWM_XINFA_ICONS: 'xinfa_icons',
     WWM_KONGFU_ICONS: 'kongfu_icons',
     WWM_GEAR_SLOT_ICONS: 'gear_slot_icons',
-    WWM_AVATAR_ICONS: 'avatar_icons',
-    WWM_LEXICON: 'lexicon',
-    WWM_STAT_LABELS: 'stat_labels'
+    WWM_AVATAR_ICONS: 'avatar_icons'
   };
   const tasks = [];
   for (const [winKey, fileName] of Object.entries(dictMap)) {
@@ -521,22 +517,26 @@ async function _loadDicts() {
   try {
     await Promise.all(tasks);
   } catch(e) { console.warn('[WWM Import] dict load failed:', e); }
-  // path系ラベルを lexicon から i18n テーブル + import dict (_STAT_LABELS_I18N) へ合成注入。
-  // 静的定義廃止の代替。i18n/import dict 両方を WWMApplyPathLabels が単一地点で注入。
-  if (typeof window.WWMApplyPathLabels === 'function') window.WWMApplyPathLabels();
 }
 
-// statKey → 4言語ラベル (WW Math 由来 statKey)
-// statKey → 4言語ラベル。実体は data/stat_labels.json (言語追加 = json に lang 列足すだけ)。
-// ここは空オブジェクト宣言のみ。_loadDicts/_ensureDicts 完了後に WWMApplyPathLabels が
-// (a) WWM_STAT_LABELS を各 lang に Object.assign 充填 (b) path系 lexicon 合成注入 を行う。
-// const + Object.assign (再代入なし) で _STAT_LABELS / window._STAT_LABELS_I18N_ALL の参照を維持。
-const _STAT_LABELS_I18N = { ja: {}, en: {}, zh: {}, ko: {} };
-const _STAT_LABELS = _STAT_LABELS_I18N.ja; // backward compat
+// statKey → 4言語ラベル。 真実源 = data/i18n/stat.json + data/i18n/path.json (合成は DataStore)。
+// _STAT_LABELS_PROXY = DataStore.name('stat', key, lang) の薄ラッパ (旧 _STAT_LABELS_I18N[L]?.[k] 互換)。
+// 旧 _STAT_LABELS_I18N dict 構造は廃止 (2026-06-09 i18n 一本化)、 callsite 用 stub のみ残置。
+const _STAT_LABELS_I18N_STUB = { ja: {}, en: {}, zh: {}, ko: {} }; // window._STAT_LABELS_I18N_ALL 互換用 (空、 sidebar/gear.js 等 fallback)
+const _STAT_LABELS_I18N = _STAT_LABELS_I18N_STUB; // backward compat alias
+const _STAT_LABELS = _STAT_LABELS_I18N.ja;        // backward compat alias
 const _STAT_LABELS_PROXY = new Proxy({}, {
   get(_, k) {
-    const L = (typeof window !== 'undefined' && window.currentLang) || 'ja';
-    return _STAT_LABELS_I18N[L]?.[k] || _STAT_LABELS_I18N.ja[k];
+    if (typeof k !== 'string') return undefined;
+    if (window.WWM_DS) {
+      const L = window.currentLang || 'ja';
+      const v = window.WWM_DS.name('stat', k, L);
+      if (v && v.indexOf('[stat:') !== 0) return v;
+      // path系等 = ui に統合済 → t() で引く
+      const t = window.WWM_DS.t(k);
+      if (t !== k) return t;
+    }
+    return undefined;
   }
 });
 
@@ -609,8 +609,7 @@ const _AFFIX_LABELS = new Proxy({}, {
   get(_, id) {
     const sk = _AFFIX_LABELS_STATKEY[id];
     if (sk) {
-      const L = (window.currentLang)||'ja';
-      const v = _STAT_LABELS_I18N[L]?.[sk];
+      const v = _STAT_LABELS_PROXY[sk];
       if (v) return v;
     }
     return _AFFIX_LABELS_JA_FALLBACK[id];
@@ -634,20 +633,9 @@ function _affixName(id, idx) {
   if (idx === 5) return (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
   return 'affix#' + id;
 }
-function _setName(suffix, slot) {
-  const s = window.WWM_SETS;
-  if (!s) return '';
-  const key = String(suffix);
-  // 武器 (slot 1,2,10,11) → weaponSets、弓 (slot 9,21) → bowSets、防具 (slot 3,4,5,8) → defensiveSets
-  const isBow = (slot === '9' || slot === '21');
-  const isArmor = (slot === '3' || slot === '4' || slot === '5' || slot === '8');
-  const sets = isBow ? (s.bowSets || {}) : (isArmor ? (s.defensiveSets || {}) : (s.weaponSets || {}));
-  if (sets[key]) return _pickName(sets[key].names, '');
-  // fallback: 全カテゴリ探索
-  for (const cat of ['weaponSets', 'bowSets', 'defensiveSets']) {
-    if (s[cat] && s[cat][key]) return _pickName(s[cat][key].names, '');
-  }
-  return '';
+function _setName(suffix) {
+  const n = window.WWM_DS.name('sets', String(suffix), _curLangImport());
+  return n.indexOf('[sets:') === 0 ? '' : n;
 }
 // import.js preview 用 簡易 fmt (statKey 未参照、 0-1 range で % 推定)。
 // sidebar.js 側 _fmtAffixVal (statKey 必須、 affix-utils.js) と 衝突回避のため rename。
