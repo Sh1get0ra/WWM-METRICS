@@ -43,7 +43,10 @@
     const sets = window.WWM_SETS || {};
     const kongfu = window.WWM_KONGFU || {};
     const lang = (window.currentLang) || 'ja';
-    const kfName = (id) => window.WWM_DS ? window.WWM_DS.name('kongfu', id, lang) : (kongfu[id]?.names?.[lang] || kongfu[id]?.names?.ja || '');
+    const kfName = (id) => {
+      const n = window.WWM_DS.name('kongfu', id, lang);
+      return n.indexOf('[kongfu:') === 0 ? '' : n;
+    };
 
     // 装備カード Score = affix ratio 平均 × 100
     function calcCardScore(eq) {
@@ -294,7 +297,10 @@
     // kongfu 名称 (主武器/副武器)
     const lang = _curLang();
     const kfMap = window.WWM_KONGFU || {};
-    const _kfName = (id) => window.WWM_DS ? window.WWM_DS.name('kongfu', id, lang) : (kfMap[id]?.names?.[lang] || kfMap[id]?.names?.ja || '');
+    const _kfName = (id) => {
+      const n = window.WWM_DS.name('kongfu', id, lang);
+      return n.indexOf('[kongfu:') === 0 ? '' : n;
+    };
     const isWeaponSlot = slot === '1' || slot === '2';
     const origKongfuId = slot === '1' ? origRi?.kongfuMain : (slot === '2' ? origRi?.kongfuSub : null);
     // 編集中 kongfu state (新パネル用) — virtual あれば virtual優先
@@ -315,18 +321,15 @@
       : (window.WWM_SETS?.weaponSets || {});
     const _setName = (s) => {
       if (!s) return '';
-      if (window.WWM_DS) {
-        const n = window.WWM_DS.name('sets', s, lang);
-        return (n.indexOf('[sets:') === 0) ? `Set ${s}` : n;
-      }
-      return setsMap[s]?.names?.[lang] || setsMap[s]?.names?.ja || `Set ${s}`;
+      const n = window.WWM_DS.name('sets', s, lang);
+      return (n.indexOf('[sets:') === 0) ? `Set ${s}` : n;
     };
     const _setRaw = (s) => setsMap[s]?.pieces2?.raw || '';
     function _setOptions(selectedId) {
       return Object.entries(setsMap)
-        .map(([id, s]) => {
-          const n = window.WWM_DS ? window.WWM_DS.name('sets', id, lang) : (s.names?.[lang]||s.names?.ja||id);
-          const label = (n.indexOf && n.indexOf('[sets:') === 0) ? id : n;
+        .map(([id]) => {
+          const n = window.WWM_DS.name('sets', id, lang);
+          const label = (n.indexOf('[sets:') === 0) ? id : n;
           return `<option value="${id}" ${String(id)===String(selectedId)?'selected':''}>${label}</option>`;
         })
         .join('');
@@ -337,7 +340,11 @@
     function _kongfuOptions(selectedId) {
       return Object.entries(kfMap)
         .filter(([k]) => /^\d+$/.test(k))
-        .map(([id]) => `<option value="${id}" ${String(id)===String(selectedId)?'selected':''}>${window.WWM_DS ? window.WWM_DS.name('kongfu', id, lang) : id}</option>`)
+        .map(([id]) => {
+          const n = window.WWM_DS.name('kongfu', id, lang);
+          const label = (n.indexOf('[kongfu:') === 0) ? id : n;
+          return `<option value="${id}" ${String(id)===String(selectedId)?'selected':''}>${label}</option>`;
+        })
         .join('');
     }
     // 仮想 roleInfo (newKongfu を反映した useful 判定用)
