@@ -53,7 +53,7 @@ function evalDataStore() {
 
   // (b) setLang 後 デフォルト lang 適用
   DS.setLang('zh');
-  assert.equal(DS.name('kongfu', 10101), '積矩九劍', 'kongfu lang from setLang');
+  assert.equal(DS.name('kongfu', 10101), '积矩九剑', 'kongfu lang from setLang');
 
   // (c) fallback: 不在 id → [cat:id]
   assert.equal(DS.name('kongfu', 99999, 'ja'), '[kongfu:99999]', 'unknown id → bracket id');
