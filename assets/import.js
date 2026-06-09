@@ -536,17 +536,24 @@ async function _loadDicts() {
   if (typeof window.WWMApplyPathLabels === 'function') window.WWMApplyPathLabels();
 }
 
-// statKey → 4言語ラベル (WW Math 由来 statKey)
-// statKey → 4言語ラベル。実体は data/stat_labels.json (言語追加 = json に lang 列足すだけ)。
-// ここは空オブジェクト宣言のみ。_loadDicts/_ensureDicts 完了後に WWMApplyPathLabels が
-// (a) WWM_STAT_LABELS を各 lang に Object.assign 充填 (b) path系 lexicon 合成注入 を行う。
-// const + Object.assign (再代入なし) で _STAT_LABELS / window._STAT_LABELS_I18N_ALL の参照を維持。
-const _STAT_LABELS_I18N = { ja: {}, en: {}, zh: {}, ko: {} };
-const _STAT_LABELS = _STAT_LABELS_I18N.ja; // backward compat
+// statKey → 4言語ラベル。 真実源 = data/i18n/stat.json + data/i18n/path.json (合成は DataStore)。
+// _STAT_LABELS_PROXY = DataStore.name('stat', key, lang) の薄ラッパ (旧 _STAT_LABELS_I18N[L]?.[k] 互換)。
+// 旧 _STAT_LABELS_I18N dict 構造は廃止 (2026-06-09 i18n 一本化)、 callsite 用 stub のみ残置。
+const _STAT_LABELS_I18N_STUB = { ja: {}, en: {}, zh: {}, ko: {} }; // window._STAT_LABELS_I18N_ALL 互換用 (空、 sidebar/gear.js 等 fallback)
+const _STAT_LABELS_I18N = _STAT_LABELS_I18N_STUB; // backward compat alias
+const _STAT_LABELS = _STAT_LABELS_I18N.ja;        // backward compat alias
 const _STAT_LABELS_PROXY = new Proxy({}, {
   get(_, k) {
-    const L = (typeof window !== 'undefined' && window.currentLang) || 'ja';
-    return _STAT_LABELS_I18N[L]?.[k] || _STAT_LABELS_I18N.ja[k];
+    if (typeof k !== 'string') return undefined;
+    if (window.WWM_DS) {
+      const L = window.currentLang || 'ja';
+      const v = window.WWM_DS.name('stat', k, L);
+      if (v && v.indexOf('[stat:') !== 0) return v;
+      // path系等 = ui に統合済 → t() で引く
+      const t = window.WWM_DS.t(k);
+      if (t !== k) return t;
+    }
+    return undefined;
   }
 });
 
@@ -619,8 +626,7 @@ const _AFFIX_LABELS = new Proxy({}, {
   get(_, id) {
     const sk = _AFFIX_LABELS_STATKEY[id];
     if (sk) {
-      const L = (window.currentLang)||'ja';
-      const v = _STAT_LABELS_I18N[L]?.[sk];
+      const v = _STAT_LABELS_PROXY[sk];
       if (v) return v;
     }
     return _AFFIX_LABELS_JA_FALLBACK[id];

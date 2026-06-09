@@ -948,7 +948,15 @@
       const helpBtn = m.querySelector('#wwmCmpOcrHelpBtn');
       if (helpBtn) helpBtn.addEventListener('click', () => {
         const T_ = window.T || {};
-        const L = (window._STAT_LABELS_I18N_ALL || {})[window.currentLang || 'ja'] || {};
+        // OCR mock label = DataStore.name('stat', key) 経由 (旧 _STAT_LABELS_I18N_ALL[lang] dict 廃止、 2026-06-09 i18n 一本化)
+        const _lang = window.currentLang || 'ja';
+        const L = new Proxy({}, {
+          get(_, k) {
+            if (typeof k !== 'string' || !window.WWM_DS) return undefined;
+            const v = window.WWM_DS.name('stat', k, _lang);
+            return (v && v.indexOf('[stat:') !== 0) ? v : undefined;
+          }
+        });
         // mock = ゲーム装備詳細画面の再現 (2026-06-07 兄貴実スクショ準拠: 大数字/装備レベル Lv.91/
         //  外功攻撃 53~124/・点 + 👍badge + 値右端オレンジ/末尾定音 = ❖)
         const _bdg = '<i class="wwm-ocr-mock-badge">👍</i>';
