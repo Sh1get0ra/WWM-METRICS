@@ -65,6 +65,18 @@ function evalDataStore() {
   assert.equal(DS.name('martial-affix', 'swordQ'), 'Strategic Q', 'martial-affix synth en (weapon strip)');
 
   console.log('PASS: data-store name()');
+
+  // ── Task 5: t() 委譲テスト ─────────────────────────────────
+  DS.setLang('ja');
+  assert.equal(DS.t('importBtn'), 'IMPORT', 't() ja');
+  DS.setLang('en');
+  assert.equal(DS.t('importBtn'), 'IMPORT', 't() en');
+  DS.setLang('zh');
+  const ui = JSON.parse(fs.readFileSync(path.join(DATA, 'ui.json'), 'utf8'));
+  assert.equal(DS.t('importBtn'), ui.importBtn.zh, 't() zh');
+  // 不在 key → key 文字列 そのまま (旧 i18n.js T() 互換)
+  assert.equal(DS.t('NONEXISTENT_KEY'), 'NONEXISTENT_KEY', 't() unknown key passthrough');
+  console.log('PASS: data-store t()');
 })().catch((e) => {
   console.error('FAIL:', e.message);
   process.exit(1);

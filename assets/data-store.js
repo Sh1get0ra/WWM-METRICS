@@ -107,9 +107,10 @@
     return '[' + cat + ':' + id + ']';
   }
 
-  // t() は Task 5 で本実装。 Phase A では stub (key そのまま返す)。
   function t(key) {
-    return key;
+    const d = data.ui;
+    if (!d || !d[key]) return key;
+    return d[key][currentLang] || d[key].ja || key;
   }
 
   const api = { ready: ready, setLang: setLang, getLang: getLang, name: name, t: t, has: _has };

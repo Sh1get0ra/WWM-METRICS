@@ -53,6 +53,8 @@ function setLang(lang) {
   T = TRANSLATIONS[lang];
   window.T = T;
   window.currentLang = lang;
+  // DataStore に lang 同期 (name()/t() の default lang として参照)
+  if (window.WWM_DS && typeof window.WWM_DS.setLang === 'function') window.WWM_DS.setLang(lang);
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang === 'ko' ? 'ko' : lang;
   document.title = T.pageTitle;
 
