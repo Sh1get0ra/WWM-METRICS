@@ -438,7 +438,12 @@ function importData() {
 // exportImage は assets/export.js に分離
 
 // ── 起動 ──────────────────────────────────────────────────────────
-function init() {
+async function init() {
+  // DataStore eager load (全 i18n 揃ってから UI 初期化 → name()/t() 同期取得保証)
+  if (window.WWM_DS && window.WWM_DS.ready) {
+    try { await window.WWM_DS.ready(); }
+    catch (e) { console.error('DataStore.ready() failed', e); }
+  }
   initTheme();
   initHeroCollapse();
   _loadSavedLang();
