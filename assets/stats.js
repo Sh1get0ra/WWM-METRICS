@@ -32,7 +32,8 @@ async function _ensureDicts() {
     WWM_SETS: 'sets',
     WWM_AFFIX: 'affix',
     WWM_EQUIP_BASE_BY_LV: 'equip_base_by_lv',
-    WWM_LEXICON: 'lexicon'
+    WWM_LEXICON: 'lexicon',
+    WWM_STAT_LABELS: 'stat_labels'
   };
   const tasks = [];
   for (const [winKey, fileName] of Object.entries(dictMap)) {

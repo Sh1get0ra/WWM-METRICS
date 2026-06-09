@@ -49,14 +49,19 @@
         Object.assign(window.WWM_I18N[L], built[L]._i18n);
       }
     }
-    // (2) import dict (_STAT_LABELS_I18N, window 公開) へ import形式注入 (min/max<Path>, <Path>Pen)。
-    //     arsenal/ranking の affix ラベル源。保存/共有ビルド経路 (_ensureDicts のみ) でも生キー fallback を防ぐ。
+    // (2) import dict (_STAT_LABELS_I18N, window 公開) へ充填。arsenal/ranking の affix ラベル源。
+    //     保存/共有ビルド経路 (_ensureDicts のみ) でも生キー fallback を防ぐ (2経路とも本関数を呼ぶ)。
+    //     (2a) ステ名/武術名 = data/stat_labels.json (window.WWM_STAT_LABELS) を素のまま配布。
+    //          import.js の static dict 廃止の代替 (言語追加 = json 編集のみ)。
+    //     (2b) path系 = lexicon 合成注入 (min/max<Path>, <Path>Pen)。キー非衝突、path を後勝ちで上書き。
     const tbl = window._STAT_LABELS_I18N_ALL;
     if (tbl) {
+      const statLabels = window.WWM_STAT_LABELS;
       for (const L of LANGS) {
         if (!tbl[L]) continue;
+        if (statLabels && statLabels[L]) Object.assign(tbl[L], statLabels[L]); // (2a)
         const { _i18n, _statDisplay, ...pathDict } = built[L];
-        Object.assign(tbl[L], pathDict);
+        Object.assign(tbl[L], pathDict); // (2b)
       }
     }
   }
