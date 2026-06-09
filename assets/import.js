@@ -309,7 +309,7 @@ function renderEnhanceArsenalForm(state, roleInfo) {
   const xinfa = window.WWM_XINFA || {};
   const xinfaRows = [0,1,2,3].map(i => {
     const xid = passive[i];
-    const xname = xid ? _pickName(xinfa[xid]?.names, `xinfa#${xid}`) : '—';
+    const xname = xid ? (window.WWM_DS ? window.WWM_DS.name('xinfa', xid, _curLangImport()) : _pickName(xinfa[xid]?.names, `xinfa#${xid}`)) : '—';
     const curTier = state.xinfaTiers?.[i] ?? 6;
     const opts = [0,1,2,3,4,5,6].map(t => `<option value="${t}"${t===curTier?' selected':''}>Tier ${t}</option>`).join('');
     const effText = xid ? _xinfaEffectsText(xinfa[xid], curTier) : '';
@@ -485,6 +485,11 @@ function _pickName(names, fallback) {
 }
 function _kongfuName(id) {
   if (id === undefined || id === null || id === 0) return '—';
+  const lang = _curLangImport();
+  if (window.WWM_DS) {
+    const n = window.WWM_DS.name('kongfu', id, lang);
+    if (n.indexOf('[kongfu:') !== 0) return n;
+  }
   try {
     const k = window.WWM_KONGFU;
     if (k && k[id]) return _pickName(k[id].names, '武術ID ' + id);
@@ -493,6 +498,11 @@ function _kongfuName(id) {
 }
 function _xinfaName(id) {
   if (id === undefined || id === null || id === 0) return '—';
+  const lang = _curLangImport();
+  if (window.WWM_DS) {
+    const n = window.WWM_DS.name('xinfa', id, lang);
+    if (n.indexOf('[xinfa:') !== 0) return n;
+  }
   try {
     const x = window.WWM_XINFA;
     if (x && x[id]) return _pickName(x[id].names, '心法ID ' + id);
@@ -642,6 +652,10 @@ function _setName(suffix, slot) {
   const isBow = (slot === '9' || slot === '21');
   const isArmor = (slot === '3' || slot === '4' || slot === '5' || slot === '8');
   const sets = isBow ? (s.bowSets || {}) : (isArmor ? (s.defensiveSets || {}) : (s.weaponSets || {}));
+  if (window.WWM_DS) {
+    const n = window.WWM_DS.name('sets', key, _curLangImport());
+    if (n.indexOf('[sets:') !== 0) return n;
+  }
   if (sets[key]) return _pickName(sets[key].names, '');
   // fallback: 全カテゴリ探索
   for (const cat of ['weaponSets', 'bowSets', 'defensiveSets']) {
