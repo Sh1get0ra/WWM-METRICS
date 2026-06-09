@@ -77,6 +77,15 @@ function evalDataStore() {
   // 不在 key → key 文字列 そのまま (旧 i18n.js T() 互換)
   assert.equal(DS.t('NONEXISTENT_KEY'), 'NONEXISTENT_KEY', 't() unknown key passthrough');
   console.log('PASS: data-store t()');
+
+  // ── Task 9-2: path系 i18n 合成 (旧 build-labels.js applyPathLabels(1) 役割) ──
+  DS.setLang('ja');
+  assert.equal(DS.t('pathBellstrike'), '鋼鳴', 'path<Path> ja');
+  assert.equal(DS.t('pathAtkBellstrike'), '鋼鳴攻撃', 'pathAtk<Path> ja');
+  assert.equal(DS.t('pathPenBellstrike'), '鋼鳴貫通', 'pathPen<Path> ja');
+  DS.setLang('en');
+  assert.equal(DS.t('pathAtkBellstrike'), 'Bellstrike', 'pathAtk<Path> en (affix.atk en = "")');
+  console.log('PASS: data-store path i18n synth');
 })().catch((e) => {
   console.error('FAIL:', e.message);
   process.exit(1);

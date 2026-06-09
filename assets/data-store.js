@@ -10,13 +10,42 @@
   const data = Object.create(null); // { kongfu: {...}, xinfa: {...}, ... }
   let readyPromise = null;
 
+  // path 系 i18n key を data.path から動的合成して data.ui に注入 (旧 build-labels.js applyPathLabels の (1) 役割)。
+  // 旧 form: path<Path> / pathAtk<Path> / pathPen<Path> / pathDmg<Path> (cap)。
+  function _injectPathI18nKeys() {
+    const path = data.path;
+    if (!path || !path.pathBase || !path.affix) return;
+    const ui = data.ui = data.ui || {};
+    const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+    const LANGS = ['ja', 'en', 'zh', 'ko'];
+    for (const [p, base] of Object.entries(path.pathBase)) {
+      const C = cap(p);
+      const keys = {
+        ['path' + C]:    {},
+        ['pathAtk' + C]: {},
+        ['pathPen' + C]: {},
+        ['pathDmg' + C]: {}
+      };
+      for (const L of LANGS) {
+        const b = base[L]; if (!b) continue;
+        keys['path' + C][L]    = b;
+        keys['pathAtk' + C][L] = b + (path.affix.atk?.[L] || '');
+        keys['pathPen' + C][L] = b + (path.affix.pen?.[L] || '');
+        keys['pathDmg' + C][L] = b + (path.affix.dmgUp?.[L] || '');
+      }
+      for (const [k, v] of Object.entries(keys)) {
+        if (!ui[k]) ui[k] = v; // 既存キー (旧 ui.json 重複) を上書きしない
+      }
+    }
+  }
+
   function ready() {
     if (readyPromise) return readyPromise;
     readyPromise = Promise.all(CATS.map(async (cat) => {
       const res = await fetch('data/i18n/' + cat + '.json?v=' + VERSION);
       if (!res.ok) throw new Error('DataStore: failed to fetch ' + cat + '.json (' + res.status + ')');
       data[cat] = await res.json();
-    })).then(() => undefined);
+    })).then(() => { _injectPathI18nKeys(); });
     return readyPromise;
   }
 
