@@ -300,8 +300,16 @@
             const delta = newScore - curScore;
             if (delta > 0 && (!best || delta > best.delta)) {
               const lang = _curLang();
-              const oldName = window.WWM_SETS.bowSets[curBowSuffix]?.names?.[lang] || window.WWM_SETS.bowSets[curBowSuffix]?.names?.ja || '';
-              const newName = window.WWM_SETS.bowSets[sfxInt]?.names?.[lang] || window.WWM_SETS.bowSets[sfxInt]?.names?.ja || '';
+              const _setN = (sfx) => {
+                if (!sfx) return '';
+                if (window.WWM_DS) {
+                  const n = window.WWM_DS.name('sets', sfx, lang);
+                  if (n.indexOf('[sets:') !== 0) return n;
+                }
+                return window.WWM_SETS.bowSets[sfx]?.names?.[lang] || window.WWM_SETS.bowSets[sfx]?.names?.ja || '';
+              };
+              const oldName = _setN(curBowSuffix);
+              const newName = _setN(sfxInt);
               best = {
                 kind: 'bowSet',
                 slot: '9,21', slotLabel: _slotLabelI18n('21') + '/' + _slotLabelI18n('9'),
