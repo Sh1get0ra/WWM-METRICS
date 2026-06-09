@@ -3,108 +3,126 @@
     "ja": "九変の剣",
     "en": "Strategic Sword",
     "zh": "积矩九剑",
-    "ko": "구현의 검무"
+    "ko": "구현의 검무",
+    "vi": "Kiếm Tích Cửu Cửu"
   },
   "10102": {
     "ja": "無銘の剣",
     "en": "Nameless Sword",
     "zh": "无名剑法",
-    "ko": "무명 검법"
+    "ko": "무명 검법",
+    "vi": "Kiếm Pháp Vô Danh"
   },
   "10201": {
     "ja": "蛇神の槍",
     "en": "Heavenquaker Spear",
     "zh": "九曲惊神枪",
-    "ko": "격류의 파동"
+    "ko": "격류의 파동",
+    "vi": "Súng Cửu Khúc Kinh Thần"
   },
   "10202": {
     "ja": "無銘の槍",
     "en": "Nameless Spear",
     "zh": "无名枪法",
-    "ko": "무명 창법"
+    "ko": "무명 창법",
+    "vi": "Súng Pháp Vô Danh"
   },
   "10301": {
     "ja": "薬川の扇",
     "en": "Panacea Fan",
     "zh": "明川药典",
-    "ko": "천계의 수호"
+    "ko": "천계의 수호",
+    "vi": "Dược Điển Minh Xuyên"
   },
   "10302": {
     "ja": "墨筆の扇",
     "en": "Inkwell Fan",
     "zh": "青山执笔",
-    "ko": "청산의 정수"
+    "ko": "청산의 정수",
+    "vi": "Bút Xanh Sơn"
   },
   "20103": {
     "ja": "嵐雷の槍",
     "en": "Stormbreaker Spear",
     "zh": "八方风雷",
-    "ko": "풍뢰의 징표"
+    "ko": "풍뢰의 징표",
+    "vi": "Súng Bát Phương Phong Lôi"
   },
   "20401": {
     "ja": "断魂の刀",
     "en": "Thundercry Blade",
     "zh": "嗟夫刀法",
-    "ko": "탄식의 검기"
+    "ko": "탄식의 검기",
+    "vi": "Đao Pháp Thán Phục"
   },
   "20402": {
     "ja": "破陣の刀",
     "en": "Phalanxbane Blade",
     "zh": "十方破阵",
-    "ko": "십방파진"
+    "ko": "십방파진",
+    "vi": "Phá Trận Thập Phương"
   },
   "20501": {
     "ja": "獄炎の双剣",
     "en": "Infernal Twinblades",
     "zh": "泥犁三垢",
-    "ko": "윤회의 가르침"
+    "ko": "윤회의 가르침",
+    "vi": "Bùn Lì Tam Cấu"
   },
   "20601": {
     "ja": "千紅の傘",
     "en": "Crimson Umbrella",
     "zh": "九重春色",
-    "ko": "봄의 선율"
+    "ko": "봄의 선율",
+    "vi": "Xuân Sắc Cửu Trùng"
   },
   "20602": {
     "ja": "誘魂の傘",
     "en": "Soulbinding Umbrella",
     "zh": "千香引魂蛊",
-    "ko": "소생의 향"
+    "ko": "소생의 향",
+    "vi": "Ngàn Hương Dẫn Hồn Cổ"
   },
   "20603": {
     "ja": "醉夢の傘",
     "en": "Drunken Dream Umbrella",
     "zh": "醉梦游春",
-    "ko": "일장춘몽"
+    "ko": "일장춘몽",
+    "vi": "Mộng Say Du Xuân"
   },
   "20701": {
     "ja": "浮塵の縄",
     "en": "Mortal Rope Dart",
     "zh": "粟子游尘",
-    "ko": "속세의 지혜"
+    "ko": "속세의 지혜",
+    "vi": "Bụi Du Hành Tử"
   },
   "20702": {
     "ja": "浮雲の縄",
     "en": "Cloudborne Rope Dart",
     "zh": "粟子行云",
-    "ko": "운진의 궤적"
+    "ko": "운진의 궤적",
+    "vi": "Mây Hành Tử"
   },
   "20703": {
     "ja": "千機の縄",
     "en": "Skygrasp Rope Dart",
     "zh": "千机索天",
-    "ko": "천기의 사슬"
+    "ko": "천기의 사슬",
+    "vi": "Ngàn Cơ Tìm Trời"
   },
   "20801": {
     "ja": "斬雪の刀",
     "en": "Snowparting Blade",
     "zh": "斩雪刀法",
-    "ko": "만설의 참격"
+    "ko": "만설의 참격",
+    "vi": "Đao Pháp Trảm Tuyết"
   },
   "20901": {
     "ja": "天志の拳",
     "en": "Heavenwill Gauntlet",
     "zh": "天志垂象",
-    "ko": "천지의 주먹"
+    "ko": "천지의 주먹",
+    "vi": "Thiên Chí Rủ Tượng"
   }
 }

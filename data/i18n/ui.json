@@ -111,43 +111,50 @@
     "ja": "命中率",
     "en": "Hit Rate",
     "zh": "精准率",
-    "ko": "정확도"
+    "ko": "정확도",
+    "vi": "Tỷ lệ chính xác"
   },
   "critRate": {
     "ja": "会心率",
     "en": "Critical Rate",
     "zh": "会心率",
-    "ko": "치명타 확률"
+    "ko": "치명타 확률",
+    "vi": "Tỷ lệ chí mạng"
   },
   "sympathyRate": {
     "ja": "会意率",
     "en": "Affinity Rate",
     "zh": "会意率",
-    "ko": "각성 확률"
+    "ko": "각성 확률",
+    "vi": "Tỷ lệ hiểu ý"
   },
   "addCritRate": {
     "ja": "付加会心率",
     "en": "Added Critical Rate",
     "zh": "直接会心率",
-    "ko": "추가 치명타 확률"
+    "ko": "추가 치명타 확률",
+    "vi": "Tỷ lệ chí mạng trực tiếp"
   },
   "addSympathyRate": {
     "ja": "付加会意率",
     "en": "Added Affinity Rate",
     "zh": "直接会意率",
-    "ko": "추가 각성 확률"
+    "ko": "추가 각성 확률",
+    "vi": "Tỷ lệ hiểu ý trực tiếp"
   },
   "critBoost": {
     "ja": "会心攻撃強化",
     "en": "Critical DMG Bonus",
     "zh": "会心伤害加成",
-    "ko": "치명타 피해 보너스"
+    "ko": "치명타 피해 보너스",
+    "vi": "Gia tăng Sát thương chí mạng"
   },
   "allMartialBoost": {
     "ja": "全武術効果増加",
     "en": "All Martial Arts Effect +",
     "zh": "全部武学增效",
-    "ko": "모든 무술의 효과 증가"
+    "ko": "모든 무술의 효과 증가",
+    "vi": "Tăng hiệu quả toàn bộ võ học"
   },
   "sympathyBoost": {
     "ja": "会意攻撃強化",
@@ -159,31 +166,36 @@
     "ja": "指定武術効果強化",
     "en": "Designated Martial Arts Effect +",
     "zh": "指定武学增效",
-    "ko": "특정 무술 효과 증가"
+    "ko": "특정 무술 효과 증가",
+    "vi": "Tăng hiệu quả võ học được chỉ định"
   },
   "outerPen": {
     "ja": "外功貫通",
     "en": "Outer Force Penetration",
     "zh": "外功穿透",
-    "ko": "외공 관통"
+    "ko": "외공 관통",
+    "vi": "Ngoại công Xuyên thấu"
   },
   "bossBoost": {
     "ja": "首領ダメージ増加",
     "en": "Elite DMG Bonus",
     "zh": "对首领单位增伤",
-    "ko": "BOSS 유닛에 대한 피해 증가"
+    "ko": "BOSS 유닛에 대한 피해 증가",
+    "vi": "Tăng sát thương đối với đơn vị thủ lĩnh"
   },
   "elemPen": {
     "ja": "属性貫通",
     "en": "Elemental Penetration",
     "zh": "属攻穿透",
-    "ko": "속성 공격 관통"
+    "ko": "속성 공격 관통",
+    "vi": "Thuộc tính Tấn công Xuyên thấu"
   },
   "elemAtkBoost": {
     "ja": "属性攻撃強化",
     "en": "Elemental ATK Boost",
     "zh": "属攻伤害加成",
-    "ko": "속성 공격 피해 보너스"
+    "ko": "속성 공격 피해 보너스",
+    "vi": "Gia tăng Sát thương thuộc tính"
   },
   "dmgReduce1": {
     "ja": "ダメージ軽減１",
@@ -267,7 +279,8 @@
     "ja": "審判耐性",
     "en": "Judgment Resistance",
     "zh": "判定抗性",
-    "ko": "저항 판정"
+    "ko": "저항 판정",
+    "vi": "Kháng định đoạt"
   },
   "physRes": {
     "ja": "物理耐性値",

@@ -3,37 +3,43 @@
     "ja": "体",
     "en": "Body",
     "zh": "体",
-    "ko": "체력"
+    "ko": "체력",
+    "vi": "Thể"
   },
   "momentum": {
     "ja": "会",
     "en": "Momentum",
     "zh": "势",
-    "ko": "기세"
+    "ko": "기세",
+    "vi": "Thế"
   },
   "agility": {
     "ja": "速",
     "en": "Agi",
     "zh": "敏",
-    "ko": "민첩"
+    "ko": "민첩",
+    "vi": "Mẫn"
   },
   "power": {
     "ja": "力",
     "en": "Power",
     "zh": "劲",
-    "ko": "내공"
+    "ko": "내공",
+    "vi": "Kình"
   },
   "defense": {
     "ja": "防御",
     "en": "Def",
     "zh": "御",
-    "ko": "방어"
+    "ko": "방어",
+    "vi": "Ngự"
   },
   "maxHp": {
     "ja": "気血最大値",
     "en": "HP Max",
     "zh": "气血最大值",
-    "ko": "기혈 최대치"
+    "ko": "기혈 최대치",
+    "vi": "Giá trị Khí huyết tối đa"
   },
   "minPhys": {
     "ja": "最小外功攻撃",
@@ -51,13 +57,15 @@
     "ja": "外功防御",
     "en": "Phys DEF",
     "zh": "外功防御",
-    "ko": "외공 방어력"
+    "ko": "외공 방어력",
+    "vi": "Phòng Ngự Ngoại công"
   },
   "physPen": {
     "ja": "外功貫通",
     "en": "Phys Pen",
     "zh": "外功穿透",
-    "ko": "외공 관통"
+    "ko": "외공 관통",
+    "vi": "Ngoại công Xuyên thấu"
   },
   "physResist": {
     "ja": "外功耐性",
@@ -69,19 +77,22 @@
     "ja": "命中率",
     "en": "Precision",
     "zh": "精准率",
-    "ko": "정확도"
+    "ko": "정확도",
+    "vi": "Tỷ lệ chính xác"
   },
   "crit": {
     "ja": "会心率",
     "en": "Crit",
     "zh": "会心率",
-    "ko": "치명타 확률"
+    "ko": "치명타 확률",
+    "vi": "Tỷ lệ chí mạng"
   },
   "affinity": {
     "ja": "会意率",
     "en": "Affinity",
     "zh": "会意率",
-    "ko": "각성 확률"
+    "ko": "각성 확률",
+    "vi": "Tỷ lệ hiểu ý"
   },
   "allWeaponDmg": {
     "ja": "全武学/PvP/BOSSダメ",
@@ -93,49 +104,57 @@
     "ja": "剣ダメ強化",
     "en": "Sword DMG",
     "zh": "剑武学增伤",
-    "ko": "검 무술 피해 증가"
+    "ko": "검 무술 피해 증가",
+    "vi": "Kiếm Võ học Tăng sát thương"
   },
   "spearDmg": {
     "ja": "槍ダメ強化",
     "en": "Spear DMG",
     "zh": "枪武学增伤",
-    "ko": "창 무술 피해 증가"
+    "ko": "창 무술 피해 증가",
+    "vi": "Võ học súng tăng sát thương"
   },
   "moBladeDmg": {
     "ja": "墨刀ダメ強化",
     "en": "Mo Blade DMG",
     "zh": "陌刀武学增伤",
-    "ko": "맥도 무술 피해 증가"
+    "ko": "맥도 무술 피해 증가",
+    "vi": "Võ học đao Mạc tăng sát thương"
   },
   "dualBladesDmg": {
     "ja": "双剣ダメ強化",
     "en": "Twinblades DMG",
     "zh": "双刀武学增伤",
-    "ko": "쌍도 무술 피해 증가"
+    "ko": "쌍도 무술 피해 증가",
+    "vi": "Võ học song đao tăng sát thương"
   },
   "fanDmg": {
     "ja": "扇ダメ強化",
     "en": "Fan DMG",
     "zh": "扇武学增效",
-    "ko": "부채 무술 효과 증가"
+    "ko": "부채 무술 효과 증가",
+    "vi": "Võ học quạt tăng hiệu quả"
   },
   "umbrellaDmg": {
     "ja": "傘ダメ強化",
     "en": "Umbrella DMG",
     "zh": "伞武学增效",
-    "ko": "우산 무술 효과 증가"
+    "ko": "우산 무술 효과 증가",
+    "vi": "Võ học dù tăng hiệu quả"
   },
   "hengBladeDmg": {
     "ja": "横刀ダメ",
     "en": "Heng Blade DMG",
     "zh": "横刀武学增伤",
-    "ko": "횡도 무술 피해 증가"
+    "ko": "횡도 무술 피해 증가",
+    "vi": "Võ học hoành đao tăng sát thương"
   },
   "ropeDartDmg": {
     "ja": "縄鏢ダメ",
     "en": "Rope Dart DMG",
     "zh": "绳镖武学增伤",
-    "ko": "승표 무술 피해 증가"
+    "ko": "승표 무술 피해 증가",
+    "vi": "Võ học dây phi tiêu tăng sát thương"
   },
   "fanHealingBoost": {
     "ja": "扇治癒強化",

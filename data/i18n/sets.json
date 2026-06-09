@@ -3,138 +3,161 @@
     "ja": "碧玉一式",
     "en": "Jadeware Set",
     "zh": "碧玉一式",
-    "ko": "옥잔 세트"
+    "ko": "옥잔 세트",
+    "vi": "Ngọc đấu"
   },
   "2": {
     "ja": "易相一式",
     "en": "Formbend Set",
     "zh": "易相一式",
-    "ko": "역상 세트"
+    "ko": "역상 세트",
+    "vi": "Dị Tướng"
   },
   "3": {
     "ja": "飛鳥一式",
     "en": "Hawkwing Set",
     "zh": "飞鸟一式",
-    "ko": "속공 세트"
+    "ko": "속공 세트",
+    "vi": "Chim Ưng Bay"
   },
   "4": {
     "ja": "鷹揚一式",
     "en": "Eaglerise Set",
     "zh": "鹰扬一式",
-    "ko": "비상 세트"
+    "ko": "비상 세트",
+    "vi": "Ưng Dương"
   },
   "7": {
     "ja": "時雨一式",
     "en": "Rainwhisper Set",
     "zh": "时雨一式",
-    "ko": "단비 세트"
+    "ko": "단비 세트",
+    "vi": "Mưa thời vụ"
   },
   "8": {
     "ja": "桂月一式",
     "en": "Moonflare Set",
     "zh": "桂月一式",
-    "ko": "월계 세트"
+    "ko": "월계 세트",
+    "vi": "Trăng quế"
   },
   "9": {
     "ja": "疾風一式",
     "en": "Swift Gale Set",
     "zh": "疾风一式",
-    "ko": "질풍 세트"
+    "ko": "질풍 세트",
+    "vi": "Gió gấp mưa mau"
   },
   "10": {
     "ja": "凌波歩一式",
     "en": "Agile Steps Set",
     "zh": "凌波步一式",
-    "ko": "운파 세트"
+    "ko": "운파 세트",
+    "vi": "Bước Lăng Ba"
   },
   "11": {
     "ja": "山崩一式",
     "en": "Shattered Ridge Set",
     "zh": "山崩一式",
-    "ko": "산경 세트"
+    "ko": "산경 세트",
+    "vi": "Nhạc Sơn Khuynh"
   },
   "12": {
     "ja": "御無欠一式",
     "en": "Flawless Defense Set",
     "zh": "御无缺一式",
-    "ko": "무결 세트"
+    "ko": "무결 세트",
+    "vi": "Ngự Vô Khuyết"
   },
   "23": {
     "ja": "帰燕一式",
     "en": "Swallowcall Set",
     "zh": "归燕一式",
-    "ko": "연귀 세트"
+    "ko": "연귀 세트",
+    "vi": "Yến Quy"
   },
   "24": {
     "ja": "江凝一式",
     "en": "Calmwaters Set",
     "zh": "江凝一式",
-    "ko": "정수 세트"
+    "ko": "정수 세트",
+    "vi": "Giang Ninh"
   },
   "25": {
     "ja": "霧柳一式",
     "en": "Mistwillow Set",
     "zh": "雾柳一式",
-    "ko": "연류 세트"
+    "ko": "연류 세트",
+    "vi": "Liễu khói dày đặc"
   },
   "26": {
     "ja": "不知寒一式",
     "en": "Beyond the Chill Set",
     "zh": "不知寒一式",
-    "ko": "흑한 세트"
+    "ko": "흑한 세트",
+    "vi": "Bất Tri Hàn"
   },
   "29": {
     "ja": "浄花一式",
     "en": "Ivorybloom Set",
     "zh": "净花一式",
-    "ko": "화계 세트"
+    "ko": "화계 세트",
+    "vi": "Hoán Hoa"
   },
   "30": {
     "ja": "梨雪一式",
     "en": "Whirlsnow Set",
     "zh": "梨雪一式",
-    "ko": "이설 세트"
+    "ko": "이설 세트",
+    "vi": "Tuyết lê"
   },
   "34": {
     "ja": "連星一式",
     "en": "Stars Align Set",
     "zh": "连星一式",
-    "ko": "연성 세트"
+    "ko": "연성 세트",
+    "vi": "Liên Tinh"
   },
   "35": {
     "ja": "抱玉一式",
     "en": "Jade Embrace Set",
     "zh": "抱玉一式",
-    "ko": "포옥 세트"
+    "ko": "포옥 세트",
+    "vi": "Bão Ngọc"
   },
   "44": {
     "ja": "弓の名手一式",
     "en": "Plume Set",
     "zh": "弓箭高手一式",
-    "ko": "현궁 세트"
+    "ko": "현궁 세트",
+    "vi": "Ẩm Vũ"
   },
   "45": {
     "ja": "驚弦一式",
     "en": "Startling String Set",
     "zh": "惊弦一式",
-    "ko": "혈우 세트"
+    "ko": "혈우 세트",
+    "vi": "Kinh Huyền"
   },
   "46": {
     "ja": "影を追う一式",
     "en": "Pursuing Shadow Set",
     "zh": "追影一式",
-    "ko": "추영 세트"
+    "ko": "추영 세트",
+    "vi": "Truy Ảnh"
   },
   "50": {
     "ja": "斬岳一式",
     "en": "Swaying Heights Set",
     "zh": "斩岳一式",
-    "ko": "단악 세트"
+    "ko": "단악 세트",
+    "vi": "Đoạn Nhạc"
   },
   "51": {
     "ja": "玄甲一式",
     "en": "Obsidian Armor Set",
     "zh": "玄甲一式",
-    "ko": "현갑 세트"
+    "ko": "현갑 세트",
+    "vi": "Huyền Giáp"
   }
 }

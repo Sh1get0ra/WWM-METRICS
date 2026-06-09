@@ -4,31 +4,36 @@
       "ja": "鋼鳴",
       "en": "Bellstrike",
       "zh": "鸣金",
-      "ko": "명금"
+      "ko": "명금",
+      "vi": "Minh Kim"
     },
     "stonesplit": {
       "ja": "砕岩",
       "en": "Stonesplit",
       "zh": "裂石",
-      "ko": "열석"
+      "ko": "열석",
+      "vi": "Liệt Thạch"
     },
     "silkbind": {
       "ja": "糸操",
       "en": "Silkbind",
       "zh": "牵丝",
-      "ko": "견사"
+      "ko": "견사",
+      "vi": "Khiên Ti"
     },
     "bamboocut": {
       "ja": "瞬嵐",
       "en": "Bamboocut",
       "zh": "破竹",
-      "ko": "파죽"
+      "ko": "파죽",
+      "vi": "Phá Trúc"
     },
     "void": {
       "ja": "無相",
       "en": "Void",
       "zh": "无相",
-      "ko": "무상"
+      "ko": "무상",
+      "vi": "Vô Tướng"
     }
   },
   "affix": {
@@ -48,25 +53,29 @@
       "ja": "攻撃",
       "en": "",
       "zh": "攻击",
-      "ko": " 공격"
+      "ko": " 공격",
+      "vi": "Tấn công "
     },
     "atkStat": {
       "ja": "攻撃力",
       "en": " ATK",
       "zh": "攻击",
-      "ko": " 공격"
+      "ko": " 공격",
+      "vi": "Tấn công "
     },
     "pen": {
       "ja": "貫通",
       "en": " Pen",
       "zh": "穿透",
-      "ko": " 관통"
+      "ko": " 관통",
+      "vi": "Xuyên thấu "
     },
     "dmgUp": {
       "ja": "ダメージ強化",
       "en": " DMG",
       "zh": "伤害加成",
-      "ko": " 피해 증가"
+      "ko": " 피해 증가",
+      "vi": "Gia tăng Sát thương "
     }
   }
 }

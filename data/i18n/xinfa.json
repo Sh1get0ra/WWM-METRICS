@@ -3,288 +3,336 @@
     "ja": "龍虎の勢",
     "en": "Wind Beneath Wings",
     "zh": "生龙活虎大法",
-    "ko": "맹호의 질주"
+    "ko": "맹호의 질주",
+    "vi": "Sinh lực mạnh mẽ"
   },
   "2": {
     "ja": "晚雪間",
     "en": "Evening Snow",
     "zh": "晚雪间",
-    "ko": "설한의 균열"
+    "ko": "설한의 균열",
+    "vi": "Giữa tuyết chiều"
   },
   "3": {
     "ja": "鉄身術",
     "en": "Steadfast Stance",
     "zh": "铁身诀",
-    "ko": "철포삼"
+    "ko": "철포삼",
+    "vi": "Quyết sắt thân"
   },
   "4": {
     "ja": "山月無影",
     "en": "Shadow Assault",
     "zh": "山月无影",
-    "ko": "월하의 섬광"
+    "ko": "월하의 섬광",
+    "vi": "Trăng núi không bóng"
   },
   "5": {
     "ja": "血涙不止",
     "en": "Fivefold Bleed",
     "zh": "极乐泣血",
-    "ko": "핏빛 찬가"
+    "ko": "핏빛 찬가",
+    "vi": "Huyết lệ cực lạc"
   },
   "6": {
     "ja": "砂塵一閃",
     "en": "Sandswirl Tail",
     "zh": "沙摆尾",
-    "ko": "사막의 춤"
+    "ko": "사막의 춤",
+    "vi": "Đuôi cát vẫy"
   },
   "41": {
     "ja": "征軍帰郷",
     "en": "Envigorated Warrior",
     "zh": "征人归",
-    "ko": "생명의 귀환"
+    "ko": "생명의 귀환",
+    "vi": "Người lính trở về"
   },
   "42": {
     "ja": "怨念連鎖",
     "en": "Bitter Seasons",
     "zh": "所恨年年",
-    "ko": "천추의 한"
+    "ko": "천추의 한",
+    "vi": "Nỗi hận năm năm"
   },
   "43": {
     "ja": "帰燕の経",
     "en": "Vital Leech",
     "zh": "归燕经",
-    "ko": "제비의 보은"
+    "ko": "제비의 보은",
+    "vi": "Kinh Yến về"
   },
   "44": {
     "ja": "怒濤斬馬",
     "en": "Fury Harvest",
     "zh": "怒斩马",
-    "ko": "분노의 참격"
+    "ko": "분노의 참격",
+    "vi": "Chém ngựa giận dữ"
   },
   "45": {
     "ja": "長生無相",
     "en": "Divine Roulette",
     "zh": "长生无相",
-    "ko": "무상의 불멸"
+    "ko": "무상의 불멸",
+    "vi": "Trường sinh vô tướng"
   },
   "46": {
     "ja": "舞影",
     "en": "Evasive Charge",
     "zh": "婆娑影",
-    "ko": "춤추는 그림자"
+    "ko": "춤추는 그림자",
+    "vi": "Bóng Bà Sa"
   },
   "47": {
     "ja": "和光同塵",
     "en": "Light and Shadow Alike",
     "zh": "明晦同尘",
-    "ko": "빛과 그림자"
+    "ko": "빛과 그림자",
+    "vi": "Sáng tối cùng bụi"
   },
   "48": {
     "ja": "赤心筆",
     "en": "Heart of Fire",
     "zh": "丹心篆",
-    "ko": "단심의 서약"
+    "ko": "단심의 서약",
+    "vi": "Tâm son khắc"
   },
   "81": {
     "ja": "易水の歌",
     "en": "Morale Chant",
     "zh": "易水歌",
-    "ko": "결의의 노래"
+    "ko": "결의의 노래",
+    "vi": "Bài ca Dễ Thúy"
   },
   "82": {
     "ja": "四季無常",
     "en": "Seasonal Edge",
     "zh": "四时无常",
-    "ko": "계절의 순환"
+    "ko": "계절의 순환",
+    "vi": "Bốn mùa vô thường"
   },
   "101": {
     "ja": "千山法",
     "en": "Mountain's Might",
     "zh": "千山法",
-    "ko": "천산의 의지"
+    "ko": "천산의 의지",
+    "vi": "Pháp Thiên Sơn"
   },
   "102": {
     "ja": "星火燎原",
     "en": "Wildfire Spark",
     "zh": "燎原星火",
-    "ko": "잿빛의 잔영"
+    "ko": "잿빛의 잔영",
+    "vi": "Lửa sao lan rộng"
   },
   "103": {
     "ja": "威猛歌",
     "en": "Battle Anthem",
     "zh": "威猛歌",
-    "ko": "맹수의 포효"
+    "ko": "맹수의 포효",
+    "vi": "Bài ca uy mãnh"
   },
   "104": {
     "ja": "無名心法",
     "en": "Sword Morph",
     "zh": "无名心法",
-    "ko": "무명 심법"
+    "ko": "무명 심법",
+    "vi": "Tâm pháp vô danh"
   },
   "151": {
     "ja": "逐狼心経",
     "en": "Wolfchaser's Art",
     "zh": "逐狼心经",
-    "ko": "굶주린 늑대"
+    "ko": "굶주린 늑대",
+    "vi": "Tâm kinh truy sói"
   },
   "152": {
     "ja": "武芸百般",
     "en": "Adaptive Steel",
     "zh": "移经易武",
-    "ko": "무공의 경지"
+    "ko": "무공의 경지",
+    "vi": "Di kinh đổi võ"
   },
   "153": {
     "ja": "一心不乱",
     "en": "Insightful Strike",
     "zh": "凝神章",
-    "ko": "통찰의 눈"
+    "ko": "통찰의 눈",
+    "vi": "Chương Ngưng Thần"
   },
   "154": {
     "ja": "剣気斬波",
     "en": "Sword Horizon",
     "zh": "剑气纵横",
-    "ko": "광풍의 검기"
+    "ko": "광풍의 검기",
+    "vi": "Kiếm khí tung hoành"
   },
   "301": {
     "ja": "一得一失",
     "en": "Flying Gourds",
     "zh": "葫芦飞飞",
-    "ko": "비상하는 호리병"
+    "ko": "비상하는 호리병",
+    "vi": "Bầu hồ lô bay bay"
   },
   "302": {
     "ja": "春雷一閃",
     "en": "Thunderous Bloom",
     "zh": "春雷篇",
-    "ko": "춘뢰일섬"
+    "ko": "춘뢰일섬",
+    "vi": "Chương sấm xuân"
   },
   "303": {
     "ja": "摘星の術",
     "en": "Star Reacher",
     "zh": "纵地摘星",
-    "ko": "천공참"
+    "ko": "천공참",
+    "vi": "Vượt đất hái sao"
   },
   "304": {
     "ja": "花上月令",
     "en": "Blossom Barrage",
     "zh": "花上月令",
-    "ko": "월광의 계율"
+    "ko": "월광의 계율",
+    "vi": "Hoa trên lệnh nguyệt"
   },
   "351": {
     "ja": "君臣薬",
     "en": "Royal Remedy",
     "zh": "君臣药",
-    "ko": "군신의 묘약"
+    "ko": "군신의 묘약",
+    "vi": "Thuốc quân thần"
   },
   "352": {
     "ja": "散花不滅",
     "en": "Restoring Blossom",
     "zh": "杏花不见",
-    "ko": "만개한 복사꽃"
+    "ko": "만개한 복사꽃",
+    "vi": "Hoa mai không thấy"
   },
   "353": {
     "ja": "蘇生の術",
     "en": "Esoteric Revival",
     "zh": "指玄篇注",
-    "ko": "생명의 고서"
+    "ko": "생명의 고서",
+    "vi": "Chú giải chương chỉ huyền"
   },
   "354": {
     "ja": "癒しの糸",
     "en": "Mending Loom",
     "zh": "千丝蛊",
-    "ko": "회복의 실"
+    "ko": "회복의 실",
+    "vi": "Ngàn tơ cổ"
   },
   "401": {
     "ja": "山河絶韻",
     "en": "Exquisite Scenery",
     "zh": "山河绝韵",
-    "ko": "지축의 분노"
+    "ko": "지축의 분노",
+    "vi": "Giai điệu tuyệt vời của núi sông"
   },
   "402": {
     "ja": "困獣心経",
     "en": "Trapped Beast",
     "zh": "困兽心经",
-    "ko": "맹수의 혼"
+    "ko": "맹수의 혼",
+    "vi": "Tâm kinh thú bị vây"
   },
   "403": {
     "ja": "堅忍の術",
     "en": "Art of Resistance",
     "zh": "抗造大法",
-    "ko": "저항의 법칙"
+    "ko": "저항의 법칙",
+    "vi": "Đại pháp chống chịu"
   },
   "404": {
     "ja": "磐石訣",
     "en": "Rock Solid",
     "zh": "磐石诀",
-    "ko": "강철의 비기"
+    "ko": "강철의 비기",
+    "vi": "Quyết đá tảng"
   },
   "451": {
     "ja": "忘川絶響",
     "en": "Echoes of Oblivion",
     "zh": "忘川绝响",
-    "ko": "망각의 울림"
+    "ko": "망각의 울림",
+    "vi": "Âm vang tuyệt diệt của Vong Xuyên"
   },
   "452": {
     "ja": "宿怨結晶",
     "en": "Vendetta",
     "zh": "心弥泥鱼",
-    "ko": "심연의 늪"
+    "ko": "심연의 늪",
+    "vi": "Tâm cá bùn đẩy"
   },
   "453": {
     "ja": "断石心法",
     "en": "Breaking Point",
     "zh": "断石之构",
-    "ko": "파괴의 서막"
+    "ko": "파괴의 서막",
+    "vi": "Cấu trúc đá gãy"
   },
   "454": {
     "ja": "蒼浪剣訣",
     "en": "Riptide Reflex",
     "zh": "沧浪剑诀",
-    "ko": "파도의 검기"
+    "ko": "파도의 검기",
+    "vi": "Kiếm pháp Thương Lang"
   },
   "501": {
     "ja": "千軍の咆哮",
     "en": "Phantom Rally",
     "zh": "千营一呼",
-    "ko": "천군의 함성"
+    "ko": "천군의 함성",
+    "vi": "Ngàn quân một tiếng gọi"
   },
   "502": {
     "ja": "砂舟行木",
     "en": "Towline Sweep",
     "zh": "绳舟行木",
-    "ko": "이동하는 나무배"
+    "ko": "이동하는 나무배",
+    "vi": "Dây thuyền đi gỗ"
   },
   "503": {
     "ja": "灯火詞",
     "en": "Light Anew",
     "zh": "灯儿亮",
-    "ko": "밝은 등불"
+    "ko": "밝은 등불",
+    "vi": "Đèn sáng"
   },
   "504": {
     "ja": "大唐歌",
     "en": "Song of Tang",
     "zh": "大唐歌",
-    "ko": "대당의 노래"
+    "ko": "대당의 노래",
+    "vi": "Bài ca Đại Đường"
   },
   "551": {
     "ja": "霜天白夜",
     "en": "Frost-Clad Night",
     "zh": "霜天白夜",
-    "ko": "서리 백야"
+    "ko": "서리 백야",
+    "vi": "Đêm trắng trời sương"
   },
   "552": {
     "ja": "不滅忠魂",
     "en": "Steadfast Devotion",
     "zh": "孤忠不辞",
-    "ko": "외로운 충성"
+    "ko": "외로운 충성",
+    "vi": "Trung thành không từ"
   },
   "553": {
     "ja": "穿喉の訣",
     "en": "Throat-Piercing Art",
     "zh": "穿喉诀",
-    "ko": "관목결"
+    "ko": "관목결",
+    "vi": "Quyết xuyên họng"
   },
   "554": {
     "ja": "燎原脚",
     "en": "Wildfire Surge",
     "zh": "燎原踏",
-    "ko": "요원의 불길"
+    "ko": "요원의 불길",
+    "vi": "Bước chân cháy lan"
   }
 }
