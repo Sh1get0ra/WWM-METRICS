@@ -121,6 +121,19 @@
     return weap + ' ' + tip;
   }
 
+  // path の語尾「力」付き表示 (旧 build-labels.js _statDisplay。 anlz.js path subItem 表記用)。
+  // 例: name('path-statdisplay', 'void', 'ja') → '無相攻撃力'。
+  function _pathStatDisplay(id, lang) {
+    const p = data.path;
+    if (!p || !p.pathBase || !p.affix) return null;
+    const base = p.pathBase[String(id)];
+    if (!base) return null;
+    const b = base[lang] || base.ja;
+    if (!b) return null;
+    const suf = p.affix.atkStat?.[lang] ?? p.affix.atkStat?.ja ?? '';
+    return b + suf;
+  }
+
   function name(cat, id, lang) {
     const L = lang || currentLang;
     if (cat === 'martial-affix') {
@@ -129,6 +142,11 @@
       // 旧 stat_labels.json 同居キーへの fallback (Phase E 完了まで)
       const direct = _lookup('stat', id, L);
       if (direct) return direct;
+      return '[' + cat + ':' + id + ']';
+    }
+    if (cat === 'path-statdisplay') {
+      const synth = _pathStatDisplay(id, L);
+      if (synth) return synth;
       return '[' + cat + ':' + id + ']';
     }
     const v = _lookup(cat, id, L);

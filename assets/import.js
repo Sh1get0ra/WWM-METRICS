@@ -518,9 +518,7 @@ async function _loadDicts() {
     WWM_XINFA_ICONS: 'xinfa_icons',
     WWM_KONGFU_ICONS: 'kongfu_icons',
     WWM_GEAR_SLOT_ICONS: 'gear_slot_icons',
-    WWM_AVATAR_ICONS: 'avatar_icons',
-    WWM_LEXICON: 'lexicon',
-    WWM_STAT_LABELS: 'stat_labels'
+    WWM_AVATAR_ICONS: 'avatar_icons'
   };
   const tasks = [];
   for (const [winKey, fileName] of Object.entries(dictMap)) {
@@ -531,9 +529,6 @@ async function _loadDicts() {
   try {
     await Promise.all(tasks);
   } catch(e) { console.warn('[WWM Import] dict load failed:', e); }
-  // path系ラベルを lexicon から i18n テーブル + import dict (_STAT_LABELS_I18N) へ合成注入。
-  // 静的定義廃止の代替。i18n/import dict 両方を WWMApplyPathLabels が単一地点で注入。
-  if (typeof window.WWMApplyPathLabels === 'function') window.WWMApplyPathLabels();
 }
 
 // statKey → 4言語ラベル。 真実源 = data/i18n/stat.json + data/i18n/path.json (合成は DataStore)。

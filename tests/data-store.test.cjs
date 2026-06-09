@@ -86,6 +86,14 @@ function evalDataStore() {
   DS.setLang('en');
   assert.equal(DS.t('pathAtkBellstrike'), 'Bellstrike', 'pathAtk<Path> en (affix.atk en = "")');
   console.log('PASS: data-store path i18n synth');
+
+  // ── Task 9-4: path-statdisplay (旧 build-labels.js _statDisplay) ──
+  DS.setLang('ja');
+  assert.equal(DS.name('path-statdisplay', 'void', 'ja'), '無相攻撃力', 'path-statdisplay void ja');
+  assert.equal(DS.name('path-statdisplay', 'bellstrike', 'ja'), '鋼鳴攻撃力', 'path-statdisplay bellstrike ja');
+  assert.equal(DS.name('path-statdisplay', 'void', 'en'), 'Void ATK', 'path-statdisplay void en');
+  assert.equal(DS.name('path-statdisplay', 'unknown', 'ja'), '[path-statdisplay:unknown]', 'path-statdisplay unknown');
+  console.log('PASS: data-store path-statdisplay');
 })().catch((e) => {
   console.error('FAIL:', e.message);
   process.exit(1);

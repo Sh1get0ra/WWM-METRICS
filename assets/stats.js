@@ -31,9 +31,7 @@ async function _ensureDicts() {
     WWM_GEAR_SLOT_ICONS: 'gear_slot_icons',
     WWM_SETS: 'sets',
     WWM_AFFIX: 'affix',
-    WWM_EQUIP_BASE_BY_LV: 'equip_base_by_lv',
-    WWM_LEXICON: 'lexicon',
-    WWM_STAT_LABELS: 'stat_labels'
+    WWM_EQUIP_BASE_BY_LV: 'equip_base_by_lv'
   };
   const tasks = [];
   for (const [winKey, fileName] of Object.entries(dictMap)) {
@@ -42,8 +40,6 @@ async function _ensureDicts() {
     }
   }
   await Promise.all(tasks);
-  // path系ラベルを lexicon から i18n テーブルへ合成注入 (静的定義廃止の代替)。
-  if (typeof window.WWMApplyPathLabels === 'function') window.WWMApplyPathLabels();
 }
 
 function _resolvePath(kongfuMain) {
