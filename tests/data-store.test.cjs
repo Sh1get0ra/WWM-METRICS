@@ -97,6 +97,14 @@ function evalDataStore() {
   assert.equal(DS.t('allWeaponDmg'), '全武学/PvP/BOSSダメ', 't() stat allWeaponDmg ja (←旧 allMartialBoost)');
   // path 合成統合 (旧 game_lex.penVoid → pathPenVoid)
   assert.equal(DS.t('pathPenVoid'),  '無相貫通', 't() path合成 pathPenVoid ja (←旧 penVoid)');
+  // 2026-06-10 stat 移管 (game_lex → stat、 名 不変 で callsite 不変):
+  assert.equal(DS.t('critBoost'),       '会心攻撃強化',     't() stat critBoost ja (移管後)');
+  assert.equal(DS.t('sympathyBoost'),   '会意攻撃強化',     't() stat sympathyBoost ja (移管後)');
+  assert.equal(DS.t('elemAtkBoost'),    '属性攻撃強化',     't() stat elemAtkBoost ja (移管後)');
+  assert.equal(DS.t('elemPen'),         '属性貫通',         't() stat elemPen ja (移管後)');
+  assert.equal(DS.t('addCritRate'),     '付加会心率',       't() stat addCritRate ja (移管後)');
+  assert.equal(DS.t('addSympathyRate'), '付加会意率',       't() stat addSympathyRate ja (移管後)');
+  assert.equal(DS.t('specMartialBoost'),'指定武術効果強化', 't() stat specMartialBoost ja (移管後)');
   // vi 退化なし (2026-06-10: stat.json に bossDmg/allWeaponDmg vi 追記)
   DS.setLang('vi');
   assert.equal(DS.t('bossDmg'),      'Tăng sát thương đối với đơn vị thủ lĩnh', 't() bossDmg vi');
