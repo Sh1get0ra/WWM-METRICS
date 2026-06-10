@@ -15,7 +15,7 @@
     "heavenquaker_spear":   { "kongfuId": "10201", "ja": "蛇神の槍", "weaponType": "Spear",     "path": "bellstrike", "damageStatKey": "spearDmg" },
     "nameless_sword":       { "kongfuId": "10102", "ja": "無銘の剣", "weaponType": "Sword",     "path": "bellstrike", "damageStatKey": "swordDmg" },
     "nameless_spear":       { "kongfuId": "10202", "ja": "無銘の槍", "weaponType": "Spear",     "path": "bellstrike", "damageStatKey": "spearDmg" },
-    "snowparting_blade":    { "kongfuId": "20801", "ja": "斬雪の刀", "weaponType": "Hengblade", "path": "stonesplit", "damageStatKey": "moBladeDmg" },
+    "snowparting_blade":    { "kongfuId": "20801", "ja": "斬雪の刀", "weaponType": "Hengblade", "path": "stonesplit", "damageStatKey": "hengBladeDmg" },
     "phalanxbane_blade":    { "kongfuId": "20402", "ja": "破陣の刀", "weaponType": "Mo Blade",  "path": "stonesplit", "damageStatKey": "moBladeDmg" },
     "everspring_umbrella":  { "kongfuId": "20603", "ja": "醉夢の傘", "weaponType": "Umbrella", "path": "bamboocut", "damageStatKey": "umbrellaDmg" },
     "unfettered_rope_dart": { "kongfuId": "20702", "ja": "浮雲の縄", "weaponType": "RopeDart",  "path": "bamboocut", "damageStatKey": "ropeDartDmg" },
