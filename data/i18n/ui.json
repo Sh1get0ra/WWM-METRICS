@@ -13,6 +13,13 @@
     "ko": "연운계",
     "vi": "風燕計"
   },
+  "brandEn": {
+    "ja": "WHERE WINDS METRICS",
+    "en": "WHERE WINDS METRICS",
+    "zh": "WHERE WINDS METRICS",
+    "ko": "WHERE WINDS METRICS",
+    "vi": "YÊN VÂN CHỈ SỐ"
+  },
   "presetTitle": {
     "ja": "プリセット",
     "en": "PRESETS",

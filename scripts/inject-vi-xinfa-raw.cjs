@@ -241,6 +241,72 @@ const DICT = {
   '場合': 'trường hợp'
 };
 
+// 追加 dict (Image #5 兄貴指摘 残 ja: 鼠系/獄炎/敵討令/恩文字の札/英語 stat label 等)
+Object.assign(DICT, {
+  '鼠ダメージ': 'sát thương Chuột',
+  '鼠ダメ': 'sát thương Chuột',
+  '鼠の威力': 'uy lực Chuột',
+  '鼠': 'Chuột',
+  'ねずみ': 'Chuột',
+  '敵デバフ': 'debuff địch',
+  'デバフ': 'debuff',
+  'バフ': 'buff',
+  '敵討令': 'Lệnh Trả Thù',
+  '敵討': 'trả thù',
+  '敵': 'địch',
+  '令': 'lệnh',
+  '威力': 'uy lực',
+  '恩文字の札': 'lá bùa chữ Ân',
+  '恩文字': 'chữ Ân',
+  '札': 'lá bùa',
+  '獄炎': 'Ngục Viêm',
+  '同装備時': 'khi cùng trang bị',
+  '同装備': 'cùng trang bị',
+  '同': 'cùng',
+  '装備': 'trang bị',
+  '倍': 'nhân',
+  '効果半減': 'hiệu quả giảm nửa',
+  '半減': 'giảm một nửa',
+  'なしで': 'nếu không có',
+  'なし': 'không có',
+  '枚': 'lá',
+  '時限': 'giới hạn thời gian',
+  'Min Physical Attack': 'Tấn công Ngoại công tối thiểu',
+  'Min Physical': 'Ngoại công tối thiểu',
+  'Physical Attack': 'Tấn công Ngoại công',
+  'Physical Penetration': 'Xuyên thấu Ngoại công',
+  'Min Magic Attack': 'Tấn công Phép tối thiểu',
+  'Magic Attack': 'Tấn công Phép',
+  'Magic Penetration': 'Xuyên thấu Phép',
+  'Magic': 'Phép',
+  'Attack': 'Tấn công',
+  'Penetration': 'Xuyên thấu',
+  'patch swap with': 'patch swap với',
+  // 残 ja 単語 (Image #5 力溜め 等)
+  '力溜め': 'tích lực',
+  '溜める': 'tích lực',
+  '溜め': 'tích',
+  '完全': 'hoàn toàn',
+  '一部': 'một phần',
+  '低下': 'giảm',
+  '上方': 'tăng',
+  '抑制': 'kìm hãm',
+  '解禁': 'mở',
+  '封印': 'phong ấn',
+  '対応': 'đối ứng',
+  // 軽い接続 ja 残り
+  'にて': ' tại ',
+  'にも': ' cũng ',
+  'では': ' thì ',
+  'での': ' tại ',
+  'での効果': ' hiệu quả tại ',
+  'まで上昇': ' đến tăng ',
+  'まで': ' đến '
+});
+
+// FORCE=1 環境変数で既存 rawI18n.vi 上書き許可 (dict 拡張後の再翻訳用)
+const FORCE = process.env.FORCE === '1';
+
 // keys 文字数降順 (長語先) で正規表現置換
 const orderedKeys = Object.keys(DICT).sort((a, b) => b.length - a.length);
 
@@ -251,8 +317,14 @@ function translate(raw) {
     const esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     s = s.replace(new RegExp(esc, 'g'), DICT[k]);
   }
-  // 連続空白圧縮
-  s = s.replace(/\s+/g, ' ').trim();
+  // 全角句読点 → 半角 (vi 表記準拠)
+  s = s
+    .replace(/、/g, ', ')
+    .replace(/。/g, '. ')
+    .replace(/（/g, ' (')
+    .replace(/）/g, ') ');
+  // 連続空白圧縮 + 句読点直後の余分空白整理
+  s = s.replace(/\s+/g, ' ').replace(/ ([,.):])/g, '$1').trim();
   return s;
 }
 
@@ -265,7 +337,7 @@ for (const [id, e] of Object.entries(x)) {
     if (typeof t.raw !== 'string' || !t.raw.trim()) continue;
     total++;
     if (!t.rawI18n) t.rawI18n = {};
-    if (typeof t.rawI18n.vi === 'string' && t.rawI18n.vi.trim()) { kept++; continue; }
+    if (!FORCE && typeof t.rawI18n.vi === 'string' && t.rawI18n.vi.trim()) { kept++; continue; }
     t.rawI18n.vi = translate(t.raw);
     injected++;
   }
