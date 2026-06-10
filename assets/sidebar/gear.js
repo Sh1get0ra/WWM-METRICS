@@ -40,6 +40,7 @@
     const root = document.getElementById('wwmGearGrid');
     if (!root) return;
     const eqDet = roleInfo?.wearEquipsDetailed || {};
+    const sets = window.WWM_SETS || {}; // _setLiupaiResolve (流派バッジ) が参照
     const kongfu = window.WWM_KONGFU || {};
     const lang = (window.currentLang) || 'ja';
     const kfName = (id) => {
