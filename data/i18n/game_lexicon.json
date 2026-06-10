@@ -230,6 +230,13 @@
     "ko": "정점",
     "vi": "Đỉnh cao"
   },
+  "arsenalNotPeaked": {
+    "ja": "未突破",
+    "en": "Not Peaked",
+    "zh": "未顶点",
+    "ko": "미정점",
+    "vi": "Chưa đỉnh"
+  },
   "ocrHelpMockLv": {
     "ja": "装備レベル",
     "en": "Equip Lv",

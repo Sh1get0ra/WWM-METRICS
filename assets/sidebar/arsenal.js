@@ -46,8 +46,8 @@
         const minV = t?.min ?? preset.min;
         const maxV = t?.max ?? preset.max;
         const valTxt = peaked
-          ? `<span style="color:var(--gold-bright);">頂点 ✓</span> <span style="color:var(--gold-bright);font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`
-          : `<span style="color:var(--paper-mute);">未突破</span> <span style="color:var(--gold-bright);font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`;
+          ? `<span style="color:var(--gold-bright);">${(window.T?.importArsenalPeaked)||'頂点'} ✓</span> <span style="color:var(--gold-bright);font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`
+          : `<span style="color:var(--paper-mute);">${(window.T?.arsenalNotPeaked)||'未突破'}</span> <span style="color:var(--gold-bright);font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`;
         return `<div class="wwm-cmp-row" style="grid-template-columns:50px 1fr;align-items:center;"><span style="font-family:var(--f-mono);font-weight:700;">Lv${lv}</span><span>${valTxt}</span></div>`;
       }).join('');
     }
@@ -67,7 +67,7 @@
              </span>`;
         return `<div class="wwm-cmp-row" style="grid-template-columns:50px 1fr;align-items:center;"><span style="font-family:var(--f-mono);font-weight:700;">Lv${lv}</span>
           <span style="display:flex;align-items:center;gap:10px;flex-wrap:nowrap;white-space:nowrap;">
-            <label style="display:inline-flex;align-items:center;gap:4px;cursor:pointer;white-space:nowrap;"><span>頂点</span> <input type="checkbox" data-tier="${lv}" ${peaked?'checked':''}></label>
+            <label style="display:inline-flex;align-items:center;gap:4px;cursor:pointer;white-space:nowrap;"><span>${(window.T?.importArsenalPeaked)||'頂点'}</span> <input type="checkbox" data-tier="${lv}" ${peaked?'checked':''}></label>
             ${inputArea}
           </span>
         </div>`;
