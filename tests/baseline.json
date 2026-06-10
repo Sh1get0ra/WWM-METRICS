@@ -1,27 +1,27 @@
 {
   "base_naked": {
-    "expected": 1246.7296373365043,
-    "statusScore": 1246.7296373365043,
+    "expected": 1388.1957119500596,
+    "statusScore": 1388.1957119500596,
     "tier": "C"
   },
   "with_globalDmgBoost_purple_5tiers": {
-    "expected": 1309.0661192033297,
-    "statusScore": 1309.0661192033297,
+    "expected": 1457.6054975475624,
+    "statusScore": 1457.6054975475624,
     "tier": "C"
   },
   "with_physDmgBoost_T5": {
-    "expected": 1254.3201991676576,
-    "statusScore": 1254.3201991676576,
+    "expected": 1395.786273781213,
+    "statusScore": 1395.786273781213,
     "tier": "C"
   },
   "with_outerPen_high": {
-    "expected": 1322.6352556480383,
-    "statusScore": 1322.6352556480383,
+    "expected": 1464.1013302615934,
+    "statusScore": 1464.1013302615934,
     "tier": "C"
   },
   "with_outerPen_low": {
-    "expected": 1186.0051426872772,
-    "statusScore": 1186.0051426872772,
+    "expected": 1327.4712173008322,
+    "statusScore": 1327.4712173008322,
     "tier": "C"
   }
 }

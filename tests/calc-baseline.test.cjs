@@ -26,9 +26,9 @@ const _basePar = () => ({
   allMartialBoost: 0, globalDmgBoost: 0,
   specMartialBoost: 0, outerPen: 30,
   bossBoost: 0, elemPen: 30,
-  elemAtkBoost: 0, dmgReduce1: 0, dmgReduce2: 0,
+  elemAtkBoost: 0,
   weaponBonus: 0, playerBoost: 0,
-  physRes: 30, judgeRes: 1.45, physDef: 350, elemRes: 30,
+  physRes: 30, judgeRes: 1.45, physDef: 350,
 });
 
 const cases = [

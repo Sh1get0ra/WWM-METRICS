@@ -3,31 +3,36 @@
     "ja": "武術技",
     "en": "Q",
     "zh": "武学技",
-    "ko": "무술 스킬"
+    "ko": "무술 스킬",
+    "vi": "kỹ năng võ học"
   },
   "charged": {
     "ja": "溜め技",
     "en": "Ch",
     "zh": "蓄力技",
-    "ko": "차지 스킬"
+    "ko": "차지 스킬",
+    "vi": "kỹ năng tích lực"
   },
   "special": {
     "ja": "特殊技",
     "en": "Sp",
     "zh": "特殊技",
-    "ko": "특수 스킬"
+    "ko": "특수 스킬",
+    "vi": "kỹ năng đặc biệt"
   },
   "drone": {
     "ja": "特殊技",
     "en": "Drone",
     "zh": "特殊技",
-    "ko": "특수 스킬"
+    "ko": "특수 스킬",
+    "vi": "kỹ năng đặc biệt"
   },
   "light": {
     "ja": "軽撃",
     "en": "LA",
     "zh": "强效轻击",
-    "ko": "강력한 약 공격"
+    "ko": "강력한 약 공격",
+    "vi": "đánh nhẹ mạnh mẽ"
   },
   "rodent": {
     "ja": "鼠",
@@ -40,24 +45,28 @@
     "ja": "シールド効果",
     "en": "Shield",
     "zh": "护盾增效",
-    "ko": "보호막 효과"
+    "ko": "보호막 효과",
+    "vi": "Hộ thuẫn"
   },
   "healing": {
     "ja": "重撃回復量",
     "en": "Heal",
     "zh": "重击回复",
-    "ko": "중격 회복"
+    "ko": "중격 회복",
+    "vi": "kỹ năng hồi phục"
   },
   "bleed": {
     "ja": "流血",
     "en": "Bleed",
     "zh": "流血",
-    "ko": "출혈"
+    "ko": "출혈",
+    "vi": "chảy máu"
   },
   "variedCombo": {
     "ja": "軽重撃派生",
     "en": "LA/HC",
     "zh": "轻重击派生",
-    "ko": "경중격 파생"
+    "ko": "경중격 파생",
+    "vi": "Đòn nhẹ và đòn mạnh kỹ năng phát sinh"
   }
 }

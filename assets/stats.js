@@ -668,10 +668,7 @@ function buildStatParamsSync(roleInfo, state) {
   r.physDef    = eRow.def;
   r.judgeRes   = eRow.jr;
   r.physRes    = 0;
-  r.elemRes    = 0;
   r.enemyDebuff= 0;
-  r.dmgReduce1 = 0;
-  r.dmgReduce2 = 0;
   r.worldLv    = 14;
   r.martialLv  = charLv;  // キャラLvと同一
   r.outerCoeff = 1.5;

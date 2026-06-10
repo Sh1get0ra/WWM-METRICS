@@ -20,20 +20,6 @@
     "ko": "전체 피해 증가",
     "vi": "Tăng toàn bộ sát thương"
   },
-  "dmgReduce1": {
-    "ja": "ダメージ軽減１",
-    "en": "DMG Reduction 1",
-    "zh": "伤害减免１",
-    "ko": "피해 경감 1",
-    "vi": "Giảm sát thương 1"
-  },
-  "dmgReduce2": {
-    "ja": "ダメージ軽減２",
-    "en": "DMG Reduction 2",
-    "zh": "伤害减免２",
-    "ko": "피해 경감 2",
-    "vi": "Giảm sát thương 2"
-  },
   "outerCoeff": {
     "ja": "外功係数",
     "en": "Outer Force Coeff.",
@@ -61,13 +47,6 @@
     "zh": "判定抗性",
     "ko": "저항 판정",
     "vi": "Kháng định đoạt"
-  },
-  "elemRes": {
-    "ja": "属性耐性値",
-    "en": "Elemental Resistance",
-    "zh": "属性抗性",
-    "ko": "속성 저항",
-    "vi": "Kháng Thuộc tính"
   },
   "worldLv": {
     "ja": "大世界等級（Lv）",

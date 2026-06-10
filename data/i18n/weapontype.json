@@ -3,43 +3,50 @@
     "ja": "剣",
     "en": "Sword",
     "zh": "剑",
-    "ko": "검"
+    "ko": "검",
+    "vi": "Kiếm"
   },
   "spear": {
     "ja": "槍",
     "en": "Spear",
     "zh": "枪",
-    "ko": "창"
+    "ko": "창",
+    "vi": "Súng"
   },
   "fan": {
     "ja": "扇",
     "en": "Fan",
     "zh": "扇",
-    "ko": "부채"
+    "ko": "부채",
+    "vi": "Quạt"
   },
   "umbrella": {
     "ja": "傘",
     "en": "Umbrella",
     "zh": "伞",
-    "ko": "우산"
+    "ko": "우산",
+    "vi": "Dù"
   },
   "mo_blade": {
     "ja": "刀",
     "en": "Blade",
     "zh": "刀",
-    "ko": "도"
+    "ko": "도",
+    "vi": "Đao Mạc"
   },
   "dual_blades": {
     "ja": "双刃",
     "en": "Twinblades",
     "zh": "双刃",
-    "ko": "쌍검"
+    "ko": "쌍검",
+    "vi": "Song đao"
   },
   "new_blade": {
     "ja": "刀",
     "en": "Blade",
     "zh": "刀",
-    "ko": "도"
+    "ko": "도",
+    "vi": "Hoành đao"
   },
   "rope_dart": {
     "ja": "縄鏢",
@@ -52,6 +59,7 @@
     "ja": "手甲",
     "en": "Gauntlet",
     "zh": "拳套",
-    "ko": "권갑"
+    "ko": "권갑",
+    "vi": "Giáp Tay"
   }
 }

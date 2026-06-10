@@ -5,7 +5,7 @@ window.WWM_SCORE_VERSION = 9;
 
 // 表示ラベル/calcKey (stat_display.json 等) の cache buster。 SCORE_VERSION と独立。
 // スコア計算を変えずラベル/表示参照だけ変えた時に +1 → baseline 無効化(再import促し)を起こさず反映。
-window.WWM_DISPLAY_VERSION = 33;
+window.WWM_DISPLAY_VERSION = 34;
 
 // ── 共通計算層 ────────────────────────────────────────────────
 // params object から innerPhys/outerBoost/各確率を計算。
@@ -14,7 +14,7 @@ function _computeCoreLayer(p) {
   const physPenDiff  = (p.outerPen || 0) - (p.physRes || 0);
   // 穿透 ≥ 抗性: overflow は /200 (半減)、< の場合: 不足分は /100 (フル軽減)
   const physPenZone  = physPenDiff >= 0 ? physPenDiff / 200 : physPenDiff / 100;
-  const elemPenDiff  = (p.elemPen || 0) - (p.elemRes || 0);
+  const elemPenDiff  = (p.elemPen || 0);
   const elemPenZone  = elemPenDiff >= 0 ? elemPenDiff / 200 : elemPenDiff / 100;
   // 増伤レイヤー分離: 内側(外功/属性別の伤害加成) と 外側(全体増伤、加算合計)
   // physDmgBoost (心法経由) を innerPhys に合流
@@ -25,7 +25,6 @@ function _computeCoreLayer(p) {
   const outerBoost   = 1 + (p.allMartialBoost || 0) + (p.specMartialBoost || 0)
                      + (p.bossBoost || 0) + (p.playerBoost || 0) + mysticContrib
                      + (p.enemyDebuff || 0) + (p.globalDmgBoost || 0);
-  const reductionZone= (1 - (p.dmgReduce1 || 0)) * (1 - (p.dmgReduce2 || 0));
 
   const judgeRes = p.judgeRes || 0;
   const sympathyRateAdj = judgeRes === 0 ? (p.sympathyRate || 0) : (p.sympathyRate || 0) / judgeRes;
@@ -48,7 +47,7 @@ function _computeCoreLayer(p) {
   const pGraze    = (1 - appliedHit) * (1 - pSympathy);
   const pNormal   = Math.max(0, 1 - pCrit - pSympathy - pGraze);
 
-  return { physPenZone, elemPenZone, innerPhys, innerElem, outerBoost, reductionZone,
+  return { physPenZone, elemPenZone, innerPhys, innerElem, outerBoost,
            pSympathy, pCrit, pGraze, pNormal, critRateAdj, sympathyRateAdj, critRateBoosted };
 }
 window._computeCoreLayer = _computeCoreLayer;
@@ -65,7 +64,7 @@ function computeExpected(pIn) {
   }
   const hiddenBonus  = p.worldLv + p.martialLv + 1;
   const core = _computeCoreLayer(p);
-  const { physPenZone, elemPenZone, innerPhys, innerElem, outerBoost, reductionZone,
+  const { physPenZone, elemPenZone, innerPhys, innerElem, outerBoost,
           pSympathy, pCrit, pGraze, pNormal } = core;
 
   function physPart(atk) { return Math.max(0, atk - p.physDef) * p.outerCoeff + p.outerAdd; }
@@ -77,13 +76,13 @@ function computeExpected(pIn) {
     mul = mul || 1;
     const pp = physPart(pa) * (1 + physPenZone) * innerPhys;
     const ee = elemPart(em, es) * (1 + elemPenZone) * innerElem;
-    return (pp + ee) * outerBoost * reductionZone * mul;
+    return (pp + ee) * outerBoost * mul;
   }
   // 物理/属性 内訳分離 (外周リング arc 用、pp+ee は dmg と一致)
   function dmgParts(pa, em, es, mul) {
     mul = mul || 1;
-    const pp = physPart(pa) * (1 + physPenZone) * innerPhys * outerBoost * reductionZone * mul;
-    const ee = elemPart(em, es) * (1 + elemPenZone) * innerElem * outerBoost * reductionZone * mul;
+    const pp = physPart(pa) * (1 + physPenZone) * innerPhys * outerBoost * mul;
+    const ee = elemPart(em, es) * (1 + elemPenZone) * innerElem * outerBoost * mul;
     return { pp, ee };
   }
 
@@ -119,7 +118,7 @@ function computeExpected(pIn) {
     mul = mul || 1;
     const pp = sPhys(pa) * (1 + physPenZone) * innerPhys;
     const ee = sElem(em, es) * (1 + elemPenZone) * innerElem;
-    return (pp + ee) * outerBoost * reductionZone * mul;
+    return (pp + ee) * outerBoost * mul;
   }
   const statusScoreRaw =
         sDmg(avgPhys, avgMain, avgSub) * pNormal

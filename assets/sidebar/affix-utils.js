@@ -123,7 +123,6 @@
     'dualWeaponSkillDmg', 'executionDmg', 'dashDmg',
     'swordDmg', 'spearDmg', 'fanDmg', 'umbrellaDmg',
     'hengBladeDmg', 'moBladeDmg', 'dualBladesDmg', 'ropeDartDmg',
-    'fanHealingBoost', 'umbrellaHealingBoost',
     'sympathyRate', 'addCritRate', 'addSympathyRate',
     // 武器固有 強化系 (全 ratio保存)
     'bleed', 'moBladeShield', 'panaceaFanHealing',

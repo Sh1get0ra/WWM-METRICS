@@ -951,10 +951,6 @@
     "internal": 252,
     "statKey": "fanDmg"
   },
-  "140124": {
-    "internal": 253,
-    "statKey": "fanHealingBoost"
-  },
   "140125": {
     "internal": 250,
     "statKey": "moBladeDmg"
@@ -1066,10 +1062,6 @@
   "140223": {
     "internal": 252,
     "statKey": "fanDmg"
-  },
-  "140224": {
-    "internal": 253,
-    "statKey": "fanHealingBoost"
   },
   "140225": {
     "internal": 250,
@@ -1183,10 +1175,6 @@
     "internal": 252,
     "statKey": "fanDmg"
   },
-  "140324": {
-    "internal": 253,
-    "statKey": "fanHealingBoost"
-  },
   "140325": {
     "internal": 250,
     "statKey": "moBladeDmg"
@@ -1298,10 +1286,6 @@
   "140423": {
     "internal": 252,
     "statKey": "fanDmg"
-  },
-  "140424": {
-    "internal": 253,
-    "statKey": "fanHealingBoost"
   },
   "140425": {
     "internal": 250,
@@ -2191,10 +2175,6 @@
     "internal": 252,
     "statKey": "fanDmg"
   },
-  "162024": {
-    "internal": 253,
-    "statKey": "fanHealingBoost"
-  },
   "162025": {
     "internal": 250,
     "statKey": "moBladeDmg"
@@ -2643,10 +2623,6 @@
     "internal": 252,
     "statKey": "fanDmg"
   },
-  "166824": {
-    "internal": 253,
-    "statKey": "fanHealingBoost"
-  },
   "166825": {
     "internal": 250,
     "statKey": "moBladeDmg"
@@ -2866,10 +2842,6 @@
   "167023": {
     "internal": 252,
     "statKey": "fanDmg"
-  },
-  "167024": {
-    "internal": 253,
-    "statKey": "fanHealingBoost"
   },
   "167025": {
     "internal": 250,
@@ -5695,10 +5667,6 @@
     "internal": 252,
     "statKey": "fanDmg"
   },
-  "8293024": {
-    "internal": 253,
-    "statKey": "fanHealingBoost"
-  },
   "8293025": {
     "internal": 250,
     "statKey": "moBladeDmg"
@@ -5714,10 +5682,6 @@
   "8293028": {
     "internal": 357,
     "statKey": "ropeDartDmg"
-  },
-  "8293029": {
-    "internal": 379,
-    "statKey": "umbrellaHealingBoost"
   },
   "8293030": {
     "internal": 254,
@@ -5843,10 +5807,6 @@
     "internal": 252,
     "statKey": "fanDmg"
   },
-  "8294024": {
-    "internal": 253,
-    "statKey": "fanHealingBoost"
-  },
   "8294025": {
     "internal": 250,
     "statKey": "moBladeDmg"
@@ -5862,10 +5822,6 @@
   "8294028": {
     "internal": 357,
     "statKey": "ropeDartDmg"
-  },
-  "8294029": {
-    "internal": 379,
-    "statKey": "umbrellaHealingBoost"
   },
   "8294030": {
     "internal": 254,
@@ -6823,10 +6779,6 @@
     "internal": 252,
     "statKey": "fanDmg"
   },
-  "8793024": {
-    "internal": 253,
-    "statKey": "fanHealingBoost"
-  },
   "8793025": {
     "internal": 250,
     "statKey": "moBladeDmg"
@@ -6842,10 +6794,6 @@
   "8793028": {
     "internal": 357,
     "statKey": "ropeDartDmg"
-  },
-  "8793029": {
-    "internal": 379,
-    "statKey": "umbrellaHealingBoost"
   },
   "8793030": {
     "internal": 254,
@@ -6971,10 +6919,6 @@
     "internal": 252,
     "statKey": "fanDmg"
   },
-  "8794024": {
-    "internal": 253,
-    "statKey": "fanHealingBoost"
-  },
   "8794025": {
     "internal": 250,
     "statKey": "moBladeDmg"
@@ -6990,10 +6934,6 @@
   "8794028": {
     "internal": 357,
     "statKey": "ropeDartDmg"
-  },
-  "8794029": {
-    "internal": 379,
-    "statKey": "umbrellaHealingBoost"
   },
   "8794030": {
     "internal": 254,
@@ -9190,7 +9130,7 @@
   "_schema": "affix ID -> {statKey, internal}. WW Math app.js (v=aad303b7) 由来。null statKey は弓矢関連。",
   "_lastUpdated": "2026-05-25",
   "_source": "Where Winds Math obfuscated app.js + jsdom抽出",
-  "_stats": 119,
+  "_stats": 117,
   "_total": 2297,
   "_note": " | 270703 set affix statKey: silkbindPen→voidPen 修正 (帰燕 set 表示名 無相貫通)"
 }
