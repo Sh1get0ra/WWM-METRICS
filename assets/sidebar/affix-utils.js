@@ -263,9 +263,11 @@
     return true;
   }
   // 主武器/副武器 で 武器ダメ系 → active 該当 weaponType のみ
-  function _isWeaponDmgMatch(statKey, slot, roleInfo) {
+  // kongfuIdOverride: 武具対照 modal で「新装備の武術」 を渡すと、 roleInfo より優先される
+  // (装備差替シミュ中に新装備の武器種で affix 候補を絞り込む)。
+  function _isWeaponDmgMatch(statKey, slot, roleInfo, kongfuIdOverride) {
     if (!_WEAPON_DMG_KEYS.has(statKey)) return true;
-    const kid = String(slot) === '1' ? roleInfo?.kongfuMain : roleInfo?.kongfuSub;
+    const kid = kongfuIdOverride || (String(slot) === '1' ? roleInfo?.kongfuMain : roleInfo?.kongfuSub);
     const wt = window.WWM_KONGFU?.[kid]?.weaponType;
     if (!wt) return true;
     const camelize = s => s.replace(/_([a-z])/g, (_,c)=>c.toUpperCase());
@@ -277,7 +279,7 @@
   // slot/idx 指定で 6番目限定処理 + idx 1-4 重複不可 (affix0 のみ重複可)
   // PvP専用定音 sentinel ID (WWM_AFFIX に存在しない固定値、計算寄与ゼロ、表示は affix6 fallback で「PvP専用定音」)
   const _PVP_AFFIX_SENTINEL = 999999;
-  function _getAffixOptions(currentAffixId, slot, idx, allAffixes) {
+  function _getAffixOptions(currentAffixId, slot, idx, allAffixes, kongfuIdOverride) {
     const all = window.WWM_AFFIX || {};
     // affix6 + 現在 ID が未登録 (PvP定音) → 変更不可、PvP option のみ返す (全スロット共通)
     if (idx === 5 && !all[currentAffixId]) {
@@ -312,7 +314,7 @@
       if (blockedKeys.has(sk)) continue;
       // slot 別 出現ルール
       if (!_isAffixAllowedInSlot(sk, slot)) continue;
-      if (!_isWeaponDmgMatch(sk, slot, WWMState.roleInfo)) continue;
+      if (!_isWeaponDmgMatch(sk, slot, WWMState.roleInfo, kongfuIdOverride)) continue;
       // idx 0 はダメ増加系/武学固有 出現不可
       if (idx === 0 && !_isAffixAllowedAtIdx0(sk)) continue;
       // 防具 idx 0 は外功攻撃 / 各属性攻撃 出現不可

@@ -406,7 +406,7 @@
         const sk = info?.statKey;
         const r = _deriveRank(ratio);
         const rkCls = r===3?'gold':r===2?'purple':'blue';
-        const opts = _getAffixOptions(id, slot, idx, newAffixes);
+        const opts = _getAffixOptions(id, slot, idx, newAffixes, newKongfuId);
         // selected: 通常は statKey 一致、affix6 で未登録ID(PvP定音含む) なら __pvp__ option
         const isPvpSlot6 = (idx === 5) && !info;
         const optsHtml = opts.map(o => {
@@ -857,7 +857,7 @@
             // allAffixes=null = idx1-4 の使用中 statKey dedupe を無効化 (「全行ブランク」相当の素 pool)。
             // 現装備の構成がスクショ affix の自然な枠を塞ぎ、並びがスクショ順にならない問題の根治
             // (2026-06-08 兄貴提案)。書込後の表示 select は通常 dedupe pool で再構築 = 整合
-            getOptions: (idx) => _getAffixOptions(newAffixes[idx]?.equipmentDetails?.[0], slot, idx, null),
+            getOptions: (idx) => _getAffixOptions(newAffixes[idx]?.equipmentDetails?.[0], slot, idx, null, newKongfuId),
             onProgress: (stage, pct) => _setStatus(
               stage === 'lang'
                 ? ((window.T&&T.ocrLangLoading)||'辞書取得中…') + ' ' + Math.round(pct*100) + '%'
