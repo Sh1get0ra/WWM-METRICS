@@ -77,7 +77,7 @@
   }
   async function _checkChangelog() {
     try {
-      const cl = await fetch('data/changelog.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json());
+      const cl = await fetch('data/changelog.json?v=' + (window.WWM_DISPLAY_VERSION || 42)).then(r => r.json());
       if (!cl?.current) return;
       const seen = localStorage.getItem(_CHANGELOG_KEY);
       if (!seen) {
@@ -267,7 +267,7 @@ finalScore  = statusScore + 4-set bonus (4個セット発動時)</pre>
   }
   async function _showAllChangelogs() {
     try {
-      const cl = await fetch('data/changelog.json?v=' + (window.WWM_SCORE_VERSION || 7)).then(r => r.json());
+      const cl = await fetch('data/changelog.json?v=' + (window.WWM_DISPLAY_VERSION || 42)).then(r => r.json());
       _showNoteModal({ defaultTab: 'spec', entries: cl.entries || [] });
     } catch (e) {
       _showNoteModal({ defaultTab: 'spec', entries: [] });

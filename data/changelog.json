@@ -1,6 +1,20 @@
 {
-  "current": "2.0.2",
+  "current": "2.1.0",
   "entries": [
+    {
+      "version": "2.1.0",
+      "date": "2026-06-10",
+      "items": [
+        {
+          "featured": true,
+          "ja": "【ベトナム語 (Tiếng Việt) 対応 追加】 5 言語目として vi を追加。 ステ画面準拠 (漢越語ベース) で UI / ステ名 / 装備 affix / 心法 Tier 効果 / セット / 武術 / 武器 / 武庫対照 modal 等を全面 vi 化。 心法効果は Claude が 48 心法 × Tier 全 336 項を 1 件ずつ手訳 (機械翻訳不採用)。 上部の「Tiếng Việt」 ボタンで切替。 ベト人プレイヤーの方、 違和感あれば GitHub Issues か Discord で気軽に指摘ください。",
+          "en": "[Vietnamese (Tiếng Việt) Support Added] Added vi as the 5th language. Full vi localization of UI / stat names / equipment affixes / xinfa tier effects / sets / martial arts / weapons / arsenal comparison modal etc., based on the in-game stat screen (Sino-Vietnamese style). Xinfa tier effects were hand-translated entry by entry (336 items across 48 xinfa) by Claude — no machine translation. Switch via the «Tiếng Việt» button at the top. Vietnamese players, feedback welcome on GitHub Issues / Discord.",
+          "zh": "【越南语 (Tiếng Việt) 支持 追加】 新增第 5 种语言 vi。 以游戏内属性画面 (汉越语风) 为准, 全面 vi 化 UI / 属性名 / 装备词条 / 心法 Tier 效果 / 套装 / 武学 / 武器 / 武库对照 modal 等。 心法效果由 Claude 逐条手译 48 心法 × Tier 共 336 项 (不采用机器翻译)。 通过顶部「Tiếng Việt」 按钮切换。 欢迎越南玩家通过 GitHub Issues 或 Discord 反馈。",
+          "ko": "【베트남어 (Tiếng Việt) 지원 추가】 5번째 언어로 vi 추가. 인게임 스탯 화면 기준 (한월어 베이스) 으로 UI / 스탯명 / 장비 어픽스 / 심법 Tier 효과 / 세트 / 무술 / 무기 / 무기고 비교 모달 등을 전면 vi 화. 심법 효과는 Claude 가 48 심법 × Tier 총 336 항을 1 건씩 직접 번역 (기계 번역 미사용). 상단의 「Tiếng Việt」 버튼으로 전환. 베트남 플레이어 분들의 피드백은 GitHub Issues 또는 Discord 로 환영합니다.",
+          "vi": "[Hỗ trợ Tiếng Việt đã thêm] Thêm vi làm ngôn ngữ thứ 5. Bản địa hóa vi toàn diện UI / tên chỉ số / phụ ấn trang bị / hiệu quả Tier tâm pháp / set / võ học / vũ khí / modal đối chiếu kho vũ khí v.v., dựa trên màn hình chỉ số trong game (phong cách Hán-Việt). Hiệu quả Tier tâm pháp được Claude dịch tay từng mục một (336 mục qua 48 tâm pháp) — không dùng dịch máy. Chuyển đổi bằng nút «Tiếng Việt» ở trên cùng. Người chơi Việt Nam, mọi góp ý vui lòng gửi qua GitHub Issues hoặc Discord."
+        }
+      ]
+    },
     {
       "version": "2.0.2",
       "date": "2026-06-08",
