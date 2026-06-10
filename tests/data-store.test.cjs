@@ -113,6 +113,16 @@ function evalDataStore() {
   assert.equal(DS.t('minBamboocut'), '最小瞬嵐攻撃', 'min<Path> ja');
   assert.equal(DS.t('maxBamboocut'), '最大瞬嵐攻撃', 'max<Path> ja');
   assert.equal(DS.t('minVoid'),       '最小無相攻撃', 'min<Path> void ja');
+  // nonPathBase 合成: elemSub (path に属さない副属性 ATK ラベル、 旧 game_lex.minElemSub/maxElemSub 置換)
+  assert.equal(DS.t('minElemSub'),    '最小副属性攻撃', 'nonPathBase elemSub ja');
+  assert.equal(DS.t('maxElemSub'),    '最大副属性攻撃', 'nonPathBase elemSub max ja');
+  DS.setLang('en');
+  assert.equal(DS.t('minElemSub'),    'Min Sub Elem', 'nonPathBase elemSub en');
+  DS.setLang('zh');
+  assert.equal(DS.t('minElemSub'),    '最小副属性攻击', 'nonPathBase elemSub zh');
+  DS.setLang('ko');
+  assert.equal(DS.t('minElemSub'),    '최소 부속성 공격', 'nonPathBase elemSub ko');
+  DS.setLang('ja');
   DS.setLang('en');
   assert.equal(DS.t('pathAtkBellstrike'), 'Bellstrike', 'pathAtk<Path> en (affix.atk en = "")');
   console.log('PASS: data-store path i18n synth');

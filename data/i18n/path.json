@@ -36,6 +36,14 @@
       "vi": "Vô Tướng"
     }
   },
+  "nonPathBase": {
+    "elemSub": {
+      "ja": "副属性",
+      "en": "Sub Elem",
+      "zh": "副属性",
+      "ko": "부속성"
+    }
+  },
   "affix": {
     "min": {
       "ja": "最小",

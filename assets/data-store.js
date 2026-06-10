@@ -47,6 +47,22 @@
         if (!ui[k]) ui[k] = v; // 既存キー (旧 ui.json 重複) を上書きしない
       }
     }
+    // nonPathBase: path 系合成 (path/pathAtk/pathPen/pathDmg) は不要だが min<Name>/max<Name>
+    // 形式のラベルだけ生成したい汎用 base (例: elemSub = 副属性、 path に属さない副属性 ATK)。
+    const nonPath = path.nonPathBase || {};
+    for (const [p, base] of Object.entries(nonPath)) {
+      const C = cap(p);
+      const keys = { ['min' + C]: {}, ['max' + C]: {} };
+      for (const L of LANGS) {
+        const b = base[L]; if (!b) continue;
+        const atk = path.affix.atk?.[L] || '';
+        keys['min' + C][L] = (path.affix.min?.[L] || '') + b + atk;
+        keys['max' + C][L] = (path.affix.max?.[L] || '') + b + atk;
+      }
+      for (const [k, v] of Object.entries(keys)) {
+        if (!ui[k]) ui[k] = v;
+      }
+    }
   }
 
   function ready() {
