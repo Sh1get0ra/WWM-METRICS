@@ -94,6 +94,10 @@ function evalDataStore() {
   assert.equal(DS.t('pathBellstrike'), '鋼鳴', 'path<Path> ja');
   assert.equal(DS.t('pathAtkBellstrike'), '鋼鳴攻撃', 'pathAtk<Path> ja');
   assert.equal(DS.t('pathPenBellstrike'), '鋼鳴貫通', 'pathPen<Path> ja');
+  // ranking.js 「調律/定音効率分析」 が引く形式 (min<Path> / max<Path>)
+  assert.equal(DS.t('minBamboocut'), '最小瞬嵐攻撃', 'min<Path> ja');
+  assert.equal(DS.t('maxBamboocut'), '最大瞬嵐攻撃', 'max<Path> ja');
+  assert.equal(DS.t('minVoid'),       '最小無相攻撃', 'min<Path> void ja');
   DS.setLang('en');
   assert.equal(DS.t('pathAtkBellstrike'), 'Bellstrike', 'pathAtk<Path> en (affix.atk en = "")');
   console.log('PASS: data-store path i18n synth');

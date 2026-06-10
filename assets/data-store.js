@@ -14,7 +14,8 @@
   let readyPromise = null;
 
   // path 系 i18n key を data.path から動的合成して data.ui に注入 (旧 build-labels.js applyPathLabels の (1) 役割)。
-  // 旧 form: path<Path> / pathAtk<Path> / pathPen<Path> / pathDmg<Path> (cap)。
+  // 旧 form: path<Path> / pathAtk<Path> / pathPen<Path> / pathDmg<Path> / min<Path> / max<Path> (cap)。
+  // min<Path> / max<Path> = ranking.js 「調律/定音効率分析」 panel が SL[pathKeys[i]] で引く形式。
   function _injectPathI18nKeys() {
     const path = data.path;
     if (!path || !path.pathBase || !path.affix) return;
@@ -27,14 +28,19 @@
         ['path' + C]:    {},
         ['pathAtk' + C]: {},
         ['pathPen' + C]: {},
-        ['pathDmg' + C]: {}
+        ['pathDmg' + C]: {},
+        ['min' + C]:     {},
+        ['max' + C]:     {}
       };
       for (const L of LANGS) {
         const b = base[L]; if (!b) continue;
+        const atk = path.affix.atk?.[L] || '';
         keys['path' + C][L]    = b;
-        keys['pathAtk' + C][L] = b + (path.affix.atk?.[L] || '');
+        keys['pathAtk' + C][L] = b + atk;
         keys['pathPen' + C][L] = b + (path.affix.pen?.[L] || '');
         keys['pathDmg' + C][L] = b + (path.affix.dmgUp?.[L] || '');
+        keys['min' + C][L]     = (path.affix.min?.[L] || '') + b + atk;
+        keys['max' + C][L]     = (path.affix.max?.[L] || '') + b + atk;
       }
       for (const [k, v] of Object.entries(keys)) {
         if (!ui[k]) ui[k] = v; // 既存キー (旧 ui.json 重複) を上書きしない
