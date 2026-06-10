@@ -5,149 +5,11 @@
     "zh": "燕云计 | WWMETRICS",
     "ko": "연운계 | WWMETRICS"
   },
-  "headerTitle": {
-    "ja": "風燕計",
-    "en": "Where Winds Metrics",
-    "zh": "燕云计",
-    "ko": "연운계"
-  },
   "brandVert": {
     "ja": "風燕計",
     "en": "風燕計",
     "zh": "燕云计",
     "ko": "연운계"
-  },
-  "headerSub": {
-    "ja": "WWM-REAL-TIME-METRICS",
-    "en": "WWM-REAL-TIME-METRICS",
-    "zh": "WWM-REAL-TIME-METRICS",
-    "ko": "WWM-REAL-TIME-METRICS"
-  },
-  "sec1": {
-    "ja": "基本ステータス",
-    "en": "Base Stats",
-    "zh": "基础属性",
-    "ko": "기초 속성"
-  },
-  "sec2": {
-    "ja": "判定確率",
-    "en": "Hit Probability",
-    "zh": "判定属性",
-    "ko": "판정 속성"
-  },
-  "sec3": {
-    "ja": "ダメージ増加効果",
-    "en": "DMG Increase Effects",
-    "zh": "增伤效果",
-    "ko": "피해 증가 효과"
-  },
-  "sec4": {
-    "ja": "スキルステータス",
-    "en": "Skill Stats",
-    "zh": "技能属性",
-    "ko": "스킬 스탯"
-  },
-  "sec5": {
-    "ja": "その他ステータス",
-    "en": "Other Stats",
-    "zh": "其他属性",
-    "ko": "기타 스탯"
-  },
-  "sec6": {
-    "ja": "エネミーデータ",
-    "en": "Enemy Data",
-    "zh": "怪物数据",
-    "ko": "적 데이터"
-  },
-  "jgInputVal": {
-    "ja": "入力値",
-    "en": "Input",
-    "zh": "输入值",
-    "ko": "입력값"
-  },
-  "jgApplied": {
-    "ja": "適用値",
-    "en": "Applied",
-    "zh": "适用值",
-    "ko": "적용값"
-  },
-  "manualInput": {
-    "ja": "手動入力",
-    "en": "Manual Input",
-    "zh": "手动输入",
-    "ko": "수동 입력"
-  },
-  "enemyPresetTitle": {
-    "ja": "エネミーデータ（プリセット）",
-    "en": "Enemy Data (Preset)",
-    "zh": "怪物数据（预设）",
-    "ko": "적 데이터（프리셋）"
-  },
-  "resultTitle": {
-    "ja": "期待ダメージ",
-    "en": "Expected Damage",
-    "zh": "期望伤害",
-    "ko": "기대 피해"
-  },
-  "resultHero": {
-    "ja": "EXPECTED · 期待値",
-    "en": "EXPECTED · Forecast",
-    "zh": "EXPECTED · 期望值",
-    "ko": "EXPECTED · 기대치"
-  },
-  "resultHeroSub": {
-    "ja": "最終ダメージ期待値",
-    "en": "Final expected damage",
-    "zh": "最终伤害期望值",
-    "ko": "최종 피해 기대치"
-  },
-  "breakdownPhys": {
-    "ja": "PHYSICAL",
-    "en": "PHYSICAL",
-    "zh": "PHYSICAL",
-    "ko": "PHYSICAL"
-  },
-  "breakdownElem": {
-    "ja": "ELEMENTAL",
-    "en": "ELEMENTAL",
-    "zh": "ELEMENTAL",
-    "ko": "ELEMENTAL"
-  },
-  "breakdownExp": {
-    "ja": "EXPECTED",
-    "en": "EXPECTED",
-    "zh": "EXPECTED",
-    "ko": "EXPECTED"
-  },
-  "donutCenter": {
-    "ja": "P · 確率分布",
-    "en": "P · Distribution",
-    "zh": "P · 概率分布",
-    "ko": "P · 확률 분포"
-  },
-  "thHitType": {
-    "ja": "ヒット種",
-    "en": "Hit Type",
-    "zh": "命中类型",
-    "ko": "히트 유형"
-  },
-  "thTotal": {
-    "ja": "合計",
-    "en": "Total",
-    "zh": "合计",
-    "ko": "합계"
-  },
-  "rowExpected": {
-    "ja": "DMG期待値",
-    "en": "Expected DMG",
-    "zh": "期望伤害",
-    "ko": "기대 피해"
-  },
-  "detailsTitle": {
-    "ja": "詳細ダメージ表",
-    "en": "Damage Detail Table",
-    "zh": "伤害详情表",
-    "ko": "피해 상세표"
   },
   "presetTitle": {
     "ja": "プリセット",
@@ -202,126 +64,6 @@
     "en": "View-only mode: EXPORT is disabled (cannot distribute others' build images)",
     "zh": "浏览模式: EXPORT 已禁用 (不能传播他人配装图)",
     "ko": "열람 모드: EXPORT 는 비활성화됨 (타인 빌드 이미지 배포 불가)"
-  },
-  "skillPresetTitle": {
-    "ja": "スキルプリセット",
-    "en": "SKILL PRESET",
-    "zh": "技能预设",
-    "ko": "스킬 프리셋"
-  },
-  "skillPresetPlaceholder": {
-    "ja": "— 選択 —",
-    "en": "— Select —",
-    "zh": "— 选择 —",
-    "ko": "— 선택 —"
-  },
-  "skillPresetNamePh": {
-    "ja": "名前を入力",
-    "en": "Enter name",
-    "zh": "输入名称",
-    "ko": "이름 입력"
-  },
-  "skillPresetSave": {
-    "ja": "保存",
-    "en": "Save",
-    "zh": "保存",
-    "ko": "저장"
-  },
-  "skillPresetNeedName": {
-    "ja": "名前を入力してください",
-    "en": "Please enter a name",
-    "zh": "请输入名称",
-    "ko": "이름을 입력하세요"
-  },
-  "effTitle": {
-    "ja": "ステータス効率分析",
-    "en": "Stat Efficiency Analysis",
-    "zh": "属性效率分析",
-    "ko": "스탯 효율 분석"
-  },
-  "effSub": {
-    "ja": "EFFICIENCY / +1 unit",
-    "en": "EFFICIENCY / +1 unit",
-    "zh": "EFFICIENCY / +1 unit",
-    "ko": "EFFICIENCY / +1 unit"
-  },
-  "effNote": {
-    "ja": "各ステータス＋装備1個あたりの期待DMG増加量。現在の入力値を基準に自動計算。",
-    "en": "Expected DMG increase per +x from one equipment piece. Auto-calculated from current inputs.",
-    "zh": "每件装备+x数值带来的期望伤害增量。基于当前输入值自动计算。",
-    "ko": "장비 1개의 +x 수치당 기대 피해 증가량. 현재 입력값 기준 자동 계산."
-  },
-  "effThStat": {
-    "ja": "ステータス",
-    "en": "Stat",
-    "zh": "属性",
-    "ko": "스탯"
-  },
-  "effThMax": {
-    "ja": "X値",
-    "en": "X Value",
-    "zh": "X值",
-    "ko": "X값"
-  },
-  "effThBase": {
-    "ja": "基準期待値",
-    "en": "Base Expected",
-    "zh": "基准期望值",
-    "ko": "기준 기대치"
-  },
-  "effThAfter": {
-    "ja": "+x後期待値",
-    "en": "+x Expected",
-    "zh": "+x后期望值",
-    "ko": "+x 후 기대치"
-  },
-  "effThDelta": {
-    "ja": "増加量(+x)",
-    "en": "Delta(+x)",
-    "zh": "增加量(+x)",
-    "ko": "증가량(+x)"
-  },
-  "effThPer1": {
-    "ja": "+1あたり",
-    "en": "Per +1",
-    "zh": "每+1",
-    "ko": "+1당"
-  },
-  "effThScore": {
-    "ja": "スコア",
-    "en": "Score",
-    "zh": "评分",
-    "ko": "점수"
-  },
-  "effThRating": {
-    "ja": "評価",
-    "en": "Rating",
-    "zh": "评价",
-    "ko": "평가"
-  },
-  "effRateFire": {
-    "ja": "最優先",
-    "en": "Top Priority",
-    "zh": "最优先",
-    "ko": "최우선"
-  },
-  "effRateStar": {
-    "ja": "優先",
-    "en": "Priority",
-    "zh": "优先",
-    "ko": "우선"
-  },
-  "effRateGood": {
-    "ja": "良好",
-    "en": "Good",
-    "zh": "良好",
-    "ko": "양호"
-  },
-  "effRateLow": {
-    "ja": "低効率",
-    "en": "Low",
-    "zh": "低效",
-    "ko": "저효율"
   },
   "toastSaved": {
     "ja": "プリセット「{name}」を保存",
@@ -442,12 +184,6 @@
     "en": "Mystic arts",
     "zh": "奇术",
     "ko": "기술 (奇術)"
-  },
-  "cardGenerate": {
-    "ja": "画像を生成",
-    "en": "Generate image",
-    "zh": "生成图片",
-    "ko": "이미지 생성"
   },
   "cardSave": {
     "ja": "画像を保存",
@@ -833,12 +569,6 @@
     "zh": "返回",
     "ko": "뒤로"
   },
-  "importStep2Title": {
-    "ja": "観音 & 武庫 入力",
-    "en": "Enhance & Arsenal",
-    "zh": "观音 & 武库 输入",
-    "ko": "첩음 & 무기고 입력"
-  },
   "importConfirmMsg": {
     "ja": "現在設定されている数値がインポートデータに差し変わりますがよろしいですか？",
     "en": "Current values will be replaced by the imported data. Continue?",
@@ -1055,12 +785,6 @@
     "zh": "[Data] 未支持ID报告 (kongfu/xinfa/affix)",
     "ko": "[Data] 미지원 ID 신고 (kongfu/xinfa/affix)"
   },
-  "affixRankingTab": {
-    "ja": "調律/定音番付",
-    "en": "Tune/Attune Value",
-    "zh": "调律/定音期待值",
-    "ko": "조율/정음 기대값"
-  },
   "affixRankingTitle": {
     "ja": "調律/定音番付",
     "en": "Tune/Attune Ranking",
@@ -1145,12 +869,6 @@
     "zh": " 其余{0}项",
     "ko": " 외 {0}개"
   },
-  "gearCompareTitle": {
-    "ja": "武具対照 / COMPARISON",
-    "en": "COMPARISON",
-    "zh": "武具对照 / COMPARISON",
-    "ko": "무구대조 / COMPARISON"
-  },
   "cmpTitleJa": {
     "ja": "武具対照",
     "en": "COMPARE",
@@ -1199,29 +917,11 @@
     "zh": "武格变动",
     "ko": "무격 변동"
   },
-  "xinfaCompareTitle": {
-    "ja": "心法比較 / COMPARISON",
-    "en": "INNER WAY COMPARISON",
-    "zh": "心法对比 / COMPARISON",
-    "ko": "심법 비교 / COMPARISON"
-  },
   "xinfaTitleJa": {
     "ja": "心法対照",
     "en": "INNER WAY",
     "zh": "心法对照",
     "ko": "심법 대조"
-  },
-  "changelogTitle": {
-    "ja": "変更履歴",
-    "en": "Changelog",
-    "zh": "更新记录",
-    "ko": "변경 이력"
-  },
-  "changelogLangNotice": {
-    "ja": "※ Changelog: Japanese only / 日本語のみ / 일본어 한정",
-    "en": "※ Changelog: Japanese only / 日本語のみ / 일본어 한정",
-    "zh": "※ Changelog: Japanese only / 日本語のみ / 일본어 한정",
-    "ko": "※ Changelog: Japanese only / 日本語のみ / 일본어 한정"
   },
   "close": {
     "ja": "閉じる",
@@ -1457,41 +1157,17 @@
     "zh": "请手动复制",
     "ko": "수동으로 복사해 주세요"
   },
-  "optApplyAll": {
-    "ja": "全適用",
-    "en": "Apply All",
-    "zh": "全部应用",
-    "ko": "전체 적용"
-  },
-  "optApplyOne": {
-    "ja": "適用",
-    "en": "Apply",
-    "zh": "应用",
-    "ko": "적용"
-  },
   "optApplySelected": {
     "ja": "選択適用",
     "en": "Apply",
     "zh": "应用所选",
     "ko": "선택 적용"
   },
-  "optRecalc": {
-    "ja": "再計算",
-    "en": "Recalc",
-    "zh": "重算",
-    "ko": "재계산"
-  },
   "optTargetRatio": {
     "ja": "目標",
     "en": "Target",
     "zh": "目标",
     "ko": "목표"
-  },
-  "optSortLabel": {
-    "ja": "並び",
-    "en": "Sort",
-    "zh": "排序",
-    "ko": "정렬"
   },
   "optSortDefault": {
     "ja": "改善順",
@@ -1594,18 +1270,6 @@
     "en": "Show weak point findings",
     "zh": "显示弱点提示",
     "ko": "약점 지적 표시"
-  },
-  "railOpt": {
-    "ja": "最適",
-    "en": "OPT",
-    "zh": "最优",
-    "ko": "최적"
-  },
-  "railRank": {
-    "ja": "期待値",
-    "en": "RANK",
-    "zh": "期待值",
-    "ko": "기대값"
   },
   "railDiag": {
     "ja": "弱点",

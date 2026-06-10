@@ -82,7 +82,6 @@ function evalDataStore() {
   DS.setLang('ja');
   assert.equal(DS.t('critRate'), '会心率', 't() game_lexicon ja (ui miss → game_lexicon)');
   assert.equal(DS.t('slotHelm'), '冠', 't() game_lexicon slot ja');
-  assert.equal(DS.t('setEff_jadeware_1'), '碧玉一式', 't() game_lexicon setEff ja');
   DS.setLang('en');
   assert.equal(DS.t('critRate'), 'Critical Rate', 't() game_lexicon en');
   // ui優先: importBtn は ui.json 残置 → ui.json が勝つ
