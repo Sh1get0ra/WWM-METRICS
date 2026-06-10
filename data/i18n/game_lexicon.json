@@ -102,12 +102,6 @@
     "zh": "勁率",
     "ko": "勁率"
   },
-  "xinfa": {
-    "ja": "心法",
-    "en": "Heart Method",
-    "zh": "心法",
-    "ko": "심법"
-  },
   "importArsenalTitle": {
     "ja": "武庫 (Arsenal)",
     "en": "Arsenal",
@@ -215,12 +209,6 @@
     "en": "Sub Martial",
     "zh": "副武术",
     "ko": "부 무술"
-  },
-  "importLabelXinfa": {
-    "ja": "心法",
-    "en": "Inner Way",
-    "zh": "心法",
-    "ko": "심법"
   },
   "pvpExclusiveAffix": {
     "ja": "PvP専用定音",
