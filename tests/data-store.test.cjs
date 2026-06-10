@@ -95,6 +95,8 @@ function evalDataStore() {
   assert.equal(DS.t('maxHp'),        '気血最大値', 't() stat maxHp ja (←旧 stMaxHp)');
   assert.equal(DS.t('physDef'),      '外功防御', 't() stat physDef ja (←旧 stPhysDef)');
   assert.equal(DS.t('allWeaponDmg'), '全武学/PvP/BOSSダメ', 't() stat allWeaponDmg ja (←旧 allMartialBoost)');
+  // path 合成統合 (旧 game_lex.penVoid → pathPenVoid)
+  assert.equal(DS.t('pathPenVoid'),  '無相貫通', 't() path合成 pathPenVoid ja (←旧 penVoid)');
   // vi 退化なし (2026-06-10: stat.json に bossDmg/allWeaponDmg vi 追記)
   DS.setLang('vi');
   assert.equal(DS.t('bossDmg'),      'Tăng sát thương đối với đơn vị thủ lĩnh', 't() bossDmg vi');

@@ -83,12 +83,6 @@
     "zh": "外功附加",
     "ko": "외공 부가"
   },
-  "enemyDebuff": {
-    "ja": "デバフ（敵）",
-    "en": "Enemy Debuff",
-    "zh": "减益（敌）",
-    "ko": "디버프（적）"
-  },
   "worldLv": {
     "ja": "大世界等級（Lv）",
     "en": "Open World Level (Lv)",
@@ -100,18 +94,6 @@
     "en": "Martial Level (Lv)",
     "zh": "武学等级（Lv）",
     "ko": "무학 등급（Lv）"
-  },
-  "elemBoostMain": {
-    "ja": "属性強化（主）",
-    "en": "Elemental Enhancement (Main)",
-    "zh": "属性强化（主）",
-    "ko": "속성 강화（주）"
-  },
-  "elemBoostSub": {
-    "ja": "属性強化（副）",
-    "en": "Elemental Enhancement (Sub)",
-    "zh": "属性强化（副）",
-    "ko": "속성 강화（부）"
   },
   "judgeRes": {
     "ja": "審判耐性",
@@ -323,12 +305,6 @@
     "en": "PvP-Exclusive Engraving",
     "zh": "PvP专用定音",
     "ko": "PvP 전용 정음"
-  },
-  "penVoid": {
-    "ja": "無相貫通",
-    "en": "Void Pen",
-    "zh": "无相穿透",
-    "ko": "무상 관통"
   },
   "penPhysShort": {
     "ja": "外功",
