@@ -1,4 +1,22 @@
 {
+  "stCritHeal": {
+    "ja": "会心治癒",
+    "en": "Critical Healing",
+    "zh": "会心治疗",
+    "ko": "치명타 치유"
+  },
+  "weaponBonus": {
+    "ja": "外功ダメージ強化",
+    "en": "Outer Force DMG Boost",
+    "zh": "外功伤害加成",
+    "ko": "외공 피해 보너스"
+  },
+  "globalDmgBoost": {
+    "ja": "全ダメージ強化",
+    "en": "Total DMG Boost",
+    "zh": "全伤害强化",
+    "ko": "전체 피해 증가"
+  },
   "dmgReduce1": {
     "ja": "ダメージ軽減１",
     "en": "DMG Reduction 1",
@@ -10,12 +28,6 @@
     "en": "DMG Reduction 2",
     "zh": "伤害减免２",
     "ko": "피해 경감 2"
-  },
-  "weaponBonus": {
-    "ja": "外功ダメージ強化",
-    "en": "Outer Force DMG Boost",
-    "zh": "外功伤害加成",
-    "ko": "외공 피해 보너스"
   },
   "outerCoeff": {
     "ja": "外功係数",
@@ -35,18 +47,6 @@
     "zh": "外功附加",
     "ko": "외공 부가"
   },
-  "worldLv": {
-    "ja": "大世界等級（Lv）",
-    "en": "Open World Level (Lv)",
-    "zh": "大世界等级（Lv）",
-    "ko": "대세계 등급（Lv）"
-  },
-  "martialLv": {
-    "ja": "武術等級（Lv）",
-    "en": "Martial Level (Lv)",
-    "zh": "武学等级（Lv）",
-    "ko": "무학 등급（Lv）"
-  },
   "judgeRes": {
     "ja": "審判耐性",
     "en": "Judgment Resistance",
@@ -59,6 +59,18 @@
     "en": "Elemental Resistance",
     "zh": "属性抗性",
     "ko": "속성 저항"
+  },
+  "worldLv": {
+    "ja": "大世界等級（Lv）",
+    "en": "Open World Level (Lv)",
+    "zh": "大世界等级（Lv）",
+    "ko": "대세계 등급（Lv）"
+  },
+  "martialLv": {
+    "ja": "武術等級（Lv）",
+    "en": "Martial Level (Lv)",
+    "zh": "武学等级（Lv）",
+    "ko": "무학 등급（Lv）"
   },
   "probCrit": {
     "ja": "会心",
@@ -101,42 +113,6 @@
     "en": "勁率",
     "zh": "勁率",
     "ko": "勁率"
-  },
-  "importArsenalTitle": {
-    "ja": "武庫 (Arsenal)",
-    "en": "Arsenal",
-    "zh": "武库",
-    "ko": "무기고"
-  },
-  "importArsenalPath": {
-    "ja": "武庫種別",
-    "en": "Arsenal Type",
-    "zh": "武库种类",
-    "ko": "무기고 종류"
-  },
-  "importArsenalPeaked": {
-    "ja": "頂点",
-    "en": "Peak",
-    "zh": "顶点",
-    "ko": "정점"
-  },
-  "ocrHelpMockLv": {
-    "ja": "装備レベル",
-    "en": "Equip Lv",
-    "zh": "装备等阶",
-    "ko": "장비 레벨"
-  },
-  "ocrHelpMockAtk": {
-    "ja": "外功攻撃",
-    "en": "Phys ATK",
-    "zh": "外功攻击",
-    "ko": "외공 공격"
-  },
-  "stCritHeal": {
-    "ja": "会心治癒",
-    "en": "Critical Healing",
-    "zh": "会心治疗",
-    "ko": "치명타 치유"
   },
   "slotMain": {
     "ja": "主武器",
@@ -198,6 +174,18 @@
     "zh": "射玦",
     "ko": "활깍지"
   },
+  "pathPhys": {
+    "ja": "汎用",
+    "en": "Universal",
+    "zh": "通用",
+    "ko": "범용"
+  },
+  "penOther": {
+    "ja": "他",
+    "en": "other",
+    "zh": "其他",
+    "ko": "기타"
+  },
   "importLabelMainKf": {
     "ja": "主武術",
     "en": "Main Martial",
@@ -210,34 +198,46 @@
     "zh": "副武术",
     "ko": "부 무술"
   },
+  "importArsenalTitle": {
+    "ja": "武庫 (Arsenal)",
+    "en": "Arsenal",
+    "zh": "武库",
+    "ko": "무기고"
+  },
+  "importArsenalPath": {
+    "ja": "武庫種別",
+    "en": "Arsenal Type",
+    "zh": "武库种类",
+    "ko": "무기고 종류"
+  },
+  "importArsenalPeaked": {
+    "ja": "頂点",
+    "en": "Peak",
+    "zh": "顶点",
+    "ko": "정점"
+  },
+  "ocrHelpMockLv": {
+    "ja": "装備レベル",
+    "en": "Equip Lv",
+    "zh": "装备等阶",
+    "ko": "장비 레벨"
+  },
+  "ocrHelpMockAtk": {
+    "ja": "外功攻撃",
+    "en": "Phys ATK",
+    "zh": "外功攻击",
+    "ko": "외공 공격"
+  },
   "pvpExclusiveAffix": {
     "ja": "PvP専用定音",
     "en": "PvP-Exclusive Engraving",
     "zh": "PvP专用定音",
     "ko": "PvP 전용 정음"
   },
-  "penOther": {
-    "ja": "他",
-    "en": "other",
-    "zh": "其他",
-    "ko": "기타"
-  },
-  "pathPhys": {
-    "ja": "汎用",
-    "en": "Universal",
-    "zh": "通用",
-    "ko": "범용"
-  },
   "effectUnset": {
     "ja": "未代入",
     "en": "Unset",
     "zh": "未填",
     "ko": "미입력"
-  },
-  "globalDmgBoost": {
-    "ja": "全ダメージ強化",
-    "en": "Total DMG Boost",
-    "zh": "全伤害强化",
-    "ko": "전체 피해 증가"
   }
 }
