@@ -257,7 +257,7 @@
     setCurrentParams: (p) => { _currentParams = p; },
     curLang,
     fmt: _fmt,
-    label: _label,
+    label: _labelKey,
     detectUnknown,
     loadConfig: _loadConfig,
   };
