@@ -957,8 +957,12 @@
         const L = new Proxy({}, {
           get(_, k) {
             if (typeof k !== 'string' || !window.WWM_DS) return undefined;
+            // 1) stat.json 直引き (affinity/crit/power 等)
             const v = window.WWM_DS.name('stat', k, _lang);
-            return (v && v.indexOf('[stat:') !== 0) ? v : undefined;
+            if (v && v.indexOf('[stat:') !== 0) return v;
+            // 2) ui chain 経路 = t() (path 合成 maxBamboocut / 短縮合成 physPen 等。 helpBtn click 時 = currentLang で開く)
+            const t = window.WWM_DS.t(k);
+            return (t !== k) ? t : undefined;
           }
         });
         // mock = ゲーム装備詳細画面の再現 (2026-06-07 兄貴実スクショ準拠: 大数字/装備レベル Lv.91/
