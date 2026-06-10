@@ -211,7 +211,7 @@
     if (!d) return null;
     const entry = d[String(id)];
     if (!entry) return null;
-    return entry[lang] || entry.ja || null;
+    return entry[lang] || entry.en || entry.ja || null;
   }
 
   function _martialAffix(key, lang) {
@@ -240,9 +240,9 @@
     if (!p || !p.pathBase || !p.affix) return null;
     const base = p.pathBase[String(id)];
     if (!base) return null;
-    const b = base[lang] || base.ja;
+    const b = base[lang] || base.en || base.ja;
     if (!b) return null;
-    const suf = p.affix.atkStat?.[lang] ?? p.affix.atkStat?.ja ?? '';
+    const suf = p.affix.atkStat?.[lang] ?? p.affix.atkStat?.en ?? p.affix.atkStat?.ja ?? '';
     return b + suf;
   }
 
@@ -266,7 +266,7 @@
   function t(key) {
     for (const cat of T_CHAIN) {
       const d = data[cat];
-      if (d && d[key]) return d[key][currentLang] || d[key].ja || key;
+      if (d && d[key]) return d[key][currentLang] || d[key].en || d[key].ja || key;
     }
     return key;
   }

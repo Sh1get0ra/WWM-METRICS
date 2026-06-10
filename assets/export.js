@@ -78,7 +78,7 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
     return sec?.items?.find(i => i.key === itemKey) || null;
   }
   function _lbl(item, lang) {
-    return (item?.label && (item.label[lang] || item.label.ja)) || '';
+    return (item?.label && (item.label[lang] || item.label.en || item.label.ja)) || '';
   }
 
   // ── 表示 format helpers ───────────────────────────────────────────
@@ -229,7 +229,7 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
 
     // 総合武力 (sidebar 表示と同源 = roleInfo.xiuWeiKungFu、 必須表記 2026-06-07 兄貴指示)
     const totalMartial = ri.xiuWeiKungFu || ri.maxXiuWeiKungFu || 0;
-    const totalMartialLabel = (cfg?.header?.title && (cfg.header.title[lang] || cfg.header.title.ja)) || '総合武力';
+    const totalMartialLabel = (cfg?.header?.title && (cfg.header.title[lang] || cfg.header.title.en || cfg.header.title.ja)) || 'Total Power';
 
     const now = new Date();
     const pad = n => String(n).padStart(2, '0');

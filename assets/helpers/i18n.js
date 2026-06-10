@@ -38,7 +38,7 @@
     pickName(names, fallback = '') {
       if (!names || typeof names !== 'object') return fallback;
       const lang = (window.currentLang) || 'ja';
-      return names[lang] || names.ja || fallback;
+      return names[lang] || names.en || names.ja || fallback;
     },
 
     /**

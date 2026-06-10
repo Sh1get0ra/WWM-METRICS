@@ -485,7 +485,7 @@ function _curLangImport() {
 function _pickName(names, fallback) {
   if (!names) return fallback;
   const lang = _curLangImport();
-  return names[lang] || names.ja || names.en || fallback;
+  return names[lang] || names.en || names.ja || fallback;
 }
 function _kongfuName(id) {
   if (id === undefined || id === null || id === 0) return '—';

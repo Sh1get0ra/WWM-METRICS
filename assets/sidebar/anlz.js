@@ -21,7 +21,7 @@
   function _label(labelObj, fallback) {
     if (!labelObj) return fallback || '';
     const lang = curLang();
-    return labelObj[lang] || labelObj.ja || labelObj.en || fallback || '';
+    return labelObj[lang] || labelObj.en || labelObj.ja || fallback || '';
   }
 
   // path系 attack subItem (鋼鳴攻撃力 等) は DataStore 合成を優先源とする (json label はフォールバック)。

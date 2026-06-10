@@ -196,7 +196,7 @@ finalScore  = statusScore + 4-set bonus (4個セット発動時)</pre>
     const lang = (window.currentLang) || 'ja';
     const _itemHtml = (it) => {
       if (typeof it === 'string') return `<li>${it}</li>`;
-      const txt = it[lang] || it.ja || it.en || '';
+      const txt = it[lang] || it.en || it.ja || '';
       if (it.featured) return `<li class="wwm-note-cl-featured">${txt}</li>`;
       return `<li>${txt}</li>`;
     };
