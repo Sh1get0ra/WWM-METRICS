@@ -7,8 +7,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "飛燕再翔 突進 気力-10%、 非対人 着地後3s 移動+30%、 撃破で気血回復 (1%+1000)",
         "rawI18n": {
+          "ja": "飛燕再翔 突進 気力-10%、 非対人 着地後3s 移動+30%、 撃破で気血回復 (1%+1000)",
+          "en": "Flying Swallow Resoar: dash Stamina -10%; non-PvP: Move Speed +30% for 3s after landing; restore HP on kill (1%+1000)",
+          "zh": "飞燕再翔：突进气力-10%，非对人 落地后3秒移动+30%，击败时回复气血（1%+1000）",
+          "ko": "비연재상: 돌진 기력 -10%, 비대인 착지 후 3초 이동속도 +30%, 처치 시 기혈 회복 (1%+1000)",
           "vi": "Phi Yến tái tường: lao tới giảm thể lực -10%, phi PvP sau khi tiếp đất 3s tăng tốc độ di chuyển +30%, hồi phục sinh lực khi tiêu diệt (1% +1000)"
         }
       },
@@ -17,8 +20,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "飛燕再翔 突進 気力減 10%→20%",
         "rawI18n": {
+          "ja": "飛燕再翔 突進 気力減 10%→20%",
+          "en": "Flying Swallow Resoar: dash Stamina reduction 10%→20%",
+          "zh": "飞燕再翔：突进气力消耗减免 10%→20%",
+          "ko": "비연재상: 돌진 기력 감소 10%→20%",
           "vi": "Phi Yến tái tường: tiêu hao thể lực khi lao tới 10% → 20%"
         }
       },
@@ -27,10 +33,13 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "raw": "Max HP (Solo Mode Level scaled, rank=blue)",
         "effects": {},
         "category": "defensive",
         "rawI18n": {
+          "ja": "Max HP (Solo Mode Level scaled, rank=blue)",
+          "en": "Max HP (Solo Mode Level scaled, rank=blue)",
+          "zh": "气血最大值（单人模式 按等级缩放，rank=blue）",
+          "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=blue)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=blue)"
         }
       },
@@ -39,8 +48,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "飛燕再翔 突進速度+30%",
         "rawI18n": {
+          "ja": "飛燕再翔 突進速度+30%",
+          "en": "Flying Swallow Resoar: dash speed +30%",
+          "zh": "飞燕再翔：突进速度+30%",
+          "ko": "비연재상: 돌진 속도 +30%",
           "vi": "Phi Yến tái tường: tốc độ lao tới +30%"
         }
       },
@@ -49,17 +61,23 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "撃破時 追加回復 固定気血 max 1000→2400",
         "rawI18n": {
+          "ja": "撃破時 追加回復 固定気血 max 1000→2400",
+          "en": "On kill: bonus fixed HP restore max 1000→2400",
+          "zh": "击败时 额外回复固定气血 上限1000→2400",
+          "ko": "처치 시 추가 회복 고정 기혈 최대 1000→2400",
           "vi": "Khi tiêu diệt: hồi phục cố định sinh lực tối đa 1000 → 2400"
         }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
-        "raw": "Physical DMG Reduction +2.2%",
         "category": "defensive",
         "rawI18n": {
+          "ja": "Physical DMG Reduction +2.2%",
+          "en": "Physical DMG Reduction +2.2%",
+          "zh": "外功伤害减免 +2.2%",
+          "ko": "외공 피해 감소 +2.2%",
           "vi": "Giảm sát thương ngoại công +2.2%"
         }
       },
@@ -68,8 +86,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "飛燕再翔 突進終了後 3s 全気力消費-10% (非対人 -30%)",
         "rawI18n": {
+          "ja": "飛燕再翔 突進終了後 3s 全気力消費-10% (非対人 -30%)",
+          "en": "Flying Swallow Resoar: all Stamina costs -10% for 3s after dash ends (non-PvP -30%)",
+          "zh": "飞燕再翔：突进结束后3秒 全部气力消耗-10%（非对人-30%）",
+          "ko": "비연재상: 돌진 종료 후 3초간 모든 기력 소모 -10% (비대인 -30%)",
           "vi": "Phi Yến tái tường: 3s sau khi kết thúc lao tới, giảm tiêu hao toàn bộ thể lực -10% (phi PvP -30%)"
         }
       }
@@ -84,8 +105,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "戦闘開始12s以内 気血60%未満で 4s雪見、 毎秒気血2%+600回復 (300s CD)",
         "rawI18n": {
+          "ja": "戦闘開始12s以内 気血60%未満で 4s雪見、 毎秒気血2%+600回復 (300s CD)",
+          "en": "Within 12s of combat start, HP below 60% triggers Snowgaze for 4s: restore 2% HP +600 per sec (300s CD)",
+          "zh": "战斗开始12秒内 气血低于60%时触发雪见4秒，每秒回复气血2%+600（300秒CD）",
+          "ko": "전투 시작 12초 이내 기혈 60% 미만 시 4초간 설견 발동, 매초 기혈 2%+600 회복 (300초 CD)",
           "vi": "Trong vòng 12s đầu trận chiến, khi sinh lực dưới 60%: kích hoạt Tuyết Kiến 4s, hồi phục mỗi giây 2% sinh lực +600 (CD 300s)"
         }
       },
@@ -94,8 +118,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "回復値 毎秒3%+600 に上昇",
         "rawI18n": {
+          "ja": "回復値 毎秒3%+600 に上昇",
+          "en": "Restore increased to 3% +600 per sec",
+          "zh": "回复量提升至每秒3%+600",
+          "ko": "회복량 매초 3%+600으로 상승",
           "vi": "Lượng hồi phục mỗi giây tăng lên 3% +600"
         }
       },
@@ -104,10 +131,13 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "raw": "Max HP (Solo Mode Level scaled, rank=blue)",
         "effects": {},
         "category": "defensive",
         "rawI18n": {
+          "ja": "Max HP (Solo Mode Level scaled, rank=blue)",
+          "en": "Max HP (Solo Mode Level scaled, rank=blue)",
+          "zh": "气血最大值（单人模式 按等级缩放，rank=blue）",
+          "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=blue)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=blue)"
         }
       },
@@ -116,8 +146,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "雪見中 与ダメ10% を気血回復",
         "rawI18n": {
+          "ja": "雪見中 与ダメ10% を気血回復",
+          "en": "During Snowgaze: restore HP equal to 10% of DMG dealt",
+          "zh": "雪见期间 将造成伤害的10%转为气血回复",
+          "ko": "설견 중 주는 피해의 10%만큼 기혈 회복",
           "vi": "Trong Tuyết Kiến: hồi sinh lực bằng 10% sát thương gây ra"
         }
       },
@@ -126,17 +159,23 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "発動間隔 50%短縮 (300s→150s)",
         "rawI18n": {
+          "ja": "発動間隔 50%短縮 (300s→150s)",
+          "en": "Trigger interval -50% (300s→150s)",
+          "zh": "触发间隔缩短50%（300秒→150秒）",
+          "ko": "발동 간격 50% 단축 (300초→150초)",
           "vi": "Khoảng cách kích hoạt giảm 50% (300s → 150s)"
         }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
-        "raw": "外功耐性 +4.5",
         "category": "defensive",
         "rawI18n": {
+          "ja": "外功耐性 +4.5",
+          "en": "Physical Resistance +4.5",
+          "zh": "外功抗性 +4.5",
+          "ko": "외공 저항 +4.5",
           "vi": "Kháng ngoại công +4.5"
         }
       },
@@ -145,8 +184,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "雪見中 次2回の技 必ず会心効果獲得",
         "rawI18n": {
+          "ja": "雪見中 次2回の技 必ず会心効果獲得",
+          "en": "During Snowgaze: next 2 skills guaranteed crit effect",
+          "zh": "雪见期间 接下来2次技能必定获得会心效果",
+          "ko": "설견 중 다음 2회 스킬 반드시 치명타 효과 획득",
           "vi": "Trong Tuyết Kiến: 2 kỹ năng tiếp theo nhất định nhận hiệu quả chí mạng"
         }
       }
@@ -161,8 +203,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "攻撃被ダメ時 硬直発生減少 (首領/プレイヤー攻撃 非発動)",
         "rawI18n": {
+          "ja": "攻撃被ダメ時 硬直発生減少 (首領/プレイヤー攻撃 非発動)",
+          "en": "Reduced hitstun when taking attack DMG (not triggered by Boss/player attacks)",
+          "zh": "受到攻击伤害时 减少硬直（首领/玩家攻击不生效）",
+          "ko": "공격 피해를 받을 때 경직 발생 감소 (보스/플레이어 공격 미적용)",
           "vi": "Khi nhận sát thương: giảm phát sinh choáng (không kích hoạt với tấn công của thủ lĩnh/người chơi)"
         }
       },
@@ -171,8 +216,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "硬直耐性 周囲敵数に応じ上昇",
         "rawI18n": {
+          "ja": "硬直耐性 周囲敵数に応じ上昇",
+          "en": "Hitstun resistance increases with nearby enemy count",
+          "zh": "硬直抗性随周围敌人数量提升",
+          "ko": "경직 저항 주변 적 수에 따라 상승",
           "vi": "Kháng choáng tăng theo số địch xung quanh"
         }
       },
@@ -181,10 +229,13 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Defense",
-        "raw": "Physical Defense (Solo Mode Level scaled, rank=blue)",
         "effects": {},
         "category": "defensive",
         "rawI18n": {
+          "ja": "Physical Defense (Solo Mode Level scaled, rank=blue)",
+          "en": "Physical Defense (Solo Mode Level scaled, rank=blue)",
+          "zh": "外功防御（单人模式 按等级缩放，rank=blue）",
+          "ko": "외공 방어력 (싱글 모드 레벨 비례, rank=blue)",
           "vi": "Phòng ngự ngoại công (theo cấp ở chế độ đơn, rank=blue)"
         }
       },
@@ -193,8 +244,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "攻撃被ダメ毎 10%確率 5s 外功防御+2% max5stack",
         "rawI18n": {
+          "ja": "攻撃被ダメ毎 10%確率 5s 外功防御+2% max5stack",
+          "en": "Each attack DMG taken: 10% chance of Physical Defense +2% for 5s, max 5 stacks",
+          "zh": "每次受到攻击伤害 10%概率 5秒外功防御+2%，最多5层",
+          "ko": "공격 피해를 받을 때마다 10% 확률로 5초간 외공 방어력 +2%, 최대 5중첩",
           "vi": "Mỗi lần nhận sát thương: xác suất 10% trong 5s tăng phòng ngự ngoại công +2%, tối đa 5 stack"
         }
       },
@@ -203,17 +257,23 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "硬直耐性 ボス戦も有効化",
         "rawI18n": {
+          "ja": "硬直耐性 ボス戦も有効化",
+          "en": "Hitstun resistance also active vs Bosses",
+          "zh": "硬直抗性 对首领战也生效",
+          "ko": "경직 저항 보스전에서도 적용",
           "vi": "Kháng choáng có hiệu lực cả trong trận BOSS"
         }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
-        "raw": "外功耐性 +4.5",
         "category": "defensive",
         "rawI18n": {
+          "ja": "外功耐性 +4.5",
+          "en": "Physical Resistance +4.5",
+          "zh": "外功抗性 +4.5",
+          "ko": "외공 저항 +4.5",
           "vi": "Kháng ngoại công +4.5"
         }
       },
@@ -222,8 +282,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "烈心効果 反撃ダメ (敵気血max 0.2%相当)、 30s毎1回 5s持続",
         "rawI18n": {
+          "ja": "烈心効果 反撃ダメ (敵気血max 0.2%相当)、 30s毎1回 5s持続",
+          "en": "Fierce Heart: counter DMG (0.2% of enemy max HP), once per 30s, lasts 5s",
+          "zh": "烈心效果 反击伤害（相当于敌方气血上限0.2%），每30秒1次，持续5秒",
+          "ko": "열심 효과 반격 피해 (적 기혈 최대치 0.2% 상당), 30초마다 1회, 5초 지속",
           "vi": "Hiệu quả Liệt Tâm: sát thương phản kích (tương đương 0.2% sinh lực tối đa của địch), 30s 1 lần duy trì 5s"
         }
       }
@@ -238,8 +301,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "命門一閃 奇襲距離+1.5m / 与ダメ+10% / 奇襲成功で気血5%回復",
         "rawI18n": {
+          "ja": "命門一閃 奇襲距離+1.5m / 与ダメ+10% / 奇襲成功で気血5%回復",
+          "en": "Vital Gate Flash: ambush range +1.5m / DMG +10% / restore 5% HP on successful ambush",
+          "zh": "命门一闪：偷袭距离+1.5米 / 伤害+10% / 偷袭成功回复5%气血",
+          "ko": "명문일섬: 기습 거리 +1.5m / 피해 +10% / 기습 성공 시 기혈 5% 회복",
           "vi": "Mệnh Môn Nhất Thiểm: khoảng cách tập kích +1.5m / sát thương gây ra +10% / hồi phục 5% sinh lực khi tập kích thành công"
         }
       },
@@ -248,8 +314,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "奇襲時 回復量 5%→10% に上昇",
         "rawI18n": {
+          "ja": "奇襲時 回復量 5%→10% に上昇",
+          "en": "Ambush restore 5%→10%",
+          "zh": "偷袭时回复量 5%→10%",
+          "ko": "기습 시 회복량 5%→10% 상승",
           "vi": "Khi tập kích: lượng hồi phục tăng 5% → 10%"
         }
       },
@@ -258,12 +327,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Min Physical Attack",
-        "raw": "Min Physical Attack (Solo Mode Level scaled, rank=blue)",
         "effects": {
           "minPhysATKAdd": 51.12
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Min Physical Attack (Solo Mode Level scaled, rank=blue)",
+          "en": "Min Physical Attack (Solo Mode Level scaled, rank=blue)",
+          "zh": "最小外功攻击（单人模式 按等级缩放，rank=blue）",
+          "ko": "최소 외공 공격 (싱글 모드 레벨 비례, rank=blue)",
           "vi": "Tấn công ngoại công tối thiểu (theo cấp ở chế độ đơn, rank=blue)"
         }
       },
@@ -272,8 +344,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "奇襲成功 対象から ランダム戦利品+1 確率向上",
         "rawI18n": {
+          "ja": "奇襲成功 対象から ランダム戦利品+1 確率向上",
+          "en": "Successful ambush: higher chance of +1 random loot from target",
+          "zh": "偷袭成功 提升从目标获得随机战利品+1的概率",
+          "ko": "기습 성공 시 대상에게서 랜덤 전리품 +1 확률 상승",
           "vi": "Khi tập kích thành công: tăng xác suất nhận thêm 1 chiến lợi phẩm ngẫu nhiên từ mục tiêu"
         }
       },
@@ -282,8 +357,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "奇襲可能 最大距離 +2.5m",
         "rawI18n": {
+          "ja": "奇襲可能 最大距離 +2.5m",
+          "en": "Max ambush range +2.5m",
+          "zh": "可偷袭最大距离 +2.5米",
+          "ko": "기습 가능 최대 거리 +2.5m",
           "vi": "Khoảng cách tập kích tối đa +2.5m"
         }
       },
@@ -292,8 +370,11 @@
         "effects": {
           "physDmgBoost": 0.022
         },
-        "raw": "Physical DMG Bonus +2.2%",
         "rawI18n": {
+          "ja": "Physical DMG Bonus +2.2%",
+          "en": "Physical DMG Bonus +2.2%",
+          "zh": "外功伤害加成 +2.2%",
+          "ko": "외공 피해 보너스 +2.2%",
           "vi": "Tăng sát thương ngoại công +2.2%"
         }
       },
@@ -302,8 +383,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "奇襲成功 すぐ潜伏状態、 20s毎1回発動",
         "rawI18n": {
+          "ja": "奇襲成功 すぐ潜伏状態、 20s毎1回発動",
+          "en": "Successful ambush: immediately re-enter stealth, once per 20s",
+          "zh": "偷袭成功后立即进入潜行状态，每20秒1次",
+          "ko": "기습 성공 시 즉시 은신 상태, 20초마다 1회 발동",
           "vi": "Khi tập kích thành công: ngay lập tức vào trạng thái ẩn nấp, 20s 1 lần kích hoạt"
         }
       }
@@ -318,8 +402,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "10%確率1stack泣血、 5s持続、 1秒毎ダメ、 max5stack、 5stack時解除→刺傷ダメ1回",
         "rawI18n": {
+          "ja": "10%確率1stack泣血、 5s持続、 1秒毎ダメ、 max5stack、 5stack時解除→刺傷ダメ1回",
+          "en": "10% chance to apply 1 Weeping Blood stack (5s, DMG per sec, max 5); at 5 stacks it clears and deals one Stab DMG hit",
+          "zh": "10%概率施加1层泣血（5秒，每秒伤害，最多5层），满5层时解除并造成1次刺伤伤害",
+          "ko": "10% 확률로 읍혈 1중첩 부여 (5초 지속, 매초 피해, 최대 5중첩), 5중첩 시 해제되며 자상 피해 1회",
           "vi": "Xác suất 10% tạo 1 stack Khấp Huyết, duy trì 5s, gây sát thương mỗi giây, tối đa 5 stack, khi đạt 5 stack thì gỡ bỏ → gây 1 lần sát thương đâm"
         }
       },
@@ -328,8 +415,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "与刺傷ダメ +100%",
         "rawI18n": {
+          "ja": "与刺傷ダメ +100%",
+          "en": "Stab DMG dealt +100%",
+          "zh": "造成的刺伤伤害+100%",
+          "ko": "자상 피해 +100%",
           "vi": "Sát thương đâm gây ra +100%"
         }
       },
@@ -338,12 +428,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max Physical Attack",
-        "raw": "Max Physical Attack (Solo Mode Level scaled, rank=blue)",
         "effects": {
           "maxPhysATKAdd": 51.12
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Max Physical Attack (Solo Mode Level scaled, rank=blue)",
+          "en": "Max Physical Attack (Solo Mode Level scaled, rank=blue)",
+          "zh": "最大外功攻击（单人模式 按等级缩放，rank=blue）",
+          "ko": "최대 외공 공격 (싱글 모드 레벨 비례, rank=blue)",
           "vi": "Tấn công ngoại công tối đa (theo cấp ở chế độ đơn, rank=blue)"
         }
       },
@@ -352,8 +445,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "泣血持続終了 5stack未満でも 20%確率 すぐ刺傷ダメ1回",
         "rawI18n": {
+          "ja": "泣血持続終了 5stack未満でも 20%確率 すぐ刺傷ダメ1回",
+          "en": "When Weeping Blood expires below 5 stacks: 20% chance to immediately deal one Stab DMG",
+          "zh": "泣血持续结束时 即使不满5层也有20%概率立即造成1次刺伤伤害",
+          "ko": "읍혈 지속 종료 시 5중첩 미만이라도 20% 확률로 즉시 자상 피해 1회",
           "vi": "Khi Khấp Huyết kết thúc: dù dưới 5 stack vẫn xác suất 20% gây ngay 1 lần sát thương đâm"
         }
       },
@@ -362,8 +458,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "泣血付与確率 10%→15%",
         "rawI18n": {
+          "ja": "泣血付与確率 10%→15%",
+          "en": "Weeping Blood apply chance 10%→15%",
+          "zh": "泣血施加概率 10%→15%",
+          "ko": "읍혈 부여 확률 10%→15%",
           "vi": "Xác suất gắn Khấp Huyết 10% → 15%"
         }
       },
@@ -372,8 +471,11 @@
         "effects": {
           "critBoost": 0.035
         },
-        "raw": "Crit DMG Bonus +3.5%",
         "rawI18n": {
+          "ja": "Crit DMG Bonus +3.5%",
+          "en": "Crit DMG Bonus +3.5%",
+          "zh": "会心伤害加成 +3.5%",
+          "ko": "치명타 피해 보너스 +3.5%",
           "vi": "Tăng sát thương chí mạng +3.5%"
         }
       },
@@ -382,8 +484,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "刺傷で全泣血解除時 必ず1-2stack残存",
         "rawI18n": {
+          "ja": "刺傷で全泣血解除時 必ず1-2stack残存",
+          "en": "When Stab clears all Weeping Blood: always keep 1-2 stacks",
+          "zh": "刺伤解除全部泣血时 必定保留1-2层",
+          "ko": "자상으로 읍혈 전체 해제 시 반드시 1-2중첩 잔존",
           "vi": "Khi đâm gỡ bỏ toàn bộ Khấp Huyết: nhất định còn lại 1-2 stack"
         }
       }
@@ -398,8 +503,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "鱗舞追月 ニシキゴイ変身中 突進/跳躍 消費-50%、 形態終了で気血シールド1生成",
         "rawI18n": {
+          "ja": "鱗舞追月 ニシキゴイ変身中 突進/跳躍 消費-50%、 形態終了で気血シールド1生成",
+          "en": "Scaledance Moonchase: during koi form, dash/jump cost -50%; gain 1 HP shield when form ends",
+          "zh": "鳞舞追月：锦鲤形态中 突进/跳跃消耗-50%，形态结束时生成1个气血护盾",
+          "ko": "인무추월: 비단잉어 형태 중 돌진/도약 소모 -50%, 형태 종료 시 기혈 보호막 1 생성",
           "vi": "Lân Vũ Truy Nguyệt: trong khi hóa Cá chép, lao tới/nhảy tiêu hao -50%, khi kết thúc hình thái tạo 1 lá chắn sinh lực"
         }
       },
@@ -408,8 +516,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "ニシキゴイ形態解除時 気血max 30% 吸収シールド (最大10s、 30s毎1回)",
         "rawI18n": {
+          "ja": "ニシキゴイ形態解除時 気血max 30% 吸収シールド (最大10s、 30s毎1回)",
+          "en": "On leaving koi form: shield absorbing up to 30% max HP (max 10s, once per 30s)",
+          "zh": "锦鲤形态解除时 获得气血上限30%的吸收护盾（最长10秒，每30秒1次）",
+          "ko": "비단잉어 형태 해제 시 기혈 최대치 30% 흡수 보호막 (최대 10초, 30초마다 1회)",
           "vi": "Khi gỡ hình thái Cá chép: tạo lá chắn hấp thụ bằng 30% sinh lực tối đa (tối đa 10s, 30s 1 lần)"
         }
       },
@@ -418,10 +529,13 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Defense",
-        "raw": "Physical Defense (Solo Mode Level scaled, rank=blue)",
         "effects": {},
         "category": "defensive",
         "rawI18n": {
+          "ja": "Physical Defense (Solo Mode Level scaled, rank=blue)",
+          "en": "Physical Defense (Solo Mode Level scaled, rank=blue)",
+          "zh": "外功防御（单人模式 按等级缩放，rank=blue）",
+          "ko": "외공 방어력 (싱글 모드 레벨 비례, rank=blue)",
           "vi": "Phòng ngự ngoại công (theo cấp ở chế độ đơn, rank=blue)"
         }
       },
@@ -430,8 +544,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "ニシキゴイ形態+戦闘離脱状態で 気血/精力 持続回復、 彩砂環境同時で 回復+100%",
         "rawI18n": {
+          "ja": "ニシキゴイ形態+戦闘離脱状態で 気血/精力 持続回復、 彩砂環境同時で 回復+100%",
+          "en": "In koi form while out of combat: HP/energy regen over time; +100% regen in colored-sand areas",
+          "zh": "锦鲤形态+脱战状态下 持续回复气血/精力，处于彩砂环境时回复+100%",
+          "ko": "비단잉어 형태 + 전투 이탈 상태에서 기혈/정력 지속 회복, 채사 환경에서는 회복 +100%",
           "vi": "Trong hình thái Cá chép + thoát chiến đấu: hồi phục liên tục sinh lực/thể lực, đồng thời ở môi trường Thải Sa thì hồi phục +100%"
         }
       },
@@ -440,17 +557,23 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "ニシキゴイ形態で 突進/跳躍 持久力消費なし",
         "rawI18n": {
+          "ja": "ニシキゴイ形態で 突進/跳躍 持久力消費なし",
+          "en": "In koi form: dash/jump cost no Endurance",
+          "zh": "锦鲤形态下 突进/跳跃不消耗耐力",
+          "ko": "비단잉어 형태에서 돌진/도약 지구력 소모 없음",
           "vi": "Trong hình thái Cá chép: lao tới/nhảy không tiêu hao thể lực"
         }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
-        "raw": "外功ダメージ軽減 +2.2%",
         "category": "defensive",
         "rawI18n": {
+          "ja": "外功ダメージ軽減 +2.2%",
+          "en": "Physical DMG Reduction +2.2%",
+          "zh": "外功伤害减免 +2.2%",
+          "ko": "외공 피해 감소 +2.2%",
           "vi": "Giảm sát thương ngoại công +2.2%"
         }
       },
@@ -459,8 +582,11 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "ニシキゴイ形態 採集時 30%確率 報酬2倍 (美食採集クリと重複可)",
         "rawI18n": {
+          "ja": "ニシキゴイ形態 採集時 30%確率 報酬2倍 (美食採集クリと重複可)",
+          "en": "Gathering in koi form: 30% chance of double rewards (stacks with gourmet gathering crits)",
+          "zh": "锦鲤形态采集时 30%概率奖励翻倍（可与美食采集暴击叠加）",
+          "ko": "비단잉어 형태 채집 시 30% 확률로 보상 2배 (미식 채집 크리티컬과 중복 가능)",
           "vi": "Trong hình thái Cá chép, khi thu thập: xác suất 30% gấp đôi phần thưởng (có thể chồng với crit thu thập mỹ thực)"
         }
       }
@@ -475,8 +601,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "全ダメージ/治癒+5%、 被撃後5s 無敵化、 cage debuff +5%被ダメ/stack",
         "rawI18n": {
+          "ja": "全ダメージ/治癒+5%、 被撃後5s 無敵化、 cage debuff +5%被ダメ/stack",
+          "en": "All DMG/Healing +5%; invulnerable for 5s after being hit; cage debuff: DMG taken +5% per stack",
+          "zh": "全部伤害/治疗+5%，被击后5秒无敌，囚笼debuff 每层受到伤害+5%",
+          "ko": "모든 피해/치유 +5%, 피격 후 5초 무적, cage 디버프 중첩당 받는 피해 +5%",
           "vi": "Toàn bộ sát thương/trị liệu +5%, sau khi nhận đả kích 5s ở trạng thái bất tử, cage debuff +5% sát thương nhận vào/stack"
         }
       },
@@ -485,8 +614,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "cage debuff 5%→3%軽減 (被害減少、 攻撃計算外)",
         "rawI18n": {
+          "ja": "cage debuff 5%→3%軽減 (被害減少、 攻撃計算外)",
+          "en": "cage debuff reduced 5%→3% (less DMG taken, outside attack calc)",
+          "zh": "囚笼debuff 5%→3%（受害减少，不计入攻击计算）",
+          "ko": "cage 디버프 5%→3% 경감 (받는 피해 감소, 공격 계산 제외)",
           "vi": "cage debuff giảm 5% → 3% (giảm sát thương nhận, không tính trong tấn công)"
         }
       },
@@ -497,8 +629,11 @@
         "effects": {
           "minPhysATKAdd": 57.5
         },
-        "raw": "Min Physical Attack +57.5",
         "rawI18n": {
+          "ja": "Min Physical Attack +57.5",
+          "en": "Min Physical Attack +57.5",
+          "zh": "最小外功攻击 +57.5",
+          "ko": "최소 외공 공격 +57.5",
           "vi": "Tấn công ngoại công tối thiểu +57.5"
         }
       },
@@ -507,8 +642,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "攻撃命中後5s 無敵化 (防御系)",
         "rawI18n": {
+          "ja": "攻撃命中後5s 無敵化 (防御系)",
+          "en": "Invulnerable for 5s after landing an attack (defensive)",
+          "zh": "攻击命中后5秒无敌（防御类）",
+          "ko": "공격 적중 후 5초 무적 (방어계)",
           "vi": "Sau khi trúng đòn tấn công 5s ở trạng thái bất tử (hệ phòng ngự)"
         }
       },
@@ -517,8 +655,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "ベース 5%→8% (T0からの差分+3%、 累計0.08)",
         "rawI18n": {
+          "ja": "ベース 5%→8% (T0からの差分+3%、 累計0.08)",
+          "en": "Base 5%→8% (+3% over T0, total 0.08)",
+          "zh": "基础 5%→8%（相对T0差值+3%，累计0.08）",
+          "ko": "기본 5%→8% (T0 대비 차분 +3%, 누계 0.08)",
           "vi": "Cơ bản 5% → 8% (chênh lệch từ T0 +3%, tích lũy 0.08)"
         }
       },
@@ -527,8 +668,11 @@
         "effects": {
           "outerPenAdd": 5.1
         },
-        "raw": "Physical Penetration +5.1",
         "rawI18n": {
+          "ja": "Physical Penetration +5.1",
+          "en": "Physical Penetration +5.1",
+          "zh": "外功穿透 +5.1",
+          "ko": "외공 관통 +5.1",
           "vi": "Xuyên thấu ngoại công +5.1"
         }
       },
@@ -537,8 +681,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "marked target hit時 無敵化リセット保護",
         "rawI18n": {
+          "ja": "marked target hit時 無敵化リセット保護",
+          "en": "Hitting marked target resets invulnerability protection",
+          "zh": "命中标记目标时 重置无敌保护",
+          "ko": "표식 대상 적중 시 무적 보호 초기화",
           "vi": "Khi đánh trúng marked target: bảo vệ đặt lại trạng thái bất tử"
         }
       }
@@ -553,8 +700,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "10%確率 毒1stack付与 (5s、1秒毎ダメ)、 毒獲得で敵 外功防御-0.6%/stack max5 (-3%)",
         "rawI18n": {
+          "ja": "10%確率 毒1stack付与 (5s、1秒毎ダメ)、 毒獲得で敵 外功防御-0.6%/stack max5 (-3%)",
+          "en": "10% chance to apply 1 Poison stack (5s, DMG per sec); poisoned enemy Physical Defense -0.6% per stack, max 5 (-3%)",
+          "zh": "10%概率施加1层中毒（5秒，每秒伤害），中毒敌人外功防御每层-0.6%，最多5层（-3%）",
+          "ko": "10% 확률로 중독 1중첩 부여 (5초, 매초 피해), 중독된 적 외공 방어력 중첩당 -0.6%, 최대 5중첩 (-3%)",
           "vi": "Xác suất 10% gắn 1 stack Độc (5s, sát thương mỗi giây), khi địch nhận Độc: phòng ngự ngoại công -0.6%/stack tối đa 5 (-3%)"
         }
       },
@@ -563,8 +713,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "毒1stackあたり 外功防御減 -0.6%→-1.2%",
         "rawI18n": {
+          "ja": "毒1stackあたり 外功防御減 -0.6%→-1.2%",
+          "en": "Physical Defense reduction per Poison stack -0.6%→-1.2%",
+          "zh": "每层中毒的外功防御降低 -0.6%→-1.2%",
+          "ko": "중독 중첩당 외공 방어력 감소 -0.6%→-1.2%",
           "vi": "Mỗi 1 stack Độc: giảm phòng ngự ngoại công -0.6% → -1.2%"
         }
       },
@@ -573,12 +726,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Precision Rate",
-        "raw": "Precision Rate (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "hitRate": 0.0594
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Precision Rate (Solo Mode Level scaled, rank=purple)",
+          "en": "Precision Rate (Solo Mode Level scaled, rank=purple)",
+          "zh": "精准率（单人模式 按等级缩放，rank=purple）",
+          "ko": "정확도 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tỷ lệ trúng đích (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -587,8 +743,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "被攻撃時 10%確率 攻撃者に毒1stack付与",
         "rawI18n": {
+          "ja": "被攻撃時 10%確率 攻撃者に毒1stack付与",
+          "en": "When attacked: 10% chance to apply 1 Poison stack to attacker",
+          "zh": "被攻击时 10%概率对攻击者施加1层中毒",
+          "ko": "피격 시 10% 확률로 공격자에게 중독 1중첩 부여",
           "vi": "Khi nhận tấn công: xác suất 10% gắn 1 stack Độc cho kẻ tấn công"
         }
       },
@@ -597,8 +756,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "毒付与確率 10%→15%",
         "rawI18n": {
+          "ja": "毒付与確率 10%→15%",
+          "en": "Poison apply chance 10%→15%",
+          "zh": "中毒施加概率 10%→15%",
+          "ko": "중독 부여 확률 10%→15%",
           "vi": "Xác suất gắn Độc 10% → 15%"
         }
       },
@@ -607,8 +769,11 @@
         "effects": {
           "physDmgBoost": 0.025
         },
-        "raw": "Physical DMG Bonus +2.5%",
         "rawI18n": {
+          "ja": "Physical DMG Bonus +2.5%",
+          "en": "Physical DMG Bonus +2.5%",
+          "zh": "外功伤害加成 +2.5%",
+          "ko": "외공 피해 보너스 +2.5%",
           "vi": "Tăng sát thương ngoại công +2.5%"
         }
       },
@@ -617,8 +782,11 @@
         "effects": {
           "outerPen": 5
         },
-        "raw": "毒5stack時 追加で敵 外功耐性-10 (デバフ → 実効 外功貫通+5)",
         "rawI18n": {
+          "ja": "毒5stack時 追加で敵 外功耐性-10 (デバフ → 実効 外功貫通+5)",
+          "en": "At 5 Poison stacks: enemy Physical Resistance -10 (debuff → effectively Physical Penetration +5)",
+          "zh": "中毒满5层时 额外使敌人外功抗性-10（debuff → 实效外功穿透+5）",
+          "ko": "중독 5중첩 시 추가로 적 외공 저항 -10 (디버프 → 실효 외공 관통 +5)",
           "vi": "Khi địch có 5 stack Độc: bổ sung kháng ngoại công -10 (debuff → thực hiệu xuyên thấu ngoại công +5)"
         }
       }
@@ -633,8 +801,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "気絶とどめ技で 与ダメ8% 気血回復",
         "rawI18n": {
+          "ja": "気絶とどめ技で 与ダメ8% 気血回復",
+          "en": "Finisher on stunned target: restore HP equal to 8% of DMG dealt",
+          "zh": "对昏迷目标处决时 回复造成伤害8%的气血",
+          "ko": "기절 대상 마무리 기술 시 주는 피해의 8% 기혈 회복",
           "vi": "Khi kết liễu địch đang choáng: hồi sinh lực bằng 8% sát thương gây ra"
         }
       },
@@ -643,8 +814,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "力尽きとどめ技 回復 8%→12%",
         "rawI18n": {
+          "ja": "力尽きとどめ技 回復 8%→12%",
+          "en": "Finisher on downed target: restore 8%→12%",
+          "zh": "对力竭目标处决 回复 8%→12%",
+          "ko": "탈진 대상 마무리 기술 회복 8%→12%",
           "vi": "Khi kết liễu địch kiệt sức: hồi phục 8% → 12%"
         }
       },
@@ -653,10 +827,13 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "raw": "Max HP (Solo Mode Level scaled, rank=purple)",
         "effects": {},
         "category": "defensive",
         "rawI18n": {
+          "ja": "Max HP (Solo Mode Level scaled, rank=purple)",
+          "en": "Max HP (Solo Mode Level scaled, rank=purple)",
+          "zh": "气血最大值（单人模式 按等级缩放，rank=purple）",
+          "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -665,8 +842,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "力尽きとどめ技で 追加 真気値+10回復",
         "rawI18n": {
+          "ja": "力尽きとどめ技で 追加 真気値+10回復",
+          "en": "Finisher on downed target: additionally restore +10 Qi",
+          "zh": "对力竭目标处决时 额外回复真气+10",
+          "ko": "탈진 대상 마무리 기술 시 추가로 진기 +10 회복",
           "vi": "Khi kết liễu địch kiệt sức: hồi phục bổ sung chân khí +10"
         }
       },
@@ -675,17 +855,23 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "力尽きとどめ技 追加ダメ+5%",
         "rawI18n": {
+          "ja": "力尽きとどめ技 追加ダメ+5%",
+          "en": "Finisher on downed target: bonus DMG +5%",
+          "zh": "对力竭目标处决 额外伤害+5%",
+          "ko": "탈진 대상 마무리 기술 추가 피해 +5%",
           "vi": "Khi kết liễu địch kiệt sức: sát thương bổ sung +5%"
         }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
-        "raw": "Physical DMG Reduction +2.5%",
         "category": "defensive",
         "rawI18n": {
+          "ja": "Physical DMG Reduction +2.5%",
+          "en": "Physical DMG Reduction +2.5%",
+          "zh": "外功伤害减免 +2.5%",
+          "ko": "외공 피해 감소 +2.5%",
           "vi": "Giảm sát thương ngoại công +2.5%"
         }
       },
@@ -694,8 +880,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "力尽き対象攻撃で とどめ技以外も 与ダメ30% 気血回復",
         "rawI18n": {
+          "ja": "力尽き対象攻撃で とどめ技以外も 与ダメ30% 気血回復",
+          "en": "Attacks on downed targets (not only finishers): restore HP equal to 30% of DMG dealt",
+          "zh": "攻击力竭目标时 非处决技也回复造成伤害30%的气血",
+          "ko": "탈진 대상 공격 시 마무리 기술 외에도 주는 피해의 30% 기혈 회복",
           "vi": "Khi tấn công địch kiệt sức: ngay cả ngoài đòn kết liễu, hồi sinh lực bằng 30% sát thương gây ra"
         }
       }
@@ -712,8 +901,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "指定回復行動後 50%確率 精気1獲得 (攻撃/被撃/受け流しで精気獲得時は追加回復なし)",
         "rawI18n": {
+          "ja": "指定回復行動後 50%確率 精気1獲得 (攻撃/被撃/受け流しで精気獲得時は追加回復なし)",
+          "en": "After designated recovery actions: 50% chance to gain 1 Essence (no extra recovery when Essence gained from attack/being hit/parry)",
+          "zh": "指定回复行动后 50%概率获得1点精气（通过攻击/被击/招架获得精气时无额外回复）",
+          "ko": "지정 회복 행동 후 50% 확률로 정기 1 획득 (공격/피격/패링으로 정기 획득 시 추가 회복 없음)",
           "vi": "Sau hành động hồi phục chỉ định: xác suất 50% nhận 1 tinh khí (không hồi bổ sung khi tinh khí từ tấn công/nhận đả kích/đỡ đòn)"
         }
       },
@@ -722,8 +914,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "撃破/暗殺/ジャスト回避/矢が弱点ヒットで精気獲得時 必ず精気+1",
         "rawI18n": {
+          "ja": "撃破/暗殺/ジャスト回避/矢が弱点ヒットで精気獲得時 必ず精気+1",
+          "en": "When gaining Essence from kill/assassination/perfect dodge/arrow weak-point hit: always +1 Essence",
+          "zh": "通过击败/暗杀/完美闪避/箭矢命中弱点获得精气时 必定精气+1",
+          "ko": "처치/암살/저스트 회피/화살 약점 적중으로 정기 획득 시 반드시 정기 +1",
           "vi": "Khi nhận tinh khí từ tiêu diệt/ám sát/né hoàn hảo/cung bắn trúng yếu điểm: chắc chắn tinh khí +1"
         }
       },
@@ -732,10 +927,13 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Defense",
-        "raw": "Physical Defense (Solo Mode Level scaled, rank=purple)",
         "effects": {},
         "category": "defensive",
         "rawI18n": {
+          "ja": "Physical Defense (Solo Mode Level scaled, rank=purple)",
+          "en": "Physical Defense (Solo Mode Level scaled, rank=purple)",
+          "zh": "外功防御（单人模式 按等级缩放，rank=purple）",
+          "ko": "외공 방어력 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Phòng ngự ngoại công (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -744,8 +942,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "攻撃 or 被攻撃で精気獲得時 10%確率 追加+1",
         "rawI18n": {
+          "ja": "攻撃 or 被攻撃で精気獲得時 10%確率 追加+1",
+          "en": "When gaining Essence from attacking or being attacked: 10% chance of +1 extra",
+          "zh": "通过攻击或被攻击获得精气时 10%概率额外+1",
+          "ko": "공격 또는 피격으로 정기 획득 시 10% 확률로 추가 +1",
           "vi": "Khi nhận tinh khí từ tấn công hoặc nhận đả kích: xác suất 10% bổ sung +1"
         }
       },
@@ -754,17 +955,23 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "受け流し成功で精気獲得時 必ず追加+1",
         "rawI18n": {
+          "ja": "受け流し成功で精気獲得時 必ず追加+1",
+          "en": "When gaining Essence from successful parry: always +1 extra",
+          "zh": "招架成功获得精气时 必定额外+1",
+          "ko": "패링 성공으로 정기 획득 시 반드시 추가 +1",
           "vi": "Khi nhận tinh khí từ đỡ đòn thành công: chắc chắn bổ sung +1"
         }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
-        "raw": "外功耐性 +5.1",
         "category": "defensive",
         "rawI18n": {
+          "ja": "外功耐性 +5.1",
+          "en": "Physical Resistance +5.1",
+          "zh": "外功抗性 +5.1",
+          "ko": "외공 저항 +5.1",
           "vi": "Kháng ngoại công +5.1"
         }
       },
@@ -773,8 +980,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "奇術技発動後5秒以内 消費精気30%返還 (1回max10)",
         "rawI18n": {
+          "ja": "奇術技発動後5秒以内 消費精気30%返還 (1回max10)",
+          "en": "Within 5s after using a Mystic Art: refund 30% of Essence spent (max 10 per use)",
+          "zh": "奇术发动后5秒内 返还消耗精气的30%（每次最多10）",
+          "ko": "비결 발동 후 5초 이내 소모 정기 30% 반환 (1회 최대 10)",
           "vi": "Trong vòng 5s sau khi kích hoạt kỳ thuật: hoàn lại 30% tinh khí đã tiêu (1 lần tối đa 10)"
         }
       }
@@ -791,8 +1001,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "受け流し成功で長生バフ獲得 (導き/心/意 1択、10s、30sCD)",
         "rawI18n": {
+          "ja": "受け流し成功で長生バフ獲得 (導き/心/意 1択、10s、30sCD)",
+          "en": "Successful parry grants a Longevity buff (Guidance/Heart/Will, one of three, 10s, 30s CD)",
+          "zh": "招架成功获得长生buff（指引/心/意 三选一，10秒，30秒CD）",
+          "ko": "패링 성공 시 장생 버프 획득 (인도/심/의 중 1종, 10초, 30초 CD)",
           "vi": "Khi đỡ đòn thành công: nhận buff Trường Sinh (chọn 1: Dẫn dắt/Tâm/Ý, 10s, CD 30s)"
         }
       },
@@ -801,8 +1014,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "受け流し成功時 真気値+5追加回復 (発動間隔制限なし)",
         "rawI18n": {
+          "ja": "受け流し成功時 真気値+5追加回復 (発動間隔制限なし)",
+          "en": "On successful parry: additionally restore +5 Qi (no trigger interval limit)",
+          "zh": "招架成功时 额外回复真气+5（无触发间隔限制）",
+          "ko": "패링 성공 시 진기 +5 추가 회복 (발동 간격 제한 없음)",
           "vi": "Khi đỡ đòn thành công: hồi phục bổ sung chân khí +5 (không giới hạn khoảng cách kích hoạt)"
         }
       },
@@ -811,12 +1027,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max Physical Attack",
-        "raw": "Max Physical Attack (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "maxPhysATKAdd": 57.51
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Max Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "en": "Max Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "最大外功攻击（单人模式 按等级缩放，rank=purple）",
+          "ko": "최대 외공 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công ngoại công tối đa (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -825,8 +1044,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "受け流し成功後5秒以内 次の被ダメ-10%",
         "rawI18n": {
+          "ja": "受け流し成功後5秒以内 次の被ダメ-10%",
+          "en": "Within 5s after successful parry: next DMG taken -10%",
+          "zh": "招架成功后5秒内 下次受到伤害-10%",
+          "ko": "패링 성공 후 5초 이내 다음 받는 피해 -10%",
           "vi": "Trong vòng 5s sau khi đỡ đòn thành công: sát thương nhận vào tiếp theo -10%"
         }
       },
@@ -835,8 +1057,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "効果の発動間隔-20% (30s→24s)",
         "rawI18n": {
+          "ja": "効果の発動間隔-20% (30s→24s)",
+          "en": "Effect trigger interval -20% (30s→24s)",
+          "zh": "效果触发间隔-20%（30秒→24秒）",
+          "ko": "효과 발동 간격 -20% (30초→24초)",
           "vi": "Khoảng cách kích hoạt hiệu quả -20% (30s → 24s)"
         }
       },
@@ -845,8 +1070,11 @@
         "effects": {
           "outerPenAdd": 5.1
         },
-        "raw": "Physical Penetration +5.1",
         "rawI18n": {
+          "ja": "Physical Penetration +5.1",
+          "en": "Physical Penetration +5.1",
+          "zh": "外功穿透 +5.1",
+          "ko": "외공 관통 +5.1",
           "vi": "Xuyên thấu ngoại công +5.1"
         }
       },
@@ -855,8 +1083,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "受け流し成功後 必ず長生の導き効果 + 長生の心/意 1つ獲得 (24sCD)",
         "rawI18n": {
+          "ja": "受け流し成功後 必ず長生の導き効果 + 長生の心/意 1つ獲得 (24sCD)",
+          "en": "After successful parry: always gain Longevity Guidance + one of Longevity Heart/Will (24s CD)",
+          "zh": "招架成功后 必定获得长生指引效果 + 长生心/意 其中1种（24秒CD）",
+          "ko": "패링 성공 후 반드시 장생 인도 효과 + 장생 심/의 중 1종 획득 (24초 CD)",
           "vi": "Sau khi đỡ đòn thành công: chắc chắn nhận hiệu quả Dẫn dắt Trường Sinh + 1 trong Tâm/Ý Trường Sinh (CD 24s)"
         }
       }
@@ -873,8 +1104,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "完全回避時 50%確率 消費気力100%返還",
         "rawI18n": {
+          "ja": "完全回避時 50%確率 消費気力100%返還",
+          "en": "On perfect dodge: 50% chance to refund 100% of Stamina spent",
+          "zh": "完美闪避时 50%概率返还100%消耗气力",
+          "ko": "완벽 회피 시 50% 확률로 소모 기력 100% 반환",
           "vi": "Khi né hoàn hảo: xác suất 50% hoàn lại 100% thể lực đã tiêu"
         }
       },
@@ -883,8 +1117,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "回避消費気力返還 一定確率70%上昇",
         "rawI18n": {
+          "ja": "回避消費気力返還 一定確率70%上昇",
+          "en": "Dodge Stamina refund chance raised to 70%",
+          "zh": "闪避气力返还概率提升至70%",
+          "ko": "회피 기력 반환 확률 70%로 상승",
           "vi": "Xác suất hoàn lại thể lực khi né tăng cố định 70%"
         }
       },
@@ -893,12 +1130,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Precision Rate",
-        "raw": "Precision Rate (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "hitRate": 0.0594
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Precision Rate (Solo Mode Level scaled, rank=purple)",
+          "en": "Precision Rate (Solo Mode Level scaled, rank=purple)",
+          "zh": "精准率（单人模式 按等级缩放，rank=purple）",
+          "ko": "정확도 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tỷ lệ trúng đích (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -907,8 +1147,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "回避消費気力-20% / 回避中被ダメ-20%",
         "rawI18n": {
+          "ja": "回避消費気力-20% / 回避中被ダメ-20%",
+          "en": "Dodge Stamina cost -20% / DMG taken while dodging -20%",
+          "zh": "闪避气力消耗-20% / 闪避中受到伤害-20%",
+          "ko": "회피 기력 소모 -20% / 회피 중 받는 피해 -20%",
           "vi": "Tiêu hao thể lực khi né -20% / sát thương nhận vào khi né -20%"
         }
       },
@@ -917,17 +1160,23 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "完全回避後 最大気血0.5%追加回復",
         "rawI18n": {
+          "ja": "完全回避後 最大気血0.5%追加回復",
+          "en": "After perfect dodge: additionally restore 0.5% max HP",
+          "zh": "完美闪避后 额外回复最大气血0.5%",
+          "ko": "완벽 회피 후 최대 기혈 0.5% 추가 회복",
           "vi": "Sau khi né hoàn hảo: hồi phục bổ sung 0.5% sinh lực tối đa"
         }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
-        "raw": "Physical DMG Reduction +2.5%",
         "category": "defensive",
         "rawI18n": {
+          "ja": "Physical DMG Reduction +2.5%",
+          "en": "Physical DMG Reduction +2.5%",
+          "zh": "外功伤害减免 +2.5%",
+          "ko": "외공 피해 감소 +2.5%",
           "vi": "Giảm sát thương ngoại công +2.5%"
         }
       },
@@ -936,8 +1185,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "回避無敵時間+20%",
         "rawI18n": {
+          "ja": "回避無敵時間+20%",
+          "en": "Dodge invulnerability window +20%",
+          "zh": "闪避无敌时间+20%",
+          "ko": "회피 무적 시간 +20%",
           "vi": "Thời gian bất tử khi né +20%"
         }
       }
@@ -954,8 +1206,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "帰義効果 与直接ダメ+3% + 敵気血20%減毎+0.5% max+2%",
         "rawI18n": {
+          "ja": "帰義効果 与直接ダメ+3% + 敵気血20%減毎+0.5% max+2%",
+          "en": "Allegiance: direct DMG dealt +3%, plus +0.5% per 20% enemy HP lost, max +2%",
+          "zh": "归义效果 造成直接伤害+3%，敌方气血每减少20%再+0.5%，最多+2%",
+          "ko": "귀의 효과 주는 직접 피해 +3%, 적 기혈 20% 감소마다 +0.5%, 최대 +2%",
           "vi": "Hiệu quả Quy Nghĩa: sát thương trực tiếp gây ra +3% + mỗi 20% sinh lực địch giảm thêm +0.5% tối đa +2%"
         }
       },
@@ -964,8 +1219,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "鏖戦効果 被直接ダメ-3%/与回復+3% + 自気血20%減毎+0.5% max+2%",
         "rawI18n": {
+          "ja": "鏖戦効果 被直接ダメ-3%/与回復+3% + 自気血20%減毎+0.5% max+2%",
+          "en": "Carnage: direct DMG taken -3% / healing dealt +3%, plus +0.5% per 20% own HP lost, max +2%",
+          "zh": "鏖战效果 受到直接伤害-3%/给予回复+3%，自身气血每减少20%再+0.5%，最多+2%",
+          "ko": "혈전 효과 받는 직접 피해 -3% / 주는 회복 +3%, 자신 기혈 20% 감소마다 +0.5%, 최대 +2%",
           "vi": "Hiệu quả Ao Chiến: sát thương trực tiếp nhận vào -3%/hồi phục gây ra +3% + mỗi 20% sinh lực bản thân giảm thêm +0.5% tối đa +2%"
         }
       },
@@ -974,13 +1232,16 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Attack",
-        "raw": "Physical Attack (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "minPhysATKAdd": 19.17,
           "maxPhysATKAdd": 38.25
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "en": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "外功攻击（单人模式 按等级缩放，rank=purple）",
+          "ko": "외공 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công ngoại công (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -989,8 +1250,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "帰義/鏖戦 気血欠損加算刻み 20%→15% (max上昇は不変)",
         "rawI18n": {
+          "ja": "帰義/鏖戦 気血欠損加算刻み 20%→15% (max上昇は不変)",
+          "en": "Allegiance/Carnage HP-loss increments 20%→15% (max bonus unchanged)",
+          "zh": "归义/鏖战 气血缺损加成刻度 20%→15%（上限不变）",
+          "ko": "귀의/혈전 기혈 결손 가산 단위 20%→15% (최대치 불변)",
           "vi": "Quy Nghĩa/Ao Chiến: bước cộng thiếu hụt sinh lực 20% → 15% (giới hạn tối đa không đổi)"
         }
       },
@@ -999,8 +1263,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "明/晦 各5層 (5s) — 明1層で帰義+10% max50%、晦1層で鏖戦+10% max50%",
         "rawI18n": {
+          "ja": "明/晦 各5層 (5s) — 明1層で帰義+10% max50%、晦1層で鏖戦+10% max50%",
+          "en": "Light/Dark, 5 stacks each (5s) — each Light stack: Allegiance +10%, max 50%; each Dark stack: Carnage +10%, max 50%",
+          "zh": "明/晦 各5层（5秒）— 每层明 归义+10% 最多50%，每层晦 鏖战+10% 最多50%",
+          "ko": "명/회 각 5중첩 (5초) — 명 1중첩당 귀의 +10% 최대 50%, 회 1중첩당 혈전 +10% 최대 50%",
           "vi": "Minh/Hối mỗi loại 5 tầng (5s) — mỗi 1 tầng Minh tăng Quy Nghĩa +10% tối đa 50%, mỗi 1 tầng Hối tăng Ao Chiến +10% tối đa 50%"
         }
       },
@@ -1009,8 +1276,11 @@
         "effects": {
           "outerPenAdd": 5.1
         },
-        "raw": "外功貫通 +5.1",
         "rawI18n": {
+          "ja": "外功貫通 +5.1",
+          "en": "Physical Penetration +5.1",
+          "zh": "外功穿透 +5.1",
+          "ko": "외공 관통 +5.1",
           "vi": "Xuyên thấu ngoại công +5.1"
         }
       },
@@ -1019,8 +1289,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "明/晦廃止、帰義 +3→+5%/敵気血15%減毎+1% max+4%、鏖戦 -3→-5%/+3→+5%/自気血15%減毎+1% max+4%",
         "rawI18n": {
+          "ja": "明/晦廃止、帰義 +3→+5%/敵気血15%減毎+1% max+4%、鏖戦 -3→-5%/+3→+5%/自気血15%減毎+1% max+4%",
+          "en": "Light/Dark removed; Allegiance +3→+5%, +1% per 15% enemy HP lost max +4%; Carnage -3→-5% / +3→+5%, +1% per 15% own HP lost max +4%",
+          "zh": "废除明/晦，归义 +3→+5%，敌方气血每减15%+1% 最多+4%；鏖战 -3→-5%/+3→+5%，自身气血每减15%+1% 最多+4%",
+          "ko": "명/회 폐지, 귀의 +3→+5%, 적 기혈 15% 감소마다 +1% 최대 +4%; 혈전 -3→-5% / +3→+5%, 자신 기혈 15% 감소마다 +1% 최대 +4%",
           "vi": "Bỏ Minh/Hối, Quy Nghĩa +3 → +5% / mỗi 15% sinh lực địch giảm +1% tối đa +4%, Ao Chiến -3 → -5%/+3 → +5%/mỗi 15% sinh lực bản thân giảm +1% tối đa +4%"
         }
       }
@@ -1037,8 +1310,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "気血<30%で警戒発動 — 気血20%回復 + 10s 被ダメ-20% (120sCD max1回)",
         "rawI18n": {
+          "ja": "気血<30%で警戒発動 — 気血20%回復 + 10s 被ダメ-20% (120sCD max1回)",
+          "en": "Below 30% HP triggers Vigilance — restore 20% HP + DMG taken -20% for 10s (120s CD, max 1)",
+          "zh": "气血低于30%时触发惕心 — 回复20%气血 + 10秒受到伤害-20%（120秒CD 最多1次）",
+          "ko": "기혈 30% 미만 시 척심 발동 — 기혈 20% 회복 + 10초간 받는 피해 -20% (120초 CD 최대 1회)",
           "vi": "Khi sinh lực <30%: kích hoạt Cảnh Giác — hồi 20% sinh lực + 10s sát thương nhận vào -20% (CD 120s, tối đa 1 lần)"
         }
       },
@@ -1047,8 +1323,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "惕心発動間隔 120s→90s短縮",
         "rawI18n": {
+          "ja": "惕心発動間隔 120s→90s短縮",
+          "en": "Vigilance trigger interval 120s→90s",
+          "zh": "惕心触发间隔 120秒→90秒",
+          "ko": "척심 발동 간격 120초→90초 단축",
           "vi": "Khoảng cách kích hoạt Dịch Tâm: 120s → 90s rút ngắn"
         }
       },
@@ -1057,10 +1336,13 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "raw": "Max HP (Solo Mode Level scaled, rank=purple)",
         "effects": {},
         "category": "defensive",
         "rawI18n": {
+          "ja": "Max HP (Solo Mode Level scaled, rank=purple)",
+          "en": "Max HP (Solo Mode Level scaled, rank=purple)",
+          "zh": "气血最大值（单人模式 按等级缩放，rank=purple）",
+          "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -1069,8 +1351,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "惕心中 与/被ダメで気血2%回復 (1s毎max1回)",
         "rawI18n": {
+          "ja": "惕心中 与/被ダメで気血2%回復 (1s毎max1回)",
+          "en": "During Vigilance: restore 2% HP when dealing/taking DMG (max once per 1s)",
+          "zh": "惕心期间 造成/受到伤害时回复2%气血（每秒最多1次）",
+          "ko": "척심 중 피해를 주거나 받을 때 기혈 2% 회복 (1초당 최대 1회)",
           "vi": "Trong Dịch Tâm: khi gây/nhận sát thương hồi 2% sinh lực (mỗi 1s tối đa 1 lần)"
         }
       },
@@ -1079,17 +1364,23 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "惕心中 被ダメで攻撃者に齟刺ダメ (1s毎max1回) + 詰問付与 (相手与ダメ-1.5%、5s、max5stack)",
         "rawI18n": {
+          "ja": "惕心中 被ダメで攻撃者に齟刺ダメ (1s毎max1回) + 詰問付与 (相手与ダメ-1.5%、5s、max5stack)",
+          "en": "During Vigilance: taking DMG deals Thorn DMG to attacker (max once per 1s) and applies Interrogate (their DMG dealt -1.5%, 5s, max 5 stacks)",
+          "zh": "惕心期间 受到伤害时对攻击者造成龃刺伤害（每秒最多1次）并施加诘问（其造成伤害-1.5%，5秒，最多5层）",
+          "ko": "척심 중 피해를 받으면 공격자에게 가시 피해 (1초당 최대 1회) + 힐문 부여 (상대 주는 피해 -1.5%, 5초, 최대 5중첩)",
           "vi": "Trong Dịch Tâm: khi nhận sát thương gây sát thương Trở Thích cho kẻ tấn công (mỗi 1s tối đa 1 lần) + gắn Cật Vấn (sát thương gây ra của đối phương -1.5%, 5s, tối đa 5 stack)"
         }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
-        "raw": "外功ダメージ軽減 +2.5%",
         "category": "defensive",
         "rawI18n": {
+          "ja": "外功ダメージ軽減 +2.5%",
+          "en": "Physical DMG Reduction +2.5%",
+          "zh": "外功伤害减免 +2.5%",
+          "ko": "외공 피해 감소 +2.5%",
           "vi": "Giảm sát thương ngoại công +2.5%"
         }
       },
@@ -1098,8 +1389,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "詰問被ダメ軽減 1.5%→3% + 惕心中 与ダメでも齟刺/詰問発動 (発動間隔不変)",
         "rawI18n": {
+          "ja": "詰問被ダメ軽減 1.5%→3% + 惕心中 与ダメでも齟刺/詰問発動 (発動間隔不変)",
+          "en": "Interrogate DMG reduction 1.5%→3%; during Vigilance, dealing DMG also triggers Thorn/Interrogate (interval unchanged)",
+          "zh": "诘问减伤 1.5%→3%，惕心期间 造成伤害也可触发龃刺/诘问（触发间隔不变）",
+          "ko": "힐문 피해 경감 1.5%→3%, 척심 중 피해를 줄 때도 가시/힐문 발동 (발동 간격 불변)",
           "vi": "Cật Vấn giảm sát thương nhận 1.5% → 3% + trong Dịch Tâm khi gây sát thương cũng kích hoạt Trở Thích/Cật Vấn (khoảng cách kích hoạt không đổi)"
         }
       }
@@ -1114,8 +1408,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "与ダメ/治癒+1%/stack × max5stack = +5% (常時発動仮定)",
         "rawI18n": {
+          "ja": "与ダメ/治癒+1%/stack × max5stack = +5% (常時発動仮定)",
+          "en": "DMG/Healing dealt +1% per stack × max 5 stacks = +5% (assumed always active)",
+          "zh": "造成伤害/治疗 每层+1% × 最多5层 = +5%（按常驻计）",
+          "ko": "주는 피해/치유 중첩당 +1% × 최대 5중첩 = +5% (상시 발동 가정)",
           "vi": "Sát thương gây ra/trị liệu +1%/stack × tối đa 5 stack = +5% (giả định kích hoạt thường trực)"
         }
       },
@@ -1124,8 +1421,11 @@
         "effects": {
           "outerPen": 10
         },
-        "raw": "外功貫通+2/stack × max5stack = +10",
         "rawI18n": {
+          "ja": "外功貫通+2/stack × max5stack = +10",
+          "en": "Physical Penetration +2 per stack × max 5 stacks = +10",
+          "zh": "外功穿透 每层+2 × 最多5层 = +10",
+          "ko": "외공 관통 중첩당 +2 × 최대 5중첩 = +10",
           "vi": "Xuyên thấu ngoại công +2/stack × tối đa 5 stack = +10"
         }
       },
@@ -1137,8 +1437,11 @@
           "minPhysATKAdd": 21.3,
           "maxPhysATKAdd": 42.5
         },
-        "raw": "Physical Attack +21.3 ~ +42.5",
         "rawI18n": {
+          "ja": "Physical Attack +21.3 ~ +42.5",
+          "en": "Physical Attack +21.3 ~ +42.5",
+          "zh": "外功攻击 +21.3 ~ +42.5",
+          "ko": "외공 공격 +21.3 ~ +42.5",
           "vi": "Tấn công ngoại công +21.3 ~ +42.5"
         }
       },
@@ -1147,8 +1450,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "衰弱中 与ダメ倍 (条件発動、常時想定不可)",
         "rawI18n": {
+          "ja": "衰弱中 与ダメ倍 (条件発動、常時想定不可)",
+          "en": "Double DMG vs Weakened targets (conditional, cannot assume always active)",
+          "zh": "对衰弱目标伤害翻倍（条件触发，不可按常驻计）",
+          "ko": "쇠약 대상 피해 2배 (조건 발동, 상시 가정 불가)",
           "vi": "Trong Suy Yếu: nhân đôi sát thương gây ra (kích hoạt theo điều kiện, không thể giả định thường trực)"
         }
       },
@@ -1157,8 +1463,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "確率100%+12s持続 (max stack維持安定化)",
         "rawI18n": {
+          "ja": "確率100%+12s持続 (max stack維持安定化)",
+          "en": "100% chance + 12s duration (stabilizes max-stack uptime)",
+          "zh": "概率100% + 持续12秒（稳定维持满层）",
+          "ko": "확률 100% + 12초 지속 (최대 중첩 유지 안정화)",
           "vi": "Xác suất 100% + duy trì 12s (ổn định hóa duy trì tối đa stack)"
         }
       },
@@ -1167,8 +1476,11 @@
         "effects": {
           "addCritRate": 0.046
         },
-        "raw": "Direct Critical Rate +4.6%",
         "rawI18n": {
+          "ja": "Direct Critical Rate +4.6%",
+          "en": "Direct Critical Rate +4.6%",
+          "zh": "直接会心率 +4.6%",
+          "ko": "추가 치명타 확률 +4.6%",
           "vi": "Tỷ lệ chí mạng trực tiếp +4.6%"
         }
       },
@@ -1177,8 +1489,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "max stack時 ボーナスダメ発動 (衰弱時2回、CD 10s)",
         "rawI18n": {
+          "ja": "max stack時 ボーナスダメ発動 (衰弱時2回、CD 10s)",
+          "en": "At max stacks: bonus DMG triggers (twice vs Weakened, 10s CD)",
+          "zh": "满层时触发额外伤害（衰弱时2次，CD 10秒）",
+          "ko": "최대 중첩 시 보너스 피해 발동 (쇠약 시 2회, CD 10초)",
           "vi": "Khi đạt max stack: kích hoạt sát thương thưởng (trong Suy Yếu thêm 2 lần, CD 10s)"
         }
       }
@@ -1193,8 +1508,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武変技後 春/夏/秋/冬 1効果ランダム獲得 (10s持続、 30s CD)",
         "rawI18n": {
+          "ja": "武変技後 春/夏/秋/冬 1効果ランダム獲得 (10s持続、 30s CD)",
+          "en": "After Martial Change skill: randomly gain one of Spring/Summer/Autumn/Winter effects (10s, 30s CD)",
+          "zh": "武变技后 随机获得春/夏/秋/冬其中1种效果（持续10秒，30秒CD）",
+          "ko": "무변기 사용 후 봄/여름/가을/겨울 중 1종 효과 랜덤 획득 (10초 지속, 30초 CD)",
           "vi": "Sau Vũ Biến Kỹ: ngẫu nhiên nhận 1 trong 4 hiệu quả Xuân/Hạ/Thu/Đông (duy trì 10s, CD 30s)"
         }
       },
@@ -1203,8 +1521,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "ステ上昇効果 持続時間 10s→12s",
         "rawI18n": {
+          "ja": "ステ上昇効果 持続時間 10s→12s",
+          "en": "Stat-up effect duration 10s→12s",
+          "zh": "属性提升效果持续时间 10秒→12秒",
+          "ko": "스탯 상승 효과 지속시간 10초→12초",
           "vi": "Thời gian duy trì hiệu quả tăng chỉ số: 10s → 12s"
         }
       },
@@ -1213,13 +1534,16 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Attack",
-        "raw": "Physical Attack (Solo Mode Level scaled, rank=gold)",
         "effects": {
           "minPhysATKAdd": 21.3,
           "maxPhysATKAdd": 42.5
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Physical Attack (Solo Mode Level scaled, rank=gold)",
+          "en": "Physical Attack (Solo Mode Level scaled, rank=gold)",
+          "zh": "外功攻击（单人模式 按等级缩放，rank=gold）",
+          "ko": "외공 공격 (싱글 모드 레벨 비례, rank=gold)",
           "vi": "Tấn công ngoại công (theo cấp ở chế độ đơn, rank=gold)"
         }
       },
@@ -1228,8 +1552,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "30%確率 効果2個ランダム獲得",
         "rawI18n": {
+          "ja": "30%確率 効果2個ランダム獲得",
+          "en": "30% chance to gain 2 random effects",
+          "zh": "30%概率随机获得2种效果",
+          "ko": "30% 확률로 효과 2종 랜덤 획득",
           "vi": "Xác suất 30%: ngẫu nhiên nhận 2 hiệu quả"
         }
       },
@@ -1238,8 +1565,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武変技ダメ/回復成功時もランダム発動、 春/冬確率大幅減",
         "rawI18n": {
+          "ja": "武変技ダメ/回復成功時もランダム発動、 春/冬確率大幅減",
+          "en": "Also triggers on Martial Change skill DMG/heal; Spring/Winter chance greatly reduced",
+          "zh": "武变技造成伤害/回复成功时也可随机触发，春/冬概率大幅降低",
+          "ko": "무변기 피해/회복 성공 시에도 랜덤 발동, 봄/겨울 확률 대폭 감소",
           "vi": "Khi Vũ Biến Kỹ gây sát thương/trị liệu thành công cũng kích hoạt ngẫu nhiên, xác suất Xuân/Đông giảm mạnh"
         }
       },
@@ -1248,8 +1578,11 @@
         "effects": {
           "physDmgBoost": 0.028
         },
-        "raw": "Physical Damage Bonus +2.8%",
         "rawI18n": {
+          "ja": "Physical Damage Bonus +2.8%",
+          "en": "Physical Damage Bonus +2.8%",
+          "zh": "外功伤害加成 +2.8%",
+          "ko": "외공 피해 보너스 +2.8%",
           "vi": "Tăng sát thương ngoại công +2.8%"
         }
       },
@@ -1258,8 +1591,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "15%確率 3個獲得、 5%確率 4個全部獲得 (5m未満 冬非獲得)",
         "rawI18n": {
+          "ja": "15%確率 3個獲得、 5%確率 4個全部獲得 (5m未満 冬非獲得)",
+          "en": "15% chance of 3 effects, 5% chance of all 4 (no Winter within 5m)",
+          "zh": "15%概率获得3种，5%概率获得全部4种（5米内不获得冬）",
+          "ko": "15% 확률로 3종, 5% 확률로 4종 전부 획득 (5m 미만 겨울 미획득)",
           "vi": "Xác suất 15% nhận 3 hiệu quả, 5% nhận toàn bộ 4 hiệu quả (dưới 5m không nhận Đông)"
         }
       }
@@ -1279,8 +1615,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "乾坤定使用中 長風効果持続10s、気力消費-20% (疾走/溜め技 さらに-10%)",
         "rawI18n": {
+          "ja": "乾坤定使用中 長風効果持続10s、気力消費-20% (疾走/溜め技 さらに-10%)",
+          "en": "While using Qiankun Stance: Long Wind effect for 10s, Stamina cost -20% (sprint/Charged skills further -10%)",
+          "zh": "乾坤定使用中 长风效果持续10秒，气力消耗-20%（疾跑/蓄力技再-10%）",
+          "ko": "건곤정 사용 중 장풍 효과 10초 지속, 기력 소모 -20% (질주/차지 스킬 추가 -10%)",
           "vi": "Trong khi dùng Càn Khôn Định: duy trì hiệu quả Trường Phong 10s, tiêu hao thể lực -20% (chạy/kỹ năng tích lực thêm -10%)"
         }
       },
@@ -1292,8 +1631,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "鋼鳴/虹流儀武術技 首領命中で真気不均衡付与可能",
         "rawI18n": {
+          "ja": "鋼鳴/虹流儀武術技 首領命中で真気不均衡付与可能",
+          "en": "Bellstrike/Rainbow Flow martial skills can apply Qi Imbalance on Boss hit",
+          "zh": "鸣金/虹流仪武学技 命中首领时可施加真气失衡",
+          "ko": "명금/홍류의 무술 스킬 보스 적중 시 진기 불균형 부여 가능",
           "vi": "Kỹ năng võ học Minh Kim/Hồng Lưu: có thể gắn Chân Khí Bất Quân khi trúng thủ lĩnh"
         }
       },
@@ -1302,7 +1644,6 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Bellstrike Attack",
-        "raw": "Bellstrike Attack (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "minBellstrike": 10.9,
           "maxBellstrike": 21.7
@@ -1313,6 +1654,10 @@
         "maxPathATK": 21.7,
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Bellstrike Attack (Solo Mode Level scaled, rank=purple)",
+          "en": "Bellstrike Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "鸣金攻击（单人模式 按等级缩放，rank=purple）",
+          "ko": "명금 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công Minh Kim (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -1324,8 +1669,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "乾坤定 気力回復+100% (回復値60)",
         "rawI18n": {
+          "ja": "乾坤定 気力回復+100% (回復値60)",
+          "en": "Qiankun Stance: Stamina regen +100% (restore 60)",
+          "zh": "乾坤定 气力回复+100%（回复值60）",
+          "ko": "건곤정 기력 회복 +100% (회복량 60)",
           "vi": "Càn Khôn Định: hồi thể lực +100% (lượng hồi 60)"
         }
       },
@@ -1337,8 +1685,11 @@
         "effects": {
           "addSympathyRate": 0.03
         },
-        "raw": "長風中 付加会意率+1.5% (対首領 追加+1.5%、合計+3%採用)",
         "rawI18n": {
+          "ja": "長風中 付加会意率+1.5% (対首領 追加+1.5%、合計+3%採用)",
+          "en": "During Long Wind: Direct Affinity Rate +1.5% (vs Boss extra +1.5%, total +3% adopted)",
+          "zh": "长风期间 直接会意率+1.5%（对首领额外+1.5%，按合计+3%采用）",
+          "ko": "장풍 중 추가 각성 확률 +1.5% (보스 대상 추가 +1.5%, 합계 +3% 채용)",
           "vi": "Trong Trường Phong: tỷ lệ hiểu ý cộng thêm +1.5% (đối với thủ lĩnh bổ sung +1.5%, dùng tổng +3%)"
         }
       },
@@ -1347,10 +1698,13 @@
         "effects": {
           "bellstrikePen": 6
         },
-        "raw": "Bellstrike Penetration +6",
         "weaponSpecific": "bellstrike",
         "pendingImplementation": true,
         "rawI18n": {
+          "ja": "Bellstrike Penetration +6",
+          "en": "Bellstrike Penetration +6",
+          "zh": "鸣金穿透 +6",
+          "ko": "명금 관통 +6",
           "vi": "Xuyên thấu Minh Kim +6"
         }
       },
@@ -1362,8 +1716,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "非首領命中で山移付与(12s)、溜め技が山移/真気不均衡対象に命中で気力4or8回復 (2s毎max1)",
         "rawI18n": {
+          "ja": "非首領命中で山移付与(12s)、溜め技が山移/真気不均衡対象に命中で気力4or8回復 (2s毎max1)",
+          "en": "Non-Boss hits apply Mountain Shift (12s); Charged skills hitting Mountain Shift/Qi Imbalance targets restore 4 or 8 Stamina (max once per 2s)",
+          "zh": "命中非首领时施加山移（12秒），蓄力技命中山移/真气失衡目标时回复气力4或8（每2秒最多1次）",
+          "ko": "비보스 적중 시 산이 부여 (12초), 차지 스킬이 산이/진기 불균형 대상 적중 시 기력 4 또는 8 회복 (2초당 최대 1회)",
           "vi": "Khi trúng phi thủ lĩnh: gắn Sơn Di (12s), kỹ năng tích lực trúng mục tiêu Sơn Di/Chân Khí Bất Quân hồi thể lực 4 hoặc 8 (mỗi 2s tối đa 1)"
         }
       }
@@ -1380,8 +1737,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "気力消費時 3.5%返還",
         "rawI18n": {
+          "ja": "気力消費時 3.5%返還",
+          "en": "Refund 3.5% of Stamina spent",
+          "zh": "消耗气力时 返还3.5%",
+          "ko": "기력 소모 시 3.5% 반환",
           "vi": "Khi tiêu hao thể lực: hoàn lại 3.5%"
         }
       },
@@ -1390,8 +1750,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "気力消費返還 3.5%→5.0%",
         "rawI18n": {
+          "ja": "気力消費返還 3.5%→5.0%",
+          "en": "Stamina refund 3.5%→5.0%",
+          "zh": "气力消耗返还 3.5%→5.0%",
+          "ko": "기력 소모 반환 3.5%→5.0%",
           "vi": "Hoàn lại thể lực 3.5% → 5.0%"
         }
       },
@@ -1400,13 +1763,16 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Attack",
-        "raw": "Physical Attack (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "minPhysATKAdd": 19.17,
           "maxPhysATKAdd": 38.25
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "en": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "外功攻击（单人模式 按等级缩放，rank=purple）",
+          "ko": "외공 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công ngoại công (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -1415,8 +1781,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "気力合計消費50で即10返還 (30sCD)",
         "rawI18n": {
+          "ja": "気力合計消費50で即10返還 (30sCD)",
+          "en": "After 50 total Stamina spent: instantly refund 10 (30s CD)",
+          "zh": "累计消耗50气力时 立即返还10（30秒CD）",
+          "ko": "기력 누계 50 소모 시 즉시 10 반환 (30초 CD)",
           "vi": "Khi tổng tiêu hao thể lực đạt 50: hoàn ngay 10 (CD 30s)"
         }
       },
@@ -1425,8 +1794,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "気力消費返還 5.0%→7.0%",
         "rawI18n": {
+          "ja": "気力消費返還 5.0%→7.0%",
+          "en": "Stamina refund 5.0%→7.0%",
+          "zh": "气力消耗返还 5.0%→7.0%",
+          "ko": "기력 소모 반환 5.0%→7.0%",
           "vi": "Hoàn lại thể lực 5.0% → 7.0%"
         }
       },
@@ -1435,8 +1807,11 @@
         "effects": {
           "physDmgBoost": 0.025
         },
-        "raw": "Physical DMG Bonus +2.5%",
         "rawI18n": {
+          "ja": "Physical DMG Bonus +2.5%",
+          "en": "Physical DMG Bonus +2.5%",
+          "zh": "外功伤害加成 +2.5%",
+          "ko": "외공 피해 보너스 +2.5%",
           "vi": "Tăng sát thương ngoại công +2.5%"
         }
       },
@@ -1445,8 +1820,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "気力変動>10で星火1stack獲得 (10s 気力回復速度+1%、max10stack)",
         "rawI18n": {
+          "ja": "気力変動>10で星火1stack獲得 (10s 気力回復速度+1%、max10stack)",
+          "en": "Stamina change >10 grants 1 Spark stack (Stamina regen +1% for 10s, max 10 stacks)",
+          "zh": "气力变动>10时获得1层星火（10秒 气力回复速度+1%，最多10层）",
+          "ko": "기력 변동 >10 시 성화 1중첩 획득 (10초간 기력 회복 속도 +1%, 최대 10중첩)",
           "vi": "Khi biến động thể lực >10: nhận 1 stack Tinh Hỏa (10s tốc độ hồi thể lực +1%, tối đa 10 stack)"
         }
       }
@@ -1467,13 +1845,16 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "溜め技 対全Boss 与ダメ+10%",
         "kongfuRequired": [
           10102,
           20401,
           20402
         ],
         "rawI18n": {
+          "ja": "溜め技 対全Boss 与ダメ+10%",
+          "en": "Charged skills: DMG +10% vs all Bosses",
+          "zh": "蓄力技 对全部首领伤害+10%",
+          "ko": "차지 스킬 모든 보스 대상 피해 +10%",
           "vi": "Kỹ năng tích lực: sát thương gây ra cho toàn Boss +10%"
         }
       },
@@ -1482,13 +1863,16 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "溜め技 全敵 (気力<60%プレイヤー含) 与ダメ+10%",
         "kongfuRequired": [
           10102,
           20401,
           20402
         ],
         "rawI18n": {
+          "ja": "溜め技 全敵 (気力<60%プレイヤー含) 与ダメ+10%",
+          "en": "Charged skills: DMG +10% vs all enemies (incl. players below 60% Stamina)",
+          "zh": "蓄力技 对全部敌人（含气力<60%的玩家）伤害+10%",
+          "ko": "차지 스킬 모든 적 (기력 60% 미만 플레이어 포함) 피해 +10%",
           "vi": "Kỹ năng tích lực: sát thương gây ra cho toàn địch (bao gồm người chơi dưới 60% thể lực) +10%"
         }
       },
@@ -1497,12 +1881,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Affinity Rate",
-        "raw": "Affinity Rate (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "sympathyRate": 0.0324
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Affinity Rate (Solo Mode Level scaled, rank=purple)",
+          "en": "Affinity Rate (Solo Mode Level scaled, rank=purple)",
+          "zh": "会意率（单人模式 按等级缩放，rank=purple）",
+          "ko": "각성 확률 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tỷ lệ hiểu ý (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -1511,13 +1898,16 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "溜め技 会心/会意時 vs プレイヤー気力-10 / vs 首領 自気力+10 (12sCD)",
         "kongfuRequired": [
           10102,
           20401,
           20402
         ],
         "rawI18n": {
+          "ja": "溜め技 会心/会意時 vs プレイヤー気力-10 / vs 首領 自気力+10 (12sCD)",
+          "en": "Charged skill crit/affinity: vs player their Stamina -10 / vs Boss own Stamina +10 (12s CD)",
+          "zh": "蓄力技会心/会意时 对玩家其气力-10 / 对首领自身气力+10（12秒CD）",
+          "ko": "차지 스킬 치명타/각성 시 vs 플레이어 기력 -10 / vs 보스 자신 기력 +10 (12초 CD)",
           "vi": "Kỹ năng tích lực khi chí mạng/hiểu ý: với người chơi -10 thể lực / với thủ lĩnh tự +10 thể lực (CD 12s)"
         }
       },
@@ -1526,13 +1916,16 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "溜め技 与ダメ 10%→15% + 気力消費+10%",
         "kongfuRequired": [
           10102,
           20401,
           20402
         ],
         "rawI18n": {
+          "ja": "溜め技 与ダメ 10%→15% + 気力消費+10%",
+          "en": "Charged skill DMG 10%→15%, Stamina cost +10%",
+          "zh": "蓄力技伤害 10%→15% + 气力消耗+10%",
+          "ko": "차지 스킬 피해 10%→15% + 기력 소모 +10%",
           "vi": "Kỹ năng tích lực: sát thương gây ra 10% → 15% + tiêu hao thể lực +10%"
         }
       },
@@ -1541,8 +1934,11 @@
         "effects": {
           "sympathyBoost": 0.052
         },
-        "raw": "Affinity DMG Bonus +5.2%",
         "rawI18n": {
+          "ja": "Affinity DMG Bonus +5.2%",
+          "en": "Affinity DMG Bonus +5.2%",
+          "zh": "属攻伤害加成 +5.2%",
+          "ko": "속성 공격 피해 보너스 +5.2%",
           "vi": "Tăng sát thương hiểu ý +5.2%"
         }
       },
@@ -1551,13 +1947,16 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "溜め技 追加ダメ — vs プレイヤー 気力差10毎+2% max10% / vs Boss 自消費気力10%毎+2% max10%",
         "kongfuRequired": [
           10102,
           20401,
           20402
         ],
         "rawI18n": {
+          "ja": "溜め技 追加ダメ — vs プレイヤー 気力差10毎+2% max10% / vs Boss 自消費気力10%毎+2% max10%",
+          "en": "Charged skill bonus DMG — vs players +2% per 10 Stamina difference max 10% / vs Boss +2% per 10% own Stamina spent max 10%",
+          "zh": "蓄力技额外伤害 — 对玩家 每10点气力差+2% 最多10% / 对首领 每消耗自身气力10%+2% 最多10%",
+          "ko": "차지 스킬 추가 피해 — vs 플레이어 기력 차 10당 +2% 최대 10% / vs 보스 자신 소모 기력 10%당 +2% 최대 10%",
           "vi": "Kỹ năng tích lực bổ sung — với người chơi mỗi 10 chênh lệch thể lực +2% tối đa 10% / với Boss mỗi 10% thể lực tự tiêu +2% tối đa 10%"
         }
       }
@@ -1575,8 +1974,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "家無き者 2段溜め完了で複数剣気、 気力消費でダメ+1.5%/pt max30%",
         "rawI18n": {
+          "ja": "家無き者 2段溜め完了で複数剣気、 気力消費でダメ+1.5%/pt max30%",
+          "en": "Homeless One: full 2-stage charge fires multiple sword qi; DMG +1.5% per Stamina point spent, max 30%",
+          "zh": "无家者 完成2段蓄力时发射多道剑气，每消耗1点气力伤害+1.5%，最多30%",
+          "ko": "집 없는 자: 2단 차지 완료 시 다중 검기, 기력 소모 1당 피해 +1.5%, 최대 30%",
           "vi": "Vô Gia Giả: hoàn thành 2 đoạn tích lực phóng nhiều kiếm khí, tiêu hao thể lực tăng sát thương +1.5%/pt tối đa 30%"
         }
       },
@@ -1588,8 +1990,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "非戦闘 退路の道剣気5s 真気シールドなしで複数剣気発射可",
         "rawI18n": {
+          "ja": "非戦闘 退路の道剣気5s 真気シールドなしで複数剣気発射可",
+          "en": "Out of combat: Retreat Path sword qi for 5s, can fire multiple sword qi without Qi shield",
+          "zh": "非战斗状态 退路剑气5秒，无真气护盾也可发射多道剑气",
+          "ko": "비전투 시 퇴로 검기 5초, 진기 보호막 없이 다중 검기 발사 가능",
           "vi": "Ngoài chiến đấu, Thoái Lộ Đạo kiếm khí 5s: có thể bắn nhiều kiếm khí mà không cần lá chắn chân khí"
         }
       },
@@ -1598,12 +2003,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max Physical Attack",
-        "raw": "Max Physical Attack (Solo Mode Level scaled, rank=gold)",
         "effects": {
           "maxPhysATKAdd": 63.9
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Max Physical Attack (Solo Mode Level scaled, rank=gold)",
+          "en": "Max Physical Attack (Solo Mode Level scaled, rank=gold)",
+          "zh": "最大外功攻击（单人模式 按等级缩放，rank=gold）",
+          "ko": "최대 외공 공격 (싱글 모드 레벨 비례, rank=gold)",
           "vi": "Tấn công ngoại công tối đa (theo cấp ở chế độ đơn, rank=gold)"
         }
       },
@@ -1615,8 +2023,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "力尽き対象命中時 軽傷化なし + 非プレイヤー力尽き 第三剣気必ず会意",
         "rawI18n": {
+          "ja": "力尽き対象命中時 軽傷化なし + 非プレイヤー力尽き 第三剣気必ず会意",
+          "en": "Hits on downed targets never graze; vs downed non-players the third sword qi always triggers affinity",
+          "zh": "命中力竭目标时不会擦伤 + 对力竭非玩家 第三道剑气必定会意",
+          "ko": "탈진 대상 적중 시 찰과상 없음 + 비플레이어 탈진 시 세 번째 검기 반드시 각성",
           "vi": "Khi trúng địch kiệt sức: không hóa trầy xước + với phi người chơi kiệt sức, kiếm khí thứ ba chắc chắn hiểu ý"
         }
       },
@@ -1628,8 +2039,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "溜め技 複数剣気5s 連発可",
         "rawI18n": {
+          "ja": "溜め技 複数剣気5s 連発可",
+          "en": "Charged skill: multiple sword qi can be fired repeatedly for 5s",
+          "zh": "蓄力技 5秒内可连发多道剑气",
+          "ko": "차지 스킬 다중 검기 5초간 연속 발사 가능",
           "vi": "Kỹ năng tích lực: có thể liên tục bắn nhiều kiếm khí trong 5s"
         }
       },
@@ -1638,8 +2052,11 @@
         "effects": {
           "addSympathyRate": 0.023
         },
-        "raw": "Direct Affinity Rate +2.3%",
         "rawI18n": {
+          "ja": "Direct Affinity Rate +2.3%",
+          "en": "Direct Affinity Rate +2.3%",
+          "zh": "直接会意率 +2.3%",
+          "ko": "추가 각성 확률 +2.3%",
           "vi": "Tỷ lệ hiểu ý trực tiếp +2.3%"
         }
       },
@@ -1651,8 +2068,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "複数剣気後 気湧獲得 (気力+20、 5s即発射1回、 CD 20s -1s/首領命中 max-8s)",
         "rawI18n": {
+          "ja": "複数剣気後 気湧獲得 (気力+20、 5s即発射1回、 CD 20s -1s/首領命中 max-8s)",
+          "en": "After multiple sword qi: gain Qi Surge (Stamina +20, 1 instant shot within 5s, CD 20s, -1s per Boss hit max -8s)",
+          "zh": "多道剑气后获得气涌（气力+20，5秒内可立即发射1次，CD 20秒，每次命中首领-1秒 最多-8秒）",
+          "ko": "다중 검기 후 기용 획득 (기력 +20, 5초 내 즉시 발사 1회, CD 20초, 보스 적중당 -1초 최대 -8초)",
           "vi": "Sau khi bắn nhiều kiếm khí: nhận Khí Dũng (thể lực +20, 5s bắn ngay 1 lần, CD 20s -1s mỗi lần trúng thủ lĩnh tối đa -8s)"
         }
       }
@@ -1672,8 +2092,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "六酔槍 連撃数5/10→4/8、流血対象命中で流血stack依存 60-100%確率 連撃+1",
         "rawI18n": {
+          "ja": "六酔槍 連撃数5/10→4/8、流血対象命中で流血stack依存 60-100%確率 連撃+1",
+          "en": "Six Drunken Spears: combo count 5/10→4/8; hitting bleeding targets grants +1 combo at 60-100% chance based on Bleed stacks",
+          "zh": "六醉枪 连击数5/10→4/8，命中流血目标时 按流血层数 60-100%概率连击+1",
+          "ko": "육취창 연격 수 5/10→4/8, 출혈 대상 적중 시 출혈 중첩에 따라 60-100% 확률로 연격 +1",
           "vi": "Lục Túy Thương: số đòn liên hoàn 5/10 → 4/8, khi trúng địch chảy máu thì xác suất 60-100% theo stack chảy máu liên hoàn +1"
         }
       },
@@ -1685,8 +2108,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "六酔槍連撃バフ持続15s延長",
         "rawI18n": {
+          "ja": "六酔槍連撃バフ持続15s延長",
+          "en": "Six Drunken Spears combo buff duration +15s",
+          "zh": "六醉枪连击buff持续延长15秒",
+          "ko": "육취창 연격 버프 지속 15초 연장",
           "vi": "Buff liên hoàn Lục Túy Thương kéo dài duy trì 15s"
         }
       },
@@ -1695,12 +2121,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Affinity Rate",
-        "raw": "Affinity Rate (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "sympathyRate": 0.0324
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Affinity Rate (Solo Mode Level scaled, rank=purple)",
+          "en": "Affinity Rate (Solo Mode Level scaled, rank=purple)",
+          "zh": "会意率（单人模式 按等级缩放，rank=purple）",
+          "ko": "각성 확률 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tỷ lệ hiểu ý (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -1712,8 +2141,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "無愁酒 ダメ+10% + 発動中 強靱化/被ダメ-60%",
         "rawI18n": {
+          "ja": "無愁酒 ダメ+10% + 発動中 強靱化/被ダメ-60%",
+          "en": "Sorrowless Wine: DMG +10%; while active, hyperarmor / DMG taken -60%",
+          "zh": "无愁酒 伤害+10% + 发动中 强韧/受到伤害-60%",
+          "ko": "무수주 피해 +10% + 발동 중 강인화/받는 피해 -60%",
           "vi": "Vô Sầu Tửu: sát thương +10% + trong khi kích hoạt cứng người hóa / sát thương nhận vào -60%"
         }
       },
@@ -1725,8 +2157,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "無愁酒連撃10で急流効果 ダメ+25% + 千軍一掃で気血20%回復+追加流血ダメ (12sCD)",
         "rawI18n": {
+          "ja": "無愁酒連撃10で急流効果 ダメ+25% + 千軍一掃で気血20%回復+追加流血ダメ (12sCD)",
+          "en": "At 10 Sorrowless Wine combos: Rapids effect, DMG +25%; Thousand Army Sweep restores 20% HP + bonus Bleed DMG (12s CD)",
+          "zh": "无愁酒连击10次时获得急流效果 伤害+25% + 千军一扫回复20%气血+额外流血伤害（12秒CD）",
+          "ko": "무수주 연격 10회 시 급류 효과 피해 +25% + 천군일소로 기혈 20% 회복 + 추가 출혈 피해 (12초 CD)",
           "vi": "Vô Sầu Tửu liên hoàn 10 lần: hiệu quả Cấp Lưu sát thương +25% + Thiên Quân Nhất Tảo hồi 20% sinh lực + sát thương chảy máu bổ sung (CD 12s)"
         }
       },
@@ -1735,8 +2170,11 @@
         "effects": {
           "sympathyBoost": 0.052
         },
-        "raw": "Affinity DMG Bonus +5.2%",
         "rawI18n": {
+          "ja": "Affinity DMG Bonus +5.2%",
+          "en": "Affinity DMG Bonus +5.2%",
+          "zh": "属攻伤害加成 +5.2%",
+          "ko": "속성 공격 피해 보너스 +5.2%",
           "vi": "Tăng sát thương hiểu ý +5.2%"
         }
       },
@@ -1748,8 +2186,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "六酔槍 神脅し対象命中で+1stack、3s内同一対象5回命中で呪い酒付与 (15s 付与元被ダメ+5%)",
         "rawI18n": {
+          "ja": "六酔槍 神脅し対象命中で+1stack、3s内同一対象5回命中で呪い酒付与 (15s 付与元被ダメ+5%)",
+          "en": "Six Drunken Spears: +1 stack when hitting Godthreat targets; 5 hits on same target within 3s applies Cursed Wine (15s, +5% DMG taken from the applier)",
+          "zh": "六醉枪 命中神慑目标时+1层，3秒内命中同一目标5次施加咒酒（15秒 受来自施加者的伤害+5%）",
+          "ko": "육취창 신위협 대상 적중 시 +1중첩, 3초 내 동일 대상 5회 적중 시 저주주 부여 (15초, 부여자에게 받는 피해 +5%)",
           "vi": "Lục Túy Thương: khi trúng đối tượng Thần Hiếp +1 stack, trúng cùng đối tượng 5 lần trong 3s gắn Chú Tửu (15s sát thương nhận vào của nguồn gắn +5%)"
         }
       }
@@ -1777,8 +2218,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武器別武芸 (剣=会意で流血付与/槍=外功防御無視12.5%/双剣=完全回避後8s次武術技+25%/斬馬刀=溜め技/反撃の会心ダメ+20%/横刀=受け流し後5s 軽重撃・派生+5%)",
         "rawI18n": {
+          "ja": "武器別武芸 (剣=会意で流血付与/槍=外功防御無視12.5%/双剣=完全回避後8s次武術技+25%/斬馬刀=溜め技/反撃の会心ダメ+20%/横刀=受け流し後5s 軽重撃・派生+5%)",
+          "en": "Per-weapon arts (Sword: affinity applies Bleed / Spear: ignore 12.5% Physical Defense / Twin Blades: after perfect dodge next martial skill +25% within 8s / Mo Blade: Charged/counter Crit DMG +20% / Heng Blade: light-heavy attacks and derivatives +5% for 5s after parry)",
+          "zh": "按武器武艺（剑=会意施加流血/枪=无视外功防御12.5%/双刀=完美闪避后8秒下次武学技+25%/陌刀=蓄力技/反击会心伤害+20%/横刀=招架后5秒 轻重击·派生+5%）",
+          "ko": "무기별 무예 (검=각성 시 출혈 부여/창=외공 방어력 무시 12.5%/쌍도=완벽 회피 후 8초 다음 무술 스킬 +25%/맥도=차지 스킬/반격 치명타 피해 +20%/횡도=패링 후 5초 약중공격·파생 +5%)",
           "vi": "Võ học theo vũ khí (Kiếm = khi hiểu ý gắn chảy máu / Súng = bỏ qua 12.5% phòng ngự ngoại công / Song đao = sau né hoàn hảo 8s kỹ năng võ học tiếp theo +25% / Đao = chí mạng đả nặng/phản kích +20% / Hoành đao = sau đỡ đòn 5s đả nhẹ/nặng/phái sinh +5%)"
         }
       },
@@ -1798,8 +2242,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武変技ダメ+30%",
         "rawI18n": {
+          "ja": "武変技ダメ+30%",
+          "en": "Martial Change skill DMG +30%",
+          "zh": "武变技伤害+30%",
+          "ko": "무변기 피해 +30%",
           "vi": "Sát thương Vũ Biến Kỹ +30%"
         }
       },
@@ -1808,7 +2255,6 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max Bellstrike Attack",
-        "raw": "Max Bellstrike Attack (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "maxBellstrike": 32.6
         },
@@ -1818,6 +2264,10 @@
         "maxPathATK": 32.6,
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Max Bellstrike Attack (Solo Mode Level scaled, rank=purple)",
+          "en": "Max Bellstrike Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "最大鸣金攻击（单人模式 按等级缩放，rank=purple）",
+          "ko": "최대 명금 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công Minh Kim tối đa (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -1837,8 +2287,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武変技命中で自移動速度+20%/対象-20% (4s)",
         "rawI18n": {
+          "ja": "武変技命中で自移動速度+20%/対象-20% (4s)",
+          "en": "Martial Change skill hit: own Move Speed +20% / target -20% (4s)",
+          "zh": "武变技命中时 自身移动速度+20%/目标-20%（4秒）",
+          "ko": "무변기 적중 시 자신 이동속도 +20% / 대상 -20% (4초)",
           "vi": "Khi Vũ Biến Kỹ trúng: tốc độ di chuyển bản thân +20% / mục tiêu -20% (4s)"
         }
       },
@@ -1858,8 +2311,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武変技発動時 気力+10回復",
         "rawI18n": {
+          "ja": "武変技発動時 気力+10回復",
+          "en": "On Martial Change skill use: restore +10 Stamina",
+          "zh": "武变技发动时 回复气力+10",
+          "ko": "무변기 발동 시 기력 +10 회복",
           "vi": "Khi kích hoạt Vũ Biến Kỹ: hồi thể lực +10"
         }
       },
@@ -1868,10 +2324,13 @@
         "effects": {
           "bellstrikeDmgBoost": 0.03
         },
-        "raw": "Bellstrike DMG Bonus +3%",
         "weaponSpecific": "bellstrike",
         "pendingImplementation": true,
         "rawI18n": {
+          "ja": "Bellstrike DMG Bonus +3%",
+          "en": "Bellstrike DMG Bonus +3%",
+          "zh": "鸣金伤害加成 +3%",
+          "ko": "명금 피해 보너스 +3%",
           "vi": "Tăng sát thương Minh Kim +3%"
         }
       },
@@ -1891,8 +2350,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武変技発動時 元武芸効果残存 (10s後消失)",
         "rawI18n": {
+          "ja": "武変技発動時 元武芸効果残存 (10s後消失)",
+          "en": "On Martial Change skill use: previous weapon art effect persists (fades after 10s)",
+          "zh": "武变技发动时 原武艺效果保留（10秒后消失）",
+          "ko": "무변기 발동 시 기존 무예 효과 잔존 (10초 후 소멸)",
           "vi": "Khi kích hoạt Vũ Biến Kỹ: hiệu quả võ học gốc còn lại (biến mất sau 10s)"
         }
       }
@@ -1919,8 +2381,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "会意ダメで集中値、max時看破状態 — 会意ダメ+10%、5%確率で被ダメ-40% (10s)",
         "rawI18n": {
+          "ja": "会意ダメで集中値、max時看破状態 — 会意ダメ+10%、5%確率で被ダメ-40% (10s)",
+          "en": "Affinity DMG builds Focus; at max, Seethrough state — Affinity DMG +10%, 5% chance of DMG taken -40% (10s)",
+          "zh": "会意伤害积累专注值，满值时进入看破状态 — 会意伤害+10%，5%概率受到伤害-40%（10秒）",
+          "ko": "각성 피해로 집중치 축적, 최대 시 간파 상태 — 각성 피해 +10%, 5% 확률로 받는 피해 -40% (10초)",
           "vi": "Khi hiểu ý gây sát thương: cộng dồn giá trị Tập Trung, khi đạt tối đa vào trạng thái Khán Phá — sát thương hiểu ý +10%, xác suất 5% giảm sát thương nhận vào -40% (10s)"
         }
       },
@@ -1935,8 +2400,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "看破中 — 自気血>75%で与ダメ+1.5%、≤75%で与ダメ1.5%相当 気血回復",
         "rawI18n": {
+          "ja": "看破中 — 自気血>75%で与ダメ+1.5%、≤75%で与ダメ1.5%相当 気血回復",
+          "en": "During Seethrough — above 75% HP: DMG dealt +1.5%; at or below 75%: restore HP equal to 1.5% of DMG dealt",
+          "zh": "看破期间 — 自身气血>75%时造成伤害+1.5%，≤75%时回复相当于造成伤害1.5%的气血",
+          "ko": "간파 중 — 자신 기혈 >75% 시 주는 피해 +1.5%, ≤75% 시 주는 피해의 1.5% 상당 기혈 회복",
           "vi": "Trong Khán Phá — khi sinh lực bản thân >75%: sát thương gây ra +1.5%, khi ≤75%: hồi sinh lực bằng 1.5% sát thương gây ra"
         }
       },
@@ -1945,13 +2413,16 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Attack",
-        "raw": "Physical Attack (Solo Mode Level scaled, rank=purple, post 5/28 patch: Bellstrike→外功)",
         "effects": {
           "minPhysATKAdd": 19.17,
           "maxPhysATKAdd": 38.25
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Physical Attack (Solo Mode Level scaled, rank=purple, post 5/28 patch: Bellstrike→外功)",
+          "en": "Physical Attack (Solo Mode Level scaled, rank=purple, post 5/28 patch: Bellstrike→Physical)",
+          "zh": "外功攻击（单人模式 按等级缩放，rank=purple，5/28补丁后：鸣金→外功）",
+          "ko": "외공 공격 (싱글 모드 레벨 비례, rank=purple, 5/28 패치 후: 명금→외공)",
           "vi": "Tấn công ngoại công (theo cấp ở chế độ đơn, rank=purple, sau patch 5/28: Bellstrike → ngoại công)"
         }
       },
@@ -1966,8 +2437,11 @@
         "effects": {
           "addSympathyRate": 0.03
         },
-        "raw": "看破中 付加会意率+1.5% (気血割合上で追加+1.5%、合計+3%採用、対象外武器0)",
         "rawI18n": {
+          "ja": "看破中 付加会意率+1.5% (気血割合上で追加+1.5%、合計+3%採用、対象外武器0)",
+          "en": "During Seethrough: Direct Affinity Rate +1.5% (extra +1.5% based on HP ratio, total +3% adopted; 0 for non-eligible weapons)",
+          "zh": "看破期间 直接会意率+1.5%（按气血比例额外+1.5%，按合计+3%采用，非适用武器为0）",
+          "ko": "간파 중 추가 각성 확률 +1.5% (기혈 비율 따라 추가 +1.5%, 합계 +3% 채용, 대상 외 무기 0)",
           "vi": "Trong Khán Phá: tỷ lệ hiểu ý cộng thêm +1.5% (theo tỷ lệ sinh lực bổ sung thêm +1.5%, dùng tổng +3%, vũ khí ngoài đối tượng = 0)"
         }
       },
@@ -1982,8 +2456,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "集中値累積効率+50%",
         "rawI18n": {
+          "ja": "集中値累積効率+50%",
+          "en": "Focus accumulation +50%",
+          "zh": "专注值积累效率+50%",
+          "ko": "집중치 축적 효율 +50%",
           "vi": "Hiệu suất tích lũy giá trị Tập Trung +50%"
         }
       },
@@ -1992,8 +2469,11 @@
         "effects": {
           "outerPenAdd": 5.1
         },
-        "raw": "Physical Penetration +5.1 (post 5/28 patch: Bellstrike Pen→外功貫通)",
         "rawI18n": {
+          "ja": "Physical Penetration +5.1 (post 5/28 patch: Bellstrike Pen→外功貫通)",
+          "en": "Physical Penetration +5.1 (post 5/28 patch: Bellstrike Pen→Physical Pen)",
+          "zh": "外功穿透 +5.1（5/28补丁后：鸣金穿透→外功穿透）",
+          "ko": "외공 관통 +5.1 (5/28 패치 후: 명금 관통→외공 관통)",
           "vi": "Xuyên thấu ngoại công +5.1 (sau patch 5/28: Bellstrike Pen → xuyên thấu ngoại công)"
         }
       },
@@ -2008,8 +2488,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "看破中 持続系ダメ及び強化効果ダメ+10% (大量流血/血涙不止/刺傷)",
         "rawI18n": {
+          "ja": "看破中 持続系ダメ及び強化効果ダメ+10% (大量流血/血涙不止/刺傷)",
+          "en": "During Seethrough: DoT and enhanced-effect DMG +10% (Heavy Bleed / Ceaseless Bloodtears / Stab)",
+          "zh": "看破期间 持续伤害及强化效果伤害+10%（大量流血/血泪不止/刺伤）",
+          "ko": "간파 중 지속 피해 및 강화 효과 피해 +10% (대량 출혈/혈루부지/자상)",
           "vi": "Trong Khán Phá: sát thương loại duy trì và sát thương hiệu quả tăng cường +10% (đại chảy máu/Khấp Huyết Bất Chỉ/sát thương đâm)"
         }
       }
@@ -2027,8 +2510,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "武術/特殊/溜め技後 納刀中完璧タイミング再押→縦横の剣追撃、 5stack流血で大流血ダメ",
         "rawI18n": {
+          "ja": "武術/特殊/溜め技後 納刀中完璧タイミング再押→縦横の剣追撃、 5stack流血で大流血ダメ",
+          "en": "After martial/special/Charged skills, perfect-timing re-press while sheathing → Crosscut Sword follow-up; at 5 Bleed stacks deals Heavy Bleed DMG",
+          "zh": "武学/特殊/蓄力技后 收刀时完美时机再按→纵横剑追击，流血满5层时造成大流血伤害",
+          "ko": "무술/특수/차지 스킬 후 납도 중 완벽 타이밍 재입력 → 종횡검 추격, 출혈 5중첩 시 대출혈 피해",
           "vi": "Sau kỹ năng võ học/đặc biệt/tích lực: trong khi tra đao, bấm lại đúng nhịp hoàn hảo → bổ sung Tung Hoành Kiếm, 5 stack chảy máu gây sát thương đại chảy máu"
         }
       },
@@ -2040,8 +2526,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "縦横剣発動成功で気力+8",
         "rawI18n": {
+          "ja": "縦横剣発動成功で気力+8",
+          "en": "Successful Crosscut Sword grants Stamina +8",
+          "zh": "纵横剑发动成功时 气力+8",
+          "ko": "종횡검 발동 성공 시 기력 +8",
           "vi": "Khi Tung Hoành Kiếm kích hoạt thành công: thể lực +8"
         }
       },
@@ -2050,12 +2539,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max Physical Attack",
-        "raw": "Max Physical Attack (Solo Mode Level scaled, rank=gold)",
         "effects": {
           "maxPhysATKAdd": 63.9
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Max Physical Attack (Solo Mode Level scaled, rank=gold)",
+          "en": "Max Physical Attack (Solo Mode Level scaled, rank=gold)",
+          "zh": "最大外功攻击（单人模式 按等级缩放，rank=gold）",
+          "ko": "최대 외공 공격 (싱글 모드 레벨 비례, rank=gold)",
           "vi": "Tấn công ngoại công tối đa (theo cấp ở chế độ đơn, rank=gold)"
         }
       },
@@ -2067,8 +2559,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "大量流血で縦横剣意蓄積、 最大時 次大量流血必ず会意",
         "rawI18n": {
+          "ja": "大量流血で縦横剣意蓄積、 最大時 次大量流血必ず会意",
+          "en": "Heavy Bleed builds Crosscut Sword Will; at max, next Heavy Bleed always triggers affinity",
+          "zh": "大量流血积累纵横剑意，满值时下次大量流血必定会意",
+          "ko": "대량 출혈로 종횡검의 축적, 최대 시 다음 대량 출혈 반드시 각성",
           "vi": "Khi gây đại chảy máu: tích lũy Tung Hoành Kiếm Ý, khi đạt tối đa thì lần đại chảy máu tiếp theo chắc chắn hiểu ý"
         }
       },
@@ -2080,8 +2575,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "縦横剣意状態中 大量出血ダメ +15%",
         "rawI18n": {
+          "ja": "縦横剣意状態中 大量出血ダメ +15%",
+          "en": "While Crosscut Sword Will active: Heavy Bleed DMG +15%",
+          "zh": "纵横剑意状态中 大量流血伤害+15%",
+          "ko": "종횡검의 상태 중 대량 출혈 피해 +15%",
           "vi": "Trong trạng thái Tung Hoành Kiếm Ý: sát thương xuất huyết lượng lớn +15%"
         }
       },
@@ -2090,8 +2588,11 @@
         "effects": {
           "addSympathyRate": 0.023
         },
-        "raw": "Direct Affinity Rate +2.3%",
         "rawI18n": {
+          "ja": "Direct Affinity Rate +2.3%",
+          "en": "Direct Affinity Rate +2.3%",
+          "zh": "直接会意率 +2.3%",
+          "ko": "추가 각성 확률 +2.3%",
           "vi": "Tỷ lệ hiểu ý trực tiếp +2.3%"
         }
       },
@@ -2103,8 +2604,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "縦横剣意中 大量流血で流血+2stack保持、 蓄積最大→会意後 20pt剣意保持で蓄積継続",
         "rawI18n": {
+          "ja": "縦横剣意中 大量流血で流血+2stack保持、 蓄積最大→会意後 20pt剣意保持で蓄積継続",
+          "en": "During Crosscut Sword Will: Heavy Bleed keeps +2 Bleed stacks; after max-gauge affinity, retain 20pt Sword Will and keep building",
+          "zh": "纵横剑意期间 大量流血时保留流血+2层，蓄积满→会意后保留20点剑意继续积累",
+          "ko": "종횡검의 중 대량 출혈 시 출혈 +2중첩 유지, 축적 최대→각성 후 검의 20pt 유지하며 축적 계속",
           "vi": "Trong Tung Hoành Kiếm Ý: khi gây đại chảy máu, chảy máu +2 stack được giữ; sau khi đạt tối đa → hiểu ý xong giữ 20 pt Kiếm Ý để tiếp tục tích lũy"
         }
       }
@@ -2124,8 +2628,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春尽山空 2stackチャージ可 (CD+3s)",
         "rawI18n": {
+          "ja": "春尽山空 2stackチャージ可 (CD+3s)",
+          "en": "Spring's End Empty Mountain: can hold 2 charges (CD +3s)",
+          "zh": "春尽山空 可储存2层（CD+3秒）",
+          "ko": "춘진산공 2중첩 충전 가능 (CD +3초)",
           "vi": "Xuân Tận Sơn Không có thể tích 2 stack charge (CD +3s)"
         }
       },
@@ -2137,8 +2644,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春尽山空で水人帰還時 CD-3s、移動速度+20%",
         "rawI18n": {
+          "ja": "春尽山空で水人帰還時 CD-3s、移動速度+20%",
+          "en": "When water puppet returns via Spring's End Empty Mountain: CD -3s, Move Speed +20%",
+          "zh": "春尽山空使水人回归时 CD-3秒，移动速度+20%",
+          "ko": "춘진산공으로 물 인형 귀환 시 CD -3초, 이동속도 +20%",
           "vi": "Khi Thủy Nhân trở về từ Xuân Tận Sơn Không: CD -3s, tốc độ di chuyển +20%"
         }
       },
@@ -2147,12 +2657,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Precision Rate",
-        "raw": "Precision Rate (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "hitRate": 0.0594
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Precision Rate (Solo Mode Level scaled, rank=purple)",
+          "en": "Precision Rate (Solo Mode Level scaled, rank=purple)",
+          "zh": "精准率（单人模式 按等级缩放，rank=purple）",
+          "ko": "정확도 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tỷ lệ trúng đích (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -2164,8 +2677,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春尽山空 対象浮遊なしでCD3s返還 + 15s 次の春尽山空ダメ+30%",
         "rawI18n": {
+          "ja": "春尽山空 対象浮遊なしでCD3s返還 + 15s 次の春尽山空ダメ+30%",
+          "en": "Spring's End Empty Mountain: if target not airborne, refund 3s CD; next one within 15s deals +30% DMG",
+          "zh": "春尽山空 目标未浮空时返还3秒CD + 15秒内下次春尽山空伤害+30%",
+          "ko": "춘진산공 대상 부유 없을 시 CD 3초 반환 + 15초 내 다음 춘진산공 피해 +30%",
           "vi": "Xuân Tận Sơn Không không làm mục tiêu lơ lửng: hoàn 3s CD + 15s sát thương Xuân Tận Sơn Không tiếp theo +30%"
         }
       },
@@ -2177,8 +2693,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春尽山空帰還で3s 無頼の浮名 溜め速度+50%/竜巻移動速度+50%",
         "rawI18n": {
+          "ja": "春尽山空帰還で3s 無頼の浮名 溜め速度+50%/竜巻移動速度+50%",
+          "en": "After Spring's End Empty Mountain return: for 3s, Rogue's Repute charge speed +50% / tornado move speed +50%",
+          "zh": "春尽山空回归后3秒 无赖浮名蓄力速度+50%/龙卷移动速度+50%",
+          "ko": "춘진산공 귀환 후 3초간 무뢰부명 차지 속도 +50% / 회오리 이동속도 +50%",
           "vi": "Khi Xuân Tận Sơn Không trở về: 3s Vô Lại Đích Phù Danh tốc độ tích lực +50% / tốc độ di chuyển lốc xoáy +50%"
         }
       },
@@ -2187,10 +2706,13 @@
         "effects": {
           "silkbindPen": 6
         },
-        "raw": "Silkbind Penetration +6",
         "weaponSpecific": "silkbind",
         "pendingImplementation": true,
         "rawI18n": {
+          "ja": "Silkbind Penetration +6",
+          "en": "Silkbind Penetration +6",
+          "zh": "牵丝穿透 +6",
+          "ko": "견사 관통 +6",
           "vi": "Xuyên thấu Khiên Ti +6"
         }
       },
@@ -2202,8 +2724,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春尽山空 浮遊/滞骨命中で CD2s返還+春月増華CDリセット、3s 重撃追撃で春尽山空CD-3s (1s毎1回)",
         "rawI18n": {
+          "ja": "春尽山空 浮遊/滞骨命中で CD2s返還+春月増華CDリセット、3s 重撃追撃で春尽山空CD-3s (1s毎1回)",
+          "en": "Spring's End Empty Mountain hitting airborne/Bonelock targets refunds 2s CD + resets Spring Moon Bloom CD; heavy follow-ups within 3s reduce its CD -3s (once per 1s)",
+          "zh": "春尽山空命中浮空/滞骨目标时 返还2秒CD+重置春月增华CD，3秒内重击追击使春尽山空CD-3秒（每秒1次）",
+          "ko": "춘진산공 부유/체골 적중 시 CD 2초 반환 + 춘월증화 CD 리셋, 3초 내 중공격 추격으로 춘진산공 CD -3초 (1초당 1회)",
           "vi": "Khi Xuân Tận Sơn Không trúng mục tiêu lơ lửng/Trễ Cốt: hoàn 2s CD + đặt lại CD Xuân Nguyệt Tăng Hoa, 3s khi truy kích đả nặng thì Xuân Tận Sơn Không CD -3s (mỗi 1s 1 lần)"
         }
       }
@@ -2228,8 +2753,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武術技発動終了で春雷3stack獲得 (15sCD、12s持続)、重撃/重撃追撃/軽撃/弾道技で1stack消費 → その技と次の1sの気血ダメ+15%",
         "rawI18n": {
+          "ja": "武術技発動終了で春雷3stack獲得 (15sCD、12s持続)、重撃/重撃追撃/軽撃/弾道技で1stack消費 → その技と次の1sの気血ダメ+15%",
+          "en": "Finishing a martial skill grants 3 Spring Thunder stacks (15s CD, 12s); heavy/heavy follow-up/light/projectile skills consume 1 stack → that skill and the next 1s deal +15% HP DMG",
+          "zh": "武学技发动结束时获得3层春雷（15秒CD，持续12秒），重击/重击追击/轻击/弹道技消耗1层 → 该技能及之后1秒的气血伤害+15%",
+          "ko": "무술 스킬 발동 종료 시 춘뢰 3중첩 획득 (15초 CD, 12초 지속), 중공격/중공격 추격/약공격/탄도 스킬로 1중첩 소모 → 해당 스킬과 다음 1초의 기혈 피해 +15%",
           "vi": "Khi kết thúc kỹ năng võ học: nhận 3 stack Xuân Lôi (CD 15s, duy trì 12s), đả nặng/truy kích nặng/đả nhẹ/kỹ năng đạn đạo tiêu 1 stack → kỹ năng đó và sát thương sinh lực trong 1s tiếp theo +15%"
         }
       },
@@ -2242,8 +2770,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春雷stack 3→4",
         "rawI18n": {
+          "ja": "春雷stack 3→4",
+          "en": "Spring Thunder stacks 3→4",
+          "zh": "春雷层数 3→4",
+          "ko": "춘뢰 중첩 3→4",
           "vi": "Xuân Lôi stack 3 → 4"
         }
       },
@@ -2252,13 +2783,16 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Attack",
-        "raw": "Physical Attack (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "minPhysATKAdd": 19.17,
           "maxPhysATKAdd": 38.25
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "en": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "外功攻击（单人模式 按等级缩放，rank=purple）",
+          "ko": "외공 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công ngoại công (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -2271,8 +2805,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春雷1消費毎 気血ダメ強化持続 1s→2s延長",
         "rawI18n": {
+          "ja": "春雷1消費毎 気血ダメ強化持続 1s→2s延長",
+          "en": "Each Spring Thunder consumed: HP DMG buff duration 1s→2s",
+          "zh": "每消耗1层春雷 气血伤害强化持续 1秒→2秒",
+          "ko": "춘뢰 1 소모마다 기혈 피해 강화 지속 1초→2초 연장",
           "vi": "Mỗi lần tiêu 1 Xuân Lôi: thời gian duy trì sát thương sinh lực tăng cường kéo dài 1s → 2s"
         }
       },
@@ -2285,8 +2822,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春雷stack 4→5",
         "rawI18n": {
+          "ja": "春雷stack 4→5",
+          "en": "Spring Thunder stacks 4→5",
+          "zh": "春雷层数 4→5",
+          "ko": "춘뢰 중첩 4→5",
           "vi": "Xuân Lôi stack 4 → 5"
         }
       },
@@ -2295,8 +2835,11 @@
         "effects": {
           "physDmgBoost": 0.025
         },
-        "raw": "Physical DMG Bonus +2.5%",
         "rawI18n": {
+          "ja": "Physical DMG Bonus +2.5%",
+          "en": "Physical DMG Bonus +2.5%",
+          "zh": "外功伤害加成 +2.5%",
+          "ko": "외공 피해 보너스 +2.5%",
           "vi": "Tăng sát thương ngoại công +2.5%"
         }
       },
@@ -2309,8 +2852,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春雷中 重/重追/軽/弾道 が真気<30%or気竭対象命中で春雷1回復 (2s毎1回)",
         "rawI18n": {
+          "ja": "春雷中 重/重追/軽/弾道 が真気<30%or気竭対象命中で春雷1回復 (2s毎1回)",
+          "en": "During Spring Thunder: heavy/heavy follow-up/light/projectile hits on targets below 30% Qi or Qi-exhausted restore 1 stack (once per 2s)",
+          "zh": "春雷期间 重击/重击追击/轻击/弹道技命中真气<30%或气竭目标时 春雷回复1层（每2秒1次）",
+          "ko": "춘뢰 중 중공격/중공격 추격/약공격/탄도가 진기 30% 미만 또는 기갈 대상 적중 시 춘뢰 1 회복 (2초당 1회)",
           "vi": "Trong Xuân Lôi: đả nặng/truy kích nặng/đả nhẹ/đạn đạo trúng mục tiêu chân khí <30% hoặc kiệt khí: hồi 1 Xuân Lôi (mỗi 2s 1 lần)"
         }
       }
@@ -2337,8 +2883,11 @@
         "effects": {
           "physDmgBoost": 0.025
         },
-        "raw": "滞骨付与で外功攻撃力+5% (8s 1s毎更新)、浮遊で+10%",
         "rawI18n": {
+          "ja": "滞骨付与で外功攻撃力+5% (8s 1s毎更新)、浮遊で+10%",
+          "en": "Applying Bonelock: Physical Attack +5% (8s, refreshed per sec); airborne: +10%",
+          "zh": "施加滞骨时 外功攻击+5%（8秒 每秒刷新），浮空时+10%",
+          "ko": "체골 부여 시 외공 공격 +5% (8초, 1초마다 갱신), 부유 시 +10%",
           "vi": "Khi gắn Trễ Cốt: tấn công ngoại công +5% (8s mỗi 1s cập nhật), khi gắn lơ lửng +10%"
         }
       },
@@ -2350,8 +2899,11 @@
         "effects": {
           "physDmgBoost": 0.025
         },
-        "raw": "滞骨5→7.5%、浮遊10→15%",
         "rawI18n": {
+          "ja": "滞骨5→7.5%、浮遊10→15%",
+          "en": "Bonelock 5→7.5%, airborne 10→15%",
+          "zh": "滞骨 5→7.5%，浮空 10→15%",
+          "ko": "체골 5→7.5%, 부유 10→15%",
           "vi": "Trễ Cốt 5 → 7.5%, lơ lửng 10 → 15%"
         }
       },
@@ -2360,7 +2912,6 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Attack",
-        "raw": "Physical Attack (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "minPhysATKAdd": 19.17,
           "maxPhysATKAdd": 38.25,
@@ -2368,6 +2919,10 @@
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "en": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "外功攻击（单人模式 按等级缩放，rank=purple）",
+          "ko": "외공 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công ngoại công (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -2377,8 +2932,11 @@
           10302
         ],
         "effects": {},
-        "raw": "対象 真気<30%or力尽き時 滞骨15%/浮遊25%に追加上昇",
         "rawI18n": {
+          "ja": "対象 真気<30%or力尽き時 滞骨15%/浮遊25%に追加上昇",
+          "en": "If target below 30% Qi or downed: Bonelock rises to 15% / airborne to 25%",
+          "zh": "目标真气<30%或力竭时 滞骨升至15%/浮空升至25%",
+          "ko": "대상 진기 30% 미만 또는 탈진 시 체골 15% / 부유 25%로 추가 상승",
           "vi": "Khi mục tiêu chân khí <30% hoặc kiệt sức: Trễ Cốt 15% / lơ lửng 25% tăng bổ sung"
         }
       },
@@ -2388,8 +2946,11 @@
           10302
         ],
         "effects": {},
-        "raw": "外功攻撃力上昇 持続8s→12s",
         "rawI18n": {
+          "ja": "外功攻撃力上昇 持続8s→12s",
+          "en": "Physical Attack buff duration 8s→12s",
+          "zh": "外功攻击提升持续 8秒→12秒",
+          "ko": "외공 공격 상승 지속 8초→12초",
           "vi": "Tấn công ngoại công tăng duy trì 8s → 12s"
         }
       },
@@ -2398,8 +2959,11 @@
         "effects": {
           "outerPenAdd": 5.1
         },
-        "raw": "Physical Penetration +5.1",
         "rawI18n": {
+          "ja": "Physical Penetration +5.1",
+          "en": "Physical Penetration +5.1",
+          "zh": "外功穿透 +5.1",
+          "ko": "외공 관통 +5.1",
           "vi": "Xuyên thấu ngoại công +5.1"
         }
       },
@@ -2409,8 +2973,11 @@
           10302
         ],
         "effects": {},
-        "raw": "浮遊/滞骨対象 — 自気血>75%で与ダメ+3%、≤75%で与ダメ10%気血回復",
         "rawI18n": {
+          "ja": "浮遊/滞骨対象 — 自気血>75%で与ダメ+3%、≤75%で与ダメ10%気血回復",
+          "en": "Vs airborne/Bonelock targets — above 75% HP: DMG +3%; at or below 75%: restore HP equal to 10% of DMG dealt",
+          "zh": "对浮空/滞骨目标 — 自身气血>75%时伤害+3%，≤75%时回复造成伤害10%的气血",
+          "ko": "부유/체골 대상 — 자신 기혈 >75% 시 피해 +3%, ≤75% 시 주는 피해의 10% 기혈 회복",
           "vi": "Với mục tiêu lơ lửng/Trễ Cốt — sinh lực bản thân >75%: sát thương gây ra +3%, ≤75%: hồi sinh lực bằng 10% sát thương gây ra"
         }
       }
@@ -2428,8 +2995,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "春恨み 2stack 連続命中効果付与、 弾道技ダメ+10% 10s持続",
         "rawI18n": {
+          "ja": "春恨み 2stack 連続命中効果付与、 弾道技ダメ+10% 10s持続",
+          "en": "Spring Grudge: 2 stacks grant Consecutive Hit effect, projectile DMG +10% for 10s",
+          "zh": "春怨 2层时施加连续命中效果，弹道技伤害+10% 持续10秒",
+          "ko": "춘한 2중첩 시 연속 명중 효과 부여, 탄도 스킬 피해 +10% 10초 지속",
           "vi": "Xuân Hận 2 stack gắn hiệu quả liên kích, sát thương kỹ năng đạn đạo +10% duy trì 10s"
         }
       },
@@ -2441,8 +3011,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "連続命中効果 弾道技ダメ 10%→20% (差分+10%)",
         "rawI18n": {
+          "ja": "連続命中効果 弾道技ダメ 10%→20% (差分+10%)",
+          "en": "Consecutive Hit projectile DMG 10%→20% (+10% delta)",
+          "zh": "连续命中效果 弹道技伤害 10%→20%（差值+10%）",
+          "ko": "연속 명중 효과 탄도 스킬 피해 10%→20% (차분 +10%)",
           "vi": "Hiệu quả liên kích: sát thương kỹ năng đạn đạo 10% → 20% (chênh lệch +10%)"
         }
       },
@@ -2451,12 +3024,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Critical Rate",
-        "raw": "Critical Rate (Solo Mode Level scaled, rank=gold)",
         "effects": {
           "critRate": 0.074
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Critical Rate (Solo Mode Level scaled, rank=gold)",
+          "en": "Critical Rate (Solo Mode Level scaled, rank=gold)",
+          "zh": "会心率（单人模式 按等级缩放，rank=gold）",
+          "ko": "치명타 확률 (싱글 모드 레벨 비례, rank=gold)",
           "vi": "Tỷ lệ chí mạng (theo cấp ở chế độ đơn, rank=gold)"
         }
       },
@@ -2468,8 +3044,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "春恨み発動速度+30%、 連続命中効果持続+15s延長",
         "rawI18n": {
+          "ja": "春恨み発動速度+30%、 連続命中効果持続+15s延長",
+          "en": "Spring Grudge cast speed +30%; Consecutive Hit duration +15s",
+          "zh": "春怨发动速度+30%，连续命中效果持续延长15秒",
+          "ko": "춘한 발동 속도 +30%, 연속 명중 효과 지속 +15초 연장",
           "vi": "Tốc độ kích hoạt Xuân Hận +30%, hiệu quả liên kích duy trì kéo dài 15s"
         }
       },
@@ -2481,8 +3060,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "対人戦以外 春風飛舞 連続命中対象命中で 与ダメ+10%、 拡散対象 3→5",
         "rawI18n": {
+          "ja": "対人戦以外 春風飛舞 連続命中対象命中で 与ダメ+10%、 拡散対象 3→5",
+          "en": "Outside PvP: Spring Breeze Dance hitting Consecutive Hit targets deals +10% DMG; spread targets 3→5",
+          "zh": "非对人战 春风飞舞命中连续命中目标时伤害+10%，扩散目标 3→5",
+          "ko": "대인전 외 춘풍비무 연속 명중 대상 적중 시 피해 +10%, 확산 대상 3→5",
           "vi": "Ngoài PvP, Xuân Phong Phi Vũ khi trúng mục tiêu liên kích: sát thương gây ra +10%, mục tiêu lan 3 → 5"
         }
       },
@@ -2491,8 +3073,11 @@
         "effects": {
           "critBoost": 0.044
         },
-        "raw": "Critical DMG Bonus +4.4%",
         "rawI18n": {
+          "ja": "Critical DMG Bonus +4.4%",
+          "en": "Critical DMG Bonus +4.4%",
+          "zh": "会心伤害加成 +4.4%",
+          "ko": "치명타 피해 보너스 +4.4%",
           "vi": "Tăng sát thương chí mạng +4.4%"
         }
       },
@@ -2504,8 +3089,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "春恨み max 3stack、 連続命中対象命中→ CD即-5s、 繁花+25 (スキル1回毎1回発動)",
         "rawI18n": {
+          "ja": "春恨み max 3stack、 連続命中対象命中→ CD即-5s、 繁花+25 (スキル1回毎1回発動)",
+          "en": "Spring Grudge max 3 stacks; hitting Consecutive Hit targets → CD instantly -5s, Blossom +25 (once per skill use)",
+          "zh": "春怨最多3层，命中连续命中目标→CD立即-5秒，繁花+25（每次技能1次）",
+          "ko": "춘한 최대 3중첩, 연속 명중 대상 적중 → CD 즉시 -5초, 번화 +25 (스킬 1회당 1회 발동)",
           "vi": "Xuân Hận tối đa 3 stack, khi trúng mục tiêu liên kích → CD ngay -5s, Phồn Hoa +25 (mỗi kỹ năng kích hoạt 1 lần)"
         }
       }
@@ -2523,8 +3111,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "雲起の座 水人治療+10%、 範囲内自身いれば毎回露水+1",
         "rawI18n": {
+          "ja": "雲起の座 水人治療+10%、 範囲内自身いれば毎回露水+1",
+          "en": "Cloudrise Seat: water puppet healing +10%; if you are in its area, gain +1 Dew each time",
+          "zh": "云起之座 水人治疗+10%，自身在范围内时每次露水+1",
+          "ko": "운기지좌 물 인형 치유 +10%, 범위 내 자신 있으면 매회 이슬 +1",
           "vi": "Vân Khởi Chi Tọa: trị liệu Thủy Nhân +10%, khi bản thân trong phạm vi mỗi lần Lộ Thủy +1"
         }
       },
@@ -2536,8 +3127,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "召喚水人治療受け時 追加露水+2",
         "rawI18n": {
+          "ja": "召喚水人治療受け時 追加露水+2",
+          "en": "When healed by summoned water puppet: extra +2 Dew",
+          "zh": "受召唤水人治疗时 额外露水+2",
+          "ko": "소환 물 인형 치유 받을 시 추가 이슬 +2",
           "vi": "Khi nhận trị liệu từ Thủy Nhân triệu hồi: bổ sung Lộ Thủy +2"
         }
       },
@@ -2546,12 +3140,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Min Physical Attack",
-        "raw": "Min Physical Attack (Solo Mode Level scaled, rank=gold)",
         "effects": {
           "minPhysATKAdd": 63.9
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Min Physical Attack (Solo Mode Level scaled, rank=gold)",
+          "en": "Min Physical Attack (Solo Mode Level scaled, rank=gold)",
+          "zh": "最小外功攻击（单人模式 按等级缩放，rank=gold）",
+          "ko": "최소 외공 공격 (싱글 모드 레벨 비례, rank=gold)",
           "vi": "Tấn công ngoại công tối thiểu (theo cấp ở chế độ đơn, rank=gold)"
         }
       },
@@ -2563,8 +3160,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "白雲無尽発動後 自身+治療対象に 6s持続治療",
         "rawI18n": {
+          "ja": "白雲無尽発動後 自身+治療対象に 6s持続治療",
+          "en": "After Boundless White Cloud: heal-over-time on self + healed targets for 6s",
+          "zh": "白云无尽发动后 自身+治疗目标获得6秒持续治疗",
+          "ko": "백운무진 발동 후 자신 + 치유 대상에게 6초 지속 치유",
           "vi": "Sau khi kích hoạt Bạch Vân Vô Tận: trị liệu duy trì 6s cho bản thân + đối tượng trị liệu"
         }
       },
@@ -2576,8 +3176,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "白雲無尽 発動条件 露水50消費に変更",
         "rawI18n": {
+          "ja": "白雲無尽 発動条件 露水50消費に変更",
+          "en": "Boundless White Cloud trigger changed to consuming 50 Dew",
+          "zh": "白云无尽发动条件改为消耗50露水",
+          "ko": "백운무진 발동 조건 이슬 50 소모로 변경",
           "vi": "Bạch Vân Vô Tận: điều kiện kích hoạt đổi sang tiêu 50 Lộ Thủy"
         }
       },
@@ -2586,8 +3189,11 @@
         "effects": {
           "addCritRate": 0.046
         },
-        "raw": "Direct Critical Rate +4.6%",
         "rawI18n": {
+          "ja": "Direct Critical Rate +4.6%",
+          "en": "Direct Critical Rate +4.6%",
+          "zh": "直接会心率 +4.6%",
+          "ko": "추가 치명타 확률 +4.6%",
           "vi": "Tỷ lệ chí mạng trực tiếp +4.6%"
         }
       },
@@ -2599,8 +3205,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "薬川装備時 非プレイヤー被ダメ-20%、 重傷時 7s復活水人召喚 (CD 120s、 軽減効果120s無効)",
         "rawI18n": {
+          "ja": "薬川装備時 非プレイヤー被ダメ-20%、 重傷時 7s復活水人召喚 (CD 120s、 軽減効果120s無効)",
+          "en": "With Panacea Fan equipped: DMG taken from non-players -20%; when critically injured, summon a revival water puppet for 7s (CD 120s; the reduction is disabled for 120s)",
+          "zh": "装备明川药典时 受非玩家伤害-20%，重伤时召唤复活水人7秒（CD 120秒，减伤效果120秒失效）",
+          "ko": "천계의 수호 장착 시 비플레이어에게 받는 피해 -20%, 중상 시 7초 부활 물 인형 소환 (CD 120초, 경감 효과 120초 무효)",
           "vi": "Khi trang bị Dược Xuyên: sát thương nhận vào từ phi người chơi -20%, khi trọng thương: triệu hồi Thủy Nhân hồi sinh 7s (CD 120s, hiệu quả giảm vô hiệu 120s)"
         }
       }
@@ -2621,8 +3230,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "会心治療で対象に養心1stack付与 (6s) — 受治療+2%、max3",
         "rawI18n": {
+          "ja": "会心治療で対象に養心1stack付与 (6s) — 受治療+2%、max3",
+          "en": "Crit heals apply 1 Nurture Heart stack to target (6s) — healing received +2%, max 3",
+          "zh": "会心治疗时对目标施加1层养心（6秒）— 受治疗+2%，最多3层",
+          "ko": "치명타 치유 시 대상에게 양심 1중첩 부여 (6초) — 받는 치유 +2%, 최대 3",
           "vi": "Khi trị liệu chí mạng: gắn 1 stack Dưỡng Tâm cho đối tượng (6s) — nhận trị liệu +2%, tối đa 3"
         }
       },
@@ -2635,8 +3247,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "養心持続 6s→10s延長",
         "rawI18n": {
+          "ja": "養心持続 6s→10s延長",
+          "en": "Nurture Heart duration 6s→10s",
+          "zh": "养心持续 6秒→10秒",
+          "ko": "양심 지속 6초→10초 연장",
           "vi": "Dưỡng Tâm duy trì 6s → 10s"
         }
       },
@@ -2645,7 +3260,6 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Min Silkbind Attack",
-        "raw": "Min Silkbind Attack (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "minSilkbind": 32.6
         },
@@ -2655,6 +3269,10 @@
         "maxPathATK": 32.6,
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Min Silkbind Attack (Solo Mode Level scaled, rank=purple)",
+          "en": "Min Silkbind Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "最小牵丝攻击（单人模式 按等级缩放，rank=purple）",
+          "ko": "최소 견사 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công Khiên Ti tối thiểu (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -2667,8 +3285,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "会心治療で自身に凝心1stack (10s) — 治療量+2%、max3",
         "rawI18n": {
+          "ja": "会心治療で自身に凝心1stack (10s) — 治療量+2%、max3",
+          "en": "Crit heals grant self 1 Focus Heart stack (10s) — healing dealt +2%, max 3",
+          "zh": "会心治疗时自身获得1层凝心（10秒）— 治疗量+2%，最多3层",
+          "ko": "치명타 치유 시 자신에게 응심 1중첩 (10초) — 치유량 +2%, 최대 3",
           "vi": "Khi trị liệu chí mạng: gắn cho bản thân 1 stack Ngưng Tâm (10s) — lượng trị liệu +2%, tối đa 3"
         }
       },
@@ -2681,17 +3302,23 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "養心/凝心 max3→6",
         "rawI18n": {
+          "ja": "養心/凝心 max3→6",
+          "en": "Nurture/Focus Heart max 3→6",
+          "zh": "养心/凝心 最大层数 3→6",
+          "ko": "양심/응심 최대 3→6",
           "vi": "Dưỡng Tâm/Ngưng Tâm tối đa 3 → 6"
         }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
-        "raw": "Critical Healing Bonus +4%",
         "category": "healing",
         "rawI18n": {
+          "ja": "Critical Healing Bonus +4%",
+          "en": "Critical Healing Bonus +4%",
+          "zh": "会心治疗加成 +4%",
+          "ko": "치명타 치유 보너스 +4%",
           "vi": "Tăng trị liệu chí mạng +4%"
         }
       },
@@ -2704,8 +3331,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "最大気血<30%対象に会心治療で 養心/凝心 2stackずつ獲得",
         "rawI18n": {
+          "ja": "最大気血<30%対象に会心治療で 養心/凝心 2stackずつ獲得",
+          "en": "Crit heals on targets below 30% max HP grant 2 stacks each of Nurture/Focus Heart",
+          "zh": "对最大气血<30%的目标会心治疗时 养心/凝心 各获得2层",
+          "ko": "최대 기혈 30% 미만 대상 치명타 치유 시 양심/응심 각 2중첩 획득",
           "vi": "Khi trị liệu chí mạng cho đối tượng sinh lực tối đa <30%: nhận Dưỡng Tâm/Ngưng Tâm 2 stack mỗi loại"
         }
       }
@@ -2725,8 +3355,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "貴き朝玉復活対象の治療気血回復+50%",
         "rawI18n": {
+          "ja": "貴き朝玉復活対象の治療気血回復+50%",
+          "en": "Precious Morning Jade: healing on revived targets +50%",
+          "zh": "贵朝玉 复活目标的治疗气血回复+50%",
+          "ko": "귀한 조옥 부활 대상 치유 기혈 회복 +50%",
           "vi": "Khi đối tượng được hồi sinh bằng Quý Triêu Ngọc: trị liệu hồi sinh lực +50%"
         }
       },
@@ -2738,8 +3371,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "復活対象 回復量 +50→+75%",
         "rawI18n": {
+          "ja": "復活対象 回復量 +50→+75%",
+          "en": "Revived target restore +50→+75%",
+          "zh": "复活目标回复量 +50→+75%",
+          "ko": "부활 대상 회복량 +50→+75%",
           "vi": "Lượng hồi phục cho đối tượng hồi sinh: +50 → +75%"
         }
       },
@@ -2748,12 +3384,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Critical Rate",
-        "raw": "Critical Rate (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "critRate": 0.0666
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Critical Rate (Solo Mode Level scaled, rank=purple)",
+          "en": "Critical Rate (Solo Mode Level scaled, rank=purple)",
+          "zh": "会心率（单人模式 按等级缩放，rank=purple）",
+          "ko": "치명타 확률 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tỷ lệ chí mạng (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -2765,8 +3404,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "復活後3s 対象被ダメ-30%",
         "rawI18n": {
+          "ja": "復活後3s 対象被ダメ-30%",
+          "en": "For 3s after revival: target DMG taken -30%",
+          "zh": "复活后3秒 目标受到伤害-30%",
+          "ko": "부활 후 3초 대상 받는 피해 -30%",
           "vi": "3s sau hồi sinh: sát thương nhận vào của đối tượng -30%"
         }
       },
@@ -2778,17 +3420,23 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "復活後 対象/自身に持続回復付与",
         "rawI18n": {
+          "ja": "復活後 対象/自身に持続回復付与",
+          "en": "After revival: heal-over-time on target and self",
+          "zh": "复活后 对目标/自身施加持续回复",
+          "ko": "부활 후 대상/자신에게 지속 회복 부여",
           "vi": "Sau hồi sinh: gắn trị liệu duy trì cho đối tượng/bản thân"
         }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
-        "raw": "Critical Healing Bonus +4%",
         "category": "healing",
         "rawI18n": {
+          "ja": "Critical Healing Bonus +4%",
+          "en": "Critical Healing Bonus +4%",
+          "zh": "会心治疗加成 +4%",
+          "ko": "치명타 치유 보너스 +4%",
           "vi": "Tăng trị liệu chí mạng +4%"
         }
       },
@@ -2800,8 +3448,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "8s 復活対象ダメ30%分担 (対象死亡で自最大気血25%回復)",
         "rawI18n": {
+          "ja": "8s 復活対象ダメ30%分担 (対象死亡で自最大気血25%回復)",
+          "en": "For 8s share 30% of revived target's DMG (if target dies, restore 25% of own max HP)",
+          "zh": "8秒内分担复活目标30%伤害（目标死亡时 回复自身最大气血25%）",
+          "ko": "8초간 부활 대상 피해 30% 분담 (대상 사망 시 자신 최대 기혈 25% 회복)",
           "vi": "8s sau hồi sinh: chia sẻ 30% sát thương của đối tượng (khi đối tượng chết: hồi 25% sinh lực tối đa của bản thân)"
         }
       }
@@ -2821,8 +3472,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "千水余韻発動後 露+5、露100消費毎 自最大気血10%追加回復",
         "rawI18n": {
+          "ja": "千水余韻発動後 露+5、露100消費毎 自最大気血10%追加回復",
+          "en": "After Thousand Waters Echo: +5 Dew; per 100 Dew spent, additionally restore 10% own max HP",
+          "zh": "千水余韵发动后 露水+5，每消耗100露水 额外回复自身最大气血10%",
+          "ko": "천수여운 발동 후 이슬 +5, 이슬 100 소모마다 자신 최대 기혈 10% 추가 회복",
           "vi": "Sau khi kích hoạt Thiên Thủy Dư Vận: Lộ +5, mỗi lần tiêu 100 Lộ hồi bổ sung 10% sinh lực tối đa của bản thân"
         }
       },
@@ -2834,8 +3488,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "千水余韻 CD 1sまで短縮",
         "rawI18n": {
+          "ja": "千水余韻 CD 1sまで短縮",
+          "en": "Thousand Waters Echo CD reduced to 1s",
+          "zh": "千水余韵 CD缩短至1秒",
+          "ko": "천수여운 CD 1초까지 단축",
           "vi": "Thiên Thủy Dư Vận: CD rút ngắn đến 1s"
         }
       },
@@ -2844,13 +3501,16 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Attack",
-        "raw": "Physical Attack (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "minPhysATKAdd": 19.17,
           "maxPhysATKAdd": 38.25
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "en": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "外功攻击（单人模式 按等级缩放，rank=purple）",
+          "ko": "외공 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công ngoại công (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -2862,8 +3522,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "累計露水50消費で自最大気血10%治療",
         "rawI18n": {
+          "ja": "累計露水50消費で自最大気血10%治療",
+          "en": "Per 50 total Dew spent: heal 10% of own max HP",
+          "zh": "累计消耗50露水时 治疗自身最大气血10%",
+          "ko": "누계 이슬 50 소모 시 자신 최대 기혈 10% 치유",
           "vi": "Khi tích lũy tiêu 50 Lộ Thủy: trị liệu 10% sinh lực tối đa của bản thân"
         }
       },
@@ -2875,17 +3538,23 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "千水余韻 気血最低味方検知範囲+50%",
         "rawI18n": {
+          "ja": "千水余韻 気血最低味方検知範囲+50%",
+          "en": "Thousand Waters Echo lowest-HP ally detection range +50%",
+          "zh": "千水余韵 检测气血最低队友范围+50%",
+          "ko": "천수여운 기혈 최저 아군 감지 범위 +50%",
           "vi": "Thiên Thủy Dư Vận: phạm vi phát hiện đồng đội sinh lực thấp nhất +50%"
         }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
-        "raw": "Physical Healing Bonus +2.5%",
         "category": "healing",
         "rawI18n": {
+          "ja": "Physical Healing Bonus +2.5%",
+          "en": "Physical Healing Bonus +2.5%",
+          "zh": "外功治疗加成 +2.5%",
+          "ko": "외공 치유 보너스 +2.5%",
           "vi": "Tăng trị liệu ngoại công +2.5%"
         }
       },
@@ -2897,8 +3566,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "千水余韻で自身+近傍気血割合最低味方を同時治療",
         "rawI18n": {
+          "ja": "千水余韻で自身+近傍気血割合最低味方を同時治療",
+          "en": "Thousand Waters Echo heals self and the nearby ally with lowest HP ratio simultaneously",
+          "zh": "千水余韵同时治疗自身+附近气血比例最低的队友",
+          "ko": "천수여운으로 자신 + 근처 기혈 비율 최저 아군 동시 치유",
           "vi": "Thiên Thủy Dư Vận: trị liệu đồng thời bản thân + đồng đội có tỷ lệ sinh lực thấp nhất gần đó"
         }
       }
@@ -2916,8 +3588,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "断魂刀防御成功→特殊カウンター + 溜め不要3段重撃溜め技 (10s CD)、 マルチ首領防御で15s絶韻stack",
         "rawI18n": {
+          "ja": "断魂刀防御成功→特殊カウンター + 溜め不要3段重撃溜め技 (10s CD)、 マルチ首領防御で15s絶韻stack",
+          "en": "Thundercry Blade successful block → special counter + no-charge 3-stage heavy Charged skill (10s CD); blocking in multi-Boss fights grants Last Echo stacks for 15s",
+          "zh": "嗟夫刀法防御成功→特殊反击 + 免蓄力3段重击蓄力技（10秒CD），多人首领战防御获得15秒绝韵层数",
+          "ko": "탄식의 검기 방어 성공 → 특수 카운터 + 차지 불요 3단 중공격 차지 스킬 (10초 CD), 멀티 보스 방어 시 15초 절운 중첩",
           "vi": "Khi Đoạn Hồn Đao đỡ thành công → phản công đặc biệt + 3 đoạn đả nặng tích lực không cần tích (CD 10s), khi đỡ multi-thủ lĩnh: 15s Tuyệt Vận stack"
         }
       },
@@ -2929,8 +3604,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "防御成功 20%確率 戦意+1追加、 対人戦 気力自然回復速度上昇",
         "rawI18n": {
+          "ja": "防御成功 20%確率 戦意+1追加、 対人戦 気力自然回復速度上昇",
+          "en": "Successful block: 20% chance of +1 extra Battle Will; in PvP, natural Stamina regen up",
+          "zh": "防御成功时 20%概率额外战意+1，对人战中气力自然回复速度提升",
+          "ko": "방어 성공 시 20% 확률로 전의 +1 추가, 대인전 기력 자연 회복 속도 상승",
           "vi": "Khi đỡ thành công: xác suất 20% Chiến Ý +1 bổ sung, trong PvP tốc độ hồi thể lực tự nhiên tăng"
         }
       },
@@ -2939,12 +3617,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Critical Rate",
-        "raw": "Critical Rate (Solo Mode Level scaled, rank=gold)",
         "effects": {
           "critRate": 0.074
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Critical Rate (Solo Mode Level scaled, rank=gold)",
+          "en": "Critical Rate (Solo Mode Level scaled, rank=gold)",
+          "zh": "会心率（单人模式 按等级缩放，rank=gold）",
+          "ko": "치명타 확률 (싱글 모드 레벨 비례, rank=gold)",
           "vi": "Tỷ lệ chí mạng (theo cấp ở chế độ đơn, rank=gold)"
         }
       },
@@ -2956,8 +3637,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "免蓄重撃溜め技 威力 1→3段階",
         "rawI18n": {
+          "ja": "免蓄重撃溜め技 威力 1→3段階",
+          "en": "No-charge heavy Charged skill power stage 1→3",
+          "zh": "免蓄重击蓄力技 威力 1→3段",
+          "ko": "차지 불요 중공격 차지 스킬 위력 1→3단계",
           "vi": "Đả nặng tích lực miễn tích: uy lực 1 → 3 cấp"
         }
       },
@@ -2969,8 +3653,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "防御成功で 特殊カウンター技 発動間隔 -50% (10→5s)",
         "rawI18n": {
+          "ja": "防御成功で 特殊カウンター技 発動間隔 -50% (10→5s)",
+          "en": "Successful block: special counter interval -50% (10→5s)",
+          "zh": "防御成功时 特殊反击触发间隔-50%（10→5秒）",
+          "ko": "방어 성공 시 특수 카운터 발동 간격 -50% (10→5초)",
           "vi": "Khi đỡ thành công: khoảng cách kích hoạt phản công đặc biệt -50% (10 → 5s)"
         }
       },
@@ -2979,8 +3666,11 @@
         "effects": {
           "critBoost": 0.044
         },
-        "raw": "Critical DMG Bonus +4.4%",
         "rawI18n": {
+          "ja": "Critical DMG Bonus +4.4%",
+          "en": "Critical DMG Bonus +4.4%",
+          "zh": "会心伤害加成 +4.4%",
+          "ko": "치명타 피해 보너스 +4.4%",
           "vi": "Tăng sát thương chí mạng +4.4%"
         }
       },
@@ -2992,8 +3682,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "三段階軽重撃/派生 戦意1消費でダメ+25% (軽重撃 2マスで+50%)",
         "rawI18n": {
+          "ja": "三段階軽重撃/派生 戦意1消費でダメ+25% (軽重撃 2マスで+50%)",
+          "en": "3-stage light-heavy attacks/derivatives consume 1 Battle Will for +25% DMG (light-heavy at 2 bars +50%)",
+          "zh": "三段轻重击/派生 消耗1点战意伤害+25%（轻重击2格时+50%）",
+          "ko": "3단계 약중공격/파생 전의 1 소모로 피해 +25% (약중공격 2칸 시 +50%)",
           "vi": "Đả nhẹ/đả nặng 3 cấp/phái sinh: tiêu 1 Chiến Ý tăng sát thương +25% (đả nhẹ/nặng ở 2 ô +50%)"
         }
       }
@@ -3013,8 +3706,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "気血<30%で困獣の闘い — 気血上限30%吸収シールド (4s、300sCD)",
         "rawI18n": {
+          "ja": "気血<30%で困獣の闘い — 気血上限30%吸収シールド (4s、300sCD)",
+          "en": "Below 30% HP triggers Cornered Beast — shield absorbing 30% max HP (4s, 300s CD)",
+          "zh": "气血低于30%时触发困兽之斗 — 气血上限30%吸收护盾（4秒，300秒CD）",
+          "ko": "기혈 30% 미만 시 곤수지투 발동 — 기혈 최대치 30% 흡수 보호막 (4초, 300초 CD)",
           "vi": "Khi sinh lực <30%: Khốn Thú Chi Đấu — lá chắn hấp thụ 30% sinh lực tối đa (4s, CD 300s)"
         }
       },
@@ -3026,8 +3722,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "シールド量 気血上限30%→40%",
         "rawI18n": {
+          "ja": "シールド量 気血上限30%→40%",
+          "en": "Shield amount 30%→40% max HP",
+          "zh": "护盾量 气血上限30%→40%",
+          "ko": "보호막량 기혈 최대치 30%→40%",
           "vi": "Lượng lá chắn: 30% → 40% sinh lực tối đa"
         }
       },
@@ -3036,10 +3735,13 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "raw": "Max HP (Solo Mode Level scaled, rank=purple)",
         "effects": {},
         "category": "defensive",
         "rawI18n": {
+          "ja": "Max HP (Solo Mode Level scaled, rank=purple)",
+          "en": "Max HP (Solo Mode Level scaled, rank=purple)",
+          "zh": "气血最大值（单人模式 按等级缩放，rank=purple）",
+          "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -3051,8 +3753,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "シールド中 受治療/薬使用効果上昇",
         "rawI18n": {
+          "ja": "シールド中 受治療/薬使用効果上昇",
+          "en": "While shielded: healing received / medicine effects increased",
+          "zh": "护盾期间 受治疗/用药效果提升",
+          "ko": "보호막 중 받는 치유/약 사용 효과 상승",
           "vi": "Trong lá chắn: hiệu quả nhận trị liệu/dùng thuốc tăng"
         }
       },
@@ -3064,17 +3769,23 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "発動間隔-40% (300s→180s)",
         "rawI18n": {
+          "ja": "発動間隔-40% (300s→180s)",
+          "en": "Trigger interval -40% (300s→180s)",
+          "zh": "触发间隔-40%（300秒→180秒）",
+          "ko": "발동 간격 -40% (300초→180초)",
           "vi": "Khoảng cách kích hoạt -40% (300s → 180s)"
         }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
-        "raw": "外功耐性 +5.1",
         "category": "defensive",
         "rawI18n": {
+          "ja": "外功耐性 +5.1",
+          "en": "Physical Resistance +5.1",
+          "zh": "外功抗性 +5.1",
+          "ko": "외공 저항 +5.1",
           "vi": "Kháng ngoại công +5.1"
         }
       },
@@ -3086,8 +3797,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "シールド持続中破壊で CD即-120s",
         "rawI18n": {
+          "ja": "シールド持続中破壊で CD即-120s",
+          "en": "If shield is broken while active: CD instantly -120s",
+          "zh": "护盾持续期间被打破时 CD立即-120秒",
+          "ko": "보호막 지속 중 파괴 시 CD 즉시 -120초",
           "vi": "Khi lá chắn bị phá trong khi duy trì: CD ngay -120s"
         }
       }
@@ -3107,8 +3821,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "発動シールド/付与効果持続+4秒",
         "rawI18n": {
+          "ja": "発動シールド/付与効果持続+4秒",
+          "en": "Shields/buffs you apply last +4s",
+          "zh": "发动的护盾/施加效果持续+4秒",
+          "ko": "발동 보호막/부여 효과 지속 +4초",
           "vi": "Lá chắn/hiệu quả gắn khi kích hoạt: kéo dài duy trì +4 giây"
         }
       },
@@ -3120,8 +3837,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "全気血シールド吸収量+10%",
         "rawI18n": {
+          "ja": "全気血シールド吸収量+10%",
+          "en": "All HP shield absorption +10%",
+          "zh": "全部气血护盾吸收量+10%",
+          "ko": "모든 기혈 보호막 흡수량 +10%",
           "vi": "Toàn bộ lá chắn sinh lực: lượng hấp thụ +10%"
         }
       },
@@ -3130,7 +3850,6 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Rock Splitting Attack",
-        "raw": "Rock Splitting Attack (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "minStonesplit": 10.9,
           "maxStonesplit": 21.7
@@ -3141,6 +3860,10 @@
         "maxPathATK": 21.7,
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Rock Splitting Attack (Solo Mode Level scaled, rank=purple)",
+          "en": "Rock Splitting Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "裂石攻击（单人模式 按等级缩放，rank=purple）",
+          "ko": "열석 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công Liệt Thạch (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -3152,8 +3875,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "シールド保護時 与全ダメ&治療+5%",
         "rawI18n": {
+          "ja": "シールド保護時 与全ダメ&治療+5%",
+          "en": "While shield-protected: all DMG dealt & healing +5%",
+          "zh": "受护盾保护时 造成全部伤害&治疗+5%",
+          "ko": "보호막 보호 시 주는 모든 피해 & 치유 +5%",
           "vi": "Trong khi lá chắn bảo vệ: toàn bộ sát thương gây ra & trị liệu +5%"
         }
       },
@@ -3165,8 +3891,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "シールド/付加効果持続+2秒追加 (合計+6秒)",
         "rawI18n": {
+          "ja": "シールド/付加効果持続+2秒追加 (合計+6秒)",
+          "en": "Shield/buff duration +2s more (total +6s)",
+          "zh": "护盾/附加效果持续再+2秒（合计+6秒）",
+          "ko": "보호막/부가 효과 지속 +2초 추가 (합계 +6초)",
           "vi": "Lá chắn/hiệu quả gắn duy trì +2 giây bổ sung (tổng +6 giây)"
         }
       },
@@ -3175,10 +3904,13 @@
         "effects": {
           "stonesplitPen": 6
         },
-        "raw": "Rock Splitting Penetration +6",
         "weaponSpecific": "stonesplit",
         "pendingImplementation": true,
         "rawI18n": {
+          "ja": "Rock Splitting Penetration +6",
+          "en": "Rock Splitting Penetration +6",
+          "zh": "裂石穿透 +6",
+          "ko": "열석 관통 +6",
           "vi": "Xuyên thấu Liệt Thạch +6"
         }
       },
@@ -3190,8 +3922,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "保護時 与ダメ&回復+10%、シールド未破壊→残量25%回復(PvP5%)、破壊→12秒硬茬+10%",
         "rawI18n": {
+          "ja": "保護時 与ダメ&回復+10%、シールド未破壊→残量25%回復(PvP5%)、破壊→12秒硬茬+10%",
+          "en": "While protected: DMG & healing +10%; shield not broken → restore 25% of remaining shield (PvP 5%); broken → Tough +10% for 12s",
+          "zh": "受保护时 伤害&回复+10%，护盾未被打破→回复剩余量25%（PvP 5%），被打破→12秒硬茬+10%",
+          "ko": "보호 시 피해 & 회복 +10%, 보호막 미파괴 → 잔량 25% 회복 (PvP 5%), 파괴 → 12초 강경 +10%",
           "vi": "Khi được bảo vệ: sát thương gây ra & hồi phục +10%, lá chắn không bị phá → hồi 25% lượng còn lại (PvP 5%), bị phá → 12 giây Cứng Răng +10%"
         }
       }
@@ -3211,8 +3946,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "挑発で風雷の嘯きDR+20%/+5% (max20%)、与ダメ-10%",
         "rawI18n": {
+          "ja": "挑発で風雷の嘯きDR+20%/+5% (max20%)、与ダメ-10%",
+          "en": "Taunt: Windthunder Roar DMG reduction +20%/+5% (max 20%); DMG dealt -10%",
+          "zh": "嘲讽时 风雷啸减伤+20%/+5%（最多20%），造成伤害-10%",
+          "ko": "도발 시 풍뢰의 포효 피해 감소 +20%/+5% (최대 20%), 주는 피해 -10%",
           "vi": "Khi khiêu khích: Phong Lôi Chi Khiếu DR +20%/+5% (tối đa 20%), sát thương gây ra -10%"
         }
       },
@@ -3224,8 +3962,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "風雷の嘯きCT-4s (16s)",
         "rawI18n": {
+          "ja": "風雷の嘯きCT-4s (16s)",
+          "en": "Windthunder Roar CD -4s (16s)",
+          "zh": "风雷啸CD-4秒（16秒）",
+          "ko": "풍뢰의 포효 CD -4초 (16초)",
           "vi": "Phong Lôi Chi Khiếu CT -4s (16s)"
         }
       },
@@ -3234,10 +3975,13 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "raw": "Max HP (Solo Mode Level scaled, rank=purple)",
         "effects": {},
         "category": "defensive",
         "rawI18n": {
+          "ja": "Max HP (Solo Mode Level scaled, rank=purple)",
+          "en": "Max HP (Solo Mode Level scaled, rank=purple)",
+          "zh": "气血最大值（单人模式 按等级缩放，rank=purple）",
+          "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -3249,8 +3993,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "挑発ユニット攻撃時 与ダメ+5%",
         "rawI18n": {
+          "ja": "挑発ユニット攻撃時 与ダメ+5%",
+          "en": "Attacking taunted units: DMG +5%",
+          "zh": "攻击被嘲讽单位时 伤害+5%",
+          "ko": "도발된 유닛 공격 시 피해 +5%",
           "vi": "Khi tấn công đơn vị bị khiêu khích: sát thương gây ra +5%"
         }
       },
@@ -3262,17 +4009,23 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "風雷の嘯きDR ボス挑発時+25%、上限25%",
         "rawI18n": {
+          "ja": "風雷の嘯きDR ボス挑発時+25%、上限25%",
+          "en": "Windthunder Roar DMG reduction +25% when taunting Bosses, cap 25%",
+          "zh": "风雷啸减伤 嘲讽首领时+25%，上限25%",
+          "ko": "풍뢰의 포효 피해 감소 보스 도발 시 +25%, 상한 25%",
           "vi": "Phong Lôi Chi Khiếu DR khi khiêu khích Boss: +25%, giới hạn 25%"
         }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
-        "raw": "Physical DMG Reduction +2.5%",
         "category": "defensive",
         "rawI18n": {
+          "ja": "Physical DMG Reduction +2.5%",
+          "en": "Physical DMG Reduction +2.5%",
+          "zh": "外功伤害减免 +2.5%",
+          "ko": "외공 피해 감소 +2.5%",
           "vi": "Giảm sát thương ngoại công +2.5%"
         }
       },
@@ -3284,8 +4037,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "風雷の嘯き被ダメ軽減中 命中で戦意1=気血+2% (最大5体)",
         "rawI18n": {
+          "ja": "風雷の嘯き被ダメ軽減中 命中で戦意1=気血+2% (最大5体)",
+          "en": "While Windthunder Roar reduction active: each hit grants 1 Battle Will = HP +2% (max 5 targets)",
+          "zh": "风雷啸减伤期间 命中时获得1点战意=气血+2%（最多5个目标）",
+          "ko": "풍뢰의 포효 피해 경감 중 적중 시 전의 1 = 기혈 +2% (최대 5명)",
           "vi": "Trong khi Phong Lôi Chi Khiếu giảm sát thương nhận: khi trúng, 1 Chiến Ý = sinh lực +2% (tối đa 5 đối tượng)"
         }
       }
@@ -3309,8 +4065,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "外功防御10%/瞬嵐耐性10無視",
         "rawI18n": {
+          "ja": "外功防御10%/瞬嵐耐性10無視",
+          "en": "Ignore 10% Physical Defense / 10 Bamboocut Resistance",
+          "zh": "无视外功防御10%/破竹抗性10",
+          "ko": "외공 방어력 10% / 파죽 저항 10 무시",
           "vi": "Bỏ qua phòng ngự ngoại công 10% / kháng Phá Trúc 10"
         }
       },
@@ -3322,8 +4081,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "悪身&苦果対象攻撃で 10s輪廻獲得、 輪廻時 与ダメ+5%",
         "rawI18n": {
+          "ja": "悪身&苦果対象攻撃で 10s輪廻獲得、 輪廻時 与ダメ+5%",
+          "en": "Attacking Evil Body & Bitter Fruit targets grants Samsara for 10s; during Samsara DMG +5%",
+          "zh": "攻击恶身&苦果目标时 获得10秒轮回，轮回期间伤害+5%",
+          "ko": "악신&고과 대상 공격 시 10초 윤회 획득, 윤회 중 피해 +5%",
           "vi": "Khi tấn công đối tượng Ác Thân & Khổ Quả: 10s nhận Luân Hồi, trong Luân Hồi sát thương gây ra +5%"
         }
       },
@@ -3334,8 +4096,11 @@
         "effects": {
           "critRate": 0.074
         },
-        "raw": "Critical Rate +7.4%",
         "rawI18n": {
+          "ja": "Critical Rate +7.4%",
+          "en": "Critical Rate +7.4%",
+          "zh": "会心率 +7.4%",
+          "ko": "치명타 확률 +7.4%",
           "vi": "Tỷ lệ chí mạng +7.4%"
         }
       },
@@ -3347,8 +4112,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "完全回避→輪廻獲得、 輪廻時ダメ→業火+1",
         "rawI18n": {
+          "ja": "完全回避→輪廻獲得、 輪廻時ダメ→業火+1",
+          "en": "Perfect dodge → gain Samsara; DMG during Samsara → Karmic Fire +1",
+          "zh": "完美闪避→获得轮回，轮回期间造成伤害→业火+1",
+          "ko": "완벽 회피 → 윤회 획득, 윤회 중 피해 → 업화 +1",
           "vi": "Né hoàn hảo → nhận Luân Hồi, sát thương trong Luân Hồi → Nghiệp Hỏa +1"
         }
       },
@@ -3360,8 +4128,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "輪廻時ダメ→業火+1",
         "rawI18n": {
+          "ja": "輪廻時ダメ→業火+1",
+          "en": "DMG during Samsara → Karmic Fire +1",
+          "zh": "轮回期间造成伤害→业火+1",
+          "ko": "윤회 중 피해 → 업화 +1",
           "vi": "Sát thương trong Luân Hồi → Nghiệp Hỏa +1"
         }
       },
@@ -3370,8 +4141,11 @@
         "effects": {
           "critBoost": 0.044
         },
-        "raw": "Critical DMG Bonus +4.4%",
         "rawI18n": {
+          "ja": "Critical DMG Bonus +4.4%",
+          "en": "Critical DMG Bonus +4.4%",
+          "zh": "会心伤害加成 +4.4%",
+          "ko": "치명타 피해 보너스 +4.4%",
           "vi": "Tăng sát thương chí mạng +4.4%"
         }
       },
@@ -3383,8 +4157,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "怒炎軽撃 悪身+苦果同時付与、 輪廻時 与ダメ+10%",
         "rawI18n": {
+          "ja": "怒炎軽撃 悪身+苦果同時付与、 輪廻時 与ダメ+10%",
+          "en": "Rage Flame light attacks apply Evil Body + Bitter Fruit together; during Samsara DMG +10%",
+          "zh": "怒炎轻击 同时施加恶身+苦果，轮回期间伤害+10%",
+          "ko": "노염 약공격 악신+고과 동시 부여, 윤회 중 피해 +10%",
           "vi": "Nộ Diệm Đả Nhẹ: gắn đồng thời Ác Thân + Khổ Quả, trong Luân Hồi sát thương gây ra +10%"
         }
       }
@@ -3402,8 +4179,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "敵討令/鼠の威力/力溜め召喚ねずみ 持続時間 10s→15s、 恩文字の札+20回復",
         "rawI18n": {
+          "ja": "敵討令/鼠の威力/力溜め召喚ねずみ 持続時間 10s→15s、 恩文字の札+20回復",
+          "en": "Vengeance Order / Rat Power / charged summon rats duration 10s→15s; Grace Charm restore +20",
+          "zh": "敌讨令/鼠之威力/蓄力召唤鼠 持续时间 10秒→15秒，恩字符回复+20",
+          "ko": "복수령/쥐의 위력/차지 소환 쥐 지속시간 10초→15초, 은 글자 부적 회복 +20",
           "vi": "Địch Thảo Lệnh / uy lực Chuột / tích lực triệu hồi Chuột: thời gian duy trì 10s → 15s, lá bùa chữ Ân +20 hồi phục"
         }
       },
@@ -3415,8 +4195,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "回復速度+30%、 敵デバフ持続+延長 (20s)",
         "rawI18n": {
+          "ja": "回復速度+30%、 敵デバフ持続+延長 (20s)",
+          "en": "Restore speed +30%; enemy debuff duration extended (20s)",
+          "zh": "回复速度+30%，敌方debuff持续延长（20秒）",
+          "ko": "회복 속도 +30%, 적 디버프 지속 연장 (20초)",
           "vi": "Tốc độ hồi phục +30%, duy trì debuff địch kéo dài (20s)"
         }
       },
@@ -3425,12 +4208,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Min Physical Attack",
-        "raw": "Min Physical Attack +57.51 (rank=purple, post 5/28 patch swap with 454)",
         "effects": {
           "minPhysATKAdd": 57.51
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Min Physical Attack +57.51 (rank=purple, post 5/28 patch swap with 454)",
+          "en": "Min Physical Attack +57.51 (rank=purple, post 5/28 patch swap with 454)",
+          "zh": "最小外功攻击 +57.51（rank=purple，5/28补丁后与454互换）",
+          "ko": "최소 외공 공격 +57.51 (rank=purple, 5/28 패치 후 454와 교체)",
           "vi": "Tấn công ngoại công tối thiểu +57.51 (rank=purple, sau patch 5/28 swap với 454)"
         }
       },
@@ -3446,8 +4232,11 @@
           20501
         ],
         "synergyMissingMultiplier": 0.5,
-        "raw": "鼠ダメージの30%追加ダメージ (20s時限、 獄炎同装備時 鼠ダメ倍 → 獄炎なしで効果半減)",
         "rawI18n": {
+          "ja": "鼠ダメージの30%追加ダメージ (20s時限、 獄炎同装備時 鼠ダメ倍 → 獄炎なしで効果半減)",
+          "en": "Bonus DMG equal to 30% of rat DMG (20s window; with Infernal Twinblades equipped rat DMG doubles → halved effect without it)",
+          "zh": "额外造成鼠伤害30%的伤害（20秒时限，同时装备泥犁三垢时鼠伤翻倍 → 无泥犁三垢效果减半）",
+          "ko": "쥐 피해의 30% 추가 피해 (20초 한정, 윤회의 가르침 동시 장착 시 쥐 피해 2배 → 없으면 효과 절반)",
           "vi": "Sát thương bổ sung bằng 30% sát thương Chuột (giới hạn 20s, khi cùng trang bị Ngục Viêm: sát thương Chuột nhân đôi → không có Ngục Viêm hiệu quả giảm nửa)"
         }
       },
@@ -3459,8 +4248,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "恩文字の札 回復速度 30→50%、 札2枚消費で持続20s延長",
         "rawI18n": {
+          "ja": "恩文字の札 回復速度 30→50%、 札2枚消費で持続20s延長",
+          "en": "Grace Charm restore speed 30→50%; consuming 2 charms extends duration 20s",
+          "zh": "恩字符回复速度 30→50%，消耗2张符时持续延长20秒",
+          "ko": "은 글자 부적 회복 속도 30→50%, 부적 2장 소모 시 지속 20초 연장",
           "vi": "Lá bùa chữ Ân: tốc độ hồi phục 30 → 50%, tiêu 2 lá bùa kéo dài duy trì +20s"
         }
       },
@@ -3469,8 +4261,11 @@
         "effects": {
           "outerPenAdd": 5.1
         },
-        "raw": "Physical Penetration +5.1 (post 5/28 patch swap with 454)",
         "rawI18n": {
+          "ja": "Physical Penetration +5.1 (post 5/28 patch swap with 454)",
+          "en": "Physical Penetration +5.1 (post 5/28 patch swap with 454)",
+          "zh": "外功穿透 +5.1（5/28补丁后与454互换）",
+          "ko": "외공 관통 +5.1 (5/28 패치 후 454와 교체)",
           "vi": "Xuyên thấu ngoại công +5.1 (sau patch 5/28 swap với 454)"
         }
       },
@@ -3486,8 +4281,11 @@
           20501
         ],
         "synergyMissingMultiplier": 0.5,
-        "raw": "鼠ダメージ+30% (獄炎同装備時 鼠ダメ倍 → 獄炎なしで効果半減)",
         "rawI18n": {
+          "ja": "鼠ダメージ+30% (獄炎同装備時 鼠ダメ倍 → 獄炎なしで効果半減)",
+          "en": "Rat DMG +30% (with Infernal Twinblades equipped rat DMG doubles → halved effect without it)",
+          "zh": "鼠伤害+30%（同时装备泥犁三垢时鼠伤翻倍 → 无泥犁三垢效果减半）",
+          "ko": "쥐 피해 +30% (윤회의 가르침 동시 장착 시 쥐 피해 2배 → 없으면 효과 절반)",
           "vi": "Sát thương Chuột +30% (khi cùng trang bị Ngục Viêm: sát thương Chuột nhân đôi → không có Ngục Viêm hiệu quả giảm nửa)"
         }
       }
@@ -3509,8 +4307,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "力尽き敵会心で崩解1stack、stack毎 outerPen+5/critBoost+5%、最大3、3秒",
         "rawI18n": {
+          "ja": "力尽き敵会心で崩解1stack、stack毎 outerPen+5/critBoost+5%、最大3、3秒",
+          "en": "Crits on downed enemies grant 1 Disintegrate stack; per stack Physical Pen +5 / Crit DMG +5%, max 3, 3s",
+          "zh": "对力竭敌人会心时获得1层崩解，每层外功穿透+5/会心伤害+5%，最多3层，3秒",
+          "ko": "탈진 적 치명타 시 붕해 1중첩, 중첩당 외공 관통 +5 / 치명타 피해 +5%, 최대 3, 3초",
           "vi": "Khi chí mạng địch kiệt sức: nhận 1 stack Băng Giải, mỗi stack outerPen +5 / critBoost +5%, tối đa 3, 3 giây"
         }
       },
@@ -3519,8 +4320,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "崩解持続5秒に延長",
         "rawI18n": {
+          "ja": "崩解持続5秒に延長",
+          "en": "Disintegrate duration extended to 5s",
+          "zh": "崩解持续延长至5秒",
+          "ko": "붕해 지속 5초로 연장",
           "vi": "Băng Giải kéo dài duy trì 5 giây"
         }
       },
@@ -3529,12 +4333,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Precision Rate",
-        "raw": "Precision Rate (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "hitRate": 0.0594
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Precision Rate (Solo Mode Level scaled, rank=purple)",
+          "en": "Precision Rate (Solo Mode Level scaled, rank=purple)",
+          "zh": "精准率（单人模式 按等级缩放，rank=purple）",
+          "ko": "정확도 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tỷ lệ trúng đích (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -3543,8 +4350,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "力尽き敵命中で即座に崩解1stack",
         "rawI18n": {
+          "ja": "力尽き敵命中で即座に崩解1stack",
+          "en": "Hitting downed enemies instantly grants 1 Disintegrate stack",
+          "zh": "命中力竭敌人时立即获得1层崩解",
+          "ko": "탈진 적 적중 시 즉시 붕해 1중첩",
           "vi": "Khi trúng địch kiệt sức: ngay lập tức nhận 1 stack Băng Giải"
         }
       },
@@ -3553,8 +4363,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "崩解最大stack数 5へ",
         "rawI18n": {
+          "ja": "崩解最大stack数 5へ",
+          "en": "Disintegrate max stacks to 5",
+          "zh": "崩解最大层数提升至5",
+          "ko": "붕해 최대 중첩 5로 상승",
           "vi": "Băng Giải tối đa stack: lên 5"
         }
       },
@@ -3563,8 +4376,11 @@
         "effects": {
           "addCritRate": 0.041
         },
-        "raw": "Direct Critical Rate +4.1%",
         "rawI18n": {
+          "ja": "Direct Critical Rate +4.1%",
+          "en": "Direct Critical Rate +4.1%",
+          "zh": "直接会心率 +4.1%",
+          "ko": "추가 치명타 확률 +4.1%",
           "vi": "Tỷ lệ chí mạng trực tiếp +4.1%"
         }
       },
@@ -3573,8 +4389,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "完全回避で崩解5stack獲得、15秒毎1回",
         "rawI18n": {
+          "ja": "完全回避で崩解5stack獲得、15秒毎1回",
+          "en": "Perfect dodge grants 5 Disintegrate stacks, once per 15s",
+          "zh": "完美闪避时获得5层崩解，每15秒1次",
+          "ko": "완벽 회피 시 붕해 5중첩 획득, 15초마다 1회",
           "vi": "Khi né hoàn hảo: nhận 5 stack Băng Giải, 15 giây 1 lần"
         }
       }
@@ -3596,8 +4415,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "妨害系命中で現武術CD-1s (10s毎1回)",
         "rawI18n": {
+          "ja": "妨害系命中で現武術CD-1s (10s毎1回)",
+          "en": "Disruption hits reduce current martial skill CD -1s (once per 10s)",
+          "zh": "妨害类命中时 当前武学CD-1秒（每10秒1次）",
+          "ko": "방해계 적중 시 현재 무술 CD -1초 (10초마다 1회)",
           "vi": "Khi kỹ năng khống chế trúng: CD võ học hiện tại -1s (mỗi 10s 1 lần)"
         }
       },
@@ -3611,8 +4433,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "妨害系命中で現武術CD-2s",
         "rawI18n": {
+          "ja": "妨害系命中で現武術CD-2s",
+          "en": "Disruption hits reduce current martial skill CD -2s",
+          "zh": "妨害类命中时 当前武学CD-2秒",
+          "ko": "방해계 적중 시 현재 무술 CD -2초",
           "vi": "Khi kỹ năng khống chế trúng: CD võ học hiện tại -2s"
         }
       },
@@ -3621,12 +4446,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Min Bamboocut Attack",
-        "raw": "Min Bamboocut Attack +32.6 (rank=purple, post 5/28 patch swap with 452)",
         "effects": {
           "minBamboocut": 32.6
         },
         "weaponSpecific": "bamboocut",
         "rawI18n": {
+          "ja": "Min Bamboocut Attack +32.6 (rank=purple, post 5/28 patch swap with 452)",
+          "en": "Min Bamboocut Attack +32.6 (rank=purple, post 5/28 patch swap with 452)",
+          "zh": "最小破竹攻击 +32.6（rank=purple，5/28补丁后与452互换）",
+          "ko": "최소 파죽 공격 +32.6 (rank=purple, 5/28 패치 후 452와 교체)",
           "vi": "Tấn công Phá Trúc tối thiểu +32.6 (rank=purple, sau patch 5/28 swap với 452)"
         }
       },
@@ -3640,8 +4468,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "制御/蝕骨対象 武術技与真気ダメ+10%",
         "rawI18n": {
+          "ja": "制御/蝕骨対象 武術技与真気ダメ+10%",
+          "en": "Vs controlled/Bone Erosion targets: martial skill Qi DMG +10%",
+          "zh": "对受控制/蚀骨目标 武学技真气伤害+10%",
+          "ko": "제어/식골 대상 무술 스킬 진기 피해 +10%",
           "vi": "Với đối tượng khống chế/Thực Cốt: sát thương chân khí của kỹ năng võ học +10%"
         }
       },
@@ -3655,8 +4486,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武術技CD短縮 発動間隔5秒へ短縮",
         "rawI18n": {
+          "ja": "武術技CD短縮 発動間隔5秒へ短縮",
+          "en": "Martial skill CD reduction interval shortened to 5s",
+          "zh": "武学技CD缩短 触发间隔缩短至5秒",
+          "ko": "무술 스킬 CD 단축 발동 간격 5초로 단축",
           "vi": "Rút ngắn CD kỹ năng võ học: khoảng cách kích hoạt rút xuống 5 giây"
         }
       },
@@ -3665,9 +4499,12 @@
         "effects": {
           "bamboocutPen": 6
         },
-        "raw": "Bamboocut Penetration +6.0 (post 5/28 patch swap with 452)",
         "weaponSpecific": "bamboocut",
         "rawI18n": {
+          "ja": "Bamboocut Penetration +6.0 (post 5/28 patch swap with 452)",
+          "en": "Bamboocut Penetration +6.0 (post 5/28 patch swap with 452)",
+          "zh": "破竹穿透 +6.0（5/28补丁后与452互换）",
+          "ko": "파죽 관통 +6.0 (5/28 패치 후 452와 교체)",
           "vi": "Xuyên thấu Phá Trúc +6.0 (sau patch 5/28 swap với 452)"
         }
       },
@@ -3681,8 +4518,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "制御/蝕骨命中で削骨3秒、武術技気血ダメ+10% 最大3スタック",
         "rawI18n": {
+          "ja": "制御/蝕骨命中で削骨3秒、武術技気血ダメ+10% 最大3スタック",
+          "en": "Hits on controlled/Bone Erosion targets apply Bone Shave for 3s: martial skill HP DMG +10%, max 3 stacks",
+          "zh": "命中受控制/蚀骨目标时施加削骨3秒，武学技气血伤害+10% 最多3层",
+          "ko": "제어/식골 적중 시 삭골 3초, 무술 스킬 기혈 피해 +10% 최대 3중첩",
           "vi": "Khi khống chế/Thực Cốt trúng: Tước Cốt 3 giây, sát thương sinh lực của kỹ năng võ học +10% tối đa 3 stack"
         }
       }
@@ -3700,8 +4540,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "紅綃香断 最初投げ→幻影傘召喚、 3回毎1本召喚、 完璧キャッチ/召喚時 共鳴範囲ダメ",
         "rawI18n": {
+          "ja": "紅綃香断 最初投げ→幻影傘召喚、 3回毎1本召喚、 完璧キャッチ/召喚時 共鳴範囲ダメ",
+          "en": "Crimson Silk Severance: first throw summons a phantom umbrella, one per 3 throws; perfect catch/summon deals resonance AoE DMG",
+          "zh": "红绡香断 首次投掷→召唤幻影伞，每3次召唤1把，完美接伞/召唤时造成共鸣范围伤害",
+          "ko": "홍초향단 첫 투척 → 환영 우산 소환, 3회마다 1개 소환, 완벽 캐치/소환 시 공명 범위 피해",
           "vi": "Hồng Tiêu Hương Đoạn: ném lần đầu → triệu hồi Huyễn Ảnh Dù, mỗi 3 lần triệu 1 cây, khi bắt hoàn hảo/triệu hồi: sát thương cộng hưởng phạm vi"
         }
       },
@@ -3713,8 +4556,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "完全防御 傘受け成功で 残紅+10回復",
         "rawI18n": {
+          "ja": "完全防御 傘受け成功で 残紅+10回復",
+          "en": "Perfect block catching the umbrella restores +10 Lingering Red",
+          "zh": "完美防御接伞成功时 残红回复+10",
+          "ko": "완전 방어 우산 받기 성공 시 잔홍 +10 회복",
           "vi": "Khi đỡ hoàn toàn bằng Dù thành công: Tàn Hồng +10 hồi phục"
         }
       },
@@ -3723,12 +4569,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Critical Rate",
-        "raw": "Critical Rate (Solo Mode Level scaled, rank=gold)",
         "effects": {
           "critRate": 0.074
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Critical Rate (Solo Mode Level scaled, rank=gold)",
+          "en": "Critical Rate (Solo Mode Level scaled, rank=gold)",
+          "zh": "会心率（单人模式 按等级缩放，rank=gold）",
+          "ko": "치명타 확률 (싱글 모드 레벨 비례, rank=gold)",
           "vi": "Tỷ lệ chí mạng (theo cấp ở chế độ đơn, rank=gold)"
         }
       },
@@ -3740,8 +4589,11 @@
         "effects": {
           "outerPen": 5
         },
-        "raw": "共鳴ダメ受敵 幻鳴 (5s) 外功耐性-2 max5stack (実効 外功貫通+5、 条件発動で維持不可→半減)",
         "rawI18n": {
+          "ja": "共鳴ダメ受敵 幻鳴 (5s) 外功耐性-2 max5stack (実効 外功貫通+5、 条件発動で維持不可→半減)",
+          "en": "Enemies taking resonance DMG get Phantom Echo (5s): Physical Resistance -2, max 5 stacks (effectively Physical Pen +5; conditional uptime → halved)",
+          "zh": "受共鸣伤害的敌人获得幻鸣（5秒）外功抗性-2 最多5层（实效外功穿透+5，条件触发难维持→减半）",
+          "ko": "공명 피해 받은 적 환명 (5초) 외공 저항 -2 최대 5중첩 (실효 외공 관통 +5, 조건 발동 유지 불가 → 절반)",
           "vi": "Địch nhận sát thương cộng hưởng: Huyễn Minh (5s) kháng ngoại công -2 tối đa 5 stack (thực hiệu xuyên thấu ngoại công +5, không thể duy trì do kích hoạt có điều kiện → giảm nửa)"
         }
       },
@@ -3753,8 +4605,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "共鳴ダメ+20%、 周囲敵引き寄せ (首領無効、 20s CD)",
         "rawI18n": {
+          "ja": "共鳴ダメ+20%、 周囲敵引き寄せ (首領無効、 20s CD)",
+          "en": "Resonance DMG +20%; pulls nearby enemies (not Bosses, 20s CD)",
+          "zh": "共鸣伤害+20%，吸引周围敌人（首领无效，20秒CD）",
+          "ko": "공명 피해 +20%, 주변 적 끌어당김 (보스 무효, 20초 CD)",
           "vi": "Sát thương cộng hưởng +20%, kéo địch xung quanh vào (thủ lĩnh vô hiệu, CD 20s)"
         }
       },
@@ -3763,8 +4618,11 @@
         "effects": {
           "physDmgBoost": 0.028
         },
-        "raw": "外功攻撃強化 +2.8%",
         "rawI18n": {
+          "ja": "外功攻撃強化 +2.8%",
+          "en": "Physical DMG Bonus +2.8%",
+          "zh": "外功伤害加成 +2.8%",
+          "ko": "외공 피해 보너스 +2.8%",
           "vi": "Tăng cường tấn công ngoại công +2.8%"
         }
       },
@@ -3776,8 +4634,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "紅綃香断 投げ毎回 幻影傘召喚、 召喚瞬間 共鳴1回発生",
         "rawI18n": {
+          "ja": "紅綃香断 投げ毎回 幻影傘召喚、 召喚瞬間 共鳴1回発生",
+          "en": "Crimson Silk Severance: every throw summons a phantom umbrella; resonance triggers once on summon",
+          "zh": "红绡香断 每次投掷都召唤幻影伞，召唤瞬间触发1次共鸣",
+          "ko": "홍초향단 투척마다 환영 우산 소환, 소환 순간 공명 1회 발생",
           "vi": "Hồng Tiêu Hương Đoạn: mỗi lần ném triệu hồi Huyễn Ảnh Dù, khoảnh khắc triệu hồi phát sinh 1 lần cộng hưởng"
         }
       }
@@ -3797,8 +4658,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "浄虚一掃後 恩文字札+50、貫穿の鏢失魂付与/魂奪時追加付与、初段引き寄せ",
         "rawI18n": {
+          "ja": "浄虚一掃後 恩文字札+50、貫穿の鏢失魂付与/魂奪時追加付与、初段引き寄せ",
+          "en": "After Purging Sweep: Grace Charm +50; Piercing Dart applies Soulloss / extra on Soulsteal; first hit pulls",
+          "zh": "净虚一扫后 恩字符+50，贯穿镖施加失魂/夺魂时额外施加，首段吸引",
+          "ko": "정허일소 후 은 글자 부적 +50, 관통 표 실혼 부여 / 혼탈 시 추가 부여, 첫 단 끌어당김",
           "vi": "Sau Tịnh Hư Nhất Tảo: lá bùa chữ Ân +50, Quán Xuyên Đích Tiêu gắn Mất Hồn / khi đoạt hồn gắn bổ sung, đoạn đầu kéo vào"
         }
       },
@@ -3810,8 +4674,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "魂抜け/還魂 持続21秒延長",
         "rawI18n": {
+          "ja": "魂抜け/還魂 持続21秒延長",
+          "en": "Soul Departure / Soul Return duration +21s",
+          "zh": "离魂/还魂 持续延长21秒",
+          "ko": "이혼/환혼 지속 21초 연장",
           "vi": "Mất Hồn/Hoàn Hồn kéo dài duy trì 21 giây"
         }
       },
@@ -3820,7 +4687,6 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Min Bamboocut Attack",
-        "raw": "Min Bamboocut Attack (Solo Mode Level scaled, rank=purple)",
         "effects": {},
         "weaponSpecific": "bamboocut",
         "pendingImplementation": true,
@@ -3828,6 +4694,10 @@
         "maxPathATK": 32.6,
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Min Bamboocut Attack (Solo Mode Level scaled, rank=purple)",
+          "en": "Min Bamboocut Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "最小破竹攻击（单人模式 按等级缩放，rank=purple）",
+          "ko": "최소 파죽 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công Phá Trúc tối thiểu (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -3839,8 +4709,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "貫穿の鏢なぎ払い 1-3段+5%/4-5段+10%/6-7段+15%",
         "rawI18n": {
+          "ja": "貫穿の鏢なぎ払い 1-3段+5%/4-5段+10%/6-7段+15%",
+          "en": "Piercing Dart sweep: stages 1-3 +5% / 4-5 +10% / 6-7 +15%",
+          "zh": "贯穿镖横扫 1-3段+5%/4-5段+10%/6-7段+15%",
+          "ko": "관통 표 휩쓸기 1-3단 +5% / 4-5단 +10% / 6-7단 +15%",
           "vi": "Quán Xuyên Đích Tiêu Quét: 1-3 đoạn +5% / 4-5 đoạn +10% / 6-7 đoạn +15%"
         }
       },
@@ -3852,8 +4725,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "魂抜け終了時 累積ダメ5%追加清算 (本体技限定)",
         "rawI18n": {
+          "ja": "魂抜け終了時 累積ダメ5%追加清算 (本体技限定)",
+          "en": "When Soul Departure ends: settle extra 5% of accumulated DMG (main-body skills only)",
+          "zh": "离魂结束时 额外结算累积伤害5%（限本体技能）",
+          "ko": "이혼 종료 시 누적 피해 5% 추가 정산 (본체 스킬 한정)",
           "vi": "Khi Mất Hồn kết thúc: bổ sung thanh toán 5% sát thương tích lũy (giới hạn kỹ năng chính)"
         }
       },
@@ -3862,8 +4738,11 @@
         "effects": {
           "elemPenAdd": 6
         },
-        "raw": "瞬嵐貫通 +6",
         "rawI18n": {
+          "ja": "瞬嵐貫通 +6",
+          "en": "Bamboocut Penetration +6",
+          "zh": "破竹穿透 +6",
+          "ko": "파죽 관통 +6",
           "vi": "Xuyên thấu Phá Trúc +6"
         }
       },
@@ -3875,8 +4754,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "焚巣破穴+15%必ず会心、指鳴らしで還魂更新+15m魂抜け再付与、清算量10%上昇",
         "rawI18n": {
+          "ja": "焚巣破穴+15%必ず会心、指鳴らしで還魂更新+15m魂抜け再付与、清算量10%上昇",
+          "en": "Nest-Burning Pierce +15% and always crits; finger snap refreshes Soul Return + reapplies Soul Departure within 15m; settlement amount +10%",
+          "zh": "焚巢破穴+15%必定会心，响指刷新还魂+15米内重新施加离魂，结算量提升10%",
+          "ko": "분소파혈 +15% 반드시 치명타, 손가락 튕기기로 환혼 갱신 + 15m 이혼 재부여, 정산량 10% 상승",
           "vi": "Phần Sào Phá Huyệt +15% chắc chắn chí mạng, búng tay làm mới Hoàn Hồn + gắn lại Mất Hồn trong 15m, lượng thanh toán tăng 10%"
         }
       }
@@ -3893,8 +4775,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "3体以上同時命中で燭影3秒、stack毎敵移動-4%/被ダメ+2%、最大5、0.5秒毎付与",
         "rawI18n": {
+          "ja": "3体以上同時命中で燭影3秒、stack毎敵移動-4%/被ダメ+2%、最大5、0.5秒毎付与",
+          "en": "Hitting 3+ enemies at once applies Candleshadow for 3s; per stack enemy Move -4% / DMG taken +2%, max 5, applied every 0.5s",
+          "zh": "同时命中3个以上敌人时施加烛影3秒，每层敌人移动-4%/受到伤害+2%，最多5层，每0.5秒施加",
+          "ko": "3명 이상 동시 적중 시 촉영 3초, 중첩당 적 이동 -4% / 받는 피해 +2%, 최대 5, 0.5초마다 부여",
           "vi": "Khi trúng đồng thời 3 thực thể trở lên: Chúc Ảnh 3 giây, mỗi stack địch di chuyển -4% / sát thương nhận vào +2%, tối đa 5, gắn mỗi 0.5 giây"
         }
       },
@@ -3903,8 +4788,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "燭影持続5秒延長",
         "rawI18n": {
+          "ja": "燭影持続5秒延長",
+          "en": "Candleshadow duration +5s",
+          "zh": "烛影持续延长5秒",
+          "ko": "촉영 지속 5초 연장",
           "vi": "Chúc Ảnh kéo dài duy trì 5 giây"
         }
       },
@@ -3913,12 +4801,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Min Physical Attack",
-        "raw": "Min Physical Attack (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "minPhysATKAdd": 57.51
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Min Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "en": "Min Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "最小外功攻击（单人模式 按等级缩放，rank=purple）",
+          "ko": "최소 외공 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công ngoại công tối thiểu (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -3927,8 +4818,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "燭影5stack敵に与ダメで2秒金縛り(首領無効)、20秒毎1体",
         "rawI18n": {
+          "ja": "燭影5stack敵に与ダメで2秒金縛り(首領無効)、20秒毎1体",
+          "en": "Damaging enemies at 5 Candleshadow stacks immobilizes them for 2s (not Bosses), 1 enemy per 20s",
+          "zh": "对满5层烛影的敌人造成伤害时定身2秒（首领无效），每20秒1个",
+          "ko": "촉영 5중첩 적에게 피해 시 2초 속박 (보스 무효), 20초마다 1명",
           "vi": "Khi gây sát thương cho địch có 5 stack Chúc Ảnh: 2 giây bất động (thủ lĩnh vô hiệu), 20 giây 1 thực thể"
         }
       },
@@ -3937,8 +4831,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "2体以上同時命中で燭影付与",
         "rawI18n": {
+          "ja": "2体以上同時命中で燭影付与",
+          "en": "Hitting 2+ enemies at once applies Candleshadow",
+          "zh": "同时命中2个以上敌人时施加烛影",
+          "ko": "2명 이상 동시 적중 시 촉영 부여",
           "vi": "Khi trúng đồng thời 2 thực thể trở lên: gắn Chúc Ảnh"
         }
       },
@@ -3947,8 +4844,11 @@
         "effects": {
           "outerPenAdd": 5.1
         },
-        "raw": "外功貫通 +5.1",
         "rawI18n": {
+          "ja": "外功貫通 +5.1",
+          "en": "Physical Penetration +5.1",
+          "zh": "外功穿透 +5.1",
+          "ko": "외공 관통 +5.1",
           "vi": "Xuyên thấu ngoại công +5.1"
         }
       },
@@ -3957,8 +4857,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "燭影最大stack敵 与ダメ+3%、距離8m超なら+6%",
         "rawI18n": {
+          "ja": "燭影最大stack敵 与ダメ+3%、距離8m超なら+6%",
+          "en": "Vs max-stack Candleshadow enemies: DMG +3%, +6% if over 8m away",
+          "zh": "对满层烛影敌人伤害+3%，距离超过8米时+6%",
+          "ko": "촉영 최대 중첩 적 피해 +3%, 거리 8m 초과 시 +6%",
           "vi": "Với địch có max stack Chúc Ảnh: sát thương gây ra +3%, nếu khoảng cách trên 8m thì +6%"
         }
       }
@@ -3982,8 +4885,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武術技で唐歌4秒、HP≥50%時 stack毎 critBoost+2%、HP<50%時 stack毎 武術技吸収+2%、最大5",
         "rawI18n": {
+          "ja": "武術技で唐歌4秒、HP≥50%時 stack毎 critBoost+2%、HP<50%時 stack毎 武術技吸収+2%、最大5",
+          "en": "Martial skills apply Tang Song for 4s; HP≥50%: Crit DMG +2% per stack; HP<50%: martial skill lifesteal +2% per stack, max 5",
+          "zh": "武学技施加唐歌4秒，气血≥50%时每层会心伤害+2%，<50%时每层武学技吸血+2%，最多5层",
+          "ko": "무술 스킬로 당가 4초, HP≥50% 시 중첩당 치명타 피해 +2%, HP<50% 시 중첩당 무술 스킬 흡혈 +2%, 최대 5",
           "vi": "Khi kỹ năng võ học: Đường Ca 4 giây, khi HP ≥50% mỗi stack critBoost +2%, khi HP <50% mỗi stack hấp thụ kỹ năng võ học +2%, tối đa 5"
         }
       },
@@ -3995,8 +4901,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "唐歌持続7秒延長",
         "rawI18n": {
+          "ja": "唐歌持続7秒延長",
+          "en": "Tang Song duration +7s",
+          "zh": "唐歌持续延长7秒",
+          "ko": "당가 지속 7초 연장",
           "vi": "Đường Ca kéo dài duy trì 7 giây"
         }
       },
@@ -4005,12 +4914,15 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Precision Rate",
-        "raw": "Precision Rate (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "hitRate": 0.0594
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Precision Rate (Solo Mode Level scaled, rank=purple)",
+          "en": "Precision Rate (Solo Mode Level scaled, rank=purple)",
+          "zh": "精准率（单人模式 按等级缩放，rank=purple）",
+          "ko": "정확도 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tỷ lệ trúng đích (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -4022,8 +4934,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "唐歌 武術技critBoost/吸収 3%に上昇、毎秒最大2stack",
         "rawI18n": {
+          "ja": "唐歌 武術技critBoost/吸収 3%に上昇、毎秒最大2stack",
+          "en": "Tang Song: martial skill Crit DMG/lifesteal raised to 3%, max 2 stacks per sec",
+          "zh": "唐歌 武学技会心伤害/吸血提升至3%，每秒最多2层",
+          "ko": "당가 무술 스킬 치명타 피해/흡혈 3%로 상승, 매초 최대 2중첩",
           "vi": "Đường Ca: critBoost/hấp thụ kỹ năng võ học tăng lên 3%, mỗi giây tối đa 2 stack"
         }
       },
@@ -4035,8 +4950,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武術技2体以上同時命中で唐歌+1stack、毎秒最大2回",
         "rawI18n": {
+          "ja": "武術技2体以上同時命中で唐歌+1stack、毎秒最大2回",
+          "en": "Martial skills hitting 2+ enemies grant +1 Tang Song stack, max twice per sec",
+          "zh": "武学技同时命中2个以上敌人时唐歌+1层，每秒最多2次",
+          "ko": "무술 스킬 2명 이상 동시 적중 시 당가 +1중첩, 매초 최대 2회",
           "vi": "Khi kỹ năng võ học trúng đồng thời 2 thực thể trở lên: Đường Ca +1 stack, mỗi giây tối đa 2 lần"
         }
       },
@@ -4045,8 +4963,11 @@
         "effects": {
           "critBoost": 0.04
         },
-        "raw": "会心攻撃強化 +4.0%",
         "rawI18n": {
+          "ja": "会心攻撃強化 +4.0%",
+          "en": "Crit DMG Bonus +4.0%",
+          "zh": "会心伤害加成 +4.0%",
+          "ko": "치명타 피해 보너스 +4.0%",
           "vi": "Tăng sát thương chí mạng +4.0%"
         }
       },
@@ -4058,8 +4979,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "唐歌は気血値に左右されない",
         "rawI18n": {
+          "ja": "唐歌は気血値に左右されない",
+          "en": "Tang Song no longer depends on HP",
+          "zh": "唐歌不再受气血值影响",
+          "ko": "당가는 기혈 수치에 좌우되지 않음",
           "vi": "Đường Ca không bị ảnh hưởng bởi giá trị sinh lực"
         }
       }
@@ -4077,8 +5001,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "斬雪刀 受け流し→雪払い発動、 刀勢-1で素早斬撃 (強靭)、 非プレイヤー命中で+36%気血ダメ (2s毎)",
         "rawI18n": {
+          "ja": "斬雪刀 受け流し→雪払い発動、 刀勢-1で素早斬撃 (強靭)、 非プレイヤー命中で+36%気血ダメ (2s毎)",
+          "en": "Snowparting Blade: parry → Snowsweep; spend 1 Blade Momentum for a swift slash (hyperarmor); +36% HP DMG on non-player hits (per 2s)",
+          "zh": "斩雪刀法 招架→拂雪发动，消耗1点刀势快速斩击（强韧），命中非玩家时+36%气血伤害（每2秒）",
+          "ko": "만설의 참격 패링 → 불설 발동, 도세 -1로 신속 참격 (강인), 비플레이어 적중 시 +36% 기혈 피해 (2초마다)",
           "vi": "Trảm Tuyết Đao: khi đỡ đòn → kích hoạt Tuyết Phất, tiêu Đao Thế -1 thực hiện trảm nhanh (cứng người), khi trúng phi người chơi: +36% sát thương sinh lực (mỗi 2s)"
         }
       },
@@ -4090,8 +5017,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "鉄衣戌魂中 撥雪尋春命中→横刀安西軍追撃",
         "rawI18n": {
+          "ja": "鉄衣戌魂中 撥雪尋春命中→横刀安西軍追撃",
+          "en": "During Ironclad Soul: Snowpart-Seeking-Spring hits → Heng Blade Anxi Army follow-up",
+          "zh": "铁衣戍魂期间 拨雪寻春命中→横刀安西军追击",
+          "ko": "철의수혼 중 발설심춘 적중 → 횡도 안서군 추격",
           "vi": "Trong Thiết Y Tuất Hồn: khi Phất Tuyết Tầm Xuân trúng → truy kích Hoành Đao An Tây Quân"
         }
       },
@@ -4102,8 +5032,11 @@
         "effects": {
           "minPhysATKAdd": 63.9
         },
-        "raw": "最小外功攻撃 +63.9",
         "rawI18n": {
+          "ja": "最小外功攻撃 +63.9",
+          "en": "Min Physical Attack +63.9",
+          "zh": "最小外功攻击 +63.9",
+          "ko": "최소 외공 공격 +63.9",
           "vi": "Tấn công ngoại công tối thiểu +63.9"
         }
       },
@@ -4115,8 +5048,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "塚上の霜/横刀武変 完全使用後 雪払い発動可、 命中で刀勢0.5還元",
         "rawI18n": {
+          "ja": "塚上の霜/横刀武変 完全使用後 雪払い発動可、 命中で刀勢0.5還元",
+          "en": "After fully using Frost on the Grave / Heng Blade Martial Change: Snowsweep usable; hits refund 0.5 Blade Momentum",
+          "zh": "冢上霜/横刀武变完整使用后 可发动拂雪，命中时返还0.5刀势",
+          "ko": "총상의 서리/횡도 무변 완전 사용 후 불설 발동 가능, 적중 시 도세 0.5 반환",
           "vi": "Sau khi dùng hoàn tất Trủng Thượng Chi Sương/Hoành Đao Vũ Biến: có thể kích hoạt Tuyết Phất, khi trúng hoàn 0.5 Đao Thế"
         }
       },
@@ -4128,8 +5064,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "飛鴻踏雪 熱血冷め難し 4stack、 雪払い1消費で非プレイヤー気血ダメ+40%",
         "rawI18n": {
+          "ja": "飛鴻踏雪 熱血冷め難し 4stack、 雪払い1消費で非プレイヤー気血ダメ+40%",
+          "en": "Flying Goose Treads Snow: Hot Blood Hard to Cool 4 stacks; spending 1 Snowsweep: HP DMG vs non-players +40%",
+          "zh": "飞鸿踏雪 热血难凉4层，消耗1次拂雪时 对非玩家气血伤害+40%",
+          "ko": "비홍답설 열혈난량 4중첩, 불설 1 소모 시 비플레이어 기혈 피해 +40%",
           "vi": "Phi Hồng Đạp Tuyết: Nhiệt Huyết Lãnh Khó 4 stack, tiêu 1 Tuyết Phất sát thương sinh lực với phi người chơi +40%"
         }
       },
@@ -4138,8 +5077,11 @@
         "effects": {
           "addCritRate": 0.046
         },
-        "raw": "付加会心率 +4.6%",
         "rawI18n": {
+          "ja": "付加会心率 +4.6%",
+          "en": "Direct Critical Rate +4.6%",
+          "zh": "直接会心率 +4.6%",
+          "ko": "추가 치명타 확률 +4.6%",
           "vi": "Tỷ lệ chí mạng cộng thêm +4.6%"
         }
       },
@@ -4151,8 +5093,11 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "雪払いダメ+10%、 忘機 (3s塚上霜1回 雪払いCD解除)、 力尽き首領命中で 熱血冷め難し追加UP + 忘機CD解除",
         "rawI18n": {
+          "ja": "雪払いダメ+10%、 忘機 (3s塚上霜1回 雪払いCD解除)、 力尽き首領命中で 熱血冷め難し追加UP + 忘機CD解除",
+          "en": "Snowsweep DMG +10%; Forgetfulness (one Frost on the Grave within 3s clears Snowsweep CD); hitting downed Bosses further raises Hot Blood Hard to Cool + clears Forgetfulness CD",
+          "zh": "拂雪伤害+10%，忘机（3秒内冢上霜1次解除拂雪CD），命中力竭首领时 热血难凉额外提升 + 解除忘机CD",
+          "ko": "불설 피해 +10%, 망기 (3초 내 총상의 서리 1회 시 불설 CD 해제), 탈진 보스 적중 시 열혈난량 추가 상승 + 망기 CD 해제",
           "vi": "Sát thương Tuyết Phất +10%, Vong Cơ (3s Trủng Thượng Sương 1 lần gỡ CD Tuyết Phất), khi trúng thủ lĩnh kiệt sức: Nhiệt Huyết Lãnh Khó tăng bổ sung + gỡ CD Vong Cơ"
         }
       }
@@ -4172,8 +5117,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "土方破陣 焚此心3段溜めへ、鉄衣成魂中 3段目で斬馬刀安西軍出現+跳び斬り",
         "rawI18n": {
+          "ja": "土方破陣 焚此心3段溜めへ、鉄衣成魂中 3段目で斬馬刀安西軍出現+跳び斬り",
+          "en": "Earthbreaker Phalanx: Burn This Heart becomes 3-stage charge; during Ironclad Soul, stage 3 summons Mo Blade Anxi Army + leaping slash",
+          "zh": "土方破阵 焚此心改为3段蓄力，铁衣成魂期间 第3段出现陌刀安西军+跳斩",
+          "ko": "토방파진 분차심 3단 차지로, 철의성혼 중 3단째에 맥도 안서군 출현 + 도약 베기",
           "vi": "Thổ Phương Phá Trận: Phần Thử Tâm trở thành 3 đoạn tích lực, trong Thiết Y Thành Hồn ở đoạn 3 hiện Đao An Tây Quân + chém nhảy"
         }
       },
@@ -4185,8 +5133,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "千軍招来CT-1秒、鉄衣成魂持続40秒へ",
         "rawI18n": {
+          "ja": "千軍招来CT-1秒、鉄衣成魂持続40秒へ",
+          "en": "Thousand Army Summon CD -1s; Ironclad Soul duration to 40s",
+          "zh": "千军召来CD-1秒，铁衣成魂持续提升至40秒",
+          "ko": "천군초래 CD -1초, 철의성혼 지속 40초로",
           "vi": "Thiên Quân Chiêu Lai CT -1 giây, Thiết Y Thành Hồn duy trì lên 40 giây"
         }
       },
@@ -4197,8 +5148,11 @@
         "effects": {
           "critRate": 0.066
         },
-        "raw": "会心率 +6.6%",
         "rawI18n": {
+          "ja": "会心率 +6.6%",
+          "en": "Critical Rate +6.6%",
+          "zh": "会心率 +6.6%",
+          "ko": "치명타 확률 +6.6%",
           "vi": "Tỷ lệ chí mạng +6.6%"
         }
       },
@@ -4210,8 +5164,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "熱血冷め難し中 斬馬刀安西軍命中で開山10秒 (焚此心/協戦安西軍 会心ダメ+10%、最終会心率≥70%必中、<70%なら会心率+15%) 15秒毎1回",
         "rawI18n": {
+          "ja": "熱血冷め難し中 斬馬刀安西軍命中で開山10秒 (焚此心/協戦安西軍 会心ダメ+10%、最終会心率≥70%必中、<70%なら会心率+15%) 15秒毎1回",
+          "en": "During Hot Blood Hard to Cool: Mo Blade Anxi Army hits grant Mountain Opener for 10s (Burn This Heart / assisting Anxi Army Crit DMG +10%; final crit rate ≥70% guarantees crit, <70% grants Crit Rate +15%), once per 15s",
+          "zh": "热血难凉期间 陌刀安西军命中时获得开山10秒（焚此心/协战安西军 会心伤害+10%，最终会心率≥70%必定会心，<70%时会心率+15%）每15秒1次",
+          "ko": "열혈난량 중 맥도 안서군 적중 시 개산 10초 (분차심/협전 안서군 치명타 피해 +10%, 최종 치명타 확률 ≥70% 확정 치명타, <70%면 치명타 확률 +15%) 15초마다 1회",
           "vi": "Trong Nhiệt Huyết Lãnh Khó: khi Đao An Tây Quân trúng: Khai Sơn 10 giây (Phần Thử Tâm/Hiệp Chiến An Tây Quân sát thương chí mạng +10%, tỷ lệ chí mạng cuối cùng ≥70% chắc trúng, <70% thì tỷ lệ chí mạng +15%) 15 giây 1 lần"
         }
       },
@@ -4223,8 +5180,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "熱血冷め難し時 破陣溜め技 刀勢消費なし、溜め3段焚此心 非プレイヤー命中で気血ダメ+32%",
         "rawI18n": {
+          "ja": "熱血冷め難し時 破陣溜め技 刀勢消費なし、溜め3段焚此心 非プレイヤー命中で気血ダメ+32%",
+          "en": "During Hot Blood Hard to Cool: Phalanx Charged skills cost no Blade Momentum; 3-stage charged Burn This Heart vs non-players HP DMG +32%",
+          "zh": "热血难凉时 破阵蓄力技不消耗刀势，3段蓄力焚此心命中非玩家时气血伤害+32%",
+          "ko": "열혈난량 시 파진 차지 스킬 도세 소모 없음, 3단 차지 분차심 비플레이어 적중 시 기혈 피해 +32%",
           "vi": "Trong Nhiệt Huyết Lãnh Khó: đả nặng tích lực Phá Trận không tiêu Đao Thế, tích lực 3 đoạn Phần Thử Tâm trúng phi người chơi: sát thương sinh lực +32%"
         }
       },
@@ -4233,8 +5193,11 @@
         "effects": {
           "critBoost": 0.04
         },
-        "raw": "会心攻撃強化 +4.0%",
         "rawI18n": {
+          "ja": "会心攻撃強化 +4.0%",
+          "en": "Crit DMG Bonus +4.0%",
+          "zh": "会心伤害加成 +4.0%",
+          "ko": "치명타 피해 보너스 +4.0%",
           "vi": "Tăng sát thương chí mạng +4.0%"
         }
       },
@@ -4246,8 +5209,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "焚此心 力尽き敵命中で開山+3秒溜め強化、次焚此心で熱血冷め難しbuff (溜め加速/刀勢無/ダメ増)、30秒毎最大3回",
         "rawI18n": {
+          "ja": "焚此心 力尽き敵命中で開山+3秒溜め強化、次焚此心で熱血冷め難しbuff (溜め加速/刀勢無/ダメ増)、30秒毎最大3回",
+          "en": "Burn This Heart hitting downed enemies: Mountain Opener +3s charge boost; next Burn This Heart gains Hot Blood Hard to Cool buff (faster charge / no Blade Momentum cost / more DMG), max 3 times per 30s",
+          "zh": "焚此心命中力竭敌人时 开山+3秒蓄力强化，下次焚此心获得热血难凉buff（蓄力加速/不耗刀势/伤害提升），每30秒最多3次",
+          "ko": "분차심 탈진 적 적중 시 개산 +3초 차지 강화, 다음 분차심에 열혈난량 버프 (차지 가속/도세 무소모/피해 증가), 30초마다 최대 3회",
           "vi": "Phần Thử Tâm khi trúng địch kiệt sức: Khai Sơn +3 giây tăng cường tích lực, Phần Thử Tâm tiếp theo nhận buff Nhiệt Huyết Lãnh Khó (tăng tốc tích lực / không Đao Thế / tăng sát thương), 30 giây tối đa 3 lần"
         }
       }
@@ -4276,8 +5242,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "軽重撃/派生で穿喉8秒/最大3、stack毎 外功耐性無視2/会心ダメ+2% (対象:断魂派生/春月増華/彩鳳飛翔/竹林の風/泉下凍/雪払い)",
         "rawI18n": {
+          "ja": "軽重撃/派生で穿喉8秒/最大3、stack毎 外功耐性無視2/会心ダメ+2% (対象:断魂派生/春月増華/彩鳳飛翔/竹林の風/泉下凍/雪払い)",
+          "en": "Light-heavy attacks/derivatives apply Throat Pierce 8s / max 3; per stack ignore 2 Physical Resistance / Crit DMG +2% (applies to: Soulrender derivative / Spring Moon Bloom / Painted Phoenix Flight / Bamboo Grove Wind / Frozen Springs / Snowsweep)",
+          "zh": "轻重击/派生施加穿喉8秒/最多3层，每层无视外功抗性2/会心伤害+2%（适用：断魂派生/春月增华/彩凤飞翔/竹林风/泉下冻/拂雪）",
+          "ko": "약중공격/파생으로 천후 8초/최대 3, 중첩당 외공 저항 무시 2 / 치명타 피해 +2% (대상: 단혼 파생/춘월증화/채봉비상/죽림풍/천하동/불설)",
           "vi": "Đả nhẹ/đả nặng/phái sinh: Xuyên Hầu 8 giây / tối đa 3, mỗi stack bỏ qua kháng ngoại công 2 / sát thương chí mạng +2% (đối tượng: phái sinh Đoạn Hồn/Xuân Nguyệt Tăng Hoa/Thải Phụng Phi Tường/Trúc Lâm Chi Phong/Tuyền Hạ Đông/Tuyết Phất)"
         }
       },
@@ -4299,8 +5268,11 @@
           "outerPen": 6,
           "critBoost": 0.06
         },
-        "raw": "穿喉持続15秒延長 (3stack時 外功貫通+6 / 会心ダメ+6%)",
         "rawI18n": {
+          "ja": "穿喉持続15秒延長 (3stack時 外功貫通+6 / 会心ダメ+6%)",
+          "en": "Throat Pierce duration +15s (at 3 stacks: Physical Pen +6 / Crit DMG +6%)",
+          "zh": "穿喉持续延长15秒（3层时 外功穿透+6/会心伤害+6%）",
+          "ko": "천후 지속 15초 연장 (3중첩 시 외공 관통 +6 / 치명타 피해 +6%)",
           "vi": "Xuyên Hầu kéo dài duy trì 15 giây (khi 3 stack: xuyên thấu ngoại công +6 / sát thương chí mạng +6%)"
         }
       },
@@ -4312,12 +5284,15 @@
           "minStonesplit": 10.9,
           "maxStonesplit": 21.7
         },
-        "raw": "砕岩攻撃力 +10.9 ~ +21.7",
         "weaponSpecific": "stonesplit",
         "pendingImplementation": true,
         "minPathATK": 10.9,
         "maxPathATK": 21.7,
         "rawI18n": {
+          "ja": "砕岩攻撃力 +10.9 ~ +21.7",
+          "en": "Rock Splitting Attack +10.9 ~ +21.7",
+          "zh": "裂石攻击 +10.9 ~ +21.7",
+          "ko": "열석 공격 +10.9 ~ +21.7",
           "vi": "Tấn công Liệt Thạch +10.9 ~ +21.7"
         }
       },
@@ -4339,8 +5314,11 @@
           "outerPen": 3,
           "critBoost": 0.03
         },
-        "raw": "穿喉強化: 外功耐性無視3/会心ダメ+3%へ (差分3stack時 外功貫通+3 / 会心ダメ+3%)",
         "rawI18n": {
+          "ja": "穿喉強化: 外功耐性無視3/会心ダメ+3%へ (差分3stack時 外功貫通+3 / 会心ダメ+3%)",
+          "en": "Throat Pierce enhanced: ignore 3 Physical Resistance / Crit DMG +3% (delta at 3 stacks: Physical Pen +3 / Crit DMG +3%)",
+          "zh": "穿喉强化：无视外功抗性3/会心伤害+3%（差值3层时 外功穿透+3/会心伤害+3%）",
+          "ko": "천후 강화: 외공 저항 무시 3 / 치명타 피해 +3%로 (차분 3중첩 시 외공 관통 +3 / 치명타 피해 +3%)",
           "vi": "Xuyên Hầu tăng cường: bỏ qua kháng ngoại công 3 / sát thương chí mạng +3% (chênh lệch khi 3 stack: xuyên thấu ngoại công +3 / sát thương chí mạng +3%)"
         }
       },
@@ -4362,8 +5340,11 @@
           "outerPen": 6,
           "critBoost": 0.06
         },
-        "raw": "穿喉最大5stackへ (+2stack分 外功貫通+6 / 会心ダメ+6%)",
         "rawI18n": {
+          "ja": "穿喉最大5stackへ (+2stack分 外功貫通+6 / 会心ダメ+6%)",
+          "en": "Throat Pierce max 5 stacks (+2 stacks worth: Physical Pen +6 / Crit DMG +6%)",
+          "zh": "穿喉最大5层（+2层相当 外功穿透+6/会心伤害+6%）",
+          "ko": "천후 최대 5중첩으로 (+2중첩분 외공 관통 +6 / 치명타 피해 +6%)",
           "vi": "Xuyên Hầu tối đa 5 stack (+2 stack: xuyên thấu ngoại công +6 / sát thương chí mạng +6%)"
         }
       },
@@ -4372,10 +5353,13 @@
         "effects": {
           "stonesplitPen": 6
         },
-        "raw": "砕岩貫通 +6",
         "weaponSpecific": "stonesplit",
         "pendingImplementation": true,
         "rawI18n": {
+          "ja": "砕岩貫通 +6",
+          "en": "Rock Splitting Penetration +6",
+          "zh": "裂石穿透 +6",
+          "ko": "열석 관통 +6",
           "vi": "Xuyên thấu Liệt Thạch +6"
         }
       },
@@ -4396,8 +5380,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "受け流し成功で穿喉5stack獲得(20秒毎1回)、協戦発動技/協戦効果でも穿喉獲得可",
         "rawI18n": {
+          "ja": "受け流し成功で穿喉5stack獲得(20秒毎1回)、協戦発動技/協戦効果でも穿喉獲得可",
+          "en": "Successful parry grants 5 Throat Pierce stacks (once per 20s); assist-triggered skills/effects can also grant Throat Pierce",
+          "zh": "招架成功时获得5层穿喉（每20秒1次），协战发动技/协战效果也可获得穿喉",
+          "ko": "패링 성공 시 천후 5중첩 획득 (20초마다 1회), 협전 발동 스킬/협전 효과로도 천후 획득 가능",
           "vi": "Khi đỡ đòn thành công: nhận 5 stack Xuyên Hầu (20 giây 1 lần), kỹ năng kích hoạt Hiệp Chiến/hiệu quả Hiệp Chiến cũng có thể nhận Xuyên Hầu"
         }
       }
@@ -4414,8 +5401,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "強靭時 全ダメ+4%、周囲3m内 敵1体毎+1% (最大+3%)",
         "rawI18n": {
+          "ja": "強靭時 全ダメ+4%、周囲3m内 敵1体毎+1% (最大+3%)",
+          "en": "While hyperarmored: all DMG +4%, +1% per enemy within 3m (max +3%)",
+          "zh": "强韧时 全部伤害+4%，3米内每个敌人+1%（最多+3%）",
+          "ko": "강인 시 모든 피해 +4%, 주위 3m 내 적 1명당 +1% (최대 +3%)",
           "vi": "Khi cứng người: toàn bộ sát thương +4%, mỗi 1 địch trong phạm vi 3m xung quanh +1% (tối đa +3%)"
         }
       },
@@ -4424,8 +5414,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "追加ダメ判定距離 3m→5m",
         "rawI18n": {
+          "ja": "追加ダメ判定距離 3m→5m",
+          "en": "Bonus DMG detection range 3m→5m",
+          "zh": "额外伤害判定距离 3米→5米",
+          "ko": "추가 피해 판정 거리 3m→5m",
           "vi": "Khoảng cách phán định sát thương bổ sung: 3m → 5m"
         }
       },
@@ -4434,13 +5427,16 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Attack",
-        "raw": "Physical Attack (Solo Mode Level scaled, rank=purple)",
         "effects": {
           "minPhysATKAdd": 19.17,
           "maxPhysATKAdd": 38.25
         },
         "derivedFromGold": true,
         "rawI18n": {
+          "ja": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "en": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "外功攻击（单人模式 按等级缩放，rank=purple）",
+          "ko": "외공 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công ngoại công (theo cấp ở chế độ đơn, rank=purple)"
         }
       },
@@ -4449,8 +5445,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "強靭時 被ダメ軽減4%、周囲5m内 敵1体毎+1% (最大+3%)",
         "rawI18n": {
+          "ja": "強靭時 被ダメ軽減4%、周囲5m内 敵1体毎+1% (最大+3%)",
+          "en": "While hyperarmored: DMG taken -4%, +1% per enemy within 5m (max +3%)",
+          "zh": "强韧时 受到伤害减免4%，5米内每个敌人+1%（最多+3%）",
+          "ko": "강인 시 받는 피해 경감 4%, 주위 5m 내 적 1명당 +1% (최대 +3%)",
           "vi": "Khi cứng người: giảm sát thương nhận vào 4%, mỗi 1 địch trong phạm vi 5m xung quanh +1% (tối đa +3%)"
         }
       },
@@ -4459,8 +5458,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "強靭時 気血吸収3% (毎秒最大気血2%まで)",
         "rawI18n": {
+          "ja": "強靭時 気血吸収3% (毎秒最大気血2%まで)",
+          "en": "While hyperarmored: 3% lifesteal (up to 2% max HP per sec)",
+          "zh": "强韧时 气血吸取3%（每秒最多最大气血2%）",
+          "ko": "강인 시 기혈 흡수 3% (매초 최대 기혈 2%까지)",
           "vi": "Khi cứng người: hấp thụ sinh lực 3% (mỗi giây tối đa 2% sinh lực tối đa)"
         }
       },
@@ -4469,8 +5471,11 @@
         "effects": {
           "physDmgBoost": 0.025
         },
-        "raw": "外功攻撃強化 +2.5%",
         "rawI18n": {
+          "ja": "外功攻撃強化 +2.5%",
+          "en": "Physical DMG Bonus +2.5%",
+          "zh": "外功伤害加成 +2.5%",
+          "ko": "외공 피해 보너스 +2.5%",
           "vi": "Tăng cường tấn công ngoại công +2.5%"
         }
       },
@@ -4479,8 +5484,11 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "周囲5m内敵1体毎 与ダメ/被ダメ追加上昇1%→1.5% (最大4.5%)",
         "rawI18n": {
+          "ja": "周囲5m内敵1体毎 与ダメ/被ダメ追加上昇1%→1.5% (最大4.5%)",
+          "en": "Per enemy within 5m: DMG dealt/taken bonus 1%→1.5% (max 4.5%)",
+          "zh": "5米内每个敌人 伤害/减伤追加提升 1%→1.5%（最多4.5%）",
+          "ko": "주위 5m 내 적 1명당 주는/받는 피해 추가 상승 1%→1.5% (최대 4.5%)",
           "vi": "Mỗi 1 địch trong phạm vi 5m xung quanh: sát thương gây ra/sát thương nhận vào tăng bổ sung 1% → 1.5% (tối đa 4.5%)"
         }
       }

@@ -87,6 +87,16 @@ for (const [id, e] of Object.entries(xinfa)) {
     if (missing.length) warn(id, ja, `i18n 欠落言語: ${missing.join(',')}`);
   }
 
+  // rawI18n coverage (Tier 説明文 5言語 完備 + 旧 raw 残骸検出。 2026-06-10 P0 移行後の契約)
+  const RAW_LANGS = ['ja', 'en', 'zh', 'ko', 'vi'];
+  for (const [tk, tb] of Object.entries(e.attributeBuff)) {
+    if (!/^tier\d$/.test(tk) || !tb || typeof tb !== 'object') continue;
+    if (typeof tb.raw === 'string') err(id, ja, `${tk}: 旧 raw フィールド残存 (rawI18n.ja へ移行済のはず)`);
+    if (!tb.rawI18n) { err(id, ja, `${tk}: rawI18n 無し`); continue; }
+    const rm = RAW_LANGS.filter(L => typeof tb.rawI18n[L] !== 'string' || !tb.rawI18n[L].trim());
+    if (rm.length) err(id, ja, `${tk}: rawI18n 欠落言語: ${rm.join(',')}`);
+  }
+
   // rank
   if (!['gold', 'purple', 'blue'].includes(e.rank)) {
     err(id, ja, `rank "${e.rank}" 不正`);

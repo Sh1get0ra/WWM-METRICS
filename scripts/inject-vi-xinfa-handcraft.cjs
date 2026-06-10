@@ -14,7 +14,8 @@ for (const [id, tiers] of Object.entries(batch)) {
   for (const [tk, vi] of Object.entries(tiers)) {
     const t = e.attributeBuff[tk];
     if (!t) { missing.push(id + '.' + tk + ' (no tier)'); continue; }
-    if (typeof t.raw !== 'string' || !t.raw.trim()) { skipped++; continue; }
+    const ja = t.rawI18n?.ja; // 旧 t.raw は migrate-xinfa-raw.cjs で rawI18n.ja へ移行済
+    if (typeof ja !== 'string' || !ja.trim()) { skipped++; continue; }
     if (typeof vi !== 'string' || !vi.trim()) { skipped++; continue; }
     if (!t.rawI18n) t.rawI18n = {};
     t.rawI18n.vi = vi;

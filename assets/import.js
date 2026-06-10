@@ -291,13 +291,17 @@ function _xinfaEffectsText(xinfa, tier) {
   const parts = [];
   const t2eff = xinfa.attributeBuff.tier2?.effects;
   const t5eff = xinfa.attributeBuff.tier5?.effects;
+  const _tierRaw = (t) => {
+    const r = t?.rawI18n;
+    return (r?.[lang]) || r?.en || r?.ja || '';
+  };
   if (tier >= 2 && t2eff && Object.keys(t2eff).length) {
     if (lang === 'ja') parts.push('T2: ' + _xinfaTierEffectsJa(t2eff));
-    else parts.push('T2: ' + (xinfa.attributeBuff.tier2.raw || ''));
+    else parts.push('T2: ' + _tierRaw(xinfa.attributeBuff.tier2));
   }
   if (tier >= 5 && t5eff && Object.keys(t5eff).length) {
     if (lang === 'ja') parts.push('T5: ' + _xinfaTierEffectsJa(t5eff));
-    else parts.push('T5: ' + (xinfa.attributeBuff.tier5.raw || ''));
+    else parts.push('T5: ' + _tierRaw(xinfa.attributeBuff.tier5));
   }
   return parts.length ? parts.join('<br>') : '<span class="wwm-muted">効果なし</span>';
 }
