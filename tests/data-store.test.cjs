@@ -84,6 +84,10 @@ function evalDataStore() {
   assert.equal(DS.t('slotHelm'), '冠', 't() game_lexicon slot ja');
   DS.setLang('en');
   assert.equal(DS.t('critRate'), 'Critical Rate', 't() game_lexicon en');
+  // stat.json 経由 (chain 3段目): xinfa.js tkey 'minPhys'/'maxPhys' = 新表記 (最小/最大外功攻撃)
+  DS.setLang('ja');
+  assert.equal(DS.t('minPhys'), '最小外功攻撃', 't() stat chain minPhys ja');
+  assert.equal(DS.t('maxPhys'), '最大外功攻撃', 't() stat chain maxPhys ja');
   // ui優先: importBtn は ui.json 残置 → ui.json が勝つ
   assert.equal(DS.t('importBtn'), 'IMPORT', 't() ui優先 (ui.json に居る間は game_lexicon fallback 走らない)');
   console.log('PASS: data-store game_lexicon fallback');

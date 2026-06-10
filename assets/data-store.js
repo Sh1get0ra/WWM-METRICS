@@ -5,9 +5,10 @@
 (function () {
   'use strict';
   const CATS = ['kongfu', 'xinfa', 'sets', 'stat', 'path', 'skilltype', 'weapontype', 'ui', 'game_lexicon'];
-  // t() lookup chain: ui (ツール独自) → game_lexicon (純粋ゲーム用語)。
-  // game_lexicon は ui.json から分離 (2026-06-10、 言語追加時の採取経路 = スクショ vs 機械翻訳 を分けるため)。
-  const T_CHAIN = ['ui', 'game_lexicon'];
+  // t() lookup chain: ui (ツール独自) → game_lexicon (ゲーム固有 UI 名) → stat (ステ/affix の真実源)。
+  // stat 追加 (2026-06-10) = xinfa.js 等が tkey 経由で stat.json のステ名を引けるようにする
+  // (例: tkey='minPhys' → 「最小外功攻撃」)。 game_lexicon ⊂ stat の重複 (physDef) は game_lexicon 優先で既存挙動維持。
+  const T_CHAIN = ['ui', 'game_lexicon', 'stat'];
   const VERSION = (typeof window !== 'undefined' && window.WWM_DISPLAY_VERSION) || 11;
   let currentLang = 'ja';
   const data = Object.create(null); // { kongfu: {...}, xinfa: {...}, ... }

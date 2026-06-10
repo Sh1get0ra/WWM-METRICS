@@ -1,16 +1,4 @@
 {
-  "minPhysATK": {
-    "ja": "最小物理ATK",
-    "en": "Min Physical ATK",
-    "zh": "最小外功攻击",
-    "ko": "최소 외공 공격"
-  },
-  "maxPhysATK": {
-    "ja": "最大物理ATK",
-    "en": "Max Physical ATK",
-    "zh": "最大外功攻击",
-    "ko": "최대 외공 공격"
-  },
   "minElemSub": {
     "ja": "最小属性攻撃(副)",
     "en": "Sub Elem ATK Min",
