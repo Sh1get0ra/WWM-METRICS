@@ -11,18 +11,6 @@
     "zh": "最大外功攻击",
     "ko": "최대 외공 공격"
   },
-  "minElemMain": {
-    "ja": "最小属性ATK（主）",
-    "en": "Min Elemental ATK (Main)",
-    "zh": "最小属性攻击（主）",
-    "ko": "최소 속성 공격（주）"
-  },
-  "maxElemMain": {
-    "ja": "最大属性ATK（主）",
-    "en": "Max Elemental ATK (Main)",
-    "zh": "最大属性攻击（主）",
-    "ko": "최대 속성 공격（주）"
-  },
   "minElemSub": {
     "ja": "最小属性攻撃(副)",
     "en": "Sub Elem ATK Min",
