@@ -7,14 +7,20 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "飛燕再翔 突進 気力-10%、 非対人 着地後3s 移動+30%、 撃破で気血回復 (1%+1000)"
+        "raw": "飛燕再翔 突進 気力-10%、 非対人 着地後3s 移動+30%、 撃破で気血回復 (1%+1000)",
+        "rawI18n": {
+          "vi": "Phi Yến tái tường lao tới thể lực-10%、 phi PvP tiếp đấtsau3s di chuyển+30%、 khi tiêu diệtsinh lựchồi phục (1%+1000)"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "飛燕再翔 突進 気力減 10%→20%"
+        "raw": "飛燕再翔 突進 気力減 10%→20%",
+        "rawI18n": {
+          "vi": "Phi Yến tái tường lao tới thể lực減 10%→20%"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -23,34 +29,49 @@
         "statType": "Max HP",
         "raw": "Max HP (Solo Mode Level scaled, rank=blue)",
         "effects": {},
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "Sinh lực tối đa (Solo Mode theo cấp, rank=blue)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "飛燕再翔 突進速度+30%"
+        "raw": "飛燕再翔 突進速度+30%",
+        "rawI18n": {
+          "vi": "Phi Yến tái tường lao tớitốc độ+30%"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "撃破時 追加回復 固定気血 max 1000→2400"
+        "raw": "撃破時 追加回復 固定気血 max 1000→2400",
+        "rawI18n": {
+          "vi": "khi tiêu diệt bổ sunghồi phục cố địnhsinh lực max 1000→2400"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "Physical DMG Reduction +2.2%",
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "giảm sát thương ngoại công +2.2%"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "飛燕再翔 突進終了後 3s 全気力消費-10% (非対人 -30%)"
+        "raw": "飛燕再翔 突進終了後 3s 全気力消費-10% (非対人 -30%)",
+        "rawI18n": {
+          "vi": "Phi Yến tái tường lao tới終了sau 3s toàn bộ thể lựctiêu hao-10% (phi PvP -30%)"
+        }
       }
     },
     "rank": "blue"
@@ -63,14 +84,20 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "戦闘開始12s以内 気血60%未満で 4s雪見、 毎秒気血2%+600回復 (300s CD)"
+        "raw": "戦闘開始12s以内 気血60%未満で 4s雪見、 毎秒気血2%+600回復 (300s CD)",
+        "rawI18n": {
+          "vi": "bắt đầu chiến đấu12strong vòng sinh lực60%dướiで 4sTuyết Kiến、 mỗi giâysinh lực2%+600hồi phục (300s CD)"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "回復値 毎秒3%+600 に上昇"
+        "raw": "回復値 毎秒3%+600 に上昇",
+        "rawI18n": {
+          "vi": "lượng hồi phục mỗi giây3%+600 にtăng"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -79,34 +106,49 @@
         "statType": "Max HP",
         "raw": "Max HP (Solo Mode Level scaled, rank=blue)",
         "effects": {},
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "Sinh lực tối đa (Solo Mode theo cấp, rank=blue)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "雪見中 与ダメ10% を気血回復"
+        "raw": "雪見中 与ダメ10% を気血回復",
+        "rawI18n": {
+          "vi": "Tuyết Kiếntrong sát thương gây ra10% をsinh lựchồi phục"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "発動間隔 50%短縮 (300s→150s)"
+        "raw": "発動間隔 50%短縮 (300s→150s)",
+        "rawI18n": {
+          "vi": "khoảng cách kích hoạt 50%rút ngắn (300s→150s)"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "外功耐性 +4.5",
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "ngoại công耐性 +4.5"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "雪見中 次2回の技 必ず会心効果獲得"
+        "raw": "雪見中 次2回の技 必ず会心効果獲得",
+        "rawI18n": {
+          "vi": "Tuyết Kiếntrong 次2lầnの技 必ずchí mạnghiệu quảnhận"
+        }
       }
     },
     "rank": "blue"
@@ -119,14 +161,20 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "攻撃被ダメ時 硬直発生減少 (首領/プレイヤー攻撃 非発動)"
+        "raw": "攻撃被ダメ時 硬直発生減少 (首領/プレイヤー攻撃 非発動)",
+        "rawI18n": {
+          "vi": "tấn côngsát thương nhận vàokhi 硬直発生giảm (thủ lĩnh/プレイヤーtấn công 非kích hoạt)"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "硬直耐性 周囲敵数に応じ上昇"
+        "raw": "硬直耐性 周囲敵数に応じ上昇",
+        "rawI18n": {
+          "vi": "硬直耐性 xung quanhđịch数に応じtăng"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -135,34 +183,49 @@
         "statType": "Physical Defense",
         "raw": "Physical Defense (Solo Mode Level scaled, rank=blue)",
         "effects": {},
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "ngoại công Defense (Solo Mode theo cấp, rank=blue)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "攻撃被ダメ毎 10%確率 5s 外功防御+2% max5stack"
+        "raw": "攻撃被ダメ毎 10%確率 5s 外功防御+2% max5stack",
+        "rawI18n": {
+          "vi": "tấn côngsát thương nhận vào毎 10%確率 5s ngoại côngphòng ngự+2% max5stack"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "硬直耐性 ボス戦も有効化"
+        "raw": "硬直耐性 ボス戦も有効化",
+        "rawI18n": {
+          "vi": "硬直耐性 ボス戦も有効化"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "外功耐性 +4.5",
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "ngoại công耐性 +4.5"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "烈心効果 反撃ダメ (敵気血max 0.2%相当)、 30s毎1回 5s持続"
+        "raw": "烈心効果 反撃ダメ (敵気血max 0.2%相当)、 30s毎1回 5s持続",
+        "rawI18n": {
+          "vi": "烈心hiệu quả 反撃ダメ (địchsinh lựcmax 0.2%相当)、 30s毎1lần 5sduy trì"
+        }
       }
     },
     "rank": "blue"
@@ -175,14 +238,20 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "命門一閃 奇襲距離+1.5m / 与ダメ+10% / 奇襲成功で気血5%回復"
+        "raw": "命門一閃 奇襲距離+1.5m / 与ダメ+10% / 奇襲成功で気血5%回復",
+        "rawI18n": {
+          "vi": "命門一閃 奇襲khoảng cách+1.5m / sát thương gây ra+10% / 奇襲thành côngでsinh lực5%hồi phục"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "奇襲時 回復量 5%→10% に上昇"
+        "raw": "奇襲時 回復量 5%→10% に上昇",
+        "rawI18n": {
+          "vi": "奇襲khi lượng hồi phục 5%→10% にtăng"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -193,35 +262,50 @@
         "effects": {
           "minPhysATKAdd": 51.12
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Min ngoại công Attack (Solo Mode theo cấp, rank=blue)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "奇襲成功 対象から ランダム戦利品+1 確率向上"
+        "raw": "奇襲成功 対象から ランダム戦利品+1 確率向上",
+        "rawI18n": {
+          "vi": "奇襲thành công mục tiêu từ ランダム戦利品+1 確率向上"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "奇襲可能 最大距離 +2.5m"
+        "raw": "奇襲可能 最大距離 +2.5m",
+        "rawI18n": {
+          "vi": "奇襲可能 tối đakhoảng cách +2.5m"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "physDmgBoost": 0.022
         },
-        "raw": "Physical DMG Bonus +2.2%"
+        "raw": "Physical DMG Bonus +2.2%",
+        "rawI18n": {
+          "vi": "ngoại công sát thương Bonus +2.2%"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "奇襲成功 すぐ潜伏状態、 20s毎1回発動"
+        "raw": "奇襲成功 すぐ潜伏状態、 20s毎1回発動",
+        "rawI18n": {
+          "vi": "奇襲thành công すぐ潜伏状態、 20s毎1lầnkích hoạt"
+        }
       }
     },
     "rank": "blue"
@@ -234,14 +318,20 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "10%確率1stack泣血、 5s持続、 1秒毎ダメ、 max5stack、 5stack時解除→刺傷ダメ1回"
+        "raw": "10%確率1stack泣血、 5s持続、 1秒毎ダメ、 max5stack、 5stack時解除→刺傷ダメ1回",
+        "rawI18n": {
+          "vi": "10%確率1stack泣血、 5sduy trì、 1giây毎ダメ、 max5stack、 5stackkhigỡ bỏ→刺傷ダメ1lần"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "与刺傷ダメ +100%"
+        "raw": "与刺傷ダメ +100%",
+        "rawI18n": {
+          "vi": "与刺傷ダメ +100%"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -252,35 +342,50 @@
         "effects": {
           "maxPhysATKAdd": 51.12
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Max ngoại công Attack (Solo Mode theo cấp, rank=blue)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "泣血持続終了 5stack未満でも 20%確率 すぐ刺傷ダメ1回"
+        "raw": "泣血持続終了 5stack未満でも 20%確率 すぐ刺傷ダメ1回",
+        "rawI18n": {
+          "vi": "泣血duy trì終了 5stackdướiでも 20%確率 すぐ刺傷ダメ1lần"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "泣血付与確率 10%→15%"
+        "raw": "泣血付与確率 10%→15%",
+        "rawI18n": {
+          "vi": "泣血gắn確率 10%→15%"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "critBoost": 0.035
         },
-        "raw": "Crit DMG Bonus +3.5%"
+        "raw": "Crit DMG Bonus +3.5%",
+        "rawI18n": {
+          "vi": "Crit sát thương Bonus +3.5%"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "刺傷で全泣血解除時 必ず1-2stack残存"
+        "raw": "刺傷で全泣血解除時 必ず1-2stack残存",
+        "rawI18n": {
+          "vi": "刺傷でtoàn bộ 泣血gỡ bỏkhi 必ず1-2stack残存"
+        }
       }
     },
     "rank": "blue"
@@ -293,14 +398,20 @@
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "鱗舞追月 ニシキゴイ変身中 突進/跳躍 消費-50%、 形態終了で気血シールド1生成"
+        "raw": "鱗舞追月 ニシキゴイ変身中 突進/跳躍 消費-50%、 形態終了で気血シールド1生成",
+        "rawI18n": {
+          "vi": "鱗舞追月 ニシキゴイ変身trong lao tới/跳躍 tiêu hao-50%、 形態終了でsinh lựclá chắn1生成"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "ニシキゴイ形態解除時 気血max 30% 吸収シールド (最大10s、 30s毎1回)"
+        "raw": "ニシキゴイ形態解除時 気血max 30% 吸収シールド (最大10s、 30s毎1回)",
+        "rawI18n": {
+          "vi": "ニシキゴイ形態gỡ bỏkhi sinh lựcmax 30% 吸収lá chắn (tối đa10s、 30s毎1lần)"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -309,34 +420,49 @@
         "statType": "Physical Defense",
         "raw": "Physical Defense (Solo Mode Level scaled, rank=blue)",
         "effects": {},
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "ngoại công Defense (Solo Mode theo cấp, rank=blue)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "ニシキゴイ形態+戦闘離脱状態で 気血/精力 持続回復、 彩砂環境同時で 回復+100%"
+        "raw": "ニシキゴイ形態+戦闘離脱状態で 気血/精力 持続回復、 彩砂環境同時で 回復+100%",
+        "rawI18n": {
+          "vi": "ニシキゴイ形態+chiến đấu離脱状態で sinh lực/精力 duy trìhồi phục、 彩砂環境同khiで hồi phục+100%"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "ニシキゴイ形態で 突進/跳躍 持久力消費なし"
+        "raw": "ニシキゴイ形態で 突進/跳躍 持久力消費なし",
+        "rawI18n": {
+          "vi": "ニシキゴイ形態で lao tới/跳躍 持久力tiêu haoなし"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "外功ダメージ軽減 +2.2%",
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "sát thương ngoại cônggiảm +2.2%"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.0065
         },
-        "raw": "ニシキゴイ形態 採集時 30%確率 報酬2倍 (美食採集クリと重複可)"
+        "raw": "ニシキゴイ形態 採集時 30%確率 報酬2倍 (美食採集クリと重複可)",
+        "rawI18n": {
+          "vi": "ニシキゴイ形態 採集khi 30%確率 報酬2倍 (美食採集クリと重複可)"
+        }
       }
     },
     "rank": "blue"
@@ -349,14 +475,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "全ダメージ/治癒+5%、 被撃後5s 無敵化、 cage debuff +5%被ダメ/stack"
+        "raw": "全ダメージ/治癒+5%、 被撃後5s 無敵化、 cage debuff +5%被ダメ/stack",
+        "rawI18n": {
+          "vi": "toàn bộ sát thương/trị liệu+5%、 sau khi nhận đả kích5s trạng thái bất tử、 cage debuff +5%sát thương nhận vào/stack"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "cage debuff 5%→3%軽減 (被害減少、 攻撃計算外)"
+        "raw": "cage debuff 5%→3%軽減 (被害減少、 攻撃計算外)",
+        "rawI18n": {
+          "vi": "cage debuff 5%→3%giảm (giảm sát thương nhận、 ngoài tính tấn công)"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -365,35 +497,50 @@
         "effects": {
           "minPhysATKAdd": 57.5
         },
-        "raw": "Min Physical Attack +57.5"
+        "raw": "Min Physical Attack +57.5",
+        "rawI18n": {
+          "vi": "Min ngoại công Attack +57.5"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "攻撃命中後5s 無敵化 (防御系)"
+        "raw": "攻撃命中後5s 無敵化 (防御系)",
+        "rawI18n": {
+          "vi": "tấn côngsau khi trúng đích5s trạng thái bất tử (phòng ngự系)"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "ベース 5%→8% (T0からの差分+3%、 累計0.08)"
+        "raw": "ベース 5%→8% (T0からの差分+3%、 累計0.08)",
+        "rawI18n": {
+          "vi": "cơ bản 5%→8% (T0 từ chênh lệch+3%、 tích lũy0.08)"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "outerPenAdd": 5.1
         },
-        "raw": "Physical Penetration +5.1"
+        "raw": "Physical Penetration +5.1",
+        "rawI18n": {
+          "vi": "ngoại công Penetration +5.1"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "marked target hit時 無敵化リセット保護"
+        "raw": "marked target hit時 無敵化リセット保護",
+        "rawI18n": {
+          "vi": "mục tiêu đã đánh dấu khi đánh trúng trạng thái bất tửđặt lạibảo vệ"
+        }
       }
     },
     "rank": "purple"
@@ -406,14 +553,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "10%確率 毒1stack付与 (5s、1秒毎ダメ)、 毒獲得で敵 外功防御-0.6%/stack max5 (-3%)"
+        "raw": "10%確率 毒1stack付与 (5s、1秒毎ダメ)、 毒獲得で敵 外功防御-0.6%/stack max5 (-3%)",
+        "rawI18n": {
+          "vi": "10%確率 毒1stackgắn (5s、1giây毎ダメ)、 毒nhậnでđịch ngoại côngphòng ngự-0.6%/stack max5 (-3%)"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "毒1stackあたり 外功防御減 -0.6%→-1.2%"
+        "raw": "毒1stackあたり 外功防御減 -0.6%→-1.2%",
+        "rawI18n": {
+          "vi": "毒1stackあたり ngoại côngphòng ngự減 -0.6%→-1.2%"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -424,35 +577,50 @@
         "effects": {
           "hitRate": 0.0594
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Precision Rate (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "被攻撃時 10%確率 攻撃者に毒1stack付与"
+        "raw": "被攻撃時 10%確率 攻撃者に毒1stack付与",
+        "rawI18n": {
+          "vi": "被khi tấn công 10%確率 tấn công者に毒1stackgắn"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "毒付与確率 10%→15%"
+        "raw": "毒付与確率 10%→15%",
+        "rawI18n": {
+          "vi": "毒gắn確率 10%→15%"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "physDmgBoost": 0.025
         },
-        "raw": "Physical DMG Bonus +2.5%"
+        "raw": "Physical DMG Bonus +2.5%",
+        "rawI18n": {
+          "vi": "ngoại công sát thương Bonus +2.5%"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "outerPen": 5
         },
-        "raw": "毒5stack時 追加で敵 外功耐性-10 (デバフ → 実効 外功貫通+5)"
+        "raw": "毒5stack時 追加で敵 外功耐性-10 (デバフ → 実効 外功貫通+5)",
+        "rawI18n": {
+          "vi": "毒5stackkhi bổ sungでđịch ngoại công耐性-10 (デバフ → 実効 xuyên thấu ngoại công+5)"
+        }
       }
     },
     "rank": "purple"
@@ -465,14 +633,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "気絶とどめ技で 与ダメ8% 気血回復"
+        "raw": "気絶とどめ技で 与ダメ8% 気血回復",
+        "rawI18n": {
+          "vi": "気絶とどめ技で sát thương gây ra8% sinh lựchồi phục"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "力尽きとどめ技 回復 8%→12%"
+        "raw": "力尽きとどめ技 回復 8%→12%",
+        "rawI18n": {
+          "vi": "力尽きとどめ技 hồi phục 8%→12%"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -481,34 +655,49 @@
         "statType": "Max HP",
         "raw": "Max HP (Solo Mode Level scaled, rank=purple)",
         "effects": {},
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "Sinh lực tối đa (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "力尽きとどめ技で 追加 真気値+10回復"
+        "raw": "力尽きとどめ技で 追加 真気値+10回復",
+        "rawI18n": {
+          "vi": "力尽きとどめ技で bổ sung 真気値+10hồi phục"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "力尽きとどめ技 追加ダメ+5%"
+        "raw": "力尽きとどめ技 追加ダメ+5%",
+        "rawI18n": {
+          "vi": "力尽きとどめ技 bổ sungダメ+5%"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "Physical DMG Reduction +2.5%",
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "giảm sát thương ngoại công +2.5%"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "力尽き対象攻撃で とどめ技以外も 与ダメ30% 気血回復"
+        "raw": "力尽き対象攻撃で とどめ技以外も 与ダメ30% 気血回復",
+        "rawI18n": {
+          "vi": "力尽きmục tiêutấn côngで とどめ技以外も sát thương gây ra30% sinh lựchồi phục"
+        }
       }
     },
     "rank": "purple"
@@ -523,14 +712,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "指定回復行動後 50%確率 精気1獲得 (攻撃/被撃/受け流しで精気獲得時は追加回復なし)"
+        "raw": "指定回復行動後 50%確率 精気1獲得 (攻撃/被撃/受け流しで精気獲得時は追加回復なし)",
+        "rawI18n": {
+          "vi": "指定hồi phục行動sau 50%確率 精気1nhận (tấn công/nhận đả kích/受け流しで精気nhậnkhiはbổ sunghồi phụcなし)"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "撃破/暗殺/ジャスト回避/矢が弱点ヒットで精気獲得時 必ず精気+1"
+        "raw": "撃破/暗殺/ジャスト回避/矢が弱点ヒットで精気獲得時 必ず精気+1",
+        "rawI18n": {
+          "vi": "tiêu diệt/暗殺/ジャストlần避/矢が弱点ヒットで精気nhậnkhi 必ず精気+1"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -539,34 +734,49 @@
         "statType": "Physical Defense",
         "raw": "Physical Defense (Solo Mode Level scaled, rank=purple)",
         "effects": {},
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "ngoại công Defense (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "攻撃 or 被攻撃で精気獲得時 10%確率 追加+1"
+        "raw": "攻撃 or 被攻撃で精気獲得時 10%確率 追加+1",
+        "rawI18n": {
+          "vi": "tấn công or 被tấn côngで精気nhậnkhi 10%確率 bổ sung+1"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "受け流し成功で精気獲得時 必ず追加+1"
+        "raw": "受け流し成功で精気獲得時 必ず追加+1",
+        "rawI18n": {
+          "vi": "受け流しthành côngで精気nhậnkhi 必ずbổ sung+1"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "外功耐性 +5.1",
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "ngoại công耐性 +5.1"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "奇術技発動後5秒以内 消費精気30%返還 (1回max10)"
+        "raw": "奇術技発動後5秒以内 消費精気30%返還 (1回max10)",
+        "rawI18n": {
+          "vi": "奇術技kích hoạtsau5giâytrong vòng tiêu hao精気30%返還 (1lầnmax10)"
+        }
       }
     },
     "rank": "purple"
@@ -581,14 +791,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "受け流し成功で長生バフ獲得 (導き/心/意 1択、10s、30sCD)"
+        "raw": "受け流し成功で長生バフ獲得 (導き/心/意 1択、10s、30sCD)",
+        "rawI18n": {
+          "vi": "受け流しthành côngでdài生バフnhận (導き/心/意 1択、10s、30sCD)"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "受け流し成功時 真気値+5追加回復 (発動間隔制限なし)"
+        "raw": "受け流し成功時 真気値+5追加回復 (発動間隔制限なし)",
+        "rawI18n": {
+          "vi": "受け流しthành côngkhi 真気値+5bổ sunghồi phục (khoảng cách kích hoạt制限なし)"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -599,35 +815,50 @@
         "effects": {
           "maxPhysATKAdd": 57.51
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Max ngoại công Attack (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "受け流し成功後5秒以内 次の被ダメ-10%"
+        "raw": "受け流し成功後5秒以内 次の被ダメ-10%",
+        "rawI18n": {
+          "vi": "受け流しthành côngsau5giâytrong vòng 次のsát thương nhận vào-10%"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "効果の発動間隔-20% (30s→24s)"
+        "raw": "効果の発動間隔-20% (30s→24s)",
+        "rawI18n": {
+          "vi": "hiệu quảのkhoảng cách kích hoạt-20% (30s→24s)"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "outerPenAdd": 5.1
         },
-        "raw": "Physical Penetration +5.1"
+        "raw": "Physical Penetration +5.1",
+        "rawI18n": {
+          "vi": "ngoại công Penetration +5.1"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "受け流し成功後 必ず長生の導き効果 + 長生の心/意 1つ獲得 (24sCD)"
+        "raw": "受け流し成功後 必ず長生の導き効果 + 長生の心/意 1つ獲得 (24sCD)",
+        "rawI18n": {
+          "vi": "受け流しthành côngsau 必ずdài生の導きhiệu quả + dài生の心/意 1つnhận (24sCD)"
+        }
       }
     },
     "rank": "purple"
@@ -642,14 +873,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "完全回避時 50%確率 消費気力100%返還"
+        "raw": "完全回避時 50%確率 消費気力100%返還",
+        "rawI18n": {
+          "vi": "完toàn bộ lần避khi 50%確率 tiêu haothể lực100%返還"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "回避消費気力返還 一定確率70%上昇"
+        "raw": "回避消費気力返還 一定確率70%上昇",
+        "rawI18n": {
+          "vi": "lần避tiêu haothể lực返還 一定確率70%tăng"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -660,34 +897,49 @@
         "effects": {
           "hitRate": 0.0594
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Precision Rate (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "回避消費気力-20% / 回避中被ダメ-20%"
+        "raw": "回避消費気力-20% / 回避中被ダメ-20%",
+        "rawI18n": {
+          "vi": "lần避tiêu haothể lực-20% / lần避trongsát thương nhận vào-20%"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "完全回避後 最大気血0.5%追加回復"
+        "raw": "完全回避後 最大気血0.5%追加回復",
+        "rawI18n": {
+          "vi": "完toàn bộ lần避sau tối đasinh lực0.5%bổ sunghồi phục"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "Physical DMG Reduction +2.5%",
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "giảm sát thương ngoại công +2.5%"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "回避無敵時間+20%"
+        "raw": "回避無敵時間+20%",
+        "rawI18n": {
+          "vi": "lần避bất tửkhi間+20%"
+        }
       }
     },
     "rank": "purple"
@@ -702,14 +954,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "帰義効果 与直接ダメ+3% + 敵気血20%減毎+0.5% max+2%"
+        "raw": "帰義効果 与直接ダメ+3% + 敵気血20%減毎+0.5% max+2%",
+        "rawI18n": {
+          "vi": "帰義hiệu quả 与直接ダメ+3% + địchsinh lực20%減毎+0.5% max+2%"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "鏖戦効果 被直接ダメ-3%/与回復+3% + 自気血20%減毎+0.5% max+2%"
+        "raw": "鏖戦効果 被直接ダメ-3%/与回復+3% + 自気血20%減毎+0.5% max+2%",
+        "rawI18n": {
+          "vi": "鏖戦hiệu quả 被直接ダメ-3%/与hồi phục+3% + 自sinh lực20%減毎+0.5% max+2%"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -721,35 +979,50 @@
           "minPhysATKAdd": 19.17,
           "maxPhysATKAdd": 38.25
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "ngoại công Attack (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "帰義/鏖戦 気血欠損加算刻み 20%→15% (max上昇は不変)"
+        "raw": "帰義/鏖戦 気血欠損加算刻み 20%→15% (max上昇は不変)",
+        "rawI18n": {
+          "vi": "帰義/鏖戦 sinh lực欠損加算刻み 20%→15% (maxtăngは不変)"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "明/晦 各5層 (5s) — 明1層で帰義+10% max50%、晦1層で鏖戦+10% max50%"
+        "raw": "明/晦 各5層 (5s) — 明1層で帰義+10% max50%、晦1層で鏖戦+10% max50%",
+        "rawI18n": {
+          "vi": "明/晦 各5tầng (5s) — 明1tầngで帰義+10% max50%、晦1tầngで鏖戦+10% max50%"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "outerPenAdd": 5.1
         },
-        "raw": "外功貫通 +5.1"
+        "raw": "外功貫通 +5.1",
+        "rawI18n": {
+          "vi": "xuyên thấu ngoại công +5.1"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "明/晦廃止、帰義 +3→+5%/敵気血15%減毎+1% max+4%、鏖戦 -3→-5%/+3→+5%/自気血15%減毎+1% max+4%"
+        "raw": "明/晦廃止、帰義 +3→+5%/敵気血15%減毎+1% max+4%、鏖戦 -3→-5%/+3→+5%/自気血15%減毎+1% max+4%",
+        "rawI18n": {
+          "vi": "明/晦廃止、帰義 +3→+5%/địchsinh lực15%減毎+1% max+4%、鏖戦 -3→-5%/+3→+5%/自sinh lực15%減毎+1% max+4%"
+        }
       }
     },
     "rank": "purple"
@@ -764,14 +1037,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "気血<30%で警戒発動 — 気血20%回復 + 10s 被ダメ-20% (120sCD max1回)"
+        "raw": "気血<30%で警戒発動 — 気血20%回復 + 10s 被ダメ-20% (120sCD max1回)",
+        "rawI18n": {
+          "vi": "sinh lực<30%で警戒kích hoạt — sinh lực20%hồi phục + 10s sát thương nhận vào-20% (120sCD max1lần)"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "惕心発動間隔 120s→90s短縮"
+        "raw": "惕心発動間隔 120s→90s短縮",
+        "rawI18n": {
+          "vi": "惕心khoảng cách kích hoạt 120s→90srút ngắn"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -780,34 +1059,49 @@
         "statType": "Max HP",
         "raw": "Max HP (Solo Mode Level scaled, rank=purple)",
         "effects": {},
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "Sinh lực tối đa (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "惕心中 与/被ダメで気血2%回復 (1s毎max1回)"
+        "raw": "惕心中 与/被ダメで気血2%回復 (1s毎max1回)",
+        "rawI18n": {
+          "vi": "惕心trong 与/sát thương nhận vàoでsinh lực2%hồi phục (1s毎max1lần)"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "惕心中 被ダメで攻撃者に齟刺ダメ (1s毎max1回) + 詰問付与 (相手与ダメ-1.5%、5s、max5stack)"
+        "raw": "惕心中 被ダメで攻撃者に齟刺ダメ (1s毎max1回) + 詰問付与 (相手与ダメ-1.5%、5s、max5stack)",
+        "rawI18n": {
+          "vi": "惕心trong sát thương nhận vàoでtấn công者に齟刺ダメ (1s毎max1lần) + 詰問gắn (相手sát thương gây ra-1.5%、5s、max5stack)"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "外功ダメージ軽減 +2.5%",
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "sát thương ngoại cônggiảm +2.5%"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "詰問被ダメ軽減 1.5%→3% + 惕心中 与ダメでも齟刺/詰問発動 (発動間隔不変)"
+        "raw": "詰問被ダメ軽減 1.5%→3% + 惕心中 与ダメでも齟刺/詰問発動 (発動間隔不変)",
+        "rawI18n": {
+          "vi": "詰問sát thương nhận vàogiảm 1.5%→3% + 惕心trong sát thương gây raでも齟刺/詰問kích hoạt (khoảng cách kích hoạt不変)"
+        }
       }
     },
     "rank": "purple"
@@ -820,14 +1114,20 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "与ダメ/治癒+1%/stack × max5stack = +5% (常時発動仮定)"
+        "raw": "与ダメ/治癒+1%/stack × max5stack = +5% (常時発動仮定)",
+        "rawI18n": {
+          "vi": "sát thương gây ra/trị liệu+1%/stack × max5stack = +5% (常khikích hoạt仮定)"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "outerPen": 10
         },
-        "raw": "外功貫通+2/stack × max5stack = +10"
+        "raw": "外功貫通+2/stack × max5stack = +10",
+        "rawI18n": {
+          "vi": "xuyên thấu ngoại công+2/stack × max5stack = +10"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -837,35 +1137,50 @@
           "minPhysATKAdd": 21.3,
           "maxPhysATKAdd": 42.5
         },
-        "raw": "Physical Attack +21.3 ~ +42.5"
+        "raw": "Physical Attack +21.3 ~ +42.5",
+        "rawI18n": {
+          "vi": "ngoại công Attack +21.3 ~ +42.5"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "衰弱中 与ダメ倍 (条件発動、常時想定不可)"
+        "raw": "衰弱中 与ダメ倍 (条件発動、常時想定不可)",
+        "rawI18n": {
+          "vi": "衰弱trong sát thương gây ra倍 (条件kích hoạt、常khi想定不可)"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "確率100%+12s持続 (max stack維持安定化)"
+        "raw": "確率100%+12s持続 (max stack維持安定化)",
+        "rawI18n": {
+          "vi": "確率100%+12sduy trì (max stack維持安定化)"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "addCritRate": 0.046
         },
-        "raw": "Direct Critical Rate +4.6%"
+        "raw": "Direct Critical Rate +4.6%",
+        "rawI18n": {
+          "vi": "Direct Critical Rate +4.6%"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "max stack時 ボーナスダメ発動 (衰弱時2回、CD 10s)"
+        "raw": "max stack時 ボーナスダメ発動 (衰弱時2回、CD 10s)",
+        "rawI18n": {
+          "vi": "max stackkhi ボーナスダメkích hoạt (衰弱khi2lần、CD 10s)"
+        }
       }
     },
     "rank": "gold"
@@ -878,14 +1193,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武変技後 春/夏/秋/冬 1効果ランダム獲得 (10s持続、 30s CD)"
+        "raw": "武変技後 春/夏/秋/冬 1効果ランダム獲得 (10s持続、 30s CD)",
+        "rawI18n": {
+          "vi": "武変技sau 春/夏/秋/冬 1hiệu quảランダムnhận (10sduy trì、 30s CD)"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "ステ上昇効果 持続時間 10s→12s"
+        "raw": "ステ上昇効果 持続時間 10s→12s",
+        "rawI18n": {
+          "vi": "ステtănghiệu quả thời gian duy trì 10s→12s"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -897,35 +1218,50 @@
           "minPhysATKAdd": 21.3,
           "maxPhysATKAdd": 42.5
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "ngoại công Attack (Solo Mode theo cấp, rank=gold)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "30%確率 効果2個ランダム獲得"
+        "raw": "30%確率 効果2個ランダム獲得",
+        "rawI18n": {
+          "vi": "30%確率 hiệu quả2個ランダムnhận"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武変技ダメ/回復成功時もランダム発動、 春/冬確率大幅減"
+        "raw": "武変技ダメ/回復成功時もランダム発動、 春/冬確率大幅減",
+        "rawI18n": {
+          "vi": "武変技ダメ/hồi phụcthành côngkhiもランダムkích hoạt、 春/冬確率大幅減"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "physDmgBoost": 0.028
         },
-        "raw": "Physical Damage Bonus +2.8%"
+        "raw": "Physical Damage Bonus +2.8%",
+        "rawI18n": {
+          "vi": "ngoại công Damage Bonus +2.8%"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "15%確率 3個獲得、 5%確率 4個全部獲得 (5m未満 冬非獲得)"
+        "raw": "15%確率 3個獲得、 5%確率 4個全部獲得 (5m未満 冬非獲得)",
+        "rawI18n": {
+          "vi": "15%確率 3個nhận、 5%確率 4個toàn bộnhận (5mdưới 冬非nhận)"
+        }
       }
     },
     "rank": "gold"
@@ -943,7 +1279,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "乾坤定使用中 長風効果持続10s、気力消費-20% (疾走/溜め技 さらに-10%)"
+        "raw": "乾坤定使用中 長風効果持続10s、気力消費-20% (疾走/溜め技 さらに-10%)",
+        "rawI18n": {
+          "vi": "乾坤定使用trong dài風hiệu quảduy trì10s、thể lựctiêu hao-20% (疾走/kỹ năng tích lực さらに-10%)"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -953,7 +1292,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "鋼鳴/虹流儀武術技 首領命中で真気不均衡付与可能"
+        "raw": "鋼鳴/虹流儀武術技 首領命中で真気不均衡付与可能",
+        "rawI18n": {
+          "vi": "Minh Kim/虹流儀kỹ năng võ học thủ lĩnhtrúng đíchで真気不均衡gắn可能"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -969,7 +1311,10 @@
         "pendingImplementation": true,
         "minPathATK": 10.9,
         "maxPathATK": 21.7,
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Bellstrike Attack (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -979,7 +1324,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "乾坤定 気力回復+100% (回復値60)"
+        "raw": "乾坤定 気力回復+100% (回復値60)",
+        "rawI18n": {
+          "vi": "乾坤定 thể lựchồi phục+100% (lượng hồi phục60)"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -989,7 +1337,10 @@
         "effects": {
           "addSympathyRate": 0.03
         },
-        "raw": "長風中 付加会意率+1.5% (対首領 追加+1.5%、合計+3%採用)"
+        "raw": "長風中 付加会意率+1.5% (対首領 追加+1.5%、合計+3%採用)",
+        "rawI18n": {
+          "vi": "dài風trong 付加tỷ lệ hiểu ý+1.5% (đối với thủ lĩnh bổ sung+1.5%、合計+3%採用)"
+        }
       },
       "tier5": {
         "permanent": true,
@@ -998,7 +1349,10 @@
         },
         "raw": "Bellstrike Penetration +6",
         "weaponSpecific": "bellstrike",
-        "pendingImplementation": true
+        "pendingImplementation": true,
+        "rawI18n": {
+          "vi": "Bellstrike Penetration +6"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -1008,7 +1362,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "非首領命中で山移付与(12s)、溜め技が山移/真気不均衡対象に命中で気力4or8回復 (2s毎max1)"
+        "raw": "非首領命中で山移付与(12s)、溜め技が山移/真気不均衡対象に命中で気力4or8回復 (2s毎max1)",
+        "rawI18n": {
+          "vi": "非thủ lĩnhtrúng đíchで山移gắn(12s)、kỹ năng tích lựcが山移/真気不均衡mục tiêuにtrúng đíchでthể lực4or8hồi phục (2s毎max1)"
+        }
       }
     },
     "rank": "purple"
@@ -1023,14 +1380,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "気力消費時 3.5%返還"
+        "raw": "気力消費時 3.5%返還",
+        "rawI18n": {
+          "vi": "thể lựctiêu haokhi 3.5%返還"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "気力消費返還 3.5%→5.0%"
+        "raw": "気力消費返還 3.5%→5.0%",
+        "rawI18n": {
+          "vi": "thể lựctiêu hao返還 3.5%→5.0%"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -1042,35 +1405,50 @@
           "minPhysATKAdd": 19.17,
           "maxPhysATKAdd": 38.25
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "ngoại công Attack (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "気力合計消費50で即10返還 (30sCD)"
+        "raw": "気力合計消費50で即10返還 (30sCD)",
+        "rawI18n": {
+          "vi": "thể lực合計tiêu hao50で即10返還 (30sCD)"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "気力消費返還 5.0%→7.0%"
+        "raw": "気力消費返還 5.0%→7.0%",
+        "rawI18n": {
+          "vi": "thể lựctiêu hao返還 5.0%→7.0%"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "physDmgBoost": 0.025
         },
-        "raw": "Physical DMG Bonus +2.5%"
+        "raw": "Physical DMG Bonus +2.5%",
+        "rawI18n": {
+          "vi": "ngoại công sát thương Bonus +2.5%"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "気力変動>10で星火1stack獲得 (10s 気力回復速度+1%、max10stack)"
+        "raw": "気力変動>10で星火1stack獲得 (10s 気力回復速度+1%、max10stack)",
+        "rawI18n": {
+          "vi": "thể lực変動>10で星火1stacknhận (10s thể lựchồi phụctốc độ+1%、max10stack)"
+        }
       }
     },
     "rank": "purple"
@@ -1094,7 +1472,10 @@
           10102,
           20401,
           20402
-        ]
+        ],
+        "rawI18n": {
+          "vi": "kỹ năng tích lực 対toàn bộ Boss sát thương gây ra+10%"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -1106,7 +1487,10 @@
           10102,
           20401,
           20402
-        ]
+        ],
+        "rawI18n": {
+          "vi": "kỹ năng tích lực toàn bộ địch (thể lực<60%プレイヤー含) sát thương gây ra+10%"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -1117,7 +1501,10 @@
         "effects": {
           "sympathyRate": 0.0324
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Affinity Rate (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -1129,7 +1516,10 @@
           10102,
           20401,
           20402
-        ]
+        ],
+        "rawI18n": {
+          "vi": "kỹ năng tích lực chí mạng/hiểu ýkhi vs プレイヤーthể lực-10 / vs thủ lĩnh 自thể lực+10 (12sCD)"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -1141,14 +1531,20 @@
           10102,
           20401,
           20402
-        ]
+        ],
+        "rawI18n": {
+          "vi": "kỹ năng tích lực sát thương gây ra 10%→15% + thể lựctiêu hao+10%"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "sympathyBoost": 0.052
         },
-        "raw": "Affinity DMG Bonus +5.2%"
+        "raw": "Affinity DMG Bonus +5.2%",
+        "rawI18n": {
+          "vi": "Affinity sát thương Bonus +5.2%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -1160,7 +1556,10 @@
           10102,
           20401,
           20402
-        ]
+        ],
+        "rawI18n": {
+          "vi": "kỹ năng tích lực bổ sungダメ — vs プレイヤー thể lực差10毎+2% max10% / vs Boss 自tiêu haothể lực10%毎+2% max10%"
+        }
       }
     },
     "rank": "purple"
@@ -1176,7 +1575,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "家無き者 2段溜め完了で複数剣気、 気力消費でダメ+1.5%/pt max30%"
+        "raw": "家無き者 2段溜め完了で複数剣気、 気力消費でダメ+1.5%/pt max30%",
+        "rawI18n": {
+          "vi": "家無き者 2tầng溜め完了で複数Kiếm気、 thể lựctiêu haoでダメ+1.5%/pt max30%"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -1186,7 +1588,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "非戦闘 退路の道剣気5s 真気シールドなしで複数剣気発射可"
+        "raw": "非戦闘 退路の道剣気5s 真気シールドなしで複数剣気発射可",
+        "rawI18n": {
+          "vi": "非chiến đấu 退路の道Kiếm気5s 真気lá chắnなしで複数Kiếm気発射可"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -1197,7 +1602,10 @@
         "effects": {
           "maxPhysATKAdd": 63.9
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Max ngoại công Attack (Solo Mode theo cấp, rank=gold)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -1207,7 +1615,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "力尽き対象命中時 軽傷化なし + 非プレイヤー力尽き 第三剣気必ず会意"
+        "raw": "力尽き対象命中時 軽傷化なし + 非プレイヤー力尽き 第三剣気必ず会意",
+        "rawI18n": {
+          "vi": "力尽きmục tiêukhi trúng đích trầy xước化なし + 非プレイヤー力尽き 第三Kiếm気必ずhiểu ý"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -1217,14 +1628,20 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "溜め技 複数剣気5s 連発可"
+        "raw": "溜め技 複数剣気5s 連発可",
+        "rawI18n": {
+          "vi": "kỹ năng tích lực 複数Kiếm気5s 連発可"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "addSympathyRate": 0.023
         },
-        "raw": "Direct Affinity Rate +2.3%"
+        "raw": "Direct Affinity Rate +2.3%",
+        "rawI18n": {
+          "vi": "Direct Affinity Rate +2.3%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -1234,7 +1651,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "複数剣気後 気湧獲得 (気力+20、 5s即発射1回、 CD 20s -1s/首領命中 max-8s)"
+        "raw": "複数剣気後 気湧獲得 (気力+20、 5s即発射1回、 CD 20s -1s/首領命中 max-8s)",
+        "rawI18n": {
+          "vi": "複数Kiếm気sau 気湧nhận (thể lực+20、 5s即発射1lần、 CD 20s -1s/thủ lĩnhtrúng đích max-8s)"
+        }
       }
     },
     "rank": "gold"
@@ -1252,7 +1672,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "六酔槍 連撃数5/10→4/8、流血対象命中で流血stack依存 60-100%確率 連撃+1"
+        "raw": "六酔槍 連撃数5/10→4/8、流血対象命中で流血stack依存 60-100%確率 連撃+1",
+        "rawI18n": {
+          "vi": "六酔Súng 連撃数5/10→4/8、chảy máumục tiêutrúng đíchでchảy máustack依存 60-100%確率 連撃+1"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -1262,7 +1685,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "六酔槍連撃バフ持続15s延長"
+        "raw": "六酔槍連撃バフ持続15s延長",
+        "rawI18n": {
+          "vi": "六酔Súng連撃バフduy trì15skéo dài"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -1273,7 +1699,10 @@
         "effects": {
           "sympathyRate": 0.0324
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Affinity Rate (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -1283,7 +1712,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "無愁酒 ダメ+10% + 発動中 強靱化/被ダメ-60%"
+        "raw": "無愁酒 ダメ+10% + 発動中 強靱化/被ダメ-60%",
+        "rawI18n": {
+          "vi": "無愁酒 ダメ+10% + kích hoạttrong 強靱化/sát thương nhận vào-60%"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -1293,14 +1725,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "無愁酒連撃10で急流効果 ダメ+25% + 千軍一掃で気血20%回復+追加流血ダメ (12sCD)"
+        "raw": "無愁酒連撃10で急流効果 ダメ+25% + 千軍一掃で気血20%回復+追加流血ダメ (12sCD)",
+        "rawI18n": {
+          "vi": "無愁酒連撃10で急流hiệu quả ダメ+25% + 千軍一掃でsinh lực20%hồi phục+bổ sungchảy máuダメ (12sCD)"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "sympathyBoost": 0.052
         },
-        "raw": "Affinity DMG Bonus +5.2%"
+        "raw": "Affinity DMG Bonus +5.2%",
+        "rawI18n": {
+          "vi": "Affinity sát thương Bonus +5.2%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -1310,7 +1748,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "六酔槍 神脅し対象命中で+1stack、3s内同一対象5回命中で呪い酒付与 (15s 付与元被ダメ+5%)"
+        "raw": "六酔槍 神脅し対象命中で+1stack、3s内同一対象5回命中で呪い酒付与 (15s 付与元被ダメ+5%)",
+        "rawI18n": {
+          "vi": "六酔Súng 神脅しmục tiêutrúng đíchで+1stack、3s内同一mục tiêu5lầntrúng đíchで呪い酒gắn (15s gắn元sát thương nhận vào+5%)"
+        }
       }
     },
     "rank": "purple"
@@ -1336,7 +1777,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武器別武芸 (剣=会意で流血付与/槍=外功防御無視12.5%/双剣=完全回避後8s次武術技+25%/斬馬刀=溜め技/反撃の会心ダメ+20%/横刀=受け流し後5s 軽重撃・派生+5%)"
+        "raw": "武器別武芸 (剣=会意で流血付与/槍=外功防御無視12.5%/双剣=完全回避後8s次武術技+25%/斬馬刀=溜め技/反撃の会心ダメ+20%/横刀=受け流し後5s 軽重撃・派生+5%)",
+        "rawI18n": {
+          "vi": "vũ khí別武芸 (Kiếm=hiểu ýでchảy máugắn/Súng=ngoại côngphòng ngự無視12.5%/双Kiếm=完toàn bộ lần避sau8s次kỹ năng võ học+25%/斬馬Đao=kỹ năng tích lực/反撃のchí mạngダメ+20%/横Đao=受け流しsau5s 軽đả nặng・派生+5%)"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -1354,7 +1798,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武変技ダメ+30%"
+        "raw": "武変技ダメ+30%",
+        "rawI18n": {
+          "vi": "武変技ダメ+30%"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -1369,7 +1816,10 @@
         "pendingImplementation": true,
         "minPathATK": 32.6,
         "maxPathATK": 32.6,
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Max Bellstrike Attack (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -1387,7 +1837,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武変技命中で自移動速度+20%/対象-20% (4s)"
+        "raw": "武変技命中で自移動速度+20%/対象-20% (4s)",
+        "rawI18n": {
+          "vi": "武変技trúng đíchで自tốc độ di chuyển+20%/mục tiêu-20% (4s)"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -1405,7 +1858,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武変技発動時 気力+10回復"
+        "raw": "武変技発動時 気力+10回復",
+        "rawI18n": {
+          "vi": "武変技khi kích hoạt thể lực+10hồi phục"
+        }
       },
       "tier5": {
         "permanent": true,
@@ -1414,7 +1870,10 @@
         },
         "raw": "Bellstrike DMG Bonus +3%",
         "weaponSpecific": "bellstrike",
-        "pendingImplementation": true
+        "pendingImplementation": true,
+        "rawI18n": {
+          "vi": "Bellstrike sát thương Bonus +3%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -1432,7 +1891,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武変技発動時 元武芸効果残存 (10s後消失)"
+        "raw": "武変技発動時 元武芸効果残存 (10s後消失)",
+        "rawI18n": {
+          "vi": "武変技khi kích hoạt 元武芸hiệu quả残存 (10ssau消失)"
+        }
       }
     },
     "rank": "purple"
@@ -1457,7 +1919,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "会意ダメで集中値、max時看破状態 — 会意ダメ+10%、5%確率で被ダメ-40% (10s)"
+        "raw": "会意ダメで集中値、max時看破状態 — 会意ダメ+10%、5%確率で被ダメ-40% (10s)",
+        "rawI18n": {
+          "vi": "hiểu ýダメで集trong値、maxkhi看破状態 — hiểu ýダメ+10%、5%確率でsát thương nhận vào-40% (10s)"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -1470,7 +1935,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "看破中 — 自気血>75%で与ダメ+1.5%、≤75%で与ダメ1.5%相当 気血回復"
+        "raw": "看破中 — 自気血>75%で与ダメ+1.5%、≤75%で与ダメ1.5%相当 気血回復",
+        "rawI18n": {
+          "vi": "看破trong — 自sinh lực>75%でsát thương gây ra+1.5%、≤75%でsát thương gây ra1.5%相当 sinh lựchồi phục"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -1482,7 +1950,10 @@
           "minPhysATKAdd": 19.17,
           "maxPhysATKAdd": 38.25
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "ngoại công Attack (Solo Mode theo cấp, rank=purple, post 5/28 patch: Bellstrike→ngoại công)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -1495,7 +1966,10 @@
         "effects": {
           "addSympathyRate": 0.03
         },
-        "raw": "看破中 付加会意率+1.5% (気血割合上で追加+1.5%、合計+3%採用、対象外武器0)"
+        "raw": "看破中 付加会意率+1.5% (気血割合上で追加+1.5%、合計+3%採用、対象外武器0)",
+        "rawI18n": {
+          "vi": "看破trong 付加tỷ lệ hiểu ý+1.5% (sinh lực割合上でbổ sung+1.5%、合計+3%採用、mục tiêu外vũ khí0)"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -1508,14 +1982,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "集中値累積効率+50%"
+        "raw": "集中値累積効率+50%",
+        "rawI18n": {
+          "vi": "集trong値累積効率+50%"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "outerPenAdd": 5.1
         },
-        "raw": "Physical Penetration +5.1 (post 5/28 patch: Bellstrike Pen→外功貫通)"
+        "raw": "Physical Penetration +5.1 (post 5/28 patch: Bellstrike Pen→外功貫通)",
+        "rawI18n": {
+          "vi": "ngoại công Penetration +5.1 (post 5/28 patch: Bellstrike Pen→xuyên thấu ngoại công)"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -1528,7 +2008,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "看破中 持続系ダメ及び強化効果ダメ+10% (大量流血/血涙不止/刺傷)"
+        "raw": "看破中 持続系ダメ及び強化効果ダメ+10% (大量流血/血涙不止/刺傷)",
+        "rawI18n": {
+          "vi": "看破trong duy trì系ダメ及びtăng cườnghiệu quảダメ+10% (大量chảy máu/血涙不止/刺傷)"
+        }
       }
     },
     "rank": "purple"
@@ -1544,7 +2027,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "武術/特殊/溜め技後 納刀中完璧タイミング再押→縦横の剣追撃、 5stack流血で大流血ダメ"
+        "raw": "武術/特殊/溜め技後 納刀中完璧タイミング再押→縦横の剣追撃、 5stack流血で大流血ダメ",
+        "rawI18n": {
+          "vi": "võ học/特殊/kỹ năng tích lựcsau 納Đaotrong完璧タイミング再押→縦横のKiếm追撃、 5stackchảy máuで大chảy máuダメ"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -1554,7 +2040,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "縦横剣発動成功で気力+8"
+        "raw": "縦横剣発動成功で気力+8",
+        "rawI18n": {
+          "vi": "縦横Kiếmkích hoạtthành côngでthể lực+8"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -1565,7 +2054,10 @@
         "effects": {
           "maxPhysATKAdd": 63.9
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Max ngoại công Attack (Solo Mode theo cấp, rank=gold)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -1575,7 +2067,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "大量流血で縦横剣意蓄積、 最大時 次大量流血必ず会意"
+        "raw": "大量流血で縦横剣意蓄積、 最大時 次大量流血必ず会意",
+        "rawI18n": {
+          "vi": "大量chảy máuで縦横Kiếm意蓄積、 tối đakhi 次大量chảy máu必ずhiểu ý"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -1585,14 +2080,20 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "縦横剣意状態中 大量出血ダメ +15%"
+        "raw": "縦横剣意状態中 大量出血ダメ +15%",
+        "rawI18n": {
+          "vi": "縦横Kiếm意状態trong 大量出血ダメ +15%"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "addSympathyRate": 0.023
         },
-        "raw": "Direct Affinity Rate +2.3%"
+        "raw": "Direct Affinity Rate +2.3%",
+        "rawI18n": {
+          "vi": "Direct Affinity Rate +2.3%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -1602,7 +2103,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "縦横剣意中 大量流血で流血+2stack保持、 蓄積最大→会意後 20pt剣意保持で蓄積継続"
+        "raw": "縦横剣意中 大量流血で流血+2stack保持、 蓄積最大→会意後 20pt剣意保持で蓄積継続",
+        "rawI18n": {
+          "vi": "縦横Kiếm意trong 大量chảy máuでchảy máu+2stack保持、 蓄積tối đa→hiểu ýsau 20ptKiếm意保持で蓄積継続"
+        }
       }
     },
     "rank": "gold"
@@ -1620,7 +2124,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春尽山空 2stackチャージ可 (CD+3s)"
+        "raw": "春尽山空 2stackチャージ可 (CD+3s)",
+        "rawI18n": {
+          "vi": "春尽山空 2stackチャージ可 (CD+3s)"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -1630,7 +2137,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春尽山空で水人帰還時 CD-3s、移動速度+20%"
+        "raw": "春尽山空で水人帰還時 CD-3s、移動速度+20%",
+        "rawI18n": {
+          "vi": "春尽山空で水人帰還khi CD-3s、tốc độ di chuyển+20%"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -1641,7 +2151,10 @@
         "effects": {
           "hitRate": 0.0594
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Precision Rate (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -1651,7 +2164,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春尽山空 対象浮遊なしでCD3s返還 + 15s 次の春尽山空ダメ+30%"
+        "raw": "春尽山空 対象浮遊なしでCD3s返還 + 15s 次の春尽山空ダメ+30%",
+        "rawI18n": {
+          "vi": "春尽山空 mục tiêu浮遊なしでCD3s返還 + 15s 次の春尽山空ダメ+30%"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -1661,7 +2177,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春尽山空帰還で3s 無頼の浮名 溜め速度+50%/竜巻移動速度+50%"
+        "raw": "春尽山空帰還で3s 無頼の浮名 溜め速度+50%/竜巻移動速度+50%",
+        "rawI18n": {
+          "vi": "春尽山空帰還で3s 無頼の浮名 溜めtốc độ+50%/竜巻tốc độ di chuyển+50%"
+        }
       },
       "tier5": {
         "permanent": true,
@@ -1670,7 +2189,10 @@
         },
         "raw": "Silkbind Penetration +6",
         "weaponSpecific": "silkbind",
-        "pendingImplementation": true
+        "pendingImplementation": true,
+        "rawI18n": {
+          "vi": "Silkbind Penetration +6"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -1680,7 +2202,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春尽山空 浮遊/滞骨命中で CD2s返還+春月増華CDリセット、3s 重撃追撃で春尽山空CD-3s (1s毎1回)"
+        "raw": "春尽山空 浮遊/滞骨命中で CD2s返還+春月増華CDリセット、3s 重撃追撃で春尽山空CD-3s (1s毎1回)",
+        "rawI18n": {
+          "vi": "春尽山空 浮遊/滞骨trúng đíchで CD2s返還+春月増華CDđặt lại、3s đả nặng追撃で春尽山空CD-3s (1s毎1lần)"
+        }
       }
     },
     "rank": "purple"
@@ -1703,7 +2228,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武術技発動終了で春雷3stack獲得 (15sCD、12s持続)、重撃/重撃追撃/軽撃/弾道技で1stack消費 → その技と次の1sの気血ダメ+15%"
+        "raw": "武術技発動終了で春雷3stack獲得 (15sCD、12s持続)、重撃/重撃追撃/軽撃/弾道技で1stack消費 → その技と次の1sの気血ダメ+15%",
+        "rawI18n": {
+          "vi": "kỹ năng võ họckích hoạt終了で春雷3stacknhận (15sCD、12sduy trì)、đả nặng/đả nặng追撃/đả nhẹ/弾道技で1stacktiêu hao → その技と次の1sのsinh lựcダメ+15%"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -1714,7 +2242,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春雷stack 3→4"
+        "raw": "春雷stack 3→4",
+        "rawI18n": {
+          "vi": "春雷stack 3→4"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -1726,7 +2257,10 @@
           "minPhysATKAdd": 19.17,
           "maxPhysATKAdd": 38.25
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "ngoại công Attack (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -1737,7 +2271,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春雷1消費毎 気血ダメ強化持続 1s→2s延長"
+        "raw": "春雷1消費毎 気血ダメ強化持続 1s→2s延長",
+        "rawI18n": {
+          "vi": "春雷1tiêu hao毎 sinh lựcダメtăng cườngduy trì 1s→2skéo dài"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -1748,14 +2285,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春雷stack 4→5"
+        "raw": "春雷stack 4→5",
+        "rawI18n": {
+          "vi": "春雷stack 4→5"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "physDmgBoost": 0.025
         },
-        "raw": "Physical DMG Bonus +2.5%"
+        "raw": "Physical DMG Bonus +2.5%",
+        "rawI18n": {
+          "vi": "ngoại công sát thương Bonus +2.5%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -1766,7 +2309,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "春雷中 重/重追/軽/弾道 が真気<30%or気竭対象命中で春雷1回復 (2s毎1回)"
+        "raw": "春雷中 重/重追/軽/弾道 が真気<30%or気竭対象命中で春雷1回復 (2s毎1回)",
+        "rawI18n": {
+          "vi": "春雷trong 重/重追/軽/弾道 が真気<30%or気竭mục tiêutrúng đíchで春雷1hồi phục (2s毎1lần)"
+        }
       }
     },
     "rank": "purple"
@@ -1791,7 +2337,10 @@
         "effects": {
           "physDmgBoost": 0.025
         },
-        "raw": "滞骨付与で外功攻撃力+5% (8s 1s毎更新)、浮遊で+10%"
+        "raw": "滞骨付与で外功攻撃力+5% (8s 1s毎更新)、浮遊で+10%",
+        "rawI18n": {
+          "vi": "滞骨gắnでtấn công ngoại công力+5% (8s 1s毎更新)、浮遊で+10%"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -1801,7 +2350,10 @@
         "effects": {
           "physDmgBoost": 0.025
         },
-        "raw": "滞骨5→7.5%、浮遊10→15%"
+        "raw": "滞骨5→7.5%、浮遊10→15%",
+        "rawI18n": {
+          "vi": "滞骨5→7.5%、浮遊10→15%"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -1814,7 +2366,10 @@
           "maxPhysATKAdd": 38.25,
           "physDmgBoost": 0.025
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "ngoại công Attack (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -1822,7 +2377,10 @@
           10302
         ],
         "effects": {},
-        "raw": "対象 真気<30%or力尽き時 滞骨15%/浮遊25%に追加上昇"
+        "raw": "対象 真気<30%or力尽き時 滞骨15%/浮遊25%に追加上昇",
+        "rawI18n": {
+          "vi": "mục tiêu 真気<30%or力尽きkhi 滞骨15%/浮遊25%にbổ sungtăng"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -1830,14 +2388,20 @@
           10302
         ],
         "effects": {},
-        "raw": "外功攻撃力上昇 持続8s→12s"
+        "raw": "外功攻撃力上昇 持続8s→12s",
+        "rawI18n": {
+          "vi": "tấn công ngoại công力tăng duy trì8s→12s"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "outerPenAdd": 5.1
         },
-        "raw": "Physical Penetration +5.1"
+        "raw": "Physical Penetration +5.1",
+        "rawI18n": {
+          "vi": "ngoại công Penetration +5.1"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -1845,7 +2409,10 @@
           10302
         ],
         "effects": {},
-        "raw": "浮遊/滞骨対象 — 自気血>75%で与ダメ+3%、≤75%で与ダメ10%気血回復"
+        "raw": "浮遊/滞骨対象 — 自気血>75%で与ダメ+3%、≤75%で与ダメ10%気血回復",
+        "rawI18n": {
+          "vi": "浮遊/滞骨mục tiêu — 自sinh lực>75%でsát thương gây ra+3%、≤75%でsát thương gây ra10%sinh lựchồi phục"
+        }
       }
     },
     "rank": "purple"
@@ -1861,7 +2428,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "春恨み 2stack 連続命中効果付与、 弾道技ダメ+10% 10s持続"
+        "raw": "春恨み 2stack 連続命中効果付与、 弾道技ダメ+10% 10s持続",
+        "rawI18n": {
+          "vi": "春恨み 2stack liên tụctrúng đíchhiệu quảgắn、 弾道技ダメ+10% 10sduy trì"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -1871,7 +2441,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "連続命中効果 弾道技ダメ 10%→20% (差分+10%)"
+        "raw": "連続命中効果 弾道技ダメ 10%→20% (差分+10%)",
+        "rawI18n": {
+          "vi": "liên tụctrúng đíchhiệu quả 弾道技ダメ 10%→20% (chênh lệch+10%)"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -1882,7 +2455,10 @@
         "effects": {
           "critRate": 0.074
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Critical Rate (Solo Mode theo cấp, rank=gold)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -1892,7 +2468,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "春恨み発動速度+30%、 連続命中効果持続+15s延長"
+        "raw": "春恨み発動速度+30%、 連続命中効果持続+15s延長",
+        "rawI18n": {
+          "vi": "春恨みkích hoạttốc độ+30%、 liên tụctrúng đíchhiệu quảduy trì+15skéo dài"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -1902,14 +2481,20 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "対人戦以外 春風飛舞 連続命中対象命中で 与ダメ+10%、 拡散対象 3→5"
+        "raw": "対人戦以外 春風飛舞 連続命中対象命中で 与ダメ+10%、 拡散対象 3→5",
+        "rawI18n": {
+          "vi": "PvP戦以外 春風飛舞 liên tụctrúng đíchmục tiêutrúng đíchで sát thương gây ra+10%、 拡散mục tiêu 3→5"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "critBoost": 0.044
         },
-        "raw": "Critical DMG Bonus +4.4%"
+        "raw": "Critical DMG Bonus +4.4%",
+        "rawI18n": {
+          "vi": "Critical sát thương Bonus +4.4%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -1919,7 +2504,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "春恨み max 3stack、 連続命中対象命中→ CD即-5s、 繁花+25 (スキル1回毎1回発動)"
+        "raw": "春恨み max 3stack、 連続命中対象命中→ CD即-5s、 繁花+25 (スキル1回毎1回発動)",
+        "rawI18n": {
+          "vi": "春恨み max 3stack、 liên tụctrúng đíchmục tiêutrúng đích→ CD即-5s、 繁花+25 (スキル1lần毎1lầnkích hoạt)"
+        }
       }
     },
     "rank": "gold"
@@ -1935,7 +2523,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "雲起の座 水人治療+10%、 範囲内自身いれば毎回露水+1"
+        "raw": "雲起の座 水人治療+10%、 範囲内自身いれば毎回露水+1",
+        "rawI18n": {
+          "vi": "雲起の座 水人trị liệu+10%、 phạm vi内bản thânいれば毎lần露水+1"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -1945,7 +2536,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "召喚水人治療受け時 追加露水+2"
+        "raw": "召喚水人治療受け時 追加露水+2",
+        "rawI18n": {
+          "vi": "triệu hồi水人trị liệu受けkhi bổ sung露水+2"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -1956,7 +2550,10 @@
         "effects": {
           "minPhysATKAdd": 63.9
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Min ngoại công Attack (Solo Mode theo cấp, rank=gold)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -1966,7 +2563,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "白雲無尽発動後 自身+治療対象に 6s持続治療"
+        "raw": "白雲無尽発動後 自身+治療対象に 6s持続治療",
+        "rawI18n": {
+          "vi": "白雲無尽kích hoạtsau bản thân+trị liệumục tiêuに 6sduy trìtrị liệu"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -1976,14 +2576,20 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "白雲無尽 発動条件 露水50消費に変更"
+        "raw": "白雲無尽 発動条件 露水50消費に変更",
+        "rawI18n": {
+          "vi": "白雲無尽 kích hoạt条件 露水50tiêu haoに変更"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "addCritRate": 0.046
         },
-        "raw": "Direct Critical Rate +4.6%"
+        "raw": "Direct Critical Rate +4.6%",
+        "rawI18n": {
+          "vi": "Direct Critical Rate +4.6%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -1993,7 +2599,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "薬川装備時 非プレイヤー被ダメ-20%、 重傷時 7s復活水人召喚 (CD 120s、 軽減効果120s無効)"
+        "raw": "薬川装備時 非プレイヤー被ダメ-20%、 重傷時 7s復活水人召喚 (CD 120s、 軽減効果120s無効)",
+        "rawI18n": {
+          "vi": "薬川装備khi 非プレイヤーsát thương nhận vào-20%、 重傷khi 7shồi sinh水人triệu hồi (CD 120s、 giảmhiệu quả120s無効)"
+        }
       }
     },
     "rank": "gold"
@@ -2012,7 +2621,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "会心治療で対象に養心1stack付与 (6s) — 受治療+2%、max3"
+        "raw": "会心治療で対象に養心1stack付与 (6s) — 受治療+2%、max3",
+        "rawI18n": {
+          "vi": "chí mạngtrị liệuでmục tiêuに養心1stackgắn (6s) — 受trị liệu+2%、max3"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -2023,7 +2635,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "養心持続 6s→10s延長"
+        "raw": "養心持続 6s→10s延長",
+        "rawI18n": {
+          "vi": "養心duy trì 6s→10skéo dài"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -2038,7 +2653,10 @@
         "pendingImplementation": true,
         "minPathATK": 32.6,
         "maxPathATK": 32.6,
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Min Silkbind Attack (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -2049,7 +2667,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "会心治療で自身に凝心1stack (10s) — 治療量+2%、max3"
+        "raw": "会心治療で自身に凝心1stack (10s) — 治療量+2%、max3",
+        "rawI18n": {
+          "vi": "chí mạngtrị liệuでbản thânに凝心1stack (10s) — trị liệu量+2%、max3"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -2060,13 +2681,19 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "養心/凝心 max3→6"
+        "raw": "養心/凝心 max3→6",
+        "rawI18n": {
+          "vi": "養心/凝心 max3→6"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "Critical Healing Bonus +4%",
-        "category": "healing"
+        "category": "healing",
+        "rawI18n": {
+          "vi": "Critical Healing Bonus +4%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -2077,7 +2704,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "最大気血<30%対象に会心治療で 養心/凝心 2stackずつ獲得"
+        "raw": "最大気血<30%対象に会心治療で 養心/凝心 2stackずつ獲得",
+        "rawI18n": {
+          "vi": "tối đasinh lực<30%mục tiêuにchí mạngtrị liệuで 養心/凝心 2stackずつnhận"
+        }
       }
     },
     "rank": "purple"
@@ -2095,7 +2725,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "貴き朝玉復活対象の治療気血回復+50%"
+        "raw": "貴き朝玉復活対象の治療気血回復+50%",
+        "rawI18n": {
+          "vi": "貴き朝玉hồi sinhmục tiêuのtrị liệusinh lựchồi phục+50%"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -2105,7 +2738,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "復活対象 回復量 +50→+75%"
+        "raw": "復活対象 回復量 +50→+75%",
+        "rawI18n": {
+          "vi": "hồi sinhmục tiêu lượng hồi phục +50→+75%"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -2116,7 +2752,10 @@
         "effects": {
           "critRate": 0.0666
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Critical Rate (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -2126,7 +2765,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "復活後3s 対象被ダメ-30%"
+        "raw": "復活後3s 対象被ダメ-30%",
+        "rawI18n": {
+          "vi": "hồi sinhsau3s mục tiêusát thương nhận vào-30%"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -2136,13 +2778,19 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "復活後 対象/自身に持続回復付与"
+        "raw": "復活後 対象/自身に持続回復付与",
+        "rawI18n": {
+          "vi": "hồi sinhsau mục tiêu/bản thânにduy trìhồi phụcgắn"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "Critical Healing Bonus +4%",
-        "category": "healing"
+        "category": "healing",
+        "rawI18n": {
+          "vi": "Critical Healing Bonus +4%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -2152,7 +2800,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "8s 復活対象ダメ30%分担 (対象死亡で自最大気血25%回復)"
+        "raw": "8s 復活対象ダメ30%分担 (対象死亡で自最大気血25%回復)",
+        "rawI18n": {
+          "vi": "8s hồi sinhmục tiêuダメ30%phút担 (mục tiêu死亡で自tối đasinh lực25%hồi phục)"
+        }
       }
     },
     "rank": "purple"
@@ -2170,7 +2821,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "千水余韻発動後 露+5、露100消費毎 自最大気血10%追加回復"
+        "raw": "千水余韻発動後 露+5、露100消費毎 自最大気血10%追加回復",
+        "rawI18n": {
+          "vi": "千水余韻kích hoạtsau 露+5、露100tiêu hao毎 自tối đasinh lực10%bổ sunghồi phục"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -2180,7 +2834,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "千水余韻 CD 1sまで短縮"
+        "raw": "千水余韻 CD 1sまで短縮",
+        "rawI18n": {
+          "vi": "千水余韻 CD 1s đến rút ngắn"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -2192,7 +2849,10 @@
           "minPhysATKAdd": 19.17,
           "maxPhysATKAdd": 38.25
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "ngoại công Attack (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -2202,7 +2862,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "累計露水50消費で自最大気血10%治療"
+        "raw": "累計露水50消費で自最大気血10%治療",
+        "rawI18n": {
+          "vi": "tích lũy露水50tiêu haoで自tối đasinh lực10%trị liệu"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -2212,13 +2875,19 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "千水余韻 気血最低味方検知範囲+50%"
+        "raw": "千水余韻 気血最低味方検知範囲+50%",
+        "rawI18n": {
+          "vi": "千水余韻 sinh lực最thấpđồng đội検知phạm vi+50%"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "Physical Healing Bonus +2.5%",
-        "category": "healing"
+        "category": "healing",
+        "rawI18n": {
+          "vi": "ngoại công Healing Bonus +2.5%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -2228,7 +2897,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "千水余韻で自身+近傍気血割合最低味方を同時治療"
+        "raw": "千水余韻で自身+近傍気血割合最低味方を同時治療",
+        "rawI18n": {
+          "vi": "千水余韻でbản thân+近傍sinh lực割合最thấpđồng độiを同khitrị liệu"
+        }
       }
     },
     "rank": "purple"
@@ -2244,7 +2916,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "断魂刀防御成功→特殊カウンター + 溜め不要3段重撃溜め技 (10s CD)、 マルチ首領防御で15s絶韻stack"
+        "raw": "断魂刀防御成功→特殊カウンター + 溜め不要3段重撃溜め技 (10s CD)、 マルチ首領防御で15s絶韻stack",
+        "rawI18n": {
+          "vi": "断魂Đaophòng ngựthành công→特殊カウンター + 溜め不要3tầngđả nặngkỹ năng tích lực (10s CD)、 マルチthủ lĩnhphòng ngựで15s絶韻stack"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -2254,7 +2929,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "防御成功 20%確率 戦意+1追加、 対人戦 気力自然回復速度上昇"
+        "raw": "防御成功 20%確率 戦意+1追加、 対人戦 気力自然回復速度上昇",
+        "rawI18n": {
+          "vi": "phòng ngựthành công 20%確率 戦意+1bổ sung、 PvP戦 thể lực自然hồi phụctốc độtăng"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -2265,7 +2943,10 @@
         "effects": {
           "critRate": 0.074
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Critical Rate (Solo Mode theo cấp, rank=gold)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -2275,7 +2956,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "免蓄重撃溜め技 威力 1→3段階"
+        "raw": "免蓄重撃溜め技 威力 1→3段階",
+        "rawI18n": {
+          "vi": "免蓄đả nặngkỹ năng tích lực 威力 1→3tầng階"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -2285,14 +2969,20 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "防御成功で 特殊カウンター技 発動間隔 -50% (10→5s)"
+        "raw": "防御成功で 特殊カウンター技 発動間隔 -50% (10→5s)",
+        "rawI18n": {
+          "vi": "phòng ngựthành côngで 特殊カウンター技 khoảng cách kích hoạt -50% (10→5s)"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "critBoost": 0.044
         },
-        "raw": "Critical DMG Bonus +4.4%"
+        "raw": "Critical DMG Bonus +4.4%",
+        "rawI18n": {
+          "vi": "Critical sát thương Bonus +4.4%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -2302,7 +2992,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "三段階軽重撃/派生 戦意1消費でダメ+25% (軽重撃 2マスで+50%)"
+        "raw": "三段階軽重撃/派生 戦意1消費でダメ+25% (軽重撃 2マスで+50%)",
+        "rawI18n": {
+          "vi": "三tầng階軽đả nặng/派生 戦意1tiêu haoでダメ+25% (軽đả nặng 2マスで+50%)"
+        }
       }
     },
     "rank": "gold"
@@ -2320,7 +3013,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "気血<30%で困獣の闘い — 気血上限30%吸収シールド (4s、300sCD)"
+        "raw": "気血<30%で困獣の闘い — 気血上限30%吸収シールド (4s、300sCD)",
+        "rawI18n": {
+          "vi": "sinh lực<30%で困獣の闘い — sinh lựcgiới hạn30%吸収lá chắn (4s、300sCD)"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -2330,7 +3026,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "シールド量 気血上限30%→40%"
+        "raw": "シールド量 気血上限30%→40%",
+        "rawI18n": {
+          "vi": "lá chắn量 sinh lựcgiới hạn30%→40%"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -2339,7 +3038,10 @@
         "statType": "Max HP",
         "raw": "Max HP (Solo Mode Level scaled, rank=purple)",
         "effects": {},
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "Sinh lực tối đa (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -2349,7 +3051,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "シールド中 受治療/薬使用効果上昇"
+        "raw": "シールド中 受治療/薬使用効果上昇",
+        "rawI18n": {
+          "vi": "lá chắntrong 受trị liệu/薬使用hiệu quảtăng"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -2359,13 +3064,19 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "発動間隔-40% (300s→180s)"
+        "raw": "発動間隔-40% (300s→180s)",
+        "rawI18n": {
+          "vi": "khoảng cách kích hoạt-40% (300s→180s)"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "外功耐性 +5.1",
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "ngoại công耐性 +5.1"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -2375,7 +3086,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "シールド持続中破壊で CD即-120s"
+        "raw": "シールド持続中破壊で CD即-120s",
+        "rawI18n": {
+          "vi": "lá chắnduy trìtrong破壊で CD即-120s"
+        }
       }
     },
     "rank": "purple"
@@ -2393,7 +3107,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "発動シールド/付与効果持続+4秒"
+        "raw": "発動シールド/付与効果持続+4秒",
+        "rawI18n": {
+          "vi": "kích hoạtlá chắn/gắnhiệu quảduy trì+4giây"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -2403,7 +3120,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "全気血シールド吸収量+10%"
+        "raw": "全気血シールド吸収量+10%",
+        "rawI18n": {
+          "vi": "toàn bộ sinh lựclá chắn吸収量+10%"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -2419,7 +3139,10 @@
         "pendingImplementation": true,
         "minPathATK": 10.9,
         "maxPathATK": 21.7,
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Rock Splitting Attack (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -2429,7 +3152,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "シールド保護時 与全ダメ&治療+5%"
+        "raw": "シールド保護時 与全ダメ&治療+5%",
+        "rawI18n": {
+          "vi": "lá chắnbảo vệkhi 与toàn bộ ダメ&trị liệu+5%"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -2439,7 +3165,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "シールド/付加効果持続+2秒追加 (合計+6秒)"
+        "raw": "シールド/付加効果持続+2秒追加 (合計+6秒)",
+        "rawI18n": {
+          "vi": "lá chắn/付加hiệu quảduy trì+2giâybổ sung (合計+6giây)"
+        }
       },
       "tier5": {
         "permanent": true,
@@ -2448,7 +3177,10 @@
         },
         "raw": "Rock Splitting Penetration +6",
         "weaponSpecific": "stonesplit",
-        "pendingImplementation": true
+        "pendingImplementation": true,
+        "rawI18n": {
+          "vi": "Rock Splitting Penetration +6"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -2458,7 +3190,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "保護時 与ダメ&回復+10%、シールド未破壊→残量25%回復(PvP5%)、破壊→12秒硬茬+10%"
+        "raw": "保護時 与ダメ&回復+10%、シールド未破壊→残量25%回復(PvP5%)、破壊→12秒硬茬+10%",
+        "rawI18n": {
+          "vi": "bảo vệkhi sát thương gây ra&hồi phục+10%、lá chắn未破壊→残量25%hồi phục(PvP5%)、破壊→12giây硬茬+10%"
+        }
       }
     },
     "rank": "purple"
@@ -2476,7 +3211,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "挑発で風雷の嘯きDR+20%/+5% (max20%)、与ダメ-10%"
+        "raw": "挑発で風雷の嘯きDR+20%/+5% (max20%)、与ダメ-10%",
+        "rawI18n": {
+          "vi": "挑発で風雷の嘯きDR+20%/+5% (max20%)、sát thương gây ra-10%"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -2486,7 +3224,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "風雷の嘯きCT-4s (16s)"
+        "raw": "風雷の嘯きCT-4s (16s)",
+        "rawI18n": {
+          "vi": "風雷の嘯きCT-4s (16s)"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -2495,7 +3236,10 @@
         "statType": "Max HP",
         "raw": "Max HP (Solo Mode Level scaled, rank=purple)",
         "effects": {},
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "Sinh lực tối đa (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -2505,7 +3249,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "挑発ユニット攻撃時 与ダメ+5%"
+        "raw": "挑発ユニット攻撃時 与ダメ+5%",
+        "rawI18n": {
+          "vi": "挑発ユニットkhi tấn công sát thương gây ra+5%"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -2515,13 +3262,19 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "風雷の嘯きDR ボス挑発時+25%、上限25%"
+        "raw": "風雷の嘯きDR ボス挑発時+25%、上限25%",
+        "rawI18n": {
+          "vi": "風雷の嘯きDR ボス挑発khi+25%、giới hạn25%"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {},
         "raw": "Physical DMG Reduction +2.5%",
-        "category": "defensive"
+        "category": "defensive",
+        "rawI18n": {
+          "vi": "giảm sát thương ngoại công +2.5%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -2531,7 +3284,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "風雷の嘯き被ダメ軽減中 命中で戦意1=気血+2% (最大5体)"
+        "raw": "風雷の嘯き被ダメ軽減中 命中で戦意1=気血+2% (最大5体)",
+        "rawI18n": {
+          "vi": "風雷の嘯きsát thương nhận vàogiảmtrong trúng đíchで戦意1=sinh lực+2% (tối đa5体)"
+        }
       }
     },
     "rank": "purple"
@@ -2553,7 +3309,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "外功防御10%/瞬嵐耐性10無視"
+        "raw": "外功防御10%/瞬嵐耐性10無視",
+        "rawI18n": {
+          "vi": "ngoại côngphòng ngự10%/Phá Trúc耐性10無視"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -2563,7 +3322,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "悪身&苦果対象攻撃で 10s輪廻獲得、 輪廻時 与ダメ+5%"
+        "raw": "悪身&苦果対象攻撃で 10s輪廻獲得、 輪廻時 与ダメ+5%",
+        "rawI18n": {
+          "vi": "悪身&苦果mục tiêutấn côngで 10s輪廻nhận、 輪廻khi sát thương gây ra+5%"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -2572,7 +3334,10 @@
         "effects": {
           "critRate": 0.074
         },
-        "raw": "Critical Rate +7.4%"
+        "raw": "Critical Rate +7.4%",
+        "rawI18n": {
+          "vi": "Critical Rate +7.4%"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -2582,7 +3347,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "完全回避→輪廻獲得、 輪廻時ダメ→業火+1"
+        "raw": "完全回避→輪廻獲得、 輪廻時ダメ→業火+1",
+        "rawI18n": {
+          "vi": "完toàn bộ lần避→輪廻nhận、 輪廻khiダメ→業火+1"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -2592,14 +3360,20 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "輪廻時ダメ→業火+1"
+        "raw": "輪廻時ダメ→業火+1",
+        "rawI18n": {
+          "vi": "輪廻khiダメ→業火+1"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "critBoost": 0.044
         },
-        "raw": "Critical DMG Bonus +4.4%"
+        "raw": "Critical DMG Bonus +4.4%",
+        "rawI18n": {
+          "vi": "Critical sát thương Bonus +4.4%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -2609,7 +3383,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "怒炎軽撃 悪身+苦果同時付与、 輪廻時 与ダメ+10%"
+        "raw": "怒炎軽撃 悪身+苦果同時付与、 輪廻時 与ダメ+10%",
+        "rawI18n": {
+          "vi": "怒炎đả nhẹ 悪身+苦果同khigắn、 輪廻khi sát thương gây ra+10%"
+        }
       }
     },
     "rank": "gold"
@@ -2625,7 +3402,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "敵討令/鼠の威力/力溜め召喚ねずみ 持続時間 10s→15s、 恩文字の札+20回復"
+        "raw": "敵討令/鼠の威力/力溜め召喚ねずみ 持続時間 10s→15s、 恩文字の札+20回復",
+        "rawI18n": {
+          "vi": "địch討令/鼠の威力/力溜めtriệu hồiねずみ thời gian duy trì 10s→15s、 恩文字の札+20hồi phục"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -2635,7 +3415,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "回復速度+30%、 敵デバフ持続+延長 (20s)"
+        "raw": "回復速度+30%、 敵デバフ持続+延長 (20s)",
+        "rawI18n": {
+          "vi": "hồi phụctốc độ+30%、 địchデバフduy trì+kéo dài (20s)"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -2646,7 +3429,10 @@
         "effects": {
           "minPhysATKAdd": 57.51
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Min ngoại công Attack +57.51 (rank=purple, post 5/28 patch swap with 454)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -2660,7 +3446,10 @@
           20501
         ],
         "synergyMissingMultiplier": 0.5,
-        "raw": "鼠ダメージの30%追加ダメージ (20s時限、 獄炎同装備時 鼠ダメ倍 → 獄炎なしで効果半減)"
+        "raw": "鼠ダメージの30%追加ダメージ (20s時限、 獄炎同装備時 鼠ダメ倍 → 獄炎なしで効果半減)",
+        "rawI18n": {
+          "vi": "鼠sát thươngの30%bổ sungsát thương (20skhi限、 獄炎同装備khi 鼠ダメ倍 → 獄炎なしでhiệu quả半減)"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -2670,14 +3459,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "恩文字の札 回復速度 30→50%、 札2枚消費で持続20s延長"
+        "raw": "恩文字の札 回復速度 30→50%、 札2枚消費で持続20s延長",
+        "rawI18n": {
+          "vi": "恩文字の札 hồi phụctốc độ 30→50%、 札2枚tiêu haoでduy trì20skéo dài"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "outerPenAdd": 5.1
         },
-        "raw": "Physical Penetration +5.1 (post 5/28 patch swap with 454)"
+        "raw": "Physical Penetration +5.1 (post 5/28 patch swap with 454)",
+        "rawI18n": {
+          "vi": "ngoại công Penetration +5.1 (post 5/28 patch swap with 454)"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -2691,7 +3486,10 @@
           20501
         ],
         "synergyMissingMultiplier": 0.5,
-        "raw": "鼠ダメージ+30% (獄炎同装備時 鼠ダメ倍 → 獄炎なしで効果半減)"
+        "raw": "鼠ダメージ+30% (獄炎同装備時 鼠ダメ倍 → 獄炎なしで効果半減)",
+        "rawI18n": {
+          "vi": "鼠sát thương+30% (獄炎同装備khi 鼠ダメ倍 → 獄炎なしでhiệu quả半減)"
+        }
       }
     },
     "rank": "purple"
@@ -2711,14 +3509,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "力尽き敵会心で崩解1stack、stack毎 outerPen+5/critBoost+5%、最大3、3秒"
+        "raw": "力尽き敵会心で崩解1stack、stack毎 outerPen+5/critBoost+5%、最大3、3秒",
+        "rawI18n": {
+          "vi": "力尽きđịchchí mạngで崩解1stack、stack毎 outerPen+5/critBoost+5%、tối đa3、3giây"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "崩解持続5秒に延長"
+        "raw": "崩解持続5秒に延長",
+        "rawI18n": {
+          "vi": "崩解duy trì5giâyにkéo dài"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -2729,35 +3533,50 @@
         "effects": {
           "hitRate": 0.0594
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Precision Rate (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "力尽き敵命中で即座に崩解1stack"
+        "raw": "力尽き敵命中で即座に崩解1stack",
+        "rawI18n": {
+          "vi": "力尽きđịchtrúng đíchで即座に崩解1stack"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "崩解最大stack数 5へ"
+        "raw": "崩解最大stack数 5へ",
+        "rawI18n": {
+          "vi": "崩解tối đastack数 5へ"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "addCritRate": 0.041
         },
-        "raw": "Direct Critical Rate +4.1%"
+        "raw": "Direct Critical Rate +4.1%",
+        "rawI18n": {
+          "vi": "Direct Critical Rate +4.1%"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "完全回避で崩解5stack獲得、15秒毎1回"
+        "raw": "完全回避で崩解5stack獲得、15秒毎1回",
+        "rawI18n": {
+          "vi": "完toàn bộ lần避で崩解5stacknhận、15giây毎1lần"
+        }
       }
     },
     "rank": "purple"
@@ -2777,7 +3596,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "妨害系命中で現武術CD-1s (10s毎1回)"
+        "raw": "妨害系命中で現武術CD-1s (10s毎1回)",
+        "rawI18n": {
+          "vi": "妨害系trúng đíchで現võ họcCD-1s (10s毎1lần)"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -2789,7 +3611,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "妨害系命中で現武術CD-2s"
+        "raw": "妨害系命中で現武術CD-2s",
+        "rawI18n": {
+          "vi": "妨害系trúng đíchで現võ họcCD-2s"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -2800,7 +3625,10 @@
         "effects": {
           "minBamboocut": 32.6
         },
-        "weaponSpecific": "bamboocut"
+        "weaponSpecific": "bamboocut",
+        "rawI18n": {
+          "vi": "Min Bamboocut Attack +32.6 (rank=purple, post 5/28 patch swap with 452)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -2812,7 +3640,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "制御/蝕骨対象 武術技与真気ダメ+10%"
+        "raw": "制御/蝕骨対象 武術技与真気ダメ+10%",
+        "rawI18n": {
+          "vi": "制御/蝕骨mục tiêu kỹ năng võ học与真気ダメ+10%"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -2824,7 +3655,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武術技CD短縮 発動間隔5秒へ短縮"
+        "raw": "武術技CD短縮 発動間隔5秒へ短縮",
+        "rawI18n": {
+          "vi": "kỹ năng võ họcCDrút ngắn khoảng cách kích hoạt5giâyへrút ngắn"
+        }
       },
       "tier5": {
         "permanent": true,
@@ -2832,7 +3666,10 @@
           "bamboocutPen": 6
         },
         "raw": "Bamboocut Penetration +6.0 (post 5/28 patch swap with 452)",
-        "weaponSpecific": "bamboocut"
+        "weaponSpecific": "bamboocut",
+        "rawI18n": {
+          "vi": "Bamboocut Penetration +6.0 (post 5/28 patch swap with 452)"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -2844,7 +3681,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "制御/蝕骨命中で削骨3秒、武術技気血ダメ+10% 最大3スタック"
+        "raw": "制御/蝕骨命中で削骨3秒、武術技気血ダメ+10% 最大3スタック",
+        "rawI18n": {
+          "vi": "制御/蝕骨trúng đíchで削骨3giây、kỹ năng võ họcsinh lựcダメ+10% tối đa3スタック"
+        }
       }
     },
     "rank": "purple"
@@ -2860,7 +3700,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "紅綃香断 最初投げ→幻影傘召喚、 3回毎1本召喚、 完璧キャッチ/召喚時 共鳴範囲ダメ"
+        "raw": "紅綃香断 最初投げ→幻影傘召喚、 3回毎1本召喚、 完璧キャッチ/召喚時 共鳴範囲ダメ",
+        "rawI18n": {
+          "vi": "紅綃香断 最初投げ→幻影Dùtriệu hồi、 3lần毎1本triệu hồi、 完璧キャッチ/triệu hồikhi 共鳴phạm viダメ"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -2870,7 +3713,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "完全防御 傘受け成功で 残紅+10回復"
+        "raw": "完全防御 傘受け成功で 残紅+10回復",
+        "rawI18n": {
+          "vi": "完toàn bộ phòng ngự Dù受けthành côngで 残紅+10hồi phục"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -2881,7 +3727,10 @@
         "effects": {
           "critRate": 0.074
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Critical Rate (Solo Mode theo cấp, rank=gold)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -2891,7 +3740,10 @@
         "effects": {
           "outerPen": 5
         },
-        "raw": "共鳴ダメ受敵 幻鳴 (5s) 外功耐性-2 max5stack (実効 外功貫通+5、 条件発動で維持不可→半減)"
+        "raw": "共鳴ダメ受敵 幻鳴 (5s) 外功耐性-2 max5stack (実効 外功貫通+5、 条件発動で維持不可→半減)",
+        "rawI18n": {
+          "vi": "共鳴ダメ受địch 幻鳴 (5s) ngoại công耐性-2 max5stack (実効 xuyên thấu ngoại công+5、 条件kích hoạtで維持不可→半減)"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -2901,14 +3753,20 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "共鳴ダメ+20%、 周囲敵引き寄せ (首領無効、 20s CD)"
+        "raw": "共鳴ダメ+20%、 周囲敵引き寄せ (首領無効、 20s CD)",
+        "rawI18n": {
+          "vi": "共鳴ダメ+20%、 xung quanhđịch引き寄せ (thủ lĩnh無効、 20s CD)"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "physDmgBoost": 0.028
         },
-        "raw": "外功攻撃強化 +2.8%"
+        "raw": "外功攻撃強化 +2.8%",
+        "rawI18n": {
+          "vi": "tấn công ngoại côngtăng cường +2.8%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -2918,7 +3776,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "紅綃香断 投げ毎回 幻影傘召喚、 召喚瞬間 共鳴1回発生"
+        "raw": "紅綃香断 投げ毎回 幻影傘召喚、 召喚瞬間 共鳴1回発生",
+        "rawI18n": {
+          "vi": "紅綃香断 投げ毎lần 幻影Dùtriệu hồi、 triệu hồi瞬間 共鳴1lần発生"
+        }
       }
     },
     "rank": "gold"
@@ -2936,7 +3797,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "浄虚一掃後 恩文字札+50、貫穿の鏢失魂付与/魂奪時追加付与、初段引き寄せ"
+        "raw": "浄虚一掃後 恩文字札+50、貫穿の鏢失魂付与/魂奪時追加付与、初段引き寄せ",
+        "rawI18n": {
+          "vi": "浄虚一掃sau 恩文字札+50、貫穿の鏢失魂gắn/魂奪khibổ sunggắn、初tầng引き寄せ"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -2946,7 +3810,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "魂抜け/還魂 持続21秒延長"
+        "raw": "魂抜け/還魂 持続21秒延長",
+        "rawI18n": {
+          "vi": "魂抜け/還魂 duy trì21giâykéo dài"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -2959,7 +3826,10 @@
         "pendingImplementation": true,
         "minPathATK": 32.6,
         "maxPathATK": 32.6,
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Min Bamboocut Attack (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -2969,7 +3839,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "貫穿の鏢なぎ払い 1-3段+5%/4-5段+10%/6-7段+15%"
+        "raw": "貫穿の鏢なぎ払い 1-3段+5%/4-5段+10%/6-7段+15%",
+        "rawI18n": {
+          "vi": "貫穿の鏢なぎ払い 1-3tầng+5%/4-5tầng+10%/6-7tầng+15%"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -2979,14 +3852,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "魂抜け終了時 累積ダメ5%追加清算 (本体技限定)"
+        "raw": "魂抜け終了時 累積ダメ5%追加清算 (本体技限定)",
+        "rawI18n": {
+          "vi": "魂抜け終了khi 累積ダメ5%bổ sung清算 (本体技限定)"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "elemPenAdd": 6
         },
-        "raw": "瞬嵐貫通 +6"
+        "raw": "瞬嵐貫通 +6",
+        "rawI18n": {
+          "vi": "Phá Trúcxuyên thấu +6"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -2996,7 +3875,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "焚巣破穴+15%必ず会心、指鳴らしで還魂更新+15m魂抜け再付与、清算量10%上昇"
+        "raw": "焚巣破穴+15%必ず会心、指鳴らしで還魂更新+15m魂抜け再付与、清算量10%上昇",
+        "rawI18n": {
+          "vi": "焚巣破穴+15%必ずchí mạng、指鳴らしで還魂更新+15m魂抜け再gắn、清算量10%tăng"
+        }
       }
     },
     "rank": "purple"
@@ -3011,14 +3893,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "3体以上同時命中で燭影3秒、stack毎敵移動-4%/被ダメ+2%、最大5、0.5秒毎付与"
+        "raw": "3体以上同時命中で燭影3秒、stack毎敵移動-4%/被ダメ+2%、最大5、0.5秒毎付与",
+        "rawI18n": {
+          "vi": "3体trở lên同khitrúng đíchで燭影3giây、stack毎địchdi chuyển-4%/sát thương nhận vào+2%、tối đa5、0.5giây毎gắn"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "燭影持続5秒延長"
+        "raw": "燭影持続5秒延長",
+        "rawI18n": {
+          "vi": "燭影duy trì5giâykéo dài"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -3029,35 +3917,50 @@
         "effects": {
           "minPhysATKAdd": 57.51
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Min ngoại công Attack (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "燭影5stack敵に与ダメで2秒金縛り(首領無効)、20秒毎1体"
+        "raw": "燭影5stack敵に与ダメで2秒金縛り(首領無効)、20秒毎1体",
+        "rawI18n": {
+          "vi": "燭影5stackđịchにsát thương gây raで2giây金縛り(thủ lĩnh無効)、20giây毎1体"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "2体以上同時命中で燭影付与"
+        "raw": "2体以上同時命中で燭影付与",
+        "rawI18n": {
+          "vi": "2体trở lên同khitrúng đíchで燭影gắn"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "outerPenAdd": 5.1
         },
-        "raw": "外功貫通 +5.1"
+        "raw": "外功貫通 +5.1",
+        "rawI18n": {
+          "vi": "xuyên thấu ngoại công +5.1"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "燭影最大stack敵 与ダメ+3%、距離8m超なら+6%"
+        "raw": "燭影最大stack敵 与ダメ+3%、距離8m超なら+6%",
+        "rawI18n": {
+          "vi": "燭影tối đastackđịch sát thương gây ra+3%、khoảng cách8m超なら+6%"
+        }
       }
     },
     "rank": "purple"
@@ -3079,7 +3982,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武術技で唐歌4秒、HP≥50%時 stack毎 critBoost+2%、HP<50%時 stack毎 武術技吸収+2%、最大5"
+        "raw": "武術技で唐歌4秒、HP≥50%時 stack毎 critBoost+2%、HP<50%時 stack毎 武術技吸収+2%、最大5",
+        "rawI18n": {
+          "vi": "kỹ năng võ họcで唐歌4giây、HP≥50%khi stack毎 critBoost+2%、HP<50%khi stack毎 kỹ năng võ học吸収+2%、tối đa5"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -3089,7 +3995,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "唐歌持続7秒延長"
+        "raw": "唐歌持続7秒延長",
+        "rawI18n": {
+          "vi": "唐歌duy trì7giâykéo dài"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -3100,7 +4009,10 @@
         "effects": {
           "hitRate": 0.0594
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "Precision Rate (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -3110,7 +4022,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "唐歌 武術技critBoost/吸収 3%に上昇、毎秒最大2stack"
+        "raw": "唐歌 武術技critBoost/吸収 3%に上昇、毎秒最大2stack",
+        "rawI18n": {
+          "vi": "唐歌 kỹ năng võ họccritBoost/吸収 3%にtăng、mỗi giâytối đa2stack"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -3120,14 +4035,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "武術技2体以上同時命中で唐歌+1stack、毎秒最大2回"
+        "raw": "武術技2体以上同時命中で唐歌+1stack、毎秒最大2回",
+        "rawI18n": {
+          "vi": "kỹ năng võ học2体trở lên同khitrúng đíchで唐歌+1stack、mỗi giâytối đa2lần"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "critBoost": 0.04
         },
-        "raw": "会心攻撃強化 +4.0%"
+        "raw": "会心攻撃強化 +4.0%",
+        "rawI18n": {
+          "vi": "chí mạngtấn côngtăng cường +4.0%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -3137,7 +4058,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "唐歌は気血値に左右されない"
+        "raw": "唐歌は気血値に左右されない",
+        "rawI18n": {
+          "vi": "唐歌はsinh lực値に左右されない"
+        }
       }
     },
     "rank": "purple"
@@ -3153,7 +4077,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "斬雪刀 受け流し→雪払い発動、 刀勢-1で素早斬撃 (強靭)、 非プレイヤー命中で+36%気血ダメ (2s毎)"
+        "raw": "斬雪刀 受け流し→雪払い発動、 刀勢-1で素早斬撃 (強靭)、 非プレイヤー命中で+36%気血ダメ (2s毎)",
+        "rawI18n": {
+          "vi": "斬雪Đao 受け流し→雪払いkích hoạt、 Đao勢-1で素早斬撃 (強靭)、 非プレイヤーtrúng đíchで+36%sinh lựcダメ (2s毎)"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -3163,7 +4090,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "鉄衣戌魂中 撥雪尋春命中→横刀安西軍追撃"
+        "raw": "鉄衣戌魂中 撥雪尋春命中→横刀安西軍追撃",
+        "rawI18n": {
+          "vi": "鉄衣戌魂trong 撥雪尋春trúng đích→横Đao安西軍追撃"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -3172,7 +4102,10 @@
         "effects": {
           "minPhysATKAdd": 63.9
         },
-        "raw": "最小外功攻撃 +63.9"
+        "raw": "最小外功攻撃 +63.9",
+        "rawI18n": {
+          "vi": "tối thiểutấn công ngoại công +63.9"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -3182,7 +4115,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "塚上の霜/横刀武変 完全使用後 雪払い発動可、 命中で刀勢0.5還元"
+        "raw": "塚上の霜/横刀武変 完全使用後 雪払い発動可、 命中で刀勢0.5還元",
+        "rawI18n": {
+          "vi": "塚上の霜/横Đao武変 完toàn bộ 使用sau 雪払いkích hoạt可、 trúng đíchでĐao勢0.5還元"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -3192,14 +4128,20 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "飛鴻踏雪 熱血冷め難し 4stack、 雪払い1消費で非プレイヤー気血ダメ+40%"
+        "raw": "飛鴻踏雪 熱血冷め難し 4stack、 雪払い1消費で非プレイヤー気血ダメ+40%",
+        "rawI18n": {
+          "vi": "飛鴻踏雪 熱血冷め難し 4stack、 雪払い1tiêu haoで非プレイヤーsinh lựcダメ+40%"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "addCritRate": 0.046
         },
-        "raw": "付加会心率 +4.6%"
+        "raw": "付加会心率 +4.6%",
+        "rawI18n": {
+          "vi": "付加tỷ lệ chí mạng +4.6%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -3209,7 +4151,10 @@
         "effects": {
           "globalDmgBoost": 0.013
         },
-        "raw": "雪払いダメ+10%、 忘機 (3s塚上霜1回 雪払いCD解除)、 力尽き首領命中で 熱血冷め難し追加UP + 忘機CD解除"
+        "raw": "雪払いダメ+10%、 忘機 (3s塚上霜1回 雪払いCD解除)、 力尽き首領命中で 熱血冷め難し追加UP + 忘機CD解除",
+        "rawI18n": {
+          "vi": "雪払いダメ+10%、 忘機 (3s塚上霜1lần 雪払いCDgỡ bỏ)、 力尽きthủ lĩnhtrúng đíchで 熱血冷め難しbổ sungUP + 忘機CDgỡ bỏ"
+        }
       }
     },
     "rank": "gold"
@@ -3227,7 +4172,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "土方破陣 焚此心3段溜めへ、鉄衣成魂中 3段目で斬馬刀安西軍出現+跳び斬り"
+        "raw": "土方破陣 焚此心3段溜めへ、鉄衣成魂中 3段目で斬馬刀安西軍出現+跳び斬り",
+        "rawI18n": {
+          "vi": "土方破陣 焚此心3tầng溜めへ、鉄衣成魂trong 3tầng目で斬馬Đao安西軍xuất hiện+跳び斬り"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -3237,7 +4185,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "千軍招来CT-1秒、鉄衣成魂持続40秒へ"
+        "raw": "千軍招来CT-1秒、鉄衣成魂持続40秒へ",
+        "rawI18n": {
+          "vi": "千軍招来CT-1giây、鉄衣成魂duy trì40giâyへ"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -3246,7 +4197,10 @@
         "effects": {
           "critRate": 0.066
         },
-        "raw": "会心率 +6.6%"
+        "raw": "会心率 +6.6%",
+        "rawI18n": {
+          "vi": "tỷ lệ chí mạng +6.6%"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -3256,7 +4210,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "熱血冷め難し中 斬馬刀安西軍命中で開山10秒 (焚此心/協戦安西軍 会心ダメ+10%、最終会心率≥70%必中、<70%なら会心率+15%) 15秒毎1回"
+        "raw": "熱血冷め難し中 斬馬刀安西軍命中で開山10秒 (焚此心/協戦安西軍 会心ダメ+10%、最終会心率≥70%必中、<70%なら会心率+15%) 15秒毎1回",
+        "rawI18n": {
+          "vi": "熱血冷め難しtrong 斬馬Đao安西軍trúng đíchで開山10giây (焚此心/協戦安西軍 chí mạngダメ+10%、最終tỷ lệ chí mạng≥70%必trong、<70%ならtỷ lệ chí mạng+15%) 15giây毎1lần"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -3266,14 +4223,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "熱血冷め難し時 破陣溜め技 刀勢消費なし、溜め3段焚此心 非プレイヤー命中で気血ダメ+32%"
+        "raw": "熱血冷め難し時 破陣溜め技 刀勢消費なし、溜め3段焚此心 非プレイヤー命中で気血ダメ+32%",
+        "rawI18n": {
+          "vi": "熱血冷め難しkhi 破陣kỹ năng tích lực Đao勢tiêu haoなし、溜め3tầng焚此心 非プレイヤーtrúng đíchでsinh lựcダメ+32%"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "critBoost": 0.04
         },
-        "raw": "会心攻撃強化 +4.0%"
+        "raw": "会心攻撃強化 +4.0%",
+        "rawI18n": {
+          "vi": "chí mạngtấn côngtăng cường +4.0%"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -3283,7 +4246,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "焚此心 力尽き敵命中で開山+3秒溜め強化、次焚此心で熱血冷め難しbuff (溜め加速/刀勢無/ダメ増)、30秒毎最大3回"
+        "raw": "焚此心 力尽き敵命中で開山+3秒溜め強化、次焚此心で熱血冷め難しbuff (溜め加速/刀勢無/ダメ増)、30秒毎最大3回",
+        "rawI18n": {
+          "vi": "焚此心 力尽きđịchtrúng đíchで開山+3giây溜めtăng cường、次焚此心で熱血冷め難しbuff (溜め加nhanh/Đao勢無/ダメ増)、30giây毎tối đa3lần"
+        }
       }
     },
     "rank": "purple"
@@ -3310,7 +4276,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "軽重撃/派生で穿喉8秒/最大3、stack毎 外功耐性無視2/会心ダメ+2% (対象:断魂派生/春月増華/彩鳳飛翔/竹林の風/泉下凍/雪払い)"
+        "raw": "軽重撃/派生で穿喉8秒/最大3、stack毎 外功耐性無視2/会心ダメ+2% (対象:断魂派生/春月増華/彩鳳飛翔/竹林の風/泉下凍/雪払い)",
+        "rawI18n": {
+          "vi": "軽đả nặng/派生で穿喉8giây/tối đa3、stack毎 ngoại công耐性無視2/chí mạngダメ+2% (mục tiêu:断魂派生/春月増華/彩鳳飛翔/竹林の風/泉下凍/雪払い)"
+        }
       },
       "tier1": {
         "permanent": true,
@@ -3330,7 +4299,10 @@
           "outerPen": 6,
           "critBoost": 0.06
         },
-        "raw": "穿喉持続15秒延長 (3stack時 外功貫通+6 / 会心ダメ+6%)"
+        "raw": "穿喉持続15秒延長 (3stack時 外功貫通+6 / 会心ダメ+6%)",
+        "rawI18n": {
+          "vi": "穿喉duy trì15giâykéo dài (3stackkhi xuyên thấu ngoại công+6 / chí mạngダメ+6%)"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -3344,7 +4316,10 @@
         "weaponSpecific": "stonesplit",
         "pendingImplementation": true,
         "minPathATK": 10.9,
-        "maxPathATK": 21.7
+        "maxPathATK": 21.7,
+        "rawI18n": {
+          "vi": "Liệt Thạchsức tấn công +10.9 ~ +21.7"
+        }
       },
       "tier3": {
         "permanent": true,
@@ -3364,7 +4339,10 @@
           "outerPen": 3,
           "critBoost": 0.03
         },
-        "raw": "穿喉強化: 外功耐性無視3/会心ダメ+3%へ (差分3stack時 外功貫通+3 / 会心ダメ+3%)"
+        "raw": "穿喉強化: 外功耐性無視3/会心ダメ+3%へ (差分3stack時 外功貫通+3 / 会心ダメ+3%)",
+        "rawI18n": {
+          "vi": "穿喉tăng cường: ngoại công耐性無視3/chí mạngダメ+3%へ (chênh lệch3stackkhi xuyên thấu ngoại công+3 / chí mạngダメ+3%)"
+        }
       },
       "tier4": {
         "permanent": true,
@@ -3384,7 +4362,10 @@
           "outerPen": 6,
           "critBoost": 0.06
         },
-        "raw": "穿喉最大5stackへ (+2stack分 外功貫通+6 / 会心ダメ+6%)"
+        "raw": "穿喉最大5stackへ (+2stack分 外功貫通+6 / 会心ダメ+6%)",
+        "rawI18n": {
+          "vi": "穿喉tối đa5stackへ (+2stackphút xuyên thấu ngoại công+6 / chí mạngダメ+6%)"
+        }
       },
       "tier5": {
         "permanent": true,
@@ -3393,7 +4374,10 @@
         },
         "raw": "砕岩貫通 +6",
         "weaponSpecific": "stonesplit",
-        "pendingImplementation": true
+        "pendingImplementation": true,
+        "rawI18n": {
+          "vi": "Liệt Thạchxuyên thấu +6"
+        }
       },
       "tier6": {
         "permanent": true,
@@ -3412,7 +4396,10 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "受け流し成功で穿喉5stack獲得(20秒毎1回)、協戦発動技/協戦効果でも穿喉獲得可"
+        "raw": "受け流し成功で穿喉5stack獲得(20秒毎1回)、協戦発動技/協戦効果でも穿喉獲得可",
+        "rawI18n": {
+          "vi": "受け流しthành côngで穿喉5stacknhận(20giây毎1lần)、協戦kích hoạt技/協戦hiệu quảでも穿喉nhận可"
+        }
       }
     },
     "rank": "purple"
@@ -3427,14 +4414,20 @@
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "強靭時 全ダメ+4%、周囲3m内 敵1体毎+1% (最大+3%)"
+        "raw": "強靭時 全ダメ+4%、周囲3m内 敵1体毎+1% (最大+3%)",
+        "rawI18n": {
+          "vi": "強靭khi toàn bộ ダメ+4%、xung quanh3m内 địch1体毎+1% (tối đa+3%)"
+        }
       },
       "tier1": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "追加ダメ判定距離 3m→5m"
+        "raw": "追加ダメ判定距離 3m→5m",
+        "rawI18n": {
+          "vi": "bổ sungダメphán địnhkhoảng cách 3m→5m"
+        }
       },
       "tier2": {
         "permanent": true,
@@ -3446,35 +4439,50 @@
           "minPhysATKAdd": 19.17,
           "maxPhysATKAdd": 38.25
         },
-        "derivedFromGold": true
+        "derivedFromGold": true,
+        "rawI18n": {
+          "vi": "ngoại công Attack (Solo Mode theo cấp, rank=purple)"
+        }
       },
       "tier3": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "強靭時 被ダメ軽減4%、周囲5m内 敵1体毎+1% (最大+3%)"
+        "raw": "強靭時 被ダメ軽減4%、周囲5m内 敵1体毎+1% (最大+3%)",
+        "rawI18n": {
+          "vi": "強靭khi sát thương nhận vàogiảm4%、xung quanh5m内 địch1体毎+1% (tối đa+3%)"
+        }
       },
       "tier4": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "強靭時 気血吸収3% (毎秒最大気血2%まで)"
+        "raw": "強靭時 気血吸収3% (毎秒最大気血2%まで)",
+        "rawI18n": {
+          "vi": "強靭khi sinh lực吸収3% (mỗi giâytối đasinh lực2% đến )"
+        }
       },
       "tier5": {
         "permanent": true,
         "effects": {
           "physDmgBoost": 0.025
         },
-        "raw": "外功攻撃強化 +2.5%"
+        "raw": "外功攻撃強化 +2.5%",
+        "rawI18n": {
+          "vi": "tấn công ngoại côngtăng cường +2.5%"
+        }
       },
       "tier6": {
         "permanent": true,
         "effects": {
           "globalDmgBoost": 0.01
         },
-        "raw": "周囲5m内敵1体毎 与ダメ/被ダメ追加上昇1%→1.5% (最大4.5%)"
+        "raw": "周囲5m内敵1体毎 与ダメ/被ダメ追加上昇1%→1.5% (最大4.5%)",
+        "rawI18n": {
+          "vi": "xung quanh5m内địch1体毎 sát thương gây ra/sát thương nhận vàobổ sungtăng1%→1.5% (tối đa4.5%)"
+        }
       }
     },
     "rank": "purple"

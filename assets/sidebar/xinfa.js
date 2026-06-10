@@ -294,10 +294,10 @@
             : (() => {
                 const stKey = def.statType && _XINFA_STATTYPE_LABEL[def.statType];
                 if (stKey) return (window.T && window.T[stKey]) || def.statType;
-                return def.raw || '-';
+                return (def.rawI18n?.[lang]) || def.raw || '-';
               })();
         } else {
-          effStr = def.raw || '-';
+          effStr = (def.rawI18n?.[lang]) || def.raw || '-';
         }
         let cls = 'wwm-tier-active';
         let warn = '';
