@@ -232,7 +232,7 @@
           <div class="wwm-btn-row" style="margin-top:6px;">
             <button class="wwm-btn-primary" id="wwmShareCopyObs">${(window.T?.shareCopyObs) ?? 'OBS URL コピー'}</button>
             <button class="wwm-btn-secondary" id="wwmShareTogglePreview">${(window.T?.sharePreviewBtn) ?? 'プレビュー表示'}</button>
-            <button class="wwm-btn-secondary" id="wwmShareClose">${(window.T?.shareCloseBtn) ?? '閉じる'}</button>
+            <button class="wwm-btn-secondary" id="wwmShareClose">${(window.T?.close) ?? '閉じる'}</button>
           </div>
           <div id="wwmSharePreviewWrap" style="display:none;margin-top:12px;">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">

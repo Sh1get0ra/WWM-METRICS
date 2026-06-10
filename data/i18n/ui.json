@@ -1025,12 +1025,6 @@
     "zh": "复制 OBS URL",
     "ko": "OBS URL 복사"
   },
-  "shareCloseBtn": {
-    "ja": "閉じる",
-    "en": "Close",
-    "zh": "关闭",
-    "ko": "닫기"
-  },
   "shareSect2Heading": {
     "ja": "▍OBS 配信用 URL",
     "en": "▍OBS Streaming URL",
@@ -1426,5 +1420,35 @@
     "en": "en-US",
     "zh": "zh-CN",
     "ko": "ko-KR"
+  },
+  "importLabelXiuwei": {
+    "ja": "武術進度",
+    "en": "Martial Progress",
+    "zh": "武术进度",
+    "ko": "무술 진도"
+  },
+  "importLabelCharName": {
+    "ja": "キャラ名",
+    "en": "Character",
+    "zh": "角色名",
+    "ko": "캐릭터명"
+  },
+  "importBaseStats": {
+    "ja": "基本ステータス",
+    "en": "Base Stats",
+    "zh": "基础属性",
+    "ko": "기본 스탯"
+  },
+  "importSubStats": {
+    "ja": "副ステータス",
+    "en": "Sub Stats",
+    "zh": "副属性",
+    "ko": "부 스탯"
+  },
+  "importLabelUID": {
+    "ja": "UID",
+    "en": "UID",
+    "zh": "UID",
+    "ko": "UID"
   }
 }
