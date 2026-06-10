@@ -652,7 +652,7 @@ function renderPreviewDetail(s, d) {
         <div class="wwm-info-row"><span class="wwm-info-label">${_xL} 4</span><span class="wwm-info-val">${_xinfaName(xin[3])}</span></div>
       </div>
       <div class="wwm-info-col">
-        <div class="wwm-info-row"><span class="wwm-info-label">${T_.importLabelXiuwei||'武術進度'}</span><span class="wwm-info-val">${s.xiuWeiKungFu} / ${s.maxXiuWeiKungFu}</span></div>
+        <div class="wwm-info-row"><span class="wwm-info-label">${T_.importLabelXiuwei||'総合武力'}</span><span class="wwm-info-val">${s.xiuWeiKungFu} / ${s.maxXiuWeiKungFu}</span></div>
       </div>
     </div>
     ${s.wearEquipsDetailed ? `

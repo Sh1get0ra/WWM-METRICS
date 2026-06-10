@@ -3,49 +3,57 @@
     "ja": "会心治癒",
     "en": "Critical Healing",
     "zh": "会心治疗",
-    "ko": "치명타 치유"
+    "ko": "치명타 치유",
+    "vi": "Gia tăng Hồi phục Hội Tâm"
   },
   "weaponBonus": {
     "ja": "外功ダメージ強化",
     "en": "Outer Force DMG Boost",
     "zh": "外功伤害加成",
-    "ko": "외공 피해 보너스"
+    "ko": "외공 피해 보너스",
+    "vi": "Gia tăng Sát thương Ngoại công"
   },
   "globalDmgBoost": {
     "ja": "全ダメージ強化",
     "en": "Total DMG Boost",
     "zh": "全伤害强化",
-    "ko": "전체 피해 증가"
+    "ko": "전체 피해 증가",
+    "vi": "Tăng toàn bộ sát thương"
   },
   "dmgReduce1": {
     "ja": "ダメージ軽減１",
     "en": "DMG Reduction 1",
     "zh": "伤害减免１",
-    "ko": "피해 경감 1"
+    "ko": "피해 경감 1",
+    "vi": "Giảm sát thương 1"
   },
   "dmgReduce2": {
     "ja": "ダメージ軽減２",
     "en": "DMG Reduction 2",
     "zh": "伤害减免２",
-    "ko": "피해 경감 2"
+    "ko": "피해 경감 2",
+    "vi": "Giảm sát thương 2"
   },
   "outerCoeff": {
     "ja": "外功係数",
     "en": "Outer Force Coeff.",
     "zh": "外功系数",
-    "ko": "외공 계수"
+    "ko": "외공 계수",
+    "vi": "Hệ số Ngoại công"
   },
   "statusCoeff": {
     "ja": "ステータス攻撃係数",
     "en": "Stat ATK Coeff.",
     "zh": "属性攻击系数",
-    "ko": "스탯 공격 계수"
+    "ko": "스탯 공격 계수",
+    "vi": "Hệ số Tấn công Chỉ số"
   },
   "outerAdd": {
     "ja": "外功付加",
     "en": "Outer Force Bonus",
     "zh": "外功附加",
-    "ko": "외공 부가"
+    "ko": "외공 부가",
+    "vi": "Phụ thêm Ngoại công"
   },
   "judgeRes": {
     "ja": "審判耐性",
@@ -58,216 +66,252 @@
     "ja": "属性耐性値",
     "en": "Elemental Resistance",
     "zh": "属性抗性",
-    "ko": "속성 저항"
+    "ko": "속성 저항",
+    "vi": "Kháng Thuộc tính"
   },
   "worldLv": {
     "ja": "大世界等級（Lv）",
     "en": "Open World Level (Lv)",
     "zh": "大世界等级（Lv）",
-    "ko": "대세계 등급（Lv）"
+    "ko": "대세계 등급（Lv）",
+    "vi": "Cấp Đại thế giới (Lv)"
   },
   "martialLv": {
     "ja": "武術等級（Lv）",
     "en": "Martial Level (Lv)",
     "zh": "武学等级（Lv）",
-    "ko": "무학 등급（Lv）"
+    "ko": "무학 등급（Lv）",
+    "vi": "Cấp độ (Lv)"
   },
   "probCrit": {
     "ja": "会心",
     "en": "Critical",
     "zh": "会心",
-    "ko": "치명타"
+    "ko": "치명타",
+    "vi": "Chí mạng"
   },
   "probSympathy": {
     "ja": "会意",
     "en": "Affinity",
     "zh": "会意",
-    "ko": "각성"
+    "ko": "각성",
+    "vi": "Hiểu ý"
   },
   "probGraze": {
     "ja": "かすり",
     "en": "Glancing",
     "zh": "擦伤",
-    "ko": "찰과상"
+    "ko": "찰과상",
+    "vi": "Vết xước"
   },
   "probNormal": {
     "ja": "通常",
     "en": "Normal",
     "zh": "普伤",
-    "ko": "일반"
+    "ko": "일반",
+    "vi": "Phổ thông"
   },
   "probPhys": {
     "ja": "物理",
     "en": "Physical",
     "zh": "物理",
-    "ko": "물리"
+    "ko": "물리",
+    "vi": "Ngoại công"
   },
   "probElem": {
     "ja": "属性",
     "en": "Element",
     "zh": "属性",
-    "ko": "속성"
+    "ko": "속성",
+    "vi": "Thuộc tính"
   },
   "donutDmgCenter": {
     "ja": "勁率",
     "en": "勁率",
     "zh": "勁率",
-    "ko": "勁率"
+    "ko": "勁率",
+    "vi": "勁率"
   },
   "slotMain": {
     "ja": "主武器",
     "en": "Main Weapon",
     "zh": "主武器",
-    "ko": "주무기"
+    "ko": "주무기",
+    "vi": "Vũ khí Chính"
   },
   "slotSub": {
     "ja": "副武器",
     "en": "Sub Weapon",
     "zh": "副武器",
-    "ko": "부무기"
+    "ko": "부무기",
+    "vi": "Vũ khí Phụ"
   },
   "slotHelm": {
     "ja": "冠",
     "en": "Helm",
     "zh": "冠胄",
-    "ko": "투구"
+    "ko": "투구",
+    "vi": "Mũ Giáp"
   },
   "slotChest": {
     "ja": "胸当て",
     "en": "Chest",
     "zh": "胸甲",
-    "ko": "흉갑"
+    "ko": "흉갑",
+    "vi": "Giáp Ngực"
   },
   "slotLegs": {
     "ja": "膝鎧",
     "en": "Greaves",
     "zh": "膝甲",
-    "ko": "경갑"
+    "ko": "경갑",
+    "vi": "Giáp Chân"
   },
   "slotHands": {
     "ja": "小手",
     "en": "Gauntlets",
     "zh": "腕甲",
-    "ko": "완갑"
+    "ko": "완갑",
+    "vi": "Giáp Tay"
   },
   "slotRing": {
     "ja": "環",
     "en": "Ring",
     "zh": "环",
-    "ko": "환"
+    "ko": "환",
+    "vi": "Nhẫn"
   },
   "slotPendant": {
     "ja": "佩び物",
     "en": "Pendant",
     "zh": "佩",
-    "ko": "패물"
+    "ko": "패물",
+    "vi": "Ngọc Bội"
   },
   "slotBow": {
     "ja": "弓矢",
     "en": "Bow",
     "zh": "弓箭",
-    "ko": "화살"
+    "ko": "화살",
+    "vi": "Cung tên"
   },
   "slotDisc": {
     "ja": "射玦",
     "en": "Archer Disc",
     "zh": "射玦",
-    "ko": "활깍지"
+    "ko": "활깍지",
+    "vi": "Bắn Ngọc quyết"
   },
   "pathPhys": {
     "ja": "汎用",
     "en": "Universal",
     "zh": "通用",
-    "ko": "범용"
+    "ko": "범용",
+    "vi": "Phổ thông"
   },
   "penOther": {
     "ja": "他",
     "en": "other",
     "zh": "其他",
-    "ko": "기타"
+    "ko": "기타",
+    "vi": "khác"
   },
   "importLabelMainKf": {
     "ja": "主武術",
     "en": "Main Martial",
     "zh": "主武术",
-    "ko": "주 무술"
+    "ko": "주 무술",
+    "vi": "Võ học chính"
   },
   "importLabelSubKf": {
     "ja": "副武術",
     "en": "Sub Martial",
     "zh": "副武术",
-    "ko": "부 무술"
+    "ko": "부 무술",
+    "vi": "Võ học phụ"
   },
   "importArsenalTitle": {
     "ja": "武庫 (Arsenal)",
     "en": "Arsenal",
     "zh": "武库",
-    "ko": "무기고"
+    "ko": "무기고",
+    "vi": "Kho vũ khí"
   },
   "importArsenalPath": {
     "ja": "武庫種別",
     "en": "Arsenal Type",
     "zh": "武库种类",
-    "ko": "무기고 종류"
+    "ko": "무기고 종류",
+    "vi": "Loại Kho vũ khí"
   },
   "importArsenalPeaked": {
     "ja": "頂点",
     "en": "Peak",
     "zh": "顶点",
-    "ko": "정점"
+    "ko": "정점",
+    "vi": "Đỉnh cao"
   },
   "ocrHelpMockLv": {
     "ja": "装備レベル",
     "en": "Equip Lv",
     "zh": "装备等阶",
-    "ko": "장비 레벨"
+    "ko": "장비 레벨",
+    "vi": "Cấp trang bị"
   },
   "ocrHelpMockAtk": {
     "ja": "外功攻撃",
     "en": "Phys ATK",
     "zh": "外功攻击",
-    "ko": "외공 공격"
+    "ko": "외공 공격",
+    "vi": "Tấn công Ngoại công"
   },
   "pvpExclusiveAffix": {
     "ja": "PvP専用定音",
     "en": "PvP-Exclusive Engraving",
     "zh": "PvP专用定音",
-    "ko": "PvP 전용 정음"
+    "ko": "PvP 전용 정음",
+    "vi": "Định âm chuyên PvP"
   },
   "effectUnset": {
     "ja": "未代入",
     "en": "Unset",
     "zh": "未填",
-    "ko": "미입력"
+    "ko": "미입력",
+    "vi": "Chưa nhập"
   },
   "cardItemKongfu": {
     "ja": "武術",
     "en": "Martial arts",
     "zh": "武学",
-    "ko": "무술"
+    "ko": "무술",
+    "vi": "Võ học"
   },
   "cardItemXinfa": {
     "ja": "心法",
     "en": "Inner Way",
     "zh": "心法",
-    "ko": "심법"
+    "ko": "심법",
+    "vi": "Tâm pháp"
   },
   "cardItemQishu": {
     "ja": "奇術",
     "en": "Mystic arts",
     "zh": "奇术",
-    "ko": "기술 (奇術)"
+    "ko": "기술 (奇術)",
+    "vi": "Kỳ thuật"
   },
   "effAnalysisTitle": {
     "ja": "調律/定音効率分析",
     "en": "Stat Efficiency",
     "zh": "状态效率分析",
-    "ko": "스탯 효율 분석"
+    "ko": "스탯 효율 분석",
+    "vi": "Phân tích hiệu suất Chuyển âm/Định âm"
   },
   "importLabelXiuwei": {
-    "ja": "武術進度",
-    "en": "Martial Progress",
-    "zh": "武术进度",
-    "ko": "무술 진도"
+    "ja": "総合武力",
+    "en": "Total Martial Power",
+    "zh": "综合武力",
+    "ko": "종합 무력",
+    "vi": "Kết hợp hiện tại"
   }
 }

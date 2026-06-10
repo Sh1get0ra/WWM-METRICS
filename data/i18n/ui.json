@@ -3,1428 +3,1666 @@
     "ja": "風燕計 | WWMETRICS",
     "en": "Where Winds Metrics | WWMETRICS",
     "zh": "燕云计 | WWMETRICS",
-    "ko": "연운계 | WWMETRICS"
+    "ko": "연운계 | WWMETRICS",
+    "vi": "Phong Yến Kế | WWMETRICS"
   },
   "brandVert": {
     "ja": "風燕計",
     "en": "風燕計",
     "zh": "燕云计",
-    "ko": "연운계"
+    "ko": "연운계",
+    "vi": "風燕計"
   },
   "presetTitle": {
     "ja": "プリセット",
     "en": "PRESETS",
     "zh": "预设",
-    "ko": "프리셋"
+    "ko": "프리셋",
+    "vi": "Cài đặt sẵn"
   },
   "presetSave": {
     "ja": "保存",
     "en": "Save",
     "zh": "保存",
-    "ko": "저장"
+    "ko": "저장",
+    "vi": "Lưu"
   },
   "presetLoad": {
     "ja": "読込",
     "en": "Load",
     "zh": "读取",
-    "ko": "불러오기"
+    "ko": "불러오기",
+    "vi": "Tải"
   },
   "presetNamePlaceholder": {
     "ja": "プリセット {n}",
     "en": "Preset {n}",
     "zh": "预设 {n}",
-    "ko": "프리셋 {n}"
+    "ko": "프리셋 {n}",
+    "vi": "Cài đặt {n}"
   },
   "sharedBuildBanner": {
     "ja": "閲覧モード: 共有されたビルド (自データは保護中)。 リロード/F5 で自データに戻る",
     "en": "View-only mode: Shared build (your data is protected). Reload/F5 to restore your data",
     "zh": "浏览模式: 共享配装 (本地数据已保护)。 刷新/F5 恢复自己的数据",
-    "ko": "열람 모드: 공유된 빌드 (내 데이터는 보호 중)。 새로고침/F5 로 내 데이터 복원"
+    "ko": "열람 모드: 공유된 빌드 (내 데이터는 보호 중)。 새로고침/F5 로 내 데이터 복원",
+    "vi": "Chế độ xem: Build đã chia sẻ (dữ liệu của bạn được bảo vệ). Tải lại/F5 để khôi phục dữ liệu của bạn"
   },
   "sharedBuildOptDisabled": {
     "ja": "閲覧モード中: 装備最適化は無効化されています",
     "en": "View-only mode: Gear Optimize is disabled",
     "zh": "浏览模式: 装备最优化已禁用",
-    "ko": "열람 모드: 장비 최적화는 비활성화됨"
+    "ko": "열람 모드: 장비 최적화는 비활성화됨",
+    "vi": "Chế độ xem: Tối ưu hóa trang bị đã bị vô hiệu hóa"
   },
   "sharedBuildImportBlocked": {
     "ja": "閲覧モード中: IMPORT は無効化されています (自データに戻すには リロード/F5)",
     "en": "View-only mode: IMPORT is disabled (reload/F5 to restore your data)",
     "zh": "浏览模式: IMPORT 已禁用 (刷新/F5 恢复自己的数据)",
-    "ko": "열람 모드: IMPORT 는 비활성화됨 (새로고침/F5 로 내 데이터 복원)"
+    "ko": "열람 모드: IMPORT 는 비활성화됨 (새로고침/F5 로 내 데이터 복원)",
+    "vi": "Chế độ xem: IMPORT đã bị vô hiệu hóa (Tải lại/F5 để khôi phục dữ liệu của bạn)"
   },
   "sharedBuildShareBlocked": {
     "ja": "閲覧モード中: SHARE URL 生成は無効化されています (他人のビルドを再配布できません)",
     "en": "View-only mode: SHARE URL generation is disabled (cannot redistribute others' builds)",
     "zh": "浏览模式: SHARE URL 生成已禁用 (不能转发他人配装)",
-    "ko": "열람 모드: SHARE URL 생성은 비활성화됨 (타인 빌드 재배포 불가)"
+    "ko": "열람 모드: SHARE URL 생성은 비활성화됨 (타인 빌드 재배포 불가)",
+    "vi": "Chế độ xem: Tạo SHARE URL đã bị vô hiệu hóa (không thể phát tán build của người khác)"
   },
   "sharedBuildExportBlocked": {
     "ja": "閲覧モード中: EXPORT は無効化されています (他人のビルド画像 拡散できません)",
     "en": "View-only mode: EXPORT is disabled (cannot distribute others' build images)",
     "zh": "浏览模式: EXPORT 已禁用 (不能传播他人配装图)",
-    "ko": "열람 모드: EXPORT 는 비활성화됨 (타인 빌드 이미지 배포 불가)"
+    "ko": "열람 모드: EXPORT 는 비활성화됨 (타인 빌드 이미지 배포 불가)",
+    "vi": "Chế độ xem: EXPORT đã bị vô hiệu hóa (không thể phát tán ảnh build của người khác)"
   },
   "toastSaved": {
     "ja": "プリセット「{name}」を保存",
     "en": "Saved \"{name}\"",
     "zh": "预设「{name}」已保存",
-    "ko": "프리셋 「{name}」 저장됨"
+    "ko": "프리셋 「{name}」 저장됨",
+    "vi": "Đã lưu cài đặt sẵn \"{name}\""
   },
   "toastLoaded": {
     "ja": "プリセット「{name}」を読込",
     "en": "Loaded \"{name}\"",
     "zh": "预设「{name}」已读取",
-    "ko": "프리셋 「{name}」 불러옴"
+    "ko": "프리셋 「{name}」 불러옴",
+    "vi": "Đã tải cài đặt sẵn \"{name}\""
   },
   "toastDeleted": {
     "ja": "プリセット「{name}」を削除",
     "en": "Deleted \"{name}\"",
     "zh": "预设「{name}」已删除",
-    "ko": "프리셋 「{name}」 삭제됨"
+    "ko": "프리셋 「{name}」 삭제됨",
+    "vi": "Đã xóa cài đặt sẵn \"{name}\""
   },
   "toastExported": {
     "ja": "画像を出力しました",
     "en": "Image exported",
     "zh": "图片已导出",
-    "ko": "이미지 내보내기 완료"
+    "ko": "이미지 내보내기 완료",
+    "vi": "Đã xuất hình ảnh"
   },
   "toastImportWip": {
     "ja": "工事中のため使用できません",
     "en": "Under construction — not yet available",
     "zh": "施工中，暂不可用",
-    "ko": "공사 중 — 아직 사용할 수 없습니다"
+    "ko": "공사 중 — 아직 사용할 수 없습니다",
+    "vi": "Đang thi công, chưa khả dụng"
   },
   "cardModalTitle": {
     "ja": "キャラクターカード生成",
     "en": "Generate Character Card",
     "zh": "生成角色卡片",
-    "ko": "캐릭터 카드 생성"
+    "ko": "캐릭터 카드 생성",
+    "vi": "Tạo Thẻ Nhân vật"
   },
   "cardTplSection": {
     "ja": "テンプレート",
     "en": "Template",
     "zh": "模板",
-    "ko": "템플릿"
+    "ko": "템플릿",
+    "vi": "Mẫu"
   },
   "cardTplBukaku": {
     "ja": "スコア大判",
     "en": "Index showcase",
     "zh": "武格大字",
-    "ko": "지수 강조"
+    "ko": "지수 강조",
+    "vi": "Võ cách chữ lớn"
   },
   "cardTplGungi": {
     "ja": "データ詳細",
     "en": "Data detail",
     "zh": "数据详情",
-    "ko": "데이터 상세"
+    "ko": "데이터 상세",
+    "vi": "Chi tiết dữ liệu"
   },
   "cardBgSection": {
     "ja": "背景",
     "en": "Background",
     "zh": "背景",
-    "ko": "배경"
+    "ko": "배경",
+    "vi": "Nền"
   },
   "cardBgPick": {
     "ja": "画像を選ぶ",
     "en": "Choose image",
     "zh": "选择图片",
-    "ko": "이미지 선택"
+    "ko": "이미지 선택",
+    "vi": "Chọn ảnh"
   },
   "cardBgClear": {
     "ja": "クリア",
     "en": "Clear",
     "zh": "清除",
-    "ko": "지우기"
+    "ko": "지우기",
+    "vi": "Xóa"
   },
   "cardBgZoom": {
     "ja": "ズーム",
     "en": "Zoom",
     "zh": "缩放",
-    "ko": "확대"
+    "ko": "확대",
+    "vi": "Phóng to"
   },
   "cardBgHint": {
     "ja": "スクショをドロップ / 貼り付け (Ctrl+V)。ドラッグで位置調整、ホイール/スライダーで拡大",
     "en": "Drop a screenshot / paste (Ctrl+V). Drag to reposition, wheel or slider to zoom",
     "zh": "拖入截图 / 粘贴 (Ctrl+V)。拖动调整位置，滚轮/滑块缩放",
-    "ko": "스크린샷 드롭 / 붙여넣기 (Ctrl+V). 드래그로 위치 조정, 휠/슬라이더로 확대"
+    "ko": "스크린샷 드롭 / 붙여넣기 (Ctrl+V). 드래그로 위치 조정, 휠/슬라이더로 확대",
+    "vi": "Thả ảnh chụp / dán (Ctrl+V). Kéo để điều chỉnh vị trí, cuộn chuột/thanh trượt để phóng to"
   },
   "cardItemsSection": {
     "ja": "表示項目",
     "en": "Items",
     "zh": "显示项目",
-    "ko": "표시 항목"
+    "ko": "표시 항목",
+    "vi": "Mục hiển thị"
   },
   "cardItemStats": {
     "ja": "基礎値",
     "en": "Base stats",
     "zh": "基础值",
-    "ko": "5대 속성"
+    "ko": "5대 속성",
+    "vi": "Chỉ số gốc"
   },
   "cardItemPrimary": {
     "ja": "主要ステータス",
     "en": "Primary stats",
     "zh": "基本属性",
-    "ko": "기본 스탯"
+    "ko": "기본 스탯",
+    "vi": "Chỉ số chính"
   },
   "cardSave": {
     "ja": "画像を保存",
     "en": "Save image",
     "zh": "保存图片",
-    "ko": "이미지 저장"
+    "ko": "이미지 저장",
+    "vi": "Lưu ảnh"
   },
   "cardGenerating": {
     "ja": "生成中…",
     "en": "Generating…",
     "zh": "生成中…",
-    "ko": "생성 중…"
+    "ko": "생성 중…",
+    "vi": "Đang tạo…"
   },
   "cardBgInvalid": {
     "ja": "画像ファイルを読み込めませんでした",
     "en": "Could not load the image file",
     "zh": "无法读取图片文件",
-    "ko": "이미지 파일을 불러올 수 없습니다"
+    "ko": "이미지 파일을 불러올 수 없습니다",
+    "vi": "Không thể đọc tệp ảnh"
   },
   "cardBgTooLarge": {
     "ja": "画像が大きすぎます (12MB まで)",
     "en": "Image too large (max 12MB)",
     "zh": "图片过大 (上限 12MB)",
-    "ko": "이미지가 너무 큽니다 (최대 12MB)"
+    "ko": "이미지가 너무 큽니다 (최대 12MB)",
+    "vi": "Ảnh quá lớn (tối đa 12MB)"
   },
   "bmOutdatedNotice": {
     "ja": "ブックマークレットが旧版です — 再登録 + 再インポートで武術・流派・奇術アイコンがカードに反映されます",
     "en": "Your bookmarklet is outdated — re-register it and re-import to show martial-art, school and mystic-art icons on the card",
     "zh": "书签脚本为旧版 — 重新注册并重新导入后，卡片即可显示武学/流派/奇术图标",
-    "ko": "북마클릿이 구버전입니다 — 재등록 + 재가져오기하면 무술/유파/기술 아이콘이 카드에 표시됩니다"
+    "ko": "북마클릿이 구버전입니다 — 재등록 + 재가져오기하면 무술/유파/기술 아이콘이 카드에 표시됩니다",
+    "vi": "Bookmarklet là phiên bản cũ — đăng ký lại và nhập lại để hiển thị biểu tượng võ học/lưu phái/kỳ thuật trên thẻ"
   },
   "cardPostX": {
     "ja": "𝕏 にポスト",
     "en": "Post to 𝕏",
     "zh": "发布到 𝕏",
-    "ko": "𝕏에 포스트"
+    "ko": "𝕏에 포스트",
+    "vi": "Đăng lên 𝕏"
   },
   "cardPostHint": {
     "ja": "𝕏 にポスト: ポスト画面が開いたら画像を Ctrl+V で貼り付け（自動コピーされます）",
     "en": "Post to 𝕏: when the post window opens, paste the image with Ctrl+V (copied automatically)",
     "zh": "发布到 𝕏: 发帖窗口打开后按 Ctrl+V 粘贴图片（会自动复制）",
-    "ko": "𝕏에 포스트: 게시창이 열리면 Ctrl+V로 이미지를 붙여넣으세요 (자동 복사됩니다)"
+    "ko": "𝕏에 포스트: 게시창이 열리면 Ctrl+V로 이미지를 붙여넣으세요 (자동 복사됩니다)",
+    "vi": "Đăng lên 𝕏: khi cửa sổ đăng mở ra, dán ảnh bằng Ctrl+V (đã tự động sao chép)"
   },
   "cardPostCopied": {
     "ja": "画像をコピーしました — 投稿欄に Ctrl+V で貼り付けてください",
     "en": "Image copied — paste it into the post with Ctrl+V",
     "zh": "图片已复制 — 在发帖框按 Ctrl+V 粘贴",
-    "ko": "이미지를 복사했습니다 — 게시창에 Ctrl+V로 붙여넣으세요"
+    "ko": "이미지를 복사했습니다 — 게시창에 Ctrl+V로 붙여넣으세요",
+    "vi": "Đã sao chép ảnh — dán vào ô đăng bằng Ctrl+V"
   },
   "cardPostCopyFail": {
     "ja": "画像を自動コピーできませんでした — ダウンロード済みの画像を添付してください",
     "en": "Could not copy the image — attach the downloaded PNG instead",
     "zh": "无法自动复制图片 — 请改为附加已下载的 PNG",
-    "ko": "이미지를 자동 복사할 수 없습니다 — 다운로드한 PNG를 첨부해 주세요"
+    "ko": "이미지를 자동 복사할 수 없습니다 — 다운로드한 PNG를 첨부해 주세요",
+    "vi": "Không thể tự động sao chép ảnh — vui lòng đính kèm ảnh PNG đã tải xuống"
   },
   "cardAlignLabel": {
     "ja": "情報の位置",
     "en": "Info position",
     "zh": "信息位置",
-    "ko": "정보 위치"
+    "ko": "정보 위치",
+    "vi": "Vị trí thông tin"
   },
   "cardAlignLeft": {
     "ja": "左",
     "en": "Left",
     "zh": "左",
-    "ko": "왼쪽"
+    "ko": "왼쪽",
+    "vi": "Trái"
   },
   "cardAlignRight": {
     "ja": "右",
     "en": "Right",
     "zh": "右",
-    "ko": "오른쪽"
+    "ko": "오른쪽",
+    "vi": "Phải"
   },
   "cardPanelLabel": {
     "ja": "パネル",
     "en": "Panel",
     "zh": "面板",
-    "ko": "패널"
+    "ko": "패널",
+    "vi": "Bảng"
   },
   "cardPanelDark": {
     "ja": "墨",
     "en": "Ink",
     "zh": "墨",
-    "ko": "먹"
+    "ko": "먹",
+    "vi": "Mực"
   },
   "cardPanelLight": {
     "ja": "紙",
     "en": "Paper",
     "zh": "纸",
-    "ko": "종이"
+    "ko": "종이",
+    "vi": "Giấy"
   },
   "cardPlaySection": {
     "ja": "プレイ情報",
     "en": "Play info",
     "zh": "游玩信息",
-    "ko": "플레이 정보"
+    "ko": "플레이 정보",
+    "vi": "Thông tin chơi"
   },
   "cardPlayTimeLabel": {
     "ja": "プレイ時間帯",
     "en": "Play time",
     "zh": "游玩时间",
-    "ko": "플레이 시간대"
+    "ko": "플레이 시간대",
+    "vi": "Thời gian chơi"
   },
   "cardPlayStyleLabel": {
     "ja": "プレイスタイル",
     "en": "Play style",
     "zh": "游玩风格",
-    "ko": "플레이 스타일"
+    "ko": "플레이 스타일",
+    "vi": "Phong cách chơi"
   },
   "cardTime_wdDay": {
     "ja": "平日昼",
     "en": "Weekday day",
     "zh": "工作日白天",
-    "ko": "평일 낮"
+    "ko": "평일 낮",
+    "vi": "Ngày thường - Ngày"
   },
   "cardTime_wdNight": {
     "ja": "平日夜",
     "en": "Weekday night",
     "zh": "工作日晚上",
-    "ko": "평일 밤"
+    "ko": "평일 밤",
+    "vi": "Ngày thường - Đêm"
   },
   "cardTime_weDay": {
     "ja": "休日昼",
     "en": "Weekend day",
     "zh": "周末白天",
-    "ko": "주말 낮"
+    "ko": "주말 낮",
+    "vi": "Cuối tuần - Ngày"
   },
   "cardTime_weNight": {
     "ja": "休日夜",
     "en": "Weekend night",
     "zh": "周末晚上",
-    "ko": "주말 밤"
+    "ko": "주말 밤",
+    "vi": "Cuối tuần - Đêm"
   },
   "cardTime_irregular": {
     "ja": "不定期",
     "en": "Irregular",
     "zh": "不定时",
-    "ko": "불규칙"
+    "ko": "불규칙",
+    "vi": "Không cố định"
   },
   "cardStyle_pve": {
     "ja": "PvE",
     "en": "PvE",
     "zh": "PvE",
-    "ko": "PvE"
+    "ko": "PvE",
+    "vi": "PvE"
   },
   "cardStyle_pvp": {
     "ja": "PvP",
     "en": "PvP",
     "zh": "PvP",
-    "ko": "PvP"
+    "ko": "PvP",
+    "vi": "PvP"
   },
   "cardStyle_coop": {
     "ja": "共闘",
     "en": "Co-op",
     "zh": "共斗",
-    "ko": "협동"
+    "ko": "협동",
+    "vi": "Đồng đội"
   },
   "cardStyle_explore": {
     "ja": "探索",
     "en": "Explore",
     "zh": "探索",
-    "ko": "탐색"
+    "ko": "탐색",
+    "vi": "Khám phá"
   },
   "cardStyle_trial": {
     "ja": "試練",
     "en": "Trials",
     "zh": "试炼",
-    "ko": "시련"
+    "ko": "시련",
+    "vi": "Thử thách"
   },
   "cardStyle_music": {
     "ja": "演奏",
     "en": "Music",
     "zh": "演奏",
-    "ko": "연주"
+    "ko": "연주",
+    "vi": "Hòa tấu"
   },
   "cardStyle_housing": {
     "ja": "ハウジング",
     "en": "Housing",
     "zh": "家园",
-    "ko": "하우징"
+    "ko": "하우징",
+    "vi": "Gia viên"
   },
   "cardStyle_ss": {
     "ja": "SS勢",
     "en": "Screenshots",
     "zh": "摄影党",
-    "ko": "스크린샷"
+    "ko": "스크린샷",
+    "vi": "Phái chụp ảnh"
   },
   "cardStyle_enjoy": {
     "ja": "エンジョイ勢",
     "en": "Casual",
     "zh": "休闲党",
-    "ko": "엔조이"
+    "ko": "엔조이",
+    "vi": "Phái thư giãn"
   },
   "cardStyle_gachi": {
     "ja": "ガチ勢",
     "en": "Hardcore",
     "zh": "硬核党",
-    "ko": "하드코어"
+    "ko": "하드코어",
+    "vi": "Phái hardcore"
   },
   "errImportParse": {
     "ja": "インポートデータの解析に失敗しました。公式ツールからもう一度実行してください",
     "en": "Failed to parse import data. Please run the import from the official tool again.",
     "zh": "导入数据解析失败。请在官方工具中重新执行导入。",
-    "ko": "가져오기 데이터 분석에 실패했습니다. 공식 도구에서 다시 실행해 주세요."
+    "ko": "가져오기 데이터 분석에 실패했습니다. 공식 도구에서 다시 실행해 주세요.",
+    "vi": "Phân tích dữ liệu nhập thất bại. Vui lòng chạy lại nhập từ công cụ chính thức."
   },
   "errSharedBuildLoad": {
     "ja": "共有ビルドの読込に失敗しました — 現在表示中なのは自分のデータです",
     "en": "Failed to load the shared build. You are now viewing your own data.",
     "zh": "共享配装加载失败 — 当前显示的是你自己的数据。",
-    "ko": "공유 빌드 불러오기에 실패했습니다 — 현재 표시 중인 것은 본인 데이터입니다."
+    "ko": "공유 빌드 불러오기에 실패했습니다 — 현재 표시 중인 것은 본인 데이터입니다.",
+    "vi": "Tải build chia sẻ thất bại — hiện đang hiển thị dữ liệu của bạn."
   },
   "errStatsBuild": {
     "ja": "データの計算に失敗しました。再インポートをお試しください",
     "en": "Calculation failed. Please try re-importing.",
     "zh": "计算失败，请尝试重新导入。",
-    "ko": "계산에 실패했습니다. 다시 가져오기를 시도해 주세요."
+    "ko": "계산에 실패했습니다. 다시 가져오기를 시도해 주세요.",
+    "vi": "Tính toán thất bại. Vui lòng thử nhập lại."
   },
   "errExportFail": {
     "ja": "画像書き出しに失敗しました",
     "en": "Image export failed",
     "zh": "图片导出失败",
-    "ko": "이미지 내보내기 실패"
+    "ko": "이미지 내보내기 실패",
+    "vi": "Xuất ảnh thất bại"
   },
   "errExportOffline": {
     "ja": "画像書き出しにはオンライン接続が必要です",
     "en": "Image export requires an online connection",
     "zh": "图片导出需要联网",
-    "ko": "이미지 내보내기는 온라인 연결이 필요합니다"
+    "ko": "이미지 내보내기는 온라인 연결이 필요합니다",
+    "vi": "Xuất ảnh cần kết nối trực tuyến"
   },
   "errShareUrlFail": {
     "ja": "共有URLの生成に失敗しました",
     "en": "Failed to generate share URL",
     "zh": "共享链接生成失败",
-    "ko": "공유 URL 생성 실패"
+    "ko": "공유 URL 생성 실패",
+    "vi": "Tạo URL chia sẻ thất bại"
   },
   "scoreUpdateMsg": {
     "ja": "計算データが更新されました。最新スコアを反映するには再インポートしてください",
     "en": "Calculation data updated. Re-import to reflect the latest scores.",
     "zh": "计算数据已更新，请重新导入以反映最新分数。",
-    "ko": "계산 데이터가 업데이트되었습니다. 최신 점수를 반영하려면 다시 가져오세요."
+    "ko": "계산 데이터가 업데이트되었습니다. 최신 점수를 반영하려면 다시 가져오세요.",
+    "vi": "Dữ liệu tính toán đã được cập nhật. Vui lòng nhập lại để phản ánh điểm số mới nhất."
   },
   "scoreUpdateBtn": {
     "ja": "再インポート",
     "en": "Re-import",
     "zh": "重新导入",
-    "ko": "다시 가져오기"
+    "ko": "다시 가져오기",
+    "vi": "Nhập lại"
   },
   "migrationMsg": {
     "ja": "新URLに移転しました: <strong>wwm-metrics.pages.dev</strong> — このURL (旧) は2026-06-08頃停止予定",
     "en": "Moved to new URL: <strong>wwm-metrics.pages.dev</strong> — this old URL will be retired around 2026-06-08",
     "zh": "已迁移到新地址: <strong>wwm-metrics.pages.dev</strong> — 当前 (旧) 地址将于 2026-06-08 前后停用",
-    "ko": "새 URL로 이전했습니다: <strong>wwm-metrics.pages.dev</strong> — 현재 (구) URL 은 2026-06-08 경 종료 예정"
+    "ko": "새 URL로 이전했습니다: <strong>wwm-metrics.pages.dev</strong> — 현재 (구) URL 은 2026-06-08 경 종료 예정",
+    "vi": "Đã chuyển sang URL mới: <strong>wwm-metrics.pages.dev</strong> — URL (cũ) này sẽ ngừng hoạt động khoảng 2026-06-08"
   },
   "migrationBtn": {
     "ja": "新URLへ",
     "en": "Go to new URL",
     "zh": "前往新地址",
-    "ko": "새 URL로"
+    "ko": "새 URL로",
+    "vi": "Đến URL mới"
   },
   "importPrompt": {
     "ja": "上部「IMPORT」ボタンからデータを取り込んでください",
     "en": "Click the IMPORT button at the top to load data",
     "zh": "请点击上方「导入」按钮加载数据",
-    "ko": "상단 「IMPORT」 버튼에서 데이터를 가져와 주세요"
+    "ko": "상단 「IMPORT」 버튼에서 데이터를 가져와 주세요",
+    "vi": "Vui lòng nhấp nút \"IMPORT\" ở trên cùng để nhập dữ liệu"
   },
   "importHintLabel": {
     "ja": "ここからインポート",
     "en": "Import here first",
     "zh": "从这里导入",
-    "ko": "여기서 가져오기"
+    "ko": "여기서 가져오기",
+    "vi": "Nhập từ đây"
   },
   "importBtn": {
     "ja": "IMPORT",
     "en": "IMPORT",
     "zh": "导入",
-    "ko": "가져오기"
+    "ko": "가져오기",
+    "vi": "NHẬP"
   },
   "exportBtn": {
     "ja": "EXPORT",
     "en": "EXPORT",
     "zh": "导出",
-    "ko": "내보내기"
+    "ko": "내보내기",
+    "vi": "XUẤT"
   },
   "resetBtn": {
     "ja": "RESET",
     "en": "RESET",
     "zh": "重置",
-    "ko": "초기화"
+    "ko": "초기화",
+    "vi": "ĐẶT LẠI"
   },
   "shareBtn": {
     "ja": "SHARE",
     "en": "SHARE",
     "zh": "分享",
-    "ko": "공유"
+    "ko": "공유",
+    "vi": "CHIA SẺ"
   },
   "noteBtn": {
     "ja": "NOTE",
     "en": "NOTE",
     "zh": "笔记",
-    "ko": "노트"
+    "ko": "노트",
+    "vi": "GHI CHÚ"
   },
   "themeLight": {
     "ja": "ライト",
     "en": "LIGHT",
     "zh": "浅色",
-    "ko": "라이트"
+    "ko": "라이트",
+    "vi": "Sáng"
   },
   "themeDark": {
     "ja": "ダーク",
     "en": "DARK",
     "zh": "深色",
-    "ko": "다크"
+    "ko": "다크",
+    "vi": "Tối"
   },
   "importSetupTitle": {
     "ja": "引燕 / DATA IMPORT",
     "en": "Import Setup",
     "zh": "导入设置",
-    "ko": "가져오기 설정"
+    "ko": "가져오기 설정",
+    "vi": "Dẫn Yến / NHẬP DỮ LIỆU"
   },
   "importSetupIntro": {
     "ja": "公式データツールのデータを取り込むには、ブックマークレットの登録が必要です。",
     "en": "To import data from the official tool, a bookmarklet needs to be installed.",
     "zh": "要从官方数据工具导入数据，需要先安装书签小工具。",
-    "ko": "공식 데이터 도구의 데이터를 가져오려면 북마클릿 등록이 필요합니다."
+    "ko": "공식 데이터 도구의 데이터를 가져오려면 북마클릿 등록이 필요합니다.",
+    "vi": "Để nhập dữ liệu từ Công cụ Dữ liệu Chính thức, cần đăng ký bookmarklet."
   },
   "importOpenOfficial": {
     "ja": "公式データツールを開く",
     "en": "Open Official Tool",
     "zh": "打开官方数据工具",
-    "ko": "공식 데이터 도구 열기"
+    "ko": "공식 데이터 도구 열기",
+    "vi": "Mở Công cụ Chính thức"
   },
   "importUsageHint": {
     "ja": "設定完了後: 公式ツールを開いてブックマークレットをクリックしてください。",
     "en": "After setup: open the official tool and click the bookmarklet.",
     "zh": "设置完成后：打开官方工具并点击书签小工具。",
-    "ko": "설정 완료 후: 공식 도구를 열고 북마클릿을 클릭하세요."
+    "ko": "설정 완료 후: 공식 도구를 열고 북마클릿을 클릭하세요.",
+    "vi": "Sau khi cài đặt: mở công cụ chính thức và nhấp vào bookmarklet."
   },
   "importLastLabel": {
     "ja": "直前のインポート",
     "en": "Last Import",
     "zh": "上次导入",
-    "ko": "직전 가져오기"
+    "ko": "직전 가져오기",
+    "vi": "Lần nhập trước"
   },
   "importReapply": {
     "ja": "再適用",
     "en": "Re-apply",
     "zh": "重新应用",
-    "ko": "재적용"
+    "ko": "재적용",
+    "vi": "Áp dụng lại"
   },
   "importNoHistory": {
     "ja": "直前のインポートはありません",
     "en": "No previous imports",
     "zh": "无导入历史",
-    "ko": "이전 가져오기 없음"
+    "ko": "이전 가져오기 없음",
+    "vi": "Không có lần nhập trước"
   },
   "importPreviewTitle": {
     "ja": "引燕 / DATA IMPORT",
     "en": "Import Card",
     "zh": "导入卡",
-    "ko": "가져오기 카드"
+    "ko": "가져오기 카드",
+    "vi": "Dẫn Yến / NHẬP DỮ LIỆU"
   },
   "importApplyBtn": {
     "ja": "インポート実行",
     "en": "Apply Import",
     "zh": "执行导入",
-    "ko": "가져오기 실행"
+    "ko": "가져오기 실행",
+    "vi": "Thực hiện Nhập"
   },
   "importCancelBtn": {
     "ja": "キャンセル",
     "en": "Cancel",
     "zh": "取消",
-    "ko": "취소"
+    "ko": "취소",
+    "vi": "Hủy"
   },
   "importNextBtn": {
     "ja": "次へ",
     "en": "Next",
     "zh": "下一步",
-    "ko": "다음"
+    "ko": "다음",
+    "vi": "Tiếp"
   },
   "importBackBtn": {
     "ja": "戻る",
     "en": "Back",
     "zh": "返回",
-    "ko": "뒤로"
+    "ko": "뒤로",
+    "vi": "Quay lại"
   },
   "importConfirmMsg": {
     "ja": "現在設定されている数値がインポートデータに差し変わりますがよろしいですか？",
     "en": "Current values will be replaced by the imported data. Continue?",
     "zh": "当前设置的数值将被导入数据替换，确认继续吗？",
-    "ko": "현재 설정된 수치가 가져오기 데이터로 대체됩니다. 계속하시겠습니까?"
+    "ko": "현재 설정된 수치가 가져오기 데이터로 대체됩니다. 계속하시겠습니까?",
+    "vi": "Giá trị hiện tại sẽ được thay thế bằng dữ liệu nhập. Tiếp tục?"
   },
   "importDone": {
     "ja": "インポート完了",
     "en": "Import complete",
     "zh": "导入完成",
-    "ko": "가져오기 완료"
+    "ko": "가져오기 완료",
+    "vi": "Nhập hoàn tất"
   },
   "importingTitle": {
     "ja": "インポート処理中",
     "en": "Importing",
     "zh": "导入处理中",
-    "ko": "가져오기 처리 중"
+    "ko": "가져오기 처리 중",
+    "vi": "Đang xử lý nhập"
   },
   "importingStats": {
     "ja": "ステータス計算中…",
     "en": "Computing stats…",
     "zh": "属性计算中…",
-    "ko": "스탯 계산 중…"
+    "ko": "스탯 계산 중…",
+    "vi": "Đang tính toán chỉ số…"
   },
   "importingTier": {
     "ja": "Tier 判定中…",
     "en": "Judging tier…",
     "zh": "Tier 判定中…",
-    "ko": "Tier 판정 중…"
+    "ko": "Tier 판정 중…",
+    "vi": "Đang phán định Tier…"
   },
   "errTierJudgeTimeout": {
     "ja": "Tier 判定がタイムアウトしました。再インポートをお試しください",
     "en": "Tier judgment timed out. Please try re-importing",
     "zh": "Tier 判定超时，请重新导入",
-    "ko": "Tier 판정 시간이 초과되었습니다. 다시 가져오기를 시도해 주세요"
+    "ko": "Tier 판정 시간이 초과되었습니다. 다시 가져오기를 시도해 주세요",
+    "vi": "Phán định Tier hết thời gian. Vui lòng thử nhập lại"
   },
   "tierPendingBlocked": {
     "ja": "Tier 判定中です。完了までお待ちください",
     "en": "Tier judgment in progress. Please wait",
     "zh": "Tier 判定中，请稍候",
-    "ko": "Tier 판정 중입니다. 완료까지 기다려 주세요"
+    "ko": "Tier 판정 중입니다. 완료까지 기다려 주세요",
+    "vi": "Đang phán định Tier. Vui lòng chờ hoàn tất"
   },
   "ocrBtnTitle": {
     "ja": "スクショ取込 (OCR)",
     "en": "Import from screenshot (OCR)",
     "zh": "截图导入 (OCR)",
-    "ko": "스크린샷 가져오기 (OCR)"
+    "ko": "스크린샷 가져오기 (OCR)",
+    "vi": "Nhập từ ảnh chụp (OCR)"
   },
   "ocrLangLoading": {
     "ja": "辞書取得中…",
     "en": "Downloading OCR data…",
     "zh": "正在下载识别数据…",
-    "ko": "OCR 데이터 다운로드 중…"
+    "ko": "OCR 데이터 다운로드 중…",
+    "vi": "Đang tải dữ liệu OCR…"
   },
   "ocrRecognizing": {
     "ja": "解析中…",
     "en": "Recognizing…",
     "zh": "识别中…",
-    "ko": "인식 중…"
+    "ko": "인식 중…",
+    "vi": "Đang nhận diện…"
   },
   "ocrApplied": {
     "ja": "読取完了",
     "en": "Screenshot imported",
     "zh": "识别完成",
-    "ko": "인식 완료"
+    "ko": "인식 완료",
+    "vi": "Đã đọc xong"
   },
   "ocrAppliedWarn": {
     "ja": "読取完了 — 朱枠の行を確認してください",
     "en": "Imported — check rows marked in red",
     "zh": "识别完成 — 请确认红框行",
-    "ko": "인식 완료 — 붉은 테두리 행을 확인해 주세요"
+    "ko": "인식 완료 — 붉은 테두리 행을 확인해 주세요",
+    "vi": "Đã đọc xong — vui lòng kiểm tra dòng viền đỏ"
   },
   "ocrNoMatch": {
     "ja": "読取できませんでした — 装備詳細画面のスクショか、言語/装備部位を確認してください",
     "en": "Could not read — use the equipment detail screen, and check language/slot",
     "zh": "无法识别 — 请使用装备详情界面截图，并确认语言/部位",
-    "ko": "인식 실패 — 장비 상세 화면 스크린샷인지, 언어/부위를 확인해 주세요"
+    "ko": "인식 실패 — 장비 상세 화면 스크린샷인지, 언어/부위를 확인해 주세요",
+    "vi": "Không thể đọc — vui lòng dùng ảnh chụp màn hình chi tiết trang bị, kiểm tra ngôn ngữ/vị trí"
   },
   "ocrErrEngine": {
     "ja": "OCR エンジン取得失敗 (オフライン?)",
     "en": "Failed to load OCR engine (offline?)",
     "zh": "OCR 引擎加载失败 (离线?)",
-    "ko": "OCR 엔진 로드 실패 (오프라인?)"
+    "ko": "OCR 엔진 로드 실패 (오프라인?)",
+    "vi": "Tải engine OCR thất bại (offline?)"
   },
   "ocrHelpTitle": {
     "ja": "スクショ取込ガイド",
     "en": "Screenshot Import Guide",
     "zh": "截图导入指南",
-    "ko": "스크린샷 가져오기 가이드"
+    "ko": "스크린샷 가져오기 가이드",
+    "vi": "Hướng dẫn Nhập từ Ảnh chụp"
   },
   "ocrHelpExample": {
     "ja": "撮影例: 装備詳細画面 (値が右端に並ぶ画面)",
     "en": "Example: equipment detail screen (values aligned to the right)",
     "zh": "示例: 装备详情界面 (数值右对齐的界面)",
-    "ko": "예시: 장비 상세 화면 (수치가 오른쪽 정렬된 화면)"
+    "ko": "예시: 장비 상세 화면 (수치가 오른쪽 정렬된 화면)",
+    "vi": "Ví dụ: màn hình chi tiết trang bị (giá trị căn phải)"
   },
   "ocrHelpStep1": {
     "ja": "ゲーム内で装備詳細画面を開き、Win+Shift+S で定音/調律の部分を範囲スクショ",
     "en": "Open the equipment detail screen in game and capture the affix area with Win+Shift+S",
     "zh": "在游戏中打开装备详情界面，用 Win+Shift+S 截取定音/调律区域",
-    "ko": "게임에서 장비 상세 화면을 열고 Win+Shift+S로 정음/조율 부분을 캡처"
+    "ko": "게임에서 장비 상세 화면을 열고 Win+Shift+S로 정음/조율 부분을 캡처",
+    "vi": "Mở màn hình chi tiết trang bị trong game, dùng Win+Shift+S để chụp vùng định âm/điều luật"
   },
   "ocrHelpStep2": {
     "ja": "武具対照を開いたまま Ctrl+V で貼付け (📷 から画像選択 / 新置列へドロップでも可)",
     "en": "With this panel open, paste with Ctrl+V (or pick an image via 📷 / drop onto the right column)",
     "zh": "保持武具对照面板打开，按 Ctrl+V 粘贴 (也可用 📷 选择图片 / 拖入右列)",
-    "ko": "무구대조 패널을 연 상태에서 Ctrl+V로 붙여넣기 (📷로 이미지 선택 / 오른쪽 열에 드롭도 가능)"
+    "ko": "무구대조 패널을 연 상태에서 Ctrl+V로 붙여넣기 (📷로 이미지 선택 / 오른쪽 열에 드롭도 가능)",
+    "vi": "Giữ panel Đối chiếu Vũ khí mở, dán bằng Ctrl+V (cũng có thể chọn ảnh qua 📷 / kéo vào cột mới)"
   },
   "ocrHelpStep3": {
     "ja": "OCR 解析が始まり、装備 Lv と定音/調律が新置列へ自動入力される",
     "en": "OCR runs and fills equipment Lv and affixes into the right column",
     "zh": "OCR 识别后，装备等级与定音/调律将自动填入右列",
-    "ko": "OCR 인식 후 장비 레벨과 정음/조율이 자동 입력됩니다"
+    "ko": "OCR 인식 후 장비 레벨과 정음/조율이 자동 입력됩니다",
+    "vi": "OCR phân tích sẽ bắt đầu, Lv trang bị và định âm/điều luật được tự động nhập vào cột mới"
   },
   "ocrHelpStep4": {
     "ja": "読み取りが怪しい行は朱枠表示、読めなかった行は空欄 — 確認・編集すると枠が消える",
     "en": "Uncertain rows are outlined in red; unreadable rows are left blank — review and edit to clear",
     "zh": "识别可疑的行显示红框，无法识别的行留空 — 确认并修改后红框消失",
-    "ko": "인식이 의심스러운 행은 붉은 테두리, 읽지 못한 행은 공란으로 표시 — 확인 후 수정하면 사라집니다"
+    "ko": "인식이 의심스러운 행은 붉은 테두리, 읽지 못한 행은 공란으로 표시 — 확인 후 수정하면 사라집니다",
+    "vi": "Dòng đọc khả nghi sẽ có viền đỏ, dòng không đọc được để trống — kiểm tra và chỉnh sửa thì viền sẽ biến mất"
   },
   "ocrHelpLangNote": {
     "ja": "スクショの言語は UI 言語と同じものを推奨 (読取失敗時は言語選択が出ます)",
     "en": "Use a screenshot in the same language as the UI (a language picker appears if reading fails)",
     "zh": "建议使用与界面语言相同的截图 (识别失败时会出现语言选择)",
-    "ko": "UI 언어와 같은 언어의 스크린샷을 권장합니다 (인식 실패 시 언어 선택이 표시됩니다)"
+    "ko": "UI 언어와 같은 언어의 스크린샷을 권장합니다 (인식 실패 시 언어 선택이 표시됩니다)",
+    "vi": "Khuyến nghị dùng ảnh chụp cùng ngôn ngữ với UI (khi đọc thất bại sẽ hiện chọn ngôn ngữ)"
   },
   "unknownNotice": {
     "ja": "⚠ 未対応データ {0}件 (click 報告)",
     "en": "⚠ {0} unsupported data item(s) — click to report",
     "zh": "⚠ 未支持数据 {0} 项 (点击报告)",
-    "ko": "⚠ 미지원 데이터 {0}건 (클릭하여 신고)"
+    "ko": "⚠ 미지원 데이터 {0}건 (클릭하여 신고)",
+    "vi": "⚠ Dữ liệu chưa hỗ trợ {0} mục (nhấp để báo cáo)"
   },
   "unknownNone": {
     "ja": "未対応データなし",
     "en": "No unsupported data",
     "zh": "无未支持数据",
-    "ko": "미지원 데이터 없음"
+    "ko": "미지원 데이터 없음",
+    "vi": "Không có dữ liệu chưa hỗ trợ"
   },
   "unknownReportTitle": {
     "ja": "未対応データ報告 ({0}件)",
     "en": "Unsupported Data Report ({0})",
     "zh": "未支持数据报告 ({0}项)",
-    "ko": "미지원 데이터 신고 ({0}건)"
+    "ko": "미지원 데이터 신고 ({0}건)",
+    "vi": "Báo cáo Dữ liệu chưa hỗ trợ ({0} mục)"
   },
   "unknownReportDesc": {
     "ja": "以下の内容をクリップボードコピー or GitHub Issue で報告してください。",
     "en": "Copy the text below or open a GitHub Issue to report it.",
     "zh": "请复制以下内容，或通过 GitHub Issue 报告。",
-    "ko": "아래 내용을 복사하거나 GitHub Issue로 신고해 주세요."
+    "ko": "아래 내용을 복사하거나 GitHub Issue로 신고해 주세요.",
+    "vi": "Vui lòng sao chép nội dung dưới hoặc báo cáo qua GitHub Issue."
   },
   "unknownCopyBtn": {
     "ja": "クリップボードにコピー",
     "en": "Copy to clipboard",
     "zh": "复制到剪贴板",
-    "ko": "클립보드에 복사"
+    "ko": "클립보드에 복사",
+    "vi": "Sao chép vào clipboard"
   },
   "unknownGithubBtn": {
     "ja": "GitHub Issue を開く",
     "en": "Open GitHub Issue",
     "zh": "打开 GitHub Issue",
-    "ko": "GitHub Issue 열기"
+    "ko": "GitHub Issue 열기",
+    "vi": "Mở GitHub Issue"
   },
   "unknownTplTitle": {
     "ja": "## 未対応 ID 報告",
     "en": "## Unsupported ID Report",
     "zh": "## 未支持 ID 报告",
-    "ko": "## 미지원 ID 신고"
+    "ko": "## 미지원 ID 신고",
+    "vi": "## Báo cáo ID chưa hỗ trợ"
   },
   "unknownTplKongfu": {
     "ja": "### 武術 (kongfu) {0}件",
     "en": "### Martial Arts (kongfu) — {0}",
     "zh": "### 武学 (kongfu) {0}项",
-    "ko": "### 무술 (kongfu) {0}건"
+    "ko": "### 무술 (kongfu) {0}건",
+    "vi": "### Võ học (kongfu) {0} mục"
   },
   "unknownTplXinfa": {
     "ja": "### 心法 (xinfa) {0}件",
     "en": "### Inner Ways (xinfa) — {0}",
     "zh": "### 心法 (xinfa) {0}项",
-    "ko": "### 심법 (xinfa) {0}건"
+    "ko": "### 심법 (xinfa) {0}건",
+    "vi": "### Tâm pháp (xinfa) {0} mục"
   },
   "unknownTplAffix": {
     "ja": "### 装備 affix {0}件",
     "en": "### Equipment affixes — {0}",
     "zh": "### 装备 affix {0}项",
-    "ko": "### 장비 affix {0}건"
+    "ko": "### 장비 affix {0}건",
+    "vi": "### Trang bị affix {0} mục"
   },
   "unknownTplChar": {
     "ja": "### キャラ情報",
     "en": "### Character Info",
     "zh": "### 角色信息",
-    "ko": "### 캐릭터 정보"
+    "ko": "### 캐릭터 정보",
+    "vi": "### Thông tin nhân vật"
   },
   "unknownTplNotes": {
     "ja": "### 補足情報 (画像/詳細などあれば追記)",
     "en": "### Additional Notes (screenshots/details welcome)",
     "zh": "### 补充信息 (如有截图/详情请追记)",
-    "ko": "### 추가 정보 (스크린샷/상세 등 있으면 추가)"
+    "ko": "### 추가 정보 (스크린샷/상세 등 있으면 추가)",
+    "vi": "### Thông tin bổ sung (có ảnh/chi tiết thì ghi thêm)"
   },
   "unknownTplMain": {
     "ja": "主",
     "en": "Main",
     "zh": "主",
-    "ko": "주"
+    "ko": "주",
+    "vi": "Chính"
   },
   "unknownTplSub": {
     "ja": "副",
     "en": "Sub",
     "zh": "副",
-    "ko": "부"
+    "ko": "부",
+    "vi": "Phụ"
   },
   "unknownIssueTitle": {
     "ja": "[Data] 未対応ID報告 (kongfu/xinfa/affix)",
     "en": "[Data] Unsupported ID report (kongfu/xinfa/affix)",
     "zh": "[Data] 未支持ID报告 (kongfu/xinfa/affix)",
-    "ko": "[Data] 미지원 ID 신고 (kongfu/xinfa/affix)"
+    "ko": "[Data] 미지원 ID 신고 (kongfu/xinfa/affix)",
+    "vi": "[Data] Báo cáo ID chưa hỗ trợ (kongfu/xinfa/affix)"
   },
   "affixRankingTitle": {
     "ja": "調律/定音番付",
     "en": "Tune/Attune Ranking",
     "zh": "调律/定音期待值排行",
-    "ko": "조율/정음 기대값 랭킹"
+    "ko": "조율/정음 기대값 랭킹",
+    "vi": "Bảng xếp hạng Điều luật/Định âm"
   },
   "optimizationTitle": {
     "ja": "装備最適化提案",
     "en": "Gear Optimize",
     "zh": "装备最优化提议",
-    "ko": "장비 최적화 제안"
+    "ko": "장비 최적화 제안",
+    "vi": "Đề xuất Tối ưu Trang bị"
   },
   "diagTitle": {
     "ja": "弱点指摘 / Diagnostics",
     "en": "Diagnostics",
     "zh": "弱点指摘 / Diagnostics",
-    "ko": "약점 진단 / Diagnostics"
+    "ko": "약점 진단 / Diagnostics",
+    "vi": "Chỉ điểm yếu / Diagnostics"
   },
   "diagHitOver": {
     "ja": "命中率過多 (現 {0}% / cap {1}% / 超過 +{2}%)",
     "en": "Precision overflow (cur {0}% / cap {1}% / +{2}% over)",
     "zh": "精准率过载 (当前 {0}% / cap {1}% / 超出 +{2}%)",
-    "ko": "정확도 과다 (현재 {0}% / cap {1}% / 초과 +{2}%)"
+    "ko": "정확도 과다 (현재 {0}% / cap {1}% / 초과 +{2}%)",
+    "vi": "Tỷ lệ chính xác quá tải (hiện {0}% / cap {1}% / vượt +{2}%)"
   },
   "diagHitUnder": {
     "ja": "命中率不足 (現 {0}% / cap {1}% / 残 {2}%)",
     "en": "Precision low (cur {0}% / cap {1}% / {2}% remaining)",
     "zh": "精准率不足 (当前 {0}% / cap {1}% / 还差 {2}%)",
-    "ko": "정확도 부족 (현재 {0}% / cap {1}% / 잔 {2}%)"
+    "ko": "정확도 부족 (현재 {0}% / cap {1}% / 잔 {2}%)",
+    "vi": "Tỷ lệ chính xác không đủ (hiện {0}% / cap {1}% / còn {2}%)"
   },
   "diagCritOver": {
     "ja": "会心率過多 (適用 {0}% / cap 80% / 超過 +{1}%)",
     "en": "Crit Rate overflow (applied {0}% / cap 80% / +{1}% over)",
     "zh": "会心率过载 (适用 {0}% / cap 80% / 超出 +{1}%)",
-    "ko": "치명타 확률 과다 (적용 {0}% / cap 80% / 초과 +{1}%)"
+    "ko": "치명타 확률 과다 (적용 {0}% / cap 80% / 초과 +{1}%)",
+    "vi": "Tỷ lệ chí mạng quá tải (áp dụng {0}% / cap 80% / vượt +{1}%)"
   },
   "diagSymOver": {
     "ja": "会意率過多 (適用 {0}% / cap 40% / 超過 +{1}%)",
     "en": "Affinity overflow (applied {0}% / cap 40% / +{1}% over)",
     "zh": "会意率过载 (适用 {0}% / cap 40% / 超出 +{1}%)",
-    "ko": "각성 확률 과다 (적용 {0}% / cap 40% / 초과 +{1}%)"
+    "ko": "각성 확률 과다 (적용 {0}% / cap 40% / 초과 +{1}%)",
+    "vi": "Tỷ lệ hiểu ý quá tải (áp dụng {0}% / cap 40% / vượt +{1}%)"
   },
   "diagCritUnder": {
     "ja": "会心率不足 (適用 {0}% / 最終会心+会意 {1}%)",
     "en": "Crit Rate low (applied {0}% / final Crit+Affinity {1}%)",
     "zh": "会心率不足 (适用 {0}% / 最终会心+会意 {1}%)",
-    "ko": "치명타 확률 부족 (적용 {0}% / 최종 치명타+각성 {1}%)"
+    "ko": "치명타 확률 부족 (적용 {0}% / 최종 치명타+각성 {1}%)",
+    "vi": "Tỷ lệ chí mạng không đủ (áp dụng {0}% / Chí mạng+Hiểu ý cuối {1}%)"
   },
   "diagGood": {
     "ja": "主要ステータス は概ね良好",
     "en": "Core stats look fine",
     "zh": "主要属性良好",
-    "ko": "주요 스탯은 양호"
+    "ko": "주요 스탯은 양호",
+    "vi": "Chỉ số chính nhìn chung tốt"
   },
   "diagPenBoth": {
     "ja": "外功/属性 どちらにも特化なし → 片方に特化推奨 (外功貫通+1={0} / 属性貫通+1={1} / 推奨 外功≥{2} or 属性≥{3})",
     "en": "Neither Phys nor Elem path specialized → recommend focus (PhysPen+1={0} / ElemPen+1={1} / recommend Phys≥{2} or Elem≥{3})",
     "zh": "外功/属攻 均未特化 → 建议专注其一 (外功穿透+1={0} / 属攻穿透+1={1} / 推荐 外功≥{2} 或 属攻≥{3})",
-    "ko": "외공/속성 모두 특화 없음 → 한쪽 특화 권장 (외공관통+1={0} / 속성관통+1={1} / 권장 외공≥{2} 또는 속성≥{3})"
+    "ko": "외공/속성 모두 특화 없음 → 한쪽 특화 권장 (외공관통+1={0} / 속성관통+1={1} / 권장 외공≥{2} 또는 속성≥{3})",
+    "vi": "Ngoại công/Thuộc tính đều không chuyên hóa → khuyến nghị chuyên một bên (Xuyên thấu ngoại công+1={0} / Xuyên thấu thuộc tính+1={1} / khuyến nghị Ngoại công≥{2} hoặc Thuộc tính≥{3})"
   },
   "diagAffix6Mismatch": {
     "ja": "武器系定音オプション 全4スロット {0} だが {1} の方が期待値高 (外功貫通+1={2} / 属性貫通+1={3})",
     "en": "Weapon Attune (all 4 slots {0}) but {1} yields higher value (PhysPen+1={2} / ElemPen+1={3})",
     "zh": "武器定音 4槽全 {0} 但 {1} 期待值更高 (外功穿透+1={2} / 属攻穿透+1={3})",
-    "ko": "무기 정음 4슬롯 전부 {0}이지만 {1}이(가) 더 효율적 (외공관통+1={2} / 속성관통+1={3})"
+    "ko": "무기 정음 4슬롯 전부 {0}이지만 {1}이(가) 더 효율적 (외공관통+1={2} / 속성관통+1={3})",
+    "vi": "Định âm vũ khí cả 4 ô {0} nhưng {1} có giá trị kỳ vọng cao hơn (Xuyên thấu ngoại công+1={2} / Xuyên thấu thuộc tính+1={3})"
   },
   "diagAffix6Mixed": {
     "ja": "武器系定音オプション 混在 ({0}) → {1} 4スロット統一推奨 (外功貫通+1={2} / 属性貫通+1={3})",
     "en": "Weapon Attune mixed ({0}) → unify on {1} across 4 slots (PhysPen+1={2} / ElemPen+1={3})",
     "zh": "武器定音 混合 ({0}) → 建议统一为 {1} (外功穿透+1={2} / 属攻穿透+1={3})",
-    "ko": "무기 정음 혼재 ({0}) → {1}(으)로 4슬롯 통일 권장 (외공관통+1={2} / 속성관통+1={3})"
+    "ko": "무기 정음 혼재 ({0}) → {1}(으)로 4슬롯 통일 권장 (외공관통+1={2} / 속성관통+1={3})",
+    "vi": "Định âm vũ khí hỗn hợp ({0}) → khuyến nghị thống nhất 4 ô thành {1} (Xuyên thấu ngoại công+1={2} / Xuyên thấu thuộc tính+1={3})"
   },
   "diagWasted": {
     "ja": "無駄オプション ({0}件): {1}{2}",
     "en": "Wasted affixes ({0}): {1}{2}",
     "zh": "无效选项 ({0}项): {1}{2}",
-    "ko": "무효 옵션 ({0}개): {1}{2}"
+    "ko": "무효 옵션 ({0}개): {1}{2}",
+    "vi": "Tùy chọn lãng phí ({0} mục): {1}{2}"
   },
   "diagWastedMore": {
     "ja": " 他{0}件",
     "en": " +{0} more",
     "zh": " 其余{0}项",
-    "ko": " 외 {0}개"
+    "ko": " 외 {0}개",
+    "vi": " còn {0} mục"
   },
   "cmpTitleJa": {
     "ja": "武具対照",
     "en": "COMPARE",
     "zh": "武具对照",
-    "ko": "무구대조"
+    "ko": "무구대조",
+    "vi": "Đối chiếu Vũ khí"
   },
   "cmpTitleEn": {
     "ja": "COMPARISON",
     "en": "COMPARISON",
     "zh": "COMPARISON",
-    "ko": "COMPARISON"
+    "ko": "COMPARISON",
+    "vi": "COMPARISON"
   },
   "cmpApply": {
     "ja": "採用",
     "en": "Apply",
     "zh": "采用",
-    "ko": "적용"
+    "ko": "적용",
+    "vi": "Áp dụng"
   },
   "cmpReset": {
     "ja": "復元",
     "en": "Revert",
     "zh": "还原",
-    "ko": "복원"
+    "ko": "복원",
+    "vi": "Khôi phục"
   },
   "cmpCancel": {
     "ja": "離脱",
     "en": "Cancel",
     "zh": "退出",
-    "ko": "취소"
+    "ko": "취소",
+    "vi": "Thoát"
   },
   "cmpCurrent": {
     "ja": "現有",
     "en": "CURRENT",
     "zh": "现有",
-    "ko": "현재"
+    "ko": "현재",
+    "vi": "Hiện có"
   },
   "cmpNew": {
     "ja": "新置",
     "en": "NEW",
     "zh": "新置",
-    "ko": "신규"
+    "ko": "신규",
+    "vi": "Mới đặt"
   },
   "cmpDeltaLabel": {
     "ja": "武格変動",
     "en": "MARTIAL Δ",
     "zh": "武格变动",
-    "ko": "무격 변동"
+    "ko": "무격 변동",
+    "vi": "Biến động Võ cách"
   },
   "xinfaTitleJa": {
     "ja": "心法対照",
     "en": "INNER WAY",
     "zh": "心法对照",
-    "ko": "심법 대조"
+    "ko": "심법 대조",
+    "vi": "Đối chiếu Tâm pháp"
   },
   "close": {
     "ja": "閉じる",
     "en": "Close",
     "zh": "关闭",
-    "ko": "닫기"
+    "ko": "닫기",
+    "vi": "Đóng"
   },
   "noteTitleJa": {
     "ja": "筆記",
     "en": "筆記",
     "zh": "笔记",
-    "ko": "필기"
+    "ko": "필기",
+    "vi": "Bút ký"
   },
   "noteSeal": {
     "ja": "記",
     "en": "NT",
     "zh": "记",
-    "ko": "기"
+    "ko": "기",
+    "vi": "Ký"
   },
   "noteTabSpec": {
     "ja": "仕様",
     "en": "Specs",
     "zh": "规格",
-    "ko": "사양"
+    "ko": "사양",
+    "vi": "Quy cách"
   },
   "noteTabChangelog": {
     "ja": "更新履歴",
     "en": "Changelog",
     "zh": "更新历史",
-    "ko": "업데이트 내역"
+    "ko": "업데이트 내역",
+    "vi": "Lịch sử cập nhật"
   },
   "noteBugReport": {
     "ja": "バグ報告",
     "en": "Report Bug",
     "zh": "错误报告",
-    "ko": "버그 신고"
+    "ko": "버그 신고",
+    "vi": "Báo lỗi"
   },
   "noteFeatureRequest": {
     "ja": "追加要望",
     "en": "Feature Req",
     "zh": "功能请求",
-    "ko": "기능 요청"
+    "ko": "기능 요청",
+    "vi": "Yêu cầu Tính năng"
   },
   "anlzTitle": {
     "ja": "格析",
     "en": "格析",
     "zh": "格析",
-    "ko": "격석"
+    "ko": "격석",
+    "vi": "Cách tích"
   },
   "anlzSubtitle": {
     "ja": "ANALYSIS",
     "en": "ANALYSIS",
     "zh": "ANALYSIS",
-    "ko": "ANALYSIS"
+    "ko": "ANALYSIS",
+    "vi": "ANALYSIS"
   },
   "anlzTabRank": {
     "ja": "期待値",
     "en": "Rank",
     "zh": "期望值",
-    "ko": "기댓값"
+    "ko": "기댓값",
+    "vi": "Giá trị Kỳ vọng"
   },
   "anlzTabOpt": {
     "ja": "最適化",
     "en": "Optimize",
     "zh": "最适化",
-    "ko": "최적화"
+    "ko": "최적화",
+    "vi": "Tối ưu"
   },
   "anlzTabHist": {
     "ja": "履歴",
     "en": "History",
     "zh": "历史",
-    "ko": "이력"
+    "ko": "이력",
+    "vi": "Lịch sử"
   },
   "shareTitle": {
     "ja": "飛簡 / BUILD SHARE",
     "en": "BUILD SHARE",
     "zh": "飞简 / BUILD SHARE",
-    "ko": "비간 / BUILD SHARE"
+    "ko": "비간 / BUILD SHARE",
+    "vi": "Phi giản / CHIA SẺ BUILD"
   },
   "shareSect1Heading": {
     "ja": "▍ビルド共有",
     "en": "▍Share Build",
     "zh": "▍分享构筑",
-    "ko": "▍빌드 공유"
+    "ko": "▍빌드 공유",
+    "vi": "▍Chia sẻ Build"
   },
   "shareSect1Desc": {
     "ja": "現在インポートしているゲームデータ (装備/心法/調律・定音オプション/武術) を共有する URL。 受信者は同じビルドで WWM-METRICS を閲覧できます。",
     "en": "URL to share your currently imported game data (equipment / xinfa / tuning & engravings / martial arts). Recipients can view WWM-METRICS with the same build.",
     "zh": "用于分享当前导入的游戏数据 (装备/心法/调律·定音/武术) 的 URL。 接收者可以使用相同构筑查看 WWM-METRICS。",
-    "ko": "현재 가져온 게임 데이터 (장비/심법/조율·정음/무술) 를 공유하는 URL. 받는 사람은 동일한 빌드로 WWM-METRICS 를 열람할 수 있습니다."
+    "ko": "현재 가져온 게임 데이터 (장비/심법/조율·정음/무술) 를 공유하는 URL. 받는 사람은 동일한 빌드로 WWM-METRICS 를 열람할 수 있습니다.",
+    "vi": "URL để chia sẻ dữ liệu game đang nhập (trang bị/tâm pháp/điều luật·định âm/võ học). Người nhận có thể xem WWM-METRICS với cùng build."
   },
   "shareCopyUrl": {
     "ja": "URL コピー",
     "en": "Copy URL",
     "zh": "复制 URL",
-    "ko": "URL 복사"
+    "ko": "URL 복사",
+    "vi": "Sao chép URL"
   },
   "shareCopyObs": {
     "ja": "OBS URL コピー",
     "en": "Copy OBS URL",
     "zh": "复制 OBS URL",
-    "ko": "OBS URL 복사"
+    "ko": "OBS URL 복사",
+    "vi": "Sao chép OBS URL"
   },
   "shareSect2Heading": {
     "ja": "▍OBS 配信用 URL",
     "en": "▍OBS Streaming URL",
     "zh": "▍OBS 推流 URL",
-    "ko": "▍OBS 방송용 URL"
+    "ko": "▍OBS 방송용 URL",
+    "vi": "▍URL phát sóng OBS"
   },
   "shareSect2Desc": {
     "ja": "OBS の「ブラウザ」 ソースに貼り付けると、 配信画面にビルドのステータスをオーバーレイ表示できます。 ビルドを更新したら URL を再コピーして OBS 側の URL も更新してください。",
     "en": "Paste this URL into an OBS Browser source to overlay your build stats on stream. After updating your build, re-copy the URL and update it in OBS.",
     "zh": "粘贴到 OBS 的「浏览器」源中, 即可在直播画面叠加显示构筑状态。 构筑更新后请重新复制 URL 并更新 OBS 中的 URL。",
-    "ko": "OBS 의「브라우저」 소스에 붙여넣으면 방송 화면에 빌드 스탯을 오버레이 표시할 수 있습니다. 빌드를 업데이트하면 URL 을 다시 복사해서 OBS 의 URL 도 업데이트해 주세요."
+    "ko": "OBS 의「브라우저」 소스에 붙여넣으면 방송 화면에 빌드 스탯을 오버레이 표시할 수 있습니다. 빌드를 업데이트하면 URL 을 다시 복사해서 OBS 의 URL 도 업데이트해 주세요.",
+    "vi": "Dán vào nguồn \"Browser\" của OBS để overlay trạng thái build lên màn hình phát sóng. Sau khi cập nhật build, vui lòng sao chép lại URL và cập nhật URL phía OBS."
   },
   "shareObsSetup": {
     "ja": "OBS への設定方法",
     "en": "OBS setup instructions",
     "zh": "OBS 设置方法",
-    "ko": "OBS 설정 방법"
+    "ko": "OBS 설정 방법",
+    "vi": "Cách cài đặt cho OBS"
   },
   "shareObsStep1": {
     "ja": "OBS Studio の「ソース」欄で「+」 → 「ブラウザ」 を追加",
     "en": "In OBS Studio, add a \"Browser\" source from the \"+\" in the Sources panel",
     "zh": "在 OBS Studio 的「来源」中点击「+」 → 添加「浏览器」",
-    "ko": "OBS Studio 의「소스」 패널에서「+」 → 「브라우저」 추가"
+    "ko": "OBS Studio 의「소스」 패널에서「+」 → 「브라우저」 추가",
+    "vi": "Trong OBS Studio, nhấp \"+\" trong khung \"Sources\" → thêm \"Browser\""
   },
   "shareObsStep2": {
     "ja": "URL 欄に下の URL を貼り付け",
     "en": "Paste the URL below into the URL field",
     "zh": "将下方 URL 粘贴到 URL 栏",
-    "ko": "아래 URL 을 URL 칸에 붙여넣기"
+    "ko": "아래 URL 을 URL 칸에 붙여넣기",
+    "vi": "Dán URL dưới vào ô URL"
   },
   "shareObsStep3": {
     "ja": "幅 640 × 高さ 900 (推奨、 内部解像度)",
     "en": "Recommended size: width 640 × height 900 (internal resolution)",
     "zh": "推荐尺寸: 宽 640 × 高 900 (内部分辨率)",
-    "ko": "권장 크기: 너비 640 × 높이 900 (내부 해상도)"
+    "ko": "권장 크기: 너비 640 × 높이 900 (내부 해상도)",
+    "vi": "Kích thước khuyến nghị: rộng 640 × cao 900 (độ phân giải nội bộ)"
   },
   "shareObsStep4": {
     "ja": "「ソースが表示されていないときにシャットダウン」 はオフ推奨 (即時反映のため)",
     "en": "Disable \"Shutdown source when not visible\" for instant updates",
     "zh": "建议关闭「不可见时关闭来源」 以实时反映",
-    "ko": "「표시되지 않을 때 소스 종료」 는 해제 권장 (즉시 반영을 위해)"
+    "ko": "「표시되지 않을 때 소스 종료」 는 해제 권장 (즉시 반영을 위해)",
+    "vi": "Khuyến nghị tắt \"Shutdown source when not visible\" (để phản ánh tức thời)"
   },
   "shareObsStep5": {
     "ja": "背景は透明、 そのままシーンに重ねて使用可能",
     "en": "Transparent background — layer it directly over your scene",
     "zh": "背景透明, 可直接叠加在场景上使用",
-    "ko": "배경은 투명, 그대로 장면에 겹쳐 사용 가능"
+    "ko": "배경은 투명, 그대로 장면에 겹쳐 사용 가능",
+    "vi": "Nền trong suốt, có thể overlay trực tiếp lên scene"
   },
   "shareObsCacheWarn": {
     "ja": "OBSキャッシュの影響で正常に表示されない場合は、ブラウザソースの作り直し or OBS再起動が必要",
     "en": "If display issues occur due to OBS cache, recreate the Browser Source or restart OBS",
     "zh": "因 OBS 缓存导致显示异常时, 请重新创建浏览器源或重启 OBS",
-    "ko": "OBS 캐시 영향으로 정상 표시되지 않을 때는 브라우저 소스 재생성 또는 OBS 재시작이 필요"
+    "ko": "OBS 캐시 영향으로 정상 표시되지 않을 때는 브라우저 소스 재생성 또는 OBS 재시작이 필요",
+    "vi": "Nếu hiển thị bất thường do cache OBS, cần tạo lại Browser Source hoặc khởi động lại OBS"
   },
   "shareLabelBg": {
     "ja": "背景色",
     "en": "BG color",
     "zh": "背景色",
-    "ko": "배경색"
+    "ko": "배경색",
+    "vi": "Màu nền"
   },
   "shareLabelOpacity": {
     "ja": "不透明度",
     "en": "Opacity",
     "zh": "不透明度",
-    "ko": "불투명도"
+    "ko": "불투명도",
+    "vi": "Độ mờ"
   },
   "shareLabelText1": {
     "ja": "文字色1",
     "en": "Text 1",
     "zh": "文字色1",
-    "ko": "글자색1"
+    "ko": "글자색1",
+    "vi": "Màu chữ 1"
   },
   "shareLabelText2": {
     "ja": "文字色2",
     "en": "Text 2",
     "zh": "文字色2",
-    "ko": "글자색2"
+    "ko": "글자색2",
+    "vi": "Màu chữ 2"
   },
   "shareLabelAcText": {
     "ja": "ラベル文字",
     "en": "Label text",
     "zh": "标签文字",
-    "ko": "레이블 글자"
+    "ko": "레이블 글자",
+    "vi": "Chữ nhãn"
   },
   "shareLabelAcBg": {
     "ja": "ラベル背景",
     "en": "Label BG",
     "zh": "标签背景",
-    "ko": "레이블 배경"
+    "ko": "레이블 배경",
+    "vi": "Nền nhãn"
   },
   "sharePreviewBtn": {
     "ja": "プレビュー表示",
     "en": "Show preview",
     "zh": "显示预览",
-    "ko": "미리보기 표시"
+    "ko": "미리보기 표시",
+    "vi": "Hiển thị xem trước"
   },
   "sharePreviewClose": {
     "ja": "プレビュー閉じる",
     "en": "Hide preview",
     "zh": "关闭预览",
-    "ko": "미리보기 닫기"
+    "ko": "미리보기 닫기",
+    "vi": "Đóng xem trước"
   },
   "sharePreviewTitle": {
     "ja": "プレビュー (内部 640×900 を縮小表示)",
     "en": "Preview (640×900 scaled down)",
     "zh": "预览 (内部 640×900 缩小显示)",
-    "ko": "미리보기 (내부 640×900 축소 표시)"
+    "ko": "미리보기 (내부 640×900 축소 표시)",
+    "vi": "Xem trước (thu nhỏ 640×900 nội bộ)"
   },
   "sharePreviewScaleLabel": {
     "ja": "縮尺",
     "en": "Scale",
     "zh": "缩放",
-    "ko": "비율"
+    "ko": "비율",
+    "vi": "Tỷ lệ"
   },
   "shareMsgCopyOK": {
     "ja": "✓ {label} コピー完了",
     "en": "✓ {label} copied",
     "zh": "✓ {label} 已复制",
-    "ko": "✓ {label} 복사 완료"
+    "ko": "✓ {label} 복사 완료",
+    "vi": "✓ {label} đã sao chép"
   },
   "shareMsgCopyManual": {
     "ja": "手動でコピーしてください",
     "en": "Please copy manually",
     "zh": "请手动复制",
-    "ko": "수동으로 복사해 주세요"
+    "ko": "수동으로 복사해 주세요",
+    "vi": "Vui lòng sao chép thủ công"
   },
   "optApplySelected": {
     "ja": "選択適用",
     "en": "Apply",
     "zh": "应用所选",
-    "ko": "선택 적용"
+    "ko": "선택 적용",
+    "vi": "Áp dụng đã chọn"
   },
   "optTargetRatio": {
     "ja": "目標",
     "en": "Target",
     "zh": "目标",
-    "ko": "목표"
+    "ko": "목표",
+    "vi": "Mục tiêu"
   },
   "optSortDefault": {
     "ja": "改善順",
     "en": "Δ",
     "zh": "按Δ",
-    "ko": "Δ순"
+    "ko": "Δ순",
+    "vi": "Theo Δ"
   },
   "optSortBySlot": {
     "ja": "部位順",
     "en": "Slot",
     "zh": "按部位",
-    "ko": "부위순"
+    "ko": "부위순",
+    "vi": "Theo vị trí"
   },
   "optNoImprovement": {
     "ja": "改善余地なし",
     "en": "No improvements available",
     "zh": "无改善余地",
-    "ko": "개선 여지 없음"
+    "ko": "개선 여지 없음",
+    "vi": "Không có chỗ cải thiện"
   },
   "optSelectOne": {
     "ja": "選択",
     "en": "Select",
     "zh": "选择",
-    "ko": "선택"
+    "ko": "선택",
+    "vi": "Chọn"
   },
   "optMinDeltaTip": {
     "ja": "これ未満のΔで打切",
     "en": "Stop below this Δ",
     "zh": "Δ低于此值时停止",
-    "ko": "이 Δ 미만 시 중단"
+    "ko": "이 Δ 미만 시 중단",
+    "vi": "Dừng khi Δ dưới giá trị này"
   },
   "optToggleAllTip": {
     "ja": "全選択/全解除 切替",
     "en": "Toggle all on/off",
     "zh": "切换全选/全清",
-    "ko": "전체 선택/해제 토글"
+    "ko": "전체 선택/해제 토글",
+    "vi": "Chuyển đổi chọn tất cả/bỏ tất cả"
   },
   "optComputing": {
     "ja": "計算中...",
     "en": "Computing...",
     "zh": "计算中...",
-    "ko": "계산 중..."
+    "ko": "계산 중...",
+    "vi": "Đang tính..."
   },
   "optComputingIter": {
     "ja": "計算中... ({0}回目)",
     "en": "Computing... (iter {0})",
     "zh": "计算中... (第{0}次)",
-    "ko": "계산 중... ({0}회)"
+    "ko": "계산 중... ({0}회)",
+    "vi": "Đang tính... (lần {0})"
   },
   "tipAffixUseful": {
     "ja": "ゲーム内 👍 マーク (火力寄与)",
     "en": "In-game 👍 mark (DMG contributor)",
     "zh": "游戏内 👍 标记 (火力贡献)",
-    "ko": "게임 내 👍 표시 (화력 기여)"
+    "ko": "게임 내 👍 표시 (화력 기여)",
+    "vi": "Dấu 👍 trong game (đóng góp sát thương)"
   },
   "tipCapNotReached": {
     "ja": "cap未到達",
     "en": "Cap not reached",
     "zh": "未达上限",
-    "ko": "cap 미달성"
+    "ko": "cap 미달성",
+    "vi": "Chưa đạt cap"
   },
   "tipTierUnreleased": {
     "ja": "未解放",
     "en": "Locked",
     "zh": "未解锁",
-    "ko": "미해방"
+    "ko": "미해방",
+    "vi": "Chưa mở"
   },
   "tipTierKfMissing": {
     "ja": "武器条件未満",
     "en": "Weapon req. unmet",
     "zh": "武器条件未达",
-    "ko": "무기 조건 미달"
+    "ko": "무기 조건 미달",
+    "vi": "Chưa đủ điều kiện vũ khí"
   },
   "tipIconExport": {
     "ja": "画像で書き出し",
     "en": "Export as image",
     "zh": "导出为图片",
-    "ko": "이미지로 내보내기"
+    "ko": "이미지로 내보내기",
+    "vi": "Xuất ra ảnh"
   },
   "tipIconShare": {
     "ja": "Build を URL で共有",
     "en": "Share build via URL",
     "zh": "通过URL分享配置",
-    "ko": "URL로 빌드 공유"
+    "ko": "URL로 빌드 공유",
+    "vi": "Chia sẻ Build qua URL"
   },
   "tipIconNote": {
     "ja": "ツール仕様 / 更新履歴",
     "en": "Tool specs / Changelog",
     "zh": "工具说明 / 更新记录",
-    "ko": "도구 사양 / 변경 이력"
+    "ko": "도구 사양 / 변경 이력",
+    "vi": "Quy cách công cụ / Lịch sử cập nhật"
   },
   "tipIconContact": {
     "ja": "お問い合わせ (X / Twitter)",
     "en": "Contact (X / Twitter)",
     "zh": "联系 (X / Twitter)",
-    "ko": "문의 (X / Twitter)"
+    "ko": "문의 (X / Twitter)",
+    "vi": "Liên hệ (X / Twitter)"
   },
   "footerUnofficial": {
     "ja": "非公式ファンメイドツール。NetEase Inc. / Everstone Studio とは関連しません。",
     "en": "Unofficial fan-made tool. Not affiliated with NetEase Inc. / Everstone Studio.",
     "zh": "非官方粉丝制作工具。与 NetEase Inc. / Everstone Studio 无关。",
-    "ko": "비공식 팬메이드 도구. NetEase Inc. / Everstone Studio 와 무관합니다."
+    "ko": "비공식 팬메이드 도구. NetEase Inc. / Everstone Studio 와 무관합니다.",
+    "vi": "Công cụ fan-made không chính thức. Không liên kết với NetEase Inc. / Everstone Studio."
   },
   "tipDiagBadge": {
     "ja": "弱点指摘を表示",
     "en": "Show weak point findings",
     "zh": "显示弱点提示",
-    "ko": "약점 지적 표시"
+    "ko": "약점 지적 표시",
+    "vi": "Hiển thị chỉ điểm yếu"
   },
   "railDiag": {
     "ja": "弱点",
     "en": "DIAG",
     "zh": "弱点",
-    "ko": "약점"
+    "ko": "약점",
+    "vi": "Yếu"
   },
   "importStep1Title": {
     "ja": "Step 1: ブックマークレット 初回セットアップ (未登録時のみ開く)",
     "en": "Step 1: Bookmarklet Initial Setup (open only if not yet registered)",
     "zh": "Step 1: 书签栏初始设置 (仅在未注册时打开)",
-    "ko": "Step 1: 북마크릿 초기 설정 (미등록 시에만 열기)"
+    "ko": "Step 1: 북마크릿 초기 설정 (미등록 시에만 열기)",
+    "vi": "Step 1: Cài đặt ban đầu Bookmarklet (chỉ mở khi chưa đăng ký)"
   },
   "importTabPC": {
     "ja": "PC",
     "en": "PC",
     "zh": "电脑",
-    "ko": "PC"
+    "ko": "PC",
+    "vi": "PC"
   },
   "importTabMobile": {
     "ja": "モバイル",
     "en": "Mobile",
     "zh": "手机",
-    "ko": "모바일"
+    "ko": "모바일",
+    "vi": "Di động"
   },
   "importPcStep1": {
     "ja": "ブックマークバー表示 (Chrome/Edge: <code>Ctrl+Shift+B</code>)",
     "en": "Show bookmark bar (Chrome/Edge: <code>Ctrl+Shift+B</code>)",
     "zh": "显示书签栏 (Chrome/Edge: <code>Ctrl+Shift+B</code>)",
-    "ko": "북마크 바 표시 (Chrome/Edge: <code>Ctrl+Shift+B</code>)"
+    "ko": "북마크 바 표시 (Chrome/Edge: <code>Ctrl+Shift+B</code>)",
+    "vi": "Hiển thị thanh bookmark (Chrome/Edge: <code>Ctrl+Shift+B</code>)"
   },
   "importPcStep2": {
     "ja": "下のボタンを<b>ドラッグ</b>してブックマークバーへ:",
     "en": "<b>Drag</b> the button below to your bookmark bar:",
     "zh": "将下方按钮<b>拖拽</b>到书签栏:",
-    "ko": "아래 버튼을 북마크 바로 <b>드래그</b>:"
+    "ko": "아래 버튼을 북마크 바로 <b>드래그</b>:",
+    "vi": "<b>Kéo</b> nút dưới vào thanh bookmark:"
   },
   "importPcStep3": {
     "ja": "下の「公式データツールを開く」 → ログイン後、登録したブックマークをクリック",
     "en": "Click \"Open Official Tool\" → log in → click the registered bookmark",
     "zh": "点击\"打开官方工具\" → 登录后 → 点击已注册的书签",
-    "ko": "\"공식 데이터 도구 열기\" 클릭 → 로그인 후 → 등록한 북마크 클릭"
+    "ko": "\"공식 데이터 도구 열기\" 클릭 → 로그인 후 → 등록한 북마크 클릭",
+    "vi": "Nhấp \"Mở Công cụ Chính thức\" → đăng nhập → nhấp bookmark đã đăng ký"
   },
   "importBmLabel": {
     "ja": "風燕計インポート",
     "en": "WWMetrics Import",
     "zh": "燕云计导入",
-    "ko": "연운계가져오기"
+    "ko": "연운계가져오기",
+    "vi": "Nhập Phong Yến Kế"
   },
   "importMobStep1": {
     "ja": "下のコードをコピー:",
     "en": "Copy the code below:",
     "zh": "复制下方代码:",
-    "ko": "아래 코드 복사:"
+    "ko": "아래 코드 복사:",
+    "vi": "Sao chép mã dưới:"
   },
   "importMobStep2": {
     "ja": "公式ツールをブックマーク登録",
     "en": "Bookmark the official tool",
     "zh": "为官方工具添加书签",
-    "ko": "공식 도구를 북마크 등록"
+    "ko": "공식 도구를 북마크 등록",
+    "vi": "Đăng ký bookmark cho công cụ chính thức"
   },
   "importMobStep3": {
     "ja": "ブックマーク編集 → URL をコピーしたコードに置換 → 名前「WWM インポート」",
     "en": "Edit the bookmark → replace URL with the copied code → name \"WWM Import\"",
     "zh": "编辑书签 → URL 替换为复制的代码 → 命名\"WWM 导入\"",
-    "ko": "북마크 편집 → URL을 복사한 코드로 교체 → 이름 \"WWM 가져오기\""
+    "ko": "북마크 편집 → URL을 복사한 코드로 교체 → 이름 \"WWM 가져오기\"",
+    "vi": "Chỉnh sửa bookmark → thay URL bằng mã đã sao chép → đặt tên \"WWM Nhập\""
   },
   "importMobStep4": {
     "ja": "公式ツール開いた状態で アドレスバーに「WWM」入力 → 候補タップ",
     "en": "With the official tool open, type \"WWM\" in the address bar → tap the suggestion",
     "zh": "打开官方工具后,在地址栏输入\"WWM\" → 点击建议项",
-    "ko": "공식 도구를 연 상태에서 주소창에 \"WWM\" 입력 → 추천 항목 탭"
+    "ko": "공식 도구를 연 상태에서 주소창에 \"WWM\" 입력 → 추천 항목 탭",
+    "vi": "Mở công cụ chính thức, nhập \"WWM\" vào thanh địa chỉ → chạm gợi ý"
   },
   "importCopy": {
     "ja": "コピー",
     "en": "Copy",
     "zh": "复制",
-    "ko": "복사"
+    "ko": "복사",
+    "vi": "Sao chép"
   },
   "importCopied": {
     "ja": "コピー完了 ✓",
     "en": "Copied ✓",
     "zh": "已复制 ✓",
-    "ko": "복사 완료 ✓"
+    "ko": "복사 완료 ✓",
+    "vi": "Đã sao chép ✓"
   },
   "importReapplyNote": {
     "ja": "前回データをそのまま再インポート。<br>最新装備で取り込むには 公式データツール から再度ブックマークレット実行。",
     "en": "Re-import the previous data as-is.<br>To pull the latest gear, run the bookmarklet again from the official tool.",
     "zh": "按原样重新导入上次数据。<br>如需获取最新装备,请从官方工具再次执行书签。",
-    "ko": "이전 데이터를 그대로 재가져옵니다.<br>최신 장비를 가져오려면 공식 데이터 도구에서 북마크릿을 다시 실행하세요."
+    "ko": "이전 데이터를 그대로 재가져옵니다.<br>최신 장비를 가져오려면 공식 데이터 도구에서 북마크릿을 다시 실행하세요.",
+    "vi": "Nhập lại dữ liệu lần trước nguyên trạng.<br>Để lấy trang bị mới nhất, chạy lại bookmarklet từ Công cụ Chính thức."
   },
   "noteSpec": {
     "ja": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">ツール概要</h3>\n      <p class=\"wwm-note-p\">風燕伝 (Where Winds Meet) 装備強度の比較・最適化ツール。<b>武格指数</b> を中心に、装備/調律・定音オプション/武術/心法/装備一式効果を統合してダメージ期待値を算出し、装備改善方針を提示する。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">データ取得 (前提)</h3>\n      <p class=\"wwm-note-p\">本ツールは <b>風燕伝公式・データツール</b> からインポートしたデータを元に動作する。インポートするまで装備情報・スコアは表示されない。インポートデータはブラウザの localStorage に保存され、再起動後も保持される。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">武格指数 (Martial Index) とは</h3>\n      <p class=\"wwm-note-p\">装備/調律・定音オプション/武術/心法/装備一式効果を全て込みで、<b>全プレイヤー共通の固定係数</b> でダメージ期待値を算出した指標。大世界等級や敵側パラメータの個人差を排除しているため、装備の絶対強度を比較できる。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tier 判定基準</h3>\n      <p class=\"wwm-note-p\"><b>装備最適化提案を全て適用した時の最大スコア</b> を 100% として、現在の武格指数の比率で判定。インポート時に基準確定、再インポートで更新。</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> 最大の 95% 以上</li>\n        <li><b>S:</b> 90% 以上</li>\n        <li><b>A:</b> 80% 以上</li>\n        <li><b>B:</b> 65% 以上</li>\n        <li><b>C:</b> 未満</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">計算に反映される効果</h3>\n      <ul class=\"wwm-note-list\">\n        <li>装備 基本ステータス (外功攻撃力/属性攻撃力 等)</li>\n        <li>調律/定音オプション (調律1〜5、 定音1〜5)</li>\n        <li>武術才能効果 (会心率上限 +Δ、 武術属性別 攻撃/貫通/属性ダメ 強化 等)</li>\n        <li>心法 Tier 効果 (Tier2/5 表示反映 + Tier0/1/3/4/6 裏加算)</li>\n        <li>装備二点一式効果 (2点装備で発動する加算系)</li>\n        <li>装備四点一式効果 (4点装備で +100 固定ボーナス、 各装備に均等配賦)</li>\n        <li>基礎値 (体/力/防/速/会) → 派生 (基本ステータス・判定確率)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">計算に反映されない効果</h3>\n      <ul class=\"wwm-note-list\">\n        <li>装備四点一式効果の条件付効果 (気血/真気/受流/重撃 トリガー等) — 一律 +100 固定で代替</li>\n        <li>観音 (ゲーム内ステータス非影響と判明、 ステ画面に反映されないため計算対象外)</li>\n        <li>PvP 専用定音 (定音6枠) — 表示のみ、 計算寄与なし</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">計算前提値 (固定)</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>外功攻撃係数:</b> ×1.5</li>\n        <li><b>ステータス攻撃係数:</b> ×1.5</li>\n        <li><b>付加外功:</b> +230</li>\n        <li><b>属性強化 (主):</b> ×1.5</li>\n        <li><b>属性強化 (副):</b> ×1.0</li>\n        <li><b>大世界等級:</b> 現在のアップデート状況に応じた上限値 (グローバル基準)</li>\n        <li><b>武術等級:</b> キャラクター Lv と同一</li>\n        <li><b>敵パラメータ:</b> charLv ≥ 96 → 敵Lv96 (DEF 405 / 審判耐性 1.65)、 未満 → 敵Lv91 (DEF 350 / 審判耐性 1.45)</li>\n        <li><b>キャラクター基本ステータス:</b> キャラクター才能/シングルプレイレベル ボーナス/五音太平楽 を含むステータス加算値を <b>振り切れているもの</b> として算出</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">データバージョン管理</h3>\n      <p class=\"wwm-note-p\">ゲーム側のバランス調整などでツール側の計算式が更新された際、既存の武格指数 (baseline) は破棄され、最上部に <b>再インポート促しバナー</b> が表示される。再インポート後、新しい計算式で武格指数が再算出される。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">主要機能</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>武具対照:</b> 現在装備と新規装備の調律/定音差分シミュレーション。スコア変動を即時プレビュー</li>\n        <li><b>心法対照:</b> 心法の差替えシミュレーション。Tier 別効果と発動条件を比較</li>\n        <li><b>装備最適化提案:</b> 調律/定音の理想配分を逆算し、 現在からの改善ステップを順に提示</li>\n        <li><b>プリセット保存:</b> 試行中の装備構成を保存・呼出し可能</li>\n        <li><b>OBS Share:</b> サイドバーのみ表示する配信用 URL を生成 (透明背景・色調カスタム対応)</li>\n        <li><b>4言語対応 (日/英/中/韓) + ライト/ダーク切替</b></li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">計算式 (要約)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\n各 dmg = (物理 + 属性) × 全武術ダメ × 外功増伤 × 軽減\nstatusScore = expected を固定係数で再計算したもの\nfinalScore  = statusScore + 4-set bonus (4点一式効果発動時)</pre>\n    </div>",
     "en": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tool Overview</h3>\n      <p class=\"wwm-note-p\">A comparison and optimization tool for Where Winds Meet equipment. Centered on the <b>Martial Index</b>, integrates equipment / tuning &amp; engravings / martial arts / xinfa / set effects to compute expected damage and propose improvement directions.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Data Required (Prerequisite)</h3>\n      <p class=\"wwm-note-p\">This tool runs on data imported from the <b>Where Winds Meet - Official Data Tool</b>. Equipment info and scores are not displayed until import. Imported data is saved in your browser's localStorage and persists across restarts.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">What is Martial Index</h3>\n      <p class=\"wwm-note-p\">An indicator that computes expected damage using <b>fixed coefficients common to all players</b>, including equipment / tuning &amp; engravings / martial arts talents / xinfa / set effects. It removes individual differences in Open World Level and enemy parameters, allowing absolute equipment strength comparison.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tier Criteria</h3>\n      <p class=\"wwm-note-p\">Judged by ratio of the current Martial Index against <b>the maximum score achievable when all optimization suggestions are applied</b>. Locked at import time, updated on re-import.</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> 95% or more of max</li>\n        <li><b>S:</b> 90% or more</li>\n        <li><b>A:</b> 80% or more</li>\n        <li><b>B:</b> 65% or more</li>\n        <li><b>C:</b> below</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Reflected in Calculation</h3>\n      <ul class=\"wwm-note-list\">\n        <li>Equipment base stats (Outer ATK / Elemental ATK etc.)</li>\n        <li>Tuning / Engraving options (Tuning 1-5, Engraving 1-5)</li>\n        <li>Martial Arts Talents effects (crit cap +Δ, Martial Element-specific ATK/penetration/elem boost, etc.)</li>\n        <li>Xinfa Tier effects (Tier 2/5 visible reflection + Tier 0/1/3/4/6 hidden additive)</li>\n        <li>2 Pieces set bonus (additive when 2 pieces equipped)</li>\n        <li>4 Pieces set bonus (+100 fixed when 4 pieces equipped, distributed evenly)</li>\n        <li>Base stats (Body/Power/Defense/Agility/Awareness) → derived (Base Stats / Judgment Rates)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Not Reflected in Calculation</h3>\n      <ul class=\"wwm-note-list\">\n        <li>4 Pieces conditional effects (HP/Inner Energy/Parry/Heavy triggers etc.) — replaced with flat +100</li>\n        <li>Enhance (confirmed not to affect game stats, so excluded from calculation)</li>\n        <li>PvP-Exclusive Engraving (Engraving slot 6) — display only, no contribution</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Fixed Calculation Presets</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>Outer ATK Coefficient:</b> ×1.5</li>\n        <li><b>Status ATK Coefficient:</b> ×1.5</li>\n        <li><b>Additional Outer:</b> +230</li>\n        <li><b>Elem Enhancement (Main):</b> ×1.5</li>\n        <li><b>Elem Enhancement (Sub):</b> ×1.0</li>\n        <li><b>Open World Level:</b> capped at the current update version (global standard)</li>\n        <li><b>Martial Level:</b> same as Character Lv</li>\n        <li><b>Enemy parameters:</b> charLv ≥ 96 → Enemy Lv96 (DEF 405 / Judgment Res 1.65), below → Enemy Lv91 (DEF 350 / 1.45)</li>\n        <li><b>Character base stats:</b> assumed maxed out, including Character Talents / Solo Mode Level bonus / Melodies of Peace stat gains</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Data Version Management</h3>\n      <p class=\"wwm-note-p\">When the tool's calculation logic is updated due to game balance changes, the existing Martial Index (baseline) is invalidated and a <b>re-import prompt banner</b> appears at the top. After re-import, the Martial Index is recalculated with the new logic.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Main Features</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>Equipment Compare:</b> Simulates tuning/engraving differences between current and new equipment with instant score preview</li>\n        <li><b>Xinfa Compare:</b> Simulates xinfa swaps, comparing Tier effects and activation conditions</li>\n        <li><b>Optimization Proposal:</b> Computes ideal tuning/engraving allocation and suggests step-by-step improvements</li>\n        <li><b>Preset Save:</b> Save and recall in-progress equipment configurations</li>\n        <li><b>OBS Share:</b> Generates a streaming URL showing only the sidebar (transparent background, color customizable)</li>\n        <li><b>4 languages (ja/en/zh/ko) + Light/Dark theme switching</b></li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Formula (Summary)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\neach dmg = (phys + elem) × all-martial-boost × outer-boost × reduction\nstatusScore = expected recomputed with fixed coefficients\nfinalScore  = statusScore + 4-set bonus (when 4 Pieces active)</pre>\n    </div>",
     "zh": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">工具概览</h3>\n      <p class=\"wwm-note-p\">《燕雲十六聲》装备强度比较与优化工具。以 <b>武格指数</b> 为核心，将装备/调律·定音/武学/心法/装备一式效果综合计算伤害期望值，提出装备改进方向。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">数据获取 (前提)</h3>\n      <p class=\"wwm-note-p\">本工具基于 <b>《燕雲十六聲》官方數據小工具</b> 导入的数据运行。在导入之前不显示装备信息和分数。导入数据保存在浏览器 localStorage 中，重启后保留。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">武格指数 (Martial Index) 是什么</h3>\n      <p class=\"wwm-note-p\">包含装备/调律·定音/武学/心法/装备一式效果，使用 <b>所有玩家通用的固定系数</b> 计算伤害期望值的指标。排除了大世界等级和敌方参数的个体差异，因此可比较装备的绝对强度。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tier 判定基准</h3>\n      <p class=\"wwm-note-p\">以 <b>装备最优化方案全部应用后的最大分数</b> 为 100%，按当前武格指数的比率判定。导入时确定基准，重新导入时更新。</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> 最大值的 95% 以上</li>\n        <li><b>S:</b> 90% 以上</li>\n        <li><b>A:</b> 80% 以上</li>\n        <li><b>B:</b> 65% 以上</li>\n        <li><b>C:</b> 以下</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">计算中反映的效果</h3>\n      <ul class=\"wwm-note-list\">\n        <li>装备基础属性 (外功攻击力/属性攻击力 等)</li>\n        <li>调律/定音 (调律 1~5、定音 1~5)</li>\n        <li>武学天赋效果 (会心率上限 +Δ、 武学属性别 攻击/穿透/属性伤强化 等)</li>\n        <li>心法 Tier 效果 (Tier 2/5 显示反映 + Tier 0/1/3/4/6 隐藏加算)</li>\n        <li>二件套效果 (2件装备发动的加算系)</li>\n        <li>四件套效果 (4件装备 +100 固定加成、 各装备均分)</li>\n        <li>五维属性 (体/劲/御/敏/势) → 派生 (基础属性·判定属性)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">计算中未反映的效果</h3>\n      <ul class=\"wwm-note-list\">\n        <li>四件套效果中的条件效果 (气血/真气/受流/重击 触发等) — 统一以 +100 固定代替</li>\n        <li>观音 (证实不影响游戏内属性，角色面板不反映故不纳入计算)</li>\n        <li>PvP 专用定音 (定音 6 槽) — 仅显示，不参与计算</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">计算前提值 (固定)</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>外功攻击系数:</b> ×1.5</li>\n        <li><b>属性攻击系数:</b> ×1.5</li>\n        <li><b>附加外功:</b> +230</li>\n        <li><b>属性强化 (主):</b> ×1.5</li>\n        <li><b>属性强化 (副):</b> ×1.0</li>\n        <li><b>大世界等级:</b> 按当前版本更新上限 (全局基准)</li>\n        <li><b>武学等级:</b> 与角色 Lv 相同</li>\n        <li><b>敌方参数:</b> charLv ≥ 96 → 敌Lv96 (DEF 405 / 判定抗性 1.65)、 以下 → 敌Lv91 (DEF 350 / 1.45)</li>\n        <li><b>角色基础属性:</b> 角色天赋/单人模式等级奖励/五音启太平 等所有属性加成值 视为 <b>已满</b> 进行计算</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">数据版本管理</h3>\n      <p class=\"wwm-note-p\">当游戏侧平衡调整等导致本工具计算公式更新时，现有武格指数 (baseline) 被废弃，顶部显示 <b>重新导入提示横幅</b>。重新导入后以新公式重新计算武格指数。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">主要功能</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>武具对照:</b> 当前装备与新装备的调律/定音差异模拟。分数变动即时预览</li>\n        <li><b>心法对照:</b> 心法替换模拟。比较 Tier 别效果和发动条件</li>\n        <li><b>装备最适化提案:</b> 反向算出调律/定音的理想配置，按改进步骤逐项呈现</li>\n        <li><b>预设保存:</b> 保存和呼出试行中的装备配置</li>\n        <li><b>OBS Share:</b> 生成仅显示侧栏的直播用 URL (透明背景·色调自定义对应)</li>\n        <li><b>4 语言对应 (日/英/中/韩) + 浅色/深色 切换</b></li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">计算公式 (摘要)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\n各 dmg = (物理 + 属性) × 全武学伤害 × 外功增伤 × 减伤\nstatusScore = expected 用固定系数重新计算后的值\nfinalScore  = statusScore + 4-set bonus (四件套效果发动时)</pre>\n    </div>",
-    "ko": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">도구 개요</h3>\n      <p class=\"wwm-note-p\">연운 (Where Winds Meet) 장비 강도 비교·최적화 도구. <b>무격 지수</b> 를 중심으로 장비/조율·정음/무술/심법/장비 세트 효과를 통합하여 데미지 기댓값을 산출하고 장비 개선 방향을 제시합니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">데이터 취득 (전제)</h3>\n      <p class=\"wwm-note-p\">본 도구는 <b>&lt;연운&gt; 공식-데이터 툴</b> 에서 가져온 데이터를 기반으로 동작합니다. 가져오기 전까지는 장비 정보·점수가 표시되지 않습니다. 가져온 데이터는 브라우저 localStorage 에 저장되어 재시작 후에도 유지됩니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">무격 지수 (Martial Index) 란</h3>\n      <p class=\"wwm-note-p\">장비/조율·정음/무술/심법/장비 세트 효과를 모두 포함하여, <b>모든 플레이어 공통의 고정 계수</b> 로 데미지 기댓값을 산출한 지표. 대세계 등급과 적측 파라미터의 개인차를 배제하여 장비의 절대 강도를 비교할 수 있습니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tier 판정 기준</h3>\n      <p class=\"wwm-note-p\"><b>장비 최적화 제안을 모두 적용했을 때의 최대 점수</b> 를 100%로 하여, 현재 무격 지수의 비율로 판정합니다. 가져오기 시 기준 확정, 다시 가져오기 시 갱신됩니다.</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> 최대의 95% 이상</li>\n        <li><b>S:</b> 90% 이상</li>\n        <li><b>A:</b> 80% 이상</li>\n        <li><b>B:</b> 65% 이상</li>\n        <li><b>C:</b> 미만</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">계산에 반영되는 효과</h3>\n      <ul class=\"wwm-note-list\">\n        <li>장비 기본 스탯 (외공 공격력/속성 공격력 등)</li>\n        <li>조율/정음 (조율 1~5, 정음 1~5)</li>\n        <li>무술 천부 효과 (회심률 상한 +Δ, 무술 속성별 공격/관통/속성 데미지 강화 등)</li>\n        <li>심법 Tier 효과 (Tier 2/5 표시 반영 + Tier 0/1/3/4/6 숨겨진 가산)</li>\n        <li>2세트 효과 (2개 장비로 발동하는 가산계)</li>\n        <li>4세트 효과 (4개 장비로 +100 고정 보너스, 각 장비에 균등 배분)</li>\n        <li>기본 스탯 (체/력/방/속/회) → 파생 (기본 스탯·판정 확률)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">계산에 반영되지 않는 효과</h3>\n      <ul class=\"wwm-note-list\">\n        <li>4세트 효과의 조건부 효과 (기혈/진기/받아넘기/중타 트리거 등) — 일률 +100 고정으로 대체</li>\n        <li>첩음 (게임 내 스탯에 영향 없음으로 판명, 스탯 화면에 반영되지 않으므로 계산 대상 외)</li>\n        <li>PvP 전용 정음 (정음 6 슬롯) — 표시만, 계산 기여 없음</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">계산 전제값 (고정)</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>외공 공격 계수:</b> ×1.5</li>\n        <li><b>스탯 공격 계수:</b> ×1.5</li>\n        <li><b>부가 외공:</b> +230</li>\n        <li><b>속성 강화 (주):</b> ×1.5</li>\n        <li><b>속성 강화 (부):</b> ×1.0</li>\n        <li><b>대세계 등급:</b> 현재 업데이트 상태에 따른 상한값 (글로벌 기준)</li>\n        <li><b>무술 등급:</b> 캐릭터 Lv 와 동일</li>\n        <li><b>적 파라미터:</b> charLv ≥ 96 → 적Lv96 (DEF 405 / 판정 저항 1.65), 미만 → 적Lv91 (DEF 350 / 1.45)</li>\n        <li><b>캐릭터 기본 스탯:</b> 캐릭터 천부/싱글 모드 레벨 보너스/오음지태평 을 포함한 모든 스탯 가산값을 <b>최대치까지 도달한 것</b> 으로 산출</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">데이터 버전 관리</h3>\n      <p class=\"wwm-note-p\">게임 측 밸런스 조정 등으로 본 도구의 계산식이 갱신되면, 기존 무격 지수 (baseline) 가 무효화되어 상단에 <b>다시 가져오기 안내 배너</b> 가 표시됩니다. 다시 가져오기 후 새 계산식으로 무격 지수가 재산출됩니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">주요 기능</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>무구 대조:</b> 현재 장비와 신규 장비의 조율/정음 차분 시뮬레이션. 점수 변동을 즉시 프리뷰</li>\n        <li><b>심법 대조:</b> 심법 교체 시뮬레이션. Tier 별 효과와 발동 조건을 비교</li>\n        <li><b>장비 최적화 제안:</b> 조율/정음의 이상적 배분을 역산해, 현재로부터의 개선 스텝을 순차 제시</li>\n        <li><b>프리셋 저장:</b> 시행 중인 장비 구성을 저장·호출 가능</li>\n        <li><b>OBS Share:</b> 사이드바만 표시하는 방송용 URL 을 생성 (투명 배경·색조 커스텀 대응)</li>\n        <li><b>4언어 대응 (일/영/중/한) + 라이트/다크 전환</b></li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">계산식 (요약)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\n각 dmg = (물리 + 속성) × 전 무술 데미지 × 외공 증댐 × 경감\nstatusScore = expected 를 고정 계수로 재계산한 값\nfinalScore  = statusScore + 4-set bonus (4세트 효과 발동 시)</pre>\n    </div>"
+    "ko": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">도구 개요</h3>\n      <p class=\"wwm-note-p\">연운 (Where Winds Meet) 장비 강도 비교·최적화 도구. <b>무격 지수</b> 를 중심으로 장비/조율·정음/무술/심법/장비 세트 효과를 통합하여 데미지 기댓값을 산출하고 장비 개선 방향을 제시합니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">데이터 취득 (전제)</h3>\n      <p class=\"wwm-note-p\">본 도구는 <b>&lt;연운&gt; 공식-데이터 툴</b> 에서 가져온 데이터를 기반으로 동작합니다. 가져오기 전까지는 장비 정보·점수가 표시되지 않습니다. 가져온 데이터는 브라우저 localStorage 에 저장되어 재시작 후에도 유지됩니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">무격 지수 (Martial Index) 란</h3>\n      <p class=\"wwm-note-p\">장비/조율·정음/무술/심법/장비 세트 효과를 모두 포함하여, <b>모든 플레이어 공통의 고정 계수</b> 로 데미지 기댓값을 산출한 지표. 대세계 등급과 적측 파라미터의 개인차를 배제하여 장비의 절대 강도를 비교할 수 있습니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tier 판정 기준</h3>\n      <p class=\"wwm-note-p\"><b>장비 최적화 제안을 모두 적용했을 때의 최대 점수</b> 를 100%로 하여, 현재 무격 지수의 비율로 판정합니다. 가져오기 시 기준 확정, 다시 가져오기 시 갱신됩니다.</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> 최대의 95% 이상</li>\n        <li><b>S:</b> 90% 이상</li>\n        <li><b>A:</b> 80% 이상</li>\n        <li><b>B:</b> 65% 이상</li>\n        <li><b>C:</b> 미만</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">계산에 반영되는 효과</h3>\n      <ul class=\"wwm-note-list\">\n        <li>장비 기본 스탯 (외공 공격력/속성 공격력 등)</li>\n        <li>조율/정음 (조율 1~5, 정음 1~5)</li>\n        <li>무술 천부 효과 (회심률 상한 +Δ, 무술 속성별 공격/관통/속성 데미지 강화 등)</li>\n        <li>심법 Tier 효과 (Tier 2/5 표시 반영 + Tier 0/1/3/4/6 숨겨진 가산)</li>\n        <li>2세트 효과 (2개 장비로 발동하는 가산계)</li>\n        <li>4세트 효과 (4개 장비로 +100 고정 보너스, 각 장비에 균등 배분)</li>\n        <li>기본 스탯 (체/력/방/속/회) → 파생 (기본 스탯·판정 확률)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">계산에 반영되지 않는 효과</h3>\n      <ul class=\"wwm-note-list\">\n        <li>4세트 효과의 조건부 효과 (기혈/진기/받아넘기/중타 트리거 등) — 일률 +100 고정으로 대체</li>\n        <li>첩음 (게임 내 스탯에 영향 없음으로 판명, 스탯 화면에 반영되지 않으므로 계산 대상 외)</li>\n        <li>PvP 전용 정음 (정음 6 슬롯) — 표시만, 계산 기여 없음</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">계산 전제값 (고정)</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>외공 공격 계수:</b> ×1.5</li>\n        <li><b>스탯 공격 계수:</b> ×1.5</li>\n        <li><b>부가 외공:</b> +230</li>\n        <li><b>속성 강화 (주):</b> ×1.5</li>\n        <li><b>속성 강화 (부):</b> ×1.0</li>\n        <li><b>대세계 등급:</b> 현재 업데이트 상태에 따른 상한값 (글로벌 기준)</li>\n        <li><b>무술 등급:</b> 캐릭터 Lv 와 동일</li>\n        <li><b>적 파라미터:</b> charLv ≥ 96 → 적Lv96 (DEF 405 / 판정 저항 1.65), 미만 → 적Lv91 (DEF 350 / 1.45)</li>\n        <li><b>캐릭터 기본 스탯:</b> 캐릭터 천부/싱글 모드 레벨 보너스/오음지태평 을 포함한 모든 스탯 가산값을 <b>최대치까지 도달한 것</b> 으로 산출</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">데이터 버전 관리</h3>\n      <p class=\"wwm-note-p\">게임 측 밸런스 조정 등으로 본 도구의 계산식이 갱신되면, 기존 무격 지수 (baseline) 가 무효화되어 상단에 <b>다시 가져오기 안내 배너</b> 가 표시됩니다. 다시 가져오기 후 새 계산식으로 무격 지수가 재산출됩니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">주요 기능</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>무구 대조:</b> 현재 장비와 신규 장비의 조율/정음 차분 시뮬레이션. 점수 변동을 즉시 프리뷰</li>\n        <li><b>심법 대조:</b> 심법 교체 시뮬레이션. Tier 별 효과와 발동 조건을 비교</li>\n        <li><b>장비 최적화 제안:</b> 조율/정음의 이상적 배분을 역산해, 현재로부터의 개선 스텝을 순차 제시</li>\n        <li><b>프리셋 저장:</b> 시행 중인 장비 구성을 저장·호출 가능</li>\n        <li><b>OBS Share:</b> 사이드바만 표시하는 방송용 URL 을 생성 (투명 배경·색조 커스텀 대응)</li>\n        <li><b>4언어 대응 (일/영/중/한) + 라이트/다크 전환</b></li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">계산식 (요약)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\n각 dmg = (물리 + 속성) × 전 무술 데미지 × 외공 증댐 × 경감\nstatusScore = expected 를 고정 계수로 재계산한 값\nfinalScore  = statusScore + 4-set bonus (4세트 효과 발동 시)</pre>\n    </div>",
+    "vi": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tổng quan công cụ</h3>\n      <p class=\"wwm-note-p\">Công cụ so sánh và tối ưu hóa độ mạnh trang bị của Yến Vân (Where Winds Meet). Lấy <b>Chỉ số Võ cách</b> làm trung tâm, tổng hợp trang bị / điều luật·định âm / võ học / tâm pháp / hiệu ứng bộ trang bị để tính giá trị kỳ vọng sát thương và đề xuất hướng cải thiện trang bị.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Lấy dữ liệu (Tiền đề)</h3>\n      <p class=\"wwm-note-p\">Công cụ này hoạt động dựa trên dữ liệu nhập từ <b>Công cụ Dữ liệu Chính thức Yến Vân</b>. Thông tin trang bị và điểm số sẽ không hiển thị cho đến khi nhập. Dữ liệu nhập được lưu trong localStorage của trình duyệt và được giữ lại sau khi khởi động lại.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Chỉ số Võ cách (Martial Index) là gì</h3>\n      <p class=\"wwm-note-p\">Là chỉ số tính giá trị kỳ vọng sát thương bằng <b>hệ số cố định chung cho tất cả người chơi</b>, bao gồm trang bị / điều luật·định âm / võ học / tâm pháp / hiệu ứng bộ trang bị. Loại bỏ chênh lệch cá nhân về cấp Đại thế giới và tham số kẻ địch, cho phép so sánh độ mạnh tuyệt đối của trang bị.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tiêu chuẩn phán định Tier</h3>\n      <p class=\"wwm-note-p\">Lấy <b>điểm tối đa khi áp dụng toàn bộ đề xuất tối ưu hóa trang bị</b> làm 100%, phán định theo tỷ lệ Chỉ số Võ cách hiện tại. Tiêu chuẩn được xác định khi nhập, cập nhật khi nhập lại.</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> Từ 95% giá trị tối đa trở lên</li>\n        <li><b>S:</b> Từ 90% trở lên</li>\n        <li><b>A:</b> Từ 80% trở lên</li>\n        <li><b>B:</b> Từ 65% trở lên</li>\n        <li><b>C:</b> Dưới mức trên</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Hiệu ứng được phản ánh trong tính toán</h3>\n      <ul class=\"wwm-note-list\">\n        <li>Chỉ số cơ bản của trang bị (Sức tấn công Ngoại công / Sức tấn công Thuộc tính, v.v.)</li>\n        <li>Điều luật / Định âm (Điều luật 1~5, Định âm 1~5)</li>\n        <li>Hiệu ứng thiên phú võ học (Tỷ lệ chí mạng giới hạn +Δ, tăng cường tấn công/xuyên thấu/sát thương thuộc tính theo võ học, v.v.)</li>\n        <li>Hiệu ứng Tier Tâm pháp (Tier 2/5 hiển thị phản ánh + Tier 0/1/3/4/6 cộng ẩn)</li>\n        <li>Hiệu ứng bộ 2 món (cộng dồn khi trang bị 2 món)</li>\n        <li>Hiệu ứng bộ 4 món (cộng cố định +100 khi trang bị 4 món, phân bổ đều cho mỗi trang bị)</li>\n        <li>Chỉ số cơ bản (Thể/Kình/Ngự/Mẫn/Thế) → Phái sinh (Chỉ số cơ bản · Tỷ lệ phán định)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Hiệu ứng không phản ánh trong tính toán</h3>\n      <ul class=\"wwm-note-list\">\n        <li>Hiệu ứng có điều kiện trong bộ 4 món (Khí huyết/Chân khí/Đỡ đòn/Đòn nặng kích hoạt, v.v.) — thay thế đồng nhất bằng +100 cố định</li>\n        <li>Quan âm (đã xác nhận không ảnh hưởng chỉ số trong game, không phản ánh trên màn hình chỉ số nên loại khỏi tính toán)</li>\n        <li>Định âm chuyên PvP (Định âm khe 6) — chỉ hiển thị, không đóng góp vào tính toán</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Giá trị tiền đề tính toán (cố định)</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>Hệ số tấn công Ngoại công:</b> ×1.5</li>\n        <li><b>Hệ số tấn công Chỉ số:</b> ×1.5</li>\n        <li><b>Ngoại công phụ thêm:</b> +230</li>\n        <li><b>Tăng cường thuộc tính (Chính):</b> ×1.5</li>\n        <li><b>Tăng cường thuộc tính (Phụ):</b> ×1.0</li>\n        <li><b>Cấp Đại thế giới:</b> Giá trị giới hạn theo phiên bản cập nhật hiện tại (tiêu chuẩn toàn cầu)</li>\n        <li><b>Cấp võ học:</b> Bằng cấp nhân vật</li>\n        <li><b>Tham số kẻ địch:</b> charLv ≥ 96 → địch Lv96 (DEF 405 / Kháng phán định 1.65), dưới đó → địch Lv91 (DEF 350 / 1.45)</li>\n        <li><b>Chỉ số cơ bản nhân vật:</b> Toàn bộ giá trị cộng chỉ số bao gồm thiên phú nhân vật/thưởng cấp chế độ một mình/Ngũ âm Thái bình lạc được tính như đã <b>đạt tối đa</b></li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Quản lý phiên bản dữ liệu</h3>\n      <p class=\"wwm-note-p\">Khi công thức tính toán của công cụ được cập nhật do điều chỉnh cân bằng bên game, Chỉ số Võ cách (baseline) hiện có sẽ bị hủy và <b>banner nhắc nhập lại</b> hiển thị ở trên cùng. Sau khi nhập lại, Chỉ số Võ cách được tính lại theo công thức mới.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Chức năng chính</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>Đối chiếu Vũ khí:</b> Mô phỏng chênh lệch Điều luật/Định âm giữa trang bị hiện tại và trang bị mới. Xem trước biến động điểm số tức thời</li>\n        <li><b>Đối chiếu Tâm pháp:</b> Mô phỏng thay thế Tâm pháp. So sánh hiệu ứng theo Tier và điều kiện kích hoạt</li>\n        <li><b>Đề xuất Tối ưu hóa Trang bị:</b> Tính ngược phân bổ lý tưởng Điều luật/Định âm và trình bày từng bước cải thiện</li>\n        <li><b>Lưu Cài đặt sẵn:</b> Lưu và gọi lại cấu hình trang bị đang thử nghiệm</li>\n        <li><b>OBS Share:</b> Tạo URL chuyên phát sóng chỉ hiển thị sidebar (hỗ trợ nền trong suốt · tùy chỉnh tông màu)</li>\n        <li><b>Hỗ trợ 5 ngôn ngữ (Nhật/Anh/Trung/Hàn/Việt) + Chuyển đổi Sáng/Tối</b></li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Công thức tính (Tóm tắt)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\nmỗi dmg = (vật lý + thuộc tính) × tăng sát thương toàn võ học × tăng ngoại công × giảm trừ\nstatusScore = expected được tính lại bằng hệ số cố định\nfinalScore  = statusScore + bộ 4 món bonus (khi hiệu ứng bộ 4 món kích hoạt)</pre>\n    </div>"
   },
   "importStep2XinfaTitle": {
     "ja": "心法 Tier",
     "en": "Inner Way Tier",
     "zh": "心法 Tier",
-    "ko": "심법 Tier"
+    "ko": "심법 Tier",
+    "vi": "Tier Tâm pháp"
   },
   "importStep2XinfaHint": {
     "ja": "各心法の到達Tier (1-5)。Tier2 で Tier2効果、Tier5 で Tier5効果 加算。",
     "en": "Tier reached for each Inner Way (1-5). Tier2 adds Tier2 effect, Tier5 adds Tier5 effect.",
     "zh": "各心法达到的 Tier (1-5)。Tier2 加 Tier2 效果,Tier5 加 Tier5 效果。",
-    "ko": "각 심법의 도달 Tier (1-5). Tier2는 Tier2 효과, Tier5는 Tier5 효과 추가."
+    "ko": "각 심법의 도달 Tier (1-5). Tier2는 Tier2 효과, Tier5는 Tier5 효과 추가.",
+    "vi": "Tier đạt của mỗi tâm pháp (1-5). Tier2 thêm hiệu ứng Tier2, Tier5 thêm hiệu ứng Tier5."
   },
   "martialIndex": {
     "ja": "武格指数",
     "en": "Martial Index",
     "zh": "武格指数",
-    "ko": "무격 지수"
+    "ko": "무격 지수",
+    "vi": "Chỉ số Võ cách"
   },
   "martialIndexSub": {
     "ja": "MARTIAL INDEX",
     "en": "MARTIAL INDEX",
     "zh": "MARTIAL INDEX",
-    "ko": "MARTIAL INDEX"
+    "ko": "MARTIAL INDEX",
+    "vi": "MARTIAL INDEX"
   },
   "sbEmptyTitle": {
     "ja": "まだインポートデータがありません。",
     "en": "No imported data yet.",
     "zh": "尚未导入数据。",
-    "ko": "아직 가져온 데이터가 없습니다."
+    "ko": "아직 가져온 데이터가 없습니다.",
+    "vi": "Chưa có dữ liệu nhập."
   },
   "sbEmptyHint": {
     "ja": "上部「IMPORT」ボタンから取り込みできます。",
     "en": "Use the IMPORT button at the top.",
     "zh": "请点击上方「导入」按钮加载。",
-    "ko": "상단의 「가져오기」 버튼을 사용해 주세요."
+    "ko": "상단의 「가져오기」 버튼을 사용해 주세요.",
+    "vi": "Vui lòng dùng nút \"IMPORT\" ở trên cùng."
   },
   "martialHistoryTab": {
     "ja": "武格履歴",
     "en": "Martial Record",
     "zh": "武格历史",
-    "ko": "무격 이력"
+    "ko": "무격 이력",
+    "vi": "Lịch sử Võ cách"
   },
   "historyEmpty": {
     "ja": "まだ履歴がありません。インポート時に自動記録されます。",
     "en": "No history yet. Will auto-record on import.",
     "zh": "暂无记录。导入时将自动记录。",
-    "ko": "아직 기록이 없습니다. 가져오기 시 자동 기록됩니다."
+    "ko": "아직 기록이 없습니다. 가져오기 시 자동 기록됩니다.",
+    "vi": "Chưa có lịch sử. Sẽ tự động ghi khi nhập."
   },
   "locale": {
     "ja": "ja-JP",
     "en": "en-US",
     "zh": "zh-CN",
-    "ko": "ko-KR"
+    "ko": "ko-KR",
+    "vi": "vi-VN"
   },
   "importLabelCharName": {
     "ja": "キャラ名",
     "en": "Character",
     "zh": "角色名",
-    "ko": "캐릭터명"
+    "ko": "캐릭터명",
+    "vi": "Nhân vật"
   },
   "importBaseStats": {
     "ja": "基本ステータス",
     "en": "Base Stats",
     "zh": "基础属性",
-    "ko": "기본 스탯"
+    "ko": "기본 스탯",
+    "vi": "Chỉ số cơ bản"
   },
   "importSubStats": {
     "ja": "副ステータス",
     "en": "Sub Stats",
     "zh": "副属性",
-    "ko": "부 스탯"
+    "ko": "부 스탯",
+    "vi": "Chỉ số phụ"
   },
   "importLabelUID": {
     "ja": "UID",
     "en": "UID",
     "zh": "UID",
-    "ko": "UID"
+    "ko": "UID",
+    "vi": "UID"
   }
 }
