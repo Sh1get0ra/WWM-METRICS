@@ -1,0 +1,600 @@
+{
+  "level": 95,
+  "roleName": "OPT-BENCH",
+  "kongfuMain": 20401,
+  "kongfuSub": 20103,
+  "passiveSlots": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "wearEquipsDetailed": {
+    "1": {
+      "exVo": {
+        "baseAttrs": {
+          "MIN_W_ATK": 53,
+          "MAX_W_ATK": 124
+        },
+        "suffix": 3,
+        "baseAffixes": [
+          {
+            "equipmentDetails": [
+              110101,
+              44.66,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              161202,
+              44.66,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              161203,
+              25.34,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              161204,
+              25.34,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              161205,
+              25.34,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              206001,
+              6.3,
+              0.7,
+              2
+            ]
+          }
+        ]
+      }
+    },
+    "2": {
+      "exVo": {
+        "baseAttrs": {
+          "MIN_W_ATK": 53,
+          "MAX_W_ATK": 124
+        },
+        "suffix": 3,
+        "baseAffixes": [
+          {
+            "equipmentDetails": [
+              110101,
+              44.66,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              161202,
+              44.66,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              161203,
+              25.34,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              161204,
+              25.34,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              161205,
+              25.34,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              206001,
+              6.3,
+              0.7,
+              2
+            ]
+          }
+        ]
+      }
+    },
+    "3": {
+      "exVo": {
+        "baseAttrs": {
+          "HP_MAX": 4614,
+          "W_DEF": 18
+        },
+        "suffix": 2,
+        "baseAffixes": [
+          {
+            "equipmentDetails": [
+              203006,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              200001,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              200002,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              200003,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              200004,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              120101,
+              1698.1999999999998,
+              0.7,
+              2
+            ]
+          }
+        ]
+      }
+    },
+    "4": {
+      "exVo": {
+        "baseAttrs": {
+          "HP_MAX": 9227,
+          "W_DEF": 18
+        },
+        "suffix": 2,
+        "baseAffixes": [
+          {
+            "equipmentDetails": [
+              213006,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              210001,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              210002,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              210003,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              210004,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              120101,
+              1698.1999999999998,
+              0.7,
+              2
+            ]
+          }
+        ]
+      }
+    },
+    "5": {
+      "exVo": {
+        "baseAttrs": {
+          "HP_MAX": 4614,
+          "W_DEF": 36
+        },
+        "suffix": 2,
+        "baseAffixes": [
+          {
+            "equipmentDetails": [
+              223006,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              220001,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              220002,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              220003,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              220004,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              120101,
+              1698.1999999999998,
+              0.7,
+              2
+            ]
+          }
+        ]
+      }
+    },
+    "8": {
+      "exVo": {
+        "baseAttrs": {
+          "HP_MAX": 4614,
+          "W_DEF": 18
+        },
+        "suffix": 2,
+        "baseAffixes": [
+          {
+            "equipmentDetails": [
+              240306,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              240001,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              240002,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              240003,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              240004,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              120101,
+              1698.1999999999998,
+              0.7,
+              2
+            ]
+          }
+        ]
+      }
+    },
+    "9": {
+      "exVo": {
+        "baseAttrs": {
+          "ARCHER_WEAKPOINT_DAMAGE": 286
+        },
+        "suffix": 44,
+        "baseAffixes": [
+          {
+            "equipmentDetails": [
+              8211001,
+              44.66,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              8211002,
+              44.66,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              8211003,
+              25.34,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              8211004,
+              25.34,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              8211005,
+              25.34,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              8211006,
+              25.34,
+              0.7,
+              2
+            ]
+          }
+        ]
+      }
+    },
+    "10": {
+      "exVo": {
+        "baseAttrs": {
+          "MIN_W_ATK": 71
+        },
+        "suffix": 3,
+        "baseAffixes": [
+          {
+            "equipmentDetails": [
+              250001,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              250001,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              250002,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              250003,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              250004,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              250701,
+              6.3,
+              0.7,
+              2
+            ]
+          }
+        ]
+      }
+    },
+    "11": {
+      "exVo": {
+        "baseAttrs": {
+          "MAX_W_ATK": 106
+        },
+        "suffix": 3,
+        "baseAffixes": [
+          {
+            "equipmentDetails": [
+              260001,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              260001,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              260002,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              260003,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              260004,
+              0.034999999999999996,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              260701,
+              6.3,
+              0.7,
+              2
+            ]
+          }
+        ]
+      }
+    },
+    "21": {
+      "exVo": {
+        "baseAttrs": {
+          "ARCHER_DAMAGE": 286
+        },
+        "suffix": 44,
+        "baseAffixes": [
+          {
+            "equipmentDetails": [
+              8711001,
+              44.66,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              8711002,
+              44.66,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              8711003,
+              25.34,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              8711004,
+              25.34,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              8711005,
+              25.34,
+              0.7,
+              2
+            ]
+          },
+          {
+            "equipmentDetails": [
+              8711006,
+              25.34,
+              0.7,
+              2
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

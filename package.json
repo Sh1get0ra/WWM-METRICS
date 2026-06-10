@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "validate:xinfa": "node scripts/validate-xinfa.cjs",
+    "bench:opt": "node scripts/opt-bench.cjs --compare",
     "vrt:baseline": "node scripts/vrt/snapshot.cjs --baseline",
     "vrt:snap": "node scripts/vrt/snapshot.cjs",
     "vrt:compare": "node scripts/vrt/compare.cjs",

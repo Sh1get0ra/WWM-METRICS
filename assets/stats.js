@@ -77,8 +77,101 @@ function _inferEquipLv(slot, eq) {
   return null;
 }
 
+// weapon class generic ダメ (集約 §9 + buildAffixAliveJudge 共有)
+const WEAPON_CLASS_MAP = {
+  sword:        ['swordDmg'],
+  spear:        ['spearDmg'],
+  fan:          ['fanDmg'],
+  moBlade:      ['moBladeDmg'],
+  dualBlades:   ['dualBladesDmg'],
+  umbrella:     ['umbrellaDmg'],
+  ropeDart:     ['ropeDartDmg'],
+  hengBlade:    ['hengBladeDmg'],
+  gauntlet:     ['gauntletDmg']    // 手甲 (天志拳系、 2026年7月武器実装予定)。 affix internal 未割当=値は武器実装後 scout、 現状 表示枠のみ
+};
+const _WEAPON_CLASS_DMG_KEYS = new Set(Object.values(WEAPON_CLASS_MAP).flat());
+// 武学固有 affix prefix → 対応 kongfu (集約 §9.5 + buildAffixAliveJudge 共有)
+const KONGFU_SPECIFIC_PREFIXES = [
+  { prefix: 'namelessSword', kongfus: [10102] },
+  { prefix: 'namelessSpear', kongfus: [10202] },
+  { prefix: 'sword',         kongfus: [10101] },
+  { prefix: 'spear',         kongfus: [10201] },
+  { prefix: 'bleed',         kongfus: [10101] },
+  { prefix: 'panaceaFan',    kongfus: [10301] },
+  { prefix: 'fan',           kongfus: [10302] },
+  { prefix: 'stormbreaker',  kongfus: [20103] },
+  { prefix: 'phalanxbane',   kongfus: [20402] },
+  { prefix: 'moBlade',       kongfus: [20401] },
+  { prefix: 'infernalTwinblades', kongfus: [20501] },
+  { prefix: 'everspringUmb', kongfus: [20603] },
+  { prefix: 'soulshadeUmb',  kongfus: [20602] },
+  { prefix: 'umb',           kongfus: [20601] },
+  { prefix: 'mortalRopeDart',kongfus: [20701] },
+  { prefix: 'unfetteredRopeDart', kongfus: [20702] },
+  { prefix: 'snowparting',   kongfus: [20801] }
+];
+
+// ── 装備最適化用: affix statKey 生死判定 (score 到達性) ──────────
+// 返す judge(statKey) が false = その key は現 roleInfo 構成で computeExpected 入力に
+// 恒等的に到達しない (寄与 0) = swap しても Δ≤0 = greedy で絶対採用されない → 評価 skip 可。
+// 判定根拠 (buildStatParamsSync の集約経路と 1:1 対応、変更時は同期必須):
+//   - derived.from (max(a,b) 分解込み) に登場 → 生 (kongfu derived 入力)
+//   - maxHp/physDef = 敵値で上書き (L603)・physResist = 参照ゼロ → 死
+//   - body/defense = 5行 derived の行き先が maxHp/physDef のみ → 死 (derivedFrom 該当時を除く)
+//   - path 別 min/max/Pen = active path のみ elemMain/elemPen 到達 (voidPen は常時加算 = default 生)
+//   - weaponClass ダメ (xxxDmg) = 装備武器種のみ specMartialBoost (prefix 判定より先、fan 系誤 skip 防止)
+//   - 武学固有 prefix = 装備武術のみ specMartialBoost
+//   - 未知 / calc 直行系 = 生 (保守的に評価)
+function buildAffixAliveJudge(roleInfo) {
+  const activePath = _resolvePath(roleInfo?.kongfuMain);
+  const activeKongfus = new Set([roleInfo?.kongfuMain, roleInfo?.kongfuSub].filter(Boolean).map(Number));
+  const camelize = s => s.replace(/_([a-z])/g, (_, c) => c.toUpperCase());
+  const activeClassDmgKeys = new Set();
+  for (const kid of [roleInfo?.kongfuMain, roleInfo?.kongfuSub]) {
+    const wt = window.WWM_KONGFU?.[kid]?.weaponType;
+    if (wt) for (const k of (WEAPON_CLASS_MAP[camelize(wt)] || [])) activeClassDmgKeys.add(k);
+  }
+  const derivedFrom = new Set();
+  for (const kid of [roleInfo?.kongfuMain, roleInfo?.kongfuSub]) {
+    for (const d of (window.WWM_KONGFU?.[kid]?.derived || [])) {
+      const m = /^max\(([^,]+),([^)]+)\)$/.exec(d.from || '');
+      if (m) { derivedFrom.add(m[1].trim()); derivedFrom.add(m[2].trim()); }
+      else if (d.from) derivedFrom.add(d.from);
+    }
+  }
+  const PATH_MINMAX = {
+    minBellstrike: 'bellstrike', maxBellstrike: 'bellstrike',
+    minStonesplit: 'stonesplit', maxStonesplit: 'stonesplit',
+    minSilkbind:   'silkbind',   maxSilkbind:   'silkbind',
+    minBamboocut:  'bamboocut',  maxBamboocut:  'bamboocut',
+    minVoid:       'voidPath',   maxVoid:       'voidPath'
+  };
+  const PATH_PEN = { bellstrikePen: 'bellstrike', stonesplitPen: 'stonesplit', silkbindPen: 'silkbind', bamboocutPen: 'bamboocut' };
+  const DEAD_ALWAYS = new Set(['maxHp', 'physDef', 'physResist']);
+  const sortedPrefixes = [...KONGFU_SPECIFIC_PREFIXES].sort((a, b) => b.prefix.length - a.prefix.length);
+  return function isAlive(sk) {
+    if (!sk) return false;
+    if (derivedFrom.has(sk)) return true;
+    if (DEAD_ALWAYS.has(sk)) return false;
+    if (sk === 'body' || sk === 'defense') return false;
+    if (sk in PATH_MINMAX) return PATH_MINMAX[sk] === activePath;
+    if (sk in PATH_PEN) return PATH_PEN[sk] === activePath;
+    if (_WEAPON_CLASS_DMG_KEYS.has(sk)) return activeClassDmgKeys.has(sk);
+    for (const def of sortedPrefixes) {
+      if (sk.startsWith(def.prefix)) return def.kongfus.some(id => activeKongfus.has(id));
+    }
+    return true;
+  };
+}
+
 async function buildStatParams(roleInfo, state) {
   await _ensureDicts();
+  return buildStatParamsSync(roleInfo, state);
+}
+
+// 同期版: dict ロード済 (WWM_DS.ready() / ensureCalcData() 済) 前提。
+// 装備最適化 loop 等 大量呼出で promise/microtask 往復を避ける高速経路。
+function buildStatParamsSync(roleInfo, state) {
   const base = window.WWM_LV95_BASE?.stats || {};
   const r = Object.assign({}, base);
   // roleInfo の 5行ステ override (ranking 力/速/会 シミュ用)
@@ -400,17 +493,7 @@ async function buildStatParams(roleInfo, state) {
   // 9. 9293025 (武器種武学ダメ ropeDartDmg等) は active weapon class なら specMartialBoost に統合
   // affix.json の statKey が weapon-class specific (swordDmg/spearDmg/ropeDartDmg/umbrellaDmg等) のものを集計
   // weapon-class generic dmg のみ (武術技毎のQ/Charged/Special/Light は move-specific で別カテゴリ)
-  const WEAPON_CLASS_MAP = {
-    sword:        ['swordDmg'],
-    spear:        ['spearDmg'],
-    fan:          ['fanDmg'],
-    moBlade:      ['moBladeDmg'],
-    dualBlades:   ['dualBladesDmg'],
-    umbrella:     ['umbrellaDmg'],
-    ropeDart:     ['ropeDartDmg'],
-    hengBlade:    ['hengBladeDmg'],
-    gauntlet:     ['gauntletDmg']    // 手甲 (天志拳系、 2026年7月武器実装予定)。 affix internal 未割当=値は武器実装後 scout、 現状 表示枠のみ
-  };
+  // (WEAPON_CLASS_MAP は module スコープ — buildAffixAliveJudge と共有)
   // 指定武術ダメ各 key を 0 初期化 (subItems 表示で未装備武器種が "-" になるのを防ぎ "0.00%" 統一)。
   Object.values(WEAPON_CLASS_MAP).flat().forEach(k => { r[k] = r[k] || 0; });
   const mainKf = window.WWM_KONGFU?.[roleInfo?.kongfuMain];
@@ -442,25 +525,7 @@ async function buildStatParams(roleInfo, state) {
   let specBoostBaseDisplay = weaponClassEffDisplay;
   // 9.5 武学固有 affix (xxxQ/Charged/Special/Light/Rodent/Drone/Healing/Shield/bleed/VariedCombo)
   //     → active kongfuMain/Sub と一致時のみ specMartialBoost に統合 (max)
-  const KONGFU_SPECIFIC_PREFIXES = [
-    { prefix: 'namelessSword', kongfus: [10102] },
-    { prefix: 'namelessSpear', kongfus: [10202] },
-    { prefix: 'sword',         kongfus: [10101] },
-    { prefix: 'spear',         kongfus: [10201] },
-    { prefix: 'bleed',         kongfus: [10101] },
-    { prefix: 'panaceaFan',    kongfus: [10301] },
-    { prefix: 'fan',           kongfus: [10302] },
-    { prefix: 'stormbreaker',  kongfus: [20103] },
-    { prefix: 'phalanxbane',   kongfus: [20402] },
-    { prefix: 'moBlade',       kongfus: [20401] },
-    { prefix: 'infernalTwinblades', kongfus: [20501] },
-    { prefix: 'everspringUmb', kongfus: [20603] },
-    { prefix: 'soulshadeUmb',  kongfus: [20602] },
-    { prefix: 'umb',           kongfus: [20601] },
-    { prefix: 'mortalRopeDart',kongfus: [20701] },
-    { prefix: 'unfetteredRopeDart', kongfus: [20702] },
-    { prefix: 'snowparting',   kongfus: [20801] }
-  ];
+  //     (KONGFU_SPECIFIC_PREFIXES は module スコープ — buildAffixAliveJudge と共有)
   const activeKongfus = new Set([roleInfo?.kongfuMain, roleInfo?.kongfuSub].filter(Boolean).map(Number));
   const sortedPrefixes = [...KONGFU_SPECIFIC_PREFIXES].sort((a,b) => b.prefix.length - a.prefix.length);
   // display版 = 防具 slot 3/4/5/8 idx 5 除外 (sidebar 表示用)
@@ -636,4 +701,4 @@ async function buildStatParams(roleInfo, state) {
   return r;
 }
 
-window.WWMStats = { buildStatParams };
+window.WWMStats = { buildStatParams, buildStatParamsSync, buildAffixAliveJudge };

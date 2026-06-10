@@ -225,11 +225,29 @@
     const wl = params?.worldLv || 14;
     const ssThr = 6700 * Math.pow(0.8, 14 - wl);
     let lastBestNull = false;
+    // ── perf 基盤 (2026-06-10 Phase1: 候補評価を clone レス + 同期 + 刈り込みで高速化。結果は旧実装とバイナリ同一) ──
+    // yield: per-slot setTimeout(0) (nesting clamp 4ms) を廃止 → 8ms 時間予算制。
+    // long task を ~10ms 以下に抑え score アニメの FPS 低下も防ぐ (TODO 23)。
+    const SLICE_MS = 8;
+    const _macroYield = () => new Promise(res => {
+      if (typeof scheduler !== 'undefined' && scheduler.yield) { scheduler.yield().then(res, res); return; }
+      const ch = new MessageChannel();
+      ch.port1.onmessage = () => res();
+      ch.port2.postMessage(null);
+    });
+    let _sliceDeadline = performance.now() + SLICE_MS;
+    // 死 statKey skip: 現 roleInfo 構成で score に到達しない key (寄与恒等0 = Δ≤0 = 絶対不採用) を評価前に刈る。
+    // 判定は stats.js buildAffixAliveJudge (集約経路と 1:1、kongfu 不変なので run 中固定)。
+    const _alive = window.WWMStats.buildAffixAliveJudge
+      ? window.WWMStats.buildAffixAliveJudge(working)
+      : (() => true);
+    // _getAffixOptions cache: slot 内 affix 構成 (= blockedKeys 入力) が変わらない限り再利用
+    const _optionsCache = new Map();
+    // 同期 params 構築 (dict は上の buildStatParams 1 回で ensure 済)
+    const _buildSync = window.WWMStats.buildStatParamsSync || null;
     // iter=0 は弓セット swap のみ評価 (他affixより先に確定)
     // iter>=1 は affix swap (弓セットも再評価)
     for (let iter = 0; iter < MAX_ITER; iter++) {
-      if (_aborted()) return;
-      await new Promise(r => setTimeout(r, 0)); // UI応答性確保
       if (_aborted()) return;
       setProgress(((window.T?.optComputingIter) || '計算中... ({0}回目)').replace('{0}', iter + 1));
       // import gate (Tier 判定中 modal) の擬似 % bar 前進 (gate 非表示時は no-op)
@@ -240,9 +258,6 @@
       // iter=0 は弓セットだけ評価 (affix skip)
       const skipAffix = (iter === 0);
       for (const slot of skipAffix ? [] : slots) {
-        if (_aborted()) return;
-        await new Promise(r => setTimeout(r, 0)); // UI応答性確保
-        if (_aborted()) return;
         const eq = eqDet[slot];
         const affixes = eq?.exVo?.baseAffixes || [];
         for (let idx = 0; idx < affixes.length; idx++) {
@@ -251,33 +266,43 @@
           const cur = affixes[idx]?.equipmentDetails;
           if (!cur) continue;
           const curStatKey = window.WWM_AFFIX?.[cur[0]]?.statKey;
-          const options = _getAffixOptions(cur[0], slot, idx, affixes);
+          const _sig = slot + '|' + idx + '|' + affixes.map(a => a?.equipmentDetails?.[0] ?? '-').join(',');
+          let options = _optionsCache.get(_sig);
+          if (!options) { options = _getAffixOptions(cur[0], slot, idx, affixes); _optionsCache.set(_sig, options); }
           for (const opt of options) {
             if (opt.statKey === curStatKey) continue;
+            if (!_alive(opt.statKey)) continue; // 死 key = Δ≤0 確定 → 評価不要
             const maxVal = _getAffixMax(opt.statKey, charLv);
             if (maxVal == null) continue;
+            if (performance.now() > _sliceDeadline) {
+              await _macroYield();
+              if (_aborted()) return;
+              _sliceDeadline = performance.now() + SLICE_MS;
+            }
+            // in-place swap → 評価 → 復元 (clone 廃止)。finally 復元で working 汚染を遮断
+            const s0 = cur[0], s1 = cur[1], s2 = cur[2], s3 = cur[3];
             try {
-              const ri = JSON.parse(JSON.stringify(working));
-              const newAffix = ri.wearEquipsDetailed[slot].exVo.baseAffixes[idx].equipmentDetails;
-              newAffix[0] = parseInt(opt.id, 10);
-              newAffix[1] = maxVal * TARGET_RATIO;
-              newAffix[2] = TARGET_RATIO;
-              newAffix[3] = 2;
-              const p = await window.WWMStats.buildStatParams(ri, state);
+              cur[0] = parseInt(opt.id, 10);
+              cur[1] = maxVal * TARGET_RATIO;
+              cur[2] = TARGET_RATIO;
+              cur[3] = 2;
+              const p = _buildSync ? _buildSync(working, state) : await window.WWMStats.buildStatParams(working, state);
               window.computeExpected(p);
-              const newScore = _scoreWithBonus(ri);
+              const newScore = _scoreWithBonus(working);
               const delta = newScore - curScore;
               if (delta > 0 && (!best || delta > best.delta)) {
                 best = {
                   slot, slotLabel: _slotLabelI18n(slot), idx,
-                  fromKey: curStatKey, fromName: _affixDisplayName(cur[0]),
-                  fromVal: cur[1], fromRatio: cur[2],
+                  fromKey: curStatKey, fromName: _affixDisplayName(s0),
+                  fromVal: s1, fromRatio: s2,
                   toName: opt.name, toId: parseInt(opt.id, 10),
                   toKey: opt.statKey, toVal: maxVal * TARGET_RATIO, toRatio: TARGET_RATIO,
                   delta, newScore
                 };
               }
-            } catch (e) {}
+            } catch (e) {} finally {
+              cur[0] = s0; cur[1] = s1; cur[2] = s2; cur[3] = s3;
+            }
           }
         }
       }
@@ -290,13 +315,19 @@
         for (const newSfx of bowSuffixOptions) {
           const sfxInt = parseInt(newSfx, 10);
           if (sfxInt === curBowSuffix) continue;
+          if (performance.now() > _sliceDeadline) {
+            await _macroYield();
+            if (_aborted()) return;
+            _sliceDeadline = performance.now() + SLICE_MS;
+          }
+          // in-place suffix swap → 評価 → 復元 (clone 廃止)
+          const sv9 = bowEq9.exVo.suffix, sv21 = bowEq21.exVo ? bowEq21.exVo.suffix : undefined;
           try {
-            const ri = JSON.parse(JSON.stringify(working));
-            ri.wearEquipsDetailed['9'].exVo.suffix = sfxInt;
-            ri.wearEquipsDetailed['21'].exVo.suffix = sfxInt;
-            const p = await window.WWMStats.buildStatParams(ri, state);
+            bowEq9.exVo.suffix = sfxInt;
+            if (bowEq21.exVo) bowEq21.exVo.suffix = sfxInt;
+            const p = _buildSync ? _buildSync(working, state) : await window.WWMStats.buildStatParams(working, state);
             window.computeExpected(p);
-            const newScore = _scoreWithBonus(ri);
+            const newScore = _scoreWithBonus(working);
             const delta = newScore - curScore;
             if (delta > 0 && (!best || delta > best.delta)) {
               const lang = _curLang();
@@ -315,7 +346,10 @@
                 delta, newScore
               };
             }
-          } catch(e) {}
+          } catch(e) {} finally {
+            bowEq9.exVo.suffix = sv9;
+            if (bowEq21.exVo) bowEq21.exVo.suffix = sv21;
+          }
         }
       }
       if (!best) {
@@ -347,7 +381,6 @@
       if (prevTier !== curTier) best.tierUp = `${prevTier} ▶ ${curTier}`;
       steps.push(best);
       curScore = best.newScore;
-      await new Promise(r => setTimeout(r, 0)); // UI yield
     }
     // 復元
     try {
