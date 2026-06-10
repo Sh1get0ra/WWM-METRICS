@@ -74,6 +74,9 @@ function evalDataStore() {
   DS.setLang('en');
   assert.equal(DS.name('martial-affix', 'swordQ'), 'Strategic Q', 'martial-affix synth en (weapon strip)');
 
+  // (e) martial-affix 合成不能 key → bracket miss (TODO 25: stat fallback 死路撤去後の挙動)
+  assert.equal(DS.name('martial-affix', 'notAMartialKey', 'ja'), '[martial-affix:notAMartialKey]', 'martial-affix miss → bracket');
+
   console.log('PASS: data-store name()');
 
   // ── Task 5: t() 委譲テスト ─────────────────────────────────

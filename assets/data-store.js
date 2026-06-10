@@ -227,9 +227,6 @@
     if (cat === 'martial-affix') {
       const synth = _martialAffix(String(id), L);
       if (synth) return synth;
-      // 旧 stat_labels.json 同居キーへの fallback (Phase E 完了まで)
-      const direct = _lookup('stat', id, L);
-      if (direct) return direct;
       return '[' + cat + ':' + id + ']';
     }
     if (cat === 'path-statdisplay') {
