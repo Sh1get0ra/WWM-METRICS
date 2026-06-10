@@ -154,6 +154,17 @@ function evalDataStore() {
   DS.setLang('ja');
   DS.setLang('en');
   assert.equal(DS.t('pathAtkBellstrike'), 'Bellstrike', 'pathAtk<Path> en (affix.atk en = "")');
+  // vi 語順反転 (affix 前置 + base 後置)。 採取記録方針 = memory vi-i18n-composition-bug
+  DS.setLang('vi');
+  assert.equal(DS.t('pathBellstrike'),    'Minh Kim',                       'path<Path> vi (base のみ)');
+  assert.equal(DS.t('pathAtkBellstrike'), 'Tấn công Minh Kim',              'pathAtk<Path> vi (語順反転)');
+  assert.equal(DS.t('pathPenVoid'),       'Xuyên thấu Vô Tướng',            'pathPen<Path> vi (語順反転)');
+  assert.equal(DS.t('pathDmgBamboocut'),  'Gia tăng Sát thương Phá Trúc',   'pathDmg<Path> vi (語順反転)');
+  assert.equal(DS.t('minBamboocut'),      'tối thiểu Tấn công Phá Trúc',    'min<Path> vi (語順反転)');
+  assert.equal(DS.t('maxVoid'),           'tối đa Tấn công Vô Tướng',       'max<Path> vi (語順反転)');
+  assert.equal(DS.t('minElemSub'),        'tối thiểu Tấn công Thuộc tính phụ', 'nonPathBase elemSub vi (語順反転)');
+  assert.equal(DS.t('physPen'),           'Xuyên thấu Ngoại công',          'short stat physPen vi (語順反転)');
+  DS.setLang('ja');
   console.log('PASS: data-store path i18n synth');
 
   // ── Task 9-4: path-statdisplay (旧 build-labels.js _statDisplay) ──

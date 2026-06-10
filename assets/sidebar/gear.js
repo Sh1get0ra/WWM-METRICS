@@ -1007,7 +1007,7 @@
       langSel.id = 'wwmCmpOcrLang';
       langSel.className = 'wwm-ocr-lang-sel';
       langSel.hidden = true;
-      langSel.innerHTML = ['ja','en','zh','ko'].map(l => `<option value="${l}">${l}</option>`).join('');
+      langSel.innerHTML = ['ja','en','zh','ko','vi'].map(l => `<option value="${l}">${l}</option>`).join('');
       langSel.value = window.currentLang || 'ja';
       ocrBtn.insertAdjacentElement('afterend', langSel);
       langSel.addEventListener('change', () => { if (_lastImg) _applyOcr(_lastImg, langSel.value); });

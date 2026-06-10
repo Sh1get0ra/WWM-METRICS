@@ -62,7 +62,11 @@
     if (!path || !path.pathBase || !path.affix) return;
     const ui = data.ui = data.ui || {};
     const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
-    const LANGS = ['ja', 'en', 'zh', 'ko'];
+    const LANGS = ['ja', 'en', 'zh', 'ko', 'vi'];
+    // vi = 語順反転 (affix 前置 + base 後置)。 例: ja「鋼鳴攻撃」/ vi「Tấn công Minh Kim」
+    // path.affix.{atk,pen,dmgUp}.vi は trailing space 付きで採取 (pen.vi="Xuyên thấu " 等)、
+    // base.vi は trailing space 無し (pathBase.vi="Minh Kim") → affix + base 連結で自然 spacing。
+    const VI_REORDER = true;
     for (const [p, base] of Object.entries(path.pathBase)) {
       const C = cap(p);
       const keys = {
@@ -76,12 +80,24 @@
       for (const L of LANGS) {
         const b = base[L]; if (!b) continue;
         const atk = path.affix.atk?.[L] || '';
-        keys['path' + C][L]    = b;
-        keys['pathAtk' + C][L] = b + atk;
-        keys['pathPen' + C][L] = b + (path.affix.pen?.[L] || '');
-        keys['pathDmg' + C][L] = b + (path.affix.dmgUp?.[L] || '');
-        keys['min' + C][L]     = (path.affix.min?.[L] || '') + b + atk;
-        keys['max' + C][L]     = (path.affix.max?.[L] || '') + b + atk;
+        const pen = path.affix.pen?.[L] || '';
+        const dmg = path.affix.dmgUp?.[L] || '';
+        const mn  = path.affix.min?.[L] || '';
+        const mx  = path.affix.max?.[L] || '';
+        keys['path' + C][L] = b;
+        if (VI_REORDER && L === 'vi') {
+          keys['pathAtk' + C][L] = atk + b;
+          keys['pathPen' + C][L] = pen + b;
+          keys['pathDmg' + C][L] = dmg + b;
+          keys['min' + C][L]     = mn + atk + b;
+          keys['max' + C][L]     = mx + atk + b;
+        } else {
+          keys['pathAtk' + C][L] = b + atk;
+          keys['pathPen' + C][L] = b + pen;
+          keys['pathDmg' + C][L] = b + dmg;
+          keys['min' + C][L]     = mn + b + atk;
+          keys['max' + C][L]     = mx + b + atk;
+        }
       }
       for (const [k, v] of Object.entries(keys)) {
         if (!ui[k]) ui[k] = v; // 既存キー (旧 ui.json 重複) を上書きしない
@@ -96,8 +112,15 @@
       for (const L of LANGS) {
         const b = base[L]; if (!b) continue;
         const atk = path.affix.atk?.[L] || '';
-        keys['min' + C][L] = (path.affix.min?.[L] || '') + b + atk;
-        keys['max' + C][L] = (path.affix.max?.[L] || '') + b + atk;
+        const mn  = path.affix.min?.[L] || '';
+        const mx  = path.affix.max?.[L] || '';
+        if (VI_REORDER && L === 'vi') {
+          keys['min' + C][L] = mn + atk + b;
+          keys['max' + C][L] = mx + atk + b;
+        } else {
+          keys['min' + C][L] = mn + b + atk;
+          keys['max' + C][L] = mx + b + atk;
+        }
       }
       for (const [k, v] of Object.entries(keys)) {
         if (!ui[k]) ui[k] = v;
@@ -117,7 +140,8 @@
           const affKey = SUF_KEY[suf];
           for (const L of LANGS) {
             const b = base[L]; if (!b) continue;
-            v[L] = b + (path.affix[affKey]?.[L] || '');
+            const af = path.affix[affKey]?.[L] || '';
+            v[L] = (VI_REORDER && L === 'vi') ? (af + b) : (b + af);
           }
           if (!ui[k]) ui[k] = v;
         }

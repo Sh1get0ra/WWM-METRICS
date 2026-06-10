@@ -125,11 +125,11 @@ function _loadSavedLang() {
     const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
     if (isObs) {
       const urlLang = new URLSearchParams(location.search).get('lang');
-      if (urlLang && ['ja','en','zh','ko'].includes(urlLang) && urlLang !== 'ja') setLang(urlLang);
+      if (urlLang && ['ja','en','zh','ko','vi'].includes(urlLang) && urlLang !== 'ja') setLang(urlLang);
       return;
     }
     const saved = WWMHelpers.storage.loadStr('wwm_lang');
-    if (saved && ['ja','en','zh','ko'].includes(saved) && saved !== 'ja') setLang(saved);
+    if (saved && ['ja','en','zh','ko','vi'].includes(saved) && saved !== 'ja') setLang(saved);
     else if (!saved) _showLangPicker();
   } catch(e) {}
 }
@@ -146,6 +146,7 @@ function _showLangPicker() {
         <button class="wwm-btn-secondary" data-lang-pick="en">English</button>
         <button class="wwm-btn-secondary" data-lang-pick="zh">中文</button>
         <button class="wwm-btn-secondary" data-lang-pick="ko">한국어</button>
+        <button class="wwm-btn-secondary" data-lang-pick="vi">Tiếng Việt</button>
       </div>
     </div>
   `;
