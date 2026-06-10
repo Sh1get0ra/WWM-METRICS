@@ -535,6 +535,9 @@ const _STAT_LABELS_PROXY = new Proxy({}, {
       // path系等 = ui に統合済 → t() で引く
       const t = window.WWM_DS.t(k);
       if (t !== k) return t;
+      // 武術 affix (swordQ/moBladeShield/bleed 等) = stat 物理保持 撤去 → _martialAffix 合成で取得
+      const m = window.WWM_DS.name('martial-affix', k, L);
+      if (m && m.indexOf('[martial-affix:') !== 0) return m;
     }
     return undefined;
   }
