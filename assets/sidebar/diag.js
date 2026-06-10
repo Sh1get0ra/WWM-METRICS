@@ -234,7 +234,7 @@
           text: _tpl(T_.diagAffix6Mismatch || '武器系定音オプション 全4スロット {0} だが {1} の方が期待値高 (外功貫通+1={2} / 属性貫通+1={3})', m.current, m.better, penEval.dPhysPer1.toFixed(2), penEval.dElemPer1.toFixed(2))
         }]);
       } else if (m?.type === 'mixed') {
-        const _Pp=T_.penPhysShort||'外功', _Vv=T_.penVoidShort||'無相', _Ot=T_.penOther||'他';
+        const _Pp=T_.phys||'外功', _Vv=T_.pathVoid||'無相', _Ot=T_.penOther||'他';
         const breakdown = `${_Pp}${m.counts.physPen}/${_Vv}${m.counts.voidPen}${m.counts.other?`/${_Ot}${m.counts.other}`:''}`;
         merged = merged.filter(it => it.type !== 'good').concat([{
           type: 'warn',

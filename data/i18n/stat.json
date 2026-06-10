@@ -595,5 +595,12 @@
     "zh": "属攻伤害加成",
     "ko": "속성 공격 피해 보너스",
     "vi": "Gia tăng Sát thương thuộc tính"
+  },
+  "phys": {
+    "ja": "外功",
+    "en": "Phys",
+    "zh": "外功",
+    "ko": "외공",
+    "vi": "Ngoại công"
   }
 }

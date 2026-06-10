@@ -258,18 +258,6 @@
     "zh": "PvP专用定音",
     "ko": "PvP 전용 정음"
   },
-  "penPhysShort": {
-    "ja": "外功",
-    "en": "Phys",
-    "zh": "外功",
-    "ko": "외공"
-  },
-  "penVoidShort": {
-    "ja": "無相",
-    "en": "Void",
-    "zh": "无相",
-    "ko": "무상"
-  },
   "penOther": {
     "ja": "他",
     "en": "other",

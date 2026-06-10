@@ -105,6 +105,9 @@ function evalDataStore() {
   assert.equal(DS.t('addCritRate'),     '付加会心率',       't() stat addCritRate ja (移管後)');
   assert.equal(DS.t('addSympathyRate'), '付加会意率',       't() stat addSympathyRate ja (移管後)');
   assert.equal(DS.t('specMartialBoost'),'指定武術効果強化', 't() stat specMartialBoost ja (移管後)');
+  // 短縮表記統合 (2026-06-10): stat.phys 新設 / penVoidShort → pathVoid
+  assert.equal(DS.t('phys'),     '外功', 't() stat phys 短縮 (←旧 penPhysShort)');
+  assert.equal(DS.t('pathVoid'), '無相', 't() path合成 pathVoid 短縮 (←旧 penVoidShort)');
   // vi 退化なし (2026-06-10: stat.json に bossDmg/allWeaponDmg vi 追記)
   DS.setLang('vi');
   assert.equal(DS.t('bossDmg'),      'Tăng sát thương đối với đơn vị thủ lĩnh', 't() bossDmg vi');
