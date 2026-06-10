@@ -167,24 +167,6 @@
     "zh": "基本属性",
     "ko": "기본 스탯"
   },
-  "cardItemKongfu": {
-    "ja": "武術",
-    "en": "Martial arts",
-    "zh": "武学",
-    "ko": "무술"
-  },
-  "cardItemXinfa": {
-    "ja": "心法",
-    "en": "Inner Way",
-    "zh": "心法",
-    "ko": "심법"
-  },
-  "cardItemQishu": {
-    "ja": "奇術",
-    "en": "Mystic arts",
-    "zh": "奇术",
-    "ko": "기술 (奇術)"
-  },
   "cardSave": {
     "ja": "画像を保存",
     "en": "Save image",
