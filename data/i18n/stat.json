@@ -95,56 +95,56 @@
     "vi": "Tăng hiệu quả toàn bộ võ học"
   },
   "swordDmg": {
-    "ja": "剣ダメ強化",
+    "ja": "剣武術ダメ",
     "en": "Sword DMG",
     "zh": "剑武学增伤",
     "ko": "검 무술 피해 증가",
     "vi": "Kiếm Võ học Tăng sát thương"
   },
   "spearDmg": {
-    "ja": "槍ダメ強化",
+    "ja": "槍武術ダメ",
     "en": "Spear DMG",
     "zh": "枪武学增伤",
     "ko": "창 무술 피해 증가",
     "vi": "Võ học súng tăng sát thương"
   },
   "moBladeDmg": {
-    "ja": "墨刀ダメ強化",
+    "ja": "斬馬刀武術ダメ",
     "en": "Mo Blade DMG",
     "zh": "陌刀武学增伤",
     "ko": "맥도 무술 피해 증가",
     "vi": "Võ học đao Mạc tăng sát thương"
   },
   "dualBladesDmg": {
-    "ja": "双剣ダメ強化",
-    "en": "Twinblades DMG",
+    "ja": "双剣武術ダメ",
+    "en": "Dual Blades DMG",
     "zh": "双刀武学增伤",
     "ko": "쌍도 무술 피해 증가",
     "vi": "Võ học song đao tăng sát thương"
   },
   "fanDmg": {
-    "ja": "扇ダメ強化",
+    "ja": "扇武術ダメ",
     "en": "Fan DMG",
     "zh": "扇武学增效",
     "ko": "부채 무술 효과 증가",
     "vi": "Võ học quạt tăng hiệu quả"
   },
   "umbrellaDmg": {
-    "ja": "傘ダメ強化",
+    "ja": "傘武術ダメ",
     "en": "Umbrella DMG",
     "zh": "伞武学增效",
     "ko": "우산 무술 효과 증가",
     "vi": "Võ học dù tăng hiệu quả"
   },
   "hengBladeDmg": {
-    "ja": "横刀ダメ",
+    "ja": "横刀武術ダメ",
     "en": "Heng Blade DMG",
     "zh": "横刀武学增伤",
     "ko": "횡도 무술 피해 증가",
     "vi": "Võ học hoành đao tăng sát thương"
   },
   "ropeDartDmg": {
-    "ja": "縄鏢ダメ",
+    "ja": "縄鏢武術ダメ",
     "en": "Rope Dart DMG",
     "zh": "绳镖武学增伤",
     "ko": "승표 무술 피해 증가",
