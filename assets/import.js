@@ -498,24 +498,9 @@ function _xinfaName(id) {
   return n.indexOf('[xinfa:') === 0 ? ('心法ID ' + id) : n;
 }
 async function _loadDicts() {
-  const dictMap = {
-    WWM_KONGFU: 'kongfu',
-    WWM_XINFA: 'xinfa',
-    WWM_SETS: 'sets',
-    WWM_AFFIX: 'affix',
-    WWM_XINFA_ICONS: 'xinfa_icons',
-    WWM_KONGFU_ICONS: 'kongfu_icons',
-    WWM_GEAR_SLOT_ICONS: 'gear_slot_icons',
-    WWM_AVATAR_ICONS: 'avatar_icons'
-  };
-  const tasks = [];
-  for (const [winKey, fileName] of Object.entries(dictMap)) {
-    if (!window[winKey]) {
-      tasks.push(WWMHelpers.fetch.loadDict(fileName).then(d => { window[winKey] = d; }));
-    }
-  }
+  // dictMap 唯一源 = data-store.js CALC_DICTS (P4-mini 供給一元化 2026-06-10)
   try {
-    await Promise.all(tasks);
+    await window.WWM_DS.ensureCalcData();
   } catch(e) { console.warn('[WWM Import] dict load failed:', e); }
 }
 

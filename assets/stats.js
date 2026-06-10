@@ -21,25 +21,8 @@ const _ENHANCE_MAX = {
 };
 
 async function _ensureDicts() {
-  const dictMap = {
-    WWM_LV95_BASE: 'lv95_base',
-    WWM_KONGFU: 'kongfu',
-    WWM_XINFA: 'xinfa',
-    WWM_XINFA_ICONS: 'xinfa_icons',
-    WWM_KONGFU_ICONS: 'kongfu_icons',
-    WWM_AVATAR_ICONS: 'avatar_icons',
-    WWM_GEAR_SLOT_ICONS: 'gear_slot_icons',
-    WWM_SETS: 'sets',
-    WWM_AFFIX: 'affix',
-    WWM_EQUIP_BASE_BY_LV: 'equip_base_by_lv'
-  };
-  const tasks = [];
-  for (const [winKey, fileName] of Object.entries(dictMap)) {
-    if (!window[winKey]) {
-      tasks.push(WWMHelpers.fetch.loadDict(fileName).then(d => { window[winKey] = d; }));
-    }
-  }
-  await Promise.all(tasks);
+  // dictMap 唯一源 = data-store.js CALC_DICTS (P4-mini 供給一元化 2026-06-10)
+  await window.WWM_DS.ensureCalcData();
 }
 
 function _resolvePath(kongfuMain) {

@@ -10,9 +10,49 @@
   // (例: tkey='minPhys' → 「最小外功攻撃」)。 game_lexicon ⊂ stat の重複 (physDef) は game_lexicon 優先で既存挙動維持。
   const T_CHAIN = ['ui', 'game_lexicon', 'stat'];
   const VERSION = (typeof window !== 'undefined' && window.WWM_DISPLAY_VERSION) || 11;
+  // 計算/icon dict (data/*.json) の供給一元化 (P4-mini 2026-06-10)。
+  // dictMap の唯一源 = ここ。 window.WWM_* は DataStore が供給する互換 read view (callsite は直読み続行で正式承認)。
+  // cache buster は SCORE_VERSION (計算 data) — i18n の DISPLAY_VERSION と独立。
+  const CALC_DICTS = {
+    WWM_LV95_BASE:        'lv95_base',
+    WWM_KONGFU:           'kongfu',
+    WWM_XINFA:            'xinfa',
+    WWM_SETS:             'sets',
+    WWM_AFFIX:            'affix',
+    WWM_EQUIP_BASE_BY_LV: 'equip_base_by_lv',
+    WWM_XINFA_ICONS:      'xinfa_icons',
+    WWM_KONGFU_ICONS:     'kongfu_icons',
+    WWM_AVATAR_ICONS:     'avatar_icons',
+    WWM_GEAR_SLOT_ICONS:  'gear_slot_icons'
+  };
   let currentLang = 'ja';
-  const data = Object.create(null); // { kongfu: {...}, xinfa: {...}, ... }
+  const data = Object.create(null); // { kongfu: {...}, xinfa: {...}, ... } (i18n)
+  const calc = Object.create(null); // { kongfu: {...}, affix: {...}, ... } (計算/icon dict 内部参照)
   let readyPromise = null;
+  let calcPromise = null;
+
+  // 計算/icon dict load (idempotent)。 失敗 = {} で続行 (旧 loadDict 互換、 throw しない)。
+  function ensureCalcData() {
+    if (calcPromise) return calcPromise;
+    const sv = (typeof window !== 'undefined' && window.WWM_SCORE_VERSION) || 7;
+    calcPromise = Promise.all(Object.entries(CALC_DICTS).map(async function ([winKey, fileName]) {
+      if (typeof window !== 'undefined' && window[winKey]) {
+        calc[fileName] = window[winKey]; // 先行ロード分 (テスト注入等) を尊重
+        return;
+      }
+      let d = {};
+      try {
+        const res = await fetch('data/' + fileName + '.json?v=' + sv);
+        if (res.ok) d = await res.json();
+        else console.warn('[DataStore] calc dict fetch failed:', fileName, res.status);
+      } catch (e) {
+        console.warn('[DataStore] calc dict fetch failed:', fileName, e);
+      }
+      calc[fileName] = d;
+      if (typeof window !== 'undefined') window[winKey] = d;
+    })).then(function () {});
+    return calcPromise;
+  }
 
   // path 系 i18n key を data.path から動的合成して data.ui に注入 (旧 build-labels.js applyPathLabels の (1) 役割)。
   // 旧 form: path<Path> / pathAtk<Path> / pathPen<Path> / pathDmg<Path> / min<Path> / max<Path> (cap)。
@@ -87,11 +127,13 @@
 
   function ready() {
     if (readyPromise) return readyPromise;
-    readyPromise = Promise.all(CATS.map(async (cat) => {
+    const i18nLoad = Promise.all(CATS.map(async (cat) => {
       const res = await fetch('data/i18n/' + cat + '.json?v=' + VERSION);
       if (!res.ok) throw new Error('DataStore: failed to fetch ' + cat + '.json (' + res.status + ')');
       data[cat] = await res.json();
     })).then(() => { _injectPathI18nKeys(); });
+    // 計算 dict も同時 load (i18n 失敗 = throw / calc 失敗 = {} 続行 の従来semantics維持)
+    readyPromise = Promise.all([i18nLoad, ensureCalcData()]).then(() => {});
     return readyPromise;
   }
 
@@ -134,9 +176,9 @@
   };
 
   function _kongfuWeaponType(id) {
-    if (typeof window !== 'undefined' && window.WWM_KONGFU && window.WWM_KONGFU[String(id)]) {
-      return window.WWM_KONGFU[String(id)].weaponType || null;
-    }
+    // 内部 calc 参照優先 (層逆転解消)。 ready() 前の呼出のみ window fallback (互換)
+    const kf = calc.kongfu || (typeof window !== 'undefined' && window.WWM_KONGFU) || null;
+    if (kf && kf[String(id)]) return kf[String(id)].weaponType || null;
     return null;
   }
 
@@ -208,7 +250,7 @@
     return key;
   }
 
-  const api = { ready: ready, setLang: setLang, getLang: getLang, name: name, t: t, has: _has };
+  const api = { ready: ready, ensureCalcData: ensureCalcData, setLang: setLang, getLang: getLang, name: name, t: t, has: _has };
   if (typeof window !== 'undefined') {
     window.WWM_DS = api;
     window.DataStore = api; // 兄貴可読性用 alias

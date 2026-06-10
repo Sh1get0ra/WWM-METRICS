@@ -1,6 +1,6 @@
 // WWM-METRICS fetch helpers
-// Phase 1.2.5: dict/JSON/SVG/image fetch の重複logic を統一。
-// stats.js + import.js + export.js 各所で散在 fetch を集約予定。
+// Phase 1.2.5: JSON/SVG/image fetch の重複logic を統一。
+// dict load (data/*.json) は data-store.js ensureCalcData に一元化済 (P4-mini 2026-06-10、 旧 loadDict 撤去)。
 
 (function () {
   'use strict';
@@ -9,25 +9,6 @@
   const _svgCache = new Map();
 
   const fetchH = {
-    /**
-     * data/{name}.json を fetch + JSON parse。 失敗時 default。
-     * @param {string} name - 'kongfu' / 'xinfa' / 'sets' / 'affix' / etc
-     * @param {object} [opts]
-     * @param {*} [opts.default={}] - 失敗時返却値
-     * @param {number} [opts.version] - cache buster (?v=N)
-     */
-    async loadDict(name, opts = {}) {
-      const defaultValue = opts.default !== undefined ? opts.default : {};
-      const version = opts.version != null ? opts.version : (window.WWM_SCORE_VERSION || 7);
-      try {
-        const r = await fetch(`data/${name}.json?v=${version}`);
-        if (!r.ok) return defaultValue;
-        return await r.json();
-      } catch (_) {
-        return defaultValue;
-      }
-    },
-
     /**
      * 任意 URL から JSON fetch。
      */

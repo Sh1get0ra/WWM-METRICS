@@ -33,10 +33,13 @@ function evalDataStore() {
   // ── Task 4: name() 実装テスト ───────────────────────────────
   // fetch stub を実 file 読みに切替 + WWM_KONGFU stub (weaponType lookup 用)
   const DATA = path.join(__dirname, '..', 'data', 'i18n');
+  const DATA_ROOT = path.join(__dirname, '..', 'data');
   global.fetch = async (url) => {
+    // i18n + 計算 dict (ensureCalcData、 P4-mini 供給一元化) 両対応
     const m = url.match(/data\/i18n\/(\w+)\.json/);
-    if (!m) throw new Error('unexpected fetch ' + url);
-    const file = path.join(DATA, m[1] + '.json');
+    const mc = m ? null : url.match(/data\/(\w+)\.json/);
+    if (!m && !mc) throw new Error('unexpected fetch ' + url);
+    const file = m ? path.join(DATA, m[1] + '.json') : path.join(DATA_ROOT, mc[1] + '.json');
     if (!fs.existsSync(file)) return { ok: false, status: 404 };
     return { ok: true, json: async () => JSON.parse(fs.readFileSync(file, 'utf8')) };
   };
@@ -46,6 +49,13 @@ function evalDataStore() {
   evalDataStore();
   const DS = global.window.WWM_DS;
   await DS.ready();
+
+  // ── P4-mini: 計算 dict 供給 (ready() が window.WWM_* を充填) ──
+  assert.ok(global.window.WWM_AFFIX && Object.keys(global.window.WWM_AFFIX).length > 0, 'WWM_AFFIX supplied by DataStore');
+  assert.ok(global.window.WWM_SETS && global.window.WWM_SETS.weaponSets, 'WWM_SETS supplied by DataStore');
+  assert.ok(global.window.WWM_KONGFU['10101'], 'WWM_KONGFU preloaded stub respected');
+  assert.strictEqual(DS.ensureCalcData(), DS.ensureCalcData(), 'ensureCalcData idempotent');
+  console.log('PASS: data-store calc dict supply');
 
   // (a) 単純取得 (kongfu 武術 本体名)
   assert.equal(DS.name('kongfu', 10101, 'ja'), '九変の剣', 'kongfu ja');
