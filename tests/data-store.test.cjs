@@ -78,6 +78,17 @@ function evalDataStore() {
   assert.equal(DS.t('NONEXISTENT_KEY'), 'NONEXISTENT_KEY', 't() unknown key passthrough');
   console.log('PASS: data-store t()');
 
+  // ── game_lexicon fallback (2026-06-10: ui.json から純粋ゲーム用語を分離) ──
+  DS.setLang('ja');
+  assert.equal(DS.t('critRate'), '会心率', 't() game_lexicon ja (ui miss → game_lexicon)');
+  assert.equal(DS.t('slotHelm'), '冠', 't() game_lexicon slot ja');
+  assert.equal(DS.t('setEff_jadeware_1'), '碧玉一式', 't() game_lexicon setEff ja');
+  DS.setLang('en');
+  assert.equal(DS.t('critRate'), 'Critical Rate', 't() game_lexicon en');
+  // ui優先: importBtn は ui.json 残置 → ui.json が勝つ
+  assert.equal(DS.t('importBtn'), 'IMPORT', 't() ui優先 (ui.json に居る間は game_lexicon fallback 走らない)');
+  console.log('PASS: data-store game_lexicon fallback');
+
   // ── Task 9-2: path系 i18n 合成 (旧 build-labels.js applyPathLabels(1) 役割) ──
   DS.setLang('ja');
   assert.equal(DS.t('pathBellstrike'), '鋼鳴', 'path<Path> ja');

@@ -4,7 +4,10 @@
 // 実装 plan : docs/superpowers/plans/2026-06-09-i18n-unification.md
 (function () {
   'use strict';
-  const CATS = ['kongfu', 'xinfa', 'sets', 'stat', 'path', 'skilltype', 'weapontype', 'ui'];
+  const CATS = ['kongfu', 'xinfa', 'sets', 'stat', 'path', 'skilltype', 'weapontype', 'ui', 'game_lexicon'];
+  // t() lookup chain: ui (ツール独自) → game_lexicon (純粋ゲーム用語)。
+  // game_lexicon は ui.json から分離 (2026-06-10、 言語追加時の採取経路 = スクショ vs 機械翻訳 を分けるため)。
+  const T_CHAIN = ['ui', 'game_lexicon'];
   const VERSION = (typeof window !== 'undefined' && window.WWM_DISPLAY_VERSION) || 11;
   let currentLang = 'ja';
   const data = Object.create(null); // { kongfu: {...}, xinfa: {...}, ... }
@@ -155,9 +158,11 @@
   }
 
   function t(key) {
-    const d = data.ui;
-    if (!d || !d[key]) return key;
-    return d[key][currentLang] || d[key].ja || key;
+    for (const cat of T_CHAIN) {
+      const d = data[cat];
+      if (d && d[key]) return d[key][currentLang] || d[key].ja || key;
+    }
+    return key;
   }
 
   const api = { ready: ready, setLang: setLang, getLang: getLang, name: name, t: t, has: _has };

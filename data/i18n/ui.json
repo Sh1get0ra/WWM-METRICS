@@ -59,42 +59,6 @@
     "zh": "怪物数据",
     "ko": "적 데이터"
   },
-  "minPhysATK": {
-    "ja": "最小物理ATK",
-    "en": "Min Physical ATK",
-    "zh": "最小外功攻击",
-    "ko": "최소 외공 공격"
-  },
-  "maxPhysATK": {
-    "ja": "最大物理ATK",
-    "en": "Max Physical ATK",
-    "zh": "最大外功攻击",
-    "ko": "최대 외공 공격"
-  },
-  "minElemMain": {
-    "ja": "最小属性ATK（主）",
-    "en": "Min Elemental ATK (Main)",
-    "zh": "最小属性攻击（主）",
-    "ko": "최소 속성 공격（주）"
-  },
-  "maxElemMain": {
-    "ja": "最大属性ATK（主）",
-    "en": "Max Elemental ATK (Main)",
-    "zh": "最大属性攻击（主）",
-    "ko": "최대 속성 공격（주）"
-  },
-  "minElemSub": {
-    "ja": "最小属性攻撃(副)",
-    "en": "Sub Elem ATK Min",
-    "zh": "最小属性攻击(副)",
-    "ko": "최소 속성 공격(부)"
-  },
-  "maxElemSub": {
-    "ja": "最大属性攻撃(副)",
-    "en": "Sub Elem ATK Max",
-    "zh": "最大属性攻击(副)",
-    "ko": "최대 속성 공격(부)"
-  },
   "jgInputVal": {
     "ja": "入力値",
     "en": "Input",
@@ -106,193 +70,6 @@
     "en": "Applied",
     "zh": "适用值",
     "ko": "적용값"
-  },
-  "hitRate": {
-    "ja": "命中率",
-    "en": "Hit Rate",
-    "zh": "精准率",
-    "ko": "정확도",
-    "vi": "Tỷ lệ chính xác"
-  },
-  "critRate": {
-    "ja": "会心率",
-    "en": "Critical Rate",
-    "zh": "会心率",
-    "ko": "치명타 확률",
-    "vi": "Tỷ lệ chí mạng"
-  },
-  "sympathyRate": {
-    "ja": "会意率",
-    "en": "Affinity Rate",
-    "zh": "会意率",
-    "ko": "각성 확률",
-    "vi": "Tỷ lệ hiểu ý"
-  },
-  "addCritRate": {
-    "ja": "付加会心率",
-    "en": "Added Critical Rate",
-    "zh": "直接会心率",
-    "ko": "추가 치명타 확률",
-    "vi": "Tỷ lệ chí mạng trực tiếp"
-  },
-  "addSympathyRate": {
-    "ja": "付加会意率",
-    "en": "Added Affinity Rate",
-    "zh": "直接会意率",
-    "ko": "추가 각성 확률",
-    "vi": "Tỷ lệ hiểu ý trực tiếp"
-  },
-  "critBoost": {
-    "ja": "会心攻撃強化",
-    "en": "Critical DMG Bonus",
-    "zh": "会心伤害加成",
-    "ko": "치명타 피해 보너스",
-    "vi": "Gia tăng Sát thương chí mạng"
-  },
-  "allMartialBoost": {
-    "ja": "全武術効果増加",
-    "en": "All Martial Arts Effect +",
-    "zh": "全部武学增效",
-    "ko": "모든 무술의 효과 증가",
-    "vi": "Tăng hiệu quả toàn bộ võ học"
-  },
-  "sympathyBoost": {
-    "ja": "会意攻撃強化",
-    "en": "Affinity DMG Bonus",
-    "zh": "会意伤害加成",
-    "ko": "각성 피해 보너스"
-  },
-  "specMartialBoost": {
-    "ja": "指定武術効果強化",
-    "en": "Designated Martial Arts Effect +",
-    "zh": "指定武学增效",
-    "ko": "특정 무술 효과 증가",
-    "vi": "Tăng hiệu quả võ học được chỉ định"
-  },
-  "outerPen": {
-    "ja": "外功貫通",
-    "en": "Outer Force Penetration",
-    "zh": "外功穿透",
-    "ko": "외공 관통",
-    "vi": "Ngoại công Xuyên thấu"
-  },
-  "bossBoost": {
-    "ja": "首領ダメージ増加",
-    "en": "Elite DMG Bonus",
-    "zh": "对首领单位增伤",
-    "ko": "BOSS 유닛에 대한 피해 증가",
-    "vi": "Tăng sát thương đối với đơn vị thủ lĩnh"
-  },
-  "elemPen": {
-    "ja": "属性貫通",
-    "en": "Elemental Penetration",
-    "zh": "属攻穿透",
-    "ko": "속성 공격 관통",
-    "vi": "Thuộc tính Tấn công Xuyên thấu"
-  },
-  "elemAtkBoost": {
-    "ja": "属性攻撃強化",
-    "en": "Elemental ATK Boost",
-    "zh": "属攻伤害加成",
-    "ko": "속성 공격 피해 보너스",
-    "vi": "Gia tăng Sát thương thuộc tính"
-  },
-  "dmgReduce1": {
-    "ja": "ダメージ軽減１",
-    "en": "DMG Reduction 1",
-    "zh": "伤害减免１",
-    "ko": "피해 경감 1"
-  },
-  "dmgReduce2": {
-    "ja": "ダメージ軽減２",
-    "en": "DMG Reduction 2",
-    "zh": "伤害减免２",
-    "ko": "피해 경감 2"
-  },
-  "weaponBonus": {
-    "ja": "外功ダメージ強化",
-    "en": "Outer Force DMG Boost",
-    "zh": "外功伤害加成",
-    "ko": "외공 피해 보너스"
-  },
-  "outerCoeff": {
-    "ja": "外功係数",
-    "en": "Outer Force Coeff.",
-    "zh": "外功系数",
-    "ko": "외공 계수"
-  },
-  "statusCoeff": {
-    "ja": "ステータス攻撃係数",
-    "en": "Stat ATK Coeff.",
-    "zh": "属性攻击系数",
-    "ko": "스탯 공격 계수"
-  },
-  "outerAdd": {
-    "ja": "外功付加",
-    "en": "Outer Force Bonus",
-    "zh": "外功附加",
-    "ko": "외공 부가"
-  },
-  "enemyDebuff": {
-    "ja": "デバフ（敵）",
-    "en": "Enemy Debuff",
-    "zh": "减益（敌）",
-    "ko": "디버프（적）"
-  },
-  "worldLv": {
-    "ja": "大世界等級（Lv）",
-    "en": "Open World Level (Lv)",
-    "zh": "大世界等级（Lv）",
-    "ko": "대세계 등급（Lv）"
-  },
-  "martialLv": {
-    "ja": "武術等級（Lv）",
-    "en": "Martial Level (Lv)",
-    "zh": "武学等级（Lv）",
-    "ko": "무학 등급（Lv）"
-  },
-  "elemBoostMain": {
-    "ja": "属性強化（主）",
-    "en": "Elemental Enhancement (Main)",
-    "zh": "属性强化（主）",
-    "ko": "속성 강화（주）"
-  },
-  "elemBoostSub": {
-    "ja": "属性強化（副）",
-    "en": "Elemental Enhancement (Sub)",
-    "zh": "属性强化（副）",
-    "ko": "속성 강화（부）"
-  },
-  "enemyLevel": {
-    "ja": "エネミーレベル",
-    "en": "Enemy Level",
-    "zh": "怪物等级",
-    "ko": "적 레벨"
-  },
-  "physDef": {
-    "ja": "物理防御力",
-    "en": "Physical Defense",
-    "zh": "外功防御",
-    "ko": "외공 방어력"
-  },
-  "judgeRes": {
-    "ja": "審判耐性",
-    "en": "Judgment Resistance",
-    "zh": "判定抗性",
-    "ko": "저항 판정",
-    "vi": "Kháng định đoạt"
-  },
-  "physRes": {
-    "ja": "物理耐性値",
-    "en": "Physical Resistance",
-    "zh": "外功抗性",
-    "ko": "외공 저항"
-  },
-  "elemRes": {
-    "ja": "属性耐性値",
-    "en": "Elemental Resistance",
-    "zh": "属性抗性",
-    "ko": "속성 저항"
   },
   "manualInput": {
     "ja": "手動入力",
@@ -342,53 +119,11 @@
     "zh": "EXPECTED",
     "ko": "EXPECTED"
   },
-  "probCrit": {
-    "ja": "会心",
-    "en": "Critical",
-    "zh": "会心",
-    "ko": "치명타"
-  },
-  "probSympathy": {
-    "ja": "会意",
-    "en": "Affinity",
-    "zh": "会意",
-    "ko": "각성"
-  },
-  "probGraze": {
-    "ja": "かすり",
-    "en": "Glancing",
-    "zh": "擦伤",
-    "ko": "찰과상"
-  },
-  "probNormal": {
-    "ja": "通常",
-    "en": "Normal",
-    "zh": "普伤",
-    "ko": "일반"
-  },
-  "probPhys": {
-    "ja": "物理",
-    "en": "Physical",
-    "zh": "物理",
-    "ko": "물리"
-  },
-  "probElem": {
-    "ja": "属性",
-    "en": "Element",
-    "zh": "属性",
-    "ko": "속성"
-  },
   "donutCenter": {
     "ja": "P · 確率分布",
     "en": "P · Distribution",
     "zh": "P · 概率分布",
     "ko": "P · 확률 분포"
-  },
-  "donutDmgCenter": {
-    "ja": "勁率",
-    "en": "勁率",
-    "zh": "勁率",
-    "ko": "勁率"
   },
   "thHitType": {
     "ja": "ヒット種",
@@ -396,89 +131,11 @@
     "zh": "命中类型",
     "ko": "히트 유형"
   },
-  "thAvgATK": {
-    "ja": "平均ATK",
-    "en": "Avg ATK",
-    "zh": "平均ATK",
-    "ko": "평균 ATK"
-  },
-  "thMinATK": {
-    "ja": "最小ATK",
-    "en": "Min ATK",
-    "zh": "最小ATK",
-    "ko": "최소 ATK"
-  },
-  "thMaxATK": {
-    "ja": "最大ATK",
-    "en": "Max ATK",
-    "zh": "最大ATK",
-    "ko": "최대 ATK"
-  },
-  "thPhysPct": {
-    "ja": "物理%",
-    "en": "Phys%",
-    "zh": "物理%",
-    "ko": "물리%"
-  },
-  "thElemPct": {
-    "ja": "属性%",
-    "en": "Elem%",
-    "zh": "属性%",
-    "ko": "속성%"
-  },
   "thTotal": {
     "ja": "合計",
     "en": "Total",
     "zh": "合计",
     "ko": "합계"
-  },
-  "thPhys": {
-    "ja": "物理",
-    "en": "Phys",
-    "zh": "物理",
-    "ko": "물리"
-  },
-  "thElem": {
-    "ja": "属性",
-    "en": "Elem",
-    "zh": "属性",
-    "ko": "속성"
-  },
-  "rowNormal": {
-    "ja": "通常DMG",
-    "en": "Normal DMG",
-    "zh": "普伤",
-    "ko": "일반 피해"
-  },
-  "rowCrit": {
-    "ja": "会心DMG",
-    "en": "Critical DMG",
-    "zh": "会心伤害",
-    "ko": "치명타 피해"
-  },
-  "rowSympathy": {
-    "ja": "会意DMG",
-    "en": "Affinity DMG",
-    "zh": "会意伤害",
-    "ko": "각성 피해"
-  },
-  "rowSympathySub": {
-    "ja": "最大ATK",
-    "en": "Max ATK",
-    "zh": "最大ATK",
-    "ko": "최대 ATK"
-  },
-  "rowGraze": {
-    "ja": "かすりDMG",
-    "en": "Glancing DMG",
-    "zh": "擦伤",
-    "ko": "찰과상 피해"
-  },
-  "rowGrazeSub": {
-    "ja": "最小ATK",
-    "en": "Min ATK",
-    "zh": "最小ATK",
-    "ko": "최소 ATK"
   },
   "rowExpected": {
     "ja": "DMG期待値",
@@ -576,186 +233,6 @@
     "zh": "请输入名称",
     "ko": "이름을 입력하세요"
   },
-  "setEffect": {
-    "ja": "セット効果",
-    "en": "Set Effect",
-    "zh": "套装效果",
-    "ko": "세트 효과"
-  },
-  "setEff_none": {
-    "ja": "セット効果なし",
-    "en": "No Set Effect",
-    "zh": "无套装效果",
-    "ko": "세트 효과 없음"
-  },
-  "setEff_jadeware_1": {
-    "ja": "碧玉一式",
-    "en": "Jadeware",
-    "zh": "碧玉一式",
-    "ko": "벽옥일식"
-  },
-  "setEff_jadeware_2": {
-    "ja": "碧玉一式（敵真気<40%）",
-    "en": "Jadeware (enemy Qi<40%)",
-    "zh": "碧玉一式（敌真气<40%）",
-    "ko": "벽옥일식 (적 진기<40%)"
-  },
-  "setEff_hawkwing_1": {
-    "ja": "飛鳥一式（1stack）",
-    "en": "Hawkwing (1 stack)",
-    "zh": "飞鸟一式（1层）",
-    "ko": "비조일식 (1스택)"
-  },
-  "setEff_hawkwing_2": {
-    "ja": "飛鳥一式（2stack）",
-    "en": "Hawkwing (2 stack)",
-    "zh": "飞鸟一式（2层）",
-    "ko": "비조일식 (2스택)"
-  },
-  "setEff_hawkwing_3": {
-    "ja": "飛鳥一式（3stack）",
-    "en": "Hawkwing (3 stack)",
-    "zh": "飞鸟一式（3层）",
-    "ko": "비조일식 (3스택)"
-  },
-  "setEff_hawkwing_4": {
-    "ja": "飛鳥一式（4stack）",
-    "en": "Hawkwing (4 stack)",
-    "zh": "飞鸟一式（4层）",
-    "ko": "비조일식 (4스택)"
-  },
-  "setEff_hawkwing_5": {
-    "ja": "飛鳥一式（5stack）",
-    "en": "Hawkwing (5 stack)",
-    "zh": "飞鸟一式（5层）",
-    "ko": "비조일식 (5스택)"
-  },
-  "setEff_rainwhisper_1": {
-    "ja": "時雨一式",
-    "en": "Rainwhisper",
-    "zh": "时雨一式",
-    "ko": "시우일식"
-  },
-  "setEff_rainwhisper_2": {
-    "ja": "時雨一式（気血シールド時）",
-    "en": "Rainwhisper (with HP shield)",
-    "zh": "时雨一式（气血护盾时）",
-    "ko": "시우일식 (기혈 보호막 시)"
-  },
-  "setEff_swallow_1": {
-    "ja": "帰燕一式（軽撃発動効果）",
-    "en": "Swallow Return (light atk effect)",
-    "zh": "归燕一式（轻击触发效果）",
-    "ko": "귀연일식 (경격 발동 효과)"
-  },
-  "setEff_swallow_2": {
-    "ja": "帰燕一式（敵真気<40%）",
-    "en": "Swallow Return (enemy Qi<40%)",
-    "zh": "归燕一式（敌真气<40%）",
-    "ko": "귀연일식 (적 진기<40%)"
-  },
-  "setEff_swallow_3": {
-    "ja": "帰燕一式（軽撃発動効果 AND 敵真気<40%）",
-    "en": "Swallow Return (both)",
-    "zh": "归燕一式（同时满足）",
-    "ko": "귀연일식 (둘 다 만족)"
-  },
-  "setEff_mountain_1": {
-    "ja": "斬岳一式",
-    "en": "Mountainsplit",
-    "zh": "斩岳一式",
-    "ko": "참악일식"
-  },
-  "setEff_mountain_2": {
-    "ja": "斬岳一式（派生・協戦技）",
-    "en": "Mountainsplit (derived/co-op)",
-    "zh": "斩岳一式（派生/协战）",
-    "ko": "참악일식 (파생/협전)"
-  },
-  "setEff_willow_1": {
-    "ja": "霧柳一式（重撃命中後）",
-    "en": "Veil of the Willow (after heavy)",
-    "zh": "雾柳一式（重击命中后）",
-    "ko": "무류일식 (중격 명중 후)"
-  },
-  "setEff_willow_2": {
-    "ja": "霧柳一式（軽撃/弾道命中後）",
-    "en": "Veil of the Willow (after light)",
-    "zh": "雾柳一式（轻击命中后）",
-    "ko": "무류일식 (경격 명중 후)"
-  },
-  "setEff_willow_3": {
-    "ja": "霧柳一式（両発動 霧柳重々）",
-    "en": "Veil of the Willow (both)",
-    "zh": "雾柳一式（雾柳重重）",
-    "ko": "무류일식 (양쪽 발동)"
-  },
-  "setEff_ivory_1": {
-    "ja": "浄花一式（気血Max時）",
-    "en": "Ivorybloom (at max HP)",
-    "zh": "净花一式（气血满时）",
-    "ko": "정화일식 (기혈 Max 시)"
-  },
-  "setEff_sway_50": {
-    "ja": "山崩一式（敵気血50%）",
-    "en": "Swaying Heights (HP 50%)",
-    "zh": "山崩一式（敌气血50%）",
-    "ko": "산붕일식 (적 기혈 50%)"
-  },
-  "setEff_sway_55": {
-    "ja": "山崩一式（敵気血55%）",
-    "en": "Swaying Heights (HP 55%)",
-    "zh": "山崩一式（敌气血55%）",
-    "ko": "산붕일식 (적 기혈 55%)"
-  },
-  "setEff_sway_60": {
-    "ja": "山崩一式（敵気血60%）",
-    "en": "Swaying Heights (HP 60%)",
-    "zh": "山崩一式（敌气血60%）",
-    "ko": "산붕일식 (적 기혈 60%)"
-  },
-  "setEff_sway_65": {
-    "ja": "山崩一式（敵気血65%）",
-    "en": "Swaying Heights (HP 65%)",
-    "zh": "山崩一式（敌气血65%）",
-    "ko": "산붕일식 (적 기혈 65%)"
-  },
-  "setEff_sway_70": {
-    "ja": "山崩一式（敵気血70%）",
-    "en": "Swaying Heights (HP 70%)",
-    "zh": "山崩一式（敌气血70%）",
-    "ko": "산붕일식 (적 기혈 70%)"
-  },
-  "setEff_sway_75": {
-    "ja": "山崩一式（敵気血75%以上）",
-    "en": "Swaying Heights (HP 75%+)",
-    "zh": "山崩一式（敌气血75%+）",
-    "ko": "산붕일식 (적 기혈 75%+)"
-  },
-  "xinfa": {
-    "ja": "心法",
-    "en": "Heart Method",
-    "zh": "心法",
-    "ko": "심법"
-  },
-  "xinfa_none": {
-    "ja": "心法なし",
-    "en": "None",
-    "zh": "无心法",
-    "ko": "심법 없음"
-  },
-  "xinfa_yishui_5": {
-    "ja": "易水の歌（5stack）",
-    "en": "Song of Yishui (5 stack)",
-    "zh": "易水之歌（5层）",
-    "ko": "역수의 노래 (5스택)"
-  },
-  "xinfa_yishui_5_cc": {
-    "ja": "易水の歌（5stack・妨害状態）",
-    "en": "Song of Yishui (5 stack, CC)",
-    "zh": "易水之歌（5层·控制）",
-    "ko": "역수의 노래 (5스택·방해 상태)"
-  },
   "effTitle": {
     "ja": "ステータス効率分析",
     "en": "Stat Efficiency Analysis",
@@ -845,84 +322,6 @@
     "en": "Low",
     "zh": "低效",
     "ko": "저효율"
-  },
-  "effMinPhysATK": {
-    "ja": "最小物理ATK",
-    "en": "Min Physical ATK",
-    "zh": "最小外功攻击",
-    "ko": "최소 외공 공격"
-  },
-  "effMaxPhysATK": {
-    "ja": "最大物理ATK",
-    "en": "Max Physical ATK",
-    "zh": "最大外功攻击",
-    "ko": "최대 외공 공격"
-  },
-  "effMinElemATK": {
-    "ja": "最小属性ATK",
-    "en": "Min Elemental ATK",
-    "zh": "最小属性攻击",
-    "ko": "최소 속성 공격"
-  },
-  "effMaxElemATK": {
-    "ja": "最大属性ATK",
-    "en": "Max Elemental ATK",
-    "zh": "最大属性攻击",
-    "ko": "최대 속성 공격"
-  },
-  "effCritRate": {
-    "ja": "会心率",
-    "en": "Critical Rate",
-    "zh": "会心率",
-    "ko": "치명타 확률"
-  },
-  "effSympathy": {
-    "ja": "会意率",
-    "en": "Affinity Rate",
-    "zh": "会意率",
-    "ko": "각성 확률"
-  },
-  "effHitRate": {
-    "ja": "命中率",
-    "en": "Hit Rate",
-    "zh": "精准率",
-    "ko": "정확도"
-  },
-  "effAgility": {
-    "ja": "速 (Agility)",
-    "en": "Agility (速)",
-    "zh": "敏 (Agility)",
-    "ko": "민첩 (Agility)"
-  },
-  "effPower": {
-    "ja": "会 (Power)",
-    "en": "Power (会)",
-    "zh": "势 (Power)",
-    "ko": "기세 (Power)"
-  },
-  "effStrength": {
-    "ja": "力 (Strength)",
-    "en": "Strength (力)",
-    "zh": "劲 (Strength)",
-    "ko": "내공 (Strength)"
-  },
-  "effBossBoost": {
-    "ja": "ダメージ増加",
-    "en": "DMG Bonus",
-    "zh": "对首领单位增伤",
-    "ko": "BOSS 유닛에 대한 피해 증가"
-  },
-  "effPhysPen": {
-    "ja": "物理貫通",
-    "en": "Physical Penetration",
-    "zh": "外功穿透",
-    "ko": "외공 관통"
-  },
-  "effElemPen": {
-    "ja": "属性貫通",
-    "en": "Elemental Penetration",
-    "zh": "属攻穿透",
-    "ko": "속성 공격 관통"
   },
   "toastSaved": {
     "ja": "プリセット「{name}」を保存",
@@ -1440,30 +839,6 @@
     "zh": "观音 & 武库 输入",
     "ko": "첩음 & 무기고 입력"
   },
-  "importEnhanceTitle": {
-    "ja": "観音 (Enhance)",
-    "en": "Enhance",
-    "zh": "观音",
-    "ko": "첩음"
-  },
-  "importArsenalTitle": {
-    "ja": "武庫 (Arsenal)",
-    "en": "Arsenal",
-    "zh": "武库",
-    "ko": "무기고"
-  },
-  "importArsenalPath": {
-    "ja": "武庫種別",
-    "en": "Arsenal Type",
-    "zh": "武库种类",
-    "ko": "무기고 종류"
-  },
-  "importArsenalPeaked": {
-    "ja": "頂点",
-    "en": "Peak",
-    "zh": "顶点",
-    "ko": "정점"
-  },
   "importConfirmMsg": {
     "ja": "現在設定されている数値がインポートデータに差し変わりますがよろしいですか？",
     "en": "Current values will be replaced by the imported data. Continue?",
@@ -1559,18 +934,6 @@
     "en": "Example: equipment detail screen (values aligned to the right)",
     "zh": "示例: 装备详情界面 (数值右对齐的界面)",
     "ko": "예시: 장비 상세 화면 (수치가 오른쪽 정렬된 화면)"
-  },
-  "ocrHelpMockLv": {
-    "ja": "装備レベル",
-    "en": "Equip Lv",
-    "zh": "装备等阶",
-    "ko": "장비 레벨"
-  },
-  "ocrHelpMockAtk": {
-    "ja": "外功攻撃",
-    "en": "Phys ATK",
-    "zh": "外功攻击",
-    "ko": "외공 공격"
   },
   "ocrHelpStep1": {
     "ja": "ゲーム内で装備詳細画面を開き、Win+Shift+S で定音/調律の部分を範囲スクショ",
@@ -1847,24 +1210,6 @@
     "en": "INNER WAY",
     "zh": "心法对照",
     "ko": "심법 대조"
-  },
-  "stMaxHp": {
-    "ja": "最大HP",
-    "en": "Max HP",
-    "zh": "气血最大值",
-    "ko": "기혈 최대치"
-  },
-  "stPhysDef": {
-    "ja": "外功防御",
-    "en": "Physical Defense",
-    "zh": "外功防御",
-    "ko": "외공 방어"
-  },
-  "stCritHeal": {
-    "ja": "会心治癒",
-    "en": "Critical Healing",
-    "zh": "会心治疗",
-    "ko": "치명타 치유"
   },
   "changelogTitle": {
     "ja": "変更履歴",
@@ -2268,66 +1613,6 @@
     "zh": "弱点",
     "ko": "약점"
   },
-  "slotMain": {
-    "ja": "主武器",
-    "en": "Main Weapon",
-    "zh": "主武器",
-    "ko": "주무기"
-  },
-  "slotSub": {
-    "ja": "副武器",
-    "en": "Sub Weapon",
-    "zh": "副武器",
-    "ko": "부무기"
-  },
-  "slotHelm": {
-    "ja": "冠",
-    "en": "Helm",
-    "zh": "冠胄",
-    "ko": "투구"
-  },
-  "slotChest": {
-    "ja": "胸当て",
-    "en": "Chest",
-    "zh": "胸甲",
-    "ko": "흉갑"
-  },
-  "slotLegs": {
-    "ja": "膝鎧",
-    "en": "Greaves",
-    "zh": "膝甲",
-    "ko": "경갑"
-  },
-  "slotHands": {
-    "ja": "小手",
-    "en": "Gauntlets",
-    "zh": "腕甲",
-    "ko": "완갑"
-  },
-  "slotRing": {
-    "ja": "環",
-    "en": "Ring",
-    "zh": "环",
-    "ko": "환"
-  },
-  "slotPendant": {
-    "ja": "佩び物",
-    "en": "Pendant",
-    "zh": "佩",
-    "ko": "패물"
-  },
-  "slotBow": {
-    "ja": "弓矢",
-    "en": "Bow",
-    "zh": "弓箭",
-    "ko": "화살"
-  },
-  "slotDisc": {
-    "ja": "射玦",
-    "en": "Archer Disc",
-    "zh": "射玦",
-    "ko": "활깍지"
-  },
   "importStep1Title": {
     "ja": "Step 1: ブックマークレット 初回セットアップ (未登録時のみ開く)",
     "en": "Step 1: Bookmarklet Initial Setup (open only if not yet registered)",
@@ -2412,60 +1697,6 @@
     "zh": "按原样重新导入上次数据。<br>如需获取最新装备,请从官方工具再次执行书签。",
     "ko": "이전 데이터를 그대로 재가져옵니다.<br>최신 장비를 가져오려면 공식 데이터 도구에서 북마크릿을 다시 실행하세요."
   },
-  "importLabelUID": {
-    "ja": "UID",
-    "en": "UID",
-    "zh": "UID",
-    "ko": "UID"
-  },
-  "importLabelCharName": {
-    "ja": "キャラ名",
-    "en": "Character",
-    "zh": "角色名",
-    "ko": "캐릭터명"
-  },
-  "importLabelMainKf": {
-    "ja": "主武術",
-    "en": "Main Martial",
-    "zh": "主武术",
-    "ko": "주 무술"
-  },
-  "importLabelSubKf": {
-    "ja": "副武術",
-    "en": "Sub Martial",
-    "zh": "副武术",
-    "ko": "부 무술"
-  },
-  "importLabelXinfa": {
-    "ja": "心法",
-    "en": "Inner Way",
-    "zh": "心法",
-    "ko": "심법"
-  },
-  "importLabelXiuwei": {
-    "ja": "武術進度",
-    "en": "Martial Progress",
-    "zh": "武术进度",
-    "ko": "무술 진도"
-  },
-  "importBaseStats": {
-    "ja": "基本ステータス",
-    "en": "Base Stats",
-    "zh": "基础属性",
-    "ko": "기본 스탯"
-  },
-  "importSubStats": {
-    "ja": "副ステータス",
-    "en": "Sub Stats",
-    "zh": "副属性",
-    "ko": "부 스탯"
-  },
-  "pvpExclusiveAffix": {
-    "ja": "PvP専用定音",
-    "en": "PvP-Exclusive Engraving",
-    "zh": "PvP专用定音",
-    "ko": "PvP 전용 정음"
-  },
   "noteSpec": {
     "ja": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">ツール概要</h3>\n      <p class=\"wwm-note-p\">風燕伝 (Where Winds Meet) 装備強度の比較・最適化ツール。<b>武格指数</b> を中心に、装備/調律・定音オプション/武術/心法/装備一式効果を統合してダメージ期待値を算出し、装備改善方針を提示する。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">データ取得 (前提)</h3>\n      <p class=\"wwm-note-p\">本ツールは <b>風燕伝公式・データツール</b> からインポートしたデータを元に動作する。インポートするまで装備情報・スコアは表示されない。インポートデータはブラウザの localStorage に保存され、再起動後も保持される。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">武格指数 (Martial Index) とは</h3>\n      <p class=\"wwm-note-p\">装備/調律・定音オプション/武術/心法/装備一式効果を全て込みで、<b>全プレイヤー共通の固定係数</b> でダメージ期待値を算出した指標。大世界等級や敵側パラメータの個人差を排除しているため、装備の絶対強度を比較できる。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tier 判定基準</h3>\n      <p class=\"wwm-note-p\"><b>装備最適化提案を全て適用した時の最大スコア</b> を 100% として、現在の武格指数の比率で判定。インポート時に基準確定、再インポートで更新。</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> 最大の 95% 以上</li>\n        <li><b>S:</b> 90% 以上</li>\n        <li><b>A:</b> 80% 以上</li>\n        <li><b>B:</b> 65% 以上</li>\n        <li><b>C:</b> 未満</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">計算に反映される効果</h3>\n      <ul class=\"wwm-note-list\">\n        <li>装備 基本ステータス (外功攻撃力/属性攻撃力 等)</li>\n        <li>調律/定音オプション (調律1〜5、 定音1〜5)</li>\n        <li>武術才能効果 (会心率上限 +Δ、 武術属性別 攻撃/貫通/属性ダメ 強化 等)</li>\n        <li>心法 Tier 効果 (Tier2/5 表示反映 + Tier0/1/3/4/6 裏加算)</li>\n        <li>装備二点一式効果 (2点装備で発動する加算系)</li>\n        <li>装備四点一式効果 (4点装備で +100 固定ボーナス、 各装備に均等配賦)</li>\n        <li>基礎値 (体/力/防/速/会) → 派生 (基本ステータス・判定確率)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">計算に反映されない効果</h3>\n      <ul class=\"wwm-note-list\">\n        <li>装備四点一式効果の条件付効果 (気血/真気/受流/重撃 トリガー等) — 一律 +100 固定で代替</li>\n        <li>観音 (ゲーム内ステータス非影響と判明、 ステ画面に反映されないため計算対象外)</li>\n        <li>PvP 専用定音 (定音6枠) — 表示のみ、 計算寄与なし</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">計算前提値 (固定)</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>外功攻撃係数:</b> ×1.5</li>\n        <li><b>ステータス攻撃係数:</b> ×1.5</li>\n        <li><b>付加外功:</b> +230</li>\n        <li><b>属性強化 (主):</b> ×1.5</li>\n        <li><b>属性強化 (副):</b> ×1.0</li>\n        <li><b>大世界等級:</b> 現在のアップデート状況に応じた上限値 (グローバル基準)</li>\n        <li><b>武術等級:</b> キャラクター Lv と同一</li>\n        <li><b>敵パラメータ:</b> charLv ≥ 96 → 敵Lv96 (DEF 405 / 審判耐性 1.65)、 未満 → 敵Lv91 (DEF 350 / 審判耐性 1.45)</li>\n        <li><b>キャラクター基本ステータス:</b> キャラクター才能/シングルプレイレベル ボーナス/五音太平楽 を含むステータス加算値を <b>振り切れているもの</b> として算出</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">データバージョン管理</h3>\n      <p class=\"wwm-note-p\">ゲーム側のバランス調整などでツール側の計算式が更新された際、既存の武格指数 (baseline) は破棄され、最上部に <b>再インポート促しバナー</b> が表示される。再インポート後、新しい計算式で武格指数が再算出される。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">主要機能</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>武具対照:</b> 現在装備と新規装備の調律/定音差分シミュレーション。スコア変動を即時プレビュー</li>\n        <li><b>心法対照:</b> 心法の差替えシミュレーション。Tier 別効果と発動条件を比較</li>\n        <li><b>装備最適化提案:</b> 調律/定音の理想配分を逆算し、 現在からの改善ステップを順に提示</li>\n        <li><b>プリセット保存:</b> 試行中の装備構成を保存・呼出し可能</li>\n        <li><b>OBS Share:</b> サイドバーのみ表示する配信用 URL を生成 (透明背景・色調カスタム対応)</li>\n        <li><b>4言語対応 (日/英/中/韓) + ライト/ダーク切替</b></li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">計算式 (要約)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\n各 dmg = (物理 + 属性) × 全武術ダメ × 外功増伤 × 軽減\nstatusScore = expected を固定係数で再計算したもの\nfinalScore  = statusScore + 4-set bonus (4点一式効果発動時)</pre>\n    </div>",
     "en": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tool Overview</h3>\n      <p class=\"wwm-note-p\">A comparison and optimization tool for Where Winds Meet equipment. Centered on the <b>Martial Index</b>, integrates equipment / tuning &amp; engravings / martial arts / xinfa / set effects to compute expected damage and propose improvement directions.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Data Required (Prerequisite)</h3>\n      <p class=\"wwm-note-p\">This tool runs on data imported from the <b>Where Winds Meet - Official Data Tool</b>. Equipment info and scores are not displayed until import. Imported data is saved in your browser's localStorage and persists across restarts.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">What is Martial Index</h3>\n      <p class=\"wwm-note-p\">An indicator that computes expected damage using <b>fixed coefficients common to all players</b>, including equipment / tuning &amp; engravings / martial arts talents / xinfa / set effects. It removes individual differences in Open World Level and enemy parameters, allowing absolute equipment strength comparison.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tier Criteria</h3>\n      <p class=\"wwm-note-p\">Judged by ratio of the current Martial Index against <b>the maximum score achievable when all optimization suggestions are applied</b>. Locked at import time, updated on re-import.</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> 95% or more of max</li>\n        <li><b>S:</b> 90% or more</li>\n        <li><b>A:</b> 80% or more</li>\n        <li><b>B:</b> 65% or more</li>\n        <li><b>C:</b> below</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Reflected in Calculation</h3>\n      <ul class=\"wwm-note-list\">\n        <li>Equipment base stats (Outer ATK / Elemental ATK etc.)</li>\n        <li>Tuning / Engraving options (Tuning 1-5, Engraving 1-5)</li>\n        <li>Martial Arts Talents effects (crit cap +Δ, Martial Element-specific ATK/penetration/elem boost, etc.)</li>\n        <li>Xinfa Tier effects (Tier 2/5 visible reflection + Tier 0/1/3/4/6 hidden additive)</li>\n        <li>2 Pieces set bonus (additive when 2 pieces equipped)</li>\n        <li>4 Pieces set bonus (+100 fixed when 4 pieces equipped, distributed evenly)</li>\n        <li>Base stats (Body/Power/Defense/Agility/Awareness) → derived (Base Stats / Judgment Rates)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Not Reflected in Calculation</h3>\n      <ul class=\"wwm-note-list\">\n        <li>4 Pieces conditional effects (HP/Inner Energy/Parry/Heavy triggers etc.) — replaced with flat +100</li>\n        <li>Enhance (confirmed not to affect game stats, so excluded from calculation)</li>\n        <li>PvP-Exclusive Engraving (Engraving slot 6) — display only, no contribution</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Fixed Calculation Presets</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>Outer ATK Coefficient:</b> ×1.5</li>\n        <li><b>Status ATK Coefficient:</b> ×1.5</li>\n        <li><b>Additional Outer:</b> +230</li>\n        <li><b>Elem Enhancement (Main):</b> ×1.5</li>\n        <li><b>Elem Enhancement (Sub):</b> ×1.0</li>\n        <li><b>Open World Level:</b> capped at the current update version (global standard)</li>\n        <li><b>Martial Level:</b> same as Character Lv</li>\n        <li><b>Enemy parameters:</b> charLv ≥ 96 → Enemy Lv96 (DEF 405 / Judgment Res 1.65), below → Enemy Lv91 (DEF 350 / 1.45)</li>\n        <li><b>Character base stats:</b> assumed maxed out, including Character Talents / Solo Mode Level bonus / Melodies of Peace stat gains</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Data Version Management</h3>\n      <p class=\"wwm-note-p\">When the tool's calculation logic is updated due to game balance changes, the existing Martial Index (baseline) is invalidated and a <b>re-import prompt banner</b> appears at the top. After re-import, the Martial Index is recalculated with the new logic.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Main Features</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>Equipment Compare:</b> Simulates tuning/engraving differences between current and new equipment with instant score preview</li>\n        <li><b>Xinfa Compare:</b> Simulates xinfa swaps, comparing Tier effects and activation conditions</li>\n        <li><b>Optimization Proposal:</b> Computes ideal tuning/engraving allocation and suggests step-by-step improvements</li>\n        <li><b>Preset Save:</b> Save and recall in-progress equipment configurations</li>\n        <li><b>OBS Share:</b> Generates a streaming URL showing only the sidebar (transparent background, color customizable)</li>\n        <li><b>4 languages (ja/en/zh/ko) + Light/Dark theme switching</b></li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Formula (Summary)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\neach dmg = (phys + elem) × all-martial-boost × outer-boost × reduction\nstatusScore = expected recomputed with fixed coefficients\nfinalScore  = statusScore + 4-set bonus (when 4 Pieces active)</pre>\n    </div>",
@@ -2483,42 +1714,6 @@
     "en": "Tier reached for each Inner Way (1-5). Tier2 adds Tier2 effect, Tier5 adds Tier5 effect.",
     "zh": "各心法达到的 Tier (1-5)。Tier2 加 Tier2 效果,Tier5 加 Tier5 效果。",
     "ko": "각 심법의 도달 Tier (1-5). Tier2는 Tier2 효과, Tier5는 Tier5 효과 추가."
-  },
-  "penPhys": {
-    "ja": "外功貫通",
-    "en": "Phys Pen",
-    "zh": "外功穿透",
-    "ko": "외공 관통"
-  },
-  "penVoid": {
-    "ja": "無相貫通",
-    "en": "Void Pen",
-    "zh": "无相穿透",
-    "ko": "무상 관통"
-  },
-  "penPhysShort": {
-    "ja": "外功",
-    "en": "Phys",
-    "zh": "外功",
-    "ko": "외공"
-  },
-  "penVoidShort": {
-    "ja": "無相",
-    "en": "Void",
-    "zh": "无相",
-    "ko": "무상"
-  },
-  "penOther": {
-    "ja": "他",
-    "en": "other",
-    "zh": "其他",
-    "ko": "기타"
-  },
-  "pathPhys": {
-    "ja": "汎用",
-    "en": "Universal",
-    "zh": "通用",
-    "ko": "범용"
   },
   "martialIndex": {
     "ja": "武格指数",
@@ -2555,18 +1750,6 @@
     "en": "No history yet. Will auto-record on import.",
     "zh": "暂无记录。导入时将自动记录。",
     "ko": "아직 기록이 없습니다. 가져오기 시 자동 기록됩니다."
-  },
-  "effectUnset": {
-    "ja": "未代入",
-    "en": "Unset",
-    "zh": "未填",
-    "ko": "미입력"
-  },
-  "globalDmgBoost": {
-    "ja": "全ダメージ強化",
-    "en": "Total DMG Boost",
-    "zh": "全伤害强化",
-    "ko": "전체 피해 증가"
   },
   "effAnalysisTitle": {
     "ja": "調律/定音効率分析",
