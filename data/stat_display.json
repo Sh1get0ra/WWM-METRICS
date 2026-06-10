@@ -4,122 +4,60 @@
   "_source": "ゲーム内ステータス画面 in-game observation (ja: 2026-05-25 4枚スクショ照合 / zh: 2026-06-07 5枚スクショ照合 — zh は原語。旧 zh 列は ja 直訳で誤りだった)",
   "_note": "format: int=整数、pct=百分率、float=小数1桁、range=Min-Max。calcKey=calc.js computeExpected param key (未対応はnull)。expandable=サブ項目展開可。zh は 2026-06-07 裏ラベル (tooltip) 込み実測網羅: 穿透5/武学增伤8/最终生效4/header=武林造诣 全実証。残推定 = 伤害加成5 subItems のみ。手甲武学增伤 (拳=天志拳系) は表示枠追加済 (2026-06-08)、 affix internal は武器実装(2026年7月)後 scout 取得予定 (後期追加 internal は規則性なく推測不可)。",
   "header": {
-    "title": {
-      "ja": "総合武力",
-      "en": "Total Power",
-      "zh": "武林造诣",
-      "ko": "무림 조예",
-      "vi": "Kết hợp hiện tại"
-    },
-    "key": "totalMartial"
+    "key": "totalMartial",
+    "label_key": "stDisp.header.title"
   },
   "sections": [
     {
       "key": "basicStats",
-      "title": {
-        "ja": "基礎値",
-        "en": "Base Stats",
-        "zh": "五维属性",
-        "ko": "5대 속성",
-        "vi": "Chỉ số gốc"
-      },
       "items": [
         {
           "key": "body",
-          "label": {
-            "ja": "体",
-            "en": "Body",
-            "zh": "体",
-            "ko": "체력",
-            "vi": "Thể"
-          },
           "format": "int",
-          "calcKey": "body"
+          "calcKey": "body",
+          "label_key": "stDisp.basicStats.body"
         },
         {
           "key": "power",
-          "label": {
-            "ja": "力",
-            "en": "Power",
-            "zh": "劲",
-            "ko": "내공",
-            "vi": "Kình"
-          },
           "format": "int",
-          "calcKey": "power"
+          "calcKey": "power",
+          "label_key": "stDisp.basicStats.power"
         },
         {
           "key": "defense",
-          "label": {
-            "ja": "防",
-            "en": "Defense",
-            "zh": "御",
-            "ko": "방어",
-            "vi": "Phòng"
-          },
           "format": "int",
-          "calcKey": "defense"
+          "calcKey": "defense",
+          "label_key": "stDisp.basicStats.defense"
         },
         {
           "key": "agility",
-          "label": {
-            "ja": "速",
-            "en": "Agility",
-            "zh": "敏",
-            "ko": "민첩",
-            "vi": "Mẫn"
-          },
           "format": "int",
-          "calcKey": "agility"
+          "calcKey": "agility",
+          "label_key": "stDisp.basicStats.agility"
         },
         {
           "key": "momentum",
-          "label": {
-            "ja": "会",
-            "en": "Momentum",
-            "zh": "势",
-            "ko": "기세",
-            "vi": "Thế"
-          },
           "format": "int",
-          "calcKey": "momentum"
+          "calcKey": "momentum",
+          "label_key": "stDisp.basicStats.momentum"
         }
-      ]
+      ],
+      "label_key_title": "stDisp.section.basicStats.title"
     },
     {
       "key": "primaryStats",
-      "title": {
-        "ja": "基本ステータス",
-        "en": "Primary Stats",
-        "zh": "基础属性",
-        "ko": "기초 속성",
-        "vi": "Chỉ số cơ bản"
-      },
       "items": [
         {
           "key": "physAtk",
-          "label": {
-            "ja": "外功攻撃力",
-            "en": "Physical ATK",
-            "zh": "外功攻击",
-            "ko": "외공 공격",
-            "vi": "Tấn công Ngoại công"
-          },
           "format": "range",
           "calcKey": [
             "minPhysATK",
             "maxPhysATK"
-          ]
+          ],
+          "label_key": "stDisp.primaryStats.physAtk"
         },
         {
           "key": "elemAtk",
-          "label": {
-            "ja": "属性攻撃",
-            "en": "Elemental ATK",
-            "zh": "属性攻击",
-            "ko": "속성 공격",
-            "vi": "Tấn công thuộc tính"
-          },
           "format": "range",
           "calcKey": [
             "minElemDisp",
@@ -129,115 +67,67 @@
           "subItems": [
             {
               "key": "bellstrike",
-              "label": {
-                "ja": "鋼鳴攻撃力",
-                "en": "Bellstrike ATK",
-                "zh": "鸣金攻击",
-                "ko": "명금 공격",
-                "vi": "Tấn công Minh Kim"
-              },
               "format": "range",
               "calcKey": [
                 "minBellstrike",
                 "maxBellstrike"
-              ]
+              ],
+              "label_key": "stDisp.primaryStats.elemAtk.bellstrike"
             },
             {
               "key": "stonesplit",
-              "label": {
-                "ja": "砕岩攻撃力",
-                "en": "Stonesplit ATK",
-                "zh": "裂石攻击",
-                "ko": "열석 공격",
-                "vi": "Tấn công Liệt Thạch"
-              },
               "format": "range",
               "calcKey": [
                 "minStonesplit",
                 "maxStonesplit"
-              ]
+              ],
+              "label_key": "stDisp.primaryStats.elemAtk.stonesplit"
             },
             {
               "key": "silkbind",
-              "label": {
-                "ja": "糸操攻撃力",
-                "en": "Silkbind ATK",
-                "zh": "牵丝攻击",
-                "ko": "견사 공격",
-                "vi": "Tấn công Khiên Ti"
-              },
               "format": "range",
               "calcKey": [
                 "minSilkbind",
                 "maxSilkbind"
-              ]
+              ],
+              "label_key": "stDisp.primaryStats.elemAtk.silkbind"
             },
             {
               "key": "bamboocut",
-              "label": {
-                "ja": "瞬嵐攻撃力",
-                "en": "Bamboocut ATK",
-                "zh": "破竹攻击",
-                "ko": "파죽 공격",
-                "vi": "Tấn công Phá Trúc"
-              },
               "format": "range",
               "calcKey": [
                 "minBamboocut",
                 "maxBamboocut"
-              ]
+              ],
+              "label_key": "stDisp.primaryStats.elemAtk.bamboocut"
             },
             {
               "key": "voidAtk",
-              "label": {
-                "ja": "無相攻撃力",
-                "en": "Void ATK",
-                "zh": "无相攻击",
-                "ko": "무상 공격",
-                "vi": "Tấn công Vô Tướng"
-              },
               "format": "range",
               "calcKey": [
                 "minVoid",
                 "maxVoid"
-              ]
+              ],
+              "label_key": "stDisp.primaryStats.elemAtk.voidAtk"
             }
-          ]
+          ],
+          "label_key": "stDisp.primaryStats.elemAtk"
         }
-      ]
+      ],
+      "label_key_title": "stDisp.section.primaryStats.title"
     },
     {
       "key": "probability",
-      "title": {
-        "ja": "判定確率",
-        "en": "Judgment Rates",
-        "zh": "判定属性",
-        "ko": "판정 속성",
-        "vi": "Xác suất phán định"
-      },
       "items": [
         {
           "key": "hitRate",
-          "label": {
-            "ja": "命中率",
-            "en": "Precision",
-            "zh": "精准率",
-            "ko": "정확도",
-            "vi": "Tỷ lệ chính xác"
-          },
           "format": "rateApplied",
           "calcKey": "hitRate",
-          "appliedCalcKey": "appliedHit"
+          "appliedCalcKey": "appliedHit",
+          "label_key": "stDisp.probability.hitRate"
         },
         {
           "key": "critRate",
-          "label": {
-            "ja": "会心率",
-            "en": "Crit",
-            "zh": "会心率",
-            "ko": "치명타 확률",
-            "vi": "Tỷ lệ chí mạng"
-          },
           "format": "rateApplied",
           "calcKey": "critRate",
           "appliedCalcKey": "appliedCrit",
@@ -245,579 +135,305 @@
           "subItems": [
             {
               "key": "critRateBoosted",
-              "label": {
-                "ja": "実効会心率(ボーナス込み)",
-                "en": "Effective Crit (with Bonus)",
-                "zh": "实效会心率(含奖励)",
-                "ko": "실효 치명타 확률(보너스 포함)",
-                "vi": "Tỷ lệ Hội tâm thực hiệu (bao gồm thưởng)"
-              },
               "format": "pct",
               "calcKey": "critRateBoosted",
-              "hiddenStat": true
+              "hiddenStat": true,
+              "label_key": "stDisp.probability.critRate.critRateBoosted"
             }
-          ]
+          ],
+          "label_key": "stDisp.probability.critRate"
         },
         {
           "key": "sympathyRate",
-          "label": {
-            "ja": "会意率",
-            "en": "Affinity",
-            "zh": "会意率",
-            "ko": "각성 확률",
-            "vi": "Tỷ lệ hiểu ý"
-          },
           "format": "rateApplied",
           "calcKey": "sympathyRate",
-          "appliedCalcKey": "appliedSympathy"
+          "appliedCalcKey": "appliedSympathy",
+          "label_key": "stDisp.probability.sympathyRate"
         },
         {
           "key": "addCritRate",
-          "label": {
-            "ja": "付加会心率",
-            "en": "Add Crit",
-            "zh": "直接会心率",
-            "ko": "추가 치명타 확률",
-            "vi": "Tỷ lệ chí mạng trực tiếp"
-          },
           "format": "pct",
-          "calcKey": "addCritRate"
+          "calcKey": "addCritRate",
+          "label_key": "stDisp.probability.addCritRate"
         },
         {
           "key": "addSympathyRate",
-          "label": {
-            "ja": "付加会意率",
-            "en": "Add Affinity",
-            "zh": "直接会意率",
-            "ko": "추가 각성 확률",
-            "vi": "Tỷ lệ hiểu ý trực tiếp"
-          },
           "format": "pct",
-          "calcKey": "addSympathyRate"
+          "calcKey": "addSympathyRate",
+          "label_key": "stDisp.probability.addSympathyRate"
         },
         {
           "key": "grazeConvert",
-          "label": {
-            "ja": "軽傷転換率",
-            "en": "Graze Convert",
-            "zh": "擦伤转化率",
-            "ko": "찰과상 전환율",
-            "vi": "Tỷ lệ chuyển đổi Trầy xước"
-          },
           "format": "pct",
-          "calcKey": "grazeConvert"
+          "calcKey": "grazeConvert",
+          "label_key": "stDisp.probability.grazeConvert"
         },
         {
           "key": "finalCritSym",
-          "label": {
-            "ja": "最終会心会意率",
-            "en": "Final Crit+Affinity",
-            "zh": "最终会心会意率",
-            "ko": "최종 치명타 각성 확률",
-            "vi": "Tỷ lệ Hội tâm Hội ý cuối cùng"
-          },
           "format": "pct",
           "calcKey": "finalCritSym",
           "expandable": true,
           "subItems": [
             {
               "key": "pCrit",
-              "label": {
-                "ja": "最終発動会心率",
-                "en": "Final Crit Rate",
-                "zh": "最终生效会心概率",
-                "ko": "최종 치명타 확률",
-                "vi": "Tỷ lệ Hội tâm phát động cuối cùng"
-              },
               "format": "pct",
-              "calcKey": "pCrit"
+              "calcKey": "pCrit",
+              "label_key": "stDisp.probability.finalCritSym.pCrit"
             },
             {
               "key": "pSym",
-              "label": {
-                "ja": "最終発動会意率",
-                "en": "Final Affinity Rate",
-                "zh": "最终生效会意概率",
-                "ko": "최종 각성 확률",
-                "vi": "Tỷ lệ Hội ý phát động cuối cùng"
-              },
               "format": "pct",
-              "calcKey": "pSympathy"
+              "calcKey": "pSympathy",
+              "label_key": "stDisp.probability.finalCritSym.pSym"
             },
             {
               "key": "pGraze",
-              "label": {
-                "ja": "最終発動軽傷率",
-                "en": "Final Graze Rate",
-                "zh": "最终生效擦伤概率",
-                "ko": "최종 찰과상 확률",
-                "vi": "Tỷ lệ Trầy xước phát động cuối cùng"
-              },
               "format": "pct",
-              "calcKey": "pGraze"
+              "calcKey": "pGraze",
+              "label_key": "stDisp.probability.finalCritSym.pGraze"
             },
             {
               "key": "pNormal",
-              "label": {
-                "ja": "最終発動並傷率",
-                "en": "Final Normal Rate",
-                "zh": "最终生效普伤概率",
-                "ko": "최종 일반 피해 확률",
-                "vi": "Tỷ lệ thường phát động cuối cùng"
-              },
               "format": "pct",
-              "calcKey": "pNormal"
+              "calcKey": "pNormal",
+              "label_key": "stDisp.probability.finalCritSym.pNormal"
             }
-          ]
+          ],
+          "label_key": "stDisp.probability.finalCritSym"
         }
-      ]
+      ],
+      "label_key_title": "stDisp.section.probability.title"
     },
     {
       "key": "dmgBoost",
-      "title": {
-        "ja": "ダメージ増加効果",
-        "en": "Damage Boost",
-        "zh": "增伤效果",
-        "ko": "피해 증가 효과",
-        "vi": "Hiệu quả gia tăng sát thương"
-      },
       "items": [
         {
           "key": "critBoost",
-          "label": {
-            "ja": "会心攻撃強化",
-            "en": "Crit DMG Boost",
-            "zh": "会心伤害加成",
-            "ko": "치명타 피해 보너스",
-            "vi": "Gia tăng Sát thương chí mạng"
-          },
           "format": "pct",
-          "calcKey": "critBoost"
+          "calcKey": "critBoost",
+          "label_key": "stDisp.dmgBoost.critBoost"
         },
         {
           "key": "sympathyBoost",
-          "label": {
-            "ja": "会意攻撃強化",
-            "en": "Affinity DMG Boost",
-            "zh": "会意伤害加成",
-            "ko": "각성 피해 보너스",
-            "vi": "Gia tăng Sát thương Hiểu ý"
-          },
           "format": "pct",
-          "calcKey": "sympathyBoost"
+          "calcKey": "sympathyBoost",
+          "label_key": "stDisp.dmgBoost.sympathyBoost"
         },
         {
           "key": "outerPen",
-          "label": {
-            "ja": "外功貫通",
-            "en": "Physical Pen",
-            "zh": "外功穿透",
-            "ko": "외공 관통",
-            "vi": "Xuyên thấu Ngoại công"
-          },
           "format": "float",
-          "calcKey": "outerPen"
+          "calcKey": "outerPen",
+          "label_key": "stDisp.dmgBoost.outerPen"
         },
         {
           "key": "weaponBonus",
-          "label": {
-            "ja": "外功ダメージ強化",
-            "en": "Physical DMG Boost",
-            "zh": "外功伤害加成",
-            "ko": "외공 피해 보너스",
-            "vi": "Gia tăng Sát thương Ngoại công"
-          },
           "format": "pct",
-          "calcKey": "weaponBonus"
+          "calcKey": "weaponBonus",
+          "label_key": "stDisp.dmgBoost.weaponBonus"
         },
         {
           "key": "elemBoostMain",
-          "label": {
-            "ja": "属性増強",
-            "en": "Element Boost",
-            "zh": "属攻穿透",
-            "ko": "속성 공격 관통",
-            "vi": "Tăng cường thuộc tính"
-          },
           "format": "float",
           "calcKey": "attrBoostSum",
           "expandable": true,
           "subItems": [
             {
               "key": "bellstrikePen",
-              "label": {
-                "ja": "鋼鳴貫通",
-                "en": "Bellstrike Pen",
-                "zh": "鸣金穿透",
-                "ko": "명금 관통",
-                "vi": "Xuyên thấu Minh Kim"
-              },
               "format": "float",
-              "calcKey": "bellstrikePen"
+              "calcKey": "bellstrikePen",
+              "label_key": "stDisp.dmgBoost.elemBoostMain.bellstrikePen"
             },
             {
               "key": "stonesplitPen",
-              "label": {
-                "ja": "砕岩貫通",
-                "en": "Stonesplit Pen",
-                "zh": "裂石穿透",
-                "ko": "열석 관통",
-                "vi": "Xuyên thấu Liệt Thạch"
-              },
               "format": "float",
-              "calcKey": "stonesplitPen"
+              "calcKey": "stonesplitPen",
+              "label_key": "stDisp.dmgBoost.elemBoostMain.stonesplitPen"
             },
             {
               "key": "silkbindPen",
-              "label": {
-                "ja": "糸操貫通",
-                "en": "Silkbind Pen",
-                "zh": "牵丝穿透",
-                "ko": "견사 관통",
-                "vi": "Xuyên thấu Khiên Ti"
-              },
               "format": "float",
-              "calcKey": "silkbindPen"
+              "calcKey": "silkbindPen",
+              "label_key": "stDisp.dmgBoost.elemBoostMain.silkbindPen"
             },
             {
               "key": "bamboocutPen",
-              "label": {
-                "ja": "瞬嵐貫通",
-                "en": "Bamboocut Pen",
-                "zh": "破竹穿透",
-                "ko": "파죽 관통",
-                "vi": "Xuyên thấu Phá Trúc"
-              },
               "format": "float",
-              "calcKey": "bamboocutPen"
+              "calcKey": "bamboocutPen",
+              "label_key": "stDisp.dmgBoost.elemBoostMain.bamboocutPen"
             },
             {
               "key": "voidPen",
-              "label": {
-                "ja": "無相貫通",
-                "en": "Void Pen",
-                "zh": "无相穿透",
-                "ko": "무상 관통",
-                "vi": "Xuyên thấu Vô Tướng"
-              },
               "format": "float",
-              "calcKey": "voidPen"
+              "calcKey": "voidPen",
+              "label_key": "stDisp.dmgBoost.elemBoostMain.voidPen"
             }
-          ]
+          ],
+          "label_key": "stDisp.dmgBoost.elemBoostMain"
         },
         {
           "key": "elemAtkBoost",
-          "label": {
-            "ja": "属性攻撃強化",
-            "en": "Elem ATK Boost",
-            "zh": "属攻伤害加成",
-            "ko": "속성 공격 피해 보너스",
-            "vi": "Gia tăng Sát thương thuộc tính"
-          },
           "format": "pct",
           "calcKey": "elemAtkBoostDisp",
           "expandable": true,
           "subItems": [
             {
               "key": "elemDmgBellstrike",
-              "label": {
-                "ja": "鋼鳴ダメージ上昇",
-                "en": "Bellstrike DMG",
-                "zh": "鸣金伤害加成",
-                "ko": "명금 피해 증가",
-                "vi": "Gia tăng Sát thương Minh Kim"
-              },
               "format": "pct",
-              "calcKey": "elemDmgBellstrike"
+              "calcKey": "elemDmgBellstrike",
+              "label_key": "stDisp.dmgBoost.elemAtkBoost.elemDmgBellstrike"
             },
             {
               "key": "elemDmgStonesplit",
-              "label": {
-                "ja": "砕岩ダメージ上昇",
-                "en": "Stonesplit DMG",
-                "zh": "裂石伤害加成",
-                "ko": "열석 피해 증가",
-                "vi": "Gia tăng Sát thương Liệt Thạch"
-              },
               "format": "pct",
-              "calcKey": "elemDmgStonesplit"
+              "calcKey": "elemDmgStonesplit",
+              "label_key": "stDisp.dmgBoost.elemAtkBoost.elemDmgStonesplit"
             },
             {
               "key": "elemDmgSilkbind",
-              "label": {
-                "ja": "糸操ダメージ上昇",
-                "en": "Silkbind DMG",
-                "zh": "牵丝伤害加成",
-                "ko": "견사 피해 증가",
-                "vi": "Gia tăng Sát thương Khiên Ti"
-              },
               "format": "pct",
-              "calcKey": "elemDmgSilkbind"
+              "calcKey": "elemDmgSilkbind",
+              "label_key": "stDisp.dmgBoost.elemAtkBoost.elemDmgSilkbind"
             },
             {
               "key": "elemDmgBamboocut",
-              "label": {
-                "ja": "瞬嵐ダメージ上昇",
-                "en": "Bamboocut DMG",
-                "zh": "破竹伤害加成",
-                "ko": "파죽 피해 증가",
-                "vi": "Gia tăng Sát thương Phá Trúc"
-              },
               "format": "pct",
-              "calcKey": "elemDmgBamboocut"
+              "calcKey": "elemDmgBamboocut",
+              "label_key": "stDisp.dmgBoost.elemAtkBoost.elemDmgBamboocut"
             },
             {
               "key": "elemDmgVoid",
-              "label": {
-                "ja": "無相ダメージ上昇",
-                "en": "Void DMG",
-                "zh": "无相伤害加成",
-                "ko": "무상 피해 증가",
-                "vi": "Gia tăng Sát thương Vô Tướng"
-              },
               "format": "pct",
-              "calcKey": "elemDmgVoid"
+              "calcKey": "elemDmgVoid",
+              "label_key": "stDisp.dmgBoost.elemAtkBoost.elemDmgVoid"
             }
-          ]
+          ],
+          "label_key": "stDisp.dmgBoost.elemAtkBoost"
         },
         {
           "key": "allMartialBoost",
-          "label": {
-            "ja": "全武術効果増加",
-            "en": "All Martial Boost",
-            "zh": "全部武学增效",
-            "ko": "모든 무술의 효과 증가",
-            "vi": "Tăng hiệu quả toàn bộ võ học"
-          },
           "format": "pct",
-          "calcKey": "allMartialBoost"
+          "calcKey": "allMartialBoost",
+          "label_key": "stDisp.dmgBoost.allMartialBoost"
         },
         {
           "key": "specMartialBoost",
-          "label": {
-            "ja": "指定武術効果強化",
-            "en": "Spec Martial Boost",
-            "zh": "指定武学增效",
-            "ko": "특정 무술 효과 증가",
-            "vi": "Tăng hiệu quả võ học được chỉ định"
-          },
           "format": "pct",
           "calcKey": "_specMartialBoostMax",
           "expandable": true,
           "subItems": [
             {
               "key": "swordDmg",
-              "label": {
-                "ja": "剣武術ダメ",
-                "en": "Sword DMG",
-                "zh": "剑武学增伤",
-                "ko": "검 무술 피해 증가",
-                "vi": "Kiếm Võ học Tăng sát thương"
-              },
               "format": "pct",
-              "calcKey": "swordDmg"
+              "calcKey": "swordDmg",
+              "label_key": "stDisp.dmgBoost.specMartialBoost.swordDmg"
             },
             {
               "key": "spearDmg",
-              "label": {
-                "ja": "槍武術ダメ",
-                "en": "Spear DMG",
-                "zh": "枪武学增伤",
-                "ko": "창 무술 피해 증가",
-                "vi": "Võ học súng tăng sát thương"
-              },
               "format": "pct",
-              "calcKey": "spearDmg"
+              "calcKey": "spearDmg",
+              "label_key": "stDisp.dmgBoost.specMartialBoost.spearDmg"
             },
             {
               "key": "fanDmg",
-              "label": {
-                "ja": "扇武術ダメ",
-                "en": "Fan DMG",
-                "zh": "扇武学增效",
-                "ko": "부채 무술 효과 증가",
-                "vi": "Võ học quạt tăng hiệu quả"
-              },
               "format": "pct",
-              "calcKey": "fanDmg"
+              "calcKey": "fanDmg",
+              "label_key": "stDisp.dmgBoost.specMartialBoost.fanDmg"
             },
             {
               "key": "umbrellaDmg",
-              "label": {
-                "ja": "傘武術ダメ",
-                "en": "Umbrella DMG",
-                "zh": "伞武学增效",
-                "ko": "우산 무술 효과 증가",
-                "vi": "Võ học dù tăng hiệu quả"
-              },
               "format": "pct",
-              "calcKey": "umbrellaDmg"
+              "calcKey": "umbrellaDmg",
+              "label_key": "stDisp.dmgBoost.specMartialBoost.umbrellaDmg"
             },
             {
               "key": "hengBladeDmg",
-              "label": {
-                "ja": "横刀武術ダメ",
-                "en": "Heng Blade DMG",
-                "zh": "横刀武学增伤",
-                "ko": "횡도 무술 피해 증가",
-                "vi": "Võ học hoành đao tăng sát thương"
-              },
               "format": "pct",
-              "calcKey": "hengBladeDmg"
+              "calcKey": "hengBladeDmg",
+              "label_key": "stDisp.dmgBoost.specMartialBoost.hengBladeDmg"
             },
             {
               "key": "moBladeDmg",
-              "label": {
-                "ja": "斬馬刀武術ダメ",
-                "en": "Mo Blade DMG",
-                "zh": "陌刀武学增伤",
-                "ko": "맥도 무술 피해 증가",
-                "vi": "Võ học đao Mạc tăng sát thương"
-              },
               "format": "pct",
-              "calcKey": "moBladeDmg"
+              "calcKey": "moBladeDmg",
+              "label_key": "stDisp.dmgBoost.specMartialBoost.moBladeDmg"
             },
             {
               "key": "dualBladesDmg",
-              "label": {
-                "ja": "双剣武術ダメ",
-                "en": "Dual Blades DMG",
-                "zh": "双刀武学增伤",
-                "ko": "쌍도 무술 피해 증가",
-                "vi": "Võ học song đao tăng sát thương"
-              },
               "format": "pct",
-              "calcKey": "dualBladesDmg"
+              "calcKey": "dualBladesDmg",
+              "label_key": "stDisp.dmgBoost.specMartialBoost.dualBladesDmg"
             },
             {
               "key": "ropeDartDmg",
-              "label": {
-                "ja": "縄鏢武術ダメ",
-                "en": "Rope Dart DMG",
-                "zh": "绳镖武学增伤",
-                "ko": "승표 무술 피해 증가",
-                "vi": "Võ học dây phi tiêu tăng sát thương"
-              },
               "format": "pct",
-              "calcKey": "ropeDartDmg"
+              "calcKey": "ropeDartDmg",
+              "label_key": "stDisp.dmgBoost.specMartialBoost.ropeDartDmg"
             },
             {
               "key": "gauntletDmg",
-              "label": {
-                "ja": "手甲武術ダメ",
-                "en": "Gauntlet DMG",
-                "zh": "手甲武学增伤",
-                "ko": "권갑 무술 피해 증가",
-                "vi": "Tăng sát thương võ học Giáp Tay"
-              },
               "format": "pct",
-              "calcKey": "gauntletDmg"
+              "calcKey": "gauntletDmg",
+              "label_key": "stDisp.dmgBoost.specMartialBoost.gauntletDmg"
             }
-          ]
+          ],
+          "label_key": "stDisp.dmgBoost.specMartialBoost"
         },
         {
           "key": "bossBoost",
-          "label": {
-            "ja": "首領に与えるダメージ増加",
-            "en": "BOSS DMG Boost",
-            "zh": "对首领单位增伤",
-            "ko": "BOSS 유닛에 대한 피해 증가",
-            "vi": "Tăng sát thương đối với đơn vị thủ lĩnh"
-          },
           "format": "pct",
-          "calcKey": "bossBoost"
+          "calcKey": "bossBoost",
+          "label_key": "stDisp.dmgBoost.bossBoost"
         },
         {
           "key": "playerBoost",
-          "label": {
-            "ja": "プレイヤーに与える効果強化",
-            "en": "PvP DMG Boost",
-            "zh": "对玩家单位增效",
-            "ko": "플레이어 유닛에 대한 효과 증가",
-            "vi": "Tăng hiệu quả đối với đơn vị Người chơi"
-          },
           "format": "pct",
-          "calcKey": "playerBoost"
+          "calcKey": "playerBoost",
+          "label_key": "stDisp.dmgBoost.playerBoost"
         },
         {
           "key": "stMysticDmg",
-          "label": {
-            "ja": "単体系奇術ダメージ増加",
-            "en": "ST Mystic DMG Boost",
-            "zh": "单体类奇术增伤",
-            "ko": "단일류 비결 피해 증가",
-            "vi": "Tăng sát thương Kỳ thuật đơn thể"
-          },
           "format": "pct",
           "calcKey": "stMysticDmgDisp",
           "expandable": true,
           "subItems": [
             {
               "key": "stControlMysticDmg",
-              "label": {
-                "ja": "単体制御系奇術ダメ",
-                "en": "ST Control Mystic",
-                "zh": "单体控制类奇术增伤",
-                "ko": "단일 제어류 비결",
-                "vi": "Tăng sát thương Kỳ thuật đơn thể (Khống chế)"
-              },
               "format": "pct",
-              "calcKey": "stControlMysticDmg"
+              "calcKey": "stControlMysticDmg",
+              "label_key": "stDisp.dmgBoost.stMysticDmg.stControlMysticDmg"
             },
             {
               "key": "stBurstMysticDmg",
-              "label": {
-                "ja": "単体爆発系奇術ダメ",
-                "en": "ST Burst Mystic",
-                "zh": "单体爆发类奇术增伤",
-                "ko": "단일 폭발류 비결",
-                "vi": "Tăng sát thương Kỳ thuật đơn thể (Bùng nổ)"
-              },
               "format": "pct",
-              "calcKey": "stBurstMysticDmg"
+              "calcKey": "stBurstMysticDmg",
+              "label_key": "stDisp.dmgBoost.stMysticDmg.stBurstMysticDmg"
             }
-          ]
+          ],
+          "label_key": "stDisp.dmgBoost.stMysticDmg"
         },
         {
           "key": "areaMysticDmg",
-          "label": {
-            "ja": "範囲系奇術ダメージ増加",
-            "en": "AOE Mystic DMG Boost",
-            "zh": "群体类奇术增伤",
-            "ko": "단체류 비결 피해 증가",
-            "vi": "Tăng sát thương Kỳ thuật phạm vi"
-          },
           "format": "pct",
           "calcKey": "areaMysticDmgDisp",
           "expandable": true,
           "subItems": [
             {
               "key": "areaDebuffMysticDmg",
-              "label": {
-                "ja": "範囲状態異常系奇術ダメ",
-                "en": "Area Debuff Mystic",
-                "zh": "群体异常类奇术增伤",
-                "ko": "단체 이상류 비결",
-                "vi": "Tăng sát thương Kỳ thuật phạm vi (Trạng thái bất thường)"
-              },
               "format": "pct",
-              "calcKey": "areaDebuffMysticDmg"
+              "calcKey": "areaDebuffMysticDmg",
+              "label_key": "stDisp.dmgBoost.areaMysticDmg.areaDebuffMysticDmg"
             },
             {
               "key": "areaDmgMysticDmg",
-              "label": {
-                "ja": "範囲攻撃系奇術ダメ",
-                "en": "Area DMG Mystic",
-                "zh": "群体伤害类奇术增伤",
-                "ko": "단체 피해류 비결",
-                "vi": "Tăng sát thương Kỳ thuật phạm vi (Sát thương)"
-              },
               "format": "pct",
-              "calcKey": "areaDmgMysticDmg"
+              "calcKey": "areaDmgMysticDmg",
+              "label_key": "stDisp.dmgBoost.areaMysticDmg.areaDmgMysticDmg"
             }
-          ]
+          ],
+          "label_key": "stDisp.dmgBoost.areaMysticDmg"
         }
-      ]
+      ],
+      "label_key_title": "stDisp.section.dmgBoost.title"
     }
   ]
 }

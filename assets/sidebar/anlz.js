@@ -18,10 +18,13 @@
 
   function curLang() { return (window.currentLang) || 'ja'; }
 
-  function _label(labelObj, fallback) {
-    if (!labelObj) return fallback || '';
-    const lang = curLang();
-    return labelObj[lang] || labelObj.en || labelObj.ja || fallback || '';
+  // 旧: stat_display.json 内蔵 label object 直引き。
+  // 新 (2026-06-10 i18n 一本化 P5): stat_display.json は label_key (stDisp.* path) 参照のみ → window.T (DataStore Proxy) で引く。
+  // T_CHAIN に stat_display cat 追加済 = 自動で全言語対応。
+  function _labelKey(key, fallback) {
+    if (!key) return fallback || '';
+    const T = window.T || {};
+    return T[key] || fallback || '';
   }
 
   // path系 attack subItem (鋼鳴攻撃力 等) は DataStore 合成を優先源とする (json label はフォールバック)。
@@ -93,7 +96,7 @@
     }
     let html = `
       <div class="wwm-sb-row${cls}${hiddenCls}" data-item-key="${item.key}">
-        <span class="wwm-sb-label">${_synthStatLabel(item.key) || _label(item.label, item.key)}${warnIcon}</span>
+        <span class="wwm-sb-label">${_synthStatLabel(item.key) || _labelKey(item.label_key, item.key)}${warnIcon}</span>
         <span class="wwm-sb-value">${_fmtItem(item, params, baseParams)}</span>
       </div>
     `;
@@ -120,7 +123,7 @@
       <section class="wwm-sb-section${isCollapsed ? ' wwm-sb-collapsed-sec' : ''}" data-section-key="${section.key}">
         <h3 class="wwm-sb-section-title" data-toggle-section="${section.key}">
           <span class="wwm-sb-sec-arrow">${isCollapsed ? '▶' : '▼'}</span>
-          ${_label(section.title, section.key)}
+          ${_labelKey(section.label_key_title, section.key)}
         </h3>
         <div class="wwm-sb-items">${items}</div>
       </section>
@@ -164,7 +167,7 @@
     const _avSrc = ri?._avatarBase64 || ri?._avatarUrl || (ri?.roleAvatar && window.WWM_AVATAR_ICONS?.[ri.roleAvatar]) || '';
     const avatar = _avSrc ? `<img class="wwm-sb-avatar" src="${_avSrc}" alt="avatar">` : '';
     const charName = ri?.roleName ? `${ri.roleName} <span class="wwm-muted">Lv${ri.level || '?'}</span>` : '';
-    const titleLabel = _label(cfg.header?.title, '総合武力');
+    const titleLabel = _labelKey(cfg.header?.label_key, 'Total Power');
     // 再render時に score が "-" に消えないよう baseline から直接埋め込む (updateHero タイミング非依存)
     const _bl = WWMState.baseline;
     const martialScoreStr = (_bl && typeof _bl.statusScore === 'number') ? Math.round(_bl.statusScore).toLocaleString() : '-';

@@ -4,11 +4,9 @@
 // 実装 plan : docs/superpowers/plans/2026-06-09-i18n-unification.md
 (function () {
   'use strict';
-  const CATS = ['kongfu', 'xinfa', 'sets', 'stat', 'path', 'skilltype', 'weapontype', 'ui', 'game_lexicon'];
-  // t() lookup chain: ui (ツール独自) → game_lexicon (ゲーム固有 UI 名) → stat (ステ/affix の真実源)。
-  // stat 追加 (2026-06-10) = xinfa.js 等が tkey 経由で stat.json のステ名を引けるようにする
-  // (例: tkey='minPhys' → 「最小外功攻撃」)。 game_lexicon ⊂ stat の重複 (physDef) は game_lexicon 優先で既存挙動維持。
-  const T_CHAIN = ['ui', 'game_lexicon', 'stat'];
+  const CATS = ['kongfu', 'xinfa', 'sets', 'stat', 'path', 'skilltype', 'weapontype', 'ui', 'game_lexicon', 'stat_display'];
+  // t() lookup chain: ui (ツール独自) → game_lexicon (ゲーム固有 UI 名) → stat (ステ/affix 真実源) → stat_display (Sidebar 表示 label、 stDisp.* prefix)。
+  const T_CHAIN = ['ui', 'game_lexicon', 'stat', 'stat_display'];
   const VERSION = (typeof window !== 'undefined' && window.WWM_DISPLAY_VERSION) || 11;
   // 計算/icon dict (data/*.json) の供給一元化 (P4-mini 2026-06-10)。
   // dictMap の唯一源 = ここ。 window.WWM_* は DataStore が供給する互換 read view (callsite は直読み続行で正式承認)。
