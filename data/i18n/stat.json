@@ -60,13 +60,6 @@
     "ko": "외공 방어력",
     "vi": "Phòng Ngự Ngoại công"
   },
-  "physPen": {
-    "ja": "外功貫通",
-    "en": "Phys Pen",
-    "zh": "外功穿透",
-    "ko": "외공 관통",
-    "vi": "Ngoại công Xuyên thấu"
-  },
   "physResist": {
     "ja": "外功耐性",
     "en": "Phys Res",
@@ -581,13 +574,6 @@
     "zh": "指定武学增效",
     "ko": "특정 무술 효과 증가",
     "vi": "Tăng hiệu quả võ học được chỉ định"
-  },
-  "elemPen": {
-    "ja": "属性貫通",
-    "en": "Elemental Penetration",
-    "zh": "属攻穿透",
-    "ko": "속성 공격 관통",
-    "vi": "Thuộc tính Tấn công Xuyên thấu"
   },
   "elemAtkBoost": {
     "ja": "属性攻撃強化",

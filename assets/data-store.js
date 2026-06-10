@@ -63,6 +63,26 @@
         if (!ui[k]) ui[k] = v;
       }
     }
+    // 短縮ステ (stat.<short>) + path.affix 接尾辞 で合成 (例: phys + pen = physPen「外功貫通」)。
+    // stat.physPen 物理保持を撤去、 stat.phys + path.affix.pen 合成で代替 (重複解消)。
+    const stat = data.stat;
+    if (stat) {
+      const SHORT_AFFIX = { phys: ['Pen'] }; // 拡張時はここに追加 (例: void: ['Pen','Atk'] 等)
+      const SUF_KEY = { Pen: 'pen', Atk: 'atk', Dmg: 'dmgUp' };
+      for (const [s, sufs] of Object.entries(SHORT_AFFIX)) {
+        const base = stat[s]; if (!base) continue;
+        for (const suf of sufs) {
+          const k = s + suf;
+          const v = {};
+          const affKey = SUF_KEY[suf];
+          for (const L of LANGS) {
+            const b = base[L]; if (!b) continue;
+            v[L] = b + (path.affix[affKey]?.[L] || '');
+          }
+          if (!ui[k]) ui[k] = v;
+        }
+      }
+    }
   }
 
   function ready() {
