@@ -1241,6 +1241,12 @@
     "zh": "联系 (X / Twitter)",
     "ko": "문의 (X / Twitter)"
   },
+  "footerUnofficial": {
+    "ja": "非公式ファンメイドツール。NetEase Inc. / Everstone Studio とは関連しません。",
+    "en": "Unofficial fan-made tool. Not affiliated with NetEase Inc. / Everstone Studio.",
+    "zh": "非官方粉丝制作工具。与 NetEase Inc. / Everstone Studio 无关。",
+    "ko": "비공식 팬메이드 도구. NetEase Inc. / Everstone Studio 와 무관합니다."
+  },
   "tipDiagBadge": {
     "ja": "弱点指摘を表示",
     "en": "Show weak point findings",
