@@ -301,12 +301,9 @@
             if (delta > 0 && (!best || delta > best.delta)) {
               const lang = _curLang();
               const _setN = (sfx) => {
-                if (!sfx) return '';
-                if (window.WWM_DS) {
-                  const n = window.WWM_DS.name('sets', sfx, lang);
-                  if (n.indexOf('[sets:') !== 0) return n;
-                }
-                return window.WWM_SETS.bowSets[sfx]?.names?.[lang] || window.WWM_SETS.bowSets[sfx]?.names?.ja || '';
+                if (!sfx || !window.WWM_DS) return '';
+                const n = window.WWM_DS.name('sets', sfx, lang);
+                return n.indexOf('[sets:') === 0 ? '' : n;
               };
               const oldName = _setN(curBowSuffix);
               const newName = _setN(sfxInt);

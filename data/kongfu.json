@@ -1,11 +1,5 @@
 {
   "10101": {
-    "names": {
-      "ja": "九変の剣",
-      "en": "Strategic Sword",
-      "zh": "積矩九劍",
-      "ko": "구현의 검무"
-    },
     "weaponType": "sword",
     "effects": {
       "minBellstrikeAdd": 80,
@@ -33,12 +27,6 @@
     ]
   },
   "10102": {
-    "names": {
-      "ja": "無銘の剣",
-      "en": "Nameless Sword",
-      "zh": "無名劍法",
-      "ko": "무명 검법"
-    },
     "weaponType": "sword",
     "effects": {
       "minBellstrikeAdd": 80,
@@ -66,12 +54,6 @@
     ]
   },
   "10201": {
-    "names": {
-      "ja": "蛇神の槍",
-      "en": "Heavenquaker Spear",
-      "zh": "九曲驚神槍",
-      "ko": "격류의 파동"
-    },
     "weaponType": "spear",
     "effects": {
       "minBellstrikeAdd": 80,
@@ -98,12 +80,6 @@
     ]
   },
   "10202": {
-    "names": {
-      "ja": "無銘の槍",
-      "en": "Nameless Spear",
-      "zh": "無名槍法",
-      "ko": "무명 창법"
-    },
     "weaponType": "spear",
     "effects": {
       "minBellstrikeAdd": 80,
@@ -131,12 +107,6 @@
     ]
   },
   "10301": {
-    "names": {
-      "ja": "薬川の扇",
-      "en": "Panacea Fan",
-      "zh": "明川藥典",
-      "ko": "천계의 수호"
-    },
     "weaponType": "fan",
     "effects": {
       "minSilkbindAdd": 80,
@@ -163,12 +133,6 @@
     ]
   },
   "10302": {
-    "names": {
-      "ja": "墨筆の扇",
-      "en": "Inkwell Fan",
-      "zh": "青山執筆",
-      "ko": "청산의 정수"
-    },
     "weaponType": "fan",
     "effects": {
       "minSilkbindAdd": 80,
@@ -187,12 +151,6 @@
     ]
   },
   "20103": {
-    "names": {
-      "ja": "嵐雷の槍",
-      "en": "Stormbreaker Spear",
-      "zh": "八方風雷槍",
-      "ko": "풍뢰의 징표"
-    },
     "weaponType": "spear",
     "effects": {
       "minStonesplitAdd": 80,
@@ -221,12 +179,6 @@
     ]
   },
   "20401": {
-    "names": {
-      "ja": "断魂の刀",
-      "en": "Thundercry Blade",
-      "zh": "嗟夫刀法",
-      "ko": "탄식의 검기"
-    },
     "weaponType": "mo_blade",
     "effects": {
       "minStonesplitAdd": 80,
@@ -253,19 +205,17 @@
     ],
     "synergyEffects": [
       {
-        "with": [20103],
-        "effects": { "bonusCritRate": 0.24 },
+        "with": [
+          20103
+        ],
+        "effects": {
+          "bonusCritRate": 0.24
+        },
         "raw": "断魂×嵐雷ペア時 ボーナス会心率+24% (本来 断魂チャージ専用効果、 嵐雷とのセット活用時 全体反映の設計判断、 内部 bonusCritRate 経由: judgeRes不影響/cap内加算/レベルキャップ上昇で増加可能性)"
       }
     ]
   },
   "20402": {
-    "names": {
-      "ja": "破陣の刀",
-      "en": "Phalanxbane Blade",
-      "zh": "十方破阵",
-      "ko": "십방파진"
-    },
     "weaponType": "mo_blade",
     "effects": {
       "minStonesplitAdd": 80,
@@ -293,12 +243,6 @@
     ]
   },
   "20501": {
-    "names": {
-      "ja": "獄炎の双剣",
-      "en": "Infernal Twinblades",
-      "zh": "泥犁三垢",
-      "ko": "윤회의 가르침"
-    },
     "weaponType": "dual_blades",
     "effects": {
       "minElemMainAdd": 80,
@@ -331,12 +275,6 @@
     "path": "bamboocut"
   },
   "20601": {
-    "names": {
-      "ja": "千紅の傘",
-      "en": "Crimson Umbrella",
-      "zh": "九重春色",
-      "ko": "봄의 선율"
-    },
     "weaponType": "umbrella",
     "effects": {
       "minSilkbindAdd": 80,
@@ -355,12 +293,6 @@
     ]
   },
   "20602": {
-    "names": {
-      "ja": "誘魂の傘",
-      "en": "Soulbinding Umbrella",
-      "zh": "千香引魂蛊",
-      "ko": "소생의 향"
-    },
     "weaponType": "umbrella",
     "effects": {
       "minSilkbindAdd": 80,
@@ -387,12 +319,6 @@
     ]
   },
   "20603": {
-    "names": {
-      "ja": "醉夢の傘",
-      "en": "Drunken Dream Umbrella",
-      "zh": "醉梦游春",
-      "ko": "일장춘몽"
-    },
     "weaponType": "umbrella",
     "effects": {
       "minElemMainAdd": 80,
@@ -418,12 +344,6 @@
     "path": "bamboocut"
   },
   "20701": {
-    "names": {
-      "ja": "浮塵の縄",
-      "en": "Mortal Rope Dart",
-      "zh": "粟子游尘",
-      "ko": "속세의 지혜"
-    },
     "weaponType": "rope_dart",
     "effects": {
       "minElemMainAdd": 80,
@@ -449,12 +369,6 @@
     "path": "bamboocut"
   },
   "20702": {
-    "names": {
-      "ja": "浮雲の縄",
-      "en": "Cloudborne Rope Dart",
-      "zh": "粟子行云",
-      "ko": "운진의 궤적"
-    },
     "weaponType": "rope_dart",
     "effects": {
       "minElemMainAdd": 80,
@@ -480,12 +394,6 @@
     "path": "bamboocut"
   },
   "20703": {
-    "names": {
-      "ja": "千機の縄",
-      "en": "Skygrasp Rope Dart",
-      "zh": "千机索天",
-      "ko": "천기의 사슬"
-    },
     "weaponType": "ropeDart",
     "effects": {},
     "description": "千機の縄 (縄鏢、Skygrasp Rope Dart、 2026年7月実装予定)。 瞬嵐属性。 effects/derived は実装後に追記。",
@@ -493,12 +401,6 @@
     "_pendingImplementation": true
   },
   "20801": {
-    "names": {
-      "ja": "斬雪の刀",
-      "en": "Snowparting Blade",
-      "zh": "斩雪刀法",
-      "ko": "만설의 참격"
-    },
     "weaponType": "new_blade",
     "effects": {
       "minStonesplitAdd": 80,
@@ -525,12 +427,6 @@
     ]
   },
   "20901": {
-    "names": {
-      "ja": "天志の拳",
-      "en": "Heavenwill Gauntlet",
-      "zh": "天志垂象",
-      "ko": "천지의 주먹"
-    },
     "weaponType": "gauntlet",
     "effects": {},
     "description": "天志の拳 (手甲、Heavenwill Gauntlet、 2026年7月実装予定、 新武器種)。 瞬嵐属性。 effects/derived は実装後に追記。",

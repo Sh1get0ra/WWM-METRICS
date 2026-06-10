@@ -40,7 +40,6 @@
     const root = document.getElementById('wwmGearGrid');
     if (!root) return;
     const eqDet = roleInfo?.wearEquipsDetailed || {};
-    const sets = window.WWM_SETS || {};
     const kongfu = window.WWM_KONGFU || {};
     const lang = (window.currentLang) || 'ja';
     const kfName = (id) => {
@@ -67,10 +66,7 @@
       const label = _GEAR_SLOT_LABELS[slot] || slot;
       if (!eq) return `<div class="wwm-equip-slot wwm-equip-empty" data-slot="${slot}"><div class="wwm-equip-slot-header"><b>${label}</b><span class="wwm-muted">未装備</span></div></div>`;
       const suffix = eq.exVo?.suffix;
-      const isBow = slot === '9' || slot === '21';
-      const isArmor = ['3','4','5','8'].includes(slot);
-      const setsCat = isBow ? sets.bowSets : (isArmor ? sets.defensiveSets : sets.weaponSets);
-      let setName = (window.WWM_DS && suffix) ? window.WWM_DS.name('sets', suffix, lang) : (setsCat?.[suffix]?.names?.[lang] || setsCat?.[suffix]?.names?.ja || setsCat?.[suffix]?.names?.en || '');
+      let setName = (window.WWM_DS && suffix) ? window.WWM_DS.name('sets', suffix, lang) : '';
       if (setName && setName.indexOf('[sets:') === 0) setName = '';
       if (lang === 'en' && setName) setName = setName.replace(/\s+Set$/i, '');
       const score = calcCardScore(eq);

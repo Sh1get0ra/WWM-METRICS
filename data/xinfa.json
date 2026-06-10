@@ -1,11 +1,5 @@
 {
   "1": {
-    "names": {
-      "ja": "龍虎の勢",
-      "en": "Wind Beneath Wings",
-      "zh": "生龙活虎",
-      "ko": "맹호의 질주"
-    },
     "description": "-40% Endurance dash cost / +30% Movement (3s) / +1% Max HP +1000 HP per kill。汎用 移動/回復系。",
     "attributeBuff": {
       "tier0": {
@@ -62,12 +56,6 @@
     "rank": "blue"
   },
   "2": {
-    "names": {
-      "ja": "晚雪間",
-      "en": "Evening Snow",
-      "zh": "晚雪间",
-      "ko": "설한의 균열"
-    },
     "description": "戦闘開始後12s 気血60%未満で 4s雪見効果、 毎秒気血 2%+600回復 (300s CD)。 汎用 回復系。",
     "attributeBuff": {
       "tier0": {
@@ -124,12 +112,6 @@
     "rank": "blue"
   },
   "3": {
-    "names": {
-      "ja": "鉄身術",
-      "en": "Steadfast Stance",
-      "zh": "铁身诀",
-      "ko": "철포삼"
-    },
     "description": "攻撃を受ける時 硬直が出にくくなる (首領/プレイヤー攻撃では非発動)。 汎用 行動妨害軽減系。",
     "attributeBuff": {
       "tier0": {
@@ -186,12 +168,6 @@
     "rank": "blue"
   },
   "4": {
-    "names": {
-      "ja": "山月無影",
-      "en": "Shadow Assault",
-      "zh": "山月无影",
-      "ko": "월하의 섬광"
-    },
     "description": "命門一閃 奇襲距離+1.5m + 与ダメ+10%、 奇襲成功で気血5%回復。 汎用。",
     "attributeBuff": {
       "tier0": {
@@ -251,12 +227,6 @@
     "rank": "blue"
   },
   "5": {
-    "names": {
-      "ja": "血涙不止",
-      "en": "Fivefold Bleed",
-      "zh": "极乐泣血",
-      "ko": "핏빛 찬가"
-    },
     "description": "10%確率で泣血付与、 5stack蓄積→刺傷ダメ。 汎用攻撃系 (少し強め)。",
     "attributeBuff": {
       "tier0": {
@@ -316,12 +286,6 @@
     "rank": "blue"
   },
   "6": {
-    "names": {
-      "ja": "砂塵一閃",
-      "en": "Sandswirl Tail",
-      "zh": "沙摆尾",
-      "ko": "사막의 춤"
-    },
     "description": "鱗舞追月 ニシキゴイ変身中 突進/跳躍消費-50%、 形態終了で気血シールド1生成。 汎用。",
     "attributeBuff": {
       "tier0": {
@@ -378,12 +342,6 @@
     "rank": "blue"
   },
   "41": {
-    "names": {
-      "ja": "征軍帰郷",
-      "en": "Envigorated Warrior",
-      "zh": "征人归",
-      "ko": "생명의 귀환"
-    },
     "description": "+5% all damage/healing / -5s cooldown after hit / +5% damage taken (Cage)",
     "attributeBuff": {
       "tier0": {
@@ -441,12 +399,6 @@
     "rank": "purple"
   },
   "42": {
-    "names": {
-      "ja": "怨念連鎖",
-      "en": "Bitter Seasons",
-      "zh": "所恨年年",
-      "ko": "천추의 한"
-    },
     "description": "毒スタック → 敵 外功防御/耐性 デバフ。 汎用。",
     "attributeBuff": {
       "tier0": {
@@ -506,12 +458,6 @@
     "rank": "purple"
   },
   "43": {
-    "names": {
-      "ja": "帰燕の経",
-      "en": "Vital Leech",
-      "zh": "归燕经",
-      "ko": "제비의 보은"
-    },
     "description": "とどめ技で 与ダメ基準 気血回復。 汎用 (吸血/真気系)。",
     "attributeBuff": {
       "tier0": {
@@ -568,12 +514,6 @@
     "rank": "purple"
   },
   "44": {
-    "names": {
-      "ja": "怒濤斬馬",
-      "en": "Fury Harvest",
-      "zh": "怒斩马",
-      "ko": "분노의 참격"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "奇術精気リソース系 (精気回復/獲得)。 汎用。",
@@ -632,12 +572,6 @@
     "rank": "purple"
   },
   "45": {
-    "names": {
-      "ja": "長生無相",
-      "en": "Divine Roulette",
-      "zh": "长生无相",
-      "ko": "무상의 불멸"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "受け流し成功で長生バフ (与ダメ+10%/確定会心/確定会意 1択、10s、30sCD)。 汎用。",
@@ -699,12 +633,6 @@
     "rank": "purple"
   },
   "46": {
-    "names": {
-      "ja": "舞影",
-      "en": "Evasive Charge",
-      "zh": "婆娑影",
-      "ko": "춤추는 그림자"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "完全回避で消費気力返還/被ダメ減/回避強化。 汎用。",
@@ -765,12 +693,6 @@
     "rank": "purple"
   },
   "47": {
-    "names": {
-      "ja": "和光同塵",
-      "en": "Light and Shadow Alike",
-      "zh": "明晦同尘",
-      "ko": "빛과 그림자"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "帰義/鏖戦 効果 (直接ダメ+/被ダメ- + 敵/自気血欠損で追加上昇)。 汎用。",
@@ -833,12 +755,6 @@
     "rank": "purple"
   },
   "48": {
-    "names": {
-      "ja": "赤心筆",
-      "en": "Heart of Fire",
-      "zh": "丹心篆",
-      "ko": "단심의 서약"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "気血<30%で警戒/惕心バフ (回復+被ダメ減)、詰問デバフで敵与ダメ減。 汎用。",
@@ -897,12 +813,6 @@
     "rank": "purple"
   },
   "81": {
-    "names": {
-      "ja": "易水の歌",
-      "en": "Morale Chant",
-      "zh": "易水歌",
-      "ko": "결의의 노래"
-    },
     "description": "5 stack × (+2 物理貫通, +1% damage·heal, 12s)。衰弱中 stack/効果 倍 (Tier3)。Tier5 +4.6% 直接会心率",
     "attributeBuff": {
       "tier0": {
@@ -961,12 +871,6 @@
     "rank": "gold"
   },
   "82": {
-    "names": {
-      "ja": "四季無常",
-      "en": "Seasonal Edge",
-      "zh": "四时无常",
-      "ko": "계절의 순환"
-    },
     "description": "武変技発動完了時 春/夏/秋/冬 1効果ランダム獲得、 30s/10s稼働",
     "attributeBuff": {
       "tier0": {
@@ -1027,12 +931,6 @@
     "rank": "gold"
   },
   "101": {
-    "names": {
-      "ja": "千山法",
-      "en": "Mountain's Might",
-      "zh": "千山法",
-      "ko": "천산의 의지"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "無銘の槍専用 — 乾坤定/長風効果強化、山移/真気不均衡 関連。 紫。",
@@ -1063,7 +961,10 @@
         "needsManualInput": false,
         "statType": "Bellstrike Attack",
         "raw": "Bellstrike Attack (Solo Mode Level scaled, rank=purple)",
-        "effects": {"minBellstrike":10.9,"maxBellstrike":21.7},
+        "effects": {
+          "minBellstrike": 10.9,
+          "maxBellstrike": 21.7
+        },
         "weaponSpecific": "bellstrike",
         "pendingImplementation": true,
         "minPathATK": 10.9,
@@ -1092,7 +993,9 @@
       },
       "tier5": {
         "permanent": true,
-        "effects": {"bellstrikePen":6},
+        "effects": {
+          "bellstrikePen": 6
+        },
         "raw": "Bellstrike Penetration +6",
         "weaponSpecific": "bellstrike",
         "pendingImplementation": true
@@ -1111,12 +1014,6 @@
     "rank": "purple"
   },
   "102": {
-    "names": {
-      "ja": "星火燎原",
-      "en": "Wildfire Spark",
-      "zh": "燎原星火",
-      "ko": "잿빛의 잔영"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "気力消費返還/星火スタック。 汎用扱い (kongfuRequiredなし)。",
@@ -1179,12 +1076,6 @@
     "rank": "purple"
   },
   "103": {
-    "names": {
-      "ja": "威猛歌",
-      "en": "Battle Anthem",
-      "zh": "威猛歌",
-      "ko": "맹수의 포효"
-    },
     "modes": {
       "vsBoss": {
         "bossBoost": 0.1
@@ -1275,12 +1166,6 @@
     "rank": "purple"
   },
   "104": {
-    "names": {
-      "ja": "無名心法",
-      "en": "Sword Morph",
-      "zh": "无名心法",
-      "ko": "무명 심법"
-    },
     "description": "無銘の剣 専用心法。 複数剣気 + 気湧効果。",
     "attributeBuff": {
       "tier0": {
@@ -1355,12 +1240,6 @@
     "rank": "gold"
   },
   "151": {
-    "names": {
-      "ja": "逐狼心経",
-      "en": "Wolfchaser's Art",
-      "zh": "逐狼心经",
-      "ko": "굶주린 늑대"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "蛇神の槍専用 — 六酔槍連撃数短縮 + 無愁酒/急流バフ + 呪い酒デバフ。 紫。",
@@ -1437,12 +1316,6 @@
     "rank": "purple"
   },
   "152": {
-    "names": {
-      "ja": "武芸百般",
-      "en": "Adaptive Steel",
-      "zh": "武艺百般",
-      "ko": "무공의 경지"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "近接武器(剣/槍/双剣/斬馬刀/横刀)武芸効果 + 武変技強化。 紫。 ※横刀IDは未マッピングのため除外。",
@@ -1489,7 +1362,9 @@
         "needsManualInput": false,
         "statType": "Max Bellstrike Attack",
         "raw": "Max Bellstrike Attack (Solo Mode Level scaled, rank=purple)",
-        "effects": {"maxBellstrike":32.6},
+        "effects": {
+          "maxBellstrike": 32.6
+        },
         "weaponSpecific": "bellstrike",
         "pendingImplementation": true,
         "minPathATK": 32.6,
@@ -1534,7 +1409,9 @@
       },
       "tier5": {
         "permanent": true,
-        "effects": {"bellstrikeDmgBoost":0.03},
+        "effects": {
+          "bellstrikeDmgBoost": 0.03
+        },
         "raw": "Bellstrike DMG Bonus +3%",
         "weaponSpecific": "bellstrike",
         "pendingImplementation": true
@@ -1561,12 +1438,6 @@
     "rank": "purple"
   },
   "153": {
-    "names": {
-      "ja": "一心不乱",
-      "en": "Insightful Strike",
-      "zh": "一心不乱",
-      "ko": "통찰의 눈"
-    },
     "modes": {
       "default": {
         "sympathyBoost": 0.1
@@ -1663,12 +1534,6 @@
     "rank": "purple"
   },
   "154": {
-    "names": {
-      "ja": "剣気斬波",
-      "en": "Sword Horizon",
-      "zh": "剑气斩波",
-      "ko": "광풍의 검기"
-    },
     "description": "九変の剣 専用心法。 縦横の剣追撃 + 流血バースト。",
     "attributeBuff": {
       "tier0": {
@@ -1743,12 +1608,6 @@
     "rank": "gold"
   },
   "301": {
-    "names": {
-      "ja": "一得一失",
-      "en": "Flying Gourds",
-      "zh": "一得一失",
-      "ko": "비상하는 호리병"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "墨筆の扇専用 — 春尽山空 CD/ダメ強化、無頼の浮名 連携。 紫。",
@@ -1806,7 +1665,9 @@
       },
       "tier5": {
         "permanent": true,
-        "effects": {"silkbindPen":6},
+        "effects": {
+          "silkbindPen": 6
+        },
         "raw": "Silkbind Penetration +6",
         "weaponSpecific": "silkbind",
         "pendingImplementation": true
@@ -1825,12 +1686,6 @@
     "rank": "purple"
   },
   "302": {
-    "names": {
-      "ja": "春雷一閃",
-      "en": "Thunderous Bloom",
-      "zh": "春雷一闪",
-      "ko": "춘뢰일섬"
-    },
     "modes": {
       "maxStack": {
         "bossBoost": 0.45
@@ -1917,12 +1772,6 @@
     "rank": "purple"
   },
   "303": {
-    "names": {
-      "ja": "摘星の術",
-      "en": "Star Reacher",
-      "zh": "摘星术",
-      "ko": "천공참"
-    },
     "modes": {
       "default": {
         "weaponBonus": 0.05
@@ -2002,12 +1851,6 @@
     "rank": "purple"
   },
   "304": {
-    "names": {
-      "ja": "花上月令",
-      "en": "Blossom Barrage",
-      "zh": "花上月令",
-      "ko": "월광의 계율"
-    },
     "description": "千紅の傘 専用心法。 春恨み連続命中効果 + 弾道技ダメ強化。",
     "attributeBuff": {
       "tier0": {
@@ -2082,12 +1925,6 @@
     "rank": "gold"
   },
   "351": {
-    "names": {
-      "ja": "君臣薬",
-      "en": "Royal Remedy",
-      "zh": "君臣药",
-      "ko": "군신의 묘약"
-    },
     "description": "薬川の扇 専用心法。 ヒーラー支援/回復系。",
     "attributeBuff": {
       "tier0": {
@@ -2162,12 +1999,6 @@
     "rank": "gold"
   },
   "352": {
-    "names": {
-      "ja": "散花不滅",
-      "en": "Restoring Blossom",
-      "zh": "散花不灭",
-      "ko": "만개한 복사꽃"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "薬川の扇/誘魂の傘専用 — 会心治療で養心/凝心 (治療量+)。 紫。",
@@ -2200,7 +2031,9 @@
         "needsManualInput": false,
         "statType": "Min Silkbind Attack",
         "raw": "Min Silkbind Attack (Solo Mode Level scaled, rank=purple)",
-        "effects": {"minSilkbind":32.6},
+        "effects": {
+          "minSilkbind": 32.6
+        },
         "weaponSpecific": "silkbind",
         "pendingImplementation": true,
         "minPathATK": 32.6,
@@ -2250,12 +2083,6 @@
     "rank": "purple"
   },
   "353": {
-    "names": {
-      "ja": "蘇生の術",
-      "en": "Esoteric Revival",
-      "zh": "苏生术",
-      "ko": "생명의 고서"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "薬川の扇専用 — 復活感知技 (貴き朝玉) 強化 (回復+/被ダメ-/分担)。 紫。",
@@ -2331,12 +2158,6 @@
     "rank": "purple"
   },
   "354": {
-    "names": {
-      "ja": "癒しの糸",
-      "en": "Mending Loom",
-      "zh": "愈合丝",
-      "ko": "회복의 실"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "誘魂の傘専用 — 千水余韻 露水リソース回復/治療強化。 紫。",
@@ -2413,12 +2234,6 @@
     "rank": "purple"
   },
   "401": {
-    "names": {
-      "ja": "山河絶韻",
-      "en": "Exquisite Scenery",
-      "zh": "山河绝韵",
-      "ko": "지축의 분노"
-    },
     "description": "断魂の刀 専用心法。 防御カウンター + 重撃溜め技バースト。",
     "attributeBuff": {
       "tier0": {
@@ -2493,12 +2308,6 @@
     "rank": "gold"
   },
   "402": {
-    "names": {
-      "ja": "困獣心経",
-      "en": "Trapped Beast",
-      "zh": "困兽心经",
-      "ko": "맹수의 혼"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "断魂の刀専用 — 気血<30%でシールド (困獣の闘い)。 紫。",
@@ -2572,12 +2381,6 @@
     "rank": "purple"
   },
   "403": {
-    "names": {
-      "ja": "堅忍の術",
-      "en": "Art of Resistance",
-      "zh": "坚忍术",
-      "ko": "저항의 법칙"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "断魂の刀専用 — 気血シールド+4秒/吸収量+10%/保護時与ダメ+5%等",
@@ -2608,7 +2411,10 @@
         "needsManualInput": false,
         "statType": "Rock Splitting Attack",
         "raw": "Rock Splitting Attack (Solo Mode Level scaled, rank=purple)",
-        "effects": {"minStonesplit":10.9,"maxStonesplit":21.7},
+        "effects": {
+          "minStonesplit": 10.9,
+          "maxStonesplit": 21.7
+        },
         "weaponSpecific": "stonesplit",
         "pendingImplementation": true,
         "minPathATK": 10.9,
@@ -2637,7 +2443,9 @@
       },
       "tier5": {
         "permanent": true,
-        "effects": {"stonesplitPen":6},
+        "effects": {
+          "stonesplitPen": 6
+        },
         "raw": "Rock Splitting Penetration +6",
         "weaponSpecific": "stonesplit",
         "pendingImplementation": true
@@ -2656,12 +2464,6 @@
     "rank": "purple"
   },
   "404": {
-    "names": {
-      "ja": "磐石訣",
-      "en": "Rock Solid",
-      "zh": "磐石诀",
-      "ko": "강철의 비기"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "嵐雷の槍専用 — 挑発で風雷の嘯きDR+20/5% (max20%)、効果時 与ダメ-10%",
@@ -2735,12 +2537,6 @@
     "rank": "purple"
   },
   "451": {
-    "names": {
-      "ja": "忘川絶響",
-      "en": "Echoes of Oblivion",
-      "zh": "忘川绝响",
-      "ko": "망각의 울림"
-    },
     "modes": {
       "default": {
         "enemyDebuff": 0.1
@@ -2819,12 +2615,6 @@
     "rank": "gold"
   },
   "452": {
-    "names": {
-      "ja": "宿怨結晶",
-      "en": "Vendetta",
-      "zh": "宿怨结晶",
-      "ko": "심연의 늪"
-    },
     "description": "浮塵の縄 鼠召喚強化心法。 鼠ダメ = 与ダメ50%想定。",
     "attributeBuff": {
       "tier0": {
@@ -2907,12 +2697,6 @@
     "rank": "purple"
   },
   "453": {
-    "names": {
-      "ja": "断石心法",
-      "en": "Breaking Point",
-      "zh": "断石心法",
-      "ko": "파괴의 서막"
-    },
     "modes": {
       "maxStack": {
         "outerPenAdd": 15,
@@ -2979,12 +2763,6 @@
     "rank": "purple"
   },
   "454": {
-    "names": {
-      "ja": "蒼浪剣訣",
-      "en": "Riptide Reflex",
-      "zh": "苍浪剑诀",
-      "ko": "파도의 검기"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "浮塵の縄/墨筆の扇/千紅の傘専用 — 妨害系命中で現武術CD-1s (10s毎1回)",
@@ -3072,12 +2850,6 @@
     "rank": "purple"
   },
   "501": {
-    "names": {
-      "ja": "千軍の咆哮",
-      "en": "Phantom Rally",
-      "zh": "千军的咆哮",
-      "ko": "천군의 함성"
-    },
     "description": "醉夢の傘 専用心法。 紅綃香断 幻影傘召喚+共鳴ダメ。",
     "attributeBuff": {
       "tier0": {
@@ -3152,12 +2924,6 @@
     "rank": "gold"
   },
   "502": {
-    "names": {
-      "ja": "砂舟行木",
-      "en": "Towline Sweep",
-      "zh": "砂舟行木",
-      "ko": "이동하는 나무배"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "浮雲の縄専用 — 浄虚一掃後恩文字+50、貫穿の鏢失魂付与、初段引き寄せ",
@@ -3236,12 +3002,6 @@
     "rank": "purple"
   },
   "503": {
-    "names": {
-      "ja": "灯火詞",
-      "en": "Light Anew",
-      "zh": "灯火词",
-      "ko": "밝은 등불"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "汎用 — 3体以上同時命中で燭影付与、stack毎 移動-4%/被ダメ+2%、最大5",
@@ -3303,12 +3063,6 @@
     "rank": "purple"
   },
   "504": {
-    "names": {
-      "ja": "大唐歌",
-      "en": "Song of Tang",
-      "zh": "大唐歌",
-      "ko": "대당의 노래"
-    },
     "modes": {
       "maxStack": {
         "critBoost": 0.1
@@ -3389,12 +3143,6 @@
     "rank": "purple"
   },
   "551": {
-    "names": {
-      "ja": "霜天白夜",
-      "en": "Frost-Clad Night",
-      "zh": "霜天白夜",
-      "ko": "서리 백야"
-    },
     "description": "斬雪の刀 専用心法。 受け流し→雪払いバースト + 忘機効果。",
     "attributeBuff": {
       "tier0": {
@@ -3467,12 +3215,6 @@
     "rank": "gold"
   },
   "552": {
-    "names": {
-      "ja": "不滅忠魂",
-      "en": "Steadfast Devotion",
-      "zh": "孤忠不辞",
-      "ko": "외로운 충성"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "破陣の刀専用 — 焚此心3段溜め、鉄衣成魂中 斬馬刀安西軍出現+跳び斬り",
@@ -3547,12 +3289,6 @@
     "rank": "purple"
   },
   "553": {
-    "names": {
-      "ja": "穿喉の訣",
-      "en": "Throat-Piercing Art",
-      "zh": "穿喉诀",
-      "ko": "관목결"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "斬雪・断魂30%/墨筆・千紅15%/他0% — 軽重撃派生で穿喉8s/最大3 (T4で5)、stack毎 outerRes無視2/critBoost+2%",
@@ -3600,7 +3336,10 @@
         "permanent": true,
         "worldLv": 14,
         "needsManualInput": false,
-        "effects": {"minStonesplit":10.9,"maxStonesplit":21.7},
+        "effects": {
+          "minStonesplit": 10.9,
+          "maxStonesplit": 21.7
+        },
         "raw": "砕岩攻撃力 +10.9 ~ +21.7",
         "weaponSpecific": "stonesplit",
         "pendingImplementation": true,
@@ -3649,7 +3388,9 @@
       },
       "tier5": {
         "permanent": true,
-        "effects": {"stonesplitPen":6},
+        "effects": {
+          "stonesplitPen": 6
+        },
         "raw": "砕岩貫通 +6",
         "weaponSpecific": "stonesplit",
         "pendingImplementation": true
@@ -3677,12 +3418,6 @@
     "rank": "purple"
   },
   "554": {
-    "names": {
-      "ja": "燎原脚",
-      "en": "Wildfire Surge",
-      "zh": "燎原踏",
-      "ko": "요원의 불길"
-    },
     "modes": {},
     "defaultMode": "default",
     "description": "汎用 — 強靭時 全ダメ+4%、周囲3m(T1で5m)内 敵1体毎+1%(最大+3%)",
@@ -3750,10 +3485,6 @@
   "_note": "全データ Claude 抽出版 (verified: false)。ユーザー検証 → 訂正フェーズ。HP回復/シールド/Endurance 系等、ダメージ計算非影響の効果は modes 空。心法 Lv MAX 前提で計測 (roleInfo に Lv フィールドなし、別 API 全 605)。 | Tier5 attributeBuff: CookieLips v1.2 sheet 由来 (verified: false)。Tier2 大世界Lv14値ユーザー手動入力待ち。ID 6/501/502/503/504 は v1.2 sheet 未掲載。 | Tier2 attributeBuff 装備中4心法 (41/81/451/452) 大世界Lv14値 in-game 観測 (2026-05-25)。 | Tier5 残5件 (6/501/502/503/504) in-game 観測 (2026-05-25)。 | rank フィールド追加 (2026-05-25): gold=金 (9件確定、霜天白夜は新ID未確定)、blue=青 (6件基礎)、purple=紫 (残り)。同rank・同ステータス → Tier5値共通。 | 新心法4件追加 (551-554, 砕岩path, 2026-05-25)。赤心筆/和光同塵 ID未取得。 | Tier2 追加 3件 (551/552/553) 大世界Lv14値 in-game 観測 (2026-05-25)。553 砕岩攻撃力 = path-specific (stonesplit)。 | Tier2 ステ種別 CSV(CookieLips v1.2) 反映 + rank係数(gold=1.0/purple=0.9/blue=0.8)で派生 (2026-05-25)。 | Tier2 ステ種別 CSV(CookieLips v1.2) 反映 + rank係数(gold=1.0/purple=0.9/blue=0.8)で派生 (2026-05-25)。 | Tier2 ステ種別 CSV(CookieLips v1.2) 反映 + rank係数(gold=1.0/purple=0.9/blue=0.8)で派生 (2026-05-25)。 | 47/48 心法追加 (2026-05-25 統合)。 | Tier2 ステ種別 CSV(CookieLips v1.2) 反映 + rank係数(gold=1.0/purple=0.9/blue=0.8)で派生 (2026-05-25)。 | Tier2 ステ種別 CSV(CookieLips v1.2) 反映 + rank係数(gold=1.0/purple=0.9/blue=0.8)で派生 (2026-05-25)。 | Tier2 ステ種別 CSV(CookieLips v1.2) 反映 + rank係数(gold=1.0/purple=0.9/blue=0.8)で派生 (2026-05-25)。",
   "_example": {
     "81_example": {
-      "names": {
-        "ja": "易水の歌",
-        "en": "Morale Chant"
-      },
       "modes": {
         "default": {
           "outerPenAdd": 10,

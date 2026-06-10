@@ -6,16 +6,20 @@
 //  - T0/T1/T3/T4/T6 effects.globalDmgBoost: rank別固定値 (gold=0.013/purple=0.01/blue=0.0065)
 //  - kongfuRequired/synergyKongfu: kongfu_derived.json存在チェック
 //  - hidden経路で計算反映0になるkey使用検出
-// 使用: node scripts/validate-xinfa.js
+// 使用: node scripts/validate-xinfa.cjs
 
 const fs = require('fs');
 const path = require('path');
 
 const xinfaPath = path.join(__dirname, '..', 'data', 'xinfa.json');
 const kongfuPath = path.join(__dirname, '..', 'data', 'kongfu_derived.json');
+const xinfaNamesPath = path.join(__dirname, '..', 'data', 'i18n', 'xinfa.json');
 
 const xinfa = JSON.parse(fs.readFileSync(xinfaPath, 'utf8'));
 const kongfu = JSON.parse(fs.readFileSync(kongfuPath, 'utf8'));
+// 名前は i18n が唯一源 (xinfa.json 本体の names は P3 で剥離済)
+let xinfaNames = {};
+try { xinfaNames = JSON.parse(fs.readFileSync(xinfaNamesPath, 'utf8')); } catch (e) {}
 
 const validKongfuIds = new Set(
   Object.values(kongfu.kongfuMap || {}).map(v => Number(v.kongfuId))
@@ -59,7 +63,7 @@ for (const [id, e] of Object.entries(xinfa)) {
   if (id.startsWith('_') || !e || typeof e !== 'object') continue;
   if (!e.attributeBuff) continue;
   total++;
-  const ja = e.names?.ja || '?';
+  const ja = xinfaNames[id]?.ja || '?';
 
   // rank
   if (!['gold', 'purple', 'blue'].includes(e.rank)) {
