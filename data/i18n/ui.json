@@ -1391,23 +1391,11 @@
     "zh": "暂无记录。导入时将自动记录。",
     "ko": "아직 기록이 없습니다. 가져오기 시 자동 기록됩니다."
   },
-  "effAnalysisTitle": {
-    "ja": "調律/定音効率分析",
-    "en": "Stat Efficiency",
-    "zh": "状态效率分析",
-    "ko": "스탯 효율 분석"
-  },
   "locale": {
     "ja": "ja-JP",
     "en": "en-US",
     "zh": "zh-CN",
     "ko": "ko-KR"
-  },
-  "importLabelXiuwei": {
-    "ja": "武術進度",
-    "en": "Martial Progress",
-    "zh": "武术进度",
-    "ko": "무술 진도"
   },
   "importLabelCharName": {
     "ja": "キャラ名",

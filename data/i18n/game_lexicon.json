@@ -257,5 +257,17 @@
     "en": "Mystic arts",
     "zh": "奇术",
     "ko": "기술 (奇術)"
+  },
+  "effAnalysisTitle": {
+    "ja": "調律/定音効率分析",
+    "en": "Stat Efficiency",
+    "zh": "状态效率分析",
+    "ko": "스탯 효율 분석"
+  },
+  "importLabelXiuwei": {
+    "ja": "武術進度",
+    "en": "Martial Progress",
+    "zh": "武术进度",
+    "ko": "무술 진도"
   }
 }
