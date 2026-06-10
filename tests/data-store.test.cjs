@@ -80,14 +80,26 @@ function evalDataStore() {
 
   // ── game_lexicon fallback (2026-06-10: ui.json から純粋ゲーム用語を分離) ──
   DS.setLang('ja');
-  assert.equal(DS.t('critRate'), '会心率', 't() game_lexicon ja (ui miss → game_lexicon)');
   assert.equal(DS.t('slotHelm'), '冠', 't() game_lexicon slot ja');
   DS.setLang('en');
-  assert.equal(DS.t('critRate'), 'Critical Rate', 't() game_lexicon en');
+  assert.equal(DS.t('slotHelm'), 'Helm', 't() game_lexicon slot en');
   // stat.json 経由 (chain 3段目): xinfa.js tkey 'minPhys'/'maxPhys' = 新表記 (最小/最大外功攻撃)
   DS.setLang('ja');
   assert.equal(DS.t('minPhys'), '最小外功攻撃', 't() stat chain minPhys ja');
   assert.equal(DS.t('maxPhys'), '最大外功攻撃', 't() stat chain maxPhys ja');
+  // 心法効果ラベル 統合 (game_lex 11 件 stat 化、 2026-06-10)
+  assert.equal(DS.t('crit'),         '会心率', 't() stat crit ja (←旧 critRate)');
+  assert.equal(DS.t('affinity'),     '会意率', 't() stat affinity ja (←旧 sympathyRate)');
+  assert.equal(DS.t('physPen'),      '外功貫通', 't() stat physPen ja (←旧 penPhys/outerPen)');
+  assert.equal(DS.t('bossDmg'),      'BOSSダメージ', 't() stat bossDmg ja (←旧 bossBoost)');
+  assert.equal(DS.t('maxHp'),        '気血最大値', 't() stat maxHp ja (←旧 stMaxHp)');
+  assert.equal(DS.t('physDef'),      '外功防御', 't() stat physDef ja (←旧 stPhysDef)');
+  assert.equal(DS.t('allWeaponDmg'), '全武学/PvP/BOSSダメ', 't() stat allWeaponDmg ja (←旧 allMartialBoost)');
+  // vi 退化なし (2026-06-10: stat.json に bossDmg/allWeaponDmg vi 追記)
+  DS.setLang('vi');
+  assert.equal(DS.t('bossDmg'),      'Tăng sát thương đối với đơn vị thủ lĩnh', 't() bossDmg vi');
+  assert.equal(DS.t('allWeaponDmg'), 'Tăng hiệu quả toàn bộ võ học', 't() allWeaponDmg vi');
+  DS.setLang('ja');
   // ui優先: importBtn は ui.json 残置 → ui.json が勝つ
   assert.equal(DS.t('importBtn'), 'IMPORT', 't() ui優先 (ui.json に居る間は game_lexicon fallback 走らない)');
   console.log('PASS: data-store game_lexicon fallback');

@@ -11,27 +11,6 @@
     "zh": "最大属性攻击(副)",
     "ko": "최대 속성 공격(부)"
   },
-  "hitRate": {
-    "ja": "命中率",
-    "en": "Hit Rate",
-    "zh": "精准率",
-    "ko": "정확도",
-    "vi": "Tỷ lệ chính xác"
-  },
-  "critRate": {
-    "ja": "会心率",
-    "en": "Critical Rate",
-    "zh": "会心率",
-    "ko": "치명타 확률",
-    "vi": "Tỷ lệ chí mạng"
-  },
-  "sympathyRate": {
-    "ja": "会意率",
-    "en": "Affinity Rate",
-    "zh": "会意率",
-    "ko": "각성 확률",
-    "vi": "Tỷ lệ hiểu ý"
-  },
   "addCritRate": {
     "ja": "付加会心率",
     "en": "Added Critical Rate",
@@ -53,13 +32,6 @@
     "ko": "치명타 피해 보너스",
     "vi": "Gia tăng Sát thương chí mạng"
   },
-  "allMartialBoost": {
-    "ja": "全武術効果増加",
-    "en": "All Martial Arts Effect +",
-    "zh": "全部武学增效",
-    "ko": "모든 무술의 효과 증가",
-    "vi": "Tăng hiệu quả toàn bộ võ học"
-  },
   "sympathyBoost": {
     "ja": "会意攻撃強化",
     "en": "Affinity DMG Bonus",
@@ -72,20 +44,6 @@
     "zh": "指定武学增效",
     "ko": "특정 무술 효과 증가",
     "vi": "Tăng hiệu quả võ học được chỉ định"
-  },
-  "outerPen": {
-    "ja": "外功貫通",
-    "en": "Outer Force Penetration",
-    "zh": "外功穿透",
-    "ko": "외공 관통",
-    "vi": "Ngoại công Xuyên thấu"
-  },
-  "bossBoost": {
-    "ja": "首領ダメージ増加",
-    "en": "Elite DMG Bonus",
-    "zh": "对首领单位增伤",
-    "ko": "BOSS 유닛에 대한 피해 증가",
-    "vi": "Tăng sát thương đối với đơn vị thủ lĩnh"
   },
   "elemPen": {
     "ja": "属性貫通",
@@ -167,24 +125,12 @@
     "zh": "属性强化（副）",
     "ko": "속성 강화（부）"
   },
-  "physDef": {
-    "ja": "物理防御力",
-    "en": "Physical Defense",
-    "zh": "外功防御",
-    "ko": "외공 방어력"
-  },
   "judgeRes": {
     "ja": "審判耐性",
     "en": "Judgment Resistance",
     "zh": "判定抗性",
     "ko": "저항 판정",
     "vi": "Kháng định đoạt"
-  },
-  "physRes": {
-    "ja": "物理耐性値",
-    "en": "Physical Resistance",
-    "zh": "外功抗性",
-    "ko": "외공 저항"
   },
   "elemRes": {
     "ja": "属性耐性値",
@@ -269,18 +215,6 @@
     "en": "Phys ATK",
     "zh": "外功攻击",
     "ko": "외공 공격"
-  },
-  "stMaxHp": {
-    "ja": "最大HP",
-    "en": "Max HP",
-    "zh": "气血最大值",
-    "ko": "기혈 최대치"
-  },
-  "stPhysDef": {
-    "ja": "外功防御",
-    "en": "Physical Defense",
-    "zh": "外功防御",
-    "ko": "외공 방어"
   },
   "stCritHeal": {
     "ja": "会心治癒",
@@ -401,12 +335,6 @@
     "en": "PvP-Exclusive Engraving",
     "zh": "PvP专用定音",
     "ko": "PvP 전용 정음"
-  },
-  "penPhys": {
-    "ja": "外功貫通",
-    "en": "Phys Pen",
-    "zh": "外功穿透",
-    "ko": "외공 관통"
   },
   "penVoid": {
     "ja": "無相貫通",

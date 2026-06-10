@@ -170,14 +170,14 @@
     }
     // xinfa effects key → i18n key + 表示形式
     const _XINFA_EFFECT_LABEL = {
-      allMartialBoost: { tkey: 'allMartialBoost', pct: true },
+      allMartialBoost: { tkey: 'allWeaponDmg',    pct: true },
       globalDmgBoost:  { tkey: 'globalDmgBoost',  pct: true },
-      critRateAdj:     { tkey: 'critRate',        pct: true },
-      critRate:        { tkey: 'critRate',        pct: true },
-      crit:            { tkey: 'critRate',        pct: true },
+      critRateAdj:     { tkey: 'crit',            pct: true },
+      critRate:        { tkey: 'crit',            pct: true },
+      crit:            { tkey: 'crit',            pct: true },
       critBoost:       { tkey: 'critBoost',       pct: true },
-      sympathyRate:    { tkey: 'sympathyRate',    pct: true },
-      affinity:        { tkey: 'sympathyRate',    pct: true },
+      sympathyRate:    { tkey: 'affinity',        pct: true },
+      affinity:        { tkey: 'affinity',        pct: true },
       sympathyBoost:   { tkey: 'sympathyBoost',   pct: true },
       affinityDmgBonus:{ tkey: 'sympathyBoost',   pct: true },
       elemAtkBoost:    { tkey: 'elemAtkBoost',    pct: true },
@@ -185,9 +185,9 @@
       weaponBonus:     { tkey: 'weaponBonus',     pct: true },
       physDmgBonus:    { tkey: 'weaponBonus',     pct: true },
       physDmgBoost:    { tkey: 'weaponBonus',     pct: true },
-      outerPen:        { tkey: 'penPhys',         pct: false },
-      outerPenAdd:     { tkey: 'penPhys',         pct: false },
-      physPen:         { tkey: 'penPhys',         pct: false },
+      outerPen:        { tkey: 'physPen',         pct: false },
+      outerPenAdd:     { tkey: 'physPen',         pct: false },
+      physPen:         { tkey: 'physPen',         pct: false },
       elemPen:         { tkey: 'penVoid',         pct: false },
       attrPen:         { tkey: 'penVoid',         pct: false },
       bossBoost:       { tkey: 'bossDmg',         pct: true },
@@ -229,8 +229,8 @@
     };
     // ダメージ計算に関与しない statType (effects空、 ゲームはステ表示するが計算外) → localized名 + (計算外)
     const _XINFA_STATTYPE_LABEL = {
-      'Max HP': 'stMaxHp',
-      'Physical Defense': 'stPhysDef',
+      'Max HP': 'maxHp',
+      'Physical Defense': 'physDef',
       'Critical Healing Bonus': 'stCritHeal',
     };
     function _xinfaFmtEffect(k, v) {

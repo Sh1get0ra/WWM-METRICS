@@ -98,7 +98,8 @@
     "ja": "全武学/PvP/BOSSダメ",
     "en": "All Martial/PvP/BOSS DMG",
     "zh": "全武学/PvP/BOSS增效",
-    "ko": "모든 무술/PvP/BOSS 피해"
+    "ko": "모든 무술/PvP/BOSS 피해",
+    "vi": "Tăng hiệu quả toàn bộ võ học"
   },
   "swordDmg": {
     "ja": "剣ダメ強化",
@@ -214,7 +215,8 @@
     "ja": "BOSSダメージ",
     "en": "BOSS DMG",
     "zh": "对首领单位增伤",
-    "ko": "BOSS 유닛에 대한 피해 증가"
+    "ko": "BOSS 유닛에 대한 피해 증가",
+    "vi": "Tăng sát thương đối với đơn vị thủ lĩnh"
   },
   "playerUnitDmg": {
     "ja": "PvPダメージ",
