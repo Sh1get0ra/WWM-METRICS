@@ -1042,6 +1042,13 @@
     "ko": "현재",
     "vi": "Hiện có"
   },
+  "cmpArsenalTitle": {
+    "ja": "武庫対照",
+    "en": "Arsenal Comparison",
+    "zh": "武库对照",
+    "ko": "무기고 비교",
+    "vi": "Đối chiếu Kho vũ khí"
+  },
   "cmpNew": {
     "ja": "新置",
     "en": "NEW",

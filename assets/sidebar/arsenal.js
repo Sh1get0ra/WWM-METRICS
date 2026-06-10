@@ -82,20 +82,20 @@
         <span class="wwm-cmp-l-bracket-tl"></span><span class="wwm-cmp-l-bracket-tr"></span>
         <span class="wwm-cmp-l-bracket-bl"></span><span class="wwm-cmp-l-bracket-br"></span>
         <div class="wwm-modal-header">
-          <h2><span class="wwm-cmp-title-ja">武庫対照</span><span class="wwm-cmp-title-en">COMPARISON</span><span class="wwm-cmp-seal">庫</span></h2>
+          <h2><span class="wwm-cmp-title-ja">${(window.T?.cmpArsenalTitle)||'武庫対照'}</span><span class="wwm-cmp-title-en">COMPARISON</span><span class="wwm-cmp-seal">庫</span></h2>
           <button class="wwm-modal-close" aria-label="Close">×</button>
         </div>
         <div class="wwm-modal-body">
           <div class="wwm-cmp-modal-bg-icon wwm-cmp-modal-bg-icon-gear wwm-cmp-modal-bg-icon-arsenal" style="background-image:url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/kongfu/images/673361fe92bef95db34510429KLQLykS05.png');"></div>
           <div class="wwm-cmp-grid">
             <div class="wwm-cmp-col wwm-cmp-current">
-              <h3 class="wwm-cmp-title" data-seal="現有"><span class="wwm-cmp-title-text">現有</span></h3>
+              <h3 class="wwm-cmp-title" data-seal="${(window.T?.cmpCurrent)||'現有'}"><span class="wwm-cmp-title-text">${(window.T?.cmpCurrent)||'現有'}</span></h3>
               <div class="wwm-cmp-kongfu-header">${pathLabel(origArsenal.path)}</div>
               <div class="wwm-cmp-rows">${_curRows(origArsenal)}</div>
             </div>
             <div class="wwm-cmp-divider"></div>
             <div class="wwm-cmp-col wwm-cmp-new">
-              <h3 class="wwm-cmp-title" data-seal="新置"><span class="wwm-cmp-title-text">新置</span></h3>
+              <h3 class="wwm-cmp-title" data-seal="${(window.T?.cmpNew)||'新置'}"><span class="wwm-cmp-title-text">${(window.T?.cmpNew)||'新置'}</span></h3>
               <div class="wwm-cmp-kongfu-header" id="wwmArsenalEditPaths" style="display:flex;flex-wrap:nowrap;gap:6px;justify-content:space-between;">${_pathRadios(newArsenal.path)}</div>
               <div class="wwm-cmp-rows" id="wwmArsenalEditRows">${_newRows(newArsenal)}</div>
             </div>
