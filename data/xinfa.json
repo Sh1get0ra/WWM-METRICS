@@ -324,11 +324,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Min Physical Attack",
         "effects": {
-          "minPhysATKAdd": 51.12
+          "minPhysATKAdd": 56.7
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -425,11 +425,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Max Physical Attack",
         "effects": {
-          "maxPhysATKAdd": 51.12
+          "maxPhysATKAdd": 56.7
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -624,17 +624,17 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "effects": {
-          "minPhysATKAdd": 57.5
+          "minPhysATKAdd": 63.8
         },
         "rawI18n": {
-          "ja": "Min Physical Attack +57.5",
-          "en": "Min Physical Attack +57.5",
-          "zh": "最小外功攻击 +57.5",
-          "ko": "최소 외공 공격 +57.5",
-          "vi": "Tấn công ngoại công tối thiểu +57.5"
+          "ja": "Min Physical Attack +63.8",
+          "en": "Min Physical Attack +63.8",
+          "zh": "最小外功攻击 +63.8",
+          "ko": "최소 외공 공격 +63.8",
+          "vi": "Tấn công ngoại công tối thiểu +63.8"
         }
       },
       "tier3": {
@@ -723,11 +723,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Precision Rate",
         "effects": {
-          "hitRate": 0.0594
+          "hitRate": 0.065
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -1024,11 +1024,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Max Physical Attack",
         "effects": {
-          "maxPhysATKAdd": 57.51
+          "maxPhysATKAdd": 63.8
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -1127,11 +1127,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Precision Rate",
         "effects": {
-          "hitRate": 0.0594
+          "hitRate": 0.065
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -1229,12 +1229,12 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Physical Attack",
         "effects": {
-          "minPhysATKAdd": 19.17,
-          "maxPhysATKAdd": 38.25
+          "minPhysATKAdd": 21.3,
+          "maxPhysATKAdd": 42.5
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -1431,18 +1431,18 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "effects": {
-          "minPhysATKAdd": 21.3,
-          "maxPhysATKAdd": 42.5
+          "minPhysATKAdd": 23.6,
+          "maxPhysATKAdd": 47.2
         },
         "rawI18n": {
-          "ja": "Physical Attack +21.3 ~ +42.5",
-          "en": "Physical Attack +21.3 ~ +42.5",
-          "zh": "外功攻击 +21.3 ~ +42.5",
-          "ko": "외공 공격 +21.3 ~ +42.5",
-          "vi": "Tấn công ngoại công +21.3 ~ +42.5"
+          "ja": "Physical Attack +23.6 ~ +47.2",
+          "en": "Physical Attack +23.6 ~ +47.2",
+          "zh": "外功攻击 +23.6 ~ +47.2",
+          "ko": "외공 공격 +23.6 ~ +47.2",
+          "vi": "Tấn công ngoại công +23.6 ~ +47.2"
         }
       },
       "tier3": {
@@ -1531,12 +1531,12 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Physical Attack",
         "effects": {
-          "minPhysATKAdd": 21.3,
-          "maxPhysATKAdd": 42.5
+          "minPhysATKAdd": 23.6,
+          "maxPhysATKAdd": 47.2
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -1641,12 +1641,12 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Bellstrike Attack",
         "effects": {
-          "minBellstrike": 10.9,
-          "maxBellstrike": 21.7
+          "minBellstrike": 12.1,
+          "maxBellstrike": 24.1
         },
         "weaponSpecific": "bellstrike",
         "pendingImplementation": true,
@@ -1760,12 +1760,12 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Physical Attack",
         "effects": {
-          "minPhysATKAdd": 19.17,
-          "maxPhysATKAdd": 38.25
+          "minPhysATKAdd": 21.3,
+          "maxPhysATKAdd": 42.5
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -1878,11 +1878,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Affinity Rate",
         "effects": {
-          "sympathyRate": 0.0324
+          "sympathyRate": 0.037
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -2000,11 +2000,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Max Physical Attack",
         "effects": {
-          "maxPhysATKAdd": 63.9
+          "maxPhysATKAdd": 70.9
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -2118,11 +2118,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Affinity Rate",
         "effects": {
-          "sympathyRate": 0.0324
+          "sympathyRate": 0.037
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -2252,11 +2252,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Max Bellstrike Attack",
         "effects": {
-          "maxBellstrike": 32.6
+          "maxBellstrike": 36.2
         },
         "weaponSpecific": "bellstrike",
         "pendingImplementation": true,
@@ -2410,12 +2410,12 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Physical Attack",
         "effects": {
-          "minPhysATKAdd": 19.17,
-          "maxPhysATKAdd": 38.25
+          "minPhysATKAdd": 21.3,
+          "maxPhysATKAdd": 42.5
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -2536,11 +2536,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Max Physical Attack",
         "effects": {
-          "maxPhysATKAdd": 63.9
+          "maxPhysATKAdd": 70.9
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -2654,11 +2654,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Precision Rate",
         "effects": {
-          "hitRate": 0.0594
+          "hitRate": 0.065
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -2780,12 +2780,12 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Physical Attack",
         "effects": {
-          "minPhysATKAdd": 19.17,
-          "maxPhysATKAdd": 38.25
+          "minPhysATKAdd": 21.3,
+          "maxPhysATKAdd": 42.5
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -2909,12 +2909,12 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Physical Attack",
         "effects": {
-          "minPhysATKAdd": 19.17,
-          "maxPhysATKAdd": 38.25,
+          "minPhysATKAdd": 21.3,
+          "maxPhysATKAdd": 42.5,
           "physDmgBoost": 0.025
         },
         "derivedFromGold": true,
@@ -3021,11 +3021,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Critical Rate",
         "effects": {
-          "critRate": 0.074
+          "critRate": 0.082
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -3137,11 +3137,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Min Physical Attack",
         "effects": {
-          "minPhysATKAdd": 63.9
+          "minPhysATKAdd": 70.9
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -3257,11 +3257,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Min Silkbind Attack",
         "effects": {
-          "minSilkbind": 32.6
+          "minSilkbind": 36.2
         },
         "weaponSpecific": "silkbind",
         "pendingImplementation": true,
@@ -3381,11 +3381,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Critical Rate",
         "effects": {
-          "critRate": 0.0666
+          "critRate": 0.082
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -3498,12 +3498,12 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Physical Attack",
         "effects": {
-          "minPhysATKAdd": 19.17,
-          "maxPhysATKAdd": 38.25
+          "minPhysATKAdd": 21.3,
+          "maxPhysATKAdd": 42.5
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -3614,11 +3614,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Critical Rate",
         "effects": {
-          "critRate": 0.074
+          "critRate": 0.082
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -3847,12 +3847,12 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Rock Splitting Attack",
         "effects": {
-          "minStonesplit": 10.9,
-          "maxStonesplit": 21.7
+          "minStonesplit": 12.1,
+          "maxStonesplit": 24.1
         },
         "weaponSpecific": "stonesplit",
         "pendingImplementation": true,
@@ -4091,17 +4091,17 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "effects": {
-          "critRate": 0.074
+          "critRate": 0.082
         },
         "rawI18n": {
-          "ja": "Critical Rate +7.4%",
-          "en": "Critical Rate +7.4%",
-          "zh": "会心率 +7.4%",
-          "ko": "치명타 확률 +7.4%",
-          "vi": "Tỷ lệ chí mạng +7.4%"
+          "ja": "Critical Rate +8.2%",
+          "en": "Critical Rate +8.2%",
+          "zh": "会心率 +8.2%",
+          "ko": "치명타 확률 +8.2%",
+          "vi": "Tỷ lệ chí mạng +8.2%"
         }
       },
       "tier3": {
@@ -4205,19 +4205,19 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Min Physical Attack",
         "effects": {
-          "minPhysATKAdd": 57.51
+          "minPhysATKAdd": 63.8
         },
         "derivedFromGold": true,
         "rawI18n": {
-          "ja": "Min Physical Attack +57.51 (rank=purple, post 5/28 patch swap with 454)",
-          "en": "Min Physical Attack +57.51 (rank=purple, post 5/28 patch swap with 454)",
-          "zh": "最小外功攻击 +57.51（rank=purple，5/28补丁后与454互换）",
-          "ko": "최소 외공 공격 +57.51 (rank=purple, 5/28 패치 후 454와 교체)",
-          "vi": "Tấn công ngoại công tối thiểu +57.51 (rank=purple, sau patch 5/28 swap với 454)"
+          "ja": "Min Physical Attack +63.8 (rank=purple, post 5/28 patch swap with 454)",
+          "en": "Min Physical Attack +63.8 (rank=purple, post 5/28 patch swap with 454)",
+          "zh": "最小外功攻击 +63.8（rank=purple，5/28补丁后与454互换）",
+          "ko": "최소 외공 공격 +63.8 (rank=purple, 5/28 패치 후 454와 교체)",
+          "vi": "Tấn công ngoại công tối thiểu +63.8 (rank=purple, sau patch 5/28 swap với 454)"
         }
       },
       "tier3": {
@@ -4330,11 +4330,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Precision Rate",
         "effects": {
-          "hitRate": 0.0594
+          "hitRate": 0.065
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -4443,19 +4443,19 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Min Bamboocut Attack",
         "effects": {
-          "minBamboocut": 32.6
+          "minBamboocut": 36.2
         },
         "weaponSpecific": "bamboocut",
         "rawI18n": {
-          "ja": "Min Bamboocut Attack +32.6 (rank=purple, post 5/28 patch swap with 452)",
-          "en": "Min Bamboocut Attack +32.6 (rank=purple, post 5/28 patch swap with 452)",
-          "zh": "最小破竹攻击 +32.6（rank=purple，5/28补丁后与452互换）",
-          "ko": "최소 파죽 공격 +32.6 (rank=purple, 5/28 패치 후 452와 교체)",
-          "vi": "Tấn công Phá Trúc tối thiểu +32.6 (rank=purple, sau patch 5/28 swap với 452)"
+          "ja": "Min Bamboocut Attack +36.2 (rank=purple, post 5/28 patch swap with 452)",
+          "en": "Min Bamboocut Attack +36.2 (rank=purple, post 5/28 patch swap with 452)",
+          "zh": "最小破竹攻击 +36.2（rank=purple，5/28补丁后与452互换）",
+          "ko": "최소 파죽 공격 +36.2 (rank=purple, 5/28 패치 후 452와 교체)",
+          "vi": "Tấn công Phá Trúc tối thiểu +36.2 (rank=purple, sau patch 5/28 swap với 452)"
         }
       },
       "tier3": {
@@ -4566,11 +4566,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Critical Rate",
         "effects": {
-          "critRate": 0.074
+          "critRate": 0.082
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -4798,11 +4798,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Min Physical Attack",
         "effects": {
-          "minPhysATKAdd": 57.51
+          "minPhysATKAdd": 63.8
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -4911,11 +4911,11 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Precision Rate",
         "effects": {
-          "hitRate": 0.0594
+          "hitRate": 0.065
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -5027,17 +5027,17 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "effects": {
-          "minPhysATKAdd": 63.9
+          "minPhysATKAdd": 70.9
         },
         "rawI18n": {
-          "ja": "最小外功攻撃 +63.9",
-          "en": "Min Physical Attack +63.9",
-          "zh": "最小外功攻击 +63.9",
-          "ko": "최소 외공 공격 +63.9",
-          "vi": "Tấn công ngoại công tối thiểu +63.9"
+          "ja": "最小外功攻撃 +70.9",
+          "en": "Min Physical Attack +70.9",
+          "zh": "最小外功攻击 +70.9",
+          "ko": "최소 외공 공격 +70.9",
+          "vi": "Tấn công ngoại công tối thiểu +70.9"
         }
       },
       "tier3": {
@@ -5143,17 +5143,17 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "effects": {
-          "critRate": 0.066
+          "critRate": 0.082
         },
         "rawI18n": {
-          "ja": "会心率 +6.6%",
-          "en": "Critical Rate +6.6%",
-          "zh": "会心率 +6.6%",
-          "ko": "치명타 확률 +6.6%",
-          "vi": "Tỷ lệ chí mạng +6.6%"
+          "ja": "会心率 +8.2%",
+          "en": "Critical Rate +8.2%",
+          "zh": "会心率 +8.2%",
+          "ko": "치명타 확률 +8.2%",
+          "vi": "Tỷ lệ chí mạng +8.2%"
         }
       },
       "tier3": {
@@ -5278,22 +5278,22 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "effects": {
-          "minStonesplit": 10.9,
-          "maxStonesplit": 21.7
+          "minStonesplit": 12.1,
+          "maxStonesplit": 24.1
         },
         "weaponSpecific": "stonesplit",
         "pendingImplementation": true,
         "minPathATK": 10.9,
         "maxPathATK": 21.7,
         "rawI18n": {
-          "ja": "砕岩攻撃力 +10.9 ~ +21.7",
-          "en": "Rock Splitting Attack +10.9 ~ +21.7",
-          "zh": "裂石攻击 +10.9 ~ +21.7",
-          "ko": "열석 공격 +10.9 ~ +21.7",
-          "vi": "Tấn công Liệt Thạch +10.9 ~ +21.7"
+          "ja": "砕岩攻撃力 +12.1 ~ +24.1",
+          "en": "Rock Splitting Attack +12.1 ~ +24.1",
+          "zh": "裂石攻击 +12.1 ~ +24.1",
+          "ko": "열석 공격 +12.1 ~ +24.1",
+          "vi": "Tấn công Liệt Thạch +12.1 ~ +24.1"
         }
       },
       "tier3": {
@@ -5424,12 +5424,12 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
         "statType": "Physical Attack",
         "effects": {
-          "minPhysATKAdd": 19.17,
-          "maxPhysATKAdd": 38.25
+          "minPhysATKAdd": 21.3,
+          "maxPhysATKAdd": 42.5
         },
         "derivedFromGold": true,
         "rawI18n": {

@@ -12,6 +12,13 @@
           "zh": "【大世界Lv15 对应】 基础属性更新为大世界Lv15 (五行属性 +8 / 精准率 +2% / 会心率 +4% / 会意率 +2%)。 SS Tier 阈值随之上升 (6700 → 8375)。 计算公式版本已更新, 请重新导入角色数据。",
           "ko": "【대세계 Lv15 대응】 기초 스탯을 대세계 Lv15 로 갱신 (오행 스탯 +8 / 정확도 +2% / 치명타 확률 +4% / 각성 확률 +2%). SS Tier 임계값도 연동 상승 (6700 → 8375). 계산식 버전이 갱신되어 재임포트를 부탁드립니다.",
           "vi": "[Hỗ trợ Đại Thế Giới Lv15] Cập nhật chỉ số cơ bản lên Đại Thế Giới Lv15 (ngũ hành +8 / tỷ lệ chính xác +2% / tỷ lệ chí mạng +4% / tỷ lệ hiểu ý +2%). Ngưỡng SS Tier tăng theo (6700 → 8375). Phiên bản công thức đã thay đổi — vui lòng import lại nhân vật."
+        },
+        {
+          "ja": "【心法 Tier2 効果の大世界Lv連動 更新】 心法 Tier2 のステータス付与 (外功攻撃/会心率/命中率/会意率/path攻撃) はゲーム内で大世界Lvに連動して成長する仕様 — 全 38 心法の Tier2 値を Lv15 値に更新 (例: 会心率 7.4% → 8.2%)。",
+          "en": "[Xinfa Tier 2 World-Level Scaling] Xinfa Tier 2 stat grants (Physical ATK / Crit / Precision / Affinity / path ATK) scale with Solo Mode Level in-game — updated Tier 2 values of all 38 xinfa to Lv15 (e.g. Crit 7.4% → 8.2%).",
+          "zh": "【心法 Tier2 效果的大世界等级联动 更新】 心法 Tier2 的属性加成 (外功攻击/会心率/精准率/会意率/路线攻击) 在游戏内随大世界等级成长 — 全部 38 个心法的 Tier2 数值已更新为 Lv15 (例: 会心率 7.4% → 8.2%)。",
+          "ko": "【심법 Tier2 효과의 대세계 레벨 연동 갱신】 심법 Tier2 의 스탯 부여 (외공 공격/치명타 확률/정확도/각성 확률/계열 공격) 는 게임 내에서 대세계 레벨에 연동 성장 — 전체 38 심법의 Tier2 값을 Lv15 값으로 갱신 (예: 치명타 확률 7.4% → 8.2%).",
+          "vi": "[Cập nhật hiệu quả Tier 2 tâm pháp theo Đại Thế Giới Lv] Chỉ số Tier 2 tâm pháp (tấn công ngoại công / chí mạng / chính xác / hiểu ý / tấn công lộ tuyến) tăng trưởng theo cấp Đại Thế Giới trong game — đã cập nhật giá trị Tier 2 của toàn bộ 38 tâm pháp lên Lv15 (vd: chí mạng 7.4% → 8.2%)."
         }
       ]
     },

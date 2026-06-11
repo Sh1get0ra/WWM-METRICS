@@ -4,7 +4,7 @@
   "_source": "Where Winds Math app.js `Uc` global (v=aad303b7、jsdom抽出) + 大世界Lv15 update (5行+8 / 命中+2% / 会心+4% / 会意+2%)",
   "_lv": 95,
   "_worldLv": 15,
-  "_note": "stats は装備/affix 加算前の素値。5行ステ 137 = 129(in-game確認済) + worldLv15 +8。affinity = 0.12922+0.02(アナウンス)+8*0.00038(派生) = 実機一致確認済。crit/minPhys/maxPhys = アナウンス+派生では実機に不足 → 兄貴 screenshot 残差逆算で flat 補正 (crit +0.008 / min +15 / max +4、2026-06-11 実機照合)。表示丸め由来 ±1/±0.1% 誤差可能性あり。maxHp/physDef = 派生機械加算のみ (実機未照合)。43 stat。",
+  "_note": "stats は装備/affix 加算前の素値。5行ステ 137 = 129(in-game確認済) + worldLv15 +8。各率 = アナウンス (命中+2%/会心+4%/会意+2%) + 5行+8 派生 (crit 8*0.00076 / affinity 8*0.00038): crit 0.30452 / affinity 0.15226 (実機一致確認済)。⚠️ 一時 flat 補正 (crit+0.008/min+15/max+4) を入れたが正体 = 心法 T2 worldLv 連動増分 (xinfa.json 側で対応) と判明し revert (2026-06-11)。maxHp/physDef = 派生機械加算のみ (実機未照合)。43 stat。",
 
   "stats": {
     "body": 137,
@@ -14,12 +14,12 @@
     "defense": 137,
 
     "maxHp": 77070,
-    "minPhys": 708.68,
-    "maxPhys": 1260.42,
+    "minPhys": 693.68,
+    "maxPhys": 1256.42,
     "physDef": 26.7,
 
     "precision": 0.94,
-    "crit": 0.31252,
+    "crit": 0.30452,
     "affinity": 0.15226,
     "directCrit": 0,
     "directAffinity": 0,
