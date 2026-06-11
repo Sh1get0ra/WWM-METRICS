@@ -328,7 +328,7 @@
         "needsManualInput": false,
         "statType": "Min Physical Attack",
         "effects": {
-          "minPhysATKAdd": 56.7
+          "minPhysATKAdd": 56.8
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -429,7 +429,7 @@
         "needsManualInput": false,
         "statType": "Max Physical Attack",
         "effects": {
-          "maxPhysATKAdd": 56.7
+          "maxPhysATKAdd": 56.8
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -627,14 +627,14 @@
         "worldLv": 15,
         "needsManualInput": false,
         "effects": {
-          "minPhysATKAdd": 63.8
+          "minPhysATKAdd": 63.9
         },
         "rawI18n": {
-          "ja": "Min Physical Attack +63.8",
-          "en": "Min Physical Attack +63.8",
-          "zh": "最小外功攻击 +63.8",
-          "ko": "최소 외공 공격 +63.8",
-          "vi": "Tấn công ngoại công tối thiểu +63.8"
+          "ja": "Min Physical Attack +63.9",
+          "en": "Min Physical Attack +63.9",
+          "zh": "最小外功攻击 +63.9",
+          "ko": "최소 외공 공격 +63.9",
+          "vi": "Tấn công ngoại công tối thiểu +63.9"
         }
       },
       "tier3": {
@@ -727,7 +727,7 @@
         "needsManualInput": false,
         "statType": "Precision Rate",
         "effects": {
-          "hitRate": 0.065
+          "hitRate": 0.066
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -1028,7 +1028,7 @@
         "needsManualInput": false,
         "statType": "Max Physical Attack",
         "effects": {
-          "maxPhysATKAdd": 63.8
+          "maxPhysATKAdd": 63.9
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -1131,7 +1131,7 @@
         "needsManualInput": false,
         "statType": "Precision Rate",
         "effects": {
-          "hitRate": 0.065
+          "hitRate": 0.066
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -1434,8 +1434,8 @@
         "worldLv": 15,
         "needsManualInput": false,
         "effects": {
-          "minPhysATKAdd": 23.6,
-          "maxPhysATKAdd": 47.2
+          "minPhysATKAdd": 23.6667,
+          "maxPhysATKAdd": 47.2222
         },
         "rawI18n": {
           "ja": "Physical Attack +23.6 ~ +47.2",
@@ -1535,8 +1535,8 @@
         "needsManualInput": false,
         "statType": "Physical Attack",
         "effects": {
-          "minPhysATKAdd": 23.6,
-          "maxPhysATKAdd": 47.2
+          "minPhysATKAdd": 23.6667,
+          "maxPhysATKAdd": 47.2222
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -1645,8 +1645,8 @@
         "needsManualInput": false,
         "statType": "Bellstrike Attack",
         "effects": {
-          "minBellstrike": 12.1,
-          "maxBellstrike": 24.1
+          "minBellstrike": 12.1111,
+          "maxBellstrike": 24.1111
         },
         "weaponSpecific": "bellstrike",
         "pendingImplementation": true,
@@ -1882,7 +1882,7 @@
         "needsManualInput": false,
         "statType": "Affinity Rate",
         "effects": {
-          "sympathyRate": 0.037
+          "sympathyRate": 0.036
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -2004,7 +2004,7 @@
         "needsManualInput": false,
         "statType": "Max Physical Attack",
         "effects": {
-          "maxPhysATKAdd": 70.9
+          "maxPhysATKAdd": 71
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -2122,7 +2122,7 @@
         "needsManualInput": false,
         "statType": "Affinity Rate",
         "effects": {
-          "sympathyRate": 0.037
+          "sympathyRate": 0.036
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -2256,7 +2256,7 @@
         "needsManualInput": false,
         "statType": "Max Bellstrike Attack",
         "effects": {
-          "maxBellstrike": 36.2
+          "maxBellstrike": 36.2222
         },
         "weaponSpecific": "bellstrike",
         "pendingImplementation": true,
@@ -2540,7 +2540,7 @@
         "needsManualInput": false,
         "statType": "Max Physical Attack",
         "effects": {
-          "maxPhysATKAdd": 70.9
+          "maxPhysATKAdd": 71
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -2658,7 +2658,7 @@
         "needsManualInput": false,
         "statType": "Precision Rate",
         "effects": {
-          "hitRate": 0.065
+          "hitRate": 0.066
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -3025,7 +3025,7 @@
         "needsManualInput": false,
         "statType": "Critical Rate",
         "effects": {
-          "critRate": 0.082
+          "critRate": 0.0822
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -3141,7 +3141,7 @@
         "needsManualInput": false,
         "statType": "Min Physical Attack",
         "effects": {
-          "minPhysATKAdd": 70.9
+          "minPhysATKAdd": 71
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -3261,7 +3261,7 @@
         "needsManualInput": false,
         "statType": "Min Silkbind Attack",
         "effects": {
-          "minSilkbind": 36.2
+          "minSilkbind": 36.2222
         },
         "weaponSpecific": "silkbind",
         "pendingImplementation": true,
@@ -3385,7 +3385,7 @@
         "needsManualInput": false,
         "statType": "Critical Rate",
         "effects": {
-          "critRate": 0.082
+          "critRate": 0.074
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -3618,7 +3618,7 @@
         "needsManualInput": false,
         "statType": "Critical Rate",
         "effects": {
-          "critRate": 0.082
+          "critRate": 0.0822
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -3851,8 +3851,8 @@
         "needsManualInput": false,
         "statType": "Rock Splitting Attack",
         "effects": {
-          "minStonesplit": 12.1,
-          "maxStonesplit": 24.1
+          "minStonesplit": 12.1111,
+          "maxStonesplit": 24.1111
         },
         "weaponSpecific": "stonesplit",
         "pendingImplementation": true,
@@ -4094,7 +4094,7 @@
         "worldLv": 15,
         "needsManualInput": false,
         "effects": {
-          "critRate": 0.082
+          "critRate": 0.0822
         },
         "rawI18n": {
           "ja": "Critical Rate +8.2%",
@@ -4209,15 +4209,15 @@
         "needsManualInput": false,
         "statType": "Min Physical Attack",
         "effects": {
-          "minPhysATKAdd": 63.8
+          "minPhysATKAdd": 63.9
         },
         "derivedFromGold": true,
         "rawI18n": {
-          "ja": "Min Physical Attack +63.8 (rank=purple, post 5/28 patch swap with 454)",
-          "en": "Min Physical Attack +63.8 (rank=purple, post 5/28 patch swap with 454)",
-          "zh": "最小外功攻击 +63.8（rank=purple，5/28补丁后与454互换）",
-          "ko": "최소 외공 공격 +63.8 (rank=purple, 5/28 패치 후 454와 교체)",
-          "vi": "Tấn công ngoại công tối thiểu +63.8 (rank=purple, sau patch 5/28 swap với 454)"
+          "ja": "Min Physical Attack +63.9 (rank=purple, post 5/28 patch swap with 454)",
+          "en": "Min Physical Attack +63.9 (rank=purple, post 5/28 patch swap with 454)",
+          "zh": "最小外功攻击 +63.9（rank=purple，5/28补丁后与454互换）",
+          "ko": "최소 외공 공격 +63.9 (rank=purple, 5/28 패치 후 454와 교체)",
+          "vi": "Tấn công ngoại công tối thiểu +63.9 (rank=purple, sau patch 5/28 swap với 454)"
         }
       },
       "tier3": {
@@ -4334,7 +4334,7 @@
         "needsManualInput": false,
         "statType": "Precision Rate",
         "effects": {
-          "hitRate": 0.065
+          "hitRate": 0.066
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -4447,7 +4447,7 @@
         "needsManualInput": false,
         "statType": "Min Bamboocut Attack",
         "effects": {
-          "minBamboocut": 36.2
+          "minBamboocut": 36.2222
         },
         "weaponSpecific": "bamboocut",
         "rawI18n": {
@@ -4570,7 +4570,7 @@
         "needsManualInput": false,
         "statType": "Critical Rate",
         "effects": {
-          "critRate": 0.082
+          "critRate": 0.0822
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -4802,7 +4802,7 @@
         "needsManualInput": false,
         "statType": "Min Physical Attack",
         "effects": {
-          "minPhysATKAdd": 63.8
+          "minPhysATKAdd": 63.9
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -4915,7 +4915,7 @@
         "needsManualInput": false,
         "statType": "Precision Rate",
         "effects": {
-          "hitRate": 0.065
+          "hitRate": 0.066
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -5030,14 +5030,14 @@
         "worldLv": 15,
         "needsManualInput": false,
         "effects": {
-          "minPhysATKAdd": 70.9
+          "minPhysATKAdd": 71
         },
         "rawI18n": {
-          "ja": "最小外功攻撃 +70.9",
-          "en": "Min Physical Attack +70.9",
-          "zh": "最小外功攻击 +70.9",
-          "ko": "최소 외공 공격 +70.9",
-          "vi": "Tấn công ngoại công tối thiểu +70.9"
+          "ja": "最小外功攻撃 +71.0",
+          "en": "Min Physical Attack +71.0",
+          "zh": "最小外功攻击 +71.0",
+          "ko": "최소 외공 공격 +71.0",
+          "vi": "Tấn công ngoại công tối thiểu +71.0"
         }
       },
       "tier3": {
@@ -5146,14 +5146,14 @@
         "worldLv": 15,
         "needsManualInput": false,
         "effects": {
-          "critRate": 0.082
+          "critRate": 0.074
         },
         "rawI18n": {
-          "ja": "会心率 +8.2%",
-          "en": "Critical Rate +8.2%",
-          "zh": "会心率 +8.2%",
-          "ko": "치명타 확률 +8.2%",
-          "vi": "Tỷ lệ chí mạng +8.2%"
+          "ja": "会心率 +7.4%",
+          "en": "Critical Rate +7.4%",
+          "zh": "会心率 +7.4%",
+          "ko": "치명타 확률 +7.4%",
+          "vi": "Tỷ lệ chí mạng +7.4%"
         }
       },
       "tier3": {
@@ -5281,8 +5281,8 @@
         "worldLv": 15,
         "needsManualInput": false,
         "effects": {
-          "minStonesplit": 12.1,
-          "maxStonesplit": 24.1
+          "minStonesplit": 12.1111,
+          "maxStonesplit": 24.1111
         },
         "weaponSpecific": "stonesplit",
         "pendingImplementation": true,
