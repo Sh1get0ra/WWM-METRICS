@@ -31,6 +31,7 @@ const CSS_FILES = [
   { path: 'assets/styles/xinfa.css',              layer: 'components' },
   { path: 'assets/styles/anlz.css',               layer: 'components' },
   { path: 'assets/styles/mobile.css',             layer: 'components' },
+  { path: 'assets/styles/workspace.css',          layer: 'components' },
   { path: 'assets/styles/modals.css',             layer: 'modals' },
   { path: 'assets/styles/responsive-globals.css', layer: 'responsive' },
   { path: 'assets/styles/dark.css',               layer: 'dark' },
