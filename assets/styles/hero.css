@@ -53,14 +53,6 @@
   .wwm-footer-unofficial { display: block; margin: 2px 0 0; }
 }
 
-.hero-left {
-  padding: 18px 24px 12px;
-  display: flex; flex-direction: column; justify-content: flex-start;
-  position: relative; z-index: 1;
-  min-width: 0;
-  overflow: hidden;
-}
-
 /* シェブロン (削除) */
 .hero::after-disabled {
   content: '';
@@ -169,16 +161,6 @@
 
 .hb-pct.elem { color: var(--c-hb-pct-elem-fg); }
 
-/* Donut on right */
-.hero-right {
-  padding: var(--space-2-5) var(--space-3-5);
-  display: flex; flex-direction: column;
-  border-left: 1px solid var(--ink-2);
-  background: var(--surf-shade);
-  position: relative; z-index: 1;
-  min-width: 0;
-}
-
 .donut {
   width: 100px; height: 100px; flex-shrink: 0; position: relative;
 }
@@ -235,48 +217,6 @@
   pointer-events: none;
   z-index: 0;
 }
-
-.hero-wuxia .hero-left {
-  position: relative;
-  z-index: 1;
-  padding-right: 18px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-}
-
-.hero-wuxia .hero-label {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 14px;
-  align-self: flex-start;
-}
-
-.hero-wuxia .hero-label .ja {
-  font-family: var(--f-display);
-  font-weight: var(--fw-bold);
-  font-size: 30px;
-  letter-spacing: .18em;
-  color: var(--c-fg-emphasis);
-}
-
-.hero-wuxia .hero-label .en {
-  font-family: var(--f-mono);
-  font-size: var(--text-14);
-  letter-spacing: .28em;
-  color: var(--paper-mute);
-  opacity: var(--c-hero-label--en-opacity);
-}
-
-.hero-wuxia .hero-score-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  position: relative;
-}
-
-.hero-wuxia .hero-current { display: flex; align-items: baseline; gap: var(--space-3); }
 
 .hero-wuxia .hero-number {
   font-family: var(--f-latin);
@@ -352,54 +292,6 @@
   box-shadow: var(--c-tier-c-hero-shadow);
 }
 
-.hero-wuxia .hero-next-inline {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-  margin-top: -6px;
-}
-
-/* hidden 属性で確実に消す ( .hero-wuxia .hero-next-inline の specificity 勝ち防止) */
-.hero-wuxia .hero-next-inline[hidden] { display: none; }
-
-.hero-wuxia .hero-next-label {
-  font-family: var(--f-mono);
-  font-size: var(--text-sm);
-  font-weight: var(--fw-bold);
-  letter-spacing: .32em;
-  color: var(--paper-mute);
-  text-transform: uppercase;
-  padding-left: var(--space-half);
-}
-
-.hero-wuxia .hero-next-row { display: flex; align-items: baseline; gap: var(--space-1-5); }
-
-.hero-wuxia .hero-next-arrow { color: var(--c-hero-next-arrow-fg); font-size: var(--text-18); align-self: center; }
-
-.hero-wuxia .hero-next-val {
-  font-family: var(--f-latin);
-  font-weight: var(--fw-extra);
-  font-size: 48px;
-  color: var(--c-hero-next-val-fg);
-  line-height: .88;
-  letter-spacing: -.01em;
-  text-shadow: var(--c-hero-wuxia--hero-next-val-text-shadow);
-}
-
-.hero-wuxia .hero-right {
-  position: relative;
-  z-index: 1;
-  border-left: 1px solid var(--gold-deep);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--space-3-5);
-  padding: 6px 0 6px 18px;
-  background: transparent;
-}
-
 .hero-wuxia .luopan {
   position: relative;
   width: 160px; height: 160px;
@@ -443,42 +335,6 @@
   letter-spacing: .18em;
   color: var(--c-luopan-center-label-fg);
   filter: drop-shadow(0 1px 1px var(--overlay-mid-2));
-}
-
-.hero-wuxia .judge-list {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  min-width: 0;
-}
-
-.hero-wuxia .judge-row {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 10.5px;
-  white-space: nowrap;
-}
-
-.hero-wuxia .judge-dot { width: 7px; height: 7px; flex-shrink: 0; }
-
-/* 物理/属性 行: 区切り線 + 菱形マーカー (◇物理=朱outline / ◆属性=翠fill) */
-.hero-wuxia .judge-row-sep { margin-top: 5px; padding-top: var(--space-1-5); border-top: 1px solid var(--ink-2); }
-
-.hero-wuxia .judge-dot-diamond { width: 8px; height: 8px; border-radius: 0; transform: rotate(45deg); }
-
-.hero-wuxia .judge-dot-phys { background: transparent; border: 1.6px solid var(--chart-sympathy); box-shadow: var(--c-judge-dot-phys-shadow); border-color: var(--c-hero-wuxia--judge-dot-phys-border); }
-
-.hero-wuxia .judge-dot-elem { background: transparent; border: 1.6px solid var(--jade-bright); box-shadow: var(--c-judge-dot-elem-shadow); border-color: var(--c-hero-wuxia--judge-dot-elem-border); }
-
-.hero-wuxia .judge-name { font-weight: var(--c-judge-name-fw); color: var(--c-judge-name-fg); text-shadow: var(--c-hero-wuxia--judge-name-text-shadow); }
-
-.hero-wuxia .judge-val {
-  font-family: var(--f-mono);
-  font-size: var(--text-sm);
-  font-weight: var(--c-judge-val-fw);
-  margin-left: auto;
-  text-shadow: var(--c-hero-wuxia--judge-val-text-shadow);
 }
 
 /* S2-g co-locate (B / K-type): light#88 L756 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */

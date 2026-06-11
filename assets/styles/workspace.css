@@ -161,6 +161,10 @@
   white-space: nowrap;
 }
 .hero-wuxia .next-chip b { color: var(--gold-bright); font-weight: 700; margin-left: 6px; }
+/* next-chip 内 span 構成 (heroScoreBaseline 互換のため b でなく span 群) — mock の <b> 相当の見た目を再現 */
+.hero-wuxia .next-chip .hero-next-label { color: var(--sumi-text-3); }
+.hero-wuxia .next-chip .hero-next-arrow { color: var(--gold-deep); margin: 0 2px; }
+.hero-wuxia .next-chip .hero-next-val { color: var(--gold-bright); font-weight: 700; margin-left: 4px; }
 /* donut = 実物 = 既存 .luopan を h-aside 内で縮小 */
 .hero-wuxia .h-aside .luopan { width: 120px; height: 120px; }
 

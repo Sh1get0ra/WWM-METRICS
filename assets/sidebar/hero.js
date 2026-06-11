@@ -7,8 +7,8 @@
 //     → arrow wrapper で window.__WWM_SET4_BONUS_OF / __WWM_GET_EFFECTIVE_ROLEINFO 経由
 //   - WWMHelpers.dom.setText / window.countUp
 // 公開:
-//   - window.WWMSidebar.hero = { update, startRoulette, stopRoulette }
-//   - 後方互換: window.WWMHero = { update }  (sidebar.js _refreshAll が参照)
+//   - window.WWMSidebar.hero = { update, setMode, startRoulette, stopRoulette }
+//     setMode(mode) = 席 swap (workspace.js tab 切替が guard 経由で call、 Task 6)
 //   - window._startTierRoulette / window._stopTierRoulette  (opt.js が call-time lookup)
 (function () {
   'use strict';
@@ -47,9 +47,58 @@
     if (heroTb) heroTb.classList.remove('tier-rolling');
   }
 
+  // ── 席 swap: 数値とタイトルだけ入替 (identity 固定)。node 移動方式 = ID/listener 無傷 ──
+  let _heroMode = 'score';
+  function setMode(mode) {
+    const hero = document.getElementById('heroRoot');
+    if (!hero || _heroMode === mode) return;
+    _heroMode = mode;
+    hero.classList.add('swapping');               // fade out 220ms quart (workspace.css .swap-anim)
+    setTimeout(() => {
+      const main = document.getElementById('heroSeatMain');
+      const sub = document.getElementById('heroSeatSub');
+      const score = document.getElementById('heroBlockScore');
+      const dps = document.getElementById('heroBlockDps');
+      if (main && sub && score && dps) {
+        if (mode === 'dps') { main.appendChild(dps); sub.appendChild(score); }
+        else { main.appendChild(score); sub.appendChild(dps); }
+      }
+      // NEXT chip は score mode のみ。visibility で場所保持 (donut 不動 — mock 教訓)
+      _syncNextVisibility();
+      hero.dataset.mode = mode;
+      hero.classList.remove('swapping');           // fade in + 浮き上がり
+    }, 230);
+  }
+
+  // ── identity (アバター/名前/Lv/総合武力) ──
+  function _syncIdentity() {
+    const ri = window.WWMState ? WWMState.roleInfo : null;
+    if (!ri) return;
+    const av = document.getElementById('heroAvatar');
+    const src = ri._avatarBase64 || ri._avatarUrl || (ri.roleAvatar && window.WWM_AVATAR_ICONS && window.WWM_AVATAR_ICONS[ri.roleAvatar]) || '';
+    if (av) {
+      let img = av.querySelector('img');
+      if (src && !img) { img = document.createElement('img'); img.alt = ''; img.loading = 'lazy'; av.appendChild(img); }
+      if (img && src && img.src !== src) img.src = src;
+    }
+    const nm = document.getElementById('heroName'), lv = document.getElementById('heroLv'), pw = document.getElementById('heroPower');
+    if (nm && nm.firstChild && nm.firstChild.nodeType === 3) nm.firstChild.textContent = ri.roleName || '—';
+    if (lv) lv.textContent = ri.level ? ('Lv ' + ri.level) : '';
+    const p = ri.xiuWeiKungFu || ri.maxXiuWeiKungFu || 0;  // export.js L233 と同源
+    if (pw) pw.textContent = p ? Number(p).toLocaleString() : '—';
+  }
+
+  let _nextMeaningful = false;  // update() が計算した「NEXT を見せる意味があるか」
+  function _syncNextVisibility() {
+    const el = document.querySelector('.hero-next-inline');
+    if (!el) return;
+    el.style.visibility = (_heroMode === 'score' && _nextMeaningful) ? '' : 'hidden';
+  }
+
   // ── Hero block 更新 ────────────────────────────────────────────
   function update(params) {
     if (!params || typeof window.computeExpected !== 'function') return;
+    _syncIdentity();
     // donut/arc DOM 書込みは このcomputeExpected (表示更新) のみ許可。
     // 他経路 (スコア試算/最適化/プレビュー) の computeExpected は ALLOW=false で donut を触らない。
     WWMState.allowDonut = true;
@@ -123,22 +172,21 @@
       if (typeof window.countUp === 'function') window.countUp('heroScoreBaseline', currentScore, 0);
       else if (baseEl) baseEl.textContent = currentScore.toLocaleString();
     }
-    // NEXT 表示制御: 確定 (baseline) と 仮想計算 (statusScore) が 丸め後同値なら NEXT行 非表示。
+    // NEXT 表示制御: 確定 (baseline) と 仮想計算 (statusScore) が 丸め後同値なら NEXT 非表示。
     // = 装備変更なし時の 「9,027 ▶ 9,027」 同値表示を排除、 装備対照/最適化で仮想変更時のみ NEXT 表示。
-    // currentScore null (baseline 未取得) 時も 隠す (NEXT 意味なし)。
-    const heroNextEl = document.querySelector('.hero-next-inline');
-    if (heroNextEl) {
-      if (currentScore === null) {
-        heroNextEl.hidden = true;
-      } else {
-        const nextRounded = Math.round(statusScore);
-        heroNextEl.hidden = (nextRounded === currentScore);
-      }
+    // currentScore null (baseline 未取得) 時も 隠す (NEXT 意味なし)。判定条件は不変。
+    // 表示は visibility 方式: 場所保持で donut 位置不動 (mock 教訓)。score mode 以外は常に隠す。
+    if (currentScore === null) {
+      _nextMeaningful = false;
+    } else {
+      const nextRounded = Math.round(statusScore);
+      _nextMeaningful = (nextRounded !== currentScore);
     }
+    _syncNextVisibility();
   }
 
   window.WWMSidebar = window.WWMSidebar || {};
-  window.WWMSidebar.hero = { update, startRoulette, stopRoulette };
+  window.WWMSidebar.hero = { update, setMode, startRoulette, stopRoulette };
   // opt.js が call-time で参照 (call-time arrow wrapper 経由のため window 直接 expose 必要)
   window._startTierRoulette = startRoulette;
   window._stopTierRoulette  = stopRoulette;
