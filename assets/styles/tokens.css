@@ -199,8 +199,8 @@
   --ratio-bad:       #e74c3c;  /* < 0.4 */
 
   /* ─── Phase 5.3-B: Semantic component tokens ───
-   * dark→light mapping を 1 か所に集約。 component 用途意図を token 名で表現。
-   * light override は styles-light.css の html[data-theme="light"] block に。
+   * component 用途意図を token 名で表現。 :root = 墨面 default 値。
+   * 紙面 (.wwm-ws-paper) 消費 token の紙値 rescope は workspace.css に集約 (2026-06-11 単一テーマ化、 旧 light.css 廃止)。
    */
   --c-surf-warm-1:        var(--surf-1);    /* warm card/modal bg gradient 上 */
   --c-surf-warm-2:        var(--surf-2);    /* warm card/modal bg gradient 下 */

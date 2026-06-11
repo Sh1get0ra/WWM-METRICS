@@ -337,16 +337,6 @@
   filter: drop-shadow(0 1px 1px var(--overlay-mid-2));
 }
 
-/* S2-g co-locate (B / K-type): light#88 L756 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .hero-wuxia #dmgPhysVal {
-  color: var(--vermilion-deep) !important;
-}
-
-/* S2-g co-locate (B / K-type): light#89 L758 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .hero-wuxia #dmgElemVal {
-  color: var(--jade-bright) !important;
-}
-
 /* S2-g co-locate (T): light#93 L773 */
 .hero-wuxia .hero-tier.tier-SS::before,
 .wwm-sb-tier-badge.tier-SS::before {
@@ -361,34 +351,6 @@ html[data-theme="light"] .hero-wuxia #dmgElemVal {
   pointer-events: var(--c-hero-wuxia--hero-tier-tier-SS-before-pe);
   z-index: var(--c-hero-wuxia--hero-tier-tier-SS-before-z);
   content: var(--c-hero-wuxia--hero-tier-tier-SS-before-content);
-}
-
-/* S2-g co-locate (B / K-type): light#104 L859 — theme gate 維持で other theme 影響ゼロ。 svg presentation attr 保護 (token unset 不可) */
-html[data-theme="light"] .hero-wuxia .ink-stroke path {
-  stroke: rgba(160,28,18,0.6);
-}
-
-/* S2-g co-locate (B / K-type): light#106 L867 — theme gate 維持で other theme 影響ゼロ。 svg presentation attr 保護 (token unset 不可) */
-html[data-theme="light"] .hero-wuxia .luopan-ticks line {
-  stroke: rgba(122,90,32,.8);
-  stroke-opacity: 1;
-}
-
-/* S2-g co-locate (B / K-type): light#107 L872 — theme gate 維持で other theme 影響ゼロ。 svg presentation attr 保護 (token unset 不可) */
-html[data-theme="light"] .hero-wuxia .luopan-ticks line[stroke-width="1.5"] {
-  stroke: var(--vermilion-deep);
-  stroke-opacity: 1;
-}
-
-/* S2-g co-locate (B / K-type): light#108 L877 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .hero-wuxia .luopan-arc circle[stroke^="rgba(232,215,180"] {
-  stroke: rgba(122,90,32,.55) !important;
-}
-
-/* S2-g co-locate (B / K-type): light#109 L881 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .hero-wuxia .luopan-inner svg circle.donut-bg,
-html[data-theme="light"] .hero-wuxia .luopan-inner svg circle[stroke^="rgba(232,215,180"] {
-  stroke: rgba(122,90,32,.5) !important;
 }
 
 @media (min-width: 601px) {

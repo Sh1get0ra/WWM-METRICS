@@ -341,22 +341,10 @@ function initHeroCollapse() {
   }
 }
 
-function toggleTheme() {
-  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-  setTheme(isLight ? 'dark' : 'light');
-}
-function setTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
-  // themeToggle の glyph 切替は CSS (data-theme で SVG sun/moon 表示切替) に移譲 —
-  // textContent 書込は inline SVG を破壊するため廃止 (critique P2 2026-06-06)
-  WWMHelpers.storage.saveStr('wwm_theme', theme);
-  // theme切替時 hero score色 (TIER_COLOR) 再適用
-  if (window.WWMSidebar?.hero && WWMState.params) window.WWMSidebar.hero.update(WWMState.params);
-}
-function initTheme() {
-  const saved = WWMHelpers.storage.loadStr('wwm_theme');
-  setTheme(saved === 'light' ? 'light' : 'dark');
-}
+// ── テーマ ────────────────────────────────────────────────────────
+// dark/light 双テーマ廃止 → 墨×紙 単一化 (2026-06-11)。
+// 墨面 = tokens.css :root default / 紙面 = .wwm-ws-paper token rescope (workspace.css)。
+// data-theme="dark" 属性は index.html 側で固定残置 (dark.css K rule = export clone 対抗の生存用)。
 
 // ── トースト ──────────────────────────────────────────────────────
 let _toastTimer = null;
@@ -486,7 +474,6 @@ async function init() {
     try { await window.WWM_DS.ready(); }
     catch (e) { console.error('DataStore.ready() failed', e); }
   }
-  initTheme();
   initHeroCollapse();
   _loadSavedLang();
   _initMigrationBanner();

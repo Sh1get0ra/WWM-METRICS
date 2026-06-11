@@ -583,11 +583,6 @@
   color: #4a9eff !important;
   border-color: rgba(74,158,255,0.55);
 }
-/* light theme の rank別 color (旧 styles-light.css から co-locate move 2026-06-05 @layer Step 1:
-   inline 対抗 imp 同士は spec 比較 = file 位置無関係、 同 file 化で layer 反転 flip を根治) */
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-gold { background: var(--c-gold-deep-faint); color: #7a5a12 !important; border-color: var(--c-gold-deep-strong); }
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.13); color: #6f3a9a !important; border-color: rgba(120,60,160,0.5); }
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.13); color: #2a5aa0 !important; border-color: rgba(40,90,160,0.5); }
 /* MAX到達 (100%) 虹色 — 色相回転 hue-rotate アニメ (両テーマ共通)
    注: background-color / box-shadow は keyframes が動かすため !important つけない (つけると keyframes が負けてアニメ無効化) */
 .wwm-cmp-modal-a .wwm-cmp-ratio.rank-max {

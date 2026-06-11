@@ -56,6 +56,231 @@
   --bone: #6a5236; --bone-dim: #8a7350;
   --donut-track: rgba(58,38,22,0.10);
   color: var(--kami-ink);
+
+  /* ── 紙面 component token (light.css 転用) ──
+     tokens.css の :root default は dark 面向け (明金/白文字) のため、
+     紙面に居る component (gear / xinfa / anlz / opt / rank / eff / equip-affix) が
+     消費する --c-* を旧 light 値で rescope。 墨面 (rail/band/modal/mobile) 用 token は移植しない。 */
+
+  /* dependency 中間 token (旧 light token block 由来。 下の --c-* が参照) */
+  --c-gold-rich:          #b8860b;
+  --c-cream-pale:         #f5e6c8;
+  --c-orange-deep:        #b85a14;
+  --c-vermilion-deep-mid: rgba(138,31,23,0.55);
+  --c-gold-deep-faint:    rgba(138,106,32,0.14);
+  --c-gold-deep-mid:      rgba(138,106,32,0.25);
+  --c-gold-deep-strong:   rgba(138,106,32,0.5);
+  --c-gold-deep-glow-2:   rgba(138,106,32,0.45);
+  --c-shadow-light:       rgba(0,0,0,0.35);
+  --c-overlay-cream:      rgba(255,248,225,0.40);
+  --c-header-cream-top:   #ffeac4;
+  --c-header-cream-bot:   #fcd5a8;
+  --c-card-bg-overlay-film: rgba(255,250,235,0.55);
+  --c-ink-line-faint:     rgba(0,0,0,0.04);
+  --c-anlz-shadow-orange: rgba(120,60,20,.18);
+  --c-opt-border-soft:    rgba(120,60,20,0.35);
+  --c-opt-border-mid:     rgba(120,60,20,0.4);
+  --c-opt-border-strong:  rgba(120,60,20,0.7);
+  --c-opt-hover-bg:       rgba(184,134,42,0.12);
+
+  /* gear / xinfa card */
+  --c-icon-dim-opacity:   0.22;
+  --c-slot-border:        rgba(40,25,18,0.30);
+  --c-rail-bg:            linear-gradient(180deg, rgba(58,38,22,0.10), rgba(58,38,22,0.04) 60%, rgba(58,38,22,0.08));
+  --c-equip-delta-pos-text-shadow: none;
+  --c-equip-delta-neg-fg:          var(--vermilion-deep);
+  --c-equip-delta-neg-text-shadow: none;
+  --c-equip-setname-fg:            var(--vermilion-deep);
+  --c-equip-setname-text-shadow:   none;
+  --c-fg-vermilion-strong:         var(--vermilion-deep);
+  --c-sb-notice-fg:                var(--vermilion-deep);
+  --c-xinfa-tier-fg:               var(--paper);
+  --c-xinfa-tier-chip-bg:          var(--vermilion-bright-tint);
+  --c-xinfa-tier-chip-border:      var(--c-vermilion-deep-mid);
+  --c-xinfa-cell--xinfa-tier-border: var(--ink-2);
+  --c-cmp-lv-select-fg:            var(--c-gold-rich);
+  --c-cmp-lv-select-border:        var(--c-gold-rich);
+  --c-cmp-stat-select-bg:          var(--surf-shade);
+
+  /* step2 / arsenal */
+  --c-step2-section-title-fw:      900;
+  --c-step2-section-title-border-bot: rgba(120,60,20,0.45);
+  --c-step2--xinfa-cell-border-bot: 1px dashed rgba(120,60,20,0.25);
+  --c-step2--xinfa-cell-pad-bot:   var(--space-1);
+  --c-step2--muted-opacity:        0.95;
+  --c-step2--num-input-bg:         var(--hover-strong);
+  --c-step2--arsenal-tier-border:  1px solid rgba(120,60,20,0.3);
+  --c-step2--arsenal-tier-bg:      rgba(255,240,210,0.4);
+
+  /* opt cluster */
+  --c-opt-loading-fg:              var(--gold-deep);
+  --c-opt-loading-text-shadow:     0 0 8px rgba(168,120,40,0.3);
+  --c-opt-btn-fg:                  #5a4220;
+  --c-opt-btn-hover-bg:            var(--c-opt-hover-bg);
+  --c-opt-btn-apply-border:        rgba(45,90,58,0.4);
+  --c-opt-btn-apply-hover-bg:      rgba(168,212,180,0.25);
+  --c-opt-btn-apply-hover-border:  rgba(45,90,58,0.7);
+  --c-opt-sort-group-border:       var(--c-opt-border-soft);
+  --c-opt-sort-btn-border-left:    var(--c-opt-border-soft);
+  --c-opt-sort-btn-fg:             #5a4838;
+  --c-opt-sort-btn-hover-bg:       var(--c-opt-hover-bg);
+  --c-opt-sort-btn-hover-fg:       var(--brown-1);
+  --c-opt-sort-btn-active-bg:      #f0d28a;
+  --c-opt-sort-btn-active-fg:      #2a1810;
+
+  /* rank table */
+  --c-rank-row-border-left:        1px solid rgba(120,60,20,0.36);
+  --c-rank-row-border-bot:         1px solid rgba(120,60,20,0.16);
+  --c-rank-row-odd-bg:             rgba(120,60,20,0.05);
+  --c-rank-row-hover-bg:           rgba(212,175,55,0.16);
+  --c-rank-row-hover-border-left:  #b8861a;
+
+  /* eff table */
+  --c-eff-row-odd-bg:              var(--surf-shade);
+  --c-eff-row-hover-bg:            var(--surf-shade-2);
+  --c-eff-input-bg:                var(--surf-shade-2);
+  --c-eff-input-fg:                #000;
+
+  /* anlz panel */
+  --c-fg-accent:                   var(--vermilion);
+  --c-anlz-shadow:                 0 6px 18px var(--c-anlz-shadow-orange);
+  --c-anlz-header-after-bg:        linear-gradient(180deg, transparent 18%, var(--c-ink-line-faint) 19%, var(--c-ink-line-faint) 20%, transparent 21%), linear-gradient(180deg, transparent 60%, rgba(0,0,0,.025) 61%, transparent 62%);
+  --c-anlz-body-after-bg:          repeating-linear-gradient(45deg, transparent 0 24px, rgba(120,60,20,.04) 24px 25px), repeating-linear-gradient(-45deg, transparent 0 24px, rgba(184,134,11,.04) 24px 25px);
+  --c-anlz-bamboo-opacity:         0.12;
+  --c-anlz-bgicon-opacity:         0.09;
+  --c-anlz-tab-fg:                 var(--brown-1);
+  --c-anlz-tab-active-fg:          #8a5a14;
+  --c-anlz-title-fg:               #1a0e08;
+  --c-anlz-title-text-shadow:      0 1px 0 var(--hover-mid-2);
+  --c-anlz-title-fg-n2:            #2a1610;
+  --c-anlz-title-text-shadow-n2:   0 0 0.5px rgba(42,22,16,.6), 0 0 1.5px rgba(74,40,20,.35), 0 0 3px rgba(106,62,22,.18), 0.6px 0 1.2px rgba(42,22,16,.25), -0.6px 0 1.2px rgba(42,22,16,.22), 0 0.5px 1.5px rgba(74,40,20,.14);
+  --c-anlz-subtitle-fg:            var(--brown-5);
+  --c-anlz-subtitle-opacity:       0.9;
+}
+
+/* ── 紙面 fine-tune (light.css 転用 selector rule) ──
+   token rescope だけでは出ない literal filter / background-image / mix-blend を
+   .wwm-ws-paper 配下に scope して移植。 元 html[data-theme="light"] X → .wwm-ws-paper X。 */
+
+/* liupai 別 icon glow (流派色 drop-shadow) */
+.wwm-ws-paper [data-liupai-pinyin="tianquan"] .wwm-equip-icon,
+.wwm-ws-paper [data-liupai-pinyin="tianquan"] .wwm-xinfa-icon {
+  filter: brightness(0) drop-shadow(0 0 3px rgba(20,60,140,0.75)) drop-shadow(0 0 8px rgba(20,60,140,0.55)) drop-shadow(0 0 16px rgba(20,60,140,0.35));
+}
+.wwm-ws-paper [data-liupai-pinyin="kuanglan"] .wwm-equip-icon,
+.wwm-ws-paper [data-liupai-pinyin="kuanglan"] .wwm-xinfa-icon {
+  filter: brightness(0) drop-shadow(0 0 3px rgba(140,25,18,0.8)) drop-shadow(0 0 8px rgba(140,25,18,0.6)) drop-shadow(0 0 16px rgba(140,25,18,0.38));
+}
+.wwm-ws-paper [data-liupai-pinyin="qingxi"] .wwm-equip-icon,
+.wwm-ws-paper [data-liupai-pinyin="qingxi"] .wwm-xinfa-icon {
+  filter: brightness(0) drop-shadow(0 0 3px rgba(20,110,55,0.75)) drop-shadow(0 0 8px rgba(20,110,55,0.55)) drop-shadow(0 0 16px rgba(20,110,55,0.35));
+}
+.wwm-ws-paper [data-liupai-pinyin="guyun"] .wwm-equip-icon,
+.wwm-ws-paper [data-liupai-pinyin="guyun"] .wwm-xinfa-icon {
+  filter: brightness(0) drop-shadow(0 0 3px rgba(90,30,140,0.8)) drop-shadow(0 0 8px rgba(90,30,140,0.6)) drop-shadow(0 0 16px rgba(90,30,140,0.38));
+}
+
+/* 既定 icon = 墨化 (紙上は黒インク + 金 glow) */
+.wwm-ws-paper .wwm-equip-icon,
+.wwm-ws-paper .wwm-xinfa-icon {
+  filter: brightness(0) drop-shadow(0 0 3px var(--c-gold-deep-strong)) drop-shadow(0 0 8px var(--gold-glow));
+}
+.wwm-ws-paper .wwm-equip-liupai-badge,
+.wwm-ws-paper .wwm-xinfa-liupai-badge {
+  filter: drop-shadow(0 1px 2px var(--c-shadow-light));
+}
+
+/* gear / xinfa slot 背景 — 紙の古紙カード film */
+.wwm-ws-paper .wwm-gear-grid .wwm-equip-slot::before,
+.wwm-ws-paper .wwm-xinfa-slot::before {
+  mix-blend-mode: multiply;
+}
+.wwm-ws-paper .wwm-gear-grid .wwm-equip-slot,
+.wwm-ws-paper .wwm-xinfa-slot {
+  background-image:
+    linear-gradient(var(--c-card-bg-overlay-film), var(--c-card-bg-overlay-film)),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg_usercard2-e8900864.png"),
+    linear-gradient(180deg, #fff3da, #fce0bc);
+  background-position: 0 0, center, 0 0;
+  background-size: auto, 100% 100%, auto;
+  background-repeat: repeat, no-repeat, repeat;
+  background-blend-mode: normal, difference, normal;
+}
+
+/* equip-affix rank 色 (金/紫/青) — 紙上で読める暗色へ */
+.wwm-ws-paper .wwm-equip-section .wwm-equip-affix .wwm-rank-gold,
+.wwm-ws-paper .wwm-equip-section .wwm-equip-affix .wwm-rank-gold .wwm-stat-name,
+.wwm-ws-paper .wwm-equip-section .wwm-equip-affix .wwm-rank-gold .wwm-stat-val {
+  color: var(--c-orange-deep);
+}
+.wwm-ws-paper .wwm-equip-section .wwm-equip-affix .wwm-rank-purple,
+.wwm-ws-paper .wwm-equip-section .wwm-equip-affix .wwm-rank-purple .wwm-stat-name,
+.wwm-ws-paper .wwm-equip-section .wwm-equip-affix .wwm-rank-purple .wwm-stat-val {
+  color: #6a2e8a;
+}
+.wwm-ws-paper .wwm-equip-section .wwm-equip-affix .wwm-rank-blue,
+.wwm-ws-paper .wwm-equip-section .wwm-equip-affix .wwm-rank-blue .wwm-stat-name,
+.wwm-ws-paper .wwm-equip-section .wwm-equip-affix .wwm-rank-blue .wwm-stat-val {
+  color: #1e5a9e;
+}
+
+/* equip / step2 本文 — 紙の墨茶文字 (token 化されない literal 群) */
+.wwm-ws-paper .wwm-equip-section .wwm-stat-name,
+.wwm-ws-paper .wwm-equip-section .wwm-stat-val,
+.wwm-ws-paper .wwm-step2 .wwm-xinfa-cell,
+.wwm-ws-paper .wwm-step2 .wwm-xinfa-label,
+.wwm-ws-paper .wwm-step2 .wwm-xinfa-effect,
+.wwm-ws-paper .wwm-step2 .wwm-arsenal-tier,
+.wwm-ws-paper .wwm-step2 .wwm-arsenal-lv,
+.wwm-ws-paper .wwm-step2 .wwm-arsenal-peaked-label,
+.wwm-ws-paper .wwm-step2 .wwm-arsenal-preset,
+.wwm-ws-paper .wwm-step2 .wwm-arsenal-custom,
+.wwm-ws-paper .wwm-step2 .wwm-stat-label,
+.wwm-ws-paper .wwm-step2 .wwm-radio-label,
+.wwm-ws-paper .wwm-equip-section .wwm-equip-base b,
+.wwm-ws-paper .wwm-equip-section .wwm-equip-affix b,
+.wwm-ws-paper .wwm-equip-section,
+.wwm-ws-paper .wwm-equip-section .wwm-equip-slot,
+.wwm-ws-paper .wwm-equip-section .wwm-equip-slot-header,
+.wwm-ws-paper .wwm-equip-section .wwm-equip-base,
+.wwm-ws-paper .wwm-equip-section .wwm-equip-affix,
+.wwm-ws-paper .wwm-step2 {
+  color: var(--brown-2);
+}
+.wwm-ws-paper .wwm-step2 .wwm-step2-section-title {
+  color: var(--brown-3);
+}
+.wwm-ws-paper .wwm-step2 .wwm-num-input {
+  color: var(--brown-2);
+}
+
+/* anlz 古紙ヘッダー / body texture (literal background-image) */
+.wwm-ws-paper .wwm-anlz {
+  --anlz-header-bg: #f0e8d2;
+  --anlz-content-bg: #faf3df;
+  --anlz-line: rgba(120,60,20,.32);
+}
+.wwm-ws-paper .wwm-anlz-header {
+  background:
+    linear-gradient(var(--c-overlay-cream), var(--c-overlay-cream)),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/section_bg-66d4d3cb.png") center / cover no-repeat,
+    linear-gradient(180deg, var(--c-header-cream-top), var(--c-header-cream-bot));
+  background-blend-mode: normal, difference, normal;
+}
+.wwm-ws-paper .wwm-anlz-header::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 0.4  0 0 0 0 0.25  0 0 0 0 0.1  0 0 0 0.22 0'/></filter><rect width='220' height='220' filter='url(%23f)'/></svg>");
+  mix-blend-mode: multiply;
+}
+.wwm-ws-paper .wwm-anlz-body::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='2.2' numOctaves='2' seed='13'/><feColorMatrix values='0 0 0 0 0.6  0 0 0 0 0.45  0 0 0 0 0.25  0 0 0 0.18 0'/></filter><rect width='180' height='180' filter='url(%23g)'/></svg>");
+  mix-blend-mode: multiply;
+}
+.wwm-ws-paper .wwm-anlz-bgicon {
+  filter: brightness(0) drop-shadow(0 0 6px var(--c-gold-deep-glow-2)) drop-shadow(0 0 14px var(--c-gold-deep-mid));
+}
+/* bamboo SVG fill — presentation attr (token unset 不可) のため明示 */
+.wwm-ws-paper .wwm-anlz-bamboo svg path {
+  fill: var(--brown-5);
 }
 
 /* ============ L 字 grid ============ */

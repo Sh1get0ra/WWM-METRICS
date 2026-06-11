@@ -314,21 +314,6 @@
 /* light mini-hero-card 文字色 rule は light.css 末尾へ再移動 (Step 5-c 2026-06-06):
    modals/light layer の `... b` phantom 競合 + OBS 競合を theme layer natural 勝ちで解消 = imp 不要 */
 
-/* S2-g co-locate (B / K-type): light#96 L804 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .wwm-sb-tier-badge.tier-A {
-  text-shadow: none !important;
-}
-
-/* S2-g co-locate (B / K-type): light#97 L811 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .wwm-sb-tier-badge.tier-B {
-  text-shadow: none !important;
-}
-
-/* S2-g co-locate (B / K-type): light#98 L818 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .wwm-sb-tier-badge.tier-C {
-  text-shadow: none !important;
-}
-
 @media (prefers-reduced-motion: reduce) {
   /* ⚠ K: !important 恒久 keep (a11y kill-switch、 Step 5 確定 2026-06-06)。
      light.css (後 layer) の tier-SS/S animation に components layer から確実に勝つには imp が必要。

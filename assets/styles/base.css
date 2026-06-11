@@ -225,19 +225,8 @@ html[lang="ko"] .top-controls-2row .icon-btn {
   box-shadow: inset 0 -2px 0 var(--c-lang-active-fg);
 }
 
-/* theme toggle = opt-sort-group 流用の [☀ライト][☾ダーク] 2アイコンセグメント (2026-06-08 兄貴指示、 X 抜けズレ解消)。
-   非active = opt-sort-btn base (transparent)、 active = 現 theme (data-theme 連動)、 setTheme('light'/'dark') で明示切替 */
-.wwm-theme-toggle { align-self: center; height: 30px; width: 66px; box-sizing: border-box; }
-.wwm-theme-btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; padding: 0; opacity: 0.4; transition: opacity 0.15s, background 0.15s, color 0.15s; }
-.wwm-theme-btn:hover { opacity: 0.75; }
-.wwm-theme-btn svg { display: block; }
-/* 選択中 = 金背景 + くっきり (opacity 1)、 非選択は沈めて差を明確化 */
-html[data-theme="light"] .wwm-theme-btn[data-theme-set="light"],
-html[data-theme="dark"]  .wwm-theme-btn[data-theme-set="dark"] {
-  opacity: 1;
-  background: var(--c-opt-sort-btn-active-bg);
-  color: var(--c-opt-sort-btn-active-fg);
-}
+/* theme toggle UI 撤去 (2026-06-11 dark/light 双テーマ廃止)。
+   .wwm-theme-toggle / .wwm-theme-btn block = HTML/JS 参照消滅で全 dead → 削除 */
 
 .icon-btn {
   width: 30px; height: 30px;

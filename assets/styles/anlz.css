@@ -798,10 +798,7 @@ html[lang="en"] .wwm-cmp-title-en {
   color: var(--c-lang-active-fg);
 }
 
-/* S2-g co-locate (B / K-type): light#124 L982 — theme gate 維持で other theme 影響ゼロ。 svg presentation attr 保護 (token unset 不可) */
-html[data-theme="light"] .wwm-anlz-bamboo svg path {
-  fill: var(--brown-5);
-}
+/* light#124 (.wwm-anlz-bamboo svg path fill) は workspace.css の .wwm-ws-paper scope へ移植 (2026-06-11 単一テーマ化) */
 
 /* S2-g co-locate (T): light#125 L984 */
 .wwm-anlz .wwm-anlz-title {

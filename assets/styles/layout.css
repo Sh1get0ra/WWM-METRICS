@@ -486,13 +486,6 @@ html.wwm-view-sidebar body .wwm-app-body { padding: var(--space-2); }
     border: 1px solid var(--gold-deep);
     box-shadow: 0 6px 14px var(--overlay-mid);
   }
-  /* background は持たない (Step 5 dead decl 削除 2026-06-06): light theme の bg は
-     light.css .wwm-sb-mini-hero-card の surf-warm gradient が layer 順 (themes > components)
-     で常勝 = ここに書いても dead。 旧値 #f4e8c8 は gradient とほぼ同色 cream で視覚差なし */
-  html[data-theme="light"] body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sb-mini-hero-card {
-    border-color: rgba(120,60,20,0.35);
-    box-shadow: 0 6px 14px var(--overlay-trace);
-  }
   /* overlay内で wwm-anlz 自体を move して表示 — 元 mobile時 display:none を上書き */
   body.wwm-layout-active .wwm-anlz.wwm-anlz-in-overlay,
   body.wwm-layout-active .wwm-mobile-anlz-overlay-body .wwm-anlz,
