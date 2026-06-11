@@ -33,8 +33,6 @@
 
 .wwm-mobile-top-reset { display: none; }
 
-.wwm-mobile-anlz-btn { display: none; }
-
 .wwm-mobile-drawer, .wwm-mobile-drawer-backdrop { display: none; }
 
 /* drawer 本体 CSS (mobile時 表示、 hidden属性 解除 + slide-in アニメ) */
@@ -148,9 +146,7 @@
 /* PC時 FAB / overlay 完全 hidden (mobile @media 外でも) */
 .wwm-mobile-stat-fab,
 .wwm-mobile-stat-overlay-backdrop,
-.wwm-mobile-stat-overlay,
-.wwm-mobile-anlz-overlay-backdrop,
-.wwm-mobile-anlz-overlay { display: none; }
+.wwm-mobile-stat-overlay { display: none; }
 
 /* S2-g co-locate (T): light#9 L381 */
 .seal {
@@ -248,32 +244,6 @@
     align-items: center;
     gap: var(--space-2);
   }
-  /* 📈格析 button: preset-bar 末尾 (mobile時のみ表示) */
-  .wwm-mobile-anlz-btn {
-    display: inline-flex; align-items: center; gap: 3px;
-    /* critique P2 改 (2026-06-06): 視覚 32px + ::after hit 拡張で実効 44 (縦長 bar の不格好解消) */
-    min-height: 32px;
-    position: relative;
-    order: -1; /* critique P2 (2026-06-06): 格析 (主要導線) を bar 先頭固定。 DOM 順不変 = focus 順は preset 先のまま */
-    padding: var(--space-half) var(--space-1-5);
-    background: linear-gradient(180deg, var(--vermilion-bright-tint), rgba(232,81,58,0.10));
-    border: 1px solid var(--vermilion-strong);
-    border-radius: 2px;
-    color: var(--vermilion-bright);
-    font-family: var(--f-display);
-    font-weight: var(--fw-bold);
-    font-size: var(--text-xs);
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    flex: 0 0 auto;
-  }
-  /* 不可視 hit 拡張: 縦 ±6px = 実効 44px (critique P2 改) */
-  .wwm-mobile-anlz-btn::after {
-    content: '';
-    position: absolute;
-    top: -6px; bottom: -6px; left: -2px; right: -2px;
-  }
-  .wwm-mobile-anlz-icon { font-size: var(--text-12); }
   /* RESET button: TopBar 右側 (mobile時のみ表示) */
   .wwm-mobile-top-reset {
     display: inline-flex; align-items: center; justify-content: center;
@@ -362,55 +332,6 @@
     font-size: var(--text-xl); line-height: 1;
     cursor: pointer;
   }
-  /* ─── Phase 8: 📈格析 全画面 overlay ─── */
-  .wwm-mobile-anlz-overlay-backdrop {
-    position: fixed; inset: 0;
-    background: var(--overlay-mid-2);
-    z-index: 1200;
-  }
-  .wwm-mobile-anlz-overlay-backdrop[hidden] { display: none; }
-  .wwm-mobile-anlz-overlay {
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(180deg, var(--c-mobile-overlay-top), var(--c-mobile-overlay-bot));
-    z-index: 1300;
-    display: flex;
-    flex-direction: column;
-    padding-top: var(--safe-top, 0px);
-    padding-bottom: var(--safe-bottom, 0px);
-  }
-  .wwm-mobile-anlz-overlay[hidden] { display: none; }
-  .wwm-mobile-anlz-overlay-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: var(--space-2) var(--space-3);
-    border-bottom: 1px solid var(--ink-2);
-    background: var(--c-mobile-overlay-header-bg);
-    flex: 0 0 auto;
-  }
-  .wwm-mobile-anlz-overlay-title {
-    font-family: var(--f-display);
-    font-weight: var(--fw-black);
-    font-size: var(--text-14);
-    letter-spacing: 0.18em;
-    color: var(--c-fg-vermilion-strong);
-  }
-  .wwm-mobile-anlz-overlay-close {
-    width: 36px; height: 36px;
-    background: transparent;
-    border: 1px solid var(--ink-2);
-    border-radius: 3px;
-    color: var(--c-fg-vermilion-strong);
-    font-size: var(--text-xl); line-height: 1;
-    cursor: pointer;
-  }
-  .wwm-mobile-anlz-overlay-body {
-    flex: 1 1 auto;
-    overflow-y: auto;
-    padding: var(--space-2) var(--space-2-5) var(--space-4);
-    scrollbar-color: var(--gold-deep) transparent;
-  }
-  .wwm-mobile-anlz-overlay-body::-webkit-scrollbar { width: 6px; }
-  .wwm-mobile-anlz-overlay-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
 }
 
 } /* end @layer components */

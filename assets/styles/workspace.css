@@ -429,7 +429,10 @@
   background: var(--sumi-1);
   color: var(--sumi-text);
   /* 金罫は紙側の縁取り (.wwm-ws-body / footer border-left) — 墨同士は地続き */
-  overflow: hidden;
+  /* overflow: clip (not hidden): kanji-mark 透かしを clip しつつ scroll container を
+     作らない → 子 .wwm-rail-in の position: sticky を生かす (Task 9 document scroll 化:
+     hidden だと sticky が無効化し rail が紙面と 1:1 で流れる、 2026-06-11 検証で確認) */
+  overflow: clip;
   z-index: 10;
 }
 .wwm-ws-rail .kanji-mark {

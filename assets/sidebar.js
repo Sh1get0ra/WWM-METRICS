@@ -178,32 +178,10 @@ function _refreshAll() {
 //             window.WWMHero / window.WWMSidebar.hero / window._startTierRoulette / window._stopTierRoulette)
 // (本体は assets/sidebar/hero.js)
 
-// Header/Footer 実高さ → CSS 変数で sidebar top/bottom 動的調整
-function _syncLayoutVars() {
-  const header = document.querySelector('.sticky-header');
-  const footer = document.querySelector('.wwm-footer');
-  if (header) document.documentElement.style.setProperty('--wwm-header-h', header.offsetHeight + 'px');
-  if (footer) document.documentElement.style.setProperty('--wwm-footer-h', footer.offsetHeight + 'px');
-  // sidebar height = footer top - hero top (上下スペース 完全一致)
-  const hero = document.querySelector('section.hero');
-  const sidebar = document.querySelector('.wwm-sidebar-test');
-  if (hero && footer && sidebar) {
-    const heroTop = hero.getBoundingClientRect().top;
-    const footerTop = footer.getBoundingClientRect().top;
-    const padBottom = parseFloat(getComputedStyle(document.querySelector('.wwm-app-body') || sidebar.parentElement).paddingBottom) || 0;
-    const height = footerTop - heroTop - padBottom;
-    if (height > 100) {
-      sidebar.style.height = height + 'px';
-      sidebar.style.maxHeight = height + 'px';
-    }
-  }
-}
-window.addEventListener('resize', _syncLayoutVars);
-window.addEventListener('DOMContentLoaded', _syncLayoutVars);
-window.addEventListener('load', _syncLayoutVars);
-setTimeout(_syncLayoutVars, 100);
-setTimeout(_syncLayoutVars, 500);
-// ResizeObserver は loop の原因になるので無効化 (sidebar は固定 calc 値で対応)
+// (Task 9 / workspace v2 2026-06-11: _syncLayoutVars 撤去 — 旧 fixed-header 独立scroll 専用。
+//  新構造 = .wwm-app L字 grid + .wwm-rail-in sticky で document scroll 化、 header/footer
+//  実測 px の CSS 変数同期も sidebar 高 inline 書込も構造的に不要化。 layout.css の
+//  K cluster !important もセットで存在理由消滅し撤去済)
 
 // ── 未対応データ検知 + 報告 ─────────────────────────────────
 // (Phase 3.2: _detectUnknown は assets/sidebar/anlz.js に切出)
@@ -215,7 +193,6 @@ window.WWMSidebar = window.WWMSidebar || {};
 Object.assign(window.WWMSidebar, {
   render: renderSidebar,
   refresh: () => { const p = _getCurrentParams(); return p && renderSidebar(p); },
-  syncLayout: _syncLayoutVars,
   openUnknownReport
 });
 // (Phase 3.6: window.WWMGear は assets/sidebar/gear.js 内で expose 済)
