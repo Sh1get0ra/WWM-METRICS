@@ -557,7 +557,8 @@
   <!-- Mobile TopBar (PC時 hidden、 mobile時のみ表示 / TITLE + 📈格析 + ≡) -->
   <div class="wwm-mobile-topbar" aria-label="モバイル用 上部バー">
     <div class="wwm-brand wwm-mobile-brand">
-      <h1 class="wwm-brand-vert" data-i18n="brandVert">風燕計</h1>
+      <!-- SEO (2026-06-11 Bing 指摘): h1 はページ 1 個原則 → PC topbar 側を正、 mobile 重複は div 化 (見た目 = .wwm-brand-vert class 由来で不変) -->
+      <div class="wwm-brand-vert" data-i18n="brandVert">風燕計</div>
       <div class="wwm-brand-right">
         <div class="wwm-brand-en" data-i18n="brandEn">WHERE WINDS METRICS</div>
         <div class="wwm-brand-sub">WWM-REAL-TIME-METRICS</div>
