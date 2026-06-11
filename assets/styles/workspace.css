@@ -336,10 +336,19 @@
 }
 
 /* hero — 主役席 (数値+NEXT+donut) / 右 identity (アバター+補助席)。
-   tab 連動で数値とタイトルが席を入替、fade out → in をしっかり見せる */
-.hero-wuxia {
+   tab 連動で数値とタイトルが席を入替、fade out → in をしっかり見せる。
+   specificity = .hero.hero-wuxia: hero.css L179 の旧 grid hero (display:grid /
+   xf-bg 背景 / border / height:195px) を workspace mock hero が上書きする要。
+   旧 grid は新 DOM (.h-main/.h-aside/.h-id flex) と非互換 = 特に mobile で破綻 */
+.hero.hero-wuxia {
   display: flex; align-items: flex-start; gap: 48px;
   padding: 28px 48px 32px;
+  /* 旧 hero の装飾を解除 (墨 band が背景を担う) */
+  background: none;
+  border: none;
+  box-shadow: none;
+  height: auto;
+  grid-template-columns: none;
 }
 .hero-wuxia .eyebrow {
   font-family: var(--f-mono); font-weight: 600; font-size: 10px;
@@ -390,8 +399,10 @@
 .hero-wuxia .next-chip .hero-next-label { color: var(--sumi-text-3); }
 .hero-wuxia .next-chip .hero-next-arrow { color: var(--gold-deep); margin: 0 2px; }
 .hero-wuxia .next-chip .hero-next-val { color: var(--gold-bright); font-weight: 700; margin-left: 4px; }
-/* donut = 実物 = 既存 .luopan を h-aside 内で縮小 */
-.hero-wuxia .h-aside .luopan { width: 120px; height: 120px; }
+/* donut = 実物 = 既存 .luopan を h-aside 内で縮小。
+   主役数値 (96px) の光学重心に donut 中心を寄せる — next-chip を頭に残しつつ
+   donut を負 margin で引き上げ、「数値比でやや下」の残調整 (兄貴指摘①) を解消 */
+.hero-wuxia .h-aside .luopan { width: 120px; height: 120px; margin-top: -22px; }
 
 /* 右 identity: アバター煙溶け + キャラ名 + 総合武力 + 補助席 */
 .hero-wuxia .h-id { margin-left: auto; display: flex; align-items: center; gap: 6px; }
@@ -442,6 +453,24 @@
   color: rgba(232,215,180,0.05);
 }
 .wwm-rail-in { position: sticky; top: 0; padding: 18px 22px 30px; }
+
+/* rail 内の sidebar = 旧 fixed 浮島 styling を解除し墨柱に地続き化。
+   sidebar.css .wwm-sidebar-test = 旧テスト用 position:fixed/right:12px の残骸
+   (OBS view は obs.css が relative 化、 mobile overlay は layout.css が上書き、
+   workspace rail はここで上書き)。 rail-in の sticky が scroll 追従を担う */
+.wwm-ws-rail .wwm-sidebar-test {
+  position: static;
+  top: auto; right: auto; left: auto;
+  width: 100%;
+  max-height: none;
+  overflow: visible;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  z-index: auto;
+  color: var(--sumi-text);
+}
 /* rail 頭 — 金ラベル + 朱印 (紙化は違和感 → 金/朱 accent 方針) */
 .wwm-rail-head {
   display: flex; align-items: center; justify-content: space-between;
@@ -639,7 +668,7 @@
 @media (max-width: 600px) {
   .wwm-app { display: block; }
   .wwm-band-top { padding: 10px 16px; }
-  .hero-wuxia { padding: 22px 18px 18px; gap: 0; display: block; position: relative; }
+  .hero.hero-wuxia { padding: 22px 18px 18px; gap: 0; display: block; position: relative; height: auto; grid-template-columns: none; }
   .wwm-band .kanji-mark { display: block; right: -14px; top: 56%; transform: translateY(-50%); font-size: 150px; color: rgba(232,215,180,0.05); }
   .hero-wuxia .h-main { display: flex; gap: 16px; align-items: flex-start; }
   .hero-wuxia .seat-main .hb-num { font-size: 54px; line-height: 1; margin-top: 4px; }
@@ -647,8 +676,10 @@
   .hero-wuxia .seat-main .tchip { font-size: 13px; padding: 1px 9px; margin-left: 10px; vertical-align: 7px; }
   .hero-wuxia .h-aside { padding-top: 6px; gap: 6px; }
   .hero-wuxia .next-chip { font-size: 10px; padding: 3px 8px; }
-  .hero-wuxia .h-aside .luopan { width: 68px; height: 68px; }
-  .hero-wuxia .h-id { margin: 10px 0 0; display: flex; align-items: center; }
+  .hero-wuxia .h-aside .luopan { width: 68px; height: 68px; margin-top: 0; }
+  /* identity = score 行の下に明示 block 化 (margin-left:auto / flex-center 由来の
+     重なりを解除)。mock 同様 縦 stack へ */
+  .hero-wuxia .h-id { margin: 12px 0 0; margin-left: 0; display: flex; align-items: center; clear: both; }
   .hero-wuxia .avatar { width: 78px; height: 74px; flex: 0 0 78px; }
   .hero-wuxia .h-id-info { min-width: 0; }
   .hero-wuxia .seat-sub { margin-top: 6px; padding-top: 6px; }
