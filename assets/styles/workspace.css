@@ -360,7 +360,10 @@
 .hero-wuxia.swapping .swap-anim { opacity: 0; transform: translateY(10px); }
 
 .hero-wuxia .h-main { display: flex; align-items: flex-start; gap: 30px; min-width: 0; }
+/* flex = 数値と tier chip の横並びを構造で保証 (span inline 依存だと
+   hero.css 旧 rule との競合で折返し落下した — 2026-06-11 hero 崩れ根治) */
 .hero-wuxia .seat-main .hb-num {
+  display: flex; align-items: flex-start;
   font-family: var(--f-latin); font-weight: 800;
   font-size: 96px; line-height: 0.95; letter-spacing: -0.015em;
   color: var(--gold-bright); margin-top: 6px;
@@ -370,12 +373,9 @@
   font-size: 20px; letter-spacing: 0.18em; color: var(--gold);
   margin-left: 12px; font-weight: 700;
 }
-.hero-wuxia .tchip {
-  font-family: var(--f-latin); font-weight: 800; font-size: 18px;
-  color: var(--gold-bright); border: 1px solid var(--gold-deep);
-  padding: 2px 12px; border-radius: 1px;
-  margin-left: 16px; vertical-align: 14px;
-}
+/* tchip の字体/色/padding/位置は hero.css .hero-wuxia .hero-tier.tier-badge (新値化済) +
+   tier-SS〜C 色 rule が担う。ここは flex 内の間隔のみ */
+.hero-wuxia .tchip { margin-left: 16px; }
 .hero-wuxia .hb-note {
   margin-top: 6px; font-family: var(--f-mono); font-weight: 600; font-size: 9px;
   letter-spacing: 0.18em; color: var(--sumi-text-3);
@@ -383,7 +383,7 @@
 /* NEXT (baseline ▶ 提案全適用時) + donut = 主役数値の付属品 */
 .hero-wuxia .h-aside {
   display: flex; flex-direction: column; align-items: flex-start;
-  gap: 10px; padding-top: 16px;
+  gap: 8px; padding-top: 6px; /* donut を数値の光学重心へ寄せる (負 margin 禁止 — NEXT と素直な縦 stack のまま詰める) */
 }
 .hero-wuxia .next-chip {
   font-family: var(--f-mono); font-weight: 600; font-size: 12px; letter-spacing: 0.1em;
@@ -400,9 +400,9 @@
 .hero-wuxia .next-chip .hero-next-arrow { color: var(--gold-deep); margin: 0 2px; }
 .hero-wuxia .next-chip .hero-next-val { color: var(--gold-bright); font-weight: 700; margin-left: 4px; }
 /* donut = 実物 = 既存 .luopan を h-aside 内で縮小。
-   主役数値 (96px) の光学重心に donut 中心を寄せる — next-chip を頭に残しつつ
-   donut を負 margin で引き上げ、「数値比でやや下」の残調整 (兄貴指摘①) を解消 */
-.hero-wuxia .h-aside .luopan { width: 120px; height: 120px; margin-top: -22px; }
+   ⚠ 負 margin での引き上げは NEXT chip 可視時に重なり事故 (2026-06-11) — 禁止。
+   縦位置調整は h-aside の padding-top で行う (NEXT/donut は素直な縦 stack) */
+.hero-wuxia .h-aside .luopan { width: 120px; height: 120px; }
 
 /* 右 identity: アバター煙溶け + キャラ名 + 総合武力 + 補助席 */
 .hero-wuxia .h-id { margin-left: auto; display: flex; align-items: center; gap: 6px; }
@@ -425,13 +425,17 @@
 .hero-wuxia .seat-sub { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--sumi-ink-1); }
 .hero-wuxia .seat-sub .eyebrow { font-size: 9px; letter-spacing: 0.26em; }
 .hero-wuxia .seat-sub .hb-num {
+  display: flex; align-items: flex-start; /* seat-main と同じ落下防止構造 */
   font-family: var(--f-latin); font-weight: 800;
   font-size: 28px; line-height: 1; color: var(--gold);
   margin-top: 4px; white-space: nowrap;
 }
 .hero-wuxia .seat-sub .hb-num .unit { font-size: 11px; letter-spacing: 0.14em; color: var(--gold-deep); margin-left: 6px; font-weight: 700; }
-.hero-wuxia .seat-sub .tchip { font-size: 11px; padding: 0 8px; margin-left: 8px; vertical-align: 3px; }
+.hero-wuxia .seat-sub .tchip { font-size: 11px; padding: 0 8px; margin-left: 8px; margin-top: 2px; }
 .hero-wuxia .seat-sub .hb-note { display: none; }
+/* COMING SOON (演武 DPS 実装前 placeholder) — 数値 96px 継承では過大、文字として品よく */
+.hero-wuxia .seat-main .hb-num.hb-coming { font-size: 44px; letter-spacing: 0.06em; padding-top: 14px; }
+.hero-wuxia .seat-sub .hb-num.hb-coming { font-size: 15px; letter-spacing: 0.1em; }
 
 /* ============ 左柱 (墨 rail / L の縦画) ============ */
 .wwm-ws-rail {
