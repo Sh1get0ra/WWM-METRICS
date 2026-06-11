@@ -94,6 +94,8 @@ function setLang(lang) {
   });
   // 移転バナー: 言語切替毎に多言語msg再適用 (旧URL検出時のみ DOM 表示)
   if (typeof _initMigrationBanner === 'function') _initMigrationBanner();
+  // SEO meta 動的更新 (description / canonical / og:*) — crawler は JS レンダリング後 DOM を読む
+  _updateSeoMeta(lang);
 
   WWMHelpers.storage.saveStr('wwm_lang', lang);
   renderPresetSlots();
@@ -103,6 +105,31 @@ function setLang(lang) {
     try { window.WWMSidebar.render(null); } catch(_) {}
   }
 }
+// SEO meta 動的更新: 言語切替時に description / canonical / hreflang対応 og:url / og:title / og:description を現在言語へ。
+// 静的 head は ja 既定 (index.html)。 canonical = ja は base URL、 他言語は ?lang= 付き自己参照 (hreflang sitemap.xml と対)。
+const _SEO_OG_LOCALE = { ja: 'ja_JP', en: 'en_US', zh: 'zh_CN', ko: 'ko_KR', vi: 'vi_VN' };
+function _updateSeoMeta(lang) {
+  try {
+    const T_ = window.T || {};
+    const desc = T_.seoDesc;
+    const title = T_.pageTitle;
+    const base = location.origin + location.pathname;
+    const selfUrl = lang === 'ja' ? base : base + '?lang=' + lang;
+    const setMeta = (sel, val) => {
+      if (typeof val !== 'string' || !val || val.indexOf('[ui:') === 0) return;
+      const el = document.querySelector(sel);
+      if (el) el.setAttribute('content', val);
+    };
+    setMeta('meta[name="description"]', desc);
+    setMeta('meta[property="og:description"]', desc);
+    setMeta('meta[property="og:title"]', title);
+    setMeta('meta[property="og:url"]', selfUrl);
+    setMeta('meta[property="og:locale"]', _SEO_OG_LOCALE[lang]);
+    const canon = document.querySelector('link[rel="canonical"]');
+    if (canon) canon.setAttribute('href', selfUrl);
+  } catch(_) {}
+}
+
 // 移転バナー: 旧URL (sh1get0ra.github.io) 検出時のみ表示。 メッセージは <strong> 含むため innerHTML 経路。 setLang 内 + init() の2箇所から呼ばれる (init = ja 初期表示でも必ず実行、 setLang = 言語切替時に msg多言語反映)。
 function _initMigrationBanner() {
   try {
@@ -126,6 +153,14 @@ function _loadSavedLang() {
     if (isObs) {
       const urlLang = new URLSearchParams(location.search).get('lang');
       if (urlLang && ['ja','en','zh','ko','vi'].includes(urlLang) && urlLang !== 'ja') setLang(urlLang);
+      return;
+    }
+    // SEO (2026-06-11): 通常 view でも ?lang= を最優先 (hreflang 先 URL /?lang=xx で crawler が各言語 DOM をレンダリングする要)。
+    // picker も抑止 (crawler は modal 越しに読めるが、 共有 link 着地 UX としても意図言語直行が正)
+    const urlLang = new URLSearchParams(location.search).get('lang');
+    if (urlLang && ['ja','en','zh','ko','vi'].includes(urlLang)) {
+      if (urlLang !== 'ja') setLang(urlLang);
+      else _updateSeoMeta('ja');
       return;
     }
     const saved = WWMHelpers.storage.loadStr('wwm_lang');

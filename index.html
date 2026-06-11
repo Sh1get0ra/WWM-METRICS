@@ -4,6 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>風燕計 | WWMETRICS</title>
+<!-- SEO (2026-06-11): description/canonical/hreflang/OGP は ja 静的既定。 言語切替時は app.js _updateSeoMeta が動的更新 (Google は JS レンダリング後 DOM を index) -->
+<meta name="description" content="風燕伝 (Where Winds Meet) のダメージ計算機。ゲームデータ取込でステータスを自動解析し、期待ダメージ・武格指数 Tier・装備最適化・心法比較・確率分布を無料で確認できます。日本語/英語/中国語/韓国語/ベトナム語対応。">
+<link rel="canonical" href="https://wwm-metrics.pages.dev/">
+<link rel="alternate" hreflang="ja" href="https://wwm-metrics.pages.dev/">
+<link rel="alternate" hreflang="en" href="https://wwm-metrics.pages.dev/?lang=en">
+<link rel="alternate" hreflang="zh" href="https://wwm-metrics.pages.dev/?lang=zh">
+<link rel="alternate" hreflang="ko" href="https://wwm-metrics.pages.dev/?lang=ko">
+<link rel="alternate" hreflang="vi" href="https://wwm-metrics.pages.dev/?lang=vi">
+<link rel="alternate" hreflang="x-default" href="https://wwm-metrics.pages.dev/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WWMETRICS">
+<meta property="og:title" content="風燕計 | WWMETRICS — Where Winds Meet ダメージ計算機">
+<meta property="og:description" content="風燕伝 (Where Winds Meet) のダメージ計算機。期待ダメージ・武格指数 Tier・装備最適化・心法比較を無料で。">
+<meta property="og:url" content="https://wwm-metrics.pages.dev/">
+<meta property="og:image" content="https://wwm-metrics.pages.dev/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "WWMETRICS (風燕計)",
+  "url": "https://wwm-metrics.pages.dev/",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "inLanguage": ["ja", "en", "zh", "ko", "vi"],
+  "description": "Damage calculator for Where Winds Meet: expected damage, gear score tier ranking, equipment optimization, Inner Way comparison, and probability distribution.",
+  "about": { "@type": "VideoGame", "name": "Where Winds Meet" }
+}
+</script>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#c9a45a">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -926,8 +959,8 @@ window.showImportToast = function(e) {
 <script src="assets/data-store.js?v=14"></script>
 <script src="assets/i18n.js?v=97"></script>
 <script src="assets/helpers/i18n.js?v=2"></script>
-<script src="assets/calc.js?v=84"></script>
-<script src="assets/app.js?v=56"></script>
+<script src="assets/calc.js?v=85"></script>
+<script src="assets/app.js?v=57"></script>
 <script src="assets/export.js?v=73"></script>
 <script src="assets/stats.js?v=72"></script>
 <script src="assets/sidebar/modal-helpers.js?v=3"></script>

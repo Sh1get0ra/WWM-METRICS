@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://wwm-metrics.pages.dev/sitemap.xml

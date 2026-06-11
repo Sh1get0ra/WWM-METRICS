@@ -6,6 +6,13 @@
     "ko": "연운계 | WWMETRICS",
     "vi": "Yên Vân Chỉ Số | WWMETRICS"
   },
+  "seoDesc": {
+    "ja": "風燕伝 (Where Winds Meet) のダメージ計算機。ゲームデータ取込でステータスを自動解析し、期待ダメージ・武格指数 Tier・装備最適化・心法比較・確率分布を無料で確認できます。日本語/英語/中国語/韓国語/ベトナム語対応。",
+    "en": "Free damage calculator for Where Winds Meet. Import your in-game stats to analyze expected damage, gear score tier, equipment optimization, Inner Way comparison, and probability distribution. Available in English, Japanese, Chinese, Korean, and Vietnamese.",
+    "zh": "燕云十六声免费伤害计算器。导入游戏数据自动解析属性，查看期望伤害、武格指数评级、装备优化建议、心法对比与概率分布。支持中文、日语、英语、韩语、越南语。",
+    "ko": "연운십육성 (Where Winds Meet) 무료 데미지 계산기. 게임 데이터를 가져와 스탯을 자동 분석하고 기대 데미지, 무격지수 티어, 장비 최적화, 심법 비교, 확률 분포를 확인하세요. 한국어/일본어/영어/중국어/베트남어 지원.",
+    "vi": "Công cụ tính sát thương miễn phí cho Where Winds Meet (Yên Vân Thập Lục Thanh). Nhập dữ liệu trong game để phân tích sát thương kỳ vọng, xếp hạng Tier, tối ưu trang bị, so sánh tâm pháp và phân phối xác suất. Hỗ trợ 5 ngôn ngữ."
+  },
   "brandVert": {
     "ja": "風燕計",
     "en": "風燕計",
