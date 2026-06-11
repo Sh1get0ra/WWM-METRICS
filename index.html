@@ -744,7 +744,6 @@
               <div class="wwm-analysis-tabs wwm-anlz-tabs" id="wwmAnalysisTabs" role="tablist">
                 <button type="button" class="wwm-analysis-tab" role="tab" aria-selected="false" aria-controls="wwmAffixRanking" data-analysis-tab="rank" data-i18n="anlzTabRank">期待値</button>
                 <button type="button" class="wwm-analysis-tab active" role="tab" aria-selected="true" aria-controls="wwmOptimization" data-analysis-tab="opt" data-i18n="anlzTabOpt">最適化</button>
-                <button type="button" class="wwm-analysis-tab" role="tab" aria-selected="false" aria-controls="wwmHistory" data-analysis-tab="history" data-i18n="anlzTabHist">履歴</button>
               </div>
             </div>
           </div>
@@ -758,14 +757,13 @@
               <!-- critique P3 (2026-06-06): 初期 placeholder — import 前の格析空箱に案内 1 行。
                    render (opt.js) の innerHTML 上書きで自然消滅、 JS flow 非依存 -->
               <div id="wwmOptimization"><div class="wwm-anlz-empty-hint"><span data-i18n="sbEmptyTitle">まだインポートデータがありません。</span><br><span data-i18n="sbEmptyHint">上部「IMPORT」ボタンから取り込みできます。</span></div></div>
-              <div id="wwmHistory" hidden></div>
             </div>
           </div>
         </div>
         <script>
         (function(){
           const tabs = document.querySelectorAll('#wwmAnalysisTabs .wwm-analysis-tab');
-          const map = { rank: 'wwmAffixRanking', opt: 'wwmOptimization', history: 'wwmHistory' };
+          const map = { rank: 'wwmAffixRanking', opt: 'wwmOptimization' };
           const KEY = 'wwm_analysis_tab_v1';
           function activate(target) {
             tabs.forEach(t => {
@@ -787,20 +785,11 @@
             const target = t.dataset.analysisTab;
             activate(target);
             try { localStorage.setItem(KEY, target); } catch(e) {}
-            if (target === 'history' && window.WWMSidebar?.history) window.WWMSidebar.history.render();
           }));
           try {
-            const saved = localStorage.getItem(KEY);
-            if (saved && map[saved]) {
-              activate(saved);
-              if (saved === 'history') {
-                const tryRender = () => {
-                  if (window.WWMSidebar?.history) window.WWMSidebar.history.render();
-                  else setTimeout(tryRender, 80);
-                };
-                tryRender();
-              }
-            }
+            let saved = localStorage.getItem(KEY);
+            if (saved && !map[saved]) saved = 'opt';  // 廃止値 (history) fallback
+            if (saved && map[saved]) activate(saved);
           } catch(e) {}
         })();
         </script>
@@ -817,8 +806,10 @@
         </div>
       </section>
 
-      <!-- V 履歴 (Phase 1 は空。Task 7 で #wwmHistory を移設) -->
+      <!-- V 履歴 -->
       <section class="wwm-ws-panel" id="wsHist" role="tabpanel">
+        <h2 class="wwm-ws-sec"><span class="pl" data-i18n="wsTabHist">履歴</span></h2>
+        <div id="wwmHistory"></div>
       </section>
     </div>
 
