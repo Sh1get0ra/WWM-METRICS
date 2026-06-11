@@ -222,7 +222,7 @@
     const steps = [];
     let curScore = startScore;
     // tier 表示用 SS閾値 (worldLv 由来)
-    const wl = params?.worldLv || 14;
+    const wl = params?.worldLv || 15;
     const ssThr = 6700 * Math.pow(0.8, 14 - wl);
     let lastBestNull = false;
     // ── perf 基盤 (2026-06-10 Phase1: 候補評価を clone レス + 同期 + 刈り込みで高速化。結果は旧実装とバイナリ同一) ──

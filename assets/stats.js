@@ -342,7 +342,7 @@ function buildStatParamsSync(roleInfo, state) {
   }
 
   // 7. 5行 derived (装備で増えた分のみ補正)
-  const baseFive = { body: 129, defense: 129, agility: 129, momentum: 129, power: 129 };
+  const baseFive = { body: 137, defense: 137, agility: 137, momentum: 137, power: 137 };
   const dBody     = (r.body     || 0) - baseFive.body;
   const dDefense  = (r.defense  || 0) - baseFive.defense;
   const dAgility  = (r.agility  || 0) - baseFive.agility;
@@ -669,7 +669,7 @@ function buildStatParamsSync(roleInfo, state) {
   r.judgeRes   = eRow.jr;
   r.physRes    = 0;
   r.enemyDebuff= 0;
-  r.worldLv    = 14;
+  r.worldLv    = 15;
   r.martialLv  = charLv;  // キャラLvと同一
   r.outerCoeff = 1.5;
   r.statusCoeff= 1.5;

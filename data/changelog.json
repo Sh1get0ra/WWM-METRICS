@@ -1,6 +1,20 @@
 {
-  "current": "2.1.0",
+  "current": "2.1.1",
   "entries": [
+    {
+      "version": "2.1.1",
+      "date": "2026-06-11",
+      "items": [
+        {
+          "featured": true,
+          "ja": "【大世界Lv15 対応】 基礎ステータスを大世界Lv15 に更新 (五行ステ +8 / 命中率 +2% / 会心率 +4% / 会意率 +2%)。 SS Tier 閾値も連動して上昇 (6700 → 8375)。 計算式バージョン更新のため、 お手数ですが再インポートをお願いします。",
+          "en": "[World Level 15 Support] Updated base stats to World Level 15 (five attributes +8 / Precision +2% / Crit +4% / Affinity +2%). The SS tier threshold rises accordingly (6700 → 8375). The formula version changed — please re-import your character.",
+          "zh": "【大世界Lv15 对应】 基础属性更新为大世界Lv15 (五行属性 +8 / 精准率 +2% / 会心率 +4% / 会意率 +2%)。 SS Tier 阈值随之上升 (6700 → 8375)。 计算公式版本已更新, 请重新导入角色数据。",
+          "ko": "【대세계 Lv15 대응】 기초 스탯을 대세계 Lv15 로 갱신 (오행 스탯 +8 / 정확도 +2% / 치명타 확률 +4% / 각성 확률 +2%). SS Tier 임계값도 연동 상승 (6700 → 8375). 계산식 버전이 갱신되어 재임포트를 부탁드립니다.",
+          "vi": "[Hỗ trợ Đại Thế Giới Lv15] Cập nhật chỉ số cơ bản lên Đại Thế Giới Lv15 (ngũ hành +8 / tỷ lệ chính xác +2% / tỷ lệ chí mạng +4% / tỷ lệ hiểu ý +2%). Ngưỡng SS Tier tăng theo (6700 → 8375). Phiên bản công thức đã thay đổi — vui lòng import lại nhân vật."
+        }
+      ]
+    },
     {
       "version": "2.1.0",
       "date": "2026-06-10",
