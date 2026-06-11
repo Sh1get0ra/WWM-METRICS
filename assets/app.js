@@ -156,11 +156,15 @@ function _loadSavedLang() {
       return;
     }
     // SEO (2026-06-11): 通常 view でも ?lang= を最優先 (hreflang 先 URL /?lang=xx で crawler が各言語 DOM をレンダリングする要)。
-    // picker も抑止 (crawler は modal 越しに読めるが、 共有 link 着地 UX としても意図言語直行が正)
+    // picker は抑止 (URL で言語確定済 = 聞き直し無意味) が、 初見の IMPORT 誘導 hint は picker 経由と同様に出す
+    // (?lang= 共有 link 着地の新規が誘導を永久に見ない穴の塞ぎ、 2026-06-11)
     const urlLang = new URLSearchParams(location.search).get('lang');
     if (urlLang && ['ja','en','zh','ko','vi'].includes(urlLang)) {
       if (urlLang !== 'ja') setLang(urlLang);
-      else _updateSeoMeta('ja');
+      else { WWMHelpers.storage.saveStr('wwm_lang', 'ja'); _updateSeoMeta('ja'); }
+      if (!WWMHelpers.storage.loadStr('wwm_import_hinted')) {
+        setTimeout(_showImportHint, 250);
+      }
       return;
     }
     const saved = WWMHelpers.storage.loadStr('wwm_lang');
