@@ -437,44 +437,6 @@
     statClose?.addEventListener('click', closeStat);
     statBackdrop?.addEventListener('click', closeStat);
 
-    // ── Phase 8: 📈格析 全画面 overlay ──
-    const anlzBtn = document.getElementById('wwmMobileAnlzBtn');
-    const anlzOverlay = document.getElementById('wwmMobileAnlzOverlay');
-    const anlzBackdrop = document.getElementById('wwmMobileAnlzOverlayBackdrop');
-    const anlzClose = document.getElementById('wwmMobileAnlzOverlayClose');
-    const anlzBody = document.getElementById('wwmMobileAnlzOverlayBody');
-    let _anlzOrigParent = null, _anlzOrigNext = null;
-    const openAnlz = () => {
-      if (!anlzOverlay || !anlzBody) return;
-      const anlz = document.querySelector('.wwm-anlz');
-      if (anlz && anlz.parentNode !== anlzBody) {
-        _anlzOrigParent = anlz.parentNode;
-        _anlzOrigNext = anlz.nextSibling;
-        anlzBody.appendChild(anlz);
-        anlz.classList.add('wwm-anlz-in-overlay');
-      }
-      anlzOverlay.hidden = false;
-      if (anlzBackdrop) anlzBackdrop.hidden = false;
-      document.body.style.overflow = 'hidden';
-    };
-    const closeAnlz = () => {
-      const anlz = document.querySelector('.wwm-anlz');
-      if (anlz && _anlzOrigParent) {
-        anlz.classList.remove('wwm-anlz-in-overlay');
-        if (_anlzOrigNext && _anlzOrigNext.parentNode === _anlzOrigParent) {
-          _anlzOrigParent.insertBefore(anlz, _anlzOrigNext);
-        } else {
-          _anlzOrigParent.appendChild(anlz);
-        }
-        _anlzOrigParent = null; _anlzOrigNext = null;
-      }
-      if (anlzOverlay) anlzOverlay.hidden = true;
-      if (anlzBackdrop) anlzBackdrop.hidden = true;
-      document.body.style.overflow = '';
-    };
-    anlzBtn?.addEventListener('click', openAnlz);
-    anlzClose?.addEventListener('click', closeAnlz);
-    anlzBackdrop?.addEventListener('click', closeAnlz);
     window.addEventListener('resize', syncFab);
     // sidebar render後 avatar 取れる → 軽く polling (一度確定したら interval停止)
     let _fabSyncTries = 0;
@@ -488,9 +450,11 @@
 </script>
 </head>
 <body class="wwm-layout-active">
-<div class="sticky-header">
-  <header class="topbar">
-    <div class="title-block">
+<div class="wwm-app" id="wwmApp">
+
+  <!-- 上帯 (L の横画) -->
+  <header class="wwm-band">
+    <div class="wwm-band-top">
       <div class="wwm-brand">
         <h1 class="wwm-brand-vert" data-i18n="brandVert">風燕計</h1>
         <div class="wwm-brand-right">
@@ -499,31 +463,367 @@
         </div>
         <div class="wwm-brand-seal" aria-hidden="true">燕</div>
       </div>
-    </div>
-    <div class="top-controls top-controls-2row">
-      <!-- 1行目 -->
-      <div class="topbar-row topbar-row-1">
-        <div class="lang-switcher lang-switcher-row" role="group" aria-label="言語切替 (1)">
+      <div class="wwm-band-actions">
+        <div class="lang-switcher lang-switcher-row" role="group" aria-label="言語切替">
           <button class="lang-btn active" data-lang="ja" onclick="setLang('ja')" aria-pressed="true">日本語</button>
           <button class="lang-btn"        data-lang="en" onclick="setLang('en')" aria-pressed="false">EN</button>
-        </div>
-        <button class="icon-btn import-btn" id="importBtn" onclick="importData()" data-i18n="importBtn">IMPORT</button>
-        <button class="icon-btn export-btn" id="exportBtn" onclick="exportImage()" title="画像で書き出し" data-i18n-title="tipIconExport" aria-label="画像で書き出し" data-i18n="exportBtn">EXPORT</button>
-        <span class="wwm-opt-sort-group wwm-theme-toggle" id="themeToggle" role="group" aria-label="ライト/ダーク切替"><button type="button" class="wwm-opt-sort-btn wwm-theme-btn" data-theme-set="light" onclick="setTheme('light')" title="ライト" data-i18n-title="themeLight" aria-label="ライト"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></button><button type="button" class="wwm-opt-sort-btn wwm-theme-btn" data-theme-set="dark" onclick="setTheme('dark')" title="ダーク" data-i18n-title="themeDark" aria-label="ダーク"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></span>
-      </div>
-      <!-- 2行目 -->
-      <div class="topbar-row topbar-row-2">
-        <div class="lang-switcher lang-switcher-row" role="group" aria-label="言語切替 (2)">
           <button class="lang-btn" data-lang="zh" onclick="setLang('zh')" aria-pressed="false">中文</button>
           <button class="lang-btn" data-lang="ko" onclick="setLang('ko')" aria-pressed="false">한국어</button>
           <button class="lang-btn" data-lang="vi" onclick="setLang('vi')" aria-pressed="false">Tiếng Việt</button>
         </div>
-        <button type="button" class="icon-btn reset-btn" id="wwmVirtResetBtn" title="新装備/心法 全リセット (現装備値に戻す)" data-i18n-title="virtResetTip" onclick="WWMHelp.resetAllVirtuals()" aria-label="装備/心法リセット" data-i18n="resetBtn">RESET</button>
+        <button class="icon-btn export-btn" id="exportBtn" onclick="exportImage()" title="画像で書き出し" data-i18n-title="tipIconExport" aria-label="画像で書き出し" data-i18n="exportBtn">EXPORT</button>
         <button class="icon-btn share-btn" id="shareBtn" onclick="WWMSidebar.share.shareUrl()" title="Build を URL で共有" data-i18n-title="tipIconShare" aria-label="URL で共有" data-i18n="shareBtn">SHARE</button>
+        <button type="button" class="icon-btn reset-btn" id="wwmVirtResetBtn" title="新装備/心法 全リセット (現装備値に戻す)" data-i18n-title="virtResetTip" onclick="WWMHelp.resetAllVirtuals()" aria-label="装備/心法リセット" data-i18n="resetBtn">RESET</button>
         <button class="icon-btn note-btn" id="noteBtn" onclick="WWMChangelog.showAll()" title="ツール仕様 / 更新履歴" data-i18n-title="tipIconNote" aria-label="NOTE (仕様 + 履歴)" data-i18n="noteBtn">NOTE</button>
+        <button class="icon-btn import-btn" id="importBtn" onclick="importData()" data-i18n="importBtn">IMPORT</button>
       </div>
     </div>
+    <!-- HERO: 武格指数 主役席 + identity (武侠デザイン適用) -->
+    <div class="hero hero-wuxia" id="heroRoot" data-mode="score">
+      <!-- 4隅L字bracket -->
+      <span class="l-bracket lb-tl"></span>
+      <span class="l-bracket lb-tr"></span>
+      <span class="l-bracket lb-bl"></span>
+      <span class="l-bracket lb-br"></span>
+      <!-- 朱墨筆ストローク -->
+      <svg class="ink-stroke" viewBox="0 0 600 240" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <filter id="inkB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.012 0.16" numOctaves="2" seed="4" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="34"/>
+          </filter>
+          <linearGradient id="inkGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="rgba(200,60,43,0)"/>
+            <stop offset="0.25" stop-color="rgba(200,60,43,0.35)"/>
+            <stop offset="0.7" stop-color="rgba(138,31,23,0.25)"/>
+            <stop offset="1" stop-color="rgba(200,60,43,0)"/>
+          </linearGradient>
+        </defs>
+        <path d="M20,140 C140,70 360,60 560,118" stroke="url(#inkGrad)" stroke-width="80" fill="none" stroke-linecap="round" filter="url(#inkB)"/>
+      </svg>
+
+      <div class="h-main">
+        <div class="seat-main swap-anim" id="heroSeatMain">
+          <div class="hero-block" id="heroBlockScore">
+            <div class="eyebrow">STATUS SCORE · <span data-i18n="heroSeatScore">武格指数</span></div>
+            <div class="hb-num"><span class="num hero-number" id="heroScore">0</span><span class="hero-tier tier-badge tchip" id="heroTierBadge">--</span></div>
+          </div>
+        </div>
+        <div class="h-aside">
+          <div class="next-chip swap-anim hero-next-inline">
+            <span class="hero-next-label">NEXT</span><span class="hero-next-arrow">▶</span>
+            <span class="num hero-next-val" id="heroScoreBaseline">0</span>
+            <span id="heroBaselineTierBadge" class="tier-badge tier-badge-baseline" hidden></span>
+          </div>
+          <div class="luopan swap-anim">
+            <!-- 外側 tick ring 60本 -->
+            <svg class="luopan-ticks" viewBox="0 0 160 160" aria-hidden="true">
+              <g id="luopanTicks"></g>
+            </svg>
+            <!-- 物理/属性 arc -->
+            <svg class="luopan-arc" viewBox="0 0 160 160" aria-hidden="true">
+              <defs>
+                <linearGradient id="physGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#c83c2b"/>
+                  <stop offset="1" stop-color="#e8513a"/>
+                </linearGradient>
+                <linearGradient id="elemGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#7fa88a"/>
+                  <stop offset="1" stop-color="#a8d4b4"/>
+                </linearGradient>
+              </defs>
+              <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(232,215,180,0.06)" stroke-width="2"/>
+              <circle id="arcPhys" cx="80" cy="80" r="68" fill="none"
+                stroke="url(#physGrad)" stroke-width="6"
+                stroke-dasharray="0 427.26"
+                transform="rotate(-90 80 80)"
+                style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
+              <circle id="arcElem" cx="80" cy="80" r="68" fill="none"
+                stroke="url(#elemGrad)" stroke-width="6"
+                stroke-dasharray="0 427.26"
+                transform="rotate(-90 80 80)"
+                style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
+            </svg>
+            <!-- 内側 donut -->
+            <div class="luopan-inner">
+              <svg viewBox="0 0 136 136">
+                <circle class="donut-bg" cx="68" cy="68" r="50" fill="none" stroke="rgba(232,215,180,.06)" stroke-width="16"/>
+                <circle id="donutDmgSegCrit"     class="donut-seg" cx="68" cy="68" r="50" fill="none" stroke="var(--chart-crit)"     stroke-width="16" stroke-dasharray="0 314.16" stroke-dashoffset="0" style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
+                <circle id="donutDmgSegSympathy" class="donut-seg" cx="68" cy="68" r="50" fill="none" stroke="var(--chart-sympathy)" stroke-width="16" stroke-dasharray="0 314.16" stroke-dashoffset="0" style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
+                <circle id="donutDmgSegGraze"    class="donut-seg" cx="68" cy="68" r="50" fill="none" stroke="var(--chart-graze)"    stroke-width="16" stroke-dasharray="0 314.16" stroke-dashoffset="0" style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
+                <circle id="donutDmgSegNormal"   class="donut-seg" cx="68" cy="68" r="50" fill="none" stroke="var(--chart-normal)"   stroke-width="16" stroke-dasharray="0 314.16" stroke-dashoffset="0" style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
+              </svg>
+              <div class="luopan-center">
+                <div class="luopan-center-label" data-i18n="donutDmgCenter">勁率</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="h-id">
+        <div class="avatar" id="heroAvatar" aria-hidden="true"></div>
+        <div class="h-id-info">
+          <div class="pname" id="heroName">—<b id="heroLv"></b></div>
+          <div class="pwr"><span data-i18n="importLabelXiuwei">総合武力</span><b id="heroPower">—</b></div>
+          <div class="seat-sub swap-anim" id="heroSeatSub">
+            <div class="hero-block" id="heroBlockDps">
+              <div class="eyebrow">ROTATION DPS · <span data-i18n="heroSeatDps">演武</span></div>
+              <div class="hb-num hb-coming" data-i18n="heroDpsComing">COMING SOON</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 羅盤 tick ring 60本 + arc 動的更新 -->
+    <script>
+    (function(){
+      const ticksGroup = document.getElementById('luopanTicks');
+      if (ticksGroup) {
+        const cx = 80, cy = 80, r1 = 78;
+        for (let i = 0; i < 60; i++) {
+          const a = i * 6 * Math.PI / 180;
+          const r2 = (i % 5 === 0) ? 68 : 73;
+          const x1 = cx + r1 * Math.cos(a), y1 = cy + r1 * Math.sin(a);
+          const x2 = cx + r2 * Math.cos(a), y2 = cy + r2 * Math.sin(a);
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', x1.toFixed(1));
+          line.setAttribute('y1', y1.toFixed(1));
+          line.setAttribute('x2', x2.toFixed(1));
+          line.setAttribute('y2', y2.toFixed(1));
+          line.setAttribute('stroke', (i % 5 === 0) ? '#c9a45a' : 'rgba(201,164,90,.3)');
+          line.setAttribute('stroke-width', (i % 5 === 0) ? 1.5 : 1);
+          ticksGroup.appendChild(line);
+        }
+      }
+      // 物理/属性 arc 動的更新: __WWM_LAST_RESULT or _CURRENT_PARAMS から phys/elem比率取得
+      window._updateLuopanArc = function(physPct){
+        const C = 427.26; // 周長 2π·68
+        const phys = Math.max(0, Math.min(1, physPct || 0));
+        const elem = 1 - phys;
+        const arcP = document.getElementById('arcPhys');
+        const arcE = document.getElementById('arcElem');
+        if (arcP) {
+          arcP.setAttribute('stroke-dasharray', (C * phys).toFixed(2) + ' ' + (C * elem).toFixed(2));
+          arcP.setAttribute('stroke-dashoffset', '0');
+        }
+        if (arcE) {
+          arcE.setAttribute('stroke-dasharray', (C * elem).toFixed(2) + ' ' + (C * phys).toFixed(2));
+          arcE.setAttribute('stroke-dashoffset', (-C * phys).toFixed(2));
+        }
+      };
+    })();
+    </script>
   </header>
+
+  <!-- 左柱 (L の縦画) -->
+  <aside class="wwm-ws-rail" id="wwmWsRail" aria-label="ステータス">
+    <span class="kanji-mark" aria-hidden="true">斬</span>
+    <div class="wwm-rail-in">
+      <div class="wwm-rail-fade">
+        <div class="wwm-rail-head">
+          <h3 data-i18n="railStatus">ステータス</h3>
+          <button class="wwm-rail-toggle" id="wwmRailClose" aria-expanded="true" aria-label="ステ欄を畳む">◀</button>
+        </div>
+        <aside id="wwmSidebar" class="wwm-sidebar-test" aria-label="サイドバー (キャラステ/装備一覧)"></aside>
+      </div>
+      <div class="wwm-rail-tate">
+        <button class="wwm-rail-toggle" id="wwmRailOpen" aria-expanded="false" aria-label="ステ欄を開く">◀</button>
+        <span class="t-label" data-i18n="railStatus">ステータス</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 紙面 (main) -->
+  <main class="wwm-ws-main wwm-ws-paper" role="main">
+    <nav class="wwm-ws-tabs" role="tablist" aria-label="workspace" id="wwmWsTabs">
+      <button class="wwm-ws-tab" role="tab" aria-selected="true" data-ws="gear"><span class="n">I</span><span data-i18n="wsTabGear">装備</span></button>
+      <button class="wwm-ws-tab" role="tab" aria-selected="false" data-ws="xinfa"><span class="n">II</span><span data-i18n="wsTabXinfa">心法</span></button>
+      <button class="wwm-ws-tab" role="tab" aria-selected="false" data-ws="anlz"><span class="n">III</span><span data-i18n="wsTabAnlz">格析</span></button>
+      <button class="wwm-ws-tab locked" role="tab" aria-selected="false" data-ws="enbu"><span class="n">IV</span><span data-i18n="wsTabEnbu">演武</span></button>
+      <button class="wwm-ws-tab" role="tab" aria-selected="false" data-ws="hist"><span class="n">V</span><span data-i18n="wsTabHist">履歴</span></button>
+      <div class="wwm-ws-tabs-r">
+        <button type="button" id="wwmDiagBadge" class="wwm-diag-badge" hidden onclick="WWMSidebar.diag.openPopup()" title="弱点指摘を表示" data-i18n-title="tipDiagBadge">
+          <span class="wwm-diag-badge-icon">⚠</span>
+          <span class="wwm-diag-badge-text" data-i18n="railDiag">弱点</span>
+          <span class="wwm-diag-badge-count" id="wwmDiagBadgeCount">0</span>
+        </button>
+        <div class="wwm-preset-wrap" id="wwmPresetWrap">
+          <button class="wwm-preset-chip" id="wwmPresetChip" aria-haspopup="true" aria-expanded="false" data-i18n="presetTitle">PRESETS</button>
+          <div class="wwm-preset-pop" id="wwmPresetPop">
+            <div class="preset-slots">
+              <div class="preset-slot" id="presetSlot0">
+                <span class="preset-slot-num">01</span>
+                <input class="preset-name-input" id="presetName0" type="text" maxlength="20">
+                <button class="preset-btn preset-save" onclick="savePreset(0)" data-i18n="presetSave">保存</button>
+                <button class="preset-btn preset-load" id="presetLoadBtn0" onclick="loadPreset(0)" data-i18n="presetLoad" disabled>読込</button>
+                <button class="preset-btn preset-del"  id="presetDelBtn0"  onclick="deletePreset(0)" disabled aria-label="プリセット01削除">✕</button>
+              </div>
+              <div class="preset-slot" id="presetSlot1">
+                <span class="preset-slot-num">02</span>
+                <input class="preset-name-input" id="presetName1" type="text" maxlength="20">
+                <button class="preset-btn preset-save" onclick="savePreset(1)" data-i18n="presetSave">保存</button>
+                <button class="preset-btn preset-load" id="presetLoadBtn1" onclick="loadPreset(1)" data-i18n="presetLoad" disabled>読込</button>
+                <button class="preset-btn preset-del"  id="presetDelBtn1"  onclick="deletePreset(1)" disabled aria-label="プリセット02削除">✕</button>
+              </div>
+              <div class="preset-slot" id="presetSlot2">
+                <span class="preset-slot-num">03</span>
+                <input class="preset-name-input" id="presetName2" type="text" maxlength="20">
+                <button class="preset-btn preset-save" onclick="savePreset(2)" data-i18n="presetSave">保存</button>
+                <button class="preset-btn preset-load" id="presetLoadBtn2" onclick="loadPreset(2)" data-i18n="presetLoad" disabled>読込</button>
+                <button class="preset-btn preset-del"  id="presetDelBtn2"  onclick="deletePreset(2)" disabled aria-label="プリセット03削除">✕</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="wwm-ws-body">
+      <!-- I 装備 -->
+      <section class="wwm-ws-panel active" id="wsGear" role="tabpanel">
+        <h2 class="wwm-ws-sec"><span class="pl" data-i18n="wsTabGear">装備</span></h2>
+        <!-- WWM Gear Grid (新レイアウト) -->
+        <div class="wwm-gear-grid wwm-placeholder-grid" id="wwmGearGrid" onclick="showImportToast(event)">
+          <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="1"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">主武器</span></div></div>
+          <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="2"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">副武器</span></div></div>
+          <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="21"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">弓箭</span></div></div>
+          <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="3"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">冠甲</span></div></div>
+          <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="4"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">胸甲</span></div></div>
+          <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="5"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">膝甲</span></div></div>
+          <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="8"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">腕甲</span></div></div>
+          <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="9"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">射玦</span></div></div>
+          <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="10"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">環</span></div></div>
+          <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="11"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">佩</span></div></div>
+        </div>
+        <script>
+        window.showImportToast = function(e) {
+          // import済なら何もしない (装備カード/心法カードクリック時の誤発火防止)
+          if (window.WWMState?.roleInfo) return;
+          const t = document.getElementById('toast');
+          if (!t) return;
+          const T = window.T || {};
+          t.textContent = T.importPrompt || '上部「IMPORT」ボタンからデータを取り込んでください';
+          t.classList.add('show');
+          if (window._toastTimer) clearTimeout(window._toastTimer);
+          window._toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+        };
+        </script>
+        <div class="wwm-diagnostics" id="wwmDiagnostics" hidden></div>
+      </section>
+
+      <!-- II 心法 -->
+      <section class="wwm-ws-panel" id="wsXinfa" role="tabpanel">
+        <h2 class="wwm-ws-sec"><span class="pl" data-i18n="wsTabXinfa">心法</span></h2>
+        <div class="wwm-xinfa-grid wwm-placeholder-grid" id="wwmXinfaGrid" onclick="showImportToast(event)">
+          <div class="wwm-xinfa-slot wwm-placeholder-slot"><div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法一</span></div></div>
+          <div class="wwm-xinfa-slot wwm-placeholder-slot"><div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法二</span></div></div>
+          <div class="wwm-xinfa-slot wwm-placeholder-slot"><div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法三</span></div></div>
+          <div class="wwm-xinfa-slot wwm-placeholder-slot"><div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法四</span></div></div>
+          <div class="wwm-xinfa-slot wwm-arsenal-slot wwm-placeholder-slot"><div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">武庫</span></div></div>
+        </div>
+        <div class="wwm-qishu"><h4>奇術<span class="sub">QISHU</span></h4><p data-i18n="qishuPlaceholder">整備中 — 奇術効果データの収載後、この区画に展開する。</p></div>
+      </section>
+
+      <!-- III 格析 -->
+      <section class="wwm-ws-panel" id="wsAnlz" role="tabpanel">
+        <div class="wwm-anlz">
+          <!-- ヘッダー: 古紙テクスチャ + bamboo SVG + 分析タイトル + タブ列 -->
+          <div class="wwm-anlz-header">
+            <!-- bamboo SVG (game-icons.net delapouite CC-BY 3.0) -->
+            <div class="wwm-anlz-bamboo">
+              <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#f0d28a" d="M51.72 25c3.76 42 3.72 84 0 126h44.22c-4.56-41.6-3.68-83.68.28-126h-44.5zm181.68 0c2.6 54.1 5.5 108.6.4 164.7h44.3c-5-54.5-3.7-109.52.3-164.7h-45zm113.2 0c4.6 31.51 3.6 62.88-.4 94h44.1c-2.4-31.33-2.4-62.67 0-94h-43.7zm116.5 36.46s-41.4 7.81-53.5 23.86c-3.2 4.61-5.9 12.32-3 17.18 3.1 4.8 10.7 5 15.8 3.3 18.3-6 40.7-44.34 40.7-44.34zM173 106.9s12 42.7 28.1 53.1c4.6 3.1 12.2 4.6 16.3.7 4.1-3.9 3.4-12 1.4-17.2-7.8-18.7-45.8-36.6-45.8-36.6zm261.4 6.9c-4.6.1-8.9.6-12.5 1.8-6.3 2.2-14.1 8.1-13.8 14.7.1 6.6 8.2 12 14.8 13.8 23.6 6.2 71.5-16.6 71.5-16.6s-35.2-14-60-13.7zM346.2 137c6.2 47.7 7.1 95.1.2 142h43.8c-4-47.4-3.5-94.8.2-142h-44.2zm67.4 18.9c-2.2.1-4.3.8-5.9 2.3-4.1 3.9-3.4 12-1.4 17.2 7.8 18.7 45.8 36.6 45.8 36.6s-12-42.7-28.1-53.1c-2.6-1.7-6.1-3-9.5-3h-.9zm-255 12.3c-13.1.2-23.2 1.3-23.2 1.3s40.3 34.6 64.7 34.8c6.7-.1 16-3.1 17.8-9.4 2.1-6.3-3.8-14.1-9.5-17.9-10.1-6.8-28.4-8.6-44.1-8.8h-5.7zm-106.59.8c4.41 42.1 3.92 84.1-.2 126h44.42c-3.9-42.3-4.92-84.4-.31-126H52.01zm181.49 32c3.3 52.1 3.5 104.7 0 158h44.6c-5-53.5-3.7-106 .3-158h-44.9zm-76.4 22.6s-38 17.9-45.8 36.6c-2 5.2-2.7 13.3 1.4 17.2 4.1 3.9 11.7 2.4 16.3-.7 16.1-10.4 28.1-53.1 28.1-53.1zm-25.6 72.1c-6.7.2-15 3.1-16.9 9-2.1 6.2 3.6 14.1 9.1 18 19.9 14 72.8 9.4 72.8 9.4s-39.3-35.6-63.7-36.4h-1.3zm214.2 1.3c2.8 36.5 3.6 73.2.2 110h43.9c-4.6-38-1.7-74.3.6-110h-44.7zM51.61 313c3.96 58.2 2.72 116.2-.2 174h45.21c-2.49-57.7-4.56-115.7-.28-174H51.61zM121 337.8c-3.8.1-7.5 1.3-9.4 4.3-2.9 4.8-.2 12.6 3 17.2 12.1 16 53.5 23.8 53.5 23.8s-22.4-38.3-40.7-44.3c-1.9-.6-4.2-1-6.4-1zm359.7 19.4s-52.9 5.1-69.9 22.5c-4.6 4.8-8.9 13.7-5.6 19.4 3.1 5.8 12.8 6.9 19.5 5.5 23.8-5.2 56-47.4 56-47.4zM234 377c3.6 36.7.4 73.9-.7 110h45.2c-1.7-35.8-5.7-72.4-.8-110H234zm182 45c-5.2 0-11.1 2.3-12.7 6.9-1.9 5.3 2.4 12.2 6.6 16 15.4 13 57.4 11.6 57.4 11.6s-30.1-32.5-49.2-34.4c-.7-.1-1.4-.1-2.1-.1zm-70 3c2.1 20.3 3.3 41 .6 62h42.8c-2.8-21.1-1.4-41.8.7-62H346z"/>
+              </svg>
+            </div>
+            <div class="wwm-anlz-header-inner">
+              <div class="wwm-anlz-title-block">
+                <h2 class="wwm-anlz-title" data-i18n="anlzTitle">格析</h2>
+                <span class="wwm-anlz-subtitle" data-i18n="anlzSubtitle">ANALYSIS</span>
+              </div>
+              <div class="wwm-analysis-tabs wwm-anlz-tabs" id="wwmAnalysisTabs" role="tablist">
+                <button type="button" class="wwm-analysis-tab" role="tab" aria-selected="false" aria-controls="wwmAffixRanking" data-analysis-tab="rank" data-i18n="anlzTabRank">期待値</button>
+                <button type="button" class="wwm-analysis-tab active" role="tab" aria-selected="true" aria-controls="wwmOptimization" data-analysis-tab="opt" data-i18n="anlzTabOpt">最適化</button>
+                <button type="button" class="wwm-analysis-tab" role="tab" aria-selected="false" aria-controls="wwmHistory" data-analysis-tab="history" data-i18n="anlzTabHist">履歴</button>
+              </div>
+            </div>
+          </div>
+          <div class="wwm-anlz-gap"></div>
+          <!-- 本文 -->
+          <div class="wwm-anlz-body">
+            <!-- パネル全体の背景アイコン (タブ切替で都度変更) -->
+            <div class="wwm-anlz-bgicon"></div>
+            <div class="wwm-analysis-grid">
+              <div id="wwmAffixRanking" hidden></div>
+              <!-- critique P3 (2026-06-06): 初期 placeholder — import 前の格析空箱に案内 1 行。
+                   render (opt.js) の innerHTML 上書きで自然消滅、 JS flow 非依存 -->
+              <div id="wwmOptimization"><div class="wwm-anlz-empty-hint"><span data-i18n="sbEmptyTitle">まだインポートデータがありません。</span><br><span data-i18n="sbEmptyHint">上部「IMPORT」ボタンから取り込みできます。</span></div></div>
+              <div id="wwmHistory" hidden></div>
+            </div>
+          </div>
+        </div>
+        <script>
+        (function(){
+          const tabs = document.querySelectorAll('#wwmAnalysisTabs .wwm-analysis-tab');
+          const map = { rank: 'wwmAffixRanking', opt: 'wwmOptimization', history: 'wwmHistory' };
+          const KEY = 'wwm_analysis_tab_v1';
+          function activate(target) {
+            tabs.forEach(t => {
+              const on = t.dataset.analysisTab === target;
+              t.classList.toggle('active', on);
+              t.setAttribute('aria-selected', on ? 'true' : 'false');
+            });
+            Object.entries(map).forEach(([k, id]) => {
+              const el = document.getElementById(id);
+              if (el) el.hidden = (k !== target);
+            });
+            // パネル全体の背景アイコン (.wwm-anlz-bgicon) をタブ別に切替
+            const anlz = document.querySelector('.wwm-anlz');
+            if (anlz) anlz.setAttribute('data-active-tab', target);
+          }
+          // 初期 active タブ (opt) を data-active-tab に反映
+          document.querySelector('.wwm-anlz')?.setAttribute('data-active-tab', 'opt');
+          tabs.forEach(t => t.addEventListener('click', () => {
+            const target = t.dataset.analysisTab;
+            activate(target);
+            try { localStorage.setItem(KEY, target); } catch(e) {}
+            if (target === 'history' && window.WWMSidebar?.history) window.WWMSidebar.history.render();
+          }));
+          try {
+            const saved = localStorage.getItem(KEY);
+            if (saved && map[saved]) {
+              activate(saved);
+              if (saved === 'history') {
+                const tryRender = () => {
+                  if (window.WWMSidebar?.history) window.WWMSidebar.history.render();
+                  else setTimeout(tryRender, 80);
+                };
+                tryRender();
+              }
+            }
+          } catch(e) {}
+        })();
+        </script>
+      </section>
+
+      <!-- IV 演武 (teaser) -->
+      <section class="wwm-ws-panel" id="wsEnbu" role="tabpanel">
+        <div class="wwm-teaser">
+          <span class="kanji-mark" aria-hidden="true">譜</span>
+          <div class="mk">譜</div>
+          <h3 data-i18n="enbuTeaserTitle">秘譜 — 演武</h3>
+          <p data-i18n="enbuTeaserBody">技の連なりを譜面に記し、回しごとの期待 DPS を測る。武術の係数表と共に近日開帳。</p>
+          <div class="road"><span><b>一</b> 武術係数表</span><span><b>二</b> 秘譜エディタ</span><span><b>三</b> 共有・画像化</span></div>
+        </div>
+      </section>
+
+      <!-- V 履歴 (Phase 1 は空。Task 7 で #wwmHistory を移設) -->
+      <section class="wwm-ws-panel" id="wsHist" role="tabpanel">
+      </section>
+    </div>
+
+    <footer class="wwm-footer"><img class="wwm-footer-logo" src="https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/logo-27b7acd2.png" alt="Where Winds Meet"><span class="wwm-footer-unofficial" data-i18n="footerUnofficial">Unofficial fan-made tool. Not affiliated with NetEase Inc. / Everstone Studio.</span><span class="wwm-footer-copy">© NetEase, Inc. All Rights Reserved. © Everstone Studio.</span><span class="wwm-footer-creator">Created by <strong>SHIGETORA</strong><a class="wwm-footer-x" href="https://x.com/TORA_XIV" target="_blank" rel="noopener noreferrer" title="お問い合わせ (X / Twitter)" data-i18n-title="tipIconContact" aria-label="X (Twitter) で問い合わせ"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></span></footer>
+  </main>
+</div>
 
   <!-- Mobile Hamburger Drawer (PC時 hidden、 mobile時 ≡ tap で slide-in) -->
   <div class="wwm-mobile-drawer-backdrop" id="wwmMobileDrawerBackdrop" hidden></div>
@@ -545,9 +845,6 @@
         </div>
       </div>
       <div class="wwm-mobile-drawer-section">
-        <button type="button" class="wwm-mobile-drawer-btn" onclick="toggleTheme()">
-          <span aria-hidden="true">🌓</span><span data-i18n="themeToggleLabel">ライト/ダーク切替</span>
-        </button>
         <button type="button" class="wwm-mobile-drawer-btn" onclick="importData()" data-i18n="importBtn">📥 IMPORT</button>
         <button type="button" class="wwm-mobile-drawer-btn" onclick="WWMSidebar.share.shareUrl()" data-i18n="shareBtn">🔗 SHARE</button>
         <button type="button" class="wwm-mobile-drawer-btn" onclick="WWMChangelog.showAll()" data-i18n="noteBtn">📝 NOTE</button>
@@ -590,16 +887,6 @@
     <div class="wwm-mobile-stat-overlay-body" id="wwmMobileStatOverlayBody"></div>
   </aside>
 
-  <!-- Mobile Analysis Overlay (📈格析 全画面 / PC時 hidden、 mobile時のみ表示) -->
-  <div class="wwm-mobile-anlz-overlay-backdrop" id="wwmMobileAnlzOverlayBackdrop" hidden></div>
-  <aside class="wwm-mobile-anlz-overlay" id="wwmMobileAnlzOverlay" hidden aria-label="格析パネル">
-    <div class="wwm-mobile-anlz-overlay-header">
-      <span class="wwm-mobile-anlz-overlay-title" data-i18n="anlzTitle">格析</span>
-      <button type="button" class="wwm-mobile-anlz-overlay-close" id="wwmMobileAnlzOverlayClose" aria-label="閉じる">×</button>
-    </div>
-    <div class="wwm-mobile-anlz-overlay-body" id="wwmMobileAnlzOverlayBody"></div>
-  </aside>
-
   <!-- スコア計算更新バナー: baseline 鮮度切れ (scoreVer 不一致) 時のみ表示。再import促し。OBS view 非表示。 -->
   <div id="wwmScoreUpdateBanner" class="wwm-score-update-banner" style="display:none;">
     <span class="wwm-score-update-icon" aria-hidden="true">⚠</span>
@@ -626,328 +913,15 @@
     <span class="wwm-shared-build-icon">👁</span>
     <span class="wwm-shared-build-text" data-i18n="sharedBuildBanner">閲覧モード: 共有されたビルド (自データは保護中)。 リロード/F5 で自データに戻る</span>
   </div>
-  <div class="preset-bar">
-    <span class="preset-bar-title" data-i18n="presetTitle">PRESETS</span>
-    <button type="button" id="wwmDiagBadge" class="wwm-diag-badge" hidden onclick="WWMSidebar.diag.openPopup()" title="弱点指摘を表示" data-i18n-title="tipDiagBadge">
-      <span class="wwm-diag-badge-icon">⚠</span>
-      <span class="wwm-diag-badge-text" data-i18n="railDiag">弱点</span>
-      <span class="wwm-diag-badge-count" id="wwmDiagBadgeCount">0</span>
-    </button>
-    <div class="preset-slots">
-      <div class="preset-slot" id="presetSlot0">
-        <span class="preset-slot-num">01</span>
-        <input class="preset-name-input" id="presetName0" type="text" maxlength="20">
-        <button class="preset-btn preset-save" onclick="savePreset(0)" data-i18n="presetSave">保存</button>
-        <button class="preset-btn preset-load" id="presetLoadBtn0" onclick="loadPreset(0)" data-i18n="presetLoad" disabled>読込</button>
-        <button class="preset-btn preset-del"  id="presetDelBtn0"  onclick="deletePreset(0)" disabled aria-label="プリセット01削除">✕</button>
-      </div>
-      <div class="preset-slot" id="presetSlot1">
-        <span class="preset-slot-num">02</span>
-        <input class="preset-name-input" id="presetName1" type="text" maxlength="20">
-        <button class="preset-btn preset-save" onclick="savePreset(1)" data-i18n="presetSave">保存</button>
-        <button class="preset-btn preset-load" id="presetLoadBtn1" onclick="loadPreset(1)" data-i18n="presetLoad" disabled>読込</button>
-        <button class="preset-btn preset-del"  id="presetDelBtn1"  onclick="deletePreset(1)" disabled aria-label="プリセット02削除">✕</button>
-      </div>
-      <div class="preset-slot" id="presetSlot2">
-        <span class="preset-slot-num">03</span>
-        <input class="preset-name-input" id="presetName2" type="text" maxlength="20">
-        <button class="preset-btn preset-save" onclick="savePreset(2)" data-i18n="presetSave">保存</button>
-        <button class="preset-btn preset-load" id="presetLoadBtn2" onclick="loadPreset(2)" data-i18n="presetLoad" disabled>読込</button>
-        <button class="preset-btn preset-del"  id="presetDelBtn2"  onclick="deletePreset(2)" disabled aria-label="プリセット03削除">✕</button>
-      </div>
-    </div>
-    <button type="button" class="wwm-mobile-anlz-btn" id="wwmMobileAnlzBtn" aria-label="格析パネルを開く" title="格析パネル">
-      <span class="wwm-mobile-anlz-icon" aria-hidden="true">📈</span>
-      <span class="wwm-mobile-anlz-text" data-i18n="anlzTitle">格析</span>
-    </button>
-  </div>
-</div>
 
-<div class="wwm-app-body">
-<!-- HERO: expected DMG + probability donut (武侠デザイン適用) -->
-<section class="hero hero-wuxia">
-  <!-- 4隅L字bracket -->
-  <span class="l-bracket lb-tl"></span>
-  <span class="l-bracket lb-tr"></span>
-  <span class="l-bracket lb-bl"></span>
-  <span class="l-bracket lb-br"></span>
-  <!-- 朱墨筆ストローク -->
-  <svg class="ink-stroke" viewBox="0 0 600 240" preserveAspectRatio="none" aria-hidden="true">
-    <defs>
-      <filter id="inkB">
-        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.16" numOctaves="2" seed="4" result="n"/>
-        <feDisplacementMap in="SourceGraphic" in2="n" scale="34"/>
-      </filter>
-      <linearGradient id="inkGrad" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="rgba(200,60,43,0)"/>
-        <stop offset="0.25" stop-color="rgba(200,60,43,0.35)"/>
-        <stop offset="0.7" stop-color="rgba(138,31,23,0.25)"/>
-        <stop offset="1" stop-color="rgba(200,60,43,0)"/>
-      </linearGradient>
-    </defs>
-    <path d="M20,140 C140,70 360,60 560,118" stroke="url(#inkGrad)" stroke-width="80" fill="none" stroke-linecap="round" filter="url(#inkB)"/>
-  </svg>
-
-  <div class="hero-left">
-    <div class="hero-label">
-      <span class="ja">武格指数</span>
-      <span class="en" data-i18n="martialIndexSub">MARTIAL INDEX</span>
-    </div>
-    <div class="hero-score-row" aria-live="polite" aria-atomic="true">
-      <div class="hero-current">
-        <span class="num hero-number" id="heroScore">0</span>
-      </div>
-      <span class="hero-tier tier-badge" id="heroTierBadge">--</span>
-      <div class="hero-next-inline">
-        <span class="hero-next-label">NEXT</span>
-        <span class="hero-next-row">
-          <span class="hero-next-arrow">▶</span>
-          <span class="num hero-next-val" id="heroScoreBaseline">0</span>
-          <span id="heroBaselineTierBadge" class="tier-badge tier-badge-baseline" hidden></span>
-        </span>
-      </div>
-    </div>
-  </div>
-
-  <div class="hero-right">
-    <div class="luopan">
-      <!-- 外側 tick ring 60本 -->
-      <svg class="luopan-ticks" viewBox="0 0 160 160" aria-hidden="true">
-        <g id="luopanTicks"></g>
-      </svg>
-      <!-- 物理/属性 arc -->
-      <svg class="luopan-arc" viewBox="0 0 160 160" aria-hidden="true">
-        <defs>
-          <linearGradient id="physGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#c83c2b"/>
-            <stop offset="1" stop-color="#e8513a"/>
-          </linearGradient>
-          <linearGradient id="elemGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#7fa88a"/>
-            <stop offset="1" stop-color="#a8d4b4"/>
-          </linearGradient>
-        </defs>
-        <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(232,215,180,0.06)" stroke-width="2"/>
-        <circle id="arcPhys" cx="80" cy="80" r="68" fill="none"
-          stroke="url(#physGrad)" stroke-width="6"
-          stroke-dasharray="0 427.26"
-          transform="rotate(-90 80 80)"
-          style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
-        <circle id="arcElem" cx="80" cy="80" r="68" fill="none"
-          stroke="url(#elemGrad)" stroke-width="6"
-          stroke-dasharray="0 427.26"
-          transform="rotate(-90 80 80)"
-          style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
-      </svg>
-      <!-- 内側 donut -->
-      <div class="luopan-inner">
-        <svg viewBox="0 0 136 136">
-          <circle class="donut-bg" cx="68" cy="68" r="50" fill="none" stroke="rgba(232,215,180,.06)" stroke-width="16"/>
-          <circle id="donutDmgSegCrit"     class="donut-seg" cx="68" cy="68" r="50" fill="none" stroke="var(--chart-crit)"     stroke-width="16" stroke-dasharray="0 314.16" stroke-dashoffset="0" style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
-          <circle id="donutDmgSegSympathy" class="donut-seg" cx="68" cy="68" r="50" fill="none" stroke="var(--chart-sympathy)" stroke-width="16" stroke-dasharray="0 314.16" stroke-dashoffset="0" style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
-          <circle id="donutDmgSegGraze"    class="donut-seg" cx="68" cy="68" r="50" fill="none" stroke="var(--chart-graze)"    stroke-width="16" stroke-dasharray="0 314.16" stroke-dashoffset="0" style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
-          <circle id="donutDmgSegNormal"   class="donut-seg" cx="68" cy="68" r="50" fill="none" stroke="var(--chart-normal)"   stroke-width="16" stroke-dasharray="0 314.16" stroke-dashoffset="0" style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
-        </svg>
-        <div class="luopan-center">
-          <div class="luopan-center-label" data-i18n="donutDmgCenter">勁率</div>
-        </div>
-      </div>
-    </div>
-    <div class="judge-list">
-      <div class="judge-row">
-        <span class="judge-dot" style="background:var(--chart-crit);box-shadow:0 0 7px var(--chart-crit);"></span>
-        <span class="judge-name" data-i18n="probCrit">会心</span>
-        <span class="num judge-val" id="dmgCritVal" style="color:var(--chart-crit);">—</span>
-      </div>
-      <div class="judge-row">
-        <span class="judge-dot" style="background:var(--chart-sympathy);box-shadow:0 0 7px var(--chart-sympathy);"></span>
-        <span class="judge-name" data-i18n="probSympathy">会意</span>
-        <span class="num judge-val" id="dmgSympathyVal" style="color:var(--chart-sympathy);">—</span>
-      </div>
-      <div class="judge-row">
-        <span class="judge-dot" style="background:var(--chart-normal);box-shadow:0 0 7px var(--chart-normal);"></span>
-        <span class="judge-name" data-i18n="probNormal">通常</span>
-        <span class="num judge-val" id="dmgNormalVal" style="color:var(--chart-normal);">—</span>
-      </div>
-      <div class="judge-row">
-        <span class="judge-dot" style="background:var(--chart-graze);"></span>
-        <span class="judge-name" data-i18n="probGraze">かすり</span>
-        <span class="num judge-val" id="dmgGrazeVal" style="color:var(--chart-graze);">—</span>
-      </div>
-      <div class="judge-row judge-row-sep">
-        <span class="judge-dot judge-dot-diamond judge-dot-phys"></span>
-        <span class="judge-name" data-i18n="probPhys">物理</span>
-        <span class="num judge-val" id="dmgPhysVal" style="color:#e8513a;">—</span>
-      </div>
-      <div class="judge-row">
-        <span class="judge-dot judge-dot-diamond judge-dot-elem"></span>
-        <span class="judge-name" data-i18n="probElem">属性</span>
-        <span class="num judge-val" id="dmgElemVal" style="color:#a8d4b4;">—</span>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- 羅盤 tick ring 60本 + arc 動的更新 -->
-<script>
-(function(){
-  const ticksGroup = document.getElementById('luopanTicks');
-  if (ticksGroup) {
-    const cx = 80, cy = 80, r1 = 78;
-    for (let i = 0; i < 60; i++) {
-      const a = i * 6 * Math.PI / 180;
-      const r2 = (i % 5 === 0) ? 68 : 73;
-      const x1 = cx + r1 * Math.cos(a), y1 = cy + r1 * Math.sin(a);
-      const x2 = cx + r2 * Math.cos(a), y2 = cy + r2 * Math.sin(a);
-      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      line.setAttribute('x1', x1.toFixed(1));
-      line.setAttribute('y1', y1.toFixed(1));
-      line.setAttribute('x2', x2.toFixed(1));
-      line.setAttribute('y2', y2.toFixed(1));
-      line.setAttribute('stroke', (i % 5 === 0) ? '#c9a45a' : 'rgba(201,164,90,.3)');
-      line.setAttribute('stroke-width', (i % 5 === 0) ? 1.5 : 1);
-      ticksGroup.appendChild(line);
-    }
-  }
-  // 物理/属性 arc 動的更新: __WWM_LAST_RESULT or _CURRENT_PARAMS から phys/elem比率取得
-  window._updateLuopanArc = function(physPct){
-    const C = 427.26; // 周長 2π·68
-    const phys = Math.max(0, Math.min(1, physPct || 0));
-    const elem = 1 - phys;
-    const arcP = document.getElementById('arcPhys');
-    const arcE = document.getElementById('arcElem');
-    if (arcP) {
-      arcP.setAttribute('stroke-dasharray', (C * phys).toFixed(2) + ' ' + (C * elem).toFixed(2));
-      arcP.setAttribute('stroke-dashoffset', '0');
-    }
-    if (arcE) {
-      arcE.setAttribute('stroke-dasharray', (C * elem).toFixed(2) + ' ' + (C * phys).toFixed(2));
-      arcE.setAttribute('stroke-dashoffset', (-C * phys).toFixed(2));
-    }
-  };
-})();
-</script>
-
-<aside id="wwmSidebar" class="wwm-sidebar-test" aria-label="サイドバー (キャラステ/装備一覧)"></aside>
-<main class="container" role="main">
-
-
-
-<!-- WWM Gear Grid (新レイアウト) -->
-<div class="wwm-gear-grid wwm-placeholder-grid" id="wwmGearGrid" onclick="showImportToast(event)">
-  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="1"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">主武器</span></div></div>
-  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="2"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">副武器</span></div></div>
-  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="21"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">弓箭</span></div></div>
-  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="3"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">冠甲</span></div></div>
-  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="4"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">胸甲</span></div></div>
-  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="5"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">膝甲</span></div></div>
-  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="8"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">腕甲</span></div></div>
-  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="9"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">射玦</span></div></div>
-  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="10"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">環</span></div></div>
-  <div class="wwm-equip-slot wwm-placeholder-slot" data-slot="11"><div class="wwm-equip-rail"><span class="wwm-equip-rail-text">佩</span></div></div>
-</div>
-<div class="wwm-xinfa-grid wwm-placeholder-grid" id="wwmXinfaGrid" onclick="showImportToast(event)">
-  <div class="wwm-xinfa-slot wwm-placeholder-slot"><div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法一</span></div></div>
-  <div class="wwm-xinfa-slot wwm-placeholder-slot"><div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法二</span></div></div>
-  <div class="wwm-xinfa-slot wwm-placeholder-slot"><div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法三</span></div></div>
-  <div class="wwm-xinfa-slot wwm-placeholder-slot"><div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法四</span></div></div>
-  <div class="wwm-xinfa-slot wwm-arsenal-slot wwm-placeholder-slot"><div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">武庫</span></div></div>
-</div>
-<script>
-window.showImportToast = function(e) {
-  // import済なら何もしない (装備カード/心法カードクリック時の誤発火防止)
-  if (window.WWMState?.roleInfo) return;
-  const t = document.getElementById('toast');
-  if (!t) return;
-  const T = window.T || {};
-  t.textContent = T.importPrompt || '上部「IMPORT」ボタンからデータを取り込んでください';
-  t.classList.add('show');
-  if (window._toastTimer) clearTimeout(window._toastTimer);
-  window._toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
-};
-</script>
-<div class="wwm-diagnostics" id="wwmDiagnostics" hidden></div>
-<div class="wwm-anlz">
-  <!-- ヘッダー: 古紙テクスチャ + bamboo SVG + 分析タイトル + タブ列 -->
-  <div class="wwm-anlz-header">
-    <!-- bamboo SVG (game-icons.net delapouite CC-BY 3.0) -->
-    <div class="wwm-anlz-bamboo">
-      <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#f0d28a" d="M51.72 25c3.76 42 3.72 84 0 126h44.22c-4.56-41.6-3.68-83.68.28-126h-44.5zm181.68 0c2.6 54.1 5.5 108.6.4 164.7h44.3c-5-54.5-3.7-109.52.3-164.7h-45zm113.2 0c4.6 31.51 3.6 62.88-.4 94h44.1c-2.4-31.33-2.4-62.67 0-94h-43.7zm116.5 36.46s-41.4 7.81-53.5 23.86c-3.2 4.61-5.9 12.32-3 17.18 3.1 4.8 10.7 5 15.8 3.3 18.3-6 40.7-44.34 40.7-44.34zM173 106.9s12 42.7 28.1 53.1c4.6 3.1 12.2 4.6 16.3.7 4.1-3.9 3.4-12 1.4-17.2-7.8-18.7-45.8-36.6-45.8-36.6zm261.4 6.9c-4.6.1-8.9.6-12.5 1.8-6.3 2.2-14.1 8.1-13.8 14.7.1 6.6 8.2 12 14.8 13.8 23.6 6.2 71.5-16.6 71.5-16.6s-35.2-14-60-13.7zM346.2 137c6.2 47.7 7.1 95.1.2 142h43.8c-4-47.4-3.5-94.8.2-142h-44.2zm67.4 18.9c-2.2.1-4.3.8-5.9 2.3-4.1 3.9-3.4 12-1.4 17.2 7.8 18.7 45.8 36.6 45.8 36.6s-12-42.7-28.1-53.1c-2.6-1.7-6.1-3-9.5-3h-.9zm-255 12.3c-13.1.2-23.2 1.3-23.2 1.3s40.3 34.6 64.7 34.8c6.7-.1 16-3.1 17.8-9.4 2.1-6.3-3.8-14.1-9.5-17.9-10.1-6.8-28.4-8.6-44.1-8.8h-5.7zm-106.59.8c4.41 42.1 3.92 84.1-.2 126h44.42c-3.9-42.3-4.92-84.4-.31-126H52.01zm181.49 32c3.3 52.1 3.5 104.7 0 158h44.6c-5-53.5-3.7-106 .3-158h-44.9zm-76.4 22.6s-38 17.9-45.8 36.6c-2 5.2-2.7 13.3 1.4 17.2 4.1 3.9 11.7 2.4 16.3-.7 16.1-10.4 28.1-53.1 28.1-53.1zm-25.6 72.1c-6.7.2-15 3.1-16.9 9-2.1 6.2 3.6 14.1 9.1 18 19.9 14 72.8 9.4 72.8 9.4s-39.3-35.6-63.7-36.4h-1.3zm214.2 1.3c2.8 36.5 3.6 73.2.2 110h43.9c-4.6-38-1.7-74.3.6-110h-44.7zM51.61 313c3.96 58.2 2.72 116.2-.2 174h45.21c-2.49-57.7-4.56-115.7-.28-174H51.61zM121 337.8c-3.8.1-7.5 1.3-9.4 4.3-2.9 4.8-.2 12.6 3 17.2 12.1 16 53.5 23.8 53.5 23.8s-22.4-38.3-40.7-44.3c-1.9-.6-4.2-1-6.4-1zm359.7 19.4s-52.9 5.1-69.9 22.5c-4.6 4.8-8.9 13.7-5.6 19.4 3.1 5.8 12.8 6.9 19.5 5.5 23.8-5.2 56-47.4 56-47.4zM234 377c3.6 36.7.4 73.9-.7 110h45.2c-1.7-35.8-5.7-72.4-.8-110H234zm182 45c-5.2 0-11.1 2.3-12.7 6.9-1.9 5.3 2.4 12.2 6.6 16 15.4 13 57.4 11.6 57.4 11.6s-30.1-32.5-49.2-34.4c-.7-.1-1.4-.1-2.1-.1zm-70 3c2.1 20.3 3.3 41 .6 62h42.8c-2.8-21.1-1.4-41.8.7-62H346z"/>
-      </svg>
-    </div>
-    <div class="wwm-anlz-header-inner">
-      <div class="wwm-anlz-title-block">
-        <h2 class="wwm-anlz-title" data-i18n="anlzTitle">格析</h2>
-        <span class="wwm-anlz-subtitle" data-i18n="anlzSubtitle">ANALYSIS</span>
-      </div>
-      <div class="wwm-analysis-tabs wwm-anlz-tabs" id="wwmAnalysisTabs" role="tablist">
-        <button type="button" class="wwm-analysis-tab" role="tab" aria-selected="false" aria-controls="wwmAffixRanking" data-analysis-tab="rank" data-i18n="anlzTabRank">期待値</button>
-        <button type="button" class="wwm-analysis-tab active" role="tab" aria-selected="true" aria-controls="wwmOptimization" data-analysis-tab="opt" data-i18n="anlzTabOpt">最適化</button>
-        <button type="button" class="wwm-analysis-tab" role="tab" aria-selected="false" aria-controls="wwmHistory" data-analysis-tab="history" data-i18n="anlzTabHist">履歴</button>
-      </div>
-    </div>
-  </div>
-  <div class="wwm-anlz-gap"></div>
-  <!-- 本文 -->
-  <div class="wwm-anlz-body">
-    <!-- パネル全体の背景アイコン (タブ切替で都度変更) -->
-    <div class="wwm-anlz-bgicon"></div>
-    <div class="wwm-analysis-grid">
-      <div id="wwmAffixRanking" hidden></div>
-      <!-- critique P3 (2026-06-06): 初期 placeholder — import 前の格析空箱に案内 1 行。
-           render (opt.js) の innerHTML 上書きで自然消滅、 JS flow 非依存 -->
-      <div id="wwmOptimization"><div class="wwm-anlz-empty-hint"><span data-i18n="sbEmptyTitle">まだインポートデータがありません。</span><br><span data-i18n="sbEmptyHint">上部「IMPORT」ボタンから取り込みできます。</span></div></div>
-      <div id="wwmHistory" hidden></div>
-    </div>
-  </div>
-</div>
-<script>
-(function(){
-  const tabs = document.querySelectorAll('#wwmAnalysisTabs .wwm-analysis-tab');
-  const map = { rank: 'wwmAffixRanking', opt: 'wwmOptimization', history: 'wwmHistory' };
-  const KEY = 'wwm_analysis_tab_v1';
-  function activate(target) {
-    tabs.forEach(t => {
-      const on = t.dataset.analysisTab === target;
-      t.classList.toggle('active', on);
-      t.setAttribute('aria-selected', on ? 'true' : 'false');
-    });
-    Object.entries(map).forEach(([k, id]) => {
-      const el = document.getElementById(id);
-      if (el) el.hidden = (k !== target);
-    });
-    // パネル全体の背景アイコン (.wwm-anlz-bgicon) をタブ別に切替
-    const anlz = document.querySelector('.wwm-anlz');
-    if (anlz) anlz.setAttribute('data-active-tab', target);
-  }
-  // 初期 active タブ (opt) を data-active-tab に反映
-  document.querySelector('.wwm-anlz')?.setAttribute('data-active-tab', 'opt');
-  tabs.forEach(t => t.addEventListener('click', () => {
-    const target = t.dataset.analysisTab;
-    activate(target);
-    try { localStorage.setItem(KEY, target); } catch(e) {}
-    if (target === 'history' && window.WWMSidebar?.history) window.WWMSidebar.history.render();
-  }));
-  try {
-    const saved = localStorage.getItem(KEY);
-    if (saved && map[saved]) {
-      activate(saved);
-      if (saved === 'history') {
-        const tryRender = () => {
-          if (window.WWMSidebar?.history) window.WWMSidebar.history.render();
-          else setTimeout(tryRender, 80);
-        };
-        tryRender();
-      }
-    }
-  } catch(e) {}
-})();
-</script>
-
-</main>
-</div>
-
-<footer class="wwm-footer"><img class="wwm-footer-logo" src="https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/logo-27b7acd2.png" alt="Where Winds Meet"><span class="wwm-footer-unofficial" data-i18n="footerUnofficial">Unofficial fan-made tool. Not affiliated with NetEase Inc. / Everstone Studio.</span><span class="wwm-footer-copy">© NetEase, Inc. All Rights Reserved. © Everstone Studio.</span><span class="wwm-footer-creator">Created by <strong>SHIGETORA</strong><a class="wwm-footer-x" href="https://x.com/TORA_XIV" target="_blank" rel="noopener noreferrer" title="お問い合わせ (X / Twitter)" data-i18n-title="tipIconContact" aria-label="X (Twitter) で問い合わせ"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></span></footer>
+<!-- mobile bottom nav (workspace tab の mobile 版 / PC時 hidden) -->
+<nav class="wwm-bottom-nav" role="tablist" aria-label="workspace mobile">
+  <button class="wwm-bn" role="tab" aria-selected="true" data-ws="gear"><span class="n">I</span><span data-i18n="wsTabGear">装備</span></button>
+  <button class="wwm-bn" role="tab" aria-selected="false" data-ws="xinfa"><span class="n">II</span><span data-i18n="wsTabXinfa">心法</span></button>
+  <button class="wwm-bn" role="tab" aria-selected="false" data-ws="anlz"><span class="n">III</span><span data-i18n="wsTabAnlz">格析</span></button>
+  <button class="wwm-bn" role="tab" aria-selected="false" data-ws="enbu"><span class="n">IV</span><span data-i18n="wsTabEnbu">演武</span></button>
+  <button class="wwm-bn" role="tab" aria-selected="false" data-ws="hist"><span class="n">V</span><span data-i18n="wsTabHist">履歴</span></button>
+</nav>
 
 <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 <div id="export-card"></div>
