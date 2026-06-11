@@ -283,7 +283,7 @@
 <script>
   // ── Mobile hero collapse: tap で hero-right (donut) 展開/折りたたみ ──
   document.addEventListener('DOMContentLoaded', () => {
-    const hero = document.querySelector('section.hero.hero-wuxia');
+    const hero = document.querySelector('#heroRoot'); /* Task4: hero は section→div 化、ID で掴む */
     if (hero) hero.addEventListener('click', (e) => {
       if (e.target.closest('button, input, select, textarea, a, label')) return;
       if (window.matchMedia('(max-width: 480px)').matches) hero.classList.toggle('hero--expanded');
