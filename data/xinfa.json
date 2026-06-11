@@ -3025,7 +3025,7 @@
         "needsManualInput": false,
         "statType": "Critical Rate",
         "effects": {
-          "critRate": 0.0822
+          "critRate": 0.082
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -3618,7 +3618,7 @@
         "needsManualInput": false,
         "statType": "Critical Rate",
         "effects": {
-          "critRate": 0.0822
+          "critRate": 0.082
         },
         "derivedFromGold": true,
         "rawI18n": {
@@ -4094,7 +4094,7 @@
         "worldLv": 15,
         "needsManualInput": false,
         "effects": {
-          "critRate": 0.0822
+          "critRate": 0.082
         },
         "rawI18n": {
           "ja": "Critical Rate +8.2%",
@@ -4570,7 +4570,7 @@
         "needsManualInput": false,
         "statType": "Critical Rate",
         "effects": {
-          "critRate": 0.0822
+          "critRate": 0.082
         },
         "derivedFromGold": true,
         "rawI18n": {
