@@ -1685,5 +1685,89 @@
     "zh": "UID",
     "ko": "UID",
     "vi": "UID"
+  },
+  "wsTabGear": {
+    "ja": "装備",
+    "en": "Gear",
+    "zh": "装备",
+    "ko": "장비",
+    "vi": "Trang bị"
+  },
+  "wsTabXinfa": {
+    "ja": "心法",
+    "en": "Inner Way",
+    "zh": "心法",
+    "ko": "심법",
+    "vi": "Tâm Pháp"
+  },
+  "wsTabAnlz": {
+    "ja": "格析",
+    "en": "格析",
+    "zh": "格析",
+    "ko": "격석",
+    "vi": "Cách tích"
+  },
+  "wsTabEnbu": {
+    "ja": "演武",
+    "en": "Rotation",
+    "zh": "演武",
+    "ko": "연무",
+    "vi": "Diễn Võ"
+  },
+  "wsTabHist": {
+    "ja": "履歴",
+    "en": "History",
+    "zh": "历史",
+    "ko": "이력",
+    "vi": "Lịch sử"
+  },
+  "enbuTeaserTitle": {
+    "ja": "秘譜 — 演武",
+    "en": "Secret Score — Rotation",
+    "zh": "秘谱 — 演武",
+    "ko": "비보 — 연무",
+    "vi": "Bí Phổ — Diễn Võ"
+  },
+  "enbuTeaserBody": {
+    "ja": "技の連なりを譜面に記し、回しごとの期待 DPS を測る。武術の係数表と共に近日開帳。",
+    "en": "Record your skill sequence like a musical score and measure expected DPS per rotation. Coming soon, alongside the martial arts coefficient table.",
+    "zh": "将技能连招记录如谱，测算每轮回转的期望DPS。与武术系数表一同近日公开。",
+    "ko": "스킬 연계를 악보처럼 기록하고 회전당 기대 DPS를 측정합니다. 무술 계수표와 함께 곧 공개 예정입니다.",
+    "vi": "Ghi lại chuỗi kỹ năng như bản nhạc và đo DPS kỳ vọng mỗi vòng xoay. Sắp ra mắt cùng bảng hệ số võ học."
+  },
+  "qishuPlaceholder": {
+    "ja": "整備中 — 奇術効果データの収載後、この区画に展開する。",
+    "en": "Under construction — This section will be populated once Mystic Arts effect data is available.",
+    "zh": "整备中 — 奇术效果数据收录后，此区块将予展开。",
+    "ko": "정비 중 — 기술(奇術) 효과 데이터 수록 후 이 영역에 전개합니다.",
+    "vi": "Đang chuẩn bị — Khu vực này sẽ được mở sau khi có dữ liệu hiệu ứng Kỳ thuật."
+  },
+  "heroSeatScore": {
+    "ja": "武格指数",
+    "en": "武格指数",
+    "zh": "武格指数",
+    "ko": "무격지수",
+    "vi": "Vũ Cách Chỉ Số"
+  },
+  "heroSeatDps": {
+    "ja": "演武",
+    "en": "演武",
+    "zh": "演武",
+    "ko": "연무",
+    "vi": "Diễn Võ"
+  },
+  "heroDpsComing": {
+    "ja": "COMING SOON",
+    "en": "COMING SOON",
+    "zh": "COMING SOON",
+    "ko": "COMING SOON",
+    "vi": "COMING SOON"
+  },
+  "railStatus": {
+    "ja": "ステータス",
+    "en": "Status",
+    "zh": "属性",
+    "ko": "스탯",
+    "vi": "Chỉ số"
   }
 }
