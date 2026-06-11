@@ -263,7 +263,9 @@
 
 .hero-wuxia .luopan-inner {
   position: relative;
-  width: 138px; height: 138px;
+  /* workspace v2 (2026-06-11): 138px 固定 → % 化 (138/160=86.25%)。
+     外枠 .luopan の width 変更 (PC 120 / mobile 56) に中身が追従 — 固定だとはみ出す */
+  width: 86.25%; height: 86.25%;
 }
 
 .hero-wuxia .luopan-inner svg {

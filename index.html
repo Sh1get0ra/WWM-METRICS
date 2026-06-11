@@ -57,14 +57,14 @@
 <link rel="stylesheet" href="assets/styles/animations.css?v=1">
 <link rel="stylesheet" href="assets/styles/base.css?v=6">
 <link rel="stylesheet" href="assets/styles/share.css?v=6">
-<link rel="stylesheet" href="assets/styles/hero.css?v=12">
+<link rel="stylesheet" href="assets/styles/hero.css?v=13">
 <link rel="stylesheet" href="assets/styles/sidebar.css?v=4">
 <link rel="stylesheet" href="assets/styles/layout.css?v=12">
 <link rel="stylesheet" href="assets/styles/gear.css?v=1">
 <link rel="stylesheet" href="assets/styles/xinfa.css?v=3">
 <link rel="stylesheet" href="assets/styles/anlz.css?v=7">
 <link rel="stylesheet" href="assets/styles/mobile.css?v=10">
-<link rel="stylesheet" href="assets/styles/workspace.css?v=8">
+<link rel="stylesheet" href="assets/styles/workspace.css?v=9">
 <link rel="stylesheet" href="assets/styles/modals.css?v=36">
 <link rel="stylesheet" href="assets/styles/responsive-globals.css?v=2">
 <link rel="stylesheet" href="assets/styles/dark.css?v=2">
@@ -483,15 +483,19 @@
         <div class="seat-main swap-anim" id="heroSeatMain">
           <div class="hero-block" id="heroBlockScore">
             <div class="eyebrow">STATUS SCORE · <span data-i18n="heroSeatScore">武格指数</span></div>
-            <div class="hb-num"><span class="num hero-number" id="heroScore">0</span><span class="hero-tier tier-badge tchip" id="heroTierBadge">--</span></div>
+            <div class="hb-num"><span class="num hero-number" id="heroScore">0</span></div>
           </div>
         </div>
         <div class="h-aside">
-          <!-- 初期 visibility:hidden — hero.js _syncNextVisibility が表示判断 (import 前の「NEXT ▶ 0」露出防止)。hidden でなく visibility = 場所保持で donut 不動 -->
-          <div class="next-chip swap-anim hero-next-inline" style="visibility:hidden">
-            <span class="hero-next-label">NEXT</span><span class="hero-next-arrow">▶</span>
-            <span class="num hero-next-val" id="heroScoreBaseline">0</span>
-            <span id="heroBaselineTierBadge" class="tier-badge tier-badge-baseline" hidden></span>
+          <!-- NEXT = 旧 hero 表現 (枠/背景なし、label 上 + ▶数値 — 枠付き chip は「ちゃっち」で棄却、兄貴 2026-06-11)。
+               初期 visibility:hidden — hero.js _syncNextVisibility が表示判断。visibility = 場所保持 -->
+          <div class="hero-next-inline swap-anim" style="visibility:hidden">
+            <span class="hero-next-label">NEXT</span>
+            <span class="hero-next-row">
+              <span class="hero-next-arrow">▶</span>
+              <span class="num hero-next-val" id="heroScoreBaseline">0</span>
+              <span id="heroBaselineTierBadge" class="tier-badge tier-badge-baseline" hidden></span>
+            </span>
           </div>
           <div class="luopan swap-anim">
             <!-- 外側 tick ring 60本 -->
@@ -542,7 +546,8 @@
         <div class="avatar" id="heroAvatar" aria-hidden="true"></div>
         <div class="h-id-info">
           <div class="pname" id="heroName">—<b id="heroLv"></b></div>
-          <div class="pwr"><span data-i18n="importLabelXiuwei">総合武力</span><b id="heroPower">—</b></div>
+          <!-- Tier badge = identity 固定 (総合武力の右、兄貴指定 2026-06-11)。席 swap の対象外 -->
+          <div class="pwr"><span data-i18n="importLabelXiuwei">総合武力</span><b id="heroPower">—</b><span class="hero-tier tier-badge" id="heroTierBadge">--</span></div>
           <div class="seat-sub swap-anim" id="heroSeatSub">
             <div class="hero-block" id="heroBlockDps">
               <div class="eyebrow">ROTATION DPS · <span data-i18n="heroSeatDps">演武</span></div>
