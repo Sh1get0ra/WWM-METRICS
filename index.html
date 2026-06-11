@@ -510,7 +510,8 @@
           </div>
         </div>
         <div class="h-aside">
-          <div class="next-chip swap-anim hero-next-inline">
+          <!-- 初期 visibility:hidden — hero.js _syncNextVisibility が表示判断 (import 前の「NEXT ▶ 0」露出防止)。hidden でなく visibility = 場所保持で donut 不動 -->
+          <div class="next-chip swap-anim hero-next-inline" style="visibility:hidden">
             <span class="hero-next-label">NEXT</span><span class="hero-next-arrow">▶</span>
             <span class="num hero-next-val" id="heroScoreBaseline">0</span>
             <span id="heroBaselineTierBadge" class="tier-badge tier-badge-baseline" hidden></span>
