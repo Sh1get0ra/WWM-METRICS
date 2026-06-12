@@ -98,8 +98,8 @@
   --c-modal-a-option-checked: #e0cfa0;
   --c-modal-a-option-fg: var(--brown-1);
   --c-modal-a-rows-bg: var(--overlay-trace);
-  --c-modal-a-kongfu-header-bg: var(--gold-tint);
-  --c-modal-a-kongfu-header-fg: var(--paper);
+  --c-modal-a-kongfu-header-bg: var(--gold-mid); /* 本番 light 実効 rgba(201,164,90,0.3) 採取値 */
+  --c-modal-a-kongfu-header-fg: var(--brown-1);
   --c-modal-a-kongfu-select-fg: var(--brown-1);
   --c-modal-a-kongfu-select-bg: var(--gold-mid);
   --c-modal-a-set-fg: var(--vermilion-bright);
@@ -117,11 +117,12 @@
   --c-cmp-modal-a--cmp-col-border: var(--c-border-soft-warm);
   --c-cmp-set-header-fg: var(--vermilion-deep);
   --c-cmp-set-header-text-shadow: none;
-  --c-cmp-current--cmp-row-bg: var(--surf-shade-2);
-  --c-cmp-current--cmp-kongfu-header-fg: var(--paper);
-  --c-cmp-current--cmp-kongfu-header-bg: var(--surf-shade-2);
-  --c-cmp-current--cmp-set-header-fg: var(--paper);
-  --c-cmp-current--cmp-set-header-bg: var(--surf-shade-2);
+  /* current 列 = 本番 light 実効値 (pages.dev computed 採取 2026-06-12) — 新置と同色系 */
+  --c-cmp-current--cmp-row-bg: var(--surf-shade);
+  --c-cmp-current--cmp-kongfu-header-fg: var(--brown-1);
+  --c-cmp-current--cmp-kongfu-header-bg: var(--gold-mid);
+  --c-cmp-current--cmp-set-header-fg: var(--c-cmp-set-header-fg);
+  --c-cmp-current--cmp-set-header-bg: var(--c-modal-a-set-select-bg);
   --c-cmp-preview-zero-fg: var(--bone-dim);
   --c-cmp-lv-select-fg: var(--c-gold-rich);
   --c-cmp-stat-select-bg: var(--surf-shade);

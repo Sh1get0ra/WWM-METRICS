@@ -2434,17 +2434,27 @@
   background: var(--kami-0);
   color: var(--kami-ink);
 }
-/* col の墨地 literal #0d0a08 — 紙上書き */
+/* col = 本番 light 実効 rgba(255,255,255,0.4) (pages.dev computed 採取 2026-06-12) */
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-col {
-  background: var(--surf-1);
+  background: var(--hover-mid-2);
 }
-/* Lv select = --bg-raised (墨、旧 light でも墨枠が原典) — 紙では浮く → 紙系へ。
-   token rescope でなく pinpoint 上書き (--bg-raised は modal 外殻も参照 = rescope 波及回避) */
+/* Lv select = 本番 light 実効 hover-strong 白50% (--bg-raised 墨の紙上書き。
+   token rescope でなく pinpoint — --bg-raised は modal 外殻も参照 = rescope 波及回避) */
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-title .wwm-cmp-lv-select {
-  background-color: var(--c-modal-a-option-bg);
+  background-color: var(--hover-strong);
 }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-title .wwm-cmp-lv-select option {
   background: var(--c-modal-a-option-bg);
+}
+/* %バッジ rank 色 = 旧 light 値 (main modals.css の data-theme=light rule から移植)。
+   !important = gear.js inline color 対抗 (原典同様) */
+.wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-gold { background: var(--c-gold-deep-faint); color: #7a5a12 !important; border-color: var(--c-gold-deep-strong); }
+.wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.13); color: #6f3a9a !important; border-color: rgba(120,60,160,0.5); }
+.wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.13); color: #2a5aa0 !important; border-color: rgba(40,90,160,0.5); }
+/* footer = header と同色 (兄貴指定 2026-06-12)。modal 地は縦 gradient (#130f0d→#0d0a08) で
+   下端ほど暗い = footer が header より沈んで見えていた → gradient 上端色を明示 */
+.wwm-cmp-footer-a {
+  background: #130f0d;
 }
 
 } /* end @layer modals */
