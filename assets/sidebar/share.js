@@ -366,7 +366,7 @@
         window.WWMExportCard.mountCardPane(pane, footer);
         return;
       }
-      pane.innerHTML = '<p style="color:var(--paper-mute);padding:20px;">CARD PANE — Task 10 で接続</p>';
+      pane.innerHTML = '<p style="color:var(--paper-mute);padding:20px;">...</p>';
     }
 
     // ── タブ engine ────────────────────────────────────────────────

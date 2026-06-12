@@ -32,9 +32,9 @@ html.wwm-shared-build-mode .wwm-shared-build-icon {
   filter: drop-shadow(0 0 4px var(--vermilion-bright));
 }
 
-/* SHARE Build mode: IMPORT / SHARE ボタン 視覚 disabled (押下で alert) */
-html.wwm-shared-build-mode #importBtn,
-html.wwm-shared-build-mode #shareBtn {
+/* SHARE Build mode: IMPORT ボタンのみ 視覚 disabled (押下で alert)。
+   #shareBtn は閲覧モードでも飛簡 modal が開く (card タブのみ disabled、 ad77c86) = 灰色化しない */
+html.wwm-shared-build-mode #importBtn {
   opacity: 0.4;
   filter: grayscale(0.8);
   cursor: not-allowed;

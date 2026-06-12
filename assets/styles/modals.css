@@ -2520,8 +2520,14 @@
 .wwm-tool-modal .wwm-modal-close:hover { background: rgba(58,38,22,0.10); }
 
 /* body = 墨 (token 既定のまま。背景は modal 地が透ける)
-   position: relative = bg-icon (absolute) の包含ブロック (header が紙 = modal 直下に置くと紙帯に被る) */
-.wwm-tool-modal .wwm-modal-body { padding: var(--space-4); position: relative; overflow: hidden; }
+   position: relative = bg-icon (absolute) の包含ブロック (header が紙 = modal 直下に置くと紙帯に被る)
+   overflow-y: auto = base (L110) の縦 scroll 復元 — 旧 overflow:hidden は縦短 viewport で
+   diag/IMPORT/飛簡 の下端をクリップしていた。横は hidden 維持 (bg-icon 包含目的) */
+.wwm-tool-modal .wwm-modal-body { padding: var(--space-4); position: relative; overflow-y: auto; overflow-x: hidden; }
+/* bg-icon は body box フィット固定 (inset 0 = scrollHeight 不拡張)。
+   はみ出し演出は background-position の +offset 側で維持 (base L1030 / diag L1309)。
+   absolute のまま scroll でコンテンツと共に流れるのは許容 (装飾)。 fixed 化禁止 (viewport 基準事故) */
+.wwm-tool-modal .wwm-modal-body .wwm-modal-bg-icon { inset: 0; width: auto; height: auto; }
 
 /* footer = 紙帯 (body の外、対照 footer-a の反転) */
 .wwm-tool-modal-footer {
