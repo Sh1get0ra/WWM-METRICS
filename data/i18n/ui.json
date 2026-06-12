@@ -1190,11 +1190,11 @@
     "vi": "Lịch sử"
   },
   "shareTitle": {
-    "ja": "飛簡 / BUILD SHARE",
-    "en": "BUILD SHARE",
-    "zh": "飞简 / BUILD SHARE",
-    "ko": "비간 / BUILD SHARE",
-    "vi": "Phi giản / CHIA SẺ BUILD"
+    "ja": "飛簡",
+    "en": "SHARE",
+    "zh": "飞简",
+    "ko": "비간",
+    "vi": "Phi Giản"
   },
   "shareSect1Heading": {
     "ja": "▍ビルド共有",

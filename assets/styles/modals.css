@@ -2557,6 +2557,12 @@
 }
 .wwm-tool-tab:disabled { opacity: 0.45; cursor: not-allowed; }
 
+/* ── 飛簡 modal (wwm-share-modal-b) 固有調整 ────────────────────── */
+/* OBS タブは PC 専用 — mobile では旧 .wwm-share-obs-block { display:none } と等価 */
+@media (max-width: 768px) {
+  .wwm-share-modal-b .wwm-tool-tab[data-tab="obs"] { display: none; }
+}
+
 /* ── NOTE modal (wwm-note-modal-b) 固有調整 ─────────────────────── */
 /* 旧 .wwm-note-modal-a (720px) から width 系継承 */
 .wwm-note-modal-b {
