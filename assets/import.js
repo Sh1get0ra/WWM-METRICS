@@ -43,7 +43,7 @@ function _createModal(id, titleKey, contentHtml, bgIconUrl, opts) {
 // ── Setup Modal (Import button → このmodal、2-step inline) ───────
 function openSetupModal() {
   const officialUrl = 'https://www.wherewindsmeetgame.com/m/2025h5sjgj/jp/';
-  const m = _createModal('wwmSetupModal', 'importSetupTitle', '<div id="wwmSetupBody"></div>', 'assets/icons/scroll-quill.svg', { titleEn: 'IMPORT', seal: '取' });
+  const m = _createModal('wwmSetupModal', 'importSetupTitle', '<div id="wwmSetupBody"></div>', 'https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b5e3e9f9f38a72b8baeazshLYQ05.png', { titleEn: 'IMPORT', seal: '取' });
   const body = m.querySelector('#wwmSetupBody');
 
   function renderIntro() {
@@ -166,7 +166,7 @@ async function openPreviewModal(data, importedAt, savedState) {
     stateSrc = WWMHelpers.storage.loadJSON(IMPORT_STATE_KEY);
   }
   const state = stateSrc ? JSON.parse(JSON.stringify(stateSrc)) : defaultState;
-  const m = _createModal('wwmPreviewModal', 'importPreviewTitle', '<div id="wwmCardBody"></div>', 'assets/icons/scroll-quill.svg', { titleEn: 'PREVIEW', seal: '覧' });
+  const m = _createModal('wwmPreviewModal', 'importPreviewTitle', '<div id="wwmCardBody"></div>', 'https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b5e3e9f9f38a72b8baeazshLYQ05.png', { titleEn: 'PREVIEW', seal: '覧' });
   m.querySelector('.wwm-modal').classList.add('wwm-modal-wide');
   const body = m.querySelector('#wwmCardBody');
   // wizard ナビ btn = footer (墨帯) — 紙 body 上の secondary は不可視 (2026-06-13 兄貴指摘)

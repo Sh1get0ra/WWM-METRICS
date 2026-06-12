@@ -216,9 +216,11 @@
     };
 
     // ── pane builders ──────────────────────────────────────────────
+    // bg-icon = 公式素材、3 タブ共通 (タブでアイコン変えない — 兄貴指定 2026-06-13)
+    const _bgIconHtml = `<div class="wwm-modal-bg-icon" style="background-image:url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b408a29e4ef06def5ezTp9BZEC05.png');"></div>`;
 
     function _buildUrlPane(pane) {
-      pane.innerHTML = `
+      pane.innerHTML = `${_bgIconHtml}
         <div style="font-size:13px;color:var(--gold-bright);font-weight:700;letter-spacing:0.12em;margin-bottom:6px;">${(window.T?.shareSect1Heading) ?? '▍ビルド共有'}</div>
         <p style="font-size:12px;color:var(--paper);opacity:0.92;margin:0 0 10px;line-height:1.6;">${(window.T?.shareSect1Desc) ?? ''}</p>
         <textarea class="wwm-share-url" id="wwmShareUrlNormal" readonly>${url}</textarea>`;
@@ -229,7 +231,7 @@
     }
 
     function _buildObsPane(pane) {
-      pane.innerHTML = `
+      pane.innerHTML = `${_bgIconHtml}
         <div style="font-size:13px;color:var(--gold-bright);font-weight:700;letter-spacing:0.12em;margin-bottom:6px;">${(window.T?.shareSect2Heading) ?? '▍OBS 配信用 URL'}</div>
         <p style="font-size:12px;color:var(--paper);opacity:0.92;margin:0 0 8px;line-height:1.6;">${(window.T?.shareSect2Desc) ?? ''}</p>
         <div class="wwm-share-warn" style="font-size:12px;color:#e8a04a;background:rgba(232,160,74,0.10);border-left:3px solid #e8a04a;padding:8px 10px;margin:0 0 10px;line-height:1.6;border-radius:2px;">⚠ ${(window.T?.shareObsCacheWarn) ?? 'OBSキャッシュの影響で正常に表示されない場合は、ブラウザソースの作り直し or OBS再起動が必要'}</div>
@@ -364,9 +366,10 @@
     function _buildCardPane(pane) {
       if (window.WWMExportCard && window.WWMExportCard.mountCardPane) {
         window.WWMExportCard.mountCardPane(pane, footer);
+        pane.insertAdjacentHTML('afterbegin', _bgIconHtml); // mount の innerHTML 上書き後に挿入
         return;
       }
-      pane.innerHTML = '<p style="color:var(--paper-mute);padding:20px;">...</p>';
+      pane.innerHTML = _bgIconHtml + '<p style="color:var(--paper-mute);padding:20px;">...</p>';
     }
 
     // ── タブ engine ────────────────────────────────────────────────

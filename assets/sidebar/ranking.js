@@ -132,7 +132,7 @@
     }).join('');
     root.innerHTML = `
       <div class="wwm-analysis-card wwm-modal-square wwm-rank-grid">
-        <div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/scales.svg');"></div>
+        <div class="wwm-modal-bg-icon" style="background-image:url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b3eed7ba50118c397aMSc1Axt605.png');"></div>
         <div class="wwm-rank-col">
           <div class="wwm-analysis-header"><h3>${(window.T && T.affixRankingTitle) || '調律/定音期待値ランキング'}</h3></div>
           <div class="wwm-rank-body">${rows}</div>

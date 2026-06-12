@@ -193,7 +193,7 @@
           <button class="wwm-modal-close" aria-label="Close">×</button>
         </div>
         <div class="wwm-modal-body wwm-ws-paper">
-          <div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/cracked-shield.svg');"></div>
+          <div class="wwm-modal-bg-icon" style="background-image:url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b56106c5e18b72fbbeyS0pjb5G05.png');"></div>
           ${sorted.length ? sorted.map(it => `<div class="wwm-diag-item wwm-diag-${it.type}"><span class="wwm-diag-icon">${it.type==='warn'?'⚠':it.type==='good'?'✓':'ℹ'}</span><span class="wwm-diag-text">${it.text}</span></div>`).join('') : '<div class="wwm-diag-item wwm-diag-good"><span class="wwm-diag-icon">✓</span><span class="wwm-diag-text">弱点なし</span></div>'}
         </div>
       </div>`;
