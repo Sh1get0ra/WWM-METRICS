@@ -26,9 +26,9 @@
   /* 紙系 token — 既存 --paper (text色) と名前衝突回避で --kami-*。
      旧古紙トーン (#e6dabc) を 1 段明るく (兄貴指定 2026-06-12 — ニュートラル白 #dfdcd8 は
      試行の上「前の色味から明るく」で差し戻し確定)。kami-1/2 は kami-0 基準の明暗連動 */
-  --kami-0: #ece2c8;
-  --kami-1: #f3ebd6;
-  --kami-2: #e3d8ba;
+  --kami-0: #f2ead4;
+  --kami-1: #f8f1e1;
+  --kami-2: #e9e0c7;
   --kami-ink: #2a1c12;
   --kami-ink-2: #54422e;
   --kami-ink-3: #7a6a52;
@@ -47,7 +47,7 @@
    custom property 継承で、配下に移設される既存 component
    (gear card / xinfa card / anlz) が light theme 相当の紙配色になる仕掛け。 */
 .wwm-ws-paper {
-  --bg-0: var(--kami-0); --bg-1: var(--kami-1); --bg-2: var(--kami-2); --bg-3: #dccfa9;
+  --bg-0: var(--kami-0); --bg-1: var(--kami-1); --bg-2: var(--kami-2); --bg-3: #e2d6b4;
   --surf-1: rgba(255,248,228,0.55); --surf-2: rgba(244,232,204,0.72);
   --surf-shade: rgba(58,38,22,0.06); --surf-shade-2: rgba(58,38,22,0.10); --surf-shade-3: rgba(58,38,22,0.14);
   --input-bg: rgba(255,250,235,0.85); --input-text: #5e3a14;
@@ -693,7 +693,7 @@ html[lang="zh-CN"] [data-kaisho] {
   color: var(--kami-ink);
   /* 上端 fade — 紙が紙面から立ち上がる見え方 (「凸」の切り口だけ消す、兄貴選定 F 案 2026-06-12)。
      下端は kami-0 で紙面と地続き (border-bottom-color 含め接続表現は維持) */
-  background: linear-gradient(180deg, rgba(236,226,200,0) 0%, rgba(236,226,200,0.55) 30%, var(--kami-0) 78%); /* rgba = kami-0 実値連動 */
+  background: linear-gradient(180deg, rgba(242,234,212,0) 0%, rgba(242,234,212,0.55) 30%, var(--kami-0) 78%); /* rgba = kami-0 実値連動 */
   border-bottom-color: var(--kami-0);
   font-weight: 700;
 }
