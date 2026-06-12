@@ -2502,22 +2502,33 @@
   padding: var(--space-3) var(--space-4) var(--space-2-5);
 }
 .wwm-tool-modal .wwm-modal-header::after { display: none; } /* 旧金線 glow 廃止 */
-/* 題字: ja 明朝 + EN sub + 金 seal (対照 modal h2 と同構造・同 token) */
+/* 題字: ja 明朝 + EN sub + 金 seal — サイズ感 = 武具対照 (.wwm-cmp-title-ja/en/.wwm-cmp-seal) と同値 (2026-06-13 兄貴指定) */
 .wwm-tool-modal .wwm-modal-header h2 {
-  display: flex; align-items: baseline; gap: 10px;
+  display: flex; align-items: center; gap: 10px;
   color: var(--c-modal-a-title-ja-fg); text-shadow: none; text-transform: none;
-  font-family: var(--f-display, 'Noto Serif JP'); letter-spacing: 0.12em;
+  font-family: var(--f-display, 'Noto Serif JP');
 }
-.wwm-tool-modal .wwm-tool-title-ja { font-size: var(--text-lg); font-weight: 700; }
+.wwm-tool-modal .wwm-tool-title-ja {
+  font-size: var(--text-18);
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-shadow: var(--c-cmp-modal-a--cmp-title-ja-text-shadow);
+}
 .wwm-tool-modal .wwm-tool-title-en {
-  font-family: var(--f-mono, 'Rajdhani'); font-size: var(--text-xs);
-  letter-spacing: 0.22em; color: var(--c-cmp-title-en-fg); font-weight: 600;
+  font-family: var(--f-latin, 'Cinzel');
+  font-size: var(--text-sm);
+  letter-spacing: 0.32em; color: var(--c-cmp-title-en-fg); font-weight: 600;
+  align-self: flex-end; padding-bottom: var(--space-half);
 }
-/* seal = 金 — ツール機能 modal の区別記号 (対照 modal の朱 seal と対) */
+/* seal = 金 28×28 回転型 (対照の朱 seal と同形、色だけ区別記号) */
 .wwm-tool-modal .wwm-tool-seal {
-  font-family: var(--f-display, 'Noto Serif JP'); font-size: var(--text-sm);
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  font-family: var(--f-display, 'Noto Serif JP'); font-size: var(--text-lg); font-weight: 900;
   color: #2a1c12; background: var(--accent); /* 儀金 #d4af37 両 theme constant */
-  padding: 1px 5px; border-radius: 1px; font-weight: 700;
+  border: 2px solid var(--gold-bright);
+  border-radius: 2px;
+  transform: rotate(-6deg);
 }
 .wwm-tool-modal .wwm-modal-close { color: var(--paper); }
 .wwm-tool-modal .wwm-modal-close:hover { background: var(--hover-soft); }
