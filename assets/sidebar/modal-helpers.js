@@ -224,28 +224,23 @@ finalScore  = statusScore + 4-set bonus (4個セット発動時)</pre>
     const m = document.createElement('div');
     m.className = 'wwm-modal-backdrop';
     m.innerHTML = `
-      <div class="wwm-note-modal-a">
-        <div class="wwm-note-rod wwm-note-rod-top"></div>
-        <div class="wwm-note-paper">
-          <div class="wwm-note-header">
-            <span class="wwm-note-title-ja">${titleJa}</span>
-            <span class="wwm-note-title-en">NOTE</span>
-            <span class="wwm-note-seal">${seal}</span>
-            <div class="wwm-note-header-actions">
-              <a class="wwm-note-btn wwm-note-btn-gh" target="_blank" rel="noopener" href="${_ghIssueUrl('bug')}">${ghSvg}${btnBug}</a>
-              <a class="wwm-note-btn wwm-note-btn-gh" target="_blank" rel="noopener" href="${_ghIssueUrl('req')}">${ghSvg}${btnReq}</a>
-              <button class="wwm-note-btn wwm-note-btn-close" id="wwmNoteClose">${btnClose}</button>
-            </div>
-          </div>
-          <div class="wwm-note-divider"></div>
-          <div class="wwm-note-tabs">
-            <button class="wwm-note-tab ${defaultTab==='spec'?'active':''}" data-tab="spec">${tabSpec}</button>
-            <button class="wwm-note-tab ${defaultTab==='changelog'?'active':''}" data-tab="changelog">${tabCl}</button>
-          </div>
-          <div class="wwm-note-body" id="wwmNoteTabSpec" style="display:${defaultTab==='spec'?'block':'none'};">${_specHtml()}</div>
-          <div class="wwm-note-body" id="wwmNoteTabChangelog" style="display:${defaultTab==='changelog'?'block':'none'};">${_changelogHtml(entries)}</div>
+      <div class="wwm-modal wwm-tool-modal wwm-note-modal-b">
+        <span class="wwm-tool-bracket wwm-tool-bracket-tl"></span><span class="wwm-tool-bracket wwm-tool-bracket-tr"></span>
+        <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
+        <div class="wwm-modal-header wwm-ws-paper">
+          <h2><span class="wwm-tool-title-ja">${titleJa}</span><span class="wwm-tool-title-en">NOTE</span><span class="wwm-tool-seal">${seal}</span></h2>
+          <button class="wwm-modal-close" id="wwmNoteClose" aria-label="${btnClose}">×</button>
         </div>
-        <div class="wwm-note-rod wwm-note-rod-bottom"></div>
+        <div class="wwm-tool-tabs wwm-ws-paper">
+          <button class="wwm-tool-tab ${defaultTab==='spec'?'active':''}" data-tab="spec">${tabSpec}</button>
+          <button class="wwm-tool-tab ${defaultTab==='changelog'?'active':''}" data-tab="changelog">${tabCl}</button>
+        </div>
+        <div class="wwm-modal-body" id="wwmNoteTabSpec" style="display:${defaultTab==='spec'?'block':'none'};">${_specHtml()}</div>
+        <div class="wwm-modal-body" id="wwmNoteTabChangelog" style="display:${defaultTab==='changelog'?'block':'none'};">${_changelogHtml(entries)}</div>
+        <div class="wwm-tool-modal-footer wwm-ws-paper">
+          <a class="wwm-btn-secondary wwm-note-btn-gh" target="_blank" rel="noopener" href="${_ghIssueUrl('bug')}">${ghSvg}${btnBug}</a>
+          <a class="wwm-btn-secondary wwm-note-btn-gh" target="_blank" rel="noopener" href="${_ghIssueUrl('req')}">${ghSvg}${btnReq}</a>
+        </div>
       </div>
     `;
     document.body.appendChild(m);
@@ -255,9 +250,9 @@ finalScore  = statusScore + 4-set bonus (4個セット発動時)</pre>
     };
     m.querySelector('#wwmNoteClose').addEventListener('click', close);
     m.addEventListener('click', e => { if (e.target === m) close(); });
-    m.querySelectorAll('.wwm-note-tab').forEach(t => {
+    m.querySelectorAll('.wwm-tool-tab').forEach(t => {
       t.addEventListener('click', () => {
-        m.querySelectorAll('.wwm-note-tab').forEach(x => x.classList.remove('active'));
+        m.querySelectorAll('.wwm-tool-tab').forEach(x => x.classList.remove('active'));
         t.classList.add('active');
         const tab = t.dataset.tab;
         m.querySelector('#wwmNoteTabSpec').style.display      = tab==='spec'     ? 'block' : 'none';

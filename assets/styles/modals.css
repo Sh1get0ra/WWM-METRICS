@@ -2551,6 +2551,32 @@
 }
 .wwm-tool-tab:disabled { opacity: 0.45; cursor: not-allowed; }
 
+/* ── NOTE modal (wwm-note-modal-b) 固有調整 ─────────────────────── */
+/* 旧 .wwm-note-modal-a (720px) から width 系継承 */
+.wwm-note-modal-b {
+  width: 720px;
+  max-width: 94vw;
+}
+/* body = 墨面: コンテンツ (--brown-3 固定色) を紙色系に上書き */
+.wwm-note-modal-b .wwm-modal-body {
+  overflow-y: auto;
+  max-height: 60vh;
+  color: var(--paper);
+}
+.wwm-note-modal-b .wwm-note-h3       { color: var(--paper); border-left-color: var(--vermilion); }
+.wwm-note-modal-b .wwm-note-title-ja { color: var(--paper); }
+.wwm-note-modal-b .wwm-note-title-en { color: var(--paper-mute); }
+.wwm-note-modal-b .wwm-note-list li b { color: var(--paper-2); }
+.wwm-note-modal-b .wwm-note-pre {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.18);
+  color: var(--paper-2);
+}
+.wwm-note-modal-b .wwm-note-cl-ver  { color: var(--paper); }
+.wwm-note-modal-b .wwm-note-cl-date { color: var(--paper-mute); }
+.wwm-note-modal-b .wwm-note-cl-entry { border-bottom-color: rgba(255,255,255,0.12); }
+.wwm-note-modal-b .wwm-note-cl-items li::before { color: var(--vermilion); }
+
 } /* end @layer modals */
 
 /* 紙 modal の rows padding — dark.css の html[data-theme=dark] rule (@layer dark > modals)
