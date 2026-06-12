@@ -311,8 +311,13 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   pointer-events: none;
   background:
     linear-gradient(180deg, rgba(20,16,9,0.30), rgba(11,9,8,0.72)),
-    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") left top / max(100%, 1000px) auto no-repeat
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") left top / clamp(1000px, 100%, 1700px) auto no-repeat
     var(--sumi-0);
+  /* 超ワイドで clamp 上限により画像右端 (x=1700) が画面内に来る → 縦の切れ目。
+     右端 280px を fade で墨に溶く (mask 透過域 = ::before 全層消え = 下の sumi-1 が出る、
+     sumi-0 との色差は知覚不可)。≤1700px 画面では fade 位置 = 画面右端 = 実質無影響 */
+  -webkit-mask-image: linear-gradient(to right, #000 calc(min(100%, 1700px) - 280px), transparent min(100%, 1700px));
+  mask-image: linear-gradient(to right, #000 calc(min(100%, 1700px) - 280px), transparent min(100%, 1700px));
   /* 幅 fit (≈2.1x) = シャープ優先。cover 4x 全面案は「伸びすぎ」で棄却 (2026-06-12)。
      下限 1000px: 100% auto は幅連動で縦も縮む → 狭幅 (~800px 以下) で画像高 < band 高
      になり原画下端の白掠れエッジが band 内に露出 (切れ目)。下限で画像高 ≥324px 死守、
