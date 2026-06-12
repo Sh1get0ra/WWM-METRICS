@@ -583,7 +583,7 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   height: 100%;
   display: flex; flex-direction: column;
   min-height: 0;
-  padding: 18px 22px 30px;
+  padding: 10px 10px 10px; /* 18 22 30 → 10 統一 (兄貴指定 2026-06-12) */
   z-index: 0; /* ::before (掛軸 BG) の z:-1 を rail-in 背面に閉じる stacking context */
 }
 
@@ -683,13 +683,10 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   transition: opacity .15s ease .1s;
 }
 .wwm-app[data-rail="min"] .wwm-rail-tate { opacity: 1; pointer-events: auto; }
-.wwm-rail-tate .t-label { /* 縦書き金ラベル + 末尾に朱印 (落款の位置) */
-  writing-mode: vertical-rl;
-  display: flex; flex-direction: column; align-items: center; gap: 12px;
-  font-family: var(--f-display); font-weight: 700; font-size: 13px;
-  letter-spacing: 0.4em; color: var(--gold);
-}
-.wwm-rail-tate .t-label::after { content: ""; width: 8px; height: 8px; background: var(--vermilion); letter-spacing: 0; }
+/* 縦書き金ラベル + 朱印 = collapse 時 非表示 (兄貴指定 2026-06-12 — 細柱は ▶ toggle
+   のみの無地墨柱に)。旧 styling (vertical-rl 金 13px + ::after 朱印 8px 落款) は
+   復活時用に git 履歴参照 (506dc85 以前) */
+.wwm-rail-tate .t-label { display: none; }
 .wwm-rail-tate .wwm-rail-toggle { transform: scaleX(-1); }
 
 /* ============ 紙面 (main) ============ */
@@ -926,7 +923,8 @@ html[lang="zh-CN"] [data-kaisho] {
 
 /* ============ tablet 調整 ============ */
 @media (max-width: 1100px) {
-  :root { --rail-w: 250px; }
+  /* --rail-w 250px 縮小は廃止 (兄貴指定 2026-06-12) — rail = 300px 固定。
+     幅連動で rail 内表示が崩れる影響の方が大、狭幅は紙面側が譲る */
   .hero-wuxia { gap: 32px; }
   .hero-wuxia .seat-main .hb-num { font-size: 82px; }
 }
