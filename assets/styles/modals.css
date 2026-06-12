@@ -2539,9 +2539,34 @@
   padding: var(--space-3) var(--space-4) var(--space-3-5);
   display: flex; align-items: center; justify-content: flex-end; gap: 10px;
 }
-/* ボタン = base (L114-130、墨向け既定) のまま。radius 0 のみ統一 (対照 modal ボタンと同) */
+/* ボタン = 対照 modal と同じ公式素材で全 modal 統一 (2026-06-13 兄貴指定)。
+   confirm/cancel png は素材自体が地を持つ = 墨 footer / 紙 body どちらでも成立 */
 .wwm-tool-modal-footer .wwm-btn-primary,
-.wwm-tool-modal-footer .wwm-btn-secondary { border-radius: 0; }
+.wwm-tool-modal .wwm-modal-body .wwm-btn-primary,
+.wwm-tool-modal-footer .wwm-card-generate {
+  background:
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_confirm-48cfa7e2.png") center / 100% 100% no-repeat,
+    linear-gradient(180deg, var(--gold-bright), var(--gold));
+  border: 1px solid var(--gold-bright);
+  border-radius: 0;
+  color: var(--brown-1);
+  padding: 7px 18px;
+  font-size: var(--text-12);
+  font-weight: var(--fw-bold);
+  box-shadow: none;
+}
+.wwm-tool-modal-footer .wwm-btn-secondary,
+.wwm-tool-modal .wwm-modal-body .wwm-btn-secondary,
+.wwm-tool-modal-footer .wwm-card-post-x {
+  background: var(--c-modal-a-btn-secondary-bg);
+  border: 1px solid var(--c-cmp-btn-row--btn-secondary-border, var(--paper-mute));
+  border-radius: 0;
+  color: var(--brown-1);
+  padding: 7px 18px;
+  font-size: var(--text-12);
+  font-weight: var(--fw-bold);
+  box-shadow: none;
+}
 
 /* タブ行 (NOTE / 飛簡 共用): 墨帯に並び、active = 紙の差し込み (紙 body へ繋がる —
    workspace 帳簿フォルダ tab と同文法) */
@@ -2563,12 +2588,8 @@
 }
 .wwm-tool-tab:disabled { opacity: 0.45; cursor: not-allowed; }
 
-/* 紙 body 内に残る文脈ボタン (IMPORT 再適用等) — base の白文字白枠は紙上で不可視 (2026-06-13 兄貴指摘) */
-.wwm-modal-body.wwm-ws-paper .wwm-btn-secondary {
-  color: #2a1c12;
-  border-color: rgba(58,38,22,0.45);
-}
-.wwm-modal-body.wwm-ws-paper .wwm-btn-secondary:hover { background: rgba(58,38,22,0.08); }
+/* 紙 body 内の文脈ボタン (IMPORT 再適用等) は上の公式素材統一 rule が地ごと面倒を見る
+   (旧 茶文字/茶枠の紙対応 rule は素材統一 2026-06-13 で撤去) */
 
 /* ── カード生成 pane の紙対応 (2026-06-13 兄貴指摘「ライト化で文字が見えない」) ──
    card controls が消費する --c-* / --gold-* は paper scope (workspace.css) 未移植の
