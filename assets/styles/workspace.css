@@ -308,11 +308,11 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   pointer-events: none;
   background:
     linear-gradient(180deg, rgba(20,16,9,0.30), rgba(11,9,8,0.72)),
-    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") left top / cover no-repeat
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") left top / 100% auto no-repeat
     var(--sumi-0);
-  /* cover (縦 fit ≈4x) + left anchor: 仏像群 (原画左端) が band〜rail の L 字に
-     1 枚絵として連続 (rail 掛軸別絵案は「シームレスでない」で棄却 2026-06-12)。
-     4x のボケは silhouette + 墨 overlay + grain で水墨の滲みとして成立 */
+  /* 幅 fit (≈2.1x) = シャープ優先。cover 4x 全面案は「伸びすぎ」で棄却 (2026-06-12)。
+     下半分は rail 掛軸 (qs-bg、下記 .wwm-rail-in::before) が受け、
+     つなぎ目は掛軸側の mask fade でクロスブレンド */
 }
 
 /* 紙の grain — 唯一許される質感。app 全面 1 枚 (墨上は実質不可視) =
@@ -486,7 +486,35 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   font-size: 230px;
   color: rgba(232,215,180,0.05);
 }
-.wwm-rail-in { position: sticky; top: 0; padding: 18px 22px 30px; }
+.wwm-rail-in {
+  position: sticky; top: 0; padding: 18px 22px 30px;
+  z-index: 0; /* ::before (掛軸 BG) の z:-1 を rail-in 背面に閉じる stacking context */
+}
+
+/* rail 掛軸 — qs-bg (682×212 横長、座る人物 silhouette) を 90° 回転して墨柱に縦掛け。
+   人物 (原画左端) が rail 上部 = band つなぎ目側に来る (R270 は上部無地で分断感 → 棄却)。
+   mask 両端 fade: 上端 160px = band の xf-bg とクロスブレンド (兄貴指摘「つなぎ目が
+   気になる」の解) / 下端 180px = 墨に溶く。mask はローカル座標 (rotate90 で
+   to right = 画面下方向)。sticky rail-in 随伴 = scroll 追従、collapse は rail の
+   overflow: clip が物理切断。OBS は :not gate (app::before と同方針) */
+html:not(.wwm-view-sidebar) .wwm-rail-in::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0; left: 0;
+  width: 100vh;          /* 回転後 = 縦方向の長さ (viewport 高ぶん) */
+  height: var(--rail-w); /* 回転後 = rail 幅 */
+  transform-origin: 0 0;
+  transform: translateX(var(--rail-w)) rotate(90deg);
+  background:
+    linear-gradient(90deg, rgba(20,16,9,0.35), rgba(11,9,8,0.70)),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/qs-bg-32d6898d.png") center / cover no-repeat;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 160px, #000 calc(100% - 180px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 160px, #000 calc(100% - 180px), transparent);
+  pointer-events: none;
+}
+/* 斬透かしは掛軸絵の上に重ねる (rail-in z0 化で DOM 順負けし不可視化するため) */
+.wwm-ws-rail .kanji-mark { z-index: 1; }
 
 /* rail 内の sidebar = 旧 fixed 浮島 styling を解除し墨柱に地続き化。
    sidebar.css .wwm-sidebar-test = 旧テスト用 position:fixed/right:12px の残骸
