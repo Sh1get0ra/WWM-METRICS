@@ -682,7 +682,13 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
    ⚠ tabs 帯 = 墨面だが .wwm-ws-paper scope 内 → icon-btn が参照する --gold-bright/--paper-2
    等が紙面用の暗色に rescope され沈む → 墨面用素値 (tokens.css :root) に戻す */
 .wwm-ws-tabs-r .icon-btn {
+  /* preset-chip と完全同寸 (兄貴指摘 2026-06-12 — base .icon-btn の height:30px/bold/0.12em が
+     微妙にデカく見えていた) */
+  height: auto;
   padding: 5px 10px; font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border-radius: 1px;
   --gold: #c9a45a;
   --gold-bright: #f0d28a;
   --gold-deep: #8a6f30;
@@ -697,14 +703,14 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
    5 ボタン横並びは言語追加毎に幅圧迫 → 1 ボタン化。.lang-btn の active 同期 JS は
    class 参照のため dropdown 内移設で無傷) */
 .wwm-lang-dd { position: relative; }
-.wwm-lang-dd-btn {
-  background: transparent; border: none; padding: 2px 4px;
-  display: flex; align-items: center;
+/* 公式 icon_lang (白地球儀 36px 単体) を icon-btn 正方枠に — EXPORT/SHARE/NOTE と同列の統一感
+   (旧 btn-lang png = globe+▼ 一枚絵は「そのままは微妙」で差替 2026-06-12) */
+.wwm-lang-dd-btn img {
+  width: 18px; height: 18px; display: block;
+  opacity: 0.75;
   transition: opacity .15s ease;
-  opacity: 0.85;
 }
-.wwm-lang-dd-btn:hover { opacity: 1; }
-.wwm-lang-dd-btn img { height: 30px; width: auto; display: block; }
+.wwm-lang-dd-btn:hover img { opacity: 1; }
 .wwm-lang-dd-pop {
   position: absolute; top: calc(100% + 8px); right: 0;
   min-width: 150px;
