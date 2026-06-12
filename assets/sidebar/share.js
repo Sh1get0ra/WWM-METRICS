@@ -375,6 +375,8 @@
       tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === name));
       Object.entries(panes).forEach(([k, p]) => { p.hidden = (k !== name); });
       if (!panes[name]._built) { builders[name](panes[name], footer); panes[name]._built = true; }
+      const ca = footer.querySelector('.wwm-card-actions');
+      if (ca) ca.hidden = (name !== 'card');
     }
     tabs.forEach(t => t.addEventListener('click', () => { if (!t.disabled) _switchTab(t.dataset.tab); }));
     _switchTab(cardBlocked ? 'url' : (opts?.tab || 'card'));

@@ -1734,6 +1734,8 @@
 .wwm-card-toggle.na { opacity: 0.35; cursor: default; }
 .wwm-card-actions { display: flex; gap: var(--space-2); }
 .wwm-card-actions > button { flex: 1; min-width: 0; }
+/* タブ切替時に footer から card actions を隠す ([hidden] は display:flex に負けるため明示 override) */
+.wwm-tool-modal-footer .wwm-card-actions[hidden] { display: none; }
 /* Generate = button-primary 語彙 (金 gradient + 墨茶文字)。 literal = 両 theme constant */
 .wwm-card-generate {
   width: 100%;
