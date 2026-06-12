@@ -552,6 +552,34 @@
     "ko": "공유",
     "vi": "CHIA SẺ"
   },
+  "shareTabCard": {
+    "ja": "画像カード",
+    "en": "Card Image",
+    "zh": "图片卡片",
+    "ko": "이미지 카드",
+    "vi": "Thẻ hình ảnh"
+  },
+  "shareTabUrl": {
+    "ja": "共有URL",
+    "en": "Share URL",
+    "zh": "分享链接",
+    "ko": "공유 URL",
+    "vi": "URL chia sẻ"
+  },
+  "shareTabObs": {
+    "ja": "OBS配信",
+    "en": "OBS Overlay",
+    "zh": "OBS直播",
+    "ko": "OBS 방송",
+    "vi": "OBS phát sóng"
+  },
+  "shareCardBlocked": {
+    "ja": "閲覧モード中は画像カードを生成できません",
+    "en": "Card generation is disabled in view mode",
+    "zh": "浏览模式下无法生成卡片",
+    "ko": "열람 모드에서는 카드를 생성할 수 없습니다",
+    "vi": "Không thể tạo thẻ ở chế độ xem"
+  },
   "noteBtn": {
     "ja": "NOTE",
     "en": "NOTE",
@@ -1776,5 +1804,12 @@
     "zh": "属性",
     "ko": "스탯",
     "vi": "Chỉ số"
+  },
+  "diagTitleJa": {
+    "ja": "弱点指摘",
+    "en": "Weakness Check",
+    "zh": "弱点指摘",
+    "ko": "약점 진단",
+    "vi": "Chỉ điểm yếu"
   }
 }
