@@ -678,8 +678,20 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
 .wwm-ws-tab[aria-selected="true"] .n { color: var(--gold-paper); }
 .wwm-ws-tab.locked { opacity: 0.45; }
 .wwm-ws-tabs-r { margin-left: auto; display: flex; gap: 6px; align-items: center; padding-bottom: 9px; }
-/* tabs-r 内 IMPORT/RESET (topbar から移設 2026-06-12) — preset-chip と背丈を揃える */
-.wwm-ws-tabs-r .icon-btn { padding: 5px 10px; font-size: 11px; }
+/* tabs-r 内 IMPORT/RESET (topbar から移設 2026-06-12) — preset-chip と背丈を揃える。
+   ⚠ tabs 帯 = 墨面だが .wwm-ws-paper scope 内 → icon-btn が参照する --gold-bright/--paper-2
+   等が紙面用の暗色に rescope され沈む → 墨面用素値 (tokens.css :root) に戻す */
+.wwm-ws-tabs-r .icon-btn {
+  padding: 5px 10px; font-size: 11px;
+  --gold: #c9a45a;
+  --gold-bright: #f0d28a;
+  --gold-deep: #8a6f30;
+  --gold-glow: rgba(240, 210, 138, 0.4);
+  --gold-faint: rgba(240, 210, 138, 0.08);
+  --paper-2: #c8bda6;
+  --ink-3: rgba(232, 215, 180, 0.22);
+  --bg-0: #141009; /* import hover の文字色 (金地に墨) */
+}
 
 /* 言語 dropdown — 公式 globe ボタン + プルダウン (2026-06-12 topbar 再編。
    5 ボタン横並びは言語追加毎に幅圧迫 → 1 ボタン化。.lang-btn の active 同期 JS は
