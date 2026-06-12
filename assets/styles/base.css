@@ -240,14 +240,10 @@ html[lang="ko"] .top-controls-2row .icon-btn {
 .icon-btn:hover { color: var(--gold-bright); border-color: var(--gold-deep); background: var(--gold-tint); }
 a.icon-btn { text-decoration: none; }
 .icon-btn-x svg { display: block; }
-.icon-btn.export-btn,
 .icon-btn.import-btn,
 .icon-btn.share-btn {
   width: auto; padding: 0 var(--space-3);
   font-family: var(--f-mono); font-weight: var(--fw-bold); font-size: var(--text-sm); letter-spacing: 0.12em;
-}
-.icon-btn.export-btn {
-  color: var(--vermilion-bright); border-color: var(--c-icon-btn-export-btn-border);
 }
 .icon-btn.import-btn {
   color: var(--gold-bright); border-color: var(--gold-deep);
@@ -255,10 +251,6 @@ a.icon-btn { text-decoration: none; }
 .icon-btn.import-btn:hover {
   background: var(--gold); color: var(--bg-0); border-color: var(--gold);
   box-shadow: 0 0 16px var(--gold-glow);
-}
-.icon-btn.export-btn:hover {
-  background: var(--vermilion); color: var(--c-on-vermilion); border-color: var(--vermilion); /* audit P2: bg-0 3.98 → white 5.08 */
-  box-shadow: 0 0 16px var(--vermilion-glow);
 }
 
 /* ─────────────────────────────────────────────────────────────────

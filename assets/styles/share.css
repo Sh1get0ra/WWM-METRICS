@@ -32,10 +32,9 @@ html.wwm-shared-build-mode .wwm-shared-build-icon {
   filter: drop-shadow(0 0 4px var(--vermilion-bright));
 }
 
-/* SHARE Build mode: IMPORT / SHARE / EXPORT ボタン 視覚 disabled (押下で alert) */
+/* SHARE Build mode: IMPORT / SHARE ボタン 視覚 disabled (押下で alert) */
 html.wwm-shared-build-mode #importBtn,
-html.wwm-shared-build-mode #shareBtn,
-html.wwm-shared-build-mode #exportBtn {
+html.wwm-shared-build-mode #shareBtn {
   opacity: 0.4;
   filter: grayscale(0.8);
   cursor: not-allowed;
