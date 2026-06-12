@@ -821,7 +821,7 @@ html[lang="zh-CN"] [data-kaisho] {
   content: "";
   position: absolute;
   top: -2px; bottom: -3px; left: -7px; right: -60px;
-  background: var(--sumi-1);
+  background: #2f2a23; /* 明るめ茶墨 (兄貴指定 2026-06-12 — sumi-1 #141009 は紙上で黒すぎ怖い) */
   -webkit-mask: url("../fude.png") 0 0 / 100% 100% no-repeat;
   mask: url("../fude.png") 0 0 / 100% 100% no-repeat;
   z-index: -1;
