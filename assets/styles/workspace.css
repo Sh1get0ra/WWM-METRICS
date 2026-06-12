@@ -381,7 +381,7 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
    サイズは seat 側 scope = 席 swap でサイズ責務一元化の既存方針 */
 .hero-wuxia .eyebrow .seat-title {
   font-family: var(--f-display); font-weight: 700;
-  letter-spacing: .18em; color: var(--paper);
+  letter-spacing: .18em; color: var(--gold-bright); /* 題字=金、スコア値=白 (兄貴指定 2026-06-12) */
 }
 .hero-wuxia .seat-main .eyebrow .seat-title { font-size: 30px; }
 .hero-wuxia .seat-sub .eyebrow .seat-title { font-size: 12px; }
