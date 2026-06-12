@@ -372,9 +372,32 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   grid-template-columns: none;
 }
 .hero-wuxia .eyebrow {
+  display: flex; align-items: baseline; gap: 14px;
   font-family: var(--f-mono); font-weight: 600; font-size: 10px;
   letter-spacing: 0.32em; color: var(--sumi-text-3);
 }
+/* 席タイトル (武格指数/演武) — 旧 hero-label .ja 形式 (兄貴指示 2026-06-12:
+   「小さすぎる、比率は昔のまま」= 旧 30px serif 白 / en mono 14px に復元)。
+   サイズは seat 側 scope = 席 swap でサイズ責務一元化の既存方針 */
+.hero-wuxia .eyebrow .seat-title {
+  font-family: var(--f-display); font-weight: 700;
+  letter-spacing: .18em; color: var(--paper);
+}
+.hero-wuxia .seat-main .eyebrow .seat-title { font-size: 30px; }
+.hero-wuxia .seat-sub .eyebrow .seat-title { font-size: 12px; }
+.hero-wuxia .seat-main .eyebrow .seat-en { font-size: 14px; letter-spacing: .28em; }
+
+/* 朱筆ストローク — 旧 hero 装飾の復活 (兄貴指示 2026-06-12)。label〜数値の背後 */
+.hero-wuxia { position: relative; }
+.hero-wuxia .ink-stroke {
+  position: absolute;
+  left: 34px; top: 8px;
+  width: 520px; height: 120px;
+  opacity: var(--c-ink-stroke-opacity);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-wuxia .h-main, .hero-wuxia .h-id { position: relative; z-index: 1; }
 .hero-wuxia .swap-anim {
   transition: opacity .22s var(--ease-out-quart), transform .22s var(--ease-out-quart);
 }
@@ -387,7 +410,8 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   display: flex; align-items: flex-start;
   font-family: var(--f-latin); font-weight: 800;
   font-size: 96px; line-height: 0.95; letter-spacing: -0.015em;
-  color: var(--gold-bright); margin-top: 6px;
+  color: var(--paper); /* 古紙白 #ede4d0 — 旧 hero 復帰 (兄貴指示 2026-06-12、明金は棄却) */
+  margin-top: 6px;
   white-space: nowrap;
 }
 .hero-wuxia .seat-main .hb-num .unit {
@@ -743,6 +767,9 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   .hero.hero-wuxia { padding: 22px 18px 18px; gap: 0; display: block; position: relative; height: auto; grid-template-columns: none; }
   .wwm-band .kanji-mark { display: block; right: -14px; top: 56%; transform: translateY(-50%); font-size: 150px; color: rgba(232,215,180,0.05); }
   .hero-wuxia .h-main { display: flex; gap: 16px; align-items: flex-start; }
+  .hero-wuxia .ink-stroke { display: none; } /* 旧 hero ≤480 と同方針 — 狭幅で帯が文字を潰す */
+  .hero-wuxia .seat-main .eyebrow .seat-title { font-size: 18px; }
+  .hero-wuxia .seat-main .eyebrow .seat-en { font-size: 9px; letter-spacing: 0.2em; }
   .hero-wuxia .seat-main .hb-num { font-size: 54px; line-height: 1; margin-top: 4px; }
   .hero-wuxia .seat-main .hb-num .unit { font-size: 14px; margin-left: 8px; }
   .hero-wuxia .pwr .hero-tier.tier-badge { font-size: 12px; padding: 1px 8px; }

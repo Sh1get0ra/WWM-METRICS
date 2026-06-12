@@ -128,7 +128,7 @@
 .hero-number {
   font-family: var(--f-latin);
   font-weight: var(--fw-extra);
-  color: var(--hero-num);
+  /* color は持たない — seat 側 .hb-num 継承 (main=古紙白/sub=金) が決める (2026-06-12) */
   letter-spacing: -0.02em;
   text-shadow: var(--hero-num-shadow);
   font-variant-numeric: tabular-nums;
@@ -173,9 +173,9 @@
 .hero-wuxia .hero-number {
   font-family: var(--f-latin);
   font-weight: var(--fw-black);
-  /* font-size/line-height は持たない — 席 swap で .seat-main/.seat-sub の .hb-num 継承が決める */
+  /* font-size/line-height/color は持たない — 席 swap で .seat-main/.seat-sub の
+     .hb-num 継承が決める (color も seat 一元化 2026-06-12: main=古紙白/sub=金) */
   letter-spacing: -.02em;
-  color: var(--gold-bright);  /* workspace v2: 古紙白→明金 (mock B 縦律 主役数値) */
   text-shadow: var(--c-hero-number-text-shadow);
 }
 

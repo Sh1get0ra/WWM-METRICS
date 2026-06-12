@@ -57,14 +57,14 @@
 <link rel="stylesheet" href="assets/styles/animations.css?v=1">
 <link rel="stylesheet" href="assets/styles/base.css?v=6">
 <link rel="stylesheet" href="assets/styles/share.css?v=6">
-<link rel="stylesheet" href="assets/styles/hero.css?v=13">
+<link rel="stylesheet" href="assets/styles/hero.css?v=14">
 <link rel="stylesheet" href="assets/styles/sidebar.css?v=4">
 <link rel="stylesheet" href="assets/styles/layout.css?v=13">
 <link rel="stylesheet" href="assets/styles/gear.css?v=1">
 <link rel="stylesheet" href="assets/styles/xinfa.css?v=3">
 <link rel="stylesheet" href="assets/styles/anlz.css?v=7">
 <link rel="stylesheet" href="assets/styles/mobile.css?v=10">
-<link rel="stylesheet" href="assets/styles/workspace.css?v=15">
+<link rel="stylesheet" href="assets/styles/workspace.css?v=16">
 <link rel="stylesheet" href="assets/styles/modals.css?v=36">
 <link rel="stylesheet" href="assets/styles/responsive-globals.css?v=2">
 <link rel="stylesheet" href="assets/styles/dark.css?v=2">
@@ -477,12 +477,28 @@
         <button class="icon-btn import-btn" id="importBtn" onclick="importData()" data-i18n="importBtn">IMPORT</button>
       </div>
     </div>
-    <!-- HERO: 武格指数 主役席 + identity (B 縦律 — l-bracket/ink-stroke は筆致棄却 + mock 準拠で削除 2026-06-11) -->
+    <!-- HERO: 武格指数 主役席 + identity (B 縦律 — l-bracket は削除のまま。
+         ink-stroke 朱筆 = 兄貴指示で復活 2026-06-12、label 背後に溶け込ませる) -->
     <div class="hero hero-wuxia" id="heroRoot" data-mode="score">
+      <svg class="ink-stroke" viewBox="0 0 600 240" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <filter id="inkB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.012 0.16" numOctaves="2" seed="4" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="34"/>
+          </filter>
+          <linearGradient id="inkGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="rgba(200,60,43,0)"/>
+            <stop offset="0.25" stop-color="rgba(200,60,43,0.35)"/>
+            <stop offset="0.7" stop-color="rgba(138,31,23,0.25)"/>
+            <stop offset="1" stop-color="rgba(200,60,43,0)"/>
+          </linearGradient>
+        </defs>
+        <path d="M20,140 C140,70 360,60 560,118" stroke="url(#inkGrad)" stroke-width="80" fill="none" stroke-linecap="round" filter="url(#inkB)"/>
+      </svg>
       <div class="h-main">
         <div class="seat-main swap-anim" id="heroSeatMain">
           <div class="hero-block" id="heroBlockScore">
-            <div class="eyebrow">STATUS SCORE · <span data-i18n="heroSeatScore">武格指数</span></div>
+            <div class="eyebrow"><span class="seat-title" data-i18n="heroSeatScore">武格指数</span><span class="seat-en">STATUS SCORE</span></div>
             <div class="hb-num"><span class="num hero-number" id="heroScore">0</span></div>
           </div>
         </div>
@@ -550,7 +566,7 @@
           <div class="pwr"><span data-i18n="importLabelXiuwei">総合武力</span><b id="heroPower">—</b><span class="hero-tier tier-badge" id="heroTierBadge">--</span></div>
           <div class="seat-sub swap-anim" id="heroSeatSub">
             <div class="hero-block" id="heroBlockDps">
-              <div class="eyebrow">ROTATION DPS · <span data-i18n="heroSeatDps">演武</span></div>
+              <div class="eyebrow"><span class="seat-title" data-i18n="heroSeatDps">演武</span><span class="seat-en">ROTATION DPS</span></div>
               <div class="hb-num hb-coming" data-i18n="heroDpsComing">COMING SOON</div>
             </div>
           </div>
