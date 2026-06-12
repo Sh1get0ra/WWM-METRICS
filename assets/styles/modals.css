@@ -2457,6 +2457,99 @@
   background: var(--c-cmp-modal-a--modal-header-bg);
 }
 
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     TOOL MODAL (逆パターン二層化 2026-06-12 spec)
+     ツール機能 modal 共通: header/footer=紙 / body=墨。
+     武具対照 .wwm-cmp-modal-a の語彙 (L字bracket/題字/footer帯) を反転。
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+.wwm-tool-modal {
+  position: relative;
+  isolation: isolate;
+  /* 地 = 墨 (body が透ける面)。対照 modal の header 墨と同 token */
+  background: var(--c-cmp-modal-a--modal-header-bg);
+  border: 1px solid var(--gold-deep);
+  border-radius: 0 0 2px 2px;
+  padding: 0;
+}
+/* 旧 .wwm-modal の金 radial 装飾/角飾りは tool modal では殺す (引き算) */
+.wwm-tool-modal::before, .wwm-tool-modal::after { display: none; }
+
+/* L字 bracket 四隅 (対照 modal と同寸・金) */
+.wwm-tool-modal .wwm-tool-bracket {
+  position: absolute; width: 14px; height: 14px;
+  border: 1px solid var(--gold-deep); opacity: 0.7;
+  pointer-events: none; z-index: 3;
+}
+.wwm-tool-modal .wwm-tool-bracket-tl { top: 6px; left: 6px; border-right: none; border-bottom: none; }
+.wwm-tool-modal .wwm-tool-bracket-tr { top: 6px; right: 6px; border-left: none; border-bottom: none; }
+.wwm-tool-modal .wwm-tool-bracket-bl { bottom: 6px; left: 6px; border-right: none; border-top: none; }
+.wwm-tool-modal .wwm-tool-bracket-br { bottom: 6px; right: 6px; border-left: none; border-top: none; }
+
+/* header = 紙帯 (.wwm-ws-paper を class 併用 = 配下 token 紙化) */
+.wwm-tool-modal .wwm-modal-header {
+  background: linear-gradient(180deg, var(--kami-0), var(--kami-1));
+  border-bottom: 1px solid var(--gold-deep);
+  padding: var(--space-3) var(--space-4) var(--space-2-5);
+}
+.wwm-tool-modal .wwm-modal-header::after { display: none; } /* 旧金線 glow 廃止 */
+/* 題字: ja 明朝 + EN sub + 朱 seal (対照 modal h2 と同構造) */
+.wwm-tool-modal .wwm-modal-header h2 {
+  display: flex; align-items: baseline; gap: 10px;
+  color: var(--kami-ink); text-shadow: none; text-transform: none;
+  font-family: var(--f-display, 'Noto Serif JP'); letter-spacing: 0.12em;
+}
+.wwm-tool-modal .wwm-tool-title-ja { font-size: var(--text-lg); font-weight: 700; }
+.wwm-tool-modal .wwm-tool-title-en {
+  font-family: var(--f-mono, 'Rajdhani'); font-size: var(--text-xs);
+  letter-spacing: 0.22em; color: #6a5236; font-weight: 600;
+}
+.wwm-tool-modal .wwm-tool-seal {
+  font-family: var(--f-display, 'Noto Serif JP'); font-size: var(--text-sm);
+  color: var(--kami-0); background: var(--vermilion);
+  padding: 1px 5px; border-radius: 1px; font-weight: 700;
+}
+.wwm-tool-modal .wwm-modal-close { color: var(--kami-ink); }
+.wwm-tool-modal .wwm-modal-close:hover { background: rgba(58,38,22,0.10); }
+
+/* body = 墨 (token 既定のまま。背景は modal 地が透ける) */
+.wwm-tool-modal .wwm-modal-body { padding: var(--space-4); }
+
+/* footer = 紙帯 (body の外、対照 footer-a の反転) */
+.wwm-tool-modal-footer {
+  background: linear-gradient(180deg, var(--kami-1), var(--kami-0));
+  border-top: 1px solid var(--gold-deep);
+  padding: var(--space-3) var(--space-4) var(--space-3-5);
+  display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+}
+/* 紙帯上のボタン素値再宣言 (沈み罠対策 — paper scope 越しでも明示) */
+.wwm-tool-modal-footer .wwm-btn-primary {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: var(--ink-light, #2a1c12); border-radius: 0;
+}
+.wwm-tool-modal-footer .wwm-btn-secondary {
+  background: transparent; color: #2a1c12;
+  border: 1px solid var(--c-gold-deep-strong, rgba(138,106,32,0.5)); border-radius: 0;
+}
+
+/* タブ行 (NOTE / 飛簡 共用): 紙帯に並び、active = 墨 (body へ差し込み) */
+.wwm-tool-tabs {
+  display: flex; gap: 2px; padding: 0 var(--space-4);
+  background: var(--kami-1);
+  border-bottom: 1px solid var(--gold-deep);
+}
+.wwm-tool-tab {
+  padding: 7px 18px; border: 1px solid transparent; border-bottom: none;
+  background: transparent; color: #6a5236; cursor: pointer;
+  font-family: var(--f-display, 'Noto Serif JP'); font-size: var(--text-sm);
+  font-weight: 600; letter-spacing: 0.1em; border-radius: 2px 2px 0 0;
+}
+.wwm-tool-tab.active {
+  background: var(--c-cmp-modal-a--modal-header-bg);
+  color: #f0d28a; border-color: var(--gold-deep);
+  position: relative; top: 1px;
+}
+.wwm-tool-tab:disabled { opacity: 0.45; cursor: not-allowed; }
+
 } /* end @layer modals */
 
 /* 紙 modal の rows padding — dark.css の html[data-theme=dark] rule (@layer dark > modals)
