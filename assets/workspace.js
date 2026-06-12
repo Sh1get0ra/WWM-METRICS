@@ -116,7 +116,8 @@
     document.querySelectorAll('[data-kaisho]').forEach(function (el) {
       var entry = dict[el.dataset.kaisho];
       if (!entry) return;
-      if (ja) {
+      // data-kaisho-fixed = 全言語共通表示 (hero 題字 武格指数/演武 — 兄貴指定 2026-06-12)
+      if (ja || el.hasAttribute('data-kaisho-fixed')) {
         el.setAttribute('aria-label', entry.text);
         el.setAttribute('role', 'img');
         el.innerHTML = '<svg class="kaisho-svg" viewBox="' + entry.vb +

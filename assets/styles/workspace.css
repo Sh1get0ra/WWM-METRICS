@@ -680,6 +680,11 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   display: inline-block;
   vertical-align: -0.18em;
 }
+/* zh = 玉ねぎ (日本語フォント) の簡体グリフ無し → Ma Shan Zheng (簡体毛筆楷書、
+   読込済 Google Fonts) をテキストのまま当てる — SVG 不要で筆の統一感 (兄貴案 2026-06-12) */
+html[lang="zh-CN"] [data-kaisho] {
+  font-family: 'Ma Shan Zheng', var(--f-display);
+}
 
 .wwm-ws-tab:hover { color: var(--sumi-text); }
 .wwm-ws-tab[aria-selected="true"] {
