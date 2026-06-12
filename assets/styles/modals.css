@@ -666,7 +666,8 @@
   opacity: var(--c-cmp-modal-bg-icon-opacity);
   pointer-events: none;
   z-index: 0;
-  filter: brightness(0) invert(1) drop-shadow(0 0 14px var(--gold-bright-mid));
+  /* 薄墨透かし (③ 2026-06-13 兄貴決定) — 白抜き+金glow は紙 body 上で不可視 */
+  filter: brightness(0);
 }
 /* 武具対照のみ 50% UP + 右下寄せ */
 .wwm-cmp-modal-bg-icon-gear {
@@ -1030,10 +1031,9 @@
   background-position: calc(100% + 40px) calc(100% + 40px);
   background-size: 60%;
   opacity: var(--c-modal-bg-icon-opacity);
-  filter:
-    brightness(0) invert(1)
-    drop-shadow(0 0 10px var(--gold-bright-strong))
-    drop-shadow(0 0 22px rgba(240,210,138,0.45));
+  /* 薄墨透かし (③ 2026-06-13 兄貴決定) — 旧 白抜き+金glow は紙 body 上で不可視。
+     黒 silhouette × 低 opacity = 紙の地色越しに焦茶の滲み (header/footer の墨と呼応) */
+  filter: brightness(0);
   pointer-events: none;
   z-index: 0;
 }
@@ -1307,11 +1307,10 @@
 .wwm-diag-modal .wwm-modal-bg-icon {
   background-size: 30% !important;
   background-position: calc(100% - 12px) calc(100% + 30px) !important;
-  filter:
-    brightness(0) invert(1)
-    drop-shadow(0 0 10px rgba(255,107,74,0.7))
-    drop-shadow(0 0 22px rgba(200,60,43,0.45));
-  opacity: var(--c-diag-modal--modal-bg-icon-opacity);
+  /* 薄墨透かし (③ 2026-06-13)。opacity は委譲 token (--c-diag-modal--*) だと :root で
+     0.18 に固化され paper scope 上書き不達 → base token 直参照で紙値 0.08 を拾う */
+  filter: brightness(0);
+  opacity: var(--c-modal-bg-icon-opacity);
 }
 
 

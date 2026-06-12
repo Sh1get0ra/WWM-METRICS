@@ -128,7 +128,9 @@
   --c-cmp-preview-zero-fg: var(--bone-dim);
   --c-cmp-lv-select-fg: var(--c-gold-rich);
   --c-cmp-stat-select-bg: var(--surf-shade);
-  --c-cmp-modal-bg-icon-opacity: 0.22;
+  /* bg-icon = 薄墨透かし化 (③ 2026-06-13) — 黒 silhouette は白抜きより視認強 → 0.22 から減 */
+  --c-cmp-modal-bg-icon-opacity: 0.08;
+  --c-modal-bg-icon-opacity: 0.08;
 
   /* gear / xinfa card */
   --c-icon-dim-opacity:   0.22;
