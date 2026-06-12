@@ -533,6 +533,8 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   z-index: auto;
   color: var(--sumi-text);
 }
+/* rest (ステ一覧) も透明化 — rail 掛軸 BG (qs-bg) が透ける (兄貴指示 2026-06-12) */
+.wwm-ws-rail .wwm-sb-rest { background: transparent; }
 /* rail 頭 — 金ラベル + 朱印 (紙化は違和感 → 金/朱 accent 方針) */
 .wwm-rail-head {
   display: flex; align-items: center; justify-content: space-between;
