@@ -661,7 +661,9 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
 .wwm-ws-tab {
   display: flex; align-items: baseline; justify-content: center; gap: 8px;
   flex: 0 1 150px; /* 等幅固定 — 文字数で幅を変えない */
-  font-family: var(--f-display); font-weight: 600; font-size: 15px; letter-spacing: 0.1em;
+  font-family: var(--f-display); font-weight: 600;
+  font-size: 20px; /* 15→20 (兄貴指定 2026-06-12 — 楷書 SVG は 1.25em 連動で 25px) */
+  letter-spacing: 0.1em;
   color: var(--sumi-text-3);
   background: none; border: none;
   border-radius: 1px 1px 0 0;
