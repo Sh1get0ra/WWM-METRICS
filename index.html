@@ -64,7 +64,7 @@
 <link rel="stylesheet" href="assets/styles/xinfa.css?v=3">
 <link rel="stylesheet" href="assets/styles/anlz.css?v=7">
 <link rel="stylesheet" href="assets/styles/mobile.css?v=10">
-<link rel="stylesheet" href="assets/styles/workspace.css?v=17">
+<link rel="stylesheet" href="assets/styles/workspace.css?v=18">
 <link rel="stylesheet" href="assets/styles/modals.css?v=36">
 <link rel="stylesheet" href="assets/styles/responsive-globals.css?v=2">
 <link rel="stylesheet" href="assets/styles/dark.css?v=2">
@@ -513,49 +513,6 @@
               <span id="heroBaselineTierBadge" class="tier-badge tier-badge-baseline" hidden></span>
             </span>
           </div>
-          <div class="luopan swap-anim">
-            <!-- 外側 tick ring 60本 -->
-            <svg class="luopan-ticks" viewBox="0 0 160 160" aria-hidden="true">
-              <g id="luopanTicks"></g>
-            </svg>
-            <!-- 物理/属性 arc -->
-            <svg class="luopan-arc" viewBox="0 0 160 160" aria-hidden="true">
-              <defs>
-                <linearGradient id="physGrad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#c83c2b"/>
-                  <stop offset="1" stop-color="#e8513a"/>
-                </linearGradient>
-                <linearGradient id="elemGrad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#7fa88a"/>
-                  <stop offset="1" stop-color="#a8d4b4"/>
-                </linearGradient>
-              </defs>
-              <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(232,215,180,0.06)" stroke-width="2"/>
-              <circle id="arcPhys" cx="80" cy="80" r="68" fill="none"
-                stroke="url(#physGrad)" stroke-width="6"
-                stroke-dasharray="0 427.26"
-                transform="rotate(-90 80 80)"
-                style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
-              <circle id="arcElem" cx="80" cy="80" r="68" fill="none"
-                stroke="url(#elemGrad)" stroke-width="6"
-                stroke-dasharray="0 427.26"
-                transform="rotate(-90 80 80)"
-                style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
-            </svg>
-            <!-- 内側 donut -->
-            <div class="luopan-inner">
-              <svg viewBox="0 0 136 136">
-                <circle class="donut-bg" cx="68" cy="68" r="50" fill="none" stroke="rgba(232,215,180,.06)" stroke-width="16"/>
-                <circle id="donutDmgSegCrit"     class="donut-seg" cx="68" cy="68" r="50" fill="none" stroke="var(--chart-crit)"     stroke-width="16" stroke-dasharray="0 314.16" stroke-dashoffset="0" style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
-                <circle id="donutDmgSegSympathy" class="donut-seg" cx="68" cy="68" r="50" fill="none" stroke="var(--chart-sympathy)" stroke-width="16" stroke-dasharray="0 314.16" stroke-dashoffset="0" style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
-                <circle id="donutDmgSegGraze"    class="donut-seg" cx="68" cy="68" r="50" fill="none" stroke="var(--chart-graze)"    stroke-width="16" stroke-dasharray="0 314.16" stroke-dashoffset="0" style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
-                <circle id="donutDmgSegNormal"   class="donut-seg" cx="68" cy="68" r="50" fill="none" stroke="var(--chart-normal)"   stroke-width="16" stroke-dasharray="0 314.16" stroke-dashoffset="0" style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
-              </svg>
-              <div class="luopan-center">
-                <div class="luopan-center-label" data-i18n="donutDmgCenter">勁率</div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       <div class="h-id">
@@ -568,6 +525,50 @@
             <div class="hero-block" id="heroBlockDps">
               <div class="eyebrow"><span class="seat-title" data-i18n="heroSeatDps">演武</span><span class="seat-en">ROTATION DPS</span></div>
               <div class="hb-num hb-coming" data-i18n="heroDpsComing">COMING SOON</div>
+            </div>
+          </div>
+        </div>
+        <!-- donut = hero 右端 (兄貴スケッチ 2026-06-12 — h-aside から移設、ID/listener 無傷の node 移動) -->
+        <div class="luopan swap-anim">
+          <!-- 外側 tick ring 60本 -->
+          <svg class="luopan-ticks" viewBox="0 0 160 160" aria-hidden="true">
+            <g id="luopanTicks"></g>
+          </svg>
+          <!-- 物理/属性 arc -->
+          <svg class="luopan-arc" viewBox="0 0 160 160" aria-hidden="true">
+            <defs>
+              <linearGradient id="physGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#c83c2b"/>
+                <stop offset="1" stop-color="#e8513a"/>
+              </linearGradient>
+              <linearGradient id="elemGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#7fa88a"/>
+                <stop offset="1" stop-color="#a8d4b4"/>
+              </linearGradient>
+            </defs>
+            <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(232,215,180,0.06)" stroke-width="2"/>
+            <circle id="arcPhys" cx="80" cy="80" r="68" fill="none"
+              stroke="url(#physGrad)" stroke-width="6"
+              stroke-dasharray="0 427.26"
+              transform="rotate(-90 80 80)"
+              style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
+            <circle id="arcElem" cx="80" cy="80" r="68" fill="none"
+              stroke="url(#elemGrad)" stroke-width="6"
+              stroke-dasharray="0 427.26"
+              transform="rotate(-90 80 80)"
+              style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
+          </svg>
+          <!-- 内側 donut -->
+          <div class="luopan-inner">
+            <svg viewBox="0 0 136 136">
+              <circle class="donut-bg" cx="68" cy="68" r="50" fill="none" stroke="rgba(232,215,180,.06)" stroke-width="16"/>
+              <circle id="donutDmgSegCrit"     class="donut-seg" cx="68" cy="68" r="50" fill="none" stroke="var(--chart-crit)"     stroke-width="16" stroke-dasharray="0 314.16" stroke-dashoffset="0" style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
+              <circle id="donutDmgSegSympathy" class="donut-seg" cx="68" cy="68" r="50" fill="none" stroke="var(--chart-sympathy)" stroke-width="16" stroke-dasharray="0 314.16" stroke-dashoffset="0" style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
+              <circle id="donutDmgSegGraze"    class="donut-seg" cx="68" cy="68" r="50" fill="none" stroke="var(--chart-graze)"    stroke-width="16" stroke-dasharray="0 314.16" stroke-dashoffset="0" style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
+              <circle id="donutDmgSegNormal"   class="donut-seg" cx="68" cy="68" r="50" fill="none" stroke="var(--chart-normal)"   stroke-width="16" stroke-dasharray="0 314.16" stroke-dashoffset="0" style="filter:drop-shadow(0 0 5px rgba(232,81,58,0.6));"/>
+            </svg>
+            <div class="luopan-center">
+              <div class="luopan-center-label" data-i18n="donutDmgCenter">勁率</div>
             </div>
           </div>
         </div>

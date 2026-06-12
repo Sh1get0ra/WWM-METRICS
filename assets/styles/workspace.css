@@ -452,11 +452,10 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   font-size: 44px; line-height: 0.88; letter-spacing: -0.01em;
   color: var(--c-hero-next-val-fg);
 }
-/* donut = 実物 = 既存 .luopan を h-aside 内で縮小。
-   ⚠ 負 margin での引き上げは NEXT chip 可視時に重なり事故 (2026-06-11) — 禁止。
-   縦位置調整は h-aside の padding-top で行う (NEXT/donut は素直な縦 stack) */
-.hero-wuxia .h-aside .luopan { width: 120px; height: 120px; }
-.hero-wuxia .h-aside .luopan-center-label { font-size: 17px; } /* 中心ラベルは外枠比例しない → サイズ別指定 (160px 時代の 30px は 120px 枠で過大) */
+/* donut = hero 一番右 (h-id 末尾、兄貴スケッチ 2026-06-12 — h-aside 配置は「不自然」で移設)。
+   ⚠ 負 margin での引き上げ禁止 (2026-06-11 重なり事故)。 */
+.hero-wuxia .h-id .luopan { width: 120px; height: 120px; flex: 0 0 120px; margin-left: 18px; }
+.hero-wuxia .h-id .luopan-center-label { font-size: 17px; } /* 中心ラベルは外枠比例しない → サイズ別指定 (160px 時代の 30px は 120px 枠で過大) */
 
 /* 右 identity: アバター煙溶け + キャラ名 + 総合武力 + 補助席 */
 .hero-wuxia .h-id { margin-left: auto; display: flex; align-items: center; gap: 6px; }
@@ -752,7 +751,7 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
 
 @media (max-width: 900px) {
   .hero-wuxia .avatar { width: 92px; height: 88px; flex: 0 0 92px; }
-  .hero-wuxia .h-aside .luopan { width: 96px; height: 96px; }
+  .hero-wuxia .h-id .luopan { width: 96px; height: 96px; flex: 0 0 96px; margin-left: 10px; }
   .hero-wuxia .h-id-info { min-width: 0; }
   .wwm-ws-body { padding: 20px 24px 40px; }
   .wwm-ws-tabs { padding: 6px 24px 0; }
@@ -778,8 +777,8 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   .hero-wuxia .hero-next-label { font-size: 9px; letter-spacing: 0.2em; }
   .hero-wuxia .hero-next-val { font-size: 22px; }
   .hero-wuxia .hero-next-arrow { font-size: 12px; }
-  .hero-wuxia .h-aside .luopan { width: 56px; height: 56px; } /* 390px で 1 行に収める (donut 右端切れ防止) */
-  .hero-wuxia .h-aside .luopan-center-label { font-size: 8px; letter-spacing: 0.1em; }
+  .hero-wuxia .h-id .luopan { width: 56px; height: 56px; flex: 0 0 56px; margin-left: auto; } /* 390px: h-id 右端寄せ */
+  .hero-wuxia .h-id .luopan-center-label { font-size: 8px; letter-spacing: 0.1em; }
   /* identity = score 行の下に明示 block 化 (margin-left:auto / flex-center 由来の
      重なりを解除)。mock 同様 縦 stack へ */
   .hero-wuxia .h-id { margin: 12px 0 0; margin-left: 0; display: flex; align-items: center; clear: both; }
