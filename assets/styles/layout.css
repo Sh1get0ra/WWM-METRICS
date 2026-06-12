@@ -30,10 +30,13 @@ html.wwm-view-sidebar .hero-wuxia,
 html.wwm-view-sidebar .ink-stroke {
   display: none;
 }
-/* OBS: app grid 解除 → rail 単独全画面 (rail-in の sticky は OBS でも無害) */
+/* OBS: app grid 解除 → rail 単独全画面 (rail-in の sticky は OBS でも無害)。
+   background transparent = workspace の sumi-1 が OBS 透明 overlay (--overlay-bg-alpha)
+   を遮蔽していた gate 漏れの修正 (2026-06-12 BG 注入検証で発見) */
 html.wwm-view-sidebar .wwm-app {
   display: block;
   min-height: 100vh;
+  background: transparent;
 }
 html.wwm-view-sidebar .wwm-ws-rail {
   display: block;

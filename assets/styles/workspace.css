@@ -289,10 +289,28 @@
   grid-template-columns: var(--rail-w) 1fr;
   grid-template-rows: auto 1fr;
   min-height: 100vh;
-  background: var(--sumi-1); /* 行間 subpixel 隙間も墨で埋める */
+  background: var(--sumi-1); /* 公式 BG (::before) の CDN 失敗時 fallback + overscroll 領域の墨 */
   transition: grid-template-columns .2s var(--ease-out-quart);
+  /* ::before z:-1 を app 内最背面に閉じる (子の z-index を触らない) */
+  isolation: isolate;
 }
 .wwm-app[data-rail="min"] { grid-template-columns: var(--rail-w-min) 1fr; }
+
+/* 公式 BG 注入 — 上帯/rail/tabs の透過部から地続きに見える 1 枚。
+   background-attachment: fixed は iOS Safari 死 → fixed 擬似要素方式。
+   painting order: .wwm-app の sumi-1 → 本層 (負 z) → 子要素 = fallback が下に生きる。
+   overlay = 墨 (上薄下濃) で文字コントラスト確保、濃度は目視調整値。
+   OBS view (?view=sidebar) は透明配信前提 = fixed BG 禁止 → :not gate (mini-hero L766 と同型) */
+html:not(.wwm-view-sidebar) .wwm-app::before {
+  content: "";
+  position: fixed; inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(20,16,9,0.30), rgba(11,9,8,0.72)),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") left top / 100% auto no-repeat
+    var(--sumi-0); /* 画像は横長帯 (685×222) — cover 4x はボケ過大 → 幅 fit、下端は原画の黒 gradient が墨に溶ける */
+}
 
 /* 紙の grain — 唯一許される質感。app 全面 1 枚 (墨上は実質不可視) =
    面ごとに乗せると粒の有無で境目が割れる、全面統一で継ぎ目が物理的に消える */
@@ -319,7 +337,7 @@
 .wwm-band {
   grid-column: 1 / 3;
   position: relative;
-  background: var(--sumi-1);
+  background: transparent; /* 公式 BG (.wwm-app::before) を透過で見せる */
   color: var(--sumi-text);
   overflow: hidden;
 }
@@ -450,7 +468,7 @@
 .wwm-ws-rail {
   grid-row: 2 / 3;
   position: relative;
-  background: var(--sumi-1);
+  background: transparent; /* 公式 BG (.wwm-app::before) を透過で見せる */
   color: var(--sumi-text);
   /* 金罫は紙側の縁取り (.wwm-ws-body / footer border-left) — 墨同士は地続き */
   /* overflow: clip (not hidden): kanji-mark 透かしを clip しつつ scroll container を
@@ -531,7 +549,9 @@
 /* ============ 紙面 (main) ============ */
 .wwm-ws-main {
   grid-row: 2 / 3;
-  background: var(--kami-0);
+  /* 紙背景は .wwm-ws-body / footer が持つ (main 全体だと tabs 帯領域まで紙化し
+     非選択 tab の公式 BG 透過が死ぬ) */
+  background: transparent;
   min-width: 0;
   display: flex; flex-direction: column;
 }
@@ -539,7 +559,7 @@
 .wwm-ws-tabs {
   display: flex; align-items: flex-end; gap: 2px;
   padding: 6px 36px 0;
-  background: var(--sumi-1);
+  background: transparent; /* 非選択部 = 公式 BG 透過。active tab の kami-0 差し込みは不変 */
   border-bottom: 1px solid var(--gold-deep);
   position: relative; z-index: 20;
 }
@@ -602,7 +622,7 @@
 }
 .wwm-preset-pop .pp-act:hover { border-color: var(--gold-deep); color: var(--kami-ink); }
 
-.wwm-ws-body { padding: 24px 36px 44px; flex: 1; border-left: 1px solid var(--gold-deep); }
+.wwm-ws-body { padding: 24px 36px 44px; flex: 1; border-left: 1px solid var(--gold-deep); background: var(--kami-0); }
 .wwm-ws-panel { display: none; }
 .wwm-ws-panel.active { display: block; animation: wsIn .15s ease; }
 @keyframes wsIn { from { opacity: 0; } to { opacity: 1; } }
@@ -655,9 +675,11 @@
 .wwm-teaser .road { display: flex; justify-content: center; gap: 22px; margin-top: 22px; font-family: var(--f-mono); font-weight: 600; font-size: 11px; letter-spacing: .1em; color: var(--sumi-text-3); }
 .wwm-teaser .road b { color: var(--gold); font-weight: 600; }
 
-/* footer 配置 — 既存 .wwm-footer の見た目は既存 CSS、紙面内の border-left 金罫のみ提供 */
+/* footer 配置 — 既存 .wwm-footer の見た目は既存 CSS、紙面内の border-left 金罫 +
+   紙背景 (main から移譲 — tabs 帯透過化のため main 全体背景は廃止) */
 .wwm-ws-main .wwm-footer {
   border-left: 1px solid var(--gold-deep);
+  background: var(--kami-0);
 }
 
 /* ============ tablet 調整 ============ */
