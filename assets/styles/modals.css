@@ -2570,6 +2570,38 @@
 }
 .wwm-modal-body.wwm-ws-paper .wwm-btn-secondary:hover { background: rgba(58,38,22,0.08); }
 
+/* ── カード生成 pane の紙対応 (2026-06-13 兄貴指摘「ライト化で文字が見えない」) ──
+   card controls が消費する --c-* / --gold-* は paper scope (workspace.css) 未移植の
+   墨向け明色 → pane scope で紙値に rescope (個別 rule 上書きより波及が読める) */
+.wwm-modal-body.wwm-ws-paper .wwm-card-modal-body {
+  --c-modal-fg: var(--kami-ink);            /* tpl-btn の 武格/軍議 */
+  --c-fg-accent: #8a1f17;                   /* active 文字 = 深朱 */
+  --c-fg-gold-label: #6a4a10;               /* ctl-btn (画像を選ぶ/墨/紙/左/右) = 暗金 */
+  --c-sb-section-title-fg: #b85a14;         /* section title = 朱橙 */
+  --c-focus-ring: var(--vermilion);         /* active 枠 = 朱 (focus 朱統一と整合) */
+  --gold-mid: rgba(138,106,32,0.45);        /* ctl-btn 枠 */
+  --gold-faint: rgba(138,106,32,0.12);      /* active/hover 地 */
+}
+
+/* layout-b (2026-06-13 兄貴画像準拠): 左 = stage + 下段 [テンプレ | 背景] / 右 = 表示項目 + プレイ情報 */
+.wwm-card-layout-b .wwm-card-under {
+  display: grid;
+  grid-template-columns: minmax(200px, 260px) 1fr;
+  gap: var(--space-5);
+  margin-top: var(--space-3);
+}
+.wwm-card-layout-b .wwm-card-under .wwm-card-ctl-section { margin-bottom: 0; }
+.wwm-card-layout-b .wwm-card-bg-head {
+  display: flex; align-items: baseline; gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+.wwm-card-layout-b .wwm-card-bg-head .wwm-card-ctl-title { margin-bottom: 0; flex-shrink: 0; }
+.wwm-card-layout-b .wwm-card-bg-head .wwm-card-stage-hint { margin: 0; }
+.wwm-card-layout-b .wwm-card-post-hint { margin-top: var(--space-4); }
+@media (max-width: 768px) {
+  .wwm-card-layout-b .wwm-card-under { grid-template-columns: 1fr; gap: var(--space-4); }
+}
+
 /* ── 飛簡 modal (wwm-share-modal-b) 固有調整 ────────────────────── */
 /* OBS タブは PC 専用 — mobile では旧 .wwm-share-obs-block { display:none } と等価 */
 @media (max-width: 480px) {
