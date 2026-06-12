@@ -185,13 +185,15 @@
     popup.id = 'wwmDiagPopup';
     popup.className = 'wwm-modal-backdrop';
     popup.innerHTML = `
-      <div class="wwm-modal wwm-modal-square wwm-diag-modal">
-        <div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/cracked-shield.svg');"></div>
-        <div class="wwm-modal-header">
-          <h2>${(window.T&&T.diagTitle)||'弱点指摘 / Diagnostics'}</h2>
+      <div class="wwm-modal wwm-modal-square wwm-tool-modal wwm-diag-modal">
+        <span class="wwm-tool-bracket wwm-tool-bracket-tl"></span><span class="wwm-tool-bracket wwm-tool-bracket-tr"></span>
+        <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
+        <div class="wwm-modal-header wwm-ws-paper">
+          <h2><span class="wwm-tool-title-ja">${(window.T&&T.diagTitleJa)||'弱点指摘'}</span><span class="wwm-tool-title-en">DIAGNOSTICS</span><span class="wwm-tool-seal">診</span></h2>
           <button class="wwm-modal-close" aria-label="Close">×</button>
         </div>
         <div class="wwm-modal-body">
+          <div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/cracked-shield.svg');"></div>
           ${sorted.length ? sorted.map(it => `<div class="wwm-diag-item wwm-diag-${it.type}"><span class="wwm-diag-icon">${it.type==='warn'?'⚠':it.type==='good'?'✓':'ℹ'}</span><span class="wwm-diag-text">${it.text}</span></div>`).join('') : '<div class="wwm-diag-item wwm-diag-good"><span class="wwm-diag-icon">✓</span><span class="wwm-diag-text">弱点なし</span></div>'}
         </div>
       </div>`;

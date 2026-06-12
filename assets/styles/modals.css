@@ -2511,8 +2511,9 @@
 .wwm-tool-modal .wwm-modal-close { color: var(--kami-ink); }
 .wwm-tool-modal .wwm-modal-close:hover { background: rgba(58,38,22,0.10); }
 
-/* body = 墨 (token 既定のまま。背景は modal 地が透ける) */
-.wwm-tool-modal .wwm-modal-body { padding: var(--space-4); }
+/* body = 墨 (token 既定のまま。背景は modal 地が透ける)
+   position: relative = bg-icon (absolute) の包含ブロック (header が紙 = modal 直下に置くと紙帯に被る) */
+.wwm-tool-modal .wwm-modal-body { padding: var(--space-4); position: relative; overflow: hidden; }
 
 /* footer = 紙帯 (body の外、対照 footer-a の反転) */
 .wwm-tool-modal-footer {
