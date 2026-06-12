@@ -238,8 +238,8 @@ finalScore  = statusScore + 4-set bonus (4個セット発動時)</pre>
         <div class="wwm-modal-body" id="wwmNoteTabSpec" style="display:${defaultTab==='spec'?'block':'none'};">${_specHtml()}</div>
         <div class="wwm-modal-body" id="wwmNoteTabChangelog" style="display:${defaultTab==='changelog'?'block':'none'};">${_changelogHtml(entries)}</div>
         <div class="wwm-tool-modal-footer wwm-ws-paper">
-          <a class="wwm-btn-secondary wwm-note-btn-gh" target="_blank" rel="noopener" href="${_ghIssueUrl('bug')}">${ghSvg}${btnBug}</a>
-          <a class="wwm-btn-secondary wwm-note-btn-gh" target="_blank" rel="noopener" href="${_ghIssueUrl('req')}">${ghSvg}${btnReq}</a>
+          <a class="wwm-btn-secondary" target="_blank" rel="noopener" href="${_ghIssueUrl('bug')}">${ghSvg}${btnBug}</a>
+          <a class="wwm-btn-secondary" target="_blank" rel="noopener" href="${_ghIssueUrl('req')}">${ghSvg}${btnReq}</a>
         </div>
       </div>
     `;

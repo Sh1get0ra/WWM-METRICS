@@ -1155,6 +1155,12 @@
 .wwm-note-btn-close { background: linear-gradient(180deg, #8a6f3a 0%, #5a4220 100%); border-color: #3a2810; }
 .wwm-note-btn svg { width: 12px; height: 12px; }
 
+/* footer の secondary ボタン全般 — svg 入り横並び (NOTE/飛簡 footer 共通) */
+.wwm-tool-modal-footer .wwm-btn-secondary {
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.wwm-tool-modal-footer .wwm-btn-secondary svg { width: 12px; height: 12px; flex-shrink: 0; }
+
 .wwm-note-divider {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--brown-6) 20%, var(--brown-4) 50%, var(--brown-6) 80%, transparent);
