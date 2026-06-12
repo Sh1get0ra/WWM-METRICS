@@ -2559,9 +2559,12 @@
 
 /* ── 飛簡 modal (wwm-share-modal-b) 固有調整 ────────────────────── */
 /* OBS タブは PC 専用 — mobile では旧 .wwm-share-obs-block { display:none } と等価 */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .wwm-share-modal-b .wwm-tool-tab[data-tab="obs"] { display: none; }
 }
+
+/* en 表示時は EN sub を出さない (title 自体が英語 = 重複、export.js L715 と同思想の CSS 統一解) */
+html[lang="en"] .wwm-tool-modal .wwm-tool-title-en { display: none; }
 
 /* ── NOTE modal (wwm-note-modal-b) 固有調整 ─────────────────────── */
 /* 旧 .wwm-note-modal-a (720px) から width 系継承 */
