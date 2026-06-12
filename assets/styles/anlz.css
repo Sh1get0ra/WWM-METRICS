@@ -758,7 +758,7 @@ html[lang="en"] .wwm-cmp-title-en {
   position: absolute;
   inset: 0;
   background-repeat: no-repeat;
-  background-position: calc(100% + 40px) calc(100% + 40px);
+  background-position: calc(100% + 80px) calc(100% + 80px); /* 右下へ寄せ — modal bg-icon と同値 (兄貴調整 2026-06-13) */
   background-size: 60%;
   opacity: var(--c-anlz-bgicon-opacity);
   filter:
@@ -769,14 +769,10 @@ html[lang="en"] .wwm-cmp-title-en {
   z-index: 0;
 }
 
-/* タブ別 背景画像 (fallback: 装備最適化の anvil) — CSS 基準パスで icons/ 直下 */
-.wwm-anlz-bgicon { background-image: url('../icons/anvil-impact.svg'); }
+/* タブ別切替 廃止 — 公式素材で固定 (タブでアイコン変えない、兄貴指定 2026-06-13)。履歴のみ別素材 */
+.wwm-anlz-bgicon { background-image: url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b3eed7ba50118c397aMSc1Axt605.png'); }
 
-.wwm-anlz[data-active-tab="opt"]     .wwm-anlz-bgicon { background-image: url('../icons/anvil-impact.svg'); }
-
-.wwm-anlz[data-active-tab="rank"]    .wwm-anlz-bgicon { background-image: url('../icons/scales.svg'); }
-
-.wwm-anlz[data-active-tab="history"] .wwm-anlz-bgicon { background-image: url('../icons/mountain-road.svg'); }
+.wwm-anlz[data-active-tab="history"] .wwm-anlz-bgicon { background-image: url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b4f773639c89b2de89vjqZazt605.png'); }
 
 /* 旧 角装飾 (擬似要素) も無効化 */
 .wwm-anlz-body .wwm-analysis-card::before,

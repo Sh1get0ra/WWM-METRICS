@@ -61,7 +61,7 @@
     const arr = _histLoad();
     if (!arr.length) {
       root.innerHTML = `<div class="wwm-analysis-card wwm-modal-square">
-        <div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/mountain-road.svg');"></div>
+        <div class="wwm-modal-bg-icon" style="background-image:url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b4f773639c89b2de89vjqZazt605.png');"></div>
         <div class="wwm-analysis-header"><h3>${T_.martialHistoryTab || '武格履歴'}</h3></div>
         <div style="padding:24px;text-align:center;color:var(--paper-mute);font-size:13px;">${T_.historyEmpty || 'まだ履歴がありません。インポート時に自動記録されます。'}</div>
       </div>`;
@@ -137,7 +137,7 @@
     }).join('');
     root.innerHTML = `
       <div class="wwm-analysis-card wwm-modal-square">
-        <div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/mountain-road.svg');"></div>
+        <div class="wwm-modal-bg-icon" style="background-image:url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b4f773639c89b2de89vjqZazt605.png');"></div>
         <div class="wwm-analysis-header"><h3>${T_.martialHistoryTab || '武格履歴'}</h3></div>
         <div style="padding:8px 12px;">
           <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="width:100%;height:${H}px;display:block;">
