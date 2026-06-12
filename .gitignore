@@ -48,3 +48,4 @@ poc/
 
 # workspace 化 design mock (local 確認専用、デプロイ禁止)
 mock/
+.superpowers/
