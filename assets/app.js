@@ -104,6 +104,8 @@ function setLang(lang) {
   if (window.WWMSidebar?.render && !WWMState.roleInfo) {
     try { window.WWMSidebar.render(null); } catch(_) {}
   }
+  // 楷書 SVG 再適用: 上の data-i18n 書換が SVG を text に戻すため必ず最後 (ja のみ SVG 化)
+  if (window.WWMKaisho) window.WWMKaisho.apply();
 }
 // SEO meta 動的更新: 言語切替時に description / canonical / hreflang対応 og:url / og:title / og:description を現在言語へ。
 // 静的 head は ja 既定 (index.html)。 canonical = ja は base URL、 他言語は ?lang= 付き自己参照 (hreflang sitemap.xml と対)。

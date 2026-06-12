@@ -104,5 +104,35 @@
     });
   }
 
+  // ── 楷書 SVG 適用 (玉ねぎ楷書「激」— 2026-06-12) ──
+  // webfont 配信 = 規約グレー → 使用文字のみの SVG path 化 (「画像化」明示許可範囲)。
+  // data-kaisho 要素を ja 表示時のみ inline <svg><path> に差し替え。
+  // 言語切替時は applyI18n が textContent を書き戻す → setLang 末尾の apply() 再呼出しで
+  // ja なら再 SVG 化 / 他言語ならテキストのまま。paths = assets/kaisho-paths.js (生成物)
+  function kaishoApply() {
+    var dict = window.WWM_KAISHO;
+    if (!dict) return;
+    var ja = (window.currentLang || 'ja') === 'ja';
+    document.querySelectorAll('[data-kaisho]').forEach(function (el) {
+      var entry = dict[el.dataset.kaisho];
+      if (!entry) return;
+      if (ja) {
+        el.setAttribute('aria-label', entry.text);
+        el.setAttribute('role', 'img');
+        el.innerHTML = '<svg class="kaisho-svg" viewBox="' + entry.vb +
+          '" aria-hidden="true"><path fill="currentColor" d="' + entry.d + '"/></svg>';
+      } else if (!el.hasAttribute('data-i18n')) {
+        // i18n 外 literal (奇術): 手でテキスト復元。data-i18n 持ちは applyI18n が復元済
+        el.removeAttribute('role');
+        el.textContent = entry.text;
+      } else {
+        el.removeAttribute('role');
+        el.removeAttribute('aria-label');
+      }
+    });
+  }
+  kaishoApply(); // 初期 (ja default)。?lang= / saved lang は app.js init の setLang 経由で再適用
+
   window.WWMWorkspace = { activate: activate, setRail: setRail };
+  window.WWMKaisho = { apply: kaishoApply };
 })();

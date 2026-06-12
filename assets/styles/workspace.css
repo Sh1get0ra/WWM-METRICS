@@ -670,6 +670,15 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   border-bottom: 1px solid transparent;
   transition: color .15s ease, background .15s ease;
 }
+/* 楷書 SVG (玉ねぎ楷書「激」 path 化 — WWMKaisho が ja 時に差し込む)。
+   height em 連動 = 親 font-size を継承、width は viewBox aspect で自動。
+   楷書は同 px の明朝より小さく見える → 1.25em で光学補正 (tab 15px → 18.75px ≈ 確定値 19px) */
+[data-kaisho] .kaisho-svg {
+  height: 1.25em;
+  display: inline-block;
+  vertical-align: -0.18em;
+}
+
 .wwm-ws-tab:hover { color: var(--sumi-text); }
 .wwm-ws-tab[aria-selected="true"] {
   color: var(--kami-ink);
