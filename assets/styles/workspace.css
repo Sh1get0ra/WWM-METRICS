@@ -361,9 +361,9 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   display: flex; align-items: center;
   padding: 12px 48px;
   border-bottom: 1px solid var(--sumi-ink-1);
-  /* 薄黒 overlay = hero と階調差 (兄貴指示 2026-06-12 — 透過地続きで差別化が無かった)。
-     BG は透けたまま一段沈む */
-  background: rgba(0, 0, 0, 0.34);
+  /* 薄墨 overlay = hero と階調差 (透過地続きで差別化が無かった)。
+     BG は透けたまま一段層が変わる。rgba(50,50,50,0.34) = 兄貴実機チューニング確定値 2026-06-12 */
+  background: rgba(50, 50, 50, 0.34);
 }
 /* 既存 topbar button (.icon-btn / .lang-btn) は既存 CSS のまま。
    ここは flex 配置のみ提供 — 右寄せ button 群コンテナ */
