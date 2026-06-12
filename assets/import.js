@@ -17,7 +17,7 @@ function _b64urlDecode(s) {
 }
 
 // ── Modal helpers ───────────────────────────────────────────────
-function _createModal(id, titleKey, contentHtml, bgIconUrl) {
+function _createModal(id, titleKey, contentHtml, bgIconUrl, opts) {
   let m = document.getElementById(id);
   if (m) { m.remove(); }
   m = document.createElement('div');
@@ -26,13 +26,14 @@ function _createModal(id, titleKey, contentHtml, bgIconUrl) {
   const iconHtml = bgIconUrl
     ? `<div class="wwm-modal-bg-icon" style="background-image:url('${bgIconUrl}');"></div>` : '';
   m.innerHTML = `
-    <div class="wwm-modal wwm-modal-square">
-      ${iconHtml}
-      <div class="wwm-modal-header">
-        <h2 data-i18n="${titleKey}">${(window.T && T[titleKey]) || titleKey}</h2>
+    <div class="wwm-modal wwm-modal-square wwm-tool-modal">
+      <span class="wwm-tool-bracket wwm-tool-bracket-tl"></span><span class="wwm-tool-bracket wwm-tool-bracket-tr"></span>
+      <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
+      <div class="wwm-modal-header wwm-ws-paper">
+        <h2><span class="wwm-tool-title-ja" data-i18n="${titleKey}">${(window.T && T[titleKey]) || titleKey}</span>${opts?.titleEn ? `<span class="wwm-tool-title-en">${opts.titleEn}</span>` : ''}${opts?.seal ? `<span class="wwm-tool-seal">${opts.seal}</span>` : ''}</h2>
         <button class="wwm-modal-close" aria-label="Close">×</button>
       </div>
-      <div class="wwm-modal-body">${contentHtml}</div>
+      <div class="wwm-modal-body">${iconHtml}${contentHtml}</div>
     </div>`;
   document.body.appendChild(m);
   m.querySelector('.wwm-modal-close').addEventListener('click', () => m.remove());
@@ -42,7 +43,7 @@ function _createModal(id, titleKey, contentHtml, bgIconUrl) {
 // ── Setup Modal (Import button → このmodal、2-step inline) ───────
 function openSetupModal() {
   const officialUrl = 'https://www.wherewindsmeetgame.com/m/2025h5sjgj/jp/';
-  const m = _createModal('wwmSetupModal', 'importSetupTitle', '<div id="wwmSetupBody"></div>', 'assets/icons/scroll-quill.svg');
+  const m = _createModal('wwmSetupModal', 'importSetupTitle', '<div id="wwmSetupBody"></div>', 'assets/icons/scroll-quill.svg', { titleEn: 'IMPORT', seal: '取' });
   const body = m.querySelector('#wwmSetupBody');
 
   function renderIntro() {
@@ -165,7 +166,7 @@ async function openPreviewModal(data, importedAt, savedState) {
     stateSrc = WWMHelpers.storage.loadJSON(IMPORT_STATE_KEY);
   }
   const state = stateSrc ? JSON.parse(JSON.stringify(stateSrc)) : defaultState;
-  const m = _createModal('wwmPreviewModal', 'importPreviewTitle', '<div id="wwmCardBody"></div>', 'assets/icons/scroll-quill.svg');
+  const m = _createModal('wwmPreviewModal', 'importPreviewTitle', '<div id="wwmCardBody"></div>', 'assets/icons/scroll-quill.svg', { titleEn: 'PREVIEW', seal: '覧' });
   m.querySelector('.wwm-modal').classList.add('wwm-modal-wide');
   const body = m.querySelector('#wwmCardBody');
 
