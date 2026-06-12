@@ -589,15 +589,17 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 
 /* rail 掛軸 — qs-bg (682×212 横長、座る人物 silhouette) を 90° 回転して墨柱に縦掛け。
    人物 (原画左端) が rail 上部 = band つなぎ目側に来る (R270 は上部無地で分断感 → 棄却)。
-   mask 両端 fade: 上端 160px = band の xf-bg とクロスブレンド (兄貴指摘「つなぎ目が
-   気になる」の解) / 下端 180px = 墨に溶く。mask はローカル座標 (rotate90 で
-   to right = 画面下方向)。sticky rail-in 随伴 = scroll 追従、collapse は rail の
-   overflow: clip が物理切断。OBS は :not gate (app::before と同方針) */
+   描画域 = rail 頭 (ステータス head) 直下の水色ラインから下に物理打ち切り (top 60px、
+   兄貴指定 2026-06-12「縦の画像はあそこで打ち切らないと何やっても浮く」— mask 透明度
+   調整では解決しない、絵の存在域そのものを head 下に限定)。上端 fade 50px = ライン
+   から fade して現れ馴染む / 下端 180px = 墨に溶く。mask はローカル座標 (rotate90 で
+   to right = 画面下方向)。collapse は rail の overflow: clip が物理切断。
+   OBS は :not gate (app::before と同方針) */
 html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   content: "";
   position: absolute;
   z-index: -1;
-  top: 0; left: 0;
+  top: 60px; left: 0;    /* 水色ライン (head 下端) から開始 = 打ち切り */
   width: 100vh;          /* 回転後 = 縦方向の長さ (viewport 高ぶん) */
   height: var(--rail-w); /* 回転後 = rail 幅 */
   transform-origin: 0 0;
@@ -605,8 +607,8 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   background:
     linear-gradient(90deg, rgba(20,16,9,0.35), rgba(11,9,8,0.70)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/qs-bg-32d6898d.png") center / cover no-repeat;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 160px, #000 calc(100% - 180px), transparent);
-  mask-image: linear-gradient(to right, transparent, #000 160px, #000 calc(100% - 180px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 50px, #000 calc(100% - 180px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 50px, #000 calc(100% - 180px), transparent);
   pointer-events: none;
 }
 /* 斬透かしは掛軸絵の上に重ねる (rail-in z0 化で DOM 順負けし不可視化するため) */
