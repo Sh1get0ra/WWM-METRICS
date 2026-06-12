@@ -288,7 +288,10 @@
   display: grid;
   grid-template-columns: var(--rail-w) 1fr;
   grid-template-rows: auto 1fr;
-  min-height: 100vh;
+  /* viewport 固定 L 字 — scroll は .wwm-sb-rest / .wwm-ws-body の内部 2 本のみ
+     (兄貴指示 2026-06-12)。band/rail頭/tabs = 固定表示。≤600 は auto に戻す */
+  height: 100vh;
+  height: 100dvh;
   background: var(--sumi-1); /* 公式 BG (::before) の CDN 失敗時 fallback + overscroll 領域の墨 */
   transition: grid-template-columns .2s var(--ease-out-quart);
   /* ::before z:-1 を app 内最背面に閉じる (子の z-index を触らない) */
@@ -497,10 +500,10 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   background: transparent; /* 公式 BG (.wwm-app::before) を透過で見せる */
   color: var(--sumi-text);
   /* 金罫は紙側の縁取り (.wwm-ws-body / footer border-left) — 墨同士は地続き */
-  /* overflow: clip (not hidden): kanji-mark 透かしを clip しつつ scroll container を
-     作らない → 子 .wwm-rail-in の position: sticky を生かす (Task 9 document scroll 化:
-     hidden だと sticky が無効化し rail が紙面と 1:1 で流れる、 2026-06-11 検証で確認) */
+  /* overflow: clip = kanji-mark/掛軸 ::before のはみ出し切断。
+     viewport 固定化 (2026-06-12) で rail 自体は動かない — scroll は rest 内部のみ */
   overflow: clip;
+  min-height: 0; /* grid item の auto min-size 抑止 — 内容で row 2 が viewport を超えない要 */
   z-index: 10;
 }
 .wwm-ws-rail .kanji-mark {
@@ -510,7 +513,13 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   color: rgba(232,215,180,0.05);
 }
 .wwm-rail-in {
-  position: sticky; top: 0; padding: 18px 22px 30px;
+  /* sticky 廃止 (2026-06-12 viewport 固定化 — rail 自体が動かないため不要)。
+     flex column = head 固定 + sidebar (rest) が残り高で内部 scroll */
+  position: relative; /* 掛軸 ::before の containing block 維持 */
+  height: 100%;
+  display: flex; flex-direction: column;
+  min-height: 0;
+  padding: 18px 22px 30px;
   z-index: 0; /* ::before (掛軸 BG) の z:-1 を rail-in 背面に閉じる stacking context */
 }
 
@@ -555,12 +564,17 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   padding: 0;
   z-index: auto;
   color: var(--sumi-text);
+  /* viewport 固定化 (2026-06-12): rest へ高さ制約を渡す flex chain */
+  display: flex; flex-direction: column;
+  flex: 1; min-height: 0;
 }
-/* rest (ステ一覧) = 透明 + 枠/余白なし — rail 掛軸 BG (qs-bg) に裸で載せる (兄貴指示 2026-06-12) */
+/* rest (ステ一覧) = 透明 + 枠/余白なし — rail 掛軸 BG (qs-bg) に裸で載せる (兄貴指示 2026-06-12)。
+   flex:1 + min-height:0 = 残り高で内部 scroll (overflow-y: auto は sidebar.css 既存) */
 .wwm-ws-rail .wwm-sb-rest {
   background: transparent;
   border: none;
   padding: 0;
+  flex: 1; min-height: 0;
 }
 /* rail 頭 — 金ラベル + 朱印 (紙化は違和感 → 金/朱 accent 方針) */
 .wwm-rail-head {
@@ -587,7 +601,13 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   transition: color .15s ease, border-color .15s ease;
 }
 .wwm-rail-toggle:hover { color: var(--gold-bright); border-color: var(--gold-deep); }
-.wwm-rail-fade { transition: opacity .15s ease; }
+.wwm-rail-fade {
+  transition: opacity .15s ease;
+  /* rail-in flex の高さ制約を sidebar→rest へ素通しする (viewport 固定化 2026-06-12)。
+     rail-fade = head+sidebar の collapse fade wrapper で chain の中間にいる */
+  display: flex; flex-direction: column;
+  flex: 1; min-height: 0;
+}
 .wwm-app[data-rail="min"] .wwm-rail-fade { opacity: 0; pointer-events: none; }
 .wwm-rail-tate {
   position: absolute; inset: 0;
@@ -613,6 +633,7 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
      非選択 tab の公式 BG 透過が死ぬ) */
   background: transparent;
   min-width: 0;
+  min-height: 0; /* grid item auto min-size 抑止 (viewport 固定化 2026-06-12) */
   display: flex; flex-direction: column;
 }
 /* tab 帯 = 墨 (上帯の続き)。active tab = 紙の差し込み — 帳簿のフォルダ tab */
@@ -682,7 +703,14 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
 }
 .wwm-preset-pop .pp-act:hover { border-color: var(--gold-deep); color: var(--kami-ink); }
 
-.wwm-ws-body { padding: 24px 36px 44px; flex: 1; border-left: 1px solid var(--gold-deep); background: var(--kami-0); }
+.wwm-ws-body {
+  padding: 24px 36px 44px; flex: 1; border-left: 1px solid var(--gold-deep); background: var(--kami-0);
+  /* 紙面の内部 scroll (viewport 固定化 2026-06-12 — tabs/footer は固定) */
+  overflow-y: auto;
+  min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-deep) transparent;
+}
 .wwm-ws-panel { display: none; }
 .wwm-ws-panel.active { display: block; animation: wsIn .15s ease; }
 @keyframes wsIn { from { opacity: 0; } to { opacity: 1; } }
@@ -762,7 +790,9 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
 .wwm-bottom-nav { display: none; }
 
 @media (max-width: 600px) {
-  .wwm-app { display: block; }
+  /* mobile = document scroll 維持 (viewport 固定は PC/tablet のみ — 狭幅で hero 固定は場所食い) */
+  .wwm-app { display: block; height: auto; }
+  .wwm-ws-body { overflow-y: visible; }
   .wwm-band-top { padding: 10px 16px; }
   .hero.hero-wuxia { padding: 22px 18px 18px; gap: 0; display: block; position: relative; height: auto; grid-template-columns: none; }
   .wwm-band .kanji-mark { display: block; right: -14px; top: 56%; transform: translateY(-50%); font-size: 150px; color: rgba(232,215,180,0.05); }

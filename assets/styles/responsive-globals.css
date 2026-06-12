@@ -21,17 +21,11 @@
 }
 
 @media (max-width: 480px) {
-  /* ─── mobile main breakpoint (TODO #14 Phase 2-5) ─── */
-
-  /* PC 全画面固定 (overflow:hidden) を解除 → mobile は normal scroll */
-  /* root scroll 抑止 (白scrollbar削除)、 wwm-app-body 内部のみscroll (金色scrollbar) */
-  /* K: JS の body.style.overflow inline (modal scroll-lock 系) 対抗 — strip するな (Step 5 確定) */
-  html, body, body.wwm-layout-active {
-    overflow: hidden !important;
-    height: 100vh;
-    height: 100dvh;
-  }
-
+  /* ─── mobile main breakpoint ─── */
+  /* 旧 rule (html/body overflow:hidden !important + height 100dvh = root scroll 抑止、
+     wwm-app-body 内部 scroll 構造の前提) は workspace v2 で削除 (2026-06-12):
+     mobile = document scroll + bottom nav が正。modal の scroll-lock は
+     JS inline (body.style.overflow) が単独で担う */
 }
 
 @media (max-width: 768px) {
