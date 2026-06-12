@@ -2451,10 +2451,16 @@
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-gold { background: var(--c-gold-deep-faint); color: #7a5a12 !important; border-color: var(--c-gold-deep-strong); }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.13); color: #6f3a9a !important; border-color: rgba(120,60,160,0.5); }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.13); color: #2a5aa0 !important; border-color: rgba(40,90,160,0.5); }
-/* footer = header と同色 (兄貴指定 2026-06-12)。modal 地は縦 gradient (#130f0d→#0d0a08) で
-   下端ほど暗い = footer が header より沈んで見えていた → gradient 上端色を明示 */
+/* footer = header と同 token (--c-cmp-modal-a--modal-header-bg = bg-raised、兄貴指定 2026-06-12)。
+   modal 地は縦 gradient で下端ほど暗く footer が沈んで見えていた */
 .wwm-cmp-footer-a {
-  background: #130f0d;
+  background: var(--c-cmp-modal-a--modal-header-bg);
 }
 
 } /* end @layer modals */
+
+/* 紙 modal の rows padding — dark.css の html[data-theme=dark] rule (@layer dark > modals)
+   が常時適用 (html 属性が dark のまま) のため、light layer (> dark) で本番 light 同値の 0 へ */
+@layer light {
+  .wwm-modal-body.wwm-ws-paper .wwm-cmp-rows { padding: 0; }
+}

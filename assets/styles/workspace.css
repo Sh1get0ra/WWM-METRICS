@@ -98,6 +98,8 @@
   --c-modal-a-option-checked: #e0cfa0;
   --c-modal-a-option-fg: var(--brown-1);
   --c-modal-a-rows-bg: var(--overlay-trace);
+  --c-cmp-modal-a--cmp-rows-border: initial;  /* light 原典 = 枠/影なし (dark = 金線+inset影) */
+  --c-cmp-modal-a--cmp-rows-shadow: initial;
   --c-modal-a-kongfu-header-bg: var(--gold-mid); /* 本番 light 実効 rgba(201,164,90,0.3) 採取値 */
   --c-modal-a-kongfu-header-fg: var(--brown-1);
   --c-modal-a-kongfu-select-fg: var(--brown-1);
