@@ -1686,6 +1686,13 @@
     "ko": "UID",
     "vi": "UID"
   },
+  "wsTabBuild": {
+    "ja": "武備",
+    "en": "Build",
+    "zh": "配装",
+    "ko": "빌드",
+    "vi": "Build"
+  },
   "wsTabGear": {
     "ja": "装備",
     "en": "Gear",

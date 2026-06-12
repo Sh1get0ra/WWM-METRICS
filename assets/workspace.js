@@ -1,10 +1,12 @@
 // ── WWM-METRICS Workspace Engine (Phase 1, 2026-06-11) ──
-// 5 workspace tab 切替 / rail 開閉 / preset popover / hero mode 連携 / mobile bottom nav
+// 4 workspace tab 切替 / rail 開閉 / preset popover / hero mode 連携 / mobile bottom nav
+// (2026-06-12: 装備+心法 → 武備 'build' に統合。旧 localStorage 値 gear/xinfa は
+//  PANELS miss → default fallback で自然 migration)
 (function () {
   'use strict';
   var WS_KEY = 'wwm_workspace_v1';
   var RAIL_KEY = 'wwm_rail_collapsed_v1';
-  var PANELS = { gear: 'wsGear', xinfa: 'wsXinfa', anlz: 'wsAnlz', enbu: 'wsEnbu', hist: 'wsHist' };
+  var PANELS = { build: 'wsBuild', anlz: 'wsAnlz', enbu: 'wsEnbu', hist: 'wsHist' };
 
   function activate(ws) {
     if (!PANELS[ws]) return;
@@ -46,7 +48,7 @@
   // 復元
   var saved = null;
   try { saved = localStorage.getItem(WS_KEY); } catch (e) {}
-  activate(saved && PANELS[saved] ? saved : 'gear');
+  activate(saved && PANELS[saved] ? saved : 'build');
 
   // ── rail 開閉 ──
   var app = document.getElementById('wwmApp');
