@@ -325,7 +325,7 @@
           <h2><span class="wwm-cmp-title-ja">${_T.xinfaTitleJa||'心法対照'}</span><span class="wwm-cmp-title-en">${_T.cmpTitleEn||'COMPARISON'}</span><span class="wwm-cmp-seal">心</span></h2>
           <button class="wwm-modal-close" aria-label="Close">×</button>
         </div>
-        <div class="wwm-modal-body">
+        <div class="wwm-modal-body wwm-ws-paper">
           ${_bgIconHtml}
           <div class="wwm-cmp-grid">
             <div class="wwm-cmp-col wwm-cmp-current">
@@ -342,17 +342,18 @@
               <div class="wwm-cmp-rows wwm-cmp-xinfa-rows" id="wwmCmpXinfaEffect">${_effectsText(newXinfaId, newTier)}</div>
             </div>
           </div>
-          <div class="wwm-cmp-footer-a">
-            <div class="wwm-cmp-delta-block">
-              <span class="wwm-cmp-delta-label">${_T.cmpDeltaLabel||'武格変動'}</span>
-              <span class="wwm-cmp-preview-value" id="wwmCmpXinfaPreviewDelta">+0</span>
-              <span class="wwm-cmp-delta-base" id="wwmCmpXinfaPreviewBase">—</span>
-            </div>
-            <div class="wwm-btn-row wwm-cmp-btn-row">
-              <button class="wwm-btn-primary" id="wwmXinfaApply">${_T.cmpApply||'採用'}</button>
-              <button class="wwm-btn-secondary" id="wwmXinfaReset">${_T.cmpReset||'復元'}</button>
-              <button class="wwm-btn-secondary" id="wwmXinfaCancel">${_T.cmpCancel||'離脱'}</button>
-            </div>
+        </div>
+        <!-- footer = body (紙) の外 = 墨帯 (modal 二層化 2026-06-12) -->
+        <div class="wwm-cmp-footer-a">
+          <div class="wwm-cmp-delta-block">
+            <span class="wwm-cmp-delta-label">${_T.cmpDeltaLabel||'武格変動'}</span>
+            <span class="wwm-cmp-preview-value" id="wwmCmpXinfaPreviewDelta">+0</span>
+            <span class="wwm-cmp-delta-base" id="wwmCmpXinfaPreviewBase">—</span>
+          </div>
+          <div class="wwm-btn-row wwm-cmp-btn-row">
+            <button class="wwm-btn-primary" id="wwmXinfaApply">${_T.cmpApply||'採用'}</button>
+            <button class="wwm-btn-secondary" id="wwmXinfaReset">${_T.cmpReset||'復元'}</button>
+            <button class="wwm-btn-secondary" id="wwmXinfaCancel">${_T.cmpCancel||'離脱'}</button>
           </div>
         </div>
       </div>

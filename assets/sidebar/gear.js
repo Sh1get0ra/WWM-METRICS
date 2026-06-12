@@ -471,7 +471,7 @@
           <h2><span class="wwm-cmp-title-ja">${(window.T&&T.cmpTitleJa)||'武具対照'}</span><span class="wwm-cmp-title-en">${(window.T&&T.cmpTitleEn)||'COMPARISON'}</span><span class="wwm-cmp-seal">比</span></h2>
           <button class="wwm-modal-close" aria-label="Close">×</button>
         </div>
-        <div class="wwm-modal-body">
+        <div class="wwm-modal-body wwm-ws-paper">
           ${bgIconHtml ? bgIconHtml.replace('class="wwm-cmp-bg-icon"', 'class="wwm-cmp-modal-bg-icon wwm-cmp-modal-bg-icon-gear' + ((slot === '9' || slot === '21') ? ' wwm-cmp-modal-bg-icon-gear-small' : (slot === '1' || slot === '2') ? ' wwm-cmp-modal-bg-icon-gear-weapon' : ' wwm-cmp-modal-bg-icon-gear-armor') + '"') : ''}
           <div class="wwm-cmp-grid">
             <div class="wwm-cmp-col wwm-cmp-current${isBowSetSlot?' wwm-cmp-bow':''}">
@@ -500,17 +500,18 @@
               ${isAffixEditable ? `<div class="wwm-cmp-rows" id="wwmCmpNewRows">${renderNewRows()}</div>` : ''}
             </div>
           </div>
-          <div class="wwm-cmp-footer-a">
-            <div class="wwm-cmp-delta-block">
-              <span class="wwm-cmp-delta-label">${(window.T&&T.cmpDeltaLabel)||'武格変動'}</span>
-              <span class="wwm-cmp-preview-value" id="wwmCmpPreviewDelta">+0</span>
-              <span class="wwm-cmp-delta-base" id="wwmCmpPreviewBase">—</span>
-            </div>
-            <div class="wwm-btn-row wwm-cmp-btn-row">
-              <button class="wwm-btn-primary" id="wwmEditApply">${(window.T&&T.cmpApply)||'採用'}</button>
-              <button class="wwm-btn-secondary" id="wwmEditReset">${(window.T&&T.cmpReset)||'復元'}</button>
-              <button class="wwm-btn-secondary" id="wwmEditCancel">${(window.T&&T.cmpCancel)||'離脱'}</button>
-            </div>
+        </div>
+        <!-- footer = body (紙) の外 = 墨帯 (modal 二層化 2026-06-12) -->
+        <div class="wwm-cmp-footer-a">
+          <div class="wwm-cmp-delta-block">
+            <span class="wwm-cmp-delta-label">${(window.T&&T.cmpDeltaLabel)||'武格変動'}</span>
+            <span class="wwm-cmp-preview-value" id="wwmCmpPreviewDelta">+0</span>
+            <span class="wwm-cmp-delta-base" id="wwmCmpPreviewBase">—</span>
+          </div>
+          <div class="wwm-btn-row wwm-cmp-btn-row">
+            <button class="wwm-btn-primary" id="wwmEditApply">${(window.T&&T.cmpApply)||'採用'}</button>
+            <button class="wwm-btn-secondary" id="wwmEditReset">${(window.T&&T.cmpReset)||'復元'}</button>
+            <button class="wwm-btn-secondary" id="wwmEditCancel">${(window.T&&T.cmpCancel)||'離脱'}</button>
           </div>
         </div>
       </div>

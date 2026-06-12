@@ -85,7 +85,7 @@
           <h2><span class="wwm-cmp-title-ja">${(window.T?.cmpArsenalTitle)||'武庫対照'}</span><span class="wwm-cmp-title-en">COMPARISON</span><span class="wwm-cmp-seal">庫</span></h2>
           <button class="wwm-modal-close" aria-label="Close">×</button>
         </div>
-        <div class="wwm-modal-body">
+        <div class="wwm-modal-body wwm-ws-paper">
           <div class="wwm-cmp-modal-bg-icon wwm-cmp-modal-bg-icon-gear wwm-cmp-modal-bg-icon-arsenal" style="background-image:url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/kongfu/images/673361fe92bef95db34510429KLQLykS05.png');"></div>
           <div class="wwm-cmp-grid">
             <div class="wwm-cmp-col wwm-cmp-current">
@@ -100,17 +100,18 @@
               <div class="wwm-cmp-rows" id="wwmArsenalEditRows">${_newRows(newArsenal)}</div>
             </div>
           </div>
-          <div class="wwm-cmp-footer-a">
-            <div class="wwm-cmp-delta-block">
-              <span class="wwm-cmp-delta-label">武格変動</span>
-              <span class="wwm-cmp-preview-value" id="wwmArsenalEditDelta">+0</span>
-              <span class="wwm-cmp-delta-base" id="wwmArsenalEditBase">—</span>
-            </div>
-            <div class="wwm-btn-row wwm-cmp-btn-row">
-              <button class="wwm-btn-primary" id="wwmArsenalEditApply">採用</button>
-              <button class="wwm-btn-secondary" id="wwmArsenalEditReset">復元</button>
-              <button class="wwm-btn-secondary" id="wwmArsenalEditCancel">離脱</button>
-            </div>
+        </div>
+        <!-- footer = body (紙) の外 = 墨帯 (modal 二層化 2026-06-12) -->
+        <div class="wwm-cmp-footer-a">
+          <div class="wwm-cmp-delta-block">
+            <span class="wwm-cmp-delta-label">武格変動</span>
+            <span class="wwm-cmp-preview-value" id="wwmArsenalEditDelta">+0</span>
+            <span class="wwm-cmp-delta-base" id="wwmArsenalEditBase">—</span>
+          </div>
+          <div class="wwm-btn-row wwm-cmp-btn-row">
+            <button class="wwm-btn-primary" id="wwmArsenalEditApply">採用</button>
+            <button class="wwm-btn-secondary" id="wwmArsenalEditReset">復元</button>
+            <button class="wwm-btn-secondary" id="wwmArsenalEditCancel">離脱</button>
           </div>
         </div>
       </div>

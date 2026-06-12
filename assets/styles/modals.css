@@ -625,8 +625,10 @@
 .wwm-cmp-modal-a .wwm-cmp-divider::after  { bottom: 30%; }
 
 .wwm-cmp-footer-a {
-  margin-top: var(--space-4);
-  padding: var(--space-3-5) 0 var(--space-1);
+  /* modal 二層化 (2026-06-12): footer = body (紙) の外の墨帯 — modal 地 (墨) がそのまま出る。
+     左右 padding は旧 body 内時代の見た目に合わせ space-4 */
+  margin-top: 0;
+  padding: var(--space-3) var(--space-4) var(--space-3-5);
   border-top: 1px solid var(--gold-soft);
   display: flex; align-items: center; justify-content: space-between;
   gap: 12px;
@@ -2424,5 +2426,25 @@
 .wwm-ocr-guide-steps { margin: 0 0 8px; padding-left: 20px; font-size: 12px; line-height: 1.7; }
 .wwm-ocr-guide-steps li { margin-bottom: 4px; }
 .wwm-ocr-guide-note { margin: 0; font-size: 11px; color: var(--paper-mute); }
+
+/* ── cmp modal 二層化 (2026-06-12): body = 紙 (.wwm-ws-paper、token は workspace.css
+   paper scope 定義) / header・footer = 墨。rule 上書きは @layer modals (components より
+   後勝ち) のためここに置く ── */
+.wwm-modal-body.wwm-ws-paper {
+  background: var(--kami-0);
+  color: var(--kami-ink);
+}
+/* col の墨地 literal #0d0a08 — 紙上書き */
+.wwm-modal-body.wwm-ws-paper .wwm-cmp-col {
+  background: var(--surf-1);
+}
+/* Lv select = --bg-raised (墨、旧 light でも墨枠が原典) — 紙では浮く → 紙系へ。
+   token rescope でなく pinpoint 上書き (--bg-raised は modal 外殻も参照 = rescope 波及回避) */
+.wwm-modal-body.wwm-ws-paper .wwm-cmp-title .wwm-cmp-lv-select {
+  background-color: var(--c-modal-a-option-bg);
+}
+.wwm-modal-body.wwm-ws-paper .wwm-cmp-title .wwm-cmp-lv-select option {
+  background: var(--c-modal-a-option-bg);
+}
 
 } /* end @layer modals */
