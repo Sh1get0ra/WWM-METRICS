@@ -64,7 +64,7 @@
 <link rel="stylesheet" href="assets/styles/xinfa.css?v=3">
 <link rel="stylesheet" href="assets/styles/anlz.css?v=7">
 <link rel="stylesheet" href="assets/styles/mobile.css?v=10">
-<link rel="stylesheet" href="assets/styles/workspace.css?v=29">
+<link rel="stylesheet" href="assets/styles/workspace.css?v=30">
 <link rel="stylesheet" href="assets/styles/modals.css?v=36">
 <link rel="stylesheet" href="assets/styles/responsive-globals.css?v=3">
 <link rel="stylesheet" href="assets/styles/dark.css?v=2">
@@ -642,10 +642,11 @@
   <!-- 紙面 (main) -->
   <main class="wwm-ws-main wwm-ws-paper" role="main">
     <nav class="wwm-ws-tabs" role="tablist" aria-label="workspace" id="wwmWsTabs">
-      <button class="wwm-ws-tab" role="tab" aria-selected="true" data-ws="build"><span class="n">I</span><span data-i18n="wsTabBuild">武備</span></button>
-      <button class="wwm-ws-tab" role="tab" aria-selected="false" data-ws="anlz"><span class="n">II</span><span data-i18n="wsTabAnlz">格析</span></button>
-      <button class="wwm-ws-tab locked" role="tab" aria-selected="false" data-ws="enbu"><span class="n">III</span><span data-i18n="wsTabEnbu">演武</span></button>
-      <button class="wwm-ws-tab" role="tab" aria-selected="false" data-ws="hist"><span class="n">IV</span><span data-i18n="wsTabHist">履歴</span></button>
+      <!-- ローマ数字連番 = 廃止 (兄貴指示 2026-06-12) -->
+      <button class="wwm-ws-tab" role="tab" aria-selected="true" data-ws="build"><span data-i18n="wsTabBuild">武備</span></button>
+      <button class="wwm-ws-tab" role="tab" aria-selected="false" data-ws="anlz"><span data-i18n="wsTabAnlz">格析</span></button>
+      <button class="wwm-ws-tab locked" role="tab" aria-selected="false" data-ws="enbu"><span data-i18n="wsTabEnbu">演武</span></button>
+      <button class="wwm-ws-tab" role="tab" aria-selected="false" data-ws="hist"><span data-i18n="wsTabHist">履歴</span></button>
       <div class="wwm-ws-tabs-r">
         <button type="button" id="wwmDiagBadge" class="wwm-diag-badge" hidden onclick="WWMSidebar.diag.openPopup()" title="弱点指摘を表示" data-i18n-title="tipDiagBadge">
           <span class="wwm-diag-badge-icon">⚠</span>
@@ -915,10 +916,10 @@
 
 <!-- mobile bottom nav (workspace tab の mobile 版 / PC時 hidden) -->
 <nav class="wwm-bottom-nav" role="tablist" aria-label="workspace mobile">
-  <button class="wwm-bn" role="tab" aria-selected="true" data-ws="build"><span class="n">I</span><span data-i18n="wsTabBuild">武備</span></button>
-  <button class="wwm-bn" role="tab" aria-selected="false" data-ws="anlz"><span class="n">II</span><span data-i18n="wsTabAnlz">格析</span></button>
-  <button class="wwm-bn" role="tab" aria-selected="false" data-ws="enbu"><span class="n">III</span><span data-i18n="wsTabEnbu">演武</span></button>
-  <button class="wwm-bn" role="tab" aria-selected="false" data-ws="hist"><span class="n">IV</span><span data-i18n="wsTabHist">履歴</span></button>
+  <button class="wwm-bn" role="tab" aria-selected="true" data-ws="build"><span data-i18n="wsTabBuild">武備</span></button>
+  <button class="wwm-bn" role="tab" aria-selected="false" data-ws="anlz"><span data-i18n="wsTabAnlz">格析</span></button>
+  <button class="wwm-bn" role="tab" aria-selected="false" data-ws="enbu"><span data-i18n="wsTabEnbu">演武</span></button>
+  <button class="wwm-bn" role="tab" aria-selected="false" data-ws="hist"><span data-i18n="wsTabHist">履歴</span></button>
 </nav>
 
 <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
