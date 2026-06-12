@@ -311,13 +311,15 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   pointer-events: none;
   background:
     linear-gradient(180deg, rgba(20,16,9,0.30), rgba(11,9,8,0.72)),
-    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") left top / clamp(1000px, 100%, 1700px) auto no-repeat
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") left top / 1400px auto no-repeat
     var(--sumi-0);
-  /* 超ワイドで clamp 上限により画像右端 (x=1700) が画面内に来る → 縦の切れ目。
-     右端 280px を fade で墨に溶く (mask 透過域 = ::before 全層消え = 下の sumi-1 が出る、
-     sumi-0 との色差は知覚不可)。≤1700px 画面では fade 位置 = 画面右端 = 実質無影響 */
-  -webkit-mask-image: linear-gradient(to right, #000 calc(min(100%, 1700px) - 280px), transparent min(100%, 1700px));
-  mask-image: linear-gradient(to right, #000 calc(min(100%, 1700px) - 280px), transparent min(100%, 1700px));
+  /* 1400px 固定 (兄貴指定 2026-06-12) — 幅連動の拡縮を完全停止、確定した塩梅を凍結。
+     画像高 454px 固定 ≥ band 高 = 狭幅切れ目なし / 広幅で伸びない。
+     >1400px 画面では画像右端 x=1400 が縦切れ目 → mask で右端 280px を墨へ fade
+     (透過域 = ::before 全層消え = 下の sumi-1、色差知覚不可)。
+     <1400px 画面では fade 位置 = 画面右端 = 実質無影響 */
+  -webkit-mask-image: linear-gradient(to right, #000 calc(min(100%, 1400px) - 280px), transparent min(100%, 1400px));
+  mask-image: linear-gradient(to right, #000 calc(min(100%, 1400px) - 280px), transparent min(100%, 1400px));
   /* 幅 fit (≈2.1x) = シャープ優先。cover 4x 全面案は「伸びすぎ」で棄却 (2026-06-12)。
      下限 1000px: 100% auto は幅連動で縦も縮む → 狭幅 (~800px 以下) で画像高 < band 高
      になり原画下端の白掠れエッジが band 内に露出 (切れ目)。下限で画像高 ≥324px 死守、
@@ -802,8 +804,14 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   /* mobile = document scroll 維持 (viewport 固定は PC/tablet のみ — 狭幅で hero 固定は場所食い) */
   .wwm-app { display: block; height: auto; }
   .wwm-ws-body { overflow-y: visible; }
-  /* mobile band = 縦積みで ~500px — BG 下限をさらに上げ切れ目防止 (scale ≈2.2x = PC 同等) */
-  html:not(.wwm-view-sidebar) .wwm-app::before { background-size: max(100%, 1500px) auto; }
+  /* mobile band = 縦積みで ~500px — 1400px だと画像高 454px で不足 → 1500px 固定。
+     mask は解除必須: base の min(100%,1400px) が mobile では 390px 基準になり
+     画面の 2/3 が fade する事故 (はみ出し crop で右端切れ目は元々画面外 = mask 不要) */
+  html:not(.wwm-view-sidebar) .wwm-app::before {
+    background-size: 1500px auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
   .wwm-band-top { padding: 10px 16px; }
   .hero.hero-wuxia { padding: 22px 18px 18px; gap: 0; display: block; position: relative; height: auto; grid-template-columns: none; }
   .wwm-band .kanji-mark { display: block; right: -14px; top: 56%; transform: translateY(-50%); font-size: 150px; color: rgba(232,215,180,0.05); }
