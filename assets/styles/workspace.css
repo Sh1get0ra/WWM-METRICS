@@ -483,7 +483,31 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   font-size: 230px;
   color: rgba(232,215,180,0.05);
 }
-.wwm-rail-in { position: sticky; top: 0; padding: 18px 22px 30px; }
+.wwm-rail-in {
+  position: sticky; top: 0; padding: 18px 22px 30px;
+  z-index: 0; /* ::before (掛軸 BG) の z:-1 を rail-in 背面に閉じる stacking context */
+}
+
+/* rail 掛軸 — xf-bg (685×222 横長) を 90° 回転して墨柱に縦掛け。
+   素材の仏像群 (画像左端) が rail 上部に来る。回転後 scale ≈ 1.35x = 主絵 (band 2.1x)
+   よりシャープ。sticky な rail-in に随伴 = scroll 追従、rail の overflow: clip が
+   collapse (46px) 時のはみ出しを物理切断。OBS は :not gate (app::before と同方針) */
+html:not(.wwm-view-sidebar) .wwm-rail-in::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0; left: 0;
+  width: 100vh;          /* 回転後 = 縦方向の長さ (viewport 高ぶん) */
+  height: var(--rail-w); /* 回転後 = rail 幅 */
+  transform-origin: 0 0;
+  transform: translateX(var(--rail-w)) rotate(90deg);
+  background:
+    linear-gradient(90deg, rgba(20,16,9,0.35), rgba(11,9,8,0.78)),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") center / cover no-repeat;
+  pointer-events: none;
+}
+/* 斬透かしは掛軸絵の上に重ねる (rail-in z0 化で DOM 順負けし不可視化するため) */
+.wwm-ws-rail .kanji-mark { z-index: 1; }
 
 /* rail 内の sidebar = 旧 fixed 浮島 styling を解除し墨柱に地続き化。
    sidebar.css .wwm-sidebar-test = 旧テスト用 position:fixed/right:12px の残骸
