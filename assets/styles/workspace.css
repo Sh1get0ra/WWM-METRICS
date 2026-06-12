@@ -805,7 +805,7 @@ html[lang="zh-CN"] [data-kaisho] {
    feTurbulence 手続き生成は「筆跡感がない」で棄却 — 本物の筆致のみが出せる質。
    mask 方式 = 色は --sumi-1 token 塗り (将来 朱/金の刷毛も同素材で可)。
    右 -120px = 素材右側のかすれ尻尾ぶんの拡張。罫線 (::after) は尻尾を避けて開始 */
-.wwm-ws-sec { display: flex; align-items: center; gap: 130px; margin-bottom: 14px; font-size: inherit; }
+.wwm-ws-sec { display: flex; align-items: center; gap: 62px; margin-bottom: 14px; font-size: inherit; }
 .wwm-ws-panel .wwm-ws-sec:not(:first-child) { margin-top: 30px; }
 .wwm-ws-sec .pl {
   display: inline-flex; align-items: baseline; gap: 10px;
@@ -813,12 +813,13 @@ html[lang="zh-CN"] [data-kaisho] {
   background: none; color: var(--sumi-text);
   position: relative;
   isolation: isolate; /* ::before z:-1 を .pl 内最背面に閉じる (無いと panel 背景の裏へ) */
-  padding: 9px 24px 9px 20px;
+  /* 刷毛は文字よりタイト = 払いが刷毛から紙へ若干はみ出すラフさ (兄貴指定 2026-06-12) */
+  padding: 1px 8px 1px 4px;
 }
 .wwm-ws-sec .pl::before {
   content: "";
   position: absolute;
-  top: -7px; bottom: -9px; left: -14px; right: -120px;
+  top: 1px; bottom: 0; left: -4px; right: -52px;
   background: var(--sumi-1);
   -webkit-mask: url("../fude.png") 0 0 / 100% 100% no-repeat;
   mask: url("../fude.png") 0 0 / 100% 100% no-repeat;
