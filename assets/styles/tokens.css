@@ -382,7 +382,7 @@
   --c-anlz-tab-active-fg: var(--chart-crit);
 
   /* ─── @layer Step 2-d r3: theme-swap tokens (dark default) ─── */
-  --c-focus-ring-shadow: 0 0 0 4px rgba(240,210,138,0.18);
+  --c-focus-ring-shadow: 0 0 0 4px rgba(232,81,58,0.22); /* focus = 朱統一 (金は紙面で不可視、兄貴指定 2026-06-12) */
   --c-equip-setname-fg: var(--vermilion-bright);
   --c-equip-setname-text-shadow: 0 0 6px rgba(232,81,58,0.35);
   --c-cmp-set-header-fg: var(--gold-bright);
@@ -405,8 +405,8 @@
   --c-brand-seal-opacity: initial;
   --c-brand-en-opacity: initial;
   --c-shared-build-mode--shared-build-banner-border: var(--vermilion-strong);
-  --c-lang-btn-focus-outline: var(--gold-bright);
-  --c-hero-focus-outline: var(--gold-bright);
+  --c-lang-btn-focus-outline: var(--vermilion-bright);
+  --c-hero-focus-outline: var(--vermilion-bright);
   --c-hero-number--unit-border-bot: var(--gold-deep);
   --c-tier-C-shadow: initial;
   --c-sb-rest-border: var(--ink-1);
@@ -468,7 +468,7 @@
   --c-anlz-subtitle-opacity: 0.75;  /* S2-g anlz-subtitle */
 
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
-  --c-focus-ring: var(--gold-bright);
+  --c-focus-ring: var(--vermilion-bright);
 
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
   --c-opt-sort-btn-border-left: var(--ink-2);
