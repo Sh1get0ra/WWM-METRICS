@@ -689,7 +689,9 @@ html[lang="zh-CN"] [data-kaisho] {
 .wwm-ws-tab:hover { color: var(--sumi-text); }
 .wwm-ws-tab[aria-selected="true"] {
   color: var(--kami-ink);
-  background: var(--kami-0);
+  /* 上端 fade — 紙が紙面から立ち上がる見え方 (「凸」の切り口だけ消す、兄貴選定 F 案 2026-06-12)。
+     下端は kami-0 で紙面と地続き (border-bottom-color 含め接続表現は維持) */
+  background: linear-gradient(180deg, rgba(230,218,188,0) 0%, rgba(230,218,188,0.55) 30%, var(--kami-0) 78%);
   border-bottom-color: var(--kami-0);
   font-weight: 700;
 }
