@@ -128,8 +128,9 @@
   --c-cmp-preview-zero-fg: var(--bone-dim);
   --c-cmp-lv-select-fg: var(--c-gold-rich);
   --c-cmp-stat-select-bg: var(--surf-shade);
-  /* bg-icon = 薄墨透かし化 (③ 2026-06-13) — 黒 silhouette は白抜きより視認強 → 0.22 から減 */
-  --c-cmp-modal-bg-icon-opacity: 0.08;
+  /* bg-icon = 薄墨透かし化 (③ 2026-06-13)。対照 = 0.4 (兄貴 F12 実機確定値 — 装備アイコンは
+     線が細く 0.08 では消える) / tool modal (盾/巻物 = ベタ面大) = 0.08 */
+  --c-cmp-modal-bg-icon-opacity: 0.4;
   --c-modal-bg-icon-opacity: 0.08;
 
   /* gear / xinfa card */
