@@ -64,7 +64,7 @@
 <link rel="stylesheet" href="assets/styles/xinfa.css?v=3">
 <link rel="stylesheet" href="assets/styles/anlz.css?v=7">
 <link rel="stylesheet" href="assets/styles/mobile.css?v=10">
-<link rel="stylesheet" href="assets/styles/workspace.css?v=20">
+<link rel="stylesheet" href="assets/styles/workspace.css?v=21">
 <link rel="stylesheet" href="assets/styles/modals.css?v=36">
 <link rel="stylesheet" href="assets/styles/responsive-globals.css?v=3">
 <link rel="stylesheet" href="assets/styles/dark.css?v=2">
@@ -499,19 +499,20 @@
         <div class="seat-main swap-anim" id="heroSeatMain">
           <div class="hero-block" id="heroBlockScore">
             <div class="eyebrow"><span class="seat-title" data-i18n="heroSeatScore">武格指数</span><span class="seat-en">STATUS SCORE</span></div>
-            <div class="hb-num"><span class="num hero-number" id="heroScore">0</span></div>
-          </div>
-        </div>
-        <div class="h-aside">
-          <!-- NEXT = 旧 hero 表現 (枠/背景なし、label 上 + ▶数値 — 枠付き chip は「ちゃっち」で棄却、兄貴 2026-06-11)。
-               初期 visibility:hidden — hero.js _syncNextVisibility が表示判断。visibility = 場所保持 -->
-          <div class="hero-next-inline swap-anim" style="visibility:hidden">
-            <span class="hero-next-label">NEXT</span>
-            <span class="hero-next-row">
-              <span class="hero-next-arrow">▶</span>
-              <span class="num hero-next-val" id="heroScoreBaseline">0</span>
-              <span id="heroBaselineTierBadge" class="tier-badge tier-badge-baseline" hidden></span>
-            </span>
+            <div class="hb-num">
+              <span class="num hero-number" id="heroScore">0</span>
+              <!-- NEXT = スコア横 (兄貴イメージ 2026-06-12 — バッジ廃止で h-aside 浮き配置は不要に)。
+                   旧 hero 表現 (枠/背景なし、label 上 + ▶数値)。初期 visibility:hidden —
+                   hero.js _syncNextVisibility が表示判断 (score mode のみ)。visibility = 場所保持 -->
+              <span class="hero-next-inline" style="visibility:hidden">
+                <span class="hero-next-label">NEXT</span>
+                <span class="hero-next-row">
+                  <span class="hero-next-arrow">▶</span>
+                  <span class="num hero-next-val" id="heroScoreBaseline">0</span>
+                  <span id="heroBaselineTierBadge" class="tier-badge tier-badge-baseline" hidden></span>
+                </span>
+              </span>
+            </div>
           </div>
         </div>
       </div>

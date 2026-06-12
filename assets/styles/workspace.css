@@ -435,14 +435,15 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   margin-top: 6px; font-family: var(--f-mono); font-weight: 600; font-size: 9px;
   letter-spacing: 0.18em; color: var(--sumi-text-3);
 }
-/* NEXT (baseline ▶ 提案全適用時) + donut = 主役数値の右に横並び (兄貴画像 2026-06-11)。
-   NEXT は旧 hero 表現: 枠/背景なし、極小 label 上 + ▶数値 (枠付き chip は「ちゃっち」で棄却) */
-.hero-wuxia .h-aside {
-  display: flex; flex-direction: row; align-items: center;
-  gap: 36px; padding-top: 10px; /* center 揃え = 数値の光学重心と自然に並ぶ */
-}
+/* NEXT (baseline ▶ 提案全適用時) = スコア数値のすぐ右 (.hb-num 内、兄貴イメージ 2026-06-12 —
+   バッジ廃止で h-aside 浮き配置は不要に、h-aside 自体を撤去)。
+   NEXT は旧 hero 表現: 枠/背景なし、極小 label 上 + ▶数値 (枠付き chip は「ちゃっち」で棄却)。
+   score block と同居 = 席 swap に自然随伴 (sub 席 = DPS mode では _syncNextVisibility が隠す) */
 .hero-wuxia .hero-next-inline {
   display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+  align-self: flex-end;
+  margin-left: 34px;
+  margin-bottom: 8px; /* スコア (line-height 0.95) の下端と光学揃え */
 }
 .hero-wuxia .hero-next-label {
   font-family: var(--f-mono); font-size: 11px; font-weight: 700;
@@ -804,7 +805,7 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   .hero-wuxia .seat-main .hb-num .unit { font-size: 14px; margin-left: 8px; }
   .hero-wuxia .pwr .hero-tier.tier-badge { font-size: 12px; padding: 1px 8px; }
   .hero-wuxia .h-main { gap: 12px; }
-  .hero-wuxia .h-aside { padding-top: 6px; gap: 10px; min-width: 0; }
+  .hero-wuxia .hero-next-inline { margin-left: 14px; margin-bottom: 4px; }
   .hero-wuxia .hero-next-label { font-size: 9px; letter-spacing: 0.2em; }
   .hero-wuxia .hero-next-val { font-size: 22px; }
   .hero-wuxia .hero-next-arrow { font-size: 12px; }
