@@ -2597,7 +2597,13 @@
 }
 .wwm-card-layout-b .wwm-card-bg-head .wwm-card-ctl-title { margin-bottom: 0; flex-shrink: 0; }
 .wwm-card-layout-b .wwm-card-bg-head .wwm-card-stage-hint { margin: 0; }
-.wwm-card-layout-b .wwm-card-post-hint { margin-top: var(--space-4); }
+/* post-hint = 右列の下端 (footer の保存/ポスト btn の直上) へ margin auto で押し下げ。
+   親 grid は align-items:start (L1594) = item が stretch しない → controls を stretch + flex column 化 */
+.wwm-card-layout-b .wwm-card-controls { display: flex; flex-direction: column; align-self: stretch; }
+.wwm-card-layout-b .wwm-card-post-hint { margin-top: auto; padding-top: var(--space-4); }
+/* footer の保存/ポスト btn = 1 行固定。base の flex:1+min-width:0 が幅圧縮で折り返し +
+   .wwm-card-generate 等の width:100% (旧 controls 列 264px 前提) が footer でははみ出し → 内容幅に */
+.wwm-tool-modal-footer .wwm-card-actions > button { flex: 0 0 auto; width: auto; min-width: 0; white-space: nowrap; }
 @media (max-width: 768px) {
   .wwm-card-layout-b .wwm-card-under { grid-template-columns: 1fr; gap: var(--space-4); }
 }
