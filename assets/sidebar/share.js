@@ -9,8 +9,8 @@
   const _curLang = window.WWMSidebar.anlz.curLang;
 
   function _shareBuildUrl(opts) {
-    // SHARE Build mode 中は 他人ビルドの再配布回避のため SHARE生成 禁止
-    if (WWMState.blockIfShared((window.T?.sharedBuildShareBlocked) ?? '閲覧モード中: SHARE URL 生成は無効化されています (他人のビルドを再配布できません)')) return;
+    // 閲覧モード (isShared) では card タブのみ disabled (L174 cardBlocked 分岐)。
+    // url/obs タブは利用可 — 旧 blockIfShared 全 block guard は撤去済 (2026-06-12)。
     // 受信側は index.html inline script で memory-only mode 処理 (localStorage 浸食回避)
     const ri = WWMState.roleInfo;
     if (!ri) { alert('build データなし。先に import してください。'); return; }
