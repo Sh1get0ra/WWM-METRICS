@@ -533,8 +533,12 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   z-index: auto;
   color: var(--sumi-text);
 }
-/* rest (ステ一覧) も透明化 — rail 掛軸 BG (qs-bg) が透ける (兄貴指示 2026-06-12) */
-.wwm-ws-rail .wwm-sb-rest { background: transparent; }
+/* rest (ステ一覧) = 透明 + 枠/余白なし — rail 掛軸 BG (qs-bg) に裸で載せる (兄貴指示 2026-06-12) */
+.wwm-ws-rail .wwm-sb-rest {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
 /* rail 頭 — 金ラベル + 朱印 (紙化は違和感 → 金/朱 accent 方針) */
 .wwm-rail-head {
   display: flex; align-items: center; justify-content: space-between;
