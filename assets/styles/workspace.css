@@ -678,6 +678,42 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
 .wwm-ws-tab[aria-selected="true"] .n { color: var(--gold-paper); }
 .wwm-ws-tab.locked { opacity: 0.45; }
 .wwm-ws-tabs-r { margin-left: auto; display: flex; gap: 6px; align-items: center; padding-bottom: 9px; }
+/* tabs-r 内 IMPORT/RESET (topbar から移設 2026-06-12) — preset-chip と背丈を揃える */
+.wwm-ws-tabs-r .icon-btn { padding: 5px 10px; font-size: 11px; }
+
+/* 言語 dropdown — 公式 globe ボタン + プルダウン (2026-06-12 topbar 再編。
+   5 ボタン横並びは言語追加毎に幅圧迫 → 1 ボタン化。.lang-btn の active 同期 JS は
+   class 参照のため dropdown 内移設で無傷) */
+.wwm-lang-dd { position: relative; }
+.wwm-lang-dd-btn {
+  background: transparent; border: none; padding: 2px 4px;
+  display: flex; align-items: center;
+  transition: opacity .15s ease;
+  opacity: 0.85;
+}
+.wwm-lang-dd-btn:hover { opacity: 1; }
+.wwm-lang-dd-btn img { height: 30px; width: auto; display: block; }
+.wwm-lang-dd-pop {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  min-width: 150px;
+  background: var(--sumi-1);
+  border: 1px solid var(--gold-deep);
+  border-radius: 1px;
+  padding: 6px;
+  z-index: 60; /* topbar 文脈 — preset pop(40)/bottom-nav(50) より上 */
+  display: none;
+  flex-direction: column; gap: 2px;
+}
+.wwm-lang-dd-pop.open { display: flex; }
+.wwm-lang-dd-pop .lang-btn {
+  text-align: left; width: 100%;
+  padding: 7px 12px;
+  background: none; border: none; border-radius: 1px;
+  font-size: 12.5px; color: var(--sumi-text-2);
+  transition: background .12s ease, color .12s ease;
+}
+.wwm-lang-dd-pop .lang-btn:hover { background: rgba(232,215,180,0.08); color: var(--sumi-text); }
+.wwm-lang-dd-pop .lang-btn.active { color: #241806; background: var(--gold); font-weight: 700; }
 
 /* preset popover */
 .wwm-preset-wrap { position: relative; display: flex; gap: 6px; }

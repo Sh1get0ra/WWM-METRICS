@@ -82,5 +82,27 @@
     });
   }
 
+  // ── 言語 dropdown (topbar 再編 2026-06-12 — preset popover と同パターン) ──
+  var langBtn = document.getElementById('wwmLangDdBtn');
+  var langPop = document.getElementById('wwmLangDdPop');
+  if (langBtn && langPop) {
+    langBtn.addEventListener('click', function (ev) {
+      ev.stopPropagation();
+      var open = langPop.classList.toggle('open');
+      langBtn.setAttribute('aria-expanded', String(open));
+    });
+    // 言語選択 (setLang は各 btn の onclick 既存) → pop を閉じる
+    langPop.addEventListener('click', function () {
+      langPop.classList.remove('open');
+      langBtn.setAttribute('aria-expanded', 'false');
+    });
+    document.addEventListener('click', function (ev) {
+      if (!langPop.contains(ev.target) && !langBtn.contains(ev.target)) {
+        langPop.classList.remove('open');
+        langBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   window.WWMWorkspace = { activate: activate, setRail: setRail };
 })();
