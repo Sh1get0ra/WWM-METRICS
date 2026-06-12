@@ -801,14 +801,29 @@ html[lang="zh-CN"] [data-kaisho] {
 .wwm-ws-panel.active { display: block; animation: wsIn .15s ease; }
 @keyframes wsIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* 題字 = 墨の扁額 plaque。統合 panel (武備 = 装備+心法) 内の 2 区画目以降は上に間 */
-.wwm-ws-sec { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; font-size: inherit; }
+/* 題字 = 兄貴手描きの刷毛 (assets/fude.png 2500×700 透過) に紙色文字が浮かぶ (2026-06-12)。
+   feTurbulence 手続き生成は「筆跡感がない」で棄却 — 本物の筆致のみが出せる質。
+   mask 方式 = 色は --sumi-1 token 塗り (将来 朱/金の刷毛も同素材で可)。
+   右 -120px = 素材右側のかすれ尻尾ぶんの拡張。罫線 (::after) は尻尾を避けて開始 */
+.wwm-ws-sec { display: flex; align-items: center; gap: 130px; margin-bottom: 14px; font-size: inherit; }
 .wwm-ws-panel .wwm-ws-sec:not(:first-child) { margin-top: 30px; }
 .wwm-ws-sec .pl {
   display: inline-flex; align-items: baseline; gap: 10px;
   font-family: var(--f-display); font-size: 16px; font-weight: 700; letter-spacing: 0.14em;
-  background: var(--sumi-1); color: var(--sumi-text);
-  padding: 7px 16px; border-radius: 1px;
+  background: none; color: var(--sumi-text);
+  position: relative;
+  isolation: isolate; /* ::before z:-1 を .pl 内最背面に閉じる (無いと panel 背景の裏へ) */
+  padding: 9px 24px 9px 20px;
+}
+.wwm-ws-sec .pl::before {
+  content: "";
+  position: absolute;
+  top: -7px; bottom: -9px; left: -14px; right: -120px;
+  background: var(--sumi-1);
+  -webkit-mask: url("../fude.png") 0 0 / 100% 100% no-repeat;
+  mask: url("../fude.png") 0 0 / 100% 100% no-repeat;
+  z-index: -1;
+  pointer-events: none;
 }
 .wwm-ws-sec .tag { font-family: var(--f-mono); font-weight: 600; font-size: 10px; letter-spacing: 0.18em; color: var(--gold); }
 .wwm-ws-sec::after { content: ""; flex: 1; height: 1px; background: var(--kami-line-2); }
