@@ -980,9 +980,11 @@
         const g = document.createElement('div');
         g.className = 'wwm-modal-backdrop';
         g.innerHTML = `
-          <div class="wwm-modal wwm-ocr-guide">
-            <div class="wwm-modal-header">
-              <h2>${T_.ocrHelpTitle || 'スクショ取込ガイド'}</h2>
+          <div class="wwm-modal wwm-tool-modal wwm-ocr-guide">
+            <span class="wwm-tool-bracket wwm-tool-bracket-tl"></span><span class="wwm-tool-bracket wwm-tool-bracket-tr"></span>
+            <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
+            <div class="wwm-modal-header wwm-ws-paper">
+              <h2><span class="wwm-tool-title-ja">${T_.ocrHelpTitle || 'スクショ取込ガイド'}</span><span class="wwm-tool-title-en">OCR GUIDE</span><span class="wwm-tool-seal">撮</span></h2>
               <button class="wwm-modal-close" aria-label="Close">×</button>
             </div>
             <div class="wwm-modal-body">
