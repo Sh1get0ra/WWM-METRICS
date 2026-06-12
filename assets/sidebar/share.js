@@ -221,11 +221,11 @@
       pane.innerHTML = `
         <div style="font-size:13px;color:var(--gold-bright);font-weight:700;letter-spacing:0.12em;margin-bottom:6px;">${(window.T?.shareSect1Heading) ?? '▍ビルド共有'}</div>
         <p style="font-size:12px;color:var(--paper);opacity:0.92;margin:0 0 10px;line-height:1.6;">${(window.T?.shareSect1Desc) ?? ''}</p>
-        <textarea class="wwm-share-url" id="wwmShareUrlNormal" readonly>${url}</textarea>
-        <div class="wwm-btn-row" style="margin-top:6px;">
-          <button class="wwm-btn-secondary" id="wwmShareCopyNormal">${(window.T?.shareCopyUrl) ?? 'URL コピー'}</button>
-        </div>`;
-      pane.querySelector('#wwmShareCopyNormal').addEventListener('click', () => copyTo(url, '通常URL'));
+        <textarea class="wwm-share-url" id="wwmShareUrlNormal" readonly>${url}</textarea>`;
+      // アクション btn = footer (墨帯) へ — 紙 body 上の secondary は不可視 (2026-06-13 兄貴指摘)
+      footer.insertAdjacentHTML('beforeend',
+        `<div class="wwm-btn-row wwm-share-foot-acts" data-foot-owner="url"><button class="wwm-btn-primary" id="wwmShareCopyNormal">${(window.T?.shareCopyUrl) ?? 'URL コピー'}</button></div>`);
+      footer.querySelector('#wwmShareCopyNormal').addEventListener('click', () => copyTo(url, '通常URL'));
     }
 
     function _buildObsPane(pane) {
@@ -269,10 +269,6 @@
           </label>
         </div>
         <textarea class="wwm-share-url" id="wwmShareUrlObs" readonly>${obsUrl}</textarea>
-        <div class="wwm-btn-row" style="margin-top:6px;">
-          <button class="wwm-btn-primary" id="wwmShareCopyObs">${(window.T?.shareCopyObs) ?? 'OBS URL コピー'}</button>
-          <button class="wwm-btn-secondary" id="wwmShareTogglePreview">${(window.T?.sharePreviewBtn) ?? 'プレビュー表示'}</button>
-        </div>
         <div id="wwmSharePreviewWrap" style="display:none;margin-top:12px;">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
             <div style="font-size:11px;color:var(--gold-bright);font-weight:700;letter-spacing:0.1em;">${(window.T?.sharePreviewTitle) ?? 'プレビュー'}</div>
@@ -288,6 +284,10 @@
           </div>
         </div>`;
 
+      // アクション btn = footer (墨帯) へ — 紙 body 上の secondary は不可視 (2026-06-13 兄貴指摘)
+      footer.insertAdjacentHTML('beforeend',
+        `<div class="wwm-btn-row wwm-share-foot-acts" data-foot-owner="obs"><button class="wwm-btn-primary" id="wwmShareCopyObs">${(window.T?.shareCopyObs) ?? 'OBS URL コピー'}</button><button class="wwm-btn-secondary" id="wwmShareTogglePreview">${(window.T?.sharePreviewBtn) ?? 'プレビュー表示'}</button></div>`);
+
       // OBS pane listeners
       const opSlider = pane.querySelector('#wwmObsOpacity');
       const opVal = pane.querySelector('#wwmObsOpacityVal');
@@ -299,7 +299,7 @@
       const obsTa = pane.querySelector('#wwmShareUrlObs');
       const previewWrap = pane.querySelector('#wwmSharePreviewWrap');
       const previewFrame = pane.querySelector('#wwmSharePreviewFrame');
-      const togglePreviewBtn = pane.querySelector('#wwmShareTogglePreview');
+      const togglePreviewBtn = footer.querySelector('#wwmShareTogglePreview');
       let previewOn = false;
       let previewDebounce = null;
       const refreshPreviewSrc = () => {
@@ -358,7 +358,7 @@
       t2Picker.addEventListener('input', refreshObs);
       acPicker.addEventListener('input', refreshObs);
       lbgPicker.addEventListener('input', refreshObs);
-      pane.querySelector('#wwmShareCopyObs').addEventListener('click', () => copyTo(obsUrl, 'OBS URL'));
+      footer.querySelector('#wwmShareCopyObs').addEventListener('click', () => copyTo(obsUrl, 'OBS URL'));
     }
 
     function _buildCardPane(pane) {
@@ -377,6 +377,7 @@
       if (!panes[name]._built) { builders[name](panes[name], footer); panes[name]._built = true; }
       const ca = footer.querySelector('.wwm-card-actions');
       if (ca) ca.hidden = (name !== 'card');
+      footer.querySelectorAll('[data-foot-owner]').forEach(el => { el.hidden = (el.dataset.footOwner !== name); });
     }
     tabs.forEach(t => t.addEventListener('click', () => { if (!t.disabled) _switchTab(t.dataset.tab); }));
     _switchTab(cardBlocked ? 'url' : (opts?.tab || 'card'));

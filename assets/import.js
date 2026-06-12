@@ -169,6 +169,10 @@ async function openPreviewModal(data, importedAt, savedState) {
   const m = _createModal('wwmPreviewModal', 'importPreviewTitle', '<div id="wwmCardBody"></div>', 'assets/icons/scroll-quill.svg', { titleEn: 'PREVIEW', seal: '覧' });
   m.querySelector('.wwm-modal').classList.add('wwm-modal-wide');
   const body = m.querySelector('#wwmCardBody');
+  // wizard ナビ btn = footer (墨帯) — 紙 body 上の secondary は不可視 (2026-06-13 兄貴指摘)
+  const footer = document.createElement('div');
+  footer.className = 'wwm-tool-modal-footer';
+  m.querySelector('.wwm-modal').appendChild(footer);
 
   function renderStep1() {
     const detailHtml = renderPreviewDetail(summary, data);
@@ -179,21 +183,25 @@ async function openPreviewModal(data, importedAt, savedState) {
     body.innerHTML = `
       ${bmNotice}
       <div class="wwm-preview-summary">${detailHtml}</div>
-      <div class="wwm-btn-row" style="margin-top:16px;">
-        <button class="wwm-btn-primary" id="wwmNextBtn">${(window.T && T.importNextBtn) || '次へ'}</button>
-        <button class="wwm-btn-secondary" id="wwmCancelBtn">${(window.T && T.importCancelBtn) || 'キャンセル'}</button>
-      </div>
     `;
-    body.querySelector('#wwmCancelBtn').addEventListener('click', () => m.remove());
-    body.querySelector('#wwmNextBtn').addEventListener('click', renderStep2);
+    footer.innerHTML = `
+      <button class="wwm-btn-secondary" id="wwmCancelBtn">${(window.T && T.importCancelBtn) || 'キャンセル'}</button>
+      <button class="wwm-btn-primary" id="wwmNextBtn">${(window.T && T.importNextBtn) || '次へ'}</button>
+    `;
+    footer.querySelector('#wwmCancelBtn').addEventListener('click', () => m.remove());
+    footer.querySelector('#wwmNextBtn').addEventListener('click', renderStep2);
   }
 
   function renderStep2() {
     body.innerHTML = renderEnhanceArsenalForm(state, data);
+    // form 末尾の btn-row を footer へ移設 (生成 HTML は不変、DOM move のみ)
+    footer.innerHTML = '';
+    const _navRow = body.querySelector('.wwm-btn-row');
+    if (_navRow) footer.appendChild(_navRow);
     _attachEnhanceArsenalEvents(body, state);
-    body.querySelector('#wwmBackBtn').addEventListener('click', renderStep1);
-    body.querySelector('#wwmCancelBtn').addEventListener('click', () => m.remove());
-    body.querySelector('#wwmApplyBtn').addEventListener('click', () => {
+    m.querySelector('#wwmBackBtn').addEventListener('click', renderStep1);
+    m.querySelector('#wwmCancelBtn').addEventListener('click', () => m.remove());
+    m.querySelector('#wwmApplyBtn').addEventListener('click', () => {
       const msg = (window.T && T.importConfirmMsg) || '現在設定されている数値がインポートデータに差し変わりますがよろしいですか？';
       if (!confirm(msg)) return;
       applyImport(data, importedAt, state);
