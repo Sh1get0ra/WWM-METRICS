@@ -602,11 +602,11 @@
     "vi": "Tối"
   },
   "importSetupTitle": {
-    "ja": "引燕 / DATA IMPORT",
+    "ja": "引燕",
     "en": "Import Setup",
     "zh": "导入设置",
     "ko": "가져오기 설정",
-    "vi": "Dẫn Yến / NHẬP DỮ LIỆU"
+    "vi": "Dẫn Yến"
   },
   "importSetupIntro": {
     "ja": "公式データツールのデータを取り込むには、ブックマークレットの登録が必要です。",
@@ -651,11 +651,11 @@
     "vi": "Không có lần nhập trước"
   },
   "importPreviewTitle": {
-    "ja": "引燕 / DATA IMPORT",
+    "ja": "引燕",
     "en": "Import Card",
     "zh": "导入卡",
     "ko": "가져오기 카드",
-    "vi": "Dẫn Yến / NHẬP DỮ LIỆU"
+    "vi": "Dẫn Yến"
   },
   "importApplyBtn": {
     "ja": "インポート実行",
