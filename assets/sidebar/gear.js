@@ -983,11 +983,11 @@
           <div class="wwm-modal wwm-tool-modal wwm-ocr-guide">
             <span class="wwm-tool-bracket wwm-tool-bracket-tl"></span><span class="wwm-tool-bracket wwm-tool-bracket-tr"></span>
             <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
-            <div class="wwm-modal-header wwm-ws-paper">
+            <div class="wwm-modal-header">
               <h2><span class="wwm-tool-title-ja">${T_.ocrHelpTitle || 'スクショ取込ガイド'}</span><span class="wwm-tool-title-en">OCR GUIDE</span><span class="wwm-tool-seal">撮</span></h2>
               <button class="wwm-modal-close" aria-label="Close">×</button>
             </div>
-            <div class="wwm-modal-body">
+            <div class="wwm-modal-body wwm-ws-paper">
               <p class="wwm-ocr-guide-cap">${T_.ocrHelpExample || '撮影例: 装備詳細画面 (値が右端に並ぶ画面)'}</p>
               <div class="wwm-ocr-mock" aria-hidden="true">
                 <div class="wwm-ocr-mock-big">811</div>

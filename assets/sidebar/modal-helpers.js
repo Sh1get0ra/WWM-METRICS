@@ -227,17 +227,17 @@ finalScore  = statusScore + 4-set bonus (4個セット発動時)</pre>
       <div class="wwm-modal wwm-tool-modal wwm-note-modal-b">
         <span class="wwm-tool-bracket wwm-tool-bracket-tl"></span><span class="wwm-tool-bracket wwm-tool-bracket-tr"></span>
         <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
-        <div class="wwm-modal-header wwm-ws-paper">
+        <div class="wwm-modal-header">
           <h2><span class="wwm-tool-title-ja">${titleJa}</span><span class="wwm-tool-title-en">NOTE</span><span class="wwm-tool-seal">${seal}</span></h2>
           <button class="wwm-modal-close" id="wwmNoteClose" aria-label="${btnClose}">×</button>
         </div>
-        <div class="wwm-tool-tabs wwm-ws-paper">
+        <div class="wwm-tool-tabs">
           <button class="wwm-tool-tab ${defaultTab==='spec'?'active':''}" data-tab="spec">${tabSpec}</button>
           <button class="wwm-tool-tab ${defaultTab==='changelog'?'active':''}" data-tab="changelog">${tabCl}</button>
         </div>
-        <div class="wwm-modal-body" id="wwmNoteTabSpec" style="display:${defaultTab==='spec'?'block':'none'};">${_specHtml()}</div>
-        <div class="wwm-modal-body" id="wwmNoteTabChangelog" style="display:${defaultTab==='changelog'?'block':'none'};">${_changelogHtml(entries)}</div>
-        <div class="wwm-tool-modal-footer wwm-ws-paper">
+        <div class="wwm-modal-body wwm-ws-paper" id="wwmNoteTabSpec" style="display:${defaultTab==='spec'?'block':'none'};">${_specHtml()}</div>
+        <div class="wwm-modal-body wwm-ws-paper" id="wwmNoteTabChangelog" style="display:${defaultTab==='changelog'?'block':'none'};">${_changelogHtml(entries)}</div>
+        <div class="wwm-tool-modal-footer">
           <a class="wwm-btn-secondary" target="_blank" rel="noopener" href="${_ghIssueUrl('bug')}">${ghSvg}${btnBug}</a>
           <a class="wwm-btn-secondary" target="_blank" rel="noopener" href="${_ghIssueUrl('req')}">${ghSvg}${btnReq}</a>
         </div>

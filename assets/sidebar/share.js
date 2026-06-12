@@ -179,19 +179,19 @@
       <div class="wwm-modal wwm-modal-wide wwm-tool-modal wwm-share-modal-b">
         <span class="wwm-tool-bracket wwm-tool-bracket-tl"></span><span class="wwm-tool-bracket wwm-tool-bracket-tr"></span>
         <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
-        <div class="wwm-modal-header wwm-ws-paper">
+        <div class="wwm-modal-header">
           <h2><span class="wwm-tool-title-ja">${T.shareTitle ?? '飛簡'}</span><span class="wwm-tool-title-en">SHARE</span><span class="wwm-tool-seal">飛</span></h2>
           <button class="wwm-modal-close" aria-label="Close">×</button>
         </div>
-        <div class="wwm-tool-tabs wwm-ws-paper">
+        <div class="wwm-tool-tabs">
           <button class="wwm-tool-tab" data-tab="card" ${cardBlocked ? `disabled title="${T.shareCardBlocked ?? ''}"` : ''}>${T.shareTabCard ?? '画像カード'}</button>
           <button class="wwm-tool-tab" data-tab="url">${T.shareTabUrl ?? '共有URL'}</button>
           <button class="wwm-tool-tab" data-tab="obs">${T.shareTabObs ?? 'OBS配信'}</button>
         </div>
-        <div class="wwm-modal-body wwm-share-pane" data-pane="card" hidden></div>
-        <div class="wwm-modal-body wwm-share-pane" data-pane="url" hidden></div>
-        <div class="wwm-modal-body wwm-share-pane" data-pane="obs" hidden></div>
-        <div class="wwm-tool-modal-footer wwm-ws-paper" id="wwmShareFooter"><div id="wwmShareMsg" style="font-size:12px;color:var(--jade-bright);min-height:16px;"></div></div>
+        <div class="wwm-modal-body wwm-ws-paper wwm-share-pane" data-pane="card" hidden></div>
+        <div class="wwm-modal-body wwm-ws-paper wwm-share-pane" data-pane="url" hidden></div>
+        <div class="wwm-modal-body wwm-ws-paper wwm-share-pane" data-pane="obs" hidden></div>
+        <div class="wwm-tool-modal-footer" id="wwmShareFooter"><div id="wwmShareMsg" style="font-size:12px;color:var(--jade-bright);min-height:16px;"></div></div>
       </div>`;
     document.body.appendChild(m);
 
