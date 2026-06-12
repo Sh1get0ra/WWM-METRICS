@@ -1028,7 +1028,7 @@
   position: absolute;  /* .wwm-modal > * { position: relative } (L1295) に勝つため必須 — Phase 5.1-b で誤って削除されていた */
   top: 0; left: 0; right: 0; bottom: 0;
   background-repeat: no-repeat;
-  background-position: calc(100% + 40px) calc(100% + 40px);
+  background-position: calc(100% + 80px) calc(100% + 80px); /* 右下へ寄せ (兄貴調整 2026-06-13) */
   background-size: 60%;
   opacity: var(--c-modal-bg-icon-opacity);
   /* 薄墨透かし (③ 2026-06-13 兄貴決定) — 旧 白抜き+金glow は紙 body 上で不可視。
@@ -1306,7 +1306,7 @@
 /* K ×2: bg-icon の JS inline background 書込 対抗 — strip するな (Step 5 確定) */
 .wwm-diag-modal .wwm-modal-bg-icon {
   background-size: 30% !important;
-  background-position: calc(100% - 12px) calc(100% + 30px) !important;
+  background-position: calc(100% + 20px) calc(100% + 60px) !important; /* 右下へ寄せ (兄貴調整 2026-06-13) */
   /* 薄墨透かし (③ 2026-06-13)。opacity は委譲 token (--c-diag-modal--*) だと :root で
      0.18 に固化され paper scope 上書き不達 → base token 直参照で紙値 0.08 を拾う */
   filter: brightness(0);

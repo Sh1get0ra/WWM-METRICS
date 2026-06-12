@@ -131,7 +131,7 @@
   /* bg-icon = 薄墨透かし化 (③ 2026-06-13)。対照 = 0.4 (兄貴 F12 実機確定値 — 装備アイコンは
      線が細く 0.08 では消える) / tool modal (盾/巻物 = ベタ面大) = 0.08 */
   --c-cmp-modal-bg-icon-opacity: 0.4;
-  --c-modal-bg-icon-opacity: 0.08;
+  --c-modal-bg-icon-opacity: 0.2;
 
   /* gear / xinfa card */
   --c-icon-dim-opacity:   0.22;
