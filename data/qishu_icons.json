@@ -241,7 +241,7 @@
  },
  "_meta": {
   "source": "data/qishu/qishu.txt (build 20251203102905)",
-  "extracted_at": "2026-06-07T05:15:00.147Z",
-  "note": "id/name(en)/pic_url のみ — 効果内容は master に存在しない。 スキル回し実装時は data/qishu.json (手動 effects) を別途整備"
+  "extracted_at": "2026-06-13T08:34:36.086Z",
+  "note": "id/name(en)/pic_url/is_post のみ — type_name field は公式 master で全空のため除外。 効果内容は master に存在しない。 スキル回し実装時は data/qishu.json (手動 effects) を別途整備"
  }
 }

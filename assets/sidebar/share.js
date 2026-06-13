@@ -29,9 +29,11 @@
     // 武術/流派/奇術 icon base64 (2026-06-07 bookmarklet 拡張分) も除外 — 受信側はEXPORT 不可なので不要
     delete riLight._kongfuIconsBase64;
     delete riLight._liupaiIconsBase64;
-    delete riLight._qishuIcons;
-    delete riLight._qishuIconsBase64;
+    delete riLight._qishuIcons;          // 旧 schema 互換削除
+    delete riLight._qishuIconsBase64;    // 旧 schema 互換削除
+    delete riLight._qishuMaster;         // bookmarklet 埋込 master (受信側は WWM_QISHU_ICONS 持ち = 不要、 11KB 節約)
     delete riLight._liupaiPicsBase64;
+    // _qishuIds は keep — SHARE に乗せて受信側で WWM_QISHU_ICONS lookup 描画 (v2 schema)
     // 心法icon URL配列も削除 → 受信側で WWM_XINFA_ICONS (data/xinfa_icons.json) fallback で復元
     delete riLight._xinfaIcons;
     // avatar URL も削除 → 受信側で roleAvatar ID → WWM_AVATAR_ICONS (data/avatar_icons.json) で復元

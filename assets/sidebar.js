@@ -152,6 +152,7 @@ function _refreshAll() {
       if (window.WWMSidebar?.hero) window.WWMSidebar.hero.update(params);
       window.WWMSidebar.gear.render(ri);
       if (window.WWMSidebar?.xinfa) window.WWMSidebar.xinfa.render(ri);
+      if (window.WWMSidebar?.qishu) window.WWMSidebar.qishu.render(ri);
       if (window.WWMSidebar?.diag) window.WWMSidebar.diag.render(ri, params);
       if (window.WWMSidebar?.ranking) window.WWMSidebar.ranking.render(ri, params);
       _autoFitText();

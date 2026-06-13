@@ -219,8 +219,10 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
       );
     }
 
-    // 奇術 (装備中 8 枠、 bookmarklet DOM 取込分。 旧 import data には無い → 空配列)
-    const qishu = (ri._qishuIconsBase64 || []).filter(Boolean);
+    // 奇術 (装備中 8 枠、 _qishuIds[i] → WWM_QISHU_ICONS[id].pic_url で公式 CDN URL 解決。
+    // 旧 import data (_qishuIconsBase64) や master 未登録 id は '' で順序保持 — _qishuRow が空 URL skip)
+    const _qm = window.WWM_QISHU_ICONS || {};
+    const qishu = (ri._qishuIds || []).map(id => (id && _qm[id] && _qm[id].pic_url) || '');
 
     // 勁率 donut
     const donut = {
@@ -379,9 +381,10 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
       + '</svg>';
   }
   function _qishuRow(model, lp) {
-    if (!model.qishu.length) return '';
+    if (!model.qishu.length || !model.qishu.some(Boolean)) return '';
     const cl = [[], []];
     model.qishu.forEach((u, i) => {
+      if (!u) return;
       const p = _QISHU_POS[i] || [1, 'left'];
       cl[p[0]].push('<img class="q-' + p[1] + '" src="' + u + '" alt="">');
     });
@@ -486,7 +489,7 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
         // 上段: 武術 (icon+名称 縦2) | 奇術パネル 横並び → 下段: 心法 4 列 tile (2026-06-07 兄貴レイアウト指示)
         + (() => {
           const kf = it.kongfu ? '<div class="wwm-card-info-arts">' + _kongfuCompact(model) + '</div>' : '';
-          const q = (it.qishu && model.qishu.length) ? _qishuRow(model, st.panel === 'light') : '';
+          const q = (it.qishu && model.qishu.some(Boolean)) ? _qishuRow(model, st.panel === 'light') : '';
           const row = (kf && q) ? '<div class="wwm-card-info-row">' + kf + q + '</div>' : (kf + q);
           return row + (it.xinfa ? _xinfaTileRow(model) : '');
         })()
@@ -525,7 +528,7 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
           + '</div>');
       }
       // MYSTIC は余白のある donut col へ同居 (donut OFF 時のみ col3 へ fallback)
-      const qishuBlock = (it.qishu && model.qishu.length)
+      const qishuBlock = (it.qishu && model.qishu.some(Boolean))
         ? '<div class="wwm-card-gsec-title">MYSTIC</div>' + _qishuRow(model, st.panel === 'light') : '';
       if (it.donut) {
         cols.push('<div class="wwm-card-gcol wwm-card-gcol-donut">'
@@ -869,7 +872,7 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
       paneEl.querySelectorAll('.wwm-card-toggle input').forEach(inp => {
         const k = inp.dataset.item;
         const na = (st.tpl === 'bukaku' && (k === 'stats' || k === 'primary'))
-          || (k === 'qishu' && !model.qishu.length);
+          || (k === 'qishu' && !model.qishu.some(Boolean));
         inp.disabled = na;
         inp.closest('.wwm-card-toggle').classList.toggle('na', na);
       });

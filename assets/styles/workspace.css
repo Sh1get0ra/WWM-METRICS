@@ -803,7 +803,7 @@ html[lang="zh-CN"] [data-kaisho] {
   scrollbar-width: thin;
   scrollbar-color: var(--gold-deep) transparent;
 }
-.wwm-ws-panel { display: none; }
+.wwm-ws-panel { display: none; container-type: inline-size; }
 .wwm-ws-panel.active { display: block; animation: wsIn .15s ease; }
 @keyframes wsIn { from { opacity: 0; } to { opacity: 1; } }
 
@@ -836,22 +836,106 @@ html[lang="zh-CN"] [data-kaisho] {
 .wwm-ws-sec .tag { font-family: var(--f-mono); font-weight: 600; font-size: 10px; letter-spacing: 0.18em; color: var(--gold); }
 .wwm-ws-sec::after { content: ""; flex: 1; height: 1px; background: var(--kami-line-2); }
 
-/* 奇術帯 (心法 panel 内) */
-.wwm-qishu {
-  margin-top: 20px;
-  background: var(--kami-2);
-  border: 1px solid var(--kami-line-2);
-  border-radius: 2px;
-  padding: 0 0 12px;
+/* 奇術 grid — 装備/心法 plank 質感の正方形 木札 (85×85 @ 親 ≥ 947px、 装備木札横幅の 75%
+   兄貴指示 2026-06-13) を 45deg 回転で ひし形配置、 十字×2 cluster (キャラカード生成時と
+   同配置、 頂点接触型)。 流派バッジ・朱印・スコア無し、 表示はアイコンのみ。 ガワ = placeholder
+   中身空。 グリッド枠 + 背景 + padding 削除 (兄貴指示 2026-06-13)。
+   親 (.wwm-ws-panel container) width 565 未満で 装備/心法と同タイミングで cluster/plank/gap/
+   padding-left を比例縮小 (cqi container query 兄貴指示 2026-06-13) — 横スクロール防止。
+   基準: 装備 plank 5枚 × 113 = 565px が装備縮小開始点。
+   240/565 = 42.48cqi、 85/565 = 15.04cqi、 60/565 = 10.62cqi、 16/565 = 2.83cqi */
+.wwm-qishu-grid {
+  display: flex;
+  gap: clamp(40px, 10.62cqi, 60px);
+  justify-content: flex-start; align-items: center;
+  padding-left: clamp(8px, 2.83cqi, 16px);
+}
+.wwm-qishu-cluster {
+  position: relative;
+  width: clamp(160px, 42.48cqi, 240px);
+  height: clamp(160px, 42.48cqi, 240px);
+  flex-shrink: 0;
+}
+/* 木札 base = 装備/心法 plank と同質感 (85×85 正方形 @ wsBuild ≥ 565px、 親縮小で比例)、 45deg 回転 */
+.wwm-ws-paper .wwm-qishu-slot {
+  position: absolute;
+  width: clamp(57px, 15.04cqi, 85px);
+  height: clamp(57px, 15.04cqi, 85px);
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(255,240,200,0.18) 15%, transparent 35%),
+    linear-gradient(95deg, transparent 25%, rgba(255,240,200,0.10) 30%, transparent 38%, transparent 58%, rgba(255,240,200,0.06) 62%, transparent 68%),
+    radial-gradient(ellipse 14px 11px at 28% 25%, rgba(60,30,8,0.55) 0%, transparent 65%),
+    radial-gradient(ellipse 10px 8px at 72% 65%, rgba(60,30,8,0.50) 0%, transparent 65%),
+    radial-gradient(ellipse 130% 45% at 50% 100%, rgba(40,20,4,0.40) 0%, transparent 70%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='280'><filter id='wood'><feTurbulence type='fractalNoise' baseFrequency='0.025 0.45' numOctaves='2' seed='20'/><feColorMatrix values='0 0 0 0 0.3  0 0 0 0 0.18  0 0 0 0 0.06  0 0 0 0 0.22 0'/></filter><rect width='150' height='280' filter='url(%23wood)'/></svg>"),
+    linear-gradient(180deg, #dcb070 0%, #b89058 50%, #8b6c3e 100%);
+  background-blend-mode: screen, screen, multiply, multiply, normal, multiply, normal;
+  box-shadow:
+    inset 0 0 0 1px rgba(40,20,4,0.5),
+    inset 0 -6px 14px rgba(40,20,4,0.4),
+    inset 0 3px 8px rgba(255,240,200,0.3),
+    0 4px 12px rgba(0,0,0,0.4);
+  border-radius: 3px;
   overflow: hidden;
+  transform-origin: center;
+  transition: transform 0.18s, box-shadow 0.18s;
 }
-.wwm-qishu h4 {
-  font-family: var(--f-display); font-size: 13px; font-weight: 700; letter-spacing: .14em;
-  background: var(--sumi-1); color: var(--sumi-text-2);
-  padding: 8px 16px;
+/* 十字配置 + 45deg rotate (頂点で接触) */
+.wwm-ws-paper .wwm-qishu-slot.q-top    { top: 0;    left: 50%; transform: translate(-50%, 0) rotate(45deg); }
+.wwm-ws-paper .wwm-qishu-slot.q-bottom { bottom: 0; left: 50%; transform: translate(-50%, 0) rotate(45deg); }
+.wwm-ws-paper .wwm-qishu-slot.q-left   { top: 50%;  left: 0;   transform: translate(0, -50%) rotate(45deg); }
+.wwm-ws-paper .wwm-qishu-slot.q-right  { top: 50%;  right: 0;  transform: translate(0, -50%) rotate(45deg); }
+/* 墨パネル (装備 plank-paint 同質感、 ひし形と整合のため矩形のまま中央配置 — 単色塗りで
+   ひし形形状と整合)。 装備 .wwm-ws-paper .plank-paint rule の height:104 / top:18 が
+   specificity の隙間から継承される ため、 height: auto と top: 9 を明示 override 必須
+   (兄貴指摘 2026-06-13 原因判明) */
+.wwm-ws-paper .wwm-qishu-slot .plank-paint {
+  position: absolute;
+  top: 9px; left: 9px; right: 9px; bottom: 9px;
+  height: auto;
+  background: var(--plank-sumi);
+  -webkit-mask-image: none;
+  mask-image: none;
+  z-index: 2;
+  pointer-events: none;
 }
-.wwm-qishu h4 .sub { font-family: var(--f-mono); font-size: 9px; letter-spacing: .18em; color: var(--sumi-text-3); margin-left: 8px; }
-.wwm-qishu p { font-size: 11.5px; color: var(--kami-ink-3); margin: 8px 16px 0; }
+.wwm-ws-paper .wwm-qishu-slot .plank-paint::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 2px solid var(--plank-frame);
+  box-shadow: inset 0 0 0 1px var(--plank-frame-edge);
+  pointer-events: none;
+}
+/* アイコン wrap (counter-rotate -45deg で正立、 装備/心法 と同じ filter 着色 silhouette)。
+   装備用 .plank-icon-wrap rule の width:75 / height:75 / top:27 / translateX(-50%) を全 override。
+   img は filter:brightness(0)invert(0.38)sepia(0.9)... の muted 茶色 (共通 rule 適用) */
+.wwm-ws-paper .wwm-qishu-slot .plank-icon-wrap {
+  position: absolute;
+  inset: 14%;
+  top: 14%; left: 14%; right: 14%; bottom: 14%;
+  width: auto; height: auto;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 3;
+  pointer-events: none;
+  transform: rotate(-45deg);
+}
+.wwm-ws-paper .wwm-qishu-slot .plank-icon-wrap img {
+  width: 130%; height: 130%;
+  object-fit: contain;
+}
+/* hover (装備/心法 plank と同様 浮き) */
+.wwm-ws-paper .wwm-qishu-slot.q-top:hover,
+.wwm-ws-paper .wwm-qishu-slot.q-bottom:hover { transform: translate(-50%, -2px) rotate(45deg); }
+.wwm-ws-paper .wwm-qishu-slot.q-left:hover,
+.wwm-ws-paper .wwm-qishu-slot.q-right:hover  { transform: translate(0, calc(-50% - 2px)) rotate(45deg); }
+.wwm-ws-paper .wwm-qishu-slot:hover {
+  box-shadow:
+    inset 0 0 0 1px rgba(40,20,4,0.5),
+    inset 0 -6px 14px rgba(40,20,4,0.4),
+    inset 0 3px 8px rgba(255,240,200,0.3),
+    0 8px 18px rgba(0,0,0,0.5);
+}
 
 /* 演武 teaser — 墨の一枚 + 透かし */
 .wwm-teaser {
@@ -1216,7 +1300,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   gap: 3px;
   font-family: var(--f-plank-num);
   font-weight: 700;
-  color: var(--wood-light);
+  color: var(--wood-mid);
   text-shadow: 0 1px 0 rgba(0,0,0,0.4);
   margin: 0; padding: 0;
 }
@@ -1243,7 +1327,6 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 .wwm-ws-paper #wwmGearGrid,
 .wwm-ws-paper #wwmXinfaGrid {
   display: grid;
-  grid-template-columns: repeat(5, 113px);
   grid-template-rows: auto;
   justify-content: space-evenly;
   align-items: start;

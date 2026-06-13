@@ -410,41 +410,41 @@
     "en": "ST Mystic DMG Boost",
     "zh": "单体类奇术增伤",
     "ko": "단일류 비결 피해 증가",
-    "vi": "Tăng sát thương Kỳ thuật đơn thể"
+    "vi": "Tăng sát thương kỳ thuật đơn mục tiêu"
   },
   "stDisp.dmgBoost.stMysticDmg.stControlMysticDmg": {
     "ja": "単体制御系奇術ダメ",
     "en": "ST Control Mystic",
     "zh": "单体控制类奇术增伤",
     "ko": "단일 제어류 비결",
-    "vi": "Tăng sát thương Kỳ thuật đơn thể (Khống chế)"
+    "vi": "Tăng sát thương kỳ thuật loại khống chế đơn mục tiêu"
   },
   "stDisp.dmgBoost.stMysticDmg.stBurstMysticDmg": {
     "ja": "単体爆発系奇術ダメ",
     "en": "ST Burst Mystic",
     "zh": "单体爆发类奇术增伤",
     "ko": "단일 폭발류 비결",
-    "vi": "Tăng sát thương Kỳ thuật đơn thể (Bùng nổ)"
+    "vi": "Tăng sát thương kỳ thuật loại bùng nổ đơn mục tiêu"
   },
   "stDisp.dmgBoost.areaMysticDmg": {
     "ja": "範囲系奇術ダメージ増加",
     "en": "AOE Mystic DMG Boost",
     "zh": "群体类奇术增伤",
     "ko": "단체류 비결 피해 증가",
-    "vi": "Tăng sát thương Kỳ thuật phạm vi"
+    "vi": "Tăng sát thương kỳ thuật đa mục tiêu"
   },
   "stDisp.dmgBoost.areaMysticDmg.areaDebuffMysticDmg": {
     "ja": "範囲状態異常系奇術ダメ",
     "en": "Area Debuff Mystic",
     "zh": "群体异常类奇术增伤",
     "ko": "단체 이상류 비결",
-    "vi": "Tăng sát thương Kỳ thuật phạm vi (Trạng thái bất thường)"
+    "vi": "Tăng sát thương kỳ thuật loại đa mục tiêu bất thường"
   },
   "stDisp.dmgBoost.areaMysticDmg.areaDmgMysticDmg": {
     "ja": "範囲攻撃系奇術ダメ",
     "en": "Area DMG Mystic",
     "zh": "群体伤害类奇术增伤",
     "ko": "단체 피해류 비결",
-    "vi": "Tăng sát thương Kỳ thuật phạm vi (Sát thương)"
+    "vi": "Tăng sát thương kỳ thuật loại sát thương đa mục tiêu"
   }
 }
