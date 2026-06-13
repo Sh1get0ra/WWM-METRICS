@@ -7,63 +7,63 @@
   "vi": ""
  },
  "2": {
-  "ja": "",
+  "ja": "神龍の焔",
   "en": "Dragon's Breath",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "3": {
-  "ja": "",
+  "ja": "詩仙酔舞",
   "en": "Drunken Poet",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "4": {
-  "ja": "",
+  "ja": "獅子咆哮",
   "en": "Lion's Roar",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "6": {
-  "ja": "",
+  "ja": "朱塵煙霧",
   "en": "Blinding Mist",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "10": {
-  "ja": "",
+  "ja": "定身鬼手",
   "en": "Chost Bind",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "11": {
-  "ja": "",
+  "ja": "蝦蟇躍撃",
   "en": "Leaping Toad",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "13": {
-  "ja": "",
+  "ja": "鷹爪連撃",
   "en": "Talon Strike",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "14": {
-  "ja": "",
+  "ja": "震地掌底",
   "en": "Guardian Palm",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "17": {
-  "ja": "",
+  "ja": "蛍光照夜",
   "en": "Glow of Fireflies",
   "zh": "",
   "ko": "",
@@ -84,21 +84,21 @@
   "vi": ""
  },
  "32": {
-  "ja": "",
+  "ja": "清風明月",
   "en": "Serene Breeze",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "33": {
-  "ja": "",
+  "ja": "薬叉護法",
   "en": "Yaksha Rush",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "34": {
-  "ja": "",
+  "ja": "隠れ身",
   "en": "Veil of Stillness",
   "zh": "",
   "ko": "",
@@ -112,133 +112,133 @@
   "vi": ""
  },
  "36": {
-  "ja": "",
+  "ja": "無尽連脚",
   "en": "Free Morph",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "37": {
-  "ja": "",
+  "ja": "猛棍蓮華",
   "en": "Wolflike Frenzy",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "38": {
-  "ja": "",
+  "ja": "龍馬旋回",
   "en": "Soaring Spin",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "39": {
-  "ja": "",
+  "ja": "流星墜火",
   "en": "Flaming Meteor",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "40": {
-  "ja": "",
+  "ja": "金身不壊",
   "en": "Golden Body",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "41": {
-  "ja": "",
+  "ja": "昇竜葉舞",
   "en": "Dragon Head",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "42": {
-  "ja": "",
+  "ja": "陰陽の型",
   "en": "Chostly Steps",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "43": {
-  "ja": "",
+  "ja": "朱塵煙霧",
   "en": "Blinding Mist",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "44": {
-  "ja": "",
+  "ja": "覇者の鳴",
   "en": "Honking Havoc",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "45": {
-  "ja": "",
+  "ja": "千浪一閃",
   "en": "Flute of the Tides",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "46": {
-  "ja": "",
+  "ja": "鵝鳥の膝つき",
   "en": "Goosy Slide",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "49": {
-  "ja": "",
+  "ja": "愛の形",
   "en": "Paired Radiance",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "50": {
-  "ja": "",
+  "ja": "風火輪",
   "en": "Cyclone Spin",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "54": {
-  "ja": "",
-  "en": "Stone Pier",
+  "ja": "雪だるま",
+  "en": "Snow Lion Form",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "101": {
-  "ja": "",
+  "ja": "太極拳",
   "en": "Tai Chi",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "102": {
-  "ja": "",
+  "ja": "光玉の手",
   "en": "Meridian Touch",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "103": {
-  "ja": "",
+  "ja": "摂星摘月",
   "en": "Celestial Seize",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "106": {
-  "ja": "",
+  "ja": "凌雲歩法",
   "en": "Cloud Steps",
   "zh": "",
   "ko": "",
   "vi": ""
  },
  "107": {
-  "ja": "",
+  "ja": "縮骨功",
   "en": "Contortion",
   "zh": "",
   "ko": "",
@@ -337,6 +337,7 @@
  },
  "_meta": {
   "extracted_at": "2026-06-13T09:50:53.055Z",
-  "note": "en = data/qishu_icons.json 公式 master 流用 (Phase B 先行)。 ja/zh/ko/vi = 兄貴採取まち (動画 5 言語 + claude vision OCR 予定)。 採取後 反映 = DataStore lookup chain (ja→en→ja) で空言語は en fallback。 game-lexicon-no-discretion 準拠 — claude 推測訳 禁止。"
+  "note": "en = data/qishu_icons.json 公式 master 流用 (Phase B 先行)。 ja/zh/ko/vi = 兄貴採取まち (動画 5 言語 + claude vision OCR 予定)。 採取後 反映 = DataStore lookup chain (ja→en→ja) で空言語は en fallback。 game-lexicon-no-discretion 準拠 — claude 推測訳 禁止。",
+  "ja_extracted_at": "2026-06-13T11:41:19.149Z"
  }
 }
