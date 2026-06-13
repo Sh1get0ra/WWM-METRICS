@@ -103,8 +103,17 @@
     const T_ = window.T || {};
     const master = window.WWM_QISHU_ICONS || {};
     const cats = window.WWM_QISHU_CATEGORIES; // 将来投入 (qishu_categories.json)。 無ければ全件 1 セクション
-    // master 全 id (数値のみ、 _meta 除外)
-    const allIds = Object.keys(master).filter(k => /^\d+$/.test(k)).map(Number).sort((a,b)=>a-b);
+    // アクティブ奇術のみ表示 (パッシブ系 = ピッカー対象外、 兄貴方針 2026-06-13)。
+    // フィルタ = master.is_post=1 (公式 endpoint で active 標識) AND PASSIVE_OVERRIDES 除外。
+    // PASSIVE_OVERRIDES = master.is_post=1 だがゲーム上パッシブ扱い (= 飛簡 / 移動術系) の例外 id。
+    const PASSIVE_OVERRIDES = new Set([315]); // Moonleap Morph (飛簡系、 ja 動画 click 外で確定済)
+    const allIds = Object.keys(master).filter(k => {
+      if (!/^\d+$/.test(k)) return false;
+      const m = master[k];
+      if (!m || m.is_post !== 1) return false;
+      if (PASSIVE_OVERRIDES.has(Number(k))) return false;
+      return true;
+    }).map(Number).sort((a,b)=>a-b);
     // カテゴリ section build — categories 無ければ「全て」1 セクション
     let sections;
     if (cats && cats.categories && cats.categories.length) {
