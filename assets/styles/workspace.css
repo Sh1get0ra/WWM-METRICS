@@ -1100,8 +1100,12 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   --f-plank-num:   "Cinzel", "Times New Roman", serif;
 }
 
-/* 木札 base (装備/心法 共通) — 113×180 (75×120 から 1.5x、 兄貴指示 2026-06-13) */
-.wwm-ws-paper .wwm-equip-slot,
+/* 木札 base (装備/心法 共通) — 113×180 (75×120 から 1.5x、 兄貴指示 2026-06-13)
+   ⚠ scope = `.wwm-gear-grid` 必須 — import preview modal も `.wwm-ws-paper` 子孫
+   + `.wwm-equip-slot` 同名 class 使用 (副ステ list 親 div、 plank ではない)。
+   bare `.wwm-equip-slot` 指定だと preview のステ list 親に木板 background が
+   誤適用されて崩れる ([[2026-06-13 兄貴発見]])。 */
+.wwm-ws-paper .wwm-gear-grid .wwm-equip-slot,
 .wwm-ws-paper .wwm-xinfa-slot {
   position: relative;
   aspect-ratio: 150 / 240;
