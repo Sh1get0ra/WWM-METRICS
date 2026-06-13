@@ -62,59 +62,32 @@
       return n ? Math.round(sum / n * 100) : 0;
     }
 
+    // 種類朱印 dispatch (右上落款、 武/装/弓) — R5 木札化
+    // 環/佩 (10/11) = 武 (武器セットに属するため、 兄貴指示 2026-06-13)
+    const _stamp = (s) => (s === '1' || s === '2' || s === '10' || s === '11') ? '武'
+                       : (s === '9' || s === '21') ? '弓'
+                       : '装';
+
     const cards = _GEAR_SLOT_ORDER.map(slot => {
       const eq = eqDet[slot];
-      const label = _GEAR_SLOT_LABELS[slot] || slot;
-      if (!eq) return `<div class="wwm-equip-slot wwm-equip-empty" data-slot="${slot}"><div class="wwm-equip-slot-header"><b>${label}</b><span class="wwm-muted">未装備</span></div></div>`;
-      const suffix = eq.exVo?.suffix;
-      let setName = (window.WWM_DS && suffix) ? window.WWM_DS.name('sets', suffix, lang) : '';
-      if (setName && setName.indexOf('[sets:') === 0) setName = '';
-      if (lang === 'en' && setName) setName = setName.replace(/\s+Set$/i, '');
-      const score = calcCardScore(eq);
-      const shortKf = (n) => {
-        if (!n || lang !== 'en') return n;
-        // 武器種類サフィックス (Sword/Spear/Blade/Twinblades/Umbrella/Fan/Rope Dart) を完全削除。
-        // 前詞 (Stormbreaker / Thundercry 等) で ユーザーは武術判別可能、 武器種類は装備カードの slot label (主武器/副武器) で示唆済のため冗長。
-        return n
-          .replace(/\s+Rope Dart$/i, '')
-          .replace(/\s+Twinblades$/i, '')
-          .replace(/\s+Sword$/i, '')
-          .replace(/\s+Spear$/i, '')
-          .replace(/\s+Blade$/i, '')
-          .replace(/\s+Umbrella$/i, '')
-          .replace(/\s+Fan$/i, '');
-      };
-      let kongfuLine = '';
-      if (slot === '1' && roleInfo?.kongfuMain) {
-        const n = shortKf(kfName(roleInfo.kongfuMain));
-        if (n) kongfuLine = `<span class="wwm-equip-kongfu">${n}</span>`;
-      } else if (slot === '2' && roleInfo?.kongfuSub) {
-        const n = shortKf(kfName(roleInfo.kongfuSub));
-        if (n) kongfuLine = `<span class="wwm-equip-kongfu">${n}</span>`;
-      }
+      if (!eq) return `<div class="wwm-equip-slot wwm-equip-empty" data-slot="${slot}"><div class="plank-hole"></div><div class="plank-stamp">${_stamp(slot)}</div><div class="plank-paint"></div><div class="plank-score-paint"></div><span class="wwm-equip-card-score" data-card-score="${slot}"><span class="plank-score-main">—</span></span></div>`;
       const iconUrl = _gearIconResolve(slot, roleInfo);
-      const isWeaponSlotIcon = (slot === '1' || slot === '2');
-      const iconCls = 'wwm-equip-icon' + (isWeaponSlotIcon ? ' wwm-equip-icon-weapon' : '');
-      const iconHtml = iconUrl ? `<img class="${iconCls}" src="${iconUrl}" alt="">` : '';
-      // 流派バッジ overlay: 武器 slot は kongfu経由、 非武器 slot は セット (sets.liupaiId) 経由
+      const iconHtml = iconUrl ? `<img src="${iconUrl}" alt="">` : '';
+      // 流派 = 公式画像 (兄貴指示 2026-06-13 復活、 mock R5 の墨splat は廃止)
       const liupaiUrl = ((slot === '1' || slot === '2')
         ? _kongfuLiupaiResolve(slot, roleInfo)
         : _setLiupaiResolve(slot, eq, sets));
-      const liupaiHtml = liupaiUrl ? `<img class="wwm-equip-liupai-badge" src="${liupaiUrl}" alt="" loading="lazy">` : '';
       const liupaiPinyin = _liupaiPinyinFromUrl(liupaiUrl);
-      const railLabel = _GEAR_RAIL_ZH[slot] || label;
+      const liupaiHtml = liupaiUrl ? `<img class="plank-liupai" src="${liupaiUrl}" alt="" loading="lazy">` : '';
       return `
         <div class="wwm-equip-slot" data-slot="${slot}"${liupaiPinyin ? ` data-liupai-pinyin="${liupaiPinyin}"` : ''} onclick="WWMSidebar.gear.openEdit('${slot}')">
+          <div class="plank-hole"></div>
+          <div class="plank-stamp">${_stamp(slot)}</div>
+          <div class="plank-paint"></div>
+          ${iconHtml ? `<div class="plank-icon-wrap">${iconHtml}</div>` : ''}
           ${liupaiHtml}
-          <div class="wwm-equip-rail"><span class="wwm-equip-rail-text">${railLabel}</span></div>
-          ${iconHtml ? `<div class="wwm-equip-icon-wrap">${iconHtml}</div>` : ''}
-          <div class="wwm-equip-slot-inner">
-            <div class="wwm-equip-slot-header">${setName ? `<span class="wwm-equip-setname">${setName}</span>` : ''}</div>
-            <div class="wwm-equip-slot-body">
-              ${kongfuLine}
-              <span class="wwm-equip-card-score" data-card-score="${slot}"><b>...</b></span>
-            </div>
-          </div>
+          <div class="plank-score-paint"></div>
+          <span class="wwm-equip-card-score" data-card-score="${slot}"><span class="plank-score-main">…</span></span>
         </div>
       `;
     }).join('');
@@ -254,15 +227,15 @@
       if (isModified && origContrib[slot] != null && origContrib[slot] !== curScore) {
         const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
         if (isObs) {
-          el.innerHTML = `<b>${origContrib[slot].toLocaleString()}</b>`;
+          el.innerHTML = `<span class="plank-score-main">${origContrib[slot].toLocaleString()}</span>`;
         } else {
           const delta = curScore - origContrib[slot];
           const sign = delta > 0 ? '+' : '';
-          const cls = delta > 0 ? 'wwm-equip-delta-pos' : 'wwm-equip-delta-neg';
-          el.innerHTML = `<b>${origContrib[slot].toLocaleString()}</b> <span class="wwm-equip-delta ${cls}">${sign}${delta.toLocaleString()}</span>`;
+          const cls = delta > 0 ? 'up' : delta < 0 ? 'dn' : '';
+          el.innerHTML = `<span class="plank-score-main">${origContrib[slot].toLocaleString()}</span> <span class="plank-score-delta ${cls}">${sign}${delta.toLocaleString()}</span>`;
         }
       } else {
-        el.innerHTML = `<b>${curScore.toLocaleString()}</b>`;
+        el.innerHTML = `<span class="plank-score-main">${curScore.toLocaleString()}</span>`;
       }
     }
     // DOM 状態復元

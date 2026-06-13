@@ -29,31 +29,22 @@
     const origPassive = WWMState.roleInfo?.passiveSlots || [];
     const cards = [0,1,2,3].map(i => {
       const xid = passive[i];
-      const xinfa = xid ? xinfaMap[xid] : null;
-      let name = '(空)';
-      if (xid) {
-        const n = window.WWM_DS.name('xinfa', xid, lang);
-        name = n.indexOf('[xinfa:') === 0 ? `心法ID ${xid}` : n;
-      }
-      const tier = tiers[i] ?? tiers[String(i)] ?? 6;
       // icon: 元と同じ xid なら base64/URL、 swap 後 or 配列が空(SHARE mode等) は dict から URL fallback
       const iconUrl = (xid === origPassive[i] && xinfaIcons[i]) ? xinfaIcons[i] : (window.WWM_XINFA_ICONS?.[xid]?.icon_url || null);
-      const iconHtml = iconUrl ? `<img class="wwm-xinfa-icon" src="${iconUrl}" alt="">` : '';
-      const tierChip = (xid && tier >= 1 && tier <= 5) ? `<div class="wwm-xinfa-tier-chip">T${tier}</div>` : '';
-      // 流派バッジ (心法に紐づく liupai)
+      const iconHtml = iconUrl ? `<img src="${iconUrl}" alt="">` : '';
+      // 流派 = 公式画像 (兄貴指示 2026-06-13)
       const liupaiUrl = xid ? (window.WWM_XINFA_ICONS?.[xid]?.liupai_pic_url || null) : null;
-      const liupaiHtml = liupaiUrl ? `<img class="wwm-xinfa-liupai-badge" src="${liupaiUrl}" alt="" loading="lazy">` : '';
       const liupaiPinyin = _liupaiPinyinFromUrl(liupaiUrl);
+      const liupaiHtml = liupaiUrl ? `<img class="plank-liupai" src="${liupaiUrl}" alt="" loading="lazy">` : '';
       return `
         <div class="wwm-xinfa-slot" data-xinfa-slot="${i}"${liupaiPinyin ? ` data-liupai-pinyin="${liupaiPinyin}"` : ''} onclick="WWMSidebar.xinfa.openEdit(${i})">
-          ${tierChip}
+          <div class="plank-hole"></div>
+          <div class="plank-stamp">心</div>
+          <div class="plank-paint"></div>
+          ${iconHtml ? `<div class="plank-icon-wrap">${iconHtml}</div>` : ''}
           ${liupaiHtml}
-          <div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法${['一','二','三','四'][i]}</span></div>
-          ${iconHtml ? `<div class="wwm-xinfa-icon-wrap">${iconHtml}</div>` : ''}
-          <div class="wwm-xinfa-inner">
-            <div class="wwm-xinfa-header"><b>${name}</b></div>
-          </div>
-          <span class="wwm-xinfa-card-score" data-xinfa-score="${i}"><b>...</b></span>
+          <div class="plank-score-paint"></div>
+          <span class="wwm-xinfa-card-score" data-xinfa-score="${i}"><span class="plank-score-main">…</span></span>
         </div>
       `;
     }).join('');
@@ -67,15 +58,16 @@
     const arsenalLiupaiUrl = _arsenalLiupaiResolve(roleInfo, pathKey);
     const arsenalLiupaiHtml = arsenalLiupaiUrl ? `<img class="wwm-xinfa-liupai-badge" src="${arsenalLiupaiUrl}" alt="" loading="lazy">` : '';
     const arsenalLiupaiPinyin = _liupaiPinyinFromUrl(arsenalLiupaiUrl);
+    const arsenalLiupaiSplat = arsenalLiupaiUrl ? `<img class="plank-liupai" src="${arsenalLiupaiUrl}" alt="" loading="lazy">` : '';
     const arsenalCard = `
       <div class="wwm-xinfa-slot wwm-arsenal-slot" data-arsenal-slot${arsenalLiupaiPinyin ? ` data-liupai-pinyin="${arsenalLiupaiPinyin}"` : ''} onclick="WWMSidebar.arsenal.openEdit()">
-        ${arsenalLiupaiHtml}
-        <div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">武庫</span></div>
-        <div class="wwm-xinfa-icon-wrap"><img class="wwm-xinfa-icon" src="https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/kongfu/images/673361fe92bef95db34510429KLQLykS05.png" alt=""></div>
-        <div class="wwm-xinfa-inner">
-          <div class="wwm-xinfa-header"><b>${pathName}</b></div>
-        </div>
-        <span class="wwm-xinfa-card-score" data-arsenal-score><b>...</b></span>
+        <div class="plank-hole"></div>
+        <div class="plank-stamp">庫</div>
+        <div class="plank-paint"></div>
+        <div class="plank-icon-wrap"><img src="https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/kongfu/images/673361fe92bef95db34510429KLQLykS05.png" alt=""></div>
+        ${arsenalLiupaiSplat}
+        <div class="plank-score-paint"></div>
+        <span class="wwm-xinfa-card-score" data-arsenal-score><span class="plank-score-main">…</span></span>
       </div>
     `;
     root.innerHTML = cards + arsenalCard;
@@ -98,7 +90,7 @@
       window.computeExpected(noArsParams);
       const noArsScore = _scoreWithBonus(roleInfo);
       const contrib = Math.round(baseScore - noArsScore);
-      const el = document.querySelector('[data-arsenal-score] b');
+      const el = document.querySelector('[data-arsenal-score] .plank-score-main');
       if (el) el.textContent = contrib.toLocaleString();
       // base 復元
       window.computeExpected(baseParams);
@@ -129,8 +121,8 @@
         window.computeExpected(p);
         const noXinfa = _scoreWithBonus(ri);
         const delta = Math.round(baseScore - noXinfa);
-        const el = document.querySelector(`[data-xinfa-score="${i}"]`);
-        if (el) el.innerHTML = `<b>${delta.toLocaleString()}</b>`;
+        const el = document.querySelector(`[data-xinfa-score="${i}"] .plank-score-main`);
+        if (el) el.textContent = delta.toLocaleString();
       } catch (e) {}
     }
     // 復元

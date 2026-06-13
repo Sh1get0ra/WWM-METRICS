@@ -210,55 +210,12 @@
 
 /* ── 紙面 fine-tune (light.css 転用 selector rule) ──
    token rescope だけでは出ない literal filter / background-image / mix-blend を
-   .wwm-ws-paper 配下に scope して移植。 元 html[data-theme="light"] X → .wwm-ws-paper X。 */
-
-/* liupai 別 icon glow (流派色 drop-shadow) */
-.wwm-ws-paper [data-liupai-pinyin="tianquan"] .wwm-equip-icon,
-.wwm-ws-paper [data-liupai-pinyin="tianquan"] .wwm-xinfa-icon {
-  filter: brightness(0) drop-shadow(0 0 3px rgba(20,60,140,0.75)) drop-shadow(0 0 8px rgba(20,60,140,0.55)) drop-shadow(0 0 16px rgba(20,60,140,0.35));
-}
-.wwm-ws-paper [data-liupai-pinyin="kuanglan"] .wwm-equip-icon,
-.wwm-ws-paper [data-liupai-pinyin="kuanglan"] .wwm-xinfa-icon {
-  filter: brightness(0) drop-shadow(0 0 3px rgba(140,25,18,0.8)) drop-shadow(0 0 8px rgba(140,25,18,0.6)) drop-shadow(0 0 16px rgba(140,25,18,0.38));
-}
-.wwm-ws-paper [data-liupai-pinyin="qingxi"] .wwm-equip-icon,
-.wwm-ws-paper [data-liupai-pinyin="qingxi"] .wwm-xinfa-icon {
-  filter: brightness(0) drop-shadow(0 0 3px rgba(20,110,55,0.75)) drop-shadow(0 0 8px rgba(20,110,55,0.55)) drop-shadow(0 0 16px rgba(20,110,55,0.35));
-}
-.wwm-ws-paper [data-liupai-pinyin="guyun"] .wwm-equip-icon,
-.wwm-ws-paper [data-liupai-pinyin="guyun"] .wwm-xinfa-icon {
-  filter: brightness(0) drop-shadow(0 0 3px rgba(90,30,140,0.8)) drop-shadow(0 0 8px rgba(90,30,140,0.6)) drop-shadow(0 0 16px rgba(90,30,140,0.38));
-}
-
-/* 既定 icon = 墨化 (紙上は黒インク + 金 glow) */
-.wwm-ws-paper .wwm-equip-icon,
-.wwm-ws-paper .wwm-xinfa-icon {
-  filter: brightness(0) drop-shadow(0 0 3px var(--c-gold-deep-strong)) drop-shadow(0 0 8px var(--gold-glow));
-}
-.wwm-ws-paper .wwm-equip-liupai-badge,
-.wwm-ws-paper .wwm-xinfa-liupai-badge {
-  filter: drop-shadow(0 1px 2px var(--c-shadow-light));
-}
+   .wwm-ws-paper 配下に scope して移植。 元 html[data-theme="light"] X → .wwm-ws-paper X。
+   gear/xinfa slot の filter glow / 古紙カード背景 = 木札 plank 化 (R5、 末尾 section) で
+   完全置換のため撤去済 (2026-06-13)。 */
 
 /* (cmp modal 二層化の rule 上書きは modals.css 末尾 — @layer modals > components のため
     同 layer に置かないと負ける。token 定義は上の paper scope 群 = layer 無関係に継承) */
-
-/* gear / xinfa slot 背景 — 紙の古紙カード film */
-.wwm-ws-paper .wwm-gear-grid .wwm-equip-slot::before,
-.wwm-ws-paper .wwm-xinfa-slot::before {
-  mix-blend-mode: multiply;
-}
-.wwm-ws-paper .wwm-gear-grid .wwm-equip-slot,
-.wwm-ws-paper .wwm-xinfa-slot {
-  background-image:
-    linear-gradient(var(--c-card-bg-overlay-film), var(--c-card-bg-overlay-film)),
-    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg_usercard2-e8900864.png"),
-    linear-gradient(180deg, #fff3da, #fce0bc);
-  background-position: 0 0, center, 0 0;
-  background-size: auto, 100% 100%, auto;
-  background-repeat: repeat, no-repeat, repeat;
-  background-blend-mode: normal, difference, normal;
-}
 
 /* equip-affix rank 色 (金/紫/青) — 紙上で読める暗色へ */
 .wwm-ws-paper .wwm-equip-section .wwm-equip-affix .wwm-rank-gold,
@@ -345,7 +302,12 @@
      (兄貴指示 2026-06-12)。band/rail頭/tabs = 固定表示。≤600 は auto に戻す */
   height: 100vh;
   height: 100dvh;
-  background: var(--sumi-1); /* 公式 BG (::before) の CDN 失敗時 fallback + overscroll 領域の墨 */
+  /* ultrawide 抑止 — 全体サイズ固定 (2026-06-13 兄貴指示 案A)。 max-width 内に band/rail/main/footer
+     と BG (::before xf-bg + ::after grain) を全部閉じ込め、 外側余白は html bg の sumi-0 単色で区切る */
+  max-width: 1500px;
+  margin: 0 auto;
+  background: var(--sumi-1);
+  position: relative;
   transition: grid-template-columns .2s var(--ease-out-quart);
   /* ::before z:-1 を app 内最背面に閉じる (子の z-index を触らない) */
   isolation: isolate;
@@ -359,33 +321,27 @@
    OBS view (?view=sidebar) は透明配信前提 = fixed BG 禁止 → :not gate (mini-hero L766 と同型) */
 html:not(.wwm-view-sidebar) .wwm-app::before {
   content: "";
-  position: fixed; inset: 0;
+  /* 案A (2026-06-13): position: fixed → absolute、 .wwm-app 内 (1500) に閉じ込めて余白は html sumi-0 単色。
+     viewport 固定 L字 (.wwm-app 自体は scroll しない) なので absolute でも fixed と同じ視覚効果 */
+  position: absolute; inset: 0;
   z-index: -1;
   pointer-events: none;
   background:
     linear-gradient(180deg, rgba(20,16,9,0.30), rgba(11,9,8,0.72)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") left top / 1400px auto no-repeat
     var(--sumi-0);
-  /* 1400px 固定 (兄貴指定 2026-06-12) — 幅連動の拡縮を完全停止、確定した塩梅を凍結。
-     画像高 454px 固定 ≥ band 高 = 狭幅切れ目なし / 広幅で伸びない。
-     >1400px 画面では画像右端 x=1400 が縦切れ目 → mask で右端 280px を墨へ fade
-     (透過域 = ::before 全層消え = 下の sumi-1、色差知覚不可)。
-     <1400px 画面では fade 位置 = 画面右端 = 実質無影響 */
+  /* 1400px 固定 (兄貴指定 2026-06-12)。 max-width 1500 内 = 画像左 1400px + 右 100px はみ出し fade、
+     mask で 1400px 以降 transparent → app 内最右 100px は sumi-1 (背景色) で受ける */
   -webkit-mask-image: linear-gradient(to right, #000 calc(min(100%, 1400px) - 280px), transparent min(100%, 1400px));
   mask-image: linear-gradient(to right, #000 calc(min(100%, 1400px) - 280px), transparent min(100%, 1400px));
-  /* 幅 fit (≈2.1x) = シャープ優先。cover 4x 全面案は「伸びすぎ」で棄却 (2026-06-12)。
-     下限 1000px: 100% auto は幅連動で縦も縮む → 狭幅 (~800px 以下) で画像高 < band 高
-     になり原画下端の白掠れエッジが band 内に露出 (切れ目)。下限で画像高 ≥324px 死守、
-     はみ出す右側は left anchor で crop (仏像は左端 = 無傷)。
-     下半分は rail 掛軸 (qs-bg、下記 .wwm-rail-in::before) が受け、
-     つなぎ目は掛軸側の mask fade でクロスブレンド */
 }
 
 /* 紙の grain — 唯一許される質感。app 全面 1 枚 (墨上は実質不可視) =
    面ごとに乗せると粒の有無で境目が割れる、全面統一で継ぎ目が物理的に消える */
 .wwm-app::after {
   content: "";
-  position: fixed; inset: 0;
+  /* 案A (2026-06-13): fixed → absolute、 grain も .wwm-app 内 (1500) のみ */
+  position: absolute; inset: 0;
   pointer-events: none;
   z-index: 30; /* tab 帯(20)より上、popover(40)/bottom-nav(50)より下 */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='4'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.05'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -1020,5 +976,284 @@ html[lang="zh-CN"] [data-kaisho] {
 /* mini-hero 廃止 (通常 view — hero が identity/score を持つため重複、兄貴指定 2026-06-11)。
    OBS view (?view=sidebar) では hero 非表示 = mini-hero が唯一の identity 表示 → render は残し CSS gate のみ */
 html:not(.wwm-view-sidebar) .wwm-sb-mini-hero-card { display: none; }
+
+/* body の旧 BG (radial 朱紅金 + noise + 公式 home_main png、 base.css L27-37) を workspace v2 で沈める。
+   max-width 1500 化 (2026-06-13) で .wwm-app 外の余白に旧 BG が露出して「hero 帯が浮く」(兄貴指摘)
+   原因 = この body BG。 html に sumi-0、 body 透明化で xf-bg (.wwm-app::before 昇格、 viewport 全面 fixed)
+   が一枚として余白も覆う */
+html:not(.wwm-view-sidebar) {
+  background: var(--sumi-0);
+}
+html:not(.wwm-view-sidebar) body.wwm-layout-active {
+  /* 案A 余白 = 公式 home_main BG (bg-b74e3a33.png) を仕込む (兄貴指示 2026-06-13)。
+     base.css L27-37 の旧 body BG (radial 朱紅金 + noise + home_main + ベタ) は workspace v2 と
+     不調和のため上書き、 公式画像 1 枚 + sumi-0 fill のみに簡素化。
+     fixed = scroll 不動、 cover = viewport 全面 fit */
+  background:
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg-b74e3a33.png") center top / cover no-repeat fixed,
+    var(--sumi-0);
+}
+
+/* ============================================================
+   装備/心法 木札 plank (R5 確定 — 2026-06-13)
+   mock/cards-r5.html → .wwm-ws-paper scope へ移植。
+   木札 base = 光沢仕上げ → 墨パネル上 70% → 公式アイコン img+filter silhouette →
+   流派 mini墨splat → 板地むき出し → 墨書 score 専用パネル。
+   class 名 = mock 互換 (plank-* そのまま採用、 既存 .wwm-equip-icon-wrap 等は
+   display:none で隠す)。
+   ============================================================ */
+.wwm-ws-paper {
+  --wood-light: #d4a868;
+  --wood-mid:   #b08850;
+  --wood-deep:  #8b6c3e;
+  --wood-shadow:#5a4220;
+  --plank-sumi:   #1a1008;
+  --plank-sumi-2: #251810;
+  --plank-vermilion: #c83c2b;
+  --plank-frame: rgba(212, 168, 104, 0.5);
+  --plank-frame-edge: rgba(60, 30, 8, 0.3);
+  --f-plank-serif: "Zen Old Mincho", "Noto Serif JP", serif;
+  --f-plank-num:   "Cinzel", "Times New Roman", serif;
+}
+
+/* 木札 base (装備/心法 共通) — 113×180 (75×120 から 1.5x、 兄貴指示 2026-06-13) */
+.wwm-ws-paper .wwm-equip-slot,
+.wwm-ws-paper .wwm-xinfa-slot {
+  position: relative;
+  aspect-ratio: 150 / 240;
+  width: 100%;
+  max-width: 113px;
+  height: auto;
+  min-height: 150px;
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(255,240,200,0.18) 15%, transparent 35%),
+    linear-gradient(95deg, transparent 25%, rgba(255,240,200,0.10) 30%, transparent 38%, transparent 58%, rgba(255,240,200,0.06) 62%, transparent 68%),
+    radial-gradient(ellipse 14px 11px at 28% 25%, rgba(60,30,8,0.55) 0%, transparent 65%),
+    radial-gradient(ellipse 10px 8px at 72% 65%, rgba(60,30,8,0.50) 0%, transparent 65%),
+    radial-gradient(ellipse 130% 45% at 50% 100%, rgba(40,20,4,0.40) 0%, transparent 70%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='280'><filter id='wood'><feTurbulence type='fractalNoise' baseFrequency='0.025 0.45' numOctaves='2' seed='20'/><feColorMatrix values='0 0 0 0 0.3  0 0 0 0 0.18  0 0 0 0 0.06  0 0 0 0 0.22 0'/></filter><rect width='150' height='280' filter='url(%23wood)'/></svg>"),
+    linear-gradient(180deg, #dcb070 0%, #b89058 50%, #8b6c3e 100%);
+  background-blend-mode: screen, screen, multiply, multiply, normal, multiply, normal;
+  box-shadow:
+    inset 0 0 0 1px rgba(40,20,4,0.5),
+    inset 0 -6px 14px rgba(40,20,4,0.4),
+    inset 0 3px 8px rgba(255,240,200,0.3),
+    0 4px 12px rgba(0,0,0,0.4);
+  border-radius: 3px;
+  overflow: hidden;
+  padding: 0; /* 既存 padding 解除 — plank 内部は絶対座標 */
+  border: none;
+}
+
+/* 木札 上端 面取り (mock .plank::before)。古紙 turbulence (gear.css/xinfa.css の ::before) は
+   `.wwm-equip-slot::before` `.wwm-xinfa-slot::before` の background を打ち消して再利用 */
+.wwm-ws-paper .wwm-gear-grid .wwm-equip-slot::before,
+.wwm-ws-paper .wwm-xinfa-slot::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(180deg, rgba(255,230,180,0.4) 0%, transparent 100%);
+  mix-blend-mode: normal;
+  opacity: 1;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* hover */
+.wwm-ws-paper .wwm-gear-grid .wwm-equip-slot[data-slot]:hover,
+.wwm-ws-paper .wwm-xinfa-slot:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 0 0 1px rgba(40,20,4,0.5),
+    inset 0 -6px 14px rgba(40,20,4,0.4),
+    inset 0 3px 8px rgba(255,240,200,0.3),
+    0 8px 18px rgba(0,0,0,0.5);
+}
+
+/* 既存子 component の隠蔽 (rail / icon-wrap / slot-inner / liupai-badge / score) —
+   plank-* 子要素に置換するため非表示 */
+.wwm-ws-paper .wwm-equip-slot .wwm-equip-rail,
+.wwm-ws-paper .wwm-equip-slot .wwm-equip-icon-wrap,
+.wwm-ws-paper .wwm-equip-slot .wwm-equip-slot-inner,
+.wwm-ws-paper .wwm-equip-slot .wwm-equip-liupai-badge,
+.wwm-ws-paper .wwm-xinfa-slot .wwm-xinfa-rail,
+.wwm-ws-paper .wwm-xinfa-slot .wwm-xinfa-icon-wrap,
+.wwm-ws-paper .wwm-xinfa-slot .wwm-xinfa-inner,
+.wwm-ws-paper .wwm-xinfa-slot .wwm-xinfa-liupai-badge,
+.wwm-ws-paper .wwm-xinfa-slot .wwm-xinfa-tier-chip {
+  display: none;
+}
+
+/* 紐穴 (上端中央 凹み) — 113×180 (75x1.5) */
+.wwm-ws-paper .plank-hole {
+  position: absolute;
+  top: 8px; left: 50%;
+  transform: translateX(-50%);
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 55%, #0a0604 0%, #1a0e06 50%, #2a1810 80%, #4a3520 100%);
+  box-shadow:
+    inset 0 1px 2px rgba(0,0,0,0.85),
+    inset 0 -1px 0 rgba(255,220,170,0.18),
+    0 1px 0 rgba(255,230,180,0.25);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* 種類朱印 (右上、 落款風) — 武/装/弓/心/庫、 流派バッジと同寸 25×25 (兄貴指示 2026-06-13) */
+.wwm-ws-paper .plank-stamp {
+  position: absolute;
+  top: 15px; right: 6px;
+  width: 25px; height: 25px;
+  background: var(--plank-vermilion);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--f-plank-serif);
+  font-size: 15px;
+  font-weight: 900;
+  color: #f8f0d8;
+  box-shadow:
+    inset 0 0 0 1px rgba(248,240,216,0.45),
+    0 1px 2px rgba(0,0,0,0.55);
+  transform: rotate(-4deg);
+  z-index: 4;
+  letter-spacing: 0;
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* 墨パネル (上アイコン側) — 額縁線付き 1.5x */
+.wwm-ws-paper .plank-paint {
+  position: absolute;
+  top: 18px; left: 9px; right: 9px;
+  height: 104px;
+  background: linear-gradient(180deg, var(--plank-sumi-2) 0%, var(--plank-sumi) 100%);
+  -webkit-mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, #000 0%, #000 75%, transparent 100%);
+  mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, #000 0%, #000 75%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+.wwm-ws-paper .plank-paint::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 3px solid var(--plank-frame);
+  box-shadow: inset 0 0 0 1px var(--plank-frame-edge);
+  pointer-events: none;
+}
+
+/* アイコン img wrap (公式 png を filter 着色 silhouette) — base 75×75 */
+.wwm-ws-paper .plank-icon-wrap {
+  position: absolute;
+  top: 27px; left: 50%;
+  transform: translateX(-50%);
+  width: 75px;
+  height: 75px;
+  z-index: 3;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+/* 装備 = base 150% (75×1.5 = 113)、 top 15 (paint 内中央寄せ補正、 兄貴指示 2026-06-13) */
+.wwm-ws-paper .wwm-equip-slot .plank-icon-wrap {
+  top: 15px;
+  width: 113px;
+  height: 113px;
+}
+/* 心法 = base 120% (75×1.2 = 90) */
+.wwm-ws-paper .wwm-xinfa-slot .plank-icon-wrap {
+  width: 90px;
+  height: 90px;
+}
+.wwm-ws-paper .plank-icon-wrap img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  /* 兄貴確定 (2026-06-13): muted 落ち着き茶 */
+  filter: brightness(0) invert(0.38) sepia(0.9) saturate(1.9) hue-rotate(352deg);
+}
+
+/* 流派バッジ = 公式画像 (兄貴指示 2026-06-13、 mock R5 の墨splat 廃止)
+   アイコン枠の左上配置 (兄貴指示 2026-06-13) */
+.wwm-ws-paper .plank-liupai {
+  position: absolute;
+  top: 10px;
+  left: -2%;
+  width: 40px; height: 40px;
+  z-index: 4;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+  pointer-events: none;
+}
+
+/* score 専用 墨パネル (下端、 アイコン側と非連結) — 1.5x */
+.wwm-ws-paper .plank-score-paint {
+  position: absolute;
+  bottom: 9px; left: 9px; right: 9px;
+  height: 35px;
+  background: linear-gradient(180deg, var(--plank-sumi-2) 0%, var(--plank-sumi) 100%);
+  -webkit-mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, #000 0%, #000 75%, transparent 100%);
+  mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, #000 0%, #000 75%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+.wwm-ws-paper .plank-score-paint::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 3px solid var(--plank-frame);
+  box-shadow: inset 0 0 0 1px var(--plank-frame-edge);
+  pointer-events: none;
+}
+
+/* score text — 1.5x */
+.wwm-ws-paper .wwm-equip-slot .wwm-equip-card-score,
+.wwm-ws-paper .wwm-xinfa-slot .wwm-xinfa-card-score {
+  position: absolute;
+  bottom: 9px; left: 9px; right: 9px;
+  height: 35px;
+  z-index: 4;
+  display: flex; align-items: center; justify-content: center;
+  gap: 3px;
+  font-family: var(--f-plank-num);
+  font-weight: 700;
+  color: var(--wood-light);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+  margin: 0; padding: 0;
+}
+.wwm-ws-paper .plank-score-main {
+  font-size: 17px;
+  letter-spacing: 0;
+  line-height: 1;
+  font-weight: 700;
+}
+.wwm-ws-paper .plank-score-delta {
+  font-size: 9px;
+  font-weight: 600;
+}
+.wwm-ws-paper .plank-score-delta.up { color: #e85040; }
+.wwm-ws-paper .plank-score-delta.dn { color: #7a6450; }
+
+/* grid container = plank 5×75 固定 + 余白 6個均等配分 (justify-content: space-evenly)。
+   余白 = container 左端 / plank1-2 / plank2-3 / plank3-4 / plank4-5 / container 右端 の **6 等分**
+   = 兄貴指示 2026-06-13 ([Image #4] 6 本の青線が均等)。
+   max-width 720 で 1080 時の ws-body 内幅 (708) に近い値で stop = 1080+ で blank これ以上広がらない、
+   1080- で parent 縮小 = container 縮小 = blank 縮小 (= ブランク埋める)。
+   gap 0 = 全 6 余白を space-evenly で均等に。
+   ID selector 化 = xinfa.css L126 specificity (0,1,0,0) に勝つため */
+.wwm-ws-paper #wwmGearGrid,
+.wwm-ws-paper #wwmXinfaGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 113px);
+  grid-template-rows: auto;
+  justify-content: space-evenly;
+  align-items: start;
+  gap: 0;
+  max-width: 827px;
+  margin-right: auto;
+}
+.wwm-ws-paper #wwmGearGrid {
+  grid-template-rows: auto auto;
+  row-gap: var(--space-2-5);  /* 装備 2 行間も心法既存 gap で */
+}
 
 } /* end @layer components */
