@@ -1,0 +1,43 @@
+{
+ "_meta": {
+  "extracted_at": "2026-06-13T00:00:00.000Z",
+  "note": "兄貴 (2026-06-13) 提供カテゴリ分け (動画 ja 30 件掲載順)。 affix 4 種 (stControl/stBurst/areaDebuff/areaDmg) = 装備 affix の「単体制御系奇術ダメ」 等と直接連携、 演武 effects 実装時の計算反映ターゲット。 残 (puzzle/support/fun) = affix 連携なし、 UI section 分けのみ。 en/zh/ko/vi 名 = 当面空 = DataStore fallback chain (ja→en→ja) で ja 表示。 公式カテゴリ名の en/zh/ko/vi は動画ヘッダ vision 採取 or 兄貴提示で後追い反映。"
+ },
+ "categories": [
+  {
+   "key": "puzzle",
+   "names": { "ja": "謎解き", "en": "", "zh": "", "ko": "", "vi": "" },
+   "ids": [101, 102, 103, 106, 107]
+  },
+  {
+   "key": "areaDebuff",
+   "names": { "ja": "範囲状態異常", "en": "", "zh": "", "ko": "", "vi": "" },
+   "ids": [4, 11]
+  },
+  {
+   "key": "areaDmg",
+   "names": { "ja": "範囲攻撃", "en": "", "zh": "", "ko": "", "vi": "" },
+   "ids": [10, 14, 39, 45]
+  },
+  {
+   "key": "stControl",
+   "names": { "ja": "単体制御", "en": "", "zh": "", "ko": "", "vi": "" },
+   "ids": [13, 33, 36, 37, 38]
+  },
+  {
+   "key": "stBurst",
+   "names": { "ja": "単体爆発", "en": "", "zh": "", "ko": "", "vi": "" },
+   "ids": [2, 3, 41]
+  },
+  {
+   "key": "support",
+   "names": { "ja": "補助", "en": "", "zh": "", "ko": "", "vi": "" },
+   "ids": [6, 43, 32, 40, 42, 44, 17, 34]
+  },
+  {
+   "key": "fun",
+   "names": { "ja": "娯楽", "en": "", "zh": "", "ko": "", "vi": "" },
+   "ids": [46, 54, 49, 50]
+  }
+ ]
+}

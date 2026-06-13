@@ -21,6 +21,7 @@
     WWM_XINFA_ICONS:      'xinfa_icons',
     WWM_KONGFU_ICONS:     'kongfu_icons',
     WWM_QISHU_ICONS:      'qishu_icons',
+    WWM_QISHU_CATEGORIES: 'qishu_categories',
     WWM_AVATAR_ICONS:     'avatar_icons',
     WWM_GEAR_SLOT_ICONS:  'gear_slot_icons'
   };
