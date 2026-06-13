@@ -1,43 +1,123 @@
 {
  "_meta": {
   "extracted_at": "2026-06-13T00:00:00.000Z",
-  "note": "兄貴 (2026-06-13) 提供カテゴリ分け (動画 ja 30 件掲載順)。 affix 4 種 (stControl/stBurst/areaDebuff/areaDmg) = 装備 affix の「単体制御系奇術ダメ」 等と直接連携、 演武 effects 実装時の計算反映ターゲット。 残 (puzzle/support/fun) = affix 連携なし、 UI section 分けのみ。 en/zh/ko/vi 名 = 当面空 = DataStore fallback chain (ja→en→ja) で ja 表示。 公式カテゴリ名の en/zh/ko/vi は動画ヘッダ vision 採取 or 兄貴提示で後追い反映。"
+  "note": "兄貴 (2026-06-13) 提供カテゴリ分け (動画 ja 30 件掲載順)。 affix 4 種 (stControl/stBurst/areaDebuff/areaDmg) = 装備 affix の「単体制御系奇術ダメ」 等と直接連携、 演武 effects 実装時の計算反映ターゲット。 残 (puzzle/support/fun) = affix 連携なし、 UI section 分けのみ。 en/zh/ko/vi 名 = 当面空 = DataStore fallback chain (ja→en→ja) で ja 表示。 公式カテゴリ名の en/zh/ko/vi は動画ヘッダ vision 採取 or 兄貴提示で後追い反映。 / affix 4 種 (areaDebuff/areaDmg/stControl/stBurst) の en/zh/ko/vi カテゴリ名 = stat_display.json の affix 表記 (単体制御系奇術ダメ 等) から「~系奇術ダメ / ~类奇术增伤 / ~류 비결 / Tăng sát thương kỳ thuật loại ~」 サフィックス除去で短縮 (兄貴指示 2026-06-13「affix にあわせる」)。 残 3 (puzzle/support/fun) = 公式 UI 表記 unverifiable = ja のみ確定 + 他言語空 = DataStore fallback で ja 表示 (実害なし、 兄貴指示 = 「4 種以外はぶっちゃけどうでもいい」)。"
  },
  "categories": [
   {
    "key": "puzzle",
-   "names": { "ja": "謎解き", "en": "", "zh": "", "ko": "", "vi": "" },
-   "ids": [101, 102, 103, 106, 107]
+   "names": {
+    "ja": "謎解き",
+    "en": "",
+    "zh": "",
+    "ko": "",
+    "vi": ""
+   },
+   "ids": [
+    101,
+    102,
+    103,
+    106,
+    107
+   ]
   },
   {
    "key": "areaDebuff",
-   "names": { "ja": "範囲状態異常", "en": "", "zh": "", "ko": "", "vi": "" },
-   "ids": [4, 11]
+   "names": {
+    "ja": "範囲状態異常",
+    "en": "Area Debuff",
+    "zh": "群体异常",
+    "ko": "단체 이상",
+    "vi": "Đa mục tiêu bất thường"
+   },
+   "ids": [
+    4,
+    11
+   ]
   },
   {
    "key": "areaDmg",
-   "names": { "ja": "範囲攻撃", "en": "", "zh": "", "ko": "", "vi": "" },
-   "ids": [10, 14, 39, 45]
+   "names": {
+    "ja": "範囲攻撃",
+    "en": "Area DMG",
+    "zh": "群体伤害",
+    "ko": "단체 피해",
+    "vi": "Sát thương đa mục tiêu"
+   },
+   "ids": [
+    10,
+    14,
+    39,
+    45
+   ]
   },
   {
    "key": "stControl",
-   "names": { "ja": "単体制御", "en": "", "zh": "", "ko": "", "vi": "" },
-   "ids": [13, 33, 36, 37, 38]
+   "names": {
+    "ja": "単体制御",
+    "en": "ST Control",
+    "zh": "单体控制",
+    "ko": "단일 제어",
+    "vi": "Khống chế đơn mục tiêu"
+   },
+   "ids": [
+    13,
+    33,
+    36,
+    37,
+    38
+   ]
   },
   {
    "key": "stBurst",
-   "names": { "ja": "単体爆発", "en": "", "zh": "", "ko": "", "vi": "" },
-   "ids": [2, 3, 41]
+   "names": {
+    "ja": "単体爆発",
+    "en": "ST Burst",
+    "zh": "单体爆发",
+    "ko": "단일 폭발",
+    "vi": "Bùng nổ đơn mục tiêu"
+   },
+   "ids": [
+    2,
+    3,
+    41
+   ]
   },
   {
    "key": "support",
-   "names": { "ja": "補助", "en": "", "zh": "", "ko": "", "vi": "" },
-   "ids": [6, 43, 32, 40, 42, 44, 17, 34]
+   "names": {
+    "ja": "補助",
+    "en": "",
+    "zh": "",
+    "ko": "",
+    "vi": ""
+   },
+   "ids": [
+    6,
+    43,
+    32,
+    40,
+    42,
+    44,
+    17,
+    34
+   ]
   },
   {
    "key": "fun",
-   "names": { "ja": "娯楽", "en": "", "zh": "", "ko": "", "vi": "" },
-   "ids": [46, 54, 49, 50]
+   "names": {
+    "ja": "娯楽",
+    "en": "",
+    "zh": "",
+    "ko": "",
+    "vi": ""
+   },
+   "ids": [
+    46,
+    54,
+    49,
+    50
+   ]
   }
  ]
 }
