@@ -4,7 +4,7 @@
 // 実装 plan : docs/superpowers/plans/2026-06-09-i18n-unification.md
 (function () {
   'use strict';
-  const CATS = ['kongfu', 'xinfa', 'sets', 'stat', 'path', 'skilltype', 'weapontype', 'ui', 'game_lexicon', 'stat_display'];
+  const CATS = ['kongfu', 'xinfa', 'sets', 'stat', 'path', 'skilltype', 'weapontype', 'ui', 'game_lexicon', 'stat_display', 'qishu'];
   // t() lookup chain: ui (ツール独自) → game_lexicon (ゲーム固有 UI 名) → stat (ステ/affix 真実源) → stat_display (Sidebar 表示 label、 stDisp.* prefix)。
   const T_CHAIN = ['ui', 'game_lexicon', 'stat', 'stat_display'];
   const VERSION = (typeof window !== 'undefined' && window.WWM_DISPLAY_VERSION) || 11;

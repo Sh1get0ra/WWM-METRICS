@@ -1777,6 +1777,27 @@
     "ko": "정비 중 — 비결 효과 데이터 수록 후 이 영역에 전개합니다.",
     "vi": "Đang chuẩn bị — Khu vực này sẽ được mở sau khi có dữ liệu hiệu ứng Kỳ thuật."
   },
+  "qishuPickerTitle": {
+    "ja": "奇術選択", "en": "Select Mystic Art", "zh": "选择奇术", "ko": "비결 선택", "vi": "Chọn Kỳ thuật"
+  },
+  "qishuPickerSlotLabel": {
+    "ja": "スロット", "en": "Slot", "zh": "栏位", "ko": "슬롯", "vi": "Ô"
+  },
+  "qishuPickerClear": {
+    "ja": "このスロットをクリア", "en": "Clear this slot", "zh": "清空此栏位", "ko": "이 슬롯 비우기", "vi": "Xóa ô này"
+  },
+  "qishuPickerReset": {
+    "ja": "全 8 枠を初期化", "en": "Reset all 8 slots", "zh": "重置全部 8 个栏位", "ko": "8 슬롯 모두 초기화", "vi": "Đặt lại 8 ô"
+  },
+  "qishuPickerCancel": {
+    "ja": "キャンセル", "en": "Cancel", "zh": "取消", "ko": "취소", "vi": "Hủy"
+  },
+  "qishuCategoryAll": {
+    "ja": "全奇術", "en": "All", "zh": "全部奇术", "ko": "전체 비결", "vi": "Tất cả Kỳ thuật"
+  },
+  "qishuCategoryOther": {
+    "ja": "その他", "en": "Other", "zh": "其他", "ko": "기타", "vi": "Khác"
+  },
   "heroSeatScore": {
     "ja": "武格指数",
     "en": "武格指数",

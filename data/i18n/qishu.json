@@ -1,0 +1,342 @@
+{
+ "1": {
+  "ja": "",
+  "en": "Touch of Death",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "2": {
+  "ja": "",
+  "en": "Dragon's Breath",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "3": {
+  "ja": "",
+  "en": "Drunken Poet",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "4": {
+  "ja": "",
+  "en": "Lion's Roar",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "6": {
+  "ja": "",
+  "en": "Blinding Mist",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "10": {
+  "ja": "",
+  "en": "Chost Bind",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "11": {
+  "ja": "",
+  "en": "Leaping Toad",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "13": {
+  "ja": "",
+  "en": "Talon Strike",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "14": {
+  "ja": "",
+  "en": "Guardian Palm",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "17": {
+  "ja": "",
+  "en": "Glow of Fireflies",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "27": {
+  "ja": "",
+  "en": "Wind Sense",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "31": {
+  "ja": "",
+  "en": "Divine Counter",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "32": {
+  "ja": "",
+  "en": "Serene Breeze",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "33": {
+  "ja": "",
+  "en": "Yaksha Rush",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "34": {
+  "ja": "",
+  "en": "Veil of Stillness",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "35": {
+  "ja": "",
+  "en": "Star Shift",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "36": {
+  "ja": "",
+  "en": "Free Morph",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "37": {
+  "ja": "",
+  "en": "Wolflike Frenzy",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "38": {
+  "ja": "",
+  "en": "Soaring Spin",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "39": {
+  "ja": "",
+  "en": "Flaming Meteor",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "40": {
+  "ja": "",
+  "en": "Golden Body",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "41": {
+  "ja": "",
+  "en": "Dragon Head",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "42": {
+  "ja": "",
+  "en": "Chostly Steps",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "43": {
+  "ja": "",
+  "en": "Blinding Mist",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "44": {
+  "ja": "",
+  "en": "Honking Havoc",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "45": {
+  "ja": "",
+  "en": "Flute of the Tides",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "46": {
+  "ja": "",
+  "en": "Goosy Slide",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "49": {
+  "ja": "",
+  "en": "Paired Radiance",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "50": {
+  "ja": "",
+  "en": "Cyclone Spin",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "54": {
+  "ja": "",
+  "en": "Stone Pier",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "101": {
+  "ja": "",
+  "en": "Tai Chi",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "102": {
+  "ja": "",
+  "en": "Meridian Touch",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "103": {
+  "ja": "",
+  "en": "Celestial Seize",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "106": {
+  "ja": "",
+  "en": "Cloud Steps",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "107": {
+  "ja": "",
+  "en": "Contortion",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "301": {
+  "ja": "",
+  "en": "Threefold Skywalk",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "302": {
+  "ja": "",
+  "en": "Skywalk Dash",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "303": {
+  "ja": "",
+  "en": "Mighty Drop",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "304": {
+  "ja": "",
+  "en": "Safe Mighty Drop",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "305": {
+  "ja": "",
+  "en": "Thousand-Mile Flight",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "306": {
+  "ja": "",
+  "en": "Meteor Flight",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "307": {
+  "ja": "",
+  "en": "Fan Glider",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "310": {
+  "ja": "",
+  "en": "Wind Rider",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "311": {
+  "ja": "",
+  "en": "Wallstride - Swiftstride",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "312": {
+  "ja": "",
+  "en": "Wallstride - Shadowdash",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "314": {
+  "ja": "",
+  "en": "Abyss Dive",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "315": {
+  "ja": "",
+  "en": "Moonleap Morph",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "401": {
+  "ja": "",
+  "en": "Still Waters",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "_meta": {
+  "extracted_at": "2026-06-13T09:50:53.055Z",
+  "note": "en = data/qishu_icons.json 公式 master 流用 (Phase B 先行)。 ja/zh/ko/vi = 兄貴採取まち (動画 5 言語 + claude vision OCR 予定)。 採取後 反映 = DataStore lookup chain (ja→en→ja) で空言語は en fallback。 game-lexicon-no-discretion 準拠 — claude 推測訳 禁止。"
+ }
+}

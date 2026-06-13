@@ -785,6 +785,7 @@ function applyImport(data, importedAt, state) {
   WWMState.virtual.kongfu = {};
   WWMState.virtual.xinfa = null;
   WWMState.virtual.arsenal = null;
+  WWMState.virtual.qishu = null;
   WWMHelpers.storage.remove('wwm_virtual_v1');
   // virtual に PvP sentinel (999999) 残骸があれば、その slot の affix6 のみ origEq の affix6 で復元 (他 affix は維持)。
   // 経緯: 前回 PvP装備で affix6 を sentinel にした virtual が PvE再import 後も残り「変更不可」になる事象を解消。
