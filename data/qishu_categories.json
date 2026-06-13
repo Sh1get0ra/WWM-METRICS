@@ -1,17 +1,17 @@
 {
  "_meta": {
   "extracted_at": "2026-06-13T00:00:00.000Z",
-  "note": "兄貴 (2026-06-13) 提供カテゴリ分け (動画 ja 30 件掲載順)。 affix 4 種 (stControl/stBurst/areaDebuff/areaDmg) = 装備 affix の「単体制御系奇術ダメ」 等と直接連携、 演武 effects 実装時の計算反映ターゲット。 残 (puzzle/support/fun) = affix 連携なし、 UI section 分けのみ。 en/zh/ko/vi 名 = 当面空 = DataStore fallback chain (ja→en→ja) で ja 表示。 公式カテゴリ名の en/zh/ko/vi は動画ヘッダ vision 採取 or 兄貴提示で後追い反映。 / affix 4 種 (areaDebuff/areaDmg/stControl/stBurst) の en/zh/ko/vi カテゴリ名 = stat_display.json の affix 表記 (単体制御系奇術ダメ 等) から「~系奇術ダメ / ~类奇术增伤 / ~류 비결 / Tăng sát thương kỳ thuật loại ~」 サフィックス除去で短縮 (兄貴指示 2026-06-13「affix にあわせる」)。 残 3 (puzzle/support/fun) = 公式 UI 表記 unverifiable = ja のみ確定 + 他言語空 = DataStore fallback で ja 表示 (実害なし、 兄貴指示 = 「4 種以外はぶっちゃけどうでもいい」)。"
+  "note": "兄貴 (2026-06-13) 提供カテゴリ分け (動画 ja 30 件掲載順)。 affix 4 種 (stControl/stBurst/areaDebuff/areaDmg) = 装備 affix の「単体制御系奇術ダメ」 等と直接連携、 演武 effects 実装時の計算反映ターゲット。 残 (puzzle/support/fun) = affix 連携なし、 UI section 分けのみ。 en/zh/ko/vi 名 = 当面空 = DataStore fallback chain (ja→en→ja) で ja 表示。 公式カテゴリ名の en/zh/ko/vi は動画ヘッダ vision 採取 or 兄貴提示で後追い反映。 / affix 4 種 (areaDebuff/areaDmg/stControl/stBurst) の en/zh/ko/vi カテゴリ名 = stat_display.json の affix 表記 (単体制御系奇術ダメ 等) から「~系奇術ダメ / ~类奇术增伤 / ~류 비결 / Tăng sát thương kỳ thuật loại ~」 サフィックス除去で短縮 (兄貴指示 2026-06-13「affix にあわせる」)。 残 3 (puzzle/support/fun) = 公式 UI 表記 unverifiable = ja のみ確定 + 他言語空 = DataStore fallback で ja 表示 (実害なし、 兄貴指示 = 「4 種以外はぶっちゃけどうでもいい」)。 / 残 3 (puzzle/support/fun) の en/zh/ko/vi = 兄貴提示 (2026-06-13 動画 image #11-20) で全 7 カテゴリ 5 言語完備。"
  },
  "categories": [
   {
    "key": "puzzle",
    "names": {
     "ja": "謎解き",
-    "en": "",
-    "zh": "",
-    "ko": "",
-    "vi": ""
+    "en": "Puzzle",
+    "zh": "解谜",
+    "ko": "간파",
+    "vi": "Giải đố"
    },
    "ids": [
     101,
@@ -87,10 +87,10 @@
    "key": "support",
    "names": {
     "ja": "補助",
-    "en": "",
-    "zh": "",
-    "ko": "",
-    "vi": ""
+    "en": "Support",
+    "zh": "辅助",
+    "ko": "지원",
+    "vi": "Hỗ trợ"
    },
    "ids": [
     6,
@@ -107,10 +107,10 @@
    "key": "fun",
    "names": {
     "ja": "娯楽",
-    "en": "",
-    "zh": "",
-    "ko": "",
-    "vi": ""
+    "en": "Entertainment",
+    "zh": "娱戏",
+    "ko": "유희",
+    "vi": "Giải Trí"
    },
    "ids": [
     46,
