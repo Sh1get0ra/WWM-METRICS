@@ -378,7 +378,7 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 }
 .wwm-band-top {
   display: flex; align-items: center;
-  padding: 12px 48px;
+  padding: 7px 20px;
   border-bottom: 1px solid var(--sumi-ink-1);
   /* 薄墨 overlay = hero と階調差 (透過地続きで差別化が無かった)。
      BG は透けたまま一段層が変わる。rgba(50,50,50,0.34) = 兄貴実機チューニング確定値 2026-06-12 */
@@ -418,7 +418,14 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   font-family: var(--f-display); font-weight: 700;
   letter-spacing: .18em; color: var(--gold-bright); /* 題字=金、スコア値=白 (兄貴指定 2026-06-12) */
 }
-.hero-wuxia .seat-main .eyebrow .seat-title { font-size: 30px; }
+.hero-wuxia .seat-main .eyebrow .seat-title {
+  font-size: 30px;
+  text-shadow: var(--c-hero-title-text-shadow);
+}
+/* ja = 玉ねぎ楷書 svg 差替え時 = text-shadow 不適用 → filter で同等浮き */
+.hero-wuxia .seat-main .eyebrow .seat-title svg {
+  filter: var(--c-hero-title-drop-shadow);
+}
 .hero-wuxia .seat-sub .eyebrow .seat-title { font-size: 12px; }
 .hero-wuxia .seat-main .eyebrow .seat-en { font-size: 14px; letter-spacing: .28em; }
 
@@ -444,7 +451,7 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 .hero-wuxia .seat-main .hb-num {
   display: flex; align-items: flex-start;
   font-family: var(--f-latin); font-weight: 800;
-  font-size: 96px; line-height: 0.95; letter-spacing: -0.015em;
+  font-size: 82px; line-height: 0.95; letter-spacing: -0.015em;
   color: var(--paper); /* 古紙白 #ede4d0 — 旧 hero 復帰 (兄貴指示 2026-06-12、明金は棄却) */
   margin-top: 6px;
   white-space: nowrap;
@@ -505,12 +512,12 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 .hero-wuxia .avatar svg, .hero-wuxia .avatar img { width: 100%; height: 100%; display: block; }
 .hero-wuxia .h-id-info { min-width: 170px; }
 .hero-wuxia .pname { font-family: var(--f-display); font-weight: 700; font-size: 17px; color: var(--sumi-text); }
-.hero-wuxia .pname b { font-family: var(--f-mono); font-weight: 600; font-size: 12px; color: var(--gold); margin-left: 8px; }
+.hero-wuxia .pname b { font-family: var(--f-latin); font-weight: 600; font-size: 12px; color: var(--gold); margin-left: 8px; }
 .hero-wuxia .pwr {
   margin-top: 2px; font-family: var(--f-mono); font-weight: 600; font-size: 11px;
   letter-spacing: 0.1em; color: var(--sumi-text-3);
 }
-.hero-wuxia .pwr b { font-size: 14px; color: var(--gold); margin-left: 6px; }
+.hero-wuxia .pwr b { font-family: var(--f-latin); font-size: 14px; color: var(--gold); margin-left: 6px; }
 .hero-wuxia .seat-sub { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--sumi-ink-1); }
 .hero-wuxia .seat-sub .eyebrow { font-size: 9px; letter-spacing: 0.26em; }
 .hero-wuxia .seat-sub .hb-num {
@@ -698,6 +705,24 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   display: inline-block;
   vertical-align: -0.18em;
 }
+/* 縦書き brand「風燕計」 svg 化時 = 親自身の writing-mode を horizontal-tb 化。
+   (vertical-rl のままだと子 block が水平方向に並ぶ = CSS writing-mode 仕様。
+    子のみ horizontal-tb 化しても block flow direction は親決定で水平のまま) */
+.wwm-brand-vert.kaisho-vert-mode {
+  writing-mode: horizontal-tb;
+  text-orientation: mixed;
+}
+.wwm-brand-vert .kaisho-vchar {
+  display: block;
+  line-height: 1;
+  text-align: center;
+}
+.wwm-brand-vert .kaisho-vchar .kaisho-svg {
+  /* height/width = base rule (L703 [data-kaisho] .kaisho-svg height:1.25em) 継承で良い塩梅 (兄貴 DevTools 2026-06-14) */
+  vertical-align: baseline;
+  display: block;
+  margin: 0 auto;
+}
 /* zh = 玉ねぎ (日本語フォント) の簡体グリフ無し → Ma Shan Zheng (簡体毛筆楷書、
    読込済 Google Fonts) をテキストのまま当てる — SVG 不要で筆の統一感 (兄貴案 2026-06-12) */
 html[lang="zh-CN"] [data-kaisho] {
@@ -805,8 +830,33 @@ html[lang="zh-CN"] [data-kaisho] {
 }
 .wwm-preset-pop .pp-act:hover { border-color: var(--gold-deep); color: var(--kami-ink); }
 
+/* 武備 tab = 公式 bg-icon 透かし (兄貴指示 2026-06-14、 anlz-bgicon と同 pattern)。
+   workspace.js が `.wwm-ws-body` 最初に `<div class="wwm-ws-bgicon-layer">` を挿入 → sticky + top:0 で
+   panel 内 scroll で bg が動かない、 同時に panel 縁まで届く (::before の flow 占有問題回避) */
+.wwm-ws-body { position: relative; }
+.wwm-ws-body > .wwm-ws-panel { position: relative; z-index: 1; }
+.wwm-ws-bgicon-layer {
+  position: sticky;
+  top: 0;
+  display: none; /* 武備 tab 時のみ表示 (下 rule で gate) */
+  height: 100vh;
+  width: 100%;
+  margin-bottom: -100vh; /* 占有逆方向 = タイトル押し下げ無し */
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 0; /* panel (z:1) 背面、 bgicon は flow 占有ゼロで重ね描画 */
+}
+.wwm-app[data-active-workspace="build"] .wwm-ws-bgicon-layer {
+  display: block;
+  background-image: url("https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b5a48a5940986d6e27FWkzmPig05.png");
+  background-position: right -63px bottom 300px;
+  background-size: 680px auto;
+  opacity: 0.4;
+  filter: brightness(0);
+}
+
 .wwm-ws-body {
-  padding: 24px 36px 44px; flex: 1; border-left: 1px solid var(--gold-deep); background: var(--kami-0);
+  padding: 20px 0 44px; flex: 1; border-left: 1px solid var(--gold-deep); background: var(--kami-0);
   /* 紙面の内部 scroll (viewport 固定化 2026-06-12 — tabs/footer は固定) */
   overflow-y: auto;
   min-height: 0;
@@ -814,6 +864,7 @@ html[lang="zh-CN"] [data-kaisho] {
   scrollbar-color: var(--gold-deep) transparent;
 }
 .wwm-ws-panel { display: none; container-type: inline-size; }
+.wwm-ws-panel.active { padding-left: 36px; }
 .wwm-ws-panel.active { display: block; animation: wsIn .15s ease; }
 @keyframes wsIn { from { opacity: 0; } to { opacity: 1; } }
 
@@ -979,7 +1030,6 @@ html[lang="zh-CN"] [data-kaisho] {
   /* --rail-w 250px 縮小は廃止 (兄貴指定 2026-06-12) — rail = 300px 固定。
      幅連動で rail 内表示が崩れる影響の方が大、狭幅は紙面側が譲る */
   .hero-wuxia { gap: 32px; }
-  .hero-wuxia .seat-main .hb-num { font-size: 82px; }
 }
 
 @media (max-width: 900px) {
@@ -1303,26 +1353,36 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   pointer-events: none;
 }
 
-/* score text — 1.5x */
+/* score text — 1.5x
+   selector に ID (#wwmGearGrid/#wwmXinfaGrid) を加え sidebar.css L235-242 の universal
+   font-family: var(--f-display) を specificity 上回りで override (兄貴 2026-06-14) */
 .wwm-ws-paper .wwm-equip-slot .wwm-equip-card-score,
-.wwm-ws-paper .wwm-xinfa-slot .wwm-xinfa-card-score {
+.wwm-ws-paper .wwm-xinfa-slot .wwm-xinfa-card-score,
+#wwmGearGrid .wwm-equip-card-score,
+#wwmXinfaGrid .wwm-xinfa-card-score {
   position: absolute;
   bottom: 9px; left: 9px; right: 9px;
   height: 35px;
   z-index: 4;
   display: flex; align-items: center; justify-content: center;
   gap: 3px;
-  font-family: var(--f-plank-num);
+  font-family: var(--f-latin);
   font-weight: 700;
   color: var(--wood-mid);
   text-shadow: 0 1px 0 rgba(0,0,0,0.4);
   margin: 0; padding: 0;
 }
+/* plank-score-main = sidebar.css `#wwmGearGrid *` から直接 font-family inherit を取られる
+   (親 .wwm-equip-card-score での override より子 universal が勝つ DevTools 観測 2026-06-14)。
+   → 子要素自身に ID 込み rule で直接当てる */
+#wwmGearGrid .plank-score-main,
+#wwmXinfaGrid .plank-score-main,
 .wwm-ws-paper .plank-score-main {
   font-size: 17px;
   letter-spacing: 0;
   line-height: 1;
   font-weight: 700;
+  font-family: var(--f-latin);
 }
 .wwm-ws-paper .plank-score-delta {
   font-size: 9px;

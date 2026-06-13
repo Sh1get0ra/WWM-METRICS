@@ -26,8 +26,16 @@ const UI_KEYS = [
   'wsTabGear', 'wsTabXinfa',                            // 扁額題字 (武備 panel 区画)
   'heroSeatScore', 'heroSeatDps',                       // hero 題字
   'railStatus',                                         // rail 頭
+  'brandVert',                                          // topbar 縦書きブランド「風燕計」
 ];
-const LITERALS = { qishu: '奇術' }; // index.html 直書き (data-i18n なし)
+const LITERALS = {
+  qishu: '奇術', // index.html 直書き (data-i18n なし)
+  // 縦書き brand「風燕計」 1 文字 entry — svg inline-block は writing-mode で 90deg 倒れる
+  // → 文字毎に svg 生成 + DOM で縦積み (kaishoApply の brandVert 分岐で組立)
+  brandV1: '風',
+  brandV2: '燕',
+  brandV3: '計',
+};
 
 if (!fs.existsSync(FONT_PATH)) {
   console.error('font not found: ' + FONT_PATH + ' (gitignore 対象 — フォント所持ローカルで実行)');

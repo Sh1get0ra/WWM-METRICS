@@ -48,7 +48,7 @@
         const valTxt = peaked
           ? `<span style="color:var(--gold-bright);">${(window.T?.importArsenalPeaked)||'頂点'} ✓</span> <span style="color:var(--gold-bright);font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`
           : `<span style="color:var(--paper-mute);">${(window.T?.arsenalNotPeaked)||'未突破'}</span> <span style="color:var(--gold-bright);font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`;
-        return `<div class="wwm-cmp-row" style="grid-template-columns:50px 1fr;align-items:center;"><span style="font-family:var(--f-mono);font-weight:700;">Lv${lv}</span><span>${valTxt}</span></div>`;
+        return `<div class="wwm-cmp-row" style="grid-template-columns:50px 1fr;align-items:center;"><span style="font-family:var(--f-latin);font-weight:700;">Lv${lv}</span><span>${valTxt}</span></div>`;
       }).join('');
     }
     function _newRows(ars) {
@@ -65,7 +65,7 @@
                <span>${sL.min}</span><input type="number" class="wwm-num-input" data-tier-min="${lv}" min="0" max="${preset.min}" step="1" value="${minV}" style="width:42px;height:20px;padding:0 4px;">
                <span>${sL.max}</span><input type="number" class="wwm-num-input" data-tier-max="${lv}" min="0" max="${preset.max}" step="1" value="${maxV}" style="width:42px;height:20px;padding:0 4px;">
              </span>`;
-        return `<div class="wwm-cmp-row" style="grid-template-columns:50px 1fr;align-items:center;"><span style="font-family:var(--f-mono);font-weight:700;">Lv${lv}</span>
+        return `<div class="wwm-cmp-row" style="grid-template-columns:50px 1fr;align-items:center;"><span style="font-family:var(--f-latin);font-weight:700;">Lv${lv}</span>
           <span style="display:flex;align-items:center;gap:10px;flex-wrap:nowrap;white-space:nowrap;">
             <label style="display:inline-flex;align-items:center;gap:4px;cursor:pointer;white-space:nowrap;"><span>${(window.T?.importArsenalPeaked)||'頂点'}</span> <input type="checkbox" data-tier="${lv}" ${peaked?'checked':''}></label>
             ${inputArea}

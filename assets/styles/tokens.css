@@ -114,7 +114,7 @@
   --liupai-guyun:   #c389ff;                  /* 流派: 瞬嵐 (guyun) 紫 */
 
   /* light theme 暗茶 scale (1=最暗, 6=中暗) — light selector で 装飾 dark accent 用 */
-  --brown-1:        #2a1810;
+  --brown-1:        #2e1f19;
   --brown-2:        #3a2010;
   --brown-3:        #5a1e10;
   --brown-4:        #5a3320;
@@ -261,7 +261,10 @@
   --c-cmp-modal-bg-icon-opacity: 0.1;
   --c-modal-bg-icon-opacity: 0.18;
   --c-xinfa-tier-chip-bg: var(--vermilion-soft);
-  --c-hero-number-text-shadow: 0 2px 1px var(--overlay-heavy), 0 4px 12px var(--overlay-soft-mid);
+  --c-hero-number-text-shadow: 0 5px 5px var(--overlay-heavy), 0 5px 20px var(--overlay-soft-mid);
+  /* hero title (武格指数) shadow — text 用 + ja 玉ねぎ svg 用 filter (drop-shadow chain 同等値) */
+  --c-hero-title-text-shadow: 0 5px 5px var(--overlay-heavy), 0 5px 20px var(--overlay-soft-mid);
+  --c-hero-title-drop-shadow: drop-shadow(0 5px 5px var(--overlay-heavy)) drop-shadow(0 5px 20px var(--overlay-soft-mid));
   --c-hero-next-val-fg: var(--bone-dim);
   --c-luopan-center-label-fg: var(--gold-bright); /* critique P3: gradient-clip 廃止 → solid 金 (light は vermilion-deep) */
   --c-judge-name-fg: var(--paper-2);

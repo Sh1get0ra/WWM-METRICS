@@ -255,7 +255,7 @@
           <label style="display:flex;align-items:center;gap:6px;">
             ${(window.T?.shareLabelOpacity) ?? '不透明度'}
             <input type="range" id="wwmObsOpacity" min="0" max="100" step="1" value="${initOp}" style="width:130px;accent-color:var(--gold);">
-            <span id="wwmObsOpacityVal" style="font-family:var(--f-mono);color:var(--gold-bright);min-width:36px;">${initOp}%</span>
+            <span id="wwmObsOpacityVal" style="font-family:var(--f-latin);color:var(--gold-bright);min-width:36px;">${initOp}%</span>
           </label>
         </div>
         <div style="display:flex;align-items:center;gap:12px;font-size:12px;color:var(--paper);margin-bottom:8px;flex-wrap:wrap;">
@@ -278,7 +278,7 @@
             <div style="font-size:11px;color:var(--gold-bright);font-weight:700;letter-spacing:0.1em;">${(window.T?.sharePreviewTitle) ?? 'プレビュー'}</div>
             <label style="font-size:11px;color:var(--paper-mute);display:flex;align-items:center;gap:6px;">${(window.T?.sharePreviewScaleLabel) ?? '縮尺'}
               <input type="range" id="wwmSharePreviewScale" min="30" max="100" step="5" value="50" style="width:120px;accent-color:var(--gold);">
-              <span id="wwmSharePreviewScaleVal" style="font-family:var(--f-mono);color:var(--gold-bright);min-width:36px;">50%</span>
+              <span id="wwmSharePreviewScaleVal" style="font-family:var(--f-latin);color:var(--gold-bright);min-width:36px;">50%</span>
             </label>
           </div>
           <div style="background:repeating-conic-gradient(#1a1a1a 0% 25%, #2a2a2a 0% 50%) 50% / 16px 16px;border:1px solid var(--ink-2);border-radius:3px;padding:8px;display:flex;justify-content:center;overflow:auto;">

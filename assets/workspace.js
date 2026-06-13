@@ -113,9 +113,34 @@
     var dict = window.WWM_KAISHO;
     if (!dict) return;
     var ja = (window.currentLang || 'ja') === 'ja';
+    var lang = window.currentLang || 'ja';
+    // brand 玉ねぎ縦書き対象言語 = ja/en/vi (zh/ko は実機表記「燕云计」/「연운계」 を textContent 表示)
+    var BRAND_KAISHO_LANGS = ['ja', 'en', 'vi'];
     document.querySelectorAll('[data-kaisho]').forEach(function (el) {
-      var entry = dict[el.dataset.kaisho];
+      var key = el.dataset.kaisho;
+      var entry = dict[key];
       if (!entry) return;
+      // brandVert 専用 = lang 別分岐 (data-kaisho-fixed の単純全言語 svg を上書き)
+      if (key === 'brandVert') {
+        if (BRAND_KAISHO_LANGS.indexOf(lang) >= 0) {
+          // ja/en/vi = 玉ねぎ 1 文字 svg 縦積み + 親 writing-mode horizontal-tb 化
+          el.setAttribute('aria-label', entry.text);
+          el.setAttribute('role', 'img');
+          el.classList.add('kaisho-vert-mode');
+          var keys = ['brandV1', 'brandV2', 'brandV3'];
+          el.innerHTML = keys.map(function (k) {
+            var sub = dict[k]; if (!sub) return '';
+            return '<span class="kaisho-vchar"><svg class="kaisho-svg" viewBox="' + sub.vb +
+              '" aria-hidden="true"><path fill="currentColor" d="' + sub.d + '"/></svg></span>';
+          }).join('');
+        } else {
+          // zh/ko = applyI18n が textContent (燕云计/연운계) を書込み済、 svg/class 解除
+          el.classList.remove('kaisho-vert-mode');
+          el.removeAttribute('role');
+          el.removeAttribute('aria-label');
+        }
+        return;
+      }
       // data-kaisho-fixed = 全言語共通表示 (hero 題字 武格指数/演武 — 兄貴指定 2026-06-12)
       if (ja || el.hasAttribute('data-kaisho-fixed')) {
         el.setAttribute('aria-label', entry.text);
@@ -133,6 +158,16 @@
     });
   }
   kaishoApply(); // 初期 (ja default)。?lang= / saved lang は app.js init の setLang 経由で再適用
+
+  // ── 武備 bg-icon layer = wwm-ws-body 最初に div 挿入 (兄貴指示 2026-06-14)
+  //    sticky で panel 内 scroll 不動 + 縁まで届く (::before の flow 占有問題回避)
+  (function () {
+    var body = document.querySelector('.wwm-ws-body');
+    if (!body || body.querySelector('.wwm-ws-bgicon-layer')) return;
+    var layer = document.createElement('div');
+    layer.className = 'wwm-ws-bgicon-layer';
+    body.insertBefore(layer, body.firstChild);
+  })();
 
   window.WWMWorkspace = { activate: activate, setRail: setRail };
   window.WWMKaisho = { apply: kaishoApply };
