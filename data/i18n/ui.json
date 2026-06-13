@@ -1798,6 +1798,38 @@
   "qishuCategoryOther": {
     "ja": "その他", "en": "Other", "zh": "其他", "ko": "기타", "vi": "Khác"
   },
+  "qishuPickerEmpty": {
+    "ja": "(空き)", "en": "(empty)", "zh": "（空）", "ko": "(비어 있음)", "vi": "(trống)"
+  },
+  "qishuPickerStageTitle": {
+    "ja": "装備中", "en": "Equipped", "zh": "已装备", "ko": "장착 중", "vi": "Đang trang bị"
+  },
+  "qishuPickerListTitle": {
+    "ja": "奇術一覧", "en": "All Mystic Arts", "zh": "奇术一览", "ko": "비결 목록", "vi": "Danh sách Kỳ thuật"
+  },
+  "qishuPickerApply": {
+    "ja": "採用", "en": "Apply", "zh": "采用", "ko": "적용", "vi": "Áp dụng"
+  },
+  "qishuPickerRestore": {
+    "ja": "復元", "en": "Restore", "zh": "还原", "ko": "복원", "vi": "Khôi phục"
+  },
+  "qishuPickerHint": {
+    "ja": "ドラッグで配置 / 枠 → 一覧へドラッグで外す",
+    "en": "Drag to place / drag slot to list to remove",
+    "zh": "拖动放置 / 拖至列表区域可移除",
+    "ko": "드래그하여 배치 / 슬롯을 목록으로 드래그하면 해제",
+    "vi": "Kéo để đặt / kéo ô về danh sách để gỡ"
+  },
+  "qishuPickerDupe": {
+    "ja": "同じ奇術は1つの枠にしか入りません",
+    "en": "Same Mystic Art cannot occupy two slots",
+    "zh": "同一奇术不能放在两个栏位",
+    "ko": "같은 비결은 한 슬롯에만 배치할 수 있습니다",
+    "vi": "Cùng một Kỳ thuật không thể chiếm 2 ô"
+  },
+  "qishuPickerEquipped": {
+    "ja": "装備中", "en": "Equipped", "zh": "已装备", "ko": "장착 중", "vi": "Đang trang bị"
+  },
   "heroSeatScore": {
     "ja": "武格指数",
     "en": "武格指数",

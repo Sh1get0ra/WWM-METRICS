@@ -337,7 +337,7 @@
  },
  "_meta": {
   "extracted_at": "2026-06-13T09:50:53.055Z",
-  "note": "en = data/qishu_icons.json 公式 master 流用 (Phase B 先行)。 ja/zh/ko/vi = 兄貴採取まち (動画 5 言語 + claude vision OCR 予定)。 採取後 反映 = DataStore lookup chain (ja→en→ja) で空言語は en fallback。 game-lexicon-no-discretion 準拠 — claude 推測訳 禁止。 / zh/ko/vi 反映 (2026-06-13 兄貴提供 zh_qishu.mp4 + kr_qishu.mp4 + vi_qishu.mp4 動画 + claude vision OCR、 表示順 = ja と一致 → id mapping 流用). vi 08 番 (id 10 定身鬼手) = 名称長で frame 右端「Nặng」 と被り完全採取不可 = 推測「Bàn tay đánh huyệt của trăm con quỷ」 (兄貴 review 待ち)。 / vi id 10 (定身鬼手) = 公式ゲーム UI 自体が名称欄で見切れ (フォントサイズ設定なし = 兄貴の動画でも実機でも右端確認不能の物理制約)、 「Bàn tay đánh huyệt của trăm con quỷ」 = zh「百鬼打穴手」 整合の推測値で確定 (兄貴承認 2026-06-13、 game-lexicon-no-discretion の例外 = 公式表記取得不能のため)。",
+  "note": "en = data/qishu_icons.json 公式 master 流用 (Phase B 先行)。 ja/zh/ko/vi = 兄貴採取まち (動画 5 言語 + claude vision OCR 予定)。 採取後 反映 = DataStore lookup chain (ja→en→ja) で空言語は en fallback。 game-lexicon-no-discretion 準拠 — claude 推測訳 禁止。 / zh/ko/vi 反映 (2026-06-13 兄貴提供 zh_qishu.mp4 + kr_qishu.mp4 + vi_qishu.mp4 動画 + claude vision OCR、 表示順 = ja と一致 → id mapping 流用). vi 08 番 (id 10 定身鬼手) = 名称長で frame 右端「Nặng」 と被り完全採取不可 = 推測「Bàn tay đánh huyệt của trăm con quỷ」 (兄貴 review 待ち)。",
   "ja_extracted_at": "2026-06-13T11:41:19.149Z",
   "zh_ko_vi_extracted_at": "2026-06-13T12:03:19.608Z"
  }
