@@ -675,11 +675,12 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   min-height: 0; /* grid item auto min-size 抑止 (viewport 固定化 2026-06-12) */
   display: flex; flex-direction: column;
 }
-/* tab 帯 = 墨 (上帯の続き)。active tab = 紙の差し込み — 帳簿のフォルダ tab */
+/* tab 帯 = 墨 (上帯の続き)。 active tab = 浮島カード = workspace 紙面と分離 (2026-06-14
+   差し込み型廃止 — スクロール時 panel 越境で切れる演出問題の根治) */
 .wwm-ws-tabs {
-  display: flex; align-items: flex-end; gap: 2px;
-  padding: 6px 36px 0;
-  background: transparent; /* 非選択部 = 公式 BG 透過。active tab の kami-0 差し込みは不変 */
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 36px;
+  background: transparent;
   border-bottom: 1px solid var(--gold-deep);
   position: relative; z-index: 20;
 }
@@ -687,15 +688,15 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   display: flex; align-items: baseline; justify-content: center; gap: 8px;
   flex: 0 1 150px; /* 等幅固定 — 文字数で幅を変えない */
   font-family: var(--f-display); font-weight: 600;
-  font-size: 20px; /* 15→20 (兄貴指定 2026-06-12 — 楷書 SVG は 1.25em 連動で 25px) */
+  font-size: 20px; /* 兄貴指定 2026-06-12 — 楷書 SVG は 1.25em 連動で 25px */
   letter-spacing: 0.1em;
   color: var(--sumi-text-3);
-  background: none; border: none;
-  border-radius: 1px 1px 0 0;
-  padding: 12px 10px 13px;
-  margin-bottom: -1px;
-  border-bottom: 1px solid transparent;
-  transition: color .15s ease, background .15s ease;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 8px 14px 9px;
+  margin-bottom: 0;
+  transition: color .15s ease, background .15s ease, border-color .15s ease, box-shadow .2s ease, transform .2s ease;
 }
 /* 楷書 SVG (玉ねぎ楷書「激」 path 化 — WWMKaisho が ja 時に差し込む)。
    height em 連動 = 親 font-size を継承、width は viewBox aspect で自動。
@@ -729,14 +730,16 @@ html[lang="zh-CN"] [data-kaisho] {
   font-family: 'Ma Shan Zheng', var(--f-display);
 }
 
-.wwm-ws-tab:hover { color: var(--sumi-text); }
+.wwm-ws-tab:hover { color: var(--sumi-text); background: rgba(242,234,212,0.06); }
 .wwm-ws-tab[aria-selected="true"] {
   color: var(--kami-ink);
-  /* 上端 fade — 紙が紙面から立ち上がる見え方 (「凸」の切り口だけ消す、兄貴選定 F 案 2026-06-12)。
-     下端は kami-0 で紙面と地続き (border-bottom-color 含め接続表現は維持) */
-  background: linear-gradient(180deg, rgba(242,234,212,0) 0%, rgba(242,234,212,0.55) 30%, var(--kami-0) 78%); /* rgba = kami-0 実値連動 */
-  border-bottom-color: var(--kami-0);
+  /* 浮島カード = 紙色塊 + 金枠 + 影。 panel と border-bottom 共有しない = 帯と panel が
+     1px 金線で明確分離、 active tab だけ墨帯の中に「置かれて」 いる見え方 */
+  background: var(--kami-0);
+  border: 1px solid var(--gold-deep);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35), 0 0 0 1px rgba(201,164,90,0.18);
   font-weight: 700;
+  transform: translateY(-1px);
 }
 .wwm-ws-tab.locked { opacity: 0.45; }
 .wwm-ws-tabs-r { margin-left: auto; display: flex; gap: 6px; align-items: center; padding-bottom: 9px; }
