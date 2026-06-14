@@ -865,13 +865,13 @@ html[lang="zh-CN"] [data-kaisho] {
 .wwm-app[data-active-workspace="build"] .wwm-ws-paper-bg::before {
   display: block;
   background-image: url("https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b5a48a5940986d6e27FWkzmPig05.png");
-  background-position: right -63px bottom 300px;
+  background-position: right -63px bottom -85px;
   background-size: 680px auto;
 }
 .wwm-app[data-active-workspace="hist"] .wwm-ws-paper-bg::before {
   display: block;
   background-image: url("https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b4f773639c89b2de89vjqZazt605.png");
-  background-position: right -63px bottom 300px;
+  background-position: right -63px bottom -85px;
   background-size: 680px auto;
 }
 
