@@ -1828,7 +1828,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   text-transform: uppercase;
 }
 .wwm-hist-pb-score {
-  font-family: var(--f-latin); font-size: 36px; font-weight: 700;
+  font-family: var(--f-latin); font-size: 36px; font-weight: 900;
   color: var(--kami-ink); line-height: 1;
   font-variant-numeric: tabular-nums;
 }
