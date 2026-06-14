@@ -1813,11 +1813,11 @@
     "vi": "Đóng"
   },
   "wsTabEnbu": {
-    "ja": "戦譜",
-    "en": "Combat Codex",
-    "zh": "连招谱",
-    "ko": "전투비보",
-    "vi": "Chiến Phổ"
+    "ja": "戦律",
+    "en": "Combat Cadence",
+    "zh": "战律",
+    "ko": "전투율",
+    "vi": "Chiến Luật"
   },
   "wsTabHist": {
     "ja": "履歴",
@@ -1908,11 +1908,11 @@
     "vi": "Vũ Cách Chỉ Số"
   },
   "heroSeatDps": {
-    "ja": "戦譜",
-    "en": "戦譜",
-    "zh": "连招谱",
-    "ko": "전투비보",
-    "vi": "Chiến Phổ"
+    "ja": "戦律",
+    "en": "戦律",
+    "zh": "战律",
+    "ko": "전투율",
+    "vi": "Chiến Luật"
   },
   "heroDpsComing": {
     "ja": "COMING SOON",
