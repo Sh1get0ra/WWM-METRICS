@@ -487,9 +487,9 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
    score block と同居 = 席 swap に自然随伴 (sub 席 = DPS mode では _syncNextVisibility が隠す) */
 .hero-wuxia .hero-next-inline {
   display: flex; align-items: flex-end;
-  align-self: flex-end;
+  align-self: flex-start;  /* 大数値 (.num.hero-number) と同じ親 align-items: flex-start 継承 = 上端揃え (兄貴指示 2026-06-15) */
   margin-left: 34px;
-  margin-bottom: 4px; /* スコア (line-height 0.95) の下端と光学揃え (兄貴指示 2026-06-15: 若干下) */
+  margin-bottom: 8px;
 }
 .hero-wuxia .hero-next-row { display: flex; align-items: baseline; gap: 6px; }
 .hero-wuxia .hero-next-arrow { color: var(--c-hero-next-arrow-fg); font-size: 18px; align-self: center; }
