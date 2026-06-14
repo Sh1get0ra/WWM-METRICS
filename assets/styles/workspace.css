@@ -502,7 +502,7 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 .hero-wuxia .seat-sub .hero-next-inline {
   margin-left: 10px;
   margin-bottom: 0;
-  align-self: baseline;  /* hb-num の align-items: flex-start を上書きして baseline 揃え */
+  align-self: num hero-number;  /* 兄貴実機検証 OK = 無効値で initial=auto = 親 align-items: flex-start 継承 → 大数値 .num.hero-number と同揃え */
 }
 .hero-wuxia .seat-sub .hero-next-val { font-size: 22px; }
 .hero-wuxia .seat-sub .hero-next-arrow { font-size: 12px; }
