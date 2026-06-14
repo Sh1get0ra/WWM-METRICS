@@ -1827,18 +1827,18 @@
     "vi": "Lịch sử"
   },
   "enbuTeaserTitle": {
-    "ja": "秘譜 — 演武",
-    "en": "Secret Score — Rotation",
-    "zh": "秘谱 — 演武",
-    "ko": "비보 — 연무",
-    "vi": "Bí Phổ — Diễn Võ"
+    "ja": "秘伝 — 戦律",
+    "en": "Hidden Cadence — Combat Cadence",
+    "zh": "秘传 — 战律",
+    "ko": "비전 — 전투율",
+    "vi": "Bí Truyền — Chiến Luật"
   },
   "enbuTeaserBody": {
-    "ja": "技の連なりを譜面に記し、回しごとの期待 DPS を測る。武術の係数表と共に近日開帳。",
-    "en": "Record your skill sequence like a musical score and measure expected DPS per rotation. Coming soon, alongside the martial arts coefficient table.",
-    "zh": "将技能连招记录如谱，测算每轮回转的期望DPS。与武术系数表一同近日公开。",
-    "ko": "스킬 연계를 악보처럼 기록하고 회전당 기대 DPS를 측정합니다. 무술 계수표와 함께 곧 공개 예정입니다.",
-    "vi": "Ghi lại chuỗi kỹ năng như bản nhạc và đo DPS kỳ vọng mỗi vòng xoay. Sắp ra mắt cùng bảng hệ số võ học."
+    "ja": "技の連なりを律として刻み、回しごとの期待 DPS を測る。武術の係数表と共に近日開帳。",
+    "en": "Etch your skill sequence as a cadence and measure expected DPS per rotation. Coming soon, alongside the martial arts coefficient table.",
+    "zh": "将技能连招刻为律动，测算每轮回转的期望DPS。与武术系数表一同近日公开。",
+    "ko": "스킬 연계를 율로 새기고 회전당 기대 DPS를 측정합니다. 무술 계수표와 함께 곧 공개 예정입니다.",
+    "vi": "Khắc chuỗi kỹ năng thành luật và đo DPS kỳ vọng mỗi vòng xoay. Sắp ra mắt cùng bảng hệ số võ học."
   },
   "qishuPlaceholder": {
     "ja": "整備中 — 奇術効果データの収載後、この区画に展開する。",
@@ -1908,11 +1908,11 @@
     "vi": "Vũ Cách Chỉ Số"
   },
   "heroSeatDps": {
-    "ja": "戦律",
-    "en": "戦律",
-    "zh": "战律",
-    "ko": "전투율",
-    "vi": "Chiến Luật"
+    "ja": "戦律指数",
+    "en": "戦律指数",
+    "zh": "战律指数",
+    "ko": "전투율지수",
+    "vi": "Chiến Luật Chỉ Số"
   },
   "heroDpsComing": {
     "ja": "COMING SOON",
