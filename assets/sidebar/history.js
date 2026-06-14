@@ -216,14 +216,15 @@
       const y = yOf(v).toFixed(1);
       yTicks.push(`<text x="${PL - 6}" y="${y}" dy="3" text-anchor="end" font-size="10" fill="var(--sumi-text-3)" style="font-family:var(--f-latin);">${Math.round(v)}</text>`);
     }
-    // X軸 label (1 or 3 点)
+    // X 軸 label = 変動 entry (statusScore が前と異なる + 1 件目) の日付を全部表示
+    // (兄貴指示 2026-06-14: 線形補間でなく実 entry の変化点と一致)
     const fmtDate = ts => { const d = new Date(ts); return (d.getMonth() + 1) + '/' + d.getDate(); };
-    // X 軸 label = entry の min/max 日付 = 折れ線 dot 端と一致 = 中間補間は出さない
-    // (兄貴指摘 2026-06-14: 中間 label が dot 位置とずれる)
-    const xLabels = (single ? [0.5] : [0, 1]).map(r => {
-      const ts = minTs + tsRange * r;
-      const x = (PL + r * innerW).toFixed(1);
-      return `<text x="${x}" y="${H - PB_PAD + 16}" text-anchor="middle" font-size="10" fill="var(--sumi-text-3)" style="font-family:var(--f-latin);">${fmtDate(ts)}</text>`;
+    const changeEntries = single
+      ? [entries[0]]
+      : entries.filter((e, i) => i === 0 || e.statusScore !== entries[i-1].statusScore);
+    const xLabels = changeEntries.map(e => {
+      const x = (single ? PL + innerW / 2 : xOf(e.ts)).toFixed(1);
+      return `<text x="${x}" y="${H - PB_PAD + 16}" text-anchor="middle" font-size="10" fill="var(--sumi-text-3)" style="font-family:var(--f-latin);">${fmtDate(e.ts)}</text>`;
     }).join('');
 
     // 線 (1 キャラ単選 = 金 1 本、 single = 線描かない)
