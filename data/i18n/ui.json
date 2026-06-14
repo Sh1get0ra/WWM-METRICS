@@ -1813,11 +1813,11 @@
     "vi": "Đóng"
   },
   "wsTabEnbu": {
-    "ja": "演武",
-    "en": "Rotation",
-    "zh": "演武",
-    "ko": "연무",
-    "vi": "Diễn Võ"
+    "ja": "戦譜",
+    "en": "Combat Codex",
+    "zh": "连招谱",
+    "ko": "전투비보",
+    "vi": "Chiến Phổ"
   },
   "wsTabHist": {
     "ja": "履歴",
@@ -1908,11 +1908,11 @@
     "vi": "Vũ Cách Chỉ Số"
   },
   "heroSeatDps": {
-    "ja": "演武",
-    "en": "演武",
-    "zh": "演武",
-    "ko": "연무",
-    "vi": "Diễn Võ"
+    "ja": "戦譜",
+    "en": "戦譜",
+    "zh": "连招谱",
+    "ko": "전투비보",
+    "vi": "Chiến Phổ"
   },
   "heroDpsComing": {
     "ja": "COMING SOON",
