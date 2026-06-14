@@ -493,14 +493,12 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 }
 .hero-wuxia .hero-next-row { display: flex; align-items: baseline; gap: 6px; }
 .hero-wuxia .hero-next-arrow { color: var(--c-hero-next-arrow-fg); font-size: 18px; align-self: center; }
-.hero-wuxia .hero-next-cur,
 .hero-wuxia .hero-next-val {
   font-family: var(--f-latin); font-weight: 800;
   font-size: 44px; line-height: 0.88; letter-spacing: -0.01em;
   color: var(--c-hero-next-val-fg);
 }
 /* sub 配置時 = seat-sub の hb-num と同 28px に揃え (兄貴指示 2026-06-15) */
-.hero-wuxia .seat-sub .hero-next-cur,
 .hero-wuxia .seat-sub .hero-next-val { font-size: 28px; }
 .hero-wuxia .seat-sub .hero-next-arrow { font-size: 14px; }
 /* donut = hero 一番右 (h-id 末尾、兄貴スケッチ 2026-06-12 — h-aside 配置は「不自然」で移設)。

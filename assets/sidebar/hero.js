@@ -122,13 +122,10 @@
     const currentScore = _hasBaseline ? Math.round(_baseline.statusScore) : null;
     if (currentScore === null) {
       setText('heroScore', '-');
-      setText('heroScoreCurrent', '-');
     } else if (typeof window.countUp === 'function') {
       window.countUp('heroScore', currentScore, 0);
-      window.countUp('heroScoreCurrent', currentScore, 0);
     } else {
       setText('heroScore', currentScore.toLocaleString());
-      setText('heroScoreCurrent', currentScore.toLocaleString());
     }
     // Tier 判定: 最適化最大スコア (__WWM_OPT_BEST.end、 import時固定) に対する比率で判定。opt未完了/best 無い時は空。
     // 仮閾値: SS>=95% / S>=90% / A>=80% / B>=65% (確定までに調整予定)
