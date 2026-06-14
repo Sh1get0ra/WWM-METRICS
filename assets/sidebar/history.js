@@ -249,6 +249,8 @@
     const _flag = (x, label) =>
       `<line x1="${x}" y1="${PT}" x2="${x}" y2="${PT + innerH}" stroke="var(--sumi-text-3)" stroke-opacity="0.35" stroke-dasharray="2,3"/>` +
       `<text x="${x}" y="12" text-anchor="middle" font-size="9" fill="var(--sumi-text-3)" style="font-family:var(--f-display);">⚑ ${label}</text>`;
+    const scorePrefix = T_.historyScorePrefix || '武格指数 ';
+    const scoreSuffix = T_.historyScoreSuffix || ' 突破';
     const flagByIdx = {};
     ['SS','S','A'].forEach(t => {
       const i = reachIdx[t];
@@ -258,12 +260,13 @@
     _scoreBreakthroughs(entries).forEach(b => {
       const i = entries.indexOf(b.entry);
       if (i < 0) return;
-      (flagByIdx[i] = flagByIdx[i] || {}).score = String(b.value);
+      (flagByIdx[i] = flagByIdx[i] || {}).score = scorePrefix + b.value + scoreSuffix;
     });
+    // 日付はX軸 label で見えるので旗ラベルから削除 (兄貴指示 2026-06-14)
     const flagHtml = Object.keys(flagByIdx).map(i => {
       const f = flagByIdx[i];
       const e = entries[i];
-      const parts = [f.tier, f.score, fmtDate(e.ts)].filter(Boolean);
+      const parts = [f.tier, f.score].filter(Boolean);
       return _flag(xOf(e.ts).toFixed(1), _esc(parts.join(' ')));
     }).join('');
 

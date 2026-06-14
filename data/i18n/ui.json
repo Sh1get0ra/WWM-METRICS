@@ -1721,6 +1721,20 @@
     "ko": "첫",
     "vi": "Lần đầu"
   },
+  "historyScorePrefix": {
+    "ja": "武格指数 ",
+    "en": "Score ",
+    "zh": "武格指数 ",
+    "ko": "무격지수 ",
+    "vi": "Vượt mốc "
+  },
+  "historyScoreSuffix": {
+    "ja": " 突破",
+    "en": " broken",
+    "zh": " 突破",
+    "ko": " 돌파",
+    "vi": ""
+  },
   "locale": {
     "ja": "ja-JP",
     "en": "en-US",
