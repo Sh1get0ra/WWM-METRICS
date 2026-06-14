@@ -1929,7 +1929,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   background: rgba(26,16,8,0.90); /* sumi-1 (#141009) 系 90% alpha 墨塊 wash */
   border-radius: 2px;
 }
-.wwm-hist-chart svg { width: 100%; display: block; }
+.wwm-hist-chart svg { width: 100%; max-width: 800px; margin: 0 auto; display: block; }
 .wwm-hist-empty {
   padding: 40px 0;
   text-align: center; color: var(--kami-ink-3);
