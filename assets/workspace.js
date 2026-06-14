@@ -51,7 +51,16 @@
   try { saved = localStorage.getItem(WS_KEY); } catch (e) {}
   // 旧 'anlz' saved 値 = popout 化で消滅 → build に migrate
   if (saved === 'anlz') saved = 'build';
-  activate(saved && PANELS[saved] ? saved : 'build');
+  var initialWs = (saved && PANELS[saved]) ? saved : 'build';
+  activate(initialWs);
+  // workspace.js は hero.js より前に読込 (index.html L960 vs L979) → 上の activate 内
+  // setMode 呼出は WWMSidebar.hero 未定義で空振る。DOMContentLoaded (全 inline script
+  // 完了後) で hero mode を再同期 = restore 時 enbu タブで hero が武格指数のまま固定バグ修正。
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.WWMSidebar && window.WWMSidebar.hero && window.WWMSidebar.hero.setMode) {
+      window.WWMSidebar.hero.setMode(initialWs === 'enbu' ? 'dps' : 'score');
+    }
+  });
 
   // ── rail 開閉 ──
   var app = document.getElementById('wwmApp');
