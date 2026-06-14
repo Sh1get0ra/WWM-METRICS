@@ -1839,6 +1839,10 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   border: 1px solid var(--gold-deep);
   color: var(--kami-ink);
   border-radius: 2px;
+  /* 裸 .tier-SS .tier-S ::before { position:absolute; inset:0 } が panel まで bleed する罠回避。
+     chip 自身を positioned 祖先にして shimmer/glow を chip 内に閉じる (sidebar.css L74-119) */
+  position: relative;
+  overflow: hidden;
 }
 .wwm-hist-pb-sub {
   margin-left: auto;
