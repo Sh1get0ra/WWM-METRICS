@@ -29,6 +29,9 @@
     if (ws === 'hist' && window.WWMSidebar && window.WWMSidebar.history) {
       window.WWMSidebar.history.render();
     }
+    // tab 切替で scroll 位置を top reset (panel 共通 .wwm-ws-body 1 scroll = 同期問題回避)
+    var wsBody = document.querySelector('.wwm-ws-body');
+    if (wsBody) wsBody.scrollTop = 0;
     try { localStorage.setItem(WS_KEY, ws); } catch (e) {}
   }
 
