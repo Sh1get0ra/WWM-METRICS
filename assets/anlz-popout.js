@@ -169,13 +169,18 @@
 
   function mountPip(win) {
     pipWin = win;
+    // OS タイトルバーの文字列 = i18n button label 由来 (色/button 配置は Chrome 強制で不能)
+    // ※ css copy より先に設定 + <title> tag 明示挿入で反映遅延を防ぐ
+    var T = window.T || {};
+    var titleStr = (T.anlzPopoutBtn || '格析') + ' — WWM-METRICS';
+    win.document.title = titleStr;
+    var titleEl = win.document.querySelector('title') || win.document.createElement('title');
+    titleEl.textContent = titleStr;
+    if (!titleEl.parentNode) win.document.head.appendChild(titleEl);
     // 親 document の link/style を全コピー (Document PiP は CSS 継承しない仕様)
     Array.from(document.querySelectorAll('link[rel="stylesheet"], style')).forEach(function (n) {
       win.document.head.appendChild(n.cloneNode(true));
     });
-    // OS タイトルバーの文字列 = i18n button label 由来 (色/button 配置は Chrome 強制で不能)
-    var T = window.T || {};
-    win.document.title = (T.anlzPopoutBtn || '格析') + ' — WWM-METRICS';
     win.document.body.style.margin = '0';
     win.document.body.innerHTML = '<div class="wwm-anlz-floating wwm-anlz-floating--pip">' + buildShell() + '</div>';
     var root = win.document.body.firstElementChild;
