@@ -874,6 +874,12 @@ html[lang="zh-CN"] [data-kaisho] {
   background-position: right -63px bottom -85px;
   background-size: 680px auto;
 }
+.wwm-app[data-active-workspace="enbu"] .wwm-ws-paper-bg::before {
+  display: block;
+  background-image: url("https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b56106c5e18b72fbbeyS0pjb5G05.png");
+  background-position: right -63px bottom -85px;
+  background-size: 680px auto;
+}
 
 .wwm-ws-body {
   /* grid 同 cell に paper-bg と重ね = body 自身は z:1 で内容のみ、 紙色/bg-icon は paper-bg へ */
