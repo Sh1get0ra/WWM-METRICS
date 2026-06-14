@@ -218,7 +218,9 @@
     }
     // X軸 label (1 or 3 点)
     const fmtDate = ts => { const d = new Date(ts); return (d.getMonth() + 1) + '/' + d.getDate(); };
-    const xLabels = (single ? [0.5] : [0, 0.5, 1]).map(r => {
+    // X 軸 label = entry の min/max 日付 = 折れ線 dot 端と一致 = 中間補間は出さない
+    // (兄貴指摘 2026-06-14: 中間 label が dot 位置とずれる)
+    const xLabels = (single ? [0.5] : [0, 1]).map(r => {
       const ts = minTs + tsRange * r;
       const x = (PL + r * innerW).toFixed(1);
       return `<text x="${x}" y="${H - PB_PAD + 16}" text-anchor="middle" font-size="10" fill="var(--sumi-text-3)" style="font-family:var(--f-latin);">${fmtDate(ts)}</text>`;
