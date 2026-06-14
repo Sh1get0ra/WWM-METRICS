@@ -829,4 +829,151 @@ html[lang="en"] .wwm-cmp-title-en {
   }
 }
 
+/* ─────────────────────────────────────
+   格析 Floating Panel + Document PiP (2026-06-14)
+   兄貴決定 = popout 単一表現化、 #wsAnlz tab 経路廃止 (mock = mock/anlz-floating-panel.html)
+   PC = PiP / Firefox·Safari·mobile = floating fallback
+   ──────────────────────────────────── */
+
+/* tabs 帯右端「格析」 button (PC 専用、 mobile = bottom nav 経由) */
+.wwm-anlz-popout-btn {
+  padding: 14px 24px;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px; font-weight: 700; letter-spacing: 0.18em;
+  color: var(--gold-bright);
+  background: none;
+  border: 1px solid var(--gold-bright);
+  box-shadow: inset 0 0 0 1px rgba(212, 184, 118, 0.15);
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+.wwm-anlz-popout-btn:hover { background: rgba(212, 184, 118, 0.10); color: var(--gold-bright); }
+@media (max-width: 600px) { .wwm-anlz-popout-btn { display: none; } }
+
+/* 元 #wsAnlz panel = popout 専用 host へ降格、 通常表示は無効化 (popout 単一表現)。
+   .active class が付かない経路に変えたので display:none で潜在化 = DOM 戻し先のみ */
+#wsAnlz { display: none; }
+
+/* popout 中 = body 属性 hook (将来 host を再活性化する場合の保険、 現在は #wsAnlz display:none で既に隠れている) */
+body[data-anlz-popout="1"] #wsAnlz .wwm-anlz-header,
+body[data-anlz-popout="1"] #wsAnlz .wwm-anlz-gap { display: none; }
+
+/* floating 外殻 (PiP window 内では .wwm-anlz-floating--pip override で position 解除) */
+.wwm-anlz-floating {
+  position: fixed; top: 100px; right: 30px;
+  width: 540px; height: 620px;
+  background: var(--kami-0); color: var(--kami-ink);
+  border: 1px solid var(--gold-deep);
+  box-shadow:
+    0 0 0 1px rgba(201, 164, 90, 0.4),
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 8px 24px rgba(0, 0, 0, 0.4);
+  display: flex; flex-direction: column;
+  z-index: 100;
+  resize: both; overflow: hidden;
+  min-width: 360px; min-height: 400px;
+}
+.wwm-anlz-floating[hidden] { display: none; }
+
+.wwm-anlz-floating .l-bracket { position: absolute; width: 14px; height: 14px; border: 1.5px solid var(--gold-deep); pointer-events: none; z-index: 2; }
+.wwm-anlz-floating .l-bracket.tl { top: 4px; left: 4px;  border-right: none; border-bottom: none; }
+.wwm-anlz-floating .l-bracket.tr { top: 4px; right: 4px; border-left: none;  border-bottom: none; }
+.wwm-anlz-floating .l-bracket.bl { bottom: 4px; left: 4px;  border-right: none; border-top: none; }
+.wwm-anlz-floating .l-bracket.br { bottom: 4px; right: 4px; border-left: none;  border-top: none; }
+
+.wwm-anlz-floating-header {
+  background: var(--sumi-1); color: var(--gold-bright);
+  padding: 10px 16px;
+  display: flex; align-items: center; gap: 12px;
+  cursor: move;
+  border-bottom: 1px solid var(--gold-deep);
+  flex-shrink: 0;
+}
+.wwm-anlz-floating-title { flex: 1; font-family: 'Noto Serif JP', serif; font-size: 15px; font-weight: 700; letter-spacing: 0.22em; display: flex; align-items: baseline; gap: 8px; }
+.wwm-anlz-floating-title .ja { color: var(--gold-bright); }
+.wwm-anlz-floating-title .en { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; color: var(--gold); }
+.wwm-anlz-floating-title .seal {
+  width: 22px; height: 22px; background: var(--vermilion);
+  color: #fff5e0; font-family: 'Noto Serif JP', serif; font-weight: 800; font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+  transform: rotate(-4deg); margin-left: 6px;
+}
+.wwm-anlz-floating-controls { display: flex; gap: 4px; }
+.wwm-anlz-floating-controls button {
+  background: none; border: 1px solid rgba(201, 164, 90, 0.35);
+  color: var(--gold); width: 28px; height: 28px;
+  cursor: pointer; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+.wwm-anlz-floating-controls button:hover { background: rgba(212, 184, 118, 0.15); color: var(--gold-bright); }
+.wwm-anlz-floating-controls button[data-act="close"]:hover {
+  background: rgba(232, 80, 64, 0.2); color: #e85040;
+  border-color: rgba(232, 80, 64, 0.5);
+}
+
+.wwm-anlz-floating-subheader {
+  display: flex; background: var(--sumi-2);
+  border-bottom: 1px solid var(--gold-deep);
+  padding: 0 12px; gap: 4px;
+  flex-shrink: 0;
+}
+.wwm-anlz-floating-subheader .anlz-subtab {
+  padding: 8px 18px;
+  font-family: 'Noto Serif JP', serif; font-size: 12px; font-weight: 700; letter-spacing: 0.18em;
+  color: var(--gold); background: none; border: none; cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.wwm-anlz-floating-subheader .anlz-subtab:hover { color: var(--gold-bright); }
+.wwm-anlz-floating-subheader .anlz-subtab.active {
+  color: var(--gold-bright);
+  border-bottom-color: var(--gold-bright);
+  background: rgba(212, 184, 118, 0.08);
+}
+
+.wwm-anlz-floating-body {
+  flex: 1; min-height: 0;
+  padding: 18px 22px;
+  overflow-y: auto;
+  background: var(--kami-0);
+  position: relative;
+}
+/* popout 内に DOM 移動された .wwm-anlz の元 header (bamboo + 大タイトル + 旧 analysis-tabs) を非表示
+   = ガワは floating 側 header+subheader が担う */
+.wwm-anlz-floating-body .wwm-anlz-header,
+.wwm-anlz-floating-body .wwm-anlz-gap { display: none; }
+/* popout 内の .wwm-anlz は wrapper として透過化、 .wwm-anlz-body が本体 */
+.wwm-anlz-floating-body .wwm-anlz { background: transparent; padding: 0; }
+
+.wwm-anlz-floating-footer {
+  background: var(--sumi-1); color: var(--paper-mute);
+  padding: 6px 14px;
+  font-size: 10px; letter-spacing: 0.16em;
+  border-top: 1px solid var(--sumi-2);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-shrink: 0;
+}
+.wwm-anlz-floating-footer .pos { font-family: 'Cinzel', serif; color: var(--gold); }
+
+/* PiP window 内 override = OS window 自体が枠なので fixed/border/resize 不要 */
+.wwm-anlz-floating--pip {
+  position: static;
+  width: 100%; height: 100vh;
+  border: none; box-shadow: none; resize: none;
+  min-width: 0; min-height: 0;
+}
+
+/* mobile = viewport 全占有 modal 化 (PiP API 非対応経路、 drag/resize 無効) */
+@media (max-width: 600px) {
+  .wwm-anlz-floating {
+    inset: 0; top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%; height: 100%;
+    border: none; box-shadow: none; resize: none;
+    z-index: 9999;
+  }
+  .wwm-anlz-floating-header { cursor: default; }
+  .wwm-anlz-floating .l-bracket { display: none; }
+}
+
 } /* end @layer components */

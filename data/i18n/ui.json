@@ -1742,6 +1742,27 @@
     "ko": "격석",
     "vi": "Cách tích"
   },
+  "anlzPopoutBtn": {
+    "ja": "格析",
+    "en": "Analysis",
+    "zh": "格析",
+    "ko": "격석",
+    "vi": "Phân tích"
+  },
+  "anlzPopoutOpacityTip": {
+    "ja": "半透明",
+    "en": "Half opacity",
+    "zh": "半透明",
+    "ko": "반투명",
+    "vi": "Bán trong suốt"
+  },
+  "anlzPopoutCloseTip": {
+    "ja": "閉じる",
+    "en": "Close",
+    "zh": "关闭",
+    "ko": "닫기",
+    "vi": "Đóng"
+  },
   "wsTabEnbu": {
     "ja": "演武",
     "en": "Rotation",

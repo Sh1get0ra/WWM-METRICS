@@ -6,7 +6,8 @@
   'use strict';
   var WS_KEY = 'wwm_workspace_v1';
   var RAIL_KEY = 'wwm_rail_collapsed_v1';
-  var PANELS = { build: 'wsBuild', anlz: 'wsAnlz', enbu: 'wsEnbu', hist: 'wsHist' };
+  // 格析 = popout 単一表現化 (2026-06-14)、 PANELS から anlz 削除。 #wsAnlz は DOM 戻し host のみ
+  var PANELS = { build: 'wsBuild', enbu: 'wsEnbu', hist: 'wsHist' };
 
   function activate(ws) {
     if (!PANELS[ws]) return;
@@ -48,6 +49,8 @@
   // 復元
   var saved = null;
   try { saved = localStorage.getItem(WS_KEY); } catch (e) {}
+  // 旧 'anlz' saved 値 = popout 化で消滅 → build に migrate
+  if (saved === 'anlz') saved = 'build';
   activate(saved && PANELS[saved] ? saved : 'build');
 
   // ── rail 開閉 ──
