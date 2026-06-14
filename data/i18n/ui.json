@@ -1679,6 +1679,48 @@
     "ko": "아직 기록이 없습니다. 가져오기 시 자동 기록됩니다.",
     "vi": "Chưa có lịch sử. Sẽ tự động ghi khi nhập."
   },
+  "historyPbLabel": {
+    "ja": "PB",
+    "en": "PB",
+    "zh": "最高",
+    "ko": "PB",
+    "vi": "PB"
+  },
+  "historyRangeAll": {
+    "ja": "全期間",
+    "en": "All",
+    "zh": "全期",
+    "ko": "전체",
+    "vi": "Toàn thời gian"
+  },
+  "historyRange30d": {
+    "ja": "30日",
+    "en": "30d",
+    "zh": "30日",
+    "ko": "30일",
+    "vi": "30 ngày"
+  },
+  "historyRange7d": {
+    "ja": "7日",
+    "en": "7d",
+    "zh": "7日",
+    "ko": "7일",
+    "vi": "7 ngày"
+  },
+  "historyEmptyInRange": {
+    "ja": "この期間に記録なし",
+    "en": "No records in this range",
+    "zh": "此期间无记录",
+    "ko": "이 기간에 기록 없음",
+    "vi": "Không có dữ liệu trong khoảng thời gian này"
+  },
+  "historyMilestoneFlag": {
+    "ja": "初",
+    "en": "First",
+    "zh": "首达",
+    "ko": "첫",
+    "vi": "Lần đầu"
+  },
   "locale": {
     "ja": "ja-JP",
     "en": "en-US",
