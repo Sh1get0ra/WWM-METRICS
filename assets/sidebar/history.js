@@ -88,6 +88,20 @@
     entries.forEach(e => { if (!best || e.statusScore > best.statusScore) best = e; });
     return best;
   }
+  function _scoreBreakthroughs(entries) {
+    // 千刻み (1000/2000/...) 突破 entry を昇順返却。 前回 max を上回る最大 k のみ 1 旗
+    // 例: 8200 → 9100 → 9500 → 11200 → 11100 = 9000/11000 旗 (中間 10000 skip = 大ジャンプ entry 1 つにまとめ)
+    const out = [];
+    let maxK = 0;
+    entries.forEach(e => {
+      const k = Math.floor(e.statusScore / 1000);
+      if (k > maxK && k >= 1) {
+        out.push({ entry: e, value: k * 1000 });
+        maxK = k;
+      }
+    });
+    return out;
+  }
 
   function _histRoleColor(roleId, roleList) {
     const idx = roleList.indexOf(roleId);
@@ -228,18 +242,22 @@
       return `<circle cx="${cx}" cy="${cy}" r="2.5" fill="var(--gold-deep)"><title>${tip}</title></circle>`;
     }).join('');
 
-    // milestone 旗 (Tier SS/S/A 初到達)
+    // milestone 旗 = Tier SS/S/A 初到達 + 千刻み score 突破 (両方 ⚑ で並列表示)
     const reachIdx = _firstTierReachIdx(entries);
     const flagPrefix = T_.historyMilestoneFlag || '初';
-    const flagHtml = ['SS','S','A'].map(t => {
+    const _flag = (x, label) =>
+      `<line x1="${x}" y1="${PT}" x2="${x}" y2="${PT + innerH}" stroke="var(--sumi-text-3)" stroke-opacity="0.35" stroke-dasharray="2,3"/>` +
+      `<text x="${x}" y="12" text-anchor="middle" font-size="9" fill="var(--sumi-text-3)" style="font-family:var(--f-display);">⚑ ${label}</text>`;
+    const tierFlagHtml = ['SS','S','A'].map(t => {
       const i = reachIdx[t];
       if (i === undefined) return '';
       const e = entries[i];
-      const x = xOf(e.ts).toFixed(1);
-      const flagLabel = _esc(flagPrefix + ' ' + t + ' ' + fmtDate(e.ts));
-      return `<line x1="${x}" y1="${PT}" x2="${x}" y2="${PT + innerH}" stroke="var(--sumi-text-3)" stroke-opacity="0.35" stroke-dasharray="2,3"/>` +
-             `<text x="${x}" y="12" text-anchor="middle" font-size="9" fill="var(--sumi-text-3)" style="font-family:var(--f-display);">⚑ ${flagLabel}</text>`;
+      return _flag(xOf(e.ts).toFixed(1), _esc(flagPrefix + ' ' + t + ' ' + fmtDate(e.ts)));
     }).join('');
+    const scoreFlagHtml = _scoreBreakthroughs(entries).map(b =>
+      _flag(xOf(b.entry.ts).toFixed(1), _esc(b.value + ' ' + fmtDate(b.entry.ts)))
+    ).join('');
+    const flagHtml = tierFlagHtml + scoreFlagHtml;
 
     return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="height:350px;">
     ${yTicks.join('')}
