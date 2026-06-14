@@ -1833,7 +1833,9 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   font-variant-numeric: tabular-nums;
 }
 .wwm-hist-pb-tier {
-  /* hero Tier badge 準拠 (hero.css L185-246 と同 design)。 SS shimmer/glow も継承される */
+  /* hero Tier badge 準拠 (hero.css L185-246)。 hero token = 墨背景前提 rgba 透過。
+     紙面 (kami-0) で色沈み回避のため chip 自身に sumi-2 を base 敷きする (background-color)。
+     background-image で hero gradient を重ね = hero と同視覚 (墨塊 + rgba + 光る text/border) */
   position: relative;
   z-index: 2;
   font-family: var(--f-latin);
@@ -1844,41 +1846,47 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   overflow: hidden;
   border-radius: 1px;
   border: 1px solid;
-  background: var(--c-tier-badge-hero-bg);
+  background-color: var(--sumi-2);
+  background-image: var(--c-tier-badge-hero-bg);
   color: var(--c-tier-badge-hero-fg);
   border-color: var(--c-tier-badge-hero-border);
 }
 .wwm-hist-pb-tier.tier-SS {
   color: var(--c-tier-ss-hero-fg);
-  background: var(--c-tier-ss-hero-bg);
+  background-color: var(--sumi-2);
+  background-image: var(--c-tier-ss-hero-bg);
   border-color: var(--c-tier-ss-hero-border);
   text-shadow: 0 0 18px rgba(240,210,138,.95), 0 0 36px var(--vermilion-bright-glow);
   box-shadow: var(--c-hero-wuxia--hero-tier-tier-SS-shadow);
 }
 .wwm-hist-pb-tier.tier-S {
   color: var(--c-tier-s-hero-fg);
-  background: var(--c-tier-s-hero-bg);
+  background-color: var(--sumi-2);
+  background-image: var(--c-tier-s-hero-bg);
   border-color: var(--c-tier-s-hero-border);
   text-shadow: 0 0 14px rgba(232,81,58,.85), 0 0 28px rgba(200,60,43,.45);
   box-shadow: var(--c-hero-wuxia--hero-tier-tier-S-shadow);
 }
 .wwm-hist-pb-tier.tier-A {
   color: var(--c-tier-a-hero-fg);
-  background: var(--c-tier-a-hero-bg);
+  background-color: var(--sumi-2);
+  background-image: var(--c-tier-a-hero-bg);
   border-color: var(--c-tier-a-hero-border);
   text-shadow: 0 0 12px rgba(168,212,180,.7), 0 0 24px rgba(127,168,138,.35);
   box-shadow: var(--c-tier-a-hero-shadow);
 }
 .wwm-hist-pb-tier.tier-B {
   color: var(--c-tier-b-hero-fg);
-  background: var(--c-tier-b-hero-bg);
+  background-color: var(--sumi-2);
+  background-image: var(--c-tier-b-hero-bg);
   border-color: var(--c-tier-b-hero-border);
   text-shadow: 0 0 10px rgba(201,184,138,.55);
   box-shadow: var(--c-tier-b-hero-shadow);
 }
 .wwm-hist-pb-tier.tier-C {
   color: var(--c-tier-c-hero-fg);
-  background: var(--c-tier-c-hero-bg);
+  background-color: var(--sumi-2);
+  background-image: var(--c-tier-c-hero-bg);
   border-color: var(--c-tier-c-hero-border);
   text-shadow: 0 0 6px rgba(122,112,96,.4);
   box-shadow: var(--c-tier-c-hero-shadow);
