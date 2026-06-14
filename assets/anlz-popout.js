@@ -7,7 +7,7 @@
 (function () {
   'use strict';
   var KEY = 'wwm_anlz_popout_v1';
-  var DEFAULTS = { mode: 'closed', x: null, y: 100, w: 540, h: 620, opacity: 1 };
+  var DEFAULTS = { mode: 'closed', x: null, y: 100, w: 540, h: 620 };
   var pipWin = null;
   var floatEl = null;
   var dragState = null;
@@ -31,7 +31,6 @@
 
   function buildShell() {
     var T = window.T || {};
-    var tipO = _esc(T.anlzPopoutOpacityTip || '半透明');
     var tipC = _esc(T.anlzPopoutCloseTip || '閉じる');
     var labelRank = _esc(T.anlzTabRank || '期待値');
     var labelOpt = _esc(T.anlzTabOpt || '最適化');
@@ -43,8 +42,7 @@
       +     '<span class="ja">格析</span><span class="en">ANALYSIS</span><span class="seal">析</span>'
       +   '</div>'
       +   '<div class="wwm-anlz-floating-controls">'
-      +     '<button type="button" data-act="opacity" title="' + tipO + '">◐</button>'
-      +     '<button type="button" data-act="close"   title="' + tipC + '">×</button>'
+      +     '<button type="button" data-act="close" title="' + tipC + '">×</button>'
       +   '</div>'
       + '</header>'
       + '<nav class="wwm-anlz-floating-subheader">'
@@ -68,37 +66,41 @@
     anlzNode = null;
   }
 
-  // popout 内サブタブ click → 親 document の既存 #wwmAnalysisTabs button を click
-  // (state 真実源 = anlz inline script の localStorage 'wwm_analysis_tab_v1' + data-active-tab bgicon)
+  // popout root 内で subtab 切替完結 (PiP child window では parent document.getElementById で
+  // popout 内子要素が取れないため、 anlz inline script に頼らず popout root context で直接 toggle)。
+  // state は localStorage 'wwm_analysis_tab_v1' (anlz inline script と互換) に保存 → close 後の
+  // 再 open 時に復元、 anlz inline script も同 key を読むので双方向で整合
+  var SUBTAB_KEY = 'wwm_analysis_tab_v1';
+  var SUBTAB_MAP = { rank: 'wwmAffixRanking', opt: 'wwmOptimization' };
+
+  function activateSubtab(root, key) {
+    if (!SUBTAB_MAP[key]) return;
+    root.querySelectorAll('.anlz-subtab').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.anlz === key);
+    });
+    Object.entries(SUBTAB_MAP).forEach(function (kv) {
+      var el = root.querySelector('#' + kv[1]);
+      if (el) el.hidden = (kv[0] !== key);
+    });
+    // 元 .wwm-anlz の data-active-tab に反映 (bgicon 切替、 popout 内でも継承される)
+    var anlzEl = root.querySelector('.wwm-anlz');
+    if (anlzEl) anlzEl.setAttribute('data-active-tab', key);
+    try { localStorage.setItem(SUBTAB_KEY, key); } catch (e) {}
+  }
+
   function bindSubtabs(root) {
-    var subtabs = root.querySelectorAll('.anlz-subtab');
-    var active = document.querySelector('#wwmAnalysisTabs .wwm-analysis-tab.active');
-    var activeKey = active ? active.dataset.analysisTab : 'opt';
-    subtabs.forEach(function (b) { b.classList.toggle('active', b.dataset.anlz === activeKey); });
-    subtabs.forEach(function (b) {
-      b.addEventListener('click', function () {
-        var key = b.dataset.anlz;
-        subtabs.forEach(function (x) { x.classList.toggle('active', x === b); });
-        var target = document.querySelector('#wwmAnalysisTabs [data-analysis-tab="' + key + '"]');
-        if (target) target.click();
-      });
+    var saved = null;
+    try { saved = localStorage.getItem(SUBTAB_KEY); } catch (e) {}
+    var initKey = (saved && SUBTAB_MAP[saved]) ? saved : 'opt';
+    activateSubtab(root, initKey);
+    root.querySelectorAll('.anlz-subtab').forEach(function (b) {
+      b.addEventListener('click', function () { activateSubtab(root, b.dataset.anlz); });
     });
   }
 
-  function bindControls(root, host) {
-    var st = loadState();
-    if (st.opacity !== 1) host.style.opacity = String(st.opacity);
-    root.querySelectorAll('[data-act]').forEach(function (b) {
-      b.addEventListener('click', function () {
-        var act = b.dataset.act;
-        if (act === 'close') { close(); return; }
-        if (act === 'opacity') {
-          var cur = parseFloat(host.style.opacity || '1');
-          var next = cur < 1 ? 1 : 0.55;
-          host.style.opacity = String(next);
-          saveState({ opacity: next });
-        }
-      });
+  function bindControls(root) {
+    root.querySelectorAll('[data-act="close"]').forEach(function (b) {
+      b.addEventListener('click', function () { close(); });
     });
   }
 
@@ -159,7 +161,7 @@
     var node = detachAnlz();
     if (node) body.appendChild(node);
     bindSubtabs(floatEl);
-    bindControls(floatEl, floatEl);
+    bindControls(floatEl);
     bindFloatingDrag(floatEl, floatEl);
     updatePosLabel(floatEl, floatEl.getBoundingClientRect());
     saveState({ mode: 'floating' });
@@ -179,7 +181,7 @@
     if (node) body.appendChild(node);
     document.body.setAttribute('data-anlz-popout', '1');
     bindSubtabs(root); // 親 document の button を経由 = state 共有
-    bindControls(root, win.document.body);
+    bindControls(root);
     win.addEventListener('pagehide', function () { close(); });
     // size 復元観測 (OS resize → save)
     if (win.ResizeObserver) {
