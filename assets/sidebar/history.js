@@ -102,9 +102,6 @@
     // 履歴空 = empty hint だけ
     if (!arr.length) {
       root.innerHTML = `<section class="wwm-hist-panel">
-        <header class="wwm-hist-head">
-          <h3 class="wwm-hist-title sec-title" data-kaisho data-kaisho-fixed data-i18n="martialHistoryTab">${_esc(T_.martialHistoryTab || '武格履歴')}</h3>
-        </header>
         <div class="wwm-hist-empty">${_esc(T_.historyEmpty || 'まだ履歴がありません。')}</div>
       </section>`;
       return;
@@ -162,9 +159,6 @@
 
     root.innerHTML = `
       <section class="wwm-hist-panel">
-        <header class="wwm-hist-head">
-          <h3 class="wwm-hist-title sec-title" data-kaisho data-kaisho-fixed data-i18n="martialHistoryTab">${_esc(T_.martialHistoryTab || '武格履歴')}</h3>
-        </header>
         ${pbHtml}
         ${chipsHtml}
         ${chartHtml}
