@@ -92,7 +92,9 @@
   function _syncNextVisibility() {
     const el = document.querySelector('.hero-next-inline');
     if (!el) return;
-    el.style.visibility = (_heroMode === 'score' && _nextMeaningful) ? '' : 'hidden';
+    // mode 制約撤廃 (2026-06-15 兄貴指示): sub 配置 (戦律 panel での武格指数) でも
+    // 現値→仮想値 が変動していれば表示。 NEXT label は廃止、 現値 ▶ 仮想値 表記
+    el.style.visibility = _nextMeaningful ? '' : 'hidden';
   }
 
   // ── Hero block 更新 ────────────────────────────────────────────
@@ -120,10 +122,13 @@
     const currentScore = _hasBaseline ? Math.round(_baseline.statusScore) : null;
     if (currentScore === null) {
       setText('heroScore', '-');
+      setText('heroScoreCurrent', '-');
     } else if (typeof window.countUp === 'function') {
       window.countUp('heroScore', currentScore, 0);
+      window.countUp('heroScoreCurrent', currentScore, 0);
     } else {
       setText('heroScore', currentScore.toLocaleString());
+      setText('heroScoreCurrent', currentScore.toLocaleString());
     }
     // Tier 判定: 最適化最大スコア (__WWM_OPT_BEST.end、 import時固定) に対する比率で判定。opt未完了/best 無い時は空。
     // 仮閾値: SS>=95% / S>=90% / A>=80% / B>=65% (確定までに調整予定)
