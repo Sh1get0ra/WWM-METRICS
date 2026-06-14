@@ -839,9 +839,9 @@ html[lang="en"] .wwm-cmp-title-en {
    ⚠ wwm-ws-paper scope 内のため --gold-bright が紙色 (#5e4310 暗金) に rescope される →
    直値 #f0d28a (墨面 --gold-bright 同値) で「明るい金」 強制 (兄貴指定 2026-06-14) */
 .wwm-anlz-popout-btn {
-  padding: 10px 30px;
+  padding: 7px 30px;
   font-family: 'Noto Serif JP', serif;
-  font-size: 14px; font-weight: 700; letter-spacing: 0.18em;
+  font-size: 20px; font-weight: 700; letter-spacing: 0.18em;
   color: #f0d28a;
   background: none;
   border: 1px solid #f0d28a;
