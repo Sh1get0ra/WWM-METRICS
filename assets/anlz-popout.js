@@ -169,22 +169,14 @@
 
   function mountPip(win) {
     pipWin = win;
-    // OS タイトルバーの文字列 = i18n button label 由来 (色/button 配置は Chrome 強制で不能)
-    // ※ Chrome PiP は初期 render 後の title 設定を無視する場合あり →
-    //   <title> tag 明示挿入 + 複数 timing で再 set (0 / 50 / 200 / 800ms) で確実化
+    // OS タイトルバーの文字列 = i18n button label 由来。 ※ Brave では URL 強制表示
+    // の仕様で document.title が反映されない (Brave privacy 機構)、 Chrome では効く想定
     var T = window.T || {};
     var titleStr = (T.anlzPopoutBtn || '格析') + ' — WWM-METRICS';
-    function applyTitle() {
-      win.document.title = titleStr;
-      var titleEl = win.document.querySelector('title');
-      if (!titleEl) {
-        titleEl = win.document.createElement('title');
-        win.document.head.appendChild(titleEl);
-      }
-      titleEl.textContent = titleStr;
-    }
-    applyTitle();
-    [0, 50, 200, 800].forEach(function (ms) { setTimeout(applyTitle, ms); });
+    win.document.title = titleStr;
+    var titleEl = win.document.querySelector('title') || win.document.createElement('title');
+    titleEl.textContent = titleStr;
+    if (!titleEl.parentNode) win.document.head.appendChild(titleEl);
     // 親 document の link/style を全コピー (Document PiP は CSS 継承しない仕様)
     Array.from(document.querySelectorAll('link[rel="stylesheet"], style')).forEach(function (n) {
       win.document.head.appendChild(n.cloneNode(true));
