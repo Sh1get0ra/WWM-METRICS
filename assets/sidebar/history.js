@@ -178,7 +178,7 @@
 
   function _renderChartSvg(entries, pb) {
     // entries = ts 昇順、 必ず 1 件以上
-    const W = 600, H = 240, PL = 40, PR = 16, PT = 18, PB_PAD = 28;
+    const W = 600, H = 350, PL = 40, PR = 16, PT = 18, PB_PAD = 28;
     const innerW = W - PL - PR, innerH = H - PT - PB_PAD;
     const minTs = entries[0].ts;
     const maxTs = entries[entries.length - 1].ts;
@@ -241,7 +241,7 @@
              `<text x="${x}" y="${(PT - 4).toFixed(1)}" text-anchor="middle" font-size="9" fill="var(--sumi-text-3)" style="font-family:var(--f-display);">⚑ ${flagLabel}</text>`;
     }).join('');
 
-    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="height:240px;">
+    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="height:350px;">
     ${yTicks.join('')}
     ${xLabels}
     ${flagHtml}
