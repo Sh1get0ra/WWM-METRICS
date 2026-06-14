@@ -36,8 +36,11 @@
       const liupaiUrl = xid ? (window.WWM_XINFA_ICONS?.[xid]?.liupai_pic_url || null) : null;
       const liupaiPinyin = _liupaiPinyinFromUrl(liupaiUrl);
       const liupaiHtml = liupaiUrl ? `<img class="plank-liupai" src="${liupaiUrl}" alt="" loading="lazy">` : '';
+      // レアリティ (gold/purple/blue) — 公式 bg を plank-paint::after に当てるため (2026-06-14 兄貴指示)
+      const rank = xid ? (xinfaMap[xid]?.rank || null) : null;
+      const rankAttr = rank ? ` data-rank="${rank}"` : '';
       return `
-        <div class="wwm-xinfa-slot" data-xinfa-slot="${i}"${liupaiPinyin ? ` data-liupai-pinyin="${liupaiPinyin}"` : ''} onclick="WWMSidebar.xinfa.openEdit(${i})">
+        <div class="wwm-xinfa-slot" data-xinfa-slot="${i}"${liupaiPinyin ? ` data-liupai-pinyin="${liupaiPinyin}"` : ''}${rankAttr} onclick="WWMSidebar.xinfa.openEdit(${i})">
           <div class="plank-hole"></div>
           <div class="plank-stamp">心</div>
           <div class="plank-paint"></div>

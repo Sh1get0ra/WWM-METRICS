@@ -70,7 +70,7 @@
 
     const cards = _GEAR_SLOT_ORDER.map(slot => {
       const eq = eqDet[slot];
-      if (!eq) return `<div class="wwm-equip-slot wwm-equip-empty" data-slot="${slot}"><div class="plank-hole"></div><div class="plank-stamp">${_stamp(slot)}</div><div class="plank-paint"></div><div class="plank-score-paint"></div><span class="wwm-equip-card-score" data-card-score="${slot}"><span class="plank-score-main">—</span></span></div>`;
+      if (!eq) return `<div class="wwm-equip-slot wwm-equip-empty" data-slot="${slot}" data-rank="gold"><div class="plank-hole"></div><div class="plank-stamp">${_stamp(slot)}</div><div class="plank-paint"></div><div class="plank-score-paint"></div><span class="wwm-equip-card-score" data-card-score="${slot}"><span class="plank-score-main">—</span></span></div>`;
       const iconUrl = _gearIconResolve(slot, roleInfo);
       const iconHtml = iconUrl ? `<img src="${iconUrl}" alt="">` : '';
       // 流派 = 公式画像 (兄貴指示 2026-06-13 復活、 mock R5 の墨splat は廃止)
@@ -80,7 +80,7 @@
       const liupaiPinyin = _liupaiPinyinFromUrl(liupaiUrl);
       const liupaiHtml = liupaiUrl ? `<img class="plank-liupai" src="${liupaiUrl}" alt="" loading="lazy">` : '';
       return `
-        <div class="wwm-equip-slot" data-slot="${slot}"${liupaiPinyin ? ` data-liupai-pinyin="${liupaiPinyin}"` : ''} onclick="WWMSidebar.gear.openEdit('${slot}')">
+        <div class="wwm-equip-slot" data-slot="${slot}"${liupaiPinyin ? ` data-liupai-pinyin="${liupaiPinyin}"` : ''} data-rank="gold" onclick="WWMSidebar.gear.openEdit('${slot}')">
           <div class="plank-hole"></div>
           <div class="plank-stamp">${_stamp(slot)}</div>
           <div class="plank-paint"></div>

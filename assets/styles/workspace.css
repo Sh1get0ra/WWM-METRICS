@@ -922,20 +922,22 @@ html[lang="zh-CN"] [data-kaisho] {
   position: absolute;
   width: clamp(57px, 15.04cqi, 85px);
   height: clamp(57px, 15.04cqi, 85px);
+  /* 墨札化 (2026-06-14): wood gradient (#dcb070→#8b6c3e) → 茶墨 gradient (#3d3328→#1f1812)
+     turbulence RGB (0.30/0.18/0.06 = 茶) → (0.18/0.14/0.10 = 茶墨) で木目感は残す
+     highlight (255,240,200 黄白) → (220,200,160 微金) で alpha 据置
+     knot (60,30,8) → (10,6,4) 真黒 */
   background:
-    linear-gradient(180deg, transparent 0%, rgba(255,240,200,0.18) 15%, transparent 35%),
-    linear-gradient(95deg, transparent 25%, rgba(255,240,200,0.10) 30%, transparent 38%, transparent 58%, rgba(255,240,200,0.06) 62%, transparent 68%),
-    radial-gradient(ellipse 14px 11px at 28% 25%, rgba(60,30,8,0.55) 0%, transparent 65%),
-    radial-gradient(ellipse 10px 8px at 72% 65%, rgba(60,30,8,0.50) 0%, transparent 65%),
-    radial-gradient(ellipse 130% 45% at 50% 100%, rgba(40,20,4,0.40) 0%, transparent 70%),
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='280'><filter id='wood'><feTurbulence type='fractalNoise' baseFrequency='0.025 0.45' numOctaves='2' seed='20'/><feColorMatrix values='0 0 0 0 0.3  0 0 0 0 0.18  0 0 0 0 0.06  0 0 0 0 0.22 0'/></filter><rect width='150' height='280' filter='url(%23wood)'/></svg>"),
-    linear-gradient(180deg, #dcb070 0%, #b89058 50%, #8b6c3e 100%);
+    linear-gradient(180deg, transparent 0%, rgba(220,200,160,0.10) 15%, transparent 35%),
+    linear-gradient(95deg, transparent 25%, rgba(220,200,160,0.06) 30%, transparent 38%, transparent 58%, rgba(220,200,160,0.04) 62%, transparent 68%),
+    radial-gradient(ellipse 14px 11px at 28% 25%, rgba(10,6,4,0.55) 0%, transparent 65%),
+    radial-gradient(ellipse 10px 8px at 72% 65%, rgba(10,6,4,0.50) 0%, transparent 65%),
+    radial-gradient(ellipse 130% 45% at 50% 100%, rgba(0,0,0,0.45) 0%, transparent 70%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='280'><filter id='wood'><feTurbulence type='fractalNoise' baseFrequency='0.025 0.45' numOctaves='2' seed='20'/><feColorMatrix values='0 0 0 0 0.18  0 0 0 0 0.14  0 0 0 0 0.10  0 0 0 0 0.24 0'/></filter><rect width='150' height='280' filter='url(%23wood)'/></svg>"),
+    linear-gradient(180deg, #3d3328 0%, #2f2620 50%, #1f1812 100%);
   background-blend-mode: screen, screen, multiply, multiply, normal, multiply, normal;
-  box-shadow:
-    inset 0 0 0 1px rgba(40,20,4,0.5),
-    inset 0 -6px 14px rgba(40,20,4,0.4),
-    inset 0 3px 8px rgba(255,240,200,0.3),
-    0 4px 12px rgba(0,0,0,0.4);
+  /* inset 全削除 (2026-06-14、 兄貴指摘): 札サイズ小 (85×85) + 45deg 回転で 外周 1px と
+     plank-paint::after 額縁線 (内側 5px、 border 3px) が近接 → 2重ボーダー視認。 外側影のみ残す */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   border-radius: 3px;
   overflow: hidden;
   transform-origin: center;
@@ -964,8 +966,11 @@ html[lang="zh-CN"] [data-kaisho] {
   content: "";
   position: absolute;
   inset: 5px;
-  border: 2px solid var(--plank-frame);
-  box-shadow: inset 0 0 0 1px var(--plank-frame-edge);
+  border: 4px solid var(--plank-frame); /* 奇術のみ太め (2026-06-14、 兄貴指示) — 装備/心法 3px、 旧 2→3→4 */
+  /* box-shadow none 明示 (2026-06-14、 playwright 確認): base `.wwm-ws-paper .plank-paint::after`
+     (L1297) が `box-shadow: inset 0 0 0 1px plank-frame-edge` を defining。 奇術 override で行削除しても
+     cascade で base 値が残り 2重ボーダー視認継続 → 明示 none で 札サイズ小 (85×85) の額縁 4px 内 2本線解消 */
+  box-shadow: none;
   pointer-events: none;
 }
 /* アイコン wrap (counter-rotate -45deg で正立、 装備/心法 と同じ filter 着色 silhouette)。
@@ -991,11 +996,7 @@ html[lang="zh-CN"] [data-kaisho] {
 .wwm-ws-paper .wwm-qishu-slot.q-left:hover,
 .wwm-ws-paper .wwm-qishu-slot.q-right:hover  { transform: translate(0, calc(-50% - 2px)) rotate(45deg); }
 .wwm-ws-paper .wwm-qishu-slot:hover {
-  box-shadow:
-    inset 0 0 0 1px rgba(40,20,4,0.5),
-    inset 0 -6px 14px rgba(40,20,4,0.4),
-    inset 0 3px 8px rgba(255,240,200,0.3),
-    0 8px 18px rgba(0,0,0,0.5);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.55);
 }
 
 /* 演武 teaser — 墨の一枚 + 透かし */
@@ -1147,15 +1148,23 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
    display:none で隠す)。
    ============================================================ */
 .wwm-ws-paper {
-  --wood-light: #d4a868;
-  --wood-mid:   #b08850;
-  --wood-deep:  #8b6c3e;
-  --wood-shadow:#5a4220;
-  --plank-sumi:   #1a1008;
-  --plank-sumi-2: #251810;
+  /* 札本体 = 墨札化 + 中央パネル = 紙化 (2026-06-14、 兄貴指示 第2版: 黄土↔墨 反転、
+     札本体 = 茶墨 / 中央 plank-paint / plank-score-paint = 古紙、 デザインバランス維持で色のみ反転)。
+     旧 wood-* (#d4a868/#b08850/#8b6c3e/#5a4220) は git 履歴参照 */
+  --wood-light: #4a3d2e;
+  --wood-mid:   #f2ead4;  /* score 文字 (kami-0 紙色) — score paint::after 墨ベタ化 (2026-06-14) で墨地に紙色文字へ */
+  --wood-deep:  #2a2218;
+  --wood-shadow:#150f0a;
+  /* 中央パネル = 紙 (旧 plank-sumi:#1a1008/sumi-2:#251810 = 墨)。 kami-2→kami-1 gradient で軽い陰影 */
+  --plank-sumi:   #e9e0c7;
+  --plank-sumi-2: #f8f1e1;
   --plank-vermilion: #c83c2b;
-  --plank-frame: rgba(212, 168, 104, 0.5);
-  --plank-frame-edge: rgba(60, 30, 8, 0.3);
+  /* 額縁線 = 札本体茶墨 wood-deep (#2a2218) 色相へ統一 (2026-06-14 第5版、 兄貴指示「ボーダーから合わせる」)。
+     旧 kami-ink alpha (42,28,18 = 赤寄り) → wood-deep alpha (42,34,24 = 黄寄り) で札と同色相。
+     第6版: alpha 0.55/0.45 = 紙地 (kami-1/2 明色) 透けて合成色明るい → 0.9/0.8 へ濃化。
+     第7版 (2026-06-14、 兄貴指示): icon と同色 → 1段暗化、 rgb 42,34,24 → 26,20,12 (wood-shadow 寄り) */
+  --plank-frame:      rgba(26, 20, 12, 0.9);
+  --plank-frame-edge: rgba(26, 20, 12, 0.8);
   --f-plank-serif: "Zen Old Mincho", "Noto Serif JP", serif;
   --f-plank-num:   "Cinzel", "Times New Roman", serif;
 }
@@ -1173,20 +1182,24 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   max-width: 113px;
   height: auto;
   min-height: 150px;
+  /* 墨札化 (2026-06-14): wood gradient (#dcb070→#8b6c3e) → 茶墨 gradient (#3d3328→#1f1812)
+     turbulence RGB (0.30/0.18/0.06 = 茶) → (0.18/0.14/0.10 = 茶墨) で木目感は残す
+     highlight (255,240,200 黄白) → (220,200,160 微金) で alpha 据置
+     knot (60,30,8) → (10,6,4) 真黒 */
   background:
-    linear-gradient(180deg, transparent 0%, rgba(255,240,200,0.18) 15%, transparent 35%),
-    linear-gradient(95deg, transparent 25%, rgba(255,240,200,0.10) 30%, transparent 38%, transparent 58%, rgba(255,240,200,0.06) 62%, transparent 68%),
-    radial-gradient(ellipse 14px 11px at 28% 25%, rgba(60,30,8,0.55) 0%, transparent 65%),
-    radial-gradient(ellipse 10px 8px at 72% 65%, rgba(60,30,8,0.50) 0%, transparent 65%),
-    radial-gradient(ellipse 130% 45% at 50% 100%, rgba(40,20,4,0.40) 0%, transparent 70%),
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='280'><filter id='wood'><feTurbulence type='fractalNoise' baseFrequency='0.025 0.45' numOctaves='2' seed='20'/><feColorMatrix values='0 0 0 0 0.3  0 0 0 0 0.18  0 0 0 0 0.06  0 0 0 0 0.22 0'/></filter><rect width='150' height='280' filter='url(%23wood)'/></svg>"),
-    linear-gradient(180deg, #dcb070 0%, #b89058 50%, #8b6c3e 100%);
+    linear-gradient(180deg, transparent 0%, rgba(220,200,160,0.10) 15%, transparent 35%),
+    linear-gradient(95deg, transparent 25%, rgba(220,200,160,0.06) 30%, transparent 38%, transparent 58%, rgba(220,200,160,0.04) 62%, transparent 68%),
+    radial-gradient(ellipse 14px 11px at 28% 25%, rgba(10,6,4,0.55) 0%, transparent 65%),
+    radial-gradient(ellipse 10px 8px at 72% 65%, rgba(10,6,4,0.50) 0%, transparent 65%),
+    radial-gradient(ellipse 130% 45% at 50% 100%, rgba(0,0,0,0.45) 0%, transparent 70%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='280'><filter id='wood'><feTurbulence type='fractalNoise' baseFrequency='0.025 0.45' numOctaves='2' seed='20'/><feColorMatrix values='0 0 0 0 0.18  0 0 0 0 0.14  0 0 0 0 0.10  0 0 0 0 0.24 0'/></filter><rect width='150' height='280' filter='url(%23wood)'/></svg>"),
+    linear-gradient(180deg, #3d3328 0%, #2f2620 50%, #1f1812 100%);
   background-blend-mode: screen, screen, multiply, multiply, normal, multiply, normal;
   box-shadow:
-    inset 0 0 0 1px rgba(40,20,4,0.5),
-    inset 0 -6px 14px rgba(40,20,4,0.4),
-    inset 0 3px 8px rgba(255,240,200,0.3),
-    0 4px 12px rgba(0,0,0,0.4);
+    inset 0 0 0 1px rgba(0,0,0,0.6),
+    inset 0 -6px 14px rgba(0,0,0,0.45),
+    inset 0 3px 8px rgba(220,200,160,0.18),
+    0 4px 12px rgba(0,0,0,0.5);
   border-radius: 3px;
   overflow: hidden;
   padding: 0; /* 既存 padding 解除 — plank 内部は絶対座標 */
@@ -1202,7 +1215,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   inset: 0 0 auto 0;
   left: 0;
   height: 2px;
-  background: linear-gradient(180deg, rgba(255,230,180,0.4) 0%, transparent 100%);
+  background: linear-gradient(180deg, rgba(220,200,160,0.25) 0%, transparent 100%);
   mix-blend-mode: normal;
   opacity: 1;
   z-index: 1;
@@ -1214,10 +1227,10 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 .wwm-ws-paper .wwm-xinfa-slot:hover {
   transform: translateY(-2px);
   box-shadow:
-    inset 0 0 0 1px rgba(40,20,4,0.5),
-    inset 0 -6px 14px rgba(40,20,4,0.4),
-    inset 0 3px 8px rgba(255,240,200,0.3),
-    0 8px 18px rgba(0,0,0,0.5);
+    inset 0 0 0 1px rgba(0,0,0,0.6),
+    inset 0 -6px 14px rgba(0,0,0,0.45),
+    inset 0 3px 8px rgba(220,200,160,0.18),
+    0 8px 18px rgba(0,0,0,0.55);
 }
 
 /* 既存子 component の隠蔽 (rail / icon-wrap / slot-inner / liupai-badge / score) —
@@ -1271,7 +1284,9 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   pointer-events: none;
 }
 
-/* 墨パネル (上アイコン側) — 額縁線付き 1.5x */
+/* 紙パネル (上アイコン側) — 額縁線付き 1.5x。
+   inset shadow = 凹み錯視 (2026-06-14、 兄貴指示「紙が墨に沈んでる見え方」)。
+   上方内側 = 暗影 (札の墨が紙の上から張り出す) / 下方内側 = 微 highlight (凹みの底) */
 .wwm-ws-paper .plank-paint {
   position: absolute;
   top: 18px; left: 9px; right: 9px;
@@ -1279,6 +1294,9 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   background: linear-gradient(180deg, var(--plank-sumi-2) 0%, var(--plank-sumi) 100%);
   -webkit-mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, #000 0%, #000 75%, transparent 100%);
   mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, #000 0%, #000 75%, transparent 100%);
+  box-shadow:
+    inset 0 4px 8px -2px rgba(0,0,0,0.55),
+    inset 0 -1px 0 rgba(255,240,210,0.18);
   z-index: 2;
   pointer-events: none;
 }
@@ -1289,6 +1307,60 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   border: 3px solid var(--plank-frame);
   box-shadow: inset 0 0 0 1px var(--plank-frame-edge);
   pointer-events: none;
+}
+
+/* レアリティ bg = 公式素材を plank-paint 本体に流用 (2026-06-14、 兄貴指示 第2版: ::after → plank-paint へ移動)。
+   装備/心法のみ、 紙パネル全域が公式 bg + 紙色 overlay。 額縁線 (::after) は別途維持。
+   --rank-bg-fade alpha で全体透明度調整 (大きいほど薄く、 0=画像そのまま)。
+   第3版 札本体配置 = 想定外で revert (2026-06-14) */
+.wwm-ws-paper {
+  --rank-bg-fade: 0.2;
+}
+.wwm-ws-paper .wwm-xinfa-slot[data-rank="gold"] :is(.plank-paint, .plank-score-paint),
+.wwm-ws-paper .wwm-equip-slot[data-rank="gold"] :is(.plank-paint, .plank-score-paint) {
+  background-image:
+    linear-gradient(rgba(242,234,212,var(--rank-bg-fade)), rgba(242,234,212,var(--rank-bg-fade))),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/5_big-d00990c4.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.wwm-ws-paper .wwm-xinfa-slot[data-rank="purple"] :is(.plank-paint, .plank-score-paint),
+.wwm-ws-paper .wwm-equip-slot[data-rank="purple"] :is(.plank-paint, .plank-score-paint) {
+  background-image:
+    linear-gradient(rgba(242,234,212,var(--rank-bg-fade)), rgba(242,234,212,var(--rank-bg-fade))),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/4_big-c8200afa.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.wwm-ws-paper .wwm-xinfa-slot[data-rank="blue"] :is(.plank-paint, .plank-score-paint),
+.wwm-ws-paper .wwm-equip-slot[data-rank="blue"] :is(.plank-paint, .plank-score-paint) {
+  background-image:
+    linear-gradient(rgba(242,234,212,var(--rank-bg-fade)), rgba(242,234,212,var(--rank-bg-fade))),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/3_big-c3e1ce14.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* 武庫 + 奇術 editor-list = 白等級 (1_big) 公式 bg (2026-06-14、 兄貴指示: 「bg 有無で質感が違いすぎ → rank なし枠にも白 bg 仕込む」) */
+.wwm-ws-paper .wwm-arsenal-slot :is(.plank-paint, .plank-score-paint),
+.wwm-ws-paper .wwm-qishu-editor-list .wwm-qishu-picker-diamond::before {
+  background-image:
+    linear-gradient(rgba(242,234,212,var(--rank-bg-fade)), rgba(242,234,212,var(--rank-bg-fade))),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/1_big-1bac704e.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* 奇術 cluster slot = 白等級 bg (background-repeat 削除 — hover 時 縁点滅対策、 兄貴指摘 2026-06-14) */
+.wwm-ws-paper .wwm-qishu-slot .plank-paint {
+  background-image:
+    linear-gradient(rgba(242,234,212,var(--rank-bg-fade)), rgba(242,234,212,var(--rank-bg-fade))),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/1_big-1bac704e.png");
+  background-size: cover;
+  background-position: center;
 }
 
 /* アイコン img wrap (公式 png を filter 着色 silhouette) — base 75×75 */
@@ -1316,8 +1388,22 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 .wwm-ws-paper .plank-icon-wrap img {
   width: 100%; height: 100%;
   object-fit: contain;
-  /* 兄貴確定 (2026-06-13): muted 落ち着き茶 */
-  filter: brightness(0) invert(0.38) sepia(0.9) saturate(1.9) hue-rotate(352deg);
+  /* 墨化 第4版 (2026-06-14、 兄貴指示): 真黒 → 札本体茶墨 (#2a2218 / wood-deep) 寄りへ統一。
+     brightness(0) で真黒化 → invert(0.15) で暗グレー → sepia(0.85) で茶基調 →
+     saturate(1.4) で発色 → hue-rotate(355deg) で僅か赤寄り = 札茶墨と色相整合
+     第7版 (2026-06-14、 兄貴指示): ボーダーと同色 → 1段暗化、 invert 0.15 → 0.08 (wood-shadow 寄り) */
+  filter: brightness(0) invert(0.08) sepia(0.85) saturate(1.4) hue-rotate(355deg);
+  opacity: 0.92;
+  /* hover 朱化グラデ用 transition (2026-06-14、 兄貴指示) */
+  transition: filter 0.25s ease, opacity 0.25s ease;
+}
+/* hover = 墨 → 朱 (vermilion 風) グラデ切替 (2026-06-14、 兄貴指示)。
+   第3版: まだオレンジ → 更に朱寄り。 hue-rotate 340→325deg / saturate 5→4 で黄味抜き赤側へ */
+.wwm-ws-paper .wwm-gear-grid .wwm-equip-slot:hover .plank-icon-wrap img,
+.wwm-ws-paper .wwm-xinfa-slot:hover .plank-icon-wrap img,
+.wwm-ws-paper .wwm-qishu-slot:hover .plank-icon-wrap img {
+  filter: brightness(0) invert(0.16) sepia(1) saturate(4) hue-rotate(320deg);
+  opacity: 1;
 }
 
 /* 流派バッジ = 公式画像 (兄貴指示 2026-06-13、 mock R5 の墨splat 廃止)
@@ -1333,7 +1419,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   pointer-events: none;
 }
 
-/* score 専用 墨パネル (下端、 アイコン側と非連結) — 1.5x */
+/* score 専用 紙パネル (下端、 アイコン側と非連結) — 1.5x。 plank-paint と同じ凹み inset shadow */
 .wwm-ws-paper .plank-score-paint {
   position: absolute;
   bottom: 9px; left: 9px; right: 9px;
@@ -1341,6 +1427,9 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   background: linear-gradient(180deg, var(--plank-sumi-2) 0%, var(--plank-sumi) 100%);
   -webkit-mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, #000 0%, #000 75%, transparent 100%);
   mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, #000 0%, #000 75%, transparent 100%);
+  box-shadow:
+    inset 0 4px 8px -2px rgba(0,0,0,0.55),
+    inset 0 -1px 0 rgba(255,240,210,0.18);
   z-index: 2;
   pointer-events: none;
 }
@@ -1350,6 +1439,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   inset: 5px;
   border: 3px solid var(--plank-frame);
   box-shadow: inset 0 0 0 1px var(--plank-frame-edge);
+  background: var(--plank-frame); /* score 額縁内側を墨ベタ塗り (2026-06-14、 兄貴指示) — 公式 rank bg を額縁内で隠し score 文字可読性確保 */
   pointer-events: none;
 }
 
@@ -1369,7 +1459,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   font-family: var(--f-latin);
   font-weight: 700;
   color: var(--wood-mid);
-  text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.08); /* 紙地化で黒影は浮く → 軽く (2026-06-14) */
   margin: 0; padding: 0;
 }
 /* plank-score-main = sidebar.css `#wwmGearGrid *` から直接 font-family inherit を取られる
@@ -1474,20 +1564,28 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   outline: 2px solid var(--gold, #d4b876);
   outline-offset: 1px;
 }
-/* ひし形 frame (45deg 回転 + 内部画像 -45deg 戻し) — grid plank 縮小版 */
+/* ひし形 frame (45deg 回転 + 内部画像 -45deg 戻し) — stage slot と同墨札スタイル (2026-06-14 第8版、 兄貴指示) */
 .wwm-ws-paper .wwm-qishu-picker-diamond {
   display: block;
   width: 64px;
   height: 64px;
   transform: rotate(45deg);
+  /* 墨札化: 茶墨 gradient (#3d3328→#1f1812) + 微金 highlight + 黒節穴 + 茶墨 turbulence */
   background:
-    linear-gradient(135deg, rgba(255,240,200,0.18) 0%, transparent 50%),
-    linear-gradient(180deg, #c9a45a 0%, #8b6c3e 100%);
-  border: 1px solid rgba(40,20,4,0.5);
-  box-shadow:
-    inset 0 0 0 1px rgba(255,240,200,0.18),
-    inset 0 -2px 6px rgba(40,20,4,0.4),
-    0 2px 4px rgba(0,0,0,0.3);
+    linear-gradient(180deg, transparent 0%, rgba(220,200,160,0.10) 15%, transparent 35%),
+    linear-gradient(95deg, transparent 25%, rgba(220,200,160,0.06) 30%, transparent 38%, transparent 58%, rgba(220,200,160,0.04) 62%, transparent 68%),
+    radial-gradient(ellipse 14px 11px at 28% 25%, rgba(10,6,4,0.55) 0%, transparent 65%),
+    radial-gradient(ellipse 10px 8px at 72% 65%, rgba(10,6,4,0.50) 0%, transparent 65%),
+    radial-gradient(ellipse 130% 45% at 50% 100%, rgba(0,0,0,0.45) 0%, transparent 70%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='280'><filter id='wood'><feTurbulence type='fractalNoise' baseFrequency='0.025 0.45' numOctaves='2' seed='20'/><feColorMatrix values='0 0 0 0 0.18  0 0 0 0 0.14  0 0 0 0 0.10  0 0 0 0 0.24 0'/></filter><rect width='150' height='280' filter='url(%23wood)'/></svg>"),
+    linear-gradient(180deg, #3d3328 0%, #2f2620 50%, #1f1812 100%);
+  background-blend-mode: screen, screen, multiply, multiply, normal, multiply, normal;
+  border: none;
+  /* inset 全削除 (2026-06-14、 兄貴指摘): 外周 1px (rgba(0,0,0,0.6)) + 上 3px 微金光沢 + 下 14px 暗影 = 全部
+     editor-list ::after 額縁線 (内側 14px) と近接 + 同色相で 2重ボーダー化。 外側影のみ残し札浮き感は維持。
+     stage slot (.wwm-qishu-slot) は別 class で影響なし */
+  box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+  border-radius: 3px;
   overflow: hidden;
   position: relative;
 }
@@ -1498,8 +1596,9 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   height: 70%;
   transform: translate(50%, -50%) rotate(-45deg);
   object-fit: contain;
-  /* 装備/心法 plank と共通 muted 茶色 (workspace.css plank-icon-wrap img と同 filter) */
-  filter: brightness(0) invert(0.95) sepia(0.6) saturate(2) hue-rotate(352deg);
+  /* 墨札 icon と同 filter (plank-icon-wrap img と同色相) */
+  filter: brightness(0) invert(0.08) sepia(0.85) saturate(1.4) hue-rotate(355deg);
+  opacity: 0.92;
 }
 .wwm-ws-paper .wwm-qishu-picker-name {
   display: -webkit-box;
@@ -1566,33 +1665,22 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   border-color: var(--vermilion, #b22a1a);
 }
 /* col-title 共通 = base rule (#2f2a23 + gold 文字) を両 col (stage/list) で使用 */
-/* 一覧 cell の ひし形 frame = stage slot と完全同質感・同サイズ (兄貴指示 2026-06-13) */
+/* 一覧 cell の ひし形 frame = stage slot と完全同質感・同サイズ (兄貴指示 2026-06-13)。
+   background/box-shadow は base .wwm-qishu-picker-diamond (L1497-) と同値 → size のみ override */
 .wwm-ws-paper .wwm-qishu-editor-list .wwm-qishu-picker-diamond {
   width: 72px;
   height: 72px;
-  background:
-    linear-gradient(180deg, transparent 0%, rgba(255,240,200,0.18) 15%, transparent 35%),
-    linear-gradient(95deg, transparent 25%, rgba(255,240,200,0.10) 30%, transparent 38%, transparent 58%, rgba(255,240,200,0.06) 62%, transparent 68%),
-    radial-gradient(ellipse 14px 11px at 28% 25%, rgba(60,30,8,0.55) 0%, transparent 65%),
-    radial-gradient(ellipse 10px 8px at 72% 65%, rgba(60,30,8,0.50) 0%, transparent 65%),
-    radial-gradient(ellipse 130% 45% at 50% 100%, rgba(40,20,4,0.40) 0%, transparent 70%),
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='280'><filter id='wood'><feTurbulence type='fractalNoise' baseFrequency='0.025 0.45' numOctaves='2' seed='20'/><feColorMatrix values='0 0 0 0 0.3  0 0 0 0 0.18  0 0 0 0 0.06  0 0 0 0 0.22 0'/></filter><rect width='150' height='280' filter='url(%23wood)'/></svg>"),
-    linear-gradient(180deg, #dcb070 0%, #b89058 50%, #8b6c3e 100%);
-  background-blend-mode: screen, screen, multiply, multiply, normal, multiply, normal;
-  box-shadow:
-    inset 0 0 0 1px rgba(40,20,4,0.5),
-    inset 0 -6px 14px rgba(40,20,4,0.4),
-    inset 0 3px 8px rgba(255,240,200,0.3),
-    0 3px 8px rgba(0,0,0,0.5);
-  border: none;
-  border-radius: 3px;
 }
-/* 墨パネル + 額縁線 (stage slot .plank-paint と同 rule) */
+/* 紙パネル + 額縁線 (stage slot .plank-paint と同 rule)。
+   inset shadow = 凹み錯視 (plank-paint と同 — 2026-06-14、 兄貴指示) */
 .wwm-ws-paper .wwm-qishu-editor-list .wwm-qishu-picker-diamond::before {
   content: "";
   position: absolute;
   top: 9px; left: 9px; right: 9px; bottom: 9px;
   background: var(--plank-sumi);
+  box-shadow:
+    inset 0 4px 8px -2px rgba(0,0,0,0.55),
+    inset 0 -1px 0 rgba(255,240,210,0.18);
   z-index: 1;
   pointer-events: none;
 }
@@ -1600,20 +1688,18 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   content: "";
   position: absolute;
   top: 14px; left: 14px; right: 14px; bottom: 14px;
-  border: 2px solid var(--plank-frame);
-  box-shadow: inset 0 0 0 1px var(--plank-frame-edge);
+  border: 4px solid var(--plank-frame); /* stage slot と統一 (2026-06-14) — 旧 2→3→4 */
+  /* box-shadow inset 1px 削除 (2026-06-14、 兄貴指摘): cell 72×72 で 額縁 border 3px + 内側 1px = 2重視認 */
   z-index: 2;
   pointer-events: none;
 }
-/* img = 墨パネル前面 + stage と同じ muted 茶 silhouette
-   (装備/心法 plank と共通 L1260 .wwm-ws-paper .plank-icon-wrap img の filter を override 適用) */
+/* img = 紙パネル前面 (size + z のみ override、 filter は base .wwm-qishu-picker-diamond img を継承) */
 .wwm-ws-paper .wwm-qishu-editor-list .wwm-qishu-picker-diamond img {
   inset: 50% 50% auto auto;
   width: 78%;
   height: 78%;
   transform: translate(50%, -50%) rotate(-45deg);
   z-index: 3;
-  filter: brightness(0) invert(0.38) sepia(0.9) saturate(1.9) hue-rotate(352deg);
 }
 .wwm-ws-paper .wwm-qishu-editor-col-title {
   font-family: var(--f-mincho);
