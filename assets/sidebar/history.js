@@ -242,22 +242,30 @@
       return `<circle cx="${cx}" cy="${cy}" r="2.5" fill="var(--gold-deep)"><title>${tip}</title></circle>`;
     }).join('');
 
-    // milestone 旗 = Tier SS/S/A 初到達 + 千刻み score 突破 (両方 ⚑ で並列表示)
+    // milestone 旗 = Tier SS/S/A 初到達 + 千刻み score 突破。 同 entry は 1 旗に統合
+    // (旗ラベル重なり回避 — 兄貴指摘 2026-06-14)
     const reachIdx = _firstTierReachIdx(entries);
     const flagPrefix = T_.historyMilestoneFlag || '初';
     const _flag = (x, label) =>
       `<line x1="${x}" y1="${PT}" x2="${x}" y2="${PT + innerH}" stroke="var(--sumi-text-3)" stroke-opacity="0.35" stroke-dasharray="2,3"/>` +
       `<text x="${x}" y="12" text-anchor="middle" font-size="9" fill="var(--sumi-text-3)" style="font-family:var(--f-display);">⚑ ${label}</text>`;
-    const tierFlagHtml = ['SS','S','A'].map(t => {
+    const flagByIdx = {};
+    ['SS','S','A'].forEach(t => {
       const i = reachIdx[t];
-      if (i === undefined) return '';
+      if (i === undefined) return;
+      (flagByIdx[i] = flagByIdx[i] || {}).tier = flagPrefix + ' ' + t;
+    });
+    _scoreBreakthroughs(entries).forEach(b => {
+      const i = entries.indexOf(b.entry);
+      if (i < 0) return;
+      (flagByIdx[i] = flagByIdx[i] || {}).score = String(b.value);
+    });
+    const flagHtml = Object.keys(flagByIdx).map(i => {
+      const f = flagByIdx[i];
       const e = entries[i];
-      return _flag(xOf(e.ts).toFixed(1), _esc(flagPrefix + ' ' + t + ' ' + fmtDate(e.ts)));
+      const parts = [f.tier, f.score, fmtDate(e.ts)].filter(Boolean);
+      return _flag(xOf(e.ts).toFixed(1), _esc(parts.join(' ')));
     }).join('');
-    const scoreFlagHtml = _scoreBreakthroughs(entries).map(b =>
-      _flag(xOf(b.entry.ts).toFixed(1), _esc(b.value + ' ' + fmtDate(b.entry.ts)))
-    ).join('');
-    const flagHtml = tierFlagHtml + scoreFlagHtml;
 
     return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="height:350px;">
     ${yTicks.join('')}
