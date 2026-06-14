@@ -1850,6 +1850,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   background-image: var(--c-tier-badge-hero-bg);
   color: var(--c-tier-badge-hero-fg);
   border-color: var(--c-tier-badge-hero-border);
+  margin-bottom: 6px; /* score 数字 visual bottom (baseline) と badge box bottom を揃える光学補正 */
 }
 .wwm-hist-pb-tier.tier-SS {
   color: var(--c-tier-ss-hero-fg);
