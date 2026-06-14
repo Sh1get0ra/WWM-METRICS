@@ -857,6 +857,14 @@ html[lang="zh-CN"] [data-kaisho] {
   opacity: 0.4;
   filter: brightness(0);
 }
+.wwm-app[data-active-workspace="hist"] .wwm-ws-bgicon-layer {
+  display: block;
+  background-image: url("https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b4f773639c89b2de89vjqZazt605.png");
+  background-position: right -63px bottom 300px;
+  background-size: 680px auto;
+  opacity: 0.4;
+  filter: brightness(0);
+}
 
 .wwm-ws-body {
   padding: 20px 0 44px; flex: 1; border-left: 1px solid var(--gold-deep); background: var(--kami-0);
@@ -1803,6 +1811,84 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   .wwm-ws-paper .wwm-qishu-editor-list .wwm-qishu-picker-diamond { width: 60px; height: 60px; }
   .wwm-ws-paper .wwm-qishu-picker-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
   .wwm-ws-paper .wwm-qishu-editor-list-scroll { max-height: 45vh; }
+}
+
+/* ── 履歴 panel 仕上げ (2026-06-14 — 武備同型 bg-icon + フラット chart) ── */
+.wwm-hist-panel {
+  padding: 0 36px;
+}
+.wwm-hist-pb {
+  display: flex; align-items: baseline; gap: 14px;
+  padding: 16px 0 8px;
+  border-bottom: 1px solid var(--gold-deep);
+}
+.wwm-hist-pb-label {
+  font-family: var(--f-latin); font-size: 12px;
+  letter-spacing: 0.18em; color: var(--kami-ink-3);
+  text-transform: uppercase;
+}
+.wwm-hist-pb-score {
+  font-family: var(--f-latin); font-size: 36px; font-weight: 700;
+  color: var(--kami-ink); line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.wwm-hist-pb-tier {
+  font-family: var(--f-display); font-weight: 700;
+  font-size: 18px;
+  padding: 3px 10px;
+  border: 1px solid var(--gold-deep);
+  color: var(--kami-ink);
+  border-radius: 2px;
+}
+.wwm-hist-pb-sub {
+  margin-left: auto;
+  font-size: 11px; color: var(--kami-ink-3);
+  letter-spacing: 0.06em;
+}
+.wwm-hist-chips {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 10px 0 14px;
+}
+.wwm-hist-chip {
+  font-family: var(--f-display); font-size: 12px;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border: 1px solid var(--kami-line-2);
+  background: transparent;
+  color: var(--kami-ink-2);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.wwm-hist-chip:hover { color: var(--kami-ink); border-color: var(--gold-deep); }
+.wwm-hist-chip[aria-pressed="true"] {
+  color: var(--kami-ink);
+  border-color: var(--gold-deep);
+  background: rgba(201,164,90,0.10); /* gold-deep + 10% alpha — token 未定義 */
+}
+.wwm-hist-range {
+  margin-left: auto;
+  display: flex; align-items: center; gap: 6px;
+}
+.wwm-hist-chart {
+  /* フラット = 枠 border / 背景 なし、 紙面に直接 SVG 線 */
+  padding: 4px 0 20px;
+}
+.wwm-hist-chart svg { width: 100%; display: block; }
+.wwm-hist-empty {
+  padding: 40px 0;
+  text-align: center; color: var(--kami-ink-3);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 600px) {
+  .wwm-hist-panel { padding: 0 16px; }
+  .wwm-hist-pb { flex-wrap: wrap; gap: 8px; padding: 12px 0 6px; }
+  .wwm-hist-pb-score { font-size: 28px; }
+  .wwm-hist-pb-sub { margin-left: 0; flex-basis: 100%; }
+  .wwm-hist-chips { gap: 6px; padding: 8px 0 10px; }
+  .wwm-hist-range { margin-left: 0; flex-basis: 100%; }
 }
 
 } /* end @layer components */
