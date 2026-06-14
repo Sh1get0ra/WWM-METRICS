@@ -178,7 +178,7 @@
 
   function _renderChartSvg(entries, pb) {
     // entries = ts 昇順、 必ず 1 件以上
-    const W = 600, H = 350, PL = 40, PR = 16, PT = 18, PB_PAD = 28;
+    const W = 600, H = 350, PL = 40, PR = 16, PT = 36, PB_PAD = 28;
     const innerW = W - PL - PR, innerH = H - PT - PB_PAD;
     const minTs = entries[0].ts;
     const maxTs = entries[entries.length - 1].ts;
