@@ -258,4 +258,14 @@
 
   window.WWMSidebar = window.WWMSidebar || {};
   window.WWMSidebar.history = { record, render };
+
+  // 初回 history.render() が data-store ready 前に呼ばれた場合、
+  // T_ から i18n 値返らず chip ラベルが 'all'/'30d'/'7d' raw 表示される bug 回避。
+  // ready 後に panel 存在チェックして再 render = i18n 正常反映。 click 経由の
+  // 再 render は ready 済なので no-op (冪等)。
+  if (window.WWM_DS && typeof window.WWM_DS.ready === 'function') {
+    window.WWM_DS.ready().then(function () {
+      if (document.getElementById('wwmHistory')) render();
+    }).catch(function () {});
+  }
 })();
