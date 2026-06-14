@@ -1923,8 +1923,11 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   display: flex; align-items: center; gap: 6px;
 }
 .wwm-hist-chart {
-  /* フラット = 枠 border / 背景 なし、 紙面に直接 SVG 線 */
-  padding: 4px 0 20px;
+  /* 半透明墨 wash (兄貴指示 2026-06-14) — 紙面に薄く墨が乗る感じ。
+     border 等は依然なし (フラット路線維持)。 padding は墨地に余白を持たせる */
+  padding: 14px 14px 18px;
+  background: rgba(26,16,8,0.10); /* sumi-1 (#141009) 系 10% alpha 紙面 wash */
+  border-radius: 2px;
 }
 .wwm-hist-chart svg { width: 100%; display: block; }
 .wwm-hist-empty {
