@@ -182,9 +182,78 @@
     if (window.WWMKaisho && window.WWMKaisho.apply) window.WWMKaisho.apply();
   }
 
-  // chart 実装は Task 4 で置換、 暫定スタブ
   function _renderChartSvg(entries, pb) {
-    return '<svg viewBox="0 0 600 240" preserveAspectRatio="none" style="height:240px;"></svg>';
+    // entries = ts 昇順、 必ず 1 件以上
+    const W = 600, H = 240, PL = 40, PR = 16, PT = 18, PB_PAD = 28;
+    const innerW = W - PL - PR, innerH = H - PT - PB_PAD;
+    const minTs = entries[0].ts;
+    const maxTs = entries[entries.length - 1].ts;
+    const tsRange = Math.max(1, maxTs - minTs);
+    // 1 件のみ = 中央に dot 1 個。 線は描かない
+    const single = entries.length === 1;
+    const minScore = Math.min(...entries.map(e => e.statusScore));
+    const maxScore = Math.max(...entries.map(e => e.statusScore));
+    const scoreMin = Math.floor(minScore * 0.92 / 100) * 100;
+    const scoreMax = Math.ceil(maxScore * 1.05 / 100) * 100;
+    const scoreRange = Math.max(1, scoreMax - scoreMin);
+    const xOf = single
+      ? (() => PL + innerW / 2)
+      : (ts => PL + ((ts - minTs) / tsRange) * innerW);
+    const yOf = sc => PT + (1 - (sc - scoreMin) / scoreRange) * innerH;
+
+    // Y軸 3 段 ticks
+    const yTicks = [];
+    for (let i = 0; i <= 2; i++) {
+      const v = scoreMin + (scoreRange * i / 2);
+      const y = yOf(v).toFixed(1);
+      yTicks.push(`<text x="${PL - 6}" y="${y}" dy="3" text-anchor="end" font-size="10" fill="var(--kami-ink-3)" style="font-family:var(--f-latin);">${Math.round(v)}</text>`);
+    }
+    // X軸 label (1 or 3 点)
+    const fmtDate = ts => { const d = new Date(ts); return (d.getMonth() + 1) + '/' + d.getDate(); };
+    const xLabels = (single ? [0.5] : [0, 0.5, 1]).map(r => {
+      const ts = minTs + tsRange * r;
+      const x = (PL + r * innerW).toFixed(1);
+      return `<text x="${x}" y="${H - PB_PAD + 16}" text-anchor="middle" font-size="10" fill="var(--kami-ink-3)" style="font-family:var(--f-latin);">${fmtDate(ts)}</text>`;
+    }).join('');
+
+    // 線 (1 キャラ単選 = 金 1 本、 single = 線描かない)
+    const linePts = entries.map(e => `${xOf(e.ts).toFixed(1)},${yOf(e.statusScore).toFixed(1)}`).join(' ');
+    const lineHtml = single ? '' : `<polyline points="${linePts}" fill="none" stroke="var(--gold-deep)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+
+    // 通常 dot + PB 朱 dot + tooltip
+    const T_ = window.T || {};
+    const pbLabel = T_.historyPbLabel || 'PB';
+    const dotsHtml = entries.map(e => {
+      const cx = xOf(e.ts).toFixed(1), cy = yOf(e.statusScore).toFixed(1);
+      const tip = _esc(`${e.roleName} Lv${e.level} | ${e.statusScore} ${e.tier} | ${e.date}`);
+      const isPb = pb && e.ts === pb.ts;
+      if (isPb) {
+        return `<g><circle cx="${cx}" cy="${cy}" r="5.5" fill="var(--accent)" stroke="#fff" stroke-width="0.8"><title>${tip}</title></circle>` +
+               `<text x="${cx}" y="${(cy - 9).toFixed(1)}" text-anchor="middle" font-size="9" fill="var(--accent)" style="font-family:var(--f-latin);font-weight:700;">${_esc(pbLabel)}</text></g>`;
+      }
+      return `<circle cx="${cx}" cy="${cy}" r="2.5" fill="var(--gold-deep)"><title>${tip}</title></circle>`;
+    }).join('');
+
+    // milestone 旗 (Tier SS/S/A 初到達)
+    const reachIdx = _firstTierReachIdx(entries);
+    const flagPrefix = T_.historyMilestoneFlag || '初';
+    const flagHtml = ['SS','S','A'].map(t => {
+      const i = reachIdx[t];
+      if (i === undefined) return '';
+      const e = entries[i];
+      const x = xOf(e.ts).toFixed(1);
+      const flagLabel = _esc(flagPrefix + ' ' + t + ' ' + fmtDate(e.ts));
+      return `<line x1="${x}" y1="${PT}" x2="${x}" y2="${PT + innerH}" stroke="var(--kami-ink-3)" stroke-opacity="0.35" stroke-dasharray="2,3"/>` +
+             `<text x="${x}" y="${(PT - 4).toFixed(1)}" text-anchor="middle" font-size="9" fill="var(--kami-ink-3)" style="font-family:var(--f-display);">⚑ ${flagLabel}</text>`;
+    }).join('');
+
+    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="height:240px;">
+    ${yTicks.join('')}
+    ${xLabels}
+    ${flagHtml}
+    ${lineHtml}
+    ${dotsHtml}
+  </svg>`;
   }
 
   window.WWMSidebar = window.WWMSidebar || {};
