@@ -13,6 +13,12 @@
   const _HIST_KEY = 'wwm_score_history_v1';
   const _HIST_MAX = 365;
   const _HIST_COLORS = ['#c9a45a', '#a8d4b4', '#e8a87c', '#7ec4cf', '#d4a5d0', '#f0d28a', '#c8786b', '#b8d09c'];
+  // ── XSS 防止 ─────────────────────────────────────────────
+  const _ESC_MAP = { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' };
+  function _esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => _ESC_MAP[c]); }
+  const _ROLE_KEY = 'wwm_hist_role_v1';
+  const _RANGE_KEY = 'wwm_hist_range_v1';
+  const _RANGES = { '7d': 7*24*3600*1000, '30d': 30*24*3600*1000, 'all': null };
 
   function _histLoad() {
     return WWMHelpers.storage.loadJSON(_HIST_KEY, []);
@@ -50,6 +56,39 @@
     if (arr.length > _HIST_MAX) arr = arr.slice(arr.length - _HIST_MAX);
     _histSave(arr);
   }
+  function _loadRole() {
+    try { return localStorage.getItem(_ROLE_KEY) || null; } catch (_) { return null; }
+  }
+  function _saveRole(v) { try { localStorage.setItem(_ROLE_KEY, v); } catch (_) {} }
+  function _loadRange() {
+    try { return localStorage.getItem(_RANGE_KEY) || 'all'; } catch (_) { return 'all'; }
+  }
+  function _saveRange(v) { try { localStorage.setItem(_RANGE_KEY, v); } catch (_) {} }
+
+  function _pickActiveRole(arr, byRole) {
+    const saved = _loadRole();
+    if (saved && byRole[saved]) return saved;
+    // default = 最後 import の roleId
+    let latest = null, latestTs = -1;
+    arr.forEach(e => { if (e.ts > latestTs) { latestTs = e.ts; latest = e.roleId; } });
+    return latest;
+  }
+  function _firstTierReachIdx(entries) {
+    // entries = ts 昇順、 SS/S/A の初到達 entry index を { SS, S, A } で返す
+    const out = {};
+    entries.forEach((e, i) => {
+      const t = e.tier;
+      if ((t === 'SS' || t === 'S' || t === 'A') && out[t] === undefined) out[t] = i;
+    });
+    return out;
+  }
+  function _pbEntry(entries) {
+    // entries 配列の中で statusScore 最大の entry を返す (同点 = 最古)
+    let best = null;
+    entries.forEach(e => { if (!best || e.statusScore > best.statusScore) best = e; });
+    return best;
+  }
+
   function _histRoleColor(roleId, roleList) {
     const idx = roleList.indexOf(roleId);
     return _HIST_COLORS[idx % _HIST_COLORS.length];
@@ -59,98 +98,93 @@
     if (!root) return;
     const T_ = window.T || {};
     const arr = _histLoad();
+
+    // 履歴空 = empty hint だけ
     if (!arr.length) {
-      root.innerHTML = `<div class="wwm-analysis-card wwm-modal-square">
-        <div class="wwm-modal-bg-icon" style="background-image:url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b4f773639c89b2de89vjqZazt605.png');"></div>
-        <div class="wwm-analysis-header"><h3>${T_.martialHistoryTab || '武格履歴'}</h3></div>
-        <div style="padding:24px;text-align:center;color:var(--paper-mute);font-size:13px;">${T_.historyEmpty || 'まだ履歴がありません。インポート時に自動記録されます。'}</div>
-      </div>`;
+      root.innerHTML = `<section class="wwm-hist-panel">
+        <header class="wwm-hist-head">
+          <h3 class="wwm-hist-title sec-title" data-kaisho data-kaisho-fixed data-i18n="martialHistoryTab">${_esc(T_.martialHistoryTab || '武格履歴')}</h3>
+        </header>
+        <div class="wwm-hist-empty">${_esc(T_.historyEmpty || 'まだ履歴がありません。')}</div>
+      </section>`;
       return;
     }
-    // キャラ別グルーピング
+
+    // キャラ別グルーピング (ts 昇順)
     const byRole = {};
     arr.forEach(e => { (byRole[e.roleId] = byRole[e.roleId] || []).push(e); });
+    Object.keys(byRole).forEach(rid => byRole[rid].sort((a,b) => a.ts - b.ts));
     const roleList = Object.keys(byRole);
-    // 日付範囲
-    const minTs = Math.min(...arr.map(e => e.ts));
-    const maxTs = Math.max(...arr.map(e => e.ts));
-    const tsRange = Math.max(1, maxTs - minTs);
-    // Score 範囲
-    const minScore = Math.min(...arr.map(e => e.statusScore));
-    const maxScore = Math.max(...arr.map(e => e.statusScore));
-    // padding for y-axis
-    const scoreMin = Math.floor(minScore * 0.92 / 100) * 100;
-    const scoreMax = Math.ceil(maxScore * 1.05 / 100) * 100;
-    const scoreRange = Math.max(1, scoreMax - scoreMin);
-    // SVG dimensions
-    const W = 600, H = 240, PL = 50, PR = 16, PT = 12, PB = 28;
-    const innerW = W - PL - PR, innerH = H - PT - PB;
-    const xOf = ts => PL + ((ts - minTs) / tsRange) * innerW;
-    const yOf = sc => PT + (1 - (sc - scoreMin) / scoreRange) * innerH;
-    // Tier 境界水平線
-    const wl = 14;
-    const ssThr = 6700 * Math.pow(0.8, 14 - wl);
-    const tierLines = [
-      { v: ssThr,        l: 'SS', c: '#f0d28a' },
-      { v: ssThr * 0.9,  l: 'S',  c: '#c9a45a' },
-      { v: ssThr * 0.8,  l: 'A',  c: '#a8d4b4' },
-      { v: ssThr * 0.6,  l: 'B',  c: '#7ec4cf' }
-    ].filter(t => t.v >= scoreMin && t.v <= scoreMax);
-    const tierSvg = tierLines.map(t => {
-      const y = yOf(t.v).toFixed(1);
-      return `<line x1="${PL}" y1="${y}" x2="${W - PR}" y2="${y}" stroke="${t.c}" stroke-opacity="0.25" stroke-dasharray="3,3"/>` +
-             `<text x="${W - PR - 2}" y="${y}" dy="-2" text-anchor="end" font-size="9" fill="${t.c}" opacity="0.7">${t.l} ${Math.round(t.v)}</text>`;
+
+    // active キャラ確定
+    const activeRole = _pickActiveRole(arr, byRole);
+    const activeEntries = byRole[activeRole] || [];
+
+    // 全期間 PB (期間切替に影響されない)
+    const pb = _pbEntry(activeEntries);
+
+    // 期間切替
+    const range = _loadRange();
+    const now = Date.now();
+    const rangeMs = _RANGES[range];
+    const filteredEntries = rangeMs ? activeEntries.filter(e => (now - e.ts) <= rangeMs) : activeEntries.slice();
+
+    // ── PB chip ──
+    const pbHtml = pb ? `
+      <div class="wwm-hist-pb">
+        <span class="wwm-hist-pb-label">${_esc(T_.historyPbLabel || 'PB')}</span>
+        <span class="wwm-hist-pb-score">${pb.statusScore.toLocaleString()}</span>
+        ${pb.tier ? `<span class="wwm-hist-pb-tier tier-${_esc(pb.tier)}">${_esc(pb.tier)}</span>` : ''}
+        <span class="wwm-hist-pb-sub">${_esc(pb.date)} / Lv ${pb.level} / ${_esc(pb.roleName)}</span>
+      </div>` : '';
+
+    // ── キャラ chip 行 (単一キャラ = 非表示) + 期間 tab ──
+    const roleChipsHtml = roleList.length > 1 ? roleList.map(rid => {
+      const name = byRole[rid][byRole[rid].length - 1].roleName;
+      const on = rid === activeRole ? 'true' : 'false';
+      return `<button class="wwm-hist-chip" data-hist-role="${_esc(rid)}" aria-pressed="${on}">${_esc(name)}</button>`;
+    }).join('') : '';
+    const rangeChipsHtml = ['all','30d','7d'].map(r => {
+      const label = T_['historyRange' + (r === 'all' ? 'All' : r === '30d' ? '30d' : '7d')] || r;
+      const on = r === range ? 'true' : 'false';
+      return `<button class="wwm-hist-chip" data-hist-range="${r}" aria-pressed="${on}">${_esc(label)}</button>`;
     }).join('');
-    // Y-axis labels (5 ticks)
-    const yTicks = [];
-    for (let i = 0; i <= 4; i++) {
-      const v = scoreMin + (scoreRange * i / 4);
-      const y = yOf(v).toFixed(1);
-      yTicks.push(`<text x="${PL - 6}" y="${y}" dy="3" text-anchor="end" font-size="9" fill="var(--paper-mute)">${Math.round(v)}</text>`);
-      yTicks.push(`<line x1="${PL - 3}" y1="${y}" x2="${PL}" y2="${y}" stroke="var(--ink-2)"/>`);
-    }
-    // X-axis labels (start/mid/end)
-    const fmtDate = ts => { const d = new Date(ts); return (d.getMonth() + 1) + '/' + d.getDate(); };
-    const xLabels = [0, 0.5, 1].map(r => {
-      const ts = minTs + tsRange * r;
-      const x = (PL + r * innerW).toFixed(1);
-      return `<text x="${x}" y="${H - PB + 14}" text-anchor="middle" font-size="10" fill="var(--paper-mute)">${fmtDate(ts)}</text>`;
-    }).join('');
-    // 各キャラの polyline + dots
-    let lines = '';
-    roleList.forEach(rid => {
-      const pts = byRole[rid].sort((a, b) => a.ts - b.ts);
-      const color = _histRoleColor(rid, roleList);
-      const polyPts = pts.map(e => `${xOf(e.ts).toFixed(1)},${yOf(e.statusScore).toFixed(1)}`).join(' ');
-      lines += `<polyline points="${polyPts}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
-      pts.forEach(e => {
-        const cx = xOf(e.ts).toFixed(1), cy = yOf(e.statusScore).toFixed(1);
-        const tip = `${e.roleName} Lv${e.level} | ${e.statusScore} ${e.tier} | ${e.date}`;
-        lines += `<circle cx="${cx}" cy="${cy}" r="3.5" fill="${color}" stroke="#000" stroke-width="0.5"><title>${tip}</title></circle>`;
-      });
-    });
-    // 凡例
-    const legend = roleList.map(rid => {
-      const last = byRole[rid][byRole[rid].length - 1];
-      const color = _histRoleColor(rid, roleList);
-      return `<span style="display:inline-flex;align-items:center;gap:6px;margin-right:14px;font-size:11px;color:var(--paper);"><span style="width:10px;height:3px;background:${color};display:inline-block;border-radius:2px;"></span>${last.roleName} (Lv${last.level})</span>`;
-    }).join('');
+    const chipsHtml = `
+      <div class="wwm-hist-chips">
+        ${roleChipsHtml}
+        <div class="wwm-hist-range">${rangeChipsHtml}</div>
+      </div>`;
+
+    // ── chart (Task 4 で実装、 ここでは container + empty hint 分岐) ──
+    const chartHtml = filteredEntries.length
+      ? `<div class="wwm-hist-chart">${_renderChartSvg(filteredEntries, pb)}</div>`
+      : `<div class="wwm-hist-empty">${_esc(T_.historyEmptyInRange || 'この期間に記録なし')}</div>`;
+
     root.innerHTML = `
-      <div class="wwm-analysis-card wwm-modal-square">
-        <div class="wwm-modal-bg-icon" style="background-image:url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b4f773639c89b2de89vjqZazt605.png');"></div>
-        <div class="wwm-analysis-header"><h3>${T_.martialHistoryTab || '武格履歴'}</h3></div>
-        <div style="padding:8px 12px;">
-          <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="width:100%;height:${H}px;display:block;">
-            <rect x="${PL}" y="${PT}" width="${innerW}" height="${innerH}" fill="rgba(0,0,0,0.15)" stroke="var(--ink-2)" stroke-width="0.5"/>
-            ${tierSvg}
-            ${yTicks.join('')}
-            ${xLabels}
-            ${lines}
-          </svg>
-          <div style="margin-top:8px;line-height:1.8;">${legend}</div>
-        </div>
-      </div>
-    `;
+      <section class="wwm-hist-panel">
+        <header class="wwm-hist-head">
+          <h3 class="wwm-hist-title sec-title" data-kaisho data-kaisho-fixed data-i18n="martialHistoryTab">${_esc(T_.martialHistoryTab || '武格履歴')}</h3>
+        </header>
+        ${pbHtml}
+        ${chipsHtml}
+        ${chartHtml}
+      </section>`;
+
+    // chip 切替 handler
+    root.querySelectorAll('[data-hist-role]').forEach(btn => {
+      btn.addEventListener('click', () => { _saveRole(btn.dataset.histRole); render(); });
+    });
+    root.querySelectorAll('[data-hist-range]').forEach(btn => {
+      btn.addEventListener('click', () => { _saveRange(btn.dataset.histRange); render(); });
+    });
+
+    // 楷書 SVG 適用 (martialHistoryTab が UI_KEYS 未含なら無効、 通常テキスト fallback)
+    if (window.WWMKaisho && window.WWMKaisho.apply) window.WWMKaisho.apply();
+  }
+
+  // chart 実装は Task 4 で置換、 暫定スタブ
+  function _renderChartSvg(entries, pb) {
+    return '<svg viewBox="0 0 600 240" preserveAspectRatio="none" style="height:240px;"></svg>';
   }
 
   window.WWMSidebar = window.WWMSidebar || {};
