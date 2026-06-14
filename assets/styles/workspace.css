@@ -668,12 +668,13 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
 /* ============ 紙面 (main) ============ */
 .wwm-ws-main {
   grid-row: 2 / 3;
-  /* 紙背景は .wwm-ws-body / footer が持つ (main 全体だと tabs 帯領域まで紙化し
-     非選択 tab の公式 BG 透過が死ぬ) */
   background: transparent;
   min-width: 0;
   min-height: 0; /* grid item auto min-size 抑止 (viewport 固定化 2026-06-12) */
-  display: flex; flex-direction: column;
+  /* 3 row grid 化: tabs / body+paper-bg 同 cell / footer。 paper-bg z:0 + body z:1 で
+     背景 layer を flow から完全分離 (兄貴案 2026-06-15 — 履歴 panel 不要 scroll 根治) */
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 /* tab 帯 = 墨 (上帯の続き)。 active tab = 浮島カード = workspace 紙面と分離 (2026-06-14
    差し込み型廃止 — スクロール時 panel 越境で切れる演出問題の根治) */
@@ -838,37 +839,50 @@ html[lang="zh-CN"] [data-kaisho] {
    panel 内 scroll で bg が動かない、 同時に panel 縁まで届く (::before の flow 占有問題回避) */
 .wwm-ws-body { position: relative; }
 .wwm-ws-body > .wwm-ws-panel { position: relative; z-index: 1; }
-.wwm-ws-bgicon-layer {
-  position: sticky;
-  top: 0;
-  display: none; /* 武備 tab 時のみ表示 (下 rule で gate) */
-  height: 100vh;
-  width: 100%;
-  margin-bottom: -100vh; /* 占有逆方向 = タイトル押し下げ無し */
-  background-repeat: no-repeat;
+/* 紙面 背景 layer (兄貴案 2026-06-15) — wwm-ws-main grid 内、 body と同 cell に重ねて
+   背景 (紙色 + bg-icon 擬似要素) を flow から分離。 body の scrollH に貢献しない =
+   履歴 panel content 短くても不要 scroll 出ない。 武備 scroll 時も bg は不動 (body と
+   別 layer)。 mobile (≤600) は main が block 化するため display:none + body 背景復活で対応 */
+.wwm-ws-paper-bg {
+  grid-row: 2 / 3;
+  grid-column: 1 / 2;
+  z-index: 0;
   pointer-events: none;
-  z-index: 0; /* panel (z:1) 背面、 bgicon は flow 占有ゼロで重ね描画 */
+  background: var(--kami-0);
+  border-left: 1px solid var(--gold-deep);
+  position: relative;
 }
-.wwm-app[data-active-workspace="build"] .wwm-ws-bgicon-layer {
+.wwm-ws-paper-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  filter: brightness(0);
+  display: none;
+}
+.wwm-app[data-active-workspace="build"] .wwm-ws-paper-bg::before {
   display: block;
   background-image: url("https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b5a48a5940986d6e27FWkzmPig05.png");
   background-position: right -63px bottom 300px;
   background-size: 680px auto;
-  opacity: 0.4;
-  filter: brightness(0);
 }
-.wwm-app[data-active-workspace="hist"] .wwm-ws-bgicon-layer {
+.wwm-app[data-active-workspace="hist"] .wwm-ws-paper-bg::before {
   display: block;
   background-image: url("https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b4f773639c89b2de89vjqZazt605.png");
   background-position: right -63px bottom 300px;
   background-size: 680px auto;
-  opacity: 0.4;
-  filter: brightness(0);
 }
 
 .wwm-ws-body {
-  padding: 20px 0 44px; flex: 1; border-left: 1px solid var(--gold-deep); background: var(--kami-0);
-  /* 紙面の内部 scroll (viewport 固定化 2026-06-12 — tabs/footer は固定) */
+  /* grid 同 cell に paper-bg と重ね = body 自身は z:1 で内容のみ、 紙色/bg-icon は paper-bg へ */
+  grid-row: 2 / 3;
+  grid-column: 1 / 2;
+  z-index: 1;
+  padding: 20px 0 44px;
+  background: transparent;
+  /* border-left は paper-bg が持つ (z:0 で同 cell) */
   overflow-y: auto;
   min-height: 0;
   scrollbar-width: thin;
@@ -1095,7 +1109,8 @@ html[lang="zh-CN"] [data-kaisho] {
   .wwm-ws-rail { display: none; }
   .wwm-ws-main { border-top: none; display: block; }
   .wwm-ws-tabs { display: none; }
-  .wwm-ws-body { padding: 14px 14px 96px; border-left: none; }
+  .wwm-ws-paper-bg { display: none; }
+  .wwm-ws-body { padding: 14px 14px 96px; border-left: none; background: var(--kami-0); }
   .wwm-ws-main .wwm-footer { border-left: none; }
 
   .wwm-bottom-nav {

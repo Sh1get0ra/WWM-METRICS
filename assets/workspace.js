@@ -174,14 +174,17 @@
   }
   kaishoApply(); // 初期 (ja default)。?lang= / saved lang は app.js init の setLang 経由で再適用
 
-  // ── 武備 bg-icon layer = wwm-ws-body 最初に div 挿入 (兄貴指示 2026-06-14)
-  //    sticky で panel 内 scroll 不動 + 縁まで届く (::before の flow 占有問題回避)
+  // ── 紙面 背景 layer = wwm-ws-main に div 挿入 (兄貴案 2026-06-15 — grid 同 cell 重ね)
+  //    paper-bg (z:0) が紙色/bg-icon を担い、 body (z:1) は内容のみ = flow 分離で不要 scroll 根治
   (function () {
-    var body = document.querySelector('.wwm-ws-body');
-    if (!body || body.querySelector('.wwm-ws-bgicon-layer')) return;
+    var main = document.querySelector('.wwm-ws-main');
+    if (!main || main.querySelector('.wwm-ws-paper-bg')) return;
     var layer = document.createElement('div');
-    layer.className = 'wwm-ws-bgicon-layer';
-    body.insertBefore(layer, body.firstChild);
+    layer.className = 'wwm-ws-paper-bg';
+    // grid 配置で順序無関係だが、 DOM 順は body の前 = tabs の直後 が自然
+    var body = main.querySelector('.wwm-ws-body');
+    if (body) main.insertBefore(layer, body);
+    else main.appendChild(layer);
   })();
 
   window.WWMWorkspace = { activate: activate, setRail: setRail };
