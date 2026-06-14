@@ -200,14 +200,14 @@
     for (let i = 0; i <= 2; i++) {
       const v = scoreMin + (scoreRange * i / 2);
       const y = yOf(v).toFixed(1);
-      yTicks.push(`<text x="${PL - 6}" y="${y}" dy="3" text-anchor="end" font-size="10" fill="var(--kami-ink-3)" style="font-family:var(--f-latin);">${Math.round(v)}</text>`);
+      yTicks.push(`<text x="${PL - 6}" y="${y}" dy="3" text-anchor="end" font-size="10" fill="var(--sumi-text-3)" style="font-family:var(--f-latin);">${Math.round(v)}</text>`);
     }
     // X軸 label (1 or 3 点)
     const fmtDate = ts => { const d = new Date(ts); return (d.getMonth() + 1) + '/' + d.getDate(); };
     const xLabels = (single ? [0.5] : [0, 0.5, 1]).map(r => {
       const ts = minTs + tsRange * r;
       const x = (PL + r * innerW).toFixed(1);
-      return `<text x="${x}" y="${H - PB_PAD + 16}" text-anchor="middle" font-size="10" fill="var(--kami-ink-3)" style="font-family:var(--f-latin);">${fmtDate(ts)}</text>`;
+      return `<text x="${x}" y="${H - PB_PAD + 16}" text-anchor="middle" font-size="10" fill="var(--sumi-text-3)" style="font-family:var(--f-latin);">${fmtDate(ts)}</text>`;
     }).join('');
 
     // 線 (1 キャラ単選 = 金 1 本、 single = 線描かない)
@@ -237,8 +237,8 @@
       const e = entries[i];
       const x = xOf(e.ts).toFixed(1);
       const flagLabel = _esc(flagPrefix + ' ' + t + ' ' + fmtDate(e.ts));
-      return `<line x1="${x}" y1="${PT}" x2="${x}" y2="${PT + innerH}" stroke="var(--kami-ink-3)" stroke-opacity="0.35" stroke-dasharray="2,3"/>` +
-             `<text x="${x}" y="${(PT - 4).toFixed(1)}" text-anchor="middle" font-size="9" fill="var(--kami-ink-3)" style="font-family:var(--f-display);">⚑ ${flagLabel}</text>`;
+      return `<line x1="${x}" y1="${PT}" x2="${x}" y2="${PT + innerH}" stroke="var(--sumi-text-3)" stroke-opacity="0.35" stroke-dasharray="2,3"/>` +
+             `<text x="${x}" y="${(PT - 4).toFixed(1)}" text-anchor="middle" font-size="9" fill="var(--sumi-text-3)" style="font-family:var(--f-display);">⚑ ${flagLabel}</text>`;
     }).join('');
 
     return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="height:240px;">
