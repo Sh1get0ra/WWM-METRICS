@@ -422,6 +422,9 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
    ⇔ 戦律 (dps 主役 = COMING SOON 等) 切替で hero 縦伸縮していたのを止める。
    probe 1440px 実測 score main = 130.4px → 132px 余裕で確保 (2026-06-15 兄貴指示) */
 .hero-wuxia .seat-main { min-height: 132px; }
+/* sub も固定 = sub 配置で score (82.7px) ⇔ dps (37.9px) でサイズ違う = hero 縦変動。
+   probe 実測 score sub = 93.7px → 94px 固定 (2026-06-15) */
+.hero-wuxia .seat-sub { min-height: 94px; }
 .hero-wuxia .seat-main .eyebrow .seat-title {
   font-size: 30px;
   text-shadow: var(--c-hero-title-text-shadow);
