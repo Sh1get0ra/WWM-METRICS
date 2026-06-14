@@ -489,7 +489,7 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   display: flex; align-items: flex-end;
   align-self: flex-end;
   margin-left: 34px;
-  margin-bottom: 8px; /* スコア (line-height 0.95) の下端と光学揃え */
+  margin-bottom: 4px; /* スコア (line-height 0.95) の下端と光学揃え (兄貴指示 2026-06-15: 若干下) */
 }
 .hero-wuxia .hero-next-row { display: flex; align-items: baseline; gap: 6px; }
 .hero-wuxia .hero-next-arrow { color: var(--c-hero-next-arrow-fg); font-size: 18px; align-self: center; }
