@@ -145,7 +145,6 @@
       <div class="wwm-hist-pb">
         <span class="wwm-hist-pb-label">${_esc(T_.historyPbLabel || 'PB')}</span>
         <span class="wwm-hist-pb-score">${pb.statusScore.toLocaleString()}</span>
-        ${pb.tier ? `<span class="wwm-hist-pb-tier tier-badge tier-${_esc(pb.tier)}">${_esc(pb.tier)}</span>` : ''}
         <span class="wwm-hist-pb-sub">${_esc(pb.date)} / Lv ${pb.level} / ${_esc(pb.roleName)}</span>
       </div>` : '';
 
