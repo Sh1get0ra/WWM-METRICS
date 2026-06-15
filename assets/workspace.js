@@ -156,12 +156,26 @@
         }
         return;
       }
-      // data-kaisho-fixed = 全言語共通表示 (hero 題字 武格指数/演武 — 兄貴指定 2026-06-12)
+      // data-kaisho-fixed = 全言語共通表示 (hero 題字 武格指数/戦律指数 — 兄貴指定 2026-06-12)
       if (ja || el.hasAttribute('data-kaisho-fixed')) {
         el.setAttribute('aria-label', entry.text);
         el.setAttribute('role', 'img');
-        el.innerHTML = '<svg class="kaisho-svg" viewBox="' + entry.vb +
-          '" aria-hidden="true"><path fill="currentColor" d="' + entry.d + '"/></svg>';
+        // hero 題字のみ 金属金 gradient (兄貴指示 2026-06-15「ただの黄色 → 金属の金」)。
+        // brand 縦書きや他 data-kaisho 要素は currentColor 継続 = 影響範囲限定
+        var isHeroGold = (key === 'heroSeatScore' || key === 'heroSeatDps');
+        var gradId = 'wwm-kaisho-gold-' + key;
+        var defs = isHeroGold
+          ? '<defs><linearGradient id="' + gradId + '" x1="0" y1="0" x2="0" y2="1">' +
+              '<stop offset="0%" stop-color="#fff4cf"/>' +
+              '<stop offset="42%" stop-color="#f0d28a"/>' +
+              '<stop offset="60%" stop-color="#c9a45a"/>' +
+              '<stop offset="100%" stop-color="#8a6a20"/>' +
+            '</linearGradient></defs>'
+          : '';
+        var fillAttr = isHeroGold ? 'url(#' + gradId + ')' : 'currentColor';
+        var svgCls = 'kaisho-svg' + (isHeroGold ? ' kaisho-svg-gold' : '');
+        el.innerHTML = '<svg class="' + svgCls + '" viewBox="' + entry.vb +
+          '" aria-hidden="true">' + defs + '<path fill="' + fillAttr + '" d="' + entry.d + '"/></svg>';
       } else if (!el.hasAttribute('data-i18n')) {
         // i18n 外 literal (奇術): 手でテキスト復元。data-i18n 持ちは applyI18n が復元済
         el.removeAttribute('role');
