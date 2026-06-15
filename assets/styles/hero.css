@@ -65,7 +65,7 @@
 /* PC のみ表示する内訳ブロック */
 .hcb-val.phys { color: var(--text-sumi-vermilion); }
 
-.hcb-val.elem { color: var(--text-sumi-gold); }
+.hcb-val.elem { color: var(--jade-bright); }
 
 .hcb-pct.phys { color: var(--text-sumi-vermilion); }
 
@@ -145,11 +145,67 @@
 
 .hb-value.phys { color: var(--text-sumi-vermilion); }
 
-.hb-value.elem { color: var(--text-sumi-gold); }
+.hb-value.elem { color: var(--jade-bright); }
 
 .hb-pct.phys { color: var(--c-hb-pct-phys-fg); }
 
 .hb-pct.elem { color: var(--c-hb-pct-elem-fg); }
+
+/* ドーナツ右側 = 勁率 4 + 物理/属性 2 = 6 行 内訳 (2026-06-15 兄貴指示で復活、 旧 hcb-/hb- 系の後継)。
+   ■ chip 4 行 (会心/会意/並傷/軽傷) + ◇ diamond 2 行 (物理/属性) で系統分離 */
+.hero-dmg-split {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  align-self: center;
+  font-family: var(--f-latin);
+  font-weight: var(--fw-bold);
+}
+.hero-dmg-split .hb-row {
+  display: grid;
+  grid-template-columns: 12px 3.5em 1fr;
+  align-items: center;
+  gap: var(--space-1-5);
+}
+.hero-dmg-split .hb-ico {
+  width: 10px; height: 10px;
+  display: inline-block;
+  background: currentColor;
+}
+.hero-dmg-split .hb-ico-diamond {
+  background: transparent;
+  border: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  width: 8px; height: 8px;
+}
+.hero-dmg-split .hb-label {
+  font-family: var(--f-display);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  color: var(--text-sumi-fg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.hero-dmg-split .hb-pct {
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--text-sumi-fg);
+}
+.hero-dmg-split .hb-row.crit  { color: var(--chart-crit); }
+.hero-dmg-split .hb-row.symp  { color: var(--chart-sympathy); }
+.hero-dmg-split .hb-row.norm  { color: var(--chart-normal); }
+.hero-dmg-split .hb-row.graz  { color: var(--chart-graze); }
+.hero-dmg-split .hb-row.phys  { color: var(--text-sumi-vermilion); }
+.hero-dmg-split .hb-row.elem  { color: var(--jade-bright); }
+.hero-dmg-split .hb-row.crit .hb-label,  .hero-dmg-split .hb-row.crit .hb-pct  { color: var(--chart-crit); }
+.hero-dmg-split .hb-row.symp .hb-label,  .hero-dmg-split .hb-row.symp .hb-pct  { color: var(--chart-sympathy); }
+.hero-dmg-split .hb-row.norm .hb-label,  .hero-dmg-split .hb-row.norm .hb-pct  { color: var(--chart-normal); }
+.hero-dmg-split .hb-row.graz .hb-label,  .hero-dmg-split .hb-row.graz .hb-pct  { color: var(--text-sumi-dim); }
+.hero-dmg-split .hb-row.phys .hb-label,  .hero-dmg-split .hb-row.phys .hb-pct  { color: var(--text-sumi-vermilion); }
+.hero-dmg-split .hb-row.elem .hb-label,  .hero-dmg-split .hb-row.elem .hb-pct  { color: var(--jade-bright); }
 
 .donut {
   width: 100px; height: 100px; flex-shrink: 0; position: relative;

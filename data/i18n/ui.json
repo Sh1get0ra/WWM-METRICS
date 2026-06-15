@@ -1,4 +1,18 @@
 {
+  "dmgSplitNormal": {
+    "ja": "並傷",
+    "en": "Normal",
+    "zh": "普伤",
+    "ko": "일반",
+    "vi": "Phổ thông"
+  },
+  "dmgSplitGraze": {
+    "ja": "軽傷",
+    "en": "Glancing",
+    "zh": "擦伤",
+    "ko": "찰과상",
+    "vi": "Trầy xước"
+  },
   "pageTitle": {
     "ja": "風燕計 | WWMETRICS",
     "en": "Where Winds Metrics | WWMETRICS",
