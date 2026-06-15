@@ -114,7 +114,7 @@
   --c-modal-a-kongfu-header-fg: var(--text-kami-gold); /* D7 2026-06-15: brown-1 → text-kami-gold 統一 (left/right 色揃え) */
   --c-modal-a-kongfu-select-fg: var(--brown-1);
   --c-modal-a-kongfu-select-bg: var(--gold-mid);
-  --c-modal-a-set-fg: var(--vermilion-bright);
+  --c-modal-a-set-fg: var(--vermilion-deep); /* D7 2026-06-15: vermilion-bright 明朱 (contrast 3.6:1 AA 不可) → vermilion-deep (7.5:1) で読みやすさ確保、 set-header と統一 */
   --c-modal-a-set-select-bg: linear-gradient(90deg, var(--vermilion-bright-tint), var(--c-vermilion-fade-end));
   --c-modal-a-stat-select-bg: var(--hover-strong);
   --c-modal-a-name-fg: var(--c-modal-a-fg);

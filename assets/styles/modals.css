@@ -489,7 +489,7 @@
 .wwm-cmp-modal-a .wwm-cmp-stat-select option {
   font-size: var(--text-12);
   font-family: var(--f-display);
-  font-weight: 600;
+  font-weight: 700;
 }
 .wwm-cmp-modal-a .wwm-cmp-set-header,
 .wwm-cmp-modal-a .wwm-cmp-set-select {
@@ -500,6 +500,8 @@
   text-shadow: var(--c-cmp-set-header-text-shadow);
   padding: var(--space-1-5) var(--space-2);
   margin-bottom: var(--space-2);
+  font-family: var(--f-display);
+  font-weight: var(--fw-extra);
 }
 .wwm-cmp-modal-a .wwm-cmp-set-select {
   border: 1px solid var(--gold-deep);
@@ -962,7 +964,7 @@
   border-radius: 4px;
   padding: var(--space-half) var(--space-1);
   font-size: var(--text-12);
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-bold);
   width: 100%;
   cursor: pointer;
 }

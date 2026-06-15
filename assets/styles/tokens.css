@@ -135,7 +135,7 @@
   /* Type — 役割固定 3 token (2026-06-15 集約、 --f-mono 廃止)
      文字 (見出し・漢字) = --f-display / 本文 (UI) = --f-body / 数値・ラテン = --f-latin
      literal 直値禁止: 新規 component は必ず token 経由 */
-  --f-display: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+  --f-display: 'Shippori Mincho', 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
   --f-body:    'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
   --f-latin:   'Cinzel', 'Cormorant Garamond', 'Noto Serif JP', serif;
 

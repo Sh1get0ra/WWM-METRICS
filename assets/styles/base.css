@@ -11,10 +11,13 @@
 html, body {
   background: var(--bg-0);
   color: var(--text-sumi-fg);
-  /* 2026-06-15 兄貴指示: base font = --f-display (Noto Serif JP) に変更。
+  /* 2026-06-15 兄貴指示: base font = --f-display (Shippori Mincho) に変更。
      旧 --f-body (Noto Sans JP) は NOTE modal の更新履歴/仕様タブ等 長文読み物のみ例外。
-     武侠舞台のテーマ親和 + Noto Sans JP の AI slop 感回避 */
+     武侠舞台のテーマ親和 + Noto Sans JP の AI slop 感回避
+     2026-06-15 兄貴指示: 全 --f-display 継承箇所を 700 (bold) で render = Shippori Mincho 細さ対策。
+     component で weight 別途明示してる箇所は override で keep */
   font-family: var(--f-display);
+  font-weight: var(--fw-bold);
   font-size: var(--text-md);
   line-height: 1.55;
   font-feature-settings: 'palt';
