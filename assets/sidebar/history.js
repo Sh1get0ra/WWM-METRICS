@@ -192,7 +192,7 @@
 
   function _renderChartSvg(entries, pb) {
     // entries = ts 昇順、 必ず 1 件以上
-    const W = 600, H = 350, PL = 40, PR = 16, PT = 36, PB_PAD = 28;
+    const W = 600, H = 350, PL = 56, PR = 16, PT = 36, PB_PAD = 28;
     const innerW = W - PL - PR, innerH = H - PT - PB_PAD;
     const minTs = entries[0].ts;
     const maxTs = entries[entries.length - 1].ts;
@@ -209,40 +209,59 @@
       : (ts => PL + ((ts - minTs) / tsRange) * innerW);
     const yOf = sc => PT + (1 - (sc - scoreMin) / scoreRange) * innerH;
 
-    // Y軸 3 段 ticks
+    // Y軸 5 段 ticks + horizontal gridline (兄貴指示 2026-06-15: 横ライン + tick 増 + 文字視認性)
     const yTicks = [];
-    for (let i = 0; i <= 2; i++) {
-      const v = scoreMin + (scoreRange * i / 2);
+    const yGrid = [];
+    const Y_STEPS = 4; // 5 段 = 0..4
+    for (let i = 0; i <= Y_STEPS; i++) {
+      const v = scoreMin + (scoreRange * i / Y_STEPS);
       const y = yOf(v).toFixed(1);
-      yTicks.push(`<text x="${PL - 6}" y="${y}" dy="3" text-anchor="end" font-size="10" fill="var(--sumi-text-3)" style="font-family:var(--f-latin);">${Math.round(v)}</text>`);
+      yTicks.push(`<text x="${PL - 14}" y="${y}" dy="3" text-anchor="end" font-size="10" fill="var(--kami-0)" style="font-family:var(--f-latin);">${Math.round(v)}</text>`);
+      // 上下端は枠線扱いで line 不要 (重ね描き回避)。中段のみ薄 solid 横線
+      if (i > 0 && i < Y_STEPS) {
+        yGrid.push(`<line x1="${PL}" y1="${y}" x2="${W - PR}" y2="${y}" stroke="var(--kami-0)" stroke-opacity="0.14" stroke-width="1"/>`);
+      }
     }
-    // X 軸 label = 変動 entry (statusScore が前と異なる + 1 件目) の日付を全部表示
-    // (兄貴指示 2026-06-14: 線形補間でなく実 entry の変化点と一致)
+    // X 軸 label = 全 import entry の日付 (兄貴指示 2026-06-15: score 変動なしでも import 日は出す)
+    // 同日同キャラ = record() で 1 件に圧縮済 = 重複 date 発生なし
     const fmtDate = ts => { const d = new Date(ts); return (d.getMonth() + 1) + '/' + d.getDate(); };
+    // score mini label は変動点のみ (密集回避) — 旗との対応関係でも使うので別途残置
     const changeEntries = single
       ? [entries[0]]
       : entries.filter((e, i) => i === 0 || e.statusScore !== entries[i-1].statusScore);
-    const xLabels = changeEntries.map(e => {
+    const xLabels = entries.map(e => {
       const x = (single ? PL + innerW / 2 : xOf(e.ts)).toFixed(1);
-      return `<text x="${x}" y="${H - PB_PAD + 16}" text-anchor="middle" font-size="10" fill="var(--sumi-text-3)" style="font-family:var(--f-latin);">${fmtDate(e.ts)}</text>`;
+      return `<text x="${x}" y="${H - PB_PAD + 16}" text-anchor="middle" font-size="10" fill="var(--kami-0)" style="font-family:var(--f-latin);">${fmtDate(e.ts)}</text>`;
+    }).join('');
+    // X軸 vertical gridline = 全 entry 位置の縦薄 solid (兄貴指示 2026-06-15)
+    // 旗の dashed と区別するため solid + 低 opacity
+    const xGrid = single ? '' : entries.map(e => {
+      const x = xOf(e.ts).toFixed(1);
+      return `<line x1="${x}" y1="${PT}" x2="${x}" y2="${PT + innerH}" stroke="var(--kami-0)" stroke-opacity="0.08" stroke-width="1"/>`;
     }).join('');
 
     // 線 (1 キャラ単選 = 金 1 本、 single = 線描かない)
     const linePts = entries.map(e => `${xOf(e.ts).toFixed(1)},${yOf(e.statusScore).toFixed(1)}`).join(' ');
     const lineHtml = single ? '' : `<polyline points="${linePts}" fill="none" stroke="var(--gold-deep)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
 
-    // 通常 dot + PB 朱 dot + tooltip
+    // 通常 dot + PB 朱 dot + tooltip + 変動点 score mini label (兄貴指示 2026-06-15)
+    // mini label は changeEntries (statusScore 変動点) のみで密集回避。 PB は朱 label 優先
     const T_ = window.T || {};
     const pbLabel = T_.historyPbLabel || 'PB';
+    const changeSet = new Set(changeEntries.map(e => e.ts));
     const dotsHtml = entries.map(e => {
       const cx = xOf(e.ts).toFixed(1), cy = yOf(e.statusScore).toFixed(1);
       const tip = _esc(`${e.roleName} Lv${e.level} | ${e.statusScore} ${e.tier} | ${e.date}`);
       const isPb = pb && e.ts === pb.ts;
       if (isPb) {
         return `<g><circle cx="${cx}" cy="${cy}" r="5.5" fill="var(--accent)" stroke="#fff" stroke-width="0.8"><title>${tip}</title></circle>` +
-               `<text x="${cx}" y="${(cy - 9).toFixed(1)}" text-anchor="middle" font-size="9" fill="var(--accent)" style="font-family:var(--f-latin);font-weight:700;">${_esc(pbLabel)}</text></g>`;
+               `<text x="${cx}" y="${(cy - 9).toFixed(1)}" text-anchor="middle" font-size="9" fill="var(--accent)" style="font-family:var(--f-latin);font-weight:700;">${_esc(pbLabel)} ${e.statusScore}</text></g>`;
       }
-      return `<circle cx="${cx}" cy="${cy}" r="2.5" fill="var(--gold-deep)"><title>${tip}</title></circle>`;
+      const showScore = changeSet.has(e.ts);
+      const scoreLabel = showScore
+        ? `<text x="${cx}" y="${(cy - 7).toFixed(1)}" text-anchor="middle" font-size="9" fill="var(--kami-0)" style="font-family:var(--f-latin);font-weight:600;">${e.statusScore}</text>`
+        : '';
+      return `<g><circle cx="${cx}" cy="${cy}" r="2.5" fill="var(--gold-deep)"><title>${tip}</title></circle>${scoreLabel}</g>`;
     }).join('');
 
     // milestone 旗 = Tier SS/S/A 初到達 + 千刻み score 突破。 同 entry は 1 旗に統合
@@ -250,8 +269,8 @@
     const reachIdx = _firstTierReachIdx(entries);
     const flagPrefix = T_.historyMilestoneFlag || '初';
     const _flag = (x, label) =>
-      `<line x1="${x}" y1="${PT}" x2="${x}" y2="${PT + innerH}" stroke="var(--sumi-text-3)" stroke-opacity="0.35" stroke-dasharray="2,3"/>` +
-      `<text x="${x}" y="12" text-anchor="middle" font-size="9" fill="var(--sumi-text-3)" style="font-family:var(--f-display);">⚑ ${label}</text>`;
+      `<line x1="${x}" y1="${PT}" x2="${x}" y2="${PT + innerH}" stroke="var(--kami-0)" stroke-opacity="0.30" stroke-dasharray="2,3"/>` +
+      `<text x="${x}" y="12" text-anchor="middle" font-size="9" fill="var(--kami-0)" style="font-family:var(--f-display);">⚑ ${label}</text>`;
     const scorePrefix = T_.historyScorePrefix || '武格指数 ';
     const scoreSuffix = T_.historyScoreSuffix || ' 突破';
     const flagByIdx = {};
@@ -274,6 +293,8 @@
     }).join('');
 
     return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="height:350px;">
+    ${yGrid.join('')}
+    ${xGrid}
     ${yTicks.join('')}
     ${xLabels}
     ${flagHtml}
