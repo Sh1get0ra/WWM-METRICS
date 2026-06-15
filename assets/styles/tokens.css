@@ -130,10 +130,9 @@
   --chart-graze:    #6a6053;  /* paper-mute 寄り */
   --chart-normal:   #ede4d0;  /* paper */
 
-  /* Paper text */
-  --paper:       #ede4d0;
+  /* Paper text — 段階廃止中。 --paper / --paper-dim は廃止済 (text-sumi-fg / dead)、
+     --paper-2 / --paper-mute は別 commit で廃止予定 */
   --paper-2:     #c8bda6;
-  --paper-dim:   #8b8170;
   --paper-mute:  #857b6a;  /* critique P2 (2026-06-06): #7a7060→#857b6a — bg-2 上 3.85→4.49 (浮上面 AA 実質達成)。 旧 #6a6053→#7a7060 (2026-06-04) に続く 2 段目 */
 
   /* Type — 役割固定 3 token (2026-06-15 集約、 --f-mono 廃止)
@@ -234,7 +233,7 @@
   --c-fg-accent: var(--gold-bright);  /* アクセント前景 (dark 明金 / light 朱) */
   --c-fg-gold-label: var(--gold);  /* 金ラベル前景 (light は暗金) */
   --c-fg-hidden-stat: #7a93b0;  /* 隠しステ行 青灰 */
-  --c-modal-a-fg: var(--paper);  /* compare modal A 主文字色 */
+  --c-modal-a-fg: var(--text-sumi-fg);  /* compare modal A 主文字色 */
   --c-icon-dim-opacity: 0.15;  /* equip/xinfa icon 背景透かし opacity */
   --c-fg-vermilion-strong: var(--vermilion-bright);  /* 朱前景 強調 (light は深朱) */
   --c-fg-emphasis: var(--gold-bright);  /* 見出し強調 (hero label ja / cmp-val-input) */
@@ -245,10 +244,10 @@
 
   /* ─── @layer Step 2-c: theme-swap tokens (dark default) ─── */
   --c-hero-before-fg: var(--vermilion-bright-trace);
-  --c-brand-en-fg: var(--paper);
+  --c-brand-en-fg: var(--text-sumi-fg);
   --c-brand-sub-fg: var(--c-fg-gold-label);
   --c-shared-banner-bg: linear-gradient(90deg, var(--vermilion-soft-2), var(--vermilion-tint));
-  --c-shared-banner-fg: var(--paper);
+  --c-shared-banner-fg: var(--text-sumi-fg);
   --c-footer-logo-opacity: 0.75;
   --c-preset-bar-bg: var(--surf-2);
   --c-h1-accent-fg: var(--vermilion-bright);
@@ -311,7 +310,7 @@
   --c-score-update-banner-bg: var(--vermilion-soft);
   --c-score-update-banner-fg: #ffd9cc;
   --c-mobile-drawer-bg: linear-gradient(180deg, var(--bg-raised), rgba(15,12,14,0.98));
-  --c-mobile-drawer-fg: var(--paper);
+  --c-mobile-drawer-fg: var(--text-sumi-fg);
   --c-mobile-fab-bg: linear-gradient(180deg, rgba(26,20,16,0.96), rgba(15,12,14,0.96));
   --c-mobile-fab-shadow: 0 4px 16px var(--overlay-soft-2), 0 0 12px rgba(212,175,55,0.4);
 
@@ -321,7 +320,7 @@
   --c-tier-chip-s-shadow: 0 0 18px var(--vermilion-strong), 0 0 40px var(--vermilion-soft), inset 0 1px 0 rgba(255,130,110,0.20), inset 0 -1px 0 var(--overlay-soft-mid);
   --c-tier-chip-a-shadow: 0 0 11px rgba(168,212,180,0.28), inset 0 1px 0 rgba(168,212,180,0.18);
   --c-tier-chip-b-shadow: 0 0 8px rgba(201,184,138,0.22), inset 0 1px 0 rgba(201,184,138,0.14);
-  --c-modal-a-option-fg: var(--paper);
+  --c-modal-a-option-fg: var(--text-sumi-fg);
   --c-anlz-title-fg: #f5e8c0;
   --c-anlz-title-text-shadow: 0 0 0.5px rgba(245,232,192,.85), 0 0 1.5px rgba(232,217,184,.55), 0 0 3px rgba(232,217,184,.35), 0.6px 0 1.2px rgba(232,217,184,.3), -0.6px 0 1.2px rgba(232,217,184,.25), 0 0.5px 1.5px rgba(232,217,184,.22);
 
@@ -380,7 +379,7 @@
   --c-modal-a-kongfu-select-bg: var(--gold-faint);
   --c-modal-a-set-select-bg: linear-gradient(90deg, rgba(232,81,58,0.30), transparent);
   --c-modal-a-stat-select-bg: var(--overlay-soft-mid);
-  --c-modal-a-lv-fg: var(--paper);
+  --c-modal-a-lv-fg: var(--text-sumi-fg);
   --c-modal-a-btn-secondary-bg: url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_cancel-9a52642a.png") center / 100% 100% no-repeat, transparent;
   --c-slot-border: rgba(232,215,180,0.20);
   --c-tier-badge-hero-bg: linear-gradient(135deg, rgba(60,40,30,.45) 0%, rgba(30,20,15,.35) 50%, rgba(60,40,30,.45) 100%);
@@ -402,7 +401,7 @@
   --c-tier-c-hero-fg: var(--paper-mute);
   --c-tier-c-hero-border: rgba(122,112,96,.45);
   --c-migration-strong-fg: #a8d0ff;
-  --c-anlz-tab-fg: var(--paper);
+  --c-anlz-tab-fg: var(--text-sumi-fg);
   --c-anlz-tab-active-fg: var(--chart-crit);
 
   /* ─── @layer Step 2-d r3: theme-swap tokens (dark default) ─── */

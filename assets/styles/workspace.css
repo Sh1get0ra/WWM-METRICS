@@ -154,7 +154,7 @@
   --c-equip-setname-text-shadow:   none;
   --c-fg-vermilion-strong:         var(--vermilion-deep);
   --c-sb-notice-fg:                var(--vermilion-deep);
-  --c-xinfa-tier-fg:               var(--paper);
+  --c-xinfa-tier-fg:               var(--text-sumi-fg);
   --c-xinfa-tier-chip-bg:          var(--vermilion-bright-tint);
   --c-xinfa-tier-chip-border:      var(--c-vermilion-deep-mid);
   --c-xinfa-cell--xinfa-tier-border: var(--ink-2);

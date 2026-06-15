@@ -224,7 +224,7 @@
     function _buildUrlPane(pane) {
       pane.innerHTML = `${_bgIconHtml}
         <div style="font-size:13px;color:var(--gold-bright);font-weight:700;letter-spacing:0.12em;margin-bottom:6px;">${(window.T?.shareSect1Heading) ?? '▍ビルド共有'}</div>
-        <p style="font-size:12px;color:var(--paper);opacity:0.92;margin:0 0 10px;line-height:1.6;">${(window.T?.shareSect1Desc) ?? ''}</p>
+        <p style="font-size:12px;color:var(--text-sumi-fg);opacity:0.92;margin:0 0 10px;line-height:1.6;">${(window.T?.shareSect1Desc) ?? ''}</p>
         <textarea class="wwm-share-url" id="wwmShareUrlNormal" readonly>${url}</textarea>`;
       // アクション btn = footer (墨帯) へ — 紙 body 上の secondary は不可視 (2026-06-13 兄貴指摘)
       footer.insertAdjacentHTML('beforeend',
@@ -235,9 +235,9 @@
     function _buildObsPane(pane) {
       pane.innerHTML = `${_bgIconHtml}
         <div style="font-size:13px;color:var(--gold-bright);font-weight:700;letter-spacing:0.12em;margin-bottom:6px;">${(window.T?.shareSect2Heading) ?? '▍OBS 配信用 URL'}</div>
-        <p style="font-size:12px;color:var(--paper);opacity:0.92;margin:0 0 8px;line-height:1.6;">${(window.T?.shareSect2Desc) ?? ''}</p>
+        <p style="font-size:12px;color:var(--text-sumi-fg);opacity:0.92;margin:0 0 8px;line-height:1.6;">${(window.T?.shareSect2Desc) ?? ''}</p>
         <div class="wwm-share-warn" style="font-size:12px;color:#e8a04a;background:rgba(232,160,74,0.10);border-left:3px solid #e8a04a;padding:8px 10px;margin:0 0 10px;line-height:1.6;border-radius:2px;">⚠ ${(window.T?.shareObsCacheWarn) ?? 'OBSキャッシュの影響で正常に表示されない場合は、ブラウザソースの作り直し or OBS再起動が必要'}</div>
-        <details style="margin:0 0 10px;font-size:12px;color:var(--paper);">
+        <details style="margin:0 0 10px;font-size:12px;color:var(--text-sumi-fg);">
           <summary style="cursor:pointer;color:var(--gold-bright);letter-spacing:0.05em;font-weight:700;">${(window.T?.shareObsSetup) ?? 'OBS への設定方法'}</summary>
           <ol style="margin:6px 0 0;padding-left:20px;line-height:1.7;opacity:0.92;">
             <li>${(window.T?.shareObsStep1) ?? ''}</li>
@@ -247,7 +247,7 @@
             <li>${(window.T?.shareObsStep5) ?? ''}</li>
           </ol>
         </details>
-        <div style="display:flex;align-items:center;gap:12px;font-size:12px;color:var(--paper);margin-bottom:8px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:12px;font-size:12px;color:var(--text-sumi-fg);margin-bottom:8px;flex-wrap:wrap;">
           <label style="display:flex;align-items:center;gap:6px;">
             ${(window.T?.shareLabelBg) ?? '背景色'}
             <input type="color" id="wwmObsBg" value="${initBg}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
@@ -258,7 +258,7 @@
             <span id="wwmObsOpacityVal" style="font-family:var(--f-latin);color:var(--gold-bright);min-width:36px;">${initOp}%</span>
           </label>
         </div>
-        <div style="display:flex;align-items:center;gap:12px;font-size:12px;color:var(--paper);margin-bottom:8px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:12px;font-size:12px;color:var(--text-sumi-fg);margin-bottom:8px;flex-wrap:wrap;">
           <label style="display:flex;align-items:center;gap:6px;">${(window.T?.shareLabelText1) ?? '文字色1'}
             <input type="color" id="wwmObsT1" value="${initT1}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
           </label>
