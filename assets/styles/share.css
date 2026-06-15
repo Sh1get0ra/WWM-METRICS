@@ -128,21 +128,21 @@ html.wwm-shared-build-mode #importBtn {
 
 .preset-slot-num {
   font-family: var(--f-latin); font-size: var(--text-xs); font-weight: var(--fw-bold);
-  color: var(--text-sumi-dim); letter-spacing: 0.1em;
+  color: var(--text-kami-dim); letter-spacing: 0.1em;
   width: 12px; flex-shrink: 0;
 }
 
-.preset-slot.has-data .preset-slot-num { color: var(--text-sumi-gold); }
+.preset-slot.has-data .preset-slot-num { color: var(--text-kami-gold); }
 
 .preset-name-input {
   flex: 1; border: none; background: transparent;
   font-family: var(--f-display); font-size: var(--text-12); font-weight: var(--fw-semibold);
-  color: var(--text-sumi-fg); min-width: 0;
+  color: var(--text-kami-fg); min-width: 0;
   /* outline:none は削除済 (2026-06-05 @layer Step 1): input は focus = :focus-visible 常時 match
      = base.css の a11y gold ring が常勝で dead だった。復活させるな (a11y + layer flip 源) */
 }
 
-.preset-name-input::placeholder { color: var(--text-sumi-dim); font-weight: var(--fw-normal); }
+.preset-name-input::placeholder { color: var(--text-kami-dim); font-weight: var(--fw-normal); }
 
 .preset-btn {
   padding: 3px 8px; border: 1px solid; background: transparent;
@@ -152,17 +152,17 @@ html.wwm-shared-build-mode #importBtn {
   white-space: nowrap;
 }
 
-.preset-save { border-color: var(--c-preset-save-border); color: var(--text-sumi-gold); }
+.preset-save { border-color: var(--c-preset-save-border); color: var(--text-kami-gold); }
 
-.preset-save:hover { background: rgba(240,210,138,0.12); color: var(--text-sumi-gold); border-color: var(--text-sumi-gold); }
+.preset-save:hover { background: rgba(201,164,90,0.16); color: var(--text-kami-gold); border-color: var(--text-kami-gold); }
 
 .preset-load { border-color: var(--c-preset-load-border); color: var(--jade-bright); }
 
 .preset-load:hover:not(:disabled) { background: rgba(168,212,180,0.12); color: var(--jade-bright); border-color: var(--jade-bright); }
 
-.preset-del  { border-color: var(--vermilion-strong); color: var(--text-sumi-vermilion); padding: 3px 6px; }
+.preset-del  { border-color: var(--vermilion-strong); color: var(--text-kami-vermilion); padding: 3px 6px; }
 
-.preset-del:hover:not(:disabled) { background: rgba(232,81,58,0.18); color: var(--text-sumi-vermilion); border-color: var(--text-sumi-vermilion); }
+.preset-del:hover:not(:disabled) { background: rgba(200,60,43,0.16); color: var(--text-kami-vermilion); border-color: var(--text-kami-vermilion); }
 
 .preset-load:disabled, .preset-del:disabled { opacity: 0.3; cursor: not-allowed; }
 

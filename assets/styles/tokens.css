@@ -192,6 +192,7 @@
   --text-kami-fg:        #3d2e1f;  /* 主要 text (現 --kami-ink 系、 焦茶) */
   --text-kami-gold:      #c9a45a;  /* 金強調 (現 --gold-deep 系、 紙上で読める金) */
   --text-kami-vermilion: #c83c2b;  /* 朱警告 (現 --vermilion 系、 紙上で読める朱) */
+  --text-kami-dim:       #7a6850;  /* 弱階調 (紙上薄め焦茶) — 2026-06-15 兄貴 OK 仮値、 実機調整余地 */
 
   /* Font weight scale */
   --fw-normal:   400;
