@@ -27,6 +27,7 @@ const UI_KEYS = [
   'heroSeatScore', 'heroSeatDps',                       // hero 題字
   'railStatus',                                         // rail 頭
   'brandVert',                                          // topbar 縦書きブランド「風燕計」
+  'martialHistoryTab',                                  // 武格履歴 panel 題字 (2026-06-15 追加)
 ];
 const LITERALS = {
   qishu: '奇術', // index.html 直書き (data-i18n なし)
