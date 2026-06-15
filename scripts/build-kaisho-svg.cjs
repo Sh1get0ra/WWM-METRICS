@@ -38,6 +38,7 @@ const UI_KEYS = [
   'noteTitleJa',        // 筆記
   'diagTitleJa',        // 弱点指摘
   'ocrHelpTitle',       // 画面取込指南 (2026-06-15 ja 漢字化、 旧「スクショ取込ガイド」)
+  'qishuPickerTitle',   // 奇術選択
 ];
 const LITERALS = {
   qishu: '奇術', // index.html 直書き (data-i18n なし)
