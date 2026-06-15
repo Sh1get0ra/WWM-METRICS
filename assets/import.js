@@ -30,7 +30,7 @@ function _createModal(id, titleKey, contentHtml, bgIconUrl, opts) {
       <span class="wwm-tool-bracket wwm-tool-bracket-tl"></span><span class="wwm-tool-bracket wwm-tool-bracket-tr"></span>
       <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
       <div class="wwm-modal-header">
-        <h2><span class="wwm-tool-title-ja" data-i18n="${titleKey}">${(window.T && T[titleKey]) || titleKey}</span>${opts?.titleEn ? `<span class="wwm-tool-title-en">${opts.titleEn}</span>` : ''}${opts?.seal ? `<span class="wwm-tool-seal">${opts.seal}</span>` : ''}</h2>
+        <h2><span class="wwm-tool-title-ja" data-i18n="${titleKey}" data-kaisho="${titleKey}">${(window.T && T[titleKey]) || titleKey}</span>${opts?.titleEn ? `<span class="wwm-tool-title-en">${opts.titleEn}</span>` : ''}${opts?.seal ? `<span class="wwm-tool-seal">${opts.seal}</span>` : ''}</h2>
         <button class="wwm-modal-close" aria-label="Close">×</button>
       </div>
       <div class="wwm-modal-body wwm-ws-paper">${iconHtml}${contentHtml}</div>

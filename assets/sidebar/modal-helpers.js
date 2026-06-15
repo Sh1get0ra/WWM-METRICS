@@ -228,7 +228,7 @@ finalScore  = statusScore + 4-set bonus (4個セット発動時)</pre>
         <span class="wwm-tool-bracket wwm-tool-bracket-tl"></span><span class="wwm-tool-bracket wwm-tool-bracket-tr"></span>
         <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
         <div class="wwm-modal-header">
-          <h2><span class="wwm-tool-title-ja">${titleJa}</span><span class="wwm-tool-title-en">NOTE</span><span class="wwm-tool-seal">${seal}</span></h2>
+          <h2><span class="wwm-tool-title-ja" data-kaisho="noteTitleJa">${titleJa}</span><span class="wwm-tool-title-en">NOTE</span><span class="wwm-tool-seal">${seal}</span></h2>
           <button class="wwm-modal-close" id="wwmNoteClose" aria-label="${btnClose}">×</button>
         </div>
         <div class="wwm-tool-tabs">

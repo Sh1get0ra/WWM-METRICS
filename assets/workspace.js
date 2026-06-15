@@ -188,6 +188,29 @@
   }
   kaishoApply(); // 初期 (ja default)。?lang= / saved lang は app.js init の setLang 経由で再適用
 
+  // ── modal 動的生成への自動 apply (2026-06-15 modal title 玉ねぎ化 sprint) ──
+  //    各 modal の callsite に個別 apply() 呼出を追加する代わりに、 body 直下に
+  //    wwm-modal-backdrop が append されたら自動で kaishoApply() を発火させる。
+  //    新規 modal 追加時のメンテ不要 = data-kaisho 属性付けるだけで自動展開
+  (function () {
+    if (!window.MutationObserver) return;
+    var obs = new MutationObserver(function (mutations) {
+      for (var i = 0; i < mutations.length; i++) {
+        var added = mutations[i].addedNodes;
+        for (var j = 0; j < added.length; j++) {
+          var n = added[j];
+          if (n.nodeType !== 1) continue;
+          if (n.classList && n.classList.contains('wwm-modal-backdrop')
+              && n.querySelector('[data-kaisho]')) {
+            kaishoApply();
+            return; // 1 回呼べば全走査 = 早抜け
+          }
+        }
+      }
+    });
+    obs.observe(document.body, { childList: true });
+  })();
+
   // ── 紙面 背景 layer = wwm-ws-main に div 挿入 (兄貴案 2026-06-15 — grid 同 cell 重ね)
   //    paper-bg (z:0) が紙色/bg-icon を担い、 body (z:1) は内容のみ = flow 分離で不要 scroll 根治
   (function () {

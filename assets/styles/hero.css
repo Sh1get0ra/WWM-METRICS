@@ -135,7 +135,7 @@
 }
 
 .hero-number .unit {
-  font-family: var(--f-mono); font-size: var(--text-md); font-weight: var(--fw-bold);
+  font-family: var(--f-latin); font-size: var(--text-md); font-weight: var(--fw-bold);
   color: var(--c-fg-gold-label); letter-spacing: 0.32em;
   padding-bottom: var(--space-3);
   border-bottom: 1px solid var(--gold-deep);

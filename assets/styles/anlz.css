@@ -103,7 +103,7 @@
   background: transparent;
   border: none;
   color: var(--paper-mute);
-  font-family: var(--f-display, var(--f-mono));
+  font-family: var(--f-display);
   font-size: var(--text-md); font-weight: var(--fw-bold);
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -192,7 +192,7 @@
 }
 
 #wwmOptRatioVal {
-  font-family: var(--f-mono); font-weight: var(--fw-bold);
+  font-family: var(--f-latin); font-weight: var(--fw-bold);
   color: var(--gold-bright); min-width: 32px;
 }
 
@@ -200,7 +200,7 @@
   background: transparent; border: 1px solid var(--ink-3);
   color: var(--c-opt-btn-fg); padding: 3px 10px;
   border-radius: 2px; cursor: pointer;
-  font-family: var(--f-mono);
+  font-family: var(--f-latin);
   font-size: var(--text-sm); font-weight: var(--fw-bold);
   letter-spacing: 0.08em;
   white-space: nowrap; /* ヘッダ高さズレ防止: en「Apply Selected」 等で2行wrap 起きないように */
@@ -212,7 +212,7 @@
 
 .wwm-opt-progress {
   padding: var(--space-1-5) var(--space-2); color: var(--paper-mute);
-  font-size: var(--text-sm); font-family: var(--f-mono);
+  font-size: var(--text-sm); font-family: var(--f-latin);
   text-align: center;
 }
 
@@ -263,7 +263,7 @@
   color: var(--c-opt-sort-btn-fg);
   border: none;
   padding: var(--space-half) var(--space-2);
-  font-family: var(--f-mono);
+  font-family: var(--f-latin);
   font-size: var(--text-sm);
   letter-spacing: 0.04em;
   cursor: pointer;
@@ -379,7 +379,7 @@
   background: var(--c-eff-input-bg);
   border: 1px solid var(--gold-deep);
   color: var(--c-eff-input-fg);
-  font-family: var(--f-mono);
+  font-family: var(--f-latin);
   font-size: var(--text-12);
   text-align: right;
   border-radius: 3px;
@@ -422,7 +422,7 @@
 }
 
 .wwm-analysis-card h3 {
-  margin: 0; font-family: var(--f-display, var(--f-latin));
+  margin: 0; font-family: var(--f-display);
   font-size: var(--text-14); font-weight: var(--fw-bold);
   color: var(--gold-bright); letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -530,7 +530,7 @@
 
 .wwm-share-url {
   width: 100%; min-height: 60px; box-sizing: border-box;
-  font-family: var(--f-mono); font-size: var(--text-sm);
+  font-family: var(--f-latin); font-size: var(--text-sm);
   background: var(--overlay-soft-mid); color: var(--paper-2);
   border: 1px solid var(--ink-2); border-radius: 4px;
   padding: var(--space-2) var(--space-2-5); resize: vertical;
@@ -606,7 +606,7 @@
 .wwm-anlz-title-block { display: flex; align-items: baseline; gap: 14px; flex-shrink: 0; }
 
 .wwm-anlz-title {
-  font-family: 'Ma Shan Zheng', 'Noto Serif JP', serif;
+  font-family: var(--f-display);
   font-size: 48px;
   color: var(--c-anlz-title-fg);
   letter-spacing: 0.05em;
@@ -618,7 +618,7 @@
 }
 
 .wwm-anlz-subtitle {
-  font-family: 'Cinzel', serif;
+  font-family: var(--f-latin);
   font-size: var(--text-md);
   letter-spacing: 0.4em;
   color: var(--gold-deep);
@@ -643,7 +643,7 @@
   background: transparent;
   border: none;
   color: var(--c-anlz-tab-fg);
-  font-family: 'Ma Shan Zheng', 'Noto Serif JP', serif;
+  font-family: var(--f-display);
   font-size: var(--text-15);
   letter-spacing: 0.18em;
   cursor: pointer;
@@ -663,19 +663,19 @@
 }
 
 html[lang="en"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
-  font-family: 'Cinzel', serif;
+  font-family: var(--f-latin);
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
 /* ja: Ma Shan Zheng は日本漢字非対応 → Noto Serif JP */
 html[lang="ja"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display);
 }
 
 /* ko: Noto Serif KR (fallback Noto Serif JP) */
 html[lang="ko"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
-  font-family: 'Noto Serif KR', 'Noto Serif JP', serif;
+  font-family: var(--f-display);
 }
 
 /* en時: modal の主タイトル / 各パネルの主タイトル を Cinzel に統一 */
@@ -685,7 +685,7 @@ html[lang="en"] .wwm-modal-header h2,
 html[lang="en"] .wwm-modal-header h2 *,
 html[lang="en"] .wwm-cmp-title-ja,
 html[lang="en"] .wwm-cmp-title-en {
-  font-family: 'Cinzel', serif !important;
+  font-family: var(--f-latin) !important;
   letter-spacing: 0.15em !important;
 }
 
@@ -840,7 +840,7 @@ html[lang="en"] .wwm-cmp-title-en {
    直値 #f0d28a (墨面 --gold-bright 同値) で「明るい金」 強制 (兄貴指定 2026-06-14) */
 .wwm-anlz-popout-btn {
   padding: 7px 30px;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display);
   font-size: 20px; font-weight: 700; letter-spacing: 0.18em;
   color: #f0d28a;
   background: none;
@@ -898,12 +898,12 @@ body[data-anlz-popout="1"] #wsAnlz .wwm-anlz-gap { display: none; }
   border-bottom: 1px solid var(--gold-deep);
   flex-shrink: 0;
 }
-.wwm-anlz-floating-title { flex: 1; font-family: 'Noto Serif JP', serif; font-size: 15px; font-weight: 700; letter-spacing: 0.22em; display: flex; align-items: baseline; gap: 8px; }
+.wwm-anlz-floating-title { flex: 1; font-family: var(--f-display); font-size: 15px; font-weight: 700; letter-spacing: 0.22em; display: flex; align-items: baseline; gap: 8px; }
 .wwm-anlz-floating-title .ja { color: var(--gold-bright); }
-.wwm-anlz-floating-title .en { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; color: var(--gold); }
+.wwm-anlz-floating-title .en { font-family: var(--f-latin); font-size: 11px; letter-spacing: 0.2em; color: var(--gold); }
 .wwm-anlz-floating-title .seal {
   width: 22px; height: 22px; background: var(--vermilion);
-  color: #fff5e0; font-family: 'Noto Serif JP', serif; font-weight: 800; font-size: 12px;
+  color: #fff5e0; font-family: var(--f-display); font-weight: 800; font-size: 12px;
   display: flex; align-items: center; justify-content: center;
   transform: rotate(-4deg); margin-left: 6px;
 }
@@ -929,7 +929,7 @@ body[data-anlz-popout="1"] #wsAnlz .wwm-anlz-gap { display: none; }
 }
 .wwm-anlz-floating-subheader .anlz-subtab {
   padding: 8px 18px;
-  font-family: 'Noto Serif JP', serif; font-size: 12px; font-weight: 700; letter-spacing: 0.18em;
+  font-family: var(--f-display); font-size: 12px; font-weight: 700; letter-spacing: 0.18em;
   color: var(--gold); background: none; border: none; cursor: pointer;
   border-bottom: 2px solid transparent;
   transition: color 0.15s, border-color 0.15s, background 0.15s;
@@ -963,7 +963,7 @@ body[data-anlz-popout="1"] #wsAnlz .wwm-anlz-gap { display: none; }
   display: flex; justify-content: space-between; align-items: center;
   flex-shrink: 0;
 }
-.wwm-anlz-floating-footer .pos { font-family: 'Cinzel', serif; color: var(--gold); }
+.wwm-anlz-floating-footer .pos { font-family: var(--f-latin); color: var(--gold); }
 
 /* PiP window 内 override = OS window 自体が枠なので fixed/border/resize 不要 */
 .wwm-anlz-floating--pip {

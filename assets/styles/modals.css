@@ -42,7 +42,7 @@
 }
 .wwm-lang-picker h2 {
   margin: 0 0 18px;
-  font-family: Cinzel, serif;
+  font-family: var(--f-latin);
   font-size: 18px;
   letter-spacing: 0.18em;
   color: var(--gold-bright);
@@ -92,7 +92,7 @@
 }
 .wwm-modal-header h2 {
   margin: 0;
-  font-family: var(--f-display, var(--f-latin));
+  font-family: var(--f-display);
   font-size: var(--text-15); font-weight: var(--fw-bold);
   color: var(--gold-bright);
   letter-spacing: 0.15em;
@@ -203,7 +203,7 @@
 .wwm-bm-link:active { cursor: grabbing; }
 .wwm-bm-code {
   width: 100%; min-height: 80px; max-height: 120px;
-  font-family: monospace; font-size: var(--text-xs);
+  font-family: var(--f-latin); font-size: var(--text-xs);
   background: #0a0a0a; color: #0f0;
   border: 1px solid #333; border-radius: 4px;
   padding: var(--space-1-5); word-break: break-all; resize: vertical;
@@ -304,7 +304,7 @@
   width: 28px; height: 28px;
   background: var(--vermilion);
   color: #fff;
-  font-family: var(--f-display, 'Noto Serif JP'); font-weight: 900; font-size: var(--text-lg);
+  font-family: var(--f-display); font-weight: 900; font-size: var(--text-lg);
   border: 2px solid var(--hover-strong);
   border-radius: 2px;
   transform: rotate(-6deg);
@@ -335,7 +335,7 @@
   padding-top: var(--space-3);
 }
 .wwm-cmp-modal-a .wwm-cmp-preview-value {
-  font-family: var(--f-latin, 'Cinzel');
+  font-family: var(--f-latin);
   font-size: var(--text-xl);
   font-weight: 900;
   letter-spacing: 0.04em;
@@ -350,7 +350,7 @@
 }
 .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-primary,
 .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
-  font-family: var(--f-display, 'Noto Serif JP');
+  font-family: var(--f-display);
   font-weight: 900;
   letter-spacing: 0.16em;
 }
@@ -389,7 +389,7 @@
   padding: 0 var(--space-2);
   background: var(--vermilion);
   color: #fff;
-  font-family: var(--f-display, 'Noto Serif JP');
+  font-family: var(--f-display);
   font-weight: 900; font-size: var(--text-md);
   letter-spacing: 0.12em;
   border: 2px solid var(--hover-strong);
@@ -456,7 +456,7 @@
    imp は何も守っていなかった relic (light.css #1a8d52 が strip 後勝つが同様に不可視)。 VRT 58/58 で確認済 */
 .wwm-cmp-modal-a .wwm-cmp-new     .wwm-cmp-title { color: var(--jade-bright); }
 .wwm-cmp-modal-a .wwm-cmp-kongfu-header {
-  font-family: var(--f-display, 'Noto Serif JP');
+  font-family: var(--f-display);
   font-weight: 700;
   font-size: var(--text-md);
   color: var(--c-modal-a-kongfu-header-fg);
@@ -472,7 +472,7 @@
   border: 1px solid var(--gold-deep);
   border-radius: 0;
   color: var(--c-modal-a-kongfu-select-fg);
-  font-family: var(--f-display, 'Noto Serif JP');
+  font-family: var(--f-display);
   font-weight: 700;
   margin-bottom: var(--space-2);
   margin-top: var(--space-1-5);
@@ -481,14 +481,14 @@
 /* select内 option を統一 (paper bg + var(--bg-raised) / hover青) */
 .wwm-cmp-modal-a select option {
   font-size: var(--text-md);
-  font-family: var(--f-display, 'Noto Serif JP');
+  font-family: var(--f-display);
   font-weight: 700;
   background: var(--c-modal-a-option-bg) ;
   color: var(--c-modal-a-option-fg);
 }
 .wwm-cmp-modal-a .wwm-cmp-stat-select option {
   font-size: var(--text-12);
-  font-family: var(--f-sans, 'Noto Sans JP');
+  font-family: var(--f-body);
   font-weight: 600;
 }
 .wwm-cmp-modal-a .wwm-cmp-set-header,
@@ -533,6 +533,7 @@
   border: 1px solid var(--ink-2);
   border-radius: 0;
   font-size: var(--text-sm);
+  font-family: var(--f-display); /* cmp-name (左 readonly) と同 font に揃え (2026-06-15 兄貴指摘) */
 }
 /* S2-d: val (現有列 readonly) と val-input (新置列 input) で light 配色が異なる → rule 分離
    (val = fg-emphasis 維持、 val-input = token swap 済) */
@@ -637,7 +638,7 @@
   display: flex; align-items: baseline; gap: 12px;
 }
 .wwm-cmp-delta-label {
-  font-family: var(--f-display, 'Noto Serif JP');
+  font-family: var(--f-display);
   font-size: var(--text-sm); font-weight: 900;
   color: var(--paper-mute);
   letter-spacing: 0.32em;
@@ -734,7 +735,7 @@
   display: flex; align-items: center; gap: 8px;
 }
 .wwm-cmp-modal-a .wwm-cmp-title-ja {
-  font-family: var(--f-display, 'Noto Serif JP');
+  font-family: var(--f-display);
   font-size: var(--text-18);
   font-weight: 900;
   letter-spacing: 0.18em;
@@ -742,7 +743,7 @@
   text-shadow: var(--c-cmp-modal-a--cmp-title-ja-text-shadow);
 }
 .wwm-cmp-modal-a .wwm-cmp-title-en {
-  font-family: var(--f-latin, 'Cinzel');
+  font-family: var(--f-latin);
   font-size: var(--text-sm);
   font-weight: 600;
   color: var(--c-cmp-title-en-fg);
@@ -974,7 +975,7 @@
 }
 .wwm-cmp-val-wrap .wwm-cmp-val-input { width: 100%; text-align: right; }
 .wwm-cmp-unit { font-size: var(--text-sm); opacity: 0.7; text-align: left; }
-.wwm-cmp-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wwm-cmp-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--f-display); }
 .wwm-cmp-val  { font-weight: var(--fw-bold); text-align: right; }
 .wwm-cmp-val-input { font-size: var(--text-sm); text-align: right; }
 .wwm-rank-gold { color: var(--accent); }
@@ -1106,14 +1107,14 @@
   flex-wrap: wrap;
 }
 .wwm-note-title-ja {
-  font-family: 'Ma Shan Zheng', 'Noto Serif JP', serif;
+  font-family: var(--f-display);
   font-size: var(--text-2xl);
   color: var(--brown-3);
   letter-spacing: 0.15em;
   text-shadow: 0 1px 0 rgba(255,240,200,.4);
 }
 .wwm-note-title-en {
-  font-family: 'Cinzel', serif;
+  font-family: var(--f-latin);
   font-size: var(--text-md);
   letter-spacing: 0.3em;
   color: #7a4220;
@@ -1124,7 +1125,7 @@
   display: flex; align-items: center; justify-content: center;
   background: var(--vermilion-note);
   color: #f5e6c8;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display);
   font-size: var(--text-lg); font-weight: 900;
   border-radius: 3px;
   box-shadow: 0 0 0 1px #5a1208, 1px 1px 0 var(--overlay-soft);
@@ -1140,7 +1141,7 @@
   color: #f5e6c8;
   border: 1px solid #5a1208;
   border-radius: 4px;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display);
   font-weight: 700;
   font-size: var(--text-12);
   letter-spacing: 0.08em;
@@ -1190,7 +1191,7 @@
   border: 1px solid var(--brown-5); border-bottom: none;
   border-radius: 6px 6px 0 0;
   color: #4a2810;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display);
   font-weight: 700; font-size: var(--text-14);
   cursor: pointer; position: relative; top: 1px;
   letter-spacing: 0.08em;
@@ -1220,7 +1221,7 @@
 
 .wwm-note-section { margin-bottom: 18px; }
 .wwm-note-h3 {
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display);
   font-size: var(--text-15); font-weight: 900;
   color: var(--brown-3);
   margin: 0 0 var(--space-2);
@@ -1242,7 +1243,7 @@
   border: 1px dashed rgba(90,30,16,.35);
   border-radius: 4px;
   padding: var(--space-2-5) var(--space-3);
-  font-family: var(--f-mono, 'Courier New', monospace);
+  font-family: var(--f-latin);
   font-size: var(--text-12);
   color: var(--brown-3);
   white-space: pre-wrap;
@@ -1252,7 +1253,7 @@
 /* 更新履歴 */
 .wwm-note-cl-entry { margin-bottom: var(--space-4); padding-bottom: var(--space-2-5); border-bottom: 1px dotted rgba(90,30,16,.35); }
 .wwm-note-cl-entry:last-child { border-bottom: none; }
-.wwm-note-cl-ver { font-family: 'Cinzel', serif; font-size: var(--text-lg); font-weight: 900; color: var(--brown-3); }
+.wwm-note-cl-ver { font-family: var(--f-latin); font-size: var(--text-lg); font-weight: 900; color: var(--brown-3); }
 .wwm-note-cl-date { font-size: var(--text-sm); color: #7a4220; margin-left: var(--space-2-5); font-weight: 400; }
 .wwm-note-cl-items { margin: var(--space-1-5) 0 0 0; padding-left: 22px; list-style: none; }
 .wwm-note-cl-items li { position: relative; margin-bottom: 3px; padding-left: var(--space-1); }
@@ -1789,7 +1790,7 @@
   overflow: hidden;
   background: #07060a;
   color: #ede4d0;
-  font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+  font-family: var(--f-body);
   text-align: left;
   /* panel 上に乗る色は --cd-* に集約 (墨 default)。 .wwm-card-panel-light が古紙 override */
   --cd-panel-1: rgba(7,6,10,0.86);
@@ -1857,7 +1858,7 @@
   content: '燕';
   position: absolute; right: 36px; top: 50%;
   transform: translateY(-50%) rotate(-6deg);
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display);
   font-weight: 900; font-size: 430px; line-height: 1;
   color: rgba(200,60,43,0.13);
 }
@@ -1923,7 +1924,7 @@
 .wwm-card-portrait-fb {
   display: flex; align-items: center; justify-content: center;
   color: var(--cd-gold-2); font-weight: 800; font-size: 44px;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display);
 }
 .wwm-card-portrait::after { /* 下部 vignette (名前との接続) */
   content: '';
@@ -1943,7 +1944,7 @@
 
 .wwm-card-info-name {
   text-align: center;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display);
   font-size: 19px; font-weight: 700; color: var(--cd-ink);
   margin-bottom: 8px;
 }
@@ -1973,20 +1974,20 @@
 /* 武格指数 (info カラム内) */
 .wwm-card-mi { margin-bottom: 10px; }
 .wwm-card-mi-label .ja {
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display);
   font-weight: 900; font-size: 18px; letter-spacing: 0.12em;
   color: var(--cd-gold);
 }
 .wwm-card-mi-label .en {
   display: block;
-  font-family: 'Rajdhani', monospace;
+  font-family: var(--f-latin);
   font-size: 10px; font-weight: 600; letter-spacing: 0.3em;
   color: var(--cd-gold-2);
   margin-top: 1px;
 }
 .wwm-card-mi-row { display: flex; align-items: baseline; gap: 14px; margin-top: 4px; }
 .wwm-card-mi-num {
-  font-family: 'Cinzel', 'Noto Serif JP', serif;
+  font-family: var(--f-latin);
   font-weight: 800; font-size: 64px; line-height: 0.95; letter-spacing: -0.01em;
   color: var(--cd-gold);
   text-shadow: var(--cd-num-shadow);
@@ -1998,7 +1999,7 @@
   display: inline-flex; align-items: center; justify-content: center;
   padding: 4px 14px;
   border-radius: 2px; border: 1.5px solid;
-  font-family: 'Cinzel', serif;
+  font-family: var(--f-latin);
   font-weight: 800; font-size: 24px; line-height: 1;
 }
 .wwm-card-tier-big { font-size: 30px; padding: 6px 16px; }
@@ -2066,7 +2067,7 @@
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .wwm-card-xtile b {
-  font-family: 'Rajdhani', monospace;
+  font-family: var(--f-latin);
   font-size: 11px; font-weight: 700; color: var(--cd-gold); letter-spacing: 0.08em;
 }
 .wwm-card-xtile-empty { color: var(--cd-mute); font-size: 12px; justify-content: center; min-height: 64px; }
@@ -2140,7 +2141,7 @@
 }
 .wwm-card-judge-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 .wwm-card-judge-name { color: var(--cd-sub); flex: 1; }
-.wwm-card-judge-val { font-family: 'Rajdhani', monospace; font-weight: 700; font-size: 14px; }
+.wwm-card-judge-val { font-family: var(--f-latin); font-weight: 700; font-size: 14px; }
 
 /* 武術 / 心法 cell */
 .wwm-card-cell {
@@ -2175,20 +2176,20 @@
   display: flex; justify-content: space-between; align-items: center;
   background: var(--cd-footer-bg);
   border-top: 1px solid var(--cd-line);
-  font-family: 'Rajdhani', monospace;
+  font-family: var(--f-latin);
   font-size: 11px; letter-spacing: 0.16em;
   color: var(--cd-mute);
 }
 .wwm-card-gungi .wwm-card-footer { margin-left: -40px; margin-right: -40px; padding: 10px 40px 12px; }
 .wwm-card-footer-brand {
   display: inline-flex; align-items: center; gap: 7px;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display);
   font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
   color: var(--cd-gold-2);
 }
 .wwm-card-footer-brand i {
   font-style: normal;
-  font-family: 'Cinzel', serif;
+  font-family: var(--f-latin);
   font-size: 9px; font-weight: 600; letter-spacing: 0.22em;
   color: var(--cd-mute);
 }
@@ -2236,7 +2237,7 @@
   display: flex; flex-direction: column; align-items: center;
 }
 .wwm-card-gsec-title {
-  font-family: 'Rajdhani', monospace;
+  font-family: var(--f-latin);
   font-size: 11px; font-weight: 700; letter-spacing: 0.24em;
   color: var(--cd-gold-2);
   margin: 2px 0 5px;
@@ -2251,13 +2252,13 @@
 }
 .wwm-card-stat5-l {
   display: block;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display);
   font-size: 12px; font-weight: 700;
   color: var(--cd-sub);
 }
 .wwm-card-stat5-v {
   display: block;
-  font-family: 'Rajdhani', monospace;
+  font-family: var(--f-latin);
   font-size: 19px; font-weight: 700;
   color: var(--cd-gold);
 }
@@ -2271,7 +2272,7 @@
 .wwm-card-row:last-child { border-bottom: none; }
 .wwm-card-row-l { color: var(--cd-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .wwm-card-row-v {
-  font-family: 'Rajdhani', monospace;
+  font-family: var(--f-latin);
   font-weight: 700; font-size: 14px;
   color: var(--cd-gold);
   white-space: nowrap;
@@ -2302,7 +2303,7 @@
 }
 .wwm-gate-title {
   margin: 0 0 var(--space-3);
-  font-family: var(--f-display, var(--f-latin));
+  font-family: var(--f-display);
   font-size: var(--text-15); font-weight: var(--fw-bold);
   color: var(--gold-bright);
   letter-spacing: 0.15em;
@@ -2505,7 +2506,7 @@
 .wwm-tool-modal .wwm-modal-header h2 {
   display: flex; align-items: center; gap: 10px;
   color: var(--c-modal-a-title-ja-fg); text-shadow: none; text-transform: none;
-  font-family: var(--f-display, 'Noto Serif JP');
+  font-family: var(--f-display);
 }
 .wwm-tool-modal .wwm-tool-title-ja {
   font-size: var(--text-18);
@@ -2514,7 +2515,7 @@
   text-shadow: var(--c-cmp-modal-a--cmp-title-ja-text-shadow);
 }
 .wwm-tool-modal .wwm-tool-title-en {
-  font-family: var(--f-latin, 'Cinzel');
+  font-family: var(--f-latin);
   font-size: var(--text-sm);
   letter-spacing: 0.32em; color: var(--c-cmp-title-en-fg); font-weight: 600;
   align-self: flex-end; padding-bottom: var(--space-half);
@@ -2523,7 +2524,7 @@
 .wwm-tool-modal .wwm-tool-seal {
   display: inline-flex; align-items: center; justify-content: center;
   width: 28px; height: 28px;
-  font-family: var(--f-display, 'Noto Serif JP'); font-size: var(--text-lg); font-weight: 900;
+  font-family: var(--f-display); font-size: var(--text-lg); font-weight: 900;
   color: #2a1c12; background: var(--accent); /* 儀金 #d4af37 両 theme constant */
   border: 2px solid var(--gold-bright);
   border-radius: 2px;
@@ -2588,7 +2589,7 @@
 .wwm-tool-tab {
   padding: 7px 18px; border: 1px solid transparent; border-bottom: none;
   background: transparent; color: var(--paper-mute); cursor: pointer;
-  font-family: var(--f-display, 'Noto Serif JP'); font-size: var(--text-sm);
+  font-family: var(--f-display); font-size: var(--text-sm);
   font-weight: 600; letter-spacing: 0.1em; border-radius: 2px 2px 0 0;
 }
 .wwm-tool-tab.active {

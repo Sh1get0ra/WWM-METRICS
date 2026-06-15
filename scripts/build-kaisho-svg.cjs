@@ -28,6 +28,16 @@ const UI_KEYS = [
   'railStatus',                                         // rail 頭
   'brandVert',                                          // topbar 縦書きブランド「風燕計」
   'martialHistoryTab',                                  // 武格履歴 panel 題字 (2026-06-15 追加)
+  // modal title 8 件 (2026-06-15 追加 — フォント整理一気 sprint)
+  'shareTitle',         // 飛簡
+  'cmpTitleJa',         // 武具対照
+  'xinfaTitleJa',       // 心法対照
+  'cmpArsenalTitle',    // 武庫対照
+  'importSetupTitle',   // 引燕
+  'importPreviewTitle', // 引燕 (= importSetupTitle と同字、 重複生成は OK)
+  'noteTitleJa',        // 筆記
+  'diagTitleJa',        // 弱点指摘
+  'ocrHelpTitle',       // 画面取込指南 (2026-06-15 ja 漢字化、 旧「スクショ取込ガイド」)
 ];
 const LITERALS = {
   qishu: '奇術', // index.html 直書き (data-i18n なし)

@@ -238,7 +238,7 @@
 #wwmGearGrid *,
 #wwmXinfaGrid,
 #wwmXinfaGrid * {
-  font-family: var(--f-display, 'Noto Serif JP'), serif;
+  font-family: var(--f-display);
 }
 
 .wwm-sb-top {

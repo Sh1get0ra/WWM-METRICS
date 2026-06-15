@@ -101,7 +101,7 @@
 }
 
 .wwm-mobile-drawer-section-title {
-  font-family: var(--f-mono); font-weight: var(--fw-bold);
+  font-family: var(--f-latin); font-weight: var(--fw-bold);
   font-size: var(--text-xs);
   color: var(--gold);
   letter-spacing: 0.18em;
@@ -253,7 +253,7 @@
     border: 1px solid var(--vermilion-strong);
     border-radius: 3px;
     color: var(--vermilion-bright);
-    font-family: var(--f-mono);
+    font-family: var(--f-latin);
     font-weight: var(--fw-bold);
     font-size: var(--text-xs);
     letter-spacing: 0.12em;
