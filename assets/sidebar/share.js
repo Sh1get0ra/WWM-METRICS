@@ -276,7 +276,7 @@
         <div id="wwmSharePreviewWrap" style="display:none;margin-top:12px;">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
             <div style="font-size:11px;color:var(--gold-bright);font-weight:700;letter-spacing:0.1em;">${(window.T?.sharePreviewTitle) ?? 'プレビュー'}</div>
-            <label style="font-size:11px;color:var(--paper-mute);display:flex;align-items:center;gap:6px;">${(window.T?.sharePreviewScaleLabel) ?? '縮尺'}
+            <label style="font-size:11px;color:var(--text-sumi-dim);display:flex;align-items:center;gap:6px;">${(window.T?.sharePreviewScaleLabel) ?? '縮尺'}
               <input type="range" id="wwmSharePreviewScale" min="30" max="100" step="5" value="50" style="width:120px;accent-color:var(--gold);">
               <span id="wwmSharePreviewScaleVal" style="font-family:var(--f-latin);color:var(--gold-bright);min-width:36px;">50%</span>
             </label>
@@ -371,7 +371,7 @@
         pane.insertAdjacentHTML('afterbegin', _bgIconHtml); // mount の innerHTML 上書き後に挿入
         return;
       }
-      pane.innerHTML = _bgIconHtml + '<p style="color:var(--paper-mute);padding:20px;">...</p>';
+      pane.innerHTML = _bgIconHtml + '<p style="color:var(--text-sumi-dim);padding:20px;">...</p>';
     }
 
     // ── タブ engine ────────────────────────────────────────────────

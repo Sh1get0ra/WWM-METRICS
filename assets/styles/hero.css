@@ -49,8 +49,8 @@
   position: absolute;
   top: 14px; right: 16px;
   width: 8px; height: 8px;
-  border-right: 1.5px solid var(--paper-mute);
-  border-bottom: 1.5px solid var(--paper-mute);
+  border-right: 1.5px solid var(--text-sumi-dim);
+  border-bottom: 1.5px solid var(--text-sumi-dim);
   transform: rotate(45deg);
   opacity: 0.4;
   transition: transform 0.25s ease, top 0.25s ease, opacity 0.15s;

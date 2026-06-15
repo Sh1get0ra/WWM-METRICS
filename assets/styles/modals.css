@@ -773,7 +773,7 @@
 }
 .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
   background: var(--c-modal-a-btn-secondary-bg);
-  border: 1px solid var(--paper-mute);
+  border: 1px solid var(--text-sumi-dim);
   border-radius: 0;
   color: var(--brown-1);
   padding: 7px 18px;
@@ -2570,7 +2570,7 @@
 .wwm-tool-modal .wwm-modal-body .wwm-btn-secondary,
 .wwm-tool-modal-footer .wwm-card-post-x {
   background: var(--c-modal-a-btn-secondary-bg);
-  border: 1px solid var(--c-cmp-btn-row--btn-secondary-border, var(--paper-mute));
+  border: 1px solid var(--c-cmp-btn-row--btn-secondary-border, var(--text-sumi-dim));
   border-radius: 0;
   color: var(--brown-1);
   padding: 7px 18px;

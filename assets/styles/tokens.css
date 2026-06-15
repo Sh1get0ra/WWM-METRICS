@@ -130,9 +130,8 @@
   --chart-graze:    #6a6053;  /* paper-mute 寄り */
   --chart-normal:   #ede4d0;  /* paper */
 
-  /* Paper text — 段階廃止中。 --paper / --paper-dim / --paper-2 は廃止済、
-     --paper-mute は別 commit で廃止予定 */
-  --paper-mute:  #857b6a;  /* critique P2 (2026-06-06): #7a7060→#857b6a — bg-2 上 3.85→4.49 (浮上面 AA 実質達成)。 旧 #6a6053→#7a7060 (2026-06-04) に続く 2 段目 */
+  /* Paper text — 全廃止済 (--paper / --paper-2 / --paper-dim / --paper-mute)、
+     全 text-sumi-fg / text-sumi-dim に集約 (2026-06-15 Phase 3 完了、 [[sumi-token-policy]]) */
 
   /* Type — 役割固定 3 token (2026-06-15 集約、 --f-mono 廃止)
      文字 (見出し・漢字) = --f-display / 本文 (UI) = --f-body / 数値・ラテン = --f-latin
@@ -250,7 +249,7 @@
   --c-footer-logo-opacity: 0.75;
   --c-preset-bar-bg: var(--surf-2);
   --c-h1-accent-fg: var(--vermilion-bright);
-  --c-h1-sub-fg: var(--paper-mute);
+  --c-h1-sub-fg: var(--text-sumi-dim);
   --c-preset-slot-has-data-bg: rgba(40, 30, 18, 0.6);
   --c-preset-slot-has-data-border: rgba(201,164,90,0.4);
   --c-preset-save-border: var(--gold-strong);
@@ -277,7 +276,7 @@
   --c-cmp-modal-a--modal-header-bg: var(--bg-raised);
   --c-cmp-title-en-fg: var(--chart-sympathy);
   --c-cmp-set-header-text-shadow: 0 0 6px var(--vermilion-bright-soft-mid);
-  --c-cmp-preview-zero-fg: var(--paper-mute);
+  --c-cmp-preview-zero-fg: var(--text-sumi-dim);
   --c-cmp-modal-bg-icon-opacity: 0.1;
   --c-modal-bg-icon-opacity: 0.18;
   --c-xinfa-tier-chip-bg: var(--vermilion-soft);
@@ -354,7 +353,7 @@
   --c-tier-chip-b-text-shadow: 0 0 10px rgba(201,184,138,0.45);
   --c-tier-chip-c-bg: rgba(139,129,112,0.10);
   --c-tier-chip-c-border: rgba(139,129,112,0.26);
-  --c-opt-sort-btn-fg: var(--paper-mute);
+  --c-opt-sort-btn-fg: var(--text-sumi-dim);
   --c-opt-sort-btn-hover-bg: var(--accent-faint);
   --c-opt-sort-btn-hover-fg: var(--gold-bright); /* audit P1 (2026-06-07): paper → gold-bright (hover contrast 3.5→AA) */
   /* audit P1 (2026-06-07): persistent sort state が 2.2-3.8:1 — 金地墨字 (button-primary 語彙) で 11:1 へ。
@@ -382,8 +381,8 @@
   --c-modal-a-btn-secondary-bg: url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_cancel-9a52642a.png") center / 100% 100% no-repeat, transparent;
   --c-slot-border: rgba(232,215,180,0.20);
   --c-tier-badge-hero-bg: linear-gradient(135deg, rgba(60,40,30,.45) 0%, rgba(30,20,15,.35) 50%, rgba(60,40,30,.45) 100%);
-  --c-tier-badge-hero-fg: var(--paper-mute);
-  --c-tier-badge-hero-border: var(--paper-mute);
+  --c-tier-badge-hero-fg: var(--text-sumi-dim);
+  --c-tier-badge-hero-border: var(--text-sumi-dim);
   --c-tier-ss-hero-bg: linear-gradient(135deg, rgba(180,40,28,.48) 0%, rgba(100,20,14,.38) 50%, rgba(180,40,28,.48) 100%);
   --c-tier-ss-hero-fg: var(--chart-crit);
   --c-tier-ss-hero-border: rgba(240,210,138,.65);
@@ -397,7 +396,7 @@
   --c-tier-b-hero-fg: var(--bone);
   --c-tier-b-hero-border: rgba(201,184,138,.5);
   --c-tier-c-hero-bg: linear-gradient(135deg, rgba(60,50,40,.3) 0%, rgba(25,20,16,.25) 50%, rgba(60,50,40,.3) 100%);
-  --c-tier-c-hero-fg: var(--paper-mute);
+  --c-tier-c-hero-fg: var(--text-sumi-dim);
   --c-tier-c-hero-border: rgba(122,112,96,.45);
   --c-migration-strong-fg: #a8d0ff;
   --c-anlz-tab-fg: var(--text-sumi-fg);
@@ -462,8 +461,8 @@
   --c-sb-totalmartial--b-text-shadow: initial;  /* S2-g sb-totalmartial--b */
   --c-sb-totalmartial--muted-fg: initial;  /* S2-g sb-totalmartial--muted */
   --c-sb-totalmartial--muted-opacity: 0.6;  /* S2-g sb-totalmartial--muted */
-  --c-cmp-modal-a--cmp-delta-label-fg: var(--paper-mute);  /* S2-g cmp-modal-a--cmp-delta-label */
-  --c-cmp-modal-a--cmp-delta-base-fg: var(--paper-mute);  /* S2-g cmp-modal-a--cmp-delta-base */
+  --c-cmp-modal-a--cmp-delta-label-fg: var(--text-sumi-dim);  /* S2-g cmp-modal-a--cmp-delta-label */
+  --c-cmp-modal-a--cmp-delta-base-fg: var(--text-sumi-dim);  /* S2-g cmp-modal-a--cmp-delta-base */
   --c-hero-wuxia--hero-tier-tier-SS-before-position: absolute;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
   --c-hero-wuxia--hero-tier-tier-SS-before-top: 0;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
   --c-hero-wuxia--hero-tier-tier-SS-before-bottom: 0;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
@@ -510,7 +509,7 @@
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
   --c-cmp-kongfu-select-fg: var(--accent);
   --c-cmp-set-select-fg: var(--liupai-guyun);
-  --c-xinfa-tier-fg: var(--paper-mute);
+  --c-xinfa-tier-fg: var(--text-sumi-dim);
 
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
   --c-share-url-border: var(--ink-2);
@@ -537,7 +536,7 @@
   --c-num-input-border: #444;
   --c-btn-secondary-border: rgba(255,255,255,0.3);
   --c-cmp-title--cmp-lv-border: var(--gold-deep);
-  --c-cmp-btn-row--btn-secondary-border: var(--paper-mute);
+  --c-cmp-btn-row--btn-secondary-border: var(--text-sumi-dim);
 
   /* Safe Area inset utility (Phase 1 base) */
   --safe-top:    env(safe-area-inset-top, 0px);
