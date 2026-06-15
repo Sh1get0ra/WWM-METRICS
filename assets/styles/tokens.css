@@ -173,6 +173,25 @@
   --text-2xl:   28px;  /* breakdown数値 */
   --text-hero:  92px;  /* EXPECTED ヒーロー */
 
+  /* ════════════════════════════════════════════════════════════════
+     Text color tokens — 6 token 集約 (2026-06-15 兄貴方針確定)
+     ────────────────────────────────────────────────────────────────
+     構造: 背面 (墨/紙) × 系 (黒/金/朱) = 6 token で全 text color 網羅
+     dim/mute 階調は廃止 (強調 = font-weight bold で表現、 色は base のまま)。
+     Phase 1 (この commit) = 新 token 定義のみ。 旧 token (--paper / --gold-bright
+     等) は keep。 Phase 2 で各 file 順次置換、 Phase 3 で旧 token 物理削除。
+     値は現状代表色から引いた (--paper #ede4d0 / --gold-bright #f0d28a /
+     --vermilion-bright #e85040 / --kami-ink #3d2e1f / --gold-deep #c9a45a /
+     --vermilion #c83c2b) — Phase 2 着手後に視覚調整余地あり */
+  /* 墨面 (背面 = 墨) text */
+  --text-sumi-fg:        #ede4d0;  /* 主要 text (現 --paper 系) */
+  --text-sumi-gold:      #f0d28a;  /* 金強調 (現 --gold-bright 系) */
+  --text-sumi-vermilion: #e85040;  /* 朱警告 (現 --vermilion-bright 系) */
+  /* 紙面 (背面 = 紙) text */
+  --text-kami-fg:        #3d2e1f;  /* 主要 text (現 --kami-ink 系、 焦茶) */
+  --text-kami-gold:      #c9a45a;  /* 金強調 (現 --gold-deep 系、 紙上で読める金) */
+  --text-kami-vermilion: #c83c2b;  /* 朱警告 (現 --vermilion 系、 紙上で読める朱) */
+
   /* Font weight scale */
   --fw-normal:   400;
   --fw-medium:   500;
