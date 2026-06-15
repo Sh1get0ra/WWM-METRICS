@@ -57,7 +57,7 @@
   display: flex; flex-direction: column;
   padding-top: var(--safe-top, 0);
   padding-bottom: var(--safe-bottom, 0);
-  color: var(--c-mobile-drawer-fg);
+  color: var(--text-sumi-fg);
   overflow-y: auto;
   border-left-color: var(--c-mobile-drawer-border-left);
 }
@@ -73,14 +73,14 @@
 .wwm-mobile-drawer-title {
   font-family: var(--f-display); font-weight: var(--fw-black);
   font-size: var(--text-lg); letter-spacing: 0.24em;
-  color: var(--gold-bright);
+  color: var(--text-sumi-gold);
 }
 
 .wwm-mobile-drawer-close {
   background: transparent; border: 1px solid var(--ink-2);
   border-radius: 3px;
   width: 36px; height: 36px;
-  color: var(--paper); font-size: var(--text-20); cursor: pointer;
+  color: var(--text-sumi-fg); font-size: var(--text-20); cursor: pointer;
   position: relative;
 }
 /* audit P3 (2026-06-07): 不可視 hit 拡張で実効 44px (preset chip と同手法) */
@@ -103,7 +103,7 @@
 .wwm-mobile-drawer-section-title {
   font-family: var(--f-latin); font-weight: var(--fw-bold);
   font-size: var(--text-xs);
-  color: var(--gold);
+  color: var(--text-sumi-gold);
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
@@ -118,7 +118,7 @@
   background: linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.30));
   border: 1px solid var(--ink-2);
   border-radius: 3px;
-  color: var(--paper);
+  color: var(--text-sumi-fg);
   font-family: var(--f-display); font-weight: var(--fw-bold);
   font-size: var(--text-sm);
   cursor: pointer;
@@ -131,7 +131,7 @@
   background: linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.30));
   border: 1px solid var(--ink-2);
   border-radius: 3px;
-  color: var(--paper);
+  color: var(--text-sumi-fg);
   font-family: var(--f-display); font-weight: var(--fw-bold);
   font-size: var(--text-md);
   text-align: left;
@@ -139,8 +139,8 @@
 }
 
 .wwm-mobile-drawer-btn:hover {
-  border-color: var(--vermilion-bright);
-  color: var(--vermilion-bright);
+  border-color: var(--text-sumi-vermilion);
+  color: var(--text-sumi-vermilion);
 }
 
 /* PC時 FAB / overlay 完全 hidden (mobile @media 外でも) */
@@ -197,7 +197,7 @@
     font-weight: var(--fw-black);
     font-size: var(--text-lg);
     letter-spacing: 0.16em;
-    color: var(--gold-bright);
+    color: var(--text-sumi-gold);
     margin: 0;
     padding: 0;
     line-height: 1.1;
@@ -252,7 +252,7 @@
     background: linear-gradient(180deg, var(--vermilion-bright-tint), rgba(232,81,58,0.10));
     border: 1px solid var(--vermilion-strong);
     border-radius: 3px;
-    color: var(--vermilion-bright);
+    color: var(--text-sumi-vermilion);
     font-family: var(--f-latin);
     font-weight: var(--fw-bold);
     font-size: var(--text-xs);
@@ -288,7 +288,7 @@
     font-family: var(--f-display);
     font-weight: var(--fw-black);
     font-size: var(--text-14);
-    color: var(--c-fg-accent);
+    color: var(--text-sumi-gold);
     letter-spacing: 0.08em;
   }
   .wwm-mobile-stat-fab-avatar[src]:not([src=""]) + .wwm-mobile-stat-fab-fallback { display: none; }
@@ -321,14 +321,14 @@
     font-weight: var(--fw-black);
     font-size: var(--text-14);
     letter-spacing: 0.18em;
-    color: var(--c-fg-accent);
+    color: var(--text-sumi-gold);
   }
   .wwm-mobile-stat-overlay-close {
     width: 36px; height: 36px;
     background: transparent;
     border: 1px solid var(--ink-2);
     border-radius: 3px;
-    color: var(--c-fg-accent);
+    color: var(--text-sumi-gold);
     font-size: var(--text-xl); line-height: 1;
     cursor: pointer;
   }
