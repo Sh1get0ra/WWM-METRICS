@@ -215,7 +215,7 @@ html[lang="ko"] .top-controls-2row .icon-btn {
 .icon-btn.note-btn { color: var(--text-sumi-gold); border-color: var(--gold-deep); }
 .icon-btn.note-btn:hover { color: var(--text-sumi-gold); border-color: var(--gold); background: var(--gold-faint); }
 
-.lang-switcher { display: flex; gap: 0; padding: var(--space-half); background: var(--surf-shade-2); border: 1px solid var(--ink-2); border-radius: 2px; }
+.lang-switcher { display: flex; gap: 0; padding: var(--space-half); background: var(--shade-strong); border: 1px solid var(--ink-2); border-radius: 2px; }
 .lang-btn {
   padding: var(--space-1) var(--space-2-5); border: none; background: transparent;
   color: var(--text-sumi-dim); font-family: var(--f-latin); font-weight: var(--fw-semibold);
@@ -237,7 +237,7 @@ html[lang="ko"] .top-controls-2row .icon-btn {
 .icon-btn {
   width: 30px; height: 30px;
   display: grid; place-items: center;
-  background: var(--surf-shade);
+  background: var(--shade-mid);
   border: 1px solid var(--ink-2);
   color: var(--text-sumi-dim); border-radius: 2px; cursor: pointer;
   font-size: var(--text-md);

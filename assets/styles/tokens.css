@@ -19,9 +19,6 @@
      (modal/card 上層 2 段 gradient の上下色)。 紙面 rescope = workspace.css。 */
   --bg-overlay-top:    rgba(26,20,16,0.7);
   --bg-overlay-bottom: rgba(15,12,14,0.85);
-  --surf-shade:  rgba(0,0,0,0.25);
-  --surf-shade-2:rgba(0,0,0,0.4);
-  --surf-shade-3:rgba(0,0,0,0.55);
   --rail-grad:   linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.5));
   --input-bg:    rgba(0,0,0,0.5);
   --input-text:  var(--gold-bright);

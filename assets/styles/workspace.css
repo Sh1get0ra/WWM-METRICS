@@ -58,7 +58,6 @@
    (gear card / xinfa card / anlz) が light theme 相当の紙配色になる仕掛け。 */
 .wwm-ws-paper {
   --bg-overlay-top: rgba(255,248,228,0.55); --bg-overlay-bottom: rgba(244,232,204,0.72);
-  --surf-shade: rgba(58,38,22,0.06); --surf-shade-2: rgba(58,38,22,0.10); --surf-shade-3: rgba(58,38,22,0.14);
   --input-bg: rgba(255,250,235,0.85); --input-text: #5e3a14;
   --ink-1: var(--kami-line-1); --ink-2: var(--kami-line-2); --ink-3: rgba(40,25,18,0.35);
   --paper: var(--kami-ink); --paper-2: var(--kami-ink-2); --paper-dim: var(--kami-ink-3); --paper-mute: #6a5236;
@@ -124,14 +123,14 @@
   --c-cmp-set-header-fg: var(--vermilion-deep);
   --c-cmp-set-header-text-shadow: none;
   /* current 列 = 本番 light 実効値 (pages.dev computed 採取 2026-06-12) — 新置と同色系 */
-  --c-cmp-current--cmp-row-bg: var(--surf-shade);
+  --c-cmp-current--cmp-row-bg: var(--shade-soft);
   --c-cmp-current--cmp-kongfu-header-fg: var(--text-kami-gold); /* D7 2026-06-15: brown-1 → text-kami-gold 統一 (左右色揃え) */
   --c-cmp-current--cmp-kongfu-header-bg: var(--gold-mid);
   --c-cmp-current--cmp-set-header-fg: var(--c-cmp-set-header-fg);
   --c-cmp-current--cmp-set-header-bg: var(--c-modal-a-set-select-bg);
   --c-cmp-preview-zero-fg: var(--bone-dim);
   --c-cmp-lv-select-fg: var(--c-gold-rich);
-  --c-cmp-stat-select-bg: var(--surf-shade);
+  --c-cmp-stat-select-bg: var(--shade-soft);
   /* bg-icon = 薄墨透かし化 (③ 2026-06-13)。対照 = 0.4 (兄貴 F12 実機確定値 — 装備アイコンは
      線が細く 0.08 では消える) / tool modal (盾/巻物 = ベタ面大) = 0.08 */
   --c-cmp-modal-bg-icon-opacity: 0.4;
@@ -153,7 +152,7 @@
   --c-xinfa-cell--xinfa-tier-border: var(--ink-2);
   --c-cmp-lv-select-fg:            var(--c-gold-rich);
   --c-cmp-lv-select-border:        var(--c-gold-rich);
-  --c-cmp-stat-select-bg:          var(--surf-shade);
+  --c-cmp-stat-select-bg:          var(--shade-soft);
 
   /* step2 / arsenal */
   --c-step2-section-title-fw:      900;
@@ -189,9 +188,9 @@
   --c-rank-row-hover-border-left:  #b8861a;
 
   /* eff table */
-  --c-eff-row-odd-bg:              var(--surf-shade);
-  --c-eff-row-hover-bg:            var(--surf-shade-2);
-  --c-eff-input-bg:                var(--surf-shade-2);
+  --c-eff-row-odd-bg:              var(--shade-soft);
+  --c-eff-row-hover-bg:            var(--shade-mid);
+  --c-eff-input-bg:                var(--shade-mid);
   --c-eff-input-fg:                #000;
 
   /* anlz panel */
