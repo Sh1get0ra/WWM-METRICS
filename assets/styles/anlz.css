@@ -760,7 +760,7 @@ html[lang="en"] .wwm-cmp-title-en {
   background-repeat: no-repeat;
   background-position: calc(100% + 80px) calc(100% + 80px); /* 右下へ寄せ — modal bg-icon と同値 (兄貴調整 2026-06-13) */
   background-size: 60%;
-  opacity: var(--c-anlz-bgicon-opacity);
+  opacity: var(--c-anlz-bg-icon-opacity);
   filter:
     brightness(0)
     drop-shadow(0 0 5px rgba(28,24,20,.4))

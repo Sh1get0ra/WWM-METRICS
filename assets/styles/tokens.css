@@ -297,7 +297,7 @@
   --c-anlz-header-after-bg: linear-gradient(180deg, transparent 18%, var(--hover-trace) 19%, var(--hover-trace) 20%, transparent 21%), linear-gradient(180deg, transparent 60%, var(--hover-trace) 61%, transparent 62%);
   --c-anlz-bamboo-opacity: 0.10;
   --c-anlz-body-after-bg: repeating-linear-gradient(45deg, transparent 0 24px, rgba(212,175,55,.025) 24px 25px), repeating-linear-gradient(-45deg, transparent 0 24px, rgba(0,0,0,.05) 24px 25px);
-  --c-anlz-bgicon-opacity: 0.28;
+  --c-anlz-bg-icon-opacity: 0.28;
   --c-note-cl-featured-bg: linear-gradient(90deg, var(--vermilion-soft), var(--vermilion-trace));
   --c-score-update-banner-bg: var(--vermilion-soft);
   --c-score-update-banner-fg: #ffd9cc;
@@ -429,7 +429,6 @@
   --c-sb-section-title-pad-left: var(--space-1-5);
   --c-cmp-modal-a--cmp-title-ja-text-shadow: 0 0 10px rgba(232,81,58,0.3);
   --c-brand-sub-text-shadow: initial;
-  --c-diag-modal--modal-bg-icon-opacity: var(--c-modal-bg-icon-opacity);
   --c-xinfa-tier-chip-border: rgba(232,81,58,0.50);
   --c-hero-label--en-opacity: initial;
   --c-hero-wuxia--hero-next-val-text-shadow: initial;
