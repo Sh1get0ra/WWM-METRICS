@@ -154,15 +154,15 @@ html.wwm-shared-build-mode #importBtn {
 
 .preset-save { border-color: var(--c-preset-save-border); color: var(--text-sumi-gold); }
 
-.preset-save:hover { background: var(--text-sumi-gold); color: var(--text-kami-fg); }
+.preset-save:hover { background: rgba(240,210,138,0.12); color: var(--text-sumi-gold); border-color: var(--text-sumi-gold); }
 
 .preset-load { border-color: var(--c-preset-load-border); color: var(--jade-bright); }
 
-.preset-load:hover:not(:disabled) { background: var(--c-preset-load-hover-bg); color: var(--text-kami-fg); }
+.preset-load:hover:not(:disabled) { background: rgba(168,212,180,0.12); color: var(--jade-bright); border-color: var(--jade-bright); }
 
 .preset-del  { border-color: var(--vermilion-strong); color: var(--text-sumi-vermilion); padding: 3px 6px; }
 
-.preset-del:hover:not(:disabled) { background: var(--vermilion); color: var(--text-sumi-fg); }
+.preset-del:hover:not(:disabled) { background: rgba(232,81,58,0.18); color: var(--text-sumi-vermilion); border-color: var(--text-sumi-vermilion); }
 
 .preset-load:disabled, .preset-del:disabled { opacity: 0.3; cursor: not-allowed; }
 
