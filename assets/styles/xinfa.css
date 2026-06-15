@@ -68,7 +68,7 @@
   font-weight: var(--fw-semibold);
   margin-left: var(--space-1-5);
   padding: var(--space-half) var(--space-2);
-  background: var(--bg-raised);
+  background: #1a1410;
   border: 1px solid var(--gold-deep);
   border-radius: 2px;
   vertical-align: middle;
@@ -77,7 +77,7 @@
 }
 
 .wwm-cmp-lv-select option {
-  background: var(--bg-raised);
+  background: #1a1410;
   color: var(--text-sumi-gold);
   font-family: var(--f-latin);
 }

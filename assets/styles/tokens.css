@@ -12,7 +12,6 @@
 
 :root {
   /* Sumi base */
-  --bg-3:        #1d1714;
   --bg-raised:   #1a1410;
 
   /* Panel surfaces (theme-swappable) */
@@ -492,7 +491,7 @@
   /* ─── @layer Step 2-i: theme-swap tokens (dark default) ─── */
   --c-cmp-modal-a--cmp-kongfu-select-border: var(--gold-mid);
   --c-cmp-modal-a--cmp-set-select-border: var(--gold-mid);
-  --c-cmp-title--cmp-lv-select-border: var(--gold-mid);
+  --c-cmp-title--cmp-lv-select-border: var(--gold-deep);
   --c-cmp-modal-a--cmp-val-input-border: var(--gold-mid);
 
   /* ─── @layer S2-j: theme-swap tokens (dark default) ─── */
@@ -519,7 +518,7 @@
   --bg-canvas:  #07060a;                           /* viewport 地塗り */
   --bg-base:    #0f0c0e;                           /* app 下地 */
   --bg-board:   #16110f;                           /* 板下 */
-  /* --bg-raised は既存 (L19 #1a1410) を流用 = 持ち上げ semantic そのまま */
+  /* --bg-raised は既存 (L16 #1a1410) を流用 = 持ち上げ semantic そのまま */
   --bg-overlay: rgba(26,20,16,0.85);               /* modal/card 上層 (surf-1/2 semantic) */
 
   /* B2. Shade/Overlay — 透過陰影 scale (zebra/hover/row mute 等) */

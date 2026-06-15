@@ -429,18 +429,18 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   padding-right: var(--space-6);
-  background-image: linear-gradient(45deg, transparent 50%, var(--text-sumi-fg) 50%), linear-gradient(135deg, var(--text-sumi-fg) 50%, transparent 50%);
+  background-image: linear-gradient(45deg, transparent 50%, var(--gold-deep) 50%), linear-gradient(135deg, var(--gold-deep) 50%, transparent 50%);
   background-position: calc(100% - 12px) 50%, calc(100% - 8px) 50%;
   background-size: 4px 4px, 4px 4px;
   background-repeat: no-repeat;
-  background-color: var(--bg-raised);
+  background-color: #1a1410;
   cursor: pointer;
 }
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select option {
   font-size: var(--text-14);
   font-family: var(--f-latin);
   font-weight: 700;
-  background: var(--bg-raised);
+  background: #1a1410;
   color: var(--c-modal-a-fg);
 }
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
