@@ -26,7 +26,7 @@
 
 /* X (Twitter) リンク — topbar から footer (SHIGETORA 横) に移設 (2026-06-08 兄貴指示)。 footer 文字色継承 + hover で金 */
 .wwm-footer-x { display: inline-flex; vertical-align: middle; margin: 0 var(--space-2); color: inherit; opacity: 0.85; transition: color 0.15s ease, opacity 0.15s ease; }
-.wwm-footer-x:hover { color: var(--gold-bright); opacity: 1; }
+.wwm-footer-x:hover { color: var(--text-sumi-gold); opacity: 1; }
 .wwm-footer-x svg { display: block; }
 
 /* 著作権表記 (ゲーム内 asset 使用のため必須 — カード footer と同文言、2026-06-08 兄貴指示)
@@ -63,11 +63,11 @@
 }
 
 /* PC のみ表示する内訳ブロック */
-.hcb-val.phys { color: var(--vermilion-bright); }
+.hcb-val.phys { color: var(--text-sumi-vermilion); }
 
 .hcb-val.elem { color: var(--jade-bright); }
 
-.hcb-pct.phys { color: var(--vermilion-bright-mid-2); }
+.hcb-pct.phys { color: var(--text-sumi-vermilion); }
 
 .hcb-pct.elem { color: var(--jade-bright-strong); }
 
@@ -143,7 +143,7 @@
   border-bottom-color: var(--c-hero-number--unit-border-bot);
 }
 
-.hb-value.phys { color: var(--vermilion-bright); }
+.hb-value.phys { color: var(--text-sumi-vermilion); }
 
 .hb-value.elem { color: var(--jade-bright); }
 
@@ -428,7 +428,7 @@
     justify-self: center;
   }
   .hero-next-inline[hidden] { display: none; }
-  .hero-wuxia .hero-next-label { font-size: var(--text-xs); letter-spacing: 0.08em; padding: 0; color: var(--paper-mute); }
+  .hero-wuxia .hero-next-label { font-size: var(--text-xs); letter-spacing: 0.08em; padding: 0; color: var(--text-sumi-fg); }
   .hero-wuxia .hero-next-row { font-size: var(--text-sm); display: inline-flex; align-items: center; gap: 2px; }
   .hero-wuxia .hero-next-val { font-size: var(--text-md); font-weight: var(--fw-bold); }
   .hero-left { grid-area: info; }
