@@ -103,7 +103,6 @@
   --jade-bright-strong: rgba(168,212,180,0.55);
 
   /* 特殊用途 constant tokens */
-  --select-bg:      #1a1a1a;  /* <select> option neutral gray bg (warm bg-raised と区別) */
   --vermilion-note: #b8321f;  /* NOTE modal 巻物 accent (--vermilion より暗 saturated) */
 
   /* Phase 4.4c: 旧 var(--accent) fallback の実体定義 + 共通色 family */
@@ -367,7 +366,7 @@
   --c-eff-row-odd-bg: var(--gold-bright-faint);
   --c-eff-row-hover-bg: var(--gold-bright-faint);
   --c-cmp-lv-select-fg: var(--gold-bright);
-  --c-cmp-stat-select-bg: var(--select-bg);
+  --c-cmp-stat-select-bg: var(--bg-raised);
   --c-btn-secondary-bg: transparent;
   --c-btn-secondary-fg: var(--text, #fff);
   --c-btn-secondary-hover-bg: var(--hover-soft);
