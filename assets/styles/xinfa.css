@@ -22,17 +22,17 @@
   flex-shrink: 0; min-width: 24px; text-align: center;
   font-family: var(--f-latin); font-weight: 700; font-size: var(--text-xs);
   padding: 0 var(--space-1); border-radius: 2px;
-  background: rgba(201,164,90,0.16); color: var(--text-sumi-gold);
+  background: rgba(201,164,90,0.16); color: var(--text-kami-vermilion);
   border: 1px solid rgba(201,164,90,0.4);
 }
 
-.wwm-cmp-tier-eff { flex: 1 1 auto; color: var(--text-sumi-fg); }
+.wwm-cmp-tier-eff { flex: 1 1 auto; color: var(--text-kami-fg); }
 
 .wwm-cmp-tier-row.wwm-tier-unrel { opacity: 0.42; }
 
-.wwm-cmp-tier-row.wwm-tier-unrel .wwm-cmp-tier-num { background: var(--hover-trace); color: var(--text-sumi-dim); border-color: rgba(255,255,255,0.14); }
+.wwm-cmp-tier-row.wwm-tier-unrel .wwm-cmp-tier-num { background: var(--hover-trace); color: var(--text-kami-dim); border-color: rgba(255,255,255,0.14); }
 
-.wwm-cmp-tier-row.wwm-tier-kfmiss .wwm-cmp-tier-eff { color: var(--text-sumi-vermilion); }
+.wwm-cmp-tier-row.wwm-tier-kfmiss .wwm-cmp-tier-eff { color: var(--text-kami-vermilion); }
 
 .wwm-cmp-tier-row.wwm-tier-empty { opacity: 0.3; }
 
@@ -51,7 +51,7 @@
 /* ライト rank/opt: zebra + 常時アクセント + hover を統一 */
 .wwm-cmp-lv {
   font-size: 0.75em;
-  color: var(--text-sumi-gold);
+  color: var(--text-kami-gold);
   font-family: var(--f-latin);
   font-weight: var(--fw-semibold);
   margin-left: var(--space-1-5);
@@ -78,7 +78,7 @@
 
 .wwm-cmp-lv-select option {
   background: var(--bg-raised);
-  color: var(--text-sumi-gold);
+  color: var(--text-kami-gold);
   font-family: var(--f-latin);
 }
 
@@ -109,7 +109,7 @@
    (2026-06-05 @layer Step 1: 汎用 modal rule との file 分裂解消 — layer 移行で
    modals.css が後 layer になり、 components.css 残置だと spec 勝ちが order 負けに反転するため) */
 .wwm-cmp-kongfu {
-  font-size: var(--text-12); color: var(--text-sumi-gold);
+  font-size: var(--text-12); color: var(--text-kami-gold);
   font-weight: var(--fw-semibold); margin-left: var(--space-2);
 }
 
