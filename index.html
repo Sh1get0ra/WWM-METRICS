@@ -53,9 +53,9 @@
 <!-- @layer Step 1 (2026-06-05): file = layer (各 file 内で @layer X { } 物理 wrap)、
      宣言順 = tokens.css 先頭の @layer 文 (後勝ち)。 layer 間は宣言順が specificity より優先。
      flip 0 を important-audit-v2 --layer-impact で機械証明済。 @layer 未対応 (2022 以前) browser 切捨て済 -->
-<link rel="stylesheet" href="assets/styles/tokens.css?v=16">
+<link rel="stylesheet" href="assets/styles/tokens.css?v=17">
 <link rel="stylesheet" href="assets/styles/animations.css?v=1">
-<link rel="stylesheet" href="assets/styles/base.css?v=10">
+<link rel="stylesheet" href="assets/styles/base.css?v=11">
 <link rel="stylesheet" href="assets/styles/share.css?v=16">
 <link rel="stylesheet" href="assets/styles/hero.css?v=23">
 <link rel="stylesheet" href="assets/styles/sidebar.css?v=8">
@@ -68,7 +68,7 @@
 <link rel="stylesheet" href="assets/styles/modals.css?v=67">
 <link rel="stylesheet" href="assets/styles/responsive-globals.css?v=3">
 <link rel="stylesheet" href="assets/styles/dark.css?v=2">
-<link rel="stylesheet" href="assets/styles/obs.css?v=4">
+<link rel="stylesheet" href="assets/styles/obs.css?v=5">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DFYB6MKMMY"></script>
 <script>
@@ -924,14 +924,6 @@
     <button class="wwm-score-update-btn" onclick="importData()" data-i18n="scoreUpdateBtn">再インポート</button>
   </div>
 
-  <!-- 移転案内バナー: 旧URL (sh1get0ra.github.io) アクセス時のみ表示。OBS view 非表示。 -->
-  <div id="wwmMigrationBanner" class="wwm-migration-banner" style="display:none;">
-    <span class="wwm-migration-icon" aria-hidden="true">📢</span>
-    <span class="wwm-migration-msg">新URLに移転しました: <strong>wwm-metrics.pages.dev</strong> — このURL (旧) は2026-06-08頃停止予定</span>
-    <span class="wwm-migration-arrow" aria-hidden="true">▶</span>
-    <a class="wwm-migration-btn" href="https://wwm-metrics.pages.dev" data-i18n="migrationBtn">新URLへ</a>
-  </div>
-
   <!-- SHARE 復元失敗バナー: 共有URL decode 失敗時のみ表示 (critique P1 2026-06-07 — 無言失敗で自データを他人buildと誤認する事故の根治)。 OBS view 非表示。 -->
   <div id="wwmShareFailBanner" class="wwm-score-update-banner" style="display:none;" role="alert">
     <span class="wwm-score-update-icon" aria-hidden="true">⚠</span>
@@ -963,8 +955,8 @@
 <script src="assets/data-store.js?v=17"></script>
 <script src="assets/i18n.js?v=97"></script>
 <script src="assets/helpers/i18n.js?v=2"></script>
-<script src="assets/calc.js?v=104"></script>
-<script src="assets/app.js?v=60"></script>
+<script src="assets/calc.js?v=105"></script>
+<script src="assets/app.js?v=61"></script>
 <script src="assets/kaisho-paths.js?v=7"></script>
 <script src="assets/export.js?v=76"></script>
 <script src="assets/stats.js?v=73"></script>

@@ -132,7 +132,6 @@ html.wwm-view-sidebar .wwm-sb-section-title {
 }
 
 /* ── OBS view: バナー類 常時非表示 (旧 base.css / modals.css) ─────── */
-html.wwm-view-sidebar .wwm-migration-banner { display: none; }
 html.wwm-view-sidebar .wwm-score-update-banner { display: none; }
 
 } /* end @layer obs */

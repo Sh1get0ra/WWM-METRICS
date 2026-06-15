@@ -510,20 +510,6 @@
     "ko": "다시 가져오기",
     "vi": "Nhập lại"
   },
-  "migrationMsg": {
-    "ja": "新URLに移転しました: <strong>wwm-metrics.pages.dev</strong> — このURL (旧) は2026-06-08頃停止予定",
-    "en": "Moved to new URL: <strong>wwm-metrics.pages.dev</strong> — this old URL will be retired around 2026-06-08",
-    "zh": "已迁移到新地址: <strong>wwm-metrics.pages.dev</strong> — 当前 (旧) 地址将于 2026-06-08 前后停用",
-    "ko": "새 URL로 이전했습니다: <strong>wwm-metrics.pages.dev</strong> — 현재 (구) URL 은 2026-06-08 경 종료 예정",
-    "vi": "Đã chuyển sang URL mới: <strong>wwm-metrics.pages.dev</strong> — URL (cũ) này sẽ ngừng hoạt động khoảng 2026-06-08"
-  },
-  "migrationBtn": {
-    "ja": "新URLへ",
-    "en": "Go to new URL",
-    "zh": "前往新地址",
-    "ko": "새 URL로",
-    "vi": "Đến URL mới"
-  },
   "importPrompt": {
     "ja": "上部「IMPORT」ボタンからデータを取り込んでください",
     "en": "Click the IMPORT button at the top to load data",

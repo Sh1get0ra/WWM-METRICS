@@ -296,9 +296,6 @@
   --c-tier-c-hero-shadow: 0 0 4px rgba(90,66,38,.2), inset 0 1px 0 rgba(122,112,96,.15);
   --c-ink-stroke-opacity: .85;
   --c-last-import-bg: var(--hover-trace);
-  --c-migration-banner-bg: rgba(60, 100, 180, 0.18);
-  --c-migration-banner-fg: #cfe0f5;
-  --c-migration-btn-bg: #4a78b8;
   --c-sb-label-opacity: 0.75;
   --c-anlz-header-after-bg: linear-gradient(180deg, transparent 18%, var(--hover-trace) 19%, var(--hover-trace) 20%, transparent 21%), linear-gradient(180deg, transparent 60%, var(--hover-trace) 61%, transparent 62%);
   --c-anlz-bamboo-opacity: 0.10;
@@ -398,7 +395,6 @@
   --c-tier-c-hero-bg: linear-gradient(135deg, rgba(60,50,40,.3) 0%, rgba(25,20,16,.25) 50%, rgba(60,50,40,.3) 100%);
   --c-tier-c-hero-fg: var(--text-sumi-dim);
   --c-tier-c-hero-border: rgba(122,112,96,.45);
-  --c-migration-strong-fg: #a8d0ff;
   --c-anlz-tab-fg: var(--text-sumi-fg);
   --c-anlz-tab-active-fg: var(--chart-crit);
 
@@ -446,7 +442,6 @@
   --c-hero-wuxia--judge-dot-elem-border: var(--jade-bright);
   --c-hero-wuxia--hero-tier-tier-SS-shadow: var(--c-tier-chip-ss-shadow);
   --c-hero-wuxia--hero-tier-tier-S-shadow: var(--c-tier-chip-s-shadow);
-  --c-migration-banner-border-bot: #4a78b8;
   --c-sb-label-fw: initial;
   --c-note-cl-items--note-cl-featured-border-left: var(--vermilion);
   --c-note-cl-items--note-cl-featured-fg: initial;
