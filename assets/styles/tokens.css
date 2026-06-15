@@ -130,9 +130,8 @@
   --chart-graze:    #6a6053;  /* paper-mute 寄り */
   --chart-normal:   #ede4d0;  /* paper */
 
-  /* Paper text — 段階廃止中。 --paper / --paper-dim は廃止済 (text-sumi-fg / dead)、
-     --paper-2 / --paper-mute は別 commit で廃止予定 */
-  --paper-2:     #c8bda6;
+  /* Paper text — 段階廃止中。 --paper / --paper-dim / --paper-2 は廃止済、
+     --paper-mute は別 commit で廃止予定 */
   --paper-mute:  #857b6a;  /* critique P2 (2026-06-06): #7a7060→#857b6a — bg-2 上 3.85→4.49 (浮上面 AA 実質達成)。 旧 #6a6053→#7a7060 (2026-06-04) に続く 2 段目 */
 
   /* Type — 役割固定 3 token (2026-06-15 集約、 --f-mono 廃止)
@@ -288,7 +287,7 @@
   --c-hero-title-drop-shadow: drop-shadow(0 5px 5px var(--overlay-heavy)) drop-shadow(0 5px 20px var(--overlay-soft-mid));
   --c-hero-next-val-fg: var(--bone-dim);
   --c-luopan-center-label-fg: var(--gold-bright); /* critique P3: gradient-clip 廃止 → solid 金 (light は vermilion-deep) */
-  --c-judge-name-fg: var(--paper-2);
+  --c-judge-name-fg: var(--text-sumi-dim);
   --c-judge-name-fw: var(--fw-semibold);
   --c-judge-val-fw: var(--fw-bold);
   --c-judge-dot-phys-shadow: 0 0 6px var(--vermilion-bright-mid-2);
