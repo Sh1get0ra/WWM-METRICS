@@ -111,7 +111,7 @@
   --c-cmp-modal-a--cmp-rows-border: initial;  /* light 原典 = 枠/影なし (dark = 金線+inset影) */
   --c-cmp-modal-a--cmp-rows-shadow: initial;
   --c-modal-a-kongfu-header-bg: var(--gold-mid); /* 本番 light 実効 rgba(201,164,90,0.3) 採取値 */
-  --c-modal-a-kongfu-header-fg: var(--brown-1);
+  --c-modal-a-kongfu-header-fg: var(--text-kami-gold); /* D7 2026-06-15: brown-1 → text-kami-gold 統一 (left/right 色揃え) */
   --c-modal-a-kongfu-select-fg: var(--brown-1);
   --c-modal-a-kongfu-select-bg: var(--gold-mid);
   --c-modal-a-set-fg: var(--vermilion-bright);
@@ -131,7 +131,7 @@
   --c-cmp-set-header-text-shadow: none;
   /* current 列 = 本番 light 実効値 (pages.dev computed 採取 2026-06-12) — 新置と同色系 */
   --c-cmp-current--cmp-row-bg: var(--surf-shade);
-  --c-cmp-current--cmp-kongfu-header-fg: var(--brown-1);
+  --c-cmp-current--cmp-kongfu-header-fg: var(--text-kami-gold); /* D7 2026-06-15: brown-1 → text-kami-gold 統一 (左右色揃え) */
   --c-cmp-current--cmp-kongfu-header-bg: var(--gold-mid);
   --c-cmp-current--cmp-set-header-fg: var(--c-cmp-set-header-fg);
   --c-cmp-current--cmp-set-header-bg: var(--c-modal-a-set-select-bg);
