@@ -264,7 +264,7 @@
 /* hiddenStat: ゲーム実機で見えない内部値 (例 critRateBoosted = ボーナス会心率込みの実効会心率) → スレート青で区別 */
 .wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-label,
 .wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-value { color: var(--c-fg-hidden-stat); }
-.wwm-sb-baseline { color: var(--text-kami-dim); opacity: 0.7; font-weight: var(--fw-medium); }
+.wwm-sb-baseline { color: var(--text-kami-dim); font-weight: var(--fw-medium); }
 .wwm-sb-arrow {
   color: var(--text-kami-gold); margin: 0 3px; opacity: 0.7;
   font-size: var(--text-xs);
