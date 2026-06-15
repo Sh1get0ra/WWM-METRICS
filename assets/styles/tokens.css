@@ -252,8 +252,6 @@
   --c-preset-slot-has-data-bg: rgba(40,30,18,0.12);
   --c-preset-slot-has-data-border: rgba(201,164,90,0.4);
   --c-preset-save-border: var(--gold-strong);
-  --c-preset-load-border: rgba(127,168,138,0.5);
-  --c-preset-load-hover-bg: var(--jade);
   --c-sb-mini-hero-ink-bg: linear-gradient(90deg, rgba(232,81,58,0), var(--vermilion-bright-tint), rgba(232,81,58,0));
   --c-sb-rest-bg: linear-gradient(180deg, var(--surf-1), var(--surf-2));
   --c-sb-applied-fg: var(--accent);
