@@ -128,7 +128,7 @@ html.wwm-shared-build-mode #importBtn {
 
 .preset-slot-num {
   font-family: var(--f-latin); font-size: var(--text-xs); font-weight: var(--fw-bold);
-  color: var(--text-sumi-fg); letter-spacing: 0.1em;
+  color: var(--text-sumi-dim); letter-spacing: 0.1em;
   width: 12px; flex-shrink: 0;
 }
 
@@ -142,7 +142,7 @@ html.wwm-shared-build-mode #importBtn {
      = base.css の a11y gold ring が常勝で dead だった。復活させるな (a11y + layer flip 源) */
 }
 
-.preset-name-input::placeholder { color: var(--text-sumi-fg); font-weight: var(--fw-normal); }
+.preset-name-input::placeholder { color: var(--text-sumi-dim); font-weight: var(--fw-normal); }
 
 .preset-btn {
   padding: 3px 8px; border: 1px solid; background: transparent;

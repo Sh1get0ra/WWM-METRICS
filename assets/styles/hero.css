@@ -428,7 +428,7 @@
     justify-self: center;
   }
   .hero-next-inline[hidden] { display: none; }
-  .hero-wuxia .hero-next-label { font-size: var(--text-xs); letter-spacing: 0.08em; padding: 0; color: var(--text-sumi-fg); }
+  .hero-wuxia .hero-next-label { font-size: var(--text-xs); letter-spacing: 0.08em; padding: 0; color: var(--text-sumi-dim); }
   .hero-wuxia .hero-next-row { font-size: var(--text-sm); display: inline-flex; align-items: center; gap: 2px; }
   .hero-wuxia .hero-next-val { font-size: var(--text-md); font-weight: var(--fw-bold); }
   .hero-left { grid-area: info; }

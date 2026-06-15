@@ -187,6 +187,7 @@
   --text-sumi-fg:        #ede4d0;  /* 主要 text (現 --paper 系) */
   --text-sumi-gold:      #f0d28a;  /* 金強調 (現 --gold-bright 系) */
   --text-sumi-vermilion: #e85040;  /* 朱警告 (現 --vermilion-bright 系) */
+  --text-sumi-dim:       #9c8a6a;  /* 弱階調 (現 --bone-dim、 NEXT 値色) — 2026-06-15 兄貴方針追加: 完全廃止せず 1 token 残し */
   /* 紙面 (背面 = 紙) text */
   --text-kami-fg:        #3d2e1f;  /* 主要 text (現 --kami-ink 系、 焦茶) */
   --text-kami-gold:      #c9a45a;  /* 金強調 (現 --gold-deep 系、 紙上で読める金) */
