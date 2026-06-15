@@ -76,7 +76,6 @@
 
   /* dependency 中間 token (旧 light token block 由来。 下の --c-* が参照) */
   --c-gold-rich:          #b8860b;
-  --c-cream-pale:         #f5e6c8;
   --c-orange-deep:        #b85a14;
   --c-vermilion-deep-mid: rgba(138,31,23,0.55);
   --c-gold-deep-faint:    rgba(138,106,32,0.14);
@@ -87,12 +86,9 @@
   --c-overlay-cream:      rgba(255,248,225,0.40);
   --c-header-cream-top:   #ffeac4;
   --c-header-cream-bot:   #fcd5a8;
-  --c-card-bg-overlay-film: rgba(255,250,235,0.55);
   --c-ink-line-faint:     rgba(0,0,0,0.04);
   --c-anlz-shadow-orange: rgba(120,60,20,.18);
   --c-opt-border-soft:    rgba(120,60,20,0.35);
-  --c-opt-border-mid:     rgba(120,60,20,0.4);
-  --c-opt-border-strong:  rgba(120,60,20,0.7);
   --c-opt-hover-bg:       rgba(184,134,42,0.12);
 
   /* ── cmp modal (武具/心法/武庫対照) 紙対応 token (light.css 転用 第2弾 —
@@ -105,7 +101,6 @@
   --c-fg-emphasis: var(--vermilion-deep);
   --c-modal-a-fg: var(--brown-1);
   --c-modal-a-option-bg: #f4e8cc;
-  --c-modal-a-option-checked: #e0cfa0;
   --c-modal-a-option-fg: var(--brown-1);
   --c-modal-a-rows-bg: var(--overlay-trace);
   --c-cmp-modal-a--cmp-rows-border: initial;  /* light 原典 = 枠/影なし (dark = 金線+inset影) */
@@ -148,7 +143,6 @@
   --c-slot-border:        rgba(40,25,18,0.30);
   --c-rail-bg:            linear-gradient(180deg, rgba(58,38,22,0.10), rgba(58,38,22,0.04) 60%, rgba(58,38,22,0.08));
   --c-equip-delta-pos-text-shadow: none;
-  --c-equip-delta-neg-fg:          var(--vermilion-deep);
   --c-equip-delta-neg-text-shadow: none;
   --c-equip-setname-fg:            var(--vermilion-deep);
   --c-equip-setname-text-shadow:   none;

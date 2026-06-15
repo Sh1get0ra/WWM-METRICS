@@ -240,11 +240,9 @@
   --c-mobile-overlay-header-bg: linear-gradient(180deg, rgba(26,20,16,0.95), rgba(15,12,14,0.92));  /* mobile overlay header bg (dark default 追加) */
 
   /* ─── @layer Step 2-c: theme-swap tokens (dark default) ─── */
-  --c-hero-before-fg: var(--vermilion-bright-trace);
   --c-brand-en-fg: var(--text-sumi-fg);
   --c-brand-sub-fg: var(--c-fg-gold-label);
   --c-shared-banner-bg: linear-gradient(90deg, var(--vermilion-soft-2), var(--vermilion-tint));
-  --c-shared-banner-fg: var(--text-sumi-fg);
   --c-footer-logo-opacity: 0.75;
   --c-preset-bar-bg: var(--surf-2);
   --c-h1-accent-fg: var(--vermilion-bright);
@@ -257,7 +255,6 @@
   --c-sb-applied-fg: var(--accent);
   --c-sb-applied-opacity: 0.85;
   --c-equip-delta-pos-text-shadow: 0 0 4px var(--jade-bright-mid);
-  --c-equip-delta-neg-fg: var(--vermilion);
   --c-equip-delta-neg-text-shadow: 0 0 4px var(--vermilion-bright-soft-mid);
   --c-sb-notice-fg: #ffb39e;
   --c-opt-loading-fg: var(--gold-bright);
@@ -283,11 +280,6 @@
   --c-hero-title-drop-shadow: drop-shadow(0 5px 5px var(--overlay-heavy)) drop-shadow(0 5px 20px var(--overlay-soft-mid));
   --c-hero-next-val-fg: var(--bone-dim);
   --c-luopan-center-label-fg: var(--gold-bright); /* critique P3: gradient-clip 廃止 → solid 金 (light は vermilion-deep) */
-  --c-judge-name-fg: var(--text-sumi-dim);
-  --c-judge-name-fw: var(--fw-semibold);
-  --c-judge-val-fw: var(--fw-bold);
-  --c-judge-dot-phys-shadow: 0 0 6px var(--vermilion-bright-mid-2);
-  --c-judge-dot-elem-shadow: 0 0 6px var(--jade-bright-strong);
   --c-tier-a-hero-shadow: 0 0 10px rgba(127,168,138,.35), inset 0 1px 0 rgba(168,212,180,.2), inset 0 -1px 0 rgba(0,0,0,.35);
   --c-tier-b-hero-shadow: 0 0 8px rgba(122,90,32,.3), inset 0 1px 0 rgba(201,184,138,.18), inset 0 -1px 0 var(--overlay-soft);
   --c-tier-c-hero-shadow: 0 0 4px rgba(90,66,38,.2), inset 0 1px 0 rgba(122,112,96,.15);
@@ -302,7 +294,6 @@
   --c-score-update-banner-bg: var(--vermilion-soft);
   --c-score-update-banner-fg: #ffd9cc;
   --c-mobile-drawer-bg: linear-gradient(180deg, var(--bg-raised), rgba(15,12,14,0.98));
-  --c-mobile-drawer-fg: var(--text-sumi-fg);
   --c-mobile-fab-bg: linear-gradient(180deg, rgba(26,20,16,0.96), rgba(15,12,14,0.96));
   --c-mobile-fab-shadow: 0 4px 16px var(--overlay-soft-2), 0 0 12px rgba(212,175,55,0.4);
 
@@ -317,16 +308,10 @@
   --c-anlz-title-text-shadow: 0 0 0.5px rgba(245,232,192,.85), 0 0 1.5px rgba(232,217,184,.55), 0 0 3px rgba(232,217,184,.35), 0.6px 0 1.2px rgba(232,217,184,.3), -0.6px 0 1.2px rgba(232,217,184,.25), 0 0.5px 1.5px rgba(232,217,184,.22);
 
   /* ─── audit/critique 2026-06-07: state contrast tokens (両 theme constant) ─── */
-  --c-on-vermilion: #fff;            /* 朱地上の text — white 5.08:1 (gold/ink は朱地で AA 不能) */
   --c-lang-active-bg: #8a1f17;       /* 言語 active = 朱影地金文字 (SS badge 語彙)。 literal = theme constant */
   --c-lang-active-fg: #f0d28a;       /* 6.2:1 on vermilion-deep */
 
   /* ─── @layer Step 2-d r2: theme-swap tokens (dark default) ─── */
-  --c-preset-slot-num-fg: var(--gold);
-  --c-preset-save-fg: var(--gold);
-  --c-preset-save-hover-fg: var(--bg-0);
-  --c-preset-load-hover-fg: var(--bg-0);
-  --c-preset-del-hover-fg: var(--c-on-vermilion); /* audit P2 (2026-06-07): bg-0 on vermilion 3.98 → white 5.08 */
   --c-hb-pct-phys-fg: var(--vermilion-bright-glow);
   --c-hb-pct-elem-fg: rgba(168,212,180,0.6);
   --c-footer-strong-fg: var(--gold);
@@ -430,12 +415,6 @@
   --c-cmp-modal-a--cmp-title-ja-text-shadow: 0 0 10px rgba(232,81,58,0.3);
   --c-brand-sub-text-shadow: initial;
   --c-xinfa-tier-chip-border: rgba(232,81,58,0.50);
-  --c-hero-label--en-opacity: initial;
-  --c-hero-wuxia--hero-next-val-text-shadow: initial;
-  --c-hero-wuxia--judge-name-text-shadow: initial;
-  --c-hero-wuxia--judge-val-text-shadow: initial;
-  --c-hero-wuxia--judge-dot-phys-border: var(--chart-sympathy);
-  --c-hero-wuxia--judge-dot-elem-border: var(--jade-bright);
   --c-hero-wuxia--hero-tier-tier-SS-shadow: var(--c-tier-chip-ss-shadow);
   --c-hero-wuxia--hero-tier-tier-S-shadow: var(--c-tier-chip-s-shadow);
   --c-sb-label-fw: initial;
@@ -485,7 +464,6 @@
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
   --c-opt-sort-btn-border-left: var(--ink-2);
   --c-cmp-modal-a-fg: var(--c-modal-fg);
-  --c-hero-wuxia-border: var(--gold-deep);
 
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
   --c-cmp-current--cmp-row-bg: transparent;  /* S2-g cmp-current--cmp-row */
