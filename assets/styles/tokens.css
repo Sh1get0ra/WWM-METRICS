@@ -12,7 +12,6 @@
 
 :root {
   /* Sumi base */
-  --bg-1:        #0f0c0e;
   --bg-2:        #16110f;
   --bg-3:        #1d1714;
   --bg-raised:   #1a1410;
@@ -221,7 +220,7 @@
    */
   --c-surf-warm-1:        var(--surf-1);    /* warm card/modal bg gradient 上 */
   --c-surf-warm-2:        var(--surf-2);    /* warm card/modal bg gradient 下 */
-  --c-toast-bg:           var(--bg-1);      /* toast notification bg */
+  --c-toast-bg:           var(--bg-base);   /* toast notification bg */
   --c-modal-a-option-bg:  var(--bg-raised); /* compare modal A select option bg */
   --c-rail-bg:            linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.25) 60%, rgba(40,30,20,0.45)); /* 装備/心法 rail 縦 gradient (light override 別値) */
 
@@ -519,7 +518,7 @@
 
   /* B1. Surface — 面の階層 (panel/card/modal 地色) */
   --bg-canvas:  #07060a;                           /* viewport 地塗り */
-  --bg-base:    var(--bg-1);                       /* app 下地 */
+  --bg-base:    #0f0c0e;                           /* app 下地 */
   --bg-board:   var(--bg-2);                       /* 板下 */
   /* --bg-raised は既存 (L19 #1a1410) を流用 = 持ち上げ semantic そのまま */
   --bg-overlay: rgba(26,20,16,0.85);               /* modal/card 上層 (surf-1/2 semantic) */
@@ -550,7 +549,7 @@
   /* B5. Container — 特殊用途 */
   --bg-input:           var(--input-bg);                          /* input/select 地 */
   --bg-rail:            var(--rail-grad);                         /* 左 rail gradient */
-  --bg-toast:           var(--bg-1);                              /* toast (現 --c-toast-bg 同値) */
+  --bg-toast:           var(--bg-base);                           /* toast (現 --c-toast-bg 同値) */
   --bg-mobile-overlay:  linear-gradient(180deg, rgba(20,15,12,0.98), rgba(10,8,9,0.98));
   --bg-anlz-decoration: repeating-linear-gradient(45deg, transparent 0 24px, rgba(212,175,55,.025) 24px 25px), repeating-linear-gradient(-45deg, transparent 0 24px, rgba(0,0,0,.05) 24px 25px);
 
