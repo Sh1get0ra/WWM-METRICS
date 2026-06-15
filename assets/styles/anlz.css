@@ -20,7 +20,7 @@
   box-sizing: border-box;
   background:
     radial-gradient(ellipse at top right, var(--gold-bright-faint), transparent 55%),
-    linear-gradient(180deg, var(--surf-1), var(--surf-2));
+    linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
   border: 1px solid var(--ink-2);
   border-top: 1px solid var(--gold-deep);
   border-left: 1px solid var(--gold); /* critique P3: side-stripe 3px→1px */
@@ -471,7 +471,7 @@
 
 .wwm-diagnostics {
   margin-top: var(--space-3);
-  background: linear-gradient(180deg, var(--surf-1), var(--surf-2));
+  background: linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
   border: 1px solid var(--ink-2);
   border-left: 3px solid var(--vermilion);
   border-radius: 2px;

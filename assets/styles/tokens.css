@@ -14,9 +14,11 @@
   /* Sumi base */
   --bg-raised:   #1a1410;
 
-  /* Panel surfaces (theme-swappable) */
-  --surf-1:      rgba(26,20,16,0.7);
-  --surf-2:      rgba(15,12,14,0.85);
+  /* Panel surfaces (theme-swappable) — bg semantic 集約 Phase 2 step 5
+     旧 --surf-1/--surf-2 を --bg-overlay-top/--bg-overlay-bottom に rename
+     (modal/card 上層 2 段 gradient の上下色)。 紙面 rescope = workspace.css。 */
+  --bg-overlay-top:    rgba(26,20,16,0.7);
+  --bg-overlay-bottom: rgba(15,12,14,0.85);
   --surf-shade:  rgba(0,0,0,0.25);
   --surf-shade-2:rgba(0,0,0,0.4);
   --surf-shade-3:rgba(0,0,0,0.55);
@@ -216,8 +218,8 @@
    * component 用途意図を token 名で表現。 :root = 墨面 default 値。
    * 紙面 (.wwm-ws-paper) 消費 token の紙値 rescope は workspace.css に集約 (2026-06-11 単一テーマ化、 旧 light.css 廃止)。
    */
-  --c-surf-warm-1:        var(--surf-1);    /* warm card/modal bg gradient 上 */
-  --c-surf-warm-2:        var(--surf-2);    /* warm card/modal bg gradient 下 */
+  --c-surf-warm-1:        var(--bg-overlay-top);    /* warm card/modal bg gradient 上 */
+  --c-surf-warm-2:        var(--bg-overlay-bottom); /* warm card/modal bg gradient 下 */
   --c-toast-bg:           var(--bg-base);   /* toast notification bg */
   --c-modal-a-option-bg:  var(--bg-raised); /* compare modal A select option bg */
   --c-rail-bg:            linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.25) 60%, rgba(40,30,20,0.45)); /* 装備/心法 rail 縦 gradient (light override 別値) */
@@ -240,14 +242,14 @@
   --c-brand-sub-fg: var(--c-fg-gold-label);
   --c-shared-banner-bg: linear-gradient(90deg, var(--vermilion-soft-2), var(--vermilion-tint));
   --c-footer-logo-opacity: 0.75;
-  --c-preset-bar-bg: var(--surf-2);
+  --c-preset-bar-bg: var(--bg-overlay-bottom);
   --c-h1-accent-fg: var(--vermilion-bright);
   --c-h1-sub-fg: var(--text-sumi-dim);
   --c-preset-slot-has-data-bg: rgba(40,30,18,0.12);
   --c-preset-slot-has-data-border: rgba(201,164,90,0.4);
   --c-preset-save-border: var(--gold-strong);
   --c-sb-mini-hero-ink-bg: linear-gradient(90deg, rgba(232,81,58,0), var(--vermilion-bright-tint), rgba(232,81,58,0));
-  --c-sb-rest-bg: linear-gradient(180deg, var(--surf-1), var(--surf-2));
+  --c-sb-rest-bg: linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
   --c-sb-applied-fg: var(--accent);
   --c-sb-applied-opacity: 0.85;
   --c-equip-delta-pos-text-shadow: 0 0 4px var(--jade-bright-mid);
@@ -519,7 +521,6 @@
   --bg-base:    #0f0c0e;                           /* app 下地 */
   --bg-board:   #16110f;                           /* 板下 */
   /* --bg-raised は既存 (L16 #1a1410) を流用 = 持ち上げ semantic そのまま */
-  --bg-overlay: rgba(26,20,16,0.85);               /* modal/card 上層 (surf-1/2 semantic) */
 
   /* B2. Shade/Overlay — 透過陰影 scale (zebra/hover/row mute 等) */
   --shade-trace:  rgba(0,0,0,0.05);

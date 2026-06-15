@@ -21,7 +21,7 @@
   position: relative;
   background:
     radial-gradient(ellipse at top right, var(--gold-bright-faint), transparent 55%),
-    linear-gradient(180deg, var(--surf-1), var(--surf-2));
+    linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
   color: var(--c-modal-fg);
   border-radius: 0 0 2px 2px;
   max-width: 600px; width: 100%;

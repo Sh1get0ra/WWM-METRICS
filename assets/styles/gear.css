@@ -225,7 +225,7 @@
 }
 
 .wwm-equip-section .wwm-equip-slot {
-  background: linear-gradient(180deg, var(--surf-1), var(--surf-2));
+  background: linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
   border: 1px solid var(--ink-2);
   border-left: 3px solid var(--vermilion);
   border-radius: 2px;
