@@ -247,8 +247,8 @@
   padding: var(--space-half) var(--space-1-5); align-items: baseline;
 }
 .wwm-sb-row.wwm-sb-sub { padding-left: 18px; opacity: 0.85; font-size: var(--text-sm); }
-.wwm-sb-label { opacity: var(--c-sb-label-opacity); white-space: nowrap; flex-shrink: 0; font-weight: var(--c-sb-label-fw); }
-.wwm-sb-value { font-weight: var(--fw-semibold); text-align: right; min-width: 0; }
+.wwm-sb-label { opacity: var(--c-sb-label-opacity); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex-shrink: 1; font-weight: var(--c-sb-label-fw); }
+.wwm-sb-value { font-weight: var(--fw-semibold); text-align: right; min-width: 0; white-space: nowrap; flex-shrink: 0; }
 .wwm-sb-warn {
   display: inline-block;
   color: var(--text-kami-vermilion);

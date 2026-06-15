@@ -231,14 +231,14 @@
 /* #wwmSidebar 本体の border を透明 (内側 mini-hero / rest が枠を持つ) */
 #wwmSidebar { border-color: transparent; }
 
-/* サイドパネル + 装備/心法カード 全体 Noto Serif JP に統一 */
+/* サイドパネル + 装備/心法カード 全体 latin (Cinzel + Noto Serif JP fallback) — 2026-06-15 兄貴試行 */
 #wwmSidebar,
 #wwmSidebar *,
 #wwmGearGrid,
 #wwmGearGrid *,
 #wwmXinfaGrid,
 #wwmXinfaGrid * {
-  font-family: var(--f-display);
+  font-family: var(--f-latin);
 }
 
 .wwm-sb-top {
