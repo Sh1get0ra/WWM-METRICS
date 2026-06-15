@@ -507,6 +507,54 @@
   --c-cmp-title--cmp-lv-border: var(--gold-deep);
   --c-cmp-btn-row--btn-secondary-border: var(--text-sumi-dim);
 
+  /* ═══════════════════════════════════════════════════════════════
+     bg semantic 集約 Phase 1 (2026-06-15、 design doc:
+     .claude/research/bg-token-semantic-collapse-plan-2026-06-15.md)
+     ───────────────────────────────────────────────────────────────
+     109 bg token (base 13 + 紙墨 6 + component 90) → 5 group × semantic 26
+     に圧縮する sprint の Phase 1 = **新 token を旧 token と並存定義**。
+     callsite 置換 0 = visual 変化 0。 Phase 2 以降で各 group 順次置換
+     → 旧 token 物理削除予定。
+     :root = 墨面 default 値。 紙面 rescope は workspace.css `.wwm-ws-paper`
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* B1. Surface — 面の階層 (panel/card/modal 地色) */
+  --bg-canvas:  var(--bg-0);                       /* viewport 地塗り */
+  --bg-base:    var(--bg-1);                       /* app 下地 */
+  --bg-board:   var(--bg-2);                       /* 板下 */
+  /* --bg-raised は既存 (L19 #1a1410) を流用 = 持ち上げ semantic そのまま */
+  --bg-overlay: rgba(26,20,16,0.85);               /* modal/card 上層 (surf-1/2 semantic) */
+
+  /* B2. Shade/Overlay — 透過陰影 scale (zebra/hover/row mute 等) */
+  --shade-trace:  rgba(0,0,0,0.05);
+  --shade-soft:   rgba(0,0,0,0.15);
+  --shade-mid:    rgba(0,0,0,0.30);
+  --shade-strong: rgba(0,0,0,0.50);
+  --shade-heavy:  rgba(0,0,0,0.70);
+
+  /* B3. State — hover/active/selected (全 component 共通) */
+  --bg-hover:    var(--gold-bright-faint);         /* 墨面 hover = 金薄 */
+  --bg-active:   var(--vermilion-soft);            /* active = 朱薄 */
+  --bg-selected: var(--accent-faint);              /* 選択中 = gold accent 薄 */
+
+  /* B4. Accent — 強調 bg (tier/banner)
+     tier chip/hero の linear-gradient は両 theme 共通値 = 紙でも rescope 不要 */
+  --bg-tier-ss: linear-gradient(135deg, rgba(180,40,28,.48) 0%, rgba(100,20,14,.38) 50%, rgba(180,40,28,.48) 100%);
+  --bg-tier-s:  linear-gradient(135deg, rgba(138,31,23,.42) 0%, rgba(60,15,10,.32) 50%, rgba(138,31,23,.42) 100%);
+  --bg-tier-a:  linear-gradient(135deg, rgba(45,90,58,.42) 0%, rgba(20,40,28,.32) 50%, rgba(45,90,58,.42) 100%);
+  --bg-tier-b:  linear-gradient(135deg, rgba(122,90,32,.38) 0%, rgba(50,38,16,.3) 50%, rgba(122,90,32,.38) 100%);
+  --bg-tier-c:  linear-gradient(135deg, rgba(60,50,40,.3) 0%, rgba(25,20,16,.25) 50%, rgba(60,50,40,.3) 100%);
+  --bg-tier-badge: linear-gradient(135deg, rgba(60,40,30,.45) 0%, rgba(30,20,15,.35) 50%, rgba(60,40,30,.45) 100%);
+  --bg-vermilion-banner: var(--vermilion-soft);    /* shared/score-update/note-cl 統合用 */
+  --bg-gold-banner:      var(--gold-bright-faint); /* 将来の金 banner 用 */
+
+  /* B5. Container — 特殊用途 */
+  --bg-input:           var(--input-bg);                          /* input/select 地 */
+  --bg-rail:            var(--rail-grad);                         /* 左 rail gradient */
+  --bg-toast:           var(--bg-1);                              /* toast (現 --c-toast-bg 同値) */
+  --bg-mobile-overlay:  linear-gradient(180deg, rgba(20,15,12,0.98), rgba(10,8,9,0.98));
+  --bg-anlz-decoration: repeating-linear-gradient(45deg, transparent 0 24px, rgba(212,175,55,.025) 24px 25px), repeating-linear-gradient(-45deg, transparent 0 24px, rgba(0,0,0,.05) 24px 25px);
+
   /* Safe Area inset utility (Phase 1 base) */
   --safe-top:    env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);

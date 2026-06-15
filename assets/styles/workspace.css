@@ -210,6 +210,42 @@
   --c-anlz-title-text-shadow-n2:   0 0 0.5px rgba(42,22,16,.6), 0 0 1.5px rgba(74,40,20,.35), 0 0 3px rgba(106,62,22,.18), 0.6px 0 1.2px rgba(42,22,16,.25), -0.6px 0 1.2px rgba(42,22,16,.22), 0 0.5px 1.5px rgba(74,40,20,.14);
   --c-anlz-subtitle-fg:            var(--brown-5);
   --c-anlz-subtitle-opacity:       0.9;
+
+  /* ═══════════════════════════════════════════════════════════════
+     bg semantic 集約 Phase 1 — 紙面 rescope (2026-06-15)
+     design doc: .claude/research/bg-token-semantic-collapse-plan-2026-06-15.md
+     ───────────────────────────────────────────────────────────────
+     :root (tokens.css) で墨 default 定義、 ここで紙値に rescope。
+     callsite 未置換 = visual 変化 0。 Phase 2 以降で各 group 順次置換予定。
+     Accent (B4 tier/banner) = 両 theme 共通色のため rescope 不要 = 省略
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* B1. Surface — 紙の面階層
+     注: 旧 --bg-raised は :root 値 #1a1410 (墨) のまま keep。 紙 callsite (xinfa.css
+     L71/80 等) が var(--bg-raised) 直参照 = Phase 1 で paper 値に rescope すると
+     視覚変化発生 (Phase 1 原則違反)。 紙 #e2d6b4 化は Phase 2 で旧 callsite を
+     semantic 経由化した後に実施。 */
+  --bg-canvas:  var(--kami-0);
+  --bg-base:    var(--kami-1);
+  --bg-board:   var(--kami-2);
+  --bg-overlay: rgba(244,232,204,0.72);
+
+  /* B2. Shade/Overlay — 紙 = 暖茶 scale */
+  --shade-trace:  rgba(58,38,22,0.03);
+  --shade-soft:   rgba(58,38,22,0.06);
+  --shade-mid:    rgba(58,38,22,0.14);
+  --shade-strong: rgba(58,38,22,0.30);
+  --shade-heavy:  rgba(58,38,22,0.50);
+
+  /* B3. State — 紙 hover/active/selected */
+  --bg-hover:    rgba(184,134,42,0.12);            /* 金茶薄 */
+  --bg-active:   rgba(212,175,55,0.16);
+  --bg-selected: rgba(184,134,42,0.20);
+
+  /* B5. Container — 紙面 input/rail */
+  --bg-input:    rgba(255,250,235,0.85);
+  --bg-rail:     linear-gradient(180deg, rgba(58,38,22,0.10), rgba(58,38,22,0.04) 60%, rgba(58,38,22,0.08));
+  /* toast/mobile-overlay/anlz-decoration = 墨基調維持 (rescope なし) */
 }
 
 /* ── 紙面 fine-tune (light.css 転用 selector rule) ──
