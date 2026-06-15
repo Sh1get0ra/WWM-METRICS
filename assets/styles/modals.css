@@ -106,7 +106,7 @@
   display: flex; align-items: center; justify-content: center;
   border-radius: 4px;
 }
-.wwm-modal-close:hover { background: var(--hover-soft); }
+.wwm-modal-close:hover { background: var(--shine-soft); }
 .wwm-modal-body {
   padding: var(--space-4); overflow-y: auto; flex: 1;
 }
@@ -305,7 +305,7 @@
   background: var(--vermilion);
   color: #fff;
   font-family: var(--f-display); font-weight: 900; font-size: var(--text-lg);
-  border: 2px solid var(--hover-strong);
+  border: 2px solid var(--shine-strong);
   border-radius: 2px;
   transform: rotate(-6deg);
   margin-left: var(--space-2);
@@ -392,7 +392,7 @@
   font-family: var(--f-display);
   font-weight: 900; font-size: var(--text-md);
   letter-spacing: 0.12em;
-  border: 2px solid var(--hover-strong);
+  border: 2px solid var(--shine-strong);
   border-radius: 2px;
   transform: rotate(-4deg);
   box-shadow: 0 0 8px var(--vermilion-bright-glow);
@@ -595,7 +595,7 @@
   font-weight: 700;
   text-shadow: 0 0 4px var(--shadow-mid-2), 0 1px 0 var(--shadow-soft-mid);
   background-color: hsl(0, 80%, 55%);
-  box-shadow: 0 0 9px hsla(0, 90%, 60%, 0.55), inset 0 1px 0 var(--hover-mid);
+  box-shadow: 0 0 9px hsla(0, 90%, 60%, 0.55), inset 0 1px 0 var(--shine-mid);
   animation: cmp-ratio-rainbow 3.5s linear infinite;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -838,8 +838,8 @@
   gap: var(--space-4);
 }
 .wwm-cmp-col {
-  background: var(--hover-trace);
-  border: 1px solid var(--hover-soft);
+  background: var(--shine-trace);
+  border: 1px solid var(--shine-soft);
   border-radius: 6px;
   padding: var(--space-2-5);
   position: relative;
@@ -933,11 +933,11 @@
 /* Changelog modal */
 .wwm-hero-delta.pos { color: var(--text-kami-vermilion); }
 .wwm-hero-delta.neg { color: var(--text-kami-dim); }
-.wwm-hero-delta.zero { color: var(--hover-mid-2); }
+.wwm-hero-delta.zero { color: var(--shine-mid-2); }
 .wwm-cmp-preview-value { font-weight: var(--fw-bold); font-size: var(--text-15); }
 .wwm-cmp-preview-value.pos { color: var(--text-kami-vermilion); }
 .wwm-cmp-preview-value.neg { color: var(--text-kami-dim); }
-.wwm-cmp-preview-value.zero { color: var(--hover-strong); }
+.wwm-cmp-preview-value.zero { color: var(--shine-strong); }
 .wwm-cmp-current { border-left: 3px solid var(--vermilion); }
 .wwm-cmp-new     { border-left: 3px solid var(--jade); }
 .wwm-cmp-title {
@@ -951,7 +951,7 @@
   grid-template-columns: 1fr max-content;
   gap: var(--space-2); align-items: center;
   padding: var(--space-1) var(--space-1-5);
-  background: var(--hover-trace);
+  background: var(--shine-trace);
   border-radius: 4px;
   font-size: var(--text-12);
 }
@@ -1007,7 +1007,7 @@
 .wwm-arsenal-tier {
   display: flex; align-items: center; gap: var(--space-3);
   padding: var(--space-1) var(--space-1-5);
-  background: var(--hover-trace);
+  background: var(--shine-trace);
   border-radius: 4px;
 }
 .wwm-arsenal-lv { font-weight: var(--fw-bold); min-width: 50px; }
@@ -1770,7 +1770,7 @@
   cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
-.wwm-card-post-x:hover { background: var(--hover-soft); border-color: var(--c-focus-ring); }
+.wwm-card-post-x:hover { background: var(--shine-soft); border-color: var(--c-focus-ring); }
 .wwm-card-post-x[hidden] { display: none; }
 .wwm-card-post-hint { margin-top: var(--space-half); }
 
@@ -2447,12 +2447,12 @@
 }
 /* col = 本番 light 実効 rgba(255,255,255,0.4) (pages.dev computed 採取 2026-06-12) */
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-col {
-  background: var(--hover-mid-2);
+  background: var(--shine-mid-2);
 }
 /* Lv select = 本番 light 実効 hover-strong 白50% (--bg-raised 墨の紙上書き。
    token rescope でなく pinpoint — --bg-raised は modal 外殻も参照 = rescope 波及回避) */
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-title .wwm-cmp-lv-select {
-  background-color: var(--hover-strong);
+  background-color: var(--shine-strong);
 }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-title .wwm-cmp-lv-select option {
   background: var(--c-modal-a-option-bg);
@@ -2533,7 +2533,7 @@
   transform: rotate(-6deg);
 }
 .wwm-tool-modal .wwm-modal-close { color: var(--text-sumi-fg); }
-.wwm-tool-modal .wwm-modal-close:hover { background: var(--hover-soft); }
+.wwm-tool-modal .wwm-modal-close:hover { background: var(--shine-soft); }
 
 /* body = 紙 (JS が .wwm-ws-paper を付与 → 汎用紙 rule L2441 + token rescope が当たる)
    position: relative = bg-icon (absolute) の包含ブロック

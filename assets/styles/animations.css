@@ -78,13 +78,13 @@
 }
 
 @keyframes cmp-ratio-rainbow {
-  0%   { background-color: hsl(  0, 80%, 55%); box-shadow: 0 0 9px hsla(  0, 90%, 60%, 0.55), inset 0 1px 0 var(--hover-mid); }
-  17%  { background-color: hsl( 45, 90%, 55%); box-shadow: 0 0 9px hsla( 45, 90%, 60%, 0.55), inset 0 1px 0 var(--hover-mid); }
-  33%  { background-color: hsl(120, 65%, 48%); box-shadow: 0 0 9px hsla(120, 75%, 55%, 0.55), inset 0 1px 0 var(--hover-mid); }
-  50%  { background-color: hsl(180, 70%, 50%); box-shadow: 0 0 9px hsla(180, 80%, 55%, 0.55), inset 0 1px 0 var(--hover-mid); }
-  67%  { background-color: hsl(220, 75%, 58%); box-shadow: 0 0 9px hsla(220, 85%, 62%, 0.55), inset 0 1px 0 var(--hover-mid); }
-  83%  { background-color: hsl(285, 70%, 58%); box-shadow: 0 0 9px hsla(285, 80%, 62%, 0.55), inset 0 1px 0 var(--hover-mid); }
-  100% { background-color: hsl(360, 80%, 55%); box-shadow: 0 0 9px hsla(360, 90%, 60%, 0.55), inset 0 1px 0 var(--hover-mid); }
+  0%   { background-color: hsl(  0, 80%, 55%); box-shadow: 0 0 9px hsla(  0, 90%, 60%, 0.55), inset 0 1px 0 var(--shine-mid); }
+  17%  { background-color: hsl( 45, 90%, 55%); box-shadow: 0 0 9px hsla( 45, 90%, 60%, 0.55), inset 0 1px 0 var(--shine-mid); }
+  33%  { background-color: hsl(120, 65%, 48%); box-shadow: 0 0 9px hsla(120, 75%, 55%, 0.55), inset 0 1px 0 var(--shine-mid); }
+  50%  { background-color: hsl(180, 70%, 50%); box-shadow: 0 0 9px hsla(180, 80%, 55%, 0.55), inset 0 1px 0 var(--shine-mid); }
+  67%  { background-color: hsl(220, 75%, 58%); box-shadow: 0 0 9px hsla(220, 85%, 62%, 0.55), inset 0 1px 0 var(--shine-mid); }
+  83%  { background-color: hsl(285, 70%, 58%); box-shadow: 0 0 9px hsla(285, 80%, 62%, 0.55), inset 0 1px 0 var(--shine-mid); }
+  100% { background-color: hsl(360, 80%, 55%); box-shadow: 0 0 9px hsla(360, 90%, 60%, 0.55), inset 0 1px 0 var(--shine-mid); }
 }
 
 @keyframes wwm-opt-loading-pulse {

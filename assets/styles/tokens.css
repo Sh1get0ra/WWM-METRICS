@@ -85,11 +85,11 @@
   --shadow-mid:       rgba(0,0,0,0.50);
   --shadow-mid-2:     rgba(0,0,0,0.55);
   --shadow-heavy:     rgba(0,0,0,0.60);
-  --hover-trace:       rgba(255,255,255,0.03);
-  --hover-soft:        rgba(255,255,255,0.10);
-  --hover-mid:         rgba(255,255,255,0.25);
-  --hover-mid-2:       rgba(255,255,255,0.40);
-  --hover-strong:      rgba(255,255,255,0.50);
+  --shine-trace:       rgba(255,255,255,0.03);
+  --shine-soft:        rgba(255,255,255,0.10);
+  --shine-mid:         rgba(255,255,255,0.25);
+  --shine-mid-2:       rgba(255,255,255,0.40);
+  --shine-strong:      rgba(255,255,255,0.50);
 
   --jade:        #7fa88a;
   --jade-bright: #a8d4b4;
@@ -279,9 +279,9 @@
   --c-tier-b-hero-shadow: 0 0 8px rgba(122,90,32,.3), inset 0 1px 0 rgba(201,184,138,.18), inset 0 -1px 0 var(--shadow-soft);
   --c-tier-c-hero-shadow: 0 0 4px rgba(90,66,38,.2), inset 0 1px 0 rgba(122,112,96,.15);
   --c-ink-stroke-opacity: .85;
-  --c-last-import-bg: var(--hover-trace);
+  --c-last-import-bg: var(--shine-trace);
   --c-sb-label-opacity: 0.75;
-  --c-anlz-header-after-bg: linear-gradient(180deg, transparent 18%, var(--hover-trace) 19%, var(--hover-trace) 20%, transparent 21%), linear-gradient(180deg, transparent 60%, var(--hover-trace) 61%, transparent 62%);
+  --c-anlz-header-after-bg: linear-gradient(180deg, transparent 18%, var(--shine-trace) 19%, var(--shine-trace) 20%, transparent 21%), linear-gradient(180deg, transparent 60%, var(--shine-trace) 61%, transparent 62%);
   --c-anlz-bamboo-opacity: 0.10;
   --c-anlz-body-after-bg: repeating-linear-gradient(45deg, transparent 0 24px, rgba(212,175,55,.025) 24px 25px), repeating-linear-gradient(-45deg, transparent 0 24px, rgba(0,0,0,.05) 24px 25px);
   --c-anlz-bg-icon-opacity: 0.28;
@@ -347,7 +347,7 @@
   --c-cmp-stat-select-bg: var(--bg-raised);
   --c-btn-secondary-bg: transparent;
   --c-btn-secondary-fg: var(--text, #fff);
-  --c-btn-secondary-hover-bg: var(--hover-soft);
+  --c-btn-secondary-hover-bg: var(--shine-soft);
   --c-modal-a-kongfu-select-bg: var(--gold-faint);
   --c-modal-a-set-select-bg: linear-gradient(90deg, rgba(232,81,58,0.30), transparent);
   --c-modal-a-stat-select-bg: var(--shadow-soft-mid);
@@ -387,7 +387,7 @@
   /* ─── @layer Step 2-e: theme-swap tokens (dark default) ─── */
   --c-modal-a-rows-bg: var(--shadow-mid);
   --c-modal-a-title-ja-fg: #f3e3d4;
-  --c-modal-a-col-bg: var(--hover-trace);
+  --c-modal-a-col-bg: var(--shine-trace);
   --c-modal-a-kongfu-header-bg: var(--gold-faint);
   --c-modal-a-kongfu-header-fg: #e6d6b8;
   --c-modal-a-kongfu-select-fg: #e6d6b8;
@@ -495,7 +495,7 @@
 
   /* ─── @layer S2-j: theme-swap tokens (dark default) ─── */
   --c-tier-C-text-shadow: initial;
-  --c-cmp-col-border: var(--hover-soft);
+  --c-cmp-col-border: var(--shine-soft);
   --c-cmp-lv-select-border: var(--gold-deep);
   --c-num-input-border: #444;
   --c-btn-secondary-border: rgba(255,255,255,0.3);

@@ -91,7 +91,7 @@
 
   /* ── cmp modal (武具/心法/武庫対照) 紙対応 token (light.css 転用 第2弾 —
         modal 二層化: header/footer=墨・body=紙、兄貴イメージ 2026-06-12)。
-        中間 token (--brown-1/--hover-strong/--gold-tint 等) は :root 共通値で成立 ── */
+        中間 token (--brown-1/--shine-strong/--gold-tint 等) は :root 共通値で成立 ── */
   --c-text-warm: #5a3a20;
   --c-border-soft-warm: rgba(40,25,18,0.18);
   --c-border-mid-warm: rgba(40,25,18,0.25);
@@ -109,11 +109,11 @@
   --c-modal-a-kongfu-select-bg: var(--gold-mid);
   --c-modal-a-set-fg: var(--vermilion-deep); /* D7 2026-06-15: vermilion-bright 明朱 (contrast 3.6:1 AA 不可) → vermilion-deep (7.5:1) で読みやすさ確保、 set-header と統一 */
   --c-modal-a-set-select-bg: linear-gradient(90deg, var(--vermilion-bright-tint), var(--c-vermilion-fade-end));
-  --c-modal-a-stat-select-bg: var(--hover-strong);
+  --c-modal-a-stat-select-bg: var(--shine-strong);
   --c-modal-a-name-fg: var(--c-modal-a-fg);
   --c-modal-a-val-fg: var(--c-fg-emphasis);
   --c-modal-a-val-input-fg: var(--brown-1);
-  --c-modal-a-lv-bg: var(--hover-strong);
+  --c-modal-a-lv-bg: var(--shine-strong);
   --c-modal-a-lv-fg: var(--c-text-warm);
   --c-cmp-modal-a--cmp-kongfu-select-border: var(--c-border-mid-warm);
   --c-cmp-modal-a--cmp-set-select-border: var(--c-border-mid-warm);
@@ -160,7 +160,7 @@
   --c-step2--xinfa-cell-border-bot: 1px dashed rgba(120,60,20,0.25);
   --c-step2--xinfa-cell-pad-bot:   var(--space-1);
   --c-step2--muted-opacity:        0.95;
-  --c-step2--num-input-bg:         var(--hover-strong);
+  --c-step2--num-input-bg:         var(--shine-strong);
   --c-step2--arsenal-tier-border:  1px solid rgba(120,60,20,0.3);
   --c-step2--arsenal-tier-bg:      rgba(255,240,210,0.4);
 
@@ -203,7 +203,7 @@
   --c-anlz-tab-fg:                 var(--brown-1);
   --c-anlz-tab-active-fg:          #8a5a14;
   --c-anlz-title-fg:               #1a0e08;
-  --c-anlz-title-text-shadow:      0 1px 0 var(--hover-mid-2);
+  --c-anlz-title-text-shadow:      0 1px 0 var(--shine-mid-2);
   --c-anlz-title-fg-n2:            #2a1610;
   --c-anlz-title-text-shadow-n2:   0 0 0.5px rgba(42,22,16,.6), 0 0 1.5px rgba(74,40,20,.35), 0 0 3px rgba(106,62,22,.18), 0.6px 0 1.2px rgba(42,22,16,.25), -0.6px 0 1.2px rgba(42,22,16,.22), 0 0.5px 1.5px rgba(74,40,20,.14);
   --c-anlz-subtitle-fg:            var(--brown-5);

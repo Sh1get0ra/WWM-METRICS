@@ -30,7 +30,7 @@
 
 .wwm-cmp-tier-row.wwm-tier-unrel { opacity: 0.42; }
 
-.wwm-cmp-tier-row.wwm-tier-unrel .wwm-cmp-tier-num { background: var(--hover-trace); color: var(--text-kami-dim); border-color: rgba(255,255,255,0.14); }
+.wwm-cmp-tier-row.wwm-tier-unrel .wwm-cmp-tier-num { background: var(--shine-trace); color: var(--text-kami-dim); border-color: rgba(255,255,255,0.14); }
 
 .wwm-cmp-tier-row.wwm-tier-kfmiss .wwm-cmp-tier-eff { color: var(--text-kami-vermilion); }
 
