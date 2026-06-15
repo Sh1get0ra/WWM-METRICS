@@ -102,7 +102,7 @@
 
 /* A — jade glow */
 .tier-A {
-  color: var(--jade-bright);
+  color: var(--text-sumi-gold);
   background: var(--c-tier-chip-a-bg);
   border-color: var(--c-tier-chip-a-border);
   text-shadow: var(--c-tier-chip-a-text-shadow);

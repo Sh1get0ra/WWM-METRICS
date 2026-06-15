@@ -65,7 +65,7 @@
 /* PC のみ表示する内訳ブロック */
 .hcb-val.phys { color: var(--text-sumi-vermilion); }
 
-.hcb-val.elem { color: var(--jade-bright); }
+.hcb-val.elem { color: var(--text-sumi-gold); }
 
 .hcb-pct.phys { color: var(--text-sumi-vermilion); }
 
@@ -145,7 +145,7 @@
 
 .hb-value.phys { color: var(--text-sumi-vermilion); }
 
-.hb-value.elem { color: var(--jade-bright); }
+.hb-value.elem { color: var(--text-sumi-gold); }
 
 .hb-pct.phys { color: var(--c-hb-pct-phys-fg); }
 

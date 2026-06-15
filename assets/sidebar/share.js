@@ -193,7 +193,7 @@
         <div class="wwm-modal-body wwm-ws-paper wwm-share-pane" data-pane="card" hidden></div>
         <div class="wwm-modal-body wwm-ws-paper wwm-share-pane" data-pane="url" hidden></div>
         <div class="wwm-modal-body wwm-ws-paper wwm-share-pane" data-pane="obs" hidden></div>
-        <div class="wwm-tool-modal-footer" id="wwmShareFooter"><div id="wwmShareMsg" style="font-size:12px;color:var(--jade-bright);min-height:16px;"></div></div>
+        <div class="wwm-tool-modal-footer" id="wwmShareFooter"><div id="wwmShareMsg" style="font-size:12px;color:var(--text-sumi-gold);min-height:16px;"></div></div>
       </div>`;
     document.body.appendChild(m);
 
@@ -223,7 +223,7 @@
 
     function _buildUrlPane(pane) {
       pane.innerHTML = `${_bgIconHtml}
-        <div style="font-size:13px;color:var(--gold-bright);font-weight:700;letter-spacing:0.12em;margin-bottom:6px;">${(window.T?.shareSect1Heading) ?? '▍ビルド共有'}</div>
+        <div style="font-size:13px;color:var(--text-sumi-gold);font-weight:700;letter-spacing:0.12em;margin-bottom:6px;">${(window.T?.shareSect1Heading) ?? '▍ビルド共有'}</div>
         <p style="font-size:12px;color:var(--text-sumi-fg);opacity:0.92;margin:0 0 10px;line-height:1.6;">${(window.T?.shareSect1Desc) ?? ''}</p>
         <textarea class="wwm-share-url" id="wwmShareUrlNormal" readonly>${url}</textarea>`;
       // アクション btn = footer (墨帯) へ — 紙 body 上の secondary は不可視 (2026-06-13 兄貴指摘)
@@ -234,11 +234,11 @@
 
     function _buildObsPane(pane) {
       pane.innerHTML = `${_bgIconHtml}
-        <div style="font-size:13px;color:var(--gold-bright);font-weight:700;letter-spacing:0.12em;margin-bottom:6px;">${(window.T?.shareSect2Heading) ?? '▍OBS 配信用 URL'}</div>
+        <div style="font-size:13px;color:var(--text-sumi-gold);font-weight:700;letter-spacing:0.12em;margin-bottom:6px;">${(window.T?.shareSect2Heading) ?? '▍OBS 配信用 URL'}</div>
         <p style="font-size:12px;color:var(--text-sumi-fg);opacity:0.92;margin:0 0 8px;line-height:1.6;">${(window.T?.shareSect2Desc) ?? ''}</p>
         <div class="wwm-share-warn" style="font-size:12px;color:#e8a04a;background:rgba(232,160,74,0.10);border-left:3px solid #e8a04a;padding:8px 10px;margin:0 0 10px;line-height:1.6;border-radius:2px;">⚠ ${(window.T?.shareObsCacheWarn) ?? 'OBSキャッシュの影響で正常に表示されない場合は、ブラウザソースの作り直し or OBS再起動が必要'}</div>
         <details style="margin:0 0 10px;font-size:12px;color:var(--text-sumi-fg);">
-          <summary style="cursor:pointer;color:var(--gold-bright);letter-spacing:0.05em;font-weight:700;">${(window.T?.shareObsSetup) ?? 'OBS への設定方法'}</summary>
+          <summary style="cursor:pointer;color:var(--text-sumi-gold);letter-spacing:0.05em;font-weight:700;">${(window.T?.shareObsSetup) ?? 'OBS への設定方法'}</summary>
           <ol style="margin:6px 0 0;padding-left:20px;line-height:1.7;opacity:0.92;">
             <li>${(window.T?.shareObsStep1) ?? ''}</li>
             <li>${(window.T?.shareObsStep2) ?? ''}</li>
@@ -255,7 +255,7 @@
           <label style="display:flex;align-items:center;gap:6px;">
             ${(window.T?.shareLabelOpacity) ?? '不透明度'}
             <input type="range" id="wwmObsOpacity" min="0" max="100" step="1" value="${initOp}" style="width:130px;accent-color:var(--gold);">
-            <span id="wwmObsOpacityVal" style="font-family:var(--f-latin);color:var(--gold-bright);min-width:36px;">${initOp}%</span>
+            <span id="wwmObsOpacityVal" style="font-family:var(--f-latin);color:var(--text-sumi-gold);min-width:36px;">${initOp}%</span>
           </label>
         </div>
         <div style="display:flex;align-items:center;gap:12px;font-size:12px;color:var(--text-sumi-fg);margin-bottom:8px;flex-wrap:wrap;">
@@ -275,10 +275,10 @@
         <textarea class="wwm-share-url" id="wwmShareUrlObs" readonly>${obsUrl}</textarea>
         <div id="wwmSharePreviewWrap" style="display:none;margin-top:12px;">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-            <div style="font-size:11px;color:var(--gold-bright);font-weight:700;letter-spacing:0.1em;">${(window.T?.sharePreviewTitle) ?? 'プレビュー'}</div>
+            <div style="font-size:11px;color:var(--text-sumi-gold);font-weight:700;letter-spacing:0.1em;">${(window.T?.sharePreviewTitle) ?? 'プレビュー'}</div>
             <label style="font-size:11px;color:var(--text-sumi-dim);display:flex;align-items:center;gap:6px;">${(window.T?.sharePreviewScaleLabel) ?? '縮尺'}
               <input type="range" id="wwmSharePreviewScale" min="30" max="100" step="5" value="50" style="width:120px;accent-color:var(--gold);">
-              <span id="wwmSharePreviewScaleVal" style="font-family:var(--f-latin);color:var(--gold-bright);min-width:36px;">50%</span>
+              <span id="wwmSharePreviewScaleVal" style="font-family:var(--f-latin);color:var(--text-sumi-gold);min-width:36px;">50%</span>
             </label>
           </div>
           <div style="background:repeating-conic-gradient(#1a1a1a 0% 25%, #2a2a2a 0% 50%) 50% / 16px 16px;border:1px solid var(--ink-2);border-radius:3px;padding:8px;display:flex;justify-content:center;overflow:auto;">

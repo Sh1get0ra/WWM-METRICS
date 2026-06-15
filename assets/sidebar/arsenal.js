@@ -46,8 +46,8 @@
         const minV = t?.min ?? preset.min;
         const maxV = t?.max ?? preset.max;
         const valTxt = peaked
-          ? `<span style="color:var(--gold-bright);">${(window.T?.importArsenalPeaked)||'頂点'} ✓</span> <span style="color:var(--gold-bright);font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`
-          : `<span style="color:var(--text-sumi-dim);">${(window.T?.arsenalNotPeaked)||'未突破'}</span> <span style="color:var(--gold-bright);font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`;
+          ? `<span style="color:var(--text-sumi-gold);">${(window.T?.importArsenalPeaked)||'頂点'} ✓</span> <span style="color:var(--text-sumi-gold);font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`
+          : `<span style="color:var(--text-sumi-dim);">${(window.T?.arsenalNotPeaked)||'未突破'}</span> <span style="color:var(--text-sumi-gold);font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`;
         return `<div class="wwm-cmp-row" style="grid-template-columns:50px 1fr;align-items:center;"><span style="font-family:var(--f-latin);font-weight:700;">Lv${lv}</span><span>${valTxt}</span></div>`;
       }).join('');
     }
@@ -60,8 +60,8 @@
         const minV = t.min ?? preset.min;
         const maxV = t.max ?? preset.max;
         const inputArea = peaked
-          ? `<span style="color:var(--gold-bright);font-size:11px;white-space:nowrap;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`
-          : `<span style="display:inline-flex;gap:4px;font-size:11px;color:var(--gold-bright);align-items:center;flex-wrap:nowrap;white-space:nowrap;">
+          ? `<span style="color:var(--text-sumi-gold);font-size:11px;white-space:nowrap;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`
+          : `<span style="display:inline-flex;gap:4px;font-size:11px;color:var(--text-sumi-gold);align-items:center;flex-wrap:nowrap;white-space:nowrap;">
                <span>${sL.min}</span><input type="number" class="wwm-num-input" data-tier-min="${lv}" min="0" max="${preset.min}" step="1" value="${minV}" style="width:42px;height:20px;padding:0 4px;">
                <span>${sL.max}</span><input type="number" class="wwm-num-input" data-tier-max="${lv}" min="0" max="${preset.max}" step="1" value="${maxV}" style="width:42px;height:20px;padding:0 4px;">
              </span>`;

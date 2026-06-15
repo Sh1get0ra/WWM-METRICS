@@ -450,7 +450,7 @@
 .wwm-cmp-modal-a .wwm-cmp-col {
   margin-top: var(--space-1);
 }
-.wwm-cmp-modal-a .wwm-cmp-current .wwm-cmp-title { color: var(--vermilion) ; }
+.wwm-cmp-modal-a .wwm-cmp-current .wwm-cmp-title { color: var(--text-kami-vermilion) ; }
 /* imp strip (Step 5-d 2026-06-06): h3 の可視部 = ::before seal (独自色) + .wwm-cmp-lv (独自色)、
    .wwm-cmp-title-text は display:none → この color は可視要素に届かない dead styling。
    imp は何も守っていなかった relic (light.css #1a8d52 が strip 後勝つが同様に不可視)。 VRT 58/58 で確認済 */
