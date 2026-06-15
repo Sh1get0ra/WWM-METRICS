@@ -1,5 +1,5 @@
 // WWM-METRICS Service Worker
-const CACHE_NAME = 'wwm-metrics-v288';
+const CACHE_NAME = 'wwm-metrics-v289';
 const CORE_ASSETS = [
   './',
   './index.html',
