@@ -259,7 +259,7 @@
 /* SS — gold (アニメ継承、静的部のみ override) */
 .hero-wuxia .hero-tier.tier-SS {
   color: var(--c-tier-ss-hero-fg);
-  background: var(--c-tier-ss-hero-bg);
+  background: var(--bg-tier-ss);
   border-color: var(--c-tier-ss-hero-border);
   text-shadow: 0 0 18px rgba(240,210,138,.95), 0 0 36px var(--vermilion-bright-glow);
   box-shadow: var(--c-hero-wuxia--hero-tier-tier-SS-shadow);
@@ -268,7 +268,7 @@
 /* S — vermilion (アニメ継承) */
 .hero-wuxia .hero-tier.tier-S {
   color: var(--c-tier-s-hero-fg);
-  background: var(--c-tier-s-hero-bg);
+  background: var(--bg-tier-s);
   border-color: var(--c-tier-s-hero-border);
   text-shadow: 0 0 14px rgba(232,81,58,.85), 0 0 28px rgba(200,60,43,.45);
   box-shadow: var(--c-hero-wuxia--hero-tier-tier-S-shadow);
@@ -277,7 +277,7 @@
 /* A — jade calm */
 .hero-wuxia .hero-tier.tier-A {
   color: var(--c-tier-a-hero-fg);
-  background: var(--c-tier-a-hero-bg);
+  background: var(--bg-tier-a);
   border-color: var(--c-tier-a-hero-border);
   text-shadow: 0 0 12px rgba(168,212,180,.7), 0 0 24px rgba(127,168,138,.35);
   box-shadow: var(--c-tier-a-hero-shadow);
@@ -286,7 +286,7 @@
 /* B — bone copper */
 .hero-wuxia .hero-tier.tier-B {
   color: var(--c-tier-b-hero-fg);
-  background: var(--c-tier-b-hero-bg);
+  background: var(--bg-tier-b);
   border-color: var(--c-tier-b-hero-border);
   text-shadow: 0 0 10px rgba(201,184,138,.55);
   box-shadow: var(--c-tier-b-hero-shadow);
@@ -295,7 +295,7 @@
 /* C — muted */
 .hero-wuxia .hero-tier.tier-C {
   color: var(--c-tier-c-hero-fg);
-  background: var(--c-tier-c-hero-bg);
+  background: var(--bg-tier-c);
   border-color: var(--c-tier-c-hero-border);
   text-shadow: 0 0 6px rgba(122,112,96,.4);
   box-shadow: var(--c-tier-c-hero-shadow);
