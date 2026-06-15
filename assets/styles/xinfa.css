@@ -41,9 +41,9 @@
 /* design-preview.html 準拠: --f-latin = Cinzel, --jade-bright = #a8d4b4 */
 .tier-badge-baseline { /* baseline は current と同等表示 */ }
 
-.wwm-hero-delta.pos { color: var(--text-sumi-gold); }
+.wwm-hero-delta.pos { color: var(--text-sumi-vermilion); }
 
-.wwm-hero-delta.neg { color: var(--text-sumi-vermilion); }
+.wwm-hero-delta.neg { color: var(--text-sumi-dim); }
 
 .wwm-hero-delta.zero { color: var(--text-sumi-dim); }
 

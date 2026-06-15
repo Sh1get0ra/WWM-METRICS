@@ -136,9 +136,9 @@
   white-space: nowrap;
 }
 
-.wwm-equip-delta-pos { color: var(--text-sumi-gold); text-shadow: var(--c-equip-delta-pos-text-shadow); }
+.wwm-equip-delta-pos { color: var(--text-sumi-vermilion); text-shadow: var(--c-equip-delta-pos-text-shadow); }
 
-.wwm-equip-delta-neg { color: var(--c-equip-delta-neg-fg); text-shadow: var(--c-equip-delta-neg-text-shadow); }
+.wwm-equip-delta-neg { color: var(--text-sumi-dim); text-shadow: var(--c-equip-delta-neg-text-shadow); }
 
 .wwm-equip-kongfu {
   display: block;
