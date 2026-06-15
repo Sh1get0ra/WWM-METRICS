@@ -11,7 +11,10 @@
 html, body {
   background: var(--bg-0);
   color: var(--paper);
-  font-family: var(--f-body);
+  /* 2026-06-15 兄貴指示: base font = --f-display (Noto Serif JP) に変更。
+     旧 --f-body (Noto Sans JP) は NOTE modal の更新履歴/仕様タブ等 長文読み物のみ例外。
+     武侠舞台のテーマ親和 + Noto Sans JP の AI slop 感回避 */
+  font-family: var(--f-display);
   font-size: var(--text-md);
   line-height: 1.55;
   font-feature-settings: 'palt';
@@ -304,7 +307,7 @@ footer strong { color: var(--c-footer-strong-fg); }
   background: var(--c-toast-bg); color: var(--paper);
   padding: 11px 18px;
   border: 1px solid var(--gold-deep); border-left: 3px solid var(--gold);
-  font-family: var(--f-body); font-size: var(--text-12); font-weight: var(--fw-semibold);
+  font-family: var(--f-display); font-size: var(--text-12); font-weight: var(--fw-semibold);
   letter-spacing: 0.02em;
   box-shadow: 0 8px 32px var(--overlay-heavy), 0 0 24px var(--gold-tint);
   z-index: var(--z-modal); opacity: 0; transform: translateY(8px);
@@ -356,7 +359,7 @@ footer strong { color: var(--c-footer-strong-fg); }
   border: 1px solid rgba(240,210,138,.6);
   border-radius: 4px;
   color: var(--gold-bright);
-  font-family: var(--f-body);
+  font-family: var(--f-display);
   font-size: var(--text-12);
   font-weight: var(--fw-bold);
   letter-spacing: .05em;

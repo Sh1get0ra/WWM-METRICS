@@ -488,7 +488,7 @@
 }
 .wwm-cmp-modal-a .wwm-cmp-stat-select option {
   font-size: var(--text-12);
-  font-family: var(--f-body);
+  font-family: var(--f-display);
   font-weight: 600;
 }
 .wwm-cmp-modal-a .wwm-cmp-set-header,
@@ -1790,7 +1790,7 @@
   overflow: hidden;
   background: #07060a;
   color: #ede4d0;
-  font-family: var(--f-body);
+  font-family: var(--f-display);
   text-align: left;
   /* panel 上に乗る色は --cd-* に集約 (墨 default)。 .wwm-card-panel-light が古紙 override */
   --cd-panel-1: rgba(7,6,10,0.86);
@@ -2660,6 +2660,9 @@ html[lang="en"] .wwm-tool-modal .wwm-tool-title-en { display: none; }
 .wwm-note-modal-b .wwm-modal-body {
   overflow-y: auto;
   max-height: 60vh;
+  /* 2026-06-15 兄貴指示: NOTE = 唯一の --f-body (Noto Sans JP) 例外。
+     更新履歴 / 仕様 = 長文読み物のため sans 維持 (base.css の display 化を上書き) */
+  font-family: var(--f-body);
 }
 
 } /* end @layer modals */

@@ -136,7 +136,7 @@ html.wwm-shared-build-mode #importBtn {
 
 .preset-name-input {
   flex: 1; border: none; background: transparent;
-  font-family: var(--f-body); font-size: var(--text-12); font-weight: var(--fw-semibold);
+  font-family: var(--f-display); font-size: var(--text-12); font-weight: var(--fw-semibold);
   color: var(--paper); min-width: 0;
   /* outline:none は削除済 (2026-06-05 @layer Step 1): input は focus = :focus-visible 常時 match
      = base.css の a11y gold ring が常勝で dead だった。復活させるな (a11y + layer flip 源) */

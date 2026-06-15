@@ -1144,7 +1144,7 @@ html[lang="zh-CN"] [data-kaisho] {
     flex: 1; min-height: 48px;
     background: none; border: none;
     color: var(--sumi-text-3);
-    font-family: var(--f-body); font-size: 10px;
+    font-family: var(--f-display); font-size: 10px;
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
   }
   .wwm-bn[aria-selected="true"] { background: var(--kami-0); color: var(--kami-ink); border-radius: 1px; }
