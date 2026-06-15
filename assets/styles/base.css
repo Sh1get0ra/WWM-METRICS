@@ -9,7 +9,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
-  background: var(--bg-0);
+  background: var(--bg-canvas);
   color: var(--text-sumi-fg);
   /* 2026-06-15 兄貴指示: base font = --f-display (Shippori Mincho) に変更。
      旧 --f-body (Noto Sans JP) は NOTE modal の更新履歴/仕様タブ等 長文読み物のみ例外。
@@ -39,7 +39,7 @@ body {
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n1'><feTurbulence type='fractalNoise' baseFrequency='0.45' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.85  0 0 0 0 0.65  0 0 0 0.08 0'/></filter><filter id='n2'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.9  0 0 0 0 0.8  0 0 0 0 0.6  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n1)'/><rect width='100%25' height='100%25' filter='url(%23n2)'/></svg>"),
     linear-gradient(var(--overlay-mid-2), var(--overlay-mid-2)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg-b74e3a33.png") center top / cover no-repeat fixed,
-    var(--bg-0);
+    var(--bg-canvas);
   min-height: 100vh;
 }
 
@@ -255,7 +255,7 @@ a.icon-btn { text-decoration: none; }
   color: var(--text-sumi-gold); border-color: var(--gold-deep);
 }
 .icon-btn.import-btn:hover {
-  background: var(--gold); color: var(--bg-0); border-color: var(--gold);
+  background: var(--gold); color: var(--bg-canvas); border-color: var(--gold);
   box-shadow: 0 0 16px var(--gold-glow);
 }
 
@@ -481,7 +481,7 @@ footer strong { color: var(--c-footer-strong-fg); }
     position: sticky;
     top: 0;
     z-index: var(--z-overlay);
-    background: var(--bg-0);
+    background: var(--bg-canvas);
     border-bottom: 1px solid var(--ink-2);
     flex-wrap: wrap;
     /* padding left/right 成分は削除済 (2026-06-05 @layer Step 1):

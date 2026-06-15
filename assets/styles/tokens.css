@@ -12,7 +12,6 @@
 
 :root {
   /* Sumi base */
-  --bg-0:        #07060a;
   --bg-1:        #0f0c0e;
   --bg-2:        #16110f;
   --bg-3:        #1d1714;
@@ -519,7 +518,7 @@
      ═══════════════════════════════════════════════════════════════ */
 
   /* B1. Surface — 面の階層 (panel/card/modal 地色) */
-  --bg-canvas:  var(--bg-0);                       /* viewport 地塗り */
+  --bg-canvas:  #07060a;                           /* viewport 地塗り */
   --bg-base:    var(--bg-1);                       /* app 下地 */
   --bg-board:   var(--bg-2);                       /* 板下 */
   /* --bg-raised は既存 (L19 #1a1410) を流用 = 持ち上げ semantic そのまま */

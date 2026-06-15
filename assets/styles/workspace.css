@@ -57,7 +57,7 @@
    custom property 継承で、配下に移設される既存 component
    (gear card / xinfa card / anlz) が light theme 相当の紙配色になる仕掛け。 */
 .wwm-ws-paper {
-  --bg-0: var(--kami-0); --bg-1: var(--kami-1); --bg-2: var(--kami-2); --bg-3: #e2d6b4;
+  --bg-1: var(--kami-1); --bg-2: var(--kami-2); --bg-3: #e2d6b4;
   --surf-1: rgba(255,248,228,0.55); --surf-2: rgba(244,232,204,0.72);
   --surf-shade: rgba(58,38,22,0.06); --surf-shade-2: rgba(58,38,22,0.10); --surf-shade-3: rgba(58,38,22,0.14);
   --input-bg: rgba(255,250,235,0.85); --input-text: #5e3a14;
@@ -813,7 +813,7 @@ html[lang="zh-CN"] [data-kaisho] {
   --gold-faint: rgba(240, 210, 138, 0.08);
   --paper-2: #c8bda6;
   --ink-3: rgba(232, 215, 180, 0.22);
-  --bg-0: #141009; /* import hover の文字色 (金地に墨) */
+  --bg-canvas: #141009; /* import hover の文字色 (金地に墨) */
 }
 
 /* 言語 dropdown — 公式 globe ボタン + プルダウン (2026-06-12 topbar 再編。
