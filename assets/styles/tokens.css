@@ -77,14 +77,14 @@
   --gold-bright-mid:   rgba(240,210,138,0.50);
   --gold-bright-strong:rgba(240,210,138,0.70);
   /* overlay (暗/明オーバーレイ) */
-  --overlay-trace:     rgba(0,0,0,0.15);
+  --shadow-trace:     rgba(0,0,0,0.15);
   --overlay-tint:      rgba(0,0,0,0.25);
-  --overlay-soft:      rgba(0,0,0,0.30);
-  --overlay-soft-mid:  rgba(0,0,0,0.40);
-  --overlay-soft-2:    rgba(0,0,0,0.45);
-  --overlay-mid:       rgba(0,0,0,0.50);
-  --overlay-mid-2:     rgba(0,0,0,0.55);
-  --overlay-heavy:     rgba(0,0,0,0.60);
+  --shadow-soft:      rgba(0,0,0,0.30);
+  --shadow-soft-mid:  rgba(0,0,0,0.40);
+  --shadow-soft-2:    rgba(0,0,0,0.45);
+  --shadow-mid:       rgba(0,0,0,0.50);
+  --shadow-mid-2:     rgba(0,0,0,0.55);
+  --shadow-heavy:     rgba(0,0,0,0.60);
   --hover-trace:       rgba(255,255,255,0.03);
   --hover-soft:        rgba(255,255,255,0.10);
   --hover-mid:         rgba(255,255,255,0.25);
@@ -229,7 +229,7 @@
   --c-icon-dim-opacity: 0.15;  /* equip/xinfa icon 背景透かし opacity */
   --c-fg-vermilion-strong: var(--vermilion-bright);  /* 朱前景 強調 (light は深朱) */
   --c-fg-emphasis: var(--gold-bright);  /* 見出し強調 (hero label ja / cmp-val-input) */
-  --c-anlz-shadow: 0 8px 22px var(--overlay-soft-2);  /* anlz header/body 浮き shadow */
+  --c-anlz-shadow: 0 8px 22px var(--shadow-soft-2);  /* anlz header/body 浮き shadow */
   --c-mobile-overlay-top: rgba(20,15,12,0.98);  /* mobile overlay bg (dark default 追加で base を token 参照化) */
   --c-mobile-overlay-bot: rgba(10,8,9,0.98);  /* mobile overlay bg (dark default 追加で base を token 参照化) */
   --c-mobile-overlay-header-bg: linear-gradient(180deg, rgba(26,20,16,0.95), rgba(15,12,14,0.92));  /* mobile overlay header bg (dark default 追加) */
@@ -257,7 +257,7 @@
   --c-opt-btn-fg: var(--gold);
   --c-opt-btn-hover-bg: rgba(212,175,55,0.1);
   --c-opt-btn-apply-hover-bg: rgba(168,212,180,0.1);
-  --c-eff-input-bg: var(--overlay-soft);
+  --c-eff-input-bg: var(--shadow-soft);
   --c-eff-input-fg: var(--gold-bright);
   --c-sb-section-title-bg: var(--accent-faint);
   --c-sb-section-title-fg: var(--accent);
@@ -269,14 +269,14 @@
   --c-cmp-modal-bg-icon-opacity: 0.1;
   --c-modal-bg-icon-opacity: 0.18;
   --c-xinfa-tier-chip-bg: var(--vermilion-soft);
-  --c-hero-number-text-shadow: 0 5px 5px var(--overlay-heavy), 0 5px 20px var(--overlay-soft-mid);
+  --c-hero-number-text-shadow: 0 5px 5px var(--shadow-heavy), 0 5px 20px var(--shadow-soft-mid);
   /* hero title (武格指数) shadow — text 用 + ja 玉ねぎ svg 用 filter (drop-shadow chain 同等値) */
-  --c-hero-title-text-shadow: 0 5px 5px var(--overlay-heavy), 0 5px 20px var(--overlay-soft-mid);
-  --c-hero-title-drop-shadow: drop-shadow(0 5px 5px var(--overlay-heavy)) drop-shadow(0 5px 20px var(--overlay-soft-mid));
+  --c-hero-title-text-shadow: 0 5px 5px var(--shadow-heavy), 0 5px 20px var(--shadow-soft-mid);
+  --c-hero-title-drop-shadow: drop-shadow(0 5px 5px var(--shadow-heavy)) drop-shadow(0 5px 20px var(--shadow-soft-mid));
   --c-hero-next-val-fg: var(--bone-dim);
   --c-luopan-center-label-fg: var(--gold-bright); /* critique P3: gradient-clip 廃止 → solid 金 (light は vermilion-deep) */
   --c-tier-a-hero-shadow: 0 0 10px rgba(127,168,138,.35), inset 0 1px 0 rgba(168,212,180,.2), inset 0 -1px 0 rgba(0,0,0,.35);
-  --c-tier-b-hero-shadow: 0 0 8px rgba(122,90,32,.3), inset 0 1px 0 rgba(201,184,138,.18), inset 0 -1px 0 var(--overlay-soft);
+  --c-tier-b-hero-shadow: 0 0 8px rgba(122,90,32,.3), inset 0 1px 0 rgba(201,184,138,.18), inset 0 -1px 0 var(--shadow-soft);
   --c-tier-c-hero-shadow: 0 0 4px rgba(90,66,38,.2), inset 0 1px 0 rgba(122,112,96,.15);
   --c-ink-stroke-opacity: .85;
   --c-last-import-bg: var(--hover-trace);
@@ -290,12 +290,12 @@
   --c-score-update-banner-fg: #ffd9cc;
   --c-mobile-drawer-bg: linear-gradient(180deg, var(--bg-raised), rgba(15,12,14,0.98));
   --c-mobile-fab-bg: linear-gradient(180deg, rgba(26,20,16,0.96), rgba(15,12,14,0.96));
-  --c-mobile-fab-shadow: 0 4px 16px var(--overlay-soft-2), 0 0 12px rgba(212,175,55,0.4);
+  --c-mobile-fab-shadow: 0 4px 16px var(--shadow-soft-2), 0 0 12px rgba(212,175,55,0.4);
 
   /* ─── @layer Step 2-d r1: theme-swap tokens (dark default) ─── */
-  --c-tier-chip-ss-shadow: 0 0 20px rgba(200,60,43,0.6), 0 0 45px var(--vermilion-soft-2), inset 0 1px 0 rgba(240,210,138,0.28), inset 0 -1px 0 var(--overlay-soft-2);
+  --c-tier-chip-ss-shadow: 0 0 20px rgba(200,60,43,0.6), 0 0 45px var(--vermilion-soft-2), inset 0 1px 0 rgba(240,210,138,0.28), inset 0 -1px 0 var(--shadow-soft-2);
   --c-tier-chip-ss-sheen: linear-gradient( 105deg, transparent 25%, rgba(240,210,138,0.30) 50%, transparent 75% );
-  --c-tier-chip-s-shadow: 0 0 18px var(--vermilion-strong), 0 0 40px var(--vermilion-soft), inset 0 1px 0 rgba(255,130,110,0.20), inset 0 -1px 0 var(--overlay-soft-mid);
+  --c-tier-chip-s-shadow: 0 0 18px var(--vermilion-strong), 0 0 40px var(--vermilion-soft), inset 0 1px 0 rgba(255,130,110,0.20), inset 0 -1px 0 var(--shadow-soft-mid);
   --c-tier-chip-a-shadow: 0 0 11px rgba(168,212,180,0.28), inset 0 1px 0 rgba(168,212,180,0.18);
   --c-tier-chip-b-shadow: 0 0 8px rgba(201,184,138,0.22), inset 0 1px 0 rgba(201,184,138,0.14);
   --c-modal-a-option-fg: var(--text-sumi-fg);
@@ -350,7 +350,7 @@
   --c-btn-secondary-hover-bg: var(--hover-soft);
   --c-modal-a-kongfu-select-bg: var(--gold-faint);
   --c-modal-a-set-select-bg: linear-gradient(90deg, rgba(232,81,58,0.30), transparent);
-  --c-modal-a-stat-select-bg: var(--overlay-soft-mid);
+  --c-modal-a-stat-select-bg: var(--shadow-soft-mid);
   --c-modal-a-lv-fg: var(--text-sumi-fg);
   --c-modal-a-btn-secondary-bg: url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_cancel-9a52642a.png") center / 100% 100% no-repeat, transparent;
   --c-slot-border: rgba(232,215,180,0.20);
@@ -385,7 +385,7 @@
   --c-hero-next-arrow-fg: var(--gold-deep);
 
   /* ─── @layer Step 2-e: theme-swap tokens (dark default) ─── */
-  --c-modal-a-rows-bg: var(--overlay-mid);
+  --c-modal-a-rows-bg: var(--shadow-mid);
   --c-modal-a-title-ja-fg: #f3e3d4;
   --c-modal-a-col-bg: var(--hover-trace);
   --c-modal-a-kongfu-header-bg: var(--gold-faint);
@@ -418,7 +418,7 @@
   --c-score-update-banner-border-bot: var(--vermilion-strong);
   --c-mobile-drawer-border-left: var(--gold-deep);
   --c-cmp-modal-a--cmp-rows-border: 1px solid rgba(201,164,90,0.25);
-  --c-cmp-modal-a--cmp-rows-shadow: inset 0 1px 6px var(--overlay-heavy);
+  --c-cmp-modal-a--cmp-rows-shadow: inset 0 1px 6px var(--shadow-heavy);
   --c-cmp-modal-a--cmp-current-border: rgba(232,81,58,0.30);
   --c-cmp-modal-a--cmp-col-border: rgba(232,81,58,0.30);
 

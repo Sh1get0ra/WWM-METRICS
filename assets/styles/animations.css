@@ -25,11 +25,11 @@
 @keyframes tier-ss-glow {
   0%, 100% {
     box-shadow: 0 0 20px rgba(200,60,43,0.6), 0 0 45px var(--vermilion-soft-2),
-                inset 0 1px 0 rgba(240,210,138,0.28), inset 0 -1px 0 var(--overlay-soft-2);
+                inset 0 1px 0 rgba(240,210,138,0.28), inset 0 -1px 0 var(--shadow-soft-2);
   }
   50% {
     box-shadow: 0 0 32px rgba(200,60,43,0.85), 0 0 65px var(--gold-bright-soft),
-                inset 0 1px 0 var(--gold-bright-mid), inset 0 -1px 0 var(--overlay-soft-2);
+                inset 0 1px 0 var(--gold-bright-mid), inset 0 -1px 0 var(--shadow-soft-2);
   }
 }
 
@@ -41,11 +41,11 @@
 @keyframes tier-s-pulse {
   0%, 100% {
     box-shadow: 0 0 18px var(--vermilion-strong), 0 0 40px var(--vermilion-soft),
-                inset 0 1px 0 rgba(255,130,110,0.20), inset 0 -1px 0 var(--overlay-soft-mid);
+                inset 0 1px 0 rgba(255,130,110,0.20), inset 0 -1px 0 var(--shadow-soft-mid);
   }
   50% {
     box-shadow: 0 0 30px rgba(200,60,43,0.84), 0 0 60px var(--vermilion-bright-soft),
-                inset 0 1px 0 rgba(255,130,110,0.38), inset 0 -1px 0 var(--overlay-soft-mid);
+                inset 0 1px 0 rgba(255,130,110,0.38), inset 0 -1px 0 var(--shadow-soft-mid);
   }
 }
 
@@ -73,7 +73,7 @@
 
 @keyframes flashpulse {
   0%   { text-shadow: var(--hero-num-shadow); }
-  50%  { text-shadow: 0 0 60px var(--vermilion-bright-strong), 0 0 100px var(--gold-bright-mid), 0 2px 0 var(--overlay-mid); }
+  50%  { text-shadow: 0 0 60px var(--vermilion-bright-strong), 0 0 100px var(--gold-bright-mid), 0 2px 0 var(--shadow-mid); }
   100% { text-shadow: var(--hero-num-shadow); }
 }
 

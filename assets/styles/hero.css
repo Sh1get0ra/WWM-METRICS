@@ -345,7 +345,7 @@
   font-weight: var(--fw-extra);
   letter-spacing: .18em;
   color: var(--c-luopan-center-label-fg);
-  filter: drop-shadow(0 1px 1px var(--overlay-mid-2));
+  filter: drop-shadow(0 1px 1px var(--shadow-mid-2));
 }
 
 /* S2-g co-locate (T): light#93 L773 */

@@ -31,7 +31,7 @@
   display: flex; flex-direction: column;
   box-shadow:
     inset 0 1px 0 var(--gold-bright-faint),
-    0 1px 2px var(--overlay-soft);
+    0 1px 2px var(--shadow-soft);
 }
 
 .wwm-analysis-card::before {
@@ -531,7 +531,7 @@
 .wwm-share-url {
   width: 100%; min-height: 60px; box-sizing: border-box;
   font-family: var(--f-latin); font-size: var(--text-sm);
-  background: var(--overlay-soft-mid); color: var(--text-sumi-fg);
+  background: var(--shadow-soft-mid); color: var(--text-sumi-fg);
   border: 1px solid var(--ink-2); border-radius: 4px;
   padding: var(--space-2) var(--space-2-5); resize: vertical;
   word-break: break-all;

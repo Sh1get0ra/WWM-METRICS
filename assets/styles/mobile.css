@@ -38,7 +38,7 @@
 /* drawer 本体 CSS (mobile時 表示、 hidden属性 解除 + slide-in アニメ) */
 .wwm-mobile-drawer-backdrop {
   position: fixed; inset: 0;
-  background: var(--overlay-mid);
+  background: var(--shadow-mid);
   z-index: 9998;
   opacity: 0; transition: opacity 0.25s ease;
 }
@@ -294,7 +294,7 @@
   .wwm-mobile-stat-fab-avatar[src]:not([src=""]) + .wwm-mobile-stat-fab-fallback { display: none; }
   .wwm-mobile-stat-overlay-backdrop {
     position: fixed; inset: 0;
-    background: var(--overlay-mid-2);
+    background: var(--shadow-mid-2);
     z-index: 1200;
   }
   .wwm-mobile-stat-overlay-backdrop[hidden] { display: none; }

@@ -85,7 +85,7 @@ html.wwm-view-sidebar .wwm-sb-section-title {
 .wwm-overlay-ctrl {
   position: fixed; top: 8px; right: 8px;
   z-index: var(--z-tooltip);
-  background: var(--overlay-heavy);
+  background: var(--shadow-heavy);
   border: 1px solid var(--gold-deep);
   border-radius: 3px;
   padding: var(--space-1-5) var(--space-2-5);

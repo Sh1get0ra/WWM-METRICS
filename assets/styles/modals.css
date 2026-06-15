@@ -32,7 +32,7 @@
   border-left: 3px solid var(--gold);
   box-shadow:
     inset 0 1px 0 var(--gold-bright-faint),
-    0 12px 40px var(--overlay-heavy);
+    0 12px 40px var(--shadow-heavy);
 }
 /* lang picker (app.js _showLangPicker — 旧 inline style から class 化 2026-06-05) */
 .wwm-modal.wwm-lang-picker {
@@ -593,7 +593,7 @@
   color: #ffffff !important;
   border-color: rgba(255,255,255,0.65);
   font-weight: 700;
-  text-shadow: 0 0 4px var(--overlay-mid-2), 0 1px 0 var(--overlay-soft-mid);
+  text-shadow: 0 0 4px var(--shadow-mid-2), 0 1px 0 var(--shadow-soft-mid);
   background-color: hsl(0, 80%, 55%);
   box-shadow: 0 0 9px hsla(0, 90%, 60%, 0.55), inset 0 1px 0 var(--hover-mid);
   animation: cmp-ratio-rainbow 3.5s linear infinite;
@@ -1058,7 +1058,7 @@
   height: 22px;
   background: linear-gradient(180deg, var(--brown-4) 0%, var(--brown-6) 20%, var(--accent) 50%, var(--brown-6) 80%, var(--brown-4) 100%);
   border-radius: 4px;
-  box-shadow: 0 0 0 1px var(--overlay-mid-2), inset 0 0 8px rgba(0,0,0,.35), 0 6px 14px var(--overlay-soft-2);
+  box-shadow: 0 0 0 1px var(--shadow-mid-2), inset 0 0 8px rgba(0,0,0,.35), 0 6px 14px var(--shadow-soft-2);
   position: relative;
 }
 .wwm-note-rod::before, .wwm-note-rod::after {
@@ -1068,7 +1068,7 @@
   width: 30px; height: 30px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, var(--chart-crit) 0%, #c8932e 40%, var(--brown-5) 100%);
-  box-shadow: 0 2px 6px var(--overlay-heavy), inset 0 0 4px var(--overlay-soft-mid);
+  box-shadow: 0 2px 6px var(--shadow-heavy), inset 0 0 4px var(--shadow-soft-mid);
   border: 1px solid #3a2210;
 }
 .wwm-note-rod::before { left: -10px; }
@@ -1130,7 +1130,7 @@
   font-family: var(--f-display);
   font-size: var(--text-lg); font-weight: 900;
   border-radius: 3px;
-  box-shadow: 0 0 0 1px #5a1208, 1px 1px 0 var(--overlay-soft);
+  box-shadow: 0 0 0 1px #5a1208, 1px 1px 0 var(--shadow-soft);
   transform: rotate(-3deg);
 }
 .wwm-note-header-actions {
@@ -1150,7 +1150,7 @@
   cursor: pointer;
   text-decoration: none;
   display: inline-flex; align-items: center; gap: 5px;
-  box-shadow: inset 0 1px 0 rgba(255,200,150,.3), 0 2px 6px var(--overlay-soft-mid);
+  box-shadow: inset 0 1px 0 rgba(255,200,150,.3), 0 2px 6px var(--shadow-soft-mid);
   transition: filter .15s, transform .15s;
 }
 .wwm-note-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }

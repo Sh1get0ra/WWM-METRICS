@@ -116,7 +116,7 @@ html.wwm-view-sidebar .wwm-rail-in {
     padding: var(--space-2-5) var(--space-3);
     background: var(--bg-raised);
     border: 1px solid var(--gold-deep);
-    box-shadow: 0 6px 14px var(--overlay-mid);
+    box-shadow: 0 6px 14px var(--shadow-mid);
   }
 }
 
