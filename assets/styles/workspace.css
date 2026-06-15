@@ -1222,12 +1222,12 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 .wwm-ws-paper .wwm-gear-grid .wwm-equip-slot,
 .wwm-ws-paper .wwm-xinfa-slot {
   position: relative;
-  /* 兄貴指示 2026-06-15 — sumi gap 撤去で札高縮約 (aspect 150/240 → 150/220) */
-  aspect-ratio: 150 / 220;
+  /* 兄貴指示 2026-06-15 — 札本体縦 = aspect 150/200 (札高 ≈ 150.7) */
+  aspect-ratio: 150 / 200;
   width: 100%;
   max-width: 113px;
   height: auto;
-  min-height: 150px;
+  min-height: 140px;
   /* 兄貴指示 2026-06-15 — 木目調 (turbulence + 茶墨 gradient + knot + highlight) 廃止 → sumi-2 単色。
      厚み box-shadow 多段 + 外影 = 維持 (札らしさ担保) */
   background: var(--sumi-2);
@@ -1315,7 +1315,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   display: none;
 }
 /* アイコン枠 = paint 上半分に独立した 4 辺 border 矩形 (Excel paint 矩形)。
-   bottom:38 = score 枠 28 + 余白 5 + paint 露出帯 5 = アイコン枠と score 枠の間に 5px paint 露出 */
+   兄貴指示 2026-06-15 — bottom:38 で score 枠と 5px 露出帯 (パネル縦圧縮済) */
 .wwm-ws-paper .plank-paint::before {
   content: "";
   position: absolute;
@@ -1381,30 +1381,29 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   background-position: center;
 }
 
-/* アイコン img wrap (公式 png を filter 着色 silhouette) — base 75×75 */
+/* アイコン img wrap = アイコン枠 (paint::before) 内に固定 (兄貴指示 2026-06-15 — img が枠外に出ない)。
+   paint::before rect = 札本体絶対座標 top:13 left:14 right:14 bottom:46。 base = 枠内全域。
+   装備/心法 = base 継承 + transform 等で位置調整 */
 .wwm-ws-paper .plank-icon-wrap {
   position: absolute;
-  top: 27px; left: 50%;
-  transform: translateX(-50%);
-  width: 75px;
-  height: 75px;
+  top: 13px; left: 14px; right: 14px; bottom: 46px;
+  width: auto; height: auto;
+  transform: none;
   z-index: 3;
   display: flex; align-items: center; justify-content: center;
   pointer-events: none;
+  overflow: hidden;
 }
-/* 装備 = base 150% (75×1.5 = 113)、 top 15 (paint 内中央寄せ補正、 兄貴指示 2026-06-13) */
-.wwm-ws-paper .wwm-equip-slot .plank-icon-wrap {
-  top: 15px;
-  width: 113px;
-  height: 113px;
-}
-/* 心法 = base 120% (75×1.2 = 90) */
+/* 装備 / 心法 override = base 継承 (rect 共通)。
+   width/height は wrap の rect で自動 (paint::before と同 85×91)。 img は wrap 内 object-fit で枠内 fit */
+.wwm-ws-paper .wwm-equip-slot .plank-icon-wrap,
 .wwm-ws-paper .wwm-xinfa-slot .plank-icon-wrap {
-  width: 90px;
-  height: 90px;
+  top: 13px; left: 14px; right: 14px; bottom: 46px;
+  width: auto; height: auto;
 }
+/* 心法 = base 150% (兄貴指示 2026-06-15)。 装備は override で 170% */
 .wwm-ws-paper .plank-icon-wrap img {
-  width: 100%; height: 100%;
+  width: 150%; height: 150%;
   object-fit: contain;
   /* 墨化 第4版 (2026-06-14、 兄貴指示): 真黒 → 札本体茶墨 (#2a2218 / wood-deep) 寄りへ統一。
      brightness(0) で真黒化 → invert(0.15) で暗グレー → sepia(0.85) で茶基調 →
@@ -1414,6 +1413,14 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   opacity: 0.92;
   /* hover 朱化グラデ用 transition (2026-06-14、 兄貴指示) */
   transition: filter 0.25s ease, opacity 0.25s ease;
+}
+/* 装備 = 170% (兄貴指示 2026-06-15、 心法は base 150% 維持) */
+.wwm-ws-paper .wwm-gear-grid .wwm-equip-slot .plank-icon-wrap img {
+  width: 170%; height: 170%;
+}
+/* 武庫 = 130% (兄貴指示 2026-06-15) */
+.wwm-ws-paper .wwm-arsenal-slot .plank-icon-wrap img {
+  width: 130%; height: 130%;
 }
 /* hover = 墨 → 朱 (vermilion 風) グラデ切替 (2026-06-14、 兄貴指示)。
    第3版: まだオレンジ → 更に朱寄り。 hue-rotate 340→325deg / saturate 5→4 で黄味抜き赤側へ */
