@@ -156,9 +156,9 @@ html.wwm-shared-build-mode #importBtn {
 
 .preset-save:hover { background: rgba(201,164,90,0.16); color: var(--text-kami-gold); border-color: var(--text-kami-gold); }
 
-.preset-load { border-color: var(--c-preset-load-border); color: var(--jade-bright); }
+.preset-load { border-color: var(--text-kami-dim); color: var(--text-kami-fg); }
 
-.preset-load:hover:not(:disabled) { background: rgba(168,212,180,0.12); color: var(--jade-bright); border-color: var(--jade-bright); }
+.preset-load:hover:not(:disabled) { background: rgba(60,46,30,0.08); color: var(--text-kami-fg); border-color: var(--text-kami-fg); }
 
 .preset-del  { border-color: var(--vermilion-strong); color: var(--text-kami-vermilion); padding: 3px 6px; }
 
