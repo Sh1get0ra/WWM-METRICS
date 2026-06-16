@@ -16,13 +16,8 @@
      (modal/card 上層 2 段 gradient の上下色)。 紙面 rescope = workspace.css。 */
   --bg-overlay-top:    rgba(26,20,16,0.7);
   --bg-overlay-bottom: rgba(15,12,14,0.85);
-  --rail-grad:   linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.5));
+  /* --rail-grad / --input-text / --header-grad / --hero-grad / --hero-num = callsite 0 dead 削除 (R8) */
   --input-bg:    rgba(0,0,0,0.5);
-  --input-text:  var(--gold-bright);
-  --header-grad: linear-gradient(180deg, rgba(26,20,16,0.85), rgba(15,12,14,0.85));
-  --hero-grad:   radial-gradient(ellipse 70% 100% at 0% 50%, var(--vermilion-tint), transparent 60%),
-                 linear-gradient(180deg, rgba(26,20,16,0.9), rgba(15,12,14,0.95));
-  --hero-num:    var(--gold-bright);
   --hero-num-shadow: 0 0 30px rgba(240,210,138,0.25), 0 2px 0 rgba(0,0,0,0.5);
   --donut-track: rgba(232, 215, 180, 0.06);
 
@@ -47,7 +42,6 @@
   --vermilion-mid-2:       rgba(200,60,43,0.35);
   --vermilion-mid-strong:  rgba(200,60,43,0.40);
   --vermilion-strong:      rgba(200,60,43,0.55);
-  --vermilion-bright-trace:rgba(232,81,58,0.15);
   --vermilion-bright-tint: rgba(232,81,58,0.18);
   --vermilion-bright-soft: rgba(232,81,58,0.25);
   --vermilion-bright-soft-mid: rgba(232,81,58,0.40);
@@ -72,7 +66,6 @@
   --gold-bright-soft:  rgba(240,210,138,0.25);
   --gold-bright-mid-2: rgba(240,210,138,0.40);
   --gold-bright-mid:   rgba(240,210,138,0.50);
-  --gold-bright-strong:rgba(240,210,138,0.70);
   /* overlay (暗/明オーバーレイ) */
   --shadow-trace:     rgba(0,0,0,0.15);
   --overlay-tint:      rgba(0,0,0,0.25);
@@ -161,26 +154,7 @@
   --text-2xl:   28px;  /* breakdown数値 */
   --text-hero:  92px;  /* EXPECTED ヒーロー */
 
-  /* ════════════════════════════════════════════════════════════════
-     Text color tokens — 6 token 集約 (2026-06-15 兄貴方針確定)
-     ────────────────────────────────────────────────────────────────
-     構造: 背面 (墨/紙) × 系 (黒/金/朱) = 6 token で全 text color 網羅
-     dim/mute 階調は廃止 (強調 = font-weight bold で表現、 色は base のまま)。
-     Phase 1 (この commit) = 新 token 定義のみ。 旧 token (--paper / --gold-bright
-     等) は keep。 Phase 2 で各 file 順次置換、 Phase 3 で旧 token 物理削除。
-     値は現状代表色から引いた (--paper #ede4d0 / --gold-bright #f0d28a /
-     --vermilion-bright #e85040 / --kami-ink #3d2e1f / --gold-deep #c9a45a /
-     --vermilion #c83c2b) — Phase 2 着手後に視覚調整余地あり */
-  /* 墨面 (背面 = 墨) text */
-  --text-sumi-fg:        #ede4d0;  /* 主要 text (現 --paper 系) */
-  --text-sumi-gold:      #f0d28a;  /* 金強調 (現 --gold-bright 系) */
-  --text-sumi-vermilion: #e85040;  /* 朱警告 (現 --vermilion-bright 系) */
-  --text-sumi-dim:       #9c8a6a;  /* 弱階調 (現 --bone-dim、 NEXT 値色) — 2026-06-15 兄貴方針追加: 完全廃止せず 1 token 残し */
-  /* 紙面 (背面 = 紙) text */
-  --text-kami-fg:        #3d2e1f;  /* 主要 text (現 --kami-ink 系、 焦茶) */
-  --text-kami-gold:      #6e5414;  /* 金強調 (紙地 #f2ead4 で contrast ≈7.5:1 AA、 旧 #c9a45a は 2.1:1 不可、 [[font-token-policy]] D7 で暗金化 2026-06-15) */
-  --text-kami-vermilion: #c83c2b;  /* 朱警告 (現 --vermilion 系、 紙上で読める朱) */
-  --text-kami-dim:       #7a6850;  /* 弱階調 (紙上薄め焦茶) — 2026-06-15 兄貴 OK 仮値、 実機調整余地 */
+  /* Text color tokens = R3.5 で reframe sprint の --sumi-fg/--kami-fg/--gold-bright/--gold-paper/--vermilion(-bright)/--sumi-fg-dim/--kami-fg-dim に集約済 (2026-06-16)。 旧 --text-*-* 群は物理削除。 */
 
   /* Font weight scale */
   --fw-normal:   400;
@@ -502,31 +476,19 @@
   /* B1. Surface = R2 で --sumi-0/1/3 に集約済 (旧 --bg-canvas/base/raised 廃止)。
      --bg-board は callsite 0 件 dead = 廃止。 */
 
-  /* B2. Shade/Overlay — 透過陰影 scale (zebra/hover/row mute 等) */
-  --shade-trace:  rgba(0,0,0,0.05);
+  /* B2. Shade/Overlay scale */
   --shade-soft:   rgba(0,0,0,0.15);
   --shade-mid:    rgba(0,0,0,0.30);
   --shade-strong: rgba(0,0,0,0.50);
-  --shade-heavy:  rgba(0,0,0,0.70);
-
-  /* B3. State — hover/active/selected (全 component 共通) */
-  --bg-hover:    var(--gold-bright-faint);         /* 墨面 hover = 金薄 */
-  --bg-active:   var(--vermilion-soft);            /* active = 朱薄 */
-  --bg-selected: var(--accent-faint);              /* 選択中 = gold accent 薄 */
-
-  /* B4. Accent — 強調 bg (tier/banner)
-     tier chip/hero の linear-gradient は両 theme 共通値 = 紙でも rescope 不要 */
+  /* B3 State (--bg-hover/active/selected) = callsite 0 で R8 dead sweep 削除済。 必要時 R7 component token 全廃 sprint で再設計 */
+  /* B4. Accent — 強調 bg (tier)、 banner 系統合 (--bg-vermilion-banner/--bg-gold-banner) は callsite 0 dead 削除済 */
   --bg-tier-ss: linear-gradient(135deg, rgba(180,40,28,.48) 0%, rgba(100,20,14,.38) 50%, rgba(180,40,28,.48) 100%);
   --bg-tier-s:  linear-gradient(135deg, rgba(138,31,23,.42) 0%, rgba(60,15,10,.32) 50%, rgba(138,31,23,.42) 100%);
   --bg-tier-a:  linear-gradient(135deg, rgba(45,90,58,.42) 0%, rgba(20,40,28,.32) 50%, rgba(45,90,58,.42) 100%);
   --bg-tier-b:  linear-gradient(135deg, rgba(122,90,32,.38) 0%, rgba(50,38,16,.3) 50%, rgba(122,90,32,.38) 100%);
   --bg-tier-c:  linear-gradient(135deg, rgba(60,50,40,.3) 0%, rgba(25,20,16,.25) 50%, rgba(60,50,40,.3) 100%);
-  --bg-tier-badge: linear-gradient(135deg, rgba(60,40,30,.45) 0%, rgba(30,20,15,.35) 50%, rgba(60,40,30,.45) 100%);
-  --bg-vermilion-banner: var(--vermilion-soft);    /* shared/score-update/note-cl 統合用 */
-  --bg-gold-banner:      var(--gold-bright-faint); /* 将来の金 banner 用 */
 
-  /* B5. Container — 特殊用途 */
-  --bg-input:           var(--input-bg);                          /* input/select 地 */
+  /* B5. Container — 特殊用途 (--bg-input = callsite 0 dead 削除済、 --input-bg が真実源) */
   --bg-rail:            linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.25) 60%, rgba(40,30,20,0.45)); /* 装備/心法 rail 縦 gradient (旧 --c-rail-bg 墨値、 --rail-grad 黒系は dead) */
   --bg-toast:           var(--sumi-1);                           /* toast notification */
   --bg-mobile-drawer:   linear-gradient(180deg, var(--sumi-3), rgba(15,12,14,0.98)); /* drawer = bg-raised 起点 (overlay と異質、 別 token) */
