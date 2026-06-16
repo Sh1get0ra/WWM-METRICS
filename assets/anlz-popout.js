@@ -32,6 +32,7 @@
   function buildShell() {
     var T = window.T || {};
     var tipC = _esc(T.anlzPopoutCloseTip || '閉じる');
+    var tipP = _esc(T.anlzPopoutPinTip || '最前面化 (OS 級) ↔ 通常表示 切替');
     var labelRank = _esc(T.anlzTabRank || '期待値');
     var labelOpt = _esc(T.anlzTabOpt || '最適化');
     return ''
@@ -42,6 +43,7 @@
       +     '<span class="ja">格析</span><span class="en">ANALYSIS</span><span class="seal">析</span>'
       +   '</div>'
       +   '<div class="wwm-anlz-floating-controls">'
+      +     '<button type="button" data-act="pin" title="' + tipP + '">📌</button>'
       +     '<button type="button" data-act="close" title="' + tipC + '">×</button>'
       +   '</div>'
       + '</header>'
@@ -102,6 +104,47 @@
     root.querySelectorAll('[data-act="close"]').forEach(function (b) {
       b.addEventListener('click', function () { close(); });
     });
+    // 最前面化 / 通常 切替 (= PiP モード ↔ floating モード 切替)。 ブラウザ仕様で
+    // PiP window は OS 級常時最前面固定、 floating は HTML div 内 (= ブラウザ tab 内のみ)。
+    // PiP の always-on-top を JS から動的 OFF にする手段なし、 唯一の切替手段はモード再 mount
+    root.querySelectorAll('[data-act="pin"]').forEach(function (b) {
+      b.addEventListener('click', function () { togglePin(); });
+    });
+  }
+
+  async function togglePin() {
+    var st = loadState();
+    if (pipWin) {
+      // PiP → floating
+      // ★ pipWin.close() より先にノード救出 (close 後だと PiP document destroy で .wwm-anlz も消滅)。
+      //   adoptNode で親 document に取り込み → host append で再装着
+      if (anlzNode) {
+        try { document.adoptNode(anlzNode); } catch (e) {}
+        var host = document.getElementById('wsAnlz');
+        if (host) host.appendChild(anlzNode);
+        anlzNode = null;
+      }
+      try { pipWin.close(); } catch (e) {}
+      pipWin = null;
+      document.body.removeAttribute('data-anlz-popout');
+      saveState({ mode: 'closed' });
+      mountFloating();
+    } else if (floatEl) {
+      // floating → PiP (Document PiP 利用可なら)
+      if (!('documentPictureInPicture' in window)) return;
+      // floating からノード救出 (一旦 host に戻す → PiP mount 内 detachAnlz で再取得)
+      reattachAnlz();
+      document.body.removeAttribute('data-anlz-popout');
+      if (floatEl) { floatEl.remove(); floatEl = null; }
+      saveState({ mode: 'closed' });
+      try {
+        var win = await documentPictureInPicture.requestWindow({ width: st.w || 540, height: st.h || 620 });
+        mountPip(win);
+      } catch (e) {
+        // PiP 失敗 → floating で復帰
+        mountFloating();
+      }
+    }
   }
 
   function bindFloatingDrag(root, host) {
@@ -190,7 +233,12 @@
     document.body.setAttribute('data-anlz-popout', '1');
     bindSubtabs(root); // 親 document の button を経由 = state 共有
     bindControls(root);
-    win.addEventListener('pagehide', function () { close(); });
+    win.addEventListener('pagehide', function () {
+      // togglePin (PiP → floating) で pipWin.close() 由来の pagehide 時、 floatEl 既に作成済
+      // = 親 tab の floating UI を維持するため close() スキップ (2026-06-16)
+      if (floatEl) return;
+      close();
+    });
     // size 復元観測 (OS resize → save)
     if (win.ResizeObserver) {
       var ro = new win.ResizeObserver(function () {
