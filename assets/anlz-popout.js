@@ -167,11 +167,13 @@
       dragState = null;
       document.body.style.userSelect = '';
       var rect = host.getBoundingClientRect();
-      // viewport 外 救出 (2026-06-16): 50px buffer 未満なら default 位置に animate で戻す
+      // viewport 外 救出 (2026-06-16): header (drag handle) が viewport 内に居るか基準。
+      // header 高 ≒ 40px。 上方向 飛ばし (rect.top < 0) も確実 rescue
       var vw = window.innerWidth;
       var vh = window.innerHeight;
-      var visible = (rect.left + rect.width > 50) && (rect.left < vw - 50) && (rect.top + rect.height > 50) && (rect.top < vh - 50);
-      if (!visible) {
+      var headerVisible = rect.top >= 0 && rect.top <= vh - 40
+                       && rect.left + rect.width > 100 && rect.left < vw - 100;
+      if (!headerVisible) {
         host.style.transition = 'left 0.3s ease, top 0.3s ease, right 0.3s ease';
         host.style.left = 'auto';
         host.style.right = '30px';
