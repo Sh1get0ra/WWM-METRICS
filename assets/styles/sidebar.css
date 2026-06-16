@@ -73,7 +73,7 @@
 /* SS — gold shimmer sweep + red pulse glow */
 .tier-SS {
   color: var(--c-tier-chip-ss-fg);
-  background: var(--c-tier-chip-ss-bg);
+  background: var(--bg-tier-chip-ss);
   border-color: var(--c-tier-chip-ss-border);
   text-shadow: var(--c-tier-chip-ss-text-shadow);
   box-shadow: var(--c-tier-chip-ss-shadow);
@@ -93,7 +93,7 @@
 /* S — vermilion pulse glow (same style as SS, no shimmer) */
 .tier-S {
   color: var(--c-tier-chip-s-fg);
-  background: var(--c-tier-chip-s-bg);
+  background: var(--bg-tier-chip-s);
   border-color: var(--c-tier-chip-s-border);
   text-shadow: var(--c-tier-chip-s-text-shadow);
   box-shadow: var(--c-tier-chip-s-shadow);
@@ -103,7 +103,7 @@
 /* A — jade glow */
 .tier-A {
   color: var(--text-sumi-gold);
-  background: var(--c-tier-chip-a-bg);
+  background: var(--bg-tier-chip-a);
   border-color: var(--c-tier-chip-a-border);
   text-shadow: var(--c-tier-chip-a-text-shadow);
   box-shadow: var(--c-tier-chip-a-shadow);
@@ -112,7 +112,7 @@
 /* B — bone warm glow */
 .tier-B {
   color: var(--c-tier-chip-b-fg);
-  background: var(--c-tier-chip-b-bg);
+  background: var(--bg-tier-chip-b);
   border-color: var(--c-tier-chip-b-border);
   text-shadow: var(--c-tier-chip-b-text-shadow);
   box-shadow: var(--c-tier-chip-b-shadow);
@@ -121,7 +121,7 @@
 /* C — dim */
 .tier-C {
   color: var(--text-sumi-dim);
-  background: var(--c-tier-chip-c-bg);
+  background: var(--bg-tier-chip-c);
   border-color: var(--c-tier-chip-c-border);
   box-shadow: var(--c-tier-C-shadow);
   text-shadow: var(--c-tier-C-text-shadow);

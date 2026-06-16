@@ -251,7 +251,7 @@
   overflow: hidden;
   border-radius: 1px;
   border: 1px solid;
-  background: var(--c-tier-badge-hero-bg);
+  background: var(--bg-tier-badge-hero);
   color: var(--c-tier-badge-hero-fg);
   border-color: var(--c-tier-badge-hero-border);
 }
