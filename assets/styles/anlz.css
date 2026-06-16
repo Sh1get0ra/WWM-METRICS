@@ -789,7 +789,7 @@ html[lang="en"] .wwm-cmp-title-en {
 
 /* critique P1 (2026-06-07): vermilion-bright on 朱tint 3.83:1 fail → lang-active token (朱影地金文字) */
 .wwm-mobile-drawer-langs .lang-btn.active {
-  background: var(--c-lang-active-bg);
+  background: var(--bg-lang-active);
   border-color: var(--vermilion);
   color: var(--c-lang-active-fg);
 }

@@ -181,7 +181,7 @@
 .wwm-xinfa-cell > .wwm-xinfa-tier {
   grid-area: tier;
   padding: var(--space-half) var(--space-1-5);
-  background: var(--c-cmp-stat-select-bg); color: inherit;
+  background: var(--bg-cmp-stat-select); color: inherit;
   border: 1px solid #444; border-radius: 4px;
   font-size: var(--text-12);
   border-color: var(--c-xinfa-cell--xinfa-tier-border);

@@ -124,18 +124,18 @@
 }
 .wwm-btn-primary:hover { opacity: 0.85; }
 .wwm-btn-secondary {
-  background: var(--c-btn-secondary-bg);
+  background: var(--bg-btn-secondary);
   color: var(--c-btn-secondary-fg);
   border: 1px solid rgba(255,255,255,0.3);
   border-color: var(--c-btn-secondary-border);
 }
-.wwm-btn-secondary:hover { background: var(--c-btn-secondary-hover-bg); }
+.wwm-btn-secondary:hover { background: var(--bg-btn-secondary-hover); }
 .wwm-list { margin: 0; padding-left: 18px; }
 .wwm-list li { margin: var(--space-half) 0; }
 .wwm-muted { opacity: 0.6; font-size: var(--text-12); }
 .wwm-last-import {
   margin-top: var(--space-4); padding: var(--space-2-5);
-  background: var(--c-last-import-bg);
+  background: var(--bg-last-import);
   border-radius: 6px;
   border-left: 3px solid var(--accent);
 }
@@ -879,7 +879,7 @@
 }
 .wwm-cmp-kongfu-select {
   width: 100%;
-  background: var(--c-cmp-stat-select-bg);
+  background: var(--bg-cmp-stat-select);
   border: 1px solid var(--accent);
   border-radius: 4px;
   color: var(--c-cmp-kongfu-select-fg);
@@ -904,7 +904,7 @@
 }
 .wwm-cmp-set-select {
   width: 100%;
-  background: var(--c-cmp-stat-select-bg);
+  background: var(--bg-cmp-stat-select);
   border: 1px solid var(--liupai-guyun);
   border-radius: 4px;
   color: var(--c-cmp-set-select-fg);
@@ -959,7 +959,7 @@
   grid-template-columns: 1fr 20px 110px;
 }
 .wwm-cmp-stat-select {
-  background: var(--c-cmp-stat-select-bg);
+  background: var(--bg-cmp-stat-select);
   border: 1px solid #444;
   border-radius: 4px;
   padding: var(--space-half) var(--space-1);
@@ -988,7 +988,7 @@
 }
 .wwm-num-input {
   width: 60px; padding: var(--space-half) var(--space-1-5);
-  background: var(--c-cmp-stat-select-bg); color: inherit;
+  background: var(--bg-cmp-stat-select); color: inherit;
   border: 1px solid #444; border-radius: 4px;
   font-size: var(--text-md); text-align: right;
   border-color: var(--c-num-input-border);
@@ -1261,7 +1261,7 @@
 .wwm-note-cl-items li { position: relative; margin-bottom: 3px; padding-left: var(--space-1); }
 .wwm-note-cl-items li::before { content: '・'; position: absolute; left: -14px; color: var(--vermilion-note); font-weight: 900; }
 .wwm-note-cl-items li.wwm-note-cl-featured {
-  background: var(--c-note-cl-featured-bg);
+  background: var(--bg-note-cl-featured);
   border-left: 3px solid var(--vermilion);
   padding: var(--space-2-5) var(--space-3);
   margin: 8px 0 12px -18px;
@@ -1349,30 +1349,30 @@
 
 /* S2-g co-locate (T): light#117 L943 */
 .wwm-step2 .wwm-num-input {
-  background: var(--c-step2--num-input-bg);
+  background: var(--bg-step2--num-input);
 }
 
 /* S2-g co-locate (T): light#120 L957 + dark#4 */
 .wwm-step2 .wwm-arsenal-tier {
   border: var(--c-step2--arsenal-tier-border);
-  background: var(--c-step2--arsenal-tier-bg);
+  background: var(--bg-step2--arsenal-tier);
 }
 
 /* S2-g co-locate (T): light#42 L548 */
 .wwm-cmp-current .wwm-cmp-row {
-  background: var(--c-cmp-current--cmp-row-bg);
+  background: var(--bg-cmp-current--cmp-row);
 }
 
 /* S2-g co-locate (T): light#45 L560 */
 .wwm-cmp-current .wwm-cmp-kongfu-header {
   color: var(--c-cmp-current--cmp-kongfu-header-fg);
-  background: var(--c-cmp-current--cmp-kongfu-header-bg);
+  background: var(--bg-cmp-current--cmp-kongfu-header);
 }
 
 /* S2-g co-locate (T): light#45 L560 */
 .wwm-cmp-current .wwm-cmp-set-header {
   color: var(--c-cmp-current--cmp-set-header-fg);
-  background: var(--c-cmp-current--cmp-set-header-bg);
+  background: var(--bg-cmp-current--cmp-set-header);
 }
 
 /* S2-g co-locate (T): light#52 L605 */
@@ -2356,7 +2356,7 @@
   min-height: 24px;
   font-size: 13px;
   line-height: 1;
-  background: var(--c-btn-secondary-bg); /* themed (dark=transparent / light=shade) */
+  background: var(--bg-btn-secondary); /* themed (dark=transparent / light=shade) */
   color: inherit; /* ? の文字色 — UA default 黒だと墨 theme で不可視 (2026-06-08 兄貴指摘) */
   border: 1px solid var(--gold-deep);
   border-radius: 2px;
@@ -2376,7 +2376,7 @@
   margin-left: 4px;
   font-size: 11px;
   font-family: var(--f-display);
-  background: var(--c-btn-secondary-bg);
+  background: var(--bg-btn-secondary);
   color: inherit;
   border: 1px solid var(--gold-deep);
   border-radius: 2px;

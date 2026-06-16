@@ -227,7 +227,7 @@ html[lang="ko"] .top-controls-2row .icon-btn {
    朱影地金文字 (SS badge 語彙、 6.2:1)。 token = theme constant で light 側 override 不要 */
 .lang-btn.active {
   color: var(--c-lang-active-fg);
-  background: var(--c-lang-active-bg);
+  background: var(--bg-lang-active);
   box-shadow: inset 0 -2px 0 var(--c-lang-active-fg);
 }
 
@@ -421,7 +421,7 @@ footer strong { color: var(--c-footer-strong-fg); }
   width: 100%;
   box-sizing: border-box;
   padding: var(--space-2) var(--space-4);
-  background: var(--c-score-update-banner-bg);
+  background: var(--bg-score-update-banner);
   border-bottom: 1px solid var(--vermilion-strong);
   color: var(--c-score-update-banner-fg);
   font-size: var(--text-13, 13px);

@@ -123,14 +123,14 @@
   --c-cmp-set-header-fg: var(--vermilion-deep);
   --c-cmp-set-header-text-shadow: none;
   /* current 列 = 本番 light 実効値 (pages.dev computed 採取 2026-06-12) — 新置と同色系 */
-  --c-cmp-current--cmp-row-bg: var(--shade-soft);
+  --bg-cmp-current--cmp-row: var(--shade-soft);
   --c-cmp-current--cmp-kongfu-header-fg: var(--text-kami-gold); /* D7 2026-06-15: brown-1 → text-kami-gold 統一 (左右色揃え) */
-  --c-cmp-current--cmp-kongfu-header-bg: var(--gold-mid);
+  --bg-cmp-current--cmp-kongfu-header: var(--gold-mid);
   --c-cmp-current--cmp-set-header-fg: var(--c-cmp-set-header-fg);
-  --c-cmp-current--cmp-set-header-bg: var(--bg-modal-a-set-select);
+  --bg-cmp-current--cmp-set-header: var(--bg-modal-a-set-select);
   --c-cmp-preview-zero-fg: var(--bone-dim);
   --c-cmp-lv-select-fg: var(--c-gold-rich);
-  --c-cmp-stat-select-bg: var(--shade-soft);
+  --bg-cmp-stat-select: var(--shade-soft);
   /* bg-icon = 薄墨透かし化 (③ 2026-06-13)。対照 = 0.4 (兄貴 F12 実機確定値 — 装備アイコンは
      線が細く 0.08 では消える) / tool modal (盾/巻物 = ベタ面大) = 0.08 */
   --c-cmp-modal-bg-icon-opacity: 0.4;
@@ -146,12 +146,12 @@
   --c-fg-vermilion-strong:         var(--vermilion-deep);
   --c-sb-notice-fg:                var(--vermilion-deep);
   --c-xinfa-tier-fg:               var(--text-sumi-fg);
-  --c-xinfa-tier-chip-bg:          var(--vermilion-bright-tint);
+  --bg-xinfa-tier-chip:          var(--vermilion-bright-tint);
   --c-xinfa-tier-chip-border:      var(--c-vermilion-deep-mid);
   --c-xinfa-cell--xinfa-tier-border: var(--ink-2);
   --c-cmp-lv-select-fg:            var(--c-gold-rich);
   --c-cmp-lv-select-border:        var(--c-gold-rich);
-  --c-cmp-stat-select-bg:          var(--shade-soft);
+  --bg-cmp-stat-select:          var(--shade-soft);
 
   /* step2 / arsenal */
   --c-step2-section-title-fw:      900;
@@ -159,9 +159,9 @@
   --c-step2--xinfa-cell-border-bot: 1px dashed rgba(120,60,20,0.25);
   --c-step2--xinfa-cell-pad-bot:   var(--space-1);
   --c-step2--muted-opacity:        0.95;
-  --c-step2--num-input-bg:         var(--shine-strong);
+  --bg-step2--num-input:         var(--shine-strong);
   --c-step2--arsenal-tier-border:  1px solid rgba(120,60,20,0.3);
-  --c-step2--arsenal-tier-bg:      rgba(255,240,210,0.4);
+  --bg-step2--arsenal-tier:      rgba(255,240,210,0.4);
 
   /* opt cluster */
   --c-opt-loading-fg:              var(--gold-deep);

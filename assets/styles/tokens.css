@@ -234,7 +234,7 @@
   /* ─── @layer Step 2-c: theme-swap tokens (dark default) ─── */
   --c-brand-en-fg: var(--text-sumi-fg);
   --c-brand-sub-fg: var(--c-fg-gold-label);
-  --c-shared-banner-bg: linear-gradient(90deg, var(--vermilion-soft-2), var(--vermilion-tint));
+  --bg-shared-banner: linear-gradient(90deg, var(--vermilion-soft-2), var(--vermilion-tint));
   --c-footer-logo-opacity: 0.75;
   --bg-preset-bar: var(--bg-overlay-bottom);
   --c-h1-accent-fg: var(--vermilion-bright);
@@ -265,7 +265,7 @@
   --c-cmp-preview-zero-fg: var(--text-sumi-dim);
   --c-cmp-modal-bg-icon-opacity: 0.1;
   --c-modal-bg-icon-opacity: 0.18;
-  --c-xinfa-tier-chip-bg: var(--vermilion-soft);
+  --bg-xinfa-tier-chip: var(--vermilion-soft);
   --c-hero-number-text-shadow: 0 5px 5px var(--shadow-heavy), 0 5px 20px var(--shadow-soft-mid);
   /* hero title (武格指数) shadow — text 用 + ja 玉ねぎ svg 用 filter (drop-shadow chain 同等値) */
   --c-hero-title-text-shadow: 0 5px 5px var(--shadow-heavy), 0 5px 20px var(--shadow-soft-mid);
@@ -276,13 +276,13 @@
   --c-tier-b-hero-shadow: 0 0 8px rgba(122,90,32,.3), inset 0 1px 0 rgba(201,184,138,.18), inset 0 -1px 0 var(--shadow-soft);
   --c-tier-c-hero-shadow: 0 0 4px rgba(90,66,38,.2), inset 0 1px 0 rgba(122,112,96,.15);
   --c-ink-stroke-opacity: .85;
-  --c-last-import-bg: var(--shine-trace);
+  --bg-last-import: var(--shine-trace);
   --c-sb-label-opacity: 0.75;
   --bg-anlz-header-deco: linear-gradient(180deg, transparent 18%, var(--shine-trace) 19%, var(--shine-trace) 20%, transparent 21%), linear-gradient(180deg, transparent 60%, var(--shine-trace) 61%, transparent 62%);
   --c-anlz-bamboo-opacity: 0.10;
   --c-anlz-bg-icon-opacity: 0.28;
-  --c-note-cl-featured-bg: linear-gradient(90deg, var(--vermilion-soft), var(--vermilion-trace));
-  --c-score-update-banner-bg: var(--vermilion-soft);
+  --bg-note-cl-featured: linear-gradient(90deg, var(--vermilion-soft), var(--vermilion-trace));
+  --bg-score-update-banner: var(--vermilion-soft);
   --c-score-update-banner-fg: #ffd9cc;
   --c-mobile-fab-shadow: 0 4px 16px var(--shadow-soft-2), 0 0 12px rgba(212,175,55,0.4);
 
@@ -297,7 +297,7 @@
   --c-anlz-title-text-shadow: 0 0 0.5px rgba(245,232,192,.85), 0 0 1.5px rgba(232,217,184,.55), 0 0 3px rgba(232,217,184,.35), 0.6px 0 1.2px rgba(232,217,184,.3), -0.6px 0 1.2px rgba(232,217,184,.25), 0 0.5px 1.5px rgba(232,217,184,.22);
 
   /* ─── audit/critique 2026-06-07: state contrast tokens (両 theme constant) ─── */
-  --c-lang-active-bg: #8a1f17;       /* 言語 active = 朱影地金文字 (SS badge 語彙)。 literal = theme constant */
+  --bg-lang-active: #8a1f17;       /* 言語 active = 朱影地金文字 (SS badge 語彙)。 literal = theme constant */
   --c-lang-active-fg: #f0d28a;       /* 6.2:1 on vermilion-deep */
 
   /* ─── @layer Step 2-d r2: theme-swap tokens (dark default) ─── */
@@ -338,10 +338,10 @@
   --bg-eff-row-odd: var(--gold-bright-faint);
   --bg-eff-row-hover: var(--gold-bright-faint);
   --c-cmp-lv-select-fg: var(--gold-bright);
-  --c-cmp-stat-select-bg: var(--bg-raised);
-  --c-btn-secondary-bg: transparent;
+  --bg-cmp-stat-select: var(--bg-raised);
+  --bg-btn-secondary: transparent;
   --c-btn-secondary-fg: var(--text, #fff);
-  --c-btn-secondary-hover-bg: var(--shine-soft);
+  --bg-btn-secondary-hover: var(--shine-soft);
   --bg-modal-a-kongfu-select: var(--gold-faint);
   --bg-modal-a-set-select: linear-gradient(90deg, rgba(232,81,58,0.30), transparent);
   --bg-modal-a-stat-select: var(--shadow-soft-mid);
@@ -431,12 +431,12 @@
   --c-equip-section--stat-pct-opacity: 0.65;  /* S2-g equip-section--stat-pct */
   --c-step2-section-title-fw: initial;  /* S2-g step2-section-title */
   --c-step2--muted-opacity: 0.6;  /* S2-g step2--muted */
-  --c-step2--num-input-bg: var(--c-cmp-stat-select-bg);  /* S2-g step2--num-input */
+  --bg-step2--num-input: var(--bg-cmp-stat-select);  /* S2-g step2--num-input */
   --c-step2-section-title-border-bot: var(--accent-mid);  /* S2-g step2-section-title */
   --c-step2--xinfa-cell-border-bot: 1px solid var(--ink-2);  /* S2-g step2--xinfa-cell */
   --c-step2--xinfa-cell-pad-bot: var(--space-2);  /* S2-g step2--xinfa-cell */
   --c-step2--arsenal-tier-border: 1px solid rgba(212,175,55,0.25);  /* S2-g step2--arsenal-tier */
-  --c-step2--arsenal-tier-bg: rgba(40,28,16,0.55);  /* S2-g step2--arsenal-tier */
+  --bg-step2--arsenal-tier: rgba(40,28,16,0.55);  /* S2-g step2--arsenal-tier */
   --c-anlz-title-fg-n2: var(--c-anlz-title-fg);  /* S2-g anlz-title */
   --c-anlz-title-text-shadow-n2: var(--c-anlz-title-text-shadow);  /* S2-g anlz-title */
   --c-anlz-subtitle-fg: var(--gold-deep);  /* S2-g anlz-subtitle */
@@ -450,11 +450,11 @@
   --c-cmp-modal-a-fg: var(--c-modal-fg);
 
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
-  --c-cmp-current--cmp-row-bg: transparent;  /* S2-g cmp-current--cmp-row */
+  --bg-cmp-current--cmp-row: transparent;  /* S2-g cmp-current--cmp-row */
   --c-cmp-current--cmp-kongfu-header-fg: var(--c-modal-a-kongfu-header-fg);  /* S2-g cmp-current--cmp-kongfu-header */
-  --c-cmp-current--cmp-kongfu-header-bg: var(--bg-modal-a-kongfu-header);  /* S2-g cmp-current--cmp-kongfu-header */
+  --bg-cmp-current--cmp-kongfu-header: var(--bg-modal-a-kongfu-header);  /* S2-g cmp-current--cmp-kongfu-header */
   --c-cmp-current--cmp-set-header-fg: var(--c-modal-a-set-fg);  /* S2-g cmp-current--cmp-set-header */
-  --c-cmp-current--cmp-set-header-bg: var(--bg-modal-a-set-select);  /* S2-g cmp-current--cmp-set-header */
+  --bg-cmp-current--cmp-set-header: var(--bg-modal-a-set-select);  /* S2-g cmp-current--cmp-set-header */
   --c-cmp-modal-a--modal-close-fg: initial;  /* S2-g cmp-modal-a--modal-close */
   --c-cmp-modal-a--optionchecked-checked-fg: var(--c-modal-a-option-fg);  /* S2-g cmp-modal-a--optionchecked-checked */
   --c-cmp-lv-select--optionchecked-checked-fg: var(--c-modal-a-fg);  /* S2-g cmp-lv-select--optionchecked-checked */
