@@ -133,5 +133,8 @@ html.wwm-view-sidebar .wwm-sb-section-title {
 
 /* ── OBS view: バナー類 常時非表示 (旧 base.css / modals.css) ─────── */
 html.wwm-view-sidebar .wwm-score-update-banner { display: none; }
+/* shared-build-banner = share.css `html.wwm-shared-build-mode` selector に対し
+   specificity 勝ち (html.x.y > html.x) で !important なし上書き */
+html.wwm-view-sidebar.wwm-shared-build-mode .wwm-shared-build-banner { display: none; }
 
 } /* end @layer obs */

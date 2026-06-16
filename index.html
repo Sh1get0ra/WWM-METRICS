@@ -68,7 +68,7 @@
 <link rel="stylesheet" href="assets/styles/modals.css?v=85">
 <link rel="stylesheet" href="assets/styles/responsive-globals.css?v=3">
 <link rel="stylesheet" href="assets/styles/dark.css?v=2">
-<link rel="stylesheet" href="assets/styles/obs.css?v=7">
+<link rel="stylesheet" href="assets/styles/obs.css?v=8">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DFYB6MKMMY"></script>
 <script>
@@ -449,6 +449,22 @@
 </script>
 </head>
 <body class="wwm-layout-active">
+<!-- banner 3 種 = wwm-app の外 (body 直下、 position: sticky で viewport 上端固定)。 workspace v2 grid 内に置くと sidebar カラム下に押し込まれて崩れる (2026-06-16 修復) -->
+<div id="wwmScoreUpdateBanner" class="wwm-score-update-banner" style="display:none;">
+  <span class="wwm-score-update-icon" aria-hidden="true">⚠</span>
+  <span class="wwm-score-update-msg" data-i18n="scoreUpdateMsg">計算データが更新されました。最新スコアを反映するには再インポートしてください</span>
+  <span class="wwm-score-update-arrow" aria-hidden="true">▶</span>
+  <button class="wwm-score-update-btn" onclick="importData()" data-i18n="scoreUpdateBtn">再インポート</button>
+</div>
+<div id="wwmShareFailBanner" class="wwm-score-update-banner" style="display:none;" role="alert">
+  <span class="wwm-score-update-icon" aria-hidden="true">⚠</span>
+  <span class="wwm-score-update-msg" data-i18n="errSharedBuildLoad">共有ビルドの読込に失敗しました — 現在表示中なのは自分のデータです</span>
+</div>
+<div class="wwm-shared-build-banner" role="status">
+  <span class="wwm-shared-build-icon">👁</span>
+  <span class="wwm-shared-build-text" data-i18n="sharedBuildBanner">閲覧モード: 共有されたビルド (自データは保護中)。 リロード/F5 で自データに戻る</span>
+</div>
+
 <div class="wwm-app" id="wwmApp">
 
   <!-- 上帯 (L の横画) -->
@@ -916,24 +932,7 @@
     <div class="wwm-mobile-stat-overlay-body" id="wwmMobileStatOverlayBody"></div>
   </aside>
 
-  <!-- スコア計算更新バナー: baseline 鮮度切れ (scoreVer 不一致) 時のみ表示。再import促し。OBS view 非表示。 -->
-  <div id="wwmScoreUpdateBanner" class="wwm-score-update-banner" style="display:none;">
-    <span class="wwm-score-update-icon" aria-hidden="true">⚠</span>
-    <span class="wwm-score-update-msg" data-i18n="scoreUpdateMsg">計算データが更新されました。最新スコアを反映するには再インポートしてください</span>
-    <span class="wwm-score-update-arrow" aria-hidden="true">▶</span>
-    <button class="wwm-score-update-btn" onclick="importData()" data-i18n="scoreUpdateBtn">再インポート</button>
-  </div>
-
-  <!-- SHARE 復元失敗バナー: 共有URL decode 失敗時のみ表示 (critique P1 2026-06-07 — 無言失敗で自データを他人buildと誤認する事故の根治)。 OBS view 非表示。 -->
-  <div id="wwmShareFailBanner" class="wwm-score-update-banner" style="display:none;" role="alert">
-    <span class="wwm-score-update-icon" aria-hidden="true">⚠</span>
-    <span class="wwm-score-update-msg" data-i18n="errSharedBuildLoad">共有ビルドの読込に失敗しました — 現在表示中なのは自分のデータです</span>
-  </div>
-
-  <div class="wwm-shared-build-banner" role="status">
-    <span class="wwm-shared-build-icon">👁</span>
-    <span class="wwm-shared-build-text" data-i18n="sharedBuildBanner">閲覧モード: 共有されたビルド (自データは保護中)。 リロード/F5 で自データに戻る</span>
-  </div>
+  <!-- banner 3 種 (score-update / share-fail / shared-build) は <main> 上に移動済 (2026-06-16) -->
 
 <!-- mobile bottom nav (workspace tab の mobile 版 / PC時 hidden) -->
 <nav class="wwm-bottom-nav" role="tablist" aria-label="workspace mobile">
