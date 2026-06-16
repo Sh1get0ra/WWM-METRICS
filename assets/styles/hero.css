@@ -20,7 +20,16 @@
   pointer-events: none;
 }
 
-.wwm-footer { position: relative; overflow: hidden; }
+.wwm-footer {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 4px;
+  column-gap: 8px;
+}
 
 .wwm-footer-logo { height: 18px; vertical-align: middle; margin-right: var(--space-2); opacity: var(--c-footer-logo-opacity); }
 
@@ -29,18 +38,16 @@
 .wwm-footer-x:hover { color: var(--gold-bright); opacity: 1; }
 .wwm-footer-x svg { display: block; }
 
-/* 著作権表記 (ゲーム内 asset 使用のため必須 — カード footer と同文言、2026-06-08 兄貴指示)
-   mobile の height:auto 化は layout.css の footer mobile rule に co-locate (こちらは後勝ちで負ける) */
-.wwm-footer-copy { margin-left: var(--space-3); font-size: 9px; opacity: 0.7; letter-spacing: 0.02em; }
-.wwm-footer-unofficial { margin-left: var(--space-3); font-size: 9px; opacity: 0.7; letter-spacing: 0.02em; }
-/* creator (Created by SHIGETORA + Xicon) を flex で右寄せ。 mobile は block flow なので無効化 */
-.wwm-footer-creator { margin-left: auto; }
-@media (max-width: 480px) {
-  .wwm-footer-creator { margin-left: 0; }
-}
-@media (max-width: 480px) {
-  .wwm-footer-copy { display: block; margin: 2px 0 0; }
-  .wwm-footer-unofficial { display: block; margin: 2px 0 0; }
+/* 著作権表記 (ゲーム内 asset 使用のため必須 — カード footer と同文言、2026-06-08 兄貴指示)。
+   2026-06-16 兄貴指示 — flex-wrap で自然折返: 広 = 1 行 (logo + ①②③ 全横並び)、
+   縮むに従って ③ → ② → ① の順に wrap、 最狭で 4 行。 強制改行 (flex-basis:100%) なし */
+.wwm-footer-unofficial,
+.wwm-footer-copy,
+.wwm-footer-creator {
+  margin: 0;
+  font-size: 9px;
+  opacity: 0.7;
+  letter-spacing: 0.02em;
 }
 
 /* シェブロン (削除) */
