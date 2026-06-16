@@ -217,7 +217,6 @@
    */
   --c-surf-warm-1:        var(--bg-overlay-top);    /* warm card/modal bg gradient 上 */
   --c-surf-warm-2:        var(--bg-overlay-bottom); /* warm card/modal bg gradient 下 */
-  --c-toast-bg:           var(--bg-base);   /* toast notification bg */
   --c-modal-a-option-bg:  var(--bg-raised); /* compare modal A select option bg */
   --c-rail-bg:            linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.25) 60%, rgba(40,30,20,0.45)); /* 装備/心法 rail 縦 gradient (light override 別値) */
 
@@ -283,7 +282,6 @@
   --c-sb-label-opacity: 0.75;
   --c-anlz-header-after-bg: linear-gradient(180deg, transparent 18%, var(--shine-trace) 19%, var(--shine-trace) 20%, transparent 21%), linear-gradient(180deg, transparent 60%, var(--shine-trace) 61%, transparent 62%);
   --c-anlz-bamboo-opacity: 0.10;
-  --c-anlz-body-after-bg: repeating-linear-gradient(45deg, transparent 0 24px, rgba(212,175,55,.025) 24px 25px), repeating-linear-gradient(-45deg, transparent 0 24px, rgba(0,0,0,.05) 24px 25px);
   --c-anlz-bg-icon-opacity: 0.28;
   --c-note-cl-featured-bg: linear-gradient(90deg, var(--vermilion-soft), var(--vermilion-trace));
   --c-score-update-banner-bg: var(--vermilion-soft);
@@ -540,7 +538,7 @@
   /* B5. Container — 特殊用途 */
   --bg-input:           var(--input-bg);                          /* input/select 地 */
   --bg-rail:            var(--rail-grad);                         /* 左 rail gradient */
-  --bg-toast:           var(--bg-base);                           /* toast (現 --c-toast-bg 同値) */
+  --bg-toast:           var(--bg-base);                           /* toast notification */
   --bg-mobile-overlay:  linear-gradient(180deg, rgba(20,15,12,0.98), rgba(10,8,9,0.98));
   --bg-anlz-decoration: repeating-linear-gradient(45deg, transparent 0 24px, rgba(212,175,55,.025) 24px 25px), repeating-linear-gradient(-45deg, transparent 0 24px, rgba(0,0,0,.05) 24px 25px);
 

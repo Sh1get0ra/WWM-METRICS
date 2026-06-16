@@ -197,7 +197,7 @@
   --c-fg-accent:                   var(--vermilion);
   --c-anlz-shadow:                 0 6px 18px var(--c-anlz-shadow-orange);
   --c-anlz-header-after-bg:        linear-gradient(180deg, transparent 18%, var(--c-ink-line-faint) 19%, var(--c-ink-line-faint) 20%, transparent 21%), linear-gradient(180deg, transparent 60%, rgba(0,0,0,.025) 61%, transparent 62%);
-  --c-anlz-body-after-bg:          repeating-linear-gradient(45deg, transparent 0 24px, rgba(120,60,20,.04) 24px 25px), repeating-linear-gradient(-45deg, transparent 0 24px, rgba(184,134,11,.04) 24px 25px);
+  --bg-anlz-decoration:            repeating-linear-gradient(45deg, transparent 0 24px, rgba(120,60,20,.04) 24px 25px), repeating-linear-gradient(-45deg, transparent 0 24px, rgba(184,134,11,.04) 24px 25px);
   --c-anlz-bamboo-opacity:         0.12;
   --c-anlz-bg-icon-opacity:         0.2; /* 公式素材化で modal bg-icon と同値へ (2026-06-13) */
   --c-anlz-tab-fg:                 var(--brown-1);

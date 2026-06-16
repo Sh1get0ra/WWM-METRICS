@@ -307,7 +307,7 @@ footer strong { color: var(--c-footer-strong-fg); }
 
 #toast {
   position: fixed; bottom: 28px; right: 28px;
-  background: var(--c-toast-bg); color: var(--text-sumi-fg);
+  background: var(--bg-toast); color: var(--text-sumi-fg);
   padding: 11px 18px;
   border: 1px solid var(--gold-deep); border-left: 3px solid var(--gold);
   font-family: var(--f-display); font-size: var(--text-12); font-weight: var(--fw-semibold);

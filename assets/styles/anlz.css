@@ -723,7 +723,7 @@ html[lang="en"] .wwm-cmp-title-en {
 .wwm-anlz-body::after {
   content: '';
   position: absolute; inset: 0;
-  background: var(--c-anlz-body-after-bg);
+  background: var(--bg-anlz-decoration);
   pointer-events: none;
 }
 
