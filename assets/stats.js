@@ -541,6 +541,9 @@ function buildStatParamsSync(roleInfo, state) {
       const info = window.WWM_AFFIX?.[d[0]];
       const sk = info?.statKey;
       if (!sk || typeof d[1] !== 'number') continue;
+      // weapon-class generic dmg (swordDmg/spearDmg/fanDmg/moBladeDmg/umbrellaDmg 等) は §9 perClassMax で処理済
+      // ここで再加算すると prefix (sword/spear/fan/moBlade/umb) と startsWith hit → 2倍 bug
+      if (_WEAPON_CLASS_DMG_KEYS.has(sk)) continue;
       for (const def of sortedPrefixes) {
         if (sk.startsWith(def.prefix)) {
           if (def.kongfus.some(id => activeKongfus.has(id))) {
