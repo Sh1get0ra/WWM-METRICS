@@ -102,7 +102,7 @@
 
 /* A — jade glow */
 .tier-A {
-  color: var(--text-sumi-gold);
+  color: var(--gold-bright);
   background: var(--bg-tier-chip-a);
   border-color: var(--c-tier-chip-a-border);
   text-shadow: var(--c-tier-chip-a-text-shadow);
@@ -120,7 +120,7 @@
 
 /* C — dim */
 .tier-C {
-  color: var(--text-sumi-dim);
+  color: var(--sumi-fg-dim);
   background: var(--bg-tier-chip-c);
   border-color: var(--c-tier-chip-c-border);
   box-shadow: var(--c-tier-C-shadow);
@@ -142,7 +142,7 @@
   padding: var(--space-3);
   font-size: var(--text-12);
   z-index: var(--z-floating);
-  color: var(--text-sumi-fg);
+  color: var(--sumi-fg);
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -267,7 +267,7 @@
 /* 武格指数 row: SSバッジ縮小 + 中央揃え (base) で row を上げ、3行を等間隔に。top:0 で -2px浮き解除 */
 .wwm-sb-martial .wwm-sb-tier-badge { font-size: var(--text-md); padding: 0 var(--space-1-5); top: 0; }
 
-.wwm-sb-totalmartial b, .wwm-sb-martial b { color: var(--text-sumi-gold); font-weight: var(--fw-bold); margin-left: var(--space-1); }
+.wwm-sb-totalmartial b, .wwm-sb-martial b { color: var(--gold-bright); font-weight: var(--fw-bold); margin-left: var(--space-1); }
 
 .wwm-sb-section-title {
   cursor: pointer;
@@ -288,7 +288,7 @@
 .wwm-sb-tier-badge.tier-rolling,
 .hero-tier.tier-rolling {
   background: linear-gradient(180deg, #2a1a0c 0%, #0a0402 100%);
-  color: var(--text-sumi-gold);
+  color: var(--gold-bright);
   border: 1px solid var(--accent);
   text-align: center;
   box-sizing: border-box;

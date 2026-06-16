@@ -22,17 +22,17 @@
   flex-shrink: 0; min-width: 24px; text-align: center;
   font-family: var(--f-latin); font-weight: 700; font-size: var(--text-xs);
   padding: 0 var(--space-1); border-radius: 2px;
-  background: rgba(201,164,90,0.16); color: var(--text-kami-vermilion);
+  background: rgba(201,164,90,0.16); color: var(--vermilion);
   border: 1px solid rgba(201,164,90,0.4);
 }
 
-.wwm-cmp-tier-eff { flex: 1 1 auto; color: var(--text-kami-fg); }
+.wwm-cmp-tier-eff { flex: 1 1 auto; color: var(--kami-fg); }
 
 .wwm-cmp-tier-row.wwm-tier-unrel { opacity: 0.42; }
 
-.wwm-cmp-tier-row.wwm-tier-unrel .wwm-cmp-tier-num { background: var(--shine-trace); color: var(--text-kami-dim); border-color: rgba(255,255,255,0.14); }
+.wwm-cmp-tier-row.wwm-tier-unrel .wwm-cmp-tier-num { background: var(--shine-trace); color: var(--kami-fg-dim); border-color: rgba(255,255,255,0.14); }
 
-.wwm-cmp-tier-row.wwm-tier-kfmiss .wwm-cmp-tier-eff { color: var(--text-kami-vermilion); }
+.wwm-cmp-tier-row.wwm-tier-kfmiss .wwm-cmp-tier-eff { color: var(--vermilion); }
 
 .wwm-cmp-tier-row.wwm-tier-empty { opacity: 0.3; }
 
@@ -41,17 +41,17 @@
 /* design-preview.html 準拠: --f-latin = Cinzel, --jade-bright = #a8d4b4 */
 .tier-badge-baseline { /* baseline は current と同等表示 */ }
 
-.wwm-hero-delta.pos { color: var(--text-sumi-vermilion); }
+.wwm-hero-delta.pos { color: var(--vermilion-bright); }
 
-.wwm-hero-delta.neg { color: var(--text-sumi-dim); }
+.wwm-hero-delta.neg { color: var(--sumi-fg-dim); }
 
-.wwm-hero-delta.zero { color: var(--text-sumi-dim); }
+.wwm-hero-delta.zero { color: var(--sumi-fg-dim); }
 
 /* ライトモード: 白系rgba background を 影系に */
 /* ライト rank/opt: zebra + 常時アクセント + hover を統一 */
 .wwm-cmp-lv {
   font-size: 0.75em;
-  color: var(--text-kami-gold);
+  color: var(--gold-paper);
   font-family: var(--f-latin);
   font-weight: var(--fw-semibold);
   margin-left: var(--space-1-5);
@@ -78,7 +78,7 @@
 
 .wwm-cmp-lv-select option {
   background: #1a1410;
-  color: var(--text-sumi-gold);
+  color: var(--gold-bright);
   font-family: var(--f-latin);
 }
 
@@ -109,7 +109,7 @@
    (2026-06-05 @layer Step 1: 汎用 modal rule との file 分裂解消 — layer 移行で
    modals.css が後 layer になり、 components.css 残置だと spec 勝ちが order 負けに反転するため) */
 .wwm-cmp-kongfu {
-  font-size: var(--text-12); color: var(--text-kami-gold);
+  font-size: var(--text-12); color: var(--gold-paper);
   font-weight: var(--fw-semibold); margin-left: var(--space-2);
 }
 
@@ -181,7 +181,7 @@
   font-family: var(--f-display); font-weight: var(--fw-black);
   font-size: var(--text-12); letter-spacing: 0.3em;
   writing-mode: vertical-rl; text-orientation: upright;
-  color: var(--text-sumi-gold);
+  color: var(--gold-bright);
   text-shadow: 0 0 10px var(--gold-bright-mid-2);
   line-height: 1.05;
 }
@@ -197,7 +197,7 @@
 
 .wwm-xinfa-header { flex-wrap: wrap; }
 
-.wwm-xinfa-header b { font-size: var(--text-md); color: var(--text-sumi-fg); font-weight: 600; }
+.wwm-xinfa-header b { font-size: var(--text-md); color: var(--sumi-fg); font-weight: 600; }
 
 .wwm-xinfa-tier {
   font-family: var(--f-latin);
@@ -231,7 +231,7 @@
   font-family: var(--f-latin);
   font-size: var(--text-lg);
   font-weight: var(--fw-bold);
-  color: var(--text-sumi-gold);
+  color: var(--gold-bright);
   font-variant-numeric: tabular-nums;
   text-shadow:
     0 0 6px rgba(240,210,138,0.55),
@@ -288,7 +288,7 @@
   font-family: var(--f-display); font-weight: var(--fw-black);
   font-size: var(--text-md); letter-spacing: 0.3em;
   writing-mode: vertical-rl; text-orientation: upright;
-  color: var(--text-sumi-fg);
+  color: var(--sumi-fg);
   text-shadow: 0 0 10px rgba(232,215,180,0.4);
   line-height: 1.05;
 }
@@ -298,7 +298,7 @@
 .wwm-equip-slot[data-slot="2"]  .wwm-equip-rail-text,
 .wwm-equip-slot[data-slot="10"] .wwm-equip-rail-text,
 .wwm-equip-slot[data-slot="11"] .wwm-equip-rail-text {
-  color: var(--text-sumi-vermilion);
+  color: var(--vermilion-bright);
   text-shadow: 0 0 12px var(--vermilion-bright-mid-2);
 }
 
@@ -307,7 +307,7 @@
 .wwm-equip-slot[data-slot="4"] .wwm-equip-rail-text,
 .wwm-equip-slot[data-slot="5"] .wwm-equip-rail-text,
 .wwm-equip-slot[data-slot="8"] .wwm-equip-rail-text {
-  color: var(--text-sumi-gold);
+  color: var(--gold-bright);
   text-shadow: 0 0 12px rgba(240,210,138,0.55);
 }
 
@@ -337,7 +337,7 @@
 
 .wwm-equip-affix .wwm-rank-purple { color: var(--liupai-guyun); }
 
-.wwm-equip-affix .wwm-rank-gold   { color: var(--text-sumi-gold); }
+.wwm-equip-affix .wwm-rank-gold   { color: var(--gold-bright); }
 
 .wwm-affix-useful { color: var(--ratio-ok); font-weight: var(--fw-bold); cursor: help; }
 
@@ -454,7 +454,7 @@
   border: 1px dashed var(--ink-2);
   display: grid;
   place-items: center;
-  color: var(--text-sumi-dim);
+  color: var(--sumi-fg-dim);
   transition: border-color 0.15s, background-color 0.15s;
 }
 

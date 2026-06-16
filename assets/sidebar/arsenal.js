@@ -47,7 +47,7 @@
         const maxV = t?.max ?? preset.max;
         const valTxt = peaked
           ? `<span>${(window.T?.importArsenalPeaked)||'頂点'} ✓</span> <span style="font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`
-          : `<span style="color:var(--text-kami-dim);">${(window.T?.arsenalNotPeaked)||'未突破'}</span> <span style="font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`;
+          : `<span style="color:var(--kami-fg-dim);">${(window.T?.arsenalNotPeaked)||'未突破'}</span> <span style="font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`;
         return `<div class="wwm-cmp-row" style="grid-template-columns:50px 1fr;align-items:center;"><span style="font-family:var(--f-latin);font-weight:700;">Lv${lv}</span><span>${valTxt}</span></div>`;
       }).join('');
     }
