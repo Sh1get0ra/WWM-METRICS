@@ -7,7 +7,7 @@
 (function () {
   'use strict';
   var KEY = 'wwm_anlz_popout_v1';
-  var DEFAULTS = { mode: 'closed', x: null, y: 100, w: 540, h: 620 };
+  var DEFAULTS = { mode: 'closed', lastMode: 'floating', x: null, y: 100, w: 540, h: 620 };
   var pipWin = null;
   var floatEl = null;
   var dragState = null;
@@ -136,6 +136,11 @@
       reattachAnlz();
       document.body.removeAttribute('data-anlz-popout');
       if (floatEl) { floatEl.remove(); floatEl = null; }
+      if (_dragHandlers) {
+        document.removeEventListener('mousemove', _dragHandlers.onMove);
+        document.removeEventListener('mouseup', _dragHandlers.onUp);
+        _dragHandlers = null;
+      }
       saveState({ mode: 'closed' });
       try {
         var win = await documentPictureInPicture.requestWindow({ width: st.w || 540, height: st.h || 620 });
@@ -147,6 +152,9 @@
     }
   }
 
+  // 再 open 時 listener 重複防止 (2026-06-16 兄貴特定 — 旧 closure mouseup が dragState を先に nullify
+   //  → 新 mount の救出 logic 不発)。 close でこの ref を辿って document level handler を確実 detach
+  var _dragHandlers = null;
   function bindFloatingDrag(root, host) {
     var handle = root.querySelector('[data-anlz-drag]');
     if (!handle) return;
@@ -157,12 +165,12 @@
       host.style.right = 'auto';
       document.body.style.userSelect = 'none';
     });
-    document.addEventListener('mousemove', function (e) {
+    var onMove = function (e) {
       if (!dragState) return;
       host.style.left = (e.clientX - dragState.dx) + 'px';
       host.style.top = (e.clientY - dragState.dy) + 'px';
-    });
-    document.addEventListener('mouseup', function () {
+    };
+    var onUp = function () {
       if (!dragState) return;
       dragState = null;
       document.body.style.userSelect = '';
@@ -174,24 +182,34 @@
       var headerVisible = rect.top >= 0 && rect.top <= vh - 40
                        && rect.left + rect.width > 100 && rect.left < vw - 100;
       if (!headerVisible) {
-        host.style.transition = 'left 0.3s ease, top 0.3s ease, right 0.3s ease';
-        host.style.left = 'auto';
-        host.style.right = '30px';
+        // 復帰先 = 右上 default (top:100, right:30 相当の left 座標で animate)。
+        // left: auto への transition は Chromium で animate 不発 → 具体座標で固定
+        var targetLeft = Math.max(50, vw - rect.width - 30);
+        host.style.transition = 'left 0.3s ease, top 0.3s ease';
+        host.style.right = 'auto';
+        host.style.left = targetLeft + 'px';
         host.style.top = '100px';
         setTimeout(function () {
           host.style.transition = '';
           var r2 = host.getBoundingClientRect();
+          if (r2.width <= 0 || r2.height <= 0) return; // host destroy 中 saveState skip
           saveState({ x: r2.left, y: r2.top, w: r2.width, h: r2.height });
           updatePosLabel(root, r2);
         }, 320);
       } else {
+        if (rect.width <= 0 || rect.height <= 0) return; // host destroy 中 saveState skip
         saveState({ x: rect.left, y: rect.top, w: rect.width, h: rect.height });
         updatePosLabel(root, rect);
       }
-    });
+    };
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+    _dragHandlers = { onMove: onMove, onUp: onUp };
     if (window.ResizeObserver) {
       var ro = new ResizeObserver(function () {
         var rect = host.getBoundingClientRect();
+        // detach 直前 rect=0 で save → w:0/h:0 永続化 防止 (2026-06-16)
+        if (rect.width <= 0 || rect.height <= 0) return;
         saveState({ w: rect.width, h: rect.height });
         updatePosLabel(root, rect);
       });
@@ -236,7 +254,7 @@
     bindControls(floatEl);
     bindFloatingDrag(floatEl, floatEl);
     updatePosLabel(floatEl, floatEl.getBoundingClientRect());
-    saveState({ mode: 'floating' });
+    saveState({ mode: 'floating', lastMode: 'floating' });
   }
 
   function mountPip(win) {
@@ -275,18 +293,20 @@
       });
       ro.observe(win.document.body);
     }
-    saveState({ mode: 'pip' });
+    saveState({ mode: 'pip', lastMode: 'pip' });
   }
 
   async function open() {
     if (document.body.getAttribute('data-anlz-popout') === '1') { close(); return; }
-    if ('documentPictureInPicture' in window) {
+    var st = loadState();
+    // 仕様 (2026-06-16 兄貴指示): 初回 = floating default、 2 回目以降 = 前回 mode 復元
+    var prevMode = st.lastMode || 'floating';
+    if (prevMode === 'pip' && 'documentPictureInPicture' in window) {
       try {
-        var st = loadState();
         var win = await documentPictureInPicture.requestWindow({ width: st.w || 540, height: st.h || 620 });
         mountPip(win);
         return;
-      } catch (e) { /* fall through */ }
+      } catch (e) { /* fall through to floating */ }
     }
     mountFloating();
   }
@@ -299,6 +319,12 @@
     }
     reattachAnlz();
     if (floatEl) { floatEl.remove(); floatEl = null; }
+    // document level drag handler 剥がし (再 open 時 重複防止、 2026-06-16 兄貴特定)
+    if (_dragHandlers) {
+      document.removeEventListener('mousemove', _dragHandlers.onMove);
+      document.removeEventListener('mouseup', _dragHandlers.onUp);
+      _dragHandlers = null;
+    }
     saveState({ mode: 'closed' });
   }
 
