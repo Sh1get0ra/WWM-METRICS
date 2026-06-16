@@ -205,7 +205,7 @@
   /* ─── @layer Step 2-c: theme-swap tokens (dark default) ─── */
   --c-brand-en-fg: var(--sumi-fg);
   --c-brand-sub-fg: var(--c-fg-gold-label);
-  --bg-shared-banner: linear-gradient(90deg, var(--vermilion-soft-2), var(--vermilion-tint));
+  --bg-shared-banner: linear-gradient(90deg, var(--vermilion-mid-strong), var(--vermilion-mid));  /* 2026-06-16: 紙面上で優しすぎ (0.2/0.1) → 0.40/0.30 で警告感強化 */
   --c-footer-logo-opacity: 0.75;
   --bg-preset-bar: var(--bg-overlay-bottom);
   --c-h1-accent-fg: var(--vermilion-bright);
@@ -253,7 +253,7 @@
   --c-anlz-bamboo-opacity: 0.10;
   --c-anlz-bg-icon-opacity: 0.28;
   --bg-note-cl-featured: linear-gradient(90deg, var(--vermilion-soft), var(--vermilion-trace));
-  --bg-score-update-banner: var(--vermilion-soft);
+  --bg-score-update-banner: var(--vermilion-mid-strong);  /* 2026-06-16: 紙面上で優しすぎ (0.15) → 0.40 で警告感強化 */
   --c-score-update-banner-fg: #ffd9cc;
   --c-mobile-fab-shadow: 0 4px 16px var(--shadow-soft-2), 0 0 12px rgba(212,175,55,0.4);
 
