@@ -1,8 +1,8 @@
 {
   "_schema": "装備Lv Tier別 affix MAX値テーブル。equipLv → tier 関数: <71→61, <81→71, <86→81, <91→86, <96→91, ≥96→96。各 stat 心法 gold Tier2 と一致 (Tier91 = 装備Lv91-95 = 大世界Lv10-14)。",
-  "_lastUpdated": "2026-05-25",
-  "_source": "Where Winds Math (https://wherewindsmath.pages.dev/) app.js から抽出 (2026-05-25)",
-  "_note": "obfuscated app.js から正規表現抽出。一部 field 名は position 推定 (stat5)、確定 stat は明示 key。tier 96 は大世界Lv15+ 用 (未解放)。",
+  "_lastUpdated": "2026-06-17",
+  "_source": "Where Winds Math (https://wherewindsmath.pages.dev/) app.js から抽出 (2026-05-25) + atkTypeDmg は WWMath 欠落のため allWeaponDmg×2 推定で補完 (2026-06-17)",
+  "_note": "obfuscated app.js から正規表現抽出。一部 field 名は position 推定 (stat5)、確定 stat は明示 key。tier 96 は大世界Lv15+ 用 (未解放)。 atkTypeDmg (指定武術ダメ) は WWMath で tier 81 のみ採取 (0.03 = 誤値) で 86/91/96 = null だったが、 ゲーム仕様「指定武術ダメ MAX = 全武術ダメ MAX × 2」 に基づき全 tier 上書き (81=0.04 / 86=0.044 / 91=0.052 / 96=0.064)。",
 
   "tiers": {
     "61": {
@@ -55,7 +55,7 @@
       "physDmgBoost": 0.038,
       "allWeaponDmg": 0.02,
       "bossDmg": 0.02,
-      "atkTypeDmg": 0.03,
+      "atkTypeDmg": 0.04,
       "mysticDmg": 0.06,
       "attunement": 0.036
     },
@@ -73,7 +73,7 @@
       "physDmgBoost": 0.044,
       "allWeaponDmg": 0.022,
       "bossDmg": 0.024,
-      "atkTypeDmg": null,
+      "atkTypeDmg": 0.044,
       "mysticDmg": 0.07,
       "attunement": 0.043
     },
@@ -91,7 +91,7 @@
       "physDmgBoost": 0.052,
       "allWeaponDmg": 0.026,
       "bossDmg": 0.026,
-      "atkTypeDmg": null,
+      "atkTypeDmg": 0.052,
       "mysticDmg": 0.08,
       "attunement": 0.05
     },
@@ -109,7 +109,7 @@
       "physDmgBoost": 0.062,
       "allWeaponDmg": 0.032,
       "bossDmg": 0.032,
-      "atkTypeDmg": null,
+      "atkTypeDmg": 0.064,
       "mysticDmg": 0.098,
       "attunement": 0.06
     }
