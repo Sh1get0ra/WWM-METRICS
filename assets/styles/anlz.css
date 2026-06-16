@@ -575,7 +575,7 @@
 .wwm-anlz-header::after {
   content: '';
   position: absolute; inset: 0;
-  background: var(--c-anlz-header-after-bg);
+  background: var(--bg-anlz-header-deco);
   pointer-events: none;
 }
 

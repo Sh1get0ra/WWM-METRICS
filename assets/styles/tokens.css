@@ -278,7 +278,7 @@
   --c-ink-stroke-opacity: .85;
   --c-last-import-bg: var(--shine-trace);
   --c-sb-label-opacity: 0.75;
-  --c-anlz-header-after-bg: linear-gradient(180deg, transparent 18%, var(--shine-trace) 19%, var(--shine-trace) 20%, transparent 21%), linear-gradient(180deg, transparent 60%, var(--shine-trace) 61%, transparent 62%);
+  --bg-anlz-header-deco: linear-gradient(180deg, transparent 18%, var(--shine-trace) 19%, var(--shine-trace) 20%, transparent 21%), linear-gradient(180deg, transparent 60%, var(--shine-trace) 61%, transparent 62%);
   --c-anlz-bamboo-opacity: 0.10;
   --c-anlz-bg-icon-opacity: 0.28;
   --c-note-cl-featured-bg: linear-gradient(90deg, var(--vermilion-soft), var(--vermilion-trace));
