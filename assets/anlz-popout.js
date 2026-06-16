@@ -7,7 +7,7 @@
 (function () {
   'use strict';
   var KEY = 'wwm_anlz_popout_v1';
-  var DEFAULTS = { mode: 'closed', lastMode: 'floating', x: null, y: 100, w: 540, h: 620 };
+  var DEFAULTS = { mode: 'closed', lastMode: 'floating', x: null, y: 100, w: 540, h: 620, opacity: 1 };
   var pipWin = null;
   var floatEl = null;
   var dragState = null;
@@ -33,8 +33,11 @@
     var T = window.T || {};
     var tipC = _esc(T.anlzPopoutCloseTip || '閉じる');
     var tipP = _esc(T.anlzPopoutPinTip || '最前面化 (OS 級) ↔ 通常表示 切替');
+    var tipO = _esc(T.anlzPopoutOpacityTip || '不透明度 (floating モード時のみ有効)');
     var labelRank = _esc(T.anlzTabRank || '期待値');
     var labelOpt = _esc(T.anlzTabOpt || '最適化');
+    var st = loadState();
+    var opVal = Math.round((st.opacity == null ? 1 : st.opacity) * 100);
     return ''
       + '<span class="l-bracket tl"></span><span class="l-bracket tr"></span>'
       + '<span class="l-bracket bl"></span><span class="l-bracket br"></span>'
@@ -43,6 +46,7 @@
       +     '<span class="ja">格析</span><span class="en">ANALYSIS</span><span class="seal">析</span>'
       +   '</div>'
       +   '<div class="wwm-anlz-floating-controls">'
+      +     '<input type="range" data-anlz-opacity min="20" max="100" step="5" value="' + opVal + '" title="' + tipO + '">'
       +     '<button type="button" data-act="pin" title="' + tipP + '">📌</button>'
       +     '<button type="button" data-act="close" title="' + tipC + '">×</button>'
       +   '</div>'
@@ -110,6 +114,14 @@
     root.querySelectorAll('[data-act="pin"]').forEach(function (b) {
       b.addEventListener('click', function () { togglePin(); });
     });
+    // opacity slider (2026-06-16 兄貴指示 — floating モード時のみ有効、 PiP は OS window のため不可)
+    root.querySelectorAll('[data-anlz-opacity]').forEach(function (s) {
+      s.addEventListener('input', function () {
+        var v = parseInt(s.value, 10) / 100;
+        if (floatEl) floatEl.style.opacity = String(v);
+        saveState({ opacity: v });
+      });
+    });
   }
 
   async function togglePin() {
@@ -159,7 +171,7 @@
     var handle = root.querySelector('[data-anlz-drag]');
     if (!handle) return;
     handle.addEventListener('mousedown', function (e) {
-      if (e.target.closest('button')) return;
+      if (e.target.closest('button, input, .wwm-anlz-floating-controls')) return;
       var rect = host.getBoundingClientRect();
       dragState = { dx: e.clientX - rect.left, dy: e.clientY - rect.top };
       host.style.right = 'auto';
@@ -245,6 +257,7 @@
       }
     }
     floatEl.innerHTML = buildShell();
+    if (st.opacity != null && st.opacity !== 1) floatEl.style.opacity = String(st.opacity);
     document.body.appendChild(floatEl);
     document.body.setAttribute('data-anlz-popout', '1');
     var body = floatEl.querySelector('[data-anlz-body]');
