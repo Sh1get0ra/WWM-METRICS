@@ -453,6 +453,10 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 /* sub も固定 = sub 配置で score (82.7px) ⇔ dps (37.9px) でサイズ違う = hero 縦変動。
    probe 実測 score sub = 93.7px → 94px 固定 (2026-06-15) */
 .hero-wuxia .seat-sub { min-height: 94px; }
+/* 2026-06-16 hero slim 化: 戦律 (ROTATION DPS) 実装まで seat-sub 全 hide。
+   兄貴指摘「COMING SOON 空席が目立つ」 解消。 戦律実装時 = 本行 1 行削除で復活、
+   swap-anim 機構は DOM 存在のため visible 復帰時に JS で display 解除すれば OK */
+.hero-wuxia .seat-sub { display: none; }
 .hero-wuxia .seat-main .eyebrow .seat-title {
   font-size: 30px;
   text-shadow: var(--c-hero-title-text-shadow);
