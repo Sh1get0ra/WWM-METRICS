@@ -753,6 +753,23 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   margin-bottom: 0;
   transition: color .15s ease, background .15s ease, border-color .15s ease, box-shadow .2s ease, transform .2s ease;
 }
+/* en/vi では楷書 (--f-display) が latin に不向き = ダサい → latin font 切替 (2026-06-16 兄貴指示)。
+   zh は --f-display (KAISHO = ja 用 SVG) が zh 字形不揃い → --f-body (汎用 sans/serif で zh 対応) */
+:lang(en) .wwm-ws-tab,
+:lang(vi) .wwm-ws-tab {
+  font-family: var(--f-latin);
+  letter-spacing: 0.06em;
+}
+:lang(zh) .wwm-ws-tab {
+  font-family: var(--f-display-zh);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+:lang(ko) .wwm-ws-tab {
+  font-family: var(--f-display-ko);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
 /* 楷書 SVG (玉ねぎ楷書「激」 path 化 — WWMKaisho が ja 時に差し込む)。
    height em 連動 = 親 font-size を継承、width は viewBox aspect で自動。
    楷書は同 px の明朝より小さく見える → 1.25em で光学補正 (tab 15px → 18.75px ≈ 確定値 19px) */
@@ -779,10 +796,14 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   display: block;
   margin: 0 auto;
 }
-/* zh = 玉ねぎ (日本語フォント) の簡体グリフ無し → Ma Shan Zheng (簡体毛筆楷書、
-   読込済 Google Fonts) をテキストのまま当てる — SVG 不要で筆の統一感 (兄貴案 2026-06-12) */
+/* zh/ko = 玉ねぎ (ja 楷書 SVG) の他言語代替 — 言語別 display token を [data-kaisho] 要素に当てる
+   (2026-06-16 兄貴指示で zh/ko 専用 display token 導入)。 旧 `var(--f-display)` 直当ては ja Mincho stack が
+   zh 字形含まずに不揃いになるバグだった */
 html[lang="zh-CN"] [data-kaisho] {
-  font-family: var(--f-display);
+  font-family: var(--f-display-zh);
+}
+html[lang="ko"] [data-kaisho] {
+  font-family: var(--f-display-ko);
 }
 
 .wwm-ws-tab:hover { color: var(--sumi-fg); background: rgba(242,234,212,0.06); }

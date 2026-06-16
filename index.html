@@ -46,14 +46,14 @@
 <link rel="apple-touch-icon" href="assets/icons/pwa-icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- audit P3 (2026-06-07): 未使用 4 family (Yuji Mai / Yuji Boku / ZCOOL QingKe HuangYou / Kaisei Decol) 削除 — 使用中 = Cinzel / Noto Sans JP / Noto Serif JP / Rajdhani / Ma Shan Zheng (印章) -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;900&family=Noto+Serif+JP:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Ma+Shan+Zheng&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- 2026-06-16: Ma Shan Zheng (zh 簡体毛筆楷書) + Black Han Sans (ko 超太字 sans) = ja KAISHO「玉ねぎ」 の他言語代替 -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;900&family=Noto+Serif+JP:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Ma+Shan+Zheng&family=Shippori+Mincho:wght@400;500;600;700;800&family=Black+Han+Sans&family=Gowun+Batang:wght@400;700&family=Diphylleia&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
 <!-- @layer Step 1 (2026-06-05): file = layer (各 file 内で @layer X { } 物理 wrap)、
      宣言順 = tokens.css 先頭の @layer 文 (後勝ち)。 layer 間は宣言順が specificity より優先。
      flip 0 を important-audit-v2 --layer-impact で機械証明済。 @layer 未対応 (2022 以前) browser 切捨て済 -->
-<link rel="stylesheet" href="assets/styles/tokens.css?v=49">
+<link rel="stylesheet" href="assets/styles/tokens.css?v=56">
 <link rel="stylesheet" href="assets/styles/animations.css?v=3">
 <link rel="stylesheet" href="assets/styles/base.css?v=21">
 <link rel="stylesheet" href="assets/styles/share.css?v=21">
@@ -62,9 +62,9 @@
 <link rel="stylesheet" href="assets/styles/layout.css?v=16">
 <link rel="stylesheet" href="assets/styles/gear.css?v=9">
 <link rel="stylesheet" href="assets/styles/xinfa.css?v=15">
-<link rel="stylesheet" href="assets/styles/anlz.css?v=24">
+<link rel="stylesheet" href="assets/styles/anlz.css?v=32">
 <link rel="stylesheet" href="assets/styles/mobile.css?v=15">
-<link rel="stylesheet" href="assets/styles/workspace.css?v=290">
+<link rel="stylesheet" href="assets/styles/workspace.css?v=298">
 <link rel="stylesheet" href="assets/styles/modals.css?v=85">
 <link rel="stylesheet" href="assets/styles/responsive-globals.css?v=3">
 <link rel="stylesheet" href="assets/styles/dark.css?v=2">

@@ -117,10 +117,13 @@
   /* Paper text — 全廃止済 (--paper / --paper-2 / --paper-dim / --paper-mute)、
      全 text-sumi-fg / text-sumi-dim に集約 (2026-06-15 Phase 3 完了、 [[sumi-token-policy]]) */
 
-  /* Type — 役割固定 3 token (2026-06-15 集約、 --f-mono 廃止)
+  /* Type — 役割固定 token (2026-06-15 集約 + 2026-06-16 言語別 display 拡張)
      文字 (見出し・漢字) = --f-display / 本文 (UI) = --f-body / 数値・ラテン = --f-latin
+     言語別 display = --f-display-zh / --f-display-ko (ja KAISHO 楷書感を zh/ko で代替、 兄貴指示)
      literal 直値禁止: 新規 component は必ず token 経由 */
-  --f-display: 'Shippori Mincho', 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+  --f-display:    'Shippori Mincho', 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+  --f-display-zh: 'Ma Shan Zheng', 'STKaiti', 'KaiTi', 'Noto Serif SC', serif;
+  --f-display-ko: 'Diphylleia', 'Gowun Batang', 'Black Han Sans', serif;
   --f-body:    'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
   --f-latin:   'Cinzel', 'Cormorant Garamond', 'Noto Serif JP', serif;
 
