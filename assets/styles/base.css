@@ -227,7 +227,7 @@ html[lang="ko"] .top-controls-2row .icon-btn {
    朱影地金文字 (SS badge 語彙、 6.2:1)。 token = theme constant で light 側 override 不要 */
 .lang-btn.active {
   color: var(--c-lang-active-fg);
-  background: var(--bg-lang-active);
+  background: var(--vermilion-deep);
   box-shadow: inset 0 -2px 0 var(--c-lang-active-fg);
 }
 
@@ -266,7 +266,7 @@ a.icon-btn { text-decoration: none; }
 .preset-bar {
   display: flex; align-items: center; gap: var(--space-3);
   padding: var(--space-2) var(--space-3-5); margin-top: var(--space-2);
-  background: var(--bg-preset-bar);
+  background: var(--bg-overlay-bottom);
   border: 1px solid var(--ink-2);
   border-radius: 2px;
 }
@@ -307,7 +307,7 @@ footer strong { color: var(--c-footer-strong-fg); }
 
 #toast {
   position: fixed; bottom: 28px; right: 28px;
-  background: var(--bg-toast); color: var(--sumi-fg);
+  background: var(--sumi-1); color: var(--sumi-fg);
   padding: 11px 18px;
   border: 1px solid var(--gold-deep); border-left: 3px solid var(--gold);
   font-family: var(--f-display-title); font-size: var(--text-12); font-weight: var(--fw-semibold);
@@ -423,7 +423,7 @@ footer strong { color: var(--c-footer-strong-fg); }
   /* wwm-ws-body の padding-top 20px を相殺 = banner 上端ピッタリ表示 (2026-06-16) */
   margin-top: -20px;
   padding: var(--space-2) var(--space-4);
-  background: var(--bg-score-update-banner);
+  background: color-mix(in oklab, var(--vermilion) 40%, transparent);
   border-bottom: 1px solid color-mix(in oklab, var(--vermilion) 55%, transparent);
   color: var(--kami-fg);  /* wwm-ws-body 紙面配置対応 (2026-06-16)、 旧 --c-score-update-banner-fg #ffd9cc (墨面用) は紙地で不可視 */
   font-size: var(--text-13, 13px);
