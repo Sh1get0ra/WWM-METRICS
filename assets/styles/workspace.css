@@ -1043,7 +1043,7 @@ html[lang="zh-CN"] [data-kaisho] {
   display: block; /* base display:none を override (兄貴指示 2026-06-15) */
   position: absolute;
   inset: 5px;
-  border: 4px solid var(--plank-frame); /* 奇術のみ太め (2026-06-14、 兄貴指示) — 装備/心法 3px、 旧 2→3→4 */
+  border: 4px solid var(--sumi-2); /* 奇術のみ太め (2026-06-14、 兄貴指示) — 装備/心法 5px、 旧 2→3→4。 色 = sumi-2 (2026-06-16) */
   /* box-shadow none 明示 (2026-06-14、 playwright 確認): base `.wwm-ws-paper .plank-paint::after`
      (L1297) が `box-shadow: inset 0 0 0 1px plank-frame-edge` を defining。 奇術 override で行削除しても
      cascade で base 値が残り 2重ボーダー視認継続 → 明示 none で 札サイズ小 (85×85) の額縁 4px 内 2本線解消 */
@@ -1351,7 +1351,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   content: "";
   position: absolute;
   top: 5px; left: 5px; right: 5px; bottom: 38px;
-  border: 3px solid var(--plank-frame);
+  border: 5px solid var(--sumi-2);
   box-shadow: inset 0 0 0 1px var(--plank-frame-edge);
   pointer-events: none;
   z-index: 3;
@@ -1364,11 +1364,15 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 .wwm-ws-paper {
   --rank-bg-fade: 0.2;
 }
+/* 自前 radial-gradient = 色担当、 公式 img = テクスチャ層 (soft-light blend で擦れ感・武侠感のみ抽出)
+   (2026-06-16、 兄貴閃き — 色と質感を分離する設計)。 紙 overlay (--rank-bg-fade) は最上層 keep */
 .wwm-ws-paper .wwm-xinfa-slot[data-rank="gold"] .plank-paint,
 .wwm-ws-paper .wwm-equip-slot[data-rank="gold"] .plank-paint {
   background-image:
     linear-gradient(rgba(242,234,212,var(--rank-bg-fade)), rgba(242,234,212,var(--rank-bg-fade))),
-    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/5_big-d00990c4.png");
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/5_big-d00990c4.png"),
+    radial-gradient(circle at 50% 40%, #f5d97a 0%, #c89a3a 55%, #6e4a18 100%);
+  background-blend-mode: normal, overlay, normal;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1377,7 +1381,9 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 .wwm-ws-paper .wwm-equip-slot[data-rank="purple"] .plank-paint {
   background-image:
     linear-gradient(rgba(242,234,212,var(--rank-bg-fade)), rgba(242,234,212,var(--rank-bg-fade))),
-    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/4_big-c8200afa.png");
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/4_big-c8200afa.png"),
+    radial-gradient(circle at 50% 40%, #c4a8e8 0%, #7a52b8 55%, #3a2570 100%);
+  background-blend-mode: normal, overlay, normal;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1386,19 +1392,23 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 .wwm-ws-paper .wwm-equip-slot[data-rank="blue"] .plank-paint {
   background-image:
     linear-gradient(rgba(242,234,212,var(--rank-bg-fade)), rgba(242,234,212,var(--rank-bg-fade))),
-    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/3_big-c3e1ce14.png");
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/3_big-c3e1ce14.png"),
+    radial-gradient(circle at 50% 40%, #90c8e8 0%, #4878a8 55%, #1e3a60 100%);
+  background-blend-mode: normal, overlay, normal;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* 武庫 + 奇術 editor-list = 白等級 (1_big) 公式 bg (2026-06-14、 兄貴指示)。
-   兄貴指示 2026-06-15 — score-paint 除外 (新 base で背景は plank-frame 黒地ベタ) */
+/* 武庫 + 奇術 editor-list = 白等級 = radial-gradient + 公式 img overlay blend 統一 (2026-06-16、 兄貴指示)。
+   金紫青と同構造、 色は紙色基調 (薄古紙→砂金→茶墨) で階層感確保 */
 .wwm-ws-paper .wwm-arsenal-slot .plank-paint,
 .wwm-ws-paper .wwm-qishu-editor-list .wwm-qishu-picker-diamond::before {
   background-image:
     linear-gradient(rgba(242,234,212,var(--rank-bg-fade)), rgba(242,234,212,var(--rank-bg-fade))),
-    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/1_big-1bac704e.png");
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/1_big-1bac704e.png"),
+    radial-gradient(circle at 50% 40%, #e8dcbe 0%, #b8a47a 55%, #5e4a28 100%);
+  background-blend-mode: normal, overlay, normal;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1407,7 +1417,9 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 .wwm-ws-paper .wwm-qishu-slot .plank-paint {
   background-image:
     linear-gradient(rgba(242,234,212,var(--rank-bg-fade)), rgba(242,234,212,var(--rank-bg-fade))),
-    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/1_big-1bac704e.png");
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/1_big-1bac704e.png"),
+    radial-gradient(circle at 50% 40%, #e8dcbe 0%, #b8a47a 55%, #5e4a28 100%);
+  background-blend-mode: normal, overlay, normal;
   background-size: cover;
   background-position: center;
 }
@@ -1436,12 +1448,11 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 .wwm-ws-paper .plank-icon-wrap img {
   width: 150%; height: 150%;
   object-fit: contain;
-  /* 墨化 第4版 (2026-06-14、 兄貴指示): 真黒 → 札本体茶墨 (#2a2218 / wood-deep) 寄りへ統一。
-     brightness(0) で真黒化 → invert(0.15) で暗グレー → sepia(0.85) で茶基調 →
-     saturate(1.4) で発色 → hue-rotate(355deg) で僅か赤寄り = 札茶墨と色相整合
-     第7版 (2026-06-14、 兄貴指示): ボーダーと同色 → 1段暗化、 invert 0.15 → 0.08 (wood-shadow 寄り) */
-  filter: brightness(0) invert(0.08) sepia(0.85) saturate(1.4) hue-rotate(355deg);
-  opacity: 0.92;
+  /* 墨化 第8版 (2026-06-16、 兄貴指示): border = --sumi-2 (#2f2a23 = RGB 47,42,35) に色合わせ。
+     brightness(0) → invert(0.17) で明度を 47/255 ≒ 17% に → sepia(0.55) で茶基調控えめ →
+     saturate(1.1) + hue-rotate(352deg) で僅か赤寄り → opacity 1.0 (旧 0.92 撤回 = sumi-2 実色を出すため) */
+  filter: brightness(0) invert(0.15) sepia(0.55) saturate(1.1) hue-rotate(352deg);
+  opacity: 1;
   /* hover 朱化グラデ用 transition (2026-06-14、 兄貴指示) */
   transition: filter 0.25s ease, opacity 0.25s ease;
 }
