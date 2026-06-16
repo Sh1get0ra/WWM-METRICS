@@ -167,8 +167,25 @@
       dragState = null;
       document.body.style.userSelect = '';
       var rect = host.getBoundingClientRect();
-      saveState({ x: rect.left, y: rect.top, w: rect.width, h: rect.height });
-      updatePosLabel(root, rect);
+      // viewport 外 救出 (2026-06-16): 50px buffer 未満なら default 位置に animate で戻す
+      var vw = window.innerWidth;
+      var vh = window.innerHeight;
+      var visible = (rect.left + rect.width > 50) && (rect.left < vw - 50) && (rect.top + rect.height > 50) && (rect.top < vh - 50);
+      if (!visible) {
+        host.style.transition = 'left 0.3s ease, top 0.3s ease, right 0.3s ease';
+        host.style.left = 'auto';
+        host.style.right = '30px';
+        host.style.top = '100px';
+        setTimeout(function () {
+          host.style.transition = '';
+          var r2 = host.getBoundingClientRect();
+          saveState({ x: r2.left, y: r2.top, w: r2.width, h: r2.height });
+          updatePosLabel(root, r2);
+        }, 320);
+      } else {
+        saveState({ x: rect.left, y: rect.top, w: rect.width, h: rect.height });
+        updatePosLabel(root, rect);
+      }
     });
     if (window.ResizeObserver) {
       var ro = new ResizeObserver(function () {
