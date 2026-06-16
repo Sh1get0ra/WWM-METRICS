@@ -114,7 +114,7 @@ html.wwm-view-sidebar .wwm-rail-in {
     z-index: 20;
     margin: -8px -10px 8px;
     padding: var(--space-2-5) var(--space-3);
-    background: var(--bg-raised);
+    background: var(--sumi-3);
     border: 1px solid var(--gold-deep);
     box-shadow: 0 6px 14px var(--shadow-mid);
   }

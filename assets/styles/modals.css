@@ -313,7 +313,7 @@
   box-shadow: 0 0 8px var(--vermilion-bright-glow);
 }
 .wwm-cmp-modal-a {
-  background: var(--bg-raised);
+  background: var(--sumi-3);
   border: 1px solid var(--gold-deep);
   border-radius: 0;
 }
@@ -478,7 +478,7 @@
   margin-top: var(--space-1-5);
   border-color: var(--c-cmp-modal-a--cmp-kongfu-select-border);
 }
-/* select内 option を統一 (paper bg + var(--bg-raised) / hover青) */
+/* select内 option を統一 (paper bg + var(--sumi-3) / hover青) */
 .wwm-cmp-modal-a select option {
   font-size: var(--text-md);
   font-family: var(--f-display);
@@ -1154,7 +1154,7 @@
   transition: filter .15s, transform .15s;
 }
 .wwm-note-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
-.wwm-note-btn-gh    { background: linear-gradient(180deg, #4a3a2a 0%, #2a1f14 100%); border-color: var(--bg-raised); }
+.wwm-note-btn-gh    { background: linear-gradient(180deg, #4a3a2a 0%, #2a1f14 100%); border-color: var(--sumi-3); }
 .wwm-note-btn-close { background: linear-gradient(180deg, #8a6f3a 0%, #5a4220 100%); border-color: #3a2810; }
 .wwm-note-btn svg { width: 12px; height: 12px; }
 

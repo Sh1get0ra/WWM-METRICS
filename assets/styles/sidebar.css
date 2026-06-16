@@ -248,7 +248,7 @@
   border-bottom: 1px solid var(--accent-mid);
   position: sticky;
   top: -12px;
-  background: var(--bg-raised);
+  background: var(--sumi-3);
   z-index: 5;
 }
 
