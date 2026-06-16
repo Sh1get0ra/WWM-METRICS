@@ -218,7 +218,6 @@
   --c-surf-warm-1:        var(--bg-overlay-top);    /* warm card/modal bg gradient 上 */
   --c-surf-warm-2:        var(--bg-overlay-bottom); /* warm card/modal bg gradient 下 */
   --c-modal-a-option-bg:  var(--bg-raised); /* compare modal A select option bg */
-  --c-rail-bg:            linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.25) 60%, rgba(40,30,20,0.45)); /* 装備/心法 rail 縦 gradient (light override 別値) */
 
   /* ─── @layer Step 2-b: theme-swap pair tokens (dark default) ─── */
   --c-fg-accent: var(--gold-bright);  /* アクセント前景 (dark 明金 / light 朱) */
@@ -537,7 +536,7 @@
 
   /* B5. Container — 特殊用途 */
   --bg-input:           var(--input-bg);                          /* input/select 地 */
-  --bg-rail:            var(--rail-grad);                         /* 左 rail gradient */
+  --bg-rail:            linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.25) 60%, rgba(40,30,20,0.45)); /* 装備/心法 rail 縦 gradient (旧 --c-rail-bg 墨値、 --rail-grad 黒系は dead) */
   --bg-toast:           var(--bg-base);                           /* toast notification */
   --bg-mobile-overlay:  linear-gradient(180deg, rgba(20,15,12,0.98), rgba(10,8,9,0.98));
   --bg-anlz-decoration: repeating-linear-gradient(45deg, transparent 0 24px, rgba(212,175,55,.025) 24px 25px), repeating-linear-gradient(-45deg, transparent 0 24px, rgba(0,0,0,.05) 24px 25px);

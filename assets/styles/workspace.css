@@ -139,7 +139,6 @@
   /* gear / xinfa card */
   --c-icon-dim-opacity:   0.22;
   --c-slot-border:        rgba(40,25,18,0.30);
-  --c-rail-bg:            linear-gradient(180deg, rgba(58,38,22,0.10), rgba(58,38,22,0.04) 60%, rgba(58,38,22,0.08));
   --c-equip-delta-pos-text-shadow: none;
   --c-equip-delta-neg-text-shadow: none;
   --c-equip-setname-fg:            var(--vermilion-deep);

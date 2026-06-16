@@ -170,7 +170,7 @@
 
 .wwm-xinfa-rail {
   position: absolute; left: 0; top: 0; bottom: 0; width: 30px;
-  background: var(--c-rail-bg);
+  background: var(--bg-rail);
   border-right: 1px solid var(--ink-2);
   display: flex; align-items: center; justify-content: center;
   padding: var(--space-2) 0;
@@ -277,7 +277,7 @@
 
 .wwm-equip-rail {
   position: absolute; left: 0; top: 0; bottom: 0; width: 30px;
-  background: var(--c-rail-bg);
+  background: var(--bg-rail);
   border-right: 1px solid var(--ink-2);
   display: flex; align-items: center; justify-content: center;
   padding: var(--space-2) 0;
