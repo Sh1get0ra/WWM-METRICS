@@ -544,6 +544,40 @@
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-left:   env(safe-area-inset-left, 0px);
   --safe-right:  env(safe-area-inset-right, 0px);
+
+  /* ═══════════════════════════════════════════════════════════════
+     bg token reframe R1 (2026-06-16、 design doc:
+     .claude/research/bg-token-reframe-20-2026-06-16.md)
+     ───────────────────────────────────────────────────────────────
+     新 16 件 semantic 並存定義 (旧 token と共存、 callsite 書換 0)。
+     R2 以降で各 group 順次 callsite 置換 → 旧 token 物理削除。
+     :root = 墨面 default。 紙面 rescope (.wwm-ws-paper) = workspace.css。
+     値は workspace.css 既存 sumi-*/kami-* (兄貴選定済) を真実源化。
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* Sumi 系 (墨基本、 font/bg 両用) */
+  --sumi-0:      #0b0908;  /* viewport 余白地 (旧 --bg-canvas) */
+  --sumi-1:      #141009;  /* app 下地 (旧 --bg-base、 workspace.css 既存値) */
+  --sumi-2:      #2f2a23;  /* 板/component 基本形 ([[sumi-token-policy]] workspace v2 基準) */
+  --sumi-3:      #1a1410;  /* 持ち上げ/modal option (旧 --bg-raised) */
+  --sumi-fg:     #ede4d0;  /* 主要 font (旧 --text-sumi-fg / --sumi-text) */
+  --sumi-fg-dim: #9c8a6a;  /* 弱階調 font (旧 --text-sumi-dim) */
+
+  /* Kami 系 (紙基本、 font/bg 両用) */
+  --kami-0:      #f2ead4;  /* viewport 紙地 */
+  --kami-1:      #f8f1e1;  /* 紙下地 */
+  --kami-2:      #e9e0c7;  /* 紙板 */
+  --kami-fg:     #3d2e1f;  /* 主要 font (旧 --text-kami-fg / --kami-ink) */
+  --kami-fg-dim: #7a6850;  /* 弱階調 font (旧 --text-kami-dim) */
+
+  /* Accent 系 (金/朱/緑、 font/bg 両用、 α 派生 = color-mix で計算) */
+  --gold:        #f0d28a;  /* 金 主アクセント (旧 --gold-bright / --text-sumi-gold) */
+  --gold-paper:  #6e5414;  /* 紙面金 font (contrast 7.5:1 AA、 旧 --text-kami-gold) */
+  --vermilion:   #c83c2b;  /* 朱 警告/active (旧 --vermilion / --text-kami-vermilion) */
+  --jade:        #7fa88a;  /* 緑 = donut 確率分布専用 ([[jade-donut-only]]) */
+
+  /* Container (input のみ、 rail/anlz-decoration 等グラデ = 既存 keep) */
+  /* --bg-input は既存 (B5 上で --input-bg と二重定義中、 R8 で --input-bg 廃止) */
 }
 
 } /* end @layer tokens */
