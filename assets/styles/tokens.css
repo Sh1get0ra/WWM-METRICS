@@ -342,7 +342,7 @@
   --c-cmp-set-header-fg: var(--gold-bright);
   --c-modal-a-val-input-fg: #ffae8a;
   --bg-modal-a-lv: var(--sumi-3);
-  --c-hero-next-arrow-fg: var(--gold-deep);
+  --c-hero-next-arrow-fg: var(--gold);  /* contrast: gold-deep #8a6f30 / sumi-1 = 3.97 NG → gold #c9a45a で 5.46 AA (2026-06-16 audit) */
 
   /* ─── @layer Step 2-e: theme-swap tokens (dark default) ─── */
   --bg-modal-a-rows: var(--shadow-mid);
