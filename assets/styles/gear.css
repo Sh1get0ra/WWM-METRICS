@@ -62,7 +62,7 @@
   font-family: var(--f-latin);
   font-size: var(--text-lg);
   font-weight: var(--fw-bold);
-  color: var(--gold);
+  color: var(--text-sumi-gold);
   letter-spacing: 0.02em;
   font-variant-numeric: tabular-nums;
   text-shadow:
@@ -123,7 +123,7 @@
 .wwm-equip-arrow {
   font-size: var(--text-xs);
   margin: 0 5px;
-  color: var(--gold);
+  color: var(--text-sumi-gold);
   opacity: 0.75;
   vertical-align: middle;
 }
@@ -136,14 +136,14 @@
   white-space: nowrap;
 }
 
-.wwm-equip-delta-pos { color: var(--vermilion-bright); text-shadow: var(--c-equip-delta-pos-text-shadow); }
+.wwm-equip-delta-pos { color: var(--text-sumi-vermilion); text-shadow: var(--c-equip-delta-pos-text-shadow); }
 
-.wwm-equip-delta-neg { color: var(--sumi-fg-dim); text-shadow: var(--c-equip-delta-neg-text-shadow); }
+.wwm-equip-delta-neg { color: var(--text-sumi-dim); text-shadow: var(--c-equip-delta-neg-text-shadow); }
 
 .wwm-equip-kongfu {
   display: block;
   font-size: var(--text-sm);
-  color: var(--sumi-fg);
+  color: var(--text-sumi-fg);
   font-weight: 600;
   letter-spacing: 0.05em;
   margin-bottom: var(--space-half);
@@ -156,7 +156,7 @@
 
 .wwm-step2-section-title {
   margin: var(--space-2) 0 var(--space-1-5); font-size: var(--text-14);
-  color: var(--gold);
+  color: var(--text-sumi-gold);
   border-bottom: 1px solid var(--accent-mid); padding-bottom: 3px;
 }
 
@@ -248,7 +248,7 @@
 .wwm-equip-section .wwm-equip-base b,
 .wwm-equip-section .wwm-equip-affix b {
   font-size: var(--text-xs);
-  color: var(--sumi-fg-dim);
+  color: var(--text-sumi-dim);
   letter-spacing: 0.05em;
   font-weight: var(--fw-semibold);
 }

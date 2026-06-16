@@ -66,7 +66,7 @@ const _set4Bonus      = (ri) => window.__WWM_SET4_BONUS_OF(ri);
 
 // ratio (0-1) → CSS変数色 (styles.css --ratio-* に対応)
 function _ratioColor(r) {
-  if (r == null) return 'var(--sumi-fg-dim)';
+  if (r == null) return 'var(--text-sumi-dim)';
   if (r >= 0.9)  return 'var(--ratio-excellent)';
   if (r >= 0.75) return 'var(--ratio-good)';
   if (r >= 0.6)  return 'var(--ratio-ok)';

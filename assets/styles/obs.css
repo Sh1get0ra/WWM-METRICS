@@ -90,7 +90,7 @@ html.wwm-view-sidebar .wwm-sb-section-title {
   border-radius: 3px;
   padding: var(--space-1-5) var(--space-2-5);
   font-family: var(--f-latin); font-size: var(--text-sm);
-  color: var(--gold);
+  color: var(--text-sumi-gold);
   display: flex; align-items: center; gap: var(--space-2);
   opacity: 0.25;
   transition: opacity 0.2s;
