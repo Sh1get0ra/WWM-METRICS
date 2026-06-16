@@ -501,39 +501,19 @@
   --safe-left:   env(safe-area-inset-left, 0px);
   --safe-right:  env(safe-area-inset-right, 0px);
 
-  /* ═══════════════════════════════════════════════════════════════
-     bg token reframe R1 (2026-06-16、 design doc:
-     .claude/research/bg-token-reframe-20-2026-06-16.md)
-     ───────────────────────────────────────────────────────────────
-     新 16 件 semantic 並存定義 (旧 token と共存、 callsite 書換 0)。
-     R2 以降で各 group 順次 callsite 置換 → 旧 token 物理削除。
-     :root = 墨面 default。 紙面 rescope (.wwm-ws-paper) = workspace.css。
-     値は workspace.css 既存 sumi-*/kami-* (兄貴選定済) を真実源化。
-     ═══════════════════════════════════════════════════════════════ */
-
-  /* Sumi 系 (墨基本、 font/bg 両用) */
-  --sumi-0:      #0b0908;  /* viewport 余白地 (旧 --bg-canvas) */
-  --sumi-1:      #141009;  /* app 下地 (旧 --bg-base、 workspace.css 既存値) */
-  --sumi-2:      #2f2a23;  /* 板/component 基本形 ([[sumi-token-policy]] workspace v2 基準) */
-  --sumi-3:      #1a1410;  /* 持ち上げ/modal option (旧 --bg-raised) */
-  --sumi-fg:     #ede4d0;  /* 主要 font (旧 --text-sumi-fg / --sumi-text) */
-  --sumi-fg-dim: #9c8a6a;  /* 弱階調 font (旧 --text-sumi-dim) */
-
-  /* Kami 系 (紙基本、 font/bg 両用) */
-  --kami-0:      #f2ead4;  /* viewport 紙地 */
-  --kami-1:      #f8f1e1;  /* 紙下地 */
-  --kami-2:      #e9e0c7;  /* 紙板 */
-  --kami-fg:     #3d2e1f;  /* 主要 font (旧 --text-kami-fg / --kami-ink) */
-  --kami-fg-dim: #7a6850;  /* 弱階調 font (旧 --text-kami-dim) */
-
-  /* Accent 系 — 緊急 fix (2026-06-16): --gold 二重定義で既存 #c9a45a が明金化 = 視覚事故 →
-     gold 既存 3 段 (gold #c9a45a / gold-bright #f0d28a / gold-deep #8a6f30) keep に方針変更。
-     新規追加は --gold-paper のみ。 --vermilion / --jade は tokens.css 上方の既存定義 (同値) を真実源とし、
-     ここでは追加定義しない (R5/R6 で旧 gold-bright/vermilion-bright callsite 集約方針も再検討)。 */
-  --gold-paper:  #6e5414;  /* 紙面金 font (contrast 7.5:1 AA、 旧 --text-kami-gold) */
-
-  /* Container (input のみ、 rail/anlz-decoration 等グラデ = 既存 keep) */
-  /* --bg-input は既存 (B5 上で --input-bg と二重定義中、 R8 で --input-bg 廃止) */
+  /* bg token reframe R1-R8 (2026-06-16) new semantic tokens */
+  --sumi-0: #0b0908;
+  --sumi-1: #141009;
+  --sumi-2: #2f2a23;
+  --sumi-3: #1a1410;
+  --sumi-fg: #ede4d0;
+  --sumi-fg-dim: #9c8a6a;
+  --kami-0: #f2ead4;
+  --kami-1: #f8f1e1;
+  --kami-2: #e9e0c7;
+  --kami-fg: #3d2e1f;
+  --kami-fg-dim: #7a6850;
+  --gold-paper: #6e5414;
 }
 
 } /* end @layer tokens */
