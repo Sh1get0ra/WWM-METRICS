@@ -449,10 +449,13 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 /* 主役席の高さ固定 = 武備 (score 主役 = 大数値 + Tier + donut + NEXT)
    ⇔ 戦律 (dps 主役 = COMING SOON 等) 切替で hero 縦伸縮していたのを止める。
    probe 1440px 実測 score main = 130.4px → 132px 余裕で確保 (2026-06-15 兄貴指示) */
-.hero-wuxia .seat-main { min-height: 132px; }
+/* min-width = swap 時の幅変動 (武備時 314 ⇔ 戦律時 392 = COMING SOON 大文字) 抑制。
+   400px = 戦律時 392 + 余裕で固定、 luopan (x=1210) まで距離余裕あり (2026-06-16 兄貴指示) */
+.hero-wuxia .seat-main { min-height: 132px; min-width: 400px; }
 /* sub も固定 = sub 配置で score (82.7px) ⇔ dps (37.9px) でサイズ違う = hero 縦変動。
-   probe 実測 score sub = 93.7px → 94px 固定 (2026-06-15) */
-.hero-wuxia .seat-sub { min-height: 94px; }
+   probe 実測 score sub = 93.7px → 94px 固定 (2026-06-15)。
+   min-width 175 = 武備時 170 ⇔ 戦律時 172 の幅変動 + sub.left -2px シフト抑制 (2026-06-16) */
+.hero-wuxia .seat-sub { min-height: 94px; min-width: 175px; }
 .hero-wuxia .seat-main .eyebrow .seat-title {
   font-size: 30px;
   text-shadow: var(--c-hero-title-text-shadow);
