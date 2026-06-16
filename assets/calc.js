@@ -5,7 +5,7 @@ window.WWM_SCORE_VERSION = 11;
 
 // 表示ラベル/calcKey (stat_display.json 等) の cache buster。 SCORE_VERSION と独立。
 // スコア計算を変えずラベル/表示参照だけ変えた時に +1 → baseline 無効化(再import促し)を起こさず反映。
-window.WWM_DISPLAY_VERSION = 74;
+window.WWM_DISPLAY_VERSION = 75;
 
 // ── 共通計算層 ────────────────────────────────────────────────
 // params object から innerPhys/outerBoost/各確率を計算。

@@ -130,7 +130,6 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
   --text-xl:    22px;  /* パネル見出し */
   --text-24:    24px;  /* 大型見出し */
   --text-2xl:   28px;  /* breakdown数値 */
-  --text-hero:  92px;  /* EXPECTED ヒーロー */
 
   /* Text color tokens = R3.5 で reframe sprint の --sumi-fg/--kami-fg/--gold-bright/--gold-paper/--vermilion(-bright)/--sumi-fg-dim/--kami-fg-dim に集約済 (2026-06-16)。 旧 --text-*-* 群は物理削除。 */
 
@@ -143,10 +142,6 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
   --fw-black:    900;
 
   /* Z-index scale */
-  --z-base:      0;
-  --z-raise:     1;
-  --z-elevated:  5;
-  --z-sticky:    50;
   --z-floating:  100;
   --z-overlay:   200;
   --z-modal:     9999;
@@ -225,7 +220,6 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
   --c-anlz-bamboo-opacity: 0.10;
   --c-anlz-bg-icon-opacity: 0.28;
   --bg-note-cl-featured: linear-gradient(90deg, color-mix(in oklab, var(--vermilion) 15%, transparent), color-mix(in oklab, var(--vermilion) 5%, transparent));
-  --c-score-update-banner-fg: #ffd9cc;
   --c-mobile-fab-shadow: 0 4px 16px var(--shadow-soft-2), 0 0 12px rgba(212,175,55,0.4);
 
   /* ─── @layer Step 2-d r1: theme-swap tokens (dark default) ─── */
