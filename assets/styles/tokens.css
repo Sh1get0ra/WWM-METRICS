@@ -230,7 +230,6 @@
   --c-anlz-shadow: 0 8px 22px var(--shadow-soft-2);  /* anlz header/body 浮き shadow */
   --c-mobile-overlay-top: rgba(20,15,12,0.98);  /* mobile overlay bg (dark default 追加で base を token 参照化) */
   --c-mobile-overlay-bot: rgba(10,8,9,0.98);  /* mobile overlay bg (dark default 追加で base を token 参照化) */
-  --c-mobile-overlay-header-bg: linear-gradient(180deg, rgba(26,20,16,0.95), rgba(15,12,14,0.92));  /* mobile overlay header bg (dark default 追加) */
 
   /* ─── @layer Step 2-c: theme-swap tokens (dark default) ─── */
   --c-brand-en-fg: var(--text-sumi-fg);
@@ -285,8 +284,6 @@
   --c-note-cl-featured-bg: linear-gradient(90deg, var(--vermilion-soft), var(--vermilion-trace));
   --c-score-update-banner-bg: var(--vermilion-soft);
   --c-score-update-banner-fg: #ffd9cc;
-  --c-mobile-drawer-bg: linear-gradient(180deg, var(--bg-raised), rgba(15,12,14,0.98));
-  --c-mobile-fab-bg: linear-gradient(180deg, rgba(26,20,16,0.96), rgba(15,12,14,0.96));
   --c-mobile-fab-shadow: 0 4px 16px var(--shadow-soft-2), 0 0 12px rgba(212,175,55,0.4);
 
   /* ─── @layer Step 2-d r1: theme-swap tokens (dark default) ─── */
@@ -538,7 +535,8 @@
   --bg-input:           var(--input-bg);                          /* input/select 地 */
   --bg-rail:            linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.25) 60%, rgba(40,30,20,0.45)); /* 装備/心法 rail 縦 gradient (旧 --c-rail-bg 墨値、 --rail-grad 黒系は dead) */
   --bg-toast:           var(--bg-base);                           /* toast notification */
-  --bg-mobile-overlay:  linear-gradient(180deg, rgba(20,15,12,0.98), rgba(10,8,9,0.98));
+  --bg-mobile-drawer:   linear-gradient(180deg, var(--bg-raised), rgba(15,12,14,0.98)); /* drawer = bg-raised 起点 (overlay と異質、 別 token) */
+  --bg-mobile-overlay:  linear-gradient(180deg, rgba(26,20,16,0.96), rgba(15,12,14,0.96)); /* fab/overlay-header 統合 (旧 fab 値、 header は α 0.92→0.96 微増、 mobile 再整備時に再確認) */
   --bg-anlz-decoration: repeating-linear-gradient(45deg, transparent 0 24px, rgba(212,175,55,.025) 24px 25px), repeating-linear-gradient(-45deg, transparent 0 24px, rgba(0,0,0,.05) 24px 25px);
 
   /* Safe Area inset utility (Phase 1 base) */

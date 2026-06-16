@@ -76,7 +76,7 @@ html.wwm-view-sidebar .wwm-rail-in {
     bottom: calc(48px + var(--safe-bottom, 0px));
     width: 56px; height: 56px;
     padding: 0;
-    background: var(--c-mobile-fab-bg);
+    background: var(--bg-mobile-overlay);
     border: 2px solid var(--gold);
     border-radius: 50%;
     box-shadow: var(--c-mobile-fab-shadow);
