@@ -22,7 +22,8 @@
   const _set4Bonus      = (ri) => window.__WWM_SET4_BONUS_OF(ri);
 
   async function render(roleInfo, params) {
-    const root = document.getElementById('wwmAffixRanking');
+    // popout 中は popout window 内 root を優先 (2026-06-16 — 親 document の getElementById は null 返す)
+    const root = (window.WWMAnlzPopout?.findEl?.('wwmAffixRanking')) || document.getElementById('wwmAffixRanking');
     if (!root || !roleInfo || !window.WWMStats?.buildStatParams) return;
     const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
     // baseline score

@@ -74,7 +74,8 @@
   }
 
   async function renderOptimization(roleInfo, params, opts) {
-    const root = document.getElementById('wwmOptimization');
+    // popout 中は popout window 内 root を優先 (2026-06-16 — 親 document の getElementById は null 返す)
+    const root = (window.WWMAnlzPopout?.findEl?.('wwmOptimization')) || document.getElementById('wwmOptimization');
     if (!root || !roleInfo || !window.WWMStats?.buildStatParams) return;
     opts = opts || {};
     // SHARE Build mode: 最適化計算 skip (panel = SHARE payload の opt_best表示のみ、 自データ書込み回避)

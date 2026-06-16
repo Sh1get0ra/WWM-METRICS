@@ -236,5 +236,18 @@
   } else {
     init();
   }
-  window.WWMAnlzPopout = { open: open, close: close };
+  // popout 中の DOM 要素検出 helper (2026-06-16 兄貴指摘 — popout 中 ranking/opt の root が
+  // 親 document で null になり render silent return = リアルタイム連携途絶 を解消)。
+  // 優先順: pipWin > floatEl > parent document
+  function findEl(id) {
+    if (pipWin) {
+      try { const el = pipWin.document.getElementById(id); if (el) return el; } catch (e) {}
+    }
+    if (floatEl) {
+      const el = floatEl.querySelector('#' + id);
+      if (el) return el;
+    }
+    return document.getElementById(id);
+  }
+  window.WWMAnlzPopout = { open: open, close: close, findEl: findEl };
 })();
