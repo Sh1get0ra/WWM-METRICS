@@ -1014,6 +1014,9 @@ html[lang="zh-CN"] [data-kaisho] {
   overflow: hidden;
   transform-origin: center;
   transition: transform 0.18s, box-shadow 0.18s;
+  /* GPU layer 強制分離 (2026-06-16、 Playwright 検証で物理 jitter ゼロ → composite group artifact 仮説)。
+     hover で隣接 slot の paint 連鎖揺れを抑止 */
+  will-change: transform;
 }
 /* 十字配置 + 45deg rotate (頂点で接触) */
 .wwm-ws-paper .wwm-qishu-slot.q-top    { top: 0;    left: 50%; transform: translate(-50%, 0) rotate(45deg); }
@@ -1028,7 +1031,8 @@ html[lang="zh-CN"] [data-kaisho] {
   position: absolute;
   top: 9px; left: 9px; right: 9px; bottom: 9px;
   height: auto;
-  background: var(--plank-sumi);
+  /* background: var(--plank-sumi); 削除 (2026-06-16、 兄貴特定) —
+     L1418 multi-layer bg と shorthand 重複で focus/hover 時 縁点滅。 background-image stack のみ運用 */
   -webkit-mask-image: none;
   mask-image: none;
   z-index: 2;
@@ -1413,7 +1417,8 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   background-position: center;
   background-repeat: no-repeat;
 }
-/* 奇術 cluster slot = 白等級 bg (background-repeat 削除 — hover 時 縁点滅対策、 兄貴指摘 2026-06-14) */
+/* 奇術 cluster slot = 白等級 bg。 multi-layer 化で background-repeat: no-repeat 必須
+   (2026-06-16、 兄貴指摘 — focus/hover 時 縁点滅 = layer repeat default が原因) */
 .wwm-ws-paper .wwm-qishu-slot .plank-paint {
   background-image:
     linear-gradient(rgba(242,234,212,var(--rank-bg-fade)), rgba(242,234,212,var(--rank-bg-fade))),
@@ -1422,6 +1427,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   background-blend-mode: normal, overlay, normal;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* アイコン img wrap = アイコン枠 (paint::before) 内に固定 (兄貴指示 2026-06-15 — img が枠外に出ない)。
@@ -1465,7 +1471,8 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   width: 130%; height: 130%;
 }
 /* hover = 墨 → 朱 (vermilion 風) グラデ切替 (2026-06-14、 兄貴指示)。
-   第3版: まだオレンジ → 更に朱寄り。 hue-rotate 340→325deg / saturate 5→4 で黄味抜き赤側へ */
+   第3版: まだオレンジ → 更に朱寄り。 hue-rotate 340→325deg / saturate 5→4 で黄味抜き赤側へ。
+   奇術も 復活 (2026-06-16 兄貴確認) — will-change: transform で composite layer 分離済 = jitter 解消後 */
 .wwm-ws-paper .wwm-gear-grid .wwm-equip-slot:hover .plank-icon-wrap img,
 .wwm-ws-paper .wwm-xinfa-slot:hover .plank-icon-wrap img,
 .wwm-ws-paper .wwm-qishu-slot:hover .plank-icon-wrap img {
@@ -1477,7 +1484,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
    アイコン枠の左上配置 (兄貴指示 2026-06-13) */
 .wwm-ws-paper .plank-liupai {
   position: absolute;
-  top: 10px;
+  top: 0;
   left: -2%;
   width: 40px; height: 40px;
   z-index: 4;
