@@ -322,7 +322,7 @@
 .wwm-cmp-modal-a::after { display: none; }
 .wwm-cmp-modal-a .wwm-modal-header {
   position: relative;
-  background: var(--c-cmp-modal-a--modal-header-bg);
+  background: var(--bg-modal-a-header);
 }
 .wwm-cmp-modal-a .wwm-modal-header::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; width: auto; height: 2px;
@@ -414,7 +414,7 @@
   border: 1px solid var(--gold-deep);
   padding: 0 var(--space-2-5);
   border-radius: 2px;
-  background: var(--c-modal-a-lv-bg);
+  background: var(--bg-modal-a-lv);
   line-height: 26px;
   height: 26px;
   display: inline-flex;
@@ -460,7 +460,7 @@
   font-weight: 700;
   font-size: var(--text-md);
   color: var(--c-modal-a-kongfu-header-fg);
-  background: var(--c-modal-a-kongfu-header-bg);
+  background: var(--bg-modal-a-kongfu-header);
   border: none;
   border-radius: 0;
   padding: var(--space-1-5) var(--space-2);
@@ -468,7 +468,7 @@
   margin-top: var(--space-1-5);
 }
 .wwm-cmp-modal-a .wwm-cmp-kongfu-select {
-  background: var(--c-modal-a-kongfu-select-bg);
+  background: var(--bg-modal-a-kongfu-select);
   border: 1px solid var(--gold-deep);
   border-radius: 0;
   color: var(--c-modal-a-kongfu-select-fg);
@@ -483,7 +483,7 @@
   font-size: var(--text-md);
   font-family: var(--f-display);
   font-weight: 700;
-  background: var(--c-modal-a-option-bg) ;
+  background: var(--bg-modal-a-option) ;
   color: var(--c-modal-a-option-fg);
 }
 .wwm-cmp-modal-a .wwm-cmp-stat-select option {
@@ -493,7 +493,7 @@
 }
 .wwm-cmp-modal-a .wwm-cmp-set-header,
 .wwm-cmp-modal-a .wwm-cmp-set-select {
-  background: var(--c-modal-a-set-select-bg);
+  background: var(--bg-modal-a-set-select);
   border: none;
   border-radius: 0;
   color: var(--c-modal-a-set-fg);
@@ -531,7 +531,7 @@
   color: var(--c-modal-a-fg);
 }
 .wwm-cmp-modal-a .wwm-cmp-stat-select {
-  background: var(--c-modal-a-stat-select-bg);
+  background: var(--bg-modal-a-stat-select);
   border: 1px solid var(--ink-2);
   border-radius: 0;
   font-size: var(--text-sm);
@@ -552,7 +552,7 @@
   font-size: var(--text-md);
 }
 .wwm-cmp-modal-a .wwm-cmp-val-input {
-  background: var(--c-modal-a-stat-select-bg);
+  background: var(--bg-modal-a-stat-select);
   border: 1px solid var(--ink-2);
   border-radius: 0;
 }
@@ -701,11 +701,11 @@
 .wwm-cmp-modal-a .wwm-cmp-grid { position: relative; z-index: 1; }
 /* col / affix-rows 透過化 (背景icon 透けさせる) */
 .wwm-cmp-modal-a .wwm-cmp-col {
-  background: var(--c-modal-a-col-bg);
+  background: var(--bg-modal-a-col);
   border-color: var(--c-cmp-modal-a--cmp-col-border);
 }
 .wwm-cmp-modal-a .wwm-cmp-rows {
-  background: var(--c-modal-a-rows-bg);
+  background: var(--bg-modal-a-rows);
   border: var(--c-cmp-modal-a--cmp-rows-border);
   box-shadow: var(--c-cmp-modal-a--cmp-rows-shadow);
 }
@@ -774,7 +774,7 @@
   box-shadow: none;
 }
 .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
-  background: var(--c-modal-a-btn-secondary-bg);
+  background: var(--bg-modal-a-btn-secondary);
   border: 1px solid var(--text-sumi-dim);
   border-radius: 0;
   color: var(--brown-1);
@@ -2455,17 +2455,17 @@
   background-color: var(--shine-strong);
 }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-title .wwm-cmp-lv-select option {
-  background: var(--c-modal-a-option-bg);
+  background: var(--bg-modal-a-option);
 }
 /* %バッジ rank 色 = 旧 light 値 (main modals.css の data-theme=light rule から移植)。
    !important = gear.js inline color 対抗 (原典同様) */
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-gold { background: var(--c-gold-deep-faint); color: #7a5a12 !important; border-color: var(--c-gold-deep-strong); }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.13); color: #6f3a9a !important; border-color: rgba(120,60,160,0.5); }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.13); color: #2a5aa0 !important; border-color: rgba(40,90,160,0.5); }
-/* footer = header と同 token (--c-cmp-modal-a--modal-header-bg = bg-raised、兄貴指定 2026-06-12)。
+/* footer = header と同 token (--bg-modal-a-header = bg-raised、兄貴指定 2026-06-12)。
    modal 地は縦 gradient で下端ほど暗く footer が沈んで見えていた */
 .wwm-cmp-footer-a {
-  background: var(--c-cmp-modal-a--modal-header-bg);
+  background: var(--bg-modal-a-header);
 }
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
@@ -2478,7 +2478,7 @@
   position: relative;
   isolation: isolate;
   /* 地 = 墨 (body が透ける面)。対照 modal の header 墨と同 token */
-  background: var(--c-cmp-modal-a--modal-header-bg);
+  background: var(--bg-modal-a-header);
   border: 1px solid var(--gold-deep);
   border-radius: 0 0 2px 2px;
   padding: 0;
@@ -2499,7 +2499,7 @@
 
 /* header = 墨帯 (対照 modal header と同 token) */
 .wwm-tool-modal .wwm-modal-header {
-  background: var(--c-cmp-modal-a--modal-header-bg);
+  background: var(--bg-modal-a-header);
   border-bottom: 1px solid var(--gold-soft);
   padding: var(--space-3) var(--space-4) var(--space-2-5);
 }
@@ -2547,7 +2547,7 @@
 
 /* footer = 墨帯 (body の外 = modal 地。対照 .wwm-cmp-footer-a と同文法) */
 .wwm-tool-modal-footer {
-  background: var(--c-cmp-modal-a--modal-header-bg);
+  background: var(--bg-modal-a-header);
   border-top: 1px solid var(--gold-soft);
   padding: var(--space-3) var(--space-4) var(--space-3-5);
   display: flex; align-items: center; justify-content: flex-end; gap: 10px;
@@ -2571,7 +2571,7 @@
 .wwm-tool-modal-footer .wwm-btn-secondary,
 .wwm-tool-modal .wwm-modal-body .wwm-btn-secondary,
 .wwm-tool-modal-footer .wwm-card-post-x {
-  background: var(--c-modal-a-btn-secondary-bg);
+  background: var(--bg-modal-a-btn-secondary);
   border: 1px solid var(--c-cmp-btn-row--btn-secondary-border, var(--text-sumi-dim));
   border-radius: 0;
   color: var(--brown-1);
@@ -2585,7 +2585,7 @@
    workspace 帳簿フォルダ tab と同文法) */
 .wwm-tool-tabs {
   display: flex; gap: 2px; padding: 0 var(--space-4);
-  background: var(--c-cmp-modal-a--modal-header-bg);
+  background: var(--bg-modal-a-header);
   border-bottom: 1px solid var(--gold-deep);
 }
 .wwm-tool-tab {

@@ -98,22 +98,22 @@
   --c-vermilion-fade-end: rgba(232,81,58,0.05);
   --c-fg-emphasis: var(--vermilion-deep);
   --c-modal-a-fg: var(--brown-1);
-  --c-modal-a-option-bg: #f4e8cc;
+  --bg-modal-a-option: #f4e8cc;
   --c-modal-a-option-fg: var(--brown-1);
-  --c-modal-a-rows-bg: var(--shadow-trace);
+  --bg-modal-a-rows: var(--shadow-trace);
   --c-cmp-modal-a--cmp-rows-border: initial;  /* light 原典 = 枠/影なし (dark = 金線+inset影) */
   --c-cmp-modal-a--cmp-rows-shadow: initial;
-  --c-modal-a-kongfu-header-bg: var(--gold-mid); /* 本番 light 実効 rgba(201,164,90,0.3) 採取値 */
+  --bg-modal-a-kongfu-header: var(--gold-mid); /* 本番 light 実効 rgba(201,164,90,0.3) 採取値 */
   --c-modal-a-kongfu-header-fg: var(--text-kami-gold); /* D7 2026-06-15: brown-1 → text-kami-gold 統一 (left/right 色揃え) */
   --c-modal-a-kongfu-select-fg: var(--brown-1);
-  --c-modal-a-kongfu-select-bg: var(--gold-mid);
+  --bg-modal-a-kongfu-select: var(--gold-mid);
   --c-modal-a-set-fg: var(--vermilion-deep); /* D7 2026-06-15: vermilion-bright 明朱 (contrast 3.6:1 AA 不可) → vermilion-deep (7.5:1) で読みやすさ確保、 set-header と統一 */
-  --c-modal-a-set-select-bg: linear-gradient(90deg, var(--vermilion-bright-tint), var(--c-vermilion-fade-end));
-  --c-modal-a-stat-select-bg: var(--shine-strong);
+  --bg-modal-a-set-select: linear-gradient(90deg, var(--vermilion-bright-tint), var(--c-vermilion-fade-end));
+  --bg-modal-a-stat-select: var(--shine-strong);
   --c-modal-a-name-fg: var(--c-modal-a-fg);
   --c-modal-a-val-fg: var(--c-fg-emphasis);
   --c-modal-a-val-input-fg: var(--brown-1);
-  --c-modal-a-lv-bg: var(--shine-strong);
+  --bg-modal-a-lv: var(--shine-strong);
   --c-modal-a-lv-fg: var(--c-text-warm);
   --c-cmp-modal-a--cmp-kongfu-select-border: var(--c-border-mid-warm);
   --c-cmp-modal-a--cmp-set-select-border: var(--c-border-mid-warm);
@@ -127,7 +127,7 @@
   --c-cmp-current--cmp-kongfu-header-fg: var(--text-kami-gold); /* D7 2026-06-15: brown-1 → text-kami-gold 統一 (左右色揃え) */
   --c-cmp-current--cmp-kongfu-header-bg: var(--gold-mid);
   --c-cmp-current--cmp-set-header-fg: var(--c-cmp-set-header-fg);
-  --c-cmp-current--cmp-set-header-bg: var(--c-modal-a-set-select-bg);
+  --c-cmp-current--cmp-set-header-bg: var(--bg-modal-a-set-select);
   --c-cmp-preview-zero-fg: var(--bone-dim);
   --c-cmp-lv-select-fg: var(--c-gold-rich);
   --c-cmp-stat-select-bg: var(--shade-soft);
@@ -221,7 +221,7 @@
      --bg-raised 紙値 #e2d6b4 = Phase 2 step 4 で `.wwm-ws-paper` 配下の
      direct consumer (xinfa.css L71/80 / sidebar.css L251 / layout.css L117 等)
      に紙面値が反映される (2026-06-15 兄貴設計目標値)。 :root 内 component token
-     chain (`--c-modal-a-option-bg: var(--bg-raised)` 等) は :root scope で
+     chain (`--bg-modal-a-option: var(--bg-raised)` 等) は :root scope で
      computed value 確定済 = 紙面 redefine 不感 (CSS custom prop 仕様)。 */
   --bg-canvas:  var(--kami-0);
   --bg-base:    var(--kami-1);
