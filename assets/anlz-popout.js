@@ -193,9 +193,19 @@
     floatEl.style.width = (st.w || 540) + 'px';
     floatEl.style.height = (st.h || 620) + 'px';
     if (st.x !== null && st.x !== undefined) {
-      floatEl.style.left = st.x + 'px';
-      floatEl.style.right = 'auto';
-      floatEl.style.top = (st.y || 100) + 'px';
+      // viewport 外 救出不能 防止 (2026-06-16): 復元位置の最低 50px が画面内に残らないなら
+      // CSS default (top:100 right:30) で fallback
+      var vw = window.innerWidth;
+      var vh = window.innerHeight;
+      var w = st.w || 540;
+      var h = st.h || 620;
+      var y = (st.y == null) ? 100 : st.y;
+      var visible = (st.x + w > 50) && (st.x < vw - 50) && (y + h > 50) && (y < vh - 50);
+      if (visible) {
+        floatEl.style.left = st.x + 'px';
+        floatEl.style.right = 'auto';
+        floatEl.style.top = y + 'px';
+      }
     }
     floatEl.innerHTML = buildShell();
     document.body.appendChild(floatEl);
