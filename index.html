@@ -453,21 +453,6 @@
 
   <!-- 上帯 (L の横画) -->
   <header class="wwm-band">
-    <!-- banner 3 種 = wwm-band 内最上部 (band-top の前)。 band の高さで吸収 → wwm-app grid 内に収まり viewport 100vh 超過なし (2026-06-16 修復、 兄貴指示「本体 scroll NG」 整合)。 wwm-app 外配置 = 100vh + banner で縦 scroll 発生のため不採用 -->
-    <div id="wwmScoreUpdateBanner" class="wwm-score-update-banner" style="display:none;">
-      <span class="wwm-score-update-icon" aria-hidden="true">⚠</span>
-      <span class="wwm-score-update-msg" data-i18n="scoreUpdateMsg">計算データが更新されました。最新スコアを反映するには再インポートしてください</span>
-      <span class="wwm-score-update-arrow" aria-hidden="true">▶</span>
-      <button class="wwm-score-update-btn" onclick="importData()" data-i18n="scoreUpdateBtn">再インポート</button>
-    </div>
-    <div id="wwmShareFailBanner" class="wwm-score-update-banner" style="display:none;" role="alert">
-      <span class="wwm-score-update-icon" aria-hidden="true">⚠</span>
-      <span class="wwm-score-update-msg" data-i18n="errSharedBuildLoad">共有ビルドの読込に失敗しました — 現在表示中なのは自分のデータです</span>
-    </div>
-    <div class="wwm-shared-build-banner" role="status">
-      <span class="wwm-shared-build-icon">👁</span>
-      <span class="wwm-shared-build-text" data-i18n="sharedBuildBanner">閲覧モード: 共有されたビルド (自データは保護中)。 リロード/F5 で自データに戻る</span>
-    </div>
     <div class="wwm-band-top">
       <div class="wwm-brand">
         <h1 class="wwm-brand-vert" data-i18n="brandVert" data-kaisho="brandVert" data-kaisho-fixed>風燕計</h1>
@@ -715,6 +700,21 @@
     </nav>
 
     <div class="wwm-ws-body">
+      <!-- banner 3 種 = wwm-ws-body 冒頭 (兄貴第一希望 2026-06-16)。 main の内部 scroll に乗る、 タイトルバー (wwm-band) より下、 workspace tab の下に出現 -->
+      <div id="wwmScoreUpdateBanner" class="wwm-score-update-banner" style="display:none;">
+        <span class="wwm-score-update-icon" aria-hidden="true">⚠</span>
+        <span class="wwm-score-update-msg" data-i18n="scoreUpdateMsg">計算データが更新されました。最新スコアを反映するには再インポートしてください</span>
+        <span class="wwm-score-update-arrow" aria-hidden="true">▶</span>
+        <button class="wwm-score-update-btn" onclick="importData()" data-i18n="scoreUpdateBtn">再インポート</button>
+      </div>
+      <div id="wwmShareFailBanner" class="wwm-score-update-banner" style="display:none;" role="alert">
+        <span class="wwm-score-update-icon" aria-hidden="true">⚠</span>
+        <span class="wwm-score-update-msg" data-i18n="errSharedBuildLoad">共有ビルドの読込に失敗しました — 現在表示中なのは自分のデータです</span>
+      </div>
+      <div class="wwm-shared-build-banner" role="status">
+        <span class="wwm-shared-build-icon">👁</span>
+        <span class="wwm-shared-build-text" data-i18n="sharedBuildBanner">閲覧モード: 共有されたビルド (自データは保護中)。 リロード/F5 で自データに戻る</span>
+      </div>
       <!-- I 装備 -->
       <!-- I 武備 = 装備 + 心法 統合 panel (2026-06-12 兄貴決定 — 装備単独は下半分空白、
            ビルドとして一体概念。区画題字は旧 tab 名 key を再利用) -->
