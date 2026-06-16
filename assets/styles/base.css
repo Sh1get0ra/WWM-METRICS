@@ -10,7 +10,7 @@
 
 html, body {
   background: var(--sumi-0);
-  color: var(--text-sumi-fg);
+  color: var(--sumi-fg);
   /* 2026-06-15 兄貴指示: base font = --f-display (Shippori Mincho) に変更。
      旧 --f-body (Noto Sans JP) は NOTE modal の更新履歴/仕様タブ等 長文読み物のみ例外。
      武侠舞台のテーマ親和 + Noto Sans JP の AI slop 感回避
@@ -82,7 +82,7 @@ header.topbar::after {
 .title-block h1 {
   font-family: var(--f-display);
   font-weight: var(--fw-black); font-size: var(--text-xl); letter-spacing: 0.12em;
-  color: var(--text-sumi-fg); line-height: 1.1;
+  color: var(--sumi-fg); line-height: 1.1;
 }
 .title-block h1 .accent { color: var(--c-h1-accent-fg); }
 .title-block p {
@@ -210,19 +210,19 @@ html[lang="ko"] .top-controls-2row .icon-btn {
   font-family: var(--f-latin); font-weight: var(--fw-bold);
   font-size: var(--text-sm); letter-spacing: 0.12em;
 }
-.icon-btn.reset-btn { color: var(--text-sumi-fg); border-color: var(--ink-3); }
-.icon-btn.reset-btn:hover { color: var(--text-sumi-vermilion); border-color: var(--vermilion); background: var(--vermilion-faint); }
-.icon-btn.note-btn { color: var(--text-sumi-gold); border-color: var(--gold-deep); }
-.icon-btn.note-btn:hover { color: var(--text-sumi-gold); border-color: var(--gold); background: var(--gold-faint); }
+.icon-btn.reset-btn { color: var(--sumi-fg); border-color: var(--ink-3); }
+.icon-btn.reset-btn:hover { color: var(--vermilion-bright); border-color: var(--vermilion); background: var(--vermilion-faint); }
+.icon-btn.note-btn { color: var(--gold); border-color: var(--gold-deep); }
+.icon-btn.note-btn:hover { color: var(--gold); border-color: var(--gold); background: var(--gold-faint); }
 
 .lang-switcher { display: flex; gap: 0; padding: var(--space-half); background: var(--shade-strong); border: 1px solid var(--ink-2); border-radius: 2px; }
 .lang-btn {
   padding: var(--space-1) var(--space-2-5); border: none; background: transparent;
-  color: var(--text-sumi-dim); font-family: var(--f-latin); font-weight: var(--fw-semibold);
+  color: var(--sumi-fg-dim); font-family: var(--f-latin); font-weight: var(--fw-semibold);
   font-size: var(--text-sm); letter-spacing: 0.08em; cursor: pointer;
   transition: color 0.15s, background 0.15s;
 }
-.lang-btn:hover { color: var(--text-sumi-fg); }
+.lang-btn:hover { color: var(--sumi-fg); }
 /* critique P1 (2026-06-07): 旧 gold-bright on vermilion-mid ≈ 3.4-3.7:1 fail →
    朱影地金文字 (SS badge 語彙、 6.2:1)。 token = theme constant で light 側 override 不要 */
 .lang-btn.active {
@@ -239,11 +239,11 @@ html[lang="ko"] .top-controls-2row .icon-btn {
   display: grid; place-items: center;
   background: var(--shade-mid);
   border: 1px solid var(--ink-2);
-  color: var(--text-sumi-dim); border-radius: 2px; cursor: pointer;
+  color: var(--sumi-fg-dim); border-radius: 2px; cursor: pointer;
   font-size: var(--text-md);
   transition: all 0.15s;
 }
-.icon-btn:hover { color: var(--text-sumi-gold); border-color: var(--gold-deep); background: var(--gold-tint); }
+.icon-btn:hover { color: var(--gold); border-color: var(--gold-deep); background: var(--gold-tint); }
 a.icon-btn { text-decoration: none; }
 .icon-btn-x svg { display: block; }
 .icon-btn.import-btn,
@@ -252,7 +252,7 @@ a.icon-btn { text-decoration: none; }
   font-family: var(--f-latin); font-weight: var(--fw-bold); font-size: var(--text-sm); letter-spacing: 0.12em;
 }
 .icon-btn.import-btn {
-  color: var(--text-sumi-gold); border-color: var(--gold-deep);
+  color: var(--gold); border-color: var(--gold-deep);
 }
 .icon-btn.import-btn:hover {
   background: var(--gold); color: var(--sumi-0); border-color: var(--gold);
@@ -301,13 +301,13 @@ a.icon-btn { text-decoration: none; }
 footer {
   text-align: center; padding: var(--space-5) 0 var(--space-1-5);
   font-family: var(--f-latin); font-size: var(--text-xs);
-  color: var(--text-sumi-dim); letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--sumi-fg-dim); letter-spacing: 0.2em; text-transform: uppercase;
 }
 footer strong { color: var(--c-footer-strong-fg); }
 
 #toast {
   position: fixed; bottom: 28px; right: 28px;
-  background: var(--bg-toast); color: var(--text-sumi-fg);
+  background: var(--bg-toast); color: var(--sumi-fg);
   padding: 11px 18px;
   border: 1px solid var(--gold-deep); border-left: 3px solid var(--gold);
   font-family: var(--f-display); font-size: var(--text-12); font-weight: var(--fw-semibold);
@@ -350,7 +350,7 @@ footer strong { color: var(--c-footer-strong-fg); }
 }
 .wwm-import-hint-arrow {
   font-size: var(--text-2xl);
-  color: var(--text-sumi-vermilion);
+  color: var(--vermilion-bright);
   text-shadow: 0 0 12px rgba(232,81,58,.8), 0 0 22px rgba(232,81,58,.5);
   animation: wwm-hint-bounce 1.2s ease-in-out infinite;
   line-height: 1;
@@ -361,7 +361,7 @@ footer strong { color: var(--c-footer-strong-fg); }
   background: linear-gradient(135deg, rgba(180,40,28,.95), rgba(100,20,14,.92));
   border: 1px solid rgba(240,210,138,.6);
   border-radius: 4px;
-  color: var(--text-sumi-gold);
+  color: var(--gold);
   font-family: var(--f-display);
   font-size: var(--text-12);
   font-weight: var(--fw-bold);
@@ -389,7 +389,7 @@ footer strong { color: var(--c-footer-strong-fg); }
   transform: translateX(-50%);
   padding: var(--space-1) var(--space-2);
   background: var(--shadow-heavy);
-  color: var(--text-sumi-fg);
+  color: var(--sumi-fg);
   font-size: var(--text-xs);
   white-space: nowrap;
   border-radius: 4px;
@@ -430,11 +430,11 @@ footer strong { color: var(--c-footer-strong-fg); }
   animation: wwm-banner-in .45s cubic-bezier(.22,1,.36,1), wwm-banner-glow 2.2s ease-in-out .45s infinite;
   border-bottom-color: var(--c-score-update-banner-border-bot);
 }
-.wwm-score-update-icon { flex: 0 0 auto; font-size: var(--text-lg); color: var(--text-sumi-vermilion); animation: wwm-banner-icon-pulse 1.4s ease-in-out infinite; }
+.wwm-score-update-icon { flex: 0 0 auto; font-size: var(--text-lg); color: var(--vermilion-bright); animation: wwm-banner-icon-pulse 1.4s ease-in-out infinite; }
 .wwm-score-update-arrow {
   flex: 0 0 auto;
   font-size: var(--text-15);
-  color: var(--text-sumi-vermilion);
+  color: var(--vermilion-bright);
   text-shadow: 0 0 10px var(--vermilion-bright-strong);
   animation: wwm-banner-arrow-bounce 1.1s ease-in-out infinite;
 }

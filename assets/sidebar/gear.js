@@ -29,7 +29,7 @@
   // anlz
   const _curLang             = window.WWMSidebar.anlz.curLang;
   // sidebar.js 内 (call時 lookup、 module load 順 非依存)
-  const _ratioColor             = (...args) => window._ratioColor ? window._ratioColor(...args) : 'var(--text-sumi-dim)';
+  const _ratioColor             = (...args) => window._ratioColor ? window._ratioColor(...args) : 'var(--sumi-fg-dim)';
   const _getEffectiveRoleInfo   = () => (typeof window._getEffectiveRoleInfo === 'function' ? window._getEffectiveRoleInfo() : null);
   const _refreshAll             = () => { if (typeof window._refreshAll === 'function') window._refreshAll(); };
 

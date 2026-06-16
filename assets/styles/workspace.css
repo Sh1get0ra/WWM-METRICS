@@ -27,7 +27,7 @@
   --sumi-2: #2f2a23;
   /* 墨面 text/line token — 紙 scope に rescope されない墨独立色
      (mock 分離設計。紙 scope 内の墨要素 = 扁額/tab帯/teaser/奇術 がこれを使う) */
-  --sumi-text:   #ede4d0;
+  /* --sumi-text は R3 で --sumi-fg に集約 (tokens.css 真実源)。 -2/-3 は値違い (#c8bda6 / #8b8170) で keep */
   --sumi-text-2: #c8bda6;
   --sumi-text-3: #8b8170;
   --sumi-ink-1:  rgba(232,215,180,0.07);
@@ -39,12 +39,12 @@
   --kami-0: #f2ead4;
   --kami-1: #f8f1e1;
   --kami-2: #e9e0c7;
-  --kami-ink: #3d2e1f;
+  /* --kami-ink は R3 で --kami-fg に集約 (tokens.css 真実源)。 -2/-3 は値違いで keep */
   --kami-ink-2: #54422e;
   --kami-ink-3: #7a6a52;
   --kami-line-1: rgba(42,28,18,0.14);
   --kami-line-2: rgba(42,28,18,0.28);
-  --gold-paper: #6e5414;
+  /* --gold-paper は tokens.css R1 で真実源化 (同値 #6e5414) */
   --jade-paper: #3f6a4d;
 
   /* rail geometry / easing */
@@ -60,12 +60,12 @@
   --bg-overlay-top: rgba(255,248,228,0.55); --bg-overlay-bottom: rgba(244,232,204,0.72);
   --input-bg: rgba(255,250,235,0.85); --input-text: #5e3a14;
   --ink-1: var(--kami-line-1); --ink-2: var(--kami-line-2); --ink-3: rgba(40,25,18,0.35);
-  --paper: var(--kami-ink); --paper-2: var(--kami-ink-2); --paper-dim: var(--kami-ink-3); --paper-mute: #6a5236;
+  --paper: var(--kami-fg); --paper-2: var(--kami-ink-2); --paper-dim: var(--kami-ink-3); --paper-mute: #6a5236;
   --gold: #8a6a20; --gold-bright: #5e4310; --gold-deep: #c9a45a; --gold-glow: rgba(138,106,32,0.3);
   --jade: #4a7a5a; --jade-bright: var(--jade-paper);
   --bone: #6a5236; --bone-dim: #8a7350;
   --donut-track: rgba(58,38,22,0.10);
-  color: var(--kami-ink);
+  color: var(--kami-fg);
 
   /* ── 紙面 component token (light.css 転用) ──
      tokens.css の :root default は dark 面向け (明金/白文字) のため、
@@ -104,7 +104,7 @@
   --c-cmp-modal-a--cmp-rows-border: initial;  /* light 原典 = 枠/影なし (dark = 金線+inset影) */
   --c-cmp-modal-a--cmp-rows-shadow: initial;
   --bg-modal-a-kongfu-header: var(--gold-mid); /* 本番 light 実効 rgba(201,164,90,0.3) 採取値 */
-  --c-modal-a-kongfu-header-fg: var(--text-kami-gold); /* D7 2026-06-15: brown-1 → text-kami-gold 統一 (left/right 色揃え) */
+  --c-modal-a-kongfu-header-fg: var(--gold-paper); /* D7 2026-06-15: brown-1 → text-kami-gold 統一 (left/right 色揃え) */
   --c-modal-a-kongfu-select-fg: var(--brown-1);
   --bg-modal-a-kongfu-select: var(--gold-mid);
   --c-modal-a-set-fg: var(--vermilion-deep); /* D7 2026-06-15: vermilion-bright 明朱 (contrast 3.6:1 AA 不可) → vermilion-deep (7.5:1) で読みやすさ確保、 set-header と統一 */
@@ -124,7 +124,7 @@
   --c-cmp-set-header-text-shadow: none;
   /* current 列 = 本番 light 実効値 (pages.dev computed 採取 2026-06-12) — 新置と同色系 */
   --bg-cmp-current--cmp-row: var(--shade-soft);
-  --c-cmp-current--cmp-kongfu-header-fg: var(--text-kami-gold); /* D7 2026-06-15: brown-1 → text-kami-gold 統一 (左右色揃え) */
+  --c-cmp-current--cmp-kongfu-header-fg: var(--gold-paper); /* D7 2026-06-15: brown-1 → text-kami-gold 統一 (左右色揃え) */
   --bg-cmp-current--cmp-kongfu-header: var(--gold-mid);
   --c-cmp-current--cmp-set-header-fg: var(--c-cmp-set-header-fg);
   --bg-cmp-current--cmp-set-header: var(--bg-modal-a-set-select);
@@ -145,7 +145,7 @@
   --c-equip-setname-text-shadow:   none;
   --c-fg-vermilion-strong:         var(--vermilion-deep);
   --c-sb-notice-fg:                var(--vermilion-deep);
-  --c-xinfa-tier-fg:               var(--text-sumi-fg);
+  --c-xinfa-tier-fg:               var(--sumi-fg);
   --bg-xinfa-tier-chip:          var(--vermilion-bright-tint);
   --c-xinfa-tier-chip-border:      var(--c-vermilion-deep-mid);
   --c-xinfa-cell--xinfa-tier-border: var(--ink-2);
@@ -401,7 +401,7 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   grid-column: 1 / 3;
   position: relative;
   background: transparent; /* 公式 BG (.wwm-app::before) を透過で見せる */
-  color: var(--sumi-text);
+  color: var(--sumi-fg);
   overflow: hidden;
 }
 .wwm-band-top {
@@ -444,7 +444,7 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
    サイズは seat 側 scope = 席 swap でサイズ責務一元化の既存方針 */
 .hero-wuxia .eyebrow .seat-title {
   font-family: var(--f-display); font-weight: 700;
-  letter-spacing: .18em; color: var(--text-sumi-gold); /* 題字=金、スコア値=白 (兄貴指定 2026-06-12) */
+  letter-spacing: .18em; color: var(--gold); /* 題字=金、スコア値=白 (兄貴指定 2026-06-12) */
 }
 /* 主役席の高さ固定 = 武備 (score 主役 = 大数値 + Tier + donut + NEXT)
    ⇔ 戦律 (dps 主役 = COMING SOON 等) 切替で hero 縦伸縮していたのを止める。
@@ -497,12 +497,12 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   display: flex; align-items: flex-start;
   font-family: var(--f-latin); font-weight: 800;
   font-size: 82px; line-height: 0.95; letter-spacing: -0.015em;
-  color: var(--text-sumi-fg); /* 古紙白 #ede4d0 — 旧 hero 復帰 (兄貴指示 2026-06-12、明金は棄却) */
+  color: var(--sumi-fg); /* 古紙白 #ede4d0 — 旧 hero 復帰 (兄貴指示 2026-06-12、明金は棄却) */
   margin-top: 6px;
   white-space: nowrap;
 }
 .hero-wuxia .seat-main .hb-num .unit {
-  font-size: 20px; letter-spacing: 0.18em; color: var(--text-sumi-gold);
+  font-size: 20px; letter-spacing: 0.18em; color: var(--gold);
   margin-left: 12px; font-weight: 700;
 }
 /* Tier badge = identity 固定 (.pwr 行、総合武力の右 — 兄貴指定 2026-06-11)。
@@ -560,22 +560,22 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 }
 .hero-wuxia .avatar svg, .hero-wuxia .avatar img { width: 100%; height: 100%; display: block; }
 .hero-wuxia .h-id-info { min-width: 170px; }
-.hero-wuxia .pname { font-family: var(--f-display); font-weight: 700; font-size: 17px; color: var(--sumi-text); }
-.hero-wuxia .pname b { font-family: var(--f-latin); font-weight: 600; font-size: 12px; color: var(--text-sumi-gold); margin-left: 8px; }
+.hero-wuxia .pname { font-family: var(--f-display); font-weight: 700; font-size: 17px; color: var(--sumi-fg); }
+.hero-wuxia .pname b { font-family: var(--f-latin); font-weight: 600; font-size: 12px; color: var(--gold); margin-left: 8px; }
 .hero-wuxia .pwr {
   margin-top: 2px; font-family: var(--f-latin); font-weight: 600; font-size: 11px;
   letter-spacing: 0.1em; color: var(--sumi-text-3);
 }
-.hero-wuxia .pwr b { font-family: var(--f-latin); font-size: 14px; color: var(--text-sumi-gold); margin-left: 6px; }
+.hero-wuxia .pwr b { font-family: var(--f-latin); font-size: 14px; color: var(--gold); margin-left: 6px; }
 .hero-wuxia .seat-sub { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--sumi-ink-1); }
 .hero-wuxia .seat-sub .eyebrow { font-size: 9px; letter-spacing: 0.26em; }
 .hero-wuxia .seat-sub .hb-num {
   display: flex; align-items: flex-start; /* seat-main と同じ落下防止構造 */
   font-family: var(--f-latin); font-weight: 800;
-  font-size: 28px; line-height: 1; color: var(--text-sumi-gold);
+  font-size: 28px; line-height: 1; color: var(--gold);
   margin-top: 4px; white-space: nowrap;
 }
-.hero-wuxia .seat-sub .hb-num .unit { font-size: 11px; letter-spacing: 0.14em; color: var(--text-sumi-gold); margin-left: 6px; font-weight: 700; }
+.hero-wuxia .seat-sub .hb-num .unit { font-size: 11px; letter-spacing: 0.14em; color: var(--gold); margin-left: 6px; font-weight: 700; }
 /* (tier badge は identity .pwr 固定化 — seat 内 tchip rule は廃止 2026-06-11) */
 .hero-wuxia .seat-sub .hb-note { display: none; }
 /* COMING SOON (演武 DPS 実装前 placeholder) — 数値 96px 継承では過大、文字として品よく */
@@ -587,7 +587,7 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   grid-row: 2 / 3;
   position: relative;
   background: transparent; /* 公式 BG (.wwm-app::before) を透過で見せる */
-  color: var(--sumi-text);
+  color: var(--sumi-fg);
   /* 金罫は紙側の縁取り (.wwm-ws-body / footer border-left) — 墨同士は地続き */
   /* overflow: clip = kanji-mark/掛軸 ::before のはみ出し切断。
      viewport 固定化 (2026-06-12) で rail 自体は動かない — scroll は rest 内部のみ */
@@ -654,7 +654,7 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   border-radius: 0;
   padding: 0;
   z-index: auto;
-  color: var(--sumi-text);
+  color: var(--sumi-fg);
   /* viewport 固定化 (2026-06-12): rest へ高さ制約を渡す flex chain */
   display: flex; flex-direction: column;
   flex: 1; min-height: 0;
@@ -676,7 +676,7 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
 .wwm-rail-head h3 {
   display: flex; align-items: center; font-family: var(--f-display);
   font-size: 13px; font-weight: 700; letter-spacing: 0.28em;
-  color: var(--text-sumi-gold); white-space: nowrap;
+  color: var(--gold); white-space: nowrap;
 }
 .wwm-rail-head h3::before {
   content: ""; width: 8px; height: 8px; background: var(--vermilion);
@@ -688,10 +688,10 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
 }
 .wwm-rail-toggle {
   background: transparent; border: 1px solid var(--sumi-ink-2); border-radius: 1px;
-  color: var(--text-sumi-gold); font-size: 11px; width: 24px; height: 24px; flex: 0 0 24px;
+  color: var(--gold); font-size: 11px; width: 24px; height: 24px; flex: 0 0 24px;
   transition: color .15s ease, border-color .15s ease;
 }
-.wwm-rail-toggle:hover { color: var(--text-sumi-gold); border-color: var(--gold-deep); }
+.wwm-rail-toggle:hover { color: var(--gold); border-color: var(--gold-deep); }
 .wwm-rail-fade {
   transition: opacity .15s ease;
   /* rail-in flex の高さ制約を sidebar→rest へ素通しする (viewport 固定化 2026-06-12)。
@@ -780,9 +780,9 @@ html[lang="zh-CN"] [data-kaisho] {
   font-family: var(--f-display);
 }
 
-.wwm-ws-tab:hover { color: var(--sumi-text); background: rgba(242,234,212,0.06); }
+.wwm-ws-tab:hover { color: var(--sumi-fg); background: rgba(242,234,212,0.06); }
 .wwm-ws-tab[aria-selected="true"] {
-  color: var(--kami-ink);
+  color: var(--kami-fg);
   /* 浮島カード = 紙色塊 + 金枠 + 影。 panel と border-bottom 共有しない = 帯と panel が
      1px 金線で明確分離、 active tab だけ墨帯の中に「置かれて」 いる見え方 */
   background: var(--kami-0);
@@ -845,7 +845,7 @@ html[lang="zh-CN"] [data-kaisho] {
   font-size: 12.5px; color: var(--sumi-text-2);
   transition: background .12s ease, color .12s ease;
 }
-.wwm-lang-dd-pop .lang-btn:hover { background: rgba(232,215,180,0.08); color: var(--sumi-text); }
+.wwm-lang-dd-pop .lang-btn:hover { background: rgba(232,215,180,0.08); color: var(--sumi-fg); }
 .wwm-lang-dd-pop .lang-btn.active { color: #241806; background: var(--gold); font-weight: 700; }
 
 /* preset popover */
@@ -857,7 +857,7 @@ html[lang="zh-CN"] [data-kaisho] {
   border: 1px solid var(--sumi-ink-2); border-radius: 1px; padding: 5px 10px;
   transition: border-color .15s ease, color .15s ease;
 }
-.wwm-preset-chip:hover { border-color: var(--gold-deep); color: var(--text-sumi-fg); }
+.wwm-preset-chip:hover { border-color: var(--gold-deep); color: var(--sumi-fg); }
 .wwm-preset-chip.on { color: #241806; background: var(--gold); border-color: var(--gold); font-weight: 700; }
 .wwm-preset-pop {
   position: absolute; top: calc(100% + 8px); right: 0;
@@ -871,17 +871,17 @@ html[lang="zh-CN"] [data-kaisho] {
 }
 .wwm-preset-pop.open { display: block; }
 .wwm-preset-pop h4 {
-  font-family: var(--f-display); font-size: 12px; font-weight: 700; color: var(--kami-ink);
+  font-family: var(--f-display); font-size: 12px; font-weight: 700; color: var(--kami-fg);
   margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--kami-line-1);
 }
 .wwm-preset-pop .pp-row { display: flex; align-items: center; gap: 8px; padding: 5px 2px; font-size: 12px; }
 .wwm-preset-pop .pp-row .num { font-family: var(--f-latin); color: var(--gold-paper); font-weight: 600; }
-.wwm-preset-pop .pp-row .name { flex: 1; color: var(--kami-ink); }
+.wwm-preset-pop .pp-row .name { flex: 1; color: var(--kami-fg); }
 .wwm-preset-pop .pp-act {
   font-size: 10px; font-family: var(--f-latin); letter-spacing: .05em; padding: 3px 8px;
   border: 1px solid var(--kami-line-2); background: transparent; color: var(--kami-ink-2); border-radius: 1px;
 }
-.wwm-preset-pop .pp-act:hover { border-color: var(--gold-deep); color: var(--text-kami-fg); }
+.wwm-preset-pop .pp-act:hover { border-color: var(--gold-deep); color: var(--kami-fg); }
 
 /* 武備 tab = 公式 bg-icon 透かし (兄貴指示 2026-06-14、 anlz-bgicon と同 pattern)。
    workspace.js が `.wwm-ws-body` 最初に `<div class="wwm-ws-bgicon-layer">` を挿入 → sticky + top:0 で
@@ -957,7 +957,7 @@ html[lang="zh-CN"] [data-kaisho] {
 .wwm-ws-sec .pl {
   display: inline-flex; align-items: baseline; gap: 10px;
   font-family: var(--f-display); font-size: 16px; font-weight: 700; letter-spacing: 0.14em;
-  background: none; color: var(--sumi-text);
+  background: none; color: var(--sumi-fg);
   position: relative;
   isolation: isolate; /* ::before z:-1 を .pl 内最背面に閉じる (無いと panel 背景の裏へ) */
   /* 刷毛は文字よりややタイト = 払いが刷毛の縁にかかる程度 (兄貴チューニング 2026-06-12:
@@ -974,7 +974,7 @@ html[lang="zh-CN"] [data-kaisho] {
   z-index: -1;
   pointer-events: none;
 }
-.wwm-ws-sec .tag { font-family: var(--f-latin); font-weight: 600; font-size: 10px; letter-spacing: 0.18em; color: var(--text-kami-gold); }
+.wwm-ws-sec .tag { font-family: var(--f-latin); font-weight: 600; font-size: 10px; letter-spacing: 0.18em; color: var(--gold-paper); }
 .wwm-ws-sec::after { content: ""; flex: 1; height: 1px; background: var(--kami-line-2); }
 
 /* 奇術 grid — 装備/心法 plank 質感の正方形 木札 (85×85 @ 親 ≥ 947px、 装備木札横幅の 75%
@@ -1079,17 +1079,17 @@ html[lang="zh-CN"] [data-kaisho] {
   background: var(--sumi-1);
   border: 1px solid var(--gold-deep);
   border-radius: 2px;
-  color: var(--text-sumi-fg);
+  color: var(--sumi-fg);
   text-align: center;
   padding: 46px 40px 42px;
   overflow: hidden;
 }
 .wwm-teaser .kanji-mark { right: -20px; top: 50%; transform: translateY(-50%); font-size: 220px; color: rgba(232,215,180,0.05); }
-.wwm-teaser .mk { font-family: var(--f-display); font-size: 40px; font-weight: 700; color: var(--text-sumi-gold); line-height: 1; }
+.wwm-teaser .mk { font-family: var(--f-display); font-size: 40px; font-weight: 700; color: var(--gold); line-height: 1; }
 .wwm-teaser h3 { font-family: var(--f-display); font-weight: 700; font-size: 19px; letter-spacing: .2em; margin: 10px 0 8px; }
-.wwm-teaser p { font-size: 12.5px; color: var(--text-sumi-dim); max-width: 42ch; margin: 0 auto; }
-.wwm-teaser .road { display: flex; justify-content: center; gap: 22px; margin-top: 22px; font-family: var(--f-latin); font-weight: 600; font-size: 11px; letter-spacing: .1em; color: var(--text-sumi-dim); }
-.wwm-teaser .road b { color: var(--text-sumi-gold); font-weight: 600; }
+.wwm-teaser p { font-size: 12.5px; color: var(--sumi-fg-dim); max-width: 42ch; margin: 0 auto; }
+.wwm-teaser .road { display: flex; justify-content: center; gap: 22px; margin-top: 22px; font-family: var(--f-latin); font-weight: 600; font-size: 11px; letter-spacing: .1em; color: var(--sumi-fg-dim); }
+.wwm-teaser .road b { color: var(--gold); font-weight: 600; }
 
 /* footer 配置 — 既存 .wwm-footer の見た目は既存 CSS、紙面内の border-left 金罫 +
    紙背景 (main から移譲 — tabs 帯透過化のため main 全体背景は廃止) */
@@ -1175,7 +1175,7 @@ html[lang="zh-CN"] [data-kaisho] {
     font-family: var(--f-display); font-size: 10px;
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
   }
-  .wwm-bn[aria-selected="true"] { background: var(--kami-0); color: var(--kami-ink); border-radius: 1px; }
+  .wwm-bn[aria-selected="true"] { background: var(--kami-0); color: var(--kami-fg); border-radius: 1px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1557,7 +1557,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   font-family: var(--f-display);
   font-size: 13px;
   letter-spacing: 0.14em;
-  color: var(--text-kami-gold);
+  color: var(--gold-paper);
   margin: 0 0 22px 0;
   padding: 10px 12px;
   border-top: 1px solid var(--kami-line-2);
@@ -1573,7 +1573,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.22em;
-  color: var(--text-sumi-gold);
+  color: var(--gold);
   text-align: center;
   margin: 0 0 16px 0;
   padding: 6px 0;
@@ -1788,7 +1788,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   font-family: var(--f-display);
   font-size: 11px;
   letter-spacing: 0.06em;
-  color: var(--text-kami-dim);
+  color: var(--kami-fg-dim);
   text-align: center;
   line-height: 1.4;
   opacity: 0.78;
@@ -1825,7 +1825,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   font-family: var(--f-display);
   font-size: 9px;
   letter-spacing: 0.1em;
-  color: var(--text-sumi-gold);
+  color: var(--gold);
   background: var(--sumi-1, #1a1008);
   padding: 1px 5px;
   border-radius: 2px;
@@ -1859,17 +1859,17 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 }
 .wwm-hist-pb-label {
   font-family: var(--f-latin); font-size: 12px;
-  letter-spacing: 0.18em; color: var(--text-kami-dim);
+  letter-spacing: 0.18em; color: var(--kami-fg-dim);
   text-transform: uppercase;
 }
 .wwm-hist-pb-score {
   font-family: var(--f-latin); font-size: 36px; font-weight: 900;
-  color: var(--text-kami-fg); line-height: 1;
+  color: var(--kami-fg); line-height: 1;
   font-variant-numeric: tabular-nums;
 }
 .wwm-hist-pb-sub {
   margin-left: auto;
-  font-size: 11px; color: var(--text-kami-dim);
+  font-size: 11px; color: var(--kami-fg-dim);
   letter-spacing: 0.06em;
 }
 .wwm-hist-chips {
@@ -1882,14 +1882,14 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   padding: 4px 12px;
   border: 1px solid var(--kami-line-2);
   background: transparent;
-  color: var(--text-kami-fg);
+  color: var(--kami-fg);
   border-radius: 2px;
   cursor: pointer;
   transition: color .15s ease, border-color .15s ease, background .15s ease;
 }
-.wwm-hist-chip:hover { color: var(--text-kami-fg); border-color: var(--gold-deep); }
+.wwm-hist-chip:hover { color: var(--kami-fg); border-color: var(--gold-deep); }
 .wwm-hist-chip[aria-pressed="true"] {
-  color: var(--text-kami-fg);
+  color: var(--kami-fg);
   border-color: var(--gold-deep);
   background: rgba(201,164,90,0.10); /* gold-deep + 10% alpha — token 未定義 */
 }
