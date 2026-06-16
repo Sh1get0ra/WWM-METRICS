@@ -30,42 +30,12 @@
   --vermilion:        #c83c2b;
   --vermilion-deep:   #8a1f17;
   --vermilion-bright: #e8513a;
-  --vermilion-glow:   rgba(232, 81, 58, 0.5);
-  /* vermilion 派生 (rgba 集約用) — 不透明度連続スケール */
-  --vermilion-trace:       rgba(200,60,43,0.05);
-  --vermilion-faint:       rgba(200,60,43,0.08);
-  --vermilion-tint:        rgba(200,60,43,0.10);
-  --vermilion-soft:        rgba(200,60,43,0.15);
-  --vermilion-soft-light:  rgba(200,60,43,0.18);
-  --vermilion-soft-2:      rgba(200,60,43,0.20);
-  --vermilion-mid:         rgba(200,60,43,0.30);
-  --vermilion-mid-2:       rgba(200,60,43,0.35);
-  --vermilion-mid-strong:  rgba(200,60,43,0.40);
-  --vermilion-strong:      rgba(200,60,43,0.55);
-  --vermilion-bright-tint: rgba(232,81,58,0.18);
-  --vermilion-bright-soft: rgba(232,81,58,0.25);
-  --vermilion-bright-soft-mid: rgba(232,81,58,0.40);
-  --vermilion-bright-mid:  rgba(232,81,58,0.45);
-  --vermilion-bright-mid-2: rgba(232,81,58,0.55);
-  --vermilion-bright-glow: rgba(232,81,58,0.60);
-  --vermilion-bright-strong: rgba(232,81,58,0.70);
+  /* R5 (2026-06-17): vermilion-glow + 17 派生 → callsite で color-mix(in oklab, var(--vermilion|--vermilion-bright) N%, transparent) 直書換、 token 物理削除 */
 
   --gold:        #c9a45a;
   --gold-bright: #f0d28a;
   --gold-deep:   #8a6f30;
-  --gold-glow:   rgba(240, 210, 138, 0.4);
-  /* gold/gold-bright 派生 (rgba集約) */
-  --gold-trace:        rgba(201,164,90,0.05);
-  --gold-faint:        rgba(201,164,90,0.08);
-  --gold-tint:         rgba(201,164,90,0.12);
-  --gold-soft:         rgba(201,164,90,0.20);
-  --gold-mid:          rgba(201,164,90,0.30);
-  --gold-strong:       rgba(201,164,90,0.50);
-  --gold-bright-faint: rgba(240,210,138,0.08);
-  --gold-bright-tint:  rgba(240,210,138,0.12);
-  --gold-bright-soft:  rgba(240,210,138,0.25);
-  --gold-bright-mid-2: rgba(240,210,138,0.40);
-  --gold-bright-mid:   rgba(240,210,138,0.50);
+  /* R4 (2026-06-17): gold-glow + 11 派生 → callsite で color-mix(in oklab, var(--gold|--gold-bright) N%, transparent) 直書換、 token 物理削除 */
   /* overlay (暗/明オーバーレイ) */
   --shadow-trace:     rgba(0,0,0,0.15);
   --overlay-tint:      rgba(0,0,0,0.25);
@@ -83,17 +53,14 @@
 
   --jade:        #7fa88a;
   --jade-bright: #a8d4b4;
-  /* jade-bright 派生 (rgba constant, light theme でも値変化なし) */
-  --jade-bright-mid:    rgba(168,212,180,0.40);
-  --jade-bright-strong: rgba(168,212,180,0.55);
+  /* R6 (2026-06-17): jade-bright-mid/strong → color-mix 直書換 */
 
   /* 特殊用途 constant tokens */
   --vermilion-note: #b8321f;  /* NOTE modal 巻物 accent (--vermilion より暗 saturated) */
 
   /* Phase 4.4c: 旧 var(--accent) fallback の実体定義 + 共通色 family */
   --accent:         #d4af37;                  /* 旧 fallback の実体、 dark/light 両 constant gold */
-  --accent-faint:   rgba(212,175,55,0.08);
-  --accent-mid:     rgba(212,175,55,0.30);
+  /* R6 (2026-06-17): accent-faint/mid → color-mix 直書換 */
   --amber-glow:     rgba(255,200,80,0.40);   /* 暖橙 glow (drop-shadow 用) */
   --liupai-guyun:   #c389ff;                  /* 流派: 瞬嵐 (guyun) 紫 */
 
@@ -216,20 +183,20 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
   /* ─── @layer Step 2-c: theme-swap tokens (dark default) ─── */
   --c-brand-en-fg: var(--sumi-fg);
   --c-brand-sub-fg: var(--c-fg-gold-label);
-  --bg-shared-banner: linear-gradient(90deg, var(--vermilion-mid-strong), var(--vermilion-mid));  /* 2026-06-16: 紙面上で優しすぎ (0.2/0.1) → 0.40/0.30 で警告感強化 */
+  --bg-shared-banner: linear-gradient(90deg, color-mix(in oklab, var(--vermilion) 40%, transparent), color-mix(in oklab, var(--vermilion) 30%, transparent));  /* 2026-06-16: 紙面上で優しすぎ (0.2/0.1) → 0.40/0.30 で警告感強化 */
   --c-footer-logo-opacity: 0.75;
   --bg-preset-bar: var(--bg-overlay-bottom);
   --c-h1-accent-fg: var(--vermilion-bright);
   --c-h1-sub-fg: var(--sumi-fg);
   --bg-preset-slot-has-data: rgba(40,30,18,0.12);
   --c-preset-slot-has-data-border: rgba(201,164,90,0.4);
-  --c-preset-save-border: var(--gold-strong);
-  --bg-sb-mini-hero-ink: linear-gradient(90deg, rgba(232,81,58,0), var(--vermilion-bright-tint), rgba(232,81,58,0));
+  --c-preset-save-border: color-mix(in oklab, var(--gold) 50%, transparent);
+  --bg-sb-mini-hero-ink: linear-gradient(90deg, rgba(232,81,58,0), color-mix(in oklab, var(--vermilion-bright) 18%, transparent), rgba(232,81,58,0));
   --bg-sb-rest: linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
   --c-sb-applied-fg: var(--accent);
   --c-sb-applied-opacity: 0.85;
-  --c-equip-delta-pos-text-shadow: 0 0 4px var(--jade-bright-mid);
-  --c-equip-delta-neg-text-shadow: 0 0 4px var(--vermilion-bright-soft-mid);
+  --c-equip-delta-pos-text-shadow: 0 0 4px color-mix(in oklab, var(--jade-bright) 40%, transparent);
+  --c-equip-delta-neg-text-shadow: 0 0 4px color-mix(in oklab, var(--vermilion-bright) 40%, transparent);
   --c-sb-notice-fg: #ffb39e;
   --c-opt-loading-fg: var(--gold-bright);
   --c-opt-loading-text-shadow: 0 0 12px rgba(232,200,120,0.45);
@@ -238,16 +205,16 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
   --bg-opt-btn-apply-hover: rgba(168,212,180,0.1);
   --bg-eff-input: var(--shadow-soft);
   --c-eff-input-fg: var(--gold-bright);
-  --bg-sb-section-title: var(--accent-faint);
+  --bg-sb-section-title: color-mix(in oklab, var(--accent) 8%, transparent);
   --c-sb-section-title-fg: var(--accent);
   --c-modal-fg: var(--text, #fff);
   --bg-modal-a-header: var(--sumi-3);
   --c-cmp-title-en-fg: var(--chart-sympathy);
-  --c-cmp-set-header-text-shadow: 0 0 6px var(--vermilion-bright-soft-mid);
+  --c-cmp-set-header-text-shadow: 0 0 6px color-mix(in oklab, var(--vermilion-bright) 40%, transparent);
   --c-cmp-preview-zero-fg: var(--sumi-fg);
   --c-cmp-modal-bg-icon-opacity: 0.1;
   --c-modal-bg-icon-opacity: 0.18;
-  --bg-xinfa-tier-chip: var(--vermilion-soft);
+  --bg-xinfa-tier-chip: color-mix(in oklab, var(--vermilion) 15%, transparent);
   --c-hero-number-text-shadow: 0 5px 5px var(--shadow-heavy), 0 5px 20px var(--shadow-soft-mid);
   /* hero title (武格指数) shadow — text 用 + ja 玉ねぎ svg 用 filter (drop-shadow chain 同等値) */
   --c-hero-title-text-shadow: 0 5px 5px var(--shadow-heavy), 0 5px 20px var(--shadow-soft-mid);
@@ -263,15 +230,15 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
   --bg-anlz-header-deco: linear-gradient(180deg, transparent 18%, var(--shine-trace) 19%, var(--shine-trace) 20%, transparent 21%), linear-gradient(180deg, transparent 60%, var(--shine-trace) 61%, transparent 62%);
   --c-anlz-bamboo-opacity: 0.10;
   --c-anlz-bg-icon-opacity: 0.28;
-  --bg-note-cl-featured: linear-gradient(90deg, var(--vermilion-soft), var(--vermilion-trace));
-  --bg-score-update-banner: var(--vermilion-mid-strong);  /* 2026-06-16: 紙面上で優しすぎ (0.15) → 0.40 で警告感強化 */
+  --bg-note-cl-featured: linear-gradient(90deg, color-mix(in oklab, var(--vermilion) 15%, transparent), color-mix(in oklab, var(--vermilion) 5%, transparent));
+  --bg-score-update-banner: color-mix(in oklab, var(--vermilion) 40%, transparent);  /* 2026-06-16: 紙面上で優しすぎ (0.15) → 0.40 で警告感強化 */
   --c-score-update-banner-fg: #ffd9cc;
   --c-mobile-fab-shadow: 0 4px 16px var(--shadow-soft-2), 0 0 12px rgba(212,175,55,0.4);
 
   /* ─── @layer Step 2-d r1: theme-swap tokens (dark default) ─── */
-  --c-tier-chip-ss-shadow: 0 0 20px rgba(200,60,43,0.6), 0 0 45px var(--vermilion-soft-2), inset 0 1px 0 rgba(240,210,138,0.28), inset 0 -1px 0 var(--shadow-soft-2);
+  --c-tier-chip-ss-shadow: 0 0 20px rgba(200,60,43,0.6), 0 0 45px color-mix(in oklab, var(--vermilion) 20%, transparent), inset 0 1px 0 rgba(240,210,138,0.28), inset 0 -1px 0 var(--shadow-soft-2);
   --c-tier-chip-ss-sheen: linear-gradient( 105deg, transparent 25%, rgba(240,210,138,0.30) 50%, transparent 75% );
-  --c-tier-chip-s-shadow: 0 0 18px var(--vermilion-strong), 0 0 40px var(--vermilion-soft), inset 0 1px 0 rgba(255,130,110,0.20), inset 0 -1px 0 var(--shadow-soft-mid);
+  --c-tier-chip-s-shadow: 0 0 18px color-mix(in oklab, var(--vermilion) 55%, transparent), 0 0 40px color-mix(in oklab, var(--vermilion) 15%, transparent), inset 0 1px 0 rgba(255,130,110,0.20), inset 0 -1px 0 var(--shadow-soft-mid);
   --c-tier-chip-a-shadow: 0 0 11px rgba(168,212,180,0.28), inset 0 1px 0 rgba(168,212,180,0.18);
   --c-tier-chip-b-shadow: 0 0 8px rgba(201,184,138,0.22), inset 0 1px 0 rgba(201,184,138,0.14);
   --c-modal-a-option-fg: var(--sumi-fg);
@@ -283,19 +250,19 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
   --c-lang-active-fg: #f0d28a;       /* 6.2:1 on vermilion-deep */
 
   /* ─── @layer Step 2-d r2: theme-swap tokens (dark default) ─── */
-  --c-hb-pct-phys-fg: var(--vermilion-bright-glow);
+  --c-hb-pct-phys-fg: color-mix(in oklab, var(--vermilion-bright) 60%, transparent);
   --c-hb-pct-elem-fg: rgba(168,212,180,0.6);
   --c-footer-strong-fg: var(--gold);
   --c-tier-chip-ss-fg: var(--chart-crit);
   --bg-tier-chip-ss: linear-gradient(135deg, rgba(180,40,28,0.48) 0%, rgba(100,20,14,0.38) 50%, rgba(180,40,28,0.48) 100%);
   --c-tier-chip-ss-border: rgba(240,210,138,0.65);
-  --c-tier-chip-ss-text-shadow: 0 0 18px rgba(240,210,138,0.95), 0 0 36px var(--vermilion-strong);
+  --c-tier-chip-ss-text-shadow: 0 0 18px rgba(240,210,138,0.95), 0 0 36px color-mix(in oklab, var(--vermilion) 55%, transparent);
   --c-tier-chip-s-fg: #ff6b50;
-  --bg-tier-chip-s: linear-gradient(135deg, var(--vermilion-mid-2), rgba(138,31,23,0.30));
-  --c-tier-chip-s-border: var(--vermilion-bright-strong);
+  --bg-tier-chip-s: linear-gradient(135deg, color-mix(in oklab, var(--vermilion) 35%, transparent), rgba(138,31,23,0.30));
+  --c-tier-chip-s-border: color-mix(in oklab, var(--vermilion-bright) 70%, transparent);
   --c-tier-chip-s-text-shadow: 0 0 14px rgba(232,81,58,0.85);
   --bg-tier-chip-a: linear-gradient(135deg, rgba(168,212,180,0.20), rgba(127,168,138,0.15));
-  --c-tier-chip-a-border: var(--jade-bright-strong);
+  --c-tier-chip-a-border: color-mix(in oklab, var(--jade-bright) 55%, transparent);
   --c-tier-chip-a-text-shadow: 0 0 12px rgba(168,212,180,0.60);
   --c-tier-chip-b-fg: var(--bone);
   --bg-tier-chip-b: linear-gradient(135deg, rgba(201,184,138,0.20), rgba(160,140,100,0.15));
@@ -304,27 +271,27 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
   --bg-tier-chip-c: rgba(139,129,112,0.10);
   --c-tier-chip-c-border: rgba(139,129,112,0.26);
   --c-opt-sort-btn-fg: var(--sumi-fg);
-  --bg-opt-sort-btn-hover: var(--accent-faint);
+  --bg-opt-sort-btn-hover: color-mix(in oklab, var(--accent) 8%, transparent);
   --c-opt-sort-btn-hover-fg: var(--gold-bright); /* audit P1 (2026-06-07): paper → gold-bright (hover contrast 3.5→AA) */
   /* audit P1 (2026-06-07): persistent sort state が 2.2-3.8:1 — 金地墨字 (button-primary 語彙) で 11:1 へ。
      literal 固定 = 両 theme constant (--gold-bright は light で暗金 swap されるため var 参照不可) */
   --bg-opt-sort-btn-active: #f0d28a;
   --c-opt-sort-btn-active-fg: #2a1810;
-  --c-opt-btn-apply-border: var(--jade-bright-mid);
+  --c-opt-btn-apply-border: color-mix(in oklab, var(--jade-bright) 40%, transparent);
   --c-opt-btn-apply-hover-border: var(--jade-bright);
   --c-rank-row-border-left: 1px solid rgba(212,175,55,0.30); /* critique P3: side-stripe 3px→1px (禁則解消、 不透明度で存在感補償) */
-  --c-rank-row-border-bot: 1px solid var(--gold-bright-tint);
-  --bg-rank-row-odd: var(--gold-bright-faint);
-  --bg-rank-row-hover: var(--gold-bright-faint);
+  --c-rank-row-border-bot: 1px solid color-mix(in oklab, var(--gold-bright) 12%, transparent);
+  --bg-rank-row-odd: color-mix(in oklab, var(--gold-bright) 8%, transparent);
+  --bg-rank-row-hover: color-mix(in oklab, var(--gold-bright) 8%, transparent);
   --c-rank-row-hover-border-left: var(--gold-bright);
-  --bg-eff-row-odd: var(--gold-bright-faint);
-  --bg-eff-row-hover: var(--gold-bright-faint);
+  --bg-eff-row-odd: color-mix(in oklab, var(--gold-bright) 8%, transparent);
+  --bg-eff-row-hover: color-mix(in oklab, var(--gold-bright) 8%, transparent);
   --c-cmp-lv-select-fg: var(--gold-bright);
   --bg-cmp-stat-select: var(--sumi-3);
   --bg-btn-secondary: transparent;
   --c-btn-secondary-fg: var(--text, #fff);
   --bg-btn-secondary-hover: var(--shine-soft);
-  --bg-modal-a-kongfu-select: var(--gold-faint);
+  --bg-modal-a-kongfu-select: color-mix(in oklab, var(--gold) 8%, transparent);
   --bg-modal-a-set-select: linear-gradient(90deg, rgba(232,81,58,0.30), transparent);
   --bg-modal-a-stat-select: var(--shadow-soft-mid);
   --c-modal-a-lv-fg: var(--sumi-fg);
@@ -336,9 +303,9 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
   --c-tier-ss-hero-fg: var(--chart-crit);
   --c-tier-ss-hero-border: rgba(240,210,138,.65);
   --c-tier-s-hero-fg: #ff6b50;
-  --c-tier-s-hero-border: var(--vermilion-bright-strong);
+  --c-tier-s-hero-border: color-mix(in oklab, var(--vermilion-bright) 70%, transparent);
   --c-tier-a-hero-fg: var(--jade-bright);
-  --c-tier-a-hero-border: var(--jade-bright-strong);
+  --c-tier-a-hero-border: color-mix(in oklab, var(--jade-bright) 55%, transparent);
   --c-tier-b-hero-fg: var(--bone);
   --c-tier-b-hero-border: rgba(201,184,138,.5);
   --c-tier-c-hero-fg: var(--sumi-fg);
@@ -359,7 +326,7 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
   --bg-modal-a-rows: var(--shadow-mid);
   --c-modal-a-title-ja-fg: #f3e3d4;
   --bg-modal-a-col: var(--shine-trace);
-  --bg-modal-a-kongfu-header: var(--gold-faint);
+  --bg-modal-a-kongfu-header: color-mix(in oklab, var(--gold) 8%, transparent);
   --c-modal-a-kongfu-header-fg: #e6d6b8;
   --c-modal-a-kongfu-select-fg: #e6d6b8;
   --c-modal-a-set-fg: #ff6b4a;
@@ -369,7 +336,7 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
   /* ─── @layer Step 2-f: theme-swap tokens (dark default) ─── */
   --c-brand-seal-opacity: initial;
   --c-brand-en-opacity: initial;
-  --c-shared-build-mode--shared-build-banner-border: var(--vermilion-strong);
+  --c-shared-build-mode--shared-build-banner-border: color-mix(in oklab, var(--vermilion) 55%, transparent);
   --c-lang-btn-focus-outline: var(--vermilion-bright);
   --c-hero-focus-outline: var(--vermilion-bright);
   --c-hero-number--unit-border-bot: var(--gold-deep);
@@ -386,7 +353,7 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
   --c-sb-label-fw: initial;
   --c-note-cl-items--note-cl-featured-border-left: var(--vermilion);
   --c-note-cl-items--note-cl-featured-fg: initial;
-  --c-score-update-banner-border-bot: var(--vermilion-strong);
+  --c-score-update-banner-border-bot: color-mix(in oklab, var(--vermilion) 55%, transparent);
   --c-mobile-drawer-border-left: var(--gold-deep);
   --c-cmp-modal-a--cmp-rows-border: 1px solid rgba(201,164,90,0.25);
   --c-cmp-modal-a--cmp-rows-shadow: inset 0 1px 6px var(--shadow-heavy);
@@ -414,7 +381,7 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
   --c-step2-section-title-fw: initial;  /* S2-g step2-section-title */
   --c-step2--muted-opacity: 0.6;  /* S2-g step2--muted */
   --bg-step2--num-input: var(--bg-cmp-stat-select);  /* S2-g step2--num-input */
-  --c-step2-section-title-border-bot: var(--accent-mid);  /* S2-g step2-section-title */
+  --c-step2-section-title-border-bot: color-mix(in oklab, var(--accent) 30%, transparent);  /* S2-g step2-section-title */
   --c-step2--xinfa-cell-border-bot: 1px solid var(--ink-2);  /* S2-g step2--xinfa-cell */
   --c-step2--xinfa-cell-pad-bot: var(--space-2);  /* S2-g step2--xinfa-cell */
   --c-step2--arsenal-tier-border: 1px solid rgba(212,175,55,0.25);  /* S2-g step2--arsenal-tier */
@@ -456,13 +423,13 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
 
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
-  --c-cmp-modal-a--cmp-stat-select-border: var(--gold-mid);
+  --c-cmp-modal-a--cmp-stat-select-border: color-mix(in oklab, var(--gold) 30%, transparent);
 
   /* ─── @layer Step 2-i: theme-swap tokens (dark default) ─── */
-  --c-cmp-modal-a--cmp-kongfu-select-border: var(--gold-mid);
-  --c-cmp-modal-a--cmp-set-select-border: var(--gold-mid);
+  --c-cmp-modal-a--cmp-kongfu-select-border: color-mix(in oklab, var(--gold) 30%, transparent);
+  --c-cmp-modal-a--cmp-set-select-border: color-mix(in oklab, var(--gold) 30%, transparent);
   --c-cmp-title--cmp-lv-select-border: var(--gold-deep);
-  --c-cmp-modal-a--cmp-val-input-border: var(--gold-mid);
+  --c-cmp-modal-a--cmp-val-input-border: color-mix(in oklab, var(--gold) 30%, transparent);
 
   /* ─── @layer S2-j: theme-swap tokens (dark default) ─── */
   --c-tier-C-text-shadow: initial;

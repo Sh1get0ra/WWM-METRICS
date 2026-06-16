@@ -249,8 +249,8 @@
     display: inline-flex; align-items: center; justify-content: center;
     min-height: 44px; /* critique P2 / TODO #14: touch target 36→44px */
     padding: var(--space-1) var(--space-2-5);
-    background: linear-gradient(180deg, var(--vermilion-bright-tint), rgba(232,81,58,0.10));
-    border: 1px solid var(--vermilion-strong);
+    background: linear-gradient(180deg, color-mix(in oklab, var(--vermilion-bright) 18%, transparent), rgba(232,81,58,0.10));
+    border: 1px solid color-mix(in oklab, var(--vermilion) 55%, transparent);
     border-radius: 3px;
     color: var(--vermilion-bright);
     font-family: var(--f-latin);

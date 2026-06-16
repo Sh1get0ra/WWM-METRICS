@@ -32,10 +32,10 @@ html, body {
 /* Body texture: ink wash + paper grain + 公式 home_main 背景 */
 body {
   background:
-    radial-gradient(ellipse 60% 35% at 50% 0%, var(--vermilion-soft-light), transparent 65%),
-    radial-gradient(ellipse 50% 25% at 0% 0%, var(--gold-faint), transparent 70%),
-    radial-gradient(ellipse 50% 25% at 100% 0%, var(--gold-faint), transparent 70%),
-    radial-gradient(ellipse 60% 70% at 100% 100%, var(--gold-trace), transparent 55%),
+    radial-gradient(ellipse 60% 35% at 50% 0%, color-mix(in oklab, var(--vermilion) 18%, transparent), transparent 65%),
+    radial-gradient(ellipse 50% 25% at 0% 0%, color-mix(in oklab, var(--gold) 8%, transparent), transparent 70%),
+    radial-gradient(ellipse 50% 25% at 100% 0%, color-mix(in oklab, var(--gold) 8%, transparent), transparent 70%),
+    radial-gradient(ellipse 60% 70% at 100% 100%, color-mix(in oklab, var(--gold) 5%, transparent), transparent 55%),
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n1'><feTurbulence type='fractalNoise' baseFrequency='0.45' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.85  0 0 0 0 0.65  0 0 0 0.08 0'/></filter><filter id='n2'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.9  0 0 0 0 0.8  0 0 0 0 0.6  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n1)'/><rect width='100%25' height='100%25' filter='url(%23n2)'/></svg>"),
     linear-gradient(var(--shadow-mid-2), var(--shadow-mid-2)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg-b74e3a33.png") center top / cover no-repeat fixed,
@@ -60,7 +60,7 @@ header.topbar {
   display: flex; align-items: center; gap: var(--space-4);
   padding: var(--space-3) var(--space-5);
   background:
-    radial-gradient(ellipse 60% 100% at 50% 50%, var(--vermilion-soft), rgba(15,12,14,0.78) 80%),
+    radial-gradient(ellipse 60% 100% at 50% 50%, color-mix(in oklab, var(--vermilion) 15%, transparent), rgba(15,12,14,0.78) 80%),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/wq-bg-99758f80.png") center / cover no-repeat;
   border: 1px solid var(--ink-2);
   border-radius: 2px;
@@ -102,7 +102,7 @@ header.topbar::after {
   padding: var(--space-half) var(--space-1);
   border-left: 2px solid var(--gold);
   border-right: 2px solid var(--gold);
-  text-shadow: 0 0 10px var(--gold-bright-mid);
+  text-shadow: 0 0 10px color-mix(in oklab, var(--gold-bright) 50%, transparent);
   line-height: 1;
 }
 .wwm-brand-right { display: flex; flex-direction: column; gap: var(--space-half); }
@@ -128,7 +128,7 @@ header.topbar::after {
   font-family: var(--f-display-title); font-weight: var(--fw-black);
   font-size: var(--text-24); color: #fff;
   line-height: 1;
-  box-shadow: 0 0 16px var(--vermilion-strong);
+  box-shadow: 0 0 16px color-mix(in oklab, var(--vermilion) 55%, transparent);
   transform: rotate(-8deg);
   flex-shrink: 0;
   opacity: var(--c-brand-seal-opacity);
@@ -211,9 +211,9 @@ html[lang="ko"] .top-controls-2row .icon-btn {
   font-size: var(--text-sm); letter-spacing: 0.12em;
 }
 .icon-btn.reset-btn { color: var(--sumi-fg); border-color: var(--ink-3); }
-.icon-btn.reset-btn:hover { color: var(--vermilion-bright); border-color: var(--vermilion); background: var(--vermilion-faint); }
+.icon-btn.reset-btn:hover { color: var(--vermilion-bright); border-color: var(--vermilion); background: color-mix(in oklab, var(--vermilion) 8%, transparent); }
 .icon-btn.note-btn { color: var(--gold-bright); border-color: var(--gold-deep); }
-.icon-btn.note-btn:hover { color: var(--gold-bright); border-color: var(--gold); background: var(--gold-faint); }
+.icon-btn.note-btn:hover { color: var(--gold-bright); border-color: var(--gold); background: color-mix(in oklab, var(--gold) 8%, transparent); }
 
 .lang-switcher { display: flex; gap: 0; padding: var(--space-half); background: var(--shade-strong); border: 1px solid var(--ink-2); border-radius: 2px; }
 .lang-btn {
@@ -243,7 +243,7 @@ html[lang="ko"] .top-controls-2row .icon-btn {
   font-size: var(--text-md);
   transition: all 0.15s;
 }
-.icon-btn:hover { color: var(--gold-bright); border-color: var(--gold-deep); background: var(--gold-tint); }
+.icon-btn:hover { color: var(--gold-bright); border-color: var(--gold-deep); background: color-mix(in oklab, var(--gold) 12%, transparent); }
 a.icon-btn { text-decoration: none; }
 .icon-btn-x svg { display: block; }
 .icon-btn.import-btn,
@@ -256,7 +256,7 @@ a.icon-btn { text-decoration: none; }
 }
 .icon-btn.import-btn:hover {
   background: var(--gold); color: var(--sumi-0); border-color: var(--gold);
-  box-shadow: 0 0 16px var(--gold-glow);
+  box-shadow: 0 0 16px color-mix(in oklab, var(--gold-bright) 40%, transparent);
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -312,7 +312,7 @@ footer strong { color: var(--c-footer-strong-fg); }
   border: 1px solid var(--gold-deep); border-left: 3px solid var(--gold);
   font-family: var(--f-display-title); font-size: var(--text-12); font-weight: var(--fw-semibold);
   letter-spacing: 0.02em;
-  box-shadow: 0 8px 32px var(--shadow-heavy), 0 0 24px var(--gold-tint);
+  box-shadow: 0 8px 32px var(--shadow-heavy), 0 0 24px color-mix(in oklab, var(--gold) 12%, transparent);
   z-index: var(--z-modal); opacity: 0; transform: translateY(8px);
   transition: opacity 0.22s, transform 0.22s;
   pointer-events: none; white-space: nowrap;
@@ -322,7 +322,7 @@ footer strong { color: var(--c-footer-strong-fg); }
 /* audit P2 (2026-06-07): error toast 視覚区別 — 朱枠 (三彩分業: 朱 = 警告)。 寿命 7s は app.js showToast 側 */
 #toast.toast-error {
   border-color: var(--vermilion); border-left-color: var(--vermilion-bright);
-  box-shadow: 0 8px 32px var(--shadow-heavy), 0 0 24px var(--vermilion-glow);
+  box-shadow: 0 8px 32px var(--shadow-heavy), 0 0 24px color-mix(in oklab, var(--vermilion-bright) 50%, transparent);
   white-space: normal; max-width: min(420px, 80vw);
 }
 
@@ -367,7 +367,7 @@ footer strong { color: var(--c-footer-strong-fg); }
   font-weight: var(--fw-bold);
   letter-spacing: .05em;
   white-space: nowrap;
-  box-shadow: 0 4px 18px var(--shadow-mid), 0 0 24px var(--vermilion-bright-soft-mid);
+  box-shadow: 0 4px 18px var(--shadow-mid), 0 0 24px color-mix(in oklab, var(--vermilion-bright) 40%, transparent);
 }
 .wwm-import-hint-out { animation: wwm-hint-out 0.3s forwards; }
 
@@ -424,7 +424,7 @@ footer strong { color: var(--c-footer-strong-fg); }
   margin-top: -20px;
   padding: var(--space-2) var(--space-4);
   background: var(--bg-score-update-banner);
-  border-bottom: 1px solid var(--vermilion-strong);
+  border-bottom: 1px solid color-mix(in oklab, var(--vermilion) 55%, transparent);
   color: var(--kami-fg);  /* wwm-ws-body 紙面配置対応 (2026-06-16)、 旧 --c-score-update-banner-fg #ffd9cc (墨面用) は紙地で不可視 */
   font-size: var(--text-13, 13px);
   position: relative;
@@ -437,14 +437,14 @@ footer strong { color: var(--c-footer-strong-fg); }
   flex: 0 0 auto;
   font-size: var(--text-15);
   color: var(--vermilion-bright);
-  text-shadow: 0 0 10px var(--vermilion-bright-strong);
+  text-shadow: 0 0 10px color-mix(in oklab, var(--vermilion-bright) 70%, transparent);
   animation: wwm-banner-arrow-bounce 1.1s ease-in-out infinite;
 }
 .wwm-score-update-msg  { flex: 1 1 auto; line-height: 1.4; }
 .wwm-score-update-btn {
   flex: 0 0 auto;
   padding: var(--space-1-5) var(--space-4);
-  background: var(--vermilion-strong);
+  background: color-mix(in oklab, var(--vermilion) 55%, transparent);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -523,7 +523,7 @@ footer strong { color: var(--c-footer-strong-fg); }
     width: 28px; height: 28px;
     font-size: var(--text-lg);
     border-width: 2px;
-    box-shadow: 0 0 10px var(--vermilion-strong);
+    box-shadow: 0 0 10px color-mix(in oklab, var(--vermilion) 55%, transparent);
     flex: 0 0 auto;
   }
   .wwm-mobile-topbar .wwm-brand-seal::after {

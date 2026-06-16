@@ -76,7 +76,7 @@
 
 .hcb-pct.phys { color: var(--vermilion-bright); }
 
-.hcb-pct.elem { color: var(--jade-bright-strong); }
+.hcb-pct.elem { color: color-mix(in oklab, var(--jade-bright) 55%, transparent); }
 
 /* ── Collapsed state overrides ── */
 .hero--collapsed .hero-compact-bar { display: flex; }
@@ -268,7 +268,7 @@
   color: var(--c-tier-ss-hero-fg);
   background: var(--bg-tier-ss);
   border-color: var(--c-tier-ss-hero-border);
-  text-shadow: 0 0 18px rgba(240,210,138,.95), 0 0 36px var(--vermilion-bright-glow);
+  text-shadow: 0 0 18px rgba(240,210,138,.95), 0 0 36px color-mix(in oklab, var(--vermilion-bright) 60%, transparent);
   box-shadow: var(--c-hero-wuxia--hero-tier-tier-SS-shadow);
 }
 

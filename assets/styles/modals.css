@@ -20,7 +20,7 @@
 .wwm-modal {
   position: relative;
   background:
-    radial-gradient(ellipse at top right, var(--gold-bright-faint), transparent 55%),
+    radial-gradient(ellipse at top right, color-mix(in oklab, var(--gold-bright) 8%, transparent), transparent 55%),
     linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
   color: var(--c-modal-fg);
   border-radius: 0 0 2px 2px;
@@ -31,7 +31,7 @@
   border-top: 1px solid var(--gold-deep);
   border-left: 3px solid var(--gold);
   box-shadow:
-    inset 0 1px 0 var(--gold-bright-faint),
+    inset 0 1px 0 color-mix(in oklab, var(--gold-bright) 8%, transparent),
     0 12px 40px var(--shadow-heavy);
 }
 /* lang picker (app.js _showLangPicker — 旧 inline style から class 化 2026-06-05) */
@@ -88,7 +88,7 @@
   left: 16px; bottom: -1px;
   width: 48px; height: 1px;
   background: linear-gradient(90deg, var(--gold-bright), transparent);
-  box-shadow: 0 0 8px var(--gold-bright-mid);
+  box-shadow: 0 0 8px color-mix(in oklab, var(--gold-bright) 50%, transparent);
 }
 .wwm-modal-header h2 {
   margin: 0;
@@ -97,7 +97,7 @@
   color: var(--gold-bright);
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  text-shadow: 0 0 10px var(--gold-bright-soft);
+  text-shadow: 0 0 10px color-mix(in oklab, var(--gold-bright) 25%, transparent);
 }
 .wwm-modal-close {
   background: none; border: none;
@@ -255,7 +255,7 @@
   font-size: var(--text-sm);
   margin-left: var(--space-half);
   cursor: help;
-  text-shadow: 0 0 6px var(--vermilion-strong);
+  text-shadow: 0 0 6px color-mix(in oklab, var(--vermilion) 55%, transparent);
 }
 .wwm-sb-expandable { cursor: pointer; }
 .wwm-sb-sub-group.wwm-sb-collapsed { display: none; }
@@ -310,7 +310,7 @@
   transform: rotate(-6deg);
   margin-left: var(--space-2);
   vertical-align: middle;
-  box-shadow: 0 0 8px var(--vermilion-bright-glow);
+  box-shadow: 0 0 8px color-mix(in oklab, var(--vermilion-bright) 60%, transparent);
 }
 .wwm-cmp-modal-a {
   background: var(--sumi-3);
@@ -329,9 +329,9 @@
   background: linear-gradient(90deg, transparent 0%, transparent 28%, rgba(232,81,58,0.75) 50%, transparent 72%, transparent 100%);
   opacity: 1; pointer-events: none;
 }
-.wwm-cmp-modal-a .wwm-cmp-set-header { text-shadow: 0 0 6px var(--gold-bright-mid-2); }
+.wwm-cmp-modal-a .wwm-cmp-set-header { text-shadow: 0 0 6px color-mix(in oklab, var(--gold-bright) 40%, transparent); }
 .wwm-cmp-modal-a .wwm-cmp-preview {
-  border-top: 1px solid var(--gold-soft);
+  border-top: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
   padding-top: var(--space-3);
 }
 .wwm-cmp-modal-a .wwm-cmp-preview-value {
@@ -342,11 +342,11 @@
 }
 .wwm-cmp-modal-a .wwm-cmp-preview-value.pos {
   color: var(--vermilion);
-  text-shadow: 0 0 14px var(--jade-bright-strong);
+  text-shadow: 0 0 14px color-mix(in oklab, var(--jade-bright) 55%, transparent);
 }
 .wwm-cmp-modal-a .wwm-cmp-preview-value.neg {
   color: var(--kami-fg-dim);
-  text-shadow: 0 0 14px var(--vermilion-bright-mid-2);
+  text-shadow: 0 0 14px color-mix(in oklab, var(--vermilion-bright) 55%, transparent);
 }
 .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-primary,
 .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
@@ -395,7 +395,7 @@
   border: 2px solid var(--shine-strong);
   border-radius: 2px;
   transform: rotate(-4deg);
-  box-shadow: 0 0 8px var(--vermilion-bright-glow);
+  box-shadow: 0 0 8px color-mix(in oklab, var(--vermilion-bright) 60%, transparent);
 }
 .wwm-cmp-modal-a .wwm-cmp-new .wwm-cmp-title::before {
   background: var(--jade);
@@ -518,7 +518,7 @@
   gap: 6px;
   padding: var(--space-1) var(--space-1-5);
   border: none;
-  border-bottom: 1px dashed var(--gold-faint);
+  border-bottom: 1px dashed color-mix(in oklab, var(--gold) 8%, transparent);
   font-size: var(--text-12);
   background: transparent ;
   box-shadow: none;
@@ -563,7 +563,7 @@
   border-radius: 2px;
   background: rgba(168,212,180,0.18) ;
   color: var(--jade-bright) !important; /* K: gear.js:679 el.style.color (inline) 対抗 — strip するな */
-  border: 1px solid var(--jade-bright-mid);
+  border: 1px solid color-mix(in oklab, var(--jade-bright) 40%, transparent);
   min-width: 30px;
   text-align: center;
   display: inline-block;
@@ -632,7 +632,7 @@
      左右 padding は旧 body 内時代の見た目に合わせ space-4 */
   margin-top: 0;
   padding: var(--space-3) var(--space-4) var(--space-3-5);
-  border-top: 1px solid var(--gold-soft);
+  border-top: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
   display: flex; align-items: center; justify-content: space-between;
   gap: 12px;
 }
@@ -651,7 +651,7 @@
 }
 /* K ×3: export.js clone の inline text-shadow (universal 書込) 対抗 — strip するな (Step 5 確定) */
 .wwm-cmp-modal-a .wwm-cmp-preview-value.pos { color: var(--vermilion); text-shadow: 0 0 18px rgba(168,212,180,0.6) !important; }
-.wwm-cmp-modal-a .wwm-cmp-preview-value.neg { color: var(--kami-fg-dim); text-shadow: 0 0 18px var(--vermilion-bright-glow) !important; }
+.wwm-cmp-modal-a .wwm-cmp-preview-value.neg { color: var(--kami-fg-dim); text-shadow: 0 0 18px color-mix(in oklab, var(--vermilion-bright) 60%, transparent) !important; }
 .wwm-cmp-modal-a .wwm-cmp-preview-value.zero { color: var(--c-cmp-preview-zero-fg); text-shadow: none !important; }
 .wwm-cmp-delta-base {
   font-family: var(--f-latin);
@@ -716,9 +716,9 @@
   display: inline-flex; align-items: center; justify-content: center;
   width: 16px; height: 16px;
   background: linear-gradient(135deg, var(--vermilion-deep), var(--vermilion));
-  border: 1px solid var(--gold-bright-mid);
+  border: 1px solid color-mix(in oklab, var(--gold-bright) 50%, transparent);
   border-radius: 2px;
-  box-shadow: 0 0 4px var(--vermilion-glow);
+  box-shadow: 0 0 4px color-mix(in oklab, var(--vermilion-bright) 50%, transparent);
   flex-shrink: 0;
   vertical-align: middle;
   margin: 0 var(--space-half);
@@ -860,8 +860,8 @@
 /* 現在の装備: 朱赤グロウ */
 .wwm-cmp-current .wwm-cmp-bg-icon {
   filter:
-    drop-shadow(0 0 6px var(--vermilion-bright-strong))
-    drop-shadow(0 0 14px var(--vermilion-bright-mid));
+    drop-shadow(0 0 6px color-mix(in oklab, var(--vermilion-bright) 70%, transparent))
+    drop-shadow(0 0 14px color-mix(in oklab, var(--vermilion-bright) 45%, transparent));
 }
 /* 新しい装備: 緑グロウ */
 .wwm-cmp-new .wwm-cmp-bg-icon {
@@ -874,7 +874,7 @@
   font-weight: var(--fw-bold);
   margin-bottom: var(--space-1-5);
   padding: var(--space-1) var(--space-1-5);
-  background: var(--accent-faint);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
   border-radius: 4px;
 }
 .wwm-cmp-kongfu-select {
@@ -897,10 +897,10 @@
   font-weight: var(--fw-bold);
   margin-bottom: var(--space-1-5);
   padding: var(--space-1) var(--space-1-5);
-  background: linear-gradient(90deg, var(--gold-bright-tint), transparent);
+  background: linear-gradient(90deg, color-mix(in oklab, var(--gold-bright) 12%, transparent), transparent);
   border-left: 2px solid var(--gold-bright);
   border-radius: 0;
-  text-shadow: 0 0 6px var(--gold-bright-mid-2);
+  text-shadow: 0 0 6px color-mix(in oklab, var(--gold-bright) 40%, transparent);
 }
 .wwm-cmp-set-select {
   width: 100%;
@@ -1291,20 +1291,20 @@
   border-left-color: var(--vermilion);
 }
 .wwm-diag-modal::before {
-  background: radial-gradient(ellipse at top right, var(--vermilion-soft-light), transparent 65%) !important; /* K: export inline background 対抗 */
+  background: radial-gradient(ellipse at top right, color-mix(in oklab, var(--vermilion) 18%, transparent), transparent 65%) !important; /* K: export inline background 対抗 */
 }
 .wwm-diag-modal::after {
   border-top-color: var(--vermilion);
   border-right-color: var(--vermilion);
 }
-.wwm-diag-modal .wwm-modal-header { border-bottom-color: var(--vermilion-mid); }
+.wwm-diag-modal .wwm-modal-header { border-bottom-color: color-mix(in oklab, var(--vermilion) 30%, transparent); }
 .wwm-diag-modal .wwm-modal-header::after {
   background: linear-gradient(90deg, var(--vermilion-bright), transparent);
-  box-shadow: 0 0 8px var(--vermilion-strong);
+  box-shadow: 0 0 8px color-mix(in oklab, var(--vermilion) 55%, transparent);
 }
 .wwm-diag-modal .wwm-modal-header h2 {
   color: var(--vermilion-bright);
-  text-shadow: 0 0 10px var(--vermilion-mid-strong) !important; /* K: export inline text-shadow 対抗 */
+  text-shadow: 0 0 10px color-mix(in oklab, var(--vermilion) 40%, transparent) !important; /* K: export inline text-shadow 対抗 */
 }
 /* K ×2: bg-icon の JS inline background 書込 対抗 — strip するな (Step 5 確定) */
 .wwm-diag-modal .wwm-modal-bg-icon {
@@ -1626,8 +1626,8 @@
   font-size: var(--text-sm);
   line-height: 1.5;
   color: var(--c-fg-vermilion-strong);
-  background: var(--vermilion-faint);
-  border: 1px solid var(--vermilion-mid);
+  background: color-mix(in oklab, var(--vermilion) 8%, transparent);
+  border: 1px solid color-mix(in oklab, var(--vermilion) 30%, transparent);
   border-radius: 2px;
 }
 .wwm-card-ctl-title {
@@ -1660,8 +1660,8 @@
   color: var(--c-modal-fg);
 }
 .wwm-card-tpl-btn i { font-style: normal; font-size: var(--text-xs); color: var(--kami-fg); }
-.wwm-card-tpl-btn:hover { border-color: var(--gold-mid); }
-.wwm-card-tpl-btn.active { border-color: var(--c-focus-ring); background: var(--gold-faint); }
+.wwm-card-tpl-btn:hover { border-color: color-mix(in oklab, var(--gold) 30%, transparent); }
+.wwm-card-tpl-btn.active { border-color: var(--c-focus-ring); background: color-mix(in oklab, var(--gold) 8%, transparent); }
 .wwm-card-tpl-btn.active b { color: var(--c-fg-accent); }
 .wwm-card-align-row {
   display: flex; align-items: center; gap: var(--space-2);
@@ -1673,7 +1673,7 @@
 .wwm-card-align-btn { flex: 1; }
 .wwm-card-align-btn.active,
 .wwm-card-play-chip.active {
-  background: var(--gold-faint);
+  background: color-mix(in oklab, var(--gold) 8%, transparent);
   border-color: var(--c-focus-ring);
   color: var(--c-fg-accent);
 }
@@ -1694,12 +1694,12 @@
   cursor: pointer;
   transition: border-color 0.15s ease, background 0.15s ease;
 }
-.wwm-card-play-chip:hover { border-color: var(--gold-mid); }
+.wwm-card-play-chip:hover { border-color: color-mix(in oklab, var(--gold) 30%, transparent); }
 .wwm-card-bg-row { display: flex; gap: var(--space-2); }
 .wwm-card-ctl-btn {
   padding: var(--space-1-5) var(--space-2-5);
   background: transparent;
-  border: 1px solid var(--gold-mid);
+  border: 1px solid color-mix(in oklab, var(--gold) 30%, transparent);
   border-radius: 2px;
   color: var(--c-fg-gold-label);
   font-size: var(--text-12);
@@ -1707,7 +1707,7 @@
   cursor: pointer;
   transition: background 0.15s ease;
 }
-.wwm-card-ctl-btn:hover:not(:disabled) { background: var(--gold-faint); }
+.wwm-card-ctl-btn:hover:not(:disabled) { background: color-mix(in oklab, var(--gold) 8%, transparent); }
 .wwm-card-ctl-btn:disabled { opacity: 0.4; cursor: default; }
 .wwm-card-zoom-row {
   display: flex; align-items: center; gap: var(--space-2);
@@ -2309,7 +2309,7 @@
   font-size: var(--text-15); font-weight: var(--fw-bold);
   color: var(--gold-bright);
   letter-spacing: 0.15em;
-  text-shadow: 0 0 10px var(--gold-bright-soft);
+  text-shadow: 0 0 10px color-mix(in oklab, var(--gold-bright) 25%, transparent);
 }
 .wwm-gate-bar {
   height: 6px;
@@ -2321,7 +2321,7 @@
   position: relative;
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--vermilion-deep), var(--vermilion-mid));
+  background: linear-gradient(90deg, var(--vermilion-deep), color-mix(in oklab, var(--vermilion) 30%, transparent));
   transition: width 0.35s ease;
 }
 .wwm-gate-fill::after { /* shimmer */
@@ -2500,7 +2500,7 @@
 /* header = 墨帯 (対照 modal header と同 token) */
 .wwm-tool-modal .wwm-modal-header {
   background: var(--bg-modal-a-header);
-  border-bottom: 1px solid var(--gold-soft);
+  border-bottom: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
   padding: var(--space-3) var(--space-4) var(--space-2-5);
 }
 .wwm-tool-modal .wwm-modal-header::after { display: none; } /* 旧金線 glow 廃止 */
@@ -2549,7 +2549,7 @@
 /* footer = 墨帯 (body の外 = modal 地。対照 .wwm-cmp-footer-a と同文法) */
 .wwm-tool-modal-footer {
   background: var(--bg-modal-a-header);
-  border-top: 1px solid var(--gold-soft);
+  border-top: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
   padding: var(--space-3) var(--space-4) var(--space-3-5);
   display: flex; align-items: center; justify-content: flex-end; gap: 10px;
 }

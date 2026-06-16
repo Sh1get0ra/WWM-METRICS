@@ -19,7 +19,7 @@ html.wwm-shared-build-mode .wwm-shared-build-banner {
   margin-top: -20px;
   padding: var(--space-2) var(--space-3-5);
   background: var(--bg-shared-banner);
-  border: 1px solid var(--vermilion-strong);
+  border: 1px solid color-mix(in oklab, var(--vermilion) 55%, transparent);
   border-radius: 2px;
   color: var(--kami-fg);  /* 紙面配置 (wwm-ws-body 内) 対応 = 焦茶で識別 (2026-06-16) */
   font-family: var(--f-display-title);
@@ -51,7 +51,7 @@ html.wwm-shared-build-mode #importBtn {
 .wwm-diag-badge {
   display: inline-flex; align-items: center; gap: var(--space-1-5);
   padding: var(--space-1) var(--space-2-5);
-  background: var(--vermilion-soft-light);
+  background: color-mix(in oklab, var(--vermilion) 18%, transparent);
   border: 1px solid rgba(200,60,43,0.6);
   border-radius: 2px;
   color: var(--vermilion-bright);
@@ -67,9 +67,9 @@ html.wwm-shared-build-mode #importBtn {
 .wwm-diag-badge[hidden] { display: none; }
 
 .wwm-diag-badge:hover {
-  background: var(--vermilion-mid);
+  background: color-mix(in oklab, var(--vermilion) 30%, transparent);
   color: var(--sumi-fg); /* 朱 bg 上の text — fg (紙色 ≈ #ede4d0) で AA 確保 */
-  box-shadow: 0 0 12px var(--vermilion-mid-strong);
+  box-shadow: 0 0 12px color-mix(in oklab, var(--vermilion) 40%, transparent);
   transform: translateY(-1px);
 }
 
@@ -124,7 +124,7 @@ html.wwm-shared-build-mode #importBtn {
 .preset-slot.has-data {
   border-color: rgba(201,164,90,0.4);
   background: var(--bg-preset-slot-has-data);
-  box-shadow: inset 0 0 14px var(--gold-trace);
+  box-shadow: inset 0 0 14px color-mix(in oklab, var(--gold) 5%, transparent);
 }
 
 .preset-slot-num {
@@ -161,7 +161,7 @@ html.wwm-shared-build-mode #importBtn {
 
 .preset-load:hover:not(:disabled) { background: rgba(60,46,30,0.08); color: var(--kami-fg); border-color: var(--kami-fg); }
 
-.preset-del  { border-color: var(--vermilion-strong); color: var(--vermilion); padding: 3px 6px; }
+.preset-del  { border-color: color-mix(in oklab, var(--vermilion) 55%, transparent); color: var(--vermilion); padding: 3px 6px; }
 
 .preset-del:hover:not(:disabled) { background: rgba(200,60,43,0.16); color: var(--vermilion); border-color: var(--vermilion); }
 
@@ -172,7 +172,7 @@ html.wwm-shared-build-mode #importBtn {
   grid-template-columns: minmax(0, 1fr) 280px;
   gap: 0;
   background:
-    radial-gradient(ellipse 70% 100% at 0% 50%, var(--vermilion-tint), transparent 60%),
+    radial-gradient(ellipse 70% 100% at 0% 50%, color-mix(in oklab, var(--vermilion) 10%, transparent), transparent 60%),
     linear-gradient(180deg, rgba(26,20,16,0.55), rgba(15,12,14,0.65)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") center / cover no-repeat;
   border: 1px solid var(--ink-2);

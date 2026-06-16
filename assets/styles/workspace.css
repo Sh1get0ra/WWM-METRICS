@@ -103,12 +103,12 @@
   --bg-modal-a-rows: var(--shadow-trace);
   --c-cmp-modal-a--cmp-rows-border: initial;  /* light 原典 = 枠/影なし (dark = 金線+inset影) */
   --c-cmp-modal-a--cmp-rows-shadow: initial;
-  --bg-modal-a-kongfu-header: var(--gold-mid); /* 本番 light 実効 rgba(201,164,90,0.3) 採取値 */
+  --bg-modal-a-kongfu-header: color-mix(in oklab, var(--gold) 30%, transparent); /* 本番 light 実効 rgba(201,164,90,0.3) 採取値 */
   --c-modal-a-kongfu-header-fg: var(--gold-paper); /* D7 2026-06-15: brown-1 → text-kami-gold 統一 (left/right 色揃え) */
   --c-modal-a-kongfu-select-fg: var(--brown-1);
-  --bg-modal-a-kongfu-select: var(--gold-mid);
+  --bg-modal-a-kongfu-select: color-mix(in oklab, var(--gold) 30%, transparent);
   --c-modal-a-set-fg: var(--vermilion-deep); /* D7 2026-06-15: vermilion-bright 明朱 (contrast 3.6:1 AA 不可) → vermilion-deep (7.5:1) で読みやすさ確保、 set-header と統一 */
-  --bg-modal-a-set-select: linear-gradient(90deg, var(--vermilion-bright-tint), var(--c-vermilion-fade-end));
+  --bg-modal-a-set-select: linear-gradient(90deg, color-mix(in oklab, var(--vermilion-bright) 18%, transparent), var(--c-vermilion-fade-end));
   --bg-modal-a-stat-select: var(--shine-strong);
   --c-modal-a-name-fg: var(--c-modal-a-fg);
   --c-modal-a-val-fg: var(--c-fg-emphasis);
@@ -125,7 +125,7 @@
   /* current 列 = 本番 light 実効値 (pages.dev computed 採取 2026-06-12) — 新置と同色系 */
   --bg-cmp-current--cmp-row: var(--shade-soft);
   --c-cmp-current--cmp-kongfu-header-fg: var(--gold-paper); /* D7 2026-06-15: brown-1 → text-kami-gold 統一 (左右色揃え) */
-  --bg-cmp-current--cmp-kongfu-header: var(--gold-mid);
+  --bg-cmp-current--cmp-kongfu-header: color-mix(in oklab, var(--gold) 30%, transparent);
   --c-cmp-current--cmp-set-header-fg: var(--c-cmp-set-header-fg);
   --bg-cmp-current--cmp-set-header: var(--bg-modal-a-set-select);
   --c-cmp-preview-zero-fg: var(--bone-dim);
@@ -146,7 +146,7 @@
   --c-fg-vermilion-strong:         var(--vermilion-deep);
   --c-sb-notice-fg:                var(--vermilion-deep);
   --c-xinfa-tier-fg:               var(--sumi-fg);
-  --bg-xinfa-tier-chip:          var(--vermilion-bright-tint);
+  --bg-xinfa-tier-chip:          color-mix(in oklab, var(--vermilion-bright) 18%, transparent);
   --c-xinfa-tier-chip-border:      var(--c-vermilion-deep-mid);
   --c-xinfa-cell--xinfa-tier-border: var(--ink-2);
   --c-cmp-lv-select-fg:            var(--c-gold-rich);

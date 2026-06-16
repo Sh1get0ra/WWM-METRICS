@@ -28,9 +28,9 @@
 /* K: export.js clone の inline box-shadow (universal 書込) 対抗 — strip するな (Step 5 確定) */
 .wwm-sb-tier-badge.tier-SS {
   box-shadow:
-    0 0 5px var(--vermilion-strong),
+    0 0 5px color-mix(in oklab, var(--vermilion) 55%, transparent),
     0 0 10px rgba(240,210,138,0.35),
-    inset 0 1px 0 var(--gold-bright-soft) !important;
+    inset 0 1px 0 color-mix(in oklab, var(--gold-bright) 25%, transparent) !important;
   text-shadow: 0 0 4px rgba(240,210,138,0.6);
 }
 
@@ -157,7 +157,7 @@
   top: 0;
   z-index: 10;
   background:
-    radial-gradient(ellipse at top right, var(--gold-bright-faint), transparent 55%),
+    radial-gradient(ellipse at top right, color-mix(in oklab, var(--gold-bright) 8%, transparent), transparent 55%),
     linear-gradient(180deg, var(--c-surf-warm-1), var(--c-surf-warm-2));
   border: 1px solid var(--gold-deep);
   padding: var(--space-3) var(--space-3-5);
@@ -245,7 +245,7 @@
   display: flex; align-items: center; gap: var(--space-2-5);
   padding: var(--space-2-5) 0 var(--space-2-5);
   margin-bottom: var(--space-2);
-  border-bottom: 1px solid var(--accent-mid);
+  border-bottom: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
   position: sticky;
   top: -12px;
   background: var(--sumi-3);

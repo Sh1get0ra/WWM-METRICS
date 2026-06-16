@@ -19,7 +19,7 @@
 
 .wwm-gear-grid .wwm-equip-slot[data-slot] { cursor: pointer; transition: transform 0.1s, box-shadow 0.1s; }
 
-.wwm-gear-grid .wwm-equip-slot[data-slot]:hover { transform: translateY(-2px); box-shadow: 0 4px 12px var(--accent-mid); }
+.wwm-gear-grid .wwm-equip-slot[data-slot]:hover { transform: translateY(-2px); box-shadow: 0 4px 12px color-mix(in oklab, var(--accent) 30%, transparent); }
 
 .wwm-gear-grid .wwm-equip-slot {
   position: relative;
@@ -42,7 +42,7 @@
   opacity: var(--c-icon-dim-opacity);
   filter:
     drop-shadow(0 0 3px rgba(212,175,55,0.5))
-    drop-shadow(0 0 8px var(--accent-mid))
+    drop-shadow(0 0 8px color-mix(in oklab, var(--accent) 30%, transparent))
     drop-shadow(0 0 16px rgba(212,175,55,0.2));
   pointer-events: none;
   z-index: 0;
@@ -87,9 +87,9 @@
 [data-liupai-pinyin="kuanglan"] .wwm-equip-icon,
 [data-liupai-pinyin="kuanglan"] .wwm-xinfa-icon {
   filter:
-    drop-shadow(0 0 3px var(--vermilion-bright-glow))
-    drop-shadow(0 0 8px var(--vermilion-bright-soft-mid))
-    drop-shadow(0 0 16px var(--vermilion-bright-soft));
+    drop-shadow(0 0 3px color-mix(in oklab, var(--vermilion-bright) 60%, transparent))
+    drop-shadow(0 0 8px color-mix(in oklab, var(--vermilion-bright) 40%, transparent))
+    drop-shadow(0 0 16px color-mix(in oklab, var(--vermilion-bright) 25%, transparent));
 }
 
 [data-liupai-pinyin="qingxi"] .wwm-equip-icon,
@@ -157,7 +157,7 @@
 .wwm-step2-section-title {
   margin: var(--space-2) 0 var(--space-1-5); font-size: var(--text-14);
   color: var(--gold-bright);
-  border-bottom: 1px solid var(--accent-mid); padding-bottom: 3px;
+  border-bottom: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); padding-bottom: 3px;
 }
 
 .wwm-xinfa-grid {
@@ -206,14 +206,14 @@
 
 .wwm-sb-notice {
   margin-top: var(--space-3); padding: var(--space-2) var(--space-2-5);
-  background: var(--vermilion-soft);
-  border: 1px solid var(--vermilion-strong);
+  background: color-mix(in oklab, var(--vermilion) 15%, transparent);
+  border: 1px solid color-mix(in oklab, var(--vermilion) 55%, transparent);
   color: var(--c-sb-notice-fg);
   cursor: pointer;
   text-align: center;
 }
 
-.wwm-sb-notice:hover { background: var(--vermilion-mid); }
+.wwm-sb-notice:hover { background: color-mix(in oklab, var(--vermilion) 30%, transparent); }
 
 .wwm-equip-section {
   margin-top: var(--space-2);

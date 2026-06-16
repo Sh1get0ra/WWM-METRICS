@@ -19,7 +19,7 @@
   width: 100%;
   box-sizing: border-box;
   background:
-    radial-gradient(ellipse at top right, var(--gold-bright-faint), transparent 55%),
+    radial-gradient(ellipse at top right, color-mix(in oklab, var(--gold-bright) 8%, transparent), transparent 55%),
     linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
   border: 1px solid var(--ink-2);
   border-top: 1px solid var(--gold-deep);
@@ -30,7 +30,7 @@
   overflow: hidden;
   display: flex; flex-direction: column;
   box-shadow:
-    inset 0 1px 0 var(--gold-bright-faint),
+    inset 0 1px 0 color-mix(in oklab, var(--gold-bright) 8%, transparent),
     0 1px 2px var(--shadow-soft);
 }
 
@@ -140,7 +140,7 @@
 
 .wwm-analysis-tab.active {
   color: var(--gold-bright);
-  text-shadow: 0 0 14px var(--gold-bright-mid);
+  text-shadow: 0 0 14px color-mix(in oklab, var(--gold-bright) 50%, transparent);
 }
 
 .wwm-analysis-tab.active::after {
@@ -350,7 +350,7 @@
   gap: var(--space-2);
   padding: 7px 10px;
   font-size: var(--text-12);
-  border-bottom: 1px solid var(--gold-bright-tint);
+  border-bottom: 1px solid color-mix(in oklab, var(--gold-bright) 12%, transparent);
   border-left: 1px solid transparent; /* critique P3: side-stripe 3px→1px */
   transition: background .15s, border-color .15s;
 }
@@ -418,7 +418,7 @@
   left: 0; bottom: -1px;
   width: 40px; height: 1px;
   background: linear-gradient(90deg, var(--gold-bright), transparent);
-  box-shadow: 0 0 8px var(--gold-bright-mid-2);
+  box-shadow: 0 0 8px color-mix(in oklab, var(--gold-bright) 40%, transparent);
 }
 
 .wwm-analysis-card h3 {
@@ -426,7 +426,7 @@
   font-size: var(--text-14); font-weight: var(--fw-bold);
   color: var(--gold-bright); letter-spacing: 0.15em;
   text-transform: uppercase;
-  text-shadow: 0 0 10px var(--gold-bright-soft);
+  text-shadow: 0 0 10px color-mix(in oklab, var(--gold-bright) 25%, transparent);
 }
 
 /* Affix ranking */
@@ -491,7 +491,7 @@
   font-family: var(--f-display-title); font-weight: var(--fw-black);
   font-size: var(--text-md); letter-spacing: 0.25em;
   color: var(--vermilion-bright);
-  text-shadow: 0 0 10px var(--vermilion-bright-soft-mid);
+  text-shadow: 0 0 10px color-mix(in oklab, var(--vermilion-bright) 40%, transparent);
 }
 
 .wwm-diag-title {
@@ -520,7 +520,7 @@
 
 .wwm-diag-warn .wwm-diag-icon { color: var(--vermilion-bright); }
 
-.wwm-diag-info { background: var(--gold-trace); }
+.wwm-diag-info { background: color-mix(in oklab, var(--gold) 5%, transparent); }
 
 .wwm-diag-info .wwm-diag-icon { color: var(--gold-bright); }
 
