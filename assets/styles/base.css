@@ -420,10 +420,12 @@ footer strong { color: var(--c-footer-strong-fg); }
   gap: var(--space-3);
   width: 100%;
   box-sizing: border-box;
+  /* wwm-ws-body の padding-top 20px を相殺 = banner 上端ピッタリ表示 (2026-06-16) */
+  margin-top: -20px;
   padding: var(--space-2) var(--space-4);
   background: var(--bg-score-update-banner);
   border-bottom: 1px solid var(--vermilion-strong);
-  color: var(--c-score-update-banner-fg);
+  color: var(--kami-fg);  /* wwm-ws-body 紙面配置対応 (2026-06-16)、 旧 --c-score-update-banner-fg #ffd9cc (墨面用) は紙地で不可視 */
   font-size: var(--text-13, 13px);
   position: relative;
   z-index: 50;

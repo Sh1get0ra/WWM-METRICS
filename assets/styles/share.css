@@ -15,12 +15,13 @@ html.wwm-shared-build-mode .wwm-shared-build-banner {
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  /* wwm-ws-body の padding-top 20px を相殺 = banner 上端ピッタリ表示 (2026-06-16) */
+  margin-top: -20px;
   padding: var(--space-2) var(--space-3-5);
-  margin-top: var(--space-2);
   background: var(--bg-shared-banner);
   border: 1px solid var(--vermilion-strong);
   border-radius: 2px;
-  color: var(--sumi-fg);
+  color: var(--kami-fg);  /* 紙面配置 (wwm-ws-body 内) 対応 = 焦茶で識別 (2026-06-16) */
   font-family: var(--f-display);
   font-size: var(--text-sm);
   letter-spacing: 0.08em;
