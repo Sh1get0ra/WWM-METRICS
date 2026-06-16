@@ -236,14 +236,14 @@
   --c-brand-sub-fg: var(--c-fg-gold-label);
   --c-shared-banner-bg: linear-gradient(90deg, var(--vermilion-soft-2), var(--vermilion-tint));
   --c-footer-logo-opacity: 0.75;
-  --c-preset-bar-bg: var(--bg-overlay-bottom);
+  --bg-preset-bar: var(--bg-overlay-bottom);
   --c-h1-accent-fg: var(--vermilion-bright);
   --c-h1-sub-fg: var(--text-sumi-dim);
-  --c-preset-slot-has-data-bg: rgba(40,30,18,0.12);
+  --bg-preset-slot-has-data: rgba(40,30,18,0.12);
   --c-preset-slot-has-data-border: rgba(201,164,90,0.4);
   --c-preset-save-border: var(--gold-strong);
-  --c-sb-mini-hero-ink-bg: linear-gradient(90deg, rgba(232,81,58,0), var(--vermilion-bright-tint), rgba(232,81,58,0));
-  --c-sb-rest-bg: linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
+  --bg-sb-mini-hero-ink: linear-gradient(90deg, rgba(232,81,58,0), var(--vermilion-bright-tint), rgba(232,81,58,0));
+  --bg-sb-rest: linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
   --c-sb-applied-fg: var(--accent);
   --c-sb-applied-opacity: 0.85;
   --c-equip-delta-pos-text-shadow: 0 0 4px var(--jade-bright-mid);
@@ -252,11 +252,11 @@
   --c-opt-loading-fg: var(--gold-bright);
   --c-opt-loading-text-shadow: 0 0 12px rgba(232,200,120,0.45);
   --c-opt-btn-fg: var(--gold);
-  --c-opt-btn-hover-bg: rgba(212,175,55,0.1);
-  --c-opt-btn-apply-hover-bg: rgba(168,212,180,0.1);
-  --c-eff-input-bg: var(--shadow-soft);
+  --bg-opt-btn-hover: rgba(212,175,55,0.1);
+  --bg-opt-btn-apply-hover: rgba(168,212,180,0.1);
+  --bg-eff-input: var(--shadow-soft);
   --c-eff-input-fg: var(--gold-bright);
-  --c-sb-section-title-bg: var(--accent-faint);
+  --bg-sb-section-title: var(--accent-faint);
   --c-sb-section-title-fg: var(--accent);
   --c-modal-fg: var(--text, #fff);
   --bg-modal-a-header: var(--bg-raised);
@@ -322,21 +322,21 @@
   --c-tier-chip-c-bg: rgba(139,129,112,0.10);
   --c-tier-chip-c-border: rgba(139,129,112,0.26);
   --c-opt-sort-btn-fg: var(--text-sumi-dim);
-  --c-opt-sort-btn-hover-bg: var(--accent-faint);
+  --bg-opt-sort-btn-hover: var(--accent-faint);
   --c-opt-sort-btn-hover-fg: var(--gold-bright); /* audit P1 (2026-06-07): paper → gold-bright (hover contrast 3.5→AA) */
   /* audit P1 (2026-06-07): persistent sort state が 2.2-3.8:1 — 金地墨字 (button-primary 語彙) で 11:1 へ。
      literal 固定 = 両 theme constant (--gold-bright は light で暗金 swap されるため var 参照不可) */
-  --c-opt-sort-btn-active-bg: #f0d28a;
+  --bg-opt-sort-btn-active: #f0d28a;
   --c-opt-sort-btn-active-fg: #2a1810;
   --c-opt-btn-apply-border: var(--jade-bright-mid);
   --c-opt-btn-apply-hover-border: var(--jade-bright);
   --c-rank-row-border-left: 1px solid rgba(212,175,55,0.30); /* critique P3: side-stripe 3px→1px (禁則解消、 不透明度で存在感補償) */
   --c-rank-row-border-bot: 1px solid var(--gold-bright-tint);
-  --c-rank-row-odd-bg: var(--gold-bright-faint);
-  --c-rank-row-hover-bg: var(--gold-bright-faint);
+  --bg-rank-row-odd: var(--gold-bright-faint);
+  --bg-rank-row-hover: var(--gold-bright-faint);
   --c-rank-row-hover-border-left: var(--gold-bright);
-  --c-eff-row-odd-bg: var(--gold-bright-faint);
-  --c-eff-row-hover-bg: var(--gold-bright-faint);
+  --bg-eff-row-odd: var(--gold-bright-faint);
+  --bg-eff-row-hover: var(--gold-bright-faint);
   --c-cmp-lv-select-fg: var(--gold-bright);
   --c-cmp-stat-select-bg: var(--bg-raised);
   --c-btn-secondary-bg: transparent;

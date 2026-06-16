@@ -207,7 +207,7 @@
 }
 
 .wwm-opt-btn:hover {
-  background: var(--c-opt-btn-hover-bg); border-color: var(--gold);
+  background: var(--bg-opt-btn-hover); border-color: var(--gold);
 }
 
 .wwm-opt-progress {
@@ -232,10 +232,10 @@
   transition: background .15s, border-color .15s;
 }
 
-.wwm-opt-row:nth-child(odd) { background: var(--c-rank-row-odd-bg); }
+.wwm-opt-row:nth-child(odd) { background: var(--bg-rank-row-odd); }
 
 .wwm-opt-row:hover {
-  background: var(--c-rank-row-hover-bg);
+  background: var(--bg-rank-row-hover);
   border-left-color: var(--c-rank-row-hover-border-left);
 }
 
@@ -270,10 +270,10 @@
   transition: background 0.12s, color 0.12s;
 }
 
-.wwm-opt-sort-btn:hover { background: var(--c-opt-sort-btn-hover-bg); color: var(--c-opt-sort-btn-hover-fg); }
+.wwm-opt-sort-btn:hover { background: var(--bg-opt-sort-btn-hover); color: var(--c-opt-sort-btn-hover-fg); }
 
 .wwm-opt-sort-btn.active {
-  background: var(--c-opt-sort-btn-active-bg);
+  background: var(--bg-opt-sort-btn-active);
   color: var(--c-opt-sort-btn-active-fg);
   font-weight: var(--fw-bold);
 }
@@ -297,7 +297,7 @@
 
 .wwm-opt-btn-apply { color: var(--text-sumi-gold); border-color: var(--c-opt-btn-apply-border); }
 
-.wwm-opt-btn-apply:hover { background: var(--c-opt-btn-apply-hover-bg); border-color: var(--c-opt-btn-apply-hover-border); }
+.wwm-opt-btn-apply:hover { background: var(--bg-opt-btn-apply-hover); border-color: var(--c-opt-btn-apply-hover-border); }
 
 .wwm-opt-pos { font-family: var(--f-latin); font-weight: var(--fw-extra); color: var(--text-sumi-gold); text-align: center; }
 
@@ -355,10 +355,10 @@
   transition: background .15s, border-color .15s;
 }
 
-.wwm-eff-row:nth-child(odd) { background: var(--c-eff-row-odd-bg); }
+.wwm-eff-row:nth-child(odd) { background: var(--bg-eff-row-odd); }
 
 .wwm-eff-row:hover {
-  background: var(--c-eff-row-hover-bg);
+  background: var(--bg-eff-row-hover);
   border-left-color: var(--gold-bright);
 }
 
@@ -376,7 +376,7 @@
 .wwm-eff-input {
   width: 100%;
   padding: 3px 6px;
-  background: var(--c-eff-input-bg);
+  background: var(--bg-eff-input);
   border: 1px solid var(--gold-deep);
   color: var(--c-eff-input-fg);
   font-family: var(--f-latin);
@@ -446,10 +446,10 @@
   transition: background .15s, border-color .15s;
 }
 
-.wwm-rank-row:nth-child(odd) { background: var(--c-rank-row-odd-bg); }
+.wwm-rank-row:nth-child(odd) { background: var(--bg-rank-row-odd); }
 
 .wwm-rank-row:hover {
-  background: var(--c-rank-row-hover-bg);
+  background: var(--bg-rank-row-hover);
   border-left-color: var(--c-rank-row-hover-border-left);
 }
 

@@ -167,29 +167,29 @@
   --c-opt-loading-fg:              var(--gold-deep);
   --c-opt-loading-text-shadow:     0 0 8px rgba(168,120,40,0.3);
   --c-opt-btn-fg:                  #5a4220;
-  --c-opt-btn-hover-bg:            var(--c-opt-hover-bg);
+  --bg-opt-btn-hover:            var(--c-opt-hover-bg);
   --c-opt-btn-apply-border:        rgba(45,90,58,0.4);
-  --c-opt-btn-apply-hover-bg:      rgba(168,212,180,0.25);
+  --bg-opt-btn-apply-hover:      rgba(168,212,180,0.25);
   --c-opt-btn-apply-hover-border:  rgba(45,90,58,0.7);
   --c-opt-sort-group-border:       var(--c-opt-border-soft);
   --c-opt-sort-btn-border-left:    var(--c-opt-border-soft);
   --c-opt-sort-btn-fg:             #5a4838;
-  --c-opt-sort-btn-hover-bg:       var(--c-opt-hover-bg);
+  --bg-opt-sort-btn-hover:       var(--c-opt-hover-bg);
   --c-opt-sort-btn-hover-fg:       var(--brown-1);
-  --c-opt-sort-btn-active-bg:      #f0d28a;
+  --bg-opt-sort-btn-active:      #f0d28a;
   --c-opt-sort-btn-active-fg:      #2a1810;
 
   /* rank table */
   --c-rank-row-border-left:        1px solid rgba(120,60,20,0.36);
   --c-rank-row-border-bot:         1px solid rgba(120,60,20,0.16);
-  --c-rank-row-odd-bg:             rgba(120,60,20,0.05);
-  --c-rank-row-hover-bg:           rgba(212,175,55,0.16);
+  --bg-rank-row-odd:             rgba(120,60,20,0.05);
+  --bg-rank-row-hover:           rgba(212,175,55,0.16);
   --c-rank-row-hover-border-left:  #b8861a;
 
   /* eff table */
-  --c-eff-row-odd-bg:              var(--shade-soft);
-  --c-eff-row-hover-bg:            var(--shade-mid);
-  --c-eff-input-bg:                var(--shade-mid);
+  --bg-eff-row-odd:              var(--shade-soft);
+  --bg-eff-row-hover:            var(--shade-mid);
+  --bg-eff-input:                var(--shade-mid);
   --c-eff-input-fg:                #000;
 
   /* anlz panel */

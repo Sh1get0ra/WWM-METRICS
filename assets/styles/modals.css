@@ -234,7 +234,7 @@
   font-size: var(--text-12); margin: 0 0 var(--space-1);
   color: var(--c-sb-section-title-fg);
   padding: var(--space-half) var(--space-1-5);
-  background: var(--c-sb-section-title-bg);
+  background: var(--bg-sb-section-title);
   border-radius: 3px;
   border-left: var(--c-sb-section-title-border-left);
   padding-left: var(--c-sb-section-title-pad-left);
