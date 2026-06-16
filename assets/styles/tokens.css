@@ -126,7 +126,15 @@
   --f-display-ko: 'Diphylleia', 'Gowun Batang', 'Black Han Sans', serif;
   --f-body:    'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
   --f-latin:   'Cinzel', 'Cormorant Garamond', 'Noto Serif JP', serif;
+  /* 主題 display = lang 動的切替 token (2026-06-16 兄貴指示 — !important 全廃のため :root 値を html[lang] で上書き、
+     modals/workspace 等の主題 selector は var(--f-display-title) 参照のみで lang 自動追従) */
+  --f-display-title: var(--f-display);
+}
+html[lang="en"], html[lang="vi"] { --f-display-title: var(--f-latin); }
+html[lang="zh-CN"], html[lang="zh"] { --f-display-title: var(--f-display-zh); }
+html[lang="ko"] { --f-display-title: var(--f-display-ko); }
 
+:root {
   /* Spacing scale (4px base) */
   --space-half: 2px;     /* badge内余白等 */
   --space-1:    4px;
@@ -212,7 +220,7 @@
   --c-footer-logo-opacity: 0.75;
   --bg-preset-bar: var(--bg-overlay-bottom);
   --c-h1-accent-fg: var(--vermilion-bright);
-  --c-h1-sub-fg: var(--sumi-fg-dim);
+  --c-h1-sub-fg: var(--sumi-fg);
   --bg-preset-slot-has-data: rgba(40,30,18,0.12);
   --c-preset-slot-has-data-border: rgba(201,164,90,0.4);
   --c-preset-save-border: var(--gold-strong);
@@ -236,7 +244,7 @@
   --bg-modal-a-header: var(--sumi-3);
   --c-cmp-title-en-fg: var(--chart-sympathy);
   --c-cmp-set-header-text-shadow: 0 0 6px var(--vermilion-bright-soft-mid);
-  --c-cmp-preview-zero-fg: var(--sumi-fg-dim);
+  --c-cmp-preview-zero-fg: var(--sumi-fg);
   --c-cmp-modal-bg-icon-opacity: 0.1;
   --c-modal-bg-icon-opacity: 0.18;
   --bg-xinfa-tier-chip: var(--vermilion-soft);
@@ -295,7 +303,7 @@
   --c-tier-chip-b-text-shadow: 0 0 10px rgba(201,184,138,0.45);
   --bg-tier-chip-c: rgba(139,129,112,0.10);
   --c-tier-chip-c-border: rgba(139,129,112,0.26);
-  --c-opt-sort-btn-fg: var(--sumi-fg-dim);
+  --c-opt-sort-btn-fg: var(--sumi-fg);
   --bg-opt-sort-btn-hover: var(--accent-faint);
   --c-opt-sort-btn-hover-fg: var(--gold-bright); /* audit P1 (2026-06-07): paper → gold-bright (hover contrast 3.5→AA) */
   /* audit P1 (2026-06-07): persistent sort state が 2.2-3.8:1 — 金地墨字 (button-primary 語彙) で 11:1 へ。
@@ -323,8 +331,8 @@
   --bg-modal-a-btn-secondary: url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_cancel-9a52642a.png") center / 100% 100% no-repeat, transparent;
   --c-slot-border: rgba(232,215,180,0.20);
   --bg-tier-badge-hero: linear-gradient(135deg, rgba(60,40,30,.45) 0%, rgba(30,20,15,.35) 50%, rgba(60,40,30,.45) 100%);
-  --c-tier-badge-hero-fg: var(--sumi-fg-dim);
-  --c-tier-badge-hero-border: var(--sumi-fg-dim);
+  --c-tier-badge-hero-fg: var(--sumi-fg);
+  --c-tier-badge-hero-border: var(--sumi-fg);
   --c-tier-ss-hero-fg: var(--chart-crit);
   --c-tier-ss-hero-border: rgba(240,210,138,.65);
   --c-tier-s-hero-fg: #ff6b50;
@@ -333,7 +341,7 @@
   --c-tier-a-hero-border: var(--jade-bright-strong);
   --c-tier-b-hero-fg: var(--bone);
   --c-tier-b-hero-border: rgba(201,184,138,.5);
-  --c-tier-c-hero-fg: var(--sumi-fg-dim);
+  --c-tier-c-hero-fg: var(--sumi-fg);
   --c-tier-c-hero-border: rgba(122,112,96,.45);
   --c-anlz-tab-fg: var(--sumi-fg);
   --c-anlz-tab-active-fg: var(--chart-crit);
@@ -389,8 +397,8 @@
   --c-sb-totalmartial--b-text-shadow: initial;  /* S2-g sb-totalmartial--b */
   --c-sb-totalmartial--muted-fg: initial;  /* S2-g sb-totalmartial--muted */
   --c-sb-totalmartial--muted-opacity: 0.6;  /* S2-g sb-totalmartial--muted */
-  --c-cmp-modal-a--cmp-delta-label-fg: var(--sumi-fg-dim);  /* S2-g cmp-modal-a--cmp-delta-label */
-  --c-cmp-modal-a--cmp-delta-base-fg: var(--sumi-fg-dim);  /* S2-g cmp-modal-a--cmp-delta-base */
+  --c-cmp-modal-a--cmp-delta-label-fg: var(--sumi-fg);  /* S2-g cmp-modal-a--cmp-delta-label */
+  --c-cmp-modal-a--cmp-delta-base-fg: var(--sumi-fg);  /* S2-g cmp-modal-a--cmp-delta-base */
   --c-hero-wuxia--hero-tier-tier-SS-before-position: absolute;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
   --c-hero-wuxia--hero-tier-tier-SS-before-top: 0;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
   --c-hero-wuxia--hero-tier-tier-SS-before-bottom: 0;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
@@ -436,7 +444,7 @@
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
   --c-cmp-kongfu-select-fg: var(--accent);
   --c-cmp-set-select-fg: var(--liupai-guyun);
-  --c-xinfa-tier-fg: var(--sumi-fg-dim);
+  --c-xinfa-tier-fg: var(--sumi-fg);
 
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
   --c-share-url-border: var(--ink-2);
@@ -463,7 +471,7 @@
   --c-num-input-border: #444;
   --c-btn-secondary-border: rgba(255,255,255,0.3);
   --c-cmp-title--cmp-lv-border: var(--gold-deep);
-  --c-cmp-btn-row--btn-secondary-border: var(--sumi-fg-dim);
+  --c-cmp-btn-row--btn-secondary-border: var(--sumi-fg);
 
   /* ═══════════════════════════════════════════════════════════════
      bg semantic 集約 Phase 1 (2026-06-15、 design doc:

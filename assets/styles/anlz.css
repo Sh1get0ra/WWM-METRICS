@@ -102,8 +102,8 @@
   padding: 12px 28px 10px;
   background: transparent;
   border: none;
-  color: var(--sumi-fg-dim);
-  font-family: var(--f-display);
+  color: var(--sumi-fg);
+  font-family: var(--f-display-title);
   font-size: var(--text-md); font-weight: var(--fw-bold);
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -183,7 +183,7 @@
 }
 
 .wwm-opt-ratio-label {
-  font-size: var(--text-sm); color: var(--sumi-fg-dim);
+  font-size: var(--text-sm); color: var(--sumi-fg);
   display: flex; align-items: center; gap: 5px;
 }
 
@@ -211,7 +211,7 @@
 }
 
 .wwm-opt-progress {
-  padding: var(--space-1-5) var(--space-2); color: var(--sumi-fg-dim);
+  padding: var(--space-1-5) var(--space-2); color: var(--sumi-fg);
   font-size: var(--text-sm); font-family: var(--f-latin);
   text-align: center;
 }
@@ -394,7 +394,7 @@
   box-shadow: 0 0 0 2px rgba(212,175,55,.18);
 }
 
-.wwm-eff-pct { font-size: var(--text-sm); color: var(--sumi-fg-dim); text-align: left; }
+.wwm-eff-pct { font-size: var(--text-sm); color: var(--sumi-fg); text-align: left; }
 
 .wwm-eff-delta {
   font-family: var(--f-latin);
@@ -422,7 +422,7 @@
 }
 
 .wwm-analysis-card h3 {
-  margin: 0; font-family: var(--f-display);
+  margin: 0; font-family: var(--f-display-title);
   font-size: var(--text-14); font-weight: var(--fw-bold);
   color: var(--gold-bright); letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -488,7 +488,7 @@
 }
 
 .wwm-diag-rail {
-  font-family: var(--f-display); font-weight: var(--fw-black);
+  font-family: var(--f-display-title); font-weight: var(--fw-black);
   font-size: var(--text-md); letter-spacing: 0.25em;
   color: var(--vermilion-bright);
   text-shadow: 0 0 10px var(--vermilion-bright-soft-mid);
@@ -606,7 +606,7 @@
 .wwm-anlz-title-block { display: flex; align-items: baseline; gap: 14px; flex-shrink: 0; }
 
 .wwm-anlz-title {
-  font-family: var(--f-display);
+  font-family: var(--f-display-title);
   font-size: 48px;
   color: var(--c-anlz-title-fg);
   letter-spacing: 0.05em;
@@ -643,7 +643,7 @@
   background: transparent;
   border: none;
   color: var(--c-anlz-tab-fg);
-  font-family: var(--f-display);
+  font-family: var(--f-display-title);
   font-size: var(--text-15);
   letter-spacing: 0.18em;
   cursor: pointer;
@@ -670,23 +670,23 @@ html[lang="en"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
 
 /* ja: Ma Shan Zheng は日本漢字非対応 → Noto Serif JP */
 html[lang="ja"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
-  font-family: var(--f-display);
+  font-family: var(--f-display-title);
 }
 
 /* ko: Noto Serif KR (fallback Noto Serif JP) */
 html[lang="ko"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
-  font-family: var(--f-display);
+  font-family: var(--f-display-title);
 }
 
 /* en時: modal の主タイトル / 各パネルの主タイトル を Cinzel に統一 */
 /* K: lang 軸 override — modals layer (後 layer) の letter-spacing/font 競合に components から
    勝つ手段が imp のみ (lang 軸は layer 表現不能) + export inline font 対抗。 strip するな (Step 5 確定) */
-html[lang="en"] .wwm-modal-header h2,
-html[lang="en"] .wwm-modal-header h2 *,
-html[lang="en"] .wwm-cmp-title-ja,
-html[lang="en"] .wwm-cmp-title-en {
-  font-family: var(--f-latin) !important;
-  letter-spacing: 0.15em !important;
+/* 旧 html[lang="..."] rule 全廃 (2026-06-16 兄貴指示) — --f-display-title 主題 token を
+   tokens.css の :root + html[lang] で動的切替する設計に統一。 lang 別 selector + !important
+   による cascade 戦は不要。 en の letter-spacing 0.15em のみ別 token 化したい場合は後 sprint */
+html[lang="en"] .wwm-cmp-title-en,
+html[lang="vi"] .wwm-cmp-title-en {
+  letter-spacing: 0.15em;
 }
 
 #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab.active::after {
@@ -748,7 +748,7 @@ html[lang="en"] .wwm-cmp-title-en {
 .wwm-anlz-empty-hint {
   text-align: center;
   padding: var(--space-7) var(--space-3);
-  color: var(--sumi-fg-dim);
+  color: var(--sumi-fg);
   font-size: var(--text-md);
   line-height: 1.9;
 }
@@ -840,7 +840,7 @@ html[lang="en"] .wwm-cmp-title-en {
    直値 #f0d28a (墨面 --gold-bright 同値) で「明るい金」 強制 (兄貴指定 2026-06-14) */
 .wwm-anlz-popout-btn {
   padding: 4px 15px;
-  font-family: var(--f-display);
+  font-family: var(--f-display-title); /* lang 動的切替 (2026-06-16) — :lang() 個別 rule 全廃 */
   font-size: 20px; font-weight: 700; letter-spacing: 0.18em;
   color: #f0d28a;
   background: none;
@@ -848,23 +848,6 @@ html[lang="en"] .wwm-cmp-title-en {
   box-shadow: inset 0 0 0 1px rgba(240, 210, 138, 0.15);
   cursor: pointer;
   transition: color 0.15s, background 0.15s;
-}
-/* en/vi では楷書 (--f-display) latin 不向き → latin font 切替 (2026-06-16 兄貴指示)。
-   zh は --f-body (汎用 sans/serif で zh 字形対応) */
-:lang(en) .wwm-anlz-popout-btn,
-:lang(vi) .wwm-anlz-popout-btn {
-  font-family: var(--f-latin);
-  letter-spacing: 0.08em;
-}
-:lang(zh) .wwm-anlz-popout-btn {
-  font-family: var(--f-display-zh);
-  font-weight: 800;
-  letter-spacing: 0.08em;
-}
-:lang(ko) .wwm-anlz-popout-btn {
-  font-family: var(--f-display-ko);
-  font-weight: 800;
-  letter-spacing: 0.08em;
 }
 .wwm-anlz-popout-btn:hover {
   background: rgba(240, 210, 138, 0.18);
@@ -915,12 +898,12 @@ body[data-anlz-popout="1"] #wsAnlz .wwm-anlz-gap { display: none; }
   border-bottom: 1px solid var(--gold-deep);
   flex-shrink: 0;
 }
-.wwm-anlz-floating-title { flex: 1; font-family: var(--f-display); font-size: 15px; font-weight: 700; letter-spacing: 0.22em; display: flex; align-items: baseline; gap: 8px; }
+.wwm-anlz-floating-title { flex: 1; font-family: var(--f-display-title); font-size: 15px; font-weight: 700; letter-spacing: 0.22em; display: flex; align-items: baseline; gap: 8px; }
 .wwm-anlz-floating-title .ja { color: var(--gold-bright); }
 .wwm-anlz-floating-title .en { font-family: var(--f-latin); font-size: 11px; letter-spacing: 0.2em; color: var(--gold-bright); }
 .wwm-anlz-floating-title .seal {
   width: 22px; height: 22px; background: var(--vermilion);
-  color: #fff5e0; font-family: var(--f-display); font-weight: 800; font-size: 12px;
+  color: #fff5e0; font-family: var(--f-display-title); font-weight: 800; font-size: 12px;
   display: flex; align-items: center; justify-content: center;
   transform: rotate(-4deg); margin-left: 6px;
 }
@@ -946,7 +929,7 @@ body[data-anlz-popout="1"] #wsAnlz .wwm-anlz-gap { display: none; }
 }
 .wwm-anlz-floating-subheader .anlz-subtab {
   padding: 8px 18px;
-  font-family: var(--f-display); font-size: 12px; font-weight: 700; letter-spacing: 0.18em;
+  font-family: var(--f-display-title); font-size: 12px; font-weight: 700; letter-spacing: 0.18em;
   color: var(--gold-bright); background: none; border: none; cursor: pointer;
   border-bottom: 2px solid transparent;
   transition: color 0.15s, border-color 0.15s, background 0.15s;
@@ -973,7 +956,7 @@ body[data-anlz-popout="1"] #wsAnlz .wwm-anlz-gap { display: none; }
 .wwm-anlz-floating-body .wwm-anlz { background: transparent; padding: 0; }
 
 .wwm-anlz-floating-footer {
-  background: var(--sumi-1); color: var(--sumi-fg-dim);
+  background: var(--sumi-1); color: var(--sumi-fg);
   padding: 6px 14px;
   font-size: 10px; letter-spacing: 0.16em;
   border-top: 1px solid var(--sumi-2);

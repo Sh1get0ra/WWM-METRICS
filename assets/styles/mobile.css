@@ -71,7 +71,7 @@
 }
 
 .wwm-mobile-drawer-title {
-  font-family: var(--f-display); font-weight: var(--fw-black);
+  font-family: var(--f-display-title); font-weight: var(--fw-black);
   font-size: var(--text-lg); letter-spacing: 0.24em;
   color: var(--gold-bright);
 }
@@ -119,7 +119,7 @@
   border: 1px solid var(--ink-2);
   border-radius: 3px;
   color: var(--sumi-fg);
-  font-family: var(--f-display); font-weight: var(--fw-bold);
+  font-family: var(--f-display-title); font-weight: var(--fw-bold);
   font-size: var(--text-sm);
   cursor: pointer;
 }
@@ -132,7 +132,7 @@
   border: 1px solid var(--ink-2);
   border-radius: 3px;
   color: var(--sumi-fg);
-  font-family: var(--f-display); font-weight: var(--fw-bold);
+  font-family: var(--f-display-title); font-weight: var(--fw-bold);
   font-size: var(--text-md);
   text-align: left;
   cursor: pointer;
@@ -193,7 +193,7 @@
 
 @media (max-width: 480px) {
   .wwm-mobile-title {
-    font-family: var(--f-display);
+    font-family: var(--f-display-title);
     font-weight: var(--fw-black);
     font-size: var(--text-lg);
     letter-spacing: 0.16em;
@@ -285,7 +285,7 @@
   .wwm-mobile-stat-fab-avatar[src=""],
   .wwm-mobile-stat-fab-avatar:not([src]) { display: none; }
   .wwm-mobile-stat-fab-fallback {
-    font-family: var(--f-display);
+    font-family: var(--f-display-title);
     font-weight: var(--fw-black);
     font-size: var(--text-14);
     color: var(--gold-bright);
@@ -317,7 +317,7 @@
     flex: 0 0 auto;
   }
   .wwm-mobile-stat-overlay-title {
-    font-family: var(--f-display);
+    font-family: var(--f-display-title);
     font-weight: var(--fw-black);
     font-size: var(--text-14);
     letter-spacing: 0.18em;

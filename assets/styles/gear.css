@@ -248,7 +248,7 @@
 .wwm-equip-section .wwm-equip-base b,
 .wwm-equip-section .wwm-equip-affix b {
   font-size: var(--text-xs);
-  color: var(--sumi-fg-dim);
+  color: var(--sumi-fg);
   letter-spacing: 0.05em;
   font-weight: var(--fw-semibold);
 }

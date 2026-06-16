@@ -56,8 +56,8 @@
   position: absolute;
   top: 14px; right: 16px;
   width: 8px; height: 8px;
-  border-right: 1.5px solid var(--sumi-fg-dim);
-  border-bottom: 1.5px solid var(--sumi-fg-dim);
+  border-right: 1.5px solid var(--sumi-fg);
+  border-bottom: 1.5px solid var(--sumi-fg);
   transform: rotate(45deg);
   opacity: 0.4;
   transition: transform 0.25s ease, top 0.25s ease, opacity 0.15s;
@@ -186,7 +186,7 @@
   width: 8px; height: 8px;
 }
 .hero-dmg-split .hb-label {
-  font-family: var(--f-display);
+  font-family: var(--f-display-title);
   font-size: var(--text-xs);
   letter-spacing: 0.1em;
   color: var(--sumi-fg);
@@ -210,7 +210,7 @@
 .hero-dmg-split .hb-row.crit .hb-label,  .hero-dmg-split .hb-row.crit .hb-pct  { color: var(--chart-crit); }
 .hero-dmg-split .hb-row.symp .hb-label,  .hero-dmg-split .hb-row.symp .hb-pct  { color: var(--chart-sympathy); }
 .hero-dmg-split .hb-row.norm .hb-label,  .hero-dmg-split .hb-row.norm .hb-pct  { color: var(--chart-normal); }
-.hero-dmg-split .hb-row.graz .hb-label,  .hero-dmg-split .hb-row.graz .hb-pct  { color: var(--sumi-fg-dim); }
+.hero-dmg-split .hb-row.graz .hb-label,  .hero-dmg-split .hb-row.graz .hb-pct  { color: var(--sumi-fg); }
 .hero-dmg-split .hb-row.phys .hb-label,  .hero-dmg-split .hb-row.phys .hb-pct  { color: var(--vermilion-bright); }
 .hero-dmg-split .hb-row.elem .hb-label,  .hero-dmg-split .hb-row.elem .hb-pct  { color: var(--jade-bright); }
 
@@ -347,7 +347,7 @@
 /* critique P3 fix (2026-06-06 兄貴承認): gradient-text (background-clip) → solid 金。
    dark = token を transparent → gold-bright 化、 light は既存 vermilion-deep のまま */
 .hero-wuxia .luopan-center-label {
-  font-family: var(--f-display);
+  font-family: var(--f-display-title);
   font-size: 30px;
   font-weight: var(--fw-extra);
   letter-spacing: .18em;
@@ -491,7 +491,7 @@
     justify-self: center;
   }
   .hero-next-inline[hidden] { display: none; }
-  .hero-wuxia .hero-next-label { font-size: var(--text-xs); letter-spacing: 0.08em; padding: 0; color: var(--sumi-fg-dim); }
+  .hero-wuxia .hero-next-label { font-size: var(--text-xs); letter-spacing: 0.08em; padding: 0; color: var(--sumi-fg); }
   .hero-wuxia .hero-next-row { font-size: var(--text-sm); display: inline-flex; align-items: center; gap: 2px; }
   .hero-wuxia .hero-next-val { font-size: var(--text-md); font-weight: var(--fw-bold); }
   .hero-left { grid-area: info; }

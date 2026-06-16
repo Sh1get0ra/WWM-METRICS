@@ -82,7 +82,7 @@
         <span class="wwm-cmp-l-bracket-tl"></span><span class="wwm-cmp-l-bracket-tr"></span>
         <span class="wwm-cmp-l-bracket-bl"></span><span class="wwm-cmp-l-bracket-br"></span>
         <div class="wwm-modal-header">
-          <h2><span class="wwm-cmp-title-ja" data-kaisho="cmpArsenalTitle">${(window.T?.cmpArsenalTitle)||'武庫対照'}</span><span class="wwm-cmp-title-en">COMPARISON</span><span class="wwm-cmp-seal">庫</span></h2>
+          <h2><span class="wwm-cmp-title-ja" data-i18n="cmpArsenalTitle" data-kaisho="cmpArsenalTitle">${(window.T?.cmpArsenalTitle)||'武庫対照'}</span><span class="wwm-cmp-title-en">COMPARISON</span><span class="wwm-cmp-seal">庫</span></h2>
           <button class="wwm-modal-close" aria-label="Close">×</button>
         </div>
         <div class="wwm-modal-body wwm-ws-paper">

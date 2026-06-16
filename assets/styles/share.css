@@ -22,7 +22,7 @@ html.wwm-shared-build-mode .wwm-shared-build-banner {
   border: 1px solid var(--vermilion-strong);
   border-radius: 2px;
   color: var(--kami-fg);  /* 紙面配置 (wwm-ws-body 内) 対応 = 焦茶で識別 (2026-06-16) */
-  font-family: var(--f-display);
+  font-family: var(--f-display-title);
   font-size: var(--text-sm);
   letter-spacing: 0.08em;
   border-color: var(--c-shared-build-mode--shared-build-banner-border);
@@ -129,7 +129,7 @@ html.wwm-shared-build-mode #importBtn {
 
 .preset-slot-num {
   font-family: var(--f-latin); font-size: var(--text-xs); font-weight: var(--fw-bold);
-  color: var(--kami-fg-dim); letter-spacing: 0.1em;
+  color: var(--kami-fg); letter-spacing: 0.1em;
   width: 12px; flex-shrink: 0;
 }
 
@@ -137,13 +137,13 @@ html.wwm-shared-build-mode #importBtn {
 
 .preset-name-input {
   flex: 1; border: none; background: transparent;
-  font-family: var(--f-display); font-size: var(--text-12); font-weight: var(--fw-semibold);
+  font-family: var(--f-display-title); font-size: var(--text-12); font-weight: var(--fw-semibold);
   color: var(--kami-fg); min-width: 0;
   /* outline:none は削除済 (2026-06-05 @layer Step 1): input は focus = :focus-visible 常時 match
      = base.css の a11y gold ring が常勝で dead だった。復活させるな (a11y + layer flip 源) */
 }
 
-.preset-name-input::placeholder { color: var(--kami-fg-dim); font-weight: var(--fw-normal); }
+.preset-name-input::placeholder { color: var(--kami-fg); font-weight: var(--fw-normal); }
 
 .preset-btn {
   padding: 3px 8px; border: 1px solid; background: transparent;

@@ -182,7 +182,7 @@
         <span class="wwm-tool-bracket wwm-tool-bracket-tl"></span><span class="wwm-tool-bracket wwm-tool-bracket-tr"></span>
         <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
         <div class="wwm-modal-header">
-          <h2><span class="wwm-tool-title-ja" data-kaisho="shareTitle">${T.shareTitle ?? '飛簡'}</span><span class="wwm-tool-title-en">SHARE</span><span class="wwm-tool-seal">飛</span></h2>
+          <h2><span class="wwm-tool-title-ja" data-i18n="shareTitle" data-kaisho="shareTitle">${T.shareTitle ?? '飛簡'}</span><span class="wwm-tool-title-en">SHARE</span><span class="wwm-tool-seal">飛</span></h2>
           <button class="wwm-modal-close" aria-label="Close">×</button>
         </div>
         <div class="wwm-tool-tabs">
