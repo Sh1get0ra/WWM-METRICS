@@ -25,8 +25,6 @@
       best: null,
       locked: false,
       running: false,
-      maxRi: null,
-      slotMaxLoo: null,
     },
     allowDonut: false,
   };
@@ -95,12 +93,7 @@
       get locked()   { return _data.opt.locked; },
       set locked(v)  { _data.opt.locked = !!v; },
       get running()  { return _data.opt.running; },
-      set running(v) { _data.opt.running = !!v; },
-      // 装備品質 % 用 (opt 実行時の全 step 反復後 max ri snapshot + 各 slot LOO)
-      get maxRi()    { return _data.opt.maxRi; },
-      set maxRi(v)   { _data.opt.maxRi = v; },
-      get slotMaxLoo() { return _data.opt.slotMaxLoo; },
-      set slotMaxLoo(v) { _data.opt.slotMaxLoo = v; }
+      set running(v) { _data.opt.running = !!v; }
     },
 
     // ── runtime flags ──────────────────────────────────

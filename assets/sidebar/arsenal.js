@@ -218,20 +218,14 @@
         window.computeExpected(p2);
         const noArsScore = _scoreWithBonus(baseRi);
         const vSlot = Math.round(totalCur - noArsScore);
-        // 装備品質 % (武庫 LOO / MAX LOO × 0.95 × 100)
-        const maxLoo = (WWMState.opt.slotMaxLoo || {})['arsenal'];
-        const _q = (l, m) => (!m || m <= 0) ? null : Math.round(l / m * 100);
-        const basePct = _q(_origArsContribCache, maxLoo);
-        const curPct = _q(vSlot, maxLoo);
-        const dPct = (basePct != null && curPct != null) ? (curPct - basePct) : null;
+        // 武備指数 (= LOO 生値) baseline ▶ current 表示 (兄貴指示 2026-06-18)
         const totalBase = Math.round(WWMState.baseline?.statusScore ?? 0);
         const pf = await window.WWMStats.buildStatParams(baseRi, newState);
         window.computeExpected(pf);
         const baseEl = m.querySelector('#wwmArsenalEditBase');
         const _ARR = '<span class="wwm-cmp-arrow">▶</span>';
         if (baseEl) {
-          if (basePct != null && curPct != null) baseEl.innerHTML = `${basePct}%${_ARR}${curPct}%`;
-          else baseEl.textContent = _origArsContribCache.toLocaleString();
+          baseEl.innerHTML = `${_origArsContribCache.toLocaleString()}${_ARR}${vSlot.toLocaleString()}`;
         }
         const totEl = m.querySelector('#wwmArsenalEditTotal');
         if (totEl) totEl.innerHTML = `${totalBase.toLocaleString()}${_ARR}${totalCur.toLocaleString()}`;

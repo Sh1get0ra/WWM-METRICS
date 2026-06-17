@@ -122,12 +122,10 @@
   }
 
   // 装備カード Score = pure LOO marginal (set 補正撤去版)
-  // カード表示は 装備品質 % (= LOO / (slot MAX LOO × 0.95) × 100、 WWMState.opt.slotMaxLoo['gear:N'] 参照)
+  // カード表示は 武備指数 (= marginal LOO 生値、 シナジー波及込み)
   async function _computeSlotContributions(roleInfo, slots, suffixSlots, set4Map) {
     if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return null;
     const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
-    // marginal LOO 方式 (兄貴指示 2026-06-17 再確認): 他装備込み base からの差分で当該 slot 寄与算出
-    // 乗算系 affix (武術ダメ/会心倍率 系) も他装備 stat に乗算で真価出る、 ratio に正しく反映
     let baseScore = 0;
     try {
       const baseParams = await window.WWMStats.buildStatParams(roleInfo, state);
@@ -136,7 +134,6 @@
     } catch (e) { return null; }
     const result = {};
     const bowPair = ['21', '9'];
-    // 弓 21 or 9 のいずれかが評価対象なら pair 同時抜きで half 配分 (modal preview = slot 単独でも整合維持)
     const hasBowMember = slots.some(s => bowPair.includes(s));
     for (const slot of slots) {
       try {
@@ -149,7 +146,7 @@
         result[slot] = Math.round(baseScore - noSlot);
       } catch (e) { result[slot] = 0; }
     }
-    // 弓ペア = 21+9 同時抜きで pair total LOO 算出 → 半分配分 (兄貴指示 弓 set effect 特殊扱い)
+    // 弓ペア = pair 同時抜き half 配分
     if (hasBowMember) {
       try {
         const ri = JSON.parse(JSON.stringify(roleInfo));
@@ -165,12 +162,6 @@
       } catch (e) { for (const ps of bowPair) { if (slots.includes(ps)) result[ps] = 0; } }
     }
     return result;
-  }
-
-  // 装備品質 % 計算 (slot LOO / slot MAX LOO × 100、 MAX LOO は opt 終了時 affix × TARGET_RATIO で既に詰まった状態 = 二重 0.95 不要)
-  function _slotQualityPct(curLoo, maxLoo) {
-    if (!maxLoo || maxLoo <= 0) return null;
-    return Math.round(curLoo / maxLoo * 100);
   }
 
   async function _computeGearCardScores(roleInfo) {
@@ -220,35 +211,27 @@
       }
       origContrib = await _computeSlotContributions(origRi, origSlots, origSuffixSlots, origSet4Map) || {};
     }
-    // 描画 = 装備品質 % のみ表示 (生 LOO 値非表示、 編集中 slot のみ baseline% ▶ current% で Δ chip 表示)
-    const slotMaxLoo = WWMState.opt.slotMaxLoo || {};
+    // 描画 = 武備指数 (= LOO 生値) 表示 (兄貴指示 2026-06-18 = 火力品質 % 廃止)
     for (const slot of slots) {
       const el = document.querySelector(`[data-card-score="${slot}"]`);
       if (!el) continue;
       const curLoo = effContrib[slot] || 0;
-      const maxLoo = slotMaxLoo['gear:' + slot];
-      const curPct = _slotQualityPct(curLoo, maxLoo);
-      if (curPct == null) {
-        // MAX LOO 未確定 (opt 未実行 等) = 生 LOO 値で fallback
-        el.innerHTML = `<span class="plank-score-main">${curLoo.toLocaleString()}</span>`;
-        continue;
-      }
       if (hasVirtual && origContrib[slot] != null) {
-        const origPct = _slotQualityPct(origContrib[slot], maxLoo);
-        if (origPct != null && origPct !== curPct) {
+        const origLoo = origContrib[slot] || 0;
+        if (origLoo !== curLoo) {
           const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
           if (isObs) {
-            el.innerHTML = `<span class="plank-score-main">${origPct}%</span>`;
+            el.innerHTML = `<span class="plank-score-main">${origLoo.toLocaleString()}</span>`;
           } else {
-            const delta = curPct - origPct;
+            const delta = curLoo - origLoo;
             const sign = delta > 0 ? '+' : '';
             const cls = delta > 0 ? 'up' : delta < 0 ? 'dn' : '';
-            el.innerHTML = `<span class="plank-score-main">${origPct}%</span> <span class="plank-score-delta ${cls}">${sign}${delta}%</span>`;
+            el.innerHTML = `<span class="plank-score-main">${origLoo.toLocaleString()}</span> <span class="plank-score-delta ${cls}">${sign}${delta.toLocaleString()}</span>`;
           }
           continue;
         }
       }
-      el.innerHTML = `<span class="plank-score-main">${curPct}%</span>`;
+      el.innerHTML = `<span class="plank-score-main">${curLoo.toLocaleString()}</span>`;
     }
     // DOM 状態復元
     try {
@@ -579,12 +562,7 @@
         const va = _slotContribArgs(vRi);
         const vMap = await _computeSlotContributions(vRi, [slot], va.suffixSlots, va.set4Map) || {};
         const vContrib = vMap[slot] || 0;
-        // 装備品質 % (LOO / (MAX LOO × 0.95) × 100)
-        const maxLoo = (WWMState.opt.slotMaxLoo || {})['gear:' + slot];
-        const basePct = _slotQualityPct(_origContribCache, maxLoo);
-        const curPct = _slotQualityPct(vContrib, maxLoo);
-        const dPct = (basePct != null && curPct != null) ? (curPct - basePct) : null;
-        // total 軸 = baseline (import 時固定) ▶ 試作 ri の現 total
+        // 武備指数 (= LOO 生値) baseline ▶ current 表示 (兄貴指示 2026-06-18)
         const totalBase = Math.round(WWMState.baseline?.statusScore ?? 0);
         const finalState = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
         const finalParams = await window.WWMStats.buildStatParams(vRi, finalState);
@@ -593,8 +571,7 @@
         const baseEl = m.querySelector('#wwmCmpPreviewBase');
         const _ARR = '<span class="wwm-cmp-arrow">▶</span>';
         if (baseEl) {
-          if (basePct != null && curPct != null) baseEl.innerHTML = `${basePct}%${_ARR}${curPct}%`;
-          else baseEl.innerHTML = `${_origContribCache.toLocaleString()}${_ARR}${vContrib.toLocaleString()}`;
+          baseEl.innerHTML = `${_origContribCache.toLocaleString()}${_ARR}${vContrib.toLocaleString()}`;
         }
         const totEl = m.querySelector('#wwmCmpPreviewTotal');
         if (totEl) totEl.innerHTML = `${totalBase.toLocaleString()}${_ARR}${totalCur.toLocaleString()}`;

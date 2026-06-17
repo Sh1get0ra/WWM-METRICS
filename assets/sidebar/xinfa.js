@@ -112,32 +112,22 @@
       const origState = WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {};
       origContrib = await _computeArsenalLooContrib(origRi, origState);
     }
-    // 描画 = 装備品質 % 表示 (LOO / (MAX LOO × 0.95) × 100)
-    const slotMaxLoo = WWMState.opt.slotMaxLoo || {};
-    const maxLoo = slotMaxLoo['arsenal'];
-    const curPct = _xinfaQualityPct(effContrib, maxLoo);
+    // 描画 = 武備指数 (= LOO 生値) 表示 (兄貴指示 2026-06-18 = 火力品質 % 廃止)
     const el = document.querySelector('[data-arsenal-score]');
     if (!el) return;
-    if (curPct == null) {
-      el.innerHTML = `<span class="plank-score-main">${effContrib.toLocaleString()}</span>`;
+    if (origContrib != null && origContrib !== effContrib) {
+      const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
+      if (isObs) {
+        el.innerHTML = `<span class="plank-score-main">${origContrib.toLocaleString()}</span>`;
+      } else {
+        const delta = effContrib - origContrib;
+        const sign = delta > 0 ? '+' : '';
+        const cls = delta > 0 ? 'up' : delta < 0 ? 'dn' : '';
+        el.innerHTML = `<span class="plank-score-main">${origContrib.toLocaleString()}</span> <span class="plank-score-delta ${cls}">${sign}${delta.toLocaleString()}</span>`;
+      }
       return;
     }
-    if (origContrib != null) {
-      const origPct = _xinfaQualityPct(origContrib, maxLoo);
-      if (origPct != null && origPct !== curPct) {
-        const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
-        if (isObs) {
-          el.innerHTML = `<span class="plank-score-main">${origPct}%</span>`;
-        } else {
-          const delta = curPct - origPct;
-          const sign = delta > 0 ? '+' : '';
-          const cls = delta > 0 ? 'up' : delta < 0 ? 'dn' : '';
-          el.innerHTML = `<span class="plank-score-main">${origPct}%</span> <span class="plank-score-delta ${cls}">${sign}${delta}%</span>`;
-        }
-        return;
-      }
-    }
-    el.innerHTML = `<span class="plank-score-main">${curPct}%</span>`;
+    el.innerHTML = `<span class="plank-score-main">${effContrib.toLocaleString()}</span>`;
   }
 
   // 心法 LOO marginal (該当 slot tier 0 化との差)
@@ -162,10 +152,6 @@
     } catch (e) { return null; }
     return result;
   }
-  function _xinfaQualityPct(curLoo, maxLoo) {
-    if (!maxLoo || maxLoo <= 0) return null;
-    return Math.round(curLoo / maxLoo * 100);
-  }
 
   async function _computeXinfaCardScores(roleInfo) {
     if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return;
@@ -184,34 +170,25 @@
       const origState = WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {};
       Object.assign(origContrib, await _computeXinfaLooContrib(origRi, origState) || {});
     }
-    // 描画 = 装備品質 % 表示 (LOO / (MAX LOO × 0.95) × 100)
-    const slotMaxLoo = WWMState.opt.slotMaxLoo || {};
+    // 描画 = 武備指数 (= LOO 生値) 表示 (兄貴指示 2026-06-18)
     for (let i = 0; i < 4; i++) {
       const el = document.querySelector(`[data-xinfa-score="${i}"]`);
       if (!el) continue;
       const curLoo = effContrib[i] || 0;
-      const maxLoo = slotMaxLoo['xinfa:' + i];
-      const curPct = _xinfaQualityPct(curLoo, maxLoo);
-      if (curPct == null) {
-        el.innerHTML = `<span class="plank-score-main">${curLoo.toLocaleString()}</span>`;
+      if (origContrib[i] != null && origContrib[i] !== curLoo) {
+        const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
+        const origLoo = origContrib[i];
+        if (isObs) {
+          el.innerHTML = `<span class="plank-score-main">${origLoo.toLocaleString()}</span>`;
+        } else {
+          const delta = curLoo - origLoo;
+          const sign = delta > 0 ? '+' : '';
+          const cls = delta > 0 ? 'up' : delta < 0 ? 'dn' : '';
+          el.innerHTML = `<span class="plank-score-main">${origLoo.toLocaleString()}</span> <span class="plank-score-delta ${cls}">${sign}${delta.toLocaleString()}</span>`;
+        }
         continue;
       }
-      if (origContrib[i] != null) {
-        const origPct = _xinfaQualityPct(origContrib[i], maxLoo);
-        if (origPct != null && origPct !== curPct) {
-          const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
-          if (isObs) {
-            el.innerHTML = `<span class="plank-score-main">${origPct}%</span>`;
-          } else {
-            const delta = curPct - origPct;
-            const sign = delta > 0 ? '+' : '';
-            const cls = delta > 0 ? 'up' : delta < 0 ? 'dn' : '';
-            el.innerHTML = `<span class="plank-score-main">${origPct}%</span> <span class="plank-score-delta ${cls}">${sign}${delta}%</span>`;
-          }
-          continue;
-        }
-      }
-      el.innerHTML = `<span class="plank-score-main">${curPct}%</span>`;
+      el.innerHTML = `<span class="plank-score-main">${curLoo.toLocaleString()}</span>`;
     }
     // 復元
     try {
@@ -494,12 +471,7 @@
         window.computeExpected(vNoParams);
         const vNoScore = _scoreWithBonus(vRi);
         const vSlot = Math.round(vTotal - vNoScore);
-        // 装備品質 % (心法 slot LOO / MAX LOO × 0.95 × 100)
-        const maxLoo = (WWMState.opt.slotMaxLoo || {})['xinfa:' + slotIdx];
-        const basePct = _xinfaQualityPct(_origSlotContribCache, maxLoo);
-        const curPct = _xinfaQualityPct(vSlot, maxLoo);
-        const dPct = (basePct != null && curPct != null) ? (curPct - basePct) : null;
-        // total 軸
+        // 武備指数 (= LOO 生値) baseline ▶ current 表示 (兄貴指示 2026-06-18)
         const totalBase = Math.round(WWMState.baseline?.statusScore ?? 0);
         const finalParams = await window.WWMStats.buildStatParams(vRi, vState);
         window.computeExpected(finalParams);
@@ -507,8 +479,7 @@
         const baseEl = m.querySelector('#wwmCmpXinfaPreviewBase');
         const _ARR = '<span class="wwm-cmp-arrow">▶</span>';
         if (baseEl) {
-          if (basePct != null && curPct != null) baseEl.innerHTML = `${basePct}%${_ARR}${curPct}%`;
-          else baseEl.textContent = _origSlotContribCache.toLocaleString();
+          baseEl.innerHTML = `${_origSlotContribCache.toLocaleString()}${_ARR}${vSlot.toLocaleString()}`;
         }
         const totEl = m.querySelector('#wwmCmpXinfaPreviewTotal');
         if (totEl) totEl.innerHTML = `${totalBase.toLocaleString()}${_ARR}${totalCur.toLocaleString()}`;
