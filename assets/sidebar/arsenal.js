@@ -105,8 +105,8 @@
         <div class="wwm-cmp-footer-a">
           <div class="wwm-cmp-delta-block">
             <span class="wwm-cmp-delta-label">武格変動</span>
-            <span class="wwm-cmp-preview-value" id="wwmArsenalEditDelta">+0</span>
-            <span class="wwm-cmp-delta-base" id="wwmArsenalEditBase">—</span>
+            <span class="wwm-cmp-preview-value" id="wwmArsenalEditDelta" style="visibility:hidden;">+0</span>
+            <span class="wwm-cmp-delta-base" id="wwmArsenalEditBase" style="visibility:hidden;">—</span>
           </div>
           <div class="wwm-btn-row wwm-cmp-btn-row">
             <button class="wwm-btn-primary" id="wwmArsenalEditApply">採用</button>
@@ -205,6 +205,10 @@
         }
         const baseEl = m.querySelector('#wwmArsenalEditBase');
         if (baseEl) baseEl.textContent = `${Math.round(baseScore).toLocaleString()} → ${Math.round(newScore).toLocaleString()}`;
+        // 2026-06-17: delta 0 時は数値非表示 (兄貴指摘)
+        const isZero = delta === 0;
+        if (deltaEl) deltaEl.style.visibility = isZero ? 'hidden' : '';
+        if (baseEl) baseEl.style.visibility = isZero ? 'hidden' : '';
         // 復元
         window.computeExpected(p1);
       } catch(e) {}

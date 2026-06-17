@@ -398,9 +398,9 @@
   box-shadow: 0 0 8px color-mix(in oklab, var(--vermilion-bright) 60%, transparent);
 }
 .wwm-cmp-modal-a .wwm-cmp-new .wwm-cmp-title::before {
-  background: var(--jade);
-  color: #1a3a24;
-  box-shadow: 0 0 8px rgba(168,212,180,0.6);
+  background: #d4af37; /* 2026-06-17: jade → 金 (朱vs金 古典対照、 [[jade-donut-only]] 政策準拠) */
+  color: #1a1208;
+  box-shadow: 0 0 8px rgba(212,175,55,0.6);
 }
 /* 本来 title内のテキスト「現有/新置」は朱印で表現するので隠す。 Lv/select は残す */
 .wwm-cmp-modal-a .wwm-cmp-title-text { display: none; }
@@ -518,7 +518,7 @@
   gap: 6px;
   padding: var(--space-1) var(--space-1-5);
   border: none;
-  border-bottom: 1px dashed color-mix(in oklab, var(--gold) 8%, transparent);
+  border-bottom: 1.5px dashed color-mix(in oklab, var(--gold) 38%, transparent); /* 2026-06-17: dashed 視認化 (8%→38% + 1px→1.5px) */
   font-size: var(--text-12);
   background: transparent ;
   box-shadow: none;
@@ -532,10 +532,16 @@
 }
 .wwm-cmp-modal-a .wwm-cmp-stat-select {
   background: var(--bg-modal-a-stat-select);
-  border: 1px solid var(--ink-2);
+  border: 1.5px solid rgba(40,25,18,0.42); /* 2026-06-17: ink-2(0.28) では弱 → 直 hex 0.6 で入力可能感 up */
   border-radius: 0;
   font-size: var(--text-sm);
   font-family: var(--f-display-title); /* cmp-name (左 readonly) と同 font に揃え (2026-06-15 兄貴指摘) */
+}
+.wwm-cmp-modal-a .wwm-cmp-stat-select:focus,
+.wwm-cmp-modal-a .wwm-cmp-val-input:focus {
+  outline: 2px solid var(--vermilion);
+  outline-offset: 0;
+  border-color: var(--vermilion);
 }
 /* S2-d: val (現有列 readonly) と val-input (新置列 input) で light 配色が異なる → rule 分離
    (val = fg-emphasis 維持、 val-input = token swap 済) */
@@ -553,7 +559,7 @@
 }
 .wwm-cmp-modal-a .wwm-cmp-val-input {
   background: var(--bg-modal-a-stat-select);
-  border: 1px solid var(--ink-2);
+  border: 1.5px solid rgba(40,25,18,0.42); /* 2026-06-17: ink-2(0.28) では弱 → 直 hex 0.6 で入力可能感 up */
   border-radius: 0;
 }
 .wwm-cmp-modal-a .wwm-cmp-ratio {
@@ -571,20 +577,21 @@
 }
 /* MAX% rank別配色 (ゲーム準拠 金>紫>青、 閾値 0.85 / 0.70)
    color の !important は K (gear.js:679 inline color 対抗) — strip するな */
+/* 2026-06-17: 背景塗+文字白抜きで紙地視認性 up (兄貴指摘) */
 .wwm-cmp-modal-a .wwm-cmp-ratio.rank-gold {
-  background: rgba(212,175,55,0.18);
-  color: var(--accent) !important;
-  border-color: rgba(212,175,55,0.55);
+  background: rgba(212,175,55,0.85);
+  color: #fff !important;
+  border-color: rgba(212,175,55,0.95);
 }
 .wwm-cmp-modal-a .wwm-cmp-ratio.rank-purple {
-  background: rgba(195,137,255,0.18);
-  color: var(--liupai-guyun) !important;
-  border-color: rgba(195,137,255,0.55);
+  background: rgba(195,137,255,0.78);
+  color: #fff !important;
+  border-color: rgba(195,137,255,0.95);
 }
 .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue {
-  background: rgba(74,158,255,0.18);
-  color: #4a9eff !important;
-  border-color: rgba(74,158,255,0.55);
+  background: rgba(74,158,255,0.82);
+  color: #fff !important;
+  border-color: rgba(74,158,255,0.95);
 }
 /* MAX到達 (100%) 虹色 — 色相回転 hue-rotate アニメ (両テーマ共通)
    注: background-color / box-shadow は keyframes が動かすため !important つけない (つけると keyframes が負けてアニメ無効化) */
@@ -609,6 +616,21 @@
 .wwm-cmp-modal-a.wwm-modal-square { overflow: visible; }
 /* 武庫modal: path 5個横並び収容のため広め */
 .wwm-modal.wwm-modal-square.wwm-arsenal-modal { max-width: 820px; }
+/* 2026-06-17: arsenal 新置 path select = 朱グラ → 透明化で親 kongfu-header (金) を透かす + 高さ揃え (兄貴指示) */
+.wwm-arsenal-modal.wwm-cmp-modal-a .wwm-cmp-set-select {
+  background: transparent;
+  color: var(--c-modal-a-kongfu-header-fg);
+  border-color: transparent;
+  width: 100%;
+  align-self: center;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+  height: auto;
+}
 /* 武庫modal: row 高さ統一 + ゆとり (checkbox表示で row 押し広げ防止) */
 .wwm-arsenal-modal .wwm-cmp-row { min-height: 38px; }
 .wwm-arsenal-modal .wwm-cmp-row input[type="checkbox"] { width: 14px; height: 14px; margin: 0; }
@@ -788,7 +810,9 @@
   display: flex;
   align-items: center !important; /* K: JS の row inline align 書込 対抗 — strip するな */
   gap: 8px;
-  padding: 5px 6px;
+  padding: 8px 10px; /* 2026-06-17: 5/6 → 8/10 で行高呼吸 (兄貴指摘 #10) */
+  min-height: 40px; /* 2026-06-17: 現有/新置 縦ライン揃え (兄貴指摘) */
+  box-sizing: border-box;
 }
 /* 現有列 (display専用): name 1fr + val (val+ratio inline) */
 .wwm-cmp-modal-a .wwm-cmp-current .wwm-cmp-row .wwm-cmp-name { flex: 1 1 auto; min-width: 0; }
@@ -831,6 +855,10 @@
   padding: 5px 8px;
   margin-bottom: var(--space-1-5);
   font-size: var(--text-12);
+  min-height: 32px; /* 2026-06-17: 現有/新置 縦ライン揃え (header vs select 高さ差吸収) */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
 }
 
 .wwm-cmp-grid {
@@ -976,7 +1004,7 @@
   width: 100%;
 }
 .wwm-cmp-val-wrap .wwm-cmp-val-input { width: 100%; text-align: right; }
-.wwm-cmp-unit { font-size: var(--text-sm); opacity: 0.7; text-align: left; }
+.wwm-cmp-unit { font-family: var(--f-latin); font-size: var(--text-md); opacity: 1; font-weight: 700; color: var(--c-modal-a-val-input-fg); text-align: left; } /* 2026-06-17: latin font + 太字 + 値と同寸 (兄貴指摘) */
 .wwm-cmp-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--f-display-title); }
 .wwm-cmp-val  { font-weight: var(--fw-bold); text-align: right; }
 .wwm-cmp-val-input { font-size: var(--text-sm); text-align: right; }
@@ -1358,8 +1386,10 @@
   background: var(--bg-step2--arsenal-tier);
 }
 
-/* S2-g co-locate (T): light#42 L548 */
-.wwm-cmp-current .wwm-cmp-row {
+/* S2-g co-locate (T): light#42 L548
+   2026-06-17: new 列にも同背景付与 = 濃度差解消 (兄貴指摘) */
+.wwm-cmp-current .wwm-cmp-row,
+.wwm-cmp-new .wwm-cmp-row {
   background: var(--bg-cmp-current--cmp-row);
 }
 
@@ -2459,9 +2489,10 @@
 }
 /* %バッジ rank 色 = 旧 light 値 (main modals.css の data-theme=light rule から移植)。
    !important = gear.js inline color 対抗 (原典同様) */
-.wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-gold { background: var(--c-gold-deep-faint); color: #7a5a12 !important; border-color: var(--c-gold-deep-strong); }
-.wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.13); color: #6f3a9a !important; border-color: rgba(120,60,160,0.5); }
-.wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.13); color: #2a5aa0 !important; border-color: rgba(40,90,160,0.5); }
+/* 2026-06-17: 紙地視認性 up = ベタ塗り + 白抜き + 暗色 border (兄貴指摘) */
+.wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-gold { background: rgba(184,134,11,0.88); color: #fff !important; border-color: #6b4d08; }
+.wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.85); color: #fff !important; border-color: #4a2566; }
+.wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.85); color: #fff !important; border-color: #1a3a70; }
 /* footer = header と同 token (--bg-modal-a-header = bg-raised、兄貴指定 2026-06-12)。
    modal 地は縦 gradient で下端ほど暗く footer が沈んで見えていた */
 .wwm-cmp-footer-a {

@@ -109,7 +109,7 @@
   --bg-modal-a-kongfu-select: color-mix(in oklab, var(--gold) 30%, transparent);
   --c-modal-a-set-fg: var(--vermilion-deep); /* D7 2026-06-15: vermilion-bright 明朱 (contrast 3.6:1 AA 不可) → vermilion-deep (7.5:1) で読みやすさ確保、 set-header と統一 */
   --bg-modal-a-set-select: linear-gradient(90deg, color-mix(in oklab, var(--vermilion-bright) 18%, transparent), var(--c-vermilion-fade-end));
-  --bg-modal-a-stat-select: var(--shine-strong);
+  --bg-modal-a-stat-select: rgba(58,38,22,0.18); /* 2026-06-17: 半透明薄茶 (shade-soft 0.06 → 0.18 で 3 倍濃度)、 row 茶背景との重ねで chip 凹み感 */
   --c-modal-a-name-fg: var(--c-modal-a-fg);
   --c-modal-a-val-fg: var(--c-fg-emphasis);
   --c-modal-a-val-input-fg: var(--brown-1);
@@ -117,7 +117,8 @@
   --c-modal-a-lv-fg: var(--c-text-warm);
   --c-cmp-modal-a--cmp-kongfu-select-border: var(--c-border-mid-warm);
   --c-cmp-modal-a--cmp-set-select-border: var(--c-border-mid-warm);
-  --c-cmp-modal-a--cmp-stat-select-border: var(--c-border-mid-warm);
+  --c-cmp-modal-a--cmp-stat-select-border: rgba(40,25,18,0.42); /* 2026-06-17: 入力可能感 up (兄貴指摘 #8) */
+  --c-cmp-modal-a--cmp-val-input-border: rgba(40,25,18,0.42); /* 2026-06-17: paper scope override 新規追加 = val-input border 濃化 */
   --c-cmp-modal-a--cmp-current-border: var(--c-border-soft-warm);
   --c-cmp-modal-a--cmp-col-border: var(--c-border-soft-warm);
   --c-cmp-set-header-fg: var(--vermilion-deep);

@@ -478,8 +478,8 @@
         <div class="wwm-cmp-footer-a">
           <div class="wwm-cmp-delta-block">
             <span class="wwm-cmp-delta-label">${(window.T&&T.cmpDeltaLabel)||'武格変動'}</span>
-            <span class="wwm-cmp-preview-value" id="wwmCmpPreviewDelta">+0</span>
-            <span class="wwm-cmp-delta-base" id="wwmCmpPreviewBase">—</span>
+            <span class="wwm-cmp-preview-value" id="wwmCmpPreviewDelta" style="visibility:hidden;">+0</span>
+            <span class="wwm-cmp-delta-base" id="wwmCmpPreviewBase" style="visibility:hidden;">—</span>
           </div>
           <div class="wwm-btn-row wwm-cmp-btn-row">
             <button class="wwm-btn-primary" id="wwmEditApply">${(window.T&&T.cmpApply)||'採用'}</button>
@@ -553,6 +553,10 @@
         el.className = 'wwm-cmp-preview-value ' + (delta > 0 ? 'pos' : delta < 0 ? 'neg' : 'zero');
         const baseEl = m.querySelector('#wwmCmpPreviewBase');
         if (baseEl) baseEl.textContent = `${Math.round(baseScore).toLocaleString()} → ${Math.round(vScore).toLocaleString()}`;
+        // 2026-06-17: delta 0 時は数値非表示 (label のみ、 兄貴指摘 #9)
+        const isZero = delta === 0;
+        el.style.visibility = isZero ? 'hidden' : '';
+        if (baseEl) baseEl.style.visibility = isZero ? 'hidden' : '';
       } catch (e) {
         console.error('[Preview]', e);
         el.textContent = 'error';
