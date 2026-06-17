@@ -116,7 +116,7 @@
     // best 確定中 (LOCKED未) は ratio=0.94 強制 (= 承音システムの全OP育成 max値、 現実的な装備上限)。
     // ratio=1.0 (= OP 100%×6種) は ゲーム仕様上 ほぼ不可能 → best基準厳しすぎる。
     // ユーザーが ratio=0.9 設定後 再import すると best が低い値で固定され、 Tier判定が緩くなるバグ防止。
-    const TARGET_RATIO = WWMState.opt.locked ? (opts.ratio ?? savedRatio) : 0.94;
+    const TARGET_RATIO = WWMState.opt.locked ? (opts.ratio ?? savedRatio) : 0.95;
     const MAX_ITER = 20; // best=null で自動停止、上限保険
     // 微改善打切閾値 (localStorage 永続化、UI で変更可)
     if (typeof window._OPT_MIN_DELTA === 'undefined' || window._OPT_MIN_DELTA == null) {
@@ -262,11 +262,41 @@
         const eq = eqDet[slot];
         const affixes = eq?.exVo?.baseAffixes || [];
         for (let idx = 0; idx < affixes.length; idx++) {
-          // 防具 idx5 (武学固有) のみ最適化対象外。武器系 idx5 (貫通系) は対象に含める
-          if (idx === 5 && _SLOT6_ARMOR.has(slot)) continue;
           const cur = affixes[idx]?.equipmentDetails;
           if (!cur) continue;
           const curStatKey = window.WWM_AFFIX?.[cur[0]]?.statKey;
+          const isArmorIdx5 = (idx === 5 && _SLOT6_ARMOR.has(slot));
+          // Phase 2 (兄貴指示 2026-06-17): 同 statKey value 上げ step 評価 (= 武器 idx=5 / 防具 idx=5 含む全 idx)
+          // current value < max × TARGET_RATIO なら value 上げ提案、 OPT 提案受けたら ratio 100% 到達設計
+          if (curStatKey) {
+            const _maxValSame = _getAffixMax(curStatKey, charLv);
+            if (_maxValSame != null && cur[1] < _maxValSame * TARGET_RATIO - 1e-6) {
+              const _s0 = cur[0], _s1 = cur[1], _s2 = cur[2], _s3 = cur[3];
+              try {
+                cur[1] = _maxValSame * TARGET_RATIO;
+                cur[2] = TARGET_RATIO;
+                cur[3] = 2;
+                const _p = _buildSync ? _buildSync(working, state) : await window.WWMStats.buildStatParams(working, state);
+                window.computeExpected(_p);
+                const _newScore = _scoreWithBonus(working);
+                const _delta = _newScore - curScore;
+                if (_delta > 0 && (!best || _delta > best.delta)) {
+                  best = {
+                    slot, slotLabel: _slotLabelI18n(slot), idx,
+                    fromKey: curStatKey, fromName: _affixDisplayName(_s0),
+                    fromVal: _s1, fromRatio: _s2,
+                    toName: _affixDisplayName(_s0), toId: _s0,
+                    toKey: curStatKey, toVal: _maxValSame * TARGET_RATIO, toRatio: TARGET_RATIO,
+                    delta: _delta, newScore: _newScore
+                  };
+                }
+              } catch (e) {} finally {
+                cur[0] = _s0; cur[1] = _s1; cur[2] = _s2; cur[3] = _s3;
+              }
+            }
+          }
+          // 防具 idx=5 = 武学固有、 statKey swap 探索外 (value 上げ step のみ既に評価済)
+          if (isArmorIdx5) continue;
           const _sig = slot + '|' + idx + '|' + affixes.map(a => a?.equipmentDetails?.[0] ?? '-').join(',');
           let options = _optionsCache.get(_sig);
           if (!options) { options = _getAffixOptions(cur[0], slot, idx, affixes); _optionsCache.set(_sig, options); }
@@ -432,60 +462,145 @@
     if (!WWMState.opt.locked) {
       const ver = window.WWM_SCORE_VERSION || 1;
       WWMState.opt.best = { end: Math.round(curScore), ts: Date.now(), scoreVer: ver };
+    }
+    // MAX 算出 (maxRi + slotMaxLoo) = インポート直後 初回のみ実行 (兄貴指示 2026-06-17、 計算重い iter 反復のため)
+    if (!WWMState.opt.locked) {
       // 装備品質 % 用: max ri snapshot + 各 slot MAX LOO 算出
       WWMState.opt.maxRi = JSON.parse(JSON.stringify(working));
-      // Phase 1 補正: 全 affix value を理論 max × TARGET_RATIO 化 (statKey は opt 結果 keep)。
-      // 防具 idx=5 (武学固有) = 適正 affix から「火力寄与あるもの (= score 上昇) 1 つ」 pick → 兄貴判断「火力寄与あるなら伸び同じ」
+      // 空 base 起点 OPT (兄貴指示 2026-06-17): 全 affix 空 + 弓 suffix 0 化から greedy で各 slot 各 idx に
+      // 理論最良 affix を詰め直す。 真の組合せ最適に近づける (現状起点 OPT の局所最適制約超え)。
+      // 副産物: ユーザー視点で「現状方向性が真の最適と乖離してないか」 のチェックにもなる。
       try {
-        const maxRi0 = WWMState.opt.maxRi;
-        const eqMax0 = maxRi0?.wearEquipsDetailed || {};
         const _affixUtil = window.WWMSidebar.affix;
-        for (const slot of Object.keys(eqMax0)) {
-          const eq = eqMax0[slot];
-          const baseAffixes = eq?.exVo?.baseAffixes || [];
-          for (let idx = 0; idx < baseAffixes.length; idx++) {
-            const det = baseAffixes[idx]?.equipmentDetails;
-            if (!det) continue;
-            if (idx === 5 && _SLOT6_ARMOR.has(String(slot))) {
-              // 防具 idx=5 = 武学固有 適正 affix pick
-              const opts = _affixUtil.getAffixOptions(det[0], slot, 5, baseAffixes);
-              const sBak = baseAffixes[idx].equipmentDetails;
-              baseAffixes[idx].equipmentDetails = null;
-              let baseScore = 0;
-              try {
-                const pBase = await window.WWMStats.buildStatParams(maxRi0, state);
-                window.computeExpected(pBase);
-                baseScore = _scoreWithBonus(maxRi0);
-              } catch (_) {}
-              let pickDet = null;
-              for (const o of opts) {
-                if (!o.statKey || o.statKey === '__pvp__') continue;
-                const mv = _affixUtil.getAffixMax(o.statKey, charLv);
-                if (mv == null) continue;
-                baseAffixes[idx].equipmentDetails = [parseInt(o.id, 10), mv * TARGET_RATIO, TARGET_RATIO, 2];
-                try {
-                  const p = await window.WWMStats.buildStatParams(maxRi0, state);
-                  window.computeExpected(p);
-                  const sc = _scoreWithBonus(maxRi0);
-                  if (sc > baseScore) {
-                    pickDet = baseAffixes[idx].equipmentDetails.slice();
-                    break;
-                  }
-                } catch (_) {}
-              }
-              baseAffixes[idx].equipmentDetails = pickDet || sBak;
-              continue;
-            }
-            // 通常 idx (0-4 + 武器 idx=5 貫通) = statKey keep + value 理論 max × TARGET_RATIO 補正
-            const sk = window.WWM_AFFIX?.[det[0]]?.statKey;
-            if (!sk) continue;
-            const mv = _affixUtil.getAffixMax(sk, charLv);
-            if (mv == null) continue;
-            det[1] = mv * TARGET_RATIO;
-            det[2] = TARGET_RATIO;
+        const trueMaxRi = JSON.parse(JSON.stringify(working));
+        // 0. 元 working の affix ID を memo (= _getAffixOptions の seed 用、 prefix 制約 keep)
+        const origAffixMemo = {};
+        for (const sl of Object.keys(trueMaxRi.wearEquipsDetailed || {})) {
+          origAffixMemo[sl] = {};
+          const ba = working.wearEquipsDetailed[sl]?.exVo?.baseAffixes || [];
+          for (let i = 0; i < ba.length; i++) {
+            const det = ba[i]?.equipmentDetails;
+            if (det && det[0] != null) origAffixMemo[sl][i] = det[0];
           }
         }
-      } catch (e) { console.error('[opt MAX affix value 補正]', e); }
+        // 1. 95% fix base 作成 (兄貴指示 2026-06-17): 全 affix value を max × TARGET_RATIO に統一
+        // = 兄貴の現状 affix value の差を「統一基準」 で評価可能化 (95% 超え/未満どちらも公平)
+        // 弓ペア (slot 21/9) = affix touch しない + suffix 0 化 (= bow swap で改めて選定)
+        const BOW_PAIR = new Set(['21', '9']);
+        for (const sl of Object.keys(trueMaxRi.wearEquipsDetailed || {})) {
+          const ba = trueMaxRi.wearEquipsDetailed[sl]?.exVo?.baseAffixes || [];
+          if (BOW_PAIR.has(sl)) {
+            if (trueMaxRi.wearEquipsDetailed[sl]?.exVo) {
+              trueMaxRi.wearEquipsDetailed[sl].exVo.suffix = 0;
+            }
+            continue;
+          }
+          for (let i = 0; i < ba.length; i++) {
+            const det = ba[i]?.equipmentDetails;
+            if (!det) continue;
+            const sk = window.WWM_AFFIX?.[det[0]]?.statKey;
+            const mv = sk ? _affixUtil.getAffixMax(sk, charLv) : null;
+            if (mv != null) {
+              const target = mv * TARGET_RATIO;
+              // 95% 超えのみ target に下げる、 95% 未満は兄貴の現状値 keep (= OPT loop で value 上げ提案対象に) (兄貴指示 2026-06-17)
+              if (det[1] > target) {
+                det[1] = target;
+                det[2] = TARGET_RATIO;
+              }
+            }
+          }
+        }
+        const maxStatePre = JSON.parse(JSON.stringify(state || {}));
+        if (!maxStatePre.xinfaTiers) maxStatePre.xinfaTiers = {};
+        for (let i = 0; i < 4; i++) { maxStatePre.xinfaTiers[i] = 6; maxStatePre.xinfaTiers[String(i)] = 6; }
+        // 2. iter 反復 = 既存 OPT 機能を value 0 起点で走らせた挙動 (兄貴指示 2026-06-17)
+        // 各 idx で「同 statKey value 更新 (0 → max × 0.95)」 + 「他 statKey swap」 両方評価 → 最大 delta 採用 → 反復
+        const MAX_ITER = 80; // 全 affix 詰める = slot 10 × idx 6 = 60 step + 局所最適脱出 余裕
+        for (let iter = 0; iter < MAX_ITER; iter++) {
+          let bestStep = null;
+          for (const slot of Object.keys(trueMaxRi.wearEquipsDetailed || {})) {
+            // 弓ペア (slot 21/9) = affix touch しない (兄貴指示 2026-06-17、 弓武器に affix ない仕様)
+            if (BOW_PAIR.has(slot)) continue;
+            const eq = trueMaxRi.wearEquipsDetailed[slot];
+            const ba = eq?.exVo?.baseAffixes || [];
+            for (let idx = 0; idx < ba.length; idx++) {
+              // 元 working で affix 持ってない idx (= ba[idx] 元 null or equipmentDetails 元 null) → ゲーム上「この idx に affix 乗らない」 ため skip
+              if (origAffixMemo[slot]?.[idx] == null) continue;
+              const curDet = ba[idx]?.equipmentDetails;
+              const curStatKey = curDet ? window.WWM_AFFIX?.[curDet[0]]?.statKey : null;
+              // seedId = 元 working の affix ID で固定 = 当該 slot/idx の prefix 制約 keep
+              // (iter 反復で curDet[0] が変動 → 別 statKey の prefix で候補絞り込み → 選択不可 affix 採用される旧バグ修正)
+              const seedId = origAffixMemo[slot][idx];
+              const opts = _affixUtil.getAffixOptions(seedId, slot, idx, ba);
+              let baseScore = 0;
+              try {
+                const p = await window.WWMStats.buildStatParams(trueMaxRi, maxStatePre);
+                window.computeExpected(p);
+                baseScore = _scoreWithBonus(trueMaxRi);
+              } catch (_) {}
+              // 評価対象: 「同 statKey value 0→max × ratio」 + 「他 statKey swap」 両方
+              const candidates = [];
+              // 同 statKey value 更新 (current value 0 の時のみ意味あり、 既に詰まってる時は skip)
+              if (curStatKey && curDet && (curDet[1] || 0) < 1e-9) {
+                candidates.push({ id: curDet[0], statKey: curStatKey });
+              }
+              // 他 statKey swap
+              for (const o of opts) {
+                if (!o.statKey || o.statKey === '__pvp__') continue;
+                if (o.statKey === curStatKey) continue;
+                candidates.push({ id: parseInt(o.id, 10), statKey: o.statKey });
+              }
+              for (const c of candidates) {
+                const mv = _affixUtil.getAffixMax(c.statKey, charLv);
+                if (mv == null) continue;
+                const sBak = ba[idx]?.equipmentDetails?.slice();
+                if (!ba[idx]) ba[idx] = {};
+                ba[idx].equipmentDetails = [c.id, mv * TARGET_RATIO, TARGET_RATIO, 2];
+                try {
+                  const p = await window.WWMStats.buildStatParams(trueMaxRi, maxStatePre);
+                  window.computeExpected(p);
+                  const sc = _scoreWithBonus(trueMaxRi);
+                  const delta = sc - baseScore;
+                  if (delta > 0 && (!bestStep || delta > bestStep.delta)) {
+                    bestStep = { slot, idx, det: ba[idx].equipmentDetails.slice(), delta };
+                  }
+                } catch (_) {}
+                ba[idx].equipmentDetails = sBak;
+              }
+            }
+          }
+          if (!bestStep) break;
+          const ba = trueMaxRi.wearEquipsDetailed[bestStep.slot].exVo.baseAffixes;
+          if (!ba[bestStep.idx]) ba[bestStep.idx] = {};
+          ba[bestStep.idx].equipmentDetails = bestStep.det;
+        }
+        // 3. 弓 suffix swap 評価
+        const bowSets = window.WWM_SETS?.bowSets;
+        if (bowSets && trueMaxRi.wearEquipsDetailed['21']?.exVo && trueMaxRi.wearEquipsDetailed['9']?.exVo) {
+          let baseScore = 0;
+          try {
+            const p = await window.WWMStats.buildStatParams(trueMaxRi, maxStatePre);
+            window.computeExpected(p);
+            baseScore = _scoreWithBonus(trueMaxRi);
+          } catch (_) {}
+          let bestSfx = 0, bestDelta = 0;
+          for (const sfx of Object.keys(bowSets)) {
+            const sfxInt = parseInt(sfx, 10);
+            trueMaxRi.wearEquipsDetailed['21'].exVo.suffix = sfxInt;
+            trueMaxRi.wearEquipsDetailed['9'].exVo.suffix = sfxInt;
+            try {
+              const p = await window.WWMStats.buildStatParams(trueMaxRi, maxStatePre);
+              window.computeExpected(p);
+              const sc = _scoreWithBonus(trueMaxRi);
+              const delta = sc - baseScore;
+              if (delta > bestDelta) { bestSfx = sfxInt; bestDelta = delta; }
+            } catch (_) {}
+          }
+          trueMaxRi.wearEquipsDetailed['21'].exVo.suffix = bestSfx;
+          trueMaxRi.wearEquipsDetailed['9'].exVo.suffix = bestSfx;
+        }
+        WWMState.opt.maxRi = trueMaxRi;
+      } catch (e) { console.error('[opt 空base起点 MAX]', e); }
       try {
         const slotMaxLoo = {};
         const maxRi = WWMState.opt.maxRi;
@@ -497,16 +612,31 @@
         const baseParams = await window.WWMStats.buildStatParams(maxRi, maxState);
         window.computeExpected(baseParams);
         const maxTotal = _scoreWithBonus(maxRi);
-        // 装備 slot MAX LOO
+        // 装備 slot MAX LOO: MAX state での marginal LOO 方式 (兄貴指示 2026-06-17 再確認)
+        // 機械が考えた最強装備 (= maxRi) に対する当該 slot の他装備込み寄与を測る
         const eqDet = maxRi?.wearEquipsDetailed || {};
         const gearSlots = ['1','2','3','4','21','10','11','5','8','9'].filter(s => eqDet[s]);
+        const bowPairMax = ['21', '9'];
+        const hasBowPairMax = bowPairMax.every(s => gearSlots.includes(s));
         for (const slot of gearSlots) {
+          if (hasBowPairMax && bowPairMax.includes(slot)) continue;
           const ri = JSON.parse(JSON.stringify(maxRi));
           delete ri.wearEquipsDetailed[slot];
           const p = await window.WWMStats.buildStatParams(ri, maxState);
           window.computeExpected(p);
           const noSlot = _scoreWithBonus(ri);
           slotMaxLoo['gear:' + slot] = Math.round(maxTotal - noSlot);
+        }
+        // 弓ペア = pair 同時抜き → total LOO half 配分
+        if (hasBowPairMax) {
+          const ri = JSON.parse(JSON.stringify(maxRi));
+          for (const ps of bowPairMax) delete ri.wearEquipsDetailed[ps];
+          const pNoPair = await window.WWMStats.buildStatParams(ri, maxState);
+          window.computeExpected(pNoPair);
+          const noPair = _scoreWithBonus(ri);
+          const pairLoo = maxTotal - noPair;
+          const half = Math.round(pairLoo / 2);
+          for (const ps of bowPairMax) slotMaxLoo['gear:' + ps] = half;
         }
         // 心法 slot MAX LOO (各 slot tier 0 化との差)
         for (let i = 0; i < 4; i++) {
@@ -542,6 +672,8 @@
           window.WWMSidebar?.xinfa?.computeArsenalCardScore?.(roleInfo);
         } catch (_) {}
       } catch (e) { console.error('[opt maxRi/slotMaxLoo]', e); }
+    }
+    if (!WWMState.opt.locked) {
       WWMState.opt.locked = true;
       try { localStorage.setItem('wwm_opt_best_v1', JSON.stringify(WWMState.opt.best)); } catch(_) {}
     }

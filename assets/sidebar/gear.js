@@ -126,6 +126,8 @@
   async function _computeSlotContributions(roleInfo, slots, suffixSlots, set4Map) {
     if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return null;
     const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+    // marginal LOO 方式 (兄貴指示 2026-06-17 再確認): 他装備込み base からの差分で当該 slot 寄与算出
+    // 乗算系 affix (武術ダメ/会心倍率 系) も他装備 stat に乗算で真価出る、 ratio に正しく反映
     let baseScore = 0;
     try {
       const baseParams = await window.WWMStats.buildStatParams(roleInfo, state);
@@ -133,8 +135,12 @@
       baseScore = _scoreWithBonus(roleInfo);
     } catch (e) { return null; }
     const result = {};
+    const bowPair = ['21', '9'];
+    const hasBowPair = bowPair.every(s => slots.includes(s));
     for (const slot of slots) {
       try {
+        // 弓ペア = pair 同時抜き → total LOO 半分配分 (= 兄貴指示 弓 set effect は特殊扱い)
+        if (hasBowPair && bowPair.includes(slot)) continue;
         const ri = JSON.parse(JSON.stringify(roleInfo));
         delete ri.wearEquipsDetailed[slot];
         const p = await window.WWMStats.buildStatParams(ri, state);
@@ -142,6 +148,19 @@
         const noSlot = _scoreWithBonus(ri);
         result[slot] = Math.round(baseScore - noSlot);
       } catch (e) { result[slot] = 0; }
+    }
+    // 弓ペア = 21+9 同時抜きで pair total LOO 算出 → 半分配分
+    if (hasBowPair) {
+      try {
+        const ri = JSON.parse(JSON.stringify(roleInfo));
+        for (const ps of bowPair) delete ri.wearEquipsDetailed[ps];
+        const p = await window.WWMStats.buildStatParams(ri, state);
+        window.computeExpected(p);
+        const noPair = _scoreWithBonus(ri);
+        const pairLoo = baseScore - noPair;
+        const half = Math.round(pairLoo / 2);
+        for (const ps of bowPair) result[ps] = half;
+      } catch (e) { for (const ps of bowPair) result[ps] = 0; }
     }
     return result;
   }
