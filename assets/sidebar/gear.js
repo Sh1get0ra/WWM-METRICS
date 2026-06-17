@@ -121,35 +121,17 @@
     return base + _set4Bonus(roleInfo);
   }
 
-  // 装備カード Score = (現状 全装備) - (該当 slot 外し) + セット効果均等分配
+  // 装備カード Score = pure LOO marginal (set 補正撤去版)
+  // カード表示は 装備品質 % (= LOO / (slot MAX LOO × 0.95) × 100、 WWMState.opt.slotMaxLoo['gear:N'] 参照)
   async function _computeSlotContributions(roleInfo, slots, suffixSlots, set4Map) {
     if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return null;
     const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
-    // base
     let baseScore = 0;
     try {
       const baseParams = await window.WWMStats.buildStatParams(roleInfo, state);
       window.computeExpected(baseParams);
       baseScore = _scoreWithBonus(roleInfo);
     } catch (e) { return null; }
-    // set 2pc share map
-    const setShare = {};
-    for (const [sfx, members] of Object.entries(suffixSlots)) {
-      if (members.length < 2) continue;
-      try {
-        const ri = JSON.parse(JSON.stringify(roleInfo));
-        for (const s of members) {
-          if (ri.wearEquipsDetailed[s]?.exVo) ri.wearEquipsDetailed[s].exVo.suffix = -999;
-        }
-        const p = await window.WWMStats.buildStatParams(ri, state);
-        window.computeExpected(p);
-        const noSet = _scoreWithBonus(ri);
-        const eff = baseScore - noSet;
-        const share = eff * (members.length - 1) / members.length;
-        for (const s of members) setShare[s] = share;
-      } catch (e) {}
-    }
-    // 各 slot 寄与
     const result = {};
     for (const slot of slots) {
       try {
@@ -158,13 +140,16 @@
         const p = await window.WWMStats.buildStatParams(ri, state);
         window.computeExpected(p);
         const noSlot = _scoreWithBonus(ri);
-        let delta = baseScore - noSlot;
-        if (setShare[slot]) delta -= setShare[slot];
-        if (set4Map[slot]) delta -= set4Map[slot];
-        result[slot] = Math.round(delta);
+        result[slot] = Math.round(baseScore - noSlot);
       } catch (e) { result[slot] = 0; }
     }
     return result;
+  }
+
+  // 装備品質 % 計算 (Tier 判定 0.95 ratio 同型)
+  function _slotQualityPct(curLoo, maxLoo) {
+    if (!maxLoo || maxLoo <= 0) return null;
+    return Math.round(curLoo / (maxLoo * 0.95) * 100);
   }
 
   async function _computeGearCardScores(roleInfo) {
@@ -214,25 +199,40 @@
       }
       origContrib = await _computeSlotContributions(origRi, origSlots, origSuffixSlots, origSet4Map) || {};
     }
-    // 描画
+    // 描画 = 装備品質 % のみ表示 (生 LOO 値非表示、 編集中 slot のみ baseline% ▶ current% で Δ chip 表示)
+    const slotMaxLoo = WWMState.opt.slotMaxLoo || {};
     for (const slot of slots) {
       const el = document.querySelector(`[data-card-score="${slot}"]`);
       if (!el) continue;
-      const curScore = effContrib[slot] || 0;
-      // 2026-06-17: 他 slot virtual の波及で寄与変わった slot にも Δ 表示 (兄貴指摘 = 胸当てバグ)
-      if (origContrib[slot] != null && origContrib[slot] !== curScore) {
-        const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
-        if (isObs) {
-          el.innerHTML = `<span class="plank-score-main">${origContrib[slot].toLocaleString()}</span>`;
-        } else {
-          const delta = curScore - origContrib[slot];
-          const sign = delta > 0 ? '+' : '';
-          const cls = delta > 0 ? 'up' : delta < 0 ? 'dn' : '';
-          el.innerHTML = `<span class="plank-score-main">${origContrib[slot].toLocaleString()}</span> <span class="plank-score-delta ${cls}">${sign}${delta.toLocaleString()}</span>`;
-        }
-      } else {
-        el.innerHTML = `<span class="plank-score-main">${curScore.toLocaleString()}</span>`;
+      const curLoo = effContrib[slot] || 0;
+      const maxLoo = slotMaxLoo['gear:' + slot];
+      const curPct = _slotQualityPct(curLoo, maxLoo);
+      const isModified = hasVirtual && (
+        WWMState.virtual.gear?.[slot] ||
+        (slot === '1' && WWMState.virtual.kongfu?.kongfuMain) ||
+        (slot === '2' && WWMState.virtual.kongfu?.kongfuSub)
+      );
+      if (curPct == null) {
+        // MAX LOO 未確定 (opt 未実行 等) = 生 LOO 値で fallback
+        el.innerHTML = `<span class="plank-score-main">${curLoo.toLocaleString()}</span>`;
+        continue;
       }
+      if (isModified && origContrib[slot] != null) {
+        const origPct = _slotQualityPct(origContrib[slot], maxLoo);
+        if (origPct != null && origPct !== curPct) {
+          const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
+          if (isObs) {
+            el.innerHTML = `<span class="plank-score-main">${origPct}%</span>`;
+          } else {
+            const delta = curPct - origPct;
+            const sign = delta > 0 ? '+' : '';
+            const cls = delta > 0 ? 'up' : delta < 0 ? 'dn' : '';
+            el.innerHTML = `<span class="plank-score-main">${origPct}%</span> <span class="plank-score-delta ${cls}">${sign}${delta}%</span>`;
+          }
+          continue;
+        }
+      }
+      el.innerHTML = `<span class="plank-score-main">${curPct}%</span>`;
     }
     // DOM 状態復元
     try {
@@ -472,15 +472,20 @@
         </div>
         <!-- footer = body (紙) の外 = 墨帯 (modal 二層化 2026-06-12) -->
         <div class="wwm-cmp-footer-a">
-          <div class="wwm-cmp-delta-block">
-            <span class="wwm-cmp-delta-label">${(window.T&&T.cmpDeltaLabel)||'武格変動'}</span>
-            <span class="wwm-cmp-preview-value" id="wwmCmpPreviewDelta"></span>
-            <span class="wwm-cmp-delta-base" id="wwmCmpPreviewBase"></span>
+          <div class="wwm-cmp-stat-row">
+            <span class="wwm-cmp-delta-label">${(window.T&&T.martialIndex)||'武格指数'}</span>
+            <span class="wwm-cmp-delta-total" id="wwmCmpPreviewTotal"></span>
           </div>
-          <div class="wwm-btn-row wwm-cmp-btn-row">
-            <button class="wwm-btn-primary" id="wwmEditApply">${(window.T&&T.cmpApply)||'採用'}</button>
-            <button class="wwm-btn-secondary" id="wwmEditReset">${(window.T&&T.cmpReset)||'復元'}</button>
-            <button class="wwm-btn-secondary" id="wwmEditCancel">${(window.T&&T.cmpCancel)||'離脱'}</button>
+          <div class="wwm-cmp-stat-row">
+            <div class="wwm-cmp-quality-block">
+              <span class="wwm-cmp-delta-label">${(window.T&&T.slotQuality)||'火力品質'}</span>
+              <span class="wwm-cmp-delta-total" id="wwmCmpPreviewBase"></span>
+            </div>
+            <div class="wwm-btn-row wwm-cmp-btn-row">
+              <button class="wwm-btn-primary" id="wwmEditApply">${(window.T&&T.cmpApply)||'採用'}</button>
+              <button class="wwm-btn-secondary" id="wwmEditReset">${(window.T&&T.cmpReset)||'復元'}</button>
+              <button class="wwm-btn-secondary" id="wwmEditCancel">${(window.T&&T.cmpCancel)||'離脱'}</button>
+            </div>
           </div>
         </div>
       </div>
@@ -505,9 +510,10 @@
     m.querySelector('#wwmEditCancel').addEventListener('click', () => m.remove());
 
     // ── Phase 2: preview Δ Score (debounced) ─────────────────
-    // 2026-06-17: slot 単体寄与 (baseline vs 試作) で表示 = カード Δ と整合 (兄貴指示)
+    // 2026-06-17 案 B: baseline = modal open 時 effective slot LOO (他装備強化のシナジー込み)、 Δ = 純編集差分
     let _previewTimer = null;
-    let _origContribCache = null; // origRi での this slot 寄与 (init 後 1 回計算)
+    let _origContribCache = null; // modal open 時 effective ri での this slot 寄与 (init 後 1 回計算)
+    const _openTimeRi = _getEffectiveRoleInfo() || origRi; // open 瞬間の effective snapshot (closure keep)
     function _slotContribArgs(ri) {
       const eqDet = ri?.wearEquipsDetailed || {};
       const slots = _GEAR_SLOT_ORDER.filter(s => eqDet[s]);
@@ -532,16 +538,16 @@
       _previewTimer = setTimeout(_runPreview, 250);
     }
     async function _runPreview() {
-      const el = m.querySelector('#wwmCmpPreviewDelta');
-      if (!el) return;
-      if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') {
-        el.textContent = 'N/A'; return;
-      }
+      if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return;
       try {
-        // baseline 寄与 (init 後 1 回キャッシュ)
+        // baseline 寄与 = isModified なら origRi (累積 Δ)、 そうでなければ open 時 effective snapshot (Δ 0 start)
         if (_origContribCache == null) {
-          const a = _slotContribArgs(origRi);
-          const map = await _computeSlotContributions(origRi, [slot], a.suffixSlots, a.set4Map) || {};
+          const isModified = !!(WWMState.virtual.gear?.[slot]) ||
+            (slot === '1' && !!WWMState.virtual.kongfu?.kongfuMain) ||
+            (slot === '2' && !!WWMState.virtual.kongfu?.kongfuSub);
+          const baseRiForCache = isModified ? origRi : _openTimeRi;
+          const a = _slotContribArgs(baseRiForCache);
+          const map = await _computeSlotContributions(baseRiForCache, [slot], a.suffixSlots, a.set4Map) || {};
           _origContribCache = map[slot] || 0;
         }
         // 試作 ri 構築
@@ -560,15 +566,27 @@
         const va = _slotContribArgs(vRi);
         const vMap = await _computeSlotContributions(vRi, [slot], va.suffixSlots, va.set4Map) || {};
         const vContrib = vMap[slot] || 0;
-        const delta = vContrib - _origContribCache;
-        const sign = delta > 0 ? '+' : '';
-        el.textContent = `${sign}${delta.toLocaleString()}`;
-        el.className = 'wwm-cmp-preview-value ' + (delta > 0 ? 'pos' : delta < 0 ? 'neg' : 'zero');
+        // 装備品質 % (LOO / (MAX LOO × 0.95) × 100)
+        const maxLoo = (WWMState.opt.slotMaxLoo || {})['gear:' + slot];
+        const basePct = _slotQualityPct(_origContribCache, maxLoo);
+        const curPct = _slotQualityPct(vContrib, maxLoo);
+        const dPct = (basePct != null && curPct != null) ? (curPct - basePct) : null;
+        // total 軸 = baseline (import 時固定) ▶ 試作 ri の現 total
+        const totalBase = Math.round(WWMState.baseline?.statusScore ?? 0);
+        const finalState = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+        const finalParams = await window.WWMStats.buildStatParams(vRi, finalState);
+        window.computeExpected(finalParams);
+        const totalCur = Math.round(_scoreWithBonus(vRi));
         const baseEl = m.querySelector('#wwmCmpPreviewBase');
-        if (baseEl) baseEl.textContent = `${_origContribCache.toLocaleString()} → ${vContrib.toLocaleString()}`;
+        const _ARR = '<span class="wwm-cmp-arrow">▶</span>';
+        if (baseEl) {
+          if (basePct != null && curPct != null) baseEl.innerHTML = `${basePct}%${_ARR}${curPct}%`;
+          else baseEl.innerHTML = `${_origContribCache.toLocaleString()}${_ARR}${vContrib.toLocaleString()}`;
+        }
+        const totEl = m.querySelector('#wwmCmpPreviewTotal');
+        if (totEl) totEl.innerHTML = `${totalBase.toLocaleString()}${_ARR}${totalCur.toLocaleString()}`;
       } catch (e) {
         console.error('[Preview]', e);
-        el.textContent = 'error';
       }
     }
 

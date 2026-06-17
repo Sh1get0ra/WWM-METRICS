@@ -78,55 +78,139 @@
     _computeArsenalCardScore(roleInfo);
   }
 
-  async function _computeArsenalCardScore(roleInfo) {
-    if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return;
-    const state = _getEffectiveState() || WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+  // 武庫 LOO marginal (arsenal 抜きとの差)
+  async function _computeArsenalLooContrib(ri, state) {
+    if (!ri || !window.WWMStats?.buildStatParams) return 0;
     try {
-      // base = 武庫込
-      const baseParams = await window.WWMStats.buildStatParams(roleInfo, state);
+      const baseParams = await window.WWMStats.buildStatParams(ri, state);
       window.computeExpected(baseParams);
-      const baseScore = _scoreWithBonus(roleInfo);
-      // 武庫無 = state.arsenal を空に
+      const baseScore = _scoreWithBonus(ri);
       const stateNoArs = JSON.parse(JSON.stringify(state || {}));
       if (stateNoArs.arsenal) stateNoArs.arsenal = { path: stateNoArs.arsenal.path, tiers: {} };
-      const noArsParams = await window.WWMStats.buildStatParams(roleInfo, stateNoArs);
+      const noArsParams = await window.WWMStats.buildStatParams(ri, stateNoArs);
       window.computeExpected(noArsParams);
-      const noArsScore = _scoreWithBonus(roleInfo);
-      const contrib = Math.round(baseScore - noArsScore);
-      const el = document.querySelector('[data-arsenal-score] .plank-score-main');
-      if (el) el.textContent = contrib.toLocaleString();
-      // base 復元
+      const noArsScore = _scoreWithBonus(ri);
+      // 元 state で復元 (lastResult)
       window.computeExpected(baseParams);
-    } catch(e) {}
+      return Math.round(baseScore - noArsScore);
+    } catch (e) { return 0; }
+  }
+
+  async function _computeArsenalCardScore(roleInfo) {
+    if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return;
+    const ri = _getEffectiveRoleInfo() || roleInfo;
+    const state = _getEffectiveState() || WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+    const effContrib = await _computeArsenalLooContrib(ri, state);
+    // baseline 寄与 (virtual.arsenal あり時のみ算出)
+    let origContrib = null;
+    if (WWMState.virtual.arsenal) {
+      const origRi = WWMState.roleInfo;
+      const origState = WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {};
+      origContrib = await _computeArsenalLooContrib(origRi, origState);
+    }
+    // 描画 = 装備品質 % 表示 (LOO / (MAX LOO × 0.95) × 100)
+    const slotMaxLoo = WWMState.opt.slotMaxLoo || {};
+    const maxLoo = slotMaxLoo['arsenal'];
+    const curPct = _xinfaQualityPct(effContrib, maxLoo);
+    const el = document.querySelector('[data-arsenal-score]');
+    if (!el) return;
+    if (curPct == null) {
+      el.innerHTML = `<span class="plank-score-main">${effContrib.toLocaleString()}</span>`;
+      return;
+    }
+    if (origContrib != null) {
+      const origPct = _xinfaQualityPct(origContrib, maxLoo);
+      if (origPct != null && origPct !== curPct) {
+        const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
+        if (isObs) {
+          el.innerHTML = `<span class="plank-score-main">${origPct}%</span>`;
+        } else {
+          const delta = curPct - origPct;
+          const sign = delta > 0 ? '+' : '';
+          const cls = delta > 0 ? 'up' : delta < 0 ? 'dn' : '';
+          el.innerHTML = `<span class="plank-score-main">${origPct}%</span> <span class="plank-score-delta ${cls}">${sign}${delta}%</span>`;
+        }
+        return;
+      }
+    }
+    el.innerHTML = `<span class="plank-score-main">${curPct}%</span>`;
+  }
+
+  // 心法 LOO marginal (該当 slot tier 0 化との差)
+  async function _computeXinfaLooContrib(ri, state) {
+    if (!ri || !window.WWMStats?.buildStatParams) return null;
+    const result = {};
+    try {
+      const baseSt = JSON.parse(JSON.stringify(state || {}));
+      if (!baseSt.xinfaTiers) baseSt.xinfaTiers = {};
+      const baseParams = await window.WWMStats.buildStatParams(ri, baseSt);
+      window.computeExpected(baseParams);
+      const baseScore = _scoreWithBonus(ri);
+      for (let i = 0; i < 4; i++) {
+        const altSt = JSON.parse(JSON.stringify(baseSt));
+        altSt.xinfaTiers[i] = 0;
+        altSt.xinfaTiers[String(i)] = 0;
+        const p = await window.WWMStats.buildStatParams(ri, altSt);
+        window.computeExpected(p);
+        const noXinfa = _scoreWithBonus(ri);
+        result[i] = Math.round(baseScore - noXinfa);
+      }
+    } catch (e) { return null; }
+    return result;
+  }
+  function _xinfaQualityPct(curLoo, maxLoo) {
+    if (!maxLoo || maxLoo <= 0) return null;
+    return Math.round(curLoo / (maxLoo * 0.95) * 100);
   }
 
   async function _computeXinfaCardScores(roleInfo) {
     if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return;
-    // virtual passive (心法ID差替) も反映するため、roleInfo は effectiveRoleInfo で上書き保証
     const ri = _getEffectiveRoleInfo() || roleInfo;
-    // virtual xinfa tiers (Edit modal適用結果) を反映するため _getEffectiveState() 使用
     const state = _getEffectiveState() || WWMHelpers.storage.loadJSON('wwm_last_state_v1');
-    // base score
-    let baseScore = 0;
-    try {
-      const baseParams = await window.WWMStats.buildStatParams(ri, state);
-      window.computeExpected(baseParams);
-      baseScore = _scoreWithBonus(ri);
-    } catch (e) { return; }
-    // 各 xinfa slot → tier 0 で再算出 = その心法寄与
+    // LOO marginal で各 slot 寄与算出 (effective)
+    const effContrib = await _computeXinfaLooContrib(ri, state) || {};
+    // baseline (origRi + origState、 virtual ある時のみ算出)
+    const origContrib = {};
+    const origRi = WWMState.roleInfo;
+    const hasVirtual = (WWMState.virtual.gear && Object.keys(WWMState.virtual.gear).length) ||
+                       (WWMState.virtual.kongfu && Object.keys(WWMState.virtual.kongfu).length) ||
+                       (WWMState.virtual.xinfa && ((WWMState.virtual.xinfa.passive && WWMState.virtual.xinfa.passive.length) || Object.keys(WWMState.virtual.xinfa.tiers || {}).length)) ||
+                       WWMState.virtual.arsenal;
+    if (hasVirtual && origRi) {
+      const origState = WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {};
+      Object.assign(origContrib, await _computeXinfaLooContrib(origRi, origState) || {});
+    }
+    // 描画 = 装備品質 % 表示 (LOO / (MAX LOO × 0.95) × 100)
+    const slotMaxLoo = WWMState.opt.slotMaxLoo || {};
     for (let i = 0; i < 4; i++) {
-      try {
-        const altState = JSON.parse(JSON.stringify(state || {}));
-        if (!altState.xinfaTiers) altState.xinfaTiers = {};
-        altState.xinfaTiers[i] = 0;
-        altState.xinfaTiers[String(i)] = 0;
-        const p = await window.WWMStats.buildStatParams(ri, altState);
-        window.computeExpected(p);
-        const noXinfa = _scoreWithBonus(ri);
-        const delta = Math.round(baseScore - noXinfa);
-        const el = document.querySelector(`[data-xinfa-score="${i}"] .plank-score-main`);
-        if (el) el.textContent = delta.toLocaleString();
-      } catch (e) {}
+      const el = document.querySelector(`[data-xinfa-score="${i}"]`);
+      if (!el) continue;
+      const curLoo = effContrib[i] || 0;
+      const maxLoo = slotMaxLoo['xinfa:' + i];
+      const curPct = _xinfaQualityPct(curLoo, maxLoo);
+      const isModified = !!(
+        WWMState.virtual.xinfa?.passive?.[i] != null && WWMState.virtual.xinfa.passive[i] !== (origRi?.passiveSlots?.[i] ?? null)
+      ) || (WWMState.virtual.xinfa?.tiers && (WWMState.virtual.xinfa.tiers[i] != null || WWMState.virtual.xinfa.tiers[String(i)] != null));
+      if (curPct == null) {
+        el.innerHTML = `<span class="plank-score-main">${curLoo.toLocaleString()}</span>`;
+        continue;
+      }
+      if (isModified && origContrib[i] != null) {
+        const origPct = _xinfaQualityPct(origContrib[i], maxLoo);
+        if (origPct != null && origPct !== curPct) {
+          const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
+          if (isObs) {
+            el.innerHTML = `<span class="plank-score-main">${origPct}%</span>`;
+          } else {
+            const delta = curPct - origPct;
+            const sign = delta > 0 ? '+' : '';
+            const cls = delta > 0 ? 'up' : delta < 0 ? 'dn' : '';
+            el.innerHTML = `<span class="plank-score-main">${origPct}%</span> <span class="plank-score-delta ${cls}">${sign}${delta}%</span>`;
+          }
+          continue;
+        }
+      }
+      el.innerHTML = `<span class="plank-score-main">${curPct}%</span>`;
     }
     // 復元
     try {
@@ -340,15 +424,20 @@
         </div>
         <!-- footer = body (紙) の外 = 墨帯 (modal 二層化 2026-06-12) -->
         <div class="wwm-cmp-footer-a">
-          <div class="wwm-cmp-delta-block">
-            <span class="wwm-cmp-delta-label">${_T.cmpDeltaLabel||'武格変動'}</span>
-            <span class="wwm-cmp-preview-value" id="wwmCmpXinfaPreviewDelta"></span>
-            <span class="wwm-cmp-delta-base" id="wwmCmpXinfaPreviewBase"></span>
+          <div class="wwm-cmp-stat-row">
+            <span class="wwm-cmp-delta-label">${_T.martialIndex||'武格指数'}</span>
+            <span class="wwm-cmp-delta-total" id="wwmCmpXinfaPreviewTotal"></span>
           </div>
-          <div class="wwm-btn-row wwm-cmp-btn-row">
-            <button class="wwm-btn-primary" id="wwmXinfaApply">${_T.cmpApply||'採用'}</button>
-            <button class="wwm-btn-secondary" id="wwmXinfaReset">${_T.cmpReset||'復元'}</button>
-            <button class="wwm-btn-secondary" id="wwmXinfaCancel">${_T.cmpCancel||'離脱'}</button>
+          <div class="wwm-cmp-stat-row">
+            <div class="wwm-cmp-quality-block">
+              <span class="wwm-cmp-delta-label">${_T.slotQuality||'火力品質'}</span>
+              <span class="wwm-cmp-delta-total" id="wwmCmpXinfaPreviewBase"></span>
+            </div>
+            <div class="wwm-btn-row wwm-cmp-btn-row">
+              <button class="wwm-btn-primary" id="wwmXinfaApply">${_T.cmpApply||'採用'}</button>
+              <button class="wwm-btn-secondary" id="wwmXinfaReset">${_T.cmpReset||'復元'}</button>
+              <button class="wwm-btn-secondary" id="wwmXinfaCancel">${_T.cmpCancel||'離脱'}</button>
+            </div>
           </div>
         </div>
       </div>
@@ -358,35 +447,71 @@
     m.querySelector('#wwmXinfaCancel').addEventListener('click', () => m.remove());
 
     let _t = null;
+    let _origSlotContribCache = null; // modal open 時 effective ri + state での該当 slot 寄与 (init 後 1 回)
+    const _openTimeRi = _getEffectiveRoleInfo() || origRi; // open 時 snapshot (closure keep)
+    const _openTimeState = _getEffectiveState() || WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {};
     function _schedule() { if (_t) clearTimeout(_t); _t = setTimeout(_runPreview, 250); }
     async function _runPreview() {
-      const el = m.querySelector('#wwmCmpXinfaPreviewDelta');
-      if (!el) return;
       try {
-        // baseline = effective (現状適用済)
+        // baseline slot 寄与 = isModified なら origRi+origState (累積 Δ)、 でなければ open 時 snapshot (Δ 0 start)
+        if (_origSlotContribCache == null) {
+          const isModified = !!(WWMState.virtual.xinfa?.passive?.[slotIdx] != null && WWMState.virtual.xinfa.passive[slotIdx] !== (origRi?.passiveSlots?.[slotIdx] ?? null))
+            || !!(WWMState.virtual.xinfa?.tiers && (WWMState.virtual.xinfa.tiers[slotIdx] != null || WWMState.virtual.xinfa.tiers[String(slotIdx)] != null));
+          const baseRiForCache = isModified ? origRi : _openTimeRi;
+          const baseStForCache = isModified ? (WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {}) : _openTimeState;
+          const baseSt = JSON.parse(JSON.stringify(baseStForCache));
+          if (!baseSt.xinfaTiers) baseSt.xinfaTiers = {};
+          const baseParams = await window.WWMStats.buildStatParams(baseRiForCache, baseSt);
+          window.computeExpected(baseParams);
+          const origTotal = _scoreWithBonus(baseRiForCache);
+          const noSt = JSON.parse(JSON.stringify(baseSt));
+          noSt.xinfaTiers[slotIdx] = 0;
+          noSt.xinfaTiers[String(slotIdx)] = 0;
+          const noParams = await window.WWMStats.buildStatParams(baseRiForCache, noSt);
+          window.computeExpected(noParams);
+          const noScore = _scoreWithBonus(baseRiForCache);
+          _origSlotContribCache = Math.round(origTotal - noScore);
+        }
+        // 試作 ri + state
         const baseRi = _getEffectiveRoleInfo() || origRi;
         const baseState = JSON.parse(JSON.stringify(state || {}));
         if (!baseState.xinfaTiers) baseState.xinfaTiers = {};
-        const baseParams = await window.WWMStats.buildStatParams(baseRi, baseState);
-        window.computeExpected(baseParams);
-        const baseScore = _scoreWithBonus(baseRi);
-        // virtual ri + state
         const vRi = JSON.parse(JSON.stringify(baseRi));
         if (!vRi.passiveSlots) vRi.passiveSlots = [];
         vRi.passiveSlots[slotIdx] = parseInt(newXinfaId, 10);
         const vState = JSON.parse(JSON.stringify(baseState));
         vState.xinfaTiers[slotIdx] = newTier;
         vState.xinfaTiers[String(slotIdx)] = newTier;
+        // 試作 slot 寄与 = vRi + vState で該当 slot tier 0 化との差
         const vParams = await window.WWMStats.buildStatParams(vRi, vState);
         window.computeExpected(vParams);
-        const vScore = _scoreWithBonus(vRi);
-        const delta = Math.round(vScore - baseScore);
-        const sign = delta > 0 ? '+' : '';
-        el.textContent = `${sign}${delta.toLocaleString()}`;
-        el.className = 'wwm-cmp-preview-value ' + (delta > 0 ? 'pos' : delta < 0 ? 'neg' : 'zero');
+        const vTotal = _scoreWithBonus(vRi);
+        const vNoSt = JSON.parse(JSON.stringify(vState));
+        vNoSt.xinfaTiers[slotIdx] = 0;
+        vNoSt.xinfaTiers[String(slotIdx)] = 0;
+        const vNoParams = await window.WWMStats.buildStatParams(vRi, vNoSt);
+        window.computeExpected(vNoParams);
+        const vNoScore = _scoreWithBonus(vRi);
+        const vSlot = Math.round(vTotal - vNoScore);
+        // 装備品質 % (心法 slot LOO / MAX LOO × 0.95 × 100)
+        const maxLoo = (WWMState.opt.slotMaxLoo || {})['xinfa:' + slotIdx];
+        const basePct = _xinfaQualityPct(_origSlotContribCache, maxLoo);
+        const curPct = _xinfaQualityPct(vSlot, maxLoo);
+        const dPct = (basePct != null && curPct != null) ? (curPct - basePct) : null;
+        // total 軸
+        const totalBase = Math.round(WWMState.baseline?.statusScore ?? 0);
+        const finalParams = await window.WWMStats.buildStatParams(vRi, vState);
+        window.computeExpected(finalParams);
+        const totalCur = Math.round(_scoreWithBonus(vRi));
         const baseEl = m.querySelector('#wwmCmpXinfaPreviewBase');
-        if (baseEl) baseEl.textContent = `${Math.round(baseScore).toLocaleString()} → ${Math.round(vScore).toLocaleString()}`;
-      } catch (e) { el.textContent = 'error'; }
+        const _ARR = '<span class="wwm-cmp-arrow">▶</span>';
+        if (baseEl) {
+          if (basePct != null && curPct != null) baseEl.innerHTML = `${basePct}%${_ARR}${curPct}%`;
+          else baseEl.textContent = _origSlotContribCache.toLocaleString();
+        }
+        const totEl = m.querySelector('#wwmCmpXinfaPreviewTotal');
+        if (totEl) totEl.innerHTML = `${totalBase.toLocaleString()}${_ARR}${totalCur.toLocaleString()}`;
+      } catch (e) { console.error('[XinfaPreview]', e); }
     }
 
     const xSel = m.querySelector('#wwmCmpXinfaSel');

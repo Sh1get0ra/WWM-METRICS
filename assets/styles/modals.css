@@ -650,21 +650,40 @@
 .wwm-cmp-modal-a .wwm-cmp-divider::after  { bottom: 30%; }
 
 .wwm-cmp-footer-a {
-  /* modal 二層化 (2026-06-12): footer = body (紙) の外の墨帯 — modal 地 (墨) がそのまま出る。
-     左右 padding は旧 body 内時代の見た目に合わせ space-4 */
+  /* modal 二層化 (2026-06-12): footer = body (紙) の外の墨帯。
+     2026-06-17: 2 行構成 = 1 行目 武格指数 / 2 行目 装備品質 + ボタン群右寄せ */
   margin-top: 0;
   padding: var(--space-3) var(--space-4) var(--space-3-5);
   border-top: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 12px;
+  display: flex; flex-direction: column; align-items: stretch;
+  gap: 8px;
 }
-.wwm-cmp-delta-block {
-  display: flex; align-items: baseline; gap: 12px;
+.wwm-cmp-stat-row {
+  display: flex; align-items: baseline; gap: 14px;
+  flex-wrap: nowrap;
+}
+.wwm-cmp-quality-block {
+  display: flex; align-items: baseline; gap: 14px;
+  min-width: 0; flex-shrink: 1;
+}
+.wwm-cmp-delta-label { white-space: nowrap; }
+.wwm-cmp-footer-a .wwm-cmp-btn-row {
+  margin-left: auto;
+  flex-shrink: 0; flex-wrap: nowrap; white-space: nowrap;
+}
+.wwm-cmp-delta-total { white-space: nowrap; }
+.wwm-cmp-arrow {
+  font-size: var(--text-sm);
+  color: var(--sumi-fg-dim);
+  opacity: 0.55;
+  margin: 0 8px;
+  vertical-align: 0.12em;
+  font-weight: normal;
 }
 .wwm-cmp-delta-label {
   font-family: var(--f-display-title);
-  font-size: var(--text-sm); font-weight: 900;
-  color: var(--kami-fg-dim);
+  font-size: var(--text-14); font-weight: 900;
+  color: var(--kami-fg);
   letter-spacing: 0.32em;
 }
 .wwm-cmp-modal-a .wwm-cmp-preview-value {
@@ -677,7 +696,22 @@
 .wwm-cmp-modal-a .wwm-cmp-preview-value.zero { color: var(--c-cmp-preview-zero-fg); text-shadow: none !important; }
 .wwm-cmp-delta-base {
   font-family: var(--f-latin);
-  font-size: var(--text-sm); color: var(--kami-fg);
+  font-size: var(--text-base);
+  font-weight: var(--fw-medium);
+  color: var(--sumi-fg);
+}
+.wwm-cmp-delta-total {
+  font-family: var(--f-latin);
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  color: var(--gold-bright);
+  letter-spacing: 0.02em;
+}
+.wwm-cmp-delta-sep {
+  color: var(--sumi-fg-dim);
+  opacity: 0.55;
+  font-size: var(--text-base);
+  padding: 0 4px;
 }
 .wwm-cmp-modal-a .wwm-cmp-bg-icon { opacity: 0 ; }
 /* 新装備アイコン modal全体背景化 — 右下から見切れる大きさ (元サイズ、 心法対照 で使用) */

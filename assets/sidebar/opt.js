@@ -432,6 +432,64 @@
     if (!WWMState.opt.locked) {
       const ver = window.WWM_SCORE_VERSION || 1;
       WWMState.opt.best = { end: Math.round(curScore), ts: Date.now(), scoreVer: ver };
+      // 装備品質 % 用: max ri snapshot + 各 slot MAX LOO 算出
+      WWMState.opt.maxRi = JSON.parse(JSON.stringify(working));
+      try {
+        const slotMaxLoo = {};
+        const maxRi = WWMState.opt.maxRi;
+        // 心法/武庫 も MAX 状態 (xinfaTiers 全 6 + arsenal max) で計算
+        const maxState = JSON.parse(JSON.stringify(state || {}));
+        if (!maxState.xinfaTiers) maxState.xinfaTiers = {};
+        for (let i = 0; i < 4; i++) { maxState.xinfaTiers[i] = 6; maxState.xinfaTiers[String(i)] = 6; }
+        // 武庫: 全 tier max 想定 (現 state.arsenal の構造 keep、 ただし peaked = true 想定で max value 採用)
+        const baseParams = await window.WWMStats.buildStatParams(maxRi, maxState);
+        window.computeExpected(baseParams);
+        const maxTotal = _scoreWithBonus(maxRi);
+        // 装備 slot MAX LOO
+        const eqDet = maxRi?.wearEquipsDetailed || {};
+        const gearSlots = ['1','2','3','4','21','10','11','5','8','9'].filter(s => eqDet[s]);
+        for (const slot of gearSlots) {
+          const ri = JSON.parse(JSON.stringify(maxRi));
+          delete ri.wearEquipsDetailed[slot];
+          const p = await window.WWMStats.buildStatParams(ri, maxState);
+          window.computeExpected(p);
+          const noSlot = _scoreWithBonus(ri);
+          slotMaxLoo['gear:' + slot] = Math.round(maxTotal - noSlot);
+        }
+        // 心法 slot MAX LOO (各 slot tier 0 化との差)
+        for (let i = 0; i < 4; i++) {
+          const altSt = JSON.parse(JSON.stringify(maxState));
+          altSt.xinfaTiers[i] = 0;
+          altSt.xinfaTiers[String(i)] = 0;
+          const p = await window.WWMStats.buildStatParams(maxRi, altSt);
+          window.computeExpected(p);
+          const noXinfa = _scoreWithBonus(maxRi);
+          slotMaxLoo['xinfa:' + i] = Math.round(maxTotal - noXinfa);
+        }
+        // 武庫 MAX LOO (arsenal 抜きとの差)
+        const noArsSt = JSON.parse(JSON.stringify(maxState));
+        if (noArsSt.arsenal) noArsSt.arsenal = { path: noArsSt.arsenal.path, tiers: {} };
+        const pNoArs = await window.WWMStats.buildStatParams(maxRi, noArsSt);
+        window.computeExpected(pNoArs);
+        const noArsScore = _scoreWithBonus(maxRi);
+        slotMaxLoo['arsenal'] = Math.round(maxTotal - noArsScore);
+        WWMState.opt.slotMaxLoo = slotMaxLoo;
+        // localStorage 保存 (ハードリロード復元用、 opt.best と同じ scoreVer ルール)
+        try {
+          localStorage.setItem('wwm_opt_slot_max_loo_v1', JSON.stringify({
+            slotMaxLoo, scoreVer: window.WWM_SCORE_VERSION || 1, ts: Date.now()
+          }));
+        } catch (_) {}
+        // 復元 (元 roleInfo + state)
+        const finParams = await window.WWMStats.buildStatParams(roleInfo, state);
+        window.computeExpected(finParams);
+        // slotMaxLoo 反映後 各 sidebar の card 再描画 (品質 % 表示有効化)
+        try {
+          window.WWMSidebar?.gear?.render?.(roleInfo);
+          window.WWMSidebar?.xinfa?.computeCardScores?.(roleInfo);
+          window.WWMSidebar?.xinfa?.computeArsenalCardScore?.(roleInfo);
+        } catch (_) {}
+      } catch (e) { console.error('[opt maxRi/slotMaxLoo]', e); }
       WWMState.opt.locked = true;
       try { localStorage.setItem('wwm_opt_best_v1', JSON.stringify(WWMState.opt.best)); } catch(_) {}
     }

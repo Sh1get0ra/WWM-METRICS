@@ -103,15 +103,20 @@
         </div>
         <!-- footer = body (紙) の外 = 墨帯 (modal 二層化 2026-06-12) -->
         <div class="wwm-cmp-footer-a">
-          <div class="wwm-cmp-delta-block">
-            <span class="wwm-cmp-delta-label">武格変動</span>
-            <span class="wwm-cmp-preview-value" id="wwmArsenalEditDelta"></span>
-            <span class="wwm-cmp-delta-base" id="wwmArsenalEditBase"></span>
+          <div class="wwm-cmp-stat-row">
+            <span class="wwm-cmp-delta-label">${(window.T&&T.martialIndex)||'武格指数'}</span>
+            <span class="wwm-cmp-delta-total" id="wwmArsenalEditTotal"></span>
           </div>
-          <div class="wwm-btn-row wwm-cmp-btn-row">
-            <button class="wwm-btn-primary" id="wwmArsenalEditApply">採用</button>
-            <button class="wwm-btn-secondary" id="wwmArsenalEditReset">復元</button>
-            <button class="wwm-btn-secondary" id="wwmArsenalEditCancel">離脱</button>
+          <div class="wwm-cmp-stat-row">
+            <div class="wwm-cmp-quality-block">
+              <span class="wwm-cmp-delta-label">${(window.T&&T.slotQuality)||'火力品質'}</span>
+              <span class="wwm-cmp-delta-total" id="wwmArsenalEditBase"></span>
+            </div>
+            <div class="wwm-btn-row wwm-cmp-btn-row">
+              <button class="wwm-btn-primary" id="wwmArsenalEditApply">採用</button>
+              <button class="wwm-btn-secondary" id="wwmArsenalEditReset">復元</button>
+              <button class="wwm-btn-secondary" id="wwmArsenalEditCancel">離脱</button>
+            </div>
           </div>
         </div>
       </div>
@@ -174,40 +179,63 @@
     }
     bindRowEvents();
     let previewTimer = null;
+    let _origArsContribCache = null; // modal open 時 effective ri + state での武庫寄与 (LOO)
+    const _openTimeRi = _getEffectiveRoleInfo() || WWMState.roleInfo;
+    const _openTimeState = _getEffectiveState() || WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {};
     async function _schedulePreview() {
       clearTimeout(previewTimer);
       previewTimer = setTimeout(_runPreview, 150);
     }
     async function _runPreview() {
-      const ri = _getEffectiveRoleInfo() || WWMState.roleInfo;
-      if (!ri || !window.WWMStats?.buildStatParams) return;
+      const baseRi = _getEffectiveRoleInfo() || WWMState.roleInfo;
+      if (!baseRi || !window.WWMStats?.buildStatParams) return;
       const baseState = _getEffectiveState() || WWMHelpers.storage.loadJSON('wwm_last_state_v1');
       try {
-        // 現 (virtual_arsenal 無視 = 元 arsenal)
-        const baseStateNoVirtArs = JSON.parse(JSON.stringify(baseState || {}));
-        const origState = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
-        if (origState?.arsenal) baseStateNoVirtArs.arsenal = origState.arsenal;
-        const p1 = await window.WWMStats.buildStatParams(ri, baseStateNoVirtArs);
-        window.computeExpected(p1);
-        const baseScore = _scoreWithBonus(ri);
-        // 新
+        // baseline 武庫寄与 = isModified (virtual.arsenal あり) なら origRi+origState (累積 Δ)、 でなければ open 時 snapshot
+        if (_origArsContribCache == null) {
+          const isModified = !!WWMState.virtual.arsenal;
+          const baseRiForCache = isModified ? WWMState.roleInfo : _openTimeRi;
+          const baseStForCache = isModified ? (WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {}) : _openTimeState;
+          const oP1 = await window.WWMStats.buildStatParams(baseRiForCache, baseStForCache);
+          window.computeExpected(oP1);
+          const oBase = _scoreWithBonus(baseRiForCache);
+          const oStNoArs = JSON.parse(JSON.stringify(baseStForCache));
+          if (oStNoArs.arsenal) oStNoArs.arsenal = { path: oStNoArs.arsenal.path, tiers: {} }; else oStNoArs.arsenal = null;
+          const oP2 = await window.WWMStats.buildStatParams(baseRiForCache, oStNoArs);
+          window.computeExpected(oP2);
+          const oNoArs = _scoreWithBonus(baseRiForCache);
+          _origArsContribCache = Math.round(oBase - oNoArs);
+        }
+        // 試作 武庫寄与: baseRi + newArsenal state (arsenal=new) vs (arsenal=null)
         const newState = JSON.parse(JSON.stringify(baseState || {}));
         newState.arsenal = newArsenal;
-        const p2 = await window.WWMStats.buildStatParams(ri, newState);
-        window.computeExpected(p2);
-        const newScore = _scoreWithBonus(ri);
-        const delta = Math.round(newScore - baseScore);
-        const deltaEl = m.querySelector('#wwmArsenalEditDelta');
-        if (deltaEl) {
-          const sign = delta > 0 ? '+' : '';
-          deltaEl.textContent = `${sign}${delta.toLocaleString()}`;
-          deltaEl.className = 'wwm-cmp-preview-value ' + (delta > 0 ? 'pos' : delta < 0 ? 'neg' : 'zero');
-        }
-        const baseEl = m.querySelector('#wwmArsenalEditBase');
-        if (baseEl) baseEl.textContent = `${Math.round(baseScore).toLocaleString()} → ${Math.round(newScore).toLocaleString()}`;
-        // 復元
+        const p1 = await window.WWMStats.buildStatParams(baseRi, newState);
         window.computeExpected(p1);
-      } catch(e) {}
+        const totalCur = Math.round(_scoreWithBonus(baseRi));
+        const noArsSt = JSON.parse(JSON.stringify(newState));
+        noArsSt.arsenal = null;
+        const p2 = await window.WWMStats.buildStatParams(baseRi, noArsSt);
+        window.computeExpected(p2);
+        const noArsScore = _scoreWithBonus(baseRi);
+        const vSlot = Math.round(totalCur - noArsScore);
+        // 装備品質 % (武庫 LOO / MAX LOO × 0.95 × 100)
+        const maxLoo = (WWMState.opt.slotMaxLoo || {})['arsenal'];
+        const _q = (l, m) => (!m || m <= 0) ? null : Math.round(l / (m * 0.95) * 100);
+        const basePct = _q(_origArsContribCache, maxLoo);
+        const curPct = _q(vSlot, maxLoo);
+        const dPct = (basePct != null && curPct != null) ? (curPct - basePct) : null;
+        const totalBase = Math.round(WWMState.baseline?.statusScore ?? 0);
+        const pf = await window.WWMStats.buildStatParams(baseRi, newState);
+        window.computeExpected(pf);
+        const baseEl = m.querySelector('#wwmArsenalEditBase');
+        const _ARR = '<span class="wwm-cmp-arrow">▶</span>';
+        if (baseEl) {
+          if (basePct != null && curPct != null) baseEl.innerHTML = `${basePct}%${_ARR}${curPct}%`;
+          else baseEl.textContent = _origArsContribCache.toLocaleString();
+        }
+        const totEl = m.querySelector('#wwmArsenalEditTotal');
+        if (totEl) totEl.innerHTML = `${totalBase.toLocaleString()}${_ARR}${totalCur.toLocaleString()}`;
+      } catch(e) { console.error('[ArsPreview]', e); }
     }
     _schedulePreview();
     m.querySelector('#wwmArsenalEditApply').addEventListener('click', () => {

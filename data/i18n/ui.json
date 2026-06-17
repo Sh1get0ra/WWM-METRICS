@@ -1644,6 +1644,13 @@
     "ko": "무격 지수",
     "vi": "Chỉ số Võ cách"
   },
+  "slotQuality": {
+    "ja": "火力品質",
+    "en": "Damage Rating",
+    "zh": "输出质量",
+    "ko": "화력 평가",
+    "vi": "Đánh giá"
+  },
   "martialIndexSub": {
     "ja": "MARTIAL INDEX",
     "en": "MARTIAL INDEX",

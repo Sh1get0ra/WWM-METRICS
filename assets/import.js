@@ -778,7 +778,10 @@ function applyImport(data, importedAt, state) {
   // Tier 基準値 (__WWM_OPT_BEST) を再 import 時にリセット → 直後の opt 完了で再確定。
   WWMState.opt.best = null;
   WWMState.opt.locked = false;
+  WWMState.opt.maxRi = null;
+  WWMState.opt.slotMaxLoo = null;
   WWMHelpers.storage.remove('wwm_opt_best_v1');
+  WWMHelpers.storage.remove('wwm_opt_slot_max_loo_v1');
   // import時 自動リセット (2026-06-01〜): 前回 import後 user が編集した 新装備データ (virtual全部) を強制クリア。
   // 「現装備 = 新装備」 状態でスタート → 装備差分のノイズ排除、 操作性向上。 sentinel問題も同時解消。
   WWMState.virtual.gear = {};
@@ -963,6 +966,15 @@ function _autoLoadLastImport() {
         WWMState.baseline = null;
         WWMHelpers.storage.remove('wwm_baseline_score_v1');
         if (typeof window._showScoreBanner === 'function') window._showScoreBanner();
+      }
+    }
+    // slotMaxLoo 復元 (品質 % 計算用、 opt.locked 同期で復元)
+    const slm = WWMHelpers.storage.loadJSON('wwm_opt_slot_max_loo_v1');
+    if (slm && slm.slotMaxLoo) {
+      if (slm.scoreVer === (window.WWM_SCORE_VERSION || 1)) {
+        WWMState.opt.slotMaxLoo = slm.slotMaxLoo;
+      } else {
+        WWMHelpers.storage.remove('wwm_opt_slot_max_loo_v1');
       }
     }
     // opt_best 復元 (baseline と同じ scoreVer ルール、不一致なら破棄して再 import 時の opt で再確定)
