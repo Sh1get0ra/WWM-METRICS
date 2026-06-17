@@ -136,11 +136,11 @@
     } catch (e) { return null; }
     const result = {};
     const bowPair = ['21', '9'];
-    const hasBowPair = bowPair.every(s => slots.includes(s));
+    // 弓 21 or 9 のいずれかが評価対象なら pair 同時抜きで half 配分 (modal preview = slot 単独でも整合維持)
+    const hasBowMember = slots.some(s => bowPair.includes(s));
     for (const slot of slots) {
       try {
-        // 弓ペア = pair 同時抜き → total LOO 半分配分 (= 兄貴指示 弓 set effect は特殊扱い)
-        if (hasBowPair && bowPair.includes(slot)) continue;
+        if (hasBowMember && bowPair.includes(slot)) continue;
         const ri = JSON.parse(JSON.stringify(roleInfo));
         delete ri.wearEquipsDetailed[slot];
         const p = await window.WWMStats.buildStatParams(ri, state);
@@ -149,8 +149,8 @@
         result[slot] = Math.round(baseScore - noSlot);
       } catch (e) { result[slot] = 0; }
     }
-    // 弓ペア = 21+9 同時抜きで pair total LOO 算出 → 半分配分
-    if (hasBowPair) {
+    // 弓ペア = 21+9 同時抜きで pair total LOO 算出 → 半分配分 (兄貴指示 弓 set effect 特殊扱い)
+    if (hasBowMember) {
       try {
         const ri = JSON.parse(JSON.stringify(roleInfo));
         for (const ps of bowPair) delete ri.wearEquipsDetailed[ps];
@@ -159,8 +159,10 @@
         const noPair = _scoreWithBonus(ri);
         const pairLoo = baseScore - noPair;
         const half = Math.round(pairLoo / 2);
-        for (const ps of bowPair) result[ps] = half;
-      } catch (e) { for (const ps of bowPair) result[ps] = 0; }
+        for (const ps of bowPair) {
+          if (slots.includes(ps)) result[ps] = half;
+        }
+      } catch (e) { for (const ps of bowPair) { if (slots.includes(ps)) result[ps] = 0; } }
     }
     return result;
   }
@@ -556,12 +558,9 @@
       try {
         // baseline 寄与 = isModified なら origRi (累積 Δ)、 そうでなければ open 時 effective snapshot (Δ 0 start)
         if (_origContribCache == null) {
-          const isModified = !!(WWMState.virtual.gear?.[slot]) ||
-            (slot === '1' && !!WWMState.virtual.kongfu?.kongfuMain) ||
-            (slot === '2' && !!WWMState.virtual.kongfu?.kongfuSub);
-          const baseRiForCache = isModified ? origRi : _openTimeRi;
-          const a = _slotContribArgs(baseRiForCache);
-          const map = await _computeSlotContributions(baseRiForCache, [slot], a.suffixSlots, a.set4Map) || {};
+          // baseline = 常に元 roleInfo (= OPT virtual 抜き) で計算 → カード現状値と整合 (兄貴指示 2026-06-18)
+          const a = _slotContribArgs(origRi);
+          const map = await _computeSlotContributions(origRi, [slot], a.suffixSlots, a.set4Map) || {};
           _origContribCache = map[slot] || 0;
         }
         // 試作 ri 構築
