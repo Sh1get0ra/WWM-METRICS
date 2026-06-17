@@ -434,6 +434,58 @@
       WWMState.opt.best = { end: Math.round(curScore), ts: Date.now(), scoreVer: ver };
       // 装備品質 % 用: max ri snapshot + 各 slot MAX LOO 算出
       WWMState.opt.maxRi = JSON.parse(JSON.stringify(working));
+      // Phase 1 補正: 全 affix value を理論 max × TARGET_RATIO 化 (statKey は opt 結果 keep)。
+      // 防具 idx=5 (武学固有) = 適正 affix から「火力寄与あるもの (= score 上昇) 1 つ」 pick → 兄貴判断「火力寄与あるなら伸び同じ」
+      try {
+        const maxRi0 = WWMState.opt.maxRi;
+        const eqMax0 = maxRi0?.wearEquipsDetailed || {};
+        const _affixUtil = window.WWMSidebar.affix;
+        for (const slot of Object.keys(eqMax0)) {
+          const eq = eqMax0[slot];
+          const baseAffixes = eq?.exVo?.baseAffixes || [];
+          for (let idx = 0; idx < baseAffixes.length; idx++) {
+            const det = baseAffixes[idx]?.equipmentDetails;
+            if (!det) continue;
+            if (idx === 5 && _SLOT6_ARMOR.has(String(slot))) {
+              // 防具 idx=5 = 武学固有 適正 affix pick
+              const opts = _affixUtil.getAffixOptions(det[0], slot, 5, baseAffixes);
+              const sBak = baseAffixes[idx].equipmentDetails;
+              baseAffixes[idx].equipmentDetails = null;
+              let baseScore = 0;
+              try {
+                const pBase = await window.WWMStats.buildStatParams(maxRi0, state);
+                window.computeExpected(pBase);
+                baseScore = _scoreWithBonus(maxRi0);
+              } catch (_) {}
+              let pickDet = null;
+              for (const o of opts) {
+                if (!o.statKey || o.statKey === '__pvp__') continue;
+                const mv = _affixUtil.getAffixMax(o.statKey, charLv);
+                if (mv == null) continue;
+                baseAffixes[idx].equipmentDetails = [parseInt(o.id, 10), mv * TARGET_RATIO, TARGET_RATIO, 2];
+                try {
+                  const p = await window.WWMStats.buildStatParams(maxRi0, state);
+                  window.computeExpected(p);
+                  const sc = _scoreWithBonus(maxRi0);
+                  if (sc > baseScore) {
+                    pickDet = baseAffixes[idx].equipmentDetails.slice();
+                    break;
+                  }
+                } catch (_) {}
+              }
+              baseAffixes[idx].equipmentDetails = pickDet || sBak;
+              continue;
+            }
+            // 通常 idx (0-4 + 武器 idx=5 貫通) = statKey keep + value 理論 max × TARGET_RATIO 補正
+            const sk = window.WWM_AFFIX?.[det[0]]?.statKey;
+            if (!sk) continue;
+            const mv = _affixUtil.getAffixMax(sk, charLv);
+            if (mv == null) continue;
+            det[1] = mv * TARGET_RATIO;
+            det[2] = TARGET_RATIO;
+          }
+        }
+      } catch (e) { console.error('[opt MAX affix value 補正]', e); }
       try {
         const slotMaxLoo = {};
         const maxRi = WWMState.opt.maxRi;

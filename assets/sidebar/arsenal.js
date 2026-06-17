@@ -220,7 +220,7 @@
         const vSlot = Math.round(totalCur - noArsScore);
         // 装備品質 % (武庫 LOO / MAX LOO × 0.95 × 100)
         const maxLoo = (WWMState.opt.slotMaxLoo || {})['arsenal'];
-        const _q = (l, m) => (!m || m <= 0) ? null : Math.round(l / (m * 0.95) * 100);
+        const _q = (l, m) => (!m || m <= 0) ? null : Math.round(l / m * 100);
         const basePct = _q(_origArsContribCache, maxLoo);
         const curPct = _q(vSlot, maxLoo);
         const dPct = (basePct != null && curPct != null) ? (curPct - basePct) : null;

@@ -146,10 +146,10 @@
     return result;
   }
 
-  // 装備品質 % 計算 (Tier 判定 0.95 ratio 同型)
+  // 装備品質 % 計算 (slot LOO / slot MAX LOO × 100、 MAX LOO は opt 終了時 affix × TARGET_RATIO で既に詰まった状態 = 二重 0.95 不要)
   function _slotQualityPct(curLoo, maxLoo) {
     if (!maxLoo || maxLoo <= 0) return null;
-    return Math.round(curLoo / (maxLoo * 0.95) * 100);
+    return Math.round(curLoo / maxLoo * 100);
   }
 
   async function _computeGearCardScores(roleInfo) {
@@ -207,17 +207,12 @@
       const curLoo = effContrib[slot] || 0;
       const maxLoo = slotMaxLoo['gear:' + slot];
       const curPct = _slotQualityPct(curLoo, maxLoo);
-      const isModified = hasVirtual && (
-        WWMState.virtual.gear?.[slot] ||
-        (slot === '1' && WWMState.virtual.kongfu?.kongfuMain) ||
-        (slot === '2' && WWMState.virtual.kongfu?.kongfuSub)
-      );
       if (curPct == null) {
         // MAX LOO 未確定 (opt 未実行 等) = 生 LOO 値で fallback
         el.innerHTML = `<span class="plank-score-main">${curLoo.toLocaleString()}</span>`;
         continue;
       }
-      if (isModified && origContrib[slot] != null) {
+      if (hasVirtual && origContrib[slot] != null) {
         const origPct = _slotQualityPct(origContrib[slot], maxLoo);
         if (origPct != null && origPct !== curPct) {
           const isObs = document.documentElement.classList.contains('wwm-view-sidebar');

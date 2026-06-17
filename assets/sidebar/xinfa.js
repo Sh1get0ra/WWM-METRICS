@@ -101,9 +101,13 @@
     const ri = _getEffectiveRoleInfo() || roleInfo;
     const state = _getEffectiveState() || WWMHelpers.storage.loadJSON('wwm_last_state_v1');
     const effContrib = await _computeArsenalLooContrib(ri, state);
-    // baseline 寄与 (virtual.arsenal あり時のみ算出)
+    // baseline 寄与 (任意 virtual 変更で波及表示、 gear と同方針)
     let origContrib = null;
-    if (WWMState.virtual.arsenal) {
+    const hasVirtual = (WWMState.virtual.gear && Object.keys(WWMState.virtual.gear).length) ||
+                       (WWMState.virtual.kongfu && Object.keys(WWMState.virtual.kongfu).length) ||
+                       (WWMState.virtual.xinfa && ((WWMState.virtual.xinfa.passive && WWMState.virtual.xinfa.passive.length) || Object.keys(WWMState.virtual.xinfa.tiers || {}).length)) ||
+                       WWMState.virtual.arsenal;
+    if (hasVirtual) {
       const origRi = WWMState.roleInfo;
       const origState = WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {};
       origContrib = await _computeArsenalLooContrib(origRi, origState);
@@ -160,7 +164,7 @@
   }
   function _xinfaQualityPct(curLoo, maxLoo) {
     if (!maxLoo || maxLoo <= 0) return null;
-    return Math.round(curLoo / (maxLoo * 0.95) * 100);
+    return Math.round(curLoo / maxLoo * 100);
   }
 
   async function _computeXinfaCardScores(roleInfo) {
@@ -188,14 +192,11 @@
       const curLoo = effContrib[i] || 0;
       const maxLoo = slotMaxLoo['xinfa:' + i];
       const curPct = _xinfaQualityPct(curLoo, maxLoo);
-      const isModified = !!(
-        WWMState.virtual.xinfa?.passive?.[i] != null && WWMState.virtual.xinfa.passive[i] !== (origRi?.passiveSlots?.[i] ?? null)
-      ) || (WWMState.virtual.xinfa?.tiers && (WWMState.virtual.xinfa.tiers[i] != null || WWMState.virtual.xinfa.tiers[String(i)] != null));
       if (curPct == null) {
         el.innerHTML = `<span class="plank-score-main">${curLoo.toLocaleString()}</span>`;
         continue;
       }
-      if (isModified && origContrib[i] != null) {
+      if (origContrib[i] != null) {
         const origPct = _xinfaQualityPct(origContrib[i], maxLoo);
         if (origPct != null && origPct !== curPct) {
           const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
