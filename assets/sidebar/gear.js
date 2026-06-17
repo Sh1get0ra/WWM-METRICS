@@ -219,12 +219,8 @@
       const el = document.querySelector(`[data-card-score="${slot}"]`);
       if (!el) continue;
       const curScore = effContrib[slot] || 0;
-      const isModified = hasVirtual && (
-        WWMState.virtual.gear?.[slot] ||
-        (slot === '1' && WWMState.virtual.kongfu?.kongfuMain) ||
-        (slot === '2' && WWMState.virtual.kongfu?.kongfuSub)
-      );
-      if (isModified && origContrib[slot] != null && origContrib[slot] !== curScore) {
+      // 2026-06-17: 他 slot virtual の波及で寄与変わった slot にも Δ 表示 (兄貴指摘 = 胸当てバグ)
+      if (origContrib[slot] != null && origContrib[slot] !== curScore) {
         const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
         if (isObs) {
           el.innerHTML = `<span class="plank-score-main">${origContrib[slot].toLocaleString()}</span>`;
@@ -478,8 +474,8 @@
         <div class="wwm-cmp-footer-a">
           <div class="wwm-cmp-delta-block">
             <span class="wwm-cmp-delta-label">${(window.T&&T.cmpDeltaLabel)||'武格変動'}</span>
-            <span class="wwm-cmp-preview-value" id="wwmCmpPreviewDelta" style="visibility:hidden;">+0</span>
-            <span class="wwm-cmp-delta-base" id="wwmCmpPreviewBase" style="visibility:hidden;">—</span>
+            <span class="wwm-cmp-preview-value" id="wwmCmpPreviewDelta"></span>
+            <span class="wwm-cmp-delta-base" id="wwmCmpPreviewBase"></span>
           </div>
           <div class="wwm-btn-row wwm-cmp-btn-row">
             <button class="wwm-btn-primary" id="wwmEditApply">${(window.T&&T.cmpApply)||'採用'}</button>
@@ -509,7 +505,28 @@
     m.querySelector('#wwmEditCancel').addEventListener('click', () => m.remove());
 
     // ── Phase 2: preview Δ Score (debounced) ─────────────────
+    // 2026-06-17: slot 単体寄与 (baseline vs 試作) で表示 = カード Δ と整合 (兄貴指示)
     let _previewTimer = null;
+    let _origContribCache = null; // origRi での this slot 寄与 (init 後 1 回計算)
+    function _slotContribArgs(ri) {
+      const eqDet = ri?.wearEquipsDetailed || {};
+      const slots = _GEAR_SLOT_ORDER.filter(s => eqDet[s]);
+      const suffixSlots = {};
+      for (const s of slots) {
+        const sfx = eqDet[s]?.exVo?.suffix;
+        if (sfx !== undefined) {
+          if (!suffixSlots[sfx]) suffixSlots[sfx] = [];
+          suffixSlots[sfx].push(s);
+        }
+      }
+      const set4Map = {};
+      for (const [sfx, members] of Object.entries(suffixSlots)) {
+        if (members.length < 4 || !_isOffensiveSet(sfx)) continue;
+        const share = _SET4_BONUS * (members.length - 1) / members.length;
+        for (const s of members) set4Map[s] = share;
+      }
+      return { slots, suffixSlots, set4Map };
+    }
     function _schedulePreview() {
       if (_previewTimer) clearTimeout(_previewTimer);
       _previewTimer = setTimeout(_runPreview, 250);
@@ -521,11 +538,16 @@
         el.textContent = 'N/A'; return;
       }
       try {
-        // 仮想 roleInfo 構築: 他 slot の適用済 virtual を含む effective base から
+        // baseline 寄与 (init 後 1 回キャッシュ)
+        if (_origContribCache == null) {
+          const a = _slotContribArgs(origRi);
+          const map = await _computeSlotContributions(origRi, [slot], a.suffixSlots, a.set4Map) || {};
+          _origContribCache = map[slot] || 0;
+        }
+        // 試作 ri 構築
         const baseRi = _getEffectiveRoleInfo() || origRi;
         const vRi = JSON.parse(JSON.stringify(baseRi));
         if (!vRi.wearEquipsDetailed) vRi.wearEquipsDetailed = {};
-        // virtual装備 (Lv変更で baseAttrs 更新済) 優先、 fallback origEq
         const vEq = JSON.parse(JSON.stringify(WWMState.virtual.gear?.[slot] || origEq));
         vEq.exVo.baseAffixes = newAffixes;
         if (isSetEditable && newSuffix != null) vEq.exVo.suffix = parseInt(newSuffix, 10);
@@ -534,29 +556,16 @@
           if (slot === '1') vRi.kongfuMain = parseInt(newKongfuId, 10);
           else if (slot === '2') vRi.kongfuSub = parseInt(newKongfuId, 10);
         }
-        const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
-        // virtual compute
-        const vParams = await window.WWMStats.buildStatParams(vRi, state);
-        window.computeExpected(vParams);
-        const vScore = (WWMState.lastResult?.statusScore || 0) + _set4Bonus(vRi);
-        // baseline 取得 (現状 effective roleInfo)
-        const origParams = WWMState.params;
-        const effBaseRi = _getEffectiveRoleInfo() || origRi;
-        let baseScore = 0;
-        if (origParams) {
-          window.computeExpected(origParams);
-          baseScore = (WWMState.lastResult?.statusScore || 0) + _set4Bonus(effBaseRi);
-        }
-        const delta = Math.round(vScore - baseScore);
+        // 試作 寄与
+        const va = _slotContribArgs(vRi);
+        const vMap = await _computeSlotContributions(vRi, [slot], va.suffixSlots, va.set4Map) || {};
+        const vContrib = vMap[slot] || 0;
+        const delta = vContrib - _origContribCache;
         const sign = delta > 0 ? '+' : '';
         el.textContent = `${sign}${delta.toLocaleString()}`;
         el.className = 'wwm-cmp-preview-value ' + (delta > 0 ? 'pos' : delta < 0 ? 'neg' : 'zero');
         const baseEl = m.querySelector('#wwmCmpPreviewBase');
-        if (baseEl) baseEl.textContent = `${Math.round(baseScore).toLocaleString()} → ${Math.round(vScore).toLocaleString()}`;
-        // 2026-06-17: delta 0 時は数値非表示 (label のみ、 兄貴指摘 #9)
-        const isZero = delta === 0;
-        el.style.visibility = isZero ? 'hidden' : '';
-        if (baseEl) baseEl.style.visibility = isZero ? 'hidden' : '';
+        if (baseEl) baseEl.textContent = `${_origContribCache.toLocaleString()} → ${vContrib.toLocaleString()}`;
       } catch (e) {
         console.error('[Preview]', e);
         el.textContent = 'error';
@@ -765,6 +774,7 @@
               if (rowsEl) {
                 rowsEl.innerHTML = renderNewRows();
                 _bindRowEvents();
+                _schedulePreview(); // 2026-06-17: stat 変更時の preview 漏れ補正 (兄貴指摘)
                 return;
               }
             }
