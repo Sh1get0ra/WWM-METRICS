@@ -730,6 +730,17 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
      背景 layer を flow から完全分離 (兄貴案 2026-06-15 — 履歴 panel 不要 scroll 根治) */
   display: grid;
   grid-template-rows: auto 1fr auto;
+  position: relative; /* .kanji-hero absolute 基準 (hero と tabs に跨る「侠」 透かし) */
+}
+/* hero ⇄ tabs 跨ぎ「侠」 透かし (main 直下 absolute = paper-bg 後で z 勝、 top 負で hero 領域に侵食)
+   z = paper-bg (0) < this (5) < tabs (20) → 紙地より前 + tab 文字より背後 = 透かし */
+.wwm-ws-main > .kanji-hero {
+  top: -200px; right: 20px;
+  font-size: 230px;
+  color: rgba(232, 215, 180, 0.05);
+  z-index: 5;
+  transform: rotate(8deg); /* 右肩落ち */
+  transform-origin: center;
 }
 /* tab 帯 = 墨 (上帯の続き)。 active tab = 浮島カード = workspace 紙面と分離 (2026-06-14
    差し込み型廃止 — スクロール時 panel 越境で切れる演出問題の根治) */
@@ -744,7 +755,7 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   display: flex; align-items: baseline; justify-content: center; gap: 8px;
   flex: 0 1 150px; /* 等幅固定 — 文字数で幅を変えない */
   font-family: var(--f-display-title); /* lang 動的切替 (2026-06-16) — :lang() 個別 rule 全廃 */
-  font-weight: 600;
+  font-weight: 800; /* en/vi の細見え対策 (2026-06-18 兄貴指示) */
   font-size: 20px; /* 兄貴指定 2026-06-12 — 楷書 SVG は 1.25em 連動で 25px */
   letter-spacing: 0.1em;
   color: var(--sumi-text-3);
@@ -1107,6 +1118,13 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
 .wwm-ws-main .wwm-footer {
   border-left: 1px solid var(--gold-deep);
   background: var(--kami-0);
+  color: var(--kami-fg); /* 紙 bg 上 = 墨色文字 (sumi-fg 系 = 紙と同化のため上書き) */
+}
+/* dim 廃止 (兄貴指示) — opacity 0.7 → 1。 文字色 (kami-fg) で十分視認 */
+.wwm-ws-main .wwm-footer .wwm-footer-unofficial,
+.wwm-ws-main .wwm-footer .wwm-footer-copy,
+.wwm-ws-main .wwm-footer .wwm-footer-creator {
+  opacity: 1;
 }
 
 /* ============ tablet 調整 ============ */

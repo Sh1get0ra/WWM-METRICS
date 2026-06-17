@@ -55,7 +55,8 @@
       const keys = Array.isArray(item.calcKey) ? item.calcKey : [item.calcKey];
       const minV = params[keys[0]] || 0;
       const maxV = params[keys[1] || keys[0]] || 0;
-      return `${Math.round(minV).toLocaleString()}-${Math.round(maxV).toLocaleString()}`;
+      // ゲーム実機表示: min=floor / max=ceil (攻撃力は大きく見せる仕様、 2026-06-18 兄貴+フレ実測一致)
+      return `${Math.floor(minV).toLocaleString()}-${Math.ceil(maxV).toLocaleString()}`;
     }
     if (item.format === 'rateApplied') {
       const raw = params[item.calcKey];
@@ -189,8 +190,13 @@
     `;
     const collapsedSet = _getCollapsedSet();
     // baseline params (original roleInfo) — virtual ある時のみ算出
-    const hasVirtual = (WWMState.virtual.gear && Object.keys(WWMState.virtual.gear).length) ||
-                       (WWMState.virtual.kongfu && Object.keys(WWMState.virtual.kongfu).length);
+    // 判定 = virtual.js _resetAllVirtuals L88-92 と統一 (gear/kongfu のみ判定だと心法/武庫/奇術 virtual 時に baseline ▶ current 表示が出ない bug、 2026-06-18 fix)
+    const _v = WWMState.virtual || {};
+    const hasVirtual = (_v.gear && Object.keys(_v.gear).length)
+                    || (_v.kongfu && Object.keys(_v.kongfu).length)
+                    || (_v.xinfa && ((_v.xinfa.passive && _v.xinfa.passive.length) || Object.keys(_v.xinfa.tiers || {}).length))
+                    || _v.arsenal
+                    || (_v.qishu && _v.qishu.some(Boolean));
     let baseParams = null;
     if (hasVirtual && ri && window.WWMStats?.buildStatParams) {
       try {

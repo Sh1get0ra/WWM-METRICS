@@ -47,6 +47,8 @@ const LITERALS = {
   brandV1: '風',
   brandV2: '燕',
   brandV3: '計',
+  railKanji: '斬', // rail 頭 ステータス panel 透かし (.kanji-mark)
+  heroKanji: '侠', // hero panel 右端 透かし (.hero-wuxia .kanji-mark)
 };
 
 if (!fs.existsSync(FONT_PATH)) {

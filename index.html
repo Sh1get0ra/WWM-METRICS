@@ -64,7 +64,7 @@
 <link rel="stylesheet" href="assets/styles/xinfa.css?v=22">
 <link rel="stylesheet" href="assets/styles/anlz.css?v=41">
 <link rel="stylesheet" href="assets/styles/mobile.css?v=18">
-<link rel="stylesheet" href="assets/styles/workspace.css?v=314">
+<link rel="stylesheet" href="assets/styles/workspace.css?v=321">
 <link rel="stylesheet" href="assets/styles/modals.css?v=135">
 <link rel="stylesheet" href="assets/styles/responsive-globals.css?v=3">
 <link rel="stylesheet" href="assets/styles/dark.css?v=2">
@@ -631,7 +631,7 @@
 
   <!-- 左柱 (L の縦画) -->
   <aside class="wwm-ws-rail" id="wwmWsRail" aria-label="ステータス">
-    <span class="kanji-mark" aria-hidden="true">斬</span>
+    <span class="kanji-mark" data-kaisho="railKanji" data-kaisho-fixed aria-hidden="true">斬</span>
     <div class="wwm-rail-in">
       <div class="wwm-rail-fade">
         <div class="wwm-rail-head">
@@ -649,6 +649,7 @@
 
   <!-- 紙面 (main) -->
   <main class="wwm-ws-main wwm-ws-paper" role="main">
+    <span class="kanji-mark kanji-hero" data-kaisho="heroKanji" data-kaisho-fixed aria-hidden="true">侠</span>
     <nav class="wwm-ws-tabs" role="tablist" aria-label="workspace" id="wwmWsTabs">
       <!-- ローマ数字連番 = 廃止 (兄貴指示 2026-06-12)。data-kaisho = ja 時 楷書 SVG 化 (WWMKaisho) -->
       <button class="wwm-ws-tab" role="tab" aria-selected="true" data-ws="build"><span data-i18n="wsTabBuild" data-kaisho="wsTabBuild">武備</span></button>
@@ -955,14 +956,14 @@
 <script src="assets/helpers/i18n.js?v=2"></script>
 <script src="assets/calc.js?v=118"></script>
 <script src="assets/app.js?v=61"></script>
-<script src="assets/kaisho-paths.js?v=7"></script>
+<script src="assets/kaisho-paths.js?v=9"></script>
 <script src="assets/export.js?v=76"></script>
 <script src="assets/stats.js?v=74"></script>
 <script src="assets/sidebar/modal-helpers.js?v=8"></script>
 <script src="assets/sidebar/affix-utils.js?v=4"></script>
 <script src="assets/sidebar/ocr.js?v=4"></script>
 <script src="assets/sidebar/icon-resolvers.js?v=1"></script>
-<script src="assets/sidebar/anlz.js?v=8"></script>
+<script src="assets/sidebar/anlz.js?v=10"></script>
 <script src="assets/anlz-popout.js?v=27"></script>
 <script src="assets/sidebar/diag.js?v=8"></script>
 <script src="assets/sidebar/opt.js?v=36"></script>
