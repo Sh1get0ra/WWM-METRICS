@@ -170,12 +170,22 @@ function _loadSavedLang() {
     // SEO 多言語 path-based 化 (2026-06-18): 真実源 = <html lang> attribute。
     // build script (scripts/build-i18n-pages.cjs) が /{lang}/index.html を emit する時に <html lang> 設定済。
     // 旧 ?lang=xx は Functions middleware で /{lang}/ に 301 redirect = 通常はここに来ない (互換 fallback)。
-    // 優先順位: ?lang= (旧 share URL 互換) > localStorage (ユーザー手動切替) > <html lang> (path 由来)
+    //
+    // 優先順位:
+    //   1. ?lang= (旧 share URL 互換、 最優先)
+    //   2. path explicit (/en/ /zh/ /ko/ /vi/ = <html lang> が非 ja) = URL に従う (localStorage より優先)
+    //   3. localStorage (ja default `/` 到達時のみ参照、 ユーザー手動切替の永続化)
+    //   4. <html lang> fallback (= ja)
+    //
+    // 理由: /en/ に explicit 訪問したユーザーが localStorage=ja で勝手に / に戻されるのは UX 破壊。
+    // path-specific URL = ユーザーの explicit choice なので localStorage を override する。
     const htmlLang = (document.documentElement.lang || 'ja').toLowerCase().split('-')[0]; // zh-CN → zh
+    const isPathSpecific = ['en','zh','ko','vi'].includes(htmlLang);
     const saved = WWMHelpers.storage.loadStr('wwm_lang');
     const resolved =
       (urlLang && VALID.includes(urlLang)) ? urlLang :
-      (saved && VALID.includes(saved))     ? saved   :
+      isPathSpecific                       ? htmlLang :
+      (saved && VALID.includes(saved))     ? saved :
       (VALID.includes(htmlLang)            ? htmlLang : 'ja');
 
     if (resolved !== 'ja') setLang(resolved);
