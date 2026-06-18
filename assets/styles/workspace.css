@@ -753,16 +753,21 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
 }
 .wwm-ws-tab {
   display: flex; align-items: baseline; justify-content: center; gap: 8px;
-  flex: 0 1 150px; /* 等幅固定 — 文字数で幅を変えない */
+  /* 等幅 grow 化 (2026-06-18 兄貴指示) — basis 0 + grow 1 で container 残幅を 3 tab で均等 share。
+     旧 `0 1 150px` = en/vi 長 label (History / Lịch sử / Phân tích 等) が 150px overflow → tabs 帯
+     横 scroll 発生 (tabs-r IMPORT/RESET と取合)。 grow 化で「文字数より container 幅基準」 に。 */
+  flex: 1 1 0;
+  min-width: 0;
+  white-space: nowrap;
   font-family: var(--f-display-title); /* lang 動的切替 (2026-06-16) — :lang() 個別 rule 全廃 */
   font-weight: 800; /* en/vi の細見え対策 (2026-06-18 兄貴指示) */
   font-size: 20px; /* 兄貴指定 2026-06-12 — 楷書 SVG は 1.25em 連動で 25px */
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
   color: var(--sumi-text-3);
   background: transparent;
   border: 1px solid transparent;
   border-radius: 4px;
-  padding: 8px 14px 9px;
+  padding: 8px 8px 9px;
   margin-bottom: 0;
   transition: color .15s ease, background .15s ease, border-color .15s ease, box-shadow .2s ease, transform .2s ease;
 }
@@ -798,6 +803,10 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   font-family: var(--f-display-title);
 }
 
+/* en/vi label 長文 (Combat Cadence / Chiến Luật 等) tab fit 用 font-size 縮小 (2026-06-18 兄貴指示)。
+   ja は KAISHO SVG (1.25em 連動 25px) のため 20px keep。 zh/ko は短文で fit 済 = 影響無。 */
+html[lang="en"] .wwm-ws-tab,
+html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
 .wwm-ws-tab:hover { color: var(--sumi-fg); background: rgba(242,234,212,0.06); }
 .wwm-ws-tab[aria-selected="true"] {
   color: var(--kami-fg);
