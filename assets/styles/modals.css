@@ -2570,7 +2570,10 @@
   display: block;
   width: 100%;
   font-family: var(--f-display-title, inherit);
+  z-index: 10;
 }
+/* 開時は兄弟 (Tier select 等) より手前に出す = 兄弟 stacking 兄弟の高 z-index に勝つ */
+.ic-select[aria-expanded="true"] { z-index: 200; }
 .ic-select-trigger {
   display: flex;
   align-items: center;
