@@ -136,6 +136,7 @@
           </label>
           <button type="button" class="wwm-opt-btn" id="wwmOptToggleAll" title="${T_.optToggleAllTip||'全選択/全解除 切替'}">☑</button>
           <button type="button" class="wwm-opt-btn wwm-opt-btn-apply" id="wwmOptApplyAll">${T_.optApplySelected||'選択適用'}</button>
+          <button type="button" class="wwm-opt-btn" id="wwmOptRerun" title="${T_.optRerunTip||'再計算'}">↻</button>
         </div>
       </div>
       <div class="wwm-opt-progress" id="wwmOptProgress"></div>
@@ -159,6 +160,9 @@
         const sel = (_OPT_LAST_STEPS || []).filter((_, i) => checkedIdxs.includes(i));
         _applyOptSteps(sel);
       });
+      // 再計算 button = 兄貴 2026-06-18: 目標値変更後 baseline 不整合等で「改善なし」 出た時の手動 trigger
+      const rrEl = root.querySelector('#wwmOptRerun');
+      if (rrEl) rrEl.addEventListener('click', () => renderOptimization(roleInfo, params));
       const sortEl = root.querySelector('#wwmOptSort');
       if (sortEl) sortEl.querySelectorAll('.wwm-opt-sort-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -184,7 +188,7 @@
     _bindControls();
     // 計算中: ヘッダ入力 (目標ratio / minDelta / slotFilter / 再計算) を一時 disable
     // → 中間状態で別ratio入力 → 結果startScoreがズレる/baseline壊れる バグ防止
-    ['#wwmOptRatio', '#wwmOptApplyAll', '#wwmOptToggleAll'].forEach(sel => {
+    ['#wwmOptRatio', '#wwmOptApplyAll', '#wwmOptToggleAll', '#wwmOptRerun'].forEach(sel => {
       const el = root.querySelector(sel);
       if (el) { el.disabled = true; el.classList.add('wwm-opt-busy'); }
     });

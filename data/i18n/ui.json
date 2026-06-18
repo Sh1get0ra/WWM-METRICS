@@ -1539,6 +1539,13 @@
     "ko": "전체 선택/해제 토글",
     "vi": "Chuyển đổi chọn tất cả/bỏ tất cả"
   },
+  "optRerunTip": {
+    "ja": "再計算",
+    "en": "Recalculate",
+    "zh": "重新计算",
+    "ko": "재계산",
+    "vi": "Tính lại"
+  },
   "optComputing": {
     "ja": "計算中...",
     "en": "Computing...",
