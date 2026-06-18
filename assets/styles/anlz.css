@@ -841,7 +841,7 @@ html[lang="vi"] .wwm-cmp-title-en {
 .wwm-anlz-popout-btn {
   padding: 4px 15px;
   font-family: var(--f-display-title); /* lang 動的切替 (2026-06-16) — :lang() 個別 rule 全廃 */
-  font-size: 20px; font-weight: 700; letter-spacing: 0.18em;
+  font-size: 17px; font-weight: 700; letter-spacing: 0.18em; /* tabs nav .wwm-ws-tab font-size に合わせ (兄貴指示 2026-06-18) */
   color: #f0d28a;
   background: none;
   border: 1px solid #f0d28a;
