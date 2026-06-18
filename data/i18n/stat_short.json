@@ -39,5 +39,20 @@
   "stControlMysticDmg":   { "vi": "ST KT Đơn khống" },
   "areaMysticDmg":        { "vi": "ST KT P.vi" },
   "areaDmgMysticDmg":     { "vi": "ST KT P.vi sát" },
-  "areaDebuffMysticDmg":  { "vi": "ST KT P.vi dị" }
+  "areaDebuffMysticDmg":  { "vi": "ST KT P.vi dị" },
+
+  "minBellstrike":        { "vi": "Minh Kim Min" },
+  "maxBellstrike":        { "vi": "Minh Kim Max" },
+  "minStonesplit":        { "vi": "Liệt Thạch Min" },
+  "maxStonesplit":        { "vi": "Liệt Thạch Max" },
+  "minSilkbind":          { "vi": "Khiên Ti Min" },
+  "maxSilkbind":          { "vi": "Khiên Ti Max" },
+  "minBamboocut":         { "vi": "Phá Trúc Min" },
+  "maxBamboocut":         { "vi": "Phá Trúc Max" },
+  "minVoid":              { "vi": "Vô Tướng Min" },
+  "maxVoid":              { "vi": "Vô Tướng Max" },
+  "bellstrikePen":        { "vi": "Xuyên Minh Kim" },
+  "stonesplitPen":        { "vi": "Xuyên Liệt Thạch" },
+  "silkbindPen":          { "vi": "Xuyên Khiên Ti" },
+  "bamboocutPen":         { "vi": "Xuyên Phá Trúc" }
 }
