@@ -2608,6 +2608,14 @@
 .ic-select[aria-expanded="true"] .ic-select-trigger::after {
   transform: translateY(-35%) rotate(-135deg);
 }
+/* read-only (現有列): trigger 風だが popup なし + arrow 非表示 + クリック不可 */
+.ic-readonly .ic-select-trigger { cursor: default; }
+.ic-readonly .ic-select-trigger::after { display: none; }
+.ic-readonly .ic-select-trigger { padding-right: 8px; }
+.ic-readonly .ic-select-trigger:hover {
+  border-color: var(--gold-deep);
+  background: rgba(255, 255, 255, 0.45);
+}
 .ic-select-trigger .ic-name {
   font-size: 14px;
   flex: 1;

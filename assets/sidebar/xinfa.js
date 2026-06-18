@@ -413,7 +413,12 @@
           <div class="wwm-cmp-grid">
             <div class="wwm-cmp-col wwm-cmp-current">
               <h3 class="wwm-cmp-title" data-seal="${_T.cmpCurrent||'現有'}"><span class="wwm-cmp-title-text">${_T.cmpCurrent||'現有'}</span></h3>
-              <div class="wwm-cmp-kongfu-header">${origName}</div>
+              ${window.WWMSidebar.iconSelect.renderReadonly({
+                className: 'wwm-cmp-kongfu-select',
+                name: origName,
+                iconUrl: window.WWM_XINFA_ICONS?.[origPassive[slotIdx]]?.icon_url || null,
+                iconType: 'inkbox'
+              })}
               <div class="wwm-cmp-set-header">Tier ${origTier}</div>
               <div class="wwm-cmp-rows wwm-cmp-xinfa-rows">${_effectsText(origPassive[slotIdx], origTier)}</div>
             </div>

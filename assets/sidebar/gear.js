@@ -468,15 +468,26 @@
     const m = document.createElement('div');
     m.className = 'wwm-modal-backdrop';
     const bgIconHtml = bgIconResolvedUrl ? `<div class="wwm-cmp-bg-icon" style="background-image: url('${bgIconResolvedUrl}');"></div>` : '';
-    // panel 内 kongfu header HTML
+    // panel 内 kongfu header HTML。 現有 = icon-select の read-only 形式で新置と row 高揃え
     const curKongfuHeader = isWeaponSlot && origKongfuId
-      ? `<div class="wwm-cmp-kongfu-header">${_kfName(origKongfuId)}</div>` : '';
+      ? window.WWMSidebar.iconSelect.renderReadonly({
+          className: 'wwm-cmp-kongfu-select',
+          name: _kfName(origKongfuId),
+          iconUrl: window.WWM_KONGFU_ICONS?.[origKongfuId]?.pic_url || null,
+          iconType: 'inkbox'
+        })
+      : '';
     const newKongfuHeader = isWeaponSlot
       ? window.WWMSidebar.iconSelect.render({ id: 'wwmCmpKongfuSel', className: 'wwm-cmp-kongfu-select', ..._kongfuIconOptions(newKongfuId) })
       : '';
-    // panel 内 set header HTML
+    // panel 内 set header HTML。 現有 = renderReadonly + 直下に effect 行
     const curSetHeader = isSetEditable && origSuffix
-      ? `<div class="wwm-cmp-set-header" title="${_setRaw(origSuffix)}">${_setName(origSuffix)}<div class="wwm-cmp-set-effect">${_setRaw(origSuffix)}</div></div>` : '';
+      ? `${window.WWMSidebar.iconSelect.renderReadonly({
+          className: 'wwm-cmp-set-select',
+          name: _setName(origSuffix),
+          iconUrl: (window.WWMSidebar.icons.liupaiUrlById && setsMap[origSuffix]) ? window.WWMSidebar.icons.liupaiUrlById(setsMap[origSuffix].liupaiId) : null,
+          iconType: 'plain'
+        })}<div class="wwm-cmp-set-effect" title="${_setRaw(origSuffix)}">${_setRaw(origSuffix)}</div>` : '';
     const newSetHeader = isSetEditable
       ? `${window.WWMSidebar.iconSelect.render({ id: 'wwmCmpSetSel', className: 'wwm-cmp-set-select', ..._setIconOptions(newSuffix) })}<div class="wwm-cmp-set-effect" id="wwmCmpSetEffect">${_setRaw(newSuffix)}</div>` : '';
     m.innerHTML = `

@@ -129,5 +129,19 @@
     });
   }
 
-  window.WWMSidebar.iconSelect = { render, attach, getValue, setValue };
+  // 現有列 等の read-only 表示用 (popup なし、 trigger 風 HTML のみ)。
+  // opts = { iconUrl, name, iconType: 'inkbox'|'plain', className }
+  function renderReadonly(opts) {
+    const cls = opts.className ? ' ' + _esc(opts.className) : '';
+    const chip = _renderChip({ iconUrl: opts.iconUrl, iconType: opts.iconType });
+    return `
+      <div class="ic-select ic-readonly${cls}" aria-disabled="true">
+        <div class="ic-select-trigger" role="presentation">
+          ${chip}<span class="ic-name">${_esc(opts.name || '')}</span>
+        </div>
+      </div>
+    `;
+  }
+
+  window.WWMSidebar.iconSelect = { render, attach, getValue, setValue, renderReadonly };
 })();
