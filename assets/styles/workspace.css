@@ -571,6 +571,9 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 .hero-wuxia .pwr {
   margin-top: 2px; font-family: var(--f-latin); font-weight: 600; font-size: 11px;
   letter-spacing: 0.1em; color: var(--sumi-text-3);
+  /* Tier badge (inline-block .hero-tier) が pwr 行末で wrap し次行へ落ちる事故防止 (2026-06-18 兄貴指示)。
+     viewport 狭幅 = text 折返より badge keep 優先 (兄貴明示)。 行 overflow は同行内処理。 */
+  white-space: nowrap;
 }
 .hero-wuxia .pwr b { font-family: var(--f-latin); font-size: 14px; color: var(--gold-bright); margin-left: 6px; }
 .hero-wuxia .seat-sub { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--sumi-ink-1); }
