@@ -1056,6 +1056,20 @@
     "ko": "적용",
     "vi": "Áp dụng"
   },
+  "cmpShouon": {
+    "ja": "同級承音",
+    "en": "Same-Tier Orchestration",
+    "zh": "同阶承音",
+    "ko": "동일 등급 승음",
+    "vi": "Thừa Âm cùng bậc"
+  },
+  "cmpShouonTitle": {
+    "ja": "新置の調律1〜5を 同級承音 (MAX×94%) で一括置換",
+    "en": "Set tunings 1-5 to Same-Tier Orchestration (94% of MAX)",
+    "zh": "新置调律1〜5 一键置换为 同阶承音 (MAX × 94%)",
+    "ko": "신규 조율 1〜5 를 동일 등급 승음 (MAX×94%) 으로 일괄 치환",
+    "vi": "Đặt điều luật 1-5 của Mới đặt thành Thừa Âm cùng bậc (94% MAX)"
+  },
   "cmpReset": {
     "ja": "復元",
     "en": "Revert",

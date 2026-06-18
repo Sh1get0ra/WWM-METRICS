@@ -446,6 +446,7 @@
               <h3 class="wwm-cmp-title" data-seal="${(window.T&&T.cmpCurrent)||'現有'}"><span class="wwm-cmp-title-text">${(window.T&&T.cmpCurrent)||'現有'}</span>${origEq?.exVo?._inferredLv ? `<span class="wwm-cmp-lv">Lv${origEq.exVo._inferredLv}</span>` : ''}</h3>
               ${curKongfuHeader}
               ${curSetHeader}
+              ${isAffixEditable ? `<div class="wwm-cmp-shouon-row" aria-hidden="true" style="visibility:hidden;"><button type="button" class="wwm-cmp-shouon-btn" tabindex="-1">${(window.T&&T.cmpShouon)||'同級承音'}</button></div>` : ''}
               ${isAffixEditable ? `<div class="wwm-cmp-rows">${renderCurrentRows()}</div>` : ''}
             </div>
             <div class="wwm-cmp-divider"></div>
@@ -465,6 +466,7 @@
               })()}</h3>
               ${newKongfuHeader}
               ${newSetHeader}
+              ${isAffixEditable ? `<div class="wwm-cmp-shouon-row"><button type="button" id="wwmEditShouon" class="wwm-cmp-shouon-btn" title="${(window.T&&T.cmpShouonTitle)||'新置の調律1〜5を MAX×94% に一括置換'}">${(window.T&&T.cmpShouon)||'同級承音'}</button></div>` : ''}
               ${isAffixEditable ? `<div class="wwm-cmp-rows" id="wwmCmpNewRows">${renderNewRows()}</div>` : ''}
             </div>
           </div>
@@ -1034,6 +1036,34 @@
           if (f) _applyOcr(f);
         });
       }
+    }
+
+    // 承音化: 新置 affix#1〜#5 (idx 0-4) を 現Lv MAX × 0.94 に一括置換 (idx 5 = 定音#6 除外)
+    const shouonBtn = m.querySelector('#wwmEditShouon');
+    if (shouonBtn) {
+      shouonBtn.addEventListener('click', async () => {
+        await _loadEquipMax();
+        const _curLv = WWMState.virtual.gear?.[slot]?.exVo?._inferredLv
+          ?? origEq?.exVo?._inferredLv ?? charLv;
+        const tier = _lvToTier(_curLv);
+        const maxTbl = _getCachedEquipMax()?.tiers?.[tier] || {};
+        for (let i = 0; i < 5; i++) {
+          const d = newAffixes[i]?.equipmentDetails;
+          if (!Array.isArray(d) || d.length < 2) continue;
+          const info = window.WWM_AFFIX?.[d[0]];
+          const sk = info?.statKey;
+          if (!sk) continue;
+          const maxKey = _STAT_TO_MAX_KEY[sk] || sk;
+          const maxVal = maxTbl[maxKey];
+          if (maxVal == null) continue;
+          d[1] = +(maxVal * 0.94).toFixed(4);
+          d[2] = 0.94;
+          d[3] = _deriveRank(0.94);
+        }
+        const rowsEl = m.querySelector('#wwmCmpNewRows');
+        if (rowsEl) { rowsEl.innerHTML = renderNewRows(); _bindRowEvents(); }
+        _schedulePreview();
+      });
     }
 
     m.querySelector('#wwmEditApply').addEventListener('click', () => {

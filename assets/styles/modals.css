@@ -2429,6 +2429,34 @@
 }
 .wwm-ocr-btn:hover { border-color: var(--vermilion); }
 .wwm-ocr-btn:disabled { opacity: 0.5; cursor: progress; }
+/* 同級承音 ボタン: 新置 panel 内、 affix rows の直上に独立行 (新置 affix#1〜#5 を MAX×0.94 一括置換)
+   font/枠 = footer ボタン (cmpApply 系) と同系統 楷書 + 控えめ sub-action 寸法 */
+.wwm-cmp-shouon-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: 6px 0 8px;
+}
+.wwm-cmp-shouon-btn {
+  padding: 5px 14px;
+  min-height: 28px;
+  font-family: var(--f-display-title);
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0.10em;
+  background: var(--sumi-2);
+  color: var(--sumi-fg);
+  border: 1px solid var(--sumi-2);
+  border-radius: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.wwm-cmp-shouon-btn:hover {
+  background: var(--vermilion);
+  border-color: var(--vermilion);
+  color: var(--sumi-fg);
+}
 .wwm-ocr-status {
   margin-left: 6px;
   font-size: 11px;
