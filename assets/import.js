@@ -185,8 +185,8 @@ async function openPreviewModal(data, importedAt, savedState) {
       <div class="wwm-preview-summary">${detailHtml}</div>
     `;
     footer.innerHTML = `
-      <button class="wwm-btn-secondary" id="wwmCancelBtn">${(window.T && T.importCancelBtn) || 'キャンセル'}</button>
       <button class="wwm-btn-primary" id="wwmNextBtn">${(window.T && T.importNextBtn) || '次へ'}</button>
+      <button class="wwm-btn-secondary" id="wwmCancelBtn">${(window.T && T.importCancelBtn) || 'キャンセル'}</button>
     `;
     footer.querySelector('#wwmCancelBtn').addEventListener('click', () => m.remove());
     footer.querySelector('#wwmNextBtn').addEventListener('click', renderStep2);
@@ -200,7 +200,6 @@ async function openPreviewModal(data, importedAt, savedState) {
     if (_navRow) footer.appendChild(_navRow);
     _attachEnhanceArsenalEvents(body, state);
     m.querySelector('#wwmBackBtn').addEventListener('click', renderStep1);
-    m.querySelector('#wwmCancelBtn').addEventListener('click', () => m.remove());
     m.querySelector('#wwmApplyBtn').addEventListener('click', () => {
       const msg = (window.T && T.importConfirmMsg) || '現在設定されている数値がインポートデータに差し変わりますがよろしいですか？';
       if (!confirm(msg)) return;
@@ -382,9 +381,8 @@ function renderEnhanceArsenalForm(state, roleInfo) {
       <div class="wwm-arsenal-tiers">${tierRows}</div>
     </div>
     <div class="wwm-btn-row" style="margin-top:16px;">
-      <button class="wwm-btn-secondary" id="wwmBackBtn">${T0.importBackBtn || '戻る'}</button>
       <button class="wwm-btn-primary" id="wwmApplyBtn">${T0.importApplyBtn || 'インポート実行'}</button>
-      <button class="wwm-btn-secondary" id="wwmCancelBtn">${T0.importCancelBtn || 'キャンセル'}</button>
+      <button class="wwm-btn-secondary" id="wwmBackBtn">${T0.importBackBtn || '戻る'}</button>
     </div>
   `;
 }
@@ -486,8 +484,8 @@ function _renderEquipSlot(slot, eq) {
   return `
     <div class="wwm-equip-slot" data-slot="${slot}">
       <div class="wwm-equip-slot-header"><b>${slotLabel}</b>${setName ? ` <span class="wwm-muted">- ${setName}</span>` : ''}</div>
-      ${baseAttrsHtml ? `<div class="wwm-equip-base"><b>${(window.T&&T.importBaseStats)||'基本ステータス'}</b><ul class="wwm-list">${baseAttrsHtml}</ul></div>` : ''}
-      ${affixHtml ? `<div class="wwm-equip-affix"><b>${(window.T&&T.importSubStats)||'副ステータス'}</b><ul class="wwm-list">${affixHtml}</ul></div>` : ''}
+      ${baseAttrsHtml ? `<div class="wwm-equip-base"><ul class="wwm-list">${baseAttrsHtml}</ul></div>` : ''}
+      ${affixHtml ? `<div class="wwm-equip-affix"><ul class="wwm-list">${affixHtml}</ul></div>` : ''}
     </div>
   `;
 }
@@ -645,24 +643,20 @@ function _fmtAffixValShort(v) {
 }
 
 function renderPreviewDetail(s, d) {
-  const xin = s.passiveSlots || [];
   const T_=window.T||{};
-  const _xL=T_.importLabelXinfa||'心法';
+  // 心法1〜4 は Step2 で見れるため preview からは廃止 (2026-06-18 兄貴指示)。
+  // 配置 = 行1: UID / キャラ名 (col3 空) / 行2: 主武術 / 副武術 / 総合武力。
   return `
     <div class="wwm-info-grid">
       <div class="wwm-info-col">
         ${s.uid ? `<div class="wwm-info-row"><span class="wwm-info-label">${T_.importLabelUID||'UID'}</span><span class="wwm-info-val">${s.uid}</span></div>` : ''}
-        <div class="wwm-info-row"><span class="wwm-info-label">${T_.importLabelCharName||'キャラ名'}</span><span class="wwm-info-val">${s.roleName} (Lv ${s.level})</span></div>
         <div class="wwm-info-row"><span class="wwm-info-label">${T_.importLabelMainKf||'主武術'}</span><span class="wwm-info-val">${_kongfuName(s.kongfuMain)}</span></div>
+      </div>
+      <div class="wwm-info-col">
+        <div class="wwm-info-row"><span class="wwm-info-label">${T_.importLabelCharName||'キャラ名'}</span><span class="wwm-info-val">${s.roleName} (Lv ${s.level})</span></div>
         <div class="wwm-info-row"><span class="wwm-info-label">${T_.importLabelSubKf||'副武術'}</span><span class="wwm-info-val">${_kongfuName(s.kongfuSub)}</span></div>
       </div>
-      <div class="wwm-info-col">
-        <div class="wwm-info-row"><span class="wwm-info-label">${_xL} 1</span><span class="wwm-info-val">${_xinfaName(xin[0])}</span></div>
-        <div class="wwm-info-row"><span class="wwm-info-label">${_xL} 2</span><span class="wwm-info-val">${_xinfaName(xin[1])}</span></div>
-        <div class="wwm-info-row"><span class="wwm-info-label">${_xL} 3</span><span class="wwm-info-val">${_xinfaName(xin[2])}</span></div>
-        <div class="wwm-info-row"><span class="wwm-info-label">${_xL} 4</span><span class="wwm-info-val">${_xinfaName(xin[3])}</span></div>
-      </div>
-      <div class="wwm-info-col">
+      <div class="wwm-info-col wwm-info-col-end">
         <div class="wwm-info-row"><span class="wwm-info-label">${T_.importLabelXiuwei||'総合武力'}</span><span class="wwm-info-val">${s.xiuWeiKungFu} / ${s.maxXiuWeiKungFu}</span></div>
       </div>
     </div>

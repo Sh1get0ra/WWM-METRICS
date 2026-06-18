@@ -162,7 +162,7 @@
   --c-step2--muted-opacity:        0.95;
   --bg-step2--num-input:         var(--shine-strong);
   --c-step2--arsenal-tier-border:  1px solid rgba(120,60,20,0.3);
-  --bg-step2--arsenal-tier:      rgba(255,240,210,0.4);
+  --bg-step2--arsenal-tier:      rgba(58,38,22,0.14);  /* 紙地で視認可能な墨弱トーン (shade-mid 同値、 2026-06-18) */
 
   /* opt cluster */
   --c-opt-loading-fg:              var(--gold-deep);

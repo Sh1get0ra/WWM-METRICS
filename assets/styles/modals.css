@@ -135,7 +135,7 @@
 .wwm-muted { opacity: 0.6; font-size: var(--text-12); }
 .wwm-last-import {
   margin-top: var(--space-4); padding: var(--space-2-5);
-  background: var(--shine-trace);
+  background: var(--shade-mid);
   border-radius: 6px;
   border-left: 3px solid var(--accent);
 }
@@ -164,6 +164,48 @@
 .wwm-stat-name { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .wwm-stat-val { font-weight: var(--fw-bold); white-space: nowrap; text-align: right; flex-shrink: 0; }
 .wwm-stat-pct { font-weight: var(--fw-normal); opacity: 0.65; font-size: var(--text-xs); }
+
+/* ── インポートプレビュー row 視認性 up (2026-06-18 兄貴指示 TODO 2):
+   既存 gear.css slot box (5列 grid + 紙地グラデ + 朱左 border) keep、 dim 廃止 + 値強調 + row dashed 区切りのみ追加 ── */
+.wwm-preview-summary .wwm-equip-slot-header .wwm-muted {
+  opacity: 1;
+  color: var(--text-sumi-gold, currentColor);
+  font-size: var(--text-sm);
+}
+.wwm-preview-summary .wwm-equip-base ul li,
+.wwm-preview-summary .wwm-equip-affix ul li {
+  padding: 3px 0;
+  border-bottom: 1px dashed color-mix(in oklab, var(--gold) 28%, transparent);
+}
+.wwm-preview-summary .wwm-equip-base ul li:last-child,
+.wwm-preview-summary .wwm-equip-affix ul li:last-child {
+  border-bottom: none;
+}
+.wwm-preview-summary .wwm-stat-val {
+  color: var(--kami-fg);
+  font-weight: var(--fw-bold);
+}
+.wwm-preview-summary .wwm-stat-pct {
+  opacity: 1;
+  color: var(--text-sumi-gold, currentColor);
+}
+/* 基本/副ステ ラベル削除 (2026-06-18 兄貴指示) → 代わりに区切り罫線 */
+.wwm-preview-summary .wwm-equip-affix {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid color-mix(in oklab, var(--gold) 32%, transparent);
+}
+/* preview 内 info ラベル (UID/キャラ名/主副武術/総合武力) dim 廃止 + gold 化 */
+.wwm-preview-summary + * .wwm-info-label,
+.wwm-preview-summary .wwm-info-label,
+#wwmCardBody .wwm-info-label {
+  opacity: 1;
+  color: var(--text-sumi-gold, currentColor);
+}
+/* 総合武力 = col3 を 2 行目 (主武術/副武術 と同行) に下寄せ */
+.wwm-preview-summary .wwm-info-col-end {
+  align-self: end;
+}
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
      SECTION 13 — SETUP MODAL WIZARD
