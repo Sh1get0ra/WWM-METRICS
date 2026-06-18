@@ -684,7 +684,7 @@
         valInp.dataset.pctmul = _pctNeedsMul(sk) ? '1' : '0';
         valInp.step = '0.1';
         // max 属性 更新 (equip_max table 優先 / fallback orig val/ratio)
-        let maxInt = _getAffixMax(sk, (origRi?.level || 95));
+        let maxInt = _getAffixMax(sk, _curNewLv());
         if (maxInt == null) {
           const origDet2 = origEq.exVo?.baseAffixes?.[idx]?.equipmentDetails;
           const origInfo2 = origDet2?.[0] != null ? window.WWM_AFFIX?.[origDet2[0]] : null;
