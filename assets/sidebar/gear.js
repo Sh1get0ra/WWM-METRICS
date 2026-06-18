@@ -657,6 +657,9 @@
     if (lvSel) {
       lvSel.addEventListener('change', () => _applyNewLv(parseInt(lvSel.value, 10)));
     }
+    // 装備個別 Lv (new 列 select 値)。 affix 値 input の MAX clamp は charLv でなく
+    // 装備 Lv 連動 (Lv86 武器を Lv91 上限で入力許容 = 物理不可能、 2026-06-18 兄貴指摘)
+    const _curNewLv = () => parseInt(lvSel?.value, 10) || charLv;
     // 初回 preview
     _schedulePreview();
 
@@ -772,7 +775,7 @@
             // 初期値 = MAX × 0.9 (新 stat の max から)
             const newInfo = window.WWM_AFFIX?.[newId];
             const newSk = newInfo?.statKey;
-            const newMax = _getAffixMax(newSk, charLv);
+            const newMax = _getAffixMax(newSk, _curNewLv());
             if (newMax != null) {
               d[1] = newMax * 0.9;
               d[2] = 0.9;
@@ -803,7 +806,7 @@
             const raw = parseFloat(el.value) || 0;
             let internal = (isPct && needsMul) ? raw / 100 : raw;
             const curSk = window.WWM_AFFIX?.[d[0]]?.statKey;
-            let max = _getAffixMax(curSk, charLv);
+            let max = _getAffixMax(curSk, _curNewLv());
             if (max == null) {
               const origDet = origEq.exVo?.baseAffixes?.[idx]?.equipmentDetails;
               const origInfoVal = origDet?.[0] != null ? window.WWM_AFFIX?.[origDet[0]] : null;
@@ -882,7 +885,7 @@
             const sk = window.WWM_AFFIX?.[d[0]]?.statKey;
             let internal = r.value;
             if (_isPctStat(sk) && _pctNeedsMul(sk)) internal = r.value / 100;
-            const mx = _getAffixMax(sk, charLv);
+            const mx = _getAffixMax(sk, _curNewLv());
             const overMax = (mx != null && internal > mx);   // 論理検証: MAX 超過 = 誤読確定 (clamp せず朱枠で人に渡す)
             d[1] = internal;
             d[2] = (mx && mx > 0) ? Math.min(1, internal / mx) : 0.9;
