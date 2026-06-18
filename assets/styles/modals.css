@@ -2500,40 +2500,142 @@
   color: var(--sumi-fg);
 }
 
-/* ── 格析対照 modal (ゼロベース比較、 2026-06-18 TODO 1) ── */
-.wwm-zb-body { padding: 4px 0; min-height: 200px; }
-/* modal 高さオーバーフロー時 = 内容スクロール可能化 (8 slot × 6 affix で縦長) */
-.wwm-cmp-modal-a .wwm-modal-body { max-height: calc(100vh - 220px); overflow-y: auto; }
-.wwm-cmp-modal-a .wwm-cmp-col { max-height: calc(100vh - 280px); overflow-y: auto; }
-.wwm-zb-score-line {
-  font-family: var(--f-display-title); font-weight: 800;
-  font-size: var(--text-lg); letter-spacing: 0.04em;
-  text-align: center; margin: 6px 0 10px;
-  color: var(--kami-fg);
+/* ── 格析 (ゼロベース比較) anlz subtab panel (2026-06-18 TODO 1) ── */
+#wwmZerobase .wwm-zb-panel {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 8px;
+  /* height = .wwm-analysis-card 570px (装備最適化 panel と統一) */
 }
-.wwm-zb-delta { font-size: var(--text-sm); margin-left: 8px; letter-spacing: 0.06em; }
-.wwm-zb-delta.pos { color: var(--vermilion); }
-.wwm-zb-delta.neg { color: var(--sumi-fg-dim); }
-.wwm-zb-slots { display: flex; flex-direction: column; gap: 6px; }
-.wwm-zb-slot {
+/* 測定開始 = panel 中央 */
+#wwmZerobase .wwm-zb-start {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 100%; gap: 20px; padding: 0 40px; text-align: center;
+}
+#wwmZerobase .wwm-zb-start-desc {
+  font-size: var(--text-sm); color: var(--sumi-fg); line-height: 1.6; max-width: 480px;
+}
+#wwmZerobase .wwm-zb-start-btn {
+  padding: 12px 32px; font-size: var(--text-md);
+  font-family: var(--f-display-title); letter-spacing: 0.08em;
+}
+/* 再計算 button = panel 下端右寄せ */
+#wwmZerobase .wwm-zb-rerun-row {
+  display: flex; justify-content: flex-end;
+  padding-top: 6px; border-top: 1px solid color-mix(in oklab, var(--gold) 25%, transparent);
+}
+#wwmZerobase .wwm-zb-rerun-btn {
+  padding: 4px 14px; font-size: var(--text-12);
+  font-family: var(--f-display-title); letter-spacing: 0.08em;
+}
+#wwmZerobase .wwm-zb-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  grid-template-rows: 1fr;
+  gap: 12px;
+  min-height: 0;
+  overflow: hidden;
+}
+#wwmZerobase .wwm-zb-divider {
+  background: color-mix(in oklab, var(--gold) 32%, transparent);
+}
+#wwmZerobase .wwm-zb-col {
+  min-width: 0;
+  display: flex; flex-direction: column;
+  min-height: 0;
+}
+#wwmZerobase .wwm-zb-col-title {
+  font-family: var(--f-display-title);
+  font-size: var(--text-14);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+  text-shadow: 0 0 10px color-mix(in oklab, var(--gold-bright) 25%, transparent);
+  margin: 0 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid color-mix(in oklab, var(--gold) 38%, transparent);
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  flex-shrink: 0;
+}
+#wwmZerobase .wwm-zb-col-title-text { white-space: nowrap; flex-shrink: 0; }
+#wwmZerobase .wwm-zb-col-score {
+  flex: 1; min-width: 0;
+  text-align: center;
+  font-family: var(--f-latin);
+  font-weight: 700;
+  font-size: var(--text-md);
+  letter-spacing: 0.04em;
+  color: var(--sumi-fg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#wwmZerobase .wwm-zb-col-score .wwm-zb-delta {
+  font-size: var(--text-12);
+  letter-spacing: 0.06em;
+  margin-left: 6px;
+}
+#wwmZerobase .wwm-zb-col-score .wwm-zb-delta.pos { color: var(--vermilion); }
+#wwmZerobase .wwm-zb-col-score .wwm-zb-delta.neg { color: var(--sumi-fg-dim); }
+#wwmZerobase .wwm-zb-apply-btn {
+  padding: 4px 12px;
+  min-height: 26px;
+  font-family: var(--f-display-title);
+  font-weight: 800;
+  font-size: var(--text-12);
+  line-height: 1.2;
+  letter-spacing: 0.10em;
+  background: var(--sumi-2);
+  color: var(--sumi-fg);
+  border: 1px solid var(--sumi-2);
+  border-radius: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+#wwmZerobase .wwm-zb-apply-btn:hover:not(:disabled) {
+  background: var(--vermilion);
+  border-color: var(--vermilion);
+  color: var(--sumi-fg);
+}
+#wwmZerobase .wwm-zb-apply-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+#wwmZerobase .wwm-zb-body {
+  flex: 1; min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+#wwmZerobase .wwm-zb-body::-webkit-scrollbar { width: 5px; }
+#wwmZerobase .wwm-zb-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 2px; }
+#wwmZerobase .wwm-zb-slots { display: flex; flex-direction: column; gap: 4px; }
+#wwmZerobase .wwm-zb-slot {
   padding: 4px 6px;
   border-bottom: 1px dashed color-mix(in oklab, var(--gold) 28%, transparent);
 }
-.wwm-zb-slot:last-child { border-bottom: none; }
-.wwm-zb-slot-name {
+#wwmZerobase .wwm-zb-slot:last-child { border-bottom: none; }
+#wwmZerobase .wwm-zb-slot-name {
   font-family: var(--f-display-title); font-weight: 700;
   font-size: var(--text-sm); letter-spacing: 0.06em;
-  color: var(--text-sumi-gold, var(--kami-fg));
   margin-bottom: 2px;
+  color: var(--gold-deep);
 }
-.wwm-zb-affix {
+#wwmZerobase .wwm-zb-affix {
   display: flex; justify-content: space-between; align-items: baseline;
   font-size: var(--text-12); padding: 1px 0;
+  color: var(--sumi-fg);
 }
-.wwm-zb-affix-name {
+#wwmZerobase .wwm-zb-affix-name {
   flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.wwm-zb-affix-val { font-weight: var(--fw-bold); white-space: nowrap; }
+#wwmZerobase .wwm-zb-affix-val { font-weight: var(--fw-bold); white-space: nowrap; color: var(--sumi-fg); }
+@media (max-width: 600px) {
+  #wwmZerobase .wwm-zb-grid { grid-template-columns: 1fr; }
+  #wwmZerobase .wwm-zb-divider { display: none; }
+}
 .wwm-ocr-status {
   margin-left: 6px;
   font-size: 11px;

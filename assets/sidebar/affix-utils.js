@@ -24,6 +24,23 @@
     }
     return (window._AFFIX_DISPLAY_LABELS?.[key]) || key;
   }
+  // 武具対照 / 格析 panel 用 = allWeaponDmg のみ stat.json 集約形 (「全武学/PvP/BOSSダメ」) なので、
+  // stat_display.json の単独正名「全武術効果増加」 に差替えて表示。 bossDmg / playerUnitDmg は
+  // stat.json で元から単独形なので _affixDisplayName と同じ経路で OK。 ranking.js (調律/定音番付) は
+  // _affixDisplayName 使用 = 集約形 keep。
+  function _affixDisplayNameSplit(id, idx) {
+    const info = window.WWM_AFFIX?.[id];
+    const key = info?.statKey;
+    if (!key) {
+      if (idx === 5) return (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
+      return 'オプション#' + id;
+    }
+    if (key === 'allWeaponDmg') {
+      const T = window.T || {};
+      return T['stDisp.dmgBoost.allMartialBoost'] || '全武術効果増加';
+    }
+    return (window._AFFIX_DISPLAY_LABELS?.[key]) || key;
+  }
 
   // 自動判定: 火力寄与statKey true、 防御系 false
   // 会心率 (crit) = 全武器 useful
@@ -331,7 +348,7 @@
         if (hasConflict) continue;
       }
       seen.add(sk);
-      opts.push({ id, statKey: sk, name: (window._AFFIX_DISPLAY_LABELS?.[sk]) || sk });
+      opts.push({ id, statKey: sk, name: _affixDisplayNameSplit(id, idx) });
     }
     opts.sort((a, b) => a.name.localeCompare(b.name, 'ja'));
     // PvE→PvP切替は不可 (上の早期return で逆方向 PvP→PvE も不可。PvE装備と PvP装備の壁を維持)
@@ -342,6 +359,7 @@
   window.WWMSidebar = window.WWMSidebar || {};
   window.WWMSidebar.affix = {
     affixDisplayName: _affixDisplayName,
+    affixDisplayNameSplit: _affixDisplayNameSplit,
     matchKongfuSpecific: _matchKongfuSpecific,
     isUsefulAffix: _isUsefulAffix,
     isPctStat: _isPctStat,

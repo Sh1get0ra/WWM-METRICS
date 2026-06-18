@@ -8,7 +8,7 @@
   // ── 他 module alias ─────────────────────────────────────
   // affix-utils
   const _isUsefulAffix       = window.WWMSidebar.affix.isUsefulAffix;
-  const _affixDisplayName    = window.WWMSidebar.affix.affixDisplayName;
+  const _affixDisplayName    = window.WWMSidebar.affix.affixDisplayNameSplit;
   const _isPctStat           = window.WWMSidebar.affix.isPctStat;
   const _pctNeedsMul         = window.WWMSidebar.affix.pctNeedsMul;
   const _fmtAffixVal         = window.WWMSidebar.affix.fmtAffixVal;

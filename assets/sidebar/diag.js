@@ -9,7 +9,7 @@
   const _loadEquipMax       = window.WWMSidebar.affix.loadEquipMax;
   const _lvToTier           = window.WWMSidebar.affix.lvToTier;
   const _getCachedEquipMax  = window.WWMSidebar.affix.getCachedEquipMax;
-  const _affixDisplayName   = window.WWMSidebar.affix.affixDisplayName;
+  const _affixDisplayName   = window.WWMSidebar.affix.affixDisplayNameSplit;
   const _slotLabelI18n      = window.WWMSidebar.icons.slotLabelI18n;
   // _scoreWithBonus は sidebar.js 内 (gear 系) で定義、 後付け expose
   const _scoreWithBonus = (ri) => window.__WWM_SCORE_WITH_BONUS(ri);

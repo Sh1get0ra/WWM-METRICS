@@ -1063,6 +1063,13 @@
     "ko": "제로베이스",
     "vi": "So sánh nền 0"
   },
+  "anlzTabZerobase": {
+    "ja": "外功vs属性",
+    "en": "Phys vs Elem",
+    "zh": "外功vs属性",
+    "ko": "외공vs속성",
+    "vi": "Ngoại công vs Thuộc tính"
+  },
   "optZerobaseCompareTip": {
     "ja": "武器系 affix#6 = 無相貫通/外功貫通 固定 で並列比較 (属性 vs 物理)",
     "en": "Compare weapon affix#6 fixed to Void Pen vs Phys Pen (element vs physical)",
@@ -1078,18 +1085,18 @@
     "vi": "Đối chiếu Nền 0"
   },
   "optZerobaseVoid": {
-    "ja": "無相貫通固定",
-    "en": "Void Pen Fixed",
-    "zh": "无相穿透固定",
-    "ko": "무상관통 고정",
-    "vi": "Cố định Xuyên Vô Tướng"
+    "ja": "属性特化ビルド",
+    "en": "Element Build",
+    "zh": "属性特化构筑",
+    "ko": "속성 특화 빌드",
+    "vi": "Build Thuộc tính"
   },
   "optZerobasePhys": {
-    "ja": "外功貫通固定",
-    "en": "Phys Pen Fixed",
-    "zh": "外功穿透固定",
-    "ko": "외공관통 고정",
-    "vi": "Cố định Xuyên Ngoại Công"
+    "ja": "外功特化ビルド",
+    "en": "Phys Build",
+    "zh": "外功特化构筑",
+    "ko": "외공 특화 빌드",
+    "vi": "Build Ngoại công"
   },
   "optZerobaseCalc": {
     "ja": "計算中…",
@@ -1132,6 +1139,27 @@
     "zh": "已采用零基础配置",
     "ko": "제로베이스 구성 적용 완료",
     "vi": "Đã áp dụng cấu hình nền 0"
+  },
+  "optZerobaseStart": {
+    "ja": "測定開始",
+    "en": "Start Measurement",
+    "zh": "开始测定",
+    "ko": "측정 시작",
+    "vi": "Bắt đầu đo"
+  },
+  "optZerobaseStartDesc": {
+    "ja": "ゼロベースで装備 affix の最適配置を 2 パターン (属性特化 / 外功特化) 並列計算します。計算に十秒〜数十秒かかります。",
+    "en": "Calculate optimal affix builds (Element / Phys) in parallel from zero base. Takes 10-30 seconds.",
+    "zh": "从零基础并列计算装备 affix 的最优配置 2 模式 (属性特化 / 外功特化)。计算需 10-30 秒。",
+    "ko": "제로베이스로 장비 affix 최적 배치를 2 패턴 (속성/외공 특화) 병렬 계산. 10-30초 소요.",
+    "vi": "Tính cấu hình affix tối ưu (Thuộc tính / Ngoại công) song song từ nền 0. Mất 10-30 giây."
+  },
+  "optZerobaseRerun": {
+    "ja": "再計算",
+    "en": "Recompute",
+    "zh": "重新计算",
+    "ko": "재계산",
+    "vi": "Tính lại"
   },
   "cmpShouon": {
     "ja": "同級承音",

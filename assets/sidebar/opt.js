@@ -9,7 +9,7 @@
   const _getAffixOptions   = window.WWMSidebar.affix.getAffixOptions;
   const _getAffixMax       = window.WWMSidebar.affix.getAffixMax;
   const _SLOT6_ARMOR       = window.WWMSidebar.affix.SLOT6_ARMOR;
-  const _affixDisplayName  = window.WWMSidebar.affix.affixDisplayName;
+  const _affixDisplayName  = window.WWMSidebar.affix.affixDisplayNameSplit;
   const _loadEquipMax      = window.WWMSidebar.affix.loadEquipMax;
   const _slotLabelI18n     = window.WWMSidebar.icons.slotLabelI18n;
   const _curLang           = window.WWMSidebar.anlz.curLang;
@@ -117,7 +117,7 @@
     // ratio=1.0 (= OP 100%×6種) は ゲーム仕様上 ほぼ不可能 → best基準厳しすぎる。
     // ユーザーが ratio=0.9 設定後 再import すると best が低い値で固定され、 Tier判定が緩くなるバグ防止。
     const TARGET_RATIO = WWMState.opt.locked ? (opts.ratio ?? savedRatio) : 0.95;
-    const MAX_ITER = 20; // best=null で自動停止、上限保険
+    const MAX_ITER = 40; // best=null で自動停止、上限保険 (2026-06-18 計算高速化に伴い 20→40)
     // 微改善打切閾値 (localStorage 永続化、UI で変更可)
     if (typeof window._OPT_MIN_DELTA === 'undefined' || window._OPT_MIN_DELTA == null) {
       try { window._OPT_MIN_DELTA = parseInt(localStorage.getItem('wwm_opt_min_delta_v1'), 10) || 5; } catch(_) { window._OPT_MIN_DELTA = 5; }
@@ -139,7 +139,6 @@
           <label class="wwm-opt-ratio-label" title="${T_.optMinDeltaTip||'これ未満のΔで打切'}">Δ<input type="number" id="wwmOptMinDelta" min="2" max="50" step="1" value="${window._OPT_MIN_DELTA}" style="width:40px;background:var(--shade-mid);color:var(--sumi-fg);border:1px solid var(--ink-2);border-radius:3px;padding:2px 4px;font-family:var(--f-latin);"></label>
           <button type="button" class="wwm-opt-btn" id="wwmOptToggleAll" title="${T_.optToggleAllTip||'全選択/全解除 切替'}">☑</button>
           <button type="button" class="wwm-opt-btn wwm-opt-btn-apply" id="wwmOptApplyAll">${T_.optApplySelected||'選択適用'}</button>
-          <button type="button" class="wwm-opt-btn" id="wwmOptZerobaseCompare" title="${T_.optZerobaseCompareTip||'武器系 affix#6 = 無相貫通/外功貫通 固定 で並列比較'}">${T_.optZerobaseCompare||'格析'}</button>
         </div>
       </div>
       <div class="wwm-opt-progress" id="wwmOptProgress"></div>
@@ -192,8 +191,6 @@
         cbs.forEach(cb => { cb.checked = anyUnchecked; });
         tgEl.textContent = anyUnchecked ? '☐' : '☑';
       });
-      const zbEl = root.querySelector('#wwmOptZerobaseCompare');
-      if (zbEl) zbEl.addEventListener('click', () => _openZerobaseCompareModal(roleInfo));
     }
     // 計算中表示
     root.innerHTML = `<div class="wwm-analysis-card wwm-modal-square"><div class="wwm-modal-bg-icon" style="background-image:url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b3eed7ba50118c397aMSc1Axt605.png');"></div>${headerHtml}<div class="wwm-opt-loading">${(window.T?.optComputing) || '計算中...'}</div></div>`;
@@ -578,8 +575,9 @@
       }
     }
 
-    // 1. 95% fix base: 全 affix value を max × TARGET_RATIO に統一 (over のみ下げ、 under は keep)
-    // 弓ペア (21/9) = affix touch せず suffix 0 化 (= bow swap で改めて選定)
+    // 1. ゼロベース起点 (兄貴指示 2026-06-18 = 「装備が実質空の状態」):
+    //    全 affix value 0 化 = 兄貴の現状 value 完全無視。 keep は 武器/防具 set 効果 (suffix) + 武術 (kongfu) + 装備本体 baseAttrs のみ。
+    //    弓ペア (21/9) = affix touch せず suffix 0 化 (= 後段の bow suffix swap で再選定)
     const BOW_PAIR = new Set(['21', '9']);
     for (const sl of Object.keys(trueMaxRi.wearEquipsDetailed || {})) {
       const ba = trueMaxRi.wearEquipsDetailed[sl]?.exVo?.baseAffixes || [];
@@ -590,12 +588,8 @@
       for (let i = 0; i < ba.length; i++) {
         const det = ba[i]?.equipmentDetails;
         if (!det) continue;
-        const sk = window.WWM_AFFIX?.[det[0]]?.statKey;
-        const mv = sk ? _affixUtil.getAffixMax(sk, charLv) : null;
-        if (mv != null) {
-          const target = mv * TARGET_RATIO;
-          if (det[1] > target) { det[1] = target; det[2] = TARGET_RATIO; }
-        }
+        det[1] = 0;
+        det[2] = 0;
       }
     }
 
@@ -623,6 +617,36 @@
     if (!maxState.xinfaTiers) maxState.xinfaTiers = {};
     for (let i = 0; i < 4; i++) { maxState.xinfaTiers[i] = 6; maxState.xinfaTiers[String(i)] = 6; }
 
+    // 3.5. 弓 suffix swap (iter loop 前 = 通常 opt 同 logic: 弓セット先確定)
+    // = bow set 全候補試行で score 最良の suffix 採用 → iter loop は「最良 bow set 環境下」 で affix 最適化
+    const bowSets = window.WWM_SETS?.bowSets;
+    async function _bowSuffixSwapEval() {
+      if (!bowSets) return;
+      if (!trueMaxRi.wearEquipsDetailed['21']?.exVo || !trueMaxRi.wearEquipsDetailed['9']?.exVo) return;
+      let baseScore = 0;
+      try {
+        const p = await window.WWMStats.buildStatParams(trueMaxRi, maxState);
+        window.computeExpected(p);
+        baseScore = _scoreWithBonus(trueMaxRi);
+      } catch (_) {}
+      let bestSfx = trueMaxRi.wearEquipsDetailed['21'].exVo.suffix, bestDelta = 0;
+      for (const sfx of Object.keys(bowSets)) {
+        const sfxInt = parseInt(sfx, 10);
+        trueMaxRi.wearEquipsDetailed['21'].exVo.suffix = sfxInt;
+        trueMaxRi.wearEquipsDetailed['9'].exVo.suffix = sfxInt;
+        try {
+          const p = await window.WWMStats.buildStatParams(trueMaxRi, maxState);
+          window.computeExpected(p);
+          const sc = _scoreWithBonus(trueMaxRi);
+          const delta = sc - baseScore;
+          if (delta > bestDelta) { bestSfx = sfxInt; bestDelta = delta; }
+        } catch (_) {}
+      }
+      trueMaxRi.wearEquipsDetailed['21'].exVo.suffix = bestSfx;
+      trueMaxRi.wearEquipsDetailed['9'].exVo.suffix = bestSfx;
+    }
+    await _bowSuffixSwapEval();
+
     // 4. iter 反復 = 各 slot 各 idx で「同 statKey value 更新」 + 「他 statKey swap」 評価 → 最大 delta 採用 → 反復
     // 武器系 idx5 (override 指定時) = 固定 = swap 評価 skip
     const MAX_ITER = 80;
@@ -647,8 +671,13 @@
             baseScore = _scoreWithBonus(trueMaxRi);
           } catch (_) {}
           const candidates = [];
-          if (curStatKey && curDet && (curDet[1] || 0) < 1e-9) {
-            candidates.push({ id: curDet[0], statKey: curStatKey });
+          // 同 statKey value 更新 = 既存値 < target × TARGET_RATIO なら value 上げ candidate 追加
+          // (現状 affix value が 94% のまま 100% に届かない bug fix、 2026-06-18 兄貴指摘)
+          if (curStatKey && curDet) {
+            const _mvSame = _affixUtil.getAffixMax(curStatKey, charLv);
+            if (_mvSame != null && curDet[1] < _mvSame * TARGET_RATIO - 1e-6) {
+              candidates.push({ id: curDet[0], statKey: curStatKey });
+            }
           }
           for (const o of opts) {
             if (!o.statKey || o.statKey === '__pvp__') continue;
@@ -680,31 +709,8 @@
       ba[bestStep.idx].equipmentDetails = bestStep.det;
     }
 
-    // 5. 弓 suffix swap = bow set 全候補試行で最良採用
-    const bowSets = window.WWM_SETS?.bowSets;
-    if (bowSets && trueMaxRi.wearEquipsDetailed['21']?.exVo && trueMaxRi.wearEquipsDetailed['9']?.exVo) {
-      let baseScore = 0;
-      try {
-        const p = await window.WWMStats.buildStatParams(trueMaxRi, maxState);
-        window.computeExpected(p);
-        baseScore = _scoreWithBonus(trueMaxRi);
-      } catch (_) {}
-      let bestSfx = 0, bestDelta = 0;
-      for (const sfx of Object.keys(bowSets)) {
-        const sfxInt = parseInt(sfx, 10);
-        trueMaxRi.wearEquipsDetailed['21'].exVo.suffix = sfxInt;
-        trueMaxRi.wearEquipsDetailed['9'].exVo.suffix = sfxInt;
-        try {
-          const p = await window.WWMStats.buildStatParams(trueMaxRi, maxState);
-          window.computeExpected(p);
-          const sc = _scoreWithBonus(trueMaxRi);
-          const delta = sc - baseScore;
-          if (delta > bestDelta) { bestSfx = sfxInt; bestDelta = delta; }
-        } catch (_) {}
-      }
-      trueMaxRi.wearEquipsDetailed['21'].exVo.suffix = bestSfx;
-      trueMaxRi.wearEquipsDetailed['9'].exVo.suffix = bestSfx;
-    }
+    // 5. 弓 suffix swap 再評価 = iter loop で affix 変動した後の最良 bow set 再選定
+    await _bowSuffixSwapEval();
 
     // 6. 最終 score 算出 (= 武格指数 maxTotal)
     let maxTotal = 0;
@@ -717,79 +723,124 @@
     return { ri: trueMaxRi, score: Math.round(maxTotal) };
   }
 
-  // ── ゼロベース比較 modal (UI、 2026-06-18 兄貴指示 TODO 1) ──────────
-  async function _openZerobaseCompareModal(roleInfo) {
+  // ── ゼロベース比較 panel (anlz subtab zb、 2026-06-18 兄貴指示 TODO 1) ──
+  // 計算重い (ゼロ起点 + 2 パターン並列) ので auto 計算でなく「測定開始」 button 経由 (兄貴指示 2026-06-18)。
+  // 一度計算済 + roleInfo 不変なら cache 結果即表示、 再計算は button 押下で新規実行。
+  let _zbLastRoleInfoSig = null;
+  let _zbCacheHtml = null; // cache 描画用 (panel innerHTML 全体)
+  function renderZerobasePanel(roleInfo) {
+    const root = document.getElementById('wwmZerobase');
+    if (!root) return;
+    if (!roleInfo) return;
+    const T_ = window.T || {};
+    const sig = JSON.stringify(roleInfo?.wearEquipsDetailed || {}) + '|' + (roleInfo?.kongfuMain ?? '') + '|' + (roleInfo?.kongfuSub ?? '');
+    // cache 有効 (= roleInfo 不変) + 既計算済 = cache 結果即表示 (= ロード時間ゼロ)
+    if (_zbLastRoleInfoSig === sig && _zbCacheHtml) {
+      root.innerHTML = _zbCacheHtml;
+      _zbBindCachedHandlers(root, roleInfo);
+      return;
+    }
+    // 初期 = 測定開始 button + 説明
+    root.innerHTML = `
+      <div class="wwm-zb-start">
+        <div class="wwm-zb-start-desc">${T_.optZerobaseStartDesc || 'ゼロベースで装備 affix の最適配置を 2 パターン (属性特化 / 外功特化) 並列計算します。計算に十秒〜数十秒かかります。'}</div>
+        <button class="wwm-btn-primary wwm-zb-start-btn" id="wwmZbStartBtn">${T_.optZerobaseStart || '測定開始'}</button>
+      </div>
+    `;
+    root.querySelector('#wwmZbStartBtn').addEventListener('click', () => _runZerobasePanel(roleInfo, sig));
+  }
+
+  function _zbBindCachedHandlers(root, roleInfo) {
+    // 採用 button 再 bind (cache html 復元時)
+    const vBtn = root.querySelector('#wwmZbApplyVoid');
+    const pBtn = root.querySelector('#wwmZbApplyPhys');
+    const rBtn = root.querySelector('#wwmZbRerunBtn');
+    if (vBtn && _zbVoidRes) { vBtn.disabled = false; vBtn.addEventListener('click', () => _applyZbResult(_zbVoidRes)); }
+    if (pBtn && _zbPhysRes) { pBtn.disabled = false; pBtn.addEventListener('click', () => _applyZbResult(_zbPhysRes)); }
+    if (rBtn) rBtn.addEventListener('click', () => { _zbCacheHtml = null; _zbLastRoleInfoSig = null; renderZerobasePanel(roleInfo); });
+    // scrollbar 強制適用
+    root.querySelectorAll('.wwm-zb-body').forEach(el => {
+      el.style.scrollbarWidth = 'thin';
+      el.style.scrollbarColor = '#8a6f30 transparent';
+    });
+  }
+  // cache 用 res 保持
+  let _zbVoidRes = null, _zbPhysRes = null;
+
+  async function _runZerobasePanel(roleInfo, sig) {
+    const root = document.getElementById('wwmZerobase');
+    if (!root) return;
     const T_ = window.T || {};
     const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {};
     const curScore = Math.round(WWMState.baseline?.statusScore ?? 0);
-    const m = document.createElement('div');
-    m.className = 'wwm-modal-backdrop';
-    m.innerHTML = `
-      <div class="wwm-modal wwm-modal-wide wwm-cmp-modal-a">
-        <span class="wwm-cmp-l-bracket-tl"></span><span class="wwm-cmp-l-bracket-tr"></span>
-        <span class="wwm-cmp-l-bracket-bl"></span><span class="wwm-cmp-l-bracket-br"></span>
-        <div class="wwm-modal-header">
-          <h2><span class="wwm-cmp-title-ja" data-kaisho="optZerobaseTitle">${T_.optZerobaseTitle||'格析対照'}</span><span class="wwm-cmp-title-en">ZEROBASE</span><span class="wwm-cmp-seal">析</span></h2>
-          <button class="wwm-modal-close" aria-label="Close">×</button>
-        </div>
-        <div class="wwm-modal-body wwm-ws-paper">
-          <div class="wwm-cmp-grid">
-            <div class="wwm-cmp-col wwm-cmp-current">
-              <h3 class="wwm-cmp-title" data-seal="${T_.optZerobaseVoid||'無相固定'}"><span class="wwm-cmp-title-text">${T_.optZerobaseVoid||'無相貫通固定'}</span></h3>
-              <div class="wwm-zb-body" id="wwmZbVoidBody"><div class="wwm-opt-loading">${T_.optZerobaseCalc||'計算中…'}</div></div>
-            </div>
-            <div class="wwm-cmp-divider"></div>
-            <div class="wwm-cmp-col wwm-cmp-new">
-              <h3 class="wwm-cmp-title" data-seal="${T_.optZerobasePhys||'外功固定'}"><span class="wwm-cmp-title-text">${T_.optZerobasePhys||'外功貫通固定'}</span></h3>
-              <div class="wwm-zb-body" id="wwmZbPhysBody"><div class="wwm-opt-loading">${T_.optZerobaseCalc||'計算中…'}</div></div>
-            </div>
+    root.innerHTML = `
+      <div class="wwm-zb-panel wwm-analysis-card">
+        <div class="wwm-zb-grid">
+          <div class="wwm-zb-col">
+            <h3 class="wwm-zb-col-title">
+              <span class="wwm-zb-col-title-text">${T_.optZerobaseVoid||'属性特化ビルド'}</span>
+              <span class="wwm-zb-col-score" id="wwmZbScoreVoid">—</span>
+              <button class="wwm-zb-apply-btn" id="wwmZbApplyVoid" disabled>${T_.cmpApply||'採用'}</button>
+            </h3>
+            <div class="wwm-zb-body" id="wwmZbVoidBody"><div class="wwm-opt-loading">${T_.optZerobaseCalc||'計算中…'}</div></div>
+          </div>
+          <div class="wwm-zb-divider"></div>
+          <div class="wwm-zb-col">
+            <h3 class="wwm-zb-col-title">
+              <span class="wwm-zb-col-title-text">${T_.optZerobasePhys||'外功特化ビルド'}</span>
+              <span class="wwm-zb-col-score" id="wwmZbScorePhys">—</span>
+              <button class="wwm-zb-apply-btn" id="wwmZbApplyPhys" disabled>${T_.cmpApply||'採用'}</button>
+            </h3>
+            <div class="wwm-zb-body" id="wwmZbPhysBody"><div class="wwm-opt-loading">${T_.optZerobaseCalc||'計算中…'}</div></div>
           </div>
         </div>
-        <div class="wwm-cmp-footer-a">
-          <div class="wwm-cmp-stat-row">
-            <span class="wwm-cmp-delta-label">${T_.martialIndex||'武格指数'}</span>
-            <span class="wwm-cmp-delta-total" id="wwmZbScores">—</span>
-          </div>
-          <div class="wwm-cmp-stat-row">
-            <div class="wwm-btn-row wwm-cmp-btn-row">
-              <button class="wwm-btn-primary" id="wwmZbApplyVoid" disabled>${T_.optZerobaseApplyVoid||'無相採用'}</button>
-              <button class="wwm-btn-primary" id="wwmZbApplyPhys" disabled>${T_.optZerobaseApplyPhys||'外功採用'}</button>
-              <button class="wwm-btn-secondary" id="wwmZbCancel">${T_.cmpCancel||'離脱'}</button>
-            </div>
-          </div>
+        <div class="wwm-zb-rerun-row">
+          <button class="wwm-btn-secondary wwm-zb-rerun-btn" id="wwmZbRerunBtn">${T_.optZerobaseRerun||'再計算'}</button>
         </div>
       </div>
     `;
-    document.body.appendChild(m);
-    const close = () => m.remove();
-    m.querySelector('.wwm-modal-close').addEventListener('click', close);
-    m.querySelector('#wwmZbCancel').addEventListener('click', close);
 
-    // 並列計算 (Promise.all)
+    // scrollbar 強制適用 (inline style = max specificity、 CSS cascade 競合回避)
+    root.querySelectorAll('.wwm-zb-body').forEach(el => {
+      el.style.scrollbarWidth = 'thin';
+      el.style.scrollbarColor = '#8a6f30 transparent';
+    });
+
     let voidRes = null, physRes = null;
     try {
       [voidRes, physRes] = await Promise.all([
         runZerobaseCompare(roleInfo, state, 'voidPen'),
         runZerobaseCompare(roleInfo, state, 'physPen')
       ]);
-    } catch (e) { console.error('[ZbCompare]', e); }
+    } catch (e) { console.error('[ZbPanel]', e); }
 
-    m.querySelector('#wwmZbVoidBody').innerHTML = _renderZbResult(voidRes, curScore);
-    m.querySelector('#wwmZbPhysBody').innerHTML = _renderZbResult(physRes, curScore);
+    root.querySelector('#wwmZbVoidBody').innerHTML = _renderZbResult(voidRes, curScore);
+    root.querySelector('#wwmZbPhysBody').innerHTML = _renderZbResult(physRes, curScore);
 
-    const _ARR = '<span class="wwm-cmp-arrow">▶</span>';
-    const scoresEl = m.querySelector('#wwmZbScores');
-    if (scoresEl) {
-      const vS = voidRes?.score || 0, pS = physRes?.score || 0;
-      const winner = vS > pS ? 'void' : (pS > vS ? 'phys' : 'tie');
-      scoresEl.innerHTML = `${curScore.toLocaleString()}${_ARR}${vS.toLocaleString()} <span style="opacity:0.6">/</span> ${pS.toLocaleString()}${winner==='void'?' ⬅':''}${winner==='phys'?'':''}`;
-    }
+    const _fmtScore = (res) => {
+      if (!res) return '—';
+      const d = res.score - curScore;
+      const sign = d >= 0 ? '+' : '';
+      const dCls = d >= 0 ? 'pos' : 'neg';
+      return `${res.score.toLocaleString()} <span class="wwm-zb-delta ${dCls}">Δ${sign}${d.toLocaleString()}</span>`;
+    };
+    const sv = root.querySelector('#wwmZbScoreVoid');
+    const sp = root.querySelector('#wwmZbScorePhys');
+    if (sv) sv.innerHTML = _fmtScore(voidRes);
+    if (sp) sp.innerHTML = _fmtScore(physRes);
 
-    const vBtn = m.querySelector('#wwmZbApplyVoid');
-    const pBtn = m.querySelector('#wwmZbApplyPhys');
-    if (voidRes) { vBtn.disabled = false; vBtn.addEventListener('click', () => _applyZbResult(voidRes, m)); }
-    if (physRes) { pBtn.disabled = false; pBtn.addEventListener('click', () => _applyZbResult(physRes, m)); }
+    const vBtn = root.querySelector('#wwmZbApplyVoid');
+    const pBtn = root.querySelector('#wwmZbApplyPhys');
+    if (voidRes) { vBtn.disabled = false; vBtn.addEventListener('click', () => _applyZbResult(voidRes)); }
+    if (physRes) { pBtn.disabled = false; pBtn.addEventListener('click', () => _applyZbResult(physRes)); }
+    const rBtn = root.querySelector('#wwmZbRerunBtn');
+    if (rBtn) rBtn.addEventListener('click', () => { _zbCacheHtml = null; _zbLastRoleInfoSig = null; renderZerobasePanel(roleInfo); });
+    // cache 保存 (= 同 sig で次回 click 時に即表示)
+    _zbVoidRes = voidRes; _zbPhysRes = physRes; _zbLastRoleInfoSig = sig;
+    _zbCacheHtml = root.innerHTML;
   }
+  // roleInfo 変更時 (採用/復元/再 import 等) は次回タブ click で再計算させる
+  function _invalidateZerobaseCache() { _zbLastRoleInfoSig = null; }
 
   function _renderZbResult(res, curScore) {
     const T_ = window.T || {};
@@ -806,7 +857,7 @@
         const d = a?.equipmentDetails;
         if (!d || d[0] == null) return '';
         const sk = window.WWM_AFFIX?.[d[0]]?.statKey;
-        const name = _affixUtil.affixDisplayName(d[0], idx);
+        const name = _affixUtil.affixDisplayNameSplit(d[0], idx);
         const isPct = sk ? _affixUtil.isPctStat(sk) : false;
         const needsMul = sk ? _affixUtil.pctNeedsMul(sk) : false;
         const v = (typeof d[1] === 'number')
@@ -816,13 +867,10 @@
       }).join('');
       return `<div class="wwm-zb-slot"><div class="wwm-zb-slot-name">${slotLabel}</div>${affixHtml}</div>`;
     }).join('');
-    return `
-      <div class="wwm-zb-score-line">${res.score.toLocaleString()} <span class="wwm-zb-delta ${delta>=0?'pos':'neg'}">Δ${sign}${delta.toLocaleString()}</span></div>
-      <div class="wwm-zb-slots">${slotsHtml}</div>
-    `;
+    return `<div class="wwm-zb-slots">${slotsHtml}</div>`;
   }
 
-  function _applyZbResult(res, m) {
+  function _applyZbResult(res) {
     const T_ = window.T || {};
     const msg = T_.optZerobaseConfirm || 'この構成を採用しますか？\n現在の affix が全 slot で上書きされます (装備本体は keep)。';
     if (!confirm(msg)) return;
@@ -840,8 +888,8 @@
       WWMState.virtual.gear[slot] = cur;
     }
     if (typeof window._saveVirtuals === 'function') window._saveVirtuals();
-    m.remove();
     if (window.showToast) window.showToast(T_.optZerobaseApplied || 'ゼロベース構成を採用しました');
+    _invalidateZerobaseCache();
     if (typeof window._refreshAll === 'function') window._refreshAll();
   }
 
@@ -853,5 +901,7 @@
     applySteps: _applyOptSteps,
     resortRows: _OPT_resortRows,
     runZerobaseCompare,
+    renderZerobase: renderZerobasePanel,
+    invalidateZerobase: _invalidateZerobaseCache,
   };
 })();

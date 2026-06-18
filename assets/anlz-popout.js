@@ -36,6 +36,7 @@
     var tipO = _esc(T.anlzPopoutOpacityTip || '不透明度 (floating モード時のみ有効)');
     var labelRank = _esc(T.anlzTabRank || '期待値');
     var labelOpt = _esc(T.anlzTabOpt || '最適化');
+    var labelZb = _esc(T.anlzTabZerobase || '外功vs属性');
     var st = loadState();
     var opVal = Math.round((st.opacity == null ? 1 : st.opacity) * 100);
     return ''
@@ -54,6 +55,7 @@
       + '<nav class="wwm-anlz-floating-subheader">'
       +   '<button type="button" class="anlz-subtab" data-anlz="rank">' + labelRank + '</button>'
       +   '<button type="button" class="anlz-subtab" data-anlz="opt">' + labelOpt + '</button>'
+      +   '<button type="button" class="anlz-subtab" data-anlz="zb">' + labelZb + '</button>'
       + '</nav>'
       + '<div class="wwm-anlz-floating-body" data-anlz-body></div>'
       + '<footer class="wwm-anlz-floating-footer">'
@@ -77,7 +79,7 @@
   // state は localStorage 'wwm_analysis_tab_v1' (anlz inline script と互換) に保存 → close 後の
   // 再 open 時に復元、 anlz inline script も同 key を読むので双方向で整合
   var SUBTAB_KEY = 'wwm_analysis_tab_v1';
-  var SUBTAB_MAP = { rank: 'wwmAffixRanking', opt: 'wwmOptimization' };
+  var SUBTAB_MAP = { rank: 'wwmAffixRanking', opt: 'wwmOptimization', zb: 'wwmZerobase' };
 
   function activateSubtab(root, key) {
     if (!SUBTAB_MAP[key]) return;
@@ -92,6 +94,10 @@
     var anlzEl = root.querySelector('.wwm-anlz');
     if (anlzEl) anlzEl.setAttribute('data-active-tab', key);
     try { localStorage.setItem(SUBTAB_KEY, key); } catch (e) {}
+    // zb tab = 格析 (ゼロベース比較) 切替時 render trigger
+    if (key === 'zb') {
+      try { window.WWMSidebar?.opt?.renderZerobase?.(window.WWMState?.roleInfo); } catch(e) {}
+    }
   }
 
   function bindSubtabs(root) {
