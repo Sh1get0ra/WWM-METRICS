@@ -105,17 +105,16 @@ function setLang(lang) {
     try { window.WWMSidebar.render(null); } catch(_) {}
   }
 }
-// SEO meta 動的更新: 言語切替時に description / canonical / og:url / og:title / og:description を現在言語へ。
-// path-based 化 (2026-06-18) 後 = 静的 head は build script が言語別に注入済 (canonical/og:url が各 file 自身を指す)。
-// 動的切替 = ユーザー手動 lang dropdown 操作時に URL path も書換 (history.replaceState) + canonical 同期。
+// SEO meta 動的更新: 言語切替時に description / canonical / hreflang対応 og:url / og:title / og:description を現在言語へ。
+// 静的 head は ja 既定 (index.html)。 canonical = ja は base URL、 他言語は ?lang= 付き自己参照 (hreflang sitemap.xml と対)。
 const _SEO_OG_LOCALE = { ja: 'ja_JP', en: 'en_US', zh: 'zh_CN', ko: 'ko_KR', vi: 'vi_VN' };
 function _updateSeoMeta(lang) {
   try {
     const T_ = window.T || {};
     const desc = T_.seoDesc;
     const title = T_.pageTitle;
-    const langPath = lang === 'ja' ? '/' : `/${lang}/`;
-    const selfUrl = location.origin + langPath;
+    const base = location.origin + location.pathname;
+    const selfUrl = lang === 'ja' ? base : base + '?lang=' + lang;
     const setMeta = (sel, val) => {
       if (typeof val !== 'string' || !val || val.indexOf('[ui:') === 0) return;
       const el = document.querySelector(sel);
@@ -128,14 +127,6 @@ function _updateSeoMeta(lang) {
     setMeta('meta[property="og:locale"]', _SEO_OG_LOCALE[lang]);
     const canon = document.querySelector('link[rel="canonical"]');
     if (canon) canon.setAttribute('href', selfUrl);
-    // URL path 同期 (search/hash keep)。 OBS view では path 書換しない (?view=sidebar で OBS 専用 instance)
-    const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
-    if (!isObs && typeof history !== 'undefined' && history.replaceState) {
-      const curLangFromPath = (location.pathname.match(/^\/(en|zh|ko|vi)\//) || [])[1] || 'ja';
-      if (curLangFromPath !== lang) {
-        history.replaceState({}, '', langPath + location.search + location.hash);
-      }
-    }
   } catch(_) {}
 }
 
@@ -157,48 +148,28 @@ function _initMigrationBanner() {
 
 function _loadSavedLang() {
   try {
-    const VALID = ['ja','en','zh','ko','vi'];
-    const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
-    const urlLang = new URLSearchParams(location.search).get('lang');
-
     // OBS view (?view=sidebar): URL paramの lang を優先、 picker は表示しない (独立ブラウザインスタンス想定)
+    const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
     if (isObs) {
-      if (urlLang && VALID.includes(urlLang) && urlLang !== 'ja') setLang(urlLang);
+      const urlLang = new URLSearchParams(location.search).get('lang');
+      if (urlLang && ['ja','en','zh','ko','vi'].includes(urlLang) && urlLang !== 'ja') setLang(urlLang);
       return;
     }
-
-    // SEO 多言語 path-based 化 (2026-06-18): 真実源 = <html lang> attribute。
-    // build script (scripts/build-i18n-pages.cjs) が /{lang}/index.html を emit する時に <html lang> 設定済。
-    // 旧 ?lang=xx は Functions middleware で /{lang}/ に 301 redirect = 通常はここに来ない (互換 fallback)。
-    //
-    // 優先順位:
-    //   1. ?lang= (旧 share URL 互換、 最優先)
-    //   2. path explicit (/en/ /zh/ /ko/ /vi/ = <html lang> が非 ja) = URL に従う (localStorage より優先)
-    //   3. localStorage (ja default `/` 到達時のみ参照、 ユーザー手動切替の永続化)
-    //   4. <html lang> fallback (= ja)
-    //
-    // 理由: /en/ に explicit 訪問したユーザーが localStorage=ja で勝手に / に戻されるのは UX 破壊。
-    // path-specific URL = ユーザーの explicit choice なので localStorage を override する。
-    const htmlLang = (document.documentElement.lang || 'ja').toLowerCase().split('-')[0]; // zh-CN → zh
-    const isPathSpecific = ['en','zh','ko','vi'].includes(htmlLang);
-    const saved = WWMHelpers.storage.loadStr('wwm_lang');
-    const resolved =
-      (urlLang && VALID.includes(urlLang)) ? urlLang :
-      isPathSpecific                       ? htmlLang :
-      (saved && VALID.includes(saved))     ? saved :
-      (VALID.includes(htmlLang)            ? htmlLang : 'ja');
-
-    if (resolved !== 'ja') setLang(resolved);
-    else { WWMHelpers.storage.saveStr('wwm_lang', 'ja'); _updateSeoMeta('ja'); }
-
-    // picker: localStorage 未設定 + URL lang 未指定 + ja 既定到達 (= 初回 root 訪問) のみ
-    const isJaDefault = !saved && !urlLang && resolved === 'ja';
-    if (isJaDefault) {
-      _showLangPicker();
-    } else if (!WWMHelpers.storage.loadStr('wwm_import_hinted')) {
-      // 言語確定済 (URL/localStorage/html lang) なら import 誘導 hint
-      setTimeout(_showImportHint, 250);
+    // SEO (2026-06-11): 通常 view でも ?lang= を最優先 (hreflang 先 URL /?lang=xx で crawler が各言語 DOM をレンダリングする要)。
+    // picker は抑止 (URL で言語確定済 = 聞き直し無意味) が、 初見の IMPORT 誘導 hint は picker 経由と同様に出す
+    // (?lang= 共有 link 着地の新規が誘導を永久に見ない穴の塞ぎ、 2026-06-11)
+    const urlLang = new URLSearchParams(location.search).get('lang');
+    if (urlLang && ['ja','en','zh','ko','vi'].includes(urlLang)) {
+      if (urlLang !== 'ja') setLang(urlLang);
+      else { WWMHelpers.storage.saveStr('wwm_lang', 'ja'); _updateSeoMeta('ja'); }
+      if (!WWMHelpers.storage.loadStr('wwm_import_hinted')) {
+        setTimeout(_showImportHint, 250);
+      }
+      return;
     }
+    const saved = WWMHelpers.storage.loadStr('wwm_lang');
+    if (saved && ['ja','en','zh','ko','vi'].includes(saved) && saved !== 'ja') setLang(saved);
+    else if (!saved) _showLangPicker();
   } catch(e) {}
 }
 function _showLangPicker() {

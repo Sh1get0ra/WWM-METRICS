@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>風燕計 | WWMETRICS</title>
-<!-- SEO (2026-06-18 path-based 化): canonical/hreflang は path 形式 (`/`/`/en/`/`/zh/`/`/ko/`/`/vi/`)。 各言語は scripts/build-i18n-pages.cjs で /{lang}/index.html 静的 emit、 自身 canonical を持つ。 旧 ?lang= は functions/_middleware.js で 301 redirect。 -->
+<!-- SEO (2026-06-11): description/canonical/hreflang/OGP は ja 静的既定。 言語切替時は app.js _updateSeoMeta が動的更新 (Google は JS レンダリング後 DOM を index) -->
 <meta name="description" content="風燕伝 (Where Winds Meet) のダメージ計算機。ゲームデータ取込でステータスを自動解析し、期待ダメージ・武格指数 Tier・装備最適化・心法比較・確率分布を無料で確認できます。日本語/英語/中国語/韓国語/ベトナム語対応。">
 <link rel="canonical" href="https://wwm-metrics.pages.dev/">
 <link rel="alternate" hreflang="ja" href="https://wwm-metrics.pages.dev/">
-<link rel="alternate" hreflang="en" href="https://wwm-metrics.pages.dev/en/">
-<link rel="alternate" hreflang="zh" href="https://wwm-metrics.pages.dev/zh/">
-<link rel="alternate" hreflang="ko" href="https://wwm-metrics.pages.dev/ko/">
-<link rel="alternate" hreflang="vi" href="https://wwm-metrics.pages.dev/vi/">
+<link rel="alternate" hreflang="en" href="https://wwm-metrics.pages.dev/?lang=en">
+<link rel="alternate" hreflang="zh" href="https://wwm-metrics.pages.dev/?lang=zh">
+<link rel="alternate" hreflang="ko" href="https://wwm-metrics.pages.dev/?lang=ko">
+<link rel="alternate" hreflang="vi" href="https://wwm-metrics.pages.dev/?lang=vi">
 <link rel="alternate" hreflang="x-default" href="https://wwm-metrics.pages.dev/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="WWMETRICS">
@@ -961,7 +961,7 @@ window.showImportToast = function(e) {
 <script src="assets/i18n.js?v=97"></script>
 <script src="assets/helpers/i18n.js?v=2"></script>
 <script src="assets/calc.js?v=88"></script>
-<script src="assets/app.js?v=59"></script>
+<script src="assets/app.js?v=58"></script>
 <script src="assets/export.js?v=73"></script>
 <script src="assets/stats.js?v=74"></script>
 <script src="assets/sidebar/modal-helpers.js?v=3"></script>
