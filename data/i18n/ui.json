@@ -1532,13 +1532,6 @@
     "ko": "선택",
     "vi": "Chọn"
   },
-  "optMinDeltaTip": {
-    "ja": "これ未満のΔで打切",
-    "en": "Stop below this Δ",
-    "zh": "Δ低于此值时停止",
-    "ko": "이 Δ 미만 시 중단",
-    "vi": "Dừng khi Δ dưới giá trị này"
-  },
   "optToggleAllTip": {
     "ja": "全選択/全解除 切替",
     "en": "Toggle all on/off",

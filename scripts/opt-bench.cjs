@@ -33,7 +33,6 @@ const server = http.createServer((req, res) => {
   page.on('pageerror', e => errors.push(String(e)));
   await page.addInitScript(() => {
     localStorage.setItem('wwm_lang', 'ja');
-    localStorage.setItem('wwm_opt_min_delta_v1', '5');
     localStorage.setItem('wwm_opt_sort_v1', 'default');
   });
   await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'load' });
