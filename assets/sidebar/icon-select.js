@@ -62,7 +62,10 @@
     const triggerName = _esc(selOpt.name || '');
     const popupItems = options.map(o => {
       const sel = String(o.value) === selV ? 'true' : 'false';
-      return `<div class="ic-select-opt" role="option" aria-selected="${sel}" data-value="${_esc(o.value)}">${_renderChip(o)}<span class="ic-name">${_esc(o.name)}</span></div>`;
+      const disabled = o.disabled ? ' is-disabled' : '';
+      const aDis = o.disabled ? ' aria-disabled="true"' : '';
+      const title = o.disabledReason ? ` title="${_esc(o.disabledReason)}"` : '';
+      return `<div class="ic-select-opt${disabled}" role="option" aria-selected="${sel}"${aDis} data-value="${_esc(o.value)}"${title}>${_renderChip(o)}<span class="ic-name">${_esc(o.name)}</span></div>`;
     }).join('');
     return `
       <div class="ic-select${cls}"${id} aria-expanded="false" data-value="${_esc(selOpt.value)}">
@@ -117,6 +120,7 @@
     rootEl.querySelectorAll('.ic-select-opt').forEach(opt => {
       opt.addEventListener('click', (e) => {
         e.stopPropagation();
+        if (opt.classList.contains('is-disabled')) return;   // 他スロット使用中 等の理由で選択不可
         const v = opt.dataset.value;
         setValue(rootEl, v, { silent: true });
         rootEl.setAttribute('aria-expanded', 'false');

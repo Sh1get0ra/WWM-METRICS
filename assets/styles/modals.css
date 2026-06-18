@@ -2682,6 +2682,19 @@
   font-size: 14px;
   flex: 1;
 }
+/* 他スロット使用中 等で選択不可 = 朱字 + 半透明 + クリック無効 */
+.ic-select-opt.is-disabled {
+  color: var(--vermilion);
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.ic-select-opt.is-disabled:hover {
+  background: transparent;
+  transform: none;
+}
+.ic-select-opt.is-disabled .ic-chip--inkbox {
+  opacity: 0.6;
+}
 
 /* ── 格析 (ゼロベース比較) anlz subtab panel (2026-06-18 TODO 1) ── */
 #wwmZerobase .wwm-zb-panel {

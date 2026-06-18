@@ -226,17 +226,27 @@
         .join('');
     }
     // icon-select 用の options 配列 (心法アイコン + 名前)。 ic-chip--inkbox = 墨地 + 白 icon
+    // 他スロットで使用中の心法 = disabled (赤 + 選択不可、 2026-06-18 兄貴指示)
     function _xinfaIconOptions(selectedId) {
+      const usedByOthers = new Set();
+      for (let i = 0; i < passive.length; i++) {
+        if (i === slotIdx) continue;
+        const id = passive[i];
+        if (id) usedByOthers.add(String(id));
+      }
       const opts = Object.entries(xinfaMap)
         .filter(([k]) => /^\d+$/.test(k))
         .map(([id]) => {
           const n = window.WWM_DS.name('xinfa', id, lang);
           const label = n.indexOf('[xinfa:') === 0 ? id : n;
+          const isUsed = usedByOthers.has(String(id));
           return {
             value: id,
             name: label,
             iconUrl: window.WWM_XINFA_ICONS?.[id]?.icon_url || null,
-            iconType: 'inkbox'
+            iconType: 'inkbox',
+            disabled: isUsed,
+            disabledReason: isUsed ? '他スロット使用中' : null
           };
         });
       return { options: opts, selectedValue: String(selectedId) };
