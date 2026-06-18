@@ -139,6 +139,7 @@
           <label class="wwm-opt-ratio-label" title="${T_.optMinDeltaTip||'これ未満のΔで打切'}">Δ<input type="number" id="wwmOptMinDelta" min="2" max="50" step="1" value="${window._OPT_MIN_DELTA}" style="width:40px;background:var(--shade-mid);color:var(--sumi-fg);border:1px solid var(--ink-2);border-radius:3px;padding:2px 4px;font-family:var(--f-latin);"></label>
           <button type="button" class="wwm-opt-btn" id="wwmOptToggleAll" title="${T_.optToggleAllTip||'全選択/全解除 切替'}">☑</button>
           <button type="button" class="wwm-opt-btn wwm-opt-btn-apply" id="wwmOptApplyAll">${T_.optApplySelected||'選択適用'}</button>
+          <button type="button" class="wwm-opt-btn" id="wwmOptZerobaseCompare" title="${T_.optZerobaseCompareTip||'武器系 affix#6 = 無相貫通/外功貫通 固定 で並列比較'}">${T_.optZerobaseCompare||'格析'}</button>
         </div>
       </div>
       <div class="wwm-opt-progress" id="wwmOptProgress"></div>
@@ -191,6 +192,8 @@
         cbs.forEach(cb => { cb.checked = anyUnchecked; });
         tgEl.textContent = anyUnchecked ? '☐' : '☑';
       });
+      const zbEl = root.querySelector('#wwmOptZerobaseCompare');
+      if (zbEl) zbEl.addEventListener('click', () => _openZerobaseCompareModal(roleInfo));
     }
     // 計算中表示
     root.innerHTML = `<div class="wwm-analysis-card wwm-modal-square"><div class="wwm-modal-bg-icon" style="background-image:url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b3eed7ba50118c397aMSc1Axt605.png');"></div>${headerHtml}<div class="wwm-opt-loading">${(window.T?.optComputing) || '計算中...'}</div></div>`;
@@ -546,6 +549,302 @@
     _refreshAll();
   }
 
+  // ── ゼロベース比較 OPT (格析 機能、 2026-06-18 兄貴指示 TODO 1) ─────────
+  // 現有装備 keep + affix のみゼロベース起点で最適化 (= 過去 commit 7ac5f42 で削除した
+  // 95% fix base 起点 OPT + iter 反復 logic 復活)。 武器系 idx5 (slot 1/2/10/11) seed を
+  // voidPen / physPen で強制差替で 2 パターン並列比較 → 「属性 vs 物理 どっち強い」 戦争終結。
+  // 防具 idx5 = seed = 元 working 武学固有 ID で prefix 制約 keep → 自然に同系統最適化。
+  // 弓ペア (21/9) = affix touch せず suffix swap のみ評価。
+  //
+  // 引数: roleInfo / state / overrideIdx5 = 'voidPen' or 'physPen' (武器系 idx5 強制 statKey)
+  // 戻り値: { ri: 最適 roleInfo, score: 武格指数 (statusScore), warning?: string }
+  async function runZerobaseCompare(roleInfo, state, overrideIdx5) {
+    if (!roleInfo || !window.WWMStats?.buildStatParams) return null;
+    const _affixUtil = window.WWMSidebar.affix;
+    const _SLOT6_WEAPON_LIKE_ = _affixUtil.SLOT6_WEAPON_LIKE;
+    const charLv = roleInfo.level || 95;
+    const TARGET_RATIO = 1.0; // 理論 max (100%) でゼロベース計算 (兄貴指示 2026-06-18)
+    const working = JSON.parse(JSON.stringify(roleInfo));
+    const trueMaxRi = JSON.parse(JSON.stringify(working));
+
+    // 0. 元 working の affix ID memo (= _getAffixOptions seed 用、 prefix 制約 keep)
+    const origAffixMemo = {};
+    for (const sl of Object.keys(trueMaxRi.wearEquipsDetailed || {})) {
+      origAffixMemo[sl] = {};
+      const ba = working.wearEquipsDetailed[sl]?.exVo?.baseAffixes || [];
+      for (let i = 0; i < ba.length; i++) {
+        const det = ba[i]?.equipmentDetails;
+        if (det && det[0] != null) origAffixMemo[sl][i] = det[0];
+      }
+    }
+
+    // 1. 95% fix base: 全 affix value を max × TARGET_RATIO に統一 (over のみ下げ、 under は keep)
+    // 弓ペア (21/9) = affix touch せず suffix 0 化 (= bow swap で改めて選定)
+    const BOW_PAIR = new Set(['21', '9']);
+    for (const sl of Object.keys(trueMaxRi.wearEquipsDetailed || {})) {
+      const ba = trueMaxRi.wearEquipsDetailed[sl]?.exVo?.baseAffixes || [];
+      if (BOW_PAIR.has(sl)) {
+        if (trueMaxRi.wearEquipsDetailed[sl]?.exVo) trueMaxRi.wearEquipsDetailed[sl].exVo.suffix = 0;
+        continue;
+      }
+      for (let i = 0; i < ba.length; i++) {
+        const det = ba[i]?.equipmentDetails;
+        if (!det) continue;
+        const sk = window.WWM_AFFIX?.[det[0]]?.statKey;
+        const mv = sk ? _affixUtil.getAffixMax(sk, charLv) : null;
+        if (mv != null) {
+          const target = mv * TARGET_RATIO;
+          if (det[1] > target) { det[1] = target; det[2] = TARGET_RATIO; }
+        }
+      }
+    }
+
+    // 2. 武器系 idx5 = override (voidPen / physPen) で seed を強制差替
+    // 過去 working の prefix を keep して同 prefix 内の override statKey option を採用
+    if (overrideIdx5) {
+      for (const slot of Object.keys(trueMaxRi.wearEquipsDetailed || {})) {
+        if (!_SLOT6_WEAPON_LIKE_.has(slot)) continue;
+        const ba = trueMaxRi.wearEquipsDetailed[slot]?.exVo?.baseAffixes || [];
+        const idx = 5;
+        const seedId = origAffixMemo[slot]?.[idx];
+        if (seedId == null) continue;
+        const opts = _affixUtil.getAffixOptions(seedId, slot, idx, ba);
+        const targetOpt = opts.find(o => o.statKey === overrideIdx5);
+        if (!targetOpt) continue;
+        const mv = _affixUtil.getAffixMax(overrideIdx5, charLv);
+        if (mv == null) continue;
+        if (!ba[idx]) ba[idx] = {};
+        ba[idx].equipmentDetails = [parseInt(targetOpt.id, 10), mv * TARGET_RATIO, TARGET_RATIO, 2, 1];
+      }
+    }
+
+    // 3. state = MAX state (心法 全 tier 6 想定、 統一基準で評価)
+    const maxState = JSON.parse(JSON.stringify(state || {}));
+    if (!maxState.xinfaTiers) maxState.xinfaTiers = {};
+    for (let i = 0; i < 4; i++) { maxState.xinfaTiers[i] = 6; maxState.xinfaTiers[String(i)] = 6; }
+
+    // 4. iter 反復 = 各 slot 各 idx で「同 statKey value 更新」 + 「他 statKey swap」 評価 → 最大 delta 採用 → 反復
+    // 武器系 idx5 (override 指定時) = 固定 = swap 評価 skip
+    const MAX_ITER = 80;
+    for (let iter = 0; iter < MAX_ITER; iter++) {
+      let bestStep = null;
+      for (const slot of Object.keys(trueMaxRi.wearEquipsDetailed || {})) {
+        if (BOW_PAIR.has(slot)) continue;
+        const eq = trueMaxRi.wearEquipsDetailed[slot];
+        const ba = eq?.exVo?.baseAffixes || [];
+        for (let idx = 0; idx < ba.length; idx++) {
+          if (origAffixMemo[slot]?.[idx] == null) continue;
+          // 武器系 idx5 (override) = 固定 = swap skip
+          if (overrideIdx5 && _SLOT6_WEAPON_LIKE_.has(slot) && idx === 5) continue;
+          const curDet = ba[idx]?.equipmentDetails;
+          const curStatKey = curDet ? window.WWM_AFFIX?.[curDet[0]]?.statKey : null;
+          const seedId = origAffixMemo[slot][idx];
+          const opts = _affixUtil.getAffixOptions(seedId, slot, idx, ba);
+          let baseScore = 0;
+          try {
+            const p = await window.WWMStats.buildStatParams(trueMaxRi, maxState);
+            window.computeExpected(p);
+            baseScore = _scoreWithBonus(trueMaxRi);
+          } catch (_) {}
+          const candidates = [];
+          if (curStatKey && curDet && (curDet[1] || 0) < 1e-9) {
+            candidates.push({ id: curDet[0], statKey: curStatKey });
+          }
+          for (const o of opts) {
+            if (!o.statKey || o.statKey === '__pvp__') continue;
+            if (o.statKey === curStatKey) continue;
+            candidates.push({ id: parseInt(o.id, 10), statKey: o.statKey });
+          }
+          for (const c of candidates) {
+            const mv = _affixUtil.getAffixMax(c.statKey, charLv);
+            if (mv == null) continue;
+            const sBak = ba[idx]?.equipmentDetails?.slice();
+            if (!ba[idx]) ba[idx] = {};
+            ba[idx].equipmentDetails = [c.id, mv * TARGET_RATIO, TARGET_RATIO, 2, 1];
+            try {
+              const p = await window.WWMStats.buildStatParams(trueMaxRi, maxState);
+              window.computeExpected(p);
+              const sc = _scoreWithBonus(trueMaxRi);
+              const delta = sc - baseScore;
+              if (delta > 0 && (!bestStep || delta > bestStep.delta)) {
+                bestStep = { slot, idx, det: ba[idx].equipmentDetails.slice(), delta };
+              }
+            } catch (_) {}
+            ba[idx].equipmentDetails = sBak;
+          }
+        }
+      }
+      if (!bestStep) break;
+      const ba = trueMaxRi.wearEquipsDetailed[bestStep.slot].exVo.baseAffixes;
+      if (!ba[bestStep.idx]) ba[bestStep.idx] = {};
+      ba[bestStep.idx].equipmentDetails = bestStep.det;
+    }
+
+    // 5. 弓 suffix swap = bow set 全候補試行で最良採用
+    const bowSets = window.WWM_SETS?.bowSets;
+    if (bowSets && trueMaxRi.wearEquipsDetailed['21']?.exVo && trueMaxRi.wearEquipsDetailed['9']?.exVo) {
+      let baseScore = 0;
+      try {
+        const p = await window.WWMStats.buildStatParams(trueMaxRi, maxState);
+        window.computeExpected(p);
+        baseScore = _scoreWithBonus(trueMaxRi);
+      } catch (_) {}
+      let bestSfx = 0, bestDelta = 0;
+      for (const sfx of Object.keys(bowSets)) {
+        const sfxInt = parseInt(sfx, 10);
+        trueMaxRi.wearEquipsDetailed['21'].exVo.suffix = sfxInt;
+        trueMaxRi.wearEquipsDetailed['9'].exVo.suffix = sfxInt;
+        try {
+          const p = await window.WWMStats.buildStatParams(trueMaxRi, maxState);
+          window.computeExpected(p);
+          const sc = _scoreWithBonus(trueMaxRi);
+          const delta = sc - baseScore;
+          if (delta > bestDelta) { bestSfx = sfxInt; bestDelta = delta; }
+        } catch (_) {}
+      }
+      trueMaxRi.wearEquipsDetailed['21'].exVo.suffix = bestSfx;
+      trueMaxRi.wearEquipsDetailed['9'].exVo.suffix = bestSfx;
+    }
+
+    // 6. 最終 score 算出 (= 武格指数 maxTotal)
+    let maxTotal = 0;
+    try {
+      const p = await window.WWMStats.buildStatParams(trueMaxRi, maxState);
+      window.computeExpected(p);
+      maxTotal = _scoreWithBonus(trueMaxRi);
+    } catch (e) { console.error('[runZerobaseCompare final]', e); }
+
+    return { ri: trueMaxRi, score: Math.round(maxTotal) };
+  }
+
+  // ── ゼロベース比較 modal (UI、 2026-06-18 兄貴指示 TODO 1) ──────────
+  async function _openZerobaseCompareModal(roleInfo) {
+    const T_ = window.T || {};
+    const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {};
+    const curScore = Math.round(WWMState.baseline?.statusScore ?? 0);
+    const m = document.createElement('div');
+    m.className = 'wwm-modal-backdrop';
+    m.innerHTML = `
+      <div class="wwm-modal wwm-modal-wide wwm-cmp-modal-a">
+        <span class="wwm-cmp-l-bracket-tl"></span><span class="wwm-cmp-l-bracket-tr"></span>
+        <span class="wwm-cmp-l-bracket-bl"></span><span class="wwm-cmp-l-bracket-br"></span>
+        <div class="wwm-modal-header">
+          <h2><span class="wwm-cmp-title-ja" data-kaisho="optZerobaseTitle">${T_.optZerobaseTitle||'格析対照'}</span><span class="wwm-cmp-title-en">ZEROBASE</span><span class="wwm-cmp-seal">析</span></h2>
+          <button class="wwm-modal-close" aria-label="Close">×</button>
+        </div>
+        <div class="wwm-modal-body wwm-ws-paper">
+          <div class="wwm-cmp-grid">
+            <div class="wwm-cmp-col wwm-cmp-current">
+              <h3 class="wwm-cmp-title" data-seal="${T_.optZerobaseVoid||'無相固定'}"><span class="wwm-cmp-title-text">${T_.optZerobaseVoid||'無相貫通固定'}</span></h3>
+              <div class="wwm-zb-body" id="wwmZbVoidBody"><div class="wwm-opt-loading">${T_.optZerobaseCalc||'計算中…'}</div></div>
+            </div>
+            <div class="wwm-cmp-divider"></div>
+            <div class="wwm-cmp-col wwm-cmp-new">
+              <h3 class="wwm-cmp-title" data-seal="${T_.optZerobasePhys||'外功固定'}"><span class="wwm-cmp-title-text">${T_.optZerobasePhys||'外功貫通固定'}</span></h3>
+              <div class="wwm-zb-body" id="wwmZbPhysBody"><div class="wwm-opt-loading">${T_.optZerobaseCalc||'計算中…'}</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="wwm-cmp-footer-a">
+          <div class="wwm-cmp-stat-row">
+            <span class="wwm-cmp-delta-label">${T_.martialIndex||'武格指数'}</span>
+            <span class="wwm-cmp-delta-total" id="wwmZbScores">—</span>
+          </div>
+          <div class="wwm-cmp-stat-row">
+            <div class="wwm-btn-row wwm-cmp-btn-row">
+              <button class="wwm-btn-primary" id="wwmZbApplyVoid" disabled>${T_.optZerobaseApplyVoid||'無相採用'}</button>
+              <button class="wwm-btn-primary" id="wwmZbApplyPhys" disabled>${T_.optZerobaseApplyPhys||'外功採用'}</button>
+              <button class="wwm-btn-secondary" id="wwmZbCancel">${T_.cmpCancel||'離脱'}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(m);
+    const close = () => m.remove();
+    m.querySelector('.wwm-modal-close').addEventListener('click', close);
+    m.querySelector('#wwmZbCancel').addEventListener('click', close);
+
+    // 並列計算 (Promise.all)
+    let voidRes = null, physRes = null;
+    try {
+      [voidRes, physRes] = await Promise.all([
+        runZerobaseCompare(roleInfo, state, 'voidPen'),
+        runZerobaseCompare(roleInfo, state, 'physPen')
+      ]);
+    } catch (e) { console.error('[ZbCompare]', e); }
+
+    m.querySelector('#wwmZbVoidBody').innerHTML = _renderZbResult(voidRes, curScore);
+    m.querySelector('#wwmZbPhysBody').innerHTML = _renderZbResult(physRes, curScore);
+
+    const _ARR = '<span class="wwm-cmp-arrow">▶</span>';
+    const scoresEl = m.querySelector('#wwmZbScores');
+    if (scoresEl) {
+      const vS = voidRes?.score || 0, pS = physRes?.score || 0;
+      const winner = vS > pS ? 'void' : (pS > vS ? 'phys' : 'tie');
+      scoresEl.innerHTML = `${curScore.toLocaleString()}${_ARR}${vS.toLocaleString()} <span style="opacity:0.6">/</span> ${pS.toLocaleString()}${winner==='void'?' ⬅':''}${winner==='phys'?'':''}`;
+    }
+
+    const vBtn = m.querySelector('#wwmZbApplyVoid');
+    const pBtn = m.querySelector('#wwmZbApplyPhys');
+    if (voidRes) { vBtn.disabled = false; vBtn.addEventListener('click', () => _applyZbResult(voidRes, m)); }
+    if (physRes) { pBtn.disabled = false; pBtn.addEventListener('click', () => _applyZbResult(physRes, m)); }
+  }
+
+  function _renderZbResult(res, curScore) {
+    const T_ = window.T || {};
+    if (!res) return `<div class="wwm-opt-loading">${T_.optZerobaseFailed||'計算失敗'}</div>`;
+    const delta = res.score - curScore;
+    const sign = delta >= 0 ? '+' : '';
+    const slots = ['1','2','10','11','3','4','5','8'];
+    const eqDet = res.ri?.wearEquipsDetailed || {};
+    const _affixUtil = window.WWMSidebar.affix;
+    const slotsHtml = slots.filter(s => eqDet[s]).map(slot => {
+      const ba = eqDet[slot]?.exVo?.baseAffixes || [];
+      const slotLabel = window.WWMSidebar?.icons?.slotLabelI18n?.(slot) || ('slot ' + slot);
+      const affixHtml = ba.map((a, idx) => {
+        const d = a?.equipmentDetails;
+        if (!d || d[0] == null) return '';
+        const sk = window.WWM_AFFIX?.[d[0]]?.statKey;
+        const name = _affixUtil.affixDisplayName(d[0], idx);
+        const isPct = sk ? _affixUtil.isPctStat(sk) : false;
+        const needsMul = sk ? _affixUtil.pctNeedsMul(sk) : false;
+        const v = (typeof d[1] === 'number')
+          ? (isPct ? (needsMul ? (d[1]*100).toFixed(1)+'%' : d[1].toFixed(1)+'%') : d[1].toFixed(1))
+          : '-';
+        return `<div class="wwm-zb-affix"><span class="wwm-zb-affix-name">${name}</span><span class="wwm-zb-affix-val">${v}</span></div>`;
+      }).join('');
+      return `<div class="wwm-zb-slot"><div class="wwm-zb-slot-name">${slotLabel}</div>${affixHtml}</div>`;
+    }).join('');
+    return `
+      <div class="wwm-zb-score-line">${res.score.toLocaleString()} <span class="wwm-zb-delta ${delta>=0?'pos':'neg'}">Δ${sign}${delta.toLocaleString()}</span></div>
+      <div class="wwm-zb-slots">${slotsHtml}</div>
+    `;
+  }
+
+  function _applyZbResult(res, m) {
+    const T_ = window.T || {};
+    const msg = T_.optZerobaseConfirm || 'この構成を採用しますか？\n現在の affix が全 slot で上書きされます (装備本体は keep)。';
+    if (!confirm(msg)) return;
+    const eqDet = res.ri?.wearEquipsDetailed || {};
+    if (!WWMState.virtual.gear) WWMState.virtual.gear = {};
+    for (const slot of Object.keys(eqDet)) {
+      const baseEq = WWMState.roleInfo?.wearEquipsDetailed?.[slot];
+      if (!baseEq) continue;
+      const cur = WWMState.virtual.gear[slot]
+        ? JSON.parse(JSON.stringify(WWMState.virtual.gear[slot]))
+        : JSON.parse(JSON.stringify(baseEq));
+      cur.exVo = cur.exVo || {};
+      cur.exVo.baseAffixes = JSON.parse(JSON.stringify(eqDet[slot]?.exVo?.baseAffixes || []));
+      if (eqDet[slot]?.exVo?.suffix !== undefined) cur.exVo.suffix = eqDet[slot].exVo.suffix;
+      WWMState.virtual.gear[slot] = cur;
+    }
+    if (typeof window._saveVirtuals === 'function') window._saveVirtuals();
+    m.remove();
+    if (window.showToast) window.showToast(T_.optZerobaseApplied || 'ゼロベース構成を採用しました');
+    if (typeof window._refreshAll === 'function') window._refreshAll();
+  }
+
   // ── expose ───────────────────────────────────────────────
   window.WWMSidebar = window.WWMSidebar || {};
   window.WWMSidebar.opt = {
@@ -553,5 +852,6 @@
     exportSteps: _exportOptSteps,
     applySteps: _applyOptSteps,
     resortRows: _OPT_resortRows,
+    runZerobaseCompare,
   };
 })();

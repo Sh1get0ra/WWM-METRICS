@@ -1056,6 +1056,83 @@
     "ko": "적용",
     "vi": "Áp dụng"
   },
+  "optZerobaseCompare": {
+    "ja": "格析",
+    "en": "Zero-Base",
+    "zh": "零基对照",
+    "ko": "제로베이스",
+    "vi": "So sánh nền 0"
+  },
+  "optZerobaseCompareTip": {
+    "ja": "武器系 affix#6 = 無相貫通/外功貫通 固定 で並列比較 (属性 vs 物理)",
+    "en": "Compare weapon affix#6 fixed to Void Pen vs Phys Pen (element vs physical)",
+    "zh": "武器 affix#6 = 无相穿透/外功穿透 固定 并列对照 (属性 vs 物理)",
+    "ko": "무기 affix#6 = 무상관통/외공관통 고정 병렬 비교 (속성 vs 물리)",
+    "vi": "So sánh vũ khí affix#6 cố định Xuyên Vô Tướng vs Xuyên Ngoại Công"
+  },
+  "optZerobaseTitle": {
+    "ja": "格析対照",
+    "en": "Zero-Base Compare",
+    "zh": "格析对照",
+    "ko": "격석 대조",
+    "vi": "Đối chiếu Nền 0"
+  },
+  "optZerobaseVoid": {
+    "ja": "無相貫通固定",
+    "en": "Void Pen Fixed",
+    "zh": "无相穿透固定",
+    "ko": "무상관통 고정",
+    "vi": "Cố định Xuyên Vô Tướng"
+  },
+  "optZerobasePhys": {
+    "ja": "外功貫通固定",
+    "en": "Phys Pen Fixed",
+    "zh": "外功穿透固定",
+    "ko": "외공관통 고정",
+    "vi": "Cố định Xuyên Ngoại Công"
+  },
+  "optZerobaseCalc": {
+    "ja": "計算中…",
+    "en": "Calculating…",
+    "zh": "计算中…",
+    "ko": "계산 중…",
+    "vi": "Đang tính…"
+  },
+  "optZerobaseFailed": {
+    "ja": "計算失敗",
+    "en": "Calculation failed",
+    "zh": "计算失败",
+    "ko": "계산 실패",
+    "vi": "Tính toán thất bại"
+  },
+  "optZerobaseApplyVoid": {
+    "ja": "無相採用",
+    "en": "Apply Void",
+    "zh": "采用无相",
+    "ko": "무상 적용",
+    "vi": "Áp dụng Vô Tướng"
+  },
+  "optZerobaseApplyPhys": {
+    "ja": "外功採用",
+    "en": "Apply Phys",
+    "zh": "采用外功",
+    "ko": "외공 적용",
+    "vi": "Áp dụng Ngoại Công"
+  },
+  "optZerobaseConfirm": {
+    "ja": "この構成を採用しますか？\n現在の affix が全 slot で上書きされます (装備本体は keep)。",
+    "en": "Apply this build? All slot affixes will be overwritten (equipment items kept).",
+    "zh": "采用此配置？所有部位 affix 将被覆盖（装备本体保留）。",
+    "ko": "이 구성을 적용하시겠습니까? 모든 슬롯 affix가 덮어씌워집니다 (장비 본체 유지).",
+    "vi": "Áp dụng cấu hình này? Affix của tất cả slot sẽ bị ghi đè (giữ trang bị gốc)."
+  },
+  "optZerobaseApplied": {
+    "ja": "ゼロベース構成を採用しました",
+    "en": "Zero-base build applied",
+    "zh": "已采用零基础配置",
+    "ko": "제로베이스 구성 적용 완료",
+    "vi": "Đã áp dụng cấu hình nền 0"
+  },
   "cmpShouon": {
     "ja": "同級承音",
     "en": "Same-Tier Orchestration",

@@ -2499,6 +2499,41 @@
   border-color: var(--vermilion);
   color: var(--sumi-fg);
 }
+
+/* ── 格析対照 modal (ゼロベース比較、 2026-06-18 TODO 1) ── */
+.wwm-zb-body { padding: 4px 0; min-height: 200px; }
+/* modal 高さオーバーフロー時 = 内容スクロール可能化 (8 slot × 6 affix で縦長) */
+.wwm-cmp-modal-a .wwm-modal-body { max-height: calc(100vh - 220px); overflow-y: auto; }
+.wwm-cmp-modal-a .wwm-cmp-col { max-height: calc(100vh - 280px); overflow-y: auto; }
+.wwm-zb-score-line {
+  font-family: var(--f-display-title); font-weight: 800;
+  font-size: var(--text-lg); letter-spacing: 0.04em;
+  text-align: center; margin: 6px 0 10px;
+  color: var(--kami-fg);
+}
+.wwm-zb-delta { font-size: var(--text-sm); margin-left: 8px; letter-spacing: 0.06em; }
+.wwm-zb-delta.pos { color: var(--vermilion); }
+.wwm-zb-delta.neg { color: var(--sumi-fg-dim); }
+.wwm-zb-slots { display: flex; flex-direction: column; gap: 6px; }
+.wwm-zb-slot {
+  padding: 4px 6px;
+  border-bottom: 1px dashed color-mix(in oklab, var(--gold) 28%, transparent);
+}
+.wwm-zb-slot:last-child { border-bottom: none; }
+.wwm-zb-slot-name {
+  font-family: var(--f-display-title); font-weight: 700;
+  font-size: var(--text-sm); letter-spacing: 0.06em;
+  color: var(--text-sumi-gold, var(--kami-fg));
+  margin-bottom: 2px;
+}
+.wwm-zb-affix {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: var(--text-12); padding: 1px 0;
+}
+.wwm-zb-affix-name {
+  flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.wwm-zb-affix-val { font-weight: var(--fw-bold); white-space: nowrap; }
 .wwm-ocr-status {
   margin-left: 6px;
   font-size: 11px;
