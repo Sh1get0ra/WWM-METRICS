@@ -2500,6 +2500,57 @@
   color: var(--sumi-fg);
 }
 
+/* Lv + Rank (品質: 金/紫/青) 1 行: 武術 select 上、 現有/新置 col 縦位置揃え (2026-06-18 兄貴指示)。
+   new = 2 select 横並び (Lv + Rank)、 current = read-only span 表示 */
+.wwm-cmp-lv-rank-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 6px;
+}
+.wwm-cmp-lv-rank-row .wwm-cmp-lv-select,
+.wwm-cmp-lv-rank-row .wwm-cmp-rank-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 2px 22px 2px 8px;
+  min-height: 24px;
+  font-family: var(--f-latin);
+  font-weight: 700;
+  font-size: var(--text-14);
+  color: var(--c-modal-a-lv-fg);
+  background-color: var(--shine-strong);
+  background-image: linear-gradient(45deg, transparent 50%, var(--c-modal-a-lv-fg) 50%), linear-gradient(135deg, var(--c-modal-a-lv-fg) 50%, transparent 50%);
+  background-position: calc(100% - 12px) 50%, calc(100% - 7px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  border: 1px solid var(--c-cmp-title--cmp-lv-border);
+  border-radius: 2px;
+  cursor: pointer;
+}
+.wwm-cmp-lv-rank-row .wwm-cmp-lv-select option,
+.wwm-cmp-lv-rank-row .wwm-cmp-rank-select option {
+  background: var(--bg-modal-a-option);
+  color: var(--c-modal-a-fg);
+}
+/* current 列 read-only: Lv + Rank label 並列、 Rank は品質色 */
+.wwm-cmp-lv-rank-readonly .wwm-cmp-lv,
+.wwm-cmp-lv-rank-readonly .wwm-cmp-rank {
+  padding: 2px 8px;
+  font-family: var(--f-latin);
+  font-weight: 700;
+  font-size: var(--text-14);
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+.wwm-cmp-lv-rank-readonly .wwm-cmp-lv {
+  color: var(--c-modal-a-lv-fg);
+}
+.wwm-cmp-rank-gold   { color: var(--gold); }
+.wwm-cmp-rank-purple { color: var(--purple, #b48ad8); }
+.wwm-cmp-rank-blue   { color: var(--blue, #6fa8d8); }
+
 /* ── 格析 (ゼロベース比較) anlz subtab panel (2026-06-18 TODO 1) ── */
 #wwmZerobase .wwm-zb-panel {
   display: grid;

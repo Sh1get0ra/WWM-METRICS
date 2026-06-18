@@ -443,7 +443,15 @@
           ${bgIconHtml ? bgIconHtml.replace('class="wwm-cmp-bg-icon"', 'class="wwm-cmp-modal-bg-icon wwm-cmp-modal-bg-icon-gear' + ((slot === '9' || slot === '21') ? ' wwm-cmp-modal-bg-icon-gear-small' : (slot === '1' || slot === '2') ? ' wwm-cmp-modal-bg-icon-gear-weapon' : ' wwm-cmp-modal-bg-icon-gear-armor') + '"') : ''}
           <div class="wwm-cmp-grid">
             <div class="wwm-cmp-col wwm-cmp-current${isBowSetSlot?' wwm-cmp-bow':''}">
-              <h3 class="wwm-cmp-title" data-seal="${(window.T&&T.cmpCurrent)||'現有'}"><span class="wwm-cmp-title-text">${(window.T&&T.cmpCurrent)||'現有'}</span>${origEq?.exVo?._inferredLv ? `<span class="wwm-cmp-lv">Lv${origEq.exVo._inferredLv}</span>` : ''}</h3>
+              <h3 class="wwm-cmp-title" data-seal="${(window.T&&T.cmpCurrent)||'現有'}"><span class="wwm-cmp-title-text">${(window.T&&T.cmpCurrent)||'現有'}</span></h3>
+              ${(() => {
+                // 現有 列の Lv + Rank 表示 (read-only)。 new 列と縦位置揃え (2026-06-18 兄貴指示)
+                const _lv = origEq?.exVo?._inferredLv;
+                const _rk = origEq?.exVo?._rank || 'gold';
+                const _rkLabel = ({gold:'金', purple:'紫', blue:'青'})[_rk] || '金';
+                if (!_lv) return '';
+                return `<div class="wwm-cmp-lv-rank-row wwm-cmp-lv-rank-readonly"><span class="wwm-cmp-lv">Lv${_lv}</span><span class="wwm-cmp-rank wwm-cmp-rank-${_rk}">${_rkLabel}</span></div>`;
+              })()}
               ${curKongfuHeader}
               ${curSetHeader}
               ${isAffixEditable ? `<div class="wwm-cmp-shouon-row" aria-hidden="true" style="visibility:hidden;"><button type="button" class="wwm-cmp-shouon-btn" tabindex="-1">${(window.T&&T.cmpShouon)||'同級承音'}</button></div>` : ''}
@@ -452,18 +460,30 @@
             <div class="wwm-cmp-divider"></div>
             <div class="wwm-cmp-col wwm-cmp-new${isBowSetSlot?' wwm-cmp-bow':''}" id="wwmCmpNewCol">
               <h3 class="wwm-cmp-title" data-seal="${(window.T&&T.cmpNew)||'新置'}"><span class="wwm-cmp-title-text">${(window.T&&T.cmpNew)||'新置'}</span>${(() => {
+                // OCR 取込ボタン (適用先 = 新置の明示)。slot 9/21 (affix 編集不可) は非表示
+                return isAffixEditable
+                  ? ` <button type="button" id="wwmCmpOcrBtn" class="wwm-ocr-btn" title="${(window.T&&T.ocrBtnTitle)||'スクショ取込 (OCR)'}" aria-label="${(window.T&&T.ocrBtnTitle)||'スクショ取込 (OCR)'}">📷</button><button type="button" id="wwmCmpOcrHelpBtn" class="wwm-ocr-btn wwm-ocr-help-btn" title="${(window.T&&T.ocrHelpTitle)||'スクショ取込ガイド'}" aria-label="${(window.T&&T.ocrHelpTitle)||'スクショ取込ガイド'}">?</button><span id="wwmCmpOcrStatus" class="wwm-ocr-status" aria-live="polite"></span>`
+                  : '';
+              })()}</h3>
+              ${(() => {
+                // Lv + Rank (品質) 1 行 (武術 select 上)。 2026-06-18 兄貴指示
                 const _curLv = WWMState.virtual.gear?.[slot]?.exVo?._inferredLv ?? origEq?.exVo?._inferredLv;
-                // 装備レベルは charLv (import時のキャラレベル) 以下のみ選択可。未所持の高Lv装備での皮算用を防ぐ。
                 const _lvList = (window.WWM_EQUIP_BASE_BY_LV?._lvList || [91, 86, 81, 71]).filter(lv => lv <= charLv);
                 const _hasTbl = !!window.WWM_EQUIP_BASE_BY_LV?.slots?.[String(slot)];
-                // OCR 取込ボタン: Lv select の右隣 (適用先 = 新置の明示)。slot 9/21 (affix 編集不可) は非表示
-                const _ocrHtml = isAffixEditable
-                  ? `<button type="button" id="wwmCmpOcrBtn" class="wwm-ocr-btn" title="${(window.T&&T.ocrBtnTitle)||'スクショ取込 (OCR)'}" aria-label="${(window.T&&T.ocrBtnTitle)||'スクショ取込 (OCR)'}">📷</button><button type="button" id="wwmCmpOcrHelpBtn" class="wwm-ocr-btn wwm-ocr-help-btn" title="${(window.T&&T.ocrHelpTitle)||'スクショ取込ガイド'}" aria-label="${(window.T&&T.ocrHelpTitle)||'スクショ取込ガイド'}">?</button><span id="wwmCmpOcrStatus" class="wwm-ocr-status" aria-live="polite"></span>`
+                const _curRank = WWMState.virtual.gear?.[slot]?.exVo?._rank ?? origEq?.exVo?._rank ?? 'gold';
+                const _lvSel = (_curLv && _hasTbl)
+                  ? `<select id="wwmCmpNewLvSel" class="wwm-cmp-lv-select">${_lvList.map(lv => `<option value="${lv}" ${lv===_curLv?'selected':''}>Lv${lv}</option>`).join('')}</select>`
+                  : (_curLv ? `<span class="wwm-cmp-lv">Lv${_curLv}</span>` : '');
+                const _rankOpts = [
+                  { v: 'gold',   l: (window.T&&T.rankGold)   || '金' },
+                  { v: 'purple', l: (window.T&&T.rankPurple) || '紫' },
+                  { v: 'blue',   l: (window.T&&T.rankBlue)   || '青' }
+                ];
+                const _rankSel = `<select id="wwmCmpNewRankSel" class="wwm-cmp-rank-select">${_rankOpts.map(o => `<option value="${o.v}" ${o.v===_curRank?'selected':''}>${o.l}</option>`).join('')}</select>`;
+                return (_lvSel || _rankSel)
+                  ? `<div class="wwm-cmp-lv-rank-row">${_lvSel}${_rankSel}</div>`
                   : '';
-                if (!_curLv || !_hasTbl) return (_curLv ? ` <span class="wwm-cmp-lv">Lv${_curLv}</span>` : '') + _ocrHtml;
-                const _opts = _lvList.map(lv => `<option value="${lv}" ${lv===_curLv?'selected':''}>Lv${lv}</option>`).join('');
-                return ` <select id="wwmCmpNewLvSel" class="wwm-cmp-lv-select">${_opts}</select>` + _ocrHtml;
-              })()}</h3>
+              })()}
               ${newKongfuHeader}
               ${newSetHeader}
               ${isAffixEditable ? `<div class="wwm-cmp-shouon-row"><button type="button" id="wwmEditShouon" class="wwm-cmp-shouon-btn" title="${(window.T&&T.cmpShouonTitle)||'新置の調律1〜5を MAX×94% に一括置換'}">${(window.T&&T.cmpShouon)||'同級承音'}</button></div>` : ''}
