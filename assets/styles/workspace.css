@@ -755,8 +755,10 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
 .wwm-ws-tabs {
   display: flex; align-items: center; gap: 8px;
   /* en/vi 狭幅 viewport で tab 見切れ防止 = wrap 許容 (兄貴指示 2026-06-18)。
-     ja/zh/ko 短 label = 1 row fit、 en/vi = 帯越え時 自然 2 row 化。 */
-  flex-wrap: wrap;
+     ja/zh/ko 短 label = 1 row fit、 en/vi = 帯越え時 自然 2 row 化。 wrap-reverse =
+     cross-axis 反転 → 1 行目 tabs-r (格析+IMPORT/RESET/PRESETS)、 2 行目 tabs
+     (Build/Combat/History) の上下逆 (兄貴指示 2026-06-18)。 */
+  flex-wrap: wrap-reverse;
   padding: 8px 36px;
   background: transparent;
   border-bottom: 1px solid var(--gold-deep);
