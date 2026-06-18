@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:i18n": "node scripts/build-i18n-pages.cjs",
     "preview": "vite preview",
     "validate:xinfa": "node scripts/validate-xinfa.cjs",
     "bench:opt": "node scripts/opt-bench.cjs --compare",

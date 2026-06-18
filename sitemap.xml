@@ -4,46 +4,46 @@
   <url>
     <loc>https://wwm-metrics.pages.dev/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://wwm-metrics.pages.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wwm-metrics.pages.dev/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://wwm-metrics.pages.dev/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wwm-metrics.pages.dev/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="vi" href="https://wwm-metrics.pages.dev/?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wwm-metrics.pages.dev/en/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://wwm-metrics.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://wwm-metrics.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://wwm-metrics.pages.dev/vi/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wwm-metrics.pages.dev/"/>
   </url>
   <url>
-    <loc>https://wwm-metrics.pages.dev/?lang=en</loc>
+    <loc>https://wwm-metrics.pages.dev/en/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://wwm-metrics.pages.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wwm-metrics.pages.dev/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://wwm-metrics.pages.dev/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wwm-metrics.pages.dev/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="vi" href="https://wwm-metrics.pages.dev/?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wwm-metrics.pages.dev/en/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://wwm-metrics.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://wwm-metrics.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://wwm-metrics.pages.dev/vi/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wwm-metrics.pages.dev/"/>
   </url>
   <url>
-    <loc>https://wwm-metrics.pages.dev/?lang=zh</loc>
+    <loc>https://wwm-metrics.pages.dev/zh/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://wwm-metrics.pages.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wwm-metrics.pages.dev/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://wwm-metrics.pages.dev/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wwm-metrics.pages.dev/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="vi" href="https://wwm-metrics.pages.dev/?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wwm-metrics.pages.dev/en/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://wwm-metrics.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://wwm-metrics.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://wwm-metrics.pages.dev/vi/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wwm-metrics.pages.dev/"/>
   </url>
   <url>
-    <loc>https://wwm-metrics.pages.dev/?lang=ko</loc>
+    <loc>https://wwm-metrics.pages.dev/ko/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://wwm-metrics.pages.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wwm-metrics.pages.dev/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://wwm-metrics.pages.dev/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wwm-metrics.pages.dev/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="vi" href="https://wwm-metrics.pages.dev/?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wwm-metrics.pages.dev/en/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://wwm-metrics.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://wwm-metrics.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://wwm-metrics.pages.dev/vi/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wwm-metrics.pages.dev/"/>
   </url>
   <url>
-    <loc>https://wwm-metrics.pages.dev/?lang=vi</loc>
+    <loc>https://wwm-metrics.pages.dev/vi/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://wwm-metrics.pages.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wwm-metrics.pages.dev/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://wwm-metrics.pages.dev/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wwm-metrics.pages.dev/?lang=ko"/>
-    <xhtml:link rel="alternate" hreflang="vi" href="https://wwm-metrics.pages.dev/?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wwm-metrics.pages.dev/en/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://wwm-metrics.pages.dev/zh/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://wwm-metrics.pages.dev/ko/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://wwm-metrics.pages.dev/vi/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://wwm-metrics.pages.dev/"/>
   </url>
 </urlset>
