@@ -754,6 +754,9 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
    差し込み型廃止 — スクロール時 panel 越境で切れる演出問題の根治) */
 .wwm-ws-tabs {
   display: flex; align-items: center; gap: 8px;
+  /* en/vi 狭幅 viewport で tab 見切れ防止 = wrap 許容 (兄貴指示 2026-06-18)。
+     ja/zh/ko 短 label = 1 row fit、 en/vi = 帯越え時 自然 2 row 化。 */
+  flex-wrap: wrap;
   padding: 8px 36px;
   background: transparent;
   border-bottom: 1px solid var(--gold-deep);
@@ -761,11 +764,9 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
 }
 .wwm-ws-tab {
   display: flex; align-items: baseline; justify-content: center; gap: 8px;
-  /* 等幅 grow 化 (2026-06-18 兄貴指示) — basis 0 + grow 1 で container 残幅を 3 tab で均等 share。
-     旧 `0 1 150px` = en/vi 長 label (History / Lịch sử / Phân tích 等) が 150px overflow → tabs 帯
-     横 scroll 発生 (tabs-r IMPORT/RESET と取合)。 grow 化で「文字数より container 幅基準」 に。 */
-  flex: 1 1 0;
-  min-width: 0;
+  /* 内容幅 keep + wrap 許容 (2026-06-18 兄貴指示)。 en/vi 長 label = container 越え時に
+     親 .wwm-ws-tabs flex-wrap で 2 row 自然分割。 等幅 grow 廃止 = 短文 tab の不自然拡大も解消。 */
+  flex: 0 0 auto;
   white-space: nowrap;
   font-family: var(--f-display-title); /* lang 動的切替 (2026-06-16) — :lang() 個別 rule 全廃 */
   font-weight: 800; /* en/vi の細見え対策 (2026-06-18 兄貴指示) */
