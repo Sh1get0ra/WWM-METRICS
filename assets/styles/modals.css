@@ -2562,6 +2562,124 @@
   background: transparent;
 }
 
+/* ─── icon-select 共通 component (2026-06-18 兄貴指示) ───
+   武術/心法/セット select に icon + 名前を視覚並列。 ネイティブ <select> は option に
+   <img> 入れられないため custom dropdown 化。 mock/icon-select.html 仕様採用 */
+.ic-select {
+  position: relative;
+  display: block;
+  width: 100%;
+  font-family: var(--f-display-title, inherit);
+}
+.ic-select-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px 28px 6px 6px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--gold-deep);
+  border-radius: 3px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  position: relative;
+  transition: border-color 0.15s, background 0.15s;
+}
+.ic-select-trigger:hover {
+  border-color: var(--gold);
+  background: rgba(255, 255, 255, 0.65);
+}
+.ic-select-trigger::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid var(--gold-deep);
+  border-bottom: 1.5px solid var(--gold-deep);
+  transform: translateY(-65%) rotate(45deg);
+}
+.ic-select[aria-expanded="true"] .ic-select-trigger::after {
+  transform: translateY(-35%) rotate(-135deg);
+}
+.ic-select-trigger .ic-name {
+  font-size: 14px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--sumi-1, #1a1410);
+}
+/* chip: 武術/心法 = 墨色 box + 白 icon、 セット = 直 icon (色不変) */
+.ic-chip {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ic-chip--inkbox {
+  background: var(--sumi-2);
+  padding: 3px;
+}
+.ic-chip--inkbox img,
+.ic-chip--plain img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+/* popup */
+.ic-select-popup {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--kami-1, #e8dfc4);
+  border: 1px solid var(--gold-deep);
+  border-radius: 3px;
+  padding: 4px;
+  box-shadow: 0 6px 20px rgba(26, 20, 16, 0.25);
+  z-index: 100;
+  max-height: 320px;
+  overflow-y: auto;
+  display: none;
+}
+.ic-select[aria-expanded="true"] .ic-select-popup {
+  display: block;
+}
+.ic-select-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 8px 5px 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.12s, transform 0.12s;
+}
+.ic-select-opt:hover {
+  background: rgba(201, 164, 90, 0.18);
+  transform: translateY(-1px);
+}
+.ic-select-opt[aria-selected="true"] {
+  background: var(--vermilion);
+  color: var(--sumi-fg);
+}
+.ic-select-opt[aria-selected="true"] .ic-chip--inkbox {
+  background: var(--sumi-0);
+  outline: 1px solid var(--gold-bright);
+  outline-offset: -1px;
+}
+.ic-select-opt .ic-name {
+  font-size: 14px;
+  flex: 1;
+}
+
 /* ── 格析 (ゼロベース比較) anlz subtab panel (2026-06-18 TODO 1) ── */
 #wwmZerobase .wwm-zb-panel {
   display: grid;

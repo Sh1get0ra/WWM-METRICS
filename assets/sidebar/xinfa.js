@@ -225,6 +225,22 @@
         })
         .join('');
     }
+    // icon-select 用の options 配列 (心法アイコン + 名前)。 ic-chip--inkbox = 墨地 + 白 icon
+    function _xinfaIconOptions(selectedId) {
+      const opts = Object.entries(xinfaMap)
+        .filter(([k]) => /^\d+$/.test(k))
+        .map(([id]) => {
+          const n = window.WWM_DS.name('xinfa', id, lang);
+          const label = n.indexOf('[xinfa:') === 0 ? id : n;
+          return {
+            value: id,
+            name: label,
+            iconUrl: window.WWM_XINFA_ICONS?.[id]?.icon_url || null,
+            iconType: 'inkbox'
+          };
+        });
+      return { options: opts, selectedValue: String(selectedId) };
+    }
     // xinfa effects key → i18n key + 表示形式
     const _XINFA_EFFECT_LABEL = {
       allMartialBoost: { tkey: 'allWeaponDmg',    pct: true },
@@ -394,7 +410,7 @@
             <div class="wwm-cmp-divider"></div>
             <div class="wwm-cmp-col wwm-cmp-new" id="wwmCmpXinfaNewCol">
               <h3 class="wwm-cmp-title" data-seal="${_T.cmpNew||'新置'}"><span class="wwm-cmp-title-text">${_T.cmpNew||'新置'}</span></h3>
-              <select class="wwm-cmp-kongfu-select" id="wwmCmpXinfaSel">${_xinfaOptions(newXinfaId)}</select>
+              ${window.WWMSidebar.iconSelect.render({ id: 'wwmCmpXinfaSel', className: 'wwm-cmp-kongfu-select', ..._xinfaIconOptions(newXinfaId) })}
               <select class="wwm-cmp-set-select" id="wwmCmpXinfaTierSel">${[0,1,2,3,4,5,6].map(t => `<option value="${t}" ${t===newTier?'selected':''}>Tier ${t}</option>`).join('')}</select>
               <div class="wwm-cmp-rows wwm-cmp-xinfa-rows" id="wwmCmpXinfaEffect">${_effectsText(newXinfaId, newTier)}</div>
             </div>
@@ -487,15 +503,17 @@
     }
 
     const xSel = m.querySelector('#wwmCmpXinfaSel');
-    xSel.addEventListener('change', () => {
-      newXinfaId = parseInt(xSel.value, 10);
-      const eff = m.querySelector('#wwmCmpXinfaEffect');
-      if (eff) eff.innerHTML = _effectsText(newXinfaId, newTier);
-      // 武具対照と同仕様: 新置 心法 select 変更で modal 背景アイコンを動的切替
-      const newIconUrl = window.WWM_XINFA_ICONS?.[newXinfaId]?.icon_url;
-      const bgEl = m.querySelector('.wwm-cmp-modal-bg-icon');
-      if (bgEl && newIconUrl) bgEl.style.backgroundImage = `url('${newIconUrl}')`;
-      _schedule();
+    window.WWMSidebar.iconSelect.attach(xSel, {
+      onChange: (val) => {
+        newXinfaId = parseInt(val, 10);
+        const eff = m.querySelector('#wwmCmpXinfaEffect');
+        if (eff) eff.innerHTML = _effectsText(newXinfaId, newTier);
+        // 武具対照と同仕様: 新置 心法 select 変更で modal 背景アイコンを動的切替
+        const newIconUrl = window.WWM_XINFA_ICONS?.[newXinfaId]?.icon_url;
+        const bgEl = m.querySelector('.wwm-cmp-modal-bg-icon');
+        if (bgEl && newIconUrl) bgEl.style.backgroundImage = `url('${newIconUrl}')`;
+        _schedule();
+      }
     });
     const tSel = m.querySelector('#wwmCmpXinfaTierSel');
     tSel.addEventListener('change', () => {
