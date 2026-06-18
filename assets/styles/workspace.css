@@ -341,6 +341,11 @@
      (兄貴指示 2026-06-12)。band/rail頭/tabs = 固定表示。≤600 は auto に戻す */
   height: 100vh;
   height: 100dvh;
+  /* en/vi 狭幅 viewport で tabs container (Combat Cadence / Chiến Luật 等 長 label) が
+     viewport 超過 → 横 scroll bar 出現 → viewport 高さ scrollbar 分圧縮 → 縦 scroll
+     連鎖発生。 横 scroll は意図しないため hidden で抑止 (兄貴指示 2026-06-18)。
+     内部 scroll (.wwm-sb-rest / .wwm-ws-body) は 1fr 内で keep。 */
+  overflow-x: hidden;
   /* ultrawide 抑止 — 全体サイズ固定 (2026-06-13 兄貴指示 案A)。 max-width 内に band/rail/main/footer
      と BG (::before xf-bg + ::after grain) を全部閉じ込め、 外側余白は html bg の sumi-0 単色で区切る */
   max-width: 1500px;
