@@ -299,6 +299,21 @@
         })
         .join('');
     }
+    // icon-select 用 (流派 icon + セット名)。 ic-chip--plain = 色不変 (公式 asset 政策)
+    function _setIconOptions(selectedId) {
+      const liupaiUrlById = window.WWMSidebar.icons.liupaiUrlById;
+      const opts = Object.entries(setsMap).map(([id, entry]) => {
+        const n = window.WWM_DS.name('sets', id, lang);
+        const label = (n.indexOf('[sets:') === 0) ? id : n;
+        return {
+          value: id,
+          name: label,
+          iconUrl: liupaiUrlById ? liupaiUrlById(entry?.liupaiId) : null,
+          iconType: 'plain'
+        };
+      });
+      return { options: opts, selectedValue: String(selectedId) };
+    }
     // slot 9/21: affix 編集不可
     const isAffixEditable = !isBowSetSlot;
     // 全 kongfu option list (slot1/2 編集用)
@@ -463,7 +478,7 @@
     const curSetHeader = isSetEditable && origSuffix
       ? `<div class="wwm-cmp-set-header" title="${_setRaw(origSuffix)}">${_setName(origSuffix)}<div class="wwm-cmp-set-effect">${_setRaw(origSuffix)}</div></div>` : '';
     const newSetHeader = isSetEditable
-      ? `<select class="wwm-cmp-set-select" id="wwmCmpSetSel">${_setOptions(newSuffix)}</select><div class="wwm-cmp-set-effect" id="wwmCmpSetEffect">${_setRaw(newSuffix)}</div>` : '';
+      ? `${window.WWMSidebar.iconSelect.render({ id: 'wwmCmpSetSel', className: 'wwm-cmp-set-select', ..._setIconOptions(newSuffix) })}<div class="wwm-cmp-set-effect" id="wwmCmpSetEffect">${_setRaw(newSuffix)}</div>` : '';
     m.innerHTML = `
       <div class="wwm-modal wwm-modal-square wwm-cmp-modal-a">
         <span class="wwm-cmp-l-bracket-tl"></span><span class="wwm-cmp-l-bracket-tr"></span>
@@ -638,11 +653,13 @@
     // セット変更 (新パネル)
     const setSel = m.querySelector('#wwmCmpSetSel');
     if (setSel) {
-      setSel.addEventListener('change', () => {
-        newSuffix = parseInt(setSel.value, 10);
-        const eff = m.querySelector('#wwmCmpSetEffect');
-        if (eff) eff.textContent = _setRaw(newSuffix);
-        _schedulePreview();
+      window.WWMSidebar.iconSelect.attach(setSel, {
+        onChange: (val) => {
+          newSuffix = parseInt(val, 10);
+          const eff = m.querySelector('#wwmCmpSetEffect');
+          if (eff) eff.textContent = _setRaw(newSuffix);
+          _schedulePreview();
+        }
       });
     }
 
