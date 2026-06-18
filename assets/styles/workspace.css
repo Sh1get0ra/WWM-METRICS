@@ -766,9 +766,10 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
 }
 .wwm-ws-tab {
   display: flex; align-items: baseline; justify-content: center; gap: 8px;
-  /* 内容幅 keep + wrap 許容 (2026-06-18 兄貴指示)。 en/vi 長 label = container 越え時に
-     親 .wwm-ws-tabs flex-wrap で 2 row 自然分割。 等幅 grow 廃止 = 短文 tab の不自然拡大も解消。 */
-  flex: 0 0 auto;
+  /* basis=auto + grow=1: 広 viewport で 1 row 収まる時は余白 grow で横長 (ja 旧仕様復活、
+     2026-06-18 兄貴指示)、 狭 viewport で wrap 発生時は内容幅 basis で 2 row 自然分割。
+     shrink=1 = wrap 後の各 row 内で残り space 再配分 (片寄り抑止)。 */
+  flex: 1 1 auto;
   white-space: nowrap;
   font-family: var(--f-display-title); /* lang 動的切替 (2026-06-16) — :lang() 個別 rule 全廃 */
   font-weight: 800; /* en/vi の細見え対策 (2026-06-18 兄貴指示) */
