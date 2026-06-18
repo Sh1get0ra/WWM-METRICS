@@ -232,10 +232,10 @@
   },
   "stDisp.dmgBoost.elemBoostMain": {
     "ja": "属性増強",
-    "en": "Element Boost",
+    "en": "Attribute Attack Penetration",
     "zh": "属攻穿透",
     "ko": "속성 공격 관통",
-    "vi": "Tăng cường thuộc tính"
+    "vi": "Thuộc tính Tấn công Xuyên thấu"
   },
   "stDisp.dmgBoost.elemBoostMain.bellstrikePen": {
     "ja": "鋼鳴貫通",
@@ -274,7 +274,7 @@
   },
   "stDisp.dmgBoost.elemAtkBoost": {
     "ja": "属性攻撃強化",
-    "en": "Elem ATK Boost",
+    "en": "Attribute Attack DMG Bonus",
     "zh": "属攻伤害加成",
     "ko": "속성 공격 피해 보너스",
     "vi": "Gia tăng Sát thương thuộc tính"
