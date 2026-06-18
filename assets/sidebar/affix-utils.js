@@ -36,6 +36,13 @@
       return 'オプション#' + id;
     }
     if (key === 'allWeaponDmg') {
+      // vi 時は _AFFIX_DISPLAY_LABELS 経由 (Proxy で stat_short 優先) で短縮表記引く。
+      // 他言語は stat_display.json の単独正名「全武術効果増加」 系を使う。
+      const L = window.currentLang || 'ja';
+      if (L === 'vi') {
+        const v = window._AFFIX_DISPLAY_LABELS?.[key];
+        if (v) return v;
+      }
       const T = window.T || {};
       return T['stDisp.dmgBoost.allMartialBoost'] || '全武術効果増加';
     }

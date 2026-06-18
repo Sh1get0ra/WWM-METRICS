@@ -526,6 +526,12 @@ const _STAT_LABELS_PROXY = new Proxy({}, {
     if (typeof k !== 'string') return undefined;
     if (window.WWM_DS) {
       const L = window.currentLang || 'ja';
+      // vi 時 = 短縮辞書 (data/i18n/stat_short.json) 優先。 武具対照 modal + import preview の文字切れ救済。
+      // miss 時は通常 stat.json (公式表記) fallback、 真実源不変
+      if (L === 'vi') {
+        const vs = window.WWM_DS.name('stat_short', k, 'vi');
+        if (vs && vs.indexOf('[stat_short:') !== 0) return vs;
+      }
       const v = window.WWM_DS.name('stat', k, L);
       if (v && v.indexOf('[stat:') !== 0) return v;
       // path系等 = ui に統合済 → t() で引く
