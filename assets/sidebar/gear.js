@@ -364,6 +364,8 @@
     }
 
     function renderNewRows() {
+      // 装備品質 (rank): blue → affix#5/#6 (idx 4-5) ロック
+      const _equipRank = WWMState.virtual.gear?.[slot]?.exVo?._rank ?? origEq?.exVo?._rank ?? 'gold';
       return newAffixes.map((a, idx) => {
         const d = a.equipmentDetails || [];
         const [id, val, ratio, rank, useful] = d;
@@ -371,6 +373,21 @@
         const sk = info?.statKey;
         const r = _deriveRank(ratio);
         const rkCls = r===3?'gold':r===2?'purple':'blue';
+        // blue + idx>=4 = affix#5/#6 ロック (select/input 無効 + ratio 空 + 「—」表示)
+        const isRankLocked = _equipRank === 'blue' && idx >= 4;
+        if (isRankLocked) {
+          return `
+            <div class="wwm-cmp-row wwm-cmp-edit-row wwm-cmp-rank-locked" data-affix-idx="${idx}" data-max-internal="">
+              <select class="wwm-cmp-stat-select" data-field="stat" data-stat-el disabled><option>—</option></select>
+              <div class="wwm-cmp-useful-mark" data-useful-el></div>
+              <div class="wwm-cmp-val-wrap">
+                <input type="number" class="wwm-num-input wwm-cmp-val-input" data-field="val" data-pct="0" data-pctmul="0" value="" disabled>
+                <span class="wwm-cmp-unit" data-unit-el></span>
+                <span class="wwm-cmp-ratio" data-ratio-el></span>
+              </div>
+            </div>
+          `;
+        }
         const opts = _getAffixOptions(id, slot, idx, newAffixes, newKongfuId);
         // selected: 通常は statKey 一致、affix6 で未登録ID(PvP定音含む) なら __pvp__ option
         const isPvpSlot6 = (idx === 5) && !info;
@@ -632,26 +649,53 @@
     // 新装備 Lv 変更 → base値 + affix値 (新Lv MAX×0.94) 自動更新
     // OCR 取込からも呼ぶため関数化 (await 可能に)
     const lvSel = m.querySelector('#wwmCmpNewLvSel');
-    async function _applyNewLv(newLv) {
+    const rankSel = m.querySelector('#wwmCmpNewRankSel');
+    // 装備品質: blue は affix#5/#6 (idx 4-5) ロック、 base 値も独立 table or 算式導出
+    // 2026-06-18 兄貴指示: gold/purple = affix 6 個、 blue = affix 4 個
+    const _curNewRank = () => rankSel?.value || 'gold';
+    // 品質別 base 値取得: gold = slots、 purple = round(gold × 0.9)、 blue = blue_slots (未収録 = gold fallback)
+    function _getBaseAttrsByRank(slot, lv, rank) {
+      const tbl = window.WWM_EQUIP_BASE_BY_LV;
+      if (!tbl) return null;
+      const slotS = String(slot), lvS = String(lv);
+      const goldRef = tbl.slots?.[slotS]?.[lvS];
+      if (!goldRef) return null;
+      if (rank === 'blue') {
+        return tbl.blue_slots?.[slotS]?.[lvS] || goldRef;   // 未収録 = gold fallback
+      }
+      if (rank === 'purple') {
+        const out = {};
+        for (const [k, v] of Object.entries(goldRef)) out[k] = Math.round(v * 0.9);
+        return out;
+      }
+      return goldRef;
+    }
+    async function _applyNewLv(newLv, newRank) {
+      const rank = newRank || _curNewRank();
       await _loadEquipMax();
       // virtual eq 作成 (origEq deep clone)
       if (!WWMState.virtual.gear) WWMState.virtual.gear = {};
       const vEq = JSON.parse(JSON.stringify(WWMState.virtual.gear[slot] || origEq));
       if (!vEq.exVo) vEq.exVo = {};
-      // base値 (baseAttrs) 新Lv
-      const refBase = window.WWM_EQUIP_BASE_BY_LV?.slots?.[String(slot)]?.[String(newLv)];
+      // base値 (baseAttrs) 新Lv + 品質
+      const refBase = _getBaseAttrsByRank(slot, newLv, rank);
       if (refBase) {
         if (!vEq.exVo.baseAttrs) vEq.exVo.baseAttrs = {};
         for (const [k, v] of Object.entries(refBase)) vEq.exVo.baseAttrs[k] = v;
       }
       vEq.exVo._inferredLv = newLv;
-      // 各affix 値 新Lv MAX × 0.94
+      vEq.exVo._rank = rank;
+      // 各affix 値 新Lv MAX × 0.94。 blue 時 idx 4-5 (affix#5/#6) はロック (値 0 化)
       const tier = _lvToTier(newLv);
       const maxTbl = _getCachedEquipMax()?.tiers?.[tier] || {};
       if (Array.isArray(vEq.exVo.baseAffixes)) {
-        for (const aff of vEq.exVo.baseAffixes) {
+        vEq.exVo.baseAffixes.forEach((aff, idx) => {
           const d = aff.equipmentDetails;
-          if (!Array.isArray(d) || d.length < 2) continue;
+          if (!Array.isArray(d) || d.length < 2) return;
+          if (rank === 'blue' && idx >= 4) {
+            d[1] = 0; d[2] = 0; d[3] = 1; d[4] = 0;   // blue affix#5/#6 = 存在せず
+            return;
+          }
           const info = window.WWM_AFFIX?.[d[0]];
           const sk = info?.statKey;
           const maxKey = _STAT_TO_MAX_KEY[sk] || sk;
@@ -660,7 +704,7 @@
             d[1] = +(maxVal * 0.94).toFixed(4);
             d[2] = 0.94;
           }
-        }
+        });
       }
       WWMState.virtual.gear[slot] = vEq;
       if (typeof window._saveVirtuals === 'function') window._saveVirtuals();
@@ -675,7 +719,10 @@
       _schedulePreview();
     }
     if (lvSel) {
-      lvSel.addEventListener('change', () => _applyNewLv(parseInt(lvSel.value, 10)));
+      lvSel.addEventListener('change', () => _applyNewLv(parseInt(lvSel.value, 10), _curNewRank()));
+    }
+    if (rankSel) {
+      rankSel.addEventListener('change', () => _applyNewLv(_curNewLv(), rankSel.value));
     }
     // 装備個別 Lv (new 列 select 値)。 affix 値 input の MAX clamp は charLv でなく
     // 装備 Lv 連動 (Lv86 武器を Lv91 上限で入力許容 = 物理不可能、 2026-06-18 兄貴指摘)
@@ -896,9 +943,12 @@
           }
           // affix 投入 (newAffixes 直接更新 → 一括再 render)
           const warnIdx = [];
+          const _ocrRank = _curNewRank();
           for (const r of res.rows) {
             const d = newAffixes[r.idx]?.equipmentDetails;
             if (!d) continue;
+            // blue 装備の affix#5/#6 (idx 4-5) は存在せず → OCR 投入 skip (2026-06-18 兄貴指示)
+            if (_ocrRank === 'blue' && r.idx >= 4) continue;
             // PvP定音 row (idx5 + 未登録 ID) は編集不可 → skip
             if (r.idx === 5 && !window.WWM_AFFIX?.[d[0]]) continue;
             d[0] = parseInt(r.affixId, 10);

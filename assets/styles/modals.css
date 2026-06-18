@@ -2551,6 +2551,17 @@
 .wwm-cmp-rank-purple { color: var(--purple, #b48ad8); }
 .wwm-cmp-rank-blue   { color: var(--blue, #6fa8d8); }
 
+/* blue 装備 affix#5/#6 ロック row: select/input 編集不可 + 半透明 grey-out */
+.wwm-cmp-rank-locked {
+  opacity: 0.4;
+  pointer-events: none;
+}
+.wwm-cmp-rank-locked .wwm-cmp-stat-select,
+.wwm-cmp-rank-locked .wwm-cmp-val-input {
+  cursor: not-allowed;
+  background: transparent;
+}
+
 /* ── 格析 (ゼロベース比較) anlz subtab panel (2026-06-18 TODO 1) ── */
 #wwmZerobase .wwm-zb-panel {
   display: grid;
