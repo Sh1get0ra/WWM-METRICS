@@ -2652,7 +2652,14 @@
   max-height: 175px;
   overflow-y: auto;
   display: none;
+  /* スクロールバー: 既存 pattern (note/anlz/zerobase) と統一 (gold-deep + thin) */
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-deep) transparent;
 }
+.ic-select-popup::-webkit-scrollbar { width: 5px; }
+.ic-select-popup::-webkit-scrollbar-track { background: transparent; }
+.ic-select-popup::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 2px; }
+.ic-select-popup::-webkit-scrollbar-thumb:hover { background: var(--gold); }
 .ic-select[aria-expanded="true"] .ic-select-popup {
   display: block;
 }
