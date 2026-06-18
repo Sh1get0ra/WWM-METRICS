@@ -312,6 +312,22 @@
         })
         .join('');
     }
+    // icon-select 用 (武術 icon + 名前)。 ic-chip--inkbox = 墨地 + 白 icon
+    function _kongfuIconOptions(selectedId) {
+      const opts = Object.entries(kfMap)
+        .filter(([k]) => /^\d+$/.test(k))
+        .map(([id]) => {
+          const n = window.WWM_DS.name('kongfu', id, lang);
+          const label = (n.indexOf('[kongfu:') === 0) ? id : n;
+          return {
+            value: id,
+            name: label,
+            iconUrl: window.WWM_KONGFU_ICONS?.[id]?.pic_url || null,
+            iconType: 'inkbox'
+          };
+        });
+      return { options: opts, selectedValue: String(selectedId) };
+    }
     // 仮想 roleInfo (newKongfu を反映した useful 判定用)
     function _virtRi(kid) {
       if (!isWeaponSlot) return origRi;
@@ -441,7 +457,7 @@
     const curKongfuHeader = isWeaponSlot && origKongfuId
       ? `<div class="wwm-cmp-kongfu-header">${_kfName(origKongfuId)}</div>` : '';
     const newKongfuHeader = isWeaponSlot
-      ? `<select class="wwm-cmp-kongfu-select" id="wwmCmpKongfuSel">${_kongfuOptions(newKongfuId)}</select>`
+      ? window.WWMSidebar.iconSelect.render({ id: 'wwmCmpKongfuSel', className: 'wwm-cmp-kongfu-select', ..._kongfuIconOptions(newKongfuId) })
       : '';
     // panel 内 set header HTML
     const curSetHeader = isSetEditable && origSuffix
@@ -633,17 +649,19 @@
     // kongfu 変更 (新パネル)
     const kfSel = m.querySelector('#wwmCmpKongfuSel');
     if (kfSel) {
-      kfSel.addEventListener('change', () => {
-        newKongfuId = parseInt(kfSel.value, 10);
-        _recalcUseful();
-        const rowsEl = m.querySelector('#wwmCmpNewRows');
-        if (rowsEl) rowsEl.innerHTML = renderNewRows();
-        _bindRowEvents();
-        // 新パネル bg icon 更新 (kongfu icon dict 優先 → fallback)
-        const newIconUrl = _gearIconResolve(slot, _virtRi(newKongfuId));
-        const bgEl = m.querySelector('.wwm-cmp-modal-bg-icon');
-        if (bgEl && newIconUrl) bgEl.style.backgroundImage = `url('${newIconUrl}')`;
-        _schedulePreview();
+      window.WWMSidebar.iconSelect.attach(kfSel, {
+        onChange: (val) => {
+          newKongfuId = parseInt(val, 10);
+          _recalcUseful();
+          const rowsEl = m.querySelector('#wwmCmpNewRows');
+          if (rowsEl) rowsEl.innerHTML = renderNewRows();
+          _bindRowEvents();
+          // 新パネル bg icon 更新 (kongfu icon dict 優先 → fallback)
+          const newIconUrl = _gearIconResolve(slot, _virtRi(newKongfuId));
+          const bgEl = m.querySelector('.wwm-cmp-modal-bg-icon');
+          if (bgEl && newIconUrl) bgEl.style.backgroundImage = `url('${newIconUrl}')`;
+          _schedulePreview();
+        }
       });
     }
     // 新装備 Lv 変更 → base値 + affix値 (新Lv MAX×0.94) 自動更新
