@@ -414,9 +414,11 @@
     // integer fallback より優先 (装備詳細画面の「境地 ▼27」誤爆対策、2026-06-07 実測)
     let lv = null;
     const lvRe = /(?:Lv|Tier)\.?\s*(\d{1,3})|(\d{1,3})\s*[阶级단]/i;   // Lv.91 / Tier 91 / 91阶·91级 (zh) / 91단 (ko)
+    // [+＋] 除外は装備本体 Lv で誤発動 (✦承音 marked = 「+承音 ·Lv.91」 で + に阻まれ未検出、 3.png 実測)
+    // → 削除。 affix 行の「+1.5%」 等は別経路 (rawNum に + 含む) なので Lv 誤認の心配なし
     for (const ln of merged) {
       const m = ln.text.match(lvRe);
-      if (m && !/[+＋]/.test(ln.text)) {
+      if (m) {
         const v = parseInt(m[1] || m[2], 10);
         if (v >= 1 && v <= 130) { lv = v; break; }
       }
@@ -516,6 +518,10 @@
     ['記ダメ', '鼠ダメ'], ['和ダメ', '鼠ダメ'], ['基加', '増加'],
     ['カカ', '力'],     // ja OCR: 1 文字 affix 力 → カカ (badge 隣接で字割れ — 2026-06-07 兄貴実スクショ)
     ['意楽', '意率'],   // ja OCR: 率 → 楽 (会意楽強化)
+    // 2026-06-18 PoC 追補 (.claude/research/ocr-poc-findings-2026-06-18.md):
+    ['人', '会'],       // ja OCR: 1 文字 affix 会 → 人 (badge 隣接 + glow、 2/4.png 実測)
+    ['浮鹿', '浮塵'],   // ja OCR: 浮塵の縄 → 浮鹿 (kongfu prefix、 3.png)
+    ['也ダメ', '鼠ダメ'], // ja OCR: 鼠ダメ → 也ダメ (kongfu suffix、 3.png)
     // ['破竹','瞬岚'] は 2026-06-07 dict zh 全面改訂 (ゲーム内訳=破竹 採用) で廃止 — 残すと正読を壊す
     ['起学', '武学'],   // zh OCR: 武→起
     ['筷筷', '鼠鼠'],   // zh OCR: 鼠鼠→筷筷
@@ -530,6 +536,10 @@
       .replace(/[\[(（【「［][^\])）】」］]{0,6}[\])）】」］]/g, '')   // 短い括弧 token ([転]/[Turn] の誤読含む) 除去
       .replace(/[・･·•]/g, ''));
     t = t.replace(/[四加回のロ口関内胃衣|컵캡켈법멀케맵팹]+$/, '');             // 末尾の badge(👍) 誤読文字 strip (四/加/関/캡 等 — 実測群)
+    // 1 文字 query 救済: 末尾「カ」(片仮名カ) 1 文字残り → 「力」 (漢字力) 化。
+    // 「力」 と 「カ」 は字形ほぼ同じで Tesseract 不安定 (5.png idx4 / 3.png [転]力 実測)。
+    // 全文置換は副作用大 (「カウンター」 等 risk) → 末尾 1 文字残り時のみ適用
+    if (t === 'カ' || t === '上カ' || t === 'カ上') t = '力';        // 「カ 上」「上 カ」 等の badge 隣接 pattern
     t = t.replace(/攻撃力(?=強化$|$)/, '攻撃');                       // 攻撃力 → 攻撃 (単独 stat「力」は温存)
     t = t.replace(/攻击力(?=强化$|$)/, '攻击');                       // zh 簡体 同様
     for (let i = 0; i < 3; i++) {
@@ -709,6 +719,51 @@
     if (src instanceof HTMLImageElement || src instanceof HTMLCanvasElement) return src;
     return await createImageBitmap(src);
   }
+  // 基礎ステ逆引き Lv (2026-06-18 PoC R4 fallback): 装備本体 OCR 行 (整数値 + name に攻撃/気血/防御)
+  // を equip_base_by_lv.json 全 slot × Lv で照合。 一意絞り込みなら採用、 複数候補 or 0 件 → null。
+  // 「+承音」 marked / glow 等で明示 Lv parse 失敗時の保険 (3.png 実測で lv=null → 91 復元)。
+  // 数値 OCR は digits worker 経由 = confidence 高、 base 値 (整数) は誤読しにくい
+  function _inferLvFromBaseStats(affixes) {
+    const tbl = window.WWM_EQUIP_BASE_BY_LV;
+    if (!tbl || !tbl.slots) return null;
+    const lvList = tbl._lvList || [91, 86, 81, 71];
+    // 基礎ステ取得: 整数値 (小数なし) + name で stat key 判定
+    const observed = {};   // {HP_MAX: 4614, W_DEF: 36, MIN_W_ATK: 53, MAX_W_ATK: 124}
+    for (const a of affixes) {
+      if (/\d[.,]\d/.test(String(a.rawNum || ''))) continue;   // 小数 = affix、 整数 = 基礎ステ候補
+      const n = String(a.name || '');
+      const v = Math.round(a.value);
+      if (!v) continue;
+      // name 部分一致 (OCR noise 許容): 気財/気血 + 最大値 → HP_MAX、 防御 → W_DEF、 攻撃 → ATK
+      if (/(気|氣)[^防]*最大|HP/i.test(n)) { observed.HP_MAX = v; }
+      else if (/防御|defense|防/i.test(n)) { observed.W_DEF = v; }
+      else if (/攻撃|攻击|attack/i.test(n)) {
+        // 「外功攻撃 53~124」 = MIN+MAX、 「最大外功攻撃 106」 = MAX のみ
+        // rawNum に区切り文字 (~/-) あれば MIN/MAX 両方 parse
+        const raw = String(a.rawNum || '');
+        const mm = raw.match(/(\d+)\s*[~\-‐〜]\s*(\d+)/);
+        if (mm) { observed.MIN_W_ATK = parseInt(mm[1], 10); observed.MAX_W_ATK = parseInt(mm[2], 10); }
+        else if (/最大|MAX|max/i.test(n)) { observed.MAX_W_ATK = v; }
+        else if (/最小|MIN|min/i.test(n)) { observed.MIN_W_ATK = v; }
+      }
+    }
+    if (!Object.keys(observed).length) return null;
+    // 全 slot × Lv 走査、 observed が ref subset と完全一致する組合せ列挙
+    const hits = new Set();
+    for (const [slot, slotTbl] of Object.entries(tbl.slots)) {
+      if (slot.startsWith('_')) continue;
+      for (const lv of lvList) {
+        const ref = slotTbl[String(lv)];
+        if (!ref) continue;
+        const refKeys = Object.keys(ref);
+        // observed が ref の値と key 単位で完全一致 (observed に ref の全 key がある + 全 value 一致)
+        const ok = refKeys.every(k => observed[k] != null && observed[k] === ref[k]);
+        if (ok) hits.add(lv);
+      }
+    }
+    return hits.size === 1 ? [...hits][0] : null;   // 一意のみ採用
+  }
+
   async function run(imgSource, ctx) {
     const lang = ctx.lang || (window.currentLang || 'ja');
     const tessLang = LANG_MAP[lang] || 'jpn';
@@ -720,7 +775,12 @@
     // 旧 強化画面は値が名前直後 = gap 極小。言語非依存・separator/装飾に依存しない — 2026-06-07 実測)
     const gaps = lines.map(l => l.gapRatio).filter(g => g != null);
     const detailMode = gaps.filter(g => g >= 0.75).length >= 4;   // 値 x ≥75%幅 が 4 行以上 = 右端寄せ列 = 詳細画面 — 実測
-    const { lv, affixes } = _parseLines(lines, detailMode);
+    let { lv, affixes } = _parseLines(lines, detailMode);
+    // 明示 Lv 取れず → 基礎ステ逆引き (R4 fallback、 ✦承音 marked / glow 等の保険)
+    if (lv == null) {
+      const inferred = _inferLvFromBaseStats(affixes);
+      if (inferred != null) lv = inferred;
+    }
     if (detailMode) {
       // ── 装備詳細画面: affix = 小数 1 桁値の行のみ (基礎ステ/セット効果/耐久度 = 整数 = 自然排除)。
       //    行順 = idx。値誤読で小数が落ちた行は欠落 → <6 安全弁で全行要確認化
