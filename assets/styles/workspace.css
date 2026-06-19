@@ -1522,7 +1522,9 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 }
 
 /* 流派バッジ = 公式画像 (兄貴指示 2026-06-13、 mock R5 の墨splat 廃止)
-   アイコン枠の左上配置 (兄貴指示 2026-06-13) */
+   アイコン枠の左上配置 (兄貴指示 2026-06-13)
+   2026-06-19 兄貴指示: 多段 drop-shadow で板から浮き上がる立体感
+   = 近接シャープ影 + 遠方ぼんやり影の 2 段 */
 .wwm-ws-paper .plank-liupai {
   position: absolute;
   top: 0;
@@ -1530,7 +1532,9 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   width: 40px; height: 40px;
   z-index: 4;
   object-fit: contain;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+  filter:
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7))
+    drop-shadow(0 2px 5px rgba(0, 0, 0, 0.8));
   pointer-events: none;
 }
 
