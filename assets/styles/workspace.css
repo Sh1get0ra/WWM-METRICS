@@ -1416,17 +1416,26 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
   .wwm-ws-rail .wwm-rail-fade { display: none; }
   .wwm-ws-rail .wwm-rail-in { position: relative; height: 100%; width: 100%; }
   .wwm-ws-rail .wwm-rail-tate {
-    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    display: block;
+    text-align: center;
     opacity: 1; pointer-events: auto;
     position: relative; inset: auto;
     padding-top: 8px;
+    width: 100%;
   }
+  .wwm-ws-rail .wwm-rail-tate > * { display: block; margin: 6px auto; }
+  /* 縦書き ステータス label: vertical-lr で writing-mode 親 (horizontal) との conflict 回避
+     (vertical-rl は要素自身の inline-block 計算で x 位置が負側にずれる、 lr で +側に補正) */
   .wwm-ws-rail .wwm-rail-tate .t-label {
-    display: block;
-    writing-mode: vertical-rl;
+    display: inline-block;
+    writing-mode: vertical-lr;
+    -webkit-writing-mode: vertical-lr;
+    text-orientation: mixed;
     font-family: var(--f-display-title); font-weight: 700;
     font-size: 12px; letter-spacing: 0.3em;
     color: var(--gold-bright);
+    width: fit-content;
+    height: auto;
   }
   .wwm-ws-rail .wwm-rail-tate .wwm-rail-toggle {
     transform: none;
@@ -1463,9 +1472,11 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
   }
   .wwm-app[data-rail-mobile="open"] ~ .wwm-rail-backdrop,
   .wwm-app[data-rail-mobile="open"] .wwm-rail-backdrop { display: block; }
-  /* rail 内 stat (rest) = collapse 時 非表示、 縦書きラベルのみ */
+  /* rail 内 stat (rest) = collapse 時 非表示、 縦書きラベルのみ。 overlay open 時のみ表示 */
   .wwm-sb-rest, .wwm-sb-mini-hero-card { display: none; }
-  .wwm-rail-tate { writing-mode: vertical-rl; font-size: 12px; color: var(--gold-bright); letter-spacing: 0.3em; }
+  .wwm-app[data-rail-mobile="open"] .wwm-sb-rest { display: block; }
+  /* writing-mode は .t-label のみに適用 (L1430)、 .wwm-rail-tate 自体に当てると flex 軸が
+     回転してしまう (兄貴指摘の x:-13 ずれ原因) */
   .wwm-rail-toggle { width: 30px; height: 30px; border: 1px solid var(--gold-deep); color: var(--gold-bright); background: transparent; }
   .wwm-rail-fade { background: none; }
 
@@ -1510,12 +1521,22 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
     border-bottom: none;
   }
   .wwm-bn {
+    flex: 1;
+    min-height: 48px;
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 4px 2px;
     font-family: var(--f-display-title);
     font-weight: 700;
     font-size: 12px;
     letter-spacing: 0.16em;
     color: var(--sumi-text-3);
-    gap: 2px;
+    cursor: pointer;
   }
   .wwm-bn[aria-selected="true"] {
     background: var(--kami-0);
