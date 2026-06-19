@@ -1601,8 +1601,11 @@
     width: 36px !important;
     font-size: var(--text-xs);
   }
-  /* ─── NOTE modal mobile 全画面 + close sticky (履歴/筆記 閉じれない問題対策) ─── */
-  .wwm-modal-backdrop {
+  /* ─── NOTE modal mobile 全画面 + close sticky (履歴/筆記 閉じれない問題対策) ───
+     :has() で NOTE modal を含む backdrop のみ scope (2026-06-19 修正)。
+     旧 = `.wwm-modal-backdrop` bare 指定で全 modal (lang picker / share / 等) が top 貼り付き
+     → lang picker が topbar 後ろに沈む「選択できない」 兄貴指摘の原因。 */
+  .wwm-modal-backdrop:has(.wwm-note-modal-a) {
     overflow-y: auto;
     padding: 0;
     align-items: flex-start;
