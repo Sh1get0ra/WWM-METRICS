@@ -237,7 +237,7 @@ body.mobile-mode .wwm-ws-rail {
 }
 /* collapse 時 = rail-tate のみ、 rail-fade hide */
 body.mobile-mode .wwm-ws-rail .wwm-rail-fade { display: none; }
-body.mobile-mode .wwm-ws-rail .wwm-rail-in { position: relative; height: 100%; width: 100%; }
+body.mobile-mode .wwm-ws-rail .wwm-rail-in { position: relative; height: 100%; width: 100%; padding: 10px 5px 10px; }
 /* rail-tate = PC base position:absolute + opacity:0 を mobile-mode で打消 */
 body.mobile-mode .wwm-ws-rail .wwm-rail-tate {
   display: block;
@@ -267,7 +267,7 @@ body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail {
   box-shadow: 4px 0 24px rgba(0,0,0,0.5);
   overflow: hidden;
   align-items: stretch;
-  padding: 12px;
+  padding: 0;
   background: var(--sumi-1);
   cursor: default;
 }
