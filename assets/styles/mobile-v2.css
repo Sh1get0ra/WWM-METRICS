@@ -393,4 +393,27 @@ body.mobile-mode .wwm-bn[aria-selected="true"] {
 /* ============ SHARE modal OBS section (mobile = OBS PC 専用なので hide) ============ */
 body.mobile-mode .wwm-share-obs-block { display: none; }
 
+/* ============ lang dd popup mobile = body 直下 DOM 移動済 (workspace.js relocateLangPop)、 fixed 全幅 ============
+   .wwm-app isolation:isolate stacking context 外で表示するため JS で body 直下 reparent + ここで mobile 位置設定。
+   PC は anchor (.wwm-lang-dd) の中 absolute right:0 のまま (workspace.css L884)。 */
+body.mobile-mode .wwm-lang-dd-pop {
+  position: fixed;
+  top: 92px;  /* bandTop 実測 84 + gap 8、 brand-vert 縮小時は追従調整 TODO */
+  left: 8px;
+  right: auto;
+  width: calc(100vw - 16px);
+  min-width: 0;
+  z-index: 9999;
+  background: var(--sumi-1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  padding: 8px;
+  gap: 4px;
+}
+body.mobile-mode .wwm-lang-dd-pop .lang-btn {
+  text-align: center;
+  padding: 10px 14px;
+  font-size: 14px;
+  width: 100%;
+}
+
 } /* end @layer components */

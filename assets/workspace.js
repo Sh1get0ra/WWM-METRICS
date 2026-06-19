@@ -140,6 +140,22 @@
   var langBtn = document.getElementById('wwmLangDdBtn');
   var langPop = document.getElementById('wwmLangDdPop');
   if (langBtn && langPop) {
+    /* mobile = popup を body 直下 DOM 移動 (2026-06-19 兄貴指摘「裏にいる」)。
+       .wwm-app は isolation:isolate で stacking context root = popup が app 内に閉じ込められて
+       hero/avatar 等と z 競合、 z-index どれだけ上げても app 外には出ない。 body 直下移動で
+       isolation 抜けて viewport stacking で表示。 PC は anchor 親 (.wwm-lang-dd) に戻す。 */
+    var langPopOrigParent = langPop.parentElement;
+    function relocateLangPop() {
+      var mobile = window.matchMedia('(max-width: 600px)').matches;
+      if (mobile && langPop.parentElement !== document.body) {
+        document.body.appendChild(langPop);
+      } else if (!mobile && langPopOrigParent && langPop.parentElement !== langPopOrigParent) {
+        langPopOrigParent.appendChild(langPop);
+      }
+    }
+    relocateLangPop();
+    window.addEventListener('resize', relocateLangPop);
+
     langBtn.addEventListener('click', function (ev) {
       ev.stopPropagation();
       var open = langPop.classList.toggle('open');
