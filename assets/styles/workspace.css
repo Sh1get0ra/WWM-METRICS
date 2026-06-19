@@ -370,8 +370,9 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   position: absolute; inset: 0;
   z-index: -1;
   pointer-events: none;
+  /* overlay 撤去 (2026-06-19 兄貴指示「overlay 全切で見れた」) — image silhouette を素で見せる。
+     hero 数字側の視認性は text-shadow 防御 ([[official-asset-color-immutable]] 許可) で別途確保 */
   background:
-    linear-gradient(180deg, rgba(20,16,9,0.30), rgba(11,9,8,0.72)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") left top / 1400px auto no-repeat
     var(--sumi-0);
   /* 1400px 固定 (兄貴指定 2026-06-12)。 max-width 1500 内 = 画像左 1400px + 右 100px はみ出し fade、
@@ -659,8 +660,8 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   height: var(--rail-w); /* 回転後 = rail 幅 */
   transform-origin: 0 0;
   transform: translateX(var(--rail-w)) rotate(90deg);
+  /* overlay 撤去 (2026-06-19 兄貴指示) — qs-bg silhouette 素で見せる */
   background:
-    linear-gradient(90deg, rgba(20,16,9,0.35), rgba(11,9,8,0.70)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/qs-bg-32d6898d.png") center / cover no-repeat;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 50px, #000 calc(100% - 180px), transparent);
   mask-image: linear-gradient(to right, transparent, #000 50px, #000 calc(100% - 180px), transparent);

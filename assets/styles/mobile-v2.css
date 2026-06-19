@@ -38,7 +38,8 @@ body.mobile-mode .wwm-band {
 }
 body.mobile-mode .wwm-band-top {
   padding: 8px 12px;
-  background: rgba(11,9,8,0.45);
+  /* overlay 相当薄く (2026-06-19 兄貴指示) — 0.45 → 0.18 */
+  background: rgba(11,9,8,0.18);
   backdrop-filter: blur(2px);
   min-height: 62px;
   border-bottom: 1px solid var(--sumi-ink-1);
@@ -69,7 +70,8 @@ body.mobile-mode .wwm-band-actions #wwmDiagBadge { display: none; }
 /* ============ hero compact (1 行帯: 左 数値+NEXT / 右 avatar+名前 LV、 兄貴指示 2026-06-19) ============ */
 body.mobile-mode .hero.hero-wuxia {
   padding: 6px 14px;
-  background: linear-gradient(180deg, rgba(11,9,8,0.30), rgba(11,9,8,0.55));
+  /* overlay 相当薄く (2026-06-19 兄貴指示) — 公式 BG silhouette 透過優先、 文字側 text-shadow で防御 */
+  background: linear-gradient(180deg, rgba(11,9,8,0.08), rgba(11,9,8,0.18));
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-areas: "main aside";
@@ -359,8 +361,9 @@ body.mobile-mode .wwm-bottom-nav {
   z-index: 20;
   height: 57px;
   padding: 4px 4px calc(4px + env(safe-area-inset-bottom));
+  /* overlay 相当薄く (2026-06-19 兄貴指示) — qs-bg silhouette 素優先 */
   background:
-    linear-gradient(180deg, rgba(11,9,8,0.30), rgba(11,9,8,0.55)),
+    linear-gradient(180deg, rgba(11,9,8,0.08), rgba(11,9,8,0.18)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/qs-bg-32d6898d.png") center / cover no-repeat,
     var(--sumi-1);
   backdrop-filter: blur(2px);
