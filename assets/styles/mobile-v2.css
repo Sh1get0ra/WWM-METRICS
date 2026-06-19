@@ -289,7 +289,7 @@ body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-fade {
 body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-sb-rest {
   flex: 1; min-height: 0;
   overflow-y: auto;
-  background: var(--sumi-1);
+  background: transparent;
   padding: 8px;
 }
 body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-tate { display: none; }
