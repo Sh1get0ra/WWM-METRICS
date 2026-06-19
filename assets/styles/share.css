@@ -73,9 +73,8 @@ html.wwm-shared-build-mode #importBtn {
   transform: translateY(-1px);
 }
 
-.wwm-diag-badge-icon { font-size: var(--text-14); }
-
-.wwm-diag-badge-text { letter-spacing: 0.12em; }
+/* SVG icon 化 (2026-06-20 兄貴指示「mobile と同じ感じ」) — 旧 .wwm-diag-badge-icon (emoji ⚠) / .wwm-diag-badge-text (text 弱点) は HTML 側で SVG + sr-only 化済、 dead rule 残骸 */
+.wwm-diag-badge .ic { width: 14px; height: 14px; display: block; }
 
 .wwm-diag-badge-count {
   display: inline-block;

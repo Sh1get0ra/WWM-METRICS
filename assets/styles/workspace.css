@@ -413,7 +413,7 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 }
 .wwm-band-top {
   display: flex; align-items: center;
-  padding: 7px 20px;
+  padding: 7px 10px;
   border-bottom: 1px solid var(--sumi-ink-1);
   /* 薄墨 overlay = hero と階調差 (透過地続きで差別化が無かった)。
      BG は透けたまま一段層が変わる。rgba(50,50,50,0.34) = 兄貴実機チューニング確定値 2026-06-12 */
@@ -422,7 +422,7 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 /* 既存 topbar button (.icon-btn / .lang-btn) は既存 CSS のまま。
    ここは flex 配置のみ提供 — 右寄せ button 群コンテナ */
 .wwm-band-top .wwm-band-actions {
-  display: flex; gap: 8px; align-items: center;
+  display: flex; gap: 6px; align-items: center;
 }
 /* 2026-06-19 兄貴指示: Ver text を button 群の上に積む = stack wrapper で縦並び右寄せ */
 .wwm-band-top .wwm-band-actions-stack {
@@ -777,7 +777,7 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
      cross-axis 反転 → 1 行目 tabs-r (格析+IMPORT/RESET/PRESETS)、 2 行目 tabs
      (Build/Combat/History) の上下逆 (兄貴指示 2026-06-18)。 */
   flex-wrap: wrap-reverse;
-  padding: 8px 36px;
+  padding: 8px 10px;
   background: transparent;
   border-bottom: 1px solid var(--gold-deep);
   position: relative; z-index: 20;
