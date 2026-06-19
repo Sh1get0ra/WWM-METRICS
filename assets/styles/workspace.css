@@ -1411,6 +1411,9 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
     cursor: pointer;
     transition: width 0.2s var(--ease-out-quart, ease);
   }
+  /* rail 内部: collapse (46px) 時 = .wwm-rail-tate のみ表示、 .wwm-rail-fade hidden */
+  .wwm-ws-rail .wwm-rail-fade { display: none; }
+  .wwm-ws-rail .wwm-rail-tate { display: flex; flex-direction: column; align-items: center; gap: 8px; }
   /* mobile rail overlay open 状態 = rail = position fixed 290px、 紙面に被せる */
   .wwm-app[data-rail-mobile="open"] .wwm-ws-rail {
     position: fixed;
@@ -1421,9 +1424,15 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
     overflow-y: auto;
     align-items: stretch;
     padding: 12px;
+    background: var(--sumi-1);
+    cursor: default;
   }
-  .wwm-app[data-rail-mobile="open"] .wwm-sb-rest { display: block; }
-  .wwm-app[data-rail-mobile="open"] .wwm-rail-tate { display: none; }
+  /* overlay 時 = 装飾 BG (qs-bg / 斬 kanji) を弱めて中身視認 */
+  .wwm-app[data-rail-mobile="open"] .wwm-ws-rail::before { opacity: 0.12; }
+  .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .kanji-mark { opacity: 0.08; font-size: 200px; }
+  .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-fade { display: block; position: relative; z-index: 2; }
+  .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-tate { display: none; }
+  .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-in { width: 100%; }
   /* backdrop = overlay 開 時 viewport 全面 暗化、 click で close (JS で append される) */
   .wwm-rail-backdrop {
     position: fixed; inset: 0;
