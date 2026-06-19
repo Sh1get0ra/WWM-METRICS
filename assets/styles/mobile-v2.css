@@ -394,23 +394,30 @@ body.mobile-mode .wwm-bn[aria-selected="true"] {
 body.mobile-mode .wwm-share-obs-block { display: none; }
 
 /* ============ lang dd popup mobile = topbar 下 fixed 全幅 (兄貴指摘「言語選択 hero と被って読めない」 2026-06-19) ============
-   PC = anchor 右上 absolute 開き、 mobile = position fixed で band-top 直下 全幅。 z:70 で rail(60)/backdrop(55) より上 */
-body.mobile-mode .wwm-lang-dd-pop {
+   PC = anchor 右上 absolute 開き、 mobile = position fixed で band-top 直下 全幅。 z:70 で rail(60)/backdrop(55) より上。
+   width: 100vw 明示 + display flex 明示で PC base (min-width 150 / absolute right:0) を確実に override */
+body.mobile-mode .wwm-band .wwm-lang-dd .wwm-lang-dd-pop {
   position: fixed;
-  /* top = bandTop 実測 84px + 8px gap。 brand-vert 縮小時は追従調整 (mobile-v2.css TODO) */
   top: 92px;
-  left: 8px; right: 8px;
+  left: 8px;
+  right: auto;
+  width: calc(100vw - 16px);
+  max-width: calc(100vw - 16px);
   min-width: 0;
   z-index: 70;
   background: var(--sumi-1);
   box-shadow: 0 8px 24px rgba(0,0,0,0.6);
   padding: 8px;
   gap: 4px;
+  flex-direction: column;
 }
-body.mobile-mode .wwm-lang-dd-pop .lang-btn {
+body.mobile-mode .wwm-band .wwm-lang-dd .wwm-lang-dd-pop:not(.open) { display: none; }
+body.mobile-mode .wwm-band .wwm-lang-dd .wwm-lang-dd-pop.open { display: flex; }
+body.mobile-mode .wwm-band .wwm-lang-dd .wwm-lang-dd-pop .lang-btn {
   text-align: center;
   padding: 10px 14px;
   font-size: 14px;
+  width: 100%;
 }
 
 } /* end @layer components */
