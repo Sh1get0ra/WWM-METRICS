@@ -64,7 +64,7 @@
 <link rel="stylesheet" href="assets/styles/xinfa.css?v=26">
 <link rel="stylesheet" href="assets/styles/anlz.css?v=45">
 <link rel="stylesheet" href="assets/styles/mobile.css?v=19">
-<link rel="stylesheet" href="assets/styles/workspace.css?v=349">
+<link rel="stylesheet" href="assets/styles/workspace.css?v=350">
 <link rel="stylesheet" href="assets/styles/modals.css?v=172">
 <link rel="stylesheet" href="assets/styles/responsive-globals.css?v=3">
 <link rel="stylesheet" href="assets/styles/dark.css?v=4">
@@ -814,17 +814,18 @@
 
     <footer class="wwm-footer"><img class="wwm-footer-logo" src="https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/logo-27b7acd2.png" alt="Where Winds Meet"><span class="wwm-footer-unofficial" data-i18n="footerUnofficial">Unofficial fan-made tool. Not affiliated with NetEase Inc. / Everstone Studio.</span><span class="wwm-footer-copy">© NetEase, Inc. All Rights Reserved. © Everstone Studio.</span><span class="wwm-footer-creator">Created by <strong>SHIGETORA</strong><a class="wwm-footer-x" href="https://x.com/TORA_XIV" target="_blank" rel="noopener noreferrer" title="お問い合わせ (X / Twitter)" data-i18n-title="tipIconContact" aria-label="X (Twitter) で問い合わせ"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></span></footer>
   </main>
+
+  <!-- mobile bottom nav (workspace tab の mobile 版 / PC時 hidden / PC tab 同順 = 武備/戦律/履歴/格析)
+       .wwm-app 内 grid 配置のため main 終了直後 + div 閉じ前に配置 (2026-06-19) -->
+  <nav class="wwm-bottom-nav" role="tablist" aria-label="workspace mobile">
+    <button class="wwm-bn" role="tab" aria-selected="true" data-ws="build"><span data-i18n="wsTabBuild" data-kaisho="wsTabBuild">武備</span></button>
+    <button class="wwm-bn" role="tab" aria-selected="false" data-ws="enbu"><span data-i18n="wsTabEnbu" data-kaisho="wsTabEnbu">戦律</span></button>
+    <button class="wwm-bn" role="tab" aria-selected="false" data-ws="hist"><span data-i18n="wsTabHist" data-kaisho="wsTabHist">履歴</span></button>
+    <button class="wwm-bn" type="button" data-anlz-popout-trigger><span data-i18n="wsTabAnlz" data-kaisho="wsTabAnlz">格析</span></button>
+  </nav>
 </div>
 
   <!-- banner 3 種 (score-update / share-fail / shared-build) は <main> 上に移動済 (2026-06-16) -->
-
-<!-- mobile bottom nav (workspace tab の mobile 版 / PC時 hidden / PC tab 同順 = 武備/戦律/履歴/格析) -->
-<nav class="wwm-bottom-nav" role="tablist" aria-label="workspace mobile">
-  <button class="wwm-bn" role="tab" aria-selected="true" data-ws="build"><span data-i18n="wsTabBuild" data-kaisho="wsTabBuild">武備</span></button>
-  <button class="wwm-bn" role="tab" aria-selected="false" data-ws="enbu"><span data-i18n="wsTabEnbu" data-kaisho="wsTabEnbu">戦律</span></button>
-  <button class="wwm-bn" role="tab" aria-selected="false" data-ws="hist"><span data-i18n="wsTabHist" data-kaisho="wsTabHist">履歴</span></button>
-  <button class="wwm-bn" type="button" data-anlz-popout-trigger><span data-i18n="wsTabAnlz" data-kaisho="wsTabAnlz">格析</span></button>
-</nav>
 
 <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 <div id="export-card"></div>

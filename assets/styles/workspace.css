@@ -1411,9 +1411,30 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
     cursor: pointer;
     transition: width 0.2s var(--ease-out-quart, ease);
   }
-  /* rail 内部: collapse (46px) 時 = .wwm-rail-tate のみ表示、 .wwm-rail-fade hidden */
+  /* rail 内部: collapse (46px) 時 = .wwm-rail-tate のみ表示、 .wwm-rail-fade hidden
+     PC base = .wwm-rail-tate { position:absolute; opacity:0 } のため opacity 上書き必須 */
   .wwm-ws-rail .wwm-rail-fade { display: none; }
-  .wwm-ws-rail .wwm-rail-tate { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .wwm-ws-rail .wwm-rail-in { position: relative; height: 100%; width: 100%; }
+  .wwm-ws-rail .wwm-rail-tate {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    opacity: 1; pointer-events: auto;
+    position: relative; inset: auto;
+    padding-top: 8px;
+  }
+  .wwm-ws-rail .wwm-rail-tate .t-label {
+    display: block;
+    writing-mode: vertical-rl;
+    font-family: var(--f-display-title); font-weight: 700;
+    font-size: 12px; letter-spacing: 0.3em;
+    color: var(--gold-bright);
+  }
+  .wwm-ws-rail .wwm-rail-tate .wwm-rail-toggle {
+    transform: none;
+    width: 30px; height: 30px;
+    border: 1px solid var(--gold-deep);
+    background: transparent;
+    color: var(--gold-bright);
+  }
   /* mobile rail overlay open 状態 = rail = position fixed 290px、 紙面に被せる */
   .wwm-app[data-rail-mobile="open"] .wwm-ws-rail {
     position: fixed;
