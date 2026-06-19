@@ -399,21 +399,15 @@ body.mobile-mode .wwm-share-obs-block { display: none; }
 body.mobile-mode .wwm-lang-dd-pop {
   position: fixed;
   top: 92px;  /* bandTop 実測 84 + gap 8、 brand-vert 縮小時は追従調整 TODO */
-  left: 8px;
-  right: auto;
-  width: calc(100vw - 16px);
-  min-width: 0;
+  right: 8px;
+  left: auto;
+  width: auto;
+  min-width: 150px;
   z-index: 9999;
   background: var(--sumi-1);
   box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-  padding: 8px;
-  gap: 4px;
-}
-body.mobile-mode .wwm-lang-dd-pop .lang-btn {
-  text-align: center;
-  padding: 10px 14px;
-  font-size: 14px;
-  width: 100%;
+  padding: 6px;
+  gap: 2px;
 }
 
 } /* end @layer components */
