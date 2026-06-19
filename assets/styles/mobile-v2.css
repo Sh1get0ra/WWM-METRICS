@@ -289,6 +289,8 @@ body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail {
 }
 /* mobile では「斬」 kanji-mark 非表示 (2026-06-19 兄貴指示) */
 body.mobile-mode .wwm-ws-rail .kanji-mark { display: none; }
+/* mobile では qs-bg 描画域を rail 頭から開始 (2026-06-19 兄貴指示) — PC base の top:60 (head 下打ち切り) を mobile 限定で打消 */
+body.mobile-mode .wwm-rail-in::before { top: 0; }
 /* ステ panel に黒 overlay (2026-06-19 兄貴指示「BG 濃いから panel に黒重ねたい」) — rail-in stacking context (z:0) 内に置く =
    qs-bg image (::before z:-1) より上 + content (kanji z:1 / rail-fade z:2) より下 = text 影響なし image のみ dim。 collapse + open 両適用 */
 body.mobile-mode .wwm-rail-in::after {
