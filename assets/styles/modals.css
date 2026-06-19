@@ -2964,9 +2964,12 @@
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-gold { background: rgba(184,134,11,0.88); color: #fff !important; border-color: #6b4d08; }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.85); color: #fff !important; border-color: #4a2566; }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.85); color: #fff !important; border-color: #1a3a70; }
-/* footer = #00000094 単色 (mobile sprint 前値復元 = PC mobile 着手前と同等)。 mobile では mobile-v2 で mountain lay override */
+/* footer = mountain image 下方 bottom anchor lay + 黒 overlay 0.75 (2026-06-20 兄貴指示「フッター見えない」)。 PC + mobile 共通。 tool-modal-footer と同方針、 alpha 0.75 で「うっすら」 質感 (旧 3b739b3 値) */
 .wwm-cmp-footer-a {
-  background: #00000094;
+  background:
+    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+    url("../bg/mountain-1920.webp") center bottom / 100% auto no-repeat,
+    var(--sumi-3);
 }
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
@@ -3052,9 +3055,13 @@
    紙面上は対照 modal の bg-icon と同じ白抜き表示が透けすぎる場合あり → 実機目視で調整 */
 .wwm-tool-modal .wwm-modal-body .wwm-modal-bg-icon { inset: 0; width: auto; height: auto; }
 
-/* footer = #00000094 単色 (mobile sprint 前値復元 = PC mobile 着手前と同等)。 mobile では mobile-v2 で mountain lay override */
+/* footer = mountain image 下方 (山道/下草) bottom anchor lay + 黒 overlay 0.58 (2026-06-20 兄貴指示「フッター見えない」)。 PC + mobile 共通。 modal 全体 (L867) は image 縦 < modal 縦で footer 範囲外 → footer 単色 → footer 個別 lay で山道見せる */
 .wwm-tool-modal-footer {
-  background: #00000094;
+  background:
+    linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
+    url("../bg/mountain-1920.webp") center bottom / 100% auto no-repeat,
+    var(--sumi-3);
+  background-blend-mode: normal, screen, normal;
   border-top: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
   padding: var(--space-3) var(--space-4) var(--space-3-5);
   display: flex; align-items: center; justify-content: flex-end; gap: 10px;
