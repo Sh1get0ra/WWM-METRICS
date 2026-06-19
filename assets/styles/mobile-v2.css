@@ -427,15 +427,4 @@ body.mobile-mode .wwm-lang-dd-pop {
   gap: 2px;
 }
 
-/* ============ cmp modal header mobile 専用 lay (2026-06-20) ============
-   modal 全体 + footer (cmp-footer-a / tool-modal-footer) は modals.css PC base で mountain image lay 化 = PC + mobile 共通 = mobile 重複 override 削除済。
-   cmp-modal-a header のみ mobile 専用 = PC 単色 #00000094、 mobile は mountain header lay で山頂見せる */
-body.mobile-mode .wwm-cmp-modal-a .wwm-modal-header {
-  background:
-    linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
-    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
-    var(--sumi-3);
-  background-blend-mode: normal, screen, normal;
-}
-
 } /* end @layer components */

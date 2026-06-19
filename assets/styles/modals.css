@@ -370,10 +370,11 @@
 .wwm-cmp-modal-a::after { display: none; }
 .wwm-cmp-modal-a .wwm-modal-header {
   position: relative;
-  /* tool-modal-header (SHARE/NOTE/IMPORT) と統一 (2026-06-19 兄貴指示)。
-     mountain は modal 全体 background (L865) で center top / 100% auto lay、
-     header は #00000094 黒 overlay 0.58 で mountain 抑え気味に透かす */
-  background: #00000094;
+  /* mountain image 個別 lay (山頂 center top) + #00000094 overlay 重ね (2026-06-20 兄貴指摘で構造対称化)。 PC + mobile 共通 */
+  background:
+    linear-gradient(#00000094, #00000094),
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
+    var(--sumi-3);
 }
 .wwm-cmp-modal-a .wwm-modal-header::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; width: auto; height: 2px;
@@ -863,13 +864,11 @@
   padding-bottom: var(--space-half);
 }
 .wwm-cmp-modal-a .wwm-modal-header h2 { align-items: flex-end; }
-/* 背景 = 水墨 1 枚絵 center top / 100% auto (2026-06-20 兄貴指示「縦幅で見え方変わるの困る」)。 cover だと modal 縦サイズで image scale 変化 = 同じ image でも見え方差。 100% auto = 横 fit + 縦 aspect 維持 + 上端 align = modal 縦サイズ無関係に header に山頂固定 (PC + mobile 同方針)。 !important = export.js clone の inline background 対抗 (旧 dark.css K rule 統合) */
+/* 背景 = 親は墨単色のみ、 mountain image は header/footer 個別 lay 化 (2026-06-20 兄貴指摘「構造非対称で footer に overlay 乗せにくい」)。
+   親 image だと縦幅で見え方変わる + footer に届かない、 header/footer 自身に image lay = 高さ固定 px で scale 一定 + 構造対称。
+   !important = export.js clone の inline background 対抗 (旧 dark.css K rule 統合) */
 .wwm-cmp-modal-a {
-  background:
-    linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
-    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
-    var(--sumi-3) !important;
-  background-blend-mode: normal, screen, normal !important;
+  background: var(--sumi-3) !important;
   color: var(--c-cmp-modal-a-fg);
 }
 /* ボタン: サンプルA 揃え (radius 0、 padding 7px 16px) */
@@ -2964,10 +2963,10 @@
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-gold { background: rgba(184,134,11,0.88); color: #fff !important; border-color: #6b4d08; }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.85); color: #fff !important; border-color: #4a2566; }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.85); color: #fff !important; border-color: #1a3a70; }
-/* footer = mountain image 下方 bottom anchor lay + 黒 overlay 0.75 (2026-06-20 兄貴指示「フッター見えない」)。 PC + mobile 共通。 tool-modal-footer と同方針、 alpha 0.75 で「うっすら」 質感 (旧 3b739b3 値) */
+/* footer = mountain image 下方 (山道 center bottom) + #00000094 overlay 重ね (2026-06-20 兄貴指摘で構造対称化、 header と同じ書き方) */
 .wwm-cmp-footer-a {
   background:
-    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+    linear-gradient(#00000094, #00000094),
     url("../bg/mountain-1920.webp") center bottom / 100% auto no-repeat,
     var(--sumi-3);
 }
@@ -2981,12 +2980,8 @@
 .wwm-tool-modal {
   position: relative;
   isolation: isolate;
-  /* 地 = 墨 + 水墨 center top / 100% auto (2026-06-20 兄貴指示「縦幅で見え方変わるの困る」)。 cmp-modal-a L867 と同方針。 PC + mobile 共通 = mobile 重複 override 削除 */
-  background:
-    linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
-    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
-    var(--sumi-3);
-  background-blend-mode: normal, screen, normal;
+  /* 地 = 墨単色のみ、 mountain image は header/footer 個別 lay 化 (2026-06-20 兄貴指摘で構造対称化、 cmp-modal-a と同方針) */
+  background: var(--sumi-3);
   border: 1px solid var(--gold-deep);
   border-radius: 0 0 2px 2px;
   padding: 0;
@@ -3008,7 +3003,11 @@
 /* header = 黒 overlay 0.58 (2026-06-19 兄貴決定値、 対照 modal と統一)
    modal 本体水墨を黒越しに抑え気味で透かす。 tabs は薄黒 #0000004f で連続感 */
 .wwm-tool-modal .wwm-modal-header {
-  background: #00000094;
+  /* mountain image 個別 lay (山頂 center top) + #00000094 overlay 重ね (2026-06-20 兄貴指摘で構造対称化、 cmp-modal-a header と同方針) */
+  background:
+    linear-gradient(#00000094, #00000094),
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
+    var(--sumi-3);
   border-bottom: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
   padding: var(--space-3) var(--space-4) var(--space-2-5);
 }
@@ -3055,13 +3054,12 @@
    紙面上は対照 modal の bg-icon と同じ白抜き表示が透けすぎる場合あり → 実機目視で調整 */
 .wwm-tool-modal .wwm-modal-body .wwm-modal-bg-icon { inset: 0; width: auto; height: auto; }
 
-/* footer = mountain image 下方 (山道/下草) bottom anchor lay + 黒 overlay 0.58 (2026-06-20 兄貴指示「フッター見えない」)。 PC + mobile 共通。 modal 全体 (L867) は image 縦 < modal 縦で footer 範囲外 → footer 単色 → footer 個別 lay で山道見せる */
+/* footer = mountain image 下方 (山道 center bottom) + #00000094 overlay 重ね (2026-06-20 兄貴指摘で構造対称化、 header と同じ書き方) */
 .wwm-tool-modal-footer {
   background:
-    linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
+    linear-gradient(#00000094, #00000094),
     url("../bg/mountain-1920.webp") center bottom / 100% auto no-repeat,
     var(--sumi-3);
-  background-blend-mode: normal, screen, normal;
   border-top: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
   padding: var(--space-3) var(--space-4) var(--space-3-5);
   display: flex; align-items: center; justify-content: flex-end; gap: 10px;
