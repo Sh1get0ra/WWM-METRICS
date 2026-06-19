@@ -421,8 +421,20 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 /* 既存 topbar button (.icon-btn / .lang-btn) は既存 CSS のまま。
    ここは flex 配置のみ提供 — 右寄せ button 群コンテナ */
 .wwm-band-top .wwm-band-actions {
-  margin-left: auto;
   display: flex; gap: 8px; align-items: center;
+}
+/* 2026-06-19 兄貴指示: Ver text を button 群の上に積む = stack wrapper で縦並び右寄せ */
+.wwm-band-top .wwm-band-actions-stack {
+  margin-left: auto;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+}
+/* ゲーム Ver text。 金文字 (gold-bright)、 枠装飾無し */
+.wwm-band-top .wwm-game-ver {
+  font-family: var(--f-display-title);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--gold-bright);
+  white-space: nowrap;
 }
 
 /* hero — 主役席 (数値+NEXT+donut) / 右 identity (アバター+補助席)。

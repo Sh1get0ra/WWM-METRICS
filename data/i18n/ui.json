@@ -41,6 +41,13 @@
     "ko": "WHERE WINDS METRICS",
     "vi": "YÊN VÂN CHỈ SỐ"
   },
+  "gameVer": {
+    "ja": "Ver1.7 宮闕の朝ぼらけ",
+    "en": "Ver1.7 The Imperial Palace",
+    "zh": "Ver1.7 宮闕日初升",
+    "ko": "Ver1.7 궁궐의 새벽빛",
+    "vi": "Ver1.7 The Imperial Palace"
+  },
   "presetTitle": {
     "ja": "PRESETS",
     "en": "PRESETS",
