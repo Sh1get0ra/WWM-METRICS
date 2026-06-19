@@ -427,17 +427,9 @@ body.mobile-mode .wwm-lang-dd-pop {
   gap: 2px;
 }
 
-/* ============ modal mountain BG mobile 専用 lay (2026-06-20 兄貴指示: PC 復元のため modals.css cover 戻し、 mobile 縦長対策の山頂/山道 lay は mobile gate に分離) ============
-   mobile では modal が flex 縦長 100dvh = cover で image 中央暗影が header に lay → 真っ黒見え問題があるため
-   ①modal 全体 = center top / 100% auto (横 fit + 上端 align で header に山頂)
-   ②footer 個別 = center bottom / 100% auto + 黒 overlay (modal 全体 100% auto では image 縦 < modal 縦で footer 範囲外 → footer 単色黒 → footer 個別 lay で山道) */
-body.mobile-mode .wwm-cmp-modal-a {
-  background:
-    linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
-    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
-    var(--sumi-3) !important;
-  background-blend-mode: normal, screen, normal !important;
-}
+/* ============ modal header/footer mountain BG mobile 専用 lay (2026-06-20) ============
+   modal 全体 (cmp-modal-a / tool-modal) は modals.css PC base で center top / 100% auto 化 = PC + mobile 共通 = mobile 重複 override 削除済。
+   header/footer 個別 lay (山頂/山道) のみ mobile 専用 = PC は単色 #00000094、 mobile は mountain image 抑え気味で lay */
 body.mobile-mode .wwm-cmp-modal-a .wwm-modal-header {
   background:
     linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
@@ -450,13 +442,6 @@ body.mobile-mode .wwm-cmp-footer-a {
     linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
     url("../bg/mountain-1920.webp") center bottom / 100% auto no-repeat,
     var(--sumi-3);
-}
-body.mobile-mode .wwm-tool-modal {
-  background:
-    linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
-    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
-    var(--sumi-3);
-  background-blend-mode: normal, screen, normal;
 }
 body.mobile-mode .wwm-tool-modal-footer {
   background:

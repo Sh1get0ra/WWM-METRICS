@@ -863,12 +863,11 @@
   padding-bottom: var(--space-half);
 }
 .wwm-cmp-modal-a .wwm-modal-header h2 { align-items: flex-end; }
-/* 背景 = 水墨 cover 1 枚絵 (mobile sprint 前値復元 = mobile 着手前と同等)。 mobile では center top / 100% auto を mobile-v2 で override。
-   !important = export.js clone の inline background (universal 書込) 対抗 (旧 dark.css K rule 統合 2026-06-20) */
+/* 背景 = 水墨 1 枚絵 center top / 100% auto (2026-06-20 兄貴指示「縦幅で見え方変わるの困る」)。 cover だと modal 縦サイズで image scale 変化 = 同じ image でも見え方差。 100% auto = 横 fit + 縦 aspect 維持 + 上端 align = modal 縦サイズ無関係に header に山頂固定 (PC + mobile 同方針)。 !important = export.js clone の inline background 対抗 (旧 dark.css K rule 統合) */
 .wwm-cmp-modal-a {
   background:
     linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
-    url("../bg/mountain-1920.webp") center center / cover no-repeat,
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
     var(--sumi-3) !important;
   background-blend-mode: normal, screen, normal !important;
   color: var(--c-cmp-modal-a-fg);
@@ -2979,10 +2978,10 @@
 .wwm-tool-modal {
   position: relative;
   isolation: isolate;
-  /* 地 = 墨 + 水墨 cover 1 枚絵 (mobile sprint 前値復元 = PC mobile 着手前と同等) */
+  /* 地 = 墨 + 水墨 center top / 100% auto (2026-06-20 兄貴指示「縦幅で見え方変わるの困る」)。 cmp-modal-a L867 と同方針。 PC + mobile 共通 = mobile 重複 override 削除 */
   background:
     linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
-    url("../bg/mountain-1920.webp") center center / cover no-repeat,
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
     var(--sumi-3);
   background-blend-mode: normal, screen, normal;
   border: 1px solid var(--gold-deep);
