@@ -562,6 +562,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+  padding: var(--space-1) var(--space-1-5); /* dark.css L8-11 統合 2026-06-20 */
 }
 .wwm-cmp-modal-a .wwm-cmp-row {
   display: grid;
@@ -862,14 +863,14 @@
   padding-bottom: var(--space-half);
 }
 .wwm-cmp-modal-a .wwm-modal-header h2 { align-items: flex-end; }
-/* 背景 = tool-modal と統一 (2026-06-19 兄貴指示「他の IMPORT/NOTE と統一」)。
-   center top / 100% auto = mountain 横 fit + 上端 align (cover の中央暗影 silhouette 回避) */
+/* 背景 = 水墨 cover 1 枚絵 (mobile sprint 前値復元 = mobile 着手前と同等)。 mobile では center top / 100% auto を mobile-v2 で override。
+   !important = export.js clone の inline background (universal 書込) 対抗 (旧 dark.css K rule 統合 2026-06-20) */
 .wwm-cmp-modal-a {
   background:
     linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
-    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
-    var(--sumi-3);
-  background-blend-mode: normal, screen, normal;
+    url("../bg/mountain-1920.webp") center center / cover no-repeat,
+    var(--sumi-3) !important;
+  background-blend-mode: normal, screen, normal !important;
   color: var(--c-cmp-modal-a-fg);
 }
 /* ボタン: サンプルA 揃え (radius 0、 padding 7px 16px) */
@@ -2964,14 +2965,9 @@
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-gold { background: rgba(184,134,11,0.88); color: #fff !important; border-color: #6b4d08; }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.85); color: #fff !important; border-color: #4a2566; }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.85); color: #fff !important; border-color: #1a3a70; }
-/* footer = header (L373) と質感統一 (2026-06-19 兄貴指摘「フッターくっきりすぎ」)。
-   screen blend だと mountain 山道 + 麓 (image 下方の明暗強い部分) が過剰明色化して「くっきり」 化。
-   blend normal + alpha 0.75 で header の「うっすら」 感に近づける */
+/* footer = #00000094 単色 (mobile sprint 前値復元 = PC mobile 着手前と同等)。 mobile では mobile-v2 で mountain lay override */
 .wwm-cmp-footer-a {
-  background:
-    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
-    url("../bg/mountain-1920.webp") center bottom / 100% auto no-repeat,
-    var(--sumi-3);
+  background: #00000094;
 }
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
@@ -2983,15 +2979,10 @@
 .wwm-tool-modal {
   position: relative;
   isolation: isolate;
-  /* 地 = 墨 + 水墨 cover 1 枚絵 (2026-06-19 兄貴指示「フッター真っ黒」 修正)
-     cover で modal 全体に水墨絵延伸 = header (山稜) → body 紙で隠れる → footer (道+下草) の連続絵
-     header/footer = 黒 overlay #00000094 で水墨を抑え気味に透かす */
+  /* 地 = 墨 + 水墨 cover 1 枚絵 (mobile sprint 前値復元 = PC mobile 着手前と同等) */
   background:
     linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
-    /* 2026-06-19 兄貴指示: center top / 100% auto (cmp-modal-a L362 と同型)。
-       cover だと mobile 縦長 modal で mountain center が body 中央 lay → header に山頂来ない
-       → 横 fit (100%) + 縦 aspect 維持 + 上端 fit で header に山頂、 下は image 自然延伸 */
-    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
+    url("../bg/mountain-1920.webp") center center / cover no-repeat,
     var(--sumi-3);
   background-blend-mode: normal, screen, normal;
   border: 1px solid var(--gold-deep);
@@ -3062,15 +3053,9 @@
    紙面上は対照 modal の bg-icon と同じ白抜き表示が透けすぎる場合あり → 実機目視で調整 */
 .wwm-tool-modal .wwm-modal-body .wwm-modal-bg-icon { inset: 0; width: auto; height: auto; }
 
-/* footer = mountain image 下方 (山道/下草) を bottom anchor で lay + 黒 overlay 0.58 透かし
-   (2026-06-19 兄貴指示「フッター真っ黒」 修正: modal 全体の mountain 100% auto/center top は
-    image 縦 < modal 縦で footer 部 image 範囲外 → 単色黒。 footer 自身に image 下方を lay) */
+/* footer = #00000094 単色 (mobile sprint 前値復元 = PC mobile 着手前と同等)。 mobile では mobile-v2 で mountain lay override */
 .wwm-tool-modal-footer {
-  background:
-    linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
-    url("../bg/mountain-1920.webp") center bottom / 100% auto no-repeat,
-    var(--sumi-3);
-  background-blend-mode: normal, screen, normal;
+  background: #00000094;
   border-top: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
   padding: var(--space-3) var(--space-4) var(--space-3-5);
   display: flex; align-items: center; justify-content: flex-end; gap: 10px;

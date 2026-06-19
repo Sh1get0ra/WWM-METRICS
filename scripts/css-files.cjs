@@ -37,7 +37,7 @@ const CSS_FILES = [
   { path: 'assets/styles/mobile-v2.css',          layer: 'components' },
   { path: 'assets/styles/modals.css',             layer: 'modals' },
   { path: 'assets/styles/responsive-globals.css', layer: 'responsive' },
-  { path: 'assets/styles/dark.css',               layer: 'dark' },
+  // dark.css 撤去 (2026-06-20 兄貴指示) — 中身 (cmp-modal-a !important background + cmp-rows padding) は modals.css に統合済
   // light.css 撤去 (2026-06-11 dark/light 双テーマ廃止)。 'light' layer 宣言は tokens.css 残置 (空 layer = 無害、 theme-swap cjs が LAYER_NAMES 前提)
   { path: 'assets/styles/obs.css',                layer: 'obs' },
 ];

@@ -370,10 +370,10 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   position: absolute; inset: 0;
   z-index: -1;
   pointer-events: none;
-  /* overlay 撤去 (2026-06-19 兄貴指示「overlay 全切で見れた」) — image silhouette を素で見せる。
-     hero 数字側の視認性は text-shadow 防御 ([[official-asset-color-immutable]] 許可) で別途確保 */
+  /* mobile sprint 前値復元 (2026-06-20 兄貴指示「PC mobile 着手前に」) — 上薄下濃の墨 overlay で文字コントラスト確保 */
   background:
-    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") left top / 1400px auto no-repeat
+    linear-gradient(180deg, rgba(20,16,9,0.30), rgba(11,9,8,0.72)),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") left top / 1400px auto no-repeat,
     var(--sumi-0);
   /* 1400px 固定 (兄貴指定 2026-06-12)。 max-width 1500 内 = 画像左 1400px + 右 100px はみ出し fade、
      mask で 1400px 以降 transparent → app 内最右 100px は sumi-1 (背景色) で受ける */
@@ -660,8 +660,9 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   height: var(--rail-w); /* 回転後 = rail 幅 */
   transform-origin: 0 0;
   transform: translateX(var(--rail-w)) rotate(90deg);
-  /* overlay 撤去 (2026-06-19 兄貴指示) — qs-bg silhouette 素で見せる */
+  /* mobile sprint 前値復元 (2026-06-20 兄貴指示) — rotate90 後 left=画面上方向、 上薄下濃 overlay で文字載せ可読性確保 */
   background:
+    linear-gradient(90deg, rgba(20,16,9,0.35), rgba(11,9,8,0.70)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/qs-bg-32d6898d.png") center / cover no-repeat;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 50px, #000 calc(100% - 180px), transparent);
   mask-image: linear-gradient(to right, transparent, #000 50px, #000 calc(100% - 180px), transparent);
@@ -1000,7 +1001,7 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
   scrollbar-color: var(--gold-deep) transparent;
 }
 .wwm-ws-panel { display: none; container-type: inline-size; }
-.wwm-ws-panel.active { display: block; animation: wsIn .15s ease; }
+.wwm-ws-panel.active { padding-left: 36px; display: block; animation: wsIn .15s ease; }
 @keyframes wsIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* 題字 = 兄貴手描きの刷毛 (assets/fude.png 2500×700 透過) に紙色文字が浮かぶ (2026-06-12)。

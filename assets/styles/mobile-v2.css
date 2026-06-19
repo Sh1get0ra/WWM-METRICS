@@ -289,6 +289,8 @@ body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail {
 }
 /* mobile では「斬」 kanji-mark 非表示 (2026-06-19 兄貴指示) */
 body.mobile-mode .wwm-ws-rail .kanji-mark { display: none; }
+/* mobile では ws-panel padding-left 0 (2026-06-19 兄貴指示「mobile 細部調整」、 元 60e71aa で PC base から削除してた分を mobile 限定 override に分離) */
+body.mobile-mode .wwm-ws-panel.active { padding-left: 0; }
 /* mobile では qs-bg 描画域を rail 頭から開始 (2026-06-19 兄貴指示) — PC base の top:60 (head 下打ち切り) を mobile 限定で打消 */
 body.mobile-mode .wwm-rail-in::before { top: 0; }
 /* ステ panel に黒 overlay (2026-06-19 兄貴指示「BG 濃いから panel に黒重ねたい」) — rail-in stacking context (z:0) 内に置く =
@@ -423,6 +425,45 @@ body.mobile-mode .wwm-lang-dd-pop {
   box-shadow: 0 8px 24px rgba(0,0,0,0.6);
   padding: 6px;
   gap: 2px;
+}
+
+/* ============ modal mountain BG mobile 専用 lay (2026-06-20 兄貴指示: PC 復元のため modals.css cover 戻し、 mobile 縦長対策の山頂/山道 lay は mobile gate に分離) ============
+   mobile では modal が flex 縦長 100dvh = cover で image 中央暗影が header に lay → 真っ黒見え問題があるため
+   ①modal 全体 = center top / 100% auto (横 fit + 上端 align で header に山頂)
+   ②footer 個別 = center bottom / 100% auto + 黒 overlay (modal 全体 100% auto では image 縦 < modal 縦で footer 範囲外 → footer 単色黒 → footer 個別 lay で山道) */
+body.mobile-mode .wwm-cmp-modal-a {
+  background:
+    linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
+    var(--sumi-3) !important;
+  background-blend-mode: normal, screen, normal !important;
+}
+body.mobile-mode .wwm-cmp-modal-a .wwm-modal-header {
+  background:
+    linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
+    var(--sumi-3);
+  background-blend-mode: normal, screen, normal;
+}
+body.mobile-mode .wwm-cmp-footer-a {
+  background:
+    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+    url("../bg/mountain-1920.webp") center bottom / 100% auto no-repeat,
+    var(--sumi-3);
+}
+body.mobile-mode .wwm-tool-modal {
+  background:
+    linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
+    var(--sumi-3);
+  background-blend-mode: normal, screen, normal;
+}
+body.mobile-mode .wwm-tool-modal-footer {
+  background:
+    linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
+    url("../bg/mountain-1920.webp") center bottom / 100% auto no-repeat,
+    var(--sumi-3);
+  background-blend-mode: normal, screen, normal;
 }
 
 } /* end @layer components */
