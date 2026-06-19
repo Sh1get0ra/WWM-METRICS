@@ -65,53 +65,57 @@ body.mobile-mode .wwm-band-actions #wwmVirtResetBtn,
 body.mobile-mode .wwm-band-actions #wwmPresetWrap,
 body.mobile-mode .wwm-band-actions #wwmDiagBadge { display: none; }
 
-/* ============ hero compact (2 列: 左 score+tier+NEXT / 右 avatar+identity) ============ */
+/* ============ hero compact (1 行帯: 左 数値+NEXT / 右 avatar+名前 LV、 兄貴指示 2026-06-19) ============ */
 body.mobile-mode .hero.hero-wuxia {
-  padding: 10px 14px 12px;
+  padding: 6px 14px;
   background: linear-gradient(180deg, rgba(11,9,8,0.30), rgba(11,9,8,0.55));
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-areas: "main aside";
-  gap: 6px 12px;
+  align-items: center;
+  gap: 0 12px;
   position: relative;
   height: auto;
-  min-height: 130px;
+  min-height: 0;
 }
 body.mobile-mode .hero-wuxia .ink-stroke { display: none; }
 body.mobile-mode .wwm-band .kanji-mark {
   display: block; right: -14px; top: 78%;
-  transform: translateY(-50%); font-size: 130px;
+  transform: translateY(-50%); font-size: 90px;
   color: rgba(232,215,180,0.05);
 }
 body.mobile-mode .hero-wuxia .h-main {
-  grid-area: main; display: flex; flex-direction: column; gap: 2px; min-width: 0;
+  grid-area: main; display: flex; flex-direction: column; gap: 0; min-width: 0;
 }
-body.mobile-mode .hero-wuxia .seat-main .eyebrow .seat-title { font-size: 14px; }
-body.mobile-mode .hero-wuxia .seat-main .eyebrow .seat-en { font-size: 8px; letter-spacing: 0.22em; }
-body.mobile-mode .hero-wuxia .seat-main .hb-num { font-size: 38px; line-height: 1; margin-top: 2px; }
-body.mobile-mode .hero-wuxia .seat-main .hb-num .unit { font-size: 11px; margin-left: 4px; }
-body.mobile-mode .hero-wuxia .pwr .hero-tier.tier-badge { font-size: 13px; padding: 1px 7px; }
+/* PC base (workspace.css L472) の min-height 132 + min-width 400 を mobile では打消 */
+body.mobile-mode .hero-wuxia .seat-main { min-height: 0; min-width: 0; }
+body.mobile-mode .hero-wuxia .seat-main .eyebrow { display: flex; align-items: baseline; gap: 6px; }
+body.mobile-mode .hero-wuxia .seat-main .eyebrow .seat-title { font-size: 11px; }
+body.mobile-mode .hero-wuxia .seat-main .eyebrow .seat-en { font-size: 7px; letter-spacing: 0.22em; }
+body.mobile-mode .hero-wuxia .seat-main .hb-num { font-size: 30px; line-height: 1; margin-top: 0; }
+body.mobile-mode .hero-wuxia .seat-main .hb-num .unit { font-size: 10px; margin-left: 4px; }
+/* 総合武力 + SS tier badge = 1 行 compact では hide (兄貴指示 image 通り) */
+body.mobile-mode .hero-wuxia .pwr { display: none; }
 body.mobile-mode .hero-wuxia .hero-next-inline {
-  margin-left: 6px; margin-bottom: 0; display: inline-flex;
+  margin-left: 6px; margin-bottom: 0; display: inline-flex; align-items: baseline;
 }
-body.mobile-mode .hero-wuxia .hero-next-label { font-size: 8px; letter-spacing: 0.16em; }
-body.mobile-mode .hero-wuxia .hero-next-val { font-size: 14px; }
+body.mobile-mode .hero-wuxia .hero-next-label { display: none; }
+body.mobile-mode .hero-wuxia .hero-next-val { font-size: 13px; }
 body.mobile-mode .hero-wuxia .hero-next-arrow { font-size: 10px; }
+/* h-id = 横並び (avatar 左 + 名前 LV 右)、 縦中央寄せ */
 body.mobile-mode .hero-wuxia .h-id {
   grid-area: aside;
-  margin: 0; margin-left: 0;
-  display: flex; flex-direction: column; align-items: flex-end;
-  gap: 2px;
+  margin: 0;
+  display: flex; flex-direction: row; align-items: center;
+  gap: 6px;
   clear: none;
 }
-body.mobile-mode .hero-wuxia .avatar { width: 56px; height: 56px; flex: 0 0 56px; }
-body.mobile-mode .hero-wuxia .h-id-info { min-width: 0; text-align: right; }
-body.mobile-mode .hero-wuxia .pname { font-size: 12px; white-space: nowrap; }
+body.mobile-mode .hero-wuxia .avatar { width: 40px; height: 40px; flex: 0 0 40px; }
+body.mobile-mode .hero-wuxia .h-id-info { min-width: 0; text-align: left; display: flex; flex-direction: column; gap: 0; }
+body.mobile-mode .hero-wuxia .pname { font-size: 11px; white-space: nowrap; line-height: 1.2; }
 body.mobile-mode .hero-wuxia .pname b { font-size: 9px; margin-left: 3px; }
-body.mobile-mode .hero-wuxia .pwr { font-size: 8px; letter-spacing: 0.1em; }
-body.mobile-mode .hero-wuxia .pwr b { font-size: 10px; margin-left: 3px; }
-body.mobile-mode .hero-wuxia .seat-sub { margin-top: 6px; padding-top: 6px; }
-body.mobile-mode .hero-wuxia .seat-sub .hb-num { font-size: 22px; }
+/* seat-sub (戦律指数 副席) = mobile では hide (compact 化、 swap 時 DOM 移動で main 席 1 席表示) */
+body.mobile-mode .hero-wuxia .seat-sub { display: none; }
 /* donut = mobile では hero 内 hide (tap popup 別実装 task) */
 body.mobile-mode .hero-wuxia .h-id .luopan { display: none; }
 
