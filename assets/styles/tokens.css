@@ -160,6 +160,9 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
    * 紙面 (.wwm-ws-paper) 消費 token の紙値 rescope は workspace.css に集約 (2026-06-11 単一テーマ化、 旧 light.css 廃止)。
    */
   --bg-modal-a-option:  var(--sumi-3); /* compare modal A select option bg */
+  /* modal header/footer の mountain image 上に重ねる垂直 gradient overlay (2026-06-20 兄貴指定値、 cmp/tool 双方 header/footer 共通)。
+     #292929e0 (灰 0.88) → #000000bd (黒 0.74) で mountain を抑えつつ header/footer の温度感を統一 */
+  --bg-modal-overlay:   linear-gradient(#292929e0, #000000bd);
 
   /* ─── @layer Step 2-b: theme-swap pair tokens (dark default) ─── */
   --c-fg-accent: var(--gold-bright);  /* アクセント前景 (dark 明金 / light 朱) */

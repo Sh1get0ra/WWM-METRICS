@@ -372,7 +372,7 @@
   position: relative;
   /* mountain image 個別 lay (山頂 center top) + #00000094 overlay 重ね (2026-06-20 兄貴指摘で構造対称化)。 PC + mobile 共通 */
   background:
-    linear-gradient(#00000094, #00000094),
+    var(--bg-modal-overlay),
     url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
     var(--sumi-3);
 }
@@ -2966,7 +2966,7 @@
 /* footer = mountain image 下方 (山道 center bottom) + #00000094 overlay 重ね (2026-06-20 兄貴指摘で構造対称化、 header と同じ書き方) */
 .wwm-cmp-footer-a {
   background:
-    linear-gradient(#00000094, #00000094),
+    var(--bg-modal-overlay),
     url("../bg/mountain-1920.webp") center bottom / 100% auto no-repeat,
     var(--sumi-3);
 }
@@ -3005,7 +3005,7 @@
 .wwm-tool-modal .wwm-modal-header {
   /* mountain image 個別 lay (山頂 center top) + #00000094 overlay 重ね (2026-06-20 兄貴指摘で構造対称化、 cmp-modal-a header と同方針) */
   background:
-    linear-gradient(#00000094, #00000094),
+    var(--bg-modal-overlay),
     url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
     var(--sumi-3);
   border-bottom: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
@@ -3057,7 +3057,7 @@
 /* footer = mountain image 下方 (山道 center bottom) + #00000094 overlay 重ね (2026-06-20 兄貴指摘で構造対称化、 header と同じ書き方) */
 .wwm-tool-modal-footer {
   background:
-    linear-gradient(#00000094, #00000094),
+    var(--bg-modal-overlay),
     url("../bg/mountain-1920.webp") center bottom / 100% auto no-repeat,
     var(--sumi-3);
   border-top: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
