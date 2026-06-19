@@ -355,7 +355,13 @@
   box-shadow: 0 0 8px color-mix(in oklab, var(--vermilion-bright) 60%, transparent);
 }
 .wwm-cmp-modal-a {
-  background: var(--sumi-3);
+  /* 2026-06-19 兄貴指示: ツール modal と同じ水墨層を対照 modal にも展開。
+     header = 透明 / footer = 独自水墨下半 で 2 枚絵構成 (modal 本体 = 水墨上半) */
+  background:
+    linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
+    var(--sumi-3);
+  background-blend-mode: normal, screen, normal;
   border: 1px solid var(--gold-deep);
   border-radius: 0;
 }
@@ -364,7 +370,7 @@
 .wwm-cmp-modal-a::after { display: none; }
 .wwm-cmp-modal-a .wwm-modal-header {
   position: relative;
-  background: var(--sumi-3);
+  background: #00000094; /* 2026-06-19 兄貴決定値: 黒 overlay 0.58 で modal 本体水墨を抑え気味に */
 }
 .wwm-cmp-modal-a .wwm-modal-header::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; width: auto; height: 2px;
@@ -853,9 +859,13 @@
   padding-bottom: var(--space-half);
 }
 .wwm-cmp-modal-a .wwm-modal-header h2 { align-items: flex-end; }
-/* 背景の赤いradial-gradient を消す */
+/* 背景 = 水墨 cover 1 枚絵 (2026-06-19: footer 域まで水墨延伸、 ツール modal と同 pattern) */
 .wwm-cmp-modal-a {
-  background: linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
+  background:
+    linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
+    url("../bg/mountain-1920.webp") center center / cover no-repeat,
+    var(--sumi-3);
+  background-blend-mode: normal, screen, normal;
   color: var(--c-cmp-modal-a-fg);
 }
 /* ボタン: サンプルA 揃え (radius 0、 padding 7px 16px) */
@@ -2947,10 +2957,9 @@
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-gold { background: rgba(184,134,11,0.88); color: #fff !important; border-color: #6b4d08; }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.85); color: #fff !important; border-color: #4a2566; }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.85); color: #fff !important; border-color: #1a3a70; }
-/* footer = header と同 token (--bg-modal-a-header = bg-raised、兄貴指定 2026-06-12)。
-   modal 地は縦 gradient で下端ほど暗く footer が沈んで見えていた */
+/* footer = 黒 overlay 0.58 のみ (2026-06-19 兄貴指示: header と質感統一) */
 .wwm-cmp-footer-a {
-  background: var(--sumi-3);
+  background: #00000094;
 }
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
@@ -2962,8 +2971,14 @@
 .wwm-tool-modal {
   position: relative;
   isolation: isolate;
-  /* 地 = 墨 (body が透ける面)。対照 modal の header 墨と同 token */
-  background: var(--sumi-3);
+  /* 地 = 墨 + 水墨 cover 1 枚絵 (2026-06-19 兄貴指示「フッター真っ黒」 修正)
+     cover で modal 全体に水墨絵延伸 = header (山稜) → body 紙で隠れる → footer (道+下草) の連続絵
+     header/footer = 黒 overlay #00000094 で水墨を抑え気味に透かす */
+  background:
+    linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
+    url("../bg/mountain-1920.webp") center center / cover no-repeat,
+    var(--sumi-3);
+  background-blend-mode: normal, screen, normal;
   border: 1px solid var(--gold-deep);
   border-radius: 0 0 2px 2px;
   padding: 0;
@@ -2982,9 +2997,10 @@
 .wwm-tool-modal .wwm-tool-bracket-bl { bottom: 6px; left: 6px; border-right: none; border-top: none; }
 .wwm-tool-modal .wwm-tool-bracket-br { bottom: 6px; right: 6px; border-left: none; border-top: none; }
 
-/* header = 墨帯 (対照 modal header と同 token) */
+/* header = 黒 overlay 0.58 (2026-06-19 兄貴決定値、 対照 modal と統一)
+   modal 本体水墨を黒越しに抑え気味で透かす。 tabs は薄黒 #0000004f で連続感 */
 .wwm-tool-modal .wwm-modal-header {
-  background: var(--sumi-3);
+  background: #00000094;
   border-bottom: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
   padding: var(--space-3) var(--space-4) var(--space-2-5);
 }
@@ -3031,9 +3047,10 @@
    紙面上は対照 modal の bg-icon と同じ白抜き表示が透けすぎる場合あり → 実機目視で調整 */
 .wwm-tool-modal .wwm-modal-body .wwm-modal-bg-icon { inset: 0; width: auto; height: auto; }
 
-/* footer = 墨帯 (body の外 = modal 地。対照 .wwm-cmp-footer-a と同文法) */
+/* footer = 黒 overlay 0.58 のみ (2026-06-19 兄貴指示: header と質感統一)
+   水墨 multi-bg 撤去、 header と同 #00000094 で上下対称化 */
 .wwm-tool-modal-footer {
-  background: var(--sumi-3);
+  background: #00000094;
   border-top: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
   padding: var(--space-3) var(--space-4) var(--space-3-5);
   display: flex; align-items: center; justify-content: flex-end; gap: 10px;
@@ -3068,10 +3085,12 @@
 }
 
 /* タブ行 (NOTE / 飛簡 共用): 墨帯に並び、active = 紙の差し込み (紙 body へ繋がる —
-   workspace 帳簿フォルダ tab と同文法) */
+   workspace 帳簿フォルダ tab と同文法)。
+   2026-06-19 兄貴指示: header + tabs 連続 1 枚水墨。 tabs に薄黒 overlay (#0000004f ≈ 0.31)
+   で header との僅か差別化を付ける (連続感は保つ) */
 .wwm-tool-tabs {
   display: flex; gap: 2px; padding: 0 var(--space-4);
-  background: var(--sumi-3);
+  background: #0000004f;
   border-bottom: 1px solid var(--gold-deep);
 }
 .wwm-tool-tab {

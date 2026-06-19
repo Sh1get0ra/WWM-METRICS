@@ -11,8 +11,13 @@ html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-rows {
 }
 
 /* K: export.js clone の inline background (universal 書込) 対抗 — S2-e 残 keep 確定。 strip するな */
+/* 2026-06-19: 水墨 cover 1 枚絵 (footer 域まで延伸)。 !important = export.js clone の inline 対抗 keep */
 html[data-theme="dark"] .wwm-cmp-modal-a {
-  background: linear-gradient(180deg, #130f0d, #0d0a08) !important;
+  background:
+    linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
+    url("../bg/mountain-1920.webp") center center / cover no-repeat,
+    var(--sumi-3) !important;
+  background-blend-mode: normal, screen, normal !important;
 }
 
 /* S2-e split: header / select で base pair が別 decl → 分離 */
