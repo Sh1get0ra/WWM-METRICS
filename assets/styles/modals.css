@@ -2964,14 +2964,14 @@
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-gold { background: rgba(184,134,11,0.88); color: #fff !important; border-color: #6b4d08; }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.85); color: #fff !important; border-color: #4a2566; }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.85); color: #fff !important; border-color: #1a3a70; }
-/* footer = tool-modal-footer L3058 と統一 (2026-06-19 兄貴指示「IMPORT/NOTE と統一」)。
-   mountain image 下方 (山道/下草) を bottom anchor 個別 lay + 黒 overlay 0.58 */
+/* footer = header (L373) と質感統一 (2026-06-19 兄貴指摘「フッターくっきりすぎ」)。
+   screen blend だと mountain 山道 + 麓 (image 下方の明暗強い部分) が過剰明色化して「くっきり」 化。
+   blend normal + alpha 0.75 で header の「うっすら」 感に近づける */
 .wwm-cmp-footer-a {
   background:
-    linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
+    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
     url("../bg/mountain-1920.webp") center bottom / 100% auto no-repeat,
     var(--sumi-3);
-  background-blend-mode: normal, screen, normal;
 }
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
