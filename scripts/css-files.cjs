@@ -32,6 +32,9 @@ const CSS_FILES = [
   { path: 'assets/styles/anlz.css',               layer: 'components' },
   { path: 'assets/styles/mobile.css',             layer: 'components' },
   { path: 'assets/styles/workspace.css',          layer: 'components' },
+  // mobile-v2.css (2026-06-19) — body.mobile-mode 独立 selector で mobile 表示を gate。
+  // workspace.css の後 = 後勝ち (workspace.css mobile @media 撤去済、 PC base 上書きを mobile-v2 で実施)
+  { path: 'assets/styles/mobile-v2.css',          layer: 'components' },
   { path: 'assets/styles/modals.css',             layer: 'modals' },
   { path: 'assets/styles/responsive-globals.css', layer: 'responsive' },
   { path: 'assets/styles/dark.css',               layer: 'dark' },

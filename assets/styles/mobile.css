@@ -1,9 +1,9 @@
 /* ╔═══════════════════════════════════════════════════════════════════╗
-     mobile.css — MOBILE v2 chip-bar / bnav 半透明 / safe-area / 残 mobile rule
-     2026-06-19 全面 rewrite: 旧 hamburger drawer / mobile-topbar / stat fab / stat overlay
-     CSS 全削除 (DOM 撤去済)。 新 mobile chip-bar + bnav 半透明 + 公式 BG mobile size のみ。
-     workspace.css mobile @media と役割分担: workspace.css = L字 grid / hero / rail、
-     mobile.css = chip-bar / bnav / safe-area / 残 mobile rule。
+     mobile.css — PC/mobile 共通の global rule + chip-bar default hide のみ
+     2026-06-19 [[mobile-css-isolation-policy]] B 案: mobile 表示 rule (chip-bar 詳細 /
+     L字 grid / hero compact / rail / bnav / SHARE OBS hide / hero-eyebrow) は全て
+     mobile-v2.css へ移管済。 ここは PC 側で必要な default 値 (chip-bar hide 等) と
+     mobile/PC 両方に効く global rule (dvh / prefers-reduced-motion / seal 装飾) のみ keep。
    ╚═══════════════════════════════════════════════════════════════════ */
 @layer components {
 
@@ -12,122 +12,16 @@
   .wwm-min-h-dvh { min-height: 100dvh; }
 }
 
-/* ============ Mobile chip-bar (hero 下 操作帯) ============
-   PC 時 hidden、 @media (max-width: 600px) で flex 表示 */
+/* chip-bar default = PC で hide (mobile-v2.css の body.mobile-mode で display:flex 上書き) */
 .wwm-mobile-chip-bar { display: none; }
 
-@media (max-width: 600px) {
-  .wwm-mobile-chip-bar {
-    display: flex;
-    align-items: stretch;
-    height: 36px;
-    background: rgba(20,16,9,0.55);
-    border-bottom: 1px solid var(--sumi-ink-2);
-    border-top: 1px solid var(--gold-deep);
-    backdrop-filter: blur(1px);
-    position: relative;
-    z-index: 20;
-  }
-  .wwm-mobile-chip {
-    flex: 1;
-    display: flex; align-items: center; justify-content: center;
-    background: transparent;
-    border: none;
-    border-right: 1px solid var(--sumi-ink-1);
-    color: var(--sumi-text-2);
-    cursor: pointer;
-    position: relative;
-    padding: 0;
-    transition: color .15s ease, background .15s ease;
-  }
-  .wwm-mobile-chip:last-child { border-right: none; }
-  .wwm-mobile-chip:hover,
-  .wwm-mobile-chip:focus-visible { color: var(--gold-bright); background: rgba(255,255,255,0.04); }
-  .wwm-mobile-chip:focus-visible { outline: 1px solid var(--gold-deep); outline-offset: -1px; }
-  .wwm-mobile-chip svg { width: 18px; height: 18px; display: block; }
-  /* 弱点 chip = 朱 (有り時) */
-  #wwmMobileChipDiag { color: var(--vermilion); }
-  .wwm-mobile-chip-badge {
-    position: absolute; top: 3px; right: 8px;
-    font-family: var(--f-latin); font-weight: 700; font-size: 9px;
-    background: var(--vermilion); color: #fff;
-    border-radius: 50%;
-    min-width: 14px; height: 14px; line-height: 14px;
-    display: flex; align-items: center; justify-content: center;
-    padding: 0 3px;
-  }
-
-  /* PRESETS accordion (chip-bar 上に展開) */
-  .wwm-mobile-preset-acc {
-    position: absolute;
-    left: 0; right: 0;
-    bottom: 100%;
-    background: var(--sumi-1);
-    border-top: 1px solid var(--gold-deep);
-    border-bottom: 1px solid var(--sumi-ink-2);
-    padding: 8px 10px;
-    display: flex; flex-direction: column; gap: 5px;
-    z-index: 40;
-    box-shadow: 0 -4px 12px rgba(0,0,0,0.4);
-  }
-  .wwm-mobile-preset-acc[hidden] { display: none; }
-  .wwm-mobile-preset-row {
-    display: flex; align-items: center; gap: 5px;
-    font-family: var(--f-latin); font-size: 11px;
-  }
-  .wwm-mobile-preset-row .num {
-    width: 22px;
-    color: var(--gold-bright);
-    font-weight: 700;
-    font-family: var(--f-latin);
-  }
-  .wwm-mobile-preset-row input.preset-name-input {
-    flex: 1; min-width: 0;
-    background: var(--sumi-0);
-    border: 1px solid var(--sumi-ink-2);
-    color: var(--sumi-text);
-    padding: 5px 7px;
-    font-size: 11px;
-    border-radius: 1px;
-    font-family: var(--f-body);
-  }
-  .wwm-mobile-preset-row .pbtn {
-    font-family: var(--f-display-title);
-    font-size: 10px;
-    font-weight: 700;
-    padding: 5px 8px;
-    background: transparent;
-    border: 1px solid var(--sumi-ink-2);
-    color: var(--sumi-text-2);
-    border-radius: 1px;
-    white-space: nowrap;
-    cursor: pointer;
-  }
-  .wwm-mobile-preset-row .pbtn.save { color: var(--gold-bright); border-color: var(--gold-deep); }
-  .wwm-mobile-preset-row .pbtn:disabled { opacity: 0.45; cursor: not-allowed; }
-}
-
-/* bnav 半透明 BG + bn font は workspace.css mobile @media に移植 (2026-06-19、 css-files.cjs 順で
-   workspace.css が後 = mobile.css 内では !important 必要だったため、 単一 file 集約) */
-
-/* ============ SHARE modal OBS section mobile hidden (OBS = PC 専用) ============ */
-@media (max-width: 600px) {
-  .wwm-share-obs-block { display: none; }
-}
-
-/* ============ prefers-reduced-motion ============ */
+/* prefers-reduced-motion: skeleton / flash-pulse animation 停止 (PC/mobile 共通) */
 @media (prefers-reduced-motion: reduce) {
   .wwm-skeleton { animation: none; }
   .flash-pulse { animation: none; }
 }
 
-/* ============ Hero compact 補助 (workspace.css mobile @media と連動) ============ */
-@media (max-width: 600px) {
-  /* hero-eyebrow size 縮小 (PC default の方が読みやすいので軽量化のみ) */
-  .hero-eyebrow { font-size: var(--text-xs); }
-}
-
-/* ============ legacy seal box-shadow (light theme 残) ============ */
+/* legacy seal box-shadow (light theme 残、 PC/mobile 共通) */
 .seal {
   box-shadow: inset 0 0 0 1px var(--c-tier-ss-glow-pink), inset 0 -8px 14px var(--c-shadow-light), 0 0 24px var(--c-vermilion-glow-soft), 0 1px 4px var(--overlay-tint);
 }

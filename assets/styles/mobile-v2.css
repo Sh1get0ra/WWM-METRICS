@@ -1,0 +1,382 @@
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     mobile-v2.css — MOBILE 独立 selector (body.mobile-mode prefix)
+     2026-06-19 [[mobile-css-isolation-policy]] B 案: PC base 上書き型 @media を撤去、
+     mobile 専用 rule を body.mobile-mode (+ html.mobile-mode) gate に集約。
+     旧 workspace.css mobile @media (~265 行) + mobile.css mobile @media (chip-bar/share-OBS/hero-eyebrow)
+     を統合移管。 vp 判定 = JS matchMedia('(max-width: 600px)') で body/html へ class toggle。
+     L字 grid 5 row 構造: topbar / hero / chip / rail+body / bnav。
+   ╚═══════════════════════════════════════════════════════════════════ */
+@layer components {
+
+/* ============ html/body overflow ============ */
+html.mobile-mode,
+body.mobile-mode { overflow: hidden; height: 100%; }
+
+/* ============ L字 grid base ============ */
+body.mobile-mode .wwm-app {
+  display: grid;
+  grid-template-columns: var(--rail-w-min, 46px) 1fr;
+  grid-template-rows: auto auto 36px minmax(0, 1fr) 57px;
+  height: 100svh;
+  overflow: hidden;
+}
+
+/* ============ 公式 BG mobile size (800px center top、 仏像 silhouette 中央寄せ) ============ */
+html.mobile-mode:not(.wwm-view-sidebar) .wwm-app::before {
+  background-size: 800px auto;
+  background-position: center top;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* ============ band (topbar + hero) = grid-row 1/3 ============ */
+body.mobile-mode .wwm-band {
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
+  border-bottom: 1px solid var(--gold-deep);
+  background: transparent;
+}
+body.mobile-mode .wwm-band-top {
+  padding: 8px 12px;
+  background: rgba(11,9,8,0.45);
+  backdrop-filter: blur(2px);
+  min-height: 62px;
+  border-bottom: 1px solid var(--sumi-ink-1);
+}
+body.mobile-mode .wwm-band .wwm-brand { gap: 8px; }
+body.mobile-mode .wwm-band .wwm-brand-vert {
+  font-size: 13px; padding: 4px 5px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+}
+body.mobile-mode .wwm-band .wwm-brand-en { font-size: 12px; }
+body.mobile-mode .wwm-band .wwm-brand-sub { font-size: 9px; }
+body.mobile-mode .wwm-band .wwm-brand-seal { display: none; }
+body.mobile-mode .wwm-band .wwm-game-ver { display: none; }
+body.mobile-mode .wwm-band-actions { gap: 2px; }
+body.mobile-mode .wwm-band-actions .icon-btn { padding: 0 6px; min-width: 38px; height: 38px; }
+/* SHARE/NOTE = text 省略 chip 化 (狭幅、 2026-06-19 兄貴指示) */
+body.mobile-mode .wwm-band-actions #shareBtn,
+body.mobile-mode .wwm-band-actions #noteBtn { font-size: 0; width: 38px; padding: 0; }
+body.mobile-mode .wwm-band-actions #shareBtn::before { content: "🔗"; font-size: 14px; }
+body.mobile-mode .wwm-band-actions #noteBtn::before { content: "📝"; font-size: 14px; }
+/* IMPORT/RESET/PRESETS/DIAG = band から hide (chip-bar 集約済) */
+body.mobile-mode .wwm-band-actions #importBtn,
+body.mobile-mode .wwm-band-actions #wwmVirtResetBtn,
+body.mobile-mode .wwm-band-actions #wwmPresetWrap,
+body.mobile-mode .wwm-band-actions #wwmDiagBadge { display: none; }
+
+/* ============ hero compact (2 列: 左 score+tier+NEXT / 右 avatar+identity) ============ */
+body.mobile-mode .hero.hero-wuxia {
+  padding: 10px 14px 12px;
+  background: linear-gradient(180deg, rgba(11,9,8,0.30), rgba(11,9,8,0.55));
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "main aside";
+  gap: 6px 12px;
+  position: relative;
+  height: auto;
+  min-height: 130px;
+}
+body.mobile-mode .hero-wuxia .ink-stroke { display: none; }
+body.mobile-mode .wwm-band .kanji-mark {
+  display: block; right: -14px; top: 78%;
+  transform: translateY(-50%); font-size: 130px;
+  color: rgba(232,215,180,0.05);
+}
+body.mobile-mode .hero-wuxia .h-main {
+  grid-area: main; display: flex; flex-direction: column; gap: 2px; min-width: 0;
+}
+body.mobile-mode .hero-wuxia .seat-main .eyebrow .seat-title { font-size: 14px; }
+body.mobile-mode .hero-wuxia .seat-main .eyebrow .seat-en { font-size: 8px; letter-spacing: 0.22em; }
+body.mobile-mode .hero-wuxia .seat-main .hb-num { font-size: 38px; line-height: 1; margin-top: 2px; }
+body.mobile-mode .hero-wuxia .seat-main .hb-num .unit { font-size: 11px; margin-left: 4px; }
+body.mobile-mode .hero-wuxia .pwr .hero-tier.tier-badge { font-size: 13px; padding: 1px 7px; }
+body.mobile-mode .hero-wuxia .hero-next-inline {
+  margin-left: 6px; margin-bottom: 0; display: inline-flex;
+}
+body.mobile-mode .hero-wuxia .hero-next-label { font-size: 8px; letter-spacing: 0.16em; }
+body.mobile-mode .hero-wuxia .hero-next-val { font-size: 14px; }
+body.mobile-mode .hero-wuxia .hero-next-arrow { font-size: 10px; }
+body.mobile-mode .hero-wuxia .h-id {
+  grid-area: aside;
+  margin: 0; margin-left: 0;
+  display: flex; flex-direction: column; align-items: flex-end;
+  gap: 2px;
+  clear: none;
+}
+body.mobile-mode .hero-wuxia .avatar { width: 56px; height: 56px; flex: 0 0 56px; }
+body.mobile-mode .hero-wuxia .h-id-info { min-width: 0; text-align: right; }
+body.mobile-mode .hero-wuxia .pname { font-size: 12px; white-space: nowrap; }
+body.mobile-mode .hero-wuxia .pname b { font-size: 9px; margin-left: 3px; }
+body.mobile-mode .hero-wuxia .pwr { font-size: 8px; letter-spacing: 0.1em; }
+body.mobile-mode .hero-wuxia .pwr b { font-size: 10px; margin-left: 3px; }
+body.mobile-mode .hero-wuxia .seat-sub { margin-top: 6px; padding-top: 6px; }
+body.mobile-mode .hero-wuxia .seat-sub .hb-num { font-size: 22px; }
+/* donut = mobile では hero 内 hide (tap popup 別実装 task) */
+body.mobile-mode .hero-wuxia .h-id .luopan { display: none; }
+
+/* ============ hero eyebrow size 縮小 (PC default より軽量化) ============ */
+body.mobile-mode .hero-eyebrow { font-size: var(--text-xs); }
+
+/* ============ chip-bar (hero 下 操作帯、 grid-row 3) ============ */
+body.mobile-mode .wwm-mobile-chip-bar {
+  display: flex;
+  grid-column: 1 / 3;
+  grid-row: 3 / 4;
+  align-items: stretch;
+  height: 36px;
+  background: rgba(20,16,9,0.55);
+  border-bottom: 1px solid var(--sumi-ink-2);
+  border-top: 1px solid var(--gold-deep);
+  backdrop-filter: blur(1px);
+  position: relative;
+  z-index: 20;
+}
+body.mobile-mode .wwm-mobile-chip {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--sumi-ink-1);
+  color: var(--sumi-text-2);
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  transition: color .15s ease, background .15s ease;
+}
+body.mobile-mode .wwm-mobile-chip:last-child { border-right: none; }
+body.mobile-mode .wwm-mobile-chip:hover,
+body.mobile-mode .wwm-mobile-chip:focus-visible {
+  color: var(--gold-bright); background: rgba(255,255,255,0.04);
+}
+body.mobile-mode .wwm-mobile-chip:focus-visible {
+  outline: 1px solid var(--gold-deep); outline-offset: -1px;
+}
+body.mobile-mode .wwm-mobile-chip svg { width: 18px; height: 18px; display: block; }
+/* 弱点 chip = 朱 (有り時) */
+body.mobile-mode #wwmMobileChipDiag { color: var(--vermilion); }
+body.mobile-mode .wwm-mobile-chip-badge {
+  position: absolute; top: 3px; right: 8px;
+  font-family: var(--f-latin); font-weight: 700; font-size: 9px;
+  background: var(--vermilion); color: #fff;
+  border-radius: 50%;
+  min-width: 14px; height: 14px; line-height: 14px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 3px;
+}
+
+/* PRESETS accordion (chip-bar 上に展開) */
+body.mobile-mode .wwm-mobile-preset-acc {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 100%;
+  background: var(--sumi-1);
+  border-top: 1px solid var(--gold-deep);
+  border-bottom: 1px solid var(--sumi-ink-2);
+  padding: 8px 10px;
+  display: flex; flex-direction: column; gap: 5px;
+  z-index: 40;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.4);
+}
+body.mobile-mode .wwm-mobile-preset-acc[hidden] { display: none; }
+body.mobile-mode .wwm-mobile-preset-row {
+  display: flex; align-items: center; gap: 5px;
+  font-family: var(--f-latin); font-size: 11px;
+}
+body.mobile-mode .wwm-mobile-preset-row .num {
+  width: 22px;
+  color: var(--gold-bright);
+  font-weight: 700;
+  font-family: var(--f-latin);
+}
+body.mobile-mode .wwm-mobile-preset-row input.preset-name-input {
+  flex: 1; min-width: 0;
+  background: var(--sumi-0);
+  border: 1px solid var(--sumi-ink-2);
+  color: var(--sumi-text);
+  padding: 5px 7px;
+  font-size: 11px;
+  border-radius: 1px;
+  font-family: var(--f-body);
+}
+body.mobile-mode .wwm-mobile-preset-row .pbtn {
+  font-family: var(--f-display-title);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 5px 8px;
+  background: transparent;
+  border: 1px solid var(--sumi-ink-2);
+  color: var(--sumi-text-2);
+  border-radius: 1px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+body.mobile-mode .wwm-mobile-preset-row .pbtn.save {
+  color: var(--gold-bright); border-color: var(--gold-deep);
+}
+body.mobile-mode .wwm-mobile-preset-row .pbtn:disabled {
+  opacity: 0.45; cursor: not-allowed;
+}
+
+/* ============ rail collapse (46px 縦柱、 tap で overlay 化) = grid-row 4 col 1 ============ */
+body.mobile-mode .wwm-ws-rail {
+  grid-column: 1 / 2;
+  grid-row: 4 / 5;
+  display: flex;
+  flex-direction: column;
+  width: var(--rail-w-min, 46px);
+  background: var(--sumi-1);
+  border-right: 1px solid var(--gold-deep);
+  overflow: hidden;
+  padding: 8px 0;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+  transition: width 0.2s var(--ease-out-quart, ease);
+}
+/* collapse 時 = rail-tate のみ、 rail-fade hide */
+body.mobile-mode .wwm-ws-rail .wwm-rail-fade { display: none; }
+body.mobile-mode .wwm-ws-rail .wwm-rail-in { position: relative; height: 100%; width: 100%; }
+/* rail-tate = PC base position:absolute + opacity:0 を mobile-mode で打消 */
+body.mobile-mode .wwm-ws-rail .wwm-rail-tate {
+  display: block;
+  text-align: center;
+  opacity: 1; pointer-events: auto;
+  position: relative; inset: auto;
+  padding-top: 8px;
+  width: 100%;
+}
+body.mobile-mode .wwm-ws-rail .wwm-rail-tate > * { display: block; margin: 6px auto; }
+/* PC 準拠 = rail collapse 時 縦書きラベル無し、 toggle button のみ */
+body.mobile-mode .wwm-ws-rail .wwm-rail-tate .t-label { display: none; }
+body.mobile-mode .wwm-ws-rail .wwm-rail-tate .wwm-rail-toggle {
+  transform: none;
+  width: 30px; height: 30px;
+  border: 1px solid var(--gold-deep);
+  background: transparent;
+  color: var(--gold-bright);
+}
+
+/* ============ rail overlay open (data-rail-mobile="open" で fixed 290px) ============ */
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail {
+  position: fixed;
+  top: 0; bottom: 0; left: 0;
+  width: 290px;
+  z-index: 60;
+  box-shadow: 4px 0 24px rgba(0,0,0,0.5);
+  overflow: hidden;
+  align-items: stretch;
+  padding: 12px;
+  background: var(--sumi-1);
+  cursor: default;
+}
+/* overlay 時 装飾 BG 弱化 + flex column で内部 scroll 確立 */
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail::before { opacity: 0.12; }
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .kanji-mark {
+  opacity: 0.08; font-size: 200px;
+}
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-in {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+}
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-fade {
+  display: flex; flex-direction: column;
+  flex: 1; min-height: 0;
+  position: relative; z-index: 2;
+  opacity: 1; pointer-events: auto;
+}
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-sb-rest {
+  flex: 1; min-height: 0;
+  overflow-y: auto;
+  background: var(--sumi-1);
+  padding: 8px;
+}
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-tate { display: none; }
+
+/* backdrop = overlay open 時のみ表示 (default は workspace.css L1284 直下 = hide) */
+body.mobile-mode .wwm-app[data-rail-mobile="open"] ~ .wwm-rail-backdrop,
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-rail-backdrop { display: block; }
+
+/* rail sb-rest / mini-hero = collapse 時 hide、 overlay 時のみ表示 */
+body.mobile-mode .wwm-sb-rest,
+body.mobile-mode .wwm-sb-mini-hero-card { display: none; }
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-sb-rest { display: block; }
+
+/* rail-toggle / rail-fade の細部 */
+body.mobile-mode .wwm-rail-toggle {
+  width: 30px; height: 30px;
+  border: 1px solid var(--gold-deep);
+  color: var(--gold-bright);
+  background: transparent;
+}
+body.mobile-mode .wwm-rail-fade { background: none; }
+
+/* ============ main = grid-row 4 col 2 (右側 body 領域) ============ */
+body.mobile-mode .wwm-ws-main {
+  grid-column: 2 / 3;
+  grid-row: 4 / 5;
+  display: block;
+  border-top: none;
+  border-left: none;
+  overflow: hidden;
+  min-height: 0;
+}
+body.mobile-mode .wwm-ws-tabs { display: none; }
+body.mobile-mode .wwm-ws-paper-bg { display: none; }
+body.mobile-mode .wwm-ws-body {
+  padding: 12px 12px 12px;
+  border-left: none;
+  background: var(--kami-0);
+  overflow-y: auto;
+  height: 100%;
+  min-height: 0;
+}
+body.mobile-mode .wwm-ws-main .wwm-footer { display: none; }
+
+/* ============ bnav = grid-row 5 (全幅 57px) ============ */
+body.mobile-mode .wwm-bottom-nav {
+  grid-column: 1 / 3;
+  grid-row: 5 / 6;
+  display: flex;
+  position: relative;
+  left: auto; right: auto; bottom: auto;
+  z-index: 20;
+  height: 57px;
+  padding: 4px 4px calc(4px + env(safe-area-inset-bottom));
+  background:
+    linear-gradient(180deg, rgba(11,9,8,0.30), rgba(11,9,8,0.55)),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/qs-bg-32d6898d.png") center / cover no-repeat,
+    var(--sumi-1);
+  backdrop-filter: blur(2px);
+  border-top: 1px solid var(--gold-deep);
+  border-bottom: none;
+}
+body.mobile-mode .wwm-bn {
+  flex: 1;
+  min-height: 48px;
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px 2px;
+  font-family: var(--f-display-title);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--sumi-text-3);
+  cursor: pointer;
+}
+body.mobile-mode .wwm-bn[aria-selected="true"] {
+  background: var(--kami-0);
+  color: var(--kami-fg);
+  border-radius: 1px;
+}
+
+/* ============ SHARE modal OBS section (mobile = OBS PC 専用なので hide) ============ */
+body.mobile-mode .wwm-share-obs-block { display: none; }
+
+} /* end @layer components */

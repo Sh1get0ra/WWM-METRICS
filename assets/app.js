@@ -511,3 +511,20 @@ async function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+/* ============ mobile-mode toggle (2026-06-19 mobile-v2.css 連動)
+   matchMedia '(max-width: 600px)' = mobile-v2.css の breakpoint と一致。
+   html + body 両方に class 付与 (CSS は body.mobile-mode prefix、 html は overflow/height 用)。
+   初回 即時 + change listener + DOMContentLoaded 再適用 (script 位置で body 未生成 case 保険) */
+(function initMobileMode() {
+  var mq = window.matchMedia('(max-width: 600px)');
+  function apply() {
+    var on = mq.matches;
+    document.documentElement.classList.toggle('mobile-mode', on);
+    if (document.body) document.body.classList.toggle('mobile-mode', on);
+  }
+  apply();
+  if (mq.addEventListener) mq.addEventListener('change', apply);
+  else if (mq.addListener) mq.addListener(apply);
+  document.addEventListener('DOMContentLoaded', apply);
+})();
