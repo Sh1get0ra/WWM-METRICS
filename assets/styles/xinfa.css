@@ -470,35 +470,35 @@
 /* @media (max-width: 768px) の grid-column: 1 強制 = 旧縦 1 列 layout の残骸、
    gear-grid 中間帯 auto-fit (gear.css 481-930) と衝突して全 slot を 1 列目に重ねていた → 削除 (2026-06-19 兄貴指示) */
 
-@media (max-width: 480px) {
-  /* ─── Phase 5: 装備 2列 stack / 心法 2列 / 武庫 直下 ─── */
+@media (max-width: 600px) {
+  /* mobile v2 (2026-06-19 兄貴指示「横 4 列で一旦」): 装備 4 列 3 行 (主副冠胸 / 環佩膝腕 / 弓射庫) */
   .wwm-gear-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: auto;
     grid-template-areas: none;
-    gap: var(--space-2);
+    gap: var(--space-1);
   }
   .wwm-gear-grid .wwm-equip-slot {
     grid-column: auto;
     grid-row: auto;
   }
-  /* 装備カード 並び順: 主武器→副武器→環→佩→冠胄→胸冑→膝冑→腕冑→弓箭→射玦 */
-  .wwm-gear-grid .wwm-equip-slot[data-slot="1"]  { order: 1; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="2"]  { order: 2; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="10"] { order: 3; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="11"] { order: 4; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="3"]  { order: 5; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="4"]  { order: 6; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="5"]  { order: 7; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="8"]  { order: 8; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="21"] { order: 9; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="9"]  { order: 10; }
-  /* 心法 grid: 2列 stack、 武庫 心法直下 1枚 (parent grid 確認後 後 phase で 微調整) */
+  /* 装備カード 並び順 (兄貴指示 2026-06-19): 主副冠胸 / 環佩膝腕 / 弓射庫 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="1"]  { order: 1; }  /* 主武器 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="2"]  { order: 2; }  /* 副武器 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="3"]  { order: 3; }  /* 冠胄 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="4"]  { order: 4; }  /* 胸冑 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="10"] { order: 5; }  /* 環 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="11"] { order: 6; }  /* 佩 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="5"]  { order: 7; }  /* 膝冑 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="8"]  { order: 8; }  /* 腕冑 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="21"] { order: 9; }  /* 弓箭 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="9"]  { order: 10; } /* 射玦 */
+  /* 心法 grid: 4列 (T0-T3 同行)、 武庫 心法直下 全幅 */
   .wwm-xinfa-grid,
   #wwmXinfaGrid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-2);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-1);
   }
   .wwm-xinfa-slot[data-arsenal-slot] {
     grid-column: 1 / -1;  /* 武庫 横全幅で 心法直下 */

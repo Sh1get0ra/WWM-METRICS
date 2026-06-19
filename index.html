@@ -61,10 +61,10 @@
 <link rel="stylesheet" href="assets/styles/sidebar.css?v=20">
 <link rel="stylesheet" href="assets/styles/layout.css?v=16">
 <link rel="stylesheet" href="assets/styles/gear.css?v=17">
-<link rel="stylesheet" href="assets/styles/xinfa.css?v=25">
+<link rel="stylesheet" href="assets/styles/xinfa.css?v=26">
 <link rel="stylesheet" href="assets/styles/anlz.css?v=45">
-<link rel="stylesheet" href="assets/styles/mobile.css?v=18">
-<link rel="stylesheet" href="assets/styles/workspace.css?v=346">
+<link rel="stylesheet" href="assets/styles/mobile.css?v=19">
+<link rel="stylesheet" href="assets/styles/workspace.css?v=347">
 <link rel="stylesheet" href="assets/styles/modals.css?v=172">
 <link rel="stylesheet" href="assets/styles/responsive-globals.css?v=3">
 <link rel="stylesheet" href="assets/styles/dark.css?v=4">
@@ -280,171 +280,62 @@
   })();
 </script>
 <script>
-  // ── Mobile hero collapse: tap で hero-right (donut) 展開/折りたたみ ──
+  // ── Mobile chip-bar PRESETS accordion + 弱点 BADGE 同期 (2026-06-19 mobile v2) ──
   document.addEventListener('DOMContentLoaded', () => {
-    const hero = document.querySelector('#heroRoot'); /* Task4: hero は section→div 化、ID で掴む */
-    if (hero) hero.addEventListener('click', (e) => {
-      if (e.target.closest('button, input, select, textarea, a, label')) return;
-      if (window.matchMedia('(max-width: 480px)').matches) hero.classList.toggle('hero--expanded');
+    const acc = document.getElementById('wwmMobilePresetAcc');
+    const presetChip = document.getElementById('wwmMobileChipPreset');
+    presetChip?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!acc) return;
+      const on = acc.getAttribute('aria-hidden') === 'false';
+      if (on) { acc.setAttribute('aria-hidden', 'true'); acc.hidden = true; }
+      else { acc.hidden = false; requestAnimationFrame(() => acc.setAttribute('aria-hidden', 'false')); }
     });
-    // ── Mobile Hamburger Drawer toggle ──
-    const ham = document.getElementById('wwmMobileHamburger');
-    const drawer = document.getElementById('wwmMobileDrawer');
-    const backdrop = document.getElementById('wwmMobileDrawerBackdrop');
-    const closeBtn = document.getElementById('wwmMobileDrawerClose');
-    const open = () => {
-      drawer.hidden = false; backdrop.hidden = false;
-      requestAnimationFrame(() => { drawer.classList.add('open'); backdrop.classList.add('open'); });
-      ham?.setAttribute('aria-expanded', 'true');
-    };
-    const close = () => {
-      drawer.classList.remove('open'); backdrop.classList.remove('open');
-      ham?.setAttribute('aria-expanded', 'false');
-      setTimeout(() => { drawer.hidden = true; backdrop.hidden = true; }, 250);
-    };
-    ham?.addEventListener('click', () => drawer.classList.contains('open') ? close() : open());
-    closeBtn?.addEventListener('click', close);
-    backdrop?.addEventListener('click', close);
-    // drawer内 button click 後も close (lang切替等は除く: 即時 update したい)
-    drawer?.addEventListener('click', (e) => {
-      const btn = e.target.closest('.wwm-mobile-drawer-btn');
-      if (btn) setTimeout(close, 100);
+    document.addEventListener('click', (e) => {
+      if (!acc || acc.hidden) return;
+      if (e.target.closest('#wwmMobilePresetAcc') || e.target.closest('#wwmMobileChipPreset')) return;
+      acc.setAttribute('aria-hidden', 'true'); acc.hidden = true;
     });
-
-    // ── Phase 7: Mobile Stat FAB + 全画面 stat overlay ──
-    const fab = document.getElementById('wwmMobileStatFab');
-    const fabAvatar = document.getElementById('wwmMobileStatFabAvatar');
-    const fabFallback = document.getElementById('wwmMobileStatFabFallback');
-    const statOverlay = document.getElementById('wwmMobileStatOverlay');
-    const statBackdrop = document.getElementById('wwmMobileStatOverlayBackdrop');
-    const statClose = document.getElementById('wwmMobileStatOverlayClose');
-    const statBody = document.getElementById('wwmMobileStatOverlayBody');
-    const isMobile = () => window.matchMedia('(max-width: 480px)').matches;
-    // avatar 同期 (sidebar render 後 / mobile時のみ FAB 表示)
-    const syncFab = () => {
-      if (!fab) return;
-      if (!isMobile()) { fab.hidden = true; return; }
-      const ri = window.WWMState?.roleInfo; /* Phase 2.8: __WWM_ROLEINFO proxy 切離し */
-      const src = ri?._avatarBase64 || ri?._avatarUrl || (ri?.roleAvatar && window.WWM_AVATAR_ICONS?.[ri.roleAvatar]) || '';
-      if (fabAvatar) {
-        if (src) { fabAvatar.src = src; fabAvatar.style.display = ''; if (fabFallback) fabFallback.style.display = 'none'; }
-        else { fabAvatar.removeAttribute('src'); fabAvatar.style.display = 'none'; if (fabFallback) fabFallback.style.display = ''; }
+    // 弱点 BADGE: PC #wwmDiagBadge の hidden/count を mobile chip にミラー (MutationObserver)
+    const pcBadge = document.getElementById('wwmDiagBadge');
+    const pcCount = document.getElementById('wwmDiagBadgeCount');
+    const mobBadge = document.getElementById('wwmMobileChipDiag');
+    const mobCount = document.getElementById('wwmMobileChipDiagCount');
+    const syncDiag = () => {
+      if (!pcBadge || !mobBadge) return;
+      const hide = pcBadge.hasAttribute('hidden');
+      mobBadge.hidden = hide;
+      if (pcCount && mobCount) mobCount.textContent = pcCount.textContent || '0';
+    };
+    if (pcBadge) {
+      new MutationObserver(syncDiag).observe(pcBadge, { attributes: true, attributeFilter: ['hidden'] });
+      if (pcCount) new MutationObserver(syncDiag).observe(pcCount, { childList: true, characterData: true, subtree: true });
+      syncDiag();
+    }
+    // mobile preset row 状態を PC preset slot とミラー (load button disabled 等)
+    const mirrorPresetState = () => {
+      for (let i = 0; i < 3; i++) {
+        const pcName = document.getElementById(`presetName${i}`);
+        const pcLoad = document.getElementById(`presetLoadBtn${i}`);
+        const pcDel = document.getElementById(`presetDelBtn${i}`);
+        const mName = document.getElementById(`presetMobName${i}`);
+        const mLoad = document.getElementById(`presetMobLoad${i}`);
+        const mDel = document.getElementById(`presetMobDel${i}`);
+        if (pcName && mName && mName.value !== pcName.value) mName.value = pcName.value;
+        if (pcLoad && mLoad) mLoad.disabled = pcLoad.disabled;
+        if (pcDel && mDel) mDel.disabled = pcDel.disabled;
       }
-      // データ未importでも FAB は表示 (tap で stat overlay = importガイドに)
-      fab.hidden = false;
     };
-    // sidebar element 自体を overlay 内に move (clone だと event listener 失う + import前 空問題)
-    let _sbOrigParent = null, _sbOrigNext = null;
-    const openStat = () => {
-      if (!statOverlay || !statBody) return;
-      const sb = document.getElementById('wwmSidebar');
-      if (sb && sb.parentNode !== statBody) {
-        _sbOrigParent = sb.parentNode;
-        _sbOrigNext = sb.nextSibling;
-        statBody.appendChild(sb);
-        sb.classList.add('wwm-sidebar-in-overlay');
+    // mobile name 入力 → PC 側にも反映
+    for (let i = 0; i < 3; i++) {
+      const mName = document.getElementById(`presetMobName${i}`);
+      const pcName = document.getElementById(`presetName${i}`);
+      if (mName && pcName) {
+        mName.addEventListener('input', () => { pcName.value = mName.value; pcName.dispatchEvent(new Event('input', { bubbles: true })); });
       }
-      // import前 等で sidebar 空なら案内表示
-      if (sb && !sb.innerHTML.trim()) {
-        sb.innerHTML = '<div style="padding:24px;text-align:center;color:var(--paper-mute);font-size:13px;">データ未インポート<br><br>ハンバーガー → IMPORT で読み込み</div>';
-      }
-      statOverlay.hidden = false;
-      if (statBackdrop) statBackdrop.hidden = false;
-      document.body.style.overflow = 'hidden';
-    };
-    const closeStat = () => {
-      const sb = document.getElementById('wwmSidebar');
-      if (sb && _sbOrigParent) {
-        sb.classList.remove('wwm-sidebar-in-overlay');
-        if (_sbOrigNext && _sbOrigNext.parentNode === _sbOrigParent) {
-          _sbOrigParent.insertBefore(sb, _sbOrigNext);
-        } else {
-          _sbOrigParent.appendChild(sb);
-        }
-        _sbOrigParent = null; _sbOrigNext = null;
-      }
-      if (statOverlay) statOverlay.hidden = true;
-      if (statBackdrop) statBackdrop.hidden = true;
-      document.body.style.overflow = '';
-    };
-    // ── Phase 7-b: FAB ドラッグ位置移動 (localStorage で永続化) ──
-    const FAB_POS_KEY = 'wwmMobileStatFabPos';
-    const FAB_SIZE = 56, DRAG_THRESHOLD = 6;
-    let _fabDragging = false, _fabMoved = false;
-    let _fabPtrStartX = 0, _fabPtrStartY = 0, _fabStartX = 0, _fabStartY = 0;
-    const _clampPos = (x, y) => {
-      const vw = window.innerWidth, vh = window.innerHeight, m = 4;
-      return {
-        x: Math.max(m, Math.min(vw - FAB_SIZE - m, x)),
-        y: Math.max(m, Math.min(vh - FAB_SIZE - m, y))
-      };
-    };
-    const _applyFabPos = (x, y) => {
-      if (!fab) return;
-      const p = _clampPos(x, y);
-      fab.style.left = p.x + 'px';
-      fab.style.top = p.y + 'px';
-      fab.style.right = 'auto';
-      fab.style.bottom = 'auto';
-    };
-    const _saveFabPos = () => {
-      if (!fab) return;
-      const r = fab.getBoundingClientRect();
-      try { localStorage.setItem(FAB_POS_KEY, JSON.stringify({ x: r.left, y: r.top })); } catch {}
-    };
-    const _restoreFabPos = () => {
-      try {
-        const raw = localStorage.getItem(FAB_POS_KEY);
-        if (!raw) return;
-        const p = JSON.parse(raw);
-        if (typeof p?.x === 'number' && typeof p?.y === 'number') _applyFabPos(p.x, p.y);
-      } catch {}
-    };
-    fab?.addEventListener('pointerdown', (e) => {
-      _fabDragging = true; _fabMoved = false;
-      _fabPtrStartX = e.clientX; _fabPtrStartY = e.clientY;
-      const r = fab.getBoundingClientRect();
-      _fabStartX = r.left; _fabStartY = r.top;
-      try { fab.setPointerCapture(e.pointerId); } catch {}
-    });
-    fab?.addEventListener('pointermove', (e) => {
-      if (!_fabDragging) return;
-      const dx = e.clientX - _fabPtrStartX, dy = e.clientY - _fabPtrStartY;
-      if (!_fabMoved && Math.hypot(dx, dy) > DRAG_THRESHOLD) _fabMoved = true;
-      if (_fabMoved) { e.preventDefault(); _applyFabPos(_fabStartX + dx, _fabStartY + dy); }
-    });
-    const _endFabDrag = (e) => {
-      if (!_fabDragging) return;
-      _fabDragging = false;
-      if (_fabMoved) _saveFabPos();
-    };
-    fab?.addEventListener('pointerup', _endFabDrag);
-    fab?.addEventListener('pointercancel', _endFabDrag);
-    // click より先に登録: 移動有なら openStat 抑止 (1回限り)
-    fab?.addEventListener('click', (e) => {
-      if (_fabMoved) { e.preventDefault(); e.stopImmediatePropagation(); _fabMoved = false; }
-    }, true);
-    // viewport resize時 はみ出し補正
-    window.addEventListener('resize', () => {
-      if (!fab || fab.hidden) return;
-      const r = fab.getBoundingClientRect();
-      _applyFabPos(r.left, r.top);
-    });
-    _restoreFabPos();
-
-    fab?.addEventListener('click', openStat);
-    statClose?.addEventListener('click', closeStat);
-    statBackdrop?.addEventListener('click', closeStat);
-
-    window.addEventListener('resize', syncFab);
-    // sidebar render後 avatar 取れる → 軽く polling (一度確定したら interval停止)
-    let _fabSyncTries = 0;
-    const _fabSyncInterval = setInterval(() => {
-      syncFab();
-      _fabSyncTries++;
-      if (_fabSyncTries > 60 || window.WWMState?.roleInfo?._avatarBase64) clearInterval(_fabSyncInterval);
-    }, 500);
-    syncFab();
+    }
+    setInterval(mirrorPresetState, 1000);
+    mirrorPresetState();
   });
 </script>
 </head>
@@ -653,6 +544,48 @@
       </div>
     </div>
   </aside>
+
+  <!-- Mobile chip-bar (hero 下 操作帯、 PC時 hidden / mobile時のみ表示)
+       2026-06-19 mobile v2 設計: 旧 hamburger drawer/stat fab/mobile-topbar 全廃止、
+       PC band-top 流用 + 操作帯のみ mobile 新設 (.wwm-app 内 grid 配置のため main 直前へ) -->
+  <nav class="wwm-mobile-chip-bar" id="wwmMobileChipBar" aria-label="操作帯">
+    <div class="wwm-mobile-preset-acc" id="wwmMobilePresetAcc" aria-hidden="true" hidden>
+      <div class="wwm-mobile-preset-row">
+        <span class="num">01</span>
+        <input class="preset-name-input" id="presetMobName0" type="text" maxlength="20" placeholder="preset 01">
+        <button class="pbtn save" onclick="savePreset(0)" data-i18n="presetSave">保存</button>
+        <button class="pbtn load" id="presetMobLoad0" onclick="loadPreset(0)" data-i18n="presetLoad" disabled>読込</button>
+        <button class="pbtn del" id="presetMobDel0" onclick="deletePreset(0)" disabled aria-label="プリセット01削除">✕</button>
+      </div>
+      <div class="wwm-mobile-preset-row">
+        <span class="num">02</span>
+        <input class="preset-name-input" id="presetMobName1" type="text" maxlength="20" placeholder="preset 02">
+        <button class="pbtn save" onclick="savePreset(1)" data-i18n="presetSave">保存</button>
+        <button class="pbtn load" id="presetMobLoad1" onclick="loadPreset(1)" data-i18n="presetLoad" disabled>読込</button>
+        <button class="pbtn del" id="presetMobDel1" onclick="deletePreset(1)" disabled aria-label="プリセット02削除">✕</button>
+      </div>
+      <div class="wwm-mobile-preset-row">
+        <span class="num">03</span>
+        <input class="preset-name-input" id="presetMobName2" type="text" maxlength="20" placeholder="preset 03">
+        <button class="pbtn save" onclick="savePreset(2)" data-i18n="presetSave">保存</button>
+        <button class="pbtn load" id="presetMobLoad2" onclick="loadPreset(2)" data-i18n="presetLoad" disabled>読込</button>
+        <button class="pbtn del" id="presetMobDel2" onclick="deletePreset(2)" disabled aria-label="プリセット03削除">✕</button>
+      </div>
+    </div>
+    <button class="wwm-mobile-chip" id="wwmMobileChipDiag" onclick="WWMSidebar.diag.openPopup()" aria-label="弱点" title="弱点指摘を表示" data-i18n-title="tipDiagBadge" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span class="wwm-mobile-chip-badge" id="wwmMobileChipDiagCount">0</span>
+    </button>
+    <button class="wwm-mobile-chip" onclick="importData()" aria-label="IMPORT" title="装備データ取込" data-i18n-title="importBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    </button>
+    <button class="wwm-mobile-chip" onclick="WWMHelp.resetAllVirtuals()" aria-label="RESET" title="新装備/心法 全リセット" data-i18n-title="virtResetTip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+    </button>
+    <button class="wwm-mobile-chip" id="wwmMobileChipPreset" aria-label="PRESETS" title="プリセット" data-i18n-title="presetTitle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </nav>
 
   <!-- 紙面 (main) -->
   <main class="wwm-ws-main wwm-ws-paper" role="main">
@@ -883,76 +816,14 @@
   </main>
 </div>
 
-  <!-- Mobile Hamburger Drawer (PC時 hidden、 mobile時 ≡ tap で slide-in) -->
-  <div class="wwm-mobile-drawer-backdrop" id="wwmMobileDrawerBackdrop" hidden></div>
-  <aside class="wwm-mobile-drawer" id="wwmMobileDrawer" hidden aria-label="メニュー">
-    <div class="wwm-mobile-drawer-header">
-      <span class="wwm-mobile-drawer-title">MENU</span>
-      <button type="button" class="wwm-mobile-drawer-close" id="wwmMobileDrawerClose" aria-label="閉じる">×</button>
-    </div>
-    <div class="wwm-mobile-drawer-body">
-      <div class="wwm-mobile-drawer-section">
-        <div class="wwm-mobile-drawer-section-title">言語 / Language</div>
-        <div class="wwm-mobile-drawer-langs">
-          <!-- ja = 初期 active (topbar と同 pattern — setLang は saved≠ja 時のみ走るため static 必須) -->
-          <button class="lang-btn active" data-lang="ja" onclick="setLang('ja')" aria-pressed="true">日本語</button>
-          <button class="lang-btn" data-lang="en" onclick="setLang('en')" aria-pressed="false">EN</button>
-          <button class="lang-btn" data-lang="zh" onclick="setLang('zh')" aria-pressed="false">中文</button>
-          <button class="lang-btn" data-lang="ko" onclick="setLang('ko')" aria-pressed="false">한국어</button>
-          <button class="lang-btn" data-lang="vi" onclick="setLang('vi')" aria-pressed="false">Tiếng Việt</button>
-        </div>
-      </div>
-      <div class="wwm-mobile-drawer-section">
-        <button type="button" class="wwm-mobile-drawer-btn" onclick="importData()" data-i18n="importBtn">📥 IMPORT</button>
-        <button type="button" class="wwm-mobile-drawer-btn" onclick="WWMSidebar.share.shareUrl()" data-i18n="shareBtn">🔗 SHARE</button>
-        <button type="button" class="wwm-mobile-drawer-btn" onclick="WWMChangelog.showAll()" data-i18n="noteBtn">📝 NOTE</button>
-      </div>
-    </div>
-  </aside>
-
-  <!-- Mobile TopBar (PC時 hidden、 mobile時のみ表示 / TITLE + 📈格析 + ≡) -->
-  <div class="wwm-mobile-topbar" aria-label="モバイル用 上部バー">
-    <div class="wwm-brand wwm-mobile-brand">
-      <!-- SEO (2026-06-11 Bing 指摘): h1 はページ 1 個原則 → PC topbar 側を正、 mobile 重複は div 化 (見た目 = .wwm-brand-vert class 由来で不変) -->
-      <div class="wwm-brand-vert" data-i18n="brandVert" data-kaisho="brandVert" data-kaisho-fixed>風燕計</div>
-      <div class="wwm-brand-right">
-        <div class="wwm-brand-en" data-i18n="brandEn">WHERE WINDS METRICS</div>
-        <div class="wwm-brand-sub">WWM-REAL-TIME-METRICS</div>
-      </div>
-      <div class="wwm-brand-seal" aria-hidden="true">燕</div>
-    </div>
-    <div class="wwm-mobile-topbar-actions">
-      <button type="button" class="wwm-mobile-top-reset" id="wwmMobileTopReset" onclick="WWMHelp.resetAllVirtuals()" data-i18n-title="virtResetTip" data-i18n="resetBtn" aria-label="装備/心法リセット" title="新装備/心法 全リセット">RESET</button>
-      <button type="button" class="wwm-mobile-hamburger" id="wwmMobileHamburger" aria-label="メニュー" aria-expanded="false" title="メニュー">
-        <span class="wwm-mobile-hamburger-bar"></span>
-        <span class="wwm-mobile-hamburger-bar"></span>
-        <span class="wwm-mobile-hamburger-bar"></span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Mobile Stat FAB (PC時 hidden、 mobile時のみ表示 / tap でステ overlay open) -->
-  <button type="button" class="wwm-mobile-stat-fab" id="wwmMobileStatFab" aria-label="ステ表示" hidden>
-    <img class="wwm-mobile-stat-fab-avatar" id="wwmMobileStatFabAvatar" alt="" loading="lazy">
-    <span class="wwm-mobile-stat-fab-fallback" id="wwmMobileStatFabFallback">ステ</span>
-  </button>
-  <div class="wwm-mobile-stat-overlay-backdrop" id="wwmMobileStatOverlayBackdrop" hidden></div>
-  <aside class="wwm-mobile-stat-overlay" id="wwmMobileStatOverlay" hidden aria-label="ステ詳細">
-    <div class="wwm-mobile-stat-overlay-header">
-      <span class="wwm-mobile-stat-overlay-title">STATS</span>
-      <button type="button" class="wwm-mobile-stat-overlay-close" id="wwmMobileStatOverlayClose" aria-label="閉じる">×</button>
-    </div>
-    <div class="wwm-mobile-stat-overlay-body" id="wwmMobileStatOverlayBody"></div>
-  </aside>
-
   <!-- banner 3 種 (score-update / share-fail / shared-build) は <main> 上に移動済 (2026-06-16) -->
 
-<!-- mobile bottom nav (workspace tab の mobile 版 / PC時 hidden) -->
+<!-- mobile bottom nav (workspace tab の mobile 版 / PC時 hidden / PC tab 同順 = 武備/戦律/履歴/格析) -->
 <nav class="wwm-bottom-nav" role="tablist" aria-label="workspace mobile">
   <button class="wwm-bn" role="tab" aria-selected="true" data-ws="build"><span data-i18n="wsTabBuild" data-kaisho="wsTabBuild">武備</span></button>
-  <button class="wwm-bn" type="button" data-anlz-popout-trigger><span data-i18n="wsTabAnlz" data-kaisho="wsTabAnlz">格析</span></button>
-  <button class="wwm-bn" role="tab" aria-selected="false" data-ws="enbu"><span data-i18n="wsTabEnbu" data-kaisho="wsTabEnbu">演武</span></button>
+  <button class="wwm-bn" role="tab" aria-selected="false" data-ws="enbu"><span data-i18n="wsTabEnbu" data-kaisho="wsTabEnbu">戦律</span></button>
   <button class="wwm-bn" role="tab" aria-selected="false" data-ws="hist"><span data-i18n="wsTabHist" data-kaisho="wsTabHist">履歴</span></button>
+  <button class="wwm-bn" type="button" data-anlz-popout-trigger><span data-i18n="wsTabAnlz" data-kaisho="wsTabAnlz">格析</span></button>
 </nav>
 
 <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
