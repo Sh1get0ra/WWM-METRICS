@@ -1042,22 +1042,24 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
    240/565 = 42.48cqi、 85/565 = 15.04cqi、 60/565 = 10.62cqi、 16/565 = 2.83cqi */
 .wwm-qishu-grid {
   display: flex;
-  gap: clamp(40px, 10.62cqi, 60px);
+  /* vp 連動に変更 (旧 cqi) = 装備 plank clamp と縮小タイミング同期 (兄貴指示 2026-06-19、 rail 閉時きれい優先) */
+  gap: clamp(40px, calc(6.06vw + 3.6px), 60px);
   justify-content: flex-start; align-items: center;
-  padding-left: clamp(8px, 2.83cqi, 16px);
+  padding-left: clamp(8px, calc(2.42vw - 6.5px), 16px);
 }
 .wwm-qishu-cluster {
   position: relative;
-  width: clamp(160px, 42.48cqi, 240px);
-  height: clamp(160px, 42.48cqi, 240px);
+  width: clamp(160px, calc(24.24vw + 14.6px), 240px);
+  height: clamp(160px, calc(24.24vw + 14.6px), 240px);
   flex-shrink: 0;
 }
 /* base = 装備/心法 と同方針 (兄貴指示 2026-06-15 — 木目調廃止 → sumi-2 単色)。
    45deg 回転維持、 外影のみ */
 .wwm-ws-paper .wwm-qishu-slot {
   position: absolute;
-  width: clamp(57px, 15.04cqi, 85px);
-  height: clamp(57px, 15.04cqi, 85px);
+  /* vp 連動に変更 (旧 cqi) = 装備 plank clamp と同期 (2026-06-19) */
+  width: clamp(57px, calc(8.48vw + 6.1px), 85px);
+  height: clamp(57px, calc(8.48vw + 6.1px), 85px);
   background: var(--sumi-2);
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   border-radius: 3px;
@@ -1171,10 +1173,9 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
   .hero-wuxia { gap: 32px; }
 }
 
-@media (max-width: 900px) {
-  .wwm-ws-body { padding: 20px 24px 40px; }
-  .wwm-ws-tabs { padding: 6px 24px 0; }
-}
+/* @media (max-width: 900) の padding ステップ切替 (ws-tabs 36→24 / ws-body 0→24)
+   削除 → 兄貴指摘「900 境界で workspace 形変わる」 真因 = この反対方向の padding ジャンプ。
+   default rule に clamp 化で 1100-900 帯 連続変化、 境界 step 解消 (2026-06-19) */
 
 /* ============ TABLET COMPACT (601-930) — clamp 連続縮小 (2026-06-19 兄貴指示)
    PC (≥931) = 上部 .hero-wuxia rule 値 (score 82px / seat-title 30px / luopan 120px 等)、 タブレット portrait 全機種
@@ -1418,9 +1419,12 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   /* 兄貴指示 2026-06-15 — 札本体縦 = aspect 150/200 (札高 ≈ 150.7) */
   aspect-ratio: 150 / 200;
   width: 100%;
-  max-width: 113px;
+  /* vp 931+ = 113 keep (= 既存視覚不変)、 930↓ = vp 連動縮小 (兄貴指示 2026-06-19)。
+     5 列 × 113 = 565 min-content が ws-body 内幅 (vp 750 ≈ 370) 超え → 横 scroll 真因。
+     slot 縮小で grid min-content を parent fit 範囲に */
+  max-width: clamp(70px, calc(13.03vw - 8.2px), 113px);
   height: auto;
-  min-height: 140px;
+  min-height: clamp(93px, calc(14.24vw + 7.56px), 140px);
   /* 兄貴指示 2026-06-15 — 木目調 (turbulence + 茶墨 gradient + knot + highlight) 廃止 → sumi-2 単色。
      厚み box-shadow 多段 + 外影 = 維持 (札らしさ担保) */
   background: var(--sumi-2);
@@ -1726,7 +1730,9 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   justify-content: space-evenly;
   align-items: start;
   gap: 0;
-  max-width: 827px;
+  /* vp ≥931 = 827 keep (= 既存視覚不変)、 930↓ = container 連続縮小、 vp 600 で 565 (slot 113×5 fit ライン) min。
+     兄貴指示 2026-06-19: 930 以下から clamp で gap を狭めて伸縮、 PC は 視覚不変 */
+  max-width: clamp(565px, calc(79.4vw + 88.6px), 827px);
   margin-right: auto;
 }
 .wwm-ws-paper #wwmGearGrid {

@@ -16,7 +16,6 @@
   align-items: stretch;
   /* min-width 削除: 圧縮停止は親 .wwm-app-body min-width:1010 で一元管理 (minmax(0,1fr) = 完全flex、 親に従う) */
 }
-
 .wwm-gear-grid .wwm-equip-slot[data-slot] { cursor: pointer; transition: transform 0.1s, box-shadow 0.1s; }
 
 .wwm-gear-grid .wwm-equip-slot[data-slot]:hover { transform: translateY(-2px); box-shadow: 0 4px 12px color-mix(in oklab, var(--accent) 30%, transparent); }

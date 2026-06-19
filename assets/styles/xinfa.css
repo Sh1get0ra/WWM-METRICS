@@ -467,11 +467,8 @@
    modals.css .wwm-rank-* (modals layer = components より後) との競合は components 内では
    imp でしか勝てない → theme layer (light) なら natural 常勝 = imp 不要。 勝者不変 */
 
-@media (max-width: 768px) {
-  .wwm-equip-slot[data-slot] {
-    grid-column: 1; grid-row: auto;
-  }
-}
+/* @media (max-width: 768px) の grid-column: 1 強制 = 旧縦 1 列 layout の残骸、
+   gear-grid 中間帯 auto-fit (gear.css 481-930) と衝突して全 slot を 1 列目に重ねていた → 削除 (2026-06-19 兄貴指示) */
 
 @media (max-width: 480px) {
   /* ─── Phase 5: 装備 2列 stack / 心法 2列 / 武庫 直下 ─── */
