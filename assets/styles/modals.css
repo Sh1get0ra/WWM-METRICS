@@ -370,7 +370,13 @@
 .wwm-cmp-modal-a::after { display: none; }
 .wwm-cmp-modal-a .wwm-modal-header {
   position: relative;
-  background: #00000094; /* 2026-06-19 兄貴決定値: 黒 overlay 0.58 で modal 本体水墨を抑え気味に */
+  /* mountain 上部 (山頂) を header に個別 lay (2026-06-19 兄貴指摘: modal cover では image 中央上部
+     が silhouette 暗影で真っ黒見え)。 footer 同型 = 100% auto 横 fit + center top で山頂表示 */
+  background:
+    linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
+    var(--sumi-3);
+  background-blend-mode: normal, screen, normal;
 }
 .wwm-cmp-modal-a .wwm-modal-header::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; width: auto; height: 2px;
@@ -859,11 +865,13 @@
   padding-bottom: var(--space-half);
 }
 .wwm-cmp-modal-a .wwm-modal-header h2 { align-items: flex-end; }
-/* 背景 = 水墨 cover 1 枚絵 (2026-06-19: footer 域まで水墨延伸、 ツール modal と同 pattern) */
+/* 背景 = 水墨 1 枚絵 (2026-06-19 改: cmp modal は SHARE と異なり modal 全体 mountain fit したい
+   兄貴指示「fit されてない」 → cover + center top で両軸 fit + 上端 align。 mobile 縦長でも
+   縦 fit scale + 横中央 crop で modal 全体に山絵展開。 footer 個別 lay は wwm-cmp-footer-a) */
 .wwm-cmp-modal-a {
   background:
     linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
-    url("../bg/mountain-1920.webp") center center / cover no-repeat,
+    url("../bg/mountain-1920.webp") center top / cover no-repeat,
     var(--sumi-3);
   background-blend-mode: normal, screen, normal;
   color: var(--c-cmp-modal-a-fg);
@@ -2960,9 +2968,14 @@
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-gold { background: rgba(184,134,11,0.88); color: #fff !important; border-color: #6b4d08; }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.85); color: #fff !important; border-color: #4a2566; }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.85); color: #fff !important; border-color: #1a3a70; }
-/* footer = 黒 overlay 0.58 のみ (2026-06-19 兄貴指示: header と質感統一) */
+/* footer = mountain image 下方 (山道/下草) を bottom anchor で lay + 黒 overlay 0.58 透かし
+   (2026-06-19 兄貴指示「対照 modal 真っ黒」 修正: tool-modal-footer L3058 と同型) */
 .wwm-cmp-footer-a {
-  background: #00000094;
+  background:
+    linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
+    url("../bg/mountain-1920.webp") center bottom / 100% auto no-repeat,
+    var(--sumi-3);
+  background-blend-mode: normal, screen, normal;
 }
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
@@ -2979,7 +2992,10 @@
      header/footer = 黒 overlay #00000094 で水墨を抑え気味に透かす */
   background:
     linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
-    url("../bg/mountain-1920.webp") center center / cover no-repeat,
+    /* 2026-06-19 兄貴指示: center top / 100% auto (cmp-modal-a L362 と同型)。
+       cover だと mobile 縦長 modal で mountain center が body 中央 lay → header に山頂来ない
+       → 横 fit (100%) + 縦 aspect 維持 + 上端 fit で header に山頂、 下は image 自然延伸 */
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
     var(--sumi-3);
   background-blend-mode: normal, screen, normal;
   border: 1px solid var(--gold-deep);
@@ -3050,10 +3066,15 @@
    紙面上は対照 modal の bg-icon と同じ白抜き表示が透けすぎる場合あり → 実機目視で調整 */
 .wwm-tool-modal .wwm-modal-body .wwm-modal-bg-icon { inset: 0; width: auto; height: auto; }
 
-/* footer = 黒 overlay 0.58 のみ (2026-06-19 兄貴指示: header と質感統一)
-   水墨 multi-bg 撤去、 header と同 #00000094 で上下対称化 */
+/* footer = mountain image 下方 (山道/下草) を bottom anchor で lay + 黒 overlay 0.58 透かし
+   (2026-06-19 兄貴指示「フッター真っ黒」 修正: modal 全体の mountain 100% auto/center top は
+    image 縦 < modal 縦で footer 部 image 範囲外 → 単色黒。 footer 自身に image 下方を lay) */
 .wwm-tool-modal-footer {
-  background: #00000094;
+  background:
+    linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
+    url("../bg/mountain-1920.webp") center bottom / 100% auto no-repeat,
+    var(--sumi-3);
+  background-blend-mode: normal, screen, normal;
   border-top: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
   padding: var(--space-3) var(--space-4) var(--space-3-5);
   display: flex; align-items: center; justify-content: flex-end; gap: 10px;
