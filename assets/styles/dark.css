@@ -11,12 +11,12 @@ html[data-theme="dark"] .wwm-cmp-modal-a .wwm-cmp-rows {
 }
 
 /* K: export.js clone の inline background (universal 書込) 対抗 — S2-e 残 keep 確定。 strip するな */
-/* 2026-06-19: 水墨 cover 1 枚絵 (footer 域まで延伸)。 !important = export.js clone の inline 対抗 keep。
-   center top で mobile 縦長 modal でも header に山頂 align (modals.css L865 と同型、 [[cmp-modal-a-dark-override]]) */
+/* 2026-06-19: tool-modal と統一 (cover 中央暗影回避 + IMPORT/NOTE と見た目揃え、 兄貴指示)。
+   center top / 100% auto = mountain 横 fit + 上端 align、 !important = export.js clone の inline 対抗 keep */
 html[data-theme="dark"] .wwm-cmp-modal-a {
   background:
     linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
-    url("../bg/mountain-1920.webp") center top / cover no-repeat,
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
     var(--sumi-3) !important;
   background-blend-mode: normal, screen, normal !important;
 }

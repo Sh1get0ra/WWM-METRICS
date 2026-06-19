@@ -370,13 +370,10 @@
 .wwm-cmp-modal-a::after { display: none; }
 .wwm-cmp-modal-a .wwm-modal-header {
   position: relative;
-  /* mountain 上部 (山頂) を header に個別 lay (2026-06-19 兄貴指摘: modal cover では image 中央上部
-     が silhouette 暗影で真っ黒見え)。 footer 同型 = 100% auto 横 fit + center top で山頂表示 */
-  background:
-    linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
-    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
-    var(--sumi-3);
-  background-blend-mode: normal, screen, normal;
+  /* tool-modal-header (SHARE/NOTE/IMPORT) と統一 (2026-06-19 兄貴指示)。
+     mountain は modal 全体 background (L865) で center top / 100% auto lay、
+     header は #00000094 黒 overlay 0.58 で mountain 抑え気味に透かす */
+  background: #00000094;
 }
 .wwm-cmp-modal-a .wwm-modal-header::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; width: auto; height: 2px;
@@ -865,13 +862,12 @@
   padding-bottom: var(--space-half);
 }
 .wwm-cmp-modal-a .wwm-modal-header h2 { align-items: flex-end; }
-/* 背景 = 水墨 1 枚絵 (2026-06-19 改: cmp modal は SHARE と異なり modal 全体 mountain fit したい
-   兄貴指示「fit されてない」 → cover + center top で両軸 fit + 上端 align。 mobile 縦長でも
-   縦 fit scale + 横中央 crop で modal 全体に山絵展開。 footer 個別 lay は wwm-cmp-footer-a) */
+/* 背景 = tool-modal と統一 (2026-06-19 兄貴指示「他の IMPORT/NOTE と統一」)。
+   center top / 100% auto = mountain 横 fit + 上端 align (cover の中央暗影 silhouette 回避) */
 .wwm-cmp-modal-a {
   background:
     linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
-    url("../bg/mountain-1920.webp") center top / cover no-repeat,
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
     var(--sumi-3);
   background-blend-mode: normal, screen, normal;
   color: var(--c-cmp-modal-a-fg);
@@ -2968,8 +2964,8 @@
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-gold { background: rgba(184,134,11,0.88); color: #fff !important; border-color: #6b4d08; }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.85); color: #fff !important; border-color: #4a2566; }
 .wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.85); color: #fff !important; border-color: #1a3a70; }
-/* footer = mountain image 下方 (山道/下草) を bottom anchor で lay + 黒 overlay 0.58 透かし
-   (2026-06-19 兄貴指示「対照 modal 真っ黒」 修正: tool-modal-footer L3058 と同型) */
+/* footer = tool-modal-footer L3058 と統一 (2026-06-19 兄貴指示「IMPORT/NOTE と統一」)。
+   mountain image 下方 (山道/下草) を bottom anchor 個別 lay + 黒 overlay 0.58 */
 .wwm-cmp-footer-a {
   background:
     linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
