@@ -98,7 +98,13 @@ html.wwm-shared-build-mode #importBtn {
   border-left: 3px solid var(--ink-2);
   border-radius: 2px;
   font-size: var(--text-md); line-height: 1.5;
+  /* modal は紙地 background → 墨色 (--kami-fg #3d2e1f) で contrast 確保 (2026-06-19 兄貴指摘「読めない」)。
+     sumi-fg (#ede4d0) は墨地用紙色 fg = 紙地に乗ると同化 = 旧バグ */
+  color: var(--kami-fg);
 }
+/* anlz.css L517 の bare `.wwm-diag-text { color: var(--sumi-fg) }` (specificity 0,1,0) が
+   diag modal 内子要素にも適用されて紙色 = 紙地同化。 modal scope では墨色 override (0,2,0) */
+.wwm-diag-modal .wwm-diag-text { color: var(--kami-fg); }
 
 .wwm-diag-modal .wwm-diag-warn { border-left-color: var(--vermilion); }
 

@@ -47,9 +47,9 @@ body.mobile-mode .wwm-band .wwm-brand { gap: 8px; }
 /* display:flex + align-items center は writing-mode:vertical-rl (base.css L98) と競合 → 縦書き崩壊
    (兄貴指摘 2026-06-19)。 size のみ override で base の writing-mode 継承、 縦書き維持 */
 body.mobile-mode .wwm-band .wwm-brand-vert {
-  font-size: 13px; padding: 4px 5px; height: 52px;
+  font-size: 13px; padding: 2px 5px; height: 52px;
 }
-body.mobile-mode .wwm-band .wwm-brand-en { font-size: 12px; }
+body.mobile-mode .wwm-band .wwm-brand-en { font-size: 11px; }
 body.mobile-mode .wwm-band .wwm-brand-sub { font-size: 9px; }
 body.mobile-mode .wwm-band .wwm-brand-seal { display: none; }
 body.mobile-mode .wwm-band .wwm-game-ver { display: none; }

@@ -461,19 +461,27 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
   --safe-left:   env(safe-area-inset-left, 0px);
   --safe-right:  env(safe-area-inset-right, 0px);
 
-  /* bg token reframe R1-R8 (2026-06-16) new semantic tokens */
-  --sumi-0: #0b0908;
-  --sumi-1: #141009;
-  --sumi-2: #2f2a23;
-  --sumi-3: #1a1410;
-  --sumi-fg: #ede4d0;
-  --sumi-fg-dim: #9c8a6a;
-  --kami-0: #f2ead4;
-  --kami-1: #f8f1e1;
-  --kami-2: #e9e0c7;
-  --kami-fg: #3d2e1f;
-  --kami-fg-dim: #7a6850;
-  --gold-paper: #6e5414;
+  /* bg token reframe R1-R8 (2026-06-16) new semantic tokens
+     命名規則 (claude 誤読防止、 2026-06-19 兄貴指摘で明示):
+       <bg>-N    = その背景色 (N=0/1/2/3 で濃度段階)
+       <bg>-fg   = その背景に乗せる文字色 (= 背景軸と逆色)
+       <bg>-fg-dim = 同 fg の dim 版 (旧値/neg/empty/disabled、 [[dim-token-policy]])
+     ⚠ 直感誤読 NG:
+       --sumi-fg = 墨色ではなく 「墨背景用 fg = 紙色 (#ede4d0 明色)」
+       --kami-fg = 紙色ではなく 「紙背景用 fg = 墨色 (#3d2e1f 暗色)」
+     → 紙地 background に文字を載せたい時は --kami-fg、 墨地 background なら --sumi-fg を使う */
+  --sumi-0: #0b0908;       /* 墨 最濃 (app 余白) */
+  --sumi-1: #141009;       /* 墨 標準 (rail / sb-rest 等の主背景) */
+  --sumi-2: #2f2a23;       /* 墨 中 (新規 component の墨デフォルト、 [[sumi-token-policy]]) */
+  --sumi-3: #1a1410;       /* 墨 補助 */
+  --sumi-fg: #ede4d0;      /* 墨背景用 文字色 = 紙色明色 */
+  --sumi-fg-dim: #9c8a6a;  /* 墨背景用 dim 文字色 */
+  --kami-0: #f2ead4;       /* 紙 標準 (ws-body 等 紙面の主背景) */
+  --kami-1: #f8f1e1;       /* 紙 明 */
+  --kami-2: #e9e0c7;       /* 紙 弱明 */
+  --kami-fg: #3d2e1f;      /* 紙背景用 文字色 = 墨色暗色 */
+  --kami-fg-dim: #7a6850;  /* 紙背景用 dim 文字色 */
+  --gold-paper: #6e5414;   /* 紙背景上で映える金 (低彩度茶寄り) */
 }
 
 } /* end @layer tokens */

@@ -999,7 +999,6 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
   scrollbar-color: var(--gold-deep) transparent;
 }
 .wwm-ws-panel { display: none; container-type: inline-size; }
-.wwm-ws-panel.active { padding-left: 36px; }
 .wwm-ws-panel.active { display: block; animation: wsIn .15s ease; }
 @keyframes wsIn { from { opacity: 0; } to { opacity: 1; } }
 
