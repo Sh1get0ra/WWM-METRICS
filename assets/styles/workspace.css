@@ -1172,7 +1172,6 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
 }
 
 @media (max-width: 900px) {
-  .hero-wuxia .h-id-info { min-width: 0; }
   .wwm-ws-body { padding: 20px 24px 40px; }
   .wwm-ws-tabs { padding: 6px 24px 0; }
 }
@@ -1202,6 +1201,15 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
     flex: 0 0 clamp(56px, calc(19.45vw - 60.91px), 120px);
   }
   .hero-wuxia .h-id .luopan-center-label { font-size: clamp(8px, calc(2.74vw - 8.43px), 17px); }
+  /* .h-id 内 identity 全体 = 兄貴指示 2026-06-19 (avatar/donut だけだと kirei に収まらない) */
+  .hero-wuxia .h-id-info { min-width: clamp(0px, calc(51.67vw - 310.55px), 170px); }
+  .hero-wuxia .pname { font-size: clamp(14px, calc(0.91vw + 8.52px), 17px); }
+  .hero-wuxia .pname b { font-size: clamp(10px, calc(0.61vw + 6.34px), 12px); }
+  .hero-wuxia .pwr { font-size: clamp(10px, calc(0.304vw + 8.17px), 11px); }
+  .hero-wuxia .pwr b { font-size: clamp(12px, calc(0.608vw + 8.35px), 14px); }
+  .hero-wuxia .seat-sub { margin-top: clamp(6px, calc(1.82vw - 4.96px), 12px); padding-top: clamp(6px, calc(1.22vw - 1.30px), 10px); }
+  .hero-wuxia .seat-sub .hb-num { font-size: clamp(22px, calc(1.82vw + 11.04px), 28px); }
+  .hero-wuxia .seat-main .hb-num.hb-coming { font-size: clamp(22px, calc(6.69vw - 18.21px), 44px); }
 }
 
 /* ============================================================
