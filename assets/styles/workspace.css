@@ -505,7 +505,11 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   pointer-events: none;
   z-index: 0;
 }
-.hero-wuxia .h-main, .hero-wuxia .h-id { position: relative; z-index: 1; }
+/* .h-id の z-index 削除 = stacking context 作らず popup (position:fixed, z:70) が
+   wwm-app root context で評価される → tab 帯/preset より上層化 (2026-06-19 popup 化対応)。
+   position:relative は luopan の hover scale 等の anchor 用に keep */
+.hero-wuxia .h-main { position: relative; z-index: 1; }
+.hero-wuxia .h-id { position: relative; }
 .hero-wuxia .swap-anim {
   transition: opacity .22s var(--ease-out-quart), transform .22s var(--ease-out-quart);
 }
@@ -1168,11 +1172,104 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
 }
 
 @media (max-width: 900px) {
-  .hero-wuxia .avatar { width: 92px; height: 88px; flex: 0 0 92px; }
-  .hero-wuxia .h-id .luopan { width: 96px; height: 96px; flex: 0 0 96px; margin-left: 10px; }
   .hero-wuxia .h-id-info { min-width: 0; }
   .wwm-ws-body { padding: 20px 24px 40px; }
   .wwm-ws-tabs { padding: 6px 24px 0; }
+}
+
+/* ============ TABLET COMPACT (601-930) — clamp 連続縮小 (2026-06-19 兄貴指示)
+   PC (≥931) = 上部 .hero-wuxia rule 値 (score 82px / seat-title 30px / luopan 120px 等)、 タブレット portrait 全機種
+   (iPad mini 744 / iPad 820 / iPad Pro 11" 834 / Surface Pro 912) と PC 狭幅をカバー。
+   mobile (≤600) = 直下 @media block 値 (score 54px / seat-title 18px / luopan 56px 等) に着地。
+   linear interpolation = vp 連動で滑らか縮小、 段階 @media なしの一本化。
+   既存 @media (max-width: 900px) avatar/luopan 中間値は clamp に置換 (後出し cascade 勝ち) */
+@media (min-width: 601px) and (max-width: 930px) {
+  .hero-wuxia .seat-main .eyebrow .seat-title { font-size: clamp(18px, calc(3.65vw - 3.93px), 30px); }
+  .hero-wuxia .seat-main .eyebrow .seat-en { font-size: clamp(9px, calc(1.52vw - 0.13px), 14px); }
+  .hero-wuxia .seat-main .hb-num { font-size: clamp(54px, calc(8.51vw + 2.84px), 82px); }
+  .hero-wuxia .seat-main .hb-num .unit { font-size: clamp(14px, calc(1.82vw + 3.06px), 20px); }
+  .hero-wuxia .pwr .hero-tier.tier-badge { font-size: clamp(12px, calc(0.61vw + 8.34px), 14px); }
+  .hero-wuxia .hero-next-val { font-size: clamp(22px, calc(6.69vw - 18.21px), 44px); }
+  .hero-wuxia .hero-next-arrow { font-size: clamp(12px, calc(1.82vw + 1.06px), 18px); }
+  .hero-wuxia .avatar {
+    width: clamp(78px, calc(13.98vw - 6.04px), 124px);
+    height: clamp(74px, calc(13.37vw - 6.36px), 118px);
+    flex: 0 0 clamp(78px, calc(13.98vw - 6.04px), 124px);
+  }
+  .hero-wuxia .h-id .luopan {
+    width: clamp(56px, calc(19.45vw - 60.91px), 120px);
+    height: clamp(56px, calc(19.45vw - 60.91px), 120px);
+    flex: 0 0 clamp(56px, calc(19.45vw - 60.91px), 120px);
+  }
+  .hero-wuxia .h-id .luopan-center-label { font-size: clamp(8px, calc(2.74vw - 8.43px), 17px); }
+}
+
+/* ============================================================
+   donut 内訳 popup (2026-06-19 兄貴指示)
+   常時表示 → donut クリックで popup 化、 hero スリム化 + vp 縛りから解放
+   ============================================================ */
+.hero-wuxia .h-id { position: relative; } /* popup anchor */
+.hero-wuxia .luopan {
+  cursor: pointer;
+  transition: transform 0.18s var(--ease-out-quart);
+}
+.hero-wuxia .luopan:hover { transform: scale(1.03); }
+.hero-wuxia .luopan:focus-visible {
+  outline: 2px solid var(--vermilion-bright);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+/* popup default = 閉 (display:none で a11y tree から除外、 開時 flex 化)。
+   position: fixed = .wwm-band の overflow:hidden を逃れる (absolute だと band 内に clip)。
+   top/right inline 値 = JS が luopan rect 基準で open 時に動的計算 */
+.hero-wuxia .wwm-hero-bd-pop {
+  display: none;
+  position: fixed;
+  z-index: 70; /* tab(20) / preset pop(40) / bottom-nav(50) / topbar(60) より上 */
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 200px;
+  padding: 14px 18px;
+  background: var(--sumi-2);
+  border: 1px solid var(--gold-bright);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.55);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.18s var(--ease-out-quart), transform 0.18s var(--ease-out-quart);
+  pointer-events: none;
+}
+.hero-wuxia .wwm-hero-bd-pop.is-open {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+/* popup 化 = 幅制約から解放 → en/vi 長 label の ellipsis 省略不要化 (兄貴指示 2026-06-19)
+   hero block 内では grid-template-columns: 12px 3.5em 1fr + overflow:hidden で省略してた */
+.hero-wuxia .wwm-hero-bd-pop .hb-row {
+  grid-template-columns: 12px auto 1fr;
+}
+.hero-wuxia .wwm-hero-bd-pop .hb-label {
+  overflow: visible;
+  text-overflow: clip;
+}
+/* 勁率内訳 (会心/会意/並傷/軽傷) と 物理/属性 を区切る線 (兄貴指示 2026-06-19) */
+.hero-wuxia .wwm-hero-bd-pop .hb-row.phys {
+  border-top: 1px solid color-mix(in oklab, var(--gold-bright) 30%, transparent);
+  padding-top: 8px;
+  margin-top: 4px;
+}
+/* ▲ donut 指し矢印 (右上 = luopan 中心寄り) */
+.hero-wuxia .wwm-hero-bd-pop::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  right: 50px;
+  width: 12px; height: 12px;
+  background: var(--sumi-2);
+  border-top: 1px solid var(--gold-bright);
+  border-left: 1px solid var(--gold-bright);
+  transform: rotate(45deg);
 }
 
 /* ============ MOBILE (workspace breakpoint = mock 通り 600px) ============ */

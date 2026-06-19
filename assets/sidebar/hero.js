@@ -193,3 +193,51 @@
   window._startTierRoulette = startRoulette;
   window._stopTierRoulette  = stopRoulette;
 })();
+
+/* ============================================================
+   donut 内訳 popup toggle (2026-06-19 兄貴指示)
+   常時表示 → donut クリックで popup 開閉。 outside click / Esc / 再 click で close
+   ============================================================ */
+(() => {
+  function init() {
+    const trigger = document.getElementById('luopanTrigger');
+    const pop = document.getElementById('heroBreakdownPop');
+    if (!trigger || !pop) return;
+
+    function isOpen() { return pop.classList.contains('is-open'); }
+    function positionPop() {
+      // luopan rect 基準で popup 位置算出 (position:fixed = viewport 座標)
+      const r = trigger.getBoundingClientRect();
+      pop.style.top = (r.bottom + 12) + 'px';
+      pop.style.right = (window.innerWidth - r.right) + 'px';
+    }
+    function open() {
+      positionPop();
+      pop.classList.add('is-open');
+      trigger.setAttribute('aria-expanded', 'true');
+      pop.setAttribute('aria-hidden', 'false');
+    }
+    function close() {
+      pop.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+      pop.setAttribute('aria-hidden', 'true');
+    }
+    function toggle(ev) { ev.stopPropagation(); isOpen() ? close() : open(); }
+
+    trigger.addEventListener('click', toggle);
+    trigger.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggle(ev); }
+    });
+    pop.addEventListener('click', (ev) => ev.stopPropagation());
+    document.addEventListener('click', () => { if (isOpen()) close(); });
+    document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && isOpen()) close(); });
+    // resize 中に popup 位置追随 (open 時のみ)
+    window.addEventListener('resize', () => { if (isOpen()) positionPop(); });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
