@@ -1424,19 +1424,8 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
     width: 100%;
   }
   .wwm-ws-rail .wwm-rail-tate > * { display: block; margin: 6px auto; }
-  /* 縦書き ステータス label: vertical-lr で writing-mode 親 (horizontal) との conflict 回避
-     (vertical-rl は要素自身の inline-block 計算で x 位置が負側にずれる、 lr で +側に補正) */
-  .wwm-ws-rail .wwm-rail-tate .t-label {
-    display: inline-block;
-    writing-mode: vertical-lr;
-    -webkit-writing-mode: vertical-lr;
-    text-orientation: mixed;
-    font-family: var(--f-display-title); font-weight: 700;
-    font-size: 12px; letter-spacing: 0.3em;
-    color: var(--gold-bright);
-    width: fit-content;
-    height: auto;
-  }
+  /* PC 準拠 = rail collapse 時 縦書きラベル無し、 ◀ toggle button のみ (兄貴指示 2026-06-19) */
+  .wwm-ws-rail .wwm-rail-tate .t-label { display: none; }
   .wwm-ws-rail .wwm-rail-tate .wwm-rail-toggle {
     transform: none;
     width: 30px; height: 30px;
@@ -1457,12 +1446,29 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
     background: var(--sumi-1);
     cursor: default;
   }
-  /* overlay 時 = 装飾 BG (qs-bg / 斬 kanji) を弱めて中身視認 */
+  /* overlay 時 = 装飾 BG (qs-bg / 斬 kanji) を弱めて中身視認 + flex column で内部 scroll 確立 */
   .wwm-app[data-rail-mobile="open"] .wwm-ws-rail::before { opacity: 0.12; }
   .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .kanji-mark { opacity: 0.08; font-size: 200px; }
-  .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-fade { display: block; position: relative; z-index: 2; }
+  .wwm-app[data-rail-mobile="open"] .wwm-ws-rail {
+    overflow: hidden;
+  }
+  .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-in {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+  }
+  .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-fade {
+    display: flex; flex-direction: column;
+    flex: 1; min-height: 0;
+    position: relative; z-index: 2;
+    opacity: 1; pointer-events: auto;
+  }
+  .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-sb-rest {
+    flex: 1; min-height: 0;
+    overflow-y: auto;
+    background: var(--sumi-1);
+    padding: 8px;
+  }
   .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-tate { display: none; }
-  .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-in { width: 100%; }
   /* backdrop = overlay 開 時 viewport 全面 暗化、 click で close (JS で append される) */
   .wwm-rail-backdrop {
     position: fixed; inset: 0;
