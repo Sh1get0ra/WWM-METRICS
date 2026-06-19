@@ -1289,12 +1289,13 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
 
 @media (max-width: 600px) {
   /* L字 grid mobile: 5 行 (topbar / hero / chip / rail+body / bnav)、 2 列 (rail-w-min / 1fr).
-     bnav は 57px 固定 (auto だと flex 子高さ計算で 0 化、 2026-06-19 確認済) */
+     bnav は 57px 固定 (auto だと flex 子高さ計算で 0 化、 2026-06-19 確認済)
+     height = 100svh (small viewport = address bar 含む最小 vp、 100dvh だと iOS Safari の動的 bar で bnav 隠れる) */
   .wwm-app {
     display: grid;
     grid-template-columns: var(--rail-w-min, 46px) 1fr;
     grid-template-rows: auto auto 36px minmax(0, 1fr) 57px;
-    height: 100dvh;
+    height: 100svh;
     overflow: hidden;
   }
   html, body { overflow: hidden; height: 100%; }
@@ -1407,7 +1408,31 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
     align-items: center;
     position: relative;
     z-index: 10;
+    cursor: pointer;
+    transition: width 0.2s var(--ease-out-quart, ease);
   }
+  /* mobile rail overlay open 状態 = rail = position fixed 290px、 紙面に被せる */
+  .wwm-app[data-rail-mobile="open"] .wwm-ws-rail {
+    position: fixed;
+    top: 0; bottom: 0; left: 0;
+    width: 290px;
+    z-index: 60;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.5);
+    overflow-y: auto;
+    align-items: stretch;
+    padding: 12px;
+  }
+  .wwm-app[data-rail-mobile="open"] .wwm-sb-rest { display: block; }
+  .wwm-app[data-rail-mobile="open"] .wwm-rail-tate { display: none; }
+  /* backdrop = overlay 開 時 viewport 全面 暗化、 click で close (JS で append される) */
+  .wwm-rail-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 55;
+    display: none;
+  }
+  .wwm-app[data-rail-mobile="open"] ~ .wwm-rail-backdrop,
+  .wwm-app[data-rail-mobile="open"] .wwm-rail-backdrop { display: block; }
   /* rail 内 stat (rest) = collapse 時 非表示、 縦書きラベルのみ */
   .wwm-sb-rest, .wwm-sb-mini-hero-card { display: none; }
   .wwm-rail-tate { writing-mode: vertical-rl; font-size: 12px; color: var(--gold-bright); letter-spacing: 0.3em; }

@@ -80,6 +80,41 @@
   if (ro) ro.addEventListener('click', function () { setRail(false); });
   try { if (localStorage.getItem(RAIL_KEY) === '1') setRail(true); } catch (e) {}
 
+  // ── mobile rail overlay (rail collapse 46px の click で 290px 展開、 兄貴指示 2026-06-19) ──
+  var rail = document.querySelector('.wwm-ws-rail');
+  // backdrop div を body に append (CSS で表示制御)
+  var railBackdrop = document.createElement('div');
+  railBackdrop.className = 'wwm-rail-backdrop';
+  document.body.appendChild(railBackdrop);
+  railBackdrop.addEventListener('click', function () { closeMobileRail(); });
+  function isMobile() { return window.matchMedia('(max-width: 600px)').matches; }
+  function openMobileRail() {
+    if (!app) return;
+    app.dataset.railMobile = 'open';
+  }
+  function closeMobileRail() {
+    if (!app) return;
+    delete app.dataset.railMobile;
+  }
+  if (rail) {
+    rail.addEventListener('click', function (ev) {
+      if (!isMobile()) return;
+      if (ev.target.closest('#wwmRailClose')) { closeMobileRail(); return; }
+      if (app && app.dataset.railMobile === 'open') return;
+      openMobileRail();
+    });
+  }
+  document.addEventListener('click', function (ev) {
+    if (!isMobile()) return;
+    if (!app || app.dataset.railMobile !== 'open') return;
+    if (ev.target.closest('.wwm-ws-rail')) return;
+    if (ev.target.closest('.wwm-rail-backdrop')) { closeMobileRail(); return; }
+    closeMobileRail();
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape' && app && app.dataset.railMobile === 'open') closeMobileRail();
+  });
+
   // ── preset popover ──
   var chip = document.getElementById('wwmPresetChip');
   var pop = document.getElementById('wwmPresetPop');
