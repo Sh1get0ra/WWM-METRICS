@@ -56,11 +56,9 @@ body.mobile-mode .wwm-band .wwm-brand-seal { display: none; }
 body.mobile-mode .wwm-band .wwm-game-ver { display: none; }
 body.mobile-mode .wwm-band-actions { gap: 2px; }
 body.mobile-mode .wwm-band-actions .icon-btn { padding: 0 6px; min-width: 38px; height: 38px; }
-/* SHARE/NOTE = text 省略 chip 化 (狭幅、 2026-06-19 兄貴指示) */
+/* SHARE/NOTE = PC 側で SVG icon 化済 (2026-06-20)、 mobile では size のみ override */
 body.mobile-mode .wwm-band-actions #shareBtn,
-body.mobile-mode .wwm-band-actions #noteBtn { font-size: 0; width: 38px; padding: 0; }
-body.mobile-mode .wwm-band-actions #shareBtn::before { content: "🔗"; font-size: 14px; }
-body.mobile-mode .wwm-band-actions #noteBtn::before { content: "📝"; font-size: 14px; }
+body.mobile-mode .wwm-band-actions #noteBtn { width: 38px; padding: 0; }
 /* IMPORT/RESET/PRESETS/DIAG = band から hide (chip-bar 集約済) */
 body.mobile-mode .wwm-band-actions #importBtn,
 body.mobile-mode .wwm-band-actions #wwmVirtResetBtn,

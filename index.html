@@ -55,7 +55,7 @@
      flip 0 を important-audit-v2 --layer-impact で機械証明済。 @layer 未対応 (2022 以前) browser 切捨て済 -->
 <link rel="stylesheet" href="assets/styles/tokens.css?v=67">
 <link rel="stylesheet" href="assets/styles/animations.css?v=5">
-<link rel="stylesheet" href="assets/styles/base.css?v=26">
+<link rel="stylesheet" href="assets/styles/base.css?v=27">
 <link rel="stylesheet" href="assets/styles/share.css?v=27">
 <link rel="stylesheet" href="assets/styles/hero.css?v=34">
 <link rel="stylesheet" href="assets/styles/sidebar.css?v=20">
@@ -64,8 +64,8 @@
 <link rel="stylesheet" href="assets/styles/xinfa.css?v=26">
 <link rel="stylesheet" href="assets/styles/anlz.css?v=45">
 <link rel="stylesheet" href="assets/styles/mobile.css?v=20">
-<link rel="stylesheet" href="assets/styles/workspace.css?v=365">
-<link rel="stylesheet" href="assets/styles/mobile-v2.css?v=38">
+<link rel="stylesheet" href="assets/styles/workspace.css?v=366">
+<link rel="stylesheet" href="assets/styles/mobile-v2.css?v=39">
 <link rel="stylesheet" href="assets/styles/modals.css?v=192">
 <link rel="stylesheet" href="assets/styles/responsive-globals.css?v=3">
 <link rel="stylesheet" href="assets/styles/obs.css?v=10">
@@ -358,8 +358,8 @@
       <div class="wwm-band-actions">
         <!-- topbar 再編 (2026-06-12 兄貴画像準拠): IMPORT/RESET = tabs 帯右端へ移設 (PRESETS と
              3 者で役割が近い)。言語 = 公式風 globe ボタン + プルダウン (言語増加に強い) -->
-        <button class="icon-btn share-btn" id="shareBtn" onclick="WWMSidebar.share.shareUrl()" title="Build を URL で共有" data-i18n-title="tipIconShare" aria-label="URL で共有" data-i18n="shareBtn">SHARE</button>
-        <button class="icon-btn note-btn" id="noteBtn" onclick="WWMChangelog.showAll()" title="ツール仕様 / 更新履歴" data-i18n-title="tipIconNote" aria-label="NOTE (仕様 + 履歴)" data-i18n="noteBtn">NOTE</button>
+        <button class="icon-btn share-btn" id="shareBtn" onclick="WWMSidebar.share.shareUrl()" title="Build を URL で共有" data-i18n-title="tipIconShare"><svg class="ic" aria-hidden="true"><use href="assets/icons/share.svg#share"/></svg><span class="sr-only" data-i18n="shareBtn">SHARE</span></button>
+        <button class="icon-btn note-btn" id="noteBtn" onclick="WWMChangelog.showAll()" title="ツール仕様 / 更新履歴" data-i18n-title="tipIconNote"><svg class="ic" aria-hidden="true"><use href="assets/icons/note.svg#note"/></svg><span class="sr-only" data-i18n="noteBtn">NOTE</span></button>
         <div class="wwm-lang-dd" id="wwmLangDd">
           <button class="icon-btn wwm-lang-dd-btn" id="wwmLangDdBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Language" title="Language">
             <img src="https://www.wherewindsmeetgame.com/pc/gw/20251031112130/img/icon_lang_cd9783b2.png" alt="" aria-hidden="true">
@@ -607,10 +607,10 @@
         </button>
         <!-- IMPORT/RESET = topbar から移設 (2026-06-12 — PRESETS と役割が近い 3 者を集約)。
              mobile は drawer IMPORT + mobile topbar RESET が別在 = 影響なし -->
-        <button class="icon-btn import-btn" id="importBtn" onclick="importData()" data-i18n="importBtn">IMPORT</button>
-        <button type="button" class="icon-btn reset-btn" id="wwmVirtResetBtn" title="新装備/心法 全リセット (現装備値に戻す)" data-i18n-title="virtResetTip" onclick="WWMHelp.resetAllVirtuals()" aria-label="装備/心法リセット" data-i18n="resetBtn">RESET</button>
+        <button class="icon-btn import-btn" id="importBtn" onclick="importData()" title="装備データ取込" data-i18n-title="importBtn"><svg class="ic" aria-hidden="true"><use href="assets/icons/import.svg#import"/></svg><span class="sr-only" data-i18n="importBtn">IMPORT</span></button>
+        <button type="button" class="icon-btn reset-btn" id="wwmVirtResetBtn" title="新装備/心法 全リセット (現装備値に戻す)" data-i18n-title="virtResetTip" onclick="WWMHelp.resetAllVirtuals()"><svg class="ic" aria-hidden="true"><use href="assets/icons/reset.svg#reset"/></svg><span class="sr-only" data-i18n="resetBtn">RESET</span></button>
         <div class="wwm-preset-wrap" id="wwmPresetWrap">
-          <button class="wwm-preset-chip" id="wwmPresetChip" aria-haspopup="true" aria-expanded="false" data-i18n="presetTitle">PRESETS</button>
+          <button class="wwm-preset-chip" id="wwmPresetChip" aria-haspopup="true" aria-expanded="false" title="プリセット" data-i18n-title="presetTitle"><svg class="ic" aria-hidden="true"><use href="assets/icons/preset.svg#preset"/></svg><span class="sr-only" data-i18n="presetTitle">PRESETS</span></button>
           <div class="wwm-preset-pop" id="wwmPresetPop">
             <div class="preset-slots">
               <div class="preset-slot" id="presetSlot0">

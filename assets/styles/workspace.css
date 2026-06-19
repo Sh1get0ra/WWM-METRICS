@@ -854,12 +854,7 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
    ⚠ tabs 帯 = 墨面だが .wwm-ws-paper scope 内 → icon-btn が参照する --gold-bright/--paper-2
    等が紙面用の暗色に rescope され沈む → 墨面用素値 (tokens.css :root) に戻す */
 .wwm-ws-tabs-r .icon-btn {
-  /* preset-chip と完全同寸 (兄貴指摘 2026-06-12 — base .icon-btn の height:30px/bold/0.12em が
-     微妙にデカく見えていた) */
-  height: auto;
-  padding: 5px 10px; font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  /* SVG icon 化 (2026-06-20) — text 用 padding/font 削除、 base .icon-btn 30x30 grid 継承で icon centering */
   border-radius: 1px;
   --gold: #c9a45a;
   --gold-bright: #f0d28a;
@@ -908,11 +903,13 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
 /* preset popover */
 .wwm-preset-wrap { position: relative; display: flex; gap: 6px; }
 .wwm-preset-chip {
-  font-family: var(--f-latin); font-weight: 600; font-size: 11px; letter-spacing: 0.06em;
-  white-space: nowrap;
+  /* SVG icon 化 (2026-06-20) — 30x30 grid + icon centering、 base .icon-btn と同寸 */
+  width: 30px; height: 30px;
+  display: grid; place-items: center;
   color: var(--sumi-text-2); background: none;
-  border: 1px solid var(--sumi-ink-2); border-radius: 1px; padding: 5px 10px;
-  transition: border-color .15s ease, color .15s ease;
+  border: 1px solid var(--sumi-ink-2); border-radius: 1px;
+  cursor: pointer;
+  transition: border-color .15s ease, color .15s ease, background .15s ease;
 }
 .wwm-preset-chip:hover { border-color: var(--gold-deep); color: var(--sumi-fg); }
 .wwm-preset-chip.on { color: #241806; background: var(--gold); border-color: var(--gold); font-weight: 700; }
