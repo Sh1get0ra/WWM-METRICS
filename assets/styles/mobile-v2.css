@@ -245,7 +245,6 @@ body.mobile-mode .wwm-ws-rail {
   background: var(--sumi-1);
   border-right: 1px solid var(--gold-deep);
   overflow: hidden;
-  padding: 8px 0;
   align-items: center;
   position: relative;
   z-index: 10;
@@ -278,7 +277,7 @@ body.mobile-mode .wwm-ws-rail .wwm-rail-tate .wwm-rail-toggle {
 /* ============ rail overlay open (data-rail-mobile="open" で fixed 290px) ============ */
 body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail {
   position: fixed;
-  top: 0; bottom: 0; left: 0;
+  top: 165px; bottom: 0; left: 0;
   width: 290px;
   z-index: 60;
   box-shadow: 4px 0 24px rgba(0,0,0,0.5);
@@ -287,6 +286,17 @@ body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail {
   padding: 0;
   background: var(--sumi-1);
   cursor: default;
+}
+/* mobile では「斬」 kanji-mark 非表示 (2026-06-19 兄貴指示) */
+body.mobile-mode .wwm-ws-rail .kanji-mark { display: none; }
+/* ステ panel に黒 overlay (2026-06-19 兄貴指示「BG 濃いから panel に黒重ねたい」) — rail-in stacking context (z:0) 内に置く =
+   qs-bg image (::before z:-1) より上 + content (kanji z:1 / rail-fade z:2) より下 = text 影響なし image のみ dim。 collapse + open 両適用 */
+body.mobile-mode .wwm-rail-in::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 0;
+  pointer-events: none;
 }
 /* overlay 時 装飾 BG 弱化 + flex column で内部 scroll 確立 */
 body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail::before { opacity: 0.12; }
@@ -367,7 +377,6 @@ body.mobile-mode .wwm-bottom-nav {
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/qs-bg-32d6898d.png") center / cover no-repeat,
     var(--sumi-1);
   backdrop-filter: blur(2px);
-  border-top: 1px solid var(--gold-deep);
   border-bottom: none;
 }
 body.mobile-mode .wwm-bn {

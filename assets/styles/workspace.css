@@ -655,7 +655,7 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   content: "";
   position: absolute;
   z-index: -1;
-  top: 60px; left: 0;    /* 水色ライン (head 下端) から開始 = 打ち切り */
+  top: 0; left: 0;
   width: 100vh;          /* 回転後 = 縦方向の長さ (viewport 高ぶん) */
   height: var(--rail-w); /* 回転後 = rail 幅 */
   transform-origin: 0 0;
