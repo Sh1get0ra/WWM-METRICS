@@ -1286,6 +1286,8 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
    chip-bar(全幅) + rail collapse 46px(左) + body(右) + bnav(全幅) の 5 row 構造。
    旧 document scroll layout (block + position fixed bnav) を廃止、 mock/mobile-v2.html 準拠 ============ */
 .wwm-bottom-nav { display: none; }
+/* rail-backdrop default = mobile @media 外で hide (PC で表示すると全面暗化、 2026-06-19 兄貴指摘) */
+.wwm-rail-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 55; }
 
 @media (max-width: 600px) {
   /* L字 grid mobile: 5 行 (topbar / hero / chip / rail+body / bnav)、 2 列 (rail-w-min / 1fr).
@@ -1469,13 +1471,8 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
     padding: 8px;
   }
   .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-tate { display: none; }
-  /* backdrop = overlay 開 時 viewport 全面 暗化、 click で close (JS で append される) */
-  .wwm-rail-backdrop {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.55);
-    z-index: 55;
-    display: none;
-  }
+  /* backdrop = overlay 開 時 viewport 全面 暗化、 click で close (JS で append される)
+     default rule は mobile @media 外 (下記) で display:none を保証、 ここでは overlay open 時のみ表示 */
   .wwm-app[data-rail-mobile="open"] ~ .wwm-rail-backdrop,
   .wwm-app[data-rail-mobile="open"] .wwm-rail-backdrop { display: block; }
   /* rail 内 stat (rest) = collapse 時 非表示、 縦書きラベルのみ。 overlay open 時のみ表示 */
