@@ -82,10 +82,14 @@
 
   // ── mobile rail overlay (rail collapse 46px の click で 290px 展開、 兄貴指示 2026-06-19) ──
   var rail = document.querySelector('.wwm-ws-rail');
-  // backdrop div を body に append (CSS で表示制御)
+  // backdrop div を .wwm-app 内 append (2026-06-19 修正): .wwm-app は isolation:isolate + position:relative
+  // で stacking context root。 body 直下 append だと backdrop z:55 vs .wwm-app(z:auto) で backdrop が
+  // app 全体を覆い、 rail z:60 を含む全 app 内容が backdrop の下になる ([[mobile-rail-overlay-stacking]])。
+  // app 内 append + descendant selector で rail z:60 > backdrop z:55 が正しく painting される
   var railBackdrop = document.createElement('div');
   railBackdrop.className = 'wwm-rail-backdrop';
-  document.body.appendChild(railBackdrop);
+  if (app) app.appendChild(railBackdrop);
+  else document.body.appendChild(railBackdrop);
   railBackdrop.addEventListener('click', function () { closeMobileRail(); });
   function isMobile() { return window.matchMedia('(max-width: 600px)').matches; }
   function openMobileRail() {
