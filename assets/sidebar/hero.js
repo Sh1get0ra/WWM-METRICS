@@ -205,11 +205,22 @@
     if (!trigger || !pop) return;
 
     function isOpen() { return pop.classList.contains('is-open'); }
+    function isMobile() { return window.matchMedia('(max-width: 600px)').matches; }
     function positionPop() {
-      // luopan rect 基準で popup 位置算出 (position:fixed = viewport 座標)
+      if (isMobile()) {
+        // mobile: 画面中央寄せ (luopan 非表示のため rect 基準不可、 2026-06-19 兄貴指示)
+        pop.style.top = '50%';
+        pop.style.left = '50%';
+        pop.style.right = 'auto';
+        pop.style.transform = 'translate(-50%, -50%)';
+        return;
+      }
+      // PC: luopan rect 基準で popup 位置算出 (position:fixed = viewport 座標)
       const r = trigger.getBoundingClientRect();
       pop.style.top = (r.bottom + 12) + 'px';
       pop.style.right = (window.innerWidth - r.right) + 'px';
+      pop.style.left = 'auto';
+      pop.style.transform = '';
     }
     function open() {
       positionPop();
@@ -233,6 +244,16 @@
     document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && isOpen()) close(); });
     // resize 中に popup 位置追随 (open 時のみ)
     window.addEventListener('resize', () => { if (isOpen()) positionPop(); });
+
+    // mobile: hero 全体 tap で popup 開閉 (donut hidden のため、 2026-06-19 兄貴指示)
+    const heroRoot = document.getElementById('heroRoot');
+    heroRoot?.addEventListener('click', (ev) => {
+      if (!isMobile()) return;
+      if (ev.target.closest('button, input, select, textarea, a, label')) return;
+      if (ev.target.closest('#heroBreakdownPop')) return;
+      ev.stopPropagation();
+      isOpen() ? close() : open();
+    });
   }
 
   if (document.readyState === 'loading') {
