@@ -57,7 +57,7 @@
 <link rel="stylesheet" href="assets/styles/animations.css?v=5">
 <link rel="stylesheet" href="assets/styles/base.css?v=27">
 <link rel="stylesheet" href="assets/styles/share.css?v=28">
-<link rel="stylesheet" href="assets/styles/hero.css?v=34">
+<link rel="stylesheet" href="assets/styles/hero.css?v=39">
 <link rel="stylesheet" href="assets/styles/sidebar.css?v=20">
 <link rel="stylesheet" href="assets/styles/layout.css?v=16">
 <link rel="stylesheet" href="assets/styles/gear.css?v=17">
@@ -590,6 +590,15 @@
   <!-- 紙面 (main) -->
   <main class="wwm-ws-main wwm-ws-paper" role="main">
     <span class="kanji-mark kanji-hero" data-kaisho="heroKanji" data-kaisho-fixed aria-hidden="true">侠</span>
+    <!-- 蛍 装飾 (2026-06-21 兄貴指示「侠と同じ場所」) — hero+tabs に跨る範囲、 active tab opaque で隠れる -->
+    <div class="wwm-fireflies" aria-hidden="true">
+      <span class="wwm-firefly"></span>
+      <span class="wwm-firefly"></span>
+      <span class="wwm-firefly"></span>
+      <span class="wwm-firefly"></span>
+      <span class="wwm-firefly"></span>
+      <span class="wwm-firefly"></span>
+    </div>
     <nav class="wwm-ws-tabs" role="tablist" aria-label="workspace" id="wwmWsTabs">
       <!-- ローマ数字連番 = 廃止 (兄貴指示 2026-06-12)。data-kaisho = ja 時 楷書 SVG 化 (WWMKaisho) -->
       <button class="wwm-ws-tab" role="tab" aria-selected="true" data-ws="build"><span data-i18n="wsTabBuild" data-kaisho="wsTabBuild">武備</span></button>

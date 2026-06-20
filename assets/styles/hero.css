@@ -559,4 +559,58 @@
   }
 }
 
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     蛍 (Firefly) — hero 背景 装飾 (2026-06-21 兄貴指示「風燕伝の金蛍を表現」)
+     A 案: ゆっくり漂う + 光弱め (静かで上品、 集中阻害最小)
+     CSS only / pointer-events:none / prefers-reduced-motion 対応
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+.wwm-fireflies {
+  pointer-events: none;
+  overflow: hidden;
+}
+/* wwm-ws-main 直下 absolute = 侠 kanji-mark と同方針。 top:-200px で hero 領域に侵食、
+   height 240px で hero 下端 + tabs 帯まで覆う。 z:5 = paper-bg (0) < fireflies (5) < tabs (20) =
+   active tab opaque で蛍隠す、 紙地より前 で視認、 装備 panel に侵食しない */
+.wwm-ws-main > .wwm-fireflies {
+  position: absolute;
+  top: -195px; left: 0; right: 0; height: 260px;
+  z-index: 5;
+}
+.wwm-firefly {
+  position: absolute;
+  display: block;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: #ffe8a0;
+  box-shadow:
+    0 0 4px 1px rgba(255, 215, 130, 0.85),
+    0 0 10px 3px rgba(212, 175, 87, 0.6),
+    0 0 20px 6px rgba(184, 149, 100, 0.3);
+  opacity: 0.5;
+  animation: wwmFireflyDrift 8s ease-in-out infinite, wwmFireflyGlow 3.5s ease-in-out infinite;
+}
+.wwm-firefly:nth-child(1) { top: 30%; left: 8%;  animation-delay: 0s,    0.5s; animation-duration: 9s, 4s; }
+.wwm-firefly:nth-child(2) { top: 70%; left: 20%; animation-delay: -2s,  -1s;   animation-duration: 11s, 3s; }
+.wwm-firefly:nth-child(3) { top: 20%; left: 45%; animation-delay: -4s,   0s;   animation-duration: 8s, 4.5s; }
+.wwm-firefly:nth-child(4) { top: 75%; left: 55%; animation-delay: -1s,  -2s;   animation-duration: 10s, 3.5s; }
+.wwm-firefly:nth-child(5) { top: 40%; left: 75%; animation-delay: -3s,  -0.5s; animation-duration: 9s, 4s; }
+.wwm-firefly:nth-child(6) { top: 65%; left: 88%; animation-delay: -5s,  -1.5s; animation-duration: 11s, 3s; }
+
+@keyframes wwmFireflyDrift {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(20px, -12px); }
+  50%  { transform: translate(35px, 8px); }
+  75%  { transform: translate(15px, 18px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes wwmFireflyGlow {
+  0%, 100% { opacity: 0.35; }
+  20%      { opacity: 1; }
+  50%      { opacity: 0.65; }
+  80%      { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wwm-firefly { animation: none; opacity: 0.25; }
+}
+
 } /* end @layer components */
