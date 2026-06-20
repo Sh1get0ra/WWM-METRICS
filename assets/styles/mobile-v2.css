@@ -549,6 +549,20 @@ body.mobile-mode .wwm-mb-page .wwm-mb-grid {
 body.mobile-mode .wwm-mb-page .wwm-mb-grid-1col {
   grid-template-columns: 1fr;
 }
+/* 奇術 page = cluster 1 個を中央配置 + 拡大 (兄貴指示 2026-06-20) */
+body.mobile-mode .wwm-mb-page[data-page^="qishu"] .wwm-mb-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  grid-template-columns: none;
+}
+body.mobile-mode .wwm-mb-page[data-page^="qishu"] .wwm-qishu-cluster {
+  width: 240px; height: 240px;
+}
+body.mobile-mode .wwm-mb-page[data-page^="qishu"] .wwm-qishu-slot {
+  width: 85px; height: 85px;
+}
 /* slot の grid-column/grid-row 強制 reset = xinfa.css L242-260 の global slot ID 別 grid 位置指定
    (5列 grid 想定) が mobile pager grid に漏れて track 拡張するのを防ぐ。
    specificity = (0,0,3,0) > 既存 (0,0,2,0) で勝つ、 !important 不要。 */
