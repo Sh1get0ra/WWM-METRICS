@@ -15,7 +15,8 @@ body.mobile-mode { overflow: hidden; height: 100%; }
 /* ============ L字 grid base ============ */
 body.mobile-mode .wwm-app {
   display: grid;
-  grid-template-columns: var(--rail-w-min, 46px) 1fr;
+  /* rail = 右配置 (2026-06-21 兄貴指示「ステの rail 右側に移動」) */
+  grid-template-columns: 1fr var(--rail-w-min, 46px);
   grid-template-rows: auto auto 36px minmax(0, 1fr) 57px;
   height: 100svh;
   overflow: hidden;
@@ -233,15 +234,15 @@ body.mobile-mode .wwm-mobile-preset-row .pbtn:disabled {
   opacity: 0.45; cursor: not-allowed;
 }
 
-/* ============ rail collapse (46px 縦柱、 tap で overlay 化) = grid-row 4 col 1 ============ */
+/* ============ rail collapse (46px 縦柱、 tap で overlay 化) = grid-row 4 col 2 (右配置) ============ */
 body.mobile-mode .wwm-ws-rail {
-  grid-column: 1 / 2;
+  grid-column: 2 / 3;
   grid-row: 4 / 5;
   display: flex;
   flex-direction: column;
   width: var(--rail-w-min, 46px);
   background: var(--sumi-1);
-  border-right: 1px solid var(--gold-deep);
+  border-left: 1px solid var(--gold-deep);
   overflow: hidden;
   align-items: center;
   position: relative;
@@ -265,20 +266,25 @@ body.mobile-mode .wwm-ws-rail .wwm-rail-tate > * { display: block; margin: 6px a
 /* PC 準拠 = rail collapse 時 縦書きラベル無し、 toggle button のみ */
 body.mobile-mode .wwm-ws-rail .wwm-rail-tate .t-label { display: none; }
 body.mobile-mode .wwm-ws-rail .wwm-rail-tate .wwm-rail-toggle {
-  transform: none;
+  /* rail 右配置のため ◀ → ▶ 反転 (2026-06-21 兄貴指示) */
+  transform: scaleX(-1);
   width: 30px; height: 30px;
   border: 1px solid var(--gold-deep);
   background: transparent;
   color: var(--gold-bright);
 }
+/* rail open 状態の close ボタンも同じく反転 (▶ → ◀ で「右に畳む」 視認) */
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-rail-fade .wwm-rail-toggle {
+  transform: scaleX(-1);
+}
 
 /* ============ rail overlay open (data-rail-mobile="open" で fixed 290px) ============ */
 body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail {
   position: fixed;
-  top: 165px; bottom: 0; left: 0;
+  top: 165px; bottom: 0; right: 0; left: auto;
   width: 290px;
   z-index: 60;
-  box-shadow: 4px 0 24px rgba(0,0,0,0.5);
+  box-shadow: -4px 0 24px rgba(0,0,0,0.5);
   overflow: hidden;
   align-items: stretch;
   padding: 0;
@@ -341,9 +347,9 @@ body.mobile-mode .wwm-rail-toggle {
 }
 body.mobile-mode .wwm-rail-fade { background: none; }
 
-/* ============ main = grid-row 4 col 2 (右側 body 領域) ============ */
+/* ============ main = grid-row 4 col 1 (左側 body 領域、 rail 右配置のため 2026-06-21 兄貴指示) ============ */
 body.mobile-mode .wwm-ws-main {
-  grid-column: 2 / 3;
+  grid-column: 1 / 2;
   grid-row: 4 / 5;
   display: block;
   border-top: none;

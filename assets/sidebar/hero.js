@@ -208,11 +208,13 @@
     function isMobile() { return window.matchMedia('(max-width: 600px)').matches; }
     function positionPop() {
       if (isMobile()) {
-        // mobile: 画面中央寄せ (luopan 非表示のため rect 基準不可、 2026-06-19 兄貴指示)
-        pop.style.top = '50%';
+        // mobile: hero 直下中央寄せ (2026-06-21 兄貴指示、 旧 画面中央 → hero 直下)
+        const hr = (document.getElementById('heroRoot') || trigger).getBoundingClientRect();
+        pop.style.top = (hr.bottom + 8) + 'px';
         pop.style.left = '50%';
         pop.style.right = 'auto';
-        pop.style.transform = 'translate(-50%, -50%)';
+        pop.style.transform = 'translateX(-50%)';
+        pop.style.maxWidth = 'calc(100vw - 24px)';
         return;
       }
       // PC: luopan rect 基準で popup 位置算出 (position:fixed = viewport 座標)
