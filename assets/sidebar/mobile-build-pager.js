@@ -133,7 +133,35 @@
       }
     }
 
-    // 心法 / 奇術 = Task 4 で実装
+    // ── 心法 + 武庫 ──
+    // xinfa-grid 子 = 心法 slot 4 + wwm-arsenal-slot 1 (武庫)。 武庫は bow page へ移送、 残りを xinfa page へ。
+    const xinfaHost = originalHosts?.xinfa?.el;
+    if (xinfaHost) {
+      const allChildren = [...xinfaHost.children];
+      const xinfaPage = root.querySelector('[data-cat="xinfa"] [data-page="xinfa"]');
+      const bowPage = root.querySelector('[data-cat="gear"] [data-page="bow"]');
+      if (xinfaPage) xinfaPage.textContent = '';
+      for (const s of allChildren) {
+        if (s.classList.contains('wwm-arsenal-slot')) {
+          if (bowPage) bowPage.appendChild(s);
+        } else {
+          if (xinfaPage) xinfaPage.appendChild(s);
+        }
+      }
+    }
+
+    // ── 奇術 ──
+    // wwm-qishu-cluster 2 個 = それぞれ 4 slot を含む。 cluster 単位で 2 page に振り分け。
+    const qishuHost = originalHosts?.qishu?.el;
+    if (qishuHost) {
+      const clusters = [...qishuHost.querySelectorAll(':scope > .wwm-qishu-cluster')];
+      const p1 = root.querySelector('[data-cat="qishu"] [data-page="qishu-1"]');
+      const p2 = root.querySelector('[data-cat="qishu"] [data-page="qishu-2"]');
+      if (p1) p1.textContent = '';
+      if (p2) p2.textContent = '';
+      if (clusters[0] && p1) p1.appendChild(clusters[0]);
+      if (clusters[1] && p2) p2.appendChild(clusters[1]);
+    }
 
     syncIndicators();
   }
