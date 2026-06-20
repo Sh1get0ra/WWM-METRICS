@@ -561,7 +561,7 @@ body.mobile-mode .wwm-mb-grid > .wwm-xinfa-slot {
    overflow: hidden で内側 plank-icon (width:130%/170%) の外溢れ contain */
 body.mobile-mode .wwm-mb-grid > .wwm-equip-slot {
   position: relative;
-  aspect-ratio: 150 / 200;
+  aspect-ratio: 150 / 170;
   width: 100%;
   max-width: none;
   min-height: 0;
