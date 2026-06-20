@@ -92,7 +92,8 @@
       const slot = cluster.querySelector('.wwm-qishu-slot.q-' + pos[1]);
       if (!slot) return;
       slot.dataset.qishuSlot = String(i);
-      slot.style.cursor = window.WWMState?.roleInfo ? 'pointer' : '';
+      const _isMobile = document.body.classList.contains('mobile-mode');
+      slot.style.cursor = (!_isMobile && window.WWMState?.roleInfo) ? 'pointer' : '';
       const nm = id ? _qishuName(id) : '';
       slot.setAttribute('title', nm || (window.T?.qishuPickerEmpty || '(空き)'));
       if (!id) return;

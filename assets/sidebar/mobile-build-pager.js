@@ -100,7 +100,6 @@
     pageNameEl = root.querySelector('.wwm-mb-pname');
     reflow();
     attachScrollListeners();
-    attachQishuClick();
   }
 
   function disable() {
@@ -217,21 +216,8 @@
     });
   }
 
-  // qishu cluster は #wwmQishuGrid から pager 内へ move 済 → qishu.js L390 の click
-  // handler が `grid.contains(slot)` で false 返って openPicker 呼ばない。
-  // pager 側で同等の click handler を delegate 設定。
-  function attachQishuClick() {
-    const root = document.querySelector('.wwm-mb-pager-root');
-    if (!root || root.dataset.qishuClickBound === '1') return;
-    root.dataset.qishuClickBound = '1';
-    root.addEventListener('click', (e) => {
-      if (!window.WWMState?.roleInfo) return;
-      const slot = e.target.closest('.wwm-qishu-slot');
-      if (!slot) return;
-      if (window.WWMState?.blockIfShared?.(window.T?.sharedBuildShareBlocked)) return;
-      if (window.WWMSidebar?.qishu?.openPicker) window.WWMSidebar.qishu.openPicker();
-    });
-  }
+  // mobile = 奇術 read-only (戦律 未対応のため picker 無効、 装備中のみ閲覧、 2026-06-20)。
+  // qishu.js L95 cursor pointer も mobile で skip 済。
 
   function attachHscrollListener(sec, meta) {
     const hs = sec.querySelector('.wwm-mb-hscroll');
