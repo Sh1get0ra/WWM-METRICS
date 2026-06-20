@@ -11,14 +11,21 @@ const _PATH_KEY_MAP = {
   phys:       { min: 'minPhys',       max: 'maxPhys'       }
 };
 
-// 観音 Lv50 値 (in-game observation): 主武/副武 Min+85/Max+57、環/佩び物 Max+113
-// 線形近似 (本来非線形、Lv50 max値、補間)
-const _ENHANCE_MAX = {
-  '1':  { minPhys: 85, maxPhys: 57 },
-  '2':  { minPhys: 85, maxPhys: 57 },
-  '10': { maxPhys: 113 },
-  '11': { maxPhys: 113 }
-};
+// 観音強化 (鍛音) max 想定 加算ヘルパー。 currentMaxLv (data/guanyin_levels.json) 想定で
+// 全 slot 強化済として min/max phys に加算。 武器 (主+副) + 環 + 佩 の 4 slot のみ
+// (弓 = 観音なし / 防具 = 外功防御のみ で min/max 影響なし)。 = キャラ才能 max 振り想定と同思想。
+function _applyGuanyinMax(r) {
+  const gy = window.WWM_GUANYIN_LEVELS;
+  if (!gy || !gy.tables || gy.currentMaxLv == null) return;
+  const lv = String(gy.currentMaxLv);
+  const wpn = gy.tables.weapon?.[lv];
+  const rs = gy.tables.ringSash?.[lv];
+  if (wpn) {
+    if (wpn.minPhys) _acc(r, 'minPhys', wpn.minPhys * 2); // 主+副
+    if (wpn.maxPhys) _acc(r, 'maxPhys', wpn.maxPhys * 2);
+  }
+  if (rs && rs.maxPhys) _acc(r, 'maxPhys', rs.maxPhys * 2); // 環+佩
+}
 
 async function _ensureDicts() {
   // dictMap 唯一源 = data-store.js CALC_DICTS (P4-mini 供給一元化 2026-06-10)
@@ -181,6 +188,9 @@ function buildStatParamsSync(roleInfo, state) {
   for (const k of ['body','defense','agility','momentum','power']) {
     if (typeof roleInfo?.[k] === 'number') r[k] = roleInfo[k];
   }
+
+  // 0.5. 観音強化 max 想定 加算 (キャラ才能 max 振り想定と同思想、 currentMaxLv = data/guanyin_levels.json)
+  _applyGuanyinMax(r);
 
   // 1. 装備 baseAttrs (+ 装備個別Lv 逆引き)
   const eqDet = roleInfo?.wearEquipsDetailed || {};

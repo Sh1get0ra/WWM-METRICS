@@ -18,6 +18,7 @@
     WWM_SETS:             'sets',
     WWM_AFFIX:            'affix',
     WWM_EQUIP_BASE_BY_LV: 'equip_base_by_lv',
+    WWM_GUANYIN_LEVELS:   'guanyin_levels',
     WWM_XINFA_ICONS:      'xinfa_icons',
     WWM_KONGFU_ICONS:     'kongfu_icons',
     WWM_QISHU_ICONS:      'qishu_icons',
