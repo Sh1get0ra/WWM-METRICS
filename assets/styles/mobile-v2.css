@@ -626,4 +626,76 @@ body.mobile-mode .wwm-mb-grid > .wwm-arsenal-slot {
   grid-row: auto;
 }
 
+/* ── IMPORT preview step1 = 装備 affix 横スワイプ pager 化 (2026-06-20) ──
+   PC = wwm-equip-section 5×2 grid (gear.css L217-225)。 mobile では狭幅で
+   操作不能 → 横 scroll-snap pager 化、 1 装備 1 page swipe。 兄貴指示。 */
+body.mobile-mode #wwmPreviewModal .wwm-modal-body {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+body.mobile-mode #wwmPreviewModal .wwm-info-grid {
+  grid-template-columns: 1fr;
+  gap: 4px;
+}
+body.mobile-mode #wwmPreviewModal .wwm-info-col-end {
+  text-align: left;
+}
+body.mobile-mode #wwmPreviewModal .wwm-equip-section {
+  display: flex;
+  grid-template-columns: none;
+  grid-template-rows: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 8px;
+  scrollbar-width: none;
+  padding: 4px 0 8px;
+}
+body.mobile-mode #wwmPreviewModal .wwm-equip-section::-webkit-scrollbar {
+  display: none;
+}
+body.mobile-mode #wwmPreviewModal .wwm-equip-section .wwm-equip-slot {
+  flex: 0 0 92%;
+  scroll-snap-align: center;
+}
+
+/* ── IMPORT preview step2 = mobile レイアウト崩れ修正 (2026-06-20) ──
+   心法 4 列 grid (PC = repeat(4, 1fr)) は狭幅で名前縦書き重なり破綻
+   → 1 列縦積みに変更。 武庫 path radios = wrap 化。 兄貴指示。 */
+body.mobile-mode #wwmPreviewModal .wwm-xinfa-grid {
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+body.mobile-mode #wwmPreviewModal .wwm-xinfa-cell {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+body.mobile-mode #wwmPreviewModal .wwm-xinfa-label {
+  flex: 1;
+  writing-mode: horizontal-tb;
+  text-orientation: mixed;
+}
+body.mobile-mode #wwmPreviewModal .wwm-xinfa-tier {
+  flex: 0 0 auto;
+}
+body.mobile-mode #wwmPreviewModal .wwm-xinfa-effect {
+  flex-basis: 100%;
+  font-size: 11px;
+}
+body.mobile-mode #wwmPreviewModal .wwm-arsenal-paths {
+  flex-wrap: wrap;
+  gap: 6px 10px;
+}
+body.mobile-mode #wwmPreviewModal .wwm-arsenal-tier {
+  flex-wrap: wrap;
+  gap: 4px 8px;
+}
+body.mobile-mode #wwmPreviewModal .wwm-arsenal-lv {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
 } /* end @layer components */
