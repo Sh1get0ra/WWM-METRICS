@@ -15,6 +15,14 @@
   let pageNameEl = null;
   let originalHosts = null; // teardown 用、 host 元位置記録
 
+  // gear.js _GEAR_SLOT_ORDER = ['1','2','3','4','21','10','11','5','8','9']
+  // gear.js _stamp() 分類: 武=1,2,10,11 / 装=3,4,5,8 / 弓=9,21
+  const GEAR_PAGE_MAP = {
+    '1': 'weapon', '2': 'weapon', '10': 'weapon', '11': 'weapon',
+    '3': 'armor', '4': 'armor', '5': 'armor', '8': 'armor',
+    '9': 'bow', '21': 'bow',
+  };
+
   const TEMPLATE = `
 <div class="wwm-mb-pager">
   <div class="wwm-mb-head">
@@ -106,7 +114,28 @@
 
   function reflow() {
     if (!enabled) return;
-    // Task 3-4 で実装
+    const root = document.querySelector('.wwm-mb-pager-root');
+    if (!root) return;
+
+    // ── 装備 ──
+    const gearHost = originalHosts?.gear?.el;
+    if (gearHost) {
+      const slots = [...gearHost.querySelectorAll(':scope > [data-slot]')];
+      const pages = {
+        weapon: root.querySelector('[data-cat="gear"] [data-page="weapon"]'),
+        armor:  root.querySelector('[data-cat="gear"] [data-page="armor"]'),
+        bow:    root.querySelector('[data-cat="gear"] [data-page="bow"]'),
+      };
+      for (const k in pages) { if (pages[k]) pages[k].textContent = ''; }
+      for (const s of slots) {
+        const page = GEAR_PAGE_MAP[s.dataset.slot];
+        if (page && pages[page]) pages[page].appendChild(s);
+      }
+    }
+
+    // 心法 / 奇術 = Task 4 で実装
+
+    syncIndicators();
   }
 
   function attachScrollListeners() {
