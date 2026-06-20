@@ -160,7 +160,7 @@
         <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
         <div class="wwm-modal-header">
           <h2>
-            <span class="wwm-tool-title-ja" data-kaisho="qishuPickerTitle">${_esc(titleJa)}</span>
+            <span class="wwm-tool-title-ja" data-i18n="qishuPickerTitle" data-kaisho="qishuPickerTitle">${_esc(titleJa)}</span>
             <span class="wwm-tool-title-en">${_esc(titleEn)}</span>
             <span class="wwm-tool-seal">${_esc(seal)}</span>
           </h2>

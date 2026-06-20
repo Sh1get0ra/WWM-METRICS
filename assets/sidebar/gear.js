@@ -1102,7 +1102,7 @@
             <span class="wwm-tool-bracket wwm-tool-bracket-tl"></span><span class="wwm-tool-bracket wwm-tool-bracket-tr"></span>
             <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
             <div class="wwm-modal-header">
-              <h2><span class="wwm-tool-title-ja" data-kaisho="ocrHelpTitle">${T_.ocrHelpTitle || '画面取込指南'}</span><span class="wwm-tool-title-en">OCR GUIDE</span><span class="wwm-tool-seal">撮</span></h2>
+              <h2><span class="wwm-tool-title-ja" data-i18n="ocrHelpTitle" data-kaisho="ocrHelpTitle">${T_.ocrHelpTitle || '画面取込指南'}</span><span class="wwm-tool-title-en">OCR GUIDE</span><span class="wwm-tool-seal">撮</span></h2>
               <button class="wwm-modal-close" aria-label="Close">×</button>
             </div>
             <div class="wwm-modal-body wwm-ws-paper">

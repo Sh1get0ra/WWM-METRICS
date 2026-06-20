@@ -487,4 +487,22 @@ html[lang="ko"] { --f-display-title: var(--f-display-ko); }
   --gold-paper: #6e5414;   /* 紙背景上で映える金 (低彩度茶寄り) */
 }
 
+/* vi 一括縮小 (2026-06-20 兄貴判断「viはでかすぎる、自動で」)
+   ベトナム語は同情報量に対し文字数 1.3〜1.5x = 同 px だと過大 → token 層で 0.85x 縮小。
+   個別 :lang(vi) override を各所に書くより 1 箇所 token 上書きが恒久的。
+   下限 (2xs/xs) は可読性のため keep、sm 以上を段階縮小 */
+:lang(vi) {
+  --text-sm:    10px;
+  --text-12:    10px;
+  --text-md:    11px;
+  --text-14:    12px;
+  --text-15:    13px;
+  --text-lg:    14px;
+  --text-18:    15px;
+  --text-20:    17px;
+  --text-xl:    19px;
+  --text-24:    20px;
+  --text-2xl:   24px;
+}
+
 } /* end @layer tokens */
