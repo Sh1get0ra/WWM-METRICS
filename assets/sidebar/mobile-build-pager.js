@@ -23,6 +23,18 @@
     '9': 'bow', '21': 'bow',
   };
 
+  // indicator label 表 (lang 切替対応は P2)
+  const CAT_LABELS = {
+    gear:  { name: '装備', pages: { weapon: '武器', armor: '防具', bow: '弓・武庫' } },
+    xinfa: { name: '心法', pages: { xinfa: '心法' } },
+    qishu: { name: '奇術', pages: { 'qishu-1': '奇術 I', 'qishu-2': '奇術 II' } },
+  };
+  const CAT_ORDER = ['gear', 'xinfa', 'qishu'];
+
+  let curCatIdx = -1;
+  let curHscroll = null;
+  let curPageKeys = [];
+
   const TEMPLATE = `
 <div class="wwm-mb-pager">
   <div class="wwm-mb-head">
@@ -110,6 +122,9 @@
     const root = document.querySelector('#wsBuild .wwm-mb-pager-root');
     if (root) root.remove();
     vscrollEl = hdotsEl = vcatEl = catNameEl = pageNameEl = null;
+    curCatIdx = -1;
+    curHscroll = null;
+    curPageKeys = [];
   }
 
   function reflow() {
@@ -167,11 +182,52 @@
   }
 
   function attachScrollListeners() {
-    // Task 6 で実装
+    if (!vscrollEl) return;
+    vscrollEl.addEventListener('scroll', () => {
+      requestAnimationFrame(syncIndicators);
+    });
+  }
+
+  function attachHscrollListener(sec, meta) {
+    const hs = sec.querySelector('.wwm-mb-hscroll');
+    if (!hs) return;
+    if (curHscroll && curHscroll !== hs) curHscroll.onscroll = null;
+    curHscroll = hs;
+    hs.onscroll = () => {
+      const i = Math.round(hs.scrollLeft / hs.clientWidth);
+      [...hdotsEl.children].forEach((e, idx) => e.classList.toggle('on', idx === i));
+      pageNameEl.textContent = meta.pages[curPageKeys[i]] || '';
+    };
   }
 
   function syncIndicators() {
-    // Task 6 で実装
+    if (!vscrollEl || !vcatEl || !catNameEl || !hdotsEl || !pageNameEl) return;
+    // 縦カテゴリ dot 構築 (初回 + reflow 後)
+    if (vcatEl.children.length !== CAT_ORDER.length) {
+      vcatEl.textContent = '';
+      for (let i = 0; i < CAT_ORDER.length; i++) vcatEl.appendChild(document.createElement('i'));
+    }
+    // 現カテゴリ idx
+    const catIdx = Math.max(0, Math.min(CAT_ORDER.length - 1,
+      Math.round(vscrollEl.scrollTop / Math.max(1, vscrollEl.clientHeight))));
+    if (catIdx !== curCatIdx) {
+      curCatIdx = catIdx;
+      const cat = CAT_ORDER[catIdx];
+      const meta = CAT_LABELS[cat];
+      catNameEl.textContent = meta.name;
+      curPageKeys = Object.keys(meta.pages);
+      hdotsEl.textContent = '';
+      for (let i = 0; i < curPageKeys.length; i++) {
+        const dot = document.createElement('i');
+        if (i === 0) dot.classList.add('on');
+        hdotsEl.appendChild(dot);
+      }
+      pageNameEl.textContent = meta.pages[curPageKeys[0]];
+      [...vcatEl.children].forEach((e, i) => e.classList.toggle('on', i === catIdx));
+      // 現カテゴリの hscroll listener 再アタッチ
+      const sec = vscrollEl.querySelector(`[data-cat="${cat}"]`);
+      if (sec) attachHscrollListener(sec, meta);
+    }
   }
 
   NS.mobileBuildPager = { enable, disable, reflow, syncIndicators };
