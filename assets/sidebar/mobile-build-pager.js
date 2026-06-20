@@ -160,7 +160,8 @@
         armor:  root.querySelector('[data-cat="gear"] [data-page="armor"] .wwm-mb-grid'),
         bow:    root.querySelector('[data-cat="gear"] [data-page="bow"] .wwm-mb-grid'),
       };
-      for (const s of [...gearHost.querySelectorAll(':scope > [data-slot]')]) {
+      for (const s of [...gearHost.children]) {
+        if (!s.dataset || !s.dataset.slot) continue;
         const page = GEAR_PAGE_MAP[s.dataset.slot];
         if (page && grids[page]) { s.dataset.mbOrigin = 'gear'; grids[page].appendChild(s); }
       }
@@ -184,7 +185,7 @@
     // ── 奇術 ──
     const qishuHost = originalHosts?.qishu?.el;
     if (qishuHost) {
-      const clusters = [...qishuHost.querySelectorAll(':scope > .wwm-qishu-cluster')];
+      const clusters = [...qishuHost.children].filter(c => c.classList && c.classList.contains('wwm-qishu-cluster'));
       const g1 = root.querySelector('[data-cat="qishu"] [data-page="qishu-1"] .wwm-mb-grid');
       const g2 = root.querySelector('[data-cat="qishu"] [data-page="qishu-2"] .wwm-mb-grid');
       if (clusters[0] && g1) { clusters[0].dataset.mbOrigin = 'qishu'; g1.appendChild(clusters[0]); }
