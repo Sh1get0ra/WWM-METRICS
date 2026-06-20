@@ -1958,9 +1958,10 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   position: absolute;
   top: 4px; left: 50%; transform: translateX(-50%);
   font-family: var(--f-display-title);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.1em;
+  white-space: nowrap;
   color: #ffffff;
   background: #b22a1a; /* vermilion 朱地 + 白文字 = contrast ≒ 6.6:1 WCAG AA pass (2026-06-16 兄貴指摘) */
   padding: 2px 6px;
