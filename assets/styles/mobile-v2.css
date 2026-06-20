@@ -387,6 +387,9 @@ body.mobile-mode .wwm-hist-pb { padding: 0; }
 /* ============ hero COMING SOON (演武 DPS placeholder) mobile = 縮小 (2026-06-21 兄貴指示「でかすぎ」) ============ */
 body.mobile-mode .hero-wuxia .seat-main .hb-num.hb-coming { font-size: 14px; padding-top: 4px; }
 
+/* ============ 蛍 mobile = 非表示 (2026-06-21 兄貴指示「変な位置に出現」) ============ */
+body.mobile-mode .wwm-ws-main > .wwm-fireflies { display: none; }
+
 /* ============ bnav = grid-row 5 (全幅 57px) ============ */
 body.mobile-mode .wwm-bottom-nav {
   grid-column: 1 / 3;
