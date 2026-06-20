@@ -16,6 +16,66 @@
   display: flex; align-items: center; justify-content: center;
   z-index: var(--z-toast);
   padding: var(--space-4);
+  /* 巻物展開 open アニメ (2026-06-21 兄貴指示「modal 開閉アニメ = 巻物」) — backdrop fade + modal 内 clip-path/scale */
+  animation: wwmModalBackdropIn 0.22s var(--ease-out-quart, ease-out) both;
+}
+.wwm-modal-backdrop.is-closing {
+  animation: wwmModalBackdropOut 0.4s var(--ease-out-quart, ease-out) both;
+  pointer-events: none;
+}
+@keyframes wwmModalBackdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes wwmModalBackdropOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+.wwm-modal-backdrop > .wwm-modal,
+.wwm-modal-backdrop > .wwm-cmp-modal-a,
+.wwm-modal-backdrop > .wwm-tool-modal {
+  animation: wwmModalScrollOpen 0.32s var(--ease-out-quart, ease-out) both;
+}
+.wwm-modal-backdrop.is-closing > .wwm-modal,
+.wwm-modal-backdrop.is-closing > .wwm-cmp-modal-a,
+.wwm-modal-backdrop.is-closing > .wwm-tool-modal {
+  animation: wwmModalScrollClose 0.4s var(--ease-out-quart, ease-out) both;
+}
+@keyframes wwmModalScrollOpen {
+  from {
+    clip-path: inset(50% 0 50% 0);
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes wwmModalScrollClose {
+  from {
+    clip-path: inset(0 0 0 0);
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    clip-path: inset(50% 0 50% 0);
+    transform: scale(0.94);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wwm-modal-backdrop,
+  .wwm-modal-backdrop > .wwm-modal,
+  .wwm-modal-backdrop > .wwm-cmp-modal-a,
+  .wwm-modal-backdrop > .wwm-tool-modal,
+  .wwm-modal-backdrop.is-closing,
+  .wwm-modal-backdrop.is-closing > .wwm-modal,
+  .wwm-modal-backdrop.is-closing > .wwm-cmp-modal-a,
+  .wwm-modal-backdrop.is-closing > .wwm-tool-modal {
+    animation: none;
+  }
 }
 .wwm-modal {
   position: relative;

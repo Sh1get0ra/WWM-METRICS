@@ -49,11 +49,29 @@
       }
     });
   }
+  // ── 巻物展開 close アニメ proxy (2026-06-21 兄貴指示): backdrop.remove() を wrap、
+  //    is-closing class 付与 → animationend で実 remove。 既存 close 呼出 (Esc/× button/outside click) 無改変
+  function _wrapBackdropCloseAnim(node) {
+    if (node._closeAnimWrapped) return;
+    node._closeAnimWrapped = true;
+    const origRemove = node.remove.bind(node);
+    node.remove = function () {
+      if (node.classList.contains('is-closing')) { origRemove(); return; }
+      node.classList.add('is-closing');
+      let done = false;
+      const finish = () => { if (done) return; done = true; origRemove(); };
+      node.addEventListener('animationend', finish, { once: true });
+      setTimeout(finish, 500); // fallback (animation 0.4s + buffer)
+    };
+  }
   const _modalObserver = new MutationObserver((mutations) => {
     for (const mut of mutations) {
       for (const node of mut.addedNodes) {
         if (node.nodeType !== 1) continue;
-        if (node.classList?.contains('wwm-modal-backdrop')) _setupModalA11y(node);
+        if (node.classList?.contains('wwm-modal-backdrop')) {
+          _setupModalA11y(node);
+          _wrapBackdropCloseAnim(node);
+        }
       }
       for (const node of mut.removedNodes) {
         if (node.nodeType !== 1) continue;
