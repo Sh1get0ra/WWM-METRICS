@@ -140,58 +140,67 @@
     curPageKeys = [];
   }
 
-  function reflow() {
+  function _reflowGear(root) {
+    // origin=gear のみ cleanup → 他カテゴリの slot に影響なし
+    root.querySelectorAll('[data-mb-origin="gear"]').forEach(el => el.remove());
+    const gearHost = originalHosts?.gear?.el;
+    if (!gearHost) return;
+    const grids = {
+      weapon: root.querySelector('[data-cat="gear"] [data-page="weapon"] .wwm-mb-grid'),
+      armor:  root.querySelector('[data-cat="gear"] [data-page="armor"] .wwm-mb-grid'),
+      bow:    root.querySelector('[data-cat="gear"] [data-page="bow"] .wwm-mb-grid'),
+    };
+    for (const s of [...gearHost.children]) {
+      if (!s.dataset || !s.dataset.slot) continue;
+      const page = GEAR_PAGE_MAP[s.dataset.slot];
+      if (page && grids[page]) { s.dataset.mbOrigin = 'gear'; grids[page].appendChild(s); }
+    }
+  }
+
+  function _reflowXinfa(root) {
+    root.querySelectorAll('[data-mb-origin="xinfa"]').forEach(el => el.remove());
+    const xinfaHost = originalHosts?.xinfa?.el;
+    if (!xinfaHost) return;
+    const xinfaGrid = root.querySelector('[data-cat="xinfa"] [data-page="xinfa"] .wwm-mb-grid');
+    const bowGrid = root.querySelector('[data-cat="gear"] [data-page="bow"] .wwm-mb-grid');
+    for (const s of [...xinfaHost.children]) {
+      s.dataset.mbOrigin = 'xinfa';
+      if (s.classList && s.classList.contains('wwm-arsenal-slot')) {
+        if (bowGrid) bowGrid.appendChild(s);
+      } else {
+        if (xinfaGrid) xinfaGrid.appendChild(s);
+      }
+    }
+  }
+
+  function _reflowQishu(root) {
+    root.querySelectorAll('[data-mb-origin="qishu"]').forEach(el => el.remove());
+    const qishuHost = originalHosts?.qishu?.el;
+    if (!qishuHost) return;
+    const clusters = [...qishuHost.children].filter(c => c.classList && c.classList.contains('wwm-qishu-cluster'));
+    const g1 = root.querySelector('[data-cat="qishu"] [data-page="qishu-1"] .wwm-mb-grid');
+    const g2 = root.querySelector('[data-cat="qishu"] [data-page="qishu-2"] .wwm-mb-grid');
+    if (clusters[0] && g1) { clusters[0].dataset.mbOrigin = 'qishu'; g1.appendChild(clusters[0]); }
+    if (clusters[1] && g2) { clusters[1].dataset.mbOrigin = 'qishu'; g2.appendChild(clusters[1]); }
+  }
+
+  // category 引数 ('gear'|'xinfa'|'qishu') = render hook で自カテゴリのみ仕分け。
+  // 引数なし = enable() 時の全カテゴリ初回仕分け。
+  //
+  // 全カテゴリ一括 reflow の致命罠: render hook で 1 つ仕分けると他 host が空になる
+  // → 次 render hook の全カテゴリ reflow で「空 host から空 move」 で他カテゴリ消失。
+  // 例: gear render → reflow → 全 host 空 → xinfa render → reflow → gear host 空 → 装備消失。
+  function reflow(category) {
     if (!enabled) return;
     const root = document.querySelector('.wwm-mb-pager-root');
     if (!root) return;
-
-    // ── pager 内 既存 origin slot を一掃 ──
-    // render 再走時 (renderGearGrid 等で host.innerHTML 上書き → 新 slot 生成) に
-    // pager 内に取り残された古い slot を防ぐ。 grid.textContent='' での空化方式は
-    // 2 回目 reflow 時 host が空 (1 回目で move 済) → grid 空のまま slot 補充ゼロ
-    // で全消滅する罠あり → 「古い清掃 + host から新規 move」 の独立 step に分解。
-    root.querySelectorAll('[data-mb-origin]').forEach(el => el.remove());
-
-    // ── 装備 ──
-    const gearHost = originalHosts?.gear?.el;
-    if (gearHost) {
-      const grids = {
-        weapon: root.querySelector('[data-cat="gear"] [data-page="weapon"] .wwm-mb-grid'),
-        armor:  root.querySelector('[data-cat="gear"] [data-page="armor"] .wwm-mb-grid'),
-        bow:    root.querySelector('[data-cat="gear"] [data-page="bow"] .wwm-mb-grid'),
-      };
-      for (const s of [...gearHost.children]) {
-        if (!s.dataset || !s.dataset.slot) continue;
-        const page = GEAR_PAGE_MAP[s.dataset.slot];
-        if (page && grids[page]) { s.dataset.mbOrigin = 'gear'; grids[page].appendChild(s); }
-      }
-    }
-
-    // ── 心法 + 武庫 ──
-    const xinfaHost = originalHosts?.xinfa?.el;
-    if (xinfaHost) {
-      const xinfaGrid = root.querySelector('[data-cat="xinfa"] [data-page="xinfa"] .wwm-mb-grid');
-      const bowGrid = root.querySelector('[data-cat="gear"] [data-page="bow"] .wwm-mb-grid');
-      for (const s of [...xinfaHost.children]) {
-        s.dataset.mbOrigin = 'xinfa';
-        if (s.classList.contains('wwm-arsenal-slot')) {
-          if (bowGrid) bowGrid.appendChild(s);
-        } else {
-          if (xinfaGrid) xinfaGrid.appendChild(s);
-        }
-      }
-    }
-
-    // ── 奇術 ──
-    const qishuHost = originalHosts?.qishu?.el;
-    if (qishuHost) {
-      const clusters = [...qishuHost.children].filter(c => c.classList && c.classList.contains('wwm-qishu-cluster'));
-      const g1 = root.querySelector('[data-cat="qishu"] [data-page="qishu-1"] .wwm-mb-grid');
-      const g2 = root.querySelector('[data-cat="qishu"] [data-page="qishu-2"] .wwm-mb-grid');
-      if (clusters[0] && g1) { clusters[0].dataset.mbOrigin = 'qishu'; g1.appendChild(clusters[0]); }
-      if (clusters[1] && g2) { clusters[1].dataset.mbOrigin = 'qishu'; g2.appendChild(clusters[1]); }
-    }
-
+    if (!category) {
+      _reflowGear(root);
+      _reflowXinfa(root);
+      _reflowQishu(root);
+    } else if (category === 'gear')  _reflowGear(root);
+    else if (category === 'xinfa') _reflowXinfa(root);
+    else if (category === 'qishu') _reflowQishu(root);
     syncIndicators();
   }
 

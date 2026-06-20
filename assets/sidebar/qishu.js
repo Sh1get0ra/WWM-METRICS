@@ -98,8 +98,8 @@
       img.alt = nm;
       wrap.appendChild(img);
     });
-    // mobile pager 化 reflow (2026-06-20)
-    if (window.WWMSidebar?.mobileBuildPager) window.WWMSidebar.mobileBuildPager.reflow();
+    // mobile pager 化 reflow = 自カテゴリのみ仕分け
+    if (window.WWMSidebar?.mobileBuildPager) window.WWMSidebar.mobileBuildPager.reflow('qishu');
   }
 
   // ── エディタ modal (全画面 1 枚) ───────────────────────
