@@ -100,6 +100,7 @@
     pageNameEl = root.querySelector('.wwm-mb-pname');
     reflow();
     attachScrollListeners();
+    attachQishuClick();
   }
 
   function disable() {
@@ -140,30 +141,34 @@
     curPageKeys = [];
   }
 
+  // 各 reflow = host に新 slot あれば置換、 host 空なら pager 内既存 keep
+  // (host 空時 cleanup すると pager から slot 消失する chain bug 第 2 弾、 兄貴症状)
   function _reflowGear(root) {
-    // origin=gear のみ cleanup → 他カテゴリの slot に影響なし
-    root.querySelectorAll('[data-mb-origin="gear"]').forEach(el => el.remove());
     const gearHost = originalHosts?.gear?.el;
     if (!gearHost) return;
+    const newSlots = [...gearHost.children].filter(s => s.dataset && s.dataset.slot);
+    if (newSlots.length === 0) return; // host 空 → pager 維持
+    root.querySelectorAll('[data-mb-origin="gear"]').forEach(el => el.remove());
     const grids = {
       weapon: root.querySelector('[data-cat="gear"] [data-page="weapon"] .wwm-mb-grid'),
       armor:  root.querySelector('[data-cat="gear"] [data-page="armor"] .wwm-mb-grid'),
       bow:    root.querySelector('[data-cat="gear"] [data-page="bow"] .wwm-mb-grid'),
     };
-    for (const s of [...gearHost.children]) {
-      if (!s.dataset || !s.dataset.slot) continue;
+    for (const s of newSlots) {
       const page = GEAR_PAGE_MAP[s.dataset.slot];
       if (page && grids[page]) { s.dataset.mbOrigin = 'gear'; grids[page].appendChild(s); }
     }
   }
 
   function _reflowXinfa(root) {
-    root.querySelectorAll('[data-mb-origin="xinfa"]').forEach(el => el.remove());
     const xinfaHost = originalHosts?.xinfa?.el;
     if (!xinfaHost) return;
+    const newChildren = [...xinfaHost.children];
+    if (newChildren.length === 0) return;
+    root.querySelectorAll('[data-mb-origin="xinfa"]').forEach(el => el.remove());
     const xinfaGrid = root.querySelector('[data-cat="xinfa"] [data-page="xinfa"] .wwm-mb-grid');
     const bowGrid = root.querySelector('[data-cat="gear"] [data-page="bow"] .wwm-mb-grid');
-    for (const s of [...xinfaHost.children]) {
+    for (const s of newChildren) {
       s.dataset.mbOrigin = 'xinfa';
       if (s.classList && s.classList.contains('wwm-arsenal-slot')) {
         if (bowGrid) bowGrid.appendChild(s);
@@ -174,10 +179,11 @@
   }
 
   function _reflowQishu(root) {
-    root.querySelectorAll('[data-mb-origin="qishu"]').forEach(el => el.remove());
     const qishuHost = originalHosts?.qishu?.el;
     if (!qishuHost) return;
     const clusters = [...qishuHost.children].filter(c => c.classList && c.classList.contains('wwm-qishu-cluster'));
+    if (clusters.length === 0) return;
+    root.querySelectorAll('[data-mb-origin="qishu"]').forEach(el => el.remove());
     const g1 = root.querySelector('[data-cat="qishu"] [data-page="qishu-1"] .wwm-mb-grid');
     const g2 = root.querySelector('[data-cat="qishu"] [data-page="qishu-2"] .wwm-mb-grid');
     if (clusters[0] && g1) { clusters[0].dataset.mbOrigin = 'qishu'; g1.appendChild(clusters[0]); }
@@ -208,6 +214,22 @@
     if (!vscrollEl) return;
     vscrollEl.addEventListener('scroll', () => {
       requestAnimationFrame(syncIndicators);
+    });
+  }
+
+  // qishu cluster は #wwmQishuGrid から pager 内へ move 済 → qishu.js L390 の click
+  // handler が `grid.contains(slot)` で false 返って openPicker 呼ばない。
+  // pager 側で同等の click handler を delegate 設定。
+  function attachQishuClick() {
+    const root = document.querySelector('.wwm-mb-pager-root');
+    if (!root || root.dataset.qishuClickBound === '1') return;
+    root.dataset.qishuClickBound = '1';
+    root.addEventListener('click', (e) => {
+      if (!window.WWMState?.roleInfo) return;
+      const slot = e.target.closest('.wwm-qishu-slot');
+      if (!slot) return;
+      if (window.WWMState?.blockIfShared?.(window.T?.sharedBuildShareBlocked)) return;
+      if (window.WWMSidebar?.qishu?.openPicker) window.WWMSidebar.qishu.openPicker();
     });
   }
 

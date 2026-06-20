@@ -74,9 +74,16 @@
     if (!grid) return;
     const ids = _effectiveIds();
     const master = window.WWM_QISHU_ICONS || {};
-    const clusters = grid.querySelectorAll('.wwm-qishu-cluster');
+    // mobile pager で cluster が #wwmQishuGrid から pager 内へ move 済の場合、
+    // grid.querySelectorAll では取れない → pager 内 fallback (2026-06-20)。
+    let clusters = grid.querySelectorAll('.wwm-qishu-cluster');
+    if (clusters.length < 2) {
+      clusters = document.querySelectorAll('.wwm-mb-pager-root .wwm-qishu-cluster');
+    }
     if (clusters.length < 2) return;
-    grid.querySelectorAll('.wwm-qishu-slot .plank-icon-wrap').forEach(w => { w.textContent = ''; });
+    clusters.forEach(cl => {
+      cl.querySelectorAll('.wwm-qishu-slot .plank-icon-wrap').forEach(w => { w.textContent = ''; });
+    });
     ids.forEach((id, i) => {
       const pos = _QISHU_POS[i];
       if (!pos) return;
