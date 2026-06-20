@@ -454,21 +454,30 @@ body.mobile-mode #wsBuild > *:not(.wwm-mb-pager-root) { display: none; }
 /* ── head (カテゴリ名 + ページ名 + 横 dot) ── */
 body.mobile-mode .wwm-mb-head {
   display: flex; align-items: center; gap: 10px;
-  padding: 9px 12px 7px;
-  border-bottom: 1px solid #cdbf9e;
-  background: var(--kami-1);
+  padding: 0 5px 5px;
   flex-shrink: 0;
 }
+/* PC .wwm-ws-sec .pl 構造を踏襲 = 朱筆 fude.png brush mask + sumi-fg (白っぽい紙色) 文字
+   = 「装備」「心法」「奇術」 を墨ブラシ背景に白抜き表示 */
 body.mobile-mode .wwm-mb-cat {
-  font-size: 15px; font-weight: 800; color: var(--kami-fg);
-  letter-spacing: 0.05em;
-  position: relative; padding-left: 10px;
+  display: inline-flex; align-items: baseline; gap: 10px;
+  font-family: var(--f-display-title); font-size: 16px; font-weight: 700; letter-spacing: 0.14em;
+  background: none; color: var(--sumi-fg);
+  position: relative;
+  isolation: isolate;
+  padding: 3px 12px 3px 8px;
 }
 body.mobile-mode .wwm-mb-cat::before {
-  content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-  width: 3px; height: 15px; background: var(--vermilion);
+  content: "";
+  position: absolute;
+  top: -2px; bottom: -3px; left: -7px; right: -60px;
+  background: var(--sumi-2);
+  -webkit-mask: url("../fude.png") 0 0 / 100% 100% no-repeat;
+  mask: url("../fude.png") 0 0 / 100% 100% no-repeat;
+  z-index: -1;
+  pointer-events: none;
 }
-body.mobile-mode .wwm-mb-pname { font-size: 10px; color: var(--kami-fg-dim); letter-spacing: 0.12em; }
+body.mobile-mode .wwm-mb-pname { display: none; }
 body.mobile-mode .wwm-mb-sp { flex: 1; }
 body.mobile-mode .wwm-mb-hdots { display: flex; gap: 5px; }
 body.mobile-mode .wwm-mb-hdots i {
@@ -561,7 +570,7 @@ body.mobile-mode .wwm-mb-grid > .wwm-xinfa-slot {
    overflow: hidden で内側 plank-icon (width:130%/170%) の外溢れ contain */
 body.mobile-mode .wwm-mb-grid > .wwm-equip-slot {
   position: relative;
-  aspect-ratio: 150 / 170;
+  aspect-ratio: 150 / 180;
   width: 100%;
   max-width: none;
   min-height: 0;
@@ -577,15 +586,6 @@ body.mobile-mode .wwm-mb-grid > .wwm-equip-slot {
   background-repeat: repeat, no-repeat;
   border: 1px solid var(--ink-2);
   border-radius: 2px;
-}
-/* plank-paint の inset 直接拡大 = absolute 子 inset は padding 無視するため。
-   PC = workspace.css L1438 (top:8 left:9 right:9 bottom:8) は default、
-   mobile では rail 32 / score 28 の領域を露出させて墨枠 frame を見せる */
-body.mobile-mode .wwm-mb-grid > .wwm-equip-slot .plank-paint {
-  top: 5px; left: 33px; right: 10px; bottom: 30px;
-}
-body.mobile-mode .wwm-mb-grid > .wwm-equip-slot .plank-icon-wrap {
-  top: 5px; left: 33px; right: 10px; bottom: 30px;
 }
 /* 心法 / 武庫 slot も同様 position:relative 確保 (rail/icon absolute の基準) */
 body.mobile-mode .wwm-mb-grid > .wwm-xinfa-slot {
