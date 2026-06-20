@@ -552,6 +552,15 @@ body.mobile-mode .wwm-mb-grid > .wwm-xinfa-slot {
   aspect-ratio: auto;
   width: auto;
 }
+/* 装備 slot (wwm-equip-slot) は move 後 .wwm-gear-grid scope 外で sizing rule 不適用
+   → grid item default stretch で巨大化 → 明示 sizing で 2x2 grid cell fit */
+body.mobile-mode .wwm-mb-grid > .wwm-equip-slot {
+  aspect-ratio: 150 / 200;
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  height: auto;
+}
 /* 武庫 slot (bow page 同居、 grid-column 全幅) — workspace.css L1364 紙面 scope の
    max-width clamp(70px,...) + aspect-ratio 150/200 を mobile pager 内で打消 */
 body.mobile-mode .wwm-mb-page[data-page="bow"] .wwm-arsenal-slot {
