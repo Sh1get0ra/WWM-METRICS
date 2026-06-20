@@ -525,7 +525,9 @@ body.mobile-mode .wwm-mb-page {
   scroll-snap-align: start;
   scroll-snap-stop: always;
   padding: 14px 12px;
-  overflow-y: auto;
+  /* overflow-y:auto は page 内縦 scroll 確保するが vscroll の縦カテゴリ snap を
+     scroll-chaining で食う → hidden で page 内 scroll 廃止、 縦スワイプ vscroll 通過 */
+  overflow-y: hidden;
   scrollbar-width: none;
 }
 body.mobile-mode .wwm-mb-page::-webkit-scrollbar { display: none; }
