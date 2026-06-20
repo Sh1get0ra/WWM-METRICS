@@ -291,7 +291,10 @@
       return _flag(xOf(e.ts).toFixed(1), _esc(parts.join(' ')));
     }).join('');
 
-    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="height:350px;">
+    // mobile = wsHist 領域 scroll 回避で chart 高さ縮小 (2026-06-21 兄貴指示)
+    const isMobile = (typeof window !== 'undefined') && window.matchMedia && window.matchMedia('(max-width: 600px)').matches;
+    const svgH = isMobile ? 220 : 350;
+    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="height:${svgH}px;">
     ${yGrid.join('')}
     ${xGrid}
     ${yTicks.join('')}

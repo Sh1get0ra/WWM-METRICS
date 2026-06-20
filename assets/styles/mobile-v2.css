@@ -206,6 +206,8 @@ body.mobile-mode .wwm-mobile-preset-row .num {
   font-family: var(--f-latin);
 }
 body.mobile-mode .wwm-mobile-preset-row input.preset-name-input {
+  /* share.css L236 @media (max-width:600px) `.preset-name-input { display:none }` 打消 (2026-06-21 兄貴指示「mobile も preset 名付け」) */
+  display: block;
   flex: 1; min-width: 0;
   background: var(--sumi-0);
   border: 1px solid var(--sumi-ink-2);
@@ -266,23 +268,26 @@ body.mobile-mode .wwm-ws-rail .wwm-rail-tate > * { display: block; margin: 6px a
 /* PC 準拠 = rail collapse 時 縦書きラベル無し、 toggle button のみ */
 body.mobile-mode .wwm-ws-rail .wwm-rail-tate .t-label { display: none; }
 body.mobile-mode .wwm-ws-rail .wwm-rail-tate .wwm-rail-toggle {
-  /* rail 右配置のため ◀ → ▶ 反転 (2026-06-21 兄貴指示) */
-  transform: scaleX(-1);
+  /* closed = ◀ そのまま (rail 右配置 → 左向き矢印で「左にスワイプ open」 印象、 2026-06-21 兄貴指示)
+     workspace.css L747 の base scaleX(-1) 打消 */
+  transform: none;
   width: 30px; height: 30px;
   border: 1px solid var(--gold-deep);
   background: transparent;
   color: var(--gold-bright);
 }
-/* rail open 状態の close ボタンも同じく反転 (▶ → ◀ で「右に畳む」 視認) */
+/* rail open 時 close ボタン = ステータス見出しの左に配置 + ▶ 反転 (「右に畳む」 視認、 2026-06-21 兄貴指示) */
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-rail-head { display: flex; align-items: center; gap: 8px; }
 body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-rail-fade .wwm-rail-toggle {
+  order: -1;
   transform: scaleX(-1);
 }
 
 /* ============ rail overlay open (data-rail-mobile="open" で fixed 290px) ============ */
-body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail {
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail,
+body.mobile-mode .wwm-app[data-rail-mobile="closing"] .wwm-ws-rail {
   position: fixed;
   top: 165px; bottom: 0; right: 0; left: auto;
-  width: 290px;
   z-index: 60;
   box-shadow: -4px 0 24px rgba(0,0,0,0.5);
   overflow: hidden;
@@ -291,6 +296,9 @@ body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail {
   background: var(--sumi-1);
   cursor: default;
 }
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail { width: 290px; }
+/* closing = fixed 維持で width 290→46 transit (close 対称アニメ、 2026-06-21 兄貴指示) */
+body.mobile-mode .wwm-app[data-rail-mobile="closing"] .wwm-ws-rail { width: var(--rail-w-min, 46px); }
 /* mobile では「斬」 kanji-mark 非表示 (2026-06-19 兄貴指示) */
 body.mobile-mode .wwm-ws-rail .kanji-mark { display: none; }
 /* mobile では ws-panel padding-left 0 (2026-06-19 兄貴指示「mobile 細部調整」、 元 60e71aa で PC base から削除してた分を mobile 限定 override に分離) */
@@ -302,7 +310,7 @@ body.mobile-mode .wwm-rail-in::before { top: 0; }
 body.mobile-mode .wwm-rail-in::after {
   content: "";
   position: absolute; inset: 0;
-  background: rgba(0,0,0,0.5);
+  /* background 削除 (2026-06-21 兄貴指示) — 旧 rgba(0,0,0,0.5) 黒 overlay 不要判断 */
   z-index: 0;
   pointer-events: none;
 }
@@ -311,11 +319,13 @@ body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail::before { opacit
 body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .kanji-mark {
   opacity: 0.08; font-size: 200px;
 }
-body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-in {
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-in,
+body.mobile-mode .wwm-app[data-rail-mobile="closing"] .wwm-ws-rail .wwm-rail-in {
   width: 100%; height: 100%;
   display: flex; flex-direction: column;
 }
-body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-fade {
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-fade,
+body.mobile-mode .wwm-app[data-rail-mobile="closing"] .wwm-ws-rail .wwm-rail-fade {
   display: flex; flex-direction: column;
   flex: 1; min-height: 0;
   position: relative; z-index: 2;
@@ -327,7 +337,8 @@ body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-sb-rest {
   background: transparent;
   padding: 8px;
 }
-body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-tate { display: none; }
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-tate,
+body.mobile-mode .wwm-app[data-rail-mobile="closing"] .wwm-ws-rail .wwm-rail-tate { display: none; }
 
 /* backdrop = overlay open 時のみ表示 (default は workspace.css L1284 直下 = hide) */
 body.mobile-mode .wwm-app[data-rail-mobile="open"] ~ .wwm-rail-backdrop,
@@ -368,6 +379,13 @@ body.mobile-mode .wwm-ws-body {
   min-height: 0;
 }
 body.mobile-mode .wwm-ws-main .wwm-footer { display: none; }
+
+/* ============ 武格履歴 (hist) mobile = scroll 回避で padding 詰め (2026-06-21 兄貴指示) ============ */
+body.mobile-mode .wwm-hist-panel { padding: 0 5px; }
+body.mobile-mode .wwm-hist-pb { padding: 0; }
+
+/* ============ hero COMING SOON (演武 DPS placeholder) mobile = 縮小 (2026-06-21 兄貴指示「でかすぎ」) ============ */
+body.mobile-mode .hero-wuxia .seat-main .hb-num.hb-coming { font-size: 14px; padding-top: 4px; }
 
 /* ============ bnav = grid-row 5 (全幅 57px) ============ */
 body.mobile-mode .wwm-bottom-nav {

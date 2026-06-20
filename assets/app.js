@@ -353,26 +353,42 @@ function renderPresetSlots() {
     const nameInp  = document.getElementById('presetName' + i);
     const loadBtn  = document.getElementById('presetLoadBtn' + i);
     const delBtn   = document.getElementById('presetDelBtn' + i);
+    // mobile 側 input/btn (2026-06-21 兄貴指示「PC版と同じ表記に」 で mobile も i18n placeholder 化)
+    const nameMob  = document.getElementById('presetMobName' + i);
+    const loadMob  = document.getElementById('presetMobLoad' + i);
+    const delMob   = document.getElementById('presetMobDel' + i);
     const p = presets[i];
+    const placeholderText = T.presetNamePlaceholder.replace('{n}', i + 1);
     // audit P2 (2026-06-07): placeholder ≠ acc name — aria-label を常時付与 (i18n 追従)
-    nameInp.setAttribute('aria-label', T.presetNamePlaceholder.replace('{n}', i + 1));
+    nameInp.setAttribute('aria-label', placeholderText);
+    if (nameMob) nameMob.setAttribute('aria-label', placeholderText);
     if (p) {
       slot.classList.add('has-data');
       nameInp.value = p.name;
       loadBtn.disabled = false;
       delBtn.disabled  = false;
+      if (nameMob) nameMob.value = p.name;
+      if (loadMob) loadMob.disabled = false;
+      if (delMob)  delMob.disabled  = false;
     } else {
       slot.classList.remove('has-data');
       nameInp.value = '';
-      nameInp.placeholder = T.presetNamePlaceholder.replace('{n}', i + 1);
+      nameInp.placeholder = placeholderText;
       loadBtn.disabled = true;
       delBtn.disabled  = true;
+      if (nameMob) { nameMob.value = ''; nameMob.placeholder = placeholderText; }
+      if (loadMob) loadMob.disabled = true;
+      if (delMob)  delMob.disabled  = true;
     }
   }
 }
 function savePreset(i) {
+  // PC / mobile 両 input から名前取得 — 編集された方を採用 (2026-06-21 兄貴指示)
   const nameInp = document.getElementById('presetName' + i);
-  const name = nameInp.value.trim() || T.presetNamePlaceholder.replace('{n}', i + 1);
+  const nameMob = document.getElementById('presetMobName' + i);
+  const v1 = (nameInp && nameInp.value.trim()) || '';
+  const v2 = (nameMob && nameMob.value.trim()) || '';
+  const name = v1 || v2 || T.presetNamePlaceholder.replace('{n}', i + 1);
   // 新レイアウト: 装備情報を保存 (roleInfo / state / virtual / baseline)
   const importSnap = WWMHelpers.storage.loadJSON('wwm_last_import_v1');
   const stateSnap = WWMHelpers.storage.loadJSON('wwm_last_state_v1');

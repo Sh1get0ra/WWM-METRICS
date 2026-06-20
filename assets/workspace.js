@@ -98,7 +98,25 @@
   }
   function closeMobileRail() {
     if (!app) return;
-    delete app.dataset.railMobile;
+    // 即時 close (open でない or rail 未取得) = grid 戻し
+    if (app.dataset.railMobile !== 'open' || !rail) {
+      delete app.dataset.railMobile;
+      return;
+    }
+    // 対称アニメ (2026-06-21 兄貴指示): closing 中間 state で position:fixed 維持 + width 290→46 transit、
+    // transitionend で grid relative 戻し → 右端固定で右にコンパクト化する綺麗な動き
+    app.dataset.railMobile = 'closing';
+    function onEnd(ev) {
+      if (ev.propertyName !== 'width') return;
+      rail.removeEventListener('transitionend', onEnd);
+      delete app.dataset.railMobile;
+    }
+    rail.addEventListener('transitionend', onEnd);
+    // fallback timer (transitionend 漏れ保険、 0.25s + buffer)
+    setTimeout(function () {
+      rail.removeEventListener('transitionend', onEnd);
+      if (app.dataset.railMobile === 'closing') delete app.dataset.railMobile;
+    }, 400);
   }
   if (rail) {
     rail.addEventListener('click', function (ev) {
