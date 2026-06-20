@@ -867,6 +867,7 @@
    + 主題自体も縮小 (--text-18 → --text-lg) */
 :lang(vi) .wwm-cmp-modal-a .wwm-cmp-title-en { display: none; }
 :lang(vi) .wwm-cmp-modal-a .wwm-cmp-title-ja { font-size: var(--text-lg); }
+:lang(vi) .wwm-cmp-modal-a .wwm-cmp-seal { display: none; }
 .wwm-cmp-modal-a .wwm-modal-header h2 { align-items: flex-end; }
 /* 背景 = 親は墨単色のみ、 mountain image は header/footer 個別 lay 化 (2026-06-20 兄貴指摘「構造非対称で footer に overlay 乗せにくい」)。
    親 image だと縦幅で見え方変わる + footer に届かない、 header/footer 自身に image lay = 高さ固定 px で scale 一定 + 構造対称。
