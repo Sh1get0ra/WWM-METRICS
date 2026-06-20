@@ -145,32 +145,33 @@
     const root = document.querySelector('.wwm-mb-pager-root');
     if (!root) return;
 
+    // ── pager 内 既存 origin slot を一掃 ──
+    // render 再走時 (renderGearGrid 等で host.innerHTML 上書き → 新 slot 生成) に
+    // pager 内に取り残された古い slot を防ぐ。 grid.textContent='' での空化方式は
+    // 2 回目 reflow 時 host が空 (1 回目で move 済) → grid 空のまま slot 補充ゼロ
+    // で全消滅する罠あり → 「古い清掃 + host から新規 move」 の独立 step に分解。
+    root.querySelectorAll('[data-mb-origin]').forEach(el => el.remove());
+
     // ── 装備 ──
-    // origin マーク: teardown で逆 reflow して元 host へ戻す手がかり
     const gearHost = originalHosts?.gear?.el;
     if (gearHost) {
-      const slots = [...gearHost.querySelectorAll(':scope > [data-slot]')];
       const grids = {
         weapon: root.querySelector('[data-cat="gear"] [data-page="weapon"] .wwm-mb-grid'),
         armor:  root.querySelector('[data-cat="gear"] [data-page="armor"] .wwm-mb-grid'),
         bow:    root.querySelector('[data-cat="gear"] [data-page="bow"] .wwm-mb-grid'),
       };
-      for (const k in grids) { if (grids[k]) grids[k].textContent = ''; }
-      for (const s of slots) {
+      for (const s of [...gearHost.querySelectorAll(':scope > [data-slot]')]) {
         const page = GEAR_PAGE_MAP[s.dataset.slot];
         if (page && grids[page]) { s.dataset.mbOrigin = 'gear'; grids[page].appendChild(s); }
       }
     }
 
     // ── 心法 + 武庫 ──
-    // xinfa-grid 子 = 心法 slot 4 + wwm-arsenal-slot 1 (武庫)。 武庫は bow page へ移送、 残りを xinfa page へ。
     const xinfaHost = originalHosts?.xinfa?.el;
     if (xinfaHost) {
-      const allChildren = [...xinfaHost.children];
       const xinfaGrid = root.querySelector('[data-cat="xinfa"] [data-page="xinfa"] .wwm-mb-grid');
       const bowGrid = root.querySelector('[data-cat="gear"] [data-page="bow"] .wwm-mb-grid');
-      if (xinfaGrid) xinfaGrid.textContent = '';
-      for (const s of allChildren) {
+      for (const s of [...xinfaHost.children]) {
         s.dataset.mbOrigin = 'xinfa';
         if (s.classList.contains('wwm-arsenal-slot')) {
           if (bowGrid) bowGrid.appendChild(s);
@@ -186,8 +187,6 @@
       const clusters = [...qishuHost.querySelectorAll(':scope > .wwm-qishu-cluster')];
       const g1 = root.querySelector('[data-cat="qishu"] [data-page="qishu-1"] .wwm-mb-grid');
       const g2 = root.querySelector('[data-cat="qishu"] [data-page="qishu-2"] .wwm-mb-grid');
-      if (g1) g1.textContent = '';
-      if (g2) g2.textContent = '';
       if (clusters[0] && g1) { clusters[0].dataset.mbOrigin = 'qishu'; g1.appendChild(clusters[0]); }
       if (clusters[1] && g2) { clusters[1].dataset.mbOrigin = 'qishu'; g2.appendChild(clusters[1]); }
     }
