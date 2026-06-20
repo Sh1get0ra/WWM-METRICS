@@ -863,6 +863,10 @@
   align-self: flex-end;
   padding-bottom: var(--space-half);
 }
+/* vi = 題字 ja 部分が長文 (So sánh trang bị 等) で 2 行化 → en 副題 (COMPARISON) を vi 時のみ非表示
+   + 主題自体も縮小 (--text-18 → --text-lg) */
+:lang(vi) .wwm-cmp-modal-a .wwm-cmp-title-en { display: none; }
+:lang(vi) .wwm-cmp-modal-a .wwm-cmp-title-ja { font-size: var(--text-lg); }
 .wwm-cmp-modal-a .wwm-modal-header h2 { align-items: flex-end; }
 /* 背景 = 親は墨単色のみ、 mountain image は header/footer 個別 lay 化 (2026-06-20 兄貴指摘「構造非対称で footer に overlay 乗せにくい」)。
    親 image だと縦幅で見え方変わる + footer に届かない、 header/footer 自身に image lay = 高さ固定 px で scale 一定 + 構造対称。
@@ -1548,33 +1552,79 @@
     overflow-y: auto;
     padding: var(--space-3);
   }
-  /* 対照 grid: 現有 / divider / 新置 を 縦stack */
+  /* 対照 grid = mobile pager 化 (2026-06-20):
+     左=現有 / 右=新置 を 2 page の横 scroll-snap pager に。
+     PC レイアウト (左右並び) と同じ視覚順序、スワイプで切替。
+     縦 scroll は modal-body (overflow-y:auto L1547) が担当。 */
   .wwm-cmp-modal-a .wwm-cmp-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    gap: 10px;
+    display: flex;
+    grid-template-columns: none;
+    grid-template-rows: none;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 0;
+    /* title `top:-14px` 飛び出し分 = overflow-x:auto で y も clip 化されるため
+       grid 内 padding で content 領域確保 (clip 範囲を朱印より上に押し上げ)。 */
+    padding-top: 18px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
-  /* divider 縦線 → 横線 */
-  .wwm-cmp-modal-a .wwm-cmp-divider {
-    width: 100%; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold-deep), transparent);
+  .wwm-cmp-modal-a .wwm-cmp-grid::-webkit-scrollbar { display: none; }
+  .wwm-cmp-modal-a .wwm-cmp-grid > .wwm-cmp-col {
+    flex: 0 0 100%;
+    min-width: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
-  .wwm-cmp-modal-a .wwm-cmp-divider::before,
-  .wwm-cmp-modal-a .wwm-cmp-divider::after {
-    top: 50%; bottom: auto;
-    transform: translate(-50%, -50%);
+  /* divider = pager 境界そのもの → 非表示 */
+  .wwm-cmp-modal-a .wwm-cmp-divider { display: none; }
+  /* padding 縮小 = 微妙な縦 scroll 解消 (2026-06-20 兄貴指示)。
+     body だけだと viewport 低高さで不足 → header/footer の縦 padding も同時詰め。
+     左右 padding は装飾余白 keep、縦のみ var(--space-2) (8px) 統一 */
+  .wwm-cmp-modal-a .wwm-modal-body.wwm-ws-paper {
+    padding: var(--space-2);
   }
-  .wwm-cmp-modal-a .wwm-cmp-divider::before { left: 30%; }
-  .wwm-cmp-modal-a .wwm-cmp-divider::after  { left: 70%; }
+  .wwm-cmp-modal-a .wwm-modal-header {
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-2);
+  }
+  .wwm-cmp-modal-a .wwm-cmp-footer-a {
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-2);
+  }
+  /* 武備指数 (火力品質 block) = mobile 表示場所なし → 非表示 (2026-06-20 兄貴指示) */
+  .wwm-cmp-modal-a .wwm-cmp-footer-a .wwm-cmp-quality-block {
+    display: none;
+  }
+  /* 武格指数 delta 行 = vi label 長文 (Chỉ số võ cách) で 1 行はみ出し → font 縮小 + 詰め */
+  .wwm-cmp-modal-a .wwm-cmp-footer-a .wwm-cmp-delta-label {
+    font-size: var(--text-12);
+    letter-spacing: 0.12em;
+  }
+  .wwm-cmp-modal-a .wwm-cmp-footer-a .wwm-cmp-delta-total {
+    font-size: var(--text-base);
+  }
+  .wwm-cmp-modal-a .wwm-cmp-footer-a .wwm-cmp-preview-value {
+    font-size: var(--text-lg);
+  }
   /* footer (delta + button row) 縦stack */
   .wwm-cmp-footer-a {
     flex-direction: column;
     align-items: stretch;
     gap: 8px;
   }
-  .wwm-cmp-btn-row { justify-content: stretch; }
+  .wwm-cmp-btn-row { justify-content: stretch; gap: 6px; }
   .wwm-cmp-btn-row .wwm-btn-primary,
   .wwm-cmp-btn-row .wwm-btn-secondary { flex: 1 1 auto; }
+  /* button 横 padding 縮小 = vi 長文 (ÁP DỤNG / KHÔI PHỤC / THOÁT) で
+     3 ボタン横並びはみ出し回避 (2026-06-20 兄貴指示) */
+  .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-primary,
+  .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
+    padding: 7px 6px;
+    min-width: 0;
+  }
   /* 武庫modal path選択: EN版で長ラベル 横溢れ → wrap強制 + 縮小 */
   .wwm-arsenal-modal .wwm-arsenal-paths {
     flex-wrap: wrap;
