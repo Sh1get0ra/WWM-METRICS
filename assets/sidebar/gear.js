@@ -94,6 +94,8 @@
     root.innerHTML = cards;
     // Phase 3: slot 寄与差分を 非同期計算 → カード更新
     _computeGearCardScores(roleInfo);
+    // mobile pager 化 reflow (mobile mode 時のみ slot を pager 側へ再仕分け、 2026-06-20)
+    if (window.WWMSidebar?.mobileBuildPager) window.WWMSidebar.mobileBuildPager.reflow();
   }
 
   // 4-set 固定ボーナス (防具セット 除外 — damage 非影響)

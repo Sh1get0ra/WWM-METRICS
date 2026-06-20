@@ -110,6 +110,19 @@
 
   function teardown() {
     if (originalHosts) {
+      // 1. pager 内の slot を [data-mb-origin] マーク経由で元 host へ全部戻す。
+      //    HTML hardcode placeholder slot を直接 move してるため、 _refreshAll では
+      //    再生成されない (import 無し時 _refreshAll は early return)。
+      const root = document.querySelector('#wsBuild .wwm-mb-pager-root');
+      if (root) {
+        root.querySelectorAll('[data-mb-origin]').forEach(el => {
+          const origin = el.dataset.mbOrigin;
+          delete el.dataset.mbOrigin;
+          const host = originalHosts[origin]?.el;
+          if (host) host.appendChild(el);
+        });
+      }
+      // 2. 元 host を pager と同階層 (wsBuild 直下、 元位置) に復帰
       for (const k of ['gear','xinfa','qishu']) {
         const h = originalHosts[k];
         if (h && h.el && h.parent) {
@@ -133,6 +146,7 @@
     if (!root) return;
 
     // ── 装備 ──
+    // origin マーク: teardown で逆 reflow して元 host へ戻す手がかり
     const gearHost = originalHosts?.gear?.el;
     if (gearHost) {
       const slots = [...gearHost.querySelectorAll(':scope > [data-slot]')];
@@ -144,7 +158,7 @@
       for (const k in grids) { if (grids[k]) grids[k].textContent = ''; }
       for (const s of slots) {
         const page = GEAR_PAGE_MAP[s.dataset.slot];
-        if (page && grids[page]) grids[page].appendChild(s);
+        if (page && grids[page]) { s.dataset.mbOrigin = 'gear'; grids[page].appendChild(s); }
       }
     }
 
@@ -157,6 +171,7 @@
       const bowGrid = root.querySelector('[data-cat="gear"] [data-page="bow"] .wwm-mb-grid');
       if (xinfaGrid) xinfaGrid.textContent = '';
       for (const s of allChildren) {
+        s.dataset.mbOrigin = 'xinfa';
         if (s.classList.contains('wwm-arsenal-slot')) {
           if (bowGrid) bowGrid.appendChild(s);
         } else {
@@ -166,7 +181,6 @@
     }
 
     // ── 奇術 ──
-    // wwm-qishu-cluster 2 個 = それぞれ 4 slot を含む。 cluster 単位で 2 page に振り分け。
     const qishuHost = originalHosts?.qishu?.el;
     if (qishuHost) {
       const clusters = [...qishuHost.querySelectorAll(':scope > .wwm-qishu-cluster')];
@@ -174,8 +188,8 @@
       const g2 = root.querySelector('[data-cat="qishu"] [data-page="qishu-2"] .wwm-mb-grid');
       if (g1) g1.textContent = '';
       if (g2) g2.textContent = '';
-      if (clusters[0] && g1) g1.appendChild(clusters[0]);
-      if (clusters[1] && g2) g2.appendChild(clusters[1]);
+      if (clusters[0] && g1) { clusters[0].dataset.mbOrigin = 'qishu'; g1.appendChild(clusters[0]); }
+      if (clusters[1] && g2) { clusters[1].dataset.mbOrigin = 'qishu'; g2.appendChild(clusters[1]); }
     }
 
     syncIndicators();

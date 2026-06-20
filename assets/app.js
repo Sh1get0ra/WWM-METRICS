@@ -522,6 +522,11 @@ document.addEventListener('DOMContentLoaded', init);
     var on = mq.matches;
     document.documentElement.classList.toggle('mobile-mode', on);
     if (document.body) document.body.classList.toggle('mobile-mode', on);
+    // mobile 武備ページャー連動 (2026-06-20): mobile ↔ PC 切替で構造を自動再構築 / 復元
+    if (window.WWMSidebar && window.WWMSidebar.mobileBuildPager) {
+      if (on) window.WWMSidebar.mobileBuildPager.enable();
+      else window.WWMSidebar.mobileBuildPager.disable();
+    }
   }
   apply();
   if (mq.addEventListener) mq.addEventListener('change', apply);
