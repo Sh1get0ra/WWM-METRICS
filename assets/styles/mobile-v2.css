@@ -567,6 +567,25 @@ body.mobile-mode .wwm-mb-grid > .wwm-equip-slot {
   min-height: 0;
   height: auto;
   overflow: hidden;
+  /* 墨色 gradient + 公式 bg_usercard2 (xinfa.css L263-269 = .wwm-gear-grid scope) を
+     pager 内 slot にも複製。 PC では plank の外周に墨枠表示、 mobile も同等 frame */
+  background-image:
+    linear-gradient(180deg, rgba(26,20,16,0.62), rgba(15,12,14,0.75)),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg_usercard2-e8900864.png");
+  background-position: 0 0, center;
+  background-size: auto, 100% 100%;
+  background-repeat: repeat, no-repeat;
+  border: 1px solid var(--ink-2);
+  border-radius: 2px;
+}
+/* plank-paint の inset 直接拡大 = absolute 子 inset は padding 無視するため。
+   PC = workspace.css L1438 (top:8 left:9 right:9 bottom:8) は default、
+   mobile では rail 32 / score 28 の領域を露出させて墨枠 frame を見せる */
+body.mobile-mode .wwm-mb-grid > .wwm-equip-slot .plank-paint {
+  top: 5px; left: 33px; right: 10px; bottom: 30px;
+}
+body.mobile-mode .wwm-mb-grid > .wwm-equip-slot .plank-icon-wrap {
+  top: 5px; left: 33px; right: 10px; bottom: 30px;
 }
 /* 心法 / 武庫 slot も同様 position:relative 確保 (rail/icon absolute の基準) */
 body.mobile-mode .wwm-mb-grid > .wwm-xinfa-slot {
