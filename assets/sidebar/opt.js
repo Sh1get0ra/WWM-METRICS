@@ -58,8 +58,8 @@
       const isBow = s.kind === 'bowSet';
       const slotCol = isBow ? s.slotLabel : `${s.slotLabel}#${s.idx+1}`;
       const changeCol = isBow
-        ? `<span class="wwm-opt-from">${s.fromName||'(未装着)'}</span> ▶ <span class="wwm-opt-to">${s.toName}</span>`
-        : `<span class="wwm-opt-from">${_fmtFromTo(s.fromName, s.fromVal, s.fromRatio, s.fromKey)}</span> ▶ <span class="wwm-opt-to">${_fmtFromTo(s.toName, s.toVal, s.toRatio, s.toKey)}</span>`;
+        ? `<span class="wwm-opt-from">${s.fromName||'(未装着)'}</span><span class="wwm-opt-to">▶ ${s.toName}</span>`
+        : `<span class="wwm-opt-from">${_fmtFromTo(s.fromName, s.fromVal, s.fromRatio, s.fromKey)}</span><span class="wwm-opt-to">▶ ${_fmtFromTo(s.toName, s.toVal, s.toRatio, s.toKey)}</span>`;
       const isChecked = checkedIdxs.size ? checkedIdxs.has(s._origIdx) : true;
       return `
       <div class="wwm-opt-row">
@@ -262,8 +262,8 @@
       const isBow = s.kind === 'bowSet';
       const slotCol = isBow ? s.slotLabel : `${s.slotLabel}#${s.idx+1}`;
       const changeCol = isBow
-        ? `<span class="wwm-opt-from">${s.fromName||'(未装着)'}</span> ▶ <span class="wwm-opt-to">${s.toName}</span>`
-        : `<span class="wwm-opt-from">${_fmtFromTo(s.fromName, s.fromVal, s.fromRatio, s.fromKey)}</span> ▶ <span class="wwm-opt-to">${_fmtFromTo(s.toName, s.toVal, s.toRatio, s.toKey)}</span>`;
+        ? `<span class="wwm-opt-from">${s.fromName||'(未装着)'}</span><span class="wwm-opt-to">▶ ${s.toName}</span>`
+        : `<span class="wwm-opt-from">${_fmtFromTo(s.fromName, s.fromVal, s.fromRatio, s.fromKey)}</span><span class="wwm-opt-to">▶ ${_fmtFromTo(s.toName, s.toVal, s.toRatio, s.toKey)}</span>`;
       return `
       <div class="wwm-opt-row">
         <span class="wwm-opt-pos">${s._origIdx+1}</span>

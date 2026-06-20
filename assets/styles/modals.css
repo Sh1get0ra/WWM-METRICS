@@ -2911,8 +2911,21 @@
 }
 #wwmZerobase .wwm-zb-affix-val { font-weight: var(--fw-bold); white-space: nowrap; color: var(--sumi-fg); }
 @media (max-width: 600px) {
-  #wwmZerobase .wwm-zb-grid { grid-template-columns: 1fr; }
+  /* zerobase = 1 col 縦積み (兄貴指示 2026-06-20、 格析 popout mobile)。
+     grid-template-rows: 1fr (PC default L2812) を auto auto auto に上書きしないと
+     1 col × 1 row = 全子 1 cell 重畳描画 で「二重」 症状になる */
+  #wwmZerobase .wwm-zb-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-auto-rows: auto;
+    gap: 8px;
+  }
   #wwmZerobase .wwm-zb-divider { display: none; }
+  #wwmZerobase .wwm-zb-col {
+    display: flex; flex-direction: column;
+    width: 100%;
+    min-width: 0;
+  }
 }
 .wwm-ocr-status {
   margin-left: 6px;

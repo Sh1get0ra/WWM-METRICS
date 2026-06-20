@@ -242,28 +242,34 @@
   function mountFloating() {
     if (floatEl) return;
     var st = loadState();
+    // mobile (≤600px) = CSS @media で全画面 modal 化 (inset:0 + width/height 100%)。
+    // PC inline style (w/h/x/y) を設定すると specificity で @media に勝って 540×620 中段表示で破綻 (2026-06-20 兄貴指摘)
+    var isMobile = window.matchMedia('(max-width: 600px)').matches;
     floatEl = document.createElement('div');
     floatEl.className = 'wwm-anlz-floating';
     floatEl.id = 'wwmAnlzFloating';
-    floatEl.style.width = (st.w || 540) + 'px';
-    floatEl.style.height = (st.h || 620) + 'px';
-    if (st.x !== null && st.x !== undefined) {
-      // viewport 外 救出不能 防止 (2026-06-16): 復元位置の最低 50px が画面内に残らないなら
-      // CSS default (top:100 right:30) で fallback
-      var vw = window.innerWidth;
-      var vh = window.innerHeight;
-      var w = st.w || 540;
-      var h = st.h || 620;
-      var y = (st.y == null) ? 100 : st.y;
-      var visible = (st.x + w > 50) && (st.x < vw - 50) && (y + h > 50) && (y < vh - 50);
-      if (visible) {
-        floatEl.style.left = st.x + 'px';
-        floatEl.style.right = 'auto';
-        floatEl.style.top = y + 'px';
+    if (!isMobile) {
+      floatEl.style.width = (st.w || 540) + 'px';
+      floatEl.style.height = (st.h || 620) + 'px';
+      if (st.x !== null && st.x !== undefined) {
+        // viewport 外 救出不能 防止 (2026-06-16): 復元位置の最低 50px が画面内に残らないなら
+        // CSS default (top:100 right:30) で fallback
+        var vw = window.innerWidth;
+        var vh = window.innerHeight;
+        var w = st.w || 540;
+        var h = st.h || 620;
+        var y = (st.y == null) ? 100 : st.y;
+        var visible = (st.x + w > 50) && (st.x < vw - 50) && (y + h > 50) && (y < vh - 50);
+        if (visible) {
+          floatEl.style.left = st.x + 'px';
+          floatEl.style.right = 'auto';
+          floatEl.style.top = y + 'px';
+        }
       }
     }
     floatEl.innerHTML = buildShell();
-    if (st.opacity != null && st.opacity !== 1) floatEl.style.opacity = String(st.opacity);
+    // mobile = 透明度操作不可 (slider hide) なので PC で設定した opacity 反映禁止 (兄貴指示 2026-06-21)
+    if (!isMobile && st.opacity != null && st.opacity !== 1) floatEl.style.opacity = String(st.opacity);
     document.body.appendChild(floatEl);
     document.body.setAttribute('data-anlz-popout', '1');
     var body = floatEl.querySelector('[data-anlz-body]');
@@ -271,7 +277,7 @@
     if (node) body.appendChild(node);
     bindSubtabs(floatEl);
     bindControls(floatEl);
-    bindFloatingDrag(floatEl, floatEl);
+    if (!isMobile) bindFloatingDrag(floatEl, floatEl);
     updatePosLabel(floatEl, floatEl.getBoundingClientRect());
     saveState({ mode: 'floating', lastMode: 'floating' });
   }

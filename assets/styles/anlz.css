@@ -983,6 +983,164 @@ body[data-anlz-popout="1"] #wsAnlz .wwm-anlz-gap { display: none; }
   }
   .wwm-anlz-floating-header { cursor: default; }
   .wwm-anlz-floating .l-bracket { display: none; }
+  /* mobile = 全画面 modal 化 → drag/resize/opacity 不可 = controls 不要 (兄貴指示 2026-06-20)。
+     close button (×) のみ残す。 footer pos label も size 表示意味なし → hide */
+  .wwm-anlz-floating [data-anlz-opacity],
+  .wwm-anlz-floating [data-act="pin"],
+  .wwm-anlz-floating [data-anlz-pos] {
+    display: none;
+  }
+  /* ── opt panel mobile 整備 (2026-06-20 兄貴指示「完全整備」) ──
+     PC = card height 570px 固定 + 6 col grid row が狭幅で破綻。 mobile では
+     card 全高占有 + opt-row 2 段 grid layout (1段: pos slot from check / 2段: to delta) */
+  /* floating body padding 詰め + 内側 wwm-anlz-body の PC base padding 撤去 (兄貴指示 2026-06-20)。
+     scroll 制御 = row list (.wwm-opt-body) のみ。 chain で flex column + min-height:0 + overflow:hidden
+     を継いで、 末端 .wwm-opt-body に flex:1 + overflow-y:auto を効かせる */
+  .wwm-anlz-floating-body {
+    padding: 0 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .wwm-anlz-floating-body .wwm-anlz {
+    display: flex; flex-direction: column;
+    flex: 1; min-height: 0;
+    overflow: hidden;
+  }
+  .wwm-anlz-floating-body .wwm-anlz-body {
+    padding: 0;
+    display: flex; flex-direction: column;
+    flex: 1; min-height: 0;
+    overflow: hidden;
+  }
+  /* .wwm-analysis-grid = anlz-body と analysis-card の間の中継 layer (PC = flex column gap:0)
+     これにも flex chain を継がせないと analysis-card の flex:1 が効かず高さ 0 = scroll 不能 */
+  .wwm-anlz-floating-body .wwm-analysis-grid {
+    flex: 1; min-height: 0;
+    margin-top: 0;
+    overflow: hidden;
+  }
+  /* analysis-grid の subtab panel (rank/opt/zb) 自体にも flex:1 必要。
+     これ無いと panel が 113px に collapse して中の analysis-card → opt-body の scroll 不能化。
+     ⚠ subtab 切替 = anlz-popout.js が `el.hidden = !active` で [hidden] attr 制御 →
+     display:flex が specificity で勝って [hidden] 効かなくなる → :not([hidden]) で除外必須 */
+  .wwm-anlz-floating-body .wwm-analysis-grid > *:not([hidden]) {
+    flex: 1; min-height: 0;
+    display: flex; flex-direction: column;
+  }
+  .wwm-anlz-floating-body .wwm-analysis-card {
+    height: 100%;
+    padding: 6px 8px;
+    flex: 1; min-height: 0;
+    overflow: hidden;
+  }
+  .wwm-anlz-floating-body .wwm-analysis-header,
+  .wwm-anlz-floating-body .wwm-opt-summary,
+  .wwm-anlz-floating-body .wwm-opt-progress {
+    flex-shrink: 0;
+  }
+  .wwm-anlz-floating-body .wwm-opt-body {
+    flex: 1; min-height: 0;
+    overflow-y: auto;
+  }
+  /* header = title 行と controls 行を分離 (兄貴指示 2026-06-20「titleはtitleだけのrowに」) */
+  .wwm-anlz-floating-body .wwm-analysis-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+  }
+  .wwm-anlz-floating-body .wwm-analysis-card h3 {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* opt controls = 2 段分け (兄貴指示 2026-06-20):
+       ① 目標 slider (full width)
+       ② [改善順/部位順] [☑] [選択適用] [↻]  右詰め (右利き優先) */
+  .wwm-anlz-floating-body .wwm-opt-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px 4px;
+  }
+  .wwm-anlz-floating-body .wwm-opt-ratio-label {
+    flex: 1 1 100%;
+    order: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+  }
+  .wwm-anlz-floating-body .wwm-opt-ratio-label input[type=range] {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .wwm-anlz-floating-body .wwm-opt-sort-group { order: 2; }
+  .wwm-anlz-floating-body #wwmOptToggleAll { order: 3; }
+  .wwm-anlz-floating-body #wwmOptApplyAll { order: 4; }
+  .wwm-anlz-floating-body #wwmOptRerun { order: 5; }
+  /* opt-row = 2 段 grid (兄貴指示 layout):
+       [pos] [slot] [from .......] [check]
+       [pos] [slot] [▶to .........] [delta]   ← pos/slot は両段にまたぐ */
+  .wwm-anlz-floating-body .wwm-opt-row {
+    grid-template-columns: 20px auto minmax(0,1fr) auto;
+    grid-template-areas:
+      "pos slot from check"
+      "pos slot to   delta";
+    column-gap: 4px;
+    row-gap: 0;
+    padding: 4px 6px;
+    font-size: 11px;
+  }
+  .wwm-anlz-floating-body .wwm-opt-body {
+    gap: 1px;
+  }
+  /* footer hint も mobile では空気 → 詰める */
+  .wwm-anlz-floating-footer {
+    padding: 2px 8px;
+    min-height: 0;
+  }
+  .wwm-anlz-floating-body .wwm-opt-pos {
+    grid-area: pos; align-self: center;
+  }
+  .wwm-anlz-floating-body .wwm-opt-slot {
+    grid-area: slot; align-self: center; white-space: nowrap;
+  }
+  /* change wrapper = mobile では contents = 子 from/to を grid item に昇格 */
+  .wwm-anlz-floating-body .wwm-opt-change {
+    display: contents;
+  }
+  .wwm-anlz-floating-body .wwm-opt-from {
+    grid-area: from;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .wwm-anlz-floating-body .wwm-opt-to {
+    grid-area: to;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .wwm-anlz-floating-body .wwm-opt-check-wrap {
+    grid-area: check; align-self: center; justify-self: end;
+  }
+  .wwm-anlz-floating-body .wwm-opt-delta {
+    grid-area: delta; align-self: center; justify-self: end;
+  }
+  /* Tier ★ chip は兄貴指示で mobile 非表示 */
+  .wwm-anlz-floating-body .wwm-opt-tierup {
+    display: none;
+  }
+  /* zerobase (外功vs属性) subtab 1 col 縦積み = modals.css 側 mobile @media に追加
+     (anlz.css = @layer components / modals.css = @layer modals で layer 順位で modals 勝、
+     ここ書いても無効。 詳細 = modals.css L2913 付近) */
 }
 
 } /* end @layer components */
