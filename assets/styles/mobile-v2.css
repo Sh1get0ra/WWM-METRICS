@@ -524,7 +524,7 @@ body.mobile-mode .wwm-mb-page {
   flex: 0 0 100%; width: 100%;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  padding: 14px 12px;
+  padding: 8px 10px;
   /* overflow-y:auto は page 内縦 scroll 確保するが vscroll の縦カテゴリ snap を
      scroll-chaining で食う → hidden で page 内 scroll 廃止、 縦スワイプ vscroll 通過 */
   overflow-y: hidden;
@@ -534,7 +534,7 @@ body.mobile-mode .wwm-mb-page::-webkit-scrollbar { display: none; }
 
 /* page 内 grid wrapper = specificity 確保 (既存 selector からの干渉回避) */
 body.mobile-mode .wwm-mb-page .wwm-mb-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
   align-content: start;
 }
 body.mobile-mode .wwm-mb-page .wwm-mb-grid-1col {
