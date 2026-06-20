@@ -553,13 +553,23 @@ body.mobile-mode .wwm-mb-grid > .wwm-xinfa-slot {
   width: auto;
 }
 /* 装備 slot (wwm-equip-slot) は move 後 .wwm-gear-grid scope 外で sizing rule 不適用
-   → grid item default stretch で巨大化 → 明示 sizing で 2x2 grid cell fit */
+   → grid item default stretch で巨大化 → 明示 sizing で 2x2 grid cell fit。
+   position: relative = 子 plank-paint/plank-icon (position:absolute) の基準確保
+   (parent static だと viewport 基準で巨大化、 兄貴症状 #5 の真因)。
+   overflow: hidden で内側 plank-icon (width:130%/170%) の外溢れ contain */
 body.mobile-mode .wwm-mb-grid > .wwm-equip-slot {
+  position: relative;
   aspect-ratio: 150 / 200;
   width: 100%;
   max-width: none;
   min-height: 0;
   height: auto;
+  overflow: hidden;
+}
+/* 心法 / 武庫 slot も同様 position:relative 確保 (rail/icon absolute の基準) */
+body.mobile-mode .wwm-mb-grid > .wwm-xinfa-slot {
+  position: relative;
+  overflow: hidden;
 }
 /* 武庫 slot (bow page 同居、 grid-column 全幅) — workspace.css L1364 紙面 scope の
    max-width clamp(70px,...) + aspect-ratio 150/200 を mobile pager 内で打消 */
