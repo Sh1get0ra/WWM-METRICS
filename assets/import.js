@@ -963,6 +963,11 @@ function _autoLoadLastImport() {
         if (typeof window._showScoreBanner === 'function') window._showScoreBanner();
       }
     }
+    // baseline = null + 過去 import 履歴あり = drift 状態継続 → 再 import するまで banner show 維持
+    // (2026-06-21 兄貴指摘: 初回 reload で banner 見逃すと 2 回目以降 banner 出ない bug)
+    if (!WWMState.baseline && WWMHelpers.storage.loadJSON(IMPORT_STORAGE_KEY)) {
+      if (typeof window._showScoreBanner === 'function') window._showScoreBanner();
+    }
     // 旧 slotMaxLoo localStorage 残骸 cleanup (= 武備指数移行で不要、 兄貴指示 2026-06-18)
     WWMHelpers.storage.remove('wwm_opt_slot_max_loo_v1');
     // opt_best 復元 (baseline と同じ scoreVer ルール、不一致なら破棄して再 import 時の opt で再確定)
