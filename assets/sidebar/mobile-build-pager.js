@@ -35,20 +35,20 @@
   <div class="wwm-mb-vscroll">
     <section class="wwm-mb-cat-sec" data-cat="gear">
       <div class="wwm-mb-hscroll">
-        <div class="wwm-mb-page" data-page="weapon"></div>
-        <div class="wwm-mb-page" data-page="armor"></div>
-        <div class="wwm-mb-page" data-page="bow"></div>
+        <div class="wwm-mb-page" data-page="weapon"><div class="wwm-mb-grid"></div></div>
+        <div class="wwm-mb-page" data-page="armor"><div class="wwm-mb-grid"></div></div>
+        <div class="wwm-mb-page" data-page="bow"><div class="wwm-mb-grid"></div></div>
       </div>
     </section>
     <section class="wwm-mb-cat-sec" data-cat="xinfa">
       <div class="wwm-mb-hscroll">
-        <div class="wwm-mb-page" data-page="xinfa"></div>
+        <div class="wwm-mb-page" data-page="xinfa"><div class="wwm-mb-grid"></div></div>
       </div>
     </section>
     <section class="wwm-mb-cat-sec" data-cat="qishu">
       <div class="wwm-mb-hscroll">
-        <div class="wwm-mb-page" data-page="qishu-1"></div>
-        <div class="wwm-mb-page" data-page="qishu-2"></div>
+        <div class="wwm-mb-page" data-page="qishu-1"><div class="wwm-mb-grid wwm-mb-grid-1col"></div></div>
+        <div class="wwm-mb-page" data-page="qishu-2"><div class="wwm-mb-grid wwm-mb-grid-1col"></div></div>
       </div>
     </section>
   </div>
@@ -121,15 +121,15 @@
     const gearHost = originalHosts?.gear?.el;
     if (gearHost) {
       const slots = [...gearHost.querySelectorAll(':scope > [data-slot]')];
-      const pages = {
-        weapon: root.querySelector('[data-cat="gear"] [data-page="weapon"]'),
-        armor:  root.querySelector('[data-cat="gear"] [data-page="armor"]'),
-        bow:    root.querySelector('[data-cat="gear"] [data-page="bow"]'),
+      const grids = {
+        weapon: root.querySelector('[data-cat="gear"] [data-page="weapon"] .wwm-mb-grid'),
+        armor:  root.querySelector('[data-cat="gear"] [data-page="armor"] .wwm-mb-grid'),
+        bow:    root.querySelector('[data-cat="gear"] [data-page="bow"] .wwm-mb-grid'),
       };
-      for (const k in pages) { if (pages[k]) pages[k].textContent = ''; }
+      for (const k in grids) { if (grids[k]) grids[k].textContent = ''; }
       for (const s of slots) {
         const page = GEAR_PAGE_MAP[s.dataset.slot];
-        if (page && pages[page]) pages[page].appendChild(s);
+        if (page && grids[page]) grids[page].appendChild(s);
       }
     }
 
@@ -138,14 +138,14 @@
     const xinfaHost = originalHosts?.xinfa?.el;
     if (xinfaHost) {
       const allChildren = [...xinfaHost.children];
-      const xinfaPage = root.querySelector('[data-cat="xinfa"] [data-page="xinfa"]');
-      const bowPage = root.querySelector('[data-cat="gear"] [data-page="bow"]');
-      if (xinfaPage) xinfaPage.textContent = '';
+      const xinfaGrid = root.querySelector('[data-cat="xinfa"] [data-page="xinfa"] .wwm-mb-grid');
+      const bowGrid = root.querySelector('[data-cat="gear"] [data-page="bow"] .wwm-mb-grid');
+      if (xinfaGrid) xinfaGrid.textContent = '';
       for (const s of allChildren) {
         if (s.classList.contains('wwm-arsenal-slot')) {
-          if (bowPage) bowPage.appendChild(s);
+          if (bowGrid) bowGrid.appendChild(s);
         } else {
-          if (xinfaPage) xinfaPage.appendChild(s);
+          if (xinfaGrid) xinfaGrid.appendChild(s);
         }
       }
     }
@@ -155,12 +155,12 @@
     const qishuHost = originalHosts?.qishu?.el;
     if (qishuHost) {
       const clusters = [...qishuHost.querySelectorAll(':scope > .wwm-qishu-cluster')];
-      const p1 = root.querySelector('[data-cat="qishu"] [data-page="qishu-1"]');
-      const p2 = root.querySelector('[data-cat="qishu"] [data-page="qishu-2"]');
-      if (p1) p1.textContent = '';
-      if (p2) p2.textContent = '';
-      if (clusters[0] && p1) p1.appendChild(clusters[0]);
-      if (clusters[1] && p2) p2.appendChild(clusters[1]);
+      const g1 = root.querySelector('[data-cat="qishu"] [data-page="qishu-1"] .wwm-mb-grid');
+      const g2 = root.querySelector('[data-cat="qishu"] [data-page="qishu-2"] .wwm-mb-grid');
+      if (g1) g1.textContent = '';
+      if (g2) g2.textContent = '';
+      if (clusters[0] && g1) g1.appendChild(clusters[0]);
+      if (clusters[1] && g2) g2.appendChild(clusters[1]);
     }
 
     syncIndicators();
