@@ -64,7 +64,6 @@
     const arsenalLiupaiSplat = arsenalLiupaiUrl ? `<img class="plank-liupai" src="${arsenalLiupaiUrl}" alt="" loading="lazy">` : '';
     const arsenalCard = `
       <div class="wwm-xinfa-slot wwm-arsenal-slot" data-arsenal-slot${arsenalLiupaiPinyin ? ` data-liupai-pinyin="${arsenalLiupaiPinyin}"` : ''} onclick="WWMSidebar.arsenal.openEdit()">
-        <div class="wwm-arsenal-title" data-kaisho="arsenalTitle" data-kaisho-fixed>武庫</div>
         <div class="plank-hole"></div>
         <div class="plank-stamp">庫</div>
         <div class="plank-paint"></div>

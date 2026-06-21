@@ -1674,20 +1674,16 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 .wwm-ws-paper .wwm-arsenal-slot .plank-icon-wrap img {
   width: 130%; height: 130%;
 }
-/* 武庫主題 (2026-06-22 兄貴指示): 心法枠内で武庫が分かりにくい問題解消、 card 上方に玉ねぎ題字 */
-.wwm-ws-paper .wwm-arsenal-slot .wwm-arsenal-title {
-  position: absolute;
-  top: -22px; left: 0; right: 0;
-  text-align: center;
+/* 武庫主題 (2026-06-22 兄貴指示): 心法枠内で武庫が分かりにくい問題解消、 心法 h2 header 右側に並列配置 */
+.wwm-ws-paper .wwm-ws-sec .wwm-arsenal-title {
+  margin-left: auto;
   font-family: var(--f-display-title);
-  font-size: 14px;
   color: var(--gold-bright);
   letter-spacing: 0.18em;
-  pointer-events: none;
-  z-index: 2;
 }
-.wwm-ws-paper .wwm-arsenal-slot .wwm-arsenal-title .kaisho-svg {
-  height: 1.5em;
+/* 心法 section の h2 は flex 横並び化 (左 = 心法、 右 = 武庫) */
+.wwm-ws-paper .wwm-ws-sec:has(.wwm-arsenal-title) {
+  display: flex; align-items: baseline;
 }
 /* hover = 墨 → 朱 (vermilion 風) グラデ切替 (2026-06-14、 兄貴指示)。
    第3版: まだオレンジ → 更に朱寄り。 hue-rotate 340→325deg / saturate 5→4 で黄味抜き赤側へ。
