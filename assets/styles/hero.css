@@ -254,7 +254,7 @@
   letter-spacing: .12em;
   padding: 3px 12px;
   align-self: flex-start;
-  margin-top: 12px;
+  /* margin-top:12px 削除 (2026-06-22 兄貴指示) = seat-sub swap 時のズレ解消、 .seat-main は workspace.css 個別 rule で上書き */
   overflow: hidden;
   border-radius: 1px;
   border: 1px solid;
