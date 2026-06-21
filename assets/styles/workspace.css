@@ -548,10 +548,13 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
    score block と同居 = 席 swap に自然随伴 (sub 席 = DPS mode では _syncNextVisibility が隠す) */
 .hero-wuxia .hero-next-inline {
   display: flex; align-items: center;
-  /* score 直下 (.hb-num 外、 .hero-block 内、 2026-06-22 兄貴指示で縦並び化)、 score 左端揃え + わずか下マージン */
-  margin-left: 0;
+  /* score 直下 (.hb-num 外、 .hero-block 内、 2026-06-22 兄貴指示で縦並び化 + score 右ライン揃え)
+     親 .hero-block を flex column 化 (下) で align-self:flex-end が効く */
+  align-self: flex-end;
   margin-top: 2px;
 }
+/* .hero-block を column flex 化 (eyebrow / hb-num / hero-next-inline 縦並び、 NEXT 右寄せ用) */
+.hero-wuxia .seat-main .hero-block { display: flex; flex-direction: column; }
 .hero-wuxia .hero-next-row { display: flex; align-items: baseline; gap: 6px; }
 .hero-wuxia .hero-next-arrow { color: var(--c-hero-next-arrow-fg); font-size: 18px; align-self: center; }
 .hero-wuxia .hero-next-val {
