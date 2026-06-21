@@ -331,7 +331,9 @@
   width: 86.25%; height: 86.25%;
 }
 
-.hero-wuxia .luopan-inner svg {
+/* luopan-inner 直接子の donut svg のみ対象 (rotate -90deg + 100%/100%)。
+   luopan-center 内の 闘率 玉ねぎ svg まで掛かると 90度回転 + 100%引き伸ばしで巨大化バグ (2026-06-22) */
+.hero-wuxia .luopan-inner > svg {
   width: 100%; height: 100%;
   transform: rotate(-90deg);
 }
