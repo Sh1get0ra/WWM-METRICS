@@ -1379,6 +1379,10 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  /* popup 用 min-width 200px (L1312) は inline mode で幅圧迫 = 解除 */
+  .hero-wuxia .wwm-hero-bd-pop {
+    min-width: 0;
+  }
 }
 
 /* MOBILE = mobile-v2.css (body.mobile-mode 独立 selector) へ全面移管 (2026-06-19、 [[mobile-css-isolation-policy]])
