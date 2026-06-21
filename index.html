@@ -67,7 +67,7 @@
 <link rel="stylesheet" href="assets/styles/xinfa.css?v=26">
 <link rel="stylesheet" href="assets/styles/anlz.css?v=61">
 <link rel="stylesheet" href="assets/styles/mobile.css?v=20">
-<link rel="stylesheet" href="assets/styles/workspace.css?v=395">
+<link rel="stylesheet" href="assets/styles/workspace.css?v=396">
 <link rel="stylesheet" href="assets/styles/mobile-v2.css?v=90">
 <link rel="stylesheet" href="assets/styles/modals.css?v=213">
 <link rel="stylesheet" href="assets/styles/responsive-globals.css?v=3">
@@ -404,17 +404,18 @@
             <div class="eyebrow"><span class="seat-title" data-i18n="heroSeatScore" data-kaisho="heroSeatScore" data-kaisho-fixed>武格指数</span><span class="seat-en" data-i18n="martialIndexSub">MARTIAL INDEX</span></div>
             <div class="hb-num">
               <span class="num hero-number" id="heroScore">0</span>
-              <!-- NEXT 表示 (現値 ▶ 仮想値、 兄貴指示 2026-06-15 = NEXT label 削除)。
-                   初期 visibility:hidden — hero.js _syncNextVisibility が判定 (現値≠仮想値の時のみ)。
-                   visibility = 場所保持。 sub 配置時も表示 (戦律 panel で武格指数の NEXT を見せる) -->
-              <span class="hero-next-inline" style="visibility:hidden">
-                <span class="hero-next-row">
-                  <span class="hero-next-arrow">▶</span>
-                  <span class="num hero-next-val" id="heroScoreBaseline">0</span>
-                  <span id="heroBaselineTierBadge" class="tier-badge tier-badge-baseline" hidden></span>
-                </span>
-              </span>
+              <!-- Tier badge = score 大数値 右 (2026-06-22 兄貴指示で .pwr から移動)。 席 swap の対象外 (.swap-anim 外) -->
+              <span class="hero-tier tier-badge" id="heroTierBadge">--</span>
             </div>
+            <!-- NEXT 表示 (score 直下に縦並び、 2026-06-22 兄貴指示で .hb-num から外出し)
+                 初期 visibility:hidden — hero.js _syncNextVisibility が判定 (現値≠仮想値の時のみ) -->
+            <span class="hero-next-inline" style="visibility:hidden">
+              <span class="hero-next-row">
+                <span class="hero-next-arrow">▶</span>
+                <span class="num hero-next-val" id="heroScoreBaseline">0</span>
+                <span id="heroBaselineTierBadge" class="tier-badge tier-badge-baseline" hidden></span>
+              </span>
+            </span>
           </div>
         </div>
       </div>
@@ -422,8 +423,7 @@
         <div class="avatar" id="heroAvatar" aria-hidden="true"></div>
         <div class="h-id-info">
           <div class="pname" id="heroName">—<b id="heroLv"></b></div>
-          <!-- Tier badge = identity 固定 (総合武力の右、兄貴指定 2026-06-11)。席 swap の対象外 -->
-          <div class="pwr"><span data-i18n="importLabelXiuwei">総合武力</span><b id="heroPower">—</b><span class="hero-tier tier-badge" id="heroTierBadge">--</span></div>
+          <div class="pwr"><span data-i18n="importLabelXiuwei">総合武力</span><b id="heroPower">—</b></div>
           <div class="seat-sub swap-anim" id="heroSeatSub">
             <div class="hero-block" id="heroBlockDps">
               <div class="eyebrow"><span class="seat-title" data-i18n="heroSeatDps" data-kaisho="heroSeatDps" data-kaisho-fixed>演武</span><span class="seat-en">ROTATION DPS</span></div>

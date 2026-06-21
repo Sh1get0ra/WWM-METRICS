@@ -532,15 +532,11 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   font-size: 20px; letter-spacing: 0.18em; color: var(--gold-bright);
   margin-left: 12px; font-weight: 700;
 }
-/* Tier badge = identity 固定 (.pwr 行、総合武力の右 — 兄貴指定 2026-06-11)。
-   hero.css base (18px/margin-top 12) を inline 文脈用に上書き */
-.hero-wuxia .pwr .hero-tier.tier-badge {
-  display: inline-block;
-  font-size: 14px;
-  padding: 1px 10px;
-  margin: 0 0 0 10px;
-  vertical-align: middle;
-  align-self: auto;
+/* Tier badge = score 大数値 右隣・縦中央 (.hb-num 内、 2026-06-22 兄貴指示で .pwr → .hb-num 移動)。
+   hero.css base (18px/margin-top 12 align-self:flex-start) を score 内 inline 文脈用に上書き */
+.hero-wuxia .seat-main .hb-num .hero-tier.tier-badge {
+  align-self: center;
+  margin: 0 0 0 14px;
 }
 .hero-wuxia .hb-note {
   margin-top: 6px; font-family: var(--f-latin); font-weight: 600; font-size: 9px;
@@ -551,10 +547,10 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
    NEXT は旧 hero 表現: 枠/背景なし、極小 label 上 + ▶数値 (枠付き chip は「ちゃっち」で棄却)。
    score block と同居 = 席 swap に自然随伴 (sub 席 = DPS mode では _syncNextVisibility が隠す) */
 .hero-wuxia .hero-next-inline {
-  display: flex; align-items: flex-end;
-  align-self: flex-end;
-  margin-left: 34px;
-  margin-bottom: 4px; /* スコア (line-height 0.95) の下端と光学揃え (兄貴指示 2026-06-15: 若干下) */
+  display: flex; align-items: center;
+  /* score 直下 (.hb-num 外、 .hero-block 内、 2026-06-22 兄貴指示で縦並び化)、 score 左端揃え + わずか下マージン */
+  margin-left: 0;
+  margin-top: 2px;
 }
 .hero-wuxia .hero-next-row { display: flex; align-items: baseline; gap: 6px; }
 .hero-wuxia .hero-next-arrow { color: var(--c-hero-next-arrow-fg); font-size: 18px; align-self: center; }
