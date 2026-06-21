@@ -445,7 +445,7 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
    旧 grid は新 DOM (.h-main/.h-aside/.h-id flex) と非互換 = 特に mobile で破綻 */
 .hero.hero-wuxia {
   display: flex; align-items: flex-start; gap: 48px;
-  padding: 18px 25px 20px; /* 縦スリム化 (兄貴指定 2026-06-11 — mini-hero 廃止と対)。 左右 25px (2026-06-15 兄貴指定) */
+  padding: 10px 15px 0px; /* 2026-06-22 兄貴調整 (旧 18px 25px 20px) */
   /* 旧 hero の装飾を解除 (墨 band が背景を担う) */
   background: none;
   border: none;
