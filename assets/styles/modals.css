@@ -3223,9 +3223,8 @@
    で header との僅か差別化を付ける (連続感は保つ) */
 .wwm-tool-tabs {
   display: flex; gap: 2px; padding: 0 var(--space-4);
-  /* overlay のみ (mountain image は .wwm-tool-modal modal base から透過、 header と完全連続 1 枚水墨)
-     overlay = 0.31 で header (0.58) より薄く、 連続感保ちつつ僅か差別化 */
-  background: linear-gradient(rgba(0, 0, 0, 0.31), rgba(0, 0, 0, 0.31));
+  /* overlay = header 下端 alpha (0.74) と同強度 単色で seam なし接続 (header --bg-modal-overlay = gradient 0.88→0.74、 その下端と整合) */
+  background: linear-gradient(rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.74));
   border-bottom: 1px solid var(--gold-deep);
 }
 .wwm-tool-tab {
