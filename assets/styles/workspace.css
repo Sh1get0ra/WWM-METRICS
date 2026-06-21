@@ -1371,6 +1371,14 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
     box-shadow: none;
   }
   .hero-wuxia .wwm-hero-bd-pop::before { display: none; }
+  /* inline mode = main 同等の compact grid (12px 3.5em 1fr、 label 短縮省略) */
+  .hero-wuxia .wwm-hero-bd-pop .hb-row {
+    grid-template-columns: 12px 3.5em 1fr;
+  }
+  .hero-wuxia .wwm-hero-bd-pop .hb-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 /* MOBILE = mobile-v2.css (body.mobile-mode 独立 selector) へ全面移管 (2026-06-19、 [[mobile-css-isolation-policy]])
