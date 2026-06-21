@@ -146,7 +146,7 @@ function _loadSavedLang() {
     if (urlLang && ['ja','en','zh','ko','vi'].includes(urlLang)) {
       if (urlLang !== 'ja') setLang(urlLang);
       else { WWMHelpers.storage.saveStr('wwm_lang', 'ja'); _updateSeoMeta('ja'); }
-      if (!WWMHelpers.storage.loadStr('wwm_import_hinted')) {
+      if (!WWMHelpers.storage.loadJSON('wwm_last_import_v1')) {
         setTimeout(_showImportHint, 250);
       }
       return;
@@ -154,8 +154,8 @@ function _loadSavedLang() {
     const saved = WWMHelpers.storage.loadStr('wwm_lang');
     if (saved && ['ja','en','zh','ko','vi'].includes(saved)) {
       if (saved !== 'ja') setLang(saved);
-      // 言語選択済だが import hint 未 dismiss = 初回 picker click 後 hint 見る前に reload 等 = 次回起動で復活
-      if (!WWMHelpers.storage.loadStr('wwm_import_hinted')) {
+      // 未 import = リロード毎に hint 復活 (兄貴方針 2026-06-21、 import 完了まで案内継続)
+      if (!WWMHelpers.storage.loadJSON('wwm_last_import_v1')) {
         setTimeout(_showImportHint, 250);
       }
     } else if (!saved) _showLangPicker();
@@ -184,9 +184,9 @@ function _showLangPicker() {
       const lang = b.dataset.langPick;
       setLang(lang);
       m.remove();
-      // 言語選択直後にIMPORT位置ヒント表示 (一度のみ)
+      // 言語選択直後に IMPORT 位置ヒント表示 (未 import 中は毎回、 import 完了で停止)
       try {
-        if (!WWMHelpers.storage.loadStr('wwm_import_hinted')) {
+        if (!WWMHelpers.storage.loadJSON('wwm_last_import_v1')) {
           setTimeout(_showImportHint, 250);
         }
       } catch(_) {}
@@ -223,7 +223,7 @@ function _showImportHint() {
   const dismiss = () => {
     o.classList.add('wwm-import-hint-out');
     setTimeout(() => o.remove(), 350);
-    WWMHelpers.storage.saveStr('wwm_import_hinted', '1');
+    // フラグ立てない = 未 import 中は次回 reload で復活、 import 完了判定は wwm_last_import_v1 で行う
     document.removeEventListener('click', dismiss, true);
   };
   setTimeout(() => document.addEventListener('click', dismiss, true), 50);
