@@ -1674,12 +1674,29 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 .wwm-ws-paper .wwm-arsenal-slot .plank-icon-wrap img {
   width: 130%; height: 130%;
 }
-/* 武庫主題 (2026-06-22 兄貴指示): 心法 [筆致線] 武庫 の 3 段並び (心法と同 .pl 筆致背景 + grid 5 列目相当右端)
-   flex order 操作で 心法(0) → ::after 線(1) → 武庫(2) の順、 ::after flex:1 で線が伸びる */
-.wwm-ws-sec:has(.wwm-arsenal-title) { gap: 0; }
-.wwm-ws-sec:has(.wwm-arsenal-title) > .pl:first-child { order: 0; }
-.wwm-ws-sec:has(.wwm-arsenal-title)::after { order: 1; margin: 0 18px; }
-.wwm-ws-sec .wwm-arsenal-title { order: 2; }
+/* 武庫主題 (2026-06-22 兄貴指示 E 案): h2 を grid 5 列化 + 全要素 col 中央寄せ
+   = 武庫題字 と grid 5 列目 card が完全同 x 位置 (= card 真上)
+   - .wwm-ws-sec-grid = h2 を flex → grid 5 列 (心法 section 限定 class)
+   - 心法 col 1 中央 / ws-sec-line col 2-4 / 武庫 col 5 中央 / ::after 無効化
+   - #wwmXinfaGrid 5 card 全部 justify-self:center で h2 row と x 同期 */
+.wwm-ws-sec-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-2-5);
+  align-items: center;
+}
+.wwm-ws-sec-grid::after { display: none; }
+.wwm-ws-sec-grid > .pl {
+  justify-self: center;
+}
+.wwm-ws-sec-grid > .ws-sec-line {
+  grid-column: 2 / 5;
+  height: 1px;
+  background: var(--kami-line-2);
+}
+#wwmXinfaGrid > .wwm-xinfa-slot {
+  justify-self: center;
+}
 /* hover = 墨 → 朱 (vermilion 風) グラデ切替 (2026-06-14、 兄貴指示)。
    第3版: まだオレンジ → 更に朱寄り。 hue-rotate 340→325deg / saturate 5→4 で黄味抜き赤側へ。
    奇術も 復活 (2026-06-16 兄貴確認) — will-change: transform で composite layer 分離済 = jitter 解消後 */
