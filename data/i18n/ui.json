@@ -1974,18 +1974,39 @@
     "vi": "Lịch sử"
   },
   "enbuTeaserTitle": {
-    "ja": "秘伝 — 戦律",
-    "en": "Hidden Cadence — Combat Cadence",
-    "zh": "秘传 — 战律",
-    "ko": "비전 — 전투율",
-    "vi": "Bí Truyền — Chiến Luật"
+    "ja": "戦律",
+    "en": "Combat Cadence",
+    "zh": "战律",
+    "ko": "전투율",
+    "vi": "Chiến Luật"
+  },
+  "enbuKofiBody": {
+    "ja": "本ツールは個人開発です。\n機能開発・サーバー維持の応援は Ko-fi からよろしくお願いします。",
+    "en": "This tool is developed by an individual.\nSupport development & server costs via Ko-fi.",
+    "zh": "本工具为个人开发。\n欢迎通过 Ko-fi 支持开发与服务器维护。",
+    "ko": "본 도구는 개인 개발입니다.\n기능 개발 및 서버 유지의 응원은 Ko-fi 에서 부탁드립니다.",
+    "vi": "Công cụ này được phát triển bởi cá nhân.\nHãy ủng hộ phát triển & duy trì máy chủ qua Ko-fi."
+  },
+  "enbuKofiBtn": {
+    "ja": "Ko-fi で応援",
+    "en": "Support on Ko-fi",
+    "zh": "在 Ko-fi 支持",
+    "ko": "Ko-fi 에서 응원",
+    "vi": "Ủng hộ trên Ko-fi"
+  },
+  "enbuTeaserDev": {
+    "ja": "※現在開発中の機能です。UIや仕様は調整中のため、実装時に変更される可能性があります。",
+    "en": "※Currently under development. UI and specs are subject to change upon implementation.",
+    "zh": "※当前为开发中功能。UI 与规格仍在调整，正式实装时可能变更。",
+    "ko": "※현재 개발 중인 기능입니다. UI 및 사양은 조정 중이며 실제 구현 시 변경될 수 있습니다.",
+    "vi": "※Tính năng đang phát triển. UI và thông số đang được điều chỉnh, có thể thay đổi khi triển khai chính thức."
   },
   "enbuTeaserBody": {
-    "ja": "技の連なりを律として刻み、回しごとの期待 DPS を測る。武術の係数表と共に近日開帳。",
-    "en": "Etch your skill sequence as a cadence and measure expected DPS per rotation. Coming soon, alongside the martial arts coefficient table.",
-    "zh": "将技能连招刻为律动，测算每轮回转的期望DPS。与武术系数表一同近日公开。",
-    "ko": "스킬 연계를 율로 새기고 회전당 기대 DPS를 측정합니다. 무술 계수표와 함께 곧 공개 예정입니다.",
-    "vi": "Khắc chuỗi kỹ năng thành luật và đo DPS kỳ vọng mỗi vòng xoay. Sắp ra mắt cùng bảng hệ số võ học."
+    "ja": "技の連なりを律として刻み、DPS期待値を算出。\n武術の係数表と共に近日開帳。",
+    "en": "Etch your skill sequence as a cadence and calculate expected DPS.\nComing soon, alongside the martial arts coefficient table.",
+    "zh": "将技能连招刻为律动，算出 DPS 期望值。\n与武术系数表一同近日公开。",
+    "ko": "스킬 연계를 율로 새기고 DPS 기댓값을 산출합니다.\n무술 계수표와 함께 곧 공개 예정입니다.",
+    "vi": "Khắc chuỗi kỹ năng thành luật và tính ra giá trị kỳ vọng DPS.\nSắp ra mắt cùng bảng hệ số võ học."
   },
   "qishuPlaceholder": {
     "ja": "整備中 — 奇術効果データの収載後、この区画に展開する。",

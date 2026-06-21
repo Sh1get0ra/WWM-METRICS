@@ -1134,21 +1134,94 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
 .wwm-teaser {
   position: relative;
   margin: 36px auto;
-  max-width: 620px;
-  background: var(--sumi-1);
+  max-width: 496px;
+  min-height: 372px;
+  background: var(--sumi-2);
   border: 1px solid var(--gold-deep);
   border-radius: 2px;
   color: var(--sumi-fg);
   text-align: center;
   padding: 46px 40px 42px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .wwm-teaser .kanji-mark { right: -20px; top: 50%; transform: translateY(-50%); font-size: 220px; color: rgba(232,215,180,0.05); }
 .wwm-teaser .mk { font-family: var(--f-display-title); font-size: 40px; font-weight: 700; color: var(--gold-bright); line-height: 1; }
-.wwm-teaser h3 { font-family: var(--f-display-title); font-weight: 700; font-size: 19px; letter-spacing: .2em; margin: 10px 0 8px; }
-.wwm-teaser p { font-size: 12.5px; color: var(--sumi-fg); max-width: 42ch; margin: 0 auto; }
+.wwm-teaser h3 {
+  font-family: var(--f-display-title);
+  font-weight: 900;
+  font-size: 44px;
+  letter-spacing: .24em;
+  margin: 10px 0 18px;
+  color: var(--gold-bright);
+  text-shadow:
+    0 0 18px rgba(201, 164, 90, 0.55),
+    0 0 4px rgba(240, 210, 138, 0.45),
+    0 2px 6px rgba(196, 58, 44, 0.35);
+  background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 50%, var(--gold-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.wwm-teaser p { font-size: 12.5px; color: var(--sumi-fg); max-width: 42ch; margin: 0 auto; white-space: pre-line; }
 .wwm-teaser .road { display: flex; justify-content: center; gap: 22px; margin-top: 22px; font-family: var(--f-latin); font-weight: 600; font-size: 11px; letter-spacing: .1em; color: var(--sumi-fg); }
 .wwm-teaser .road b { color: var(--gold-bright); font-weight: 600; }
+.wwm-teaser .wwm-teaser-dev {
+  position: absolute;
+  right: 14px;
+  bottom: 10px;
+  z-index: 1;
+  font-size: 10px;
+  color: var(--sumi-fg-dim);
+  letter-spacing: 0.02em;
+  text-align: right;
+  line-height: 1.4;
+}
+
+/* Ko-fi 支援 block (戦律 teaser 下) */
+.wwm-enbu-kofi {
+  max-width: 496px;
+  margin: 16px auto 36px;
+  text-align: center;
+  padding: 18px 22px 20px;
+  background: var(--sumi-2);
+  border: 1px solid var(--gold-deep);
+  border-radius: 2px;
+}
+.wwm-enbu-kofi p {
+  font-size: 12.5px;
+  color: var(--sumi-fg);
+  margin: 0 0 12px;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+.wwm-enbu-kofi .wwm-kofi-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--vermilion);
+  color: #fff;
+  padding: 9px 22px;
+  border-radius: 3px;
+  text-decoration: none;
+  font-family: var(--f-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--vermilion-bright);
+  transition: background 0.15s, transform 0.1s;
+}
+.wwm-enbu-kofi .wwm-kofi-action:hover {
+  background: var(--vermilion-bright);
+  transform: translateY(-1px);
+}
+.wwm-enbu-kofi .wwm-kofi-action .ic {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
 
 /* footer 配置 — 既存 .wwm-footer の見た目は既存 CSS、紙面内の border-left 金罫 +
    紙背景 (main から移譲 — tabs 帯透過化のため main 全体背景は廃止) */
@@ -2057,6 +2130,46 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   .wwm-hist-pb-sub { margin-left: 0; flex-basis: 100%; }
   .wwm-hist-chips { gap: 6px; padding: 8px 0 10px; }
   .wwm-hist-range { margin-left: 0; flex-basis: 100%; }
+}
+
+/* ── 戦律 teaser 背景 carousel (2026-06-21、 兄貴 mock 画像化後 自動フェード切替) ── */
+.wwm-teaser { position: relative; overflow: hidden; }
+.wwm-teaser-carousel {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.wwm-teaser-slide {
+  position: absolute;
+  inset: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--sumi-0);
+  opacity: 0;
+  animation: wwmEnbuFade 12s infinite ease-in-out;
+}
+.wwm-teaser-slide:nth-child(1) { animation-delay: 0s; }
+.wwm-teaser-slide:nth-child(2) { animation-delay: 6s; }
+@keyframes wwmEnbuFade {
+  0%   { opacity: 0; }
+  5%   { opacity: 0.32; }
+  45%  { opacity: 0.32; }
+  50%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+/* 前景文字を carousel より上に */
+.wwm-teaser > .kanji-mark,
+.wwm-teaser > .mk,
+.wwm-teaser > h3,
+.wwm-teaser > p {
+  position: relative;
+  z-index: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wwm-teaser-slide { animation: none; opacity: 0.32; }
+  .wwm-teaser-slide:nth-child(2) { opacity: 0; }
 }
 
 } /* end @layer components */

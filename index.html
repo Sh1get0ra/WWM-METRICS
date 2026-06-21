@@ -67,8 +67,8 @@
 <link rel="stylesheet" href="assets/styles/xinfa.css?v=26">
 <link rel="stylesheet" href="assets/styles/anlz.css?v=59">
 <link rel="stylesheet" href="assets/styles/mobile.css?v=20">
-<link rel="stylesheet" href="assets/styles/workspace.css?v=372">
-<link rel="stylesheet" href="assets/styles/mobile-v2.css?v=88">
+<link rel="stylesheet" href="assets/styles/workspace.css?v=388">
+<link rel="stylesheet" href="assets/styles/mobile-v2.css?v=90">
 <link rel="stylesheet" href="assets/styles/modals.css?v=208">
 <link rel="stylesheet" href="assets/styles/responsive-globals.css?v=3">
 <link rel="stylesheet" href="assets/styles/obs.css?v=10">
@@ -808,14 +808,26 @@
         </script>
       </section>
 
-      <!-- IV 演武 (teaser) -->
+      <!-- IV 演武 (teaser 背景 carousel + サンプル画像化用 mock grid) -->
       <section class="wwm-ws-panel" id="wsEnbu" role="tabpanel">
         <div class="wwm-teaser">
-          <span class="kanji-mark" aria-hidden="true">律</span>
-          <div class="mk">律</div>
-          <h3 data-i18n="enbuTeaserTitle">秘伝 — 戦律</h3>
-          <p data-i18n="enbuTeaserBody">技の連なりを律として刻み、回しごとの期待 DPS を測る。武術の係数表と共に近日開帳。</p>
-          <div class="road"><span><b>一</b> 武術係数表</span><span><b>二</b> 戦律エディタ</span><span><b>三</b> 共有・画像化</span></div>
+          <!-- 背景 carousel = 2 image 自動フェード切替 (兄貴 mock 画像化後 自動表示) -->
+          <div class="wwm-teaser-carousel" aria-hidden="true">
+            <div class="wwm-teaser-slide" style="background-image: url('assets/images/enbu-rotation.png')"></div>
+            <div class="wwm-teaser-slide" style="background-image: url('assets/images/enbu-dps.png')"></div>
+          </div>
+          <h3 data-i18n="enbuTeaserTitle">戦律</h3>
+          <p data-i18n="enbuTeaserBody">技の連なりを律として刻み、DPS期待値を算出。
+武術の係数表と共に近日開帳。</p>
+          <span class="wwm-teaser-dev" data-i18n="enbuTeaserDev">※現在開発中の機能です。UIや仕様は調整中のため、実装時に変更される可能性があります。</span>
+        </div>
+        <div class="wwm-enbu-kofi">
+          <p data-i18n="enbuKofiBody">本ツールは個人開発です。
+機能開発・サーバー維持の応援は Ko-fi からよろしくお願いします。</p>
+          <a class="wwm-kofi-action" href="https://ko-fi.com/sh1getora" target="_blank" rel="noopener noreferrer" data-i18n-title="tipIconKofi" title="開発を応援する (Ko-fi)">
+            <svg class="ic" aria-hidden="true"><use href="assets/icons/kofi.svg#kofi"/></svg>
+            <span data-i18n="enbuKofiBtn">Ko-fi で応援</span>
+          </a>
         </div>
       </section>
 
