@@ -501,8 +501,8 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 .hero-wuxia { position: relative; }
 .hero-wuxia .ink-stroke {
   position: absolute;
-  left: 34px; top: 8px;
-  width: 520px; height: 120px;
+  left: -13px; top: 4px;
+  width: 460px; height: 120px;
   opacity: var(--c-ink-stroke-opacity);
   pointer-events: none;
   z-index: 0;
