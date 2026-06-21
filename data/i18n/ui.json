@@ -1616,6 +1616,20 @@
     "ko": "도구 사양 / 변경 이력",
     "vi": "Quy cách công cụ / Lịch sử cập nhật"
   },
+  "tipIconKofi": {
+    "ja": "開発を応援する (Ko-fi)",
+    "en": "Support development (Ko-fi)",
+    "zh": "支持开发 (Ko-fi)",
+    "ko": "개발 응원하기 (Ko-fi)",
+    "vi": "Ủng hộ phát triển (Ko-fi)"
+  },
+  "kofiBtn": {
+    "ja": "応援",
+    "en": "Support",
+    "zh": "支持",
+    "ko": "응원",
+    "vi": "Ủng hộ"
+  },
   "tipIconContact": {
     "ja": "お問い合わせ (X / Twitter)",
     "en": "Contact (X / Twitter)",

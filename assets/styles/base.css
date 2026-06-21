@@ -259,6 +259,13 @@ a.icon-btn { text-decoration: none; }
   background: var(--gold); color: var(--sumi-0); border-color: var(--gold);
   box-shadow: 0 0 16px color-mix(in oklab, var(--gold-bright) 40%, transparent);
 }
+.icon-btn.kofi-btn {
+  color: var(--vermilion-bright); border-color: var(--vermilion-deep);
+}
+.icon-btn.kofi-btn:hover {
+  background: var(--vermilion); color: var(--sumi-0); border-color: var(--vermilion);
+  box-shadow: 0 0 16px color-mix(in oklab, var(--vermilion-bright) 40%, transparent);
+}
 
 /* ─────────────────────────────────────────────────────────────────
    PRESET RAIL
