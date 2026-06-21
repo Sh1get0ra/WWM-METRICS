@@ -124,7 +124,6 @@
 /* sidebar 心法カードは 横1列 (4 心法 + 1 武庫 = 5列) で表示 */
 #wwmXinfaGrid {
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: var(--space-2); /* gear-grid と同 gap で col 寸法揃える (2026-06-22 兄貴指示の装備/心法 card 位置同期) */
   /* min-width 削除: 親 .wwm-app-body min-width:1010 で一元管理 (minmax(0,1fr) = 完全flex) */
 }
 
