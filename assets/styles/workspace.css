@@ -1674,12 +1674,12 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 .wwm-ws-paper .wwm-arsenal-slot .plank-icon-wrap img {
   width: 130%; height: 130%;
 }
-/* 武庫主題 (2026-06-22 兄貴指示): 心法 [筆致線] 武庫 の 3 段並び (心法と同 .pl 筆致背景 + grid 5 列目相当右端)
-   flex order 操作で 心法(0) → ::after 線(1) → 武庫(2) の順、 ::after flex:1 で線が伸びる */
+/* 武庫主題 (2026-06-22 兄貴指示): 心法 [短い線] 余白 武庫 の並び
+   ::after 線 = 固定長 (心法直後で stop) + 武庫 = margin-left:auto で右端 push */
 .wwm-ws-sec:has(.wwm-arsenal-title) { gap: 0; }
 .wwm-ws-sec:has(.wwm-arsenal-title) > .pl:first-child { order: 0; }
-.wwm-ws-sec:has(.wwm-arsenal-title)::after { order: 1; margin: 0 18px; }
-.wwm-ws-sec .wwm-arsenal-title { order: 2; }
+.wwm-ws-sec:has(.wwm-arsenal-title)::after { order: 1; flex: 0 0 120px; margin: 0 18px; }
+.wwm-ws-sec .wwm-arsenal-title { order: 2; margin-left: auto; }
 /* hover = 墨 → 朱 (vermilion 風) グラデ切替 (2026-06-14、 兄貴指示)。
    第3版: まだオレンジ → 更に朱寄り。 hue-rotate 340→325deg / saturate 5→4 で黄味抜き赤側へ。
    奇術も 復活 (2026-06-16 兄貴確認) — will-change: transform で composite layer 分離済 = jitter 解消後 */
