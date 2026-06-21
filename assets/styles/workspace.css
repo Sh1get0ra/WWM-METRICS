@@ -492,7 +492,7 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
    = gradient のみで金属表現、 影なし */
 /* 闘率 svg = 武格指数 同金色表現 + height 2.25em (2026-06-22 兄貴指示) */
 .hero-wuxia .luopan-center-label .kaisho-svg {
-  height: 2.25em;
+  height: 2em;
 }
 .hero-wuxia .seat-sub .eyebrow .seat-title { font-size: 12px; }
 .hero-wuxia .seat-main .eyebrow .seat-en { font-size: 14px; letter-spacing: .28em; }
