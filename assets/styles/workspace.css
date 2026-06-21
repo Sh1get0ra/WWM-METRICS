@@ -1383,6 +1383,13 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
     min-width: 0;
   }
   /* タブレット clamp 帯 = 601-799px に縮約済 (2026-06-22)、 ≥800px は PC base 値固定 = ここで再宣言不要 */
+  /* donut size = hero.css base 160px 復帰 (workspace v2 大改修で 120px 縮小していた、 2026-06-22 兄貴指示 main 同等化) */
+  .hero-wuxia .h-id .luopan {
+    width: 160px;
+    height: 160px;
+    flex: 0 0 160px;
+  }
+  .hero-wuxia .h-id .luopan-center-label { font-size: 30px; }
 }
 
 /* MOBILE = mobile-v2.css (body.mobile-mode 独立 selector) へ全面移管 (2026-06-19、 [[mobile-css-isolation-policy]])
