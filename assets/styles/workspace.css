@@ -1383,13 +1383,6 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
   .hero-wuxia .wwm-hero-bd-pop {
     min-width: 0;
   }
-  /* タブレット帯 (601-930) clamp 縮小を inline mode で打消し → luopan 120px 固定 (兄貴指示 2026-06-22) */
-  .hero-wuxia .h-id .luopan {
-    width: 120px;
-    height: 120px;
-    flex: 0 0 120px;
-  }
-  .hero-wuxia .h-id .luopan-center-label { font-size: 17px; }
 }
 
 /* MOBILE = mobile-v2.css (body.mobile-mode 独立 selector) へ全面移管 (2026-06-19、 [[mobile-css-isolation-policy]])
