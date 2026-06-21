@@ -49,7 +49,7 @@ const LITERALS = {
   brandV3: '計',
   railKanji: '斬', // rail 頭 ステータス panel 透かし (.kanji-mark)
   heroKanji: '侠', // hero panel 右端 透かし (.hero-wuxia .kanji-mark)
-  donutDmgCenter: '勁率', // luopan 中心 label (2026-06-22 兄貴指示で玉ねぎ化、 ttf 字形あり)
+  donutDmgCenter: '闘率', // luopan 中心 label (2026-06-22 兄貴指示で玉ねぎ化、 旧「勁率」 は「勁」 path 空グリフで✗ → 闘率に変更)
 };
 
 if (!fs.existsSync(FONT_PATH)) {
