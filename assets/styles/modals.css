@@ -3104,8 +3104,11 @@
 .wwm-tool-modal {
   position: relative;
   isolation: isolate;
-  /* 地 = 墨単色のみ、 mountain image は header/footer 個別 lay 化 (2026-06-20 兄貴指摘で構造対称化、 cmp-modal-a と同方針) */
-  background: var(--sumi-3);
+  /* header → tabs 連続 1 枚水墨用 modal 全体 base mountain image。 body は wwm-ws-paper 紙地で覆われる、 footer は独立 mountain (center bottom = 山道) で上書き
+     2026-06-21 兄貴指摘で header と tabs の絵が繋がってないと NG → modal base 化で連続化 */
+  background:
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
+    var(--sumi-3);
   border: 1px solid var(--gold-deep);
   border-radius: 0 0 2px 2px;
   padding: 0;
@@ -3127,11 +3130,8 @@
 /* header = 黒 overlay 0.58 (2026-06-19 兄貴決定値、 対照 modal と統一)
    modal 本体水墨を黒越しに抑え気味で透かす。 tabs は薄黒 #0000004f で連続感 */
 .wwm-tool-modal .wwm-modal-header {
-  /* mountain image 個別 lay (山頂 center top) + #00000094 overlay 重ね (2026-06-20 兄貴指摘で構造対称化、 cmp-modal-a header と同方針) */
-  background:
-    var(--bg-modal-overlay),
-    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
-    var(--sumi-3);
+  /* overlay のみ (mountain image は .wwm-tool-modal modal base から透過、 header→tabs 連続表示) */
+  background: var(--bg-modal-overlay);
   border-bottom: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
   padding: var(--space-3) var(--space-4) var(--space-2-5);
 }
@@ -3223,12 +3223,9 @@
    で header との僅か差別化を付ける (連続感は保つ) */
 .wwm-tool-tabs {
   display: flex; gap: 2px; padding: 0 var(--space-4);
-  /* header と同 mountain image 個別 lay で連続水墨感 (2026-06-21 兄貴指摘で構造対称化、 modal-header と同方針)
-     overlay = linear-gradient で書く (color literal は background shorthand 多 layer 構文エラーで rule 全消失) */
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.31), rgba(0, 0, 0, 0.31)),
-    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
-    var(--sumi-3);
+  /* overlay のみ (mountain image は .wwm-tool-modal modal base から透過、 header と完全連続 1 枚水墨)
+     overlay = 0.31 で header (0.58) より薄く、 連続感保ちつつ僅か差別化 */
+  background: linear-gradient(rgba(0, 0, 0, 0.31), rgba(0, 0, 0, 0.31));
   border-bottom: 1px solid var(--gold-deep);
 }
 .wwm-tool-tab {
