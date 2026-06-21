@@ -3223,7 +3223,12 @@
    で header との僅か差別化を付ける (連続感は保つ) */
 .wwm-tool-tabs {
   display: flex; gap: 2px; padding: 0 var(--space-4);
-  background: #0000004f;
+  /* header と同 mountain image 個別 lay で連続水墨感 (2026-06-21 兄貴指摘で構造対称化、 modal-header と同方針)
+     旧 #0000004f 単色 = mountain layer 漏れで真黒化バグ */
+  background:
+    #0000004f,
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
+    var(--sumi-3);
   border-bottom: 1px solid var(--gold-deep);
 }
 .wwm-tool-tab {
