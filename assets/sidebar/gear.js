@@ -123,71 +123,46 @@
     return base + _set4Bonus(roleInfo);
   }
 
-  // 装備カード Score = 純装備寄与 (suffix 全抜き LOO) + セット配賦 (suffix 別 N 均等)
-  // D2 設計 (2026-06-21): セット効果を装備本体寄与から分離 → 同 suffix 重複加算 解消 + 弓+射決 救済
-  // baseScore (武格指数) = 完全不変 (stats.js / calc.js 触らず、 表示計算のみ改修)
-  // 4 点 +100 = suffix 別寄与 (baseWithSet - noSfx) に自動含有 → 統合で別管理不要
-  // 引数 set4Map = 後方互換 keep (内部未使用)
+  // 装備カード Score = pure LOO marginal (set 補正撤去版)
+  // カード表示は 武備指数 (= marginal LOO 生値、 シナジー波及込み)
   async function _computeSlotContributions(roleInfo, slots, suffixSlots, set4Map) {
     if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return null;
     const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
-    // 0. baseWithSet (セット込み = 武格指数経路)
-    let baseWithSet = 0;
+    let baseScore = 0;
     try {
-      const p = await window.WWMStats.buildStatParams(roleInfo, state);
-      window.computeExpected(p);
-      baseWithSet = _scoreWithBonus(roleInfo);
+      const baseParams = await window.WWMStats.buildStatParams(roleInfo, state);
+      window.computeExpected(baseParams);
+      baseScore = _scoreWithBonus(roleInfo);
     } catch (e) { return null; }
-    // 1. 純装備寄与 = suffix 全抜き状態での独立 LOO
-    const riNoSet = JSON.parse(JSON.stringify(roleInfo));
-    for (const eq of Object.values(riNoSet.wearEquipsDetailed || {})) {
-      if (eq?.exVo && eq.exVo.suffix !== undefined) delete eq.exVo.suffix;
-    }
-    let baseNoSet = 0;
-    try {
-      const p = await window.WWMStats.buildStatParams(riNoSet, state);
-      window.computeExpected(p);
-      baseNoSet = _scoreWithBonus(riNoSet);
-    } catch (e) { return null; }
-    const pureContrib = {};
+    const result = {};
+    const bowPair = ['21', '9'];
+    const hasBowMember = slots.some(s => bowPair.includes(s));
     for (const slot of slots) {
       try {
-        const ri = JSON.parse(JSON.stringify(riNoSet));
+        if (hasBowMember && bowPair.includes(slot)) continue;
+        const ri = JSON.parse(JSON.stringify(roleInfo));
         delete ri.wearEquipsDetailed[slot];
         const p = await window.WWMStats.buildStatParams(ri, state);
         window.computeExpected(p);
         const noSlot = _scoreWithBonus(ri);
-        pureContrib[slot] = baseNoSet - noSlot;
-      } catch (e) { pureContrib[slot] = 0; }
+        result[slot] = Math.round(baseScore - noSlot);
+      } catch (e) { result[slot] = 0; }
     }
-    // 2. セット配賦 = suffix 別寄与を該当 slot 数 N で均等
-    const setAlloc = {};
-    for (const [sfx, members] of Object.entries(suffixSlots || {})) {
-      if (!members?.length) continue;
+    // 弓ペア = pair 同時抜き half 配分
+    if (hasBowMember) {
       try {
         const ri = JSON.parse(JSON.stringify(roleInfo));
-        for (const s of members) {
-          if (ri.wearEquipsDetailed?.[s]?.exVo) delete ri.wearEquipsDetailed[s].exVo.suffix;
-        }
+        for (const ps of bowPair) delete ri.wearEquipsDetailed[ps];
         const p = await window.WWMStats.buildStatParams(ri, state);
         window.computeExpected(p);
-        const noSfxScore = _scoreWithBonus(ri);
-        const setBonus = baseWithSet - noSfxScore;
-        const share = setBonus / members.length;
-        for (const s of members) setAlloc[s] = (setAlloc[s] || 0) + share;
-      } catch (e) { /* skip */ }
+        const noPair = _scoreWithBonus(ri);
+        const pairLoo = baseScore - noPair;
+        const half = Math.round(pairLoo / 2);
+        for (const ps of bowPair) {
+          if (slots.includes(ps)) result[ps] = half;
+        }
+      } catch (e) { for (const ps of bowPair) { if (slots.includes(ps)) result[ps] = 0; } }
     }
-    // 3. 合算 + 副作用契約 復元 (caller の DOM 状態整合)
-    const result = {};
-    for (const slot of slots) {
-      const pure = pureContrib[slot] || 0;
-      const alloc = setAlloc[slot] || 0;
-      result[slot] = Math.round(pure + alloc);
-    }
-    try {
-      const finalP = await window.WWMStats.buildStatParams(roleInfo, state);
-      window.computeExpected(finalP);
-    } catch (e) {}
     return result;
   }
 
