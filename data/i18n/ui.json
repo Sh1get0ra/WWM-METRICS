@@ -2299,6 +2299,27 @@
     "ko": "프리셋",
     "vi": "PRESETS"
   },
+  "tutorialCh2Step3BodyMobile": {
+    "ja": "アイコンクリックで写真を撮影、もしくは撮影済の画像を選択してください。<br>調律/定音の内容を自動取込します。",
+    "en": "Tap the icon to take a photo or pick an existing image — tunings / engravings will be auto-extracted.",
+    "zh": "点击图标拍照或选择已有图片 — 调律/定音内容会自动提取。",
+    "ko": "아이콘을 눌러 사진을 촬영하거나 기존 이미지를 선택하세요 — 조율/정음 내용이 자동 추출됩니다.",
+    "vi": "Nhấn biểu tượng để chụp ảnh hoặc chọn ảnh có sẵn — nội dung điều luật / định âm sẽ được tự động trích xuất."
+  },
+  "tutorialChOcrGuideTitle": {
+    "ja": "画像取込指南",
+    "en": "OCR Guide",
+    "zh": "图像取入指南",
+    "ko": "이미지 가져오기 안내",
+    "vi": "Hướng dẫn nhập ảnh"
+  },
+  "tutorialChOcrGuideBody": {
+    "ja": "実際の撮影例とステップ手順を確認できます。<br>装備詳細画面 (値が右端に並ぶ画面) を撮影するのがコツです。",
+    "en": "View real screenshot examples and step-by-step instructions.<br>Tip: capture the gear detail screen (values aligned on the right).",
+    "zh": "可查看实际撮影示例与步骤说明。<br>诀窍：撮影装备详情画面（数值在右端排列）。",
+    "ko": "실제 촬영 예시와 단계별 안내를 확인할 수 있습니다.<br>요령: 장비 상세 화면(값이 오른쪽 끝에 정렬된 화면)을 촬영하세요.",
+    "vi": "Xem ví dụ chụp ảnh thực tế và hướng dẫn từng bước.<br>Mẹo: chụp màn hình chi tiết trang bị (giá trị nằm bên phải)."
+  },
   "tutorialChPresetBody": {
     "ja": "現在の状態 (装備・心法・調律/定音 等) を 3 つまで保存できるプリセット機能です。<br>装備パターンを試したい時の保存場所として活用してください。",
     "en": "Save up to 3 snapshots of your current state (gear, Inner Way, tunings / engravings, etc.).<br>Use as a stash for gear-pattern experiments.",

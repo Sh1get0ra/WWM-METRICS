@@ -77,12 +77,24 @@
       }
     } catch (_) {}
   }
-  // ステ rail 強制 open (閉じてるユーザー対策)
+  // ステ rail 強制 open (閉じてるユーザー対策)。 PC = setRail(false)、 mobile = data-rail-mobile="open"
   function _ensureRailOpen() {
     try {
       if (window.WWMWorkspace && typeof window.WWMWorkspace.setRail === 'function') {
         window.WWMWorkspace.setRail(false);
       }
+      if (document.body.classList.contains('mobile-mode')) {
+        const app = document.getElementById('wwmApp');
+        if (app) app.dataset.railMobile = 'open';
+      }
+    } catch (_) {}
+  }
+  // mobile rail 閉じる (ステ step 通過後、 後続 step の表示妨害回避)
+  function _closeRailIfMobile() {
+    try {
+      if (!document.body.classList.contains('mobile-mode')) return;
+      const app = document.getElementById('wwmApp');
+      if (app && app.dataset.railMobile === 'open') delete app.dataset.railMobile;
     } catch (_) {}
   }
   function _firstGearSlot() {
@@ -131,6 +143,11 @@
     const firstSlotSel = (firstSlotEl && firstSlotEl.dataset && firstSlotEl.dataset.slot)
       ? `.wwm-equip-slot[data-slot="${firstSlotEl.dataset.slot}"]`
       : '#wsBuild';
+    // mobile/PC で selector 差替 (mobile = bottom-nav / mobile chip-bar の別 element)
+    const isMobile = document.body.classList.contains('mobile-mode');
+    const anlzSel   = isMobile ? '.wwm-bottom-nav .wwm-bn[data-anlz-popout-trigger]' : '#wwmAnlzPopoutBtn';
+    const resetSel  = isMobile ? '.wwm-mobile-chip[aria-label="RESET"]' : '#wwmVirtResetBtn';
+    const presetSel = isMobile ? '#wwmMobileChipPreset' : '#wwmPresetChip';
 
     // ── Ch.1 武格指数 (2 step) ──
     steps.push({
@@ -178,7 +195,7 @@
         side: 'top',
         align: 'center'
       },
-      onHighlightStarted: () => _scrollAllToTop(),
+      onHighlightStarted: () => { _closeRailIfMobile(); _scrollAllToTop(); },
       onHighlighted: () => _scrollAllToTop()
     });
 
@@ -223,9 +240,47 @@
       element: '#wwmCmpOcrBtn',
       popover: {
         title: _t('tutorialCh2Step3Title', 'OCR'),
-        description: _t('tutorialCh2Step3Body', 'ゲーム画面のスクリーンショットをドロップ or 選択すると、affix 数値を自動取込します。<br>手動入力の手間を省けます。'),
+        description: isMobile
+          ? _t('tutorialCh2Step3BodyMobile', 'アイコンクリックで写真を撮影、もしくは撮影済の画像を選択してください。<br>調律/定音の内容を自動取込します。')
+          : _t('tutorialCh2Step3Body', 'ゲーム画面のスクリーンショットをドロップorCtrl+Vでの貼付、もしくはこちらのアイコンをクリックして選択すると、調律/定音の内容を自動取込します。手動入力の手間を省けますので、ご活用ください。'),
         side: 'top',
-        align: 'center'
+        align: 'center',
+        onNextClick: () => {
+          // OCR help button click → wwm-ocr-guide modal open → 新 driver で OCR 指南 step へ
+          const helpBtn = document.querySelector('#wwmCmpOcrHelpBtn');
+          if (helpBtn) {
+            _resumeIntent = true;
+            const cur = driverRef();
+            if (cur && typeof cur.destroy === 'function') cur.destroy();
+            setTimeout(() => {
+              try { helpBtn.click(); } catch (_) {}
+              setTimeout(() => _resumeFromIndex(7), 350);
+            }, 100);
+          } else {
+            driverRef().moveNext();
+          }
+        }
+      }
+    });
+
+    // ── Ch.OCR 指南 (新規 step、 wwm-ocr-guide modal 内) ──
+    steps.push({
+      element: '.wwm-ocr-guide',
+      popover: {
+        title: _t('tutorialChOcrGuideTitle', '画像取込指南'),
+        description: _t('tutorialChOcrGuideBody', '実際の撮影例とステップ手順を確認できます。<br>装備詳細画面 (値が右端に並ぶ画面) を撮影するのがコツです。'),
+        side: 'left',
+        align: 'center',
+        onNextClick: () => {
+          // ocr guide modal close → 元の 武具対照 modal に戻る → Ch.同級承音 へ
+          _resumeIntent = true;
+          const guide = document.querySelector('.wwm-ocr-guide');
+          const guideBd = guide?.closest('.wwm-modal-backdrop');
+          const cur = driverRef();
+          if (cur && typeof cur.destroy === 'function') cur.destroy();
+          if (guideBd) guideBd.remove();
+          setTimeout(() => _resumeFromIndex(8), 200);
+        }
       }
     });
 
@@ -244,7 +299,7 @@
           const cur = driverRef();
           if (cur && typeof cur.destroy === 'function') cur.destroy();
           if (backdrop) backdrop.remove();
-          setTimeout(() => _resumeFromIndex(8), 200);
+          setTimeout(() => _resumeFromIndex(9), 200);
         }
       }
     });
@@ -252,7 +307,7 @@
     // ── Ch.3 格析 popout (1 step) ──
     // popout 起動「前」 に説明 = popout 後は DOM detach で driver.js が target 失う ([[document-pip-implementation-traps]])
     steps.push({
-      element: '#wwmAnlzPopoutBtn',
+      element: anlzSel,
       popover: {
         title: _t('tutorialCh3Step1Title', '格析'),
         description: _t('tutorialCh3Step1Body', '格析 button から別 window で「期待値」「装備最適化」 2 tab を確認できます。<br>主画面で装備を弄りながら格析を別 window で常時表示する使い方が便利です。'),
@@ -265,7 +320,7 @@
 
     // ── Ch.操作 (リセット + プリセット 2 step) ──
     steps.push({
-      element: '#wwmVirtResetBtn',
+      element: resetSel,
       popover: {
         title: _t('tutorialChResetTitle', 'リセット'),
         description: _t('tutorialChResetBody', '新装備/心法 として弄った内容を全て現装備値に戻すボタンです。<br>装備変更前の状態に戻したい時に使用してください。'),
@@ -277,7 +332,7 @@
     });
 
     steps.push({
-      element: '#wwmPresetChip',
+      element: presetSel,
       popover: {
         title: _t('tutorialChPresetTitle', 'プリセット'),
         description: _t('tutorialChPresetBody', '現在の状態 (装備・心法・調律/定音 等) を 3 つまで保存できるプリセット機能です。<br>装備パターンを試したい時の保存場所として活用してください。'),
