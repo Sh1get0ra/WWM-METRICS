@@ -537,6 +537,7 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 .hero-wuxia .seat-main .hb-num .hero-tier.tier-badge {
   align-self: center;
   margin: 0 0 0 14px;
+  font-size: 24px;
 }
 .hero-wuxia .hb-note {
   margin-top: 6px; font-family: var(--f-latin); font-weight: 600; font-size: 9px;
