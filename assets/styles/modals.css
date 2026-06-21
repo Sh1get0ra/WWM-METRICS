@@ -3224,9 +3224,9 @@
 .wwm-tool-tabs {
   display: flex; gap: 2px; padding: 0 var(--space-4);
   /* header と同 mountain image 個別 lay で連続水墨感 (2026-06-21 兄貴指摘で構造対称化、 modal-header と同方針)
-     旧 #0000004f 単色 = mountain layer 漏れで真黒化バグ */
+     overlay = linear-gradient で書く (color literal は background shorthand 多 layer 構文エラーで rule 全消失) */
   background:
-    #0000004f,
+    linear-gradient(rgba(0, 0, 0, 0.31), rgba(0, 0, 0, 0.31)),
     url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
     var(--sumi-3);
   border-bottom: 1px solid var(--gold-deep);
