@@ -1353,6 +1353,26 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
   transform: rotate(45deg);
 }
 
+/* 広 viewport (>= 800px) では donut 右隣に常時 inline 表示 (2026-06-22 兄貴指示)
+   - hero.js が isInlineMode() で popup logic を skip = inline style 設定なし → !important 不要
+   - popup の position:fixed / display:none / transform / opacity を CSS で打消し
+   - ▲矢印は inline 化で不要 = hide */
+@media (min-width: 800px) {
+  .hero-wuxia .wwm-hero-bd-pop {
+    display: flex;
+    position: static;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    z-index: auto;
+    background: transparent;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+  }
+  .hero-wuxia .wwm-hero-bd-pop::before { display: none; }
+}
+
 /* MOBILE = mobile-v2.css (body.mobile-mode 独立 selector) へ全面移管 (2026-06-19、 [[mobile-css-isolation-policy]])
    workspace.css mobile @media (旧 266 行) は撤去、 PC 修正で mobile 波及するバグを構造的排除。
    PC base = bnav 非表示 + rail-backdrop 非表示 (DOM 残置時の保険) のみ keep */

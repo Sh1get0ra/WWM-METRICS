@@ -206,7 +206,10 @@
 
     function isOpen() { return pop.classList.contains('is-open'); }
     function isMobile() { return window.matchMedia('(max-width: 600px)').matches; }
+    // >=800px = 常時 inline 表示 = popup logic 全 skip (2026-06-22 兄貴指示)
+    function isInlineMode() { return window.matchMedia('(min-width: 800px)').matches; }
     function positionPop() {
+      if (isInlineMode()) return;
       if (isMobile()) {
         // mobile: hero 直下中央寄せ (2026-06-21 兄貴指示、 旧 画面中央 → hero 直下)
         const hr = (document.getElementById('heroRoot') || trigger).getBoundingClientRect();
@@ -225,17 +228,19 @@
       pop.style.transform = '';
     }
     function open() {
+      if (isInlineMode()) return;
       positionPop();
       pop.classList.add('is-open');
       trigger.setAttribute('aria-expanded', 'true');
       pop.setAttribute('aria-hidden', 'false');
     }
     function close() {
+      if (isInlineMode()) return;
       pop.classList.remove('is-open');
       trigger.setAttribute('aria-expanded', 'false');
       pop.setAttribute('aria-hidden', 'true');
     }
-    function toggle(ev) { ev.stopPropagation(); isOpen() ? close() : open(); }
+    function toggle(ev) { if (isInlineMode()) return; ev.stopPropagation(); isOpen() ? close() : open(); }
 
     trigger.addEventListener('click', toggle);
     trigger.addEventListener('keydown', (ev) => {
