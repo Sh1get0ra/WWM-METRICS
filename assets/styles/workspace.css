@@ -536,7 +536,7 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
    hero.css base (18px/margin-top 12 align-self:flex-start) を score 内 inline 文脈用に上書き */
 .hero-wuxia .seat-main .hb-num .hero-tier.tier-badge {
   align-self: center;
-  margin: -20px 0 0 14px;
+  margin: -6px 0 0 14px;
   font-size: 24px;
 }
 .hero-wuxia .hb-note {
