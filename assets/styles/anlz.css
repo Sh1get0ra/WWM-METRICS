@@ -936,9 +936,14 @@ body[data-anlz-popout="1"] #wsAnlz .wwm-anlz-gap { display: none; }
 }
 .wwm-anlz-floating-subheader .anlz-subtab:hover { color: var(--gold-bright); }
 .wwm-anlz-floating-subheader .anlz-subtab.active {
-  color: var(--gold-bright);
-  border-bottom-color: var(--gold-bright);
-  background: rgba(212, 184, 118, 0.08);
+  /* SHARE modal `.wwm-tool-tab.active` と同表現 (2026-06-22 兄貴指定): 紙差し込み演出 */
+  background: var(--kami-0);
+  color: var(--kami-fg);
+  border: 1px solid var(--gold-deep);
+  border-bottom: none;
+  border-radius: 2px 2px 0 0;
+  position: relative;
+  top: 1px;
 }
 
 .wwm-anlz-floating-body {
