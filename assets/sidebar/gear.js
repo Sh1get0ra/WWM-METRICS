@@ -173,19 +173,19 @@
         for (const s of members) alloc[s] = (alloc[s] || 0) + share;
         // leak = s 抜きで消える effect 寄与 (N 別条件分岐)
         if (N === 2) {
-          // s 抜きで N→1 = 2 点 effect 消滅 → LOO[s] に setEffectTotal_full 全寄与
+          // s 抜きで N→1 = 2 点 effect 消滅 (4 点なし) → LOO[s] に setEffectTotal 全寄与 (= 2 点 effect 単独)
           for (const s of members) leak[s] = (leak[s] || 0) + setEffectTotal;
         } else if (N === 3) {
           // s 抜きで N→2 = 2 点 effect 残存 → LOO[s] に effect 寄与なし → leak 0
         } else if (N === 4) {
-          // s 抜きで N→3 = 4 点 effect のみ消滅 → LOO[s] に 4 点 effect 全寄与
-          // 4 点 effect 寄与 = baseWithSet - score(1 個 suffix 削除で 3 揃え状態)
+          // s 抜きで N→3 = 4 点 +100 bonus のみ消滅 (2 点 effect は N=3 で残存 = LOO 差なし)
+          // fourPcsBonus = baseWithSet - score(1 個 suffix 削除で 3 揃え状態) = 4 点 +100 単独寄与
           const no1Sfx = await _score(ri => {
             const one = members[0];
             if (ri.wearEquipsDetailed?.[one]?.exVo) delete ri.wearEquipsDetailed[one].exVo.suffix;
           });
-          const fourPcsEffect = baseWithSet - no1Sfx;
-          for (const s of members) leak[s] = (leak[s] || 0) + fourPcsEffect;
+          const fourPcsBonus = baseWithSet - no1Sfx;
+          for (const s of members) leak[s] = (leak[s] || 0) + fourPcsBonus;
         }
       } catch (e) { /* skip */ }
     }
