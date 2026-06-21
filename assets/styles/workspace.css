@@ -1249,12 +1249,13 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
    削除 → 兄貴指摘「900 境界で workspace 形変わる」 真因 = この反対方向の padding ジャンプ。
    default rule に clamp 化で 1100-900 帯 連続変化、 境界 step 解消 (2026-06-19) */
 
-/* ============ TABLET COMPACT (601-799) — clamp 連続縮小 (2026-06-19 兄貴指示 → 2026-06-22 上端 930→799 縮約)
-   ≥800px = inline mode (勁率内訳 常時表示) で hero 伸縮不要 (兄貴指示 2026-06-22) → PC base 値固定
-   元設計 = 601-930 でタブレット portrait 全機種 (iPad mini 744 / iPad 820 等) と PC 狭幅 一本化、
-   現 = 800-930 帯のタブレット portrait も PC 値で固定表示 (兄貴判断、 inline mode 優先)
-   mobile (≤600) = 直下 @media block 値 (score 54px / seat-title 18px / luopan 56px 等) に着地 */
-@media (min-width: 601px) and (max-width: 799px) {
+/* ============ TABLET COMPACT (601-930) — clamp 連続縮小 (2026-06-19 兄貴指示)
+   PC (≥931) = 上部 .hero-wuxia rule 値 (score 82px / seat-title 30px / luopan 120px 等)、 タブレット portrait 全機種
+   (iPad mini 744 / iPad 820 / iPad Pro 11" 834 / Surface Pro 912) と PC 狭幅をカバー。
+   mobile (≤600) = 直下 @media block 値 (score 54px / seat-title 18px / luopan 56px 等) に着地。
+   linear interpolation = vp 連動で滑らか縮小、 段階 @media なしの一本化。
+   既存 @media (max-width: 900px) avatar/luopan 中間値は clamp に置換 (後出し cascade 勝ち) */
+@media (min-width: 601px) and (max-width: 930px) {
   .hero-wuxia .seat-main .eyebrow .seat-title { font-size: clamp(18px, calc(3.65vw - 3.93px), 30px); }
   .hero-wuxia .seat-main .eyebrow .seat-en { font-size: clamp(9px, calc(1.52vw - 0.13px), 14px); }
   .hero-wuxia .seat-main .hb-num { font-size: clamp(54px, calc(8.51vw + 2.84px), 82px); }
@@ -1382,7 +1383,13 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
   .hero-wuxia .wwm-hero-bd-pop {
     min-width: 0;
   }
-  /* タブレット clamp 帯 = 601-799px に縮約済 (2026-06-22)、 ≥800px は PC base 値固定 = ここで再宣言不要 */
+  /* タブレット帯 (601-930) clamp 縮小を inline mode で打消し → luopan 120px 固定 (兄貴指示 2026-06-22) */
+  .hero-wuxia .h-id .luopan {
+    width: 120px;
+    height: 120px;
+    flex: 0 0 120px;
+  }
+  .hero-wuxia .h-id .luopan-center-label { font-size: 17px; }
 }
 
 /* MOBILE = mobile-v2.css (body.mobile-mode 独立 selector) へ全面移管 (2026-06-19、 [[mobile-css-isolation-policy]])
