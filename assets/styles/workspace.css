@@ -1674,6 +1674,21 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 .wwm-ws-paper .wwm-arsenal-slot .plank-icon-wrap img {
   width: 130%; height: 130%;
 }
+/* 武庫主題 (2026-06-22 兄貴指示): 心法枠内で武庫が分かりにくい問題解消、 card 上方に玉ねぎ題字 */
+.wwm-ws-paper .wwm-arsenal-slot .wwm-arsenal-title {
+  position: absolute;
+  top: -22px; left: 0; right: 0;
+  text-align: center;
+  font-family: var(--f-display-title);
+  font-size: 14px;
+  color: var(--gold-bright);
+  letter-spacing: 0.18em;
+  pointer-events: none;
+  z-index: 2;
+}
+.wwm-ws-paper .wwm-arsenal-slot .wwm-arsenal-title .kaisho-svg {
+  height: 1.5em;
+}
 /* hover = 墨 → 朱 (vermilion 風) グラデ切替 (2026-06-14、 兄貴指示)。
    第3版: まだオレンジ → 更に朱寄り。 hue-rotate 340→325deg / saturate 5→4 で黄味抜き赤側へ。
    奇術も 復活 (2026-06-16 兄貴確認) — will-change: transform で composite layer 分離済 = jitter 解消後 */

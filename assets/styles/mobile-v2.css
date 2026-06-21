@@ -130,6 +130,8 @@ body.mobile-mode .hero-wuxia .pname b { font-size: 9px; margin-left: 3px; }
 body.mobile-mode .hero-wuxia .seat-sub { display: none; }
 /* donut = mobile では hero 内 hide (tap popup 別実装 task) */
 body.mobile-mode .hero-wuxia .h-id .luopan { display: none; }
+/* 武庫主題 = mobile では装備パネルに武庫があるため hide (2026-06-22 兄貴指示) */
+body.mobile-mode .wwm-arsenal-title { display: none; }
 
 /* ============ hero eyebrow size 縮小 (PC default より軽量化) ============ */
 body.mobile-mode .hero-eyebrow { font-size: var(--text-xs); }

@@ -64,6 +64,7 @@
     const arsenalLiupaiSplat = arsenalLiupaiUrl ? `<img class="plank-liupai" src="${arsenalLiupaiUrl}" alt="" loading="lazy">` : '';
     const arsenalCard = `
       <div class="wwm-xinfa-slot wwm-arsenal-slot" data-arsenal-slot${arsenalLiupaiPinyin ? ` data-liupai-pinyin="${arsenalLiupaiPinyin}"` : ''} onclick="WWMSidebar.arsenal.openEdit()">
+        <div class="wwm-arsenal-title" data-kaisho="arsenalTitle" data-kaisho-fixed>武庫</div>
         <div class="plank-hole"></div>
         <div class="plank-stamp">庫</div>
         <div class="plank-paint"></div>
@@ -78,6 +79,8 @@
     _computeArsenalCardScore(roleInfo);
     // mobile pager 化 reflow = 自カテゴリのみ仕分け
     if (window.WWMSidebar?.mobileBuildPager) window.WWMSidebar.mobileBuildPager.reflow('xinfa');
+    // 武庫題字 (data-kaisho="arsenalTitle") SVG 化発火
+    if (window.WWMKaisho?.apply) window.WWMKaisho.apply();
   }
 
   // 武庫 LOO marginal (arsenal 抜きとの差)
