@@ -235,7 +235,7 @@
         el.setAttribute('role', 'img');
         // hero 題字のみ 金属金 gradient (兄貴指示 2026-06-15「ただの黄色 → 金属の金」)。
         // brand 縦書きや他 data-kaisho 要素は currentColor 継続 = 影響範囲限定
-        var isHeroGold = (key === 'heroSeatScore' || key === 'heroSeatDps');
+        var isHeroGold = (key === 'heroSeatScore' || key === 'heroSeatDps' || key === 'donutDmgCenter');
         var gradId = 'wwm-kaisho-gold-' + key;
         var defs = isHeroGold
           ? '<defs><linearGradient id="' + gradId + '" x1="0" y1="0" x2="0" y2="1">' +

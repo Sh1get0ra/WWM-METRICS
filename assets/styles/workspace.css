@@ -488,11 +488,16 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
    gradient (svg defs 側で 4-stop 縦) + drop-shadow 3 段で 締め黒 + 上 highlight + 下 lowlight。
    main / sub 両席 (武格指数 30px + 戦律指数 12px) 共通 = .seat-main scope 外し。
    金 glow は兄貴判定で削除 (2026-06-15) = 浮きすぎ → 彫刻金 のみ残す */
-.hero-wuxia .eyebrow .seat-title svg.kaisho-svg-gold {
+.hero-wuxia .eyebrow .seat-title svg.kaisho-svg-gold,
+.hero-wuxia .luopan-center-label svg.kaisho-svg-gold {
   filter:
     drop-shadow(0 1px 0 rgba(255, 244, 207, 0.55))    /* 上 highlight 風 */
     drop-shadow(0 -1px 0 rgba(94, 67, 16, 0.45))      /* 下 lowlight (彫り感) */
     drop-shadow(0 3px 5px rgba(0, 0, 0, 0.55));        /* 黒 締め */
+}
+/* 闘率 svg = 武格指数 同金色表現 + height 2.25em (2026-06-22 兄貴指示) */
+.hero-wuxia .luopan-center-label .kaisho-svg {
+  height: 2.25em;
 }
 .hero-wuxia .seat-sub .eyebrow .seat-title { font-size: 12px; }
 .hero-wuxia .seat-main .eyebrow .seat-en { font-size: 14px; letter-spacing: .28em; }
