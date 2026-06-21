@@ -535,7 +535,11 @@ document.addEventListener('DOMContentLoaded', init);
 (function initMobileMode() {
   var mq = window.matchMedia('(max-width: 600px)');
   function apply() {
-    var on = mq.matches;
+    // OBS view (?view=sidebar) 中は mobile-mode 強制 OFF — 配信側 600px 以下窓で
+    // mobile overlay (chip-bar / bnav / 装備ページャー) が出てしまう regression 抑止
+    // (2026-06-21 兄貴指摘で再発確認)
+    var isObs = document.documentElement.classList.contains('wwm-view-sidebar');
+    var on = mq.matches && !isObs;
     document.documentElement.classList.toggle('mobile-mode', on);
     if (document.body) document.body.classList.toggle('mobile-mode', on);
     // mobile 武備ページャー連動 (2026-06-20): mobile ↔ PC 切替で構造を自動再構築 / 復元
