@@ -473,8 +473,9 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 .hero-wuxia .seat-main { min-height: 132px; min-width: 400px; }
 /* sub も固定 = sub 配置で score (82.7px) ⇔ dps (37.9px) でサイズ違う = hero 縦変動。
    probe 実測 score sub = 93.7px → 94px 固定 (2026-06-15)。
-   min-width 175 = 武備時 170 ⇔ 戦律時 172 の幅変動 + sub.left -2px シフト抑制 (2026-06-16) */
-.hero-wuxia .seat-sub { min-height: 94px; min-width: 175px; }
+   min-width 175 = 武備時 170 ⇔ 戦律時 172 の幅変動 + sub.left -2px シフト抑制 (2026-06-16)。
+   max-width 175 = swap で sub 内 block 中身 (score 武格指数大字 = 185px に伸び ⇔ dps COMING SOON 175px) で width 変動 → 左 element shift バグ抑止 (2026-06-21 兄貴計測 confirmed) */
+.hero-wuxia .seat-sub { min-height: 94px; min-width: 175px; max-width: 175px; }
 .hero-wuxia .seat-main .eyebrow .seat-title {
   font-size: 30px;
   text-shadow: var(--c-hero-title-text-shadow);
