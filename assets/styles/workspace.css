@@ -1263,8 +1263,7 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
   .hero-wuxia .seat-main .hb-num { font-size: clamp(54px, calc(8.51vw + 2.84px), 82px); }
   .hero-wuxia .seat-main .hb-num .unit { font-size: clamp(14px, calc(1.82vw + 3.06px), 20px); }
   .hero-wuxia .pwr .hero-tier.tier-badge { font-size: clamp(12px, calc(0.61vw + 8.34px), 14px); }
-  .hero-wuxia .hero-next-val { font-size: clamp(22px, calc(6.69vw - 18.21px), 44px); }
-  .hero-wuxia .hero-next-arrow { font-size: clamp(12px, calc(1.82vw + 1.06px), 18px); }
+  /* NEXT val/arrow = base (26/12) 固定 (2026-06-22 兄貴指示「十分小さいので変動なし」)、 旧 clamp 撤去 */
   .hero-wuxia .avatar {
     width: clamp(78px, calc(13.98vw - 6.04px), 124px);
     height: clamp(74px, calc(13.37vw - 6.36px), 118px);
