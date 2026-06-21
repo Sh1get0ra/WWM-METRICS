@@ -152,8 +152,13 @@ function _loadSavedLang() {
       return;
     }
     const saved = WWMHelpers.storage.loadStr('wwm_lang');
-    if (saved && ['ja','en','zh','ko','vi'].includes(saved) && saved !== 'ja') setLang(saved);
-    else if (!saved) _showLangPicker();
+    if (saved && ['ja','en','zh','ko','vi'].includes(saved)) {
+      if (saved !== 'ja') setLang(saved);
+      // 言語選択済だが import hint 未 dismiss = 初回 picker click 後 hint 見る前に reload 等 = 次回起動で復活
+      if (!WWMHelpers.storage.loadStr('wwm_import_hinted')) {
+        setTimeout(_showImportHint, 250);
+      }
+    } else if (!saved) _showLangPicker();
   } catch(e) {}
 }
 function _showLangPicker() {
