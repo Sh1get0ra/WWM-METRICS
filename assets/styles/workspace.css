@@ -1268,12 +1268,8 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
     height: clamp(74px, calc(13.37vw - 6.36px), 118px);
     flex: 0 0 clamp(78px, calc(13.98vw - 6.04px), 124px);
   }
-  .hero-wuxia .h-id .luopan {
-    width: clamp(56px, calc(19.45vw - 60.91px), 120px);
-    height: clamp(56px, calc(19.45vw - 60.91px), 120px);
-    flex: 0 0 clamp(56px, calc(19.45vw - 60.91px), 120px);
-  }
-  .hero-wuxia .h-id .luopan-center-label { font-size: clamp(8px, calc(2.74vw - 8.43px), 17px); }
+  /* luopan は 120px 固定 (2026-06-22 兄貴指示「大きさ動かさない」)、 旧 clamp 縮小撤去 = PC base 120 効く
+     mobile (≤600) は mobile-v2.css で display:none = size 影響なし */
   /* .h-id 内 identity 全体 = 兄貴指示 2026-06-19 (avatar/donut だけだと kirei に収まらない) */
   .hero-wuxia .h-id-info { min-width: clamp(0px, calc(51.67vw - 310.55px), 170px); }
   .hero-wuxia .pname { font-size: clamp(14px, calc(0.91vw + 8.52px), 17px); }
