@@ -559,10 +559,10 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
   min-width: 0;
 }
 .hero-wuxia .hero-next-row { display: flex; align-items: baseline; gap: 6px; }
-.hero-wuxia .hero-next-arrow { color: var(--c-hero-next-arrow-fg); font-size: 18px; align-self: center; }
+.hero-wuxia .hero-next-arrow { color: var(--c-hero-next-arrow-fg); font-size: 12px; align-self: center; }
 .hero-wuxia .hero-next-val {
   font-family: var(--f-latin); font-weight: 800;
-  font-size: 44px; line-height: 0.88; letter-spacing: -0.01em;
+  font-size: 26px; line-height: 0.88; letter-spacing: -0.01em;
   color: var(--c-hero-next-val-fg);
 }
 /* sub 配置時 = やや小さめ + 本体数値とくっつけて下端揃え (兄貴指示 2026-06-15) */
