@@ -1,4 +1,4 @@
-// ── WWM-METRICS Sidebar / 装備最適化 (Phase 3.4 切出) ────────
+// ── WWMetrics Sidebar / 装備最適化 (Phase 3.4 切出) ────────
 // Greedy 全体最適化: renderOptimization / _renderOptimizationInner /
 // _OPT_resortRows / _exportOptSteps / _applyOptSteps
 (function () {
@@ -306,7 +306,7 @@
     if (!_OPT_LAST_STEPS || !_OPT_LAST_SCORES) { alert('まず計算してください'); return; }
     const s = _OPT_LAST_SCORES;
     const lines = [
-      `WWM-METRICS 装備最適化提案 (目標 ${Math.round(s.ratio*100)}%)`,
+      `WWMetrics 装備最適化提案 (目標 ${Math.round(s.ratio*100)}%)`,
       `現状: ${s.start.toLocaleString()} → 最適化後: ${s.end.toLocaleString()} (Δ+${s.delta.toLocaleString()})`,
       '',
       ..._OPT_LAST_STEPS.map((step, i) => {

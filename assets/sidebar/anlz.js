@@ -1,4 +1,4 @@
-// ── WWM-METRICS Sidebar / Analysis tab render (Phase 3.2 切出) ─
+// ── WWMetrics Sidebar / Analysis tab render (Phase 3.2 切出) ─
 // 分析タブ render: _loadConfig / _curLang / _label / _fmt / _fmtItem /
 //                  _renderItem / _renderSection / renderSidebar / detectUnknown
 (function () {

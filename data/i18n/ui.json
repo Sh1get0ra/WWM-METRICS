@@ -1330,10 +1330,10 @@
     "vi": "▍Chia sẻ Build"
   },
   "shareSect1Desc": {
-    "ja": "現在インポートしているゲームデータ (装備/心法/調律・定音オプション/武術) を共有する URL。 受信者は同じビルドで WWM-METRICS を閲覧できます。",
-    "en": "URL to share your currently imported game data (equipment / xinfa / tuning & engravings / martial arts). Recipients can view WWM-METRICS with the same build.",
-    "zh": "用于分享当前导入的游戏数据 (装备/心法/调律·定音/武术) 的 URL。 接收者可以使用相同构筑查看 WWM-METRICS。",
-    "ko": "현재 가져온 게임 데이터 (장비/심법/조율·정음/무술) 를 공유하는 URL. 받는 사람은 동일한 빌드로 WWM-METRICS 를 열람할 수 있습니다.",
+    "ja": "現在インポートしているゲームデータ (装備/心法/調律・定音オプション/武術) を共有する URL。 受信者は同じビルドで WWMetrics を閲覧できます。",
+    "en": "URL to share your currently imported game data (equipment / xinfa / tuning & engravings / martial arts). Recipients can view WWMetrics with the same build.",
+    "zh": "用于分享当前导入的游戏数据 (装备/心法/调律·定音/武术) 的 URL。 接收者可以使用相同构筑查看 WWMetrics。",
+    "ko": "현재 가져온 게임 데이터 (장비/심법/조율·정음/무술) 를 공유하는 URL. 받는 사람은 동일한 빌드로 WWMetrics 를 열람할 수 있습니다.",
     "vi": "URL để chia sẻ dữ liệu game đang nhập (trang bị/tâm pháp/điều luật·định âm/võ học). Người nhận có thể xem Yên Vân Chỉ Số với cùng build."
   },
   "shareCopyUrl": {

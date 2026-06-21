@@ -1,4 +1,4 @@
-// WWM-METRICS constants
+// WWMetrics constants
 // Phase 1.2.6: 各所散在の magic number / 配列 / マップ を集約。
 
 (function () {

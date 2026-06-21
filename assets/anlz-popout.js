@@ -1,4 +1,4 @@
-// ── WWM-METRICS 格析 Popout Engine (2026-06-14) ──
+// ── WWMetrics 格析 Popout Engine (2026-06-14) ──
 // 兄貴決定: 格析 = popout 単一表現化 (元 #wsAnlz workspace tab 廃止、 DOM 戻し host のみ)
 // Default = Document Picture-in-Picture (Chrome/Edge 116+)
 // Fallback = floating div (Firefox/Safari/iOS/mobile chrome)
@@ -287,7 +287,7 @@
     // OS タイトルバーの文字列 = i18n button label 由来。 ※ Brave では URL 強制表示
     // の仕様で document.title が反映されない (Brave privacy 機構)、 Chrome では効く想定
     var T = window.T || {};
-    var titleStr = (T.anlzPopoutBtn || '格析') + ' — WWM-METRICS';
+    var titleStr = (T.anlzPopoutBtn || '格析') + ' — WWMetrics';
     win.document.title = titleStr;
     var titleEl = win.document.querySelector('title') || win.document.createElement('title');
     titleEl.textContent = titleStr;

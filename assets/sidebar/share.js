@@ -1,4 +1,4 @@
-// ── WWM-METRICS Sidebar / Build Sharing URL (Phase 3.5 切出) ────
+// ── WWMetrics Sidebar / Build Sharing URL (Phase 3.5 切出) ────
 // _shareBuildUrl / _loadSharedBuild / window.WWMShare
 // 絶対ルール: localStorage 浸食NG (SHARE mode 保護機構維持)、
 //             WWMBaseline (base64+checksum) touch禁止 — logic 改変なし純粋move

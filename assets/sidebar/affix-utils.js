@@ -1,4 +1,4 @@
-// WWM-METRICS Sidebar - affix utility helpers
+// WWMetrics Sidebar - affix utility helpers
 // Phase 3.1: sidebar.js から affix 関連 helper / lookup table 切出。
 //   - 表示: _affixDisplayName / _fmtAffixVal / _isPctStat / _pctNeedsMul
 //   - 判定: _isUsefulAffix / _matchKongfuSpecific

@@ -1,4 +1,4 @@
-// ── WWM-METRICS Sidebar / 武庫編集 modal (Phase 3.8 切出) ────
+// ── WWMetrics Sidebar / 武庫編集 modal (Phase 3.8 切出) ────
 // openArsenalEdit / window.WWMArsenal
 (function () {
   'use strict';

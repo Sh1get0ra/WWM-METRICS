@@ -1,4 +1,4 @@
-// WWM-METRICS - icon-select 共通 component (2026-06-18 兄貴指示)
+// WWMetrics - icon-select 共通 component (2026-06-18 兄貴指示)
 // 心法/武術/セット の select で icon + 名前 を視覚並列。 ネイティブ <select> は option に
 // <img> 入れられないため custom dropdown 化。 a11y = aria-expanded/aria-selected + keyboard nav
 //

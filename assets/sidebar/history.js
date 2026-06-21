@@ -1,4 +1,4 @@
-// ── WWM-METRICS / Sidebar / History (Phase 3.9c 切出) ──
+// ── WWMetrics / Sidebar / History (Phase 3.9c 切出) ──
 // 武格履歴 (Martial Record): import毎にスコア記録、 SVG線グラフでキャラ別推移表示。
 // 依存:
 //   - WWMHelpers.storage.loadJSON

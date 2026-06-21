@@ -1,4 +1,4 @@
-// ── WWM-METRICS Sidebar / Mobile 武備 ページャー化 (2026-06-20) ──
+// ── WWMetrics Sidebar / Mobile 武備 ページャー化 (2026-06-20) ──
 // mobile-mode (≤600px) のみで動作。 PC では完全 no-op。
 // 22 slot 縦積み → 2軸 scroll-snap ページャー (装備3p / 心法1p / 奇術2p)。
 // 設計 = docs/superpowers/specs/2026-06-20-mobile-build-pager-design.md

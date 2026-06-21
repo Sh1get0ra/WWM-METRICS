@@ -1,4 +1,4 @@
-// ── WWM-METRICS Sidebar / 心法 panel + 編集 modal (Phase 3.7 切出) ─
+// ── WWMetrics Sidebar / 心法 panel + 編集 modal (Phase 3.7 切出) ─
 // renderXinfaGrid / _computeArsenalCardScore / _computeXinfaCardScores /
 // openXinfaEdit / window.WWMXinfa
 (function () {

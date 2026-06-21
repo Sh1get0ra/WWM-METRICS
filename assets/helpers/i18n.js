@@ -1,4 +1,4 @@
-// WWM-METRICS i18n helpers
+// WWMetrics i18n helpers
 // Phase 1.2.4: 多言語 label 取得 logic を統一。
 // 既存 patterns (window.T?.x || 'def' / _label / [lang] fallback) を集約。
 

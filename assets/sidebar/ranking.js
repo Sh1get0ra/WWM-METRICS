@@ -1,4 +1,4 @@
-// ── WWM-METRICS / Sidebar / Affix Ranking (Phase 3.9d 切出) ──
+// ── WWMetrics / Sidebar / Affix Ranking (Phase 3.9d 切出) ──
 // 各 affix 1オプション分の Δscore 寄与ランキング + 効率分析 (入力値で再計算)。
 // 依存:
 //   - WWMSidebar.affix: loadEquipMax / lvToTier / getCachedEquipMax

@@ -1,4 +1,4 @@
-// ── WWM-METRICS / Sidebar / Virtual State (Phase 3.9f 切出) ──
+// ── WWMetrics / Sidebar / Virtual State (Phase 3.9f 切出) ──
 // 仮想装備 (Edit modal 適用結果) の merge / 永続化 / リセット を担当。
 // WWMState.virtual.{gear, kongfu, xinfa, arsenal} を localStorage 'wwm_virtual_v1' に保存、
 // _getEffectiveRoleInfo / _getEffectiveState で 元データに重ね合わせて参照。

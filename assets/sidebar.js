@@ -1,4 +1,4 @@
-// ── WWM-METRICS Sidebar ─────────────────────────────────────────
+// ── WWMetrics Sidebar ─────────────────────────────────────────
 
 // ── Phase 3.2 切出 alias: assets/sidebar/anlz.js ─
 const {

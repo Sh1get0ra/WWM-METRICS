@@ -1,4 +1,4 @@
-// WWM-METRICS state hub
+// WWMetrics state hub
 // Phase 2.7: 内部 _data object 化 = window.__WWM_* 切離し完了。
 //   - params / lastResult / virtual.* / opt.* / allowDonut → 内部 _data 経由
 // Phase 2.8 (2026-06-07 export.js v2 工事完了と同時): roleInfo / baseline も _data 化。

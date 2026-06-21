@@ -1,4 +1,4 @@
-// ── WWM-METRICS / Sidebar / Hero (Phase 3.9e 切出) ──
+// ── WWMetrics / Sidebar / Hero (Phase 3.9e 切出) ──
 // Hero block (武格指数 / NEXT / Tier badge) 更新 + opt中の tier badge ルーレット演出。
 // 依存:
 //   - WWMState.{baseline, opt, allowDonut, lastResult, params}

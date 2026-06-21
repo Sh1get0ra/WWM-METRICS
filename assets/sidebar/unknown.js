@@ -1,4 +1,4 @@
-// ── WWM-METRICS / Sidebar / Unknown Report (Phase 3.9a 切出) ──
+// ── WWMetrics / Sidebar / Unknown Report (Phase 3.9a 切出) ──
 // 未対応 ID (kongfu / xinfa / affix) を modal で表示し、 GitHub Issue 起票テンプレを生成。
 // 依存:
 //   - WWMState.roleInfo

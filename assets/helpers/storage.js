@@ -1,4 +1,4 @@
-// WWM-METRICS localStorage helpers
+// WWMetrics localStorage helpers
 // Phase 1.2.2: localStorage の try-catch + JSON parse散在 (70箇所) を統一。
 // SHARE Build mode の localStorage monkey patch とも共存 (getItem/setItem経由)。
 

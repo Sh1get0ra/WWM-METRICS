@@ -1,4 +1,4 @@
-// ── WWM-METRICS Sidebar / Gear Grid + 装備編集 modal (Phase 3.6 切出) ─
+// ── WWMetrics Sidebar / Gear Grid + 装備編集 modal (Phase 3.6 切出) ─
 // _GEAR_SLOT_ORDER / renderGearGrid / _SET4_BONUS / _isOffensiveSet /
 // _set4Bonus / _scoreWithBonus / _computeSlotContributions /
 // _computeGearCardScores / openGearEdit / window.WWMGear

@@ -1,4 +1,4 @@
-// ── WWM-METRICS Workspace Engine (Phase 1, 2026-06-11) ──
+// ── WWMetrics Workspace Engine (Phase 1, 2026-06-11) ──
 // 4 workspace tab 切替 / rail 開閉 / preset popover / hero mode 連携 / mobile bottom nav
 // (2026-06-12: 装備+心法 → 武備 'build' に統合。旧 localStorage 値 gear/xinfa は
 //  PANELS miss → default fallback で自然 migration)

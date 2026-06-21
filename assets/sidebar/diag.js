@@ -1,4 +1,4 @@
-// ── WWM-METRICS Sidebar / Diagnostics 弱点指摘 (Phase 3.3 切出) ─
+// ── WWMetrics Sidebar / Diagnostics 弱点指摘 (Phase 3.3 切出) ─
 // _diagnose / _evalPenSpecialization / _checkAffix6PenMismatch /
 // _findWastedAffixes / _updateDiagBadge / _openDiagPopup / renderDiagnostics
 (function () {

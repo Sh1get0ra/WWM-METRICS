@@ -1,4 +1,4 @@
-// ── WWM-METRICS Stat Aggregator ─────────────────────────────────
+// ── WWMetrics Stat Aggregator ─────────────────────────────────
 // roleInfo + state (観音/武庫) + Lv95 base + 心法 + セット → 全 stat 集約
 // 出力: calc.js computeExpected param object + sidebar 表示用 extra stats
 

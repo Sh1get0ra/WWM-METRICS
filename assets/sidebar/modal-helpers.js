@@ -1,4 +1,4 @@
-// WWM-METRICS Sidebar - modal helpers
+// WWMetrics Sidebar - modal helpers
 // Phase 3.1: sidebar.js から modal a11y / 巻物NOTE / changelog 系 切出。
 //   - _setupModalA11y + MutationObserver + Esc key listener
 //   - _CHANGELOG_KEY + _semver + _checkChangelog + _showAllChangelogs (+ WWMChangelog global)

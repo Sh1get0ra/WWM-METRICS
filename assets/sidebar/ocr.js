@@ -1,4 +1,4 @@
-﻿// WWM-METRICS - affix OCR 取込 (TODO #16)
+﻿// WWMetrics - affix OCR 取込 (TODO #16)
 // pipeline: 前処理 → 行切出し → Tesseract 行単位認識 → parse → 閉語彙 fuzzy match
 // engine 非依存設計: ENGINE section だけ差替えれば PaddleOCR 等へ移行可能
 //
