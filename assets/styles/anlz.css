@@ -657,7 +657,14 @@
 #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab:hover { opacity: 1; }
 
 #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab.active {
-  color: var(--c-anlz-tab-active-fg);
+  /* SHARE modal `.wwm-tool-tab.active` と同表現 (2026-06-22 兄貴指定): 紙差し込み演出 */
+  background: var(--kami-0);
+  color: var(--kami-fg);
+  border: 1px solid var(--gold-deep);
+  border-bottom: none;
+  border-radius: 2px 2px 0 0;
+  position: relative;
+  top: 1px;
   opacity: 1;
   font-weight: 900;
 }
@@ -689,14 +696,7 @@ html[lang="vi"] .wwm-cmp-title-en {
   letter-spacing: 0.15em;
 }
 
-#wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab.active::after {
-  content: '';
-  position: absolute;
-  left: -4px; right: -4px; bottom: -2px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #c89a2e 50%, transparent);
-  box-shadow: 0 0 6px rgba(212,175,55,.6);
-}
+/* 旧 ::after 金線 glow は SHARE modal 同表現化 (紙差し込み) に伴い廃止 (2026-06-22) */
 
 /* ── ギャップ ── */
 .wwm-anlz-gap { height: 14px; }
