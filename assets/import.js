@@ -843,11 +843,12 @@ function applyImport(data, importedAt, state) {
         requestAnimationFrame(() => requestAnimationFrame(() => {
           window.WWMSidebar.opt.render(data, params)
             // resolve でも best 未確定の経路あり (opt 内 silent return) → locked 時のみ 100% 演出
-            .then(() => _importGateClose(!!WWMState.opt.locked))
-            .catch(e => { console.error('[WWM] opt failed:', e); _importGateClose(false); });
+            .then(() => { _importGateClose(!!WWMState.opt.locked); if (window.WWMTutorial) window.WWMTutorial.maybeStart(); })
+            .catch(e => { console.error('[WWM] opt failed:', e); _importGateClose(false); if (window.WWMTutorial) window.WWMTutorial.maybeStart(); });
         }));
       } else {
         _importGateClose(false); // opt 経路無し → gate 即解除 (deadlock 防止)
+        if (window.WWMTutorial) window.WWMTutorial.maybeStart();
       }
     }).catch(e => {
       console.error('[WWM] stats build failed:', e);

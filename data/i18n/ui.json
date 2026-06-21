@@ -2081,5 +2081,229 @@
     "zh": "弱点指摘",
     "ko": "약점 진단",
     "vi": "Chỉ điểm yếu"
+  },
+  "tutorialAskTitle": {
+    "ja": "ツアーを受けますか？",
+    "en": "Take the tour?",
+    "zh": "要进行教程吗？",
+    "ko": "투어를 받으시겠습니까?",
+    "vi": "Bắt đầu hướng dẫn?"
+  },
+  "tutorialAskBody": {
+    "ja": "WWMetrics の主要機能 (武格指数 / 武具対照 / 格析) を約 1-2 分で案内します。後で NOTE から再表示も可能。",
+    "en": "Walk through WWMetrics' core features (Gear Score / Cmp Modal / Analysis) in about 1-2 minutes. You can replay it later from NOTE.",
+    "zh": "约 1-2 分钟介绍 WWMetrics 主要功能 (武格指数 / 武具对照 / 格析)。 之后可从 NOTE 重新查看。",
+    "ko": "WWMetrics 의 주요 기능 (무격지수 / 무구대조 / 격석) 을 약 1-2분 안내합니다. 나중에 NOTE 에서 다시 볼 수 있습니다.",
+    "vi": "Giới thiệu các tính năng chính của WWMetrics (Chỉ số võ học / Đối chiếu trang bị / Phân tích) trong khoảng 1-2 phút. Có thể xem lại từ NOTE sau."
+  },
+  "tutorialAskYes": {
+    "ja": "ツアーを受ける",
+    "en": "Start tour",
+    "zh": "开始教程",
+    "ko": "투어 시작",
+    "vi": "Bắt đầu"
+  },
+  "tutorialAskNo": {
+    "ja": "スキップ",
+    "en": "Skip",
+    "zh": "跳过",
+    "ko": "건너뛰기",
+    "vi": "Bỏ qua"
+  },
+  "tutorialNext": {
+    "ja": "次へ",
+    "en": "Next",
+    "zh": "下一步",
+    "ko": "다음",
+    "vi": "Tiếp"
+  },
+  "tutorialPrev": {
+    "ja": "戻る",
+    "en": "Back",
+    "zh": "上一步",
+    "ko": "이전",
+    "vi": "Quay lại"
+  },
+  "tutorialFinish": {
+    "ja": "完了",
+    "en": "Done",
+    "zh": "完成",
+    "ko": "완료",
+    "vi": "Hoàn tất"
+  },
+  "tutorialCh1Step1Title": {
+    "ja": "武格指数",
+    "en": "Martial Index",
+    "zh": "武格指数",
+    "ko": "무격 지수",
+    "vi": "Chỉ số Võ cách"
+  },
+  "tutorialCh1Step1Body": {
+    "ja": "武格指数とは風燕伝のダメージ計算式と装備データに基づいた火力指標となります。<br>現在使用している武術構成の最適装備スコアからの割合で、SS〜Cランクまでランクが自動で付与されます。<br>本ツールで装備を変更しても、ランク評価は変動しません。実際に最適な装備をゲーム内で整え武格指数を上げていきましょう。",
+    "en": "Martial Index is a power indicator based on Where Winds Meet's damage formula and your gear data.<br>Ranks (SS to C) are auto-assigned by the ratio against the optimal gear score for your current martial build.<br>Changing gear in this tool does NOT change your rank — equip optimal gear in-game to raise your Martial Index.",
+    "zh": "武格指数是基于燕云十六声伤害公式与装备数据的火力指标。<br>根据当前武术构成的最优装备分数比例，自动赋予 SS～C 评级。<br>在本工具中更改装备不会改变评级，请在游戏内配齐最优装备以提升武格指数。",
+    "ko": "무격 지수는 연운십육성의 데미지 공식과 장비 데이터에 기반한 화력 지표입니다.<br>현재 무술 구성의 최적 장비 스코어 대비 비율로 SS~C 등급이 자동 부여됩니다.<br>본 도구에서 장비를 변경해도 등급은 바뀌지 않으니, 게임 내에서 최적 장비를 갖춰 무격 지수를 올리세요.",
+    "vi": "Chỉ số Võ cách là chỉ báo sức mạnh dựa trên công thức sát thương Where Winds Meet và dữ liệu trang bị.<br>Xếp hạng SS~C được tự động cấp theo tỉ lệ so với điểm trang bị tối ưu của cấu hình võ học hiện tại.<br>Thay đổi trang bị trong công cụ này KHÔNG đổi xếp hạng — hãy trang bị tối ưu trong game để tăng Chỉ số Võ cách."
+  },
+  "tutorialCh1Step2Title": {
+    "ja": "装備パネル",
+    "en": "Gear Panel",
+    "zh": "装备面板",
+    "ko": "장비 패널",
+    "vi": "Bảng trang bị"
+  },
+  "tutorialCh1Step2Body": {
+    "ja": "装備・心法・奇術を一覧表示する武備パネル。装備変更で武格指数とランクが動きます。<br>次は装備カードを開いて武具対照を見てみましょう。",
+    "en": "The Gear panel lists your equipment, Inner Ways, and Mystic Arts. Changing gear updates your Martial Index and rank in real time.<br>Next, open a gear card to see the COMPARE view.",
+    "zh": "装备面板列出当前装备、心法与奇术。 更改装备会即时更新武格指数与评级。<br>接下来打开装备卡片，看看武具对照视图。",
+    "ko": "장비 패널은 현재 장비·심법·기술을 한 눈에 보여줍니다. 장비 변경 시 무격 지수와 등급이 실시간으로 갱신됩니다.<br>다음은 장비 카드를 열어 무구대조 화면을 살펴봅니다.",
+    "vi": "Bảng trang bị liệt kê trang bị, tâm pháp và kỳ thuật hiện có. Thay đổi trang bị sẽ cập nhật Chỉ số Võ cách và xếp hạng theo thời gian thực.<br>Tiếp theo, mở thẻ trang bị để xem màn hình Đối chiếu Vũ khí."
+  },
+  "tutorialCh2Step1Title": {
+    "ja": "装備カード",
+    "en": "Gear Card",
+    "zh": "装备卡片",
+    "ko": "장비 카드",
+    "vi": "Thẻ trang bị"
+  },
+  "tutorialCh2Step1Body": {
+    "ja": "装備カードをクリックすると武具対照パネルが開きます。<br>現在の装備と新しい装備を比較して、装備変更による武格指数の変動を確認できます。",
+    "en": "Click a gear card to open the COMPARE panel.<br>Compare your current gear with a new one to see how Martial Index shifts when you change equipment.",
+    "zh": "点击装备卡片即可打开武具对照面板。<br>对比当前装备与新装备，查看更换装备时武格指数的变化。",
+    "ko": "장비 카드를 클릭하면 무구대조 패널이 열립니다.<br>현재 장비와 새 장비를 비교하여 장비 변경에 따른 무격 지수 변화를 확인할 수 있습니다.",
+    "vi": "Nhấp vào thẻ trang bị để mở bảng Đối chiếu Vũ khí.<br>So sánh trang bị hiện tại với trang bị mới để xem biến động Chỉ số Võ cách khi thay đổi trang bị."
+  },
+  "tutorialCh2Step2Title": {
+    "ja": "武具対照パネル",
+    "en": "COMPARE panel",
+    "zh": "武具对照面板",
+    "ko": "무구대조 패널",
+    "vi": "Bảng Đối chiếu Vũ khí"
+  },
+  "tutorialCh2Step2Body": {
+    "ja": "左 = 現在の装備、右 = 新しい装備。新しい装備側の調律/定音を編集すると武格指数の変動が即座に反映されます。<br>装備変更前のシミュレーションに使用してください。",
+    "en": "Left = current gear, Right = new gear. Edit tunings / engravings on the new side and Martial Index updates instantly.<br>Use this to simulate gear changes before committing them in-game.",
+    "zh": "左 = 当前装备，右 = 新装备。 编辑新装备侧的调律/定音，武格指数会即时更新。<br>可用于装备变更前的模拟。",
+    "ko": "왼쪽 = 현재 장비, 오른쪽 = 새 장비. 새 장비 측의 조율/정음을 편집하면 무격 지수가 즉시 갱신됩니다.<br>실제 변경 전 시뮬레이션 용도로 사용하세요.",
+    "vi": "Trái = trang bị hiện tại, Phải = trang bị mới. Chỉnh sửa điều luật / định âm phía mới và Chỉ số Võ cách cập nhật ngay lập tức.<br>Dùng để mô phỏng trước khi thực sự đổi trang bị trong game."
+  },
+  "tutorialCh2Step3Title": {
+    "ja": "OCR",
+    "en": "OCR",
+    "zh": "OCR",
+    "ko": "OCR",
+    "vi": "OCR"
+  },
+  "tutorialCh2Step3Body": {
+    "ja": "ゲーム画面のスクリーンショットをドロップorCtrl+Vでの貼付、もしくはこちらのアイコンをクリックして選択すると、調律/定音の内容を自動取込します。手動入力の手間を省けますので、ご活用ください。",
+    "en": "Drop a screenshot, paste it with Ctrl+V, or click this icon to pick a file — tunings / engravings are auto-extracted. Saves you from typing them in by hand.",
+    "zh": "拖入截图、用 Ctrl+V 粘贴、或点击此图标选择文件 — 调律/定音内容会自动提取。 免去手动输入的麻烦。",
+    "ko": "스크린샷을 드롭하거나 Ctrl+V 로 붙여넣기, 또는 이 아이콘을 클릭해 파일을 선택하면 조율/정음 내용이 자동 추출됩니다. 수동 입력 수고를 덜어줍니다.",
+    "vi": "Kéo thả ảnh chụp màn hình, dán bằng Ctrl+V, hoặc nhấp vào biểu tượng này để chọn tệp — nội dung điều luật / định âm sẽ được tự động trích xuất. Tiện lợi, không cần nhập tay."
+  },
+  "tutorialCh2Step4Title": {
+    "ja": "同級承音",
+    "en": "Same-Tier Orchestration",
+    "zh": "同阶承音",
+    "ko": "동일 등급 승음",
+    "vi": "Thừa Âm cùng bậc"
+  },
+  "tutorialCh2Step4Body": {
+    "ja": "同級承音シミュレーションができます。<br>現在の調律/定音を一括で94%にする機能です。",
+    "en": "Same-Tier Orchestration simulation.<br>One click fills all current tunings / engravings to 94%.",
+    "zh": "同阶承音模拟功能。<br>一键将当前调律/定音全部填到 94%。",
+    "ko": "동일 등급 승음 시뮬레이션 기능.<br>현재 조율/정음을 일괄로 94% 로 채워줍니다.",
+    "vi": "Mô phỏng Thừa Âm cùng bậc.<br>Một chạm đưa toàn bộ điều luật / định âm hiện tại lên 94%."
+  },
+  "tutorialCh3Step1Title": {
+    "ja": "格析",
+    "en": "Analysis",
+    "zh": "格析",
+    "ko": "격석",
+    "vi": "Cách tích"
+  },
+  "tutorialCh3Step1Body": {
+    "ja": "格析ボタンから別ウィンドウで新しい装備をベースとした調律/定音の各期待値の閲覧、装備最適化の提案機能が使用できます。",
+    "en": "The Analysis button opens a separate window where you can view the expected value of each tuning / engraving based on the new gear, and use the gear optimization suggestion feature.",
+    "zh": "点击格析按钮，可在独立窗口中基于新装备查看各调律/定音的期望值，并使用装备最适化建议功能。",
+    "ko": "격석 버튼을 누르면 별도 창에서 새 장비를 기준으로 각 조율/정음의 기댓값을 확인하고, 장비 최적화 제안 기능을 사용할 수 있습니다.",
+    "vi": "Nút Cách tích mở một cửa sổ riêng nơi bạn có thể xem giá trị kỳ vọng của từng điều luật / định âm dựa trên trang bị mới, và sử dụng tính năng đề xuất tối ưu trang bị."
+  },
+  "tutorialFinishTitle": {
+    "ja": "ツアー完了",
+    "en": "Tour Complete",
+    "zh": "教程完成",
+    "ko": "투어 완료",
+    "vi": "Hoàn tất hướng dẫn"
+  },
+  "tutorialFinishBody": {
+    "ja": "お疲れさまでした。NOTE 内の「ツアーを見る」 ボタンからいつでも再表示できます。<br>素敵な風燕伝ライフを!",
+    "en": "Thanks for taking the tour. You can replay it any time from the \"Take the tour\" button inside NOTE.<br>Enjoy your Where Winds Meet journey!",
+    "zh": "辛苦了。 之后可从 NOTE 内的「查看教程」按钮随时再次查看。<br>祝你燕云十六声玩得愉快！",
+    "ko": "수고하셨습니다. NOTE 내 「투어 보기」 버튼에서 언제든지 다시 볼 수 있습니다.<br>즐거운 연운십육성 되세요!",
+    "vi": "Cảm ơn bạn đã hoàn thành. Có thể xem lại bất cứ lúc nào qua nút \"Xem hướng dẫn\" trong NOTE.<br>Chúc bạn trải nghiệm Where Winds Meet vui vẻ!"
+  },
+  "noteTutorialBtn": {
+    "ja": "ツアーを見る",
+    "en": "Take the tour",
+    "zh": "查看教程",
+    "ko": "투어 보기",
+    "vi": "Xem hướng dẫn"
+  },
+  "tutorialChStatusTitle": {
+    "ja": "ステータス",
+    "en": "Status",
+    "zh": "属性",
+    "ko": "스탯",
+    "vi": "Chỉ số"
+  },
+  "tutorialChStatusBody": {
+    "ja": "インポートで取り込まれた情報でステータスを閲覧できます。<br>インポートで取り込めない情報は心法のレベル、観音のレベル、武庫のレベル、才能/五音太平楽の解放状況となります。",
+    "en": "View your stats based on imported data.<br>Items NOT included in import: Inner Way levels, Guanyin level, Arsenal level, and unlock status of Talents / 五音太平楽 (Wuyin Taipingyue).",
+    "zh": "可基于导入数据查看属性。<br>导入无法获取的项目：心法等级、观音等级、武库等级、天赋/五音太平乐 的解锁状态。",
+    "ko": "임포트한 데이터를 기반으로 스탯을 확인할 수 있습니다.<br>임포트로 가져올 수 없는 정보: 심법 레벨, 관음 레벨, 무고 레벨, 재능/오음태평악 해방 상태.",
+    "vi": "Xem chỉ số dựa trên dữ liệu đã nhập.<br>Các mục KHÔNG được nhập: cấp tâm pháp, cấp Quan Âm, cấp Vũ Khố, trạng thái mở khóa Thiên Phú / Ngũ Âm Thái Bình Nhạc."
+  },
+  "tutorialChStatus2Title": {
+    "ja": "ステータス補足",
+    "en": "Status note",
+    "zh": "属性补充",
+    "ko": "스탯 보충",
+    "vi": "Ghi chú chỉ số"
+  },
+  "tutorialChStatus2Body": {
+    "ja": "心法のレベルと武庫のレベルについては、インポート時に選択をお願いします。<br>観音/才能/五音太平楽の解放状況についてはゲーム内パッチでの最高到達段階を適用しておりますので、各解放状況が追いついていない段階だとステータスに差異がございます。",
+    "en": "Inner Way / Arsenal levels: please select them at import time.<br>Guanyin / Talents / 五音太平楽 unlock status: the tool assumes the latest in-game patch's max stage, so if your progress hasn't caught up, your actual stats will differ.",
+    "zh": "心法等级与武库等级请在导入时选择。<br>观音/天赋/五音太平乐 的解锁状态：工具按当前游戏补丁的最高阶段计算，若你尚未达到该阶段，属性会有差异。",
+    "ko": "심법 레벨과 무고 레벨은 임포트 시 선택해 주세요.<br>관음/재능/오음태평악 해방 상태: 본 도구는 현재 게임 패치의 최고 도달 단계를 적용하므로, 본인 진행도가 따라잡지 못한 경우 스탯에 차이가 발생합니다.",
+    "vi": "Cấp tâm pháp và cấp Vũ Khố: hãy chọn khi nhập dữ liệu.<br>Trạng thái mở khóa Quan Âm / Thiên Phú / Ngũ Âm Thái Bình Nhạc: công cụ áp dụng giai đoạn tối đa của bản patch hiện tại, nên nếu tiến độ của bạn chưa theo kịp, chỉ số sẽ có chênh lệch."
+  },
+  "tutorialChResetTitle": {
+    "ja": "リセット",
+    "en": "RESET",
+    "zh": "重置",
+    "ko": "리셋",
+    "vi": "RESET"
+  },
+  "tutorialChResetBody": {
+    "ja": "新装備/心法 として弄った内容を全て現装備値に戻すボタンです。<br>装備変更前の状態に戻したい時に使用してください。",
+    "en": "Restores all simulated new gear / Inner Way edits back to your current values.<br>Use this to return to the pre-simulation state.",
+    "zh": "将所有作为新装备/心法 进行的编辑全部还原为当前装备数值的按钮。<br>需要回到装备变更前的状态时使用。",
+    "ko": "새 장비/심법 으로 편집한 모든 내용을 현재 장비 값으로 되돌리는 버튼입니다.<br>장비 변경 전 상태로 돌아가고 싶을 때 사용하세요.",
+    "vi": "Nút khôi phục toàn bộ chỉnh sửa trang bị / tâm pháp mới về giá trị hiện tại.<br>Dùng khi muốn quay về trạng thái trước khi mô phỏng."
+  },
+  "tutorialChPresetTitle": {
+    "ja": "プリセット",
+    "en": "PRESETS",
+    "zh": "预设",
+    "ko": "프리셋",
+    "vi": "PRESETS"
+  },
+  "tutorialChPresetBody": {
+    "ja": "現在の状態 (装備・心法・調律/定音 等) を 3 つまで保存できるプリセット機能です。<br>装備パターンを試したい時の保存場所として活用してください。",
+    "en": "Save up to 3 snapshots of your current state (gear, Inner Way, tunings / engravings, etc.).<br>Use as a stash for gear-pattern experiments.",
+    "zh": "可保存当前状态（装备、心法、调律/定音 等）最多 3 组的预设功能。<br>需要尝试不同装备方案时作为保存空间使用。",
+    "ko": "현재 상태(장비·심법·조율/정음 등)를 최대 3 개까지 저장할 수 있는 프리셋 기능입니다.<br>장비 패턴을 시험하고 싶을 때 저장 공간으로 활용하세요.",
+    "vi": "Lưu tối đa 3 bản chụp trạng thái hiện tại (trang bị, tâm pháp, điều luật / định âm, v.v.).<br>Dùng làm nơi lưu trữ khi muốn thử nghiệm các cấu hình trang bị."
   }
 }
