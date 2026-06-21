@@ -1682,7 +1682,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 .wwm-ws-sec-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: var(--space-2-5);
+  gap: var(--space-2); /* gear-grid と同 gap で col 寸法揃える (2026-06-22) */
   align-items: center;
 }
 .wwm-ws-sec-grid::after { display: none; }
