@@ -123,46 +123,84 @@
     return base + _set4Bonus(roleInfo);
   }
 
-  // 装備カード Score = pure LOO marginal (set 補正撤去版)
-  // カード表示は 武備指数 (= marginal LOO 生値、 シナジー波及込み)
+  // 装備カード Score = LOO (現基盤 重複込み) − leak (s 抜きで消える セット effect 寄与) + alloc (suffix 別 N 均等配賦)
+  // D4 設計 (2026-06-21): セット effect の重複加算 (N=2 で各 slot に 100%) + 配賦欠落 (N=4 で 2 点 effect が個別合計に乗らない) を 3 phase で同時解消
+  // - 現基盤 LOO 維持 = 装備の現ビルド貢献度 (D2 仮想ゼロベースの轍 回避)
+  // - 弓 (slot 21/9) = pair half 廃止 → 個別 LOO に統一 (N=2 同 logic 自動適用)
+  // - 防具 = pieces2.effects 空 = setEffectTotal 0 = 補正/配賦 0 = 旧 LOO 値そのまま
+  // - 4 点 +100 = setEffectTotal_full 経由で 配賦に自動含有 (set4Map と統合、 set4Map 引数は後方互換 keep)
+  // 検算: 個別合計 Σ contrib = Σ 装備本体寄与 + Σ setEffectTotal_full (LOO non-additivity の セット由来分のみ修正)
   async function _computeSlotContributions(roleInfo, slots, suffixSlots, set4Map) {
     if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return null;
     const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
-    let baseScore = 0;
+    const _score = async (modCb) => {
+      const ri = JSON.parse(JSON.stringify(roleInfo));
+      modCb(ri);
+      const p = await window.WWMStats.buildStatParams(ri, state);
+      window.computeExpected(p);
+      return _scoreWithBonus(ri);
+    };
+    // 0. baseWithSet (現 score)
+    let baseWithSet = 0;
     try {
-      const baseParams = await window.WWMStats.buildStatParams(roleInfo, state);
-      window.computeExpected(baseParams);
-      baseScore = _scoreWithBonus(roleInfo);
+      const p = await window.WWMStats.buildStatParams(roleInfo, state);
+      window.computeExpected(p);
+      baseWithSet = _scoreWithBonus(roleInfo);
     } catch (e) { return null; }
-    const result = {};
-    const bowPair = ['21', '9'];
-    const hasBowMember = slots.some(s => bowPair.includes(s));
+    // 1. LOO[s] = 現基盤 個別 LOO (弓 pair half 廃止 = 全 slot 同 logic)
+    const LOO = {};
     for (const slot of slots) {
       try {
-        if (hasBowMember && bowPair.includes(slot)) continue;
-        const ri = JSON.parse(JSON.stringify(roleInfo));
-        delete ri.wearEquipsDetailed[slot];
-        const p = await window.WWMStats.buildStatParams(ri, state);
-        window.computeExpected(p);
-        const noSlot = _scoreWithBonus(ri);
-        result[slot] = Math.round(baseScore - noSlot);
-      } catch (e) { result[slot] = 0; }
+        LOO[slot] = baseWithSet - await _score(ri => { delete ri.wearEquipsDetailed[slot]; });
+      } catch (e) { LOO[slot] = 0; }
     }
-    // 弓ペア = pair 同時抜き half 配分
-    if (hasBowMember) {
+    // 2. suffix 別 leak / alloc
+    const leak = {};
+    const alloc = {};
+    for (const [sfx, members] of Object.entries(suffixSlots || {})) {
+      const N = members?.length || 0;
+      if (N < 2) continue;
       try {
-        const ri = JSON.parse(JSON.stringify(roleInfo));
-        for (const ps of bowPair) delete ri.wearEquipsDetailed[ps];
-        const p = await window.WWMStats.buildStatParams(ri, state);
-        window.computeExpected(p);
-        const noPair = _scoreWithBonus(ri);
-        const pairLoo = baseScore - noPair;
-        const half = Math.round(pairLoo / 2);
-        for (const ps of bowPair) {
-          if (slots.includes(ps)) result[ps] = half;
+        // setEffectTotal_full = 全 members suffix 削除差分 (2 点+4 点 合計)
+        const noAllSfx = await _score(ri => {
+          for (const s of members) {
+            if (ri.wearEquipsDetailed?.[s]?.exVo) delete ri.wearEquipsDetailed[s].exVo.suffix;
+          }
+        });
+        const setEffectTotal = baseWithSet - noAllSfx;
+        // alloc = N 均等配賦
+        const share = setEffectTotal / N;
+        for (const s of members) alloc[s] = (alloc[s] || 0) + share;
+        // leak = s 抜きで消える effect 寄与 (N 別条件分岐)
+        if (N === 2) {
+          // s 抜きで N→1 = 2 点 effect 消滅 → LOO[s] に setEffectTotal_full 全寄与
+          for (const s of members) leak[s] = (leak[s] || 0) + setEffectTotal;
+        } else if (N === 3) {
+          // s 抜きで N→2 = 2 点 effect 残存 → LOO[s] に effect 寄与なし → leak 0
+        } else if (N === 4) {
+          // s 抜きで N→3 = 4 点 effect のみ消滅 → LOO[s] に 4 点 effect 全寄与
+          // 4 点 effect 寄与 = baseWithSet - score(1 個 suffix 削除で 3 揃え状態)
+          const no1Sfx = await _score(ri => {
+            const one = members[0];
+            if (ri.wearEquipsDetailed?.[one]?.exVo) delete ri.wearEquipsDetailed[one].exVo.suffix;
+          });
+          const fourPcsEffect = baseWithSet - no1Sfx;
+          for (const s of members) leak[s] = (leak[s] || 0) + fourPcsEffect;
         }
-      } catch (e) { for (const ps of bowPair) { if (slots.includes(ps)) result[ps] = 0; } }
+      } catch (e) { /* skip */ }
     }
+    // 3. 合算 + 副作用契約 復元
+    const result = {};
+    for (const slot of slots) {
+      const l = LOO[slot] || 0;
+      const lk = leak[slot] || 0;
+      const al = alloc[slot] || 0;
+      result[slot] = Math.round(l - lk + al);
+    }
+    try {
+      const finalP = await window.WWMStats.buildStatParams(roleInfo, state);
+      window.computeExpected(finalP);
+    } catch (e) {}
     return result;
   }
 
