@@ -2,8 +2,8 @@
   "name": "風燕計 | Where Winds Metrics",
   "short_name": "風燕計",
   "description": "Where Winds Meet リアルタイム メトリクス (ダメ計算/最適化/診断)",
-  "start_url": "./",
-  "scope": "./",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#0a0a0a",
@@ -11,7 +11,7 @@
   "lang": "ja",
   "icons": [
     {
-      "src": "assets/icons/pwa-icon.svg",
+      "src": "/assets/icons/pwa-icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
