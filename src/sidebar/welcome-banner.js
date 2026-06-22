@@ -27,6 +27,8 @@
   }
 
   function show() {
+    // OBS view (`?view=sidebar`) は表示専用 = banner 非表示 (配信邪魔回避)
+    if (document.documentElement.classList.contains('wwm-view-sidebar')) return;
     const el = document.getElementById('wwmWelcomeBanner');
     if (!el) return;
     if (_isDismissed()) return;

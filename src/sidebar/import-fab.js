@@ -163,6 +163,8 @@
 
   function show() {
     if (fab) return;
+    // OBS view (`?view=sidebar`) は表示専用 = FAB 非表示 (配信邪魔回避)
+    if (document.documentElement.classList.contains('wwm-view-sidebar')) return;
     fab = _build();
     document.body.appendChild(fab);
     _refresh();
