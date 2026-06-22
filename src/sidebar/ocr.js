@@ -901,3 +901,6 @@
     _internals: { _preprocess, _segmentLines, _trimRange, _parseLines, _matchAffix, _norm, _dice, _ocrLines }
   };
 })();
+
+// vite移行 P2: ESM 副作用 module 化 (window expose は IIFE 内 keep)
+export {};

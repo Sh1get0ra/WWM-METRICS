@@ -1,10 +1,9 @@
 // WWMetrics format helpers
 // Phase 1.2.3: 数値format / base64 / clamp 等の重複 logic を統一。
 
-(function () {
-  'use strict';
+// vite移行 P2: ESM 化、 window expose 互換 keep。
 
-  const format = {
+const format = {
     /**
      * 数値を桁区切りで表示。 decimals指定で小数桁丸め。
      * @param {number} n
@@ -89,6 +88,8 @@
     }
   };
 
-  window.WWMHelpers = window.WWMHelpers || {};
-  window.WWMHelpers.format = format;
-})();
+window.WWMHelpers = window.WWMHelpers || {};
+window.WWMHelpers.format = format;
+
+export { format };
+export default format;

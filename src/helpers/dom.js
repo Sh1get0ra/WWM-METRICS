@@ -1,11 +1,9 @@
 // WWMetrics DOM helpers
 // Phase 1.2.1: dom操作の重複pattern を helper化。
 // 使用例: WWMHelpers.dom.setText('heroScore', '11,295');
+// vite移行 P2: ESM 化、 window expose 互換 keep。
 
-(function () {
-  'use strict';
-
-  const dom = {
+const dom = {
     /**
      * id文字列 or element に textContent を set。 null安全。
      * @param {string|Element} target - element id (string) or Element
@@ -110,6 +108,8 @@
     }
   };
 
-  window.WWMHelpers = window.WWMHelpers || {};
-  window.WWMHelpers.dom = dom;
-})();
+window.WWMHelpers = window.WWMHelpers || {};
+window.WWMHelpers.dom = dom;
+
+export { dom };
+export default dom;

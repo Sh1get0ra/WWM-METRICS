@@ -2,13 +2,12 @@
 // Phase 1.2.5: JSON/SVG/image fetch の重複logic を統一。
 // dict load (data/*.json) は data-store.js ensureCalcData に一元化済 (P4-mini 2026-06-10、 旧 loadDict 撤去)。
 
-(function () {
-  'use strict';
+// vite移行 P2: ESM 化、 window expose 互換 keep。
 
-  // SVG inline化 結果 cache (path → string)
-  const _svgCache = new Map();
+// SVG inline化 結果 cache (path → string)
+const _svgCache = new Map();
 
-  const fetchH = {
+const fetchH = {
     /**
      * 任意 URL から JSON fetch。
      */
@@ -72,6 +71,8 @@
     }
   };
 
-  window.WWMHelpers = window.WWMHelpers || {};
-  window.WWMHelpers.fetch = fetchH;
-})();
+window.WWMHelpers = window.WWMHelpers || {};
+window.WWMHelpers.fetch = fetchH;
+
+export { fetchH };
+export default fetchH;

@@ -181,3 +181,6 @@ const SCORE_FIXED = { outerCoeff: 1.5, statusCoeff: 1.5, outerAdd: 230 };
 // ── (旧UI) SET_EFFECTS / XINFA_EFFECTS は import経路移行で削除済 ──
 // セット/心法効果は data/sets.json / data/xinfa.json + stats.js buildStatParams 経由で適用
 window.computeExpected = computeExpected;
+
+// vite移行 P2: ESM 副作用 module 化 (window expose は IIFE 内 keep)
+export {};

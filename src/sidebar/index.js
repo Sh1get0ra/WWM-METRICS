@@ -210,3 +210,6 @@ Object.assign(window.WWMSidebar, {
 // ── ロール品質 heatmap (装備別 平均ratio) ─────────────────────
 // (Phase 3.9b: 廃止。 #wwmQuality DOM/呼出 共に消滅、 機能は装備編集 modal に移植済)
 // (旧 _qualSlotLabel / _qualColor / _qualRender / WWMQuality は削除済 — styles.css の残骸も別途整理予定)
+
+// vite移行 P2: ESM 副作用 module 化 (window expose は IIFE 内 keep)
+export {};

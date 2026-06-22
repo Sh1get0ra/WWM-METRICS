@@ -2,10 +2,9 @@
 // Phase 1.2.2: localStorage の try-catch + JSON parse散在 (70箇所) を統一。
 // SHARE Build mode の localStorage monkey patch とも共存 (getItem/setItem経由)。
 
-(function () {
-  'use strict';
+// vite移行 P2: ESM 化、 window expose 互換 keep。
 
-  const storage = {
+const storage = {
     /**
      * localStorage から JSON parse して返す。 失敗時 defaultValue。
      * @param {string} key
@@ -98,6 +97,8 @@
     }
   };
 
-  window.WWMHelpers = window.WWMHelpers || {};
-  window.WWMHelpers.storage = storage;
-})();
+window.WWMHelpers = window.WWMHelpers || {};
+window.WWMHelpers.storage = storage;
+
+export { storage };
+export default storage;

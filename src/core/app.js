@@ -558,3 +558,6 @@ document.addEventListener('DOMContentLoaded', init);
   else if (mq.addListener) mq.addListener(apply);
   document.addEventListener('DOMContentLoaded', apply);
 })();
+
+// vite移行 P2: ESM 副作用 module 化 (window expose は IIFE 内 keep)
+export {};

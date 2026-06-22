@@ -1036,3 +1036,6 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
     if (window.WWMSidebar?.share?.shareUrl) WWMSidebar.share.shareUrl({ tab: 'card' });
   };
 })();
+
+// vite移行 P2: ESM 副作用 module 化 (window expose は IIFE 内 keep)
+export {};

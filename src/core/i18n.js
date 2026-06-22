@@ -28,3 +28,6 @@
   // currentLang は app.js setLang() が管理。 ここでは初期値のみ。
   if (typeof window.currentLang === 'undefined') window.currentLang = 'ja';
 })();
+
+// vite移行 P2: ESM 副作用 module 化 (window expose は IIFE 内 keep)
+export {};

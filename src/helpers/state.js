@@ -5,11 +5,10 @@
 //   - window.__WWM_ROLEINFO / __WWM_BASELINE 参照は全廃 (export.js + index.html inline 移行済)
 //   - SHARED_BUILD のみ proxy 永久維持 (index.html inline で受信時 set のため切離し不可)
 
-(function () {
-  'use strict';
+// vite移行 P2: ESM 化、 window expose 互換 keep。
 
-  // ── 内部 state (window.__WWM_* 切離し済) ──────────────
-  const _data = {
+// ── 内部 state (window.__WWM_* 切離し済) ──────────────
+const _data = {
     roleInfo: null,
     baseline: null,
     params: null,
@@ -113,8 +112,10 @@
     }
   };
 
-  window.WWMHelpers = window.WWMHelpers || {};
-  window.WWMHelpers.state = state;
-  // top-level alias (頻繁使用のため短縮アクセス)
-  window.WWMState = state;
-})();
+window.WWMHelpers = window.WWMHelpers || {};
+window.WWMHelpers.state = state;
+// top-level alias (頻繁使用のため短縮アクセス)
+window.WWMState = state;
+
+export { state };
+export default state;

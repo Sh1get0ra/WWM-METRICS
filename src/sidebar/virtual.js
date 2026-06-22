@@ -121,3 +121,6 @@
   // 起動時 1回: localStorage → WWMState.virtual に復元
   _loadVirtuals();
 })();
+
+// vite移行 P2: ESM 副作用 module 化 (window expose は IIFE 内 keep)
+export {};

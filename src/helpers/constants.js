@@ -1,10 +1,9 @@
 // WWMetrics constants
 // Phase 1.2.6: 各所散在の magic number / 配列 / マップ を集約。
 
-(function () {
-  'use strict';
+// vite移行 P2: ESM 化、 window expose 互換 keep。
 
-  const C = {
+const C = {
     /** 武庫 (Arsenal) Tier Lv (7段階) */
     ARSENAL_TIERS: [41, 51, 56, 61, 71, 81, 86],
 
@@ -87,6 +86,8 @@
     }
   };
 
-  window.WWMHelpers = window.WWMHelpers || {};
-  window.WWMHelpers.constants = C;
-})();
+window.WWMHelpers = window.WWMHelpers || {};
+window.WWMHelpers.constants = C;
+
+export { C };
+export default C;

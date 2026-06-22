@@ -2,10 +2,9 @@
 // Phase 1.2.4: 多言語 label 取得 logic を統一。
 // 既存 patterns (window.T?.x || 'def' / _label / [lang] fallback) を集約。
 
-(function () {
-  'use strict';
+// vite移行 P2: ESM 化、 window expose 互換 keep。
 
-  const i18n = {
+const i18n = {
     /**
      * 現言語 ('ja' | 'en' | 'zh' | 'ko')。 window.currentLang から取得、 fallback 'ja'。
      */
@@ -62,6 +61,8 @@
     }
   };
 
-  window.WWMHelpers = window.WWMHelpers || {};
-  window.WWMHelpers.i18n = i18n;
-})();
+window.WWMHelpers = window.WWMHelpers || {};
+window.WWMHelpers.i18n = i18n;
+
+export { i18n };
+export default i18n;

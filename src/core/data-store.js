@@ -285,3 +285,6 @@
     window.DataStore = api; // 兄貴可読性用 alias
   }
 })();
+
+// vite移行 P2: ESM 副作用 module 化 (window expose は IIFE 内 keep)
+export {};
