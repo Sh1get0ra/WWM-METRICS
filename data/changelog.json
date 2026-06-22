@@ -1,6 +1,27 @@
 {
-  "current": "2.2.0",
+  "current": "2.3.0",
   "entries": [
+    {
+      "version": "2.3.0",
+      "date": "2026-06-23",
+      "items": [
+        {
+          "featured": true,
+          "ja": "【ブックマークレット 最終再登録のお願い】 ブックマークレットを自動更新化しました。 今後の改修ではブックマークレット再登録は不要になります。 今回が **最後の再登録のお願い** です。 旧ブックマークレットを削除して、 新版を登録し直してください。",
+          "en": "[Bookmarklet — Final Re-registration] The bookmarklet now auto-updates. Going forward, future changes will no longer require you to re-register the bookmarklet. **This is the last re-registration request.** Please remove your old bookmarklet and register the new version.",
+          "zh": "【书签栏 最终重新注册请求】 已将书签栏自动更新化。 今后的改动不再需要重新注册书签栏。 **本次为最后一次重新注册请求。** 请删除旧书签栏, 重新注册新版。",
+          "ko": "【북마크릿 최종 재등록 안내】 북마크릿을 자동 업데이트화하였습니다. 향후 개선에서는 북마크릿 재등록이 불필요해집니다. **이번이 마지막 재등록 안내입니다.** 기존 북마크릿을 삭제하고, 새 버전을 다시 등록해 주십시오.",
+          "vi": "[Bookmarklet — Đăng ký lại lần cuối] Bookmarklet giờ tự cập nhật. Các thay đổi trong tương lai sẽ không còn yêu cầu bạn đăng ký lại bookmarklet. **Đây là lần đăng ký lại cuối cùng.** Vui lòng xóa bookmarklet cũ và đăng ký lại phiên bản mới."
+        },
+        {
+          "ja": "【内部更新 / 安定性向上】 ページの読込・更新まわりを刷新しました。 今後新機能を入れた時の 「変わらない」 「古い画面のまま」 という体感を大幅に削減します。",
+          "en": "[Internal Refresh / Stability] Overhauled how the page loads and updates. Reduces the «nothing changed» / «old UI remains» experience whenever new features ship from now on.",
+          "zh": "【内部更新 / 稳定性提升】 刷新了页面加载与更新机制。 大幅减少今后投入新功能时「未变化」「仍是旧画面」 的体感。",
+          "ko": "【내부 갱신 / 안정성 향상】 페이지의 로딩・갱신 방식을 쇄신하였습니다. 향후 신규 기능 투입 시「변하지 않음」「구 화면 그대로」 라는 체감을 대폭 감소시킵니다.",
+          "vi": "[Cập nhật nội bộ / Ổn định] Đại tu cách trang tải và cập nhật. Giảm mạnh cảm giác «không có gì thay đổi» / «vẫn là UI cũ» mỗi khi có tính năng mới."
+        }
+      ]
+    },
     {
       "version": "2.2.0",
       "date": "2026-06-22",
