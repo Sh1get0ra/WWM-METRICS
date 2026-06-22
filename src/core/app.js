@@ -388,6 +388,8 @@ function renderPresetSlots() {
   }
 }
 function savePreset(i) {
+  // 🚨 閲覧モード (他人 build 表示中) は preset 保存 block (2026-06-23 兄貴指示)
+  if (WWMState.blockIfShared((window.T?.sharedBuildPresetBlocked) ?? '閲覧モード中: プリセット は無効化されています (自データに戻すには リロード/F5)')) return;
   // PC / mobile 両 input から名前取得 — 編集された方を採用 (2026-06-21 兄貴指示)
   const nameInp = document.getElementById('presetName' + i);
   const nameMob = document.getElementById('presetMobName' + i);
@@ -412,6 +414,8 @@ function savePreset(i) {
   showToast(T.toastSaved.replace('{name}', name));
 }
 function loadPreset(i) {
+  // 🚨 閲覧モード (他人 build 表示中) は preset 読込 block (2026-06-23 兄貴指示)
+  if (WWMState.blockIfShared((window.T?.sharedBuildPresetBlocked) ?? '閲覧モード中: プリセット は無効化されています (自データに戻すには リロード/F5)')) return;
   // 🚨 in-memory presets[] は過去 save 時に shared reference で汚染された可能性あり
   //    (修正前 savePreset = WWMState.virtual.* と同 ref で保存 → 以降の編集が presets[i] を mutate)。
   //    localStorage から fresh re-load で「保存時 snapshot」 を真に取得 (2026-06-22 bug 根治 完)
@@ -459,6 +463,8 @@ function loadPreset(i) {
   showToast(T.toastLoaded.replace('{name}', p.name));
 }
 function deletePreset(i) {
+  // 🚨 閲覧モード (他人 build 表示中) は preset 削除 block (2026-06-23 兄貴指示)
+  if (WWMState.blockIfShared((window.T?.sharedBuildPresetBlocked) ?? '閲覧モード中: プリセット は無効化されています (自データに戻すには リロード/F5)')) return;
   const name = presets[i] ? presets[i].name : T.presetNamePlaceholder.replace('{n}', i + 1);
   presets[i] = null;
   WWMHelpers.storage.saveJSON(PRESET_KEY, presets);

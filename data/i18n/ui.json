@@ -111,6 +111,13 @@
     "ko": "열람 모드: EXPORT 는 비활성화됨 (타인 빌드 이미지 배포 불가)",
     "vi": "Chế độ xem: EXPORT đã bị vô hiệu hóa (không thể phát tán ảnh build của người khác)"
   },
+  "sharedBuildPresetBlocked": {
+    "ja": "閲覧モード中: プリセット は無効化されています (他人のビルドを自分のプリセットに保存できません)",
+    "en": "View-only mode: presets are disabled (cannot save others' builds to your own preset)",
+    "zh": "浏览模式: 预设 已禁用 (不能将他人配装保存为自己的预设)",
+    "ko": "열람 모드: 프리셋 은 비활성화됨 (타인 빌드를 본인 프리셋에 저장 불가)",
+    "vi": "Chế độ xem: Preset đã bị vô hiệu hóa (không thể lưu build của người khác vào preset của bạn)"
+  },
   "toastSaved": {
     "ja": "プリセット「{name}」を保存",
     "en": "Saved \"{name}\"",

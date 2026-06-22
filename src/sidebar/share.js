@@ -9,9 +9,10 @@
   const _curLang = window.WWMSidebar.anlz.curLang;
 
   function _shareBuildUrl(opts) {
-    // 閲覧モード (isShared) では card タブのみ disabled (L174 cardBlocked 分岐)。
-    // url/obs タブは利用可 — 旧 blockIfShared 全 block guard は撤去済 (2026-06-12)。
+    // 🚨 閲覧モード (isShared) では SHARE 全 block (2026-06-23 兄貴指示で 2026-06-12 緩和を逆戻し)。
+    // 理由 = 他人の build を表示中に自分の SHARE URL / OBS URL 生成は概念的に NG。
     // 受信側は index.html inline script で memory-only mode 処理 (localStorage 浸食回避)
+    if (WWMState.blockIfShared((window.T?.sharedBuildShareBlocked) ?? '閲覧モード中: SHARE は無効化されています (自データに戻すには リロード/F5)')) return;
     const ri = WWMState.roleInfo;
     if (!ri) { alert('build データなし。先に import してください。'); return; }
     // Tier 判定前 (opt best 未確定) は SHARE 抑止 — 受信側 Tier 無し URL の生成防止 (EXPORT と同じ保険 guard)
