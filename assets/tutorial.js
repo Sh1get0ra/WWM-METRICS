@@ -343,6 +343,19 @@
       onHighlighted: () => _scrollAllToTop()
     });
 
+    // ── Ch.再インポート (IMPORT FAB highlight) — mobile では FAB 非表示なので skip ──
+    if (!document.body.classList.contains('mobile-mode') && document.querySelector('.wwm-import-fab')) {
+      steps.push({
+        element: '.wwm-import-fab',
+        popover: {
+          title: _t('tutorialChImportFabTitle', 'インポート'),
+          description: _t('tutorialChImportFabBody', '再度インポートを行う場合は、 このインポートボタンをクリックしてください。<br>自由に動かせますので、 お好きな場所に設置してください。'),
+          side: 'left',
+          align: 'center'
+        }
+      });
+    }
+
     // ── 完了 step (popover only、 element なし = 画面中央 modal 風) ──
     steps.push({
       popover: {

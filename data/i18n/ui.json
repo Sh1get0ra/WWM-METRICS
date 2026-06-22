@@ -538,6 +538,41 @@
     "ko": "가져오기",
     "vi": "NHẬP"
   },
+  "welcomeBannerMsg": {
+    "ja": "データ取込から始めましょう (右下の朱印をクリック)",
+    "en": "Start by importing your data (click the seal at the bottom-right)",
+    "zh": "先导入数据 (点击右下角朱印)",
+    "ko": "데이터 임포트로 시작 (우측 하단 인장 클릭)",
+    "vi": "Bắt đầu bằng cách import dữ liệu (nhấp vào ấn ở góc dưới phải)"
+  },
+  "welcomeBannerBtn": {
+    "ja": "インポート",
+    "en": "IMPORT",
+    "zh": "导入",
+    "ko": "가져오기",
+    "vi": "NHẬP"
+  },
+  "welcomeBannerClose": {
+    "ja": "閉じる",
+    "en": "Close",
+    "zh": "关闭",
+    "ko": "닫기",
+    "vi": "Đóng"
+  },
+  "tutorialChImportFabTitle": {
+    "ja": "インポート",
+    "en": "Import",
+    "zh": "导入",
+    "ko": "임포트",
+    "vi": "Import"
+  },
+  "tutorialChImportFabBody": {
+    "ja": "再度インポートを行う場合は、 このインポートボタンをクリックしてください。<br>自由に動かせますので、 お好きな場所に設置してください。",
+    "en": "To re-import, click this Import button.<br>It can be dragged freely — place it wherever you prefer.",
+    "zh": "需要再次导入时, 请点击此导入按钮。<br>可自由拖动, 请放置在喜欢的位置。",
+    "ko": "다시 임포트할 때는 이 임포트 버튼을 클릭하세요.<br>자유롭게 이동 가능하니, 원하는 위치에 배치하세요.",
+    "vi": "Để import lại, hãy nhấp vào nút Import này.<br>Nút có thể kéo thả tự do — đặt ở vị trí bạn muốn."
+  },
   "exportBtn": {
     "ja": "EXPORT",
     "en": "EXPORT",
