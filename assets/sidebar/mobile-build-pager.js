@@ -113,14 +113,27 @@
       // 1. pager 内の slot を [data-mb-origin] マーク経由で元 host へ全部戻す。
       //    HTML hardcode placeholder slot を直接 move してるため、 _refreshAll では
       //    再生成されない (import 無し時 _refreshAll は early return)。
+      //    武庫 slot は mobile 時 bowGrid (gear セクション) に居る → document 順巡回だと
+      //    xinfaHost.appendChild が「武庫 → 心法 0-3」 で 武庫が先頭に来る (PC 戻し時 入替バグ)。
+      //    → origin 別に集めて xinfa は arsenal-slot を必ず末尾に並べる
       const root = document.querySelector('#wsBuild .wwm-mb-pager-root');
       if (root) {
+        const byOrigin = { gear: [], xinfa: [], qishu: [] };
         root.querySelectorAll('[data-mb-origin]').forEach(el => {
           const origin = el.dataset.mbOrigin;
           delete el.dataset.mbOrigin;
-          const host = originalHosts[origin]?.el;
-          if (host) host.appendChild(el);
+          if (byOrigin[origin]) byOrigin[origin].push(el);
         });
+        // xinfa = arsenal-slot を末尾固定 (元 render 順 = 心法 0-3 → 武庫)
+        byOrigin.xinfa.sort((a, b) =>
+          (a.classList.contains('wwm-arsenal-slot') ? 1 : 0) -
+          (b.classList.contains('wwm-arsenal-slot') ? 1 : 0)
+        );
+        for (const origin of ['gear','xinfa','qishu']) {
+          const host = originalHosts[origin]?.el;
+          if (!host) continue;
+          byOrigin[origin].forEach(el => host.appendChild(el));
+        }
       }
       // 2. 元 host を pager と同階層 (wsBuild 直下、 元位置) に復帰
       for (const k of ['gear','xinfa','qishu']) {
