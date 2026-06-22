@@ -1,0 +1,4 @@
+# Cloudflare Pages _headers = bm-loader.js を cross-origin fetch 可能化 (公式 mypage から fetch 用)
+/bm-loader.js
+  Access-Control-Allow-Origin: *
+  Cache-Control: no-store

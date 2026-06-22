@@ -219,10 +219,13 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
       );
     }
 
-    // 奇術 (装備中 8 枠、 _qishuIds[i] → WWM_QISHU_ICONS[id].pic_url で公式 CDN URL 解決。
-    // 旧 import data (_qishuIconsBase64) や master 未登録 id は '' で順序保持 — _qishuRow が空 URL skip)
+    // 奇術 (装備中 8 枠、 v3 = base64 優先 / fallback CDN URL)。
+    // v3 base64 = bookmarklet (bm-loader.js) が公式 mypage から取得して roleInfo._qishuIconsBase64[id] に保存 (画像生成 canvas tainted 回避)。
+    // SHARE URL では share.js が _qishuIconsBase64 を削除 = 軽量化 keep (本人 PC のみ使用)。
+    // 旧 v2 (_qishuIds + _qishuMaster のみ) data = CDN URL fallback (画像生成では出ない仕様 = 旧 import data + bookmarklet 再登録待ち)。
     const _qm = window.WWM_QISHU_ICONS || {};
-    const qishu = (ri._qishuIds || []).map(id => (id && _qm[id] && _qm[id].pic_url) || '');
+    const _qb = ri._qishuIconsBase64 || {};
+    const qishu = (ri._qishuIds || []).map(id => (id && _qb[id]) || (id && _qm[id] && _qm[id].pic_url) || '');
 
     // 勁率 donut
     const donut = {
