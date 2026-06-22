@@ -46,7 +46,7 @@
           <h2 id="wwmTutorialAskTitle">${_t('tutorialAskTitle', 'ツアーを受けますか?')}</h2>
           <button class="wwm-modal-close" aria-label="${_t('close', '閉じる')}">×</button>
         </header>
-        <div class="wwm-modal-body">
+        <div class="wwm-modal-body wwm-ws-paper">
           <p>${_t('tutorialAskBody', 'WWMetrics の主要機能を約 1-2 分で案内します。後で NOTE から再表示も可能。')}</p>
         </div>
         <footer class="wwm-modal-footer">

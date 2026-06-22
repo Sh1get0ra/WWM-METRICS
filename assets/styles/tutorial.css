@@ -123,7 +123,8 @@
   font-size: 13px;
   line-height: 1.7;
   margin: 0;
-  color: var(--sumi-fg, #ede4d0);
+  /* wwm-ws-paper 紙地化に合わせ墨色文字 (旧 --sumi-fg 明色は山水透過で読めず、 2026-06-22 兄貴指摘) */
+  color: var(--kami-fg, #3d2e1f);
 }
 .wwm-tutorial-ask-modal .wwm-modal-footer {
   display: flex;
