@@ -559,5 +559,13 @@ document.addEventListener('DOMContentLoaded', init);
   document.addEventListener('DOMContentLoaded', apply);
 })();
 
+// vite移行 P7 (2026-06-22): ESM module scope で top-level function は window 自動 expose されない。
+// index.html inline onclick (setLang/savePreset/loadPreset/deletePreset/importData) から呼ばれるため明示 expose 必須。
+window.setLang = setLang;
+window.savePreset = savePreset;
+window.loadPreset = loadPreset;
+window.deletePreset = deletePreset;
+window.importData = importData;
+
 // vite移行 P2: ESM 副作用 module 化 (window expose は IIFE 内 keep)
 export {};
