@@ -23,7 +23,7 @@ const SIZE = 64; // 生成基準 (ベクタ = 表示サイズは CSS)
 // 対象: ui.json key (ja 値を引く) + literal (i18n 外の静的文字)
 const UI_KEYS = [
   'wsTabBuild', 'wsTabAnlz', 'wsTabEnbu', 'wsTabHist', // tab (PC + mobile bottom nav)
-  'wsTabGear', 'wsTabXinfa',                            // 扁額題字 (武備 panel 区画)
+  'wsTabGear', 'wsTabXinfa', 'wsXinfaArsenal',          // 扁額題字 (武備 panel 区画、 心法/武庫 統合題字)
   'heroSeatScore', 'heroSeatDps',                       // hero 題字
   'railStatus',                                         // rail 頭
   'brandVert',                                          // topbar 縦書きブランド「風燕計」

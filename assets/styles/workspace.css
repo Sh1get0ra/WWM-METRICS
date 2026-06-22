@@ -1608,15 +1608,26 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   background-repeat: no-repeat;
 }
 
-/* 武庫 + 奇術 editor-list = 白等級 = radial-gradient + 公式 img overlay blend 統一 (2026-06-16、 兄貴指示)。
+/* 奇術 editor-list = 白等級 = radial-gradient + 公式 img overlay blend (2026-06-16、 兄貴指示)。
    金紫青と同構造、 色は紙色基調 (薄古紙→砂金→茶墨) で階層感確保 */
-.wwm-ws-paper .wwm-arsenal-slot .plank-paint,
 .wwm-ws-paper .wwm-qishu-editor-list .wwm-qishu-picker-diamond::before {
   background-image:
     linear-gradient(rgba(242,234,212,var(--rank-bg-fade)), rgba(242,234,212,var(--rank-bg-fade))),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/1_big-1bac704e.png"),
     radial-gradient(circle at 50% 40%, #e8dcbe 0%, #b8a47a 55%, #5e4a28 100%);
   background-blend-mode: normal, overlay, normal;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* 武庫 card = 心法 (明背景+墨アイコン) の反転ネガ (TODO #38 案1、 兄貴指示 2026-06-22)。
+   frame = 旧「白等級 紙色基調」 → 墨地に反転 (公式 texture は overlay で擦れ感のみ流用)。
+   アイコン明色反転は別 rule、 流派バッジは公式色維持 (色変更 NG) */
+.wwm-ws-paper .wwm-arsenal-slot .plank-paint {
+  background-image:
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/1_big-1bac704e.png"),
+    radial-gradient(circle at 50% 40%, #4a4034 0%, #2f2a23 55%, #14110c 100%);
+  background-blend-mode: soft-light, normal;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1670,9 +1681,12 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 .wwm-ws-paper .wwm-gear-grid .wwm-equip-slot .plank-icon-wrap img {
   width: 170%; height: 170%;
 }
-/* 武庫 = 130% (兄貴指示 2026-06-15) */
+/* 武庫 = 130% (兄貴指示 2026-06-15) + 明色反転 (TODO #38 案1)。
+   心法 = 墨塗り (brightness0 invert0.15) に対し武庫 = 明色 (invert 高め = 紙色トーン) で反転ネガ。
+   元アイコンは明色線画 (共通 rule が brightness0+invert で墨化している)。 塩梅は実機擦り合わせ */
 .wwm-ws-paper .wwm-arsenal-slot .plank-icon-wrap img {
   width: 130%; height: 130%;
+  filter: brightness(0) invert(0.88) sepia(0.35) saturate(0.8) hue-rotate(352deg);
 }
 /* 武庫主題配置 = 2026-06-22 retire (h2 と grid container が別 sibling で card 真上完全同期不可能、
    別 session の workspace 構成大改修で再着手予定、 TODO 起票済) */
