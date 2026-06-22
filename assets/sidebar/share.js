@@ -1,4 +1,4 @@
-// ── WWM-METRICS Sidebar / Build Sharing URL (Phase 3.5 切出) ────
+// ── WWMetrics Sidebar / Build Sharing URL (Phase 3.5 切出) ────
 // _shareBuildUrl / _loadSharedBuild / window.WWMShare
 // 絶対ルール: localStorage 浸食NG (SHARE mode 保護機構維持)、
 //             WWMBaseline (base64+checksum) touch禁止 — logic 改変なし純粋move
@@ -8,9 +8,9 @@
   // ── 他 module alias ─────────────────────────────────────
   const _curLang = window.WWMSidebar.anlz.curLang;
 
-  function _shareBuildUrl() {
-    // SHARE Build mode 中は 他人ビルドの再配布回避のため SHARE生成 禁止
-    if (WWMState.blockIfShared((window.T?.sharedBuildShareBlocked) ?? '閲覧モード中: SHARE URL 生成は無効化されています (他人のビルドを再配布できません)')) return;
+  function _shareBuildUrl(opts) {
+    // 閲覧モード (isShared) では card タブのみ disabled (L174 cardBlocked 分岐)。
+    // url/obs タブは利用可 — 旧 blockIfShared 全 block guard は撤去済 (2026-06-12)。
     // 受信側は index.html inline script で memory-only mode 処理 (localStorage 浸食回避)
     const ri = WWMState.roleInfo;
     if (!ri) { alert('build データなし。先に import してください。'); return; }
@@ -29,9 +29,11 @@
     // 武術/流派/奇術 icon base64 (2026-06-07 bookmarklet 拡張分) も除外 — 受信側はEXPORT 不可なので不要
     delete riLight._kongfuIconsBase64;
     delete riLight._liupaiIconsBase64;
-    delete riLight._qishuIcons;
-    delete riLight._qishuIconsBase64;
+    delete riLight._qishuIcons;          // 旧 schema 互換削除
+    delete riLight._qishuIconsBase64;    // 旧 schema 互換削除
+    delete riLight._qishuMaster;         // bookmarklet 埋込 master (受信側は WWM_QISHU_ICONS 持ち = 不要、 11KB 節約)
     delete riLight._liupaiPicsBase64;
+    // _qishuIds は keep — SHARE に乗せて受信側で WWM_QISHU_ICONS lookup 描画 (v2 schema)
     // 心法icon URL配列も削除 → 受信側で WWM_XINFA_ICONS (data/xinfa_icons.json) fallback で復元
     delete riLight._xinfaIcons;
     // avatar URL も削除 → 受信側で roleAvatar ID → WWM_AVATAR_ICONS (data/avatar_icons.json) で復元
@@ -169,174 +171,226 @@
     const initAc = saved.ac || '#c9a45a';
     const initLbg = saved.lbg || '#d4af37';
     let obsUrl = buildObsUrl(initOp, initBg, initT1, initT2, initAc, initLbg);
-    // modal で表示 + clipboard コピー
+
+    // ── 3 タブ modal shell ──────────────────────────────────────────
+    const cardBlocked = !!(window.WWMState && WWMState.isShared);
+    const T = window.T || {};
     const m = document.createElement('div');
     m.className = 'wwm-modal-backdrop';
     m.innerHTML = `
-      <div class="wwm-modal wwm-modal-wide">
-        <div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/share.svg');background-position:calc(100% + 40px) calc(100% + 140px);background-size:70%;"></div>
+      <div class="wwm-modal wwm-modal-wide wwm-tool-modal wwm-share-modal-b">
+        <span class="wwm-tool-bracket wwm-tool-bracket-tl"></span><span class="wwm-tool-bracket wwm-tool-bracket-tr"></span>
+        <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
         <div class="wwm-modal-header">
-          <h2>${(window.T?.shareTitle) ?? '飛簡 / BUILD SHARE'}</h2>
+          <h2><span class="wwm-tool-title-ja" data-i18n="shareTitle" data-kaisho="shareTitle">${T.shareTitle ?? '飛簡'}</span><span class="wwm-tool-title-en">SHARE</span><span class="wwm-tool-seal">飛</span></h2>
           <button class="wwm-modal-close" aria-label="Close">×</button>
         </div>
-        <div class="wwm-modal-body">
-          <!-- セクション1: ビルド共有 -->
-          <div style="font-size:13px;color:var(--gold-bright);font-weight:700;letter-spacing:0.12em;margin-bottom:6px;">${(window.T?.shareSect1Heading) ?? '▍ビルド共有'}</div>
-          <p style="font-size:12px;color:var(--paper);opacity:0.92;margin:0 0 10px;line-height:1.6;">${(window.T?.shareSect1Desc) ?? ''}</p>
-          <textarea class="wwm-share-url" id="wwmShareUrlNormal" readonly>${url}</textarea>
-          <div class="wwm-btn-row" style="margin-top:6px;">
-            <button class="wwm-btn-secondary" id="wwmShareCopyNormal">${(window.T?.shareCopyUrl) ?? 'URL コピー'}</button>
-          </div>
-
-          <!-- セクション2: OBS Browser Source (mobile時 hidden) -->
-          <div class="wwm-share-obs-block">
-          <div style="font-size:13px;color:var(--gold-bright);font-weight:700;letter-spacing:0.12em;margin:22px 0 6px;">${(window.T?.shareSect2Heading) ?? '▍OBS 配信用 URL'}</div>
-          <p style="font-size:12px;color:var(--paper);opacity:0.92;margin:0 0 8px;line-height:1.6;">${(window.T?.shareSect2Desc) ?? ''}</p>
-          <div class="wwm-share-warn" style="font-size:12px;color:#e8a04a;background:rgba(232,160,74,0.10);border-left:3px solid #e8a04a;padding:8px 10px;margin:0 0 10px;line-height:1.6;border-radius:2px;">⚠ ${(window.T?.shareObsCacheWarn) ?? 'OBSキャッシュの影響で正常に表示されない場合は、ブラウザソースの作り直し or OBS再起動が必要'}</div>
-          <details style="margin:0 0 10px;font-size:12px;color:var(--paper);">
-            <summary style="cursor:pointer;color:var(--gold-bright);letter-spacing:0.05em;font-weight:700;">${(window.T?.shareObsSetup) ?? 'OBS への設定方法'}</summary>
-            <ol style="margin:6px 0 0;padding-left:20px;line-height:1.7;opacity:0.92;">
-              <li>${(window.T?.shareObsStep1) ?? ''}</li>
-              <li>${(window.T?.shareObsStep2) ?? ''}</li>
-              <li>${(window.T?.shareObsStep3) ?? ''}</li>
-              <li>${(window.T?.shareObsStep4) ?? ''}</li>
-              <li>${(window.T?.shareObsStep5) ?? ''}</li>
-            </ol>
-          </details>
-          <div style="display:flex;align-items:center;gap:12px;font-size:12px;color:var(--paper);margin-bottom:8px;flex-wrap:wrap;">
-            <label style="display:flex;align-items:center;gap:6px;">
-              ${(window.T?.shareLabelBg) ?? '背景色'}
-              <input type="color" id="wwmObsBg" value="${initBg}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
-            </label>
-            <label style="display:flex;align-items:center;gap:6px;">
-              ${(window.T?.shareLabelOpacity) ?? '不透明度'}
-              <input type="range" id="wwmObsOpacity" min="0" max="100" step="1" value="${initOp}" style="width:130px;accent-color:var(--gold);">
-              <span id="wwmObsOpacityVal" style="font-family:var(--f-mono);color:var(--gold-bright);min-width:36px;">${initOp}%</span>
-            </label>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;font-size:12px;color:var(--paper);margin-bottom:8px;flex-wrap:wrap;">
-            <label style="display:flex;align-items:center;gap:6px;">${(window.T?.shareLabelText1) ?? '文字色1'}
-              <input type="color" id="wwmObsT1" value="${initT1}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
-            </label>
-            <label style="display:flex;align-items:center;gap:6px;">${(window.T?.shareLabelText2) ?? '文字色2'}
-              <input type="color" id="wwmObsT2" value="${initT2}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
-            </label>
-            <label style="display:flex;align-items:center;gap:6px;">${(window.T?.shareLabelAcText) ?? 'ラベル文字'}
-              <input type="color" id="wwmObsAc" value="${initAc}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
-            </label>
-            <label style="display:flex;align-items:center;gap:6px;">${(window.T?.shareLabelAcBg) ?? 'ラベル背景'}
-              <input type="color" id="wwmObsLbg" value="${initLbg}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
-            </label>
-          </div>
-          <textarea class="wwm-share-url" id="wwmShareUrlObs" readonly>${obsUrl}</textarea>
-          <div class="wwm-btn-row" style="margin-top:6px;">
-            <button class="wwm-btn-primary" id="wwmShareCopyObs">${(window.T?.shareCopyObs) ?? 'OBS URL コピー'}</button>
-            <button class="wwm-btn-secondary" id="wwmShareTogglePreview">${(window.T?.sharePreviewBtn) ?? 'プレビュー表示'}</button>
-            <button class="wwm-btn-secondary" id="wwmShareClose">${(window.T?.close) ?? '閉じる'}</button>
-          </div>
-          <div id="wwmSharePreviewWrap" style="display:none;margin-top:12px;">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-              <div style="font-size:11px;color:var(--gold-bright);font-weight:700;letter-spacing:0.1em;">${(window.T?.sharePreviewTitle) ?? 'プレビュー'}</div>
-              <label style="font-size:11px;color:var(--paper-mute);display:flex;align-items:center;gap:6px;">${(window.T?.sharePreviewScaleLabel) ?? '縮尺'}
-                <input type="range" id="wwmSharePreviewScale" min="30" max="100" step="5" value="50" style="width:120px;accent-color:var(--gold);">
-                <span id="wwmSharePreviewScaleVal" style="font-family:var(--f-mono);color:var(--gold-bright);min-width:36px;">50%</span>
-              </label>
-            </div>
-            <div style="background:repeating-conic-gradient(#1a1a1a 0% 25%, #2a2a2a 0% 50%) 50% / 16px 16px;border:1px solid var(--ink-2);border-radius:3px;padding:8px;display:flex;justify-content:center;overflow:auto;">
-              <div id="wwmSharePreviewClip" style="width:320px;height:450px;overflow:hidden;position:relative;">
-                <iframe id="wwmSharePreviewFrame" src="" style="width:640px;height:900px;border:none;background:transparent;transform:scale(0.5);transform-origin:0 0;" sandbox="allow-scripts allow-same-origin"></iframe>
-              </div>
-            </div>
-          </div>
-          </div><!-- /wwm-share-obs-block -->
-          <div id="wwmShareMsg" style="margin-top:8px;font-size:12px;color:var(--jade-bright);"></div>
+        <div class="wwm-tool-tabs">
+          <button class="wwm-tool-tab" data-tab="card" ${cardBlocked ? `disabled title="${T.shareCardBlocked ?? ''}"` : ''}>${T.shareTabCard ?? '画像カード'}</button>
+          <button class="wwm-tool-tab" data-tab="url">${T.shareTabUrl ?? '共有URL'}</button>
+          <button class="wwm-tool-tab" data-tab="obs">${T.shareTabObs ?? 'OBS配信'}</button>
         </div>
-      </div>
-    `;
+        <div class="wwm-modal-body wwm-ws-paper wwm-share-pane" data-pane="card" hidden></div>
+        <div class="wwm-modal-body wwm-ws-paper wwm-share-pane" data-pane="url" hidden></div>
+        <div class="wwm-modal-body wwm-ws-paper wwm-share-pane" data-pane="obs" hidden></div>
+        <div class="wwm-tool-modal-footer" id="wwmShareFooter"><div id="wwmShareMsg" style="font-size:12px;color:var(--gold-paper);min-height:16px;"></div></div>
+      </div>`;
     document.body.appendChild(m);
-    const close = () => m.remove();
-    m.querySelector('.wwm-modal-close').addEventListener('click', close);
-    m.querySelector('#wwmShareClose').addEventListener('click', close);
+
+    // ── pane references ────────────────────────────────────────────
+    const panes = {
+      card: m.querySelector('[data-pane="card"]'),
+      url:  m.querySelector('[data-pane="url"]'),
+      obs:  m.querySelector('[data-pane="obs"]'),
+    };
+    const tabs = m.querySelectorAll('.wwm-tool-tab');
+    const footer = m.querySelector('#wwmShareFooter');
+
+    // ── copyTo helper (msg は footer 常設 #wwmShareMsg に表示) ─────
     const copyTo = async (text, label) => {
       try {
         await navigator.clipboard.writeText(text);
         const tpl = (window.T?.shareMsgCopyOK) ?? '✓ {label} コピー完了';
-        m.querySelector('#wwmShareMsg').textContent = tpl.replace('{label}', label);
+        footer.querySelector('#wwmShareMsg').textContent = tpl.replace('{label}', label);
       } catch (e) {
-        m.querySelector('#wwmShareMsg').textContent = (window.T?.shareMsgCopyManual) ?? '手動でコピーしてください';
+        footer.querySelector('#wwmShareMsg').textContent = (window.T?.shareMsgCopyManual) ?? '手動でコピーしてください';
       }
     };
-    m.querySelector('#wwmShareCopyNormal').addEventListener('click', () => copyTo(url, '通常URL'));
-    m.querySelector('#wwmShareCopyObs').addEventListener('click', () => copyTo(obsUrl, 'OBS URL'));
-    const opSlider = m.querySelector('#wwmObsOpacity');
-    const opVal = m.querySelector('#wwmObsOpacityVal');
-    const bgPicker = m.querySelector('#wwmObsBg');
-    const t1Picker = m.querySelector('#wwmObsT1');
-    const t2Picker = m.querySelector('#wwmObsT2');
-    const acPicker = m.querySelector('#wwmObsAc');
-    const lbgPicker = m.querySelector('#wwmObsLbg');
-    const obsTa = m.querySelector('#wwmShareUrlObs');
-    const previewWrap = m.querySelector('#wwmSharePreviewWrap');
-    const previewFrame = m.querySelector('#wwmSharePreviewFrame');
-    const togglePreviewBtn = m.querySelector('#wwmShareTogglePreview');
-    let previewOn = false;
-    let previewDebounce = null;
-    const refreshPreviewSrc = () => {
-      if (!previewOn) return;
-      if (previewDebounce) clearTimeout(previewDebounce);
-      previewDebounce = setTimeout(() => {
-        // cache buster で 旧版iframe強制再load
-        const sep = obsUrl.includes('?') ? '&' : '?';
-        const bustParam = sep + '_t=' + Date.now();
-        // hash#build の前に bustParam 挿入
-        const hashIdx = obsUrl.indexOf('#');
-        previewFrame.src = hashIdx >= 0
-          ? obsUrl.slice(0, hashIdx) + bustParam + obsUrl.slice(hashIdx)
-          : obsUrl + bustParam;
-      }, 250);
-    };
-    const refreshObs = () => {
-      const pct = parseInt(opSlider.value, 10);
-      opVal.textContent = pct + '%';
-      obsUrl = buildObsUrl(pct, bgPicker.value, t1Picker.value, t2Picker.value, acPicker.value, lbgPicker.value);
-      obsTa.value = obsUrl;
-      try { localStorage.setItem(OVL_KEY, JSON.stringify({ op: pct, bg: bgPicker.value, t1: t1Picker.value, t2: t2Picker.value, ac: acPicker.value, lbg: lbgPicker.value })); } catch(_) {}
-      refreshPreviewSrc();
-    };
-    togglePreviewBtn.addEventListener('click', () => {
-      previewOn = !previewOn;
-      previewWrap.style.display = previewOn ? 'block' : 'none';
-      togglePreviewBtn.textContent = previewOn ? ((window.T?.sharePreviewClose) ?? 'プレビュー閉じる') : ((window.T?.sharePreviewBtn) ?? 'プレビュー表示');
-      if (previewOn) {
-        // cache buster で 旧版iframe強制再load
-        const sep = obsUrl.includes('?') ? '&' : '?';
-        const bustParam = sep + '_t=' + Date.now();
-        const hashIdx = obsUrl.indexOf('#');
-        previewFrame.src = hashIdx >= 0
-          ? obsUrl.slice(0, hashIdx) + bustParam + obsUrl.slice(hashIdx)
-          : obsUrl + bustParam;
-      } else {
-        previewFrame.src = 'about:blank';
+
+    // ── pane builders ──────────────────────────────────────────────
+    // bg-icon = 公式素材、3 タブ共通 (タブでアイコン変えない — 兄貴指定 2026-06-13)
+    const _bgIconHtml = `<div class="wwm-modal-bg-icon" style="background-image:url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b408a29e4ef06def5ezTp9BZEC05.png');"></div>`;
+
+    function _buildUrlPane(pane) {
+      pane.innerHTML = `${_bgIconHtml}
+        <div style="font-size:13px;color:var(--gold-paper);font-weight:700;letter-spacing:0.12em;margin-bottom:6px;">${(window.T?.shareSect1Heading) ?? '▍ビルド共有'}</div>
+        <p style="font-size:12px;color:var(--kami-fg);opacity:0.92;margin:0 0 10px;line-height:1.6;">${(window.T?.shareSect1Desc) ?? ''}</p>
+        <textarea class="wwm-share-url" id="wwmShareUrlNormal" readonly>${url}</textarea>`;
+      // アクション btn = footer (墨帯) へ — 紙 body 上の secondary は不可視 (2026-06-13 兄貴指摘)
+      footer.insertAdjacentHTML('beforeend',
+        `<div class="wwm-btn-row wwm-share-foot-acts" data-foot-owner="url"><button class="wwm-btn-primary" id="wwmShareCopyNormal">${(window.T?.shareCopyUrl) ?? 'URL コピー'}</button></div>`);
+      footer.querySelector('#wwmShareCopyNormal').addEventListener('click', () => copyTo(url, '通常URL'));
+    }
+
+    function _buildObsPane(pane) {
+      pane.innerHTML = `${_bgIconHtml}
+        <div style="font-size:13px;color:var(--gold-paper);font-weight:700;letter-spacing:0.12em;margin-bottom:6px;">${(window.T?.shareSect2Heading) ?? '▍OBS 配信用 URL'}</div>
+        <p style="font-size:12px;color:var(--kami-fg);opacity:0.92;margin:0 0 8px;line-height:1.6;">${(window.T?.shareSect2Desc) ?? ''}</p>
+        <div class="wwm-share-warn" style="font-size:12px;color:var(--vermilion-deep);background:var(--vermilion-faint);border-left:3px solid var(--vermilion-deep);padding:8px 10px;margin:0 0 10px;line-height:1.6;border-radius:2px;">⚠ ${(window.T?.shareObsCacheWarn) ?? 'OBSキャッシュの影響で正常に表示されない場合は、ブラウザソースの作り直し or OBS再起動が必要'}</div>
+        <details style="margin:0 0 10px;font-size:12px;color:var(--kami-fg);">
+          <summary style="cursor:pointer;color:var(--gold-paper);letter-spacing:0.05em;font-weight:700;">${(window.T?.shareObsSetup) ?? 'OBS への設定方法'}</summary>
+          <ol style="margin:6px 0 0;padding-left:20px;line-height:1.7;opacity:0.92;">
+            <li>${(window.T?.shareObsStep1) ?? ''}</li>
+            <li>${(window.T?.shareObsStep2) ?? ''}</li>
+            <li>${(window.T?.shareObsStep3) ?? ''}</li>
+            <li>${(window.T?.shareObsStep4) ?? ''}</li>
+            <li>${(window.T?.shareObsStep5) ?? ''}</li>
+          </ol>
+        </details>
+        <div style="display:flex;align-items:center;gap:12px;font-size:12px;color:var(--kami-fg);margin-bottom:8px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:6px;">
+            ${(window.T?.shareLabelBg) ?? '背景色'}
+            <input type="color" id="wwmObsBg" value="${initBg}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;">
+            ${(window.T?.shareLabelOpacity) ?? '不透明度'}
+            <input type="range" id="wwmObsOpacity" min="0" max="100" step="1" value="${initOp}" style="width:130px;accent-color:var(--gold);">
+            <span id="wwmObsOpacityVal" style="font-family:var(--f-latin);color:var(--gold-paper);min-width:36px;">${initOp}%</span>
+          </label>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:12px;color:var(--kami-fg);margin-bottom:8px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:6px;">${(window.T?.shareLabelText1) ?? '文字色1'}
+            <input type="color" id="wwmObsT1" value="${initT1}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;">${(window.T?.shareLabelText2) ?? '文字色2'}
+            <input type="color" id="wwmObsT2" value="${initT2}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;">${(window.T?.shareLabelAcText) ?? 'ラベル文字'}
+            <input type="color" id="wwmObsAc" value="${initAc}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;">${(window.T?.shareLabelAcBg) ?? 'ラベル背景'}
+            <input type="color" id="wwmObsLbg" value="${initLbg}" style="width:32px;height:24px;border:1px solid var(--ink-2);background:transparent;cursor:pointer;">
+          </label>
+        </div>
+        <textarea class="wwm-share-url" id="wwmShareUrlObs" readonly>${obsUrl}</textarea>
+        <div id="wwmSharePreviewWrap" style="display:none;margin-top:12px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+            <div style="font-size:11px;color:var(--gold-paper);font-weight:700;letter-spacing:0.1em;">${(window.T?.sharePreviewTitle) ?? 'プレビュー'}</div>
+            <label style="font-size:11px;color:var(--kami-fg-dim);display:flex;align-items:center;gap:6px;">${(window.T?.sharePreviewScaleLabel) ?? '縮尺'}
+              <input type="range" id="wwmSharePreviewScale" min="30" max="100" step="5" value="50" style="width:120px;accent-color:var(--gold);">
+              <span id="wwmSharePreviewScaleVal" style="font-family:var(--f-latin);color:var(--gold-paper);min-width:36px;">50%</span>
+            </label>
+          </div>
+          <div style="background:repeating-conic-gradient(#1a1a1a 0% 25%, #2a2a2a 0% 50%) 50% / 16px 16px;border:1px solid var(--ink-2);border-radius:3px;padding:8px;display:flex;justify-content:center;overflow:auto;">
+            <div id="wwmSharePreviewClip" style="width:320px;height:450px;overflow:hidden;position:relative;">
+              <iframe id="wwmSharePreviewFrame" src="" style="width:640px;height:900px;border:none;background:transparent;transform:scale(0.5);transform-origin:0 0;" sandbox="allow-scripts allow-same-origin"></iframe>
+            </div>
+          </div>
+        </div>`;
+
+      // アクション btn = footer (墨帯) へ — 紙 body 上の secondary は不可視 (2026-06-13 兄貴指摘)
+      footer.insertAdjacentHTML('beforeend',
+        `<div class="wwm-btn-row wwm-share-foot-acts" data-foot-owner="obs"><button class="wwm-btn-primary" id="wwmShareCopyObs">${(window.T?.shareCopyObs) ?? 'OBS URL コピー'}</button><button class="wwm-btn-secondary" id="wwmShareTogglePreview">${(window.T?.sharePreviewBtn) ?? 'プレビュー表示'}</button></div>`);
+
+      // OBS pane listeners
+      const opSlider = pane.querySelector('#wwmObsOpacity');
+      const opVal = pane.querySelector('#wwmObsOpacityVal');
+      const bgPicker = pane.querySelector('#wwmObsBg');
+      const t1Picker = pane.querySelector('#wwmObsT1');
+      const t2Picker = pane.querySelector('#wwmObsT2');
+      const acPicker = pane.querySelector('#wwmObsAc');
+      const lbgPicker = pane.querySelector('#wwmObsLbg');
+      const obsTa = pane.querySelector('#wwmShareUrlObs');
+      const previewWrap = pane.querySelector('#wwmSharePreviewWrap');
+      const previewFrame = pane.querySelector('#wwmSharePreviewFrame');
+      const togglePreviewBtn = footer.querySelector('#wwmShareTogglePreview');
+      let previewOn = false;
+      let previewDebounce = null;
+      const refreshPreviewSrc = () => {
+        if (!previewOn) return;
+        if (previewDebounce) clearTimeout(previewDebounce);
+        previewDebounce = setTimeout(() => {
+          // cache buster で 旧版iframe強制再load
+          const sep = obsUrl.includes('?') ? '&' : '?';
+          const bustParam = sep + '_t=' + Date.now();
+          // hash#build の前に bustParam 挿入
+          const hashIdx = obsUrl.indexOf('#');
+          previewFrame.src = hashIdx >= 0
+            ? obsUrl.slice(0, hashIdx) + bustParam + obsUrl.slice(hashIdx)
+            : obsUrl + bustParam;
+        }, 250);
+      };
+      const refreshObs = () => {
+        const pct = parseInt(opSlider.value, 10);
+        opVal.textContent = pct + '%';
+        obsUrl = buildObsUrl(pct, bgPicker.value, t1Picker.value, t2Picker.value, acPicker.value, lbgPicker.value);
+        obsTa.value = obsUrl;
+        try { localStorage.setItem(OVL_KEY, JSON.stringify({ op: pct, bg: bgPicker.value, t1: t1Picker.value, t2: t2Picker.value, ac: acPicker.value, lbg: lbgPicker.value })); } catch(_) {}
+        refreshPreviewSrc();
+      };
+      togglePreviewBtn.addEventListener('click', () => {
+        previewOn = !previewOn;
+        previewWrap.style.display = previewOn ? 'block' : 'none';
+        togglePreviewBtn.textContent = previewOn ? ((window.T?.sharePreviewClose) ?? 'プレビュー閉じる') : ((window.T?.sharePreviewBtn) ?? 'プレビュー表示');
+        if (previewOn) {
+          // cache buster で 旧版iframe強制再load
+          const sep = obsUrl.includes('?') ? '&' : '?';
+          const bustParam = sep + '_t=' + Date.now();
+          const hashIdx = obsUrl.indexOf('#');
+          previewFrame.src = hashIdx >= 0
+            ? obsUrl.slice(0, hashIdx) + bustParam + obsUrl.slice(hashIdx)
+            : obsUrl + bustParam;
+        } else {
+          previewFrame.src = 'about:blank';
+        }
+      });
+      const scaleSlider = pane.querySelector('#wwmSharePreviewScale');
+      const scaleVal = pane.querySelector('#wwmSharePreviewScaleVal');
+      const scaleClip = pane.querySelector('#wwmSharePreviewClip');
+      const INNER_W = 640, INNER_H = 900;
+      scaleSlider.addEventListener('input', () => {
+        const pct = parseInt(scaleSlider.value, 10);
+        const s = pct / 100;
+        scaleVal.textContent = pct + '%';
+        previewFrame.style.transform = `scale(${s})`;
+        scaleClip.style.width = (INNER_W * s) + 'px';
+        scaleClip.style.height = (INNER_H * s) + 'px';
+      });
+      opSlider.addEventListener('input', refreshObs);
+      bgPicker.addEventListener('input', refreshObs);
+      t1Picker.addEventListener('input', refreshObs);
+      t2Picker.addEventListener('input', refreshObs);
+      acPicker.addEventListener('input', refreshObs);
+      lbgPicker.addEventListener('input', refreshObs);
+      footer.querySelector('#wwmShareCopyObs').addEventListener('click', () => copyTo(obsUrl, 'OBS URL'));
+    }
+
+    function _buildCardPane(pane) {
+      if (window.WWMExportCard && window.WWMExportCard.mountCardPane) {
+        window.WWMExportCard.mountCardPane(pane, footer);
+        pane.insertAdjacentHTML('afterbegin', _bgIconHtml); // mount の innerHTML 上書き後に挿入
+        return;
       }
-    });
-    const scaleSlider = m.querySelector('#wwmSharePreviewScale');
-    const scaleVal = m.querySelector('#wwmSharePreviewScaleVal');
-    const scaleClip = m.querySelector('#wwmSharePreviewClip');
-    const INNER_W = 640, INNER_H = 900;
-    scaleSlider.addEventListener('input', () => {
-      const pct = parseInt(scaleSlider.value, 10);
-      const s = pct / 100;
-      scaleVal.textContent = pct + '%';
-      previewFrame.style.transform = `scale(${s})`;
-      scaleClip.style.width = (INNER_W * s) + 'px';
-      scaleClip.style.height = (INNER_H * s) + 'px';
-    });
-    opSlider.addEventListener('input', refreshObs);
-    bgPicker.addEventListener('input', refreshObs);
-    t1Picker.addEventListener('input', refreshObs);
-    t2Picker.addEventListener('input', refreshObs);
-    acPicker.addEventListener('input', refreshObs);
-    lbgPicker.addEventListener('input', refreshObs);
+      pane.innerHTML = _bgIconHtml + '<p style="color:var(--kami-fg-dim);padding:20px;">...</p>';
+    }
+
+    // ── タブ engine ────────────────────────────────────────────────
+    const builders = { card: _buildCardPane, url: _buildUrlPane, obs: _buildObsPane };
+    function _switchTab(name) {
+      tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+      Object.entries(panes).forEach(([k, p]) => { p.hidden = (k !== name); });
+      if (!panes[name]._built) { builders[name](panes[name], footer); panes[name]._built = true; }
+      const ca = footer.querySelector('.wwm-card-actions');
+      if (ca) ca.hidden = (name !== 'card');
+      footer.querySelectorAll('[data-foot-owner]').forEach(el => { el.hidden = (el.dataset.footOwner !== name); });
+    }
+    tabs.forEach(t => t.addEventListener('click', () => { if (!t.disabled) _switchTab(t.dataset.tab); }));
+    _switchTab(cardBlocked ? 'url' : (opts?.tab || 'card'));
+
+    // ── close ──────────────────────────────────────────────────────
+    const close = () => m.remove();
+    m.querySelector('.wwm-modal-close').addEventListener('click', close);
+    m.addEventListener('click', e => { if (e.target === m) close(); });
   }
 
   // hash で build 受信時 復元 — 処理は index.html inline script (memory-only mode、 早期実行)

@@ -1,0 +1,17 @@
+{
+  "_schema": "観音強化 grade 別 base ステ加算 (累積実値、 Lv0 起点)。 武器 (主+副 = slot 1/2) + 環 (slot 10) + 佩 (slot 11) の 4 slot のみ対象 = 観音が外功 min/max に影響する slot のみ (弓 = 観音なし / 防具 = 外功防御のみ で min/max 影響なし)。 全 slot 最大強化 (currentMaxLv) 想定で計算反映 = キャラ才能 max 振り想定と同思想 (ツール = 振り切れ前提で算出)。 拡張時 (例 Lv60 解放) は currentMaxLv 更新 + 新 Lv table 1 行追記のみで全反映、 lv95_base.json は不変。",
+  "_lastUpdated": "2026-06-20",
+  "_source": "兄貴 実機採取 2026-06-20 (鍛音 panel 直読み)",
+  "_note": "Lv50 = 旧 _ENHANCE_MAX dead code 値と一致。 anchor 切替 (lv95_base 観音込み → 観音 0 純粋値) に伴い、 計算反映は本 file 経由に一本化。 中間 Lv (51-54) は table に持たず max 振り想定 で受容 (= ユーザー個別 grade < currentMaxLv の場合 ツールは過大評価、 仕様)。",
+  "currentMaxLv": 55,
+  "tables": {
+    "weapon": {
+      "50": { "minPhys": 85, "maxPhys": 57 },
+      "55": { "minPhys": 97, "maxPhys": 65 }
+    },
+    "ringSash": {
+      "50": { "maxPhys": 113 },
+      "55": { "maxPhys": 129 }
+    }
+  }
+}

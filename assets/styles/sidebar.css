@@ -28,9 +28,9 @@
 /* K: export.js clone の inline box-shadow (universal 書込) 対抗 — strip するな (Step 5 確定) */
 .wwm-sb-tier-badge.tier-SS {
   box-shadow:
-    0 0 5px var(--vermilion-strong),
+    0 0 5px color-mix(in oklab, var(--vermilion) 55%, transparent),
     0 0 10px rgba(240,210,138,0.35),
-    inset 0 1px 0 var(--gold-bright-soft) !important;
+    inset 0 1px 0 color-mix(in oklab, var(--gold-bright) 25%, transparent) !important;
   text-shadow: 0 0 4px rgba(240,210,138,0.6);
 }
 
@@ -73,7 +73,7 @@
 /* SS — gold shimmer sweep + red pulse glow */
 .tier-SS {
   color: var(--c-tier-chip-ss-fg);
-  background: var(--c-tier-chip-ss-bg);
+  background: var(--bg-tier-chip-ss);
   border-color: var(--c-tier-chip-ss-border);
   text-shadow: var(--c-tier-chip-ss-text-shadow);
   box-shadow: var(--c-tier-chip-ss-shadow);
@@ -93,7 +93,7 @@
 /* S — vermilion pulse glow (same style as SS, no shimmer) */
 .tier-S {
   color: var(--c-tier-chip-s-fg);
-  background: var(--c-tier-chip-s-bg);
+  background: var(--bg-tier-chip-s);
   border-color: var(--c-tier-chip-s-border);
   text-shadow: var(--c-tier-chip-s-text-shadow);
   box-shadow: var(--c-tier-chip-s-shadow);
@@ -102,8 +102,8 @@
 
 /* A — jade glow */
 .tier-A {
-  color: var(--jade-bright);
-  background: var(--c-tier-chip-a-bg);
+  color: var(--gold-bright);
+  background: var(--bg-tier-chip-a);
   border-color: var(--c-tier-chip-a-border);
   text-shadow: var(--c-tier-chip-a-text-shadow);
   box-shadow: var(--c-tier-chip-a-shadow);
@@ -112,7 +112,7 @@
 /* B — bone warm glow */
 .tier-B {
   color: var(--c-tier-chip-b-fg);
-  background: var(--c-tier-chip-b-bg);
+  background: var(--bg-tier-chip-b);
   border-color: var(--c-tier-chip-b-border);
   text-shadow: var(--c-tier-chip-b-text-shadow);
   box-shadow: var(--c-tier-chip-b-shadow);
@@ -120,8 +120,8 @@
 
 /* C — dim */
 .tier-C {
-  color: var(--paper-mute);
-  background: var(--c-tier-chip-c-bg);
+  color: var(--sumi-fg-dim);
+  background: var(--bg-tier-chip-c);
   border-color: var(--c-tier-chip-c-border);
   box-shadow: var(--c-tier-C-shadow);
   text-shadow: var(--c-tier-C-text-shadow);
@@ -135,14 +135,14 @@
   width: 300px;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
-  background: linear-gradient(180deg, var(--surf-1), var(--surf-2));
+  background: linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
   border: 1px solid var(--ink-2);
   border-left: 3px solid var(--vermilion);
   border-radius: 2px;
   padding: var(--space-3);
   font-size: var(--text-12);
   z-index: var(--z-floating);
-  color: var(--paper);
+  color: var(--sumi-fg);
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -157,8 +157,8 @@
   top: 0;
   z-index: 10;
   background:
-    radial-gradient(ellipse at top right, var(--gold-bright-faint), transparent 55%),
-    linear-gradient(180deg, var(--c-surf-warm-1), var(--c-surf-warm-2));
+    radial-gradient(ellipse at top right, color-mix(in oklab, var(--gold-bright) 8%, transparent), transparent 55%),
+    linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
   border: 1px solid var(--gold-deep);
   padding: var(--space-3) var(--space-3-5);
   margin-bottom: var(--space-2-5);
@@ -192,7 +192,7 @@
 .wwm-sb-mini-hero-ink {
   position: absolute; bottom: -15px; left: -20px;
   width: 200px; height: 60px;
-  background: var(--c-sb-mini-hero-ink-bg);
+  background: var(--bg-sb-mini-hero-ink);
   filter: blur(8px);
   border-radius: 50%;
   pointer-events: none;
@@ -213,7 +213,7 @@
 
 /* sections wrapper */
 .wwm-sb-rest {
-  background: var(--c-sb-rest-bg);
+  background: var(--bg-sb-rest);
   border: 1px solid var(--ink-1);
   padding: 10px 18px 12px 12px;
   display: flex; flex-direction: column; gap: 4px;
@@ -231,24 +231,24 @@
 /* #wwmSidebar 本体の border を透明 (内側 mini-hero / rest が枠を持つ) */
 #wwmSidebar { border-color: transparent; }
 
-/* サイドパネル + 装備/心法カード 全体 Noto Serif JP に統一 */
+/* サイドパネル + 装備/心法カード 全体 latin (Cinzel + Noto Serif JP fallback) — 2026-06-15 兄貴試行 */
 #wwmSidebar,
 #wwmSidebar *,
 #wwmGearGrid,
 #wwmGearGrid *,
 #wwmXinfaGrid,
 #wwmXinfaGrid * {
-  font-family: var(--f-display, 'Noto Serif JP'), serif;
+  font-family: var(--f-latin);
 }
 
 .wwm-sb-top {
   display: flex; align-items: center; gap: var(--space-2-5);
   padding: var(--space-2-5) 0 var(--space-2-5);
   margin-bottom: var(--space-2);
-  border-bottom: 1px solid var(--accent-mid);
+  border-bottom: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
   position: sticky;
   top: -12px;
-  background: var(--bg-raised);
+  background: var(--sumi-3);
   z-index: 5;
 }
 
@@ -267,7 +267,7 @@
 /* 武格指数 row: SSバッジ縮小 + 中央揃え (base) で row を上げ、3行を等間隔に。top:0 で -2px浮き解除 */
 .wwm-sb-martial .wwm-sb-tier-badge { font-size: var(--text-md); padding: 0 var(--space-1-5); top: 0; }
 
-.wwm-sb-totalmartial b, .wwm-sb-martial b { color: var(--accent); font-weight: var(--fw-bold); margin-left: var(--space-1); }
+.wwm-sb-totalmartial b, .wwm-sb-martial b { color: var(--gold-bright); font-weight: var(--fw-bold); margin-left: var(--space-1); }
 
 .wwm-sb-section-title {
   cursor: pointer;
@@ -288,7 +288,7 @@
 .wwm-sb-tier-badge.tier-rolling,
 .hero-tier.tier-rolling {
   background: linear-gradient(180deg, #2a1a0c 0%, #0a0402 100%);
-  color: #f5d970;
+  color: var(--gold-bright);
   border: 1px solid var(--accent);
   text-align: center;
   box-sizing: border-box;
@@ -313,21 +313,6 @@
 
 /* light mini-hero-card 文字色 rule は light.css 末尾へ再移動 (Step 5-c 2026-06-06):
    modals/light layer の `... b` phantom 競合 + OBS 競合を theme layer natural 勝ちで解消 = imp 不要 */
-
-/* S2-g co-locate (B / K-type): light#96 L804 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .wwm-sb-tier-badge.tier-A {
-  text-shadow: none !important;
-}
-
-/* S2-g co-locate (B / K-type): light#97 L811 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .wwm-sb-tier-badge.tier-B {
-  text-shadow: none !important;
-}
-
-/* S2-g co-locate (B / K-type): light#98 L818 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .wwm-sb-tier-badge.tier-C {
-  text-shadow: none !important;
-}
 
 @media (prefers-reduced-motion: reduce) {
   /* ⚠ K: !important 恒久 keep (a11y kill-switch、 Step 5 確定 2026-06-06)。

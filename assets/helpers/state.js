@@ -1,4 +1,4 @@
-// WWM-METRICS state hub
+// WWMetrics state hub
 // Phase 2.7: 内部 _data object 化 = window.__WWM_* 切離し完了。
 //   - params / lastResult / virtual.* / opt.* / allowDonut → 内部 _data 経由
 // Phase 2.8 (2026-06-07 export.js v2 工事完了と同時): roleInfo / baseline も _data 化。
@@ -19,6 +19,7 @@
       kongfu: null,
       xinfa: null,
       arsenal: null,
+      qishu: null,    // [id × 8] 配列 — 兄貴入替済 奇術 (Phase B 2026-06-13)。 score 計算無関係 = cosmetic 専用。 import で reset (装備/心法と同列)
     },
     opt: {
       best: null,
@@ -59,13 +60,16 @@
       set xinfa(v)  { _data.virtual.xinfa = v; },
       get arsenal() { return _data.virtual.arsenal; },
       set arsenal(v){ _data.virtual.arsenal = (v == null) ? null : v; },
+      get qishu()   { return _data.virtual.qishu; },
+      set qishu(v)  { _data.virtual.qishu = v; },
 
-      /** 全 virtual state リセット (装備/心法/武庫 全部) */
+      /** 全 virtual state リセット (装備/心法/武庫/奇術 全部) */
       clear() {
         _data.virtual.gear = {};
         _data.virtual.kongfu = {};
         _data.virtual.xinfa = null;
         _data.virtual.arsenal = null;
+        _data.virtual.qishu = null;
       },
 
       /** virtual差分 1つでもあるか */

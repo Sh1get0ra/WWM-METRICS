@@ -1,4 +1,4 @@
-// ── WWM-METRICS Import Module ─────────────────────────────────────
+// ── WWMetrics Import Module ─────────────────────────────────────
 // 公式ツール bookmarklet からの roleInfo データ受取 + Preview + Apply
 
 const IMPORT_STORAGE_KEY = 'wwm_last_import_v1';
@@ -6,7 +6,7 @@ const IMPORT_STATE_KEY = 'wwm_last_state_v1';
 const IMPORT_HASH_PREFIX = '#import=';
 // bookmarklet バージョン (bmSrc に _bmVer として刻印 — bookmarklet 拡張時 +1 すると旧版検出が自動で効く)
 // v1 = 2026-06-07: 武術/流派/奇術 icon base64 取込 対応版
-const WWM_BM_VERSION = 1;
+const WWM_BM_VERSION = 2;
 window.WWM_BM_VERSION = WWM_BM_VERSION;
 
 // ── base64url decode ────────────────────────────────────────────
@@ -17,7 +17,7 @@ function _b64urlDecode(s) {
 }
 
 // ── Modal helpers ───────────────────────────────────────────────
-function _createModal(id, titleKey, contentHtml, bgIconUrl) {
+function _createModal(id, titleKey, contentHtml, bgIconUrl, opts) {
   let m = document.getElementById(id);
   if (m) { m.remove(); }
   m = document.createElement('div');
@@ -26,13 +26,14 @@ function _createModal(id, titleKey, contentHtml, bgIconUrl) {
   const iconHtml = bgIconUrl
     ? `<div class="wwm-modal-bg-icon" style="background-image:url('${bgIconUrl}');"></div>` : '';
   m.innerHTML = `
-    <div class="wwm-modal wwm-modal-square">
-      ${iconHtml}
+    <div class="wwm-modal wwm-modal-square wwm-tool-modal">
+      <span class="wwm-tool-bracket wwm-tool-bracket-tl"></span><span class="wwm-tool-bracket wwm-tool-bracket-tr"></span>
+      <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
       <div class="wwm-modal-header">
-        <h2 data-i18n="${titleKey}">${(window.T && T[titleKey]) || titleKey}</h2>
+        <h2><span class="wwm-tool-title-ja" data-i18n="${titleKey}" data-kaisho="${titleKey}">${(window.T && T[titleKey]) || titleKey}</span>${opts?.titleEn ? `<span class="wwm-tool-title-en">${opts.titleEn}</span>` : ''}${opts?.seal ? `<span class="wwm-tool-seal">${opts.seal}</span>` : ''}</h2>
         <button class="wwm-modal-close" aria-label="Close">×</button>
       </div>
-      <div class="wwm-modal-body">${contentHtml}</div>
+      <div class="wwm-modal-body wwm-ws-paper">${iconHtml}${contentHtml}</div>
     </div>`;
   document.body.appendChild(m);
   m.querySelector('.wwm-modal-close').addEventListener('click', () => m.remove());
@@ -42,7 +43,7 @@ function _createModal(id, titleKey, contentHtml, bgIconUrl) {
 // ── Setup Modal (Import button → このmodal、2-step inline) ───────
 function openSetupModal() {
   const officialUrl = 'https://www.wherewindsmeetgame.com/m/2025h5sjgj/jp/';
-  const m = _createModal('wwmSetupModal', 'importSetupTitle', '<div id="wwmSetupBody"></div>', 'assets/icons/scroll-quill.svg');
+  const m = _createModal('wwmSetupModal', 'importSetupTitle', '<div id="wwmSetupBody"></div>', 'https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b5e3e9f9f38a72b8baeazshLYQ05.png', { titleEn: 'IMPORT', seal: '取' });
   const body = m.querySelector('#wwmSetupBody');
 
   function renderIntro() {
@@ -63,7 +64,7 @@ function openSetupModal() {
          </div>`
       : `<p class="wwm-muted" data-i18n="importNoHistory">${(window.T && T.importNoHistory) || '直前のインポートはありません'}</p>`;
     const calcUrl = location.origin + location.pathname.replace(/[^/]*$/, '');
-    const bmSrc = "(async()=>{const C='" + calcUrl + "',H='www.wherewindsmeetgame.com',A='https://s2.easebar.com/78ae9d90792a3e9b/role/roleInfo',T=10000;if(location.host!==H){alert('公式ツール ('+H+') で実行してください');return;}const t=document.createElement('div');t.style.cssText='position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#000c;color:#fff;padding:12px 20px;border-radius:6px;z-index:99999;font:14px sans-serif';t.textContent='WWM-METRICS: 読込中...';document.body.appendChild(t);const i2b=async u=>{try{const r=await fetch(u);const bl=await r.blob();return await new Promise(rs=>{const f=new FileReader();f.onload=()=>rs(f.result);f.onerror=()=>rs('');f.readAsDataURL(bl);});}catch(_){return '';}};const shr=async u=>{try{const rr=await fetch(u);const bl=await rr.blob();const im=await createImageBitmap(bl);const sc=Math.min(1,96/Math.max(im.width,im.height));const cv=document.createElement('canvas');cv.width=Math.round(im.width*sc);cv.height=Math.round(im.height*sc);cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);return cv.toDataURL('image/png');}catch(_){return await i2b(u);}};try{const k=(document.cookie.match(/(?:^|;\\s*)token=([^;]+)/)||[])[1];if(!k)throw new Error('未ログインです');const c=new AbortController,d=setTimeout(()=>c.abort(),T);const r=await fetch(A,{headers:{access_token:k},credentials:'include',signal:c.signal});clearTimeout(d);if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();if(!j.data)throw new Error(j.msg||'API err');j.data._bmVer=" + WWM_BM_VERSION + ";try{const av=document.querySelector('img[src*=\"head/images\"]')?.src;if(av){j.data._avatarUrl=av;t.textContent='アバター取得中...';const b64=await i2b(av);if(b64)j.data._avatarBase64=b64;}}catch(_){}try{const xi=[...document.querySelectorAll('.icon-item .icon img.icon')].map(i=>i.src).filter(s=>s&&s.includes('xinfa/images'));if(xi.length){j.data._xinfaIcons=xi;t.textContent='心法アイコン取得中...';j.data._xinfaIconsBase64=await Promise.all(xi.map(u=>i2b(u)));}}catch(_){}try{const kids=[j.data.kongfuMain,j.data.kongfuSub].filter(Boolean);if(kids.length){t.textContent='武術アイコン取得中...';let bp='/pc/qt/20251203102905/';try{const br=await fetch('/m/zt/20251121182818/js/index-76a5ce60.js');const bt=await br.text();const bm=bt.match(/\\/pc\\/qt\\/(\\d{14})\\//);if(bm)bp='/pc/qt/'+bm[1]+'/';}catch(_){}const dec=x=>{const rv=[...x].reverse().join('');let n='';for(let i=0;i<rv.length;i+=100){const c=rv.substr(i,100);n+=c.substr(0,c.length-1);}return atob(n);};const kj=JSON.parse(dec(await fetch(bp+'data/kongfu/kongfu.txt',{credentials:'omit'}).then(r=>r.text())));const ki={},li={};for(const kid of kids){const e=kj[kid]||{};if(e.pic_url){const b=await shr(e.pic_url);if(b)ki[kid]=b;}if(e.liupai_pic_url){const b=await i2b(e.liupai_pic_url);if(b)li[kid]=b;}}if(Object.keys(ki).length)j.data._kongfuIconsBase64=ki;if(Object.keys(li).length)j.data._liupaiIconsBase64=li;}}catch(_){}try{const qi=[...document.querySelectorAll('.qs-list img')].map(i=>i.src).filter(s=>s&&s.includes('qishu/images'));if(qi.length){t.textContent='奇術アイコン取得中...';j.data._qishuIcons=qi;j.data._qishuIconsBase64=await Promise.all(qi.map(u=>shr(u)));}}catch(_){}try{const lp={};document.querySelectorAll('img').forEach(i=>{const u=i.src||'';if(u.includes('/liupai_pic/')){const fn=u.split('/').pop().split('?')[0];if(!lp[fn])lp[fn]=u;}});const fns=Object.keys(lp);if(fns.length){t.textContent='流派バッジ取得中...';const lb={};for(const fn of fns){const b=await i2b(lp[fn]);if(b)lb[fn]=b;}j.data._liupaiPicsBase64=lb;}}catch(_){}const s=JSON.stringify(j.data),b=btoa(unescape(encodeURIComponent(s))).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');t.textContent='転送中...';var u=C+'#import='+b;if(/Mobi|Android|iPhone|iPad|iPod|Touch/i.test(navigator.userAgent)||screen.width<700){location.href=u;return;}window.open(u,'_blank')||(location.href=u);t.textContent='完了';setTimeout(()=>{t.remove();try{window.close();}catch(_){}},800);}catch(e){t.textContent='エラー: '+e.message;t.style.background='#c00';setTimeout(()=>t.remove(),5000);}})();";
+    const bmSrc = "(async()=>{const C='" + calcUrl + "',H='www.wherewindsmeetgame.com',A='https://s2.easebar.com/78ae9d90792a3e9b/role/roleInfo',T=10000;if(location.host!==H){alert('公式ツール ('+H+') で実行してください');return;}const t=document.createElement('div');t.style.cssText='position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#000c;color:#fff;padding:12px 20px;border-radius:6px;z-index:99999;font:14px sans-serif';t.textContent='WWMetrics: 読込中...';document.body.appendChild(t);const i2b=async u=>{try{const r=await fetch(u);const bl=await r.blob();return await new Promise(rs=>{const f=new FileReader();f.onload=()=>rs(f.result);f.onerror=()=>rs('');f.readAsDataURL(bl);});}catch(_){return '';}};const shr=async u=>{try{const rr=await fetch(u);const bl=await rr.blob();const im=await createImageBitmap(bl);const sc=Math.min(1,96/Math.max(im.width,im.height));const cv=document.createElement('canvas');cv.width=Math.round(im.width*sc);cv.height=Math.round(im.height*sc);cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);return cv.toDataURL('image/png');}catch(_){return await i2b(u);}};let bp='/pc/qt/20251203102905/';try{const br=await fetch('/m/zt/20251121182818/js/index-76a5ce60.js');const bt=await br.text();const bm=bt.match(/\\/pc\\/qt\\/(\\d{14})\\//);if(bm)bp='/pc/qt/'+bm[1]+'/';}catch(_){}const dec=x=>{const rv=[...x].reverse().join('');let n='';for(let i=0;i<rv.length;i+=100){const c=rv.substr(i,100);n+=c.substr(0,c.length-1);}return atob(n);};try{const k=(document.cookie.match(/(?:^|;\\s*)token=([^;]+)/)||[])[1];if(!k)throw new Error('未ログインです');const c=new AbortController,d=setTimeout(()=>c.abort(),T);const r=await fetch(A,{headers:{access_token:k},credentials:'include',signal:c.signal});clearTimeout(d);if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();if(!j.data)throw new Error(j.msg||'API err');j.data._bmVer=" + WWM_BM_VERSION + ";try{const av=document.querySelector('img[src*=\"head/images\"]')?.src;if(av){j.data._avatarUrl=av;t.textContent='アバター取得中...';const b64=await i2b(av);if(b64)j.data._avatarBase64=b64;}}catch(_){}try{const xi=[...document.querySelectorAll('.icon-item .icon img.icon')].map(i=>i.src).filter(s=>s&&s.includes('xinfa/images'));if(xi.length){j.data._xinfaIcons=xi;t.textContent='心法アイコン取得中...';j.data._xinfaIconsBase64=await Promise.all(xi.map(u=>i2b(u)));}}catch(_){}try{const kids=[j.data.kongfuMain,j.data.kongfuSub].filter(Boolean);if(kids.length){t.textContent='武術アイコン取得中...';const kj=JSON.parse(dec(await fetch(bp+'data/kongfu/kongfu.txt',{credentials:'omit'}).then(r=>r.text())));const ki={},li={};for(const kid of kids){const e=kj[kid]||{};if(e.pic_url){const b=await shr(e.pic_url);if(b)ki[kid]=b;}if(e.liupai_pic_url){const b=await i2b(e.liupai_pic_url);if(b)li[kid]=b;}}if(Object.keys(ki).length)j.data._kongfuIconsBase64=ki;if(Object.keys(li).length)j.data._liupaiIconsBase64=li;}}catch(_){}try{const qsImgs=[...document.querySelectorAll('.qs-list img')].map(i=>i.src).filter(s=>s&&s.includes('qishu/images'));if(qsImgs.length){t.textContent='奇術アイコン取得中...';const qj=JSON.parse(dec(await fetch(bp+'data/qishu/qishu.txt',{credentials:'omit'}).then(r=>r.text())));const qm={},u2i={};for(const k in qj){const e=qj[k];if(!e||!e.pic_url)continue;qm[k]={name:e.name,pic_url:e.pic_url,is_post:e.is_post};u2i[e.pic_url]=Number(k);}j.data._qishuIds=qsImgs.map(u=>u2i[u]||null);j.data._qishuMaster=qm;}}catch(_){}try{const lp={};document.querySelectorAll('img').forEach(i=>{const u=i.src||'';if(u.includes('/liupai_pic/')){const fn=u.split('/').pop().split('?')[0];if(!lp[fn])lp[fn]=u;}});const fns=Object.keys(lp);if(fns.length){t.textContent='流派バッジ取得中...';const lb={};for(const fn of fns){const b=await i2b(lp[fn]);if(b)lb[fn]=b;}j.data._liupaiPicsBase64=lb;}}catch(_){}const s=JSON.stringify(j.data),b=btoa(unescape(encodeURIComponent(s))).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');t.textContent='転送中...';var u=C+'#import='+b;if(/Mobi|Android|iPhone|iPad|iPod|Touch/i.test(navigator.userAgent)||screen.width<700){location.href=u;return;}window.open(u,'_blank')||(location.href=u);t.textContent='完了';setTimeout(()=>{t.remove();try{window.close();}catch(_){}},800);}catch(e){t.textContent='エラー: '+e.message;t.style.background='#c00';setTimeout(()=>t.remove(),5000);}})();";
     const bmUrl = 'javascript:' + encodeURIComponent(bmSrc);
     const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
     body.innerHTML = `
@@ -165,9 +166,13 @@ async function openPreviewModal(data, importedAt, savedState) {
     stateSrc = WWMHelpers.storage.loadJSON(IMPORT_STATE_KEY);
   }
   const state = stateSrc ? JSON.parse(JSON.stringify(stateSrc)) : defaultState;
-  const m = _createModal('wwmPreviewModal', 'importPreviewTitle', '<div id="wwmCardBody"></div>', 'assets/icons/scroll-quill.svg');
+  const m = _createModal('wwmPreviewModal', 'importPreviewTitle', '<div id="wwmCardBody"></div>', 'https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b5e3e9f9f38a72b8baeazshLYQ05.png', { titleEn: 'PREVIEW', seal: '覧' });
   m.querySelector('.wwm-modal').classList.add('wwm-modal-wide');
   const body = m.querySelector('#wwmCardBody');
+  // wizard ナビ btn = footer (墨帯) — 紙 body 上の secondary は不可視 (2026-06-13 兄貴指摘)
+  const footer = document.createElement('div');
+  footer.className = 'wwm-tool-modal-footer';
+  m.querySelector('.wwm-modal').appendChild(footer);
 
   function renderStep1() {
     const detailHtml = renderPreviewDetail(summary, data);
@@ -178,21 +183,24 @@ async function openPreviewModal(data, importedAt, savedState) {
     body.innerHTML = `
       ${bmNotice}
       <div class="wwm-preview-summary">${detailHtml}</div>
-      <div class="wwm-btn-row" style="margin-top:16px;">
-        <button class="wwm-btn-primary" id="wwmNextBtn">${(window.T && T.importNextBtn) || '次へ'}</button>
-        <button class="wwm-btn-secondary" id="wwmCancelBtn">${(window.T && T.importCancelBtn) || 'キャンセル'}</button>
-      </div>
     `;
-    body.querySelector('#wwmCancelBtn').addEventListener('click', () => m.remove());
-    body.querySelector('#wwmNextBtn').addEventListener('click', renderStep2);
+    footer.innerHTML = `
+      <button class="wwm-btn-primary" id="wwmNextBtn">${(window.T && T.importNextBtn) || '次へ'}</button>
+      <button class="wwm-btn-secondary" id="wwmCancelBtn">${(window.T && T.importCancelBtn) || 'キャンセル'}</button>
+    `;
+    footer.querySelector('#wwmCancelBtn').addEventListener('click', () => m.remove());
+    footer.querySelector('#wwmNextBtn').addEventListener('click', renderStep2);
   }
 
   function renderStep2() {
     body.innerHTML = renderEnhanceArsenalForm(state, data);
+    // form 末尾の btn-row を footer へ移設 (生成 HTML は不変、DOM move のみ)
+    footer.innerHTML = '';
+    const _navRow = body.querySelector('.wwm-btn-row');
+    if (_navRow) footer.appendChild(_navRow);
     _attachEnhanceArsenalEvents(body, state);
-    body.querySelector('#wwmBackBtn').addEventListener('click', renderStep1);
-    body.querySelector('#wwmCancelBtn').addEventListener('click', () => m.remove());
-    body.querySelector('#wwmApplyBtn').addEventListener('click', () => {
+    m.querySelector('#wwmBackBtn').addEventListener('click', renderStep1);
+    m.querySelector('#wwmApplyBtn').addEventListener('click', () => {
       const msg = (window.T && T.importConfirmMsg) || '現在設定されている数値がインポートデータに差し変わりますがよろしいですか？';
       if (!confirm(msg)) return;
       applyImport(data, importedAt, state);
@@ -373,9 +381,8 @@ function renderEnhanceArsenalForm(state, roleInfo) {
       <div class="wwm-arsenal-tiers">${tierRows}</div>
     </div>
     <div class="wwm-btn-row" style="margin-top:16px;">
-      <button class="wwm-btn-secondary" id="wwmBackBtn">${T0.importBackBtn || '戻る'}</button>
       <button class="wwm-btn-primary" id="wwmApplyBtn">${T0.importApplyBtn || 'インポート実行'}</button>
-      <button class="wwm-btn-secondary" id="wwmCancelBtn">${T0.importCancelBtn || 'キャンセル'}</button>
+      <button class="wwm-btn-secondary" id="wwmBackBtn">${T0.importBackBtn || '戻る'}</button>
     </div>
   `;
 }
@@ -477,8 +484,8 @@ function _renderEquipSlot(slot, eq) {
   return `
     <div class="wwm-equip-slot" data-slot="${slot}">
       <div class="wwm-equip-slot-header"><b>${slotLabel}</b>${setName ? ` <span class="wwm-muted">- ${setName}</span>` : ''}</div>
-      ${baseAttrsHtml ? `<div class="wwm-equip-base"><b>${(window.T&&T.importBaseStats)||'基本ステータス'}</b><ul class="wwm-list">${baseAttrsHtml}</ul></div>` : ''}
-      ${affixHtml ? `<div class="wwm-equip-affix"><b>${(window.T&&T.importSubStats)||'副ステータス'}</b><ul class="wwm-list">${affixHtml}</ul></div>` : ''}
+      ${baseAttrsHtml ? `<div class="wwm-equip-base"><ul class="wwm-list">${baseAttrsHtml}</ul></div>` : ''}
+      ${affixHtml ? `<div class="wwm-equip-affix"><ul class="wwm-list">${affixHtml}</ul></div>` : ''}
     </div>
   `;
 }
@@ -519,6 +526,12 @@ const _STAT_LABELS_PROXY = new Proxy({}, {
     if (typeof k !== 'string') return undefined;
     if (window.WWM_DS) {
       const L = window.currentLang || 'ja';
+      // vi 時 = 短縮辞書 (data/i18n/stat_short.json) 優先。 武具対照 modal + import preview の文字切れ救済。
+      // miss 時は通常 stat.json (公式表記) fallback、 真実源不変
+      if (L === 'vi') {
+        const vs = window.WWM_DS.name('stat_short', k, 'vi');
+        if (vs && vs.indexOf('[stat_short:') !== 0) return vs;
+      }
       const v = window.WWM_DS.name('stat', k, L);
       if (v && v.indexOf('[stat:') !== 0) return v;
       // path系等 = ui に統合済 → t() で引く
@@ -575,8 +588,6 @@ const _AFFIX_LABELS_STATKEY = {
   '9293004':'agility',
   '9293007':'minPhys', '9293008':'maxPhys',
   '9293018':'precision', '9293019':'crit', '9293020':'affinity',
-  '9293025':'allWeaponDmg',
-  '9293028':'allMartialBoost',
   '9293032':'stBurstMysticDmg',
   '9293033':'bossDmg',
   '9243003':'precision', '9243005':'affinity',
@@ -591,7 +602,7 @@ const _AFFIX_LABELS_JA_FALLBACK = {
   '9213011':'速','9233001':'最小外功攻撃強化','9233002':'最大外功攻撃強化',
   '9293004':'速','9293007':'最小外功攻撃強化','9293008':'最大外功攻撃強化',
   '9293018':'命中率強化','9293019':'会心率強化','9293020':'会意率強化',
-  '9293025':'武器種武学ダメ増加','9293028':'全武学効果増加','9293032':'単体爆発奇術ダメ','9293033':'BOSSダメージ',
+  '9293032':'単体爆発奇術ダメ','9293033':'BOSSダメージ',
   '9243003':'命中率強化','9243005':'会意率強化','9253004':'会心率強化','9253005':'会意率強化',
   '9273001':'弓矢基礎ダメ','9273004':'最大飛行時間+','9283002':'弓矢基礎ダメ','9283003':'弱点ダメージ強化',
   '9283004':'明鏡止水消費減','9283005':'明鏡止水時間+','9283007':'空中降下低下',
@@ -638,24 +649,20 @@ function _fmtAffixValShort(v) {
 }
 
 function renderPreviewDetail(s, d) {
-  const xin = s.passiveSlots || [];
   const T_=window.T||{};
-  const _xL=T_.importLabelXinfa||'心法';
+  // 心法1〜4 は Step2 で見れるため preview からは廃止 (2026-06-18 兄貴指示)。
+  // 配置 = 行1: UID / キャラ名 (col3 空) / 行2: 主武術 / 副武術 / 総合武力。
   return `
     <div class="wwm-info-grid">
       <div class="wwm-info-col">
         ${s.uid ? `<div class="wwm-info-row"><span class="wwm-info-label">${T_.importLabelUID||'UID'}</span><span class="wwm-info-val">${s.uid}</span></div>` : ''}
-        <div class="wwm-info-row"><span class="wwm-info-label">${T_.importLabelCharName||'キャラ名'}</span><span class="wwm-info-val">${s.roleName} (Lv ${s.level})</span></div>
         <div class="wwm-info-row"><span class="wwm-info-label">${T_.importLabelMainKf||'主武術'}</span><span class="wwm-info-val">${_kongfuName(s.kongfuMain)}</span></div>
+      </div>
+      <div class="wwm-info-col">
+        <div class="wwm-info-row"><span class="wwm-info-label">${T_.importLabelCharName||'キャラ名'}</span><span class="wwm-info-val">${s.roleName} (Lv ${s.level})</span></div>
         <div class="wwm-info-row"><span class="wwm-info-label">${T_.importLabelSubKf||'副武術'}</span><span class="wwm-info-val">${_kongfuName(s.kongfuSub)}</span></div>
       </div>
-      <div class="wwm-info-col">
-        <div class="wwm-info-row"><span class="wwm-info-label">${_xL} 1</span><span class="wwm-info-val">${_xinfaName(xin[0])}</span></div>
-        <div class="wwm-info-row"><span class="wwm-info-label">${_xL} 2</span><span class="wwm-info-val">${_xinfaName(xin[1])}</span></div>
-        <div class="wwm-info-row"><span class="wwm-info-label">${_xL} 3</span><span class="wwm-info-val">${_xinfaName(xin[2])}</span></div>
-        <div class="wwm-info-row"><span class="wwm-info-label">${_xL} 4</span><span class="wwm-info-val">${_xinfaName(xin[3])}</span></div>
-      </div>
-      <div class="wwm-info-col">
+      <div class="wwm-info-col wwm-info-col-end">
         <div class="wwm-info-row"><span class="wwm-info-label">${T_.importLabelXiuwei||'総合武力'}</span><span class="wwm-info-val">${s.xiuWeiKungFu} / ${s.maxXiuWeiKungFu}</span></div>
       </div>
     </div>
@@ -756,6 +763,16 @@ function applyImport(data, importedAt, state) {
   _saveStored(data, importedAt, state);
   WWMHelpers.storage.saveJSON(IMPORT_STATE_KEY, state);
   console.log('[WWM Import] applied:', { data, state });
+  // _qishuMaster (bookmarklet 埋込) を window.WWM_QISHU_ICONS に runtime merge — 新奇術追加時の自動追従。
+  // 永続化 = 別 scout で data/qishu_icons.json 更新 (新規 id 検出 = console log で把握)。
+  if (data && data._qishuMaster && typeof data._qishuMaster === 'object') {
+    const cur = window.WWM_QISHU_ICONS || (window.WWM_QISHU_ICONS = {});
+    const added = [];
+    for (const k in data._qishuMaster) {
+      if (!cur[k] && data._qishuMaster[k]) { cur[k] = data._qishuMaster[k]; added.push(k); }
+    }
+    if (added.length) console.log('[WWM Import] qishu master merged: +' + added.length + ' new id(s):', added.join(','));
+  }
   // Tier 基準値 (__WWM_OPT_BEST) を再 import 時にリセット → 直後の opt 完了で再確定。
   WWMState.opt.best = null;
   WWMState.opt.locked = false;
@@ -766,6 +783,7 @@ function applyImport(data, importedAt, state) {
   WWMState.virtual.kongfu = {};
   WWMState.virtual.xinfa = null;
   WWMState.virtual.arsenal = null;
+  WWMState.virtual.qishu = null;
   WWMHelpers.storage.remove('wwm_virtual_v1');
   // virtual に PvP sentinel (999999) 残骸があれば、その slot の affix6 のみ origEq の affix6 で復元 (他 affix は維持)。
   // 経緯: 前回 PvP装備で affix6 を sentinel にした virtual が PvE再import 後も残り「変更不可」になる事象を解消。
@@ -797,6 +815,7 @@ function applyImport(data, importedAt, state) {
       window.WWMSidebar.render(params);
       if (window.WWMSidebar?.gear) window.WWMSidebar.gear.render(data);
       if (window.WWMSidebar?.xinfa) window.WWMSidebar.xinfa.render(data);
+      if (window.WWMSidebar?.qishu) window.WWMSidebar.qishu.render(data);
       if (window.WWMSidebar?.diag) window.WWMSidebar.diag.render(data, params);
       if (window.WWMSidebar?.ranking) window.WWMSidebar.ranking.render(data, params);
       if (window.WWMSidebar?.hero) window.WWMSidebar.hero.update(params);
@@ -824,11 +843,12 @@ function applyImport(data, importedAt, state) {
         requestAnimationFrame(() => requestAnimationFrame(() => {
           window.WWMSidebar.opt.render(data, params)
             // resolve でも best 未確定の経路あり (opt 内 silent return) → locked 時のみ 100% 演出
-            .then(() => _importGateClose(!!WWMState.opt.locked))
-            .catch(e => { console.error('[WWM] opt failed:', e); _importGateClose(false); });
+            .then(() => { _importGateClose(!!WWMState.opt.locked); if (window.WWMTutorial) window.WWMTutorial.maybeStart(); })
+            .catch(e => { console.error('[WWM] opt failed:', e); _importGateClose(false); if (window.WWMTutorial) window.WWMTutorial.maybeStart(); });
         }));
       } else {
         _importGateClose(false); // opt 経路無し → gate 即解除 (deadlock 防止)
+        if (window.WWMTutorial) window.WWMTutorial.maybeStart();
       }
     }).catch(e => {
       console.error('[WWM] stats build failed:', e);
@@ -944,6 +964,13 @@ function _autoLoadLastImport() {
         if (typeof window._showScoreBanner === 'function') window._showScoreBanner();
       }
     }
+    // baseline = null + 過去 import 履歴あり = drift 状態継続 → 再 import するまで banner show 維持
+    // (2026-06-21 兄貴指摘: 初回 reload で banner 見逃すと 2 回目以降 banner 出ない bug)
+    if (!WWMState.baseline && WWMHelpers.storage.loadJSON(IMPORT_STORAGE_KEY)) {
+      if (typeof window._showScoreBanner === 'function') window._showScoreBanner();
+    }
+    // 旧 slotMaxLoo localStorage 残骸 cleanup (= 武備指数移行で不要、 兄貴指示 2026-06-18)
+    WWMHelpers.storage.remove('wwm_opt_slot_max_loo_v1');
     // opt_best 復元 (baseline と同じ scoreVer ルール、不一致なら破棄して再 import 時の opt で再確定)
     const ob = WWMHelpers.storage.loadJSON('wwm_opt_best_v1');
     if (ob) {
@@ -973,6 +1000,7 @@ function _autoLoadLastImport() {
         window.WWMSidebar.render(params);
         if (window.WWMSidebar?.gear) window.WWMSidebar.gear.render(stored.data);
         if (window.WWMSidebar?.xinfa) window.WWMSidebar.xinfa.render(stored.data);
+        if (window.WWMSidebar?.qishu) window.WWMSidebar.qishu.render(stored.data);
         if (window.WWMSidebar?.diag) window.WWMSidebar.diag.render(stored.data, params);
         if (window.WWMSidebar?.ranking) window.WWMSidebar.ranking.render(stored.data, params);
         if (window.WWMSidebar?.opt) window.WWMSidebar.opt.render(stored.data, params);

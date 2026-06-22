@@ -6,18 +6,11 @@
    ╚═══════════════════════════════════════════════════════════════════╝ */
 @layer components {
 
-/* ライト hero: 紙色 overlay で公式 xinfa 背景を 透かす */
-.hero::before {
-  /* corner kanji watermark — 明朝 (Noto Serif JP black) */
-  content: '斬'; position: absolute; right: -10px; bottom: -40px;
-  font-family: var(--f-display);
-  font-weight: var(--fw-black);
-  font-size: 260px; color: var(--c-hero-before-fg);
-  pointer-events: none; line-height: 1;
-}
+/* workspace v2 (2026-06-11): hero::before 斬透かし + hero::after 古紙 noise は削除 —
+   漢字透かしは rail (斬) が担い、質感は .wwm-app::after 全面 grain 1 枚に統一 (mock 準拠) */
 
-/* 古紙テクスチャ overlay (SVG turbulence + blend) — テスト用に強度UP */
-.hero::after, .wwm-footer::after {
+/* 古紙テクスチャ overlay (SVG turbulence + blend) — footer 用 */
+.wwm-footer::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -27,10 +20,16 @@
   pointer-events: none;
 }
 
-/* hero::after ノイズ overlay を 半透明化 (xinfa_bg 見せるため) */
-.hero::after { opacity: 0.35; }
-
-.wwm-footer { position: relative; overflow: hidden; }
+.wwm-footer {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 4px;
+  column-gap: 8px;
+}
 
 .wwm-footer-logo { height: 18px; vertical-align: middle; margin-right: var(--space-2); opacity: var(--c-footer-logo-opacity); }
 
@@ -39,26 +38,16 @@
 .wwm-footer-x:hover { color: var(--gold-bright); opacity: 1; }
 .wwm-footer-x svg { display: block; }
 
-/* 著作権表記 (ゲーム内 asset 使用のため必須 — カード footer と同文言、2026-06-08 兄貴指示)
-   mobile の height:auto 化は layout.css の footer mobile rule に co-locate (こちらは後勝ちで負ける) */
-.wwm-footer-copy { margin-left: var(--space-3); font-size: 9px; opacity: 0.7; letter-spacing: 0.02em; }
-.wwm-footer-unofficial { margin-left: var(--space-3); font-size: 9px; opacity: 0.7; letter-spacing: 0.02em; }
-/* creator (Created by SHIGETORA + Xicon) を flex で右寄せ。 mobile は block flow なので無効化 */
-.wwm-footer-creator { margin-left: auto; }
-@media (max-width: 480px) {
-  .wwm-footer-creator { margin-left: 0; }
-}
-@media (max-width: 480px) {
-  .wwm-footer-copy { display: block; margin: 2px 0 0; }
-  .wwm-footer-unofficial { display: block; margin: 2px 0 0; }
-}
-
-.hero-left {
-  padding: 18px 24px 12px;
-  display: flex; flex-direction: column; justify-content: flex-start;
-  position: relative; z-index: 1;
-  min-width: 0;
-  overflow: hidden;
+/* 著作権表記 (ゲーム内 asset 使用のため必須 — カード footer と同文言、2026-06-08 兄貴指示)。
+   2026-06-16 兄貴指示 — flex-wrap で自然折返: 広 = 1 行 (logo + ①②③ 全横並び)、
+   縮むに従って ③ → ② → ① の順に wrap、 最狭で 4 行。 強制改行 (flex-basis:100%) なし */
+.wwm-footer-unofficial,
+.wwm-footer-copy,
+.wwm-footer-creator {
+  margin: 0;
+  font-size: 9px;
+  opacity: 0.7;
+  letter-spacing: 0.02em;
 }
 
 /* シェブロン (削除) */
@@ -67,8 +56,8 @@
   position: absolute;
   top: 14px; right: 16px;
   width: 8px; height: 8px;
-  border-right: 1.5px solid var(--paper-mute);
-  border-bottom: 1.5px solid var(--paper-mute);
+  border-right: 1.5px solid var(--sumi-fg);
+  border-bottom: 1.5px solid var(--sumi-fg);
   transform: rotate(45deg);
   opacity: 0.4;
   transition: transform 0.25s ease, top 0.25s ease, opacity 0.15s;
@@ -85,9 +74,9 @@
 
 .hcb-val.elem { color: var(--jade-bright); }
 
-.hcb-pct.phys { color: var(--vermilion-bright-mid-2); }
+.hcb-pct.phys { color: var(--vermilion-bright); }
 
-.hcb-pct.elem { color: var(--jade-bright-strong); }
+.hcb-pct.elem { color: color-mix(in oklab, var(--jade-bright) 55%, transparent); }
 
 /* ── Collapsed state overrides ── */
 .hero--collapsed .hero-compact-bar { display: flex; }
@@ -140,20 +129,20 @@
 .hero--collapsed .pval { font-size: var(--text-xs); }
 
 /* モバイル: pname を非表示にしてドット+数値だけに絞る */
+/* workspace v2 (2026-06-11): 旧 display:flex/margin-top/font-size を削除 —
+   flex は tier chip 落下、直 font-size は席 swap のサイズ切替 (seat-main 96px ⇔
+   seat-sub 28px、.hb-num からの継承) を殺していた。字体/色の責務だけ残す */
 .hero-number {
   font-family: var(--f-latin);
-  font-weight: var(--fw-extra); font-size: clamp(48px, calc(-85.5px + 13.88vw), 92px); line-height: 0.95;
-  color: var(--hero-num);
+  font-weight: var(--fw-extra);
+  /* color は持たない — seat 側 .hb-num 継承 (main=古紙白/sub=金) が決める (2026-06-12) */
   letter-spacing: -0.02em;
-  margin-top: var(--space-1);
   text-shadow: var(--hero-num-shadow);
   font-variant-numeric: tabular-nums;
-  display: flex; align-items: flex-end; gap: var(--space-3);
-  position: relative;
 }
 
 .hero-number .unit {
-  font-family: var(--f-mono); font-size: var(--text-md); font-weight: var(--fw-bold);
+  font-family: var(--f-latin); font-size: var(--text-md); font-weight: var(--fw-bold);
   color: var(--c-fg-gold-label); letter-spacing: 0.32em;
   padding-bottom: var(--space-3);
   border-bottom: 1px solid var(--gold-deep);
@@ -169,15 +158,61 @@
 
 .hb-pct.elem { color: var(--c-hb-pct-elem-fg); }
 
-/* Donut on right */
-.hero-right {
-  padding: var(--space-2-5) var(--space-3-5);
-  display: flex; flex-direction: column;
-  border-left: 1px solid var(--ink-2);
-  background: var(--surf-shade);
-  position: relative; z-index: 1;
+/* ドーナツ右側 = 勁率 4 + 物理/属性 2 = 6 行 内訳 (2026-06-15 兄貴指示で復活、 旧 hcb-/hb- 系の後継)。
+   ■ chip 4 行 (会心/会意/並傷/軽傷) + ◇ diamond 2 行 (物理/属性) で系統分離 */
+.hero-dmg-split {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  align-self: center;
+  font-family: var(--f-latin);
+  font-weight: var(--fw-bold);
+}
+.hero-dmg-split .hb-row {
+  display: grid;
+  grid-template-columns: 12px 3.5em 1fr;
+  align-items: center;
+  gap: var(--space-1-5);
+}
+.hero-dmg-split .hb-ico {
+  width: 10px; height: 10px;
+  display: inline-block;
+  background: currentColor;
+}
+.hero-dmg-split .hb-ico-diamond {
+  background: transparent;
+  border: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  width: 8px; height: 8px;
+}
+.hero-dmg-split .hb-label {
+  font-family: var(--f-display-title);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  color: var(--sumi-fg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   min-width: 0;
 }
+.hero-dmg-split .hb-pct {
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--sumi-fg);
+}
+.hero-dmg-split .hb-row.crit  { color: var(--chart-crit); }
+.hero-dmg-split .hb-row.symp  { color: var(--chart-sympathy); }
+.hero-dmg-split .hb-row.norm  { color: var(--chart-normal); }
+.hero-dmg-split .hb-row.graz  { color: var(--chart-graze); }
+.hero-dmg-split .hb-row.phys  { color: var(--vermilion-bright); }
+.hero-dmg-split .hb-row.elem  { color: var(--jade-bright); }
+.hero-dmg-split .hb-row.crit .hb-label,  .hero-dmg-split .hb-row.crit .hb-pct  { color: var(--chart-crit); }
+.hero-dmg-split .hb-row.symp .hb-label,  .hero-dmg-split .hb-row.symp .hb-pct  { color: var(--chart-sympathy); }
+.hero-dmg-split .hb-row.norm .hb-label,  .hero-dmg-split .hb-row.norm .hb-pct  { color: var(--chart-normal); }
+.hero-dmg-split .hb-row.graz .hb-label,  .hero-dmg-split .hb-row.graz .hb-pct  { color: var(--sumi-fg); }
+.hero-dmg-split .hb-row.phys .hb-label,  .hero-dmg-split .hb-row.phys .hb-pct  { color: var(--vermilion-bright); }
+.hero-dmg-split .hb-row.elem .hb-label,  .hero-dmg-split .hb-row.elem .hb-pct  { color: var(--jade-bright); }
 
 .donut {
   width: 100px; height: 100px; flex-shrink: 0; position: relative;
@@ -192,117 +227,38 @@
 #arcPhys, #arcElem { transition: stroke-dashoffset 0.6s cubic-bezier(.4,.2,.2,1), stroke-dasharray 0.6s cubic-bezier(.4,.2,.2,1); }
 
 /* ═══════════════════════════════════════════════════════════════
-   Hero 武侠デザイン (design-sample由来) — sidebar越え左端まで伸ばす
+   Hero 武侠デザイン — workspace v2 (2026-06-11):
+   旧 grid block (display:grid/背景image/border/height:195px) + l-bracket 4隅 +
+   ink-stroke 朱筆を物理削除。band 一体のフラット墨 + 全面 grain (mock B 縦律 準拠、
+   筆致棄却原則)。layout は workspace.css の .hero.hero-wuxia flex が担う。
+   公式背景 BG の復帰はテーマフェーズで別途判断 (TODO 🏯 hero 機能要件②)
    ═══════════════════════════════════════════════════════════════ */
-.hero.hero-wuxia {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  padding: var(--space-4) var(--space-6);
-  background:
-    linear-gradient(180deg, rgba(30,23,17,0.50), rgba(16,12,11,0.58)),
-    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/xf-bg-23f42caf.png") center / cover no-repeat;
-  border: 1px solid var(--gold-deep);
-  box-shadow: inset 0 0 60px var(--overlay-mid);
-  overflow: hidden;
-  position: relative;
-  height: 195px;
-  /* min-width 削除: 圧縮停止は親 .wwm-app-body min-width:1010 で一元管理 (個別min は alignment 崩しの原因だった) */
-  border-color: var(--c-hero-wuxia-border);
-}
-
-/* ライト hero-wuxia: 紙色 overlay + xinfa 公式背景 */
-.hero-wuxia .l-bracket {
-  position: absolute;
-  width: 32px; height: 32px;
-  box-shadow: 0 0 10px rgba(201,164,90,.35);
-  pointer-events: none;
-  z-index: 2;
-}
-
-.hero-wuxia .lb-tl { top: -1px; left: -1px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
-
-.hero-wuxia .lb-tr { top: -1px; right: -1px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
-
-.hero-wuxia .lb-bl { bottom: -1px; left: -1px; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
-
-.hero-wuxia .lb-br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
-
-.hero-wuxia .ink-stroke {
-  position: absolute;
-  left: 0; top: 52px;
-  width: 520px; height: 120px;
-  opacity: var(--c-ink-stroke-opacity);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.hero-wuxia .hero-left {
-  position: relative;
-  z-index: 1;
-  padding-right: 18px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-}
-
-.hero-wuxia .hero-label {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 14px;
-  align-self: flex-start;
-}
-
-.hero-wuxia .hero-label .ja {
-  font-family: var(--f-display);
-  font-weight: var(--fw-bold);
-  font-size: 30px;
-  letter-spacing: .18em;
-  color: var(--c-fg-emphasis);
-}
-
-.hero-wuxia .hero-label .en {
-  font-family: var(--f-mono);
-  font-size: var(--text-14);
-  letter-spacing: .28em;
-  color: var(--paper-mute);
-  opacity: var(--c-hero-label--en-opacity);
-}
-
-.hero-wuxia .hero-score-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  position: relative;
-}
-
-.hero-wuxia .hero-current { display: flex; align-items: baseline; gap: var(--space-3); }
-
 .hero-wuxia .hero-number {
   font-family: var(--f-latin);
   font-weight: var(--fw-black);
-  font-size: 96px;
-  line-height: .88;
+  /* font-size/line-height/color は持たない — 席 swap で .seat-main/.seat-sub の
+     .hb-num 継承が決める (color も seat 一元化 2026-06-12: main=古紙白/sub=金) */
   letter-spacing: -.02em;
-  color: var(--paper);  /* 古紙白 #ede4d0 */
   text-shadow: var(--c-hero-number-text-shadow);
 }
 
-/* Tier badge 共通 base */
+/* Tier badge 共通 base — workspace v2 (2026-06-11): 旧 hero-score-row flex 前提の
+   align-self:flex-end/margin-bottom を撤去 (新 .hb-num flex 内で落下していた)。
+   数値の右隣・上寄り (mock tchip 位置)。Tier 色 (SS-C) は下の rule 群が継続 */
 .hero-wuxia .hero-tier.tier-badge {
   position: relative;
   z-index: 2;
   font-family: var(--f-latin);
-  font-size: var(--text-xl);
+  font-size: 18px;
   font-weight: var(--fw-black);
   letter-spacing: .12em;
-  padding: 5px 16px;
-  align-self: flex-end;
-  margin-bottom: var(--space-3-5);
+  padding: 3px 12px;
+  align-self: flex-start;
+  /* margin-top:12px 削除 (2026-06-22 兄貴指示) = seat-sub swap 時のズレ解消、 .seat-main は workspace.css 個別 rule で上書き */
   overflow: hidden;
-  border-radius: 0;
+  border-radius: 1px;
   border: 1px solid;
-  background: var(--c-tier-badge-hero-bg);
+  background: var(--bg-tier-badge-hero);
   color: var(--c-tier-badge-hero-fg);
   border-color: var(--c-tier-badge-hero-border);
 }
@@ -310,16 +266,16 @@
 /* SS — gold (アニメ継承、静的部のみ override) */
 .hero-wuxia .hero-tier.tier-SS {
   color: var(--c-tier-ss-hero-fg);
-  background: var(--c-tier-ss-hero-bg);
+  background: var(--bg-tier-ss);
   border-color: var(--c-tier-ss-hero-border);
-  text-shadow: 0 0 18px rgba(240,210,138,.95), 0 0 36px var(--vermilion-bright-glow);
+  text-shadow: 0 0 18px rgba(240,210,138,.95), 0 0 36px color-mix(in oklab, var(--vermilion-bright) 60%, transparent);
   box-shadow: var(--c-hero-wuxia--hero-tier-tier-SS-shadow);
 }
 
 /* S — vermilion (アニメ継承) */
 .hero-wuxia .hero-tier.tier-S {
   color: var(--c-tier-s-hero-fg);
-  background: var(--c-tier-s-hero-bg);
+  background: var(--bg-tier-s);
   border-color: var(--c-tier-s-hero-border);
   text-shadow: 0 0 14px rgba(232,81,58,.85), 0 0 28px rgba(200,60,43,.45);
   box-shadow: var(--c-hero-wuxia--hero-tier-tier-S-shadow);
@@ -328,7 +284,7 @@
 /* A — jade calm */
 .hero-wuxia .hero-tier.tier-A {
   color: var(--c-tier-a-hero-fg);
-  background: var(--c-tier-a-hero-bg);
+  background: var(--bg-tier-a);
   border-color: var(--c-tier-a-hero-border);
   text-shadow: 0 0 12px rgba(168,212,180,.7), 0 0 24px rgba(127,168,138,.35);
   box-shadow: var(--c-tier-a-hero-shadow);
@@ -337,7 +293,7 @@
 /* B — bone copper */
 .hero-wuxia .hero-tier.tier-B {
   color: var(--c-tier-b-hero-fg);
-  background: var(--c-tier-b-hero-bg);
+  background: var(--bg-tier-b);
   border-color: var(--c-tier-b-hero-border);
   text-shadow: 0 0 10px rgba(201,184,138,.55);
   box-shadow: var(--c-tier-b-hero-shadow);
@@ -346,58 +302,10 @@
 /* C — muted */
 .hero-wuxia .hero-tier.tier-C {
   color: var(--c-tier-c-hero-fg);
-  background: var(--c-tier-c-hero-bg);
+  background: var(--bg-tier-c);
   border-color: var(--c-tier-c-hero-border);
   text-shadow: 0 0 6px rgba(122,112,96,.4);
   box-shadow: var(--c-tier-c-hero-shadow);
-}
-
-.hero-wuxia .hero-next-inline {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-  margin-top: -6px;
-}
-
-/* hidden 属性で確実に消す ( .hero-wuxia .hero-next-inline の specificity 勝ち防止) */
-.hero-wuxia .hero-next-inline[hidden] { display: none; }
-
-.hero-wuxia .hero-next-label {
-  font-family: var(--f-mono);
-  font-size: var(--text-sm);
-  font-weight: var(--fw-bold);
-  letter-spacing: .32em;
-  color: var(--paper-mute);
-  text-transform: uppercase;
-  padding-left: var(--space-half);
-}
-
-.hero-wuxia .hero-next-row { display: flex; align-items: baseline; gap: var(--space-1-5); }
-
-.hero-wuxia .hero-next-arrow { color: var(--c-hero-next-arrow-fg); font-size: var(--text-18); align-self: center; }
-
-.hero-wuxia .hero-next-val {
-  font-family: var(--f-latin);
-  font-weight: var(--fw-extra);
-  font-size: 48px;
-  color: var(--c-hero-next-val-fg);
-  line-height: .88;
-  letter-spacing: -.01em;
-  text-shadow: var(--c-hero-wuxia--hero-next-val-text-shadow);
-}
-
-.hero-wuxia .hero-right {
-  position: relative;
-  z-index: 1;
-  border-left: 1px solid var(--gold-deep);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--space-3-5);
-  padding: 6px 0 6px 18px;
-  background: transparent;
 }
 
 .hero-wuxia .luopan {
@@ -418,10 +326,14 @@
 
 .hero-wuxia .luopan-inner {
   position: relative;
-  width: 138px; height: 138px;
+  /* workspace v2 (2026-06-11): 138px 固定 → % 化 (138/160=86.25%)。
+     外枠 .luopan の width 変更 (PC 120 / mobile 56) に中身が追従 — 固定だとはみ出す */
+  width: 86.25%; height: 86.25%;
 }
 
-.hero-wuxia .luopan-inner svg {
+/* luopan-inner 直接子の donut svg のみ対象 (rotate -90deg + 100%/100%)。
+   luopan-center 内の 闘率 玉ねぎ svg まで掛かると 90度回転 + 100%引き伸ばしで巨大化バグ (2026-06-22) */
+.hero-wuxia .luopan-inner > svg {
   width: 100%; height: 100%;
   transform: rotate(-90deg);
 }
@@ -437,58 +349,12 @@
 /* critique P3 fix (2026-06-06 兄貴承認): gradient-text (background-clip) → solid 金。
    dark = token を transparent → gold-bright 化、 light は既存 vermilion-deep のまま */
 .hero-wuxia .luopan-center-label {
-  font-family: var(--f-display);
+  font-family: var(--f-display-title);
   font-size: 30px;
   font-weight: var(--fw-extra);
   letter-spacing: .18em;
   color: var(--c-luopan-center-label-fg);
-  filter: drop-shadow(0 1px 1px var(--overlay-mid-2));
-}
-
-.hero-wuxia .judge-list {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  min-width: 0;
-}
-
-.hero-wuxia .judge-row {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 10.5px;
-  white-space: nowrap;
-}
-
-.hero-wuxia .judge-dot { width: 7px; height: 7px; flex-shrink: 0; }
-
-/* 物理/属性 行: 区切り線 + 菱形マーカー (◇物理=朱outline / ◆属性=翠fill) */
-.hero-wuxia .judge-row-sep { margin-top: 5px; padding-top: var(--space-1-5); border-top: 1px solid var(--ink-2); }
-
-.hero-wuxia .judge-dot-diamond { width: 8px; height: 8px; border-radius: 0; transform: rotate(45deg); }
-
-.hero-wuxia .judge-dot-phys { background: transparent; border: 1.6px solid var(--chart-sympathy); box-shadow: var(--c-judge-dot-phys-shadow); border-color: var(--c-hero-wuxia--judge-dot-phys-border); }
-
-.hero-wuxia .judge-dot-elem { background: transparent; border: 1.6px solid var(--jade-bright); box-shadow: var(--c-judge-dot-elem-shadow); border-color: var(--c-hero-wuxia--judge-dot-elem-border); }
-
-.hero-wuxia .judge-name { font-weight: var(--c-judge-name-fw); color: var(--c-judge-name-fg); text-shadow: var(--c-hero-wuxia--judge-name-text-shadow); }
-
-.hero-wuxia .judge-val {
-  font-family: var(--f-mono);
-  font-size: var(--text-sm);
-  font-weight: var(--c-judge-val-fw);
-  margin-left: auto;
-  text-shadow: var(--c-hero-wuxia--judge-val-text-shadow);
-}
-
-/* S2-g co-locate (B / K-type): light#88 L756 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .hero-wuxia #dmgPhysVal {
-  color: var(--vermilion-deep) !important;
-}
-
-/* S2-g co-locate (B / K-type): light#89 L758 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .hero-wuxia #dmgElemVal {
-  color: var(--jade-bright) !important;
+  filter: drop-shadow(0 1px 1px var(--shadow-mid-2));
 }
 
 /* S2-g co-locate (T): light#93 L773 */
@@ -505,34 +371,6 @@ html[data-theme="light"] .hero-wuxia #dmgElemVal {
   pointer-events: var(--c-hero-wuxia--hero-tier-tier-SS-before-pe);
   z-index: var(--c-hero-wuxia--hero-tier-tier-SS-before-z);
   content: var(--c-hero-wuxia--hero-tier-tier-SS-before-content);
-}
-
-/* S2-g co-locate (B / K-type): light#104 L859 — theme gate 維持で other theme 影響ゼロ。 svg presentation attr 保護 (token unset 不可) */
-html[data-theme="light"] .hero-wuxia .ink-stroke path {
-  stroke: rgba(160,28,18,0.6);
-}
-
-/* S2-g co-locate (B / K-type): light#106 L867 — theme gate 維持で other theme 影響ゼロ。 svg presentation attr 保護 (token unset 不可) */
-html[data-theme="light"] .hero-wuxia .luopan-ticks line {
-  stroke: rgba(122,90,32,.8);
-  stroke-opacity: 1;
-}
-
-/* S2-g co-locate (B / K-type): light#107 L872 — theme gate 維持で other theme 影響ゼロ。 svg presentation attr 保護 (token unset 不可) */
-html[data-theme="light"] .hero-wuxia .luopan-ticks line[stroke-width="1.5"] {
-  stroke: var(--vermilion-deep);
-  stroke-opacity: 1;
-}
-
-/* S2-g co-locate (B / K-type): light#108 L877 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .hero-wuxia .luopan-arc circle[stroke^="rgba(232,215,180"] {
-  stroke: rgba(122,90,32,.55) !important;
-}
-
-/* S2-g co-locate (B / K-type): light#109 L881 — theme gate 維持で other theme 影響ゼロ。 imp は inline/競合 対抗 keep */
-html[data-theme="light"] .hero-wuxia .luopan-inner svg circle.donut-bg,
-html[data-theme="light"] .hero-wuxia .luopan-inner svg circle[stroke^="rgba(232,215,180"] {
-  stroke: rgba(122,90,32,.5) !important;
 }
 
 @media (min-width: 601px) {
@@ -611,10 +449,7 @@ html[data-theme="light"] .hero-wuxia .luopan-inner svg circle[stroke^="rgba(232,
     gap: 8px;
     align-items: center;
   }
-  .hero-wuxia .hero-number {
-    font-size: 60px;  /* current score 大字 */
-    line-height: 1;
-  }
+  /* workspace v2: .hero-number の mobile font-size 直指定は削除 — 席継承 (workspace.css ≤600 の .seat-main .hb-num 54px) が担う */
   .hero-wuxia .hero-tier.tier-badge {
     font-size: var(--text-lg);
     padding: var(--space-1) var(--space-2);
@@ -658,7 +493,7 @@ html[data-theme="light"] .hero-wuxia .luopan-inner svg circle[stroke^="rgba(232,
     justify-self: center;
   }
   .hero-next-inline[hidden] { display: none; }
-  .hero-wuxia .hero-next-label { font-size: var(--text-xs); letter-spacing: 0.08em; padding: 0; color: var(--paper-mute); }
+  .hero-wuxia .hero-next-label { font-size: var(--text-xs); letter-spacing: 0.08em; padding: 0; color: var(--sumi-fg); }
   .hero-wuxia .hero-next-row { font-size: var(--text-sm); display: inline-flex; align-items: center; gap: 2px; }
   .hero-wuxia .hero-next-val { font-size: var(--text-md); font-weight: var(--fw-bold); }
   .hero-left { grid-area: info; }
@@ -713,18 +548,71 @@ html[data-theme="light"] .hero-wuxia .luopan-inner svg circle[stroke^="rgba(232,
 }
 
 @media (max-width: 359px) {
-  /* hero-number: 480px @media で 60px だが 320px だと score 領域が広すぎて NEXT/tier 圧迫 */
-  .hero-wuxia .hero-number {
+  /* workspace v2: .hero-number 直 font-size は削除 (席継承へ)。極小幅は .hb-num 側で縮小 */
+  .hero-wuxia .seat-main .hb-num {
     font-size: 44px;
   }
 
-  /* hero-tier badge: 480px @media で var(--text-xl)=22px に拡大したが、 320-359px では
-     grid "score | next/tier" 領域に 22px badge が収まらず NEXT/donut と重なる。 中間サイズに縮小。 */
+  /* hero-tier badge: 320-359px では 18px badge も窮屈 → 中間サイズに縮小 */
   .hero-wuxia .hero-tier.tier-badge {
     font-size: var(--text-lg);  /* 16px */
     padding: 3px 10px;
     letter-spacing: 0.05em;
   }
+}
+
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     蛍 (Firefly) — hero 背景 装飾 (2026-06-21 兄貴指示「風燕伝の金蛍を表現」)
+     A 案: ゆっくり漂う + 光弱め (静かで上品、 集中阻害最小)
+     CSS only / pointer-events:none / prefers-reduced-motion 対応
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+.wwm-fireflies {
+  pointer-events: none;
+  overflow: hidden;
+}
+/* wwm-ws-main 直下 absolute = 侠 kanji-mark と同方針。 top:-200px で hero 領域に侵食、
+   height 240px で hero 下端 + tabs 帯まで覆う。 z:5 = paper-bg (0) < fireflies (5) < tabs (20) =
+   active tab opaque で蛍隠す、 紙地より前 で視認、 装備 panel に侵食しない */
+.wwm-ws-main > .wwm-fireflies {
+  position: absolute;
+  top: -195px; left: 0; right: 0; height: 260px;
+  z-index: 5;
+}
+.wwm-firefly {
+  position: absolute;
+  display: block;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: #ffe8a0;
+  box-shadow:
+    0 0 4px 1px rgba(255, 215, 130, 0.85),
+    0 0 10px 3px rgba(212, 175, 87, 0.6),
+    0 0 20px 6px rgba(184, 149, 100, 0.3);
+  opacity: 0.5;
+  animation: wwmFireflyDrift 8s ease-in-out infinite, wwmFireflyGlow 3.5s ease-in-out infinite;
+}
+.wwm-firefly:nth-child(1) { top: 30%; left: 8%;  animation-delay: 0s,    0.5s; animation-duration: 9s, 4s; }
+.wwm-firefly:nth-child(2) { top: 70%; left: 20%; animation-delay: -2s,  -1s;   animation-duration: 11s, 3s; }
+.wwm-firefly:nth-child(3) { top: 20%; left: 45%; animation-delay: -4s,   0s;   animation-duration: 8s, 4.5s; }
+.wwm-firefly:nth-child(4) { top: 75%; left: 55%; animation-delay: -1s,  -2s;   animation-duration: 10s, 3.5s; }
+.wwm-firefly:nth-child(5) { top: 40%; left: 75%; animation-delay: -3s,  -0.5s; animation-duration: 9s, 4s; }
+.wwm-firefly:nth-child(6) { top: 65%; left: 88%; animation-delay: -5s,  -1.5s; animation-duration: 11s, 3s; }
+
+@keyframes wwmFireflyDrift {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(20px, -12px); }
+  50%  { transform: translate(35px, 8px); }
+  75%  { transform: translate(15px, 18px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes wwmFireflyGlow {
+  0%, 100% { opacity: 0.35; }
+  20%      { opacity: 1; }
+  50%      { opacity: 0.65; }
+  80%      { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wwm-firefly { animation: none; opacity: 0.25; }
 }
 
 } /* end @layer components */

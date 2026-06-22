@@ -1,4 +1,4 @@
-// WWM-METRICS constants
+// WWMetrics constants
 // Phase 1.2.6: 各所散在の magic number / 配列 / マップ を集約。
 
 (function () {
@@ -73,7 +73,6 @@
       BASELINE_SCORE: 'wwm_baseline_score_v1',
       OPT_BEST:       'wwm_opt_best_v1',
       OPT_TARGET:     'wwm_opt_target_ratio_v1',
-      OPT_MIN_DELTA:  'wwm_opt_min_delta_v1',
       OPT_SORT:       'wwm_opt_sort_v1',
       VIRTUAL:        'wwm_virtual_v1',
       COLLAPSED:      'wwm_collapsed_v1',

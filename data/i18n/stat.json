@@ -69,6 +69,20 @@
     "ko": "외공 방어력",
     "vi": "Phòng Ngự Ngoại công"
   },
+  "physPen": {
+    "ja": "外功貫通",
+    "en": "Phys Pen",
+    "zh": "外功穿透",
+    "ko": "외공 관통",
+    "vi": "Xuyên thấu Ngoại công"
+  },
+  "voidPen": {
+    "ja": "無相貫通",
+    "en": "Void Pen",
+    "zh": "无相穿透",
+    "ko": "무상 관통",
+    "vi": "Xuyên thấu Vô Tướng"
+  },
   "physResist": {
     "ja": "外功耐性",
     "en": "Phys Res",

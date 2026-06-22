@@ -1,4 +1,4 @@
-// WWM-METRICS Sidebar - icon resolvers
+// WWMetrics Sidebar - icon resolvers
 // Phase 3.1c: sidebar.js から 装備 slot / 流派 (liupai) アイコン URL 解決 切出。
 //   - _GEAR_SLOT_LABELS_JA / _GEAR_SLOT_I18N_KEY / _GEAR_SLOT_LABELS (Proxy) / _slotLabelI18n
 //   - _GEAR_RAIL_ZH (rail 縦書き用 中国語ラベル)

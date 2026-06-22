@@ -1,4 +1,4 @@
-// ── WWM-METRICS Sidebar / 心法 panel + 編集 modal (Phase 3.7 切出) ─
+// ── WWMetrics Sidebar / 心法 panel + 編集 modal (Phase 3.7 切出) ─
 // renderXinfaGrid / _computeArsenalCardScore / _computeXinfaCardScores /
 // openXinfaEdit / window.WWMXinfa
 (function () {
@@ -29,31 +29,25 @@
     const origPassive = WWMState.roleInfo?.passiveSlots || [];
     const cards = [0,1,2,3].map(i => {
       const xid = passive[i];
-      const xinfa = xid ? xinfaMap[xid] : null;
-      let name = '(空)';
-      if (xid) {
-        const n = window.WWM_DS.name('xinfa', xid, lang);
-        name = n.indexOf('[xinfa:') === 0 ? `心法ID ${xid}` : n;
-      }
-      const tier = tiers[i] ?? tiers[String(i)] ?? 6;
       // icon: 元と同じ xid なら base64/URL、 swap 後 or 配列が空(SHARE mode等) は dict から URL fallback
       const iconUrl = (xid === origPassive[i] && xinfaIcons[i]) ? xinfaIcons[i] : (window.WWM_XINFA_ICONS?.[xid]?.icon_url || null);
-      const iconHtml = iconUrl ? `<img class="wwm-xinfa-icon" src="${iconUrl}" alt="">` : '';
-      const tierChip = (xid && tier >= 1 && tier <= 5) ? `<div class="wwm-xinfa-tier-chip">T${tier}</div>` : '';
-      // 流派バッジ (心法に紐づく liupai)
+      const iconHtml = iconUrl ? `<img src="${iconUrl}" alt="">` : '';
+      // 流派 = 公式画像 (兄貴指示 2026-06-13)
       const liupaiUrl = xid ? (window.WWM_XINFA_ICONS?.[xid]?.liupai_pic_url || null) : null;
-      const liupaiHtml = liupaiUrl ? `<img class="wwm-xinfa-liupai-badge" src="${liupaiUrl}" alt="" loading="lazy">` : '';
       const liupaiPinyin = _liupaiPinyinFromUrl(liupaiUrl);
+      const liupaiHtml = liupaiUrl ? `<img class="plank-liupai" src="${liupaiUrl}" alt="" loading="lazy">` : '';
+      // レアリティ (gold/purple/blue) — 公式 bg を plank-paint::after に当てるため (2026-06-14 兄貴指示)
+      const rank = xid ? (xinfaMap[xid]?.rank || null) : null;
+      const rankAttr = rank ? ` data-rank="${rank}"` : '';
       return `
-        <div class="wwm-xinfa-slot" data-xinfa-slot="${i}"${liupaiPinyin ? ` data-liupai-pinyin="${liupaiPinyin}"` : ''} onclick="WWMSidebar.xinfa.openEdit(${i})">
-          ${tierChip}
+        <div class="wwm-xinfa-slot" data-xinfa-slot="${i}"${liupaiPinyin ? ` data-liupai-pinyin="${liupaiPinyin}"` : ''}${rankAttr} onclick="WWMSidebar.xinfa.openEdit(${i})">
+          <div class="plank-hole"></div>
+          <div class="plank-stamp">心</div>
+          <div class="plank-paint"></div>
+          ${iconHtml ? `<div class="plank-icon-wrap">${iconHtml}</div>` : ''}
           ${liupaiHtml}
-          <div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">心法${['一','二','三','四'][i]}</span></div>
-          ${iconHtml ? `<div class="wwm-xinfa-icon-wrap">${iconHtml}</div>` : ''}
-          <div class="wwm-xinfa-inner">
-            <div class="wwm-xinfa-header"><b>${name}</b></div>
-          </div>
-          <span class="wwm-xinfa-card-score" data-xinfa-score="${i}"><b>...</b></span>
+          <div class="plank-score-paint"></div>
+          <span class="wwm-xinfa-card-score" data-xinfa-score="${i}"><span class="plank-score-main">…</span></span>
         </div>
       `;
     }).join('');
@@ -67,71 +61,138 @@
     const arsenalLiupaiUrl = _arsenalLiupaiResolve(roleInfo, pathKey);
     const arsenalLiupaiHtml = arsenalLiupaiUrl ? `<img class="wwm-xinfa-liupai-badge" src="${arsenalLiupaiUrl}" alt="" loading="lazy">` : '';
     const arsenalLiupaiPinyin = _liupaiPinyinFromUrl(arsenalLiupaiUrl);
+    const arsenalLiupaiSplat = arsenalLiupaiUrl ? `<img class="plank-liupai" src="${arsenalLiupaiUrl}" alt="" loading="lazy">` : '';
     const arsenalCard = `
       <div class="wwm-xinfa-slot wwm-arsenal-slot" data-arsenal-slot${arsenalLiupaiPinyin ? ` data-liupai-pinyin="${arsenalLiupaiPinyin}"` : ''} onclick="WWMSidebar.arsenal.openEdit()">
-        ${arsenalLiupaiHtml}
-        <div class="wwm-xinfa-rail"><span class="wwm-xinfa-rail-text">武庫</span></div>
-        <div class="wwm-xinfa-icon-wrap"><img class="wwm-xinfa-icon" src="https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/kongfu/images/673361fe92bef95db34510429KLQLykS05.png" alt=""></div>
-        <div class="wwm-xinfa-inner">
-          <div class="wwm-xinfa-header"><b>${pathName}</b></div>
-        </div>
-        <span class="wwm-xinfa-card-score" data-arsenal-score><b>...</b></span>
+        <div class="plank-hole"></div>
+        <div class="plank-stamp">庫</div>
+        <div class="plank-paint"></div>
+        <div class="plank-icon-wrap"><img src="https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/kongfu/images/673361fe92bef95db34510429KLQLykS05.png" alt=""></div>
+        ${arsenalLiupaiSplat}
+        <div class="plank-score-paint"></div>
+        <span class="wwm-xinfa-card-score" data-arsenal-score><span class="plank-score-main">…</span></span>
       </div>
     `;
     root.innerHTML = cards + arsenalCard;
     _computeXinfaCardScores(roleInfo);
     _computeArsenalCardScore(roleInfo);
+    // mobile pager 化 reflow = 自カテゴリのみ仕分け
+    if (window.WWMSidebar?.mobileBuildPager) window.WWMSidebar.mobileBuildPager.reflow('xinfa');
+    // 武庫題字 (data-kaisho="arsenalTitle") SVG 化発火
+    if (window.WWMKaisho?.apply) window.WWMKaisho.apply();
+  }
+
+  // 武庫 LOO marginal (arsenal 抜きとの差)
+  async function _computeArsenalLooContrib(ri, state) {
+    if (!ri || !window.WWMStats?.buildStatParams) return 0;
+    try {
+      const baseParams = await window.WWMStats.buildStatParams(ri, state);
+      window.computeExpected(baseParams);
+      const baseScore = _scoreWithBonus(ri);
+      const stateNoArs = JSON.parse(JSON.stringify(state || {}));
+      if (stateNoArs.arsenal) stateNoArs.arsenal = { path: stateNoArs.arsenal.path, tiers: {} };
+      const noArsParams = await window.WWMStats.buildStatParams(ri, stateNoArs);
+      window.computeExpected(noArsParams);
+      const noArsScore = _scoreWithBonus(ri);
+      // 元 state で復元 (lastResult)
+      window.computeExpected(baseParams);
+      return Math.round(baseScore - noArsScore);
+    } catch (e) { return 0; }
   }
 
   async function _computeArsenalCardScore(roleInfo) {
     if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return;
+    const ri = _getEffectiveRoleInfo() || roleInfo;
     const state = _getEffectiveState() || WWMHelpers.storage.loadJSON('wwm_last_state_v1');
+    const effContrib = await _computeArsenalLooContrib(ri, state);
+    // baseline 寄与 (任意 virtual 変更で波及表示、 gear と同方針)
+    let origContrib = null;
+    const hasVirtual = (WWMState.virtual.gear && Object.keys(WWMState.virtual.gear).length) ||
+                       (WWMState.virtual.kongfu && Object.keys(WWMState.virtual.kongfu).length) ||
+                       (WWMState.virtual.xinfa && ((WWMState.virtual.xinfa.passive && WWMState.virtual.xinfa.passive.length) || Object.keys(WWMState.virtual.xinfa.tiers || {}).length)) ||
+                       WWMState.virtual.arsenal;
+    if (hasVirtual) {
+      const origRi = WWMState.roleInfo;
+      const origState = WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {};
+      origContrib = await _computeArsenalLooContrib(origRi, origState);
+    }
+    // 描画 = 武備指数 (= LOO 生値) 表示 (兄貴指示 2026-06-18 = 火力品質 % 廃止)
+    const el = document.querySelector('[data-arsenal-score]');
+    if (!el) return;
+    if (origContrib != null && origContrib !== effContrib) {
+      const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
+      if (isObs) {
+        el.innerHTML = `<span class="plank-score-main">${origContrib.toLocaleString()}</span>`;
+      } else {
+        const delta = effContrib - origContrib;
+        const sign = delta > 0 ? '+' : '';
+        const cls = delta > 0 ? 'up' : delta < 0 ? 'dn' : '';
+        el.innerHTML = `<span class="plank-score-main">${origContrib.toLocaleString()}</span> <span class="plank-score-delta ${cls}">${sign}${delta.toLocaleString()}</span>`;
+      }
+      return;
+    }
+    el.innerHTML = `<span class="plank-score-main">${effContrib.toLocaleString()}</span>`;
+  }
+
+  // 心法 LOO marginal (該当 slot tier 0 化との差)
+  async function _computeXinfaLooContrib(ri, state) {
+    if (!ri || !window.WWMStats?.buildStatParams) return null;
+    const result = {};
     try {
-      // base = 武庫込
-      const baseParams = await window.WWMStats.buildStatParams(roleInfo, state);
+      const baseSt = JSON.parse(JSON.stringify(state || {}));
+      if (!baseSt.xinfaTiers) baseSt.xinfaTiers = {};
+      const baseParams = await window.WWMStats.buildStatParams(ri, baseSt);
       window.computeExpected(baseParams);
-      const baseScore = _scoreWithBonus(roleInfo);
-      // 武庫無 = state.arsenal を空に
-      const stateNoArs = JSON.parse(JSON.stringify(state || {}));
-      if (stateNoArs.arsenal) stateNoArs.arsenal = { path: stateNoArs.arsenal.path, tiers: {} };
-      const noArsParams = await window.WWMStats.buildStatParams(roleInfo, stateNoArs);
-      window.computeExpected(noArsParams);
-      const noArsScore = _scoreWithBonus(roleInfo);
-      const contrib = Math.round(baseScore - noArsScore);
-      const el = document.querySelector('[data-arsenal-score] b');
-      if (el) el.textContent = contrib.toLocaleString();
-      // base 復元
-      window.computeExpected(baseParams);
-    } catch(e) {}
+      const baseScore = _scoreWithBonus(ri);
+      for (let i = 0; i < 4; i++) {
+        const altSt = JSON.parse(JSON.stringify(baseSt));
+        altSt.xinfaTiers[i] = 0;
+        altSt.xinfaTiers[String(i)] = 0;
+        const p = await window.WWMStats.buildStatParams(ri, altSt);
+        window.computeExpected(p);
+        const noXinfa = _scoreWithBonus(ri);
+        result[i] = Math.round(baseScore - noXinfa);
+      }
+    } catch (e) { return null; }
+    return result;
   }
 
   async function _computeXinfaCardScores(roleInfo) {
     if (!window.WWMStats?.buildStatParams || typeof window.computeExpected !== 'function') return;
-    // virtual passive (心法ID差替) も反映するため、roleInfo は effectiveRoleInfo で上書き保証
     const ri = _getEffectiveRoleInfo() || roleInfo;
-    // virtual xinfa tiers (Edit modal適用結果) を反映するため _getEffectiveState() 使用
     const state = _getEffectiveState() || WWMHelpers.storage.loadJSON('wwm_last_state_v1');
-    // base score
-    let baseScore = 0;
-    try {
-      const baseParams = await window.WWMStats.buildStatParams(ri, state);
-      window.computeExpected(baseParams);
-      baseScore = _scoreWithBonus(ri);
-    } catch (e) { return; }
-    // 各 xinfa slot → tier 0 で再算出 = その心法寄与
+    // LOO marginal で各 slot 寄与算出 (effective)
+    const effContrib = await _computeXinfaLooContrib(ri, state) || {};
+    // baseline (origRi + origState、 virtual ある時のみ算出)
+    const origContrib = {};
+    const origRi = WWMState.roleInfo;
+    const hasVirtual = (WWMState.virtual.gear && Object.keys(WWMState.virtual.gear).length) ||
+                       (WWMState.virtual.kongfu && Object.keys(WWMState.virtual.kongfu).length) ||
+                       (WWMState.virtual.xinfa && ((WWMState.virtual.xinfa.passive && WWMState.virtual.xinfa.passive.length) || Object.keys(WWMState.virtual.xinfa.tiers || {}).length)) ||
+                       WWMState.virtual.arsenal;
+    if (hasVirtual && origRi) {
+      const origState = WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {};
+      Object.assign(origContrib, await _computeXinfaLooContrib(origRi, origState) || {});
+    }
+    // 描画 = 武備指数 (= LOO 生値) 表示 (兄貴指示 2026-06-18)
     for (let i = 0; i < 4; i++) {
-      try {
-        const altState = JSON.parse(JSON.stringify(state || {}));
-        if (!altState.xinfaTiers) altState.xinfaTiers = {};
-        altState.xinfaTiers[i] = 0;
-        altState.xinfaTiers[String(i)] = 0;
-        const p = await window.WWMStats.buildStatParams(ri, altState);
-        window.computeExpected(p);
-        const noXinfa = _scoreWithBonus(ri);
-        const delta = Math.round(baseScore - noXinfa);
-        const el = document.querySelector(`[data-xinfa-score="${i}"]`);
-        if (el) el.innerHTML = `<b>${delta.toLocaleString()}</b>`;
-      } catch (e) {}
+      const el = document.querySelector(`[data-xinfa-score="${i}"]`);
+      if (!el) continue;
+      const curLoo = effContrib[i] || 0;
+      if (origContrib[i] != null && origContrib[i] !== curLoo) {
+        const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
+        const origLoo = origContrib[i];
+        if (isObs) {
+          el.innerHTML = `<span class="plank-score-main">${origLoo.toLocaleString()}</span>`;
+        } else {
+          const delta = curLoo - origLoo;
+          const sign = delta > 0 ? '+' : '';
+          const cls = delta > 0 ? 'up' : delta < 0 ? 'dn' : '';
+          el.innerHTML = `<span class="plank-score-main">${origLoo.toLocaleString()}</span> <span class="plank-score-delta ${cls}">${sign}${delta.toLocaleString()}</span>`;
+        }
+        continue;
+      }
+      el.innerHTML = `<span class="plank-score-main">${curLoo.toLocaleString()}</span>`;
     }
     // 復元
     try {
@@ -167,6 +228,32 @@
           return `<option value="${id}" ${String(id)===String(selectedId)?'selected':''}>${label}</option>`;
         })
         .join('');
+    }
+    // icon-select 用の options 配列 (心法アイコン + 名前)。 ic-chip--inkbox = 墨地 + 白 icon
+    // 他スロットで使用中の心法 = disabled (赤 + 選択不可、 2026-06-18 兄貴指示)
+    function _xinfaIconOptions(selectedId) {
+      const usedByOthers = new Set();
+      for (let i = 0; i < passive.length; i++) {
+        if (i === slotIdx) continue;
+        const id = passive[i];
+        if (id) usedByOthers.add(String(id));
+      }
+      const opts = Object.entries(xinfaMap)
+        .filter(([k]) => /^\d+$/.test(k))
+        .map(([id]) => {
+          const n = window.WWM_DS.name('xinfa', id, lang);
+          const label = n.indexOf('[xinfa:') === 0 ? id : n;
+          const isUsed = usedByOthers.has(String(id));
+          return {
+            value: id,
+            name: label,
+            iconUrl: window.WWM_XINFA_ICONS?.[id]?.icon_url || null,
+            iconType: 'inkbox',
+            disabled: isUsed,
+            disabledReason: isUsed ? '他スロット使用中' : null
+          };
+        });
+      return { options: opts, selectedValue: String(selectedId) };
     }
     // xinfa effects key → i18n key + 表示形式
     const _XINFA_EFFECT_LABEL = {
@@ -322,31 +409,42 @@
         <span class="wwm-cmp-l-bracket-tl"></span><span class="wwm-cmp-l-bracket-tr"></span>
         <span class="wwm-cmp-l-bracket-bl"></span><span class="wwm-cmp-l-bracket-br"></span>
         <div class="wwm-modal-header">
-          <h2><span class="wwm-cmp-title-ja">${_T.xinfaTitleJa||'心法対照'}</span><span class="wwm-cmp-title-en">${_T.cmpTitleEn||'COMPARISON'}</span><span class="wwm-cmp-seal">心</span></h2>
+          <h2><span class="wwm-cmp-title-ja" data-i18n="xinfaTitleJa" data-kaisho="xinfaTitleJa">${_T.xinfaTitleJa||'心法対照'}</span><span class="wwm-cmp-title-en">${_T.cmpTitleEn||'COMPARISON'}</span><span class="wwm-cmp-seal">心</span></h2>
           <button class="wwm-modal-close" aria-label="Close">×</button>
         </div>
-        <div class="wwm-modal-body">
+        <div class="wwm-modal-body wwm-ws-paper">
           ${_bgIconHtml}
           <div class="wwm-cmp-grid">
             <div class="wwm-cmp-col wwm-cmp-current">
               <h3 class="wwm-cmp-title" data-seal="${_T.cmpCurrent||'現有'}"><span class="wwm-cmp-title-text">${_T.cmpCurrent||'現有'}</span></h3>
-              <div class="wwm-cmp-kongfu-header">${origName}</div>
+              ${window.WWMSidebar.iconSelect.renderReadonly({
+                className: 'wwm-cmp-kongfu-select',
+                name: origName,
+                iconUrl: window.WWM_XINFA_ICONS?.[origPassive[slotIdx]]?.icon_url || null,
+                iconType: 'inkbox'
+              })}
               <div class="wwm-cmp-set-header">Tier ${origTier}</div>
               <div class="wwm-cmp-rows wwm-cmp-xinfa-rows">${_effectsText(origPassive[slotIdx], origTier)}</div>
             </div>
             <div class="wwm-cmp-divider"></div>
             <div class="wwm-cmp-col wwm-cmp-new" id="wwmCmpXinfaNewCol">
               <h3 class="wwm-cmp-title" data-seal="${_T.cmpNew||'新置'}"><span class="wwm-cmp-title-text">${_T.cmpNew||'新置'}</span></h3>
-              <select class="wwm-cmp-kongfu-select" id="wwmCmpXinfaSel">${_xinfaOptions(newXinfaId)}</select>
+              ${window.WWMSidebar.iconSelect.render({ id: 'wwmCmpXinfaSel', className: 'wwm-cmp-kongfu-select', ..._xinfaIconOptions(newXinfaId) })}
               <select class="wwm-cmp-set-select" id="wwmCmpXinfaTierSel">${[0,1,2,3,4,5,6].map(t => `<option value="${t}" ${t===newTier?'selected':''}>Tier ${t}</option>`).join('')}</select>
               <div class="wwm-cmp-rows wwm-cmp-xinfa-rows" id="wwmCmpXinfaEffect">${_effectsText(newXinfaId, newTier)}</div>
             </div>
           </div>
-          <div class="wwm-cmp-footer-a">
-            <div class="wwm-cmp-delta-block">
-              <span class="wwm-cmp-delta-label">${_T.cmpDeltaLabel||'武格変動'}</span>
-              <span class="wwm-cmp-preview-value" id="wwmCmpXinfaPreviewDelta">+0</span>
-              <span class="wwm-cmp-delta-base" id="wwmCmpXinfaPreviewBase">—</span>
+        </div>
+        <!-- footer = body (紙) の外 = 墨帯 (modal 二層化 2026-06-12) -->
+        <div class="wwm-cmp-footer-a">
+          <div class="wwm-cmp-stat-row">
+            <span class="wwm-cmp-delta-label">${_T.martialIndex||'武格指数'}</span>
+            <span class="wwm-cmp-delta-total" id="wwmCmpXinfaPreviewTotal"></span>
+          </div>
+          <div class="wwm-cmp-stat-row">
+            <div class="wwm-cmp-quality-block">
+              <span class="wwm-cmp-delta-label">${_T.slotQuality||'火力品質'}</span>
+              <span class="wwm-cmp-delta-total" id="wwmCmpXinfaPreviewBase"></span>
             </div>
             <div class="wwm-btn-row wwm-cmp-btn-row">
               <button class="wwm-btn-primary" id="wwmXinfaApply">${_T.cmpApply||'採用'}</button>
@@ -362,47 +460,79 @@
     m.querySelector('#wwmXinfaCancel').addEventListener('click', () => m.remove());
 
     let _t = null;
+    let _origSlotContribCache = null; // modal open 時 effective ri + state での該当 slot 寄与 (init 後 1 回)
+    const _openTimeRi = _getEffectiveRoleInfo() || origRi; // open 時 snapshot (closure keep)
+    const _openTimeState = _getEffectiveState() || WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {};
     function _schedule() { if (_t) clearTimeout(_t); _t = setTimeout(_runPreview, 250); }
     async function _runPreview() {
-      const el = m.querySelector('#wwmCmpXinfaPreviewDelta');
-      if (!el) return;
       try {
-        // baseline = effective (現状適用済)
+        // baseline slot 寄与 = isModified なら origRi+origState (累積 Δ)、 でなければ open 時 snapshot (Δ 0 start)
+        if (_origSlotContribCache == null) {
+          const isModified = !!(WWMState.virtual.xinfa?.passive?.[slotIdx] != null && WWMState.virtual.xinfa.passive[slotIdx] !== (origRi?.passiveSlots?.[slotIdx] ?? null))
+            || !!(WWMState.virtual.xinfa?.tiers && (WWMState.virtual.xinfa.tiers[slotIdx] != null || WWMState.virtual.xinfa.tiers[String(slotIdx)] != null));
+          const baseRiForCache = isModified ? origRi : _openTimeRi;
+          const baseStForCache = isModified ? (WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {}) : _openTimeState;
+          const baseSt = JSON.parse(JSON.stringify(baseStForCache));
+          if (!baseSt.xinfaTiers) baseSt.xinfaTiers = {};
+          const baseParams = await window.WWMStats.buildStatParams(baseRiForCache, baseSt);
+          window.computeExpected(baseParams);
+          const origTotal = _scoreWithBonus(baseRiForCache);
+          const noSt = JSON.parse(JSON.stringify(baseSt));
+          noSt.xinfaTiers[slotIdx] = 0;
+          noSt.xinfaTiers[String(slotIdx)] = 0;
+          const noParams = await window.WWMStats.buildStatParams(baseRiForCache, noSt);
+          window.computeExpected(noParams);
+          const noScore = _scoreWithBonus(baseRiForCache);
+          _origSlotContribCache = Math.round(origTotal - noScore);
+        }
+        // 試作 ri + state
         const baseRi = _getEffectiveRoleInfo() || origRi;
         const baseState = JSON.parse(JSON.stringify(state || {}));
         if (!baseState.xinfaTiers) baseState.xinfaTiers = {};
-        const baseParams = await window.WWMStats.buildStatParams(baseRi, baseState);
-        window.computeExpected(baseParams);
-        const baseScore = _scoreWithBonus(baseRi);
-        // virtual ri + state
         const vRi = JSON.parse(JSON.stringify(baseRi));
         if (!vRi.passiveSlots) vRi.passiveSlots = [];
         vRi.passiveSlots[slotIdx] = parseInt(newXinfaId, 10);
         const vState = JSON.parse(JSON.stringify(baseState));
         vState.xinfaTiers[slotIdx] = newTier;
         vState.xinfaTiers[String(slotIdx)] = newTier;
+        // 試作 slot 寄与 = vRi + vState で該当 slot tier 0 化との差
         const vParams = await window.WWMStats.buildStatParams(vRi, vState);
         window.computeExpected(vParams);
-        const vScore = _scoreWithBonus(vRi);
-        const delta = Math.round(vScore - baseScore);
-        const sign = delta > 0 ? '+' : '';
-        el.textContent = `${sign}${delta.toLocaleString()}`;
-        el.className = 'wwm-cmp-preview-value ' + (delta > 0 ? 'pos' : delta < 0 ? 'neg' : 'zero');
+        const vTotal = _scoreWithBonus(vRi);
+        const vNoSt = JSON.parse(JSON.stringify(vState));
+        vNoSt.xinfaTiers[slotIdx] = 0;
+        vNoSt.xinfaTiers[String(slotIdx)] = 0;
+        const vNoParams = await window.WWMStats.buildStatParams(vRi, vNoSt);
+        window.computeExpected(vNoParams);
+        const vNoScore = _scoreWithBonus(vRi);
+        const vSlot = Math.round(vTotal - vNoScore);
+        // 武備指数 (= LOO 生値) baseline ▶ current 表示 (兄貴指示 2026-06-18)
+        const totalBase = Math.round(WWMState.baseline?.statusScore ?? 0);
+        const finalParams = await window.WWMStats.buildStatParams(vRi, vState);
+        window.computeExpected(finalParams);
+        const totalCur = Math.round(_scoreWithBonus(vRi));
         const baseEl = m.querySelector('#wwmCmpXinfaPreviewBase');
-        if (baseEl) baseEl.textContent = `${Math.round(baseScore).toLocaleString()} → ${Math.round(vScore).toLocaleString()}`;
-      } catch (e) { el.textContent = 'error'; }
+        const _ARR = '<span class="wwm-cmp-arrow">▶</span>';
+        if (baseEl) {
+          baseEl.innerHTML = `${_origSlotContribCache.toLocaleString()}${_ARR}${vSlot.toLocaleString()}`;
+        }
+        const totEl = m.querySelector('#wwmCmpXinfaPreviewTotal');
+        if (totEl) totEl.innerHTML = `${totalBase.toLocaleString()}${_ARR}${totalCur.toLocaleString()}`;
+      } catch (e) { console.error('[XinfaPreview]', e); }
     }
 
     const xSel = m.querySelector('#wwmCmpXinfaSel');
-    xSel.addEventListener('change', () => {
-      newXinfaId = parseInt(xSel.value, 10);
-      const eff = m.querySelector('#wwmCmpXinfaEffect');
-      if (eff) eff.innerHTML = _effectsText(newXinfaId, newTier);
-      // 武具対照と同仕様: 新置 心法 select 変更で modal 背景アイコンを動的切替
-      const newIconUrl = window.WWM_XINFA_ICONS?.[newXinfaId]?.icon_url;
-      const bgEl = m.querySelector('.wwm-cmp-modal-bg-icon');
-      if (bgEl && newIconUrl) bgEl.style.backgroundImage = `url('${newIconUrl}')`;
-      _schedule();
+    window.WWMSidebar.iconSelect.attach(xSel, {
+      onChange: (val) => {
+        newXinfaId = parseInt(val, 10);
+        const eff = m.querySelector('#wwmCmpXinfaEffect');
+        if (eff) eff.innerHTML = _effectsText(newXinfaId, newTier);
+        // 武具対照と同仕様: 新置 心法 select 変更で modal 背景アイコンを動的切替
+        const newIconUrl = window.WWM_XINFA_ICONS?.[newXinfaId]?.icon_url;
+        const bgEl = m.querySelector('.wwm-cmp-modal-bg-icon');
+        if (bgEl && newIconUrl) bgEl.style.backgroundImage = `url('${newIconUrl}')`;
+        _schedule();
+      }
     });
     const tSel = m.querySelector('#wwmCmpXinfaTierSel');
     tSel.addEventListener('change', () => {

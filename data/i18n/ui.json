@@ -1,4 +1,18 @@
 {
+  "dmgSplitNormal": {
+    "ja": "並傷",
+    "en": "Normal",
+    "zh": "普伤",
+    "ko": "일반",
+    "vi": "Phổ thông"
+  },
+  "dmgSplitGraze": {
+    "ja": "軽傷",
+    "en": "Glancing",
+    "zh": "擦伤",
+    "ko": "찰과상",
+    "vi": "Trầy xước"
+  },
   "pageTitle": {
     "ja": "風燕計 | WWMETRICS",
     "en": "Where Winds Metrics | WWMETRICS",
@@ -27,8 +41,15 @@
     "ko": "WHERE WINDS METRICS",
     "vi": "YÊN VÂN CHỈ SỐ"
   },
+  "gameVer": {
+    "ja": "Ver1.7 宮闕の朝ぼらけ",
+    "en": "Ver1.7 The Imperial Palace",
+    "zh": "Ver1.7 宮闕日初升",
+    "ko": "Ver1.7 궁궐의 새벽빛",
+    "vi": "Ver1.7 The Imperial Palace"
+  },
   "presetTitle": {
-    "ja": "プリセット",
+    "ja": "PRESETS",
     "en": "PRESETS",
     "zh": "预设",
     "ko": "프리셋",
@@ -496,20 +517,6 @@
     "ko": "다시 가져오기",
     "vi": "Nhập lại"
   },
-  "migrationMsg": {
-    "ja": "新URLに移転しました: <strong>wwm-metrics.pages.dev</strong> — このURL (旧) は2026-06-08頃停止予定",
-    "en": "Moved to new URL: <strong>wwm-metrics.pages.dev</strong> — this old URL will be retired around 2026-06-08",
-    "zh": "已迁移到新地址: <strong>wwm-metrics.pages.dev</strong> — 当前 (旧) 地址将于 2026-06-08 前后停用",
-    "ko": "새 URL로 이전했습니다: <strong>wwm-metrics.pages.dev</strong> — 현재 (구) URL 은 2026-06-08 경 종료 예정",
-    "vi": "Đã chuyển sang URL mới: <strong>wwm-metrics.pages.dev</strong> — URL (cũ) này sẽ ngừng hoạt động khoảng 2026-06-08"
-  },
-  "migrationBtn": {
-    "ja": "新URLへ",
-    "en": "Go to new URL",
-    "zh": "前往新地址",
-    "ko": "새 URL로",
-    "vi": "Đến URL mới"
-  },
   "importPrompt": {
     "ja": "上部「IMPORT」ボタンからデータを取り込んでください",
     "en": "Click the IMPORT button at the top to load data",
@@ -531,6 +538,41 @@
     "ko": "가져오기",
     "vi": "NHẬP"
   },
+  "welcomeBannerMsg": {
+    "ja": "データ取込から始めましょう (右下の朱印をクリック)",
+    "en": "Start by importing your data (click the seal at the bottom-right)",
+    "zh": "先导入数据 (点击右下角朱印)",
+    "ko": "데이터 임포트로 시작 (우측 하단 인장 클릭)",
+    "vi": "Bắt đầu bằng cách import dữ liệu (nhấp vào ấn ở góc dưới phải)"
+  },
+  "welcomeBannerBtn": {
+    "ja": "インポート",
+    "en": "IMPORT",
+    "zh": "导入",
+    "ko": "가져오기",
+    "vi": "NHẬP"
+  },
+  "welcomeBannerClose": {
+    "ja": "閉じる",
+    "en": "Close",
+    "zh": "关闭",
+    "ko": "닫기",
+    "vi": "Đóng"
+  },
+  "tutorialChImportFabTitle": {
+    "ja": "インポート",
+    "en": "Import",
+    "zh": "导入",
+    "ko": "임포트",
+    "vi": "Import"
+  },
+  "tutorialChImportFabBody": {
+    "ja": "再度インポートを行う場合は、 このインポートボタンをクリックしてください。<br>自由に動かせますので、 お好きな場所に設置してください。",
+    "en": "To re-import, click this Import button.<br>It can be dragged freely — place it wherever you prefer.",
+    "zh": "需要再次导入时, 请点击此导入按钮。<br>可自由拖动, 请放置在喜欢的位置。",
+    "ko": "다시 임포트할 때는 이 임포트 버튼을 클릭하세요.<br>자유롭게 이동 가능하니, 원하는 위치에 배치하세요.",
+    "vi": "Để import lại, hãy nhấp vào nút Import này.<br>Nút có thể kéo thả tự do — đặt ở vị trí bạn muốn."
+  },
   "exportBtn": {
     "ja": "EXPORT",
     "en": "EXPORT",
@@ -551,6 +593,34 @@
     "zh": "分享",
     "ko": "공유",
     "vi": "CHIA SẺ"
+  },
+  "shareTabCard": {
+    "ja": "画像カード",
+    "en": "Card Image",
+    "zh": "图片卡片",
+    "ko": "이미지 카드",
+    "vi": "Thẻ hình ảnh"
+  },
+  "shareTabUrl": {
+    "ja": "共有URL",
+    "en": "Share URL",
+    "zh": "分享链接",
+    "ko": "공유 URL",
+    "vi": "URL chia sẻ"
+  },
+  "shareTabObs": {
+    "ja": "OBS配信",
+    "en": "OBS Overlay",
+    "zh": "OBS直播",
+    "ko": "OBS 방송",
+    "vi": "OBS phát sóng"
+  },
+  "shareCardBlocked": {
+    "ja": "閲覧モード中は画像カードを生成できません",
+    "en": "Card generation is disabled in view mode",
+    "zh": "浏览模式下无法生成卡片",
+    "ko": "열람 모드에서는 카드를 생성할 수 없습니다",
+    "vi": "Không thể tạo thẻ ở chế độ xem"
   },
   "noteBtn": {
     "ja": "NOTE",
@@ -574,11 +644,11 @@
     "vi": "Tối"
   },
   "importSetupTitle": {
-    "ja": "引燕 / DATA IMPORT",
+    "ja": "引燕",
     "en": "Import Setup",
     "zh": "导入设置",
     "ko": "가져오기 설정",
-    "vi": "Dẫn Yến / NHẬP DỮ LIỆU"
+    "vi": "Dẫn Yến"
   },
   "importSetupIntro": {
     "ja": "公式データツールのデータを取り込むには、ブックマークレットの登録が必要です。",
@@ -623,11 +693,11 @@
     "vi": "Không có lần nhập trước"
   },
   "importPreviewTitle": {
-    "ja": "引燕 / DATA IMPORT",
+    "ja": "引燕",
     "en": "Import Card",
     "zh": "导入卡",
     "ko": "가져오기 카드",
-    "vi": "Dẫn Yến / NHẬP DỮ LIỆU"
+    "vi": "Dẫn Yến"
   },
   "importApplyBtn": {
     "ja": "インポート実行",
@@ -756,11 +826,11 @@
     "vi": "Tải engine OCR thất bại (offline?)"
   },
   "ocrHelpTitle": {
-    "ja": "スクショ取込ガイド",
+    "ja": "画面取込指南",
     "en": "Screenshot Import Guide",
     "zh": "截图导入指南",
     "ko": "스크린샷 가져오기 가이드",
-    "vi": "Hướng dẫn Nhập từ Ảnh chụp"
+    "vi": "Nhập từ Ảnh chụp"
   },
   "ocrHelpExample": {
     "ja": "撮影例: 装備詳細画面 (値が右端に並ぶ画面)",
@@ -1028,6 +1098,125 @@
     "ko": "적용",
     "vi": "Áp dụng"
   },
+  "optZerobaseCompare": {
+    "ja": "格析",
+    "en": "Zero-Base",
+    "zh": "零基对照",
+    "ko": "제로베이스",
+    "vi": "So sánh nền 0"
+  },
+  "anlzTabZerobase": {
+    "ja": "外功vs属性",
+    "en": "Phys vs Elem",
+    "zh": "外功vs属性",
+    "ko": "외공vs속성",
+    "vi": "Ngoại công vs Thuộc tính"
+  },
+  "optZerobaseCompareTip": {
+    "ja": "武器系 affix#6 = 無相貫通/外功貫通 固定 で並列比較 (属性 vs 物理)",
+    "en": "Compare weapon affix#6 fixed to Void Pen vs Phys Pen (element vs physical)",
+    "zh": "武器 affix#6 = 无相穿透/外功穿透 固定 并列对照 (属性 vs 物理)",
+    "ko": "무기 affix#6 = 무상관통/외공관통 고정 병렬 비교 (속성 vs 물리)",
+    "vi": "So sánh vũ khí affix#6 cố định Xuyên Vô Tướng vs Xuyên Ngoại Công"
+  },
+  "optZerobaseTitle": {
+    "ja": "格析対照",
+    "en": "Zero-Base Compare",
+    "zh": "格析对照",
+    "ko": "격석 대조",
+    "vi": "Đối chiếu Nền 0"
+  },
+  "optZerobaseVoid": {
+    "ja": "属性特化ビルド",
+    "en": "Element Build",
+    "zh": "属性特化构筑",
+    "ko": "속성 특화 빌드",
+    "vi": "Build Thuộc tính"
+  },
+  "optZerobasePhys": {
+    "ja": "外功特化ビルド",
+    "en": "Phys Build",
+    "zh": "外功特化构筑",
+    "ko": "외공 특화 빌드",
+    "vi": "Build Ngoại công"
+  },
+  "optZerobaseCalc": {
+    "ja": "計算中…",
+    "en": "Calculating…",
+    "zh": "计算中…",
+    "ko": "계산 중…",
+    "vi": "Đang tính…"
+  },
+  "optZerobaseFailed": {
+    "ja": "計算失敗",
+    "en": "Calculation failed",
+    "zh": "计算失败",
+    "ko": "계산 실패",
+    "vi": "Tính toán thất bại"
+  },
+  "optZerobaseApplyVoid": {
+    "ja": "無相採用",
+    "en": "Apply Void",
+    "zh": "采用无相",
+    "ko": "무상 적용",
+    "vi": "Áp dụng Vô Tướng"
+  },
+  "optZerobaseApplyPhys": {
+    "ja": "外功採用",
+    "en": "Apply Phys",
+    "zh": "采用外功",
+    "ko": "외공 적용",
+    "vi": "Áp dụng Ngoại Công"
+  },
+  "optZerobaseConfirm": {
+    "ja": "この構成を採用しますか？\n現在の affix が全 slot で上書きされます (装備本体は keep)。",
+    "en": "Apply this build? All slot affixes will be overwritten (equipment items kept).",
+    "zh": "采用此配置？所有部位 affix 将被覆盖（装备本体保留）。",
+    "ko": "이 구성을 적용하시겠습니까? 모든 슬롯 affix가 덮어씌워집니다 (장비 본체 유지).",
+    "vi": "Áp dụng cấu hình này? Affix của tất cả slot sẽ bị ghi đè (giữ trang bị gốc)."
+  },
+  "optZerobaseApplied": {
+    "ja": "ゼロベース構成を採用しました",
+    "en": "Zero-base build applied",
+    "zh": "已采用零基础配置",
+    "ko": "제로베이스 구성 적용 완료",
+    "vi": "Đã áp dụng cấu hình nền 0"
+  },
+  "optZerobaseStart": {
+    "ja": "測定開始",
+    "en": "Start Measurement",
+    "zh": "开始测定",
+    "ko": "측정 시작",
+    "vi": "Bắt đầu đo"
+  },
+  "optZerobaseStartDesc": {
+    "ja": "ゼロベースで装備 affix の最適配置を 2 パターン (属性特化 / 外功特化) 並列計算します。計算に十秒〜数十秒かかります。",
+    "en": "Calculate optimal affix builds (Element / Phys) in parallel from zero base. Takes 10-30 seconds.",
+    "zh": "从零基础并列计算装备 affix 的最优配置 2 模式 (属性特化 / 外功特化)。计算需 10-30 秒。",
+    "ko": "제로베이스로 장비 affix 최적 배치를 2 패턴 (속성/외공 특화) 병렬 계산. 10-30초 소요.",
+    "vi": "Tính cấu hình affix tối ưu (Thuộc tính / Ngoại công) song song từ nền 0. Mất 10-30 giây."
+  },
+  "optZerobaseRerun": {
+    "ja": "再計算",
+    "en": "Recompute",
+    "zh": "重新计算",
+    "ko": "재계산",
+    "vi": "Tính lại"
+  },
+  "cmpShouon": {
+    "ja": "同級承音",
+    "en": "Same-Tier Orchestration",
+    "zh": "同阶承音",
+    "ko": "동일 등급 승음",
+    "vi": "Thừa Âm cùng bậc"
+  },
+  "cmpShouonTitle": {
+    "ja": "新置の調律1〜5を 同級承音 (MAX×94%) で一括置換",
+    "en": "Set tunings 1-5 to Same-Tier Orchestration (94% of MAX)",
+    "zh": "新置调律1〜5 一键置换为 同阶承音 (MAX × 94%)",
+    "ko": "신규 조율 1〜5 를 동일 등급 승음 (MAX×94%) 으로 일괄 치환",
+    "vi": "Đặt điều luật 1-5 của Mới đặt thành Thừa Âm cùng bậc (94% MAX)"
+  },
   "cmpReset": {
     "ja": "復元",
     "en": "Revert",
@@ -1162,11 +1351,11 @@
     "vi": "Lịch sử"
   },
   "shareTitle": {
-    "ja": "飛簡 / BUILD SHARE",
-    "en": "BUILD SHARE",
-    "zh": "飞简 / BUILD SHARE",
-    "ko": "비간 / BUILD SHARE",
-    "vi": "Phi giản / CHIA SẺ BUILD"
+    "ja": "飛簡",
+    "en": "SHARE",
+    "zh": "飞简",
+    "ko": "비간",
+    "vi": "Phi Giản"
   },
   "shareSect1Heading": {
     "ja": "▍ビルド共有",
@@ -1176,10 +1365,10 @@
     "vi": "▍Chia sẻ Build"
   },
   "shareSect1Desc": {
-    "ja": "現在インポートしているゲームデータ (装備/心法/調律・定音オプション/武術) を共有する URL。 受信者は同じビルドで WWM-METRICS を閲覧できます。",
-    "en": "URL to share your currently imported game data (equipment / xinfa / tuning & engravings / martial arts). Recipients can view WWM-METRICS with the same build.",
-    "zh": "用于分享当前导入的游戏数据 (装备/心法/调律·定音/武术) 的 URL。 接收者可以使用相同构筑查看 WWM-METRICS。",
-    "ko": "현재 가져온 게임 데이터 (장비/심법/조율·정음/무술) 를 공유하는 URL. 받는 사람은 동일한 빌드로 WWM-METRICS 를 열람할 수 있습니다.",
+    "ja": "現在インポートしているゲームデータ (装備/心法/調律・定音オプション/武術) を共有する URL。 受信者は同じビルドで WWMetrics を閲覧できます。",
+    "en": "URL to share your currently imported game data (equipment / xinfa / tuning & engravings / martial arts). Recipients can view WWMetrics with the same build.",
+    "zh": "用于分享当前导入的游戏数据 (装备/心法/调律·定音/武术) 的 URL。 接收者可以使用相同构筑查看 WWMetrics。",
+    "ko": "현재 가져온 게임 데이터 (장비/심법/조율·정음/무술) 를 공유하는 URL. 받는 사람은 동일한 빌드로 WWMetrics 를 열람할 수 있습니다.",
     "vi": "URL để chia sẻ dữ liệu game đang nhập (trang bị/tâm pháp/điều luật·định âm/võ học). Người nhận có thể xem Yên Vân Chỉ Số với cùng build."
   },
   "shareCopyUrl": {
@@ -1385,19 +1574,19 @@
     "ko": "선택",
     "vi": "Chọn"
   },
-  "optMinDeltaTip": {
-    "ja": "これ未満のΔで打切",
-    "en": "Stop below this Δ",
-    "zh": "Δ低于此值时停止",
-    "ko": "이 Δ 미만 시 중단",
-    "vi": "Dừng khi Δ dưới giá trị này"
-  },
   "optToggleAllTip": {
     "ja": "全選択/全解除 切替",
     "en": "Toggle all on/off",
     "zh": "切换全选/全清",
     "ko": "전체 선택/해제 토글",
     "vi": "Chuyển đổi chọn tất cả/bỏ tất cả"
+  },
+  "optRerunTip": {
+    "ja": "再計算",
+    "en": "Recalculate",
+    "zh": "重新计算",
+    "ko": "재계산",
+    "vi": "Tính lại"
   },
   "optComputing": {
     "ja": "計算中...",
@@ -1461,6 +1650,20 @@
     "zh": "工具说明 / 更新记录",
     "ko": "도구 사양 / 변경 이력",
     "vi": "Quy cách công cụ / Lịch sử cập nhật"
+  },
+  "tipIconKofi": {
+    "ja": "開発を応援する (Ko-fi)",
+    "en": "Support development (Ko-fi)",
+    "zh": "支持开发 (Ko-fi)",
+    "ko": "개발 응원하기 (Ko-fi)",
+    "vi": "Ủng hộ phát triển (Ko-fi)"
+  },
+  "kofiBtn": {
+    "ja": "応援",
+    "en": "Support",
+    "zh": "支持",
+    "ko": "응원",
+    "vi": "Ủng hộ"
   },
   "tipIconContact": {
     "ja": "お問い合わせ (X / Twitter)",
@@ -1589,11 +1792,11 @@
     "vi": "Nhập lại dữ liệu lần trước nguyên trạng.<br>Để lấy trang bị mới nhất, chạy lại bookmarklet từ Công cụ Chính thức."
   },
   "noteSpec": {
-    "ja": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">ツール概要</h3>\n      <p class=\"wwm-note-p\">風燕伝 (Where Winds Meet) 装備強度の比較・最適化ツール。<b>武格指数</b> を中心に、装備/調律・定音オプション/武術/心法/装備一式効果を統合してダメージ期待値を算出し、装備改善方針を提示する。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">データ取得 (前提)</h3>\n      <p class=\"wwm-note-p\">本ツールは <b>風燕伝公式・データツール</b> からインポートしたデータを元に動作する。インポートするまで装備情報・スコアは表示されない。インポートデータはブラウザの localStorage に保存され、再起動後も保持される。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">武格指数 (Martial Index) とは</h3>\n      <p class=\"wwm-note-p\">装備/調律・定音オプション/武術/心法/装備一式効果を全て込みで、<b>全プレイヤー共通の固定係数</b> でダメージ期待値を算出した指標。大世界等級や敵側パラメータの個人差を排除しているため、装備の絶対強度を比較できる。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tier 判定基準</h3>\n      <p class=\"wwm-note-p\"><b>装備最適化提案を全て適用した時の最大スコア</b> を 100% として、現在の武格指数の比率で判定。インポート時に基準確定、再インポートで更新。</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> 最大の 95% 以上</li>\n        <li><b>S:</b> 90% 以上</li>\n        <li><b>A:</b> 80% 以上</li>\n        <li><b>B:</b> 65% 以上</li>\n        <li><b>C:</b> 未満</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">計算に反映される効果</h3>\n      <ul class=\"wwm-note-list\">\n        <li>装備 基本ステータス (外功攻撃力/属性攻撃力 等)</li>\n        <li>調律/定音オプション (調律1〜5、 定音1〜5)</li>\n        <li>武術才能効果 (会心率上限 +Δ、 武術属性別 攻撃/貫通/属性ダメ 強化 等)</li>\n        <li>心法 Tier 効果 (Tier2/5 表示反映 + Tier0/1/3/4/6 裏加算)</li>\n        <li>装備二点一式効果 (2点装備で発動する加算系)</li>\n        <li>装備四点一式効果 (4点装備で +100 固定ボーナス、 各装備に均等配賦)</li>\n        <li>基礎値 (体/力/防/速/会) → 派生 (基本ステータス・判定確率)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">計算に反映されない効果</h3>\n      <ul class=\"wwm-note-list\">\n        <li>装備四点一式効果の条件付効果 (気血/真気/受流/重撃 トリガー等) — 一律 +100 固定で代替</li>\n        <li>観音 (ゲーム内ステータス非影響と判明、 ステ画面に反映されないため計算対象外)</li>\n        <li>PvP 専用定音 (定音6枠) — 表示のみ、 計算寄与なし</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">計算前提値 (固定)</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>外功攻撃係数:</b> ×1.5</li>\n        <li><b>ステータス攻撃係数:</b> ×1.5</li>\n        <li><b>付加外功:</b> +230</li>\n        <li><b>属性強化 (主):</b> ×1.5</li>\n        <li><b>属性強化 (副):</b> ×1.0</li>\n        <li><b>大世界等級:</b> 現在のアップデート状況に応じた上限値 (グローバル基準)</li>\n        <li><b>武術等級:</b> キャラクター Lv と同一</li>\n        <li><b>敵パラメータ:</b> charLv ≥ 96 → 敵Lv96 (DEF 405 / 審判耐性 1.65)、 未満 → 敵Lv91 (DEF 350 / 審判耐性 1.45)</li>\n        <li><b>キャラクター基本ステータス:</b> キャラクター才能/シングルプレイレベル ボーナス/五音太平楽 を含むステータス加算値を <b>振り切れているもの</b> として算出</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">データバージョン管理</h3>\n      <p class=\"wwm-note-p\">ゲーム側のバランス調整などでツール側の計算式が更新された際、既存の武格指数 (baseline) は破棄され、最上部に <b>再インポート促しバナー</b> が表示される。再インポート後、新しい計算式で武格指数が再算出される。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">主要機能</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>武具対照:</b> 現在装備と新規装備の調律/定音差分シミュレーション。スコア変動を即時プレビュー</li>\n        <li><b>心法対照:</b> 心法の差替えシミュレーション。Tier 別効果と発動条件を比較</li>\n        <li><b>装備最適化提案:</b> 調律/定音の理想配分を逆算し、 現在からの改善ステップを順に提示</li>\n        <li><b>プリセット保存:</b> 試行中の装備構成を保存・呼出し可能</li>\n        <li><b>OBS Share:</b> サイドバーのみ表示する配信用 URL を生成 (透明背景・色調カスタム対応)</li>\n        <li><b>4言語対応 (日/英/中/韓) + ライト/ダーク切替</b></li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">計算式 (要約)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\n各 dmg = (物理 + 属性) × 全武術ダメ × 外功増伤 × 軽減\nstatusScore = expected を固定係数で再計算したもの\nfinalScore  = statusScore + 4-set bonus (4点一式効果発動時)</pre>\n    </div>",
-    "en": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tool Overview</h3>\n      <p class=\"wwm-note-p\">A comparison and optimization tool for Where Winds Meet equipment. Centered on the <b>Martial Index</b>, integrates equipment / tuning &amp; engravings / martial arts / xinfa / set effects to compute expected damage and propose improvement directions.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Data Required (Prerequisite)</h3>\n      <p class=\"wwm-note-p\">This tool runs on data imported from the <b>Where Winds Meet - Official Data Tool</b>. Equipment info and scores are not displayed until import. Imported data is saved in your browser's localStorage and persists across restarts.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">What is Martial Index</h3>\n      <p class=\"wwm-note-p\">An indicator that computes expected damage using <b>fixed coefficients common to all players</b>, including equipment / tuning &amp; engravings / martial arts talents / xinfa / set effects. It removes individual differences in Open World Level and enemy parameters, allowing absolute equipment strength comparison.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tier Criteria</h3>\n      <p class=\"wwm-note-p\">Judged by ratio of the current Martial Index against <b>the maximum score achievable when all optimization suggestions are applied</b>. Locked at import time, updated on re-import.</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> 95% or more of max</li>\n        <li><b>S:</b> 90% or more</li>\n        <li><b>A:</b> 80% or more</li>\n        <li><b>B:</b> 65% or more</li>\n        <li><b>C:</b> below</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Reflected in Calculation</h3>\n      <ul class=\"wwm-note-list\">\n        <li>Equipment base stats (Outer ATK / Elemental ATK etc.)</li>\n        <li>Tuning / Engraving options (Tuning 1-5, Engraving 1-5)</li>\n        <li>Martial Arts Talents effects (crit cap +Δ, Martial Element-specific ATK/penetration/elem boost, etc.)</li>\n        <li>Xinfa Tier effects (Tier 2/5 visible reflection + Tier 0/1/3/4/6 hidden additive)</li>\n        <li>2 Pieces set bonus (additive when 2 pieces equipped)</li>\n        <li>4 Pieces set bonus (+100 fixed when 4 pieces equipped, distributed evenly)</li>\n        <li>Base stats (Body/Power/Defense/Agility/Awareness) → derived (Base Stats / Judgment Rates)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Not Reflected in Calculation</h3>\n      <ul class=\"wwm-note-list\">\n        <li>4 Pieces conditional effects (HP/Inner Energy/Parry/Heavy triggers etc.) — replaced with flat +100</li>\n        <li>Enhance (confirmed not to affect game stats, so excluded from calculation)</li>\n        <li>PvP-Exclusive Engraving (Engraving slot 6) — display only, no contribution</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Fixed Calculation Presets</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>Outer ATK Coefficient:</b> ×1.5</li>\n        <li><b>Status ATK Coefficient:</b> ×1.5</li>\n        <li><b>Additional Outer:</b> +230</li>\n        <li><b>Elem Enhancement (Main):</b> ×1.5</li>\n        <li><b>Elem Enhancement (Sub):</b> ×1.0</li>\n        <li><b>Open World Level:</b> capped at the current update version (global standard)</li>\n        <li><b>Martial Level:</b> same as Character Lv</li>\n        <li><b>Enemy parameters:</b> charLv ≥ 96 → Enemy Lv96 (DEF 405 / Judgment Res 1.65), below → Enemy Lv91 (DEF 350 / 1.45)</li>\n        <li><b>Character base stats:</b> assumed maxed out, including Character Talents / Solo Mode Level bonus / Melodies of Peace stat gains</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Data Version Management</h3>\n      <p class=\"wwm-note-p\">When the tool's calculation logic is updated due to game balance changes, the existing Martial Index (baseline) is invalidated and a <b>re-import prompt banner</b> appears at the top. After re-import, the Martial Index is recalculated with the new logic.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Main Features</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>Equipment Compare:</b> Simulates tuning/engraving differences between current and new equipment with instant score preview</li>\n        <li><b>Xinfa Compare:</b> Simulates xinfa swaps, comparing Tier effects and activation conditions</li>\n        <li><b>Optimization Proposal:</b> Computes ideal tuning/engraving allocation and suggests step-by-step improvements</li>\n        <li><b>Preset Save:</b> Save and recall in-progress equipment configurations</li>\n        <li><b>OBS Share:</b> Generates a streaming URL showing only the sidebar (transparent background, color customizable)</li>\n        <li><b>4 languages (ja/en/zh/ko) + Light/Dark theme switching</b></li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Formula (Summary)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\neach dmg = (phys + elem) × all-martial-boost × outer-boost × reduction\nstatusScore = expected recomputed with fixed coefficients\nfinalScore  = statusScore + 4-set bonus (when 4 Pieces active)</pre>\n    </div>",
-    "zh": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">工具概览</h3>\n      <p class=\"wwm-note-p\">《燕雲十六聲》装备强度比较与优化工具。以 <b>武格指数</b> 为核心，将装备/调律·定音/武学/心法/装备一式效果综合计算伤害期望值，提出装备改进方向。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">数据获取 (前提)</h3>\n      <p class=\"wwm-note-p\">本工具基于 <b>《燕雲十六聲》官方數據小工具</b> 导入的数据运行。在导入之前不显示装备信息和分数。导入数据保存在浏览器 localStorage 中，重启后保留。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">武格指数 (Martial Index) 是什么</h3>\n      <p class=\"wwm-note-p\">包含装备/调律·定音/武学/心法/装备一式效果，使用 <b>所有玩家通用的固定系数</b> 计算伤害期望值的指标。排除了大世界等级和敌方参数的个体差异，因此可比较装备的绝对强度。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tier 判定基准</h3>\n      <p class=\"wwm-note-p\">以 <b>装备最优化方案全部应用后的最大分数</b> 为 100%，按当前武格指数的比率判定。导入时确定基准，重新导入时更新。</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> 最大值的 95% 以上</li>\n        <li><b>S:</b> 90% 以上</li>\n        <li><b>A:</b> 80% 以上</li>\n        <li><b>B:</b> 65% 以上</li>\n        <li><b>C:</b> 以下</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">计算中反映的效果</h3>\n      <ul class=\"wwm-note-list\">\n        <li>装备基础属性 (外功攻击力/属性攻击力 等)</li>\n        <li>调律/定音 (调律 1~5、定音 1~5)</li>\n        <li>武学天赋效果 (会心率上限 +Δ、 武学属性别 攻击/穿透/属性伤强化 等)</li>\n        <li>心法 Tier 效果 (Tier 2/5 显示反映 + Tier 0/1/3/4/6 隐藏加算)</li>\n        <li>二件套效果 (2件装备发动的加算系)</li>\n        <li>四件套效果 (4件装备 +100 固定加成、 各装备均分)</li>\n        <li>五维属性 (体/劲/御/敏/势) → 派生 (基础属性·判定属性)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">计算中未反映的效果</h3>\n      <ul class=\"wwm-note-list\">\n        <li>四件套效果中的条件效果 (气血/真气/受流/重击 触发等) — 统一以 +100 固定代替</li>\n        <li>观音 (证实不影响游戏内属性，角色面板不反映故不纳入计算)</li>\n        <li>PvP 专用定音 (定音 6 槽) — 仅显示，不参与计算</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">计算前提值 (固定)</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>外功攻击系数:</b> ×1.5</li>\n        <li><b>属性攻击系数:</b> ×1.5</li>\n        <li><b>附加外功:</b> +230</li>\n        <li><b>属性强化 (主):</b> ×1.5</li>\n        <li><b>属性强化 (副):</b> ×1.0</li>\n        <li><b>大世界等级:</b> 按当前版本更新上限 (全局基准)</li>\n        <li><b>武学等级:</b> 与角色 Lv 相同</li>\n        <li><b>敌方参数:</b> charLv ≥ 96 → 敌Lv96 (DEF 405 / 判定抗性 1.65)、 以下 → 敌Lv91 (DEF 350 / 1.45)</li>\n        <li><b>角色基础属性:</b> 角色天赋/单人模式等级奖励/五音启太平 等所有属性加成值 视为 <b>已满</b> 进行计算</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">数据版本管理</h3>\n      <p class=\"wwm-note-p\">当游戏侧平衡调整等导致本工具计算公式更新时，现有武格指数 (baseline) 被废弃，顶部显示 <b>重新导入提示横幅</b>。重新导入后以新公式重新计算武格指数。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">主要功能</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>武具对照:</b> 当前装备与新装备的调律/定音差异模拟。分数变动即时预览</li>\n        <li><b>心法对照:</b> 心法替换模拟。比较 Tier 别效果和发动条件</li>\n        <li><b>装备最适化提案:</b> 反向算出调律/定音的理想配置，按改进步骤逐项呈现</li>\n        <li><b>预设保存:</b> 保存和呼出试行中的装备配置</li>\n        <li><b>OBS Share:</b> 生成仅显示侧栏的直播用 URL (透明背景·色调自定义对应)</li>\n        <li><b>4 语言对应 (日/英/中/韩) + 浅色/深色 切换</b></li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">计算公式 (摘要)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\n各 dmg = (物理 + 属性) × 全武学伤害 × 外功增伤 × 减伤\nstatusScore = expected 用固定系数重新计算后的值\nfinalScore  = statusScore + 4-set bonus (四件套效果发动时)</pre>\n    </div>",
-    "ko": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">도구 개요</h3>\n      <p class=\"wwm-note-p\">연운 (Where Winds Meet) 장비 강도 비교·최적화 도구. <b>무격 지수</b> 를 중심으로 장비/조율·정음/무술/심법/장비 세트 효과를 통합하여 데미지 기댓값을 산출하고 장비 개선 방향을 제시합니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">데이터 취득 (전제)</h3>\n      <p class=\"wwm-note-p\">본 도구는 <b>&lt;연운&gt; 공식-데이터 툴</b> 에서 가져온 데이터를 기반으로 동작합니다. 가져오기 전까지는 장비 정보·점수가 표시되지 않습니다. 가져온 데이터는 브라우저 localStorage 에 저장되어 재시작 후에도 유지됩니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">무격 지수 (Martial Index) 란</h3>\n      <p class=\"wwm-note-p\">장비/조율·정음/무술/심법/장비 세트 효과를 모두 포함하여, <b>모든 플레이어 공통의 고정 계수</b> 로 데미지 기댓값을 산출한 지표. 대세계 등급과 적측 파라미터의 개인차를 배제하여 장비의 절대 강도를 비교할 수 있습니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tier 판정 기준</h3>\n      <p class=\"wwm-note-p\"><b>장비 최적화 제안을 모두 적용했을 때의 최대 점수</b> 를 100%로 하여, 현재 무격 지수의 비율로 판정합니다. 가져오기 시 기준 확정, 다시 가져오기 시 갱신됩니다.</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> 최대의 95% 이상</li>\n        <li><b>S:</b> 90% 이상</li>\n        <li><b>A:</b> 80% 이상</li>\n        <li><b>B:</b> 65% 이상</li>\n        <li><b>C:</b> 미만</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">계산에 반영되는 효과</h3>\n      <ul class=\"wwm-note-list\">\n        <li>장비 기본 스탯 (외공 공격력/속성 공격력 등)</li>\n        <li>조율/정음 (조율 1~5, 정음 1~5)</li>\n        <li>무술 천부 효과 (회심률 상한 +Δ, 무술 속성별 공격/관통/속성 데미지 강화 등)</li>\n        <li>심법 Tier 효과 (Tier 2/5 표시 반영 + Tier 0/1/3/4/6 숨겨진 가산)</li>\n        <li>2세트 효과 (2개 장비로 발동하는 가산계)</li>\n        <li>4세트 효과 (4개 장비로 +100 고정 보너스, 각 장비에 균등 배분)</li>\n        <li>기본 스탯 (체/력/방/속/회) → 파생 (기본 스탯·판정 확률)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">계산에 반영되지 않는 효과</h3>\n      <ul class=\"wwm-note-list\">\n        <li>4세트 효과의 조건부 효과 (기혈/진기/받아넘기/중타 트리거 등) — 일률 +100 고정으로 대체</li>\n        <li>첩음 (게임 내 스탯에 영향 없음으로 판명, 스탯 화면에 반영되지 않으므로 계산 대상 외)</li>\n        <li>PvP 전용 정음 (정음 6 슬롯) — 표시만, 계산 기여 없음</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">계산 전제값 (고정)</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>외공 공격 계수:</b> ×1.5</li>\n        <li><b>스탯 공격 계수:</b> ×1.5</li>\n        <li><b>부가 외공:</b> +230</li>\n        <li><b>속성 강화 (주):</b> ×1.5</li>\n        <li><b>속성 강화 (부):</b> ×1.0</li>\n        <li><b>대세계 등급:</b> 현재 업데이트 상태에 따른 상한값 (글로벌 기준)</li>\n        <li><b>무술 등급:</b> 캐릭터 Lv 와 동일</li>\n        <li><b>적 파라미터:</b> charLv ≥ 96 → 적Lv96 (DEF 405 / 판정 저항 1.65), 미만 → 적Lv91 (DEF 350 / 1.45)</li>\n        <li><b>캐릭터 기본 스탯:</b> 캐릭터 천부/싱글 모드 레벨 보너스/오음지태평 을 포함한 모든 스탯 가산값을 <b>최대치까지 도달한 것</b> 으로 산출</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">데이터 버전 관리</h3>\n      <p class=\"wwm-note-p\">게임 측 밸런스 조정 등으로 본 도구의 계산식이 갱신되면, 기존 무격 지수 (baseline) 가 무효화되어 상단에 <b>다시 가져오기 안내 배너</b> 가 표시됩니다. 다시 가져오기 후 새 계산식으로 무격 지수가 재산출됩니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">주요 기능</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>무구 대조:</b> 현재 장비와 신규 장비의 조율/정음 차분 시뮬레이션. 점수 변동을 즉시 프리뷰</li>\n        <li><b>심법 대조:</b> 심법 교체 시뮬레이션. Tier 별 효과와 발동 조건을 비교</li>\n        <li><b>장비 최적화 제안:</b> 조율/정음의 이상적 배분을 역산해, 현재로부터의 개선 스텝을 순차 제시</li>\n        <li><b>프리셋 저장:</b> 시행 중인 장비 구성을 저장·호출 가능</li>\n        <li><b>OBS Share:</b> 사이드바만 표시하는 방송용 URL 을 생성 (투명 배경·색조 커스텀 대응)</li>\n        <li><b>4언어 대응 (일/영/중/한) + 라이트/다크 전환</b></li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">계산식 (요약)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\n각 dmg = (물리 + 속성) × 전 무술 데미지 × 외공 증댐 × 경감\nstatusScore = expected 를 고정 계수로 재계산한 값\nfinalScore  = statusScore + 4-set bonus (4세트 효과 발동 시)</pre>\n    </div>",
-    "vi": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tổng quan công cụ</h3>\n      <p class=\"wwm-note-p\">Công cụ so sánh và tối ưu hóa độ mạnh trang bị của Yến Vân (Where Winds Meet). Lấy <b>Chỉ số Võ cách</b> làm trung tâm, tổng hợp trang bị / điều luật·định âm / võ học / tâm pháp / hiệu ứng bộ trang bị để tính giá trị kỳ vọng sát thương và đề xuất hướng cải thiện trang bị.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Lấy dữ liệu (Tiền đề)</h3>\n      <p class=\"wwm-note-p\">Công cụ này hoạt động dựa trên dữ liệu nhập từ <b>Công cụ Dữ liệu Chính thức Yến Vân</b>. Thông tin trang bị và điểm số sẽ không hiển thị cho đến khi nhập. Dữ liệu nhập được lưu trong localStorage của trình duyệt và được giữ lại sau khi khởi động lại.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Chỉ số Võ cách (Martial Index) là gì</h3>\n      <p class=\"wwm-note-p\">Là chỉ số tính giá trị kỳ vọng sát thương bằng <b>hệ số cố định chung cho tất cả người chơi</b>, bao gồm trang bị / điều luật·định âm / võ học / tâm pháp / hiệu ứng bộ trang bị. Loại bỏ chênh lệch cá nhân về cấp Đại thế giới và tham số kẻ địch, cho phép so sánh độ mạnh tuyệt đối của trang bị.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tiêu chuẩn phán định Tier</h3>\n      <p class=\"wwm-note-p\">Lấy <b>điểm tối đa khi áp dụng toàn bộ đề xuất tối ưu hóa trang bị</b> làm 100%, phán định theo tỷ lệ Chỉ số Võ cách hiện tại. Tiêu chuẩn được xác định khi nhập, cập nhật khi nhập lại.</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> Từ 95% giá trị tối đa trở lên</li>\n        <li><b>S:</b> Từ 90% trở lên</li>\n        <li><b>A:</b> Từ 80% trở lên</li>\n        <li><b>B:</b> Từ 65% trở lên</li>\n        <li><b>C:</b> Dưới mức trên</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Hiệu ứng được phản ánh trong tính toán</h3>\n      <ul class=\"wwm-note-list\">\n        <li>Chỉ số cơ bản của trang bị (Sức tấn công Ngoại công / Sức tấn công Thuộc tính, v.v.)</li>\n        <li>Điều luật / Định âm (Điều luật 1~5, Định âm 1~5)</li>\n        <li>Hiệu ứng thiên phú võ học (Tỷ lệ chí mạng giới hạn +Δ, tăng cường tấn công/xuyên thấu/sát thương thuộc tính theo võ học, v.v.)</li>\n        <li>Hiệu ứng Tier Tâm pháp (Tier 2/5 hiển thị phản ánh + Tier 0/1/3/4/6 cộng ẩn)</li>\n        <li>Hiệu ứng bộ 2 món (cộng dồn khi trang bị 2 món)</li>\n        <li>Hiệu ứng bộ 4 món (cộng cố định +100 khi trang bị 4 món, phân bổ đều cho mỗi trang bị)</li>\n        <li>Chỉ số cơ bản (Thể/Kình/Ngự/Mẫn/Thế) → Phái sinh (Chỉ số cơ bản · Tỷ lệ phán định)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Hiệu ứng không phản ánh trong tính toán</h3>\n      <ul class=\"wwm-note-list\">\n        <li>Hiệu ứng có điều kiện trong bộ 4 món (Khí huyết/Chân khí/Đỡ đòn/Đòn nặng kích hoạt, v.v.) — thay thế đồng nhất bằng +100 cố định</li>\n        <li>Quan âm (đã xác nhận không ảnh hưởng chỉ số trong game, không phản ánh trên màn hình chỉ số nên loại khỏi tính toán)</li>\n        <li>Định âm chuyên PvP (Định âm khe 6) — chỉ hiển thị, không đóng góp vào tính toán</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Giá trị tiền đề tính toán (cố định)</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>Hệ số tấn công Ngoại công:</b> ×1.5</li>\n        <li><b>Hệ số tấn công Chỉ số:</b> ×1.5</li>\n        <li><b>Ngoại công phụ thêm:</b> +230</li>\n        <li><b>Tăng cường thuộc tính (Chính):</b> ×1.5</li>\n        <li><b>Tăng cường thuộc tính (Phụ):</b> ×1.0</li>\n        <li><b>Cấp Đại thế giới:</b> Giá trị giới hạn theo phiên bản cập nhật hiện tại (tiêu chuẩn toàn cầu)</li>\n        <li><b>Cấp võ học:</b> Bằng cấp nhân vật</li>\n        <li><b>Tham số kẻ địch:</b> charLv ≥ 96 → địch Lv96 (DEF 405 / Kháng phán định 1.65), dưới đó → địch Lv91 (DEF 350 / 1.45)</li>\n        <li><b>Chỉ số cơ bản nhân vật:</b> Toàn bộ giá trị cộng chỉ số bao gồm thiên phú nhân vật/thưởng cấp chế độ một mình/Ngũ âm Thái bình lạc được tính như đã <b>đạt tối đa</b></li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Quản lý phiên bản dữ liệu</h3>\n      <p class=\"wwm-note-p\">Khi công thức tính toán của công cụ được cập nhật do điều chỉnh cân bằng bên game, Chỉ số Võ cách (baseline) hiện có sẽ bị hủy và <b>banner nhắc nhập lại</b> hiển thị ở trên cùng. Sau khi nhập lại, Chỉ số Võ cách được tính lại theo công thức mới.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Chức năng chính</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>Đối chiếu Vũ khí:</b> Mô phỏng chênh lệch Điều luật/Định âm giữa trang bị hiện tại và trang bị mới. Xem trước biến động điểm số tức thời</li>\n        <li><b>Đối chiếu Tâm pháp:</b> Mô phỏng thay thế Tâm pháp. So sánh hiệu ứng theo Tier và điều kiện kích hoạt</li>\n        <li><b>Đề xuất Tối ưu hóa Trang bị:</b> Tính ngược phân bổ lý tưởng Điều luật/Định âm và trình bày từng bước cải thiện</li>\n        <li><b>Lưu Cài đặt sẵn:</b> Lưu và gọi lại cấu hình trang bị đang thử nghiệm</li>\n        <li><b>OBS Share:</b> Tạo URL chuyên phát sóng chỉ hiển thị sidebar (hỗ trợ nền trong suốt · tùy chỉnh tông màu)</li>\n        <li><b>Hỗ trợ 5 ngôn ngữ (Nhật/Anh/Trung/Hàn/Việt) + Chuyển đổi Sáng/Tối</b></li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Công thức tính (Tóm tắt)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\nmỗi dmg = (vật lý + thuộc tính) × tăng sát thương toàn võ học × tăng ngoại công × giảm trừ\nstatusScore = expected được tính lại bằng hệ số cố định\nfinalScore  = statusScore + bộ 4 món bonus (khi hiệu ứng bộ 4 món kích hoạt)</pre>\n    </div>"
+    "ja": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">ツール概要</h3>\n      <p class=\"wwm-note-p\">風燕伝 (Where Winds Meet) 装備強度の比較・最適化ツール。キャラクターステータスを元に風燕伝ダメージ計算式をベースに <b>武格指数</b> を算出。最適な装備の提案、装備一つ一つの比較など装備改善方針を提示する。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">ツールを使用するための前提条件</h3>\n      <p class=\"wwm-note-p\">本ツールは <b>風燕伝公式・データツール</b> からデータをインポートすることを前提としている。インポートを行うまで、各機能は使用できません。インポートデータはブラウザの localStorage に保存され、再起動後も保持される。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">武格指数 とは</h3>\n      <p class=\"wwm-note-p\">キャラクターステータスを元に、<b>全プレイヤー共通の固定スキル係数</b> でダメージ期待値を算出した指標。武術のスキル倍率差などを固定化しているため、装備の絶対強度を比較できる。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">武格指数 Tier 判定基準</h3>\n      <p class=\"wwm-note-p\">インポート時に適用された装備で算出された武格指数と<b>最適化装備基準の武格指数</b>の比率で判定。武格指数 Tierについてはインポート時に自動判定されるため、再インポートするまで変動しない。</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> 最大の 95% 以上</li>\n        <li><b>S:</b> 90% 以上</li>\n        <li><b>A:</b> 80% 以上</li>\n        <li><b>B:</b> 65% 以上</li>\n        <li><b>C:</b> 未満</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">計算に反映される効果</h3>\n      <ul class=\"wwm-note-list\">\n        <li>装備 基本ステータス (外功攻撃力/属性攻撃力 等)</li>\n        <li>調律/定音オプション (調律1〜5、 定音1〜5)</li>\n        <li>武術才能効果 (会心率上限 +Δ、 武術属性別 攻撃/貫通/属性ダメ 強化 等)</li>\n        <li>心法 Tier 効果 (Tier2/5 表示反映 + Tier0/1/3/4/6 裏加算)</li>\n        <li>装備二点一式効果 (2点装備で発動する加算系)</li>\n        <li>装備四点一式効果 (4点装備で +100 固定ボーナス、 各装備に均等配賦)</li>\n        <li>基礎値 (体/力/防/速/会) → 派生 (基本ステータス・判定確率)</li>\n        <li>キャラクター基本ステータス (才能/五音太平楽/観音 等)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">計算に反映されない効果</h3>\n      <ul class=\"wwm-note-list\">\n        <li>PvP 専用定音 (定音6枠) — 表示のみ、 計算寄与なし</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">計算前提値 (固定)</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>外功攻撃係数:</b> ×1.5</li>\n        <li><b>ステータス攻撃係数:</b> ×1.5</li>\n        <li><b>付加外功:</b> +230</li>\n        <li><b>属性強化 (主):</b> ×1.5</li>\n        <li><b>属性強化 (副):</b> ×1.0</li>\n        <li><b>大世界等級:</b> 現在のアップデート状況に応じた上限値 (グローバル基準)</li>\n        <li><b>武術等級:</b> キャラクター Lv と同一</li>\n        <li><b>敵パラメータ:</b> charLv ≥ 96 → 敵Lv96 (DEF 405 / 審判耐性 1.65)、 未満 → 敵Lv91 (DEF 350 / 審判耐性 1.45)</li>\n        <li><b>キャラクター基本ステータス:</b> キャラクター才能/シングルプレイレベル ボーナス/五音太平楽 を含むステータス加算値を <b>振り切れているもの</b> として算出</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">実機ステータスとの誤差について</h3>\n      <p class=\"wwm-note-p\">武格指数は キャラクター基本ステータス (才能/五音太平楽/観音 等) を <b>全プレイヤー共通の max 想定</b> で算出する。実機キャラがまだ振り切れていない場合、ツール上の数値が実機より高く出ることがある。これは絶対強度比較を成立させるための仕様。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">データバージョン管理</h3>\n      <p class=\"wwm-note-p\">ゲーム側のバランス調整などでツール側の計算式が更新された際、既存の武格指数は破棄される。再インポート後、新しい計算式で武格指数が再算出される。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">計算式 (要約)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\n各 dmg = (物理 + 属性) × 全武術ダメ × 外功増伤 × 軽減\nstatusScore = expected を固定係数で再計算したもの\nfinalScore  = statusScore + 4-set bonus (4点一式効果発動時)</pre>\n    </div>",
+    "en": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tool Overview</h3>\n      <p class=\"wwm-note-p\">A comparison and optimization tool for Where Winds Meet equipment. Computes the <b>Martial Index</b> based on character stats following the Where Winds Meet damage formula. Proposes optimal equipment and per-piece comparisons to guide equipment improvement.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Prerequisites for Using This Tool</h3>\n      <p class=\"wwm-note-p\">This tool requires data imported from the <b>Where Winds Meet - Official Data Tool</b>. Until import is performed, the features cannot be used. Imported data is saved in your browser's localStorage and persists across restarts.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">What is Martial Index</h3>\n      <p class=\"wwm-note-p\">An indicator that computes expected damage from character stats using <b>fixed skill coefficients common to all players</b>. By fixing differences such as martial arts skill multipliers, it allows absolute equipment strength comparison.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Martial Index Tier Criteria</h3>\n      <p class=\"wwm-note-p\">Judged by the ratio between the Martial Index computed from equipment at import time and the <b>Martial Index based on optimized equipment</b>. The Martial Index Tier is auto-determined at import time and does not change until re-import.</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> 95% or more of max</li>\n        <li><b>S:</b> 90% or more</li>\n        <li><b>A:</b> 80% or more</li>\n        <li><b>B:</b> 65% or more</li>\n        <li><b>C:</b> below</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Reflected in Calculation</h3>\n      <ul class=\"wwm-note-list\">\n        <li>Equipment base stats (Outer ATK / Elemental ATK etc.)</li>\n        <li>Tuning / Engraving options (Tuning 1-5, Engraving 1-5)</li>\n        <li>Martial Arts Talents effects (crit cap +Δ, Martial Element-specific ATK/penetration/elem boost, etc.)</li>\n        <li>Xinfa Tier effects (Tier 2/5 visible reflection + Tier 0/1/3/4/6 hidden additive)</li>\n        <li>2 Pieces set bonus (additive when 2 pieces equipped)</li>\n        <li>4 Pieces set bonus (+100 fixed when 4 pieces equipped, distributed evenly)</li>\n        <li>Base stats (Body/Power/Defense/Agility/Awareness) → derived (Base Stats / Judgment Rates)</li>\n        <li>Character base stats (Talents / Melodies of Peace / Enhance, etc.)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Not Reflected in Calculation</h3>\n      <ul class=\"wwm-note-list\">\n        <li>PvP-Exclusive Engraving (Engraving slot 6) — display only, no contribution</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Fixed Calculation Presets</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>Outer ATK Coefficient:</b> ×1.5</li>\n        <li><b>Status ATK Coefficient:</b> ×1.5</li>\n        <li><b>Additional Outer:</b> +230</li>\n        <li><b>Elem Enhancement (Main):</b> ×1.5</li>\n        <li><b>Elem Enhancement (Sub):</b> ×1.0</li>\n        <li><b>Open World Level:</b> capped at the current update version (global standard)</li>\n        <li><b>Martial Level:</b> same as Character Lv</li>\n        <li><b>Enemy parameters:</b> charLv ≥ 96 → Enemy Lv96 (DEF 405 / Judgment Res 1.65), below → Enemy Lv91 (DEF 350 / 1.45)</li>\n        <li><b>Character base stats:</b> assumed maxed out, including Character Talents / Solo Mode Level bonus / Melodies of Peace stat gains</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">About Discrepancies with In-Game Stats</h3>\n      <p class=\"wwm-note-p\">The Martial Index is computed assuming character base stats (Talents / Melodies of Peace / Enhance, etc.) are <b>maxed out — common to all players</b>. If your character has not yet maxed these, the tool's value may appear higher than your in-game stats. This is intentional, to enable absolute equipment strength comparison.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Data Version Management</h3>\n      <p class=\"wwm-note-p\">When the tool's calculation logic is updated due to game balance changes, the existing Martial Index is discarded. After re-import, the Martial Index is recalculated with the new logic.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Formula (Summary)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\neach dmg = (phys + elem) × all-martial-boost × outer-boost × reduction\nstatusScore = expected recomputed with fixed coefficients\nfinalScore  = statusScore + 4-set bonus (when 4 Pieces active)</pre>\n    </div>",
+    "zh": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">工具概览</h3>\n      <p class=\"wwm-note-p\">《燕雲十六聲》装备强度比较与优化工具。基于角色属性，依据《燕雲十六聲》伤害公式计算 <b>武格指数</b>。提供最优装备建议、装备逐件比较等装备改进方向。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">使用本工具的前提条件</h3>\n      <p class=\"wwm-note-p\">本工具以从 <b>《燕雲十六聲》官方數據小工具</b> 导入数据为前提。在导入之前，各功能无法使用。导入数据保存在浏览器 localStorage 中，重启后保留。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">武格指数 是什么</h3>\n      <p class=\"wwm-note-p\">基于角色属性，使用 <b>所有玩家通用的固定技能系数</b> 计算伤害期望值的指标。固定了武学技能倍率等差异，因此可比较装备的绝对强度。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">武格指数 Tier 判定基准</h3>\n      <p class=\"wwm-note-p\">按导入时所应用装备算出的武格指数与<b>最优化装备基准的武格指数</b>的比率判定。武格指数 Tier 在导入时自动判定，再次导入前不会变动。</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> 最大值的 95% 以上</li>\n        <li><b>S:</b> 90% 以上</li>\n        <li><b>A:</b> 80% 以上</li>\n        <li><b>B:</b> 65% 以上</li>\n        <li><b>C:</b> 以下</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">计算中反映的效果</h3>\n      <ul class=\"wwm-note-list\">\n        <li>装备基础属性 (外功攻击力/属性攻击力 等)</li>\n        <li>调律/定音 (调律 1~5、定音 1~5)</li>\n        <li>武学天赋效果 (会心率上限 +Δ、 武学属性别 攻击/穿透/属性伤强化 等)</li>\n        <li>心法 Tier 效果 (Tier 2/5 显示反映 + Tier 0/1/3/4/6 隐藏加算)</li>\n        <li>二件套效果 (2件装备发动的加算系)</li>\n        <li>四件套效果 (4件装备 +100 固定加成、 各装备均分)</li>\n        <li>五维属性 (体/劲/御/敏/势) → 派生 (基础属性·判定属性)</li>\n        <li>角色基础属性 (天赋/五音启太平/观音 等)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">计算中未反映的效果</h3>\n      <ul class=\"wwm-note-list\">\n        <li>PvP 专用定音 (定音 6 槽) — 仅显示，不参与计算</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">计算前提值 (固定)</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>外功攻击系数:</b> ×1.5</li>\n        <li><b>属性攻击系数:</b> ×1.5</li>\n        <li><b>附加外功:</b> +230</li>\n        <li><b>属性强化 (主):</b> ×1.5</li>\n        <li><b>属性强化 (副):</b> ×1.0</li>\n        <li><b>大世界等级:</b> 按当前版本更新上限 (全局基准)</li>\n        <li><b>武学等级:</b> 与角色 Lv 相同</li>\n        <li><b>敌方参数:</b> charLv ≥ 96 → 敌Lv96 (DEF 405 / 判定抗性 1.65)、 以下 → 敌Lv91 (DEF 350 / 1.45)</li>\n        <li><b>角色基础属性:</b> 角色天赋/单人模式等级奖励/五音启太平 等所有属性加成值 视为 <b>已满</b> 进行计算</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">关于与游戏内数值的差异</h3>\n      <p class=\"wwm-note-p\">武格指数将角色基础属性 (天赋/五音启太平/观音 等) 视为 <b>所有玩家通用的最大值</b> 进行计算。若角色尚未达到最大值，工具数值可能高于游戏内实际数值。此为实现装备绝对强度比较的设计。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">数据版本管理</h3>\n      <p class=\"wwm-note-p\">当游戏侧平衡调整等导致本工具计算公式更新时，现有武格指数被废弃。重新导入后以新公式重新计算武格指数。</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">计算公式 (摘要)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\n各 dmg = (物理 + 属性) × 全武学伤害 × 外功增伤 × 减伤\nstatusScore = expected 用固定系数重新计算后的值\nfinalScore  = statusScore + 4-set bonus (四件套效果发动时)</pre>\n    </div>",
+    "ko": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">도구 개요</h3>\n      <p class=\"wwm-note-p\">연운 (Where Winds Meet) 장비 강도 비교·최적화 도구. 캐릭터 스탯을 기반으로 연운 데미지 공식에 따라 <b>무격 지수</b> 를 산출. 최적 장비 제안, 장비 개별 비교 등 장비 개선 방향을 제시합니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">도구 사용을 위한 전제 조건</h3>\n      <p class=\"wwm-note-p\">본 도구는 <b>&lt;연운&gt; 공식-데이터 툴</b> 에서 데이터를 가져오는 것을 전제로 합니다. 가져오기 전까지는 각 기능을 사용할 수 없습니다. 가져온 데이터는 브라우저 localStorage 에 저장되어 재시작 후에도 유지됩니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">무격 지수 란</h3>\n      <p class=\"wwm-note-p\">캐릭터 스탯을 기반으로 <b>모든 플레이어 공통의 고정 스킬 계수</b> 로 데미지 기댓값을 산출한 지표. 무술 스킬 배율 차이 등을 고정화했기 때문에 장비의 절대 강도를 비교할 수 있습니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">무격 지수 Tier 판정 기준</h3>\n      <p class=\"wwm-note-p\">가져오기 시 적용된 장비로 산출된 무격 지수와 <b>최적화 장비 기준 무격 지수</b>의 비율로 판정합니다. 무격 지수 Tier 는 가져오기 시 자동 판정되므로 다시 가져올 때까지 변동하지 않습니다.</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> 최대의 95% 이상</li>\n        <li><b>S:</b> 90% 이상</li>\n        <li><b>A:</b> 80% 이상</li>\n        <li><b>B:</b> 65% 이상</li>\n        <li><b>C:</b> 미만</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">계산에 반영되는 효과</h3>\n      <ul class=\"wwm-note-list\">\n        <li>장비 기본 스탯 (외공 공격력/속성 공격력 등)</li>\n        <li>조율/정음 (조율 1~5, 정음 1~5)</li>\n        <li>무술 천부 효과 (회심률 상한 +Δ, 무술 속성별 공격/관통/속성 데미지 강화 등)</li>\n        <li>심법 Tier 효과 (Tier 2/5 표시 반영 + Tier 0/1/3/4/6 숨겨진 가산)</li>\n        <li>2세트 효과 (2개 장비로 발동하는 가산계)</li>\n        <li>4세트 효과 (4개 장비로 +100 고정 보너스, 각 장비에 균등 배분)</li>\n        <li>기본 스탯 (체/력/방/속/회) → 파생 (기본 스탯·판정 확률)</li>\n        <li>캐릭터 기본 스탯 (천부/오음지태평/첩음 등)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">계산에 반영되지 않는 효과</h3>\n      <ul class=\"wwm-note-list\">\n        <li>PvP 전용 정음 (정음 6 슬롯) — 표시만, 계산 기여 없음</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">계산 전제값 (고정)</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>외공 공격 계수:</b> ×1.5</li>\n        <li><b>스탯 공격 계수:</b> ×1.5</li>\n        <li><b>부가 외공:</b> +230</li>\n        <li><b>속성 강화 (주):</b> ×1.5</li>\n        <li><b>속성 강화 (부):</b> ×1.0</li>\n        <li><b>대세계 등급:</b> 현재 업데이트 상태에 따른 상한값 (글로벌 기준)</li>\n        <li><b>무술 등급:</b> 캐릭터 Lv 와 동일</li>\n        <li><b>적 파라미터:</b> charLv ≥ 96 → 적Lv96 (DEF 405 / 판정 저항 1.65), 미만 → 적Lv91 (DEF 350 / 1.45)</li>\n        <li><b>캐릭터 기본 스탯:</b> 캐릭터 천부/싱글 모드 레벨 보너스/오음지태평 을 포함한 모든 스탯 가산값을 <b>최대치까지 도달한 것</b> 으로 산출</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">게임 내 스탯과의 오차에 대해</h3>\n      <p class=\"wwm-note-p\">무격 지수는 캐릭터 기본 스탯 (천부/오음지태평/첩음 등) 을 <b>모든 플레이어 공통의 최대치</b> 로 가정하여 산출합니다. 캐릭터가 아직 최대치에 도달하지 않은 경우, 도구의 수치가 실제 게임 내 수치보다 높게 나타날 수 있습니다. 이는 장비의 절대 강도 비교를 성립시키기 위한 사양입니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">데이터 버전 관리</h3>\n      <p class=\"wwm-note-p\">게임 측 밸런스 조정 등으로 본 도구의 계산식이 갱신되면, 기존 무격 지수가 폐기됩니다. 다시 가져오기 후 새 계산식으로 무격 지수가 재산출됩니다.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">계산식 (요약)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\n각 dmg = (물리 + 속성) × 전 무술 데미지 × 외공 증댐 × 경감\nstatusScore = expected 를 고정 계수로 재계산한 값\nfinalScore  = statusScore + 4-set bonus (4세트 효과 발동 시)</pre>\n    </div>",
+    "vi": "\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tổng quan công cụ</h3>\n      <p class=\"wwm-note-p\">Công cụ so sánh và tối ưu hóa độ mạnh trang bị của Yến Vân (Where Winds Meet). Dựa trên chỉ số nhân vật, tính <b>Chỉ số Võ cách</b> theo công thức sát thương của Yến Vân. Đề xuất trang bị tối ưu, so sánh từng món trang bị để hướng dẫn cải thiện trang bị.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Điều kiện tiên quyết để sử dụng công cụ</h3>\n      <p class=\"wwm-note-p\">Công cụ này yêu cầu nhập dữ liệu từ <b>Công cụ Dữ liệu Chính thức Yến Vân</b>. Trước khi nhập, các chức năng không thể sử dụng. Dữ liệu nhập được lưu trong localStorage của trình duyệt và được giữ lại sau khi khởi động lại.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Chỉ số Võ cách là gì</h3>\n      <p class=\"wwm-note-p\">Là chỉ số tính giá trị kỳ vọng sát thương dựa trên chỉ số nhân vật, sử dụng <b>hệ số kỹ năng cố định chung cho tất cả người chơi</b>. Bằng cách cố định các chênh lệch như hệ số sát thương kỹ năng võ học, cho phép so sánh độ mạnh tuyệt đối của trang bị.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Tiêu chuẩn phán định Tier Chỉ số Võ cách</h3>\n      <p class=\"wwm-note-p\">Phán định theo tỷ lệ giữa Chỉ số Võ cách được tính từ trang bị áp dụng tại thời điểm nhập và <b>Chỉ số Võ cách dựa trên trang bị tối ưu hóa</b>. Tier Chỉ số Võ cách được tự động phán định khi nhập, không thay đổi cho đến khi nhập lại.</p>\n      <ul class=\"wwm-note-list\">\n        <li><b>SS:</b> Từ 95% giá trị tối đa trở lên</li>\n        <li><b>S:</b> Từ 90% trở lên</li>\n        <li><b>A:</b> Từ 80% trở lên</li>\n        <li><b>B:</b> Từ 65% trở lên</li>\n        <li><b>C:</b> Dưới mức trên</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Hiệu ứng được phản ánh trong tính toán</h3>\n      <ul class=\"wwm-note-list\">\n        <li>Chỉ số cơ bản của trang bị (Sức tấn công Ngoại công / Sức tấn công Thuộc tính, v.v.)</li>\n        <li>Điều luật / Định âm (Điều luật 1~5, Định âm 1~5)</li>\n        <li>Hiệu ứng thiên phú võ học (Tỷ lệ chí mạng giới hạn +Δ, tăng cường tấn công/xuyên thấu/sát thương thuộc tính theo võ học, v.v.)</li>\n        <li>Hiệu ứng Tier Tâm pháp (Tier 2/5 hiển thị phản ánh + Tier 0/1/3/4/6 cộng ẩn)</li>\n        <li>Hiệu ứng bộ 2 món (cộng dồn khi trang bị 2 món)</li>\n        <li>Hiệu ứng bộ 4 món (cộng cố định +100 khi trang bị 4 món, phân bổ đều cho mỗi trang bị)</li>\n        <li>Chỉ số cơ bản (Thể/Kình/Ngự/Mẫn/Thế) → Phái sinh (Chỉ số cơ bản · Tỷ lệ phán định)</li>\n        <li>Chỉ số cơ bản nhân vật (Thiên phú/Ngũ âm Thái bình lạc/Quan âm, v.v.)</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Hiệu ứng không phản ánh trong tính toán</h3>\n      <ul class=\"wwm-note-list\">\n        <li>Định âm chuyên PvP (Định âm khe 6) — chỉ hiển thị, không đóng góp vào tính toán</li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Giá trị tiền đề tính toán (cố định)</h3>\n      <ul class=\"wwm-note-list\">\n        <li><b>Hệ số tấn công Ngoại công:</b> ×1.5</li>\n        <li><b>Hệ số tấn công Chỉ số:</b> ×1.5</li>\n        <li><b>Ngoại công phụ thêm:</b> +230</li>\n        <li><b>Tăng cường thuộc tính (Chính):</b> ×1.5</li>\n        <li><b>Tăng cường thuộc tính (Phụ):</b> ×1.0</li>\n        <li><b>Cấp Đại thế giới:</b> Giá trị giới hạn theo phiên bản cập nhật hiện tại (tiêu chuẩn toàn cầu)</li>\n        <li><b>Cấp võ học:</b> Bằng cấp nhân vật</li>\n        <li><b>Tham số kẻ địch:</b> charLv ≥ 96 → địch Lv96 (DEF 405 / Kháng phán định 1.65), dưới đó → địch Lv91 (DEF 350 / 1.45)</li>\n        <li><b>Chỉ số cơ bản nhân vật:</b> Toàn bộ giá trị cộng chỉ số bao gồm thiên phú nhân vật/thưởng cấp chế độ một mình/Ngũ âm Thái bình lạc được tính như đã <b>đạt tối đa</b></li>\n      </ul>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Về sai lệch với chỉ số trong game</h3>\n      <p class=\"wwm-note-p\">Chỉ số Võ cách được tính bằng cách giả định chỉ số cơ bản nhân vật (Thiên phú/Ngũ âm Thái bình lạc/Quan âm, v.v.) đã <b>đạt mức tối đa chung cho tất cả người chơi</b>. Nếu nhân vật chưa đạt tối đa, giá trị trên công cụ có thể cao hơn giá trị trong game thực tế. Đây là thiết kế để cho phép so sánh độ mạnh tuyệt đối của trang bị.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Quản lý phiên bản dữ liệu</h3>\n      <p class=\"wwm-note-p\">Khi công thức tính toán của công cụ được cập nhật do điều chỉnh cân bằng bên game, Chỉ số Võ cách hiện có sẽ bị hủy. Sau khi nhập lại, Chỉ số Võ cách được tính lại theo công thức mới.</p>\n    </div>\n    <div class=\"wwm-note-section\">\n      <h3 class=\"wwm-note-h3\">Công thức tính (Tóm tắt)</h3>\n      <pre class=\"wwm-note-pre\">expected = normalAvg × pNormal\n         + critAvg × pCrit\n         + sympathyDmg × pSympathy\n         + grazeDmg × pGraze\n\nmỗi dmg = (vật lý + thuộc tính) × tăng sát thương toàn võ học × tăng ngoại công × giảm trừ\nstatusScore = expected được tính lại bằng hệ số cố định\nfinalScore  = statusScore + bộ 4 món bonus (khi hiệu ứng bộ 4 món kích hoạt)</pre>\n    </div>"
   },
   "importStep2XinfaTitle": {
     "ja": "心法 Tier",
@@ -1615,6 +1818,13 @@
     "zh": "武格指数",
     "ko": "무격 지수",
     "vi": "Chỉ số Võ cách"
+  },
+  "slotQuality": {
+    "ja": "武備指数",
+    "en": "Slot Score",
+    "zh": "装备得分",
+    "ko": "장비 점수",
+    "vi": "Điểm trang bị"
   },
   "martialIndexSub": {
     "ja": "MARTIAL INDEX",
@@ -1651,6 +1861,62 @@
     "ko": "아직 기록이 없습니다. 가져오기 시 자동 기록됩니다.",
     "vi": "Chưa có lịch sử. Sẽ tự động ghi khi nhập."
   },
+  "historyPbLabel": {
+    "ja": "PB",
+    "en": "PB",
+    "zh": "最高",
+    "ko": "PB",
+    "vi": "PB"
+  },
+  "historyRangeAll": {
+    "ja": "全期間",
+    "en": "All",
+    "zh": "全期",
+    "ko": "전체",
+    "vi": "Toàn thời gian"
+  },
+  "historyRange30d": {
+    "ja": "30日",
+    "en": "30d",
+    "zh": "30日",
+    "ko": "30일",
+    "vi": "30 ngày"
+  },
+  "historyRange7d": {
+    "ja": "7日",
+    "en": "7d",
+    "zh": "7日",
+    "ko": "7일",
+    "vi": "7 ngày"
+  },
+  "historyEmptyInRange": {
+    "ja": "この期間に記録なし",
+    "en": "No records in this range",
+    "zh": "此期间无记录",
+    "ko": "이 기간에 기록 없음",
+    "vi": "Không có dữ liệu trong khoảng thời gian này"
+  },
+  "historyMilestoneFlag": {
+    "ja": "初",
+    "en": "First",
+    "zh": "首达",
+    "ko": "첫",
+    "vi": "Lần đầu"
+  },
+  "historyScorePrefix": {
+    "ja": "武格指数 ",
+    "en": "Score ",
+    "zh": "武格指数 ",
+    "ko": "무격지수 ",
+    "vi": "Vượt mốc "
+  },
+  "historyScoreSuffix": {
+    "ja": " 突破",
+    "en": " broken",
+    "zh": " 突破",
+    "ko": " 돌파",
+    "vi": ""
+  },
   "locale": {
     "ja": "ja-JP",
     "en": "en-US",
@@ -1685,5 +1951,443 @@
     "zh": "UID",
     "ko": "UID",
     "vi": "UID"
+  },
+  "wsTabBuild": {
+    "ja": "武備",
+    "en": "Build",
+    "zh": "配装",
+    "ko": "빌드",
+    "vi": "Build"
+  },
+  "wsTabGear": {
+    "ja": "装備",
+    "en": "Gear",
+    "zh": "装备",
+    "ko": "장비",
+    "vi": "Trang bị"
+  },
+  "wsTabXinfa": {
+    "ja": "心法",
+    "en": "Inner Way",
+    "zh": "心法",
+    "ko": "심법",
+    "vi": "Tâm Pháp"
+  },
+  "wsXinfaArsenal": {
+    "ja": "心法/武庫",
+    "en": "Inner Way / Arsenal",
+    "zh": "心法/武库",
+    "ko": "심법/무기고",
+    "vi": "Tâm Pháp / Kho vũ khí"
+  },
+  "wsTabAnlz": {
+    "ja": "格析",
+    "en": "ANALYSIS",
+    "zh": "格析",
+    "ko": "격석",
+    "vi": "Cách tích"
+  },
+  "anlzPopoutBtn": {
+    "ja": "格析",
+    "en": "Analysis",
+    "zh": "格析",
+    "ko": "격석",
+    "vi": "Phân tích"
+  },
+  "anlzPopoutCloseTip": {
+    "ja": "閉じる",
+    "en": "Close",
+    "zh": "关闭",
+    "ko": "닫기",
+    "vi": "Đóng"
+  },
+  "wsTabEnbu": {
+    "ja": "戦律",
+    "en": "Combat Cadence",
+    "zh": "战律",
+    "ko": "전투율",
+    "vi": "Chiến Luật"
+  },
+  "wsTabHist": {
+    "ja": "履歴",
+    "en": "History",
+    "zh": "历史",
+    "ko": "이력",
+    "vi": "Lịch sử"
+  },
+  "enbuTeaserTitle": {
+    "ja": "戦律",
+    "en": "Combat Cadence",
+    "zh": "战律",
+    "ko": "전투율",
+    "vi": "Chiến Luật"
+  },
+  "enbuKofiBody": {
+    "ja": "本ツールは個人開発です。\n機能開発・サーバー維持の応援は Ko-fi からよろしくお願いします。",
+    "en": "This tool is developed by an individual.\nSupport development & server costs via Ko-fi.",
+    "zh": "本工具为个人开发。\n欢迎通过 Ko-fi 支持开发与服务器维护。",
+    "ko": "본 도구는 개인 개발입니다.\n기능 개발 및 서버 유지의 응원은 Ko-fi 에서 부탁드립니다.",
+    "vi": "Công cụ này được phát triển bởi cá nhân.\nHãy ủng hộ phát triển & duy trì máy chủ qua Ko-fi."
+  },
+  "enbuKofiBtn": {
+    "ja": "Ko-fi で応援",
+    "en": "Support on Ko-fi",
+    "zh": "在 Ko-fi 支持",
+    "ko": "Ko-fi 에서 응원",
+    "vi": "Ủng hộ trên Ko-fi"
+  },
+  "enbuTeaserDev": {
+    "ja": "※現在開発中の機能です。UIや仕様は調整中のため、実装時に変更される可能性があります。",
+    "en": "※Currently under development. UI and specs are subject to change upon implementation.",
+    "zh": "※当前为开发中功能。UI 与规格仍在调整，正式实装时可能变更。",
+    "ko": "※현재 개발 중인 기능입니다. UI 및 사양은 조정 중이며 실제 구현 시 변경될 수 있습니다.",
+    "vi": "※Tính năng đang phát triển. UI và thông số đang được điều chỉnh, có thể thay đổi khi triển khai chính thức."
+  },
+  "enbuTeaserBody": {
+    "ja": "技の連なりを律として刻み、DPS期待値を算出。\n武術の係数表と共に近日開帳。",
+    "en": "Etch your skill sequence as a cadence and calculate expected DPS.\nComing soon, alongside the martial arts coefficient table.",
+    "zh": "将技能连招刻为律动，算出 DPS 期望值。\n与武术系数表一同近日公开。",
+    "ko": "스킬 연계를 율로 새기고 DPS 기댓값을 산출합니다.\n무술 계수표와 함께 곧 공개 예정입니다.",
+    "vi": "Khắc chuỗi kỹ năng thành luật và tính ra giá trị kỳ vọng DPS.\nSắp ra mắt cùng bảng hệ số võ học."
+  },
+  "qishuPlaceholder": {
+    "ja": "整備中 — 奇術効果データの収載後、この区画に展開する。",
+    "en": "Under construction — This section will be populated once Mystic Arts effect data is available.",
+    "zh": "整备中 — 奇术效果数据收录后，此区块将予展开。",
+    "ko": "정비 중 — 비결 효과 데이터 수록 후 이 영역에 전개합니다.",
+    "vi": "Đang chuẩn bị — Khu vực này sẽ được mở sau khi có dữ liệu hiệu ứng Kỳ thuật."
+  },
+  "qishuPickerTitle": {
+    "ja": "奇術選択", "en": "Select Mystic Art", "zh": "选择奇术", "ko": "비결 선택", "vi": "Chọn Kỳ thuật"
+  },
+  "qishuPickerSlotLabel": {
+    "ja": "スロット", "en": "Slot", "zh": "栏位", "ko": "슬롯", "vi": "Ô"
+  },
+  "qishuPickerClear": {
+    "ja": "このスロットをクリア", "en": "Clear this slot", "zh": "清空此栏位", "ko": "이 슬롯 비우기", "vi": "Xóa ô này"
+  },
+  "qishuPickerReset": {
+    "ja": "全 8 枠を初期化", "en": "Reset all 8 slots", "zh": "重置全部 8 个栏位", "ko": "8 슬롯 모두 초기화", "vi": "Đặt lại 8 ô"
+  },
+  "qishuPickerCancel": {
+    "ja": "キャンセル", "en": "Cancel", "zh": "取消", "ko": "취소", "vi": "Hủy"
+  },
+  "qishuCategoryAll": {
+    "ja": "全奇術", "en": "All", "zh": "全部奇术", "ko": "전체 비결", "vi": "Tất cả Kỳ thuật"
+  },
+  "qishuCategoryOther": {
+    "ja": "その他", "en": "Other", "zh": "其他", "ko": "기타", "vi": "Khác"
+  },
+  "qishuPickerEmpty": {
+    "ja": "(空き)", "en": "(empty)", "zh": "（空）", "ko": "(비어 있음)", "vi": "(trống)"
+  },
+  "qishuPickerStageTitle": {
+    "ja": "装備中", "en": "Equipped", "zh": "已装备", "ko": "장착 중", "vi": "Đang trang bị"
+  },
+  "qishuPickerListTitle": {
+    "ja": "奇術一覧", "en": "All Mystic Arts", "zh": "奇术一览", "ko": "비결 목록", "vi": "Danh sách Kỳ thuật"
+  },
+  "qishuPickerApply": {
+    "ja": "採用", "en": "Apply", "zh": "采用", "ko": "적용", "vi": "Áp dụng"
+  },
+  "qishuPickerRestore": {
+    "ja": "復元", "en": "Restore", "zh": "还原", "ko": "복원", "vi": "Khôi phục"
+  },
+  "qishuPickerHint": {
+    "ja": "ドラッグで配置 / 枠 → 一覧へドラッグで外す",
+    "en": "Drag to place / drag slot to list to remove",
+    "zh": "拖动放置 / 拖至列表区域可移除",
+    "ko": "드래그하여 배치 / 슬롯을 목록으로 드래그하면 해제",
+    "vi": "Kéo để đặt / kéo ô về danh sách để gỡ"
+  },
+  "qishuPickerDupe": {
+    "ja": "同じ奇術は1つの枠にしか入りません",
+    "en": "Same Mystic Art cannot occupy two slots",
+    "zh": "同一奇术不能放在两个栏位",
+    "ko": "같은 비결은 한 슬롯에만 배치할 수 있습니다",
+    "vi": "Cùng một Kỳ thuật không thể chiếm 2 ô"
+  },
+  "qishuPickerEquipped": {
+    "ja": "装備中", "en": "Equipped", "zh": "已装备", "ko": "장착 중", "vi": "Đang trang bị"
+  },
+  "heroSeatScore": {
+    "ja": "武格指数",
+    "en": "武格指数",
+    "zh": "武格指数",
+    "ko": "무격지수",
+    "vi": "Vũ Cách Chỉ Số"
+  },
+  "heroSeatDps": {
+    "ja": "戦律指数",
+    "en": "戦律指数",
+    "zh": "战律指数",
+    "ko": "전투율지수",
+    "vi": "Chiến Luật Chỉ Số"
+  },
+  "heroDpsComing": {
+    "ja": "COMING SOON",
+    "en": "COMING SOON",
+    "zh": "COMING SOON",
+    "ko": "COMING SOON",
+    "vi": "COMING SOON"
+  },
+  "railStatus": {
+    "ja": "ステータス",
+    "en": "Status",
+    "zh": "属性",
+    "ko": "스탯",
+    "vi": "Chỉ số"
+  },
+  "diagTitleJa": {
+    "ja": "弱点指摘",
+    "en": "Weakness Check",
+    "zh": "弱点指摘",
+    "ko": "약점 진단",
+    "vi": "Chỉ điểm yếu"
+  },
+  "tutorialAskTitle": {
+    "ja": "ツアーを受けますか？",
+    "en": "Take the tour?",
+    "zh": "要进行教程吗？",
+    "ko": "투어를 받으시겠습니까?",
+    "vi": "Bắt đầu hướng dẫn?"
+  },
+  "tutorialAskBody": {
+    "ja": "WWMetrics の主要機能 (武格指数 / 武具対照 / 格析) を約 1-2 分で案内します。後で NOTE から再表示も可能。",
+    "en": "Walk through WWMetrics' core features (Gear Score / Cmp Modal / Analysis) in about 1-2 minutes. You can replay it later from NOTE.",
+    "zh": "约 1-2 分钟介绍 WWMetrics 主要功能 (武格指数 / 武具对照 / 格析)。 之后可从 NOTE 重新查看。",
+    "ko": "WWMetrics 의 주요 기능 (무격지수 / 무구대조 / 격석) 을 약 1-2분 안내합니다. 나중에 NOTE 에서 다시 볼 수 있습니다.",
+    "vi": "Giới thiệu các tính năng chính của WWMetrics (Chỉ số võ học / Đối chiếu trang bị / Phân tích) trong khoảng 1-2 phút. Có thể xem lại từ NOTE sau."
+  },
+  "tutorialAskYes": {
+    "ja": "ツアーを受ける",
+    "en": "Start tour",
+    "zh": "开始教程",
+    "ko": "투어 시작",
+    "vi": "Bắt đầu"
+  },
+  "tutorialAskNo": {
+    "ja": "スキップ",
+    "en": "Skip",
+    "zh": "跳过",
+    "ko": "건너뛰기",
+    "vi": "Bỏ qua"
+  },
+  "tutorialNext": {
+    "ja": "次へ",
+    "en": "Next",
+    "zh": "下一步",
+    "ko": "다음",
+    "vi": "Tiếp"
+  },
+  "tutorialPrev": {
+    "ja": "戻る",
+    "en": "Back",
+    "zh": "上一步",
+    "ko": "이전",
+    "vi": "Quay lại"
+  },
+  "tutorialFinish": {
+    "ja": "完了",
+    "en": "Done",
+    "zh": "完成",
+    "ko": "완료",
+    "vi": "Hoàn tất"
+  },
+  "tutorialCh1Step1Title": {
+    "ja": "武格指数",
+    "en": "Martial Index",
+    "zh": "武格指数",
+    "ko": "무격 지수",
+    "vi": "Chỉ số Võ cách"
+  },
+  "tutorialCh1Step1Body": {
+    "ja": "武格指数とは風燕伝のダメージ計算式と装備データに基づいた火力指標となります。<br>現在使用している武術構成の最適装備スコアからの割合で、SS〜Cランクまでランクが自動で付与されます。<br>本ツールで装備を変更しても、ランク評価は変動しません。実際に最適な装備をゲーム内で整え武格指数を上げていきましょう。",
+    "en": "Martial Index is a power indicator based on Where Winds Meet's damage formula and your gear data.<br>Ranks (SS to C) are auto-assigned by the ratio against the optimal gear score for your current martial build.<br>Changing gear in this tool does NOT change your rank — equip optimal gear in-game to raise your Martial Index.",
+    "zh": "武格指数是基于燕云十六声伤害公式与装备数据的火力指标。<br>根据当前武术构成的最优装备分数比例，自动赋予 SS～C 评级。<br>在本工具中更改装备不会改变评级，请在游戏内配齐最优装备以提升武格指数。",
+    "ko": "무격 지수는 연운십육성의 데미지 공식과 장비 데이터에 기반한 화력 지표입니다.<br>현재 무술 구성의 최적 장비 스코어 대비 비율로 SS~C 등급이 자동 부여됩니다.<br>본 도구에서 장비를 변경해도 등급은 바뀌지 않으니, 게임 내에서 최적 장비를 갖춰 무격 지수를 올리세요.",
+    "vi": "Chỉ số Võ cách là chỉ báo sức mạnh dựa trên công thức sát thương Where Winds Meet và dữ liệu trang bị.<br>Xếp hạng SS~C được tự động cấp theo tỉ lệ so với điểm trang bị tối ưu của cấu hình võ học hiện tại.<br>Thay đổi trang bị trong công cụ này KHÔNG đổi xếp hạng — hãy trang bị tối ưu trong game để tăng Chỉ số Võ cách."
+  },
+  "tutorialCh1Step2Title": {
+    "ja": "装備パネル",
+    "en": "Gear Panel",
+    "zh": "装备面板",
+    "ko": "장비 패널",
+    "vi": "Bảng trang bị"
+  },
+  "tutorialCh1Step2Body": {
+    "ja": "装備・心法・奇術を一覧表示する武備パネル。装備変更で武格指数とランクが動きます。<br>次は装備カードを開いて武具対照を見てみましょう。",
+    "en": "The Gear panel lists your equipment, Inner Ways, and Mystic Arts. Changing gear updates your Martial Index and rank in real time.<br>Next, open a gear card to see the COMPARE view.",
+    "zh": "装备面板列出当前装备、心法与奇术。 更改装备会即时更新武格指数与评级。<br>接下来打开装备卡片，看看武具对照视图。",
+    "ko": "장비 패널은 현재 장비·심법·기술을 한 눈에 보여줍니다. 장비 변경 시 무격 지수와 등급이 실시간으로 갱신됩니다.<br>다음은 장비 카드를 열어 무구대조 화면을 살펴봅니다.",
+    "vi": "Bảng trang bị liệt kê trang bị, tâm pháp và kỳ thuật hiện có. Thay đổi trang bị sẽ cập nhật Chỉ số Võ cách và xếp hạng theo thời gian thực.<br>Tiếp theo, mở thẻ trang bị để xem màn hình Đối chiếu Vũ khí."
+  },
+  "tutorialCh2Step1Title": {
+    "ja": "装備カード",
+    "en": "Gear Card",
+    "zh": "装备卡片",
+    "ko": "장비 카드",
+    "vi": "Thẻ trang bị"
+  },
+  "tutorialCh2Step1Body": {
+    "ja": "装備カードをクリックすると武具対照パネルが開きます。<br>現在の装備と新しい装備を比較して、装備変更による武格指数の変動を確認できます。",
+    "en": "Click a gear card to open the COMPARE panel.<br>Compare your current gear with a new one to see how Martial Index shifts when you change equipment.",
+    "zh": "点击装备卡片即可打开武具对照面板。<br>对比当前装备与新装备，查看更换装备时武格指数的变化。",
+    "ko": "장비 카드를 클릭하면 무구대조 패널이 열립니다.<br>현재 장비와 새 장비를 비교하여 장비 변경에 따른 무격 지수 변화를 확인할 수 있습니다.",
+    "vi": "Nhấp vào thẻ trang bị để mở bảng Đối chiếu Vũ khí.<br>So sánh trang bị hiện tại với trang bị mới để xem biến động Chỉ số Võ cách khi thay đổi trang bị."
+  },
+  "tutorialCh2Step2Title": {
+    "ja": "武具対照パネル",
+    "en": "COMPARE panel",
+    "zh": "武具对照面板",
+    "ko": "무구대조 패널",
+    "vi": "Bảng Đối chiếu Vũ khí"
+  },
+  "tutorialCh2Step2Body": {
+    "ja": "左 = 現在の装備、右 = 新しい装備。新しい装備側の調律/定音を編集すると武格指数の変動が即座に反映されます。<br>装備変更前のシミュレーションに使用してください。",
+    "en": "Left = current gear, Right = new gear. Edit tunings / engravings on the new side and Martial Index updates instantly.<br>Use this to simulate gear changes before committing them in-game.",
+    "zh": "左 = 当前装备，右 = 新装备。 编辑新装备侧的调律/定音，武格指数会即时更新。<br>可用于装备变更前的模拟。",
+    "ko": "왼쪽 = 현재 장비, 오른쪽 = 새 장비. 새 장비 측의 조율/정음을 편집하면 무격 지수가 즉시 갱신됩니다.<br>실제 변경 전 시뮬레이션 용도로 사용하세요.",
+    "vi": "Trái = trang bị hiện tại, Phải = trang bị mới. Chỉnh sửa điều luật / định âm phía mới và Chỉ số Võ cách cập nhật ngay lập tức.<br>Dùng để mô phỏng trước khi thực sự đổi trang bị trong game."
+  },
+  "tutorialCh2Step3Title": {
+    "ja": "OCR",
+    "en": "OCR",
+    "zh": "OCR",
+    "ko": "OCR",
+    "vi": "OCR"
+  },
+  "tutorialCh2Step3Body": {
+    "ja": "ゲーム画面のスクリーンショットをドロップorCtrl+Vでの貼付、もしくはこちらのアイコンをクリックして選択すると、調律/定音の内容を自動取込します。手動入力の手間を省けますので、ご活用ください。",
+    "en": "Drop a screenshot, paste it with Ctrl+V, or click this icon to pick a file — tunings / engravings are auto-extracted. Saves you from typing them in by hand.",
+    "zh": "拖入截图、用 Ctrl+V 粘贴、或点击此图标选择文件 — 调律/定音内容会自动提取。 免去手动输入的麻烦。",
+    "ko": "스크린샷을 드롭하거나 Ctrl+V 로 붙여넣기, 또는 이 아이콘을 클릭해 파일을 선택하면 조율/정음 내용이 자동 추출됩니다. 수동 입력 수고를 덜어줍니다.",
+    "vi": "Kéo thả ảnh chụp màn hình, dán bằng Ctrl+V, hoặc nhấp vào biểu tượng này để chọn tệp — nội dung điều luật / định âm sẽ được tự động trích xuất. Tiện lợi, không cần nhập tay."
+  },
+  "tutorialCh2Step4Title": {
+    "ja": "同級承音",
+    "en": "Same-Tier Orchestration",
+    "zh": "同阶承音",
+    "ko": "동일 등급 승음",
+    "vi": "Thừa Âm cùng bậc"
+  },
+  "tutorialCh2Step4Body": {
+    "ja": "同級承音シミュレーションができます。<br>現在の調律/定音を一括で94%にする機能です。",
+    "en": "Same-Tier Orchestration simulation.<br>One click fills all current tunings / engravings to 94%.",
+    "zh": "同阶承音模拟功能。<br>一键将当前调律/定音全部填到 94%。",
+    "ko": "동일 등급 승음 시뮬레이션 기능.<br>현재 조율/정음을 일괄로 94% 로 채워줍니다.",
+    "vi": "Mô phỏng Thừa Âm cùng bậc.<br>Một chạm đưa toàn bộ điều luật / định âm hiện tại lên 94%."
+  },
+  "tutorialCh3Step1Title": {
+    "ja": "格析",
+    "en": "Analysis",
+    "zh": "格析",
+    "ko": "격석",
+    "vi": "Cách tích"
+  },
+  "tutorialCh3Step1Body": {
+    "ja": "格析ボタンから別ウィンドウで新しい装備をベースとした調律/定音の各期待値の閲覧、装備最適化の提案機能が使用できます。",
+    "en": "The Analysis button opens a separate window where you can view the expected value of each tuning / engraving based on the new gear, and use the gear optimization suggestion feature.",
+    "zh": "点击格析按钮，可在独立窗口中基于新装备查看各调律/定音的期望值，并使用装备最适化建议功能。",
+    "ko": "격석 버튼을 누르면 별도 창에서 새 장비를 기준으로 각 조율/정음의 기댓값을 확인하고, 장비 최적화 제안 기능을 사용할 수 있습니다.",
+    "vi": "Nút Cách tích mở một cửa sổ riêng nơi bạn có thể xem giá trị kỳ vọng của từng điều luật / định âm dựa trên trang bị mới, và sử dụng tính năng đề xuất tối ưu trang bị."
+  },
+  "tutorialFinishTitle": {
+    "ja": "ツアー完了",
+    "en": "Tour Complete",
+    "zh": "教程完成",
+    "ko": "투어 완료",
+    "vi": "Hoàn tất hướng dẫn"
+  },
+  "tutorialFinishBody": {
+    "ja": "お疲れさまでした。NOTE 内の「ツアーを見る」 ボタンからいつでも再表示できます。<br>素敵な風燕伝ライフを!",
+    "en": "Thanks for taking the tour. You can replay it any time from the \"Take the tour\" button inside NOTE.<br>Enjoy your Where Winds Meet journey!",
+    "zh": "辛苦了。 之后可从 NOTE 内的「查看教程」按钮随时再次查看。<br>祝你燕云十六声玩得愉快！",
+    "ko": "수고하셨습니다. NOTE 내 「투어 보기」 버튼에서 언제든지 다시 볼 수 있습니다.<br>즐거운 연운십육성 되세요!",
+    "vi": "Cảm ơn bạn đã hoàn thành. Có thể xem lại bất cứ lúc nào qua nút \"Xem hướng dẫn\" trong NOTE.<br>Chúc bạn trải nghiệm Where Winds Meet vui vẻ!"
+  },
+  "noteTutorialBtn": {
+    "ja": "ツアーを見る",
+    "en": "Take the tour",
+    "zh": "查看教程",
+    "ko": "투어 보기",
+    "vi": "Xem hướng dẫn"
+  },
+  "tutorialChStatusTitle": {
+    "ja": "ステータス",
+    "en": "Status",
+    "zh": "属性",
+    "ko": "스탯",
+    "vi": "Chỉ số"
+  },
+  "tutorialChStatusBody": {
+    "ja": "インポートで取り込まれた情報でステータスを閲覧できます。<br>インポートで取り込めない情報は心法のレベル、観音のレベル、武庫のレベル、才能/五音太平楽の解放状況となります。",
+    "en": "View your stats based on imported data.<br>Items NOT included in import: Inner Way levels, Guanyin level, Arsenal level, and unlock status of Talents / 五音太平楽 (Wuyin Taipingyue).",
+    "zh": "可基于导入数据查看属性。<br>导入无法获取的项目：心法等级、观音等级、武库等级、天赋/五音太平乐 的解锁状态。",
+    "ko": "임포트한 데이터를 기반으로 스탯을 확인할 수 있습니다.<br>임포트로 가져올 수 없는 정보: 심법 레벨, 관음 레벨, 무고 레벨, 재능/오음태평악 해방 상태.",
+    "vi": "Xem chỉ số dựa trên dữ liệu đã nhập.<br>Các mục KHÔNG được nhập: cấp tâm pháp, cấp Quan Âm, cấp Vũ Khố, trạng thái mở khóa Thiên Phú / Ngũ Âm Thái Bình Nhạc."
+  },
+  "tutorialChStatus2Title": {
+    "ja": "ステータス補足",
+    "en": "Status note",
+    "zh": "属性补充",
+    "ko": "스탯 보충",
+    "vi": "Ghi chú chỉ số"
+  },
+  "tutorialChStatus2Body": {
+    "ja": "心法のレベルと武庫のレベルについては、インポート時に選択をお願いします。<br>観音/才能/五音太平楽の解放状況についてはゲーム内パッチでの最高到達段階を適用しておりますので、各解放状況が追いついていない段階だとステータスに差異がございます。",
+    "en": "Inner Way / Arsenal levels: please select them at import time.<br>Guanyin / Talents / 五音太平楽 unlock status: the tool assumes the latest in-game patch's max stage, so if your progress hasn't caught up, your actual stats will differ.",
+    "zh": "心法等级与武库等级请在导入时选择。<br>观音/天赋/五音太平乐 的解锁状态：工具按当前游戏补丁的最高阶段计算，若你尚未达到该阶段，属性会有差异。",
+    "ko": "심법 레벨과 무고 레벨은 임포트 시 선택해 주세요.<br>관음/재능/오음태평악 해방 상태: 본 도구는 현재 게임 패치의 최고 도달 단계를 적용하므로, 본인 진행도가 따라잡지 못한 경우 스탯에 차이가 발생합니다.",
+    "vi": "Cấp tâm pháp và cấp Vũ Khố: hãy chọn khi nhập dữ liệu.<br>Trạng thái mở khóa Quan Âm / Thiên Phú / Ngũ Âm Thái Bình Nhạc: công cụ áp dụng giai đoạn tối đa của bản patch hiện tại, nên nếu tiến độ của bạn chưa theo kịp, chỉ số sẽ có chênh lệch."
+  },
+  "tutorialChResetTitle": {
+    "ja": "リセット",
+    "en": "RESET",
+    "zh": "重置",
+    "ko": "리셋",
+    "vi": "RESET"
+  },
+  "tutorialChResetBody": {
+    "ja": "新装備/心法 として弄った内容を全て現装備値に戻すボタンです。<br>装備変更前の状態に戻したい時に使用してください。",
+    "en": "Restores all simulated new gear / Inner Way edits back to your current values.<br>Use this to return to the pre-simulation state.",
+    "zh": "将所有作为新装备/心法 进行的编辑全部还原为当前装备数值的按钮。<br>需要回到装备变更前的状态时使用。",
+    "ko": "새 장비/심법 으로 편집한 모든 내용을 현재 장비 값으로 되돌리는 버튼입니다.<br>장비 변경 전 상태로 돌아가고 싶을 때 사용하세요.",
+    "vi": "Nút khôi phục toàn bộ chỉnh sửa trang bị / tâm pháp mới về giá trị hiện tại.<br>Dùng khi muốn quay về trạng thái trước khi mô phỏng."
+  },
+  "tutorialChPresetTitle": {
+    "ja": "プリセット",
+    "en": "PRESETS",
+    "zh": "预设",
+    "ko": "프리셋",
+    "vi": "PRESETS"
+  },
+  "tutorialCh2Step3BodyMobile": {
+    "ja": "アイコンクリックで写真を撮影、もしくは撮影済の画像を選択してください。<br>調律/定音の内容を自動取込します。",
+    "en": "Tap the icon to take a photo or pick an existing image — tunings / engravings will be auto-extracted.",
+    "zh": "点击图标拍照或选择已有图片 — 调律/定音内容会自动提取。",
+    "ko": "아이콘을 눌러 사진을 촬영하거나 기존 이미지를 선택하세요 — 조율/정음 내용이 자동 추출됩니다.",
+    "vi": "Nhấn biểu tượng để chụp ảnh hoặc chọn ảnh có sẵn — nội dung điều luật / định âm sẽ được tự động trích xuất."
+  },
+  "tutorialChOcrGuideTitle": {
+    "ja": "画像取込指南",
+    "en": "OCR Guide",
+    "zh": "图像取入指南",
+    "ko": "이미지 가져오기 안내",
+    "vi": "Hướng dẫn nhập ảnh"
+  },
+  "tutorialChOcrGuideBody": {
+    "ja": "実際の撮影例とステップ手順を確認できます。<br>装備詳細画面 (値が右端に並ぶ画面) を撮影するのがコツです。",
+    "en": "View real screenshot examples and step-by-step instructions.<br>Tip: capture the gear detail screen (values aligned on the right).",
+    "zh": "可查看实际撮影示例与步骤说明。<br>诀窍：撮影装备详情画面（数值在右端排列）。",
+    "ko": "실제 촬영 예시와 단계별 안내를 확인할 수 있습니다.<br>요령: 장비 상세 화면(값이 오른쪽 끝에 정렬된 화면)을 촬영하세요.",
+    "vi": "Xem ví dụ chụp ảnh thực tế và hướng dẫn từng bước.<br>Mẹo: chụp màn hình chi tiết trang bị (giá trị nằm bên phải)."
+  },
+  "tutorialChPresetBody": {
+    "ja": "現在の状態 (装備・心法・調律/定音 等) を 3 つまで保存できるプリセット機能です。<br>装備パターンを試したい時の保存場所として活用してください。",
+    "en": "Save up to 3 snapshots of your current state (gear, Inner Way, tunings / engravings, etc.).<br>Use as a stash for gear-pattern experiments.",
+    "zh": "可保存当前状态（装备、心法、调律/定音 等）最多 3 组的预设功能。<br>需要尝试不同装备方案时作为保存空间使用。",
+    "ko": "현재 상태(장비·심법·조율/정음 등)를 최대 3 개까지 저장할 수 있는 프리셋 기능입니다.<br>장비 패턴을 시험하고 싶을 때 저장 공간으로 활용하세요.",
+    "vi": "Lưu tối đa 3 bản chụp trạng thái hiện tại (trang bị, tâm pháp, điều luật / định âm, v.v.).<br>Dùng làm nơi lưu trữ khi muốn thử nghiệm các cấu hình trang bị."
   }
 }

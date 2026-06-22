@@ -11,26 +11,13 @@
    ╚═══════════════════════════════════════════════════════════════════╝ */
 
 :root {
-  /* Sumi base */
-  --bg-0:        #07060a;
-  --bg-1:        #0f0c0e;
-  --bg-2:        #16110f;
-  --bg-3:        #1d1714;
-  --bg-raised:   #1a1410;
-
-  /* Panel surfaces (theme-swappable) */
-  --surf-1:      rgba(26,20,16,0.7);
-  --surf-2:      rgba(15,12,14,0.85);
-  --surf-shade:  rgba(0,0,0,0.25);
-  --surf-shade-2:rgba(0,0,0,0.4);
-  --surf-shade-3:rgba(0,0,0,0.55);
-  --rail-grad:   linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.5));
+  /* Panel surfaces (theme-swappable) — bg semantic 集約 Phase 2 step 5
+     旧 --surf-1/--surf-2 を --bg-overlay-top/--bg-overlay-bottom に rename
+     (modal/card 上層 2 段 gradient の上下色)。 紙面 rescope = workspace.css。 */
+  --bg-overlay-top:    rgba(26,20,16,0.7);
+  --bg-overlay-bottom: rgba(15,12,14,0.85);
+  /* --rail-grad / --input-text / --header-grad / --hero-grad / --hero-num = callsite 0 dead 削除 (R8) */
   --input-bg:    rgba(0,0,0,0.5);
-  --input-text:  var(--gold-bright);
-  --header-grad: linear-gradient(180deg, rgba(26,20,16,0.85), rgba(15,12,14,0.85));
-  --hero-grad:   radial-gradient(ellipse 70% 100% at 0% 50%, var(--vermilion-tint), transparent 60%),
-                 linear-gradient(180deg, rgba(26,20,16,0.9), rgba(15,12,14,0.95));
-  --hero-num:    var(--gold-bright);
   --hero-num-shadow: 0 0 30px rgba(240,210,138,0.25), 0 2px 0 rgba(0,0,0,0.5);
   --donut-track: rgba(232, 215, 180, 0.06);
 
@@ -43,78 +30,42 @@
   --vermilion:        #c83c2b;
   --vermilion-deep:   #8a1f17;
   --vermilion-bright: #e8513a;
-  --vermilion-glow:   rgba(232, 81, 58, 0.5);
-  /* vermilion 派生 (rgba 集約用) — 不透明度連続スケール */
-  --vermilion-trace:       rgba(200,60,43,0.05);
-  --vermilion-faint:       rgba(200,60,43,0.08);
-  --vermilion-tint:        rgba(200,60,43,0.10);
-  --vermilion-soft:        rgba(200,60,43,0.15);
-  --vermilion-soft-light:  rgba(200,60,43,0.18);
-  --vermilion-soft-2:      rgba(200,60,43,0.20);
-  --vermilion-mid:         rgba(200,60,43,0.30);
-  --vermilion-mid-2:       rgba(200,60,43,0.35);
-  --vermilion-mid-strong:  rgba(200,60,43,0.40);
-  --vermilion-strong:      rgba(200,60,43,0.55);
-  --vermilion-bright-trace:rgba(232,81,58,0.15);
-  --vermilion-bright-tint: rgba(232,81,58,0.18);
-  --vermilion-bright-soft: rgba(232,81,58,0.25);
-  --vermilion-bright-soft-mid: rgba(232,81,58,0.40);
-  --vermilion-bright-mid:  rgba(232,81,58,0.45);
-  --vermilion-bright-mid-2: rgba(232,81,58,0.55);
-  --vermilion-bright-glow: rgba(232,81,58,0.60);
-  --vermilion-bright-strong: rgba(232,81,58,0.70);
+  /* R5 (2026-06-17): vermilion-glow + 17 派生 → callsite で color-mix(in oklab, var(--vermilion|--vermilion-bright) N%, transparent) 直書換、 token 物理削除 */
 
   --gold:        #c9a45a;
   --gold-bright: #f0d28a;
   --gold-deep:   #8a6f30;
-  --gold-glow:   rgba(240, 210, 138, 0.4);
-  /* gold/gold-bright 派生 (rgba集約) */
-  --gold-trace:        rgba(201,164,90,0.05);
-  --gold-faint:        rgba(201,164,90,0.08);
-  --gold-tint:         rgba(201,164,90,0.12);
-  --gold-soft:         rgba(201,164,90,0.20);
-  --gold-mid:          rgba(201,164,90,0.30);
-  --gold-strong:       rgba(201,164,90,0.50);
-  --gold-bright-faint: rgba(240,210,138,0.08);
-  --gold-bright-tint:  rgba(240,210,138,0.12);
-  --gold-bright-soft:  rgba(240,210,138,0.25);
-  --gold-bright-mid-2: rgba(240,210,138,0.40);
-  --gold-bright-mid:   rgba(240,210,138,0.50);
-  --gold-bright-strong:rgba(240,210,138,0.70);
+  /* R4 (2026-06-17): gold-glow + 11 派生 → callsite で color-mix(in oklab, var(--gold|--gold-bright) N%, transparent) 直書換、 token 物理削除 */
   /* overlay (暗/明オーバーレイ) */
-  --overlay-trace:     rgba(0,0,0,0.15);
+  --shadow-trace:     rgba(0,0,0,0.15);
   --overlay-tint:      rgba(0,0,0,0.25);
-  --overlay-soft:      rgba(0,0,0,0.30);
-  --overlay-soft-mid:  rgba(0,0,0,0.40);
-  --overlay-soft-2:    rgba(0,0,0,0.45);
-  --overlay-mid:       rgba(0,0,0,0.50);
-  --overlay-mid-2:     rgba(0,0,0,0.55);
-  --overlay-heavy:     rgba(0,0,0,0.60);
-  --hover-trace:       rgba(255,255,255,0.03);
-  --hover-soft:        rgba(255,255,255,0.10);
-  --hover-mid:         rgba(255,255,255,0.25);
-  --hover-mid-2:       rgba(255,255,255,0.40);
-  --hover-strong:      rgba(255,255,255,0.50);
+  --shadow-soft:      rgba(0,0,0,0.30);
+  --shadow-soft-mid:  rgba(0,0,0,0.40);
+  --shadow-soft-2:    rgba(0,0,0,0.45);
+  --shadow-mid:       rgba(0,0,0,0.50);
+  --shadow-mid-2:     rgba(0,0,0,0.55);
+  --shadow-heavy:     rgba(0,0,0,0.60);
+  --shine-trace:       rgba(255,255,255,0.03);
+  --shine-soft:        rgba(255,255,255,0.10);
+  --shine-mid:         rgba(255,255,255,0.25);
+  --shine-mid-2:       rgba(255,255,255,0.40);
+  --shine-strong:      rgba(255,255,255,0.50);
 
   --jade:        #7fa88a;
   --jade-bright: #a8d4b4;
-  /* jade-bright 派生 (rgba constant, light theme でも値変化なし) */
-  --jade-bright-mid:    rgba(168,212,180,0.40);
-  --jade-bright-strong: rgba(168,212,180,0.55);
+  /* R6 (2026-06-17): jade-bright-mid/strong → color-mix 直書換 */
 
   /* 特殊用途 constant tokens */
-  --select-bg:      #1a1a1a;  /* <select> option neutral gray bg (warm bg-raised と区別) */
   --vermilion-note: #b8321f;  /* NOTE modal 巻物 accent (--vermilion より暗 saturated) */
 
   /* Phase 4.4c: 旧 var(--accent) fallback の実体定義 + 共通色 family */
   --accent:         #d4af37;                  /* 旧 fallback の実体、 dark/light 両 constant gold */
-  --accent-faint:   rgba(212,175,55,0.08);
-  --accent-mid:     rgba(212,175,55,0.30);
+  /* R6 (2026-06-17): accent-faint/mid → color-mix 直書換 */
   --amber-glow:     rgba(255,200,80,0.40);   /* 暖橙 glow (drop-shadow 用) */
   --liupai-guyun:   #c389ff;                  /* 流派: 瞬嵐 (guyun) 紫 */
 
   /* light theme 暗茶 scale (1=最暗, 6=中暗) — light selector で 装飾 dark accent 用 */
-  --brown-1:        #2a1810;
+  --brown-1:        #2e1f19;
   --brown-2:        #3a2010;
   --brown-3:        #5a1e10;
   --brown-4:        #5a3320;
@@ -130,18 +81,27 @@
   --chart-graze:    #6a6053;  /* paper-mute 寄り */
   --chart-normal:   #ede4d0;  /* paper */
 
-  /* Paper text */
-  --paper:       #ede4d0;
-  --paper-2:     #c8bda6;
-  --paper-dim:   #8b8170;
-  --paper-mute:  #857b6a;  /* critique P2 (2026-06-06): #7a7060→#857b6a — bg-2 上 3.85→4.49 (浮上面 AA 実質達成)。 旧 #6a6053→#7a7060 (2026-06-04) に続く 2 段目 */
+  /* Paper text — 全廃止済 (--paper / --paper-2 / --paper-dim / --paper-mute)、
+     全 text-sumi-fg / text-sumi-dim に集約 (2026-06-15 Phase 3 完了、 [[sumi-token-policy]]) */
 
-  /* Type */
-  --f-display: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+  /* Type — 役割固定 token (2026-06-15 集約 + 2026-06-16 言語別 display 拡張)
+     文字 (見出し・漢字) = --f-display / 本文 (UI) = --f-body / 数値・ラテン = --f-latin
+     言語別 display = --f-display-zh / --f-display-ko (ja KAISHO 楷書感を zh/ko で代替、 兄貴指示)
+     literal 直値禁止: 新規 component は必ず token 経由 */
+  --f-display:    'Shippori Mincho', 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+  --f-display-zh: 'Ma Shan Zheng', 'STKaiti', 'KaiTi', 'Noto Serif SC', serif;
+  --f-display-ko: 'Diphylleia', 'Gowun Batang', 'Black Han Sans', serif;
   --f-body:    'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
   --f-latin:   'Cinzel', 'Cormorant Garamond', 'Noto Serif JP', serif;
-  --f-mono:    'Rajdhani', 'JetBrains Mono', monospace;
+  /* 主題 display = lang 動的切替 token (2026-06-16 兄貴指示 — !important 全廃のため :root 値を html[lang] で上書き、
+     modals/workspace 等の主題 selector は var(--f-display-title) 参照のみで lang 自動追従) */
+  --f-display-title: var(--f-display);
+}
+html[lang="en"], html[lang="vi"] { --f-display-title: var(--f-latin); }
+html[lang="zh-CN"], html[lang="zh"] { --f-display-title: var(--f-display-zh); }
+html[lang="ko"] { --f-display-title: var(--f-display-ko); }
 
+:root {
   /* Spacing scale (4px base) */
   --space-half: 2px;     /* badge内余白等 */
   --space-1:    4px;
@@ -170,7 +130,8 @@
   --text-xl:    22px;  /* パネル見出し */
   --text-24:    24px;  /* 大型見出し */
   --text-2xl:   28px;  /* breakdown数値 */
-  --text-hero:  92px;  /* EXPECTED ヒーロー */
+
+  /* Text color tokens = R3.5 で reframe sprint の --sumi-fg/--kami-fg/--gold-bright/--gold-paper/--vermilion(-bright)/--sumi-fg-dim/--kami-fg-dim に集約済 (2026-06-16)。 旧 --text-*-* 群は物理削除。 */
 
   /* Font weight scale */
   --fw-normal:   400;
@@ -181,10 +142,6 @@
   --fw-black:    900;
 
   /* Z-index scale */
-  --z-base:      0;
-  --z-raise:     1;
-  --z-elevated:  5;
-  --z-sticky:    50;
   --z-floating:  100;
   --z-overlay:   200;
   --z-modal:     9999;
@@ -199,202 +156,163 @@
   --ratio-bad:       #e74c3c;  /* < 0.4 */
 
   /* ─── Phase 5.3-B: Semantic component tokens ───
-   * dark→light mapping を 1 か所に集約。 component 用途意図を token 名で表現。
-   * light override は styles-light.css の html[data-theme="light"] block に。
+   * component 用途意図を token 名で表現。 :root = 墨面 default 値。
+   * 紙面 (.wwm-ws-paper) 消費 token の紙値 rescope は workspace.css に集約 (2026-06-11 単一テーマ化、 旧 light.css 廃止)。
    */
-  --c-surf-warm-1:        var(--surf-1);    /* warm card/modal bg gradient 上 */
-  --c-surf-warm-2:        var(--surf-2);    /* warm card/modal bg gradient 下 */
-  --c-toast-bg:           var(--bg-1);      /* toast notification bg */
-  --c-modal-a-option-bg:  var(--bg-raised); /* compare modal A select option bg */
-  --c-rail-bg:            linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.25) 60%, rgba(40,30,20,0.45)); /* 装備/心法 rail 縦 gradient (light override 別値) */
+  --bg-modal-a-option:  var(--sumi-3); /* compare modal A select option bg */
+  /* modal header/footer の mountain image 上に重ねる垂直 gradient overlay (2026-06-20 兄貴指定値、 cmp/tool 双方 header/footer 共通)。
+     #292929e0 (灰 0.88) → #000000bd (黒 0.74) で mountain を抑えつつ header/footer の温度感を統一 */
+  --bg-modal-overlay:   linear-gradient(#292929e0, #000000bd);
 
   /* ─── @layer Step 2-b: theme-swap pair tokens (dark default) ─── */
   --c-fg-accent: var(--gold-bright);  /* アクセント前景 (dark 明金 / light 朱) */
   --c-fg-gold-label: var(--gold);  /* 金ラベル前景 (light は暗金) */
   --c-fg-hidden-stat: #7a93b0;  /* 隠しステ行 青灰 */
-  --c-modal-a-fg: var(--paper);  /* compare modal A 主文字色 */
+  --c-modal-a-fg: var(--sumi-fg);  /* compare modal A 主文字色 */
   --c-icon-dim-opacity: 0.15;  /* equip/xinfa icon 背景透かし opacity */
   --c-fg-vermilion-strong: var(--vermilion-bright);  /* 朱前景 強調 (light は深朱) */
   --c-fg-emphasis: var(--gold-bright);  /* 見出し強調 (hero label ja / cmp-val-input) */
-  --c-anlz-shadow: 0 8px 22px var(--overlay-soft-2);  /* anlz header/body 浮き shadow */
+  --c-anlz-shadow: 0 8px 22px var(--shadow-soft-2);  /* anlz header/body 浮き shadow */
   --c-mobile-overlay-top: rgba(20,15,12,0.98);  /* mobile overlay bg (dark default 追加で base を token 参照化) */
   --c-mobile-overlay-bot: rgba(10,8,9,0.98);  /* mobile overlay bg (dark default 追加で base を token 参照化) */
-  --c-mobile-overlay-header-bg: linear-gradient(180deg, rgba(26,20,16,0.95), rgba(15,12,14,0.92));  /* mobile overlay header bg (dark default 追加) */
 
   /* ─── @layer Step 2-c: theme-swap tokens (dark default) ─── */
-  --c-hero-before-fg: var(--vermilion-bright-trace);
-  --c-brand-en-fg: var(--paper);
+  --c-brand-en-fg: var(--sumi-fg);
   --c-brand-sub-fg: var(--c-fg-gold-label);
-  --c-shared-banner-bg: linear-gradient(90deg, var(--vermilion-soft-2), var(--vermilion-tint));
-  --c-shared-banner-fg: var(--paper);
+  --bg-shared-banner: linear-gradient(90deg, color-mix(in oklab, var(--vermilion) 40%, transparent), color-mix(in oklab, var(--vermilion) 30%, transparent));  /* 2026-06-16: 紙面上で優しすぎ (0.2/0.1) → 0.40/0.30 で警告感強化 */
   --c-footer-logo-opacity: 0.75;
-  --c-preset-bar-bg: var(--surf-2);
   --c-h1-accent-fg: var(--vermilion-bright);
-  --c-h1-sub-fg: var(--paper-mute);
-  --c-icon-btn-export-btn-border: var(--vermilion-strong);
-  --c-preset-slot-has-data-bg: rgba(40, 30, 18, 0.6);
+  --c-h1-sub-fg: var(--sumi-fg);
+  --bg-preset-slot-has-data: rgba(40,30,18,0.12);
   --c-preset-slot-has-data-border: rgba(201,164,90,0.4);
-  --c-preset-save-border: var(--gold-strong);
-  --c-preset-load-border: rgba(127,168,138,0.5);
-  --c-preset-load-hover-bg: var(--jade);
-  --c-sb-mini-hero-ink-bg: linear-gradient(90deg, rgba(232,81,58,0), var(--vermilion-bright-tint), rgba(232,81,58,0));
-  --c-sb-rest-bg: linear-gradient(180deg, var(--surf-1), var(--surf-2));
+  --c-preset-save-border: color-mix(in oklab, var(--gold) 50%, transparent);
+  --bg-sb-mini-hero-ink: linear-gradient(90deg, rgba(232,81,58,0), color-mix(in oklab, var(--vermilion-bright) 18%, transparent), rgba(232,81,58,0));
+  --bg-sb-rest: linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
   --c-sb-applied-fg: var(--accent);
   --c-sb-applied-opacity: 0.85;
-  --c-equip-delta-pos-text-shadow: 0 0 4px var(--jade-bright-mid);
-  --c-equip-delta-neg-fg: var(--vermilion);
-  --c-equip-delta-neg-text-shadow: 0 0 4px var(--vermilion-bright-soft-mid);
+  --c-equip-delta-pos-text-shadow: 0 0 4px color-mix(in oklab, var(--jade-bright) 40%, transparent);
+  --c-equip-delta-neg-text-shadow: 0 0 4px color-mix(in oklab, var(--vermilion-bright) 40%, transparent);
   --c-sb-notice-fg: #ffb39e;
   --c-opt-loading-fg: var(--gold-bright);
   --c-opt-loading-text-shadow: 0 0 12px rgba(232,200,120,0.45);
   --c-opt-btn-fg: var(--gold);
-  --c-opt-btn-hover-bg: rgba(212,175,55,0.1);
-  --c-opt-btn-apply-hover-bg: rgba(168,212,180,0.1);
-  --c-eff-input-bg: var(--overlay-soft);
+  --bg-opt-btn-hover: rgba(212,175,55,0.1);
+  --bg-opt-btn-apply-hover: rgba(168,212,180,0.1);
+  --bg-eff-input: var(--shadow-soft);
   --c-eff-input-fg: var(--gold-bright);
-  --c-sb-section-title-bg: var(--accent-faint);
   --c-sb-section-title-fg: var(--accent);
   --c-modal-fg: var(--text, #fff);
-  --c-cmp-modal-a--modal-header-bg: var(--bg-raised);
   --c-cmp-title-en-fg: var(--chart-sympathy);
-  --c-cmp-set-header-text-shadow: 0 0 6px var(--vermilion-bright-soft-mid);
-  --c-cmp-preview-zero-fg: var(--paper-mute);
+  --c-cmp-set-header-text-shadow: 0 0 6px color-mix(in oklab, var(--vermilion-bright) 40%, transparent);
+  --c-cmp-preview-zero-fg: var(--sumi-fg);
   --c-cmp-modal-bg-icon-opacity: 0.1;
   --c-modal-bg-icon-opacity: 0.18;
-  --c-xinfa-tier-chip-bg: var(--vermilion-soft);
-  --c-hero-number-text-shadow: 0 2px 1px var(--overlay-heavy), 0 4px 12px var(--overlay-soft-mid);
+  --bg-xinfa-tier-chip: color-mix(in oklab, var(--vermilion) 15%, transparent);
+  --c-hero-number-text-shadow: 0 5px 5px var(--shadow-heavy), 0 5px 20px var(--shadow-soft-mid);
+  /* hero title (武格指数) shadow — text 用 + ja 玉ねぎ svg 用 filter (drop-shadow chain 同等値) */
+  --c-hero-title-text-shadow: 0 5px 5px var(--shadow-heavy), 0 5px 20px var(--shadow-soft-mid);
+  --c-hero-title-drop-shadow: drop-shadow(0 5px 5px var(--shadow-heavy)) drop-shadow(0 5px 20px var(--shadow-soft-mid));
   --c-hero-next-val-fg: var(--bone-dim);
   --c-luopan-center-label-fg: var(--gold-bright); /* critique P3: gradient-clip 廃止 → solid 金 (light は vermilion-deep) */
-  --c-judge-name-fg: var(--paper-2);
-  --c-judge-name-fw: var(--fw-semibold);
-  --c-judge-val-fw: var(--fw-bold);
-  --c-judge-dot-phys-shadow: 0 0 6px var(--vermilion-bright-mid-2);
-  --c-judge-dot-elem-shadow: 0 0 6px var(--jade-bright-strong);
   --c-tier-a-hero-shadow: 0 0 10px rgba(127,168,138,.35), inset 0 1px 0 rgba(168,212,180,.2), inset 0 -1px 0 rgba(0,0,0,.35);
-  --c-tier-b-hero-shadow: 0 0 8px rgba(122,90,32,.3), inset 0 1px 0 rgba(201,184,138,.18), inset 0 -1px 0 var(--overlay-soft);
+  --c-tier-b-hero-shadow: 0 0 8px rgba(122,90,32,.3), inset 0 1px 0 rgba(201,184,138,.18), inset 0 -1px 0 var(--shadow-soft);
   --c-tier-c-hero-shadow: 0 0 4px rgba(90,66,38,.2), inset 0 1px 0 rgba(122,112,96,.15);
   --c-ink-stroke-opacity: .85;
-  --c-last-import-bg: var(--hover-trace);
-  --c-migration-banner-bg: rgba(60, 100, 180, 0.18);
-  --c-migration-banner-fg: #cfe0f5;
-  --c-migration-btn-bg: #4a78b8;
   --c-sb-label-opacity: 0.75;
-  --c-anlz-header-after-bg: linear-gradient(180deg, transparent 18%, var(--hover-trace) 19%, var(--hover-trace) 20%, transparent 21%), linear-gradient(180deg, transparent 60%, var(--hover-trace) 61%, transparent 62%);
+  --bg-anlz-header-deco: linear-gradient(180deg, transparent 18%, var(--shine-trace) 19%, var(--shine-trace) 20%, transparent 21%), linear-gradient(180deg, transparent 60%, var(--shine-trace) 61%, transparent 62%);
   --c-anlz-bamboo-opacity: 0.10;
-  --c-anlz-body-after-bg: repeating-linear-gradient(45deg, transparent 0 24px, rgba(212,175,55,.025) 24px 25px), repeating-linear-gradient(-45deg, transparent 0 24px, rgba(0,0,0,.05) 24px 25px);
-  --c-anlz-bgicon-opacity: 0.28;
-  --c-note-cl-featured-bg: linear-gradient(90deg, var(--vermilion-soft), var(--vermilion-trace));
-  --c-score-update-banner-bg: var(--vermilion-soft);
-  --c-score-update-banner-fg: #ffd9cc;
-  --c-mobile-drawer-bg: linear-gradient(180deg, var(--bg-raised), rgba(15,12,14,0.98));
-  --c-mobile-drawer-fg: var(--paper);
-  --c-mobile-fab-bg: linear-gradient(180deg, rgba(26,20,16,0.96), rgba(15,12,14,0.96));
-  --c-mobile-fab-shadow: 0 4px 16px var(--overlay-soft-2), 0 0 12px rgba(212,175,55,0.4);
+  --c-anlz-bg-icon-opacity: 0.28;
+  --bg-note-cl-featured: linear-gradient(90deg, color-mix(in oklab, var(--vermilion) 15%, transparent), color-mix(in oklab, var(--vermilion) 5%, transparent));
+  --c-mobile-fab-shadow: 0 4px 16px var(--shadow-soft-2), 0 0 12px rgba(212,175,55,0.4);
 
   /* ─── @layer Step 2-d r1: theme-swap tokens (dark default) ─── */
-  --c-tier-chip-ss-shadow: 0 0 20px rgba(200,60,43,0.6), 0 0 45px var(--vermilion-soft-2), inset 0 1px 0 rgba(240,210,138,0.28), inset 0 -1px 0 var(--overlay-soft-2);
+  --c-tier-chip-ss-shadow: 0 0 20px rgba(200,60,43,0.6), 0 0 45px color-mix(in oklab, var(--vermilion) 20%, transparent), inset 0 1px 0 rgba(240,210,138,0.28), inset 0 -1px 0 var(--shadow-soft-2);
   --c-tier-chip-ss-sheen: linear-gradient( 105deg, transparent 25%, rgba(240,210,138,0.30) 50%, transparent 75% );
-  --c-tier-chip-s-shadow: 0 0 18px var(--vermilion-strong), 0 0 40px var(--vermilion-soft), inset 0 1px 0 rgba(255,130,110,0.20), inset 0 -1px 0 var(--overlay-soft-mid);
+  --c-tier-chip-s-shadow: 0 0 18px color-mix(in oklab, var(--vermilion) 55%, transparent), 0 0 40px color-mix(in oklab, var(--vermilion) 15%, transparent), inset 0 1px 0 rgba(255,130,110,0.20), inset 0 -1px 0 var(--shadow-soft-mid);
   --c-tier-chip-a-shadow: 0 0 11px rgba(168,212,180,0.28), inset 0 1px 0 rgba(168,212,180,0.18);
   --c-tier-chip-b-shadow: 0 0 8px rgba(201,184,138,0.22), inset 0 1px 0 rgba(201,184,138,0.14);
-  --c-modal-a-option-fg: var(--paper);
+  --c-modal-a-option-fg: var(--sumi-fg);
   --c-anlz-title-fg: #f5e8c0;
   --c-anlz-title-text-shadow: 0 0 0.5px rgba(245,232,192,.85), 0 0 1.5px rgba(232,217,184,.55), 0 0 3px rgba(232,217,184,.35), 0.6px 0 1.2px rgba(232,217,184,.3), -0.6px 0 1.2px rgba(232,217,184,.25), 0 0.5px 1.5px rgba(232,217,184,.22);
 
   /* ─── audit/critique 2026-06-07: state contrast tokens (両 theme constant) ─── */
-  --c-on-vermilion: #fff;            /* 朱地上の text — white 5.08:1 (gold/ink は朱地で AA 不能) */
-  --c-lang-active-bg: #8a1f17;       /* 言語 active = 朱影地金文字 (SS badge 語彙)。 literal = theme constant */
   --c-lang-active-fg: #f0d28a;       /* 6.2:1 on vermilion-deep */
 
   /* ─── @layer Step 2-d r2: theme-swap tokens (dark default) ─── */
-  --c-preset-slot-num-fg: var(--gold);
-  --c-preset-save-fg: var(--gold);
-  --c-preset-save-hover-fg: var(--bg-0);
-  --c-preset-load-hover-fg: var(--bg-0);
-  --c-preset-del-hover-fg: var(--c-on-vermilion); /* audit P2 (2026-06-07): bg-0 on vermilion 3.98 → white 5.08 */
-  --c-hb-pct-phys-fg: var(--vermilion-bright-glow);
+  --c-hb-pct-phys-fg: color-mix(in oklab, var(--vermilion-bright) 60%, transparent);
   --c-hb-pct-elem-fg: rgba(168,212,180,0.6);
   --c-footer-strong-fg: var(--gold);
   --c-tier-chip-ss-fg: var(--chart-crit);
-  --c-tier-chip-ss-bg: linear-gradient(135deg, rgba(180,40,28,0.48) 0%, rgba(100,20,14,0.38) 50%, rgba(180,40,28,0.48) 100%);
+  --bg-tier-chip-ss: linear-gradient(135deg, rgba(180,40,28,0.48) 0%, rgba(100,20,14,0.38) 50%, rgba(180,40,28,0.48) 100%);
   --c-tier-chip-ss-border: rgba(240,210,138,0.65);
-  --c-tier-chip-ss-text-shadow: 0 0 18px rgba(240,210,138,0.95), 0 0 36px var(--vermilion-strong);
+  --c-tier-chip-ss-text-shadow: 0 0 18px rgba(240,210,138,0.95), 0 0 36px color-mix(in oklab, var(--vermilion) 55%, transparent);
   --c-tier-chip-s-fg: #ff6b50;
-  --c-tier-chip-s-bg: linear-gradient(135deg, var(--vermilion-mid-2), rgba(138,31,23,0.30));
-  --c-tier-chip-s-border: var(--vermilion-bright-strong);
+  --bg-tier-chip-s: linear-gradient(135deg, color-mix(in oklab, var(--vermilion) 35%, transparent), rgba(138,31,23,0.30));
+  --c-tier-chip-s-border: color-mix(in oklab, var(--vermilion-bright) 70%, transparent);
   --c-tier-chip-s-text-shadow: 0 0 14px rgba(232,81,58,0.85);
-  --c-tier-chip-a-bg: linear-gradient(135deg, rgba(168,212,180,0.20), rgba(127,168,138,0.15));
-  --c-tier-chip-a-border: var(--jade-bright-strong);
+  --bg-tier-chip-a: linear-gradient(135deg, rgba(168,212,180,0.20), rgba(127,168,138,0.15));
+  --c-tier-chip-a-border: color-mix(in oklab, var(--jade-bright) 55%, transparent);
   --c-tier-chip-a-text-shadow: 0 0 12px rgba(168,212,180,0.60);
   --c-tier-chip-b-fg: var(--bone);
-  --c-tier-chip-b-bg: linear-gradient(135deg, rgba(201,184,138,0.20), rgba(160,140,100,0.15));
+  --bg-tier-chip-b: linear-gradient(135deg, rgba(201,184,138,0.20), rgba(160,140,100,0.15));
   --c-tier-chip-b-border: rgba(201,184,138,0.48);
   --c-tier-chip-b-text-shadow: 0 0 10px rgba(201,184,138,0.45);
-  --c-tier-chip-c-bg: rgba(139,129,112,0.10);
+  --bg-tier-chip-c: rgba(139,129,112,0.10);
   --c-tier-chip-c-border: rgba(139,129,112,0.26);
-  --c-opt-sort-btn-fg: var(--paper-mute);
-  --c-opt-sort-btn-hover-bg: var(--accent-faint);
+  --c-opt-sort-btn-fg: var(--sumi-fg);
+  --bg-opt-sort-btn-hover: color-mix(in oklab, var(--accent) 8%, transparent);
   --c-opt-sort-btn-hover-fg: var(--gold-bright); /* audit P1 (2026-06-07): paper → gold-bright (hover contrast 3.5→AA) */
   /* audit P1 (2026-06-07): persistent sort state が 2.2-3.8:1 — 金地墨字 (button-primary 語彙) で 11:1 へ。
      literal 固定 = 両 theme constant (--gold-bright は light で暗金 swap されるため var 参照不可) */
-  --c-opt-sort-btn-active-bg: #f0d28a;
+  --bg-opt-sort-btn-active: #f0d28a;
   --c-opt-sort-btn-active-fg: #2a1810;
-  --c-opt-btn-apply-border: var(--jade-bright-mid);
+  --c-opt-btn-apply-border: color-mix(in oklab, var(--jade-bright) 40%, transparent);
   --c-opt-btn-apply-hover-border: var(--jade-bright);
   --c-rank-row-border-left: 1px solid rgba(212,175,55,0.30); /* critique P3: side-stripe 3px→1px (禁則解消、 不透明度で存在感補償) */
-  --c-rank-row-border-bot: 1px solid var(--gold-bright-tint);
-  --c-rank-row-odd-bg: var(--gold-bright-faint);
-  --c-rank-row-hover-bg: var(--gold-bright-faint);
+  --c-rank-row-border-bot: 1px solid color-mix(in oklab, var(--gold-bright) 12%, transparent);
+  --bg-rank-row-odd: color-mix(in oklab, var(--gold-bright) 8%, transparent);
+  --bg-rank-row-hover: color-mix(in oklab, var(--gold-bright) 8%, transparent);
   --c-rank-row-hover-border-left: var(--gold-bright);
-  --c-eff-row-odd-bg: var(--gold-bright-faint);
-  --c-eff-row-hover-bg: var(--gold-bright-faint);
+  --bg-eff-row-odd: color-mix(in oklab, var(--gold-bright) 8%, transparent);
+  --bg-eff-row-hover: color-mix(in oklab, var(--gold-bright) 8%, transparent);
   --c-cmp-lv-select-fg: var(--gold-bright);
-  --c-cmp-stat-select-bg: var(--select-bg);
-  --c-btn-secondary-bg: transparent;
+  --bg-cmp-stat-select: var(--sumi-3);
   --c-btn-secondary-fg: var(--text, #fff);
-  --c-btn-secondary-hover-bg: var(--hover-soft);
-  --c-modal-a-kongfu-select-bg: var(--gold-faint);
-  --c-modal-a-set-select-bg: linear-gradient(90deg, rgba(232,81,58,0.30), transparent);
-  --c-modal-a-stat-select-bg: var(--overlay-soft-mid);
-  --c-modal-a-lv-fg: var(--paper);
-  --c-modal-a-btn-secondary-bg: url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_cancel-9a52642a.png") center / 100% 100% no-repeat, transparent;
+  --bg-modal-a-kongfu-select: color-mix(in oklab, var(--gold) 8%, transparent);
+  --bg-modal-a-set-select: linear-gradient(90deg, rgba(232,81,58,0.30), transparent);
+  --bg-modal-a-stat-select: var(--shadow-soft-mid);
+  --c-modal-a-lv-fg: var(--sumi-fg);
+  --bg-modal-a-btn-secondary: url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_cancel-9a52642a.png") center / 100% 100% no-repeat, transparent;
   --c-slot-border: rgba(232,215,180,0.20);
-  --c-tier-badge-hero-bg: linear-gradient(135deg, rgba(60,40,30,.45) 0%, rgba(30,20,15,.35) 50%, rgba(60,40,30,.45) 100%);
-  --c-tier-badge-hero-fg: var(--paper-mute);
-  --c-tier-badge-hero-border: var(--paper-mute);
-  --c-tier-ss-hero-bg: linear-gradient(135deg, rgba(180,40,28,.48) 0%, rgba(100,20,14,.38) 50%, rgba(180,40,28,.48) 100%);
+  --bg-tier-badge-hero: linear-gradient(135deg, rgba(60,40,30,.45) 0%, rgba(30,20,15,.35) 50%, rgba(60,40,30,.45) 100%);
+  --c-tier-badge-hero-fg: var(--sumi-fg);
+  --c-tier-badge-hero-border: var(--sumi-fg);
   --c-tier-ss-hero-fg: var(--chart-crit);
   --c-tier-ss-hero-border: rgba(240,210,138,.65);
-  --c-tier-s-hero-bg: linear-gradient(135deg, rgba(138,31,23,.42) 0%, rgba(60,15,10,.32) 50%, rgba(138,31,23,.42) 100%);
   --c-tier-s-hero-fg: #ff6b50;
-  --c-tier-s-hero-border: var(--vermilion-bright-strong);
-  --c-tier-a-hero-bg: linear-gradient(135deg, rgba(45,90,58,.42) 0%, rgba(20,40,28,.32) 50%, rgba(45,90,58,.42) 100%);
+  --c-tier-s-hero-border: color-mix(in oklab, var(--vermilion-bright) 70%, transparent);
   --c-tier-a-hero-fg: var(--jade-bright);
-  --c-tier-a-hero-border: var(--jade-bright-strong);
-  --c-tier-b-hero-bg: linear-gradient(135deg, rgba(122,90,32,.38) 0%, rgba(50,38,16,.3) 50%, rgba(122,90,32,.38) 100%);
+  --c-tier-a-hero-border: color-mix(in oklab, var(--jade-bright) 55%, transparent);
   --c-tier-b-hero-fg: var(--bone);
   --c-tier-b-hero-border: rgba(201,184,138,.5);
-  --c-tier-c-hero-bg: linear-gradient(135deg, rgba(60,50,40,.3) 0%, rgba(25,20,16,.25) 50%, rgba(60,50,40,.3) 100%);
-  --c-tier-c-hero-fg: var(--paper-mute);
+  --c-tier-c-hero-fg: var(--sumi-fg);
   --c-tier-c-hero-border: rgba(122,112,96,.45);
-  --c-migration-strong-fg: #a8d0ff;
-  --c-anlz-tab-fg: var(--paper);
+  --c-anlz-tab-fg: var(--sumi-fg);
   --c-anlz-tab-active-fg: var(--chart-crit);
 
   /* ─── @layer Step 2-d r3: theme-swap tokens (dark default) ─── */
-  --c-focus-ring-shadow: 0 0 0 4px rgba(240,210,138,0.18);
+  --c-focus-ring-shadow: 0 0 0 4px rgba(232,81,58,0.22); /* focus = 朱統一 (金は紙面で不可視、兄貴指定 2026-06-12) */
   --c-equip-setname-fg: var(--vermilion-bright);
   --c-equip-setname-text-shadow: 0 0 6px rgba(232,81,58,0.35);
   --c-cmp-set-header-fg: var(--gold-bright);
   --c-modal-a-val-input-fg: #ffae8a;
-  --c-modal-a-lv-bg: var(--bg-raised);
-  --c-hero-next-arrow-fg: var(--gold-deep);
+  --bg-modal-a-lv: var(--sumi-3);
+  --c-hero-next-arrow-fg: var(--gold);  /* contrast: gold-deep #8a6f30 / sumi-1 = 3.97 NG → gold #c9a45a で 5.46 AA (2026-06-16 audit) */
 
   /* ─── @layer Step 2-e: theme-swap tokens (dark default) ─── */
-  --c-modal-a-rows-bg: var(--overlay-mid);
+  --bg-modal-a-rows: var(--shadow-mid);
   --c-modal-a-title-ja-fg: #f3e3d4;
-  --c-modal-a-col-bg: var(--hover-trace);
-  --c-modal-a-kongfu-header-bg: var(--gold-faint);
+  --bg-modal-a-kongfu-header: color-mix(in oklab, var(--gold) 8%, transparent);
   --c-modal-a-kongfu-header-fg: #e6d6b8;
   --c-modal-a-kongfu-select-fg: #e6d6b8;
   --c-modal-a-set-fg: #ff6b4a;
@@ -404,9 +322,9 @@
   /* ─── @layer Step 2-f: theme-swap tokens (dark default) ─── */
   --c-brand-seal-opacity: initial;
   --c-brand-en-opacity: initial;
-  --c-shared-build-mode--shared-build-banner-border: var(--vermilion-strong);
-  --c-lang-btn-focus-outline: var(--gold-bright);
-  --c-hero-focus-outline: var(--gold-bright);
+  --c-shared-build-mode--shared-build-banner-border: color-mix(in oklab, var(--vermilion) 55%, transparent);
+  --c-lang-btn-focus-outline: var(--vermilion-bright);
+  --c-hero-focus-outline: var(--vermilion-bright);
   --c-hero-number--unit-border-bot: var(--gold-deep);
   --c-tier-C-shadow: initial;
   --c-sb-rest-border: var(--ink-1);
@@ -415,24 +333,16 @@
   --c-sb-section-title-pad-left: var(--space-1-5);
   --c-cmp-modal-a--cmp-title-ja-text-shadow: 0 0 10px rgba(232,81,58,0.3);
   --c-brand-sub-text-shadow: initial;
-  --c-diag-modal--modal-bg-icon-opacity: var(--c-modal-bg-icon-opacity);
   --c-xinfa-tier-chip-border: rgba(232,81,58,0.50);
-  --c-hero-label--en-opacity: initial;
-  --c-hero-wuxia--hero-next-val-text-shadow: initial;
-  --c-hero-wuxia--judge-name-text-shadow: initial;
-  --c-hero-wuxia--judge-val-text-shadow: initial;
-  --c-hero-wuxia--judge-dot-phys-border: var(--chart-sympathy);
-  --c-hero-wuxia--judge-dot-elem-border: var(--jade-bright);
   --c-hero-wuxia--hero-tier-tier-SS-shadow: var(--c-tier-chip-ss-shadow);
   --c-hero-wuxia--hero-tier-tier-S-shadow: var(--c-tier-chip-s-shadow);
-  --c-migration-banner-border-bot: #4a78b8;
   --c-sb-label-fw: initial;
   --c-note-cl-items--note-cl-featured-border-left: var(--vermilion);
   --c-note-cl-items--note-cl-featured-fg: initial;
-  --c-score-update-banner-border-bot: var(--vermilion-strong);
+  --c-score-update-banner-border-bot: color-mix(in oklab, var(--vermilion) 55%, transparent);
   --c-mobile-drawer-border-left: var(--gold-deep);
   --c-cmp-modal-a--cmp-rows-border: 1px solid rgba(201,164,90,0.25);
-  --c-cmp-modal-a--cmp-rows-shadow: inset 0 1px 6px var(--overlay-heavy);
+  --c-cmp-modal-a--cmp-rows-shadow: inset 0 1px 6px var(--shadow-heavy);
   --c-cmp-modal-a--cmp-current-border: rgba(232,81,58,0.30);
   --c-cmp-modal-a--cmp-col-border: rgba(232,81,58,0.30);
 
@@ -440,8 +350,8 @@
   --c-sb-totalmartial--b-text-shadow: initial;  /* S2-g sb-totalmartial--b */
   --c-sb-totalmartial--muted-fg: initial;  /* S2-g sb-totalmartial--muted */
   --c-sb-totalmartial--muted-opacity: 0.6;  /* S2-g sb-totalmartial--muted */
-  --c-cmp-modal-a--cmp-delta-label-fg: var(--paper-mute);  /* S2-g cmp-modal-a--cmp-delta-label */
-  --c-cmp-modal-a--cmp-delta-base-fg: var(--paper-mute);  /* S2-g cmp-modal-a--cmp-delta-base */
+  --c-cmp-modal-a--cmp-delta-label-fg: var(--sumi-fg);  /* S2-g cmp-modal-a--cmp-delta-label */
+  --c-cmp-modal-a--cmp-delta-base-fg: var(--sumi-fg);  /* S2-g cmp-modal-a--cmp-delta-base */
   --c-hero-wuxia--hero-tier-tier-SS-before-position: absolute;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
   --c-hero-wuxia--hero-tier-tier-SS-before-top: 0;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
   --c-hero-wuxia--hero-tier-tier-SS-before-bottom: 0;  /* S2-g hero-wuxia--hero-tier-tier-SS-before */
@@ -456,31 +366,30 @@
   --c-equip-section--stat-pct-opacity: 0.65;  /* S2-g equip-section--stat-pct */
   --c-step2-section-title-fw: initial;  /* S2-g step2-section-title */
   --c-step2--muted-opacity: 0.6;  /* S2-g step2--muted */
-  --c-step2--num-input-bg: var(--c-cmp-stat-select-bg);  /* S2-g step2--num-input */
-  --c-step2-section-title-border-bot: var(--accent-mid);  /* S2-g step2-section-title */
+  --bg-step2--num-input: var(--bg-cmp-stat-select);  /* S2-g step2--num-input */
+  --c-step2-section-title-border-bot: color-mix(in oklab, var(--accent) 30%, transparent);  /* S2-g step2-section-title */
   --c-step2--xinfa-cell-border-bot: 1px solid var(--ink-2);  /* S2-g step2--xinfa-cell */
   --c-step2--xinfa-cell-pad-bot: var(--space-2);  /* S2-g step2--xinfa-cell */
   --c-step2--arsenal-tier-border: 1px solid rgba(212,175,55,0.25);  /* S2-g step2--arsenal-tier */
-  --c-step2--arsenal-tier-bg: rgba(40,28,16,0.55);  /* S2-g step2--arsenal-tier */
+  --bg-step2--arsenal-tier: rgba(40,28,16,0.55);  /* S2-g step2--arsenal-tier */
   --c-anlz-title-fg-n2: var(--c-anlz-title-fg);  /* S2-g anlz-title */
   --c-anlz-title-text-shadow-n2: var(--c-anlz-title-text-shadow);  /* S2-g anlz-title */
   --c-anlz-subtitle-fg: var(--gold-deep);  /* S2-g anlz-subtitle */
   --c-anlz-subtitle-opacity: 0.75;  /* S2-g anlz-subtitle */
 
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
-  --c-focus-ring: var(--gold-bright);
+  --c-focus-ring: var(--vermilion-bright);
 
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
   --c-opt-sort-btn-border-left: var(--ink-2);
   --c-cmp-modal-a-fg: var(--c-modal-fg);
-  --c-hero-wuxia-border: var(--gold-deep);
 
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
-  --c-cmp-current--cmp-row-bg: transparent;  /* S2-g cmp-current--cmp-row */
+  --bg-cmp-current--cmp-row: transparent;  /* S2-g cmp-current--cmp-row */
   --c-cmp-current--cmp-kongfu-header-fg: var(--c-modal-a-kongfu-header-fg);  /* S2-g cmp-current--cmp-kongfu-header */
-  --c-cmp-current--cmp-kongfu-header-bg: var(--c-modal-a-kongfu-header-bg);  /* S2-g cmp-current--cmp-kongfu-header */
+  --bg-cmp-current--cmp-kongfu-header: var(--bg-modal-a-kongfu-header);  /* S2-g cmp-current--cmp-kongfu-header */
   --c-cmp-current--cmp-set-header-fg: var(--c-modal-a-set-fg);  /* S2-g cmp-current--cmp-set-header */
-  --c-cmp-current--cmp-set-header-bg: var(--c-modal-a-set-select-bg);  /* S2-g cmp-current--cmp-set-header */
+  --bg-cmp-current--cmp-set-header: var(--bg-modal-a-set-select);  /* S2-g cmp-current--cmp-set-header */
   --c-cmp-modal-a--modal-close-fg: initial;  /* S2-g cmp-modal-a--modal-close */
   --c-cmp-modal-a--optionchecked-checked-fg: var(--c-modal-a-option-fg);  /* S2-g cmp-modal-a--optionchecked-checked */
   --c-cmp-lv-select--optionchecked-checked-fg: var(--c-modal-a-fg);  /* S2-g cmp-lv-select--optionchecked-checked */
@@ -488,7 +397,7 @@
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
   --c-cmp-kongfu-select-fg: var(--accent);
   --c-cmp-set-select-fg: var(--liupai-guyun);
-  --c-xinfa-tier-fg: var(--paper-mute);
+  --c-xinfa-tier-fg: var(--sumi-fg);
 
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
   --c-share-url-border: var(--ink-2);
@@ -500,28 +409,100 @@
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
 
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
-  --c-cmp-modal-a--cmp-stat-select-border: var(--gold-mid);
+  --c-cmp-modal-a--cmp-stat-select-border: color-mix(in oklab, var(--gold) 30%, transparent);
 
   /* ─── @layer Step 2-i: theme-swap tokens (dark default) ─── */
-  --c-cmp-modal-a--cmp-kongfu-select-border: var(--gold-mid);
-  --c-cmp-modal-a--cmp-set-select-border: var(--gold-mid);
-  --c-cmp-title--cmp-lv-select-border: var(--gold-mid);
-  --c-cmp-modal-a--cmp-val-input-border: var(--gold-mid);
+  --c-cmp-modal-a--cmp-kongfu-select-border: color-mix(in oklab, var(--gold) 30%, transparent);
+  --c-cmp-modal-a--cmp-set-select-border: color-mix(in oklab, var(--gold) 30%, transparent);
+  --c-cmp-title--cmp-lv-select-border: var(--gold-deep);
+  --c-cmp-modal-a--cmp-val-input-border: color-mix(in oklab, var(--gold) 30%, transparent);
 
   /* ─── @layer S2-j: theme-swap tokens (dark default) ─── */
   --c-tier-C-text-shadow: initial;
-  --c-cmp-col-border: var(--hover-soft);
+  --c-cmp-col-border: var(--shine-soft);
   --c-cmp-lv-select-border: var(--gold-deep);
   --c-num-input-border: #444;
   --c-btn-secondary-border: rgba(255,255,255,0.3);
   --c-cmp-title--cmp-lv-border: var(--gold-deep);
-  --c-cmp-btn-row--btn-secondary-border: var(--paper-mute);
+  --c-cmp-btn-row--btn-secondary-border: var(--sumi-fg);
+
+  /* ═══════════════════════════════════════════════════════════════
+     bg semantic 集約 Phase 1 (2026-06-15、 design doc:
+     .claude/research/bg-token-semantic-collapse-plan-2026-06-15.md)
+     ───────────────────────────────────────────────────────────────
+     109 bg token (base 13 + 紙墨 6 + component 90) → 5 group × semantic 26
+     に圧縮する sprint の Phase 1 = **新 token を旧 token と並存定義**。
+     callsite 置換 0 = visual 変化 0。 Phase 2 以降で各 group 順次置換
+     → 旧 token 物理削除予定。
+     :root = 墨面 default 値。 紙面 rescope は workspace.css `.wwm-ws-paper`
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* B1. Surface = R2 で --sumi-0/1/3 に集約済 (旧 --bg-canvas/base/raised 廃止)。
+     --bg-board は callsite 0 件 dead = 廃止。 */
+
+  /* B2. Shade/Overlay scale */
+  --shade-soft:   rgba(0,0,0,0.15);
+  --shade-mid:    rgba(0,0,0,0.30);
+  --shade-strong: rgba(0,0,0,0.50);
+  /* B3 State (--bg-hover/active/selected) = callsite 0 で R8 dead sweep 削除済。 必要時 R7 component token 全廃 sprint で再設計 */
+  /* B4. Accent — 強調 bg (tier)、 banner 系統合 (--bg-vermilion-banner/--bg-gold-banner) は callsite 0 dead 削除済 */
+  --bg-tier-ss: linear-gradient(135deg, rgba(180,40,28,.48) 0%, rgba(100,20,14,.38) 50%, rgba(180,40,28,.48) 100%);
+  --bg-tier-s:  linear-gradient(135deg, rgba(138,31,23,.42) 0%, rgba(60,15,10,.32) 50%, rgba(138,31,23,.42) 100%);
+  --bg-tier-a:  linear-gradient(135deg, rgba(45,90,58,.42) 0%, rgba(20,40,28,.32) 50%, rgba(45,90,58,.42) 100%);
+  --bg-tier-b:  linear-gradient(135deg, rgba(122,90,32,.38) 0%, rgba(50,38,16,.3) 50%, rgba(122,90,32,.38) 100%);
+  --bg-tier-c:  linear-gradient(135deg, rgba(60,50,40,.3) 0%, rgba(25,20,16,.25) 50%, rgba(60,50,40,.3) 100%);
+
+  /* B5. Container — 特殊用途 (--bg-input = callsite 0 dead 削除済、 --input-bg が真実源) */
+  --bg-rail:            linear-gradient(180deg, rgba(40,30,20,0.55), rgba(40,30,20,0.25) 60%, rgba(40,30,20,0.45)); /* 装備/心法 rail 縦 gradient (旧 --c-rail-bg 墨値、 --rail-grad 黒系は dead) */
+  --bg-mobile-drawer:   linear-gradient(180deg, var(--sumi-3), rgba(15,12,14,0.98)); /* drawer = bg-raised 起点 (overlay と異質、 別 token) */
+  --bg-mobile-overlay:  linear-gradient(180deg, rgba(26,20,16,0.96), rgba(15,12,14,0.96)); /* fab/overlay-header 統合 (旧 fab 値、 header は α 0.92→0.96 微増、 mobile 再整備時に再確認) */
+  --bg-anlz-decoration: repeating-linear-gradient(45deg, transparent 0 24px, rgba(212,175,55,.025) 24px 25px), repeating-linear-gradient(-45deg, transparent 0 24px, rgba(0,0,0,.05) 24px 25px);
 
   /* Safe Area inset utility (Phase 1 base) */
   --safe-top:    env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-left:   env(safe-area-inset-left, 0px);
   --safe-right:  env(safe-area-inset-right, 0px);
+
+  /* bg token reframe R1-R8 (2026-06-16) new semantic tokens
+     命名規則 (claude 誤読防止、 2026-06-19 兄貴指摘で明示):
+       <bg>-N    = その背景色 (N=0/1/2/3 で濃度段階)
+       <bg>-fg   = その背景に乗せる文字色 (= 背景軸と逆色)
+       <bg>-fg-dim = 同 fg の dim 版 (旧値/neg/empty/disabled、 [[dim-token-policy]])
+     ⚠ 直感誤読 NG:
+       --sumi-fg = 墨色ではなく 「墨背景用 fg = 紙色 (#ede4d0 明色)」
+       --kami-fg = 紙色ではなく 「紙背景用 fg = 墨色 (#3d2e1f 暗色)」
+     → 紙地 background に文字を載せたい時は --kami-fg、 墨地 background なら --sumi-fg を使う */
+  --sumi-0: #0b0908;       /* 墨 最濃 (app 余白) */
+  --sumi-1: #141009;       /* 墨 標準 (rail / sb-rest 等の主背景) */
+  --sumi-2: #2f2a23;       /* 墨 中 (新規 component の墨デフォルト、 [[sumi-token-policy]]) */
+  --sumi-3: #1a1410;       /* 墨 補助 */
+  --sumi-fg: #ede4d0;      /* 墨背景用 文字色 = 紙色明色 */
+  --sumi-fg-dim: #9c8a6a;  /* 墨背景用 dim 文字色 */
+  --kami-0: #f2ead4;       /* 紙 標準 (ws-body 等 紙面の主背景) */
+  --kami-1: #f8f1e1;       /* 紙 明 */
+  --kami-2: #e9e0c7;       /* 紙 弱明 */
+  --kami-fg: #3d2e1f;      /* 紙背景用 文字色 = 墨色暗色 */
+  --kami-fg-dim: #7a6850;  /* 紙背景用 dim 文字色 */
+  --gold-paper: #6e5414;   /* 紙背景上で映える金 (低彩度茶寄り) */
+}
+
+/* vi 一括縮小 (2026-06-20 兄貴判断「viはでかすぎる、自動で」)
+   ベトナム語は同情報量に対し文字数 1.3〜1.5x = 同 px だと過大 → token 層で 0.85x 縮小。
+   個別 :lang(vi) override を各所に書くより 1 箇所 token 上書きが恒久的。
+   下限 (2xs/xs) は可読性のため keep、sm 以上を段階縮小 */
+:lang(vi) {
+  --text-sm:    10px;
+  --text-12:    10px;
+  --text-md:    11px;
+  --text-14:    12px;
+  --text-15:    13px;
+  --text-lg:    14px;
+  --text-18:    15px;
+  --text-20:    17px;
+  --text-xl:    19px;
+  --text-24:    20px;
+  --text-2xl:   24px;
 }
 
 } /* end @layer tokens */

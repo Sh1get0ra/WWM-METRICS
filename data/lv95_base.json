@@ -1,10 +1,10 @@
 {
   "_schema": "Lv95 大世界15 キャラクター基礎ステータス。装備/affix/心法/観音/武庫 全外し時の値。WW Math 由来 (worldLv14 値) + worldLv15 update 差分反映。",
-  "_lastUpdated": "2026-06-11",
-  "_source": "Where Winds Math app.js `Uc` global (v=aad303b7、jsdom抽出) + 大世界Lv15 update (5行+8 / 命中+2% / 会心+4% / 会意+2%)",
+  "_lastUpdated": "2026-06-20",
+  "_source": "Where Winds Math app.js `Uc` global (v=aad303b7、jsdom抽出) + 大世界Lv15 update (5行+8 / 命中+2% / 会心+4% / 会意+2%) + 観音 Lv0 純粋値化 (2026-06-20、 兄貴 実機採取で観音強化分 = 基本ステ内包 確定)",
   "_lv": 95,
   "_worldLv": 15,
-  "_note": "stats は装備/affix 加算前の素値。5行ステ 137 = 129(in-game確認済) + worldLv15 +8。各率 = アナウンス (命中+2%/会心+4%/会意+2%) + 5行+8 派生 (crit 8*0.00076 / affinity 8*0.00038): crit 0.30452 / affinity 0.15226 (実機一致確認済)。⚠️ 一時 flat 補正 (crit+0.008/min+15/max+4) を入れたが正体 = 心法 T2 worldLv 連動増分 (xinfa.json 側で対応) と判明し revert (2026-06-11)。maxPhys のみ機械派生 (1256.42) でなく実機 anchor 1255.7 (= flat版完全一致値 1302.92 − 易水T2精密 47.2222、最大外功 +1 ズレ解消)。minPhys/maxHp/physDef = 派生機械加算 (min は実機一致確認済)。43 stat。",
+  "_note": "stats は装備/affix/観音 加算前の純素値。5行ステ 137 = 129(in-game確認済) + worldLv15 +8。各率 = アナウンス (命中+2%/会心+4%/会意+2%) + 5行+8 派生 (crit 8*0.00076 / affinity 8*0.00038): crit 0.30452 / affinity 0.15226 (実機一致確認済)。 **観音 = 別 file `data/guanyin_levels.json` で管理、 currentMaxLv 想定で stats.js が全量加算**。 minPhys 旧 693.68 → 523.68 (= 旧 - 武器 Lv50 観音 85×2 = 170)。 maxPhys 旧 1255.7 → 915.7 (= 旧 - 武器 57×2 - 環/佩 113×2 = 旧 - 340)。 過去経緯: 2026-06-11 anchor 確定時 兄貴の易水 T2 値で逆算 = Lv50 観音込み相当だった。 2026-06-20 観音 Lv55 解放で +24/+25 ズレ → 観音込み anchor の限界判明 → 観音 0 純粋値 + 観音 別 file 加算 方式に refactor (= キャラ才能 max 振り想定と同思想で拡張容易化)。 maxHp/physDef = 派生機械加算。 43 stat。",
 
   "stats": {
     "body": 137,
@@ -14,8 +14,8 @@
     "defense": 137,
 
     "maxHp": 77070,
-    "minPhys": 693.68,
-    "maxPhys": 1255.7,
+    "minPhys": 523.68,
+    "maxPhys": 915.7,
     "physDef": 26.7,
 
     "precision": 0.94,

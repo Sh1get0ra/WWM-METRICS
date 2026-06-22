@@ -1,0 +1,147 @@
+// 名称ラベル 合成エンジン (純粋関数 + window 接続)
+// DOM 非依存。データは引数で受け取る → node から直接テスト可能。
+// ブラウザは <script src="assets/build-labels.js"> (非module) で読み window.WWMBuildLabels を生やす。
+(function (root) {
+  const LANGS = ['ja', 'en', 'zh', 'ko'];
+  const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+  // ── 武術名 affix ラベル合成 ───────────────────────────────────────
+  // 武器名(kongfu.json names = 唯一源) + 技種別接辞(lexicon.skillType) 合成。
+  // 旧 stat_labels.json 直書き(武器名二重 + zh簡繁/en略記ズレ)を解消。
+  // prefix→kongfu id は stats.js KONGFU_SPECIFIC_PREFIXES と対 (用途別: あちら=score集約 / ここ=ラベル)。長さ降順。
+  const MARTIAL_PREFIXES = [
+    { prefix: 'infernalTwinblades', id: 20501 },
+    { prefix: 'unfetteredRopeDart', id: 20702 },
+    { prefix: 'mortalRopeDart',     id: 20701 },
+    { prefix: 'namelessSword',      id: 10102 },
+    { prefix: 'namelessSpear',      id: 10202 },
+    { prefix: 'stormbreaker',       id: 20103 },
+    { prefix: 'everspringUmb',      id: 20603 },
+    { prefix: 'soulshadeUmb',       id: 20602 },
+    { prefix: 'phalanxbane',        id: 20402 },
+    { prefix: 'snowparting',        id: 20801 },
+    { prefix: 'panaceaFan',         id: 10301 },
+    { prefix: 'moBlade',            id: 20401 },
+    { prefix: 'sword',              id: 10101 },
+    { prefix: 'spear',              id: 10201 },
+    { prefix: 'bleed',              id: 10101 },
+    { prefix: 'fan',                id: 10302 },
+    { prefix: 'umb',                id: 20601 }
+  ];
+  // suffix (キーから prefix を除いた残り) → lexicon.skillType の id。'' = bleed (キー = prefix のみ)。
+  const SUFFIX_TO_SKILL = {
+    'Q': 'martial', 'Charged': 'charged', 'Special': 'special', 'Drone': 'drone',
+    'Light': 'light', 'Rodent': 'rodent', 'Shield': 'shield', 'Healing': 'healing',
+    'VariedCombo': 'variedCombo', '': 'bleed'
+  };
+  // 武術名キー一覧 (旧 stat_labels.json から移管。武器が実際に持つ技のみ = 不規則なので明示列挙)。
+  const MARTIAL_KEYS = [
+    'bleed', 'moBladeShield', 'panaceaFanHealing',
+    'swordQ', 'swordCharged', 'swordSpecial',
+    'namelessSwordQ', 'namelessSwordCharged', 'namelessSwordSpecial',
+    'spearQ', 'spearCharged', 'spearSpecial',
+    'namelessSpearQ', 'namelessSpearCharged', 'namelessSpearSpecial',
+    'stormbreakerQ', 'stormbreakerCharged', 'stormbreakerSpecial',
+    'fanQ', 'fanCharged', 'fanSpecial',
+    'panaceaFanQ', 'panaceaFanSpecial',
+    'moBladeCharged', 'moBladeSpecial',
+    'phalanxbaneQ', 'phalanxbaneCharged',
+    'snowpartingQ', 'snowpartingCharged', 'snowpartingVariedCombo',
+    'infernalTwinbladesQ', 'infernalTwinbladesSpecial', 'infernalTwinbladesLight',
+    'umbQ', 'umbCharged', 'umbDrone',
+    'soulshadeUmbQ', 'soulshadeUmbCharged', 'soulshadeUmbSpecial',
+    'everspringUmbQ', 'everspringUmbCharged', 'everspringUmbSpecial',
+    'mortalRopeDartQ', 'mortalRopeDartCharged', 'mortalRopeDartRodent',
+    'unfetteredRopeDartQ', 'unfetteredRopeDartCharged', 'unfetteredRopeDartSpecial'
+  ];
+
+  // 1言語分の武術名ラベルを合成。kongfu 未ロード時は {} (path系のみで動作継続)。
+  function buildMartialLabels(kongfu, lex, L) {
+    const out = {};
+    if (!kongfu || !lex.skillType) return out;
+    for (const key of MARTIAL_KEYS) {
+      const def = MARTIAL_PREFIXES.find((d) => key.startsWith(d.prefix));
+      if (!def) continue;
+      const kf = kongfu[String(def.id)];
+      if (!kf || !kf.names) continue;
+      const tip = lex.skillType[SUFFIX_TO_SKILL[key.slice(def.prefix.length)]];
+      if (!tip) continue;
+      let weap = kf.names[L];
+      if (L === 'en') {
+        const wEn = lex.weaponLabel && lex.weaponLabel.en && lex.weaponLabel.en[kf.weaponType];
+        if (wEn && weap.endsWith(' ' + wEn)) weap = weap.slice(0, -(wEn.length + 1)); // 武器種語 strip → 冠名のみ
+      }
+      out[key] = weap + ' ' + tip[L];
+    }
+    return out;
+  }
+
+  // sources = { lexicon, kongfu? }
+  function buildLabels(sources) {
+    const lex = sources.lexicon;
+    const out = {};
+    for (const L of LANGS) {
+      const dict = {};        // import dict 形式 (minBellstrike 等)
+      const i18n = {};        // T() 形式 (pathBellstrike / pathAtk* / pathPen* / pathDmg*)
+      const statDisp = {};    // stat_display 形式 (語尾「力」)
+      for (const [p, base] of Object.entries(lex.pathBase)) {
+        const C = cap(p);
+        const b = base[L];
+        // import dict 形式
+        dict['min' + C]  = lex.affix.min[L] + b + lex.affix.atk[L];
+        dict['max' + C]  = lex.affix.max[L] + b + lex.affix.atk[L];
+        dict[p + 'Pen']  = b + lex.affix.pen[L];
+        // i18n T() 形式
+        i18n['path' + C]    = b;
+        i18n['pathAtk' + C] = b + lex.affix.atk[L];
+        i18n['pathPen' + C] = b + lex.affix.pen[L];
+        i18n['pathDmg' + C] = b + lex.affix.dmgUp[L];
+        // stat_display 形式 (語尾「力」= atkStat)
+        statDisp[p] = b + lex.affix.atkStat[L];
+      }
+      // 武術名 (kongfu names + 接辞)。path系と非衝突キー。
+      Object.assign(dict, buildMartialLabels(sources.kongfu, lex, L));
+      dict._i18n = i18n;
+      dict._statDisplay = statDisp;
+      out[L] = dict;
+    }
+    return out;
+  }
+
+  // i18n テーブル (TRANSLATIONS, window.WWM_I18N) へ path系合成ラベルを注入。
+  // path* (pathAtk/Pen/Dmg/path<Path>) は lexicon 唯一源 → i18n.js から静的定義削除済。
+  // データ非同期ロード (_loadDicts/_ensureDicts) 完了後に呼ぶ。冪等。
+  function applyPathLabels() {
+    if (typeof window === 'undefined') return;
+    if (!window.WWM_LEXICON) return;
+    const built = buildLabels({ lexicon: window.WWM_LEXICON, kongfu: window.WWM_KONGFU });
+    // (1) i18n テーブル (TRANSLATIONS) へ T() 形式注入 (pathAtk*/pathPen*/pathDmg*/path<Path>)。
+    if (window.WWM_I18N) {
+      for (const L of LANGS) {
+        if (!window.WWM_I18N[L]) continue;
+        Object.assign(window.WWM_I18N[L], built[L]._i18n);
+      }
+    }
+    // (2) import dict (_STAT_LABELS_I18N, window 公開) へ充填。arsenal/ranking の affix ラベル源。
+    //     保存/共有ビルド経路 (_ensureDicts のみ) でも生キー fallback を防ぐ (2経路とも本関数を呼ぶ)。
+    //     (2a) ステ名/武術名 = data/stat_labels.json (window.WWM_STAT_LABELS) を素のまま配布。
+    //          import.js の static dict 廃止の代替 (言語追加 = json 編集のみ)。
+    //     (2b) path系 + 武術名 = lexicon/kongfu 合成注入 (min/max<Path>, <Path>Pen, swordQ 等)。キー非衝突、後勝ちで上書き。
+    const tbl = window._STAT_LABELS_I18N_ALL;
+    if (tbl) {
+      const statLabels = window.WWM_STAT_LABELS;
+      for (const L of LANGS) {
+        if (!tbl[L]) continue;
+        if (statLabels && statLabels[L]) Object.assign(tbl[L], statLabels[L]); // (2a)
+        const { _i18n, _statDisplay, ...pathDict } = built[L];
+        Object.assign(tbl[L], pathDict); // (2b)
+      }
+    }
+  }
+
+  root.buildLabels = buildLabels;
+  if (typeof window !== 'undefined') {
+    window.WWMBuildLabels = buildLabels;
+    window.WWMApplyPathLabels = applyPathLabels;
+  }
+})(typeof window !== 'undefined' ? window : globalThis);

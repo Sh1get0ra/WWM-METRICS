@@ -1,4 +1,4 @@
-// ── WWM-METRICS / Sidebar / Affix Ranking (Phase 3.9d 切出) ──
+// ── WWMetrics / Sidebar / Affix Ranking (Phase 3.9d 切出) ──
 // 各 affix 1オプション分の Δscore 寄与ランキング + 効率分析 (入力値で再計算)。
 // 依存:
 //   - WWMSidebar.affix: loadEquipMax / lvToTier / getCachedEquipMax
@@ -22,7 +22,8 @@
   const _set4Bonus      = (ri) => window.__WWM_SET4_BONUS_OF(ri);
 
   async function render(roleInfo, params) {
-    const root = document.getElementById('wwmAffixRanking');
+    // popout 中は popout window 内 root を優先 (2026-06-16 — 親 document の getElementById は null 返す)
+    const root = (window.WWMAnlzPopout?.findEl?.('wwmAffixRanking')) || document.getElementById('wwmAffixRanking');
     if (!root || !roleInfo || !window.WWMStats?.buildStatParams) return;
     const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
     // baseline score
@@ -132,7 +133,7 @@
     }).join('');
     root.innerHTML = `
       <div class="wwm-analysis-card wwm-modal-square wwm-rank-grid">
-        <div class="wwm-modal-bg-icon" style="background-image:url('assets/icons/scales.svg');"></div>
+        <div class="wwm-modal-bg-icon" style="background-image:url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/base_school/images/673325b3eed7ba50118c397aMSc1Axt605.png');"></div>
         <div class="wwm-rank-col">
           <div class="wwm-analysis-header"><h3>${(window.T && T.affixRankingTitle) || '調律/定音期待値ランキング'}</h3></div>
           <div class="wwm-rank-body">${rows}</div>

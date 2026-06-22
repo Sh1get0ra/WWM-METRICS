@@ -1,0 +1,728 @@
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     mobile-v2.css — MOBILE 独立 selector (body.mobile-mode prefix)
+     2026-06-19 [[mobile-css-isolation-policy]] B 案: PC base 上書き型 @media を撤去、
+     mobile 専用 rule を body.mobile-mode (+ html.mobile-mode) gate に集約。
+     旧 workspace.css mobile @media (~265 行) + mobile.css mobile @media (chip-bar/share-OBS/hero-eyebrow)
+     を統合移管。 vp 判定 = JS matchMedia('(max-width: 600px)') で body/html へ class toggle。
+     L字 grid 5 row 構造: topbar / hero / chip / rail+body / bnav。
+   ╚═══════════════════════════════════════════════════════════════════ */
+@layer components {
+
+/* ============ html/body overflow ============ */
+html.mobile-mode,
+body.mobile-mode { overflow: hidden; height: 100%; }
+
+/* ============ L字 grid base ============ */
+body.mobile-mode .wwm-app {
+  display: grid;
+  /* rail = 右配置 (2026-06-21 兄貴指示「ステの rail 右側に移動」) */
+  grid-template-columns: 1fr var(--rail-w-min, 46px);
+  grid-template-rows: auto auto 36px minmax(0, 1fr) 57px;
+  height: 100svh;
+  overflow: hidden;
+}
+
+/* ============ 公式 BG mobile size (800px center top、 仏像 silhouette 中央寄せ) ============ */
+html.mobile-mode:not(.wwm-view-sidebar) .wwm-app::before {
+  background-size: 800px auto;
+  background-position: center top;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* ============ band (topbar + hero) = grid-row 1/3 ============ */
+body.mobile-mode .wwm-band {
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
+  border-bottom: 1px solid var(--gold-deep);
+  background: transparent;
+}
+body.mobile-mode .wwm-band-top {
+  padding: 8px 12px;
+  /* overlay 相当薄く (2026-06-19 兄貴指示) — 0.45 → 0.18 */
+  background: rgba(11,9,8,0.18);
+  backdrop-filter: blur(2px);
+  min-height: 62px;
+  border-bottom: 1px solid var(--sumi-ink-1);
+}
+body.mobile-mode .wwm-band .wwm-brand { gap: 8px; }
+/* display:flex + align-items center は writing-mode:vertical-rl (base.css L98) と競合 → 縦書き崩壊
+   (兄貴指摘 2026-06-19)。 size のみ override で base の writing-mode 継承、 縦書き維持 */
+body.mobile-mode .wwm-band .wwm-brand-vert {
+  font-size: 13px; padding: 2px 5px; height: 52px;
+}
+body.mobile-mode .wwm-band .wwm-brand-en { font-size: 11px; }
+body.mobile-mode .wwm-band .wwm-brand-sub { font-size: 9px; }
+body.mobile-mode .wwm-band .wwm-brand-seal { display: none; }
+body.mobile-mode .wwm-band .wwm-game-ver { display: none; }
+body.mobile-mode .wwm-band-actions { gap: 2px; }
+body.mobile-mode .wwm-band-actions .icon-btn { padding: 0 6px; min-width: 38px; height: 38px; }
+/* SHARE/NOTE = PC 側で SVG icon 化済 (2026-06-20)、 mobile では size のみ override */
+body.mobile-mode .wwm-band-actions #shareBtn,
+body.mobile-mode .wwm-band-actions #noteBtn { width: 38px; padding: 0; }
+/* IMPORT/RESET/PRESETS/DIAG = band から hide (chip-bar 集約済) */
+body.mobile-mode .wwm-band-actions #importBtn,
+body.mobile-mode .wwm-band-actions #wwmVirtResetBtn,
+body.mobile-mode .wwm-band-actions #wwmPresetWrap,
+body.mobile-mode .wwm-band-actions #wwmDiagBadge { display: none; }
+
+/* ============ hero compact (1 行帯: 左 数値+NEXT / 右 avatar+名前 LV、 兄貴指示 2026-06-19) ============ */
+body.mobile-mode .hero.hero-wuxia {
+  padding: 6px 14px;
+  /* overlay 相当薄く (2026-06-19 兄貴指示) — 公式 BG silhouette 透過優先、 文字側 text-shadow で防御 */
+  background: linear-gradient(180deg, rgba(11,9,8,0.08), rgba(11,9,8,0.18));
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "main aside";
+  align-items: center;
+  gap: 0 12px;
+  position: relative;
+  height: auto;
+  min-height: 0;
+}
+body.mobile-mode .hero-wuxia .ink-stroke { display: none; }
+body.mobile-mode .wwm-band .kanji-mark {
+  display: block; right: -14px; top: 78%;
+  transform: translateY(-50%); font-size: 90px;
+  color: rgba(232,215,180,0.05);
+}
+body.mobile-mode .hero-wuxia .h-main {
+  grid-area: main; display: flex; flex-direction: column; gap: 0; min-width: 0;
+}
+/* PC base (workspace.css L472) の min-height 132 + min-width 400 を mobile では打消 */
+body.mobile-mode .hero-wuxia .seat-main { min-height: 0; min-width: 0; }
+body.mobile-mode .hero-wuxia .seat-main .eyebrow { display: flex; align-items: baseline; gap: 6px; }
+body.mobile-mode .hero-wuxia .seat-main .eyebrow .seat-title { font-size: 11px; }
+body.mobile-mode .hero-wuxia .seat-main .eyebrow .seat-en { font-size: 7px; letter-spacing: 0.22em; }
+body.mobile-mode .hero-wuxia .seat-main .hb-num { font-size: 30px; line-height: 1; margin-top: 0; }
+body.mobile-mode .hero-wuxia .seat-main .hb-num .unit { font-size: 10px; margin-left: 4px; }
+/* 総合武力 + SS tier badge = h-id-info 内 pname 下に 1 行表示 (兄貴指示「最低限ほしい」 2026-06-19) */
+body.mobile-mode .hero-wuxia .pwr {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 7px; letter-spacing: 0.08em;
+  margin: 0;
+  white-space: nowrap;
+}
+body.mobile-mode .hero-wuxia .pwr b { font-size: 10px; margin-left: 2px; }
+body.mobile-mode .hero-wuxia .pwr .hero-tier.tier-badge {
+  font-size: 10px; padding: 0 5px;
+  margin-left: 2px;
+}
+body.mobile-mode .hero-wuxia .hero-next-inline {
+  margin-left: 6px; margin-bottom: 0; display: inline-flex; align-items: baseline;
+}
+body.mobile-mode .hero-wuxia .hero-next-label { display: none; }
+body.mobile-mode .hero-wuxia .hero-next-val { font-size: 13px; }
+body.mobile-mode .hero-wuxia .hero-next-arrow { font-size: 10px; }
+/* h-id = 横並び (avatar 左 + 名前 LV 右)、 縦中央寄せ */
+body.mobile-mode .hero-wuxia .h-id {
+  grid-area: aside;
+  margin: 0;
+  display: flex; flex-direction: row; align-items: center;
+  gap: 6px;
+  clear: none;
+}
+body.mobile-mode .hero-wuxia .avatar { width: 40px; height: 40px; flex: 0 0 40px; }
+body.mobile-mode .hero-wuxia .h-id-info { min-width: 0; text-align: left; display: flex; flex-direction: column; gap: 0; }
+body.mobile-mode .hero-wuxia .pname { font-size: 11px; white-space: nowrap; line-height: 1.2; }
+body.mobile-mode .hero-wuxia .pname b { font-size: 9px; margin-left: 3px; }
+/* seat-sub (戦律指数 副席) = mobile では hide (compact 化、 swap 時 DOM 移動で main 席 1 席表示) */
+body.mobile-mode .hero-wuxia .seat-sub { display: none; }
+/* donut = mobile では hero 内 hide (tap popup 別実装 task) */
+body.mobile-mode .hero-wuxia .h-id .luopan { display: none; }
+
+/* ============ hero eyebrow size 縮小 (PC default より軽量化) ============ */
+body.mobile-mode .hero-eyebrow { font-size: var(--text-xs); }
+
+/* ============ chip-bar (hero 下 操作帯、 grid-row 3) ============ */
+body.mobile-mode .wwm-mobile-chip-bar {
+  display: flex;
+  grid-column: 1 / 3;
+  grid-row: 3 / 4;
+  align-items: stretch;
+  height: 36px;
+  background: rgba(20,16,9,0.55);
+  border-bottom: 1px solid var(--sumi-ink-2);
+  border-top: 1px solid var(--gold-deep);
+  backdrop-filter: blur(1px);
+  position: relative;
+  z-index: 20;
+}
+body.mobile-mode .wwm-mobile-chip {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--sumi-ink-1);
+  color: var(--sumi-text-2);
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  transition: color .15s ease, background .15s ease;
+}
+body.mobile-mode .wwm-mobile-chip:last-child { border-right: none; }
+body.mobile-mode .wwm-mobile-chip:hover,
+body.mobile-mode .wwm-mobile-chip:focus-visible {
+  color: var(--gold-bright); background: rgba(255,255,255,0.04);
+}
+body.mobile-mode .wwm-mobile-chip:focus-visible {
+  outline: 1px solid var(--gold-deep); outline-offset: -1px;
+}
+body.mobile-mode .wwm-mobile-chip svg { width: 18px; height: 18px; display: block; }
+/* 弱点 chip = 朱 (有り時) */
+body.mobile-mode #wwmMobileChipDiag { color: var(--vermilion); }
+body.mobile-mode .wwm-mobile-chip-badge {
+  position: absolute; top: 3px; right: 8px;
+  font-family: var(--f-latin); font-weight: 700; font-size: 9px;
+  background: var(--vermilion); color: #fff;
+  border-radius: 50%;
+  min-width: 14px; height: 14px; line-height: 14px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 3px;
+}
+
+/* PRESETS accordion (chip-bar 上に展開) */
+body.mobile-mode .wwm-mobile-preset-acc {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 100%;
+  background: var(--sumi-1);
+  border-top: 1px solid var(--gold-deep);
+  border-bottom: 1px solid var(--sumi-ink-2);
+  padding: 8px 10px;
+  display: flex; flex-direction: column; gap: 5px;
+  z-index: 40;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.4);
+}
+body.mobile-mode .wwm-mobile-preset-acc[hidden] { display: none; }
+body.mobile-mode .wwm-mobile-preset-row {
+  display: flex; align-items: center; gap: 5px;
+  font-family: var(--f-latin); font-size: 11px;
+}
+body.mobile-mode .wwm-mobile-preset-row .num {
+  width: 22px;
+  color: var(--gold-bright);
+  font-weight: 700;
+  font-family: var(--f-latin);
+}
+body.mobile-mode .wwm-mobile-preset-row input.preset-name-input {
+  /* share.css L236 @media (max-width:600px) `.preset-name-input { display:none }` 打消 (2026-06-21 兄貴指示「mobile も preset 名付け」) */
+  display: block;
+  flex: 1; min-width: 0;
+  background: var(--sumi-0);
+  border: 1px solid var(--sumi-ink-2);
+  color: var(--sumi-text);
+  padding: 5px 7px;
+  font-size: 11px;
+  border-radius: 1px;
+  font-family: var(--f-body);
+}
+body.mobile-mode .wwm-mobile-preset-row .pbtn {
+  font-family: var(--f-display-title);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 5px 8px;
+  background: transparent;
+  border: 1px solid var(--sumi-ink-2);
+  color: var(--sumi-text-2);
+  border-radius: 1px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+body.mobile-mode .wwm-mobile-preset-row .pbtn.save {
+  color: var(--gold-bright); border-color: var(--gold-deep);
+}
+body.mobile-mode .wwm-mobile-preset-row .pbtn:disabled {
+  opacity: 0.45; cursor: not-allowed;
+}
+
+/* ============ rail collapse (46px 縦柱、 tap で overlay 化) = grid-row 4 col 2 (右配置) ============ */
+body.mobile-mode .wwm-ws-rail {
+  grid-column: 2 / 3;
+  grid-row: 4 / 5;
+  display: flex;
+  flex-direction: column;
+  width: var(--rail-w-min, 46px);
+  background: var(--sumi-1);
+  border-left: 1px solid var(--gold-deep);
+  overflow: hidden;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+  transition: width 0.2s var(--ease-out-quart, ease);
+}
+/* collapse 時 = rail-tate のみ、 rail-fade hide */
+body.mobile-mode .wwm-ws-rail .wwm-rail-fade { display: none; }
+body.mobile-mode .wwm-ws-rail .wwm-rail-in { position: relative; height: 100%; width: 100%; padding: 10px 5px 10px; }
+/* rail-tate = PC base position:absolute + opacity:0 を mobile-mode で打消 */
+body.mobile-mode .wwm-ws-rail .wwm-rail-tate {
+  display: block;
+  text-align: center;
+  opacity: 1; pointer-events: auto;
+  position: relative; inset: auto;
+  padding-top: 8px;
+  width: 100%;
+}
+body.mobile-mode .wwm-ws-rail .wwm-rail-tate > * { display: block; margin: 6px auto; }
+/* PC 準拠 = rail collapse 時 縦書きラベル無し、 toggle button のみ */
+body.mobile-mode .wwm-ws-rail .wwm-rail-tate .t-label { display: none; }
+body.mobile-mode .wwm-ws-rail .wwm-rail-tate .wwm-rail-toggle {
+  /* closed = ◀ そのまま (rail 右配置 → 左向き矢印で「左にスワイプ open」 印象、 2026-06-21 兄貴指示)
+     workspace.css L747 の base scaleX(-1) 打消 */
+  transform: none;
+  width: 30px; height: 30px;
+  border: 1px solid var(--gold-deep);
+  background: transparent;
+  color: var(--gold-bright);
+}
+/* rail open 時 close ボタン = ステータス見出しの左に配置 + ▶ 反転 (「右に畳む」 視認、 2026-06-21 兄貴指示) */
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-rail-head { display: flex; align-items: center; gap: 8px; }
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-rail-fade .wwm-rail-toggle {
+  order: -1;
+  transform: scaleX(-1);
+}
+
+/* ============ rail overlay open (data-rail-mobile="open" で fixed 290px) ============ */
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail,
+body.mobile-mode .wwm-app[data-rail-mobile="closing"] .wwm-ws-rail {
+  position: fixed;
+  top: 165px; bottom: 0; right: 0; left: auto;
+  z-index: 60;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.5);
+  overflow: hidden;
+  align-items: stretch;
+  padding: 0;
+  background: var(--sumi-1);
+  cursor: default;
+}
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail { width: 290px; }
+/* closing = fixed 維持で width 290→46 transit (close 対称アニメ、 2026-06-21 兄貴指示) */
+body.mobile-mode .wwm-app[data-rail-mobile="closing"] .wwm-ws-rail { width: var(--rail-w-min, 46px); }
+/* mobile では「斬」 kanji-mark 非表示 (2026-06-19 兄貴指示) */
+body.mobile-mode .wwm-ws-rail .kanji-mark { display: none; }
+/* mobile では ws-panel padding-left 0 (2026-06-19 兄貴指示「mobile 細部調整」、 元 60e71aa で PC base から削除してた分を mobile 限定 override に分離) */
+body.mobile-mode .wwm-ws-panel.active { padding-left: 0; }
+/* mobile では qs-bg 描画域を rail 頭から開始 (2026-06-19 兄貴指示) — PC base の top:60 (head 下打ち切り) を mobile 限定で打消 */
+body.mobile-mode .wwm-rail-in::before { top: 0; }
+/* ステ panel に黒 overlay (2026-06-19 兄貴指示「BG 濃いから panel に黒重ねたい」) — rail-in stacking context (z:0) 内に置く =
+   qs-bg image (::before z:-1) より上 + content (kanji z:1 / rail-fade z:2) より下 = text 影響なし image のみ dim。 collapse + open 両適用 */
+body.mobile-mode .wwm-rail-in::after {
+  content: "";
+  position: absolute; inset: 0;
+  /* background 削除 (2026-06-21 兄貴指示) — 旧 rgba(0,0,0,0.5) 黒 overlay 不要判断 */
+  z-index: 0;
+  pointer-events: none;
+}
+/* overlay 時 装飾 BG 弱化 + flex column で内部 scroll 確立 */
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail::before { opacity: 0.12; }
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .kanji-mark {
+  opacity: 0.08; font-size: 200px;
+}
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-in,
+body.mobile-mode .wwm-app[data-rail-mobile="closing"] .wwm-ws-rail .wwm-rail-in {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+}
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-fade,
+body.mobile-mode .wwm-app[data-rail-mobile="closing"] .wwm-ws-rail .wwm-rail-fade {
+  display: flex; flex-direction: column;
+  flex: 1; min-height: 0;
+  position: relative; z-index: 2;
+  opacity: 1; pointer-events: auto;
+}
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-sb-rest {
+  flex: 1; min-height: 0;
+  overflow-y: auto;
+  background: transparent;
+  padding: 8px;
+}
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-ws-rail .wwm-rail-tate,
+body.mobile-mode .wwm-app[data-rail-mobile="closing"] .wwm-ws-rail .wwm-rail-tate { display: none; }
+
+/* backdrop = overlay open 時のみ表示 (default は workspace.css L1284 直下 = hide) */
+body.mobile-mode .wwm-app[data-rail-mobile="open"] ~ .wwm-rail-backdrop,
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-rail-backdrop { display: block; }
+
+/* rail sb-rest / mini-hero = collapse 時 hide、 overlay 時のみ表示 */
+body.mobile-mode .wwm-sb-rest,
+body.mobile-mode .wwm-sb-mini-hero-card { display: none; }
+body.mobile-mode .wwm-app[data-rail-mobile="open"] .wwm-sb-rest { display: block; }
+
+/* rail-toggle / rail-fade の細部 */
+body.mobile-mode .wwm-rail-toggle {
+  width: 30px; height: 30px;
+  border: 1px solid var(--gold-deep);
+  color: var(--gold-bright);
+  background: transparent;
+}
+body.mobile-mode .wwm-rail-fade { background: none; }
+
+/* ============ main = grid-row 4 col 1 (左側 body 領域、 rail 右配置のため 2026-06-21 兄貴指示) ============ */
+body.mobile-mode .wwm-ws-main {
+  grid-column: 1 / 2;
+  grid-row: 4 / 5;
+  display: block;
+  border-top: none;
+  border-left: none;
+  overflow: hidden;
+  min-height: 0;
+}
+body.mobile-mode .wwm-ws-tabs { display: none; }
+body.mobile-mode .wwm-ws-paper-bg { display: none; }
+body.mobile-mode .wwm-ws-body {
+  padding: 12px 12px 12px;
+  border-left: none;
+  background: var(--kami-0);
+  overflow-y: auto;
+  height: 100%;
+  min-height: 0;
+}
+body.mobile-mode .wwm-ws-main .wwm-footer { display: none; }
+
+/* ============ 武格履歴 (hist) mobile = scroll 回避で padding 詰め (2026-06-21 兄貴指示) ============ */
+body.mobile-mode .wwm-hist-panel { padding: 0 5px; }
+body.mobile-mode .wwm-hist-pb { padding: 0; }
+
+/* ============ hero COMING SOON (演武 DPS placeholder) mobile = 縮小 (2026-06-21 兄貴指示「でかすぎ」) ============ */
+body.mobile-mode .hero-wuxia .seat-main .hb-num.hb-coming { font-size: 14px; padding-top: 4px; }
+
+/* ============ 蛍 mobile = 非表示 (2026-06-21 兄貴指示「変な位置に出現」) ============ */
+body.mobile-mode .wwm-ws-main > .wwm-fireflies { display: none; }
+
+/* ============ bnav = grid-row 5 (全幅 57px) ============ */
+body.mobile-mode .wwm-bottom-nav {
+  grid-column: 1 / 3;
+  grid-row: 5 / 6;
+  display: flex;
+  position: relative;
+  left: auto; right: auto; bottom: auto;
+  z-index: 20;
+  height: 57px;
+  padding: 4px 4px calc(4px + env(safe-area-inset-bottom));
+  /* overlay 相当薄く (2026-06-19 兄貴指示) — qs-bg silhouette 素優先 */
+  background:
+    linear-gradient(180deg, rgba(11,9,8,0.08), rgba(11,9,8,0.18)),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/qs-bg-32d6898d.png") center / cover no-repeat,
+    var(--sumi-1);
+  backdrop-filter: blur(2px);
+  border-bottom: none;
+}
+body.mobile-mode .wwm-bn {
+  flex: 1;
+  min-height: 48px;
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px 2px;
+  font-family: var(--f-display-title);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--sumi-text-3);
+  cursor: pointer;
+}
+body.mobile-mode .wwm-bn[aria-selected="true"] {
+  background: var(--kami-0);
+  color: var(--kami-fg);
+  border-radius: 1px;
+}
+
+/* ============ SHARE modal OBS section (mobile = OBS PC 専用なので hide) ============ */
+body.mobile-mode .wwm-share-obs-block { display: none; }
+
+/* ============ lang dd popup mobile = body 直下 DOM 移動済 (workspace.js relocateLangPop)、 fixed 全幅 ============
+   .wwm-app isolation:isolate stacking context 外で表示するため JS で body 直下 reparent + ここで mobile 位置設定。
+   PC は anchor (.wwm-lang-dd) の中 absolute right:0 のまま (workspace.css L884)。 */
+body.mobile-mode .wwm-lang-dd-pop {
+  position: fixed;
+  top: 92px;  /* bandTop 実測 84 + gap 8、 brand-vert 縮小時は追従調整 TODO */
+  right: 8px;
+  left: auto;
+  width: auto;
+  min-width: 150px;
+  z-index: 9999;
+  background: var(--sumi-1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  padding: 6px;
+  gap: 2px;
+}
+
+/* ============ 武備 mobile ページャー (2026-06-20) ============ */
+/* #wsBuild に position:relative + pager-root を position:absolute inset:0 で埋める方式。
+   iOS Safari / Brave で flex chain (display:flex + flex:1 + min-height:0 多段) の
+   高さ計算が崩れて pager 内全 slot 非表示になる挙動を回避。 mobile-mode 限定 = PC 影響なし。 */
+body.mobile-mode #wsBuild.wwm-ws-panel.active {
+  position: relative;
+  height: 100%; min-height: 0;
+  padding: 0; /* 余白 = pager 内側 padding で制御 */
+  overflow: hidden;
+}
+body.mobile-mode .wwm-mb-pager-root {
+  position: absolute;
+  inset: 0;
+  display: flex; flex-direction: column;
+}
+body.mobile-mode .wwm-mb-pager {
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column;
+  position: relative;
+  background: var(--kami-0);
+}
+
+/* mobile pager 起動時 = #wsBuild 直下子のうち pager-root 以外 (朱筆題字 band + 元 host) を hide。
+   slot は pager 側へ move 済 = 元 host も hide で OK */
+body.mobile-mode #wsBuild > *:not(.wwm-mb-pager-root) { display: none; }
+
+/* ── head (カテゴリ名 + ページ名 + 横 dot) ── */
+body.mobile-mode .wwm-mb-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 5px 5px;
+  flex-shrink: 0;
+}
+/* PC .wwm-ws-sec .pl 構造を踏襲 = 朱筆 fude.png brush mask + sumi-fg (白っぽい紙色) 文字
+   = 「装備」「心法」「奇術」 を墨ブラシ背景に白抜き表示 */
+body.mobile-mode .wwm-mb-cat {
+  display: inline-flex; align-items: baseline; gap: 10px;
+  font-family: var(--f-display-title); font-size: 16px; font-weight: 700; letter-spacing: 0.14em;
+  background: none; color: var(--sumi-fg);
+  position: relative;
+  isolation: isolate;
+  padding: 3px 12px 3px 8px;
+}
+body.mobile-mode .wwm-mb-cat::before {
+  content: "";
+  position: absolute;
+  top: -2px; bottom: -3px; left: -7px; right: -60px;
+  background: var(--sumi-2);
+  -webkit-mask: url("../fude.png") 0 0 / 100% 100% no-repeat;
+  mask: url("../fude.png") 0 0 / 100% 100% no-repeat;
+  z-index: -1;
+  pointer-events: none;
+}
+body.mobile-mode .wwm-mb-pname { display: none; }
+body.mobile-mode .wwm-mb-sp { flex: 1; }
+body.mobile-mode .wwm-mb-hdots { display: flex; gap: 5px; }
+body.mobile-mode .wwm-mb-hdots i {
+  width: 6px; height: 6px; border-radius: 50%; background: #bcae8c;
+  display: block; transition: 0.2s;
+}
+body.mobile-mode .wwm-mb-hdots i.on { background: var(--vermilion); width: 16px; border-radius: 3px; }
+
+/* ── 縦カテゴリ dot (右端) ── */
+body.mobile-mode .wwm-mb-vcat {
+  position: absolute; right: 0px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 8px;
+  z-index: 5;
+  pointer-events: none;
+}
+body.mobile-mode .wwm-mb-vcat i {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(188,174,140,0.2);
+  border: 1px solid #bcae8c;
+  transition: 0.2s;
+}
+body.mobile-mode .wwm-mb-vcat i.on {
+  background: var(--vermilion); border-color: var(--vermilion);
+  height: 18px; border-radius: 4px;
+}
+
+/* ── 縦 snap (カテゴリ送り) ── */
+body.mobile-mode .wwm-mb-vscroll {
+  flex: 1; min-height: 0;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+body.mobile-mode .wwm-mb-vscroll::-webkit-scrollbar { display: none; }
+body.mobile-mode .wwm-mb-cat-sec {
+  height: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex; flex-direction: column;
+  min-height: 0;
+}
+
+/* ── 横 snap (ページ送り) ── */
+body.mobile-mode .wwm-mb-hscroll {
+  flex: 1; min-height: 0;
+  display: flex;
+  overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+body.mobile-mode .wwm-mb-hscroll::-webkit-scrollbar { display: none; }
+body.mobile-mode .wwm-mb-page {
+  flex: 0 0 100%; width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding: 8px 10px;
+  /* overflow-y:auto は page 内縦 scroll 確保するが vscroll の縦カテゴリ snap を
+     scroll-chaining で食う → hidden で page 内 scroll 廃止、 縦スワイプ vscroll 通過 */
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+body.mobile-mode .wwm-mb-page::-webkit-scrollbar { display: none; }
+
+/* page 内 grid wrapper = specificity 確保 (既存 selector からの干渉回避) */
+body.mobile-mode .wwm-mb-page .wwm-mb-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  align-content: start;
+}
+body.mobile-mode .wwm-mb-page .wwm-mb-grid-1col {
+  grid-template-columns: 1fr;
+}
+/* 奇術 page = cluster 1 個を中央配置 + 拡大 (兄貴指示 2026-06-20) */
+body.mobile-mode .wwm-mb-page[data-page^="qishu"] .wwm-mb-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  grid-template-columns: none;
+}
+body.mobile-mode .wwm-mb-page[data-page^="qishu"] .wwm-qishu-cluster {
+  width: 240px; height: 240px;
+}
+body.mobile-mode .wwm-mb-page[data-page^="qishu"] .wwm-qishu-slot {
+  width: 85px; height: 85px;
+}
+/* slot の grid-column/grid-row 強制 reset = xinfa.css L242-260 の global slot ID 別 grid 位置指定
+   (5列 grid 想定) が mobile pager grid に漏れて track 拡張するのを防ぐ。
+   specificity = (0,0,3,0) > 既存 (0,0,2,0) で勝つ、 !important 不要。 */
+body.mobile-mode .wwm-mb-grid > [data-slot] {
+  grid-column: auto;
+  grid-row: auto;
+}
+/* 心法 / 武庫 slot = 装備と同じ縦長 frame (aspect 150/180) で統一 (兄貴指示 2026-06-20)。
+   workspace.css L1364 (.wwm-ws-paper .wwm-xinfa-slot max-width clamp(70px,...)) 打消 +
+   xinfa.css L263-269 同等の墨 gradient + bg_usercard2 + border 復元で装備同形 frame。 */
+body.mobile-mode .wwm-mb-grid > .wwm-xinfa-slot {
+  aspect-ratio: 150 / 180;
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  height: auto;
+  background-image:
+    linear-gradient(180deg, rgba(26,20,16,0.62), rgba(15,12,14,0.75)),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg_usercard2-e8900864.png");
+  background-position: 0 0, center;
+  background-size: auto, 100% 100%;
+  background-repeat: repeat, no-repeat;
+  border: 1px solid var(--ink-2);
+  border-radius: 2px;
+}
+/* 装備 slot (wwm-equip-slot) は move 後 .wwm-gear-grid scope 外で sizing rule 不適用
+   → grid item default stretch で巨大化 → 明示 sizing で 2x2 grid cell fit。
+   position: relative = 子 plank-paint/plank-icon (position:absolute) の基準確保
+   (parent static だと viewport 基準で巨大化、 兄貴症状 #5 の真因)。
+   overflow: hidden で内側 plank-icon (width:130%/170%) の外溢れ contain */
+body.mobile-mode .wwm-mb-grid > .wwm-equip-slot {
+  position: relative;
+  aspect-ratio: 150 / 180;
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  height: auto;
+  overflow: hidden;
+  /* 墨色 gradient + 公式 bg_usercard2 (xinfa.css L263-269 = .wwm-gear-grid scope) を
+     pager 内 slot にも複製。 PC では plank の外周に墨枠表示、 mobile も同等 frame */
+  background-image:
+    linear-gradient(180deg, rgba(26,20,16,0.62), rgba(15,12,14,0.75)),
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg_usercard2-e8900864.png");
+  background-position: 0 0, center;
+  background-size: auto, 100% 100%;
+  background-repeat: repeat, no-repeat;
+  border: 1px solid var(--ink-2);
+  border-radius: 2px;
+}
+/* 心法 / 武庫 slot も同様 position:relative 確保 (rail/icon absolute の基準) */
+body.mobile-mode .wwm-mb-grid > .wwm-xinfa-slot {
+  position: relative;
+  overflow: hidden;
+}
+/* 武庫 slot = grid-column 1/3 全幅廃止 = 装備と同じ 1 cell 占有 (兄貴指示 2026-06-20)。
+   wwm-xinfa-slot rule (上記) で aspect 150/180 + 同等 frame 適用済。
+   xinfa.css L504 `@media (max-width:600px) .wwm-xinfa-slot[data-arsenal-slot] { grid-column: 1/-1 }`
+   が mobile @media で発火するので強制 auto で打消。 */
+body.mobile-mode .wwm-mb-grid > .wwm-arsenal-slot {
+  grid-column: auto;
+  grid-row: auto;
+}
+
+/* ── IMPORT preview step1 = 装備 affix 横スワイプ pager 化 (2026-06-20) ──
+   PC = wwm-equip-section 5×2 grid (gear.css L217-225)。 mobile では狭幅で
+   操作不能 → 横 scroll-snap pager 化、 1 装備 1 page swipe。 兄貴指示。 */
+body.mobile-mode #wwmPreviewModal .wwm-modal-body {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+body.mobile-mode #wwmPreviewModal .wwm-info-grid {
+  grid-template-columns: 1fr;
+  gap: 4px;
+}
+body.mobile-mode #wwmPreviewModal .wwm-info-col-end {
+  text-align: left;
+}
+body.mobile-mode #wwmPreviewModal .wwm-equip-section {
+  display: flex;
+  grid-template-columns: none;
+  grid-template-rows: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 8px;
+  scrollbar-width: none;
+  padding: 4px 0 8px;
+}
+body.mobile-mode #wwmPreviewModal .wwm-equip-section::-webkit-scrollbar {
+  display: none;
+}
+body.mobile-mode #wwmPreviewModal .wwm-equip-section .wwm-equip-slot {
+  flex: 0 0 92%;
+  scroll-snap-align: center;
+}
+
+/* ── IMPORT preview step2 = mobile レイアウト崩れ修正 (2026-06-20) ──
+   心法 4 列 grid (PC = repeat(4, 1fr)) は狭幅で名前縦書き重なり破綻
+   → 1 列縦積みに変更。 武庫 path radios = wrap 化。 兄貴指示。 */
+body.mobile-mode #wwmPreviewModal .wwm-xinfa-grid {
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+body.mobile-mode #wwmPreviewModal .wwm-xinfa-cell {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+body.mobile-mode #wwmPreviewModal .wwm-xinfa-label {
+  flex: 1;
+  writing-mode: horizontal-tb;
+  text-orientation: mixed;
+}
+body.mobile-mode #wwmPreviewModal .wwm-xinfa-tier {
+  flex: 0 0 auto;
+}
+body.mobile-mode #wwmPreviewModal .wwm-xinfa-effect {
+  flex-basis: 100%;
+  font-size: 11px;
+}
+body.mobile-mode #wwmPreviewModal .wwm-arsenal-paths {
+  flex-wrap: wrap;
+  gap: 6px 10px;
+}
+body.mobile-mode #wwmPreviewModal .wwm-arsenal-tier {
+  flex-wrap: wrap;
+  gap: 4px 8px;
+}
+body.mobile-mode #wwmPreviewModal .wwm-arsenal-lv {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+} /* end @layer components */

@@ -1,0 +1,344 @@
+{
+ "1": {
+  "ja": "",
+  "en": "Touch of Death",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "2": {
+  "ja": "神龍の焔",
+  "en": "Dragon's Breath",
+  "zh": "神龙吐火",
+  "ko": "신룡의 화염",
+  "vi": "Rồng thần phun lửa"
+ },
+ "3": {
+  "ja": "詩仙酔舞",
+  "en": "Drunken Poet",
+  "zh": "太白醉月",
+  "ko": "태백취권",
+  "vi": "Thái Bạch say trăng"
+ },
+ "4": {
+  "ja": "獅子咆哮",
+  "en": "Lion's Roar",
+  "zh": "狮吼正声",
+  "ko": "사자후",
+  "vi": "Tiếng gầm chính trực của sư tử"
+ },
+ "6": {
+  "ja": "朱塵煙霧",
+  "en": "Blinding Mist",
+  "zh": "红尘障目",
+  "ko": "속세의 장막",
+  "vi": "Bụi hồng che mắt"
+ },
+ "10": {
+  "ja": "定身鬼手",
+  "en": "Chost Bind",
+  "zh": "百鬼打穴手",
+  "ko": "귀혈수",
+  "vi": "Bàn tay đánh huyệt của trăm con quỷ"
+ },
+ "11": {
+  "ja": "蝦蟇躍撃",
+  "en": "Leaping Toad",
+  "zh": "金蟾腾跃",
+  "ko": "합마공",
+  "vi": "Kim Thiềm Nhảy Vọt"
+ },
+ "13": {
+  "ja": "鷹爪連撃",
+  "en": "Talon Strike",
+  "zh": "鹰爪连凿",
+  "ko": "응조권법",
+  "vi": "Móng Đại Bàng Đâm Liên Tiếp"
+ },
+ "14": {
+  "ja": "震地掌底",
+  "en": "Guardian Palm",
+  "zh": "韦陀正法",
+  "ko": "호법의 권세",
+  "vi": "Chính Pháp Vi Đà"
+ },
+ "17": {
+  "ja": "蛍光照夜",
+  "en": "Glow of Fireflies",
+  "zh": "萤光晖夜",
+  "ko": "암야의 휘광",
+  "vi": "Ánh Đom Đóm Sáng Đêm"
+ },
+ "27": {
+  "ja": "",
+  "en": "Wind Sense",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "31": {
+  "ja": "",
+  "en": "Divine Counter",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "32": {
+  "ja": "清風明月",
+  "en": "Serene Breeze",
+  "zh": "清风霁月",
+  "ko": "청풍명월",
+  "vi": "Gió Trong Trăng Sáng"
+ },
+ "33": {
+  "ja": "薬叉護法",
+  "en": "Yaksha Rush",
+  "zh": "药叉破魔",
+  "ko": "금강의 호법",
+  "vi": "Dược Xoa Phá Ma"
+ },
+ "34": {
+  "ja": "隠れ身",
+  "en": "Veil of Stillness",
+  "zh": "杳无形",
+  "ko": "묘령의 그림자",
+  "vi": "Không Dấu Vết"
+ },
+ "35": {
+  "ja": "",
+  "en": "Star Shift",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "36": {
+  "ja": "無尽連脚",
+  "en": "Free Morph",
+  "zh": "自在无碍",
+  "ko": "속박의 자유",
+  "vi": "Tự Tại Không Cản Trở"
+ },
+ "37": {
+  "ja": "猛棍蓮華",
+  "en": "Wolflike Frenzy",
+  "zh": "狗嘴夺食",
+  "ko": "포식자의 맹습",
+  "vi": "Miệng Chó Cướp Mồi"
+ },
+ "38": {
+  "ja": "龍馬旋回",
+  "en": "Soaring Spin",
+  "zh": "骑龙回马",
+  "ko": "맹수의 돌격",
+  "vi": "Cưỡi Rồng Quay Ngựa"
+ },
+ "39": {
+  "ja": "流星墜火",
+  "en": "Flaming Meteor",
+  "zh": "流星坠火",
+  "ko": "유성 낙화",
+  "vi": "Sao Băng Rơi Lửa"
+ },
+ "40": {
+  "ja": "金身不壊",
+  "en": "Golden Body",
+  "zh": "无相金身",
+  "ko": "불멸의 육신",
+  "vi": "Thân Vàng Vô Tướng"
+ },
+ "41": {
+  "ja": "昇竜葉舞",
+  "en": "Dragon Head",
+  "zh": "叶龙骧首",
+  "ko": "용의 진노",
+  "vi": "Lá Rồng Ngẩng Đầu"
+ },
+ "42": {
+  "ja": "陰陽の型",
+  "en": "Chostly Steps",
+  "zh": "阴阳迷踪步",
+  "ko": "음양의 조화",
+  "vi": "Bước Mê Tung Âm Dương"
+ },
+ "43": {
+  "ja": "朱塵煙霧",
+  "en": "Blinding Mist",
+  "zh": "红尘障目",
+  "ko": "속세의 장막",
+  "vi": "Bụi hồng che mắt"
+ },
+ "44": {
+  "ja": "覇者の鳴",
+  "en": "Honking Havoc",
+  "zh": "以鹅之鸣",
+  "ko": "거위의 절규",
+  "vi": "Tiếng Kêu Của Ngỗng"
+ },
+ "45": {
+  "ja": "千浪一閃",
+  "en": "Flute of the Tides",
+  "zh": "箫吟千浪",
+  "ko": "격랑의 파도",
+  "vi": "Tiếng Sáo Ngàn Sóng"
+ },
+ "46": {
+  "ja": "鵝鳥の膝つき",
+  "en": "Goosy Slide",
+  "zh": "鹅之膝",
+  "ko": "거위의 가호",
+  "vi": "Đầu Gối Ngỗng"
+ },
+ "49": {
+  "ja": "愛の形",
+  "en": "Paired Radiance",
+  "zh": "相携照影",
+  "ko": "동행의 그림자",
+  "vi": "Cùng Nhau Soi Bóng"
+ },
+ "50": {
+  "ja": "風火輪",
+  "en": "Cyclone Spin",
+  "zh": "风火枪",
+  "ko": "풍화륜",
+  "vi": "Phong Hỏa Luân"
+ },
+ "54": {
+  "ja": "雪だるま",
+  "en": "Snow Lion Form",
+  "zh": "化身为墩",
+  "ko": "설동이 변신",
+  "vi": "Hóa Thân Thành Đôn"
+ },
+ "101": {
+  "ja": "太極拳",
+  "en": "Tai Chi",
+  "zh": "太极",
+  "ko": "태극",
+  "vi": "Thái Cực"
+ },
+ "102": {
+  "ja": "光玉の手",
+  "en": "Meridian Touch",
+  "zh": "金玉手",
+  "ko": "금옥점혈수",
+  "vi": "Tay Ngọc Vàng"
+ },
+ "103": {
+  "ja": "摂星摘月",
+  "en": "Celestial Seize",
+  "zh": "摄星拿月",
+  "ko": "허공섭물",
+  "vi": "Bắt Sao Nắm Trăng"
+ },
+ "106": {
+  "ja": "凌雲歩法",
+  "en": "Cloud Steps",
+  "zh": "凌云踏",
+  "ko": "구름 위 질주",
+  "vi": "Đạp Lên Mây Cao"
+ },
+ "107": {
+  "ja": "縮骨功",
+  "en": "Contortion",
+  "zh": "缩骨功",
+  "ko": "축골공",
+  "vi": "Công Thu Nhỏ Xương"
+ },
+ "301": {
+  "ja": "",
+  "en": "Threefold Skywalk",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "302": {
+  "ja": "",
+  "en": "Skywalk Dash",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "303": {
+  "ja": "",
+  "en": "Mighty Drop",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "304": {
+  "ja": "",
+  "en": "Safe Mighty Drop",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "305": {
+  "ja": "",
+  "en": "Thousand-Mile Flight",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "306": {
+  "ja": "",
+  "en": "Meteor Flight",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "307": {
+  "ja": "",
+  "en": "Fan Glider",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "310": {
+  "ja": "",
+  "en": "Wind Rider",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "311": {
+  "ja": "",
+  "en": "Wallstride - Swiftstride",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "312": {
+  "ja": "",
+  "en": "Wallstride - Shadowdash",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "314": {
+  "ja": "",
+  "en": "Abyss Dive",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "315": {
+  "ja": "",
+  "en": "Moonleap Morph",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "401": {
+  "ja": "",
+  "en": "Still Waters",
+  "zh": "",
+  "ko": "",
+  "vi": ""
+ },
+ "_meta": {
+  "extracted_at": "2026-06-13T09:50:53.055Z",
+  "note": "en = data/qishu_icons.json 公式 master 流用 (Phase B 先行)。 ja/zh/ko/vi = 兄貴採取まち (動画 5 言語 + claude vision OCR 予定)。 採取後 反映 = DataStore lookup chain (ja→en→ja) で空言語は en fallback。 game-lexicon-no-discretion 準拠 — claude 推測訳 禁止。 / zh/ko/vi 反映 (2026-06-13 兄貴提供 zh_qishu.mp4 + kr_qishu.mp4 + vi_qishu.mp4 動画 + claude vision OCR、 表示順 = ja と一致 → id mapping 流用). vi 08 番 (id 10 定身鬼手) = 名称長で frame 右端「Nặng」 と被り完全採取不可 = 推測「Bàn tay đánh huyệt của trăm con quỷ」 (兄貴 review 待ち)。",
+  "ja_extracted_at": "2026-06-13T11:41:19.149Z",
+  "zh_ko_vi_extracted_at": "2026-06-13T12:03:19.608Z"
+ }
+}

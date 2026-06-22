@@ -9,9 +9,15 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
-  background: var(--bg-0);
-  color: var(--paper);
-  font-family: var(--f-body);
+  background: var(--sumi-0);
+  color: var(--sumi-fg);
+  /* 2026-06-15 兄貴指示: base font = --f-display (Shippori Mincho) に変更。
+     旧 --f-body (Noto Sans JP) は NOTE modal の更新履歴/仕様タブ等 長文読み物のみ例外。
+     武侠舞台のテーマ親和 + Noto Sans JP の AI slop 感回避
+     2026-06-15 兄貴指示: 全 --f-display 継承箇所を 700 (bold) で render = Shippori Mincho 細さ対策。
+     component で weight 別途明示してる箇所は override で keep */
+  font-family: var(--f-display-title);
+  font-weight: var(--fw-bold);
   font-size: var(--text-md);
   line-height: 1.55;
   font-feature-settings: 'palt';
@@ -26,14 +32,14 @@ html, body {
 /* Body texture: ink wash + paper grain + 公式 home_main 背景 */
 body {
   background:
-    radial-gradient(ellipse 60% 35% at 50% 0%, var(--vermilion-soft-light), transparent 65%),
-    radial-gradient(ellipse 50% 25% at 0% 0%, var(--gold-faint), transparent 70%),
-    radial-gradient(ellipse 50% 25% at 100% 0%, var(--gold-faint), transparent 70%),
-    radial-gradient(ellipse 60% 70% at 100% 100%, var(--gold-trace), transparent 55%),
+    radial-gradient(ellipse 60% 35% at 50% 0%, color-mix(in oklab, var(--vermilion) 18%, transparent), transparent 65%),
+    radial-gradient(ellipse 50% 25% at 0% 0%, color-mix(in oklab, var(--gold) 8%, transparent), transparent 70%),
+    radial-gradient(ellipse 50% 25% at 100% 0%, color-mix(in oklab, var(--gold) 8%, transparent), transparent 70%),
+    radial-gradient(ellipse 60% 70% at 100% 100%, color-mix(in oklab, var(--gold) 5%, transparent), transparent 55%),
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n1'><feTurbulence type='fractalNoise' baseFrequency='0.45' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.85  0 0 0 0 0.65  0 0 0 0.08 0'/></filter><filter id='n2'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.9  0 0 0 0 0.8  0 0 0 0 0.6  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n1)'/><rect width='100%25' height='100%25' filter='url(%23n2)'/></svg>"),
-    linear-gradient(var(--overlay-mid-2), var(--overlay-mid-2)),
+    linear-gradient(var(--shadow-mid-2), var(--shadow-mid-2)),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/bg-b74e3a33.png") center top / cover no-repeat fixed,
-    var(--bg-0);
+    var(--sumi-0);
   min-height: 100vh;
 }
 
@@ -54,7 +60,7 @@ header.topbar {
   display: flex; align-items: center; gap: var(--space-4);
   padding: var(--space-3) var(--space-5);
   background:
-    radial-gradient(ellipse 60% 100% at 50% 50%, var(--vermilion-soft), rgba(15,12,14,0.78) 80%),
+    radial-gradient(ellipse 60% 100% at 50% 50%, color-mix(in oklab, var(--vermilion) 15%, transparent), rgba(15,12,14,0.78) 80%),
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/wq-bg-99758f80.png") center / cover no-repeat;
   border: 1px solid var(--ink-2);
   border-radius: 2px;
@@ -74,20 +80,20 @@ header.topbar::after {
 
 .title-block { flex: 1; min-width: 0; }
 .title-block h1 {
-  font-family: var(--f-display);
+  font-family: var(--f-display-title);
   font-weight: var(--fw-black); font-size: var(--text-xl); letter-spacing: 0.12em;
-  color: var(--paper); line-height: 1.1;
+  color: var(--sumi-fg); line-height: 1.1;
 }
 .title-block h1 .accent { color: var(--c-h1-accent-fg); }
 .title-block p {
   font-size: var(--text-sm); color: var(--c-h1-sub-fg);
   letter-spacing: 0.08em; margin-top: var(--space-1);
-  text-transform: uppercase; font-family: var(--f-mono); font-weight: var(--fw-medium);
+  text-transform: uppercase; font-family: var(--f-latin); font-weight: var(--fw-medium);
 }
 /* WWM Brand (D案: 縦書き漢字 + 横英字 + 朱印章) */
 .wwm-brand { display: flex; align-items: center; gap: var(--space-4); }
 .wwm-brand-vert {
-  font-family: 'Noto Serif JP', var(--f-display), serif;
+  font-family: var(--f-display-title);
   font-weight: var(--fw-black);
   writing-mode: vertical-rl;
   text-orientation: upright;
@@ -96,18 +102,18 @@ header.topbar::after {
   padding: var(--space-half) var(--space-1);
   border-left: 2px solid var(--gold);
   border-right: 2px solid var(--gold);
-  text-shadow: 0 0 10px var(--gold-bright-mid);
+  text-shadow: 0 0 10px color-mix(in oklab, var(--gold-bright) 50%, transparent);
   line-height: 1;
 }
 .wwm-brand-right { display: flex; flex-direction: column; gap: var(--space-half); }
 .wwm-brand-en {
-  font-family: var(--f-latin), serif;
+  font-family: var(--f-latin);
   font-weight: var(--fw-extra); font-size: var(--text-20); letter-spacing: 0.22em;
   color: var(--c-brand-en-fg);
   opacity: var(--c-brand-en-opacity);
 }
 .wwm-brand-sub {
-  font-family: var(--f-mono);
+  font-family: var(--f-latin);
   font-size: var(--text-sm); color: var(--c-brand-sub-fg);
   letter-spacing: 0.3em; opacity: 0.85;
   text-shadow: var(--c-brand-sub-text-shadow);
@@ -119,10 +125,10 @@ header.topbar::after {
   border: 3px solid var(--vermilion);
   border-radius: 8%;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Noto Serif JP', serif; font-weight: var(--fw-black);
+  font-family: var(--f-display-title); font-weight: var(--fw-black);
   font-size: var(--text-24); color: #fff;
   line-height: 1;
-  box-shadow: 0 0 16px var(--vermilion-strong);
+  box-shadow: 0 0 16px color-mix(in oklab, var(--vermilion) 55%, transparent);
   transform: rotate(-8deg);
   flex-shrink: 0;
   opacity: var(--c-brand-seal-opacity);
@@ -198,78 +204,67 @@ html[lang="ko"] .top-controls-2row .icon-btn {
   justify-content: center;
   text-align: center;
 }
-.icon-btn.reset-btn,
-.icon-btn.note-btn {
-  width: auto; padding: 0 var(--space-3);
-  font-family: var(--f-mono); font-weight: var(--fw-bold);
-  font-size: var(--text-sm); letter-spacing: 0.12em;
-}
-.icon-btn.reset-btn { color: var(--paper-2); border-color: var(--ink-3); }
-.icon-btn.reset-btn:hover { color: var(--vermilion-bright); border-color: var(--vermilion); background: var(--vermilion-faint); }
-.icon-btn.note-btn { color: var(--gold); border-color: var(--gold-deep); }
-.icon-btn.note-btn:hover { color: var(--gold-bright); border-color: var(--gold); background: var(--gold-faint); }
+/* reset-btn / note-btn = SVG icon 化済 (2026-06-20)、 width:auto/padding/font 設定削除で base .icon-btn 30x30 grid 継承、 color/hover のみ keep */
+.icon-btn.reset-btn { color: var(--sumi-fg); border-color: var(--ink-3); }
+.icon-btn.reset-btn:hover { color: var(--vermilion-bright); border-color: var(--vermilion); background: color-mix(in oklab, var(--vermilion) 8%, transparent); }
+.icon-btn.note-btn { color: var(--gold-bright); border-color: var(--gold-deep); }
+.icon-btn.note-btn:hover { color: var(--gold-bright); border-color: var(--gold); background: color-mix(in oklab, var(--gold) 8%, transparent); }
 
-.lang-switcher { display: flex; gap: 0; padding: var(--space-half); background: var(--surf-shade-2); border: 1px solid var(--ink-2); border-radius: 2px; }
+.lang-switcher { display: flex; gap: 0; padding: var(--space-half); background: var(--shade-strong); border: 1px solid var(--ink-2); border-radius: 2px; }
 .lang-btn {
   padding: var(--space-1) var(--space-2-5); border: none; background: transparent;
-  color: var(--paper-mute); font-family: var(--f-mono); font-weight: var(--fw-semibold);
+  color: var(--sumi-fg); font-family: var(--f-latin); font-weight: var(--fw-semibold);
   font-size: var(--text-sm); letter-spacing: 0.08em; cursor: pointer;
   transition: color 0.15s, background 0.15s;
 }
-.lang-btn:hover { color: var(--paper-2); }
+.lang-btn:hover { color: var(--sumi-fg); }
 /* critique P1 (2026-06-07): 旧 gold-bright on vermilion-mid ≈ 3.4-3.7:1 fail →
    朱影地金文字 (SS badge 語彙、 6.2:1)。 token = theme constant で light 側 override 不要 */
 .lang-btn.active {
   color: var(--c-lang-active-fg);
-  background: var(--c-lang-active-bg);
+  background: var(--vermilion-deep);
   box-shadow: inset 0 -2px 0 var(--c-lang-active-fg);
 }
 
-/* theme toggle = opt-sort-group 流用の [☀ライト][☾ダーク] 2アイコンセグメント (2026-06-08 兄貴指示、 X 抜けズレ解消)。
-   非active = opt-sort-btn base (transparent)、 active = 現 theme (data-theme 連動)、 setTheme('light'/'dark') で明示切替 */
-.wwm-theme-toggle { align-self: center; height: 30px; width: 66px; box-sizing: border-box; }
-.wwm-theme-btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; padding: 0; opacity: 0.4; transition: opacity 0.15s, background 0.15s, color 0.15s; }
-.wwm-theme-btn:hover { opacity: 0.75; }
-.wwm-theme-btn svg { display: block; }
-/* 選択中 = 金背景 + くっきり (opacity 1)、 非選択は沈めて差を明確化 */
-html[data-theme="light"] .wwm-theme-btn[data-theme-set="light"],
-html[data-theme="dark"]  .wwm-theme-btn[data-theme-set="dark"] {
-  opacity: 1;
-  background: var(--c-opt-sort-btn-active-bg);
-  color: var(--c-opt-sort-btn-active-fg);
-}
+/* theme toggle UI 撤去 (2026-06-11 dark/light 双テーマ廃止)。
+   .wwm-theme-toggle / .wwm-theme-btn block = HTML/JS 参照消滅で全 dead → 削除 */
 
 .icon-btn {
   width: 30px; height: 30px;
   display: grid; place-items: center;
-  background: var(--surf-shade);
+  background: var(--shade-mid);
   border: 1px solid var(--ink-2);
-  color: var(--paper-dim); border-radius: 2px; cursor: pointer;
+  color: var(--sumi-fg); border-radius: 2px; cursor: pointer;
   font-size: var(--text-md);
   transition: all 0.15s;
 }
-.icon-btn:hover { color: var(--gold-bright); border-color: var(--gold-deep); background: var(--gold-tint); }
+.icon-btn:hover { color: var(--gold-bright); border-color: var(--gold-deep); background: color-mix(in oklab, var(--gold) 12%, transparent); }
 a.icon-btn { text-decoration: none; }
 .icon-btn-x svg { display: block; }
-.icon-btn.export-btn,
-.icon-btn.import-btn,
-.icon-btn.share-btn {
-  width: auto; padding: 0 var(--space-3);
-  font-family: var(--f-mono); font-weight: var(--fw-bold); font-size: var(--text-sm); letter-spacing: 0.12em;
-}
-.icon-btn.export-btn {
-  color: var(--vermilion-bright); border-color: var(--c-icon-btn-export-btn-border);
+/* button icon (2026-06-20 IMPORT/RESET/PRESETS/SHARE/NOTE 線画 SVG 化) — 18x18 / currentColor / 1.5px stroke (公式 globe 線画感に揃え) */
+.icon-btn .ic, .wwm-preset-chip .ic { width: 18px; height: 18px; display: block; color: currentColor; }
+/* visually-hidden text (sr-only) = screen reader / a11y 維持 + 視覚上 hide */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
 }
 .icon-btn.import-btn {
   color: var(--gold-bright); border-color: var(--gold-deep);
 }
 .icon-btn.import-btn:hover {
-  background: var(--gold); color: var(--bg-0); border-color: var(--gold);
-  box-shadow: 0 0 16px var(--gold-glow);
+  background: var(--gold); color: var(--sumi-0); border-color: var(--gold);
+  box-shadow: 0 0 16px color-mix(in oklab, var(--gold-bright) 40%, transparent);
 }
-.icon-btn.export-btn:hover {
-  background: var(--vermilion); color: var(--c-on-vermilion); border-color: var(--vermilion); /* audit P2: bg-0 3.98 → white 5.08 */
-  box-shadow: 0 0 16px var(--vermilion-glow);
+.icon-btn.kofi-btn {
+  color: var(--vermilion-bright); border-color: var(--vermilion-deep);
+}
+.icon-btn.kofi-btn:hover {
+  background: var(--vermilion); color: var(--sumi-0); border-color: var(--vermilion);
+  box-shadow: 0 0 16px color-mix(in oklab, var(--vermilion-bright) 40%, transparent);
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -279,7 +274,7 @@ a.icon-btn { text-decoration: none; }
 .preset-bar {
   display: flex; align-items: center; gap: var(--space-3);
   padding: var(--space-2) var(--space-3-5); margin-top: var(--space-2);
-  background: var(--c-preset-bar-bg);
+  background: var(--bg-overlay-bottom);
   border: 1px solid var(--ink-2);
   border-radius: 2px;
 }
@@ -313,19 +308,19 @@ a.icon-btn { text-decoration: none; }
 
 footer {
   text-align: center; padding: var(--space-5) 0 var(--space-1-5);
-  font-family: var(--f-mono); font-size: var(--text-xs);
-  color: var(--paper-mute); letter-spacing: 0.2em; text-transform: uppercase;
+  font-family: var(--f-latin); font-size: var(--text-xs);
+  color: var(--sumi-fg); letter-spacing: 0.2em; text-transform: uppercase;
 }
 footer strong { color: var(--c-footer-strong-fg); }
 
 #toast {
   position: fixed; bottom: 28px; right: 28px;
-  background: var(--c-toast-bg); color: var(--paper);
+  background: var(--sumi-1); color: var(--sumi-fg);
   padding: 11px 18px;
   border: 1px solid var(--gold-deep); border-left: 3px solid var(--gold);
-  font-family: var(--f-body); font-size: var(--text-12); font-weight: var(--fw-semibold);
+  font-family: var(--f-display-title); font-size: var(--text-12); font-weight: var(--fw-semibold);
   letter-spacing: 0.02em;
-  box-shadow: 0 8px 32px var(--overlay-heavy), 0 0 24px var(--gold-tint);
+  box-shadow: 0 8px 32px var(--shadow-heavy), 0 0 24px color-mix(in oklab, var(--gold) 12%, transparent);
   z-index: var(--z-modal); opacity: 0; transform: translateY(8px);
   transition: opacity 0.22s, transform 0.22s;
   pointer-events: none; white-space: nowrap;
@@ -335,7 +330,7 @@ footer strong { color: var(--c-footer-strong-fg); }
 /* audit P2 (2026-06-07): error toast 視覚区別 — 朱枠 (三彩分業: 朱 = 警告)。 寿命 7s は app.js showToast 側 */
 #toast.toast-error {
   border-color: var(--vermilion); border-left-color: var(--vermilion-bright);
-  box-shadow: 0 8px 32px var(--overlay-heavy), 0 0 24px var(--vermilion-glow);
+  box-shadow: 0 8px 32px var(--shadow-heavy), 0 0 24px color-mix(in oklab, var(--vermilion-bright) 50%, transparent);
   white-space: normal; max-width: min(420px, 80vw);
 }
 
@@ -375,12 +370,12 @@ footer strong { color: var(--c-footer-strong-fg); }
   border: 1px solid rgba(240,210,138,.6);
   border-radius: 4px;
   color: var(--gold-bright);
-  font-family: var(--f-body);
+  font-family: var(--f-display-title);
   font-size: var(--text-12);
   font-weight: var(--fw-bold);
   letter-spacing: .05em;
   white-space: nowrap;
-  box-shadow: 0 4px 18px var(--overlay-mid), 0 0 24px var(--vermilion-bright-soft-mid);
+  box-shadow: 0 4px 18px var(--shadow-mid), 0 0 24px color-mix(in oklab, var(--vermilion-bright) 40%, transparent);
 }
 .wwm-import-hint-out { animation: wwm-hint-out 0.3s forwards; }
 
@@ -401,8 +396,8 @@ footer strong { color: var(--c-footer-strong-fg); }
   left: 50%;
   transform: translateX(-50%);
   padding: var(--space-1) var(--space-2);
-  background: var(--overlay-heavy);
-  color: var(--paper);
+  background: var(--shadow-heavy);
+  color: var(--sumi-fg);
   font-size: var(--text-xs);
   white-space: nowrap;
   border-radius: 4px;
@@ -433,29 +428,31 @@ footer strong { color: var(--c-footer-strong-fg); }
   gap: var(--space-3);
   width: 100%;
   box-sizing: border-box;
+  /* wwm-ws-body の padding-top 20px を相殺 = banner 上端ピッタリ表示 (2026-06-16) */
+  margin-top: -20px;
   padding: var(--space-2) var(--space-4);
-  background: var(--c-score-update-banner-bg);
-  border-bottom: 1px solid var(--vermilion-strong);
-  color: var(--c-score-update-banner-fg);
+  background: color-mix(in oklab, var(--vermilion) 40%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--vermilion) 55%, transparent);
+  color: var(--kami-fg);  /* wwm-ws-body 紙面配置対応 (2026-06-16)、 旧 --c-score-update-banner-fg #ffd9cc (墨面用) は紙地で不可視 */
   font-size: var(--text-13, 13px);
   position: relative;
   z-index: 50;
   animation: wwm-banner-in .45s cubic-bezier(.22,1,.36,1), wwm-banner-glow 2.2s ease-in-out .45s infinite;
   border-bottom-color: var(--c-score-update-banner-border-bot);
 }
-.wwm-score-update-icon { flex: 0 0 auto; font-size: var(--text-lg); color: var(--vermilion-strong); animation: wwm-banner-icon-pulse 1.4s ease-in-out infinite; }
+.wwm-score-update-icon { flex: 0 0 auto; font-size: var(--text-lg); color: var(--vermilion-bright); animation: wwm-banner-icon-pulse 1.4s ease-in-out infinite; }
 .wwm-score-update-arrow {
   flex: 0 0 auto;
   font-size: var(--text-15);
   color: var(--vermilion-bright);
-  text-shadow: 0 0 10px var(--vermilion-bright-strong);
+  text-shadow: 0 0 10px color-mix(in oklab, var(--vermilion-bright) 70%, transparent);
   animation: wwm-banner-arrow-bounce 1.1s ease-in-out infinite;
 }
 .wwm-score-update-msg  { flex: 1 1 auto; line-height: 1.4; }
 .wwm-score-update-btn {
   flex: 0 0 auto;
   padding: var(--space-1-5) var(--space-4);
-  background: var(--vermilion-strong);
+  background: color-mix(in oklab, var(--vermilion) 55%, transparent);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -468,47 +465,24 @@ footer strong { color: var(--c-footer-strong-fg); }
 .wwm-score-update-btn:hover { filter: brightness(1.15); }
 .wwm-score-update-btn { animation: wwm-banner-btn-pulse 1.6s ease-in-out infinite; }
 
-/* ╔═══════════════════════════════════════════════════════════════════╗
-     SECTION 33 — MIGRATION BANNER
-   ╚═══════════════════════════════════════════════════════════════════╝ */
-
-/* ── 移転案内バナー (旧URL アクセス時のみ表示、 OBS view非表示) ── */
-.wwm-migration-banner {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  width: 100%;
-  box-sizing: border-box;
-  padding: var(--space-2) var(--space-4);
-  background: var(--c-migration-banner-bg);
-  border-bottom: 1px solid #4a78b8;
-  color: var(--c-migration-banner-fg);
-  font-size: var(--text-13, 13px);
-  position: relative;
-  z-index: 50;
-  animation: wwm-banner-in .45s cubic-bezier(.22,1,.36,1);
-  border-bottom-color: var(--c-migration-banner-border-bot);
-}
-.wwm-migration-icon { flex: 0 0 auto; font-size: var(--text-lg); }
-.wwm-migration-arrow { flex: 0 0 auto; font-size: var(--text-15); color: #7fb0e8; animation: wwm-banner-arrow-bounce 1.1s ease-in-out infinite; }
-.wwm-migration-msg { flex: 1 1 auto; line-height: 1.4; }
-.wwm-migration-msg strong { color: var(--c-migration-strong-fg); font-weight: 700; }
-.wwm-migration-btn {
+/* welcome banner = drift banner と同 class 流用 + × close button (2026-06-22 FAB 一択化対応) */
+.wwm-welcome-banner-close {
   flex: 0 0 auto;
-  padding: var(--space-1-5) var(--space-4);
-  background: var(--c-migration-btn-bg);
-  color: #fff;
-  border: none;
+  width: 24px; height: 24px;
+  margin-left: var(--space-2);
+  background: transparent;
+  color: inherit;
+  border: 1px solid currentColor;
   border-radius: 4px;
-  font-weight: 700;
-  font-size: var(--text-12);
+  font-size: 14px;
+  line-height: 1;
   cursor: pointer;
-  white-space: nowrap;
-  text-decoration: none;
-  transition: filter .15s;
+  opacity: 0.6;
+  transition: opacity .15s, background .15s;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0;
 }
-.wwm-migration-btn:hover { filter: brightness(1.15); }
-/* OBS view banner hide は styles-obs.css へ移動済 (2026-06-05 @layer Step 1) */
+.wwm-welcome-banner-close:hover { opacity: 1; background: rgba(255,255,255,0.1); }
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
      SECTION 39 — A11Y :focus-visible (global)
@@ -536,7 +510,7 @@ footer strong { color: var(--c-footer-strong-fg); }
     position: sticky;
     top: 0;
     z-index: var(--z-overlay);
-    background: var(--bg-0);
+    background: var(--sumi-0);
     border-bottom: 1px solid var(--ink-2);
     flex-wrap: wrap;
     /* padding left/right 成分は削除済 (2026-06-05 @layer Step 1):
@@ -569,7 +543,6 @@ footer strong { color: var(--c-footer-strong-fg); }
 @media (prefers-reduced-motion: reduce) {
   .wwm-import-hint, .wwm-import-hint-arrow { animation: none; }
   .wwm-score-update-banner, .wwm-score-update-icon, .wwm-score-update-btn, .wwm-score-update-arrow { animation: none; }
-  .wwm-migration-banner, .wwm-migration-icon, .wwm-migration-btn, .wwm-migration-arrow { animation: none; }
 }
 
 @media (max-width: 480px) {
@@ -577,7 +550,7 @@ footer strong { color: var(--c-footer-strong-fg); }
     width: 28px; height: 28px;
     font-size: var(--text-lg);
     border-width: 2px;
-    box-shadow: 0 0 10px var(--vermilion-strong);
+    box-shadow: 0 0 10px color-mix(in oklab, var(--vermilion) 55%, transparent);
     flex: 0 0 auto;
   }
   .wwm-mobile-topbar .wwm-brand-seal::after {

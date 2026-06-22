@@ -16,10 +16,9 @@
   align-items: stretch;
   /* min-width 削除: 圧縮停止は親 .wwm-app-body min-width:1010 で一元管理 (minmax(0,1fr) = 完全flex、 親に従う) */
 }
-
 .wwm-gear-grid .wwm-equip-slot[data-slot] { cursor: pointer; transition: transform 0.1s, box-shadow 0.1s; }
 
-.wwm-gear-grid .wwm-equip-slot[data-slot]:hover { transform: translateY(-2px); box-shadow: 0 4px 12px var(--accent-mid); }
+.wwm-gear-grid .wwm-equip-slot[data-slot]:hover { transform: translateY(-2px); box-shadow: 0 4px 12px color-mix(in oklab, var(--accent) 30%, transparent); }
 
 .wwm-gear-grid .wwm-equip-slot {
   position: relative;
@@ -42,7 +41,7 @@
   opacity: var(--c-icon-dim-opacity);
   filter:
     drop-shadow(0 0 3px rgba(212,175,55,0.5))
-    drop-shadow(0 0 8px var(--accent-mid))
+    drop-shadow(0 0 8px color-mix(in oklab, var(--accent) 30%, transparent))
     drop-shadow(0 0 16px rgba(212,175,55,0.2));
   pointer-events: none;
   z-index: 0;
@@ -87,9 +86,9 @@
 [data-liupai-pinyin="kuanglan"] .wwm-equip-icon,
 [data-liupai-pinyin="kuanglan"] .wwm-xinfa-icon {
   filter:
-    drop-shadow(0 0 3px var(--vermilion-bright-glow))
-    drop-shadow(0 0 8px var(--vermilion-bright-soft-mid))
-    drop-shadow(0 0 16px var(--vermilion-bright-soft));
+    drop-shadow(0 0 3px color-mix(in oklab, var(--vermilion-bright) 60%, transparent))
+    drop-shadow(0 0 8px color-mix(in oklab, var(--vermilion-bright) 40%, transparent))
+    drop-shadow(0 0 16px color-mix(in oklab, var(--vermilion-bright) 25%, transparent));
 }
 
 [data-liupai-pinyin="qingxi"] .wwm-equip-icon,
@@ -123,7 +122,7 @@
 .wwm-equip-arrow {
   font-size: var(--text-xs);
   margin: 0 5px;
-  color: var(--gold);
+  color: var(--gold-bright);
   opacity: 0.75;
   vertical-align: middle;
 }
@@ -136,14 +135,14 @@
   white-space: nowrap;
 }
 
-.wwm-equip-delta-pos { color: var(--jade-bright); text-shadow: var(--c-equip-delta-pos-text-shadow); }
+.wwm-equip-delta-pos { color: var(--vermilion-bright); text-shadow: var(--c-equip-delta-pos-text-shadow); }
 
-.wwm-equip-delta-neg { color: var(--c-equip-delta-neg-fg); text-shadow: var(--c-equip-delta-neg-text-shadow); }
+.wwm-equip-delta-neg { color: var(--sumi-fg-dim); text-shadow: var(--c-equip-delta-neg-text-shadow); }
 
 .wwm-equip-kongfu {
   display: block;
   font-size: var(--text-sm);
-  color: var(--paper);
+  color: var(--sumi-fg);
   font-weight: 600;
   letter-spacing: 0.05em;
   margin-bottom: var(--space-half);
@@ -156,8 +155,8 @@
 
 .wwm-step2-section-title {
   margin: var(--space-2) 0 var(--space-1-5); font-size: var(--text-14);
-  color: var(--accent);
-  border-bottom: 1px solid var(--accent-mid); padding-bottom: 3px;
+  color: var(--gold-bright);
+  border-bottom: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); padding-bottom: 3px;
 }
 
 .wwm-xinfa-grid {
@@ -172,7 +171,7 @@
   gap: 4px 10px; align-items: center;
   font-size: var(--text-md);
   padding: var(--space-2) var(--space-2-5);
-  background: var(--surf-shade); border: 1px solid var(--ink-2);
+  background: var(--shade-mid); border: 1px solid var(--ink-2);
   border-radius: 3px;
 }
 
@@ -181,7 +180,7 @@
 .wwm-xinfa-cell > .wwm-xinfa-tier {
   grid-area: tier;
   padding: var(--space-half) var(--space-1-5);
-  background: var(--c-cmp-stat-select-bg); color: inherit;
+  background: var(--bg-cmp-stat-select); color: inherit;
   border: 1px solid #444; border-radius: 4px;
   font-size: var(--text-12);
   border-color: var(--c-xinfa-cell--xinfa-tier-border);
@@ -206,14 +205,14 @@
 
 .wwm-sb-notice {
   margin-top: var(--space-3); padding: var(--space-2) var(--space-2-5);
-  background: var(--vermilion-soft);
-  border: 1px solid var(--vermilion-strong);
+  background: color-mix(in oklab, var(--vermilion) 15%, transparent);
+  border: 1px solid color-mix(in oklab, var(--vermilion) 55%, transparent);
   color: var(--c-sb-notice-fg);
   cursor: pointer;
   text-align: center;
 }
 
-.wwm-sb-notice:hover { background: var(--vermilion-mid); }
+.wwm-sb-notice:hover { background: color-mix(in oklab, var(--vermilion) 30%, transparent); }
 
 .wwm-equip-section {
   margin-top: var(--space-2);
@@ -225,7 +224,7 @@
 }
 
 .wwm-equip-section .wwm-equip-slot {
-  background: linear-gradient(180deg, var(--surf-1), var(--surf-2));
+  background: linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
   border: 1px solid var(--ink-2);
   border-left: 3px solid var(--vermilion);
   border-radius: 2px;
@@ -248,7 +247,7 @@
 .wwm-equip-section .wwm-equip-base b,
 .wwm-equip-section .wwm-equip-affix b {
   font-size: var(--text-xs);
-  color: var(--paper-mute);
+  color: var(--sumi-fg);
   letter-spacing: 0.05em;
   font-weight: var(--fw-semibold);
 }

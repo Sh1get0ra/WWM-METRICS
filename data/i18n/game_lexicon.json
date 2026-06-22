@@ -283,7 +283,7 @@
     "ja": "奇術",
     "en": "Mystic arts",
     "zh": "奇术",
-    "ko": "기술 (奇術)",
+    "ko": "비결",
     "vi": "Kỳ thuật"
   },
   "effAnalysisTitle": {
@@ -295,9 +295,9 @@
   },
   "importLabelXiuwei": {
     "ja": "総合武力",
-    "en": "Total Martial Power",
-    "zh": "综合武力",
-    "ko": "종합 무력",
+    "en": "Total Power",
+    "zh": "武林造诣",
+    "ko": "무림 조예",
     "vi": "Kết hợp hiện tại"
   }
 }

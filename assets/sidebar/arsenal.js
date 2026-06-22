@@ -1,4 +1,4 @@
-// ── WWM-METRICS Sidebar / 武庫編集 modal (Phase 3.8 切出) ────
+// ── WWMetrics Sidebar / 武庫編集 modal (Phase 3.8 切出) ────
 // openArsenalEdit / window.WWMArsenal
 (function () {
   'use strict';
@@ -46,9 +46,9 @@
         const minV = t?.min ?? preset.min;
         const maxV = t?.max ?? preset.max;
         const valTxt = peaked
-          ? `<span style="color:var(--gold-bright);">${(window.T?.importArsenalPeaked)||'頂点'} ✓</span> <span style="color:var(--gold-bright);font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`
-          : `<span style="color:var(--paper-mute);">${(window.T?.arsenalNotPeaked)||'未突破'}</span> <span style="color:var(--gold-bright);font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`;
-        return `<div class="wwm-cmp-row" style="grid-template-columns:50px 1fr;align-items:center;"><span style="font-family:var(--f-mono);font-weight:700;">Lv${lv}</span><span>${valTxt}</span></div>`;
+          ? `<span>${(window.T?.importArsenalPeaked)||'頂点'} ✓</span> <span style="font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`
+          : `<span style="color:var(--kami-fg-dim);">${(window.T?.arsenalNotPeaked)||'未突破'}</span> <span style="font-size:11px;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`;
+        return `<div class="wwm-cmp-row" style="grid-template-columns:50px 1fr;align-items:center;"><span style="font-family:var(--f-latin);font-weight:700;">Lv${lv}</span><span>${valTxt}</span></div>`;
       }).join('');
     }
     function _newRows(ars) {
@@ -60,12 +60,12 @@
         const minV = t.min ?? preset.min;
         const maxV = t.max ?? preset.max;
         const inputArea = peaked
-          ? `<span style="color:var(--gold-bright);font-size:11px;white-space:nowrap;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`
-          : `<span style="display:inline-flex;gap:4px;font-size:11px;color:var(--gold-bright);align-items:center;flex-wrap:nowrap;white-space:nowrap;">
+          ? `<span style="font-size:11px;white-space:nowrap;">${sL.min}+${minV} ${sL.max}+${maxV}</span>`
+          : `<span style="display:inline-flex;gap:4px;font-size:11px;align-items:center;flex-wrap:nowrap;white-space:nowrap;">
                <span>${sL.min}</span><input type="number" class="wwm-num-input" data-tier-min="${lv}" min="0" max="${preset.min}" step="1" value="${minV}" style="width:42px;height:20px;padding:0 4px;">
                <span>${sL.max}</span><input type="number" class="wwm-num-input" data-tier-max="${lv}" min="0" max="${preset.max}" step="1" value="${maxV}" style="width:42px;height:20px;padding:0 4px;">
              </span>`;
-        return `<div class="wwm-cmp-row" style="grid-template-columns:50px 1fr;align-items:center;"><span style="font-family:var(--f-mono);font-weight:700;">Lv${lv}</span>
+        return `<div class="wwm-cmp-row" style="grid-template-columns:50px 1fr;align-items:center;"><span style="font-family:var(--f-latin);font-weight:700;">Lv${lv}</span>
           <span style="display:flex;align-items:center;gap:10px;flex-wrap:nowrap;white-space:nowrap;">
             <label style="display:inline-flex;align-items:center;gap:4px;cursor:pointer;white-space:nowrap;"><span>${(window.T?.importArsenalPeaked)||'頂点'}</span> <input type="checkbox" data-tier="${lv}" ${peaked?'checked':''}></label>
             ${inputArea}
@@ -82,10 +82,10 @@
         <span class="wwm-cmp-l-bracket-tl"></span><span class="wwm-cmp-l-bracket-tr"></span>
         <span class="wwm-cmp-l-bracket-bl"></span><span class="wwm-cmp-l-bracket-br"></span>
         <div class="wwm-modal-header">
-          <h2><span class="wwm-cmp-title-ja">${(window.T?.cmpArsenalTitle)||'武庫対照'}</span><span class="wwm-cmp-title-en">COMPARISON</span><span class="wwm-cmp-seal">庫</span></h2>
+          <h2><span class="wwm-cmp-title-ja" data-i18n="cmpArsenalTitle" data-kaisho="cmpArsenalTitle">${(window.T?.cmpArsenalTitle)||'武庫対照'}</span><span class="wwm-cmp-title-en">COMPARISON</span><span class="wwm-cmp-seal">庫</span></h2>
           <button class="wwm-modal-close" aria-label="Close">×</button>
         </div>
-        <div class="wwm-modal-body">
+        <div class="wwm-modal-body wwm-ws-paper">
           <div class="wwm-cmp-modal-bg-icon wwm-cmp-modal-bg-icon-gear wwm-cmp-modal-bg-icon-arsenal" style="background-image:url('https://www.wherewindsmeetgame.com/pc/qt/20251203102905/data/kongfu/images/673361fe92bef95db34510429KLQLykS05.png');"></div>
           <div class="wwm-cmp-grid">
             <div class="wwm-cmp-col wwm-cmp-current">
@@ -100,11 +100,17 @@
               <div class="wwm-cmp-rows" id="wwmArsenalEditRows">${_newRows(newArsenal)}</div>
             </div>
           </div>
-          <div class="wwm-cmp-footer-a">
-            <div class="wwm-cmp-delta-block">
-              <span class="wwm-cmp-delta-label">武格変動</span>
-              <span class="wwm-cmp-preview-value" id="wwmArsenalEditDelta">+0</span>
-              <span class="wwm-cmp-delta-base" id="wwmArsenalEditBase">—</span>
+        </div>
+        <!-- footer = body (紙) の外 = 墨帯 (modal 二層化 2026-06-12) -->
+        <div class="wwm-cmp-footer-a">
+          <div class="wwm-cmp-stat-row">
+            <span class="wwm-cmp-delta-label">${(window.T&&T.martialIndex)||'武格指数'}</span>
+            <span class="wwm-cmp-delta-total" id="wwmArsenalEditTotal"></span>
+          </div>
+          <div class="wwm-cmp-stat-row">
+            <div class="wwm-cmp-quality-block">
+              <span class="wwm-cmp-delta-label">${(window.T&&T.slotQuality)||'火力品質'}</span>
+              <span class="wwm-cmp-delta-total" id="wwmArsenalEditBase"></span>
             </div>
             <div class="wwm-btn-row wwm-cmp-btn-row">
               <button class="wwm-btn-primary" id="wwmArsenalEditApply">採用</button>
@@ -173,40 +179,57 @@
     }
     bindRowEvents();
     let previewTimer = null;
+    let _origArsContribCache = null; // modal open 時 effective ri + state での武庫寄与 (LOO)
+    const _openTimeRi = _getEffectiveRoleInfo() || WWMState.roleInfo;
+    const _openTimeState = _getEffectiveState() || WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {};
     async function _schedulePreview() {
       clearTimeout(previewTimer);
       previewTimer = setTimeout(_runPreview, 150);
     }
     async function _runPreview() {
-      const ri = _getEffectiveRoleInfo() || WWMState.roleInfo;
-      if (!ri || !window.WWMStats?.buildStatParams) return;
+      const baseRi = _getEffectiveRoleInfo() || WWMState.roleInfo;
+      if (!baseRi || !window.WWMStats?.buildStatParams) return;
       const baseState = _getEffectiveState() || WWMHelpers.storage.loadJSON('wwm_last_state_v1');
       try {
-        // 現 (virtual_arsenal 無視 = 元 arsenal)
-        const baseStateNoVirtArs = JSON.parse(JSON.stringify(baseState || {}));
-        const origState = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
-        if (origState?.arsenal) baseStateNoVirtArs.arsenal = origState.arsenal;
-        const p1 = await window.WWMStats.buildStatParams(ri, baseStateNoVirtArs);
-        window.computeExpected(p1);
-        const baseScore = _scoreWithBonus(ri);
-        // 新
+        // baseline 武庫寄与 = isModified (virtual.arsenal あり) なら origRi+origState (累積 Δ)、 でなければ open 時 snapshot
+        if (_origArsContribCache == null) {
+          const isModified = !!WWMState.virtual.arsenal;
+          const baseRiForCache = isModified ? WWMState.roleInfo : _openTimeRi;
+          const baseStForCache = isModified ? (WWMHelpers.storage.loadJSON('wwm_last_state_v1') || {}) : _openTimeState;
+          const oP1 = await window.WWMStats.buildStatParams(baseRiForCache, baseStForCache);
+          window.computeExpected(oP1);
+          const oBase = _scoreWithBonus(baseRiForCache);
+          const oStNoArs = JSON.parse(JSON.stringify(baseStForCache));
+          if (oStNoArs.arsenal) oStNoArs.arsenal = { path: oStNoArs.arsenal.path, tiers: {} }; else oStNoArs.arsenal = null;
+          const oP2 = await window.WWMStats.buildStatParams(baseRiForCache, oStNoArs);
+          window.computeExpected(oP2);
+          const oNoArs = _scoreWithBonus(baseRiForCache);
+          _origArsContribCache = Math.round(oBase - oNoArs);
+        }
+        // 試作 武庫寄与: baseRi + newArsenal state (arsenal=new) vs (arsenal=null)
         const newState = JSON.parse(JSON.stringify(baseState || {}));
         newState.arsenal = newArsenal;
-        const p2 = await window.WWMStats.buildStatParams(ri, newState);
-        window.computeExpected(p2);
-        const newScore = _scoreWithBonus(ri);
-        const delta = Math.round(newScore - baseScore);
-        const deltaEl = m.querySelector('#wwmArsenalEditDelta');
-        if (deltaEl) {
-          const sign = delta > 0 ? '+' : '';
-          deltaEl.textContent = `${sign}${delta.toLocaleString()}`;
-          deltaEl.className = 'wwm-cmp-preview-value ' + (delta > 0 ? 'pos' : delta < 0 ? 'neg' : 'zero');
-        }
-        const baseEl = m.querySelector('#wwmArsenalEditBase');
-        if (baseEl) baseEl.textContent = `${Math.round(baseScore).toLocaleString()} → ${Math.round(newScore).toLocaleString()}`;
-        // 復元
+        const p1 = await window.WWMStats.buildStatParams(baseRi, newState);
         window.computeExpected(p1);
-      } catch(e) {}
+        const totalCur = Math.round(_scoreWithBonus(baseRi));
+        const noArsSt = JSON.parse(JSON.stringify(newState));
+        noArsSt.arsenal = null;
+        const p2 = await window.WWMStats.buildStatParams(baseRi, noArsSt);
+        window.computeExpected(p2);
+        const noArsScore = _scoreWithBonus(baseRi);
+        const vSlot = Math.round(totalCur - noArsScore);
+        // 武備指数 (= LOO 生値) baseline ▶ current 表示 (兄貴指示 2026-06-18)
+        const totalBase = Math.round(WWMState.baseline?.statusScore ?? 0);
+        const pf = await window.WWMStats.buildStatParams(baseRi, newState);
+        window.computeExpected(pf);
+        const baseEl = m.querySelector('#wwmArsenalEditBase');
+        const _ARR = '<span class="wwm-cmp-arrow">▶</span>';
+        if (baseEl) {
+          baseEl.innerHTML = `${_origArsContribCache.toLocaleString()}${_ARR}${vSlot.toLocaleString()}`;
+        }
+        const totEl = m.querySelector('#wwmArsenalEditTotal');
+        if (totEl) totEl.innerHTML = `${totalBase.toLocaleString()}${_ARR}${totalCur.toLocaleString()}`;
+      } catch(e) { console.error('[ArsPreview]', e); }
     }
     _schedulePreview();
     m.querySelector('#wwmArsenalEditApply').addEventListener('click', () => {

@@ -4,7 +4,7 @@
 // 実装 plan : docs/superpowers/plans/2026-06-09-i18n-unification.md
 (function () {
   'use strict';
-  const CATS = ['kongfu', 'xinfa', 'sets', 'stat', 'path', 'skilltype', 'weapontype', 'ui', 'game_lexicon', 'stat_display'];
+  const CATS = ['kongfu', 'xinfa', 'sets', 'stat', 'path', 'skilltype', 'weapontype', 'ui', 'game_lexicon', 'stat_display', 'qishu', 'stat_short', 'skilltype_short', 'kongfu_short'];
   // t() lookup chain: ui (ツール独自) → game_lexicon (ゲーム固有 UI 名) → stat (ステ/affix 真実源) → stat_display (Sidebar 表示 label、 stDisp.* prefix)。
   const T_CHAIN = ['ui', 'game_lexicon', 'stat', 'stat_display'];
   const VERSION = (typeof window !== 'undefined' && window.WWM_DISPLAY_VERSION) || 11;
@@ -18,8 +18,11 @@
     WWM_SETS:             'sets',
     WWM_AFFIX:            'affix',
     WWM_EQUIP_BASE_BY_LV: 'equip_base_by_lv',
+    WWM_GUANYIN_LEVELS:   'guanyin_levels',
     WWM_XINFA_ICONS:      'xinfa_icons',
     WWM_KONGFU_ICONS:     'kongfu_icons',
+    WWM_QISHU_ICONS:      'qishu_icons',
+    WWM_QISHU_CATEGORIES: 'qishu_categories',
     WWM_AVATAR_ICONS:     'avatar_icons',
     WWM_GEAR_SLOT_ICONS:  'gear_slot_icons'
   };
@@ -218,8 +221,15 @@
     const suffix = key.slice(def.prefix.length);
     const skillKey = SUFFIX_TO_SKILL[suffix];
     if (!skillKey) return null;
-    let weap = _lookup('kongfu', def.id, lang);
-    const tip = _lookup('skilltype', skillKey, lang);
+    // vi 時 = kongfu/skilltype 両方 短縮版優先 (武具対照 modal + import preview + 防具 affix6
+    // dropdown の武術固有 affix 文字切れ救済)。 真実源 (kongfu.json/skilltype.json 公式 lexicon)
+    // 不変 keep、 表示時 fallback only。 short miss 時は通常 lookup chain。
+    let weap = null;
+    if (lang === 'vi') weap = _lookup('kongfu_short', def.id, 'vi');
+    if (!weap) weap = _lookup('kongfu', def.id, lang);
+    let tip = null;
+    if (lang === 'vi') tip = _lookup('skilltype_short', skillKey, 'vi');
+    if (!tip) tip = _lookup('skilltype', skillKey, lang);
     if (!weap || !tip) return null;
     if (lang === 'en') {
       const wType = _kongfuWeaponType(def.id);

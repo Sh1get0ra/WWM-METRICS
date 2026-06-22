@@ -1,5 +1,5 @@
-// ── キャラクターカード生成 (EXPORT v2 — card builder modal) ──────────
-// EXPORT btn → カード生成 modal: ①背景 (upload/paste/drag + zoom/pan)
+// ── キャラクターカード生成 (EXPORT v2 — 飛簡 modal card pane、 2026-06-12 統合) ──
+// 飛簡 (SHARE) modal の card タブに mount: ①背景 (upload/paste/drag + zoom/pan)
 // ②テンプレ (武格/軍議) ③表示項目 toggle → Generate → PNG 1200×630 (×2 = 2400×1260)。
 // カードは「朱墨軍議」identity 固定 (theme 非連動の独立 artifact)。
 // Phase 2.8: window.__WWM_ROLEINFO/__WWM_BASELINE 直接参照 全廃 → WWMState 経由。
@@ -219,8 +219,10 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
       );
     }
 
-    // 奇術 (装備中 8 枠、 bookmarklet DOM 取込分。 旧 import data には無い → 空配列)
-    const qishu = (ri._qishuIconsBase64 || []).filter(Boolean);
+    // 奇術 (装備中 8 枠、 _qishuIds[i] → WWM_QISHU_ICONS[id].pic_url で公式 CDN URL 解決。
+    // 旧 import data (_qishuIconsBase64) や master 未登録 id は '' で順序保持 — _qishuRow が空 URL skip)
+    const _qm = window.WWM_QISHU_ICONS || {};
+    const qishu = (ri._qishuIds || []).map(id => (id && _qm[id] && _qm[id].pic_url) || '');
 
     // 勁率 donut
     const donut = {
@@ -379,9 +381,10 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
       + '</svg>';
   }
   function _qishuRow(model, lp) {
-    if (!model.qishu.length) return '';
+    if (!model.qishu.length || !model.qishu.some(Boolean)) return '';
     const cl = [[], []];
     model.qishu.forEach((u, i) => {
+      if (!u) return;
       const p = _QISHU_POS[i] || [1, 'left'];
       cl[p[0]].push('<img class="q-' + p[1] + '" src="' + u + '" alt="">');
     });
@@ -486,7 +489,7 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
         // 上段: 武術 (icon+名称 縦2) | 奇術パネル 横並び → 下段: 心法 4 列 tile (2026-06-07 兄貴レイアウト指示)
         + (() => {
           const kf = it.kongfu ? '<div class="wwm-card-info-arts">' + _kongfuCompact(model) + '</div>' : '';
-          const q = (it.qishu && model.qishu.length) ? _qishuRow(model, st.panel === 'light') : '';
+          const q = (it.qishu && model.qishu.some(Boolean)) ? _qishuRow(model, st.panel === 'light') : '';
           const row = (kf && q) ? '<div class="wwm-card-info-row">' + kf + q + '</div>' : (kf + q);
           return row + (it.xinfa ? _xinfaTileRow(model) : '');
         })()
@@ -525,7 +528,7 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
           + '</div>');
       }
       // MYSTIC は余白のある donut col へ同居 (donut OFF 時のみ col3 へ fallback)
-      const qishuBlock = (it.qishu && model.qishu.length)
+      const qishuBlock = (it.qishu && model.qishu.some(Boolean))
         ? '<div class="wwm-card-gsec-title">MYSTIC</div>' + _qishuRow(model, st.panel === 'light') : '';
       if (it.donut) {
         cols.push('<div class="wwm-card-gcol wwm-card-gcol-donut">'
@@ -698,68 +701,66 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
     return 'WWM-' + safeName + '-' + (model.score ?? 0) + '-' + model.fileStamp + '.png';
   }
 
-  // ── カード生成 modal ──────────────────────────────────────────────
-  async function _openCardModal() {
+  // ── カード生成 pane (飛簡 modal card タブへ mount — 2026-06-12 統合) ──
+  // share.js _buildCardPane が呼ぶ。 paneEl = .wwm-share-pane[data-pane="card"]、
+  // footerEl = #wwmShareFooter (modal shell / close 経路は share.js 持ち)
+  async function mountCardPane(paneEl, footerEl) {
     const T = window.T || {};
     const st = Object.assign(_loadSettings(), { bg: { url: '', w: 0, h: 0, x: 0, y: 0, scale: 1 } });
     // mobile = share sheet で完結。 PC は canShare=true でも share sheet が X に繋がらないため常に intent 経路
     const _isMobileUA = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)
       || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform)); // iPadOS desktop 擬装
 
-    const m = document.createElement('div');
-    m.className = 'wwm-modal-backdrop';
-    m.innerHTML =
-      '<div class="wwm-modal wwm-card-modal">'
-      + '<div class="wwm-modal-header"><h2>' + _esc(T.cardModalTitle ?? 'キャラクターカード生成')
-      // EN は title 自体が英語 = sub 重複するため非表示
-      +   ((window.currentLang || 'ja') === 'en' ? '' : '<span class="wwm-card-modal-sub">CHARACTER CARD</span>') + '</h2>'
-      +   '<button class="wwm-modal-close" aria-label="' + _esc(T.close ?? '閉じる') + '">×</button></div>'
-      + '<div class="wwm-modal-body wwm-card-modal-body">'
+    // 旧 .wwm-card-modal-body class は 2カラム grid CSS の家 → wrapper div として残す。
+    // layout-b (2026-06-13 兄貴画像準拠): 左 = stage + 下段 [テンプレ | 背景] / 右 = 表示項目 + プレイ情報
+    paneEl.innerHTML =
+      '<div class="wwm-card-modal-body wwm-card-layout-b">'
       +   '<div class="wwm-card-left">'
       +     '<div class="wwm-card-stage" id="wwmCardStage"><div class="wwm-card-scalebox" id="wwmCardScale">'
       +       '<div class="wwm-card wwm-card-loading-ph"><div class="wwm-card-bg wwm-card-cloth"></div></div>'
       +     '</div></div>'
-      +     '<p class="wwm-card-stage-hint">' + _esc(T.cardBgHint ?? 'ドロップ / 貼り付け (Ctrl+V) / ドラッグで位置調整') + '</p>'
-      // 𝕏 Ctrl+V ガイドは preview 下に常設 (PC のみ — mobile は share sheet で完結)
-      +     (_isMobileUA ? '' : '<p class="wwm-card-stage-hint wwm-card-post-hint">'
-      +       _esc(T.cardPostHint ?? '𝕏 にポスト: ポスト画面が開いたら画像を Ctrl+V で貼り付け（自動コピーされます）') + '</p>')
+      +     '<div class="wwm-card-under">'
+      +       '<div class="wwm-card-ctl-section" role="radiogroup" aria-label="' + _esc(T.cardTplSection ?? 'テンプレート') + '">'
+      +         '<div class="wwm-card-ctl-title">' + _esc(T.cardTplSection ?? 'テンプレート') + '</div>'
+      +         '<div class="wwm-card-tpl-row">'
+      +           '<button class="wwm-card-tpl-btn" data-tpl="bukaku" role="radio"><b>武格</b><i>'
+      +             _esc(T.cardTplBukaku ?? 'スコア大判') + '</i></button>'
+      +           '<button class="wwm-card-tpl-btn" data-tpl="gungi" role="radio"><b>軍議</b><i>'
+      +             _esc(T.cardTplGungi ?? 'データ詳細') + '</i></button>'
+      +         '</div>'
+      +         '<div class="wwm-card-align-row" id="wwmCardAlignRow" role="radiogroup" aria-label="'
+      +           _esc(T.cardAlignLabel ?? '情報の位置') + '">'
+      +           '<span>' + _esc(T.cardAlignLabel ?? '情報の位置') + '</span>'
+      +           '<button class="wwm-card-ctl-btn wwm-card-align-btn" data-align="left" role="radio">'
+      +             _esc(T.cardAlignLeft ?? '左') + '</button>'
+      +           '<button class="wwm-card-ctl-btn wwm-card-align-btn" data-align="right" role="radio">'
+      +             _esc(T.cardAlignRight ?? '右') + '</button>'
+      +         '</div>'
+      +         '<div class="wwm-card-align-row" role="radiogroup" aria-label="' + _esc(T.cardPanelLabel ?? 'パネル') + '">'
+      +           '<span>' + _esc(T.cardPanelLabel ?? 'パネル') + '</span>'
+      +           '<button class="wwm-card-ctl-btn wwm-card-panel-btn" data-panel="dark" role="radio">'
+      +             _esc(T.cardPanelDark ?? '墨') + '</button>'
+      +           '<button class="wwm-card-ctl-btn wwm-card-panel-btn" data-panel="light" role="radio">'
+      +             _esc(T.cardPanelLight ?? '紙') + '</button>'
+      +         '</div>'
+      +       '</div>'
+      +       '<div class="wwm-card-ctl-section">'
+      +         '<div class="wwm-card-bg-head">'
+      +           '<div class="wwm-card-ctl-title">' + _esc(T.cardBgSection ?? '背景') + '</div>'
+      +           '<p class="wwm-card-stage-hint">' + _esc(T.cardBgHint ?? 'スクショをドロップ / 貼り付け (Ctrl+V)。ドラッグで位置調整、ホイール/スライダーで拡大') + '</p>'
+      +         '</div>'
+      +         '<div class="wwm-card-bg-row">'
+      +           '<button class="wwm-card-ctl-btn" id="wwmCardBgPick">' + _esc(T.cardBgPick ?? '画像を選ぶ') + '</button>'
+      +           '<button class="wwm-card-ctl-btn" id="wwmCardBgClear" disabled>' + _esc(T.cardBgClear ?? 'クリア') + '</button>'
+      +           '<input type="file" id="wwmCardBgFile" accept="image/*" hidden>'
+      +         '</div>'
+      +         '<label class="wwm-card-zoom-row"><span>' + _esc(T.cardBgZoom ?? 'ズーム') + '</span>'
+      +           '<input type="range" id="wwmCardBgZoom" min="1" max="3" step="0.05" value="1" disabled '
+      +             'aria-label="' + _esc(T.cardBgZoom ?? 'ズーム') + '"></label>'
+      +       '</div>'
+      +     '</div>'
       +   '</div>'
       +   '<div class="wwm-card-controls">'
-      +     '<div class="wwm-card-ctl-section" role="radiogroup" aria-label="' + _esc(T.cardTplSection ?? 'テンプレート') + '">'
-      +       '<div class="wwm-card-ctl-title">' + _esc(T.cardTplSection ?? 'テンプレート') + '</div>'
-      +       '<div class="wwm-card-tpl-row">'
-      +         '<button class="wwm-card-tpl-btn" data-tpl="bukaku" role="radio"><b>武格</b><i>'
-      +           _esc(T.cardTplBukaku ?? 'スコア大判') + '</i></button>'
-      +         '<button class="wwm-card-tpl-btn" data-tpl="gungi" role="radio"><b>軍議</b><i>'
-      +           _esc(T.cardTplGungi ?? 'データ詳細') + '</i></button>'
-      +       '</div>'
-      +       '<div class="wwm-card-align-row" id="wwmCardAlignRow" role="radiogroup" aria-label="'
-      +         _esc(T.cardAlignLabel ?? '情報の位置') + '">'
-      +         '<span>' + _esc(T.cardAlignLabel ?? '情報の位置') + '</span>'
-      +         '<button class="wwm-card-ctl-btn wwm-card-align-btn" data-align="left" role="radio">'
-      +           _esc(T.cardAlignLeft ?? '左') + '</button>'
-      +         '<button class="wwm-card-ctl-btn wwm-card-align-btn" data-align="right" role="radio">'
-      +           _esc(T.cardAlignRight ?? '右') + '</button>'
-      +       '</div>'
-      +       '<div class="wwm-card-align-row" role="radiogroup" aria-label="' + _esc(T.cardPanelLabel ?? 'パネル') + '">'
-      +         '<span>' + _esc(T.cardPanelLabel ?? 'パネル') + '</span>'
-      +         '<button class="wwm-card-ctl-btn wwm-card-panel-btn" data-panel="dark" role="radio">'
-      +           _esc(T.cardPanelDark ?? '墨') + '</button>'
-      +         '<button class="wwm-card-ctl-btn wwm-card-panel-btn" data-panel="light" role="radio">'
-      +           _esc(T.cardPanelLight ?? '紙') + '</button>'
-      +       '</div>'
-      +     '</div>'
-      +     '<div class="wwm-card-ctl-section">'
-      +       '<div class="wwm-card-ctl-title">' + _esc(T.cardBgSection ?? '背景') + '</div>'
-      +       '<div class="wwm-card-bg-row">'
-      +         '<button class="wwm-card-ctl-btn" id="wwmCardBgPick">' + _esc(T.cardBgPick ?? '画像を選ぶ') + '</button>'
-      +         '<button class="wwm-card-ctl-btn" id="wwmCardBgClear" disabled>' + _esc(T.cardBgClear ?? 'クリア') + '</button>'
-      +         '<input type="file" id="wwmCardBgFile" accept="image/*" hidden>'
-      +       '</div>'
-      +       '<label class="wwm-card-zoom-row"><span>' + _esc(T.cardBgZoom ?? 'ズーム') + '</span>'
-      +         '<input type="range" id="wwmCardBgZoom" min="1" max="3" step="0.05" value="1" disabled '
-      +           'aria-label="' + _esc(T.cardBgZoom ?? 'ズーム') + '"></label>'
-      +     '</div>'
       +     '<div class="wwm-card-ctl-section">'
       +       '<div class="wwm-card-ctl-title">' + _esc(T.cardItemsSection ?? '表示項目') + '</div>'
       +       '<div class="wwm-card-toggles">'
@@ -782,34 +783,38 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
       +         _PLAY_STYLE_KEYS.map(k => _playChipBtn('style', k, T['cardStyle_' + k] ?? k, st)).join('')
       +       '</div>'
       +     '</div>'
-      +     '<div class="wwm-card-actions">'
-      +       '<button class="wwm-card-generate" id="wwmCardGenerate" disabled>'
-      +         _esc(T.cardSave ?? '画像を保存') + '</button>'
-      +       '<button class="wwm-card-post-x" id="wwmCardPostX" disabled>'
-      +         _esc(T.cardPostX ?? '𝕏 にポスト') + '</button>'
-      +     '</div>'
+      // 𝕏 Ctrl+V ガイド (PC のみ — mobile は share sheet で完結)
+      +     (_isMobileUA ? '' : '<p class="wwm-card-stage-hint wwm-card-post-hint">'
+      +       _esc(T.cardPostHint ?? '𝕏 にポスト: ポスト画面が開いたら画像を Ctrl+V で貼り付け（自動コピーされます）') + '</p>')
       +   '</div>'
-      + '</div></div>';
-    document.body.appendChild(m);
+      + '</div>';
+    // アクション 2 btn = footer へ (#wwmShareMsg 常設と共存 → innerHTML 上書き禁止)。
+    // タブ往復で _buildCardPane 再走しても二重注入しないよう既存分を先に除去
+    const oldActions = footerEl.querySelector('.wwm-card-actions');
+    if (oldActions) oldActions.remove();
+    footerEl.insertAdjacentHTML('beforeend',
+      '<div class="wwm-card-actions">'
+      + '<button class="wwm-card-generate" id="wwmCardGenerate" disabled>'
+      +   _esc(T.cardSave ?? '画像を保存') + '</button>'
+      + '<button class="wwm-card-post-x" id="wwmCardPostX" disabled>'
+      +   _esc(T.cardPostX ?? '𝕏 にポスト') + '</button>'
+      + '</div>');
 
-    const stage = m.querySelector('#wwmCardStage');
-    const scaleBox = m.querySelector('#wwmCardScale');
-    const genBtn = m.querySelector('#wwmCardGenerate');
-    const zoomEl = m.querySelector('#wwmCardBgZoom');
-    const clearBtn = m.querySelector('#wwmCardBgClear');
-    const fileEl = m.querySelector('#wwmCardBgFile');
+    const stage = paneEl.querySelector('#wwmCardStage');
+    const scaleBox = paneEl.querySelector('#wwmCardScale');
+    const genBtn = footerEl.querySelector('#wwmCardGenerate');
+    const zoomEl = paneEl.querySelector('#wwmCardBgZoom');
+    const clearBtn = paneEl.querySelector('#wwmCardBgClear');
+    const fileEl = paneEl.querySelector('#wwmCardBgFile');
 
-    // ── close 経路 (×, backdrop, Esc は modal-helpers が backdrop remove) ──
+    // ── cleanup 経路 (modal close は飛簡 shell = share.js 持ち) ──
     const onPaste = (e) => {
       const item = [...(e.clipboardData?.items || [])].find(i => i.type.startsWith('image/'));
       if (item) { e.preventDefault(); _readBgBlob(item.getAsFile(), st, onBgChanged); }
     };
     const cleanup = () => window.removeEventListener('paste', onPaste);
-    const close = () => { cleanup(); m.remove(); };
-    m.querySelector('.wwm-modal-close').addEventListener('click', close);
-    m.addEventListener('click', e => { if (e.target === m) close(); });
-    // Esc 経路 (modal-helpers 全 backdrop 共通) は DOM remove のみ → paste listener を MutationObserver 任せにせず保険 cleanup
-    const mo = new MutationObserver(() => { if (!document.body.contains(m)) { cleanup(); mo.disconnect(); } });
+    // 飛簡 modal close (×/backdrop/Esc) = backdrop remove → paneEl も DOM から消える = MutationObserver で paste 解除
+    const mo = new MutationObserver(() => { if (!document.body.contains(paneEl)) { cleanup(); mo.disconnect(); } });
     mo.observe(document.body, { childList: true });
     window.addEventListener('paste', onPaste);
 
@@ -824,12 +829,12 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
 
     // ── model 構築 (icon dataURL 化込み) → 初回 render ──
     const model = await _buildCardModel();
-    if (!document.body.contains(m)) return; // 構築中に閉じられた
-    if (!model) { close(); return; }
+    if (!document.body.contains(paneEl)) return; // 構築中に閉じられた
+    if (!model) { cleanup(); mo.disconnect(); return; } // roleInfo 無し (share.js 側 guard 済 = 実質不達)
 
     // bookmarklet 旧版検出 (_bmVer 刻印 < 現行) → 再登録案内 notice
     if ((WWMState.roleInfo?._bmVer || 0) < (window.WWM_BM_VERSION || 1)) {
-      const ctl = m.querySelector('.wwm-card-controls');
+      const ctl = paneEl.querySelector('.wwm-card-controls');
       const n = document.createElement('p');
       n.className = 'wwm-bm-notice';
       n.textContent = T.bmOutdatedNotice
@@ -845,33 +850,33 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
       stage.classList.toggle('has-bg', !!st.bg.url);
     };
     const syncCtl = () => {
-      m.querySelectorAll('.wwm-card-tpl-btn').forEach(b => {
+      paneEl.querySelectorAll('.wwm-card-tpl-btn').forEach(b => {
         const on = b.dataset.tpl === st.tpl;
         b.classList.toggle('active', on);
         b.setAttribute('aria-checked', on ? 'true' : 'false');
       });
       // 情報位置 (align) は 武格のみ
-      const alignRow = m.querySelector('#wwmCardAlignRow');
+      const alignRow = paneEl.querySelector('#wwmCardAlignRow');
       if (alignRow) alignRow.hidden = st.tpl !== 'bukaku';
-      m.querySelectorAll('.wwm-card-align-btn').forEach(b => {
+      paneEl.querySelectorAll('.wwm-card-align-btn').forEach(b => {
         const on = b.dataset.align === st.align;
         b.classList.toggle('active', on);
         b.setAttribute('aria-checked', on ? 'true' : 'false');
       });
-      m.querySelectorAll('.wwm-card-panel-btn').forEach(b => {
+      paneEl.querySelectorAll('.wwm-card-panel-btn').forEach(b => {
         const on = b.dataset.panel === st.panel;
         b.classList.toggle('active', on);
         b.setAttribute('aria-checked', on ? 'true' : 'false');
       });
       // 武格 = 基礎値/主要ステ 非掲載、 奇術 = data 無し (旧 import) なら disable
-      m.querySelectorAll('.wwm-card-toggle input').forEach(inp => {
+      paneEl.querySelectorAll('.wwm-card-toggle input').forEach(inp => {
         const k = inp.dataset.item;
         const na = (st.tpl === 'bukaku' && (k === 'stats' || k === 'primary'))
-          || (k === 'qishu' && !model.qishu.length);
+          || (k === 'qishu' && !model.qishu.some(Boolean));
         inp.disabled = na;
         inp.closest('.wwm-card-toggle').classList.toggle('na', na);
       });
-      m.querySelectorAll('.wwm-card-play-chip').forEach(b => {
+      paneEl.querySelectorAll('.wwm-card-play-chip').forEach(b => {
         const on = (st.play[b.dataset.group] || []).includes(b.dataset.key);
         b.classList.toggle('active', on);
         b.setAttribute('aria-pressed', on ? 'true' : 'false');
@@ -884,27 +889,27 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
     const onBgChanged = () => { syncCtl(); render(); };
     render(); syncCtl();
     genBtn.disabled = false;
-    m.querySelector('#wwmCardPostX').disabled = false;
+    footerEl.querySelector('#wwmCardPostX').disabled = false;
 
     // ── controls ──
-    m.querySelectorAll('.wwm-card-tpl-btn').forEach(b => {
+    paneEl.querySelectorAll('.wwm-card-tpl-btn').forEach(b => {
       b.addEventListener('click', () => {
         st.tpl = b.dataset.tpl; _saveSettings(st); syncCtl(); render();
       });
     });
-    m.querySelectorAll('.wwm-card-align-btn').forEach(b => {
+    paneEl.querySelectorAll('.wwm-card-align-btn').forEach(b => {
       b.addEventListener('click', () => {
         st.align = b.dataset.align === 'right' ? 'right' : 'left';
         _saveSettings(st); syncCtl(); render();
       });
     });
-    m.querySelectorAll('.wwm-card-panel-btn').forEach(b => {
+    paneEl.querySelectorAll('.wwm-card-panel-btn').forEach(b => {
       b.addEventListener('click', () => {
         st.panel = b.dataset.panel === 'light' ? 'light' : 'dark';
         _saveSettings(st); syncCtl(); render();
       });
     });
-    m.querySelectorAll('.wwm-card-play-chip').forEach(b => {
+    paneEl.querySelectorAll('.wwm-card-play-chip').forEach(b => {
       b.addEventListener('click', () => {
         const arr = st.play[b.dataset.group] || (st.play[b.dataset.group] = []);
         const i = arr.indexOf(b.dataset.key);
@@ -912,13 +917,13 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
         _saveSettings(st); syncCtl(); render();
       });
     });
-    m.querySelectorAll('.wwm-card-toggle input').forEach(inp => {
+    paneEl.querySelectorAll('.wwm-card-toggle input').forEach(inp => {
       inp.checked = !!st.items[inp.dataset.item];
       inp.addEventListener('change', () => {
         st.items[inp.dataset.item] = inp.checked; _saveSettings(st); render();
       });
     });
-    m.querySelector('#wwmCardBgPick').addEventListener('click', () => fileEl.click());
+    paneEl.querySelector('#wwmCardBgPick').addEventListener('click', () => fileEl.click());
     fileEl.addEventListener('change', () => {
       if (fileEl.files?.[0]) _readBgBlob(fileEl.files[0], st, onBgChanged);
       fileEl.value = '';
@@ -970,7 +975,7 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
     }, { passive: false });
 
     // ── 保存 / 𝕏 ポスト — 両 btn とも押下で生成から実行 (DL 不要でポスト可) ──
-    const postBtn = m.querySelector('#wwmCardPostX');
+    const postBtn = footerEl.querySelector('#wwmCardPostX');
 
     // 画像を保存 = 生成 → PNG DL
     genBtn.addEventListener('click', () => _withCanvas(model, st, genBtn, async (canvas) => {
@@ -1015,7 +1020,11 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
       + '" data-key="' + key + '" aria-pressed="' + (on ? 'true' : 'false') + '">' + _esc(label) + '</button>';
   }
 
-  // ── entry (EXPORT btn onclick) ────────────────────────────────────
+  // ── expose (飛簡 share.js _buildCardPane が mount) ────────────────
+  window.WWMExportCard = { mountCardPane };
+
+  // ── entry (旧 EXPORT 経路の互換 wrapper — 飛簡 card タブを開く) ────
+  // roleInfo / Tier pending guard は share.js _shareBuildUrl 側が持つ
   window.exportImage = function exportImage() {
     const T = window.T || {};
     // SHARE Build mode 中は EXPORT 抑止 (他人ビルドの画像拡散回避)
@@ -1023,18 +1032,7 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
       showToast(T.sharedBuildExportBlocked ?? '閲覧モード中: EXPORT は無効化されています', { error: true });
       return;
     }
-    if (!WWMState.roleInfo) {
-      showToast(T.importPrompt ?? '上部「IMPORT」ボタンからデータを取り込んでください', { error: true });
-      return;
-    }
-    // Tier 判定前 (opt best 未確定) は EXPORT 抑止 — Tier 空欄カード防止。
-    // import 中は gate modal が全クリック抑止するが、 reload 時 scoreVer 不一致の再確定 window
-    // + watchdog 強制解除後 の抜け道をこの保険 guard が塞ぐ
-    if (!WWMState.opt.best?.end) {
-      showToast(T.tierPendingBlocked ?? 'Tier 判定中です。完了までお待ちください', { error: true });
-      return;
-    }
-    if (document.querySelector('.wwm-card-modal')) return; // 二重起動 guard
-    _openCardModal();
+    // 飛簡 modal の card タブを開く (統合 2026-06-12)
+    if (window.WWMSidebar?.share?.shareUrl) WWMSidebar.share.shareUrl({ tab: 'card' });
   };
 })();

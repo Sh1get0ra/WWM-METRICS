@@ -16,12 +16,72 @@
   display: flex; align-items: center; justify-content: center;
   z-index: var(--z-toast);
   padding: var(--space-4);
+  /* 巻物展開 open アニメ (2026-06-21 兄貴指示「modal 開閉アニメ = 巻物」) — backdrop fade + modal 内 clip-path/scale */
+  animation: wwmModalBackdropIn 0.22s var(--ease-out-quart, ease-out) both;
+}
+.wwm-modal-backdrop.is-closing {
+  animation: wwmModalBackdropOut 0.4s var(--ease-out-quart, ease-out) both;
+  pointer-events: none;
+}
+@keyframes wwmModalBackdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes wwmModalBackdropOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+.wwm-modal-backdrop > .wwm-modal,
+.wwm-modal-backdrop > .wwm-cmp-modal-a,
+.wwm-modal-backdrop > .wwm-tool-modal {
+  animation: wwmModalScrollOpen 0.32s var(--ease-out-quart, ease-out) both;
+}
+.wwm-modal-backdrop.is-closing > .wwm-modal,
+.wwm-modal-backdrop.is-closing > .wwm-cmp-modal-a,
+.wwm-modal-backdrop.is-closing > .wwm-tool-modal {
+  animation: wwmModalScrollClose 0.4s var(--ease-out-quart, ease-out) both;
+}
+@keyframes wwmModalScrollOpen {
+  from {
+    clip-path: inset(50% 0 50% 0);
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes wwmModalScrollClose {
+  from {
+    clip-path: inset(0 0 0 0);
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    clip-path: inset(50% 0 50% 0);
+    transform: scale(0.94);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wwm-modal-backdrop,
+  .wwm-modal-backdrop > .wwm-modal,
+  .wwm-modal-backdrop > .wwm-cmp-modal-a,
+  .wwm-modal-backdrop > .wwm-tool-modal,
+  .wwm-modal-backdrop.is-closing,
+  .wwm-modal-backdrop.is-closing > .wwm-modal,
+  .wwm-modal-backdrop.is-closing > .wwm-cmp-modal-a,
+  .wwm-modal-backdrop.is-closing > .wwm-tool-modal {
+    animation: none;
+  }
 }
 .wwm-modal {
   position: relative;
   background:
-    radial-gradient(ellipse at top right, var(--gold-bright-faint), transparent 55%),
-    linear-gradient(180deg, var(--surf-1), var(--surf-2));
+    radial-gradient(ellipse at top right, color-mix(in oklab, var(--gold-bright) 8%, transparent), transparent 55%),
+    linear-gradient(180deg, var(--bg-overlay-top), var(--bg-overlay-bottom));
   color: var(--c-modal-fg);
   border-radius: 0 0 2px 2px;
   max-width: 600px; width: 100%;
@@ -31,8 +91,8 @@
   border-top: 1px solid var(--gold-deep);
   border-left: 3px solid var(--gold);
   box-shadow:
-    inset 0 1px 0 var(--gold-bright-faint),
-    0 12px 40px var(--overlay-heavy);
+    inset 0 1px 0 color-mix(in oklab, var(--gold-bright) 8%, transparent),
+    0 12px 40px var(--shadow-heavy);
 }
 /* lang picker (app.js _showLangPicker — 旧 inline style から class 化 2026-06-05) */
 .wwm-modal.wwm-lang-picker {
@@ -42,7 +102,7 @@
 }
 .wwm-lang-picker h2 {
   margin: 0 0 18px;
-  font-family: Cinzel, serif;
+  font-family: var(--f-latin);
   font-size: 18px;
   letter-spacing: 0.18em;
   color: var(--gold-bright);
@@ -88,16 +148,16 @@
   left: 16px; bottom: -1px;
   width: 48px; height: 1px;
   background: linear-gradient(90deg, var(--gold-bright), transparent);
-  box-shadow: 0 0 8px var(--gold-bright-mid);
+  box-shadow: 0 0 8px color-mix(in oklab, var(--gold-bright) 50%, transparent);
 }
 .wwm-modal-header h2 {
   margin: 0;
-  font-family: var(--f-display, var(--f-latin));
+  font-family: var(--f-display-title);
   font-size: var(--text-15); font-weight: var(--fw-bold);
   color: var(--gold-bright);
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  text-shadow: 0 0 10px var(--gold-bright-soft);
+  text-shadow: 0 0 10px color-mix(in oklab, var(--gold-bright) 25%, transparent);
 }
 .wwm-modal-close {
   background: none; border: none;
@@ -106,10 +166,15 @@
   display: flex; align-items: center; justify-content: center;
   border-radius: 4px;
 }
-.wwm-modal-close:hover { background: var(--hover-soft); }
+.wwm-modal-close:hover { background: var(--shine-soft); }
 .wwm-modal-body {
   padding: var(--space-4); overflow-y: auto; flex: 1;
+  /* ツール標準 = 金 thin scrollbar (sidebar.css / workspace.css と統一、 2026-06-22 兄貴指示) */
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-deep) transparent;
 }
+.wwm-modal-body::-webkit-scrollbar { width: 6px; }
+.wwm-modal-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
 .wwm-btn-row { display: flex; gap: var(--space-2); flex-wrap: wrap; }
 .wwm-btn-primary, .wwm-btn-secondary {
   padding: 10px 18px;
@@ -124,18 +189,18 @@
 }
 .wwm-btn-primary:hover { opacity: 0.85; }
 .wwm-btn-secondary {
-  background: var(--c-btn-secondary-bg);
+  background: transparent;
   color: var(--c-btn-secondary-fg);
   border: 1px solid rgba(255,255,255,0.3);
   border-color: var(--c-btn-secondary-border);
 }
-.wwm-btn-secondary:hover { background: var(--c-btn-secondary-hover-bg); }
+.wwm-btn-secondary:hover { background: var(--shine-soft); }
 .wwm-list { margin: 0; padding-left: 18px; }
 .wwm-list li { margin: var(--space-half) 0; }
 .wwm-muted { opacity: 0.6; font-size: var(--text-12); }
 .wwm-last-import {
   margin-top: var(--space-4); padding: var(--space-2-5);
-  background: var(--c-last-import-bg);
+  background: var(--shade-mid);
   border-radius: 6px;
   border-left: 3px solid var(--accent);
 }
@@ -165,6 +230,48 @@
 .wwm-stat-val { font-weight: var(--fw-bold); white-space: nowrap; text-align: right; flex-shrink: 0; }
 .wwm-stat-pct { font-weight: var(--fw-normal); opacity: 0.65; font-size: var(--text-xs); }
 
+/* ── インポートプレビュー row 視認性 up (2026-06-18 兄貴指示 TODO 2):
+   既存 gear.css slot box (5列 grid + 紙地グラデ + 朱左 border) keep、 dim 廃止 + 値強調 + row dashed 区切りのみ追加 ── */
+.wwm-preview-summary .wwm-equip-slot-header .wwm-muted {
+  opacity: 1;
+  color: var(--text-sumi-gold, currentColor);
+  font-size: var(--text-sm);
+}
+.wwm-preview-summary .wwm-equip-base ul li,
+.wwm-preview-summary .wwm-equip-affix ul li {
+  padding: 3px 0;
+  border-bottom: 1px dashed color-mix(in oklab, var(--gold) 28%, transparent);
+}
+.wwm-preview-summary .wwm-equip-base ul li:last-child,
+.wwm-preview-summary .wwm-equip-affix ul li:last-child {
+  border-bottom: none;
+}
+.wwm-preview-summary .wwm-stat-val {
+  color: var(--kami-fg);
+  font-weight: var(--fw-bold);
+}
+.wwm-preview-summary .wwm-stat-pct {
+  opacity: 1;
+  color: var(--text-sumi-gold, currentColor);
+}
+/* 基本/副ステ ラベル削除 (2026-06-18 兄貴指示) → 代わりに区切り罫線 */
+.wwm-preview-summary .wwm-equip-affix {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid color-mix(in oklab, var(--gold) 32%, transparent);
+}
+/* preview 内 info ラベル (UID/キャラ名/主副武術/総合武力) dim 廃止 + gold 化 */
+.wwm-preview-summary + * .wwm-info-label,
+.wwm-preview-summary .wwm-info-label,
+#wwmCardBody .wwm-info-label {
+  opacity: 1;
+  color: var(--text-sumi-gold, currentColor);
+}
+/* 総合武力 = col3 を 2 行目 (主武術/副武術 と同行) に下寄せ */
+.wwm-preview-summary .wwm-info-col-end {
+  align-self: end;
+}
+
 /* ╔═══════════════════════════════════════════════════════════════════╗
      SECTION 13 — SETUP MODAL WIZARD
    ╚═══════════════════════════════════════════════════════════════════╝ */
@@ -173,20 +280,20 @@
 .wwm-setup-collapse {
   margin: var(--space-3) 0;
   border: 1px solid var(--ink-2); border-radius: 4px;
-  background: var(--surf-shade);
+  background: var(--shade-mid);
 }
 .wwm-setup-collapse > summary {
   padding: var(--space-2-5) var(--space-3-5); cursor: pointer; user-select: none;
-  font-weight: var(--fw-semibold); font-size: var(--text-md); color: var(--paper-dim);
+  font-weight: var(--fw-semibold); font-size: var(--text-md); color: var(--kami-fg);
   list-style: none; outline: none;
   display: flex; align-items: center; gap: var(--space-2);
 }
 .wwm-setup-collapse > summary::-webkit-details-marker { display: none; }
 .wwm-setup-collapse > summary::before {
-  content: '▶'; font-size: var(--text-xs); transition: transform 0.15s; color: var(--gold-bright);
+  content: '▶'; font-size: var(--text-xs); transition: transform 0.15s; color: var(--gold-paper);
 }
 .wwm-setup-collapse[open] > summary::before { transform: rotate(90deg); }
-.wwm-setup-collapse > summary:hover { color: var(--gold-bright); }
+.wwm-setup-collapse > summary:hover { color: var(--gold-paper); }
 .wwm-setup-collapse-body { padding: var(--space-3) var(--space-3-5) var(--space-3-5); border-top: 1px solid var(--ink-2); }
 .wwm-setup-tabs { display: flex; gap: var(--space-1); border-bottom: 2px solid var(--accent); margin-bottom: var(--space-3); }
 .wwm-setup-tab { padding: var(--space-2) var(--space-4); background: none; border: none; color: inherit; font-size: var(--text-md); cursor: pointer; border-radius: 4px 4px 0 0; }
@@ -203,7 +310,7 @@
 .wwm-bm-link:active { cursor: grabbing; }
 .wwm-bm-code {
   width: 100%; min-height: 80px; max-height: 120px;
-  font-family: monospace; font-size: var(--text-xs);
+  font-family: var(--f-latin); font-size: var(--text-xs);
   background: #0a0a0a; color: #0f0;
   border: 1px solid #333; border-radius: 4px;
   padding: var(--space-1-5); word-break: break-all; resize: vertical;
@@ -234,7 +341,7 @@
   font-size: var(--text-12); margin: 0 0 var(--space-1);
   color: var(--c-sb-section-title-fg);
   padding: var(--space-half) var(--space-1-5);
-  background: var(--c-sb-section-title-bg);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
   border-radius: 3px;
   border-left: var(--c-sb-section-title-border-left);
   padding-left: var(--c-sb-section-title-pad-left);
@@ -247,15 +354,15 @@
   padding: var(--space-half) var(--space-1-5); align-items: baseline;
 }
 .wwm-sb-row.wwm-sb-sub { padding-left: 18px; opacity: 0.85; font-size: var(--text-sm); }
-.wwm-sb-label { opacity: var(--c-sb-label-opacity); white-space: nowrap; flex-shrink: 0; font-weight: var(--c-sb-label-fw); }
-.wwm-sb-value { font-weight: var(--fw-semibold); text-align: right; min-width: 0; }
+.wwm-sb-label { opacity: var(--c-sb-label-opacity); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex-shrink: 1; font-weight: var(--c-sb-label-fw); }
+.wwm-sb-value { font-weight: var(--fw-semibold); text-align: right; min-width: 0; white-space: nowrap; flex-shrink: 0; }
 .wwm-sb-warn {
   display: inline-block;
-  color: var(--vermilion-bright);
+  color: var(--vermilion);
   font-size: var(--text-sm);
   margin-left: var(--space-half);
   cursor: help;
-  text-shadow: 0 0 6px var(--vermilion-strong);
+  text-shadow: 0 0 6px color-mix(in oklab, var(--vermilion) 55%, transparent);
 }
 .wwm-sb-expandable { cursor: pointer; }
 .wwm-sb-sub-group.wwm-sb-collapsed { display: none; }
@@ -264,9 +371,9 @@
 /* hiddenStat: ゲーム実機で見えない内部値 (例 critRateBoosted = ボーナス会心率込みの実効会心率) → スレート青で区別 */
 .wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-label,
 .wwm-sb-row.wwm-sb-hidden-stat .wwm-sb-value { color: var(--c-fg-hidden-stat); }
-.wwm-sb-baseline { color: var(--paper-mute); opacity: 0.7; font-weight: var(--fw-medium); }
+.wwm-sb-baseline { color: var(--sumi-fg-dim); font-weight: var(--fw-medium); /* 旧値表記、 墨背景上で sumi-fg-dim 維持 */ }
 .wwm-sb-arrow {
-  color: var(--gold); margin: 0 3px; opacity: 0.7;
+  color: var(--gold-paper); margin: 0 3px; opacity: 0.7;
   font-size: var(--text-xs);
   display: inline-block;
   transform: translateY(-1px);
@@ -304,16 +411,22 @@
   width: 28px; height: 28px;
   background: var(--vermilion);
   color: #fff;
-  font-family: var(--f-display, 'Noto Serif JP'); font-weight: 900; font-size: var(--text-lg);
-  border: 2px solid var(--hover-strong);
+  font-family: var(--f-display-title); font-weight: 900; font-size: var(--text-lg);
+  border: 2px solid var(--shine-strong);
   border-radius: 2px;
   transform: rotate(-6deg);
   margin-left: var(--space-2);
   vertical-align: middle;
-  box-shadow: 0 0 8px var(--vermilion-bright-glow);
+  box-shadow: 0 0 8px color-mix(in oklab, var(--vermilion-bright) 60%, transparent);
 }
 .wwm-cmp-modal-a {
-  background: var(--bg-raised);
+  /* 2026-06-19 兄貴指示: ツール modal と同じ水墨層を対照 modal にも展開。
+     header = 透明 / footer = 独自水墨下半 で 2 枚絵構成 (modal 本体 = 水墨上半) */
+  background:
+    linear-gradient(rgba(47, 42, 35, 0.72), rgba(47, 42, 35, 0.72)),
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
+    var(--sumi-3);
+  background-blend-mode: normal, screen, normal;
   border: 1px solid var(--gold-deep);
   border-radius: 0;
 }
@@ -322,35 +435,39 @@
 .wwm-cmp-modal-a::after { display: none; }
 .wwm-cmp-modal-a .wwm-modal-header {
   position: relative;
-  background: var(--c-cmp-modal-a--modal-header-bg);
+  /* mountain image 個別 lay (山頂 center top) + #00000094 overlay 重ね (2026-06-20 兄貴指摘で構造対称化)。 PC + mobile 共通 */
+  background:
+    var(--bg-modal-overlay),
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
+    var(--sumi-3);
 }
 .wwm-cmp-modal-a .wwm-modal-header::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; width: auto; height: 2px;
   background: linear-gradient(90deg, transparent 0%, transparent 28%, rgba(232,81,58,0.75) 50%, transparent 72%, transparent 100%);
   opacity: 1; pointer-events: none;
 }
-.wwm-cmp-modal-a .wwm-cmp-set-header { text-shadow: 0 0 6px var(--gold-bright-mid-2); }
+.wwm-cmp-modal-a .wwm-cmp-set-header { text-shadow: 0 0 6px color-mix(in oklab, var(--gold-bright) 40%, transparent); }
 .wwm-cmp-modal-a .wwm-cmp-preview {
-  border-top: 1px solid var(--gold-soft);
+  border-top: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
   padding-top: var(--space-3);
 }
 .wwm-cmp-modal-a .wwm-cmp-preview-value {
-  font-family: var(--f-latin, 'Cinzel');
+  font-family: var(--f-latin);
   font-size: var(--text-xl);
   font-weight: 900;
   letter-spacing: 0.04em;
 }
 .wwm-cmp-modal-a .wwm-cmp-preview-value.pos {
-  color: var(--jade-bright);
-  text-shadow: 0 0 14px var(--jade-bright-strong);
+  color: var(--vermilion);
+  text-shadow: 0 0 14px color-mix(in oklab, var(--jade-bright) 55%, transparent);
 }
 .wwm-cmp-modal-a .wwm-cmp-preview-value.neg {
-  color: var(--vermilion);
-  text-shadow: 0 0 14px var(--vermilion-bright-mid-2);
+  color: var(--kami-fg-dim);
+  text-shadow: 0 0 14px color-mix(in oklab, var(--vermilion-bright) 55%, transparent);
 }
 .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-primary,
 .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
-  font-family: var(--f-display, 'Noto Serif JP');
+  font-family: var(--f-display-title);
   font-weight: 900;
   letter-spacing: 0.16em;
 }
@@ -389,32 +506,32 @@
   padding: 0 var(--space-2);
   background: var(--vermilion);
   color: #fff;
-  font-family: var(--f-display, 'Noto Serif JP');
+  font-family: var(--f-display-title);
   font-weight: 900; font-size: var(--text-md);
   letter-spacing: 0.12em;
-  border: 2px solid var(--hover-strong);
+  border: 2px solid var(--shine-strong);
   border-radius: 2px;
   transform: rotate(-4deg);
-  box-shadow: 0 0 8px var(--vermilion-bright-glow);
+  box-shadow: 0 0 8px color-mix(in oklab, var(--vermilion-bright) 60%, transparent);
 }
 .wwm-cmp-modal-a .wwm-cmp-new .wwm-cmp-title::before {
-  background: var(--jade);
-  color: #1a3a24;
-  box-shadow: 0 0 8px rgba(168,212,180,0.6);
+  background: #d4af37; /* 2026-06-17: jade → 金 (朱vs金 古典対照、 [[jade-donut-only]] 政策準拠) */
+  color: #1a1208;
+  box-shadow: 0 0 8px rgba(212,175,55,0.6);
 }
 /* 本来 title内のテキスト「現有/新置」は朱印で表現するので隠す。 Lv/select は残す */
 .wwm-cmp-modal-a .wwm-cmp-title-text { display: none; }
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv,
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
   color: var(--c-modal-a-lv-fg);
-  font-family: var(--f-mono, 'Rajdhani');
+  font-family: var(--f-latin);
   font-size: var(--text-14);
   font-weight: 700;
   letter-spacing: 0.08em;
   border: 1px solid var(--gold-deep);
   padding: 0 var(--space-2-5);
   border-radius: 2px;
-  background: var(--c-modal-a-lv-bg);
+  background: var(--bg-modal-a-lv);
   line-height: 26px;
   height: 26px;
   display: inline-flex;
@@ -429,18 +546,18 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   padding-right: var(--space-6);
-  background-image: linear-gradient(45deg, transparent 50%, var(--paper) 50%), linear-gradient(135deg, var(--paper) 50%, transparent 50%);
+  background-image: linear-gradient(45deg, transparent 50%, var(--gold-deep) 50%), linear-gradient(135deg, var(--gold-deep) 50%, transparent 50%);
   background-position: calc(100% - 12px) 50%, calc(100% - 8px) 50%;
   background-size: 4px 4px, 4px 4px;
   background-repeat: no-repeat;
-  background-color: var(--bg-raised);
+  background-color: #1a1410;
   cursor: pointer;
 }
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select option {
   font-size: var(--text-14);
-  font-family: var(--f-mono, 'Rajdhani');
+  font-family: var(--f-latin);
   font-weight: 700;
-  background: var(--bg-raised);
+  background: #1a1410;
   color: var(--c-modal-a-fg);
 }
 .wwm-cmp-modal-a .wwm-cmp-title .wwm-cmp-lv-select {
@@ -454,13 +571,13 @@
 /* imp strip (Step 5-d 2026-06-06): h3 の可視部 = ::before seal (独自色) + .wwm-cmp-lv (独自色)、
    .wwm-cmp-title-text は display:none → この color は可視要素に届かない dead styling。
    imp は何も守っていなかった relic (light.css #1a8d52 が strip 後勝つが同様に不可視)。 VRT 58/58 で確認済 */
-.wwm-cmp-modal-a .wwm-cmp-new     .wwm-cmp-title { color: var(--jade-bright); }
+.wwm-cmp-modal-a .wwm-cmp-new     .wwm-cmp-title { color: var(--kami-fg); }
 .wwm-cmp-modal-a .wwm-cmp-kongfu-header {
-  font-family: var(--f-display, 'Noto Serif JP');
+  font-family: var(--f-display-title);
   font-weight: 700;
   font-size: var(--text-md);
   color: var(--c-modal-a-kongfu-header-fg);
-  background: var(--c-modal-a-kongfu-header-bg);
+  background: var(--bg-modal-a-kongfu-header);
   border: none;
   border-radius: 0;
   padding: var(--space-1-5) var(--space-2);
@@ -468,38 +585,40 @@
   margin-top: var(--space-1-5);
 }
 .wwm-cmp-modal-a .wwm-cmp-kongfu-select {
-  background: var(--c-modal-a-kongfu-select-bg);
+  background: var(--bg-modal-a-kongfu-select);
   border: 1px solid var(--gold-deep);
   border-radius: 0;
   color: var(--c-modal-a-kongfu-select-fg);
-  font-family: var(--f-display, 'Noto Serif JP');
+  font-family: var(--f-display-title);
   font-weight: 700;
   margin-bottom: var(--space-2);
   margin-top: var(--space-1-5);
   border-color: var(--c-cmp-modal-a--cmp-kongfu-select-border);
 }
-/* select内 option を統一 (paper bg + var(--bg-raised) / hover青) */
+/* select内 option を統一 (paper bg + var(--sumi-3) / hover青) */
 .wwm-cmp-modal-a select option {
   font-size: var(--text-md);
-  font-family: var(--f-display, 'Noto Serif JP');
+  font-family: var(--f-display-title);
   font-weight: 700;
-  background: var(--c-modal-a-option-bg) ;
+  background: var(--bg-modal-a-option) ;
   color: var(--c-modal-a-option-fg);
 }
 .wwm-cmp-modal-a .wwm-cmp-stat-select option {
   font-size: var(--text-12);
-  font-family: var(--f-sans, 'Noto Sans JP');
-  font-weight: 600;
+  font-family: var(--f-display-title);
+  font-weight: 700;
 }
 .wwm-cmp-modal-a .wwm-cmp-set-header,
 .wwm-cmp-modal-a .wwm-cmp-set-select {
-  background: var(--c-modal-a-set-select-bg);
+  background: var(--bg-modal-a-set-select);
   border: none;
   border-radius: 0;
   color: var(--c-modal-a-set-fg);
   text-shadow: var(--c-cmp-set-header-text-shadow);
   padding: var(--space-1-5) var(--space-2);
   margin-bottom: var(--space-2);
+  font-family: var(--f-display-title);
+  font-weight: var(--fw-extra);
 }
 .wwm-cmp-modal-a .wwm-cmp-set-select {
   border: 1px solid var(--gold-deep);
@@ -509,6 +628,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+  padding: var(--space-1) var(--space-1-5); /* dark.css L8-11 統合 2026-06-20 */
 }
 .wwm-cmp-modal-a .wwm-cmp-row {
   display: grid;
@@ -516,7 +636,7 @@
   gap: 6px;
   padding: var(--space-1) var(--space-1-5);
   border: none;
-  border-bottom: 1px dashed var(--gold-faint);
+  border-bottom: 1.5px dashed color-mix(in oklab, var(--gold) 38%, transparent); /* 2026-06-17: dashed 視認化 (8%→38% + 1px→1.5px) */
   font-size: var(--text-12);
   background: transparent ;
   box-shadow: none;
@@ -529,38 +649,45 @@
   color: var(--c-modal-a-fg);
 }
 .wwm-cmp-modal-a .wwm-cmp-stat-select {
-  background: var(--c-modal-a-stat-select-bg);
-  border: 1px solid var(--ink-2);
+  background: var(--bg-modal-a-stat-select);
+  border: 1.5px solid rgba(40,25,18,0.42); /* 2026-06-17: ink-2(0.28) では弱 → 直 hex 0.6 で入力可能感 up */
   border-radius: 0;
   font-size: var(--text-sm);
+  font-family: var(--f-display-title); /* cmp-name (左 readonly) と同 font に揃え (2026-06-15 兄貴指摘) */
+}
+.wwm-cmp-modal-a .wwm-cmp-stat-select:focus,
+.wwm-cmp-modal-a .wwm-cmp-val-input:focus {
+  outline: 2px solid var(--vermilion);
+  outline-offset: 0;
+  border-color: var(--vermilion);
 }
 /* S2-d: val (現有列 readonly) と val-input (新置列 input) で light 配色が異なる → rule 分離
    (val = fg-emphasis 維持、 val-input = token swap 済) */
 .wwm-cmp-modal-a .wwm-cmp-val {
-  font-family: var(--f-mono, 'Rajdhani');
+  font-family: var(--f-latin);
   font-weight: 700;
   color: var(--c-modal-a-val-fg);
   font-size: var(--text-md);
 }
 .wwm-cmp-modal-a .wwm-cmp-val-input {
-  font-family: var(--f-mono, 'Rajdhani');
+  font-family: var(--f-latin);
   font-weight: 700;
   color: var(--c-modal-a-val-input-fg);
   font-size: var(--text-md);
 }
 .wwm-cmp-modal-a .wwm-cmp-val-input {
-  background: var(--c-modal-a-stat-select-bg);
-  border: 1px solid var(--ink-2);
+  background: var(--bg-modal-a-stat-select);
+  border: 1.5px solid rgba(40,25,18,0.42); /* 2026-06-17: ink-2(0.28) では弱 → 直 hex 0.6 で入力可能感 up */
   border-radius: 0;
 }
 .wwm-cmp-modal-a .wwm-cmp-ratio {
-  font-family: var(--f-mono, 'Rajdhani');
+  font-family: var(--f-latin);
   font-size: var(--text-xs);
   padding: 1px 3px;
   border-radius: 2px;
   background: rgba(168,212,180,0.18) ;
   color: var(--jade-bright) !important; /* K: gear.js:679 el.style.color (inline) 対抗 — strip するな */
-  border: 1px solid var(--jade-bright-mid);
+  border: 1px solid color-mix(in oklab, var(--jade-bright) 40%, transparent);
   min-width: 30px;
   text-align: center;
   display: inline-block;
@@ -568,26 +695,22 @@
 }
 /* MAX% rank別配色 (ゲーム準拠 金>紫>青、 閾値 0.85 / 0.70)
    color の !important は K (gear.js:679 inline color 対抗) — strip するな */
+/* 2026-06-17: 背景塗+文字白抜きで紙地視認性 up (兄貴指摘) */
 .wwm-cmp-modal-a .wwm-cmp-ratio.rank-gold {
-  background: rgba(212,175,55,0.18);
-  color: var(--accent) !important;
-  border-color: rgba(212,175,55,0.55);
+  background: rgba(212,175,55,0.85);
+  color: #fff !important;
+  border-color: rgba(212,175,55,0.95);
 }
 .wwm-cmp-modal-a .wwm-cmp-ratio.rank-purple {
-  background: rgba(195,137,255,0.18);
-  color: var(--liupai-guyun) !important;
-  border-color: rgba(195,137,255,0.55);
+  background: rgba(195,137,255,0.78);
+  color: #fff !important;
+  border-color: rgba(195,137,255,0.95);
 }
 .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue {
-  background: rgba(74,158,255,0.18);
-  color: #4a9eff !important;
-  border-color: rgba(74,158,255,0.55);
+  background: rgba(74,158,255,0.82);
+  color: #fff !important;
+  border-color: rgba(74,158,255,0.95);
 }
-/* light theme の rank別 color (旧 styles-light.css から co-locate move 2026-06-05 @layer Step 1:
-   inline 対抗 imp 同士は spec 比較 = file 位置無関係、 同 file 化で layer 反転 flip を根治) */
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-gold { background: var(--c-gold-deep-faint); color: #7a5a12 !important; border-color: var(--c-gold-deep-strong); }
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.13); color: #6f3a9a !important; border-color: rgba(120,60,160,0.5); }
-html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.13); color: #2a5aa0 !important; border-color: rgba(40,90,160,0.5); }
 /* MAX到達 (100%) 虹色 — 色相回転 hue-rotate アニメ (両テーマ共通)
    注: background-color / box-shadow は keyframes が動かすため !important つけない (つけると keyframes が負けてアニメ無効化) */
 .wwm-cmp-modal-a .wwm-cmp-ratio.rank-max {
@@ -595,9 +718,9 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   color: #ffffff !important;
   border-color: rgba(255,255,255,0.65);
   font-weight: 700;
-  text-shadow: 0 0 4px var(--overlay-mid-2), 0 1px 0 var(--overlay-soft-mid);
+  text-shadow: 0 0 4px var(--shadow-mid-2), 0 1px 0 var(--shadow-soft-mid);
   background-color: hsl(0, 80%, 55%);
-  box-shadow: 0 0 9px hsla(0, 90%, 60%, 0.55), inset 0 1px 0 var(--hover-mid);
+  box-shadow: 0 0 9px hsla(0, 90%, 60%, 0.55), inset 0 1px 0 var(--shine-mid);
   animation: cmp-ratio-rainbow 3.5s linear infinite;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -611,6 +734,21 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-cmp-modal-a.wwm-modal-square { overflow: visible; }
 /* 武庫modal: path 5個横並び収容のため広め */
 .wwm-modal.wwm-modal-square.wwm-arsenal-modal { max-width: 820px; }
+/* 2026-06-17: arsenal 新置 path select = 朱グラ → 透明化で親 kongfu-header (金) を透かす + 高さ揃え (兄貴指示) */
+.wwm-arsenal-modal.wwm-cmp-modal-a .wwm-cmp-set-select {
+  background: transparent;
+  color: var(--c-modal-a-kongfu-header-fg);
+  border-color: transparent;
+  width: 100%;
+  align-self: center;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+  height: auto;
+}
 /* 武庫modal: row 高さ統一 + ゆとり (checkbox表示で row 押し広げ防止) */
 .wwm-arsenal-modal .wwm-cmp-row { min-height: 38px; }
 .wwm-arsenal-modal .wwm-cmp-row input[type="checkbox"] { width: 14px; height: 14px; margin: 0; }
@@ -630,19 +768,40 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-cmp-modal-a .wwm-cmp-divider::after  { bottom: 30%; }
 
 .wwm-cmp-footer-a {
-  margin-top: var(--space-4);
-  padding: var(--space-3-5) 0 var(--space-1);
-  border-top: 1px solid var(--gold-soft);
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 12px;
+  /* modal 二層化 (2026-06-12): footer = body (紙) の外の墨帯。
+     2026-06-17: 2 行構成 = 1 行目 武格指数 / 2 行目 装備品質 + ボタン群右寄せ */
+  margin-top: 0;
+  padding: var(--space-3) var(--space-4) var(--space-3-5);
+  border-top: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
+  display: flex; flex-direction: column; align-items: stretch;
+  gap: 8px;
 }
-.wwm-cmp-delta-block {
-  display: flex; align-items: baseline; gap: 12px;
+.wwm-cmp-stat-row {
+  display: flex; align-items: baseline; gap: 14px;
+  flex-wrap: nowrap;
+}
+.wwm-cmp-quality-block {
+  display: flex; align-items: baseline; gap: 14px;
+  min-width: 0; flex-shrink: 1;
+}
+.wwm-cmp-delta-label { white-space: nowrap; }
+.wwm-cmp-footer-a .wwm-cmp-btn-row {
+  margin-left: auto;
+  flex-shrink: 0; flex-wrap: nowrap; white-space: nowrap;
+}
+.wwm-cmp-delta-total { white-space: nowrap; }
+.wwm-cmp-arrow {
+  font-size: var(--text-sm);
+  color: var(--sumi-fg-dim);
+  opacity: 0.55;
+  margin: 0 8px;
+  vertical-align: 0.12em;
+  font-weight: normal;
 }
 .wwm-cmp-delta-label {
-  font-family: var(--f-display, 'Noto Serif JP');
-  font-size: var(--text-sm); font-weight: 900;
-  color: var(--paper-mute);
+  font-family: var(--f-display-title);
+  font-size: var(--text-14); font-weight: 900;
+  color: var(--kami-fg);
   letter-spacing: 0.32em;
 }
 .wwm-cmp-modal-a .wwm-cmp-preview-value {
@@ -650,12 +809,27 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   line-height: 1;
 }
 /* K ×3: export.js clone の inline text-shadow (universal 書込) 対抗 — strip するな (Step 5 確定) */
-.wwm-cmp-modal-a .wwm-cmp-preview-value.pos { color: var(--jade-bright); text-shadow: 0 0 18px rgba(168,212,180,0.6) !important; }
-.wwm-cmp-modal-a .wwm-cmp-preview-value.neg { color: var(--vermilion); text-shadow: 0 0 18px var(--vermilion-bright-glow) !important; }
+.wwm-cmp-modal-a .wwm-cmp-preview-value.pos { color: var(--vermilion); text-shadow: 0 0 18px rgba(168,212,180,0.6) !important; }
+.wwm-cmp-modal-a .wwm-cmp-preview-value.neg { color: var(--kami-fg-dim); text-shadow: 0 0 18px color-mix(in oklab, var(--vermilion-bright) 60%, transparent) !important; }
 .wwm-cmp-modal-a .wwm-cmp-preview-value.zero { color: var(--c-cmp-preview-zero-fg); text-shadow: none !important; }
 .wwm-cmp-delta-base {
-  font-family: var(--f-mono, 'Rajdhani');
-  font-size: var(--text-sm); color: var(--paper-mute);
+  font-family: var(--f-latin);
+  font-size: var(--text-base);
+  font-weight: var(--fw-medium);
+  color: var(--sumi-fg);
+}
+.wwm-cmp-delta-total {
+  font-family: var(--f-latin);
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  color: var(--gold-bright);
+  letter-spacing: 0.02em;
+}
+.wwm-cmp-delta-sep {
+  color: var(--sumi-fg-dim);
+  opacity: 0.55;
+  font-size: var(--text-base);
+  padding: 0 4px;
 }
 .wwm-cmp-modal-a .wwm-cmp-bg-icon { opacity: 0 ; }
 /* 新装備アイコン modal全体背景化 — 右下から見切れる大きさ (元サイズ、 心法対照 で使用) */
@@ -669,7 +843,8 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   opacity: var(--c-cmp-modal-bg-icon-opacity);
   pointer-events: none;
   z-index: 0;
-  filter: brightness(0) invert(1) drop-shadow(0 0 14px var(--gold-bright-mid));
+  /* 薄墨透かし (③ 2026-06-13 兄貴決定) — 白抜き+金glow は紙 body 上で不可視 */
+  filter: brightness(0);
 }
 /* 武具対照のみ 50% UP + 右下寄せ */
 .wwm-cmp-modal-bg-icon-gear {
@@ -700,11 +875,11 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-cmp-modal-a .wwm-cmp-grid { position: relative; z-index: 1; }
 /* col / affix-rows 透過化 (背景icon 透けさせる) */
 .wwm-cmp-modal-a .wwm-cmp-col {
-  background: var(--c-modal-a-col-bg);
+  background: var(--shine-trace);
   border-color: var(--c-cmp-modal-a--cmp-col-border);
 }
 .wwm-cmp-modal-a .wwm-cmp-rows {
-  background: var(--c-modal-a-rows-bg);
+  background: var(--bg-modal-a-rows);
   border: var(--c-cmp-modal-a--cmp-rows-border);
   box-shadow: var(--c-cmp-modal-a--cmp-rows-shadow);
 }
@@ -715,9 +890,9 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   display: inline-flex; align-items: center; justify-content: center;
   width: 16px; height: 16px;
   background: linear-gradient(135deg, var(--vermilion-deep), var(--vermilion));
-  border: 1px solid var(--gold-bright-mid);
+  border: 1px solid color-mix(in oklab, var(--gold-bright) 50%, transparent);
   border-radius: 2px;
-  box-shadow: 0 0 4px var(--vermilion-glow);
+  box-shadow: 0 0 4px color-mix(in oklab, var(--vermilion-bright) 50%, transparent);
   flex-shrink: 0;
   vertical-align: middle;
   margin: 0 var(--space-half);
@@ -736,7 +911,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   display: flex; align-items: center; gap: 8px;
 }
 .wwm-cmp-modal-a .wwm-cmp-title-ja {
-  font-family: var(--f-display, 'Noto Serif JP');
+  font-family: var(--f-display-title);
   font-size: var(--text-18);
   font-weight: 900;
   letter-spacing: 0.18em;
@@ -744,7 +919,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   text-shadow: var(--c-cmp-modal-a--cmp-title-ja-text-shadow);
 }
 .wwm-cmp-modal-a .wwm-cmp-title-en {
-  font-family: var(--f-latin, 'Cinzel');
+  font-family: var(--f-latin);
   font-size: var(--text-sm);
   font-weight: 600;
   color: var(--c-cmp-title-en-fg);
@@ -753,10 +928,17 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   align-self: flex-end;
   padding-bottom: var(--space-half);
 }
+/* vi = 題字 ja 部分が長文 (So sánh trang bị 等) で 2 行化 → en 副題 (COMPARISON) を vi 時のみ非表示
+   + 主題自体も縮小 (--text-18 → --text-lg) */
+:lang(vi) .wwm-cmp-modal-a .wwm-cmp-title-en { display: none; }
+:lang(vi) .wwm-cmp-modal-a .wwm-cmp-title-ja { font-size: var(--text-lg); }
+:lang(vi) .wwm-cmp-modal-a .wwm-cmp-seal { display: none; }
 .wwm-cmp-modal-a .wwm-modal-header h2 { align-items: flex-end; }
-/* 背景の赤いradial-gradient を消す */
+/* 背景 = 親は墨単色のみ、 mountain image は header/footer 個別 lay 化 (2026-06-20 兄貴指摘「構造非対称で footer に overlay 乗せにくい」)。
+   親 image だと縦幅で見え方変わる + footer に届かない、 header/footer 自身に image lay = 高さ固定 px で scale 一定 + 構造対称。
+   !important = export.js clone の inline background 対抗 (旧 dark.css K rule 統合) */
 .wwm-cmp-modal-a {
-  background: linear-gradient(180deg, var(--c-surf-warm-1), var(--c-surf-warm-2));
+  background: var(--sumi-3) !important;
   color: var(--c-cmp-modal-a-fg);
 }
 /* ボタン: サンプルA 揃え (radius 0、 padding 7px 16px) */
@@ -773,8 +955,8 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   box-shadow: none;
 }
 .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
-  background: var(--c-modal-a-btn-secondary-bg);
-  border: 1px solid var(--paper-mute);
+  background: var(--bg-modal-a-btn-secondary);
+  border: 1px solid var(--sumi-fg);
   border-radius: 0;
   color: var(--brown-1);
   padding: 7px 18px;
@@ -787,7 +969,9 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   display: flex;
   align-items: center !important; /* K: JS の row inline align 書込 対抗 — strip するな */
   gap: 8px;
-  padding: 5px 6px;
+  padding: 8px 10px; /* 2026-06-17: 5/6 → 8/10 で行高呼吸 (兄貴指摘 #10) */
+  min-height: 40px; /* 2026-06-17: 現有/新置 縦ライン揃え (兄貴指摘) */
+  box-sizing: border-box;
 }
 /* 現有列 (display専用): name 1fr + val (val+ratio inline) */
 .wwm-cmp-modal-a .wwm-cmp-current .wwm-cmp-row .wwm-cmp-name { flex: 1 1 auto; min-width: 0; }
@@ -830,6 +1014,10 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   padding: 5px 8px;
   margin-bottom: var(--space-1-5);
   font-size: var(--text-12);
+  min-height: 32px; /* 2026-06-17: 現有/新置 縦ライン揃え (header vs select 高さ差吸収) */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
 }
 
 .wwm-cmp-grid {
@@ -837,8 +1025,8 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   gap: var(--space-4);
 }
 .wwm-cmp-col {
-  background: var(--hover-trace);
-  border: 1px solid var(--hover-soft);
+  background: var(--shine-trace);
+  border: 1px solid var(--shine-soft);
   border-radius: 6px;
   padding: var(--space-2-5);
   position: relative;
@@ -859,8 +1047,8 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 /* 現在の装備: 朱赤グロウ */
 .wwm-cmp-current .wwm-cmp-bg-icon {
   filter:
-    drop-shadow(0 0 6px var(--vermilion-bright-strong))
-    drop-shadow(0 0 14px var(--vermilion-bright-mid));
+    drop-shadow(0 0 6px color-mix(in oklab, var(--vermilion-bright) 70%, transparent))
+    drop-shadow(0 0 14px color-mix(in oklab, var(--vermilion-bright) 45%, transparent));
 }
 /* 新しい装備: 緑グロウ */
 .wwm-cmp-new .wwm-cmp-bg-icon {
@@ -869,16 +1057,16 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
     drop-shadow(0 0 14px rgba(168,212,180,0.45));
 }
 .wwm-cmp-kongfu-header {
-  font-size: var(--text-12); color: var(--accent);
+  font-size: var(--text-12); color: var(--gold-paper);
   font-weight: var(--fw-bold);
   margin-bottom: var(--space-1-5);
   padding: var(--space-1) var(--space-1-5);
-  background: var(--accent-faint);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
   border-radius: 4px;
 }
 .wwm-cmp-kongfu-select {
   width: 100%;
-  background: var(--c-cmp-stat-select-bg);
+  background: var(--bg-cmp-stat-select);
   border: 1px solid var(--accent);
   border-radius: 4px;
   color: var(--c-cmp-kongfu-select-fg);
@@ -896,14 +1084,14 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   font-weight: var(--fw-bold);
   margin-bottom: var(--space-1-5);
   padding: var(--space-1) var(--space-1-5);
-  background: linear-gradient(90deg, var(--gold-bright-tint), transparent);
+  background: linear-gradient(90deg, color-mix(in oklab, var(--gold-bright) 12%, transparent), transparent);
   border-left: 2px solid var(--gold-bright);
   border-radius: 0;
-  text-shadow: 0 0 6px var(--gold-bright-mid-2);
+  text-shadow: 0 0 6px color-mix(in oklab, var(--gold-bright) 40%, transparent);
 }
 .wwm-cmp-set-select {
   width: 100%;
-  background: var(--c-cmp-stat-select-bg);
+  background: var(--bg-cmp-stat-select);
   border: 1px solid var(--liupai-guyun);
   border-radius: 4px;
   color: var(--c-cmp-set-select-fg);
@@ -919,10 +1107,10 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   padding: var(--space-half) var(--space-1-5) var(--space-1-5);
   line-height: 1.3;
 }
-.wwm-cmp-tier-line.wwm-tier-active   { color: var(--gold-bright); }
-.wwm-cmp-tier-line.wwm-tier-unrel    { color: rgba(255,255,255,0.28); }
-.wwm-cmp-tier-line.wwm-tier-kfmiss   { color: var(--vermilion-bright-strong); }
-.wwm-cmp-tier-line.wwm-tier-empty    { color: rgba(255,255,255,0.2); }
+.wwm-cmp-tier-line.wwm-tier-active   { color: var(--kami-fg); }
+.wwm-cmp-tier-line.wwm-tier-unrel    { color: var(--kami-fg-dim); }
+.wwm-cmp-tier-line.wwm-tier-kfmiss   { color: var(--vermilion); }
+.wwm-cmp-tier-line.wwm-tier-empty    { color: var(--kami-fg-dim); }
 .wwm-tier-warn { font-size: var(--text-xs); }
 .wwm-tier-dash { opacity: 0.5; }
 /* ╔═══════════════════════════════════════════════════════════════════╗
@@ -930,27 +1118,27 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
    ╚═══════════════════════════════════════════════════════════════════╝ */
 
 /* Changelog modal */
-.wwm-hero-delta.pos { color: #2ec27e; }
-.wwm-hero-delta.neg { color: #ff6b6b; }
-.wwm-hero-delta.zero { color: var(--hover-mid-2); }
+.wwm-hero-delta.pos { color: var(--vermilion); }
+.wwm-hero-delta.neg { color: var(--kami-fg-dim); }
+.wwm-hero-delta.zero { color: var(--shine-mid-2); }
 .wwm-cmp-preview-value { font-weight: var(--fw-bold); font-size: var(--text-15); }
-.wwm-cmp-preview-value.pos { color: #2ec27e; }
-.wwm-cmp-preview-value.neg { color: #ff6b6b; }
-.wwm-cmp-preview-value.zero { color: var(--hover-strong); }
+.wwm-cmp-preview-value.pos { color: var(--vermilion); }
+.wwm-cmp-preview-value.neg { color: var(--kami-fg-dim); }
+.wwm-cmp-preview-value.zero { color: var(--shine-strong); }
 .wwm-cmp-current { border-left: 3px solid var(--vermilion); }
 .wwm-cmp-new     { border-left: 3px solid var(--jade); }
 .wwm-cmp-title {
   margin: 0 0 var(--space-2); font-size: var(--text-md); font-weight: var(--fw-bold);
 }
 .wwm-cmp-current .wwm-cmp-title { color: var(--vermilion); }
-.wwm-cmp-new .wwm-cmp-title { color: var(--jade-bright); }
+.wwm-cmp-new .wwm-cmp-title { color: var(--kami-fg); }
 .wwm-cmp-rows { display: flex; flex-direction: column; gap: var(--space-1); }
 .wwm-cmp-row {
   display: grid;
   grid-template-columns: 1fr max-content;
   gap: var(--space-2); align-items: center;
   padding: var(--space-1) var(--space-1-5);
-  background: var(--hover-trace);
+  background: var(--shine-trace);
   border-radius: 4px;
   font-size: var(--text-12);
 }
@@ -958,12 +1146,12 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   grid-template-columns: 1fr 20px 110px;
 }
 .wwm-cmp-stat-select {
-  background: var(--c-cmp-stat-select-bg);
+  background: var(--bg-cmp-stat-select);
   border: 1px solid #444;
   border-radius: 4px;
   padding: var(--space-half) var(--space-1);
   font-size: var(--text-12);
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-bold);
   width: 100%;
   cursor: pointer;
 }
@@ -975,8 +1163,8 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   width: 100%;
 }
 .wwm-cmp-val-wrap .wwm-cmp-val-input { width: 100%; text-align: right; }
-.wwm-cmp-unit { font-size: var(--text-sm); opacity: 0.7; text-align: left; }
-.wwm-cmp-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wwm-cmp-unit { font-family: var(--f-latin); font-size: var(--text-md); opacity: 1; font-weight: 700; color: var(--c-modal-a-val-input-fg); text-align: left; } /* 2026-06-17: latin font + 太字 + 値と同寸 (兄貴指摘) */
+.wwm-cmp-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--f-display-title); }
 .wwm-cmp-val  { font-weight: var(--fw-bold); text-align: right; }
 .wwm-cmp-val-input { font-size: var(--text-sm); text-align: right; }
 .wwm-rank-gold { color: var(--accent); }
@@ -987,7 +1175,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 }
 .wwm-num-input {
   width: 60px; padding: var(--space-half) var(--space-1-5);
-  background: var(--c-cmp-stat-select-bg); color: inherit;
+  background: var(--bg-cmp-stat-select); color: inherit;
   border: 1px solid #444; border-radius: 4px;
   font-size: var(--text-md); text-align: right;
   border-color: var(--c-num-input-border);
@@ -1006,7 +1194,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-arsenal-tier {
   display: flex; align-items: center; gap: var(--space-3);
   padding: var(--space-1) var(--space-1-5);
-  background: var(--hover-trace);
+  background: var(--shine-trace);
   border-radius: 4px;
 }
 .wwm-arsenal-lv { font-weight: var(--fw-bold); min-width: 50px; }
@@ -1030,13 +1218,12 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   position: absolute;  /* .wwm-modal > * { position: relative } (L1295) に勝つため必須 — Phase 5.1-b で誤って削除されていた */
   top: 0; left: 0; right: 0; bottom: 0;
   background-repeat: no-repeat;
-  background-position: calc(100% + 40px) calc(100% + 40px);
+  background-position: calc(100% + 80px) calc(100% + 80px); /* 右下へ寄せ (兄貴調整 2026-06-13) */
   background-size: 60%;
   opacity: var(--c-modal-bg-icon-opacity);
-  filter:
-    brightness(0) invert(1)
-    drop-shadow(0 0 10px var(--gold-bright-strong))
-    drop-shadow(0 0 22px rgba(240,210,138,0.45));
+  /* 薄墨透かし (③ 2026-06-13 兄貴決定) — 旧 白抜き+金glow は紙 body 上で不可視。
+     黒 silhouette × 低 opacity = 紙の地色越しに焦茶の滲み (header/footer の墨と呼応) */
+  filter: brightness(0);
   pointer-events: none;
   z-index: 0;
 }
@@ -1058,7 +1245,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   height: 22px;
   background: linear-gradient(180deg, var(--brown-4) 0%, var(--brown-6) 20%, var(--accent) 50%, var(--brown-6) 80%, var(--brown-4) 100%);
   border-radius: 4px;
-  box-shadow: 0 0 0 1px var(--overlay-mid-2), inset 0 0 8px rgba(0,0,0,.35), 0 6px 14px var(--overlay-soft-2);
+  box-shadow: 0 0 0 1px var(--shadow-mid-2), inset 0 0 8px rgba(0,0,0,.35), 0 6px 14px var(--shadow-soft-2);
   position: relative;
 }
 .wwm-note-rod::before, .wwm-note-rod::after {
@@ -1068,7 +1255,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   width: 30px; height: 30px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, var(--chart-crit) 0%, #c8932e 40%, var(--brown-5) 100%);
-  box-shadow: 0 2px 6px var(--overlay-heavy), inset 0 0 4px var(--overlay-soft-mid);
+  box-shadow: 0 2px 6px var(--shadow-heavy), inset 0 0 4px var(--shadow-soft-mid);
   border: 1px solid #3a2210;
 }
 .wwm-note-rod::before { left: -10px; }
@@ -1109,14 +1296,14 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   flex-wrap: wrap;
 }
 .wwm-note-title-ja {
-  font-family: 'Ma Shan Zheng', 'Noto Serif JP', serif;
+  font-family: var(--f-display-title);
   font-size: var(--text-2xl);
   color: var(--brown-3);
   letter-spacing: 0.15em;
   text-shadow: 0 1px 0 rgba(255,240,200,.4);
 }
 .wwm-note-title-en {
-  font-family: 'Cinzel', serif;
+  font-family: var(--f-latin);
   font-size: var(--text-md);
   letter-spacing: 0.3em;
   color: #7a4220;
@@ -1127,10 +1314,10 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   display: flex; align-items: center; justify-content: center;
   background: var(--vermilion-note);
   color: #f5e6c8;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display-title);
   font-size: var(--text-lg); font-weight: 900;
   border-radius: 3px;
-  box-shadow: 0 0 0 1px #5a1208, 1px 1px 0 var(--overlay-soft);
+  box-shadow: 0 0 0 1px #5a1208, 1px 1px 0 var(--shadow-soft);
   transform: rotate(-3deg);
 }
 .wwm-note-header-actions {
@@ -1143,20 +1330,26 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   color: #f5e6c8;
   border: 1px solid #5a1208;
   border-radius: 4px;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display-title);
   font-weight: 700;
   font-size: var(--text-12);
   letter-spacing: 0.08em;
   cursor: pointer;
   text-decoration: none;
   display: inline-flex; align-items: center; gap: 5px;
-  box-shadow: inset 0 1px 0 rgba(255,200,150,.3), 0 2px 6px var(--overlay-soft-mid);
+  box-shadow: inset 0 1px 0 rgba(255,200,150,.3), 0 2px 6px var(--shadow-soft-mid);
   transition: filter .15s, transform .15s;
 }
 .wwm-note-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
-.wwm-note-btn-gh    { background: linear-gradient(180deg, #4a3a2a 0%, #2a1f14 100%); border-color: var(--bg-raised); }
+.wwm-note-btn-gh    { background: linear-gradient(180deg, #4a3a2a 0%, #2a1f14 100%); border-color: var(--sumi-3); }
 .wwm-note-btn-close { background: linear-gradient(180deg, #8a6f3a 0%, #5a4220 100%); border-color: #3a2810; }
 .wwm-note-btn svg { width: 12px; height: 12px; }
+
+/* footer の secondary ボタン全般 — svg 入り横並び (NOTE/飛簡 footer 共通) */
+.wwm-tool-modal-footer .wwm-btn-secondary {
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.wwm-tool-modal-footer .wwm-btn-secondary svg { width: 12px; height: 12px; flex-shrink: 0; }
 
 .wwm-note-divider {
   height: 1px;
@@ -1187,7 +1380,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   border: 1px solid var(--brown-5); border-bottom: none;
   border-radius: 6px 6px 0 0;
   color: #4a2810;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display-title);
   font-weight: 700; font-size: var(--text-14);
   cursor: pointer; position: relative; top: 1px;
   letter-spacing: 0.08em;
@@ -1210,14 +1403,16 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   color: var(--brown-2);
   max-height: 500px; overflow-y: auto;
   padding-right: var(--space-2-5);
+  /* ツール標準 = 金 thin scrollbar (sidebar.css / workspace.css と統一、 2026-06-22 兄貴指示) */
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-deep) transparent;
 }
-.wwm-note-body::-webkit-scrollbar { width: 8px; }
-.wwm-note-body::-webkit-scrollbar-track { background: rgba(80,40,20,.15); border-radius: 4px; }
-.wwm-note-body::-webkit-scrollbar-thumb { background: var(--brown-6); border-radius: 4px; }
+.wwm-note-body::-webkit-scrollbar { width: 6px; }
+.wwm-note-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
 
 .wwm-note-section { margin-bottom: 18px; }
 .wwm-note-h3 {
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display-title);
   font-size: var(--text-15); font-weight: 900;
   color: var(--brown-3);
   margin: 0 0 var(--space-2);
@@ -1239,7 +1434,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   border: 1px dashed rgba(90,30,16,.35);
   border-radius: 4px;
   padding: var(--space-2-5) var(--space-3);
-  font-family: var(--f-mono, 'Courier New', monospace);
+  font-family: var(--f-latin);
   font-size: var(--text-12);
   color: var(--brown-3);
   white-space: pre-wrap;
@@ -1249,13 +1444,13 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 /* 更新履歴 */
 .wwm-note-cl-entry { margin-bottom: var(--space-4); padding-bottom: var(--space-2-5); border-bottom: 1px dotted rgba(90,30,16,.35); }
 .wwm-note-cl-entry:last-child { border-bottom: none; }
-.wwm-note-cl-ver { font-family: 'Cinzel', serif; font-size: var(--text-lg); font-weight: 900; color: var(--brown-3); }
+.wwm-note-cl-ver { font-family: var(--f-latin); font-size: var(--text-lg); font-weight: 900; color: var(--brown-3); }
 .wwm-note-cl-date { font-size: var(--text-sm); color: #7a4220; margin-left: var(--space-2-5); font-weight: 400; }
 .wwm-note-cl-items { margin: var(--space-1-5) 0 0 0; padding-left: 22px; list-style: none; }
 .wwm-note-cl-items li { position: relative; margin-bottom: 3px; padding-left: var(--space-1); }
 .wwm-note-cl-items li::before { content: '・'; position: absolute; left: -14px; color: var(--vermilion-note); font-weight: 900; }
 .wwm-note-cl-items li.wwm-note-cl-featured {
-  background: var(--c-note-cl-featured-bg);
+  background: var(--bg-note-cl-featured);
   border-left: 3px solid var(--vermilion);
   padding: var(--space-2-5) var(--space-3);
   margin: 8px 0 12px -18px;
@@ -1285,30 +1480,29 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   border-left-color: var(--vermilion);
 }
 .wwm-diag-modal::before {
-  background: radial-gradient(ellipse at top right, var(--vermilion-soft-light), transparent 65%) !important; /* K: export inline background 対抗 */
+  background: radial-gradient(ellipse at top right, color-mix(in oklab, var(--vermilion) 18%, transparent), transparent 65%) !important; /* K: export inline background 対抗 */
 }
 .wwm-diag-modal::after {
   border-top-color: var(--vermilion);
   border-right-color: var(--vermilion);
 }
-.wwm-diag-modal .wwm-modal-header { border-bottom-color: var(--vermilion-mid); }
+.wwm-diag-modal .wwm-modal-header { border-bottom-color: color-mix(in oklab, var(--vermilion) 30%, transparent); }
 .wwm-diag-modal .wwm-modal-header::after {
   background: linear-gradient(90deg, var(--vermilion-bright), transparent);
-  box-shadow: 0 0 8px var(--vermilion-strong);
+  box-shadow: 0 0 8px color-mix(in oklab, var(--vermilion) 55%, transparent);
 }
 .wwm-diag-modal .wwm-modal-header h2 {
   color: var(--vermilion-bright);
-  text-shadow: 0 0 10px var(--vermilion-mid-strong) !important; /* K: export inline text-shadow 対抗 */
+  text-shadow: 0 0 10px color-mix(in oklab, var(--vermilion) 40%, transparent) !important; /* K: export inline text-shadow 対抗 */
 }
 /* K ×2: bg-icon の JS inline background 書込 対抗 — strip するな (Step 5 確定) */
 .wwm-diag-modal .wwm-modal-bg-icon {
   background-size: 30% !important;
-  background-position: calc(100% - 12px) calc(100% + 30px) !important;
-  filter:
-    brightness(0) invert(1)
-    drop-shadow(0 0 10px rgba(255,107,74,0.7))
-    drop-shadow(0 0 22px rgba(200,60,43,0.45));
-  opacity: var(--c-diag-modal--modal-bg-icon-opacity);
+  background-position: calc(100% + 20px) calc(100% + 60px) !important; /* 右下へ寄せ (兄貴調整 2026-06-13) */
+  /* 薄墨透かし (③ 2026-06-13)。opacity は委譲 token (--c-diag-modal--*) だと :root で
+     0.18 に固化され paper scope 上書き不達 → base token 直参照で紙値 0.08 を拾う */
+  filter: brightness(0);
+  opacity: var(--c-modal-bg-icon-opacity);
 }
 
 
@@ -1344,30 +1538,32 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 
 /* S2-g co-locate (T): light#117 L943 */
 .wwm-step2 .wwm-num-input {
-  background: var(--c-step2--num-input-bg);
+  background: var(--bg-step2--num-input);
 }
 
 /* S2-g co-locate (T): light#120 L957 + dark#4 */
 .wwm-step2 .wwm-arsenal-tier {
   border: var(--c-step2--arsenal-tier-border);
-  background: var(--c-step2--arsenal-tier-bg);
+  background: var(--bg-step2--arsenal-tier);
 }
 
-/* S2-g co-locate (T): light#42 L548 */
-.wwm-cmp-current .wwm-cmp-row {
-  background: var(--c-cmp-current--cmp-row-bg);
+/* S2-g co-locate (T): light#42 L548
+   2026-06-17: new 列にも同背景付与 = 濃度差解消 (兄貴指摘) */
+.wwm-cmp-current .wwm-cmp-row,
+.wwm-cmp-new .wwm-cmp-row {
+  background: var(--bg-cmp-current--cmp-row);
 }
 
 /* S2-g co-locate (T): light#45 L560 */
 .wwm-cmp-current .wwm-cmp-kongfu-header {
   color: var(--c-cmp-current--cmp-kongfu-header-fg);
-  background: var(--c-cmp-current--cmp-kongfu-header-bg);
+  background: var(--bg-cmp-current--cmp-kongfu-header);
 }
 
 /* S2-g co-locate (T): light#45 L560 */
 .wwm-cmp-current .wwm-cmp-set-header {
   color: var(--c-cmp-current--cmp-set-header-fg);
-  background: var(--c-cmp-current--cmp-set-header-bg);
+  background: var(--bg-cmp-current--cmp-set-header);
 }
 
 /* S2-g co-locate (T): light#52 L605 */
@@ -1424,33 +1620,79 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
     overflow-y: auto;
     padding: var(--space-3);
   }
-  /* 対照 grid: 現有 / divider / 新置 を 縦stack */
+  /* 対照 grid = mobile pager 化 (2026-06-20):
+     左=現有 / 右=新置 を 2 page の横 scroll-snap pager に。
+     PC レイアウト (左右並び) と同じ視覚順序、スワイプで切替。
+     縦 scroll は modal-body (overflow-y:auto L1547) が担当。 */
   .wwm-cmp-modal-a .wwm-cmp-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    gap: 10px;
+    display: flex;
+    grid-template-columns: none;
+    grid-template-rows: none;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 0;
+    /* title `top:-14px` 飛び出し分 = overflow-x:auto で y も clip 化されるため
+       grid 内 padding で content 領域確保 (clip 範囲を朱印より上に押し上げ)。 */
+    padding-top: 18px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
-  /* divider 縦線 → 横線 */
-  .wwm-cmp-modal-a .wwm-cmp-divider {
-    width: 100%; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold-deep), transparent);
+  .wwm-cmp-modal-a .wwm-cmp-grid::-webkit-scrollbar { display: none; }
+  .wwm-cmp-modal-a .wwm-cmp-grid > .wwm-cmp-col {
+    flex: 0 0 100%;
+    min-width: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
-  .wwm-cmp-modal-a .wwm-cmp-divider::before,
-  .wwm-cmp-modal-a .wwm-cmp-divider::after {
-    top: 50%; bottom: auto;
-    transform: translate(-50%, -50%);
+  /* divider = pager 境界そのもの → 非表示 */
+  .wwm-cmp-modal-a .wwm-cmp-divider { display: none; }
+  /* padding 縮小 = 微妙な縦 scroll 解消 (2026-06-20 兄貴指示)。
+     body だけだと viewport 低高さで不足 → header/footer の縦 padding も同時詰め。
+     左右 padding は装飾余白 keep、縦のみ var(--space-2) (8px) 統一 */
+  .wwm-cmp-modal-a .wwm-modal-body.wwm-ws-paper {
+    padding: var(--space-2);
   }
-  .wwm-cmp-modal-a .wwm-cmp-divider::before { left: 30%; }
-  .wwm-cmp-modal-a .wwm-cmp-divider::after  { left: 70%; }
+  .wwm-cmp-modal-a .wwm-modal-header {
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-2);
+  }
+  .wwm-cmp-modal-a .wwm-cmp-footer-a {
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-2);
+  }
+  /* 武備指数 (火力品質 block) = mobile 表示場所なし → 非表示 (2026-06-20 兄貴指示) */
+  .wwm-cmp-modal-a .wwm-cmp-footer-a .wwm-cmp-quality-block {
+    display: none;
+  }
+  /* 武格指数 delta 行 = vi label 長文 (Chỉ số võ cách) で 1 行はみ出し → font 縮小 + 詰め */
+  .wwm-cmp-modal-a .wwm-cmp-footer-a .wwm-cmp-delta-label {
+    font-size: var(--text-12);
+    letter-spacing: 0.12em;
+  }
+  .wwm-cmp-modal-a .wwm-cmp-footer-a .wwm-cmp-delta-total {
+    font-size: var(--text-base);
+  }
+  .wwm-cmp-modal-a .wwm-cmp-footer-a .wwm-cmp-preview-value {
+    font-size: var(--text-lg);
+  }
   /* footer (delta + button row) 縦stack */
   .wwm-cmp-footer-a {
     flex-direction: column;
     align-items: stretch;
     gap: 8px;
   }
-  .wwm-cmp-btn-row { justify-content: stretch; }
+  .wwm-cmp-btn-row { justify-content: stretch; gap: 6px; }
   .wwm-cmp-btn-row .wwm-btn-primary,
   .wwm-cmp-btn-row .wwm-btn-secondary { flex: 1 1 auto; }
+  /* button 横 padding 縮小 = vi 長文 (ÁP DỤNG / KHÔI PHỤC / THOÁT) で
+     3 ボタン横並びはみ出し回避 (2026-06-20 兄貴指示) */
+  .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-primary,
+  .wwm-cmp-modal-a .wwm-cmp-btn-row .wwm-btn-secondary {
+    padding: 7px 6px;
+    min-width: 0;
+  }
   /* 武庫modal path選択: EN版で長ラベル 横溢れ → wrap強制 + 縮小 */
   .wwm-arsenal-modal .wwm-arsenal-paths {
     flex-wrap: wrap;
@@ -1480,8 +1722,11 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
     width: 36px !important;
     font-size: var(--text-xs);
   }
-  /* ─── NOTE modal mobile 全画面 + close sticky (履歴/筆記 閉じれない問題対策) ─── */
-  .wwm-modal-backdrop {
+  /* ─── NOTE modal mobile 全画面 + close sticky (履歴/筆記 閉じれない問題対策) ───
+     :has() で NOTE modal を含む backdrop のみ scope (2026-06-19 修正)。
+     旧 = `.wwm-modal-backdrop` bare 指定で全 modal (lang picker / share / 等) が top 貼り付き
+     → lang picker が topbar 後ろに沈む「選択できない」 兄貴指摘の原因。 */
+  .wwm-modal-backdrop:has(.wwm-note-modal-a) {
     overflow-y: auto;
     padding: 0;
     align-items: flex-start;
@@ -1576,7 +1821,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 /* ── modal shell ───────────────────────────────────────────────── */
 .wwm-card-modal { max-width: min(1120px, 94vw); }
 .wwm-card-modal-sub {
-  font-family: var(--f-mono);
+  font-family: var(--f-display-title);
   font-size: var(--text-xs);
   font-weight: var(--fw-semibold);
   letter-spacing: 0.22em;
@@ -1610,7 +1855,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-card-stage-hint {
   margin: var(--space-1-5) 0 0;
   font-size: var(--text-xs);
-  color: var(--paper-dim);
+  color: var(--kami-fg);
 }
 
 /* ── controls ──────────────────────────────────────────────────── */
@@ -1621,12 +1866,12 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   font-size: var(--text-sm);
   line-height: 1.5;
   color: var(--c-fg-vermilion-strong);
-  background: var(--vermilion-faint);
-  border: 1px solid var(--vermilion-mid);
+  background: color-mix(in oklab, var(--vermilion) 8%, transparent);
+  border: 1px solid color-mix(in oklab, var(--vermilion) 30%, transparent);
   border-radius: 2px;
 }
 .wwm-card-ctl-title {
-  font-family: var(--f-mono);
+  font-family: var(--f-display-title);
   font-size: var(--text-xs);
   font-weight: var(--fw-semibold);
   letter-spacing: 0.14em;
@@ -1642,39 +1887,39 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   background: var(--input-bg);
   border: 1px solid var(--ink-2);
   border-radius: 2px;
-  color: var(--paper-2);
+  color: var(--kami-fg);
   cursor: pointer;
   font-family: inherit;
   text-align: left;
   transition: border-color 0.15s ease, background 0.15s ease;
 }
 .wwm-card-tpl-btn b {
-  font-family: var(--f-display);
+  font-family: var(--f-display-title);
   font-size: var(--text-lg);
   font-weight: var(--fw-bold);
   color: var(--c-modal-fg);
 }
-.wwm-card-tpl-btn i { font-style: normal; font-size: var(--text-xs); color: var(--paper-dim); }
-.wwm-card-tpl-btn:hover { border-color: var(--gold-mid); }
-.wwm-card-tpl-btn.active { border-color: var(--c-focus-ring); background: var(--gold-faint); }
+.wwm-card-tpl-btn i { font-style: normal; font-size: var(--text-xs); color: var(--kami-fg); }
+.wwm-card-tpl-btn:hover { border-color: color-mix(in oklab, var(--gold) 30%, transparent); }
+.wwm-card-tpl-btn.active { border-color: var(--c-focus-ring); background: color-mix(in oklab, var(--gold) 8%, transparent); }
 .wwm-card-tpl-btn.active b { color: var(--c-fg-accent); }
 .wwm-card-align-row {
   display: flex; align-items: center; gap: var(--space-2);
   margin-top: var(--space-2-5);
   font-size: var(--text-12);
-  color: var(--paper-2);
+  color: var(--kami-fg);
 }
 .wwm-card-align-row[hidden] { display: none; }
 .wwm-card-align-btn { flex: 1; }
 .wwm-card-align-btn.active,
 .wwm-card-play-chip.active {
-  background: var(--gold-faint);
+  background: color-mix(in oklab, var(--gold) 8%, transparent);
   border-color: var(--c-focus-ring);
   color: var(--c-fg-accent);
 }
 .wwm-card-play-label {
   font-size: var(--text-xs);
-  color: var(--paper-dim);
+  color: var(--kami-fg);
   margin: var(--space-2) 0 var(--space-1);
 }
 .wwm-card-play-chips { display: flex; flex-wrap: wrap; gap: var(--space-1); }
@@ -1683,18 +1928,18 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   background: var(--input-bg);
   border: 1px solid var(--ink-2);
   border-radius: 2px;
-  color: var(--paper-2);
+  color: var(--kami-fg);
   font-size: var(--text-sm);
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.15s ease, background 0.15s ease;
 }
-.wwm-card-play-chip:hover { border-color: var(--gold-mid); }
+.wwm-card-play-chip:hover { border-color: color-mix(in oklab, var(--gold) 30%, transparent); }
 .wwm-card-bg-row { display: flex; gap: var(--space-2); }
 .wwm-card-ctl-btn {
   padding: var(--space-1-5) var(--space-2-5);
   background: transparent;
-  border: 1px solid var(--gold-mid);
+  border: 1px solid color-mix(in oklab, var(--gold) 30%, transparent);
   border-radius: 2px;
   color: var(--c-fg-gold-label);
   font-size: var(--text-12);
@@ -1702,13 +1947,13 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   cursor: pointer;
   transition: background 0.15s ease;
 }
-.wwm-card-ctl-btn:hover:not(:disabled) { background: var(--gold-faint); }
+.wwm-card-ctl-btn:hover:not(:disabled) { background: color-mix(in oklab, var(--gold) 8%, transparent); }
 .wwm-card-ctl-btn:disabled { opacity: 0.4; cursor: default; }
 .wwm-card-zoom-row {
   display: flex; align-items: center; gap: var(--space-2);
   margin-top: var(--space-2-5);
   font-size: var(--text-12);
-  color: var(--paper-2);
+  color: var(--kami-fg);
 }
 .wwm-card-zoom-row input[type="range"] {
   flex: 1;
@@ -1721,7 +1966,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   display: flex; align-items: center; gap: var(--space-2);
   padding: var(--space-1-5) 0;
   font-size: var(--text-md);
-  color: var(--paper-2);
+  color: var(--kami-fg);
   cursor: pointer;
 }
 .wwm-card-toggle input {
@@ -1731,6 +1976,9 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-card-toggle.na { opacity: 0.35; cursor: default; }
 .wwm-card-actions { display: flex; gap: var(--space-2); }
 .wwm-card-actions > button { flex: 1; min-width: 0; }
+/* タブ切替時に footer から card actions を隠す ([hidden] は display:flex に負けるため明示 override) */
+.wwm-tool-modal-footer .wwm-card-actions[hidden],
+.wwm-tool-modal-footer [data-foot-owner][hidden] { display: none; }
 /* Generate = button-primary 語彙 (金 gradient + 墨茶文字)。 literal = 両 theme constant */
 .wwm-card-generate {
   width: 100%;
@@ -1762,7 +2010,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
-.wwm-card-post-x:hover { background: var(--hover-soft); border-color: var(--c-focus-ring); }
+.wwm-card-post-x:hover { background: var(--shine-soft); border-color: var(--c-focus-ring); }
 .wwm-card-post-x[hidden] { display: none; }
 .wwm-card-post-hint { margin-top: var(--space-half); }
 
@@ -1784,7 +2032,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   overflow: hidden;
   background: #07060a;
   color: #ede4d0;
-  font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+  font-family: 'Noto Serif JP', var(--f-display-title);
   text-align: left;
   /* panel 上に乗る色は --cd-* に集約 (墨 default)。 .wwm-card-panel-light が古紙 override */
   --cd-panel-1: rgba(7,6,10,0.86);
@@ -1852,7 +2100,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   content: '燕';
   position: absolute; right: 36px; top: 50%;
   transform: translateY(-50%) rotate(-6deg);
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display-title);
   font-weight: 900; font-size: 430px; line-height: 1;
   color: rgba(200,60,43,0.13);
 }
@@ -1918,7 +2166,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-card-portrait-fb {
   display: flex; align-items: center; justify-content: center;
   color: var(--cd-gold-2); font-weight: 800; font-size: 44px;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display-title);
 }
 .wwm-card-portrait::after { /* 下部 vignette (名前との接続) */
   content: '';
@@ -1938,7 +2186,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 
 .wwm-card-info-name {
   text-align: center;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display-title);
   font-size: 19px; font-weight: 700; color: var(--cd-ink);
   margin-bottom: 8px;
 }
@@ -1968,20 +2216,20 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 /* 武格指数 (info カラム内) */
 .wwm-card-mi { margin-bottom: 10px; }
 .wwm-card-mi-label .ja {
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display-title);
   font-weight: 900; font-size: 18px; letter-spacing: 0.12em;
   color: var(--cd-gold);
 }
 .wwm-card-mi-label .en {
   display: block;
-  font-family: 'Rajdhani', monospace;
+  font-family: var(--f-latin);
   font-size: 10px; font-weight: 600; letter-spacing: 0.3em;
   color: var(--cd-gold-2);
   margin-top: 1px;
 }
 .wwm-card-mi-row { display: flex; align-items: baseline; gap: 14px; margin-top: 4px; }
 .wwm-card-mi-num {
-  font-family: 'Cinzel', 'Noto Serif JP', serif;
+  font-family: var(--f-latin);
   font-weight: 800; font-size: 64px; line-height: 0.95; letter-spacing: -0.01em;
   color: var(--cd-gold);
   text-shadow: var(--cd-num-shadow);
@@ -1993,7 +2241,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   display: inline-flex; align-items: center; justify-content: center;
   padding: 4px 14px;
   border-radius: 2px; border: 1.5px solid;
-  font-family: 'Cinzel', serif;
+  font-family: var(--f-latin);
   font-weight: 800; font-size: 24px; line-height: 1;
 }
 .wwm-card-tier-big { font-size: 30px; padding: 6px 16px; }
@@ -2061,10 +2309,10 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .wwm-card-xtile b {
-  font-family: 'Rajdhani', monospace;
+  font-family: var(--f-latin);
   font-size: 11px; font-weight: 700; color: var(--cd-gold); letter-spacing: 0.08em;
 }
-.wwm-card-xtile-empty { color: var(--cd-mute); font-size: 12px; justify-content: center; min-height: 64px; }
+.wwm-card-xtile-empty { color: var(--cd-sub); font-size: 12px; justify-content: center; min-height: 64px; }
 /* 武術 compact (icon + 名称のみ) */
 .wwm-card-kf-compact { align-items: center; }
 .wwm-card-kf-compact .wwm-card-cell-name { font-size: 13px; }
@@ -2135,7 +2383,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 }
 .wwm-card-judge-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 .wwm-card-judge-name { color: var(--cd-sub); flex: 1; }
-.wwm-card-judge-val { font-family: 'Rajdhani', monospace; font-weight: 700; font-size: 14px; }
+.wwm-card-judge-val { font-family: var(--f-latin); font-weight: 700; font-size: 14px; }
 
 /* 武術 / 心法 cell */
 .wwm-card-cell {
@@ -2152,13 +2400,13 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-card-cell-icon-xf { border-radius: 2px; }
 .wwm-card-liupai { position: absolute; left: -7px; top: -7px; width: 20px; height: 20px; }
 .wwm-card-cell-texts { display: flex; flex-direction: column; min-width: 0; }
-.wwm-card-cell-sub { font-size: 10px; letter-spacing: 0.06em; color: var(--cd-mute); }
+.wwm-card-cell-sub { font-size: 10px; letter-spacing: 0.06em; color: var(--cd-sub); }
 .wwm-card-xf-tier { color: var(--cd-gold); font-weight: 700; }
 .wwm-card-cell-name {
   font-size: 13px; font-weight: 700; color: var(--cd-gold);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.wwm-card-cell-empty .wwm-card-cell-name { color: var(--cd-mute); font-weight: 400; }
+.wwm-card-cell-empty .wwm-card-cell-name { color: var(--cd-sub); font-weight: 400; }
 .wwm-card-info-arts .wwm-card-cell { min-height: 40px; padding: 4px 9px; background: var(--cd-cell); }
 .wwm-card-info-arts .wwm-card-cell-iconwrap,
 .wwm-card-info-arts .wwm-card-cell-icon { width: 32px; height: 32px; }
@@ -2170,22 +2418,22 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   display: flex; justify-content: space-between; align-items: center;
   background: var(--cd-footer-bg);
   border-top: 1px solid var(--cd-line);
-  font-family: 'Rajdhani', monospace;
+  font-family: var(--f-latin);
   font-size: 11px; letter-spacing: 0.16em;
-  color: var(--cd-mute);
+  color: var(--cd-sub);
 }
 .wwm-card-gungi .wwm-card-footer { margin-left: -40px; margin-right: -40px; padding: 10px 40px 12px; }
 .wwm-card-footer-brand {
   display: inline-flex; align-items: center; gap: 7px;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display-title);
   font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
   color: var(--cd-gold-2);
 }
 .wwm-card-footer-brand i {
   font-style: normal;
-  font-family: 'Cinzel', serif;
+  font-family: var(--f-latin);
   font-size: 9px; font-weight: 600; letter-spacing: 0.22em;
-  color: var(--cd-mute);
+  color: var(--cd-sub);
 }
 .wwm-card-footer-seal {
   width: 16px; height: 16px;
@@ -2197,7 +2445,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 }
 .wwm-card-footer-copy {
   font-size: 9px; letter-spacing: 0.06em;
-  color: var(--cd-mute);
+  color: var(--cd-sub);
 }
 .wwm-card-footer-url { color: var(--cd-gold-2); font-weight: 700; }
 
@@ -2231,7 +2479,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   display: flex; flex-direction: column; align-items: center;
 }
 .wwm-card-gsec-title {
-  font-family: 'Rajdhani', monospace;
+  font-family: var(--f-latin);
   font-size: 11px; font-weight: 700; letter-spacing: 0.24em;
   color: var(--cd-gold-2);
   margin: 2px 0 5px;
@@ -2246,13 +2494,13 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 }
 .wwm-card-stat5-l {
   display: block;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--f-display-title);
   font-size: 12px; font-weight: 700;
   color: var(--cd-sub);
 }
 .wwm-card-stat5-v {
   display: block;
-  font-family: 'Rajdhani', monospace;
+  font-family: var(--f-latin);
   font-size: 19px; font-weight: 700;
   color: var(--cd-gold);
 }
@@ -2266,7 +2514,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-card-row:last-child { border-bottom: none; }
 .wwm-card-row-l { color: var(--cd-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .wwm-card-row-v {
-  font-family: 'Rajdhani', monospace;
+  font-family: var(--f-latin);
   font-weight: 700; font-size: 14px;
   color: var(--cd-gold);
   white-space: nowrap;
@@ -2297,11 +2545,11 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 }
 .wwm-gate-title {
   margin: 0 0 var(--space-3);
-  font-family: var(--f-display, var(--f-latin));
+  font-family: var(--f-display-title);
   font-size: var(--text-15); font-weight: var(--fw-bold);
   color: var(--gold-bright);
   letter-spacing: 0.15em;
-  text-shadow: 0 0 10px var(--gold-bright-soft);
+  text-shadow: 0 0 10px color-mix(in oklab, var(--gold-bright) 25%, transparent);
 }
 .wwm-gate-bar {
   height: 6px;
@@ -2313,7 +2561,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   position: relative;
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--vermilion-deep), var(--vermilion-mid));
+  background: linear-gradient(90deg, var(--vermilion-deep), color-mix(in oklab, var(--vermilion) 30%, transparent));
   transition: width 0.35s ease;
 }
 .wwm-gate-fill::after { /* shimmer */
@@ -2325,7 +2573,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 .wwm-gate-fill.wwm-gate-fill-done { background: var(--gold-bright); } /* 完了 = 金 (階級の光) */
 .wwm-gate-label {
   font-size: var(--text-12);
-  color: var(--paper-mute);
+  color: var(--sumi-fg);
   letter-spacing: 0.05em;
 }
 @keyframes wwm-gate-shimmer {
@@ -2348,7 +2596,7 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
   min-height: 24px;
   font-size: 13px;
   line-height: 1;
-  background: var(--c-btn-secondary-bg); /* themed (dark=transparent / light=shade) */
+  background: transparent; /* themed (dark=transparent / light=shade) */
   color: inherit; /* ? の文字色 — UA default 黒だと墨 theme で不可視 (2026-06-08 兄貴指摘) */
   border: 1px solid var(--gold-deep);
   border-radius: 2px;
@@ -2357,27 +2605,418 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 }
 .wwm-ocr-btn:hover { border-color: var(--vermilion); }
 .wwm-ocr-btn:disabled { opacity: 0.5; cursor: progress; }
+/* 同級承音 ボタン: 新置 panel 内、 affix rows の直上に独立行 (新置 affix#1〜#5 を MAX×0.94 一括置換)
+   font/枠 = footer ボタン (cmpApply 系) と同系統 楷書 + 控えめ sub-action 寸法 */
+.wwm-cmp-shouon-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: 6px 0 8px;
+}
+.wwm-cmp-shouon-btn {
+  padding: 5px 14px;
+  min-height: 28px;
+  font-family: var(--f-display-title);
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0.10em;
+  background: var(--sumi-2);
+  color: var(--sumi-fg);
+  border: 1px solid var(--sumi-2);
+  border-radius: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.wwm-cmp-shouon-btn:hover {
+  background: var(--vermilion);
+  border-color: var(--vermilion);
+  color: var(--sumi-fg);
+}
+
+/* Lv + Rank (品質: 金/紫/青) 1 行: 武術 select 上、 現有/新置 col 縦位置揃え (2026-06-18 兄貴指示)。
+   new = 2 select 横並び (Lv + Rank)、 current = read-only span 表示 */
+.wwm-cmp-lv-rank-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 6px;
+}
+.wwm-cmp-lv-rank-row .wwm-cmp-lv-select,
+.wwm-cmp-lv-rank-row .wwm-cmp-rank-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 2px 22px 2px 8px;
+  min-height: 24px;
+  font-family: var(--f-latin);
+  font-weight: 700;
+  font-size: var(--text-14);
+  color: var(--c-modal-a-lv-fg);
+  background-color: var(--shine-strong);
+  background-image: linear-gradient(45deg, transparent 50%, var(--c-modal-a-lv-fg) 50%), linear-gradient(135deg, var(--c-modal-a-lv-fg) 50%, transparent 50%);
+  background-position: calc(100% - 12px) 50%, calc(100% - 7px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  border: 1px solid var(--c-cmp-title--cmp-lv-border);
+  border-radius: 2px;
+  cursor: pointer;
+}
+.wwm-cmp-lv-rank-row .wwm-cmp-lv-select option,
+.wwm-cmp-lv-rank-row .wwm-cmp-rank-select option {
+  background: var(--bg-modal-a-option);
+  color: var(--c-modal-a-fg);
+}
+/* current 列 read-only: Lv + Rank label 並列、 Rank は品質色 */
+.wwm-cmp-lv-rank-readonly .wwm-cmp-lv,
+.wwm-cmp-lv-rank-readonly .wwm-cmp-rank {
+  padding: 2px 8px;
+  font-family: var(--f-latin);
+  font-weight: 700;
+  font-size: var(--text-14);
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+.wwm-cmp-lv-rank-readonly .wwm-cmp-lv {
+  color: var(--c-modal-a-lv-fg);
+}
+.wwm-cmp-rank-gold   { color: var(--gold); }
+.wwm-cmp-rank-purple { color: var(--purple, #b48ad8); }
+.wwm-cmp-rank-blue   { color: var(--blue, #6fa8d8); }
+
+/* blue 装備 affix#5/#6 ロック row: select/input 編集不可 + 半透明 grey-out */
+.wwm-cmp-rank-locked {
+  opacity: 0.4;
+  pointer-events: none;
+}
+.wwm-cmp-rank-locked .wwm-cmp-stat-select,
+.wwm-cmp-rank-locked .wwm-cmp-val-input {
+  cursor: not-allowed;
+  background: transparent;
+}
+
+/* ─── icon-select 共通 component (2026-06-18 兄貴指示) ───
+   武術/心法/セット select に icon + 名前を視覚並列。 ネイティブ <select> は option に
+   <img> 入れられないため custom dropdown 化。 mock/icon-select.html 仕様採用 */
+.ic-select {
+  position: relative;
+  display: block;
+  width: 100%;
+  font-family: var(--f-display-title, inherit);
+  z-index: 10;
+}
+/* 開時は兄弟 (Tier select 等) より手前に出す = 兄弟 stacking 兄弟の高 z-index に勝つ */
+.ic-select[aria-expanded="true"] { z-index: 200; }
+.ic-select-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px 28px 6px 6px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--gold-deep);
+  border-radius: 3px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  position: relative;
+  transition: border-color 0.15s, background 0.15s;
+}
+.ic-select-trigger:hover {
+  border-color: var(--gold);
+  background: rgba(255, 255, 255, 0.65);
+}
+.ic-select-trigger::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid var(--gold-deep);
+  border-bottom: 1.5px solid var(--gold-deep);
+  transform: translateY(-65%) rotate(45deg);
+}
+.ic-select[aria-expanded="true"] .ic-select-trigger::after {
+  transform: translateY(-35%) rotate(-135deg);
+}
+/* read-only (現有列): trigger 風だが popup なし + arrow 非表示 + クリック不可 */
+.ic-readonly .ic-select-trigger { cursor: default; }
+.ic-readonly .ic-select-trigger::after { display: none; }
+.ic-readonly .ic-select-trigger { padding-right: 8px; }
+.ic-readonly .ic-select-trigger:hover {
+  border-color: var(--gold-deep);
+  background: rgba(255, 255, 255, 0.45);
+}
+.ic-select-trigger .ic-name {
+  font-size: 14px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--sumi-1, #1a1410);
+}
+/* chip: 武術/心法 = 墨色 box + 白 icon、 セット = 直 icon (色不変) */
+.ic-chip {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ic-chip--inkbox {
+  background: var(--sumi-2);
+  padding: 3px;
+}
+.ic-chip--inkbox img,
+.ic-chip--plain img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+/* popup */
+.ic-select-popup {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--kami-1, #e8dfc4);
+  border: 1px solid var(--gold-deep);
+  border-radius: 3px;
+  padding: 4px;
+  box-shadow: 0 6px 20px rgba(26, 20, 16, 0.25);
+  z-index: 100;
+  max-height: 175px;
+  overflow-y: auto;
+  display: none;
+  /* スクロールバー: 既存 pattern (note/anlz/zerobase) と統一 (gold-deep + thin) */
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-deep) transparent;
+}
+.ic-select-popup::-webkit-scrollbar { width: 5px; }
+.ic-select-popup::-webkit-scrollbar-track { background: transparent; }
+.ic-select-popup::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 2px; }
+.ic-select-popup::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+.ic-select[aria-expanded="true"] .ic-select-popup {
+  display: block;
+}
+.ic-select-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 0 2px 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.12s, transform 0.12s;
+}
+.ic-select-opt:hover {
+  background: rgba(201, 164, 90, 0.18);
+  transform: translateY(-1px);
+}
+.ic-select-opt[aria-selected="true"] {
+  background: var(--vermilion);
+  color: var(--sumi-fg);
+}
+.ic-select-opt[aria-selected="true"] .ic-chip--inkbox {
+  background: var(--sumi-0);
+  outline: 1px solid var(--gold-bright);
+  outline-offset: -1px;
+}
+.ic-select-opt .ic-name {
+  font-size: 14px;
+  flex: 1;
+}
+/* 他スロット使用中 等で選択不可 = 朱字 + 半透明 + クリック無効 */
+.ic-select-opt.is-disabled {
+  color: var(--vermilion);
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.ic-select-opt.is-disabled:hover {
+  background: transparent;
+  transform: none;
+}
+.ic-select-opt.is-disabled .ic-chip--inkbox {
+  opacity: 0.6;
+}
+
+/* ── 格析 (ゼロベース比較) anlz subtab panel (2026-06-18 TODO 1) ── */
+#wwmZerobase .wwm-zb-panel {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 8px;
+  /* height = .wwm-analysis-card 570px (装備最適化 panel と統一) */
+}
+/* 測定開始 = panel 中央 */
+#wwmZerobase .wwm-zb-start {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 100%; gap: 20px; padding: 0 40px; text-align: center;
+}
+#wwmZerobase .wwm-zb-start-desc {
+  font-size: var(--text-sm); color: var(--sumi-fg); line-height: 1.6; max-width: 480px;
+}
+#wwmZerobase .wwm-zb-start-btn {
+  padding: 12px 32px; font-size: var(--text-md);
+  font-family: var(--f-display-title); letter-spacing: 0.08em;
+}
+/* 再計算 button = panel 下端右寄せ */
+#wwmZerobase .wwm-zb-rerun-row {
+  display: flex; justify-content: flex-end;
+  padding-top: 6px; border-top: 1px solid color-mix(in oklab, var(--gold) 25%, transparent);
+}
+#wwmZerobase .wwm-zb-rerun-btn {
+  padding: 4px 14px; font-size: var(--text-12);
+  font-family: var(--f-display-title); letter-spacing: 0.08em;
+}
+#wwmZerobase .wwm-zb-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  grid-template-rows: 1fr;
+  gap: 12px;
+  min-height: 0;
+  overflow: hidden;
+}
+#wwmZerobase .wwm-zb-divider {
+  background: color-mix(in oklab, var(--gold) 32%, transparent);
+}
+#wwmZerobase .wwm-zb-col {
+  min-width: 0;
+  display: flex; flex-direction: column;
+  min-height: 0;
+}
+#wwmZerobase .wwm-zb-col-title {
+  font-family: var(--f-display-title);
+  font-size: var(--text-14);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+  text-shadow: 0 0 10px color-mix(in oklab, var(--gold-bright) 25%, transparent);
+  margin: 0 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid color-mix(in oklab, var(--gold) 38%, transparent);
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  flex-shrink: 0;
+}
+#wwmZerobase .wwm-zb-col-title-text { white-space: nowrap; flex-shrink: 0; }
+#wwmZerobase .wwm-zb-col-score {
+  flex: 1; min-width: 0;
+  text-align: center;
+  font-family: var(--f-latin);
+  font-weight: 700;
+  font-size: var(--text-md);
+  letter-spacing: 0.04em;
+  color: var(--sumi-fg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#wwmZerobase .wwm-zb-col-score .wwm-zb-delta {
+  font-size: var(--text-12);
+  letter-spacing: 0.06em;
+  margin-left: 6px;
+}
+#wwmZerobase .wwm-zb-col-score .wwm-zb-delta.pos { color: var(--vermilion); }
+#wwmZerobase .wwm-zb-col-score .wwm-zb-delta.neg { color: var(--sumi-fg-dim); }
+#wwmZerobase .wwm-zb-apply-btn {
+  padding: 4px 12px;
+  min-height: 26px;
+  font-family: var(--f-display-title);
+  font-weight: 800;
+  font-size: var(--text-12);
+  line-height: 1.2;
+  letter-spacing: 0.10em;
+  background: var(--sumi-2);
+  color: var(--sumi-fg);
+  border: 1px solid var(--sumi-2);
+  border-radius: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+#wwmZerobase .wwm-zb-apply-btn:hover:not(:disabled) {
+  background: var(--vermilion);
+  border-color: var(--vermilion);
+  color: var(--sumi-fg);
+}
+#wwmZerobase .wwm-zb-apply-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+#wwmZerobase .wwm-zb-body {
+  flex: 1; min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+#wwmZerobase .wwm-zb-body::-webkit-scrollbar { width: 5px; }
+#wwmZerobase .wwm-zb-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 2px; }
+#wwmZerobase .wwm-zb-slots { display: flex; flex-direction: column; gap: 4px; }
+#wwmZerobase .wwm-zb-slot {
+  padding: 4px 6px;
+  border-bottom: 1px dashed color-mix(in oklab, var(--gold) 28%, transparent);
+}
+#wwmZerobase .wwm-zb-slot:last-child { border-bottom: none; }
+#wwmZerobase .wwm-zb-slot-name {
+  font-family: var(--f-display-title); font-weight: 700;
+  font-size: var(--text-sm); letter-spacing: 0.06em;
+  margin-bottom: 2px;
+  color: var(--gold-deep);
+}
+#wwmZerobase .wwm-zb-affix {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: var(--text-12); padding: 1px 0;
+  color: var(--sumi-fg);
+}
+#wwmZerobase .wwm-zb-affix-name {
+  flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+#wwmZerobase .wwm-zb-affix-val { font-weight: var(--fw-bold); white-space: nowrap; color: var(--sumi-fg); }
+@media (max-width: 600px) {
+  /* zerobase = 1 col 縦積み (兄貴指示 2026-06-20、 格析 popout mobile)。
+     grid-template-rows: 1fr (PC default L2812) を auto auto auto に上書きしないと
+     1 col × 1 row = 全子 1 cell 重畳描画 で「二重」 症状になる */
+  #wwmZerobase .wwm-zb-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-auto-rows: auto;
+    gap: 8px;
+  }
+  #wwmZerobase .wwm-zb-divider { display: none; }
+  #wwmZerobase .wwm-zb-col {
+    display: flex; flex-direction: column;
+    width: 100%;
+    min-width: 0;
+  }
+}
 .wwm-ocr-status {
   margin-left: 6px;
   font-size: 11px;
-  color: var(--paper-mute);
+  color: var(--kami-fg);
   letter-spacing: 0.03em;
   vertical-align: middle;
 }
 .wwm-ocr-lang-sel {
   margin-left: 4px;
   font-size: 11px;
-  font-family: var(--f-mono);
-  background: var(--c-btn-secondary-bg);
+  font-family: var(--f-display-title);
+  background: transparent;
   color: inherit;
   border: 1px solid var(--gold-deep);
   border-radius: 2px;
   vertical-align: middle;
 }
-/* 低確信行: 朱枠 (編集で解除) */
+/* 低確信行: 朱枠 (編集で解除)。 child の input/select border (1px) と外側 outline がクロス
+   して 2 本見える事故を回避するため offset を -1px で row 内側に食い込ませ + 太め (2.5px) で
+   視認強化 (2026-06-18 兄貴指摘 — row 調整後の見え方調整) */
 .wwm-cmp-edit-row.wwm-ocr-warn {
-  outline: 1.5px solid var(--vermilion);
-  outline-offset: 1px;
+  outline: 2.5px solid var(--vermilion);
+  outline-offset: -1px;
 }
 /* drop hover (新置列) */
 .wwm-cmp-new.wwm-ocr-dropping { outline: 2px dashed var(--gold-deep); outline-offset: -2px; }
@@ -2428,6 +3067,266 @@ html[data-theme="light"] .wwm-cmp-modal-a .wwm-cmp-ratio.rank-blue { background:
 }
 .wwm-ocr-guide-steps { margin: 0 0 8px; padding-left: 20px; font-size: 12px; line-height: 1.7; }
 .wwm-ocr-guide-steps li { margin-bottom: 4px; }
-.wwm-ocr-guide-note { margin: 0; font-size: 11px; color: var(--paper-mute); }
+.wwm-ocr-guide-note { margin: 0; font-size: 11px; color: var(--kami-fg); }
+
+/* ── cmp modal 二層化 (2026-06-12): body = 紙 (.wwm-ws-paper、token は workspace.css
+   paper scope 定義) / header・footer = 墨。rule 上書きは @layer modals (components より
+   後勝ち) のためここに置く ── */
+.wwm-modal-body.wwm-ws-paper {
+  background: var(--kami-0);
+  color: var(--kami-fg);
+}
+/* col = 本番 light 実効 rgba(255,255,255,0.4) (pages.dev computed 採取 2026-06-12) */
+.wwm-modal-body.wwm-ws-paper .wwm-cmp-col {
+  background: var(--shine-mid-2);
+}
+/* Lv select = 本番 light 実効 hover-strong 白50% (--bg-raised 墨の紙上書き。
+   token rescope でなく pinpoint — --bg-raised は modal 外殻も参照 = rescope 波及回避) */
+.wwm-modal-body.wwm-ws-paper .wwm-cmp-title .wwm-cmp-lv-select {
+  background-color: var(--shine-strong);
+}
+.wwm-modal-body.wwm-ws-paper .wwm-cmp-title .wwm-cmp-lv-select option {
+  background: var(--bg-modal-a-option);
+}
+/* %バッジ rank 色 = 旧 light 値 (main modals.css の data-theme=light rule から移植)。
+   !important = gear.js inline color 対抗 (原典同様) */
+/* 2026-06-17: 紙地視認性 up = ベタ塗り + 白抜き + 暗色 border (兄貴指摘) */
+.wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-gold { background: rgba(184,134,11,0.88); color: #fff !important; border-color: #6b4d08; }
+.wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-purple { background: rgba(120,60,160,0.85); color: #fff !important; border-color: #4a2566; }
+.wwm-modal-body.wwm-ws-paper .wwm-cmp-ratio.rank-blue { background: rgba(40,90,160,0.85); color: #fff !important; border-color: #1a3a70; }
+/* footer = mountain image 下方 (山道 center bottom) + #00000094 overlay 重ね (2026-06-20 兄貴指摘で構造対称化、 header と同じ書き方) */
+.wwm-cmp-footer-a {
+  background:
+    var(--bg-modal-overlay),
+    url("../bg/mountain-1920.webp") center bottom / 100% auto no-repeat,
+    var(--sumi-3);
+}
+
+/* ╔═══════════════════════════════════════════════════════════════════╗
+     TOOL MODAL (二層化統一 2026-06-13 — 旧逆パターン廃止、兄貴決定)
+     ツール機能 modal 共通: header/footer=墨 / body=紙 = 対照 .wwm-cmp-modal-a
+     と同文法に統一 (modal ごとに白黒反転はユーザーの目が疲れる)。
+     区別 = seal 金 (対照 modal = 朱 seal とのワンポイント差分のみ)。
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+.wwm-tool-modal {
+  position: relative;
+  isolation: isolate;
+  /* header → tabs 連続 1 枚水墨用 modal 全体 base mountain image。 body は wwm-ws-paper 紙地で覆われる、 footer は独立 mountain (center bottom = 山道) で上書き
+     2026-06-21 兄貴指摘で header と tabs の絵が繋がってないと NG → modal base 化で連続化 */
+  background:
+    url("../bg/mountain-1920.webp") center top / 100% auto no-repeat,
+    var(--sumi-3);
+  border: 1px solid var(--gold-deep);
+  border-radius: 0 0 2px 2px;
+  padding: 0;
+}
+/* 旧 .wwm-modal の金 radial 装飾/角飾りは tool modal では殺す (引き算) */
+.wwm-tool-modal::before, .wwm-tool-modal::after { display: none; }
+
+/* L字 bracket 四隅 (対照 modal と同寸・金) */
+.wwm-tool-modal .wwm-tool-bracket {
+  position: absolute; width: 14px; height: 14px;
+  border: 1px solid var(--gold-deep); opacity: 0.7;
+  pointer-events: none; z-index: 3;
+}
+.wwm-tool-modal .wwm-tool-bracket-tl { top: 6px; left: 6px; border-right: none; border-bottom: none; }
+.wwm-tool-modal .wwm-tool-bracket-tr { top: 6px; right: 6px; border-left: none; border-bottom: none; }
+.wwm-tool-modal .wwm-tool-bracket-bl { bottom: 6px; left: 6px; border-right: none; border-top: none; }
+.wwm-tool-modal .wwm-tool-bracket-br { bottom: 6px; right: 6px; border-left: none; border-top: none; }
+
+/* header = 黒 overlay 0.58 (2026-06-19 兄貴決定値、 対照 modal と統一)
+   modal 本体水墨を黒越しに抑え気味で透かす。 tabs は薄黒 #0000004f で連続感 */
+.wwm-tool-modal .wwm-modal-header {
+  /* overlay のみ (mountain image は .wwm-tool-modal modal base から透過、 header→tabs 連続表示) */
+  background: var(--bg-modal-overlay);
+  border-bottom: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
+  padding: var(--space-3) var(--space-4) var(--space-2-5);
+}
+.wwm-tool-modal .wwm-modal-header::after { display: none; } /* 旧金線 glow 廃止 */
+/* 題字: ja 明朝 + EN sub + 金 seal — サイズ感 = 武具対照 (.wwm-cmp-title-ja/en/.wwm-cmp-seal) と同値 (2026-06-13 兄貴指定) */
+.wwm-tool-modal .wwm-modal-header h2 {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--c-modal-a-title-ja-fg); text-shadow: none; text-transform: none;
+  font-family: var(--f-display-title);
+}
+.wwm-tool-modal .wwm-tool-title-ja {
+  font-family: var(--f-display-title);
+  font-size: var(--text-18);
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-shadow: var(--c-cmp-modal-a--cmp-title-ja-text-shadow);
+}
+.wwm-tool-modal .wwm-tool-title-en {
+  font-family: var(--f-latin);
+  font-size: var(--text-sm);
+  letter-spacing: 0.32em; color: var(--c-cmp-title-en-fg); font-weight: 600;
+  align-self: flex-end; padding-bottom: var(--space-half);
+}
+/* seal = 金 28×28 回転型 (対照の朱 seal と同形、色だけ区別記号) */
+.wwm-tool-modal .wwm-tool-seal {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  font-family: var(--f-display-title); font-size: var(--text-lg); font-weight: 900;
+  color: #2a1c12; background: var(--accent); /* 儀金 #d4af37 両 theme constant */
+  border: 2px solid var(--gold-bright);
+  border-radius: 2px;
+  transform: rotate(-6deg);
+}
+.wwm-tool-modal .wwm-modal-close { color: var(--sumi-fg); }
+.wwm-tool-modal .wwm-modal-close:hover { background: var(--shine-soft); }
+
+/* body = 紙 (JS が .wwm-ws-paper を付与 → 汎用紙 rule L2441 + token rescope が当たる)
+   position: relative = bg-icon (absolute) の包含ブロック
+   overflow-y: auto = base (L110) の縦 scroll — overflow:hidden は縦短 viewport でクリップした前歴 */
+.wwm-tool-modal .wwm-modal-body { padding: var(--space-4); position: relative; overflow-y: auto; overflow-x: hidden; }
+/* bg-icon は body box フィット固定 (inset 0 = scrollHeight 不拡張)。
+   はみ出し演出は background-position の +offset 側で維持 (base L1030 / diag L1309)。
+   absolute のまま scroll でコンテンツと共に流れるのは許容 (装飾)。 fixed 化禁止 (viewport 基準事故)
+   紙面上は対照 modal の bg-icon と同じ白抜き表示が透けすぎる場合あり → 実機目視で調整 */
+.wwm-tool-modal .wwm-modal-body .wwm-modal-bg-icon { inset: 0; width: auto; height: auto; }
+
+/* footer = mountain image 下方 (山道 center bottom) + #00000094 overlay 重ね (2026-06-20 兄貴指摘で構造対称化、 header と同じ書き方) */
+.wwm-tool-modal-footer {
+  background:
+    var(--bg-modal-overlay),
+    url("../bg/mountain-1920.webp") center bottom / 100% auto no-repeat,
+    var(--sumi-3);
+  border-top: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
+  padding: var(--space-3) var(--space-4) var(--space-3-5);
+  display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+}
+/* ボタン = 対照 modal と同じ公式素材で全 modal 統一 (2026-06-13 兄貴指定)。
+   confirm/cancel png は素材自体が地を持つ = 墨 footer / 紙 body どちらでも成立 */
+.wwm-tool-modal-footer .wwm-btn-primary,
+.wwm-tool-modal .wwm-modal-body .wwm-btn-primary,
+.wwm-tool-modal-footer .wwm-card-generate {
+  background:
+    url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/popup_btn_confirm-48cfa7e2.png") center / 100% 100% no-repeat,
+    linear-gradient(180deg, var(--gold-bright), var(--gold));
+  border: 1px solid var(--gold-bright);
+  border-radius: 0;
+  color: var(--brown-1);
+  padding: 7px 18px;
+  font-size: var(--text-12);
+  font-weight: var(--fw-bold);
+  box-shadow: none;
+}
+.wwm-tool-modal-footer .wwm-btn-secondary,
+.wwm-tool-modal .wwm-modal-body .wwm-btn-secondary,
+.wwm-tool-modal-footer .wwm-card-post-x {
+  background: var(--bg-modal-a-btn-secondary);
+  border: 1px solid var(--c-cmp-btn-row--btn-secondary-border, var(--sumi-fg));
+  border-radius: 0;
+  color: var(--brown-1);
+  padding: 7px 18px;
+  font-size: var(--text-12);
+  font-weight: var(--fw-bold);
+  box-shadow: none;
+}
+
+/* タブ行 (NOTE / 飛簡 共用): 墨帯に並び、active = 紙の差し込み (紙 body へ繋がる —
+   workspace 帳簿フォルダ tab と同文法)。
+   2026-06-19 兄貴指示: header + tabs 連続 1 枚水墨。 tabs に薄黒 overlay (#0000004f ≈ 0.31)
+   で header との僅か差別化を付ける (連続感は保つ) */
+.wwm-tool-tabs {
+  display: flex; gap: 2px; padding: 0 var(--space-4);
+  /* overlay (mountain image は .wwm-tool-modal modal base から透過、 header と連続 1 枚水墨)
+     overlay = 0.5 (2026-06-21 兄貴調整、 0.31 = 薄すぎ / 0.74 = 落差なし / 0.5 = 中間) */
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  border-bottom: 1px solid var(--gold-deep);
+}
+.wwm-tool-tab {
+  padding: 7px 18px; border: 1px solid transparent; border-bottom: none;
+  background: transparent; color: var(--sumi-fg); cursor: pointer;
+  font-family: var(--f-display-title); font-size: var(--text-sm);
+  font-weight: 600; letter-spacing: 0.1em; border-radius: 2px 2px 0 0;
+}
+.wwm-tool-tab.active {
+  background: var(--kami-0);
+  color: var(--kami-fg); border-color: var(--gold-deep);
+  position: relative; top: 1px;
+}
+.wwm-tool-tab:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* 紙 body 内の文脈ボタン (IMPORT 再適用等) は上の公式素材統一 rule が地ごと面倒を見る
+   (旧 茶文字/茶枠の紙対応 rule は素材統一 2026-06-13 で撤去) */
+
+/* ── カード生成 pane の紙対応 (2026-06-13 兄貴指摘「ライト化で文字が見えない」) ──
+   card controls が消費する --c-* / --gold-* は paper scope (workspace.css) 未移植の
+   墨向け明色 → pane scope で紙値に rescope (個別 rule 上書きより波及が読める) */
+.wwm-modal-body.wwm-ws-paper .wwm-card-modal-body {
+  --c-modal-fg: var(--kami-fg);            /* tpl-btn の 武格/軍議 */
+  --c-fg-accent: #8a1f17;                   /* active 文字 = 深朱 */
+  --c-fg-gold-label: #6a4a10;               /* ctl-btn (画像を選ぶ/墨/紙/左/右) = 暗金 */
+  --c-sb-section-title-fg: #b85a14;         /* section title = 朱橙 */
+  --c-focus-ring: var(--vermilion);         /* active 枠 = 朱 (focus 朱統一と整合) */
+  --gold-mid: rgba(138,106,32,0.45);        /* ctl-btn 枠 */
+  --gold-faint: rgba(138,106,32,0.12);      /* active/hover 地 */
+}
+
+/* layout-b (2026-06-13 兄貴画像準拠): 左 = stage + 下段 [テンプレ | 背景] / 右 = 表示項目 + プレイ情報 */
+.wwm-card-layout-b .wwm-card-under {
+  display: grid;
+  grid-template-columns: minmax(200px, 260px) 1fr;
+  gap: var(--space-5);
+  margin-top: var(--space-3);
+}
+.wwm-card-layout-b .wwm-card-under .wwm-card-ctl-section { margin-bottom: 0; }
+.wwm-card-layout-b .wwm-card-bg-head {
+  display: flex; align-items: baseline; gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+.wwm-card-layout-b .wwm-card-bg-head .wwm-card-ctl-title { margin-bottom: 0; flex-shrink: 0; }
+.wwm-card-layout-b .wwm-card-bg-head .wwm-card-stage-hint { margin: 0; }
+/* post-hint = 右列の下端 (footer の保存/ポスト btn の直上) へ margin auto で押し下げ。
+   親 grid は align-items:start (L1594) = item が stretch しない → controls を stretch + flex column 化 */
+.wwm-card-layout-b .wwm-card-controls { display: flex; flex-direction: column; align-self: stretch; }
+.wwm-card-layout-b .wwm-card-post-hint { margin-top: auto; padding-top: var(--space-4); }
+/* footer の保存/ポスト btn = 1 行固定。base の flex:1+min-width:0 が幅圧縮で折り返し +
+   .wwm-card-generate 等の width:100% (旧 controls 列 264px 前提) が footer でははみ出し → 内容幅に */
+.wwm-tool-modal-footer .wwm-card-actions > button { flex: 0 0 auto; width: auto; min-width: 0; white-space: nowrap; }
+@media (max-width: 768px) {
+  .wwm-card-layout-b .wwm-card-under { grid-template-columns: 1fr; gap: var(--space-4); }
+}
+
+/* ── 飛簡 modal (wwm-share-modal-b) 固有調整 ────────────────────── */
+/* OBS タブは PC 専用 — mobile では旧 .wwm-share-obs-block { display:none } と等価 */
+@media (max-width: 480px) {
+  .wwm-share-modal-b .wwm-tool-tab[data-tab="obs"] { display: none; }
+}
+
+/* en 表示時は EN sub を出さない (title 自体が英語 = 重複、export.js L715 と同思想の CSS 統一解) */
+html[lang="en"] .wwm-tool-modal .wwm-tool-title-en { display: none; }
+
+/* ── NOTE modal (wwm-note-modal-b) 固有調整 ─────────────────────── */
+/* 旧 .wwm-note-modal-a (720px) から width 系継承 */
+.wwm-note-modal-b {
+  width: 720px;
+  max-width: 94vw;
+}
+/* body = 紙面: 旧コンテンツ色 (--brown-3 系 = 巻物紙前提) がそのまま正 —
+   逆パターン時代の墨面用上書き群は 2026-06-13 統一で撤去 */
+.wwm-note-modal-b .wwm-modal-body {
+  overflow-y: auto;
+  max-height: 60vh;
+  /* 2026-06-15 兄貴指示: NOTE = 唯一の --f-body (Noto Sans JP) 例外。
+     更新履歴 / 仕様 = 長文読み物のため sans 維持 (base.css の display 化を上書き) */
+  font-family: var(--f-body);
+}
+
+/* 2026-06-16 兄貴指示 — share modal の「画像カード」 タブ (= .wwm-share-modal-b) が全体読みづらい解消。
+   preview (.wwm-card) + control UI + footer 全部 Noto Serif JP (900 load 済) 太字 serif で統一。
+   配置 = modal 全 rule の最末尾 → cascade 後勝ちで個別 rule (0,1,0) を上書き */
+.wwm-share-modal-b,
+.wwm-share-modal-b * {
+  font-family: 'Noto Serif JP', 'Shippori Mincho', 'Yu Mincho', serif;
+  font-weight: 700;
+}
 
 } /* end @layer modals */
+
+/* 紙 modal の rows padding — dark.css の html[data-theme=dark] rule (@layer dark > modals)
+   が常時適用 (html 属性が dark のまま) のため、light layer (> dark) で本番 light 同値の 0 へ */
+@layer light {
+  .wwm-modal-body.wwm-ws-paper .wwm-cmp-rows { padding: 0; }
+}

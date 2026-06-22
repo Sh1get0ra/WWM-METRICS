@@ -1,17 +1,66 @@
 {
-  "current": "2.1.1",
+  "current": "2.2.0",
   "entries": [
+    {
+      "version": "2.2.0",
+      "date": "2026-06-22",
+      "items": [
+        {
+          "featured": true,
+          "ja": "【UI 全面改修】 開発中の新機能を追加するため、 Workspace型UIへ移行。 武備 (装備/心法/武庫/奇術) / 戦律 (DPS/コンボシミュレータ) ※開発中 / 履歴 の タブ構成と格析ポップアップパネルの構成に再設計。 旧UIに慣れた方は最初戸惑うかもしれませんが、 基本の使い方は変わりません。 インポート後にチュートリアルツアーも実装させていただきましたので、 ご確認お願いします。",
+          "en": "[Full UI Overhaul] Migrated to a Workspace-style UI to make room for upcoming features. Restructured into tabs — Build (gear / xinfa / arsenal / qishu) / Tactics (DPS / combo simulator) ※in development / History — plus an Analysis popout panel. Returning users may feel disoriented at first, but the core workflow hasn't changed. A tutorial tour now runs after import — please give it a look.",
+          "zh": "【UI 全面改版】 为了添加开发中的新功能, 迁移至 Workspace 型 UI。 重新设计为 武备 (装备/心法/武库/奇术) / 战律 (DPS/连招模拟器) ※开发中 / 历史 的 tab 构成 + 格析弹出面板。 习惯旧 UI 的用户可能最初会感到困惑, 但基本用法没有改变。 导入后追加了新手引导教程, 请确认。",
+          "ko": "【UI 전면 개편】 개발 중인 신규 기능 추가를 위해, Workspace 형 UI 로 이행. 무비 (장비/심법/무기고/기술) / 전율 (DPS/콤보 시뮬레이터) ※개발 중 / 이력 의 탭 구성과 격석 팝업 패널 구성으로 재설계. 구 UI 에 익숙한 분은 처음 당황할 수 있으나, 기본 사용법은 변하지 않았습니다. 임포트 후 튜토리얼 투어도 구현하였으니 확인 부탁드립니다.",
+          "vi": "[Đại tu UI] Chuyển sang UI kiểu Workspace để dành chỗ cho các tính năng đang phát triển. Tái thiết kế thành các tab — Vũ Bị (trang bị / tâm pháp / kho vũ khí / kỳ thuật) / Chiến Luật (DPS / mô phỏng combo) ※đang phát triển / Lịch Sử — cùng popup Cách Tích. Người dùng cũ có thể bối rối lúc đầu, nhưng luồng sử dụng cơ bản không đổi. Đã thêm tour hướng dẫn sau khi import — vui lòng kiểm tra."
+        },
+        {
+          "ja": "【単一テーマ化 (墨×紙)】 ダーク/ライトテーマを廃止し、 墨×紙 武侠水墨の単一テーマに統合。",
+          "en": "[Single Theme (Ink × Paper)] Retired the dark/light themes in favor of a unified wuxia ink theme (ink × paper).",
+          "zh": "【单一主题 (墨×纸)】 废除 dark/light 主题, 统合为墨×纸 武侠水墨单一主题。",
+          "ko": "【단일 테마 (먹×종이)】 다크/라이트 테마를 폐지하고, 먹×종이 무협 수묵 단일 테마로 통합.",
+          "vi": "[Theme đơn (Mực × Giấy)] Bỏ theme dark/light, hợp nhất thành theme võ hiệp thủy mặc đơn (mực × giấy)."
+        },
+        {
+          "ja": "【格析ポップアップパネル化】 旧「格析 タブ」 を ポップアップで出現するウィンドウ化。 武備で装備を変えながら、 別ウィンドウで 期待値ランキング / 装備最適化など をリアルタイム監視。",
+          "en": "[Analysis Popup Panel] The old Analysis tab is now a popup window. Edit gear in Build while monitoring Expected-Value Ranking / Gear Optimization etc. live in a separate window.",
+          "zh": "【格析弹出面板化】 旧「格析 tab」 改为弹出窗口形式。 在武备调整装备的同时、 在另一窗口实时监控 期望值排行 / 装备最优化 等。",
+          "ko": "【격석 팝업 패널화】 구「격석 탭」 을 팝업으로 등장하는 창으로 변경. 무비에서 장비를 변경하면서 별 창에서 기댓값 랭킹 / 장비 최적화 등 을 실시간 모니터링.",
+          "vi": "[Popup Cách Tích] Tab «Cách Tích» cũ giờ là cửa sổ popup. Chỉnh trang bị ở Vũ Bị trong khi theo dõi Xếp Hạng Giá Trị Kỳ Vọng / Tối Ưu Trang Bị v.v. trực tiếp ở cửa sổ khác."
+        },
+        {
+          "ja": "【モバイル環境最適化】 モバイル環境 (≤600px) は フッターにタブ要素 (装備/心法/演武/履歴/格析) を配置。 ステータスパネルはFAB式から、 画面右側のスライドパネル型へ変更。 その他、 武具対照パネルや、 装備の一覧が見れる武備パネルではページ式採用。",
+          "en": "[Mobile Optimization] On mobile (≤600px), tab elements (Gear/Xinfa/Tactics/History/Analysis) are placed in the footer. The stats panel switched from a FAB to a slide-in panel from the right edge. The gear-compare panel and the Build panel (gear list view) now use a paged layout.",
+          "zh": "【移动端优化】 移动端 (≤600px) 在底栏配置 tab 元素 (装备/心法/演武/历史/格析)。 状态面板从 FAB 改为画面右侧滑出面板。 此外, 武具对照面板和武备面板 (装备一览) 采用分页式。",
+          "ko": "【모바일 환경 최적화】 모바일 환경 (≤600px) 은 푸터에 탭 요소 (장비/심법/연무/이력/격석) 를 배치. 스탯 패널은 FAB 식에서 화면 우측 슬라이드 패널형으로 변경. 그 외, 무구 비교 패널과 장비 일람을 볼 수 있는 무비 패널에서는 페이지 식 채용.",
+          "vi": "[Tối ưu Mobile] Trên mobile (≤600px), các tab (Trang Bị/Tâm Pháp/Diễn Võ/Lịch Sử/Cách Tích) đặt ở footer. Bảng chỉ số chuyển từ FAB sang panel trượt từ cạnh phải. Ngoài ra, panel đối chiếu trang bị và panel Vũ Bị (xem danh sách trang bị) chuyển sang dạng phân trang."
+        },
+        {
+          "ja": "【観音強化 反映 / 計算式 v13】 ゲームアップデートにより観音の強化値が拡張されました。 計算式バージョンが更新されましたので、 再インポートをお願いします。",
+          "en": "[Guanyin Enhancement / Formula v13] A game update extended the Guanyin enhancement values. The formula version was bumped — please re-import.",
+          "zh": "【观音强化 反映 / 计算公式 v13】 游戏更新扩展了观音强化数值。 计算公式版本已更新, 请重新导入。",
+          "ko": "【관음 강화 반영 / 계산식 v13】 게임 업데이트로 관음 강화값이 확장되었습니다. 계산식 버전이 갱신되었으니, 재 임포트를 부탁드립니다.",
+          "vi": "[Cường hóa Quan Âm / Công thức v13] Cập nhật game đã mở rộng giá trị cường hóa Quan Âm. Phiên bản công thức đã bump — vui lòng import lại."
+        },
+        {
+          "ja": "【表示 / 数値ロジック 細部修正】 ゲーム実機に合わせステータス表示方式を変更しました。",
+          "en": "[Display / Numeric Polish] Stat display format updated to match the in-game display.",
+          "zh": "【显示 / 数值逻辑 细节修正】 状态显示方式调整为与游戏实机一致。",
+          "ko": "【표시 / 수치 로직 세부 수정】 게임 실기에 맞춰 스탯 표시 방식을 변경하였습니다.",
+          "vi": "[Hiển thị / Đánh bóng số liệu] Cập nhật định dạng hiển thị chỉ số khớp với hiển thị trong game."
+        }
+      ]
+    },
     {
       "version": "2.1.1",
       "date": "2026-06-11",
       "items": [
         {
           "featured": true,
-          "ja": "【大世界Lv15 対応】 基礎ステータスを大世界Lv15 に更新 (五行ステ +8 / 命中率 +2% / 会心率 +4% / 会意率 +2%)。 SS Tier 閾値も連動して上昇 (6700 → 8375)。 計算式バージョン更新のため、 お手数ですが再インポートをお願いします。",
-          "en": "[World Level 15 Support] Updated base stats to World Level 15 (five attributes +8 / Precision +2% / Crit +4% / Affinity +2%). The SS tier threshold rises accordingly (6700 → 8375). The formula version changed — please re-import your character.",
-          "zh": "【大世界Lv15 对应】 基础属性更新为大世界Lv15 (五行属性 +8 / 精准率 +2% / 会心率 +4% / 会意率 +2%)。 SS Tier 阈值随之上升 (6700 → 8375)。 计算公式版本已更新, 请重新导入角色数据。",
-          "ko": "【대세계 Lv15 대응】 기초 스탯을 대세계 Lv15 로 갱신 (오행 스탯 +8 / 정확도 +2% / 치명타 확률 +4% / 각성 확률 +2%). SS Tier 임계값도 연동 상승 (6700 → 8375). 계산식 버전이 갱신되어 재임포트를 부탁드립니다.",
-          "vi": "[Hỗ trợ Đại Thế Giới Lv15] Cập nhật chỉ số cơ bản lên Đại Thế Giới Lv15 (ngũ hành +8 / tỷ lệ chính xác +2% / tỷ lệ chí mạng +4% / tỷ lệ hiểu ý +2%). Ngưỡng SS Tier tăng theo (6700 → 8375). Phiên bản công thức đã thay đổi — vui lòng import lại nhân vật."
+          "ja": "【大世界Lv15 対応】 基礎ステータスを大世界Lv15 に更新 (五行ステ +8 / 命中率 +2% / 会心率 +4% / 会意率 +2%)。 計算式バージョン更新のため、 お手数ですが再インポートをお願いします。",
+          "en": "[World Level 15 Support] Updated base stats to World Level 15 (five attributes +8 / Precision +2% / Crit +4% / Affinity +2%). The formula version changed — please re-import your character.",
+          "zh": "【大世界Lv15 对应】 基础属性更新为大世界Lv15 (五行属性 +8 / 精准率 +2% / 会心率 +4% / 会意率 +2%)。 计算公式版本已更新, 请重新导入角色数据。",
+          "ko": "【대세계 Lv15 대응】 기초 스탯을 대세계 Lv15 로 갱신 (오행 스탯 +8 / 정확도 +2% / 치명타 확률 +4% / 각성 확률 +2%). 계산식 버전이 갱신되어 재임포트를 부탁드립니다.",
+          "vi": "[Hỗ trợ Đại Thế Giới Lv15] Cập nhật chỉ số cơ bản lên Đại Thế Giới Lv15 (ngũ hành +8 / tỷ lệ chính xác +2% / tỷ lệ chí mạng +4% / tỷ lệ hiểu ý +2%). Phiên bản công thức đã thay đổi — vui lòng import lại nhân vật."
         },
         {
           "ja": "【心法 Tier2 効果の大世界Lv連動 更新】 心法 Tier2 のステータス付与 (外功攻撃/会心率/命中率/会意率/path攻撃) はゲーム内で大世界Lvに連動して成長する仕様 — 全 38 心法の Tier2 値を Lv15 値に更新 (例: 会心率 7.4% → 8.2%)。",

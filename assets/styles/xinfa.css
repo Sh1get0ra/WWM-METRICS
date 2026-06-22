@@ -11,28 +11,28 @@
 
 .wwm-cmp-tier-row {
   display: flex; align-items: center; gap: 8px;
-  padding: 3px 2px;
-  border-bottom: 1px dashed var(--gold-tint);
-  font-size: var(--text-sm); line-height: 1.3;
+  padding: 8px 8px; /* 2026-06-17: 行間ゆとり (兄貴指摘) */
+  border-bottom: 1.5px dashed color-mix(in oklab, var(--gold) 38%, transparent); /* 2026-06-17: 武具 cmp sprint 罫線と整合 */
+  font-size: var(--text-sm); line-height: 1.45;
 }
 
 .wwm-cmp-tier-row:last-child { border-bottom: none; }
 
 .wwm-cmp-tier-num {
   flex-shrink: 0; min-width: 24px; text-align: center;
-  font-family: var(--f-mono); font-weight: 700; font-size: var(--text-xs);
+  font-family: var(--f-latin); font-weight: 700; font-size: var(--text-xs);
   padding: 0 var(--space-1); border-radius: 2px;
-  background: rgba(201,164,90,0.16); color: var(--gold-bright);
-  border: 1px solid rgba(201,164,90,0.4);
+  background: var(--sumi-2); color: #fff; /* 2026-06-17: 黄枠朱文字 → 墨塗白文字 (兄貴指示) */
+  border: 1px solid var(--sumi-2);
 }
 
-.wwm-cmp-tier-eff { flex: 1 1 auto; color: var(--paper); }
+.wwm-cmp-tier-eff { flex: 1 1 auto; color: var(--kami-fg); }
 
 .wwm-cmp-tier-row.wwm-tier-unrel { opacity: 0.42; }
 
-.wwm-cmp-tier-row.wwm-tier-unrel .wwm-cmp-tier-num { background: var(--hover-trace); color: var(--paper-mute); border-color: rgba(255,255,255,0.14); }
+.wwm-cmp-tier-row.wwm-tier-unrel .wwm-cmp-tier-num { background: var(--shine-trace); color: var(--kami-fg); border-color: rgba(255,255,255,0.14); }
 
-.wwm-cmp-tier-row.wwm-tier-kfmiss .wwm-cmp-tier-eff { color: var(--vermilion-bright); }
+.wwm-cmp-tier-row.wwm-tier-kfmiss .wwm-cmp-tier-eff { color: var(--vermilion); }
 
 .wwm-cmp-tier-row.wwm-tier-empty { opacity: 0.3; }
 
@@ -41,18 +41,18 @@
 /* design-preview.html 準拠: --f-latin = Cinzel, --jade-bright = #a8d4b4 */
 .tier-badge-baseline { /* baseline は current と同等表示 */ }
 
-.wwm-hero-delta.pos { color: #2ec27e; }
+.wwm-hero-delta.pos { color: var(--vermilion-bright); }
 
-.wwm-hero-delta.neg { color: #ff6b6b; }
+.wwm-hero-delta.neg { color: var(--sumi-fg); }
 
-.wwm-hero-delta.zero { color: rgba(255,255,255,0.35); }
+.wwm-hero-delta.zero { color: var(--sumi-fg); }
 
 /* ライトモード: 白系rgba background を 影系に */
 /* ライト rank/opt: zebra + 常時アクセント + hover を統一 */
 .wwm-cmp-lv {
   font-size: 0.75em;
-  color: var(--gold-bright);
-  font-family: var(--f-mono);
+  color: var(--gold-paper);
+  font-family: var(--f-latin);
   font-weight: var(--fw-semibold);
   margin-left: var(--space-1-5);
   padding: 1px 5px;
@@ -64,11 +64,11 @@
 .wwm-cmp-lv-select {
   font-size: 0.85em;
   color: var(--c-cmp-lv-select-fg);
-  font-family: var(--f-mono);
+  font-family: var(--f-latin);
   font-weight: var(--fw-semibold);
   margin-left: var(--space-1-5);
   padding: var(--space-half) var(--space-2);
-  background: var(--bg-raised);
+  background: #1a1410;
   border: 1px solid var(--gold-deep);
   border-radius: 2px;
   vertical-align: middle;
@@ -77,9 +77,9 @@
 }
 
 .wwm-cmp-lv-select option {
-  background: var(--bg-raised);
+  background: #1a1410;
   color: var(--gold-bright);
-  font-family: var(--f-mono);
+  font-family: var(--f-latin);
 }
 
 /* ライト: select/input 黒背景 → 紙系 */
@@ -109,7 +109,7 @@
    (2026-06-05 @layer Step 1: 汎用 modal rule との file 分裂解消 — layer 移行で
    modals.css が後 layer になり、 components.css 残置だと spec 勝ちが order 負けに反転するため) */
 .wwm-cmp-kongfu {
-  font-size: var(--text-12); color: var(--accent);
+  font-size: var(--text-12); color: var(--gold-paper);
   font-weight: var(--fw-semibold); margin-left: var(--space-2);
 }
 
@@ -165,12 +165,12 @@
 /* 心法 rail label も center 維持 (badge は rail上端 / label center で共存) */
 .wwm-xinfa-slot:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--accent-mid);
+  box-shadow: 0 4px 12px color-mix(in oklab, var(--accent) 30%, transparent);
 }
 
 .wwm-xinfa-rail {
   position: absolute; left: 0; top: 0; bottom: 0; width: 30px;
-  background: var(--c-rail-bg);
+  background: var(--bg-rail);
   border-right: 1px solid var(--ink-2);
   display: flex; align-items: center; justify-content: center;
   padding: var(--space-2) 0;
@@ -178,11 +178,11 @@
 }
 
 .wwm-xinfa-rail-text {
-  font-family: var(--f-display); font-weight: var(--fw-black);
+  font-family: var(--f-display-title); font-weight: var(--fw-black);
   font-size: var(--text-12); letter-spacing: 0.3em;
   writing-mode: vertical-rl; text-orientation: upright;
   color: var(--gold-bright);
-  text-shadow: 0 0 10px var(--gold-bright-mid-2);
+  text-shadow: 0 0 10px color-mix(in oklab, var(--gold-bright) 40%, transparent);
   line-height: 1.05;
 }
 
@@ -197,10 +197,10 @@
 
 .wwm-xinfa-header { flex-wrap: wrap; }
 
-.wwm-xinfa-header b { font-size: var(--text-md); color: var(--paper); font-weight: 600; }
+.wwm-xinfa-header b { font-size: var(--text-md); color: var(--sumi-fg); font-weight: 600; }
 
 .wwm-xinfa-tier {
-  font-family: var(--f-mono);
+  font-family: var(--f-latin);
   font-size: var(--text-xs);
   color: var(--c-xinfa-tier-fg);
   padding: 1px 5px;
@@ -218,7 +218,7 @@
   width: 88px; height: 88px;
   opacity: var(--c-icon-dim-opacity);
   filter:
-    drop-shadow(0 0 3px var(--gold-bright-mid))
+    drop-shadow(0 0 3px color-mix(in oklab, var(--gold-bright) 50%, transparent))
     drop-shadow(0 0 8px rgba(240,210,138,0.3))
     drop-shadow(0 0 16px rgba(240,210,138,0.2));
   pointer-events: none;
@@ -277,7 +277,7 @@
 
 .wwm-equip-rail {
   position: absolute; left: 0; top: 0; bottom: 0; width: 30px;
-  background: var(--c-rail-bg);
+  background: var(--bg-rail);
   border-right: 1px solid var(--ink-2);
   display: flex; align-items: center; justify-content: center;
   padding: var(--space-2) 0;
@@ -285,10 +285,10 @@
 }
 
 .wwm-equip-rail-text {
-  font-family: var(--f-display); font-weight: var(--fw-black);
+  font-family: var(--f-display-title); font-weight: var(--fw-black);
   font-size: var(--text-md); letter-spacing: 0.3em;
   writing-mode: vertical-rl; text-orientation: upright;
-  color: var(--paper);
+  color: var(--sumi-fg);
   text-shadow: 0 0 10px rgba(232,215,180,0.4);
   line-height: 1.05;
 }
@@ -299,7 +299,7 @@
 .wwm-equip-slot[data-slot="10"] .wwm-equip-rail-text,
 .wwm-equip-slot[data-slot="11"] .wwm-equip-rail-text {
   color: var(--vermilion-bright);
-  text-shadow: 0 0 12px var(--vermilion-bright-mid-2);
+  text-shadow: 0 0 12px color-mix(in oklab, var(--vermilion-bright) 55%, transparent);
 }
 
 /* 防具セット (冠/胸当て/膝鎧/小手) - 金 */
@@ -315,7 +315,7 @@
 .wwm-equip-slot[data-slot="9"]  .wwm-equip-rail-text,
 .wwm-equip-slot[data-slot="21"] .wwm-equip-rail-text {
   color: var(--jade-bright);
-  text-shadow: 0 0 12px var(--jade-bright-strong);
+  text-shadow: 0 0 12px color-mix(in oklab, var(--jade-bright) 55%, transparent);
 }
 
 .wwm-equip-setname {
@@ -337,7 +337,7 @@
 
 .wwm-equip-affix .wwm-rank-purple { color: var(--liupai-guyun); }
 
-.wwm-equip-affix .wwm-rank-gold   { color: var(--accent); }
+.wwm-equip-affix .wwm-rank-gold   { color: var(--gold-bright); }
 
 .wwm-affix-useful { color: var(--ratio-ok); font-weight: var(--fw-bold); cursor: help; }
 
@@ -423,13 +423,13 @@
   position: absolute;
   top: 5px; right: 8px;
   z-index: 3;
-  font-family: var(--f-mono);
+  font-family: var(--f-latin);
   font-size: var(--text-xs);
   font-weight: var(--fw-bold);
   color: var(--c-fg-vermilion-strong);
   padding: 1px 6px;
   border: 1px solid rgba(232,81,58,0.50);
-  background: var(--c-xinfa-tier-chip-bg);
+  background: var(--bg-xinfa-tier-chip);
   letter-spacing: 0.08em;
   border-radius: 1px;
   pointer-events: none;
@@ -454,54 +454,51 @@
   border: 1px dashed var(--ink-2);
   display: grid;
   place-items: center;
-  color: var(--paper-mute);
+  color: var(--sumi-fg);
   transition: border-color 0.15s, background-color 0.15s;
 }
 
 .wwm-placeholder-grid:hover .wwm-placeholder-slot {
   border-color: var(--gold-deep);
-  background-color: var(--gold-faint);
+  background-color: color-mix(in oklab, var(--gold) 8%, transparent);
 }
 
 /* light rank色 override 3 rule は light.css 末尾へ再移動 (Step 5-c 2026-06-06):
    modals.css .wwm-rank-* (modals layer = components より後) との競合は components 内では
    imp でしか勝てない → theme layer (light) なら natural 常勝 = imp 不要。 勝者不変 */
 
-@media (max-width: 768px) {
-  .wwm-equip-slot[data-slot] {
-    grid-column: 1; grid-row: auto;
-  }
-}
+/* @media (max-width: 768px) の grid-column: 1 強制 = 旧縦 1 列 layout の残骸、
+   gear-grid 中間帯 auto-fit (gear.css 481-930) と衝突して全 slot を 1 列目に重ねていた → 削除 (2026-06-19 兄貴指示) */
 
-@media (max-width: 480px) {
-  /* ─── Phase 5: 装備 2列 stack / 心法 2列 / 武庫 直下 ─── */
+@media (max-width: 600px) {
+  /* mobile v2 (2026-06-19 兄貴指示「横 4 列で一旦」): 装備 4 列 3 行 (主副冠胸 / 環佩膝腕 / 弓射庫) */
   .wwm-gear-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: auto;
     grid-template-areas: none;
-    gap: var(--space-2);
+    gap: var(--space-1);
   }
   .wwm-gear-grid .wwm-equip-slot {
     grid-column: auto;
     grid-row: auto;
   }
-  /* 装備カード 並び順: 主武器→副武器→環→佩→冠胄→胸冑→膝冑→腕冑→弓箭→射玦 */
-  .wwm-gear-grid .wwm-equip-slot[data-slot="1"]  { order: 1; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="2"]  { order: 2; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="10"] { order: 3; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="11"] { order: 4; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="3"]  { order: 5; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="4"]  { order: 6; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="5"]  { order: 7; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="8"]  { order: 8; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="21"] { order: 9; }
-  .wwm-gear-grid .wwm-equip-slot[data-slot="9"]  { order: 10; }
-  /* 心法 grid: 2列 stack、 武庫 心法直下 1枚 (parent grid 確認後 後 phase で 微調整) */
+  /* 装備カード 並び順 (兄貴指示 2026-06-19): 主副冠胸 / 環佩膝腕 / 弓射庫 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="1"]  { order: 1; }  /* 主武器 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="2"]  { order: 2; }  /* 副武器 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="3"]  { order: 3; }  /* 冠胄 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="4"]  { order: 4; }  /* 胸冑 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="10"] { order: 5; }  /* 環 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="11"] { order: 6; }  /* 佩 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="5"]  { order: 7; }  /* 膝冑 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="8"]  { order: 8; }  /* 腕冑 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="21"] { order: 9; }  /* 弓箭 */
+  .wwm-gear-grid .wwm-equip-slot[data-slot="9"]  { order: 10; } /* 射玦 */
+  /* 心法 grid: 4列 (T0-T3 同行)、 武庫 心法直下 全幅 */
   .wwm-xinfa-grid,
   #wwmXinfaGrid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-2);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-1);
   }
   .wwm-xinfa-slot[data-arsenal-slot] {
     grid-column: 1 / -1;  /* 武庫 横全幅で 心法直下 */

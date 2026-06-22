@@ -1,4 +1,4 @@
-// ── WWM-METRICS / Sidebar / Virtual State (Phase 3.9f 切出) ──
+// ── WWMetrics / Sidebar / Virtual State (Phase 3.9f 切出) ──
 // 仮想装備 (Edit modal 適用結果) の merge / 永続化 / リセット を担当。
 // WWMState.virtual.{gear, kongfu, xinfa, arsenal} を localStorage 'wwm_virtual_v1' に保存、
 // _getEffectiveRoleInfo / _getEffectiveState で 元データに重ね合わせて参照。
@@ -60,12 +60,14 @@
         gear:    WWMState.virtual.gear || null,
         kongfu:  WWMState.virtual.kongfu || null,
         xinfa:   WWMState.virtual.xinfa || null,
-        arsenal: WWMState.virtual.arsenal || null
+        arsenal: WWMState.virtual.arsenal || null,
+        qishu:   WWMState.virtual.qishu || null
       };
       const empty = (!data.gear || !Object.keys(data.gear).length)
                  && (!data.kongfu || !Object.keys(data.kongfu).length)
                  && (!data.xinfa || (!(data.xinfa.passive && data.xinfa.passive.length) && !Object.keys(data.xinfa.tiers || {}).length))
-                 && (!data.arsenal);
+                 && (!data.arsenal)
+                 && (!data.qishu || !data.qishu.some(Boolean));
       if (empty) localStorage.removeItem(_VIRTUAL_KEY);
       else localStorage.setItem(_VIRTUAL_KEY, JSON.stringify(data));
     } catch (_) {}
@@ -79,19 +81,22 @@
       if (d.kongfu)  WWMState.virtual.kongfu = d.kongfu;
       if (d.xinfa)   WWMState.virtual.xinfa = d.xinfa;
       if (d.arsenal) WWMState.virtual.arsenal = d.arsenal;
+      if (d.qishu)   WWMState.virtual.qishu = d.qishu;
     } catch (_) {}
   }
   function _resetAllVirtuals() {
     const hasV = (WWMState.virtual.gear && Object.keys(WWMState.virtual.gear).length)
               || (WWMState.virtual.kongfu && Object.keys(WWMState.virtual.kongfu).length)
               || (WWMState.virtual.xinfa && ((WWMState.virtual.xinfa.passive && WWMState.virtual.xinfa.passive.length) || Object.keys(WWMState.virtual.xinfa.tiers || {}).length))
-              || WWMState.virtual.arsenal;
+              || WWMState.virtual.arsenal
+              || (WWMState.virtual.qishu && WWMState.virtual.qishu.some(Boolean));
     if (!hasV) { alert('リセット対象なし'); return; }
-    if (!confirm('新装備/心法/武術/武庫 全てを現装備値に戻す。よろしい?')) return;
+    if (!confirm('新装備/心法/武術/武庫/奇術 全てを現装備値に戻す。よろしい?')) return;
     WWMState.virtual.gear = {};
     WWMState.virtual.kongfu = {};
     WWMState.virtual.xinfa = null;
     WWMState.virtual.arsenal = null;
+    WWMState.virtual.qishu = null;
     try { localStorage.removeItem('wwm_virtual_v1'); } catch (_) {}
     if (typeof window._refreshAll === 'function') window._refreshAll();
   }

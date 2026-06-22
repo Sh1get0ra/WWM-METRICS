@@ -1,0 +1,40 @@
+{
+  "_schema": "合成ラベル用 共通語彙。path基底 + 接辞。固有名 (武術/心法/セット) は per-domain json 側。言語追加時はここに lang 列を足すだけ。",
+  "_lastUpdated": "2026-06-08",
+  "pathBase": {
+    "bellstrike": { "ja": "鋼鳴", "en": "Bellstrike", "zh": "鸣金", "ko": "명금" },
+    "stonesplit": { "ja": "砕岩", "en": "Stonesplit", "zh": "裂石", "ko": "열석" },
+    "silkbind":   { "ja": "糸操", "en": "Silkbind", "zh": "牵丝", "ko": "견사" },
+    "bamboocut":  { "ja": "瞬嵐", "en": "Bamboocut", "zh": "破竹", "ko": "파죽" },
+    "void":       { "ja": "無相", "en": "Void", "zh": "无相", "ko": "무상" }
+  },
+  "affix": {
+    "min":     { "ja": "最小", "en": "Min ", "zh": "最小", "ko": "최소 " },
+    "max":     { "ja": "最大", "en": "Max ", "zh": "最大", "ko": "최대 " },
+    "atk":     { "ja": "攻撃", "en": "", "zh": "攻击", "ko": " 공격" },
+    "atkStat": { "ja": "攻撃力", "en": " ATK", "zh": "攻击", "ko": " 공격" },
+    "pen":     { "ja": "貫通", "en": " Pen", "zh": "穿透", "ko": " 관통" },
+    "dmgUp":   { "ja": "ダメージ強化", "en": " DMG", "zh": "伤害加成", "ko": " 피해 증가" }
+  },
+  "_skillTypeNote": "武術名 affix ラベル合成用 技種別接辞。武器名 = kongfu.json names (唯一源)、接辞 = ここ。合成 = stripWeaponType(names[L]) + ' ' + skillType[id][L] (build-labels.js)。en のみ weaponLabel.en で武器種語を strip。",
+  "skillType": {
+    "martial":     { "ja": "武術技", "en": "Q", "zh": "武学技", "ko": "무술 스킬" },
+    "charged":     { "ja": "溜め技", "en": "Ch", "zh": "蓄力技", "ko": "차지 스킬" },
+    "special":     { "ja": "特殊技", "en": "Sp", "zh": "特殊技", "ko": "특수 스킬" },
+    "drone":       { "ja": "特殊技", "en": "Drone", "zh": "特殊技", "ko": "특수 스킬" },
+    "light":       { "ja": "軽撃", "en": "LA", "zh": "强效轻击", "ko": "강력한 약 공격" },
+    "rodent":      { "ja": "鼠", "en": "Rodent", "zh": "鼠鼠", "ko": "쥐 기술" },
+    "shield":      { "ja": "シールド効果", "en": "Shield", "zh": "护盾增效", "ko": "보호막 효과" },
+    "healing":     { "ja": "重撃回復量", "en": "Heal", "zh": "重击回复", "ko": "중격 회복" },
+    "bleed":       { "ja": "流血", "en": "Bleed", "zh": "流血", "ko": "출혈" },
+    "variedCombo": { "ja": "軽重撃派生", "en": "LA/HC", "zh": "轻重击派生", "ko": "경중격 파생" }
+  },
+  "_weaponLabelNote": "en strip 用 武器種語 (kongfu.weaponType → en語)。names.en 末尾から除去し冠名のみ残す (Strategic Sword → Strategic)。en 専用。",
+  "weaponLabel": {
+    "en": {
+      "sword": "Sword", "spear": "Spear", "fan": "Fan", "umbrella": "Umbrella",
+      "mo_blade": "Blade", "dual_blades": "Twinblades", "new_blade": "Blade",
+      "rope_dart": "Rope Dart", "ropeDart": "Rope Dart", "gauntlet": "Gauntlet"
+    }
+  }
+}

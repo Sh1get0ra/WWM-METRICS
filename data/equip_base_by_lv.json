@@ -1,8 +1,13 @@
 {
-  "_schema": "装備 slot 別 Lv → baseAttrs 値表。 import data の baseAttrs から逆引きで 装備個別Lv 推定 + edit modal で Lv変更時 base値更新用。",
-  "_lastUpdated": "2026-05-29",
-  "_source": "Where Winds Math (Ruricon) + ユーザー実機画像",
+  "_schema": "装備 slot 別 Lv → baseAttrs 値表。 import data の baseAttrs から逆引きで 装備個別Lv 推定 + edit modal で Lv変更時 base値更新用。 品質 (金/紫/青) 軸: 金 = slots (default)、 紫 = round(金 × 0.9) で算式導出 (table 不要)、 青 = blue_slots (採取済 entry のみ、 未収録 = 金 fallback)。",
+  "_lastUpdated": "2026-06-18",
+  "_source": "Where Winds Math (Ruricon) + ユーザー実機画像 (青 Lv91 = 2026-06-18 兄貴採取)",
   "_lvList": [91, 86, 81, 71],
+  "_qualityRule": {
+    "gold": "slots (base table)",
+    "purple": "round(gold × 0.9) — 算式導出、 5/5 hit (主武器/環/冠 で検証)",
+    "blue": "blue_slots (採取値)。 ×0.8 で stat 別丸め: HP_MAX/MAX_W_ATK=round / W_DEF/MIN_W_ATK=ceil (累積 9 件 hit) — ただ単一係数導出は数学的不可確定で table 採取運用"
+  },
 
   "slots": {
     "1": {
@@ -84,6 +89,43 @@
       "86": { "ARCHER_DAMAGE": 250 },
       "81": { "ARCHER_DAMAGE": 218 },
       "71": { "ARCHER_DAMAGE": 176 }
+    }
+  },
+
+  "blue_slots": {
+    "_note": "青品質 base 値。 schema = slots と同形。 採取済 entry のみ収録、 未収録 Lv = 当面 fallback (金品質扱い)。 弓系 (slot 9/21) は青運用想定なし = 採取除外 (2026-06-18 兄貴判断)。 副武器 (slot 2) = 主武器同値推定。",
+    "_source": "2026-06-18 兄貴ゲーム内手動採取",
+    "1": {
+      "_label": "主武器",
+      "91": { "MIN_W_ATK": 43, "MAX_W_ATK": 99 }
+    },
+    "2": {
+      "_label": "副武器",
+      "91": { "MIN_W_ATK": 43, "MAX_W_ATK": 99 }
+    },
+    "3": {
+      "_label": "冠",
+      "91": { "HP_MAX": 3691, "W_DEF": 15 }
+    },
+    "4": {
+      "_label": "胸当",
+      "91": { "HP_MAX": 7382, "W_DEF": 15 }
+    },
+    "5": {
+      "_label": "膝鎧",
+      "91": { "HP_MAX": 3691, "W_DEF": 29 }
+    },
+    "8": {
+      "_label": "小手",
+      "91": { "HP_MAX": 3691, "W_DEF": 15 }
+    },
+    "10": {
+      "_label": "環",
+      "91": { "MIN_W_ATK": 57 }
+    },
+    "11": {
+      "_label": "佩",
+      "91": { "MAX_W_ATK": 85 }
     }
   }
 }

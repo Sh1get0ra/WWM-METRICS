@@ -1,0 +1,143 @@
+/* WWMetrics Tutorial — driver.js popover 墨×紙 統合 override
+   2026-06-21 Phase 4: driver.js v1.3.1 デフォルト白基調 popover → sumi-2 背景 + 紙地 border + 朱筆 accent */
+
+/* popover container = sumi-2 背景 + 紙地 細枠 */
+.wwm-tutorial-popover.driver-popover {
+  background: var(--sumi-2, #2f2a23);
+  color: var(--sumi-fg, #ede4d0);
+  border: 1px solid var(--kami, #ede4d0);
+  border-radius: 4px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(201, 164, 90, 0.18);
+  font-family: var(--f-body, "Noto Sans JP", sans-serif);
+  max-width: 380px;
+  padding: 18px 20px 14px;
+}
+
+/* title = 楷書 + 朱 accent underline */
+.wwm-tutorial-popover .driver-popover-title {
+  color: var(--vermilion, #c43a2c);
+  font-family: var(--f-display-ja, "Noto Serif JP", serif);
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(196, 58, 44, 0.35);
+  letter-spacing: 0.04em;
+}
+
+/* description = 紙色 fg */
+.wwm-tutorial-popover .driver-popover-description {
+  color: var(--sumi-fg, #ede4d0);
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0 0 12px;
+}
+
+/* close button (×) */
+.wwm-tutorial-popover .driver-popover-close-btn {
+  color: var(--sumi-fg-dim, #8a7a5e);
+  font-size: 22px;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  transition: color 0.15s ease;
+}
+.wwm-tutorial-popover .driver-popover-close-btn:hover {
+  color: var(--vermilion, #c43a2c);
+}
+
+/* footer = progress + nav buttons */
+.wwm-tutorial-popover .driver-popover-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  gap: 8px;
+}
+
+.wwm-tutorial-popover .driver-popover-progress-text {
+  color: var(--sumi-fg-dim, #8a7a5e);
+  font-size: 11px;
+  font-family: var(--f-latin, "Rajdhani", sans-serif);
+  letter-spacing: 0.1em;
+}
+
+/* nav buttons (Next / Prev / Done) — wwm-btn-primary 風 */
+.wwm-tutorial-popover .driver-popover-navigation-btns {
+  display: flex;
+  gap: 6px;
+}
+.wwm-tutorial-popover .driver-popover-navigation-btns button {
+  background: var(--sumi-1, #1f1c18);
+  color: var(--sumi-fg, #ede4d0);
+  border: 1px solid var(--kami-fg-dim, #5a4d3a);
+  border-radius: 3px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  text-shadow: none;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.wwm-tutorial-popover .driver-popover-navigation-btns button:hover {
+  background: var(--vermilion, #c43a2c);
+  border-color: var(--vermilion, #c43a2c);
+  color: #fff;
+}
+.wwm-tutorial-popover .driver-popover-next-btn {
+  background: var(--vermilion-dim, #8a2920) !important;
+  border-color: var(--vermilion, #c43a2c) !important;
+  color: #ffe9d6 !important;
+}
+.wwm-tutorial-popover .driver-popover-next-btn:hover {
+  background: var(--vermilion, #c43a2c) !important;
+  color: #fff !important;
+}
+
+/* arrow = popover 背景に合わせる */
+.wwm-tutorial-popover .driver-popover-arrow-side-top {
+  border-top-color: var(--sumi-2, #2f2a23);
+}
+.wwm-tutorial-popover .driver-popover-arrow-side-bottom {
+  border-bottom-color: var(--sumi-2, #2f2a23);
+}
+.wwm-tutorial-popover .driver-popover-arrow-side-left {
+  border-left-color: var(--sumi-2, #2f2a23);
+}
+.wwm-tutorial-popover .driver-popover-arrow-side-right {
+  border-right-color: var(--sumi-2, #2f2a23);
+}
+
+/* overlay = 既存 modal backdrop と同等の dim */
+.driver-overlay {
+  fill: rgba(0, 0, 0, 0.55) !important;
+}
+
+/* ── ツアー受けますか modal (wwm-tool-modal pattern 流用、 サイズだけ調整) ── */
+.wwm-tutorial-ask-modal {
+  max-width: 460px;
+  width: calc(100vw - 40px);
+}
+.wwm-tutorial-ask-modal .wwm-modal-body p {
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0;
+  color: var(--sumi-fg, #ede4d0);
+}
+.wwm-tutorial-ask-modal .wwm-modal-footer {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding-top: 8px;
+}
+
+/* mobile = popover 幅を viewport に合わせる */
+@media (max-width: 600px) {
+  .wwm-tutorial-popover.driver-popover {
+    max-width: calc(100vw - 24px);
+    padding: 14px 16px 10px;
+  }
+  .wwm-tutorial-popover .driver-popover-title { font-size: 15px; }
+  .wwm-tutorial-popover .driver-popover-description { font-size: 12px; }
+}

@@ -1,4 +1,4 @@
-// WWM-METRICS fetch helpers
+// WWMetrics fetch helpers
 // Phase 1.2.5: JSON/SVG/image fetch の重複logic を統一。
 // dict load (data/*.json) は data-store.js ensureCalcData に一元化済 (P4-mini 2026-06-10、 旧 loadDict 撤去)。
 

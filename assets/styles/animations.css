@@ -16,7 +16,7 @@
   50% {
     box-shadow:
       0 0 36px var(--vermilion),
-      0 0 62px var(--vermilion-bright-glow),
+      0 0 62px color-mix(in oklab, var(--vermilion-bright) 60%, transparent),
       inset 0 1px 0 rgba(255,230,210,0.75),
       inset 0 -1px 0 rgba(60,10,5,0.40);
   }
@@ -24,12 +24,12 @@
 
 @keyframes tier-ss-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(200,60,43,0.6), 0 0 45px var(--vermilion-soft-2),
-                inset 0 1px 0 rgba(240,210,138,0.28), inset 0 -1px 0 var(--overlay-soft-2);
+    box-shadow: 0 0 20px rgba(200,60,43,0.6), 0 0 45px color-mix(in oklab, var(--vermilion) 20%, transparent),
+                inset 0 1px 0 rgba(240,210,138,0.28), inset 0 -1px 0 var(--shadow-soft-2);
   }
   50% {
-    box-shadow: 0 0 32px rgba(200,60,43,0.85), 0 0 65px var(--gold-bright-soft),
-                inset 0 1px 0 var(--gold-bright-mid), inset 0 -1px 0 var(--overlay-soft-2);
+    box-shadow: 0 0 32px rgba(200,60,43,0.85), 0 0 65px color-mix(in oklab, var(--gold-bright) 25%, transparent),
+                inset 0 1px 0 color-mix(in oklab, var(--gold-bright) 50%, transparent), inset 0 -1px 0 var(--shadow-soft-2);
   }
 }
 
@@ -40,18 +40,18 @@
 
 @keyframes tier-s-pulse {
   0%, 100% {
-    box-shadow: 0 0 18px var(--vermilion-strong), 0 0 40px var(--vermilion-soft),
-                inset 0 1px 0 rgba(255,130,110,0.20), inset 0 -1px 0 var(--overlay-soft-mid);
+    box-shadow: 0 0 18px color-mix(in oklab, var(--vermilion) 55%, transparent), 0 0 40px color-mix(in oklab, var(--vermilion) 15%, transparent),
+                inset 0 1px 0 rgba(255,130,110,0.20), inset 0 -1px 0 var(--shadow-soft-mid);
   }
   50% {
-    box-shadow: 0 0 30px rgba(200,60,43,0.84), 0 0 60px var(--vermilion-bright-soft),
-                inset 0 1px 0 rgba(255,130,110,0.38), inset 0 -1px 0 var(--overlay-soft-mid);
+    box-shadow: 0 0 30px rgba(200,60,43,0.84), 0 0 60px color-mix(in oklab, var(--vermilion-bright) 25%, transparent),
+                inset 0 1px 0 rgba(255,130,110,0.38), inset 0 -1px 0 var(--shadow-soft-mid);
   }
 }
 
 @keyframes tier-ss-glow-light {
-  0%, 100% { box-shadow: 0 0 12px var(--vermilion-mid), inset 0 1px 0 rgba(255,200,180,0.3); }
-  50%       { box-shadow: 0 0 22px var(--vermilion-strong), inset 0 1px 0 rgba(255,200,180,0.5); }
+  0%, 100% { box-shadow: 0 0 12px color-mix(in oklab, var(--vermilion) 30%, transparent), inset 0 1px 0 rgba(255,200,180,0.3); }
+  50%       { box-shadow: 0 0 22px color-mix(in oklab, var(--vermilion) 55%, transparent), inset 0 1px 0 rgba(255,200,180,0.5); }
 }
 
 @keyframes tier-s-pulse-light {
@@ -65,7 +65,7 @@
   50% {
     box-shadow:
       0 0 28px rgba(200,60,43,0.95),
-      0 0 50px var(--vermilion-bright-soft-mid),
+      0 0 50px color-mix(in oklab, var(--vermilion-bright) 40%, transparent),
       inset 0 1px 0 rgba(255,230,210,0.65),
       inset 0 -1px 0 rgba(60,10,5,0.35);
   }
@@ -73,18 +73,18 @@
 
 @keyframes flashpulse {
   0%   { text-shadow: var(--hero-num-shadow); }
-  50%  { text-shadow: 0 0 60px var(--vermilion-bright-strong), 0 0 100px var(--gold-bright-mid), 0 2px 0 var(--overlay-mid); }
+  50%  { text-shadow: 0 0 60px color-mix(in oklab, var(--vermilion-bright) 70%, transparent), 0 0 100px color-mix(in oklab, var(--gold-bright) 50%, transparent), 0 2px 0 var(--shadow-mid); }
   100% { text-shadow: var(--hero-num-shadow); }
 }
 
 @keyframes cmp-ratio-rainbow {
-  0%   { background-color: hsl(  0, 80%, 55%); box-shadow: 0 0 9px hsla(  0, 90%, 60%, 0.55), inset 0 1px 0 var(--hover-mid); }
-  17%  { background-color: hsl( 45, 90%, 55%); box-shadow: 0 0 9px hsla( 45, 90%, 60%, 0.55), inset 0 1px 0 var(--hover-mid); }
-  33%  { background-color: hsl(120, 65%, 48%); box-shadow: 0 0 9px hsla(120, 75%, 55%, 0.55), inset 0 1px 0 var(--hover-mid); }
-  50%  { background-color: hsl(180, 70%, 50%); box-shadow: 0 0 9px hsla(180, 80%, 55%, 0.55), inset 0 1px 0 var(--hover-mid); }
-  67%  { background-color: hsl(220, 75%, 58%); box-shadow: 0 0 9px hsla(220, 85%, 62%, 0.55), inset 0 1px 0 var(--hover-mid); }
-  83%  { background-color: hsl(285, 70%, 58%); box-shadow: 0 0 9px hsla(285, 80%, 62%, 0.55), inset 0 1px 0 var(--hover-mid); }
-  100% { background-color: hsl(360, 80%, 55%); box-shadow: 0 0 9px hsla(360, 90%, 60%, 0.55), inset 0 1px 0 var(--hover-mid); }
+  0%   { background-color: hsl(  0, 80%, 55%); box-shadow: 0 0 9px hsla(  0, 90%, 60%, 0.55), inset 0 1px 0 var(--shine-mid); }
+  17%  { background-color: hsl( 45, 90%, 55%); box-shadow: 0 0 9px hsla( 45, 90%, 60%, 0.55), inset 0 1px 0 var(--shine-mid); }
+  33%  { background-color: hsl(120, 65%, 48%); box-shadow: 0 0 9px hsla(120, 75%, 55%, 0.55), inset 0 1px 0 var(--shine-mid); }
+  50%  { background-color: hsl(180, 70%, 50%); box-shadow: 0 0 9px hsla(180, 80%, 55%, 0.55), inset 0 1px 0 var(--shine-mid); }
+  67%  { background-color: hsl(220, 75%, 58%); box-shadow: 0 0 9px hsla(220, 85%, 62%, 0.55), inset 0 1px 0 var(--shine-mid); }
+  83%  { background-color: hsl(285, 70%, 58%); box-shadow: 0 0 9px hsla(285, 80%, 62%, 0.55), inset 0 1px 0 var(--shine-mid); }
+  100% { background-color: hsl(360, 80%, 55%); box-shadow: 0 0 9px hsla(360, 90%, 60%, 0.55), inset 0 1px 0 var(--shine-mid); }
 }
 
 @keyframes wwm-opt-loading-pulse {
@@ -123,7 +123,7 @@
 
 @keyframes wwm-banner-glow {
   0%,100% { box-shadow: 0 0 0 rgba(232,81,58,0); }
-  50%     { box-shadow: 0 2px 18px var(--vermilion-bright-mid); }
+  50%     { box-shadow: 0 2px 18px color-mix(in oklab, var(--vermilion-bright) 45%, transparent); }
 }
 
 @keyframes wwm-banner-icon-pulse {

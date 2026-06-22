@@ -1,4 +1,4 @@
-// WWM-METRICS format helpers
+// WWMetrics format helpers
 // Phase 1.2.3: 数値format / base64 / clamp 等の重複 logic を統一。
 
 (function () {

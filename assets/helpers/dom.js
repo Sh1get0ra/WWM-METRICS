@@ -1,4 +1,4 @@
-// WWM-METRICS DOM helpers
+// WWMetrics DOM helpers
 // Phase 1.2.1: dom操作の重複pattern を helper化。
 // 使用例: WWMHelpers.dom.setText('heroScore', '11,295');
 

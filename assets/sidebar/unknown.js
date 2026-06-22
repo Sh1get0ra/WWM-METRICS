@@ -1,4 +1,4 @@
-// ── WWM-METRICS / Sidebar / Unknown Report (Phase 3.9a 切出) ──
+// ── WWMetrics / Sidebar / Unknown Report (Phase 3.9a 切出) ──
 // 未対応 ID (kongfu / xinfa / affix) を modal で表示し、 GitHub Issue 起票テンプレを生成。
 // 依存:
 //   - WWMState.roleInfo
@@ -62,18 +62,20 @@
     const m = document.createElement('div');
     m.className = 'wwm-modal-backdrop';
     m.innerHTML = `
-      <div class="wwm-modal">
+      <div class="wwm-modal wwm-tool-modal">
+        <span class="wwm-tool-bracket wwm-tool-bracket-tl"></span><span class="wwm-tool-bracket wwm-tool-bracket-tr"></span>
+        <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
         <div class="wwm-modal-header">
-          <h2>${((window.T && T.unknownReportTitle) || '未対応データ報告 ({0}件)').replace('{0}', total)}</h2>
+          <h2><span class="wwm-tool-title-ja">${((window.T && T.unknownReportTitle) || '未対応データ報告 ({0}件)').replace('{0}', total)}</span><span class="wwm-tool-title-en">UNKNOWN DATA</span><span class="wwm-tool-seal">報</span></h2>
           <button class="wwm-modal-close" aria-label="Close">×</button>
         </div>
-        <div class="wwm-modal-body">
+        <div class="wwm-modal-body wwm-ws-paper">
           <p>${(window.T && T.unknownReportDesc) || '以下の内容をクリップボードコピー or GitHub Issue で報告してください。'}</p>
           <textarea class="wwm-bm-code" readonly style="min-height:200px;">${body.replace(/</g, '&lt;')}</textarea>
-          <div class="wwm-btn-row" style="margin-top:12px;">
-            <button class="wwm-btn-primary" id="wwmCopyReport">${(window.T && T.unknownCopyBtn) || 'クリップボードにコピー'}</button>
-            <a class="wwm-btn-secondary" href="${githubUrl}" target="_blank" rel="noopener">${(window.T && T.unknownGithubBtn) || 'GitHub Issue を開く'}</a>
-          </div>
+        </div>
+        <div class="wwm-tool-modal-footer">
+          <button class="wwm-btn-primary" id="wwmCopyReport">${(window.T && T.unknownCopyBtn) || 'クリップボードにコピー'}</button>
+          <a class="wwm-btn-secondary" href="${githubUrl}" target="_blank" rel="noopener">${(window.T && T.unknownGithubBtn) || 'GitHub Issue を開く'}</a>
         </div>
       </div>
     `;

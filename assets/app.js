@@ -92,8 +92,6 @@ function setLang(lang) {
     const k = el.getAttribute('data-i18n-aria');
     if (T[k] !== undefined) el.setAttribute('aria-label', T[k]);
   });
-  // 移転バナー: 言語切替毎に多言語msg再適用 (旧URL検出時のみ DOM 表示)
-  if (typeof _initMigrationBanner === 'function') _initMigrationBanner();
   // SEO meta 動的更新 (description / canonical / og:*) — crawler は JS レンダリング後 DOM を読む
   _updateSeoMeta(lang);
 
@@ -104,6 +102,8 @@ function setLang(lang) {
   if (window.WWMSidebar?.render && !WWMState.roleInfo) {
     try { window.WWMSidebar.render(null); } catch(_) {}
   }
+  // 楷書 SVG 再適用: 上の data-i18n 書換が SVG を text に戻すため必ず最後 (ja のみ SVG 化)
+  if (window.WWMKaisho) window.WWMKaisho.apply();
 }
 // SEO meta 動的更新: 言語切替時に description / canonical / hreflang対応 og:url / og:title / og:description を現在言語へ。
 // 静的 head は ja 既定 (index.html)。 canonical = ja は base URL、 他言語は ?lang= 付き自己参照 (hreflang sitemap.xml と対)。
@@ -130,22 +130,6 @@ function _updateSeoMeta(lang) {
   } catch(_) {}
 }
 
-// 移転バナー: 旧URL (sh1get0ra.github.io) 検出時のみ表示。 メッセージは <strong> 含むため innerHTML 経路。 setLang 内 + init() の2箇所から呼ばれる (init = ja 初期表示でも必ず実行、 setLang = 言語切替時に msg多言語反映)。
-function _initMigrationBanner() {
-  try {
-    const migBanner = document.getElementById('wwmMigrationBanner');
-    if (!migBanner) return;
-    const isOldDomain = location.hostname === 'sh1get0ra.github.io';
-    if (!isOldDomain) { migBanner.style.display = 'none'; return; }
-    const T_ = window.T || {};
-    const msgEl = migBanner.querySelector('.wwm-migration-msg');
-    if (msgEl && T_.migrationMsg) msgEl.innerHTML = T_.migrationMsg;
-    const btnEl = migBanner.querySelector('.wwm-migration-btn');
-    if (btnEl && T_.migrationBtn) btnEl.textContent = T_.migrationBtn;
-    migBanner.style.display = 'flex';
-  } catch(_) {}
-}
-
 function _loadSavedLang() {
   try {
     // OBS view (?view=sidebar): URL paramの lang を優先、 picker は表示しない (独立ブラウザインスタンス想定)
@@ -162,14 +146,19 @@ function _loadSavedLang() {
     if (urlLang && ['ja','en','zh','ko','vi'].includes(urlLang)) {
       if (urlLang !== 'ja') setLang(urlLang);
       else { WWMHelpers.storage.saveStr('wwm_lang', 'ja'); _updateSeoMeta('ja'); }
-      if (!WWMHelpers.storage.loadStr('wwm_import_hinted')) {
+      if (!WWMHelpers.storage.loadJSON('wwm_last_import_v1')) {
         setTimeout(_showImportHint, 250);
       }
       return;
     }
     const saved = WWMHelpers.storage.loadStr('wwm_lang');
-    if (saved && ['ja','en','zh','ko','vi'].includes(saved) && saved !== 'ja') setLang(saved);
-    else if (!saved) _showLangPicker();
+    if (saved && ['ja','en','zh','ko','vi'].includes(saved)) {
+      if (saved !== 'ja') setLang(saved);
+      // 未 import = リロード毎に hint 復活 (兄貴方針 2026-06-21、 import 完了まで案内継続)
+      if (!WWMHelpers.storage.loadJSON('wwm_last_import_v1')) {
+        setTimeout(_showImportHint, 250);
+      }
+    } else if (!saved) _showLangPicker();
   } catch(e) {}
 }
 function _showLangPicker() {
@@ -195,9 +184,9 @@ function _showLangPicker() {
       const lang = b.dataset.langPick;
       setLang(lang);
       m.remove();
-      // 言語選択直後にIMPORT位置ヒント表示 (一度のみ)
+      // 言語選択直後に IMPORT 位置ヒント表示 (未 import 中は毎回、 import 完了で停止)
       try {
-        if (!WWMHelpers.storage.loadStr('wwm_import_hinted')) {
+        if (!WWMHelpers.storage.loadJSON('wwm_last_import_v1')) {
           setTimeout(_showImportHint, 250);
         }
       } catch(_) {}
@@ -234,7 +223,7 @@ function _showImportHint() {
   const dismiss = () => {
     o.classList.add('wwm-import-hint-out');
     setTimeout(() => o.remove(), 350);
-    WWMHelpers.storage.saveStr('wwm_import_hinted', '1');
+    // フラグ立てない = 未 import 中は次回 reload で復活、 import 完了判定は wwm_last_import_v1 で行う
     document.removeEventListener('click', dismiss, true);
   };
   setTimeout(() => document.addEventListener('click', dismiss, true), 50);
@@ -341,22 +330,10 @@ function initHeroCollapse() {
   }
 }
 
-function toggleTheme() {
-  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-  setTheme(isLight ? 'dark' : 'light');
-}
-function setTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
-  // themeToggle の glyph 切替は CSS (data-theme で SVG sun/moon 表示切替) に移譲 —
-  // textContent 書込は inline SVG を破壊するため廃止 (critique P2 2026-06-06)
-  WWMHelpers.storage.saveStr('wwm_theme', theme);
-  // theme切替時 hero score色 (TIER_COLOR) 再適用
-  if (window.WWMSidebar?.hero && WWMState.params) window.WWMSidebar.hero.update(WWMState.params);
-}
-function initTheme() {
-  const saved = WWMHelpers.storage.loadStr('wwm_theme');
-  setTheme(saved === 'light' ? 'light' : 'dark');
-}
+// ── テーマ ────────────────────────────────────────────────────────
+// dark/light 双テーマ廃止 → 墨×紙 単一化 (2026-06-11)。
+// 墨面 = tokens.css :root default / 紙面 = .wwm-ws-paper token rescope (workspace.css)。
+// data-theme="dark" 属性は index.html 側で固定残置 (dark.css K rule = export clone 対抗の生存用)。
 
 // ── トースト ──────────────────────────────────────────────────────
 let _toastTimer = null;
@@ -381,26 +358,42 @@ function renderPresetSlots() {
     const nameInp  = document.getElementById('presetName' + i);
     const loadBtn  = document.getElementById('presetLoadBtn' + i);
     const delBtn   = document.getElementById('presetDelBtn' + i);
+    // mobile 側 input/btn (2026-06-21 兄貴指示「PC版と同じ表記に」 で mobile も i18n placeholder 化)
+    const nameMob  = document.getElementById('presetMobName' + i);
+    const loadMob  = document.getElementById('presetMobLoad' + i);
+    const delMob   = document.getElementById('presetMobDel' + i);
     const p = presets[i];
+    const placeholderText = T.presetNamePlaceholder.replace('{n}', i + 1);
     // audit P2 (2026-06-07): placeholder ≠ acc name — aria-label を常時付与 (i18n 追従)
-    nameInp.setAttribute('aria-label', T.presetNamePlaceholder.replace('{n}', i + 1));
+    nameInp.setAttribute('aria-label', placeholderText);
+    if (nameMob) nameMob.setAttribute('aria-label', placeholderText);
     if (p) {
       slot.classList.add('has-data');
       nameInp.value = p.name;
       loadBtn.disabled = false;
       delBtn.disabled  = false;
+      if (nameMob) nameMob.value = p.name;
+      if (loadMob) loadMob.disabled = false;
+      if (delMob)  delMob.disabled  = false;
     } else {
       slot.classList.remove('has-data');
       nameInp.value = '';
-      nameInp.placeholder = T.presetNamePlaceholder.replace('{n}', i + 1);
+      nameInp.placeholder = placeholderText;
       loadBtn.disabled = true;
       delBtn.disabled  = true;
+      if (nameMob) { nameMob.value = ''; nameMob.placeholder = placeholderText; }
+      if (loadMob) loadMob.disabled = true;
+      if (delMob)  delMob.disabled  = true;
     }
   }
 }
 function savePreset(i) {
+  // PC / mobile 両 input から名前取得 — 編集された方を採用 (2026-06-21 兄貴指示)
   const nameInp = document.getElementById('presetName' + i);
-  const name = nameInp.value.trim() || T.presetNamePlaceholder.replace('{n}', i + 1);
+  const nameMob = document.getElementById('presetMobName' + i);
+  const v1 = (nameInp && nameInp.value.trim()) || '';
+  const v2 = (nameMob && nameMob.value.trim()) || '';
+  const name = v1 || v2 || T.presetNamePlaceholder.replace('{n}', i + 1);
   // 新レイアウト: 装備情報を保存 (roleInfo / state / virtual / baseline)
   const importSnap = WWMHelpers.storage.loadJSON('wwm_last_import_v1');
   const stateSnap = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
@@ -486,10 +479,8 @@ async function init() {
     try { await window.WWM_DS.ready(); }
     catch (e) { console.error('DataStore.ready() failed', e); }
   }
-  initTheme();
   initHeroCollapse();
   _loadSavedLang();
-  _initMigrationBanner();
   initPresets();
 
   // 数値入力フィールド：全角→半角自動変換 + 数字以外ブロック
@@ -541,3 +532,29 @@ async function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+/* ============ mobile-mode toggle (2026-06-19 mobile-v2.css 連動)
+   matchMedia '(max-width: 600px)' = mobile-v2.css の breakpoint と一致。
+   html + body 両方に class 付与 (CSS は body.mobile-mode prefix、 html は overflow/height 用)。
+   初回 即時 + change listener + DOMContentLoaded 再適用 (script 位置で body 未生成 case 保険) */
+(function initMobileMode() {
+  var mq = window.matchMedia('(max-width: 600px)');
+  function apply() {
+    // OBS view (?view=sidebar) 中は mobile-mode 強制 OFF — 配信側 600px 以下窓で
+    // mobile overlay (chip-bar / bnav / 装備ページャー) が出てしまう regression 抑止
+    // (2026-06-21 兄貴指摘で再発確認)
+    var isObs = document.documentElement.classList.contains('wwm-view-sidebar');
+    var on = mq.matches && !isObs;
+    document.documentElement.classList.toggle('mobile-mode', on);
+    if (document.body) document.body.classList.toggle('mobile-mode', on);
+    // mobile 武備ページャー連動 (2026-06-20): mobile ↔ PC 切替で構造を自動再構築 / 復元
+    if (window.WWMSidebar && window.WWMSidebar.mobileBuildPager) {
+      if (on) window.WWMSidebar.mobileBuildPager.enable();
+      else window.WWMSidebar.mobileBuildPager.disable();
+    }
+  }
+  apply();
+  if (mq.addEventListener) mq.addEventListener('change', apply);
+  else if (mq.addListener) mq.addListener(apply);
+  document.addEventListener('DOMContentLoaded', apply);
+})();
