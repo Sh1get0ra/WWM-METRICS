@@ -560,12 +560,22 @@ document.addEventListener('DOMContentLoaded', init);
 })();
 
 // vite移行 P7 (2026-06-22): ESM module scope で top-level function は window 自動 expose されない。
-// index.html inline onclick (setLang/savePreset/loadPreset/deletePreset/importData) から呼ばれるため明示 expose 必須。
+// index.html inline onclick + 他 module からの window.XXX 経由参照分を全件明示 expose 必須。
+// 漏れ罠 (P10 検出): countUp 未 expose で hero.js が L175 else 経路落ち + currentScore=null.toLocaleString 死。
 window.setLang = setLang;
 window.savePreset = savePreset;
 window.loadPreset = loadPreset;
 window.deletePreset = deletePreset;
 window.importData = importData;
+window.countUp = countUp;
+window.formatNum = formatNum;
+window.showToast = showToast;
+window.updateDonut = updateDonut;
+window.updateLuopanArc = updateLuopanArc;
+window.toggleHero = toggleHero;
+window.initHeroCollapse = initHeroCollapse;
+window.renderPresetSlots = renderPresetSlots;
+window.initPresets = initPresets;
 
 // vite移行 P2: ESM 副作用 module 化 (window expose は IIFE 内 keep)
 export {};
