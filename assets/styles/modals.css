@@ -169,7 +169,12 @@
 .wwm-modal-close:hover { background: var(--shine-soft); }
 .wwm-modal-body {
   padding: var(--space-4); overflow-y: auto; flex: 1;
+  /* ツール標準 = 金 thin scrollbar (sidebar.css / workspace.css と統一、 2026-06-22 兄貴指示) */
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-deep) transparent;
 }
+.wwm-modal-body::-webkit-scrollbar { width: 6px; }
+.wwm-modal-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
 .wwm-btn-row { display: flex; gap: var(--space-2); flex-wrap: wrap; }
 .wwm-btn-primary, .wwm-btn-secondary {
   padding: 10px 18px;
@@ -1398,10 +1403,12 @@
   color: var(--brown-2);
   max-height: 500px; overflow-y: auto;
   padding-right: var(--space-2-5);
+  /* ツール標準 = 金 thin scrollbar (sidebar.css / workspace.css と統一、 2026-06-22 兄貴指示) */
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-deep) transparent;
 }
-.wwm-note-body::-webkit-scrollbar { width: 8px; }
-.wwm-note-body::-webkit-scrollbar-track { background: rgba(80,40,20,.15); border-radius: 4px; }
-.wwm-note-body::-webkit-scrollbar-thumb { background: var(--brown-6); border-radius: 4px; }
+.wwm-note-body::-webkit-scrollbar { width: 6px; }
+.wwm-note-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
 
 .wwm-note-section { margin-bottom: 18px; }
 .wwm-note-h3 {
