@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 // vite移行 P8 (2026-06-22): TODO #39 = C 案 (フル ESM) + vite-plugin-pwa (Workbox) + data network-first。
 // 旧 ?v=N 手動 bump + 手書き sw.js は廃止 → hash filename + workbox precache 自動。
@@ -29,6 +30,18 @@ export default defineConfig({
   },
 
   plugins: [
+    // data/ ディレクトリを dist/data/ に build 時 copy (動的 fetch されるため hash 化対象外)。
+    // dev (vite serve) は middleware で root から配信、 同 path で揃う ([[asset-version-bump-mandatory]])
+    viteStaticCopy({
+      targets: [
+        { src: 'data', dest: '.' },
+        { src: 'assets/icons', dest: 'assets' },
+        { src: 'assets/images', dest: 'assets' },
+        { src: 'assets/bg', dest: 'assets' },
+        { src: 'assets/fonts', dest: 'assets' }
+      ]
+    }),
+
     VitePWA({
       // 自動更新 = sw register + skipWaiting + clientsClaim 自動生成。
       // 1 回違和感本懸案 (workspace v2 main merge 直後の旧 UI 一瞬出現) の根本解消。
