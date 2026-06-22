@@ -92,7 +92,9 @@ export default defineConfig({
 
         // sw activate 即時 (旧 controller 待たず)
         skipWaiting: true,
-        clientsClaim: true
+        clientsClaim: true,
+        // 旧 precache cache を自動削除 (1 発勝負カードで旧 UI 残らないよう確実化、 workbox default false)
+        cleanupOutdatedCaches: true
       },
 
       // manifest = 現 sw.js + 既存 PWA 設定継承予定 (兄貴判断後)。 false = manifest 生成しない、 sw のみ
