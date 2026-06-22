@@ -395,29 +395,41 @@ function savePreset(i) {
   const v2 = (nameMob && nameMob.value.trim()) || '';
   const name = v1 || v2 || T.presetNamePlaceholder.replace('{n}', i + 1);
   // 新レイアウト: 装備情報を保存 (roleInfo / state / virtual / baseline)
+  // 🚨 deep clone 必須: WWMState.virtual.* と shared reference のまま保存すると、
+  //    保存後 WWMState 編集が presets[i].virtual を mutate = 「保存時 snapshot」 消失 →
+  //    loadPreset で同 ref 自己代入 = 復元無効化 (2026-06-22 bug 根治)
   const importSnap = WWMHelpers.storage.loadJSON('wwm_last_import_v1');
   const stateSnap = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
-  const virtual = {
+  const virtual = JSON.parse(JSON.stringify({
     gear:   WWMState.virtual.gear || null,
     kongfu: WWMState.virtual.kongfu || null,
     xinfa:  WWMState.virtual.xinfa || null
-  };
-  const baseline = WWMState.baseline || null;
+  }));
+  const baseline = WWMState.baseline ? JSON.parse(JSON.stringify(WWMState.baseline)) : null;
   presets[i] = { name, importSnap, stateSnap, virtual, baseline };
   WWMHelpers.storage.saveJSON(PRESET_KEY, presets);
   renderPresetSlots();
   showToast(T.toastSaved.replace('{name}', name));
 }
 function loadPreset(i) {
-  const p = presets[i];
+  // 🚨 in-memory presets[] は過去 save 時に shared reference で汚染された可能性あり
+  //    (修正前 savePreset = WWMState.virtual.* と同 ref で保存 → 以降の編集が presets[i] を mutate)。
+  //    localStorage から fresh re-load で「保存時 snapshot」 を真に取得 (2026-06-22 bug 根治 完)
+  const fresh = WWMHelpers.storage.loadJSON(PRESET_KEY);
+  const p = (Array.isArray(fresh) ? fresh[i] : null) || presets[i];
   if (!p) return;
+  // in-memory presets[] も fresh で同期 (次回 load 整合性)
+  if (Array.isArray(fresh)) presets = fresh;
   try {
     if (p.importSnap) WWMHelpers.storage.saveJSON('wwm_last_import_v1', p.importSnap);
     if (p.stateSnap)  WWMHelpers.storage.saveJSON('wwm_last_state_v1',  p.stateSnap);
     if (p.virtual) {
-      WWMState.virtual.gear        = p.virtual.gear   || null;
-      WWMState.virtual.kongfu = p.virtual.kongfu || null;
-      WWMState.virtual.xinfa  = p.virtual.xinfa  || null;
+      // 🚨 deep clone 必須: preset[i].virtual.* を WWMState に直接代入すると以降の編集が
+      //    preset 側も mutate → 次回 load で「保存時 snapshot」 消失 (2026-06-22 bug 根治)
+      const v = JSON.parse(JSON.stringify(p.virtual));
+      WWMState.virtual.gear   = v.gear   || null;
+      WWMState.virtual.kongfu = v.kongfu || null;
+      WWMState.virtual.xinfa  = v.xinfa  || null;
     }
     if (p.baseline) {
       const curVer = window.WWM_SCORE_VERSION || 1;
