@@ -1620,9 +1620,22 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   background-position: center;
   background-repeat: no-repeat;
 }
-/* 武庫 card = 心法 (明背景+墨アイコン) の反転ネガ (TODO #38 案1、 兄貴指示 2026-06-22)。
-   frame = 旧「白等級 紙色基調」 → 墨地に反転 (公式 texture は overlay で擦れ感のみ流用)。
-   アイコン明色反転は別 rule、 流派バッジは公式色維持 (色変更 NG) */
+/* 武庫 card 完全反転ネガ (TODO #38 案1、 兄貴指示 2026-06-22)。 心法 = 墨札枠 + 明中央 + 墨アイコン
+   → 武庫 = 明札枠 + 墨中央 + 明アイコン。 大枠 (札本体 sumi-2) + 額縁 (plank-paint::before border)
+   を明色 (紙) に反転。 塩梅は実機調整 */
+.wwm-ws-paper .wwm-arsenal-slot {
+  background: #e3d5b5;  /* sumi-2 墨札 → 紙札 (反転) */
+  box-shadow:
+    inset 0 0 0 1px rgba(120,95,55,0.55),
+    inset 0 -6px 14px rgba(90,70,40,0.22),
+    inset 0 3px 8px rgba(255,250,235,0.5),
+    0 4px 12px rgba(0,0,0,0.5);
+}
+.wwm-ws-paper .wwm-arsenal-slot .plank-paint::before {
+  border-color: #e3d5b5;  /* sumi-2 墨額縁 → 紙額縁 (反転) */
+  box-shadow: inset 0 0 0 1px rgba(120,95,55,0.4);
+}
+/* frame = 旧「白等級 紙色基調」 → 墨地に反転 (公式 texture は overlay で擦れ感のみ流用) */
 .wwm-ws-paper .wwm-arsenal-slot .plank-paint {
   background-image:
     url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/1_big-1bac704e.png"),
@@ -1774,7 +1787,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
 }
 .wwm-ws-paper .wwm-arsenal-slot .plank-score-paint::after {
   border-color: #c9b485;
-  box-shadow: inset 0 0 0 1px rgba(94,74,40,0.5);
+  box-shadow: inset 0 0 0 1px rgba(255,250,235,0.45);
 }
 .wwm-ws-paper .wwm-arsenal-slot .wwm-xinfa-card-score {
   color: var(--kami-fg);
