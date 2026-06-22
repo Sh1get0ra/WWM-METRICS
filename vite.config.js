@@ -37,8 +37,9 @@ export default defineConfig({
         { src: 'data', dest: '.' },
         { src: 'assets/icons', dest: 'assets' },
         { src: 'assets/images', dest: 'assets' },
-        { src: 'assets/bg', dest: 'assets' },
-        { src: 'assets/fonts', dest: 'assets' }
+        { src: 'assets/bg', dest: 'assets' }
+        // assets/fonts = build 用 ttf 配置場所 (scripts/build-kaisho-svg.cjs)、 Web 配信不要 = copy 対象外
+        // 空 dir = git track されない = Cloudflare clone 時不在 = vite-plugin-static-copy fail の罠回避
       ]
     }),
 
