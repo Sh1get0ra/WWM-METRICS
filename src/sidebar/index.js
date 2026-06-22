@@ -137,6 +137,10 @@ function _autoFitText(root) {
   });
 }
 window._autoFitText = _autoFitText;
+// vite移行 P10 (2026-06-22): ESM module-scope 罠 = app.js/import.js/arsenal.js/gear.js が
+// window._refreshAll / window._ratioColor 経由参照 = 明示 expose 必須。
+window._refreshAll = _refreshAll;
+window._ratioColor = _ratioColor;
 
 // (Phase 3.9f: _VIRTUAL_KEY / _saveVirtuals / _loadVirtuals は assets/sidebar/virtual.js に切出)
 
