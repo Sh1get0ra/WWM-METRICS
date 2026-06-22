@@ -1767,6 +1767,19 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
   font-weight: 700;
   font-family: var(--f-latin);
 }
+/* 武庫 card score も反転 (TODO #38 案1)。 心法 = 暗帯 (--plank-frame) + 明文字 (--wood-mid) →
+   武庫 = 明帯 (古紙) + 墨文字 (--kami-fg = 墨色)。 塩梅は実機調整 */
+.wwm-ws-paper .wwm-arsenal-slot .plank-score-paint {
+  background: #c9b485;
+}
+.wwm-ws-paper .wwm-arsenal-slot .plank-score-paint::after {
+  border-color: #c9b485;
+  box-shadow: inset 0 0 0 1px rgba(94,74,40,0.5);
+}
+.wwm-ws-paper .wwm-arsenal-slot .wwm-xinfa-card-score {
+  color: var(--kami-fg);
+  text-shadow: none;
+}
 .wwm-ws-paper .plank-score-delta {
   font-size: 9px;
   font-weight: 600;
