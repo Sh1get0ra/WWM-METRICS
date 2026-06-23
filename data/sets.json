@@ -14,7 +14,7 @@
       },
       "pieces4": {
         "effects": {},
-        "raw": "武術技発動後 碧玉効果 → 会意ダメ+10%、真気値<対象 or <40%でダメ与時 付加会意率+5% 3秒",
+        "raw": "武術技発動後 碧玉効果 → 真気不均衡/真気<対象/真気<40% 対象に与ダメ時 会意ダメ+10%、付加会意率+7.5% 10秒 (12秒1回)",
         "conditional": true,
         "pendingImplementation": true
       },
@@ -142,7 +142,7 @@
       },
       "pieces4": {
         "effects": {},
-        "raw": "2体以上同時命中+首領/Player命中で 連星 1stack 獲得 5秒 (武術技ダメ強化)",
+        "raw": "2体以上同時命中 or 首領/Player命中 → 連星 1stack 5秒 武術技ダメ+3%。 4m超対象に距離ボーナス追加 (8m max+1%)。 max5stack、被ダメで1stack喪失、1秒max2stack獲得",
         "conditional": true,
         "pendingImplementation": true
       },
@@ -158,7 +158,7 @@
       },
       "pieces4": {
         "effects": {},
-        "raw": "受流成功 or 首領命中 → 5秒 斬岳効果 気血ダメ+5% (軽撃/重撃派生/協戦発動技)",
+        "raw": "受流成功 or 首領命中 → 5秒 斬岳効果 気血ダメ+5%、軽撃/重撃派生 + 協戦発動技/効果ダメ+5%",
         "conditional": true,
         "pendingImplementation": true
       },

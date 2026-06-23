@@ -726,7 +726,7 @@
   function _inferLvFromBaseStats(affixes) {
     const tbl = window.WWM_EQUIP_BASE_BY_LV;
     if (!tbl || !tbl.slots) return null;
-    const lvList = tbl._lvList || [91, 86, 81, 71];
+    const lvList = tbl._lvList || [96, 91, 86, 81, 71];
     // 基礎ステ取得: 整数値 (小数なし) + name で stat key 判定
     const observed = {};   // {HP_MAX: 4614, W_DEF: 36, MIN_W_ATK: 53, MAX_W_ATK: 124}
     for (const a of affixes) {
@@ -748,17 +748,21 @@
       }
     }
     if (!Object.keys(observed).length) return null;
-    // 全 slot × Lv 走査、 observed が ref subset と完全一致する組合せ列挙
+    // 全 slot × Lv × 全 tier (金/紫/青) 走査、 observed が ref subset と完全一致する組合せ列挙
+    // (2026-06-23 新 schema = slots[slot].table[lv][tier])
     const hits = new Set();
     for (const [slot, slotTbl] of Object.entries(tbl.slots)) {
-      if (slot.startsWith('_')) continue;
+      if (slot.startsWith('_') || !slotTbl?.table) continue;
       for (const lv of lvList) {
-        const ref = slotTbl[String(lv)];
-        if (!ref) continue;
-        const refKeys = Object.keys(ref);
-        // observed が ref の値と key 単位で完全一致 (observed に ref の全 key がある + 全 value 一致)
-        const ok = refKeys.every(k => observed[k] != null && observed[k] === ref[k]);
-        if (ok) hits.add(lv);
+        const tierTbl = slotTbl.table[String(lv)];
+        if (!tierTbl) continue;
+        for (const tier of ['5','4','3']) {
+          const ref = tierTbl[tier];
+          if (!ref) continue;
+          const refKeys = Object.keys(ref);
+          const ok = refKeys.every(k => observed[k] != null && observed[k] === ref[k]);
+          if (ok) hits.add(lv);
+        }
       }
     }
     return hits.size === 1 ? [...hits][0] : null;   // 一意のみ採用

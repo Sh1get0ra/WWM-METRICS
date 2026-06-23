@@ -69,17 +69,21 @@ function _accMapped(r, key, val) {
   _acc(r, _CALCJS_TO_WWM[key] || key, val);
 }
 
-// 装備 slot + baseAttrs から 装備個別Lv 逆引き
+// 装備 slot + baseAttrs から 装備個別Lv 逆引き (2026-06-23 新 schema: 全 Lv × 全 tier (金/紫/青) 走査)
 function _inferEquipLv(slot, eq) {
   if (!eq?.exVo?.baseAttrs) return null;
-  const tbl = window.WWM_EQUIP_BASE_BY_LV?.slots?.[String(slot)];
-  if (!tbl) return null;
-  const lvList = window.WWM_EQUIP_BASE_BY_LV?._lvList || [91, 86, 81, 71];
+  const slotTbl = window.WWM_EQUIP_BASE_BY_LV?.slots?.[String(slot)];
+  if (!slotTbl?.table) return null;
+  const lvList = window.WWM_EQUIP_BASE_BY_LV?._lvList || [96, 91, 86, 81, 71];
   for (const lv of lvList) {
-    const ref = tbl[String(lv)];
-    if (!ref) continue;
-    const match = Object.entries(ref).every(([k, v]) => eq.exVo.baseAttrs[k] === v);
-    if (match) return lv;
+    const tierTbl = slotTbl.table[String(lv)];
+    if (!tierTbl) continue;
+    for (const tier of ['5','4','3']) {  // 金 → 紫 → 青 順 (最頻度装備優先)
+      const ref = tierTbl[tier];
+      if (!ref) continue;
+      const match = Object.entries(ref).every(([k, v]) => eq.exVo.baseAttrs[k] === v);
+      if (match) return lv;
+    }
   }
   return null;
 }
@@ -307,7 +311,20 @@ function buildStatParamsSync(roleInfo, state) {
         const ok = def.kongfuRequired.some(k => _myKfs.includes(k) || _myKfs.includes(String(k)) || _myKfs.includes(Number(k)));
         if (!ok) continue;
       }
-      const eff = def.effects || {};
+      let eff = def.effects || {};
+      // T2 effectId 経路 (2026-06-23 心法 effects master 化): master `xinfa_effects.json` から WorldLv 別値取得
+      //   バランス調整時 1 箇所更新で全心法反映。 master miss/未 load 時 = effects (= WorldLv 15 hardcode) fallback
+      if (tk === 'tier2' && def.effectId) {
+        const masterStats = window.WWM_XINFA_EFFECTS?.effects?.[def.effectId]?.stats;
+        if (masterStats) {
+          const wl = String(state?.worldLv || roleInfo?.worldLv || 15);
+          const lookup = {};
+          for (const [sk, wlMap] of Object.entries(masterStats)) {
+            if (wlMap[wl] != null) lookup[sk] = wlMap[wl];
+          }
+          if (Object.keys(lookup).length) eff = lookup;
+        }
+      }
       // synergyKongfu: 指定武術 同時装備で 一致→synergyMultiplier倍 / 不一致→synergyMissingMultiplier倍
       const synKfs = Array.isArray(def.synergyKongfu) ? def.synergyKongfu : [];
       const synActive = synKfs.length > 0 && synKfs.some(k => _myKfs.includes(String(k)) || _myKfs.includes(Number(k)));

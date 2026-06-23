@@ -1,21 +1,50 @@
 {
-  "_schema": "装備Lv Tier別 affix MAX値テーブル。equipLv → tier 関数: <71→61, <81→71, <86→81, <91→86, <96→91, ≥96→96。各 stat 心法 gold Tier2 と一致 (Tier91 = 装備Lv91-95 = 大世界Lv10-14)。",
-  "_lastUpdated": "2026-06-17",
-  "_source": "Where Winds Math (https://wherewindsmath.pages.dev/) app.js から抽出 (2026-05-25) + atkTypeDmg は WWMath 欠落のため allWeaponDmg×2 推定で補完 (2026-06-17)",
-  "_note": "obfuscated app.js から正規表現抽出。一部 field 名は position 推定 (stat5)、確定 stat は明示 key。tier 96 は大世界Lv15+ 用 (未解放)。 atkTypeDmg (指定武術ダメ) は WWMath で tier 81 のみ採取 (0.03 = 誤値) で 86/91/96 = null だったが、 ゲーム仕様「指定武術ダメ MAX = 全武術ダメ MAX × 2」 に基づき全 tier 上書き (81=0.04 / 86=0.044 / 91=0.052 / 96=0.064)。",
-
+  "_schema": "装備Lv Tier別 affix MIN-MAX 値マスタ (2026-06-23 Lv 別精密化)。 wdb snapshot mode 抽出、 {min, max} ペア。 _getAffixMax(sk,lv) 後方互換 (number → object.max)。",
+  "_lastUpdated": "2026-06-23",
+  "_source": "wwmdb.vlt.fyi equip-items snapshot (Lv71/81/86/91/96 各 tier=5 = 金) affixTables mode 採用",
+  "_note": "obfuscated app.js から正規表現抽出。一部 field 名は position 推定 (stat5)、確定 stat は明示 key。tier 96 は大世界Lv15+ 用 (未解放)。 atkTypeDmg (指定武術ダメ) は WWMath で tier 81 のみ採取 (0.03 = 誤値) で 86/91/96 = null だったが、 ゲーム仕様「指定武術ダメ MAX = 全武術ダメ MAX × 2」 に基づき全 tier 上書き (81=0.04 / 86=0.044 / 91=0.052 / 96=0.064)。 / 2026-06-23: {min, max} ペア化、 旧 number は 1:2 比で min 補完 (tier 61 snapshot 未取得分)。",
   "tiers": {
     "61": {
-      "maxPhys": 33.8,
-      "precision": 0.034,
-      "crit": 0.038,
-      "affinity": 0.02,
-      "stat5": 21.6,
-      "pathSingle": 19.2,
-      "outerPen": 4.8,
-      "attrPen": 5.6,
-      "maxHp": 1286,
-      "physDef": 17,
+      "maxPhys": {
+        "min": 16.9,
+        "max": 33.8
+      },
+      "precision": {
+        "min": 0.017,
+        "max": 0.034
+      },
+      "crit": {
+        "min": 0.019,
+        "max": 0.038
+      },
+      "affinity": {
+        "min": 0.01,
+        "max": 0.02
+      },
+      "stat5": {
+        "min": 10.8,
+        "max": 21.6
+      },
+      "pathSingle": {
+        "min": 9.6,
+        "max": 19.2
+      },
+      "outerPen": {
+        "min": 2.4,
+        "max": 4.8
+      },
+      "attrPen": {
+        "min": 2.8,
+        "max": 5.6
+      },
+      "maxHp": {
+        "min": 643,
+        "max": 1286
+      },
+      "physDef": {
+        "min": 8.5,
+        "max": 17
+      },
       "physDmgBoost": null,
       "allWeaponDmg": null,
       "bossDmg": null,
@@ -24,97 +53,321 @@
       "attunement": null
     },
     "71": {
-      "maxPhys": 39.6,
-      "precision": 0.04,
-      "crit": 0.046,
-      "affinity": 0.022,
-      "stat5": 25.1,
-      "pathSingle": 22.4,
-      "outerPen": 5.6,
-      "attrPen": 6.6,
-      "maxHp": 1504,
-      "physDef": 19.8,
+      "maxPhys": {
+        "min": 19.8,
+        "max": 39.6
+      },
+      "precision": {
+        "min": 0.02,
+        "max": 0.04
+      },
+      "crit": {
+        "min": 0.023,
+        "max": 0.046
+      },
+      "affinity": {
+        "min": 0.011,
+        "max": 0.022
+      },
+      "stat5": {
+        "min": 12.5,
+        "max": 25
+      },
+      "pathSingle": {
+        "min": 11.2,
+        "max": 22.4
+      },
+      "outerPen": {
+        "min": 3.4,
+        "max": 5.6
+      },
+      "attrPen": {
+        "min": 4,
+        "max": 6.6
+      },
+      "maxHp": {
+        "min": 752,
+        "max": 1504
+      },
+      "physDef": {
+        "min": 9.9,
+        "max": 19.8
+      },
       "physDmgBoost": null,
-      "allWeaponDmg": null,
+      "allWeaponDmg": {
+        "min": 0.008,
+        "max": 0.016
+      },
       "bossDmg": null,
       "atkTypeDmg": null,
       "mysticDmg": null,
       "attunement": null
     },
     "81": {
-      "maxPhys": 47.0,
-      "precision": 0.048,
-      "crit": 0.054,
-      "affinity": 0.028,
-      "stat5": 29.8,
-      "pathSingle": 26.6,
-      "outerPen": 6.6,
-      "attrPen": 8,
-      "maxHp": 1786,
-      "physDef": 23.6,
-      "physDmgBoost": 0.038,
-      "allWeaponDmg": 0.02,
-      "bossDmg": 0.02,
-      "atkTypeDmg": 0.04,
-      "mysticDmg": 0.06,
-      "attunement": 0.036
+      "maxPhys": {
+        "min": 23.5,
+        "max": 47
+      },
+      "precision": {
+        "min": 0.024,
+        "max": 0.048
+      },
+      "crit": {
+        "min": 0.027,
+        "max": 0.054
+      },
+      "affinity": {
+        "min": 0.014,
+        "max": 0.028
+      },
+      "stat5": {
+        "min": 14.9,
+        "max": 29.8
+      },
+      "pathSingle": {
+        "min": 13.3,
+        "max": 26.6
+      },
+      "outerPen": {
+        "min": 4,
+        "max": 6.6
+      },
+      "attrPen": {
+        "min": 4.8,
+        "max": 8
+      },
+      "maxHp": {
+        "min": 893,
+        "max": 1786
+      },
+      "physDef": {
+        "min": 11.8,
+        "max": 23.6
+      },
+      "physDmgBoost": {
+        "min": 0.019,
+        "max": 0.038
+      },
+      "allWeaponDmg": {
+        "min": 0.01,
+        "max": 0.02
+      },
+      "bossDmg": {
+        "min": 0.01,
+        "max": 0.02
+      },
+      "atkTypeDmg": {
+        "min": 0.02,
+        "max": 0.04
+      },
+      "mysticDmg": {
+        "min": 0.03,
+        "max": 0.06
+      },
+      "attunement": {
+        "min": 0.018,
+        "max": 0.036
+      }
     },
     "86": {
-      "maxPhys": 54.8,
-      "precision": 0.056,
-      "crit": 0.064,
-      "affinity": 0.032,
-      "stat5": 34.8,
-      "pathSingle": 31,
-      "outerPen": 7.8,
-      "attrPen": 9.2,
-      "maxHp": 2084,
-      "physDef": 27.4,
-      "physDmgBoost": 0.044,
-      "allWeaponDmg": 0.022,
-      "bossDmg": 0.024,
-      "atkTypeDmg": 0.044,
-      "mysticDmg": 0.07,
-      "attunement": 0.043
+      "maxPhys": {
+        "min": 27.4,
+        "max": 54.8
+      },
+      "precision": {
+        "min": 0.028,
+        "max": 0.056
+      },
+      "crit": {
+        "min": 0.032,
+        "max": 0.064
+      },
+      "affinity": {
+        "min": 0.016,
+        "max": 0.032
+      },
+      "stat5": {
+        "min": 17.4,
+        "max": 34.8
+      },
+      "pathSingle": {
+        "min": 15.5,
+        "max": 31
+      },
+      "outerPen": {
+        "min": 4.7,
+        "max": 7.8
+      },
+      "attrPen": {
+        "min": 5.5,
+        "max": 9.2
+      },
+      "maxHp": {
+        "min": 1042,
+        "max": 2084
+      },
+      "physDef": {
+        "min": 13.7,
+        "max": 27.4
+      },
+      "physDmgBoost": {
+        "min": 0.022,
+        "max": 0.044
+      },
+      "allWeaponDmg": {
+        "min": 0.011,
+        "max": 0.022
+      },
+      "bossDmg": {
+        "min": 0.012,
+        "max": 0.024
+      },
+      "atkTypeDmg": {
+        "min": 0.022,
+        "max": 0.044
+      },
+      "mysticDmg": {
+        "min": 0.035,
+        "max": 0.07
+      },
+      "attunement": {
+        "min": 0.0215,
+        "max": 0.043
+      }
     },
     "91": {
-      "maxPhys": 63.8,
-      "precision": 0.066,
-      "crit": 0.074,
-      "affinity": 0.036,
-      "stat5": 40.4,
-      "pathSingle": 36.2,
-      "outerPen": 9,
-      "attrPen": 10.8,
-      "maxHp": 2426,
-      "physDef": 32,
-      "physDmgBoost": 0.052,
-      "allWeaponDmg": 0.026,
-      "bossDmg": 0.026,
-      "atkTypeDmg": 0.052,
-      "mysticDmg": 0.08,
-      "attunement": 0.05
+      "maxPhys": {
+        "min": 31.9,
+        "max": 63.8
+      },
+      "precision": {
+        "min": 0.033,
+        "max": 0.066
+      },
+      "crit": {
+        "min": 0.037,
+        "max": 0.074
+      },
+      "affinity": {
+        "min": 0.018,
+        "max": 0.036
+      },
+      "stat5": {
+        "min": 20.2,
+        "max": 40.4
+      },
+      "pathSingle": {
+        "min": 18.1,
+        "max": 36.2
+      },
+      "outerPen": {
+        "min": 5.4,
+        "max": 9
+      },
+      "attrPen": {
+        "min": 5.4,
+        "max": 10.8
+      },
+      "maxHp": {
+        "min": 1213,
+        "max": 2426
+      },
+      "physDef": {
+        "min": 16,
+        "max": 32
+      },
+      "physDmgBoost": {
+        "min": 0.026,
+        "max": 0.052
+      },
+      "allWeaponDmg": {
+        "min": 0.013,
+        "max": 0.026
+      },
+      "bossDmg": {
+        "min": 0.013,
+        "max": 0.026
+      },
+      "atkTypeDmg": {
+        "min": 0.026,
+        "max": 0.052
+      },
+      "mysticDmg": {
+        "min": 0.04,
+        "max": 0.08
+      },
+      "attunement": {
+        "min": 0.025,
+        "max": 0.05
+      }
     },
     "96": {
-      "maxPhys": 77.8,
-      "precision": 0.08,
-      "crit": 0.09,
-      "affinity": 0.044,
-      "stat5": 49.4,
-      "pathSingle": 44.2,
-      "outerPen": 11,
-      "attrPen": 13,
-      "maxHp": 2960,
-      "physDef": 39,
-      "physDmgBoost": 0.062,
-      "allWeaponDmg": 0.032,
-      "bossDmg": 0.032,
-      "atkTypeDmg": 0.064,
-      "mysticDmg": 0.098,
-      "attunement": 0.06
+      "maxPhys": {
+        "min": 38.9,
+        "max": 77.8
+      },
+      "precision": {
+        "min": 0.04,
+        "max": 0.08
+      },
+      "crit": {
+        "min": 0.045,
+        "max": 0.09
+      },
+      "affinity": {
+        "min": 0.022,
+        "max": 0.044
+      },
+      "stat5": {
+        "min": 24.7,
+        "max": 49.4
+      },
+      "pathSingle": {
+        "min": 22.1,
+        "max": 44.2
+      },
+      "outerPen": {
+        "min": 6.6,
+        "max": 11
+      },
+      "attrPen": {
+        "min": 6.5,
+        "max": 13
+      },
+      "maxHp": {
+        "min": 1480,
+        "max": 2960
+      },
+      "physDef": {
+        "min": 19.5,
+        "max": 39
+      },
+      "physDmgBoost": {
+        "min": 0.031,
+        "max": 0.062
+      },
+      "allWeaponDmg": {
+        "min": 0.016,
+        "max": 0.032
+      },
+      "bossDmg": {
+        "min": 0.016,
+        "max": 0.032
+      },
+      "atkTypeDmg": {
+        "min": 0.032,
+        "max": 0.064
+      },
+      "mysticDmg": {
+        "min": 0.049,
+        "max": 0.098
+      },
+      "attunement": {
+        "min": 0.03,
+        "max": 0.06
+      }
     }
   },
-
   "_fieldMapping": {
     "maxPhys": "Max Physical Attack (= Min同値、心法 minPhysATKAdd/maxPhysATKAdd gold値)",
     "precision": "Precision Rate (命中率 hitRate)",
@@ -133,18 +386,34 @@
     "mysticDmg": "奇術ダメ (Mystic Damage、Lv81+)",
     "attunement": "共鳴 affix (Attunement、Lv81+)"
   },
-
   "_tierBoundaries": {
     "comment": "equipLv → tier 関数",
     "rules": [
-      { "equipLv": "1-70", "tier": 61 },
-      { "equipLv": "71-80", "tier": 71 },
-      { "equipLv": "81-85", "tier": 81 },
-      { "equipLv": "86-90", "tier": 86 },
-      { "equipLv": "91-95", "tier": 91 },
-      { "equipLv": "96-100", "tier": 96 }
+      {
+        "equipLv": "1-70",
+        "tier": 61
+      },
+      {
+        "equipLv": "71-80",
+        "tier": 71
+      },
+      {
+        "equipLv": "81-85",
+        "tier": 81
+      },
+      {
+        "equipLv": "86-90",
+        "tier": 86
+      },
+      {
+        "equipLv": "91-95",
+        "tier": 91
+      },
+      {
+        "equipLv": "96-100",
+        "tier": 96
+      }
     ]
   },
-
   "_worldLvMapping": "大世界Lv = equipLv - 81 (装備Lv95 = 大世界Lv14、装備Lv96 = 大世界Lv15)。Tier91 = 大世界Lv10-14 (現状)。Tier96 = 大世界Lv15-19 (将来Lv上限解放時)。"
 }

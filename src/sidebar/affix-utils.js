@@ -255,7 +255,22 @@
     }
     if (!mapKey) return null;
     const v = t[mapKey];
-    return (typeof v === 'number') ? v : null;
+    if (typeof v === 'number') return v;
+    return v?.max ?? null;
+  }
+  // {min, max} ペア取得 (Lv 別 min-max マスタ移行、 2026-06-23)
+  function _getAffixMinMax(statKey, lv) {
+    if (!_EQUIP_MAX || !statKey) return null;
+    const tier = _lvToTier(lv);
+    const t = _EQUIP_MAX.tiers?.[tier];
+    if (!t) return null;
+    let mapKey = _STAT_TO_MAX_KEY[statKey];
+    if (!mapKey && /Q$|Charged$|Special$|Drone$|Light$|Healing$|Shield$|Rodent$|VariedCombo$|^bleed$/.test(statKey)) mapKey = 'attunement';
+    if (!mapKey) return null;
+    const v = t[mapKey];
+    if (typeof v === 'number') return { min: v / 2, max: v };
+    if (v && typeof v === 'object' && v.max != null) return { min: v.min, max: v.max };
+    return null;
   }
 
   // slot 別 affix 出現ルール (ゲーム仕様)
@@ -376,6 +391,7 @@
     loadEquipMax: _loadEquipMax,
     getCachedEquipMax: _getCachedEquipMax,
     getAffixMax: _getAffixMax,
+    getAffixMinMax: _getAffixMinMax,
     isAffixAllowedInSlot: _isAffixAllowedInSlot,
     isAffixAllowedAtIdx0: _isAffixAllowedAtIdx0,
     isWeaponDmgMatch: _isWeaponDmgMatch,

@@ -567,7 +567,7 @@
               ${(() => {
                 // Lv + Rank (品質) 1 行 (武術 select 上)。 2026-06-18 兄貴指示
                 const _curLv = WWMState.virtual.gear?.[slot]?.exVo?._inferredLv ?? origEq?.exVo?._inferredLv;
-                const _lvList = (window.WWM_EQUIP_BASE_BY_LV?._lvList || [91, 86, 81, 71]).filter(lv => lv <= charLv);
+                const _lvList = (window.WWM_EQUIP_BASE_BY_LV?._lvList || [96, 91, 86, 81, 71]).filter(lv => lv <= charLv);
                 const _hasTbl = !!window.WWM_EQUIP_BASE_BY_LV?.slots?.[String(slot)];
                 const _curRank = WWMState.virtual.gear?.[slot]?.exVo?._rank ?? origEq?.exVo?._rank ?? 'gold';
                 const _lvSel = (_curLv && _hasTbl)
@@ -739,22 +739,16 @@
     // 装備品質: blue は affix#5/#6 (idx 4-5) ロック、 base 値も独立 table or 算式導出
     // 2026-06-18 兄貴指示: gold/purple = affix 6 個、 blue = affix 4 個
     const _curNewRank = () => rankSel?.value || 'gold';
-    // 品質別 base 値取得: gold = slots、 purple = round(gold × 0.9)、 blue = blue_slots (未収録 = gold fallback)
+    // 品質別 base 値取得 (2026-06-23 新 schema: 全 Lv × 全 tier 統一 table、 _qualityRule 算式廃止)
     function _getBaseAttrsByRank(slot, lv, rank) {
       const tbl = window.WWM_EQUIP_BASE_BY_LV;
       if (!tbl) return null;
-      const slotS = String(slot), lvS = String(lv);
-      const goldRef = tbl.slots?.[slotS]?.[lvS];
-      if (!goldRef) return null;
-      if (rank === 'blue') {
-        return tbl.blue_slots?.[slotS]?.[lvS] || goldRef;   // 未収録 = gold fallback
-      }
-      if (rank === 'purple') {
-        const out = {};
-        for (const [k, v] of Object.entries(goldRef)) out[k] = Math.round(v * 0.9);
-        return out;
-      }
-      return goldRef;
+      const RANK_TO_TIER = { gold: '5', purple: '4', blue: '3' };
+      const tier = RANK_TO_TIER[rank] || '5';
+      const ref = tbl.slots?.[String(slot)]?.table?.[String(lv)]?.[tier];
+      if (ref) return ref;
+      // fallback = 金値 (= rank 未収録時の保険、 schema 完備で発火しない想定)
+      return tbl.slots?.[String(slot)]?.table?.[String(lv)]?.['5'] || null;
     }
     async function _applyNewLv(newLv, newRank) {
       const rank = newRank || _curNewRank();
@@ -785,7 +779,8 @@
           const info = window.WWM_AFFIX?.[d[0]];
           const sk = info?.statKey;
           const maxKey = _STAT_TO_MAX_KEY[sk] || sk;
-          const maxVal = maxTbl[maxKey];
+          const _raw = maxTbl[maxKey];
+          const maxVal = typeof _raw === 'number' ? _raw : _raw?.max;
           if (maxVal != null) {
             d[1] = +(maxVal * 0.94).toFixed(4);
             d[2] = 0.94;
@@ -1213,7 +1208,8 @@
           const sk = info?.statKey;
           if (!sk) continue;
           const maxKey = _STAT_TO_MAX_KEY[sk] || sk;
-          const maxVal = maxTbl[maxKey];
+          const _raw = maxTbl[maxKey];
+          const maxVal = typeof _raw === 'number' ? _raw : _raw?.max;
           if (maxVal == null) continue;
           d[1] = +(maxVal * 0.94).toFixed(4);
           d[2] = 0.94;
