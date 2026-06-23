@@ -262,6 +262,8 @@
       critRateAdj:     { tkey: 'crit',            pct: true },
       critRate:        { tkey: 'crit',            pct: true },
       crit:            { tkey: 'crit',            pct: true },
+      hitRate:         { tkey: 'precision',       pct: true },
+      precision:       { tkey: 'precision',       pct: true },
       critBoost:       { tkey: 'critBoost',       pct: true },
       sympathyRate:    { tkey: 'affinity',        pct: true },
       affinity:        { tkey: 'affinity',        pct: true },

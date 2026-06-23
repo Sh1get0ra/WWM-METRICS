@@ -1,6 +1,27 @@
 {
-  "current": "2.3.0",
+  "current": "2.4.0",
   "entries": [
+    {
+      "version": "2.4.0",
+      "date": "2026-06-23",
+      "items": [
+        {
+          "featured": true,
+          "ja": "【心法 効果反映 修正】 ゲーム本体のバランス調整 反映漏れを修正しました。 君臣薬 二重 = 会心率、 砂舟行木 二重 = 最小外功攻撃 / 五重 = 外功貫通、 灯火詞 二重 = 最小瞬嵐攻撃 / 五重 = 瞬嵐貫通 に訂正。 該当心法を装備中の方は武格指数が変動します (再 import 推奨)。",
+          "en": "[Xinfa Effect Fix] Synced with the game's balance patches. Royal Remedy T2 → Critical Rate; Towline Sweep T2 → Min Physical Attack / T5 → Physical Penetration; Light Anew T2 → Min Bamboocut Attack / T5 → Bamboocut Penetration. If you equip any of these, your Score will shift (re-import recommended).",
+          "zh": "【心法效果反映 修正】 同步游戏本体的平衡调整。 君臣药 T2 → 会心率, 绳舟行木 T2 → 最小外功攻击 / T5 → 外功穿透, 灯儿亮 T2 → 最小破竹攻击 / T5 → 破竹穿透。 装备相关心法的玩家武格指数会变动 (建议重新 import)。",
+          "ko": "【심법 효과 반영 수정】 게임 본체의 밸런스 조정 반영 누락을 수정. 군신의 묘약 T2 → 치명타 확률, 이동하는 나무배 T2 → 최소 외공 공격 / T5 → 외공 관통, 밝은 등불 T2 → 최소 파죽 공격 / T5 → 파죽 관통 으로 정정. 해당 심법 장착 시 무격지수가 변동됩니다 (재 import 권장).",
+          "vi": "[Sửa hiệu ứng Tâm Pháp] Đồng bộ với các bản cân bằng của game. Thuốc quân thần T2 → Tỷ lệ chí mạng; Dây thuyền đi gỗ T2 → Tấn công ngoại công tối thiểu / T5 → Xuyên thấu ngoại công; Đèn sáng T2 → Tấn công Phá Trúc tối thiểu / T5 → Xuyên thấu Phá Trúc. Nếu đang trang bị, chỉ số Vũ Cách sẽ thay đổi (khuyến nghị import lại)."
+        },
+        {
+          "ja": "【装備マスタ精密化】 装備強化値の判定を全Lv帯で精密化しました。 全Lv帯装備の 調律/定音 の評価精度が向上します。 ※武格指数に影響がございません。",
+          "en": "[Equipment Master Refinement] Refined equipment enhancement evaluation across every level tier. Tuning/Attuning ratings on gear of all levels are now more accurate. *No impact on the Score.",
+          "zh": "【装备数据精密化】 全 Lv 段精密化了装备强化值判定。 全 Lv 段装备的 调律/定音 评估精度提升。 ※不影响武格指数。",
+          "ko": "【장비 데이터 정밀화】 모든 Lv 대에서 장비 강화값 판정을 정밀화. 모든 Lv 대 장비의 조율/정음 평가 정밀도가 향상됩니다. ※무격지수에는 영향이 없습니다.",
+          "vi": "[Tinh chỉnh dữ liệu trang bị] Tinh chỉnh đánh giá cường hóa trang bị trên mọi cấp. Độ chính xác đánh giá Điều Luật/Định Âm trên trang bị mọi cấp đã cải thiện. *Không ảnh hưởng Vũ Cách."
+        }
+      ]
+    },
     {
       "version": "2.3.0",
       "date": "2026-06-23",

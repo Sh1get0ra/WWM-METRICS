@@ -337,7 +337,8 @@
           "zh": "最小外功攻击（单人模式 按等级缩放，rank=blue）",
           "ko": "최소 외공 공격 (싱글 모드 레벨 비례, rank=blue)",
           "vi": "Tấn công ngoại công tối thiểu (theo cấp ở chế độ đơn, rank=blue)"
-        }
+        },
+        "effectId": "phys_min_blue"
       },
       "tier3": {
         "permanent": true,
@@ -438,7 +439,8 @@
           "zh": "最大外功攻击（单人模式 按等级缩放，rank=blue）",
           "ko": "최대 외공 공격 (싱글 모드 레벨 비례, rank=blue)",
           "vi": "Tấn công ngoại công tối đa (theo cấp ở chế độ đơn, rank=blue)"
-        }
+        },
+        "effectId": "phys_max_blue"
       },
       "tier3": {
         "permanent": true,
@@ -635,7 +637,8 @@
           "zh": "最小外功攻击 +63.9",
           "ko": "최소 외공 공격 +63.9",
           "vi": "Tấn công ngoại công tối thiểu +63.9"
-        }
+        },
+        "effectId": "phys_min_purple"
       },
       "tier3": {
         "permanent": true,
@@ -736,7 +739,8 @@
           "zh": "精准率（单人模式 按等级缩放，rank=purple）",
           "ko": "정확도 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tỷ lệ trúng đích (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_rate_hitRate_purple"
       },
       "tier3": {
         "permanent": true,
@@ -1037,7 +1041,8 @@
           "zh": "最大外功攻击（单人模式 按等级缩放，rank=purple）",
           "ko": "최대 외공 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công ngoại công tối đa (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_max_purple"
       },
       "tier3": {
         "permanent": true,
@@ -1140,7 +1145,8 @@
           "zh": "精准率（单人模式 按等级缩放，rank=purple）",
           "ko": "정확도 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tỷ lệ trúng đích (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_rate_hitRate_purple"
       },
       "tier3": {
         "permanent": true,
@@ -1243,7 +1249,8 @@
           "zh": "外功攻击（单人模式 按等级缩放，rank=purple）",
           "ko": "외공 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công ngoại công (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_minmax_purple"
       },
       "tier3": {
         "permanent": true,
@@ -1443,7 +1450,8 @@
           "zh": "外功攻击 +23.6 ~ +47.2",
           "ko": "외공 공격 +23.6 ~ +47.2",
           "vi": "Tấn công ngoại công +23.6 ~ +47.2"
-        }
+        },
+        "effectId": "phys_minmax_gold"
       },
       "tier3": {
         "permanent": true,
@@ -1545,7 +1553,8 @@
           "zh": "外功攻击（单人模式 按等级缩放，rank=gold）",
           "ko": "외공 공격 (싱글 모드 레벨 비례, rank=gold)",
           "vi": "Tấn công ngoại công (theo cấp ở chế độ đơn, rank=gold)"
-        }
+        },
+        "effectId": "phys_minmax_gold"
       },
       "tier3": {
         "permanent": true,
@@ -1659,7 +1668,8 @@
           "zh": "鸣金攻击（单人模式 按等级缩放，rank=purple）",
           "ko": "명금 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công Minh Kim (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "bellstrike_minmax_purple"
       },
       "tier3": {
         "permanent": true,
@@ -1774,7 +1784,8 @@
           "zh": "外功攻击（单人模式 按等级缩放，rank=purple）",
           "ko": "외공 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công ngoại công (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_minmax_purple"
       },
       "tier3": {
         "permanent": true,
@@ -1891,7 +1902,8 @@
           "zh": "会意率（单人模式 按等级缩放，rank=purple）",
           "ko": "각성 확률 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tỷ lệ hiểu ý (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_rate_sympathyRate_purple"
       },
       "tier3": {
         "permanent": true,
@@ -2013,7 +2025,8 @@
           "zh": "最大外功攻击（单人模式 按等级缩放，rank=gold）",
           "ko": "최대 외공 공격 (싱글 모드 레벨 비례, rank=gold)",
           "vi": "Tấn công ngoại công tối đa (theo cấp ở chế độ đơn, rank=gold)"
-        }
+        },
+        "effectId": "phys_max_gold"
       },
       "tier3": {
         "permanent": true,
@@ -2131,7 +2144,8 @@
           "zh": "会意率（单人模式 按等级缩放，rank=purple）",
           "ko": "각성 확률 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tỷ lệ hiểu ý (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_rate_sympathyRate_purple"
       },
       "tier3": {
         "permanent": true,
@@ -2269,7 +2283,8 @@
           "zh": "最大鸣金攻击（单人模式 按等级缩放，rank=purple）",
           "ko": "최대 명금 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công Minh Kim tối đa (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "bellstrike_max_purple"
       },
       "tier3": {
         "permanent": true,
@@ -2424,7 +2439,8 @@
           "zh": "外功攻击（单人模式 按等级缩放，rank=purple，5/28补丁后：鸣金→外功）",
           "ko": "외공 공격 (싱글 모드 레벨 비례, rank=purple, 5/28 패치 후: 명금→외공)",
           "vi": "Tấn công ngoại công (theo cấp ở chế độ đơn, rank=purple, sau patch 5/28: Bellstrike → ngoại công)"
-        }
+        },
+        "effectId": "phys_minmax_purple"
       },
       "tier3": {
         "permanent": true,
@@ -2549,7 +2565,8 @@
           "zh": "最大外功攻击（单人模式 按等级缩放，rank=gold）",
           "ko": "최대 외공 공격 (싱글 모드 레벨 비례, rank=gold)",
           "vi": "Tấn công ngoại công tối đa (theo cấp ở chế độ đơn, rank=gold)"
-        }
+        },
+        "effectId": "phys_max_gold"
       },
       "tier3": {
         "permanent": true,
@@ -2667,7 +2684,8 @@
           "zh": "精准率（单人模式 按等级缩放，rank=purple）",
           "ko": "정확도 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tỷ lệ trúng đích (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_rate_hitRate_purple"
       },
       "tier3": {
         "permanent": true,
@@ -2794,7 +2812,8 @@
           "zh": "外功攻击（单人模式 按等级缩放，rank=purple）",
           "ko": "외공 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công ngoại công (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_minmax_purple"
       },
       "tier3": {
         "permanent": true,
@@ -2924,7 +2943,8 @@
           "zh": "外功攻击（单人模式 按等级缩放，rank=purple）",
           "ko": "외공 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công ngoại công (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_minmax_purple"
       },
       "tier3": {
         "permanent": true,
@@ -3034,7 +3054,8 @@
           "zh": "会心率（单人模式 按等级缩放，rank=gold）",
           "ko": "치명타 확률 (싱글 모드 레벨 비례, rank=gold)",
           "vi": "Tỷ lệ chí mạng (theo cấp ở chế độ đơn, rank=gold)"
-        }
+        },
+        "effectId": "phys_rate_critRate_gold"
       },
       "tier3": {
         "permanent": true,
@@ -3139,18 +3160,19 @@
         "permanent": true,
         "worldLv": 15,
         "needsManualInput": false,
-        "statType": "Min Physical Attack",
+        "statType": "Critical Rate",
         "effects": {
-          "minPhysATKAdd": 71
+          "critRate": 0.082
         },
         "derivedFromGold": true,
         "rawI18n": {
-          "ja": "Min Physical Attack (Solo Mode Level scaled, rank=gold)",
-          "en": "Min Physical Attack (Solo Mode Level scaled, rank=gold)",
-          "zh": "最小外功攻击（单人模式 按等级缩放，rank=gold）",
-          "ko": "최소 외공 공격 (싱글 모드 레벨 비례, rank=gold)",
-          "vi": "Tấn công ngoại công tối thiểu (theo cấp ở chế độ đơn, rank=gold)"
-        }
+          "ja": "Critical Rate (Solo Mode Level scaled, rank=gold)",
+          "en": "Critical Rate (Solo Mode Level scaled, rank=gold)",
+          "zh": "会心率（单人模式 按等级缩放，rank=gold）",
+          "ko": "치명타 확률 (싱글 모드 레벨 비례, rank=gold)",
+          "vi": "Tỷ lệ chí mạng (theo cấp ở chế độ đơn, rank=gold)"
+        },
+        "effectId": "phys_rate_critRate_gold"
       },
       "tier3": {
         "permanent": true,
@@ -3274,7 +3296,8 @@
           "zh": "最小牵丝攻击（单人模式 按等级缩放，rank=purple）",
           "ko": "최소 견사 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công Khiên Ti tối thiểu (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "silkbind_min_purple"
       },
       "tier3": {
         "permanent": true,
@@ -3394,7 +3417,8 @@
           "zh": "会心率（单人模式 按等级缩放，rank=purple）",
           "ko": "치명타 확률 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tỷ lệ chí mạng (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_rate_critRate_purple"
       },
       "tier3": {
         "permanent": true,
@@ -3512,7 +3536,8 @@
           "zh": "外功攻击（单人模式 按等级缩放，rank=purple）",
           "ko": "외공 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công ngoại công (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_minmax_purple"
       },
       "tier3": {
         "permanent": true,
@@ -3627,7 +3652,8 @@
           "zh": "会心率（单人模式 按等级缩放，rank=gold）",
           "ko": "치명타 확률 (싱글 모드 레벨 비례, rank=gold)",
           "vi": "Tỷ lệ chí mạng (theo cấp ở chế độ đơn, rank=gold)"
-        }
+        },
+        "effectId": "phys_rate_critRate_gold"
       },
       "tier3": {
         "permanent": true,
@@ -3865,7 +3891,8 @@
           "zh": "裂石攻击（单人模式 按等级缩放，rank=purple）",
           "ko": "열석 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công Liệt Thạch (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "stonesplit_minmax_purple"
       },
       "tier3": {
         "permanent": true,
@@ -4102,7 +4129,8 @@
           "zh": "会心率 +8.2%",
           "ko": "치명타 확률 +8.2%",
           "vi": "Tỷ lệ chí mạng +8.2%"
-        }
+        },
+        "effectId": "phys_rate_critRate_gold"
       },
       "tier3": {
         "permanent": true,
@@ -4218,7 +4246,8 @@
           "zh": "最小外功攻击 +63.9（rank=purple，5/28补丁后与454互换）",
           "ko": "최소 외공 공격 +63.9 (rank=purple, 5/28 패치 후 454와 교체)",
           "vi": "Tấn công ngoại công tối thiểu +63.9 (rank=purple, sau patch 5/28 swap với 454)"
-        }
+        },
+        "effectId": "phys_min_purple"
       },
       "tier3": {
         "permanent": true,
@@ -4343,7 +4372,8 @@
           "zh": "精准率（单人模式 按等级缩放，rank=purple）",
           "ko": "정확도 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tỷ lệ trúng đích (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_rate_hitRate_purple"
       },
       "tier3": {
         "permanent": true,
@@ -4456,7 +4486,8 @@
           "zh": "最小破竹攻击 +36.2（rank=purple，5/28补丁后与452互换）",
           "ko": "최소 파죽 공격 +36.2 (rank=purple, 5/28 패치 후 452와 교체)",
           "vi": "Tấn công Phá Trúc tối thiểu +36.2 (rank=purple, sau patch 5/28 swap với 452)"
-        }
+        },
+        "effectId": "bamboocut_min_purple"
       },
       "tier3": {
         "permanent": true,
@@ -4579,7 +4610,8 @@
           "zh": "会心率（单人模式 按等级缩放，rank=gold）",
           "ko": "치명타 확률 (싱글 모드 레벨 비례, rank=gold)",
           "vi": "Tỷ lệ chí mạng (theo cấp ở chế độ đơn, rank=gold)"
-        }
+        },
+        "effectId": "phys_rate_critRate_gold"
       },
       "tier3": {
         "permanent": true,
@@ -4684,22 +4716,21 @@
       },
       "tier2": {
         "permanent": true,
-        "worldLv": 14,
+        "worldLv": 15,
         "needsManualInput": false,
-        "statType": "Min Bamboocut Attack",
-        "effects": {},
-        "weaponSpecific": "bamboocut",
-        "pendingImplementation": true,
-        "minPathATK": 32.6,
-        "maxPathATK": 32.6,
+        "statType": "Min Physical Attack",
+        "effects": {
+          "minPhysATKAdd": 63.9
+        },
         "derivedFromGold": true,
         "rawI18n": {
-          "ja": "Min Bamboocut Attack (Solo Mode Level scaled, rank=purple)",
-          "en": "Min Bamboocut Attack (Solo Mode Level scaled, rank=purple)",
-          "zh": "最小破竹攻击（单人模式 按等级缩放，rank=purple）",
-          "ko": "최소 파죽 공격 (싱글 모드 레벨 비례, rank=purple)",
-          "vi": "Tấn công Phá Trúc tối thiểu (theo cấp ở chế độ đơn, rank=purple)"
-        }
+          "ja": "Min Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "en": "Min Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "最小外功攻击（单人模式 按等级缩放，rank=purple）",
+          "ko": "최소 외공 공격 (싱글 모드 레벨 비례, rank=purple)",
+          "vi": "Tấn công ngoại công tối thiểu (theo cấp ở chế độ đơn, rank=purple)"
+        },
+        "effectId": "phys_min_purple"
       },
       "tier3": {
         "permanent": true,
@@ -4736,14 +4767,14 @@
       "tier5": {
         "permanent": true,
         "effects": {
-          "elemPenAdd": 6
+          "outerPenAdd": 5.1
         },
         "rawI18n": {
-          "ja": "瞬嵐貫通 +6",
-          "en": "Bamboocut Penetration +6",
-          "zh": "破竹穿透 +6",
-          "ko": "파죽 관통 +6",
-          "vi": "Xuyên thấu Phá Trúc +6"
+          "ja": "外功貫通 +5.1",
+          "en": "Physical Penetration +5.1",
+          "zh": "外功穿透 +5.1",
+          "ko": "외공 관통 +5.1",
+          "vi": "Xuyên thấu ngoại công +5.1"
         }
       },
       "tier6": {
@@ -4800,18 +4831,20 @@
         "permanent": true,
         "worldLv": 15,
         "needsManualInput": false,
-        "statType": "Min Physical Attack",
+        "statType": "Min Bamboocut Attack",
         "effects": {
-          "minPhysATKAdd": 63.9
+          "minBamboocut": 36.2222
         },
+        "weaponSpecific": "bamboocut",
         "derivedFromGold": true,
         "rawI18n": {
-          "ja": "Min Physical Attack (Solo Mode Level scaled, rank=purple)",
-          "en": "Min Physical Attack (Solo Mode Level scaled, rank=purple)",
-          "zh": "最小外功攻击（单人模式 按等级缩放，rank=purple）",
-          "ko": "최소 외공 공격 (싱글 모드 레벨 비례, rank=purple)",
-          "vi": "Tấn công ngoại công tối thiểu (theo cấp ở chế độ đơn, rank=purple)"
-        }
+          "ja": "Min Bamboocut Attack (Solo Mode Level scaled, rank=purple)",
+          "en": "Min Bamboocut Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "最小破竹攻击（单人模式 按等级缩放，rank=purple）",
+          "ko": "최소 파죽 공격 (싱글 모드 레벨 비례, rank=purple)",
+          "vi": "Tấn công Phá Trúc tối thiểu (theo cấp ở chế độ đơn, rank=purple)"
+        },
+        "effectId": "bamboocut_min_purple"
       },
       "tier3": {
         "permanent": true,
@@ -4842,14 +4875,15 @@
       "tier5": {
         "permanent": true,
         "effects": {
-          "outerPenAdd": 5.1
+          "bamboocutPen": 6
         },
+        "weaponSpecific": "bamboocut",
         "rawI18n": {
-          "ja": "外功貫通 +5.1",
-          "en": "Physical Penetration +5.1",
-          "zh": "外功穿透 +5.1",
-          "ko": "외공 관통 +5.1",
-          "vi": "Xuyên thấu ngoại công +5.1"
+          "ja": "瞬嵐貫通 +6",
+          "en": "Bamboocut Penetration +6",
+          "zh": "破竹穿透 +6",
+          "ko": "파죽 관통 +6",
+          "vi": "Xuyên thấu Phá Trúc +6"
         }
       },
       "tier6": {
@@ -4924,7 +4958,8 @@
           "zh": "精准率（单人模式 按等级缩放，rank=purple）",
           "ko": "정확도 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tỷ lệ trúng đích (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_rate_hitRate_purple"
       },
       "tier3": {
         "permanent": true,
@@ -5038,7 +5073,8 @@
           "zh": "最小外功攻击 +71.0",
           "ko": "최소 외공 공격 +71.0",
           "vi": "Tấn công ngoại công tối thiểu +71.0"
-        }
+        },
+        "effectId": "phys_min_gold"
       },
       "tier3": {
         "permanent": true,
@@ -5154,7 +5190,8 @@
           "zh": "会心率 +7.4%",
           "ko": "치명타 확률 +7.4%",
           "vi": "Tỷ lệ chí mạng +7.4%"
-        }
+        },
+        "effectId": "phys_rate_critRate_purple"
       },
       "tier3": {
         "permanent": true,
@@ -5294,7 +5331,8 @@
           "zh": "裂石攻击 +12.1 ~ +24.1",
           "ko": "열석 공격 +12.1 ~ +24.1",
           "vi": "Tấn công Liệt Thạch +12.1 ~ +24.1"
-        }
+        },
+        "effectId": "stonesplit_minmax_purple"
       },
       "tier3": {
         "permanent": true,
@@ -5438,7 +5476,8 @@
           "zh": "外功攻击（单人模式 按等级缩放，rank=purple）",
           "ko": "외공 공격 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Tấn công ngoại công (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_minmax_purple"
       },
       "tier3": {
         "permanent": true,
@@ -5502,22 +5541,34 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [20901],
-        "effects": { "globalDmgBoost": 0.013 },
+        "kongfuRequired": [
+          20901
+        ],
+        "effects": {
+          "globalDmgBoost": 0.013
+        },
         "rawI18n": {
           "ja": "",
           "en": "Heaven's Will 3 bars: Heavenwill Gauntlets' Charged Heavy Attack evolves into Vile Condemned: End (Invincibility while casting, 18s CD); +20% HP DMG to non-player units with Falcon's Pursuit/Vile Condemned series",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [20901],
-        "effects": { "globalDmgBoost": 0.013 },
+        "kongfuRequired": [
+          20901
+        ],
+        "effects": {
+          "globalDmgBoost": 0.013
+        },
         "rawI18n": {
           "ja": "",
           "en": "After Wicked Defiance or Celestial Mandate: chain into 5th Light Attack",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier2": {
@@ -5525,51 +5576,78 @@
         "worldLv": 15,
         "needsManualInput": false,
         "statType": "Min Physical Attack",
-        "effects": { "minPhysATKAdd": 71 },
+        "effects": {
+          "minPhysATKAdd": 71
+        },
         "derivedFromGold": true,
         "rawI18n": {
           "ja": "",
           "en": "Min Physical Attack (Solo Mode Level scaled, rank=gold)",
-          "zh": "", "ko": "", "vi": ""
-        }
+          "zh": "",
+          "ko": "",
+          "vi": ""
+        },
+        "effectId": "phys_min_gold"
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [20901],
-        "effects": { "globalDmgBoost": 0.013 },
+        "kongfuRequired": [
+          20901
+        ],
+        "effects": {
+          "globalDmgBoost": 0.013
+        },
         "rawI18n": {
           "ja": "",
           "en": "Vile Condemned miss → 50% Heaven's Will refund (no CD); Falcon's Pursuit on Exhausted Boss resets Vile Condemned: End CD (30s)",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [20901],
-        "effects": { "globalDmgBoost": 0.013 },
+        "kongfuRequired": [
+          20901
+        ],
+        "effects": {
+          "globalDmgBoost": 0.013
+        },
         "rawI18n": {
           "ja": "",
           "en": "Vile Condemned: End hit → restores 1 bar of Heaven's Will (CD 18s)",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier5": {
         "permanent": true,
-        "effects": { "addCritRate": 0.046 },
+        "effects": {
+          "addCritRate": 0.046
+        },
         "rawI18n": {
           "ja": "",
           "en": "Direct Critical Rate +4.6%",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [20901],
-        "effects": { "globalDmgBoost": 0.013 },
+        "kongfuRequired": [
+          20901
+        ],
+        "effects": {
+          "globalDmgBoost": 0.013
+        },
         "rawI18n": {
           "ja": "",
           "en": "Heaven's Will 4 bars: Vile Condemned: End consumes all → HP DMG +30% + Critical DMG +10%",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       }
     },
@@ -5582,22 +5660,34 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "kongfuRequired": [20703],
-        "effects": { "globalDmgBoost": 0.01 },
+        "kongfuRequired": [
+          20703
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
         "rawI18n": {
           "ja": "",
           "en": "Heaven's Might base passive (Skygrasp Rope Dart)",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier1": {
         "permanent": true,
-        "kongfuRequired": [20703],
-        "effects": { "globalDmgBoost": 0.01 },
+        "kongfuRequired": [
+          20703
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
         "rawI18n": {
           "ja": "",
           "en": "Heaven's Might duration 24s",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier2": {
@@ -5605,51 +5695,78 @@
         "worldLv": 15,
         "needsManualInput": false,
         "statType": "Critical Rate",
-        "effects": { "critRate": 0.074 },
+        "effects": {
+          "critRate": 0.074
+        },
         "derivedFromGold": true,
         "rawI18n": {
           "ja": "",
           "en": "Critical Rate (Solo Mode Level scaled, rank=purple)",
-          "zh": "", "ko": "", "vi": ""
-        }
+          "zh": "",
+          "ko": "",
+          "vi": ""
+        },
+        "effectId": "phys_rate_critRate_purple"
       },
       "tier3": {
         "permanent": true,
-        "kongfuRequired": [20703],
-        "effects": { "globalDmgBoost": 0.01 },
+        "kongfuRequired": [
+          20703
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
         "rawI18n": {
           "ja": "",
           "en": "With Heavenwill Gauntlets: Sky Grasped hit → Falcon's Pursuit AoE; +0.25 Heaven's Will per hit (max 1); Falcon's Pursuit / Vile Condemned series +30% Qi DMG to Boss",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier4": {
         "permanent": true,
-        "kongfuRequired": [20703],
-        "effects": { "globalDmgBoost": 0.01 },
+        "kongfuRequired": [
+          20703
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
         "rawI18n": {
           "ja": "",
           "en": "Snaring Lash: Sever +20% HP DMG; +0.5 Heaven's Will per hit",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier5": {
         "permanent": true,
-        "effects": { "critBoost": 0.04 },
+        "effects": {
+          "critBoost": 0.04
+        },
         "rawI18n": {
           "ja": "",
           "en": "Critical DMG Bonus +4.0%",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier6": {
         "permanent": true,
-        "kongfuRequired": [20703],
-        "effects": { "globalDmgBoost": 0.01 },
+        "kongfuRequired": [
+          20703
+        ],
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
         "rawI18n": {
           "ja": "",
           "en": "Charged Skills +10% Crit DMG to Heaven's Might targets; Boss → 40% as DoT 3s (CD 18s); Falcon's Pursuit on Exhausted Boss resets DoT (CD 30s)",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       }
     },
@@ -5662,20 +5779,28 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "effects": { "globalDmgBoost": 0.01 },
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
         "rawI18n": {
           "ja": "",
           "en": "Cognition base passive",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier1": {
         "permanent": true,
-        "effects": { "globalDmgBoost": 0.01 },
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
         "rawI18n": {
           "ja": "",
           "en": "Cognition duration 8s",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier2": {
@@ -5683,48 +5808,71 @@
         "worldLv": 15,
         "needsManualInput": false,
         "statType": "Physical Attack",
-        "effects": { "minPhysATKAdd": 21.3, "maxPhysATKAdd": 42.5 },
+        "effects": {
+          "minPhysATKAdd": 21.3,
+          "maxPhysATKAdd": 42.5
+        },
         "derivedFromGold": true,
         "rawI18n": {
           "ja": "",
           "en": "Physical Attack (Solo Mode Level scaled, rank=purple)",
-          "zh": "", "ko": "", "vi": ""
-        }
+          "zh": "",
+          "ko": "",
+          "vi": ""
+        },
+        "effectId": "phys_minmax_purple"
       },
       "tier3": {
         "permanent": true,
-        "effects": { "globalDmgBoost": 0.01 },
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
         "rawI18n": {
           "ja": "",
           "en": "Cognition stacks up to 5",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier4": {
         "permanent": true,
-        "effects": { "globalDmgBoost": 0.01 },
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
         "rawI18n": {
           "ja": "",
           "en": "Cognition: no CD between stack gains",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier5": {
         "permanent": true,
-        "effects": { "physDmgBoost": 0.025 },
+        "effects": {
+          "physDmgBoost": 0.025
+        },
         "rawI18n": {
           "ja": "",
           "en": "Physical DMG Bonus +2.5%",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier6": {
         "permanent": true,
-        "effects": { "outerPen": 1, "elemPen": 1 },
+        "effects": {
+          "outerPen": 1,
+          "elemPen": 1
+        },
         "rawI18n": {
           "ja": "",
           "en": "Enhances Cognition: +2 Physical Pen + +2 all Attribute Pen when Martial Trigger Effects deal damage (Gauntlets Falcon's Pursuit/Vile Condemned series: +2 extra). Conditional uptime → halved",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       }
     },
@@ -5737,20 +5885,28 @@
     "attributeBuff": {
       "tier0": {
         "permanent": true,
-        "effects": { "globalDmgBoost": 0.01 },
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
         "rawI18n": {
           "ja": "",
           "en": "Ceaseless base passive",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier1": {
         "permanent": true,
-        "effects": { "globalDmgBoost": 0.01 },
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
         "rawI18n": {
           "ja": "",
           "en": "Ceaseless duration 8s",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier2": {
@@ -5758,48 +5914,70 @@
         "worldLv": 15,
         "needsManualInput": false,
         "statType": "Formless Attack",
-        "effects": { "minVoid": 12.1111, "maxVoid": 24.1111 },
+        "effects": {
+          "minVoid": 12.1111,
+          "maxVoid": 24.1111
+        },
         "derivedFromGold": true,
         "rawI18n": {
           "ja": "",
           "en": "Formless Attack (Solo Mode Level scaled, rank=purple)",
-          "zh": "", "ko": "", "vi": ""
-        }
+          "zh": "",
+          "ko": "",
+          "vi": ""
+        },
+        "effectId": "phys_minmax_purple"
       },
       "tier3": {
         "permanent": true,
-        "effects": { "globalDmgBoost": 0.01 },
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
         "rawI18n": {
           "ja": "",
           "en": "Empowers Ceaseless: DMG taken -0.5% (+0.8% from enemies >5m away)",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier4": {
         "permanent": true,
-        "effects": { "globalDmgBoost": 0.01 },
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
         "rawI18n": {
           "ja": "",
           "en": "Perfect Dodge → +3 Ceaseless stacks",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier5": {
         "permanent": true,
-        "effects": { "voidPen": 6 },
+        "effects": {
+          "voidPen": 6
+        },
         "rawI18n": {
           "ja": "",
           "en": "Formless Penetration +6",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       },
       "tier6": {
         "permanent": true,
-        "effects": { "globalDmgBoost": 0.01 },
+        "effects": {
+          "globalDmgBoost": 0.01
+        },
         "rawI18n": {
           "ja": "",
           "en": "Enhances Ceaseless: proximity bonuses (DMG dealt / healing / DMG reduction) increase to 1.2%",
-          "zh": "", "ko": "", "vi": ""
+          "zh": "",
+          "ko": "",
+          "vi": ""
         }
       }
     },

@@ -15,6 +15,7 @@
     WWM_LV95_BASE:        'lv95_base',
     WWM_KONGFU:           'kongfu',
     WWM_XINFA:            'xinfa',
+    WWM_XINFA_EFFECTS:    'xinfa_effects',
     WWM_SETS:             'sets',
     WWM_AFFIX:            'affix',
     WWM_EQUIP_BASE_BY_LV: 'equip_base_by_lv',
