@@ -950,17 +950,35 @@ function _hideScoreBanner() {
 window._showScoreBanner = _showScoreBanner;
 window._hideScoreBanner = _hideScoreBanner;
 
+// SCORE_VERSION 最新値取得 (= data/calc-version.json NetworkFirst で SW precache 旧 calc.js bypass)
+// 2026-06-23 兄貴指摘 SW cache race fix: 初回接続で旧 SW precache の旧 calc.js (= 旧 WWM_SCORE_VERSION)
+// が動作してもバナー出るよう、 baseline 鮮度判定は data fetch で取った最新値で照合。
+// fetch 失敗時 (= offline) = window.WWM_SCORE_VERSION fallback (= 旧挙動と同等)
+async function _fetchLatestScoreVer() {
+  try {
+    const ctrl = new AbortController();
+    const tid = setTimeout(() => ctrl.abort(), 3000);
+    const r = await fetch('data/calc-version.json', { cache: 'no-cache', signal: ctrl.signal });
+    clearTimeout(tid);
+    if (!r.ok) return window.WWM_SCORE_VERSION || 1;
+    const j = await r.json();
+    return j?.scoreVer ?? (window.WWM_SCORE_VERSION || 1);
+  } catch (_) {
+    return window.WWM_SCORE_VERSION || 1;
+  }
+}
+
 // page load 時: hash がなければ最後の import を localStorage から auto-load。
 // データ無い場合も sidebar は placeholder で描画。
-function _autoLoadLastImport() {
+async function _autoLoadLastImport() {
   if ((location.hash || '').startsWith(IMPORT_HASH_PREFIX)) return;  // hash flow が処理
-  // baseline 復元 + 鮮度チェック (scoreVer)
+  // baseline 復元 + 鮮度チェック (scoreVer = data fetch 最新値、 SW cache race 回避)
+  const curVer = await _fetchLatestScoreVer();
   try {
     let bl = window.WWMBaseline
       ? window.WWMBaseline.load()
       : WWMHelpers.storage.loadJSON('wwm_baseline_score_v1');
     if (bl) {
-      const curVer = window.WWM_SCORE_VERSION || 1;
       if (bl.scoreVer === curVer) {
         WWMState.baseline = bl;
       } else {
@@ -981,7 +999,6 @@ function _autoLoadLastImport() {
     // opt_best 復元 (baseline と同じ scoreVer ルール、不一致なら破棄して再 import 時の opt で再確定)
     const ob = WWMHelpers.storage.loadJSON('wwm_opt_best_v1');
     if (ob) {
-      const curVer = window.WWM_SCORE_VERSION || 1;
       if (ob.scoreVer === curVer && typeof ob.end === 'number') {
         WWMState.opt.best = ob;
         WWMState.opt.locked = true;
