@@ -37,7 +37,10 @@
     await _loadEquipMax();
     const charLv = roleInfo?.level || 95;
     const tier = _lvToTier(charLv);
-    const maxTbl = _getCachedEquipMax()?.tiers?.[tier] || {};
+    const _rawMax = _getCachedEquipMax()?.tiers?.[tier] || {};
+    // 2026-06-23 schema: 各 entry = number (旧) or {min, max} (新)。 ranking は max 値で評価 = number 抽出。
+    const _v = (x) => (x && typeof x === 'object' && 'max' in x) ? x.max : x;
+    const maxTbl = new Proxy(_rawMax, { get: (t, k) => _v(t[k]) });
     const PATH_PEN = { bellstrike: 'bellstrikePen', stonesplit: 'stonesplitPen', silkbind: 'silkbindPen', bamboocut: 'bamboocutPen', voidPath: 'voidPen' };
     const path = window.WWM_KONGFU?.[roleInfo?.kongfuMain]?.path;
     const PATH_MAP = {

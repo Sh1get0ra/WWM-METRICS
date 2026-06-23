@@ -72,7 +72,10 @@
     await _loadEquipMax();
     const charLv = roleInfo?.level || 95;
     const tier = _lvToTier(charLv);
-    const maxTbl = _getCachedEquipMax()?.tiers?.[tier] || {};
+    const _rawMax = _getCachedEquipMax()?.tiers?.[tier] || {};
+    // 2026-06-23 schema 後方互換: 各 entry = number (旧) or {min, max} (新)
+    const _vM = (x) => (x && typeof x === 'object' && 'max' in x) ? x.max : x;
+    const maxTbl = new Proxy(_rawMax, { get: (t, k) => _vM(t[k]) });
     const maxPhysPen = maxTbl.outerPen || 9;
     const maxElemPen = maxTbl.attrPen  || 10.8;
     try {
