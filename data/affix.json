@@ -7939,6 +7939,11 @@
     "internal": 399,
     "statKey": "hengBladeDmg"
   },
+  "9293036": {
+    "internal": 0,
+    "statKey": "gauntletDmg",
+    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定。 9294036 / 8293036 / 8294036 等 variant ID も同時追加要 (Vanguard Titans Gauntlets affixTable 内既出)"
+  },
   "9294001": {
     "internal": 1,
     "statKey": "body"

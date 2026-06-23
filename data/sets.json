@@ -163,6 +163,23 @@
         "pendingImplementation": true
       },
       "liupaiId": "kuanglan_1"
+    },
+    "56": {
+      "activationLv": 91,
+      "pieces2": {
+        "effects": {
+          "minPhysATKAdd": 63
+        },
+        "raw": "最小外功攻撃 +63"
+      },
+      "pieces4": {
+        "effects": {},
+        "raw": "Etherwrath: boss/player ヒット → 全攻撃 (Phys + 全 Attribute) +1% 8s max5stack。 max stack で Martial Trigger Effects ダメ時 全 attribute attack penetration +4。 Perfect Dodge で 5stack 即付与。 適用 Martial Trigger: Heavenwill Gauntlets' Falcon's Pursuit / Vile Condemned series, Mortal Rope Dart's Rodent, Everspring Umbrella's Resonance, Phalanxbane Blade's Anxi Army Assist",
+        "conditional": true,
+        "pendingImplementation": true
+      },
+      "liupaiId": "kite_1",
+      "_pendingVerification": "2026-07 cap 解放当日 ゲーム実機表示と pieces2 値 verify (wdb minPhysATK 63.8 → floor 仮値 63、 実機が 64 なら ceil 規則優先)"
     }
   },
   "bowSets": {
@@ -302,6 +319,18 @@
         "pendingImplementation": true
       },
       "liupaiId": "kuanglan_1"
+    },
+    "57": {
+      "pieces2": {
+        "raw": "外功防御力 +32 (Lv91)"
+      },
+      "pieces4": {
+        "raw": "Perfect Dodge → Honorbound 5秒: 受気血ダメ-10%、 受 Critical/Affinity DMG -12% (10秒1回)",
+        "conditional": true,
+        "pendingImplementation": true
+      },
+      "liupaiId": "kite_1",
+      "_pendingVerification": "2026-07 cap 解放当日 ゲーム実機 verify。 防具系火力反映なし方針で effects 空 keep"
     }
   }
 }

@@ -5495,6 +5495,316 @@
     },
     "rank": "purple"
   },
+  "601": {
+    "modes": {},
+    "defaultMode": "default",
+    "description": "天志拳 専用 — Heaven's Will 3 bars で Charged Heavy → Vile Condemned: End 進化。 2026-07 実装予定 (新 BambooCut – Kite path)",
+    "attributeBuff": {
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [20901],
+        "effects": { "globalDmgBoost": 0.013 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Heaven's Will 3 bars: Heavenwill Gauntlets' Charged Heavy Attack evolves into Vile Condemned: End (Invincibility while casting, 18s CD); +20% HP DMG to non-player units with Falcon's Pursuit/Vile Condemned series",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [20901],
+        "effects": { "globalDmgBoost": 0.013 },
+        "rawI18n": {
+          "ja": "",
+          "en": "After Wicked Defiance or Celestial Mandate: chain into 5th Light Attack",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier2": {
+        "permanent": true,
+        "worldLv": 15,
+        "needsManualInput": false,
+        "statType": "Min Physical Attack",
+        "effects": { "minPhysATKAdd": 71 },
+        "derivedFromGold": true,
+        "rawI18n": {
+          "ja": "",
+          "en": "Min Physical Attack (Solo Mode Level scaled, rank=gold)",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [20901],
+        "effects": { "globalDmgBoost": 0.013 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Vile Condemned miss → 50% Heaven's Will refund (no CD); Falcon's Pursuit on Exhausted Boss resets Vile Condemned: End CD (30s)",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [20901],
+        "effects": { "globalDmgBoost": 0.013 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Vile Condemned: End hit → restores 1 bar of Heaven's Will (CD 18s)",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier5": {
+        "permanent": true,
+        "effects": { "addCritRate": 0.046 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Direct Critical Rate +4.6%",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [20901],
+        "effects": { "globalDmgBoost": 0.013 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Heaven's Will 4 bars: Vile Condemned: End consumes all → HP DMG +30% + Critical DMG +10%",
+          "zh": "", "ko": "", "vi": ""
+        }
+      }
+    },
+    "rank": "gold"
+  },
+  "602": {
+    "modes": {},
+    "defaultMode": "default",
+    "description": "千機の縄 専用 — Heaven's Might / Falcon's Pursuit / Snaring Lash 関連。 2026-07 実装予定 (新 BambooCut – Kite path)",
+    "attributeBuff": {
+      "tier0": {
+        "permanent": true,
+        "kongfuRequired": [20703],
+        "effects": { "globalDmgBoost": 0.01 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Heaven's Might base passive (Skygrasp Rope Dart)",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier1": {
+        "permanent": true,
+        "kongfuRequired": [20703],
+        "effects": { "globalDmgBoost": 0.01 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Heaven's Might duration 24s",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier2": {
+        "permanent": true,
+        "worldLv": 15,
+        "needsManualInput": false,
+        "statType": "Critical Rate",
+        "effects": { "critRate": 0.074 },
+        "derivedFromGold": true,
+        "rawI18n": {
+          "ja": "",
+          "en": "Critical Rate (Solo Mode Level scaled, rank=purple)",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier3": {
+        "permanent": true,
+        "kongfuRequired": [20703],
+        "effects": { "globalDmgBoost": 0.01 },
+        "rawI18n": {
+          "ja": "",
+          "en": "With Heavenwill Gauntlets: Sky Grasped hit → Falcon's Pursuit AoE; +0.25 Heaven's Will per hit (max 1); Falcon's Pursuit / Vile Condemned series +30% Qi DMG to Boss",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier4": {
+        "permanent": true,
+        "kongfuRequired": [20703],
+        "effects": { "globalDmgBoost": 0.01 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Snaring Lash: Sever +20% HP DMG; +0.5 Heaven's Will per hit",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier5": {
+        "permanent": true,
+        "effects": { "critBoost": 0.04 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Critical DMG Bonus +4.0%",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier6": {
+        "permanent": true,
+        "kongfuRequired": [20703],
+        "effects": { "globalDmgBoost": 0.01 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Charged Skills +10% Crit DMG to Heaven's Might targets; Boss → 40% as DoT 3s (CD 18s); Falcon's Pursuit on Exhausted Boss resets DoT (CD 30s)",
+          "zh": "", "ko": "", "vi": ""
+        }
+      }
+    },
+    "rank": "purple"
+  },
+  "603": {
+    "modes": {},
+    "defaultMode": "default",
+    "description": "汎用 — Cognition stack。 T6 = 貫通系 (条件発動で 0.5× 反映)。 2026-07 実装予定 (新 BambooCut – Kite path)",
+    "attributeBuff": {
+      "tier0": {
+        "permanent": true,
+        "effects": { "globalDmgBoost": 0.01 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Cognition base passive",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": { "globalDmgBoost": 0.01 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Cognition duration 8s",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier2": {
+        "permanent": true,
+        "worldLv": 15,
+        "needsManualInput": false,
+        "statType": "Physical Attack",
+        "effects": { "minPhysATKAdd": 21.3, "maxPhysATKAdd": 42.5 },
+        "derivedFromGold": true,
+        "rawI18n": {
+          "ja": "",
+          "en": "Physical Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier3": {
+        "permanent": true,
+        "effects": { "globalDmgBoost": 0.01 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Cognition stacks up to 5",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": { "globalDmgBoost": 0.01 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Cognition: no CD between stack gains",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier5": {
+        "permanent": true,
+        "effects": { "physDmgBoost": 0.025 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Physical DMG Bonus +2.5%",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier6": {
+        "permanent": true,
+        "effects": { "outerPen": 1, "elemPen": 1 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Enhances Cognition: +2 Physical Pen + +2 all Attribute Pen when Martial Trigger Effects deal damage (Gauntlets Falcon's Pursuit/Vile Condemned series: +2 extra). Conditional uptime → halved",
+          "zh": "", "ko": "", "vi": ""
+        }
+      }
+    },
+    "rank": "purple"
+  },
+  "604": {
+    "modes": {},
+    "defaultMode": "default",
+    "description": "汎用 — Ceaseless stack。 T2 無相攻撃 / T5 無相貫通。 2026-07 実装予定 (新 BambooCut – Kite path)",
+    "attributeBuff": {
+      "tier0": {
+        "permanent": true,
+        "effects": { "globalDmgBoost": 0.01 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Ceaseless base passive",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier1": {
+        "permanent": true,
+        "effects": { "globalDmgBoost": 0.01 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Ceaseless duration 8s",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier2": {
+        "permanent": true,
+        "worldLv": 15,
+        "needsManualInput": false,
+        "statType": "Formless Attack",
+        "effects": { "minVoid": 12.1111, "maxVoid": 24.1111 },
+        "derivedFromGold": true,
+        "rawI18n": {
+          "ja": "",
+          "en": "Formless Attack (Solo Mode Level scaled, rank=purple)",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier3": {
+        "permanent": true,
+        "effects": { "globalDmgBoost": 0.01 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Empowers Ceaseless: DMG taken -0.5% (+0.8% from enemies >5m away)",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier4": {
+        "permanent": true,
+        "effects": { "globalDmgBoost": 0.01 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Perfect Dodge → +3 Ceaseless stacks",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier5": {
+        "permanent": true,
+        "effects": { "voidPen": 6 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Formless Penetration +6",
+          "zh": "", "ko": "", "vi": ""
+        }
+      },
+      "tier6": {
+        "permanent": true,
+        "effects": { "globalDmgBoost": 0.01 },
+        "rawI18n": {
+          "ja": "",
+          "en": "Enhances Ceaseless: proximity bonuses (DMG dealt / healing / DMG reduction) increase to 1.2%",
+          "zh": "", "ko": "", "vi": ""
+        }
+      }
+    },
+    "rank": "purple"
+  },
   "_schema": "ID → 心法名 + モード別ステータス影響値マッピング。modes 配下に default/maxStack/ccBuff 等を定義。description は人間向け説明。effects はダメージ計算に影響する数値のみ。",
   "_lastUpdated": "2026-05-23",
   "_source": "wherewindsmeetgame.com app.js 抽出 + Game8 / Fextralife wiki",

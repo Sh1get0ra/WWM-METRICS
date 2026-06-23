@@ -1,7 +1,7 @@
 // ── 計算バージョン ──────────────────────────────────────────────
 // スコア計算に影響する変更 (xinfa/kongfu 付与量, calc/stats の式, equip_base 等) を入れた時だけ +1。
 // UI/色/i18n/レイアウト変更では上げない。baseline の鮮度判定に使う (古い→再import 促しバナー)。
-window.WWM_SCORE_VERSION = 13;
+window.WWM_SCORE_VERSION = 14;
 
 // 表示ラベル/calcKey (stat_display.json 等) の cache buster。 SCORE_VERSION と独立。
 // スコア計算を変えずラベル/表示参照だけ変えた時に +1 → baseline 無効化(再import促し)を起こさず反映。
