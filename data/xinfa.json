@@ -5918,6 +5918,7 @@
           "minVoid": 12.1111,
           "maxVoid": 24.1111
         },
+        "weaponSpecific": "void",
         "derivedFromGold": true,
         "rawI18n": {
           "ja": "",
@@ -5926,7 +5927,7 @@
           "ko": "",
           "vi": ""
         },
-        "effectId": "phys_minmax_purple"
+        "effectId": "void_minmax_purple"
       },
       "tier3": {
         "permanent": true,
