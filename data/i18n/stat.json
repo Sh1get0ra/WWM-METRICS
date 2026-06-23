@@ -209,6 +209,13 @@
     "ko": "횡도 무술 피해 증가",
     "vi": "Võ học hoành đao tăng sát thương"
   },
+  "gauntletDmg": {
+    "ja": "手甲武術ダメ",
+    "en": "Gauntlet DMG",
+    "zh": "手甲武学增伤",
+    "ko": "권갑 무술 피해 증가",
+    "vi": "Tăng sát thương võ học Giáp Tay"
+  },
   "ropeDartDmg": {
     "ja": "縄鏢武術ダメ",
     "en": "Rope Dart DMG",
