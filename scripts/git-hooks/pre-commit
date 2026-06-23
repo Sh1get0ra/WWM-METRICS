@@ -1,4 +1,0 @@
-#!/bin/sh
-# WWMetrics pre-commit — !important 退行ガード
-# 有効化: git config core.hooksPath scripts/git-hooks
-node scripts/important-guard.cjs || exit 1

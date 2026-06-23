@@ -39,9 +39,11 @@ dist/
 # critique 作業スクショ (playwright 出力)
 crit-*.png
 
-# scripts/ artifacts (regenerable; cjs scripts themselves ARE tracked)
-scripts/.*.json
-scripts/.*.md
+# scripts/ (開発専用 CLI tool、 web 配信不要、 兄貴単独 dev で claude 再生成可能)
+scripts/
+
+# tests/ (開発専用 test、 web 配信不要)
+tests/
 
 # OCR PoC (local 専用、デプロイ禁止)
 poc/
