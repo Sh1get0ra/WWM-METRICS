@@ -316,11 +316,63 @@
     return statKey === expected;
   }
 
+  // INITIAL (affix#1) 候補 master (wwmdb 由来 = data/affix_candidates_initial.json) 経由 filter
+  // slot 別 装備カテゴリ判定 (防具+装飾品 = 直 mapping。 武器/弓 slot は master 経由 filter 無効 = 旧経路 keep)
+  // ツール slot ↔ wdb category 対応:
+  //   '3'/'4'/'5'/'8' = 防具 4 種 / '10' = 環 (wdb Disc) / '11' = 佩 (wdb Pendant)
+  //   '9' (射玦) / '21' (弓矢) = 火力寄与なし = ツール選択不可 = master 対象外
+  const _SLOT_TO_WDB_CAT = {
+    '3': 'Helmet', '4': 'Chestpiece', '5': 'Greaves', '8': 'Bracer',
+    '10': 'Disc', '11': 'Pendant',
+  };
+  const _RANK_TO_TIER = { gold: '5', purple: '4', blue: '3' };
+  // 装備中武器 → wdb weapon category (Disc/Pendant 等の path 別 stat restrict filter 用)
+  function _activeWeaponWdbCat(roleInfo, kongfuIdOverride) {
+    const kid = kongfuIdOverride || roleInfo?.kongfuMain;
+    const wt = window.WWM_KONGFU?.[kid]?.weaponType;
+    if (!wt) return null;
+    const M = {
+      sword: 'Weapon-Sword', spear: 'Weapon-Spear', mo_blade: 'Weapon-Mo Blade',
+      dual_blades: 'Weapon-Dual Blades', rope_dart: 'Weapon-Rope Dart',
+      fan: 'Weapon-Fan', umbrella: 'Weapon-Umbrella',
+      heng_blade: 'Weapon-Heng Blade', gauntlet: 'Weapon-Gauntlets',
+    };
+    return M[wt] || null;
+  }
+  // INITIAL 候補 statKey set (chance>0 + restrict 装備武器 filter)。 master 無/未対応 slot = null (= 旧経路 fallback)
+  function _initialAllowedStatKeys(slot, equipLv, equipRank, roleInfo, kongfuIdOverride) {
+    const wdbCat = _SLOT_TO_WDB_CAT[String(slot)];
+    if (!wdbCat) return null;
+    const master = window.WWM_AFFIX_INIT?.data;
+    if (!master) return null;
+    const tier = _RANK_TO_TIER[equipRank] || '5';
+    const lv = equipLv || 91;
+    const candList = master[wdbCat]?.[String(lv)]?.[tier];
+    if (!candList) return null;
+    // Disc/Pendant INITIAL = ゲーム実機で path 別 stat 出現せず (= 兄貴確認、 wdb data Lv91 の path 別記載は実機と乖離)
+    // → restrict あり stat (= path 別) を無条件除外、 minPhys/maxPhys のみ keep
+    const isDiscPendant = (wdbCat === 'Disc' || wdbCat === 'Pendant');
+    const activeWeapon = _activeWeaponWdbCat(roleInfo, kongfuIdOverride);
+    const allKeys = new Set();
+    const affixMaster = window.WWM_AFFIX || {};
+    for (const c of candList) {
+      if (c.chance === 0) continue;
+      if (c.restrict) {
+        if (isDiscPendant) continue;
+        if (!activeWeapon) continue;
+        if (!c.restrict.includes(activeWeapon)) continue;
+      }
+      const sk = affixMaster[c.id]?.statKey;
+      if (sk) allKeys.add(sk);
+    }
+    return allKeys;
+  }
+
   // affix 種別変更 option list: 現 affix と同じ prefix2 のもの → statKey で dedup
   // slot/idx 指定で 6番目限定処理 + idx 1-4 重複不可 (affix0 のみ重複可)
   // PvP専用定音 sentinel ID (WWM_AFFIX に存在しない固定値、計算寄与ゼロ、表示は affix6 fallback で「PvP専用定音」)
   const _PVP_AFFIX_SENTINEL = 999999;
-  function _getAffixOptions(currentAffixId, slot, idx, allAffixes, kongfuIdOverride) {
+  function _getAffixOptions(currentAffixId, slot, idx, allAffixes, kongfuIdOverride, equipLv, equipRank) {
     const all = window.WWM_AFFIX || {};
     // affix6 + 現在 ID が未登録 (PvP定音) → 変更不可、PvP option のみ返す (全スロット共通)
     if (idx === 5 && !all[currentAffixId]) {
@@ -344,6 +396,10 @@
         if (otherInfo?.statKey) blockedKeys.add(otherInfo.statKey);
       }
     }
+    // INITIAL master 経由 statKey filter (idx 0、 防具+装飾 7 slot のみ。 武器/弓 = null = 旧経路 keep)
+    const initialAllowed = (idx === 0)
+      ? _initialAllowedStatKeys(slot, equipLv, equipRank, WWMState.roleInfo, kongfuIdOverride)
+      : null;
     const seen = new Set();
     const opts = [];
     for (const [id, info] of Object.entries(all)) {
@@ -353,6 +409,7 @@
       if (isWeaponLike6 && !_SLOT6_PEN_STATS.includes(sk)) continue;
       if (isArmor6 && _SLOT6_PEN_STATS.includes(sk)) continue;
       if (blockedKeys.has(sk)) continue;
+      if (initialAllowed && !initialAllowed.has(sk)) continue;
       // slot 別 出現ルール
       if (!_isAffixAllowedInSlot(sk, slot)) continue;
       if (!_isWeaponDmgMatch(sk, slot, WWMState.roleInfo, kongfuIdOverride)) continue;

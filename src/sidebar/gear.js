@@ -437,6 +437,8 @@
     function renderNewRows() {
       // 装備品質 (rank): blue → affix#5/#6 (idx 4-5) ロック
       const _equipRank = WWMState.virtual.gear?.[slot]?.exVo?._rank ?? origEq?.exVo?._rank ?? 'gold';
+      // 装備個別 Lv (INITIAL master 経由 affix filter 用 + 既存 max 算出にも共用)
+      const _equipLv = (WWMState.virtual.gear?.[slot]?.exVo?._inferredLv) ?? origEq?.exVo?._inferredLv ?? charLv;
       return newAffixes.map((a, idx) => {
         const d = a.equipmentDetails || [];
         const [id, val, ratio, rank, useful] = d;
@@ -459,7 +461,7 @@
             </div>
           `;
         }
-        const opts = _getAffixOptions(id, slot, idx, newAffixes, newKongfuId);
+        const opts = _getAffixOptions(id, slot, idx, newAffixes, newKongfuId, _equipLv, _equipRank);
         // selected: 通常は statKey 一致、affix6 で未登録ID(PvP定音含む) なら __pvp__ option
         const isPvpSlot6 = (idx === 5) && !info;
         const optsHtml = opts.map(o => {
@@ -473,7 +475,7 @@
           : (typeof val === 'number' ? val.toFixed(1) : val);
         const step = '0.1';
         // max 値算出: 装備個別Lv基準 → equip_max.json (Lv → tier) ベース。fallback: orig val/ratio (sameStat時)
-        const _eqLv = (WWMState.virtual.gear?.[slot]?.exVo?._inferredLv) ?? origEq?.exVo?._inferredLv ?? charLv;
+        const _eqLv = _equipLv;
         let maxInternal = _getAffixMax(sk, _eqLv);
         if (maxInternal == null) {
           const origDet = origEq.exVo?.baseAffixes?.[idx]?.equipmentDetails;
@@ -1003,7 +1005,11 @@
             // allAffixes=null = idx1-4 の使用中 statKey dedupe を無効化 (「全行ブランク」相当の素 pool)。
             // 現装備の構成がスクショ affix の自然な枠を塞ぎ、並びがスクショ順にならない問題の根治
             // (2026-06-08 兄貴提案)。書込後の表示 select は通常 dedupe pool で再構築 = 整合
-            getOptions: (idx) => _getAffixOptions(newAffixes[idx]?.equipmentDetails?.[0], slot, idx, null, newKongfuId),
+            getOptions: (idx) => {
+              const eLv = (WWMState.virtual.gear?.[slot]?.exVo?._inferredLv) ?? origEq?.exVo?._inferredLv ?? charLv;
+              const eRank = WWMState.virtual.gear?.[slot]?.exVo?._rank ?? origEq?.exVo?._rank ?? 'gold';
+              return _getAffixOptions(newAffixes[idx]?.equipmentDetails?.[0], slot, idx, null, newKongfuId, eLv, eRank);
+            },
             onProgress: (stage, pct) => _setStatus(
               stage === 'lang'
                 ? ((window.T&&T.ocrLangLoading)||'辞書取得中…') + ' ' + Math.round(pct*100) + '%'
