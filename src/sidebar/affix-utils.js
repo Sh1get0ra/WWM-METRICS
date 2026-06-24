@@ -358,29 +358,23 @@
     }
     return _SLOT_TO_WDB_CAT[s] || null;
   }
-  // INITIAL 候補 statKey set (chance>0 + restrict 装備武器 filter)。 master 無/未対応 slot = null (= 旧経路 fallback)
-  function _initialAllowedStatKeys(slot, equipLv, equipRank, roleInfo, kongfuIdOverride) {
+  // wdb master 経由 statKey set 統一 helper (INITIAL/TUNING 共通)
+  //   restrict = 自装備 wdbCat 照合のみ (兄貴確認: restrict は「その stat が candidate になる装備 slot list」)
+  //   master 無/未対応 slot = null (= 旧経路 fallback)
+  function _wdbAllowedStatKeys(masterRoot, slot, equipLv, equipRank, roleInfo, kongfuIdOverride) {
     const wdbCat = _slotToWdbCategory(slot, roleInfo, kongfuIdOverride);
     if (!wdbCat) return null;
-    const master = window.WWM_AFFIX_INIT?.data;
+    const master = masterRoot?.data;
     if (!master) return null;
     const tier = _RANK_TO_TIER[equipRank] || '5';
     const lv = equipLv || 91;
     const candList = master[wdbCat]?.[String(lv)]?.[tier];
     if (!candList) return null;
-    // Disc/Pendant INITIAL = ゲーム実機で path 別 stat 出現せず (= 兄貴確認、 wdb data Lv91 の path 別記載は実機と乖離)
-    // → restrict あり stat (= path 別) を無条件除外、 minPhys/maxPhys のみ keep
-    const isDiscPendant = (wdbCat === 'Disc' || wdbCat === 'Pendant');
-    const activeWeapon = _activeWeaponWdbCat(roleInfo, kongfuIdOverride);
     const allKeys = new Set();
     const affixMaster = window.WWM_AFFIX || {};
     for (const c of candList) {
       if (c.chance === 0) continue;
-      if (c.restrict) {
-        if (isDiscPendant) continue;
-        if (!activeWeapon) continue;
-        if (!c.restrict.includes(activeWeapon)) continue;
-      }
+      if (c.restrict && !c.restrict.includes(wdbCat)) continue;
       const sk = affixMaster[c.id]?.statKey;
       if (sk) allKeys.add(sk);
     }
@@ -415,10 +409,14 @@
         if (otherInfo?.statKey) blockedKeys.add(otherInfo.statKey);
       }
     }
-    // INITIAL master 経由 statKey filter (idx 0、 防具+装飾 7 slot のみ。 武器/弓 = null = 旧経路 keep)
-    const initialAllowed = (idx === 0)
-      ? _initialAllowedStatKeys(slot, equipLv, equipRank, WWMState.roleInfo, kongfuIdOverride)
-      : null;
+    // wdb master 経由 statKey filter (idx 0 = INITIAL、 idx 1-4 = TUNING、 idx 5 = 既存 logic keep)
+    //   master 未対応 slot (= 武器以外で _SLOT_TO_WDB_CAT 未登録) = null = 旧経路 fallback
+    let wdbAllowed = null;
+    if (idx === 0) {
+      wdbAllowed = _wdbAllowedStatKeys(window.WWM_AFFIX_INIT, slot, equipLv, equipRank, WWMState.roleInfo, kongfuIdOverride);
+    } else if (idx >= 1 && idx <= 4) {
+      wdbAllowed = _wdbAllowedStatKeys(window.WWM_AFFIX_TUNING, slot, equipLv, equipRank, WWMState.roleInfo, kongfuIdOverride);
+    }
     const seen = new Set();
     const opts = [];
     for (const [id, info] of Object.entries(all)) {
@@ -428,7 +426,7 @@
       if (isWeaponLike6 && !_SLOT6_PEN_STATS.includes(sk)) continue;
       if (isArmor6 && _SLOT6_PEN_STATS.includes(sk)) continue;
       if (blockedKeys.has(sk)) continue;
-      if (initialAllowed && !initialAllowed.has(sk)) continue;
+      if (wdbAllowed && !wdbAllowed.has(sk)) continue;
       // slot 別 出現ルール
       if (!_isAffixAllowedInSlot(sk, slot)) continue;
       if (!_isWeaponDmgMatch(sk, slot, WWMState.roleInfo, kongfuIdOverride)) continue;

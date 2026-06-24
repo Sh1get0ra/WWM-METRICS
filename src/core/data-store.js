@@ -19,6 +19,7 @@
     WWM_SETS:             'sets',
     WWM_AFFIX:            'affix',
     WWM_AFFIX_INIT:       'affix_candidates_initial',
+    WWM_AFFIX_TUNING:     'affix_candidates_tuning',
     WWM_PVP_ATTUNE:       'pvp_attune_table',
     WWM_EQUIP_BASE_BY_LV: 'equip_base_by_lv',
     WWM_GUANYIN_LEVELS:   'guanyin_levels',
