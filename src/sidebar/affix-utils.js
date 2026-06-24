@@ -318,15 +318,16 @@
 
   // INITIAL (affix#1) 候補 master (wwmdb 由来 = data/affix_candidates_initial.json) 経由 filter
   // slot 別 装備カテゴリ判定 (防具+装飾品 = 直 mapping。 武器/弓 slot は master 経由 filter 無効 = 旧経路 keep)
-  // ツール slot ↔ wdb category 対応:
+  // ツール slot ↔ wdb category 対応 (静的):
   //   '3'/'4'/'5'/'8' = 防具 4 種 / '10' = 環 (wdb Disc) / '11' = 佩 (wdb Pendant)
   //   '9' (射玦) / '21' (弓矢) = 火力寄与なし = ツール選択不可 = master 対象外
+  //   '1' (主武器) / '2' (副武器) = 動的 (= 装備中 kongfu の weaponType 経由)
   const _SLOT_TO_WDB_CAT = {
     '3': 'Helmet', '4': 'Chestpiece', '5': 'Greaves', '8': 'Bracer',
     '10': 'Disc', '11': 'Pendant',
   };
   const _RANK_TO_TIER = { gold: '5', purple: '4', blue: '3' };
-  // 装備中武器 → wdb weapon category (Disc/Pendant 等の path 別 stat restrict filter 用)
+  // 装備中武器 → wdb weapon category (Disc/Pendant 等の path 別 stat restrict filter 用 + 武器 slot 自体の解決用)
   function _activeWeaponWdbCat(roleInfo, kongfuIdOverride) {
     const kid = kongfuIdOverride || roleInfo?.kongfuMain;
     const wt = window.WWM_KONGFU?.[kid]?.weaponType;
@@ -339,9 +340,27 @@
     };
     return M[wt] || null;
   }
+  // slot → wdb category 解決 (武器 slot 1/2 は装備武器経由で動的)
+  function _slotToWdbCategory(slot, roleInfo, kongfuIdOverride) {
+    const s = String(slot);
+    if (s === '1' || s === '2') {
+      // slot 2 は副武器 = 兄貴指示なきため slot 1 = 主武器と同じ kongfu 由来でいい想定 (= 副武器も同武術系統)
+      const kid = kongfuIdOverride || (s === '1' ? roleInfo?.kongfuMain : roleInfo?.kongfuSub);
+      const wt = window.WWM_KONGFU?.[kid]?.weaponType;
+      if (!wt) return null;
+      const M = {
+        sword: 'Weapon-Sword', spear: 'Weapon-Spear', mo_blade: 'Weapon-Mo Blade',
+        dual_blades: 'Weapon-Dual Blades', rope_dart: 'Weapon-Rope Dart',
+        fan: 'Weapon-Fan', umbrella: 'Weapon-Umbrella',
+        heng_blade: 'Weapon-Heng Blade', gauntlet: 'Weapon-Gauntlets',
+      };
+      return M[wt] || null;
+    }
+    return _SLOT_TO_WDB_CAT[s] || null;
+  }
   // INITIAL 候補 statKey set (chance>0 + restrict 装備武器 filter)。 master 無/未対応 slot = null (= 旧経路 fallback)
   function _initialAllowedStatKeys(slot, equipLv, equipRank, roleInfo, kongfuIdOverride) {
-    const wdbCat = _SLOT_TO_WDB_CAT[String(slot)];
+    const wdbCat = _slotToWdbCategory(slot, roleInfo, kongfuIdOverride);
     if (!wdbCat) return null;
     const master = window.WWM_AFFIX_INIT?.data;
     if (!master) return null;
