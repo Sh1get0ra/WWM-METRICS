@@ -28,8 +28,8 @@
     "vi": "Sức mạnh"
   },
   "defense": {
-    "ja": "防御",
-    "en": "Def",
+    "ja": "防",
+    "en": "Defense",
     "zh": "御",
     "ko": "방어",
     "vi": "Ngự"
@@ -158,7 +158,7 @@
     "en": "Specified Weapon Martial Art Boost",
     "zh": "指定武学增效",
     "ko": "특정 무술 효과 증가",
-    "vi": "Tăng hiệu quả võ học chỉ định"
+    "vi": "Tăng hiệu quả võ học được chỉ định"
   },
   "swordDmg": {
     "ja": "剣武学ダメージ増加",
@@ -200,7 +200,7 @@
     "en": "Art of Umbrella Boost",
     "zh": "伞武学增效",
     "ko": "우산 무술 효과 증가",
-    "vi": "Tăng hiệu quả võ học dù"
+    "vi": "Võ học dù tăng hiệu quả"
   },
   "hengBladeDmg": {
     "ja": "横刀武術ダメージ増加",

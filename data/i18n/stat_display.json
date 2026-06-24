@@ -67,7 +67,7 @@
     "en": "Attribute Attack",
     "zh": "属性攻击",
     "ko": "속성 공격",
-    "vi": "Thuộc tính Tấn công"
+    "vi": "Tấn công thuộc tính"
   },
   "stDisp.primaryStats.elemAtk.bellstrike": {
     "ja": "鋼鳴攻撃",
@@ -158,7 +158,7 @@
     "en": "Abrasion Conversion Rate",
     "zh": "擦伤转化率",
     "ko": "찰과상 전환율",
-    "vi": "Tỷ lệ chuyển đổi vết xước"
+    "vi": "Tỷ lệ chuyển đổi Trầy xước"
   },
   "stDisp.probability.finalCritSym": {
     "ja": "最終会心会意率",
@@ -200,7 +200,7 @@
     "en": "Damage Increase Effect",
     "zh": "增伤效果",
     "ko": "피해 증가 효과",
-    "vi": "Hiệu ứng Tăng sát thương"
+    "vi": "Hiệu quả Tăng sát thương"
   },
   "stDisp.dmgBoost.critBoost": {
     "ja": "会心攻撃強化",
@@ -235,7 +235,7 @@
     "en": "Attribute Attack Penetration",
     "zh": "属攻穿透",
     "ko": "속성 공격 관통",
-    "vi": "Xuyên phá thuộc tính công"
+    "vi": "Thuộc tính Tấn công Xuyên thấu"
   },
   "stDisp.dmgBoost.elemBoostMain.bellstrikePen": {
     "ja": "鋼鳴貫通",
@@ -326,7 +326,7 @@
     "en": "Specified Weapon Martial Art Boost",
     "zh": "指定武学增效",
     "ko": "특정 무술 효과 증가",
-    "vi": "Tăng hiệu quả võ học chỉ định"
+    "vi": "Tăng hiệu quả võ học được chỉ định"
   },
   "stDisp.dmgBoost.specMartialBoost.swordDmg": {
     "ja": "剣武学ダメージ増加",
@@ -354,7 +354,7 @@
     "en": "Art of Umbrella Boost",
     "zh": "伞武学增效",
     "ko": "우산 무술 효과 증가",
-    "vi": "Tăng hiệu quả võ học dù"
+    "vi": "Võ học dù tăng hiệu quả"
   },
   "stDisp.dmgBoost.specMartialBoost.hengBladeDmg": {
     "ja": "横刀武術ダメージ増加",
