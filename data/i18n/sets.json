@@ -2,51 +2,51 @@
   "1": {
     "ja": "碧玉一式",
     "en": "Jadeware Set",
-    "zh": "碧玉一式",
+    "zh": "玉斗套装",
     "ko": "옥잔 세트",
-    "vi": "Ngọc đấu"
+    "vi": "Bộ trang phục Ngọc Đẩu"
   },
   "2": {
     "ja": "易相一式",
     "en": "Formbend Set",
-    "zh": "易相一式",
+    "zh": "易相套装",
     "ko": "역상 세트",
-    "vi": "Dị Tướng"
+    "vi": "Bộ trang phục Dễ Tương"
   },
   "3": {
     "ja": "飛鳥一式",
     "en": "Hawkwing Set",
-    "zh": "飞鸟一式",
+    "zh": "飞隼套装",
     "ko": "속공 세트",
-    "vi": "Chim Ưng Bay"
+    "vi": "Bộ trang phục Phi Thuấn"
   },
   "4": {
     "ja": "鷹揚一式",
     "en": "Eaglerise Set",
-    "zh": "鹰扬一式",
+    "zh": "鹰扬套装",
     "ko": "비상 세트",
-    "vi": "Ưng Dương"
+    "vi": "Bộ trang phục Ưng Dương"
   },
   "7": {
     "ja": "時雨一式",
     "en": "Rainwhisper Set",
-    "zh": "时雨一式",
+    "zh": "时雨套装",
     "ko": "단비 세트",
-    "vi": "Mưa thời vụ"
+    "vi": "Bộ trang phục Thời Vũ"
   },
   "8": {
     "ja": "桂月一式",
     "en": "Moonflare Set",
-    "zh": "桂月一式",
+    "zh": "桂月套装",
     "ko": "월계 세트",
-    "vi": "Trăng quế"
+    "vi": "Bộ trang phục Quế Nguyệt"
   },
   "9": {
     "ja": "疾風一式",
     "en": "Swift Gale Set",
-    "zh": "疾风一式",
+    "zh": "急风骤套装",
     "ko": "질풍 세트",
-    "vi": "Gió gấp mưa mau"
+    "vi": "Bộ trang phục Cấp Phong Tẩu"
   },
   "10": {
     "ja": "凌波歩一式",
@@ -58,9 +58,9 @@
   "11": {
     "ja": "山崩一式",
     "en": "Shattered Ridge Set",
-    "zh": "山崩一式",
+    "zh": "岳山倾套装",
     "ko": "산경 세트",
-    "vi": "Nhạc Sơn Khuynh"
+    "vi": "Bộ trang phục Nhạc Sơn Nghiêng"
   },
   "12": {
     "ja": "御無欠一式",
@@ -72,44 +72,44 @@
   "23": {
     "ja": "帰燕一式",
     "en": "Swallowcall Set",
-    "zh": "归燕一式",
+    "zh": "燕归套装",
     "ko": "연귀 세트",
-    "vi": "Yến Quy"
+    "vi": "Bộ trang phục Yến Quy"
   },
   "24": {
     "ja": "江凝一式",
     "en": "Calmwaters Set",
-    "zh": "江凝一式",
+    "zh": "江凝套装",
     "ko": "정수 세트",
-    "vi": "Giang Ninh"
+    "vi": "Bộ trang phục Giang Ngưng"
   },
   "25": {
     "ja": "霧柳一式",
     "en": "Mistwillow Set",
-    "zh": "雾柳一式",
+    "zh": "烟柳重重套装",
     "ko": "연류 세트",
-    "vi": "Liễu khói dày đặc"
+    "vi": "Bộ trang phục Yên Liễu Trùng Trùng"
   },
   "26": {
     "ja": "不知寒一式",
     "en": "Beyond the Chill Set",
-    "zh": "不知寒一式",
+    "zh": "不知寒套装",
     "ko": "흑한 세트",
-    "vi": "Bất Tri Hàn"
+    "vi": "Bộ trang phục Bất Tri Hàn"
   },
   "29": {
     "ja": "浄花一式",
     "en": "Ivorybloom Set",
-    "zh": "净花一式",
+    "zh": "浣花套装",
     "ko": "화계 세트",
-    "vi": "Hoán Hoa"
+    "vi": "Bộ trang phục Hoán Hoa"
   },
   "30": {
     "ja": "梨雪一式",
     "en": "Whirlsnow Set",
-    "zh": "梨雪一式",
+    "zh": "梨雪套装",
     "ko": "이설 세트",
-    "vi": "Tuyết lê"
+    "vi": "Bộ trang phục Lê Tuyết"
   },
   "34": {
     "ja": "連星一式",
@@ -121,9 +121,9 @@
   "35": {
     "ja": "抱玉一式",
     "en": "Jade Embrace Set",
-    "zh": "抱玉一式",
+    "zh": "抱玉套装",
     "ko": "포옥 세트",
-    "vi": "Bão Ngọc"
+    "vi": "Bộ trang phục Bão Ngọc"
   },
   "44": {
     "ja": "弓の名手一式",
@@ -149,16 +149,16 @@
   "50": {
     "ja": "斬岳一式",
     "en": "Swaying Heights Set",
-    "zh": "斩岳一式",
+    "zh": "断岳套装",
     "ko": "단악 세트",
-    "vi": "Đoạn Nhạc"
+    "vi": "Bộ trang phục Đoạn Nhạc"
   },
   "51": {
     "ja": "玄甲一式",
     "en": "Obsidian Armor Set",
-    "zh": "玄甲一式",
+    "zh": "玄甲套装",
     "ko": "현갑 세트",
-    "vi": "Huyền Giáp"
+    "vi": "Bộ trang phục Huyền Giáp"
   },
   "56": {
     "ja": "",
