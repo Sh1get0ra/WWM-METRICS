@@ -639,7 +639,11 @@ function _affixName(id, idx) {
     if (a.internal && _BOW_INTERNAL_LABELS[a.internal]) return _BOW_INTERNAL_LABELS[a.internal];
     if (a.internal) return 'internal#' + a.internal;
   }
-  // 3) affix6 スロット (idx===5) の未登録 ID = PvP専用定音 (ユーザー仕様)。計算寄与は元々ゼロで安全弁にもなる。
+  // 2.5) pvp_attune_table.json lookup (= ARENA ATTUNE 発動効果系)。 idx 不問で「PvP専用定音」 fallback、 計算寄与ゼロ。
+  if (window.WWM_PVP_ATTUNE && window.WWM_PVP_ATTUNE[id]) {
+    return (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
+  }
+  // 3) affix6 スロット (idx===5) の未登録 ID = PvP専用定音 legacy fallback (= 互換 keep)。計算寄与は元々ゼロで安全弁にもなる。
   if (idx === 5) return (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
   return 'affix#' + id;
 }

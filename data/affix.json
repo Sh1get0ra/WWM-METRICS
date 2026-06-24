@@ -3475,6 +3475,26 @@
     "internal": 404,
     "statKey": "phalanxbaneCharged"
   },
+  "239651": {
+    "internal": 393,
+    "statKey": "heavenwillGauntletsCharged"
+  },
+  "239652": {
+    "internal": 394,
+    "statKey": "heavenwillGauntletsQ"
+  },
+  "239653": {
+    "internal": 395,
+    "statKey": "heavenwillGauntletsLightVariedCombo"
+  },
+  "239654": {
+    "internal": 396,
+    "statKey": "skygraspRopeDartHeavy"
+  },
+  "239655": {
+    "internal": 397,
+    "statKey": "skygraspRopeDartSpecial"
+  },
   "239751": {
     "internal": 400,
     "statKey": "snowpartingQ"
@@ -3678,6 +3698,26 @@
   "240606": {
     "internal": 148,
     "statKey": "bamboocutPen"
+  },
+  "249751": {
+    "internal": 393,
+    "statKey": "heavenwillGauntletsCharged"
+  },
+  "249752": {
+    "internal": 394,
+    "statKey": "heavenwillGauntletsQ"
+  },
+  "249753": {
+    "internal": 395,
+    "statKey": "heavenwillGauntletsLightVariedCombo"
+  },
+  "249754": {
+    "internal": 396,
+    "statKey": "skygraspRopeDartHeavy"
+  },
+  "249755": {
+    "internal": 397,
+    "statKey": "skygraspRopeDartSpecial"
   },
   "249901": {
     "internal": 400,
@@ -3883,6 +3923,26 @@
     "internal": 148,
     "statKey": "bamboocutPen"
   },
+  "259751": {
+    "internal": 393,
+    "statKey": "heavenwillGauntletsCharged"
+  },
+  "259752": {
+    "internal": 394,
+    "statKey": "heavenwillGauntletsQ"
+  },
+  "259753": {
+    "internal": 395,
+    "statKey": "heavenwillGauntletsLightVariedCombo"
+  },
+  "259754": {
+    "internal": 396,
+    "statKey": "skygraspRopeDartHeavy"
+  },
+  "259755": {
+    "internal": 397,
+    "statKey": "skygraspRopeDartSpecial"
+  },
   "259901": {
     "internal": 400,
     "statKey": "snowpartingQ"
@@ -4067,6 +4127,26 @@
     "internal": 148,
     "statKey": "bamboocutPen"
   },
+  "269751": {
+    "internal": 393,
+    "statKey": "heavenwillGauntletsCharged"
+  },
+  "269752": {
+    "internal": 394,
+    "statKey": "heavenwillGauntletsQ"
+  },
+  "269753": {
+    "internal": 395,
+    "statKey": "heavenwillGauntletsLightVariedCombo"
+  },
+  "269754": {
+    "internal": 396,
+    "statKey": "skygraspRopeDartHeavy"
+  },
+  "269755": {
+    "internal": 397,
+    "statKey": "skygraspRopeDartSpecial"
+  },
   "269901": {
     "internal": 400,
     "statKey": "snowpartingQ"
@@ -4238,6 +4318,26 @@
   "270703": {
     "internal": 392,
     "statKey": "voidPen"
+  },
+  "279751": {
+    "internal": 393,
+    "statKey": "heavenwillGauntletsCharged"
+  },
+  "279752": {
+    "internal": 394,
+    "statKey": "heavenwillGauntletsQ"
+  },
+  "279753": {
+    "internal": 395,
+    "statKey": "heavenwillGauntletsLightVariedCombo"
+  },
+  "279754": {
+    "internal": 396,
+    "statKey": "skygraspRopeDartHeavy"
+  },
+  "279755": {
+    "internal": 397,
+    "statKey": "skygraspRopeDartSpecial"
   },
   "279901": {
     "internal": 400,
@@ -5715,6 +5815,11 @@
     "internal": 399,
     "statKey": "hengBladeDmg"
   },
+  "8293038": {
+    "internal": 0,
+    "statKey": "gauntletDmg",
+    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定"
+  },
   "8294001": {
     "internal": 1,
     "statKey": "body"
@@ -5854,6 +5959,11 @@
   "8294037": {
     "internal": 399,
     "statKey": "hengBladeDmg"
+  },
+  "8294038": {
+    "internal": 0,
+    "statKey": "gauntletDmg",
+    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定"
   },
   "8711001": {
     "internal": 15,
@@ -6827,6 +6937,11 @@
     "internal": 399,
     "statKey": "hengBladeDmg"
   },
+  "8793038": {
+    "internal": 0,
+    "statKey": "gauntletDmg",
+    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定"
+  },
   "8794001": {
     "internal": 1,
     "statKey": "body"
@@ -6966,6 +7081,11 @@
   "8794037": {
     "internal": 399,
     "statKey": "hengBladeDmg"
+  },
+  "8794038": {
+    "internal": 0,
+    "statKey": "gauntletDmg",
+    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定"
   },
   "9211001": {
     "internal": 15,
@@ -7942,7 +8062,7 @@
   "9293036": {
     "internal": 0,
     "statKey": "gauntletDmg",
-    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定。 9294036 / 8293036 / 8294036 等 variant ID も同時追加要 (Vanguard Titans Gauntlets affixTable 内既出)"
+    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定 (2026-06-24: variant ID 8293038/8294038/8793038/8794038/9294036/9793031/9794031 全 7 件 追加済)"
   },
   "9294001": {
     "internal": 1,
@@ -8083,6 +8203,11 @@
   "9294035": {
     "internal": 399,
     "statKey": "hengBladeDmg"
+  },
+  "9294036": {
+    "internal": 0,
+    "statKey": "gauntletDmg",
+    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定"
   },
   "9711001": {
     "internal": 15,
@@ -8796,6 +8921,11 @@
     "internal": 143,
     "statKey": "maxBamboocut"
   },
+  "9793031": {
+    "internal": 0,
+    "statKey": "gauntletDmg",
+    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定"
+  },
   "9793101": {
     "internal": 1,
     "statKey": "body"
@@ -9023,6 +9153,11 @@
   "9794030": {
     "internal": 143,
     "statKey": "maxBamboocut"
+  },
+  "9794031": {
+    "internal": 0,
+    "statKey": "gauntletDmg",
+    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定"
   },
   "9794101": {
     "internal": 1,

@@ -18,6 +18,7 @@
     WWM_XINFA_EFFECTS:    'xinfa_effects',
     WWM_SETS:             'sets',
     WWM_AFFIX:            'affix',
+    WWM_PVP_ATTUNE:       'pvp_attune_table',
     WWM_EQUIP_BASE_BY_LV: 'equip_base_by_lv',
     WWM_GUANYIN_LEVELS:   'guanyin_levels',
     WWM_XINFA_ICONS:      'xinfa_icons',
@@ -177,9 +178,11 @@
 
   // 武術 affix prefix → kongfu id (旧 build-labels.js MARTIAL_PREFIXES。 長さ降順、 短 prefix が長 prefix を吸う bug 防止)
   const MARTIAL_PREFIXES = [
+    { prefix: 'heavenwillGauntlets', id: 20901 },
     { prefix: 'infernalTwinblades', id: 20501 },
     { prefix: 'unfetteredRopeDart', id: 20702 },
     { prefix: 'mortalRopeDart',     id: 20701 },
+    { prefix: 'skygraspRopeDart',   id: 20703 },
     { prefix: 'namelessSword',      id: 10102 },
     { prefix: 'namelessSpear',      id: 10202 },
     { prefix: 'stormbreaker',       id: 20103 },
@@ -197,8 +200,8 @@
   ];
   const SUFFIX_TO_SKILL = {
     'Q': 'martial', 'Charged': 'charged', 'Special': 'special', 'Drone': 'drone',
-    'Light': 'light', 'Rodent': 'rodent', 'Shield': 'shield', 'Healing': 'healing',
-    'VariedCombo': 'variedCombo', '': 'bleed'
+    'Light': 'light', 'Heavy': 'heavy', 'Rodent': 'rodent', 'Shield': 'shield', 'Healing': 'healing',
+    'LightVariedCombo': 'lightVariedCombo', 'VariedCombo': 'variedCombo', '': 'bleed'
   };
 
   function _kongfuWeaponType(id) {

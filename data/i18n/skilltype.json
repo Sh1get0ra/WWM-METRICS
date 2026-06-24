@@ -63,10 +63,24 @@
     "vi": "chảy máu"
   },
   "variedCombo": {
-    "ja": "軽重撃派生",
-    "en": "LA/HC",
-    "zh": "轻重击派生",
-    "ko": "경중격 파생",
-    "vi": "Đòn nhẹ và đòn mạnh kỹ năng phát sinh"
+    "ja": "派生",
+    "en": "Varied",
+    "zh": "派生",
+    "ko": "파생",
+    "vi": "phát sinh"
+  },
+  "lightVariedCombo": {
+    "ja": "軽撃/派生",
+    "en": "LA/Varied",
+    "zh": "轻击/派生",
+    "ko": "약 공격/파생",
+    "vi": "đánh nhẹ/phát sinh"
+  },
+  "heavy": {
+    "ja": "重撃",
+    "en": "HA",
+    "zh": "重击",
+    "ko": "중격",
+    "vi": "Đòn mạnh"
   }
 }

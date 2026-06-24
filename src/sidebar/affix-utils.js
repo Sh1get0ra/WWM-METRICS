@@ -18,7 +18,9 @@
     const info = window.WWM_AFFIX?.[id];
     const key = info?.statKey;
     if (!key) {
-      // affix6 (idx===5) の未登録 ID = PvP専用定音 (sentinel 含む)
+      // pvp_attune_table.json hit = ARENA ATTUNE 発動効果系 = PvP専用定音 (全 slot 共通)
+      if (window.WWM_PVP_ATTUNE && window.WWM_PVP_ATTUNE[id]) return (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
+      // affix6 (idx===5) の未登録 ID = PvP専用定音 legacy fallback (sentinel 含む)
       if (idx === 5) return (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
       return 'オプション#' + id;
     }
@@ -32,6 +34,7 @@
     const info = window.WWM_AFFIX?.[id];
     const key = info?.statKey;
     if (!key) {
+      if (window.WWM_PVP_ATTUNE && window.WWM_PVP_ATTUNE[id]) return (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
       if (idx === 5) return (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
       return 'オプション#' + id;
     }
@@ -233,7 +236,7 @@
     // 武学ダメ (atkType)
     swordDmg: 'atkTypeDmg', spearDmg: 'atkTypeDmg', fanDmg: 'atkTypeDmg',
     moBladeDmg: 'atkTypeDmg', dualBladesDmg: 'atkTypeDmg', umbrellaDmg: 'atkTypeDmg',
-    ropeDartDmg: 'atkTypeDmg', hengBladeDmg: 'atkTypeDmg',
+    ropeDartDmg: 'atkTypeDmg', hengBladeDmg: 'atkTypeDmg', gauntletDmg: 'atkTypeDmg',
     lightAtkDmg: 'atkTypeDmg', heavyAtkDmg: 'atkTypeDmg', executionDmg: 'atkTypeDmg',
     airborneLightAtkDmg: 'atkTypeDmg', jumpStrikeDmg: 'atkTypeDmg',
     dualWeaponSkillDmg: 'atkTypeDmg', dashDmg: 'atkTypeDmg',
@@ -250,7 +253,7 @@
     if (!t) return null;
     let mapKey = _STAT_TO_MAX_KEY[statKey];
     // 武学固有 affix (xxxQ, xxxCharged, xxxSpecial, bleed 等) → attunement (武器固有 max = 0.05@tier91)
-    if (!mapKey && /Q$|Charged$|Special$|Drone$|Light$|Healing$|Shield$|Rodent$|VariedCombo$|^bleed$/.test(statKey)) {
+    if (!mapKey && /Q$|Charged$|Special$|Drone$|Light$|Heavy$|Healing$|Shield$|Rodent$|VariedCombo$|^bleed$/.test(statKey)) {
       mapKey = 'attunement';
     }
     if (!mapKey) return null;
@@ -265,7 +268,7 @@
     const t = _EQUIP_MAX.tiers?.[tier];
     if (!t) return null;
     let mapKey = _STAT_TO_MAX_KEY[statKey];
-    if (!mapKey && /Q$|Charged$|Special$|Drone$|Light$|Healing$|Shield$|Rodent$|VariedCombo$|^bleed$/.test(statKey)) mapKey = 'attunement';
+    if (!mapKey && /Q$|Charged$|Special$|Drone$|Light$|Heavy$|Healing$|Shield$|Rodent$|VariedCombo$|^bleed$/.test(statKey)) mapKey = 'attunement';
     if (!mapKey) return null;
     const v = t[mapKey];
     if (typeof v === 'number') return { min: v / 2, max: v };
@@ -274,7 +277,7 @@
   }
 
   // slot 別 affix 出現ルール (ゲーム仕様)
-  const _WEAPON_DMG_KEYS = new Set(['swordDmg','spearDmg','fanDmg','umbrellaDmg','moBladeDmg','dualBladesDmg','ropeDartDmg','hengBladeDmg']);
+  const _WEAPON_DMG_KEYS = new Set(['swordDmg','spearDmg','fanDmg','umbrellaDmg','moBladeDmg','dualBladesDmg','ropeDartDmg','hengBladeDmg','gauntletDmg']);
   const _MYSTIC_DMG_KEYS = new Set(['stMysticDmg','stBurstMysticDmg','stControlMysticDmg','areaMysticDmg','areaDmgMysticDmg','areaDebuffMysticDmg']);
   const _PVP_BOSS_KEYS = new Set(['bossDmg','playerUnitDmg']);
   const _ALL_WEAPON_KEYS = new Set(['allWeaponDmg']);

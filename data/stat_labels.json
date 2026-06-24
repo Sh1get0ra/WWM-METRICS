@@ -37,7 +37,9 @@
     "soulshadeUmbQ": "誘魂の傘 武術技", "soulshadeUmbCharged": "誘魂の傘 溜め技", "soulshadeUmbSpecial": "誘魂の傘 特殊技",
     "everspringUmbQ": "醉夢の傘 武術技", "everspringUmbCharged": "醉夢の傘 溜め技", "everspringUmbSpecial": "醉夢の傘 特殊技",
     "mortalRopeDartQ": "浮塵の縄 武術技", "mortalRopeDartCharged": "浮塵の縄 溜め技", "mortalRopeDartRodent": "浮塵の縄 鼠",
-    "unfetteredRopeDartQ": "浮雲の縄 武術技", "unfetteredRopeDartCharged": "浮雲の縄 溜め技", "unfetteredRopeDartSpecial": "浮雲の縄 特殊技"
+    "unfetteredRopeDartQ": "浮雲の縄 武術技", "unfetteredRopeDartCharged": "浮雲の縄 溜め技", "unfetteredRopeDartSpecial": "浮雲の縄 特殊技",
+    "heavenwillGauntletsQ": "天志の拳 武術技", "heavenwillGauntletsCharged": "天志の拳 溜め技", "heavenwillGauntletsLightVariedCombo": "天志の拳 軽撃/派生",
+    "skygraspRopeDartHeavy": "千機の縄 重撃", "skygraspRopeDartSpecial": "千機の縄 特殊技"
   },
   "en": {
     "body": "Body", "momentum": "Momentum", "agility": "Agi", "power": "Power", "defense": "Def",
@@ -74,7 +76,9 @@
     "soulshadeUmbQ": "Soulshade UM Q", "soulshadeUmbCharged": "Soulshade UM Ch", "soulshadeUmbSpecial": "Soulshade UM Sp",
     "everspringUmbQ": "Everspring UM Q", "everspringUmbCharged": "Everspring UM Ch", "everspringUmbSpecial": "Everspring UM Sp",
     "mortalRopeDartQ": "Mortal RD Q", "mortalRopeDartCharged": "Mortal RD Ch", "mortalRopeDartRodent": "Mortal RD Rodent",
-    "unfetteredRopeDartQ": "Unfettered RD Q", "unfetteredRopeDartCharged": "Unfettered RD Ch", "unfetteredRopeDartSpecial": "Unfettered RD Sp"
+    "unfetteredRopeDartQ": "Unfettered RD Q", "unfetteredRopeDartCharged": "Unfettered RD Ch", "unfetteredRopeDartSpecial": "Unfettered RD Sp",
+    "heavenwillGauntletsQ": "Heavenwill GA Q", "heavenwillGauntletsCharged": "Heavenwill GA Ch", "heavenwillGauntletsLightVariedCombo": "Heavenwill GA LA/Varied",
+    "skygraspRopeDartHeavy": "Skygrasp RD HA", "skygraspRopeDartSpecial": "Skygrasp RD Sp"
   },
   "zh": {
     "body": "体", "momentum": "势", "agility": "敏", "power": "劲", "defense": "御",
@@ -111,7 +115,9 @@
     "soulshadeUmbQ": "千香引魂蛊 武学技", "soulshadeUmbCharged": "千香引魂蛊 蓄力技", "soulshadeUmbSpecial": "千香引魂蛊 特殊技",
     "everspringUmbQ": "醉梦游春 武学技", "everspringUmbCharged": "醉梦游春 蓄力技", "everspringUmbSpecial": "醉梦游春 特殊技",
     "mortalRopeDartQ": "粟子游尘 武学技", "mortalRopeDartCharged": "粟子游尘 蓄力技", "mortalRopeDartRodent": "粟子游尘 鼠鼠",
-    "unfetteredRopeDartQ": "粟子行云 武学技", "unfetteredRopeDartCharged": "粟子行云 蓄力技", "unfetteredRopeDartSpecial": "粟子行云 特殊技"
+    "unfetteredRopeDartQ": "粟子行云 武学技", "unfetteredRopeDartCharged": "粟子行云 蓄力技", "unfetteredRopeDartSpecial": "粟子行云 特殊技",
+    "heavenwillGauntletsQ": "天志垂象 武学技", "heavenwillGauntletsCharged": "天志垂象 蓄力技", "heavenwillGauntletsLightVariedCombo": "天志垂象 轻击/派生",
+    "skygraspRopeDartHeavy": "千机索天 重击", "skygraspRopeDartSpecial": "千机索天 特殊技"
   },
   "ko": {
     "body": "체력", "momentum": "기세", "agility": "민첩", "power": "내공", "defense": "방어",
@@ -148,6 +154,8 @@
     "soulshadeUmbQ": "소생의 향 무술 스킬", "soulshadeUmbCharged": "소생의 향 차지 스킬", "soulshadeUmbSpecial": "소생의 향 특수 스킬",
     "everspringUmbQ": "일장춘몽 무술 스킬", "everspringUmbCharged": "일장춘몽 차지 스킬", "everspringUmbSpecial": "일장춘몽 특수 스킬",
     "mortalRopeDartQ": "속세의 지혜 무술 스킬", "mortalRopeDartCharged": "속세의 지혜 차지 스킬", "mortalRopeDartRodent": "속세의 지혜 쥐 기술",
-    "unfetteredRopeDartQ": "운진의 궤적 무술 스킬", "unfetteredRopeDartCharged": "운진의 궤적 차지 스킬", "unfetteredRopeDartSpecial": "운진의 궤적 특수 스킬"
+    "unfetteredRopeDartQ": "운진의 궤적 무술 스킬", "unfetteredRopeDartCharged": "운진의 궤적 차지 스킬", "unfetteredRopeDartSpecial": "운진의 궤적 특수 스킬",
+    "heavenwillGauntletsQ": "천지의 주먹 무술 스킬", "heavenwillGauntletsCharged": "천지의 주먹 차지 스킬", "heavenwillGauntletsLightVariedCombo": "천지의 주먹 약 공격/파생",
+    "skygraspRopeDartHeavy": "천기의 사슬 중격", "skygraspRopeDartSpecial": "천기의 사슬 특수 스킬"
   }
 }
