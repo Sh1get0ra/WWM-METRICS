@@ -38,9 +38,12 @@
     const charLv = roleInfo?.level || 95;
     const tier = _lvToTier(charLv);
     const _rawMax = _getCachedEquipMax()?.tiers?.[tier] || {};
-    // 2026-06-23 schema: 各 entry = number (旧) or {min, max} (新)。 ranking は max 値で評価 = number 抽出。
+    // 2026-06-24 schema: 各 entry = number (旧) or {min, max} (新)。 ranking は max 値で評価。
+    //   Proxy 経由 (2026-06-23 cce69ac) → HMR/module cache で trap が発火しない経路あり = 旧 schema 解釈で .toFixed クラッシュ。
+    //   defensive 化: 起動時 plain object に pre-resolve (= 全 key を .max 抽出済 number に展開)。
     const _v = (x) => (x && typeof x === 'object' && 'max' in x) ? x.max : x;
-    const maxTbl = new Proxy(_rawMax, { get: (t, k) => _v(t[k]) });
+    const maxTbl = {};
+    for (const k of Object.keys(_rawMax)) maxTbl[k] = _v(_rawMax[k]);
     const PATH_PEN = { bellstrike: 'bellstrikePen', stonesplit: 'stonesplitPen', silkbind: 'silkbindPen', bamboocut: 'bamboocutPen', voidPath: 'voidPen' };
     const path = window.WWM_KONGFU?.[roleInfo?.kongfuMain]?.path;
     const PATH_MAP = {

@@ -11,6 +11,7 @@
   const _SLOT6_ARMOR       = window.WWMSidebar.affix.SLOT6_ARMOR;
   const _affixDisplayName  = window.WWMSidebar.affix.affixDisplayNameSplit;
   const _loadEquipMax      = window.WWMSidebar.affix.loadEquipMax;
+  const _lvToTier          = window.WWMSidebar.affix.lvToTier;
   const _slotLabelI18n     = window.WWMSidebar.icons.slotLabelI18n;
   const _curLang           = window.WWMSidebar.anlz.curLang;
   // sidebar.js 内 関数 (call時 lookup)
@@ -403,9 +404,47 @@
     const onProgress    = opts.onProgress || null;
     const _SLOT6_WEAPON_LIKE = window.WWMSidebar.affix.SLOT6_WEAPON_LIKE;
     const charLv = roleInfo?.level || 95;
+    await _loadEquipMax();
 
     // working clone (原 roleInfo 不可変)
     const working = JSON.parse(JSON.stringify(roleInfo));
+
+    // 装備 Lv UP fix preprocess (2026-06-24 #43):
+    //   現装備 Lv < charLv tier 上限 Lv の場合、 内部的に上限 Lv (= charLv 装備可能最大) に fix。
+    //   base 値 (equip_base_by_lv) + 各 affix 値 (newMax × 元 ratio = 品質 keep) 再算。
+    //   既 OPT logic はこの fix 後 working を前提に affix 最適化提示 = 「装備 Lv UP 込みの推奨ビルド」 になる。
+    const _lvFixApplied = [];
+    {
+      const RANK_TO_TIER = { gold: '5', purple: '4', blue: '3' };
+      const targetLv = parseInt(_lvToTier(charLv), 10);
+      const equipBase = window.WWM_EQUIP_BASE_BY_LV;
+      if (equipBase) {
+        for (const slot of Object.keys(working.wearEquipsDetailed || {})) {
+          const eq = working.wearEquipsDetailed[slot];
+          if (!eq?.exVo) continue;
+          const curLv = eq.exVo._inferredLv;
+          if (curLv == null || curLv >= targetLv) continue;
+          const rank = eq.exVo._rank || 'gold';
+          const tier = RANK_TO_TIER[rank] || '5';
+          const refBase = equipBase.slots?.[String(slot)]?.table?.[String(targetLv)]?.[tier];
+          if (!refBase) continue;
+          if (!eq.exVo.baseAttrs) eq.exVo.baseAttrs = {};
+          for (const [k, v] of Object.entries(refBase)) eq.exVo.baseAttrs[k] = v;
+          for (const aff of (eq.exVo.baseAffixes || [])) {
+            const d = aff?.equipmentDetails;
+            if (!Array.isArray(d) || d.length < 2) continue;
+            const sk = window.WWM_AFFIX?.[d[0]]?.statKey;
+            if (!sk) continue;
+            const newMax = _getAffixMax(sk, targetLv);
+            if (newMax == null) continue;
+            const ratio = d[2] || 0;
+            d[1] = +(newMax * ratio).toFixed(4);
+          }
+          eq.exVo._inferredLv = targetLv;
+          _lvFixApplied.push({ slot, fromLv: curLv, toLv: targetLv, rank });
+        }
+      }
+    }
 
     // state 上書き (③ xinfa MAX)
     let effectiveState = state;
@@ -467,7 +506,8 @@
     // 初期 baseline
     let startScore = 0;
     try {
-      await window.WWMStats.buildStatParams(working, effectiveState);
+      const _p0 = await window.WWMStats.buildStatParams(working, effectiveState);
+      window.computeExpected(_p0);
       startScore = _scoreWithBonus(working);
     } catch (e) { return { ri: working, startScore: 0, endScore: 0, steps: [], aborted: false }; }
     let curScore = startScore;
