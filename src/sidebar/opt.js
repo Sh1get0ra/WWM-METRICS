@@ -493,7 +493,8 @@
         const idx = 5;
         const seedId = origAffixMemo[slot]?.[idx];
         if (seedId == null) continue;
-        const opts2 = _getAffixOptions(seedId, slot, idx, ba);
+        const _ex = working.wearEquipsDetailed[slot]?.exVo;
+        const opts2 = _getAffixOptions(seedId, slot, idx, ba, null, _ex?._inferredLv, _ex?._rank);
         const targetOpt = opts2.find(o => o.statKey === overrideIdx5);
         if (!targetOpt) continue;
         const mv = _getAffixMax(overrideIdx5, charLv);
@@ -624,7 +625,7 @@
           if (isArmorIdx5) continue;
           const _sig = slot + '|' + idx + '|' + affixes.map(a => a?.equipmentDetails?.[0] ?? '-').join(',');
           let options = _optionsCache.get(_sig);
-          if (!options) { options = _getAffixOptions(cur[0], slot, idx, affixes); _optionsCache.set(_sig, options); }
+          if (!options) { options = _getAffixOptions(cur[0], slot, idx, affixes, null, eq?.exVo?._inferredLv, eq?.exVo?._rank); _optionsCache.set(_sig, options); }
           for (const opt of options) {
             if (!opt.statKey || opt.statKey === '__pvp__') continue;
             if (opt.statKey === curStatKey) continue;

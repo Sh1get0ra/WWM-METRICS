@@ -3,7 +3,7 @@
 //   - 表示: _affixDisplayName / _fmtAffixVal / _isPctStat / _pctNeedsMul
 //   - 判定: _isUsefulAffix / _matchKongfuSpecific
 //   - 装備Lv → tier: _lvToTier / _getAffixMax / _loadEquipMax (+ data/equip_max.json cache)
-//   - slot/idx ルール: _isAffixAllowedInSlot / _isAffixAllowedAtIdx0 / _isWeaponDmgMatch / _getAffixOptions
+//   - slot/idx ルール: _selectorAllowedStatKeys (= wdb master 1 本化、 idx 0-4) + _isWeaponDmgMatch (idx 5 ATTUNE 用) / _getAffixOptions
 //
 // 依存: window.WWM_AFFIX / window.WWM_KONGFU / window._AFFIX_DISPLAY_LABELS / window.T /
 //       window.WWM_SCORE_VERSION / WWMState.roleInfo
@@ -276,33 +276,8 @@
     return null;
   }
 
-  // slot 別 affix 出現ルール (ゲーム仕様)
+  // 武器ダメ系 statKey (= 主武器/副武器 idx 5 ATTUNE 用 _isWeaponDmgMatch でのみ使用、 idx 0-4 は master 1 本化済)
   const _WEAPON_DMG_KEYS = new Set(['swordDmg','spearDmg','fanDmg','umbrellaDmg','moBladeDmg','dualBladesDmg','ropeDartDmg','hengBladeDmg','gauntletDmg']);
-  const _MYSTIC_DMG_KEYS = new Set(['stMysticDmg','stBurstMysticDmg','stControlMysticDmg','areaMysticDmg','areaDmgMysticDmg','areaDebuffMysticDmg']);
-  const _PVP_BOSS_KEYS = new Set(['bossDmg','playerUnitDmg']);
-  const _ALL_WEAPON_KEYS = new Set(['allWeaponDmg']);
-  // statKey が指定 slot で出現可能か判定
-  function _isAffixAllowedInSlot(statKey, slot) {
-    const s = String(slot);
-    if (_WEAPON_DMG_KEYS.has(statKey)) return ['1','2'].includes(s);
-    if (_ALL_WEAPON_KEYS.has(statKey)) return ['10','11'].includes(s);
-    if (_MYSTIC_DMG_KEYS.has(statKey)) return ['3','4'].includes(s);
-    if (_PVP_BOSS_KEYS.has(statKey)) return ['5','8'].includes(s);
-    return true;
-  }
-  // idx 0 (affix1) は ダメージ増加系 + 武学固有 出現不可
-  const _IDX0_FORBIDDEN_PREFIXES = ['namelessSword','namelessSpear','sword','spear','bleed','panaceaFan','fan','stormbreaker','phalanxbane','moBlade','infernalTwinblades','everspringUmb','soulshadeUmb','umb','mortalRopeDart','unfetteredRopeDart','snowparting','lightAtkDmg','heavyAtkDmg','executionDmg','airborneLightAtkDmg','jumpStrikeDmg','dualWeaponSkillDmg','dashDmg'];
-  function _isAffixAllowedAtIdx0(statKey) {
-    if (_WEAPON_DMG_KEYS.has(statKey)) return false;
-    if (_ALL_WEAPON_KEYS.has(statKey)) return false;
-    if (_MYSTIC_DMG_KEYS.has(statKey)) return false;
-    if (_PVP_BOSS_KEYS.has(statKey)) return false;
-    // 武学固有 (xxxQ/Charged/Special/Light/Drone/Healing/Rodent/Shield/VariedCombo/bleed)
-    for (const p of _IDX0_FORBIDDEN_PREFIXES) {
-      if (statKey.startsWith(p)) return false;
-    }
-    return true;
-  }
   // 主武器/副武器 で 武器ダメ系 → active 該当 weaponType のみ
   // kongfuIdOverride: 武具対照 modal で「新装備の武術」 を渡すと、 roleInfo より優先される
   // (装備差替シミュ中に新装備の武器種で affix 候補を絞り込む)。
@@ -358,27 +333,20 @@
     }
     return _SLOT_TO_WDB_CAT[s] || null;
   }
-  // wdb master 経由 statKey set 統一 helper (INITIAL/TUNING 共通)
-  //   restrict = 自装備 wdbCat 照合のみ (兄貴確認: restrict は「その stat が candidate になる装備 slot list」)
-  //   master 無/未対応 slot = null (= 旧経路 fallback)
-  function _wdbAllowedStatKeys(masterRoot, slot, equipLv, equipRank, roleInfo, kongfuIdOverride) {
+  // wdb 統合 master (data/affix_selector.json) 経由 statKey set lookup
+  //   idx 0 = INITIAL / idx 1-4 = TUNING / idx 5 = ATTUNE (別 sprint = null 返却で旧 logic fallback)
+  //   master 未対応 slot (= 弓 21 / 射玦 9 / 環 master 未収録) = null = 旧 logic fallback
+  function _selectorAllowedStatKeys(slot, idx, equipLv, equipRank, roleInfo, kongfuIdOverride) {
+    if (idx < 0 || idx > 4) return null;
     const wdbCat = _slotToWdbCategory(slot, roleInfo, kongfuIdOverride);
     if (!wdbCat) return null;
-    const master = masterRoot?.data;
+    const master = window.WWM_AFFIX_SELECTOR?.data;
     if (!master) return null;
     const tier = _RANK_TO_TIER[equipRank] || '5';
     const lv = equipLv || 91;
-    const candList = master[wdbCat]?.[String(lv)]?.[tier];
-    if (!candList) return null;
-    const allKeys = new Set();
-    const affixMaster = window.WWM_AFFIX || {};
-    for (const c of candList) {
-      if (c.chance === 0) continue;
-      if (c.restrict && !c.restrict.includes(wdbCat)) continue;
-      const sk = affixMaster[c.id]?.statKey;
-      if (sk) allKeys.add(sk);
-    }
-    return allKeys;
+    const list = master[wdbCat]?.[String(lv)]?.[tier]?.[String(idx)];
+    if (!list || !list.length) return null;
+    return new Set(list);
   }
 
   // affix 種別変更 option list: 現 affix と同じ prefix2 のもの → statKey で dedup
@@ -409,14 +377,10 @@
         if (otherInfo?.statKey) blockedKeys.add(otherInfo.statKey);
       }
     }
-    // wdb master 経由 statKey filter (idx 0 = INITIAL、 idx 1-4 = TUNING、 idx 5 = 既存 logic keep)
-    //   master 未対応 slot (= 武器以外で _SLOT_TO_WDB_CAT 未登録) = null = 旧経路 fallback
-    let wdbAllowed = null;
-    if (idx === 0) {
-      wdbAllowed = _wdbAllowedStatKeys(window.WWM_AFFIX_INIT, slot, equipLv, equipRank, WWMState.roleInfo, kongfuIdOverride);
-    } else if (idx >= 1 && idx <= 4) {
-      wdbAllowed = _wdbAllowedStatKeys(window.WWM_AFFIX_TUNING, slot, equipLv, equipRank, WWMState.roleInfo, kongfuIdOverride);
-    }
+    // wdb 統合 master (affix_selector.json) 経由 statKey filter (idx 0-4)
+    //   idx 5 (ATTUNE) = 別 sprint = wdbAllowed null + ATTUNE 用 ad-hoc filter keep
+    //   master 未対応 slot (= 弓/射玦/Thumb Ring 等) = null = 旧 logic fallback
+    const wdbAllowed = _selectorAllowedStatKeys(slot, idx, equipLv, equipRank, WWMState.roleInfo, kongfuIdOverride);
     const seen = new Set();
     const opts = [];
     for (const [id, info] of Object.entries(all)) {
@@ -427,15 +391,12 @@
       if (isArmor6 && _SLOT6_PEN_STATS.includes(sk)) continue;
       if (blockedKeys.has(sk)) continue;
       if (wdbAllowed && !wdbAllowed.has(sk)) continue;
-      // slot 別 出現ルール
-      if (!_isAffixAllowedInSlot(sk, slot)) continue;
-      if (!_isWeaponDmgMatch(sk, slot, WWMState.roleInfo, kongfuIdOverride)) continue;
-      // idx 0 はダメ増加系/武学固有 出現不可
-      if (idx === 0 && !_isAffixAllowedAtIdx0(sk)) continue;
-      // 防具 idx 0 は外功攻撃 / 各属性攻撃 出現不可
-      if (idx === 0 && _SLOT6_ARMOR.has(slotS) && /^(minPhys|maxPhys|min(Bellstrike|Stonesplit|Silkbind|Bamboocut|Void)|max(Bellstrike|Stonesplit|Silkbind|Bamboocut|Void))$/.test(sk)) continue;
-      // 武器セット idx 0 は 会心率/会意率/命中率 出現不可
-      if (idx === 0 && _SLOT6_WEAPON_LIKE.has(slotS) && (sk === 'crit' || sk === 'affinity' || sk === 'precision')) continue;
+      // idx 0-4 = wdb master 1 本化済 (= ad-hoc filter 全廃: _isAffixAllowedInSlot / _isWeaponDmgMatch /
+      //   _isAffixAllowedAtIdx0 / 防具 idx0 minPhys-path 除外 / 武器 idx0 crit/affinity/precision 除外)
+      // idx 5 (ATTUNE) = master 未対応 (= wdbAllowed=null) で旧 ad-hoc filter 必要、 別 sprint で master 化予定:
+      if (idx === 5) {
+        if (!_isWeaponDmgMatch(sk, slot, WWMState.roleInfo, kongfuIdOverride)) continue;
+      }
       // BOSSダメ + PvPダメ は同装備内 排他 (どちらか1種のみ)
       if (allAffixes && (sk === 'bossDmg' || sk === 'playerUnitDmg')) {
         const conflict = sk === 'bossDmg' ? 'playerUnitDmg' : 'bossDmg';
@@ -469,8 +430,6 @@
     getCachedEquipMax: _getCachedEquipMax,
     getAffixMax: _getAffixMax,
     getAffixMinMax: _getAffixMinMax,
-    isAffixAllowedInSlot: _isAffixAllowedInSlot,
-    isAffixAllowedAtIdx0: _isAffixAllowedAtIdx0,
     isWeaponDmgMatch: _isWeaponDmgMatch,
     getAffixOptions: _getAffixOptions,
     PVP_AFFIX_SENTINEL: _PVP_AFFIX_SENTINEL,
