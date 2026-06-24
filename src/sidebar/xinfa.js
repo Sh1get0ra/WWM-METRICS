@@ -357,7 +357,19 @@
         const isTwoFive = (t === 2 || t === 5);
         const needsKf = !isTwoFive && Array.isArray(def.kongfuRequired) && def.kongfuRequired.length;
         const kfOk = !needsKf || def.kongfuRequired.some(k => myKfs.includes(String(k)));
-        const effects = def.effects || {};
+        let effects = def.effects || {};
+        // T2 effectId 経路 (2026-06-24): 内部計算 (stats.js L317-326) と表示同期。 master `xinfa_effects.json` から WorldLv 別実値取得、 effects (= hardcode WL15 推定) を上書き。 表現形式は keep
+        if (t === 2 && def.effectId) {
+          const masterStats = window.WWM_XINFA_EFFECTS?.effects?.[def.effectId]?.stats;
+          if (masterStats) {
+            const wl = String(effRi?.worldLv || 15);
+            const lookup = {};
+            for (const [sk, wlMap] of Object.entries(masterStats)) {
+              if (wlMap[wl] != null) lookup[sk] = wlMap[wl];
+            }
+            if (Object.keys(lookup).length) effects = lookup;
+          }
+        }
         const hasEff = Object.keys(effects).length > 0;
         // labelOverride: tier毎に effects key → 表示label の上書き (i18n対応)
         const lang = _curLang();

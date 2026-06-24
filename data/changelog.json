@@ -1,6 +1,27 @@
 {
-  "current": "2.4.0",
+  "current": "2.5.0",
   "entries": [
+    {
+      "version": "2.5.0",
+      "date": "2026-06-24",
+      "items": [
+        {
+          "featured": true,
+          "ja": "【セット 2点効果 装備Lv 連動化】 セット 2点効果 (会心率/会意率/命中率/最小・最大外功攻撃) が 装備Lv に応じた値で反映されるようになりました。 今まで Lv91 固定値だったため、 Lv96 装備での実機効果値とツール値が乖離していました。 該当セットを Lv91 以外で装備中の方は武格指数が変動します (再 import 推奨)。",
+          "en": "[Set 2-piece Effects: Level-Scaling] Set 2-piece effects (Critical/Affinity/Precision Rate, Min/Max Physical Attack) now scale with equipment level. Previously fixed at Lv91 values, causing divergence from in-game values on Lv96 gear. If you wear affected sets at non-Lv91, your Score will shift (re-import recommended).",
+          "zh": "【套装 2件效果 装备Lv 联动化】 套装 2件效果 (会心率/会意率/命中率/最小・最大外功攻击) 已按 装备Lv 反映对应数值。 此前固定为 Lv91 数值, Lv96 装备的实机效果与工具值存在偏差。 在 Lv91 以外装备相关套装的玩家武格指数会变动 (建议重新 import)。",
+          "ko": "【세트 2피스 효과 장비Lv 연동화】 세트 2피스 효과 (치명타율/공명률/명중률/최소・최대 외공 공격) 가 장비Lv 에 따라 반영됩니다. 지금까지 Lv91 고정 값이었기에, Lv96 장비의 실기 효과치와 도구 값이 괴리되어 있었습니다. 해당 세트를 Lv91 이외에서 장착 중인 분은 무격지수가 변동됩니다 (재 import 권장).",
+          "vi": "[Hiệu ứng 2 món Bộ — Theo cấp trang bị] Hiệu ứng 2 món bộ (Tỷ lệ chí mạng/Cộng hưởng/Trúng đích, Tấn công ngoại công Min/Max) giờ thay đổi theo cấp trang bị. Trước đây cố định ở giá trị Lv91, gây sai lệch với giá trị thực tế trong game ở trang bị Lv96. Nếu bạn đang trang bị các bộ liên quan ngoài Lv91, chỉ số Vũ Cách sẽ thay đổi (khuyến nghị import lại)."
+        },
+        {
+          "ja": "【装備最適化 装備Lv UP 込み 提案化】 装備最適化 / ゼロベース推奨 が「装備可能な最大 Lv 装備」 を前提に評価するようになりました。 例: キャラ Lv96 で Lv91 装備中 → Lv96 装備への入替を前提に affix 推奨を提示。 推奨スコアが従来より上振れます (品質ランクは現装備 keep)。",
+          "en": "[Optimizer: Level-Up Aware] Equipment Optimizer / Zero-base Recommendation now evaluates assuming the highest gear level your character can equip. Example: Char Lv96 with Lv91 gear → suggestions assume swapping to Lv96 gear before affix tuning. Recommended Score may rise vs. before (gear quality rank kept as-is).",
+          "zh": "【装备最适化 装备Lv UP 集成】 装备最适化 / 零基础推荐 现以「角色可装备的最高 Lv」 为前提评估。 例: 角色 Lv96 + Lv91 装备 → 在 affix 推荐前先假设换装到 Lv96 装备。 推荐分数较以往上调 (装备品质保持)。",
+          "ko": "【장비 최적화 장비Lv UP 통합】 장비 최적화 / 제로베이스 추천이 「캐릭터가 장착 가능한 최고 Lv」 를 전제로 평가합니다. 예: 캐릭 Lv96 + Lv91 장비 → affix 추천 전에 Lv96 장비 교체를 가정. 추천 점수가 종전보다 상승합니다 (장비 품질 유지).",
+          "vi": "[Tối ưu hóa trang bị — Tính cả nâng cấp Lv] Tối ưu hóa trang bị / Đề xuất Zero-base giờ đánh giá dựa trên «cấp trang bị tối đa nhân vật có thể trang bị». Ví dụ: Char Lv96 + trang bị Lv91 → các đề xuất giả định đổi sang trang bị Lv96 trước khi tinh chỉnh affix. Điểm đề xuất có thể tăng so với trước (giữ nguyên cấp chất lượng trang bị)."
+        }
+      ]
+    },
     {
       "version": "2.4.0",
       "date": "2026-06-23",

@@ -1,4 +1,4 @@
 {
   "_schema": "計算 SCORE_VERSION の network-first 配信用 (= SW precache の旧 calc.js が動作中でも最新値を取得して baseline 鮮度判定可能化)。 calc.js の WWM_SCORE_VERSION bump 時に同期更新必須。",
-  "scoreVer": 15
+  "scoreVer": 16
 }

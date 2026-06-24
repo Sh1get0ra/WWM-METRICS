@@ -10,7 +10,51 @@
         "effects": {
           "maxPhysATKAdd": 64
         },
-        "raw": "最大外功攻撃 +64"
+        "raw": "最大外功攻撃 +64",
+        "effectsByLv": {
+          "3": {
+            "maxPhysATKAdd": 2
+          },
+          "16": {
+            "maxPhysATKAdd": 5
+          },
+          "31": {
+            "maxPhysATKAdd": 9
+          },
+          "41": {
+            "maxPhysATKAdd": 15
+          },
+          "51": {
+            "maxPhysATKAdd": 21
+          },
+          "56": {
+            "maxPhysATKAdd": 27
+          },
+          "61": {
+            "maxPhysATKAdd": 34
+          },
+          "71": {
+            "maxPhysATKAdd": 40
+          },
+          "81": {
+            "maxPhysATKAdd": 47
+          },
+          "86": {
+            "maxPhysATKAdd": 55
+          },
+          "91": {
+            "maxPhysATKAdd": 64
+          },
+          "96": {
+            "maxPhysATKAdd": 78
+          },
+          "100": {
+            "maxPhysATKAdd": 91
+          },
+          "105": {
+            "maxPhysATKAdd": 106
+          }
+        }
       },
       "pieces4": {
         "effects": {},
@@ -26,7 +70,51 @@
         "effects": {
           "sympathyRate": 0.037
         },
-        "raw": "会意率 +3.7%"
+        "raw": "会意率 +3.7%",
+        "effectsByLv": {
+          "3": {
+            "sympathyRate": 0.001
+          },
+          "16": {
+            "sympathyRate": 0.003
+          },
+          "31": {
+            "sympathyRate": 0.005
+          },
+          "41": {
+            "sympathyRate": 0.009
+          },
+          "51": {
+            "sympathyRate": 0.012
+          },
+          "56": {
+            "sympathyRate": 0.015
+          },
+          "61": {
+            "sympathyRate": 0.019
+          },
+          "71": {
+            "sympathyRate": 0.023
+          },
+          "81": {
+            "sympathyRate": 0.027
+          },
+          "86": {
+            "sympathyRate": 0.032
+          },
+          "91": {
+            "sympathyRate": 0.037
+          },
+          "96": {
+            "sympathyRate": 0.045
+          },
+          "100": {
+            "sympathyRate": 0.052
+          },
+          "105": {
+            "sympathyRate": 0.061
+          }
+        }
       },
       "pieces4": {
         "effects": {},
@@ -42,7 +130,51 @@
         "effects": {
           "hitRate": 0.066
         },
-        "raw": "命中率 +6.6%"
+        "raw": "命中率 +6.6%",
+        "effectsByLv": {
+          "3": {
+            "hitRate": 0.001
+          },
+          "16": {
+            "hitRate": 0.005
+          },
+          "31": {
+            "hitRate": 0.008
+          },
+          "41": {
+            "hitRate": 0.015
+          },
+          "51": {
+            "hitRate": 0.021
+          },
+          "56": {
+            "hitRate": 0.027
+          },
+          "61": {
+            "hitRate": 0.035
+          },
+          "71": {
+            "hitRate": 0.041
+          },
+          "81": {
+            "hitRate": 0.048
+          },
+          "86": {
+            "hitRate": 0.056
+          },
+          "91": {
+            "hitRate": 0.066
+          },
+          "96": {
+            "hitRate": 0.08
+          },
+          "100": {
+            "hitRate": 0.093
+          },
+          "105": {
+            "hitRate": 0.108
+          }
+        }
       },
       "pieces4": {
         "effects": {},
@@ -58,7 +190,51 @@
         "effects": {
           "maxPhysATKAdd": 64
         },
-        "raw": "最大外功攻撃 +64"
+        "raw": "最大外功攻撃 +64",
+        "effectsByLv": {
+          "3": {
+            "maxPhysATKAdd": 2
+          },
+          "16": {
+            "maxPhysATKAdd": 5
+          },
+          "31": {
+            "maxPhysATKAdd": 9
+          },
+          "41": {
+            "maxPhysATKAdd": 15
+          },
+          "51": {
+            "maxPhysATKAdd": 21
+          },
+          "56": {
+            "maxPhysATKAdd": 27
+          },
+          "61": {
+            "maxPhysATKAdd": 34
+          },
+          "71": {
+            "maxPhysATKAdd": 40
+          },
+          "81": {
+            "maxPhysATKAdd": 47
+          },
+          "86": {
+            "maxPhysATKAdd": 55
+          },
+          "91": {
+            "maxPhysATKAdd": 64
+          },
+          "96": {
+            "maxPhysATKAdd": 78
+          },
+          "100": {
+            "maxPhysATKAdd": 91
+          },
+          "105": {
+            "maxPhysATKAdd": 106
+          }
+        }
       },
       "pieces4": {
         "effects": {},
@@ -74,7 +250,51 @@
         "effects": {
           "minPhysATKAdd": 64
         },
-        "raw": "最小外功攻撃 +64"
+        "raw": "最小外功攻撃 +64",
+        "effectsByLv": {
+          "3": {
+            "minPhysATKAdd": 2
+          },
+          "16": {
+            "minPhysATKAdd": 5
+          },
+          "31": {
+            "minPhysATKAdd": 9
+          },
+          "41": {
+            "minPhysATKAdd": 15
+          },
+          "51": {
+            "minPhysATKAdd": 21
+          },
+          "56": {
+            "minPhysATKAdd": 27
+          },
+          "61": {
+            "minPhysATKAdd": 34
+          },
+          "71": {
+            "minPhysATKAdd": 40
+          },
+          "81": {
+            "minPhysATKAdd": 47
+          },
+          "86": {
+            "minPhysATKAdd": 55
+          },
+          "91": {
+            "minPhysATKAdd": 64
+          },
+          "96": {
+            "minPhysATKAdd": 78
+          },
+          "100": {
+            "minPhysATKAdd": 91
+          },
+          "105": {
+            "minPhysATKAdd": 106
+          }
+        }
       },
       "pieces4": {
         "effects": {},
@@ -90,7 +310,51 @@
         "effects": {
           "minPhysATKAdd": 64
         },
-        "raw": "最小外功攻撃 +64"
+        "raw": "最小外功攻撃 +64",
+        "effectsByLv": {
+          "3": {
+            "minPhysATKAdd": 2
+          },
+          "16": {
+            "minPhysATKAdd": 5
+          },
+          "31": {
+            "minPhysATKAdd": 9
+          },
+          "41": {
+            "minPhysATKAdd": 15
+          },
+          "51": {
+            "minPhysATKAdd": 21
+          },
+          "56": {
+            "minPhysATKAdd": 27
+          },
+          "61": {
+            "minPhysATKAdd": 34
+          },
+          "71": {
+            "minPhysATKAdd": 40
+          },
+          "81": {
+            "minPhysATKAdd": 47
+          },
+          "86": {
+            "minPhysATKAdd": 55
+          },
+          "91": {
+            "minPhysATKAdd": 64
+          },
+          "96": {
+            "minPhysATKAdd": 78
+          },
+          "100": {
+            "minPhysATKAdd": 91
+          },
+          "105": {
+            "minPhysATKAdd": 106
+          }
+        }
       },
       "pieces4": {
         "effects": {},
@@ -106,7 +370,51 @@
         "effects": {
           "hitRate": 0.066
         },
-        "raw": "命中率 +6.6%"
+        "raw": "命中率 +6.6%",
+        "effectsByLv": {
+          "3": {
+            "hitRate": 0.001
+          },
+          "16": {
+            "hitRate": 0.005
+          },
+          "31": {
+            "hitRate": 0.008
+          },
+          "41": {
+            "hitRate": 0.015
+          },
+          "51": {
+            "hitRate": 0.021
+          },
+          "56": {
+            "hitRate": 0.027
+          },
+          "61": {
+            "hitRate": 0.035
+          },
+          "71": {
+            "hitRate": 0.041
+          },
+          "81": {
+            "hitRate": 0.048
+          },
+          "86": {
+            "hitRate": 0.056
+          },
+          "91": {
+            "hitRate": 0.066
+          },
+          "96": {
+            "hitRate": 0.08
+          },
+          "100": {
+            "hitRate": 0.093
+          },
+          "105": {
+            "hitRate": 0.108
+          }
+        }
       },
       "pieces4": {
         "effects": {},
@@ -122,7 +430,51 @@
         "effects": {
           "critRate": 0.074
         },
-        "raw": "会心率 +7.4%"
+        "raw": "会心率 +7.4%",
+        "effectsByLv": {
+          "3": {
+            "critRate": 0.001
+          },
+          "16": {
+            "critRate": 0.005
+          },
+          "31": {
+            "critRate": 0.009
+          },
+          "41": {
+            "critRate": 0.017
+          },
+          "51": {
+            "critRate": 0.023
+          },
+          "56": {
+            "critRate": 0.031
+          },
+          "61": {
+            "critRate": 0.039
+          },
+          "71": {
+            "critRate": 0.046
+          },
+          "81": {
+            "critRate": 0.054
+          },
+          "86": {
+            "critRate": 0.063
+          },
+          "91": {
+            "critRate": 0.074
+          },
+          "96": {
+            "critRate": 0.09
+          },
+          "100": {
+            "critRate": 0.104
+          },
+          "105": {
+            "critRate": 0.121
+          }
+        }
       },
       "pieces4": {
         "effects": {},
@@ -138,7 +490,51 @@
         "effects": {
           "minPhysATKAdd": 64
         },
-        "raw": "最小外功攻撃 +64"
+        "raw": "最小外功攻撃 +64",
+        "effectsByLv": {
+          "3": {
+            "minPhysATKAdd": 2
+          },
+          "16": {
+            "minPhysATKAdd": 5
+          },
+          "31": {
+            "minPhysATKAdd": 9
+          },
+          "41": {
+            "minPhysATKAdd": 15
+          },
+          "51": {
+            "minPhysATKAdd": 21
+          },
+          "56": {
+            "minPhysATKAdd": 27
+          },
+          "61": {
+            "minPhysATKAdd": 34
+          },
+          "71": {
+            "minPhysATKAdd": 40
+          },
+          "81": {
+            "minPhysATKAdd": 47
+          },
+          "86": {
+            "minPhysATKAdd": 55
+          },
+          "91": {
+            "minPhysATKAdd": 64
+          },
+          "96": {
+            "minPhysATKAdd": 78
+          },
+          "100": {
+            "minPhysATKAdd": 91
+          },
+          "105": {
+            "minPhysATKAdd": 106
+          }
+        }
       },
       "pieces4": {
         "effects": {},
@@ -154,7 +550,51 @@
         "effects": {
           "minPhysATKAdd": 64
         },
-        "raw": "最小外功攻撃 +64"
+        "raw": "最小外功攻撃 +64",
+        "effectsByLv": {
+          "3": {
+            "minPhysATKAdd": 2
+          },
+          "16": {
+            "minPhysATKAdd": 5
+          },
+          "31": {
+            "minPhysATKAdd": 9
+          },
+          "41": {
+            "minPhysATKAdd": 15
+          },
+          "51": {
+            "minPhysATKAdd": 21
+          },
+          "56": {
+            "minPhysATKAdd": 27
+          },
+          "61": {
+            "minPhysATKAdd": 34
+          },
+          "71": {
+            "minPhysATKAdd": 40
+          },
+          "81": {
+            "minPhysATKAdd": 47
+          },
+          "86": {
+            "minPhysATKAdd": 55
+          },
+          "91": {
+            "minPhysATKAdd": 64
+          },
+          "96": {
+            "minPhysATKAdd": 78
+          },
+          "100": {
+            "minPhysATKAdd": 91
+          },
+          "105": {
+            "minPhysATKAdd": 106
+          }
+        }
       },
       "pieces4": {
         "effects": {},
@@ -170,7 +610,51 @@
         "effects": {
           "minPhysATKAdd": 63
         },
-        "raw": "最小外功攻撃 +63"
+        "raw": "最小外功攻撃 +63",
+        "effectsByLv": {
+          "3": {
+            "minPhysATKAdd": 2
+          },
+          "16": {
+            "minPhysATKAdd": 5
+          },
+          "31": {
+            "minPhysATKAdd": 9
+          },
+          "41": {
+            "minPhysATKAdd": 15
+          },
+          "51": {
+            "minPhysATKAdd": 21
+          },
+          "56": {
+            "minPhysATKAdd": 27
+          },
+          "61": {
+            "minPhysATKAdd": 34
+          },
+          "71": {
+            "minPhysATKAdd": 40
+          },
+          "81": {
+            "minPhysATKAdd": 47
+          },
+          "86": {
+            "minPhysATKAdd": 55
+          },
+          "91": {
+            "minPhysATKAdd": 64
+          },
+          "96": {
+            "minPhysATKAdd": 78
+          },
+          "100": {
+            "minPhysATKAdd": 91
+          },
+          "105": {
+            "minPhysATKAdd": 106
+          }
+        }
       },
       "pieces4": {
         "effects": {},
@@ -190,7 +674,51 @@
         "effects": {
           "hitRate": 0.033
         },
-        "raw": "命中率 +3.3%"
+        "raw": "命中率 +3.3%",
+        "effectsByLv": {
+          "3": {
+            "hitRate": 0.001
+          },
+          "16": {
+            "hitRate": 0.002
+          },
+          "31": {
+            "hitRate": 0.004
+          },
+          "41": {
+            "hitRate": 0.008
+          },
+          "51": {
+            "hitRate": 0.01
+          },
+          "56": {
+            "hitRate": 0.014
+          },
+          "61": {
+            "hitRate": 0.017
+          },
+          "71": {
+            "hitRate": 0.02
+          },
+          "81": {
+            "hitRate": 0.024
+          },
+          "86": {
+            "hitRate": 0.028
+          },
+          "91": {
+            "hitRate": 0.033
+          },
+          "96": {
+            "hitRate": 0.04
+          },
+          "100": {
+            "hitRate": 0.047
+          },
+          "105": {
+            "hitRate": 0.054
+          }
+        }
       },
       "_note": "suffix予想 (連番仮説 44/45/46)、未装備未検証",
       "liupaiId": "tongyong"
@@ -201,7 +729,51 @@
         "effects": {
           "critRate": 0.037
         },
-        "raw": "会心率 +3.7%"
+        "raw": "会心率 +3.7%",
+        "effectsByLv": {
+          "3": {
+            "critRate": 0.001
+          },
+          "16": {
+            "critRate": 0.003
+          },
+          "31": {
+            "critRate": 0.005
+          },
+          "41": {
+            "critRate": 0.009
+          },
+          "51": {
+            "critRate": 0.012
+          },
+          "56": {
+            "critRate": 0.015
+          },
+          "61": {
+            "critRate": 0.019
+          },
+          "71": {
+            "critRate": 0.023
+          },
+          "81": {
+            "critRate": 0.027
+          },
+          "86": {
+            "critRate": 0.032
+          },
+          "91": {
+            "critRate": 0.037
+          },
+          "96": {
+            "critRate": 0.045
+          },
+          "100": {
+            "critRate": 0.052
+          },
+          "105": {
+            "critRate": 0.061
+          }
+        }
       },
       "liupaiId": "tongyong"
     },
@@ -211,7 +783,51 @@
         "effects": {
           "sympathyRate": 0.018
         },
-        "raw": "会意率 +1.8%"
+        "raw": "会意率 +1.8%",
+        "effectsByLv": {
+          "3": {
+            "sympathyRate": 0.001
+          },
+          "16": {
+            "sympathyRate": 0.001
+          },
+          "31": {
+            "sympathyRate": 0.002
+          },
+          "41": {
+            "sympathyRate": 0.004
+          },
+          "51": {
+            "sympathyRate": 0.006
+          },
+          "56": {
+            "sympathyRate": 0.008
+          },
+          "61": {
+            "sympathyRate": 0.01
+          },
+          "71": {
+            "sympathyRate": 0.011
+          },
+          "81": {
+            "sympathyRate": 0.014
+          },
+          "86": {
+            "sympathyRate": 0.016
+          },
+          "91": {
+            "sympathyRate": 0.018
+          },
+          "96": {
+            "sympathyRate": 0.022
+          },
+          "100": {
+            "sympathyRate": 0.026
+          },
+          "105": {
+            "sympathyRate": 0.03
+          }
+        }
       },
       "liupaiId": "tongyong"
     }

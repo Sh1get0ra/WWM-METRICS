@@ -353,17 +353,33 @@ function buildStatParamsSync(roleInfo, state) {
   }
 
   // 6. セット pieces2 (suffix が 2個以上で発動)
+  // Lv 連動 (effectsByLv) 優先: 同 suffix 装備の平均 _inferredLv → 該当 Lv 以下の最大 lookup
+  //   fallback = pieces2.effects (= Lv91 hardcode、 wdb 未取得セット用)
   const suffixCount = {};
+  const suffixLvSum = {};
   for (const eq of Object.values(eqDet)) {
     const sfx = eq?.exVo?.suffix;
-    if (sfx !== undefined) suffixCount[sfx] = (suffixCount[sfx]||0) + 1;
+    if (sfx === undefined) continue;
+    suffixCount[sfx] = (suffixCount[sfx]||0) + 1;
+    const lv = eq?.exVo?._inferredLv;
+    if (typeof lv === 'number') suffixLvSum[sfx] = (suffixLvSum[sfx]||0) + lv;
   }
   for (const [sfx, cnt] of Object.entries(suffixCount)) {
     if (cnt < 2) continue;
     const sets = window.WWM_SETS || {};
     const setDef = sets.weaponSets?.[sfx] || sets.bowSets?.[sfx] || sets.defensiveSets?.[sfx];
-    if (!setDef?.pieces2?.effects) continue;
-    for (const [k, v] of Object.entries(setDef.pieces2.effects)) {
+    if (!setDef?.pieces2) continue;
+    let effects = setDef.pieces2.effects;
+    const byLv = setDef.pieces2.effectsByLv;
+    if (byLv) {
+      const avgLv = suffixLvSum[sfx] != null ? Math.floor(suffixLvSum[sfx] / cnt) : 91;
+      const lvKeys = Object.keys(byLv).map(Number).sort((a,b) => a - b);
+      let pickLv = lvKeys[0];
+      for (const lk of lvKeys) { if (lk <= avgLv) pickLv = lk; else break; }
+      effects = byLv[String(pickLv)] || effects;
+    }
+    if (!effects) continue;
+    for (const [k, v] of Object.entries(effects)) {
       if (typeof v === 'number') _accMapped(r, k, v);
     }
   }
