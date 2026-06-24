@@ -42,8 +42,8 @@
     "vi": "Phụ thêm Ngoại công"
   },
   "judgeRes": {
-    "ja": "審判耐性",
-    "en": "Judgment Resistance",
+    "ja": "判定耐性",
+    "en": "Resistance",
     "zh": "判定抗性",
     "ko": "저항 판정",
     "vi": "Kháng định đoạt"
@@ -95,7 +95,7 @@
     "en": "Physical",
     "zh": "物理",
     "ko": "물리",
-    "vi": "Ngoại công"
+    "vi": "Vật lý"
   },
   "probElem": {
     "ja": "属性",
@@ -120,10 +120,10 @@
   },
   "slotSub": {
     "ja": "副武器",
-    "en": "Sub Weapon",
-    "zh": "副武器",
-    "ko": "부무기",
-    "vi": "Vũ khí Phụ"
+    "en": "Off-hand Weapon",
+    "zh": "副武",
+    "ko": "보조 무기",
+    "vi": "Vũ khí phụ"
   },
   "slotHelm": {
     "ja": "冠",
@@ -176,7 +176,7 @@
   },
   "slotDisc": {
     "ja": "射玦",
-    "en": "Archer Disc",
+    "en": "Archery Jade",
     "zh": "射玦",
     "ko": "활깍지",
     "vi": "Bắn Ngọc quyết"
@@ -226,8 +226,8 @@
   "importArsenalPeaked": {
     "ja": "頂点",
     "en": "Peak",
-    "zh": "顶点",
-    "ko": "정점",
+    "zh": "巅峰",
+    "ko": "최고 수준",
     "vi": "Đỉnh cao"
   },
   "arsenalNotPeaked": {
@@ -239,17 +239,17 @@
   },
   "ocrHelpMockLv": {
     "ja": "装備レベル",
-    "en": "Equip Lv",
+    "en": "Gear Tier",
     "zh": "装备等阶",
     "ko": "장비 레벨",
-    "vi": "Cấp trang bị"
+    "vi": "Cấp bậc trang bị"
   },
   "ocrHelpMockAtk": {
     "ja": "外功攻撃",
-    "en": "Phys ATK",
+    "en": "Physical Attack",
     "zh": "外功攻击",
     "ko": "외공 공격",
-    "vi": "Tấn công Ngoại công"
+    "vi": "Tấn công ngoại công"
   },
   "pvpExclusiveAffix": {
     "ja": "PvP専用定音",

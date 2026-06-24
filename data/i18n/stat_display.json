@@ -32,7 +32,7 @@
     "en": "Defense",
     "zh": "御",
     "ko": "방어",
-    "vi": "Phòng"
+    "vi": "Ngự"
   },
   "stDisp.basicStats.agility": {
     "ja": "速",
@@ -70,8 +70,8 @@
     "vi": "Tấn công thuộc tính"
   },
   "stDisp.primaryStats.elemAtk.bellstrike": {
-    "ja": "鋼鳴攻撃力",
-    "en": "Bellstrike ATK",
+    "ja": "鋼鳴攻撃",
+    "en": "Bellstrike Attack",
     "zh": "鸣金攻击",
     "ko": "명금 공격",
     "vi": "Tấn công Minh Kim"
@@ -106,21 +106,21 @@
   },
   "stDisp.section.probability.title": {
     "ja": "判定確率",
-    "en": "Judgment Rates",
+    "en": "Attribute to Check",
     "zh": "判定属性",
     "ko": "판정 속성",
-    "vi": "Xác suất phán định"
+    "vi": "Thuộc tính phán định"
   },
   "stDisp.probability.hitRate": {
     "ja": "命中率",
-    "en": "Precision",
+    "en": "Precision Rate",
     "zh": "精准率",
     "ko": "정확도",
     "vi": "Tỷ lệ chính xác"
   },
   "stDisp.probability.critRate": {
     "ja": "会心率",
-    "en": "Crit",
+    "en": "Critical Rate",
     "zh": "会心率",
     "ko": "치명타 확률",
     "vi": "Tỷ lệ chí mạng"
@@ -134,21 +134,21 @@
   },
   "stDisp.probability.sympathyRate": {
     "ja": "会意率",
-    "en": "Affinity",
+    "en": "Affinity Rate",
     "zh": "会意率",
     "ko": "각성 확률",
     "vi": "Tỷ lệ hiểu ý"
   },
   "stDisp.probability.addCritRate": {
     "ja": "付加会心率",
-    "en": "Add Crit",
+    "en": "Direct Critical Rate",
     "zh": "直接会心率",
     "ko": "추가 치명타 확률",
     "vi": "Tỷ lệ chí mạng trực tiếp"
   },
   "stDisp.probability.addSympathyRate": {
     "ja": "付加会意率",
-    "en": "Add Affinity",
+    "en": "Direct Affinity Rate",
     "zh": "直接会意率",
     "ko": "추가 각성 확률",
     "vi": "Tỷ lệ hiểu ý trực tiếp"
@@ -162,24 +162,24 @@
   },
   "stDisp.probability.finalCritSym": {
     "ja": "最終会心会意率",
-    "en": "Final Crit+Affinity",
+    "en": "Final Critical & Affinity Rate",
     "zh": "最终会心会意率",
     "ko": "최종 치명타 각성 확률",
-    "vi": "Tỷ lệ Hội tâm Hội ý cuối cùng"
+    "vi": "Tỷ lệ Chí mạng hiểu ý cuối cùng"
   },
   "stDisp.probability.finalCritSym.pCrit": {
-    "ja": "最終発動会心率",
-    "en": "Final Crit Rate",
+    "ja": "最終実効会心確率",
+    "en": "Final Effective Critical Rate",
     "zh": "最终生效会心概率",
-    "ko": "최종 치명타 확률",
-    "vi": "Tỷ lệ Hội tâm phát động cuối cùng"
+    "ko": "최종 적용 치명타 확률",
+    "vi": "Xác suất chí mạng có hiệu lực cuối cùng"
   },
   "stDisp.probability.finalCritSym.pSym": {
-    "ja": "最終発動会意率",
-    "en": "Final Affinity Rate",
+    "ja": "最終実効会意確率",
+    "en": "Final Effective Affinity Rate",
     "zh": "最终生效会意概率",
-    "ko": "최종 각성 확률",
-    "vi": "Tỷ lệ Hội ý phát động cuối cùng"
+    "ko": "최종 적용 각성 확률",
+    "vi": "Xác suất Hiểu ý có hiệu lực cuối cùng"
   },
   "stDisp.probability.finalCritSym.pGraze": {
     "ja": "最終発動軽傷率",
@@ -267,10 +267,10 @@
   },
   "stDisp.dmgBoost.elemBoostMain.voidPen": {
     "ja": "無相貫通",
-    "en": "Void Pen",
+    "en": "Formless Penetration",
     "zh": "无相穿透",
     "ko": "무상 관통",
-    "vi": "Xuyên thấu Vô Tướng"
+    "vi": "Xuyên thấu vô hình"
   },
   "stDisp.dmgBoost.elemAtkBoost": {
     "ja": "属性攻撃強化",
@@ -288,24 +288,24 @@
   },
   "stDisp.dmgBoost.elemAtkBoost.elemDmgStonesplit": {
     "ja": "砕岩ダメージ上昇",
-    "en": "Stonesplit DMG",
+    "en": "Stonesplit DMG Bonus",
     "zh": "裂石伤害加成",
-    "ko": "열석 피해 증가",
-    "vi": "Gia tăng Sát thương Liệt Thạch"
+    "ko": "열석 피해 보너스",
+    "vi": "Xé đá Tăng sát thương"
   },
   "stDisp.dmgBoost.elemAtkBoost.elemDmgSilkbind": {
     "ja": "糸操ダメージ上昇",
-    "en": "Silkbind DMG",
+    "en": "Silkbind DMG Bonus",
     "zh": "牵丝伤害加成",
-    "ko": "견사 피해 증가",
-    "vi": "Gia tăng Sát thương Khiên Ti"
+    "ko": "견사 피해 보너스",
+    "vi": "Kéo tơ Tăng sát thương"
   },
   "stDisp.dmgBoost.elemAtkBoost.elemDmgBamboocut": {
     "ja": "瞬嵐ダメージ上昇",
-    "en": "Bamboocut DMG",
+    "en": "Bamboocut DMG Bonus",
     "zh": "破竹伤害加成",
-    "ko": "파죽 피해 증가",
-    "vi": "Gia tăng Sát thương Phá Trúc"
+    "ko": "파죽 피해 보너스",
+    "vi": "Phá tre Tăng sát thương"
   },
   "stDisp.dmgBoost.elemAtkBoost.elemDmgVoid": {
     "ja": "無相ダメージ上昇",
@@ -316,7 +316,7 @@
   },
   "stDisp.dmgBoost.allMartialBoost": {
     "ja": "全武術効果増加",
-    "en": "All Martial Boost",
+    "en": "All Martial Art Skill DMG Boost",
     "zh": "全部武学增效",
     "ko": "모든 무술의 효과 증가",
     "vi": "Tăng hiệu quả toàn bộ võ học"

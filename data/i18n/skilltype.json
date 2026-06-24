@@ -8,7 +8,7 @@
   },
   "charged": {
     "ja": "溜め技",
-    "en": "Ch",
+    "en": "Charged Skill",
     "zh": "蓄力技",
     "ko": "차지 스킬",
     "vi": "kỹ năng tích lực"
@@ -57,10 +57,10 @@
   },
   "bleed": {
     "ja": "流血",
-    "en": "Bleed",
+    "en": "Bleeding",
     "zh": "流血",
     "ko": "출혈",
-    "vi": "chảy máu"
+    "vi": "Chảy máu"
   },
   "variedCombo": {
     "ja": "派生",
