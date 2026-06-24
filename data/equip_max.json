@@ -1,8 +1,8 @@
 {
   "_schema": "装備Lv Tier別 affix MIN-MAX 値マスタ (2026-06-23 Lv 別精密化)。 wdb snapshot mode 抽出、 {min, max} ペア。 _getAffixMax(sk,lv) 後方互換 (number → object.max)。",
-  "_lastUpdated": "2026-06-23",
+  "_lastUpdated": "2026-06-24",
   "_source": "wwmdb.vlt.fyi equip-items snapshot (Lv71/81/86/91/96 各 tier=5 = 金) affixTables mode 採用",
-  "_note": "obfuscated app.js から正規表現抽出。一部 field 名は position 推定 (stat5)、確定 stat は明示 key。tier 96 は大世界Lv15+ 用 (未解放)。 atkTypeDmg (指定武術ダメ) は WWMath で tier 81 のみ採取 (0.03 = 誤値) で 86/91/96 = null だったが、 ゲーム仕様「指定武術ダメ MAX = 全武術ダメ MAX × 2」 に基づき全 tier 上書き (81=0.04 / 86=0.044 / 91=0.052 / 96=0.064)。 / 2026-06-23: {min, max} ペア化、 旧 number は 1:2 比で min 補完 (tier 61 snapshot 未取得分)。",
+  "_note": "obfuscated app.js から正規表現抽出。一部 field 名は position 推定 (stat5)、確定 stat は明示 key。tier 96 は大世界Lv15+ 用 (未解放)。 atkTypeDmg (指定武術ダメ) は WWMath で tier 81 のみ採取 (0.03 = 誤値) で 86/91/96 = null だったが、 ゲーム仕様「指定武術ダメ MAX = 全武術ダメ MAX × 2」 に基づき全 tier 上書き (81=0.04 / 86=0.044 / 91=0.052 / 96=0.064)。 / 2026-06-23: {min, max} ペア化、 旧 number は 1:2 比で min 補完 (tier 61 snapshot 未取得分)。 / 2026-06-24: tier 91/96 attrPen min 修正 (Lv91+ で 5path 系貫通廃止→無相貫通一本化、 wdb 280703/270703 真値 6.5-10.8 / 7.8-13 を attrPen に反映、 旧 min 5.4/6.5 は 5path 系 ratio 残骸)。 / 2026-06-24: tier 81/86/91/96 attunement min 修正 (防具 #6 武術固有 affix = wdb 280001-280605 等 35 種共有 max table、 真値 ratio 0.6 で min 0.022/0.026/0.03/0.036 に補正、 旧 min は max×0.5 偽補完残骸)。 / 2026-06-24: atkTypeDmg 倍化ルール撤去 → wdb 真値テーブル参照に切替。 tier 81 = 0.019-0.038 / tier 96 = 0.031-0.062 (旧倍化値 0.02-0.04 / 0.032-0.064 から微調整)。 全武器 (Sword/Spear/Fan/MoBlade/DualBlades/Umb/RopeDart/Gauntlets/Heng) で同 table 参照 (兄貴確認: 完全同一値)。",
   "tiers": {
     "61": {
       "maxPhys": {
@@ -157,15 +157,15 @@
         "max": 0.02
       },
       "atkTypeDmg": {
-        "min": 0.02,
-        "max": 0.04
+        "min": 0.019,
+        "max": 0.038
       },
       "mysticDmg": {
         "min": 0.03,
         "max": 0.06
       },
       "attunement": {
-        "min": 0.018,
+        "min": 0.022,
         "max": 0.036
       }
     },
@@ -231,7 +231,7 @@
         "max": 0.07
       },
       "attunement": {
-        "min": 0.0215,
+        "min": 0.026,
         "max": 0.043
       }
     },
@@ -265,7 +265,7 @@
         "max": 9
       },
       "attrPen": {
-        "min": 5.4,
+        "min": 6.5,
         "max": 10.8
       },
       "maxHp": {
@@ -297,7 +297,7 @@
         "max": 0.08
       },
       "attunement": {
-        "min": 0.025,
+        "min": 0.03,
         "max": 0.05
       }
     },
@@ -331,7 +331,7 @@
         "max": 11
       },
       "attrPen": {
-        "min": 6.5,
+        "min": 7.8,
         "max": 13
       },
       "maxHp": {
@@ -355,15 +355,15 @@
         "max": 0.032
       },
       "atkTypeDmg": {
-        "min": 0.032,
-        "max": 0.064
+        "min": 0.031,
+        "max": 0.062
       },
       "mysticDmg": {
         "min": 0.049,
         "max": 0.098
       },
       "attunement": {
-        "min": 0.03,
+        "min": 0.036,
         "max": 0.06
       }
     }
