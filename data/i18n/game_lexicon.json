@@ -1,17 +1,17 @@
 {
   "stCritHeal": {
-    "ja": "会心治癒",
-    "en": "Critical Healing",
+    "ja": "会心治療",
+    "en": "Critical Heal",
     "zh": "会心治疗",
-    "ko": "치명타 치유",
-    "vi": "Gia tăng Hồi phục Hội Tâm"
+    "ko": "회심 치료",
+    "vi": "Hồi phục chí mạng."
   },
   "weaponBonus": {
     "ja": "外功ダメージ強化",
-    "en": "Outer Force DMG Boost",
+    "en": "Physical DMG Bonus",
     "zh": "外功伤害加成",
     "ko": "외공 피해 보너스",
-    "vi": "Gia tăng Sát thương Ngoại công"
+    "vi": "Thêm sát thương ngoại công"
   },
   "globalDmgBoost": {
     "ja": "全ダメージ強化",
@@ -98,8 +98,8 @@
     "vi": "Vật lý"
   },
   "probElem": {
-    "ja": "属性",
-    "en": "Element",
+    "ja": "ステータス",
+    "en": "Attributes",
     "zh": "属性",
     "ko": "속성",
     "vi": "Thuộc tính"
@@ -115,8 +115,8 @@
     "ja": "主武器",
     "en": "Main Weapon",
     "zh": "主武器",
-    "ko": "주무기",
-    "vi": "Vũ khí Chính"
+    "ko": "메인 무기",
+    "vi": "Vũ khí chính"
   },
   "slotSub": {
     "ja": "副武器",
@@ -127,49 +127,49 @@
   },
   "slotHelm": {
     "ja": "冠",
-    "en": "Helm",
+    "en": "Helmet",
     "zh": "冠胄",
     "ko": "투구",
-    "vi": "Mũ Giáp"
+    "vi": "Mũ giáp"
   },
   "slotChest": {
     "ja": "胸当て",
-    "en": "Chest",
+    "en": "Chestpiece",
     "zh": "胸甲",
     "ko": "흉갑",
-    "vi": "Giáp Ngực"
+    "vi": "Giáp ngực"
   },
   "slotLegs": {
     "ja": "膝鎧",
     "en": "Greaves",
-    "zh": "膝甲",
+    "zh": "胫甲",
     "ko": "경갑",
-    "vi": "Giáp Chân"
+    "vi": "Giáp ống chân"
   },
   "slotHands": {
     "ja": "小手",
-    "en": "Gauntlets",
+    "en": "Bracer",
     "zh": "腕甲",
     "ko": "완갑",
-    "vi": "Giáp Tay"
+    "vi": "Giáp tay"
   },
   "slotRing": {
     "ja": "環",
-    "en": "Ring",
+    "en": "Disc",
     "zh": "环",
     "ko": "환",
-    "vi": "Nhẫn"
+    "vi": "Vòng"
   },
   "slotPendant": {
     "ja": "佩び物",
     "en": "Pendant",
     "zh": "佩",
     "ko": "패물",
-    "vi": "Ngọc Bội"
+    "vi": "Trang sức"
   },
   "slotBow": {
     "ja": "弓矢",
-    "en": "Bow",
+    "en": "Bow and Arrow",
     "zh": "弓箭",
     "ko": "화살",
     "vi": "Cung tên"
@@ -183,30 +183,30 @@
   },
   "pathPhys": {
     "ja": "汎用",
-    "en": "Universal",
+    "en": "General",
     "zh": "通用",
-    "ko": "범용",
-    "vi": "Phổ thông"
+    "ko": "일반",
+    "vi": "Chung"
   },
   "penOther": {
-    "ja": "他",
-    "en": "other",
+    "ja": "その他",
+    "en": "Other",
     "zh": "其他",
     "ko": "기타",
-    "vi": "khác"
+    "vi": "Khác"
   },
   "importLabelMainKf": {
     "ja": "主武術",
-    "en": "Main Martial",
-    "zh": "主武术",
+    "en": "Main Martial Arts",
+    "zh": "主武学",
     "ko": "주 무술",
     "vi": "Võ học chính"
   },
   "importLabelSubKf": {
     "ja": "副武術",
-    "en": "Sub Martial",
-    "zh": "副武术",
-    "ko": "부 무술",
+    "en": "Off-hand Martial Arts",
+    "zh": "副武学",
+    "ko": "보조 무술",
     "vi": "Võ học phụ"
   },
   "importArsenalTitle": {
@@ -267,7 +267,7 @@
   },
   "cardItemKongfu": {
     "ja": "武術",
-    "en": "Martial arts",
+    "en": "Martial Arts",
     "zh": "武学",
     "ko": "무술",
     "vi": "Võ học"
@@ -281,7 +281,7 @@
   },
   "cardItemQishu": {
     "ja": "奇術",
-    "en": "Mystic arts",
+    "en": "Mystic Skills",
     "zh": "奇术",
     "ko": "비결",
     "vi": "Kỳ thuật"
@@ -295,9 +295,9 @@
   },
   "importLabelXiuwei": {
     "ja": "総合武力",
-    "en": "Total Power",
+    "en": "Martial Mastery",
     "zh": "武林造诣",
-    "ko": "무림 조예",
-    "vi": "Kết hợp hiện tại"
+    "ko": "무술 조예",
+    "vi": "Thành tựu võ lâm"
   }
 }
