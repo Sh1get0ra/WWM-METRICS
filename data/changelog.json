@@ -1,6 +1,27 @@
 {
-  "current": "2.5.2",
+  "current": "2.5.3",
   "entries": [
+    {
+      "version": "2.5.3",
+      "date": "2026-06-25",
+      "items": [
+        {
+          "featured": true,
+          "ja": "【対応言語を 5 → 12 言語に拡大】 ドイツ語 / スペイン語 / フランス語 / ポルトガル語 (ブラジル) / ロシア語 / タイ語 / 繁體中文 の 7 言語に対応しました。 画面右上の言語切替メニューから選択できます。 計算結果には影響ありません。",
+          "en": "[Language Support: 5 → 12] Added support for German, Spanish, French, Portuguese (Brazil), Russian, Thai, and Traditional Chinese. Switch from the language menu at the top right. No impact on calculations.",
+          "zh": "【支持语言扩展 5 → 12】 新增 德语 / 西班牙语 / 法语 / 葡萄牙语 (巴西) / 俄语 / 泰语 / 繁體中文 7 种语言支持。 可从画面右上的语言切换菜单选择。 不影响计算结果。",
+          "ko": "【지원 언어 5 → 12 확장】 독일어 / 스페인어 / 프랑스어 / 포르투갈어 (브라질) / 러시아어 / 태국어 / 번체 중국어 7 개 언어를 추가 지원합니다. 화면 우측 상단 언어 전환 메뉴에서 선택 가능합니다. 계산 결과에는 영향 없습니다.",
+          "vi": "[Hỗ trợ ngôn ngữ: 5 → 12] Thêm hỗ trợ tiếng Đức, Tây Ban Nha, Pháp, Bồ Đào Nha (Brazil), Nga, Thái và Trung Phồn thể. Chuyển ngôn ngữ từ menu góc trên bên phải. Không ảnh hưởng tính toán.",
+          "de": "[Sprachunterstützung: 5 → 12] Deutsch, Spanisch, Französisch, Portugiesisch (Brasilien), Russisch, Thailändisch und Traditionelles Chinesisch hinzugefügt. Wechseln über das Sprachmenü oben rechts. Keine Auswirkung auf Berechnungen.",
+          "es": "[Soporte de idiomas: 5 → 12] Se añadieron alemán, español, francés, portugués (Brasil), ruso, tailandés y chino tradicional. Cambia desde el menú de idiomas en la esquina superior derecha. Sin impacto en los cálculos.",
+          "fr": "[Prise en charge des langues : 5 → 12] Ajout de l'allemand, l'espagnol, le français, le portugais (Brésil), le russe, le thaï et le chinois traditionnel. Changez depuis le menu de langue en haut à droite. Aucun impact sur les calculs.",
+          "pt_br": "[Suporte de idiomas: 5 → 12] Adicionados alemão, espanhol, francês, português (Brasil), russo, tailandês e chinês tradicional. Alterne pelo menu de idiomas no canto superior direito. Sem impacto nos cálculos.",
+          "ru": "[Поддержка языков: 5 → 12] Добавлены немецкий, испанский, французский, португальский (Бразилия), русский, тайский и традиционный китайский. Переключайте через меню языков в правом верхнем углу. Не влияет на расчёты.",
+          "th": "[รองรับภาษา: 5 → 12] เพิ่มภาษาเยอรมัน สเปน ฝรั่งเศส โปรตุเกส (บราซิล) รัสเซีย ไทย และจีนตัวเต็ม สลับจากเมนูภาษามุมขวาบน ไม่ส่งผลต่อการคำนวณ",
+          "zh_tw": "【支援語言擴展 5 → 12】 新增 德語 / 西班牙語 / 法語 / 葡萄牙語 (巴西) / 俄語 / 泰語 / 繁體中文 7 種語言支援。 可從畫面右上的語言切換選單選擇。 不影響計算結果。"
+        }
+      ]
+    },
     {
       "version": "2.5.2",
       "date": "2026-06-25",
