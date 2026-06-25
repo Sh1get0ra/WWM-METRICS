@@ -48,7 +48,7 @@
     "precision": "Precision", "crit": "Crit", "affinity": "Affinity",
     "allWeaponDmg": "All Martial/PvP/BOSS DMG",
     "swordDmg": "Sword DMG", "spearDmg": "Spear DMG", "moBladeDmg": "Mo Blade DMG",
-    "dualBladesDmg": "Twinblades DMG", "fanDmg": "Fan DMG", "umbrellaDmg": "Umbrella DMG",
+    "dualBladesDmg": "Dual Blades DMG", "fanDmg": "Fan DMG", "umbrellaDmg": "Umbrella DMG",
     "hengBladeDmg": "Heng Blade DMG", "ropeDartDmg": "Rope Dart DMG",
     "fanHealingBoost": "Fan Heal+", "umbrellaHealingBoost": "Umb Heal+",
     "lightAtkDmg": "LA", "heavyAtkDmg": "HA",

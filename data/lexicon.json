@@ -33,7 +33,7 @@
   "weaponLabel": {
     "en": {
       "sword": "Sword", "spear": "Spear", "fan": "Fan", "umbrella": "Umbrella",
-      "mo_blade": "Blade", "dual_blades": "Twinblades", "new_blade": "Blade",
+      "mo_blade": "Blade", "dual_blades": "Dual Blades", "new_blade": "Blade",
       "rope_dart": "Rope Dart", "ropeDart": "Rope Dart", "gauntlet": "Gauntlet"
     }
   }

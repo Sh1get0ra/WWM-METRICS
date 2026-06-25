@@ -20,7 +20,7 @@
     "everspring_umbrella":  { "kongfuId": "20603", "ja": "醉夢の傘", "weaponType": "Umbrella", "path": "bamboocut", "damageStatKey": "umbrellaDmg" },
     "unfettered_rope_dart": { "kongfuId": "20702", "ja": "浮雲の縄", "weaponType": "RopeDart",  "path": "bamboocut", "damageStatKey": "ropeDartDmg" },
     "mortal_rope_dart":     { "kongfuId": "20701", "ja": "浮塵の縄", "weaponType": "RopeDart",  "path": "bamboocut", "damageStatKey": "ropeDartDmg" },
-    "infernal_twinblades":  { "kongfuId": "20501", "ja": "獄炎の双剣", "weaponType": "Twinblades", "path": "bamboocut", "damageStatKey": "twinbladesDmg" }
+    "infernal_twinblades":  { "kongfuId": "20501", "ja": "獄炎の双剣", "weaponType": "Dual Blades", "path": "bamboocut", "damageStatKey": "twinbladesDmg" }
   },
 
   "derivedFormulas": {

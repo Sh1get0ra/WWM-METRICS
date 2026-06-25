@@ -271,7 +271,7 @@
         "formula": "linear_capped"
       }
     ],
-    "description": "獄炎の双剣 (双刃、Infernal Twinblades)。瞬嵐攻撃力 +80~160 (固定) + 速依存 会心率上昇 (cap 6.8%) + 最小瞬嵐依存 瞬嵐貫通上昇 (cap 18.0)。in-game 観測 2026-05-25 (旧 minPhys cap 訂正)。",
+    "description": "獄炎の双剣 (双剣、Dual Blades)。瞬嵐攻撃力 +80~160 (固定) + 速依存 会心率上昇 (cap 6.8%) + 最小瞬嵐依存 瞬嵐貫通上昇 (cap 18.0)。in-game 観測 2026-05-25 (旧 minPhys cap 訂正)。",
     "path": "bamboocut"
   },
   "20601": {
