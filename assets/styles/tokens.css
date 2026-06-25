@@ -97,14 +97,11 @@
      modals/workspace 等の主題 selector は var(--f-display-title) 参照のみで lang 自動追従) */
   --f-display-title: var(--f-display);
 }
-/* ラテン系 = en と同じ Cinzel 統一 (2026-06-25 兄貴指示で 7 言語拡大時 de/es/fr/pt-BR/ru の en 同化、 ru = Cinzel が Cyrillic glyph 無ければ system fallback) */
-html[lang="en"], html[lang="vi"],
-html[lang="de"], html[lang="es"], html[lang="fr"], html[lang="pt-BR"], html[lang="ru"] { --f-display-title: var(--f-latin); }
-/* 中国語 = 簡繁とも display-zh (Kaiti、 大半 glyph 共通) */
-html[lang="zh-CN"], html[lang="zh"], html[lang="zh-TW"] { --f-display-title: var(--f-display-zh); }
+html[lang="en"], html[lang="vi"] { --f-display-title: var(--f-latin); }
+html[lang="zh-CN"], html[lang="zh"] { --f-display-title: var(--f-display-zh); }
 html[lang="ko"] { --f-display-title: var(--f-display-ko); }
-/* タイ語 = ラテン token に Thai glyph なし → system Thai font fallback */
-html[lang="th"] { --f-display-title: 'Sarabun', 'Noto Sans Thai', 'Tahoma', sans-serif; }
+/* 7 言語 (de/es/fr/pt-BR/ru/th/zh-TW) font map = button rollback と連動取下げ (2026-06-25)、
+   button 復活時に再追加予定 */
 
 :root {
   /* Spacing scale (4px base) */
