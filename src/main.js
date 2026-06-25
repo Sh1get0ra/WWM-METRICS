@@ -55,10 +55,12 @@ import './helpers/constants.js';
 import './helpers/state.js';
 
 // ── core (data-store/i18n/helpers-i18n/calc/app/kaisho/export/stats) ─
+// calc.js を data-store.js より先に import 必須 = data-store の getVersion() が window.WWM_DISPLAY_VERSION 参照、
+// 旧順序 (data-store→calc) では DISPLAY 未定義時 fallback 11 で固定 = i18n cache buster 全無効 (2026-06-25 fix)
+import './core/calc.js';
 import './core/data-store.js';
 import './core/i18n.js';
 import './helpers/i18n.js';
-import './core/calc.js';
 import './core/app.js';
 import './core/kaisho-paths.js';
 import './core/export.js';

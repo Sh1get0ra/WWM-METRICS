@@ -7,7 +7,10 @@
   const CATS = ['kongfu', 'xinfa', 'sets', 'stat', 'path', 'skilltype', 'weapontype', 'ui', 'game_lexicon', 'stat_display', 'qishu', 'stat_short', 'skilltype_short', 'kongfu_short'];
   // t() lookup chain: ui (ツール独自) → game_lexicon (ゲーム固有 UI 名) → stat (ステ/affix 真実源) → stat_display (Sidebar 表示 label、 stDisp.* prefix)。
   const T_CHAIN = ['ui', 'game_lexicon', 'stat', 'stat_display'];
-  const VERSION = (typeof window !== 'undefined' && window.WWM_DISPLAY_VERSION) || 11;
+  // 動的 getter 化 (2026-06-25 真因 fix): 旧 const は module 読込時 1 回評価で
+  // main.js import 順序 (data-store.js が calc.js より先) で window.WWM_DISPLAY_VERSION 未定義
+  // → fallback 11 固定 → 全 i18n fetch URL `?v=11` で browser cache HIT = DISPLAY bump 全無効化されてた
+  const getVersion = () => (typeof window !== 'undefined' && window.WWM_DISPLAY_VERSION) || 11;
   // 計算/icon dict (data/*.json) の供給一元化 (P4-mini 2026-06-10)。
   // dictMap の唯一源 = ここ。 window.WWM_* は DataStore が供給する互換 read view (callsite は直読み続行で正式承認)。
   // cache buster は SCORE_VERSION (計算 data) — i18n の DISPLAY_VERSION と独立。
@@ -156,7 +159,7 @@
   function ready() {
     if (readyPromise) return readyPromise;
     const i18nLoad = Promise.all(CATS.map(async (cat) => {
-      const res = await fetch('data/i18n/' + cat + '.json?v=' + VERSION);
+      const res = await fetch('data/i18n/' + cat + '.json?v=' + getVersion());
       if (!res.ok) throw new Error('DataStore: failed to fetch ' + cat + '.json (' + res.status + ')');
       data[cat] = await res.json();
     })).then(() => { _injectPathI18nKeys(); });
