@@ -445,6 +445,8 @@ body.mobile-mode .wwm-lang-dd-pop {
   left: auto;
   width: auto;
   min-width: 150px;
+  /* 12 言語対応 (2026-06-25): mobile viewport 短い時 (= 800px 未満) に 7 button overflow 救済 */
+  max-height: calc(100vh - 100px); overflow-y: auto;
   z-index: 9999;
   background: var(--sumi-1);
   box-shadow: 0 8px 24px rgba(0,0,0,0.6);
