@@ -1,6 +1,26 @@
 {
-  "current": "2.5.1",
+  "current": "2.5.2",
   "entries": [
+    {
+      "version": "2.5.2",
+      "date": "2026-06-25",
+      "items": [
+        {
+          "ja": "【武器種別 表記の精度を向上】 これまで複数の武器種別が同じ「刀」 と表示されていた問題を解消しました。 陌刀 (= mo_blade) と 横刀 (= new_blade) を区別して表示するようになります。 表示のみで計算結果には影響ありません。",
+          "en": "[Weapon Type Labels: Disambiguation] Resolved an issue where multiple weapon types were all shown as «Blade». Mo Blade (mo_blade) and Heng Blade (new_blade) are now displayed distinctly. Visual only — no impact on calculations.",
+          "zh": "【武器种别 表记精度提升】 解决了多种武器种别均显示为「刀」 的问题。 陌刀 (mo_blade) 和 横刀 (new_blade) 现在会分别区分显示。 仅影响显示, 不影响计算结果。",
+          "ko": "【무기 종류 표기 정확도 향상】 여러 무기 종류가 모두 「刀」 로 표시되던 문제를 해결했습니다. 맥도 (mo_blade) 와 횡도 (new_blade) 를 구분하여 표시합니다. 표시만의 문제로 계산 결과에는 영향 없습니다.",
+          "vi": "[Tên loại vũ khí: Phân biệt] Đã khắc phục lỗi nhiều loại vũ khí cùng hiển thị là «Dao». Mo Blade (mo_blade) và Heng Blade (new_blade) giờ hiển thị riêng biệt. Chỉ ảnh hưởng giao diện — không ảnh hưởng tính toán."
+        },
+        {
+          "ja": "【技種別/語彙 表記精度を向上】 一部の技種別 (シールド効果 → シールド効果強化、 鼠 等) と語彙 (通常 → 正常 等) の翻訳精度を改善しました。 計算結果には影響ありません。",
+          "en": "[Skill Type / Lexicon Polish] Improved translations for some skill types (Shield → Shield Boost, Rat, etc.) and lexicon terms (Normal, etc.). No impact on calculations.",
+          "zh": "【技种别/语汇 表记精度提升】 改善了部分技种别 (护盾效果 → 护盾效果增强, 鼠 等) 与语汇 (正常 等) 的翻译精度。 不影响计算结果。",
+          "ko": "【기술 종류/어휘 표기 정확도 향상】 일부 기술 종류 (보호막 효과 → 보호막 효과 증가, 쥐 등) 와 어휘 (정상 등) 의 번역 정확도를 개선했습니다. 계산 결과에는 영향이 없습니다.",
+          "vi": "[Tinh chỉnh loại kỹ năng/Từ vựng] Cải thiện bản dịch cho một số loại kỹ năng (Hộ thuẫn → Hộ thuẫn tăng hiệu quả, Chuột, v.v.) và từ vựng (Bình thường, v.v.). Không ảnh hưởng tính toán."
+        }
+      ]
+    },
     {
       "version": "2.5.1",
       "date": "2026-06-25",
