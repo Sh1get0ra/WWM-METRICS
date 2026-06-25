@@ -820,10 +820,10 @@ function applyImport(data, importedAt, state) {
   if (window.WWMStats && window.WWMSidebar) {
     // Tier 判定完了 (opt best 確定) まで 全操作抑止 gate (close は opt 完了/失敗/watchdog の 3 経路)
     _importGateShow();
-    window.WWMStats.buildStatParams(data, state).then(params => {
+    window.WWMStats.buildStatParams(data, state).then(async params => {
       WWMState.params = params;
       WWMState.roleInfo = data;
-      window.WWMSidebar.render(params);
+      await window.WWMSidebar.render(params);
       if (window.WWMSidebar?.gear) window.WWMSidebar.gear.render(data);
       if (window.WWMSidebar?.xinfa) window.WWMSidebar.xinfa.render(data);
       if (window.WWMSidebar?.qishu) window.WWMSidebar.qishu.render(data);
