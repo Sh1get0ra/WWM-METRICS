@@ -1,6 +1,34 @@
 {
-  "current": "2.5.0",
+  "current": "2.5.1",
   "entries": [
+    {
+      "version": "2.5.1",
+      "date": "2026-06-25",
+      "items": [
+        {
+          "featured": true,
+          "ja": "【再インポート促しバナー 消えない不具合を修正】 一部の方で再インポートを促すバナーが消えず表示され続ける症状を修正しました。 インポート直後の武格指数 基準値 保存処理のタイミングずれが原因。 全ての方の保存済みデータをリフレッシュ対象としていますので、 一度再インポートをお願いします。",
+          "en": "[Re-import Banner: Stuck Display Fix] Fixed an issue where the «please re-import» banner kept showing for some users. Root cause: a timing slip in baseline Score persistence right after import. All users' saved data is targeted for refresh — please re-import once.",
+          "zh": "【重新 import 提示横幅 不消失问题修复】 修复了部分玩家「请重新 import」 横幅持续显示不消失的问题。 原因为 import 直后基础武格指数保存时机错位。 所有玩家保存数据均纳入刷新对象, 请重新 import 一次。",
+          "ko": "【재 import 안내 배너 사라지지 않는 문제 수정】 일부 사용자에서 「재 import 권장」 배너가 계속 표시되는 문제를 수정했습니다. 원인은 import 직후 기준 무격지수 저장 타이밍 어긋남. 모든 사용자의 저장 데이터를 새로 고침 대상으로 설정했으므로, 한 번 재 import 해 주세요.",
+          "vi": "[Banner re-import: Sửa lỗi không biến mất] Sửa lỗi banner «vui lòng re-import» tiếp tục hiển thị với một số người dùng. Nguyên nhân: lệch thời điểm lưu chỉ số Vũ Cách nền sau khi import. Dữ liệu của tất cả người dùng được đặt lại để làm mới — vui lòng re-import một lần."
+        },
+        {
+          "ja": "【小幅画面での装備対照画面 表示不具合を修正】 320px 程度の小さい画面で装備対照 / 心法対照 / 武庫対照 画面のタイトル部分が圧迫されて表示される問題を修正しました。 表示のみで計算結果には影響ありません。",
+          "en": "[Comparison Modal on Narrow Screens: Layout Fix] Fixed a layout issue where the title area of Gear/Xinfa/Arsenal Comparison modals was cramped on ~320px narrow screens. Visual only — no impact on calculations.",
+          "zh": "【小宽屏装备对照画面 显示问题修复】 修复了 320px 左右窄屏下装备对照 / 心法对照 / 武库对照 画面标题区域被挤压显示的问题。 仅影响显示, 不影响计算结果。",
+          "ko": "【좁은 화면 장비 대조 화면 표시 문제 수정】 320px 정도의 좁은 화면에서 장비 대조 / 심법 대조 / 무고 대조 화면의 타이틀 부분이 압축되어 표시되는 문제를 수정했습니다. 표시만의 문제로 계산 결과에는 영향 없습니다.",
+          "vi": "[Sửa giao diện Modal So sánh trên màn hình hẹp] Sửa lỗi vùng tiêu đề của các modal So sánh trang bị/Tâm Pháp/Vũ Khố bị chèn ép trên màn hình hẹp khoảng 320px. Chỉ ảnh hưởng giao diện — không ảnh hưởng tính toán."
+        },
+        {
+          "ja": "【言語別 翻訳精度を向上】 ゲーム内表記との整合を高めるため、 一部のセット名 / 心法名 / 武器種別名の翻訳を更新しました。 計算結果には影響ありません。",
+          "en": "[Localization Polish] Updated translations of some set / Xinfa / weapon type names to better match in-game wording. No impact on calculations.",
+          "zh": "【各语言 翻译精度提升】 为提升与游戏内表记的一致性, 更新了部分套装名 / 心法名 / 武器种别名的翻译。 不影响计算结果。",
+          "ko": "【언어별 번역 정확도 향상】 게임 내 표기와의 일관성을 높이기 위해 일부 세트명 / 심법명 / 무기 종류명 번역을 갱신했습니다. 계산 결과에는 영향이 없습니다.",
+          "vi": "[Tinh chỉnh bản dịch] Cập nhật bản dịch một số tên Bộ / Tâm Pháp / Loại vũ khí để khớp hơn với trong game. Không ảnh hưởng tính toán."
+        }
+      ]
+    },
     {
       "version": "2.5.0",
       "date": "2026-06-24",
@@ -14,7 +42,7 @@
           "vi": "[Hiệu ứng 2 món Bộ — Theo cấp trang bị] Hiệu ứng 2 món bộ (Tỷ lệ chí mạng/Cộng hưởng/Trúng đích, Tấn công ngoại công Min/Max) giờ thay đổi theo cấp trang bị. Trước đây cố định ở giá trị Lv91, gây sai lệch với giá trị thực tế trong game ở trang bị Lv96. Nếu bạn đang trang bị các bộ liên quan ngoài Lv91, chỉ số Vũ Cách sẽ thay đổi (khuyến nghị import lại)."
         },
         {
-          "ja": "【装備最適化 装備Lv UP 込み 提案化】 装備最適化 / ゼロベース推奨 が「装備可能な最大 Lv 装備」 を前提に評価するようになりました。 例: キャラ Lv96 で Lv91 装備中 → Lv96 装備への入替を前提に affix 推奨を提示。 推奨スコアが従来より上振れます (品質ランクは現装備 keep)。",
+          "ja": "【装備最適化 装備Lv UP 込み 提案化】 装備最適化 / ゼロベース推奨 が「装備可能な最大 Lv 装備」 を前提に評価するようになりました。 例: キャラ Lv96 で Lv91 装備中 → Lv96 装備への入替を前提に最適な調律/定音効果を提案。 推奨される武格指数が従来より上振れます (品質ランクは現装備のまま)。",
           "en": "[Optimizer: Level-Up Aware] Equipment Optimizer / Zero-base Recommendation now evaluates assuming the highest gear level your character can equip. Example: Char Lv96 with Lv91 gear → suggestions assume swapping to Lv96 gear before affix tuning. Recommended Score may rise vs. before (gear quality rank kept as-is).",
           "zh": "【装备最适化 装备Lv UP 集成】 装备最适化 / 零基础推荐 现以「角色可装备的最高 Lv」 为前提评估。 例: 角色 Lv96 + Lv91 装备 → 在 affix 推荐前先假设换装到 Lv96 装备。 推荐分数较以往上调 (装备品质保持)。",
           "ko": "【장비 최적화 장비Lv UP 통합】 장비 최적화 / 제로베이스 추천이 「캐릭터가 장착 가능한 최고 Lv」 를 전제로 평가합니다. 예: 캐릭 Lv96 + Lv91 장비 → affix 추천 전에 Lv96 장비 교체를 가정. 추천 점수가 종전보다 상승합니다 (장비 품질 유지).",
