@@ -6,7 +6,7 @@
       "date": "2026-06-25",
       "items": [
         {
-          "ja": "【武器種別 表記の精度を向上】 これまで複数の武器種別が同じ「刀」 と表示されていた問題を解消しました。 陌刀 (= mo_blade) と 横刀 (= new_blade) を区別して表示するようになります。 表示のみで計算結果には影響ありません。",
+          "ja": "【武器種別 表記の精度を向上】 これまで複数の武器種別が同じ「刀」 と表示されていた問題を解消しました。 斬馬刀 と 横刀 を区別して表示するようになります。 表示のみで計算結果には影響ありません。",
           "en": "[Weapon Type Labels: Disambiguation] Resolved an issue where multiple weapon types were all shown as «Blade». Mo Blade (mo_blade) and Heng Blade (new_blade) are now displayed distinctly. Visual only — no impact on calculations.",
           "zh": "【武器种别 表记精度提升】 解决了多种武器种别均显示为「刀」 的问题。 陌刀 (mo_blade) 和 横刀 (new_blade) 现在会分别区分显示。 仅影响显示, 不影响计算结果。",
           "ko": "【무기 종류 표기 정확도 향상】 여러 무기 종류가 모두 「刀」 로 표시되던 문제를 해결했습니다. 맥도 (mo_blade) 와 횡도 (new_blade) 를 구분하여 표시합니다. 표시만의 문제로 계산 결과에는 영향 없습니다.",
