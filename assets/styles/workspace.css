@@ -884,6 +884,8 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
 .wwm-lang-dd-pop {
   position: absolute; top: calc(100% + 8px); right: 0;
   min-width: 150px;
+  /* 12 言語対応で button 数増 (2026-06-25): viewport 短い場合に下端が画面外に出るのを救済 */
+  max-height: calc(100vh - 80px); overflow-y: auto;
   background: var(--sumi-2);
   border: 1px solid var(--gold-deep);
   border-radius: 1px;
