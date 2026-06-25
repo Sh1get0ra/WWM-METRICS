@@ -86,9 +86,9 @@
   "probNormal": {
     "ja": "通常",
     "en": "Normal",
-    "zh": "普伤",
-    "ko": "일반",
-    "vi": "Phổ thông"
+    "zh": "正常",
+    "ko": "정상",
+    "vi": "Bình thường"
   },
   "probPhys": {
     "ja": "物理",
@@ -297,7 +297,7 @@
     "ja": "総合武力",
     "en": "Martial Mastery",
     "zh": "武林造诣",
-    "ko": "무술 조예",
+    "ko": "무림 조예",
     "vi": "Thành tựu võ lâm"
   }
 }

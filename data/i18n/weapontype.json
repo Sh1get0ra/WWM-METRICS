@@ -28,10 +28,10 @@
     "vi": "Dù"
   },
   "mo_blade": {
-    "ja": "刀",
-    "en": "Blade",
-    "zh": "刀",
-    "ko": "도",
+    "ja": "斬馬刀",
+    "en": "Mo Blade",
+    "zh": "陌刀",
+    "ko": "맥도",
     "vi": "Đao Mạc"
   },
   "dual_blades": {
@@ -42,10 +42,10 @@
     "vi": "Song đao"
   },
   "new_blade": {
-    "ja": "刀",
-    "en": "Blade",
-    "zh": "刀",
-    "ko": "도",
+    "ja": "横刀",
+    "en": "Heng Blade",
+    "zh": "横刀",
+    "ko": "횡도",
     "vi": "Hoành đao"
   },
   "rope_dart": {

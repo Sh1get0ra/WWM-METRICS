@@ -31,22 +31,22 @@
     "ja": "軽撃",
     "en": "LA",
     "zh": "强效轻击",
-    "ko": "강력한 약 공격",
-    "vi": "đánh nhẹ mạnh mẽ"
+    "ko": "약공격",
+    "vi": "Đánh nhẹ"
   },
   "rodent": {
     "ja": "鼠",
-    "en": "Rodent",
-    "zh": "鼠鼠",
-    "ko": "쥐 기술",
-    "vi": "Chuột Chuột"
+    "en": "Rat",
+    "zh": "鼠",
+    "ko": "쥐",
+    "vi": "Chuột"
   },
   "shield": {
-    "ja": "シールド効果",
-    "en": "Shield",
+    "ja": "シールド効果強化",
+    "en": "Shield Boost",
     "zh": "护盾增效",
-    "ko": "보호막 효과",
-    "vi": "Hộ thuẫn"
+    "ko": "보호막 효과 증가",
+    "vi": "Hộ thuẫn tăng hiệu quả"
   },
   "healing": {
     "ja": "重撃回復量",
@@ -80,7 +80,7 @@
     "ja": "重撃",
     "en": "HA",
     "zh": "重击",
-    "ko": "중격",
-    "vi": "Đòn mạnh"
+    "ko": "강공격",
+    "vi": "Đánh mạnh"
   }
 }
