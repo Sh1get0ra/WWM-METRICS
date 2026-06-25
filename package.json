@@ -12,7 +12,10 @@
     "vrt:baseline": "node scripts/vrt/snapshot.cjs --baseline",
     "vrt:snap": "node scripts/vrt/snapshot.cjs",
     "vrt:compare": "node scripts/vrt/compare.cjs",
-    "vrt": "node scripts/vrt/snapshot.cjs && node scripts/vrt/compare.cjs"
+    "vrt": "node scripts/vrt/snapshot.cjs && node scripts/vrt/compare.cjs",
+    "regression:fixture": "node scripts/regression-fixture.cjs",
+    "regression:func": "node scripts/regression.mjs",
+    "regression": "node scripts/regression-fixture.cjs && node scripts/regression.mjs && node scripts/vrt/snapshot.cjs && node scripts/vrt/compare.cjs"
   },
   "devDependencies": {
     "opentype.js": "^2.0.0",

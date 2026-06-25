@@ -936,6 +936,11 @@ window.WWMImport = {
   handleHashOnLoad: handleHashOnLoad,
   getLastImport: getLastImportSummary
 };
+// dev mode 限定 = regression test 用 applyImport 直 call ([[role-mock-verify-asset]])。
+// 本番 build (import.meta.env.DEV === false) では一切 expose されない。
+if (import.meta.env?.DEV) {
+  window.WWMImport.__DEV_apply = (data, state) => applyImport(data, Date.now(), state || {});
+}
 // sidebar.js (Edit modal) から statKey → 日本語ラベル参照用
 window._AFFIX_DISPLAY_LABELS = _STAT_LABELS_PROXY;
 // OCR 言語 fallback 用: スクショ言語 ≠ UI 言語の場合に他言語 affix 名で fuzzy match する
