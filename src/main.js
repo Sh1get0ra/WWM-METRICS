@@ -3,6 +3,29 @@
 // 各 module は副作用 (window.WWM* expose) のみで連結、 named export は helpers のみ。
 // 順序入替 = 起動破壊 = 絶対やらない。
 
+// dev mode SW 残骸自動除去 (2026-06-25): 過去 build/preview で登録された SW が
+// dev 中も intercept = 古い module cache 配信 = リロード→ranking.js:53 旧 stack クラッシュ
+// (ハードリロードでのみ消える既知 [[sw-burnin-stale-after-vite-migration]] パターン)。
+// 1 回走れば SW + 全 caches purge → reload で恒久解消。
+if (import.meta.env.DEV && typeof navigator !== 'undefined') {
+  (async () => {
+    try {
+      if ('serviceWorker' in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        if (regs.length) {
+          for (const r of regs) await r.unregister();
+          if (window.caches) {
+            const keys = await caches.keys();
+            for (const k of keys) await caches.delete(k);
+          }
+          console.warn('[WWM dev] stale SW + caches purged → reloading once');
+          location.reload();
+        }
+      }
+    } catch(_) {}
+  })();
+}
+
 // ── CSS (vite が hash 化 + bundle) ─────────────────────────────
 import '../assets/styles/tokens.css';
 import '../assets/styles/animations.css';
