@@ -1213,9 +1213,30 @@
 @media (max-width: 768px) {
   .wwm-enhance-grid { grid-template-columns: 1fr 1fr; }
 }
-.wwm-modal.wwm-modal-square { max-width: 680px; }
+/* modal 幅 = 既存 680px keep (= ja design baseline)。 ラテン拡張言語 (de/ru/th) は内部 text 長を
+   ellipsis + wrap で吸収する方針 ([[いい感じ width]] = 横拡張 hack でなく内部吸収、 2026-06-25 兄貴判定)。 */
+.wwm-modal.wwm-modal-square {
+  width: fit-content;
+  min-width: 380px;
+  max-width: min(680px, 95vw);
+}
 .wwm-modal.wwm-modal-wide,
-.wwm-modal.wwm-modal-square.wwm-modal-wide { max-width: 1100px; }
+.wwm-modal.wwm-modal-square.wwm-modal-wide { max-width: min(1100px, 95vw); }
+/* grid item の min-width: auto default が内部 content 全体 fit 強制 = de 長 text で grid item が
+   widen → overflow。 min-width: 0 で grid item 縮小許可 = ellipsis/wrap 効かせる土台 */
+.wwm-cmp-modal-a .wwm-cmp-grid,
+.wwm-cmp-modal-a .wwm-cmp-grid > *,
+.wwm-cmp-modal-a .wwm-cmp-col,
+.wwm-cmp-modal-a .wwm-cmp-row,
+.wwm-cmp-modal-a .wwm-cmp-row > * { min-width: 0; }
+/* 武備同位 button 等 大型 button の text 長対応 = 2 行 wrap 許可 + 行高調整 */
+.wwm-cmp-modal-a button { white-space: normal; word-wrap: break-word; line-height: 1.2; }
+/* stat 名 / dropdown option の text overflow = ellipsis */
+.wwm-cmp-modal-a .wwm-cmp-row .wwm-cmp-name,
+.wwm-cmp-modal-a .wwm-cmp-stat-select {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .wwm-modal-square {
   position: relative;
   overflow: hidden;
