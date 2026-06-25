@@ -4,328 +4,657 @@
     "en": "Body",
     "zh": "体",
     "ko": "체력",
-    "vi": "Thể"
+    "vi": "Thể",
+    "de": "Körper",
+    "es": "Cuerpo",
+    "fr": "Corps",
+    "pt_br": "Corpo",
+    "ru": "Телосложение",
+    "th": "ร่างกาย",
+    "zh_tw": "體"
   },
   "momentum": {
     "ja": "会",
     "en": "Momentum",
     "zh": "势",
     "ko": "기세",
-    "vi": "Thế"
+    "vi": "Thế",
+    "de": "Schwung",
+    "es": "Impulso",
+    "fr": "Élan",
+    "pt_br": "Impulso",
+    "ru": "Импульс",
+    "th": "พลังท่า",
+    "zh_tw": "勢"
   },
   "agility": {
     "ja": "速",
     "en": "Agility",
     "zh": "敏",
     "ko": "민첩",
-    "vi": "Nhanh nhẹn"
+    "vi": "Nhanh nhẹn",
+    "de": "Beweglichkeit",
+    "es": "Agilidad",
+    "fr": "Agilité",
+    "pt_br": "Agilidade",
+    "ru": "Ловкость",
+    "th": "ความไว",
+    "zh_tw": "敏"
   },
   "power": {
     "ja": "力",
     "en": "Power",
     "zh": "劲",
     "ko": "내공",
-    "vi": "Sức mạnh"
+    "vi": "Sức mạnh",
+    "de": "Kraft",
+    "es": "Poder",
+    "fr": "Puissance",
+    "pt_br": "Poder",
+    "ru": "Сила",
+    "th": "พลัง",
+    "zh_tw": "勁"
   },
   "defense": {
     "ja": "防",
     "en": "Defense",
     "zh": "御",
     "ko": "방어",
-    "vi": "Ngự"
+    "vi": "Ngự",
+    "de": "Verteidigung",
+    "es": "Defensa",
+    "fr": "Défense",
+    "pt_br": "Defesa",
+    "ru": "Защита",
+    "th": "ควบคุม",
+    "zh_tw": "御"
   },
   "maxHp": {
     "ja": "気血最大値",
     "en": "Max HP",
     "zh": "气血最大值",
     "ko": "기혈 최대치",
-    "vi": "Giá trị máu tối đa"
+    "vi": "Giá trị máu tối đa",
+    "de": "Maximale HP",
+    "es": "Vida Máxima",
+    "fr": "PV Max",
+    "pt_br": "HP Máximo",
+    "ru": "Макс. HP",
+    "th": "ค่าพลังชีวิตสูงสุด",
+    "zh_tw": "氣血最大值"
   },
   "phys": {
     "ja": "外功",
     "en": "Physical",
     "zh": "外功",
     "ko": "외공",
-    "vi": "Ngoại công"
+    "vi": "Ngoại công",
+    "de": "Physisch",
+    "es": "Físico",
+    "fr": "Physique",
+    "pt_br": "Físico",
+    "ru": "Физический",
+    "th": "พลังภายนอก",
+    "zh_tw": "外功"
   },
   "minPhys": {
     "ja": "最小外功攻撃",
     "en": "Min Physical Attack",
     "zh": "最小外功攻击",
     "ko": "최소 외공 공격",
-    "vi": "Tấn công ngoại công nhỏ nhất"
+    "vi": "Tấn công ngoại công nhỏ nhất",
+    "de": "Min. physischer Angriff",
+    "es": "Ataque Físico Mínimo",
+    "fr": "Attaque physique minimale",
+    "pt_br": "Ataque Físico Mínimo",
+    "ru": "Мин. физ. атака",
+    "th": "การโจมตีกายภาพขั้นต่ำ",
+    "zh_tw": "最小外功攻擊"
   },
   "maxPhys": {
     "ja": "最大外功攻撃",
     "en": "Max Physical Attack",
     "zh": "最大外功攻击",
     "ko": "최대 외공 공격",
-    "vi": "Tấn công ngoại công lớn nhất"
+    "vi": "Tấn công ngoại công lớn nhất",
+    "de": "Max. physischer Angriff",
+    "es": "Ataque Físico Máximo",
+    "fr": "Attaque physique maximale",
+    "pt_br": "Ataque Físico Máximo",
+    "ru": "Макс. физ. атака",
+    "th": "การโจมตีกายภาพสูงสุด",
+    "zh_tw": "最大外功攻擊"
   },
   "physDef": {
     "ja": "外功防御力強化",
     "en": "Physical Defense",
     "zh": "外功防御",
     "ko": "외공 방어력",
-    "vi": "Phòng thủ ngoại công"
+    "vi": "Phòng thủ ngoại công",
+    "de": "Physische Verteidigung",
+    "es": "Defensa Física",
+    "fr": "Défense physique",
+    "pt_br": "Defesa Física",
+    "ru": "Физическая защита",
+    "th": "ป้องกันกายภาพ",
+    "zh_tw": "外功防禦"
   },
   "physPen": {
     "ja": "外功貫通",
     "en": "Physical Penetration",
     "zh": "外功穿透",
     "ko": "외공 관통",
-    "vi": "Xuyên phá ngoại công"
+    "vi": "Xuyên phá ngoại công",
+    "de": "Physische Durchdringung",
+    "es": "Penetración Física",
+    "fr": "Pénétration Physique",
+    "pt_br": "Penetração Física",
+    "ru": "Физическое проникновение",
+    "th": "การเจาะทะลุพลังภายนอก",
+    "zh_tw": "外功穿透"
   },
   "voidPen": {
     "ja": "無相貫通",
     "en": "Formless Penetration",
     "zh": "无相穿透",
     "ko": "무상 관통",
-    "vi": "Xuyên thấu vô hình"
+    "vi": "Xuyên thấu vô hình",
+    "de": "Formlose Durchdringung",
+    "es": "Penetración Sin Forma",
+    "fr": "Pénétration Informe",
+    "pt_br": "Penetração Sem Forma",
+    "ru": "Проникновение Безформенного",
+    "th": "การทะลุทะลวงไร้รูปร่าง",
+    "zh_tw": "無相穿透"
   },
   "physResist": {
     "ja": "外功耐性",
     "en": "Physical Resistance",
     "zh": "外功抗性",
     "ko": "외공 저항",
-    "vi": "Kháng ngoại công"
+    "vi": "Kháng ngoại công",
+    "de": "Physischer Widerstand",
+    "es": "Resistencia Física",
+    "fr": "Résistance physique",
+    "pt_br": "Resistência Física",
+    "ru": "Физическое сопротивление",
+    "th": "ความต้านทานพลังภายนอก",
+    "zh_tw": "外功抗性"
   },
   "precision": {
     "ja": "命中率",
     "en": "Precision Rate",
     "zh": "精准率",
     "ko": "정확도",
-    "vi": "Tỷ lệ chính xác"
+    "vi": "Tỷ lệ chính xác",
+    "de": "Präzisionsrate",
+    "es": "Tasa de Precisión",
+    "fr": "Taux de Précision",
+    "pt_br": "Taxa de Precisão",
+    "ru": "Точность",
+    "th": "ความแม่นยำ",
+    "zh_tw": "精準率"
   },
   "crit": {
     "ja": "会心率",
     "en": "Critical Rate",
     "zh": "会心率",
     "ko": "치명타 확률",
-    "vi": "Tỷ lệ chí mạng"
+    "vi": "Tỷ lệ chí mạng",
+    "de": "Kritische Trefferrate",
+    "es": "Tasa de Crítico",
+    "fr": "Taux de Critique",
+    "pt_br": "Taxa Crítica",
+    "ru": "Шанс критического удара",
+    "th": "อัตราคริติคอล",
+    "zh_tw": "會心率"
   },
   "addCritRate": {
     "ja": "付加会心率",
     "en": "Direct Critical Rate",
     "zh": "直接会心率",
     "ko": "추가 치명타 확률",
-    "vi": "Tỷ lệ chí mạng trực tiếp"
+    "vi": "Tỷ lệ chí mạng trực tiếp",
+    "de": "Direkte kritische Trefferrate",
+    "es": "Tasa de Crítico Directo",
+    "fr": "Taux de Critique Direct",
+    "pt_br": "Taxa Crítica Direta",
+    "ru": "Прямой показатель крита",
+    "th": "อัตราคริติคอลโดยตรง",
+    "zh_tw": "直接會心率"
   },
   "critBoost": {
     "ja": "会心攻撃強化",
     "en": "Critical DMG Bonus",
     "zh": "会心伤害加成",
     "ko": "치명타 피해 보너스",
-    "vi": "Thêm sát thương chí mạng"
+    "vi": "Thêm sát thương chí mạng",
+    "de": "Kritischer Schadensbonus",
+    "es": "Bonus de Daño Crítico",
+    "fr": "Bonus de Dégâts Critiques",
+    "pt_br": "Bônus de Dano Crítico",
+    "ru": "Бонус к критическому урону",
+    "th": "โบนัสความเสียหายคริติคอล",
+    "zh_tw": "會心傷害加成"
   },
   "affinity": {
     "ja": "会意率",
     "en": "Affinity Rate",
     "zh": "会意率",
     "ko": "각성 확률",
-    "vi": "Tỷ lệ hiểu ý"
+    "vi": "Tỷ lệ hiểu ý",
+    "de": "Affinitätsrate",
+    "es": "Tasa de Afinidad",
+    "fr": "Taux d'Affinité",
+    "pt_br": "Taxa de Afinidade",
+    "ru": "Шанс сродства",
+    "th": "อัตราเข้าใจ",
+    "zh_tw": "會意率"
   },
   "addSympathyRate": {
     "ja": "付加会意率",
     "en": "Direct Affinity Rate",
     "zh": "直接会意率",
     "ko": "추가 각성 확률",
-    "vi": "Tỷ lệ hiểu ý trực tiếp"
+    "vi": "Tỷ lệ hiểu ý trực tiếp",
+    "de": "Direkte Affinitätsrate",
+    "es": "Tasa de Afinidad Directa",
+    "fr": "Taux d'Affinité Directe",
+    "pt_br": "Taxa de Afinidade Direta",
+    "ru": "Прямой показатель родства",
+    "th": "อัตราเข้าใจโดยตรง",
+    "zh_tw": "直接會意率"
   },
   "sympathyBoost": {
     "ja": "会意攻撃強化",
     "en": "Affinity DMG Bonus",
     "zh": "会意伤害加成",
     "ko": "각성 피해 보너스",
-    "vi": "Thêm sát thương hiểu ý"
+    "vi": "Thêm sát thương hiểu ý",
+    "de": "Affinitäts-Schadensbonus",
+    "es": "Bonificación de Daño por Afinidad",
+    "fr": "Bonus de Dégâts d'Affinité",
+    "pt_br": "Bônus de Dano de Afinidade",
+    "ru": "Бонус к урону от родства",
+    "th": "โบนัสความเสียหายเข้าใจ",
+    "zh_tw": "會意傷害加成"
   },
   "elemAtkBoost": {
     "ja": "属性攻撃強化",
     "en": "Attribute Attack DMG Bonus",
     "zh": "属攻伤害加成",
     "ko": "속성 공격 피해 보너스",
-    "vi": "Thêm sát thương thuộc tính công"
+    "vi": "Thêm sát thương thuộc tính công",
+    "de": "Attributangriff-Schadensbonus",
+    "es": "Bonificación de Daño de Ataque de Atributo",
+    "fr": "Bonus de dégâts d'attaque d'attribut",
+    "pt_br": "Bônus de Dano de Ataque de Atributo",
+    "ru": "Бонус к урону от атаки атрибута",
+    "th": "โบนัสความเสียหายพลังธาตุ",
+    "zh_tw": "屬攻傷害加成"
   },
   "allWeaponDmg": {
     "ja": "全武学/PvP/BOSSダメ",
     "en": "All Martial/PvP/BOSS DMG",
     "zh": "全武学/PvP/BOSS增效",
     "ko": "모든 무술/PvP/BOSS 피해",
-    "vi": "Tăng hiệu quả toàn bộ võ học"
+    "vi": "Tăng hiệu quả toàn bộ võ học",
+    "de": "All Martial/PvP/BOSS DMG",
+    "es": "All Martial/PvP/BOSS DMG",
+    "fr": "All Martial/PvP/BOSS DMG",
+    "pt_br": "All Martial/PvP/BOSS DMG",
+    "ru": "All Martial/PvP/BOSS DMG",
+    "th": "All Martial/PvP/BOSS DMG",
+    "zh_tw": "All Martial/PvP/BOSS DMG"
   },
   "specMartialBoost": {
     "ja": "指定武術効果強化",
     "en": "Specified Weapon Martial Art Boost",
     "zh": "指定武学增效",
     "ko": "특정 무술 효과 증가",
-    "vi": "Tăng hiệu quả võ học được chỉ định"
+    "vi": "Tăng hiệu quả võ học được chỉ định",
+    "de": "Spezieller Waffenkampfkunst-Boost",
+    "es": "Mejora de Arte Marcial con Arma Específica",
+    "fr": "Amélioration d'Art Martial d'Arme Spécifique",
+    "pt_br": "Aprimoramento de Arte Marcial de Arma Especificada",
+    "ru": "Усиление боевого искусства для указанного оружия",
+    "th": "เพิ่มประสิทธิภาพของศิลปะการต่อสู้ที่กำหนด",
+    "zh_tw": "指定武學增效"
   },
   "swordDmg": {
     "ja": "剣武学ダメージ増加",
     "en": "Art of Sword DMG Boost",
     "zh": "剑武学增伤",
     "ko": "검 무술 피해 증가",
-    "vi": "Tăng sát thương Võ học Kiếm"
+    "vi": "Tăng sát thương Võ học Kiếm",
+    "de": "Schwertkunst-Schadensbonus",
+    "es": "Potenciador de Daño del Arte de la Espada",
+    "fr": "Bonus de Dégâts de l'Art de l'Épée",
+    "pt_br": "Bônus de Dano da Arte da Espada",
+    "ru": "Искусство Увеличения Урона Мечом",
+    "th": "เพิ่มความเสียหายศิลปะการต่อสู้ดาบ",
+    "zh_tw": "劍武學增傷"
   },
   "spearDmg": {
     "ja": "槍武学ダメージ増加",
     "en": "Art of Spear DMG Boost",
     "zh": "枪武学增伤",
     "ko": "창 무술 피해 증가",
-    "vi": "Tăng sát thương Võ học Súng"
+    "vi": "Tăng sát thương Võ học Súng",
+    "de": "Speerkunst-Schadensbonus",
+    "es": "Potenciador de Daño del Arte de la Lanza",
+    "fr": "Bonus de Dégâts de l'Art de la Lance",
+    "pt_br": "Bônus de Dano da Arte da Lança",
+    "ru": "Усиление урона копьем",
+    "th": "เพิ่มความเสียหายศิลปะการต่อสู้หอก",
+    "zh_tw": "槍武學增傷"
   },
   "moBladeDmg": {
     "ja": "斬馬刀武学ダメージ増加",
     "en": "Art of Mo Blade DMG Boost",
     "zh": "陌刀武学增伤",
     "ko": "맥도 무술 피해 증가",
-    "vi": "Tăng sát thương Võ học Đao Mạc"
+    "vi": "Tăng sát thương Võ học Đao Mạc",
+    "de": "Mo-Klingen-Kunst-Schadensbonus",
+    "es": "Potenciador de Daño del Arte de la Espada Mo",
+    "fr": "Bonus de Dégâts de l'Art de la Lame Mo",
+    "pt_br": "Arte da Lâmina Mo - Aumento de Dano",
+    "ru": "Искусство Увеличения Урона Мечом Мо",
+    "th": "เพิ่มความเสียหายศิลปะการต่อสู้ดาบใหญ่",
+    "zh_tw": "陌刀武學增傷"
   },
   "dualBladesDmg": {
     "ja": "双剣武学ダメージ増加",
     "en": "Art of Dual Blades DMG Boost",
     "zh": "双刀武学增伤",
     "ko": "쌍도 무술 피해 증가",
-    "vi": "Tăng sát thương Võ học Song đao"
+    "vi": "Tăng sát thương Võ học Song đao",
+    "de": "Doppelklingen-Kunst-Schadensbonus",
+    "es": "Potenciador de Daño del Arte de las Espadas Gemelas",
+    "fr": "Bonus de Dégâts de l'Art des Lames Jumelles",
+    "pt_br": "Arte das Lâminas Duplas - Aumento de Dano",
+    "ru": "Усиление урона парными клинками",
+    "th": "เพิ่มความเสียหายศิลปะการต่อสู้ดาบคู่",
+    "zh_tw": "雙刀武學增傷"
   },
   "fanDmg": {
     "ja": "扇武術効果強化",
     "en": "Art of Fan Boost",
     "zh": "扇武学增效",
     "ko": "부채 무술 효과 증가",
-    "vi": "Tăng hiệu quả võ học quạt"
+    "vi": "Tăng hiệu quả võ học quạt",
+    "de": "Kunst des Fan-Boosts",
+    "es": "Arte de Refuerzo con Fan",
+    "fr": "Art du Fan - Augmentation",
+    "pt_br": "Arte do Impulso do Fan",
+    "ru": "Искусство веера",
+    "th": "เพิ่มประสิทธิภาพศิลปะการต่อสู้พัด",
+    "zh_tw": "扇武學增效"
   },
   "umbrellaDmg": {
     "ja": "傘武術効果強化",
     "en": "Art of Umbrella Boost",
     "zh": "伞武学增效",
     "ko": "우산 무술 효과 증가",
-    "vi": "Võ học dù tăng hiệu quả"
+    "vi": "Võ học dù tăng hiệu quả",
+    "de": "Schirmkunst-Bonus",
+    "es": "Arte de Sombrilla: Aumento",
+    "fr": "Art du Parapluie - Augmentation",
+    "pt_br": "Arte do Impulso do Guarda-chuva",
+    "ru": "Искусство Усиления Зонтика",
+    "th": "ร่มศิลปะการต่อสู้เพิ่มประสิทธิภาพ",
+    "zh_tw": "傘武學增效"
   },
   "hengBladeDmg": {
     "ja": "横刀武術ダメージ増加",
     "en": "Art of Heng Blade DMG Boost",
     "zh": "横刀武学增伤",
     "ko": "횡도 무술 피해 증가",
-    "vi": "Hoành đao võ học tăng sát thương"
+    "vi": "Hoành đao võ học tăng sát thương",
+    "de": "Kunst der Heng-Klinge - Schadensbonus",
+    "es": "Arte de la Hoja Heng - Aumento de Daño",
+    "fr": "Art de la Lame Heng - Augmentation des Dégâts",
+    "pt_br": "Aumento de Dano da Arte da Lâmina Heng",
+    "ru": "Искусство Увеличения Урона Мечом Хэн",
+    "th": "ดาบขวางศิลปะการต่อสู้เพิ่มความเสียหาย",
+    "zh_tw": "橫刀武學增傷"
   },
   "gauntletDmg": {
     "ja": "手甲武術ダメージ増加",
     "en": "Gauntlets Martial Art DMG Boost",
     "zh": "手甲武学增伤",
     "ko": "권갑 무술 피해 증가",
-    "vi": "Găng tay Võ học Tăng sát thương"
+    "vi": "Găng tay Võ học Tăng sát thương",
+    "de": "Panzerhandschuhe Kampfkunst Schadenssteigerung",
+    "es": "Impulso de Daño de Arte Marcial de Guanteletes",
+    "fr": "Boost de dégâts d'Art Martial des Gantelets",
+    "pt_br": "Aumento de Dano de Arte Marcial de Manoplas",
+    "ru": "Усиление урона боевым искусством Перчаток",
+    "th": "เพิ่มความเสียหายศิลปะการต่อสู้สนับมือ",
+    "zh_tw": "手甲武學增傷"
   },
   "ropeDartDmg": {
     "ja": "縄鏢武学ダメージ増加",
     "en": "Art of Rope Dart DMG Boost",
     "zh": "绳镖武学增伤",
     "ko": "승표 무술 피해 증가",
-    "vi": "Tăng sát thương Võ học Dây phi tiêu"
+    "vi": "Tăng sát thương Võ học Dây phi tiêu",
+    "de": "Seildolch-Kunst-Schadensbonus",
+    "es": "Potenciador de Daño del Arte del Dardo con Cuerda",
+    "fr": "Bonus de Dégâts de l'Art du Dard-Corde",
+    "pt_br": "Arte do Dardo de Corda - Aumento de Dano",
+    "ru": "Усиление урона веревочным дротиком",
+    "th": "เพิ่มความเสียหายศิลปะการต่อสู้เชือกปลายแหลม",
+    "zh_tw": "繩鏢武學增傷"
   },
   "lightAtkDmg": {
     "ja": "軽撃ダメージ増加",
     "en": "Light Attack DMG Boost",
     "zh": "轻击增伤",
     "ko": "약공격 피해 증가",
-    "vi": "Đánh nhẹ Tăng sát thương"
+    "vi": "Đánh nhẹ Tăng sát thương",
+    "de": "Leichter Angriff Schadensbonus",
+    "es": "Aumento de Daño de Ataque Ligero",
+    "fr": "Bonus de Dégâts d'Attaque Légère",
+    "pt_br": "Aumento de Dano de Ataque Leve",
+    "ru": "Увеличение урона от Легкой атаки",
+    "th": "โจมตีเบาเพิ่มความเสียหาย",
+    "zh_tw": "輕擊增傷"
   },
   "heavyAtkDmg": {
     "ja": "重撃ダメ強化",
     "en": "HA",
     "zh": "重击增伤",
     "ko": "중격 피해 강화",
-    "vi": "Gia tăng Sát thương Đòn mạnh"
+    "vi": "Gia tăng Sát thương Đòn mạnh",
+    "de": "HA",
+    "es": "HA",
+    "fr": "HA",
+    "pt_br": "HA",
+    "ru": "HA",
+    "th": "HA",
+    "zh_tw": "HA"
   },
   "airborneLightAtkDmg": {
     "ja": "空中軽撃ダメージ",
     "en": "Airborne Light Attack DMG Boost",
     "zh": "空中轻击增伤",
     "ko": "공중 약공격 피해 증가",
-    "vi": "Tăng sát thương Đánh nhẹ trên không"
+    "vi": "Tăng sát thương Đánh nhẹ trên không",
+    "de": "Luftangriff Leichter Angriff Schadensbonus",
+    "es": "Aumento de daño de ataque ligero en el aire",
+    "fr": "Bonus de dégâts d'attaque légère aérienne",
+    "pt_br": "Aumento de Dano de Ataque Leve no Ar",
+    "ru": "Увеличение урона воздушной легкой атаки",
+    "th": "เพิ่มความเสียหายโจมตีเบาในอากาศ",
+    "zh_tw": "空中輕擊增傷"
   },
   "jumpStrikeDmg": {
     "ja": "跳躍撃ダメ強化",
     "en": "Jump Strike",
     "zh": "跃击增伤",
     "ko": "도약격 피해 강화",
-    "vi": "Gia tăng Sát thương đòn nhảy"
+    "vi": "Gia tăng Sát thương đòn nhảy",
+    "de": "Jump Strike",
+    "es": "Jump Strike",
+    "fr": "Jump Strike",
+    "pt_br": "Jump Strike",
+    "ru": "Jump Strike",
+    "th": "Jump Strike",
+    "zh_tw": "Jump Strike"
   },
   "dualWeaponSkillDmg": {
     "ja": "双武器技ダメ強化",
     "en": "Dual Skill",
     "zh": "双武器技增伤",
     "ko": "쌍무기 기술 피해 강화",
-    "vi": "Gia tăng Sát thương kỹ năng song vũ khí"
+    "vi": "Gia tăng Sát thương kỹ năng song vũ khí",
+    "de": "Dual Skill",
+    "es": "Dual Skill",
+    "fr": "Dual Skill",
+    "pt_br": "Dual Skill",
+    "ru": "Dual Skill",
+    "th": "Dual Skill",
+    "zh_tw": "Dual Skill"
   },
   "executionDmg": {
     "ja": "処決ダメージ増加",
     "en": "Execution DMG Boost",
     "zh": "处决增伤",
     "ko": "처형 피해 증가",
-    "vi": "Tăng sát thương Xử quyết"
+    "vi": "Tăng sát thương Xử quyết",
+    "de": "Vollstreckung Schadensbonus",
+    "es": "Aumento de daño de ejecución",
+    "fr": "Bonus de dégâts d'exécution",
+    "pt_br": "Aumento de Dano de Execução",
+    "ru": "Увеличение урона при исполнении",
+    "th": "เพิ่มความเสียหายปลิดชีพ",
+    "zh_tw": "處決增傷"
   },
   "dashDmg": {
     "ja": "突進ダメ強化",
     "en": "Dash DMG",
     "zh": "冲刺增伤",
     "ko": "돌진 피해 강화",
-    "vi": "Gia tăng Sát thương Đột kích"
+    "vi": "Gia tăng Sát thương Đột kích",
+    "de": "Dash DMG",
+    "es": "Dash DMG",
+    "fr": "Dash DMG",
+    "pt_br": "Dash DMG",
+    "ru": "Dash DMG",
+    "th": "Dash DMG",
+    "zh_tw": "Dash DMG"
   },
   "bossDmg": {
     "ja": "首領に与えるダメージ増加",
     "en": "Combat Boost Against Boss Units",
     "zh": "对首领单位增伤",
     "ko": "BOSS 유닛 피해 증가",
-    "vi": "Tăng sát thương đối với đơn vị thủ lĩnh"
+    "vi": "Tăng sát thương đối với đơn vị thủ lĩnh",
+    "de": "Kampfsteigerung gegen Boss-Einheiten",
+    "es": "Impulso de Combate contra Unidades de Jefe",
+    "fr": "Boost de Combat contre les Unités Boss",
+    "pt_br": "Aumento de Combate contra Unidades de Chefe",
+    "ru": "Усиление в Бою против Боссов",
+    "th": "เพิ่มความเสียหายต่อหน่วยหัวหน้า",
+    "zh_tw": "對首領單位增傷"
   },
   "playerUnitDmg": {
     "ja": "PvPダメージ",
     "en": "PvP DMG",
     "zh": "对玩家单位增伤",
     "ko": "플레이어 유닛에 대한 효과 증가",
-    "vi": "Tăng sát thương đối với đơn vị người chơi"
+    "vi": "Tăng sát thương đối với đơn vị người chơi",
+    "de": "PvP DMG",
+    "es": "PvP DMG",
+    "fr": "PvP DMG",
+    "pt_br": "PvP DMG",
+    "ru": "PvP DMG",
+    "th": "PvP DMG",
+    "zh_tw": "PvP DMG"
   },
   "stMysticDmg": {
     "ja": "単体系奇術ダメージ増加",
     "en": "Single-Target Mystic Skill DMG Boost",
     "zh": "单体类奇术增伤",
     "ko": "단일류 비결 피해 증가",
-    "vi": "Tăng sát thương kỳ thuật đơn mục tiêu"
+    "vi": "Tăng sát thương kỳ thuật đơn mục tiêu",
+    "de": "Einzelziel Mystischer Fertigkeit Schadensbonus",
+    "es": "Potenciador de Daño de Habilidad Mística de Objetivo Único",
+    "fr": "Bonus de dégâts des compétences mystiques à cible unique",
+    "pt_br": "Aumento de Dano de Habilidade Mística em Alvo Único",
+    "ru": "Увеличение урона от мистического умения по одной цели",
+    "th": "เพิ่มความเสียหายศาสตร์ลึกลับประเภทเป้าหมายเดี่ยว",
+    "zh_tw": "單體類奇術增傷"
   },
   "stBurstMysticDmg": {
     "ja": "単体爆発系奇術ダメージ増加",
     "en": "Single-target Burst Mystic Skill DMG Boost",
     "zh": "单体爆发类奇术增伤",
     "ko": "단일 폭발류 비결 피해 증가",
-    "vi": "Tăng sát thương Kỳ thuật loại bùng nổ Đơn mục tiêu"
+    "vi": "Tăng sát thương Kỳ thuật loại bùng nổ Đơn mục tiêu",
+    "de": "Einzelziel-Burst Mystischer Fertigkeit Schadensbonus",
+    "es": "Aumento de daño de habilidad mística de ráfaga a un objetivo",
+    "fr": "Bonus de Dégâts de Compétence Mystique d'Explosion à Cible Unique",
+    "pt_br": "Aumento de Dano de Habilidade Mística de Explosão em Alvo Único",
+    "ru": "Увеличение урона одиночного взрывного мистического навыка",
+    "th": "เพิ่มความเสียหายศาสตร์ลึกลับประเภทเป้าหมายเดี่ยวที่ระเบิด",
+    "zh_tw": "單體爆發類奇術增傷"
   },
   "stControlMysticDmg": {
     "ja": "単体制御系奇術ダメージ増加",
     "en": "Single-target Control Mystic Skill DMG Boost",
     "zh": "单体控制类奇术增伤",
     "ko": "단일 제어류 비결 피해 증가",
-    "vi": "Tăng sát thương Kỳ thuật loại khống chế Đơn mục tiêu"
+    "vi": "Tăng sát thương Kỳ thuật loại khống chế Đơn mục tiêu",
+    "de": "Einzelziel-Kontrolle Mystischer Fertigkeit Schadensbonus",
+    "es": "Aumento de daño de habilidad mística de control a un objetivo",
+    "fr": "Bonus de dégâts des compétences mystiques de contrôle à cible unique",
+    "pt_br": "Aumento de Dano de Habilidade Mística de Controle em Alvo Único",
+    "ru": "Увеличение урона одиночного контролирующего мистического навыка",
+    "th": "เพิ่มความเสียหายศาสตร์ลึกลับประเภทเป้าหมายเดี่ยวที่ควบคุม",
+    "zh_tw": "單體控制類奇術增傷"
   },
   "areaMysticDmg": {
     "ja": "範囲系奇術ダメージ増加",
     "en": "Area Mystic Skill DMG Boost",
     "zh": "群体类奇术增伤",
     "ko": "단체류 비결 피해 증가",
-    "vi": "Tăng sát thương kỳ thuật đa mục tiêu"
+    "vi": "Tăng sát thương kỳ thuật đa mục tiêu",
+    "de": "Bereich Mystischer Fertigkeit Schadensbonus",
+    "es": "Potenciador de Daño de Habilidad Mística de Área",
+    "fr": "Bonus de Dégâts des Compétences Mystiques de Zone",
+    "pt_br": "Aumento de Dano de Habilidade Mística em Área",
+    "ru": "Увеличение урона мистических навыков области",
+    "th": "เพิ่มความเสียหายศาสตร์ลึกลับประเภทเป้าหมายกลุ่ม",
+    "zh_tw": "群體類奇術增傷"
   },
   "areaDmgMysticDmg": {
     "ja": "範囲攻撃系奇術ダメージ増加",
     "en": "Area DMG Mystic Skill DMG Boost",
     "zh": "群体伤害类奇术增伤",
     "ko": "단체 피해류 비결 피해 증가",
-    "vi": "Tăng sát thương Kỳ thuật loại sát thương Đa mục tiêu"
+    "vi": "Tăng sát thương Kỳ thuật loại sát thương Đa mục tiêu",
+    "de": "Bereichsschaden Mystischer Fertigkeit Schadensbonus",
+    "es": "Aumento de daño de habilidad mística de área",
+    "fr": "Bonus de Dégâts de Compétence Mystique de Zone",
+    "pt_br": "Aumento de Dano de Habilidade Mística de Dano em Área",
+    "ru": "Увеличение урона от мистического навыка по области",
+    "th": "เพิ่มความเสียหายศาสตร์ลึกลับประเภทเป้าหมายกลุ่มที่สร้างความเสียหาย",
+    "zh_tw": "群體傷害類奇術增傷"
   },
   "areaDebuffMysticDmg": {
     "ja": "範囲状態異常系奇術ダメージ増加",
     "en": "Area Debuff Mystic Skill DMG Boost",
     "zh": "群体异常类奇术增伤",
     "ko": "단체 이상류 비결 피해 증가",
-    "vi": "Tăng sát thương Kỳ thuật loại bất thường Đa mục tiêu"
+    "vi": "Tăng sát thương Kỳ thuật loại bất thường Đa mục tiêu",
+    "de": "Bereichs-Debuff Mystischer Fertigkeit Schadensbonus",
+    "es": "Aumento de Daño en Habilidad Mística de Debuff en Área",
+    "fr": "Augmentation des dégâts des compétences mystiques d'affaiblissement de zone",
+    "pt_br": "Aumento de Dano de Habilidade Mística de Debuff em Área",
+    "ru": "Увеличение урона от мистического навыка ослабления по области",
+    "th": "เพิ่มความเสียหายศาสตร์ลึกลับประเภทเป้าหมายกลุ่มที่ผิดปกติ",
+    "zh_tw": "群體異常類奇術增傷"
   }
 }

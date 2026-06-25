@@ -57,7 +57,10 @@ function setLang(lang) {
   // DataStore に lang 同期 (window.T Proxy が DataStore.t() 委譲する前提)
   if (window.WWM_DS && typeof window.WWM_DS.setLang === 'function') window.WWM_DS.setLang(lang);
   // 旧: T = TRANSLATIONS[lang] / window.T = T → i18n.js Proxy で透過化、 ここでの代入は不要
-  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang === 'ko' ? 'ko' : lang;
+  // BCP-47 lang tag = ツール lang コードと差異あるもののみ map (= zh/zh_tw/pt_br)
+  document.documentElement.lang = ({
+    zh: 'zh-CN', zh_tw: 'zh-TW', pt_br: 'pt-BR'
+  })[lang] || lang;
   document.title = T.pageTitle;
 
   document.querySelectorAll('.lang-btn').forEach(b => {
@@ -136,14 +139,14 @@ function _loadSavedLang() {
     const isObs = document.documentElement.classList.contains('wwm-view-sidebar');
     if (isObs) {
       const urlLang = new URLSearchParams(location.search).get('lang');
-      if (urlLang && ['ja','en','zh','ko','vi'].includes(urlLang) && urlLang !== 'ja') setLang(urlLang);
+      if (urlLang && ['ja','en','zh','ko','vi','de','es','fr','pt_br','ru','th','zh_tw'].includes(urlLang) && urlLang !== 'ja') setLang(urlLang);
       return;
     }
     // SEO (2026-06-11): 通常 view でも ?lang= を最優先 (hreflang 先 URL /?lang=xx で crawler が各言語 DOM をレンダリングする要)。
     // picker は抑止 (URL で言語確定済 = 聞き直し無意味) が、 初見の IMPORT 誘導 hint は picker 経由と同様に出す
     // (?lang= 共有 link 着地の新規が誘導を永久に見ない穴の塞ぎ、 2026-06-11)
     const urlLang = new URLSearchParams(location.search).get('lang');
-    if (urlLang && ['ja','en','zh','ko','vi'].includes(urlLang)) {
+    if (urlLang && ['ja','en','zh','ko','vi','de','es','fr','pt_br','ru','th','zh_tw'].includes(urlLang)) {
       if (urlLang !== 'ja') setLang(urlLang);
       else { WWMHelpers.storage.saveStr('wwm_lang', 'ja'); _updateSeoMeta('ja'); }
       if (!WWMHelpers.storage.loadJSON('wwm_last_import_v1')) {
@@ -152,7 +155,7 @@ function _loadSavedLang() {
       return;
     }
     const saved = WWMHelpers.storage.loadStr('wwm_lang');
-    if (saved && ['ja','en','zh','ko','vi'].includes(saved)) {
+    if (saved && ['ja','en','zh','ko','vi','de','es','fr','pt_br','ru','th','zh_tw'].includes(saved)) {
       if (saved !== 'ja') setLang(saved);
       // 未 import = リロード毎に hint 復活 (兄貴方針 2026-06-21、 import 完了まで案内継続)
       if (!WWMHelpers.storage.loadJSON('wwm_last_import_v1')) {

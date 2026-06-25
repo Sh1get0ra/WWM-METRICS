@@ -1,13 +1,33 @@
 {
   "_meta": "vi 短縮表記辞書 (2026-06-18 着手)。 skilltype.json vi 公式表記が「kỹ năng XX」 等長文 → 武術固有合成 affix (例 panaceaFanSpecial = Dược Điển Minh Xuyên + skilltype.special.vi) で文字切れ。 真実源 skilltype.json 不変、 _martialAffix 経路 vi 時のみ skilltype_short 優先。 kongfu 名 (=公式 lexicon) は短縮しない。 兄貴目視校正前提。",
-  "martial":      { "vi": "Võ học" },
-  "charged":      { "vi": "Tích lực" },
-  "special":      { "vi": "Đặc biệt" },
-  "drone":        { "vi": "Đặc biệt" },
-  "light":        { "vi": "Nhẹ mạnh" },
-  "rodent":       { "vi": "Chuột" },
-  "shield":       { "vi": "Hộ thuẫn" },
-  "healing":      { "vi": "Hồi phục" },
-  "bleed":        { "vi": "Chảy máu" },
-  "variedCombo":  { "vi": "Nhẹ/Mạnh phát sinh" }
+  "martial": {
+    "vi": "Võ học"
+  },
+  "charged": {
+    "vi": "Tích lực"
+  },
+  "special": {
+    "vi": "Đặc biệt"
+  },
+  "drone": {
+    "vi": "Đặc biệt"
+  },
+  "light": {
+    "vi": "Nhẹ mạnh"
+  },
+  "rodent": {
+    "vi": "Chuột"
+  },
+  "shield": {
+    "vi": "Hộ thuẫn"
+  },
+  "healing": {
+    "vi": "Hồi phục"
+  },
+  "bleed": {
+    "vi": "Chảy máu"
+  },
+  "variedCombo": {
+    "vi": "Nhẹ/Mạnh phát sinh"
+  }
 }

@@ -4,83 +4,167 @@
     "en": "Q",
     "zh": "武学技",
     "ko": "무술 스킬",
-    "vi": "kỹ năng võ học"
+    "vi": "kỹ năng võ học",
+    "de": "Kampfkunst-Fertigkeit",
+    "es": "Habilidad de Arte Marcial",
+    "fr": "Compétence d'Art Martial",
+    "pt_br": "Habilidade de Arte Marcial",
+    "ru": "Навык боевого искусства",
+    "th": "ทักษะศิลปะการต่อสู้",
+    "zh_tw": "武學技"
   },
   "charged": {
     "ja": "溜め技",
     "en": "Charged Skill",
     "zh": "蓄力技",
     "ko": "차지 스킬",
-    "vi": "kỹ năng tích lực"
+    "vi": "kỹ năng tích lực",
+    "de": "Geladene Fähigkeit",
+    "es": "Habilidad Cargada",
+    "fr": "Compétence Chargée",
+    "pt_br": "Habilidade Carregada",
+    "ru": "Заряжаемый навык",
+    "th": "ทักษะชาร์จพลัง",
+    "zh_tw": "蓄力技"
   },
   "special": {
     "ja": "特殊技",
     "en": "Sp",
     "zh": "特殊技",
     "ko": "특수 스킬",
-    "vi": "kỹ năng đặc biệt"
+    "vi": "kỹ năng đặc biệt",
+    "de": "Spezialfähigkeit",
+    "es": "Habilidad Especial",
+    "fr": "Compétence Spéciale",
+    "pt_br": "Habilidade Especial",
+    "ru": "Особый навык",
+    "th": "ทักษะพิเศษ",
+    "zh_tw": "特殊技"
   },
   "drone": {
     "ja": "特殊技",
     "en": "Drone",
     "zh": "特殊技",
     "ko": "특수 스킬",
-    "vi": "kỹ năng đặc biệt"
+    "vi": "kỹ năng đặc biệt",
+    "de": "Spezialfähigkeit",
+    "es": "Habilidad Especial",
+    "fr": "Compétence Spéciale",
+    "pt_br": "Habilidade Especial",
+    "ru": "Особый навык",
+    "th": "ทักษะพิเศษ",
+    "zh_tw": "特殊技"
   },
   "light": {
     "ja": "軽撃",
     "en": "LA",
     "zh": "强效轻击",
     "ko": "약공격",
-    "vi": "Đánh nhẹ"
+    "vi": "Đánh nhẹ",
+    "de": "Leichter Angriff",
+    "es": "Ataque Ligero",
+    "fr": "Attaque légère",
+    "pt_br": "Ataque Leve",
+    "ru": "Легкая атака",
+    "th": "โจมตีเบา",
+    "zh_tw": "輕擊"
   },
   "rodent": {
     "ja": "鼠",
     "en": "Rat",
     "zh": "鼠",
     "ko": "쥐",
-    "vi": "Chuột"
+    "vi": "Chuột",
+    "de": "Maus",
+    "es": "Rata",
+    "fr": "Souris",
+    "pt_br": "Rato",
+    "ru": "Мышь",
+    "th": "หนู",
+    "zh_tw": "老鼠"
   },
   "shield": {
     "ja": "シールド効果強化",
     "en": "Shield Boost",
     "zh": "护盾增效",
     "ko": "보호막 효과 증가",
-    "vi": "Hộ thuẫn tăng hiệu quả"
+    "vi": "Hộ thuẫn tăng hiệu quả",
+    "de": "Schildschub",
+    "es": "Impulso de Escudo",
+    "fr": "Boost de Bouclier",
+    "pt_br": "Impulso de Escudo",
+    "ru": "Усиление щита",
+    "th": "เพิ่มประสิทธิภาพเกราะป้องกัน",
+    "zh_tw": "護盾增效"
   },
   "healing": {
     "ja": "重撃回復量",
     "en": "Heal",
     "zh": "重击回复",
     "ko": "중격 회복",
-    "vi": "kỹ năng hồi phục"
+    "vi": "kỹ năng hồi phục",
+    "de": "Heal",
+    "es": "Heal",
+    "fr": "Heal",
+    "pt_br": "Heal",
+    "ru": "Heal",
+    "th": "Heal",
+    "zh_tw": "Heal"
   },
   "bleed": {
     "ja": "流血",
     "en": "Bleeding",
     "zh": "流血",
     "ko": "출혈",
-    "vi": "Chảy máu"
+    "vi": "Chảy máu",
+    "de": "Blutung",
+    "es": "Sangrado",
+    "fr": "Saignement",
+    "pt_br": "Sangramento",
+    "ru": "Кровотечение",
+    "th": "เลือดไหล",
+    "zh_tw": "流血"
   },
   "variedCombo": {
     "ja": "派生",
     "en": "Varied",
     "zh": "派生",
     "ko": "파생",
-    "vi": "phát sinh"
+    "vi": "phát sinh",
+    "de": "Varied",
+    "es": "Varied",
+    "fr": "Varied",
+    "pt_br": "Varied",
+    "ru": "Varied",
+    "th": "Varied",
+    "zh_tw": "Varied"
   },
   "lightVariedCombo": {
     "ja": "軽撃/派生",
     "en": "LA/Varied",
     "zh": "轻击/派生",
     "ko": "약 공격/파생",
-    "vi": "đánh nhẹ/phát sinh"
+    "vi": "đánh nhẹ/phát sinh",
+    "de": "LA/Varied",
+    "es": "LA/Varied",
+    "fr": "LA/Varied",
+    "pt_br": "LA/Varied",
+    "ru": "LA/Varied",
+    "th": "LA/Varied",
+    "zh_tw": "LA/Varied"
   },
   "heavy": {
     "ja": "重撃",
     "en": "HA",
     "zh": "重击",
     "ko": "강공격",
-    "vi": "Đánh mạnh"
+    "vi": "Đánh mạnh",
+    "de": "Schwerer Angriff",
+    "es": "Ataque Pesado",
+    "fr": "Attaque Lourde",
+    "pt_br": "Ataque Pesado",
+    "ru": "Тяжелая атака",
+    "th": "โจมตีหนัก",
+    "zh_tw": "重擊"
   }
 }

@@ -1,58 +1,165 @@
 {
   "_meta": "vi 短縮表記辞書 (2026-06-18 着手)。 stat.json vi 公式表記が長文 → 武具対照 modal + import preview で文字切れ発生 → 表示時のみ短縮版を引く。 真実源 (stat.json vi) 不変、 lookup miss 時は stat.json vi にフォールバック。 圧縮レベル目標 ~15字、 ja 圧縮表記と同等。 兄貴目視校正前提 (claude 機械短縮初稿)。",
-  "minPhys":              { "vi": "Ngoại công Min" },
-  "maxPhys":              { "vi": "Ngoại công Max" },
-  "physDef":              { "vi": "Phòng Ngoại" },
-  "physResist":           { "vi": "Kháng Ngoại" },
-  "physPen":              { "vi": "Xuyên Ngoại" },
-  "voidPen":              { "vi": "Xuyên Vô Tướng" },
-  "maxHp":                { "vi": "Khí huyết Max" },
-  "precision":            { "vi": "Chính xác" },
-  "crit":                 { "vi": "Chí mạng" },
-  "affinity":             { "vi": "Hiểu ý" },
-  "addCritRate":          { "vi": "Chí mạng tt" },
-  "addSympathyRate":      { "vi": "Hiểu ý tt" },
-  "bossDmg":              { "vi": "ST BOSS" },
-  "playerUnitDmg":        { "vi": "ST PvP" },
-  "allWeaponDmg":         { "vi": "ST toàn võ học" },
-  "specMartialBoost":     { "vi": "Võ học chỉ định" },
-  "elemAtkBoost":         { "vi": "ST thuộc tính" },
-  "critBoost":            { "vi": "ST chí mạng" },
-  "sympathyBoost":        { "vi": "ST hiểu ý" },
-  "swordDmg":             { "vi": "ST Kiếm" },
-  "spearDmg":             { "vi": "ST Súng" },
-  "fanDmg":               { "vi": "ST Quạt" },
-  "umbrellaDmg":          { "vi": "ST Dù" },
-  "moBladeDmg":           { "vi": "ST Đao Mạc" },
-  "dualBladesDmg":        { "vi": "ST Song đao" },
-  "ropeDartDmg":          { "vi": "ST Phi tiêu" },
-  "hengBladeDmg":         { "vi": "ST Hoành đao" },
-  "lightAtkDmg":          { "vi": "ST Đòn nhẹ" },
-  "heavyAtkDmg":          { "vi": "ST Đòn mạnh" },
-  "executionDmg":         { "vi": "ST Xử quyết" },
-  "airborneLightAtkDmg":  { "vi": "ST Nhẹ k.trung" },
-  "jumpStrikeDmg":        { "vi": "ST Đòn nhảy" },
-  "dualWeaponSkillDmg":   { "vi": "ST Song vũ khí" },
-  "dashDmg":              { "vi": "ST Đột kích" },
-  "stMysticDmg":          { "vi": "ST KT đơn thể" },
-  "stBurstMysticDmg":     { "vi": "ST KT Đơn nổ" },
-  "stControlMysticDmg":   { "vi": "ST KT Đơn khống" },
-  "areaMysticDmg":        { "vi": "ST KT P.vi" },
-  "areaDmgMysticDmg":     { "vi": "ST KT P.vi sát" },
-  "areaDebuffMysticDmg":  { "vi": "ST KT P.vi dị" },
-
-  "minBellstrike":        { "vi": "Minh Kim Min" },
-  "maxBellstrike":        { "vi": "Minh Kim Max" },
-  "minStonesplit":        { "vi": "Liệt Thạch Min" },
-  "maxStonesplit":        { "vi": "Liệt Thạch Max" },
-  "minSilkbind":          { "vi": "Khiên Ti Min" },
-  "maxSilkbind":          { "vi": "Khiên Ti Max" },
-  "minBamboocut":         { "vi": "Phá Trúc Min" },
-  "maxBamboocut":         { "vi": "Phá Trúc Max" },
-  "minVoid":              { "vi": "Vô Tướng Min" },
-  "maxVoid":              { "vi": "Vô Tướng Max" },
-  "bellstrikePen":        { "vi": "Xuyên Minh Kim" },
-  "stonesplitPen":        { "vi": "Xuyên Liệt Thạch" },
-  "silkbindPen":          { "vi": "Xuyên Khiên Ti" },
-  "bamboocutPen":         { "vi": "Xuyên Phá Trúc" }
+  "minPhys": {
+    "vi": "Ngoại công Min"
+  },
+  "maxPhys": {
+    "vi": "Ngoại công Max"
+  },
+  "physDef": {
+    "vi": "Phòng Ngoại"
+  },
+  "physResist": {
+    "vi": "Kháng Ngoại"
+  },
+  "physPen": {
+    "vi": "Xuyên Ngoại"
+  },
+  "voidPen": {
+    "vi": "Xuyên Vô Tướng"
+  },
+  "maxHp": {
+    "vi": "Khí huyết Max"
+  },
+  "precision": {
+    "vi": "Chính xác"
+  },
+  "crit": {
+    "vi": "Chí mạng"
+  },
+  "affinity": {
+    "vi": "Hiểu ý"
+  },
+  "addCritRate": {
+    "vi": "Chí mạng tt"
+  },
+  "addSympathyRate": {
+    "vi": "Hiểu ý tt"
+  },
+  "bossDmg": {
+    "vi": "ST BOSS"
+  },
+  "playerUnitDmg": {
+    "vi": "ST PvP"
+  },
+  "allWeaponDmg": {
+    "vi": "ST toàn võ học"
+  },
+  "specMartialBoost": {
+    "vi": "Võ học chỉ định"
+  },
+  "elemAtkBoost": {
+    "vi": "ST thuộc tính"
+  },
+  "critBoost": {
+    "vi": "ST chí mạng"
+  },
+  "sympathyBoost": {
+    "vi": "ST hiểu ý"
+  },
+  "swordDmg": {
+    "vi": "ST Kiếm"
+  },
+  "spearDmg": {
+    "vi": "ST Súng"
+  },
+  "fanDmg": {
+    "vi": "ST Quạt"
+  },
+  "umbrellaDmg": {
+    "vi": "ST Dù"
+  },
+  "moBladeDmg": {
+    "vi": "ST Đao Mạc"
+  },
+  "dualBladesDmg": {
+    "vi": "ST Song đao"
+  },
+  "ropeDartDmg": {
+    "vi": "ST Phi tiêu"
+  },
+  "hengBladeDmg": {
+    "vi": "ST Hoành đao"
+  },
+  "lightAtkDmg": {
+    "vi": "ST Đòn nhẹ"
+  },
+  "heavyAtkDmg": {
+    "vi": "ST Đòn mạnh"
+  },
+  "executionDmg": {
+    "vi": "ST Xử quyết"
+  },
+  "airborneLightAtkDmg": {
+    "vi": "ST Nhẹ k.trung"
+  },
+  "jumpStrikeDmg": {
+    "vi": "ST Đòn nhảy"
+  },
+  "dualWeaponSkillDmg": {
+    "vi": "ST Song vũ khí"
+  },
+  "dashDmg": {
+    "vi": "ST Đột kích"
+  },
+  "stMysticDmg": {
+    "vi": "ST KT đơn thể"
+  },
+  "stBurstMysticDmg": {
+    "vi": "ST KT Đơn nổ"
+  },
+  "stControlMysticDmg": {
+    "vi": "ST KT Đơn khống"
+  },
+  "areaMysticDmg": {
+    "vi": "ST KT P.vi"
+  },
+  "areaDmgMysticDmg": {
+    "vi": "ST KT P.vi sát"
+  },
+  "areaDebuffMysticDmg": {
+    "vi": "ST KT P.vi dị"
+  },
+  "minBellstrike": {
+    "vi": "Minh Kim Min"
+  },
+  "maxBellstrike": {
+    "vi": "Minh Kim Max"
+  },
+  "minStonesplit": {
+    "vi": "Liệt Thạch Min"
+  },
+  "maxStonesplit": {
+    "vi": "Liệt Thạch Max"
+  },
+  "minSilkbind": {
+    "vi": "Khiên Ti Min"
+  },
+  "maxSilkbind": {
+    "vi": "Khiên Ti Max"
+  },
+  "minBamboocut": {
+    "vi": "Phá Trúc Min"
+  },
+  "maxBamboocut": {
+    "vi": "Phá Trúc Max"
+  },
+  "minVoid": {
+    "vi": "Vô Tướng Min"
+  },
+  "maxVoid": {
+    "vi": "Vô Tướng Max"
+  },
+  "bellstrikePen": {
+    "vi": "Xuyên Minh Kim"
+  },
+  "stonesplitPen": {
+    "vi": "Xuyên Liệt Thạch"
+  },
+  "silkbindPen": {
+    "vi": "Xuyên Khiên Ti"
+  },
+  "bamboocutPen": {
+    "vi": "Xuyên Phá Trúc"
+  }
 }

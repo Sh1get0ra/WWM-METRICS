@@ -4,300 +4,601 @@
     "en": "Critical Heal",
     "zh": "会心治疗",
     "ko": "회심 치료",
-    "vi": "Chí mạng hồi phục"
+    "vi": "Chí mạng hồi phục",
+    "de": "Kritische Heilung",
+    "es": "Curación Crítica",
+    "fr": "Soin Critique",
+    "pt_br": "Cura Crítica",
+    "ru": "Критическое лечение",
+    "th": "การรักษาคริติคอล",
+    "zh_tw": "會心治療"
   },
   "weaponBonus": {
     "ja": "外功ダメージ強化",
     "en": "Physical DMG Bonus",
     "zh": "外功伤害加成",
     "ko": "외공 피해 보너스",
-    "vi": "Thêm sát thương ngoại công"
+    "vi": "Thêm sát thương ngoại công",
+    "de": "Physischer Schadensbonus",
+    "es": "Bonus de Daño Físico",
+    "fr": "Bonus de Dégâts Physiques",
+    "pt_br": "Bônus de Dano Físico",
+    "ru": "Бонус к физическому урону",
+    "th": "โบนัสความเสียหายพลังภายนอก",
+    "zh_tw": "外功傷害加成"
   },
   "globalDmgBoost": {
     "ja": "全ダメージ強化",
     "en": "Total DMG Boost",
     "zh": "全伤害强化",
     "ko": "전체 피해 증가",
-    "vi": "Tăng toàn bộ sát thương"
+    "vi": "Tăng toàn bộ sát thương",
+    "de": "Total DMG Boost",
+    "es": "Total DMG Boost",
+    "fr": "Total DMG Boost",
+    "pt_br": "Total DMG Boost",
+    "ru": "Total DMG Boost",
+    "th": "Total DMG Boost",
+    "zh_tw": "Total DMG Boost"
   },
   "outerCoeff": {
     "ja": "外功係数",
     "en": "Outer Force Coeff.",
     "zh": "外功系数",
     "ko": "외공 계수",
-    "vi": "Hệ số Ngoại công"
+    "vi": "Hệ số Ngoại công",
+    "de": "Outer Force Coeff.",
+    "es": "Outer Force Coeff.",
+    "fr": "Outer Force Coeff.",
+    "pt_br": "Outer Force Coeff.",
+    "ru": "Outer Force Coeff.",
+    "th": "Outer Force Coeff.",
+    "zh_tw": "Outer Force Coeff."
   },
   "statusCoeff": {
     "ja": "ステータス攻撃係数",
     "en": "Stat ATK Coeff.",
     "zh": "属性攻击系数",
     "ko": "스탯 공격 계수",
-    "vi": "Hệ số Tấn công Chỉ số"
+    "vi": "Hệ số Tấn công Chỉ số",
+    "de": "Stat ATK Coeff.",
+    "es": "Stat ATK Coeff.",
+    "fr": "Stat ATK Coeff.",
+    "pt_br": "Stat ATK Coeff.",
+    "ru": "Stat ATK Coeff.",
+    "th": "Stat ATK Coeff.",
+    "zh_tw": "Stat ATK Coeff."
   },
   "outerAdd": {
     "ja": "外功付加",
     "en": "Outer Force Bonus",
     "zh": "外功附加",
     "ko": "외공 부가",
-    "vi": "Phụ thêm Ngoại công"
+    "vi": "Phụ thêm Ngoại công",
+    "de": "Outer Force Bonus",
+    "es": "Outer Force Bonus",
+    "fr": "Outer Force Bonus",
+    "pt_br": "Outer Force Bonus",
+    "ru": "Outer Force Bonus",
+    "th": "Outer Force Bonus",
+    "zh_tw": "Outer Force Bonus"
   },
   "judgeRes": {
     "ja": "判定耐性",
     "en": "Resistance",
     "zh": "判定抗性",
     "ko": "저항 판정",
-    "vi": "Kháng định đoạt"
+    "vi": "Kháng định đoạt",
+    "de": "Widerstand",
+    "es": "Resistencia",
+    "fr": "Résistance",
+    "pt_br": "Resistência",
+    "ru": "Сопротивление",
+    "th": "ความต้านทานการตัดสิน",
+    "zh_tw": "判定抗性"
   },
   "worldLv": {
     "ja": "大世界等級（Lv）",
     "en": "Open World Level (Lv)",
     "zh": "大世界等级（Lv）",
     "ko": "대세계 등급（Lv）",
-    "vi": "Cấp Đại thế giới (Lv)"
+    "vi": "Cấp Đại thế giới (Lv)",
+    "de": "Open World Level (Lv)",
+    "es": "Open World Level (Lv)",
+    "fr": "Open World Level (Lv)",
+    "pt_br": "Open World Level (Lv)",
+    "ru": "Open World Level (Lv)",
+    "th": "Open World Level (Lv)",
+    "zh_tw": "Open World Level (Lv)"
   },
   "martialLv": {
     "ja": "武術等級（Lv）",
     "en": "Martial Level (Lv)",
     "zh": "武学等级（Lv）",
     "ko": "무학 등급（Lv）",
-    "vi": "Cấp độ (Lv)"
+    "vi": "Cấp độ (Lv)",
+    "de": "Martial Level (Lv)",
+    "es": "Martial Level (Lv)",
+    "fr": "Martial Level (Lv)",
+    "pt_br": "Martial Level (Lv)",
+    "ru": "Martial Level (Lv)",
+    "th": "Martial Level (Lv)",
+    "zh_tw": "Martial Level (Lv)"
   },
   "probCrit": {
     "ja": "会心",
     "en": "Critical",
     "zh": "会心",
     "ko": "치명타",
-    "vi": "Chí mạng"
+    "vi": "Chí mạng",
+    "de": "Kritisch",
+    "es": "Crítico",
+    "fr": "Critique",
+    "pt_br": "Crítico",
+    "ru": "Критический удар",
+    "th": "คริติคอล",
+    "zh_tw": "會心"
   },
   "probSympathy": {
     "ja": "会意",
     "en": "Affinity",
     "zh": "会意",
     "ko": "각성",
-    "vi": "Hiểu ý"
+    "vi": "Hiểu ý",
+    "de": "Affinity",
+    "es": "Affinity",
+    "fr": "Affinity",
+    "pt_br": "Affinity",
+    "ru": "Affinity",
+    "th": "Affinity",
+    "zh_tw": "Affinity"
   },
   "probGraze": {
     "ja": "かすり",
     "en": "Glancing",
     "zh": "擦伤",
     "ko": "찰과상",
-    "vi": "Trầy xước"
+    "vi": "Trầy xước",
+    "de": "Glancing",
+    "es": "Glancing",
+    "fr": "Glancing",
+    "pt_br": "Glancing",
+    "ru": "Glancing",
+    "th": "Glancing",
+    "zh_tw": "Glancing"
   },
   "probNormal": {
     "ja": "通常",
     "en": "Normal",
     "zh": "正常",
     "ko": "정상",
-    "vi": "Bình thường"
+    "vi": "Bình thường",
+    "de": "Normal",
+    "es": "Normal",
+    "fr": "Normal",
+    "pt_br": "Normal",
+    "ru": "Обычный",
+    "th": "ปกติ",
+    "zh_tw": "正常"
   },
   "probPhys": {
     "ja": "物理",
     "en": "Physical",
     "zh": "物理",
     "ko": "물리",
-    "vi": "Vật lý"
+    "vi": "Vật lý",
+    "de": "Physisch",
+    "es": "Físico",
+    "fr": "Physique",
+    "pt_br": "Físico",
+    "ru": "Физический",
+    "th": "กายภาพ",
+    "zh_tw": "關閉物理"
   },
   "probElem": {
     "ja": "ステータス",
     "en": "Attributes",
     "zh": "属性",
     "ko": "속성",
-    "vi": "Thuộc tính"
+    "vi": "Thuộc tính",
+    "de": "Attribute",
+    "es": "Atributos",
+    "fr": "Attributs",
+    "pt_br": "Atributos",
+    "ru": "Атрибуты",
+    "th": "คุณสมบัติ",
+    "zh_tw": "屬性"
   },
   "donutDmgCenter": {
     "ja": "勁率",
     "en": "勁率",
     "zh": "勁率",
     "ko": "勁率",
-    "vi": "勁率"
+    "vi": "勁率",
+    "de": "勁率",
+    "es": "勁率",
+    "fr": "勁率",
+    "pt_br": "勁率",
+    "ru": "勁率",
+    "th": "勁率",
+    "zh_tw": "勁率"
   },
   "slotMain": {
     "ja": "主武器",
     "en": "Main Weapon",
     "zh": "主武器",
     "ko": "메인 무기",
-    "vi": "Vũ khí chính"
+    "vi": "Vũ khí chính",
+    "de": "Hauptwaffe",
+    "es": "Arma principal",
+    "fr": "Arme principale",
+    "pt_br": "Arma Principal",
+    "ru": "Основное оружие",
+    "th": "อาวุธหลัก",
+    "zh_tw": "主武器"
   },
   "slotSub": {
     "ja": "副武器",
     "en": "Off-hand Weapon",
     "zh": "副武",
     "ko": "보조 무기",
-    "vi": "Vũ khí phụ"
+    "vi": "Vũ khí phụ",
+    "de": "Nebenhandwaffe",
+    "es": "Arma de Mano Izquierda",
+    "fr": "Arme de main gauche",
+    "pt_br": "Arma de Mão Secundária",
+    "ru": "Оружие в левой руке",
+    "th": "อาวุธรอง",
+    "zh_tw": "副武"
   },
   "slotHelm": {
     "ja": "冠",
     "en": "Helmet",
     "zh": "冠胄",
     "ko": "투구",
-    "vi": "Mũ giáp"
+    "vi": "Mũ giáp",
+    "de": "Champion",
+    "es": "Campeón",
+    "fr": "Champion",
+    "pt_br": "Campeão",
+    "ru": "Чемпион",
+    "th": "แชมป์",
+    "zh_tw": "冠"
   },
   "slotChest": {
     "ja": "胸当て",
     "en": "Chestpiece",
     "zh": "胸甲",
     "ko": "흉갑",
-    "vi": "Giáp ngực"
+    "vi": "Giáp ngực",
+    "de": "Brustpanzer",
+    "es": "Peto",
+    "fr": "Plastron",
+    "pt_br": "Peitoral",
+    "ru": "Нагрудник",
+    "th": "เกราะอก",
+    "zh_tw": "胸甲"
   },
   "slotLegs": {
     "ja": "膝鎧",
     "en": "Greaves",
     "zh": "胫甲",
     "ko": "경갑",
-    "vi": "Giáp ống chân"
+    "vi": "Giáp ống chân",
+    "de": "Beinschienen",
+    "es": "Grebas",
+    "fr": "Grèves",
+    "pt_br": "Grevas",
+    "ru": "Поножи",
+    "th": "สนับแข้งเจี่ย",
+    "zh_tw": "脛甲"
   },
   "slotHands": {
     "ja": "小手",
     "en": "Bracer",
     "zh": "腕甲",
     "ko": "완갑",
-    "vi": "Giáp tay"
+    "vi": "Giáp tay",
+    "de": "Armschiene",
+    "es": "Brazal",
+    "fr": "Brassard",
+    "pt_br": "Braçadeira",
+    "ru": "Наручи",
+    "th": "เกราะแขน",
+    "zh_tw": "腕甲"
   },
   "slotRing": {
     "ja": "環",
     "en": "Disc",
     "zh": "环",
     "ko": "환",
-    "vi": "Vòng"
+    "vi": "Vòng",
+    "de": "Scheibe",
+    "es": "Disco",
+    "fr": "Disque",
+    "pt_br": "Disco",
+    "ru": "Диск",
+    "th": "วงแหวน",
+    "zh_tw": "環"
   },
   "slotPendant": {
     "ja": "佩び物",
     "en": "Pendant",
     "zh": "佩",
     "ko": "패물",
-    "vi": "Trang sức"
+    "vi": "Trang sức",
+    "de": "Anhänger",
+    "es": "Colgante",
+    "fr": "Pendentif",
+    "pt_br": "Pingente",
+    "ru": "Подвеска",
+    "th": "เครื่องประดับ",
+    "zh_tw": "佩"
   },
   "slotBow": {
     "ja": "弓矢",
     "en": "Bow and Arrow",
     "zh": "弓箭",
     "ko": "화살",
-    "vi": "Cung tên"
+    "vi": "Cung tên",
+    "de": "Bogen und Pfeile",
+    "es": "Arco y Flecha",
+    "fr": "Arc et Flèches",
+    "pt_br": "Arco e Flecha",
+    "ru": "Лук и стрелы",
+    "th": "ธนู",
+    "zh_tw": "弓箭"
   },
   "slotDisc": {
     "ja": "射玦",
     "en": "Archery Jade",
     "zh": "射玦",
     "ko": "활깍지",
-    "vi": "Bắn Ngọc quyết"
+    "vi": "Bắn Ngọc quyết",
+    "de": "Bogenschießen-Jade",
+    "es": "Jade de Tiro con Arco",
+    "fr": "Jade de Tir à l'Arc",
+    "pt_br": "Jade de Arco e Flecha",
+    "ru": "Нефрит для Стрельбы из лука",
+    "th": "ยิงจี้หยก",
+    "zh_tw": "射玦"
   },
   "pathPhys": {
     "ja": "汎用",
     "en": "General",
     "zh": "通用",
     "ko": "일반",
-    "vi": "Chung"
+    "vi": "Chung",
+    "de": "General",
+    "es": "General",
+    "fr": "Général",
+    "pt_br": "General",
+    "ru": "Генерал",
+    "th": "ทั่วไป",
+    "zh_tw": "通用"
   },
   "penOther": {
     "ja": "その他",
     "en": "Other",
     "zh": "其他",
     "ko": "기타",
-    "vi": "Khác"
+    "vi": "Khác",
+    "de": "Andere",
+    "es": "Otro",
+    "fr": "Autre",
+    "pt_br": "Outro",
+    "ru": "Другое",
+    "th": "อื่นๆ",
+    "zh_tw": "其他"
   },
   "importLabelMainKf": {
     "ja": "主武術",
     "en": "Main Martial Arts",
     "zh": "主武学",
     "ko": "주 무술",
-    "vi": "Võ học chính"
+    "vi": "Võ học chính",
+    "de": "Hauptkampfkunst",
+    "es": "Artes Marciales Principales",
+    "fr": "Arts martiaux principaux",
+    "pt_br": "Artes Marciais Principais",
+    "ru": "Основные боевые искусства",
+    "th": "ศิลปะการต่อสู้อาวุธหลัก",
+    "zh_tw": "主武學"
   },
   "importLabelSubKf": {
     "ja": "副武術",
     "en": "Off-hand Martial Arts",
     "zh": "副武学",
     "ko": "보조 무술",
-    "vi": "Võ học phụ"
+    "vi": "Võ học phụ",
+    "de": "Nebenhand-Kampfkunst",
+    "es": "Artes Marciales Secundarias",
+    "fr": "Arts Martiaux Secondaires",
+    "pt_br": "Artes Marciais Secundárias",
+    "ru": "Боевые искусства для второй руки",
+    "th": "ศิลปะการต่อสู้อาวุธรอง",
+    "zh_tw": "副武學"
   },
   "importArsenalTitle": {
     "ja": "武庫",
     "en": "Arsenal",
     "zh": "武库",
     "ko": "무기고",
-    "vi": "Kho vũ khí"
+    "vi": "Kho vũ khí",
+    "de": "Arsenal",
+    "es": "Arsenal",
+    "fr": "Arsenal",
+    "pt_br": "Arsenal",
+    "ru": "Арсенал",
+    "th": "คลังอาวุธ",
+    "zh_tw": "武庫"
   },
   "importArsenalPath": {
     "ja": "武庫種別",
     "en": "Arsenal Type",
     "zh": "武库种类",
     "ko": "무기고 종류",
-    "vi": "Loại Kho vũ khí"
+    "vi": "Loại Kho vũ khí",
+    "de": "Arsenal Type",
+    "es": "Arsenal Type",
+    "fr": "Arsenal Type",
+    "pt_br": "Arsenal Type",
+    "ru": "Arsenal Type",
+    "th": "Arsenal Type",
+    "zh_tw": "Arsenal Type"
   },
   "importArsenalPeaked": {
     "ja": "頂点",
     "en": "Peak",
     "zh": "巅峰",
     "ko": "최고 수준",
-    "vi": "Đỉnh cao"
+    "vi": "Đỉnh cao",
+    "de": "Spitze",
+    "es": "Cima",
+    "fr": "Pic",
+    "pt_br": "Ápice",
+    "ru": "Пик",
+    "th": "จุดสูงสุด",
+    "zh_tw": "巔峰"
   },
   "arsenalNotPeaked": {
     "ja": "未突破",
     "en": "Not Peaked",
     "zh": "未顶点",
     "ko": "미정점",
-    "vi": "Chưa đỉnh"
+    "vi": "Chưa đỉnh",
+    "de": "Not Peaked",
+    "es": "Not Peaked",
+    "fr": "Not Peaked",
+    "pt_br": "Not Peaked",
+    "ru": "Not Peaked",
+    "th": "Not Peaked",
+    "zh_tw": "Not Peaked"
   },
   "ocrHelpMockLv": {
     "ja": "装備レベル",
     "en": "Gear Tier",
     "zh": "装备等阶",
     "ko": "장비 레벨",
-    "vi": "Cấp bậc trang bị"
+    "vi": "Cấp bậc trang bị",
+    "de": "Ausrüstungsstufe",
+    "es": "Nivel de Equipo",
+    "fr": "Niveau d'équipement",
+    "pt_br": "Nível de Equipamento",
+    "ru": "Уровень снаряжения",
+    "th": "ระดับอุปกรณ์",
+    "zh_tw": "裝等"
   },
   "ocrHelpMockAtk": {
     "ja": "外功攻撃",
     "en": "Physical Attack",
     "zh": "外功攻击",
     "ko": "외공 공격",
-    "vi": "Tấn công ngoại công"
+    "vi": "Tấn công ngoại công",
+    "de": "Physischer Angriff",
+    "es": "Ataque Físico",
+    "fr": "Attaque physique",
+    "pt_br": "Ataque Físico",
+    "ru": "Физическая атака",
+    "th": "โจมตีกายภาพ",
+    "zh_tw": "外功攻擊"
   },
   "pvpExclusiveAffix": {
     "ja": "PvP専用定音",
     "en": "PvP-Exclusive Engraving",
     "zh": "PvP专用定音",
     "ko": "PvP 전용 정음",
-    "vi": "Định âm chuyên PvP"
+    "vi": "Định âm chuyên PvP",
+    "de": "PvP-Exclusive Engraving",
+    "es": "PvP-Exclusive Engraving",
+    "fr": "PvP-Exclusive Engraving",
+    "pt_br": "PvP-Exclusive Engraving",
+    "ru": "PvP-Exclusive Engraving",
+    "th": "PvP-Exclusive Engraving",
+    "zh_tw": "PvP-Exclusive Engraving"
   },
   "effectUnset": {
     "ja": "未代入",
     "en": "Unset",
     "zh": "未填",
     "ko": "미입력",
-    "vi": "Chưa nhập"
+    "vi": "Chưa nhập",
+    "de": "Unset",
+    "es": "Unset",
+    "fr": "Unset",
+    "pt_br": "Unset",
+    "ru": "Unset",
+    "th": "Unset",
+    "zh_tw": "Unset"
   },
   "cardItemKongfu": {
     "ja": "武術",
     "en": "Martial Arts",
     "zh": "武学",
     "ko": "무술",
-    "vi": "Võ học"
+    "vi": "Võ học",
+    "de": "Kampfkunst",
+    "es": "Artes Marciales",
+    "fr": "Arts Martiaux",
+    "pt_br": "Artes Marciais",
+    "ru": "Боевые искусства",
+    "th": "ศิลปะการต่อสู้",
+    "zh_tw": "武學"
   },
   "cardItemXinfa": {
     "ja": "心法",
     "en": "Inner Way",
     "zh": "心法",
     "ko": "심법",
-    "vi": "Tâm pháp"
+    "vi": "Tâm pháp",
+    "de": "Inner Way",
+    "es": "Camino Interior",
+    "fr": "Voie Intérieure",
+    "pt_br": "Caminho Interior",
+    "ru": "Внутренний Путь",
+    "th": "จิตวิชา",
+    "zh_tw": "心法"
   },
   "cardItemQishu": {
     "ja": "奇術",
     "en": "Mystic Skills",
     "zh": "奇术",
     "ko": "비결",
-    "vi": "Kỳ thuật"
+    "vi": "Kỳ thuật",
+    "de": "Mystische Fähigkeiten",
+    "es": "Habilidades Místicas",
+    "fr": "Compétences Mystiques",
+    "pt_br": "Habilidades Místicas",
+    "ru": "Мистические навыки",
+    "th": "ศาสตร์ลึกลับ",
+    "zh_tw": "奇術"
   },
   "effAnalysisTitle": {
     "ja": "調律/定音効率分析",
     "en": "Stat Efficiency",
     "zh": "状态效率分析",
     "ko": "스탯 효율 분석",
-    "vi": "Phân tích hiệu suất Chuyển âm/Định âm"
+    "vi": "Phân tích hiệu suất Chuyển âm/Định âm",
+    "de": "Stat Efficiency",
+    "es": "Stat Efficiency",
+    "fr": "Stat Efficiency",
+    "pt_br": "Stat Efficiency",
+    "ru": "Stat Efficiency",
+    "th": "Stat Efficiency",
+    "zh_tw": "Stat Efficiency"
   },
   "importLabelXiuwei": {
     "ja": "総合武力",
     "en": "Martial Mastery",
     "zh": "武林造诣",
     "ko": "무림 조예",
-    "vi": "Thành tựu võ lâm"
+    "vi": "Thành tựu võ lâm",
+    "de": "Kampfkunst-Meisterschaft",
+    "es": "Maestría Marcial",
+    "fr": "Maîtrise Martiale",
+    "pt_br": "Maestria Marcial",
+    "ru": "Мастерство боевых искусств",
+    "th": "ความเชี่ยวชาญในยุทธภพ",
+    "zh_tw": "武林造詣"
   }
 }

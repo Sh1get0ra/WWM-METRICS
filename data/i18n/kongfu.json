@@ -4,125 +4,251 @@
     "en": "Strategic Sword",
     "zh": "积矩九剑",
     "ko": "구현의 검무",
-    "vi": "Kiếm Tích Cựu Cửu"
+    "vi": "Kiếm Tích Cựu Cửu",
+    "de": "Strategisches Schwert",
+    "es": "Espada Estratégica",
+    "fr": "Épée stratégique",
+    "pt_br": "Espada Estratégica",
+    "ru": "Стратегический Меч",
+    "th": "กระบวนดาบเก้าสะสมพลัง",
+    "zh_tw": "積矩九劍"
   },
   "10102": {
     "ja": "無銘の剣",
     "en": "Nameless Sword",
     "zh": "无名剑法",
     "ko": "무명 검법",
-    "vi": "Kiếm Pháp Vô Danh"
+    "vi": "Kiếm Pháp Vô Danh",
+    "de": "Namenloses Schwert",
+    "es": "Espada Sin Nombre",
+    "fr": "Épée Sans Nom",
+    "pt_br": "Espada Sem Nome",
+    "ru": "Безымянный Меч",
+    "th": "กระบวนดาบไร้นาม",
+    "zh_tw": "無名劍法"
   },
   "10201": {
     "ja": "蛇神の槍",
     "en": "Heavenquaker Spear",
     "zh": "九曲惊神枪",
     "ko": "격류의 파동",
-    "vi": "Súng Cửu Khúc Kinh Thần"
+    "vi": "Súng Cửu Khúc Kinh Thần",
+    "de": "Himmelserschütterer Speer",
+    "es": "Lanza del Temblor Celestial",
+    "fr": "Lance Ébranle-Ciel",
+    "pt_br": "Lança Treme-Céus",
+    "ru": "Копьё Небесного Грома",
+    "th": "หอกเก้าท่วงท่าตื่นตะลึง",
+    "zh_tw": "九曲驚神槍"
   },
   "10202": {
     "ja": "無銘の槍",
     "en": "Nameless Spear",
     "zh": "无名枪法",
     "ko": "무명 창법",
-    "vi": "Súng Pháp Vô Danh"
+    "vi": "Súng Pháp Vô Danh",
+    "de": "Namenlose Speer",
+    "es": "Lanza Sin Nombre",
+    "fr": "Lance sans nom",
+    "pt_br": "Lança Sem Nome",
+    "ru": "Безымянное Копьё",
+    "th": "กระบวนหอกไร้นาม",
+    "zh_tw": "無名槍法"
   },
   "10301": {
     "ja": "薬川の扇",
     "en": "Panacea Fan",
     "zh": "明川药典",
     "ko": "천계의 수호",
-    "vi": "Dược Điển Minh Xuyên"
+    "vi": "Dược Điển Minh Xuyên",
+    "de": "Allheilfächer",
+    "es": "Abanico Panacea",
+    "fr": "Éventail Panacée",
+    "pt_br": "Leque Panaceia",
+    "ru": "Веер Панацеи",
+    "th": "ตำรายาแห่งหมิงชวน",
+    "zh_tw": "明川藥典"
   },
   "10302": {
     "ja": "墨筆の扇",
     "en": "Inkwell Fan",
     "zh": "青山执笔",
     "ko": "청산의 정수",
-    "vi": "Bút Xanh Sơn"
+    "vi": "Bút Xanh Sơn",
+    "de": "Tintenfassfächer",
+    "es": "Abanico del Tintero",
+    "fr": "Éventail Encrier",
+    "pt_br": "Leque Tinteiro",
+    "ru": "Веер Чернильницы",
+    "th": "ชิงซานผู้จับพู่กัน",
+    "zh_tw": "青山執筆"
   },
   "20103": {
     "ja": "嵐雷の槍",
     "en": "Stormbreaker Spear",
     "zh": "八方风雷",
     "ko": "천둥의 속박",
-    "vi": "Bát Phương Phong Lôi"
+    "vi": "Bát Phương Phong Lôi",
+    "de": "Sturmbrecher-Speer",
+    "es": "Lanza Rompetormentas",
+    "fr": "Lance Fende-Tempête",
+    "pt_br": "Lança Quebrador de Tempestades",
+    "ru": "Копьё Грозового Разлома",
+    "th": "หอกสายฟ้าฟาดแปดทิศ",
+    "zh_tw": "八方風雷槍"
   },
   "20401": {
     "ja": "断魂の刀",
     "en": "Thundercry Blade",
     "zh": "嗟夫刀法",
     "ko": "탄식의 검기",
-    "vi": "Đao Pháp Thán Phục"
+    "vi": "Đao Pháp Thán Phục",
+    "de": "Donnerruf-Klinge",
+    "es": "Espada del Trueno",
+    "fr": "Lame du Tonnerre",
+    "pt_br": "Lâmina do Grito do Trovão",
+    "ru": "Клинок Громового Крика",
+    "th": "กระบวนดาบเจียฝู",
+    "zh_tw": "嗟夫刀法"
   },
   "20402": {
     "ja": "破陣の刀",
     "en": "Phalanxbane Blade",
     "zh": "十方破阵",
     "ko": "십방파진",
-    "vi": "Phá Trận Thập Phương"
+    "vi": "Phá Trận Thập Phương",
+    "de": "Phalanxbrechende Klinge",
+    "es": "Espada Rompefalanges",
+    "fr": "Lame Brise-Phalange",
+    "pt_br": "Lâmina Aniquiladora de Falanges",
+    "ru": "Клинок Губитель Фаланги",
+    "th": "ทำลายขบวนศึกสิบทิศ",
+    "zh_tw": "十方破陣"
   },
   "20501": {
     "ja": "獄炎の双剣",
     "en": "Infernal Twinblades",
     "zh": "泥犁三垢",
     "ko": "윤회의 가르침",
-    "vi": "Bùn Lì Tam Cấu"
+    "vi": "Bùn Lì Tam Cấu",
+    "de": "Höllische Zwillingsklingen",
+    "es": "Hojas Gemelas Infernales",
+    "fr": "Lames jumelles infernales",
+    "pt_br": "Lâminas Gêmeas Infernais",
+    "ru": "Адские Парные Клинки",
+    "th": "โคลนลึกสามชั้น",
+    "zh_tw": "泥犁三垢"
   },
   "20601": {
     "ja": "千紅の傘",
     "en": "Vernal Umbrella",
     "zh": "九重春色",
     "ko": "봄의 선율",
-    "vi": "Xuân Sắc Cửu Trùng"
+    "vi": "Xuân Sắc Cửu Trùng",
+    "de": "Frühlingsschirm",
+    "es": "Sombrilla Primaveral",
+    "fr": "Parapluie printanier",
+    "pt_br": "Guarda-chuva Vernal",
+    "ru": "Весенний Зонт",
+    "th": "ฤดูใบไม้ผลิอันงดงามเก้าชั้น",
+    "zh_tw": "九重春色"
   },
   "20602": {
     "ja": "誘魂の傘",
     "en": "Soulshade Umbrella",
     "zh": "千香引魂蛊",
     "ko": "소생의 향",
-    "vi": "Ngàn Hương Dẫn Hồn Cổ"
+    "vi": "Ngàn Hương Dẫn Hồn Cổ",
+    "de": "Soulshade-Schirm",
+    "es": "Sombrilla Almasombra",
+    "fr": "Parapluie Âme d'Ombre",
+    "pt_br": "Guarda-chuva Sombra da Alma",
+    "ru": "Зонт Теней Души",
+    "th": "หมื่นกลิ่นล่อวิญญาณพิษ",
+    "zh_tw": "千香引魂蠱"
   },
   "20603": {
     "ja": "酔夢の傘",
     "en": "Everspring Umbrella",
     "zh": "醉梦游春",
     "ko": "일장춘몽",
-    "vi": "Mộng Say Du Xuân"
+    "vi": "Mộng Say Du Xuân",
+    "de": "Frühlings-Traumlandschaft",
+    "es": "Paisaje de Ensueño Primaveral",
+    "fr": "Paysage de Rêve Printanier",
+    "pt_br": "Paisagem do Sonho Primaveril",
+    "ru": "Весенний Мираж",
+    "th": "ฝันเมามายท่องฤดูใบไม้ผลิ",
+    "zh_tw": "醉夢遊春"
   },
   "20701": {
     "ja": "浮塵の縄",
     "en": "Mortal Rope Dart",
     "zh": "粟子游尘",
     "ko": "속세의 지혜",
-    "vi": "Bụi Du Hành Tử"
+    "vi": "Bụi Du Hành Tử",
+    "de": "Sterbliches Seildart",
+    "es": "Dardo Mortal con Cuerda",
+    "fr": "Dard mortel à corde",
+    "pt_br": "Dardo Cordial Mortal",
+    "ru": "Смертельный Канатный Дротик",
+    "th": "ธุลีเดินทางแห่งซู่จื่อ",
+    "zh_tw": "粟子遊塵"
   },
   "20702": {
     "ja": "浮雲の縄",
     "en": "Unfettered Rope Dart",
     "zh": "粟子行云",
     "ko": "운진의 궤적",
-    "vi": "Mây Hành Tử"
+    "vi": "Mây Hành Tử",
+    "de": "Flüchtige Wolken",
+    "es": "Nubes Fugaces",
+    "fr": "Nuages Fugaces",
+    "pt_br": "Nuvens Efêmeras",
+    "ru": "Мимолетные Облака",
+    "th": "เมฆลอยแห่งซู่จื่อ",
+    "zh_tw": "粟子行雲"
   },
   "20703": {
     "ja": "千機の鎖",
     "en": "Skygrasp Rope Dart",
     "zh": "千机索天",
     "ko": "천기의 사슬",
-    "vi": "Ngàn Cơ Tìm Trời"
+    "vi": "Ngàn Cơ Tìm Trời",
+    "de": "Himmelsgriff-Seildolch",
+    "es": "Dardo con Cuerda del Asidero Celestial",
+    "fr": "Dard-Corde de la Saisie Céleste",
+    "pt_br": "Dardo de Corda do Domínio Celestial",
+    "ru": "Небесный Веревочный Дротик",
+    "th": "พันกลไกไขฟ้าสวรรค์",
+    "zh_tw": "千機索天"
   },
   "20801": {
     "ja": "斬雪の刀",
     "en": "Snowparting Blade",
     "zh": "斩雪刀法",
     "ko": "만설의 참격",
-    "vi": "Đao Pháp Trảm Tuyết"
+    "vi": "Đao Pháp Trảm Tuyết",
+    "de": "Schneetrennende Klinge",
+    "es": "Espada Partenieves",
+    "fr": "Lame Séparant la Neige",
+    "pt_br": "Lâmina do Adeus à Neve",
+    "ru": "Клинок Рассекающий Снег",
+    "th": "กระบวนดาบฟันหิมะ",
+    "zh_tw": "斬雪刀法"
   },
   "20901": {
     "ja": "天志の拳",
     "en": "Heavenwill Gauntlets",
     "zh": "天志垂象",
     "ko": "천지의 주먹",
-    "vi": "Thiên Chí Rủ Tượng"
+    "vi": "Thiên Chí Rủ Tượng",
+    "de": "Himmelswillen-Panzerhandschuhe",
+    "es": "Guanteletes de la Voluntad Celestial",
+    "fr": "Gantelets de la Volonté Céleste",
+    "pt_br": "Manoplas do Céu",
+    "ru": "Перчатки Небесной Воли",
+    "th": "ฟ้าประทานปริศนา",
+    "zh_tw": "天志垂象"
   }
 }

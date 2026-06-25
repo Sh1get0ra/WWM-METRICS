@@ -1,14 +1,36 @@
 {
   "_meta": "vi 短縮表記辞書 (2026-06-18 着手)。 kongfu.json vi 公式表記が 17-25 字 → 武術固有合成 affix (kongfu + skilltype) で防具 affix6 dropdown 文字切れ。 真実源 kongfu.json 不変 ([[game-lexicon-no-discretion]] keep)、 _martialAffix 経路 vi 時のみ kongfu_short 優先 fallback chain。 主要部品 (主題語) keep + 修飾省略 = 12-14 字目標。 兄貴目視校正前提。",
-  "10101": { "vi": "Kiếm Cửu Cửu" },
-  "10102": { "vi": "Kiếm Vô Danh" },
-  "10201": { "vi": "Súng Kinh Thần" },
-  "10202": { "vi": "Súng Vô Danh" },
-  "10301": { "vi": "Dược Điển" },
-  "20103": { "vi": "Súng Phong Lôi" },
-  "20401": { "vi": "Đao Thán Phục" },
-  "20402": { "vi": "Phá Trận" },
-  "20601": { "vi": "Xuân Sắc" },
-  "20602": { "vi": "Dẫn Hồn Cổ" },
-  "20801": { "vi": "Trảm Tuyết" }
+  "10101": {
+    "vi": "Kiếm Cửu Cửu"
+  },
+  "10102": {
+    "vi": "Kiếm Vô Danh"
+  },
+  "10201": {
+    "vi": "Súng Kinh Thần"
+  },
+  "10202": {
+    "vi": "Súng Vô Danh"
+  },
+  "10301": {
+    "vi": "Dược Điển"
+  },
+  "20103": {
+    "vi": "Súng Phong Lôi"
+  },
+  "20401": {
+    "vi": "Đao Thán Phục"
+  },
+  "20402": {
+    "vi": "Phá Trận"
+  },
+  "20601": {
+    "vi": "Xuân Sắc"
+  },
+  "20602": {
+    "vi": "Dẫn Hồn Cổ"
+  },
+  "20801": {
+    "vi": "Trảm Tuyết"
+  }
 }

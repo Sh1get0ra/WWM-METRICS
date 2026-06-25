@@ -4,174 +4,349 @@
     "en": "Jadeware Set",
     "zh": "玉斗套装",
     "ko": "옥두 세트",
-    "vi": "Bộ trang phục Ngọc Đẩu"
+    "vi": "Bộ trang phục Ngọc Đẩu",
+    "de": "Jadewaren-Set",
+    "es": "Conjunto Jade",
+    "fr": "Ensemble Jade",
+    "pt_br": "Conjunto Artefato de Jade",
+    "ru": "Комплект «Нефритовая утварь»",
+    "th": "ชุดอวี้โต่ว",
+    "zh_tw": "玉斗套裝"
   },
   "2": {
     "ja": "易相一式",
     "en": "Formbend Set",
     "zh": "易相套装",
     "ko": "역상 세트",
-    "vi": "Bộ trang phục Dễ Tương"
+    "vi": "Bộ trang phục Dễ Tương",
+    "de": "Formbiege-Set",
+    "es": "Conjunto Dobleforma",
+    "fr": "Ensemble Courbétoile",
+    "pt_br": "Conjunto Curvatura da Forma",
+    "ru": "Комплект \"Гибкая форма\"",
+    "th": "ชุดอี้เซียง",
+    "zh_tw": "易相套裝"
   },
   "3": {
     "ja": "飛鳥一式",
     "en": "Hawkwing Set",
     "zh": "飞隼套装",
     "ko": "속공 세트",
-    "vi": "Bộ trang phục Phi Thuấn"
+    "vi": "Bộ trang phục Phi Thuấn",
+    "de": "Falkenflügel-Set",
+    "es": "Conjunto Ala de Halcón",
+    "fr": "Ensemble Ailefaucon",
+    "pt_br": "Conjunto Asa de Falcão",
+    "ru": "Комплект «Соколиное крыло»",
+    "th": "ชุดเฟยซุน",
+    "zh_tw": "飛隼套裝"
   },
   "4": {
     "ja": "鷹揚一式",
     "en": "Eaglerise Set",
     "zh": "鹰扬套装",
     "ko": "비상 세트",
-    "vi": "Bộ trang phục Ưng Dương"
+    "vi": "Bộ trang phục Ưng Dương",
+    "de": "Adleraufstieg-Set",
+    "es": "Conjunto Ascenso del Águila",
+    "fr": "Ensemble Éléaigle",
+    "pt_br": "Conjunto Ascensão da Águia",
+    "ru": "Комплект \"Орлиный взлёт\"",
+    "th": "ชุดอิงหยาง",
+    "zh_tw": "鷹揚套裝"
   },
   "7": {
     "ja": "時雨一式",
     "en": "Rainwhisper Set",
     "zh": "时雨套装",
     "ko": "단비 세트",
-    "vi": "Bộ trang phục Thời Vũ"
+    "vi": "Bộ trang phục Thời Vũ",
+    "de": "Regenflüstern-Set",
+    "es": "Conjunto Susurro de Lluvia",
+    "fr": "Ensemble Murmurepluie",
+    "pt_br": "Conjunto Sussurro da Chuva",
+    "ru": "Комплект «Шёпот дождя»",
+    "th": "ชุดสืออวี่",
+    "zh_tw": "時雨套裝"
   },
   "8": {
     "ja": "桂月一式",
     "en": "Moonflare Set",
     "zh": "桂月套装",
     "ko": "월계 세트",
-    "vi": "Bộ trang phục Quế Nguyệt"
+    "vi": "Bộ trang phục Quế Nguyệt",
+    "de": "Mondflackern-Set",
+    "es": "Conjunto Destello Lunar",
+    "fr": "Ensemble Flammelune",
+    "pt_br": "Conjunto Clarão Lunar",
+    "ru": "Комплект \"Лунная вспышка\"",
+    "th": "ชุดกุ้ยเยว่",
+    "zh_tw": "桂月套裝"
   },
   "9": {
     "ja": "疾風一式",
     "en": "Swift Gale Set",
     "zh": "急风骤套装",
     "ko": "질풍 세트",
-    "vi": "Bộ trang phục Cấp Phong Tẩu"
+    "vi": "Bộ trang phục Cấp Phong Tẩu",
+    "de": "Set des schnellen Windes",
+    "es": "Conjunto Viento Veloz",
+    "fr": "Ensemble Vent Rapide",
+    "pt_br": "Conjunto Vento Veloz",
+    "ru": "Комплект \"Стремительный вихрь\"",
+    "th": "ชุดจีเฟิงโจว",
+    "zh_tw": "急風驟套裝"
   },
   "10": {
     "ja": "波駆一式",
     "en": "Agile Steps Set",
     "zh": "凌波步套装",
     "ko": "운파 세트",
-    "vi": "Bước Lăng Ba"
+    "vi": "Bước Lăng Ba",
+    "de": "Agile Steps Set",
+    "es": "Agile Steps Set",
+    "fr": "Agile Steps Set",
+    "pt_br": "Agile Steps Set",
+    "ru": "Agile Steps Set",
+    "th": "Agile Steps Set",
+    "zh_tw": "Agile Steps Set"
   },
   "11": {
     "ja": "山崩一式",
     "en": "Swaying Heights Set",
     "zh": "岳山倾套装",
     "ko": "산경 세트",
-    "vi": "Bộ trang phục Nhạc Sơn Nghiêng"
+    "vi": "Bộ trang phục Nhạc Sơn Nghiêng",
+    "de": "Swaying Heights-Set",
+    "es": "Conjunto Alturas Ondulantes",
+    "fr": "Ensemble des Cimes Balançantes",
+    "pt_br": "Conjunto Alturas Oscilantes",
+    "ru": "Комплект \"Колеблющие вершины\"",
+    "th": "ชุดเยว่ซานชิง",
+    "zh_tw": "嶽山傾套裝"
   },
   "12": {
     "ja": "無欠一式",
     "en": "Flawless Defense Set",
     "zh": "御无缺套装",
     "ko": "무결 세트",
-    "vi": "Ngự Vô Khuyết"
+    "vi": "Ngự Vô Khuyết",
+    "de": "Flawless Defense Set",
+    "es": "Flawless Defense Set",
+    "fr": "Flawless Defense Set",
+    "pt_br": "Flawless Defense Set",
+    "ru": "Flawless Defense Set",
+    "th": "Flawless Defense Set",
+    "zh_tw": "Flawless Defense Set"
   },
   "23": {
     "ja": "帰燕一式",
     "en": "Swallowcall Set",
     "zh": "燕归套装",
     "ko": "연귀 세트",
-    "vi": "Bộ trang phục Yến Quy"
+    "vi": "Bộ trang phục Yến Quy",
+    "de": "Schwalbenruf-Set",
+    "es": "Conjunto Llamada de Golondrina",
+    "fr": "Ensemble Hirondelle",
+    "pt_br": "Conjunto Chamado da Andorinha",
+    "ru": "Комплект «Зов ласточки»",
+    "th": "ชุดแย่นกุย",
+    "zh_tw": "燕歸套裝"
   },
   "24": {
     "ja": "江凝一式",
     "en": "Calmwaters Set",
     "zh": "江凝套装",
     "ko": "정수 세트",
-    "vi": "Bộ trang phục Giang Ngưng"
+    "vi": "Bộ trang phục Giang Ngưng",
+    "de": "Stilles-Wasser-Set",
+    "es": "Conjunto Aguas Tranquilas",
+    "fr": "Ensemble Eauxcalmes",
+    "pt_br": "Conjunto Águas Serenas",
+    "ru": "Комплект \"Тихие воды\"",
+    "th": "ชุดเจียงหนิง",
+    "zh_tw": "江凝套裝"
   },
   "25": {
     "ja": "霧柳一式",
     "en": "Mistwillow Set",
     "zh": "烟柳重重套装",
     "ko": "연류 모음 세트",
-    "vi": "Bộ trang phục Yên Liễu Trùng Trùng"
+    "vi": "Bộ trang phục Yên Liễu Trùng Trùng",
+    "de": "Nebelweiden-Set",
+    "es": "Conjunto Mistwillow",
+    "fr": "Ensemble Brumesaule",
+    "pt_br": "Conjunto Salgueiro-nevoento",
+    "ru": "Комплект \"Туманной Ивы\"",
+    "th": "ชุดควันหลิวฉงฉง",
+    "zh_tw": "煙柳重重套裝"
   },
   "26": {
     "ja": "不知寒一式",
     "en": "Beyond the Chill Set",
     "zh": "不知寒套装",
     "ko": "혹한 세트",
-    "vi": "Bộ trang phục Bất Tri Hàn"
+    "vi": "Bộ trang phục Bất Tri Hàn",
+    "de": "Jenseits-der-Kälte-Set",
+    "es": "Conjunto Más Allá del Frío",
+    "fr": "Au-delà du Froid",
+    "pt_br": "Conjunto Além do Frio",
+    "ru": "Комплект \"За пределами холода\"",
+    "th": "ชุดปู้จือหาน",
+    "zh_tw": "不知寒套裝"
   },
   "29": {
     "ja": "浄花一式",
     "en": "Ivorybloom Set",
     "zh": "浣花套装",
     "ko": "화계 세트",
-    "vi": "Bộ trang phục Hoán Hoa"
+    "vi": "Bộ trang phục Hoán Hoa",
+    "de": "Elfenblüten-Set",
+    "es": "Conjunto Flor de Marfil",
+    "fr": "Ensemble Florivoire",
+    "pt_br": "Conjunto Flor de Marfim",
+    "ru": "Комплект \"Слоновой Кости\"",
+    "th": "ชุดฮ่วนฮวา",
+    "zh_tw": "浣花套裝"
   },
   "30": {
     "ja": "梨雪一式",
     "en": "Whirlsnow Set",
     "zh": "梨雪套装",
     "ko": "이설 세트",
-    "vi": "Bộ trang phục Lê Tuyết"
+    "vi": "Bộ trang phục Lê Tuyết",
+    "de": "Schneewirbel-Set",
+    "es": "Conjunto Remolino de Nieve",
+    "fr": "Ensemble Tourbillon-neige",
+    "pt_br": "Conjunto Neve Espiral",
+    "ru": "Комплект \"Вихрь снега\"",
+    "th": "ชุดลี่เสวี่ย",
+    "zh_tw": "梨雪套裝"
   },
   "34": {
     "ja": "連星",
     "en": "Stars Align",
     "zh": "连星",
     "ko": "연성",
-    "vi": "Liên Tinh"
+    "vi": "Liên Tinh",
+    "de": "Sternenkonstellation",
+    "es": "Estrellas Alineadas",
+    "fr": "Alignement des Étoiles",
+    "pt_br": "Estrelas Alinhadas",
+    "ru": "Звёзды Сходятся",
+    "th": "เชื่อมดารา",
+    "zh_tw": "連星"
   },
   "35": {
     "ja": "抱玉一式",
     "en": "Jadeclasp Set",
     "zh": "抱玉套装",
     "ko": "포옥 세트",
-    "vi": "Bộ trang phục Bão Ngọc"
+    "vi": "Bộ trang phục Bão Ngọc",
+    "de": "Jadespange-Set",
+    "es": "Conjunto Broche de Jade",
+    "fr": "Ensemble Agrafejade",
+    "pt_br": "Conjunto Jadeclasp",
+    "ru": "Комплект \"Нефритовый замок\"",
+    "th": "ชุดเป่าอวี้",
+    "zh_tw": "抱玉套裝"
   },
   "44": {
     "ja": "弓の名手一式",
     "en": "Plume Set",
     "zh": "饮羽套装",
     "ko": "혈우 세트",
-    "vi": "Ẩm Vũ"
+    "vi": "Ẩm Vũ",
+    "de": "Plume Set",
+    "es": "Plume Set",
+    "fr": "Plume Set",
+    "pt_br": "Plume Set",
+    "ru": "Plume Set",
+    "th": "Plume Set",
+    "zh_tw": "Plume Set"
   },
   "45": {
     "ja": "驚弦一式",
     "en": "Startling String Set",
     "zh": "惊弦套装",
     "ko": "혈우 세트",
-    "vi": "Kinh Huyền"
+    "vi": "Kinh Huyền",
+    "de": "Startling String Set",
+    "es": "Startling String Set",
+    "fr": "Startling String Set",
+    "pt_br": "Startling String Set",
+    "ru": "Startling String Set",
+    "th": "Startling String Set",
+    "zh_tw": "Startling String Set"
   },
   "46": {
     "ja": "影を追う一式",
     "en": "Pursuing Shadow Set",
     "zh": "追影套装",
     "ko": "추영 세트",
-    "vi": "Truy Ảnh"
+    "vi": "Truy Ảnh",
+    "de": "Pursuing Shadow Set",
+    "es": "Pursuing Shadow Set",
+    "fr": "Pursuing Shadow Set",
+    "pt_br": "Pursuing Shadow Set",
+    "ru": "Pursuing Shadow Set",
+    "th": "Pursuing Shadow Set",
+    "zh_tw": "Pursuing Shadow Set"
   },
   "50": {
     "ja": "斬岳一式",
     "en": "Cleftpeak Set",
     "zh": "断岳套装",
     "ko": "단악 세트",
-    "vi": "Bộ trang phục Đoạn Nhạc"
+    "vi": "Bộ trang phục Đoạn Nhạc",
+    "de": "Kluftgipfel-Set",
+    "es": "Conjunto Pico Hendido",
+    "fr": "Ensemble Picfendu",
+    "pt_br": "Conjunto Cleftpeak",
+    "ru": "Комплект \"Расщепленная вершина\"",
+    "th": "ชุดต้วนเยว่",
+    "zh_tw": "斷嶽套裝"
   },
   "51": {
     "ja": "玄甲一式",
     "en": "Ebonward Set",
     "zh": "玄甲套装",
     "ko": "현갑 세트",
-    "vi": "Bộ trang phục Huyền Giáp"
+    "vi": "Bộ trang phục Huyền Giáp",
+    "de": "Schattenwehr-Set",
+    "es": "Conjunto Guardia de Ébano",
+    "fr": "Ensemble Gardenoire",
+    "pt_br": "Conjunto Ebonward",
+    "ru": "Комплект \"Черный дозор\"",
+    "th": "ชุดเสวียนเจี่ย",
+    "zh_tw": "玄甲套裝"
   },
   "56": {
     "ja": "撼天一式",
     "en": "Etherwrath Set",
     "zh": "撼天套装",
     "ko": "진천 세트",
-    "vi": "Bộ trang phục Hám Thiên"
+    "vi": "Bộ trang phục Hám Thiên",
+    "de": "Etherzorn-Set",
+    "es": "Conjunto Etherwrath",
+    "fr": "Ensemble Etherwrath",
+    "pt_br": "Conjunto Etherwrath",
+    "ru": "Комплект Эфирной ярости",
+    "th": "ชุดฮั่นเทียน",
+    "zh_tw": "撼天套裝"
   },
   "57": {
     "ja": "護義",
     "en": "Exalted Righteousness",
     "zh": "尚义",
     "ko": "상의",
-    "vi": "Thượng Nghĩa"
+    "vi": "Thượng Nghĩa",
+    "de": "Erhabene Rechtschaffenheit",
+    "es": "Rectitud Exaltada",
+    "fr": "Rectitude Exaltée",
+    "pt_br": "Retidão Exaltada",
+    "ru": "Возвышенная Справедливость",
+    "th": "ยึดมั่นในคุณธรรม",
+    "zh_tw": "尚義"
   }
 }

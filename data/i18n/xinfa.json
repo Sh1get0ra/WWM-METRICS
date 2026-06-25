@@ -4,363 +4,727 @@
     "en": "Wind Beneath Wings",
     "zh": "生龙活虎",
     "ko": "맹호의 질주",
-    "vi": "Sinh lực mạnh mẽ"
+    "vi": "Sinh lực mạnh mẽ",
+    "de": "Wind unter den Flügeln",
+    "es": "Viento Bajo las Alas",
+    "fr": "Vent sous les Ailes",
+    "pt_br": "Vento Sob as Asas",
+    "ru": "Ветер под крыльями",
+    "th": "เปี่ยมพลังดั่งมังกร",
+    "zh_tw": "生龍活虎"
   },
   "2": {
     "ja": "晩雪間",
     "en": "Evening Snow",
     "zh": "晚雪间",
     "ko": "설한의 균열",
-    "vi": "Giữa tuyết chiều"
+    "vi": "Giữa tuyết chiều",
+    "de": "Abendschnee",
+    "es": "Nieve Vespertina",
+    "fr": "Neige du Soir",
+    "pt_br": "Neve ao Anoitecer",
+    "ru": "Вечерний Снег",
+    "th": "ท่ามกลางหิมะยามค่ำ",
+    "zh_tw": "晚雪間"
   },
   "3": {
     "ja": "鉄身術",
     "en": "Steadfast Stance",
     "zh": "铁身诀",
     "ko": "철포삼",
-    "vi": "Quyết sắt thân"
+    "vi": "Quyết sắt thân",
+    "de": "Standfeste Haltung",
+    "es": "Postura Firme",
+    "fr": "Posture Inébranlable",
+    "pt_br": "Postura Inabalável",
+    "ru": "Стойка Непоколебимости",
+    "th": "เคล็ดกายเหล็ก",
+    "zh_tw": "鐵身訣"
   },
   "4": {
     "ja": "山月無影",
     "en": "Shadow Assault",
     "zh": "山月无影",
     "ko": "월하의 섬광",
-    "vi": "Trăng núi không bóng"
+    "vi": "Trăng núi không bóng",
+    "de": "Schattenangriff",
+    "es": "Asalto Sombrío",
+    "fr": "Assaut de l'Ombre",
+    "pt_br": "Ataque das Sombras",
+    "ru": "Теневой Штурм",
+    "th": "เงาจันทร์บนภูเขา",
+    "zh_tw": "山月無影"
   },
   "5": {
     "ja": "血涙不止",
     "en": "Fivefold Bleed",
     "zh": "极乐泣血",
     "ko": "핏빛 찬가",
-    "vi": "Huyết lệ cực lạc"
+    "vi": "Huyết lệ cực lạc",
+    "de": "Fünffache Blutung",
+    "es": "Sangrado Quintuple",
+    "fr": "Saignement Quintuple",
+    "pt_br": "Sangramento Quíntuplo",
+    "ru": "Пятикратное Кровотечение",
+    "th": "สุขสุดขีดน้ำตาเลือด",
+    "zh_tw": "極樂泣血"
   },
   "6": {
     "ja": "砂塵一閃",
     "en": "Sandswirl Tail",
     "zh": "沙摆尾",
     "ko": "사막의 춤",
-    "vi": "Đuôi cát vẫy"
+    "vi": "Đuôi cát vẫy",
+    "de": "Sandwirbel-Schwanz",
+    "es": "Cola de Remolino de Arena",
+    "fr": "Queue de Tourbillon Sableux",
+    "pt_br": "Cauda de Redemoinho de Areia",
+    "ru": "Поток карпов",
+    "th": "หางทรายสะบัด",
+    "zh_tw": "沙擺尾"
   },
   "41": {
     "ja": "征軍帰郷",
     "en": "Envigorated Warrior",
     "zh": "征人归",
     "ko": "생명의 귀환",
-    "vi": "Người lính trở về"
+    "vi": "Người lính trở về",
+    "de": "Belebter Krieger",
+    "es": "Guerrero Vigorizado",
+    "fr": "Guerrier Revigoré",
+    "pt_br": "Guerreiro Revigorado",
+    "ru": "Воодушевленный Воин",
+    "th": "นักรบกลับบ้าน",
+    "zh_tw": "征人歸"
   },
   "42": {
     "ja": "怨念連鎖",
     "en": "Bitter Seasons",
     "zh": "所恨年年",
     "ko": "천추의 한",
-    "vi": "Nỗi hận năm năm"
+    "vi": "Nỗi hận năm năm",
+    "de": "Bittere Jahreszeiten",
+    "es": "Estaciones Amargas",
+    "fr": "Saisons Amères",
+    "pt_br": "Estações Amargas",
+    "ru": "Горькие Времена Года",
+    "th": "ความเสียใจในทุกปี",
+    "zh_tw": "所恨年年"
   },
   "43": {
     "ja": "帰燕の経",
     "en": "Vital Leech",
     "zh": "归燕经",
     "ko": "제비의 보은",
-    "vi": "Kinh Yến về"
+    "vi": "Kinh Yến về",
+    "de": "Lebensentzug",
+    "es": "Parásito Vital",
+    "fr": "Sangsue Vitale",
+    "pt_br": "Suga-Vital",
+    "ru": "Высасывание Жизни",
+    "th": "บทแห่งนกนางแอ่นกลับรัง",
+    "zh_tw": "歸燕經"
   },
   "44": {
     "ja": "怒濤斬馬",
     "en": "Fury Harvest",
     "zh": "怒斩马",
     "ko": "분노의 참격",
-    "vi": "Chém ngựa giận dữ"
+    "vi": "Chém ngựa giận dữ",
+    "de": "Furien-Ernte",
+    "es": "Cosecha de Furia",
+    "fr": "Moisson de Fureur",
+    "pt_br": "Colheita de Fúria",
+    "ru": "Жатва Ярости",
+    "th": "ฟันม้าด้วยความโกรธ",
+    "zh_tw": "怒斬馬"
   },
   "45": {
     "ja": "長生無相",
     "en": "Divine Roulette",
     "zh": "长生无相",
     "ko": "무상의 불멸",
-    "vi": "Trường sinh vô tướng"
+    "vi": "Trường sinh vô tướng",
+    "de": "Göttliches Roulette",
+    "es": "Ruleta Divina",
+    "fr": "Roulette Divine",
+    "pt_br": "Roleta Divina",
+    "ru": "Божественная Рулетка",
+    "th": "อมตะไร้รูป",
+    "zh_tw": "長生無相"
   },
   "46": {
     "ja": "舞影",
     "en": "Evasive Charge",
     "zh": "婆娑影",
     "ko": "춤추는 그림자",
-    "vi": "Bóng Bà Sa"
+    "vi": "Bóng Bà Sa",
+    "de": "Ausweichladung",
+    "es": "Carga Evasiva",
+    "fr": "Charge Évasive",
+    "pt_br": "Carga Evasiva",
+    "ru": "Уклоняющийся Рывок",
+    "th": "เงาเต้นระบำ",
+    "zh_tw": "婆娑影"
   },
   "47": {
     "ja": "和光同塵",
     "en": "Light and Shadow Alike",
     "zh": "明晦同尘",
     "ko": "빛과 그림자",
-    "vi": "Sáng tối cùng bụi"
+    "vi": "Sáng tối cùng bụi",
+    "de": "Licht und Schatten Alike",
+    "es": "Luz y Sombra por Igual",
+    "fr": "Lumière et Ombres Alike",
+    "pt_br": "Luz e Sombra Iguais",
+    "ru": "Свет и тень как одно",
+    "th": "แสงและเงารวมเป็นหนึ่ง",
+    "zh_tw": "明晦同塵"
   },
   "48": {
     "ja": "赤心筆",
     "en": "Heart of Fire",
     "zh": "丹心篆",
     "ko": "단심의 서약",
-    "vi": "Tâm son khắc"
+    "vi": "Tâm son khắc",
+    "de": "Herz des Feuers",
+    "es": "Corazón de Fuego",
+    "fr": "Cœur de Feu",
+    "pt_br": "Coração de Fogo",
+    "ru": "Сердце огня",
+    "th": "ตราประทับหัวใจสีแดง",
+    "zh_tw": "丹心篆"
   },
   "81": {
     "ja": "易水の歌",
     "en": "Morale Chant",
     "zh": "易水歌",
     "ko": "결의의 노래",
-    "vi": "Bài ca Dễ Thủy"
+    "vi": "Bài ca Dễ Thủy",
+    "de": "Moralgesang",
+    "es": "Canto de Moral",
+    "fr": "Chant du Moral",
+    "pt_br": "Canto de Moral",
+    "ru": "Боевой Напев",
+    "th": "เพลงแห่งอี๋สุ่ย",
+    "zh_tw": "易水歌"
   },
   "82": {
     "ja": "四季無常",
     "en": "Seasonal Edge",
     "zh": "四时无常",
     "ko": "계절의 순환",
-    "vi": "Bốn mùa vô thường"
+    "vi": "Bốn mùa vô thường",
+    "de": "Jahreszeitenklinge",
+    "es": "Filo Estacional",
+    "fr": "Tranchant Saisonnier",
+    "pt_br": "Gume Sazonal",
+    "ru": "Сезонное Лезвие",
+    "th": "สี่ฤดูที่ไม่แน่นอน",
+    "zh_tw": "四時無常"
   },
   "101": {
     "ja": "千山法",
     "en": "Mountain's Might",
     "zh": "千山法",
     "ko": "천산의 의지",
-    "vi": "Pháp ngàn núi"
+    "vi": "Pháp ngàn núi",
+    "de": "Macht des Berges",
+    "es": "Poder del Monte",
+    "fr": "Puissance de la Montagne",
+    "pt_br": "Poder da Montanha",
+    "ru": "Мощь Горы",
+    "th": "วิถีพันภูเขา",
+    "zh_tw": "千山法"
   },
   "102": {
     "ja": "星火燎原",
     "en": "Wildfire Spark",
     "zh": "燎原星火",
     "ko": "잿빛의 잔영",
-    "vi": "Lửa sao lan rộng"
+    "vi": "Lửa sao lan rộng",
+    "de": "Wildfunken",
+    "es": "Chispa de Incendio",
+    "fr": "Étincelle de Feu Sauvage",
+    "pt_br": "Centelha de Incêndio",
+    "ru": "Искра Пожара",
+    "th": "ประกายไฟเผาผลาญ",
+    "zh_tw": "燎原星火"
   },
   "103": {
     "ja": "威猛歌",
     "en": "Battle Anthem",
     "zh": "威猛歌",
     "ko": "맹수의 포효",
-    "vi": "Bài ca uy mãnh"
+    "vi": "Bài ca uy mãnh",
+    "de": "Schlachthymne",
+    "es": "Himno de Batalla",
+    "fr": "Hymne de Bataille",
+    "pt_br": "Hino de Batalha",
+    "ru": "Боевой Гимн",
+    "th": "บทเพลงแห่งพลัง",
+    "zh_tw": "威猛歌"
   },
   "104": {
     "ja": "無名心法",
     "en": "Sword Morph",
     "zh": "无名心法",
     "ko": "무명 심법",
-    "vi": "Tâm pháp vô danh"
+    "vi": "Tâm pháp vô danh",
+    "de": "Schwertwandlung",
+    "es": "Morfosis de Espada",
+    "fr": "Métamorphose de l'Épée",
+    "pt_br": "Morfar Espada",
+    "ru": "Трансформация Меча",
+    "th": "เคล็ดวิชาลึกลับ",
+    "zh_tw": "無名心法"
   },
   "151": {
     "ja": "逐狼心経",
     "en": "Wolfchaser's Art",
     "zh": "逐狼心经",
     "ko": "굶주린 늑대",
-    "vi": "Tâm kinh truy sói"
+    "vi": "Tâm kinh truy sói",
+    "de": "Kunst des Wolfsjägers",
+    "es": "Arte del Cazalobos",
+    "fr": "Art du Chasseur de Loups",
+    "pt_br": "Arte do Perseguidor de Lobos",
+    "ru": "Искусство Волчьего Преследователя",
+    "th": "คัมภีร์จิตหมาป่า",
+    "zh_tw": "逐狼心經"
   },
   "152": {
     "ja": "武芸百般",
     "en": "Adaptive Steel",
     "zh": "移经易武",
     "ko": "무공의 경지",
-    "vi": "Di kinh đổi võ"
+    "vi": "Di kinh đổi võ",
+    "de": "Anpassungsfähiger Stahl",
+    "es": "Acero Adaptable",
+    "fr": "Acier Adaptatif",
+    "pt_br": "Aço Adaptável",
+    "ru": "Адаптивная сталь",
+    "th": "เคล็ดเปลี่ยนเส้นเอ็น",
+    "zh_tw": "移經易武"
   },
   "153": {
     "ja": "一心不乱",
     "en": "Insightful Strike",
     "zh": "凝神章",
     "ko": "통찰의 눈",
-    "vi": "Chương ngưng thần"
+    "vi": "Chương ngưng thần",
+    "de": "Einsichtiger Hieb",
+    "es": "Golpe Perspicaz",
+    "fr": "Frappe Perspicace",
+    "pt_br": "Golpe Perspicaz",
+    "ru": "Проницательный удар",
+    "th": "บทแห่งสมาธิ",
+    "zh_tw": "凝神章"
   },
   "154": {
     "ja": "剣気斬波",
     "en": "Sword Horizon",
     "zh": "剑气纵横",
     "ko": "광풍의 검기",
-    "vi": "Kiếm khí tung hoành"
+    "vi": "Kiếm khí tung hoành",
+    "de": "Schwerthorizont",
+    "es": "Horizonte de Espada",
+    "fr": "Horizon de l'Épée",
+    "pt_br": "Horizonte da Espada",
+    "ru": "Горизонт меча",
+    "th": "พลังดาบสะท้านฟ้า",
+    "zh_tw": "劍氣縱橫"
   },
   "301": {
     "ja": "一得一失",
     "en": "Gourd Toss",
     "zh": "葫芦飞飞",
     "ko": "비상하는 호리병",
-    "vi": "Bầu hồ lô bay bay"
+    "vi": "Bầu hồ lô bay bay",
+    "de": "Fliegende Kürbisse",
+    "es": "Calabazas Voladoras",
+    "fr": "Gourdes Volantes",
+    "pt_br": "Cabaças Voadoras",
+    "ru": "Летучие тыквы",
+    "th": "น้ำเต้าลอยลม",
+    "zh_tw": "葫蘆飛飛"
   },
   "302": {
     "ja": "春雷一閃",
     "en": "Thunderous Bloom",
     "zh": "春雷篇",
     "ko": "춘뢰일섬",
-    "vi": "Chương sấm xuân"
+    "vi": "Chương sấm xuân",
+    "de": "Donnernde Blüte",
+    "es": "Floración Atronadora",
+    "fr": "Floraison Tonitruante",
+    "pt_br": "Florescer Trovejante",
+    "ru": "Громовое цветение",
+    "th": "บทสายฟ้าฤดูใบไม้ผลิ",
+    "zh_tw": "春雷篇"
   },
   "303": {
     "ja": "摘星の術",
     "en": "Star Reacher",
     "zh": "纵地摘星",
     "ko": "천공참",
-    "vi": "Vượt đất hái sao"
+    "vi": "Vượt đất hái sao",
+    "de": "Sternengreifer",
+    "es": "Alcanzador de Estrellas",
+    "fr": "Attrape-Étoiles",
+    "pt_br": "Alcançador de Estrelas",
+    "ru": "Достигающий звёзд",
+    "th": "ก้าวข้ามฟ้าคว้าดาว",
+    "zh_tw": "縱地摘星"
   },
   "304": {
     "ja": "花上月令",
     "en": "Blossom Barrage",
     "zh": "花上月令",
     "ko": "월광의 계율",
-    "vi": "Hoa trên lệnh nguyệt"
+    "vi": "Hoa trên lệnh nguyệt",
+    "de": "Blütenhagel",
+    "es": "Barrera de Flores",
+    "fr": "Barrage de Fleurs",
+    "pt_br": "Barragem de Flores",
+    "ru": "Цветочный барраж",
+    "th": "บทกวีแห่งดอกไม้และจันทรา",
+    "zh_tw": "花上月令"
   },
   "351": {
     "ja": "君臣薬",
     "en": "Royal Remedy",
     "zh": "君臣药",
     "ko": "군신의 묘약",
-    "vi": "Thuốc quân thần"
+    "vi": "Thuốc quân thần",
+    "de": "Königliche Heilung",
+    "es": "Remedio Real",
+    "fr": "Remède Royal",
+    "pt_br": "Remédio Real",
+    "ru": "Королевское снадобье",
+    "th": "ยาราชาและขุนนาง",
+    "zh_tw": "君臣藥"
   },
   "352": {
     "ja": "散花不滅",
     "en": "Restoring Blossom",
     "zh": "杏花不见",
     "ko": "만개한 복사꽃",
-    "vi": "Hoa mai không thấy"
+    "vi": "Hoa mai không thấy",
+    "de": "Heilende Blüte",
+    "es": "Flor Restauradora",
+    "fr": "Fleur Restauratrice",
+    "pt_br": "Florescer Restaurador",
+    "ru": "Восстанавливающий цветок",
+    "th": "ดอกแอปริคอทที่มองไม่เห็น",
+    "zh_tw": "杏花不見"
   },
   "353": {
     "ja": "蘇生の術",
     "en": "Esoteric Revival",
     "zh": "指玄篇注",
     "ko": "생명의 고서",
-    "vi": "Chú giải chương chỉ huyền"
+    "vi": "Chú giải chương chỉ huyền",
+    "de": "Esoterische Wiederbelebung",
+    "es": "Renacimiento Esotérico",
+    "fr": "Renaissance Ésotérique",
+    "pt_br": "Renascimento Esotérico",
+    "ru": "Эзотерическое возрождение",
+    "th": "คำอธิบายบทชี้แนะ",
+    "zh_tw": "指玄篇註"
   },
   "354": {
     "ja": "癒しの糸",
     "en": "Mending Loom",
     "zh": "千丝蛊",
     "ko": "회복의 실",
-    "vi": "Ngàn tơ cổ"
+    "vi": "Ngàn tơ cổ",
+    "de": "Heilender Webstuhl",
+    "es": "Telar Reparador",
+    "fr": "Métier à Réparer",
+    "pt_br": "Tear de Reparo",
+    "ru": "Ткацкий станок восстановления",
+    "th": "พิษไหมนับพัน",
+    "zh_tw": "千絲蠱"
   },
   "401": {
     "ja": "山河絶韻",
     "en": "Exquisite Scenery",
     "zh": "山河绝韵",
     "ko": "지축의 분노",
-    "vi": "Giai điệu tuyệt vời của núi sông"
+    "vi": "Giai điệu tuyệt vời của núi sông",
+    "de": "Exquisite Landschaft",
+    "es": "Paisaje Exquisito",
+    "fr": "Paysage Exquis",
+    "pt_br": "Cenário Exuberante",
+    "ru": "Изысканный пейзаж",
+    "th": "บทเพลงแห่งขุนเขาและสายน้ำ",
+    "zh_tw": "山河絕韻"
   },
   "402": {
     "ja": "困獣心経",
     "en": "Trapped Beast",
     "zh": "困兽心经",
     "ko": "맹수의 혼",
-    "vi": "Tâm kinh thú bị vây"
+    "vi": "Tâm kinh thú bị vây",
+    "de": "Gefangenes Tier",
+    "es": "Bestia Atrapada",
+    "fr": "Bête Piégée",
+    "pt_br": "Fera Aprisionada",
+    "ru": "Загнанный зверь",
+    "th": "คัมภีร์สัตว์ร้าย",
+    "zh_tw": "困獸心經"
   },
   "403": {
     "ja": "堅忍の術",
     "en": "Art of Resistance",
     "zh": "抗造大法",
     "ko": "저항의 법칙",
-    "vi": "Đại pháp chống chịu"
+    "vi": "Đại pháp chống chịu",
+    "de": "Kunst des Widerstands",
+    "es": "Arte de la Resistencia",
+    "fr": "Art de la Résistance",
+    "pt_br": "Arte da Resistência",
+    "ru": "Искусство сопротивления",
+    "th": "วิชาต้านทาน",
+    "zh_tw": "抗造大法"
   },
   "404": {
     "ja": "磐石訣",
     "en": "Rock Solid",
     "zh": "磐石诀",
     "ko": "강철의 비기",
-    "vi": "Quyết đá tảng"
+    "vi": "Quyết đá tảng",
+    "de": "Felsenfest",
+    "es": "Roca Sólida",
+    "fr": "Solide comme le Roc",
+    "pt_br": "Sólido como Rocha",
+    "ru": "Твёрдый как камень",
+    "th": "เคล็ดหินผา",
+    "zh_tw": "磐石訣"
   },
   "451": {
     "ja": "忘川絶響",
     "en": "Echoes of Oblivion",
     "zh": "忘川绝响",
     "ko": "망각의 울림",
-    "vi": "Âm vang tuyệt diệt của Vong Xuyên"
+    "vi": "Âm vang tuyệt diệt của Vong Xuyên",
+    "de": "Echos des Vergessens",
+    "es": "Ecos del Olvido",
+    "fr": "Échos de l'Oubli",
+    "pt_br": "Ecos do Esquecimento",
+    "ru": "Эхо забвения",
+    "th": "บทเพลงแห่งแม่น้ำลืมเลือน",
+    "zh_tw": "忘川絕響"
   },
   "452": {
     "ja": "宿怨結晶",
     "en": "Vendetta",
     "zh": "心弥泥鱼",
     "ko": "심연의 늪",
-    "vi": "Tâm cá bùn đầy"
+    "vi": "Tâm cá bùn đầy",
+    "de": "Vendetta",
+    "es": "Venganza",
+    "fr": "Vendetta",
+    "pt_br": "Vingança",
+    "ru": "Вендетта",
+    "th": "จิตแห่งปลาดิน",
+    "zh_tw": "心彌泥魚"
   },
   "453": {
     "ja": "断石心法",
     "en": "Breaking Point",
     "zh": "断石之构",
     "ko": "파괴의 서막",
-    "vi": "Cấu trúc đá gãy"
+    "vi": "Cấu trúc đá gãy",
+    "de": "Brechpunkt",
+    "es": "Punto de Ruptura",
+    "fr": "Point de Rupture",
+    "pt_br": "Ponto de Ruptura",
+    "ru": "Предел прочности",
+    "th": "โครงสร้างหินแตก",
+    "zh_tw": "斷石之構"
   },
   "454": {
     "ja": "蒼浪剣訣",
     "en": "Riptide Reflex",
     "zh": "沧浪剑诀",
     "ko": "파도의 검기",
-    "vi": "Kiếm pháp Thương Lang"
+    "vi": "Kiếm pháp Thương Lang",
+    "de": "Gezeitenreflex",
+    "es": "Reflejo de Marea",
+    "fr": "Reflexe du Courant",
+    "pt_br": "Reflexo da Maré",
+    "ru": "Рефлекс отлива",
+    "th": "กระบวนท่าดาบชางล่าง",
+    "zh_tw": "滄浪劍訣"
   },
   "501": {
     "ja": "千軍の咆哮",
     "en": "Phantom Rally",
     "zh": "千营一呼",
     "ko": "천군의 함성",
-    "vi": "Ngàn quân một tiếng gọi"
+    "vi": "Ngàn quân một tiếng gọi",
+    "de": "Phantomsammlung",
+    "es": "Convocación Fantasma",
+    "fr": "Ralliement Fantôme",
+    "pt_br": "Reunião Fantasma",
+    "ru": "Фантомный сбор",
+    "th": "เรียกกองทัพพันนาย",
+    "zh_tw": "千營一呼"
   },
   "502": {
     "ja": "砂舟行木",
     "en": "Towline Sweep",
     "zh": "绳舟行木",
     "ko": "이동하는 나무배",
-    "vi": "Dây thuyền đi gỗ"
+    "vi": "Dây thuyền đi gỗ",
+    "de": "Schleppnetz-Feger",
+    "es": "Barrido de Cable",
+    "fr": "Balayage de Remorque",
+    "pt_br": "Varredura de Corda",
+    "ru": "Размашистый Рывок",
+    "th": "เชือกพายเรือ",
+    "zh_tw": "繩舟行木"
   },
   "503": {
     "ja": "灯火詞",
     "en": "Light Anew",
     "zh": "灯儿亮",
     "ko": "촛불의 잔영",
-    "vi": "Đèn sáng"
+    "vi": "Đèn sáng",
+    "de": "Neues Licht",
+    "es": "Renacer de la Luz",
+    "fr": "Lumière Renaissante",
+    "pt_br": "Luz Renovada",
+    "ru": "Новый Свет",
+    "th": "แสงโคมสว่าง",
+    "zh_tw": "燈兒亮"
   },
   "504": {
     "ja": "大唐歌",
     "en": "Song of Tang",
     "zh": "大唐歌",
     "ko": "대당의 노래",
-    "vi": "Bài ca Đại Đường"
+    "vi": "Bài ca Đại Đường",
+    "de": "Lied der Tang",
+    "es": "Canción de Tang",
+    "fr": "Chant des Tang",
+    "pt_br": "Canção de Tang",
+    "ru": "Песня Тан",
+    "th": "บทเพลงต้าถัง",
+    "zh_tw": "大唐歌"
   },
   "551": {
     "ja": "霜天白夜",
     "en": "Frost-Clad Night",
     "zh": "霜天白夜",
     "ko": "서리 백야",
-    "vi": "Đêm trắng trời sương"
+    "vi": "Đêm trắng trời sương",
+    "de": "Frostklare Nacht",
+    "es": "Noche Escarchada",
+    "fr": "Nuit Givrée",
+    "pt_br": "Noite Revestida de Gelo",
+    "ru": "Морозная Ночь",
+    "th": "ฟ้าหนาวกลางคืนขาว",
+    "zh_tw": "霜天白夜"
   },
   "552": {
     "ja": "不滅忠魂",
     "en": "Steadfast Devotion",
     "zh": "孤忠不辞",
     "ko": "외로운 충성",
-    "vi": "Trung thành không từ"
+    "vi": "Trung thành không từ",
+    "de": "Unerschütterliche Hingabe",
+    "es": "Devoción Inquebrantable",
+    "fr": "Dévotion Inébranlable",
+    "pt_br": "Devoção Inabalável",
+    "ru": "Непоколебимая Преданность",
+    "th": "ภักดีไม่ย่อท้อ",
+    "zh_tw": "孤忠不辭"
   },
   "553": {
     "ja": "穿喉の訣",
     "en": "Throat-Piercing Art",
     "zh": "穿喉诀",
     "ko": "관목결",
-    "vi": "Quyết xuyên họng"
+    "vi": "Quyết xuyên họng",
+    "de": "Kehlendurchdringende Kunst",
+    "es": "Arte Perforagargantas",
+    "fr": "Art Perçant la Gorge",
+    "pt_br": "Arte de Perfuração de Garganta",
+    "ru": "Искусство Пронзания Горла",
+    "th": "กระบวนท่าทะลุลำคอ",
+    "zh_tw": "穿喉訣"
   },
   "554": {
     "ja": "燎原脚",
     "en": "Wildfire Surge",
     "zh": "燎原踏",
     "ko": "요원의 불길",
-    "vi": "Bước chân cháy lan"
+    "vi": "Bước chân cháy lan",
+    "de": "Wildfeuer-Welle",
+    "es": "Oleada de Fuego Salvaje",
+    "fr": "Vague de Feu Sauvage",
+    "pt_br": "Onda de Fogo Selvagem",
+    "ru": "Вал Пламени",
+    "th": "เหยียบเผาผลาญ",
+    "zh_tw": "燎原踏"
   },
   "601": {
     "ja": "大義天志",
     "en": "Soaring High",
     "zh": "扶摇直上",
     "ko": "풍운 승천",
-    "vi": "Bay thẳng lên trời"
+    "vi": "Bay thẳng lên trời",
+    "de": "Soaring High",
+    "es": "Soaring High",
+    "fr": "Soaring High",
+    "pt_br": "Soaring High",
+    "ru": "Soaring High",
+    "th": "Soaring High",
+    "zh_tw": "Soaring High"
   },
   "602": {
     "ja": "擒天勢",
     "en": "Sky Gripped",
     "zh": "擒天势",
     "ko": "속박의 기세",
-    "vi": "Thế bắt trời"
+    "vi": "Thế bắt trời",
+    "de": "Himmelsgriff",
+    "es": "Agarre del Cielo",
+    "fr": "Étreinte Céleste",
+    "pt_br": "Agarrão Celestial",
+    "ru": "Небесная Хватка",
+    "th": "พลังจับฟ้า",
+    "zh_tw": "擒天勢"
   },
   "603": {
     "ja": "三窮悟知",
     "en": "Empirical Edge",
     "zh": "三穷致知",
     "ko": "만물의 통찰",
-    "vi": "Ba khó dẫn đến tri thức"
+    "vi": "Ba khó dẫn đến tri thức",
+    "de": "Empirischer Vorteil",
+    "es": "Ventaja Empírica",
+    "fr": "Avantage empirique",
+    "pt_br": "Vantagem Empírica",
+    "ru": "Эмпирическое преимущество",
+    "th": "สามวิถีสู่ปัญญา",
+    "zh_tw": "三窮致知"
   },
   "604": {
     "ja": "天行不息",
     "en": "Celestial Vigor",
     "zh": "天行健",
     "ko": "천행의 순환",
-    "vi": "Trời hành kiên"
+    "vi": "Trời hành kiên",
+    "de": "Himmlische Lebenskraft",
+    "es": "Vigor Celestial",
+    "fr": "Vigueur Céleste",
+    "pt_br": "Vigor Celestial",
+    "ru": "Небесная бодрость",
+    "th": "การเคลื่อนไหวแห่งฟ้า",
+    "zh_tw": "天行健"
   }
 }

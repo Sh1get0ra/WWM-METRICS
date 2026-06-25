@@ -66,7 +66,7 @@
     if (!path || !path.pathBase || !path.affix) return;
     const ui = data.ui = data.ui || {};
     const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
-    const LANGS = ['ja', 'en', 'zh', 'ko', 'vi'];
+    const LANGS = ['ja', 'en', 'zh', 'ko', 'vi', 'de', 'es', 'fr', 'pt_br', 'ru', 'th', 'zh_tw'];
     // vi = 語順反転 (affix 前置 + base 後置)。 例: ja「鋼鳴攻撃」/ vi「Tấn công Minh Kim」
     // path.affix.{atk,pen,dmgUp}.vi は trailing space 付きで採取 (pen.vi="Xuyên thấu " 等)、
     // base.vi は trailing space 無し (pathBase.vi="Minh Kim") → affix + base 連結で自然 spacing。

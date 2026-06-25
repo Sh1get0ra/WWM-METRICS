@@ -4,62 +4,125 @@
     "en": "Sword",
     "zh": "剑",
     "ko": "검",
-    "vi": "Kiếm"
+    "vi": "Kiếm",
+    "de": "Schwert",
+    "es": "Espada",
+    "fr": "Épée",
+    "pt_br": "Espada",
+    "ru": "Меч",
+    "th": "ดาบ",
+    "zh_tw": "劍"
   },
   "spear": {
     "ja": "槍",
     "en": "Spear",
     "zh": "枪",
     "ko": "창",
-    "vi": "Súng"
+    "vi": "Súng",
+    "de": "Speer",
+    "es": "Lanza",
+    "fr": "Lance",
+    "pt_br": "Lança",
+    "ru": "Копье",
+    "th": "หอก",
+    "zh_tw": "槍"
   },
   "fan": {
     "ja": "扇",
     "en": "Fan",
     "zh": "扇",
     "ko": "부채",
-    "vi": "Quạt"
+    "vi": "Quạt",
+    "de": "Fan",
+    "es": "Fan",
+    "fr": "Fan",
+    "pt_br": "Fan",
+    "ru": "Веер",
+    "th": "พัด",
+    "zh_tw": "扇"
   },
   "umbrella": {
     "ja": "傘",
     "en": "Umbrella",
     "zh": "伞",
     "ko": "우산",
-    "vi": "Dù"
+    "vi": "Dù",
+    "de": "Schirm",
+    "es": "Sombrilla",
+    "fr": "Parapluie",
+    "pt_br": "Guarda-chuva",
+    "ru": "Зонт",
+    "th": "ร่ม",
+    "zh_tw": "傘"
   },
   "mo_blade": {
     "ja": "斬馬刀",
     "en": "Mo Blade",
     "zh": "陌刀",
     "ko": "맥도",
-    "vi": "Đao Mạc"
+    "vi": "Đao Mạc",
+    "de": "Mo-Klinge",
+    "es": "Espada Mo",
+    "fr": "Lame Mo",
+    "pt_br": "Lâmina Mo",
+    "ru": "Клинок Мо",
+    "th": "ดาบใหญ่",
+    "zh_tw": "陌刀"
   },
   "dual_blades": {
     "ja": "双剣",
     "en": "Dual Blades",
     "zh": "双刀",
     "ko": "쌍도",
-    "vi": "Song đao"
+    "vi": "Song đao",
+    "de": "Doppelklingen",
+    "es": "Espadas Gemelas",
+    "fr": "Lames Jumelles",
+    "pt_br": "Lâminas Duplas",
+    "ru": "Парные клинки",
+    "th": "ดาบคู่",
+    "zh_tw": "雙刀"
   },
   "new_blade": {
     "ja": "横刀",
     "en": "Heng Blade",
     "zh": "横刀",
     "ko": "횡도",
-    "vi": "Hoành đao"
+    "vi": "Hoành đao",
+    "de": "Heng-Klinge",
+    "es": "Espada Heng",
+    "fr": "Lame Heng",
+    "pt_br": "Lâmina Heng",
+    "ru": "Клинок Хэн",
+    "th": "ดาบขวาง",
+    "zh_tw": "橫刀"
   },
   "rope_dart": {
     "ja": "縄鏢",
     "en": "Rope Dart",
     "zh": "绳镖",
     "ko": "승표",
-    "vi": "Dây phi tiêu"
+    "vi": "Dây phi tiêu",
+    "de": "Seildolch",
+    "es": "Dardo con Cuerda",
+    "fr": "Dard-Corde",
+    "pt_br": "Dardo de Corda",
+    "ru": "Веревочный дротик",
+    "th": "เชือกปลายแหลม",
+    "zh_tw": "繩鏢"
   },
   "gauntlet": {
     "ja": "手甲",
     "en": "Gauntlets",
     "zh": "手甲",
     "ko": "권갑",
-    "vi": "Găng tay"
+    "vi": "Găng tay",
+    "de": "Panzerhandschuhe",
+    "es": "Guanteletes",
+    "fr": "Gantelets",
+    "pt_br": "Manoplas",
+    "ru": "Рукавицы",
+    "th": "สนับมือ",
+    "zh_tw": "手甲"
   }
 }
