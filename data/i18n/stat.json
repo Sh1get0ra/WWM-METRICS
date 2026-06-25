@@ -495,13 +495,13 @@
     "zh": "跃击增伤",
     "ko": "도약격 피해 강화",
     "vi": "Gia tăng Sát thương đòn nhảy",
-    "de": "Jump Strike",
-    "es": "Jump Strike",
-    "fr": "Jump Strike",
-    "pt_br": "Jump Strike",
-    "ru": "Jump Strike",
-    "th": "Jump Strike",
-    "zh_tw": "Jump Strike"
+    "de": "Sprungangriff",
+    "es": "Golpe en Salto",
+    "fr": "Frappe en Saut",
+    "pt_br": "Golpe no Salto",
+    "ru": "Прыжковый удар",
+    "th": "กระโดดฟัน",
+    "zh_tw": "跳劈"
   },
   "dualWeaponSkillDmg": {
     "ja": "双武器技ダメ強化",

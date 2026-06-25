@@ -103,13 +103,13 @@
     "zh": "重击回复",
     "ko": "중격 회복",
     "vi": "kỹ năng hồi phục",
-    "de": "Heal",
-    "es": "Heal",
-    "fr": "Heal",
-    "pt_br": "Heal",
-    "ru": "Heal",
-    "th": "Heal",
-    "zh_tw": "Heal"
+    "de": "Heilen",
+    "es": "Curar",
+    "fr": "Soin",
+    "pt_br": "Cura",
+    "ru": "Лечение",
+    "th": "การรักษา",
+    "zh_tw": "治療"
   },
   "bleed": {
     "ja": "流血",

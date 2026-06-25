@@ -9,9 +9,9 @@
     "es": "Normal",
     "fr": "Normal",
     "pt_br": "Normal",
-    "ru": "Normal",
-    "th": "Normal",
-    "zh_tw": "Normal"
+    "ru": "Обычный",
+    "th": "ทั่วไป",
+    "zh_tw": "普通"
   },
   "dmgSplitGraze": {
     "ja": "軽傷",
@@ -131,13 +131,13 @@
     "zh": "读取",
     "ko": "불러오기",
     "vi": "Tải",
-    "de": "Load",
-    "es": "Load",
-    "fr": "Load",
-    "pt_br": "Load",
-    "ru": "Load",
-    "th": "Load",
-    "zh_tw": "Load"
+    "de": "Laden",
+    "es": "Cargar",
+    "fr": "Charger",
+    "pt_br": "Carregar",
+    "ru": "Загрузить",
+    "th": "โหลด",
+    "zh_tw": "裝西麥"
   },
   "presetNamePlaceholder": {
     "ja": "プリセット {n}",
@@ -439,13 +439,13 @@
     "zh": "显示项目",
     "ko": "표시 항목",
     "vi": "Mục hiển thị",
-    "de": "Items",
-    "es": "Items",
-    "fr": "Items",
-    "pt_br": "Items",
-    "ru": "Items",
-    "th": "Items",
-    "zh_tw": "Items"
+    "de": "Gegenstände",
+    "es": "Objetos",
+    "fr": "Objets",
+    "pt_br": "Itens",
+    "ru": "Предметы",
+    "th": "ไอเทม",
+    "zh_tw": "道具"
   },
   "cardItemStats": {
     "ja": "基礎値",
@@ -831,13 +831,13 @@
     "zh": "共斗",
     "ko": "협동",
     "vi": "Đồng đội",
-    "de": "Co-op",
-    "es": "Co-op",
-    "fr": "Co-op",
+    "de": "Kooperation",
+    "es": "Cooperativo",
+    "fr": "Coopératif",
     "pt_br": "Co-op",
-    "ru": "Co-op",
-    "th": "Co-op",
-    "zh_tw": "Co-op"
+    "ru": "Кооператив",
+    "th": "ออนไลน์",
+    "zh_tw": "連線"
   },
   "cardStyle_explore": {
     "ja": "探索",
@@ -873,13 +873,13 @@
     "zh": "演奏",
     "ko": "연주",
     "vi": "Hòa tấu",
-    "de": "Music",
-    "es": "Music",
-    "fr": "Music",
-    "pt_br": "Music",
-    "ru": "Music",
-    "th": "Music",
-    "zh_tw": "Music"
+    "de": "Musik",
+    "es": "Música",
+    "fr": "Musique",
+    "pt_br": "Música",
+    "ru": "Музыка",
+    "th": "บทเพลง",
+    "zh_tw": "樂曲"
   },
   "cardStyle_housing": {
     "ja": "ハウジング",
@@ -915,13 +915,13 @@
     "zh": "休闲党",
     "ko": "엔조이",
     "vi": "Phái thư giãn",
-    "de": "Casual",
-    "es": "Casual",
-    "fr": "Casual",
+    "de": "Freizeit",
+    "es": "Informal",
+    "fr": "Décontracté",
     "pt_br": "Casual",
-    "ru": "Casual",
-    "th": "Casual",
-    "zh_tw": "Casual"
+    "ru": "Обычный",
+    "th": "พักผ่อน",
+    "zh_tw": "休閒"
   },
   "cardStyle_gachi": {
     "ja": "ガチ勢",
@@ -933,9 +933,9 @@
     "es": "Hardcore",
     "fr": "Hardcore",
     "pt_br": "Hardcore",
-    "ru": "Hardcore",
-    "th": "Hardcore",
-    "zh_tw": "Hardcore"
+    "ru": "Хардкор",
+    "th": "สถานการณ์คับขัน·สละชีวิต",
+    "zh_tw": "絕境·捨生"
   },
   "errImportParse": {
     "ja": "インポートデータの解析に失敗しました。公式ツールからもう一度実行してください",
@@ -2203,13 +2203,13 @@
     "zh": "采用",
     "ko": "적용",
     "vi": "Áp dụng",
-    "de": "Apply",
-    "es": "Apply",
-    "fr": "Apply",
-    "pt_br": "Apply",
-    "ru": "Apply",
-    "th": "Apply",
-    "zh_tw": "Apply"
+    "de": "Anwenden",
+    "es": "Aplicar",
+    "fr": "Appliquer",
+    "pt_br": "Aplicar",
+    "ru": "Применить",
+    "th": "สมัครเข้าร่วม",
+    "zh_tw": "申請加入"
   },
   "optZerobaseCompare": {
     "ja": "格析",
@@ -2679,13 +2679,13 @@
     "zh": "期望值",
     "ko": "기댓값",
     "vi": "Giá trị Kỳ vọng",
-    "de": "Rank",
-    "es": "Rank",
-    "fr": "Rank",
-    "pt_br": "Rank",
-    "ru": "Rank",
-    "th": "Rank",
-    "zh_tw": "Rank"
+    "de": "Rang",
+    "es": "Rango",
+    "fr": "Classement",
+    "pt_br": "Classificação",
+    "ru": "Ранг",
+    "th": "อันดับ",
+    "zh_tw": "排名"
   },
   "anlzTabOpt": {
     "ja": "最適化",
@@ -3043,13 +3043,13 @@
     "zh": "缩放",
     "ko": "비율",
     "vi": "Tỷ lệ",
-    "de": "Scale",
-    "es": "Scale",
-    "fr": "Scale",
-    "pt_br": "Scale",
-    "ru": "Scale",
-    "th": "Scale",
-    "zh_tw": "Scale"
+    "de": "Skalierung",
+    "es": "Escala",
+    "fr": "Échelle",
+    "pt_br": "Escala",
+    "ru": "Масштаб",
+    "th": "มาตราส่วน",
+    "zh_tw": "比例尺"
   },
   "shareMsgCopyOK": {
     "ja": "✓ {label} コピー完了",
@@ -3085,13 +3085,13 @@
     "zh": "应用所选",
     "ko": "선택 적용",
     "vi": "Áp dụng đã chọn",
-    "de": "Apply",
-    "es": "Apply",
-    "fr": "Apply",
-    "pt_br": "Apply",
-    "ru": "Apply",
-    "th": "Apply",
-    "zh_tw": "Apply"
+    "de": "Anwenden",
+    "es": "Aplicar",
+    "fr": "Appliquer",
+    "pt_br": "Aplicar",
+    "ru": "Применить",
+    "th": "สมัครเข้าร่วม",
+    "zh_tw": "申請加入"
   },
   "optTargetRatio": {
     "ja": "目標",
@@ -3128,12 +3128,12 @@
     "ko": "부위순",
     "vi": "Theo vị trí",
     "de": "Slot",
-    "es": "Slot",
-    "fr": "Slot",
+    "es": "Ranura",
+    "fr": "Emplacement",
     "pt_br": "Slot",
-    "ru": "Slot",
-    "th": "Slot",
-    "zh_tw": "Slot"
+    "ru": "Слот",
+    "th": "ช่อง",
+    "zh_tw": "欄位"
   },
   "optNoImprovement": {
     "ja": "改善余地なし",
@@ -3757,13 +3757,13 @@
     "zh": "全期",
     "ko": "전체",
     "vi": "Toàn thời gian",
-    "de": "All",
-    "es": "All",
-    "fr": "All",
-    "pt_br": "All",
-    "ru": "All",
-    "th": "All",
-    "zh_tw": "All"
+    "de": "Alle",
+    "es": "Todos",
+    "fr": "Tout",
+    "pt_br": "Todos",
+    "ru": "Все",
+    "th": "ทั้งหมด",
+    "zh_tw": "全部"
   },
   "historyRange30d": {
     "ja": "30日",
@@ -3813,13 +3813,13 @@
     "zh": "首达",
     "ko": "첫",
     "vi": "Lần đầu",
-    "de": "First",
-    "es": "First",
-    "fr": "First",
-    "pt_br": "First",
-    "ru": "First",
-    "th": "First",
-    "zh_tw": "First"
+    "de": "Erster",
+    "es": "Primero",
+    "fr": "Premier",
+    "pt_br": "Primeiro",
+    "ru": "Первый",
+    "th": "หัว",
+    "zh_tw": "首"
   },
   "historyScorePrefix": {
     "ja": "武格指数 ",
@@ -3925,13 +3925,13 @@
     "zh": "配装",
     "ko": "빌드",
     "vi": "Build",
-    "de": "Build",
-    "es": "Build",
-    "fr": "Build",
-    "pt_br": "Build",
-    "ru": "Build",
-    "th": "Build",
-    "zh_tw": "Build"
+    "de": "Bau",
+    "es": "Construir",
+    "fr": "Construction",
+    "pt_br": "Construir",
+    "ru": "Строительство",
+    "th": "ก่อสร้าง",
+    "zh_tw": "建造"
   },
   "wsTabGear": {
     "ja": "装備",
@@ -4205,13 +4205,13 @@
     "zh": "全部奇术",
     "ko": "전체 비결",
     "vi": "Tất cả Kỳ thuật",
-    "de": "All",
-    "es": "All",
-    "fr": "All",
-    "pt_br": "All",
-    "ru": "All",
-    "th": "All",
-    "zh_tw": "All"
+    "de": "Alle",
+    "es": "Todos",
+    "fr": "Tout",
+    "pt_br": "Todos",
+    "ru": "Все",
+    "th": "ทั้งหมด",
+    "zh_tw": "全部"
   },
   "qishuCategoryOther": {
     "ja": "その他",
@@ -4275,13 +4275,13 @@
     "zh": "采用",
     "ko": "적용",
     "vi": "Áp dụng",
-    "de": "Apply",
-    "es": "Apply",
-    "fr": "Apply",
-    "pt_br": "Apply",
-    "ru": "Apply",
-    "th": "Apply",
-    "zh_tw": "Apply"
+    "de": "Anwenden",
+    "es": "Aplicar",
+    "fr": "Appliquer",
+    "pt_br": "Aplicar",
+    "ru": "Применить",
+    "th": "สมัครเข้าร่วม",
+    "zh_tw": "申請加入"
   },
   "qishuPickerRestore": {
     "ja": "復元",
