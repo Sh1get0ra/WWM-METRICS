@@ -986,9 +986,11 @@
 }
 /* 新置列 (編集): select + useful + val-wrap */
 /* K: JS の row inline grid-template-columns 書込 対抗 — strip するな (Step 5 確定) */
+/* value 列 = 固定 110px (= 数値 + 効率 % で全言語不変、 2026-06-25 兄貴指摘
+   「label/値同期伸縮で modal 不格好」 解消 = value 固定で label 1fr が単独可変化) */
 .wwm-cmp-modal-a .wwm-cmp-new .wwm-cmp-row.wwm-cmp-edit-row {
   display: grid;
-  grid-template-columns: minmax(78px, 1fr) 20px minmax(92px, 1.15fr) !important;
+  grid-template-columns: minmax(78px, 1fr) 20px 110px !important;
 }
 .wwm-cmp-modal-a .wwm-cmp-new .wwm-cmp-val-wrap {
   display: flex; align-items: center; gap: 4px;
@@ -1218,7 +1220,8 @@
 .wwm-modal.wwm-modal-square {
   width: fit-content;
   min-width: 380px;
-  max-width: min(680px, 95vw);
+  /* 兄貴指摘 = value 列固定後の label 拡張余地。 ja ~850 自然 fit / de-ru ~900 上限 / viewport 95% 制約 */
+  max-width: min(900px, 95vw);
 }
 .wwm-modal.wwm-modal-wide,
 .wwm-modal.wwm-modal-square.wwm-modal-wide { max-width: min(1100px, 95vw); }
