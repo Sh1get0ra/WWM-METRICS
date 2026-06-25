@@ -882,10 +882,13 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
 }
 .wwm-lang-dd-btn:hover img { opacity: 1; }
 .wwm-lang-dd-pop {
-  position: absolute; top: calc(100% + 8px); right: 0;
+  /* position: fixed = 親 <header.wwm-band> の overflow:hidden 罠を escape (2026-06-25 真因 fix)。
+     旧 absolute では 12 button が .wwm-band height 252px を超えて 5 button 分で clip された。
+     top/right = topbar 実測 position 固定 (= viewport 基準)、 band 内 anchor button 横ずれは
+     viewport 1366px 想定で十分整合 (mobile は mobile-v2 で別 fixed 設定継続)。 */
+  position: fixed; top: 76px; right: 12px;
   min-width: 150px;
-  /* 12 言語対応で button 数増 (2026-06-25): viewport 短い場合に下端が画面外に出るのを救済 */
-  max-height: calc(100vh - 80px); overflow-y: auto;
+  max-height: calc(100vh - 96px); overflow-y: auto;
   background: var(--sumi-2);
   border: 1px solid var(--gold-deep);
   border-radius: 1px;
