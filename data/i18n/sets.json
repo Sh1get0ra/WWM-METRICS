@@ -49,9 +49,9 @@
     "vi": "Bộ trang phục Cấp Phong Tẩu"
   },
   "10": {
-    "ja": "凌波歩一式",
+    "ja": "波駆一式",
     "en": "Agile Steps Set",
-    "zh": "凌波步一式",
+    "zh": "凌波步套装",
     "ko": "운파 세트",
     "vi": "Bước Lăng Ba"
   },
@@ -63,9 +63,9 @@
     "vi": "Bộ trang phục Nhạc Sơn Nghiêng"
   },
   "12": {
-    "ja": "御無欠一式",
+    "ja": "無欠一式",
     "en": "Flawless Defense Set",
-    "zh": "御无缺一式",
+    "zh": "御无缺套装",
     "ko": "무결 세트",
     "vi": "Ngự Vô Khuyết"
   },
@@ -112,10 +112,10 @@
     "vi": "Bộ trang phục Lê Tuyết"
   },
   "34": {
-    "ja": "連星一式",
-    "en": "Stars Align Set",
-    "zh": "连星一式",
-    "ko": "연성 세트",
+    "ja": "連星",
+    "en": "Stars Align",
+    "zh": "连星",
+    "ko": "연성",
     "vi": "Liên Tinh"
   },
   "35": {
@@ -135,14 +135,14 @@
   "45": {
     "ja": "驚弦一式",
     "en": "Startling String Set",
-    "zh": "惊弦一式",
+    "zh": "惊弦套装",
     "ko": "혈우 세트",
     "vi": "Kinh Huyền"
   },
   "46": {
     "ja": "影を追う一式",
     "en": "Pursuing Shadow Set",
-    "zh": "追影一式",
+    "zh": "追影套装",
     "ko": "추영 세트",
     "vi": "Truy Ảnh"
   },
