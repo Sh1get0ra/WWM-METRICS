@@ -228,7 +228,7 @@
     "en": "Mountain's Might",
     "zh": "千山法",
     "ko": "천산의 의지",
-    "vi": "Pháp ngàn núi",
+    "vi": "Pháp Thiên Sơn",
     "de": "Macht des Berges",
     "es": "Poder del Monte",
     "fr": "Puissance de la Montagne",
@@ -312,7 +312,7 @@
     "en": "Insightful Strike",
     "zh": "凝神章",
     "ko": "통찰의 눈",
-    "vi": "Chương ngưng thần",
+    "vi": "Chương Ngưng Thần",
     "de": "Einsichtiger Hieb",
     "es": "Golpe Perspicaz",
     "fr": "Frappe Perspicace",
@@ -591,7 +591,7 @@
     "ja": "灯火詞",
     "en": "Light Anew",
     "zh": "灯儿亮",
-    "ko": "촛불의 잔영",
+    "ko": "밝은 등불",
     "vi": "Đèn sáng",
     "de": "Neues Licht",
     "es": "Renacer de la Luz",
@@ -726,5 +726,19 @@
     "ru": "Небесная бодрость",
     "th": "การเคลื่อนไหวแห่งฟ้า",
     "zh_tw": "天行健"
+  },
+  "651": {
+    "ja": "太鼓の合唱",
+    "en": "Song of Harmony",
+    "zh": "相和歌",
+    "ko": "화답가",
+    "vi": "Tương hòa ca",
+    "de": "Lied der Harmonie",
+    "es": "Canción de la Armonía",
+    "fr": "Chant de l'Harmonie",
+    "pt_br": "Canção da Harmonia",
+    "ru": "Песнь Гармонии",
+    "th": "เพลงเซียงเหอ",
+    "zh_tw": "相和歌"
   }
 }

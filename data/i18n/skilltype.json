@@ -57,17 +57,17 @@
   },
   "light": {
     "ja": "軽撃",
-    "en": "LA",
-    "zh": "强效轻击",
+    "en": "Light Attack",
+    "zh": "轻击",
+    "zh_tw": "輕擊",
     "ko": "약공격",
     "vi": "Đánh nhẹ",
     "de": "Leichter Angriff",
     "es": "Ataque Ligero",
-    "fr": "Attaque légère",
+    "fr": "Attaque Légère",
     "pt_br": "Ataque Leve",
     "ru": "Легкая атака",
-    "th": "โจมตีเบา",
-    "zh_tw": "輕擊"
+    "th": "โจมตีเบา"
   },
   "rodent": {
     "ja": "鼠",
@@ -98,18 +98,18 @@
     "zh_tw": "護盾增效"
   },
   "healing": {
-    "ja": "重撃回復量",
-    "en": "Heal",
-    "zh": "重击回复",
-    "ko": "중격 회복",
-    "vi": "kỹ năng hồi phục",
-    "de": "Heilen",
-    "es": "Curar",
+    "ja": "治癒",
+    "en": "Cure",
+    "zh": "愈合",
+    "zh_tw": "癒合",
+    "ko": "재생",
+    "vi": "Hồi phục",
+    "de": "Heilung",
+    "es": "Cura",
     "fr": "Soin",
     "pt_br": "Cura",
-    "ru": "Лечение",
-    "th": "การรักษา",
-    "zh_tw": "治療"
+    "ru": "Исцеление",
+    "th": "การฟื้นตัว"
   },
   "bleed": {
     "ja": "流血",
@@ -125,33 +125,19 @@
     "th": "เลือดไหล",
     "zh_tw": "流血"
   },
-  "variedCombo": {
-    "ja": "派生",
-    "en": "Varied",
-    "zh": "派生",
-    "ko": "파생",
-    "vi": "phát sinh",
-    "de": "Varied",
-    "es": "Varied",
-    "fr": "Varied",
-    "pt_br": "Varied",
-    "ru": "Varied",
-    "th": "Varied",
-    "zh_tw": "Varied"
-  },
   "lightVariedCombo": {
-    "ja": "軽撃/派生",
-    "en": "LA/Varied",
-    "zh": "轻击/派生",
-    "ko": "약 공격/파생",
-    "vi": "đánh nhẹ/phát sinh",
-    "de": "LA/Varied",
-    "es": "LA/Varied",
-    "fr": "LA/Varied",
-    "pt_br": "LA/Varied",
-    "ru": "LA/Varied",
-    "th": "LA/Varied",
-    "zh_tw": "LA/Varied"
+    "ja": "軽撃派生",
+    "en": "Light Attack Varied Combo",
+    "zh": "轻击派生",
+    "zh_tw": "輕擊派生",
+    "ko": "약공격 연계",
+    "vi": "Phái sinh đòn nhẹ",
+    "de": "Variierter Leichter-Angriff-Combo",
+    "es": "Combo Variado de Ataque Ligero",
+    "fr": "Combo Varié d'Attaque Légère",
+    "pt_br": "Combo Variado de Ataque Leve",
+    "ru": "Вариативная комбо лёгких атак",
+    "th": "ต่อเนื่องจากการโจมตีเบา"
   },
   "heavy": {
     "ja": "重撃",
@@ -166,5 +152,19 @@
     "ru": "Тяжелая атака",
     "th": "โจมตีหนัก",
     "zh_tw": "重擊"
+  },
+  "variedCombo": {
+    "ja": "派生技",
+    "en": "Varied Combo",
+    "zh": "派生技",
+    "zh_tw": "派生技",
+    "ko": "연계 스킬",
+    "vi": "kỹ năng phát sinh",
+    "de": "Variierter Combo",
+    "es": "Combo Variado",
+    "fr": "Combo Varié",
+    "pt_br": "Combo Variado",
+    "ru": "Разнообразные комбо",
+    "th": "ทักษะแตกแขนง"
   }
 }

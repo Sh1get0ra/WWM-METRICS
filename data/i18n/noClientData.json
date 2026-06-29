@@ -1,0 +1,45 @@
+{
+  "_meta": "noClientData = mining 対象 cat の no_hit entry 隔離。 ゲーム内用語性質保持 (= Claude 翻訳 NG)、 兄貴決定 ja 表記。 ui.json (= 常用語) と性質区別。 2026-06-29 確定、 詳細 [[no-noclientdata-2026-06-29]]。",
+  "probSympathy": {
+    "ja": "会意",
+    "en": "Affinity",
+    "zh": "会意",
+    "ko": "각성",
+    "vi": "Hiểu ý",
+    "de": "Affinität",
+    "es": "Afinidad",
+    "fr": "Affinité",
+    "pt_br": "Afinidade",
+    "ru": "Сродство",
+    "th": "ความสัมพันธ์",
+    "zh_tw": "親和力"
+  },
+  "probGraze": {
+    "ja": "軽傷",
+    "en": "Glancing",
+    "zh": "擦伤",
+    "ko": "찰과상",
+    "vi": "Trầy xước",
+    "de": "Streifend",
+    "es": "Roce",
+    "fr": "Effleurement",
+    "pt_br": "De raspão",
+    "ru": "Скользящий",
+    "th": "ฟาดผ่าน",
+    "zh_tw": "擦傷"
+  },
+  "donutDmgCenter": {
+    "ja": "闘率",
+    "en": "闘率",
+    "zh": "闘率",
+    "ko": "闘率",
+    "vi": "闘率",
+    "de": "闘率",
+    "es": "闘率",
+    "fr": "闘率",
+    "pt_br": "闘率",
+    "ru": "闘率",
+    "th": "闘率",
+    "zh_tw": "闘率"
+  }
+}

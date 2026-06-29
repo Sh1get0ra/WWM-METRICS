@@ -197,17 +197,17 @@
   },
   "stDisp.primaryStats.elemAtk.voidAtk": {
     "ja": "無相攻撃力",
-    "en": "Void ATK",
+    "en": "Formless Attack",
     "zh": "无相攻击",
+    "zh_tw": "無相攻擊",
     "ko": "무상 공격",
     "vi": "Tấn công Vô Tướng",
-    "de": "Void ATK",
-    "es": "Void ATK",
-    "fr": "Void ATK",
-    "pt_br": "Void ATK",
-    "ru": "Void ATK",
-    "th": "Void ATK",
-    "zh_tw": "Void ATK"
+    "de": "Formlose Attacke",
+    "es": "Formless Attack",
+    "fr": "Formless Attack",
+    "pt_br": "Formless Attack",
+    "ru": "Formless Attack",
+    "th": "การโจมตีไร้รูปร่าง"
   },
   "stDisp.section.probability.title": {
     "ja": "判定確率",
@@ -252,18 +252,18 @@
     "zh_tw": "會心率"
   },
   "stDisp.probability.critRate.critRateBoosted": {
-    "ja": "実効会心率(ボーナス込み)",
-    "en": "Effective Crit (with Bonus)",
-    "zh": "实效会心率(含奖励)",
-    "ko": "실효 치명타 확률(보너스 포함)",
-    "vi": "Tỷ lệ Hội tâm thực hiệu (bao gồm thưởng)",
-    "de": "Effective Crit (with Bonus)",
-    "es": "Effective Crit (with Bonus)",
-    "fr": "Effective Crit (with Bonus)",
-    "pt_br": "Effective Crit (with Bonus)",
-    "ru": "Effective Crit (with Bonus)",
-    "th": "Effective Crit (with Bonus)",
-    "zh_tw": "Effective Crit (with Bonus)"
+    "ja": "実効会心率",
+    "en": "Effective Critical Rate",
+    "zh": "生效会心率",
+    "zh_tw": "生效會心率",
+    "ko": "적용된 치명타 확률",
+    "vi": "Tỷ lệ chí mạng có hiệu lực",
+    "de": "Effektive kritische Trefferrate",
+    "es": "Tasa de Crítico Efectivo",
+    "fr": "Taux Critique Effectif",
+    "pt_br": "Taxa de Crítico Efetiva",
+    "ru": "Эффективный шанс критического удара",
+    "th": "อัตราคริติคอลที่มีผล"
   },
   "stDisp.probability.sympathyRate": {
     "ja": "会意率",
@@ -336,11 +336,11 @@
     "zh_tw": "最終會心會意率"
   },
   "stDisp.probability.finalCritSym.pCrit": {
-    "ja": "最終実効会心確率",
+    "ja": "最終発動会心確率",
     "en": "Final Effective Critical Rate",
     "zh": "最终生效会心概率",
-    "ko": "최종 적용 치명타 확률",
-    "vi": "Xác suất chí mạng có hiệu lực cuối cùng",
+    "ko": "최종 치명타 확률",
+    "vi": "Xác suất chí mạng hiệu lực cuối cùng",
     "de": "Finale Effektive Kritische Trefferrate",
     "es": "Tasa de Crítico Efectiva Final",
     "fr": "Taux de Critique Effectif Final",
@@ -350,11 +350,11 @@
     "zh_tw": "最終生效會心機率"
   },
   "stDisp.probability.finalCritSym.pSym": {
-    "ja": "最終実効会意確率",
+    "ja": "最終発動会意確率",
     "en": "Final Effective Affinity Rate",
     "zh": "最终生效会意概率",
-    "ko": "최종 적용 각성 확률",
-    "vi": "Xác suất Hiểu ý có hiệu lực cuối cùng",
+    "ko": "최종 각성 확률",
+    "vi": "Xác suất hiểu ý hiệu lực cuối cùng",
     "de": "Finale Effektive Affinitätsrate",
     "es": "Tasa de Afinidad Efectiva Final",
     "fr": "Taux d'Affinité Effectif Final",
@@ -364,32 +364,32 @@
     "zh_tw": "最終生效會意機率"
   },
   "stDisp.probability.finalCritSym.pGraze": {
-    "ja": "最終発動軽傷率",
-    "en": "Final Graze Rate",
+    "ja": "最終発動軽傷確率",
+    "en": "Final Effective Abrasion Rate",
     "zh": "最终生效擦伤概率",
     "ko": "최종 찰과상 확률",
-    "vi": "Tỷ lệ Trầy xước phát động cuối cùng",
+    "vi": "Xác suất vết xước hiệu lực cuối cùng",
     "de": "Final Graze Rate",
     "es": "Final Graze Rate",
-    "fr": "Final Graze Rate",
+    "fr": "Taux d'Abrasion Effectif Final",
     "pt_br": "Final Graze Rate",
     "ru": "Final Graze Rate",
     "th": "Final Graze Rate",
-    "zh_tw": "Final Graze Rate"
+    "zh_tw": "最終生效擦傷機率"
   },
   "stDisp.probability.finalCritSym.pNormal": {
-    "ja": "最終発動並傷率",
-    "en": "Final Normal Rate",
+    "ja": "最終発動並傷確率",
+    "en": "Final Effective Normal Damage Rate",
     "zh": "最终生效普伤概率",
     "ko": "최종 일반 피해 확률",
-    "vi": "Tỷ lệ thường phát động cuối cùng",
+    "vi": "Xác suất sát thương phổ thông hiệu lực cuối cùng",
     "de": "Final Normal Rate",
     "es": "Final Normal Rate",
-    "fr": "Final Normal Rate",
+    "fr": "Taux de Dégâts Normaux Effectif Final",
     "pt_br": "Final Normal Rate",
     "ru": "Final Normal Rate",
     "th": "Final Normal Rate",
-    "zh_tw": "Final Normal Rate"
+    "zh_tw": "最終生效普傷機率"
   },
   "stDisp.section.dmgBoost.title": {
     "ja": "ダメージ増加効果",
@@ -614,20 +614,6 @@
     "ru": "Бонус урона Рассечение бамбука",
     "th": "ไผ่แตกเพิ่มความเสียหาย",
     "zh_tw": "破竹傷害加成"
-  },
-  "stDisp.dmgBoost.elemAtkBoost.elemDmgVoid": {
-    "ja": "無相ダメージ上昇",
-    "en": "Void DMG",
-    "zh": "无相伤害加成",
-    "ko": "무상 피해 증가",
-    "vi": "Gia tăng Sát thương Vô Tướng",
-    "de": "Void DMG",
-    "es": "Void DMG",
-    "fr": "Void DMG",
-    "pt_br": "Void DMG",
-    "ru": "Void DMG",
-    "th": "Void DMG",
-    "zh_tw": "Void DMG"
   },
   "stDisp.dmgBoost.allMartialBoost": {
     "ja": "全武術効果増加",

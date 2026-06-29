@@ -293,20 +293,6 @@
     "th": "โบนัสความเสียหายพลังธาตุ",
     "zh_tw": "屬攻傷害加成"
   },
-  "allWeaponDmg": {
-    "ja": "全武学/PvP/BOSSダメ",
-    "en": "All Martial/PvP/BOSS DMG",
-    "zh": "全武学/PvP/BOSS增效",
-    "ko": "모든 무술/PvP/BOSS 피해",
-    "vi": "Tăng hiệu quả toàn bộ võ học",
-    "de": "All Martial/PvP/BOSS DMG",
-    "es": "All Martial/PvP/BOSS DMG",
-    "fr": "All Martial/PvP/BOSS DMG",
-    "pt_br": "All Martial/PvP/BOSS DMG",
-    "ru": "All Martial/PvP/BOSS DMG",
-    "th": "All Martial/PvP/BOSS DMG",
-    "zh_tw": "All Martial/PvP/BOSS DMG"
-  },
   "specMartialBoost": {
     "ja": "指定武術効果強化",
     "en": "Specified Weapon Martial Art Boost",
@@ -462,18 +448,18 @@
     "zh_tw": "輕擊增傷"
   },
   "heavyAtkDmg": {
-    "ja": "重撃ダメ強化",
-    "en": "HA",
-    "zh": "重击增伤",
-    "ko": "중격 피해 강화",
-    "vi": "Gia tăng Sát thương Đòn mạnh",
-    "de": "HA",
-    "es": "HA",
-    "fr": "HA",
-    "pt_br": "HA",
-    "ru": "HA",
-    "th": "HA",
-    "zh_tw": "HA"
+    "ja": "重撃ダメージ",
+    "en": "Heavy Attack DMG Boost",
+    "zh": "重攻击增伤",
+    "zh_tw": "重攻擊增傷",
+    "ko": "강공격 피해 증가",
+    "vi": "Tăng sát thương Tấn công mạnh",
+    "de": "Schwerer Angriff Schadensbonus",
+    "es": "Aumento de daño de ataque pesado",
+    "fr": "Augmentation des dégâts d'attaque lourde",
+    "pt_br": "Aumento de Dano do Ataque Pesado",
+    "ru": "Увеличение урона от Тяжелой атаки",
+    "th": "เพิ่มความเสียหายโจมตีหนัก"
   },
   "airborneLightAtkDmg": {
     "ja": "空中軽撃ダメージ",
@@ -490,32 +476,18 @@
     "zh_tw": "空中輕擊增傷"
   },
   "jumpStrikeDmg": {
-    "ja": "跳躍撃ダメ強化",
-    "en": "Jump Strike",
-    "zh": "跃击增伤",
-    "ko": "도약격 피해 강화",
-    "vi": "Gia tăng Sát thương đòn nhảy",
-    "de": "Sprungangriff",
-    "es": "Golpe en Salto",
-    "fr": "Frappe en Saut",
-    "pt_br": "Golpe no Salto",
-    "ru": "Прыжковый удар",
-    "th": "กระโดดฟัน",
-    "zh_tw": "跳劈"
-  },
-  "dualWeaponSkillDmg": {
-    "ja": "双武器技ダメ強化",
-    "en": "Dual Skill",
-    "zh": "双武器技增伤",
-    "ko": "쌍무기 기술 피해 강화",
-    "vi": "Gia tăng Sát thương kỹ năng song vũ khí",
-    "de": "Dual Skill",
-    "es": "Dual Skill",
-    "fr": "Dual Skill",
-    "pt_br": "Dual Skill",
-    "ru": "Dual Skill",
-    "th": "Dual Skill",
-    "zh_tw": "Dual Skill"
+    "ja": "空中重撃",
+    "en": "Airborne Heavy Attack",
+    "zh": "空中重击",
+    "zh_tw": "空中重擊",
+    "ko": "공중 강공격",
+    "vi": "Đòn mạnh trên không",
+    "de": "Schwerer Luftangriff",
+    "es": "Ataque Pesado Aéreo",
+    "fr": "Attaque lourde aérienne",
+    "pt_br": "Ataque Aéreo Pesado",
+    "ru": "Тяжёлая атака в воздухе",
+    "th": "โจมตีหนักกลางอากาศ"
   },
   "executionDmg": {
     "ja": "処決ダメージ増加",
@@ -531,20 +503,6 @@
     "th": "เพิ่มความเสียหายปลิดชีพ",
     "zh_tw": "處決增傷"
   },
-  "dashDmg": {
-    "ja": "突進ダメ強化",
-    "en": "Dash DMG",
-    "zh": "冲刺增伤",
-    "ko": "돌진 피해 강화",
-    "vi": "Gia tăng Sát thương Đột kích",
-    "de": "Dash DMG",
-    "es": "Dash DMG",
-    "fr": "Dash DMG",
-    "pt_br": "Dash DMG",
-    "ru": "Dash DMG",
-    "th": "Dash DMG",
-    "zh_tw": "Dash DMG"
-  },
   "bossDmg": {
     "ja": "首領に与えるダメージ増加",
     "en": "Combat Boost Against Boss Units",
@@ -558,20 +516,6 @@
     "ru": "Усиление в Бою против Боссов",
     "th": "เพิ่มความเสียหายต่อหน่วยหัวหน้า",
     "zh_tw": "對首領單位增傷"
-  },
-  "playerUnitDmg": {
-    "ja": "PvPダメージ",
-    "en": "PvP DMG",
-    "zh": "对玩家单位增伤",
-    "ko": "플레이어 유닛에 대한 효과 증가",
-    "vi": "Tăng sát thương đối với đơn vị người chơi",
-    "de": "PvP DMG",
-    "es": "PvP DMG",
-    "fr": "PvP DMG",
-    "pt_br": "PvP DMG",
-    "ru": "PvP DMG",
-    "th": "PvP DMG",
-    "zh_tw": "PvP DMG"
   },
   "stMysticDmg": {
     "ja": "単体系奇術ダメージ増加",
@@ -656,5 +600,61 @@
     "ru": "Увеличение урона от мистического навыка ослабления по области",
     "th": "เพิ่มความเสียหายศาสตร์ลึกลับประเภทเป้าหมายกลุ่มที่ผิดปกติ",
     "zh_tw": "群體異常類奇術增傷"
+  },
+  "dualWeaponSkillDmg": {
+    "ja": "特殊技強化",
+    "en": "Special Skill Enhancement",
+    "zh": "特殊技强化",
+    "zh_tw": "特殊技強化",
+    "ko": "특수 스킬 강화",
+    "vi": "Tăng cường kỹ năng đặc biệt",
+    "de": "Spezialfähigkeits-Verstärkung",
+    "es": "Mejora de Habilidad Especial",
+    "fr": "Amélioration de compétence spéciale",
+    "pt_br": "Aprimoramento de Habilidade Especial",
+    "ru": "Усиление особого навыка",
+    "th": "การเสริมพลังทักษะพิเศษ"
+  },
+  "dashDmg": {
+    "ja": "突進ダメージ",
+    "en": "Dash DMG Boost",
+    "zh": "突进增伤",
+    "zh_tw": "突進增傷",
+    "ko": "돌진 피해 증가",
+    "vi": "Tăng sát thương Đột kích",
+    "de": "Sturmschaden-Bonus",
+    "es": "Aumento de daño de carrera",
+    "fr": "Bonus de dégâts de ruée",
+    "pt_br": "Aumento de Dano de Investida",
+    "ru": "Увеличение урона при рывке",
+    "th": "เพิ่มความเสียหายพุ่งโจมตี"
+  },
+  "playerUnitDmg": {
+    "ja": "プレイヤーダメージ増加",
+    "en": "Player DMG Boost",
+    "zh": "玩家增伤",
+    "zh_tw": "玩家增傷",
+    "ko": "플레이어 피해 증가",
+    "vi": "Người chơi Tăng sát thương",
+    "de": "Spieler-Schadenssteigerung",
+    "es": "Aumento de Daño a Jugadores",
+    "fr": "Bonus de dégâts contre les joueurs",
+    "pt_br": "Aumento de Dano de Jogador",
+    "ru": "Увеличение урона от игроков",
+    "th": "ผู้เล่นเพิ่มความเสียหาย"
+  },
+  "allWeaponDmg": {
+    "ja": "全武術効果増加",
+    "en": "All Martial Arts Boost",
+    "zh": "全武学增效",
+    "zh_tw": "全武學增效",
+    "ko": "전체 무술 효과 증가",
+    "vi": "Tăng hiệu quả toàn bộ Võ học",
+    "de": "Alle Kampfkünste verstärkt",
+    "es": "Mejora de Todas las Artes Marciales",
+    "fr": "Amélioration de toutes les Arts Martiaux",
+    "pt_br": "Impulso para Todas as Artes Marciais",
+    "ru": "Усиление всех боевых искусств",
+    "th": "เพิ่มประสิทธิภาพศิลปะการต่อสู้ทั้งหมด"
   }
 }

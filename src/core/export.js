@@ -282,7 +282,7 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
       + '<circle cx="68" cy="68" r="64" fill="none" stroke="' + (lp ? '#2d5a3a' : '#a8d4b4') + '" stroke-width="2.5"'
       + ' stroke-dasharray="' + (C2 - physLen).toFixed(2) + ' ' + physLen.toFixed(2) + '"'
       + ' stroke-dashoffset="' + (-physLen).toFixed(2) + '" transform="rotate(-90 68 68)"/>';
-    const label = _esc(window.T?.donutDmgCenter ?? '勁率');
+    const label = _esc(window.T?.donutDmgCenter ?? '闘率');
     return '<svg viewBox="0 0 136 136" width="' + size + '" height="' + size + '" aria-hidden="true">'
       + '<circle cx="68" cy="68" r="50" fill="none" stroke="' + (lp ? 'rgba(40,25,18,0.07)' : 'rgba(232,215,180,0.07)') + '" stroke-width="15"/>'
       + circles + ring
@@ -296,8 +296,8 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
     const rows = [
       [T?.probCrit ?? '会心', _pct(d.pCrit), 'var(--cd-gold, #f0d28a)'],
       [T?.probSympathy ?? '会意', _pct(d.pSym), 'var(--cd-judge-sym, #e8513a)'],
-      [T?.probNormal ?? '通常', _pct(d.pNormal), 'var(--cd-judge-normal, #ede4d0)'],
-      [T?.probGraze ?? 'かすり', _pct(d.pGraze), 'var(--cd-mute, #8b8170)'],
+      [T?.probNormal ?? '並傷', _pct(d.pNormal), 'var(--cd-judge-normal, #ede4d0)'],
+      [T?.probGraze ?? '軽傷', _pct(d.pGraze), 'var(--cd-mute, #8b8170)'],
       [T?.probPhys ?? '物理', _pct(d.physRatio), 'var(--cd-judge-sym, #e8513a)'],
       [T?.probElem ?? '属性', _pct(d.elemRatio), 'var(--cd-judge-elem, #a8d4b4)']
     ];
@@ -767,7 +767,7 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
       +     '<div class="wwm-card-ctl-section">'
       +       '<div class="wwm-card-ctl-title">' + _esc(T.cardItemsSection ?? '表示項目') + '</div>'
       +       '<div class="wwm-card-toggles">'
-      +         _cardToggle('donut', T.donutDmgCenter ?? '勁率', st)
+      +         _cardToggle('donut', T.donutDmgCenter ?? '闘率', st)
       +         _cardToggle('stats', T.cardItemStats ?? '基礎値', st)
       +         _cardToggle('primary', T.cardItemPrimary ?? '主要ステータス', st)
       +         _cardToggle('kongfu', T.cardItemKongfu ?? '武術', st)

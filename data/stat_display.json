@@ -299,12 +299,6 @@
               "format": "pct",
               "calcKey": "elemDmgBamboocut",
               "label_key": "stDisp.dmgBoost.elemAtkBoost.elemDmgBamboocut"
-            },
-            {
-              "key": "elemDmgVoid",
-              "format": "pct",
-              "calcKey": "elemDmgVoid",
-              "label_key": "stDisp.dmgBoost.elemAtkBoost.elemDmgVoid"
             }
           ],
           "label_key": "stDisp.dmgBoost.elemAtkBoost"

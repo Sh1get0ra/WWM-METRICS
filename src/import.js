@@ -382,7 +382,7 @@ function renderEnhanceArsenalForm(state, roleInfo) {
 
       <h3 class="wwm-step2-section-title" style="margin-top:16px;">${T0.importArsenalTitle || '武庫 (Arsenal)'}</h3>
       <div class="wwm-arsenal-paths">
-        <span class="wwm-info-label">${T0.importArsenalPath || '武庫種別'}:</span>
+        <span class="wwm-info-label">${(T0.arsenal||'武庫') + ((['ja','zh','zh_tw','ko','vi'].includes(window.currentLang||'ja')) ? '' : ' ') + (T0.typeLabel||'種別')}:</span>
         ${pathRadios}
       </div>
       <div class="wwm-arsenal-tiers">${tierRows}</div>
@@ -641,10 +641,10 @@ function _affixName(id, idx) {
   }
   // 2.5) pvp_attune_table.json lookup (= ARENA ATTUNE 発動効果系)。 idx 不問で「PvP専用定音」 fallback、 計算寄与ゼロ。
   if (window.WWM_PVP_ATTUNE && window.WWM_PVP_ATTUNE[id]) {
-    return (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
+    return (window.T && window.T.pvpExclusiveAffix) || '対人戦定音';
   }
   // 3) affix6 スロット (idx===5) の未登録 ID = PvP専用定音 legacy fallback (= 互換 keep)。計算寄与は元々ゼロで安全弁にもなる。
-  if (idx === 5) return (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
+  if (idx === 5) return (window.T && window.T.pvpExclusiveAffix) || '対人戦定音';
   return 'affix#' + id;
 }
 function _setName(suffix) {

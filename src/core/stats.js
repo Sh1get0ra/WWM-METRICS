@@ -676,7 +676,6 @@ function buildStatParamsSync(roleInfo, state) {
   r.elemDmgStonesplit = _pathDmgTotals.stonesplit;
   r.elemDmgSilkbind   = _pathDmgTotals.silkbind;
   r.elemDmgBamboocut  = _pathDmgTotals.bamboocut;
-  r.elemDmgVoid       = _pathDmgTotals.voidPath;
   r.allMartialBoost  = r.allWeaponDmg  || 0;
   r.specMartialBoost = r._specMartialBoostScore || 0;
   r.bossBoost       = r.bossDmg        || 0;

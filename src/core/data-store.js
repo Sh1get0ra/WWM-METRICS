@@ -4,9 +4,9 @@
 // 実装 plan : docs/superpowers/plans/2026-06-09-i18n-unification.md
 (function () {
   'use strict';
-  const CATS = ['kongfu', 'xinfa', 'sets', 'stat', 'path', 'skilltype', 'weapontype', 'ui', 'game_lexicon', 'stat_display', 'qishu', 'stat_short', 'skilltype_short', 'kongfu_short'];
-  // t() lookup chain: ui (ツール独自) → game_lexicon (ゲーム固有 UI 名) → stat (ステ/affix 真実源) → stat_display (Sidebar 表示 label、 stDisp.* prefix)。
-  const T_CHAIN = ['ui', 'game_lexicon', 'stat', 'stat_display'];
+  const CATS = ['kongfu', 'xinfa', 'sets', 'stat', 'path', 'skilltype', 'weapontype', 'ui', 'game_lexicon', 'stat_display', 'qishu', 'stat_short', 'skilltype_short', 'kongfu_short', 'noClientData', 'xinfa_tier_label'];
+  // t() lookup chain: ui (常用語) → game_lexicon (ゲーム内用語) → stat (ステ/affix) → stat_display (Sidebar label) → noClientData (mining 不可 ゲーム内用語 隔離) → xinfa_tier_label (心法 tier effect text)
+  const T_CHAIN = ['ui', 'game_lexicon', 'stat', 'stat_display', 'noClientData', 'xinfa_tier_label'];
   // 動的 getter 化 (2026-06-25 真因 fix): 旧 const は module 読込時 1 回評価で
   // main.js import 順序 (data-store.js が calc.js より先) で window.WWM_DISPLAY_VERSION 未定義
   // → fallback 11 固定 → 全 i18n fetch URL `?v=11` で browser cache HIT = DISPLAY bump 全無効化されてた
@@ -112,7 +112,9 @@
     }
     // nonPathBase: path 系合成 (path/pathAtk/pathPen/pathDmg) は不要だが min<Name>/max<Name>
     // 形式のラベルだけ生成したい汎用 base (例: elemSub = 副属性、 path に属さない副属性 ATK)。
-    const nonPath = path.nonPathBase || {};
+    // 2026-06-29: 副属性 base = ui.elemSubBase に移動 (= ツール独自命名、 ゲーム内表記なし)
+    const nonPath = { ...(path.nonPathBase || {}) };
+    if (ui.elemSubBase) nonPath.elemSub = ui.elemSubBase;
     for (const [p, base] of Object.entries(nonPath)) {
       const C = cap(p);
       const keys = { ['min' + C]: {}, ['max' + C]: {} };
@@ -276,6 +278,9 @@
     }
     const v = _lookup(cat, id, L);
     if (v) return v;
+    // noClientData fallback (= mining 不可 ゲーム内用語 隔離、 cat 不問)
+    const v2 = _lookup('noClientData', id, L);
+    if (v2) return v2;
     return '[' + cat + ':' + id + ']';
   }
 

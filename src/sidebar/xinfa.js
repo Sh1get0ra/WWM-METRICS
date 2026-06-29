@@ -258,7 +258,6 @@
     // xinfa effects key → i18n key + 表示形式
     const _XINFA_EFFECT_LABEL = {
       allMartialBoost: { tkey: 'allWeaponDmg',    pct: true },
-      globalDmgBoost:  { tkey: 'globalDmgBoost',  pct: true },
       critRateAdj:     { tkey: 'crit',            pct: true },
       critRate:        { tkey: 'crit',            pct: true },
       crit:            { tkey: 'crit',            pct: true },
@@ -340,6 +339,16 @@
       }
       return `${label} +${valStr}`;
     }
+    // tier 別 effect text 取得 (= WWM_DS 経由 一本化、 旧 def.rawI18n は data/i18n/xinfa_tier_label.json へ移行済)。
+    // WWM_DS miss + xinfa_tier_label cat に key 不在時 = def.rawI18n fallback (= mining 完成までの中間段階、 [[xinfa-tier-label-sprint-plan-2026-06-29]])。
+    function _tierLabel(id, t, lang, def) {
+      const DS = window.WWM_DS;
+      if (DS) {
+        const v = DS.name('xinfa_tier_label', `${id}.tier${t}`, lang);
+        if (v && v.indexOf('[xinfa_tier_label:') !== 0 && v.indexOf('[noClientData:') !== 0) return v;
+      }
+      return (def?.rawI18n?.[lang]) || def?.rawI18n?.en || def?.rawI18n?.ja || '-';
+    }
     function _effectsText(id, tier) {
       if (!id) return '';
       const x = xinfaMap[id];
@@ -395,10 +404,10 @@
             : (() => {
                 const stKey = def.statType && _XINFA_STATTYPE_LABEL[def.statType];
                 if (stKey) return (window.T && window.T[stKey]) || def.statType;
-                return (def.rawI18n?.[lang]) || def.rawI18n?.en || def.rawI18n?.ja || '-';
+                return _tierLabel(id, t, lang, def);
               })();
         } else {
-          effStr = (def.rawI18n?.[lang]) || def.rawI18n?.en || def.rawI18n?.ja || '-';
+          effStr = _tierLabel(id, t, lang, def);
         }
         let cls = 'wwm-tier-active';
         let warn = '';

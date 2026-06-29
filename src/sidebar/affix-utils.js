@@ -19,9 +19,9 @@
     const key = info?.statKey;
     if (!key) {
       // pvp_attune_table.json hit = ARENA ATTUNE 発動効果系 = PvP専用定音 (全 slot 共通)
-      if (window.WWM_PVP_ATTUNE && window.WWM_PVP_ATTUNE[id]) return (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
+      if (window.WWM_PVP_ATTUNE && window.WWM_PVP_ATTUNE[id]) return (window.T && window.T.pvpExclusiveAffix) || '対人戦定音';
       // affix6 (idx===5) の未登録 ID = PvP専用定音 legacy fallback (sentinel 含む)
-      if (idx === 5) return (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
+      if (idx === 5) return (window.T && window.T.pvpExclusiveAffix) || '対人戦定音';
       return 'オプション#' + id;
     }
     return (window._AFFIX_DISPLAY_LABELS?.[key]) || key;
@@ -34,8 +34,8 @@
     const info = window.WWM_AFFIX?.[id];
     const key = info?.statKey;
     if (!key) {
-      if (window.WWM_PVP_ATTUNE && window.WWM_PVP_ATTUNE[id]) return (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
-      if (idx === 5) return (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
+      if (window.WWM_PVP_ATTUNE && window.WWM_PVP_ATTUNE[id]) return (window.T && window.T.pvpExclusiveAffix) || '対人戦定音';
+      if (idx === 5) return (window.T && window.T.pvpExclusiveAffix) || '対人戦定音';
       return 'オプション#' + id;
     }
     if (key === 'allWeaponDmg') {
@@ -357,7 +357,7 @@
     const all = window.WWM_AFFIX || {};
     // affix6 + 現在 ID が未登録 (PvP定音) → 変更不可、PvP option のみ返す (全スロット共通)
     if (idx === 5 && !all[currentAffixId]) {
-      const pvpName = (window.T && window.T.pvpExclusiveAffix) || 'PvP専用定音';
+      const pvpName = (window.T && window.T.pvpExclusiveAffix) || '対人戦定音';
       return [{ id: _PVP_AFFIX_SENTINEL, statKey: '__pvp__', name: pvpName }];
     }
     const cur = String(currentAffixId);

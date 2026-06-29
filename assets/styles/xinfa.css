@@ -26,7 +26,13 @@
   border: 1px solid var(--sumi-2);
 }
 
-.wwm-cmp-tier-eff { flex: 1 1 auto; color: var(--kami-fg); }
+.wwm-cmp-tier-eff {
+  flex: 1 1 auto; color: var(--kami-fg);
+  /* row 最大 3 行 + 内 scroll = modal 縦伸び防止 (= 2026-06-29 xinfa_tier_label sprint) */
+  max-height: calc(1.45em * 3 + 4px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
 
 .wwm-cmp-tier-row.wwm-tier-unrel { opacity: 0.42; }
 

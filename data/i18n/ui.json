@@ -1,32 +1,4 @@
 {
-  "dmgSplitNormal": {
-    "ja": "並傷",
-    "en": "Normal",
-    "zh": "普伤",
-    "ko": "일반",
-    "vi": "Phổ thông",
-    "de": "Normal",
-    "es": "Normal",
-    "fr": "Normal",
-    "pt_br": "Normal",
-    "ru": "Обычный",
-    "th": "ทั่วไป",
-    "zh_tw": "普通"
-  },
-  "dmgSplitGraze": {
-    "ja": "軽傷",
-    "en": "Glancing",
-    "zh": "擦伤",
-    "ko": "찰과상",
-    "vi": "Trầy xước",
-    "de": "Glancing",
-    "es": "Glancing",
-    "fr": "Glancing",
-    "pt_br": "Glancing",
-    "ru": "Glancing",
-    "th": "Glancing",
-    "zh_tw": "Glancing"
-  },
   "pageTitle": {
     "ja": "風燕計 | WWMETRICS",
     "en": "Where Winds Metrics | WWMETRICS",
@@ -4898,5 +4870,68 @@
     "ru": "Save up to 3 snapshots of your current state (gear, Inner Way, tunings / engravings, etc.).<br>Use as a stash for gear-pattern experiments.",
     "th": "Save up to 3 snapshots of your current state (gear, Inner Way, tunings / engravings, etc.).<br>Use as a stash for gear-pattern experiments.",
     "zh_tw": "Save up to 3 snapshots of your current state (gear, Inner Way, tunings / engravings, etc.).<br>Use as a stash for gear-pattern experiments."
+  },
+  "arsenalNotPeaked": {
+    "ja": "未突破",
+    "en": "Not Peaked",
+    "zh": "未顶点",
+    "ko": "미정점",
+    "vi": "Chưa đỉnh",
+    "de": "Nicht erreicht",
+    "es": "No alcanzado",
+    "fr": "Non atteint",
+    "pt_br": "Não atingido",
+    "ru": "Не достигнут",
+    "th": "ยังไม่ถึงจุดสูงสุด",
+    "zh_tw": "未頂點"
+  },
+  "effectUnset": {
+    "ja": "未代入",
+    "en": "Unset",
+    "zh": "未填",
+    "ko": "미입력",
+    "vi": "Chưa nhập",
+    "de": "Nicht festgelegt",
+    "es": "No establecido",
+    "fr": "Non défini",
+    "pt_br": "Não definido",
+    "ru": "Не задано",
+    "th": "ยังไม่ได้ตั้งค่า",
+    "zh_tw": "未設定"
+  },
+  "effAnalysisTitle": {
+    "ja": "調律/定音効率分析",
+    "en": "Stat Efficiency",
+    "zh": "状态效率分析",
+    "ko": "스탯 효율 분석",
+    "vi": "Phân tích hiệu suất Chuyển âm/Định âm",
+    "de": "Stat Efficiency",
+    "es": "Stat Efficiency",
+    "fr": "Stat Efficiency",
+    "pt_br": "Stat Efficiency",
+    "ru": "Stat Efficiency",
+    "th": "Stat Efficiency",
+    "zh_tw": "Stat Efficiency"
+  },
+  "elemSubBase": {
+    "ja": "副属性",
+    "en": "Sub Elem",
+    "zh": "副属性",
+    "ko": "부속성",
+    "vi": "Thuộc tính phụ"
+  },
+  "typeLabel": {
+    "ja": "種別",
+    "en": "Type",
+    "zh": "类型",
+    "zh_tw": "類型",
+    "ko": "종류",
+    "vi": "Loại",
+    "de": "Typ",
+    "es": "Tipo",
+    "fr": "Type",
+    "pt_br": "Tipo",
+    "ru": "Тип",
+    "th": "ประเภท"
   }
 }
