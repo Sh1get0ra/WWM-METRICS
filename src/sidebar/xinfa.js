@@ -339,15 +339,27 @@
       }
       return `${label} +${valStr}`;
     }
-    // tier 別 effect text 取得 (= WWM_DS 経由 一本化、 旧 def.rawI18n は data/i18n/xinfa_tier_label.json へ移行済)。
-    // WWM_DS miss + xinfa_tier_label cat に key 不在時 = def.rawI18n fallback (= mining 完成までの中間段階、 [[xinfa-tier-label-sprint-plan-2026-06-29]])。
+    // tier 別 effect text 取得 (= WWM_DS 経由 一本化、 ゲーム原文 12 lang ([[xinfa-tier-label-sprint-plan-2026-06-29]] 完成版))。
+    // WWM_DS miss + xinfa_tier_label cat に key 不在時 = def.rawI18n fallback。
+    // client 原文 format token (= `<text|781|...|...>` stat ref / `#Y...#E` 等 marker) は表示 normalize で除去。
+    function _normalizeWWMText(s) {
+      if (!s) return s;
+      // stat reference token = `<text|num|...|num>` → text のみ (= 内部 fallback bug 表示 防止)
+      s = s.replace(/<([^|<>]+)\|[^<>]*>/g, '$1');
+      // 強調 marker = #Y...#E / #H...#E / #J...#E / #C...#E / #R...#E → inner text のみ
+      s = s.replace(/#[YHJCR]([\s\S]*?)#E/g, '$1');
+      return s;
+    }
     function _tierLabel(id, t, lang, def) {
       const DS = window.WWM_DS;
       if (DS) {
         const v = DS.name('xinfa_tier_label', `${id}.tier${t}`, lang);
-        if (v && v.indexOf('[xinfa_tier_label:') !== 0 && v.indexOf('[noClientData:') !== 0) return v;
+        if (v && v.indexOf('[xinfa_tier_label:') !== 0 && v.indexOf('[noClientData:') !== 0) {
+          return _normalizeWWMText(v);
+        }
       }
-      return (def?.rawI18n?.[lang]) || def?.rawI18n?.en || def?.rawI18n?.ja || '-';
+      const raw = (def?.rawI18n?.[lang]) || def?.rawI18n?.en || def?.rawI18n?.ja || '-';
+      return _normalizeWWMText(raw);
     }
     function _effectsText(id, tier) {
       if (!id) return '';
