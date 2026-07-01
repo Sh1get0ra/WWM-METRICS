@@ -5,7 +5,7 @@
   "_note": "format: int=整数、pct=百分率、float=小数1桁、range=Min-Max。calcKey=calc.js computeExpected param key (未対応はnull)。expandable=サブ項目展開可。zh は 2026-06-07 裏ラベル (tooltip) 込み実測網羅: 穿透5/武学增伤8/最终生效4/header=武林造诣 全実証。残推定 = 伤害加成5 subItems のみ。手甲武学增伤 (拳=天志拳系) は表示枠追加済 (2026-06-08)、 affix internal は武器実装(2026年7月)後 scout 取得予定 (後期追加 internal は規則性なく推測不可)。",
   "header": {
     "key": "totalMartial",
-    "label_key": "stDisp.header.title"
+    "label_key": "totalMartialTitle"
   },
   "sections": [
     {
@@ -15,34 +15,34 @@
           "key": "body",
           "format": "int",
           "calcKey": "body",
-          "label_key": "stDisp.basicStats.body"
+          "label_key": "body"
         },
         {
           "key": "power",
           "format": "int",
           "calcKey": "power",
-          "label_key": "stDisp.basicStats.power"
+          "label_key": "power"
         },
         {
           "key": "defense",
           "format": "int",
           "calcKey": "defense",
-          "label_key": "stDisp.basicStats.defense"
+          "label_key": "defense"
         },
         {
           "key": "agility",
           "format": "int",
           "calcKey": "agility",
-          "label_key": "stDisp.basicStats.agility"
+          "label_key": "agility"
         },
         {
           "key": "momentum",
           "format": "int",
           "calcKey": "momentum",
-          "label_key": "stDisp.basicStats.momentum"
+          "label_key": "momentum"
         }
       ],
-      "label_key_title": "stDisp.section.basicStats.title"
+      "label_key_title": "sectionBasicStatsTitle"
     },
     {
       "key": "primaryStats",
@@ -54,7 +54,7 @@
             "minPhysATK",
             "maxPhysATK"
           ],
-          "label_key": "stDisp.primaryStats.physAtk"
+          "label_key": "physAtkLabel"
         },
         {
           "key": "elemAtk",
@@ -72,7 +72,7 @@
                 "minBellstrike",
                 "maxBellstrike"
               ],
-              "label_key": "stDisp.primaryStats.elemAtk.bellstrike"
+              "label_key": "elemAtkBellstrikeLabel"
             },
             {
               "key": "stonesplit",
@@ -81,7 +81,7 @@
                 "minStonesplit",
                 "maxStonesplit"
               ],
-              "label_key": "stDisp.primaryStats.elemAtk.stonesplit"
+              "label_key": "elemAtkStonesplitLabel"
             },
             {
               "key": "silkbind",
@@ -90,7 +90,7 @@
                 "minSilkbind",
                 "maxSilkbind"
               ],
-              "label_key": "stDisp.primaryStats.elemAtk.silkbind"
+              "label_key": "elemAtkSilkbindLabel"
             },
             {
               "key": "bamboocut",
@@ -99,7 +99,7 @@
                 "minBamboocut",
                 "maxBamboocut"
               ],
-              "label_key": "stDisp.primaryStats.elemAtk.bamboocut"
+              "label_key": "elemAtkBamboocutLabel"
             },
             {
               "key": "voidAtk",
@@ -108,13 +108,13 @@
                 "minVoid",
                 "maxVoid"
               ],
-              "label_key": "stDisp.primaryStats.elemAtk.voidAtk"
+              "label_key": "elemAtkVoidLabel"
             }
           ],
-          "label_key": "stDisp.primaryStats.elemAtk"
+          "label_key": "elemAtkLabel"
         }
       ],
-      "label_key_title": "stDisp.section.primaryStats.title"
+      "label_key_title": "sectionPrimaryStatsTitle"
     },
     {
       "key": "probability",
@@ -124,7 +124,7 @@
           "format": "rateApplied",
           "calcKey": "hitRate",
           "appliedCalcKey": "appliedHit",
-          "label_key": "stDisp.probability.hitRate"
+          "label_key": "precision"
         },
         {
           "key": "critRate",
@@ -138,35 +138,35 @@
               "format": "pct",
               "calcKey": "critRateBoosted",
               "hiddenStat": true,
-              "label_key": "stDisp.probability.critRate.critRateBoosted"
+              "label_key": "critRateBoosted"
             }
           ],
-          "label_key": "stDisp.probability.critRate"
+          "label_key": "crit"
         },
         {
           "key": "sympathyRate",
           "format": "rateApplied",
           "calcKey": "sympathyRate",
           "appliedCalcKey": "appliedSympathy",
-          "label_key": "stDisp.probability.sympathyRate"
+          "label_key": "affinity"
         },
         {
           "key": "addCritRate",
           "format": "pct",
           "calcKey": "addCritRate",
-          "label_key": "stDisp.probability.addCritRate"
+          "label_key": "addCritRate"
         },
         {
           "key": "addSympathyRate",
           "format": "pct",
           "calcKey": "addSympathyRate",
-          "label_key": "stDisp.probability.addSympathyRate"
+          "label_key": "addSympathyRate"
         },
         {
           "key": "grazeConvert",
           "format": "pct",
           "calcKey": "grazeConvert",
-          "label_key": "stDisp.probability.grazeConvert"
+          "label_key": "grazeConvert"
         },
         {
           "key": "finalCritSym",
@@ -178,31 +178,31 @@
               "key": "pCrit",
               "format": "pct",
               "calcKey": "pCrit",
-              "label_key": "stDisp.probability.finalCritSym.pCrit"
+              "label_key": "finalCritSymPCrit"
             },
             {
               "key": "pSym",
               "format": "pct",
               "calcKey": "pSympathy",
-              "label_key": "stDisp.probability.finalCritSym.pSym"
+              "label_key": "finalCritSymPSym"
             },
             {
               "key": "pGraze",
               "format": "pct",
               "calcKey": "pGraze",
-              "label_key": "stDisp.probability.finalCritSym.pGraze"
+              "label_key": "finalCritSymPGraze"
             },
             {
               "key": "pNormal",
               "format": "pct",
               "calcKey": "pNormal",
-              "label_key": "stDisp.probability.finalCritSym.pNormal"
+              "label_key": "finalCritSymPNormal"
             }
           ],
-          "label_key": "stDisp.probability.finalCritSym"
+          "label_key": "finalCritSym"
         }
       ],
-      "label_key_title": "stDisp.section.probability.title"
+      "label_key_title": "sectionProbabilityTitle"
     },
     {
       "key": "dmgBoost",
@@ -211,25 +211,25 @@
           "key": "critBoost",
           "format": "pct",
           "calcKey": "critBoost",
-          "label_key": "stDisp.dmgBoost.critBoost"
+          "label_key": "critBoost"
         },
         {
           "key": "sympathyBoost",
           "format": "pct",
           "calcKey": "sympathyBoost",
-          "label_key": "stDisp.dmgBoost.sympathyBoost"
+          "label_key": "sympathyBoost"
         },
         {
           "key": "outerPen",
           "format": "float",
           "calcKey": "outerPen",
-          "label_key": "stDisp.dmgBoost.outerPen"
+          "label_key": "physPen"
         },
         {
           "key": "weaponBonus",
           "format": "pct",
           "calcKey": "weaponBonus",
-          "label_key": "stDisp.dmgBoost.weaponBonus"
+          "label_key": "weaponBonusLabel"
         },
         {
           "key": "elemBoostMain",
@@ -241,34 +241,34 @@
               "key": "bellstrikePen",
               "format": "float",
               "calcKey": "bellstrikePen",
-              "label_key": "stDisp.dmgBoost.elemBoostMain.bellstrikePen"
+              "label_key": "bellstrikePen"
             },
             {
               "key": "stonesplitPen",
               "format": "float",
               "calcKey": "stonesplitPen",
-              "label_key": "stDisp.dmgBoost.elemBoostMain.stonesplitPen"
+              "label_key": "stonesplitPen"
             },
             {
               "key": "silkbindPen",
               "format": "float",
               "calcKey": "silkbindPen",
-              "label_key": "stDisp.dmgBoost.elemBoostMain.silkbindPen"
+              "label_key": "silkbindPen"
             },
             {
               "key": "bamboocutPen",
               "format": "float",
               "calcKey": "bamboocutPen",
-              "label_key": "stDisp.dmgBoost.elemBoostMain.bamboocutPen"
+              "label_key": "bamboocutPen"
             },
             {
               "key": "voidPen",
               "format": "float",
               "calcKey": "voidPen",
-              "label_key": "stDisp.dmgBoost.elemBoostMain.voidPen"
+              "label_key": "voidPen"
             }
           ],
-          "label_key": "stDisp.dmgBoost.elemBoostMain"
+          "label_key": "elemBoostMainLabel"
         },
         {
           "key": "elemAtkBoost",
@@ -280,34 +280,34 @@
               "key": "elemDmgBellstrike",
               "format": "pct",
               "calcKey": "elemDmgBellstrike",
-              "label_key": "stDisp.dmgBoost.elemAtkBoost.elemDmgBellstrike"
+              "label_key": "elemDmgBellstrikeLabel"
             },
             {
               "key": "elemDmgStonesplit",
               "format": "pct",
               "calcKey": "elemDmgStonesplit",
-              "label_key": "stDisp.dmgBoost.elemAtkBoost.elemDmgStonesplit"
+              "label_key": "elemDmgStonesplitLabel"
             },
             {
               "key": "elemDmgSilkbind",
               "format": "pct",
               "calcKey": "elemDmgSilkbind",
-              "label_key": "stDisp.dmgBoost.elemAtkBoost.elemDmgSilkbind"
+              "label_key": "elemDmgSilkbindLabel"
             },
             {
               "key": "elemDmgBamboocut",
               "format": "pct",
               "calcKey": "elemDmgBamboocut",
-              "label_key": "stDisp.dmgBoost.elemAtkBoost.elemDmgBamboocut"
+              "label_key": "elemDmgBamboocutLabel"
             }
           ],
-          "label_key": "stDisp.dmgBoost.elemAtkBoost"
+          "label_key": "elemAtkBoost"
         },
         {
           "key": "allMartialBoost",
           "format": "pct",
           "calcKey": "allMartialBoost",
-          "label_key": "stDisp.dmgBoost.allMartialBoost"
+          "label_key": "allMartialBoost"
         },
         {
           "key": "specMartialBoost",
@@ -319,70 +319,70 @@
               "key": "swordDmg",
               "format": "pct",
               "calcKey": "swordDmg",
-              "label_key": "stDisp.dmgBoost.specMartialBoost.swordDmg"
+              "label_key": "swordDmg"
             },
             {
               "key": "spearDmg",
               "format": "pct",
               "calcKey": "spearDmg",
-              "label_key": "stDisp.dmgBoost.specMartialBoost.spearDmg"
+              "label_key": "spearDmg"
             },
             {
               "key": "fanDmg",
               "format": "pct",
               "calcKey": "fanDmg",
-              "label_key": "stDisp.dmgBoost.specMartialBoost.fanDmg"
+              "label_key": "fanDmg"
             },
             {
               "key": "umbrellaDmg",
               "format": "pct",
               "calcKey": "umbrellaDmg",
-              "label_key": "stDisp.dmgBoost.specMartialBoost.umbrellaDmg"
+              "label_key": "umbrellaDmg"
             },
             {
               "key": "hengBladeDmg",
               "format": "pct",
               "calcKey": "hengBladeDmg",
-              "label_key": "stDisp.dmgBoost.specMartialBoost.hengBladeDmg"
+              "label_key": "hengBladeDmg"
             },
             {
               "key": "moBladeDmg",
               "format": "pct",
               "calcKey": "moBladeDmg",
-              "label_key": "stDisp.dmgBoost.specMartialBoost.moBladeDmg"
+              "label_key": "moBladeDmg"
             },
             {
               "key": "dualBladesDmg",
               "format": "pct",
               "calcKey": "dualBladesDmg",
-              "label_key": "stDisp.dmgBoost.specMartialBoost.dualBladesDmg"
+              "label_key": "dualBladesDmg"
             },
             {
               "key": "ropeDartDmg",
               "format": "pct",
               "calcKey": "ropeDartDmg",
-              "label_key": "stDisp.dmgBoost.specMartialBoost.ropeDartDmg"
+              "label_key": "ropeDartDmg"
             },
             {
               "key": "gauntletDmg",
               "format": "pct",
               "calcKey": "gauntletDmg",
-              "label_key": "stDisp.dmgBoost.specMartialBoost.gauntletDmg"
+              "label_key": "gauntletDmg"
             }
           ],
-          "label_key": "stDisp.dmgBoost.specMartialBoost"
+          "label_key": "specMartialBoost"
         },
         {
           "key": "bossBoost",
           "format": "pct",
           "calcKey": "bossBoost",
-          "label_key": "stDisp.dmgBoost.bossBoost"
+          "label_key": "bossDmg"
         },
         {
           "key": "playerBoost",
           "format": "pct",
           "calcKey": "playerBoost",
-          "label_key": "stDisp.dmgBoost.playerBoost"
+          "label_key": "playerBoostLabel"
         },
         {
           "key": "stMysticDmg",
@@ -394,16 +394,16 @@
               "key": "stControlMysticDmg",
               "format": "pct",
               "calcKey": "stControlMysticDmg",
-              "label_key": "stDisp.dmgBoost.stMysticDmg.stControlMysticDmg"
+              "label_key": "stControlMysticDmg"
             },
             {
               "key": "stBurstMysticDmg",
               "format": "pct",
               "calcKey": "stBurstMysticDmg",
-              "label_key": "stDisp.dmgBoost.stMysticDmg.stBurstMysticDmg"
+              "label_key": "stBurstMysticDmg"
             }
           ],
-          "label_key": "stDisp.dmgBoost.stMysticDmg"
+          "label_key": "stMysticDmg"
         },
         {
           "key": "areaMysticDmg",
@@ -415,19 +415,19 @@
               "key": "areaDebuffMysticDmg",
               "format": "pct",
               "calcKey": "areaDebuffMysticDmg",
-              "label_key": "stDisp.dmgBoost.areaMysticDmg.areaDebuffMysticDmg"
+              "label_key": "areaDebuffMysticDmg"
             },
             {
               "key": "areaDmgMysticDmg",
               "format": "pct",
               "calcKey": "areaDmgMysticDmg",
-              "label_key": "stDisp.dmgBoost.areaMysticDmg.areaDmgMysticDmg"
+              "label_key": "areaDmgMysticDmg"
             }
           ],
-          "label_key": "stDisp.dmgBoost.areaMysticDmg"
+          "label_key": "areaMysticDmg"
         }
       ],
-      "label_key_title": "stDisp.section.dmgBoost.title"
+      "label_key_title": "sectionDmgBoostTitle"
     }
   ]
 }
