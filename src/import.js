@@ -522,7 +522,7 @@ async function _loadDicts() {
   } catch(e) { console.warn('[WWM Import] dict load failed:', e); }
 }
 
-// statKey → 4言語ラベル。 真実源 = data/i18n/stat.json + data/i18n/path.json (合成は DataStore)。
+// statKey → 4言語ラベル。 真実源 = data/i18n/game.json (stat/path namespace、 2026-07-01 統合、 合成は DataStore)。
 // _STAT_LABELS_PROXY = DataStore.name('stat', key, lang) の薄ラッパ (旧 _STAT_LABELS_I18N[L]?.[k] 互換)。
 // 旧 _STAT_LABELS_I18N dict 構造は廃止 (2026-06-09 i18n 一本化)、 callsite 用 stub のみ残置。
 const _STAT_LABELS_I18N_STUB = { ja: {}, en: {}, zh: {}, ko: {} }; // window._STAT_LABELS_I18N_ALL 互換用 (空、 sidebar/gear.js 等 fallback)
