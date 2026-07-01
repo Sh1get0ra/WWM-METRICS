@@ -4,7 +4,10 @@
 // 実装 plan : docs/superpowers/plans/2026-06-09-i18n-unification.md
 (function () {
   'use strict';
-  const CATS = ['kongfu', 'xinfa', 'sets', 'skilltype', 'weapontype', 'ui', 'game_lexicon', 'qishu', 'stat_short', 'skilltype_short', 'kongfu_short', 'noClientData', 'xinfa_tier_label'];
+  // 2026-07-01 Phase2: kongfu/xinfa/sets/skilltype/weapontype/game_lexicon/qishu/
+  // stat_short/skilltype_short/kongfu_short/xinfa_tier_label は data/i18n/game.json に統合済。
+  // ui (Layer3=ツール独自UI文言) / noClientData (Layer2=mining不可ゲーム用語) のみ個別ファイルとして残置。
+  const CATS = ['ui', 'noClientData'];
   // t() lookup chain: ui (常用語) → game_lexicon (ゲーム内用語) → stat (ステ/affix、2026-07-01 stat_display統合済) → noClientData (mining 不可 ゲーム内用語 隔離) → xinfa_tier_label (心法 tier effect text)
   const T_CHAIN = ['ui', 'game_lexicon', 'stat', 'noClientData', 'xinfa_tier_label'];
   // 動的 getter 化 (2026-06-25 真因 fix): 旧 const は module 読込時 1 回評価で
@@ -179,12 +182,12 @@
         data[cat] = await res.json();
       }),
       (async () => {
-        // 2026-07-01: stat.json + stat_display.json + path.json 統合 (data/i18n/game.json)
+        // 2026-07-01: stat/path (Phase1) + kongfu/kongfu_short/xinfa/xinfa_tier_label/sets/qishu/
+        // skilltype/skilltype_short/weapontype/game_lexicon/stat_short (Phase2) 統合 (data/i18n/game.json)
         const res = await fetch('data/i18n/game.json?v=' + getVersion());
         if (!res.ok) throw new Error('DataStore: failed to fetch game.json (' + res.status + ')');
         const game = await res.json();
-        data.stat = game.stat;
-        data.path = game.path;
+        for (const [k, v] of Object.entries(game)) data[k] = v;
       })()
     ]).then(() => { _injectPathI18nKeys(); });
     // 計算 dict も同時 load (i18n 失敗 = throw / calc 失敗 = {} 続行 の従来semantics維持)
