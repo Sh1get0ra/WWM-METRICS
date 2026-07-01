@@ -109,6 +109,18 @@
       for (const [k, v] of Object.entries(keys)) {
         if (!ui[k]) ui[k] = v; // 既存キー (旧 ui.json 重複) を上書きしない
       }
+      // suffix型 <path>Pen (data/affix.json 実 statKey 命名規則。 prefix型 pathPen<Path> とは別に必要、
+      // 2026-07-01: 5path系貫通affix4種の表示名解決バグ修正)
+      const stat = data.stat = data.stat || {};
+      if (!stat[p + 'Pen']) {
+        const penEntry = {};
+        for (const L of LANGS) {
+          const b = base[L]; if (!b) continue;
+          const pen = path.affix.pen?.[L] || '';
+          penEntry[L] = (VI_REORDER && L === 'vi') ? (pen + b) : (b + pen);
+        }
+        stat[p + 'Pen'] = penEntry;
+      }
     }
     // nonPathBase: path 系合成 (path/pathAtk/pathPen/pathDmg) は不要だが min<Name>/max<Name>
     // 形式のラベルだけ生成したい汎用 base (例: elemSub = 副属性、 path に属さない副属性 ATK)。
