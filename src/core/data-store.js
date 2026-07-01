@@ -4,9 +4,9 @@
 // 実装 plan : docs/superpowers/plans/2026-06-09-i18n-unification.md
 (function () {
   'use strict';
-  const CATS = ['kongfu', 'xinfa', 'sets', 'stat', 'path', 'skilltype', 'weapontype', 'ui', 'game_lexicon', 'stat_display', 'qishu', 'stat_short', 'skilltype_short', 'kongfu_short', 'noClientData', 'xinfa_tier_label'];
-  // t() lookup chain: ui (常用語) → game_lexicon (ゲーム内用語) → stat (ステ/affix) → stat_display (Sidebar label) → noClientData (mining 不可 ゲーム内用語 隔離) → xinfa_tier_label (心法 tier effect text)
-  const T_CHAIN = ['ui', 'game_lexicon', 'stat', 'stat_display', 'noClientData', 'xinfa_tier_label'];
+  const CATS = ['kongfu', 'xinfa', 'sets', 'skilltype', 'weapontype', 'ui', 'game_lexicon', 'qishu', 'stat_short', 'skilltype_short', 'kongfu_short', 'noClientData', 'xinfa_tier_label'];
+  // t() lookup chain: ui (常用語) → game_lexicon (ゲーム内用語) → stat (ステ/affix、2026-07-01 stat_display統合済) → noClientData (mining 不可 ゲーム内用語 隔離) → xinfa_tier_label (心法 tier effect text)
+  const T_CHAIN = ['ui', 'game_lexicon', 'stat', 'noClientData', 'xinfa_tier_label'];
   // 動的 getter 化 (2026-06-25 真因 fix): 旧 const は module 読込時 1 回評価で
   // main.js import 順序 (data-store.js が calc.js より先) で window.WWM_DISPLAY_VERSION 未定義
   // → fallback 11 固定 → 全 i18n fetch URL `?v=11` で browser cache HIT = DISPLAY bump 全無効化されてた
@@ -160,11 +160,21 @@
 
   function ready() {
     if (readyPromise) return readyPromise;
-    const i18nLoad = Promise.all(CATS.map(async (cat) => {
-      const res = await fetch('data/i18n/' + cat + '.json?v=' + getVersion());
-      if (!res.ok) throw new Error('DataStore: failed to fetch ' + cat + '.json (' + res.status + ')');
-      data[cat] = await res.json();
-    })).then(() => { _injectPathI18nKeys(); });
+    const i18nLoad = Promise.all([
+      ...CATS.map(async (cat) => {
+        const res = await fetch('data/i18n/' + cat + '.json?v=' + getVersion());
+        if (!res.ok) throw new Error('DataStore: failed to fetch ' + cat + '.json (' + res.status + ')');
+        data[cat] = await res.json();
+      }),
+      (async () => {
+        // 2026-07-01: stat.json + stat_display.json + path.json 統合 (data/i18n/game.json)
+        const res = await fetch('data/i18n/game.json?v=' + getVersion());
+        if (!res.ok) throw new Error('DataStore: failed to fetch game.json (' + res.status + ')');
+        const game = await res.json();
+        data.stat = game.stat;
+        data.path = game.path;
+      })()
+    ]).then(() => { _injectPathI18nKeys(); });
     // 計算 dict も同時 load (i18n 失敗 = throw / calc 失敗 = {} 続行 の従来semantics維持)
     readyPromise = Promise.all([i18nLoad, ensureCalcData()]).then(() => {});
     return readyPromise;
