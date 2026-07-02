@@ -100,8 +100,11 @@
 /* ラテン系 = en と同じ Cinzel 統一 (2026-06-25 兄貴指示で 7 言語拡大時 de/es/fr/pt-BR/ru の en 同化、 ru = Cinzel が Cyrillic glyph 無ければ system fallback) */
 html[lang="en"], html[lang="vi"],
 html[lang="de"], html[lang="es"], html[lang="fr"], html[lang="pt-BR"], html[lang="ru"] { --f-display-title: var(--f-latin); }
-/* 中国語 = 簡繁とも display-zh (Kaiti、 大半 glyph 共通) */
-html[lang="zh-CN"], html[lang="zh"], html[lang="zh-TW"] { --f-display-title: var(--f-display-zh); }
+/* 簡体 = display-zh (Ma Shan Zheng 楷書 webfont) */
+html[lang="zh-CN"], html[lang="zh"] { --f-display-title: var(--f-display-zh); }
+/* 繁体 = Ma Shan Zheng が簡体専用サブセットのため除外 (繁体字「雲/計」glyph 無し → 1字だけ webfont
+   描画で混在崩れ、2026-07-02 兄貴指摘)。繁体対応楷書系システムフォントで全字統一 */
+html[lang="zh-TW"] { --f-display-title: 'DFKai-SB', 'BiauKai', 'TW-Kai', 'STKaiti', 'KaiTi', 'Noto Serif TC', 'Noto Serif SC', serif; }
 html[lang="ko"] { --f-display-title: var(--f-display-ko); }
 /* タイ語 = ラテン token に Thai glyph なし → system Thai font fallback */
 html[lang="th"] { --f-display-title: 'Sarabun', 'Noto Sans Thai', 'Tahoma', sans-serif; }
