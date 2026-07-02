@@ -382,7 +382,7 @@ function renderEnhanceArsenalForm(state, roleInfo) {
 
       <h3 class="wwm-step2-section-title" style="margin-top:16px;">${T0.importArsenalTitle || '武庫 (Arsenal)'}</h3>
       <div class="wwm-arsenal-paths">
-        <span class="wwm-info-label">${(T0.arsenal||'武庫') + ((['ja','zh','zh_tw','ko','vi'].includes(window.currentLang||'ja')) ? '' : ' ') + (T0.typeLabel||'種別')}:</span>
+        <span class="wwm-info-label">${(T0.arsenal||'武庫') + ((['ja','zh','zh_tw','ko','vi','th'].includes(window.currentLang||'ja')) ? '' : ' ') + (T0.typeLabel||'種別')}:</span>
         ${pathRadios}
       </div>
       <div class="wwm-arsenal-tiers">${tierRows}</div>
