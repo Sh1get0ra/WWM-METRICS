@@ -2156,7 +2156,7 @@
   },
   "xinfa_tier_label": {
     "_schema": "心法 tier 別 effect description (= ゲーム原文 12 lang)。 mining 完成版 = data/mining/xinfa_tier_desc_master.json 由来 = T0 base 概要 + T1-T6 tier 別効果文書。 6-sid-block source (= 28 心法) は T1-T6 単一 sid 確定、 他 source (= 16 anchor + 4 name + 5 hardcoded) は 最長 description 1 候補選択 (= 旧 patch / 新 patch mix で兄貴 review 後 確定)。 T0 = 全 53 心法 anchor 周辺 / skill keyword / 兄貴 SS で取得 (= 同様 最長 description 選択)。 flat key = `<xinfa_id>.tier<N>` for N in 0..6。 build script = scripts/mining/build_xinfa_tier_desc.py + apply script = この出力。 12 lang format token (= `<text|num|...|num>` / `#Y...#E`) 残置 = 表示 layer (= src/sidebar/xinfa.js _tierLabel) で normalize 想定。",
-    "_lastUpdated": "2026-07-01T08:15:29.744148+00:00 (T0/T1 汚染修正 = wwmdb anchor + locale_en jaccard 全52心法 T0 + 24心法 T1 再選定、2026-07-01)",
+    "_lastUpdated": "2026-07-02T00:00:00.000000+00:00 (tier0 数値修正 = buff_id直接デコード方式で発見した6件のtier先取り混入バグを修正: 454/554/504/604/5/404、2026-07-02)",
     "_source": "data/mining/xinfa_tier_desc_master.json 由来 (= HD/oversea archive mining + 兄貴 SS exact match)",
     "1.tier0": {
       "ja": "飛び上がった時に奇術（移動）「飛燕再翔」で前方へ突進すると、消費する気力-10%、非対人戦背景で着地後、3秒間持続する30%の移動速度上昇を獲得できる。いずれかの敵を撃破すると、追加で気血を回復する（自身の気血最大値の1%+固定値1000）。",
@@ -2551,18 +2551,18 @@
       "th": "หลังจากการโจมตีแบบลอบสังหารสำเร็จ#Y จะเข้าสู่สถานะซ่อนตัวทันที#E โดยสามารถกระตุ้นได้เพียง1ครั้งในทุก#Y20#Eวินาที."
     },
     "5.tier0": {
-      "ja": "ダメージを与えるたびに、15%の確率で1スタックの泣血効果を付与し、5秒間持続、1秒ごとに1回ダメージを与える。最大5スタックまで。対象の泣血が5スタックになると、3～4スタック分の効果のみ解除し強力な刺傷ダメージを与える。重複して獲得すると時間が更新される。泣血効果終了時に5スタック未満の場合も20%の確率で刺傷ダメージが発生する",
+      "ja": "ダメージを与えるごとに、10%の確率で1スタックの泣血効果を付与し、5秒間持続。1秒ごとにダメージを1回与える。最大5スタックまで。対象の泣血が5スタックになると、ただちに効果を解除して刺傷ダメージを1回与える。重複して獲得すると時間が更新される",
       "en": "Dealing damage has a 10% chance to apply one stack of Weeping Blood for 5 seconds, damaging the target once per second (up to 5 stacks, duration refreshed upon stacking). At 5 stacks, Weeping Blood will be removed from the target and deal piercing damage once.",
-      "zh": "每次造成伤害时，都有15%概率附加一层泣血效果，持续5秒，每秒造成一次伤害，最多叠加5层。目标身上的泣血层数累计到5层时会只清除3-4层效果并造成一次强效刺伤伤害。重复获得可刷新时间。泣血效果结束时未累计到5层时也有20%概率造成一次刺伤伤害。",
-      "zh_tw": "每次造成傷害時，都有15%機率附加一層泣血效果，持續5秒，每秒造成一次傷害，最多疊加5層。目標身上的泣血層數累計到5層時會只清除3-4層效果並造成一次強效刺傷傷害。重複獲得可更新時間。泣血效果結束時未累計到5層時也有20%機率造成一次刺傷傷害。",
-      "ko": "매 공격 시 15% 확률로 5초간 누혈 효과를 1회 부여하며, 매초 피해를 준다. 최대 5중첩 가능. 목표의 누혈 중첩이 5에 도달하면 3-4중첩 효과가 해제되고 강력한 자상 피해를 준다. 효과는 중첩 시 갱신된다. 누혈 효과 종료 시 5중첩 미만이면 20% 확률로 1회 자상 피해를 준다.",
-      "vi": "Mỗi lần gây sát thương, có 15% xác suất để thêm một tầng hiệu ứng khóc máu, kéo dài 5 giây, mỗi giây gây một lần sát thương, tối đa chồng lên 5 tầng. Khi số tầng khóc máu trên mục tiêu tích lũy đến 5 tầng, sẽ chỉ xóa 3-4 tầng hiệu ứng và gây một lần sát thương đâm thương mạnh. Nhận được lặp lại có thể làm mới thời gian. Khi hiệu ứng khóc máu kết thúc mà không tích lũy đến 5 tầng, cũng có 20% xác suất gây một lần sát thương đâm thương.",
+      "zh": "每次造成伤害时，都有10%概率附加一层泣血效果，持续5秒，每秒造成一次伤害，最多叠加5层。目标身上的泣血层数累计到5层时会立刻清除并造成一次刺伤伤害。重复获得可刷新时间。",
+      "zh_tw": "每次造成傷害時，都有10%機率附加一層泣血效果，持續5秒，每秒造成一次傷害，最多疊加5層。目標身上的泣血層數累計到5層時會立刻清除並造成一次刺傷傷害。重複獲得可更新時間。",
+      "ko": "매 공격 시 10% 확률로 5초간 누혈 효과를 1회 부여하며, 매초 피해를 준다. 최대 5중첩 가능. 목표의 누혈 중첩이 5에 도달하면 즉시 해제되고 자상 피해를 준다. 효과는 중첩 시 갱신된다.",
+      "vi": "Mỗi lần gây sát thương, có 10% khả năng thêm một tầng hiệu quả Khóc máu, kéo dài trong 5 giây, gây sát thương mỗi giây một lần, tối đa chồng lên 5 tầng. Khi số tầng Khóc máu trên mục tiêu tích lũy đến 5 tầng, sẽ lập tức bị xóa và gây một lần sát thương Đâm thương. Việc nhận lại hiệu quả có thể làm mới thời gian.",
       "de": "Schaden zuzufügen hat eine 10% Chance, für 5 Sekunden einen Stapel von Weeping Blood zu verursachen, was dem Ziel einmal pro Sekunde Schaden zufügt (bis zu 5 Stapel, Dauer wird beim Stapeln erneuert). Bei 5 Stapeln wird Weeping Blood vom Ziel entfernt und fügt einmal durchdringenden Schaden zu.",
       "es": "Al infligir daño, hay un 10% de probabilidad de aplicar un acumulativo de Sangre Llorosa durante 5 segundos, lo que daña al objetivo una vez por segundo (hasta 5 acumulativos, la duración se reinicia al acumular). Al llegar a 5 acumulativos, Sangre Llorosa se eliminará del objetivo e infligirá daño penetrante una vez.",
       "fr": "Infliger des dégâts a une chance de 10% d'appliquer un cumul de Sang qui Pleure pendant 5 secondes, infligeant des dégâts à la cible une fois par seconde (jusqu'à 5 cumuls, la durée est réinitialisée à chaque cumul). À 5 cumuls, Sang qui Pleure est retiré de la cible et inflige des dégâts perforants une fois.",
       "pt_br": "Causar dano tem uma chance de 10% de aplicar uma pilha de Sangue Choro por 5 segundos, causando dano ao alvo uma vez por segundo (máximo de 5 pilhas, duração renovada ao acumular). Com 5 pilhas, Sangue Choro será removido do alvo e causará dano perfurante uma vez.",
       "ru": "Нанесение урона с вероятностью 10% накладывает один стак Кровавых слёз на 5 секунд, нанося цель урон каждую секунду (максимум 5 стаков, длительность обновляется при добавлении стака). При 5 стаках Кровавые слёзы исчезают с цели и наносят проникающий урон один раз.",
-      "th": "ทุกครั้งที่สร้างความเสียหาย มีโอกาส15%ที่จะเพิ่มผลลัพธ์น้ำตาเลือดหนึ่งชั้น ซึ่งมีผลต่อเนื่อง5วินาที สร้างความเสียหายทุกวินาที และสามารถซ้อนทับได้สูงสุด5ชั้น เมื่อจำนวนชั้นน้ำตาเลือดบนเป้าหมายสะสมถึง5ชั้น จะลบเพียง3-4ชั้นของผลลัพธ์และสร้างความเสียหายบาดแผลจากการแทงที่รุนแรง การได้รับซ้ำสามารถรีเฟรชเวลาได้ หากผลลัพธ์น้ำตาเลือดสิ้นสุดลงโดยไม่ได้สะสมถึง5ชั้น ยังมีโอกาส20%ที่จะสร้างความเสียหายบาดแผลจากการแทงหนึ่งครั้ง"
+      "th": "ทุกครั้งที่สร้างความเสียหาย มีโอกาส 10% ที่จะเพิ่มผลลัพธ์น้ำตาเลือด 1 ชั้น โดยผลลัพธ์นี้จะคงอยู่เป็นเวลา 5 วินาที และสร้างความเสียหายทุกๆ วินาที โดยสามารถซ้อนทับได้สูงสุด 5 ชั้น เมื่อจำนวนชั้นน้ำตาเลือดบนเป้าหมายสะสมถึง 5 ชั้น จะถูกลบออกทันทีและสร้างความเสียหายจากบาดแผลจากการแทง 1 ครั้ง การได้รับผลลัพธ์ซ้ำจะรีเฟรชระยะเวลา"
     },
     "5.tier1": {
       "ja": "与える刺傷ダメージ+#Y100%#E",
@@ -5099,18 +5099,18 @@
       "th": "ปริมาณการดูดซับความเสียหายต่อพลังชีวิตของเกราะป้องกันทั้งหมดเพิ่มขึ้น10%"
     },
     "404.tier0": {
-      "ja": "首領とその他ユニットの挑発に成功すると、嵐雷の槍の技風雷の嘯きのダメージ軽減がそれぞれ20%と5%上昇、最大20%まで。ただし集中対応の代償として、ダメージ軽減効果の持続期間は与ダメージ−10%。風雷の嘯きのクールタイムが4秒短縮。",
-      "en": "Increases the DMG Reduction of Stormbreaker Spear's Storm Roar by 20% after taunting a boss unit, and by 5% after taunting a non-boss unit, up to 20% in total. While the DMG Reduction is active, reduces all damage dealt by 10%. Reduces the cooldown of Storm Roar by 4 seconds.",
-      "zh": "八方风雷枪招式风雷啸的减伤效果，会在成功嘲讽一个首领和非首领单位后分别增加20%和5%，最多可增加20%。作为专注应对的代价，减伤效果持续期间，角色造成的所有伤害均会降低10%。风雷啸的冷却时间减少4秒。",
-      "zh_tw": "八方風雷槍招式風雷嘯的減傷效果，會在成功嘲諷一個首領和非首領單位後分別增加20%和5%，最多可增加20%。作為專注應對的代價，減傷效果持續期間，角色造成的所有傷害均會降低10%。風雷嘯的冷卻時間減少4秒。",
-      "ko": "풍뢰의 징표 초식 천둥의 포효의 피해 감소 효과는 BOSS와 일반 적에게 도발을 성공했을 때 각각 20% 및 5% 증가하며, 최대 20%까지 누적된다. 집중 방어의 대가로, 피해 감소 효과가 유지되는 동안 캐릭터가 입히는 모든 피해는 10% 감소한다. 천둥의 포효의 쿨타임이 4초 감소한다.",
-      "vi": "Súng Bát Phương Phong LôiChiêu thứcSấm Sét Giócóhiệu quả giảm sát thương, sẽ tăng thêm20% và5% khi chế nhạo thành công một Thủ lĩnh và Đơn vị không phải Thủ lĩnh, tối đa có thể tăng thêm20%. Là cái giá phải trả cho việc tập trung đối phó, trong thời gian hiệu quả giảm sát thương kéo dài, tất cả sát thương mà Nhân vật gây ra sẽ giảm10%. Thời gian hồi chiêu của Sấm Sét Gió giảm4giây.",
-      "de": "Erhöht die Schadensreduzierung von Sturmbrecher-Speer Sturmgebrüll um 20% nach dem Provozieren einer Boss-Einheit und um 5% nach dem Provozieren einer Nicht-Boss-Einheit, insgesamt bis zu 20%. Während die Schadensreduzierung aktiv ist, wird aller verursachte Schaden um 10% reduziert. Verringert die Abklingzeit von Sturmgebrüll um 4 Sekunden.",
-      "es": "Aumenta la Reducción de Daño de Lanza Rompetormentas Rugido de Tormenta en 20% después de provocar a una unidad jefe, y en 5% después de provocar a una unidad no jefe, hasta un máximo de 20% en total. Mientras la Reducción de Daño está activa, reduce todo el daño infligido en 10%. Reduce el tiempo de reutilización de Rugido de Tormenta en 4 segundos.",
-      "fr": "Augmente la réduction de dégâts de Rugissement Tempétueux de la Lance Brise-Tempête de 20% après avoir provoqué une unité boss, et de 5% après avoir provoqué une unité non-boss, jusqu'à 20% au total. Tant que la réduction de dégâts est active, réduit tous les dégâts infligés de 10%. Réduit le temps de recharge de Rugissement Tempétueux de 4 secondes.",
-      "pt_br": "Aumenta a Redução de Dano da Lança Quebra-Tempestade Rugido da Tempestade em 20% após provocar uma unidade chefe, e em 5% após provocar uma unidade não-chefe, até um total de 20%. Enquanto a Redução de Dano está ativa, reduz todo o dano causado em 10%. Reduz o tempo de recarga do Rugido da Tempestade em 4 segundos.",
-      "ru": "Увеличивает Снижение урона для 781Копья Громобойца20103 в навыке 781Рев бури#C2010320103101 на #Y20% после провокации босса и на 5% после провокации обычного противника, в сумме до 20%. Пока действует Снижение урона, уменьшает весь наносимый урон на 10%. Сокращает время восстановления Рева бури на 4 секунды.",
-      "th": "หอกสายฟ้าฟาดแปดทิศกระบวนท่าเสียงลมและสายฟ้าที่ผลลัพธ์ลดความเสียหาย จะเพิ่มขึ้นเมื่อยั่วยุหัวหน้าและหน่วยที่ไม่ใช่หัวหน้าได้สำเร็จ โดยจะเพิ่มขึ้นตามลำดับเป็น20%และ5% โดยสามารถเพิ่มได้สูงสุดถึง20% ในช่วงเวลาที่ผลลัพธ์ลดความเสียหายมีผล ตัวละครจะสร้างความเสียหายทั้งหมดลดลง10% เวลาคูลดาวน์ของเสียงลมและสายฟ้าลดลง4วินาที"
+      "ja": "首領とその他ユニットの挑発に成功すると、嵐雷の槍の技風雷の嘯きのダメージ軽減がそれぞれ20%と5%上昇、最大20%まで。ただし集中対応の代償として、ダメージ軽減効果の持続期間は与ダメージ−10%。",
+      "en": "Increases the DMG Reduction of Stormbreaker Spear's Storm Roar by 20% after taunting a boss unit, and by 5% after taunting a non-boss unit, up to 20% in total. While the DMG Reduction is active, reduces all damage dealt by 10%.",
+      "zh": "八方风雷枪招式风雷啸的减伤效果，会在成功嘲讽一个首领和非首领单位后分别增加20%和5%，最多可增加20%。作为专注应对的代价，减伤效果持续期间，角色造成的所有伤害均会降低10%。",
+      "zh_tw": "八方風雷槍招式風雷嘯的減傷效果，會在成功嘲諷一個首領和非首領單位後分別增加20%和5%，最多可增加20%。作為專注應對的代價，減傷效果持續期間，角色造成的所有傷害均會降低10%。",
+      "ko": "풍뢰의 징표 초식 천둥의 포효의 피해 감소 효과는 BOSS와 일반 적에게 도발을 성공했을 때 각각 20% 및 5% 증가하며, 최대 20%까지 누적된다. 집중 방어의 대가로, 피해 감소 효과가 유지되는 동안 캐릭터가 입히는 모든 피해는 10% 감소한다.",
+      "vi": "Súng Bát Phương Phong LôiChiêu thứcSấm Sét Giócóhiệu quả giảm sát thương, sẽ tăng thêm20% và5% khi chế nhạo thành công một Thủ lĩnh và Đơn vị không phải Thủ lĩnh, tối đa có thể tăng thêm20%. Là cái giá phải trả cho việc tập trung đối phó, trong thời gian hiệu quả giảm sát thương kéo dài, tất cả sát thương mà Nhân vật gây ra sẽ giảm10%.",
+      "de": "Erhöht die Schadensreduzierung von Sturmbrecher-Speer Sturmgebrüll um 20% nach dem Provozieren einer Boss-Einheit und um 5% nach dem Provozieren einer Nicht-Boss-Einheit, insgesamt bis zu 20%. Während die Schadensreduzierung aktiv ist, wird aller verursachte Schaden um 10% reduziert.",
+      "es": "Aumenta la Reducción de Daño de Lanza Rompetormentas Rugido de Tormenta en 20% después de provocar a una unidad jefe, y en 5% después de provocar a una unidad no jefe, hasta un máximo de 20% en total. Mientras la Reducción de Daño está activa, reduce todo el daño infligido en 10%.",
+      "fr": "Augmente la réduction de dégâts de Rugissement Tempétueux de la Lance Brise-Tempête de 20% après avoir provoqué une unité boss, et de 5% après avoir provoqué une unité non-boss, jusqu'à 20% au total. Tant que la réduction de dégâts est active, réduit tous les dégâts infligés de 10%.",
+      "pt_br": "Aumenta a Redução de Dano da Lança Quebra-Tempestade Rugido da Tempestade em 20% após provocar uma unidade chefe, e em 5% após provocar uma unidade não-chefe, até um total de 20%. Enquanto a Redução de Dano está ativa, reduz todo o dano causado em 10%.",
+      "ru": "Увеличивает Снижение урона для 781Копья Громобойца20103 в навыке 781Рев бури#C2010320103101 на #Y20% после провокации босса и на 5% после провокации обычного противника, в сумме до 20%. Пока действует Снижение урона, уменьшает весь наносимый урон на 10%.",
+      "th": "หอกสายฟ้าฟาดแปดทิศกระบวนท่าเสียงลมและสายฟ้าที่ผลลัพธ์ลดความเสียหาย จะเพิ่มขึ้นเมื่อยั่วยุหัวหน้าและหน่วยที่ไม่ใช่หัวหน้าได้สำเร็จ โดยจะเพิ่มขึ้นตามลำดับเป็น20%และ5% โดยสามารถเพิ่มได้สูงสุดถึง20% ในช่วงเวลาที่ผลลัพธ์ลดความเสียหายมีผล ตัวละครจะสร้างความเสียหายทั้งหมดลดลง10%"
     },
     "404.tier1": {
       "ja": "風雷の嘯きのクールタイム-4秒（16秒になる）",
@@ -5211,18 +5211,18 @@
       "th": "ระยะเวลาต่อเนื่องของการแตกสลายเพิ่มขึ้นเป็น5วินาที"
     },
     "454.tier0": {
-      "ja": "妨害系技が敵に命中すると、現在の武術技のクールタイムを2秒短縮する。この効果は10秒ごとに最大1回まで発動可能。\n効果対象となる妨害系技：引縄斬、屈龍、乾坤定、春恨み、春月増華、浮名無依、春尽山空。",
-      "en": "Hitting an Enemy with a Control Skill reduces the Cooldown of the current Martial Art Skill by 2s. This effect can only trigger once every 10s.\nAffected Control Skills include: Bladebound Thread, Coiled Dragon, Qiankun's Lock, Spring Sorrow, Moon Shatter Spring, Wayfarer's Drift, Peak's Springless Silence.",
-      "zh": "控制类技能命中敌人后会减少2秒当前武学技的冷却时间，此效果每10秒最多触发1次。\n可生效的控制类技能包括：牵绳引刃、龙蛰蠖屈、乾坤定、抛春恨、月出惊春、浮名无寄、春尽山空。",
-      "zh_tw": "控制類技能命中敵人後會減少2秒當前武學技能的冷卻時間，此效果每10秒最多觸發1次。\n可生效的控制類技能包括：牽繩引刃、龍蟄蠖屈、乾坤定、拋春恨、月出驚春、浮名無寄、春盡山空。",
-      "ko": "제어류 스킬이 명중 시 현재 무술 스킬의 쿨타임이 2초 감소하며, 이 효과는 10초당 최대 1회 발동한다. \n발동 가능한 제어류 스킬에는 사슬도, 용의 칩거, 건곤의 정수, 봄의 원한, 춘월의 파문, 허무의 이름, 봄의 침묵 등이 포함된다.",
-      "vi": "Sau khi kỹ năng Khống chế Đánh trúng Kẻ thù sẽ giảm 2 giây Thời gian hồi chiêu của kỹ năng võ học hiện tại, Hiệu quả này mỗi 10 giây tối đa Kích hoạt 1 lần.\nKỹ năng Khống chế có thể kích hoạt bao gồm: Kéo dây dẫn lưỡi、Rồng ẩn cong mình、Định càn khôn、Vứt bỏ hận xuân、Trăng Lên Kinh Xuân、Danh Hư Không Nơi Nương Tựa、Xuân Tàn Núi Trống.",
-      "de": "Das Treffen eines Feindes mit einer Kontrollfähigkeit reduziert die Abklingzeit der aktuellen Kampfkunstfähigkeit um 2s. Dieser Effekt kann nur einmal alle 10s ausgelöst werden.\nBetroffene Kontrollfähigkeiten umfassen: Bladebound Thread, Coiled Dragon, Qiankun's Lock, Spring Sorrow, Moon Shatter Spring, Wayfarer's Drift, Peak's Springless Silence.",
-      "es": "Golpear a un Enemigo con una Habilidad de Control reduce el Tiempo de Recarga de la Habilidad de Arte Marcial actual en 2s. Este efecto solo puede activarse una vez cada 10s.\nLas Habilidades de Control afectadas incluyen: Bladebound Thread, Coiled Dragon, Qiankun's Lock, Spring Sorrow, Moon Shatter Spring, Wayfarer's Drift, Peak's Springless Silence.",
-      "fr": "Infliger un coup à un Ennemi avec une compétence de contrôle réduit le temps de recharge de la compétence d'art martial actuelle de 2s. Cet effet ne peut se déclencher qu'une fois toutes les 10s.\nLes compétences de contrôle concernées incluent : Bladebound Thread, Coiled Dragon, Qiankun's Lock, Spring Sorrow, Moon Shatter Spring, Wayfarer's Drift, Peak's Springless Silence.",
-      "pt_br": "Acertar um Inimigo com uma Habilidade de Controle reduz o Tempo de Recarga da habilidade atual de Arte Marcial em 2s. Este efeito só pode ser acionado uma vez a cada 10s.\nHabilidades de Controle afetadas incluem: Fio da Lâmina Atada, Dragão Enrolado, Cadeado de Qiankun, Tristeza da Primavera, Lua Quebrada da Primavera, Deriva do Viajante, Silêncio sem Primavera do Pico.",
-      "ru": "Попадание по врагу навыком контроля уменьшает время восстановления текущего навыка боевого искусства на 2 сек. Этот эффект может срабатывать только раз в 10 сек.\nЗатронутые навыки контроля включают: Нить клинка, Свернувшийся дракон, Замок Цянькунь, Весенняя Печаль, Ручей Разбитой Луны, Дрейф Странника, Безмолвие Пика без Родников.",
-      "th": "เมื่อทักษะการควบคุมโจมตีศัตรูสำเร็จ จะลดเวลาคูลดาวน์ของทักษะศิลปะการต่อสู้ปัจจุบันลง 2 วินาที ผลลัพธ์นี้สามารถกระตุ้นได้สูงสุด 1 ครั้งในทุกๆ 10 วินาที\nทักษะการควบคุมที่สามารถมีผลได้รวมถึง: ดึงเชือกนำคมดาบ, มังกรหลบซ่อนตัว, กำหนดฟ้าดิน, ทิ้งความเศร้าของฤดูใบไม้ผลิ, พระจันทร์ขึ้นสะเทือนฤดูใบไม้ผลิ, ชื่อเสียงลอยไร้ที่พักพิง, ฤดูใบไม้ผลิสิ้นสุดภูเขาว่างเปล่า."
+      "ja": "妨害系技が敵に命中すると、現在の武術技のクールタイムを1秒短縮する。この効果は10秒ごとに最大1回まで発動可能。\n効果対象となる妨害系技：引縄斬、屈龍、乾坤定、春恨み、春月増華、浮名無依、春尽山空。",
+      "en": "Hitting an Enemy with a Control Skill reduces the Cooldown of the current Martial Art Skill by 1s. This effect can only trigger once every 10s.\nAffected Control Skills include: Bladebound Thread, Coiled Dragon, Qiankun's Lock, Spring Sorrow, Moon Shatter Spring, Wayfarer's Drift, Peak's Springless Silence.",
+      "zh": "控制类技能命中敌人后会减少1秒当前武学技的冷却时间，此效果每10秒最多触发1次。\n可生效的控制类技能包括：牵绳引刃、龙蛰蠖屈、乾坤定、抛春恨、月出惊春、浮名无寄、春尽山空。",
+      "zh_tw": "控制類技能命中敵人後會減少1秒當前武學技能的冷卻時間，此效果每10秒最多觸發1次。\n可生效的控制類技能包括：牽繩引刃、龍蟄蠖屈、乾坤定、拋春恨、月出驚春、浮名無寄、春盡山空。",
+      "ko": "제어류 스킬이 명중 시 현재 무술 스킬의 쿨타임이 1초 감소하며, 이 효과는 10초당 최대 1회 발동한다. \n발동 가능한 제어류 스킬에는 사슬도, 용의 칩거, 건곤의 정수, 봄의 원한, 춘월의 파문, 허무의 이름, 봄의 침묵 등이 포함된다.",
+      "vi": "Sau khi kỹ năng Khống chế Đánh trúng Kẻ thù sẽ giảm 1 giây Thời gian hồi chiêu của kỹ năng võ học hiện tại, Hiệu quả này mỗi 10 giây tối đa Kích hoạt 1 lần.\nKỹ năng Khống chế có thể kích hoạt bao gồm: Kéo dây dẫn lưỡi、Rồng ẩn cong mình、Định càn khôn、Vứt bỏ hận xuân、Trăng Lên Kinh Xuân、Danh Hư Không Nơi Nương Tựa、Xuân Tàn Núi Trống.",
+      "de": "Das Treffen eines Feindes mit einer Kontrollfähigkeit reduziert die Abklingzeit der aktuellen Kampfkunstfähigkeit um 1s. Dieser Effekt kann nur einmal alle 10s ausgelöst werden.\nBetroffene Kontrollfähigkeiten umfassen: Bladebound Thread, Coiled Dragon, Qiankun's Lock, Spring Sorrow, Moon Shatter Spring, Wayfarer's Drift, Peak's Springless Silence.",
+      "es": "Golpear a un Enemigo con una Habilidad de Control reduce el Tiempo de Recarga de la Habilidad de Arte Marcial actual en 1s. Este efecto solo puede activarse una vez cada 10s.\nLas Habilidades de Control afectadas incluyen: Bladebound Thread, Coiled Dragon, Qiankun's Lock, Spring Sorrow, Moon Shatter Spring, Wayfarer's Drift, Peak's Springless Silence.",
+      "fr": "Infliger un coup à un Ennemi avec une compétence de contrôle réduit le temps de recharge de la compétence d'art martial actuelle de 1s. Cet effet ne peut se déclencher qu'une fois toutes les 10s.\nLes compétences de contrôle concernées incluent : Bladebound Thread, Coiled Dragon, Qiankun's Lock, Spring Sorrow, Moon Shatter Spring, Wayfarer's Drift, Peak's Springless Silence.",
+      "pt_br": "Acertar um Inimigo com uma Habilidade de Controle reduz o Tempo de Recarga da habilidade atual de Arte Marcial em 1s. Este efeito só pode ser acionado uma vez a cada 10s.\nHabilidades de Controle afetadas incluem: Fio da Lâmina Atada, Dragão Enrolado, Cadeado de Qiankun, Tristeza da Primavera, Lua Quebrada da Primavera, Deriva do Viajante, Silêncio sem Primavera do Pico.",
+      "ru": "Попадание по врагу навыком контроля уменьшает время восстановления текущего навыка боевого искусства на 1 сек. Этот эффект может срабатывать только раз в 10 сек.\nЗатронутые навыки контроля включают: Нить клинка, Свернувшийся дракон, Замок Цянькунь, Весенняя Печаль, Ручей Разбитой Луны, Дрейф Странника, Безмолвие Пика без Родников.",
+      "th": "เมื่อทักษะการควบคุมโจมตีศัตรูสำเร็จ จะลดเวลาคูลดาวน์ของทักษะศิลปะการต่อสู้ปัจจุบันลง 1 วินาที ผลลัพธ์นี้สามารถกระตุ้นได้สูงสุด 1 ครั้งในทุกๆ 10 วินาที\nทักษะการควบคุมที่สามารถมีผลได้รวมถึง: ดึงเชือกนำคมดาบ, มังกรหลบซ่อนตัว, กำหนดฟ้าดิน, ทิ้งความเศร้าของฤดูใบไม้ผลิ, พระจันทร์ขึ้นสะเทือนฤดูใบไม้ผลิ, ชื่อเสียงลอยไร้ที่พักพิง, ฤดูใบไม้ผลิสิ้นสุดภูเขาว่างเปล่า."
     },
     "454.tier1": {
       "ja": "妨害系の技が敵に命中すると、現在の武術の武術技CD-2秒",
@@ -5323,18 +5323,18 @@
       "th": "เงาเทียนระยะเวลาต่อเนื่องเพิ่มขึ้นเป็น5วินาที."
     },
     "504.tier0": {
-      "ja": "武術技で敵にダメージを与えると、自身が7秒間持続する唐歌効果を獲得する。気血値が50%以上の場合、唐歌1スタックごとに、武術技の会心ダメージ+2%；気血値が50%未満の場合、唐歌1スタックごとに、自身の武術技の気血吸収+2%、1秒あたりの吸収上限は自身の最大気血値の2.5%となる。唐歌は最大5スタックまで積み重ね、1秒ごとに最大1スタックまで獲得可能。",
-      "en": "When dealing damage with Martial Art skills, gain Tang Melody for 7s (max 5 stacks, limited to 1 stack per second). Each stack grants Martial Art Skill bonus: when above 50% HP, +2% Critical Damage; when below 50% HP, +2% HP Drain (capped at 2.5% of your Max HP per second).",
-      "zh": "武学技对敌人造成伤害时自身获得持续7秒的唐歌效果。当气血值高于50%时，每层唐歌使武学技结算时造成的会心伤害增加2%；当气血值低于50%时，每层唐歌提升自身武学技2%气血吸取，每秒最多吸取自身2.5%最大气血值。唐歌最多叠加5层，每秒最多获得1层。",
-      "zh_tw": "武學技對敵人造成傷害時自身獲得持續7秒的唐歌效果。當氣血值高於50%時，每層唐歌使武學技結算時造成的會心傷害增加2%；當氣血值低於50%時，每層唐歌提升自身武學技2%氣血吸取，每秒最多吸取自身2.5%最大氣血值。唐歌最多疊加5層，每秒最多獲得1層。",
-      "ko": "무술 스킬로 적에게 피해를 입히면 7초 동안 당의 노래 효과를 획득할 수 있다. 기혈이 50% 초과일 때, 당의 노래 중첩당 무술 스킬 결산 시 입히는 치명타 피해가 2% 증가한다. 기혈이 50% 미만일 때, 당의 노래 중첩당 무술 스킬의 기혈 흡수율이 2% 증가한다(초당 최대 기혈의 2.5%까지 흡수 가능). 당의 노래는 최대 5회 중첩되며, 초당 최대 1회 획득할 수 있다.",
-      "vi": "kỹ năng võ họckhi gây Sát thương cho Kẻ thù, bản thân Nhận được Hiệu quảBài ca Đườngkéo dài7giây. Khi Giá trị Khí huyết Cao hơn50%, mỗi TầngBài ca Đườngkhiến Sát thương chí mạng gây ra khi kỹ năng võ học Thanh toán tăng2%; Khi Giá trị Khí huyết Thấp hơn50%, mỗi TầngBài ca Đườngtăng Hút khí huyết của kỹ năng võ học bản thân2%, mỗi giây tối đa hút2.5% Giá trị khí huyết tối đa bản thân.Bài ca Đườngtối đa Chồng lên5Tầng, mỗi giây tối đa Nhận được1Tầng.",
-      "de": "Wenn du mit Kampfkunst-Fähigkeiten Schaden verursachst, erhältst du für 7 s Tang Song (maximal 5 Stapel, begrenzt auf 1 Stapel pro Sekunde). Jeder Stapel gewährt einen Kampfkunst-Fähigkeit-Bonus: Bei über 50% HP +2% Kritischer Schaden; bei unter 50% HP +2% HP-Entzug (begrenzt auf 2.5% deiner maximalen HP pro Sekunde).",
-      "es": "Al infligir daño con habilidades de Arte Marcial, obtienes Tang Song durante 7s (máximo 5 acumulaciones, limitado a 1 acumulación por segundo). Cada acumulación otorga una bonificación de Habilidad de Arte Marcial: cuando tienes más del 50% de HP, +2% de Daño Crítico; cuando tienes menos del 50% de HP, +2% de Drenaje de Vida (limitado a 2.5% de tu Vida Máxima por segundo).",
-      "fr": "En infligeant des dégâts avec les compétences d'Art Martial, obtenez Tang Song pendant 7 s (maximum 5 piles, limité à 1 pile par seconde). Chaque pile accorde un bonus de Compétence d'art martial : lorsque les PV dépassent 50 %, +2 % de Dégâts Critiques ; lorsque les PV sont inférieurs à 50 %, +2 % de Drainage de PV (plafonné à 2.5 % de vos PV Max par seconde).",
-      "pt_br": "Ao causar dano com habilidades de Arte Marcial, ganhe Tang Song por 7s (máximo de 5 acúmulos, limitado a 1 acúmulo por segundo). Cada acúmulo concede bônus de Habilidade de Arte Marcial: quando acima de 50% de HP, +2% de Dano Crítico; quando abaixo de 50% de HP, +2% de Dreno de HP (limitado a 2.5% do seu HP Máximo por segundo).",
-      "ru": "При нанесении урона с помощью навыков боевых искусств вы получаете Мелодию Тан на 7 сек. (максимум 5 стаков, ограничение: 1 стак в секунду). Каждый стак даёт бонус к навыкам боевых искусств: при уровне здоровья выше 50% +2% к критическому урону; при уровне здоровья ниже 50% +2% к поглощению HP (максимум 2.5% от вашего макс. HP в секунду).",
-      "th": "ทักษะศิลปะการต่อสู้เมื่อสร้างความเสียหายแก่ศัตรู ตัวเองจะได้รับบทเพลงแห่งถังผลลัพธ์ที่คงอยู่เป็นเวลา7วินาที เมื่อพลังชีวิตสูงกว่า50% แต่ละชั้นของบทเพลงแห่งถังจะเพิ่มความเสียหายคริติคอลที่เกิดจากการสรุปผลของทักษะศิลปะการต่อสู้ขึ้น2%；เมื่อพลังชีวิตต่ำกว่า50% แต่ละชั้นของบทเพลงแห่งถังจะเพิ่มการดูดซับพลังชีวิตของทักษะศิลปะการต่อสู้ของตัวเองขึ้น2% โดยในแต่ละวินาทีสามารถดูดซับได้สูงสุด2.5% ของพลังชีวิตสูงสุดของตัวเอง บทเพลงแห่งถังสามารถซ้อนทับได้สูงสุด5ชั้น และในแต่ละวินาทีสามารถได้รับสูงสุด1ชั้น。"
+      "ja": "武術技で敵にダメージを与えると、自身が4秒間持続する唐歌効果を獲得する。気血値が50%以上の場合、唐歌1スタックごとに、武術技の会心ダメージ+2%；気血値が50%未満の場合、唐歌1スタックごとに、自身の武術技の気血吸収+2%、1秒あたりの吸収上限は自身の最大気血値の2.5%となる。唐歌は最大5スタックまで積み重ね、1秒ごとに最大1スタックまで獲得可能。",
+      "en": "When dealing damage with Martial Art skills, gain Tang Melody for 4s (max 5 stacks, limited to 1 stack per second). Each stack grants Martial Art Skill bonus: when above 50% HP, +2% Critical Damage; when below 50% HP, +2% HP Drain (capped at 2.5% of your Max HP per second).",
+      "zh": "武学技对敌人造成伤害时自身获得持续4秒的唐歌效果。当气血值高于50%时，每层唐歌使武学技结算时造成的会心伤害增加2%；当气血值低于50%时，每层唐歌提升自身武学技2%气血吸取，每秒最多吸取自身2.5%最大气血值。唐歌最多叠加5层，每秒最多获得1层。",
+      "zh_tw": "武學技對敵人造成傷害時自身獲得持續4秒的唐歌效果。當氣血值高於50%時，每層唐歌使武學技結算時造成的會心傷害增加2%；當氣血值低於50%時，每層唐歌提升自身武學技2%氣血吸取，每秒最多吸取自身2.5%最大氣血值。唐歌最多疊加5層，每秒最多獲得1層。",
+      "ko": "무술 스킬로 적에게 피해를 입히면 4초 동안 당의 노래 효과를 획득할 수 있다. 기혈이 50% 초과일 때, 당의 노래 중첩당 무술 스킬 결산 시 입히는 치명타 피해가 2% 증가한다. 기혈이 50% 미만일 때, 당의 노래 중첩당 무술 스킬의 기혈 흡수율이 2% 증가한다(초당 최대 기혈의 2.5%까지 흡수 가능). 당의 노래는 최대 5회 중첩되며, 초당 최대 1회 획득할 수 있다.",
+      "vi": "kỹ năng võ họckhi gây Sát thương cho Kẻ thù, bản thân Nhận được Hiệu quảBài ca Đườngkéo dài4giây. Khi Giá trị Khí huyết Cao hơn50%, mỗi TầngBài ca Đườngkhiến Sát thương chí mạng gây ra khi kỹ năng võ học Thanh toán tăng2%; Khi Giá trị Khí huyết Thấp hơn50%, mỗi TầngBài ca Đườngtăng Hút khí huyết của kỹ năng võ học bản thân2%, mỗi giây tối đa hút2.5% Giá trị khí huyết tối đa bản thân.Bài ca Đườngtối đa Chồng lên5Tầng, mỗi giây tối đa Nhận được1Tầng.",
+      "de": "Wenn du mit Kampfkunst-Fähigkeiten Schaden verursachst, erhältst du für 4 s Tang Song (maximal 5 Stapel, begrenzt auf 1 Stapel pro Sekunde). Jeder Stapel gewährt einen Kampfkunst-Fähigkeit-Bonus: Bei über 50% HP +2% Kritischer Schaden; bei unter 50% HP +2% HP-Entzug (begrenzt auf 2.5% deiner maximalen HP pro Sekunde).",
+      "es": "Al infligir daño con habilidades de Arte Marcial, obtienes Tang Song durante 4s (máximo 5 acumulaciones, limitado a 1 acumulación por segundo). Cada acumulación otorga una bonificación de Habilidad de Arte Marcial: cuando tienes más del 50% de HP, +2% de Daño Crítico; cuando tienes menos del 50% de HP, +2% de Drenaje de Vida (limitado a 2.5% de tu Vida Máxima por segundo).",
+      "fr": "En infligeant des dégâts avec les compétences d'Art Martial, obtenez Tang Song pendant 4 s (maximum 5 piles, limité à 1 pile par seconde). Chaque pile accorde un bonus de Compétence d'art martial : lorsque les PV dépassent 50 %, +2 % de Dégâts Critiques ; lorsque les PV sont inférieurs à 50 %, +2 % de Drainage de PV (plafonné à 2.5 % de vos PV Max par seconde).",
+      "pt_br": "Ao causar dano com habilidades de Arte Marcial, ganhe Tang Song por 4s (máximo de 5 acúmulos, limitado a 1 acúmulo por segundo). Cada acúmulo concede bônus de Habilidade de Arte Marcial: quando acima de 50% de HP, +2% de Dano Crítico; quando abaixo de 50% de HP, +2% de Dreno de HP (limitado a 2.5% do seu HP Máximo por segundo).",
+      "ru": "При нанесении урона с помощью навыков боевых искусств вы получаете Мелодию Тан на 4 сек. (максимум 5 стаков, ограничение: 1 стак в секунду). Каждый стак даёт бонус к навыкам боевых искусств: при уровне здоровья выше 50% +2% к критическому урону; при уровне здоровья ниже 50% +2% к поглощению HP (максимум 2.5% от вашего макс. HP в секунду).",
+      "th": "ทักษะศิลปะการต่อสู้เมื่อสร้างความเสียหายแก่ศัตรู ตัวเองจะได้รับบทเพลงแห่งถังผลลัพธ์ที่คงอยู่เป็นเวลา4 วินาที เมื่อพลังชีวิตสูงกว่า50% แต่ละชั้นของบทเพลงแห่งถังจะเพิ่มความเสียหายคริติคอลที่เกิดจากการสรุปผลของทักษะศิลปะการต่อสู้ขึ้น2%；เมื่อพลังชีวิตต่ำกว่า50% แต่ละชั้นของบทเพลงแห่งถังจะเพิ่มการดูดซับพลังชีวิตของทักษะศิลปะการต่อสู้ของตัวเองขึ้น2% โดยในแต่ละวินาทีสามารถดูดซับได้สูงสุด2.5% ของพลังชีวิตสูงสุดของตัวเอง บทเพลงแห่งถังสามารถซ้อนทับได้สูงสุด5ชั้น และในแต่ละวินาทีสามารถได้รับสูงสุด1ชั้น。"
     },
     "504.tier1": {
       "ja": "唐歌の持続時間が7秒に延長される。",
@@ -5435,18 +5435,18 @@
       "th": "ทะลุลำคอ ระยะเวลาต่อเนื่องเพิ่มเป็น15 วินาที"
     },
     "554.tier0": {
-      "ja": "自分が強靭状態のとき、与える全てのダメージが4%上昇し、さらに周囲5m以内の生存している敵1体ごとに追加で1%ダメージが上昇する（最大で追加3%まで）。",
-      "en": "While in Tenacity, damage dealt increases by 4% Gain an extra 1% per enemy within 5 meters, up to an additional 3%.",
-      "zh": "自身处于强韧状态时，造成的所有伤害提升4%，且周围5米内每有一名存活敌人额外提升1%伤害，最多额外提升3%。",
-      "zh_tw": "自身處於強韌狀態時，造成的所有傷害提升4%，且周圍5米內每有一名存活敵人額外提升1%傷害，最多額外提升3%。",
-      "ko": "자신이 강인 상태일 때 주는 모든 피해가 4% 증가하며, 주변 5m 내에 생존한 적 1명당 피해가 1% 추가 증가한다(최대 3%).",
-      "vi": "Khi bản thân ở trạng thái Kiên cường, tất cả sát thương gây ra tăng 4%, và mỗi kẻ thù sống trong phạm vi 5 mét xung quanh sẽ tăng thêm 1% sát thương, tối đa tăng thêm 3%.",
-      "de": "Während Zähigkeit aktiv ist, erhöht sich der verursachte Schaden um 4%. Erhalte zusätzliche 1% pro Feind innerhalb von 5 Metern, bis zu einem zusätzlichen 3%.",
-      "es": "Mientras estás en Tenacidad, el daño infligido aumenta en 4%. Obtén un 1% adicional por cada enemigo dentro de 5 metros, hasta un máximo de 3% extra.",
-      "fr": "Lorsque Tenacité est active, les dégâts infligés augmentent de 4%. Gagnez un bonus supplémentaire de 1% par ennemi présent dans un rayon de 5 mètres, jusqu'à un maximum de 3%.",
-      "pt_br": "Enquanto em Tenacidade, o dano causado aumenta em 4%. Ganhe um adicional de 1% por inimigo dentro de 5 metros, até um máximo de 3% adicional.",
-      "ru": "Пока действует Стойкость, наносимый урон увеличивается на 4%. Получите дополнительно 1% за каждого врага в радиусе 5 метров, но не более 3% в сумме.",
-      "th": "เมื่ออยู่ในสถานะความแข็งแกร่ง ความเสียหายทั้งหมดที่สร้างขึ้นเพิ่มขึ้น4% และในระยะ5เมตรรอบตัว หากมีศัตรูที่ยังมีชีวิตอยู่ จะเพิ่มความเสียหายเพิ่มเติม1% โดยสามารถเพิ่มได้สูงสุด3%。"
+      "ja": "自分が強靭状態のとき、与える全てのダメージが4%上昇し、さらに周囲3m以内の生存している敵1体ごとに追加で1%ダメージが上昇する（最大で追加3%まで）。",
+      "en": "While in Tenacity, damage dealt increases by 4% Gain an extra 1% per enemy within 3 meters, up to an additional 3%.",
+      "zh": "自身处于强韧状态时，造成的所有伤害提升4%，且周围3米内每有一名存活敌人额外提升1%伤害，最多额外提升3%。",
+      "zh_tw": "自身處於強韌狀態時，造成的所有傷害提升4%，且周圍3米內每有一名存活敵人額外提升1%傷害，最多額外提升3%。",
+      "ko": "자신이 강인 상태일 때 주는 모든 피해가 4% 증가하며, 주변 3m 내에 생존한 적 1명당 피해가 1% 추가 증가한다(최대 3%).",
+      "vi": "Khi bản thân ở trạng thái Kiên cường, tất cả sát thương gây ra tăng 4%, và mỗi kẻ thù sống trong phạm vi 3 mét xung quanh sẽ tăng thêm 1% sát thương, tối đa tăng thêm 3%.",
+      "de": "Während Zähigkeit aktiv ist, erhöht sich der verursachte Schaden um 4%. Erhalte zusätzliche 1% pro Feind innerhalb von 3 Metern, bis zu einem zusätzlichen 3%.",
+      "es": "Mientras estás en Tenacidad, el daño infligido aumenta en 4%. Obtén un 1% adicional por cada enemigo dentro de 3 metros, hasta un máximo de 3% extra.",
+      "fr": "Lorsque Tenacité est active, les dégâts infligés augmentent de 4%. Gagnez un bonus supplémentaire de 1% par ennemi présent dans un rayon de 3 mètres, jusqu'à un maximum de 3%.",
+      "pt_br": "Enquanto em Tenacidade, o dano causado aumenta em 4%. Ganhe um adicional de 1% por inimigo dentro de 3 metros, até um máximo de 3% adicional.",
+      "ru": "Пока действует Стойкость, наносимый урон увеличивается на 4%. Получите дополнительно 1% за каждого врага в радиусе 3 метров, но не более 3% в сумме.",
+      "th": "เมื่ออยู่ในสถานะความแข็งแกร่ง ความเสียหายทั้งหมดที่สร้างขึ้นเพิ่มขึ้น4% และในระยะ3เมตรรอบตัว หากมีศัตรูที่ยังมีชีวิตอยู่ จะเพิ่มความเสียหายเพิ่มเติม1% โดยสามารถเพิ่มได้สูงสุด3%。"
     },
     "554.tier1": {
       "ja": "追加ダメージ増加の判定距離が3mから5mに拡大する。",
@@ -5547,18 +5547,18 @@
       "th": "ระยะเวลาต่อเนื่องของผลลัพธ์การวิจัยเพิ่มขึ้นเป็น8วินาที"
     },
     "604.tier0": {
-      "ja": "完全回避発動後、8秒間の不息効果を獲得する。与ダメージと回復効果+0.5%、自身から5m以内の敵には追加で0.8%のダメージを与え、5m以内の味方は追加で0.8%回復させる。最大5スタックまで。",
+      "ja": "完全回避発動後、5秒間の不息効果を獲得する。与ダメージと回復効果+0.5%、自身から5m以内の敵には追加で0.8%のダメージを与え、5m以内の味方は追加で0.8%回復させる。最大5スタックまで。",
       "en": "After triggering a perfect dodge, gain Unceasing for 5 seconds: Increases damage and healing dealt by 0.5%, deals 0.8% bonus damage to enemies within 5 meters and 0.8% bonus healing to allies within 5 meters. Unceasing stacks up to 5 times.",
-      "zh": "触发完美闪避后，自身获得持续8秒的不息效果：造成的伤害和治疗效果提升0.5%，对距离自身5米内的敌人额外造成0.8%伤害，对距离自身5米内的友军额外造成0.8%治疗，不息最多叠加5层。",
-      "zh_tw": "觸發完美閃避後，自身獲得持續8秒的不息效果：造成的傷害和治療效果提升0.5%，對距離自身5米內的敵人額外造成0.8%傷害，對距離自身5米內的友軍額外造成0.8%治療，不息最多疊加5層。",
-      "ko": "완벽 회피 발동 시 8초 동안 불식 효과를 획득한다. 효과 획득 시 주는 피해 및 치유 효과가 0.5% 증가하며, 자신으로부터 5m 이내의 적에게는 추가로 0.8%의 피해를 주고, 아군에게는 추가로 0.8%의 치유 효과를 부여한다. 불식 효과는 최대 5회까지 중첩된다.",
-      "vi": "Sau khi kích hoạt Tránh né hoàn hảo, bản thân nhận được hiệu quả 8giây của Không ngừng: sát thương gây ra và hiệu quả hồi phục được tăng thêm 0.5%, đối với kẻ thù trong phạm vi 5mét gây thêm 0.8%sát thương, đối với đồng đội trong phạm vi 5mét gây thêm 0.8%hồi phục, Không ngừng tối đa chồng lên 5tầng.",
+      "zh": "触发完美闪避后，自身获得持续5秒的不息效果：造成的伤害和治疗效果提升0.5%，对距离自身5米内的敌人额外造成0.8%伤害，对距离自身5米内的友军额外造成0.8%治疗，不息最多叠加5层。",
+      "zh_tw": "觸發完美閃避後，自身獲得持續5秒的不息效果：造成的傷害和治療效果提升0.5%，對距離自身5米內的敵人額外造成0.8%傷害，對距離自身5米內的友軍額外造成0.8%治療，不息最多疊加5層。",
+      "ko": "완벽 회피 발동 시 5초 동안 불식 효과를 획득한다. 효과 획득 시 주는 피해 및 치유 효과가 0.5% 증가하며, 자신으로부터 5m 이내의 적에게는 추가로 0.8%의 피해를 주고, 아군에게는 추가로 0.8%의 치유 효과를 부여한다. 불식 효과는 최대 5회까지 중첩된다.",
+      "vi": "Sau khi kích hoạt Tránh né hoàn hảo, bản thân nhận được hiệu quả 5 giây của Không ngừng: sát thương gây ra và hiệu quả hồi phục được tăng thêm 0.5%, đối với kẻ thù trong phạm vi 5mét gây thêm 0.8%sát thương, đối với đồng đội trong phạm vi 5mét gây thêm 0.8%hồi phục, Không ngừng tối đa chồng lên 5tầng.",
       "de": "Nach Auslösen eines perfekten Ausweichens erhältst du Unaufhörlich für 5 Sekunden: Erhöht verursachten Schaden und Heilung um 0.5%, fügt Gegnern innerhalb von 5 Metern 0.8% Bonus-Schaden zu und verbündeten Einheiten innerhalb von 5 Metern 0.8% Bonus-Heilung. Unaufhörlich kann bis zu 5 Mal gestapelt werden.",
       "es": "Al activar un Esquive Perfecto, obtienes Incesante durante 5 segundos: Aumenta el Daño y la curación infligidos en 0.5%, inflige 0.8% de Daño adicional a los Enemigos dentro de 5 metros y 0.8% de curación adicional a los Aliados dentro de 5 metros. Incesante puede acumularse hasta 5 veces.",
       "fr": "Après avoir déclenché une Esquive parfaite, obtenez Incessant pendant 5 secondes : Augmente les Dégâts et les soins infligés de 0.5%, inflige 0.8% de Dégâts supplémentaires aux Ennemis dans un rayon de 5 mètres et 0.8% de soins supplémentaires aux Alliés dans un rayon de 5 mètres. Incessant peut se cumuler jusqu'à 5 fois.",
       "pt_br": "Após desencadear uma Esquiva Perfeita, ganhe Incessante por 5 segundos: Aumenta o Dano e cura causados em 0.5%, causa 0.8% de Dano bônus a Inimigos dentro de 5 metros e 0.8% de cura bônus a Aliados dentro de 5 metros. Incessante pode acumular até 5 vezes.",
       "ru": "После успешного выполнения идеального уклонения вы получаете эффект Непрекращающийся на 5 секунд: увеличивает наносимый урон и лечение на 0.5%, наносит дополнительный урон в размере 0.8% врагам в радиусе 5 метров и увеличивает лечение союзников в радиусе 5 метров на 0.8%. Эффект Непрекращающийся может складываться до 5 раз.",
-      "th": "เมื่อกระตุ้นการหลบหลีกอย่างสมบูรณ์แบบ จะได้รับ8วินาทีของไม่หยุดผลลัพธ์: ความเสียหายที่สร้างและผลการรักษาจะเพิ่มขึ้น0.5%, สร้างความเสียหายเพิ่มเติม5เมตรให้กับศัตรูในระยะ0.8%, และเพิ่มผลการรักษาเพิ่มเติม5เมตรให้กับพันธมิตรในระยะ0.8%. ไม่หยุดสามารถซ้อนทับได้สูงสุด5ชั้น."
+      "th": "เมื่อกระตุ้นการหลบหลีกอย่างสมบูรณ์แบบ จะได้รับ5 วินาทีของไม่หยุดผลลัพธ์: ความเสียหายที่สร้างและผลการรักษาจะเพิ่มขึ้น0.5%, สร้างความเสียหายเพิ่มเติม5เมตรให้กับศัตรูในระยะ0.8%, และเพิ่มผลการรักษาเพิ่มเติม5เมตรให้กับพันธมิตรในระยะ0.8%. ไม่หยุดสามารถซ้อนทับได้สูงสุด5ชั้น."
     },
     "604.tier1": {
       "ja": "不息効果の持続時間が8秒に延長される。",
