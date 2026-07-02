@@ -109,7 +109,7 @@
     "pt_br": "Carregar",
     "ru": "Загрузить",
     "th": "โหลด",
-    "zh_tw": "裝西麥"
+    "zh_tw": "讀取"
   },
   "presetNamePlaceholder": {
     "ja": "プリセット {n}",
@@ -346,8 +346,8 @@
     "fr": "Arrière-plan",
     "pt_br": "Plano de Fundo",
     "ru": "Фон",
-    "th": "สภาพแวดล้อม",
-    "zh_tw": "環境"
+    "th": "พื้นหลัง",
+    "zh_tw": "背景"
   },
   "cardBgPick": {
     "ja": "画像を選ぶ",
@@ -411,13 +411,13 @@
     "zh": "显示项目",
     "ko": "표시 항목",
     "vi": "Mục hiển thị",
-    "de": "Gegenstände",
-    "es": "Objetos",
-    "fr": "Objets",
-    "pt_br": "Itens",
-    "ru": "Предметы",
-    "th": "ไอเทม",
-    "zh_tw": "道具"
+    "de": "Anzeigeelemente",
+    "es": "Elementos mostrados",
+    "fr": "Éléments affichés",
+    "pt_br": "Itens exibidos",
+    "ru": "Отображаемые элементы",
+    "th": "รายการแสดงผล",
+    "zh_tw": "顯示項目"
   },
   "cardItemStats": {
     "ja": "基礎値",
@@ -635,12 +635,12 @@
     "zh": "墨",
     "ko": "먹",
     "vi": "Mực",
-    "de": "Mo",
-    "es": "Mo",
-    "fr": "Mo",
-    "pt_br": "Mo",
-    "ru": "Мо",
-    "th": "มั่ว",
+    "de": "Tusche",
+    "es": "Tinta",
+    "fr": "Encre",
+    "pt_br": "Tinta",
+    "ru": "Тушь",
+    "th": "หมึก",
     "zh_tw": "墨"
   },
   "cardPanelLight": {
@@ -691,13 +691,13 @@
     "zh": "游玩风格",
     "ko": "플레이 스타일",
     "vi": "Phong cách chơi",
-    "de": "Soziale Präferenz",
-    "es": "Preferencias sociales",
-    "fr": "Préférences sociales",
-    "pt_br": "Preferência Social",
-    "ru": "Социальные предпочтения",
-    "th": "การเลือกแนวโน้มทางสังคม",
-    "zh_tw": "社交傾向選擇"
+    "de": "Spielstil",
+    "es": "Estilo de juego",
+    "fr": "Style de jeu",
+    "pt_br": "Estilo de jogo",
+    "ru": "Стиль игры",
+    "th": "สไตล์การเล่น",
+    "zh_tw": "遊玩風格"
   },
   "cardTime_wdDay": {
     "ja": "平日昼",
@@ -1433,13 +1433,13 @@
     "zh": "返回",
     "ko": "뒤로",
     "vi": "Quay lại",
-    "de": "Abbrechen",
-    "es": "Cancelar",
-    "fr": "Annuler",
-    "pt_br": "Cancelar",
-    "ru": "Отмена",
-    "th": "ยกเลิก",
-    "zh_tw": "取消"
+    "de": "Zurück",
+    "es": "Atrás",
+    "fr": "Retour",
+    "pt_br": "Voltar",
+    "ru": "Назад",
+    "th": "ย้อนกลับ",
+    "zh_tw": "返回"
   },
   "importConfirmMsg": {
     "ja": "現在設定されている数値がインポートデータに差し変わりますがよろしいですか？",
@@ -1909,7 +1909,7 @@
     "zh": "主",
     "ko": "주",
     "vi": "Chính",
-    "de": "Hauptmenü",
+    "de": "Haupt",
     "es": "Principal",
     "fr": "Principal",
     "pt_br": "Principal",
@@ -1923,11 +1923,11 @@
     "zh": "副",
     "ko": "부",
     "vi": "Phụ",
-    "de": "Stück(e)",
-    "es": "Pieza(s) de",
-    "fr": "Pièce(s) de",
-    "pt_br": "Peça(s) de",
-    "ru": "Штук(а)",
+    "de": "Neben",
+    "es": "Secundario",
+    "fr": "Secondaire",
+    "pt_br": "Secundário",
+    "ru": "Доп.",
     "th": "รอง",
     "zh_tw": "副"
   },
@@ -2180,8 +2180,8 @@
     "fr": "Appliquer",
     "pt_br": "Aplicar",
     "ru": "Применить",
-    "th": "สมัครเข้าร่วม",
-    "zh_tw": "申請加入"
+    "th": "ใช้",
+    "zh_tw": "採用"
   },
   "optZerobaseCompare": {
     "ja": "格析",
@@ -2427,13 +2427,13 @@
     "zh": "还原",
     "ko": "복원",
     "vi": "Khôi phục",
-    "de": "Umkehren",
-    "es": "Invertir",
-    "fr": "Inverser",
-    "pt_br": "Reverter",
-    "ru": "Обратный ход",
-    "th": "พลิกกลับ",
-    "zh_tw": "倒轉"
+    "de": "Wiederherstellen",
+    "es": "Restaurar",
+    "fr": "Restaurer",
+    "pt_br": "Restaurar",
+    "ru": "Восстановить",
+    "th": "คืนค่า",
+    "zh_tw": "復原"
   },
   "cmpCancel": {
     "ja": "離脱",
@@ -2441,13 +2441,13 @@
     "zh": "退出",
     "ko": "취소",
     "vi": "Thoát",
-    "de": "Loslassen",
-    "es": "Soltar",
-    "fr": "Relâcher",
-    "pt_br": "Soltar",
-    "ru": "Освободить",
-    "th": "ปล่อย",
-    "zh_tw": "鬆開"
+    "de": "Verlassen",
+    "es": "Salir",
+    "fr": "Quitter",
+    "pt_br": "Sair",
+    "ru": "Выйти",
+    "th": "ออก",
+    "zh_tw": "離開"
   },
   "cmpCurrent": {
     "ja": "現有",
@@ -3062,8 +3062,8 @@
     "fr": "Appliquer",
     "pt_br": "Aplicar",
     "ru": "Применить",
-    "th": "สมัครเข้าร่วม",
-    "zh_tw": "申請加入"
+    "th": "ใช้ที่เลือก",
+    "zh_tw": "套用所選"
   },
   "optTargetRatio": {
     "ja": "目標",
@@ -3127,13 +3127,13 @@
     "zh": "选择",
     "ko": "선택",
     "vi": "Chọn",
-    "de": "Ausgewählt",
-    "es": "Seleccionado",
-    "fr": "Sélectionné",
-    "pt_br": "Selecionado",
-    "ru": "Выбрано",
+    "de": "Auswählen",
+    "es": "Seleccionar",
+    "fr": "Sélectionner",
+    "pt_br": "Selecionar",
+    "ru": "Выбрать",
     "th": "เลือก",
-    "zh_tw": "選中"
+    "zh_tw": "選擇"
   },
   "optToggleAllTip": {
     "ja": "全選択/全解除 切替",
@@ -3897,13 +3897,13 @@
     "zh": "配装",
     "ko": "빌드",
     "vi": "Build",
-    "de": "Bau",
-    "es": "Construir",
-    "fr": "Construction",
-    "pt_br": "Construir",
-    "ru": "Строительство",
-    "th": "ก่อสร้าง",
-    "zh_tw": "建造"
+    "de": "Build",
+    "es": "Build",
+    "fr": "Build",
+    "pt_br": "Build",
+    "ru": "Сборка",
+    "th": "จัดชุด",
+    "zh_tw": "配裝"
   },
   "wsTabGear": {
     "ja": "装備",
@@ -3911,13 +3911,13 @@
     "zh": "装备",
     "ko": "장비",
     "vi": "Trang bị",
-    "de": "Ersetzen",
-    "es": "Reemplazar",
-    "fr": "Remplacer",
-    "pt_br": "Substituir",
-    "ru": "Заменить",
+    "de": "Ausrüstung",
+    "es": "Equipo",
+    "fr": "Équipement",
+    "pt_br": "Equipamento",
+    "ru": "Экипировка",
     "th": "อุปกรณ์",
-    "zh_tw": "替換"
+    "zh_tw": "裝備"
   },
   "wsTabXinfa": {
     "ja": "心法",
@@ -3995,7 +3995,7 @@
     "zh": "战律",
     "ko": "전투율",
     "vi": "Chiến Luật",
-    "de": "Combat Cadence",
+    "de": "Kampfkadenz",
     "es": "Cadencia de combate",
     "fr": "Cadence de combat",
     "pt_br": "Cadência de combate",
@@ -4023,7 +4023,7 @@
     "zh": "战律",
     "ko": "전투율",
     "vi": "Chiến Luật",
-    "de": "Combat Cadence",
+    "de": "Kampfkadenz",
     "es": "Cadencia de combate",
     "fr": "Cadence de combat",
     "pt_br": "Cadência de combate",
@@ -4252,8 +4252,8 @@
     "fr": "Appliquer",
     "pt_br": "Aplicar",
     "ru": "Применить",
-    "th": "สมัครเข้าร่วม",
-    "zh_tw": "申請加入"
+    "th": "ใช้",
+    "zh_tw": "採用"
   },
   "qishuPickerRestore": {
     "ja": "復元",
@@ -4261,13 +4261,13 @@
     "zh": "还原",
     "ko": "복원",
     "vi": "Khôi phục",
-    "de": "Umkehren",
-    "es": "Invertir",
-    "fr": "Inverser",
-    "pt_br": "Reverter",
-    "ru": "Обратный ход",
-    "th": "พลิกกลับ",
-    "zh_tw": "倒轉"
+    "de": "Wiederherstellen",
+    "es": "Restaurar",
+    "fr": "Restaurer",
+    "pt_br": "Restaurar",
+    "ru": "Восстановить",
+    "th": "คืนค่า",
+    "zh_tw": "復原"
   },
   "qishuPickerHint": {
     "ja": "ドラッグで配置 / 枠 → 一覧へドラッグで外す",
@@ -4331,7 +4331,7 @@
     "zh": "战律指数",
     "ko": "전투율지수",
     "vi": "Chiến Luật Chỉ Số",
-    "de": "Cadence-Index",
+    "de": "Kampfkadenz-Index",
     "es": "Índice de Cadencia",
     "fr": "Indice de Cadence",
     "pt_br": "Índice de Cadência",
@@ -4457,13 +4457,13 @@
     "zh": "上一步",
     "ko": "이전",
     "vi": "Quay lại",
-    "de": "Abbrechen",
-    "es": "Cancelar",
-    "fr": "Annuler",
-    "pt_br": "Cancelar",
-    "ru": "Отмена",
-    "th": "ยกเลิก",
-    "zh_tw": "取消"
+    "de": "Zurück",
+    "es": "Atrás",
+    "fr": "Retour",
+    "pt_br": "Voltar",
+    "ru": "Назад",
+    "th": "ย้อนกลับ",
+    "zh_tw": "返回"
   },
   "tutorialFinish": {
     "ja": "完了",
@@ -4779,13 +4779,13 @@
     "zh": "重置",
     "ko": "리셋",
     "vi": "RESET",
-    "de": "Standard",
-    "es": "Predeterminado",
-    "fr": "Par défaut",
-    "pt_br": "Padrão",
-    "ru": "По умолчанию",
-    "th": "การรีเซ็ต",
-    "zh_tw": "恢復預設"
+    "de": "RESET",
+    "es": "RESTABLECER",
+    "fr": "RÉINITIALISER",
+    "pt_br": "REDEFINIR",
+    "ru": "СБРОС",
+    "th": "รีเซ็ต",
+    "zh_tw": "重置"
   },
   "tutorialChResetBody": {
     "ja": "新装備/心法 として弄った内容を全て現装備値に戻すボタンです。<br>装備変更前の状態に戻したい時に使用してください。",
@@ -4807,12 +4807,12 @@
     "zh": "预设",
     "ko": "프리셋",
     "vi": "PRESETS",
-    "de": "Voreinstellung",
-    "es": "Preestablecido",
-    "fr": "Préréglage",
-    "pt_br": "Predefinição",
-    "ru": "Предустановка",
-    "th": "ค่าที่ตั้งไว้ล่วงหน้า",
+    "de": "PRESETS",
+    "es": "PRESETS",
+    "fr": "PRESETS",
+    "pt_br": "PRESETS",
+    "ru": "ПРЕСЕТЫ",
+    "th": "พรีเซ็ต",
     "zh_tw": "預設"
   },
   "tutorialCh2Step3BodyMobile": {
