@@ -202,15 +202,17 @@
     if (!dict) return;
     var ja = (window.currentLang || 'ja') === 'ja';
     var lang = window.currentLang || 'ja';
-    // brand 玉ねぎ縦書き対象言語 = ja/en/vi (zh/ko は実機表記「燕云计」/「연운계」 を textContent 表示)
-    var BRAND_KAISHO_LANGS = ['ja', 'en', 'vi'];
+    // brand 玉ねぎ縦書き = zh/ko/zh_tw 以外の全言語 (zh/ko/zh_tw は現地表記「燕云计」/「연운계」/「燕雲計」
+    // を textContent 表示)。7言語 (de/es/fr/pt_br/ru/th) は現地表記なし + ラテン/タイ font に漢字 glyph
+    // 無し = fallback 明朝で崩れるため、ja/en/vi と同じ玉ねぎ SVG (font 非依存) を表示 (2026-07-02)
+    var BRAND_TEXT_LANGS = ['zh', 'ko', 'zh_tw'];
     document.querySelectorAll('[data-kaisho]').forEach(function (el) {
       var key = el.dataset.kaisho;
       var entry = dict[key];
       if (!entry) return;
       // brandVert 専用 = lang 別分岐 (data-kaisho-fixed の単純全言語 svg を上書き)
       if (key === 'brandVert') {
-        if (BRAND_KAISHO_LANGS.indexOf(lang) >= 0) {
+        if (BRAND_TEXT_LANGS.indexOf(lang) < 0) {
           // ja/en/vi = 玉ねぎ 1 文字 svg 縦積み + 親 writing-mode horizontal-tb 化
           el.setAttribute('aria-label', entry.text);
           el.setAttribute('role', 'img');
@@ -222,7 +224,7 @@
               '" aria-hidden="true"><path fill="currentColor" d="' + sub.d + '"/></svg></span>';
           }).join('');
         } else {
-          // zh/ko = applyI18n が textContent (燕云计/연운계) を書込み済、 svg/class 解除
+          // zh/ko/zh_tw = applyI18n が textContent (燕云计/연운계/燕雲計) を書込み済、 svg/class 解除
           el.classList.remove('kaisho-vert-mode');
           el.removeAttribute('role');
           el.removeAttribute('aria-label');
