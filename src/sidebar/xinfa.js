@@ -344,10 +344,26 @@
     // client 原文 format token (= `<text|781|...|...>` stat ref / `#Y...#E` 等 marker) は表示 normalize で除去。
     function _normalizeWWMText(s) {
       if (!s) return s;
-      // stat reference token = `<text|num|...|num>` → text のみ (= 内部 fallback bug 表示 防止)
-      s = s.replace(/<([^|<>]+)\|[^<>]*>/g, '$1');
-      // 強調 marker = #Y...#E / #H...#E / #J...#E / #C...#E / #R...#E → inner text のみ
-      s = s.replace(/#[YHJCR]([\s\S]*?)#E/g, '$1');
+      // unwrap 2 pass = 入れ子タグ (`<<用語>|meta>` 型) は 1 周目で内側 unwrap → 2 周目で外側が完全形になる
+      for (let i = 0; i < 2; i++) {
+        // stat reference token = `<text|num|...|num>` → text のみ (= 内部 fallback bug 表示 防止)
+        s = s.replace(/<([^|<>]+)\|[^<>]*>/g, '$1');
+        // custom color marker = `#RRGGBB` (hex 6 桁、 WWM 色コード仕様 = preset 26 種 + hex custom) → marker のみ除去
+        s = s.replace(/#[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/g, '');
+        // 強調 marker = `#<大文字>...#E` pair → inner text のみ (preset 色は #A-#Z 26 種、 E は終端専用)
+        s = s.replace(/#[A-DF-Z]([\s\S]*?)#E/g, '$1');
+        // pipe 無し用語強調 `<鉄衣戍魂>` / `<Огненной Плети>` → 中身のみ
+        s = s.replace(/<([^<>|]{1,64})>/g, '$1');
+      }
+      // ── 壊れタグ除去 (2026-07-02、 data 内に外殻欠け token が 91 箇所実在)。 unwrap 後に 1 回 ──
+      // 先頭 `<` 欠けの参照メタ列 `780|#C|160>` / `781||20501|20501001>` → 除去 (末尾 `>` 込み)
+      s = s.replace(/\d+\|[0-9#A-Z|]*>/g, '');
+      // 外殻 `<>` 全欠けの参照メタ列 `|781||20801|20801005` / `|780|#C|13` → 除去
+      s = s.replace(/\|\d{2,}[0-9#A-Z|]*/g, '');
+      // 対応相手を失った孤立 marker (`#Y` 単独 / `#E` 単独 等) → 除去
+      s = s.replace(/#[A-Z]/g, '');
+      // 除去痕の連続半角 space を 1 個に (ja/zh は space 無し連結のため影響なし)
+      s = s.replace(/ {2,}/g, ' ');
       return s;
     }
     function _tierLabel(id, t, lang, def) {
