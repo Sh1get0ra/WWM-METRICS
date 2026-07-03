@@ -539,6 +539,10 @@ const _STAT_LABELS_PROXY = new Proxy({}, {
         const vs = window.WWM_DS.name('stat_short', k, 'vi');
         if (vs && vs.indexOf('[stat_short:') !== 0) return vs;
       }
+      // affix文脈 = stat cat(パネル値)とaffix実測値で表記が違う項目 (2026-07-03、GroupB uikey mining)
+      // は affix_stat 側を優先。affix_stat未登録statKeyはstat側にそのままfallback
+      const va = window.WWM_DS.name('affix_stat', k, L);
+      if (va && va.indexOf('[affix_stat:') !== 0) return va;
       const v = window.WWM_DS.name('stat', k, L);
       if (v && v.indexOf('[stat:') !== 0) return v;
       // path系等 = ui に統合済 → t() で引く
