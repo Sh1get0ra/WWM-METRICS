@@ -912,7 +912,7 @@
 }
 .wwm-cmp-modal-a .wwm-cmp-title-ja {
   font-family: var(--f-display-title);
-  font-size: var(--text-18);
+  font-size: var(--text-xl);
   font-weight: 900;
   letter-spacing: 0.18em;
   color: var(--c-modal-a-title-ja-fg);
@@ -3164,7 +3164,7 @@
 }
 .wwm-tool-modal .wwm-tool-title-ja {
   font-family: var(--f-display-title);
-  font-size: var(--text-18);
+  font-size: var(--text-xl);
   font-weight: 900;
   letter-spacing: 0.18em;
   text-shadow: var(--c-cmp-modal-a--cmp-title-ja-text-shadow);
