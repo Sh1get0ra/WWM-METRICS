@@ -3044,7 +3044,10 @@
 .wwm-ocr-help-btn:hover { background: #e8513a; border-color: #e8513a; }
 /* 取込ガイド modal: 撮影例 mock = ゲーム詳細画面の HTML 再現 (実スクショ再配布回避)。
    ゲーム UI = 常時暗地 → theme 非連動の literal 色 (card artifact と同方針) */
-.wwm-ocr-guide { max-width: 440px; }
+/* 2026-07-04: 440px だと title font-size 拡大後 en/es/ru 等長い言語で2行折返し + seal 位置
+   ズレ (兄貴指摘)。560px へ拡大 (en/es/de/fr/pt_br/zh_tw は1行化、ru 等最長勢のみ2行残るが
+   下記 align-items: flex-start で seal/close 位置は安定) */
+.wwm-ocr-guide { max-width: 560px; }
 .wwm-ocr-guide-cap { margin: 0 0 6px; font-size: 12px; }
 .wwm-ocr-mock {
   background: #16120d;
@@ -3158,10 +3161,13 @@
 .wwm-tool-modal .wwm-modal-header::after { display: none; } /* 旧金線 glow 廃止 */
 /* 題字: ja 明朝 + EN sub + 金 seal — サイズ感 = 武具対照 (.wwm-cmp-title-ja/en/.wwm-cmp-seal) と同値 (2026-06-13 兄貴指定) */
 .wwm-tool-modal .wwm-modal-header h2 {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: flex-start; gap: 10px;
   color: var(--c-modal-a-title-ja-fg); text-shadow: none; text-transform: none;
   font-family: var(--f-display-title);
 }
+/* 2026-07-04: h2 align-items: center → flex-start (上記) — 長い言語で title-ja が2行折返しても
+   seal が1行目高さに固定され「seal が追いやられる」ズレを防ぐ (兄貴指摘)。margin-top は下記
+   .wwm-tool-seal 定義に統合 (line-height 分の視覚オフセット補正) */
 .wwm-tool-modal .wwm-tool-title-ja {
   font-family: var(--f-display-title);
   font-size: var(--text-xl);
@@ -3178,6 +3184,8 @@
   border: 2px solid var(--gold-bright);
   border-radius: 2px;
   transform: rotate(-6deg);
+  flex-shrink: 0;
+  margin-top: 2px; /* h2 flex-start 化 (2026-07-04) の line-height 視覚オフセット補正 */
 }
 .wwm-tool-modal .wwm-modal-close { color: var(--sumi-fg); }
 .wwm-tool-modal .wwm-modal-close:hover { background: var(--shine-soft); }
