@@ -232,10 +232,16 @@ const _ARSENAL_PATHS = [
 function _arsenalPathLabel(p){ return (window.T && window.T[p.labelKey]) || p.ja; }
 function _arsenalStatLabels(pathKey) {
   const p = _ARSENAL_PATHS.find(x => x.key === pathKey) || _ARSENAL_PATHS[0];
-  return {
-    min: _STAT_LABELS_PROXY[p.minStat] || p.minStat,
-    max: _STAT_LABELS_PROXY[p.maxStat] || p.maxStat
+  // 武庫 = affix でなく stats 側表記 (兄貴指示 2026-07-03)。 t() = ui/stat 合成 (「最小鋼鳴攻撃」) が
+  // affix_stat 実測 (「最小鋼鳴攻撃力」) より先に解決される。 t() miss 時のみ PROXY fallback
+  const t = (k) => {
+    if (window.WWM_DS) {
+      const v = window.WWM_DS.t(k);
+      if (v !== k) return v;
+    }
+    return _STAT_LABELS_PROXY[k] || k;
   };
+  return { min: t(p.minStat), max: t(p.maxStat) };
 }
 function _tierLabel(lv) {
   const lang = _curLangImport();

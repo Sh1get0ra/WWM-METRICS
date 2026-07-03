@@ -27,9 +27,18 @@
     const TIERS = [86, 81, 71, 61, 56, 51, 41];
     const TIER_PRESET = { 41: { min: 12, max: 25 }, default: { min: 17, max: 34 } };
     const SL = window._AFFIX_DISPLAY_LABELS || {};
+    // 武庫 = affix でなく stats 側表記 (兄貴指示 2026-07-03)。 t() = ui/stat 合成 (「最小鋼鳴攻撃」) が
+    // affix_stat 実測 (「最小鋼鳴攻撃力」) より先に解決される。 t() miss 時のみ SL fallback
+    const _statT = (k) => {
+      if (window.WWM_DS) {
+        const v = window.WWM_DS.t(k);
+        if (v !== k) return v;
+      }
+      return SL[k] || k;
+    };
     const statLabels = (pk) => {
       const p = PATHS.find(x => x.key === pk) || PATHS[0];
-      return { min: SL[p.minStat] || p.minStat, max: SL[p.maxStat] || p.maxStat };
+      return { min: _statT(p.minStat), max: _statT(p.maxStat) };
     };
     const pathLabel = (k) => {
       const p = PATHS.find(x => x.key === k);
