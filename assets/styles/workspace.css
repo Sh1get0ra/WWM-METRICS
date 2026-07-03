@@ -921,7 +921,7 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
 .wwm-preset-chip.on { color: #241806; background: var(--gold); border-color: var(--gold); font-weight: 700; }
 .wwm-preset-pop {
   position: absolute; top: calc(100% + 8px); right: 0;
-  width: 240px;
+  width: 400px;
   background: var(--kami-1);
   border: 1px solid var(--kami-line-2);
   border-radius: 1px;
