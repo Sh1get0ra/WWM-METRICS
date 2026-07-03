@@ -28,20 +28,6 @@
     "th": "ฟาดผ่าน",
     "zh_tw": "擦傷"
   },
-  "donutDmgCenter": {
-    "ja": "闘率",
-    "en": "闘率",
-    "zh": "闘率",
-    "ko": "闘率",
-    "vi": "闘率",
-    "de": "闘率",
-    "es": "闘率",
-    "fr": "闘率",
-    "pt_br": "闘率",
-    "ru": "闘率",
-    "th": "闘率",
-    "zh_tw": "闘率"
-  },
   "outerCoeff": {
     "ja": "外功係数",
     "en": "Physical Coefficient",
