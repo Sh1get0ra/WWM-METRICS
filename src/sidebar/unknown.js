@@ -66,7 +66,7 @@
         <span class="wwm-tool-bracket wwm-tool-bracket-tl"></span><span class="wwm-tool-bracket wwm-tool-bracket-tr"></span>
         <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
         <div class="wwm-modal-header">
-          <h2><span class="wwm-tool-title-ja">${((window.T && T.unknownReportTitle) || '未対応データ報告 ({0}件)').replace('{0}', total)}</span><span class="wwm-tool-title-en">UNKNOWN DATA</span><span class="wwm-tool-seal">報</span></h2>
+          <h2><span class="wwm-tool-title-ja">${((window.T && T.unknownReportTitle) || '未対応データ報告 ({0}件)').replace('{0}', total)}</span><span class="wwm-tool-seal">報</span></h2>
           <button class="wwm-modal-close" aria-label="Close">×</button>
         </div>
         <div class="wwm-modal-body wwm-ws-paper">

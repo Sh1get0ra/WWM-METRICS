@@ -147,7 +147,9 @@
     const persistVer = opts.persistVer || null;
     const T_ = window.T || {};
     const titleJa = T_.noteTitleJa || '筆記';
-    const seal    = T_.noteSeal    || '記';
+    // seal = 装飾漢字1文字、他 modal (比/庫/診/飛/心/報) と同じく固定値。
+    // 旧 T_.noteSeal 経由は誤って翻訳対象になり en/de/es/fr/pt_br/ru/th が「NT」化するバグだった (2026-07-04)
+    const seal = '記';
     const tabSpec = T_.noteTabSpec || '仕様';
     const tabCl   = T_.noteTabChangelog || '更新履歴';
     const btnBug  = T_.noteBugReport || 'バグ報告';
@@ -162,7 +164,7 @@
         <span class="wwm-tool-bracket wwm-tool-bracket-tl"></span><span class="wwm-tool-bracket wwm-tool-bracket-tr"></span>
         <span class="wwm-tool-bracket wwm-tool-bracket-bl"></span><span class="wwm-tool-bracket wwm-tool-bracket-br"></span>
         <div class="wwm-modal-header">
-          <h2><span class="wwm-tool-title-ja" data-i18n="noteTitleJa" data-kaisho="noteTitleJa">${titleJa}</span><span class="wwm-tool-title-en">NOTE</span><span class="wwm-tool-seal">${seal}</span></h2>
+          <h2><span class="wwm-tool-title-ja" data-i18n="noteTitleJa" data-kaisho="noteTitleJa">${titleJa}</span><span class="wwm-tool-seal">${seal}</span></h2>
           <button class="wwm-modal-close" id="wwmNoteClose" aria-label="${btnClose}">×</button>
         </div>
         <div class="wwm-tool-tabs">

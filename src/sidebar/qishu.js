@@ -152,7 +152,6 @@
     m.id = 'wwmQishuPickerModal';
     m.className = 'wwm-modal-backdrop';
     const titleJa = T_.qishuPickerTitle || '奇術選択';
-    const titleEn = 'QISHU';
     const seal = '選';
 
     m.innerHTML = `
@@ -162,7 +161,6 @@
         <div class="wwm-modal-header">
           <h2>
             <span class="wwm-tool-title-ja" data-i18n="qishuPickerTitle" data-kaisho="qishuPickerTitle">${_esc(titleJa)}</span>
-            <span class="wwm-tool-title-en">${_esc(titleEn)}</span>
             <span class="wwm-tool-seal">${_esc(seal)}</span>
           </h2>
           <button class="wwm-modal-close" aria-label="Close">×</button>

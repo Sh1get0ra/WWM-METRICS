@@ -918,27 +918,10 @@
   color: var(--c-modal-a-title-ja-fg);
   text-shadow: var(--c-cmp-modal-a--cmp-title-ja-text-shadow);
 }
-.wwm-cmp-modal-a .wwm-cmp-title-en {
-  font-family: var(--f-latin);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--c-cmp-title-en-fg);
-  letter-spacing: 0.32em;
-  margin-left: var(--space-1);
-  align-self: flex-end;
-  padding-bottom: var(--space-half);
-}
-/* vi = 題字 ja 部分が長文 (So sánh trang bị 等) で 2 行化 → en 副題 (COMPARISON) を vi 時のみ非表示
-   + 主題自体も縮小 (--text-18 → --text-lg) */
-:lang(vi) .wwm-cmp-modal-a .wwm-cmp-title-en { display: none; }
+/* vi = 題字 ja 部分が長文 (So sánh trang bị 等) で 2 行化 → 主題自体を縮小
+   (--text-18 → --text-lg)。旧 en 副題非表示ルールは副題自体の廃止 (2026-07-04) で不要化 */
 :lang(vi) .wwm-cmp-modal-a .wwm-cmp-title-ja { font-size: var(--text-lg); }
 :lang(vi) .wwm-cmp-modal-a .wwm-cmp-seal { display: none; }
-/* mobile-xs (320px) = title「○○対照」 + 副題「COMPARISON」 + 朱印 seal 28px + close 32px で
-   横幅破綻 → seal と close が接触圧迫 (modal-xinfa/gear/arsenal 全 modal 共通)。
-   vi 同様 = en 副題のみ非表示で主題 + seal は維持 (2026-06-25 兄貴指摘) */
-@media (max-width: 360px) {
-  .wwm-cmp-modal-a .wwm-cmp-title-en { display: none; }
-}
 .wwm-cmp-modal-a .wwm-modal-header h2 { align-items: flex-end; }
 /* 背景 = 親は墨単色のみ、 mountain image は header/footer 個別 lay 化 (2026-06-20 兄貴指摘「構造非対称で footer に overlay 乗せにくい」)。
    親 image だと縦幅で見え方変わる + footer に届かない、 header/footer 自身に image lay = 高さ固定 px で scale 一定 + 構造対称。
@@ -3186,12 +3169,6 @@
   letter-spacing: 0.18em;
   text-shadow: var(--c-cmp-modal-a--cmp-title-ja-text-shadow);
 }
-.wwm-tool-modal .wwm-tool-title-en {
-  font-family: var(--f-latin);
-  font-size: var(--text-sm);
-  letter-spacing: 0.32em; color: var(--c-cmp-title-en-fg); font-weight: 600;
-  align-self: flex-end; padding-bottom: var(--space-half);
-}
 /* seal = 金 28×28 回転型 (対照の朱 seal と同形、色だけ区別記号) */
 .wwm-tool-modal .wwm-tool-seal {
   display: inline-flex; align-items: center; justify-content: center;
@@ -3324,9 +3301,6 @@
 @media (max-width: 480px) {
   .wwm-share-modal-b .wwm-tool-tab[data-tab="obs"] { display: none; }
 }
-
-/* en 表示時は EN sub を出さない (title 自体が英語 = 重複、export.js L715 と同思想の CSS 統一解) */
-html[lang="en"] .wwm-tool-modal .wwm-tool-title-en { display: none; }
 
 /* ── NOTE modal (wwm-note-modal-b) 固有調整 ─────────────────────── */
 /* 旧 .wwm-note-modal-a (720px) から width 系継承 */

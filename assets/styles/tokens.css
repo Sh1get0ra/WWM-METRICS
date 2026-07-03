@@ -221,7 +221,6 @@ html[lang="th"] { --f-display-title: 'Sarabun', 'Noto Sans Thai', 'Tahoma', sans
   --c-eff-input-fg: var(--gold-bright);
   --c-sb-section-title-fg: var(--accent);
   --c-modal-fg: var(--text, #fff);
-  --c-cmp-title-en-fg: var(--chart-sympathy);
   --c-cmp-set-header-text-shadow: 0 0 6px color-mix(in oklab, var(--vermilion-bright) 40%, transparent);
   --c-cmp-preview-zero-fg: var(--sumi-fg);
   --c-cmp-modal-bg-icon-opacity: 0.1;
@@ -393,8 +392,6 @@ html[lang="th"] { --f-display-title: 'Sarabun', 'Noto Sans Thai', 'Tahoma', sans
   --bg-step2--arsenal-tier: rgba(40,28,16,0.55);  /* S2-g step2--arsenal-tier */
   --c-anlz-title-fg-n2: var(--c-anlz-title-fg);  /* S2-g anlz-title */
   --c-anlz-title-text-shadow-n2: var(--c-anlz-title-text-shadow);  /* S2-g anlz-title */
-  --c-anlz-subtitle-fg: var(--gold-deep);  /* S2-g anlz-subtitle */
-  --c-anlz-subtitle-opacity: 0.75;  /* S2-g anlz-subtitle */
 
   /* ─── @layer Step 2-h: theme-swap tokens (dark default) ─── */
   --c-focus-ring: var(--vermilion-bright);

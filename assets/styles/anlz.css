@@ -617,15 +617,6 @@
   text-shadow: var(--c-anlz-title-text-shadow);
 }
 
-.wwm-anlz-subtitle {
-  font-family: var(--f-latin);
-  font-size: var(--text-md);
-  letter-spacing: 0.4em;
-  color: var(--gold-bright);
-  opacity: 0.75;
-  line-height: 1;
-}
-
 /* タブ列 (右側) — 既存 wwm-analysis-tab を案30 風に上書き */
 #wwmAnalysisTabs.wwm-anlz-tabs {
   display: flex;
@@ -683,17 +674,6 @@ html[lang="ja"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
 /* ko: Noto Serif KR (fallback Noto Serif JP) */
 html[lang="ko"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
   font-family: var(--f-display-title);
-}
-
-/* en時: modal の主タイトル / 各パネルの主タイトル を Cinzel に統一 */
-/* K: lang 軸 override — modals layer (後 layer) の letter-spacing/font 競合に components から
-   勝つ手段が imp のみ (lang 軸は layer 表現不能) + export inline font 対抗。 strip するな (Step 5 確定) */
-/* 旧 html[lang="..."] rule 全廃 (2026-06-16 兄貴指示) — --f-display-title 主題 token を
-   tokens.css の :root + html[lang] で動的切替する設計に統一。 lang 別 selector + !important
-   による cascade 戦は不要。 en の letter-spacing 0.15em のみ別 token 化したい場合は後 sprint */
-html[lang="en"] .wwm-cmp-title-en,
-html[lang="vi"] .wwm-cmp-title-en {
-  letter-spacing: 0.15em;
 }
 
 /* 旧 ::after 金線 glow は SHARE modal 同表現化 (紙差し込み) に伴い廃止 (2026-06-22) */
@@ -803,11 +783,6 @@ html[lang="vi"] .wwm-cmp-title-en {
 }
 
 /* S2-g co-locate (T): light#126 L995 */
-.wwm-anlz .wwm-anlz-subtitle {
-  color: var(--c-anlz-subtitle-fg);
-  opacity: var(--c-anlz-subtitle-opacity);
-}
-
 @media (max-width: 900px) {
   .wwm-rank-grid { grid-template-columns: 1fr; }
 }
@@ -900,7 +875,6 @@ body[data-anlz-popout="1"] #wsAnlz .wwm-anlz-gap { display: none; }
 }
 .wwm-anlz-floating-title { flex: 1; font-family: var(--f-display-title); font-size: 15px; font-weight: 700; letter-spacing: 0.22em; display: flex; align-items: baseline; gap: 8px; }
 .wwm-anlz-floating-title .ja { color: var(--gold-bright); }
-.wwm-anlz-floating-title .en { font-family: var(--f-latin); font-size: 11px; letter-spacing: 0.2em; color: var(--gold-bright); }
 .wwm-anlz-floating-title .seal {
   width: 22px; height: 22px; background: var(--vermilion);
   color: #fff5e0; font-family: var(--f-display-title); font-weight: 800; font-size: 12px;

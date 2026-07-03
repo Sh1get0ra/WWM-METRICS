@@ -37,6 +37,10 @@
     var labelRank = _esc(T.anlzTabRank || '期待値');
     var labelOpt = _esc(T.anlzTabOpt || '最適化');
     var labelZb = _esc(T.anlzTabZerobase || '外功vs属性');
+    // 2026-07-04: index.html .wwm-anlz-title (data-i18n="anlzTitle") とは別の独立 HTML 生成のため
+    // ハードコード「格析」が i18n 適用外だったバグ修正 (兄貴実機指摘)。サブタイトル (en) は他
+    // modal 統一方針 (2026-07-04) に合わせ廃止
+    var titleJa = _esc(T.anlzTitle || '格析');
     var st = loadState();
     var opVal = Math.round((st.opacity == null ? 1 : st.opacity) * 100);
     return ''
@@ -44,7 +48,7 @@
       + '<span class="l-bracket bl"></span><span class="l-bracket br"></span>'
       + '<header class="wwm-anlz-floating-header" data-anlz-drag>'
       +   '<div class="wwm-anlz-floating-title">'
-      +     '<span class="ja">格析</span><span class="en">ANALYSIS</span><span class="seal">析</span>'
+      +     '<span class="ja">' + titleJa + '</span><span class="seal">析</span>'
       +   '</div>'
       +   '<div class="wwm-anlz-floating-controls">'
       +     '<input type="range" data-anlz-opacity min="20" max="100" step="5" value="' + opVal + '" title="' + tipO + '">'

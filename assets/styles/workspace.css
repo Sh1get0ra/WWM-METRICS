@@ -206,8 +206,6 @@
   --c-anlz-title-text-shadow:      0 1px 0 var(--shine-mid-2);
   --c-anlz-title-fg-n2:            #2a1610;
   --c-anlz-title-text-shadow-n2:   0 0 0.5px rgba(42,22,16,.6), 0 0 1.5px rgba(74,40,20,.35), 0 0 3px rgba(106,62,22,.18), 0.6px 0 1.2px rgba(42,22,16,.25), -0.6px 0 1.2px rgba(42,22,16,.22), 0 0.5px 1.5px rgba(74,40,20,.14);
-  --c-anlz-subtitle-fg:            var(--brown-5);
-  --c-anlz-subtitle-opacity:       0.9;
 
   /* ═══════════════════════════════════════════════════════════════
      bg semantic 集約 Phase 1 — 紙面 rescope (2026-06-15)
