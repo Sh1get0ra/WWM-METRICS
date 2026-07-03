@@ -8,8 +8,8 @@
   // stat_short/skilltype_short/kongfu_short/xinfa_tier_label は data/i18n/game.json に統合済。
   // ui (Layer3=ツール独自UI文言) / noClientData (Layer2=mining不可ゲーム用語) のみ個別ファイルとして残置。
   const CATS = ['ui', 'noClientData'];
-  // t() lookup chain: ui (常用語) → game_lexicon (ゲーム内用語) → stat (ステ/affix、2026-07-01 stat_display統合済) → noClientData (mining 不可 ゲーム内用語 隔離) → xinfa_tier_label (心法 tier effect text)
-  const T_CHAIN = ['ui', 'game_lexicon', 'stat', 'noClientData', 'xinfa_tier_label'];
+  // t() lookup chain: ui (常用語) → game_lexicon (ゲーム内用語) → stat (パネル表示59項目、2026-07-03 affix分離済) → affix_stat (affix専用15項目) → noClientData (mining 不可 ゲーム内用語 隔離) → xinfa_tier_label (心法 tier effect text)
+  const T_CHAIN = ['ui', 'game_lexicon', 'stat', 'affix_stat', 'noClientData', 'xinfa_tier_label'];
   // 動的 getter 化 (2026-06-25 真因 fix): 旧 const は module 読込時 1 回評価で
   // main.js import 順序 (data-store.js が calc.js より先) で window.WWM_DISPLAY_VERSION 未定義
   // → fallback 11 固定 → 全 i18n fetch URL `?v=11` で browser cache HIT = DISPLAY bump 全無効化されてた
@@ -157,7 +157,8 @@
       const SHORT_AFFIX = { phys: ['Pen'] }; // 拡張時はここに追加 (例: void: ['Pen','Atk'] 等)
       const SUF_KEY = { Pen: 'pen', Atk: 'atk', Dmg: 'dmgUp' };
       for (const [s, sufs] of Object.entries(SHORT_AFFIX)) {
-        const base = stat[s]; if (!base) continue;
+        // phys は affix 専用 15項目分離 (2026-07-03) で data.affix_stat 側に移動済
+        const base = stat[s] || data.affix_stat?.[s]; if (!base) continue;
         for (const suf of sufs) {
           const k = s + suf;
           const v = {};
@@ -303,6 +304,11 @@
     }
     const v = _lookup(cat, id, L);
     if (v) return v;
+    // affix_stat fallback (= stat cat はパネル表示 59項目限定、 affix専用15項目は affix_stat 隔離。2026-07-03)
+    if (cat === 'stat') {
+      const v1 = _lookup('affix_stat', id, L);
+      if (v1) return v1;
+    }
     // noClientData fallback (= mining 不可 ゲーム内用語 隔離、 cat 不問)
     const v2 = _lookup('noClientData', id, L);
     if (v2) return v2;
