@@ -8,8 +8,8 @@
   // stat_short/skilltype_short/kongfu_short/xinfa_tier_label は data/i18n/game.json に統合済。
   // ui (Layer3=ツール独自UI文言) / noClientData (Layer2=mining不可ゲーム用語) のみ個別ファイルとして残置。
   const CATS = ['ui', 'noClientData'];
-  // t() lookup chain: ui (常用語) → stat (パネル表示59項目、2026-07-03 affix分離済) → affix_stat (affix専用) → noClientData (mining 不可 ゲーム内用語 隔離、旧 game_lexicon 36キー統合 2026-07-04) → xinfa_tier_label (心法 tier effect text)
-  const T_CHAIN = ['ui', 'stat', 'affix_stat', 'noClientData', 'xinfa_tier_label'];
+  // t() lookup chain: ui (常用語) → game_lexicon (ゲーム内用語、zh anchor mining対象31キー) → stat (パネル表示59項目、2026-07-03 affix分離済) → affix_stat (affix専用) → noClientData (mining 不可 隔離、係数系ツール独自5キーは 2026-07-04 game_lexicon から移管) → xinfa_tier_label (心法 tier effect text)
+  const T_CHAIN = ['ui', 'game_lexicon', 'stat', 'affix_stat', 'noClientData', 'xinfa_tier_label'];
   // 動的 getter 化 (2026-06-25 真因 fix): 旧 const は module 読込時 1 回評価で
   // main.js import 順序 (data-store.js が calc.js より先) で window.WWM_DISPLAY_VERSION 未定義
   // → fallback 11 固定 → 全 i18n fetch URL `?v=11` で browser cache HIT = DISPLAY bump 全無効化されてた
