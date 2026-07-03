@@ -90,9 +90,35 @@ header.topbar::after {
   letter-spacing: 0.08em; margin-top: var(--space-1);
   text-transform: uppercase; font-family: var(--f-latin); font-weight: var(--fw-medium);
 }
-/* WWM Brand (D案: 縦書き漢字 + 横英字 + 朱印章) */
-.wwm-brand { display: flex; align-items: center; gap: var(--space-4); }
+/* WWM Brand (D案: 縦書き漢字 + 横英字 + 朱印章)
+   2026-07-04 title_sample.png 案2+案4合成: 飾り罫◇ + 菱形コネクタ + 羅盤線画 + 印章擦れ */
+/* padding+負margin = レイアウト位置不変のまま overflow クリップ境界 (padding box) を拡張。
+   seal の rotate はみ出しと羅盤の右側を切らないための余白 (兄貴指摘 2026-07-04) */
+.wwm-brand {
+  display: flex; align-items: center; gap: var(--space-4);
+  position: relative; overflow: hidden;
+  padding: 10px 52px 10px 0;
+  margin: -10px -52px -10px 0;
+}
+/* 羅盤線画 (案4): seal 背後に金の計器円環。mask data-URI + background-color = theme token 追従。
+   親 overflow:hidden で brand 箱内クリップ = band-top からはみ出さない。
+   perspective + rotateY/X = 斜め視点の円盤 (兄貴コイン画像の角度準拠 2026-07-04) */
+.wwm-brand::after {
+  content: '';
+  position: absolute;
+  right: 14px; top: 50%;
+  width: 150px; height: 150px;
+  transform: translateY(-50%) perspective(340px) rotateY(-32deg) rotateX(9deg);
+  background-color: var(--gold);
+  opacity: 0.26;
+  -webkit-mask-image: var(--brand-luopan-mask);
+  mask-image: var(--brand-luopan-mask);
+  -webkit-mask-size: contain; mask-size: contain;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  pointer-events: none;
+}
 .wwm-brand-vert {
+  position: relative;
   font-family: var(--f-display-title);
   font-weight: var(--fw-black);
   writing-mode: vertical-rl;
@@ -105,6 +131,16 @@ header.topbar::after {
   text-shadow: 0 0 10px color-mix(in oklab, var(--gold-bright) 50%, transparent);
   line-height: 1;
 }
+/* 菱形コネクタ (案2): 縦書き枠の右 border 中点に金菱形 */
+.wwm-brand-vert::after {
+  content: '';
+  position: absolute;
+  right: -5px; top: 50%;
+  width: 6px; height: 6px;
+  transform: translateY(-50%) rotate(45deg);
+  background: var(--c-bg-band, #0f0c0e);
+  border: 1.5px solid var(--gold);
+}
 .wwm-brand-right { display: flex; flex-direction: column; gap: var(--space-half); }
 .wwm-brand-en {
   font-family: var(--f-latin);
@@ -113,11 +149,25 @@ header.topbar::after {
   opacity: var(--c-brand-en-opacity);
 }
 .wwm-brand-sub {
+  display: flex; align-items: center; gap: var(--space-2);
   font-family: var(--f-latin);
   font-size: var(--text-sm); color: var(--c-brand-sub-fg);
   letter-spacing: 0.3em; opacity: 0.85;
   text-shadow: var(--c-brand-sub-text-shadow);
 }
+/* 飾り罫 ─◇─ (案2): sub の左右に金の線+菱形。mask data-URI + background-color 着色 */
+.wwm-brand-sub::before, .wwm-brand-sub::after {
+  content: '';
+  width: 46px; height: 9px;
+  flex-shrink: 0;
+  background-color: var(--gold);
+  opacity: 0.75;
+  -webkit-mask-image: var(--brand-rule-mask);
+  mask-image: var(--brand-rule-mask);
+  -webkit-mask-size: contain; mask-size: contain;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+}
+.wwm-brand-sub::after { transform: scaleX(-1); }
 .wwm-brand-seal {
   position: relative;
   width: 48px; height: 48px;
@@ -138,6 +188,11 @@ header.topbar::after {
   position: absolute; inset: 3px;
   border: 1.5px solid rgba(255,255,255,0.55);
   border-radius: 5%;
+}
+/* 狭幅: 飾り罫のみ縮小 (sub 文字列の折返し防止)。羅盤/菱形は brand overflow クリップ内で
+   無害のため全幅表示 (兄貴指摘 2026-07-04 で768pxガード撤回、罫幅のみ調整) */
+@media (max-width: 768px) {
+  .wwm-brand-sub::before, .wwm-brand-sub::after { width: 18px; }
 }
 /* light: hero::before「斬」watermark 視認性up (vermilion-trace 0.05 → 濃化) */
 

@@ -54,6 +54,8 @@ body.mobile-mode .wwm-band .wwm-brand-vert {
 body.mobile-mode .wwm-band .wwm-brand-en { font-size: 11px; }
 body.mobile-mode .wwm-band .wwm-brand-sub { font-size: 9px; }
 body.mobile-mode .wwm-band .wwm-brand-seal { display: none; }
+/* 羅盤 (base.css .wwm-brand::after 2026-07-04) = seal 非表示に合わせ mobile off (浮き+actions 被り防止) */
+body.mobile-mode .wwm-band .wwm-brand::after { display: none; }
 body.mobile-mode .wwm-band .wwm-game-ver { display: none; }
 body.mobile-mode .wwm-band-actions { gap: 2px; }
 body.mobile-mode .wwm-band-actions .icon-btn { padding: 0 6px; min-width: 38px; height: 38px; }
