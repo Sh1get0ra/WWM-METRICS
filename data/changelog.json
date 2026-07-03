@@ -3,7 +3,7 @@
   "entries": [
     {
       "version": "2.5.3",
-      "date": "2026-07-02",
+      "date": "2026-07-04",
       "items": [
         {
           "featured": true,
@@ -19,6 +19,36 @@
           "ru": "[Поддержка языков: 5 → 12] Добавлены немецкий, испанский, французский, португальский (Бразилия), русский, тайский и традиционный китайский. Переключайте через меню языков в правом верхнем углу. Не влияет на расчёты.",
           "th": "[รองรับภาษา: 5 → 12] เพิ่มภาษาเยอรมัน สเปน ฝรั่งเศส โปรตุเกส (บราซิล) รัสเซีย ไทย และจีนตัวเต็ม สลับจากเมนูภาษามุมขวาบน ไม่ส่งผลต่อการคำนวณ",
           "zh_tw": "【支援語言擴展 5 → 12】 新增 德語 / 西班牙語 / 法語 / 葡萄牙語 (巴西) / 俄語 / 泰語 / 繁體中文 7 種語言支援。 可從畫面右上的語言切換選單選擇。 不影響計算結果。"
+        },
+        {
+          "featured": false,
+          "ja": "【デザインを微調整】 タイトルバー・各種画面のヘッダー装飾など、細部のデザインを調整しました。表示のみで計算結果には影響ありません。",
+          "en": "[Design Polish] Adjusted minor design details across the title bar and various modal headers. Visual only — no impact on calculations.",
+          "zh": "【设计微调】 调整了标题栏及各画面标题等细节设计。 仅影响显示, 不影响计算结果。",
+          "ko": "【디자인 미세 조정】 타이틀 바 및 각종 화면 헤더 등 세부 디자인을 조정했습니다. 표시만의 문제로 계산 결과에는 영향 없습니다.",
+          "vi": "[Tinh chỉnh Thiết kế] Điều chỉnh chi tiết thiết kế thanh tiêu đề và tiêu đề các modal. Chỉ ảnh hưởng giao diện — không ảnh hưởng tính toán.",
+          "de": "[Design-Feinschliff] Kleinere Designanpassungen an der Titelleiste und diversen Modal-Überschriften. Nur visuell — keine Auswirkung auf Berechnungen.",
+          "es": "[Ajustes de diseño] Pequeños ajustes de diseño en la barra de título y encabezados de varios paneles. Solo visual — sin impacto en los cálculos.",
+          "fr": "[Ajustements de design] Petits ajustements de design sur la barre de titre et les en-têtes de divers modales. Visuel uniquement — aucun impact sur les calculs.",
+          "pt_br": "[Ajustes de Design] Pequenos ajustes de design na barra de título e cabeçalhos de vários modais. Apenas visual — sem impacto nos cálculos.",
+          "ru": "[Доработка дизайна] Небольшие изменения дизайна в панели заголовка и заголовках различных окон. Только визуально — не влияет на расчёты.",
+          "th": "[ปรับแต่งดีไซน์] ปรับรายละเอียดดีไซน์แถบชื่อเรื่องและหัวข้อหน้าต่างต่าง ๆ เล็กน้อย ส่งผลเฉพาะการแสดงผล ไม่ส่งผลต่อการคำนวณ",
+          "zh_tw": "【設計微調】 調整了標題欄及各畫面標題等細節設計。 僅影響顯示, 不影響計算結果。"
+        },
+        {
+          "featured": false,
+          "ja": "【装備オプション表記の精度を向上】 一部の装備オプション（会心率強化、瞬嵐攻撃力 等）の表記をゲーム内表示に合わせて改善しました。計算結果には影響ありません。",
+          "en": "[Equipment Option Label Precision] Improved the wording of some equipment options (e.g. Critical Rate Boost, Bamboocut Attack) to better match in-game display. No impact on calculations.",
+          "zh": "【装备选项表记精度提升】 改善了部分装备选项 (会心率强化、瞬岚攻击力 等) 的表记, 使其更贴合游戏内显示。 不影响计算结果。",
+          "ko": "【장비 옵션 표기 정확도 향상】 일부 장비 옵션 (치명타 확률 강화, 순풍 공격력 등) 의 표기를 게임 내 표시에 맞게 개선했습니다. 계산 결과에는 영향이 없습니다.",
+          "vi": "[Cải thiện độ chính xác nhãn Tùy chọn Trang bị] Cải thiện cách diễn đạt của một số tùy chọn trang bị (Tăng tỷ lệ Chí mạng, Tấn công Phá Trúc, v.v.) để khớp hơn với hiển thị trong game. Không ảnh hưởng tính toán.",
+          "de": "[Präzisere Ausrüstungsoptionen] Verbesserte Formulierungen einiger Ausrüstungsoptionen (z. B. Krit.-Rate-Boost, Bambusschnitt-Angriff), um der Spielanzeige besser zu entsprechen. Keine Auswirkung auf Berechnungen.",
+          "es": "[Precisión en opciones de equipo] Se mejoró la redacción de algunas opciones de equipo (p. ej. Aumento de tasa crítica, Ataque de Corte de Bambú) para coincidir mejor con la pantalla del juego. Sin impacto en los cálculos.",
+          "fr": "[Précision des options d'équipement] Amélioration du libellé de certaines options d'équipement (ex. Bonus de taux critique, Attaque Coupe de bambou) pour mieux correspondre à l'affichage en jeu. Aucun impact sur les calculs.",
+          "pt_br": "[Precisão das Opções de Equipamento] Melhoria na redação de algumas opções de equipamento (ex. Aumento de Taxa Crítica, Ataque de Corte de Bambu) para corresponder melhor à exibição do jogo. Sem impacto nos cálculos.",
+          "ru": "[Точность опций снаряжения] Улучшены формулировки некоторых опций снаряжения (например, усиление шанса крита, атака Рассечения бамбука) для соответствия отображению в игре. Не влияет на расчёты.",
+          "th": "[ปรับความแม่นยำป้ายตัวเลือกอุปกรณ์] ปรับปรุงคำอธิบายตัวเลือกอุปกรณ์บางส่วน (เช่น เพิ่มอัตราคริติคอล, โจมตีไผ่แตก) ให้ตรงกับการแสดงผลในเกมมากขึ้น ไม่ส่งผลต่อการคำนวณ",
+          "zh_tw": "【裝備選項表記精度提升】 改善了部分裝備選項 (會心率強化、瞬嵐攻擊力 等) 的表記, 使其更貼合遊戲內顯示。 不影響計算結果。"
         }
       ]
     },
