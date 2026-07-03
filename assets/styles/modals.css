@@ -845,7 +845,7 @@
   z-index: 0;
   /* 金筆透かし (2026-07-04 兄貴決定、旧墨透かし ③ 2026-06-13 から変更) — 文字との干渉軽減。
      brightness(0) で黒silhouette化 → invert/sepia/saturate/hue-rotate で gold token 近似色へ */
-  filter: brightness(0) invert(0.78) sepia(0.65) saturate(2.2) hue-rotate(3deg);
+  filter: brightness(0) invert(0.5) sepia(0.8) saturate(5) hue-rotate(3deg);
 }
 /* 武具対照のみ 50% UP + 右下寄せ */
 .wwm-cmp-modal-bg-icon-gear {
@@ -1236,7 +1236,7 @@
   background-size: 60%;
   opacity: var(--c-modal-bg-icon-opacity);
   /* 金筆透かし (2026-07-04 兄貴決定、旧墨透かし ③ 2026-06-13 から変更) — 文字との干渉軽減 */
-  filter: brightness(0) invert(0.78) sepia(0.65) saturate(2.2) hue-rotate(3deg);
+  filter: brightness(0) invert(0.5) sepia(0.8) saturate(5) hue-rotate(3deg);
   pointer-events: none;
   z-index: 0;
 }
@@ -1514,7 +1514,7 @@
   background-position: calc(100% + 20px) calc(100% + 60px) !important; /* 右下へ寄せ (兄貴調整 2026-06-13) */
   /* 金筆透かし (2026-07-04、旧墨透かし ③ 2026-06-13 から変更)。opacity は委譲 token
      (--c-diag-modal--*) だと :root で 0.18 に固化され paper scope 上書き不達 → base token 直参照で紙値 0.08 を拾う */
-  filter: brightness(0) invert(0.78) sepia(0.65) saturate(2.2) hue-rotate(3deg);
+  filter: brightness(0) invert(0.5) sepia(0.8) saturate(5) hue-rotate(3deg);
   opacity: var(--c-modal-bg-icon-opacity);
 }
 
