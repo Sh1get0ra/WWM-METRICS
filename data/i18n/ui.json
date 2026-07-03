@@ -3639,20 +3639,6 @@
     "th": "คะแนนอุปกรณ์",
     "zh_tw": "裝備得分"
   },
-  "martialIndexSub": {
-    "ja": "MARTIAL INDEX",
-    "en": "MARTIAL INDEX",
-    "zh": "MARTIAL INDEX",
-    "ko": "MARTIAL INDEX",
-    "vi": "MARTIAL INDEX",
-    "de": "MARTIAL INDEX",
-    "es": "MARTIAL INDEX",
-    "fr": "MARTIAL INDEX",
-    "pt_br": "MARTIAL INDEX",
-    "ru": "MARTIAL INDEX",
-    "th": "MARTIAL INDEX",
-    "zh_tw": "MARTIAL INDEX"
-  },
   "sbEmptyTitle": {
     "ja": "まだインポートデータがありません。",
     "en": "No imported data yet.",
@@ -4313,7 +4299,7 @@
   },
   "heroSeatScore": {
     "ja": "武格指数",
-    "en": "武格指数",
+    "en": "Martial Index",
     "zh": "武格指数",
     "ko": "무격지수",
     "vi": "Vũ Cách Chỉ Số",
@@ -4327,7 +4313,7 @@
   },
   "heroSeatDps": {
     "ja": "戦律指数",
-    "en": "戦律指数",
+    "en": "Rotation DPS",
     "zh": "战律指数",
     "ko": "전투율지수",
     "vi": "Chiến Luật Chỉ Số",
@@ -4943,16 +4929,16 @@
   },
   "donutDmgCenter": {
     "ja": "闘率",
-    "en": "闘率",
-    "zh": "闘率",
-    "ko": "闘率",
-    "vi": "闘率",
-    "de": "闘率",
-    "es": "闘率",
-    "fr": "闘率",
-    "pt_br": "闘率",
-    "ru": "闘率",
-    "th": "闘率",
-    "zh_tw": "闘率"
+    "en": "Ratio",
+    "zh": "斗率",
+    "ko": "투율",
+    "vi": "Đấu Suất",
+    "de": "Rate",
+    "es": "Ratio",
+    "fr": "Taux",
+    "pt_br": "Taxa",
+    "ru": "Доля",
+    "th": "อัตรา",
+    "zh_tw": "鬥率"
   }
 }
