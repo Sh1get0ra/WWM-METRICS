@@ -955,18 +955,18 @@
       "zh_tw": "空中輕擊增傷"
     },
     "jumpStrikeDmg": {
-      "ja": "空中重撃",
-      "en": "Airborne Heavy Attack",
-      "zh": "空中重击",
-      "zh_tw": "空中重擊",
-      "ko": "공중 강공격",
-      "vi": "Đòn mạnh trên không",
-      "de": "Schwerer Luftangriff",
-      "es": "Ataque Pesado Aéreo",
-      "fr": "Attaque lourde aérienne",
-      "pt_br": "Ataque Aéreo Pesado",
-      "ru": "Тяжёлая атака в воздухе",
-      "th": "โจมตีหนักกลางอากาศ"
+      "ja": "跳び斬りダメージ",
+      "en": "Jump Strike DMG Bonus",
+      "zh": "跳劈增伤",
+      "ko": "도약 베기 피해 증가",
+      "vi": "Tăng sát thương nhảy bổ",
+      "de": "Sprungangriff-Schadensbonus",
+      "es": "Bonificación de Daño por Golpe de Salto",
+      "fr": "Bonus de dégâts de Frappe Sautante",
+      "pt_br": "Bônus de Dano do Golpe em Salto",
+      "ru": "Бонус урона прыжкового удара",
+      "th": "เพิ่มความเสียหายของกระโดดฟัน",
+      "zh_tw": "跳劈增傷"
     },
     "executionDmg": {
       "ja": "処決ダメージ増加",
@@ -983,18 +983,18 @@
       "zh_tw": "處決增傷"
     },
     "dualWeaponSkillDmg": {
-      "ja": "特殊技強化",
-      "en": "Special Skill Enhancement",
-      "zh": "特殊技强化",
-      "zh_tw": "特殊技強化",
-      "ko": "특수 스킬 강화",
-      "vi": "Tăng cường kỹ năng đặc biệt",
-      "de": "Spezialfähigkeits-Verstärkung",
-      "es": "Mejora de Habilidad Especial",
-      "fr": "Amélioration de compétence spéciale",
-      "pt_br": "Aprimoramento de Habilidade Especial",
-      "ru": "Усиление особого навыка",
-      "th": "การเสริมพลังทักษะพิเศษ"
+      "ja": "武変ダメージ",
+      "en": "Dual-Weapon Skill DMG Boost",
+      "zh": "易武增伤",
+      "ko": "무기 교체 피해 증가",
+      "vi": "Tăng sát thương đổi vũ khí",
+      "de": "Dualwaffen-Fähigkeitsschaden-Bonus",
+      "es": "Aumento de daño de habilidad de armas duales",
+      "fr": "Bonus de Dégâts de Compétence à Double Arme",
+      "pt_br": "Aumento de Dano de Habilidade de Arma Dupla",
+      "ru": "Увеличение урона умения двойного оружия",
+      "th": "เพิ่มความเสียหายของเปลี่ยนอาวุธ",
+      "zh_tw": "易武增傷"
     },
     "dashDmg": {
       "ja": "突進ダメージ",
