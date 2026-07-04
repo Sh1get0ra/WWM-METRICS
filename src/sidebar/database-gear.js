@@ -117,6 +117,15 @@
     `;
   }
 
+  const _RECIPE_SLOTS = new Set(['9', '21']);
+
+  function _renderRecipeSection(slot) {
+    return `
+      <h3>${(window.T && window.T.dbRecipeTitle) || '製作レシピ'}</h3>
+      <p class="wwm-db-recipe-placeholder">${(window.T && window.T.dbRecipeComingSoon) || '近日対応予定'}</p>
+    `;
+  }
+
   function _attachWeaponAffixControls() {
     const root = document.getElementById('dbGear');
     if (!root) return;
@@ -272,6 +281,10 @@
     });
     const detailEl = root.querySelector('[data-db-gear-detail]');
     if (!detailEl) return;
+    if (_RECIPE_SLOTS.has(slot)) {
+      detailEl.innerHTML = `<div class="wwm-db-gear-recipe">${_renderRecipeSection(slot)}</div>`;
+      return;
+    }
     detailEl.innerHTML = `
       <div class="wwm-db-gear-basestat">${_renderBaseStatTable(slot)}</div>
       <div class="wwm-db-gear-affix" data-db-affix-section></div>
