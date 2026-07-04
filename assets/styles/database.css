@@ -49,3 +49,40 @@
     display: flex;
   }
 }
+
+@layer components {
+  .wwm-db-gear {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0;
+    height: 100%;
+    width: 100%;
+  }
+  .wwm-db-gear-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px;
+    border-right: 1px solid var(--gold-deep);
+    overflow-y: auto;
+  }
+  .wwm-db-slot-item {
+    text-align: left;
+    padding: 8px 12px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: var(--kami-fg);
+    cursor: pointer;
+    font-size: 15px;
+  }
+  .wwm-db-slot-item[aria-selected="true"] {
+    background: var(--sumi-1);
+    border-color: var(--gold-deep);
+    color: var(--sumi-fg);
+  }
+  .wwm-db-gear-detail {
+    padding: 16px;
+    overflow-y: auto;
+  }
+}

@@ -97,6 +97,7 @@ import './sidebar/index.js';
 
 // ── workspace 系 (sidebar 群完了後、 hero.setMode 等参照 = workspace 必須順) ──
 import './workspace.js';
+import './sidebar/database-gear.js';
 import './database.js';
 import './tutorial.js';
 import './import.js';
