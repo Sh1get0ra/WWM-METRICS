@@ -124,3 +124,22 @@
     color: var(--kami-fg);
   }
 }
+
+@media (max-width: 600px) {
+  .wwm-db-gear {
+    grid-template-columns: 1fr;
+  }
+  .wwm-db-gear[data-mobile-view="detail"] .wwm-db-gear-list {
+    display: none;
+  }
+  .wwm-db-gear:not([data-mobile-view="detail"]) .wwm-db-gear-detail {
+    display: none;
+  }
+  .wwm-db-gear-back {
+    display: none;
+  }
+  .wwm-db-gear[data-mobile-view="detail"] .wwm-db-gear-back {
+    display: block;
+    margin-bottom: 12px;
+  }
+}

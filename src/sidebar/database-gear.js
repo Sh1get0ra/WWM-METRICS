@@ -255,13 +255,20 @@
     });
   }
 
+  function _isMobile() {
+    return window.matchMedia && window.matchMedia('(max-width: 600px)').matches;
+  }
+
   function render() {
     const root = document.getElementById('dbGear');
     if (!root) return;
     root.innerHTML = `
-      <div class="wwm-db-gear">
+      <div class="wwm-db-gear" data-db-gear-root>
         <div class="wwm-db-gear-list" data-db-gear-list></div>
-        <div class="wwm-db-gear-detail" data-db-gear-detail></div>
+        <div class="wwm-db-gear-detail" data-db-gear-detail>
+          <button type="button" class="wwm-db-gear-back" data-db-gear-back>${(window.T && window.T.dbBackToList) || '← 一覧へ戻る'}</button>
+          <div data-db-gear-detail-body></div>
+        </div>
       </div>
     `;
     const listEl = root.querySelector('[data-db-gear-list]');
@@ -269,7 +276,19 @@
     listEl.querySelectorAll('[data-db-slot]').forEach(btn => {
       btn.addEventListener('click', () => selectSlot(btn.dataset.dbSlot));
     });
+    const backBtn = root.querySelector('[data-db-gear-back]');
+    if (backBtn) backBtn.addEventListener('click', () => {
+      const gearRoot = root.querySelector('[data-db-gear-root]');
+      if (gearRoot) gearRoot.removeAttribute('data-mobile-view');
+    });
     selectSlot(_selectedSlot);
+    // selectSlot()内のdata-mobile-view設定はスロットボタン明示クリック時と
+    // render()末尾の初期選択呼び出しとで共有ロジックのため、上のselectSlot()呼び出し
+    // (タブを開いた際の初期選択、ユーザー操作ではない) 由来で立った状態を即解除。
+    // これにより「タブを開いた直後は一覧を表示、スロットをタップして初めて詳細へ」になる
+    // (これをしないとモバイルでタブを開いた瞬間に一覧が非表示になり操作不能になるため)
+    const gearRootInit = root.querySelector('[data-db-gear-root]');
+    if (gearRootInit) gearRootInit.removeAttribute('data-mobile-view');
   }
 
   function selectSlot(slot) {
@@ -279,21 +298,25 @@
     root.querySelectorAll('[data-db-slot]').forEach(btn => {
       btn.setAttribute('aria-selected', String(btn.dataset.dbSlot === slot));
     });
-    const detailEl = root.querySelector('[data-db-gear-detail]');
-    if (!detailEl) return;
+    const bodyEl = root.querySelector('[data-db-gear-detail-body]');
+    if (!bodyEl) return;
     if (_RECIPE_SLOTS.has(slot)) {
-      detailEl.innerHTML = `<div class="wwm-db-gear-recipe">${_renderRecipeSection(slot)}</div>`;
-      return;
+      bodyEl.innerHTML = `<div class="wwm-db-gear-recipe">${_renderRecipeSection(slot)}</div>`;
+    } else {
+      bodyEl.innerHTML = `
+        <div class="wwm-db-gear-basestat">${_renderBaseStatTable(slot)}</div>
+        <div class="wwm-db-gear-affix" data-db-affix-section></div>
+      `;
+      const affixSectionEl = bodyEl.querySelector('[data-db-affix-section]');
+      if (affixSectionEl) {
+        affixSectionEl.innerHTML = _renderAffixSection(slot);
+        if (_WEAPON_SLOTS.has(slot)) _attachWeaponAffixControls();
+        else _attachAffixControls(slot);
+      }
     }
-    detailEl.innerHTML = `
-      <div class="wwm-db-gear-basestat">${_renderBaseStatTable(slot)}</div>
-      <div class="wwm-db-gear-affix" data-db-affix-section></div>
-    `;
-    const affixSectionEl = root.querySelector('[data-db-affix-section]');
-    if (affixSectionEl) {
-      affixSectionEl.innerHTML = _renderAffixSection(slot);
-      if (_WEAPON_SLOTS.has(slot)) _attachWeaponAffixControls();
-      else _attachAffixControls(slot);
+    if (_isMobile()) {
+      const gearRoot = root.querySelector('[data-db-gear-root]');
+      if (gearRoot) gearRoot.setAttribute('data-mobile-view', 'detail');
     }
   }
 
