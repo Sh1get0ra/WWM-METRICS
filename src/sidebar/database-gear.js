@@ -51,6 +51,85 @@
   const _RANK_ORDER = ['gold', 'purple', 'blue'];
   const _RANK_LABEL_JA = { gold: '金', purple: '紫', blue: '青' };
 
+  // weaponType (data/kongfu.json の内部キー) → affix_selector.json / affix_selector_chance.json の wdbCat 文字列
+  // (src/sidebar/affix-utils.js:325-330 の M テーブルと同一内容)
+  const _WEAPON_TYPE_TO_WDB_CAT = {
+    sword: 'Weapon-Sword', spear: 'Weapon-Spear', mo_blade: 'Weapon-Mo Blade',
+    dual_blades: 'Weapon-Dual Blades', rope_dart: 'Weapon-Rope Dart',
+    fan: 'Weapon-Fan', umbrella: 'Weapon-Umbrella',
+    heng_blade: 'Weapon-Heng Blade', gauntlet: 'Weapon-Gauntlets',
+  };
+  const _WEAPON_TYPE_LABEL_JA = {
+    sword: '剣', spear: '槍', mo_blade: '墨刀', dual_blades: '双剣',
+    rope_dart: '縄鏢', fan: '扇', umbrella: '傘', heng_blade: '横刀', gauntlet: '拳甲',
+  };
+  const _WEAPON_SLOTS = new Set(['1', '2']);
+  let _weaponType = 'sword';
+
+  function _weaponAffixRows() {
+    const wdbCat = _WEAPON_TYPE_TO_WDB_CAT[_weaponType];
+    const selectorData = window.WWM_AFFIX_SELECTOR && window.WWM_AFFIX_SELECTOR.data;
+    const chanceData = window.WWM_AFFIX_CHANCE && window.WWM_AFFIX_CHANCE.data;
+    if (!wdbCat || !selectorData) return '';
+    const rankToTier = { gold: '5', purple: '4', blue: '3' };
+    const tier = rankToTier[_affixRank] || '5';
+    const affixNs = window.WWMSidebar.affix;
+    const seen = new Set();
+    const rows = [];
+    for (let idx = 0; idx <= 4; idx++) {
+      const list = selectorData[wdbCat] && selectorData[wdbCat][String(_affixLv)] && selectorData[wdbCat][String(_affixLv)][tier] && selectorData[wdbCat][String(_affixLv)][tier][String(idx)];
+      if (!list) continue;
+      const chanceForIdx = (chanceData && chanceData[wdbCat] && chanceData[wdbCat][String(_affixLv)] && chanceData[wdbCat][String(_affixLv)][tier] && chanceData[wdbCat][String(_affixLv)][tier][String(idx)]) || {};
+      list.forEach(sk => {
+        if (seen.has(sk)) return;
+        seen.add(sk);
+        const minMax = affixNs.getAffixMinMax(sk, _affixLv);
+        const label = (window._AFFIX_DISPLAY_LABELS && window._AFFIX_DISPLAY_LABELS[sk]) || sk;
+        const pct = chanceForIdx[sk] != null ? chanceForIdx[sk].toFixed(2) + '%' : '-';
+        const range = minMax ? `${minMax.min} 〜 ${minMax.max}` : '-';
+        rows.push(`<tr><td>${_esc(label)}</td><td>${_esc(range)}</td><td>${_esc(pct)}</td></tr>`);
+      });
+    }
+    if (!rows.length) return `<p class="wwm-db-affix-empty">${(window.T && window.T.dbAffixEmpty) || 'データなし'}</p>`;
+    return `
+      <table class="wwm-db-affix-table">
+        <thead><tr>
+          <th scope="col">${(window.T && window.T.dbAffixColName) || '効果'}</th>
+          <th scope="col">${(window.T && window.T.dbAffixColRange) || '範囲'}</th>
+          <th scope="col">${(window.T && window.T.dbAffixColChance) || '出現率'}</th>
+        </tr></thead>
+        <tbody>${rows.join('')}</tbody>
+      </table>
+    `;
+  }
+
+  function _renderWeaponAffixSection() {
+    const wtOpts = Object.keys(_WEAPON_TYPE_TO_WDB_CAT).map(wt =>
+      `<option value="${wt}" ${wt === _weaponType ? 'selected' : ''}>${_WEAPON_TYPE_LABEL_JA[wt]}</option>`
+    ).join('');
+    return `
+      <h3>${(window.T && window.T.dbAffixTitle) || 'affix 出現範囲'}</h3>
+      <div class="wwm-db-affix-controls">
+        <label>${(window.T && window.T.dbWeaponType) || '武器種'} <select data-db-weapon-type>${wtOpts}</select></label>
+      </div>
+      ${_renderAffixControls()}
+      <div data-db-affix-rows>${_weaponAffixRows()}</div>
+    `;
+  }
+
+  function _attachWeaponAffixControls() {
+    const root = document.getElementById('dbGear');
+    if (!root) return;
+    const wtSel = root.querySelector('[data-db-weapon-type]');
+    const lvSel = root.querySelector('[data-db-affix-lv]');
+    const rankSel = root.querySelector('[data-db-affix-rank]');
+    const rowsEl = root.querySelector('[data-db-affix-rows]');
+    const rerender = () => { if (rowsEl) rowsEl.innerHTML = _weaponAffixRows(); };
+    if (wtSel) wtSel.addEventListener('change', () => { _weaponType = wtSel.value; rerender(); });
+    if (lvSel) lvSel.addEventListener('change', () => { _affixLv = parseInt(lvSel.value, 10); rerender(); });
+    if (rankSel) rankSel.addEventListener('change', () => { _affixRank = rankSel.value; rerender(); });
+  }
+
   function _renderBaseStatTable(slot) {
     if (_NO_BASE_TABLE_SLOTS.has(slot)) return '';
     const tbl = window.WWM_EQUIP_BASE_BY_LV;
@@ -127,6 +206,7 @@
   }
 
   function _renderAffixSection(slot) {
+    if (_WEAPON_SLOTS.has(slot)) return _renderWeaponAffixSection();
     if (!_NORMAL_AFFIX_SLOTS.has(slot)) return '';
     return `
       <h3>${(window.T && window.T.dbAffixTitle) || 'affix 出現範囲'}</h3>
@@ -193,7 +273,8 @@
     const affixSectionEl = root.querySelector('[data-db-affix-section]');
     if (affixSectionEl) {
       affixSectionEl.innerHTML = _renderAffixSection(slot);
-      _attachAffixControls(slot);
+      if (_WEAPON_SLOTS.has(slot)) _attachWeaponAffixControls();
+      else _attachAffixControls(slot);
     }
   }
 
