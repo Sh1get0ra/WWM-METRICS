@@ -109,3 +109,18 @@
     white-space: nowrap;
   }
 }
+
+@layer components {
+  .wwm-db-affix-controls {
+    display: flex; gap: 16px; margin: 8px 0 12px;
+  }
+  .wwm-db-affix-table {
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .wwm-db-affix-table th, .wwm-db-affix-table td {
+    border: 1px solid var(--gold-deep);
+    padding: 4px 8px;
+    color: var(--kami-fg);
+  }
+}
