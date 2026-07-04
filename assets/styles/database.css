@@ -86,3 +86,26 @@
     overflow-y: auto;
   }
 }
+
+@layer components {
+  .wwm-db-base-table {
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 13px;
+  }
+  .wwm-db-base-table caption {
+    text-align: left;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--kami-fg);
+  }
+  .wwm-db-base-table th, .wwm-db-base-table td {
+    border: 1px solid var(--gold-deep);
+    padding: 4px 8px;
+    color: var(--kami-fg);
+  }
+  .wwm-db-base-table th[scope="row"] {
+    font-weight: 700;
+    white-space: nowrap;
+  }
+}
