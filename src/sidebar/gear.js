@@ -451,7 +451,7 @@
         if (isRankLocked) {
           return `
             <div class="wwm-cmp-row wwm-cmp-edit-row wwm-cmp-rank-locked" data-affix-idx="${idx}" data-max-internal="">
-              <select class="wwm-cmp-stat-select" data-field="stat" data-stat-el disabled><option>—</option></select>
+              ${window.WWMSidebar.statSelect.render({ className: 'wwm-cmp-stat-select', disabled: true, extraAttrs: { 'data-field': 'stat', 'data-stat-el': '' }, options: [{ value: '', statKey: '', name: '—' }] })}
               <div class="wwm-cmp-useful-mark" data-useful-el></div>
               <div class="wwm-cmp-val-wrap">
                 <input type="number" class="wwm-num-input wwm-cmp-val-input" data-field="val" data-pct="0" data-pctmul="0" value="" disabled>
@@ -464,10 +464,10 @@
         const opts = _getAffixOptions(id, slot, idx, newAffixes, newKongfuId, _equipLv, _equipRank);
         // selected: 通常は statKey 一致、affix6 で未登録ID(PvP定音含む) なら __pvp__ option
         const isPvpSlot6 = (idx === 5) && !info;
-        const optsHtml = opts.map(o => {
-          const sel = isPvpSlot6 ? (o.statKey === '__pvp__') : (o.statKey === sk);
-          return `<option value="${o.id}" data-stat="${o.statKey}" ${sel?'selected':''}>${o.name}</option>`;
-        }).join('');
+        const statSelectOpts = opts.map(o => ({
+          value: o.id, statKey: o.statKey, name: o.name, chance: o.chance,
+          selected: isPvpSlot6 ? (o.statKey === '__pvp__') : (o.statKey === sk),
+        }));
         const isPct = _isPctStat(sk);
         const needsMul = _pctNeedsMul(sk);
         const displayVal = isPct
@@ -495,7 +495,7 @@
         // PvP定音 (idx=5 + 未登録): wwm-cmp-pvp-locked クラスで val/unit/ratio を visibility:hidden (編集不可)
         return `
           <div class="wwm-cmp-row wwm-cmp-edit-row${isPvpSlot6?' wwm-cmp-pvp-locked':''}" data-affix-idx="${idx}" data-max-internal="${maxInternal||''}">
-            <select class="wwm-cmp-stat-select wwm-rank-${rkCls}" data-field="stat" data-stat-el>${optsHtml}</select>
+            ${window.WWMSidebar.statSelect.render({ className: `wwm-cmp-stat-select wwm-rank-${rkCls}`, extraAttrs: { 'data-field': 'stat', 'data-stat-el': '' }, options: statSelectOpts })}
             <div class="wwm-cmp-useful-mark" data-useful-el>${useful?'<span class="wwm-good-icon"><svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13.17 1 7.59 6.59C7.22 6.95 7 7.45 7 8v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1z"/></svg></span>':''}</div>
             <div class="wwm-cmp-val-wrap">
               <input type="number" class="wwm-num-input wwm-cmp-val-input" step="${step}" min="0" ${maxAttr} value="${displayVal}" data-field="val" data-pct="${isPct?1:0}" data-pctmul="${needsMul?1:0}">
@@ -822,7 +822,10 @@
       const rk = d[3];
       const cls = rk===3?'gold':rk===2?'purple':'blue';
       const sel = row.querySelector('[data-stat-el]');
-      if (sel) sel.className = 'wwm-cmp-stat-select wwm-rank-' + cls;
+      // native <select> 時代の直 className 書換 (= wwm-stat-select 基底クラス欠落) は custom
+      // dropdown の CSS(position/z-index)/JS(document click-outside 判定等)を壊す
+      // (2026-07-04 実機発覚: affix#6 変更が保存されない/戻って見える不具合の実体)
+      if (sel) window.WWMSidebar.statSelect.setClassName(sel, 'wwm-cmp-stat-select wwm-rank-' + cls);
       // PvP定音 (idx=5 + 未登録/sentinel): wwm-cmp-pvp-locked クラスで val/unit/ratio を visibility:hidden
       const isPvp = idx === 5 && !info;
       row.classList.toggle('wwm-cmp-pvp-locked', isPvp);
@@ -902,13 +905,16 @@
         // blur 確実化
         valEl.addEventListener('blur', () => { normalize(); valEl.dispatchEvent(new Event('input')); });
       }
+      // stat select (wwm-stat-select custom dropdown) = open/close + option click 配線
+      row.querySelectorAll('.wwm-stat-select').forEach(el => window.WWMSidebar.statSelect.attach(el));
       row.querySelectorAll('[data-field]').forEach(el => {
-        const evt = el.tagName === 'SELECT' ? 'change' : 'input';
+        const isStatSelect = el.classList.contains('wwm-stat-select');
+        const evt = el.tagName === 'SELECT' ? 'change' : (isStatSelect ? 'wwm-stat-change' : 'input');
         el.addEventListener(evt, () => {
           const f = el.dataset.field;
           const d = newAffixes[idx].equipmentDetails;
           if (f === 'stat') {
-            const newId = parseInt(el.value, 10);
+            const newId = parseInt(isStatSelect ? el.dataset.value : el.value, 10);
             d[0] = newId;
             // PvP専用定音 sentinel: val=1/ratio=1.0/rank=3/useful=0 固定 (計算寄与ゼロ、編集不可)
             if (newId === _PVP_AFFIX_SENTINEL) {

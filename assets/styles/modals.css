@@ -2858,6 +2858,116 @@
   opacity: 0.6;
 }
 
+/* ─── stat-select 共通 component (2026-07-04) ───
+   affix stat 選択肢に出現確率(%) を添えるための custom dropdown。native <select> は選択中
+   option のテキストがそのまま閉状態表示になるため「開いたリストにだけ%表示」が実現できない
+   制約を icon-select.js 同型設計で回避 (popup 表示テキストと trigger 同期テキストを分離)。
+   .wwm-cmp-stat-select クラスは root に維持 = 既存 bg/border/padding/font/rank色 全部継承、
+   本blockは trigger(button)/popup/opt の新規部分のみ追加。 */
+.wwm-stat-select {
+  position: relative;
+  display: block;
+  z-index: 10;
+}
+/* .wwm-cmp-stat-select (旧 native select 用、L1223) の overflow:hidden が popup(絶対配置の
+   子要素)をクリップして不可視化する罠 (2026-07-04 実機確認)。ellipsis は .wwm-stat-select-name
+   側で個別処理するため root では visible に戻す (同 specificity、 source順で本rule優先) */
+.wwm-cmp-modal-a .wwm-stat-select {
+  overflow: visible;
+}
+.wwm-stat-select[aria-expanded="true"] { z-index: 200; }
+.wwm-stat-select-trigger {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: none;
+  border: none;
+  padding: 0 16px 0 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: inherit;
+  position: relative;
+}
+.wwm-stat-select[aria-disabled="true"] .wwm-stat-select-trigger { cursor: not-allowed; }
+.wwm-stat-select-trigger::after {
+  content: "";
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  opacity: 0.6;
+  transform: translateY(-65%) rotate(45deg);
+  transition: transform 0.15s;
+}
+.wwm-stat-select[aria-expanded="true"] .wwm-stat-select-trigger::after {
+  transform: translateY(-35%) rotate(-135deg);
+}
+.wwm-stat-select[aria-disabled="true"] .wwm-stat-select-trigger::after { display: none; }
+.wwm-stat-select-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.wwm-stat-select-popup {
+  /* position/top/left/min-width は JS (_positionPopup) が portal化(document.body直下)後に
+     fixed + 実測座標で inline style 上書き。 ここでの absolute/top/left は
+     portal化前(初期HTML挿入直後、display:noneのため無関係)の fallback 値。
+     width は trigger幅固定にせず内容依存(max-content) = 長い affix名でも横スクロール/文字
+     見切れが起きない(2026-07-04 実機発覚、trigger幅=grid列制約で狭いため固定は不可) */
+  position: absolute;
+  top: calc(100% + 3px);
+  left: 0;
+  width: max-content;
+  max-width: min(320px, calc(100vw - 16px));
+  background: var(--kami-1, #e8dfc4);
+  border: 1px solid var(--gold-deep);
+  border-radius: 3px;
+  padding: 3px;
+  box-shadow: 0 6px 20px rgba(26, 20, 16, 0.25);
+  /* portal化(document.body直下)後は modal backdrop(--z-toast=10000)より上に出す必要あり */
+  z-index: var(--z-tooltip, 99999);
+  max-height: 220px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-deep) transparent;
+}
+.wwm-stat-select-popup.is-open { display: block; }
+.wwm-stat-select-popup::-webkit-scrollbar { width: 5px; }
+.wwm-stat-select-popup::-webkit-scrollbar-track { background: transparent; }
+.wwm-stat-select-popup::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 2px; }
+.wwm-stat-select-opt {
+  padding: 3px 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: var(--text-12);
+  font-family: var(--f-display-title);
+  /* popup背景 = kami-1(紙地明色) → 乗せる文字色は kami-fg(墨色)。sumi-fg は逆(墨地用紙色)で
+     紙地に乗せると明色on明色で見えなくなる罠 ([[sumi-kami-fg-naming-trap]]、2026-07-04実機発覚) */
+  color: var(--kami-fg, #3d2e1f);
+  /* max-width(320px) 超の長い名前(会心率強化+%prefix等)は nowrap だと横クリップされるため
+     折返し許容 (2026-07-04 実機発覚、popup幅は max-content だが上限あり) */
+  white-space: normal;
+  word-break: break-word;
+  transition: background 0.12s;
+}
+.wwm-stat-select-opt:hover {
+  background: rgba(201, 164, 90, 0.18);
+}
+.wwm-stat-select-opt[aria-selected="true"] {
+  background: var(--vermilion);
+  color: var(--sumi-fg);
+}
+
 /* ── 格析 (ゼロベース比較) anlz subtab panel (2026-06-18 TODO 1) ── */
 #wwmZerobase .wwm-zb-panel {
   display: grid;

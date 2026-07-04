@@ -77,6 +77,7 @@ import './sidebar/diag.js';
 import './sidebar/opt.js';
 import './sidebar/share.js';
 import './sidebar/icon-select.js';
+import './sidebar/stat-select.js';
 import './sidebar/gear.js';
 import './sidebar/xinfa.js';
 import './sidebar/qishu.js';

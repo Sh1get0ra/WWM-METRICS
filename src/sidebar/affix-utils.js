@@ -13,6 +13,11 @@
 (function () {
   'use strict';
 
+  // 仮想(次)状態反映済 roleInfo (= gear.js/xinfa.js 等と同じ既存 pattern、 [[中略]])。
+  // WWMState.roleInfo (baseline/CUR) 直読みは仮武術替え等の "次" 状態を無視する罠
+  // (2026-07-04 兄貴指摘)、防具#6武術filter等 "現在シミュレーション中" の武術を見る箇所は必ずこちら経由
+  const _getEffectiveRoleInfo = () => (typeof window._getEffectiveRoleInfo === 'function' ? window._getEffectiveRoleInfo() : null);
+
   // ── Affix 統計 ラベル取得 (import.js の _STAT_LABELS 利用) ────
   function _affixDisplayName(id, idx) {
     const info = window.WWM_AFFIX?.[id];
@@ -71,6 +76,7 @@
     // 指定武術効果強化 (装備限定 → 出れば確定 useful)
     'swordDmg', 'spearDmg', 'fanDmg', 'umbrellaDmg',
     'hengBladeDmg', 'moBladeDmg', 'dualBladesDmg', 'ropeDartDmg',
+    'gauntletDmg', // 7月新武器(拳甲)追加分、他武器種と同時追加漏れ (2026-07-04 実機発覚)
     // 武術攻撃強化系 (装備限定 → 出れば確定 useful)
     'lightAtkDmg', 'heavyAtkDmg', 'executionDmg',
     'airborneLightAtkDmg', 'jumpStrikeDmg', 'dualWeaponSkillDmg', 'dashDmg',
@@ -98,7 +104,12 @@
     { prefix: 'umb',                 kongfus: [20601] },  // 千紅の傘 (Vernal Umbrella)
     { prefix: 'mortalRopeDart',      kongfus: [20701] },  // 浮塵の縄
     { prefix: 'unfetteredRopeDart',  kongfus: [20702] },  // 浮雲の縄
-    { prefix: 'snowparting',         kongfus: [20801] }   // 斬雪の刀
+    { prefix: 'snowparting',         kongfus: [20801] },  // 斬雪の刀
+    { prefix: 'heavenwillGauntlets', kongfus: [20901] },  // 天志の拳 (Heavenwill Gauntlets)
+    // 千機索天 (skygrasp) = 2026-07-04 時点 kongfu.json 未収録 (スキン未発売 = 未実装武器、
+    // [[weapontype-bganchor-gauntlet-resolved-2026-07-03]]系). 20703 は同 rope_dart ID 空間の
+    // 次候補、実装時に自動一致する想定でIDのみ先置き (現状マッチ対象なし = 無害)
+    { prefix: 'skygraspRopeDart',    kongfus: [20703] }
   ];
   function _matchKongfuSpecific(statKey) {
     // 長い prefix 優先 (例: namelessSword > sword)
@@ -149,7 +160,7 @@
     'lightAtkDmg', 'heavyAtkDmg', 'airborneLightAtkDmg', 'jumpStrikeDmg',
     'dualWeaponSkillDmg', 'executionDmg', 'dashDmg',
     'swordDmg', 'spearDmg', 'fanDmg', 'umbrellaDmg',
-    'hengBladeDmg', 'moBladeDmg', 'dualBladesDmg', 'ropeDartDmg',
+    'hengBladeDmg', 'moBladeDmg', 'dualBladesDmg', 'ropeDartDmg', 'gauntletDmg',
     'sympathyRate', 'addCritRate', 'addSympathyRate',
     // 武器固有 強化系 (全 ratio保存)
     'bleed', 'moBladeShield', 'panaceaFanHealing',
@@ -168,7 +179,11 @@
     'soulshadeUmbQ', 'soulshadeUmbCharged', 'soulshadeUmbSpecial',
     'everspringUmbQ', 'everspringUmbCharged', 'everspringUmbSpecial',
     'mortalRopeDartQ', 'mortalRopeDartCharged', 'mortalRopeDartRodent',
-    'unfetteredRopeDartQ', 'unfetteredRopeDartCharged', 'unfetteredRopeDartSpecial'
+    'unfetteredRopeDartQ', 'unfetteredRopeDartCharged', 'unfetteredRopeDartSpecial',
+    // 7月新武器 (拳甲/千機の鎖) 追加分 = _KONGFU_SPECIFIC_AFFIX と同じ更新漏れだった
+    // (2026-07-04 実機発覚、%表記にならず生ratio 0.1 のまま表示されてたバグ)
+    'heavenwillGauntletsCharged', 'heavenwillGauntletsQ', 'heavenwillGauntletsLightVariedCombo',
+    'skygraspRopeDartHeavy', 'skygraspRopeDartSpecial'
   ]);
   // すでに % 単位で保存 (例: 9.4=9.4%) → *100 不要。現状空 (Pen系はゲーム内 非%表記)
   const _PCT_DIRECT_STATKEYS = new Set([]);
@@ -349,6 +364,20 @@
     return new Set(list);
   }
 
+  // affix 選択肢に添える出現確率(%) lookup (data/affix_selector_chance.json 経由)。
+  // _selectorAllowedStatKeys と同じ wdbCat/lv/tier 解決を再利用、対象外 (idx 5 / 弓等 master 未収録) = null
+  //   idx 0 = INITIAL / idx 1-4 = TUNING 共通プール (2026-07-04 新設)
+  function _affixChanceMap(slot, idx, equipLv, equipRank, roleInfo, kongfuIdOverride) {
+    if (idx < 0 || idx > 4) return null;
+    const wdbCat = _slotToWdbCategory(slot, roleInfo, kongfuIdOverride);
+    if (!wdbCat) return null;
+    const master = window.WWM_AFFIX_CHANCE?.data;
+    if (!master) return null;
+    const tier = _RANK_TO_TIER[equipRank] || '5';
+    const lv = equipLv || 91;
+    return master[wdbCat]?.[String(lv)]?.[tier]?.[String(idx)] || null;
+  }
+
   // affix 種別変更 option list: 現 affix と同じ prefix2 のもの → statKey で dedup
   // slot/idx 指定で 6番目限定処理 + idx 1-4 重複不可 (affix0 のみ重複可)
   // PvP専用定音 sentinel ID (WWM_AFFIX に存在しない固定値、計算寄与ゼロ、表示は affix6 fallback で「PvP専用定音」)
@@ -362,6 +391,7 @@
     }
     const cur = String(currentAffixId);
     const prefix = cur.substring(0, 2);
+    const curStatKey = all[currentAffixId]?.statKey || null;
     const slotS = String(slot);
     const isIdx6 = idx === 5;
     const isWeaponLike6 = isIdx6 && _SLOT6_WEAPON_LIKE.has(slotS);
@@ -381,6 +411,7 @@
     //   idx 5 (ATTUNE) = 別 sprint = wdbAllowed null + ATTUNE 用 ad-hoc filter keep
     //   master 未対応 slot (= 弓/射玦/Thumb Ring 等) = null = 旧 logic fallback
     const wdbAllowed = _selectorAllowedStatKeys(slot, idx, equipLv, equipRank, WWMState.roleInfo, kongfuIdOverride);
+    const chanceMap = _affixChanceMap(slot, idx, equipLv, equipRank, WWMState.roleInfo, kongfuIdOverride);
     const seen = new Set();
     const opts = [];
     for (const [id, info] of Object.entries(all)) {
@@ -396,6 +427,20 @@
       // idx 5 (ATTUNE) = master 未対応 (= wdbAllowed=null) で旧 ad-hoc filter 必要、 別 sprint で master 化予定:
       if (idx === 5) {
         if (!_isWeaponDmgMatch(sk, slot, WWMState.roleInfo, kongfuIdOverride)) continue;
+        // 防具#6 = ツール独自仕様 (2026-07-04 兄貴指示): ゲーム本来は流派選択式で全武学固有
+        // affixが選択可能だが、ツールでは装備中武術(main/sub)分のみに絞る。武学固有以外
+        // (= _matchKongfuSpecific が null な universal affix) は対象外、素通り。
+        // ただし既に設定済(現在このスロットの statKey と一致)の1件は、その後 武器を
+        // 別武術に変更しても一覧から消さない (= 実際のaffix値は武器変更で自動変動しない
+        // ゲーム仕様と整合、2026-07-04 兄貴指摘「CURの値は保持、リストからは消えるが
+        // 値自体は変えない」)。消すのは "新規に選べる候補" からのみ
+        const kfSpecific = _matchKongfuSpecific(sk);
+        if (kfSpecific && sk !== curStatKey) {
+          const effRi = _getEffectiveRoleInfo() || WWMState.roleInfo;
+          const km = parseInt(effRi?.kongfuMain, 10);
+          const ks = parseInt(effRi?.kongfuSub, 10);
+          if (!kfSpecific.includes(km) && !kfSpecific.includes(ks)) continue;
+        }
       }
       // BOSSダメ + PvPダメ は同装備内 排他 (どちらか1種のみ)
       if (allAffixes && (sk === 'bossDmg' || sk === 'playerUnitDmg')) {
@@ -408,7 +453,8 @@
         if (hasConflict) continue;
       }
       seen.add(sk);
-      opts.push({ id, statKey: sk, name: _affixDisplayNameSplit(id, idx) });
+      const chance = chanceMap ? chanceMap[sk] : null;
+      opts.push({ id, statKey: sk, name: _affixDisplayNameSplit(id, idx), chance: chance != null ? chance : null });
     }
     opts.sort((a, b) => a.name.localeCompare(b.name, 'ja'));
     // PvE→PvP切替は不可 (上の早期return で逆方向 PvP→PvE も不可。PvE装備と PvP装備の壁を維持)
