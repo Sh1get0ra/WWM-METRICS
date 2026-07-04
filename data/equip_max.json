@@ -1,8 +1,8 @@
 {
   "_schema": "装備Lv Tier別 affix MIN-MAX 値マスタ (2026-06-23 Lv 別精密化)。 wdb snapshot mode 抽出、 {min, max} ペア。 _getAffixMax(sk,lv) 後方互換 (number → object.max)。",
-  "_lastUpdated": "2026-06-24",
-  "_source": "wwmdb.vlt.fyi equip-items snapshot (Lv71/81/86/91/96 各 tier=5 = 金) affixTables mode 採用",
-  "_note": "obfuscated app.js から正規表現抽出。一部 field 名は position 推定 (stat5)、確定 stat は明示 key。tier 96 は大世界Lv15+ 用 (未解放)。 atkTypeDmg (指定武術ダメ) は WWMath で tier 81 のみ採取 (0.03 = 誤値) で 86/91/96 = null だったが、 ゲーム仕様「指定武術ダメ MAX = 全武術ダメ MAX × 2」 に基づき全 tier 上書き (81=0.04 / 86=0.044 / 91=0.052 / 96=0.064)。 / 2026-06-23: {min, max} ペア化、 旧 number は 1:2 比で min 補完 (tier 61 snapshot 未取得分)。 / 2026-06-24: tier 91/96 attrPen min 修正 (Lv91+ で 5path 系貫通廃止→無相貫通一本化、 wdb 280703/270703 真値 6.5-10.8 / 7.8-13 を attrPen に反映、 旧 min 5.4/6.5 は 5path 系 ratio 残骸)。 / 2026-06-24: tier 81/86/91/96 attunement min 修正 (防具 #6 武術固有 affix = wdb 280001-280605 等 35 種共有 max table、 真値 ratio 0.6 で min 0.022/0.026/0.03/0.036 に補正、 旧 min は max×0.5 偽補完残骸)。 / 2026-06-24: atkTypeDmg 倍化ルール撤去 → wdb 真値テーブル参照に切替。 tier 81 = 0.019-0.038 / tier 96 = 0.031-0.062 (旧倍化値 0.02-0.04 / 0.032-0.064 から微調整)。 全武器 (Sword/Spear/Fan/MoBlade/DualBlades/Umb/RopeDart/Gauntlets/Heng) で同 table 参照 (兄貴確認: 完全同一値)。",
+  "_lastUpdated": "2026-07-04",
+  "_source": "wwmdb.vlt.fyi equip-items snapshot (Lv71/81/86/91/96 各 tier=5 = 金) affixTables mode 採用。tier 100/105 = client直接抽出 (装備item master group id経由、affix.json statKey mapping適用)",
+  "_note": "obfuscated app.js から正規表現抽出。一部 field 名は position 推定 (stat5)、確定 stat は明示 key。tier 96 は大世界Lv15+ 用 (未解放)。 atkTypeDmg (指定武術ダメ) は WWMath で tier 81 のみ採取 (0.03 = 誤値) で 86/91/96 = null だったが、 ゲーム仕様「指定武術ダメ MAX = 全武術ダメ MAX × 2」 に基づき全 tier 上書き (81=0.04 / 86=0.044 / 91=0.052 / 96=0.064)。 / 2026-06-23: {min, max} ペア化、 旧 number は 1:2 比で min 補完 (tier 61 snapshot 未取得分)。 / 2026-06-24: tier 91/96 attrPen min 修正 (Lv91+ で 5path 系貫通廃止→無相貫通一本化、 wdb 280703/270703 真値 6.5-10.8 / 7.8-13 を attrPen に反映、 旧 min 5.4/6.5 は 5path 系 ratio 残骸)。 / 2026-06-24: tier 81/86/91/96 attunement min 修正 (防具 #6 武術固有 affix = wdb 280001-280605 等 35 種共有 max table、 真値 ratio 0.6 で min 0.022/0.026/0.03/0.036 に補正、 旧 min は max×0.5 偽補完残骸)。 / 2026-06-24: atkTypeDmg 倍化ルール撤去 → wdb 真値テーブル参照に切替。 tier 81 = 0.019-0.038 / tier 96 = 0.031-0.062 (旧倍化値 0.02-0.04 / 0.032-0.064 から微調整)。 全武器 (Sword/Spear/Fan/MoBlade/DualBlades/Umb/RopeDart/Gauntlets/Heng) で同 table 参照 (兄貴確認: 完全同一値)。 / 2026-07-04: tier 100/105 追加 (先行データ、次パッチ想定、Lv95キャップの現行実機では未使用)。装備item master内のaffix group id (INITIAL/TUNING=100xxx/105xxx prefix、貫通=1907/2007、attunement=1900/2000系列) から直接抽出、全16 key既存Tier71-96の伸び率と整合確認済み。physDmgBoost = atkTypeDmgと常に同値 (既存Tier81-96で実証済みの仕様、Lv100/105も同値を流用)。",
   "tiers": {
     "61": {
       "maxPhys": {
@@ -365,6 +365,138 @@
       "attunement": {
         "min": 0.036,
         "max": 0.06
+      }
+    },
+    "100": {
+      "maxPhys": {
+        "min": 45.3,
+        "max": 90.6
+      },
+      "precision": {
+        "min": 0.047,
+        "max": 0.094
+      },
+      "crit": {
+        "min": 0.052,
+        "max": 0.104
+      },
+      "affinity": {
+        "min": 0.026,
+        "max": 0.052
+      },
+      "stat5": {
+        "min": 28.7,
+        "max": 57.4
+      },
+      "pathSingle": {
+        "min": 25.7,
+        "max": 51.4
+      },
+      "outerPen": {
+        "min": 7.7,
+        "max": 12.8
+      },
+      "attrPen": {
+        "min": 9.1,
+        "max": 15.2
+      },
+      "maxHp": {
+        "min": 1722,
+        "max": 3444
+      },
+      "physDef": {
+        "min": 22.7,
+        "max": 45.4
+      },
+      "physDmgBoost": {
+        "min": 0.037,
+        "max": 0.074
+      },
+      "allWeaponDmg": {
+        "min": 0.018,
+        "max": 0.036
+      },
+      "bossDmg": {
+        "min": 0.019,
+        "max": 0.038
+      },
+      "atkTypeDmg": {
+        "min": 0.037,
+        "max": 0.074
+      },
+      "mysticDmg": {
+        "min": 0.057,
+        "max": 0.114
+      },
+      "attunement": {
+        "min": 0.042,
+        "max": 0.07
+      }
+    },
+    "105": {
+      "maxPhys": {
+        "min": 52.8,
+        "max": 105.6
+      },
+      "precision": {
+        "min": 0.054,
+        "max": 0.108
+      },
+      "crit": {
+        "min": 0.061,
+        "max": 0.122
+      },
+      "affinity": {
+        "min": 0.03,
+        "max": 0.06
+      },
+      "stat5": {
+        "min": 33.4,
+        "max": 66.8
+      },
+      "pathSingle": {
+        "min": 29.9,
+        "max": 59.8
+      },
+      "outerPen": {
+        "min": 8.8,
+        "max": 14.6
+      },
+      "attrPen": {
+        "min": 10.4,
+        "max": 17.4
+      },
+      "maxHp": {
+        "min": 2005,
+        "max": 4010
+      },
+      "physDef": {
+        "min": 26.4,
+        "max": 52.8
+      },
+      "physDmgBoost": {
+        "min": 0.043,
+        "max": 0.086
+      },
+      "allWeaponDmg": {
+        "min": 0.021,
+        "max": 0.042
+      },
+      "bossDmg": {
+        "min": 0.022,
+        "max": 0.044
+      },
+      "atkTypeDmg": {
+        "min": 0.043,
+        "max": 0.086
+      },
+      "mysticDmg": {
+        "min": 0.067,
+        "max": 0.134
+      },
+      "attunement": {
+        "min": 0.048,
+        "max": 0.08
       }
     }
   },

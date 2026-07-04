@@ -1,13 +1,15 @@
 {
   "_schema": "全 Lv × 全 Tier × 全 slot base stat マスタ。 wdb 実値 mode 採用、 算式廃止 ([[equipment-quality-rank-formula]] 紫=round(金×0.9) は ±1 ズレ で wdb と不一致 = 廃止)。",
-  "_source": "wwmdb.vlt.fyi equip-items snapshot 全 Lv × 全 tier (mode 採用で例外品質装備除外)",
-  "_lastUpdated": "2026-06-23",
+  "_source": "wwmdb.vlt.fyi equip-items snapshot (Lv71-96、 mode 採用) + client直接抽出 (Lv71-96 全slot完全一致検証済み、 Lv100/105 = 装備item master group id経由の先行データ)",
+  "_lastUpdated": "2026-07-04",
   "_lvList": [
     71,
     81,
     86,
     91,
-    96
+    96,
+    100,
+    105
   ],
   "_tierList": [
     3,
@@ -101,6 +103,34 @@
             "MIN_W_ATK": 65,
             "MAX_W_ATK": 151
           }
+        },
+        "100": {
+          "3": {
+            "MAX_W_ATK": 140,
+            "MIN_W_ATK": 60
+          },
+          "4": {
+            "MAX_W_ATK": 158,
+            "MIN_W_ATK": 68
+          },
+          "5": {
+            "MAX_W_ATK": 175,
+            "MIN_W_ATK": 75
+          }
+        },
+        "105": {
+          "3": {
+            "MAX_W_ATK": 162,
+            "MIN_W_ATK": 70
+          },
+          "4": {
+            "MAX_W_ATK": 183,
+            "MIN_W_ATK": 79
+          },
+          "5": {
+            "MAX_W_ATK": 203,
+            "MIN_W_ATK": 87
+          }
         }
       }
     },
@@ -179,6 +209,34 @@
           "5": {
             "MIN_W_ATK": 65,
             "MAX_W_ATK": 151
+          }
+        },
+        "100": {
+          "3": {
+            "MAX_W_ATK": 140,
+            "MIN_W_ATK": 60
+          },
+          "4": {
+            "MAX_W_ATK": 158,
+            "MIN_W_ATK": 68
+          },
+          "5": {
+            "MAX_W_ATK": 175,
+            "MIN_W_ATK": 75
+          }
+        },
+        "105": {
+          "3": {
+            "MAX_W_ATK": 162,
+            "MIN_W_ATK": 70
+          },
+          "4": {
+            "MAX_W_ATK": 183,
+            "MIN_W_ATK": 79
+          },
+          "5": {
+            "MAX_W_ATK": 203,
+            "MIN_W_ATK": 87
           }
         }
       }
@@ -259,6 +317,34 @@
             "HP_MAX": 5774,
             "W_DEF": 22
           }
+        },
+        "100": {
+          "3": {
+            "HP_MAX": 5504,
+            "W_DEF": 20
+          },
+          "4": {
+            "HP_MAX": 6192,
+            "W_DEF": 23
+          },
+          "5": {
+            "HP_MAX": 6879,
+            "W_DEF": 25
+          }
+        },
+        "105": {
+          "3": {
+            "HP_MAX": 6580,
+            "W_DEF": 24
+          },
+          "4": {
+            "HP_MAX": 7402,
+            "W_DEF": 27
+          },
+          "5": {
+            "HP_MAX": 8225,
+            "W_DEF": 29
+          }
         }
       }
     },
@@ -337,6 +423,34 @@
           "5": {
             "HP_MAX": 11547,
             "W_DEF": 22
+          }
+        },
+        "100": {
+          "3": {
+            "HP_MAX": 11007,
+            "W_DEF": 20
+          },
+          "4": {
+            "HP_MAX": 12383,
+            "W_DEF": 23
+          },
+          "5": {
+            "HP_MAX": 13758,
+            "W_DEF": 25
+          }
+        },
+        "105": {
+          "3": {
+            "HP_MAX": 13160,
+            "W_DEF": 24
+          },
+          "4": {
+            "HP_MAX": 14804,
+            "W_DEF": 27
+          },
+          "5": {
+            "HP_MAX": 16449,
+            "W_DEF": 29
           }
         }
       }
@@ -417,6 +531,34 @@
             "HP_MAX": 5774,
             "W_DEF": 44
           }
+        },
+        "100": {
+          "3": {
+            "HP_MAX": 5504,
+            "W_DEF": 40
+          },
+          "4": {
+            "HP_MAX": 6192,
+            "W_DEF": 45
+          },
+          "5": {
+            "HP_MAX": 6879,
+            "W_DEF": 50
+          }
+        },
+        "105": {
+          "3": {
+            "HP_MAX": 6580,
+            "W_DEF": 47
+          },
+          "4": {
+            "HP_MAX": 7402,
+            "W_DEF": 53
+          },
+          "5": {
+            "HP_MAX": 8225,
+            "W_DEF": 58
+          }
         }
       }
     },
@@ -496,6 +638,34 @@
             "HP_MAX": 5774,
             "W_DEF": 22
           }
+        },
+        "100": {
+          "3": {
+            "HP_MAX": 5504,
+            "W_DEF": 20
+          },
+          "4": {
+            "HP_MAX": 6192,
+            "W_DEF": 23
+          },
+          "5": {
+            "HP_MAX": 6879,
+            "W_DEF": 25
+          }
+        },
+        "105": {
+          "3": {
+            "HP_MAX": 6580,
+            "W_DEF": 24
+          },
+          "4": {
+            "HP_MAX": 7402,
+            "W_DEF": 27
+          },
+          "5": {
+            "HP_MAX": 8225,
+            "W_DEF": 29
+          }
         }
       }
     },
@@ -558,6 +728,28 @@
           },
           "5": {
             "ARCHER_WEAKPOINT_DAMAGE": 342
+          }
+        },
+        "100": {
+          "3": {
+            "ARCHER_WEAKPOINT_DAMAGE": 308
+          },
+          "4": {
+            "ARCHER_WEAKPOINT_DAMAGE": 346
+          },
+          "5": {
+            "ARCHER_WEAKPOINT_DAMAGE": 386
+          }
+        },
+        "105": {
+          "3": {
+            "ARCHER_WEAKPOINT_DAMAGE": 346
+          },
+          "4": {
+            "ARCHER_WEAKPOINT_DAMAGE": 388
+          },
+          "5": {
+            "ARCHER_WEAKPOINT_DAMAGE": 432
           }
         }
       }
@@ -622,6 +814,28 @@
           "5": {
             "MIN_W_ATK": 86
           }
+        },
+        "100": {
+          "3": {
+            "MIN_W_ATK": 80
+          },
+          "4": {
+            "MIN_W_ATK": 90
+          },
+          "5": {
+            "MIN_W_ATK": 100
+          }
+        },
+        "105": {
+          "3": {
+            "MIN_W_ATK": 93
+          },
+          "4": {
+            "MIN_W_ATK": 105
+          },
+          "5": {
+            "MIN_W_ATK": 116
+          }
         }
       }
     },
@@ -669,7 +883,7 @@
             "MAX_W_ATK": 85
           },
           "4": {
-            "MAX_W_ATK": 106
+            "MAX_W_ATK": 96
           },
           "5": {
             "MAX_W_ATK": 106
@@ -684,6 +898,28 @@
           },
           "5": {
             "MAX_W_ATK": 129
+          }
+        },
+        "100": {
+          "3": {
+            "MAX_W_ATK": 120
+          },
+          "4": {
+            "MAX_W_ATK": 135
+          },
+          "5": {
+            "MAX_W_ATK": 150
+          }
+        },
+        "105": {
+          "3": {
+            "MAX_W_ATK": 139
+          },
+          "4": {
+            "MAX_W_ATK": 157
+          },
+          "5": {
+            "MAX_W_ATK": 174
           }
         }
       }
@@ -748,8 +984,31 @@
           "5": {
             "ARCHER_DAMAGE": 342
           }
+        },
+        "100": {
+          "3": {
+            "ARCHER_DAMAGE": 308
+          },
+          "4": {
+            "ARCHER_DAMAGE": 346
+          },
+          "5": {
+            "ARCHER_DAMAGE": 386
+          }
+        },
+        "105": {
+          "3": {
+            "ARCHER_DAMAGE": 346
+          },
+          "4": {
+            "ARCHER_DAMAGE": 388
+          },
+          "5": {
+            "ARCHER_DAMAGE": 432
+          }
         }
       }
     }
-  }
+  },
+  "_note": "2026-07-04: Lv91佩(slot11) Tier4値を106→96に修正 (既存Tier5値混入バグ、 client直接抽出+兄貴確認「金Tier5=106」で確定)。 Lv100/105追加 (次パッチ想定の先行データ、 現行実機Lv95キャップのため未使用。 slot2副武器はLv100/105とも主武器同値推定を踏襲)。"
 }
