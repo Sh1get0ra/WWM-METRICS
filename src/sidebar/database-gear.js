@@ -125,6 +125,12 @@
     const rankSel = root.querySelector('[data-db-affix-rank]');
     const rowsEl = root.querySelector('[data-db-affix-rows]');
     const rerender = () => { if (rowsEl) rowsEl.innerHTML = _weaponAffixRows(); };
+    // 主武器(1)がDB画面の初期選択スロットのため、_attachAffixControlsと同じ equip_max 遅延読込
+    // fallback が無いと初回表示で範囲列が "-" 固定になる (実機確認済、_attachAffixControls:224-232 と同一事象)
+    const affixNs = window.WWMSidebar.affix;
+    if (affixNs && !affixNs.getCachedEquipMax()) {
+      affixNs.loadEquipMax().then(rerender);
+    }
     if (wtSel) wtSel.addEventListener('change', () => { _weaponType = wtSel.value; rerender(); });
     if (lvSel) lvSel.addEventListener('change', () => { _affixLv = parseInt(lvSel.value, 10); rerender(); });
     if (rankSel) rankSel.addEventListener('change', () => { _affixRank = rankSel.value; rerender(); });
