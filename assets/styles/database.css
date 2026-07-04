@@ -7,6 +7,7 @@
     overflow: hidden;
     background: var(--kami-0);
     flex-direction: column;
+    position: relative;
   }
   .wwm-app[data-mode="database"] .wwm-database {
     display: flex;
