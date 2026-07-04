@@ -478,6 +478,9 @@
     getAffixMinMax: _getAffixMinMax,
     isWeaponDmgMatch: _isWeaponDmgMatch,
     getAffixOptions: _getAffixOptions,
+    selectorAllowedStatKeys: _selectorAllowedStatKeys,
+    affixChanceMap: _affixChanceMap,
+    slotToWdbCategory: _slotToWdbCategory,
     PVP_AFFIX_SENTINEL: _PVP_AFFIX_SENTINEL,
     // 公開 const (sidebar.js 内 直接 lookup 用)
     SLOT6_ARMOR: _SLOT6_ARMOR,
