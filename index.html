@@ -373,6 +373,7 @@
           </div>
         </div>
         <a class="icon-btn kofi-btn" id="kofiBtn" href="https://ko-fi.com/sh1getora" target="_blank" rel="noopener noreferrer" title="開発を応援する (Ko-fi)" data-i18n-title="tipIconKofi" aria-label="開発を応援する (Ko-fi)" data-i18n-aria="tipIconKofi"><svg class="ic" aria-hidden="true"><use href="assets/icons/kofi.svg#kofi"/></svg><span class="sr-only" data-i18n="kofiBtn">Support</span></a>
+        <button class="icon-btn database-btn" id="wwmDatabaseBtn" onclick="WWMSidebar.database.toggle()" title="装備/心法データベース" data-i18n-title="tipIconDatabase"><svg class="ic" aria-hidden="true"><use href="assets/icons/note.svg#note"/></svg><span class="sr-only" data-i18n="databaseBtn">DATABASE</span></button>
       </div>
       </div>
     </div>
@@ -842,6 +843,17 @@
 
     <footer class="wwm-footer"><img class="wwm-footer-logo" src="https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/logo-27b7acd2.png" alt="Where Winds Meet"><span class="wwm-footer-unofficial" data-i18n="footerUnofficial">Unofficial fan-made tool. Not affiliated with NetEase Inc. / Everstone Studio.</span><span class="wwm-footer-copy">© NetEase, Inc. All Rights Reserved. © Everstone Studio.</span><span class="wwm-footer-creator">Created by <strong>SHIGETORA</strong><a class="wwm-footer-x" href="https://x.com/TORA_XIV" target="_blank" rel="noopener noreferrer" title="お問い合わせ (X / Twitter)" data-i18n-title="tipIconContact" aria-label="X (Twitter) で問い合わせ"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></span></footer>
   </main>
+
+  <div class="wwm-database" id="wwmDatabase" hidden>
+    <nav class="wwm-db-tabs" role="tablist" aria-label="database">
+      <button class="wwm-db-tab" role="tab" aria-selected="true" data-db-tab="gear"><span data-i18n="dbTabGear">装備</span></button>
+      <button class="wwm-db-tab" role="tab" aria-selected="false" data-db-tab="xinfa"><span data-i18n="dbTabXinfa">心法</span></button>
+    </nav>
+    <div class="wwm-db-body">
+      <section class="wwm-db-panel active" id="dbGear" role="tabpanel"></section>
+      <section class="wwm-db-panel" id="dbXinfa" role="tabpanel" hidden></section>
+    </div>
+  </div>
 
   <!-- mobile bottom nav (workspace tab の mobile 版 / PC時 hidden / PC tab 同順 = 武備/戦律/履歴/格析)
        .wwm-app 内 grid 配置のため main 終了直後 + div 閉じ前に配置 (2026-06-19) -->
