@@ -8,16 +8,17 @@
 
   // 主武器/副武器は装備欄が2つあるだけで「武器」概念は1つ (兄貴指摘 2026-07-05)。
   // 内部データは主武器(slot '1')を参照 (equip_base_by_lv.json上slot1/slot2は全Lv/Tier完全同値)
+  // 3グループ (武器系/防具系/弓矢系) 構成、兄貴指示2026-07-06で並び替え
   const _DISPLAY_ITEMS = [
-    { key: 'weapon', dataSlot: '1', isWeapon: true },
-    { key: '3', dataSlot: '3' },
-    { key: '4', dataSlot: '4' },
-    { key: '21', dataSlot: '21' },
-    { key: '10', dataSlot: '10' },
-    { key: '11', dataSlot: '11' },
-    { key: '5', dataSlot: '5' },
-    { key: '8', dataSlot: '8' },
-    { key: '9', dataSlot: '9' },
+    { key: 'weapon', dataSlot: '1', isWeapon: true, group: 1 },
+    { key: '10', dataSlot: '10', group: 1 },
+    { key: '11', dataSlot: '11', group: 1 },
+    { key: '3', dataSlot: '3', group: 2 },
+    { key: '4', dataSlot: '4', group: 2 },
+    { key: '5', dataSlot: '5', group: 2 },
+    { key: '8', dataSlot: '8', group: 2 },
+    { key: '21', dataSlot: '21', group: 3 },
+    { key: '9', dataSlot: '9', group: 3 },
   ];
   let _selectedKey = 'weapon';
 
@@ -29,9 +30,12 @@
   }
 
   function _renderSlotList() {
+    let lastGroup = null;
     return _DISPLAY_ITEMS.map(item => {
       const sel = item.key === _selectedKey ? 'true' : 'false';
-      return `<button type="button" class="wwm-db-slot-item" data-db-slot="${_esc(item.key)}" aria-selected="${sel}">${_esc(_displayLabel(item))}</button>`;
+      const divider = (lastGroup !== null && item.group !== lastGroup) ? '<div class="wwm-db-slot-divider" role="separator"></div>' : '';
+      lastGroup = item.group;
+      return `${divider}<button type="button" class="wwm-db-slot-item" data-db-slot="${_esc(item.key)}" aria-selected="${sel}">${_esc(_displayLabel(item))}</button>`;
     }).join('');
   }
 
@@ -85,7 +89,8 @@
   let _ctrlRank = 'gold';
   let _ctrlWeaponType = 'sword';
 
-  function _renderControls(item) {
+  function _renderControls(item, opts) {
+    opts = opts || {};
     const tbl = window.WWM_EQUIP_BASE_BY_LV;
     const lvList = (tbl && tbl._lvList) || [71, 81, 86, 91, 96, 100, 105];
     const lvOpts = lvList.map(lv => `<option value="${lv}" ${lv === _ctrlLv ? 'selected' : ''}>Lv${lv}</option>`).join('');
@@ -94,11 +99,13 @@
       <label class="wwm-db-ctrl-item"><span class="wwm-db-ctrl-label">${_esc((window.T && window.T.dbWeaponType) || '武器種')}</span><select data-db-ctrl-weapontype>${
         Object.keys(_WEAPON_TYPE_TO_WDB_CAT).map(wt => `<option value="${wt}" ${wt === _ctrlWeaponType ? 'selected' : ''}>${_esc(_WEAPON_TYPE_LABEL_JA[wt])}</option>`).join('')
       }</select></label>` : '';
+    // レシピ枠 (弓矢/射玦) は Tier(gold/purple/blue) 概念が無い (rankName が Lv と1:1、兄貴指示2026-07-05)
+    const tierHtml = opts.showTier === false ? '' : `<label class="wwm-db-ctrl-item"><span class="wwm-db-ctrl-label">Tier</span><select data-db-ctrl-rank>${rankOpts}</select></label>`;
     return `
       <div class="wwm-db-controls">
         ${weaponTypeHtml}
         <label class="wwm-db-ctrl-item"><span class="wwm-db-ctrl-label">Lv</span><select data-db-ctrl-lv>${lvOpts}</select></label>
-        <label class="wwm-db-ctrl-item"><span class="wwm-db-ctrl-label">Tier</span><select data-db-ctrl-rank>${rankOpts}</select></label>
+        ${tierHtml}
       </div>
     `;
   }
@@ -251,11 +258,74 @@
     `;
   }
 
-  function _renderRecipeSection() {
+  // 弓矢(slot 21)/射玦(slot 9) のみレシピ枠 (data/gear_recipe.jsonの recipe.slot 値と対応)
+  const _RECIPE_SLOT_TO_TYPE = { '21': 'bow', '9': 'ring' };
+
+  function _curLang() { return (window.currentLang) || 'ja'; }
+
+  // access_no=255 = 「モンスター討伐全般/その他手段」の汎用sentinel (名前なし、data/gear_recipe.json _schema参照)
+  function _materialAccessText(itemId) {
+    const rec = window.WWM_GEAR_RECIPE;
+    const arr = (rec && rec.materialAccess && rec.materialAccess[String(itemId)]) || [];
+    const named = arr.filter(a => a !== 255).map(a => window.WWM_DS.name('material_access', a, _curLang()));
+    const hasOther = arr.includes(255);
+    if (!named.length) return hasOther ? _esc((window.T && window.T.dbRecipeAccessOther) || 'その他の入手方法') : '-';
+    let text = named.join('、');
+    if (hasOther) text += '、' + ((window.T && window.T.dbRecipeAccessOther) || 'その他の入手方法');
+    return _esc(text);
+  }
+
+  function _renderRecipeMaterialsTable(materials) {
+    const rows = materials.map(m => {
+      const name = window.WWM_DS.name('material', m.itemId, _curLang());
+      const desc = window.WWM_DS.name('material_desc', m.itemId, _curLang());
+      return `<tr><td title="${_esc(desc)}">${_esc(name)}</td><td>×${m.qty}</td><td>${_materialAccessText(m.itemId)}</td></tr>`;
+    }).join('');
+    return `
+      <table class="wwm-db-recipe-materials">
+        <thead><tr>
+          <th scope="col">${_esc((window.T && window.T.dbRecipeMaterialCol) || '材料')}</th>
+          <th scope="col">${_esc((window.T && window.T.dbRecipeQtyCol) || '個数')}</th>
+          <th scope="col">${_esc((window.T && window.T.dbRecipeAccessCol) || '獲得方法')}</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  function _renderRecipeItem(recipe) {
+    // outputs(base/bonusT4/bonusT5)確率は全35レシピ共通固定(100%/10%/5%)、UI表示せず(兄貴指示2026-07-05)。
+    // データ自体はgear_recipe.jsonに保持継続
+    const outName = window.WWM_DS.name('gear_recipe_item', recipe.outputItemBase, _curLang());
+    const variantLabel = (outName && outName.indexOf('[gear_recipe_item:') !== 0) ? outName : recipe.variant;
+    return `
+      <div class="wwm-db-recipe-item">
+        <div class="wwm-db-recipe-variant">${_esc(variantLabel)}</div>
+        ${_renderRecipeMaterialsTable(recipe.materials)}
+      </div>
+    `;
+  }
+
+  // 共通 Lv セレクタ(_ctrlLv)で絞り込み表示 (兄貴指示2026-07-05「これもレベル選択式にする」)。
+  // gear_recipe.json が Lv71/81/86/91/96/100/105 の全7Lv分そろった (Homebound/Azurecloud追加確定) ため、
+  // 他セクションと同じ _ctrlLv 共有で欠番なく成立する。
+  function _renderRecipeSection(dataSlot) {
+    const title = `<h3 class="wwm-db-section-title">${_esc((window.T && window.T.dbRecipeTitle) || '製作レシピ')}</h3>`;
+    const wantType = _RECIPE_SLOT_TO_TYPE[dataSlot];
+    const rec = window.WWM_GEAR_RECIPE;
+    const recipes = wantType ? (rec && rec.recipes || []).filter(r => r.slot === wantType && r.lv === _ctrlLv) : [];
+    if (!recipes.length) {
+      return `<section class="wwm-db-section">${title}<p class="wwm-db-empty">${_esc((window.T && window.T.dbRecipeComingSoon) || '近日対応予定')}</p></section>`;
+    }
+    // rankName見出しは削除 (Lvは上のLVセレクタと重複、rankNameはカードタイトル= gear_recipe_item 正式名に
+    // 既に日本語で埋め込み済み「東望の弓・剛腕」等、兄貴指摘2026-07-05で二重表示と判明)
+    const itemsHtml = recipes.map(_renderRecipeItem).join('');
     return `
       <section class="wwm-db-section">
-        <h3 class="wwm-db-section-title">${_esc((window.T && window.T.dbRecipeTitle) || '製作レシピ')}</h3>
-        <p class="wwm-db-empty">${_esc((window.T && window.T.dbRecipeComingSoon) || '近日対応予定')}</p>
+        ${title}
+        <div class="wwm-db-recipe-rank">
+          ${itemsHtml}
+        </div>
       </section>
     `;
   }
@@ -266,7 +336,11 @@
     const bodyEl = root.querySelector('[data-db-gear-detail-body]');
     if (!bodyEl) return;
     if (_RECIPE_SLOTS.has(item.dataSlot)) {
-      bodyEl.innerHTML = _renderRecipeSection();
+      bodyEl.innerHTML = `
+        ${_renderControls(item, { showTier: false })}
+        ${_renderRecipeSection(item.dataSlot)}
+      `;
+      _attachControls(item);
       return;
     }
     bodyEl.innerHTML = `

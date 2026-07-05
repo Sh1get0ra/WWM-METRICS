@@ -142,6 +142,11 @@
     border-left-color: var(--vermilion-bright);
     color: var(--sumi-fg);
   }
+  .wwm-db-slot-divider {
+    height: 1px;
+    margin: 6px 12px;
+    background: color-mix(in oklab, var(--sumi-fg) 20%, transparent);
+  }
   .wwm-db-gear-detail {
     padding: 20px 24px;
     overflow-y: auto;
@@ -323,6 +328,64 @@
     flex: 0 0 auto;
     font-weight: 700;
     color: var(--vermilion);
+  }
+}
+
+/* ── レシピ (弓矢/射玦、rankName別グループ+材料表、2026-07-05 mining成果反映) ── */
+@layer components {
+  .wwm-db-recipe-rank {
+    margin-bottom: 26px;
+  }
+  .wwm-db-recipe-item {
+    background: color-mix(in oklab, var(--kami-fg) 5%, transparent);
+    border: 1px solid color-mix(in oklab, var(--kami-fg) 20%, transparent);
+    padding: 12px 14px;
+    margin-bottom: 12px;
+  }
+  .wwm-db-recipe-variant {
+    font-family: var(--f-display-title);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--kami-fg);
+    margin-bottom: 10px;
+  }
+  .wwm-db-recipe-materials {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .wwm-db-recipe-materials th:nth-child(1), .wwm-db-recipe-materials td:nth-child(1) { width: 32%; }
+  .wwm-db-recipe-materials th:nth-child(2), .wwm-db-recipe-materials td:nth-child(2) { width: 14%; }
+  .wwm-db-recipe-materials th:nth-child(3), .wwm-db-recipe-materials td:nth-child(3) { width: 54%; }
+  .wwm-db-recipe-materials th,
+  .wwm-db-recipe-materials td {
+    text-align: left;
+    padding: 6px 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--kami-fg);
+  }
+  .wwm-db-recipe-materials thead th {
+    font-family: var(--f-display);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--kami-fg);
+    font-weight: 600;
+    border-bottom: 1px solid color-mix(in oklab, var(--kami-fg) 25%, transparent);
+  }
+  .wwm-db-recipe-materials tbody td {
+    border-bottom: 1px solid color-mix(in oklab, var(--kami-fg) 10%, transparent);
+  }
+  .wwm-db-recipe-materials td:nth-child(2) {
+    font-family: var(--f-latin);
+  }
+  /* 獲得方法 = 差別化情報 (wwmdb未対応)、省略させず全件折返し表示 */
+  .wwm-db-recipe-materials td:nth-child(3) {
+    white-space: normal;
+    word-break: break-word;
   }
 }
 

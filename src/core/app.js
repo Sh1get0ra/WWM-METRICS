@@ -105,6 +105,11 @@ function setLang(lang) {
   if (window.WWMSidebar?.render && !WWMState.roleInfo) {
     try { window.WWMSidebar.render(null); } catch(_) {}
   }
+  // DB画面(装備タブ)表示中は言語切替が innerHTML 動的生成部分(材料名/獲得方法/variant名等)に
+  // 伝わらないため再描画必須 (兄貴指摘2026-07-06)
+  if (window.WWMSidebar?.database?.isOpen?.() && window.WWMSidebar?.databaseGear?.render) {
+    try { window.WWMSidebar.databaseGear.render(); } catch(_) {}
+  }
   // 楷書 SVG 再適用: 上の data-i18n 書換が SVG を text に戻すため必ず最後 (ja のみ SVG 化)
   if (window.WWMKaisho) window.WWMKaisho.apply();
 }

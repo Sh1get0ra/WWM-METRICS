@@ -1,0 +1,1319 @@
+{
+  "_schema": "弓/射玦 製作レシピ master。材料/生成物のitem_idは game.json material カテゴリ(名前)/material_desc(説明文)から WWM_DS.name() 経由で引く。materialAccessはitem_id→獲得方法access_no配列、名前はgame.json material_accessカテゴリから引く(255=モンスター討伐全般/その他手段のsentinel、名前なし)。",
+  "_lastUpdated": "2026-07-05",
+  "_source": "client mining (data2 archive内クラフトレシピ生record、材料block構造パターン走査。獲得場所はdata8内stuff_accessテーブル、off-by-one補正込み)。2026-07-05追加分: Lv100(Homebound/帰雁)+Lv105(Azurecloud/青雲)を出力id連番(1101700番台/1101800番台)+tier連番field(fid0x0e=11/12、既知81→7,86→8,91→9,96→10と等差+1で確定(71は素材重複によりfield値未直接確認だが等差から6と推定))から発見・追加。材料544002(Azurecloud Precision)/542076(Azurecloud ring)の2件はclient archive内にitem masterレコード発見できず未解決、name()呼出は[material:id]フォールバック表示",
+  "recipes": [
+    {
+      "rankName": "Bloodlinked",
+      "lv": 71,
+      "slot": "bow",
+      "variant": "Divine",
+      "outputItemBase": 1101209,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542016,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101209,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Bloodlinked",
+      "lv": 71,
+      "slot": "bow",
+      "variant": "Longshot",
+      "outputItemBase": 1101208,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542003,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101208,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Bloodlinked",
+      "lv": 71,
+      "slot": "bow",
+      "variant": "Precision",
+      "outputItemBase": 1101210,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542025,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101210,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Bloodlinked",
+      "lv": 71,
+      "slot": "bow",
+      "variant": "Rapidfire",
+      "outputItemBase": 1101211,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542004,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101211,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Bloodlinked",
+      "lv": 71,
+      "slot": "ring",
+      "variant": "Thumb Ring",
+      "outputItemBase": 1101207,
+      "materials": [
+        {
+          "itemId": 542007,
+          "qty": 10
+        },
+        {
+          "itemId": 542020,
+          "qty": 10
+        },
+        {
+          "itemId": 540010,
+          "qty": 5
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101207,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Evercloud",
+      "lv": 81,
+      "slot": "bow",
+      "variant": "Divine",
+      "outputItemBase": 1101309,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542016,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101309,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Evercloud",
+      "lv": 81,
+      "slot": "bow",
+      "variant": "Longshot",
+      "outputItemBase": 1101308,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542003,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101308,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Evercloud",
+      "lv": 81,
+      "slot": "bow",
+      "variant": "Precision",
+      "outputItemBase": 1101310,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542025,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101310,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Evercloud",
+      "lv": 81,
+      "slot": "bow",
+      "variant": "Rapidfire",
+      "outputItemBase": 1101311,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542004,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101311,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Evercloud",
+      "lv": 81,
+      "slot": "ring",
+      "variant": "Thumb Ring",
+      "outputItemBase": 1101307,
+      "materials": [
+        {
+          "itemId": 542007,
+          "qty": 10
+        },
+        {
+          "itemId": 542020,
+          "qty": 10
+        },
+        {
+          "itemId": 540010,
+          "qty": 5
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101307,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Sieger",
+      "lv": 86,
+      "slot": "bow",
+      "variant": "Divine",
+      "outputItemBase": 1101409,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542051,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101409,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Sieger",
+      "lv": 86,
+      "slot": "bow",
+      "variant": "Longshot",
+      "outputItemBase": 1101408,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542050,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101408,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Sieger",
+      "lv": 86,
+      "slot": "bow",
+      "variant": "Precision",
+      "outputItemBase": 1101410,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542052,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101410,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Sieger",
+      "lv": 86,
+      "slot": "bow",
+      "variant": "Rapidfire",
+      "outputItemBase": 1101411,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542054,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101411,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Sieger",
+      "lv": 86,
+      "slot": "ring",
+      "variant": "Thumb Ring",
+      "outputItemBase": 1101407,
+      "materials": [
+        {
+          "itemId": 542006,
+          "qty": 10
+        },
+        {
+          "itemId": 542060,
+          "qty": 10
+        },
+        {
+          "itemId": 540010,
+          "qty": 5
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101407,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Eastgaze",
+      "lv": 91,
+      "slot": "bow",
+      "variant": "Divine",
+      "outputItemBase": 1101509,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542053,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101509,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Eastgaze",
+      "lv": 91,
+      "slot": "bow",
+      "variant": "Longshot",
+      "outputItemBase": 1101508,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542059,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101508,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Eastgaze",
+      "lv": 91,
+      "slot": "bow",
+      "variant": "Precision",
+      "outputItemBase": 1101510,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542055,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101510,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Eastgaze",
+      "lv": 91,
+      "slot": "bow",
+      "variant": "Rapidfire",
+      "outputItemBase": 1101511,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542062,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101511,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Eastgaze",
+      "lv": 91,
+      "slot": "ring",
+      "variant": "Thumb Ring",
+      "outputItemBase": 1101507,
+      "materials": [
+        {
+          "itemId": 542066,
+          "qty": 10
+        },
+        {
+          "itemId": 542022,
+          "qty": 10
+        },
+        {
+          "itemId": 540010,
+          "qty": 5
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101507,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Dragonshadow",
+      "lv": 96,
+      "slot": "bow",
+      "variant": "Divine",
+      "outputItemBase": 1101609,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542078,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101609,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Dragonshadow",
+      "lv": 96,
+      "slot": "bow",
+      "variant": "Longshot",
+      "outputItemBase": 1101608,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542077,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101608,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Dragonshadow",
+      "lv": 96,
+      "slot": "bow",
+      "variant": "Precision",
+      "outputItemBase": 1101610,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542084,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101610,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Dragonshadow",
+      "lv": 96,
+      "slot": "bow",
+      "variant": "Rapidfire",
+      "outputItemBase": 1101611,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542090,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101611,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Dragonshadow",
+      "lv": 96,
+      "slot": "ring",
+      "variant": "Thumb Ring",
+      "outputItemBase": 1101607,
+      "materials": [
+        {
+          "itemId": 542081,
+          "qty": 10
+        },
+        {
+          "itemId": 542064,
+          "qty": 10
+        },
+        {
+          "itemId": 540010,
+          "qty": 5
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101607,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Homebound",
+      "lv": 100,
+      "slot": "bow",
+      "variant": "Divine",
+      "outputItemBase": 1101709,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542099,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101709,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Homebound",
+      "lv": 100,
+      "slot": "bow",
+      "variant": "Longshot",
+      "outputItemBase": 1101708,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542097,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101708,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Homebound",
+      "lv": 100,
+      "slot": "bow",
+      "variant": "Precision",
+      "outputItemBase": 1101710,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542067,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101710,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Homebound",
+      "lv": 100,
+      "slot": "bow",
+      "variant": "Rapidfire",
+      "outputItemBase": 1101711,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542061,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101711,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Homebound",
+      "lv": 100,
+      "slot": "ring",
+      "variant": "Thumb Ring",
+      "outputItemBase": 1101707,
+      "materials": [
+        {
+          "itemId": 542098,
+          "qty": 10
+        },
+        {
+          "itemId": 542064,
+          "qty": 10
+        },
+        {
+          "itemId": 540010,
+          "qty": 5
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101707,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Azurecloud",
+      "lv": 105,
+      "slot": "bow",
+      "variant": "Divine",
+      "outputItemBase": 1101809,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542065,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101809,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Azurecloud",
+      "lv": 105,
+      "slot": "bow",
+      "variant": "Longshot",
+      "outputItemBase": 1101808,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542078,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101808,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Azurecloud",
+      "lv": 105,
+      "slot": "bow",
+      "variant": "Precision",
+      "outputItemBase": 1101810,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 544002,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101810,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Azurecloud",
+      "lv": 105,
+      "slot": "bow",
+      "variant": "Rapidfire",
+      "outputItemBase": 1101811,
+      "materials": [
+        {
+          "itemId": 540011,
+          "qty": 10
+        },
+        {
+          "itemId": 542025,
+          "qty": 10
+        },
+        {
+          "itemId": 2200015,
+          "qty": 1
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101811,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    },
+    {
+      "rankName": "Azurecloud",
+      "lv": 105,
+      "slot": "ring",
+      "variant": "Thumb Ring",
+      "outputItemBase": 1101807,
+      "materials": [
+        {
+          "itemId": 542055,
+          "qty": 10
+        },
+        {
+          "itemId": 542076,
+          "qty": 10
+        },
+        {
+          "itemId": 540010,
+          "qty": 5
+        }
+      ],
+      "outputs": {
+        "base": {
+          "itemId": 1101807,
+          "chance": 1
+        },
+        "bonusT4": {
+          "chance": 0.1
+        },
+        "bonusT5": {
+          "chance": 0.05
+        }
+      }
+    }
+  ],
+  "materialAccess": {
+    "540010": [
+      460,
+      461,
+      462,
+      463,
+      464,
+      471,
+      255
+    ],
+    "540011": [
+      830,
+      831,
+      832,
+      836,
+      839,
+      841,
+      847,
+      850,
+      853,
+      255
+    ],
+    "542003": [
+      825,
+      255
+    ],
+    "542004": [
+      828,
+      255
+    ],
+    "542006": [
+      860,
+      255
+    ],
+    "542007": [
+      859,
+      255
+    ],
+    "542016": [
+      1352,
+      255
+    ],
+    "542020": [
+      1354,
+      255
+    ],
+    "542022": [
+      468,
+      255
+    ],
+    "542025": [
+      827,
+      255
+    ],
+    "542050": [
+      1497,
+      255
+    ],
+    "542051": [
+      1498,
+      255
+    ],
+    "542052": [
+      1499,
+      255
+    ],
+    "542053": [
+      1500,
+      255
+    ],
+    "542054": [
+      1501,
+      255
+    ],
+    "542055": [
+      1502,
+      255
+    ],
+    "542059": [
+      1506,
+      255
+    ],
+    "542060": [
+      1507,
+      255
+    ],
+    "542061": [
+      1580,
+      255
+    ],
+    "542062": [
+      1574,
+      255
+    ],
+    "542064": [
+      1798,
+      255
+    ],
+    "542065": [
+      1575,
+      1579,
+      255
+    ],
+    "542066": [
+      1576,
+      255
+    ],
+    "542067": [
+      1577,
+      255
+    ],
+    "542076": [
+      1821,
+      255
+    ],
+    "542077": [
+      1822,
+      255
+    ],
+    "542078": [
+      1823,
+      255
+    ],
+    "542081": [
+      1826,
+      255
+    ],
+    "542084": [
+      1829,
+      255
+    ],
+    "542090": [
+      1831,
+      255
+    ],
+    "542097": [
+      2045,
+      255
+    ],
+    "542098": [
+      2046,
+      255
+    ],
+    "542099": [
+      2047,
+      255
+    ],
+    "544002": [
+      2189,
+      255
+    ],
+    "2200015": [
+      882,
+      456,
+      883
+    ]
+  }
+}

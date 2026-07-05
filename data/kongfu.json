@@ -5,7 +5,7 @@
       "minBellstrikeAdd": 80,
       "maxBellstrikeAdd": 160
     },
-    "description": "九変の剣 (片手剣、Strategic Sword)。鋼鳴攻撃力 +80~160 想定 + 力依存 共鳴率 (cap 3.37%) + max鋼鳴 依存 鋼鳴貫通 (cap 18.0)。WW Math 由来 + 推定。",
+    "description": "九変の剣 (片手剣、Strategic Sword)。鋼鳴攻撃力 +80~160 想定 + 力依存 共鳴率 (cap 3.37%) + max鋼鳴 依存 鋼鳴貫通 (cap 18.0、閾値536)。2026-07-06 兄貴実機SS(無銘の剣10102で確認、appliesTo同一のため10101も適用)によりthresholdValue 563→536 訂正。",
     "path": "bellstrike",
     "derived": [
       {
@@ -18,7 +18,7 @@
       },
       {
         "from": "maxBellstrike",
-        "thresholdValue": 563,
+        "thresholdValue": 536,
         "maxBoost": 18,
         "appliesTo": "bellstrikePen",
         "formula": "linear_capped",
@@ -32,7 +32,7 @@
       "minBellstrikeAdd": 80,
       "maxBellstrikeAdd": 160
     },
-    "description": "無銘の剣 (片手剣、Nameless Sword)。鋼鳴攻撃力 +80~160 想定 + 力依存 最小外功 (cap 59.4) + max鋼鳴 依存 鋼鳴貫通 (cap 18.0)。WW Math 由来 + 推定。",
+    "description": "無銘の剣 (片手剣、Nameless Sword)。鋼鳴攻撃力 +80~160 想定 + 力依存 最小外功 (cap 59.4) + max鋼鳴 依存 鋼鳴貫通 (cap 18.0、閾値536)。2026-07-06 兄貴実機SS(Lv95/95)で「鋼鳴ステータス上昇」ツールチップに閾値536と明記確認、thresholdValue 563→536 訂正。",
     "path": "bellstrike",
     "derived": [
       {
@@ -45,7 +45,7 @@
       },
       {
         "from": "maxBellstrike",
-        "thresholdValue": 563,
+        "thresholdValue": 536,
         "maxBoost": 18,
         "appliesTo": "bellstrikePen",
         "formula": "linear_capped",

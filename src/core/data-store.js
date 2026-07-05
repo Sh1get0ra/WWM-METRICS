@@ -34,7 +34,8 @@
     WWM_QISHU_ICONS:      'qishu_icons',
     WWM_QISHU_CATEGORIES: 'qishu_categories',
     WWM_AVATAR_ICONS:     'avatar_icons',
-    WWM_GEAR_SLOT_ICONS:  'gear_slot_icons'
+    WWM_GEAR_SLOT_ICONS:  'gear_slot_icons',
+    WWM_GEAR_RECIPE:      'gear_recipe'
   };
   let currentLang = 'ja';
   const data = Object.create(null); // { kongfu: {...}, xinfa: {...}, ... } (i18n)
