@@ -5,7 +5,7 @@
     display: none;
     min-height: 0;
     overflow: hidden;
-    background: var(--kami-0);
+    background: transparent; /* 公式BG(.wwm-app::before)を透過で見せる、header/railと同じ扱い */
     flex-direction: column;
     position: relative;
   }
@@ -17,24 +17,61 @@
   .wwm-app[data-mode="database"] .hero {
     display: none;
   }
+  /* rail掛軸 (.wwm-rail-in::beforeと同一手法) を .wwm-db-gear-list でなく .wwm-database 全体に敷く
+     (元は.wwm-db-gear-list限定だったため、footer行の左側だけ掛軸が途切れて見えた。兄貴指摘2026-07-05
+     「wwm-db-gear-listが途中で途切れてて不自然」→ tabs行〜footer行まで一貫させるため.wwm-databaseへ移動) */
+  html:not(.wwm-view-sidebar) .wwm-database::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0; left: 0;
+    width: 100vh;
+    height: var(--rail-w);
+    transform-origin: 0 0;
+    transform: translateX(var(--rail-w)) rotate(90deg);
+    background:
+      linear-gradient(90deg, rgba(20,16,9,0.35), rgba(11,9,8,0.70)),
+      url("https://www.wherewindsmeetgame.com/m/zt/20251121182818/img/qs-bg-32d6898d.png") center / cover no-repeat;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 50px, #000 calc(100% - 180px), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 50px, #000 calc(100% - 180px), transparent);
+    pointer-events: none;
+  }
+  /* footer = 計算機本体(.wwm-ws-main .wwm-footer)と同じ紙背景意匠 (兄貴指示 2026-07-05 DB画面にfooter表示)。
+     .wwm-database は list+detail 全幅なので、rail幅ぶんmargin-leftで避けてdetail位置に揃える
+     (兄貴指摘「左パネルまで貫通してる」) */
+  .wwm-database .wwm-footer {
+    flex: 0 0 auto;
+    margin-left: var(--rail-w);
+    border-left: 1px solid var(--gold-deep);
+    background: var(--kami-0);
+    color: var(--kami-fg);
+  }
+  .wwm-database .wwm-footer .wwm-footer-unofficial,
+  .wwm-database .wwm-footer .wwm-footer-copy,
+  .wwm-database .wwm-footer .wwm-footer-creator {
+    opacity: 1;
+  }
   .wwm-db-tabs {
     display: flex; gap: 8px; padding: 12px 16px;
-    border-bottom: 1px solid var(--gold-deep);
     flex: 0 0 auto;
+    background: transparent; /* 公式BG(.wwm-app::before)を透過で見せる、header/railと同じ扱い */
   }
   .wwm-db-tab {
     font-family: var(--f-display-title);
-    font-size: 18px;
+    font-size: 16px;
     padding: 6px 16px;
     background: transparent;
     border: 1px solid transparent;
-    border-radius: 4px;
-    color: var(--kami-fg);
+    border-radius: 2px;
+    color: var(--sumi-fg-dim);
     cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .wwm-db-tab:hover {
+    color: var(--sumi-fg);
   }
   .wwm-db-tab[aria-selected="true"] {
-    background: var(--sumi-1);
-    border-color: var(--gold-deep);
+    border-color: var(--gold-bright);
     color: var(--sumi-fg);
   }
   .wwm-db-body {
@@ -51,78 +88,241 @@
   }
 }
 
+/* ── 墨L字: 左(スロット一覧)=墨、右(詳細)=紙。計算機本体(header=墨/rail=墨/main=紙)と
+   同じ骨格をDB画面内で再現 (兄貴指示 2026-07-05「紙一辺倒が気になる」) ── */
 @layer components {
   .wwm-db-gear {
     display: grid;
-    grid-template-columns: 220px 1fr;
+    grid-template-columns: var(--rail-w) 1fr;
     gap: 0;
     height: 100%;
     width: 100%;
   }
+  /* railと同じ2層構造 (.wwm-ws-rail固定+overflow:clip / .wwm-rail-in掛軸containing block /
+     内側.wwm-sidebar-testのみscroll、兄貴指摘2026-07-05「スクロール時境目が気になる」—
+     掛軸::beforeを持つ要素自体がscrollすると画像がコンテンツと一緒に動いて不自然になるため、
+     掛軸は固定層に置き、scrollは内側の別要素だけに担わせる) */
   .wwm-db-gear-list {
+    position: relative;
+    overflow: hidden; /* rail同様 = 掛軸のcontaining block、scrollしない */
+    background: transparent; /* 公式BG(.wwm-app::before)を透過で見せる、header/railと同じ扱い */
+  }
+  .wwm-db-gear-list-inner {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    padding: 12px;
-    border-right: 1px solid var(--gold-deep);
+    gap: 2px;
+    padding: 16px 10px;
+    height: 100%;
     overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-deep) transparent;
   }
+  .wwm-db-gear-list-inner::-webkit-scrollbar { width: 6px; }
+  .wwm-db-gear-list-inner::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
   .wwm-db-slot-item {
     text-align: left;
-    padding: 8px 12px;
+    padding: 9px 12px;
     background: transparent;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    color: var(--kami-fg);
+    border: none;
+    border-left: 2px solid transparent;
+    border-radius: 0;
+    color: var(--sumi-fg-dim);
     cursor: pointer;
-    font-size: 15px;
+    font-size: 14px;
+    font-family: var(--f-display-title);
+    letter-spacing: 0.02em;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+  .wwm-db-slot-item:hover {
+    color: var(--sumi-fg);
+    background: color-mix(in oklab, var(--sumi-fg) 5%, transparent);
   }
   .wwm-db-slot-item[aria-selected="true"] {
-    background: var(--sumi-1);
-    border-color: var(--gold-deep);
+    background: color-mix(in oklab, var(--vermilion) 14%, transparent);
+    border-left-color: var(--vermilion-bright);
     color: var(--sumi-fg);
   }
   .wwm-db-gear-detail {
-    padding: 16px;
+    padding: 20px 24px;
     overflow-y: auto;
+    background: var(--kami-0);
+    border-left: 1px solid var(--gold-deep); /* 金罫=紙側の縁取り(既存.wwm-ws-paper-bgと同方針)。
+      墨側(掛軸画像)は境界を持たせず地続きのまま、紙側の罫線でrail/detail境界を明確化
+      (兄貴指摘2026-07-05「境界が1pxずれて見える」— 実測は完全一致だったが掛軸画像コンテンツの
+      濃淡で境界が視覚的にジグザグして見えていた、金罫を足して境界を明確にする対処) */
+    color: var(--kami-fg);
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-deep) transparent;
+    scrollbar-gutter: stable;
+  }
+  .wwm-db-gear-detail::-webkit-scrollbar { width: 6px; }
+  .wwm-db-gear-detail::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
+  /* 「一覧へ戻る」はモバイル専用UI (PCは左右split常時表示のため不要、600px以下のみ表示) */
+  .wwm-db-gear-back {
+    display: none;
   }
 }
 
+/* ── 共通セレクタ (武器種/Lv/Tier) ── */
 @layer components {
-  .wwm-db-base-table {
+  .wwm-db-controls {
+    display: flex;
+    gap: 20px;
+    align-items: baseline;
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid color-mix(in oklab, var(--kami-fg) 22%, transparent);
+  }
+  .wwm-db-ctrl-item {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .wwm-db-ctrl-label {
+    font-family: var(--f-display);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--kami-fg);
+    text-transform: uppercase;
+  }
+  .wwm-db-ctrl-item select {
+    font-family: var(--f-display);
+    font-size: 13px;
+    color: var(--gold-paper);
+    background: color-mix(in oklab, var(--kami-fg) 5%, transparent);
+    border: 1px solid color-mix(in oklab, var(--kami-fg) 28%, transparent);
+    border-radius: 2px;
+    padding: 3px 6px;
+    cursor: pointer;
+  }
+  .wwm-db-ctrl-item select:focus-visible {
+    outline: none;
+    box-shadow: var(--c-focus-ring-shadow);
+    border-color: var(--vermilion-bright);
+  }
+}
+
+/* ── セクション共通 (基本ステ/調律1/調律2-5/定音/レシピ) ── */
+@layer components {
+  .wwm-db-section {
+    margin-bottom: 22px;
+  }
+  .wwm-db-section-title {
+    display: inline-flex; align-items: baseline;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--kami-fg);
+    margin: 0 0 10px;
+    padding: 0;
+  }
+  .wwm-db-empty {
+    font-size: 13px;
+    color: var(--kami-fg-dim);
+    padding-left: 8px;
+  }
+}
+
+/* ── 基本ステータス (grid 2列カード、1c-light案採用 2026-07-05) ── */
+@layer components {
+  .wwm-db-basestat {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .wwm-db-basestat-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    background: color-mix(in oklab, var(--kami-fg) 5%, transparent);
+    border: 1px solid color-mix(in oklab, var(--kami-fg) 20%, transparent);
+    padding: 14px 16px;
+  }
+  .wwm-db-basestat-label {
+    font-size: 13px;
+    color: var(--kami-fg);
+    min-width: 0;
+  }
+  .wwm-db-basestat-value {
+    font-family: var(--f-latin);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--kami-fg);
+  }
+}
+
+/* ── 調律/定音 テーブル (墨線区切り、面でなく線。DESIGN.md方針) ── */
+@layer components {
+  .wwm-db-table {
+    width: 100%;
+    table-layout: fixed; /* 効果/範囲列の幅・開始位置をsection間(調律1/2-5枚目/定音)で揃える */
     border-collapse: collapse;
-    margin-bottom: 20px;
     font-size: 13px;
   }
-  .wwm-db-base-table caption {
+  .wwm-db-table th:nth-child(1), .wwm-db-table td:nth-child(1) { width: 55%; }
+  .wwm-db-table th:nth-child(2), .wwm-db-table td:nth-child(2) { width: 25%; }
+  .wwm-db-table th,
+  .wwm-db-table td {
     text-align: left;
-    font-weight: 700;
-    margin-bottom: 8px;
+    padding: 7px 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-bottom: none;
     color: var(--kami-fg);
   }
-  .wwm-db-base-table th, .wwm-db-base-table td {
-    border: 1px solid var(--gold-deep);
-    padding: 4px 8px;
+  .wwm-db-table thead th {
+    font-family: var(--f-display);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--kami-fg);
+    font-weight: 600;
+    border-bottom: 1px solid color-mix(in oklab, var(--kami-fg) 25%, transparent);
+  }
+  .wwm-db-table tbody tr td {
+    background: color-mix(in oklab, var(--kami-fg) 5%, transparent);
+  }
+  .wwm-db-table tbody tr:hover td {
+    background: color-mix(in oklab, var(--vermilion) 8%, transparent);
+  }
+  /* row間の隙間。tr自体でなくtdに直接指定
+     (tr指定はborder-collapse:collapse下のconflict resolutionで「幅が広い方が勝つ」ルールにより
+     td側のborder-bottom:noneより優先されてしまい、意図せず線が生き残ってhover時にだけ
+     背景色差で可視化される干渉バグになっていた。2026-07-05発覚) */
+  .wwm-db-table tbody td {
+    border-bottom: 2px solid var(--kami-0);
+  }
+  .wwm-db-table td:nth-child(2) {
+    font-family: var(--f-latin);
     color: var(--kami-fg);
   }
-  .wwm-db-base-table th[scope="row"] {
-    font-weight: 700;
+  /* 出現率セル: バー表示 (1枚目/2〜5枚目/定音 全部朱色統一) */
+  .wwm-db-table td.wwm-db-pct-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     white-space: nowrap;
   }
-}
-
-@layer components {
-  .wwm-db-affix-controls {
-    display: flex; gap: 16px; margin: 8px 0 12px;
+  .wwm-db-pct-bar-wrap {
+    display: block;
+    flex: 1 1 auto;
+    height: 7px;
+    background: color-mix(in oklab, var(--kami-fg) 14%, transparent);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
   }
-  .wwm-db-affix-table {
-    border-collapse: collapse;
-    font-size: 13px;
+  .wwm-db-pct-bar {
+    position: absolute;
+    left: 0; top: 0; height: 100%;
+    background: linear-gradient(90deg, var(--vermilion), var(--vermilion-bright));
   }
-  .wwm-db-affix-table th, .wwm-db-affix-table td {
-    border: 1px solid var(--gold-deep);
-    padding: 4px 8px;
-    color: var(--kami-fg);
+  .wwm-db-pct-text {
+    flex: 0 0 auto;
+    font-weight: 700;
+    color: var(--vermilion);
   }
 }
 
@@ -136,11 +336,19 @@
   .wwm-db-gear:not([data-mobile-view="detail"]) .wwm-db-gear-detail {
     display: none;
   }
-  .wwm-db-gear-back {
-    display: none;
-  }
   .wwm-db-gear[data-mobile-view="detail"] .wwm-db-gear-back {
-    display: block;
+    display: inline-block;
     margin-bottom: 12px;
+    font-size: 13px;
+    color: var(--kami-fg);
+    background: transparent;
+    border: 1px solid color-mix(in oklab, var(--kami-fg) 28%, transparent);
+    border-radius: 2px;
+    padding: 5px 12px;
+    cursor: pointer;
+  }
+  .wwm-db-controls {
+    flex-wrap: wrap;
+    gap: 14px;
   }
 }

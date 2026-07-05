@@ -5,8 +5,24 @@
      styles.css から切出。 cascade: tokens → animations → base → styles → modals → responsive → dark → light
    ╚═══════════════════════════════════════════════════════════════════╝ */
 
-/* ── Global reset + typography (元 styles.css L255-267、 Step 1 残置分) ── */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── Global reset + typography (元 styles.css L255-267、 Step 1 残置分) ──
+   全称セレクタ`*`でのmargin:0リセットは 2026-07-05 撤去 (兄貴実機発見: DB画面テーブルhover時に
+   `*`によるmarginリセットが原因で境界線が描画/消滅を繰り返す視覚バグが発生)。table/tr/td/th等は
+   対象外のまま残し、UA既定marginを持つタグ (h1-h6/p/ul/ol/li/dl/dd/dt/blockquote/figure/pre) だけ
+   明示的にmargin:0を再指定 (=既存の見た目を維持しつつ`*`の適用は撤去)。
+   ただし #wwmApp (計算機本体、header/hero/rail/main) スコープ内は margin:0 固定を revert
+   (下記ルール参照) — 実機検証で #wwmApp 配下のmargin:0固定が視覚バグの再発条件と確定
+   (根本メカニズム未解明、band単体/rail単体/rail+mainでは非再現、band+railまたはband+mainで
+   解消確認、#wwmApp全体revertで確実に解消) ── */
+* { box-sizing: border-box; padding: 0; }
+h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dd, dt, blockquote, figure, fieldset, legend, pre {
+  margin: 0;
+}
+#wwmApp h1, #wwmApp h2, #wwmApp h3, #wwmApp h4, #wwmApp h5, #wwmApp h6,
+#wwmApp p, #wwmApp ul, #wwmApp ol, #wwmApp li, #wwmApp dl, #wwmApp dd, #wwmApp dt,
+#wwmApp blockquote, #wwmApp figure, #wwmApp fieldset, #wwmApp legend, #wwmApp pre {
+  margin: revert;
+}
 
 html, body {
   background: var(--sumi-0);
