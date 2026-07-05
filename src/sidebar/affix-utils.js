@@ -221,7 +221,9 @@
     if (lv < 86) return '81';
     if (lv < 91) return '86';
     if (lv < 96) return '91';
-    return '96';
+    if (lv < 100) return '96';
+    if (lv < 105) return '100';
+    return '105';
   }
   // statKey → equip_max table key
   const _STAT_TO_MAX_KEY = {
@@ -243,7 +245,10 @@
     silkbindPen: 'attrPen', bamboocutPen: 'attrPen',
     voidPen: 'attrPen', attrPen: 'attrPen',
     // 防具
-    maxHp: 'maxHp', physDef: 'physDef', physResist: 'physDef',
+    maxHp: 'maxHp', physDef: 'physDef',
+    // 外功耐性強化 (weapon-like slot専用 affix#6 ATTUNE 3択の一つ、physDefとは無関係の別stat。
+    // 2026-07-05 TODO#64: 旧physDef共有マッピングのバグ修正、equip_max.json専用key新設)
+    physResist: 'physResist',
     // ダメ強化
     physDmgBonus: 'physDmgBoost', attrDmgBonus: 'physDmgBoost',
     critDmgBonus: 'physDmgBoost', affinityDmgBonus: 'physDmgBoost',

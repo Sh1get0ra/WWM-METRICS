@@ -4509,7 +4509,7 @@
   },
   "280703": {
     "internal": 392,
-    "statKey": "silkbindPen"
+    "statKey": "voidPen"
   },
   "600001": {
     "internal": 290,
@@ -9272,5 +9272,5 @@
   "_source": "Where Winds Math obfuscated app.js + jsdom抽出",
   "_stats": 117,
   "_total": 2297,
-  "_note": " | 270703 set affix statKey: silkbindPen→voidPen 修正 (帰燕 set 表示名 無相貫通)"
+  "_note": " | 270703 set affix statKey: silkbindPen→voidPen 修正 (帰燕 set 表示名 無相貫通) | 2026-07-05 TODO#64: 280703 も同根の未修正漏れと判明 (internal=392、270703と同じ帰燕系voidPen枠の別tier、equip_max.jsonのattrPen tier96は既に280703真値7.8-13.0を反映済だったがaffix.json側のstatKeyラベルだけ更新されずsilkbindPenのまま残置)、silkbindPen→voidPen修正"
 }
