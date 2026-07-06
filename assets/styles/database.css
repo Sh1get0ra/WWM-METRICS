@@ -184,14 +184,14 @@
     gap: 6px;
   }
   .wwm-db-ctrl-label {
-    font-family: var(--f-display);
+    font-family: var(--f-display-title);
     font-size: 11px;
     letter-spacing: 0.1em;
     color: var(--kami-fg);
     text-transform: uppercase;
   }
   .wwm-db-ctrl-item select {
-    font-family: var(--f-display);
+    font-family: var(--f-display-title);
     font-size: 13px;
     color: var(--gold-paper);
     background: color-mix(in oklab, var(--kami-fg) 5%, transparent);
@@ -204,6 +204,13 @@
     outline: none;
     box-shadow: var(--c-focus-ring-shadow);
     border-color: var(--vermilion-bright);
+  }
+  /* native <option> popupはbackground未指定だとbrowser既定に落ちてcolor(--gold-paper)との
+     組み合わせ次第で読みにくくなる(2026-07-06、心法タブfilterで発覚した同種バグの横展開修正)。
+     紙面の暗文字で明示統一 (.wwm-cmp-modal-a select optionと同型対処) */
+  .wwm-db-ctrl-item select option {
+    color: var(--kami-fg);
+    background: var(--kami-0);
   }
 }
 
@@ -278,7 +285,7 @@
     color: var(--kami-fg);
   }
   .wwm-db-table thead th {
-    font-family: var(--f-display);
+    font-family: var(--f-display-title);
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -368,7 +375,7 @@
     color: var(--kami-fg);
   }
   .wwm-db-recipe-materials thead th {
-    font-family: var(--f-display);
+    font-family: var(--f-display-title);
     font-size: 10px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -413,5 +420,241 @@
   .wwm-db-controls {
     flex-wrap: wrap;
     gap: 14px;
+  }
+}
+
+/* ── 心法タブ (2026-07-06、装備タブの墨L字骨格+検索/フィルタを踏襲) ── */
+@layer components {
+  .wwm-db-xinfa {
+    display: grid;
+    grid-template-columns: var(--rail-w) 1fr;
+    gap: 0;
+    height: 100%;
+    width: 100%;
+  }
+  .wwm-db-xinfa-list-pane {
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+  }
+  .wwm-db-xinfa-controls {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 10px 8px;
+  }
+  .wwm-db-xinfa-search,
+  .wwm-db-xinfa-filter {
+    font-family: var(--f-display-title);
+    font-size: 12px;
+    color: var(--sumi-fg);
+    background: color-mix(in oklab, var(--sumi-fg) 8%, transparent);
+    border: 1px solid color-mix(in oklab, var(--sumi-fg) 28%, transparent);
+    border-radius: 2px;
+    padding: 5px 8px;
+  }
+  .wwm-db-xinfa-search::placeholder {
+    color: var(--sumi-fg-dim);
+  }
+  /* native <option> popupは閉状態select(--sumi-fg=紙色/暗背景用)のcolorをそのまま継承するが、
+     popup自体の背景はブラウザ既定(明色)のままになるため明色on明色で読めなくなる
+     (兄貴実機SS報告 2026-07-06)。option には紙面(--kami-*)の暗文字を明示指定して解消
+     (既存 .wwm-cmp-modal-a select option と同型の対処、modals.css参照) */
+  .wwm-db-xinfa-filter option {
+    color: var(--kami-fg);
+    background: var(--kami-0);
+  }
+  .wwm-db-xinfa-search:focus-visible,
+  .wwm-db-xinfa-filter:focus-visible {
+    outline: none;
+    box-shadow: var(--c-focus-ring-shadow);
+    border-color: var(--vermilion-bright);
+  }
+  .wwm-db-xinfa-list-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 4px 10px 16px;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-deep) transparent;
+  }
+  .wwm-db-xinfa-list-inner::-webkit-scrollbar { width: 6px; }
+  .wwm-db-xinfa-list-inner::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
+  .wwm-db-xinfa-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+    padding: 6px 12px;
+    background: transparent;
+    border: none;
+    border-left: 2px solid transparent;
+    color: var(--sumi-fg-dim);
+    cursor: pointer;
+    font-size: 13px;
+    font-family: var(--f-display-title);
+    letter-spacing: 0.02em;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+  .wwm-db-xinfa-item:hover {
+    color: var(--sumi-fg);
+    background: color-mix(in oklab, var(--sumi-fg) 5%, transparent);
+  }
+  .wwm-db-xinfa-item[aria-selected="true"] {
+    background: color-mix(in oklab, var(--vermilion) 14%, transparent);
+    border-left-color: var(--vermilion-bright);
+    color: var(--sumi-fg);
+  }
+  .wwm-db-xinfa-item-name {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .wwm-db-xinfa-item-icon {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+    border-radius: 2px;
+    object-fit: cover;
+    background: var(--sumi-2);
+    border: 1.5px solid color-mix(in oklab, var(--sumi-fg) 30%, transparent);
+  }
+  .wwm-db-xinfa-item-icon-empty {
+    background: var(--sumi-2);
+  }
+  /* rank色枠 = 詳細側.wwm-db-xinfa-rankと同一token再利用 (兄貴指示2026-07-06) */
+  .wwm-db-xinfa-item-icon[data-rank="gold"] { border-color: var(--gold-bright); }
+  .wwm-db-xinfa-item-icon[data-rank="purple"] { border-color: var(--liupai-guyun); }
+  .wwm-db-xinfa-item-icon[data-rank="blue"] { border-color: #4a9eff; }
+  .wwm-db-xinfa-detail {
+    padding: 20px 24px;
+    overflow-y: auto;
+    background: var(--kami-0);
+    border-left: 1px solid var(--gold-deep);
+    color: var(--kami-fg);
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-deep) transparent;
+    scrollbar-gutter: stable;
+  }
+  .wwm-db-xinfa-detail::-webkit-scrollbar { width: 6px; }
+  .wwm-db-xinfa-detail::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
+  .wwm-db-xinfa-back {
+    display: none;
+  }
+  .wwm-db-xinfa-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 14px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid color-mix(in oklab, var(--kami-fg) 22%, transparent);
+  }
+  .wwm-db-xinfa-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+    object-fit: cover;
+    background: var(--sumi-2);
+  }
+  .wwm-db-xinfa-name {
+    flex: 1 1 auto;
+    font-family: var(--f-display-title);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--kami-fg);
+    margin: 0;
+  }
+  .wwm-db-xinfa-rank {
+    font-family: var(--f-display-title);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 3px 9px;
+    border-radius: 2px;
+    border: 1px solid color-mix(in oklab, var(--kami-fg) 30%, transparent);
+    color: var(--kami-fg);
+  }
+  /* rank色 = 紙(--kami-0)背景上のため暗色variant使用。--gold-bright/--liupai-guyun/#4a9effは
+     暗背景(sumi)向けの明色でここでは低コントラスト(兄貴指摘2026-07-06)。workspace.cssの
+     `.wwm-ws-paper .wwm-rank-gold/-purple/-blue`(紙上表示、equip-affix用)と同一の暗色variantに統一 */
+  .wwm-db-xinfa-rank[data-rank="gold"] { color: #b85a14; border-color: #b85a14; }
+  .wwm-db-xinfa-rank[data-rank="purple"] { color: #6a2e8a; border-color: #6a2e8a; }
+  .wwm-db-xinfa-rank[data-rank="blue"] { color: #1e5a9e; border-color: #1e5a9e; }
+  .wwm-db-xinfa-tiers {
+    display: flex;
+    flex-direction: column;
+  }
+  .wwm-db-xinfa-tier-row {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1.5px dashed color-mix(in oklab, var(--gold) 70%, transparent);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .wwm-db-xinfa-tier-row:last-child { border-bottom: none; }
+  .wwm-db-xinfa-tier-row .wwm-cmp-tier-eff { max-height: none; overflow-y: visible; }
+  .wwm-db-xinfa-kfreq {
+    flex: 0 0 100%;
+    font-size: 11px;
+    color: var(--kami-fg-dim);
+  }
+  .wwm-db-xinfa-worldlv-wrap {
+    flex: 0 0 100%;
+    overflow-x: auto;
+    margin: 2px 0 6px 32px;
+  }
+  .wwm-db-xinfa-worldlv-table {
+    border-collapse: collapse;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+  .wwm-db-xinfa-worldlv-table th,
+  .wwm-db-xinfa-worldlv-table td {
+    padding: 4px 7px;
+    text-align: center;
+    color: var(--kami-fg);
+    border-bottom: 1px solid color-mix(in oklab, var(--kami-fg) 14%, transparent);
+  }
+  .wwm-db-xinfa-worldlv-table thead th {
+    font-family: var(--f-display-title);
+    letter-spacing: 0.05em;
+    color: var(--kami-fg);
+    font-weight: 600;
+  }
+  .wwm-db-xinfa-worldlv-table th[scope="row"] {
+    text-align: left;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 600px) {
+  .wwm-db-xinfa {
+    grid-template-columns: 1fr;
+  }
+  .wwm-db-xinfa[data-mobile-view="detail"] .wwm-db-xinfa-list-pane {
+    display: none;
+  }
+  .wwm-db-xinfa:not([data-mobile-view="detail"]) .wwm-db-xinfa-detail {
+    display: none;
+  }
+  .wwm-db-xinfa[data-mobile-view="detail"] .wwm-db-xinfa-back {
+    display: inline-block;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: var(--kami-fg);
+    background: transparent;
+    border: 1px solid color-mix(in oklab, var(--kami-fg) 28%, transparent);
+    border-radius: 2px;
+    padding: 5px 12px;
+    cursor: pointer;
   }
 }

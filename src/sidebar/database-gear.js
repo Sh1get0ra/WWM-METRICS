@@ -70,6 +70,11 @@
   const _RECIPE_SLOTS = new Set(['9', '21']);
   const _RANK_ORDER = ['gold', 'purple', 'blue'];
   const _RANK_LABEL_JA = { gold: '金', purple: '紫', blue: '青' };
+  const _RANK_I18N_KEY = { gold: 'dbRankGold', purple: 'dbRankPurple', blue: 'dbRankBlue' };
+  function _rankLabel(r) {
+    const key = _RANK_I18N_KEY[r];
+    return (key && window.T && window.T[key]) || _RANK_LABEL_JA[r] || r;
+  }
   const _RANK_TO_TIER = { gold: '5', purple: '4', blue: '3' };
 
   // weaponType (data/kongfu.json 内部キー) → wdbCat 文字列 (affix-utils.js の M テーブルと同一)
@@ -83,6 +88,13 @@
     sword: '剣', spear: '槍', mo_blade: '墨刀', dual_blades: '双剣',
     rope_dart: '縄鏢', fan: '扇', umbrella: '傘', heng_blade: '横刀', gauntlet: '拳甲',
   };
+  // data/i18n/game.json の weapontype cat と内部キーが1件だけ不一致 (heng_blade→new_blade)
+  const _WEAPON_TYPE_I18N_KEY = { heng_blade: 'new_blade' };
+  function _weaponTypeLabel(wt, lang) {
+    const dsKey = _WEAPON_TYPE_I18N_KEY[wt] || wt;
+    const n = window.WWM_DS && window.WWM_DS.name('weapontype', dsKey, lang);
+    return (n && n.indexOf('[weapontype:') !== 0) ? n : _WEAPON_TYPE_LABEL_JA[wt];
+  }
 
   // ── 共通セレクタ state (スロット選択+武器種+Lv+Tier で 基本ステ/調律/定音 全部連動) ──
   let _ctrlLv = 91;
@@ -91,13 +103,14 @@
 
   function _renderControls(item, opts) {
     opts = opts || {};
+    const lang = _curLang();
     const tbl = window.WWM_EQUIP_BASE_BY_LV;
     const lvList = (tbl && tbl._lvList) || [71, 81, 86, 91, 96, 100, 105];
     const lvOpts = lvList.map(lv => `<option value="${lv}" ${lv === _ctrlLv ? 'selected' : ''}>Lv${lv}</option>`).join('');
-    const rankOpts = _RANK_ORDER.map(r => `<option value="${r}" ${r === _ctrlRank ? 'selected' : ''}>${_RANK_LABEL_JA[r]}</option>`).join('');
+    const rankOpts = _RANK_ORDER.map(r => `<option value="${r}" ${r === _ctrlRank ? 'selected' : ''}>${_esc(_rankLabel(r))}</option>`).join('');
     const weaponTypeHtml = item.isWeapon ? `
       <label class="wwm-db-ctrl-item"><span class="wwm-db-ctrl-label">${_esc((window.T && window.T.dbWeaponType) || '武器種')}</span><select data-db-ctrl-weapontype>${
-        Object.keys(_WEAPON_TYPE_TO_WDB_CAT).map(wt => `<option value="${wt}" ${wt === _ctrlWeaponType ? 'selected' : ''}>${_esc(_WEAPON_TYPE_LABEL_JA[wt])}</option>`).join('')
+        Object.keys(_WEAPON_TYPE_TO_WDB_CAT).map(wt => `<option value="${wt}" ${wt === _ctrlWeaponType ? 'selected' : ''}>${_esc(_weaponTypeLabel(wt, lang))}</option>`).join('')
       }</select></label>` : '';
     // レシピ枠 (弓矢/射玦) は Tier(gold/purple/blue) 概念が無い (rankName が Lv と1:1、兄貴指示2026-07-05)
     const tierHtml = opts.showTier === false ? '' : `<label class="wwm-db-ctrl-item"><span class="wwm-db-ctrl-label">Tier</span><select data-db-ctrl-rank>${rankOpts}</select></label>`;

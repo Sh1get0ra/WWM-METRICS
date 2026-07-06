@@ -48,6 +48,9 @@
     if (tab === 'gear' && window.WWMSidebar && window.WWMSidebar.databaseGear) {
       window.WWMSidebar.databaseGear.render();
     }
+    if (tab === 'xinfa' && window.WWMSidebar && window.WWMSidebar.databaseXinfa) {
+      window.WWMSidebar.databaseXinfa.render();
+    }
   }
 
   document.querySelectorAll('[data-db-tab]').forEach(function (t) {

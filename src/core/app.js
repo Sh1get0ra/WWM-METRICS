@@ -110,6 +110,9 @@ function setLang(lang) {
   if (window.WWMSidebar?.database?.isOpen?.() && window.WWMSidebar?.databaseGear?.render) {
     try { window.WWMSidebar.databaseGear.render(); } catch(_) {}
   }
+  if (window.WWMSidebar?.database?.isOpen?.() && window.WWMSidebar?.databaseXinfa?.render) {
+    try { window.WWMSidebar.databaseXinfa.render(); } catch(_) {}
+  }
   // 楷書 SVG 再適用: 上の data-i18n 書換が SVG を text に戻すため必ず最後 (ja のみ SVG 化)
   if (window.WWMKaisho) window.WWMKaisho.apply();
 }

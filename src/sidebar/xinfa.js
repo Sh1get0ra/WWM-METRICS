@@ -201,6 +201,198 @@
     } catch (e) {}
   }
 
+  // xinfa effects key → i18n key + 表示形式 (DB画面(database-xinfa.js)からも参照するためmodule scope)
+  const _XINFA_EFFECT_LABEL = {
+    allMartialBoost: { tkey: 'allWeaponDmg',    pct: true },
+    critRateAdj:     { tkey: 'crit',            pct: true },
+    critRate:        { tkey: 'crit',            pct: true },
+    crit:            { tkey: 'crit',            pct: true },
+    hitRate:         { tkey: 'precision',       pct: true },
+    precision:       { tkey: 'precision',       pct: true },
+    critBoost:       { tkey: 'critBoost',       pct: true },
+    sympathyRate:    { tkey: 'affinity',        pct: true },
+    affinity:        { tkey: 'affinity',        pct: true },
+    sympathyBoost:   { tkey: 'sympathyBoost',   pct: true },
+    affinityDmgBonus:{ tkey: 'sympathyBoost',   pct: true },
+    elemAtkBoost:    { tkey: 'elemAtkBoost',    pct: true },
+    attrDmgBonus:    { tkey: 'elemAtkBoost',    pct: true },
+    weaponBonus:     { tkey: 'weaponBonus',     pct: true },
+    physDmgBonus:    { tkey: 'weaponBonus',     pct: true },
+    physDmgBoost:    { tkey: 'weaponBonus',     pct: true },
+    outerPen:        { tkey: 'physPen',         pct: false },
+    outerPenAdd:     { tkey: 'physPen',         pct: false },
+    physPen:         { tkey: 'physPen',         pct: false },
+    elemPen:         { tkey: 'pathPenVoid',     pct: false },
+    attrPen:         { tkey: 'pathPenVoid',     pct: false },
+    bossBoost:       { tkey: 'bossDmg',         pct: true },
+    bossDmg:         { tkey: 'bossDmg',         pct: true },
+    minPhys:         { tkey: 'minPhys',         pct: false },
+    maxPhys:         { tkey: 'maxPhys',         pct: false },
+    minPhysATK:      { tkey: 'minPhys',         pct: false },
+    maxPhysATK:      { tkey: 'maxPhys',         pct: false },
+    minPhysATKAdd:   { tkey: 'minPhys',         pct: false },
+    maxPhysATKAdd:   { tkey: 'maxPhys',         pct: false },
+    addCritRate:     { tkey: 'addCritRate',     pct: true },
+    directCrit:      { tkey: 'addCritRate',     pct: true },
+    addSympathyRate: { tkey: 'addSympathyRate', pct: true },
+    directAffinity:  { tkey: 'addSympathyRate', pct: true },
+    fixedScoreBonus: { tkey: 'martialIndex',    pct: false, scoreCustom: true },
+    // path別 攻撃 (min/max 共通ラベル、 値で区別)
+    minBellstrike:   { tkey: 'pathAtkBellstrike', pct: false },
+    maxBellstrike:   { tkey: 'pathAtkBellstrike', pct: false },
+    minStonesplit:   { tkey: 'pathAtkStonesplit', pct: false },
+    maxStonesplit:   { tkey: 'pathAtkStonesplit', pct: false },
+    minSilkbind:     { tkey: 'pathAtkSilkbind',   pct: false },
+    maxSilkbind:     { tkey: 'pathAtkSilkbind',   pct: false },
+    minBamboocut:    { tkey: 'pathAtkBamboocut',  pct: false },
+    maxBamboocut:    { tkey: 'pathAtkBamboocut',  pct: false },
+    minVoid:         { tkey: 'pathAtkVoid',       pct: false },
+    maxVoid:         { tkey: 'pathAtkVoid',       pct: false },
+    // path別 貫通
+    bellstrikePen:   { tkey: 'pathPenBellstrike', pct: false },
+    stonesplitPen:   { tkey: 'pathPenStonesplit', pct: false },
+    silkbindPen:     { tkey: 'pathPenSilkbind',   pct: false },
+    bamboocutPen:    { tkey: 'pathPenBamboocut',  pct: false },
+    voidPen:         { tkey: 'pathPenVoid',       pct: false },
+    // path別 ダメージ強化
+    bellstrikeDmgBoost: { tkey: 'pathDmgBellstrike', pct: true },
+    stonesplitDmgBoost: { tkey: 'pathDmgStonesplit', pct: true },
+    silkbindDmgBoost:   { tkey: 'pathDmgSilkbind',   pct: true },
+    bamboocutDmgBoost:  { tkey: 'pathDmgBamboocut',  pct: true },
+    voidDmgBoost:       { tkey: 'pathDmgVoid',       pct: true }
+  };
+  // ダメージ計算に関与しない statType (effects空、 ゲームはステ表示するが計算外) → localized名 + (計算外)
+  const _XINFA_STATTYPE_LABEL = {
+    'Max HP': 'maxHp',
+    'Physical Defense': 'physDef',
+    'Critical Healing Bonus': 'stCritHeal',
+  };
+  function _xinfaFmtEffect(k, v) {
+    const T = window.T || {};
+    const def = _XINFA_EFFECT_LABEL[k];
+    const label = (def && T[def.tkey]) || k;
+    if (def?.scoreCustom) {
+      if (!v) return `${label} +? (${T.effectUnset || '未代入'})`;
+      return `${label} +${v}`;
+    }
+    const isPct = def?.pct;
+    let valStr;
+    if (isPct) {
+      const pctVal = (Math.abs(v) < 1 ? v * 100 : v);
+      valStr = `${pctVal.toFixed(1)}%`;
+    } else {
+      valStr = String(v);
+    }
+    return `${label} +${valStr}`;
+  }
+  // tier 別 effect text 取得 (= WWM_DS 経由 一本化、 ゲーム原文 12 lang ([[xinfa-tier-label-sprint-plan-2026-06-29]] 完成版))。
+  // WWM_DS miss + xinfa_tier_label cat に key 不在時 = def.rawI18n fallback。
+  // client 原文 format token (= `<text|781|...|...>` stat ref / `#Y...#E` 等 marker) は表示 normalize で除去。
+  function _normalizeWWMText(s) {
+    if (!s) return s;
+    // unwrap 2 pass = 入れ子タグ (`<<用語>|meta>` 型) は 1 周目で内側 unwrap → 2 周目で外側が完全形になる
+    for (let i = 0; i < 2; i++) {
+      // stat reference token = `<text|num|...|num>` → text のみ (= 内部 fallback bug 表示 防止)
+      s = s.replace(/<([^|<>]+)\|[^<>]*>/g, '$1');
+      // custom color marker = `#RRGGBB` (hex 6 桁、 WWM 色コード仕様 = preset 26 種 + hex custom) → marker のみ除去
+      s = s.replace(/#[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/g, '');
+      // 強調 marker = `#<大文字>...#E` pair → inner text のみ (preset 色は #A-#Z 26 種、 E は終端専用)
+      s = s.replace(/#[A-DF-Z]([\s\S]*?)#E/g, '$1');
+      // pipe 無し用語強調 `<鉄衣戍魂>` / `<Огненной Плети>` → 中身のみ
+      s = s.replace(/<([^<>|]{1,64})>/g, '$1');
+    }
+    // ── 壊れタグ除去 (2026-07-02、 data 内に外殻欠け token が 91 箇所実在)。 unwrap 後に 1 回 ──
+    // 先頭 `<` 欠けの参照メタ列 `780|#C|160>` / `781||20501|20501001>` → 除去 (末尾 `>` 込み)
+    s = s.replace(/\d+\|[0-9#A-Z|]*>/g, '');
+    // 外殻 `<>` 全欠けの参照メタ列 `|781||20801|20801005` / `|780|#C|13` → 除去
+    s = s.replace(/\|\d{2,}[0-9#A-Z|]*/g, '');
+    // 対応相手を失った孤立 marker (`#Y` 単独 / `#E` 単独 等) → 除去
+    s = s.replace(/#[A-Z]/g, '');
+    // 除去痕の連続半角 space を 1 個に (ja/zh は space 無し連結のため影響なし)
+    s = s.replace(/ {2,}/g, ' ');
+    return s;
+  }
+  function _tierLabel(id, t, lang, def) {
+    const DS = window.WWM_DS;
+    if (DS) {
+      const v = DS.name('xinfa_tier_label', `${id}.tier${t}`, lang);
+      if (v && v.indexOf('[xinfa_tier_label:') !== 0 && v.indexOf('[noClientData:') !== 0) {
+        return _normalizeWWMText(v);
+      }
+    }
+    const raw = (def?.rawI18n?.[lang]) || def?.rawI18n?.en || def?.rawI18n?.ja || '-';
+    return _normalizeWWMText(raw);
+  }
+  function _effectsText(id, tier) {
+    if (!id) return '';
+    const xinfaMap = window.WWM_XINFA || {};
+    const x = xinfaMap[id];
+    if (!x?.attributeBuff) return '';
+    const effRi = _getEffectiveRoleInfo() || (WWMState.roleInfo || {});
+    const myKfs = [effRi?.kongfuMain, effRi?.kongfuSub].filter(Boolean).map(v => String(v));
+    const lines = [];
+    for (let t = 0; t <= 6; t++) {
+      const def = x.attributeBuff[`tier${t}`];
+      const isActive = t <= tier;
+      if (!def) {
+        lines.push(`<div class="wwm-cmp-tier-row wwm-tier-empty"><span class="wwm-cmp-tier-num">T${t}</span><span class="wwm-cmp-tier-eff wwm-tier-dash">—</span></div>`);
+        continue;
+      }
+      const isTwoFive = (t === 2 || t === 5);
+      const needsKf = !isTwoFive && Array.isArray(def.kongfuRequired) && def.kongfuRequired.length;
+      const kfOk = !needsKf || def.kongfuRequired.some(k => myKfs.includes(String(k)));
+      let effects = def.effects || {};
+      // T2 effectId 経路 (2026-06-24): 内部計算 (stats.js L317-326) と表示同期。 master `xinfa_effects.json` から WorldLv 別実値取得、 effects (= hardcode WL15 推定) を上書き。 表現形式は keep
+      if (t === 2 && def.effectId) {
+        const masterStats = window.WWM_XINFA_EFFECTS?.effects?.[def.effectId]?.stats;
+        if (masterStats) {
+          const wl = String(effRi?.worldLv || 15);
+          const lookup = {};
+          for (const [sk, wlMap] of Object.entries(masterStats)) {
+            if (wlMap[wl] != null) lookup[sk] = wlMap[wl];
+          }
+          if (Object.keys(lookup).length) effects = lookup;
+        }
+      }
+      const hasEff = Object.keys(effects).length > 0;
+      // labelOverride: tier毎に effects key → 表示label の上書き (i18n対応)
+      const lang = _curLang();
+      const labelOv = def.labelOverride || null;
+      // T2/T5 = effects key+値表示 (ゲーム ステ画面準拠、 fixedScoreBonus 単独時は raw)
+      // 他Tier = raw のみ表示 (ゲーム原文説明、 effects/fixedScoreBonus ラベル非表示、 裏で計算反映)
+      let effStr;
+      if (isTwoFive) {
+        // fixedScoreBonus 以外の effects のみ表示
+        const visibleEntries = Object.entries(effects).filter(([k]) => k !== 'fixedScoreBonus');
+        effStr = visibleEntries.length > 0
+          ? visibleEntries.map(([k,v]) => {
+              if (labelOv && labelOv[k]) {
+                const ovLabel = labelOv[k][lang] || labelOv[k].ja || labelOv[k].en || k;
+                const _def = _XINFA_EFFECT_LABEL[k];
+                if (_def?.scoreCustom) return `${ovLabel} +${v || '?'}`;
+                const isPct = _def?.pct;
+                const valStr = isPct ? `${(Math.abs(v) < 1 ? v*100 : v).toFixed(1)}%` : String(v);
+                return `${ovLabel} +${valStr}`;
+              }
+              return _xinfaFmtEffect(k, v);
+            }).join(', ')
+          : (() => {
+              const stKey = def.statType && _XINFA_STATTYPE_LABEL[def.statType];
+              if (stKey) return (window.T && window.T[stKey]) || def.statType;
+              return _tierLabel(id, t, lang, def);
+            })();
+      } else {
+        effStr = _tierLabel(id, t, lang, def);
+      }
+      let cls = 'wwm-tier-active';
+      let warn = '';
+      if (!isActive) { cls = 'wwm-tier-unrel'; warn = ` <span class="wwm-tier-warn" title="${(window.T&&window.T.tipTierUnreleased)||'未解放'}">⏳</span>`; }
+      else if (needsKf && !kfOk) { cls = 'wwm-tier-kfmiss'; warn = ` <span class="wwm-tier-warn" title="${(window.T&&window.T.tipTierKfMissing)||'武器条件未満'}">⚠</span>`; }
+      lines.push(`<div class="wwm-cmp-tier-row ${cls}"><span class="wwm-cmp-tier-num">T${t}</span><span class="wwm-cmp-tier-eff">${effStr}${warn}</span></div>`);
+    }
+    return lines.join('');
+  }
+
   // ── Xinfa Edit modal ───────────────────────────────────────────
   function openXinfaEdit(slotIdx) {
     const origRi = WWMState.roleInfo;
@@ -254,196 +446,6 @@
           };
         });
       return { options: opts, selectedValue: String(selectedId) };
-    }
-    // xinfa effects key → i18n key + 表示形式
-    const _XINFA_EFFECT_LABEL = {
-      allMartialBoost: { tkey: 'allWeaponDmg',    pct: true },
-      critRateAdj:     { tkey: 'crit',            pct: true },
-      critRate:        { tkey: 'crit',            pct: true },
-      crit:            { tkey: 'crit',            pct: true },
-      hitRate:         { tkey: 'precision',       pct: true },
-      precision:       { tkey: 'precision',       pct: true },
-      critBoost:       { tkey: 'critBoost',       pct: true },
-      sympathyRate:    { tkey: 'affinity',        pct: true },
-      affinity:        { tkey: 'affinity',        pct: true },
-      sympathyBoost:   { tkey: 'sympathyBoost',   pct: true },
-      affinityDmgBonus:{ tkey: 'sympathyBoost',   pct: true },
-      elemAtkBoost:    { tkey: 'elemAtkBoost',    pct: true },
-      attrDmgBonus:    { tkey: 'elemAtkBoost',    pct: true },
-      weaponBonus:     { tkey: 'weaponBonus',     pct: true },
-      physDmgBonus:    { tkey: 'weaponBonus',     pct: true },
-      physDmgBoost:    { tkey: 'weaponBonus',     pct: true },
-      outerPen:        { tkey: 'physPen',         pct: false },
-      outerPenAdd:     { tkey: 'physPen',         pct: false },
-      physPen:         { tkey: 'physPen',         pct: false },
-      elemPen:         { tkey: 'pathPenVoid',     pct: false },
-      attrPen:         { tkey: 'pathPenVoid',     pct: false },
-      bossBoost:       { tkey: 'bossDmg',         pct: true },
-      bossDmg:         { tkey: 'bossDmg',         pct: true },
-      minPhys:         { tkey: 'minPhys',         pct: false },
-      maxPhys:         { tkey: 'maxPhys',         pct: false },
-      minPhysATK:      { tkey: 'minPhys',         pct: false },
-      maxPhysATK:      { tkey: 'maxPhys',         pct: false },
-      minPhysATKAdd:   { tkey: 'minPhys',         pct: false },
-      maxPhysATKAdd:   { tkey: 'maxPhys',         pct: false },
-      addCritRate:     { tkey: 'addCritRate',     pct: true },
-      directCrit:      { tkey: 'addCritRate',     pct: true },
-      addSympathyRate: { tkey: 'addSympathyRate', pct: true },
-      directAffinity:  { tkey: 'addSympathyRate', pct: true },
-      fixedScoreBonus: { tkey: 'martialIndex',    pct: false, scoreCustom: true },
-      // path別 攻撃 (min/max 共通ラベル、 値で区別)
-      minBellstrike:   { tkey: 'pathAtkBellstrike', pct: false },
-      maxBellstrike:   { tkey: 'pathAtkBellstrike', pct: false },
-      minStonesplit:   { tkey: 'pathAtkStonesplit', pct: false },
-      maxStonesplit:   { tkey: 'pathAtkStonesplit', pct: false },
-      minSilkbind:     { tkey: 'pathAtkSilkbind',   pct: false },
-      maxSilkbind:     { tkey: 'pathAtkSilkbind',   pct: false },
-      minBamboocut:    { tkey: 'pathAtkBamboocut',  pct: false },
-      maxBamboocut:    { tkey: 'pathAtkBamboocut',  pct: false },
-      minVoid:         { tkey: 'pathAtkVoid',       pct: false },
-      maxVoid:         { tkey: 'pathAtkVoid',       pct: false },
-      // path別 貫通
-      bellstrikePen:   { tkey: 'pathPenBellstrike', pct: false },
-      stonesplitPen:   { tkey: 'pathPenStonesplit', pct: false },
-      silkbindPen:     { tkey: 'pathPenSilkbind',   pct: false },
-      bamboocutPen:    { tkey: 'pathPenBamboocut',  pct: false },
-      voidPen:         { tkey: 'pathPenVoid',       pct: false },
-      // path別 ダメージ強化
-      bellstrikeDmgBoost: { tkey: 'pathDmgBellstrike', pct: true },
-      stonesplitDmgBoost: { tkey: 'pathDmgStonesplit', pct: true },
-      silkbindDmgBoost:   { tkey: 'pathDmgSilkbind',   pct: true },
-      bamboocutDmgBoost:  { tkey: 'pathDmgBamboocut',  pct: true },
-      voidDmgBoost:       { tkey: 'pathDmgVoid',       pct: true }
-    };
-    // ダメージ計算に関与しない statType (effects空、 ゲームはステ表示するが計算外) → localized名 + (計算外)
-    const _XINFA_STATTYPE_LABEL = {
-      'Max HP': 'maxHp',
-      'Physical Defense': 'physDef',
-      'Critical Healing Bonus': 'stCritHeal',
-    };
-    function _xinfaFmtEffect(k, v) {
-      const T = window.T || {};
-      const def = _XINFA_EFFECT_LABEL[k];
-      const label = (def && T[def.tkey]) || k;
-      if (def?.scoreCustom) {
-        if (!v) return `${label} +? (${T.effectUnset || '未代入'})`;
-        return `${label} +${v}`;
-      }
-      const isPct = def?.pct;
-      let valStr;
-      if (isPct) {
-        const pctVal = (Math.abs(v) < 1 ? v * 100 : v);
-        valStr = `${pctVal.toFixed(1)}%`;
-      } else {
-        valStr = String(v);
-      }
-      return `${label} +${valStr}`;
-    }
-    // tier 別 effect text 取得 (= WWM_DS 経由 一本化、 ゲーム原文 12 lang ([[xinfa-tier-label-sprint-plan-2026-06-29]] 完成版))。
-    // WWM_DS miss + xinfa_tier_label cat に key 不在時 = def.rawI18n fallback。
-    // client 原文 format token (= `<text|781|...|...>` stat ref / `#Y...#E` 等 marker) は表示 normalize で除去。
-    function _normalizeWWMText(s) {
-      if (!s) return s;
-      // unwrap 2 pass = 入れ子タグ (`<<用語>|meta>` 型) は 1 周目で内側 unwrap → 2 周目で外側が完全形になる
-      for (let i = 0; i < 2; i++) {
-        // stat reference token = `<text|num|...|num>` → text のみ (= 内部 fallback bug 表示 防止)
-        s = s.replace(/<([^|<>]+)\|[^<>]*>/g, '$1');
-        // custom color marker = `#RRGGBB` (hex 6 桁、 WWM 色コード仕様 = preset 26 種 + hex custom) → marker のみ除去
-        s = s.replace(/#[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/g, '');
-        // 強調 marker = `#<大文字>...#E` pair → inner text のみ (preset 色は #A-#Z 26 種、 E は終端専用)
-        s = s.replace(/#[A-DF-Z]([\s\S]*?)#E/g, '$1');
-        // pipe 無し用語強調 `<鉄衣戍魂>` / `<Огненной Плети>` → 中身のみ
-        s = s.replace(/<([^<>|]{1,64})>/g, '$1');
-      }
-      // ── 壊れタグ除去 (2026-07-02、 data 内に外殻欠け token が 91 箇所実在)。 unwrap 後に 1 回 ──
-      // 先頭 `<` 欠けの参照メタ列 `780|#C|160>` / `781||20501|20501001>` → 除去 (末尾 `>` 込み)
-      s = s.replace(/\d+\|[0-9#A-Z|]*>/g, '');
-      // 外殻 `<>` 全欠けの参照メタ列 `|781||20801|20801005` / `|780|#C|13` → 除去
-      s = s.replace(/\|\d{2,}[0-9#A-Z|]*/g, '');
-      // 対応相手を失った孤立 marker (`#Y` 単独 / `#E` 単独 等) → 除去
-      s = s.replace(/#[A-Z]/g, '');
-      // 除去痕の連続半角 space を 1 個に (ja/zh は space 無し連結のため影響なし)
-      s = s.replace(/ {2,}/g, ' ');
-      return s;
-    }
-    function _tierLabel(id, t, lang, def) {
-      const DS = window.WWM_DS;
-      if (DS) {
-        const v = DS.name('xinfa_tier_label', `${id}.tier${t}`, lang);
-        if (v && v.indexOf('[xinfa_tier_label:') !== 0 && v.indexOf('[noClientData:') !== 0) {
-          return _normalizeWWMText(v);
-        }
-      }
-      const raw = (def?.rawI18n?.[lang]) || def?.rawI18n?.en || def?.rawI18n?.ja || '-';
-      return _normalizeWWMText(raw);
-    }
-    function _effectsText(id, tier) {
-      if (!id) return '';
-      const x = xinfaMap[id];
-      if (!x?.attributeBuff) return '';
-      const effRi = _getEffectiveRoleInfo() || (WWMState.roleInfo || {});
-      const myKfs = [effRi?.kongfuMain, effRi?.kongfuSub].filter(Boolean).map(v => String(v));
-      const lines = [];
-      for (let t = 0; t <= 6; t++) {
-        const def = x.attributeBuff[`tier${t}`];
-        const isActive = t <= tier;
-        if (!def) {
-          lines.push(`<div class="wwm-cmp-tier-row wwm-tier-empty"><span class="wwm-cmp-tier-num">T${t}</span><span class="wwm-cmp-tier-eff wwm-tier-dash">—</span></div>`);
-          continue;
-        }
-        const isTwoFive = (t === 2 || t === 5);
-        const needsKf = !isTwoFive && Array.isArray(def.kongfuRequired) && def.kongfuRequired.length;
-        const kfOk = !needsKf || def.kongfuRequired.some(k => myKfs.includes(String(k)));
-        let effects = def.effects || {};
-        // T2 effectId 経路 (2026-06-24): 内部計算 (stats.js L317-326) と表示同期。 master `xinfa_effects.json` から WorldLv 別実値取得、 effects (= hardcode WL15 推定) を上書き。 表現形式は keep
-        if (t === 2 && def.effectId) {
-          const masterStats = window.WWM_XINFA_EFFECTS?.effects?.[def.effectId]?.stats;
-          if (masterStats) {
-            const wl = String(effRi?.worldLv || 15);
-            const lookup = {};
-            for (const [sk, wlMap] of Object.entries(masterStats)) {
-              if (wlMap[wl] != null) lookup[sk] = wlMap[wl];
-            }
-            if (Object.keys(lookup).length) effects = lookup;
-          }
-        }
-        const hasEff = Object.keys(effects).length > 0;
-        // labelOverride: tier毎に effects key → 表示label の上書き (i18n対応)
-        const lang = _curLang();
-        const labelOv = def.labelOverride || null;
-        // T2/T5 = effects key+値表示 (ゲーム ステ画面準拠、 fixedScoreBonus 単独時は raw)
-        // 他Tier = raw のみ表示 (ゲーム原文説明、 effects/fixedScoreBonus ラベル非表示、 裏で計算反映)
-        let effStr;
-        if (isTwoFive) {
-          // fixedScoreBonus 以外の effects のみ表示
-          const visibleEntries = Object.entries(effects).filter(([k]) => k !== 'fixedScoreBonus');
-          effStr = visibleEntries.length > 0
-            ? visibleEntries.map(([k,v]) => {
-                if (labelOv && labelOv[k]) {
-                  const ovLabel = labelOv[k][lang] || labelOv[k].ja || labelOv[k].en || k;
-                  const _def = _XINFA_EFFECT_LABEL[k];
-                  if (_def?.scoreCustom) return `${ovLabel} +${v || '?'}`;
-                  const isPct = _def?.pct;
-                  const valStr = isPct ? `${(Math.abs(v) < 1 ? v*100 : v).toFixed(1)}%` : String(v);
-                  return `${ovLabel} +${valStr}`;
-                }
-                return _xinfaFmtEffect(k, v);
-              }).join(', ')
-            : (() => {
-                const stKey = def.statType && _XINFA_STATTYPE_LABEL[def.statType];
-                if (stKey) return (window.T && window.T[stKey]) || def.statType;
-                return _tierLabel(id, t, lang, def);
-              })();
-        } else {
-          effStr = _tierLabel(id, t, lang, def);
-        }
-        let cls = 'wwm-tier-active';
-        let warn = '';
-        if (!isActive) { cls = 'wwm-tier-unrel'; warn = ` <span class="wwm-tier-warn" title="${(window.T&&window.T.tipTierUnreleased)||'未解放'}">⏳</span>`; }
-        else if (needsKf && !kfOk) { cls = 'wwm-tier-kfmiss'; warn = ` <span class="wwm-tier-warn" title="${(window.T&&window.T.tipTierKfMissing)||'武器条件未満'}">⚠</span>`; }
-        lines.push(`<div class="wwm-cmp-tier-row ${cls}"><span class="wwm-cmp-tier-num">T${t}</span><span class="wwm-cmp-tier-eff">${effStr}${warn}</span></div>`);
-      }
-      return lines.join('');
     }
     const origName = _xName(origPassive[slotIdx]);
     const m = document.createElement('div');
@@ -618,6 +620,11 @@
     openEdit: openXinfaEdit,
     computeCardScores: _computeXinfaCardScores,
     computeArsenalCardScore: _computeArsenalCardScore,
+    tierLabel: _tierLabel,
+    normalizeText: _normalizeWWMText,
+    fmtEffect: _xinfaFmtEffect,
+    effectLabelTable: _XINFA_EFFECT_LABEL,
+    statTypeLabelTable: _XINFA_STATTYPE_LABEL,
   };
 })();
 
