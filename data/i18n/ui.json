@@ -4941,6 +4941,34 @@
     "ru": "DATABASE",
     "th": "DATABASE"
   },
+  "tipIconBackToCalc": {
+    "ja": "計算機に戻る",
+    "en": "Back to Calculator",
+    "zh": "返回计算器",
+    "zh_tw": "返回計算器",
+    "ko": "계산기로 돌아가기",
+    "vi": "Quay lại Máy tính",
+    "de": "Zurück zum Rechner",
+    "es": "Volver a la Calculadora",
+    "fr": "Retour au Calculateur",
+    "pt_br": "Voltar à Calculadora",
+    "ru": "Вернуться к калькулятору",
+    "th": "กลับไปที่เครื่องคำนวณ"
+  },
+  "backToCalcBtn": {
+    "ja": "戻る",
+    "en": "BACK",
+    "zh": "BACK",
+    "zh_tw": "BACK",
+    "ko": "BACK",
+    "vi": "BACK",
+    "de": "BACK",
+    "es": "BACK",
+    "fr": "BACK",
+    "pt_br": "BACK",
+    "ru": "BACK",
+    "th": "BACK"
+  },
   "dbTabGear": {
     "ja": "装備",
     "en": "Equipment",

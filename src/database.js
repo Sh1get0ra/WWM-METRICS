@@ -11,6 +11,27 @@
     if (isOpen) close(); else open();
   }
 
+  // header内DBボタン = DB画面表示中は「計算機に戻る」ボタンへ見た目を切替 (2026-07-06 兄貴指摘: 同アイコンで開閉両方は紛らわしい)
+  function _updateBtnState(dbMode) {
+    var btn = document.getElementById('wwmDatabaseBtn');
+    if (!btn) return;
+    var use = btn.querySelector('svg use');
+    var srOnly = btn.querySelector('.sr-only');
+    var iconHref = dbMode ? 'assets/icons/calculator.svg#calculator' : 'assets/icons/database.svg#database';
+    var titleKey = dbMode ? 'tipIconBackToCalc' : 'tipIconDatabase';
+    var srKey = dbMode ? 'backToCalcBtn' : 'databaseBtn';
+    if (use) use.setAttribute('href', iconHref);
+    btn.setAttribute('data-i18n-title', titleKey);
+    btn.setAttribute('data-i18n-aria', titleKey);
+    var titleText = (window.T && window.T[titleKey] !== undefined) ? window.T[titleKey] : titleKey;
+    btn.setAttribute('title', titleText);
+    btn.setAttribute('aria-label', titleText);
+    if (srOnly) {
+      srOnly.setAttribute('data-i18n', srKey);
+      srOnly.textContent = (window.T && window.T[srKey] !== undefined) ? window.T[srKey] : srKey;
+    }
+  }
+
   function open() {
     var app = document.getElementById('wwmApp');
     if (!app) return;
@@ -18,6 +39,7 @@
     var dbRoot = document.getElementById('wwmDatabase');
     if (dbRoot) dbRoot.hidden = false;
     isOpen = true;
+    _updateBtnState(true);
     try { localStorage.setItem(MODE_KEY, '1'); } catch (e) {}
     var saved = null;
     try { saved = localStorage.getItem(TAB_KEY); } catch (e) {}
@@ -31,6 +53,7 @@
     var dbRoot = document.getElementById('wwmDatabase');
     if (dbRoot) dbRoot.hidden = true;
     isOpen = false;
+    _updateBtnState(false);
     try { localStorage.setItem(MODE_KEY, '0'); } catch (e) {}
   }
 
