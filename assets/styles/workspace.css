@@ -411,7 +411,7 @@ html:not(.wwm-view-sidebar) .wwm-app::before {
 }
 .wwm-band-top {
   display: flex; align-items: center;
-  padding: 7px 10px;
+  padding: 5px 10px;
   border-bottom: 1px solid var(--sumi-ink-1);
   /* 薄墨 overlay = hero と階調差 (透過地続きで差別化が無かった)。
      BG は透けたまま一段層が変わる。rgba(50,50,50,0.34) = 兄貴実機チューニング確定値 2026-06-12 */

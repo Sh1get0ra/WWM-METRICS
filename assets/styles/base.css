@@ -113,7 +113,7 @@ header.topbar::after {
 .wwm-brand {
   display: flex; align-items: center; gap: var(--space-4);
   position: relative; overflow: hidden;
-  padding: 10px 52px 10px 0;
+  padding: 0 52px 0 0;
   margin: -10px -52px -10px 0;
 }
 /* 羅盤線画 (案4): seal 背後に金の計器円環。mask data-URI + background-color = theme token 追従。
