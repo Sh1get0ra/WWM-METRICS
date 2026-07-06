@@ -4969,6 +4969,20 @@
     "ru": "BACK",
     "th": "BACK"
   },
+  "dbTitle": {
+    "ja": "万宝録",
+    "en": "Where Winds Meet Data Base",
+    "zh": "万宝录",
+    "zh_tw": "萬寶錄",
+    "ko": "Where Winds Meet Data Base",
+    "vi": "Where Winds Meet Data Base",
+    "de": "Where Winds Meet Data Base",
+    "es": "Where Winds Meet Data Base",
+    "fr": "Where Winds Meet Data Base",
+    "pt_br": "Where Winds Meet Data Base",
+    "ru": "Where Winds Meet Data Base",
+    "th": "Where Winds Meet Data Base"
+  },
   "dbTabGear": {
     "ja": "装備",
     "en": "Equipment",

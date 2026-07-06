@@ -844,10 +844,13 @@
   </main>
 
   <div class="wwm-database" id="wwmDatabase" hidden>
-    <nav class="wwm-db-tabs" role="tablist" aria-label="database">
-      <button class="wwm-db-tab" role="tab" aria-selected="true" data-db-tab="gear"><span data-i18n="dbTabGear">装備</span></button>
-      <button class="wwm-db-tab" role="tab" aria-selected="false" data-db-tab="xinfa"><span data-i18n="dbTabXinfa">心法</span></button>
-    </nav>
+    <div class="wwm-db-header">
+      <h2 class="wwm-db-title" data-i18n="dbTitle" data-kaisho="dbTitle">万宝録</h2>
+      <nav class="wwm-db-tabs" role="tablist" aria-label="database">
+        <button class="wwm-db-tab" role="tab" aria-selected="true" data-db-tab="gear"><span data-i18n="dbTabGear">装備</span></button>
+        <button class="wwm-db-tab" role="tab" aria-selected="false" data-db-tab="xinfa"><span data-i18n="dbTabXinfa">心法</span></button>
+      </nav>
+    </div>
     <div class="wwm-db-body">
       <section class="wwm-db-panel active" id="dbGear" role="tabpanel"></section>
       <section class="wwm-db-panel" id="dbXinfa" role="tabpanel" hidden></section>
