@@ -38,6 +38,17 @@
 .wwm-footer-x:hover { color: var(--gold-bright); opacity: 1; }
 .wwm-footer-x svg { display: block; }
 
+/* Ko-fi リンク — topbar (旧 icon-btn.kofi-btn 30x30 枠ボタン) から footer (X 横) に移設 (2026-07-06 兄貴指示)。
+   見た目 (角丸枠 + vermilion 配色 + hover 背景) は旧 icon-btn.kofi-btn をそのまま踏襲、サイズのみ footer 収まりへ縮小 */
+.wwm-footer-kofi {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; vertical-align: middle; margin-left: var(--space-2);
+  background: var(--vermilion); border: 1px solid var(--vermilion); border-radius: 2px;
+  color: var(--sumi-0);
+  box-shadow: 0 0 10px color-mix(in oklab, var(--vermilion-bright) 40%, transparent);
+}
+.wwm-footer-kofi svg { width: 12px; height: 12px; display: block; fill: currentColor; }
+
 /* 著作権表記 (ゲーム内 asset 使用のため必須 — カード footer と同文言、2026-06-08 兄貴指示)。
    2026-06-16 兄貴指示 — flex-wrap で自然折返: 広 = 1 行 (logo + ①②③ 全横並び)、
    縮むに従って ③ → ② → ① の順に wrap、 最狭で 4 行。 強制改行 (flex-basis:100%) なし */
