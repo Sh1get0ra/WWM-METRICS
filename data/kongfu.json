@@ -1,205 +1,162 @@
 {
   "10101": {
     "weaponType": "sword",
-    "effects": {
-      "minBellstrikeAdd": 80,
-      "maxBellstrikeAdd": 160
-    },
     "description": "九変の剣 (片手剣、Strategic Sword)。鋼鳴攻撃力 +80~160 想定 + 力依存 共鳴率 (cap 3.37%) + max鋼鳴 依存 鋼鳴貫通 (cap 18.0、閾値536)。2026-07-06 兄貴実機SS(無銘の剣10102で確認、appliesTo同一のため10101も適用)によりthresholdValue 563→536 訂正。",
     "path": "bellstrike",
     "derived": [
       {
         "from": "power",
-        "thresholdValue": 225,
-        "maxBoost": 0.0337,
         "appliesTo": "sympathyRate",
-        "formula": "linear_capped",
-        "_inferred": "fromStat=momentum 推定"
+        "slot": "s1",
+        "formula": "linear_capped_rung"
       },
       {
         "from": "maxBellstrike",
-        "thresholdValue": 536,
-        "maxBoost": 18,
         "appliesTo": "bellstrikePen",
-        "formula": "linear_capped",
+        "slot": "s3",
+        "formula": "linear_capped_rung",
         "weaponSpecific": "bellstrike"
       }
     ]
   },
   "10102": {
     "weaponType": "sword",
-    "effects": {
-      "minBellstrikeAdd": 80,
-      "maxBellstrikeAdd": 160
-    },
     "description": "無銘の剣 (片手剣、Nameless Sword)。鋼鳴攻撃力 +80~160 想定 + 力依存 最小外功 (cap 59.4) + max鋼鳴 依存 鋼鳴貫通 (cap 18.0、閾値536)。2026-07-06 兄貴実機SS(Lv95/95)で「鋼鳴ステータス上昇」ツールチップに閾値536と明記確認、thresholdValue 563→536 訂正。",
     "path": "bellstrike",
     "derived": [
       {
-        "from": "power",
-        "thresholdValue": 225,
-        "maxBoost": 59.4,
-        "appliesTo": "minPhysATK",
-        "formula": "linear_capped",
-        "_inferred": "fromStat=momentum 推定"
+        "from": "momentum",
+        "appliesTo": "maxPhysATK",
+        "slot": "s1",
+        "formula": "linear_capped_rung"
       },
       {
         "from": "maxBellstrike",
-        "thresholdValue": 536,
-        "maxBoost": 18,
         "appliesTo": "bellstrikePen",
-        "formula": "linear_capped",
+        "slot": "s3",
+        "formula": "linear_capped_rung",
         "weaponSpecific": "bellstrike"
       }
     ]
   },
   "10201": {
     "weaponType": "spear",
-    "effects": {
-      "minBellstrikeAdd": 80,
-      "maxBellstrikeAdd": 160
-    },
     "description": "蛇神の槍 (Heavenquaker Spear)。鋼鳴攻撃力 +80~160 想定 + 力依存 最小外功 (cap 59.4) + max鋼鳴 依存 属性ダメ (cap 9.0%)。",
     "path": "bellstrike",
     "derived": [
       {
         "from": "power",
-        "thresholdValue": 225,
-        "maxBoost": 59.4,
-        "appliesTo": "minPhysATK",
-        "formula": "linear_capped"
+        "appliesTo": "maxPhysATK",
+        "slot": "s1",
+        "formula": "linear_capped_rung"
       },
       {
         "from": "maxBellstrike",
-        "thresholdValue": 536,
-        "maxBoost": 0.09,
         "appliesTo": "elemAtkBoost",
-        "formula": "linear_capped",
-        "_inferred": "toStat=attrDmgBonus相当=elemAtkBoost"
+        "slot": "s3",
+        "formula": "linear_capped_rung",
+        "weaponSpecific": "bellstrike"
       }
     ]
   },
   "10202": {
     "weaponType": "spear",
-    "effects": {
-      "minBellstrikeAdd": 80,
-      "maxBellstrikeAdd": 160
-    },
     "description": "無銘の槍 (Nameless Spear)。鋼鳴攻撃力 +80~160 想定 + 力依存 共鳴率 (cap 3.37%) + min鋼鳴 依存 属性ダメ (cap 9.0%)。",
     "path": "bellstrike",
     "derived": [
       {
-        "from": "power",
-        "thresholdValue": 225,
-        "maxBoost": 0.0337,
+        "from": "momentum",
         "appliesTo": "sympathyRate",
-        "formula": "linear_capped",
-        "_inferred": "fromStat=momentum 推定"
+        "slot": "s1",
+        "formula": "linear_capped_rung"
       },
       {
-        "from": "minBellstrike",
-        "thresholdValue": 536,
-        "maxBoost": 0.09,
+        "from": "maxBellstrike",
         "appliesTo": "elemAtkBoost",
-        "formula": "linear_capped",
-        "_inferred": "toStat=attrDmgBonus相当=elemAtkBoost"
+        "slot": "s3",
+        "formula": "linear_capped_rung",
+        "weaponSpecific": "bellstrike"
       }
     ]
   },
   "10301": {
     "weaponType": "fan",
-    "effects": {
-      "minSilkbindAdd": 80,
-      "maxSilkbindAdd": 160
-    },
     "description": "薬川の扇 (Panacea Fan)。糸操攻撃力 +80~160 想定 + 速依存 会心率 (cap 6.8%) + min糸操 依存 属性ダメ (cap 9.0%)。",
     "path": "silkbind",
     "derived": [
       {
         "from": "agility",
-        "thresholdValue": 225,
-        "maxBoost": 0.068,
         "appliesTo": "critRate",
-        "formula": "linear_capped"
+        "slot": "s1",
+        "formula": "linear_capped_rung"
       },
       {
         "from": "minSilkbind",
-        "thresholdValue": 268,
-        "maxBoost": 0.09,
         "appliesTo": "elemAtkBoost",
-        "formula": "linear_capped",
-        "_inferred": "toStat=attrDmgBonus相当=elemAtkBoost"
+        "slot": "s3",
+        "formula": "linear_capped_rung",
+        "weaponSpecific": "silkbind"
       }
     ]
   },
   "10302": {
     "weaponType": "fan",
-    "effects": {
-      "minSilkbindAdd": 80,
-      "maxSilkbindAdd": 160
-    },
     "description": "墨筆の扇 (Inkwell Fan)。糸操攻撃力 +80~160 想定 + 速依存 最小外功 (cap 59.4)。WW Math 由来 (単一 bonus)。",
     "path": "silkbind",
     "derived": [
       {
         "from": "agility",
-        "thresholdValue": 225,
-        "maxBoost": 59.4,
         "appliesTo": "minPhysATK",
-        "formula": "linear_capped"
+        "slot": "s1",
+        "formula": "linear_capped_rung"
+      },
+      {
+        "from": "minSilkbind",
+        "appliesTo": "elemAtkBoost",
+        "slot": "s3",
+        "formula": "linear_capped_rung",
+        "weaponSpecific": "silkbind"
       }
     ]
   },
   "20103": {
     "weaponType": "spear",
-    "effects": {
-      "minStonesplitAdd": 80,
-      "maxStonesplitAdd": 160
-    },
     "description": "嵐雷の槍 (Stormbreaker Spear)。砕岩攻撃力 +80~160 想定 + max(体,力)依存 気血最大値 (cap +2250、ダメ非影響) + min砕岩 依存 属性ダメ (cap 9.0%)。in-game 観測 2026-05-25。",
     "path": "stonesplit",
     "derived": [
       {
         "from": "max(body,power)",
-        "thresholdValue": 225,
-        "maxBoost": 2250,
         "appliesTo": "maxHp",
-        "formula": "linear_capped",
+        "slot": "s1",
+        "formula": "linear_capped_rung",
         "category": "defensive",
         "_note": "ダメ非影響、calc.jsスルー対象"
       },
       {
         "from": "minStonesplit",
-        "thresholdValue": 268,
-        "maxBoost": 0.09,
         "appliesTo": "elemAtkBoost",
-        "formula": "linear_capped",
-        "_inferred": "toStat=attrDmgBonus相当=elemAtkBoost"
+        "slot": "s3",
+        "formula": "linear_capped_rung",
+        "weaponSpecific": "stonesplit"
       }
     ]
   },
   "20401": {
     "weaponType": "mo_blade",
-    "effects": {
-      "minStonesplitAdd": 80,
-      "maxStonesplitAdd": 160
-    },
     "description": "断魂の刀 (陌刀、Thundercry Blade)。砕岩攻撃力 +80~160 (固定) + 力依存 会心率上昇 (cap 6.8%) + 最小砕岩依存 砕岩貫通上昇 (cap 18.0)。in-game 観測 2026-05-25。",
     "path": "stonesplit",
     "derived": [
       {
         "from": "max(body,power)",
-        "thresholdValue": 225,
-        "maxBoost": 0.068,
         "appliesTo": "critRate",
-        "formula": "linear_capped"
+        "slot": "s1",
+        "formula": "linear_capped_rung"
       },
       {
         "from": "minStonesplit",
-        "thresholdValue": 268,
-        "maxBoost": 18,
         "appliesTo": "stonesplitPen",
-        "formula": "linear_capped",
+        "slot": "s3",
+        "formula": "linear_capped_rung",
         "weaponSpecific": "stonesplit"
       }
     ],
@@ -208,67 +165,68 @@
         "with": [
           20103
         ],
-        "effects": {
-          "bonusCritRate": 0.24
+        "effectsByStage": {
+          "2": {
+            "bonusCritRate": {
+              "fixed": 0.03,
+              "hpCap": 0.05,
+              "hpThreshold": 30000
+            }
+          },
+          "6": {
+            "bonusCritRate": {
+              "fixed": 0.06,
+              "hpCap": 0.1,
+              "hpThreshold": 60000
+            }
+          },
+          "8": {
+            "bonusCritRate": {
+              "fixed": 0.09,
+              "hpCap": 0.15,
+              "hpThreshold": 90000
+            }
+          }
         },
-        "raw": "断魂×嵐雷ペア時 ボーナス会心率+24% (本来 断魂チャージ専用効果、 嵐雷とのセット活用時 全体反映の設計判断、 内部 bonusCritRate 経由: judgeRes不影響/cap内加算/レベルキャップ上昇で増加可能性)"
+        "raw": "断魂×嵐雷ペア時 ボーナス会心率 (本来 断魂チャージ専用効果=溜め会心強化、 嵐雷とのセット活用時 全体反映の設計判断は維持)。2026-07-07 才能段階(重)連動化: rank1@二重=固定3%+気血scaling最大5%(閾値30000)/rank2@六重=6%+10%(60000)/rank3@八重=9%+15%(90000)。値=client passive_skills 305201-203 + kongfu_up_rank per-stage 抽出、気血scaling=1%/6000pt線形(cap=閾値×rate)。Lv95(十二重)+気血90000以上で従来値0.24と同値"
       }
     ]
   },
   "20402": {
     "weaponType": "mo_blade",
-    "effects": {
-      "minStonesplitAdd": 80,
-      "maxStonesplitAdd": 160
-    },
     "description": "破陣の刀 (Phalanxbane Blade)。砕岩攻撃力 +80~160 想定 + 力依存 会心率 (cap 6.8%) + min砕岩 依存 砕岩貫通 (cap 18.0)。",
     "path": "stonesplit",
     "derived": [
       {
         "from": "agility",
-        "thresholdValue": 225,
-        "maxBoost": 0.068,
         "appliesTo": "critRate",
-        "formula": "linear_capped",
-        "_inferred": "fromStat=momentum 推定"
+        "slot": "s1",
+        "formula": "linear_capped_rung"
       },
       {
         "from": "minStonesplit",
-        "thresholdValue": 268,
-        "maxBoost": 18,
         "appliesTo": "stonesplitPen",
-        "formula": "linear_capped",
+        "slot": "s3",
+        "formula": "linear_capped_rung",
         "weaponSpecific": "stonesplit"
       }
     ]
   },
   "20501": {
     "weaponType": "dual_blades",
-    "effects": {
-      "minElemMainAdd": 80,
-      "maxElemMainAdd": 160
-    },
     "derived": [
       {
         "from": "agility",
-        "thresholdValue": 225,
-        "maxBoost": 0.068,
-        "appliesTo": "critRate",
-        "formula": "linear_capped"
+        "appliesTo": "minPhysATK",
+        "slot": "s1",
+        "formula": "linear_capped_rung"
       },
       {
-        "from": "agility",
-        "thresholdValue": 225,
-        "maxBoost": 59.4,
-        "appliesTo": "minPhys",
-        "formula": "linear_capped"
-      },
-      {
-        "from": "minElemMain",
-        "thresholdValue": 268,
-        "maxBoost": 18,
+        "from": "minBamboocut",
         "appliesTo": "elemPen",
-        "formula": "linear_capped"
+        "slot": "s3",
+        "formula": "linear_capped_rung",
+        "weaponSpecific": "bamboocut"
       }
     ],
     "description": "獄炎の双剣 (双剣、Dual Blades)。瞬嵐攻撃力 +80~160 (固定) + 速依存 会心率上昇 (cap 6.8%) + 最小瞬嵐依存 瞬嵐貫通上昇 (cap 18.0)。in-game 観測 2026-05-25 (旧 minPhys cap 訂正)。",
@@ -276,68 +234,59 @@
   },
   "20601": {
     "weaponType": "umbrella",
-    "effects": {
-      "minSilkbindAdd": 80,
-      "maxSilkbindAdd": 160
-    },
     "description": "千紅の傘 (Vernal Umbrella)。糸操攻撃力 +80~160 想定 + 速依存 会心率 (cap 6.8%)。WW Math 由来 (単一 bonus)。",
     "path": "silkbind",
     "derived": [
       {
         "from": "agility",
-        "thresholdValue": 225,
-        "maxBoost": 0.068,
         "appliesTo": "critRate",
-        "formula": "linear_capped"
+        "slot": "s1",
+        "formula": "linear_capped_rung"
+      },
+      {
+        "from": "minSilkbind",
+        "appliesTo": "silkbindPen",
+        "slot": "s3",
+        "formula": "linear_capped_rung",
+        "weaponSpecific": "silkbind"
       }
     ]
   },
   "20602": {
     "weaponType": "umbrella",
-    "effects": {
-      "minSilkbindAdd": 80,
-      "maxSilkbindAdd": 160
-    },
     "description": "誘魂の傘 (Soulshade Umbrella)。糸操攻撃力 +80~160 想定 + 速依存 最小外功 (cap 59.4) + min糸操 依存 糸操貫通 (cap 18.0)。",
     "path": "silkbind",
     "derived": [
       {
         "from": "agility",
-        "thresholdValue": 225,
-        "maxBoost": 59.4,
         "appliesTo": "minPhysATK",
-        "formula": "linear_capped"
+        "slot": "s1",
+        "formula": "linear_capped_rung"
       },
       {
         "from": "minSilkbind",
-        "thresholdValue": 268,
-        "maxBoost": 18,
         "appliesTo": "silkbindPen",
-        "formula": "linear_capped",
+        "slot": "s3",
+        "formula": "linear_capped_rung",
         "weaponSpecific": "silkbind"
       }
     ]
   },
   "20603": {
     "weaponType": "umbrella",
-    "effects": {
-      "minElemMainAdd": 80,
-      "maxElemMainAdd": 160
-    },
     "derived": [
       {
         "from": "agility",
-        "thresholdValue": 225,
-        "maxBoost": 59.4,
         "appliesTo": "minPhysATK",
-        "formula": "linear_capped"
+        "slot": "s1",
+        "formula": "linear_capped_rung"
       },
       {
-        "from": "minElemMain",
-        "thresholdValue": 268,
-        "maxBoost": 18,
+        "from": "minBamboocut",
         "appliesTo": "elemPen",
-        "formula": "linear_capped"
+        "slot": "s3",
+        "formula": "linear_capped_rung",
+        "weaponSpecific": "bamboocut"
       }
     ],
     "description": "酔夢の傘 (傘・遠距離攻撃・瞬嵐塵)。瞬嵐ステータス上昇 (固定 +80~160) + 瞬嵐貫通 (cap 18.0) + 外功攻撃上昇 (cap 59.4)。完璧キャッチ強化/回旋傘ダメ強化/属性ダメ強化は未実装。",
@@ -345,24 +294,19 @@
   },
   "20701": {
     "weaponType": "rope_dart",
-    "effects": {
-      "minElemMainAdd": 80,
-      "maxElemMainAdd": 160
-    },
     "derived": [
       {
         "from": "agility",
-        "thresholdValue": 225,
-        "maxBoost": 0.068,
         "appliesTo": "critRate",
-        "formula": "linear_capped"
+        "slot": "s1",
+        "formula": "linear_capped_rung"
       },
       {
-        "from": "minElemMain",
-        "thresholdValue": 268,
-        "maxBoost": 0.09,
+        "from": "minBamboocut",
         "appliesTo": "elemAtkBoost",
-        "formula": "linear_capped"
+        "slot": "s3",
+        "formula": "linear_capped_rung",
+        "weaponSpecific": "bamboocut"
       }
     ],
     "description": "浮塵の縄 (縄鏢、Mortal Rope Dart)。瞬嵐攻撃力 +80~160 (固定) + 速依存 会心率上昇 (cap 6.8%) + 最小瞬嵐依存 瞬嵐ダメ上昇 (cap 9.0%)。in-game 観測 2026-05-25。",
@@ -370,24 +314,19 @@
   },
   "20702": {
     "weaponType": "rope_dart",
-    "effects": {
-      "minElemMainAdd": 80,
-      "maxElemMainAdd": 160
-    },
     "derived": [
       {
         "from": "agility",
-        "thresholdValue": 225,
-        "maxBoost": 0.068,
         "appliesTo": "critRate",
-        "formula": "linear_capped"
+        "slot": "s1",
+        "formula": "linear_capped_rung"
       },
       {
-        "from": "minElemMain",
-        "thresholdValue": 268,
-        "maxBoost": 0.09,
+        "from": "minBamboocut",
         "appliesTo": "elemAtkBoost",
-        "formula": "linear_capped"
+        "slot": "s3",
+        "formula": "linear_capped_rung",
+        "weaponSpecific": "bamboocut"
       }
     ],
     "description": "浮雲の縄 (縄鏢・遠距離攻撃・瞬嵐塵)。瞬嵐ステータス上昇 (固定 +80~160) + 瞬嵐ダメージ上昇 (cap 9.0%) + 会心率上昇 (cap 6.8%)。溜め連撃強化/失魂会心上昇/属性ダメ強化は未実装。",
@@ -395,43 +334,65 @@
   },
   "20703": {
     "weaponType": "ropeDart",
-    "effects": {},
     "description": "千機の縄 (縄鏢、Skygrasp Rope Dart、 2026年7月実装予定)。 瞬嵐属性。 effects/derived は実装後に追記。",
     "path": "bamboocut",
-    "_pendingImplementation": true
+    "_pendingImplementation": true,
+    "derived": [
+      {
+        "from": "agility",
+        "appliesTo": "critRate",
+        "slot": "s1",
+        "formula": "linear_capped_rung"
+      },
+      {
+        "from": "minBamboocut",
+        "appliesTo": "elemPen",
+        "slot": "s3",
+        "formula": "linear_capped_rung",
+        "weaponSpecific": "bamboocut"
+      }
+    ]
   },
   "20801": {
     "weaponType": "new_blade",
-    "effects": {
-      "minStonesplitAdd": 80,
-      "maxStonesplitAdd": 160
-    },
     "description": "斬雪の刀 (Snowparting Blade、新武器種)。砕岩攻撃力 +80~160 想定 + 速依存 最小外功 (cap 59.4) + min砕岩 依存 属性ダメ (cap 9.0%)。",
     "path": "stonesplit",
     "derived": [
       {
         "from": "agility",
-        "thresholdValue": 225,
-        "maxBoost": 59.4,
         "appliesTo": "minPhysATK",
-        "formula": "linear_capped"
+        "slot": "s1",
+        "formula": "linear_capped_rung"
       },
       {
         "from": "minStonesplit",
-        "thresholdValue": 268,
-        "maxBoost": 0.09,
         "appliesTo": "elemAtkBoost",
-        "formula": "linear_capped",
-        "_inferred": "toStat=attrDmgBonus相当=elemAtkBoost"
+        "slot": "s3",
+        "formula": "linear_capped_rung",
+        "weaponSpecific": "stonesplit"
       }
     ]
   },
   "20901": {
     "weaponType": "gauntlet",
-    "effects": {},
     "description": "天志の拳 (手甲、Heavenwill Gauntlet、 2026年7月実装予定、 新武器種)。 瞬嵐属性。 effects/derived は実装後に追記。",
     "path": "bamboocut",
-    "_pendingImplementation": true
+    "_pendingImplementation": true,
+    "derived": [
+      {
+        "from": "agility",
+        "appliesTo": "minPhysATK",
+        "slot": "s1",
+        "formula": "linear_capped_rung"
+      },
+      {
+        "from": "minBamboocut",
+        "appliesTo": "elemAtkBoost",
+        "slot": "s3",
+        "formula": "linear_capped_rung",
+        "weaponSpecific": "bamboocut"
+      }
+    ]
   },
   "_schema": "ID → 武術名 + 武器タイプ + 説明。武術自体は直接 effects 値を持たず、武術ツリー進行度 (xiuWeiKungFu) と武器ボーナスに集約される。",
   "_lastUpdated": "2026-05-25",

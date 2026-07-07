@@ -32,6 +32,48 @@ async function _ensureDicts() {
   await window.WWM_DS.ensureCalcData();
 }
 
+// kongfu 才能 突破段階 (重) をキャラLvから決定 (2026-07-07 兄貴仕様: 武術Lvはキャラ
+// Lvを超えられない前提で、Lv95→十二重/Lv96→十三重 のように lvCaps で最小の重を選ぶ)。
+// ⚠️ 十三重(lvCaps idx12)以降の解放トリガーは WorldLv+キャラLv 相互考慮に変わる可能性
+// あり (兄貴)。変更時は data/kongfu_talent_ladders.json の lvCaps とこの関数のみ修正。
+// ladders 未load 時 fallback = 12 (十二重/Lv95 現行キャップ)。
+function _kongfuTalentStage(charLv) {
+  const L = window.WWM_KONGFU_LADDERS;
+  if (!L || !Array.isArray(L.lvCaps)) return 12;
+  // null/undefined = 未指定 → 95 (max想定、観音と同思想)。 0/負値 = 1 (最低段階) にclamp
+  const lv = charLv == null ? 95 : Math.max(1, charLv);
+  for (let i = 0; i < L.lvCaps.length; i++) {
+    if (L.lvCaps[i] >= lv) return i + 1;
+  }
+  return L.lvCaps.length;
+}
+
+// kongfu derived entry の {thr, cap} を突破段階から解決 (v2 slot schema、
+// data/kongfu_talent_ladders.json 参照)。旧schema (thresholdValue/maxBoost 直値) は
+// そのまま返す互換。S3 (pathステータス上昇) は三重解放 = rung = stage-2、未解放は null。
+function _resolveDerivedRung(d, stage) {
+  if (d.thresholdValue != null) return { thr: d.thresholdValue, cap: d.maxBoost }; // 旧schema互換
+  const L = window.WWM_KONGFU_LADDERS;
+  // fetch失敗時 ensureCalcData は {} で続行する仕様 → 構造check必須 (throw防止、寄与0で degrade)
+  if (!L || !Array.isArray(L.s1Thresholds) || !L.s3Thresholds || !L.s1Caps || !L.s3Caps) return null;
+  if (d.slot === 's1') {
+    const i = Math.min(stage, L.s1Thresholds.length) - 1;
+    const caps = L.s1Caps?.[d.appliesTo];
+    if (!caps) return null;
+    return { thr: L.s1Thresholds[i], cap: caps[i] };
+  }
+  if (d.slot === 's3') {
+    const rung = stage - 2;
+    if (rung < 1) return null;
+    const table = d.weaponSpecific === 'bellstrike' ? L.s3Thresholds.bellstrike : L.s3Thresholds.normal;
+    const i = Math.min(rung, table.length) - 1;
+    const caps = /Pen$/.test(d.appliesTo) ? L.s3Caps?.pen : L.s3Caps?.dmg;
+    if (!caps) return null;
+    return { thr: table[i], cap: caps[i] };
+  }
+  return null;
+}
+
 function _resolvePath(kongfuMain) {
   const k = window.WWM_KONGFU?.[kongfuMain];
   return k?.path || 'bamboocut';
@@ -150,6 +192,22 @@ function buildAffixAliveJudge(roleInfo) {
       else if (d.from) derivedFrom.add(d.from);
     }
   }
+  // synergy effectsByStage の HP線形 scaling (断魂×嵐雷 bonusCritRate 等、2026-07-07) が
+  // ペア成立で有効な構成では maxHp → bonusCritRate → score の寄与経路が生まれる
+  // → maxHp と body (5行derived 経由で maxHp に流れる) を生扱いにする (cap 到達判定は
+  // state 無しでは不能のため保守的に常時生 = 誤skipゼロ優先)
+  let synergyHpScaling = false;
+  for (const kid of [roleInfo?.kongfuMain, roleInfo?.kongfuSub]) {
+    for (const se of (window.WWM_KONGFU?.[kid]?.synergyEffects || [])) {
+      if (!se?.effectsByStage || !Array.isArray(se.with)) continue;
+      if (!se.with.every(w => activeKongfus.has(Number(w)))) continue;
+      for (const stageEff of Object.values(se.effectsByStage)) {
+        for (const v of Object.values(stageEff)) {
+          if (v && typeof v === 'object' && v.hpThreshold) synergyHpScaling = true;
+        }
+      }
+    }
+  }
   const PATH_MINMAX = {
     minBellstrike: 'bellstrike', maxBellstrike: 'bellstrike',
     minStonesplit: 'stonesplit', maxStonesplit: 'stonesplit',
@@ -163,8 +221,10 @@ function buildAffixAliveJudge(roleInfo) {
   return function isAlive(sk) {
     if (!sk) return false;
     if (derivedFrom.has(sk)) return true;
+    // maxHp/body/defense = HP連動synergy 時のみ生 (maxHp = dBody×60 + dDefense×17 の
+    // 5行derived 経由で bonusCritRate 経路に到達。stats.js L486 参照)
+    if (sk === 'maxHp' || sk === 'body' || sk === 'defense') return synergyHpScaling || false;
     if (DEAD_ALWAYS.has(sk)) return false;
-    if (sk === 'body' || sk === 'defense') return false;
     if (sk in PATH_MINMAX) return PATH_MINMAX[sk] === activePath;
     if (sk in PATH_PEN) return PATH_PEN[sk] === activePath;
     if (_WEAPON_CLASS_DMG_KEYS.has(sk)) return activeClassDmgKeys.has(sk);
@@ -238,20 +298,32 @@ function buildStatParamsSync(roleInfo, state) {
   }
   // NOTE: r._arsMinSum / r._arsMaxSum / r._arsPath は read 0件で死コードのため削除済 (2026-06-01)。 武庫合計値が必要な L289-290 (副属性枠) は local 変数 `_arsMinSum`/`_arsMaxSum` を直接使用、 state.arsenal.path 必要時は state から直接読む。
 
-  // 4.5 武術 (kongfu) effects: 主+副 の minElemMainAdd/maxElemMainAdd → path-specific min/max のみ
+  // 4.5 武術 (kongfu) 固有 path攻撃 固定Add: 突破段階(重) 依存 (S3=三重解放、rung=stage-2)
+  //     v2 = data/kongfu_talent_ladders.json s3FixedAdd[rung] (例 十二重=[80,160])。
+  //     旧schema (effects 内 static min/max*Add) は fallback として温存 (二重加算防止付き)
+  const _talentStage = _kongfuTalentStage(roleInfo?.level);
   for (const kid of [roleInfo?.kongfuMain, roleInfo?.kongfuSub]) {
     const kf = window.WWM_KONGFU?.[kid];
     if (!kf) continue;
     const kPath = kf.path;
     const kKeys = _PATH_KEY_MAP[kPath] || _PATH_KEY_MAP.bamboocut;
     const ef = kf.effects || {};
-    if (ef.minElemMainAdd) _acc(r, kKeys.min, ef.minElemMainAdd);
-    if (ef.maxElemMainAdd) _acc(r, kKeys.max, ef.maxElemMainAdd);
-    // path特定 key (例: minStonesplitAdd / maxBamboocutAdd)
     const minAddKey = kKeys.min + 'Add';
     const maxAddKey = kKeys.max + 'Add';
+    // 旧schema fallback (static 値が残ってる場合のみ)
+    if (ef.minElemMainAdd) _acc(r, kKeys.min, ef.minElemMainAdd);
+    if (ef.maxElemMainAdd) _acc(r, kKeys.max, ef.maxElemMainAdd);
     if (ef[minAddKey]) _acc(r, kKeys.min, ef[minAddKey]);
     if (ef[maxAddKey]) _acc(r, kKeys.max, ef[maxAddKey]);
+    // v2: S3 持ち武学のみ、static key が無い時だけ ladder 値を加算 (二重加算防止)
+    const _hasStatic = ef.minElemMainAdd || ef[minAddKey];
+    const _hasS3 = (kf.derived || []).some((d) => d.slot === 's3');
+    const _rung = _talentStage - 2;
+    const L = window.WWM_KONGFU_LADDERS;
+    if (_hasS3 && !_hasStatic && _rung >= 1 && Array.isArray(L?.s3FixedAdd)) {
+      const fp = L.s3FixedAdd[Math.min(_rung, L.s3FixedAdd.length) - 1];
+      if (fp) { _acc(r, kKeys.min, fp[0]); _acc(r, kKeys.max, fp[1]); }
+    }
   }
 
   // 4.6 武術 (kongfu) synergyEffects: 主×副 ペア成立時のみ発動する effects (順序不問)
@@ -267,7 +339,8 @@ function buildStatParamsSync(roleInfo, state) {
       if (!kf || !Array.isArray(kf.synergyEffects)) continue;
       for (let i = 0; i < kf.synergyEffects.length; i++) {
         const synEntry = kf.synergyEffects[i];
-        if (!synEntry || !Array.isArray(synEntry.with) || !synEntry.effects) continue;
+        if (!synEntry || !Array.isArray(synEntry.with)) continue;
+        if (!synEntry.effects && !synEntry.effectsByStage) continue;
         // 重複発火防止 key (kid+index、 主・副ループで同一 entry再読防止)
         const dedupKey = String(kid) + '#' + i;
         if (seenSynergyKeys.has(dedupKey)) continue;
@@ -277,8 +350,28 @@ function buildStatParamsSync(roleInfo, state) {
         );
         if (!allMet) continue;
         seenSynergyKeys.add(dedupKey);
-        for (const [k, v] of Object.entries(synEntry.effects)) {
-          if (typeof v === 'number') _acc(r, k, v);
+        // v2 (2026-07-07): effectsByStage = 突破段階(重) 連動 (例: 断魂 溜め会心強化
+        // rank1@二重/rank2@六重/rank3@八重、kongfu_up_rank per-stage 抽出値)。
+        // 適用rank = _talentStage 以下の最大 stage キー。値が {fixed,hpCap,hpThreshold}
+        // 形式なら maxHp 線形 scaling 込み → maxHp 確定後に解決 (r._synergyStagedHp へ遅延)
+        if (synEntry.effectsByStage) {
+          let bestStage = -1;
+          for (const sk of Object.keys(synEntry.effectsByStage)) {
+            const sn = Number(sk);
+            if (sn <= _talentStage && sn > bestStage) bestStage = sn;
+          }
+          if (bestStage >= 0) {
+            for (const [k, v] of Object.entries(synEntry.effectsByStage[String(bestStage)])) {
+              if (typeof v === 'number') _acc(r, k, v);
+              else if (v && typeof v === 'object') {
+                (r._synergyStagedHp = r._synergyStagedHp || []).push({ key: k, ...v });
+              }
+            }
+          }
+        } else if (synEntry.effects) {
+          for (const [k, v] of Object.entries(synEntry.effects)) {
+            if (typeof v === 'number') _acc(r, k, v);
+          }
         }
       }
     }
@@ -456,11 +549,15 @@ function buildStatParamsSync(roleInfo, state) {
         applyKey = dmgMap[kf.path] || applyKey;
       }
       const finalKey = _CALCJS_TO_WWM[applyKey] || applyKey;
-      if (fromVal >= (d.thresholdValue || 0)) {
-        _acc(r, finalKey, d.maxBoost);
+      // v2: 閾値/cap は突破段階(重) から解決 (_talentStage は §4.5 で算出済み)。
+      // null = S3未解放 (三重未満) or ladders 未load → 寄与なし
+      const _rc = _resolveDerivedRung(d, _talentStage);
+      if (!_rc) continue;
+      if (fromVal >= (_rc.thr || 0)) {
+        _acc(r, finalKey, _rc.cap);
       } else {
-        const ratio = fromVal / (d.thresholdValue || 1);
-        _acc(r, finalKey, d.maxBoost * ratio);
+        const ratio = fromVal / (_rc.thr || 1);
+        _acc(r, finalKey, _rc.cap * ratio);
       }
       derivedSeen.add(wwmKey);
     }
@@ -495,7 +592,8 @@ function buildStatParamsSync(roleInfo, state) {
         }
       }
       if (!warnKeys.length) continue;
-      const thr = d.thresholdValue || 0;
+      const _rcw = _resolveDerivedRung(d, _talentStage);
+      const thr = _rcw ? (_rcw.thr || 0) : 0;
       if (thr > 0 && curVal < thr) {
         for (const wk of warnKeys) {
           const prev = r._capWarnings[wk];
@@ -621,6 +719,17 @@ function buildStatParamsSync(roleInfo, state) {
     const _jr = r.judgeRes || 1.45;
     r.appliedHit = Math.max(0, Math.min(1, _raw < 0.65 ? _raw : 0.65 + (_raw - 0.65) / _jr));
   }
+  // 12.5 synergy 段階連動効果の HP scaling 部解決 (§4.6 で遅延した分。maxHp 確定後の
+  // この位置で 値 = fixed + hpCap × min(maxHp/hpThreshold, 1) を加算。例: 断魂 溜め会心
+  // rank3 = 9% + 15%×min(maxHp/90000,1) = HP90000到達で計24%)
+  if (Array.isArray(r._synergyStagedHp)) {
+    for (const sp of r._synergyStagedHp) {
+      const ratio = sp.hpThreshold > 0 ? Math.min((r.maxHp || 0) / sp.hpThreshold, 1) : 1;
+      _acc(r, sp.key, (sp.fixed || 0) + (sp.hpCap || 0) * ratio);
+    }
+    delete r._synergyStagedHp;
+  }
+
   // appliedCrit: ゲーム実機の会心率表記用 (bonusCritRate 抜き、 judgeRes割込み + cap 80%)。 サイドパネル「会心率」 行の (applied) はこの値。
   // critRateBoosted: 実効会心率 (bonusCritRate 込み、 cap 80%)。 hiddenStat 表示用 + 後段 finalCrit / 期待値ダメージ計算で参照。
   r.appliedCrit      = Math.min(0.8, (r.crit || 0) / judgeResApplied);
@@ -658,7 +767,6 @@ function buildStatParamsSync(roleInfo, state) {
   r.weaponBonus     = r.physDmgBonus   || 0;
   // elemBoostMain/Sub は L549-550 で 1.5/1.0 に上書きされる (旧 1/1 dead代入削除)
   // 属性攻撃強化 = path別 (ゲーム仕様: 表示=MAX(5path)、計算=active path total)。generic(attrDmgBonus)は本来0。
-  const _PDMG = { bellstrike:'bellstrikeDmgBoost', stonesplit:'stonesplitDmgBoost', silkbind:'silkbindDmgBoost', bamboocut:'bamboocutDmgBoost', voidPath:'voidDmgBoost' };
   ['bellstrikeDmgBoost','stonesplitDmgBoost','silkbindDmgBoost','bamboocutDmgBoost','voidDmgBoost'].forEach(k => { r[k] = r[k] || 0; });
   const _genElemDmg = r.attrDmgBonus || 0;
   const _pathDmgTotals = {
