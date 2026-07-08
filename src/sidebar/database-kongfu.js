@@ -36,7 +36,7 @@
     return ids.map(id => {
       const sel = id === _selectedId ? 'true' : 'false';
       const kf = _kongfuMap()[id];
-      const iconUrl = window.WWM_KONGFU_ICONS && window.WWM_KONGFU_ICONS[id] && window.WWM_KONGFU_ICONS[id].icon_url;
+      const iconUrl = window.WWM_KONGFU_ICONS && window.WWM_KONGFU_ICONS[id] && window.WWM_KONGFU_ICONS[id].pic_url;
       const iconHtml = iconUrl
         ? `<img class="wwm-db-kongfu-item-icon" data-path="${_esc(kf && kf.path || '')}" src="${iconUrl}" alt="" loading="lazy">`
         : '<span class="wwm-db-kongfu-item-icon wwm-db-kongfu-item-icon-empty"></span>';
