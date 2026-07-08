@@ -99,6 +99,7 @@ import './sidebar/index.js';
 import './workspace.js';
 import './sidebar/database-gear.js';
 import './sidebar/database-xinfa.js';
+import './sidebar/database-kongfu.js';
 import './database.js';
 import './tutorial.js';
 import './import.js';

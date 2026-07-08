@@ -57,7 +57,7 @@
     try { localStorage.setItem(MODE_KEY, '0'); } catch (e) {}
   }
 
-  var PANELS = { gear: 'dbGear', xinfa: 'dbXinfa' };
+  var PANELS = { gear: 'dbGear', xinfa: 'dbXinfa', kongfu: 'dbKongfu' };
   function activateTab(tab) {
     if (!PANELS[tab]) return;
     Object.entries(PANELS).forEach(function (kv) {
@@ -73,6 +73,9 @@
     }
     if (tab === 'xinfa' && window.WWMSidebar && window.WWMSidebar.databaseXinfa) {
       window.WWMSidebar.databaseXinfa.render();
+    }
+    if (tab === 'kongfu' && window.WWMSidebar && window.WWMSidebar.databaseKongfu) {
+      window.WWMSidebar.databaseKongfu.render();
     }
   }
 
