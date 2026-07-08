@@ -1,0 +1,1406 @@
+{
+  "10101": {
+    "s1": {
+      "fromStatKey": "power",
+      "appliesTo": "sympathyRate",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "10101_s2_1",
+        "descKey": "10101_s2_1",
+        "titleSid": "c4b8af6bf0aa3dd9",
+        "descSid": null,
+        "psid": 300201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "10101_s2_2",
+        "descKey": "10101_s2_2",
+        "titleSid": "db5a99b6169910b4",
+        "descSid": null,
+        "psid": 300202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "10101_s2_3",
+        "descKey": "10101_s2_3",
+        "titleSid": "12d136c55653be1e",
+        "descSid": null,
+        "psid": 300203
+      }
+    ],
+    "s3": {
+      "pathVariant": "bellstrike",
+      "appliesTo": "bellstrikePen",
+      "capKind": "pen",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "bellstrike",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "31bad83630cd6342",
+      "psid": 300401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "10101_s5_1",
+        "descKey": "10101_s5_1",
+        "titleSid": "581c9fac5fdceed0",
+        "descSid": null,
+        "psid": 300501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "10101_s5_2",
+        "descKey": "10101_s5_2",
+        "titleSid": "c2fc9c1769b4a69d",
+        "descSid": null,
+        "psid": 300502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "10102": {
+    "s1": {
+      "fromStatKey": "momentum",
+      "appliesTo": "maxPhysATK",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "10102_s2_1",
+        "descKey": "10102_s2_1",
+        "titleSid": "73d74c5d9688105c",
+        "descSid": null,
+        "psid": 307201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "10102_s2_2",
+        "descKey": "10102_s2_2",
+        "titleSid": "9a14dc6cc193283f",
+        "descSid": null,
+        "psid": 307202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "10102_s2_3",
+        "descKey": "10102_s2_3",
+        "titleSid": "dfe3a548d90239e3",
+        "descSid": null,
+        "psid": 307203
+      }
+    ],
+    "s3": {
+      "pathVariant": "bellstrike",
+      "appliesTo": "bellstrikePen",
+      "capKind": "pen",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "bellstrike",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "3068a54223439608",
+      "psid": 307401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "10102_s5_1",
+        "descKey": "10102_s5_1",
+        "titleSid": "baffdf366880b40c",
+        "descSid": null,
+        "psid": 307501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "10102_s5_2",
+        "descKey": "10102_s5_2",
+        "titleSid": "f4140e4db3b792db",
+        "descSid": null,
+        "psid": 307502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "10201": {
+    "s1": {
+      "fromStatKey": "power",
+      "appliesTo": "maxPhysATK",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "10201_s2_1",
+        "descKey": "10201_s2_1",
+        "titleSid": "e420fa1e5fcd3795",
+        "descSid": null,
+        "psid": 301201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "10201_s2_2",
+        "descKey": "10201_s2_2",
+        "titleSid": "7f2350801d356dce",
+        "descSid": null,
+        "psid": 301202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "10201_s2_3",
+        "descKey": "10201_s2_3",
+        "titleSid": "8fb3913100b9ee57",
+        "descSid": null,
+        "psid": 301203
+      }
+    ],
+    "s3": {
+      "pathVariant": "bellstrike",
+      "appliesTo": "elemAtkBoost",
+      "capKind": "dmg",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "bellstrike",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "8bf9a2534d18d140",
+      "psid": 301401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "10201_s5_1",
+        "descKey": "10201_s5_1",
+        "titleSid": "6e62a22e522abf5a",
+        "descSid": null,
+        "psid": 301501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "10201_s5_2",
+        "descKey": "10201_s5_2",
+        "titleSid": "042c6a05e9895c1f",
+        "descSid": null,
+        "psid": 301502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "10202": {
+    "s1": {
+      "fromStatKey": "momentum",
+      "appliesTo": "sympathyRate",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "10202_s2_1",
+        "descKey": "10202_s2_1",
+        "titleSid": "74ee49d53be76020",
+        "descSid": null,
+        "psid": 308201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "10202_s2_2",
+        "descKey": "10202_s2_2",
+        "titleSid": "fb32302fd232247a",
+        "descSid": null,
+        "psid": 308202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "10202_s2_3",
+        "descKey": "10202_s2_3",
+        "titleSid": "23c32ff6d9e5a021",
+        "descSid": null,
+        "psid": 308203
+      }
+    ],
+    "s3": {
+      "pathVariant": "bellstrike",
+      "appliesTo": "elemAtkBoost",
+      "capKind": "dmg",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "bellstrike",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "5444e2ba3d99bbd9",
+      "psid": 308401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "10202_s5_1",
+        "descKey": "10202_s5_1",
+        "titleSid": "69fd762769bc3e4a",
+        "descSid": null,
+        "psid": 308501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "10202_s5_2",
+        "descKey": "10202_s5_2",
+        "titleSid": "d69953232e039c6b",
+        "descSid": null,
+        "psid": 308502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "10301": {
+    "s1": {
+      "fromStatKey": "agility",
+      "appliesTo": "critRate",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "10301_s2_1",
+        "descKey": "10301_s2_1",
+        "titleSid": "c2771731a02a3ab3",
+        "descSid": null,
+        "psid": 309201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "10301_s2_2",
+        "descKey": "10301_s2_2",
+        "titleSid": "d152a6f40d380b64",
+        "descSid": null,
+        "psid": 309202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "10301_s2_3",
+        "descKey": "10301_s2_3",
+        "titleSid": "8017841cbff6b8c5",
+        "descSid": null,
+        "psid": 309203
+      }
+    ],
+    "s3": {
+      "pathVariant": "normal",
+      "appliesTo": "elemAtkBoost",
+      "capKind": "dmg",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "silkbind",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "fe9b2b97ea6255a1",
+      "psid": 309401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "10301_s5_1",
+        "descKey": "10301_s5_1",
+        "titleSid": "fa3e55e9ff17b980",
+        "descSid": null,
+        "psid": 309501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "10301_s5_2",
+        "descKey": "10301_s5_2",
+        "titleSid": "a508ca09da077c96",
+        "descSid": null,
+        "psid": 309502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "10302": {
+    "s1": {
+      "fromStatKey": "agility",
+      "appliesTo": "minPhysATK",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "10302_s2_1",
+        "descKey": "10302_s2_1",
+        "titleSid": "f2e5a1b239bbfd80",
+        "descSid": null,
+        "psid": 304201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "10302_s2_2",
+        "descKey": "10302_s2_2",
+        "titleSid": "51dfbbc7d714ee33",
+        "descSid": null,
+        "psid": 304202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "10302_s2_3",
+        "descKey": "10302_s2_3",
+        "titleSid": "4eb68a7168435e98",
+        "descSid": null,
+        "psid": 304203
+      }
+    ],
+    "s3": {
+      "pathVariant": "normal",
+      "appliesTo": "elemAtkBoost",
+      "capKind": "dmg",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "silkbind",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "b0cbfa9a82b68be3",
+      "psid": 304401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "10302_s5_1",
+        "descKey": "10302_s5_1",
+        "titleSid": "9eebfd2a0be90bca",
+        "descSid": null,
+        "psid": 304501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "10302_s5_2",
+        "descKey": "10302_s5_2",
+        "titleSid": "0d54e5acc1f5fff6",
+        "descSid": null,
+        "psid": 304502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "20103": {
+    "s1": {
+      "fromStatKey": "max(body,power)",
+      "appliesTo": "maxHp",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "20103_s2_1",
+        "descKey": "20103_s2_1",
+        "titleSid": "f98a0ec9d797144f",
+        "descSid": null,
+        "psid": 306201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "20103_s2_2",
+        "descKey": "20103_s2_2",
+        "titleSid": "0a1d4cbfa4800821",
+        "descSid": null,
+        "psid": 306202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "20103_s2_3",
+        "descKey": "20103_s2_3",
+        "titleSid": "635f447a2efdbb0a",
+        "descSid": null,
+        "psid": 306203
+      }
+    ],
+    "s3": {
+      "pathVariant": "normal",
+      "appliesTo": "elemAtkBoost",
+      "capKind": "dmg",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "stonesplit",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "61c6ca6ade32c680",
+      "psid": 306401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "20103_s5_1",
+        "descKey": "20103_s5_1",
+        "titleSid": "c10c3291be0e7969",
+        "descSid": null,
+        "psid": 306501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "20103_s5_2",
+        "descKey": "20103_s5_2",
+        "titleSid": "90c68fdfb9698203",
+        "descSid": null,
+        "psid": 306502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "20401": {
+    "s1": {
+      "fromStatKey": "max(body,power)",
+      "appliesTo": "critRate",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "20401_s2_1",
+        "descKey": "20401_s2_1",
+        "titleSid": "29f814377257aa84",
+        "descSid": null,
+        "psid": 305201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "20401_s2_2",
+        "descKey": "20401_s2_2",
+        "titleSid": "2221ec2f0789ebda",
+        "descSid": null,
+        "psid": 305202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "20401_s2_3",
+        "descKey": "20401_s2_3",
+        "titleSid": "ac87adaf7a3bceb2",
+        "descSid": null,
+        "psid": 305203
+      }
+    ],
+    "s3": {
+      "pathVariant": "normal",
+      "appliesTo": "stonesplitPen",
+      "capKind": "pen",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "stonesplit",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "31648d112047de42",
+      "psid": 305401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "20401_s5_1",
+        "descKey": "20401_s5_1",
+        "titleSid": "923638ce7f59df9c",
+        "descSid": null,
+        "psid": 305501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "20401_s5_2",
+        "descKey": "20401_s5_2",
+        "titleSid": "35821c26816f5b56",
+        "descSid": null,
+        "psid": 305502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "20402": {
+    "s1": {
+      "fromStatKey": "agility",
+      "appliesTo": "critRate",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "20402_s2_1",
+        "descKey": "20402_s2_1",
+        "titleSid": "bbdb2e2b574e73d0",
+        "descSid": null,
+        "psid": 314201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "20402_s2_2",
+        "descKey": "20402_s2_2",
+        "titleSid": "2d8e7b441bc1f411",
+        "descSid": null,
+        "psid": 314202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "20402_s2_3",
+        "descKey": "20402_s2_3",
+        "titleSid": "de9c4e7aef6b2199",
+        "descSid": null,
+        "psid": 314203
+      }
+    ],
+    "s3": {
+      "pathVariant": "normal",
+      "appliesTo": "stonesplitPen",
+      "capKind": "pen",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "stonesplit",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "84e580633a5eaeca",
+      "psid": 314401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "20402_s5_1",
+        "descKey": "20402_s5_1",
+        "titleSid": "a6c59b5c5e68d716",
+        "descSid": null,
+        "psid": 314501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "20402_s5_2",
+        "descKey": "20402_s5_2",
+        "titleSid": "945479329806e03d",
+        "descSid": null,
+        "psid": 314502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "20501": {
+    "s1": {
+      "fromStatKey": "agility",
+      "appliesTo": "minPhysATK",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "20501_s2_1",
+        "descKey": "20501_s2_1",
+        "titleSid": "8f7e10bfa91128cf",
+        "descSid": null,
+        "psid": 302201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "20501_s2_2",
+        "descKey": "20501_s2_2",
+        "titleSid": "553754b5ebfbaa63",
+        "descSid": null,
+        "psid": 302202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "20501_s2_3",
+        "descKey": "20501_s2_3",
+        "titleSid": "ad391e6a56663e84",
+        "descSid": null,
+        "psid": 302203
+      }
+    ],
+    "s3": {
+      "pathVariant": "normal",
+      "appliesTo": "elemPen",
+      "capKind": "pen",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "bamboocut",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "4e9b05f25303cedf",
+      "psid": 302401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "20501_s5_1",
+        "descKey": "20501_s5_1",
+        "titleSid": "13d4026428bbf6cd",
+        "descSid": null,
+        "psid": 302501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "20501_s5_2",
+        "descKey": "20501_s5_2",
+        "titleSid": "6c936878b79e957b",
+        "descSid": null,
+        "psid": 302502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "20601": {
+    "s1": {
+      "fromStatKey": "agility",
+      "appliesTo": "critRate",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "20601_s2_1",
+        "descKey": "20601_s2_1",
+        "titleSid": "f4b057f78b82f814",
+        "descSid": null,
+        "psid": 303201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "20601_s2_2",
+        "descKey": "20601_s2_2",
+        "titleSid": "fab1661d62901b02",
+        "descSid": null,
+        "psid": 303202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "20601_s2_3",
+        "descKey": "20601_s2_3",
+        "titleSid": "be806ddb6f5a5121",
+        "descSid": null,
+        "psid": 303203
+      }
+    ],
+    "s3": {
+      "pathVariant": "normal",
+      "appliesTo": "silkbindPen",
+      "capKind": "pen",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "silkbind",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "b21c99671da9a672",
+      "psid": 303401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "20601_s5_1",
+        "descKey": "20601_s5_1",
+        "titleSid": "94e12c6bd635fd70",
+        "descSid": null,
+        "psid": 303501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "20601_s5_2",
+        "descKey": "20601_s5_2",
+        "titleSid": "720da2e72c62dc44",
+        "descSid": null,
+        "psid": 303502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "20602": {
+    "s1": {
+      "fromStatKey": "agility",
+      "appliesTo": "minPhysATK",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "20602_s2_1",
+        "descKey": "20602_s2_1",
+        "titleSid": "6137583fbf9777a5",
+        "descSid": null,
+        "psid": 311201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "20602_s2_2",
+        "descKey": "20602_s2_2",
+        "titleSid": "d0449cfd41b9f342",
+        "descSid": null,
+        "psid": 311202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "20602_s2_3",
+        "descKey": "20602_s2_3",
+        "titleSid": "d665774a9792c157",
+        "descSid": null,
+        "psid": 311203
+      }
+    ],
+    "s3": {
+      "pathVariant": "normal",
+      "appliesTo": "silkbindPen",
+      "capKind": "pen",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "silkbind",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "69230419906dedf4",
+      "psid": 311401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "20602_s5_1",
+        "descKey": "20602_s5_1",
+        "titleSid": "9d750196b7f0050f",
+        "descSid": null,
+        "psid": 311501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "20602_s5_2",
+        "descKey": "20602_s5_2",
+        "titleSid": "d6fa70d1c42e6e87",
+        "descSid": null,
+        "psid": 311502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "20603": {
+    "s1": {
+      "fromStatKey": "agility",
+      "appliesTo": "minPhysATK",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "20603_s2_1",
+        "descKey": "20603_s2_1",
+        "titleSid": "1f25e8b7f4e76a87",
+        "descSid": null,
+        "psid": 312201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "20603_s2_2",
+        "descKey": "20603_s2_2",
+        "titleSid": "ae6b4c81c8a60ad2",
+        "descSid": null,
+        "psid": 312202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "20603_s2_3",
+        "descKey": "20603_s2_3",
+        "titleSid": "bc6660343f75ed9f",
+        "descSid": null,
+        "psid": 312203
+      }
+    ],
+    "s3": {
+      "pathVariant": "normal",
+      "appliesTo": "elemPen",
+      "capKind": "pen",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "bamboocut",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "4706dfdca46a7fb6",
+      "psid": 312401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "20603_s5_1",
+        "descKey": "20603_s5_1",
+        "titleSid": "91c17bb6f7bcd054",
+        "descSid": null,
+        "psid": 312501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "20603_s5_2",
+        "descKey": "20603_s5_2",
+        "titleSid": "b8712d9bc3a8abb9",
+        "descSid": null,
+        "psid": 312502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "20701": {
+    "s1": {
+      "fromStatKey": "agility",
+      "appliesTo": "critRate",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "20701_s2_1",
+        "descKey": "20701_s2_1",
+        "titleSid": "0bcae6415bf5c011",
+        "descSid": null,
+        "psid": 310201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "20701_s2_2",
+        "descKey": "20701_s2_2",
+        "titleSid": "4d6616341f1e22ba",
+        "descSid": null,
+        "psid": 310202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "20701_s2_3",
+        "descKey": "20701_s2_3",
+        "titleSid": "7a3ef1f61303290a",
+        "descSid": null,
+        "psid": 310203
+      }
+    ],
+    "s3": {
+      "pathVariant": "normal",
+      "appliesTo": "elemAtkBoost",
+      "capKind": "dmg",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "bamboocut",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "62b2303875cd11b4",
+      "psid": 310401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "20701_s5_1",
+        "descKey": "20701_s5_1",
+        "titleSid": "5a8ba244b2c4f7ef",
+        "descSid": null,
+        "psid": 310501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "20701_s5_2",
+        "descKey": "20701_s5_2",
+        "titleSid": "3287fd49b5034f90",
+        "descSid": null,
+        "psid": 310502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "20702": {
+    "s1": {
+      "fromStatKey": "agility",
+      "appliesTo": "critRate",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "20702_s2_1",
+        "descKey": "20702_s2_1",
+        "titleSid": "2e9b86021bd61609",
+        "descSid": null,
+        "psid": 313201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "20702_s2_2",
+        "descKey": "20702_s2_2",
+        "titleSid": "df040e2ee8fe8ef6",
+        "descSid": null,
+        "psid": 313202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "20702_s2_3",
+        "descKey": "20702_s2_3",
+        "titleSid": "fa61344e2a9dea37",
+        "descSid": null,
+        "psid": 313203
+      }
+    ],
+    "s3": {
+      "pathVariant": "normal",
+      "appliesTo": "elemAtkBoost",
+      "capKind": "dmg",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "bamboocut",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "628e58a0c186f2c6",
+      "psid": 313401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "20702_s5_1",
+        "descKey": "20702_s5_1",
+        "titleSid": "8670d7100797c6b0",
+        "descSid": null,
+        "psid": 313501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "20702_s5_2",
+        "descKey": "20702_s5_2",
+        "titleSid": "82988fe5050f03c5",
+        "descSid": null,
+        "psid": 313502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "20703": {
+    "s1": {
+      "fromStatKey": "agility",
+      "appliesTo": "critRate",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "20703_s2_1",
+        "descKey": "20703_s2_1",
+        "titleSid": "2c64b02fc9a02d4a",
+        "descSid": null,
+        "psid": 317201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "20703_s2_2",
+        "descKey": "20703_s2_2",
+        "titleSid": "77d5e302167cf27a",
+        "descSid": null,
+        "psid": 317202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "20703_s2_3",
+        "descKey": "20703_s2_3",
+        "titleSid": "151f42df9ac312dc",
+        "descSid": null,
+        "psid": 317203
+      }
+    ],
+    "s3": {
+      "pathVariant": "normal",
+      "appliesTo": "elemPen",
+      "capKind": "pen",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "bamboocut",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "3963aa059422d0d1",
+      "psid": 317401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "20703_s5_1",
+        "descKey": "20703_s5_1",
+        "titleSid": "9460d602debc2c08",
+        "descSid": null,
+        "psid": 317501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "20703_s5_2",
+        "descKey": "20703_s5_2",
+        "titleSid": "f0fc6e9a08f45b64",
+        "descSid": null,
+        "psid": 317502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "20801": {
+    "s1": {
+      "fromStatKey": "agility",
+      "appliesTo": "minPhysATK",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "20801_s2_1",
+        "descKey": "20801_s2_1",
+        "titleSid": "b12e99eb4d4432db",
+        "descSid": null,
+        "psid": 315201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "20801_s2_2",
+        "descKey": "20801_s2_2",
+        "titleSid": "52452a36b6bca995",
+        "descSid": null,
+        "psid": 315202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "20801_s2_3",
+        "descKey": "20801_s2_3",
+        "titleSid": "0fc93a07257b090c",
+        "descSid": null,
+        "psid": 315203
+      }
+    ],
+    "s3": {
+      "pathVariant": "normal",
+      "appliesTo": "elemAtkBoost",
+      "capKind": "dmg",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "stonesplit",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "235322457adb0f3f",
+      "psid": 315401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "20801_s5_1",
+        "descKey": "20801_s5_1",
+        "titleSid": "cd1718ada3d29840",
+        "descSid": null,
+        "psid": 315501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "20801_s5_2",
+        "descKey": "20801_s5_2",
+        "titleSid": "48da9beb9c113c3f",
+        "descSid": null,
+        "psid": 315502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  },
+  "20901": {
+    "s1": {
+      "fromStatKey": "agility",
+      "appliesTo": "minPhysATK",
+      "unlockStage": 1
+    },
+    "s2": [
+      {
+        "rank": 1,
+        "unlockStage": 2,
+        "titleKey": "20901_s2_1",
+        "descKey": "20901_s2_1",
+        "titleSid": "486acc6a4ee45926",
+        "descSid": null,
+        "psid": 316201
+      },
+      {
+        "rank": 2,
+        "unlockStage": 6,
+        "titleKey": "20901_s2_2",
+        "descKey": "20901_s2_2",
+        "titleSid": "af4d7c7abcbc2b38",
+        "descSid": null,
+        "psid": 316202
+      },
+      {
+        "rank": 3,
+        "unlockStage": 8,
+        "titleKey": "20901_s2_3",
+        "descKey": "20901_s2_3",
+        "titleSid": "65c1240a3eb1e8a8",
+        "descSid": null,
+        "psid": 316203
+      }
+    ],
+    "s3": {
+      "pathVariant": "normal",
+      "appliesTo": "elemAtkBoost",
+      "capKind": "dmg",
+      "unlockStage": 3
+    },
+    "s4": {
+      "path": "bamboocut",
+      "value": 0.5,
+      "unlockStage": 3,
+      "titleSid": "434223e066c2c811",
+      "psid": 316401
+    },
+    "s5": [
+      {
+        "rank": 1,
+        "unlockStage": 0,
+        "titleKey": "20901_s5_1",
+        "descKey": "20901_s5_1",
+        "titleSid": "f1e30fb823f2cc9b",
+        "descSid": null,
+        "psid": 316501
+      },
+      {
+        "rank": 2,
+        "unlockStage": 5,
+        "titleKey": "20901_s5_2",
+        "descKey": "20901_s5_2",
+        "titleSid": "cfac95c079d6c61a",
+        "descSid": null,
+        "psid": 316502
+      }
+    ],
+    "s6": {
+      "unlockStage": 14,
+      "caps": [
+        0.0725,
+        0.15,
+        0.225,
+        0.3
+      ]
+    }
+  }
+}
