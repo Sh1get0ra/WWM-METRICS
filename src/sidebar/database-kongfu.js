@@ -124,7 +124,9 @@
   }
 
   const _STAGE_JA = ['一重', '二重', '三重', '四重', '五重', '六重', '七重', '八重', '九重', '十重', '十一重', '十二重', '十三重', '十四重', '十五重', '十六重', '十七重'];
+  // stage=0 = client 実データの「初出重0」case (S5 rank1 等) = Task 1 兄貴決定 B により「初期解放」表示
   function _stageLabel(stage) {
+    if (stage === 0) return (window.T && window.T.dbKongfuStageInitial) || '初期解放';
     const key = `dbKongfuStage${stage}`;
     return (window.T && window.T[key]) || _STAGE_JA[stage - 1] || `${stage}重`;
   }

@@ -5599,6 +5599,20 @@
     "ru": "Разблокируется на {stage}",
     "th": "ปลดล็อกที่ {stage}"
   },
+  "dbKongfuStageInitial": {
+    "ja": "初期解放",
+    "en": "Initial Unlock",
+    "zh": "初始解锁",
+    "zh_tw": "初始解鎖",
+    "ko": "초기 해금",
+    "vi": "Mở khóa ban đầu",
+    "de": "Anfangsfreischaltung",
+    "es": "Desbloqueado de inicio",
+    "fr": "Débloqué initialement",
+    "pt_br": "Desbloqueado no início",
+    "ru": "Изначальное разблокирование",
+    "th": "ปลดล็อกตั้งแต่แรก"
+  },
   "dbKongfuS6Future": {
     "ja": "※ 十四重解放 (現行未実装)",
     "en": "* Unlocks at Stage 14 (not yet implemented)",
