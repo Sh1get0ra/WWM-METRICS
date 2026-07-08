@@ -5501,6 +5501,34 @@
     "ru": "Текущий предел",
     "th": "เพดานปัจจุบัน"
   },
+  "dbKongfuSlotS3": {
+    "ja": "属性上昇才能",
+    "en": "Attribute Boost Talent",
+    "zh": "属性提升才能",
+    "zh_tw": "屬性提升才能",
+    "ko": "속성 상승 재능",
+    "vi": "Tài năng tăng thuộc tính",
+    "de": "Attribut-Steigerungstalent",
+    "es": "Talento de Aumento de Atributo",
+    "fr": "Talent d'Amélioration d'Attribut",
+    "pt_br": "Talento de Aumento de Atributo",
+    "ru": "Талант повышения атрибута",
+    "th": "พรสวรรค์เพิ่มพลังธาตุ"
+  },
+  "dbKongfuColFixedAdd": {
+    "ja": "固定加算",
+    "en": "Fixed Bonus",
+    "zh": "固定加成",
+    "zh_tw": "固定加成",
+    "ko": "고정 보너스",
+    "vi": "Cộng thêm cố định",
+    "de": "Fixer Bonus",
+    "es": "Bono Fijo",
+    "fr": "Bonus Fixe",
+    "pt_br": "Bônus Fixo",
+    "ru": "Фиксированный бонус",
+    "th": "โบนัสคงที่"
+  },
   "dbRankGold": {
     "ja": "金",
     "en": "Gold",

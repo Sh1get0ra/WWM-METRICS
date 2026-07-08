@@ -3,7 +3,8 @@
 // (path/weaponType バッジ + description + slot縦積み S1→S3→S2→S5→S4→S6)。
 // キャラ非依存の閲覧専用、心法タブと同型パターン。
 // Task 5 = 骨格のみ (プレースホルダ表示)。Task 6 = 左一覧 (検索 + icon list) 実装。
-// Task 7 = 右詳細 見出し+description枠(常に空、Task4判定)+S1才能表(17段) 実装。S3/S2/S5/S4/S6 は Task 8-9。
+// Task 7 = 右詳細 見出し+description枠(常に空、Task4判定)+S1才能表(17段) 実装。
+// Task 8 = S3才能表 (path上昇、15段、三重解放) 実装。S2/S5/S4/S6 は Task 9。
 (function () {
   'use strict';
   const _ESC_MAP = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
@@ -63,7 +64,15 @@
   // 存在 (data/i18n/game.json:831) = WWM_DS.t() の T_CHAIN 経由でそのまま解決可。
   // fromStatKey が "max(body,power)" 等の合成式文字列の場合 (例: 20103) は英数字のみでないため
   // lookup せず生文字列のまま fallback 表示する ──
-  const _APPLIES_TO_ALIAS = { critRate: 'crit', sympathyRate: 'affinity', maxPhysATK: 'physAtkLabel', minPhysATK: 'physAtkLabel' };
+  // Task 8 (S3) 追加分: kongfu_passive_skills.json の s3.appliesTo 実値を grep 突合した結果、
+  // bellstrikePen/stonesplitPen/silkbindPen/elemAtkBoost は data/i18n/game.json 'stat' cat に
+  // 同名キーで実在 (grep 確認: game.json:1391,1405,1419,199) = alias 不要、直引きで解決可。
+  // 'elemPen' のみ 'stat' cat に同名キー無し (grep 0件) だが、data/kongfu.json 側で
+  // elemPen を appliesTo に持つ全3件 (20501/20603/20703) は "path":"bamboocut" +
+  // "weaponSpecific":"bamboocut" (game.json 側の実データ = 瞬嵐固有貫通) と確認済 →
+  // 'bamboocutPen' (game.json:1433「瞬嵐貫通」) へ alias。bamboocutPen 自体を appliesTo に
+  // 持つ passive は現状0件 (elemPen が実質の内部表記)。
+  const _APPLIES_TO_ALIAS = { critRate: 'crit', sympathyRate: 'affinity', maxPhysATK: 'physAtkLabel', minPhysATK: 'physAtkLabel', elemPen: 'bamboocutPen' };
   function _appliesToLabel(key) {
     if (!key) return '';
     const alias = _APPLIES_TO_ALIAS[key] || key;
@@ -161,6 +170,59 @@
     `;
   }
 
+  // ── S3 = path上昇才能 (15段、三重解放から開始)。pathVariant('normal'|'bellstrike') で
+  // 閾値ladderが切替わる (data/kongfu_talent_ladders.json:41-76)。capKind='dmg' のみ %表示、
+  // 'pen' 系は生数値 (data/kongfu_talent_ladders.json:236-271、s3Caps.dmg は0.02〜0.148=2.0〜14.8%
+  // 表記、s3Caps.pen は4〜29.6の生数値表記で確認済) ──
+  function _renderSlotS3(id, kf, lang) {
+    const passives = _passivesMap()[id];
+    const s3 = passives && passives.s3;
+    if (!s3) return '';
+    const L = _ladders();
+    const pathVariant = s3.pathVariant; // 'normal' | 'bellstrike'
+    const thresholds = (L.s3Thresholds && L.s3Thresholds[pathVariant]) || [];
+    const fixedAdd = L.s3FixedAdd || [];
+    const caps = (L.s3Caps && L.s3Caps[s3.capKind]) || [];
+    const lvCaps = L.lvCaps || [];
+    const unlockStage = s3.unlockStage || 3;
+    const applyLabel = _appliesToLabel(s3.appliesTo);
+    const capIsPct = s3.capKind === 'dmg'; // dmg = %表示、 pen = 生数値
+    const rows = thresholds.map((th, i) => {
+      const stage = unlockStage + i; // 三重解放 = index0 → stage3
+      const lvCap = lvCaps[stage - 1] != null ? lvCaps[stage - 1] : '-';
+      const cap = caps[i];
+      const fa = fixedAdd[i] || [null, null];
+      const isCurrent = stage === 12; // Lv95 = 十二重 (kongfu_talent_ladders.json lvCaps[11]=95相当帯)
+      const capText = cap == null ? '-' : `+${_formatCap(cap, capIsPct)}`;
+      const faText = (fa[0] == null || fa[1] == null) ? '-' : `+${fa[0]}~${fa[1]}`;
+      const currentBadge = isCurrent ? `<span class="wwm-db-kongfu-current-badge">${_esc((window.T && window.T.dbKongfuCurrentCap) || '現行キャップ')}</span>` : '';
+      return `<tr class="${isCurrent ? 'wwm-db-kongfu-current-cap-row' : ''}">
+        <th scope="row">${_esc(_stageLabel(stage))}</th>
+        <td>${_esc(String(lvCap))}</td>
+        <td>${_esc(String(th))}</td>
+        <td>${_esc(faText)}</td>
+        <td>${_esc(capText)}${currentBadge}</td>
+      </tr>`;
+    }).join('');
+    return `
+      <section class="wwm-db-kongfu-slot-section">
+        <h4 class="wwm-db-kongfu-slot-title">S3: ${_esc((window.T && window.T.dbKongfuSlotS3) || '属性上昇才能')}
+          <span class="wwm-db-kongfu-slot-detail">(→ ${_esc(applyLabel)})</span>
+        </h4>
+        <table class="wwm-db-kongfu-table">
+          <thead><tr>
+            <th>${_esc((window.T && window.T.dbKongfuColStage) || '突破段階')}</th>
+            <th>${_esc((window.T && window.T.dbKongfuColLvCap) || 'Lv上限')}</th>
+            <th>${_esc((window.T && window.T.dbKongfuColThreshold) || '閾値')}</th>
+            <th>${_esc((window.T && window.T.dbKongfuColFixedAdd) || '固定加算')}</th>
+            <th>${_esc((window.T && window.T.dbKongfuColCap) || '上昇量')}</th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </section>
+    `;
+  }
+
   function _isMobile() { return window.matchMedia && window.matchMedia('(max-width: 600px)').matches; }
 
   function _refreshList() {
@@ -205,8 +267,9 @@
     if (!kf) return `<p class="wwm-db-empty">${_esc((window.T && window.T.dbKongfuEmpty) || '武術が見つかりません')}</p>`;
     return _renderHeader(id, kf, lang) +
            _renderDescription(id, lang) +
-           _renderSlotS1(id, kf, lang);
-    // S3/S2/S5/S4/S6 は Task 8-9 で追加
+           _renderSlotS1(id, kf, lang) +
+           _renderSlotS3(id, kf, lang);
+    // S2/S5/S4/S6 は Task 9 で追加
   }
 
   function render() {
