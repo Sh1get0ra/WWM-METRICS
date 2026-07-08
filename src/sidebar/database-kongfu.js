@@ -2,7 +2,8 @@
 // 左: 18武学一覧 (名前検索)。右: 選択武学の詳細
 // (path/weaponType バッジ + description + slot縦積み S1→S3→S2→S5→S4→S6)。
 // キャラ非依存の閲覧専用、心法タブと同型パターン。
-// Task 5 = 骨格のみ (プレースホルダ表示)。Task 6 = 左一覧 (検索 + icon list) 実装。右詳細は Task 7-9 で実装。
+// Task 5 = 骨格のみ (プレースホルダ表示)。Task 6 = 左一覧 (検索 + icon list) 実装。
+// Task 7 = 右詳細 見出し+description枠(常に空、Task4判定)+S1才能表(17段) 実装。S3/S2/S5/S4/S6 は Task 8-9。
 (function () {
   'use strict';
   const _ESC_MAP = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
@@ -44,6 +45,122 @@
     }).join('');
   }
 
+  // ── path 表示名 (data/i18n/game.json の path cat は pathBase 経由の nested 構造 = WWM_DS.name('path', id) 直引き不可。
+  // src/core/data-store.js _injectPathI18nKeys() が 'path'+大文字化 keyで ui cat に合成注入済 (例: pathBellstrike「鋼鳴」)、
+  // 既存 callsite (import.js:227 / arsenal.js:22 / xinfa.js:58) と同じ経路で参照する ([[i18n-source-policy]] 実装確認済) ──
+  function _capFirst(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
+  function _pathLabel(path) {
+    if (!path) return '';
+    const key = 'path' + _capFirst(path);
+    const label = window.WWM_DS.t(key);
+    return (label && label !== key) ? label : path;
+  }
+
+  // ── stat key 表示名 (data/i18n/game.json の 'stat' cat は WWM_DS.t(key) 経由で直引き可、
+  // 'stat.'+key 形式の合成キーは存在しない。appliesTo の一部 (critRate/sympathyRate/min|maxPhysATK) は
+  // 'stat' cat の実キー名と直接一致しないため alias table 経由 (crit/affinity/physAtkLabel、
+  // data/stat_display.json:130,147,54 の label_key 突合で確認済)。maxHp は affix_stat cat 直下に
+  // 存在 (data/i18n/game.json:831) = WWM_DS.t() の T_CHAIN 経由でそのまま解決可。
+  // fromStatKey が "max(body,power)" 等の合成式文字列の場合 (例: 20103) は英数字のみでないため
+  // lookup せず生文字列のまま fallback 表示する ──
+  const _APPLIES_TO_ALIAS = { critRate: 'crit', sympathyRate: 'affinity', maxPhysATK: 'physAtkLabel', minPhysATK: 'physAtkLabel' };
+  function _appliesToLabel(key) {
+    if (!key) return '';
+    const alias = _APPLIES_TO_ALIAS[key] || key;
+    const label = window.WWM_DS.t(alias);
+    return (label && label !== alias) ? label : key;
+  }
+  function _fromStatLabel(key) {
+    if (!key) return '';
+    if (/^[A-Za-z]+$/.test(key)) {
+      const label = window.WWM_DS.t(key);
+      if (label && label !== key) return label;
+    }
+    return key; // 合成式文字列 (例: "max(body,power)") = i18n無、生表示
+  }
+
+  function _renderHeader(id, kf, lang) {
+    const iconUrl = window.WWM_KONGFU_ICONS && window.WWM_KONGFU_ICONS[id] && window.WWM_KONGFU_ICONS[id].pic_url;
+    const path = kf.path || '';
+    const weapon = kf.weaponType || '';
+    const pathLabel = _pathLabel(path);
+    const weaponLabel = weapon ? window.WWM_DS.name('weapontype', weapon, lang) : '';
+    const pathBadge = path ? `<span class="wwm-db-kongfu-badge" data-path="${_esc(path)}">${_esc(pathLabel)}</span>` : '';
+    const weaponBadge = weapon ? `<span class="wwm-db-kongfu-badge wwm-db-kongfu-badge-weapon">${_esc(weaponLabel)}</span>` : '';
+    return `
+      <div class="wwm-db-kongfu-header">
+        ${iconUrl ? `<img class="wwm-db-kongfu-icon" data-path="${_esc(path)}" src="${iconUrl}" alt="">` : ''}
+        <h3 class="wwm-db-kongfu-name">${_esc(_kfName(id, lang))}</h3>
+        ${pathBadge}${weaponBadge}
+      </div>
+    `;
+  }
+
+  // ── description 枠: Phase A3 判定 = 公式説明文 client mining 不採用 (常に非表示 fallback)。
+  // 詳細: docs/superpowers/plans/2026-07-08-database-kongfu.md Task4、kongfu.json.description は内部メモのみ、UI参照禁止 ──
+  function _renderDescription(_id, _lang) {
+    return '';
+  }
+
+  function _formatCap(v, isPct) {
+    if (v == null) return '-';
+    const abs = Math.abs(v);
+    if (isPct) {
+      // s1Caps は 0.068 = 6.8% 表記。値<1 なら %化、>=1 ならそのまま (maxHp等の生数値は isPct=false で来る)
+      return abs < 1 ? `${(v * 100).toFixed(1)}%` : String(v);
+    }
+    return String(v);
+  }
+
+  const _STAGE_JA = ['一重', '二重', '三重', '四重', '五重', '六重', '七重', '八重', '九重', '十重', '十一重', '十二重', '十三重', '十四重', '十五重', '十六重', '十七重'];
+  function _stageLabel(stage) {
+    const key = `dbKongfuStage${stage}`;
+    return (window.T && window.T[key]) || _STAGE_JA[stage - 1] || `${stage}重`;
+  }
+
+  function _renderSlotS1(id, kf, lang) {
+    const passives = _passivesMap()[id];
+    const s1 = passives && passives.s1;
+    if (!s1) return '';
+    const L = _ladders();
+    const thresholds = L.s1Thresholds || [];
+    const lvCaps = L.lvCaps || [];
+    const caps = (L.s1Caps && L.s1Caps[s1.appliesTo]) || [];
+    const applyLabel = _appliesToLabel(s1.appliesTo);
+    const fromLabel = _fromStatLabel(s1.fromStatKey);
+    const isPctAppliesTo = ['sympathyRate', 'critRate'].indexOf(s1.appliesTo) !== -1;
+    const rows = thresholds.map((th, i) => {
+      const stage = i + 1; // 一重 = index0
+      const lvCap = lvCaps[i] != null ? lvCaps[i] : '-';
+      const cap = caps[i];
+      const isCurrent = stage === 12; // Lv95 = 十二重 (kongfu_talent_ladders.json lvCaps[11]=95相当帯)
+      const capText = cap == null ? '-' : `+${_formatCap(cap, isPctAppliesTo)}`;
+      const currentBadge = isCurrent ? `<span class="wwm-db-kongfu-current-badge">${_esc((window.T && window.T.dbKongfuCurrentCap) || '現行キャップ')}</span>` : '';
+      return `<tr class="${isCurrent ? 'wwm-db-kongfu-current-cap-row' : ''}">
+        <th scope="row">${_esc(_stageLabel(stage))}</th>
+        <td>${_esc(String(lvCap))}</td>
+        <td>${_esc(String(th))}</td>
+        <td>${_esc(capText)}${currentBadge}</td>
+      </tr>`;
+    }).join('');
+    return `
+      <section class="wwm-db-kongfu-slot-section">
+        <h4 class="wwm-db-kongfu-slot-title">S1: ${_esc((window.T && window.T.dbKongfuSlotS1) || '5行ステータス才能')}
+          <span class="wwm-db-kongfu-slot-detail">(${_esc(fromLabel)} → ${_esc(applyLabel)})</span>
+        </h4>
+        <table class="wwm-db-kongfu-table">
+          <thead><tr>
+            <th>${_esc((window.T && window.T.dbKongfuColStage) || '突破段階')}</th>
+            <th>${_esc((window.T && window.T.dbKongfuColLvCap) || 'Lv上限')}</th>
+            <th>${_esc((window.T && window.T.dbKongfuColThreshold) || '閾値')}</th>
+            <th>${_esc((window.T && window.T.dbKongfuColCap) || '上昇量')}</th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </section>
+    `;
+  }
+
   function _isMobile() { return window.matchMedia && window.matchMedia('(max-width: 600px)').matches; }
 
   function _refreshList() {
@@ -65,7 +182,7 @@
       btn.setAttribute('aria-selected', String(btn.dataset.dbKongfuId === id));
     });
     const bodyEl = root.querySelector('[data-db-kongfu-detail-body]');
-    if (bodyEl) bodyEl.innerHTML = _renderDetail(id);  // Task 7 で本実装
+    if (bodyEl) bodyEl.innerHTML = _renderDetail(id);
     if (_isMobile()) {
       const r = root.querySelector('[data-db-kongfu-root]');
       if (r) r.setAttribute('data-mobile-view', 'detail');
@@ -83,8 +200,13 @@
   }
 
   function _renderDetail(id) {
-    // Task 7 で本実装、今は placeholder
-    return `<div>${_esc(_kfName(id, _curLang()))} 詳細 (実装中)</div>`;
+    const lang = _curLang();
+    const kf = _kongfuMap()[id];
+    if (!kf) return `<p class="wwm-db-empty">${_esc((window.T && window.T.dbKongfuEmpty) || '武術が見つかりません')}</p>`;
+    return _renderHeader(id, kf, lang) +
+           _renderDescription(id, lang) +
+           _renderSlotS1(id, kf, lang);
+    // S3/S2/S5/S4/S6 は Task 8-9 で追加
   }
 
   function render() {
