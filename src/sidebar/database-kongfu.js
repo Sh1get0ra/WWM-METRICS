@@ -227,8 +227,10 @@
     `;
   }
 
-  // ── 解放段階 unlock表示 共通 helper (S2/S5/S4 で共用)。dbKongfuUnlockAt = "{stage}解放" placeholder ──
+  // ── 解放段階 unlock表示 共通 helper (S2/S5/S4 で共用)。dbKongfuUnlockAt = "{stage}解放" placeholder。
+  // stage=0 = 初期解放 は それ自体で完結 label のため template で「解放」suffix 付けずそのまま表示 ──
   function _unlockText(stage) {
+    if (stage === 0) return _stageLabel(0);
     const tmpl = (window.T && window.T.dbKongfuUnlockAt) || '{stage}解放';
     return tmpl.replace('{stage}', _stageLabel(stage));
   }
