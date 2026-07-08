@@ -4,7 +4,9 @@
 // キャラ非依存の閲覧専用、心法タブと同型パターン。
 // Task 5 = 骨格のみ (プレースホルダ表示)。Task 6 = 左一覧 (検索 + icon list) 実装。
 // Task 7 = 右詳細 見出し+description枠(常に空、Task4判定)+S1才能表(17段) 実装。
-// Task 8 = S3才能表 (path上昇、15段、三重解放) 実装。S2/S5/S4/S6 は Task 9。
+// Task 8 = S3才能表 (path上昇、15段、三重解放) 実装。
+// Task 9 = S2/S5箭条書き(固有才能)+S4単発(path属性ダメ強化)+S6汎用4段(十四重解放、現行未実装注記) 実装。
+// 右詳細 全slot (S1→S3→S2→S5→S4→S6) 完成。CSS styling は Task 10。
 (function () {
   'use strict';
   const _ESC_MAP = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
@@ -223,6 +225,96 @@
     `;
   }
 
+  // ── 解放段階 unlock表示 共通 helper (S2/S5/S4 で共用)。dbKongfuUnlockAt = "{stage}解放" placeholder ──
+  function _unlockText(stage) {
+    const tmpl = (window.T && window.T.dbKongfuUnlockAt) || '{stage}解放';
+    return tmpl.replace('{stage}', _stageLabel(stage));
+  }
+
+  // ── S2/S5 = 固有才能 (箭条書き、rank昇順)。 titleKey/descKey (例 "20501_s2_1") を
+  // data/i18n/game.json の kongfu_talent_title / kongfu_talent_desc cat と突合 (Task 3 成果物)。
+  // lookup miss = WWM_DS.name() fallback '[cat:id]' 形式 ('[' 始まりで判定、data-store.js:297-320 確認済) →
+  // title は #rank に fallback、 desc は空 (非表示) に fallback ──
+  function _renderSlotS2S5(id, kf, lang, slotKey) {
+    const passives = _passivesMap()[id];
+    const items = passives && passives[slotKey];
+    if (!items || !items.length) return '';
+    const bullets = items.map(r => {
+      const title = window.WWM_DS.name('kongfu_talent_title', r.titleKey, lang);
+      const desc = window.WWM_DS.name('kongfu_talent_desc', r.descKey, lang);
+      const titleShown = title.indexOf('[') === 0 ? `#${r.rank}` : title;
+      const descShown = desc.indexOf('[') === 0 ? '' : desc;
+      const unlockText = _unlockText(r.unlockStage);
+      return `<li class="wwm-db-kongfu-bullet">
+        <div class="wwm-db-kongfu-bullet-head">
+          <span class="wwm-db-kongfu-bullet-title">${_esc(titleShown)}</span>
+          <span class="wwm-db-kongfu-bullet-unlock">(${_esc(unlockText)})</span>
+        </div>
+        ${descShown ? `<div class="wwm-db-kongfu-bullet-desc">${_esc(descShown)}</div>` : ''}
+      </li>`;
+    }).join('');
+    const slotTitleKey = slotKey === 's2' ? 'dbKongfuSlotS2' : 'dbKongfuSlotS5';
+    const slotFallback = slotKey === 's2' ? '固有才能' : '固有才能 (第2)';
+    const slotLabel = (window.T && window.T[slotTitleKey]) || slotFallback;
+    return `
+      <section class="wwm-db-kongfu-slot-section">
+        <h4 class="wwm-db-kongfu-slot-title">${slotKey.toUpperCase()}: ${_esc(slotLabel)}</h4>
+        <ul class="wwm-db-kongfu-bullet-list">${bullets}</ul>
+      </section>
+    `;
+  }
+
+  // ── S4 = path属性ダメ強化 (単発、+50%固定)。 見出しの path 部分は _pathLabel() 経由
+  // ('path' cat は data/i18n/game.json 上 pathBase nested構造 = WWM_DS.name('path', id) 直引き不可、
+  // l49-58 コメント + _renderHeader 実装と同じ経路。 WWM_DS.name('path', id) を直接使うと
+  // fallback '[path:xxx]' になる点に注意) ──
+  function _renderSlotS4(id, kf, lang) {
+    const passives = _passivesMap()[id];
+    const s4 = passives && passives.s4;
+    if (!s4) return '';
+    const pathLabel = _pathLabel(s4.path);
+    const slotLabel = (window.T && window.T.dbKongfuSlotS4) || '属性ダメージ強化';
+    const unlockText = _unlockText(s4.unlockStage);
+    const valuePct = (s4.value * 100).toFixed(1);
+    return `
+      <section class="wwm-db-kongfu-slot-section">
+        <h4 class="wwm-db-kongfu-slot-title">S4: ${_esc(pathLabel)}${_esc(slotLabel)}</h4>
+        <ul class="wwm-db-kongfu-bullet-list">
+          <li class="wwm-db-kongfu-bullet">
+            <div class="wwm-db-kongfu-bullet-head">
+              <span class="wwm-db-kongfu-bullet-title">+${valuePct}%</span>
+              <span class="wwm-db-kongfu-bullet-unlock">(${_esc(unlockText)})</span>
+            </div>
+          </li>
+        </ul>
+      </section>
+    `;
+  }
+
+  // ── S6 = 付加攻撃強化 (汎用、全18武学共通 caps = kongfu_passive_skills.json 生成時に固定値埋込済)。
+  // unlockStage=14 (十四重) は現行 Lv95=十二重上限で未到達 = 常時「現行未実装」注記付き ──
+  function _renderSlotS6(id, kf, lang) {
+    const passives = _passivesMap()[id];
+    const s6 = passives && passives.s6;
+    if (!s6) return '';
+    const slotLabel = (window.T && window.T.dbKongfuSlotS6) || '付加攻撃強化 (汎用)';
+    const futureNote = (window.T && window.T.dbKongfuS6Future) || '※ 十四重解放 (現行未実装)';
+    const rows = (s6.caps || []).map((cap, i) => `<tr>
+      <th scope="row">rank${i + 1}</th>
+      <td>+${(cap * 100).toFixed(2)}%</td>
+    </tr>`).join('');
+    return `
+      <section class="wwm-db-kongfu-slot-section wwm-db-kongfu-slot-future">
+        <h4 class="wwm-db-kongfu-slot-title">S6: ${_esc(slotLabel)}</h4>
+        <p class="wwm-db-kongfu-future-note">${_esc(futureNote)}</p>
+        <table class="wwm-db-kongfu-table wwm-db-kongfu-table-s6">
+          <thead><tr><th>rank</th><th>${_esc((window.T && window.T.dbKongfuColCap) || '上昇量')}</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </section>
+    `;
+  }
+
   function _isMobile() { return window.matchMedia && window.matchMedia('(max-width: 600px)').matches; }
 
   function _refreshList() {
@@ -268,8 +360,11 @@
     return _renderHeader(id, kf, lang) +
            _renderDescription(id, lang) +
            _renderSlotS1(id, kf, lang) +
-           _renderSlotS3(id, kf, lang);
-    // S2/S5/S4/S6 は Task 9 で追加
+           _renderSlotS3(id, kf, lang) +
+           _renderSlotS2S5(id, kf, lang, 's2') +
+           _renderSlotS2S5(id, kf, lang, 's5') +
+           _renderSlotS4(id, kf, lang) +
+           _renderSlotS6(id, kf, lang);
   }
 
   function render() {
