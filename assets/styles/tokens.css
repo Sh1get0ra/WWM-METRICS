@@ -79,6 +79,12 @@
   --path-stonesplit-dark: #a83022;  /* 深朱 (kuanglan hue、対 kami-0 ≈6.3:1 AA) */
   --path-silkbind-dark:   #266b30;  /* 深緑 (qingxi hue、対 kami-0 ≈5.3:1 AA、jade token とは独立) */
   --path-bamboocut-dark:  #7a3a9e;  /* 深紫 (guyun hue、対 kami-0 ≈7.4:1 AAA) */
+  /* 暗背景 (sumi、DB武術タブ左一覧 = 装備/心法と同型 墨L字) 用 明色 variant。gear.css:76-108 の
+     glow 色から採光。 memory [[rank-color-paper-vs-sumi-context-trap]] 準拠 = 明暗 variant 両持ち */
+  --path-bellstrike: #4a9eff;  /* 明青 (tianquan、心法 blue rank と同色) */
+  --path-stonesplit: var(--vermilion-bright);  /* 明朱 (kuanglan) */
+  --path-silkbind:   #6edc8c;  /* 明緑 (qingxi、gear.css rgba(110,220,140) 相当) */
+  --path-bamboocut:  var(--liupai-guyun);  /* 明紫 (guyun、心法 purple rank と同色) */
 
   /* light theme 暗茶 scale (1=最暗, 6=中暗) — light selector で 装飾 dark accent 用 */
   --brown-1:        #2e1f19;
