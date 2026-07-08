@@ -81,6 +81,26 @@
     const label = window.WWM_DS.t(alias);
     return (label && label !== alias) ? label : key;
   }
+  // minPhysATK/maxPhysATK は _appliesToLabel だと「外功攻撃」= 兄貴指示のテーブル列見出しは「外功攻撃力」= 語尾「力」付与
+  function _appliesToLabelFull(key) {
+    const base = _appliesToLabel(key);
+    if (key === 'minPhysATK' || key === 'maxPhysATK') return base + '力';
+    return base;
+  }
+  // path 攻撃力 label (S3 固定加算列見出し = 「鋼鳴/砕岩/糸操/瞬嵐攻撃力」)
+  function _pathAttackLabel(path) {
+    return _pathLabel(path) + '攻撃力';
+  }
+  // S3 の閾値 fromStat (minBamboocut 等) は 'stat' cat 内 name 経由で「最小瞬嵐攻撃力」形式取得
+  // 「力」suffix 付き = 'stat' cat 実データが持っている。 _fromStatLabel (t 経由「最小瞬嵐攻撃」) と別分岐
+  function _fromStatLabelFull(key, lang) {
+    if (!key) return '';
+    if (/^(min|max)[A-Z][a-z]+$/.test(key)) {
+      const n = window.WWM_DS.name('stat', key, lang);
+      if (n.indexOf('[') !== 0) return n;
+    }
+    return _fromStatLabel(key);
+  }
   function _fromStatLabel(key) {
     if (!key) return '';
     if (/^[A-Za-z]+$/.test(key)) {
@@ -139,7 +159,7 @@
     const thresholds = L.s1Thresholds || [];
     const lvCaps = L.lvCaps || [];
     const caps = (L.s1Caps && L.s1Caps[s1.appliesTo]) || [];
-    const applyLabel = _appliesToLabel(s1.appliesTo);
+    const applyLabel = _appliesToLabelFull(s1.appliesTo);
     const fromLabel = _fromStatLabel(s1.fromStatKey);
     const isPctAppliesTo = ['sympathyRate', 'critRate'].indexOf(s1.appliesTo) !== -1;
     const rows = thresholds.map((th, i) => {
@@ -163,8 +183,8 @@
           <thead><tr>
             <th>${_esc((window.T && window.T.dbKongfuColStage) || '突破段階')}</th>
             <th>${_esc((window.T && window.T.dbKongfuColLvCap) || 'Lv上限')}</th>
-            <th>${_esc((window.T && window.T.dbKongfuColThreshold) || '閾値')}</th>
-            <th>${_esc((window.T && window.T.dbKongfuColCap) || '上昇量')}</th>
+            <th>${_esc((window.T && window.T.dbKongfuColThreshold) || '閾値')}（${_esc(fromLabel)}）</th>
+            <th>${_esc(applyLabel)}</th>
           </tr></thead>
           <tbody>${rows}</tbody>
         </table>
@@ -187,7 +207,10 @@
     const caps = (L.s3Caps && L.s3Caps[s3.capKind]) || [];
     const lvCaps = L.lvCaps || [];
     const unlockStage = s3.unlockStage || 3;
-    const applyLabel = _appliesToLabel(s3.appliesTo);
+    const s3Def = (kf.derived || []).find(d => d.slot === 's3');
+    const s3FromLabel = _fromStatLabelFull(s3Def && s3Def.from, lang);
+    const applyLabel = _appliesToLabelFull(s3.appliesTo);
+    const pathAttackLabel = _pathAttackLabel(kf.path);
     const capIsPct = s3.capKind === 'dmg'; // dmg = %表示、 pen = 生数値
     const rows = thresholds.map((th, i) => {
       const stage = unlockStage + i; // 三重解放 = index0 → stage3
@@ -213,9 +236,9 @@
           <thead><tr>
             <th>${_esc((window.T && window.T.dbKongfuColStage) || '突破段階')}</th>
             <th>${_esc((window.T && window.T.dbKongfuColLvCap) || 'Lv上限')}</th>
-            <th>${_esc((window.T && window.T.dbKongfuColThreshold) || '閾値')}</th>
-            <th>${_esc((window.T && window.T.dbKongfuColFixedAdd) || '固定加算')}</th>
-            <th>${_esc((window.T && window.T.dbKongfuColCap) || '上昇量')}</th>
+            <th>${_esc((window.T && window.T.dbKongfuColThreshold) || '閾値')}（${_esc(s3FromLabel)}）</th>
+            <th>${_esc(pathAttackLabel)}</th>
+            <th>${_esc(applyLabel)}</th>
           </tr></thead>
           <tbody>${rows}</tbody>
         </table>
