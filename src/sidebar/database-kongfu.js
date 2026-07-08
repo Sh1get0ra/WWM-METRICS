@@ -107,7 +107,13 @@
       const label = window.WWM_DS.t(key);
       if (label && label !== key) return label;
     }
-    return key; // 合成式文字列 (例: "max(body,power)") = i18n無、生表示
+    // 合成式 (例: "max(body,power)") = 内側の英数字stat key を個別に i18n 化
+    // 20103嵐雷の槍 / 20401断魂の刀 の S1 fromStat がこれ ("max(体,力)")
+    const composite = key.replace(/[A-Za-z]+/g, tok => {
+      const label = window.WWM_DS.t(tok);
+      return (label && label !== tok) ? label : tok;
+    });
+    return composite;
   }
 
   function _renderHeader(id, kf, lang) {
