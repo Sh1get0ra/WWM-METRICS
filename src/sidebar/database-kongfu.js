@@ -158,9 +158,7 @@
     }).join('');
     return `
       <section class="wwm-db-kongfu-slot-section">
-        <h4 class="wwm-db-kongfu-slot-title">S1: ${_esc((window.T && window.T.dbKongfuSlotS1) || '5行ステータス才能')}
-          <span class="wwm-db-kongfu-slot-detail">(${_esc(fromLabel)} → ${_esc(applyLabel)})</span>
-        </h4>
+        <h4 class="wwm-db-kongfu-slot-title">${_esc(_slotTitle(id, 's1', lang, '5行ステータス才能'))}</h4>
         <table class="wwm-db-kongfu-table">
           <thead><tr>
             <th>${_esc((window.T && window.T.dbKongfuColStage) || '突破段階')}</th>
@@ -210,9 +208,7 @@
     }).join('');
     return `
       <section class="wwm-db-kongfu-slot-section">
-        <h4 class="wwm-db-kongfu-slot-title">S3: ${_esc((window.T && window.T.dbKongfuSlotS3) || '属性上昇才能')}
-          <span class="wwm-db-kongfu-slot-detail">(→ ${_esc(applyLabel)})</span>
-        </h4>
+        <h4 class="wwm-db-kongfu-slot-title">${_esc(_slotTitle(id, 's3', lang, '属性上昇才能'))}</h4>
         <table class="wwm-db-kongfu-table">
           <thead><tr>
             <th>${_esc((window.T && window.T.dbKongfuColStage) || '突破段階')}</th>
@@ -225,6 +221,15 @@
         </table>
       </section>
     `;
+  }
+
+  // ── slot 見出し = ゲーム内才能パネル表記 (kongfu_talent_title cat の <id>_<slot>_1 = rank1 title)。
+  // lookup miss = WWM_DS.name() が '[cat:id]' fallback を返す (data-store.js:297-320) → 事前想定の
+  // fallback label を返す。 全 slot section 見出しで共用 (S1/S2/S3/S4/S5/S6) ──
+  function _slotTitle(id, slotKey, lang, fallback) {
+    const key = `${id}_${slotKey}_1`;
+    const name = window.WWM_DS.name('kongfu_talent_title', key, lang);
+    return (name && name.indexOf('[') !== 0) ? name : fallback;
   }
 
   // ── 解放段階 unlock表示 共通 helper (S2/S5/S4 で共用)。dbKongfuUnlockAt = "{stage}解放" placeholder。
@@ -257,12 +262,10 @@
         ${descShown ? `<div class="wwm-db-kongfu-bullet-desc">${_esc(descShown)}</div>` : ''}
       </li>`;
     }).join('');
-    const slotTitleKey = slotKey === 's2' ? 'dbKongfuSlotS2' : 'dbKongfuSlotS5';
     const slotFallback = slotKey === 's2' ? '固有才能' : '固有才能 (第2)';
-    const slotLabel = (window.T && window.T[slotTitleKey]) || slotFallback;
     return `
       <section class="wwm-db-kongfu-slot-section">
-        <h4 class="wwm-db-kongfu-slot-title">${slotKey.toUpperCase()}: ${_esc(slotLabel)}</h4>
+        <h4 class="wwm-db-kongfu-slot-title">${_esc(_slotTitle(id, slotKey, lang, slotFallback))}</h4>
         <ul class="wwm-db-kongfu-bullet-list">${bullets}</ul>
       </section>
     `;
@@ -276,13 +279,12 @@
     const passives = _passivesMap()[id];
     const s4 = passives && passives.s4;
     if (!s4) return '';
-    const pathLabel = _pathLabel(s4.path);
-    const slotLabel = (window.T && window.T.dbKongfuSlotS4) || '属性ダメージ強化';
+    const slotFallback = _pathLabel(s4.path) + ((window.T && window.T.dbKongfuSlotS4) || '属性ダメージ強化');
     const unlockText = _unlockText(s4.unlockStage);
     const valuePct = (s4.value * 100).toFixed(1);
     return `
       <section class="wwm-db-kongfu-slot-section">
-        <h4 class="wwm-db-kongfu-slot-title">S4: ${_esc(pathLabel)}${_esc(slotLabel)}</h4>
+        <h4 class="wwm-db-kongfu-slot-title">${_esc(_slotTitle(id, 's4', lang, slotFallback))}</h4>
         <ul class="wwm-db-kongfu-bullet-list">
           <li class="wwm-db-kongfu-bullet">
             <div class="wwm-db-kongfu-bullet-head">
@@ -301,7 +303,7 @@
     const passives = _passivesMap()[id];
     const s6 = passives && passives.s6;
     if (!s6) return '';
-    const slotLabel = (window.T && window.T.dbKongfuSlotS6) || '付加攻撃強化 (汎用)';
+    const slotFallback = (window.T && window.T.dbKongfuSlotS6) || '付加攻撃強化 (汎用)';
     const futureNote = (window.T && window.T.dbKongfuS6Future) || '※ 十四重解放 (現行未実装)';
     const rows = (s6.caps || []).map((cap, i) => `<tr>
       <th scope="row">rank${i + 1}</th>
@@ -309,7 +311,7 @@
     </tr>`).join('');
     return `
       <section class="wwm-db-kongfu-slot-section wwm-db-kongfu-slot-future">
-        <h4 class="wwm-db-kongfu-slot-title">S6: ${_esc(slotLabel)}</h4>
+        <h4 class="wwm-db-kongfu-slot-title">${_esc(_slotTitle(id, 's6', lang, slotFallback))}</h4>
         <p class="wwm-db-kongfu-future-note">${_esc(futureNote)}</p>
         <table class="wwm-db-kongfu-table wwm-db-kongfu-table-s6">
           <thead><tr><th>rank</th><th>${_esc((window.T && window.T.dbKongfuColCap) || '上昇量')}</th></tr></thead>
