@@ -361,12 +361,14 @@
     const lang = _curLang();
     const kf = _kongfuMap()[id];
     if (!kf) return `<p class="wwm-db-empty">${_esc((window.T && window.T.dbKongfuEmpty) || '武術が見つかりません')}</p>`;
+    // slot 順 = ゲーム内才能パネル表示順 (kongfu_up_rank_stages_raw の psids 並び順 = 全18武学統一)。
+    // S5→S1→S2→S3→S4 + S6 (汎用、末尾)
     return _renderHeader(id, kf, lang) +
            _renderDescription(id, lang) +
-           _renderSlotS1(id, kf, lang) +
-           _renderSlotS3(id, kf, lang) +
-           _renderSlotS2S5(id, kf, lang, 's2') +
            _renderSlotS2S5(id, kf, lang, 's5') +
+           _renderSlotS1(id, kf, lang) +
+           _renderSlotS2S5(id, kf, lang, 's2') +
+           _renderSlotS3(id, kf, lang) +
            _renderSlotS4(id, kf, lang) +
            _renderSlotS6(id, kf, lang);
   }
