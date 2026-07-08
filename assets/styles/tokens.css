@@ -67,6 +67,19 @@
   --amber-glow:     rgba(255,200,80,0.40);   /* 暖橙 glow (drop-shadow 用) */
   --liupai-guyun:   #c389ff;                  /* 流派: 瞬嵐 (guyun) 紫 */
 
+  /* 武術 path 識別色 = 紙背景 (--kami-0 #f2ead4) 上で読める暗色 variant (2026-07-08 DB画面 武術タブ新設)。
+     既存 gear.css:76-108 の drop-shadow glow (`data-liupai-pinyin`)は暗背景 rail 向け明色 rgba
+     (tianquan#5096ff / kuanglan#e8513a / qingxi#6edc8c / guyun#b46eff)、path 意味色 =
+     bellstrike=青 / stonesplit=赤 / silkbind=緑 / bamboocut=紫 の対応を継承しつつ、
+     紙面 (kami-0 L≈0.834) でコントラスト AA/AAA を確保する暗色に導出。
+     silkbind の緑は donut jade policy [[jade-donut-only]] とは別次元 (path identity 保持のための例外、
+     [[official-asset-color-immutable]] = 流派色は意味色 = 変更不可)。DB武術タブ item icon border /
+     header icon border / badge (border+color) 4色識別に使う */
+  --path-bellstrike-dark: #1a4a8f;  /* 深青 (tianquan hue、対 kami-0 ≈8.7:1 AAA) */
+  --path-stonesplit-dark: #a83022;  /* 深朱 (kuanglan hue、対 kami-0 ≈6.3:1 AA) */
+  --path-silkbind-dark:   #266b30;  /* 深緑 (qingxi hue、対 kami-0 ≈5.3:1 AA、jade token とは独立) */
+  --path-bamboocut-dark:  #7a3a9e;  /* 深紫 (guyun hue、対 kami-0 ≈7.4:1 AAA) */
+
   /* light theme 暗茶 scale (1=最暗, 6=中暗) — light selector で 装飾 dark accent 用 */
   --brown-1:        #2e1f19;
   --brown-2:        #3a2010;
