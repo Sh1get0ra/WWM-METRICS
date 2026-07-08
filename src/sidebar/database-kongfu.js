@@ -43,7 +43,7 @@
       const iconUrl = window.WWM_KONGFU_ICONS && window.WWM_KONGFU_ICONS[id] && window.WWM_KONGFU_ICONS[id].pic_url;
       const iconHtml = iconUrl
         ? `<img class="wwm-db-kongfu-item-icon" data-path="${_esc(kf && kf.path || '')}" src="${iconUrl}" alt="" loading="lazy">`
-        : '<span class="wwm-db-kongfu-item-icon wwm-db-kongfu-item-icon-empty"></span>';
+        : `<span class="wwm-db-kongfu-item-icon wwm-db-kongfu-item-icon-empty" data-path="${_esc(kf && kf.path || '')}"></span>`;
       return `<button type="button" class="wwm-db-kongfu-item" data-db-kongfu-id="${_esc(id)}" aria-selected="${sel}">${iconHtml}<span class="wwm-db-kongfu-item-name">${_esc(_kfName(id, lang))}</span></button>`;
     }).join('');
   }
