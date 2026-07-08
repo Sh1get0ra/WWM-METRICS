@@ -813,7 +813,7 @@
     height: 48px;
     border-radius: 3px;
     object-fit: cover;
-    background: var(--kami-2);
+    background: var(--sumi-2);
     border: 2px solid var(--path-bellstrike-dark);
   }
   .wwm-db-kongfu-icon[data-path="stonesplit"] { border-color: var(--path-stonesplit-dark); }
