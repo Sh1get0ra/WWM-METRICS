@@ -8899,6 +8899,20 @@
       "th": "ทักษะชาร์จพลัง",
       "zh_tw": "蓄力技"
     },
+    "lightCharged": {
+      "ja": "軽撃・溜め",
+      "en": "Light Attack Charged",
+      "zh": "轻击蓄力",
+      "ko": "약공격 차지",
+      "zh_tw": "輕擊蓄力"
+    },
+    "heavyCharged": {
+      "ja": "重撃・溜め",
+      "en": "Heavy Attack Charged",
+      "zh": "重击蓄力",
+      "ko": "강공격 차지",
+      "zh_tw": "重擊蓄力"
+    },
     "special": {
       "ja": "特殊技",
       "en": "Sp",
@@ -9038,6 +9052,90 @@
       "pt_br": "Combo Variado",
       "ru": "Разнообразные комбо",
       "th": "ทักษะแตกแขนง"
+    },
+    "lightEnhanced": {
+      "ja": "強化軽撃",
+      "en": "Enhanced Light",
+      "zh": "强化轻击",
+      "ko": "강화 약공격",
+      "zh_tw": "强化轻击",
+      "vi": "Enhanced Light",
+      "de": "Enhanced Light",
+      "es": "Enhanced Light",
+      "fr": "Enhanced Light",
+      "pt_br": "Enhanced Light",
+      "ru": "Enhanced Light",
+      "th": "Enhanced Light"
+    },
+    "heavyEnhanced": {
+      "ja": "強化重撃",
+      "en": "Enhanced Heavy",
+      "zh": "强化重击",
+      "ko": "강화 강공격",
+      "zh_tw": "强化重击",
+      "vi": "Enhanced Heavy",
+      "de": "Enhanced Heavy",
+      "es": "Enhanced Heavy",
+      "fr": "Enhanced Heavy",
+      "pt_br": "Enhanced Heavy",
+      "ru": "Enhanced Heavy",
+      "th": "Enhanced Heavy"
+    },
+    "active": {
+      "ja": "武術技",
+      "en": "Martial Art Skill",
+      "zh": "武学技",
+      "ko": "무술 스킬",
+      "zh_tw": "武學技",
+      "vi": "kỹ năng võ học",
+      "de": "Kampfkunst-Fertigkeit",
+      "es": "Habilidad de Arte Marcial",
+      "fr": "Compétence d'Art Martial",
+      "pt_br": "Habilidade de Arte Marcial",
+      "ru": "Навык боевого искусства",
+      "th": "ทักษะศิลปะการต่อสู้"
+    },
+    "weapon": {
+      "ja": "武変技",
+      "en": "Conversion Skill",
+      "zh": "武变技",
+      "ko": "무기 교체 기술",
+      "zh_tw": "武器技",
+      "vi": "Weapon Skill",
+      "de": "Weapon Skill",
+      "es": "Weapon Skill",
+      "fr": "Weapon Skill",
+      "pt_br": "Weapon Skill",
+      "ru": "Weapon Skill",
+      "th": "Weapon Skill"
+    },
+    "enhanced": {
+      "ja": "強化技",
+      "en": "Enhanced Skill",
+      "zh": "强化技",
+      "ko": "강화 기술",
+      "zh_tw": "强化技",
+      "vi": "Enhanced Skill",
+      "de": "Enhanced Skill",
+      "es": "Enhanced Skill",
+      "fr": "Enhanced Skill",
+      "pt_br": "Enhanced Skill",
+      "ru": "Enhanced Skill",
+      "th": "Enhanced Skill"
+    },
+    "other": {
+      "ja": "その他",
+      "en": "Other",
+      "zh": "其他",
+      "ko": "기타",
+      "zh_tw": "其他",
+      "vi": "Other",
+      "de": "Other",
+      "es": "Other",
+      "fr": "Other",
+      "pt_br": "Other",
+      "ru": "Other",
+      "th": "Other"
     }
   },
   "skilltype_short": {
@@ -15524,6 +15622,1256 @@
       "pt_br": "A janela de ativação da Esquiva Perfeita é estendida, e você ganha Tenacidade nos modos Arena ou Invencibilidade em outros modos durante uma Esquiva Perfeita. Ao ativar uma Esquiva Perfeita, você recupera uma pequena quantidade de Resistência e pode pressionar Ataque Leve para lançar Combo Variado de Ataque Leve - Desafio Perverso. A Habilidade Carregada de Ataque Pesado - série de habilidades Condenação Vil é garantida de não acionar Abrasão.",
       "ru": "Окно активации Идеального уклонения увеличено, и во время него вы получаете Стойкость в режимах Арены или Неуязвимость в других режимах. При срабатывании Идеального уклонения вы восстанавливаете небольшое количество Выносливости и можете Нажать Лёгкую атаку, чтобы применить Разнообразную комбинацию лёгких атак - Гнусное неповиновение. Заряженный навык Тяжёлой атаки - навыки серии Гнусное осуждение гарантированно не вызывают Истирание.",
       "th": "หน้าต่างเปิดใช้การหลบหลีกสมบูรณ์แบบยาวนานขึ้น ระหว่างหลบหลีกสมบูรณ์แบบ จะได้รับความแกร่ง/อยู่ยงคงกระพันในรูปแบบการเล่นหยุดสงคราม/นอกหยุดสงครามตามลำดับ เมื่อเปิดใช้การหลบหลีกสมบูรณ์แบบจะฟื้นฟูพลังกายเล็กน้อย แตะโจมตีเบาเพื่อใช้ทักษะแตกแขนงต่อเนื่องจากการโจมตีเบา อสุจริต ทักษะชาร์จพลังโจมตีหนัก·ชุดทักษะประหารอสุจริต จะไม่ทำให้เกิดบาดแผลถลอกอย่างแน่นอน"
+    }
+  },
+  "skill_name": {
+    "20202101": {
+      "zh": "内一衡径数",
+      "ja": "内径均衡値",
+      "en": "Inner Track Slash",
+      "ko": "내공운행"
+    },
+    "20202102": {
+      "ja": "次二衡の径数",
+      "en": "Second Track Slash",
+      "zh": "积矩九剑-蓄力技-次二衡径数",
+      "ko": "내공응결"
+    },
+    "20202109": {
+      "ja": "次三衡の径数",
+      "en": "Inner Balance Strike III",
+      "zh": "次三衡径数",
+      "ko": "내공폭발"
+    },
+    "20201001": {
+      "ja": "剣・軽撃",
+      "en": "Sword - Light Attack",
+      "zh": "轻击·剑",
+      "ko": "약공격·검"
+    },
+    "20201006": {
+      "ja": "剣・重撃",
+      "en": "Sword - Heavy Attack",
+      "zh": "重击·剑",
+      "ko": "강공격·검"
+    },
+    "20201012": {
+      "ja": "剣・空中軽撃",
+      "en": "Sword - Aerial Light Attack",
+      "zh": "剑·空中轻击",
+      "ko": "검·공중 약공격"
+    },
+    "20201013": {
+      "ja": "剣・跳躍斬り",
+      "en": "Sword - Jump Strike",
+      "zh": "剑·跳劈",
+      "ko": "검-공중 강공격"
+    },
+    "20201014": {
+      "ja": "剣・とどめ",
+      "en": "Sword - Execution",
+      "zh": "剑·处决",
+      "ko": "검·처형"
+    },
+    "20201020": {
+      "zh": "剑·起身",
+      "ja": "剣・起身",
+      "en": "Sword - Recovery",
+      "ko": "검-일어나기"
+    },
+    "20201103": {
+      "ja": "カウンター",
+      "en": "Defensive Riposte",
+      "zh": "防反",
+      "ko": "방어 반격"
+    },
+    "20201105": {
+      "ja": "剣・突進",
+      "en": "Sword - Dash",
+      "zh": "剑·突进",
+      "ko": "검·돌진"
+    },
+    "20201107": {
+      "ja": "剣・武変",
+      "en": "Sword - Conversion",
+      "zh": "剑·易武",
+      "ko": "검·무기 교체"
+    },
+    "20201108": {
+      "zh": "执讯连连",
+      "ja": "連鎖の執念",
+      "en": "Relentless Chase",
+      "ko": "심판의 연격"
+    },
+    "10100001": {
+      "zh": "无名剑法-0普攻"
+    },
+    "10100103": {
+      "zh": "无名剑法-A"
+    },
+    "10100104": {
+      "zh": "无名剑法-B"
+    },
+    "20201101": {
+      "ja": "畏れの現れ",
+      "en": "Daunting Strike",
+      "zh": "出畏之",
+      "ko": "공포의 급습"
+    },
+    "20201102": {
+      "ja": "家無き者",
+      "en": "Vagrant Sword",
+      "zh": "无以为家",
+      "ko": "방랑의 검법"
+    },
+    "20201110": {
+      "ja": "退路の道",
+      "en": "Shadow Step",
+      "zh": "退亦有方",
+      "ko": "후퇴의 길"
+    },
+    "20201113": {
+      "zh": "剑·突进",
+      "ja": "剣・突進",
+      "en": "Sword - Dash",
+      "ko": "검-돌진"
+    },
+    "None": {
+      "zh": "手甲新武学-手甲.奥义（四格）"
+    },
+    "20101001": {
+      "ja": "槍・軽撃",
+      "en": "Spear - Light Attack",
+      "zh": "轻击·枪",
+      "ko": "약공격·창"
+    },
+    "20101005": {
+      "ja": "槍・重攻撃",
+      "en": "Spear - Heavy Attack",
+      "zh": "枪·重击",
+      "ko": "창-강공격"
+    },
+    "20101008": {
+      "ja": "槍・とどめ",
+      "en": "Spear - Execution",
+      "zh": "枪·处决",
+      "ko": "창·처형"
+    },
+    "20101017": {
+      "ja": "槍・空中軽撃",
+      "en": "Spear - Aerial Light Attack",
+      "zh": "枪·空中轻击",
+      "ko": "창·공중 약공격"
+    },
+    "20101020": {
+      "ja": "槍・跳斬",
+      "en": "Spear - Jump Strike",
+      "zh": "枪·跳劈",
+      "ko": "창-도약 베기"
+    },
+    "20101030": {
+      "zh": "枪·起身",
+      "ja": "槍・起身",
+      "en": "Spear - Recovery",
+      "ko": "창-일어나기"
+    },
+    "20101103": {
+      "ja": "槍・突進",
+      "en": "Spear - Dash",
+      "zh": "枪·突进",
+      "ko": "창·돌진"
+    },
+    "20101105": {
+      "ja": "槍・武変",
+      "en": "Spear - Conversion",
+      "zh": "枪·易武",
+      "ko": "창·무기 교체"
+    },
+    "20102103": {
+      "ja": "カウンター",
+      "en": "Defensive Riposte",
+      "zh": "防反",
+      "ko": "방어 반격"
+    },
+    "10200001": {
+      "zh": "无名枪法-1普攻"
+    },
+    "10200103": {
+      "zh": "无名枪法-C"
+    },
+    "10200104": {
+      "zh": "无名枪法-D"
+    },
+    "10200105": {
+      "zh": "无名枪法-P破防"
+    },
+    "20102101": {
+      "ja": "乾坤定",
+      "en": "Qiankun's Lock",
+      "zh": "乾坤定",
+      "ko": "진기 불균형"
+    },
+    "20102102": {
+      "ja": "連山一掃",
+      "en": "Storm Dance",
+      "zh": "扫连山",
+      "ko": "산해참"
+    },
+    "20102105": {
+      "zh": "奔云势",
+      "ja": "奔雲の勢い",
+      "en": "Cloudstep",
+      "ko": "구름의 추격"
+    },
+    "20102110": {
+      "ja": "軍破り",
+      "en": "Legion Crusher",
+      "zh": "万军破",
+      "ko": "만군의 격파"
+    },
+    "20301101": {
+      "ja": "坐雲の観",
+      "en": "Cloudburst Healing",
+      "zh": "坐看云起",
+      "ko": "무위자연"
+    },
+    "20301120": {
+      "zh": "千金朝玉",
+      "ja": "貴き朝玉",
+      "en": "Resurrection",
+      "ko": "천금의 갈망"
+    },
+    "20301121": {
+      "ja": "白雲無尽",
+      "en": "Endless White Clouds",
+      "zh": "白云无尽",
+      "ko": "무진의 백운"
+    },
+    "20301125": {
+      "zh": "朝雨轻尘",
+      "ja": "朝雨軽塵",
+      "en": "Light Dust After Morning Rain",
+      "ko": "여명의 안개"
+    },
+    "20301001": {
+      "ja": "扇・軽撃",
+      "en": "Fan - Light Attack",
+      "zh": "轻击·扇",
+      "ko": "약공격·부채"
+    },
+    "20301005": {
+      "ja": "扇・重攻撃",
+      "en": "Fan - Heavy Attack",
+      "zh": "扇·重击",
+      "ko": "부채-강공격"
+    },
+    "20301008": {
+      "ja": "扇・とどめ",
+      "en": "Fan - Execution",
+      "zh": "扇·处决",
+      "ko": "부채·처형"
+    },
+    "20301017": {
+      "ja": "扇・空中軽撃",
+      "en": "Fan - Aerial Light Attack",
+      "zh": "扇·空中轻击",
+      "ko": "부채·공중 약공격"
+    },
+    "20301030": {
+      "zh": "扇·起身",
+      "ja": "扇・起き上がり",
+      "en": "Fan - Recovery",
+      "ko": "부채-일어나기"
+    },
+    "20301102": {
+      "zh": "朝雨轻尘",
+      "ja": "朝雨軽塵",
+      "en": "Light Dust After Morning Rain",
+      "ko": "여명의 안개"
+    },
+    "20301104": {
+      "ja": "カウンター",
+      "en": "Defensive Riposte",
+      "zh": "防反",
+      "ko": "방어 반격"
+    },
+    "20301105": {
+      "ja": "扇・武変",
+      "en": "Fan - Conversion",
+      "zh": "扇·易武",
+      "ko": "부채·무기 교체"
+    },
+    "20301130": {
+      "ja": "扇・武変",
+      "en": "Fan - Conversion",
+      "zh": "扇·易武",
+      "ko": "부채·무기 교체"
+    },
+    "20302101": {
+      "ja": "春尽山空",
+      "en": "Peak's Springless Silence",
+      "zh": "春尽山空",
+      "ko": "봄의 침묵"
+    },
+    "20302103": {
+      "zh": "点按 {}",
+      "ja": "{}を押す",
+      "en": "Press {}",
+      "ko": "{} 탭하기"
+    },
+    "20302104": {
+      "zh": "明月相照",
+      "ja": "明月の照らし",
+      "en": "Glow & Flow",
+      "ko": "명월의 응시"
+    },
+    "20302105": {
+      "ja": "春月増華",
+      "en": "Moon Shatter Spring",
+      "zh": "月出惊春",
+      "ko": "춘월의 파문"
+    },
+    "20302111": {
+      "ja": "無頼の浮名",
+      "en": "Forsaken Fame",
+      "zh": "浮名无寄",
+      "ko": "망혼의 단절"
+    },
+    "20302116": {
+      "ja": "屏山の断翠",
+      "en": "Jadewind Shield",
+      "zh": "屏山断翠",
+      "ko": "바람의 장벽"
+    },
+    "20103005": {
+      "zh": "枪·重击",
+      "ja": "槍・重攻撃",
+      "en": "Spear - Heavy Attack",
+      "ko": "창-강공격"
+    },
+    "20103101": {
+      "ja": "風雷の嘯き",
+      "en": "Storm Roar",
+      "zh": "风雷啸",
+      "ko": "천둥의 포효"
+    },
+    "20103104": {
+      "ja": "雷驚震",
+      "en": "Thunder Shock",
+      "zh": "惊雷震",
+      "ko": "천뢰의 울림"
+    },
+    "20401102": {
+      "zh": "风卷残云",
+      "ja": "風巻残雲",
+      "en": "Galecloud Cleave",
+      "ko": "강풍의 소멸"
+    },
+    "20401103": {
+      "ja": "山崩地裂",
+      "en": "Avalanche",
+      "zh": "山崩地裂",
+      "ko": "대지의 분열"
+    },
+    "20401104": {
+      "ja": "威勢、天を貫く",
+      "en": "Vitality Slash",
+      "zh": "气贯长虹",
+      "ko": "장홍의 기세"
+    },
+    "20401107": {
+      "ja": "日風追い",
+      "en": "Wind Vortex",
+      "zh": "嗟夫刀法-特殊技-逐日追风",
+      "ko": "추풍일로"
+    },
+    "20401114": {
+      "ja": "砕岩穿石劈",
+      "en": "Stonebreaker Cleave",
+      "zh": "破石穿岩劈",
+      "ko": "파석불기(베기)"
+    },
+    "20401010": {
+      "ja": "斬馬刀・とどめ",
+      "en": "Mo Blade - Execution",
+      "zh": "陌刀·处决",
+      "ko": "맥도·처형"
+    },
+    "20401108": {
+      "ja": "斬馬刀・武変",
+      "en": "Mo Blade - Conversion",
+      "zh": "陌刀·易武",
+      "ko": "맥도·무기 교체"
+    },
+    "20401024": {
+      "ja": "斬馬刀・防御",
+      "en": "Mo Blade - Defense",
+      "zh": "陌刀·防御",
+      "ko": "맥도-방어"
+    },
+    "20402002": {
+      "zh": "陌刀·重击",
+      "ja": "斬馬刀・重攻撃",
+      "en": "Mo Blade - Heavy Attack",
+      "ko": "맥도-강공격"
+    },
+    "20402103": {
+      "zh": "荡八荒",
+      "ja": "八荒一掃",
+      "en": "Total Annihilation",
+      "ko": "팔황의 격동"
+    },
+    "20402104": {
+      "zh": "荡八荒",
+      "ja": "八荒一掃",
+      "en": "Total Annihilation",
+      "ko": "당팔황"
+    },
+    "20501001": {
+      "ja": "双剣・軽撃",
+      "en": "Dual Blades - Light Attack",
+      "zh": "双刀·轻击",
+      "ko": "쌍도-약공격"
+    },
+    "20501002": {
+      "ja": "双剣・軽撃",
+      "en": "Dual Blades - Light Attack",
+      "zh": "双刀·轻击",
+      "ko": "쌍도-약공격"
+    },
+    "20501003": {
+      "ja": "双剣・軽撃",
+      "en": "Dual Blades - Light Attack",
+      "zh": "双刀·轻击",
+      "ko": "쌍도-약공격"
+    },
+    "20501004": {
+      "ja": "双剣・軽撃",
+      "en": "Dual Blades - Light Attack",
+      "zh": "双刀·轻击",
+      "ko": "쌍도-약공격"
+    },
+    "20501011": {
+      "ja": "天怒刀術",
+      "en": "Blade of Heaven's Wrath",
+      "zh": "天怒刀法",
+      "ko": "진노의 검"
+    },
+    "20501012": {
+      "zh": "天怒刀法",
+      "ja": "天怒刀術",
+      "en": "Blade of Heaven's Wrath",
+      "ko": "진노의 도법"
+    },
+    "20501013": {
+      "zh": "天怒刀法",
+      "ja": "天怒刀術",
+      "en": "Blade of Heaven's Wrath",
+      "ko": "진노의 도법"
+    },
+    "20501014": {
+      "zh": "天怒刀法",
+      "ja": "天怒刀術",
+      "en": "Blade of Heaven's Wrath",
+      "ko": "진노의 도법"
+    },
+    "20501015": {
+      "zh": "天怒刀法",
+      "ja": "天怒刀術",
+      "en": "Blade of Heaven's Wrath",
+      "ko": "진노의 검"
+    },
+    "20502001": {
+      "ja": "痴障",
+      "en": "Delusion",
+      "zh": "痴障",
+      "ko": "미혹의 장막"
+    },
+    "20502002": {
+      "ja": "貪禍",
+      "en": "Calamity's Greed",
+      "zh": "贪祸",
+      "ko": "탐화"
+    },
+    "20502003": {
+      "ja": "怒炎",
+      "en": "Flamelash",
+      "zh": "嗔焰",
+      "ko": "격노의 화염"
+    },
+    "20502004": {
+      "zh": "贪祸·追",
+      "ja": "貪禍・追",
+      "en": "Greed Bane - Pursuit",
+      "ko": "탐화-추격"
+    },
+    "20502005": {
+      "zh": "贪祸·魂",
+      "ja": "貪禍・魂",
+      "en": "Greed Bane - Soul",
+      "ko": "탐화-영혼"
+    },
+    "20501402": {
+      "zh": "双刀·起身",
+      "ja": "双剣・起き上がり",
+      "en": "Dual Blades - Recovery",
+      "ko": "쌍도-일어나기"
+    },
+    "20501403": {
+      "ja": "双剣・武変",
+      "en": "Dual Blades - Conversion",
+      "zh": "双刀·易武",
+      "ko": "쌍도·무기 교체"
+    },
+    "20501603": {
+      "ja": "カウンター",
+      "en": "Defensive Riposte",
+      "zh": "防反",
+      "ko": "방어 반격"
+    },
+    "20501605": {
+      "ja": "双剣・とどめ",
+      "en": "Dual Blades - Execution",
+      "zh": "双刀·处决",
+      "ko": "쌍도·처형"
+    },
+    "20601101": {
+      "ja": "彩鳳飛翔",
+      "en": "Colorful Phoenix",
+      "zh": "彩凤飞",
+      "ko": "봉황의 비상"
+    },
+    "20601102": {
+      "ja": "杏花の天",
+      "en": "Apricot Heaven",
+      "zh": "九重春色-重击蓄力技-杏花天-1档",
+      "ko": "봄의 연무"
+    },
+    "20601103": {
+      "ja": "常初花",
+      "en": "Unwithering Flower",
+      "zh": "不谢花",
+      "ko": "불멸의 꽃"
+    },
+    "20601104": {
+      "ja": "竹林の風",
+      "en": "Bamboo Breeze",
+      "zh": "风敲竹",
+      "ko": "벗과의 조우"
+    },
+    "20601112": {
+      "ja": "春風飛舞",
+      "en": "Spring Flies to its End",
+      "zh": "春飞尽",
+      "ko": "봄의 비상"
+    },
+    "20601113": {
+      "ja": "春恨み",
+      "en": "Cast Spring's Regret",
+      "zh": "抛春恨",
+      "ko": "봄의 원한"
+    },
+    "20601201": {
+      "zh": "袖剑·轻击",
+      "ja": "袖剣・軽撃",
+      "en": "Hidden Sword - Light Attack",
+      "ko": "암살검-약공격"
+    },
+    "20601206": {
+      "zh": "袖剑·重击",
+      "ja": "袖剣・重撃",
+      "en": "Hidden Sword - Heavy Attack",
+      "ko": "암살검-강공격"
+    },
+    "20601212": {
+      "zh": "袖剑·空中轻击",
+      "ja": "袖剣・空中軽撃",
+      "en": "Hidden Sword - Airborne Light Attack",
+      "ko": "암살검-공중 약공격"
+    },
+    "20601213": {
+      "zh": "袖剑·跳劈",
+      "ja": "袖剣・跳び斬り",
+      "en": "Hidden Sword - Jump Strike",
+      "ko": "암살검-공중 강공격"
+    },
+    "10101019": {
+      "zh": "伞-派生技能-处决"
+    },
+    "20601005": {
+      "zh": "伞·重击",
+      "ja": "傘・重撃",
+      "en": "Umbrella - Heavy Attack",
+      "ko": "우산-강공격"
+    },
+    "20601016": {
+      "ja": "傘・武変",
+      "en": "Umbrella - Conversion",
+      "zh": "伞·易武",
+      "ko": "우산·무기 교체"
+    },
+    "20601023": {
+      "zh": "伞·起身",
+      "ja": "傘・起き上がり",
+      "en": "Umbrella - Recovery",
+      "ko": "우산-일어나기"
+    },
+    "20601105": {
+      "zh": "梦行云",
+      "ja": "夢行雲",
+      "en": "Cloud Reverie",
+      "ko": "운몽의 자락"
+    },
+    "20601010": {
+      "ja": "傘・とどめ",
+      "en": "Umbrella - Execution",
+      "zh": "伞·处决",
+      "ko": "우산·처형"
+    },
+    "20601110": {
+      "ja": "カウンター",
+      "en": "Defensive Riposte",
+      "zh": "防反",
+      "ko": "방어 반격"
+    },
+    "20602050": {
+      "ja": "傘・武変",
+      "en": "Umbrella - Conversion",
+      "zh": "伞·易武",
+      "ko": "우산·무기 교체"
+    },
+    "20602101": {
+      "ja": "一念浮生",
+      "en": "Floating Grace",
+      "zh": "一念浮生",
+      "ko": "찰나의 생"
+    },
+    "20602102": {
+      "zh": "百露凋残",
+      "ja": "百露凋残",
+      "en": "Pale Petal",
+      "ko": "백로의 이슬"
+    },
+    "20602103": {
+      "ja": "千水余韻",
+      "en": "Echoing Grow",
+      "zh": "千莳余响",
+      "ko": "천향의 울림"
+    },
+    "20603102": {
+      "zh": "醉梦游春-特殊技.流风回雪-释放"
+    },
+    "20603103": {
+      "zh": "流风回雪",
+      "ja": "流風回雪",
+      "en": "Cyclone Waltz",
+      "ko": "설풍의 눈"
+    },
+    "20603201": {
+      "zh": "玲珑泡影",
+      "ja": "玲瓏の泡沫",
+      "en": "Dreamwrought Bubbles",
+      "ko": "찬란한 환영"
+    },
+    "20603202": {
+      "ja": "紅絢香断",
+      "en": "Scarlet Spin",
+      "zh": "红绡香断",
+      "ko": "적연의 파멸"
+    },
+    "20603203": {
+      "zh": "红绡香断",
+      "ja": "紅絢香断",
+      "en": "Scarlet Spin",
+      "ko": "적연의 파멸"
+    },
+    "20603204": {
+      "zh": "红绡香断",
+      "ja": "紅絢香断",
+      "en": "Scarlet Spin",
+      "ko": "적연의 파멸"
+    },
+    "20603205": {
+      "zh": "红绡香断",
+      "ja": "紅絢香断",
+      "en": "Scarlet Spin",
+      "ko": "적연의 파멸"
+    },
+    "20701001": {
+      "ja": "鼠の威力",
+      "en": "Rodent Rampage",
+      "zh": "鼠鼠生威",
+      "ko": "어둠의 권능"
+    },
+    "20701002": {
+      "ja": "引縄斬",
+      "en": "Bladebound Thread",
+      "zh": "牵绳引刃",
+      "ko": "사슬도"
+    },
+    "20701003": {
+      "ja": "隠居",
+      "en": "Coiled Dragon",
+      "zh": "龙蛰蠖屈",
+      "ko": "용의 칩거"
+    },
+    "20700101": {
+      "ja": "伏鼠の縛",
+      "en": "Rodent's Resilience",
+      "zh": "伏鼠之缚",
+      "ko": "제압의 족쇄"
+    },
+    "20700102": {
+      "zh": "伏鼠之缚",
+      "ja": "伏鼠の縛",
+      "en": "Rodent's Resilience",
+      "ko": "제압의 족쇄"
+    },
+    "20700402": {
+      "zh": "绳镖·起身",
+      "ja": "縄鏢・起き上がり",
+      "en": "Rope Dart - Recovery",
+      "ko": "승표-일어나기"
+    },
+    "20700403": {
+      "ja": "縄鏢・武変",
+      "en": "Rope Dart - Conversion",
+      "zh": "绳镖·易武",
+      "ko": "승표·무기 교체"
+    },
+    "20700603": {
+      "ja": "カウンター",
+      "en": "Defensive Riposte",
+      "zh": "防反",
+      "ko": "방어 반격"
+    },
+    "20700605": {
+      "ja": "縄鏢・とどめ",
+      "en": "Rope Dart - Execution",
+      "zh": "绳镖·处决",
+      "ko": "승표·처형"
+    },
+    "20703006": {
+      "zh": "纵横势",
+      "ja": "乱撃の索",
+      "en": "Crisscross Stance",
+      "ko": "종횡무진의 기세"
+    },
+    "20703101": {
+      "ja": "追撃の索",
+      "en": "Snaring Lash",
+      "zh": "飞来势",
+      "ko": "날아드는 기세"
+    },
+    "20703102": {
+      "ja": "追撃の索・断",
+      "en": "Soaring Stance: Sever",
+      "zh": "飞来势·断",
+      "ko": "날아드는 기세-단"
+    },
+    "20702001": {
+      "ja": "虚塵の掃き",
+      "en": "Soul Sweep",
+      "zh": "履虚扫尘",
+      "ko": "허공일섬"
+    },
+    "20702002": {
+      "ja": "巣滅の一撃",
+      "en": "Burn and Bury",
+      "zh": "焚巢捣穴",
+      "ko": "소굴 분쇄"
+    },
+    "20702102": {
+      "ja": "貫穿の鏢",
+      "en": "Piercing Dart",
+      "zh": "镖鸣彻野",
+      "ko": "절창의 울림"
+    },
+    "20702103": {
+      "zh": "镖鸣彻野",
+      "ja": "貫穿の鏢",
+      "en": "Piercing Dart",
+      "ko": "충천의 표창"
+    },
+    "20702104": {
+      "zh": "镖鸣彻野",
+      "ja": "貫穿の鏢",
+      "en": "Piercing Dart",
+      "ko": "충천의 표창"
+    },
+    "20801001": {
+      "ja": "横刀・軽撃",
+      "en": "Heng Blade - Light Attack",
+      "zh": "轻击·横刀",
+      "ko": "약공격·횡도"
+    },
+    "20801006": {
+      "zh": "横刀·重击",
+      "ja": "横刀・重撃",
+      "en": "Heng Blade - Heavy Attack",
+      "ko": "횡도-강공격"
+    },
+    "20801010": {
+      "ja": "横刀・突進",
+      "en": "Heng Blade - Dash",
+      "zh": "横刀·突进",
+      "ko": "횡도·돌진"
+    },
+    "20801011": {
+      "ja": "横刀・空中軽撃",
+      "en": "Heng Blade - Aerial Light Attack",
+      "zh": "横刀·空中轻击",
+      "ko": "횡도·공중 약공격"
+    },
+    "20801012": {
+      "ja": "横刀・跳び斬り",
+      "en": "Heng Blade - Jump Strike",
+      "zh": "横刀·跳劈",
+      "ko": "횡도·도약 베기"
+    },
+    "20801096": {
+      "zh": "横刀·起身",
+      "ja": "横刀・起き上がり",
+      "en": "Heng Blade - Recovery",
+      "ko": "횡도-기상"
+    },
+    "20801101": {
+      "ja": "白刃殺将",
+      "en": "General's Bane",
+      "zh": "白刃杀将",
+      "ko": "순백의 섬광"
+    },
+    "20801102": {
+      "zh": "白刃杀将",
+      "ja": "白刃将討ち",
+      "en": "General's Bane",
+      "ko": "순백의 섬광"
+    },
+    "20801103": {
+      "zh": "白刃杀将·斩",
+      "ja": "白刃将討ち・斬撃",
+      "en": "General's Bane - Slash",
+      "ko": "칼날의 단죄(참)"
+    },
+    "20801104": {
+      "zh": "白刃杀将·刺",
+      "ja": "白刃殺将・刺",
+      "en": "General's Bane - Stab",
+      "ko": "순백의 섬광(살)"
+    },
+    "20801105": {
+      "ja": "飛鴻踏雪",
+      "en": "Fleeting Trace",
+      "zh": "飞鸿踏雪",
+      "ko": "비홍의 잔상"
+    },
+    "20801110": {
+      "ja": "横刀・武変",
+      "en": "Heng Blade - Conversion",
+      "zh": "横刀·易武",
+      "ko": "횡도·무기 교체"
+    },
+    "20801201": {
+      "ja": "泉下凍",
+      "en": "Frozen Under Spring",
+      "zh": "泉下冻",
+      "ko": "엄동의 샘"
+    },
+    "20801206": {
+      "ja": "雪を払って春を尋ねる",
+      "en": "Snowbreak Spring",
+      "zh": "拨雪寻春",
+      "ko": "만설의 각성"
+    },
+    "20801090": {
+      "ja": "横刀・とどめ",
+      "en": "Heng Blade - Execution",
+      "zh": "横刀·处决",
+      "ko": "횡도·처형"
+    },
+    "20801111": {
+      "ja": "横刀・防御反撃",
+      "en": "Heng Blade - Defensive Riposte",
+      "zh": "横刀·防反",
+      "ko": "횡도-반격"
+    },
+    "20901001": {
+      "ja": "天欲義",
+      "en": "Celestial Righteousness",
+      "zh": "天欲义",
+      "ko": "천의의 계율"
+    },
+    "20901002": {
+      "ja": "天欲義",
+      "en": "Celestial Righteousness",
+      "zh": "天欲义",
+      "ko": "천의의 계율"
+    },
+    "20901003": {
+      "ja": "天欲義",
+      "en": "Celestial Righteousness",
+      "zh": "天欲义",
+      "ko": "천의의 계율"
+    },
+    "20901004": {
+      "ja": "天欲義",
+      "en": "Celestial Righteousness",
+      "zh": "天欲义",
+      "ko": "천의의 계율"
+    },
+    "20901005": {
+      "ja": "天欲義",
+      "en": "Celestial Righteousness",
+      "zh": "天欲义",
+      "ko": "천의의 계율"
+    },
+    "20901006": {
+      "zh": "有义则治1",
+      "ja": "義の統治1段目",
+      "en": "Rule of Righteousness 1",
+      "ko": "하늘의 질서 1"
+    },
+    "20901007": {
+      "zh": "有义则治2",
+      "ja": "義の統治2段目",
+      "en": "Rule of Righteousness 2",
+      "ko": "하늘의 질서 2"
+    },
+    "20901008": {
+      "zh": "有义则治3",
+      "ja": "義の統治3段目",
+      "en": "Rule of Righteousness 3",
+      "ko": "하늘의 질서 3"
+    },
+    "20901009": {
+      "zh": "有义则治4",
+      "ja": "義の統治4段目",
+      "en": "Rule of Righteousness 4",
+      "ko": "하늘의 질서 4"
+    },
+    "20901010": {
+      "ja": "手甲・突進",
+      "en": "Gauntlets - Dash",
+      "zh": "手甲·突进",
+      "ko": "권갑·돌진"
+    },
+    "20901011": {
+      "ja": "手甲・空中軽撃",
+      "en": "Gauntlets - Aerial Light Attack",
+      "zh": "手甲·空中轻击",
+      "ko": "권갑·공중 약공격"
+    },
+    "20901012": {
+      "ja": "手甲・跳び斬り",
+      "en": "Gauntlets - Jump Strike",
+      "zh": "手甲·跳劈",
+      "ko": "권갑·도약 베기"
+    },
+    "20901096": {
+      "zh": "手甲·起身",
+      "ja": "手甲・起き上がる",
+      "en": "Gauntlets - Get Up",
+      "ko": "권갑-일어나기"
+    },
+    "20901101": {
+      "ja": "天志の力",
+      "en": "Heaven's Will",
+      "zh": "我有天志",
+      "ko": "하늘의 뜻"
+    },
+    "20901102": {
+      "ja": "法天無双",
+      "en": "Heaven's Law",
+      "zh": "法天无双",
+      "ko": "천의 만법"
+    },
+    "20901108": {
+      "zh": "天下归义",
+      "ja": "天下帰義",
+      "en": "World's Righteousness",
+      "ko": "천하 귀의"
+    },
+    "20901110": {
+      "ja": "手甲・武変",
+      "en": "Gauntlets - Conversion",
+      "zh": "手甲·易武",
+      "ko": "권갑·무기 교체"
+    },
+    "20901201": {
+      "ja": "悪不義",
+      "en": "Wicked Injustice",
+      "zh": "恶不义",
+      "ko": "불의의 증오"
+    },
+    "20901090": {
+      "ja": "手甲・とどめ",
+      "en": "Gauntlets - Execution",
+      "zh": "手甲·处决",
+      "ko": "권갑·처형"
+    },
+    "20901111": {
+      "ja": "手甲・防御反撃",
+      "en": "Gauntlets - Defensive Riposte",
+      "zh": "手甲·防反",
+      "ko": "권갑-방어 반격"
+    },
+    "10301205": {
+      "ja": "貴き朝玉",
+      "en": "Resurrection",
+      "zh": "千金朝玉",
+      "ko": "마음의 갈망"
+    },
+    "20202102913": {
+      "ja": "次二衡の径数",
+      "en": "Second Track Slash",
+      "zh": "次二衡径数",
+      "ko": "내공응결"
+    },
+    "20402001": {
+      "ja": "焚此心",
+      "en": "Burning Heart",
+      "zh": "焚此心",
+      "ko": "타오르는 결의"
+    },
+    "20601001": {
+      "ja": "傘・軽撃",
+      "en": "Umbrella - Light Attack",
+      "zh": "轻击·伞",
+      "ko": "약공격·우산"
+    },
+    "20702101": {
+      "ja": "貫穿の鏢",
+      "en": "Piercing Dart",
+      "zh": "镖鸣彻野",
+      "ko": "절창의 울림"
+    },
+    "21001105": {
+      "ja": "凌波滴露",
+      "en": "Rippling Dew",
+      "zh": "凌波滴露",
+      "ko": "능파적로"
+    },
+    "24703101": {
+      "ja": "追撃の索",
+      "en": "Snaring Lash",
+      "zh": "飞来势",
+      "ko": "날아드는 기세"
+    },
+    "20201006911": {
+      "ja": "家無き者",
+      "en": "Vagrant Sword",
+      "zh": "无以为家",
+      "ko": "방랑의 검법"
+    },
+    "20101101": {
+      "ja": "六酔槍",
+      "en": "Sober Sorrow",
+      "zh": "愁无酒",
+      "ko": "허무의 술잔"
+    },
+    "20801005": {
+      "ja": "塚上の霜",
+      "en": "Grave Frost",
+      "zh": "冢上霜",
+      "ko": "서리 무덤"
+    },
+    "20401111": {
+      "ja": "天地をも揺るがす",
+      "en": "Heaven's Shift",
+      "zh": "移天换日",
+      "ko": "천일의 전환"
+    },
+    "20301101913": {
+      "ja": "雲水療",
+      "en": "Cloudburst Healing",
+      "zh": "坐看云起",
+      "ko": "무위자연"
+    },
+    "20101102913": {
+      "ja": "断蓬飛び",
+      "en": "Severing Jab",
+      "zh": "断蓬飞",
+      "ko": "절연의 비상"
+    },
+    "20101107": {
+      "ja": "千軍一掃",
+      "en": "Sweep All",
+      "zh": "扫千军",
+      "ko": "일소천군"
+    },
+    "20102101913": {
+      "ja": "乾坤定",
+      "en": "Qiankun's Lock",
+      "zh": "乾坤定",
+      "ko": "건곤의 정수"
+    },
+    "20201102913": {
+      "ja": "家無き者",
+      "en": "Vagrant Sword",
+      "zh": "无以为家",
+      "ko": "방랑의 검법"
+    },
+    "20502003910": {
+      "ja": "怒炎",
+      "en": "Flamelash",
+      "zh": "嗔焰",
+      "ko": "격노의 화염"
+    },
+    "20601102914": {
+      "ja": "杏花の天",
+      "en": "Apricot Heaven",
+      "zh": "杏花天",
+      "ko": "봄의 연무"
+    },
+    "20103101913": {
+      "ja": "風雷の嘯き",
+      "en": "Storm Roar's",
+      "zh": "风雷啸",
+      "ko": "천둥의 포효"
+    },
+    "20402102": {
+      "ja": "千軍招来",
+      "en": "Legion Summoner's",
+      "zh": "唤千军",
+      "ko": "천군 소환"
+    },
+    "20103102": {
+      "ja": "八方の戦い",
+      "en": "Fury Spear",
+      "zh": "战八方",
+      "ko": "팔방참"
+    },
+    "20301055": {
+      "ja": "碧玉返露",
+      "en": "Emerald Dewtouch",
+      "zh": "点翠沾衣",
+      "ko": "비취의 이슬"
+    },
+    "20602103913": {
+      "ja": "万木余響",
+      "en": "Herbal Resonance",
+      "zh": "千莳余响",
+      "ko": "천향의 울림"
+    },
+    "20703105": {
+      "ja": "縛りの索",
+      "en": "Sky Grasped",
+      "zh": "索天势",
+      "ko": "결박의 기세"
+    },
+    "20102101911": {
+      "ja": "乾坤定",
+      "en": "Qiankun's Lock",
+      "zh": "乾坤定",
+      "ko": "건곤의 정수"
+    },
+    "209011093": {
+      "ja": "不義天誅・尽",
+      "en": "Just Verdict - End",
+      "zh": "无义当诛·尽",
+      "ko": "불의의 단죄·끝"
+    },
+    "20401107913": {
+      "ja": "日風追い",
+      "en": "Wind Vortex",
+      "zh": "逐日追风",
+      "ko": "추풍일로"
+    },
+    "21001106": {
+      "ja": "凌波·撼玉",
+      "en": "Ripple: Jadebreaker",
+      "zh": "凌波·撼玉",
+      "ko": "능파-함옥"
+    },
+    "21001107": {
+      "ja": "凌波·昭陽",
+      "en": "Ripple: Dawnsun",
+      "zh": "凌波·昭阳",
+      "ko": "능파-소양"
+    },
+    "21001108": {
+      "ja": "凌波·繁音",
+      "en": "Ripple: Flourishing Notes",
+      "zh": "凌波·繁音",
+      "ko": "능파-번음"
+    },
+    "20302101914": {
+      "ja": "春尽山空",
+      "en": "Peak's Springless Silence",
+      "zh": "春尽山空",
+      "ko": "봄의 침묵"
+    },
+    "20401021": {
+      "ja": "斬馬刀・突進",
+      "en": "Mo Blade - Dash",
+      "zh": "陌刀·突进",
+      "ko": "맥도·돌진"
+    },
+    "20501401": {
+      "ja": "双剣・突進",
+      "en": "Dual Blades - Dash",
+      "zh": "双刀·突进",
+      "ko": "쌍도·돌진"
+    },
+    "20601015": {
+      "ja": "傘・突進",
+      "en": "Umbrella - Dash",
+      "zh": "伞·突进",
+      "ko": "우산·돌진"
+    },
+    "20401017": {
+      "ja": "斬馬刀・空中軽撃",
+      "en": "Mo Blade - Aerial Light Attack",
+      "zh": "陌刀·空中轻击",
+      "ko": "맥도·공중 약공격"
+    },
+    "20601108": {
+      "ja": "傘・空中軽撃",
+      "en": "Umbrella - Aerial Light Attack",
+      "zh": "伞·空中轻击",
+      "ko": "우산·공중 약공격"
+    },
+    "20401020": {
+      "ja": "斬馬刀・跳び斬り",
+      "en": "Mo Blade - Jump Strike",
+      "zh": "陌刀·跳劈",
+      "ko": "맥도·도약 베기"
+    },
+    "20501305": {
+      "ja": "双剣・跳び斬り",
+      "en": "Dual Blades - Jump Strike",
+      "zh": "双刀·跳劈",
+      "ko": "쌍도·도약 베기"
+    },
+    "20601107": {
+      "ja": "傘・跳び斬り",
+      "en": "Umbrella - Jump Strike",
+      "zh": "伞·跳劈",
+      "ko": "우산·도약 베기"
+    },
+    "20401001": {
+      "ja": "斬馬刀・軽撃",
+      "en": "Mo Blade - Light Attack",
+      "zh": "轻击·陌刀",
+      "ko": "약공격·맥도"
+    },
+    "20901200": {
+      "ja": "手甲・軽撃鷹隼",
+      "en": "Gauntlets - Light Attack Falcon",
+      "zh": "拳·轻击鹰隼",
+      "ko": "권갑·약공격 참매"
+    },
+    "209011092": {
+      "ja": "不義天誅",
+      "en": "Just Verdict",
+      "zh": "无义当诛",
+      "ko": "불의의 단죄"
+    },
+    "209011094": {
+      "ja": "不義天誅・尽",
+      "en": "Just Verdict - End",
+      "zh": "无义当诛·尽",
+      "ko": "불의의 단죄·끝"
     }
   }
 }

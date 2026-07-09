@@ -15,6 +15,8 @@
 
   let _searchQuery = '';
   let _selectedId = null;
+  let _selectedTab = 'talent'; // 'talent' | 'skill'
+  let _selectedLv = null; // null = default = currentLvCap
 
   function _kongfuMap() { return window.WWM_KONGFU || {}; }
   function _passivesMap() { return window.WWM_KONGFU_PASSIVES || {}; }
@@ -168,11 +170,12 @@
     const applyLabel = _appliesToLabelFull(s1.appliesTo);
     const fromLabel = _fromStatLabel(s1.fromStatKey);
     const isPctAppliesTo = ['sympathyRate', 'critRate'].indexOf(s1.appliesTo) !== -1;
+    const currentLvCap = L.currentLvCap;
     const rows = thresholds.map((th, i) => {
       const stage = i + 1; // 一重 = index0
       const lvCap = lvCaps[i] != null ? lvCaps[i] : '-';
       const cap = caps[i];
-      const isCurrent = stage === 12; // Lv95 = 十二重 (kongfu_talent_ladders.json lvCaps[11]=95相当帯)
+      const isCurrent = currentLvCap != null && lvCaps[i] === currentLvCap;
       const capText = cap == null ? '-' : `+${_formatCap(cap, isPctAppliesTo)}`;
       const currentBadge = isCurrent ? `<span class="wwm-db-kongfu-current-badge">${_esc((window.T && window.T.dbKongfuCurrentCap) || '現行キャップ')}</span>` : '';
       return `<tr class="${isCurrent ? 'wwm-db-kongfu-current-cap-row' : ''}">
@@ -218,12 +221,13 @@
     const applyLabel = _appliesToLabelFull(s3.appliesTo);
     const pathAttackLabel = _pathAttackLabel(kf.path);
     const capIsPct = s3.capKind === 'dmg'; // dmg = %表示、 pen = 生数値
+    const currentLvCap = L.currentLvCap;
     const rows = thresholds.map((th, i) => {
       const stage = unlockStage + i; // 三重解放 = index0 → stage3
       const lvCap = lvCaps[stage - 1] != null ? lvCaps[stage - 1] : '-';
       const cap = caps[i];
       const fa = fixedAdd[i] || [null, null];
-      const isCurrent = stage === 12; // Lv95 = 十二重 (kongfu_talent_ladders.json lvCaps[11]=95相当帯)
+      const isCurrent = currentLvCap != null && lvCaps[stage - 1] === currentLvCap;
       const capText = cap == null ? '-' : `+${_formatCap(cap, capIsPct)}`;
       const faText = (fa[0] == null || fa[1] == null) ? '-' : `+${fa[0]}~${fa[1]}`;
       const currentBadge = isCurrent ? `<span class="wwm-db-kongfu-current-badge">${_esc((window.T && window.T.dbKongfuCurrentCap) || '現行キャップ')}</span>` : '';
@@ -363,8 +367,35 @@
     });
   }
 
+  function _attachDetailHandlers(root) {
+    if (!root) return;
+    root.querySelectorAll('[data-db-kongfu-tab]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        _selectedTab = btn.dataset.dbKongfuTab || 'talent';
+        _rerenderDetailBody();
+      });
+    });
+    const lvSel = root.querySelector('[data-db-kongfu-lv-select]');
+    if (lvSel) {
+      lvSel.addEventListener('change', () => {
+        _selectedLv = Number(lvSel.value);
+        _rerenderDetailBody();
+      });
+    }
+  }
+
+  function _rerenderDetailBody() {
+    const root = document.getElementById('dbKongfu');
+    if (!root || !_selectedId) return;
+    const bodyEl = root.querySelector('[data-db-kongfu-detail-body]');
+    if (!bodyEl) return;
+    bodyEl.innerHTML = _renderDetail(_selectedId);
+    _attachDetailHandlers(root);
+  }
+
   function selectId(id) {
     _selectedId = id;
+    _selectedLv = null; // kongfu 切替時 = default (currentLvCap) にリセット
     const root = document.getElementById('dbKongfu');
     if (!root) return;
     root.querySelectorAll('[data-db-kongfu-id]').forEach(btn => {
@@ -372,6 +403,7 @@
     });
     const bodyEl = root.querySelector('[data-db-kongfu-detail-body]');
     if (bodyEl) bodyEl.innerHTML = _renderDetail(id);
+    _attachDetailHandlers(root);
     if (_isMobile()) {
       const r = root.querySelector('[data-db-kongfu-root]');
       if (r) r.setAttribute('data-mobile-view', 'detail');
@@ -388,20 +420,156 @@
     });
   }
 
-  function _renderDetail(id) {
-    const lang = _curLang();
-    const kf = _kongfuMap()[id];
-    if (!kf) return `<p class="wwm-db-empty">${_esc((window.T && window.T.dbKongfuEmpty) || '武術が見つかりません')}</p>`;
-    // slot 順 = ゲーム内才能パネル表示順 (kongfu_up_rank_stages_raw の psids 並び順 = 全18武学統一)。
-    // S5→S1→S2→S3→S4 + S6 (汎用、末尾)
-    return _renderHeader(id, kf, lang) +
-           _renderDescription(id, lang) +
+  // ── tab bar (才能 / 武術技 切替) ──
+  function _renderTabBar(_id, _lang) {
+    const talentLabel = (window.T && window.T.dbKongfuTabTalent) || '才能';
+    const skillLabel = (window.T && window.T.dbKongfuTabSkill) || '武術技';
+    const talentSel = _selectedTab === 'talent';
+    const skillSel = _selectedTab === 'skill';
+    return `
+      <div class="wwm-db-kongfu-tabs" role="tablist">
+        <button type="button" class="wwm-db-kongfu-tab" role="tab" data-db-kongfu-tab="talent" aria-selected="${talentSel}">${_esc(talentLabel)}</button>
+        <button type="button" class="wwm-db-kongfu-tab" role="tab" data-db-kongfu-tab="skill" aria-selected="${skillSel}">${_esc(skillLabel)}</button>
+      </div>
+    `;
+  }
+
+  // ── talent tab = 既存 slot 群 (順序: S5→S1→S2→S3→S4→S6、ゲーム内才能パネル表示順) ──
+  function _renderTalentTab(id, kf, lang) {
+    return _renderDescription(id, lang) +
            _renderSlotS2S5(id, kf, lang, 's5') +
            _renderSlotS1(id, kf, lang) +
            _renderSlotS2S5(id, kf, lang, 's2') +
            _renderSlotS3(id, kf, lang) +
            _renderSlotS4(id, kf, lang) +
            _renderSlotS6(id, kf, lang);
+  }
+
+  // ── skill tab = 武術技一覧 (data/skill_damage.json 由来、Lv dropdown で切替) ──
+  // data source = window.WWM_SKILL_DAMAGE (data-store が起動時 eager load、 short key 形)。
+  // schema: { <kongfu_id>: { w: weaponType, s: [{ i: skill_id, n: damage_name(zh), t: type, r: { <lv>: [f1,f2,f3,f4,f5] } }] } }
+  // 表示 field = 外功係数(f5=[4]) / 外功付加(f3=[2]) / 属性係数(f5 × 1.5、 才能適用後) の 3 列。
+  // 属性付加(f2=[1]) は画面非表示 (calc.js 内部用、 memory [[skill-damage-buff-mining-complete-2026-07-08]])。
+  function _skillDamageMap() { return window.WWM_SKILL_DAMAGE || {}; }
+  function _ladderMeta() { return window.WWM_KONGFU_LADDERS || {}; }
+  function _currentLvCap() { return _ladderMeta().currentLvCap || 95; }
+  function _availableLvs(skills) {
+    const set = new Set();
+    for (const s of skills) {
+      const rec = s.r || {};
+      for (const lv of Object.keys(rec)) set.add(Number(lv));
+    }
+    return [...set].sort((a, b) => a - b);
+  }
+  function _skillDisplayName(s, lang) {
+    // 表示優先順:
+    // 1. skill_name cat (skill_id ベース、 data/i18n/game.json、 196 sid × 4 lang partial)
+    // 2. s.ln (zh 内部名 hash key 経由 locale mapping、 4 lang = build_skill_damage.py で埋込)
+    // 3. s.n (zh 内部名 fallback)
+    if (s.i && window.WWM_DS) {
+      const n = window.WWM_DS.name('skill_name', s.i, lang);
+      if (n && n.indexOf('[skill_name:') !== 0) return n;
+    }
+    if (s.ln && s.ln[lang]) return s.ln[lang];
+    // en fallback (ln.ja ある場合 en/ko でも使える)
+    if (s.ln && (s.ln.en || s.ln.ja)) return s.ln.en || s.ln.ja;
+    return s.n || `#${s.i}`;
+  }
+
+  // skilltype chip = damage_name zh tag anchor で build_skill_damage.py が 'k' field 埋込
+  // (light/heavy/charged/special/active/weapon/variedCombo/lightEnhanced/enhanced/other)。
+  // WWM_DS.name('skilltype', k) で i18n label 取得、 未定義 = 表示なし
+  function _skilltypeChip(s, lang) {
+    if (!s.k || !window.WWM_DS) return '';
+    const label = window.WWM_DS.name('skilltype', s.k, lang);
+    if (!label || label.indexOf('[') === 0) return '';
+    return `<span class="wwm-db-kongfu-skill-chip" data-skilltype="${_esc(s.k)}">${_esc(label)}</span>`;
+  }
+  // 段係数 chip = skill_damage.json 内の s.seg (build_skill_damage.py で merge、 locale の
+  // $D$F<mult>$E$G<sid>$E pattern 由来)。 2 段以上あれば「N 段」表示、 tooltip = 各段の実 damage %
+  // = base f5 × 段係数 × 100% (兄貴 SS の game 表示 一段/二段/三段 と直接突合可能)
+  function _segChip(s, curLv) {
+    const mults = s.seg;
+    if (!mults || !Array.isArray(mults) || mults.length < 2) return '';
+    const floats = curLv != null ? (s.r || {})[String(curLv)] : null;
+    const baseF5 = floats && floats.length >= 5 ? floats[4] : null;
+    let tooltip;
+    if (baseF5 != null) {
+      tooltip = mults.map((m, i) => `${i+1}段=${(baseF5 * m * 100).toFixed(2)}% (×${m})`).join(' / ');
+    } else {
+      tooltip = mults.map((m, i) => `${i+1}段=×${m}`).join(' ');
+    }
+    return `<span class="wwm-db-kongfu-skill-chip wwm-db-kongfu-skill-chip-seg" title="${_esc(tooltip)}">${mults.length}段</span>`;
+  }
+  function _renderSkillTab(id, _kf, lang) {
+    const dmg = _skillDamageMap()[id];
+    if (!dmg || !dmg.s || !dmg.s.length) {
+      return `<p class="wwm-db-empty">${_esc((window.T && window.T.dbKongfuSkillEmpty) || '表示可能な武術技がありません')}</p>`;
+    }
+    const skills = dmg.s;
+    const lvs = _availableLvs(skills);
+    if (!lvs.length) {
+      return `<p class="wwm-db-empty">${_esc((window.T && window.T.dbKongfuSkillEmpty) || '表示可能な武術技がありません')}</p>`;
+    }
+    const cap = _currentLvCap();
+    let curLv = _selectedLv;
+    if (curLv == null || lvs.indexOf(curLv) === -1) curLv = lvs.indexOf(cap) !== -1 ? cap : lvs[lvs.length - 1];
+    const lvOptions = lvs.map(lv => `<option value="${lv}" ${lv === curLv ? 'selected' : ''}>Lv${lv}${lv === cap ? ' ★' : ''}</option>`).join('');
+    const rows = skills.map(s => {
+      const floats = (s.r || {})[String(curLv)];
+      const name = _esc(_skillDisplayName(s, lang));
+      const chip = _skilltypeChip(s, lang);
+      const segChip = _segChip(s, curLv);
+      const nameCell = `<div class="wwm-db-kongfu-skill-name-cell">${name}${chip}${segChip}</div>`;
+      if (!floats || floats.length < 5) {
+        return `<tr><td>${nameCell}</td><td>-</td><td>-</td><td>-</td></tr>`;
+      }
+      // floats[5] = [f1定数, f2属性付加raw, f3外功付加raw, f4属性係数base=1.0, f5外功係数]
+      const f3 = floats[2], f5 = floats[4];
+      const physCoefPct = (f5 * 100).toFixed(2) + '%';
+      const physAdd = f3.toFixed(0);
+      // 属性係数 = 外功係数 × 1.5 (才能適用後、 SS 検証済、 Lv1 = ×1.0 は本表示では簡略化)
+      const attrCoefPct = (f5 * 1.5 * 100).toFixed(2) + '%';
+      return `<tr>
+        <td>${nameCell}</td>
+        <td>${physCoefPct}</td>
+        <td>${physAdd}</td>
+        <td>${attrCoefPct}</td>
+      </tr>`;
+    }).join('');
+    const lvLabel = (window.T && window.T.dbKongfuSkillLvLabel) || '表示レベル';
+    const cName = (window.T && window.T.dbKongfuSkillColName) || '武術技';
+    const cPhysCoef = (window.T && window.T.dbKongfuSkillColPhysCoef) || '外功係数';
+    const cPhysAdd = (window.T && window.T.dbKongfuSkillColPhysAdd) || '外功付加';
+    const cAttrCoef = (window.T && window.T.dbKongfuSkillColAttrCoef) || '属性係数';
+    return `
+      <div class="wwm-db-kongfu-skill-controls">
+        <label class="wwm-db-kongfu-skill-lv-label">${_esc(lvLabel)}:
+          <select class="wwm-db-kongfu-skill-lv-select" data-db-kongfu-lv-select>${lvOptions}</select>
+        </label>
+      </div>
+      <table class="wwm-db-kongfu-table wwm-db-kongfu-skill-table">
+        <thead><tr>
+          <th>${_esc(cName)}</th>
+          <th>${_esc(cPhysCoef)}</th>
+          <th>${_esc(cPhysAdd)}</th>
+          <th>${_esc(cAttrCoef)}</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  function _renderDetail(id) {
+    const lang = _curLang();
+    const kf = _kongfuMap()[id];
+    if (!kf) return `<p class="wwm-db-empty">${_esc((window.T && window.T.dbKongfuEmpty) || '武術が見つかりません')}</p>`;
+    const tabContent = _selectedTab === 'skill'
+      ? _renderSkillTab(id, kf, lang)
+      : _renderTalentTab(id, kf, lang);
+    return _renderHeader(id, kf, lang) +
+           _renderTabBar(id, lang) +
+           `<div class="wwm-db-kongfu-tab-content" data-db-kongfu-tab-content>${tabContent}</div>`;
   }
 
   function render() {

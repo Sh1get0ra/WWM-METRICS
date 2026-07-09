@@ -984,6 +984,132 @@
     margin: 4px 0 8px;
     font-style: italic;
   }
+  /* tab bar = 才能 / 武術技 切替 (header 直下) */
+  .wwm-db-kongfu-tabs {
+    display: flex;
+    gap: 4px;
+    margin: 0 0 14px;
+    border-bottom: 1px solid color-mix(in oklab, var(--gold-paper) 55%, transparent);
+  }
+  .wwm-db-kongfu-tab {
+    padding: 8px 16px;
+    font-family: var(--f-display-title);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--kami-fg-dim);
+    background: transparent;
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: 3px 3px 0 0;
+    cursor: pointer;
+    margin-bottom: -1px;
+  }
+  .wwm-db-kongfu-tab:hover {
+    color: var(--kami-fg);
+  }
+  .wwm-db-kongfu-tab[aria-selected="true"] {
+    color: var(--gold-deep);
+    border-color: color-mix(in oklab, var(--gold-paper) 55%, transparent);
+    background: var(--kami-0);
+  }
+  .wwm-db-kongfu-tab-content {
+    /* tab content wrapper = no special styling、 slot-section が margin 持つ */
+  }
+  /* skill tab = Lv dropdown + skill table */
+  .wwm-db-kongfu-skill-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 12px;
+  }
+  .wwm-db-kongfu-skill-lv-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--kami-fg-dim);
+    font-family: var(--f-display-title);
+    letter-spacing: 0.03em;
+  }
+  .wwm-db-kongfu-skill-lv-select {
+    padding: 4px 8px;
+    font-size: 13px;
+    font-family: var(--f-body);
+    color: var(--kami-fg);
+    background: var(--kami-0);
+    border: 1px solid color-mix(in oklab, var(--kami-fg) 28%, transparent);
+    border-radius: 3px;
+  }
+  .wwm-db-kongfu-skill-table th:first-child,
+  .wwm-db-kongfu-skill-table td:first-child {
+    text-align: left;
+    max-width: 300px;
+    word-break: break-word;
+  }
+  .wwm-db-kongfu-skill-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .wwm-db-kongfu-skill-chip {
+    display: inline-block;
+    padding: 1px 8px;
+    font-size: 10px;
+    font-family: var(--f-display-title);
+    letter-spacing: 0.05em;
+    border-radius: 2px;
+    color: var(--kami-fg-dim);
+    background: color-mix(in oklab, var(--kami-fg) 8%, transparent);
+    border: 1px solid color-mix(in oklab, var(--kami-fg) 20%, transparent);
+    white-space: nowrap;
+  }
+  /* skilltype 別色 = 主要 tag に path 系 palette 割当 (審美目的) */
+  .wwm-db-kongfu-skill-chip[data-skilltype="light"],
+  .wwm-db-kongfu-skill-chip[data-skilltype="lightVariedCombo"],
+  .wwm-db-kongfu-skill-chip[data-skilltype="lightEnhanced"] {
+    color: var(--path-silkbind-dark);
+    border-color: color-mix(in oklab, var(--path-silkbind-dark) 40%, transparent);
+    background: color-mix(in oklab, var(--path-silkbind-dark) 6%, transparent);
+  }
+  .wwm-db-kongfu-skill-chip[data-skilltype="heavy"],
+  .wwm-db-kongfu-skill-chip[data-skilltype="heavyEnhanced"] {
+    color: var(--path-stonesplit-dark);
+    border-color: color-mix(in oklab, var(--path-stonesplit-dark) 40%, transparent);
+    background: color-mix(in oklab, var(--path-stonesplit-dark) 6%, transparent);
+  }
+  .wwm-db-kongfu-skill-chip[data-skilltype="charged"] {
+    color: var(--path-bamboocut-dark);
+    border-color: color-mix(in oklab, var(--path-bamboocut-dark) 40%, transparent);
+    background: color-mix(in oklab, var(--path-bamboocut-dark) 6%, transparent);
+  }
+  .wwm-db-kongfu-skill-chip[data-skilltype="special"],
+  .wwm-db-kongfu-skill-chip[data-skilltype="active"],
+  .wwm-db-kongfu-skill-chip[data-skilltype="enhanced"] {
+    color: var(--path-bellstrike-dark);
+    border-color: color-mix(in oklab, var(--path-bellstrike-dark) 40%, transparent);
+    background: color-mix(in oklab, var(--path-bellstrike-dark) 6%, transparent);
+  }
+  .wwm-db-kongfu-skill-chip[data-skilltype="weapon"],
+  .wwm-db-kongfu-skill-chip[data-skilltype="variedCombo"] {
+    color: var(--gold-deep);
+    border-color: color-mix(in oklab, var(--gold-deep) 40%, transparent);
+    background: color-mix(in oklab, var(--gold-deep) 6%, transparent);
+  }
+  /* 段係数 chip = locale 由来の N 段連続攻撃 */
+  .wwm-db-kongfu-skill-chip-seg {
+    color: var(--kami-fg);
+    border-color: color-mix(in oklab, var(--kami-fg) 30%, transparent);
+    background: color-mix(in oklab, var(--kami-fg) 4%, transparent);
+    cursor: help;
+  }
+  .wwm-db-kongfu-skill-table th:not(:first-child),
+  .wwm-db-kongfu-skill-table td:not(:first-child) {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
 }
 
 /* Mobile: 一覧 ⇔ 詳細 全画面切替 */

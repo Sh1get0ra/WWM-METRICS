@@ -1,5 +1,6 @@
 {
  "_note": "kongfu 才能 共通ladder (client抽出、scripts/mining/apply_kongfu_talent_derived.py 生成)。stage(重) = lvCaps で武術Lv(=キャラLv上限) を満たす最小index+1。S1 rung=stage、S3 rung=stage-2 (三重解放)。cap=rate×閾値のゲーム表示丸め値。⚠️ lvCaps 十三重(idx12)以降は+5則外挿、解放トリガーがWorldLv相互考慮に変わる可能性あり",
+ "currentLvCap": 95,
  "lvCaps": [
   30,
   40,
