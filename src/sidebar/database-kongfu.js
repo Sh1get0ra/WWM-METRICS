@@ -462,15 +462,16 @@
     return [...set].sort((a, b) => a - b);
   }
   function _skillDisplayName(s, lang) {
-    // 表示優先順:
-    // 1. skill_name cat (skill_id ベース、 data/i18n/game.json、 196 sid × 4 lang partial)
-    // 2. s.ln (zh 内部名 hash key 経由 locale mapping、 4 lang = build_skill_damage.py で埋込)
+    // 表示優先順 (2026-07-10 兄貴 fact 訂正: 逆転):
+    // 1. s.ln (build_skill_damage.py で dup label suffix 番号付与済 = 「双剣・軽撃1〜4」等 段番号 保持)
+    // 2. skill_name cat (skill_id 共通 anchor = 段番号なし「双剣・軽撃」等 汎用 fallback)
     // 3. s.n (zh 内部名 fallback)
+    // 前 (1)(2) 逆 = skill_name cat 優先で 段番号 truncate = 20501001~004 全 「双剣・軽撃」 表示問題
+    if (s.ln && s.ln[lang]) return s.ln[lang];
     if (s.i && window.WWM_DS) {
       const n = window.WWM_DS.name('skill_name', s.i, lang);
       if (n && n.indexOf('[skill_name:') !== 0) return n;
     }
-    if (s.ln && s.ln[lang]) return s.ln[lang];
     // en fallback (ln.ja ある場合 en/ko でも使える)
     if (s.ln && (s.ln.en || s.ln.ja)) return s.ln.en || s.ln.ja;
     return s.n || `#${s.i}`;
@@ -485,28 +486,78 @@
     if (!label || label.indexOf('[') === 0) return '';
     return `<span class="wwm-db-kongfu-skill-chip" data-skilltype="${_esc(s.k)}">${_esc(label)}</span>`;
   }
-  // 段係数 chip = skill_damage.json 内の s.seg (build_skill_damage.py で merge、 locale の
-  // $D$F<mult>$E$G<sid>$E pattern 由来)。 2 段以上あれば「N 段」表示、 tooltip = 各段の実 damage %
-  // = base f5 × 段係数 × 100% (兄貴 SS の game 表示 一段/二段/三段 と直接突合可能)
-  function _segChip(s, curLv) {
+  // 段係数 chip 表示:
+  //   (1) s.seg あり (未展開 base + 段係数 array) = 「N 段」+ tooltip = 各段の実 damage %
+  //   (2) s.segTotal + s.segBundle + s.segIdx あり (束ね skill = 20401114 派生技+地面叩き 同時発生)
+  //       = 「N 段」+ tooltip = 束ね sub 内訳 (base × sub_mult × 100%)
+  //   (3) s.segTotal のみ = 「N 段」chip 単独 (未使用、 将来 束ねなし chip case 用)
+  function _segChip(s, curLv, lang) {
     const mults = s.seg;
-    if (!mults || !Array.isArray(mults) || mults.length < 2) return '';
-    const floats = curLv != null ? (s.r || {})[String(curLv)] : null;
-    const baseF5 = floats && floats.length >= 5 ? floats[4] : null;
-    let tooltip;
-    if (baseF5 != null) {
-      tooltip = mults.map((m, i) => `${i+1}段=${(baseF5 * m * 100).toFixed(2)}% (×${m})`).join(' / ');
-    } else {
-      tooltip = mults.map((m, i) => `${i+1}段=×${m}`).join(' ');
+    if (mults && Array.isArray(mults) && mults.length >= 2) {
+      const floats = curLv != null ? (s.r || {})[String(curLv)] : null;
+      const baseF5 = floats && floats.length >= 5 ? floats[4] : null;
+      let tooltip;
+      if (baseF5 != null) {
+        tooltip = mults.map((m, i) => `${i+1}段=${(baseF5 * m * 100).toFixed(2)}% (×${m})`).join(' / ');
+      } else {
+        tooltip = mults.map((m, i) => `${i+1}段=×${m}`).join(' ');
+      }
+      return `<span class="wwm-db-kongfu-skill-chip wwm-db-kongfu-skill-chip-seg" title="${_esc(tooltip)}">${mults.length}段</span>`;
     }
-    return `<span class="wwm-db-kongfu-skill-chip wwm-db-kongfu-skill-chip-seg" title="${_esc(tooltip)}">${mults.length}段</span>`;
+    const segTotal = s.segTotal;
+    // 束ね対象 = segTotal >= 1 かつ segBundle あり = 「N段」chip (N = active sub 数、 「N sub 合算」の meaning)
+    if (typeof segTotal === 'number' && segTotal >= 1) {
+      const bundle = s.segBundle;
+      const idx = s.segIdx;
+      if (Array.isArray(bundle) && typeof idx === 'number') {
+        const floats = curLv != null ? (s.r || {})[String(curLv)] : null;
+        const rowF5 = floats && floats.length >= 5 ? floats[4] : null;
+        const i0 = idx - 1;
+        // 段別 sub mult>0 の active sub のみ 束ね対象、 sub 単独 (activeSubs<2) = 束ね対象外 = chip なし
+        const activeSubs = bundle.filter(c => c.mults && (c.mults[i0] || 0) > 0);
+        if (activeSubs.length >= 2) {
+          const sumMult = activeSubs.reduce((a, c) => a + c.mults[i0], 0);
+          const baseF5 = rowF5 != null && sumMult > 0 ? rowF5 / sumMult : null;
+          if (baseF5 != null) {
+            const langKey = (activeSubs[0] && activeSubs[0][lang]) ? lang : 'ja';
+            const tooltip = activeSubs.map(c => `${c[langKey]}=${(baseF5 * c.mults[i0] * 100).toFixed(2)}%`).join(' + ');
+            return `<span class="wwm-db-kongfu-skill-chip wwm-db-kongfu-skill-chip-seg" title="${_esc(tooltip)}">${activeSubs.length}段</span>`;
+          }
+        }
+      }
+      return '';
+    }
+    return '';
+  }
+  // 2026-07-10 兄貴 fact: skill list 並び順 = 兄貴期待 category 順で sort
+  const _SKILL_CAT_ORDER = [
+    'light',              // 軽撃
+    'lightCharged',       // 軽撃溜め
+    'lightVariedCombo',   // 軽撃派生
+    'lightEnhanced',      // 強化軽撃 (light 系末尾)
+    'heavy',              // 重撃
+    'heavyCharged',       // 重撃溜め
+    'variedCombo',        // 重撃派生
+    'heavyEnhanced',      // 強化重撃 (heavy 系末尾)
+    'charged',            // 溜め技 (未振り分け)
+    'enhanced',           // 強化技 (未振り分け)
+    'active',             // 武術技
+    'special',            // 特殊技
+    'weapon',             // 武変技
+    'other',              // その他
+  ];
+  function _skillCatOrder(k) {
+    const i = _SKILL_CAT_ORDER.indexOf(k);
+    return i === -1 ? 999 : i;
   }
   function _renderSkillTab(id, _kf, lang) {
     const dmg = _skillDamageMap()[id];
     if (!dmg || !dmg.s || !dmg.s.length) {
       return `<p class="wwm-db-empty">${_esc((window.T && window.T.dbKongfuSkillEmpty) || '表示可能な武術技がありません')}</p>`;
     }
-    const skills = dmg.s;
+    // 2026-07-10 兄貴 fact: category 順で sort (元順序 = fable src 順で 兄貴期待違い)
+    // stable sort = 同 category 内 元順序 keep
+    const skills = dmg.s.slice().sort((a, b) => _skillCatOrder(a.k) - _skillCatOrder(b.k));
     const lvs = _availableLvs(skills);
     if (!lvs.length) {
       return `<p class="wwm-db-empty">${_esc((window.T && window.T.dbKongfuSkillEmpty) || '表示可能な武術技がありません')}</p>`;
@@ -519,7 +570,7 @@
       const floats = (s.r || {})[String(curLv)];
       const name = _esc(_skillDisplayName(s, lang));
       const chip = _skilltypeChip(s, lang);
-      const segChip = _segChip(s, curLv);
+      const segChip = _segChip(s, curLv, lang);
       const nameCell = `<div class="wwm-db-kongfu-skill-name-cell">${name}${chip}${segChip}</div>`;
       if (!floats || floats.length < 5) {
         return `<tr><td>${nameCell}</td><td>-</td><td>-</td><td>-</td></tr>`;
@@ -527,7 +578,7 @@
       // floats[5] = [f1定数, f2属性付加raw, f3外功付加raw, f4属性係数base=1.0, f5外功係数]
       const f3 = floats[2], f5 = floats[4];
       const physCoefPct = (f5 * 100).toFixed(2) + '%';
-      const physAdd = f3.toFixed(0);
+      const physAdd = f3 == null ? '-' : Math.floor(f3).toString();
       // 属性係数 = 外功係数 × 1.5 (才能適用後、 SS 検証済、 Lv1 = ×1.0 は本表示では簡略化)
       const attrCoefPct = (f5 * 1.5 * 100).toFixed(2) + '%';
       return `<tr>
