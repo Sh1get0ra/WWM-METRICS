@@ -706,14 +706,25 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   padding: 4px 0 12px;
   border-bottom: 1px solid var(--gold-deep);
 }
+/* 「武録」= 白墨跡 (fude.png mask + --kami-0 塗り) に黒墨文字。
+   軍議卓に貼られた白紙メモに墨書き — 墨面 rail の中で紙面小片が浮く (2026-07-11 兄貴確定)。
+   旧「ステータス」金文字 + 8×8 朱印 は撤去。 mask 方式 = 装備/心法/奇術 見出し帯と同素材文法。 */
 .wwm-rail-head h3 {
+  position: relative;
   display: flex; align-items: center; font-family: var(--f-display-title);
-  font-size: 13px; font-weight: 700; letter-spacing: 0.28em;
-  color: var(--gold-bright); white-space: nowrap;
+  font-size: 16px; font-weight: 700; letter-spacing: 0.28em;
+  color: var(--kami-fg); white-space: nowrap;
+  padding: 4px 24px;
+  z-index: 1;
 }
 .wwm-rail-head h3::before {
-  content: ""; width: 8px; height: 8px; background: var(--vermilion);
-  margin-right: 10px; flex: 0 0 8px;
+  content: "";
+  position: absolute;
+  inset: -5px -20px -5px 0;
+  z-index: -1;
+  background: var(--kami-0);
+  -webkit-mask: url("../fude.png") 0 0 / 100% 100% no-repeat;
+  mask: url("../fude.png") 0 0 / 100% 100% no-repeat;
 }
 .wwm-rail-head h3 .en {
   font-family: var(--f-latin); font-size: 9px; letter-spacing: 0.2em;
@@ -784,6 +795,7 @@ html:not(.wwm-view-sidebar) .wwm-rail-in::before {
   position: relative; z-index: 20;
 }
 .wwm-ws-tab {
+  position: relative;                    /* ::before 白墨跡の positioning parent (2026-07-11) */
   display: flex; align-items: baseline; justify-content: center; gap: 8px;
   /* basis=auto + grow=1: 広 viewport で 1 row 収まる時は余白 grow で横長 (ja 旧仕様復活、
      2026-06-18 兄貴指示)、 狭 viewport で wrap 発生時は内容幅 basis で 2 row 自然分割。
@@ -841,13 +853,30 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
 .wwm-ws-tab:hover { color: var(--sumi-fg); background: rgba(242,234,212,0.06); }
 .wwm-ws-tab[aria-selected="true"] {
   color: var(--kami-fg);
-  /* 浮島カード = 紙色塊 + 金枠 + 影。 panel と border-bottom 共有しない = 帯と panel が
-     1px 金線で明確分離、 active tab だけ墨帯の中に「置かれて」 いる見え方 */
-  background: var(--kami-0);
-  border: 1px solid var(--gold-deep);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.35), 0 0 0 1px rgba(201,164,90,0.18);
+  /* 白墨跡 (fude.png mask + --kami-0) で active 表現 (2026-07-11 兄貴確定)。
+     旧「浮島カード = 紙色塊 + 金枠 + 影」 は撤去、 rail 頭「武録」 と同素材文法で統一。
+     刷毛の質感で浮遊感、 枠/影に頼らず。 */
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
   font-weight: 700;
   transform: translateY(-1px);
+}
+.wwm-ws-tab[aria-selected="true"]::before {
+  content: "";
+  position: absolute;
+  inset: -3px -12px;
+  z-index: -1;
+  background: var(--kami-0);
+  -webkit-mask: url("../fude.png") 0 0 / 100% 100% no-repeat;
+  mask: url("../fude.png") 0 0 / 100% 100% no-repeat;
+  /* 右→左に筆が引かれる (2026-07-11 兄貴指示)。 一筆感 = ease-out で終点払い */
+  transform-origin: right center;
+  animation: wwmTabInkStroke 0.4s ease-out;
+}
+@keyframes wwmTabInkStroke {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
 }
 .wwm-ws-tab.locked { opacity: 0.45; }
 .wwm-ws-tabs-r { margin-left: auto; display: flex; gap: 6px; align-items: center; padding-bottom: 9px; }
@@ -1402,6 +1431,7 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
   .wwm-rail-toggle,
   .wwm-preset-chip { transition: none; }
   .wwm-ws-panel.active { animation: none; }
+  .wwm-ws-tab[aria-selected="true"]::before { animation: none; }
 }
 
 /* mini-hero 廃止 (通常 view — hero が identity/score を持つため重複、兄貴指定 2026-06-11)。
