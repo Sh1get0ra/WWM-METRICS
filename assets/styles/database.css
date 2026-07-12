@@ -1065,8 +1065,11 @@
     border: 1px solid color-mix(in oklab, var(--kami-fg) 20%, transparent);
     white-space: nowrap;
   }
-  /* skilltype 別色 = 主要 tag に path 系 palette 割当 (審美目的) */
+  /* skilltype 別色 = 主要 tag に path 系 palette 割当 (審美目的)
+     2026-07-10 兄貴指示: 軽撃・溜め = 軽撃 と 同色、 重撃・溜め = 重撃 と 同色 = lightCharged/heavyCharged を 軽/重 group に合流
+     2026-07-10 兄貴指示: 重撃派生 = 重撃 と 同色 = variedCombo を heavy group に合流 */
   .wwm-db-kongfu-skill-chip[data-skilltype="light"],
+  .wwm-db-kongfu-skill-chip[data-skilltype="lightCharged"],
   .wwm-db-kongfu-skill-chip[data-skilltype="lightVariedCombo"],
   .wwm-db-kongfu-skill-chip[data-skilltype="lightEnhanced"] {
     color: var(--path-silkbind-dark);
@@ -1074,7 +1077,9 @@
     background: color-mix(in oklab, var(--path-silkbind-dark) 6%, transparent);
   }
   .wwm-db-kongfu-skill-chip[data-skilltype="heavy"],
-  .wwm-db-kongfu-skill-chip[data-skilltype="heavyEnhanced"] {
+  .wwm-db-kongfu-skill-chip[data-skilltype="heavyCharged"],
+  .wwm-db-kongfu-skill-chip[data-skilltype="heavyEnhanced"],
+  .wwm-db-kongfu-skill-chip[data-skilltype="variedCombo"] {
     color: var(--path-stonesplit-dark);
     border-color: color-mix(in oklab, var(--path-stonesplit-dark) 40%, transparent);
     background: color-mix(in oklab, var(--path-stonesplit-dark) 6%, transparent);
@@ -1091,8 +1096,7 @@
     border-color: color-mix(in oklab, var(--path-bellstrike-dark) 40%, transparent);
     background: color-mix(in oklab, var(--path-bellstrike-dark) 6%, transparent);
   }
-  .wwm-db-kongfu-skill-chip[data-skilltype="weapon"],
-  .wwm-db-kongfu-skill-chip[data-skilltype="variedCombo"] {
+  .wwm-db-kongfu-skill-chip[data-skilltype="weapon"] {
     color: var(--gold-deep);
     border-color: color-mix(in oklab, var(--gold-deep) 40%, transparent);
     background: color-mix(in oklab, var(--gold-deep) 6%, transparent);

@@ -9040,18 +9040,18 @@
       "zh_tw": "重擊"
     },
     "variedCombo": {
-      "ja": "派生技",
-      "en": "Varied Combo",
-      "zh": "派生技",
-      "zh_tw": "派生技",
-      "ko": "연계 스킬",
-      "vi": "kỹ năng phát sinh",
-      "de": "Variierter Combo",
-      "es": "Combo Variado",
-      "fr": "Combo Varié",
-      "pt_br": "Combo Variado",
-      "ru": "Разнообразные комбо",
-      "th": "ทักษะแตกแขนง"
+      "ja": "重撃派生",
+      "en": "Heavy Attack Varied Combo",
+      "zh": "重击派生",
+      "zh_tw": "重擊派生",
+      "ko": "강공격 연계",
+      "vi": "Phái sinh đòn mạnh",
+      "de": "Variierter Schwerer-Angriff-Combo",
+      "es": "Combo Variado de Ataque Pesado",
+      "fr": "Combo Varié d'Attaque Lourde",
+      "pt_br": "Combo Variado de Ataque Pesado",
+      "ru": "Вариативная комбо тяжёлых атак",
+      "th": "ต่อเนื่องจากการโจมตีหนัก"
     },
     "lightEnhanced": {
       "ja": "強化軽撃",
@@ -15629,25 +15629,57 @@
       "zh": "内一衡径数",
       "ja": "内径均衡値",
       "en": "Inner Track Slash",
-      "ko": "내공운행"
+      "ko": "내공운행",
+      "de": "Innere Spur-Hieb",
+      "es": "Tajo de Pista Interna",
+      "fr": "Entaille de la Voie Intérieure",
+      "pt_br": "Golpe Interno",
+      "ru": "Рассечение внутренней тропы",
+      "th": "เส้นทางสมดุลหนึ่ง",
+      "vi": "Đường cân bằng nội bộ một",
+      "zh_tw": "內一衡徑數"
     },
     "20202102": {
       "ja": "次二衡の径数",
       "en": "Second Track Slash",
       "zh": "积矩九剑-蓄力技-次二衡径数",
-      "ko": "내공응결"
+      "ko": "내공응결",
+      "de": "Zweite Spur-Schlag",
+      "es": "Tajo de Segunda Vía",
+      "fr": "Entaille de la seconde voie",
+      "pt_br": "Golpe de Trilha Secundária",
+      "ru": "Рассечение второй тропы",
+      "th": "เส้นทางสมดุลสอง",
+      "vi": "Đường cân bằng nội bộ hai",
+      "zh_tw": "次二衡徑數"
     },
     "20202109": {
       "ja": "次三衡の径数",
       "en": "Inner Balance Strike III",
       "zh": "次三衡径数",
-      "ko": "내공폭발"
+      "ko": "내공폭발",
+      "de": "Innerer Gleichgewichtsschlag III",
+      "es": "Golpe de Equilibrio Interior III",
+      "fr": "Frappe d'Équilibre Intérieur III",
+      "pt_br": "Golpe do Equilíbrio Interior III",
+      "ru": "Удар внутреннего равновесия III",
+      "th": "เส้นทางสมดุลสาม",
+      "vi": "Đường cân bằng nội bộ ba",
+      "zh_tw": "次三衡徑數"
     },
     "20201001": {
       "ja": "剣・軽撃",
       "en": "Sword - Light Attack",
       "zh": "轻击·剑",
-      "ko": "약공격·검"
+      "ko": "약공격·검",
+      "de": "Schwert - Leichter Angriff",
+      "es": "Espada - Ataque Ligero",
+      "fr": "Épée - Attaque légère",
+      "pt_br": "Espada - Ataque Leve",
+      "ru": "Меч - Легкая атака",
+      "th": "ดาบ·โจมตีเบา",
+      "vi": "Kiếm·Đánh nhẹ",
+      "zh_tw": "劍·輕擊"
     },
     "20201006": {
       "ja": "剣・重撃",
@@ -15659,49 +15691,113 @@
       "ja": "剣・空中軽撃",
       "en": "Sword - Aerial Light Attack",
       "zh": "剑·空中轻击",
-      "ko": "검·공중 약공격"
+      "ko": "검·공중 약공격",
+      "de": "Schwert - Leichter Luftangriff",
+      "es": "Espada - Ataque Ligero en el Aire",
+      "fr": "Épée - Attaque légère aérienne",
+      "pt_br": "Espada - Ataque Leve Aéreo",
+      "ru": "Меч - Воздушная лёгкая атака",
+      "th": "ดาบ·โจมตีเบาในอากาศ",
+      "vi": "Kiếm·Đánh nhẹ trên không",
+      "zh_tw": "劍·空中輕擊"
     },
     "20201013": {
       "ja": "剣・跳躍斬り",
       "en": "Sword - Jump Strike",
       "zh": "剑·跳劈",
-      "ko": "검-공중 강공격"
+      "ko": "검-공중 강공격",
+      "de": "Schwert - Sprungangriff",
+      "es": "Espada - Golpe en Salto",
+      "fr": "Épée - Frappe en saut",
+      "pt_br": "Espada - Golpe no Salto",
+      "ru": "Меч - Прыжковый удар",
+      "th": "ดาบ·กระโดดฟัน",
+      "vi": "Kiếm·Nhảy bổ",
+      "zh_tw": "劍·跳劈"
     },
     "20201014": {
       "ja": "剣・とどめ",
       "en": "Sword - Execution",
       "zh": "剑·处决",
-      "ko": "검·처형"
+      "ko": "검·처형",
+      "de": "Schwert - Hinrichtung",
+      "es": "Espada - Ejecución",
+      "fr": "Épée - Exécution",
+      "pt_br": "Espada - Execução",
+      "ru": "Меч - Казнь",
+      "th": "ดาบ·ปลิดชีพ",
+      "vi": "Kiếm·Xử quyết",
+      "zh_tw": "劍·處決"
     },
     "20201020": {
       "zh": "剑·起身",
       "ja": "剣・起身",
       "en": "Sword - Recovery",
-      "ko": "검-일어나기"
+      "ko": "검-일어나기",
+      "de": "Schwert - Erholung",
+      "es": "Espada - Recuperación",
+      "fr": "Épée - Récupération",
+      "pt_br": "Espada - Recuperação",
+      "ru": "Меч - Восстановление",
+      "th": "ดาบ·ลุกขึ้น",
+      "vi": "Kiếm·Đứng dậy",
+      "zh_tw": "劍·起身"
     },
     "20201103": {
       "ja": "カウンター",
       "en": "Defensive Riposte",
       "zh": "防反",
-      "ko": "방어 반격"
+      "ko": "방어 반격",
+      "de": "Defensiver Riposte",
+      "es": "Contraataque Defensivo",
+      "fr": "Riposte défensive",
+      "pt_br": "Resposta Defensiva",
+      "ru": "Защитный ответ",
+      "th": "ป้องกันและโต้กลับ",
+      "vi": "Phòng thủ phản công",
+      "zh_tw": "防反"
     },
     "20201105": {
       "ja": "剣・突進",
       "en": "Sword - Dash",
       "zh": "剑·突进",
-      "ko": "검·돌진"
+      "ko": "검·돌진",
+      "de": "Schwert - Sturmangriff",
+      "es": "Espada - Carrera",
+      "fr": "Épée - Ruée",
+      "pt_br": "Espada - Investida",
+      "ru": "Меч - Рывок",
+      "th": "ดาบ·พุ่งโจมตี",
+      "vi": "Kiếm·Đột kích",
+      "zh_tw": "劍·突進"
     },
     "20201107": {
       "ja": "剣・武変",
       "en": "Sword - Conversion",
       "zh": "剑·易武",
-      "ko": "검·무기 교체"
+      "ko": "검·무기 교체",
+      "de": "Schwert",
+      "es": "Espada",
+      "fr": "Épée",
+      "pt_br": "Espada",
+      "ru": "Меч",
+      "th": "ดาบ·เปลี่ยนอาวุธ",
+      "vi": "Kiếm·Đổi vũ khí",
+      "zh_tw": "劍·易武"
     },
     "20201108": {
       "zh": "执讯连连",
       "ja": "連鎖の執念",
       "en": "Relentless Chase",
-      "ko": "심판의 연격"
+      "ko": "심판의 연격",
+      "de": "Unerbittliche Verfolgung",
+      "es": "Persecución Implacable",
+      "fr": "Poursuite Implacable",
+      "pt_br": "Perseguição Implacável",
+      "ru": "Неустанная погоня",
+      "th": "การสอบสวนต่อเนื่อง",
+      "vi": "Liên tục thẩm vấn",
+      "zh_tw": "執訊連連"
     },
     "10100001": {
       "zh": "无名剑法-0普攻"
@@ -15716,25 +15812,57 @@
       "ja": "畏れの現れ",
       "en": "Daunting Strike",
       "zh": "出畏之",
-      "ko": "공포의 급습"
+      "ko": "공포의 급습",
+      "de": "Einschüchternder Schlag",
+      "es": "Golpe Intimidante",
+      "fr": "Frappe Intimidante",
+      "pt_br": "Golpe Intimidador",
+      "ru": "Грозный удар",
+      "th": "ออกจากความกลัว",
+      "vi": "Xuất hiện không sợ hãi",
+      "zh_tw": "出畏之"
     },
     "20201102": {
       "ja": "家無き者",
       "en": "Vagrant Sword",
       "zh": "无以为家",
-      "ko": "방랑의 검법"
+      "ko": "방랑의 검법",
+      "de": "Vagabundenschwert",
+      "es": "Espada Vagabunda",
+      "fr": "Épée Vagabonde",
+      "pt_br": "Espada do Andarilho",
+      "ru": "Бродячий меч",
+      "th": "ไร้ที่อยู่อาศัย",
+      "vi": "Không nơi nương tựa",
+      "zh_tw": "無以為家"
     },
     "20201110": {
       "ja": "退路の道",
       "en": "Shadow Step",
       "zh": "退亦有方",
-      "ko": "후퇴의 길"
+      "ko": "후퇴의 길",
+      "de": "Schatten Schritt",
+      "es": "Paso de Sombra",
+      "fr": "Pas de l'Ombre",
+      "pt_br": "Passo da Sombra",
+      "ru": "Шаг тени",
+      "th": "ถอยอย่างมีชั้นเชิง",
+      "vi": "Rút lui có chiến lược",
+      "zh_tw": "退亦有方"
     },
     "20201113": {
       "zh": "剑·突进",
       "ja": "剣・突進",
       "en": "Sword - Dash",
-      "ko": "검-돌진"
+      "ko": "검-돌진",
+      "de": "Schwert - Sprint",
+      "es": "Espada - Carrera",
+      "fr": "Épée - Ruée",
+      "pt_br": "Espada - Investida",
+      "ru": "Меч - Рывок",
+      "th": "ดาบ·พุ่งโจมตี",
+      "vi": "Kiếm·Đột kích",
+      "zh_tw": "劍·突進"
     },
     "None": {
       "zh": "手甲新武学-手甲.奥义（四格）"
@@ -15743,55 +15871,127 @@
       "ja": "槍・軽撃",
       "en": "Spear - Light Attack",
       "zh": "轻击·枪",
-      "ko": "약공격·창"
+      "ko": "약공격·창",
+      "de": "Speer - Leichter Angriff",
+      "es": "Lanza - Ataque Ligero",
+      "fr": "Lance - Attaque légère",
+      "pt_br": "Lança - Ataque Leve",
+      "ru": "Копье - Легкая атака",
+      "th": "หอก·โจมตีเบา",
+      "vi": "Súng·Đánh nhẹ",
+      "zh_tw": "槍·輕擊"
     },
     "20101005": {
       "ja": "槍・重攻撃",
       "en": "Spear - Heavy Attack",
       "zh": "枪·重击",
-      "ko": "창-강공격"
+      "ko": "창-강공격",
+      "de": "Speer - Schwerer Angriff",
+      "es": "Lanza - Ataque Pesado",
+      "fr": "Lance - Attaque lourde",
+      "pt_br": "Lança - Ataque Pesado",
+      "ru": "Копье - Тяжелая атака",
+      "th": "หอก·โจมตีหนัก",
+      "vi": "Súng·Đánh mạnh",
+      "zh_tw": "槍·重擊"
     },
     "20101008": {
       "ja": "槍・とどめ",
       "en": "Spear - Execution",
       "zh": "枪·处决",
-      "ko": "창·처형"
+      "ko": "창·처형",
+      "de": "Speer - Hinrichtung",
+      "es": "Lanza - Ejecución",
+      "fr": "Lance - Exécution",
+      "pt_br": "Lança - Execução",
+      "ru": "Копье - Казнь",
+      "th": "หอก·ปลิดชีพ",
+      "vi": "Súng·Xử quyết",
+      "zh_tw": "槍·處決"
     },
     "20101017": {
       "ja": "槍・空中軽撃",
       "en": "Spear - Aerial Light Attack",
       "zh": "枪·空中轻击",
-      "ko": "창·공중 약공격"
+      "ko": "창·공중 약공격",
+      "de": "Speer - Leichter Luftangriff",
+      "es": "Lanza - Ataque Ligero Aéreo",
+      "fr": "Lance - Attaque légère aérienne",
+      "pt_br": "Lança - Ataque Leve no Ar",
+      "ru": "Копье - Воздушная лёгкая атака",
+      "th": "หอก·โจมตีเบาในอากาศ",
+      "vi": "Súng·Đánh nhẹ trên không",
+      "zh_tw": "槍·空中輕擊"
     },
     "20101020": {
       "ja": "槍・跳斬",
       "en": "Spear - Jump Strike",
       "zh": "枪·跳劈",
-      "ko": "창-도약 베기"
+      "ko": "창-도약 베기",
+      "de": "Speer - Sprungschlag",
+      "es": "Lanza - Golpe en salto",
+      "fr": "Lance - Frappe en saut",
+      "pt_br": "Lança - Golpe no Salto",
+      "ru": "Копье - Прыжковый удар",
+      "th": "หอก·กระโดดฟัน",
+      "vi": "Súng·Nhảy bổ",
+      "zh_tw": "槍·跳劈"
     },
     "20101030": {
       "zh": "枪·起身",
       "ja": "槍・起身",
       "en": "Spear - Recovery",
-      "ko": "창-일어나기"
+      "ko": "창-일어나기",
+      "de": "Speer - Erholung",
+      "es": "Lanza - Recuperación",
+      "fr": "Lance - Récupération",
+      "pt_br": "Lança - Recuperação",
+      "ru": "Копье - Восстановление",
+      "th": "หอก·ลุกขึ้น",
+      "vi": "Súng·Đứng dậy",
+      "zh_tw": "槍·起身"
     },
     "20101103": {
       "ja": "槍・突進",
       "en": "Spear - Dash",
       "zh": "枪·突进",
-      "ko": "창·돌진"
+      "ko": "창·돌진",
+      "de": "Speer - Sprint",
+      "es": "Lanza - Arremetida",
+      "fr": "Lance - Ruée",
+      "pt_br": "Lança - Investida",
+      "ru": "Копье - Рывок",
+      "th": "หอก·พุ่งโจมตี",
+      "vi": "Súng·Đột kích",
+      "zh_tw": "槍·突進"
     },
     "20101105": {
       "ja": "槍・武変",
       "en": "Spear - Conversion",
       "zh": "枪·易武",
-      "ko": "창·무기 교체"
+      "ko": "창·무기 교체",
+      "de": "Speer",
+      "es": "Lanza",
+      "fr": "Lance",
+      "pt_br": "Lança",
+      "ru": "Копье",
+      "th": "หอก·เปลี่ยนอาวุธ",
+      "vi": "Súng·Đổi vũ khí",
+      "zh_tw": "槍·易武"
     },
     "20102103": {
       "ja": "カウンター",
       "en": "Defensive Riposte",
       "zh": "防反",
-      "ko": "방어 반격"
+      "ko": "방어 반격",
+      "de": "Defensiver Riposte",
+      "es": "Contraataque Defensivo",
+      "fr": "Riposte défensive",
+      "pt_br": "Resposta Defensiva",
+      "ru": "Защитный ответ",
+      "th": "ป้องกันและโต้กลับ",
+      "vi": "Phòng thủ phản công",
+      "zh_tw": "防反"
     },
     "10200001": {
       "zh": "无名枪法-1普攻"
@@ -15809,391 +16009,897 @@
       "ja": "乾坤定",
       "en": "Qiankun's Lock",
       "zh": "乾坤定",
-      "ko": "진기 불균형"
+      "ko": "진기 불균형",
+      "de": "Qiankuns Schloss",
+      "es": "Candado de Qiankun",
+      "fr": "Verrou de Qiankun",
+      "pt_br": "Bloqueio de Qiankun",
+      "ru": "Замок Цянькунь",
+      "th": "กำหนดฟ้าดิน",
+      "vi": "Định càn khôn",
+      "zh_tw": "乾坤定"
     },
     "20102102": {
       "ja": "連山一掃",
       "en": "Storm Dance",
       "zh": "扫连山",
-      "ko": "산해참"
+      "ko": "산해참",
+      "de": "Sturmtanz",
+      "es": "Danza de la Tormenta",
+      "fr": "Danse de la tempête",
+      "pt_br": "Dança da Tempestade",
+      "ru": "Танец бури",
+      "th": "กวาดภูเขาเชื่อมต่อ",
+      "vi": "Quét Liên Sơn",
+      "zh_tw": "掃連山"
     },
     "20102105": {
       "zh": "奔云势",
       "ja": "奔雲の勢い",
       "en": "Cloudstep",
-      "ko": "구름의 추격"
+      "ko": "구름의 추격",
+      "de": "Wolkenstapfen",
+      "es": "Paso de Nube",
+      "fr": "Pas de nuage",
+      "pt_br": "Passo das Nuvens",
+      "ru": "Шаг по облакам",
+      "th": "พลังท่าบรรลุเมฆา",
+      "vi": "Thế Bôn Vân",
+      "zh_tw": "奔雲勢"
     },
     "20102110": {
       "ja": "軍破り",
       "en": "Legion Crusher",
       "zh": "万军破",
-      "ko": "만군의 격파"
+      "ko": "만군의 격파",
+      "de": "Legionenbrecher",
+      "es": "Destructor de Legión",
+      "fr": "Broyeur de Légion",
+      "pt_br": "Esmagador da Legião",
+      "ru": "Крушитель легионов",
+      "th": "ทะลวงกองทัพ",
+      "vi": "Phá Vạn Quân",
+      "zh_tw": "萬軍破"
     },
     "20301101": {
       "ja": "坐雲の観",
       "en": "Cloudburst Healing",
       "zh": "坐看云起",
-      "ko": "무위자연"
+      "ko": "무위자연",
+      "de": "Wolkenbruch-Heilung",
+      "es": "Curación Torrencial",
+      "fr": "Guérison Déluge",
+      "pt_br": "Cura da Tempestade",
+      "ru": "Исцеление Ливнем",
+      "th": "นั่งมองเมฆลอย",
+      "vi": "Ngồi Nhìn Mây Dâng",
+      "zh_tw": "坐看雲起"
     },
     "20301120": {
       "zh": "千金朝玉",
       "ja": "貴き朝玉",
       "en": "Resurrection",
-      "ko": "천금의 갈망"
+      "ko": "천금의 갈망",
+      "de": "Wiederbelebung",
+      "es": "Resurrección",
+      "fr": "Résurrection",
+      "pt_br": "Ressurreição",
+      "ru": "Воскрешение",
+      "th": "เงินพันทองคำยามเช้า",
+      "vi": "Ngàn Vàng Sáng Ngọc",
+      "zh_tw": "千金朝玉"
     },
     "20301121": {
       "ja": "白雲無尽",
       "en": "Endless White Clouds",
       "zh": "白云无尽",
-      "ko": "무진의 백운"
+      "ko": "무진의 백운",
+      "de": "Endlose Wolken",
+      "es": "Nube Infinita",
+      "fr": "Nuage Infini",
+      "pt_br": "Nuvem Infinita",
+      "ru": "Бесконечное Облако",
+      "th": "เมฆขาวไม่สิ้นสุด",
+      "vi": "Mây Trắng Vô Tận",
+      "zh_tw": "白雲無盡"
     },
     "20301125": {
       "zh": "朝雨轻尘",
       "ja": "朝雨軽塵",
       "en": "Light Dust After Morning Rain",
-      "ko": "여명의 안개"
+      "ko": "여명의 안개",
+      "de": "Leichter Staub nach Morgenregen",
+      "es": "Polvo Ligero Tras la Lluvia Matutina",
+      "fr": "Poussière Lumineuse après la Pluie Matinale",
+      "pt_br": "Poeira Leve Após a Chuva Matinal",
+      "ru": "Лёгкая пыль после утреннего дождя",
+      "th": "ฝนยามเช้าปัดฝุ่นเบา",
+      "vi": "Mưa Sớm Nhẹ Bụi",
+      "zh_tw": "朝雨輕塵"
     },
     "20301001": {
       "ja": "扇・軽撃",
       "en": "Fan - Light Attack",
       "zh": "轻击·扇",
-      "ko": "약공격·부채"
+      "ko": "약공격·부채",
+      "de": "Fächer - Leichter Angriff",
+      "es": "Fan - Ataque ligero",
+      "fr": "Fan - Attaque légère",
+      "pt_br": "Fan - Ataque Leve",
+      "ru": "Веер - Легкая атака",
+      "th": "พัด·โจมตีเบา",
+      "vi": "Quạt·Đánh nhẹ",
+      "zh_tw": "扇·輕擊"
     },
     "20301005": {
       "ja": "扇・重攻撃",
       "en": "Fan - Heavy Attack",
       "zh": "扇·重击",
-      "ko": "부채-강공격"
+      "ko": "부채-강공격",
+      "de": "Fan - Schwerer Angriff",
+      "es": "Fan - Ataque Pesado",
+      "fr": "Fan - Attaque lourde",
+      "pt_br": "Fan - Ataque Pesado",
+      "ru": "Веер - Тяжелая атака",
+      "th": "พัด·โจมตีหนัก",
+      "vi": "Quạt·Đánh mạnh",
+      "zh_tw": "扇·重擊"
     },
     "20301008": {
       "ja": "扇・とどめ",
       "en": "Fan - Execution",
       "zh": "扇·处决",
-      "ko": "부채·처형"
+      "ko": "부채·처형",
+      "de": "Fächer - Hinrichtung",
+      "es": "Fan - Ejecución",
+      "fr": "Fan - Exécution",
+      "pt_br": "Fan - Execução",
+      "ru": "Веер - Казнь",
+      "th": "พัด·ปลิดชีพ",
+      "vi": "Quạt·Xử quyết",
+      "zh_tw": "扇·處決"
     },
     "20301017": {
       "ja": "扇・空中軽撃",
       "en": "Fan - Aerial Light Attack",
       "zh": "扇·空中轻击",
-      "ko": "부채·공중 약공격"
+      "ko": "부채·공중 약공격",
+      "de": "Fan - Leichter Luftangriff",
+      "es": "Fan - Ataque Ligero en el Aire",
+      "fr": "Fan - Attaque légère aérienne",
+      "pt_br": "Fan - Ataque Leve no Ar",
+      "ru": "Веер - Воздушная лёгкая атака",
+      "th": "พัด·โจมตีเบาในอากาศ",
+      "vi": "Quạt·Đánh nhẹ trên không",
+      "zh_tw": "扇·空中輕擊"
     },
     "20301030": {
       "zh": "扇·起身",
       "ja": "扇・起き上がり",
       "en": "Fan - Recovery",
-      "ko": "부채-일어나기"
+      "ko": "부채-일어나기",
+      "de": "Fan - Erholung",
+      "es": "Fan - Recuperación",
+      "fr": "Fan - Récupération",
+      "pt_br": "Fan - Recuperação",
+      "ru": "Веер - Восстановление",
+      "th": "พัด·ลุกขึ้น",
+      "vi": "Quạt·Đứng dậy",
+      "zh_tw": "扇·起身"
     },
     "20301102": {
       "zh": "朝雨轻尘",
       "ja": "朝雨軽塵",
       "en": "Light Dust After Morning Rain",
-      "ko": "여명의 안개"
+      "ko": "여명의 안개",
+      "de": "Leichter Staub nach Morgenregen",
+      "es": "Polvo Ligero Tras la Lluvia Matutina",
+      "fr": "Poussière Lumineuse après la Pluie Matinale",
+      "pt_br": "Poeira Leve Após a Chuva Matinal",
+      "ru": "Лёгкая пыль после утреннего дождя",
+      "th": "ฝนยามเช้าปัดฝุ่นเบา",
+      "vi": "Mưa Sớm Nhẹ Bụi",
+      "zh_tw": "朝雨輕塵"
     },
     "20301104": {
       "ja": "カウンター",
       "en": "Defensive Riposte",
       "zh": "防反",
-      "ko": "방어 반격"
+      "ko": "방어 반격",
+      "de": "Defensiver Riposte",
+      "es": "Contraataque Defensivo",
+      "fr": "Riposte défensive",
+      "pt_br": "Resposta Defensiva",
+      "ru": "Защитный ответ",
+      "th": "ป้องกันและโต้กลับ",
+      "vi": "Phòng thủ phản công",
+      "zh_tw": "防反"
     },
     "20301105": {
       "ja": "扇・武変",
       "en": "Fan - Conversion",
       "zh": "扇·易武",
-      "ko": "부채·무기 교체"
+      "ko": "부채·무기 교체",
+      "de": "Fan",
+      "es": "Fan",
+      "fr": "Fan",
+      "pt_br": "Fan",
+      "ru": "Поклонник",
+      "th": "พัด·เปลี่ยนอาวุธ",
+      "vi": "Quạt·Đổi vũ khí",
+      "zh_tw": "扇·易武"
     },
     "20301130": {
       "ja": "扇・武変",
       "en": "Fan - Conversion",
       "zh": "扇·易武",
-      "ko": "부채·무기 교체"
+      "ko": "부채·무기 교체",
+      "de": "Fan",
+      "es": "Fan",
+      "fr": "Fan",
+      "pt_br": "Fan",
+      "ru": "Поклонник",
+      "th": "พัด·เปลี่ยนอาวุธ",
+      "vi": "Quạt·Đổi vũ khí",
+      "zh_tw": "扇·易武"
     },
     "20302101": {
       "ja": "春尽山空",
       "en": "Peak's Springless Silence",
       "zh": "春尽山空",
-      "ko": "봄의 침묵"
+      "ko": "봄의 침묵",
+      "de": "Gipfels federlose Stille",
+      "es": "Silencio Sin Primavera de la Cima",
+      "fr": "Silence Printanier du Pic",
+      "pt_br": "Silêncio Sem Primavera do Pico",
+      "ru": "Безмолвие Пика без Родников",
+      "th": "ฤดูใบไม้ผลิสิ้นสุดภูเขาว่างเปล่า",
+      "vi": "Xuân Tàn Núi Trống",
+      "zh_tw": "春盡山空"
     },
     "20302103": {
-      "zh": "点按 {}",
-      "ja": "{}を押す",
-      "en": "Press {}",
-      "ko": "{} 탭하기"
+      "ja": "春月増華 (強化)",
+      "en": "Moon Shatter Spring (Enhanced)",
+      "zh": "月出惊春 (强化)",
+      "zh_tw": "月出驚春 (強化)",
+      "ko": "춘월의 파문 (강화)",
+      "de": "Mondzertrümmerungsquelle (Enhanced)",
+      "es": "Manantial Rompe-Luna (Enhanced)",
+      "fr": "Source de l'Éclat Lunaire (Enhanced)",
+      "pt_br": "Fonte da Lua Partida (Enhanced)",
+      "ru": "Ручей Разбитой Луны (Enhanced)",
+      "th": "พระจันทร์ขึ้นสะเทือนฤดูใบไม้ผลิ (Enhanced)",
+      "vi": "Trăng Lên Kinh Xuân (Enhanced)"
     },
     "20302104": {
       "zh": "明月相照",
       "ja": "明月の照らし",
       "en": "Glow & Flow",
-      "ko": "명월의 응시"
+      "ko": "명월의 응시",
+      "de": "Glühen & Fließen",
+      "es": "Resplandor y Flujo",
+      "fr": "Lueur & Flux",
+      "pt_br": "Brilho & Fluxo",
+      "ru": "Сияние и Поток",
+      "th": "พระจันทร์ส่องสว่าง",
+      "vi": "Trăng Sáng Soi Cùng",
+      "zh_tw": "明月相照"
     },
     "20302105": {
       "ja": "春月増華",
       "en": "Moon Shatter Spring",
       "zh": "月出惊春",
-      "ko": "춘월의 파문"
+      "ko": "춘월의 파문",
+      "de": "Mondzertrümmerungsquelle",
+      "es": "Manantial Rompe-Luna",
+      "fr": "Source de l'Éclat Lunaire",
+      "pt_br": "Fonte da Lua Partida",
+      "ru": "Ручей Разбитой Луны",
+      "th": "พระจันทร์ขึ้นสะเทือนฤดูใบไม้ผลิ",
+      "vi": "Trăng Lên Kinh Xuân",
+      "zh_tw": "月出驚春"
     },
     "20302111": {
       "ja": "無頼の浮名",
       "en": "Forsaken Fame",
       "zh": "浮名无寄",
-      "ko": "망혼의 단절"
+      "ko": "망혼의 단절",
+      "de": "Verlorener Ruhm",
+      "es": "Fama Abandonada",
+      "fr": "Gloire Abandonnée",
+      "pt_br": "Fama Abandonada",
+      "ru": "Забытая Слава",
+      "th": "ชื่อเสียงลอยไร้ที่พักพิง",
+      "vi": "Danh Hư Không Nơi Nương Tựa",
+      "zh_tw": "浮名無寄"
     },
     "20302116": {
       "ja": "屏山の断翠",
       "en": "Jadewind Shield",
       "zh": "屏山断翠",
-      "ko": "바람의 장벽"
+      "ko": "바람의 장벽",
+      "de": "Smaragdbarriere",
+      "es": "Barrera Esmeralda",
+      "fr": "Barrière d'émeraude",
+      "pt_br": "Barreira de Esmeralda",
+      "ru": "Изумрудный барьер",
+      "th": "ภูเขาบังตัดสีเขียว",
+      "vi": "Đứt Xanh Bên Núi",
+      "zh_tw": "屏山斷翠"
     },
     "20103005": {
       "zh": "枪·重击",
       "ja": "槍・重攻撃",
       "en": "Spear - Heavy Attack",
-      "ko": "창-강공격"
+      "ko": "창-강공격",
+      "de": "Speer - Schwerer Angriff",
+      "es": "Lanza - Ataque Pesado",
+      "fr": "Lance - Attaque lourde",
+      "pt_br": "Lança - Ataque Pesado",
+      "ru": "Копье - Тяжелая атака",
+      "th": "หอก·โจมตีหนัก",
+      "vi": "Súng·Đánh mạnh",
+      "zh_tw": "槍·重擊"
     },
     "20103101": {
       "ja": "風雷の嘯き",
       "en": "Storm Roar",
       "zh": "风雷啸",
-      "ko": "천둥의 포효"
+      "ko": "천둥의 포효",
+      "de": "Sturmgebrüll",
+      "es": "Rugido de la Tormenta",
+      "fr": "Rugissement de la Tempête",
+      "pt_br": "Rugido da Tempestade",
+      "ru": "Рев бури",
+      "th": "เสียงลมและสายฟ้า",
+      "vi": "Sấm Sét Gió",
+      "zh_tw": "風雷嘯"
     },
     "20103104": {
       "ja": "雷驚震",
       "en": "Thunder Shock",
       "zh": "惊雷震",
-      "ko": "천뢰의 울림"
+      "ko": "천뢰의 울림",
+      "de": "Donnerschock",
+      "es": "Impacto del Trueno",
+      "fr": "Choc de Foudre",
+      "pt_br": "Choque do Trovão",
+      "ru": "Удар Грома",
+      "th": "สายฟ้าสะเทือน",
+      "vi": "Chấn Động Sấm Sét",
+      "zh_tw": "驚雷震"
     },
     "20401102": {
       "zh": "风卷残云",
       "ja": "風巻残雲",
       "en": "Galecloud Cleave",
-      "ko": "강풍의 소멸"
+      "ko": "강풍의 소멸",
+      "de": "Sturmwolkenhieb",
+      "es": "Corte del Viento Tempestuoso",
+      "fr": "Fendage Nuageux",
+      "pt_br": "Golpe do Vendaval",
+      "ru": "Рассечение Грозового Облака",
+      "th": "ลมพัดกวาดเมฆ",
+      "vi": "Gió cuốn mây tan",
+      "zh_tw": "風捲殘雲"
     },
     "20401103": {
       "ja": "山崩地裂",
       "en": "Avalanche",
       "zh": "山崩地裂",
-      "ko": "대지의 분열"
+      "ko": "대지의 분열",
+      "de": "Lawine",
+      "es": "Avalancha",
+      "fr": "Avalanche",
+      "pt_br": "Avalanche",
+      "ru": "Лавина",
+      "th": "ภูเขาถล่มแผ่นดินแยก",
+      "vi": "Núi lở đất rung",
+      "zh_tw": "山崩地裂"
     },
     "20401104": {
       "ja": "威勢、天を貫く",
       "en": "Vitality Slash",
       "zh": "气贯长虹",
-      "ko": "장홍의 기세"
+      "ko": "장홍의 기세",
+      "de": "Vitalitätsschlag",
+      "es": "Tajo Vital",
+      "fr": "Entaille vitale",
+      "pt_br": "Golpe Vital",
+      "ru": "Удар Жизненной Силы",
+      "th": "พลังทะลุสายรุ้ง",
+      "vi": "Khí thế ngút trời",
+      "zh_tw": "氣貫長虹"
     },
     "20401107": {
       "ja": "日風追い",
-      "en": "Wind Vortex",
-      "zh": "嗟夫刀法-特殊技-逐日追风",
-      "ko": "추풍일로"
+      "en": "Sunrush Gale",
+      "zh": "逐日追风",
+      "ko": "추풍일로",
+      "de": "Sonnensturm",
+      "es": "Vendaval del Amanecer",
+      "fr": "Rafale Solaire",
+      "pt_br": "Rajada do Sol Nascente",
+      "ru": "Солнечный Шквал",
+      "th": "ไล่ตามแสงอาทิตย์",
+      "vi": "Đuổi theo ánh mặt trời",
+      "zh_tw": "逐日追風"
     },
     "20401114": {
       "ja": "砕岩穿石劈",
       "en": "Stonebreaker Cleave",
       "zh": "破石穿岩劈",
-      "ko": "파석불기(베기)"
+      "ko": "파석불기(베기)",
+      "de": "Steinbrecher-Spalter",
+      "es": "Rompepiedras Hendir",
+      "fr": "Fendoir Briseur de Pierre",
+      "pt_br": "Quebrador de Pedras - Golpe",
+      "ru": "Крушитель Камней: Рассечение",
+      "th": "ฟันทะลุศิลา",
+      "vi": "Phá đá xuyên núi chẻ",
+      "zh_tw": "破石穿岩劈"
     },
     "20401010": {
       "ja": "斬馬刀・とどめ",
       "en": "Mo Blade - Execution",
       "zh": "陌刀·处决",
-      "ko": "맥도·처형"
+      "ko": "맥도·처형",
+      "de": "Mo-Klinge - Hinrichtung",
+      "es": "Espada Mo - Ejecución",
+      "fr": "Lame Mo - Exécution",
+      "pt_br": "Lâmina Mo - Execução",
+      "ru": "Клинок Мо - Казнь",
+      "th": "ดาบใหญ่·ปลิดชีพ",
+      "vi": "Đao Mạc · Xử quyết",
+      "zh_tw": "陌刀·處決"
     },
     "20401108": {
       "ja": "斬馬刀・武変",
       "en": "Mo Blade - Conversion",
       "zh": "陌刀·易武",
-      "ko": "맥도·무기 교체"
+      "ko": "맥도·무기 교체",
+      "de": "Mo-Klinge",
+      "es": "Espada Mo",
+      "fr": "Lame Mo",
+      "pt_br": "Lâmina Mo",
+      "ru": "Клинок Мо",
+      "th": "ดาบใหญ่·เปลี่ยนอาวุธ",
+      "vi": "Đao Mạc · Đổi vũ khí",
+      "zh_tw": "陌刀·易武"
     },
     "20401024": {
       "ja": "斬馬刀・防御",
       "en": "Mo Blade - Defense",
       "zh": "陌刀·防御",
-      "ko": "맥도-방어"
-    },
-    "20402002": {
-      "zh": "陌刀·重击",
-      "ja": "斬馬刀・重攻撃",
-      "en": "Mo Blade - Heavy Attack",
-      "ko": "맥도-강공격"
+      "ko": "맥도-방어",
+      "de": "Mo-Klinge - Verteidigung",
+      "es": "Espada Mo - Defensa",
+      "fr": "Lame Mo - Défense",
+      "pt_br": "Lâmina Mo - Defesa",
+      "ru": "Клинок Мо - Защита",
+      "th": "ดาบใหญ่·ป้องกัน",
+      "vi": "Đao Mạc · Phòng thủ",
+      "zh_tw": "陌刀·防禦"
     },
     "20402103": {
       "zh": "荡八荒",
       "ja": "八荒一掃",
       "en": "Total Annihilation",
-      "ko": "팔황의 격동"
+      "ko": "팔황의 격동",
+      "de": "Völlige Vernichtung",
+      "es": "Aniquilación Total",
+      "fr": "Anéantissement Total",
+      "pt_br": "Aniquilação Total",
+      "ru": "Тотальное Уничтожение",
+      "th": "ต้านป่าแปดทิศ",
+      "vi": "Quét sạch tám hướng",
+      "zh_tw": "蕩八荒"
     },
     "20402104": {
-      "zh": "荡八荒",
-      "ja": "八荒一掃",
-      "en": "Total Annihilation",
-      "ko": "당팔황"
+      "ja": "八荒一掃・極",
+      "en": "Total Annihilation - Supreme",
+      "zh": "荡八荒·极",
+      "ko": "팔황의 격동(극)",
+      "de": "Totale Vernichtung - Höchste Stufe",
+      "es": "Aniquilación Total - Supremo",
+      "fr": "Anéantissement total - Suprême",
+      "pt_br": "Aniquilação Total - Suprema",
+      "ru": "Тотальное Уничтожение - Высшая",
+      "th": "ต้านป่าแปดทิศ·สุดยอด",
+      "vi": "Quét sạch tám hướng · Tuyệt phẩm",
+      "zh_tw": "蕩八荒·極"
     },
     "20501001": {
       "ja": "双剣・軽撃",
       "en": "Dual Blades - Light Attack",
       "zh": "双刀·轻击",
-      "ko": "쌍도-약공격"
+      "ko": "쌍도-약공격",
+      "de": "Doppelklingen - Leichter Angriff",
+      "es": "Espadas Gemelas - Ataque Ligero",
+      "fr": "Lames Jumelles - Attaque légère",
+      "pt_br": "Lâminas Duplas - Ataque Leve",
+      "ru": "Парные клинки - Легкая атака",
+      "th": "ดาบคู่·โจมตีเบา",
+      "vi": "Song đao·Đánh nhẹ",
+      "zh_tw": "雙刀·輕擊"
     },
     "20501002": {
       "ja": "双剣・軽撃",
       "en": "Dual Blades - Light Attack",
       "zh": "双刀·轻击",
-      "ko": "쌍도-약공격"
+      "ko": "쌍도-약공격",
+      "de": "Doppelklingen - Leichter Angriff",
+      "es": "Espadas Gemelas - Ataque Ligero",
+      "fr": "Lames Jumelles - Attaque légère",
+      "pt_br": "Lâminas Duplas - Ataque Leve",
+      "ru": "Парные клинки - Легкая атака",
+      "th": "ดาบคู่·โจมตีเบา",
+      "vi": "Song đao·Đánh nhẹ",
+      "zh_tw": "雙刀·輕擊"
     },
     "20501003": {
       "ja": "双剣・軽撃",
       "en": "Dual Blades - Light Attack",
       "zh": "双刀·轻击",
-      "ko": "쌍도-약공격"
+      "ko": "쌍도-약공격",
+      "de": "Doppelklingen - Leichter Angriff",
+      "es": "Espadas Gemelas - Ataque Ligero",
+      "fr": "Lames Jumelles - Attaque légère",
+      "pt_br": "Lâminas Duplas - Ataque Leve",
+      "ru": "Парные клинки - Легкая атака",
+      "th": "ดาบคู่·โจมตีเบา",
+      "vi": "Song đao·Đánh nhẹ",
+      "zh_tw": "雙刀·輕擊"
     },
     "20501004": {
       "ja": "双剣・軽撃",
       "en": "Dual Blades - Light Attack",
       "zh": "双刀·轻击",
-      "ko": "쌍도-약공격"
+      "ko": "쌍도-약공격",
+      "de": "Doppelklingen - Leichter Angriff",
+      "es": "Espadas Gemelas - Ataque Ligero",
+      "fr": "Lames Jumelles - Attaque légère",
+      "pt_br": "Lâminas Duplas - Ataque Leve",
+      "ru": "Парные клинки - Легкая атака",
+      "th": "ดาบคู่·โจมตีเบา",
+      "vi": "Song đao·Đánh nhẹ",
+      "zh_tw": "雙刀·輕擊"
     },
     "20501011": {
       "ja": "天怒刀術",
       "en": "Blade of Heaven's Wrath",
       "zh": "天怒刀法",
-      "ko": "진노의 검"
+      "ko": "진노의 검",
+      "de": "Klinge des Himmelszorns",
+      "es": "Espada de la Ira Celestial",
+      "fr": "Lame de la Colère Céleste",
+      "pt_br": "Lâmina da Ira Celestial",
+      "ru": "Клинок Небесного Гнева",
+      "th": "กระบวนท่าดาบแห่งความโกรธสวรรค์",
+      "vi": "Đao pháp Thiên Nộ",
+      "zh_tw": "天怒刀法"
     },
     "20501012": {
       "zh": "天怒刀法",
       "ja": "天怒刀術",
       "en": "Blade of Heaven's Wrath",
-      "ko": "진노의 도법"
+      "ko": "진노의 도법",
+      "de": "Klinge des Himmelszorns",
+      "es": "Espada de la Ira Celestial",
+      "fr": "Lame de la Colère céleste",
+      "pt_br": "Lâmina da Ira Celestial",
+      "ru": "Клинок Небесного Гнева",
+      "th": "กระบวนท่าดาบแห่งความโกรธสวรรค์",
+      "vi": "Đao pháp Thiên Nộ",
+      "zh_tw": "天怒刀法"
     },
     "20501013": {
       "zh": "天怒刀法",
       "ja": "天怒刀術",
       "en": "Blade of Heaven's Wrath",
-      "ko": "진노의 도법"
+      "ko": "진노의 도법",
+      "de": "Klinge des Himmelszorns",
+      "es": "Espada de la Ira Celestial",
+      "fr": "Lame de la Colère céleste",
+      "pt_br": "Lâmina da Ira Celestial",
+      "ru": "Клинок Небесного Гнева",
+      "th": "กระบวนท่าดาบแห่งความโกรธสวรรค์",
+      "vi": "Đao pháp Thiên Nộ",
+      "zh_tw": "天怒刀法"
     },
     "20501014": {
       "zh": "天怒刀法",
       "ja": "天怒刀術",
       "en": "Blade of Heaven's Wrath",
-      "ko": "진노의 도법"
+      "ko": "진노의 도법",
+      "de": "Klinge des Himmelszorns",
+      "es": "Espada de la Ira Celestial",
+      "fr": "Lame de la Colère céleste",
+      "pt_br": "Lâmina da Ira Celestial",
+      "ru": "Клинок Небесного Гнева",
+      "th": "กระบวนท่าดาบแห่งความโกรธสวรรค์",
+      "vi": "Đao pháp Thiên Nộ",
+      "zh_tw": "天怒刀法"
     },
     "20501015": {
       "zh": "天怒刀法",
       "ja": "天怒刀術",
       "en": "Blade of Heaven's Wrath",
-      "ko": "진노의 검"
+      "ko": "진노의 검",
+      "de": "Klinge des Himmelszorns",
+      "es": "Espada de la Ira Celestial",
+      "fr": "Lame de la Colère Céleste",
+      "pt_br": "Lâmina da Ira Celestial",
+      "ru": "Клинок Небесного Гнева",
+      "th": "กระบวนท่าดาบแห่งความโกรธสวรรค์",
+      "vi": "Đao pháp Thiên Nộ",
+      "zh_tw": "天怒刀法"
     },
     "20502001": {
       "ja": "痴障",
       "en": "Delusion",
       "zh": "痴障",
-      "ko": "미혹의 장막"
+      "ko": "미혹의 장막",
+      "de": "Verwirrter Geist",
+      "es": "Mente Confusa",
+      "fr": "Esprit Confus",
+      "pt_br": "Mente Confusa",
+      "ru": "Смятенный Разум",
+      "th": "ความหลงผิด",
+      "vi": "Chướng ngại si mê",
+      "zh_tw": "癡障"
     },
     "20502002": {
       "ja": "貪禍",
       "en": "Calamity's Greed",
       "zh": "贪祸",
-      "ko": "탐화"
+      "ko": "탐화",
+      "de": "Gier des Unheils",
+      "es": "Codicia de la Calamidad",
+      "fr": "Cupidité du Fléau",
+      "pt_br": "Ganância da Calamidade",
+      "ru": "Жадность Бедствия",
+      "th": "ภัยจากความโลภ",
+      "vi": "Tai họa tham lam",
+      "zh_tw": "貪禍"
     },
     "20502003": {
       "ja": "怒炎",
       "en": "Flamelash",
       "zh": "嗔焰",
-      "ko": "격노의 화염"
+      "ko": "격노의 화염",
+      "de": "Flammenpeitsche",
+      "es": "Latigazo de Llamas",
+      "fr": "Fouet de Flammes",
+      "pt_br": "Chicote de Chamas",
+      "ru": "Огненная Плеть",
+      "th": "เปลวไฟแห่งความโกรธ",
+      "vi": "Lửa giận bừng cháy",
+      "zh_tw": "嗔焰"
     },
     "20502004": {
       "zh": "贪祸·追",
       "ja": "貪禍・追",
       "en": "Greed Bane - Pursuit",
-      "ko": "탐화-추격"
+      "ko": "탐화-추격",
+      "de": "Giervernichter - Verfolgung",
+      "es": "Azote de la Codicia - Persecución",
+      "fr": "Fléau de la Convoitise - Poursuite",
+      "pt_br": "Flagelo da Ganância - Perseguição",
+      "ru": "Гибель алчности - Преследование",
+      "th": "ภัยจากความโลภ·ไล่ล่า",
+      "vi": "Tai họa tham lam·Truy đuổi",
+      "zh_tw": "貪禍·追"
     },
     "20502005": {
       "zh": "贪祸·魂",
       "ja": "貪禍・魂",
       "en": "Greed Bane - Soul",
-      "ko": "탐화-영혼"
+      "ko": "탐화-영혼",
+      "de": "Geißel der Gier - Seele",
+      "es": "Azote de la Codicia - Alma",
+      "fr": "Fléau de l'Avarice - Âme",
+      "pt_br": "Flagelo da Ganância - Alma",
+      "ru": "Гибель алчности - Душа",
+      "th": "ภัยจากความโลภ·วิญญาณ",
+      "vi": "Tai họa tham lam·Hồn",
+      "zh_tw": "貪禍·魂"
     },
     "20501402": {
       "zh": "双刀·起身",
       "ja": "双剣・起き上がり",
       "en": "Dual Blades - Recovery",
-      "ko": "쌍도-일어나기"
+      "ko": "쌍도-일어나기",
+      "de": "Doppelklingen - Erholung",
+      "es": "Espadas Gemelas - Recuperación",
+      "fr": "Lames Jumelles - Récupération",
+      "pt_br": "Lâminas Duplas - Recuperação",
+      "ru": "Парные клинки - Восстановление",
+      "th": "ดาบคู่·ลุกขึ้น",
+      "vi": "Song đao·Đứng dậy",
+      "zh_tw": "雙刀·起身"
     },
     "20501403": {
       "ja": "双剣・武変",
       "en": "Dual Blades - Conversion",
       "zh": "双刀·易武",
-      "ko": "쌍도·무기 교체"
+      "ko": "쌍도·무기 교체",
+      "de": "Doppelklingen",
+      "es": "Espadas Gemelas",
+      "fr": "Lames Jumelles",
+      "pt_br": "Lâminas Duplas",
+      "ru": "Парные клинки",
+      "th": "ดาบคู่·เปลี่ยนอาวุธ",
+      "vi": "Song đao·Đổi vũ khí",
+      "zh_tw": "雙刀·易武"
     },
     "20501603": {
       "ja": "カウンター",
       "en": "Defensive Riposte",
       "zh": "防反",
-      "ko": "방어 반격"
+      "ko": "방어 반격",
+      "de": "Defensiver Riposte",
+      "es": "Contraataque Defensivo",
+      "fr": "Riposte défensive",
+      "pt_br": "Resposta Defensiva",
+      "ru": "Защитный ответ",
+      "th": "ป้องกันและโต้กลับ",
+      "vi": "Phòng thủ phản công",
+      "zh_tw": "防反"
     },
     "20501605": {
       "ja": "双剣・とどめ",
       "en": "Dual Blades - Execution",
       "zh": "双刀·处决",
-      "ko": "쌍도·처형"
+      "ko": "쌍도·처형",
+      "de": "Doppelklingen - Hinrichtung",
+      "es": "Espadas Gemelas - Ejecutar",
+      "fr": "Lames Jumelles - Exécution",
+      "pt_br": "Lâminas Duplas - Executar",
+      "ru": "Парные клинки - Казнь",
+      "th": "ดาบคู่·ปลิดชีพ",
+      "vi": "Song đao·Xử quyết",
+      "zh_tw": "雙刀·處決"
     },
     "20601101": {
       "ja": "彩鳳飛翔",
       "en": "Colorful Phoenix",
       "zh": "彩凤飞",
-      "ko": "봉황의 비상"
+      "ko": "봉황의 비상",
+      "de": "Bunter Phönix",
+      "es": "Fénix Colorido",
+      "fr": "Phénix Coloré",
+      "pt_br": "Fênix Colorida",
+      "ru": "Разноцветный феникс",
+      "th": "นกฟีนิกซ์หลากสีบิน",
+      "vi": "Phượng sắc bay",
+      "zh_tw": "彩鳳飛"
     },
     "20601102": {
       "ja": "杏花の天",
       "en": "Apricot Heaven",
       "zh": "九重春色-重击蓄力技-杏花天-1档",
-      "ko": "봄의 연무"
+      "ko": "봄의 연무",
+      "de": "Aprikosenhimmel",
+      "es": "Paraíso del Albaricoque",
+      "fr": "Paradis des Abricots",
+      "pt_br": "Céu de Damasco",
+      "ru": "Абрикосовый Рай",
+      "th": "ดอกแอปริคอตในวันฟ้าใส",
+      "vi": "Trời hoa mơ",
+      "zh_tw": "杏花天"
     },
     "20601103": {
       "ja": "常初花",
       "en": "Unwithering Flower",
       "zh": "不谢花",
-      "ko": "불멸의 꽃"
+      "ko": "불멸의 꽃",
+      "de": "Unverwelkte Blume",
+      "es": "Flor Imperecedera",
+      "fr": "Fleur Impérissable",
+      "pt_br": "Flor Imperecível",
+      "ru": "Неувядающий Цветок",
+      "th": "ไม่โรยดอกไม้",
+      "vi": "Không tạ hoa",
+      "zh_tw": "不謝花"
     },
     "20601104": {
       "ja": "竹林の風",
       "en": "Bamboo Breeze",
       "zh": "风敲竹",
-      "ko": "벗과의 조우"
+      "ko": "벗과의 조우",
+      "de": "Bambusbrise",
+      "es": "Brisa de Bambú",
+      "fr": "Brise de Bambou",
+      "pt_br": "Brisa de Bambu",
+      "ru": "Бамбуковый бриз",
+      "th": "ลมเคาะไผ่",
+      "vi": "Gió gõ trúc",
+      "zh_tw": "風敲竹"
     },
     "20601112": {
       "ja": "春風飛舞",
       "en": "Spring Flies to its End",
       "zh": "春飞尽",
-      "ko": "봄의 비상"
+      "ko": "봄의 비상",
+      "de": "Frühlingsflucht",
+      "es": "Salto Primaveral",
+      "fr": "Fuite printanière",
+      "pt_br": "Fonte Distante",
+      "ru": "Весенний Порыв",
+      "th": "ฤดูใบไม้ผลิที่ล่วงลับ",
+      "vi": "Xuân bay hết",
+      "zh_tw": "春飛盡"
     },
     "20601113": {
       "ja": "春恨み",
       "en": "Cast Spring's Regret",
       "zh": "抛春恨",
-      "ko": "봄의 원한"
+      "ko": "봄의 원한",
+      "de": "Frühlingskummer",
+      "es": "Pena Primaveral",
+      "fr": "Chagrin printanier",
+      "pt_br": "Tristeza da Primavera",
+      "ru": "Весенняя Печаль",
+      "th": "ทิ้งความเศร้าของฤดูใบไม้ผลิ",
+      "vi": "Vứt bỏ hận xuân",
+      "zh_tw": "拋春恨"
     },
     "20601201": {
       "zh": "袖剑·轻击",
       "ja": "袖剣・軽撃",
       "en": "Hidden Sword - Light Attack",
-      "ko": "암살검-약공격"
+      "ko": "암살검-약공격",
+      "de": "Verborgenes Schwert - Leichter Angriff",
+      "es": "Espada Oculta - Ataque Ligero",
+      "fr": "Épée Cachée - Attaque Légère",
+      "pt_br": "Espada Oculta - Ataque Leve",
+      "ru": "Скрытый меч - Легкая атака",
+      "th": "ดาบซ่อนในแขน·โจมตีเบา",
+      "vi": "Kiếm tay áo·Đánh nhẹ",
+      "zh_tw": "袖劍·輕擊"
     },
     "20601206": {
       "zh": "袖剑·重击",
       "ja": "袖剣・重撃",
       "en": "Hidden Sword - Heavy Attack",
-      "ko": "암살검-강공격"
+      "ko": "암살검-강공격",
+      "de": "Verborgenes Schwert - Starker Angriff",
+      "es": "Espada Oculta - Ataque Pesado",
+      "fr": "Épée cachée - Attaque lourde",
+      "pt_br": "Espada Oculta - Ataque Pesado",
+      "ru": "Скрытый меч - Тяжелая атака",
+      "th": "ดาบลับ·โจมตีหนัก",
+      "vi": "Kiếm tay áo·Đánh mạnh",
+      "zh_tw": "袖劍·重擊"
     },
     "20601212": {
       "zh": "袖剑·空中轻击",
       "ja": "袖剣・空中軽撃",
       "en": "Hidden Sword - Airborne Light Attack",
-      "ko": "암살검-공중 약공격"
+      "ko": "암살검-공중 약공격",
+      "de": "Verborgenes Schwert - Leichter Luftangriff",
+      "es": "Espada Oculta - Ataque Ligero Aéreo",
+      "fr": "Épée Cachée - Attaque Légère Aérienne",
+      "pt_br": "Espada Oculta - Ataque Leve Aéreo",
+      "ru": "Скрытый меч - Воздушная лёгкая атака",
+      "th": "ดาบซ่อนในแขน·โจมตีเบาในอากาศ",
+      "vi": "Kiếm tay áo·Đánh nhẹ trên không",
+      "zh_tw": "袖劍·空中輕擊"
     },
     "20601213": {
       "zh": "袖剑·跳劈",
       "ja": "袖剣・跳び斬り",
       "en": "Hidden Sword - Jump Strike",
-      "ko": "암살검-공중 강공격"
+      "ko": "암살검-공중 강공격",
+      "de": "Verborgenes Schwert - Sprungschlag",
+      "es": "Espada Oculta - Golpe en Salto",
+      "fr": "Épée Cachée - Frappe en Saut",
+      "pt_br": "Espada Oculta - Golpe no Salto",
+      "ru": "Скрытый меч - Прыжковый удар",
+      "th": "ดาบซ่อนในแขน·กระโดดฟัน",
+      "vi": "Kiếm tay áo·Nhảy bổ",
+      "zh_tw": "袖劍·跳劈"
     },
     "10101019": {
       "zh": "伞-派生技能-处决"
@@ -16202,61 +16908,141 @@
       "zh": "伞·重击",
       "ja": "傘・重撃",
       "en": "Umbrella - Heavy Attack",
-      "ko": "우산-강공격"
+      "ko": "우산-강공격",
+      "de": "Schirm - Schwerer Angriff",
+      "es": "Sombrilla - Ataque Pesado",
+      "fr": "Parapluie - Attaque lourde",
+      "pt_br": "Guarda-chuva - Ataque Pesado",
+      "ru": "Зонт - Тяжелая атака",
+      "th": "ร่ม·โจมตีหนัก",
+      "vi": "Dù · Đánh mạnh",
+      "zh_tw": "傘·重擊"
     },
     "20601016": {
       "ja": "傘・武変",
       "en": "Umbrella - Conversion",
       "zh": "伞·易武",
-      "ko": "우산·무기 교체"
+      "ko": "우산·무기 교체",
+      "de": "Schirm",
+      "es": "Sombrilla",
+      "fr": "Parapluie",
+      "pt_br": "Guarda-chuva",
+      "ru": "Зонт",
+      "th": "ร่ม·เปลี่ยนอาวุธ",
+      "vi": "Dù·Đổi vũ khí",
+      "zh_tw": "傘·易武"
     },
     "20601023": {
       "zh": "伞·起身",
       "ja": "傘・起き上がり",
       "en": "Umbrella - Recovery",
-      "ko": "우산-일어나기"
+      "ko": "우산-일어나기",
+      "de": "Schirm - Erholung",
+      "es": "Sombrilla - Recuperación",
+      "fr": "Parapluie - Récupération",
+      "pt_br": "Guarda-chuva - Recuperação",
+      "ru": "Зонт - Восстановление",
+      "th": "ร่ม·ลุกขึ้น",
+      "vi": "Dù·Đứng dậy",
+      "zh_tw": "傘·起身"
     },
     "20601105": {
       "zh": "梦行云",
       "ja": "夢行雲",
       "en": "Cloud Reverie",
-      "ko": "운몽의 자락"
+      "ko": "운몽의 자락",
+      "de": "Wolkenreigen",
+      "es": "Ensueño de Nubes",
+      "fr": "Rêverie Nuageuse",
+      "pt_br": "Devaneio das Nuvens",
+      "ru": "Облачная греза",
+      "th": "เมิ่งหิงหยุน",
+      "vi": "Mộng hành vân",
+      "zh_tw": "夢行雲"
     },
     "20601010": {
       "ja": "傘・とどめ",
       "en": "Umbrella - Execution",
       "zh": "伞·处决",
-      "ko": "우산·처형"
+      "ko": "우산·처형",
+      "de": "Schirm - Hinrichtung",
+      "es": "Paraguas - Ejecutar",
+      "fr": "Parapluie - Exécution",
+      "pt_br": "Guarda-chuva - Execução",
+      "ru": "Зонт - Казнь",
+      "th": "ร่ม·ปลิดชีพ",
+      "vi": "Dù·Xử quyết",
+      "zh_tw": "傘·處決"
     },
     "20601110": {
       "ja": "カウンター",
       "en": "Defensive Riposte",
       "zh": "防反",
-      "ko": "방어 반격"
+      "ko": "방어 반격",
+      "de": "Defensiver Riposte",
+      "es": "Contraataque Defensivo",
+      "fr": "Riposte défensive",
+      "pt_br": "Resposta Defensiva",
+      "ru": "Защитный ответ",
+      "th": "ป้องกันและโต้กลับ",
+      "vi": "Phòng thủ phản công",
+      "zh_tw": "防反"
     },
     "20602050": {
       "ja": "傘・武変",
       "en": "Umbrella - Conversion",
       "zh": "伞·易武",
-      "ko": "우산·무기 교체"
+      "ko": "우산·무기 교체",
+      "de": "Schirm",
+      "es": "Sombrilla",
+      "fr": "Parapluie",
+      "pt_br": "Guarda-chuva",
+      "ru": "Зонт",
+      "th": "ร่ม·เปลี่ยนอาวุธ",
+      "vi": "Dù·Đổi vũ khí",
+      "zh_tw": "傘·易武"
     },
     "20602101": {
       "ja": "一念浮生",
       "en": "Floating Grace",
       "zh": "一念浮生",
-      "ko": "찰나의 생"
+      "ko": "찰나의 생",
+      "de": "Schwebende Anmut",
+      "es": "Gracia Flotante",
+      "fr": "Grâce Flottante",
+      "pt_br": "Graça Flutuante",
+      "ru": "Парящая Грация",
+      "th": "ความคิดเดียวในชีวิตล่องลอย",
+      "vi": "Một niệm phù sinh",
+      "zh_tw": "一念浮生"
     },
     "20602102": {
       "zh": "百露凋残",
       "ja": "百露凋残",
       "en": "Pale Petal",
-      "ko": "백로의 이슬"
+      "ko": "백로의 이슬",
+      "de": "Blasses Blütenblatt",
+      "es": "Pétalo Pálido",
+      "fr": "Pâle Pétale",
+      "pt_br": "Pétala Pálida",
+      "ru": "Бледный Лепесток",
+      "th": "หยาดน้ำค้างร่วงโรย",
+      "vi": "Trăm giọt sương tàn",
+      "zh_tw": "百露凋殘"
     },
     "20602103": {
       "ja": "千水余韻",
       "en": "Echoing Grow",
       "zh": "千莳余响",
-      "ko": "천향의 울림"
+      "ko": "천향의 울림",
+      "de": "Echos tausend Pflanzen",
+      "es": "Ecos de Mil Plantas",
+      "fr": "Échos de mille plantes",
+      "pt_br": "Ecos de Mil Plantas",
+      "ru": "Эхо Тысячи Растений",
+      "th": "เสียงสะท้อนที่เหลือจากพันฤดู",
+      "vi": "Ngàn âm vang dư",
+      "zh_tw": "千蒔餘響"
     },
     "20603102": {
       "zh": "醉梦游春-特殊技.流风回雪-释放"
@@ -16265,595 +17051,1387 @@
       "zh": "流风回雪",
       "ja": "流風回雪",
       "en": "Cyclone Waltz",
-      "ko": "설풍의 눈"
+      "ko": "설풍의 눈",
+      "de": "Zykluswalzer",
+      "es": "Vals Ciclónico",
+      "fr": "Valse Cyclonique",
+      "pt_br": "Valsa Ciclone",
+      "ru": "Вальс Циклона",
+      "th": "สายลมหมุนวนหิมะโปรย",
+      "vi": "Gió lướt tuyết quay",
+      "zh_tw": "流風回雪"
     },
     "20603201": {
       "zh": "玲珑泡影",
       "ja": "玲瓏の泡沫",
       "en": "Dreamwrought Bubbles",
-      "ko": "찬란한 환영"
+      "ko": "찬란한 환영",
+      "de": "Traumgeschmiedete Blasen",
+      "es": "Burbujas Forjadas en Sueños",
+      "fr": "Bulles de Rêve Forgé",
+      "pt_br": "Bolhas Forjadas pelo Sonho",
+      "ru": "Пузыри Грез",
+      "th": "ฟองสบู่ล้ำค่าที่เลือนลาง",
+      "vi": "Bọt nước lung linh",
+      "zh_tw": "玲瓏泡影"
     },
     "20603202": {
       "ja": "紅絢香断",
       "en": "Scarlet Spin",
       "zh": "红绡香断",
-      "ko": "적연의 파멸"
+      "ko": "적연의 파멸",
+      "de": "Scharlachroter Wirbel",
+      "es": "Giro Escarlata",
+      "fr": "Tour Écarlate",
+      "pt_br": "Giro Escarlate",
+      "ru": "Алый Вихрь",
+      "th": "กลิ่นหอมแห่งผ้าแดงที่ขาดสะบั้น",
+      "vi": "Hương đỏ đoạn tình",
+      "zh_tw": "紅綃香斷"
     },
     "20603203": {
       "zh": "红绡香断",
       "ja": "紅絢香断",
       "en": "Scarlet Spin",
-      "ko": "적연의 파멸"
+      "ko": "적연의 파멸",
+      "de": "Scharlachroter Wirbel",
+      "es": "Giro Escarlata",
+      "fr": "Tour Écarlate",
+      "pt_br": "Giro Escarlate",
+      "ru": "Алый Вихрь",
+      "th": "กลิ่นหอมแห่งผ้าแดงที่ขาดสะบั้น",
+      "vi": "Hương đỏ đoạn tình",
+      "zh_tw": "紅綃香斷"
     },
     "20603204": {
       "zh": "红绡香断",
       "ja": "紅絢香断",
       "en": "Scarlet Spin",
-      "ko": "적연의 파멸"
+      "ko": "적연의 파멸",
+      "de": "Scharlachroter Wirbel",
+      "es": "Giro Escarlata",
+      "fr": "Tour Écarlate",
+      "pt_br": "Giro Escarlate",
+      "ru": "Алый Вихрь",
+      "th": "กลิ่นหอมแห่งผ้าแดงที่ขาดสะบั้น",
+      "vi": "Hương đỏ đoạn tình",
+      "zh_tw": "紅綃香斷"
     },
     "20603205": {
       "zh": "红绡香断",
       "ja": "紅絢香断",
       "en": "Scarlet Spin",
-      "ko": "적연의 파멸"
+      "ko": "적연의 파멸",
+      "de": "Scharlachroter Wirbel",
+      "es": "Giro Escarlata",
+      "fr": "Tour Écarlate",
+      "pt_br": "Giro Escarlate",
+      "ru": "Алый Вихрь",
+      "th": "กลิ่นหอมแห่งผ้าแดงที่ขาดสะบั้น",
+      "vi": "Hương đỏ đoạn tình",
+      "zh_tw": "紅綃香斷"
     },
     "20701001": {
       "ja": "鼠の威力",
       "en": "Rodent Rampage",
       "zh": "鼠鼠生威",
-      "ko": "어둠의 권능"
+      "ko": "어둠의 권능",
+      "de": "Nager-Amok",
+      "es": "Furia de Roedores",
+      "fr": "Déferlement Rongeur",
+      "pt_br": "Fúria do Roedor",
+      "ru": "Буйство грызуна",
+      "th": "หนูหนูสร้างพลัง",
+      "vi": "Chuột chuột sinh uy",
+      "zh_tw": "鼠鼠生威"
     },
     "20701002": {
       "ja": "引縄斬",
       "en": "Bladebound Thread",
       "zh": "牵绳引刃",
-      "ko": "사슬도"
+      "ko": "사슬도",
+      "de": "Klingenverbundener Faden",
+      "es": "Hilo de Espada Atada",
+      "fr": "Fil de la Lame Liée",
+      "pt_br": "Fio da Lâmina Atada",
+      "ru": "Нить клинка",
+      "th": "ดึงเชือกนำคมดาบ",
+      "vi": "Kéo dây dẫn lưỡi",
+      "zh_tw": "牽繩引刃"
     },
     "20701003": {
       "ja": "隠居",
       "en": "Coiled Dragon",
       "zh": "龙蛰蠖屈",
-      "ko": "용의 칩거"
+      "ko": "용의 칩거",
+      "de": "Geringelter Drache",
+      "es": "Dragón Enroscado",
+      "fr": "Dragon enroulé",
+      "pt_br": "Dragão Enrolado",
+      "ru": "Свернувшийся дракон",
+      "th": "มังกรหลบซ่อนตัว",
+      "vi": "Rồng ẩn cong mình",
+      "zh_tw": "龍蟄蠖屈"
     },
     "20700101": {
       "ja": "伏鼠の縛",
       "en": "Rodent's Resilience",
       "zh": "伏鼠之缚",
-      "ko": "제압의 족쇄"
+      "ko": "제압의 족쇄",
+      "de": "Nagetiers Widerstandskraft",
+      "es": "Resiliencia del Roedor",
+      "fr": "Résilience du Rongeur",
+      "pt_br": "Resiliência do Roedor",
+      "ru": "Живучесть грызуна",
+      "th": "พันธนาการแห่งหนู",
+      "vi": "Trói chuột phục",
+      "zh_tw": "伏鼠之縛"
     },
     "20700102": {
       "zh": "伏鼠之缚",
       "ja": "伏鼠の縛",
       "en": "Rodent's Resilience",
-      "ko": "제압의 족쇄"
+      "ko": "제압의 족쇄",
+      "de": "Nagetiers Widerstandskraft",
+      "es": "Resiliencia del Roedor",
+      "fr": "Résilience du Rongeur",
+      "pt_br": "Resiliência do Roedor",
+      "ru": "Живучесть грызуна",
+      "th": "พันธนาการแห่งหนู",
+      "vi": "Trói chuột phục",
+      "zh_tw": "伏鼠之縛"
     },
     "20700402": {
       "zh": "绳镖·起身",
       "ja": "縄鏢・起き上がり",
       "en": "Rope Dart - Recovery",
-      "ko": "승표-일어나기"
+      "ko": "승표-일어나기",
+      "de": "Seildolch - Erholung",
+      "es": "Dardo con Cuerda - Recuperación",
+      "fr": "Dard-Corde - Récupération",
+      "pt_br": "Dardo de Corda - Recuperação",
+      "ru": "Веревочный дротик - Восстановление",
+      "th": "เชือกปลายแหลม·ลุกขึ้น",
+      "vi": "Dây phi tiêu·Đứng dậy",
+      "zh_tw": "繩鏢·起身"
     },
     "20700403": {
       "ja": "縄鏢・武変",
       "en": "Rope Dart - Conversion",
       "zh": "绳镖·易武",
-      "ko": "승표·무기 교체"
+      "ko": "승표·무기 교체",
+      "de": "Seildolch",
+      "es": "Dardo con Cuerda",
+      "fr": "Dard-Corde",
+      "pt_br": "Dardo de Corda",
+      "ru": "Веревочный дротик",
+      "th": "เชือกปลายแหลม·เปลี่ยนอาวุธ",
+      "vi": "Dây phi tiêu·Đổi vũ khí",
+      "zh_tw": "繩鏢·易武"
     },
     "20700603": {
       "ja": "カウンター",
       "en": "Defensive Riposte",
       "zh": "防反",
-      "ko": "방어 반격"
+      "ko": "방어 반격",
+      "de": "Defensiver Riposte",
+      "es": "Contraataque Defensivo",
+      "fr": "Riposte défensive",
+      "pt_br": "Resposta Defensiva",
+      "ru": "Защитный ответ",
+      "th": "ป้องกันและโต้กลับ",
+      "vi": "Phòng thủ phản công",
+      "zh_tw": "防反"
     },
     "20700605": {
       "ja": "縄鏢・とどめ",
       "en": "Rope Dart - Execution",
       "zh": "绳镖·处决",
-      "ko": "승표·처형"
+      "ko": "승표·처형",
+      "de": "Seildolch - Hinrichtung",
+      "es": "Dardo con Cuerda - Ejecutar",
+      "fr": "Dard-Corde - Exécution",
+      "pt_br": "Dardo de Corda - Executar",
+      "ru": "Веревочный дротик - Казнь",
+      "th": "เชือกปลายแหลม·ปลิดชีพ",
+      "vi": "Dây phi tiêu·Xử quyết",
+      "zh_tw": "繩鏢·處決"
     },
     "20703006": {
       "zh": "纵横势",
       "ja": "乱撃の索",
       "en": "Crisscross Stance",
-      "ko": "종횡무진의 기세"
+      "ko": "종횡무진의 기세",
+      "de": "Kreuzstellung",
+      "es": "Postura Entrecruzada",
+      "fr": "Position Croisée",
+      "pt_br": "Postura Cruzada",
+      "ru": "Перекрёстная стойка",
+      "th": "ท่าพุ่งทะลุแนว",
+      "vi": "Thế tung hoành",
+      "zh_tw": "縱橫勢"
     },
     "20703101": {
       "ja": "追撃の索",
       "en": "Snaring Lash",
       "zh": "飞来势",
-      "ko": "날아드는 기세"
+      "ko": "날아드는 기세",
+      "de": "Schwebende Haltung",
+      "es": "Postura Ascendente",
+      "fr": "Posture Aérienne",
+      "pt_br": "Postura Elevada",
+      "ru": "Парящая стойка",
+      "th": "ท่าบินมา",
+      "vi": "Thế bay đến",
+      "zh_tw": "飛來勢"
     },
     "20703102": {
       "ja": "追撃の索・断",
       "en": "Soaring Stance: Sever",
       "zh": "飞来势·断",
-      "ko": "날아드는 기세-단"
+      "ko": "날아드는 기세-단",
+      "de": "Schwebende Stellung: Schnitt",
+      "es": "Postura Ascendente: Corte",
+      "fr": "Posture ascendante : Tranchant",
+      "pt_br": "Postura Elevada: Corte",
+      "ru": "Парящая стойка: Рассечение",
+      "th": "ท่าบินมา·ตัด",
+      "vi": "Thế bay đến · Đoạn",
+      "zh_tw": "飛來勢·斷"
     },
     "20702001": {
       "ja": "虚塵の掃き",
       "en": "Soul Sweep",
       "zh": "履虚扫尘",
-      "ko": "허공일섬"
+      "ko": "허공일섬",
+      "de": "Seelenfeger",
+      "es": "Barrido de Almas",
+      "fr": "Balayage d'Âme",
+      "pt_br": "Varredura da Alma",
+      "ru": "Развеяние душ",
+      "th": "ก้าวผ่านความว่างเปล่า",
+      "vi": "Dẫm hư quét bụi",
+      "zh_tw": "履虛掃塵"
     },
     "20702002": {
       "ja": "巣滅の一撃",
       "en": "Burn and Bury",
       "zh": "焚巢捣穴",
-      "ko": "소굴 분쇄"
+      "ko": "소굴 분쇄",
+      "de": "Verbrennen und Begraben",
+      "es": "Quemar y Enterrar",
+      "fr": "Brûler et Enfouir",
+      "pt_br": "Queimar e Enterrar",
+      "ru": "Сжечь и похоронить",
+      "th": "เผารังทำลายโพรง",
+      "vi": "Đốt tổ phá hang",
+      "zh_tw": "焚巢搗穴"
     },
     "20702102": {
       "ja": "貫穿の鏢",
       "en": "Piercing Dart",
       "zh": "镖鸣彻野",
-      "ko": "절창의 울림"
+      "ko": "절창의 울림",
+      "de": "Durchdringender Wurfpfeil",
+      "es": "Dardo Penetrante",
+      "fr": "Dard perçant",
+      "pt_br": "Dardo Perfurante",
+      "ru": "Песня дротика в пустоши",
+      "th": "เสียงลูกดอกก้องทั่วทุ่ง",
+      "vi": "Phi tiêu vang đồng",
+      "zh_tw": "鏢鳴徹野"
     },
     "20702103": {
       "zh": "镖鸣彻野",
       "ja": "貫穿の鏢",
       "en": "Piercing Dart",
-      "ko": "충천의 표창"
+      "ko": "충천의 표창",
+      "de": "Durchdringender Wurfpfeil",
+      "es": "Dardo Penetrante",
+      "fr": "Dard perçant",
+      "pt_br": "Dardo Perfurante",
+      "ru": "Песня дротика в пустоши",
+      "th": "เสียงลูกดอกก้องทั่วทุ่ง",
+      "vi": "Phi tiêu vang đồng",
+      "zh_tw": "鏢鳴徹野"
     },
     "20702104": {
       "zh": "镖鸣彻野",
       "ja": "貫穿の鏢",
       "en": "Piercing Dart",
-      "ko": "충천의 표창"
+      "ko": "충천의 표창",
+      "de": "Durchdringender Wurfpfeil",
+      "es": "Dardo Penetrante",
+      "fr": "Dard perçant",
+      "pt_br": "Dardo Perfurante",
+      "ru": "Песня дротика в пустоши",
+      "th": "เสียงลูกดอกก้องทั่วทุ่ง",
+      "vi": "Phi tiêu vang đồng",
+      "zh_tw": "鏢鳴徹野"
     },
     "20801001": {
       "ja": "横刀・軽撃",
       "en": "Heng Blade - Light Attack",
       "zh": "轻击·横刀",
-      "ko": "약공격·횡도"
+      "ko": "약공격·횡도",
+      "de": "Heng-Klinge - Leichter Angriff",
+      "es": "Espada Heng - Ataque ligero",
+      "fr": "Lame Heng - Attaque légère",
+      "pt_br": "Lâmina Heng - Ataque Leve",
+      "ru": "Клинок Хэн - Легкая атака",
+      "th": "ดาบขวาง·โจมตีเบา",
+      "vi": "Hoành đao · Đánh nhẹ",
+      "zh_tw": "橫刀·輕擊"
     },
     "20801006": {
       "zh": "横刀·重击",
       "ja": "横刀・重撃",
       "en": "Heng Blade - Heavy Attack",
-      "ko": "횡도-강공격"
+      "ko": "횡도-강공격",
+      "de": "Heng-Klinge - Schwerer Angriff",
+      "es": "Espada Heng - Ataque pesado",
+      "fr": "Lame Heng - Attaque lourde",
+      "pt_br": "Lâmina Heng - Ataque Pesado",
+      "ru": "Клинок Хэн - Тяжелая атака",
+      "th": "ดาบขวาง·โจมตีหนัก",
+      "vi": "Hoành đao · Đánh mạnh",
+      "zh_tw": "橫刀·重擊"
     },
     "20801010": {
       "ja": "横刀・突進",
       "en": "Heng Blade - Dash",
       "zh": "横刀·突进",
-      "ko": "횡도·돌진"
+      "ko": "횡도·돌진",
+      "de": "Heng-Klinge - Ausweichen",
+      "es": "Espada Heng - Carrera",
+      "fr": "Lame Heng - Ruée",
+      "pt_br": "Lâmina Heng - Investida",
+      "ru": "Клинок Хэн - Рывок",
+      "th": "ดาบขวาง·พุ่งโจมตี",
+      "vi": "Hoành đao · Đột kích",
+      "zh_tw": "橫刀·突進"
     },
     "20801011": {
       "ja": "横刀・空中軽撃",
       "en": "Heng Blade - Aerial Light Attack",
       "zh": "横刀·空中轻击",
-      "ko": "횡도·공중 약공격"
+      "ko": "횡도·공중 약공격",
+      "de": "Heng-Klinge - Leichter Luftangriff",
+      "es": "Espada Heng - Ataque Ligero Aéreo",
+      "fr": "Lame Heng - Attaque aérienne légère",
+      "pt_br": "Lâmina Heng - Ataque Leve Aéreo",
+      "ru": "Клинок Хэн - Воздушная лёгкая атака",
+      "th": "ดาบขวาง·โจมตีเบาในอากาศ",
+      "vi": "Hoành đao · Đánh nhẹ trên không",
+      "zh_tw": "橫刀·空中輕擊"
     },
     "20801012": {
       "ja": "横刀・跳び斬り",
       "en": "Heng Blade - Jump Strike",
       "zh": "横刀·跳劈",
-      "ko": "횡도·도약 베기"
+      "ko": "횡도·도약 베기",
+      "de": "Heng-Klinge - Sprungschlag",
+      "es": "Espada Heng - Golpe en salto",
+      "fr": "Lame Heng - Frappe en saut",
+      "pt_br": "Lâmina Heng - Golpe no Salto",
+      "ru": "Клинок Хэн - Прыжковый удар",
+      "th": "ดาบขวาง·กระโดดฟัน",
+      "vi": "Hoành đao · Nhảy bổ",
+      "zh_tw": "橫刀·跳劈"
     },
     "20801096": {
       "zh": "横刀·起身",
       "ja": "横刀・起き上がり",
       "en": "Heng Blade - Recovery",
-      "ko": "횡도-기상"
+      "ko": "횡도-기상",
+      "de": "Heng-Klinge - Erholung",
+      "es": "Espada Heng - Recuperación",
+      "fr": "Lame Heng - Récupération",
+      "pt_br": "Lâmina Heng - Recuperação",
+      "ru": "Клинок Хэн - Восстановление",
+      "th": "ดาบขวาง·ลุกขึ้น",
+      "vi": "Hoành đao · Đứng dậy",
+      "zh_tw": "橫刀·起身"
     },
     "20801101": {
       "ja": "白刃殺将",
       "en": "General's Bane",
       "zh": "白刃杀将",
-      "ko": "순백의 섬광"
+      "ko": "순백의 섬광",
+      "de": "Fluch des Generals",
+      "es": "Azote del General",
+      "fr": "Fléau du Général",
+      "pt_br": "Flagelo do General",
+      "ru": "Гибель генерала",
+      "th": "ดาบขาวสังหารศัตรู",
+      "vi": "Bạch nhận sát tướng",
+      "zh_tw": "白刃殺將"
     },
     "20801102": {
       "zh": "白刃杀将",
       "ja": "白刃将討ち",
       "en": "General's Bane",
-      "ko": "순백의 섬광"
+      "ko": "순백의 섬광",
+      "de": "Generalsfluch",
+      "es": "Maldición del General",
+      "fr": "Fléau du Général",
+      "pt_br": "Maldição do General",
+      "ru": "Гибель генерала",
+      "th": "ดาบขาวสังหารศัตรู",
+      "vi": "Bạch nhận sát tướng",
+      "zh_tw": "白刃殺將"
     },
     "20801103": {
       "zh": "白刃杀将·斩",
       "ja": "白刃将討ち・斬撃",
       "en": "General's Bane - Slash",
-      "ko": "칼날의 단죄(참)"
+      "ko": "칼날의 단죄(참)",
+      "de": "Generalsfluch - Hieb",
+      "es": "Maldición del General - Tajo",
+      "fr": "Fléau du Général - Tranchant",
+      "pt_br": "Maldição do General - Corte",
+      "ru": "Гибель Генерала - Рассечение",
+      "th": "ดาบขาวสังหารศัตรู·ฟัน",
+      "vi": "Bạch nhận sát tướng · Chém",
+      "zh_tw": "白刃殺將·斬"
     },
     "20801104": {
       "zh": "白刃杀将·刺",
       "ja": "白刃殺将・刺",
       "en": "General's Bane - Stab",
-      "ko": "순백의 섬광(살)"
+      "ko": "순백의 섬광(살)",
+      "de": "Generalsfluch - Stich",
+      "es": "Maldición del General - Estocada",
+      "fr": "Fléau du Général - Estoc",
+      "pt_br": "Maldição do General - Estocada",
+      "ru": "Гибель Генерала - Укол",
+      "th": "ดาบขาวสังหารศัตรู·แทง",
+      "vi": "Bạch nhận sát tướng · Đâm",
+      "zh_tw": "白刃殺將·刺"
     },
     "20801105": {
       "ja": "飛鴻踏雪",
       "en": "Fleeting Trace",
       "zh": "飞鸿踏雪",
-      "ko": "비홍의 잔상"
+      "ko": "비홍의 잔상",
+      "de": "Flüchtige Spur",
+      "es": "Rastro Efímero",
+      "fr": "Trace Fugace",
+      "pt_br": "Rastro Efêmero",
+      "ru": "Мимолётный След",
+      "th": "หงส์บินเหยียบหิมะ",
+      "vi": "Hồng bay giẫm tuyết",
+      "zh_tw": "飛鴻踏雪"
     },
     "20801110": {
       "ja": "横刀・武変",
       "en": "Heng Blade - Conversion",
       "zh": "横刀·易武",
-      "ko": "횡도·무기 교체"
+      "ko": "횡도·무기 교체",
+      "de": "Heng-Klinge",
+      "es": "Espada Heng",
+      "fr": "Lame Heng",
+      "pt_br": "Lâmina Heng",
+      "ru": "Клинок Хэн",
+      "th": "ดาบขวาง·เปลี่ยนอาวุธ",
+      "vi": "Hoành đao·Đổi vũ khí",
+      "zh_tw": "橫刀·易武"
     },
     "20801201": {
       "ja": "泉下凍",
       "en": "Frozen Under Spring",
       "zh": "泉下冻",
-      "ko": "엄동의 샘"
+      "ko": "엄동의 샘",
+      "de": "Gefroren unter dem Frühling",
+      "es": "Congelado Bajo la Primavera",
+      "fr": "Gel sous le Printemps",
+      "pt_br": "Congelado sob a Primavera",
+      "ru": "Лёд под весной",
+      "th": "น้ำพุที่เยือกแข็ง",
+      "vi": "Đóng băng dưới suối",
+      "zh_tw": "泉下凍"
     },
     "20801206": {
       "ja": "雪を払って春を尋ねる",
       "en": "Snowbreak Spring",
       "zh": "拨雪寻春",
-      "ko": "만설의 각성"
+      "ko": "만설의 각성",
+      "de": "Schneebruchfrühling",
+      "es": "Primavera Rompenieves",
+      "fr": "Source de la Rupture des Neiges",
+      "pt_br": "Primavera Rompe-neve",
+      "ru": "Весенний снегопад",
+      "th": "ค้นหาฤดูใบไม้ผลิในหิมะ",
+      "vi": "Tìm xuân giữa tuyết",
+      "zh_tw": "撥雪尋春"
     },
     "20801090": {
       "ja": "横刀・とどめ",
       "en": "Heng Blade - Execution",
       "zh": "横刀·处决",
-      "ko": "횡도·처형"
+      "ko": "횡도·처형",
+      "de": "Heng-Klinge - Hinrichtung",
+      "es": "Espada Heng - Ejecución",
+      "fr": "Lame Heng - Exécution",
+      "pt_br": "Lâmina Heng - Execução",
+      "ru": "Клинок Хэн - Казнь",
+      "th": "ดาบขวาง·ปลิดชีพ",
+      "vi": "Hoành đao · Xử quyết",
+      "zh_tw": "橫刀·處決"
     },
     "20801111": {
       "ja": "横刀・防御反撃",
       "en": "Heng Blade - Defensive Riposte",
       "zh": "横刀·防反",
-      "ko": "횡도-반격"
+      "ko": "횡도-반격",
+      "de": "Heng-Klinge - Defensive Riposte",
+      "es": "Espada Heng - Contraataque Defensivo",
+      "fr": "Lame Heng - Riposte défensive",
+      "pt_br": "Lâmina Heng - Resposta Defensiva",
+      "ru": "Меч Хэн - Защитный Рипост",
+      "th": "ดาบขวาง·ป้องกันและโต้กลับ",
+      "vi": "Hoành đao·Phòng thủ phản công",
+      "zh_tw": "橫刀·防反"
     },
     "20901001": {
       "ja": "天欲義",
       "en": "Celestial Righteousness",
       "zh": "天欲义",
-      "ko": "천의의 계율"
+      "ko": "천의의 계율",
+      "de": "Himmlische Gerechtigkeit",
+      "es": "Rectitud Celestial",
+      "fr": "Justice Céleste",
+      "pt_br": "Justiça Celestial",
+      "ru": "Небесная праведность",
+      "th": "สวรรค์ปรารถนาความยุติธรรม",
+      "vi": "Trời muốn nghĩa",
+      "zh_tw": "天欲義"
     },
     "20901002": {
       "ja": "天欲義",
       "en": "Celestial Righteousness",
       "zh": "天欲义",
-      "ko": "천의의 계율"
+      "ko": "천의의 계율",
+      "de": "Himmlische Gerechtigkeit",
+      "es": "Rectitud Celestial",
+      "fr": "Justice Céleste",
+      "pt_br": "Justiça Celestial",
+      "ru": "Небесная праведность",
+      "th": "สวรรค์ปรารถนาความยุติธรรม",
+      "vi": "Trời muốn nghĩa",
+      "zh_tw": "天欲義"
     },
     "20901003": {
       "ja": "天欲義",
       "en": "Celestial Righteousness",
       "zh": "天欲义",
-      "ko": "천의의 계율"
+      "ko": "천의의 계율",
+      "de": "Himmlische Gerechtigkeit",
+      "es": "Rectitud Celestial",
+      "fr": "Justice Céleste",
+      "pt_br": "Justiça Celestial",
+      "ru": "Небесная праведность",
+      "th": "สวรรค์ปรารถนาความยุติธรรม",
+      "vi": "Trời muốn nghĩa",
+      "zh_tw": "天欲義"
     },
     "20901004": {
       "ja": "天欲義",
       "en": "Celestial Righteousness",
       "zh": "天欲义",
-      "ko": "천의의 계율"
+      "ko": "천의의 계율",
+      "de": "Himmlische Gerechtigkeit",
+      "es": "Rectitud Celestial",
+      "fr": "Justice Céleste",
+      "pt_br": "Justiça Celestial",
+      "ru": "Небесная праведность",
+      "th": "สวรรค์ปรารถนาความยุติธรรม",
+      "vi": "Trời muốn nghĩa",
+      "zh_tw": "天欲義"
     },
     "20901005": {
       "ja": "天欲義",
       "en": "Celestial Righteousness",
       "zh": "天欲义",
-      "ko": "천의의 계율"
+      "ko": "천의의 계율",
+      "de": "Himmlische Gerechtigkeit",
+      "es": "Rectitud Celestial",
+      "fr": "Justice Céleste",
+      "pt_br": "Justiça Celestial",
+      "ru": "Небесная праведность",
+      "th": "สวรรค์ปรารถนาความยุติธรรม",
+      "vi": "Trời muốn nghĩa",
+      "zh_tw": "天欲義"
     },
     "20901006": {
       "zh": "有义则治1",
       "ja": "義の統治1段目",
       "en": "Rule of Righteousness 1",
-      "ko": "하늘의 질서 1"
+      "ko": "하늘의 질서 1",
+      "de": "Herrschaft der Rechtschaffenheit1",
+      "es": "Mandato de la Rectitud1",
+      "fr": "Loi de la Vertu1",
+      "pt_br": "Lei da Justiça1",
+      "ru": "Закон праведности1",
+      "th": "ผู้มีคุณธรรมย่อมปกครอง1",
+      "vi": "Có nghĩa thì trị1",
+      "zh_tw": "有義則治1"
     },
     "20901007": {
       "zh": "有义则治2",
       "ja": "義の統治2段目",
       "en": "Rule of Righteousness 2",
-      "ko": "하늘의 질서 2"
+      "ko": "하늘의 질서 2",
+      "de": "Herrschaft der Rechtschaffenheit2",
+      "es": "Mandato de la Rectitud2",
+      "fr": "Loi de la Vertu2",
+      "pt_br": "Lei da Justiça2",
+      "ru": "Закон праведности2",
+      "th": "ผู้มีคุณธรรมย่อมปกครอง2",
+      "vi": "Có nghĩa thì trị2",
+      "zh_tw": "有義則治2"
     },
     "20901008": {
       "zh": "有义则治3",
       "ja": "義の統治3段目",
       "en": "Rule of Righteousness 3",
-      "ko": "하늘의 질서 3"
+      "ko": "하늘의 질서 3",
+      "de": "Herrschaft der Rechtschaffenheit3",
+      "es": "Mandato de la Rectitud3",
+      "fr": "Loi de la Vertu3",
+      "pt_br": "Lei da Justiça3",
+      "ru": "Закон праведности3",
+      "th": "ผู้มีคุณธรรมย่อมปกครอง3",
+      "vi": "Có nghĩa thì trị3",
+      "zh_tw": "有義則治3"
     },
     "20901009": {
       "zh": "有义则治4",
       "ja": "義の統治4段目",
       "en": "Rule of Righteousness 4",
-      "ko": "하늘의 질서 4"
+      "ko": "하늘의 질서 4",
+      "de": "Herrschaft der Rechtschaffenheit4",
+      "es": "Mandato de la Rectitud4",
+      "fr": "Loi de la Vertu4",
+      "pt_br": "Lei da Justiça4",
+      "ru": "Закон праведности4",
+      "th": "ผู้มีคุณธรรมย่อมปกครอง4",
+      "vi": "Có nghĩa thì trị4",
+      "zh_tw": "有義則治4"
     },
     "20901010": {
       "ja": "手甲・突進",
       "en": "Gauntlets - Dash",
       "zh": "手甲·突进",
-      "ko": "권갑·돌진"
+      "ko": "권갑·돌진",
+      "de": "Panzerhandschuhe - Sprint",
+      "es": "Guanteletes - Arremetida",
+      "fr": "Gantelets - Ruée",
+      "pt_br": "Manoplas - Arremetida",
+      "ru": "Рукавицы - Рывок",
+      "th": "สนับมือ·พุ่งโจมตี",
+      "vi": "Găng tay · Đột kích",
+      "zh_tw": "手甲·突進"
     },
     "20901011": {
       "ja": "手甲・空中軽撃",
       "en": "Gauntlets - Aerial Light Attack",
       "zh": "手甲·空中轻击",
-      "ko": "권갑·공중 약공격"
+      "ko": "권갑·공중 약공격",
+      "de": "Panzerhandschuhe - Luftangriff",
+      "es": "Guanteletes - Ataque Ligero Aéreo",
+      "fr": "Gantelets - Attaque Légère Aérienne",
+      "pt_br": "Manoplas - Ataque Leve Aéreo",
+      "ru": "Рукавицы - Лёгкая атака в воздухе",
+      "th": "สนับมือ·โจมตีเบาในอากาศ",
+      "vi": "Găng tay · Đánh nhẹ trên không",
+      "zh_tw": "手甲·空中輕擊"
     },
     "20901012": {
       "ja": "手甲・跳び斬り",
       "en": "Gauntlets - Jump Strike",
       "zh": "手甲·跳劈",
-      "ko": "권갑·도약 베기"
+      "ko": "권갑·도약 베기",
+      "de": "Panzerhandschuhe - Sprungschnitt",
+      "es": "Guanteletes - Golpe en Salto",
+      "fr": "Gantelets - Frappe en Saut",
+      "pt_br": "Manoplas - Golpe no Ar",
+      "ru": "Рукавицы - Удар в прыжке",
+      "th": "สนับมือ·กระโดดฟัน",
+      "vi": "Găng tay · Nhảy bổ",
+      "zh_tw": "手甲·跳劈"
     },
     "20901096": {
       "zh": "手甲·起身",
       "ja": "手甲・起き上がる",
       "en": "Gauntlets - Get Up",
-      "ko": "권갑-일어나기"
+      "ko": "권갑-일어나기",
+      "de": "Panzerhandschuhe - Aufstehen",
+      "es": "Guanteletes - Levantarse",
+      "fr": "Gantelets - Relève-toi",
+      "pt_br": "Manoplas - Levantar",
+      "ru": "Рукавицы - Подняться",
+      "th": "สนับมือ·ลุกขึ้น",
+      "vi": "Găng tay·Đứng dậy",
+      "zh_tw": "手甲·起身"
     },
     "20901101": {
       "ja": "天志の力",
       "en": "Heaven's Will",
       "zh": "我有天志",
-      "ko": "하늘의 뜻"
+      "ko": "하늘의 뜻",
+      "de": "Himmelswille",
+      "es": "Voluntad Celestial",
+      "fr": "Volonté céleste",
+      "pt_br": "Vontade do Céu",
+      "ru": "Воля Небес",
+      "th": "ข้ามีปณิธานแห่งสวรรค์",
+      "vi": "Tôi có chí trời",
+      "zh_tw": "我有天志"
     },
     "20901102": {
       "ja": "法天無双",
       "en": "Heaven's Law",
       "zh": "法天无双",
-      "ko": "천의 만법"
+      "ko": "천의 만법",
+      "de": "Himmlisches Gesetz",
+      "es": "Ley Celestial",
+      "fr": "Loi céleste",
+      "pt_br": "Lei Celestial",
+      "ru": "Закон Небес",
+      "th": "ไม่มีอะไรเทียบเท่ากฎแห่งฟ้า",
+      "vi": "Không gì bằng pháp trời",
+      "zh_tw": "莫如法天"
     },
     "20901108": {
       "zh": "天下归义",
       "ja": "天下帰義",
       "en": "World's Righteousness",
-      "ko": "천하 귀의"
+      "ko": "천하 귀의",
+      "de": "Gerechtigkeit der Welt",
+      "es": "Justicia del Mundo",
+      "fr": "Justice du monde",
+      "pt_br": "Justiça do Mundo",
+      "ru": "Праведность мира",
+      "th": "ใต้หล้ากลับคืนสู่ความยุติธรรม",
+      "vi": "Thiên hạ quy nghĩa",
+      "zh_tw": "天下歸義"
     },
     "20901110": {
       "ja": "手甲・武変",
       "en": "Gauntlets - Conversion",
       "zh": "手甲·易武",
-      "ko": "권갑·무기 교체"
+      "ko": "권갑·무기 교체",
+      "de": "Panzerhandschuhe - Zweiwaffen-Fertigkeit",
+      "es": "Guanteletes - Habilidad de Armas Dobles",
+      "fr": "Gantelets - Compétence à Deux Armes",
+      "pt_br": "Manoplas - Habilidade de Armas Duplas",
+      "ru": "Рукавицы - Навык двуручного оружия",
+      "th": "สนับมือ·เปลี่ยนอาวุธ",
+      "vi": "Găng tay·Đổi vũ khí",
+      "zh_tw": "手甲·易武"
     },
     "20901201": {
       "ja": "悪不義",
       "en": "Wicked Injustice",
       "zh": "恶不义",
-      "ko": "불의의 증오"
+      "ko": "불의의 증오",
+      "de": "Boshaftes Unrecht",
+      "es": "Injusticia Maligna",
+      "fr": "Injustice Maléfique",
+      "pt_br": "Injustiça Perversa",
+      "ru": "Гнусная несправедливость",
+      "th": "เกลียดชังความไร้คุณธรรม",
+      "vi": "Ghét bất nghĩa",
+      "zh_tw": "惡不義"
     },
     "20901090": {
       "ja": "手甲・とどめ",
       "en": "Gauntlets - Execution",
       "zh": "手甲·处决",
-      "ko": "권갑·처형"
+      "ko": "권갑·처형",
+      "de": "Panzerhandschuhe - Ausführen",
+      "es": "Guanteletes - Ejecutar",
+      "fr": "Gantelets - Exécuter",
+      "pt_br": "Manoplas - Executar",
+      "ru": "Рукавицы - Казнь",
+      "th": "สนับมือ·ปลิดชีพ",
+      "vi": "Găng tay · Xử quyết",
+      "zh_tw": "手甲·處決"
     },
     "20901111": {
       "ja": "手甲・防御反撃",
       "en": "Gauntlets - Defensive Riposte",
       "zh": "手甲·防反",
-      "ko": "권갑-방어 반격"
+      "ko": "권갑-방어 반격",
+      "de": "Panzerhandschuhe - Defensive Riposte",
+      "es": "Guanteletes - Réplica Defensiva",
+      "fr": "Gantelets - Riposte défensive",
+      "pt_br": "Manoplas - Resposta Defensiva",
+      "ru": "Рукавицы - Защитный ответ",
+      "th": "สนับมือ·ป้องกันและโต้กลับ",
+      "vi": "Găng tay·Phòng thủ phản công",
+      "zh_tw": "手甲·防反"
     },
     "10301205": {
       "ja": "貴き朝玉",
       "en": "Resurrection",
       "zh": "千金朝玉",
-      "ko": "마음의 갈망"
+      "ko": "마음의 갈망",
+      "de": "Wiederbelebung",
+      "es": "Resurrección",
+      "fr": "Résurrection",
+      "pt_br": "Ressurreição",
+      "ru": "Воскрешение",
+      "th": "เงินพันทองคำยามเช้า",
+      "vi": "Ngàn Vàng Sáng Ngọc",
+      "zh_tw": "千金朝玉"
     },
     "20202102913": {
       "ja": "次二衡の径数",
       "en": "Second Track Slash",
       "zh": "次二衡径数",
-      "ko": "내공응결"
+      "ko": "내공응결",
+      "de": "Zweite Spur-Schlag",
+      "es": "Tajo de Segunda Vía",
+      "fr": "Entaille de la seconde voie",
+      "pt_br": "Golpe de Trilha Secundária",
+      "ru": "Рассечение второй тропы",
+      "th": "เส้นทางสมดุลสอง",
+      "vi": "Đường cân bằng nội bộ hai",
+      "zh_tw": "次二衡徑數"
     },
     "20402001": {
       "ja": "焚此心",
       "en": "Burning Heart",
       "zh": "焚此心",
-      "ko": "타오르는 결의"
+      "ko": "타오르는 결의",
+      "de": "Brennendes Herz",
+      "es": "Corazón Ardiente",
+      "fr": "Cœur Brûlant",
+      "pt_br": "Coração em Chamas",
+      "ru": "Пылающее Сердце",
+      "th": "เผาไหม้หัวใจนี้",
+      "vi": "Đốt cháy trái tim này",
+      "zh_tw": "焚此心"
     },
     "20601001": {
       "ja": "傘・軽撃",
       "en": "Umbrella - Light Attack",
       "zh": "轻击·伞",
-      "ko": "약공격·우산"
+      "ko": "약공격·우산",
+      "de": "Schirm - Leichter Angriff",
+      "es": "Sombrilla - Ataque Ligero",
+      "fr": "Parapluie - Attaque légère",
+      "pt_br": "Guarda-chuva - Ataque Leve",
+      "ru": "Зонт - Легкая атака",
+      "th": "ร่ม·โจมตีเบา",
+      "vi": "Dù · Đánh nhẹ",
+      "zh_tw": "傘·輕擊"
     },
     "20702101": {
       "ja": "貫穿の鏢",
       "en": "Piercing Dart",
       "zh": "镖鸣彻野",
-      "ko": "절창의 울림"
+      "ko": "절창의 울림",
+      "de": "Durchdringender Wurfpfeil",
+      "es": "Dardo Penetrante",
+      "fr": "Dard perçant",
+      "pt_br": "Dardo Perfurante",
+      "ru": "Песня дротика в пустоши",
+      "th": "เสียงลูกดอกก้องทั่วทุ่ง",
+      "vi": "Phi tiêu vang đồng",
+      "zh_tw": "鏢鳴徹野"
     },
     "21001105": {
       "ja": "凌波滴露",
       "en": "Rippling Dew",
       "zh": "凌波滴露",
-      "ko": "능파적로"
+      "ko": "능파적로",
+      "de": "Wogender Tau",
+      "es": "Rocío Ondulante",
+      "fr": "Rosée Ondulante",
+      "pt_br": "Orvalho Ondulante",
+      "ru": "Рябящая Роса",
+      "th": "หลิงปัวหยดน้ำค้าง",
+      "vi": "Lăng Ba giọt sương",
+      "zh_tw": "凌波滴露"
     },
     "24703101": {
       "ja": "追撃の索",
       "en": "Snaring Lash",
       "zh": "飞来势",
-      "ko": "날아드는 기세"
+      "ko": "날아드는 기세",
+      "de": "Schwebende Haltung",
+      "es": "Postura Ascendente",
+      "fr": "Posture Aérienne",
+      "pt_br": "Postura Elevada",
+      "ru": "Парящая стойка",
+      "th": "ท่าบินมา",
+      "vi": "Thế bay đến",
+      "zh_tw": "飛來勢"
     },
     "20201006911": {
       "ja": "家無き者",
       "en": "Vagrant Sword",
       "zh": "无以为家",
-      "ko": "방랑의 검법"
+      "ko": "방랑의 검법",
+      "de": "Vagabundenschwert",
+      "es": "Espada Vagabunda",
+      "fr": "Épée Vagabonde",
+      "pt_br": "Espada do Andarilho",
+      "ru": "Бродячий меч",
+      "th": "ไร้ที่อยู่อาศัย",
+      "vi": "Không nơi nương tựa",
+      "zh_tw": "無以為家"
     },
     "20101101": {
       "ja": "六酔槍",
       "en": "Sober Sorrow",
       "zh": "愁无酒",
-      "ko": "허무의 술잔"
+      "ko": "허무의 술잔",
+      "de": "Nüchterne Trauer",
+      "es": "Tristeza Sobria",
+      "fr": "Tristesse Lucide",
+      "pt_br": "Tristeza Sóbria",
+      "ru": "Трезвая Печаль",
+      "th": "เศร้าไร้สุรา",
+      "vi": "Buồn Không Rượu",
+      "zh_tw": "愁無酒"
     },
     "20801005": {
       "ja": "塚上の霜",
       "en": "Grave Frost",
       "zh": "冢上霜",
-      "ko": "서리 무덤"
+      "ko": "서리 무덤",
+      "de": "Grabfrost",
+      "es": "Escarcha Fúnebre",
+      "fr": "Givre Funèbre",
+      "pt_br": "Gelo Grave",
+      "ru": "Гробовой мороз",
+      "th": "น้ำค้างแข็งบนหลุมศพ",
+      "vi": "Sương trên mộ",
+      "zh_tw": "冢上霜"
     },
     "20401111": {
       "ja": "天地をも揺るがす",
       "en": "Heaven's Shift",
       "zh": "移天换日",
-      "ko": "천일의 전환"
+      "ko": "천일의 전환",
+      "de": "Himmelsverschiebung",
+      "es": "Cambio Celestial",
+      "fr": "Déplacement céleste",
+      "pt_br": "Deslocamento Celestial",
+      "ru": "Сдвиг Небес",
+      "th": "เปลี่ยนฟ้าสลับดวงอาทิตย์",
+      "vi": "Đổi trời thay ngày",
+      "zh_tw": "移天換日"
     },
     "20301101913": {
       "ja": "雲水療",
       "en": "Cloudburst Healing",
       "zh": "坐看云起",
-      "ko": "무위자연"
+      "ko": "무위자연",
+      "de": "Wolkenbruch-Heilung",
+      "es": "Curación Torrencial",
+      "fr": "Guérison Déluge",
+      "pt_br": "Cura da Tempestade",
+      "ru": "Исцеление Ливнем",
+      "th": "นั่งมองเมฆลอย",
+      "vi": "Ngồi Nhìn Mây Dâng",
+      "zh_tw": "坐看雲起"
     },
     "20101102913": {
       "ja": "断蓬飛び",
       "en": "Severing Jab",
       "zh": "断蓬飞",
-      "ko": "절연의 비상"
+      "ko": "절연의 비상",
+      "de": "Treibender Stoß",
+      "es": "Empuje a la Deriva",
+      "fr": "Estocade Vagabonde",
+      "pt_br": "Investida à Deriva",
+      "ru": "Дрейфующий Толчок",
+      "th": "ตัดสายลมปลิว",
+      "vi": "Cắt Bụi Bay",
+      "zh_tw": "斷蓬飛"
     },
     "20101107": {
       "ja": "千軍一掃",
       "en": "Sweep All",
       "zh": "扫千军",
-      "ko": "일소천군"
+      "ko": "일소천군",
+      "de": "Alles Fegen",
+      "es": "Barrido Total",
+      "fr": "Balayage Total",
+      "pt_br": "Varredura Total",
+      "ru": "Сметать Все",
+      "th": "กวาดกองทัพนับพัน",
+      "vi": "Quét Ngàn Quân",
+      "zh_tw": "掃千軍"
     },
     "20102101913": {
       "ja": "乾坤定",
       "en": "Qiankun's Lock",
       "zh": "乾坤定",
-      "ko": "건곤의 정수"
+      "ko": "건곤의 정수",
+      "de": "Qiankuns Schloss",
+      "es": "Candado de Qiankun",
+      "fr": "Verrou de Qiankun",
+      "pt_br": "Bloqueio de Qiankun",
+      "ru": "Замок Цянькунь",
+      "th": "กำหนดฟ้าดิน",
+      "vi": "Định càn khôn",
+      "zh_tw": "乾坤定"
     },
     "20201102913": {
       "ja": "家無き者",
       "en": "Vagrant Sword",
       "zh": "无以为家",
-      "ko": "방랑의 검법"
+      "ko": "방랑의 검법",
+      "de": "Vagabundenschwert",
+      "es": "Espada Vagabunda",
+      "fr": "Épée Vagabonde",
+      "pt_br": "Espada do Andarilho",
+      "ru": "Бродячий меч",
+      "th": "ไร้ที่อยู่อาศัย",
+      "vi": "Không nơi nương tựa",
+      "zh_tw": "無以為家"
     },
     "20502003910": {
       "ja": "怒炎",
       "en": "Flamelash",
       "zh": "嗔焰",
-      "ko": "격노의 화염"
+      "ko": "격노의 화염",
+      "de": "Flammenpeitsche",
+      "es": "Latigazo de Llamas",
+      "fr": "Fouet de Flammes",
+      "pt_br": "Chicote de Chamas",
+      "ru": "Огненная Плеть",
+      "th": "เปลวไฟแห่งความโกรธ",
+      "vi": "Lửa giận bừng cháy",
+      "zh_tw": "嗔焰"
     },
     "20601102914": {
       "ja": "杏花の天",
       "en": "Apricot Heaven",
       "zh": "杏花天",
-      "ko": "봄의 연무"
+      "ko": "봄의 연무",
+      "de": "Aprikosenhimmel",
+      "es": "Paraíso del Albaricoque",
+      "fr": "Paradis des Abricots",
+      "pt_br": "Céu de Damasco",
+      "ru": "Абрикосовый Рай",
+      "th": "ดอกแอปริคอตในวันฟ้าใส",
+      "vi": "Trời hoa mơ",
+      "zh_tw": "杏花天"
     },
     "20103101913": {
       "ja": "風雷の嘯き",
       "en": "Storm Roar's",
       "zh": "风雷啸",
-      "ko": "천둥의 포효"
+      "ko": "천둥의 포효",
+      "de": "Sturmgebrüll",
+      "es": "Rugido de la Tormenta",
+      "fr": "Rugissement de la Tempête",
+      "pt_br": "Rugido da Tempestade",
+      "ru": "Рев бури",
+      "th": "เสียงลมและสายฟ้า",
+      "vi": "Sấm Sét Gió",
+      "zh_tw": "風雷嘯"
     },
     "20402102": {
       "ja": "千軍招来",
       "en": "Legion Summoner's",
       "zh": "唤千军",
-      "ko": "천군 소환"
+      "ko": "천군 소환",
+      "de": "Legionsbeschwörer",
+      "es": "Invocador de Legión",
+      "fr": "Invocateur de Légion",
+      "pt_br": "Invocador da Legião",
+      "ru": "Призыватель Легиона",
+      "th": "เรียกกองทัพนับพัน",
+      "vi": "Triệu hồi ngàn quân",
+      "zh_tw": "喚千軍"
     },
     "20103102": {
       "ja": "八方の戦い",
       "en": "Fury Spear",
       "zh": "战八方",
-      "ko": "팔방참"
+      "ko": "팔방참",
+      "de": "Zornspeer",
+      "es": "Lanza de Furia",
+      "fr": "Lance de fureur",
+      "pt_br": "Lança da Fúria",
+      "ru": "Копье Ярости",
+      "th": "ต่อสู้ทั่วสารทิศ",
+      "vi": "Chiến Bát Phương",
+      "zh_tw": "戰八方"
     },
     "20301055": {
       "ja": "碧玉返露",
       "en": "Emerald Dewtouch",
       "zh": "点翠沾衣",
-      "ko": "비취의 이슬"
+      "ko": "비취의 이슬",
+      "de": "Smaragdtauberührung",
+      "es": "Rocío de Esmeralda",
+      "fr": "Rosée d'Émeraude",
+      "pt_br": "Orvalho de Esmeralda",
+      "ru": "Изумрудная Роса",
+      "th": "หยดสีเขียวแตะเสื้อผ้า",
+      "vi": "Điểm Xanh Vương Áo",
+      "zh_tw": "點翠沾衣"
     },
     "20602103913": {
       "ja": "万木余響",
       "en": "Herbal Resonance",
       "zh": "千莳余响",
-      "ko": "천향의 울림"
+      "ko": "천향의 울림",
+      "de": "Kräuterresonanz",
+      "es": "Resonancia Herbolaria",
+      "fr": "Résonance Herbal",
+      "pt_br": "Ressonância Herbácea",
+      "ru": "Травяного Резонанса",
+      "th": "เสียงสะท้อนที่เหลือจากพันฤดู",
+      "vi": "Ngàn âm vang dư",
+      "zh_tw": "千蒔餘響"
     },
     "20703105": {
       "ja": "縛りの索",
       "en": "Sky Grasped",
       "zh": "索天势",
-      "ko": "결박의 기세"
+      "ko": "결박의 기세",
+      "de": "Himmelsfänger-Haltung",
+      "es": "Postura Trampa Celestial",
+      "fr": "Posture du Piège Céleste",
+      "pt_br": "Postura da Armadilha Celeste",
+      "ru": "Стойка небесной ловушки",
+      "th": "ท่าทะยานฟ้า",
+      "vi": "Thế tìm trời",
+      "zh_tw": "索天勢"
     },
     "20102101911": {
       "ja": "乾坤定",
       "en": "Qiankun's Lock",
       "zh": "乾坤定",
-      "ko": "건곤의 정수"
+      "ko": "건곤의 정수",
+      "de": "Qiankuns Schloss",
+      "es": "Candado de Qiankun",
+      "fr": "Verrou de Qiankun",
+      "pt_br": "Bloqueio de Qiankun",
+      "ru": "Замок Цянькунь",
+      "th": "กำหนดฟ้าดิน",
+      "vi": "Định càn khôn",
+      "zh_tw": "乾坤定"
     },
     "209011093": {
       "ja": "不義天誅・尽",
       "en": "Just Verdict - End",
       "zh": "无义当诛·尽",
-      "ko": "불의의 단죄·끝"
+      "ko": "불의의 단죄·끝",
+      "de": "Gerechtes Urteil - Ende",
+      "es": "Veredicto Justo - Final",
+      "fr": "Verdict juste - Fin",
+      "pt_br": "Veredito Justo - Fim",
+      "ru": "Справедливый приговор - Финал",
+      "th": "ผู้ไร้คุณธรรมสมควรถูกกำจัด·สิ้นสุด",
+      "vi": "Không nghĩa thì phải trừng phạt·Hết",
+      "zh_tw": "無義當誅·盡"
     },
     "20401107913": {
       "ja": "日風追い",
       "en": "Wind Vortex",
       "zh": "逐日追风",
-      "ko": "추풍일로"
+      "ko": "추풍일로",
+      "de": "Sonnensturm",
+      "es": "Vendaval del Amanecer",
+      "fr": "Rafale Solaire",
+      "pt_br": "Rajada do Sol Nascente",
+      "ru": "Солнечный Шквал",
+      "th": "ไล่ตามแสงอาทิตย์",
+      "vi": "Đuổi theo ánh mặt trời",
+      "zh_tw": "逐日追風"
     },
     "21001106": {
       "ja": "凌波·撼玉",
       "en": "Ripple: Jadebreaker",
       "zh": "凌波·撼玉",
-      "ko": "능파-함옥"
+      "ko": "능파-함옥",
+      "de": "Welle: Jadespalter",
+      "es": "Ondulación: Rompejades",
+      "fr": "Ondulation : Briseur de Jade",
+      "pt_br": "Ondulação: Quebrador de Jade",
+      "ru": "Ripple: Jadebreaker",
+      "th": "หลิงปัว·สั่นหยก",
+      "vi": "Lăng Ba·Chấn Ngọc",
+      "zh_tw": "凌波·撼玉"
     },
     "21001107": {
       "ja": "凌波·昭陽",
       "en": "Ripple: Dawnsun",
       "zh": "凌波·昭阳",
-      "ko": "능파-소양"
+      "ko": "능파-소양",
+      "de": "Welle: Morgensonne",
+      "es": "Ondulación: Sol del Alba",
+      "fr": "Ondulation : Soleil de l'Aube",
+      "pt_br": "Ondulação: Sol da Aurora",
+      "ru": "Ripple: Dawnsun",
+      "th": "หลิงปัว·เจาหยาง",
+      "vi": "Lăng Ba·Chiêu Dương",
+      "zh_tw": "凌波·昭陽"
     },
     "21001108": {
       "ja": "凌波·繁音",
       "en": "Ripple: Flourishing Notes",
       "zh": "凌波·繁音",
-      "ko": "능파-번음"
+      "ko": "능파-번음",
+      "de": "Welle: Blühende Noten",
+      "es": "Ondulación: Notas Florecientes",
+      "fr": "Ondulation : Notes Florissantes",
+      "pt_br": "Ondulação: Bilhetes Florescentes",
+      "ru": "Ripple: Flourishing Notes",
+      "th": "หลิงปัว·เสียงหลากหลาย",
+      "vi": "Lăng Ba·Phồn Âm",
+      "zh_tw": "凌波·繁音"
     },
     "20302101914": {
       "ja": "春尽山空",
       "en": "Peak's Springless Silence",
       "zh": "春尽山空",
-      "ko": "봄의 침묵"
+      "ko": "봄의 침묵",
+      "de": "Gipfels federlose Stille",
+      "es": "Silencio Sin Primavera de la Cima",
+      "fr": "Silence Printanier du Pic",
+      "pt_br": "Silêncio Sem Primavera do Pico",
+      "ru": "Безмолвие Пика без Родников",
+      "th": "ฤดูใบไม้ผลิสิ้นสุดภูเขาว่างเปล่า",
+      "vi": "Xuân Tàn Núi Trống",
+      "zh_tw": "春盡山空"
     },
     "20401021": {
       "ja": "斬馬刀・突進",
       "en": "Mo Blade - Dash",
       "zh": "陌刀·突进",
-      "ko": "맥도·돌진"
+      "ko": "맥도·돌진",
+      "de": "Mo Klinge - Sprint",
+      "es": "Espada Mo - Carrera",
+      "fr": "Mo Lame - Ruée",
+      "pt_br": "Lâmina Mo - Investida",
+      "ru": "Меч Мо - Рывок",
+      "th": "ดาบใหญ่·พุ่งโจมตี",
+      "vi": "Đao Mạc·Đột kích",
+      "zh_tw": "陌刀·突進"
     },
     "20501401": {
       "ja": "双剣・突進",
       "en": "Dual Blades - Dash",
       "zh": "双刀·突进",
-      "ko": "쌍도·돌진"
+      "ko": "쌍도·돌진",
+      "de": "Doppelklingen - Sprint",
+      "es": "Espadas Gemelas - Carrera",
+      "fr": "Lames Jumelles - Ruée",
+      "pt_br": "Lâminas Duplas - Investida",
+      "ru": "Парные клинки - Рывок",
+      "th": "ดาบคู่·พุ่งโจมตี",
+      "vi": "Song đao·Đột kích",
+      "zh_tw": "雙刀·突進"
     },
     "20601015": {
       "ja": "傘・突進",
       "en": "Umbrella - Dash",
       "zh": "伞·突进",
-      "ko": "우산·돌진"
+      "ko": "우산·돌진",
+      "de": "Schirm - Sprint",
+      "es": "Sombrilla - Carrera",
+      "fr": "Parapluie - Ruée",
+      "pt_br": "Guarda-chuva - Arremetida",
+      "ru": "Зонт - Рывок",
+      "th": "ร่ม·พุ่งโจมตี",
+      "vi": "Dù·Đột kích",
+      "zh_tw": "傘·突進"
     },
     "20401017": {
       "ja": "斬馬刀・空中軽撃",
       "en": "Mo Blade - Aerial Light Attack",
       "zh": "陌刀·空中轻击",
-      "ko": "맥도·공중 약공격"
+      "ko": "맥도·공중 약공격",
+      "de": "Mo Klinge - Leichter Luftangriff",
+      "es": "Espada Mo - Ataque Ligero en el Aire",
+      "fr": "Mo Lame - Attaque légère aérienne",
+      "pt_br": "Lâmina Mo - Ataque Leve no Ar",
+      "ru": "Клинок Мо - Воздушная лёгкая атака",
+      "th": "ดาบใหญ่·โจมตีเบาในอากาศ",
+      "vi": "Đao Mạc·Đánh nhẹ trên không",
+      "zh_tw": "陌刀·空中輕擊"
     },
     "20601108": {
       "ja": "傘・空中軽撃",
       "en": "Umbrella - Aerial Light Attack",
       "zh": "伞·空中轻击",
-      "ko": "우산·공중 약공격"
+      "ko": "우산·공중 약공격",
+      "de": "Schirm - Leichter Luftangriff",
+      "es": "Sombrilla - Ataque Ligero Aéreo",
+      "fr": "Parapluie - Attaque légère aérienne",
+      "pt_br": "Guarda-chuva - Ataque Leve Aéreo",
+      "ru": "Зонт - Воздушная лёгкая атака",
+      "th": "ร่ม·โจมตีเบาในอากาศ",
+      "vi": "Dù·Đánh nhẹ trên không",
+      "zh_tw": "傘·空中輕擊"
     },
     "20401020": {
       "ja": "斬馬刀・跳び斬り",
       "en": "Mo Blade - Jump Strike",
       "zh": "陌刀·跳劈",
-      "ko": "맥도·도약 베기"
+      "ko": "맥도·도약 베기",
+      "de": "Mo Klinge - Sprungschlag",
+      "es": "Espada Mo - Golpe Saltante",
+      "fr": "Lame Mo - Frappe Sautée",
+      "pt_br": "Lâmina Mo - Golpe no Salto",
+      "ru": "Клинок Мо - Прыжковый удар",
+      "th": "ดาบใหญ่·กระโดดฟัน",
+      "vi": "Đao Mạc · Nhảy bổ",
+      "zh_tw": "陌刀·跳劈"
     },
     "20501305": {
       "ja": "双剣・跳び斬り",
       "en": "Dual Blades - Jump Strike",
       "zh": "双刀·跳劈",
-      "ko": "쌍도·도약 베기"
+      "ko": "쌍도·도약 베기",
+      "de": "Doppelklingen - Sprungschlag",
+      "es": "Espadas Gemelas - Golpe en Salto",
+      "fr": "Lames Jumelles - Frappe en Saut",
+      "pt_br": "Lâminas Duplas - Golpe no Salto",
+      "ru": "Парные клинки - Прыжковый удар",
+      "th": "ดาบคู่·กระโดดฟัน",
+      "vi": "Song đao·Nhảy bổ",
+      "zh_tw": "雙刀·跳劈"
     },
     "20601107": {
       "ja": "傘・跳び斬り",
       "en": "Umbrella - Jump Strike",
       "zh": "伞·跳劈",
-      "ko": "우산·도약 베기"
+      "ko": "우산·도약 베기",
+      "de": "Schirm - Sprungschlag",
+      "es": "Sombrilla - Golpe en el Aire",
+      "fr": "Parapluie - Frappe en Saut",
+      "pt_br": "Guarda-chuva - Golpe no Salto",
+      "ru": "Зонт - Прыжковый удар",
+      "th": "ร่ม·กระโดดฟัน",
+      "vi": "Dù·Nhảy bổ",
+      "zh_tw": "傘·跳劈"
     },
     "20401001": {
       "ja": "斬馬刀・軽撃",
       "en": "Mo Blade - Light Attack",
       "zh": "轻击·陌刀",
-      "ko": "약공격·맥도"
+      "ko": "약공격·맥도",
+      "de": "Mo Klinge - Leichter Angriff",
+      "es": "Espada Mo - Ataque Ligero",
+      "fr": "Lame Mo - Attaque Légère",
+      "pt_br": "Lâmina Mo - Ataque Leve",
+      "ru": "Клинок Мо - Легкая атака",
+      "th": "ดาบใหญ่·โจมตีเบา",
+      "vi": "Đao Mạc·Đánh nhẹ",
+      "zh_tw": "陌刀·輕擊"
     },
     "20901200": {
       "ja": "手甲・軽撃鷹隼",
@@ -16865,13 +18443,29 @@
       "ja": "不義天誅",
       "en": "Just Verdict",
       "zh": "无义当诛",
-      "ko": "불의의 단죄"
+      "ko": "불의의 단죄",
+      "de": "Gerechtes Urteil",
+      "es": "Veredicto Justo",
+      "fr": "Verdict Juste",
+      "pt_br": "Veredito Justo",
+      "ru": "Справедливый приговор",
+      "th": "ผู้ไร้คุณธรรมสมควรถูกกำจัด",
+      "vi": "Không nghĩa thì phải trừng phạt",
+      "zh_tw": "無義當誅"
     },
     "209011094": {
       "ja": "不義天誅・尽",
       "en": "Just Verdict - End",
       "zh": "无义当诛·尽",
-      "ko": "불의의 단죄·끝"
+      "ko": "불의의 단죄·끝",
+      "de": "Gerechtes Urteil - Ende",
+      "es": "Veredicto Justo - Final",
+      "fr": "Verdict juste - Fin",
+      "pt_br": "Veredito Justo - Fim",
+      "ru": "Справедливый приговор - Финал",
+      "th": "ผู้ไร้คุณธรรมสมควรถูกกำจัด·สิ้นสุด",
+      "vi": "Không nghĩa thì phải trừng phạt·Hết",
+      "zh_tw": "無義當誅·盡"
     }
   }
 }
