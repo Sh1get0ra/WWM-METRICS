@@ -422,8 +422,8 @@ body.mobile-mode .wwm-ws-body {
 body.mobile-mode .wwm-ws-body > .wwm-score-update-banner {
   position: absolute;
   top: 0;
-  left: 12px;
-  right: 12px;
+  left: 0;
+  right: 0;
   margin-top: 0;
   z-index: 25;
   /* PC版フル文言のままだと375px幅で2-3行に折返りコンテンツを広く覆う → 装飾要素を削り
@@ -432,6 +432,9 @@ body.mobile-mode .wwm-ws-body > .wwm-score-update-banner {
   gap: 6px;
   font-size: 11px;
   border-radius: 4px;
+  /* absolute化でコンテンツに重なる分、PC版共通の40%不透明度だと下の暗コンテンツが
+     透けて視認性が落ちる。白文字化とあわせ背景も75%まで引き上げ (2026-07-13) */
+  background: color-mix(in oklab, var(--vermilion) 75%, transparent);
 }
 body.mobile-mode .wwm-ws-body > .wwm-score-update-banner .wwm-score-update-icon,
 body.mobile-mode .wwm-ws-body > .wwm-score-update-banner .wwm-score-update-arrow {
