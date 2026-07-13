@@ -3349,13 +3349,14 @@
   box-shadow: none;
 }
 
-/* NOTE modal 仕様タブ末尾 disclaimer (2026-07-13 兄貴指示: footer から NOTE 冒頭へ集約した後、
-   さらに仕様タブ本文 (_specHtml) 末尾へ再配置。墨背景→紙背景になるため赤字強調に変更、
-   Unofficial宣言/著作権表記の2行を続けて書かず分離表示) */
+/* NOTE modal 仕様タブ最上部 disclaimer (2026-07-13: footer→NOTE冒頭→仕様タブ本文の
+   ツール概要section直前、と位置調整を重ねた最終形。中央揃え赤字強調が中途半端な
+   位置にならないよう独立した帯として最上部固定 + 薄い背景で区画を明確化) */
 .wwm-note-disclaimer {
-  margin: var(--space-4) 0 0;
-  padding-top: var(--space-3);
-  border-top: 1px solid color-mix(in oklab, var(--vermilion) 30%, transparent);
+  margin: 0 0 var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  background: color-mix(in oklab, var(--vermilion) 8%, transparent);
+  border-bottom: 1px solid color-mix(in oklab, var(--vermilion) 30%, transparent);
   font-size: var(--text-11);
   text-align: center;
   letter-spacing: 0.02em;

@@ -125,16 +125,10 @@
   function _specHtml() {
     return (window.T && window.T.noteSpec) || '';
   }
-  // noteSpec 冒頭「ツール概要」section 直後に disclaimer を差し込む (2026-07-13)。
-  // noteSpec は複数 section が続く長文なので、末尾でなく最初の section 終端 (最初の </div>) の
-  // 直後を挿入点にする
+  // noteSpec 冒頭「ツール概要」section の直前に disclaimer を差し込む (2026-07-13)。
+  // 概要section直後だと中央揃え強調が中途半端な位置になるため、仕様タブ最上部に変更
   function _specHtmlWithDisclaimer(disclaimerHtml) {
-    const spec = _specHtml();
-    const marker = '</div>';
-    const idx = spec.indexOf(marker);
-    if (idx === -1) return spec + disclaimerHtml;
-    const insertAt = idx + marker.length;
-    return spec.slice(0, insertAt) + disclaimerHtml + spec.slice(insertAt);
+    return disclaimerHtml + _specHtml();
   }
   function _changelogHtml(entries) {
     const lang = (window.currentLang) || 'ja';
