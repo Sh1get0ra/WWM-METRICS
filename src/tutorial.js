@@ -18,7 +18,6 @@
 
   const FLAG_KEY = 'wwm_tutorial_seen_version';
   const CURRENT_TUTORIAL_VERSION = 1;
-  const DB_FLAG_KEY = 'wwm_tutorial_seen_db_v1';
 
   function _getSeenVersion() {
     try {
@@ -29,13 +28,6 @@
 
   function _markSeen() {
     try { localStorage.setItem(FLAG_KEY, String(CURRENT_TUTORIAL_VERSION)); } catch (_) {}
-  }
-
-  function _getSeenDb() {
-    try { return localStorage.getItem(DB_FLAG_KEY) === '1'; } catch (_) { return false; }
-  }
-  function _markSeenDb() {
-    try { localStorage.setItem(DB_FLAG_KEY, '1'); } catch (_) {}
   }
 
   function _t(key, fb) {
@@ -70,39 +62,6 @@
       _markSeen();
       backdrop.remove();
       start(true);
-    });
-    backdrop.addEventListener('click', (e) => {
-      if (e.target === backdrop) closeAndMark();
-    });
-    document.body.appendChild(backdrop);
-  }
-
-  // ── 「DB画面を追加しました」 ask modal ───────────────────────────────
-  function _showDbAskModal() {
-    const backdrop = document.createElement('div');
-    backdrop.className = 'wwm-modal-backdrop';
-    backdrop.innerHTML = `
-      <div class="wwm-tool-modal wwm-tutorial-ask-modal" role="dialog" aria-modal="true" aria-labelledby="wwmDbTutorialAskTitle">
-        <header class="wwm-modal-header">
-          <h2 id="wwmDbTutorialAskTitle">${_t('dbTutorialAskTitle', 'DB画面を追加しました')}</h2>
-          <button class="wwm-modal-close" aria-label="${_t('close', '閉じる')}">×</button>
-        </header>
-        <div class="wwm-modal-body wwm-ws-paper">
-          <p>${_t('dbTutorialAskBody', '装備/心法/武術のマスタデータを閲覧できるDB画面を追加しました。約1分でご案内します。')}</p>
-        </div>
-        <footer class="wwm-modal-footer">
-          <button class="wwm-btn-primary" id="wwmDbTutorialYesBtn">${_t('dbTutorialAskYes', '見てみる')}</button>
-          <button class="wwm-btn-secondary" id="wwmDbTutorialNoBtn">${_t('dbTutorialAskNo', 'スキップ')}</button>
-        </footer>
-      </div>
-    `;
-    const closeAndMark = () => { _markSeenDb(); backdrop.remove(); };
-    backdrop.querySelector('.wwm-modal-close').addEventListener('click', closeAndMark);
-    backdrop.querySelector('#wwmDbTutorialNoBtn').addEventListener('click', closeAndMark);
-    backdrop.querySelector('#wwmDbTutorialYesBtn').addEventListener('click', () => {
-      _markSeenDb();
-      backdrop.remove();
-      startDb(true);
     });
     backdrop.addEventListener('click', (e) => {
       if (e.target === backdrop) closeAndMark();
@@ -409,153 +368,10 @@
     return steps;
   }
 
-  // ── DB告知ミニツアー step構築 ──────────────────────────────
-  // 対象心法/武学は固定ID (T2効果/武術技データが実在するIDを明示選択、database.md確認済み)
-  const DB_XINFA_TARGET_ID = '4';      // 山月無影、T2 effectId=phys_min_blue、WorldLv 1-21 実在
-  const DB_KONGFU_TARGET_ID = '10101'; // 才能テーブル + 武術技ダメージ係数 両方実在
-
-  function _buildDbSteps(driverRef) {
-    const steps = [];
-    const isMobile = document.body.classList.contains('mobile-mode');
-    const dbTabGearSel = isMobile ? '.wwm-bottom-nav [data-db-tab="gear"]' : '.wwm-database [data-db-tab="gear"]';
-
-    // Step1: DBボタン紹介 → クリックしてDB画面起動
-    steps.push({
-      element: '#wwmDatabaseBtn',
-      popover: {
-        title: _t('dbTutorialStep1Title', 'DB画面'),
-        description: _t('dbTutorialStep1Body', 'ヘッダーのこのボタンから、装備・心法・武術のマスタデータを閲覧できる専用画面に切り替えられます。'),
-        side: 'bottom',
-        align: 'start',
-        onNextClick: () => {
-          _resumeIntent = true;
-          const cur = driverRef();
-          if (cur && typeof cur.destroy === 'function') cur.destroy();
-          try {
-            if (!window.WWMSidebar.database.isOpen()) window.WWMSidebar.database.open();
-            const gearTab = document.querySelector('[data-db-tab="gear"]');
-            if (gearTab) gearTab.click();
-            if (window.WWMSidebar.databaseGear) window.WWMSidebar.databaseGear.selectSlot('weapon');
-          } catch (_) {}
-          setTimeout(() => _resumeFromDbIndex(1), 250);
-        }
-      },
-      onHighlightStarted: () => _scrollAllToTop(),
-      onHighlighted: () => _scrollAllToTop()
-    });
-
-    // Step2: 3タブ紹介
-    steps.push({
-      element: dbTabGearSel,
-      popover: {
-        title: _t('dbTutorialStep2Title', '3タブ構成'),
-        description: _t('dbTutorialStep2Body', '装備・心法・武術の3タブで、キャラクター非依存のマスタデータを閲覧できます。'),
-        side: 'bottom',
-        align: 'start'
-      },
-      onHighlightStarted: () => _scrollAllToTop(),
-      onHighlighted: () => _scrollAllToTop()
-    });
-
-    // Step3: 装備タブ 調律%表示 (weapon slot = tuning1 セクション単独持ち)
-    steps.push({
-      element: '[data-db-section="tuning1"]',
-      popover: {
-        title: _t('dbTutorialStep3Title', '調律出現率'),
-        description: _t('dbTutorialStep3Body', '装備タブでは、各Lv・Tierごとの調律オプションと出現確率(%)を一覧で確認できます。'),
-        side: 'right',
-        align: 'start',
-        onNextClick: () => {
-          _resumeIntent = true;
-          const cur = driverRef();
-          if (cur && typeof cur.destroy === 'function') cur.destroy();
-          try {
-            const xinfaTab = document.querySelector('[data-db-tab="xinfa"]');
-            if (xinfaTab) xinfaTab.click();
-            if (window.WWMSidebar.databaseXinfa) window.WWMSidebar.databaseXinfa.selectId(DB_XINFA_TARGET_ID);
-          } catch (_) {}
-          setTimeout(() => _resumeFromDbIndex(3), 250);
-        }
-      },
-      onHighlightStarted: () => _scrollAllToTop(),
-      onHighlighted: () => _scrollAllToTop()
-    });
-
-    // Step4: 心法タブ WorldLv別テーブル
-    steps.push({
-      element: '.wwm-db-xinfa-worldlv-table',
-      popover: {
-        title: _t('dbTutorialStep4Title', '心法WorldLv別数値'),
-        description: _t('dbTutorialStep4Body', '心法タブのT2効果は、WorldLv別の数値を全部一覧表示します。ゲーム内進行度に応じた将来値も先取り確認できます。'),
-        side: 'left',
-        align: 'start',
-        onNextClick: () => {
-          _resumeIntent = true;
-          const cur = driverRef();
-          if (cur && typeof cur.destroy === 'function') cur.destroy();
-          try {
-            const kongfuTab = document.querySelector('[data-db-tab="kongfu"]');
-            if (kongfuTab) kongfuTab.click();
-            if (window.WWMSidebar.databaseKongfu) window.WWMSidebar.databaseKongfu.selectId(DB_KONGFU_TARGET_ID);
-          } catch (_) {}
-          setTimeout(() => _resumeFromDbIndex(4), 250);
-        }
-      },
-      onHighlightStarted: () => _scrollAllToTop(),
-      onHighlighted: () => _scrollAllToTop()
-    });
-
-    // Step5: 武術タブ「才能」サブタブ (selectId直後 = _selectedTab既定 'talent')
-    steps.push({
-      element: '.wwm-db-kongfu-slot-section',
-      popover: {
-        title: _t('dbTutorialStep5Title', '武術・才能'),
-        description: _t('dbTutorialStep5Body', '武術タブでは、各武学の才能突破段階を、閾値・上限まで含めてテーブルで確認できます。'),
-        side: 'left',
-        align: 'start',
-        onNextClick: () => {
-          _resumeIntent = true;
-          const cur = driverRef();
-          if (cur && typeof cur.destroy === 'function') cur.destroy();
-          const skillTabBtn = document.querySelector('[data-db-kongfu-tab="skill"]');
-          if (skillTabBtn) skillTabBtn.click();
-          setTimeout(() => _resumeFromDbIndex(5), 250);
-        }
-      },
-      onHighlightStarted: () => _scrollAllToTop(),
-      onHighlighted: () => _scrollAllToTop()
-    });
-
-    // Step6: 武術タブ「武術技」サブタブ ダメージ係数
-    steps.push({
-      element: '.wwm-db-kongfu-skill-table',
-      popover: {
-        title: _t('dbTutorialStep6Title', '武術技ダメージ係数'),
-        description: _t('dbTutorialStep6Body', '「武術技」サブタブでは、各技の外功係数・外功付加・属性係数をLv別に一覧できます。'),
-        side: 'left',
-        align: 'start'
-      },
-      onHighlightStarted: () => _scrollAllToTop(),
-      onHighlighted: () => _scrollAllToTop()
-    });
-
-    // Step7: 完了
-    steps.push({
-      popover: {
-        title: _t('dbTutorialFinishTitle', 'DB画面紹介完了'),
-        description: _t('dbTutorialFinishBody', '以上がDB画面の主な機能です。いつでもヘッダーのDBボタンから開けます。'),
-        showButtons: ['close']
-      }
-    });
-
-    return steps;
-  }
-
   // ── driver.js engine 起動 ──────────────────────────────────────
   // _activeDriver = 現在の driver instance、 _allSteps = 構築済 step 配列 (mid-tour 再起動用)
   let _activeDriver = null;
   let _allSteps = [];
-  let _allDbSteps = [];
   let _resumeIntent = false; // tour 中 destroy で flag を立てたくない (modal open 切替時)
 
   function _resumeFromIndex(idx) {
@@ -568,18 +384,7 @@
     _resumeIntent = false;
   }
 
-  function _resumeFromDbIndex(idx) {
-    if (!_allDbSteps.length) return;
-    const remain = _allDbSteps.slice(idx);
-    if (!remain.length) return;
-    _resumeIntent = true;
-    _activeDriver = window.driver.js.driver(_driverOpts(remain, _markSeenDb));
-    _activeDriver.drive();
-    _resumeIntent = false;
-  }
-
-  function _driverOpts(stepsArr, markFn) {
-    const mark = markFn || _markSeen;
+  function _driverOpts(stepsArr) {
     return {
       showProgress: true,
       allowClose: true,
@@ -591,7 +396,7 @@
       prevBtnText: _t('tutorialPrev', '戻る'),
       doneBtnText: _t('tutorialFinish', '完了'),
       onDestroyStarted: () => {
-        if (!_resumeIntent) { mark(); _unlockScroll(); }
+        if (!_resumeIntent) { _markSeen(); _unlockScroll(); }
         if (_activeDriver && typeof _activeDriver.destroy === 'function') _activeDriver.destroy();
       },
       steps: stepsArr
@@ -617,44 +422,11 @@
     requestAnimationFrame(() => requestAnimationFrame(() => _showAskModal()));
   }
 
-  function startDb(force) {
-    if (!window.driver || typeof window.driver.js !== 'object') {
-      console.warn('[WWMTutorial] driver.js not loaded');
-      return;
-    }
-    _scrollAllToTop();
-    _lockScroll();
-    const driverRef = () => _activeDriver;
-    _allDbSteps = _buildDbSteps(driverRef);
-    _activeDriver = window.driver.js.driver(_driverOpts(_allDbSteps, _markSeenDb));
-    _activeDriver.drive();
-  }
-
-  function maybeStartDb() {
-    if (_getSeenVersion() < CURRENT_TUTORIAL_VERSION) return; // フルツアー未読 = 次回訪問時まで待つ
-    if (_getSeenDb()) return;
-    requestAnimationFrame(() => requestAnimationFrame(() => _showDbAskModal()));
-  }
-
-  // welcome-banner.js 同型 (DOMContentLoaded待ち + setTimeout、baseline/import状態確定を待つ)。
-  // import.js側の既存 maybeStart() 呼び出しコードは変更せず、DB告知は自己完結で起動する。
-  function _initDb() {
-    const launch = () => setTimeout(maybeStartDb, 1500);
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', launch, { once: true });
-    } else {
-      launch();
-    }
-  }
-  _initDb();
-
   window.WWMTutorial = {
     CURRENT_TUTORIAL_VERSION,
     maybeStart,
     start,
-    _markSeen,
-    maybeStartDb,
-    startDb
+    _markSeen
   };
 })();
 
