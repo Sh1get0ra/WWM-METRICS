@@ -437,6 +437,12 @@ body.mobile-mode .wwm-ws-body > .wwm-score-update-banner .wwm-score-update-icon,
 body.mobile-mode .wwm-ws-body > .wwm-score-update-banner .wwm-score-update-arrow {
   display: none;
 }
+/* absolute化でコンテンツに重なる分、文字色は紙背景前提の暗い墨色(--kami-fg)のままだと
+   下に透ける暗いコンテンツと同化して読めなくなる(2026-07-13発覚)。不透明度を上げる案は
+   墨色文字自体の視認性が上がらず不採用、白文字化で対応 */
+body.mobile-mode .wwm-ws-body > .wwm-score-update-banner .wwm-score-update-msg {
+  color: #fff;
+}
 body.mobile-mode .wwm-ws-body > .wwm-score-update-banner .wwm-score-update-btn {
   padding: 4px 10px;
   font-size: 11px;

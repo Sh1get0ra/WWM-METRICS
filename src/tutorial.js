@@ -633,6 +633,13 @@
   function maybeStartDb() {
     if (_getSeenVersion() < CURRENT_TUTORIAL_VERSION) return; // フルツアー未読 = 次回訪問時まで待つ
     if (_getSeenDb()) return;
+    // NOTE modal (changelog 自動表示、sidebar/index.js の 500ms setTimeout) 等、
+    // 他の起動時 modal と表示タイミングが重なると2枚重ねになり両方読めなくなる (2026-07-13発覚)。
+    // 既存 modal が開いてる間はポーリングで待つ
+    if (document.querySelector('.wwm-modal-backdrop')) {
+      setTimeout(maybeStartDb, 500);
+      return;
+    }
     requestAnimationFrame(() => requestAnimationFrame(() => _showDbAskModal()));
   }
 
