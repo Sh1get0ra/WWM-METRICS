@@ -125,6 +125,17 @@
   function _specHtml() {
     return (window.T && window.T.noteSpec) || '';
   }
+  // noteSpec 冒頭「ツール概要」section 直後に disclaimer を差し込む (2026-07-13)。
+  // noteSpec は複数 section が続く長文なので、末尾でなく最初の section 終端 (最初の </div>) の
+  // 直後を挿入点にする
+  function _specHtmlWithDisclaimer(disclaimerHtml) {
+    const spec = _specHtml();
+    const marker = '</div>';
+    const idx = spec.indexOf(marker);
+    if (idx === -1) return spec + disclaimerHtml;
+    const insertAt = idx + marker.length;
+    return spec.slice(0, insertAt) + disclaimerHtml + spec.slice(insertAt);
+  }
   function _changelogHtml(entries) {
     const lang = (window.currentLang) || 'ja';
     const _itemHtml = (it) => {
@@ -174,7 +185,7 @@
           <button class="wwm-tool-tab ${defaultTab==='spec'?'active':''}" data-tab="spec">${tabSpec}</button>
           <button class="wwm-tool-tab ${defaultTab==='changelog'?'active':''}" data-tab="changelog">${tabCl}</button>
         </div>
-        <div class="wwm-modal-body wwm-ws-paper" id="wwmNoteTabSpec" style="display:${defaultTab==='spec'?'block':'none'};">${_specHtml()}<p class="wwm-note-disclaimer"><span class="wwm-note-disclaimer-line">${unofficialText}</span><span class="wwm-note-disclaimer-line">© NetEase, Inc. All Rights Reserved. © Everstone Studio.</span></p></div>
+        <div class="wwm-modal-body wwm-ws-paper" id="wwmNoteTabSpec" style="display:${defaultTab==='spec'?'block':'none'};">${_specHtmlWithDisclaimer(`<p class="wwm-note-disclaimer"><span class="wwm-note-disclaimer-line">${unofficialText}</span><span class="wwm-note-disclaimer-line">© NetEase, Inc. All Rights Reserved. © Everstone Studio.</span></p>`)}</div>
         <div class="wwm-modal-body wwm-ws-paper" id="wwmNoteTabChangelog" style="display:${defaultTab==='changelog'?'block':'none'};">${_changelogHtml(entries)}</div>
         <div class="wwm-tool-modal-footer">
           <button type="button" class="wwm-btn-secondary" id="wwmNoteTourBtn">${btnTour}</button>
