@@ -37,21 +37,6 @@
         },
         {
           "featured": false,
-          "ja": "【左側パネルの見出しデザインを刷新】 見出しを「武録」に改名し、墨面に紙片が浮かぶような演出のデザインへ統一しました。表示のみで計算結果には影響ありません。",
-          "en": "[Left Panel Heading Redesign] Renamed the heading to \"Martial Record\" and unified the design with a paper-on-ink visual style. Visual only — no impact on calculations.",
-          "zh": "【左侧面板标题设计更新】 标题改名为「武录」, 统一为纸片浮于墨面的演出设计。 仅影响显示, 不影响计算结果。",
-          "ko": "【좌측 패널 제목 디자인 개편】 제목을 「무록」으로 변경하고, 먹빛 위에 종이가 떠 있는 듯한 연출 디자인으로 통일했습니다. 표시만의 문제로 계산 결과에는 영향 없습니다.",
-          "vi": "[Thiết kế lại tiêu đề bảng bên trái] Đổi tên tiêu đề thành \"Võ Lục\" và thống nhất thiết kế theo phong cách giấy nổi trên mực. Chỉ ảnh hưởng giao diện — không ảnh hưởng tính toán.",
-          "de": "[Neugestaltung der linken Panel-Überschrift] Überschrift in „Kampfaufzeichnung“ umbenannt und auf einen Papier-auf-Tinte-Look vereinheitlicht. Nur visuell — keine Auswirkung auf Berechnungen.",
-          "es": "[Rediseño del encabezado del panel izquierdo] Se renombró el encabezado a \"Registro Marcial\" y se unificó el diseño con un estilo visual de papel sobre tinta. Solo visual — sin impacto en los cálculos.",
-          "fr": "[Refonte de l'en-tête du panneau gauche] En-tête renommé en « Registre Martial » et design unifié avec un style visuel papier sur encre. Visuel uniquement — aucun impact sur les calculs.",
-          "pt_br": "[Redesign do cabeçalho do painel esquerdo] Cabeçalho renomeado para \"Registro Marcial\" e design unificado com estilo visual de papel sobre tinta. Apenas visual — sem impacto nos cálculos.",
-          "ru": "[Редизайн заголовка левой панели] Заголовок переименован в «Боевая летопись», дизайн унифицирован в стиле бумаги на чернилах. Только визуально — не влияет на расчёты.",
-          "th": "[ปรับดีไซน์หัวข้อแผงด้านซ้าย] เปลี่ยนชื่อหัวข้อเป็น \"บันทึกยุทธ์\" และรวมดีไซน์เป็นสไตล์กระดาษลอยบนหมึก ส่งผลเฉพาะการแสดงผล ไม่ส่งผลต่อการคำนวณ",
-          "zh_tw": "【左側面板標題設計更新】 標題改名為「武錄」, 統一為紙片浮於墨面的演出設計。 僅影響顯示, 不影響計算結果。"
-        },
-        {
-          "featured": false,
           "ja": "【支援ボタンの配置を変更】 応援用のKo-fiボタンをヘッダーからフッターへ移動しました。",
           "en": "[Support Button Relocated] Moved the Ko-fi support button from the header to the footer.",
           "zh": "【支持按钮位置调整】 将Ko-fi支持按钮从头部移动到了底部。",
