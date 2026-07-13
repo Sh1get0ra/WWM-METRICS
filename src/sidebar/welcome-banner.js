@@ -26,6 +26,16 @@
     return !hasHistory;
   }
 
+  // mobile: banner は absolute 配置でコンテンツ上に重ねているため (2026-07-13)、
+  // panel 側 (padding-top) が banner の実高さぶん避ける必要がある。固定px値だと
+  // banner 非表示時に無駄な空白が残ってしまう (兄貴指摘「上下の余白なに？」) ため、
+  // 実測高さを CSS 変数で都度反映する
+  function _syncBannerHeight() {
+    const el = document.getElementById('wwmWelcomeBanner');
+    const h = (el && el.style.display !== 'none') ? el.getBoundingClientRect().height : 0;
+    document.documentElement.style.setProperty('--wwm-banner-h', h + 'px');
+  }
+
   function show() {
     // OBS view (`?view=sidebar`) は表示専用 = banner 非表示 (配信邪魔回避)
     if (document.documentElement.classList.contains('wwm-view-sidebar')) return;
@@ -34,6 +44,7 @@
     if (_isDismissed()) return;
     if (!_isFirstTime()) return;
     el.style.display = '';
+    requestAnimationFrame(_syncBannerHeight);
     const close = el.querySelector('.wwm-welcome-banner-close');
     if (close && !close._wired) {
       close._wired = true;
@@ -46,6 +57,7 @@
   function hide() {
     const el = document.getElementById('wwmWelcomeBanner');
     if (el) el.style.display = 'none';
+    _syncBannerHeight();
   }
   function init() {
     // WWMState.baseline / IMPORT_STORAGE_KEY は app.js / import.js 起動後でないと

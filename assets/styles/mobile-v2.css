@@ -37,6 +37,17 @@ body.mobile-mode .wwm-band {
   border-bottom: 1px solid var(--gold-deep);
   background: transparent;
 }
+/* DB画面表示中は hero が display:none で中身が消えても .wwm-band 自体は grid-row 1/3 のまま
+   track sizing で伸び、同じ row2 に置かれた .wwm-database と重なって database 側の見出し
+   ("万宝録") が band の下に隠れる崩壊が発生 (2026-07-13 兄貴指摘)。DB mode 時は band を
+   topbar 行 (row1) のみに縮め、database 側は band と被らない row2-4 に配置する */
+body.mobile-mode .wwm-app[data-mode="database"] .wwm-band {
+  grid-row: 1 / 2;
+}
+body.mobile-mode .wwm-database {
+  grid-row: 2 / 5;
+  grid-column: 1 / 3;
+}
 body.mobile-mode .wwm-band-top {
   padding: 8px 12px;
   /* overlay 相当薄く (2026-06-19 兄貴指示) — 0.45 → 0.18 */
@@ -51,8 +62,14 @@ body.mobile-mode .wwm-band .wwm-brand { gap: 8px; }
 body.mobile-mode .wwm-band .wwm-brand-vert {
   font-size: 13px; padding: 2px 5px; height: 52px;
 }
-body.mobile-mode .wwm-band .wwm-brand-en { font-size: 11px; }
-body.mobile-mode .wwm-band .wwm-brand-sub { font-size: 9px; }
+/* letter-spacing は PC 版 0.22em/0.3em のまま font-size だけ縮小すると、153px幅の
+   .wwm-brand-right に "WHERE WINDS METRICS" / "WWM-REAL-TIME-METRICS" が収まらず
+   単語ごとに折り返され縦に伸びる崩壊が発生 (兄貴指摘 2026-07-13)。letter-spacing も
+   合わせて縮小 + nowrap で1行固定 */
+body.mobile-mode .wwm-band .wwm-brand-en { font-size: 11px; letter-spacing: 0.04em; white-space: nowrap; }
+body.mobile-mode .wwm-band .wwm-brand-sub { font-size: 9px; letter-spacing: 0.05em; white-space: nowrap; }
+body.mobile-mode .wwm-band .wwm-brand-sub::before,
+body.mobile-mode .wwm-band .wwm-brand-sub::after { width: 10px; }
 body.mobile-mode .wwm-band .wwm-brand-seal { display: none; }
 /* 羅盤 (base.css .wwm-brand::after 2026-07-04) = seal 非表示に合わせ mobile off (浮き+actions 被り防止) */
 body.mobile-mode .wwm-band .wwm-brand::after { display: none; }
@@ -70,7 +87,7 @@ body.mobile-mode .wwm-band-actions #wwmDiagBadge { display: none; }
 
 /* ============ hero compact (1 行帯: 左 数値+NEXT / 右 avatar+名前 LV、 兄貴指示 2026-06-19) ============ */
 body.mobile-mode .hero.hero-wuxia {
-  padding: 6px 14px;
+  padding: 2px 14px;
   /* overlay 相当薄く (2026-06-19 兄貴指示) — 公式 BG silhouette 透過優先、 文字側 text-shadow で防御 */
   background: linear-gradient(180deg, rgba(11,9,8,0.08), rgba(11,9,8,0.18));
   display: grid;
@@ -98,6 +115,18 @@ body.mobile-mode .hero-wuxia .seat-main .eyebrow .seat-title { font-size: 11px; 
 body.mobile-mode .hero-wuxia .seat-main .eyebrow .seat-en { font-size: 7px; letter-spacing: 0.22em; }
 body.mobile-mode .hero-wuxia .seat-main .hb-num { font-size: 30px; line-height: 1; margin-top: 0; }
 body.mobile-mode .hero-wuxia .seat-main .hb-num .unit { font-size: 10px; margin-left: 4px; }
+/* 兄貴指示 (2026-07-13、モバイルのみ調整): workspace.css base (margin:-6px.../font-size:24px) を上書き */
+body.mobile-mode .hero-wuxia .seat-main .hb-num .hero-tier.tier-badge {
+  align-self: center;
+  margin: -12px 0 0 14px;
+  font-size: 14px;
+}
+/* 兄貴指示 (2026-07-13、モバイルのみ調整): hero.css @media(max-width:480px) base (padding:5px 16px) を上書き */
+body.mobile-mode .hero-wuxia .hero-tier.tier-badge {
+  grid-area: tier;
+  font-size: var(--text-xl);
+  padding: 2px 7px;
+}
 /* 総合武力 + SS tier badge = h-id-info 内 pname 下に 1 行表示 (兄貴指示「最低限ほしい」 2026-06-19) */
 body.mobile-mode .hero-wuxia .pwr {
   display: flex; align-items: center; gap: 4px;
@@ -149,6 +178,10 @@ body.mobile-mode .wwm-mobile-chip-bar {
   backdrop-filter: blur(1px);
   position: relative;
   z-index: 20;
+}
+/* DB画面 (row2-4に拡張済) と同じ row3 に重なるため DB mode 時は非表示 (diag/import/reset は計算機専用機能) */
+body.mobile-mode .wwm-app[data-mode="database"] .wwm-mobile-chip-bar {
+  display: none;
 }
 body.mobile-mode .wwm-mobile-chip {
   flex: 1;
@@ -373,14 +406,56 @@ body.mobile-mode .wwm-ws-main {
 body.mobile-mode .wwm-ws-tabs { display: none; }
 body.mobile-mode .wwm-ws-paper-bg { display: none; }
 body.mobile-mode .wwm-ws-body {
-  padding: 12px 12px 12px;
+  padding: 6px 12px calc(24px + env(safe-area-inset-bottom));
   border-left: none;
   background: var(--kami-0);
   overflow-y: auto;
   height: 100%;
   min-height: 0;
+  position: relative;
 }
-body.mobile-mode .wwm-ws-main .wwm-footer { display: none; }
+/* banner (データ取込促進等) が documentフロー内で #wsBuild の前に居座ると、#wsBuild の
+   height:100% (banner高さを考慮しない設計) が banner 分ずれた位置からフル高さを要求し
+   bottom-nav/footer と重なる (2026-07-13 兄貴指摘「表示の仕方が問題では」)。
+   banner を absolute でコンテンツの上に重ねる表示に変え、#wsBuild 側の高さ計算を
+   banner の有無から完全に独立させる (flex化はiOS Safari/Brave高さ計算崩れリスクのため回避) */
+body.mobile-mode .wwm-ws-body > .wwm-score-update-banner {
+  position: absolute;
+  top: 0;
+  left: 12px;
+  right: 12px;
+  margin-top: 0;
+  z-index: 25;
+  /* PC版フル文言のままだと375px幅で2-3行に折返りコンテンツを広く覆う → 装飾要素を削り
+     テキストも縮小し極力コンパクトに (絶対配置でコンテンツに重なるため高さ最小化が必須) */
+  padding: 6px 10px;
+  gap: 6px;
+  font-size: 11px;
+  border-radius: 4px;
+}
+body.mobile-mode .wwm-ws-body > .wwm-score-update-banner .wwm-score-update-icon,
+body.mobile-mode .wwm-ws-body > .wwm-score-update-banner .wwm-score-update-arrow {
+  display: none;
+}
+body.mobile-mode .wwm-ws-body > .wwm-score-update-banner .wwm-score-update-btn {
+  padding: 4px 10px;
+  font-size: 11px;
+}
+/* banner が absolute 化された分、通常 panel (#wsEnbu/#wsHist 等、height:100%でなく
+   documentフロー通常配置) は banner の存在を考慮せず先頭から表示されるため見出しが
+   banner と重なる。全 panel 共通で banner 分の余白を確保 (#wsBuild だけ pagerRoot 側で
+   個別対応済のため、ID セレクタの詳細度でここでの padding-top を上書きし影響を受けない)。
+   固定 48px だと banner 非表示時 (データ import 済、大半のユーザー) に常時無駄な空白が
+   残る (兄貴指摘「上下の余白なに？」) → welcome-banner.js が banner 表示/非表示のたび
+   実測高さを --wwm-banner-h に反映、CSS 側は変数参照のみにする */
+body.mobile-mode .wwm-ws-panel.active {
+  padding-top: var(--wwm-banner-h, 0px);
+}
+/* footer 表示 (2026-07-13 兄貴指示: 従来 display:none だったが理由不明のまま計算機画面のみ
+   非表示になっていた、DB画面footer簡略化に合わせ計算機画面でも表示する) → 下記 L762 以降の
+   共通 footer/bottom-nav fixed 化ルールが計算機・DB画面どちらにも適用される。
+   padding-bottom 84px = bottom-nav(57px) + footer(27px) 分、fixed 要素の下にコンテンツが
+   隠れないための余白 */
 
 /* ============ 武格履歴 (hist) mobile = scroll 回避で padding 詰め (2026-06-21 兄貴指示) ============ */
 body.mobile-mode .wwm-hist-panel { padding: 0 5px; }
@@ -392,16 +467,22 @@ body.mobile-mode .hero-wuxia .seat-main .hb-num.hb-coming { font-size: 14px; pad
 /* ============ 蛍 mobile = 非表示 (2026-06-21 兄貴指示「変な位置に出現」) ============ */
 body.mobile-mode .wwm-ws-main > .wwm-fireflies { display: none; }
 
-/* ============ bnav = grid-row 5 (全幅 57px) ============ */
+/* ============ bnav = 画面下部 fixed、footer の直上 (2026-07-13 兄貴指示: footer を
+   bottom-nav よりさらに下、画面絶対最下部に配置するため bnav 自体を fixed 化) ============ */
 body.mobile-mode .wwm-bottom-nav {
   grid-column: 1 / 3;
   grid-row: 5 / 6;
   display: flex;
-  position: relative;
-  left: auto; right: auto; bottom: auto;
+  position: fixed;
+  left: 0; right: 0;
+  /* footer(実測27px、+ホームインジケーター env(safe-area-inset-bottom))の直上に配置。
+     bnav 自体は画面絶対最下部でなくなった (footer がさらに下にいる) ため、bnav 自身の
+     padding-bottom に safe-area を積む必要はなくなった (以前 = bnav が最下部だった名残の
+     safe-area 対応 padding が残っていたが、footer 側で対応済みのため通常値に戻す) */
+  bottom: calc(27px + env(safe-area-inset-bottom));
   z-index: 20;
   height: 57px;
-  padding: 4px 4px calc(4px + env(safe-area-inset-bottom));
+  padding: 4px 4px 4px;
   /* overlay 相当薄く (2026-06-19 兄貴指示) — qs-bg silhouette 素優先 */
   background:
     linear-gradient(180deg, rgba(11,9,8,0.08), rgba(11,9,8,0.18)),
@@ -433,6 +514,15 @@ body.mobile-mode .wwm-bn[aria-selected="true"] {
   color: var(--kami-fg);
   border-radius: 1px;
 }
+/* DB画面表示中は bottom-nav を workspace tab (武備/戦律/履歴/格析) でなく
+   DB tab (装備/心法/武術) に差し替え (2026-07-13 兄貴指示: 「そもそもDBに武備とかいらなくないか」)。
+   DB表示中に旧 workspace tab を叩くと裏で workspace.activate() が発火し、DB を閉じた時に
+   意図しない tab に切り替わっている紛らわしさがあった */
+body.mobile-mode .wwm-bn-db { display: none; }
+body.mobile-mode .wwm-app[data-mode="database"] .wwm-bn:not(.wwm-bn-db) { display: none; }
+body.mobile-mode .wwm-app[data-mode="database"] .wwm-bn-db { display: flex; }
+/* 上部 .wwm-db-tabs は bottom-nav に統合したため mobile では重複表示、非表示化 */
+body.mobile-mode .wwm-db-tabs { display: none; }
 
 /* ============ SHARE modal OBS section (mobile = OBS PC 専用なので hide) ============ */
 body.mobile-mode .wwm-share-obs-block { display: none; }
@@ -468,7 +558,12 @@ body.mobile-mode #wsBuild.wwm-ws-panel.active {
 }
 body.mobile-mode .wwm-mb-pager-root {
   position: absolute;
-  inset: 0;
+  /* banner(absolute配置) がコンテンツ上部に重なるため、その分を top で避ける。
+     `#wsBuild` 側の padding では inset:0 (absolute の基準 = 親の padding box) には
+     効かないため pagerRoot 自身の top で直接指定する必要があった。値は welcome-banner.js
+     が banner 表示/非表示のたび実測して --wwm-banner-h に反映 (固定48pxだと banner
+     非表示時に無駄な空白が残っていた、兄貴指摘「上下の余白なに？」) */
+  top: var(--wwm-banner-h, 0px); right: 0; bottom: 0; left: 0;
   display: flex; flex-direction: column;
 }
 body.mobile-mode .wwm-mb-pager {
@@ -727,6 +822,84 @@ body.mobile-mode #wwmPreviewModal .wwm-arsenal-tier {
 body.mobile-mode #wwmPreviewModal .wwm-arsenal-lv {
   flex: 0 0 auto;
   white-space: nowrap;
+}
+
+/* rail掛軸 (database.css ::before) は PC 版 --rail-w(300px) 基準の変形画像、
+   モバイルでは意図しない見た目 (見出し部が公式BG途切れて見苦しい) になっていた
+   (2026-07-13 兄貴指示) → モバイルDB画面では非表示 */
+body.mobile-mode .wwm-database::before {
+  display: none;
+}
+
+/* affix テーブル (調律/定音) の PC版列幅比率 (55%/25%/20%) だと 375px 幅で範囲列が
+   狭すぎ、数値が省略記号で切れていた (兄貴指摘)。列幅を広げ、フォントも少し縮小 */
+body.mobile-mode .wwm-db-table {
+  font-size: 12px;
+}
+body.mobile-mode .wwm-db-table th:nth-child(1),
+body.mobile-mode .wwm-db-table td:nth-child(1) {
+  width: 42%;
+}
+body.mobile-mode .wwm-db-table th:nth-child(2),
+body.mobile-mode .wwm-db-table td:nth-child(2) {
+  width: 33%;
+}
+body.mobile-mode .wwm-db-table th,
+body.mobile-mode .wwm-db-table td {
+  padding: 6px 4px;
+}
+
+/* ── footer 画面最下部 fixed 配置 (計算機画面 + DB画面 共通、2026-07-13 兄貴指示) ──
+   DB画面 footer の `margin-left: var(--rail-w)` (database.css) は PC 版 rail 幅ぶんの意図的
+   余白だが、mobile では rail 自体が存在せず 300px 分の余白で footer 表示域が圧縮され
+   ロゴ+3行disclaimerが縦に潰れて崩壊していた。unofficial/copyright は NOTE modal 冒頭へ
+   移設済のため footer は logo + Created by 行のみ。「一番下」= bottom-nav(タブ) よりも下、
+   画面絶対最下部を意味する (兄貴確認) → footer を bottom:0 に fixed、bottom-nav をその直上
+   (bottom:27px、footer実測高さ分、上記 L421 で fixed 化済) に配置 */
+body.mobile-mode .wwm-footer {
+  margin-left: 0;
+  border-left: none;
+  /* iPhone ホームインジケーター領域 (env(safe-area-inset-bottom)) 対応漏れ、
+     bottom-nav (既存 L465) には元々あったが footer 新設時に見落としていた
+     (2026-07-13、実機で「悪化してる」指摘の一因と判明) */
+  padding: 6px 12px calc(6px + env(safe-area-inset-bottom));
+  row-gap: 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 16;
+  background: var(--kami-0);
+}
+body.mobile-mode .wwm-db-body {
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
+  /* 紙色背景(kami-0)にした結果、.wwm-db-slot-item 等の文字色(sumi-fg-dim = 明るい系、
+     PC版 background:transparent で公式BG=暗い画像の上に乗る前提の色設計)とコントラストが
+     合わなくなった (兄貴指摘)。既存の文字色トークンを変えずに済む墨色背景に変更
+     (sumi-2 = 墨色基本形、sumi-1 は使用NG、兄貴指摘 2026-07-13) */
+  background: var(--sumi-2);
+}
+body.mobile-mode .wwm-footer-logo {
+  height: 12px;
+}
+body.mobile-mode .wwm-footer-creator {
+  font-size: 9px;
+}
+body.mobile-mode .wwm-footer-x {
+  margin: 0 4px;
+}
+body.mobile-mode .wwm-footer-x svg {
+  width: 10px;
+  height: 10px;
+}
+body.mobile-mode .wwm-footer-kofi {
+  width: 15px;
+  height: 15px;
+  margin-left: 4px;
+}
+body.mobile-mode .wwm-footer-kofi svg {
+  width: 9px;
+  height: 9px;
 }
 
 } /* end @layer components */

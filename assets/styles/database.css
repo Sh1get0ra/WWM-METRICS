@@ -17,6 +17,12 @@
   .wwm-app[data-mode="database"] .hero {
     display: none;
   }
+  /* mobile-v2.css の `body.mobile-mode .hero.hero-wuxia { display: grid; }` (class詳細度3+type1) が
+     上記 `.hero`(class詳細度3+type0) を上回り DB画面表示中も hero が残存、DB本体を圧迫していた
+     (兄貴指摘 2026-07-13)。 body prefix を足して確実に上書きする */
+  body.mobile-mode .wwm-app[data-mode="database"] .hero {
+    display: none;
+  }
   /* rail掛軸 (.wwm-rail-in::beforeと同一手法) を .wwm-db-gear-list でなく .wwm-database 全体に敷く
      (元は.wwm-db-gear-list限定だったため、footer行の左側だけ掛軸が途切れて見えた。兄貴指摘2026-07-05
      「wwm-db-gear-listが途中で途切れてて不自然」→ tabs行〜footer行まで一貫させるため.wwm-databaseへ移動) */

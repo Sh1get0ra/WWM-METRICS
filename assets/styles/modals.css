@@ -3349,6 +3349,20 @@
   box-shadow: none;
 }
 
+/* NOTE modal 冒頭 disclaimer (2026-07-13 兄貴指示: footer(PC/モバイル共通)から
+   unofficial/copyright 表記を撤去、NOTE 冒頭に集約。footer は Created by 行のみ残す) */
+.wwm-note-disclaimer {
+  margin: 0;
+  padding: 6px var(--space-4);
+  font-size: var(--text-11);
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0.02em;
+  position: relative;
+  /* 直下 .wwm-tool-tabs の overlay (L3360) と同値、水墨背景上の可読性確保 */
+  background: rgba(0, 0, 0, 0.5);
+}
+
 /* タブ行 (NOTE / 飛簡 共用): 墨帯に並び、active = 紙の差し込み (紙 body へ繋がる —
    workspace 帳簿フォルダ tab と同文法)。
    2026-06-19 兄貴指示: header + tabs 連続 1 枚水墨。 tabs に薄黒 overlay (#0000004f ≈ 0.31)
