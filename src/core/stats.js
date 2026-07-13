@@ -161,7 +161,9 @@ const KONGFU_SPECIFIC_PREFIXES = [
   { prefix: 'umb',           kongfus: [20601] },
   { prefix: 'mortalRopeDart',kongfus: [20701] },
   { prefix: 'unfetteredRopeDart', kongfus: [20702] },
-  { prefix: 'snowparting',   kongfus: [20801] }
+  { prefix: 'snowparting',   kongfus: [20801] },
+  { prefix: 'heavenwillGauntlets', kongfus: [20901] },
+  { prefix: 'skygraspRopeDart',    kongfus: [20703] }
 ];
 
 // ── 装備最適化用: affix statKey 生死判定 (score 到達性) ──────────
