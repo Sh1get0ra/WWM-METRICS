@@ -862,7 +862,7 @@ body.mobile-mode .wwm-footer {
   /* iPhone ホームインジケーター領域 (env(safe-area-inset-bottom)) 対応漏れ、
      bottom-nav (既存 L465) には元々あったが footer 新設時に見落としていた
      (2026-07-13、実機で「悪化してる」指摘の一因と判明) */
-  padding: 6px 12px calc(6px + env(safe-area-inset-bottom));
+  padding: 6px 12px calc(3px + env(safe-area-inset-bottom));
   row-gap: 0;
   position: fixed;
   left: 0;
@@ -883,7 +883,7 @@ body.mobile-mode .wwm-footer-logo {
   height: 12px;
 }
 body.mobile-mode .wwm-footer-creator {
-  font-size: 9px;
+  font-size: 12px;
 }
 body.mobile-mode .wwm-footer-x {
   margin: 0 4px;
