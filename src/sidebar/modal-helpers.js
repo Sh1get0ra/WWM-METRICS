@@ -170,12 +170,11 @@
           <h2><span class="wwm-tool-title-ja" data-i18n="noteTitleJa" data-kaisho="noteTitleJa">${titleJa}</span><span class="wwm-tool-seal">${seal}</span></h2>
           <button class="wwm-modal-close" id="wwmNoteClose" aria-label="${btnClose}">×</button>
         </div>
-        <p class="wwm-note-disclaimer">${unofficialText} © NetEase, Inc. All Rights Reserved. © Everstone Studio.</p>
         <div class="wwm-tool-tabs">
           <button class="wwm-tool-tab ${defaultTab==='spec'?'active':''}" data-tab="spec">${tabSpec}</button>
           <button class="wwm-tool-tab ${defaultTab==='changelog'?'active':''}" data-tab="changelog">${tabCl}</button>
         </div>
-        <div class="wwm-modal-body wwm-ws-paper" id="wwmNoteTabSpec" style="display:${defaultTab==='spec'?'block':'none'};">${_specHtml()}</div>
+        <div class="wwm-modal-body wwm-ws-paper" id="wwmNoteTabSpec" style="display:${defaultTab==='spec'?'block':'none'};">${_specHtml()}<p class="wwm-note-disclaimer"><span class="wwm-note-disclaimer-line">${unofficialText}</span><span class="wwm-note-disclaimer-line">© NetEase, Inc. All Rights Reserved. © Everstone Studio.</span></p></div>
         <div class="wwm-modal-body wwm-ws-paper" id="wwmNoteTabChangelog" style="display:${defaultTab==='changelog'?'block':'none'};">${_changelogHtml(entries)}</div>
         <div class="wwm-tool-modal-footer">
           <button type="button" class="wwm-btn-secondary" id="wwmNoteTourBtn">${btnTour}</button>

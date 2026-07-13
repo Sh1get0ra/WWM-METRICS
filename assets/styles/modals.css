@@ -3349,18 +3349,23 @@
   box-shadow: none;
 }
 
-/* NOTE modal 冒頭 disclaimer (2026-07-13 兄貴指示: footer(PC/モバイル共通)から
-   unofficial/copyright 表記を撤去、NOTE 冒頭に集約。footer は Created by 行のみ残す) */
+/* NOTE modal 仕様タブ末尾 disclaimer (2026-07-13 兄貴指示: footer から NOTE 冒頭へ集約した後、
+   さらに仕様タブ本文 (_specHtml) 末尾へ再配置。墨背景→紙背景になるため赤字強調に変更、
+   Unofficial宣言/著作権表記の2行を続けて書かず分離表示) */
 .wwm-note-disclaimer {
-  margin: 0;
-  padding: 6px var(--space-4);
+  margin: var(--space-4) 0 0;
+  padding-top: var(--space-3);
+  border-top: 1px solid color-mix(in oklab, var(--vermilion) 30%, transparent);
   font-size: var(--text-11);
-  color: #fff;
   text-align: center;
   letter-spacing: 0.02em;
-  position: relative;
-  /* 直下 .wwm-tool-tabs の overlay (L3360) と同値、水墨背景上の可読性確保 */
-  background: rgba(0, 0, 0, 0.5);
+}
+.wwm-note-disclaimer-line {
+  display: block;
+  color: var(--vermilion);
+}
+.wwm-note-disclaimer-line + .wwm-note-disclaimer-line {
+  margin-top: 4px;
 }
 
 /* タブ行 (NOTE / 飛簡 共用): 墨帯に並び、active = 紙の差し込み (紙 body へ繋がる —
