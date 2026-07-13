@@ -1266,8 +1266,6 @@ html[lang="vi"] .wwm-ws-tab { font-size: 17px; }
   color: var(--kami-fg); /* 紙 bg 上 = 墨色文字 (sumi-fg 系 = 紙と同化のため上書き) */
 }
 /* dim 廃止 (兄貴指示) — opacity 0.7 → 1。 文字色 (kami-fg) で十分視認 */
-.wwm-ws-main .wwm-footer .wwm-footer-unofficial,
-.wwm-ws-main .wwm-footer .wwm-footer-copy,
 .wwm-ws-main .wwm-footer .wwm-footer-creator {
   opacity: 1;
 }
@@ -1460,7 +1458,7 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
    mock/cards-r5.html → .wwm-ws-paper scope へ移植。
    木札 base = 光沢仕上げ → 墨パネル上 70% → 公式アイコン img+filter silhouette →
    流派 mini墨splat → 板地むき出し → 墨書 score 専用パネル。
-   class 名 = mock 互換 (plank-* そのまま採用、 既存 .wwm-equip-icon-wrap 等は
+   class 名 = mock 互換 (plank-* そのまま採用、 既存 .wwm-equip-rail 等は
    display:none で隠す)。
    ============================================================ */
 .wwm-ws-paper {
@@ -1550,12 +1548,9 @@ html:not(.wwm-view-sidebar) body.wwm-layout-active {
     0 8px 20px rgba(0,0,0,0.6);
 }
 
-/* 既存子 component の隠蔽 (rail / icon-wrap / slot-inner / liupai-badge / score) —
+/* 既存子 component の隠蔽 (rail / score) —
    plank-* 子要素に置換するため非表示 */
 .wwm-ws-paper .wwm-equip-slot .wwm-equip-rail,
-.wwm-ws-paper .wwm-equip-slot .wwm-equip-icon-wrap,
-.wwm-ws-paper .wwm-equip-slot .wwm-equip-slot-inner,
-.wwm-ws-paper .wwm-equip-slot .wwm-equip-liupai-badge,
 .wwm-ws-paper .wwm-xinfa-slot .wwm-xinfa-rail,
 .wwm-ws-paper .wwm-xinfa-slot .wwm-xinfa-icon-wrap,
 .wwm-ws-paper .wwm-xinfa-slot .wwm-xinfa-inner,

@@ -294,7 +294,6 @@ html.wwm-shared-build-mode #importBtn {
     position: absolute;
     top: -6px; bottom: -6px; left: -2px; right: -2px;
   }
-  .wwm-diag-badge-text { display: none; }
 }
 
 } /* end @layer components */

@@ -52,8 +52,6 @@
     background: var(--kami-0);
     color: var(--kami-fg);
   }
-  .wwm-database .wwm-footer .wwm-footer-unofficial,
-  .wwm-database .wwm-footer .wwm-footer-copy,
   .wwm-database .wwm-footer .wwm-footer-creator {
     opacity: 1;
   }

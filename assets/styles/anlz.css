@@ -482,29 +482,6 @@
   overflow: hidden;
 }
 
-.wwm-diag-header {
-  display: flex; align-items: center; gap: var(--space-3);
-  margin-bottom: var(--space-2);
-}
-
-.wwm-diag-rail {
-  font-family: var(--f-display-title); font-weight: var(--fw-black);
-  font-size: var(--text-md); letter-spacing: 0.25em;
-  color: var(--vermilion-bright);
-  text-shadow: 0 0 10px color-mix(in oklab, var(--vermilion-bright) 40%, transparent);
-}
-
-.wwm-diag-title {
-  margin: 0; font-family: var(--f-latin);
-  font-size: var(--text-14); font-weight: var(--fw-bold);
-  color: var(--gold-bright); letter-spacing: 0.12em;
-}
-
-.wwm-diag-body {
-  display: grid; grid-template-columns: repeat(2, 1fr);
-  gap: 6px 16px;
-}
-
 .wwm-diag-item {
   display: flex; align-items: flex-start; gap: var(--space-2);
   font-size: var(--text-12); line-height: 1.4;
@@ -767,13 +744,6 @@ html[lang="ko"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
 .wwm-cmp-modal-a .wwm-cmp-pvp-locked .wwm-cmp-unit,
 .wwm-cmp-modal-a .wwm-cmp-pvp-locked .wwm-cmp-ratio { visibility: hidden; }
 
-/* critique P1 (2026-06-07): vermilion-bright on 朱tint 3.83:1 fail → lang-active token (朱影地金文字) */
-.wwm-mobile-drawer-langs .lang-btn.active {
-  background: var(--vermilion-deep);
-  border-color: var(--vermilion);
-  color: var(--c-lang-active-fg);
-}
-
 /* light#124 (.wwm-anlz-bamboo svg path fill) は workspace.css の .wwm-ws-paper scope へ移植 (2026-06-11 単一テーマ化) */
 
 /* S2-g co-locate (T): light#125 L984 */
@@ -785,10 +755,6 @@ html[lang="ko"] #wwmAnalysisTabs.wwm-anlz-tabs .wwm-analysis-tab {
 /* S2-g co-locate (T): light#126 L995 */
 @media (max-width: 900px) {
   .wwm-rank-grid { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 768px) {
-  .wwm-diag-body { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {

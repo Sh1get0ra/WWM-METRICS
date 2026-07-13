@@ -65,59 +65,6 @@ html.wwm-view-sidebar .wwm-rail-in {
     border-bottom: 1px solid var(--ink-2);
     min-height: 44px;
   }
-  /* ── ステFAB + 全画面 stat overlay (Task 4 維持の mobile 機構) ──
-     FAB box / overlay-body は .wwm-app 外の独立 UI、 mobile.css は
-     FAB avatar/fallback と overlay 枠のみ持つ → FAB 本体 box はここが家 */
-  body.wwm-layout-active .wwm-mobile-stat-fab {
-    display: inline-flex;
-    align-items: center; justify-content: center;
-    position: fixed;
-    right: calc(12px + var(--safe-right, 0px));
-    bottom: calc(48px + var(--safe-bottom, 0px));
-    width: 56px; height: 56px;
-    padding: 0;
-    background: var(--bg-mobile-overlay);
-    border: 2px solid var(--gold);
-    border-radius: 50%;
-    box-shadow: var(--c-mobile-fab-shadow);
-    cursor: pointer;
-    z-index: 1100;
-    overflow: hidden;
-    touch-action: none;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-  }
-  body.wwm-layout-active .wwm-mobile-stat-fab[hidden] { display: none; }
-  body.wwm-layout-active .wwm-mobile-stat-fab:active { transform: scale(0.94); }
-  .wwm-mobile-stat-overlay-body {
-    flex: 1 1 auto;
-    overflow-y: auto;
-    padding: var(--space-2) var(--space-2-5) var(--space-4);
-    scrollbar-color: var(--gold-deep) transparent;
-  }
-  .wwm-mobile-stat-overlay-body::-webkit-scrollbar { width: 6px; }
-  .wwm-mobile-stat-overlay-body::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 3px; }
-  /* overlay 内 sidebar 表示 rule は styles-components.css の PC sidebar rule 直後へ
-     co-locate move 済 (2026-06-05 Step 1 hotfix): 両者 imp の layer 反転 flip 根治。
-     imp 同士は spec 比較 = file 位置無関係で現 cascade 不変 */
-  /* mini-hero-card 上部固定: overlay-body 直下に出して sticky 復活 (sidebar-test 内では効かない場合の保険として padding 構造合わせ) */
-  body.wwm-layout-active .wwm-mobile-stat-overlay-body {
-    position: relative;
-  }
-  body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sidebar-test {
-    overflow: visible;
-  }
-  body.wwm-layout-active .wwm-mobile-stat-overlay-body .wwm-sb-mini-hero-card {
-    position: sticky;
-    top: -8px;
-    z-index: 20;
-    margin: -8px -10px 8px;
-    padding: var(--space-2-5) var(--space-3);
-    background: var(--sumi-3);
-    border: 1px solid var(--gold-deep);
-    box-shadow: 0 6px 14px var(--shadow-mid);
-  }
 }
 
 } /* end @layer components */

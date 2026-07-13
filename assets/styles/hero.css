@@ -52,8 +52,6 @@
 /* 著作権表記 (ゲーム内 asset 使用のため必須 — カード footer と同文言、2026-06-08 兄貴指示)。
    2026-06-16 兄貴指示 — flex-wrap で自然折返: 広 = 1 行 (logo + ①②③ 全横並び)、
    縮むに従って ③ → ② → ① の順に wrap、 最狭で 4 行。 強制改行 (flex-basis:100%) なし */
-.wwm-footer-unofficial,
-.wwm-footer-copy,
 .wwm-footer-creator {
   margin: 0;
   font-size: 12px;

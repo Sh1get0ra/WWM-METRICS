@@ -533,9 +533,6 @@ body.mobile-mode .wwm-app[data-mode="database"] .wwm-bn-db { display: flex; }
 /* 上部 .wwm-db-tabs は bottom-nav に統合したため mobile では重複表示、非表示化 */
 body.mobile-mode .wwm-db-tabs { display: none; }
 
-/* ============ SHARE modal OBS section (mobile = OBS PC 専用なので hide) ============ */
-body.mobile-mode .wwm-share-obs-block { display: none; }
-
 /* ============ lang dd popup mobile = body 直下 DOM 移動済 (workspace.js relocateLangPop)、 fixed 全幅 ============
    .wwm-app isolation:isolate stacking context 外で表示するため JS で body 直下 reparent + ここで mobile 位置設定。
    PC は anchor (.wwm-lang-dd) の中 absolute right:0 のまま (workspace.css L884)。 */

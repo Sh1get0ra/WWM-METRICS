@@ -117,16 +117,7 @@ html.wwm-view-sidebar .wwm-sb-section-title {
   html.wwm-view-sidebar .hero-wuxia,
   html.wwm-view-sidebar .ink-stroke,
   html.wwm-view-sidebar body.wwm-layout-active .wwm-mobile-topbar,
-  html.wwm-view-sidebar .wwm-mobile-top-reset,
-  html.wwm-view-sidebar .wwm-mobile-hero-reset,
-  html.wwm-view-sidebar .wwm-mobile-anlz-btn,
-  html.wwm-view-sidebar .wwm-mobile-drawer,
-  html.wwm-view-sidebar .wwm-mobile-drawer-backdrop,
-  html.wwm-view-sidebar body.wwm-layout-active .wwm-mobile-stat-fab,
-  html.wwm-view-sidebar .wwm-mobile-stat-overlay-backdrop,
-  html.wwm-view-sidebar .wwm-mobile-stat-overlay,
-  html.wwm-view-sidebar .wwm-mobile-anlz-overlay-backdrop,
-  html.wwm-view-sidebar .wwm-mobile-anlz-overlay {
+  html.wwm-view-sidebar .wwm-mobile-drawer {
     display: none;
   }
 }
