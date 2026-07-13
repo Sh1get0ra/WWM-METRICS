@@ -1,6 +1,72 @@
 {
-  "current": "2.5.3",
+  "current": "2.6.0",
   "entries": [
+    {
+      "version": "2.6.0",
+      "date": "2026-07-13",
+      "items": [
+        {
+          "featured": true,
+          "ja": "【DB画面 (データベースモード) を追加】 装備・心法・武術のマスタデータをキャラクター非依存で閲覧できる専用画面を追加しました。ヘッダーのDBアイコンから切替できます。装備タブでは調律の出現確率、心法タブではWorldLv別の効果数値、武術タブでは才能の突破段階や技のダメージ係数を確認できます。",
+          "en": "[Added DB Screen (Database Mode)] Added a dedicated screen for browsing equipment, Inner Way, and martial arts master data, independent of your character. Switch via the DB icon in the header. The Equipment tab shows tuning appearance rates, the Inner Way tab shows values by World-Lv, and the Martial Arts tab shows talent breakthrough stages and skill damage coefficients.",
+          "zh": "【新增DB界面 (数据库模式)】 新增了可浏览装备、心法、武术主数据的专用界面, 与角色无关。 可从头部的DB图标切换。 装备标签页可查看调律出现概率, 心法标签页可查看按WorldLv划分的数值, 武术标签页可查看才能突破阶段与技能伤害系数。",
+          "ko": "【DB 화면 (데이터베이스 모드) 추가】 캐릭터와 무관하게 장비·심법·무술 마스터 데이터를 볼 수 있는 전용 화면을 추가했습니다. 헤더의 DB 아이콘으로 전환할 수 있습니다. 장비 탭에서는 조율 출현 확률, 심법 탭에서는 WorldLv별 수치, 무술 탭에서는 재능 돌파 단계와 기술 데미지 계수를 확인할 수 있습니다.",
+          "vi": "[Thêm màn hình DB (Chế độ Cơ sở dữ liệu)] Đã thêm màn hình chuyên dụng để xem dữ liệu gốc trang bị, tâm pháp, võ học, không phụ thuộc nhân vật. Chuyển bằng biểu tượng DB trên header. Tab Trang bị hiển thị tỷ lệ xuất hiện điều luật, tab Tâm pháp hiển thị giá trị theo WorldLv, tab Võ học hiển thị giai đoạn đột phá thiên phú và hệ số sát thương chiêu thức.",
+          "de": "[DB-Bildschirm (Datenbankmodus) hinzugefügt] Ein eigener Bildschirm zum Durchsuchen von Ausrüstungs-, Inneren-Wege- und Kampfkunst-Stammdaten wurde hinzugefügt, unabhängig vom Charakter. Wechseln über das DB-Symbol im Header. Der Ausrüstungs-Tab zeigt Tuning-Erscheinungschancen, der Innerer-Weg-Tab Werte nach World-Lv, der Kampfkunst-Tab Talent-Durchbruchsstufen und Fertigkeiten-Schadenskoeffizienten.",
+          "es": "[Pantalla de BD (Modo Base de Datos) añadida] Se añadió una pantalla dedicada para explorar datos maestros de equipo, vías internas y artes marciales, independiente del personaje. Cambia con el icono de BD en el encabezado. La pestaña de equipo muestra probabilidades de aparición de tuning, la de vías internas muestra valores por World-Lv, y la de artes marciales muestra etapas de avance de talento y coeficientes de daño de habilidades.",
+          "fr": "[Écran BD (Mode Base de données) ajouté] Un écran dédié pour parcourir les données de référence équipement, voies intérieures et arts martiaux a été ajouté, indépendant du personnage. Changez via l'icône BD dans l'en-tête. L'onglet Équipement affiche les probabilités d'apparition des tunings, l'onglet Voies intérieures les valeurs par World-Lv, et l'onglet Arts martiaux les paliers de percée de talent et les coefficients de dégâts des techniques.",
+          "pt_br": "[Tela de BD (Modo Banco de Dados) adicionada] Foi adicionada uma tela dedicada para navegar dados mestres de equipamento, caminhos internos e artes marciais, independente do personagem. Alterne pelo ícone de BD no cabeçalho. A aba de equipamento mostra as chances de aparição de tuning, a de caminhos internos mostra valores por World-Lv, e a de artes marciais mostra estágios de avanço de talento e coeficientes de dano de habilidades.",
+          "ru": "[Добавлен экран БД (режим базы данных)] Добавлен отдельный экран для просмотра базовых данных экипировки, внутренних путей и боевых искусств, не зависящих от персонажа. Переключайте через значок БД в шапке. Вкладка экипировки показывает вероятность появления настроек, вкладка внутренних путей — значения по World-Lv, вкладка боевых искусств — этапы прорыва таланта и коэффициенты урона навыков.",
+          "th": "[เพิ่มหน้าจอฐานข้อมูล (โหมดฐานข้อมูล)] เพิ่มหน้าจอเฉพาะสำหรับดูข้อมูลหลักของอุปกรณ์ วิถีใน และศิลปะการต่อสู้ ไม่ขึ้นกับตัวละคร สลับได้จากไอคอน DB บนส่วนหัว แท็บอุปกรณ์แสดงโอกาสปรากฏของ Tuning แท็บวิถีในแสดงค่าตาม World-Lv แท็บศิลปะการต่อสู้แสดงขั้นตอนการทะลวงพรสวรรค์และค่าสัมประสิทธิ์ความเสียหายของท่า",
+          "zh_tw": "【新增DB介面 (資料庫模式)】 新增了可瀏覽裝備、心法、武術主數據的專用介面, 與角色無關。 可從頭部的DB圖示切換。 裝備標籤頁可查看調律出現機率, 心法標籤頁可查看按WorldLv劃分的數值, 武術標籤頁可查看才能突破階段與技能傷害係數。"
+        },
+        {
+          "featured": false,
+          "ja": "【武術才能の突破段階を見直し】 キャラクターLvに応じて才能の上限値が自動的に反映されるよう調整しました。武格指数の計算精度が向上します。",
+          "en": "[Martial Arts Talent Tuning] Talent caps now adjust automatically based on your character Lv. Improves Martial Index calculation accuracy.",
+          "zh": "【武术才能突破阶段调整】 才能上限值现会根据角色Lv自动反映。 提升武格指数计算精度。",
+          "ko": "【무술 재능 돌파 단계 조정】 재능 상한값이 캐릭터 Lv에 따라 자동으로 반영되도록 조정했습니다. 무격 지수 계산 정확도가 향상됩니다.",
+          "vi": "[Điều chỉnh giai đoạn đột phá Thiên phú Võ học] Giới hạn thiên phú giờ tự động phản ánh theo Lv nhân vật. Cải thiện độ chính xác tính toán Chỉ số Võ cách.",
+          "de": "[Anpassung der Kampfkunst-Talent-Durchbruchsstufen] Talent-Obergrenzen passen sich nun automatisch an dein Charakter-Lv an. Verbessert die Genauigkeit der Kampfindex-Berechnung.",
+          "es": "[Ajuste de etapas de avance de talento de artes marciales] Los límites de talento ahora se ajustan automáticamente según tu Lv de personaje. Mejora la precisión del cálculo del Índice Marcial.",
+          "fr": "[Ajustement des paliers de percée de talent d'arts martiaux] Les plafonds de talent s'ajustent désormais automatiquement selon votre Lv de personnage. Améliore la précision du calcul de l'Indice Martial.",
+          "pt_br": "[Ajuste dos estágios de avanço de talento de artes marciais] Os limites de talento agora se ajustam automaticamente de acordo com o Lv do seu personagem. Melhora a precisão do cálculo do Índice Marcial.",
+          "ru": "[Корректировка этапов прорыва таланта боевых искусств] Пределы таланта теперь автоматически подстраиваются под уровень вашего персонажа. Повышает точность расчёта боевого индекса.",
+          "th": "[ปรับขั้นตอนการทะลวงพรสวรรค์ศิลปะการต่อสู้] ขีดจำกัดพรสวรรค์จะสะท้อนอัตโนมัติตาม Lv ตัวละครของคุณ เพิ่มความแม่นยำในการคำนวณดัชนียุทธ์",
+          "zh_tw": "【武術才能突破階段調整】 才能上限值現會根據角色Lv自動反映。 提升武格指數計算精度。"
+        },
+        {
+          "featured": false,
+          "ja": "【左側パネルの見出しデザインを刷新】 見出しを「武録」に改名し、墨面に紙片が浮かぶような演出のデザインへ統一しました。表示のみで計算結果には影響ありません。",
+          "en": "[Left Panel Heading Redesign] Renamed the heading to \"Martial Record\" and unified the design with a paper-on-ink visual style. Visual only — no impact on calculations.",
+          "zh": "【左侧面板标题设计更新】 标题改名为「武录」, 统一为纸片浮于墨面的演出设计。 仅影响显示, 不影响计算结果。",
+          "ko": "【좌측 패널 제목 디자인 개편】 제목을 「무록」으로 변경하고, 먹빛 위에 종이가 떠 있는 듯한 연출 디자인으로 통일했습니다. 표시만의 문제로 계산 결과에는 영향 없습니다.",
+          "vi": "[Thiết kế lại tiêu đề bảng bên trái] Đổi tên tiêu đề thành \"Võ Lục\" và thống nhất thiết kế theo phong cách giấy nổi trên mực. Chỉ ảnh hưởng giao diện — không ảnh hưởng tính toán.",
+          "de": "[Neugestaltung der linken Panel-Überschrift] Überschrift in „Kampfaufzeichnung“ umbenannt und auf einen Papier-auf-Tinte-Look vereinheitlicht. Nur visuell — keine Auswirkung auf Berechnungen.",
+          "es": "[Rediseño del encabezado del panel izquierdo] Se renombró el encabezado a \"Registro Marcial\" y se unificó el diseño con un estilo visual de papel sobre tinta. Solo visual — sin impacto en los cálculos.",
+          "fr": "[Refonte de l'en-tête du panneau gauche] En-tête renommé en « Registre Martial » et design unifié avec un style visuel papier sur encre. Visuel uniquement — aucun impact sur les calculs.",
+          "pt_br": "[Redesign do cabeçalho do painel esquerdo] Cabeçalho renomeado para \"Registro Marcial\" e design unificado com estilo visual de papel sobre tinta. Apenas visual — sem impacto nos cálculos.",
+          "ru": "[Редизайн заголовка левой панели] Заголовок переименован в «Боевая летопись», дизайн унифицирован в стиле бумаги на чернилах. Только визуально — не влияет на расчёты.",
+          "th": "[ปรับดีไซน์หัวข้อแผงด้านซ้าย] เปลี่ยนชื่อหัวข้อเป็น \"บันทึกยุทธ์\" และรวมดีไซน์เป็นสไตล์กระดาษลอยบนหมึก ส่งผลเฉพาะการแสดงผล ไม่ส่งผลต่อการคำนวณ",
+          "zh_tw": "【左側面板標題設計更新】 標題改名為「武錄」, 統一為紙片浮於墨面的演出設計。 僅影響顯示, 不影響計算結果。"
+        },
+        {
+          "featured": false,
+          "ja": "【支援ボタンの配置を変更】 応援用のKo-fiボタンをヘッダーからフッターへ移動しました。",
+          "en": "[Support Button Relocated] Moved the Ko-fi support button from the header to the footer.",
+          "zh": "【支持按钮位置调整】 将Ko-fi支持按钮从头部移动到了底部。",
+          "ko": "【후원 버튼 위치 변경】 Ko-fi 후원 버튼을 헤더에서 푸터로 이동했습니다.",
+          "vi": "[Di chuyển nút Hỗ trợ] Đã chuyển nút hỗ trợ Ko-fi từ header xuống footer.",
+          "de": "[Support-Button verschoben] Der Ko-fi-Support-Button wurde vom Header in die Fußzeile verschoben.",
+          "es": "[Botón de apoyo reubicado] Se movió el botón de apoyo Ko-fi del encabezado al pie de página.",
+          "fr": "[Bouton de soutien déplacé] Le bouton de soutien Ko-fi a été déplacé de l'en-tête vers le pied de page.",
+          "pt_br": "[Botão de apoio reposicionado] O botão de apoio Ko-fi foi movido do cabeçalho para o rodapé.",
+          "ru": "[Кнопка поддержки перемещена] Кнопка поддержки Ko-fi перемещена из шапки в подвал.",
+          "th": "[ย้ายปุ่มสนับสนุน] ย้ายปุ่มสนับสนุน Ko-fi จากส่วนหัวไปยังส่วนท้าย",
+          "zh_tw": "【支持按鈕位置調整】 將Ko-fi支持按鈕從頭部移動到了底部。"
+        }
+      ]
+    },
     {
       "version": "2.5.3",
       "date": "2026-07-04",
