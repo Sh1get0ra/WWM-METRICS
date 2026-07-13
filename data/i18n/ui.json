@@ -279,20 +279,6 @@
     "th": "อยู่ระหว่างปรับปรุง ยังใช้งานไม่ได้",
     "zh_tw": "施工中，暫不可用"
   },
-  "cardModalTitle": {
-    "ja": "キャラクターカード生成",
-    "en": "Generate Character Card",
-    "zh": "生成角色卡片",
-    "ko": "캐릭터 카드 생성",
-    "vi": "Tạo Thẻ Nhân vật",
-    "de": "Charakterkarte erstellen",
-    "es": "Generar tarjeta de personaje",
-    "fr": "Générer la carte de personnage",
-    "pt_br": "Gerar cartão de personagem",
-    "ru": "Создать карточку персонажа",
-    "th": "สร้างการ์ดตัวละคร",
-    "zh_tw": "產生角色卡片"
-  },
   "cardTplSection": {
     "ja": "テンプレート",
     "en": "Template",
@@ -1133,20 +1119,6 @@
     "th": "หากต้องการนำเข้าอีกครั้ง ให้คลิกปุ่มนำเข้านี้<br>สามารถลากย้ายได้อิสระ วางไว้ตรงไหนก็ได้ตามต้องการ",
     "zh_tw": "需要再次匯入時, 請點擊此匯入按鈕。<br>可自由拖曳, 請放置在喜歡的位置。"
   },
-  "exportBtn": {
-    "ja": "EXPORT",
-    "en": "EXPORT",
-    "zh": "导出",
-    "ko": "내보내기",
-    "vi": "XUẤT",
-    "de": "EXPORT",
-    "es": "EXPORTAR",
-    "fr": "EXPORTER",
-    "pt_br": "EXPORTAR",
-    "ru": "ЭКСПОРТ",
-    "th": "ส่งออก",
-    "zh_tw": "匯出"
-  },
   "resetBtn": {
     "ja": "RESET",
     "en": "RESET",
@@ -1510,34 +1482,6 @@
     "ru": "ЗАМЕТКИ",
     "th": "บันทึก",
     "zh_tw": "筆記"
-  },
-  "themeLight": {
-    "ja": "ライト",
-    "en": "LIGHT",
-    "zh": "浅色",
-    "ko": "라이트",
-    "vi": "Sáng",
-    "de": "HELL",
-    "es": "CLARO",
-    "fr": "CLAIR",
-    "pt_br": "CLARO",
-    "ru": "СВЕТЛАЯ",
-    "th": "สว่าง",
-    "zh_tw": "淺色"
-  },
-  "themeDark": {
-    "ja": "ダーク",
-    "en": "DARK",
-    "zh": "深色",
-    "ko": "다크",
-    "vi": "Tối",
-    "de": "DUNKEL",
-    "es": "OSCURO",
-    "fr": "SOMBRE",
-    "pt_br": "ESCURO",
-    "ru": "ТЁМНАЯ",
-    "th": "มืด",
-    "zh_tw": "深色"
   },
   "importSetupTitle": {
     "ja": "引燕",
@@ -2239,20 +2183,6 @@
     "th": "ข้อเสนอปรับแต่งอุปกรณ์",
     "zh_tw": "裝備最佳化提議"
   },
-  "diagTitle": {
-    "ja": "弱点指摘 / Diagnostics",
-    "en": "Diagnostics",
-    "zh": "弱点指摘 / Diagnostics",
-    "ko": "약점 진단 / Diagnostics",
-    "vi": "Chỉ điểm yếu / Diagnostics",
-    "de": "Schwachstellen / Diagnostics",
-    "es": "Puntos débiles / Diagnostics",
-    "fr": "Points faibles / Diagnostics",
-    "pt_br": "Pontos fracos / Diagnostics",
-    "ru": "Слабые места / Diagnostics",
-    "th": "จุดอ่อน / Diagnostics",
-    "zh_tw": "弱點指摘 / Diagnostics"
-  },
   "diagHitOver": {
     "ja": "命中率過多 (現 {0}% / cap {1}% / 超過 +{2}%)",
     "en": "Precision overflow (cur {0}% / cap {1}% / +{2}% over)",
@@ -2421,20 +2351,6 @@
     "th": "เปรียบเทียบ",
     "zh_tw": "武具對照"
   },
-  "cmpTitleEn": {
-    "ja": "COMPARISON",
-    "en": "COMPARISON",
-    "zh": "COMPARISON",
-    "ko": "COMPARISON",
-    "vi": "COMPARISON",
-    "de": "COMPARISON",
-    "es": "COMPARISON",
-    "fr": "COMPARISON",
-    "pt_br": "COMPARISON",
-    "ru": "COMPARISON",
-    "th": "COMPARISON",
-    "zh_tw": "COMPARISON"
-  },
   "cmpApply": {
     "ja": "採用",
     "en": "Apply",
@@ -2449,20 +2365,6 @@
     "th": "ใช้",
     "zh_tw": "採用"
   },
-  "optZerobaseCompare": {
-    "ja": "格析",
-    "en": "Zero-Base",
-    "zh": "零基对照",
-    "ko": "제로베이스",
-    "vi": "So sánh nền 0",
-    "de": "Zero-Base",
-    "es": "Base cero",
-    "fr": "Base zéro",
-    "pt_br": "Base zero",
-    "ru": "С нуля",
-    "th": "ฐานศูนย์",
-    "zh_tw": "零基對照"
-  },
   "anlzTabZerobase": {
     "ja": "外功vs属性",
     "en": "Phys vs Elem",
@@ -2476,34 +2378,6 @@
     "ru": "Физ vs Стихии",
     "th": "กายภาพ vs ธาตุ",
     "zh_tw": "外功vs屬性"
-  },
-  "optZerobaseCompareTip": {
-    "ja": "武器系 affix#6 = 無相貫通/外功貫通 固定 で並列比較 (属性 vs 物理)",
-    "en": "Compare weapon affix#6 fixed to Void Pen vs Phys Pen (element vs physical)",
-    "zh": "武器 affix#6 = 无相穿透/外功穿透 固定 并列对照 (属性 vs 物理)",
-    "ko": "무기 affix#6 = 무상관통/외공관통 고정 병렬 비교 (속성 vs 물리)",
-    "vi": "So sánh vũ khí affix#6 cố định Xuyên Vô Tướng vs Xuyên Ngoại Công",
-    "de": "Vergleich mit Waffen-Affix#6 fest auf Formlos-Durchdringung vs. Phys-Durchdringung (Elementar vs. Physisch)",
-    "es": "Compara con el afijo#6 de arma fijado en Pen. Sin Forma vs Pen. Física (elemental vs físico)",
-    "fr": "Compare avec l'affixe#6 d'arme fixé sur Pén. Informe vs Pén. Physique (élémentaire vs physique)",
-    "pt_br": "Compara com o afixo#6 da arma fixado em Pen. Sem Forma vs Pen. Física (elemental vs físico)",
-    "ru": "Параллельное сравнение с аффиксом#6 оружия, зафиксированным на пробивании Без формы vs физическом (стихии vs физика)",
-    "th": "เปรียบเทียบโดยตรึงค่าเสริม#6 ของอาวุธเป็น เจาะไร้รูปร่าง vs เจาะกายภาพ (ธาตุ vs กายภาพ)",
-    "zh_tw": "武器 affix#6 = 無相穿透/外功穿透 固定 並列對照 (屬性 vs 物理)"
-  },
-  "optZerobaseTitle": {
-    "ja": "格析対照",
-    "en": "Zero-Base Compare",
-    "zh": "格析对照",
-    "ko": "격석 대조",
-    "vi": "Đối chiếu Nền 0",
-    "de": "Zero-Base-Vergleich",
-    "es": "Comparación base cero",
-    "fr": "Comparaison base zéro",
-    "pt_br": "Comparação base zero",
-    "ru": "Сравнение с нуля",
-    "th": "เปรียบเทียบฐานศูนย์",
-    "zh_tw": "格析對照"
   },
   "optZerobaseVoid": {
     "ja": "属性特化ビルド",
@@ -2560,34 +2434,6 @@
     "ru": "Ошибка расчёта",
     "th": "การคำนวณล้มเหลว",
     "zh_tw": "計算失敗"
-  },
-  "optZerobaseApplyVoid": {
-    "ja": "無相採用",
-    "en": "Apply Void",
-    "zh": "采用无相",
-    "ko": "무상 적용",
-    "vi": "Áp dụng Vô Tướng",
-    "de": "Formlos anwenden",
-    "es": "Aplicar Sin Forma",
-    "fr": "Appliquer Informe",
-    "pt_br": "Aplicar Sem Forma",
-    "ru": "Применить Без формы",
-    "th": "ใช้สายไร้รูปร่าง",
-    "zh_tw": "採用無相"
-  },
-  "optZerobaseApplyPhys": {
-    "ja": "外功採用",
-    "en": "Apply Phys",
-    "zh": "采用外功",
-    "ko": "외공 적용",
-    "vi": "Áp dụng Ngoại Công",
-    "de": "Phys anwenden",
-    "es": "Aplicar Físico",
-    "fr": "Appliquer Physique",
-    "pt_br": "Aplicar Físico",
-    "ru": "Применить физический",
-    "th": "ใช้สายกายภาพ",
-    "zh_tw": "採用外功"
   },
   "optZerobaseConfirm": {
     "ja": "この構成を採用しますか？\n現在の affix が全 slot で上書きされます (装備本体は keep)。",
@@ -2757,20 +2603,6 @@
     "th": "ใหม่",
     "zh_tw": "新置"
   },
-  "cmpDeltaLabel": {
-    "ja": "武格変動",
-    "en": "MARTIAL Δ",
-    "zh": "武格变动",
-    "ko": "무격 변동",
-    "vi": "Biến động Võ cách",
-    "de": "Index-Δ",
-    "es": "Δ de índice",
-    "fr": "Δ d'indice",
-    "pt_br": "Δ de índice",
-    "ru": "Δ индекса",
-    "th": "Δ ดัชนี",
-    "zh_tw": "武格變動"
-  },
   "xinfaTitleJa": {
     "ja": "心法対照",
     "en": "INNER WAY",
@@ -2910,20 +2742,6 @@
     "ru": "Оптимизация",
     "th": "ปรับแต่ง",
     "zh_tw": "最佳化"
-  },
-  "anlzTabHist": {
-    "ja": "履歴",
-    "en": "History",
-    "zh": "历史",
-    "ko": "이력",
-    "vi": "Lịch sử",
-    "de": "Verlauf",
-    "es": "Historial",
-    "fr": "Historique",
-    "pt_br": "Histórico",
-    "ru": "История",
-    "th": "บันทึกประวัติ",
-    "zh_tw": "歷史記錄"
   },
   "shareTitle": {
     "ja": "飛簡",
@@ -3541,20 +3359,6 @@
     "th": "สนับสนุนการพัฒนา (Ko-fi)",
     "zh_tw": "支持開發 (Ko-fi)"
   },
-  "kofiBtn": {
-    "ja": "応援",
-    "en": "Support",
-    "zh": "支持",
-    "ko": "응원",
-    "vi": "Ủng hộ",
-    "de": "Unterstützung",
-    "es": "Apoyo",
-    "fr": "Soutien",
-    "pt_br": "Suporte",
-    "ru": "Поддержка",
-    "th": "สนับสนุน",
-    "zh_tw": "應援"
-  },
   "tipIconContact": {
     "ja": "お問い合わせ (X / Twitter)",
     "en": "Contact (X / Twitter)",
@@ -4073,34 +3877,6 @@
     "th": "ชื่อตัวละคร",
     "zh_tw": "角色名稱"
   },
-  "importBaseStats": {
-    "ja": "基本ステータス",
-    "en": "Base Stats",
-    "zh": "基础属性",
-    "ko": "기본 스탯",
-    "vi": "Chỉ số cơ bản",
-    "de": "Grundattribute",
-    "es": "Atributos Básicos",
-    "fr": "Attributs de Base",
-    "pt_br": "Atributos Básicos",
-    "ru": "Базовые атрибуты",
-    "th": "คุณสมบัติพื้นฐาน",
-    "zh_tw": "基礎屬性"
-  },
-  "importSubStats": {
-    "ja": "副ステータス",
-    "en": "Sub Stats",
-    "zh": "副属性",
-    "ko": "부 스탯",
-    "vi": "Chỉ số phụ",
-    "de": "Nebenwerte",
-    "es": "Atributos secundarios",
-    "fr": "Attributs secondaires",
-    "pt_br": "Atributos secundários",
-    "ru": "Второстепенные характеристики",
-    "th": "ค่าสถานะรอง",
-    "zh_tw": "副屬性"
-  },
   "importLabelUID": {
     "ja": "UID",
     "en": "UID",
@@ -4311,20 +4087,6 @@
     "th": "บันทึกลำดับสกิลเป็นจังหวะ แล้วคำนวณ DPS คาดหวัง\nเปิดให้ใช้เร็ว ๆ นี้ พร้อมตารางค่าสัมประสิทธิ์วิชายุทธ์",
     "zh_tw": "將技能連招刻為律動，算出 DPS 期望值。\n與武術係數表一同近日公開。"
   },
-  "qishuPlaceholder": {
-    "ja": "整備中 — 奇術効果データの収載後、この区画に展開する。",
-    "en": "Under construction — This section will be populated once Mystic Arts effect data is available.",
-    "zh": "整备中 — 奇术效果数据收录后，此区块将予展开。",
-    "ko": "정비 중 — 비결 효과 데이터 수록 후 이 영역에 전개합니다.",
-    "vi": "Đang chuẩn bị — Khu vực này sẽ được mở sau khi có dữ liệu hiệu ứng Kỳ thuật.",
-    "de": "Im Aufbau — dieser Bereich wird gefüllt, sobald Effektdaten der Mystischen Künste vorliegen.",
-    "es": "En construcción — esta sección se completará cuando estén disponibles los datos de efectos de las artes místicas.",
-    "fr": "En construction — cette section sera remplie dès que les données d'effets des arts mystiques seront disponibles.",
-    "pt_br": "Em construção — esta seção será preenchida quando os dados de efeito das artes místicas estiverem disponíveis.",
-    "ru": "В разработке — раздел будет заполнен, когда появятся данные об эффектах мистических искусств.",
-    "th": "อยู่ระหว่างจัดเตรียม — ส่วนนี้จะเปิดใช้เมื่อมีข้อมูลผลของศิลป์ลึกลับ",
-    "zh_tw": "整備中 — 奇術效果資料收錄後，此區塊將予展開。"
-  },
   "qishuPickerTitle": {
     "ja": "奇術選択",
     "en": "Select Mystic Art",
@@ -4338,48 +4100,6 @@
     "ru": "Выбор мистического искусства",
     "th": "เลือกศิลป์ลึกลับ",
     "zh_tw": "選擇奇術"
-  },
-  "qishuPickerSlotLabel": {
-    "ja": "スロット",
-    "en": "Slot",
-    "zh": "栏位",
-    "ko": "슬롯",
-    "vi": "Ô",
-    "de": "Slot",
-    "es": "Ranura",
-    "fr": "Emplacement",
-    "pt_br": "Slot",
-    "ru": "Слот",
-    "th": "ช่อง",
-    "zh_tw": "欄位"
-  },
-  "qishuPickerClear": {
-    "ja": "このスロットをクリア",
-    "en": "Clear this slot",
-    "zh": "清空此栏位",
-    "ko": "이 슬롯 비우기",
-    "vi": "Xóa ô này",
-    "de": "Diesen Slot leeren",
-    "es": "Vaciar esta casilla",
-    "fr": "Vider cet emplacement",
-    "pt_br": "Limpar este slot",
-    "ru": "Очистить этот слот",
-    "th": "ล้างช่องนี้",
-    "zh_tw": "清空此欄位"
-  },
-  "qishuPickerReset": {
-    "ja": "全 8 枠を初期化",
-    "en": "Reset all 8 slots",
-    "zh": "重置全部 8 个栏位",
-    "ko": "8 슬롯 모두 초기화",
-    "vi": "Đặt lại 8 ô",
-    "de": "Alle 8 Slots zurücksetzen",
-    "es": "Restablecer las 8 casillas",
-    "fr": "Réinitialiser les 8 emplacements",
-    "pt_br": "Redefinir todos os 8 slots",
-    "ru": "Сбросить все 8 слотов",
-    "th": "รีเซ็ตทั้ง 8 ช่อง",
-    "zh_tw": "重置全部 8 個欄位"
   },
   "qishuPickerCancel": {
     "ja": "キャンセル",
@@ -4506,20 +4226,6 @@
     "ru": "Перетащите для размещения / перетащите слот в список, чтобы убрать",
     "th": "ลากเพื่อวาง / ลากช่องกลับไปที่รายการเพื่อถอด",
     "zh_tw": "拖曳放置 / 拖至列表區域可移除"
-  },
-  "qishuPickerDupe": {
-    "ja": "同じ奇術は1つの枠にしか入りません",
-    "en": "Same Mystic Art cannot occupy two slots",
-    "zh": "同一奇术不能放在两个栏位",
-    "ko": "같은 비결은 한 슬롯에만 배치할 수 있습니다",
-    "vi": "Cùng một Kỳ thuật không thể chiếm 2 ô",
-    "de": "Dieselbe Mystische Kunst kann nicht zwei Slots belegen",
-    "es": "El mismo arte místico no puede ocupar dos casillas",
-    "fr": "Le même art mystique ne peut pas occuper deux emplacements",
-    "pt_br": "A mesma arte mística não pode ocupar dois slots",
-    "ru": "Одно и то же мистическое искусство нельзя поставить в два слота",
-    "th": "ศิลป์ลึกลับเดียวกันใส่ได้เพียงช่องเดียว",
-    "zh_tw": "同一奇術不能放在兩個欄位"
   },
   "qishuPickerEquipped": {
     "ja": "装備中",
@@ -5277,20 +4983,6 @@
     "ru": "Внутренний Путь",
     "th": "จิตวิชา"
   },
-  "dbBaseStatCaption": {
-    "ja": "基本ステータス (Lv × Tier)",
-    "en": "Base Stats (Lv × Tier)",
-    "zh": "基础属性 (等级 × 品阶)",
-    "zh_tw": "基礎屬性 (等級 × 品階)",
-    "ko": "기본 스탯 (레벨 × 등급)",
-    "vi": "Chỉ số cơ bản (Cấp × Bậc)",
-    "de": "Basiswerte (Lv × Stufe)",
-    "es": "Estadísticas base (Nv × Nivel)",
-    "fr": "Statistiques de base (Niv × Palier)",
-    "pt_br": "Estatísticas base (Nív × Nível)",
-    "ru": "Базовые характеристики (Ур. × Уровень)",
-    "th": "สเตตัสพื้นฐาน (Lv × ระดับ)"
-  },
   "dbAffixEmpty": {
     "ja": "データなし",
     "en": "No data",
@@ -5346,20 +5038,6 @@
     "pt_br": "Chance",
     "ru": "Шанс",
     "th": "โอกาส"
-  },
-  "dbAffixTitle": {
-    "ja": "affix 出現範囲",
-    "en": "Affix Range",
-    "zh": "词缀范围",
-    "zh_tw": "詞綴範圍",
-    "ko": "옵션 범위",
-    "vi": "Phạm vi thuộc tính",
-    "de": "Affix-Bereich",
-    "es": "Rango de afijo",
-    "fr": "Plage d'affixe",
-    "pt_br": "Faixa de afixo",
-    "ru": "Диапазон аффикса",
-    "th": "ช่วงค่าแอฟฟิกซ์"
   },
   "dbWeaponType": {
     "ja": "武器種",
@@ -5780,20 +5458,6 @@
     "pt_br": "Talento de Aumento de Atributo",
     "ru": "Талант повышения атрибута",
     "th": "พรสวรรค์เพิ่มพลังธาตุ"
-  },
-  "dbKongfuColFixedAdd": {
-    "ja": "固定加算",
-    "en": "Fixed Bonus",
-    "zh": "固定加成",
-    "zh_tw": "固定加成",
-    "ko": "고정 보너스",
-    "vi": "Cộng thêm cố định",
-    "de": "Fixer Bonus",
-    "es": "Bono Fijo",
-    "fr": "Bonus Fixe",
-    "pt_br": "Bônus Fixo",
-    "ru": "Фиксированный бонус",
-    "th": "โบนัสคงที่"
   },
   "dbKongfuSlotS2": {
     "ja": "固有才能",
