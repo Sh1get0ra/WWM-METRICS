@@ -416,6 +416,8 @@
 
   function _buildDbSteps(driverRef) {
     const steps = [];
+    const isMobile = document.body.classList.contains('mobile-mode');
+    const dbTabGearSel = isMobile ? '.wwm-bottom-nav [data-db-tab="gear"]' : '.wwm-database [data-db-tab="gear"]';
 
     // Step1: DBボタン紹介 → クリックしてDB画面起動
     steps.push({
@@ -444,7 +446,7 @@
 
     // Step2: 3タブ紹介
     steps.push({
-      element: '.wwm-database [data-db-tab="gear"]',
+      element: dbTabGearSel,
       popover: {
         title: _t('dbTutorialStep2Title', '3タブ構成'),
         description: _t('dbTutorialStep2Body', '装備・心法・武術の3タブで、キャラクター非依存のマスタデータを閲覧できます。'),
