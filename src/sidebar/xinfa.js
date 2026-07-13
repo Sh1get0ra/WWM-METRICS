@@ -292,6 +292,11 @@
     if (!s) return s;
     // unwrap 2 pass = 入れ子タグ (`<<用語>|meta>` 型) は 1 周目で内側 unwrap → 2 周目で外側が完全形になる
     for (let i = 0; i < 2; i++) {
+      // 用語 pair marker `<term>用語</term>` / `<b>用語</b>` (2026-07-13、 ru xinfa_tier_label 81 で実在確認) → 中身のみ
+      s = s.replace(/<\/?(?:term|b)>/g, '');
+      // `<term>` unwrap 後に隣接語直付けで残る参照メタ列 `780#C153` (先頭 `|` すら欠け、 2026-07-13 ru 81 で実在確認)。
+      // 強調marker `#[A-DF-Z]...#E` (次行) より先に除去必須 — 先に強調marker側が `#C153 ... #E` を誤ペア化してしまう
+      s = s.replace(/\d+#C\d+/g, '');
       // stat reference token = `<text|num|...|num>` → text のみ (= 内部 fallback bug 表示 防止)
       s = s.replace(/<([^|<>]+)\|[^<>]*>/g, '$1');
       // custom color marker = `#RRGGBB` (hex 6 桁、 WWM 色コード仕様 = preset 26 種 + hex custom) → marker のみ除去

@@ -11,7 +11,21 @@
   'use strict';
   const _ESC_MAP = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
   function _esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => _ESC_MAP[c]); }
+  // ゲーム内client原文マークアップ (#Y強調#E、 <技名|ID|#C|kongfuId|skillId>リンク) が
+  // kongfu_talent_desc に生文字列で混入 (2026-07-13 兄貴指摘)。 中身のみプレーンテキスト表示に剥がす。
+  function _stripGameMarkup(s) {
+    if (!s) return s;
+    return s.replace(/#Y(.*?)#E/g, '$1')
+      .replace(/<([^|<>]+)\|[^<>]*>/g, '$1')
+      .replace(/<\/?(?:term|b)>/g, '')
+      // pipe 無し用語強調 `<Урон родства>` (2026-07-13、 ru で複数実在確認) → 中身のみ
+      .replace(/<([^<>|]{1,64})>/g, '$1');
+  }
   function _curLang() { return (window.currentLang) || 'ja'; }
+  // ratio(小数、 例 0.81315) → "81.32%" 表示文字列。 (ratio*100).toFixed(2) は IEEE754 誤差で
+  // x.xx5 境界値 (例 0.81315) を切り捨て相当に丸める既知バグあり (兄貴 SS 実測 81.32% vs 表示 81.31% で発覚)。
+  // Math.round を先に噛ませて整数域で丸めることで誤差回避。
+  function _pctStr(ratio) { return (Math.round(ratio * 10000) / 100).toFixed(2) + '%'; }
 
   let _searchQuery = '';
   let _selectedId = null;
@@ -284,8 +298,8 @@
     const bullets = items.map(r => {
       const title = window.WWM_DS.name('kongfu_talent_title', r.titleKey, lang);
       const desc = window.WWM_DS.name('kongfu_talent_desc', r.descKey, lang);
-      const titleShown = title.indexOf('[') === 0 ? `#${r.rank}` : title;
-      const descShown = desc.indexOf('[') === 0 ? '' : desc;
+      const titleShown = title.indexOf('[') === 0 ? `#${r.rank}` : _stripGameMarkup(title);
+      const descShown = desc.indexOf('[') === 0 ? '' : _stripGameMarkup(desc);
       const unlockText = _unlockText(r.unlockStage);
       return `<li class="wwm-db-kongfu-bullet">
         <div class="wwm-db-kongfu-bullet-head">
@@ -340,7 +354,7 @@
     const futureNote = (window.T && window.T.dbKongfuS6Future) || '※ 十四重解放 (現行未実装)';
     const rows = (s6.caps || []).map((cap, i) => `<tr>
       <th scope="row">rank${i + 1}</th>
-      <td>+${(cap * 100).toFixed(2)}%</td>
+      <td>+${_pctStr(cap)}</td>
     </tr>`).join('');
     return `
       <section class="wwm-db-kongfu-slot-section wwm-db-kongfu-slot-future">
@@ -488,6 +502,7 @@
   }
   // 段係数 chip 表示:
   //   (1) s.seg あり (未展開 base + 段係数 array) = 「N 段」+ tooltip = 各段の実 damage %
+  //       s.segLabels{ja,en,zh,ko} あり = 「N段目」既定ラベルの代わりに使用 (2026-07-13、貫穿の鏢/虚塵の掃き 段グループ名対応)
   //   (2) s.segTotal + s.segBundle + s.segIdx あり (束ね skill = 20401114 派生技+地面叩き 同時発生)
   //       = 「N 段」+ tooltip = 束ね sub 内訳 (base × sub_mult × 100%)
   //   (3) s.segTotal のみ = 「N 段」chip 単独 (未使用、 将来 束ねなし chip case 用)
@@ -496,11 +511,12 @@
     if (mults && Array.isArray(mults) && mults.length >= 2) {
       const floats = curLv != null ? (s.r || {})[String(curLv)] : null;
       const baseF5 = floats && floats.length >= 5 ? floats[4] : null;
+      const labelArr = s.segLabels && (s.segLabels[lang] || s.segLabels.ja);
       let tooltip;
       if (baseF5 != null) {
-        tooltip = mults.map((m, i) => `${i+1}段=${(baseF5 * m * 100).toFixed(2)}% (×${m})`).join(' / ');
+        tooltip = mults.map((m, i) => `${labelArr ? labelArr[i] : (i+1)+'段'}=${_pctStr(baseF5 * m)}`).join(' / ');
       } else {
-        tooltip = mults.map((m, i) => `${i+1}段=×${m}`).join(' ');
+        tooltip = mults.map((m, i) => `${labelArr ? labelArr[i] : (i+1)+'段'}=×${m}`).join(' ');
       }
       return `<span class="wwm-db-kongfu-skill-chip wwm-db-kongfu-skill-chip-seg" title="${_esc(tooltip)}">${mults.length}段</span>`;
     }
@@ -520,7 +536,7 @@
           const baseF5 = rowF5 != null && sumMult > 0 ? rowF5 / sumMult : null;
           if (baseF5 != null) {
             const langKey = (activeSubs[0] && activeSubs[0][lang]) ? lang : 'ja';
-            const tooltip = activeSubs.map(c => `${c[langKey]}=${(baseF5 * c.mults[i0] * 100).toFixed(2)}%`).join(' + ');
+            const tooltip = activeSubs.map(c => `${c[langKey]}=${_pctStr(baseF5 * c.mults[i0])}`).join(' + ');
             return `<span class="wwm-db-kongfu-skill-chip wwm-db-kongfu-skill-chip-seg" title="${_esc(tooltip)}">${activeSubs.length}段</span>`;
           }
         }
@@ -577,10 +593,10 @@
       }
       // floats[5] = [f1定数, f2属性付加raw, f3外功付加raw, f4属性係数base=1.0, f5外功係数]
       const f3 = floats[2], f5 = floats[4];
-      const physCoefPct = (f5 * 100).toFixed(2) + '%';
+      const physCoefPct = _pctStr(f5);
       const physAdd = f3 == null ? '-' : Math.floor(f3).toString();
       // 属性係数 = 外功係数 × 1.5 (才能適用後、 SS 検証済、 Lv1 = ×1.0 は本表示では簡略化)
-      const attrCoefPct = (f5 * 1.5 * 100).toFixed(2) + '%';
+      const attrCoefPct = _pctStr(f5 * 1.5);
       return `<tr>
         <td>${nameCell}</td>
         <td>${physCoefPct}</td>

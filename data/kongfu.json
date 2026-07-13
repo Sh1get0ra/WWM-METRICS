@@ -333,7 +333,7 @@
     "path": "bamboocut"
   },
   "20703": {
-    "weaponType": "ropeDart",
+    "weaponType": "rope_dart",
     "description": "千機の縄 (縄鏢、Skygrasp Rope Dart、 2026年7月実装予定)。 瞬嵐属性。 effects/derived は実装後に追記。",
     "path": "bamboocut",
     "_pendingImplementation": true,
