@@ -3,7 +3,7 @@
 //   - _setupModalA11y + MutationObserver + Esc key listener
 //   - _CHANGELOG_KEY + _semver + _checkChangelog + _showAllChangelogs (+ WWMChangelog global)
 //   - _ghIssueUrl + _specHtml + _changelogHtml + _showNoteModal
-//   - _showScoreFormula (+ WWMHelp.showScoreFormula global)
+//   - _showScoreFormula
 //   - _tpl + _optionTerm (i18n template helpers、 diag.js で使用)
 //
 // 依存: window.T (i18n)、 window.WWM_SCORE_VERSION、 window.currentLang
@@ -251,8 +251,6 @@
     CHANGELOG_KEY: _CHANGELOG_KEY,
   };
   window.WWMChangelog = { check: _checkChangelog, showAll: _showAllChangelogs };
-  window.WWMHelp = window.WWMHelp || {};
-  window.WWMHelp.showScoreFormula = _showScoreFormula;
 })();
 
 // vite移行 P2: ESM 副作用 module 化 (window expose は IIFE 内 keep)

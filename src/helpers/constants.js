@@ -87,7 +87,6 @@ const C = {
   };
 
 window.WWMHelpers = window.WWMHelpers || {};
-window.WWMHelpers.constants = C;
 
 export { C };
 export default C;

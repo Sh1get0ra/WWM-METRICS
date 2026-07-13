@@ -113,7 +113,6 @@ const _data = {
   };
 
 window.WWMHelpers = window.WWMHelpers || {};
-window.WWMHelpers.state = state;
 // top-level alias (頻繁使用のため短縮アクセス)
 window.WWMState = state;
 

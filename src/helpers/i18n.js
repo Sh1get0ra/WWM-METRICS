@@ -62,7 +62,6 @@ const i18n = {
   };
 
 window.WWMHelpers = window.WWMHelpers || {};
-window.WWMHelpers.i18n = i18n;
 
 export { i18n };
 export default i18n;

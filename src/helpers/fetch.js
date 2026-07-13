@@ -72,7 +72,6 @@ const fetchH = {
   };
 
 window.WWMHelpers = window.WWMHelpers || {};
-window.WWMHelpers.fetch = fetchH;
 
 export { fetchH };
 export default fetchH;

@@ -11,7 +11,6 @@
 //   - window.__WWM_GET_EFFECTIVE_ROLEINFO  (hero.js が参照)
 //   - window._saveVirtuals / _loadVirtuals
 //   - window.WWMHelp.resetAllVirtuals  (index.html onclick × 2)
-//   - window.WWMSidebar.virtual = { getEffectiveRoleInfo, getEffectiveState, save, load, resetAll }
 // 起動時 IIFE 末尾で _loadVirtuals() を即時実行 (旧 sidebar.js line 218 と同等)。
 (function () {
   'use strict';
@@ -109,14 +108,6 @@
   window._loadVirtuals = _loadVirtuals;
   window.WWMHelp = window.WWMHelp || {};
   window.WWMHelp.resetAllVirtuals = _resetAllVirtuals;
-  window.WWMSidebar = window.WWMSidebar || {};
-  window.WWMSidebar.virtual = {
-    getEffectiveRoleInfo: _getEffectiveRoleInfo,
-    getEffectiveState:    _getEffectiveState,
-    save:    _saveVirtuals,
-    load:    _loadVirtuals,
-    resetAll: _resetAllVirtuals
-  };
 
   // 起動時 1回: localStorage → WWMState.virtual に復元
   _loadVirtuals();

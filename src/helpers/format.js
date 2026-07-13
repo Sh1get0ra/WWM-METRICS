@@ -89,7 +89,6 @@ const format = {
   };
 
 window.WWMHelpers = window.WWMHelpers || {};
-window.WWMHelpers.format = format;
 
 export { format };
 export default format;
