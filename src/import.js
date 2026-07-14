@@ -848,6 +848,9 @@ function applyImport(data, importedAt, state) {
         WWMState.baseline = { expected: res.expected, statusScore: res.statusScore + bonus, tier: res.tier, ts: Date.now(), scoreVer: window.WWM_SCORE_VERSION || 1 };
         // 再import 成功 → 計算更新バナーがあれば消す
         if (typeof window._hideScoreBanner === 'function') window._hideScoreBanner();
+        // 初回 import 成功 → welcome banner (未import 案内) 残存バグ修正 (2026-07-14 兄貴報告)
+        // hide() 呼び出しがこれまで × ボタンのみで、import 成功経路に無かったため import 後も表示残存してた
+        if (window.WWMSidebar?.welcomeBanner) window.WWMSidebar.welcomeBanner.hide();
         // OBS view (表示専用) では baseline を書き込まない (読込のみ)。スコアは変動しないので保存不要、汚染源を断つ。
         if (!document.documentElement.classList.contains('wwm-view-sidebar')) {
           if (window.WWMBaseline) window.WWMBaseline.save(WWMState.baseline);
