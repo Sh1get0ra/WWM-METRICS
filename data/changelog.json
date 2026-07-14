@@ -1,27 +1,6 @@
 {
-  "current": "2.7.0",
+  "current": "2.6.0",
   "entries": [
-    {
-      "version": "2.7.0",
-      "date": "2026-07-14",
-      "items": [
-        {
-          "featured": false,
-          "ja": "【心法WorldLv別数値の精度向上】 一部の心法(会心率/命中率系)のWorldLv別数値をより精密な値に更新しました。武格指数の計算精度が向上します。",
-          "en": "[Improved Inner Way World-Lv Value Accuracy] Updated World-Lv values for some Inner Ways (crit rate / hit rate types) to more precise figures. Improves Martial Index calculation accuracy.",
-          "zh": "【提升心法WorldLv数值精度】 部分心法(会心率/命中率类)的WorldLv数值已更新为更精确的数值。提升武格指数计算精度。",
-          "ko": "【심법 WorldLv별 수치 정밀도 향상】 일부 심법(회심율/명중율 계열)의 WorldLv별 수치를 더 정밀한 값으로 업데이트했습니다. 무격 지수 계산 정확도가 향상됩니다.",
-          "vi": "[Cải thiện độ chính xác giá trị Tâm pháp theo World-Lv] Đã cập nhật giá trị theo World-Lv của một số Tâm pháp (loại tỷ lệ chí mạng/tỷ lệ trúng) thành giá trị chính xác hơn. Cải thiện độ chính xác tính toán Chỉ số Võ cách.",
-          "de": "[Verbesserte Genauigkeit der Inner-Way-World-Lv-Werte] Die World-Lv-Werte einiger Inner Ways (Krit-Rate/Trefferrate-Typen) wurden auf präzisere Werte aktualisiert. Verbessert die Genauigkeit der Kampfindex-Berechnung.",
-          "es": "[Mejora de precisión de valores de Vía Interna por World-Lv] Se actualizaron los valores por World-Lv de algunas Vías Internas (tipos de tasa de crítico/acierto) a cifras más precisas. Mejora la precisión del cálculo del Índice Marcial.",
-          "fr": "[Amélioration de la précision des valeurs de Voie intérieure par World-Lv] Les valeurs par World-Lv de certaines Voies intérieures (types taux de critique/précision) ont été mises à jour avec des chiffres plus précis. Améliore la précision du calcul de l'Indice Martial.",
-          "pt_br": "[Melhoria de precisão dos valores de Caminho Interno por World-Lv] Os valores por World-Lv de alguns Caminhos Internos (tipos de taxa de crítico/acerto) foram atualizados para números mais precisos. Melhora a precisão do cálculo do Índice Marcial.",
-          "ru": "[Повышена точность значений Внутреннего пути по World-Lv] Значения по World-Lv некоторых Внутренних путей (типы шанс крита/шанс попадания) обновлены до более точных цифр. Повышает точность расчёта боевого индекса.",
-          "th": "[ปรับปรุงความแม่นยำค่าวิถีในตาม World-Lv] อัปเดตค่าตาม World-Lv ของวิถีในบางส่วน (ประเภทอัตราคริติคอล/อัตราโดน) ให้แม่นยำยิ่งขึ้น เพิ่มความแม่นยำในการคำนวณดัชนียุทธ์",
-          "zh_tw": "【提升心法WorldLv數值精度】 部分心法(會心率/命中率類)的WorldLv數值已更新為更精確的數值。提升武格指數計算精度。"
-        }
-      ]
-    },
     {
       "version": "2.6.0",
       "date": "2026-07-13",
