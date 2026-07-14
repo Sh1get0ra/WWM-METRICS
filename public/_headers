@@ -2,3 +2,7 @@
 /bm-loader.js
   Access-Control-Allow-Origin: *
   Cache-Control: no-store
+
+# killer SW 検証用 (test/sw-killer-verify): CDN edge が sw.js を長期キャッシュする問題の回避、必ず origin へ revalidate させる
+/sw.js
+  Cache-Control: no-store
