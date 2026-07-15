@@ -3,7 +3,7 @@
 //   - 表示: _affixDisplayName / _fmtAffixVal / _isPctStat / _pctNeedsMul
 //   - 判定: _isUsefulAffix / _matchKongfuSpecific
 //   - 装備Lv → tier: _lvToTier / _getAffixMax / _loadEquipMax (+ data/equip_max.json cache)
-//   - slot/idx ルール: _selectorAllowedStatKeys (= wdb master 1 本化、 idx 0-4) + _isWeaponDmgMatch (idx 5 ATTUNE 用) / _getAffixOptions
+//   - slot/idx ルール: _selectorAllowedStatKeys (= wdb master 1 本化、 idx 0-5) + _selectorAttuneMartialArt (ATTUNE 武学固有) / _getAffixOptions
 //
 // 依存: window.WWM_AFFIX / window.WWM_KONGFU / window._AFFIX_DISPLAY_LABELS / window.T /
 //       window.WWM_SCORE_VERSION / WWMState.roleInfo
@@ -296,20 +296,9 @@
     return null;
   }
 
-  // 武器ダメ系 statKey (= 主武器/副武器 idx 5 ATTUNE 用 _isWeaponDmgMatch でのみ使用、 idx 0-4 は master 1 本化済)
+  // 武器ダメ系 statKey (= DB画面 database-gear.js _attuneStatKeys / _getAffixOptions idx5 で
+  //   汎用武器種ダメ除外用に使用、 idx 0-4 は master 1 本化済)
   const _WEAPON_DMG_KEYS = new Set(['swordDmg','spearDmg','fanDmg','umbrellaDmg','moBladeDmg','dualBladesDmg','ropeDartDmg','hengBladeDmg','gauntletDmg']);
-  // 主武器/副武器 で 武器ダメ系 → active 該当 weaponType のみ
-  // kongfuIdOverride: 武具対照 modal で「新装備の武術」 を渡すと、 roleInfo より優先される
-  // (装備差替シミュ中に新装備の武器種で affix 候補を絞り込む)。
-  function _isWeaponDmgMatch(statKey, slot, roleInfo, kongfuIdOverride) {
-    if (!_WEAPON_DMG_KEYS.has(statKey)) return true;
-    const kid = kongfuIdOverride || (String(slot) === '1' ? roleInfo?.kongfuMain : roleInfo?.kongfuSub);
-    const wt = window.WWM_KONGFU?.[kid]?.weaponType;
-    if (!wt) return true;
-    const camelize = s => s.replace(/_([a-z])/g, (_,c)=>c.toUpperCase());
-    const expected = camelize(wt) + 'Dmg';
-    return statKey === expected;
-  }
 
   // INITIAL (affix#1) 候補 master (wwmdb 由来 = data/affix_candidates_initial.json) 経由 filter
   // slot 別 装備カテゴリ判定 (防具+装飾品 = 直 mapping。 武器/弓 slot は master 経由 filter 無効 = 旧経路 keep)
@@ -354,10 +343,10 @@
     return _SLOT_TO_WDB_CAT[s] || null;
   }
   // wdb 統合 master (data/affix_selector.json) 経由 statKey set lookup
-  //   idx 0 = INITIAL / idx 1-4 = TUNING / idx 5 = ATTUNE (別 sprint = null 返却で旧 logic fallback)
-  //   master 未対応 slot (= 弓 21 / 射玦 9 / 環 master 未収録) = null = 旧 logic fallback
+  //   idx 0 = INITIAL / idx 1-4 = TUNING / idx 5 = ATTUNE (2026-07-15 master化、{statKey,martialArt,attackType} 形式)
+  //   master 未対応 slot/lv (= 弓 21 / 射玦 9 / 環 master 未収録 / Lv71 武器・Lv100-105 idx5 未対応) = null = 旧 logic fallback
   function _selectorAllowedStatKeys(slot, idx, equipLv, equipRank, roleInfo, kongfuIdOverride) {
-    if (idx < 0 || idx > 4) return null;
+    if (idx < 0 || idx > 5) return null;
     const wdbCat = _slotToWdbCategory(slot, roleInfo, kongfuIdOverride);
     if (!wdbCat) return null;
     const master = window.WWM_AFFIX_SELECTOR?.data;
@@ -366,7 +355,23 @@
     const lv = equipLv || 91;
     const list = master[wdbCat]?.[String(lv)]?.[tier]?.[String(idx)];
     if (!list || !list.length) return null;
+    if (idx === 5) return new Set(list.map(e => e.statKey));
     return new Set(list);
+  }
+
+  // ATTUNE(idx5) statKey → 武学固有 kongfuId lookup (master 経由、_matchKongfuSpecific のハードコード代替)
+  //   master 未対応 (= null) の場合は呼び出し側で _matchKongfuSpecific にフォールバック
+  function _selectorAttuneMartialArt(slot, statKey, equipLv, equipRank, roleInfo, kongfuIdOverride) {
+    const wdbCat = _slotToWdbCategory(slot, roleInfo, kongfuIdOverride);
+    if (!wdbCat) return null;
+    const master = window.WWM_AFFIX_SELECTOR?.data;
+    if (!master) return null;
+    const tier = _RANK_TO_TIER[equipRank] || '5';
+    const lv = equipLv || 91;
+    const list = master[wdbCat]?.[String(lv)]?.[tier]?.['5'];
+    if (!list || !list.length) return null;
+    const entry = list.find(e => e.statKey === statKey);
+    return entry ? entry.martialArt : null;
   }
 
   // affix 選択肢に添える出現確率(%) lookup (data/affix_selector_chance.json 経由)。
@@ -412,9 +417,9 @@
         if (otherInfo?.statKey) blockedKeys.add(otherInfo.statKey);
       }
     }
-    // wdb 統合 master (affix_selector.json) 経由 statKey filter (idx 0-4)
-    //   idx 5 (ATTUNE) = 別 sprint = wdbAllowed null + ATTUNE 用 ad-hoc filter keep
-    //   master 未対応 slot (= 弓/射玦/Thumb Ring 等) = null = 旧 logic fallback
+    // wdb 統合 master (affix_selector.json) 経由 statKey filter
+    //   idx 0-4 = INITIAL/TUNING master / idx 5 = ATTUNE master (2026-07-15 master化)
+    //   master 未対応 slot/lv (= 弓/射玦/Thumb Ring 等 / Lv71武器・Lv100-105 idx5) = null = 旧 logic fallback
     const wdbAllowed = _selectorAllowedStatKeys(slot, idx, equipLv, equipRank, WWMState.roleInfo, kongfuIdOverride);
     const chanceMap = _affixChanceMap(slot, idx, equipLv, equipRank, WWMState.roleInfo, kongfuIdOverride);
     const seen = new Set();
@@ -427,19 +432,22 @@
       if (isArmor6 && _SLOT6_PEN_STATS.includes(sk)) continue;
       if (blockedKeys.has(sk)) continue;
       if (wdbAllowed && !wdbAllowed.has(sk)) continue;
-      // idx 0-4 = wdb master 1 本化済 (= ad-hoc filter 全廃: _isAffixAllowedInSlot / _isWeaponDmgMatch /
+      // idx 0-4 = wdb master 1 本化済 (= ad-hoc filter 全廃: _isAffixAllowedInSlot /
       //   _isAffixAllowedAtIdx0 / 防具 idx0 minPhys-path 除外 / 武器 idx0 crit/affinity/precision 除外)
-      // idx 5 (ATTUNE) = master 未対応 (= wdbAllowed=null) で旧 ad-hoc filter 必要、 別 sprint で master 化予定:
       if (idx === 5) {
-        if (!_isWeaponDmgMatch(sk, slot, WWMState.roleInfo, kongfuIdOverride)) continue;
         // 防具#6 = ツール独自仕様 (2026-07-04 兄貴指示): ゲーム本来は流派選択式で全武学固有
         // affixが選択可能だが、ツールでは装備中武術(main/sub)分のみに絞る。武学固有以外
-        // (= _matchKongfuSpecific が null な universal affix) は対象外、素通り。
+        // (= kfSpecific が null な universal affix、貫通3種等) は対象外、素通り。
         // ただし既に設定済(現在このスロットの statKey と一致)の1件は、その後 武器を
         // 別武術に変更しても一覧から消さない (= 実際のaffix値は武器変更で自動変動しない
         // ゲーム仕様と整合、2026-07-04 兄貴指摘「CURの値は保持、リストからは消えるが
         // 値自体は変えない」)。消すのは "新規に選べる候補" からのみ
-        const kfSpecific = _matchKongfuSpecific(sk);
+        // 武学固有 kongfuId 解決 = wdb master 優先(2026-07-15)、未対応時は _matchKongfuSpecific ハードコードへ fallback
+        // 汎用武器種ダメ(swordDmg等)は武学固有でない(2026-07-05 兄貴指摘「定音じゃないものが紛れてる」、
+        // database-gear.js _attuneStatKeys と同じ対処)、_matchKongfuSpecific の prefix 誤爆(sword→九変の剣等)防止
+        const masterKid = _selectorAttuneMartialArt(slot, sk, equipLv, equipRank, WWMState.roleInfo, kongfuIdOverride);
+        const kfSpecific = masterKid != null ? [parseInt(masterKid, 10)]
+          : (_WEAPON_DMG_KEYS.has(sk) ? null : _matchKongfuSpecific(sk));
         if (kfSpecific && sk !== curStatKey) {
           const effRi = _getEffectiveRoleInfo() || WWMState.roleInfo;
           const km = parseInt(effRi?.kongfuMain, 10);
@@ -481,9 +489,9 @@
     getCachedEquipMax: _getCachedEquipMax,
     getAffixMax: _getAffixMax,
     getAffixMinMax: _getAffixMinMax,
-    isWeaponDmgMatch: _isWeaponDmgMatch,
     getAffixOptions: _getAffixOptions,
     selectorAllowedStatKeys: _selectorAllowedStatKeys,
+    selectorAttuneMartialArt: _selectorAttuneMartialArt,
     affixChanceMap: _affixChanceMap,
     slotToWdbCategory: _slotToWdbCategory,
     PVP_AFFIX_SENTINEL: _PVP_AFFIX_SENTINEL,

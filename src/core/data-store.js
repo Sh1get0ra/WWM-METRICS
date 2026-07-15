@@ -24,8 +24,6 @@
     WWM_XINFA_EFFECTS:    'xinfa_effects',
     WWM_SETS:             'sets',
     WWM_AFFIX:            'affix',
-    WWM_AFFIX_SELECTOR:   'affix_selector',
-    WWM_AFFIX_CHANCE:     'affix_selector_chance',
     WWM_PVP_ATTUNE:       'pvp_attune_table',
     WWM_EQUIP_BASE_BY_LV: 'equip_base_by_lv',
     WWM_GUANYIN_LEVELS:   'guanyin_levels',
@@ -40,6 +38,13 @@
     WWM_GEAR_SLOT_ICONS:  'gear_slot_icons',
     WWM_GEAR_RECIPE:      'gear_recipe'
   };
+  // affix 選択肢 master (affix_selector/affix_selector_chance) = 選択肢候補の表示/フィルタ用データで
+  // スコア計算式そのものは変えない (2026-07-15 ATTUNE master化で判明)。 cache buster は
+  // DISPLAY_VERSION (SCORE_VERSION と独立、baseline 無効化を起こさず反映)。
+  const DISPLAY_DICTS = {
+    WWM_AFFIX_SELECTOR: 'affix_selector',
+    WWM_AFFIX_CHANCE:   'affix_selector_chance',
+  };
   let currentLang = 'ja';
   const data = Object.create(null); // { kongfu: {...}, xinfa: {...}, ... } (i18n)
   const calc = Object.create(null); // { kongfu: {...}, affix: {...}, ... } (計算/icon dict 内部参照)
@@ -47,17 +52,15 @@
   let calcPromise = null;
 
   // 計算/icon dict load (idempotent)。 失敗 = {} で続行 (旧 loadDict 互換、 throw しない)。
-  function ensureCalcData() {
-    if (calcPromise) return calcPromise;
-    const sv = (typeof window !== 'undefined' && window.WWM_SCORE_VERSION) || 7;
-    calcPromise = Promise.all(Object.entries(CALC_DICTS).map(async function ([winKey, fileName]) {
-      if (typeof window !== 'undefined' && window[winKey]) {
-        calc[fileName] = window[winKey]; // 先行ロード分 (テスト注入等) を尊重
-        return;
-      }
+  function fetchDict(winKey, fileName, ver) {
+    if (typeof window !== 'undefined' && window[winKey]) {
+      calc[fileName] = window[winKey]; // 先行ロード分 (テスト注入等) を尊重
+      return Promise.resolve();
+    }
+    return (async function () {
       let d = {};
       try {
-        const res = await fetch('data/' + fileName + '.json?v=' + sv);
+        const res = await fetch('data/' + fileName + '.json?v=' + ver);
         if (res.ok) d = await res.json();
         else console.warn('[DataStore] calc dict fetch failed:', fileName, res.status);
       } catch (e) {
@@ -65,7 +68,16 @@
       }
       calc[fileName] = d;
       if (typeof window !== 'undefined') window[winKey] = d;
-    })).then(function () {});
+    })();
+  }
+  function ensureCalcData() {
+    if (calcPromise) return calcPromise;
+    const sv = (typeof window !== 'undefined' && window.WWM_SCORE_VERSION) || 7;
+    const dv = getVersion();
+    calcPromise = Promise.all([
+      ...Object.entries(CALC_DICTS).map(([winKey, fileName]) => fetchDict(winKey, fileName, sv)),
+      ...Object.entries(DISPLAY_DICTS).map(([winKey, fileName]) => fetchDict(winKey, fileName, dv)),
+    ]).then(function () {});
     return calcPromise;
   }
 

@@ -35,7 +35,6 @@ const {
   loadEquipMax: _loadEquipMax,
   getCachedEquipMax: _getCachedEquipMax,
   getAffixMax: _getAffixMax,
-  isWeaponDmgMatch: _isWeaponDmgMatch,
   getAffixOptions: _getAffixOptions,
   PVP_AFFIX_SENTINEL: _PVP_AFFIX_SENTINEL,
   SLOT6_ARMOR: _SLOT6_ARMOR,
