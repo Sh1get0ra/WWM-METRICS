@@ -288,7 +288,6 @@
     return `${label} +${valStr}`;
   }
   // tier 別 effect text 取得 (= WWM_DS 経由 一本化、 ゲーム原文 12 lang ([[xinfa-tier-label-sprint-plan-2026-06-29]] 完成版))。
-  // WWM_DS miss + xinfa_tier_label cat に key 不在時 = def.rawI18n fallback。
   // client 原文 format token (= `<text|781|...|...>` stat ref / `#Y...#E` 等 marker) は表示 normalize で除去。
   function _normalizeWWMText(s) {
     if (!s) return s;
@@ -319,7 +318,7 @@
     s = s.replace(/ {2,}/g, ' ');
     return s;
   }
-  function _tierLabel(id, t, lang, def) {
+  function _tierLabel(id, t, lang) {
     const DS = window.WWM_DS;
     if (DS) {
       const v = DS.name('xinfa_tier_label', `${id}.tier${t}`, lang);
@@ -327,8 +326,7 @@
         return _normalizeWWMText(v);
       }
     }
-    const raw = (def?.rawI18n?.[lang]) || def?.rawI18n?.en || def?.rawI18n?.ja || '-';
-    return _normalizeWWMText(raw);
+    return '-';
   }
   function _effectsText(id, tier) {
     if (!id) return '';
@@ -386,10 +384,10 @@
           : (() => {
               const stKey = def.statType && _XINFA_STATTYPE_LABEL[def.statType];
               if (stKey) return (window.T && window.T[stKey]) || def.statType;
-              return _tierLabel(id, t, lang, def);
+              return _tierLabel(id, t, lang);
             })();
       } else {
-        effStr = _tierLabel(id, t, lang, def);
+        effStr = _tierLabel(id, t, lang);
       }
       let cls = 'wwm-tier-active';
       let warn = '';

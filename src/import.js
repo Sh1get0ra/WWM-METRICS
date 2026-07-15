@@ -306,23 +306,26 @@ function _xinfaTierEffectsJa(eff) {
   }
   return parts.join(', ');
 }
-function _xinfaEffectsText(xinfa, tier) {
+function _xinfaEffectsText(xinfa, tier, xid) {
   if (!xinfa?.attributeBuff || tier < 2) return '<span class="wwm-muted">効果なし</span>';
   const lang = _curLangImport();
   const parts = [];
   const t2eff = xinfa.attributeBuff.tier2?.effects;
   const t5eff = xinfa.attributeBuff.tier5?.effects;
   const _tierRaw = (t) => {
-    const r = t?.rawI18n;
-    return (r?.[lang]) || r?.en || r?.ja || '';
+    const DS = window.WWM_DS;
+    if (!DS || xid == null) return '';
+    const v = DS.name('xinfa_tier_label', `${xid}.tier${t}`, lang);
+    if (!v || v.indexOf('[xinfa_tier_label:') === 0 || v.indexOf('[noClientData:') === 0) return '';
+    return window.WWMSidebar?.xinfa?.normalizeText ? window.WWMSidebar.xinfa.normalizeText(v) : v;
   };
   if (tier >= 2 && t2eff && Object.keys(t2eff).length) {
     if (lang === 'ja') parts.push('T2: ' + _xinfaTierEffectsJa(t2eff));
-    else parts.push('T2: ' + _tierRaw(xinfa.attributeBuff.tier2));
+    else parts.push('T2: ' + _tierRaw(2));
   }
   if (tier >= 5 && t5eff && Object.keys(t5eff).length) {
     if (lang === 'ja') parts.push('T5: ' + _xinfaTierEffectsJa(t5eff));
-    else parts.push('T5: ' + _tierRaw(xinfa.attributeBuff.tier5));
+    else parts.push('T5: ' + _tierRaw(5));
   }
   return parts.length ? parts.join('<br>') : '<span class="wwm-muted">効果なし</span>';
 }
@@ -341,7 +344,7 @@ function renderEnhanceArsenalForm(state, roleInfo) {
     }
     const curTier = state.xinfaTiers?.[i] ?? 6;
     const opts = [0,1,2,3,4,5,6].map(t => `<option value="${t}"${t===curTier?' selected':''}>Tier ${t}</option>`).join('');
-    const effText = xid ? _xinfaEffectsText(xinfa[xid], curTier) : '';
+    const effText = xid ? _xinfaEffectsText(xinfa[xid], curTier, xid) : '';
     return `
       <div class="wwm-xinfa-cell" data-xinfa-row="${i}">
         <span class="wwm-xinfa-label">${i+1}. ${xname}</span>
@@ -415,7 +418,7 @@ function _attachEnhanceArsenalEvents(root, state) {
         const passive = WWMState.roleInfo?.passiveSlots || [];
         const xid = passive[parseInt(slot,10)];
         const xinfa = window.WWM_XINFA?.[xid];
-        effEl.innerHTML = xinfa ? _xinfaEffectsText(xinfa, state.xinfaTiers[slot]) : '';
+        effEl.innerHTML = xinfa ? _xinfaEffectsText(xinfa, state.xinfaTiers[slot], xid) : '';
       }
     });
   });
