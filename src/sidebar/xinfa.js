@@ -203,6 +203,8 @@
 
   // xinfa effects key → i18n key + 表示形式 (DB画面(database-xinfa.js)からも参照するためmodule scope)
   const _XINFA_EFFECT_LABEL = {
+    maxHp:           { tkey: 'maxHp',           pct: false },
+    physDef:         { tkey: 'physDef',         pct: false },
     allMartialBoost: { tkey: 'allWeaponDmg',    pct: true },
     critRateAdj:     { tkey: 'crit',            pct: true },
     critRate:        { tkey: 'crit',            pct: true },

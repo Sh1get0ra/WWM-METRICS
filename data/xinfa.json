@@ -33,7 +33,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "effects": {},
+        "effects": {
+          "maxHp": 1941
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Max HP (Solo Mode Level scaled, rank=blue)",
@@ -131,7 +133,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "effects": {},
+        "effects": {
+          "maxHp": 1941
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Max HP (Solo Mode Level scaled, rank=blue)",
@@ -229,7 +233,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Defense",
-        "effects": {},
+        "effects": {
+          "physDef": 25.5
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Physical Defense (Solo Mode Level scaled, rank=blue)",
@@ -531,7 +537,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Defense",
-        "effects": {},
+        "effects": {
+          "physDef": 25.5
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Physical Defense (Solo Mode Level scaled, rank=blue)",
@@ -831,7 +839,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "effects": {},
+        "effects": {
+          "maxHp": 2184
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Max HP (Solo Mode Level scaled, rank=purple)",
@@ -931,7 +941,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Defense",
-        "effects": {},
+        "effects": {
+          "physDef": 28.7
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Physical Defense (Solo Mode Level scaled, rank=purple)",
@@ -1343,7 +1355,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "effects": {},
+        "effects": {
+          "maxHp": 2184
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Max HP (Solo Mode Level scaled, rank=purple)",
@@ -3761,7 +3775,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "effects": {},
+        "effects": {
+          "maxHp": 2184
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Max HP (Solo Mode Level scaled, rank=purple)",
@@ -4002,7 +4018,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "effects": {},
+        "effects": {
+          "maxHp": 2184
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Max HP (Solo Mode Level scaled, rank=purple)",
