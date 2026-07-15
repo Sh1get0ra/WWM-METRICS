@@ -33,7 +33,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "effects": {},
+        "effects": {
+          "maxHp": 1941
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Max HP (Solo Mode Level scaled, rank=blue)",
@@ -41,7 +43,8 @@
           "zh": "气血最大值（单人模式 按等级缩放，rank=blue）",
           "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=blue)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=blue)"
-        }
+        },
+        "effectId": "phys_hp_blue"
       },
       "tier3": {
         "permanent": true,
@@ -131,7 +134,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "effects": {},
+        "effects": {
+          "maxHp": 1941
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Max HP (Solo Mode Level scaled, rank=blue)",
@@ -139,7 +144,8 @@
           "zh": "气血最大值（单人模式 按等级缩放，rank=blue）",
           "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=blue)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=blue)"
-        }
+        },
+        "effectId": "phys_hp_blue"
       },
       "tier3": {
         "permanent": true,
@@ -229,7 +235,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Defense",
-        "effects": {},
+        "effects": {
+          "physDef": 25.5
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Physical Defense (Solo Mode Level scaled, rank=blue)",
@@ -237,7 +245,8 @@
           "zh": "外功防御（单人模式 按等级缩放，rank=blue）",
           "ko": "외공 방어력 (싱글 모드 레벨 비례, rank=blue)",
           "vi": "Phòng ngự ngoại công (theo cấp ở chế độ đơn, rank=blue)"
-        }
+        },
+        "effectId": "phys_def_blue"
       },
       "tier3": {
         "permanent": true,
@@ -531,7 +540,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Defense",
-        "effects": {},
+        "effects": {
+          "physDef": 25.5
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Physical Defense (Solo Mode Level scaled, rank=blue)",
@@ -539,7 +550,8 @@
           "zh": "外功防御（单人模式 按等级缩放，rank=blue）",
           "ko": "외공 방어력 (싱글 모드 레벨 비례, rank=blue)",
           "vi": "Phòng ngự ngoại công (theo cấp ở chế độ đơn, rank=blue)"
-        }
+        },
+        "effectId": "phys_def_blue"
       },
       "tier3": {
         "permanent": true,
@@ -831,7 +843,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "effects": {},
+        "effects": {
+          "maxHp": 2184
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Max HP (Solo Mode Level scaled, rank=purple)",
@@ -839,7 +853,8 @@
           "zh": "气血最大值（单人模式 按等级缩放，rank=purple）",
           "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_hp_purple"
       },
       "tier3": {
         "permanent": true,
@@ -931,7 +946,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Physical Defense",
-        "effects": {},
+        "effects": {
+          "physDef": 28.7
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Physical Defense (Solo Mode Level scaled, rank=purple)",
@@ -939,7 +956,8 @@
           "zh": "外功防御（单人模式 按等级缩放，rank=purple）",
           "ko": "외공 방어력 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Phòng ngự ngoại công (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_def_purple"
       },
       "tier3": {
         "permanent": true,
@@ -1343,7 +1361,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "effects": {},
+        "effects": {
+          "maxHp": 2184
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Max HP (Solo Mode Level scaled, rank=purple)",
@@ -1351,7 +1371,8 @@
           "zh": "气血最大值（单人模式 按等级缩放，rank=purple）",
           "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_hp_purple"
       },
       "tier3": {
         "permanent": true,
@@ -3338,7 +3359,7 @@
         "effects": {},
         "category": "healing",
         "rawI18n": {
-          "ja": "Critical Healing Bonus +4%",
+          "ja": "会心治療強化+4.0%",
           "en": "Critical Healing Bonus +4%",
           "zh": "会心治疗加成 +4%",
           "ko": "치명타 치유 보너스 +4%",
@@ -3761,7 +3782,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "effects": {},
+        "effects": {
+          "maxHp": 2184
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Max HP (Solo Mode Level scaled, rank=purple)",
@@ -3769,7 +3792,8 @@
           "zh": "气血最大值（单人模式 按等级缩放，rank=purple）",
           "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_hp_purple"
       },
       "tier3": {
         "permanent": true,
@@ -4002,7 +4026,9 @@
         "worldLv": 14,
         "needsManualInput": false,
         "statType": "Max HP",
-        "effects": {},
+        "effects": {
+          "maxHp": 2184
+        },
         "category": "defensive",
         "rawI18n": {
           "ja": "Max HP (Solo Mode Level scaled, rank=purple)",
@@ -4010,7 +4036,8 @@
           "zh": "气血最大值（单人模式 按等级缩放，rank=purple）",
           "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_hp_purple"
       },
       "tier3": {
         "permanent": true,
@@ -4049,7 +4076,7 @@
         "effects": {},
         "category": "defensive",
         "rawI18n": {
-          "ja": "Physical DMG Reduction +2.5%",
+          "ja": "外功ダメージ軽減 +2.5%",
           "en": "Physical DMG Reduction +2.5%",
           "zh": "外功伤害减免 +2.5%",
           "ko": "외공 피해 감소 +2.5%",

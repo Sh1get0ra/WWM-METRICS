@@ -1,8 +1,8 @@
 {
   "_schema": "装備Lv Tier別 affix MIN-MAX 値マスタ (2026-06-23 Lv 別精密化)。 wdb snapshot mode 抽出、 {min, max} ペア。 _getAffixMax(sk,lv) 後方互換 (number → object.max)。",
-  "_lastUpdated": "2026-07-04",
+  "_lastUpdated": "2026-07-14",
   "_source": "wwmdb.vlt.fyi equip-items snapshot (Lv71/81/86/91/96 各 tier=5 = 金) affixTables mode 採用。tier 100/105 = client直接抽出 (装備item master group id経由、affix.json statKey mapping適用)",
-  "_note": "obfuscated app.js から正規表現抽出。一部 field 名は position 推定 (stat5)、確定 stat は明示 key。tier 96 は大世界Lv15+ 用 (未解放)。 atkTypeDmg (指定武術ダメ) は WWMath で tier 81 のみ採取 (0.03 = 誤値) で 86/91/96 = null だったが、 ゲーム仕様「指定武術ダメ MAX = 全武術ダメ MAX × 2」 に基づき全 tier 上書き (81=0.04 / 86=0.044 / 91=0.052 / 96=0.064)。 / 2026-06-23: {min, max} ペア化、 旧 number は 1:2 比で min 補完 (tier 61 snapshot 未取得分)。 / 2026-06-24: tier 91/96 attrPen min 修正 (Lv91+ で 5path 系貫通廃止→無相貫通一本化、 wdb 280703/270703 真値 6.5-10.8 / 7.8-13 を attrPen に反映、 旧 min 5.4/6.5 は 5path 系 ratio 残骸)。 / 2026-06-24: tier 81/86/91/96 attunement min 修正 (防具 #6 武術固有 affix = wdb 280001-280605 等 35 種共有 max table、 真値 ratio 0.6 で min 0.022/0.026/0.03/0.036 に補正、 旧 min は max×0.5 偽補完残骸)。 / 2026-06-24: atkTypeDmg 倍化ルール撤去 → wdb 真値テーブル参照に切替。 tier 81 = 0.019-0.038 / tier 96 = 0.031-0.062 (旧倍化値 0.02-0.04 / 0.032-0.064 から微調整)。 全武器 (Sword/Spear/Fan/MoBlade/DualBlades/Umb/RopeDart/Gauntlets/Heng) で同 table 参照 (兄貴確認: 完全同一値)。 / 2026-07-04: tier 100/105 追加 (先行データ、次パッチ想定、Lv95キャップの現行実機では未使用)。装備item master内のaffix group id (INITIAL/TUNING=100xxx/105xxx prefix、貫通=1907/2007、attunement=1900/2000系列) から直接抽出、全16 key既存Tier71-96の伸び率と整合確認済み。physDmgBoost = atkTypeDmgと常に同値 (既存Tier81-96で実証済みの仕様、Lv100/105も同値を流用)。 / 2026-07-05: 新規key physResist 追加 (TODO#64、外功耐性強化=weapon-like slot専用affix#6 ATTUNE 3択の一つ、physPen/voidPenと同枠だがphysDefとは無関係の別stat)。従来 _STAT_TO_MAX_KEY で誤って physDef と同じ key を共有していたため DB画面表示が実値と大きく乖離(Lv91表示16.0〜32.0、実機+5.4〜9.0)。affix_value_master_data4.json直接値(attrId=230、tier71=240602/81=250702/86=260702/91=270702/96=280702、tier91実機SS値と完全一致確認済み)で71-96を新設。tier61は候補ID3件(206002/216002/226002、rank差か旧granularity差か未特定)で確定値を出せず null 据置(要継続調査)。tier100/105は同様データ未検証のため null。",
+  "_note": "obfuscated app.js から正規表現抽出。一部 field 名は position 推定 (stat5)、確定 stat は明示 key。tier 96 は大世界Lv15+ 用 (未解放)。 atkTypeDmg (指定武術ダメ) は WWMath で tier 81 のみ採取 (0.03 = 誤値) で 86/91/96 = null だったが、 ゲーム仕様「指定武術ダメ MAX = 全武術ダメ MAX × 2」 に基づき全 tier 上書き (81=0.04 / 86=0.044 / 91=0.052 / 96=0.064)。 / 2026-06-23: {min, max} ペア化、 旧 number は 1:2 比で min 補完 (tier 61 snapshot 未取得分)。 / 2026-06-24: tier 91/96 attrPen min 修正 (Lv91+ で 5path 系貫通廃止→無相貫通一本化、 wdb 280703/270703 真値 6.5-10.8 / 7.8-13 を attrPen に反映、 旧 min 5.4/6.5 は 5path 系 ratio 残骸)。 / 2026-06-24: tier 81/86/91/96 attunement min 修正 (防具 #6 武術固有 affix = wdb 280001-280605 等 35 種共有 max table、 真値 ratio 0.6 で min 0.022/0.026/0.03/0.036 に補正、 旧 min は max×0.5 偽補完残骸)。 / 2026-06-24: atkTypeDmg 倍化ルール撤去 → wdb 真値テーブル参照に切替。 tier 81 = 0.019-0.038 / tier 96 = 0.031-0.062 (旧倍化値 0.02-0.04 / 0.032-0.064 から微調整)。 全武器 (Sword/Spear/Fan/MoBlade/DualBlades/Umb/RopeDart/Gauntlets/Heng) で同 table 参照 (兄貴確認: 完全同一値)。 / 2026-07-04: tier 100/105 追加 (先行データ、次パッチ想定、Lv95キャップの現行実機では未使用)。装備item master内のaffix group id (INITIAL/TUNING=100xxx/105xxx prefix、貫通=1907/2007、attunement=1900/2000系列) から直接抽出、全16 key既存Tier71-96の伸び率と整合確認済み。physDmgBoost = atkTypeDmgと常に同値 (既存Tier81-96で実証済みの仕様、Lv100/105も同値を流用)。 / 2026-07-05: 新規key physResist 追加 (TODO#64、外功耐性強化=weapon-like slot専用affix#6 ATTUNE 3択の一つ、physPen/voidPenと同枠だがphysDefとは無関係の別stat)。従来 _STAT_TO_MAX_KEY で誤って physDef と同じ key を共有していたため DB画面表示が実値と大きく乖離(Lv91表示16.0〜32.0、実機+5.4〜9.0)。affix_value_master_data4.json直接値(attrId=230、tier71=240602/81=250702/86=260702/91=270702/96=280702、tier91実機SS値と完全一致確認済み)で71-96を新設。tier61は候補ID3件(206002/216002/226002、rank差か旧granularity差か未特定)で確定値を出せず null 据置(要継続調査)。 / 2026-07-14: tier100/105 physResist反映(affix_value_master_data4.json attrId=230、290702=Lv100(min7.7/max12.8)/300702=Lv105(min8.8/max14.6)、96→100伸び率1.164倍がequip_base_by_lv.json記載の1.165倍と整合確認済み)。",
   "tiers": {
     "61": {
       "maxPhys": {
@@ -429,7 +429,10 @@
         "min": 22.7,
         "max": 45.4
       },
-      "physResist": null,
+      "physResist": {
+        "min": 7.7,
+        "max": 12.8
+      },
       "physDmgBoost": {
         "min": 0.037,
         "max": 0.074
@@ -496,7 +499,10 @@
         "min": 26.4,
         "max": 52.8
       },
-      "physResist": null,
+      "physResist": {
+        "min": 8.8,
+        "max": 14.6
+      },
       "physDmgBoost": {
         "min": 0.043,
         "max": 0.086

@@ -5816,9 +5816,8 @@
     "statKey": "hengBladeDmg"
   },
   "8293038": {
-    "internal": 0,
-    "statKey": "gauntletDmg",
-    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定"
+    "internal": 413,
+    "statKey": "gauntletDmg"
   },
   "8294001": {
     "internal": 1,
@@ -5961,9 +5960,8 @@
     "statKey": "hengBladeDmg"
   },
   "8294038": {
-    "internal": 0,
-    "statKey": "gauntletDmg",
-    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定"
+    "internal": 413,
+    "statKey": "gauntletDmg"
   },
   "8711001": {
     "internal": 15,
@@ -6938,9 +6936,8 @@
     "statKey": "hengBladeDmg"
   },
   "8793038": {
-    "internal": 0,
-    "statKey": "gauntletDmg",
-    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定"
+    "internal": 413,
+    "statKey": "gauntletDmg"
   },
   "8794001": {
     "internal": 1,
@@ -7083,9 +7080,8 @@
     "statKey": "hengBladeDmg"
   },
   "8794038": {
-    "internal": 0,
-    "statKey": "gauntletDmg",
-    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定"
+    "internal": 413,
+    "statKey": "gauntletDmg"
   },
   "9211001": {
     "internal": 15,
@@ -8060,9 +8056,8 @@
     "statKey": "hengBladeDmg"
   },
   "9293036": {
-    "internal": 0,
-    "statKey": "gauntletDmg",
-    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定 (2026-06-24: variant ID 8293038/8294038/8793038/8794038/9294036/9793031/9794031 全 7 件 追加済)"
+    "internal": 413,
+    "statKey": "gauntletDmg"
   },
   "9294001": {
     "internal": 1,
@@ -8205,9 +8200,8 @@
     "statKey": "hengBladeDmg"
   },
   "9294036": {
-    "internal": 0,
-    "statKey": "gauntletDmg",
-    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定"
+    "internal": 413,
+    "statKey": "gauntletDmg"
   },
   "9711001": {
     "internal": 15,
@@ -8922,9 +8916,8 @@
     "statKey": "maxBamboocut"
   },
   "9793031": {
-    "internal": 0,
-    "statKey": "gauntletDmg",
-    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定"
+    "internal": 413,
+    "statKey": "gauntletDmg"
   },
   "9793101": {
     "internal": 1,
@@ -9155,9 +9148,8 @@
     "statKey": "maxBamboocut"
   },
   "9794031": {
-    "internal": 0,
-    "statKey": "gauntletDmg",
-    "_pendingVerification": "internal 値は 2026-07 拳甲武器実装当日 ゲーム app.js scout で確定"
+    "internal": 413,
+    "statKey": "gauntletDmg"
   },
   "9794101": {
     "internal": 1,

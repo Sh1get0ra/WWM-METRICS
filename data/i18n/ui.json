@@ -5417,6 +5417,34 @@
     "ru": "Порог",
     "th": "เกณฑ์"
   },
+  "labelMin": {
+    "ja": "最小",
+    "en": "Min",
+    "zh": "最小",
+    "zh_tw": "最小",
+    "ko": "최소",
+    "vi": "Tối thiểu",
+    "de": "Min.",
+    "es": "Mín.",
+    "fr": "Min.",
+    "pt_br": "Mín.",
+    "ru": "Мин.",
+    "th": "ขั้นต่ำ"
+  },
+  "labelMax": {
+    "ja": "最大",
+    "en": "Max",
+    "zh": "最大",
+    "zh_tw": "最大",
+    "ko": "최대",
+    "vi": "Tối đa",
+    "de": "Max.",
+    "es": "Máx.",
+    "fr": "Max.",
+    "pt_br": "Máx.",
+    "ru": "Макс.",
+    "th": "สูงสุด"
+  },
   "dbKongfuColCap": {
     "ja": "上昇量",
     "en": "Bonus",

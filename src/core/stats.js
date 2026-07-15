@@ -487,7 +487,9 @@ function buildStatParamsSync(roleInfo, state) {
   const dMomentum = (r.momentum || 0) - baseFive.momentum;  // 会の増加分 (8199224 全swap後: 内部 momentum=会)
   const dPower    = (r.power    || 0) - baseFive.power;     // 力の増加分 (8199224 全swap後: 内部 power=力)
 
-  _acc(r, 'maxHp',    dBody*60 + dDefense*17);
+  // 気血最大値 正式集計 (装備 maxHp affix / 心法 buff 込み合算) 未実装のため、
+  // 断魂×嵐雷 synergy の hpThreshold cap 判定 (L727 付近) 用に仮固定値 +50000 を基礎ステータスへ上乗せ (2026-07-15 兄貴指示、暫定措置)
+  _acc(r, 'maxHp',    dBody*60 + dDefense*17 + 50000);
   _acc(r, 'physDef',  dDefense*0.5);
   _acc(r, 'minPhys',  dAgility*0.9 + dPower*0.225);          // 速*0.9 + 力*0.225
   _acc(r, 'maxPhys',  dMomentum*0.9 + dPower*1.36);          // 会*0.9 + 力*1.36
