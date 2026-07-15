@@ -97,10 +97,18 @@
     const label = window.WWM_DS.t(alias);
     return (label && label !== alias) ? label : key;
   }
-  // minPhysATK/maxPhysATK は _appliesToLabel だと「外功攻撃」= 兄貴指示のテーブル列見出しは「外功攻撃力」= 語尾「力」付与
+  // minPhysATK/maxPhysATK は _appliesToLabel だと「外功攻撃」= min/max 区別付かず何が上がるか不明瞭
+  // (2026-07-15 兄貴指摘、以前「外功攻撃力」統一は指示意図でない = 実際に上がる値を見出しにする) →
+  // 「最小/最大」接頭辞 + 語尾「力」(ja/zh/zh_tw/ko のみ、他言語は英語風スペース区切り) 付与
   function _appliesToLabelFull(key) {
     const base = _appliesToLabel(key);
-    if (key === 'minPhysATK' || key === 'maxPhysATK') return base + '力';
+    if (key === 'minPhysATK' || key === 'maxPhysATK') {
+      const T = window.T || {};
+      const prefix = (key === 'minPhysATK' ? T.labelMin : T.labelMax) || '';
+      const lang = _curLang();
+      const isCjk = ['ja', 'zh', 'zh_tw', 'ko'].indexOf(lang) !== -1;
+      return isCjk ? `${prefix}${base}力` : `${prefix} ${base}`;
+    }
     return base;
   }
   // path 攻撃力 label (S3 固定加算列見出し = 「鋼鳴/砕岩/糸操/瞬嵐攻撃力」)
