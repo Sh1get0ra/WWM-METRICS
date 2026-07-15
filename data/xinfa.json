@@ -43,7 +43,8 @@
           "zh": "气血最大值（单人模式 按等级缩放，rank=blue）",
           "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=blue)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=blue)"
-        }
+        },
+        "effectId": "phys_hp_blue"
       },
       "tier3": {
         "permanent": true,
@@ -143,7 +144,8 @@
           "zh": "气血最大值（单人模式 按等级缩放，rank=blue）",
           "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=blue)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=blue)"
-        }
+        },
+        "effectId": "phys_hp_blue"
       },
       "tier3": {
         "permanent": true,
@@ -243,7 +245,8 @@
           "zh": "外功防御（单人模式 按等级缩放，rank=blue）",
           "ko": "외공 방어력 (싱글 모드 레벨 비례, rank=blue)",
           "vi": "Phòng ngự ngoại công (theo cấp ở chế độ đơn, rank=blue)"
-        }
+        },
+        "effectId": "phys_def_blue"
       },
       "tier3": {
         "permanent": true,
@@ -547,7 +550,8 @@
           "zh": "外功防御（单人模式 按等级缩放，rank=blue）",
           "ko": "외공 방어력 (싱글 모드 레벨 비례, rank=blue)",
           "vi": "Phòng ngự ngoại công (theo cấp ở chế độ đơn, rank=blue)"
-        }
+        },
+        "effectId": "phys_def_blue"
       },
       "tier3": {
         "permanent": true,
@@ -849,7 +853,8 @@
           "zh": "气血最大值（单人模式 按等级缩放，rank=purple）",
           "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_hp_purple"
       },
       "tier3": {
         "permanent": true,
@@ -951,7 +956,8 @@
           "zh": "外功防御（单人模式 按等级缩放，rank=purple）",
           "ko": "외공 방어력 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Phòng ngự ngoại công (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_def_purple"
       },
       "tier3": {
         "permanent": true,
@@ -1365,7 +1371,8 @@
           "zh": "气血最大值（单人模式 按等级缩放，rank=purple）",
           "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_hp_purple"
       },
       "tier3": {
         "permanent": true,
@@ -3785,7 +3792,8 @@
           "zh": "气血最大值（单人模式 按等级缩放，rank=purple）",
           "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_hp_purple"
       },
       "tier3": {
         "permanent": true,
@@ -4028,7 +4036,8 @@
           "zh": "气血最大值（单人模式 按等级缩放，rank=purple）",
           "ko": "기혈 최대치 (싱글 모드 레벨 비례, rank=purple)",
           "vi": "Sinh lực tối đa (theo cấp ở chế độ đơn, rank=purple)"
-        }
+        },
+        "effectId": "phys_hp_purple"
       },
       "tier3": {
         "permanent": true,
