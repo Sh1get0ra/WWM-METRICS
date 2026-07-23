@@ -97,7 +97,7 @@
   }
 
   // ── 共通セレクタ state (スロット選択+武器種+Lv+Tier で 基本ステ/調律/定音 全部連動) ──
-  let _ctrlLv = 91;
+  let _ctrlLv = 96;
   let _ctrlRank = 'gold';
   let _ctrlWeaponType = 'sword';
 

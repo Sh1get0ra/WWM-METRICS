@@ -24,7 +24,7 @@
       { key: 'silkbind',   labelKey: 'pathSilkbind',   minStat: 'minSilkbind',   maxStat: 'maxSilkbind' },
       { key: 'bamboocut',  labelKey: 'pathBamboocut',  minStat: 'minBamboocut',  maxStat: 'maxBamboocut' }
     ];
-    const TIERS = [86, 81, 71, 61, 56, 51, 41];
+    const TIERS = [91, 86, 81, 71, 61, 56, 51, 41];
     const TIER_PRESET = { 41: { min: 12, max: 25 }, default: { min: 17, max: 34 } };
     const SL = window._AFFIX_DISPLAY_LABELS || {};
     // 武庫 = affix でなく stats 側表記 (兄貴指示 2026-07-03)。 t() = ui/stat 合成 (「最小鋼鳴攻撃」) が

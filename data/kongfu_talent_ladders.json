@@ -1,6 +1,6 @@
 {
- "_note": "kongfu 才能 共通ladder (client抽出、scripts/mining/apply_kongfu_talent_derived.py 生成)。stage(重) = lvCaps で武術Lv(=キャラLv上限) を満たす最小index+1。S1 rung=stage、S3 rung=stage-2 (三重解放)。cap=rate×閾値のゲーム表示丸め値。⚠️ lvCaps 十三重(idx12)以降は+5則外挿、解放トリガーがWorldLv相互考慮に変わる可能性あり",
- "currentLvCap": 95,
+ "_note": "kongfu 才能 共通ladder (client抽出、scripts/mining/apply_kongfu_talent_derived.py 生成)。stage(重) = lvCaps で武術Lv(=キャラLv上限) を満たす最小index+1。S1 rung=stage、S3 rung=stage-2 (三重解放)。cap=rate×閾値のゲーム表示丸め値。⚠️ lvCaps 十三重(idx12)以降は+5則外挿、解放トリガーがWorldLv相互考慮に変わる可能性あり。2026-07-23: s1Caps.critRate[12](rung13/閾値280)を実機確認値へ補正。実機ツールチップ「現在7.8%上昇済み(agility 257時点)」は cap 値そのものでなく **agility=257 での按分後の値** ── 一度誤ってcap=0.078と直接置換し二重按分バグを作った(即撤回)。正しくは cap = 0.078×280/257.352 ≈ 0.0849 で逆算(検算: 0.0849×257.352/280=0.078=実機一致)。旧外挿値0.084とは僅差(+0.0009)で、rate定数(0.0003/pt、Lv95以下4点フィット)自体はほぼ正確だったと判明。同rung13の他系統(minPhysATK[12]=73.9)は逆算検算で実機67.9と一致確認済み=変更不要。apply_kongfu_talent_derived.py再実行時はこの手動上書きが失われる点に注意",
+ "currentLvCap": 100,
  "lvCaps": [
   30,
   40,
@@ -189,7 +189,7 @@
    0.052,
    0.06,
    0.068,
-   0.084,
+   0.0849,
    0.09,
    0.098,
    0.11,

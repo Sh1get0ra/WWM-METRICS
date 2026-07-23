@@ -23,14 +23,13 @@
     const xinfaMap = window.WWM_XINFA || {};
     const state = _getEffectiveState() || WWMHelpers.storage.loadJSON('wwm_last_state_v1');
     const tiers = state?.xinfaTiers || {};
-    const xinfaIconsRaw = WWMState.roleInfo?._xinfaIcons || roleInfo?._xinfaIcons || [];
-    const xinfaIconsB64 = WWMState.roleInfo?._xinfaIconsBase64 || roleInfo?._xinfaIconsBase64 || [];
-    const xinfaIcons = xinfaIconsRaw.map((u, i) => xinfaIconsB64[i] || u);
-    const origPassive = WWMState.roleInfo?.passiveSlots || [];
     const cards = [0,1,2,3].map(i => {
       const xid = passive[i];
-      // icon: 元と同じ xid なら base64/URL、 swap 後 or 配列が空(SHARE mode等) は dict から URL fallback
-      const iconUrl = (xid === origPassive[i] && xinfaIcons[i]) ? xinfaIcons[i] : (window.WWM_XINFA_ICONS?.[xid]?.icon_url || null);
+      // icon: マスター (xinfa_icons.json) のみ参照。 インポート元 (bookmarklet/API) 由来の実画像 URL は使わない。
+      // 旧ロジックは「インポート画像優先、マスターはfallback」だったが、マスター未登録の心法でインポート元が
+      // 誤った画像URLを返す事例が発覚 (2026-07-23 兄貴報告: 大義天志が易水と誤表示)。マスター整備が進んだ現在
+      // (52心法中49件登録済み) はインポート画像に頼る理由が薄いため、信頼性の高いマスター一本化に変更。
+      const iconUrl = window.WWM_XINFA_ICONS?.[xid]?.icon_url || null;
       const iconHtml = iconUrl ? `<img src="${iconUrl}" alt="">` : '';
       // 流派 = 公式画像 (兄貴指示 2026-06-13)
       const liupaiUrl = xid ? (window.WWM_XINFA_ICONS?.[xid]?.liupai_pic_url || null) : null;
@@ -351,7 +350,7 @@
       if (t === 2 && def.effectId) {
         const masterStats = window.WWM_XINFA_EFFECTS?.effects?.[def.effectId]?.stats;
         if (masterStats) {
-          const wl = String(effRi?.worldLv || 15);
+          const wl = String(effRi?.worldLv || 16);
           const lookup = {};
           for (const [sk, wlMap] of Object.entries(masterStats)) {
             if (wlMap[wl] != null) lookup[sk] = wlMap[wl];

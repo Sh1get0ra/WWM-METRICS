@@ -412,7 +412,7 @@ function buildStatParamsSync(roleInfo, state) {
       if (tk === 'tier2' && def.effectId) {
         const masterStats = window.WWM_XINFA_EFFECTS?.effects?.[def.effectId]?.stats;
         if (masterStats) {
-          const wl = String(state?.worldLv || roleInfo?.worldLv || 15);
+          const wl = String(state?.worldLv || roleInfo?.worldLv || 16);
           const lookup = {};
           for (const [sk, wlMap] of Object.entries(masterStats)) {
             if (wlMap[wl] != null) lookup[sk] = wlMap[wl];
@@ -448,16 +448,20 @@ function buildStatParamsSync(roleInfo, state) {
   }
 
   // 6. セット pieces2 (suffix が 2個以上で発動)
-  // Lv 連動 (effectsByLv) 優先: 同 suffix 装備の平均 _inferredLv → 該当 Lv 以下の最大 lookup
+  // Lv 連動 (effectsByLv): 同 suffix 装備の**最大** _inferredLv → 該当 Lv 以下の最大 lookup
   //   fallback = pieces2.effects (= Lv91 hardcode、 wdb 未取得セット用)
+  // 2026-07-23 バグ修正: 旧実装は「平均」を使っていたが、兄貴実機確認(4装備中1つのみLv96に
+  // 更新、他3つはLv91のまま)で「セット効果はLv96側の値(+78)が適用される」と判明。
+  // 平均(91+91+91+96)/4=92.25→floor92 では旧ロジックはLv91枠(+64)を選んでしまい実機と不一致。
+  // 装備群の最大Lvを使うロジックに訂正(1つでも高Lv装備があれば、セット全体がそのLvの効果を得る仕様)。
   const suffixCount = {};
-  const suffixLvSum = {};
+  const suffixLvMax = {};
   for (const eq of Object.values(eqDet)) {
     const sfx = eq?.exVo?.suffix;
     if (sfx === undefined) continue;
     suffixCount[sfx] = (suffixCount[sfx]||0) + 1;
     const lv = eq?.exVo?._inferredLv;
-    if (typeof lv === 'number') suffixLvSum[sfx] = (suffixLvSum[sfx]||0) + lv;
+    if (typeof lv === 'number') suffixLvMax[sfx] = Math.max(suffixLvMax[sfx] ?? 0, lv);
   }
   for (const [sfx, cnt] of Object.entries(suffixCount)) {
     if (cnt < 2) continue;
@@ -467,10 +471,10 @@ function buildStatParamsSync(roleInfo, state) {
     let effects = setDef.pieces2.effects;
     const byLv = setDef.pieces2.effectsByLv;
     if (byLv) {
-      const avgLv = suffixLvSum[sfx] != null ? Math.floor(suffixLvSum[sfx] / cnt) : 91;
+      const maxLv = suffixLvMax[sfx] != null ? suffixLvMax[sfx] : 91;
       const lvKeys = Object.keys(byLv).map(Number).sort((a,b) => a - b);
       let pickLv = lvKeys[0];
-      for (const lk of lvKeys) { if (lk <= avgLv) pickLv = lk; else break; }
+      for (const lk of lvKeys) { if (lk <= maxLv) pickLv = lk; else break; }
       effects = byLv[String(pickLv)] || effects;
     }
     if (!effects) continue;
@@ -480,7 +484,7 @@ function buildStatParamsSync(roleInfo, state) {
   }
 
   // 7. 5行 derived (装備で増えた分のみ補正)
-  const baseFive = { body: 137, defense: 137, agility: 137, momentum: 137, power: 137 };
+  const baseFive = { body: 153, defense: 153, agility: 153, momentum: 153, power: 153 };
   const dBody     = (r.body     || 0) - baseFive.body;
   const dDefense  = (r.defense  || 0) - baseFive.defense;
   const dAgility  = (r.agility  || 0) - baseFive.agility;
@@ -489,12 +493,28 @@ function buildStatParamsSync(roleInfo, state) {
 
   // 気血最大値 正式集計 (装備 maxHp affix / 心法 buff 込み合算) 未実装のため、
   // 断魂×嵐雷 synergy の hpThreshold cap 判定 (L727 付近) 用に仮固定値 +50000 を基礎ステータスへ上乗せ (2026-07-15 兄貴指示、暫定措置)
+  // 2026-07-23: formula_player.ft `attr_first_level_trans` テーブル(config()呼び出し9件)発見時、
+  // 一旦 physDef 0.5→0.57 / minPhys力側 0.225→0.22 に変更したが、実際に MIN_W_ATK/MAX_W_ATK の
+  // formula chain を辿って参照有無を検証した結果、このテーブルは外功攻撃力の計算に一切使われて
+  // いないと判明(別 formula 専用の係数、偶然名前が近いだけ)。誤った適用だったため旧値に revert。
   _acc(r, 'maxHp',    dBody*60 + dDefense*17 + 50000);
   _acc(r, 'physDef',  dDefense*0.5);
   _acc(r, 'minPhys',  dAgility*0.9 + dPower*0.225);          // 速*0.9 + 力*0.225
   _acc(r, 'maxPhys',  dMomentum*0.9 + dPower*1.36);          // 会*0.9 + 力*1.36
   _acc(r, 'crit',     dAgility*0.00076);   // 速 → 会心率 only
   _acc(r, 'affinity', dMomentum*0.00038);  // 会 → 会意率 only
+
+  // 7.5 Lv96+ 動的成長加算 (2026-07-23 兄貴合意)
+  // lv95_base.json は Lv95 固定値。avatar_base_attrs (client 側 Lv成長テーブル) は
+  // MANIFEST chunk 位置未解明で直接取得不可のため、Lv96 以降は実測ベース近似値で動的加算する暫定対応。
+  // 成長率 min+6.5/lv, max+13/lv は Lv96→97 実測差分1点のみからの推定値 (推測、Lv98以降の線形継続は未検証)。
+  // 才能/観音(鍛音)/五音太平楽は変更なし、既存ロジックのままカンスト前提。
+  const charLv = roleInfo?.level || 95;
+  if (charLv > 95) {
+    const lvGrowth = charLv - 95;
+    _acc(r, 'minPhys', lvGrowth * 6.5);
+    _acc(r, 'maxPhys', lvGrowth * 13);
+  }
 
   // 8. active path → minElemMain/maxElemMain
   const activePath = _resolvePath(roleInfo?.kongfuMain);
@@ -713,6 +733,29 @@ function buildStatParamsSync(roleInfo, state) {
   r.maxQi = 100;
   r.grazeConvert = 0;
 
+  // 11.5 敵Lv 自動: charLv 95→91, 96-100→96 (アップデートに追加可)
+  // 2026-07-23 バグ修正: 元々 12 適用値セクションより後 (maxPhysATK 付近) にあったため、
+  // r.judgeRes 確定前に appliedHit/appliedCrit/appliedSympathy が computed され、常に
+  // fallback 1.45 (敵Lv91相当) を使ってしまってた。r.judgeRes 依存の計算より前に移動。
+  let enemyLv;
+  if (charLv >= 96) enemyLv = 96;
+  else enemyLv = 91;
+  // 敵Lv テーブル (DEF / 審判耐性)
+  const ENEMY_TABLE = {
+    16:  { def: 10,  jr: 1.0 },
+    51:  { def: 29,  jr: 1.0 },
+    81:  { def: 270, jr: 1.15 },
+    86:  { def: 307, jr: 1.3 },
+    91:  { def: 350, jr: 1.45 },
+    96:  { def: 405, jr: 1.65 },
+    100: { def: 498, jr: 1.85 }
+  };
+  const eRow = ENEMY_TABLE[enemyLv] || ENEMY_TABLE[91];
+  r.physDef    = eRow.def;
+  r.judgeRes   = eRow.jr;
+  r.physRes    = 0;
+  r.enemyDebuff= 0;
+
   // 12. 適用値 (game UI 表示準拠: 命中率 = capped、会心 = cap 80%、会意 = cap 40%)
   // ユーザー仕様: sidebar 適用値 (カッコ内) は最大 80%/40% で頭打ち表示。
   const judgeResApplied = 1.45;
@@ -736,9 +779,14 @@ function buildStatParamsSync(roleInfo, state) {
 
   // appliedCrit: ゲーム実機の会心率表記用 (bonusCritRate 抜き、 judgeRes割込み + cap 80%)。 サイドパネル「会心率」 行の (applied) はこの値。
   // critRateBoosted: 実効会心率 (bonusCritRate 込み、 cap 80%)。 hiddenStat 表示用 + 後段 finalCrit / 期待値ダメージ計算で参照。
-  r.appliedCrit      = Math.min(0.8, (r.crit || 0) / judgeResApplied);
+  // 2026-07-23 バグ修正: judgeResApplied (718行目、固定1.45) を使っていたため敵Lv依存の
+  // r.judgeRes (91=1.45/96=1.65/100=1.85) が反映されず、キャラLv96到達後も判定耐性が
+  // 変わらないように見えてた (全ユーザーLv95固定だった間は敵Lv91固定=judgeResAppliedと
+  // 常に一致してたため表面化しなかった、兄貴指摘で発覚)。appliedHit と同じ r.judgeRes||1.45 に統一。
+  const _judgeResEff = r.judgeRes || judgeResApplied;
+  r.appliedCrit      = Math.min(0.8, (r.crit || 0) / _judgeResEff);
   r.critRateBoosted  = Math.min(0.8, r.appliedCrit + (r.bonusCritRate || 0));
-  r.appliedSympathy  = Math.min(0.4, (r.affinity || 0) / judgeResApplied);
+  r.appliedSympathy  = Math.min(0.4, (r.affinity || 0) / _judgeResEff);
 
   // 13. 最終会心率/会意率 (calc.js _computeCoreLayer式準拠: cap内 + directCrit/Affinity 加算、 0..1 clamp)
   // finalCrit は critRateBoosted (bonusCritRate込み) 参照 → 実ダメージ (期待値) と一致。 appliedCrit (bonus抜き、 ゲーム実機表記) ではない。
@@ -806,27 +854,7 @@ function buildStatParamsSync(roleInfo, state) {
 
   r.maxPhysATK = r.maxPhys;
   r.minPhysATK = r.minPhys;
-  // 敵Lv 自動: charLv 95→91, 96-100→96 (アップデートに追加可)
-  const charLv = roleInfo?.level || 95;
-  let enemyLv;
-  if (charLv >= 96) enemyLv = 96;
-  else enemyLv = 91;
-  // 敵Lv テーブル (DEF / 審判耐性)
-  const ENEMY_TABLE = {
-    16:  { def: 10,  jr: 1.0 },
-    51:  { def: 29,  jr: 1.0 },
-    81:  { def: 270, jr: 1.15 },
-    86:  { def: 307, jr: 1.3 },
-    91:  { def: 350, jr: 1.45 },
-    96:  { def: 405, jr: 1.65 },
-    100: { def: 498, jr: 1.85 }
-  };
-  const eRow = ENEMY_TABLE[enemyLv] || ENEMY_TABLE[91];
-  r.physDef    = eRow.def;
-  r.judgeRes   = eRow.jr;
-  r.physRes    = 0;
-  r.enemyDebuff= 0;
-  r.worldLv    = 15;
+  r.worldLv    = 16;
   r.martialLv  = charLv;  // キャラLvと同一
   r.outerCoeff = 1.5;
   r.statusCoeff= 1.5;

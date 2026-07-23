@@ -97,12 +97,16 @@
     } catch (_) {}
 
     // 心法 icons
+    // 2026-07-23 fix: filter() で未取得スロットを除外すると配列が詰まり、後続スロットの画像が
+    // 前のスロット位置にズレ込む(=大義天志のスロットに易水の画像が誤表示されるバグの根本原因)。
+    // map() でスロット位置(index)を保持したまま、未取得は空文字にする。
     try {
-      const xi = [...document.querySelectorAll('.icon-item .icon img.icon')].map(i => i.src).filter(s => s && s.includes('xinfa/images'));
-      if (xi.length) {
+      const xi = [...document.querySelectorAll('.icon-item .icon img.icon')]
+        .map(i => (i.src && i.src.includes('xinfa/images')) ? i.src : '');
+      if (xi.some(Boolean)) {
         j.data._xinfaIcons = xi;
         t.textContent = '心法アイコン取得中...';
-        j.data._xinfaIconsBase64 = await Promise.all(xi.map(u => i2b(u)));
+        j.data._xinfaIconsBase64 = await Promise.all(xi.map(u => u ? i2b(u) : ''));
       }
     } catch (_) {}
 

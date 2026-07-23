@@ -1,6 +1,57 @@
 {
-  "current": "2.6.0",
+  "current": "2.6.1",
   "entries": [
+    {
+      "version": "2.6.1",
+      "date": "2026-07-23",
+      "items": [
+        {
+          "featured": true,
+          "ja": "【グローバルゲームVer2.0に対応】WorldLv16解放に伴うキャラクター基礎ステータスを反映し、会心率・外功攻撃力の計算精度が向上しました。",
+          "en": "[Global Game Ver2.0 Support] Reflected character base stats following the WorldLv16 unlock, improving Critical Rate and Physical Attack calculation accuracy.",
+          "zh": "【适配全球服游戏Ver2.0】 反映了WorldLv16解锁后的角色基础属性, 提升了会心率、外功攻击力的计算精度。",
+          "ko": "【글로벌 게임 Ver2.0 대응】 WorldLv16 해금에 따른 캐릭터 기본 스탯을 반영하여, 회심율·외공 공격력의 계산 정확도가 향상되었습니다.",
+          "vi": "[Hỗ trợ Game Toàn cầu Ver2.0] Đã phản ánh chỉ số cơ bản nhân vật theo mở khóa WorldLv16, cải thiện độ chính xác tính toán Tỷ lệ Chí mạng và Công kích Ngoại công.",
+          "de": "[Unterstützung für globale Spielversion 2.0] Charakter-Basiswerte nach der WorldLv16-Freischaltung berücksichtigt, wodurch die Berechnungsgenauigkeit von kritischer Rate und physischem Angriff verbessert wurde.",
+          "es": "[Compatibilidad con Ver2.0 global del juego] Se reflejaron las estadísticas base del personaje tras el desbloqueo de WorldLv16, mejorando la precisión de cálculo de Tasa Crítica y Ataque Físico.",
+          "fr": "[Prise en charge de la Ver2.0 mondiale du jeu] Les statistiques de base du personnage après le déblocage du WorldLv16 ont été prises en compte, améliorant la précision du calcul du Taux Critique et de l'Attaque Physique.",
+          "pt_br": "[Suporte à Ver2.0 global do jogo] Refletidos os status base do personagem após o desbloqueio do WorldLv16, melhorando a precisão do cálculo de Taxa Crítica e Ataque Físico.",
+          "ru": "[Поддержка глобальной версии игры 2.0] Учтены базовые характеристики персонажа после разблокировки WorldLv16, что повысило точность расчёта шанса крита и физической атаки.",
+          "th": "[รองรับเกมเวอร์ชันสากล Ver2.0] สะท้อนค่าสถานะพื้นฐานตัวละครหลังปลดล็อก WorldLv16 เพิ่มความแม่นยำในการคำนวณอัตราคริติคอลและพลังโจมตีภายนอก",
+          "zh_tw": "【適配全球服遊戲Ver2.0】 反映了WorldLv16解鎖後的角色基礎屬性, 提升了會心率、外功攻擊力的計算精度。"
+        },
+        {
+          "featured": false,
+          "ja": "【武庫Lv91を追加】武庫の強化上限がLv91まで拡張されたことに対応しました。",
+          "en": "[Added Arsenal Lv91] Supported the Arsenal enhancement cap being extended to Lv91.",
+          "zh": "【新增武库Lv91】 适配了武库强化上限拓展至Lv91。",
+          "ko": "【무고 Lv91 추가】 무고 강화 상한이 Lv91까지 확장된 것에 대응했습니다.",
+          "vi": "[Thêm Vũ khố Lv91] Đã hỗ trợ giới hạn nâng cấp Vũ khố mở rộng đến Lv91.",
+          "de": "[Waffenkammer Lv91 hinzugefügt] Unterstützung für die auf Lv91 erweiterte Obergrenze der Waffenkammer-Verbesserung.",
+          "es": "[Añadido Arsenal Lv91] Se admite la ampliación del límite de mejora del Arsenal a Lv91.",
+          "fr": "[Arsenal Lv91 ajouté] Prise en charge de l'extension du plafond d'amélioration de l'Arsenal à Lv91.",
+          "pt_br": "[Adicionado Arsenal Lv91] Suporte à extensão do limite de aprimoramento do Arsenal para Lv91.",
+          "ru": "[Добавлен Арсенал Lv91] Поддержка расширения предела улучшения Арсенала до Lv91.",
+          "th": "[เพิ่มคลังแสง Lv91] รองรับการขยายขีดจำกัดการเสริมคลังแสงถึง Lv91",
+          "zh_tw": "【新增武庫Lv91】 適配了武庫強化上限拓展至Lv91。"
+        },
+        {
+          "featured": false,
+          "ja": "【装備鍛音の上限拡張に対応】装備鍛音(強化)の上限がLv60まで拡張されたことに対応しました。",
+          "en": "[Equip Enhance Cap Extension] Supported the Equipment Enhance cap being extended to Lv60.",
+          "zh": "【适配装备锻音上限拓展】 适配了装备锻音(强化)上限拓展至Lv60。",
+          "ko": "【장비 단음 상한 확장 대응】 장비 단음(강화) 상한이 Lv60까지 확장된 것에 대응했습니다.",
+          "vi": "[Hỗ trợ mở rộng giới hạn Rèn âm trang bị] Đã hỗ trợ giới hạn Rèn âm (tăng cường) trang bị mở rộng đến Lv60.",
+          "de": "[Erweiterung der Ausrüstungsverstärkungs-Obergrenze] Unterstützung für die auf Lv60 erweiterte Obergrenze der Ausrüstungsverstärkung (Enhance).",
+          "es": "[Ampliación del límite de mejora de equipo] Se admite la ampliación del límite de Mejora de equipo a Lv60.",
+          "fr": "[Extension du plafond d'amélioration d'équipement] Prise en charge de l'extension du plafond d'Amélioration d'équipement à Lv60.",
+          "pt_br": "[Extensão do limite de aprimoramento de equipamento] Suporte à extensão do limite de Aprimoramento de equipamento para Lv60.",
+          "ru": "[Расширение предела усиления экипировки] Поддержка расширения предела усиления экипировки до Lv60.",
+          "th": "[รองรับการขยายขีดจำกัดการเสริมพลังอุปกรณ์] รองรับขีดจำกัดการเสริมพลังอุปกรณ์ (Enhance) ขยายถึง Lv60",
+          "zh_tw": "【適配裝備鍛音上限拓展】 適配了裝備鍛音(強化)上限拓展至Lv60。"
+        }
+      ]
+    },
     {
       "version": "2.6.0",
       "date": "2026-07-13",

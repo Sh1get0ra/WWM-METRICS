@@ -164,7 +164,8 @@ async function openPreviewModal(data, importedAt, savedState) {
         61: { peaked: true, min: 17, max: 34 },
         71: { peaked: true, min: 17, max: 34 },
         81: { peaked: true, min: 17, max: 34 },
-        86: { peaked: true, min: 17, max: 34 }
+        86: { peaked: true, min: 17, max: 34 },
+        91: { peaked: false, min: 17, max: 34 }
       }
     }
   };
@@ -220,7 +221,7 @@ async function openPreviewModal(data, importedAt, savedState) {
 }
 
 // ── Step2 form (観音 + 武庫) ────────────────────────────────────
-const _ARSENAL_TIERS = [86, 81, 71, 61, 56, 51, 41];
+const _ARSENAL_TIERS = [91, 86, 81, 71, 61, 56, 51, 41];
 const _ARSENAL_TIER_PRESET = { 41: { min: 12, max: 25 }, default: { min: 17, max: 34 } };
 const _ARSENAL_PATHS = [
   { key: 'phys',       ja: '汎用', labelKey:'pathPhys',       minStat: 'minPhys',       maxStat: 'maxPhys'       },
@@ -361,8 +362,9 @@ function renderEnhanceArsenalForm(state, roleInfo) {
   `).join('');
   const statLabels = _arsenalStatLabels(state.arsenal.path);
   const tierRows = _ARSENAL_TIERS.map(lv => {
-    const t = state.arsenal.tiers[lv];
     const preset = lv === 41 ? _ARSENAL_TIER_PRESET[41] : _ARSENAL_TIER_PRESET.default;
+    // 旧 savedState/localStorage 由来 (新規 Tier 追加前に保存された state) は tiers[lv] 欠落しうる → fallback 生成
+    const t = state.arsenal.tiers[lv] || (state.arsenal.tiers[lv] = { peaked: false, min: preset.min, max: preset.max });
     return `
       <div class="wwm-arsenal-tier" data-tier="${lv}">
         <span class="wwm-arsenal-lv">${_tierLabel(lv)}</span>

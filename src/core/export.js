@@ -184,8 +184,13 @@ const WWM_SITE_URL = 'https://wwm-metrics.pages.dev';
       const x = window.WWM_XINFA?.[xid];
       const _n = window.WWM_DS.name('xinfa', xid, lang);
       const name = _n.indexOf('[xinfa:') === 0 ? ('#' + xid) : _n;
-      const iconRaw = ri._xinfaIconsBase64?.[i] || ri._xinfaIcons?.[i]
-        || window.WWM_XINFA_ICONS?.[xid]?.icon_url || '';
+      // マスター (xinfa_icons.json) 未登録の心法は問答無用でアイコンなし (インポート元の誤URL遮断)。
+      // 登録済みなら従来通りインポート画像 (bookmarklet base64、 CORS 回避) 優先、 なければマスター URL。
+      // (2026-07-23: xinfa.js grid とは違い export = html2canvas 系で公式CDN画像は CORS 不可 →
+      //  マスター一本化不可、インポート画像優先の構造自体は維持する必要がある)
+      const iconRaw = window.WWM_XINFA_ICONS?.[xid]
+        ? (ri._xinfaIconsBase64?.[i] || ri._xinfaIcons?.[i] || window.WWM_XINFA_ICONS?.[xid]?.icon_url || '')
+        : '';
       const iconSrc = await _fetchImgDataUrl(iconRaw);
       const liupaiSrc = _liupaiData(ri, window.WWM_XINFA_ICONS?.[xid]?.liupai_pic_url);
       xinfa.push({ xid, name, iconSrc, liupaiSrc, tier: tiers[i] ?? tiers[String(i)] ?? 6, rank: x?.rank || '' });

@@ -112,7 +112,7 @@
         if (state.enhance)    stateSlim.e = Object.entries(state.enhance).map(([k, v]) => [+k, v]);
         if (state.xinfaTiers) stateSlim.x = Object.entries(state.xinfaTiers).map(([k, v]) => [+k, v]);
         if (state.arsenal && typeof state.arsenal === 'object') {
-          const ARS_TIERS = [41, 51, 56, 61, 71, 81, 86];
+          const ARS_TIERS = [41, 51, 56, 61, 71, 81, 86, 91];
           const PATH_DICT = ['bellstrike','stonesplit','silkbind','bamboocut','voidPath']; // 未知 path は raw 文字列 fallback
           const tiers = state.arsenal.tiers || {};
           const pi = PATH_DICT.indexOf(state.arsenal.path);
