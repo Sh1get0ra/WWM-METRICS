@@ -581,7 +581,11 @@ function buildStatParamsSync(roleInfo, state) {
         _acc(r, finalKey, _rc.cap);
       } else {
         const ratio = fromVal / (_rc.thr || 1);
-        _acc(r, finalKey, _rc.cap * ratio);
+        // 20703(千機の縄)才能S3実測: 閾値未達成でも実機は満額表示 (327/328でも22.0、線形按分21.93でなく
+        // 切り上げ相当)。原因未確定(推測: ゲーム側は閾値未達成分をceil、または表示精度と内部精度の差)、
+        // 兄貴GO済みでこの才能のみ暫定的にceil適用 (2026-07-25)。他talentへの拡大は未検証。
+        const raw = _rc.cap * ratio;
+        _acc(r, finalKey, d.roundUp ? Math.ceil(raw * 10) / 10 : raw);
       }
       derivedSeen.add(wwmKey);
     }

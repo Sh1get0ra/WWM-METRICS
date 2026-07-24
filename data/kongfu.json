@@ -349,7 +349,8 @@
         "appliesTo": "elemPen",
         "slot": "s3",
         "formula": "linear_capped_rung",
-        "weaponSpecific": "bamboocut"
+        "weaponSpecific": "bamboocut",
+        "roundUp": true
       }
     ]
   },
