@@ -5,7 +5,11 @@ window.WWM_SCORE_VERSION = 22;
 
 // 表示ラベル/calcKey (stat_display.json 等) の cache buster。 SCORE_VERSION と独立。
 // スコア計算を変えずラベル/表示参照だけ変えた時に +1 → baseline 無効化(再import促し)を起こさず反映。
-window.WWM_DISPLAY_VERSION = 179;
+window.WWM_DISPLAY_VERSION = 183;
+
+// 現在のゲーム大世界Lv (アップデート追従で書換、 stats.js r.worldLv と opt.js 装備tier上限判定の
+// single source of truth、 2026-07-24 導入)。 大世界Lv アップデートのたびにここを更新すること。
+window.WWM_CURRENT_WORLD_LV = 16;
 
 // ── 共通計算層 ────────────────────────────────────────────────
 // params object から innerPhys/outerBoost/各確率を計算。

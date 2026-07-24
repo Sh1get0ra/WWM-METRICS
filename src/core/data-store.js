@@ -94,6 +94,10 @@
     // path.affix.{atk,pen,dmgUp}.vi は trailing space 付きで採取 (pen.vi="Xuyên thấu " 等)、
     // base.vi は trailing space 無し (pathBase.vi="Minh Kim") → affix + base 連結で自然 spacing。
     const VI_REORDER = true;
+    // min<Path>/max<Path> = affix_stat 実測値 (min/max<StatKeyName> 形式、2026-07-03 GroupB archive
+    // 実測で兄貴GO済) を直接使う。文字列連結 (prefix+base+atkStat) は言語ごとの語順に対応できず
+    // 9言語 (en/de/es/fr/pt_br/ru/th 等) で不自然な表記になっていた (2026-07-25 発覚・修正)。
+    const affixStat = data.affix_stat || {};
     for (const [p, base] of Object.entries(path.pathBase)) {
       const C = cap(p);
       const keys = {
@@ -104,38 +108,39 @@
         ['min' + C]:     {},
         ['max' + C]:     {}
       };
+      const minStat = affixStat['min' + C];
+      const maxStat = affixStat['max' + C];
       for (const L of LANGS) {
         const b = base[L]; if (!b) continue;
         const atk = path.affix.atk?.[L] || '';
         const pen = path.affix.pen?.[L] || '';
         const dmg = path.affix.dmgUp?.[L] || '';
-        const mn  = path.affix.min?.[L] || '';
-        const mx  = path.affix.max?.[L] || '';
         keys['path' + C][L] = b;
         if (VI_REORDER && L === 'vi') {
           keys['pathAtk' + C][L] = atk + b;
           keys['pathPen' + C][L] = pen + b;
           keys['pathDmg' + C][L] = dmg + b;
-          keys['min' + C][L]     = mn + atk + b;
-          keys['max' + C][L]     = mx + atk + b;
         } else {
           keys['pathAtk' + C][L] = b + atk;
           keys['pathPen' + C][L] = b + pen;
           keys['pathDmg' + C][L] = b + dmg;
-          keys['min' + C][L]     = mn + b + atk;
-          keys['max' + C][L]     = mx + b + atk;
         }
+        if (minStat?.[L]) keys['min' + C][L] = minStat[L];
+        if (maxStat?.[L]) keys['max' + C][L] = maxStat[L];
       }
       for (const [k, v] of Object.entries(keys)) {
         if (!ui[k]) ui[k] = v; // 既存キー (旧 ui.json 重複) を上書きしない
       }
       // suffix型 <path>Pen (data/affix.json 実 statKey 命名規則。 prefix型 pathPen<Path> とは別に必要、
-      // 2026-07-01: 5path系貫通affix4種の表示名解決バグ修正)
+      // 2026-07-01: 5path系貫通affix4種の表示名解決バグ修正)。
+      // affix_stat に実測値があれば優先 (2026-07-25: voidPen は affix_stat に無いので文字列連結 fallback)
       const stat = data.stat = data.stat || {};
       if (!stat[p + 'Pen']) {
+        const penStat = affixStat[p + 'Pen'];
         const penEntry = {};
         for (const L of LANGS) {
           const b = base[L]; if (!b) continue;
+          if (penStat?.[L]) { penEntry[L] = penStat[L]; continue; }
           const pen = path.affix.pen?.[L] || '';
           penEntry[L] = (VI_REORDER && L === 'vi') ? (pen + b) : (b + pen);
         }
@@ -296,6 +301,10 @@
 
   // path の語尾「力」付き表示 (旧 build-labels.js _statDisplay。 anlz.js path subItem 表記用)。
   // 例: name('path-statdisplay', 'void', 'ja') → '無相攻撃力'。
+  // 2026-07-25: min/max無し版はゲーム内に単独sidが存在せず(locale完全一致0件)、実機確認の結果
+  // 「鋼鳴攻撃力」のようにpathBase+atkStat連結の表記が正しいと確定(兄貴実機SS)。
+  // 一時的にaffix_stat.<path>Atk(PRO_ATK_A等由来)を直接参照する実装を試みたが、これは別文脈の
+  // テキストを誤収集したもので誤りだった(即revert、affix_stat側の該当4キーも次回削除検討)。
   function _pathStatDisplay(id, lang) {
     const p = data.path;
     if (!p || !p.pathBase || !p.affix) return null;

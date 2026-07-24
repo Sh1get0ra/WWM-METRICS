@@ -143,12 +143,12 @@
   },
   "20401": {
     "weaponType": "mo_blade",
-    "description": "断魂の刀 (陌刀、Thundercry Blade)。砕岩攻撃力 +80~160 (固定) + 力依存 会心率上昇 (cap 6.8%) + 最小砕岩依存 砕岩貫通上昇 (cap 18.0)。in-game 観測 2026-05-25。",
+    "description": "断魂の刀 (陌刀、Thundercry Blade)。砕岩攻撃力 +80~160 (固定) + 体/力依存 外功攻撃上昇 (cap 59.4) + 最小砕岩依存 砕岩貫通上昇 (cap 18.0)。in-game 観測 2026-05-25、2026-07-23パッチで才能「会心率強化上昇」→「外功攻撃力上昇」(体/力依存、対象ステータス変更)に仕様変更、2026-07-24 mining再取得で反映。",
     "path": "stonesplit",
     "derived": [
       {
         "from": "max(body,power)",
-        "appliesTo": "critRate",
+        "appliesTo": "maxPhysATK",
         "slot": "s1",
         "formula": "linear_capped_rung"
       },

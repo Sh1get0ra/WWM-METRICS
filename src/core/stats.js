@@ -854,7 +854,7 @@ function buildStatParamsSync(roleInfo, state) {
 
   r.maxPhysATK = r.maxPhys;
   r.minPhysATK = r.minPhys;
-  r.worldLv    = 16;
+  r.worldLv    = window.WWM_CURRENT_WORLD_LV || 16;
   r.martialLv  = charLv;  // キャラLvと同一
   r.outerCoeff = 1.5;
   r.statusCoeff= 1.5;

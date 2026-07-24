@@ -8,7 +8,6 @@
   const _fmtAffixVal       = window.WWMSidebar.affix.fmtAffixVal;
   const _getAffixOptions   = window.WWMSidebar.affix.getAffixOptions;
   const _getAffixMax       = window.WWMSidebar.affix.getAffixMax;
-  const _SLOT6_ARMOR       = window.WWMSidebar.affix.SLOT6_ARMOR;
   const _affixDisplayName  = window.WWMSidebar.affix.affixDisplayNameSplit;
   const _loadEquipMax      = window.WWMSidebar.affix.loadEquipMax;
   const _lvToTier          = window.WWMSidebar.affix.lvToTier;
@@ -23,8 +22,35 @@
   // ── 内部 state ───────────────────────────────────────────
   let _OPT_LAST_STEPS = null;
   let _OPT_LAST_SCORES = null;
+  // 装備Lv UP fix (L412-447) 込みの最適化後 roleInfo。_applyOptSteps が affix 差替と
+  // 同時に装備本体(baseAttrs/_inferredLv)の LvUP 分も反映するために必要 (2026-07-24 バグ修正:
+  // 適用前は元Lvのbaseattrsのまま affix だけ書き換えていたため、提案スコアと適用後の実スコアが
+  // 乖離していた = 装備Lv UP分の本体ステ差が適用処理に反映されていなかった)。
+  let _OPT_LAST_OPTIMIZED_RI = null;
+  // 装備Lv UP fix 対象 slot 一覧 ({slot, fromLv, toLv, rank}[])。_applyOptSteps が「affix変更の
+  // 無かった slot」にも装備LvUPを反映するために必要 (2026-07-24 バグ修正: steps に乗るのは
+  // affix 差替が発生した slot のみのため、affix 最適余地の無かった slot [例: 弓/射玦] は
+  // LvUP 自体が適用処理から漏れ、提案スコアと適用後スコアがまだ僅かに乖離していた)。
+  let _OPT_LAST_LVFIX = null;
   // 装備部位 sort用 order map (renderOptimization + _OPT_resortRows 共通)
   const _OPT_SLOT_ORDER = { '1':0,'2':1,'3':2,'4':3,'5':4,'8':5,'10':6,'11':7,'9,21':99,'9':99,'21':99 };
+
+  // 装備tier 解放条件 = キャラLv条件(_lvToTier) AND 現在大世界Lv条件 (兄貴指示 2026-07-24)。
+  // _lvToTier はキャラLvのみからの理論上限で、 まだゲーム内で解放されていない装備tier
+  // (例: キャラLv100でも大世界Lv16時点ではLv100装備は未実装/取得不可) まで提案してしまうバグがあった。
+  // tier91/96 は現在(大世界Lv16)で実装済み = 制約なし。tier100/105 は未実装、必要大世界Lvは仮値
+  // (兄貴予想: 大世界Lv18→Lv100解放, 大世界Lv20→Lv105解放)、正式実装判明時にここを更新すること。
+  const _TIER_WORLDLV_REQ = { 105: 20, 100: 18 };
+  function _worldLvCapTier(theoreticalTier) {
+    const worldLv = window.WWM_CURRENT_WORLD_LV || 16;
+    const tiers = [105, 100, 96, 91, 86, 81, 71, 61];
+    for (const t of tiers) {
+      if (theoreticalTier < t) continue;
+      const req = _TIER_WORLDLV_REQ[t];
+      if (req == null || worldLv >= req) return t;
+    }
+    return theoreticalTier;
+  }
 
   // sort切替時 再計算なしで rows DOM だけ即時並び替え (checked状態保持)
   function _OPT_resortRows(sortBy) {
@@ -221,6 +247,14 @@
     if (_aborted() || optResult.aborted) return;
     const startScore = optResult.startScore;
     const curScore = optResult.endScore;
+    // 装備Lv UP fix 込みの最適化後 roleInfo を cache (_applyOptSteps 用、下記 _OPT_LAST_OPTIMIZED_RI 参照)
+    _OPT_LAST_OPTIMIZED_RI = optResult.ri;
+    _OPT_LAST_LVFIX = optResult.lvFixApplied;
+    // 表示用開始値 = 現在の実武格指数 (baseline)。startScore (内部計算) は「装備Lv UP fix
+    // preprocess」(L412-447、現装備Lv < charLv装備可能上限の場合に内部的に装備を上限Lvへ
+    // 引き上げた仮想状態) 由来のため、そのまま表示すると実際の武格指数と乖離する
+    // (2026-07-24 兄貴指摘: 装備Lv UP込みの提案自体は妥当だが、基準は現在の実武格指数にすべき)。
+    const displayStartScore = WWMState.baseline?.statusScore ?? startScore;
     const steps = optResult.steps;
     // tier 達成判定 (各 step で prev→cur tier 移行記録)
     const TIER_LIST = [['SS', 1.0], ['S', 0.9], ['A', 0.8], ['B', 0.6]];
@@ -239,8 +273,8 @@
       const fin = await window.WWMStats.buildStatParams(roleInfo, state);
       window.computeExpected(fin);
     } catch (e) {}
-    const totalDelta = Math.round(curScore - startScore);
-    const summary = `${Math.round(startScore).toLocaleString()} ▶ ${Math.round(curScore).toLocaleString()} <span class="wwm-opt-totaldelta">+${totalDelta.toLocaleString()}</span>`;
+    const totalDelta = Math.round(curScore - displayStartScore);
+    const summary = `${Math.round(displayStartScore).toLocaleString()} ▶ ${Math.round(curScore).toLocaleString()} <span class="wwm-opt-totaldelta">+${totalDelta.toLocaleString()}</span>`;
     const _fmtFromTo = (name, val, ratio, key) => {
       const v = _fmtAffixVal(val, key);
       const pct = ratio != null ? `(${Math.round(ratio*100)}%)` : '';
@@ -277,7 +311,7 @@
     `;}).join('') : `<div class="wwm-opt-empty">${(window.T&&window.T.optNoImprovement)||'改善余地なし'}</div>`;
     // 結果 cache (export 用)
     _OPT_LAST_STEPS = steps;
-    _OPT_LAST_SCORES = { start: Math.round(startScore), end: Math.round(curScore), delta: totalDelta, ratio: TARGET_RATIO };
+    _OPT_LAST_SCORES = { start: Math.round(displayStartScore), end: Math.round(curScore), delta: totalDelta, ratio: TARGET_RATIO };
     // Tier 基準: 最適化最大スコア (= curScore) は import 時に1回だけ確定保存。以降の opt 再計算では値を更新しない。
     // ※ applyImport で localStorage 削除 + LOCKED 解除 → 再 import で再確定する。
     if (!WWMState.opt.locked) {
@@ -332,13 +366,29 @@
     const origRi = WWMState.roleInfo;
     if (!origRi) return;
     if (!WWMState.virtual.gear) WWMState.virtual.gear = {};
+    // 装備Lv UP fix (L412-447相当) 込みの最適化後 roleInfo を優先参照 (2026-07-24 バグ修正)。
+    // 元の origRi をそのまま使うと装備本体(baseAttrs/_inferredLv)が旧Lvのままで、affix差替だけの
+    // 適用になり、提案スコアと実際に適用した後のスコアが乖離する (兄貴実測: 提案+4,456 に対し
+    // 適用後+2,399 相当しか反映されなかった実例)。
+    const lvFixedRi = _OPT_LAST_OPTIMIZED_RI;
+    // affix変更の有無に関わらず、装備Lv UP fix対象slot全部を先にvirtual gearへ反映 (2026-07-24
+    // バグ修正: steps に乗るのは affix 差替が発生した slot のみのため、affix 最適余地の無かった
+    // slot [例: 弓/射玦] は下の step ループだけでは装備Lv UP自体が漏れる)。
+    if (lvFixedRi && _OPT_LAST_LVFIX) {
+      for (const fix of _OPT_LAST_LVFIX) {
+        if (WWMState.virtual.gear[fix.slot]) continue; // 既に用意済みなら重複作成しない
+        const orig = lvFixedRi.wearEquipsDetailed?.[fix.slot];
+        if (!orig) continue;
+        WWMState.virtual.gear[fix.slot] = JSON.parse(JSON.stringify(orig));
+      }
+    }
     for (const step of stepsToApply) {
       if (step.kind === 'bowSet') {
         // 弓セット suffix 変更 (slot 9 + 21)
         ['9','21'].forEach(s => {
           let vEq = WWMState.virtual.gear[s];
           if (!vEq) {
-            const orig = origRi.wearEquipsDetailed?.[s];
+            const orig = lvFixedRi?.wearEquipsDetailed?.[s] || origRi.wearEquipsDetailed?.[s];
             if (!orig) return;
             vEq = JSON.parse(JSON.stringify(orig));
             WWMState.virtual.gear[s] = vEq;
@@ -351,7 +401,7 @@
       // 既存 virtual or original の clone を取得/初期化
       let vEq = WWMState.virtual.gear[slot];
       if (!vEq) {
-        const orig = origRi.wearEquipsDetailed?.[slot];
+        const orig = lvFixedRi?.wearEquipsDetailed?.[slot] || origRi.wearEquipsDetailed?.[slot];
         if (!orig) continue;
         vEq = JSON.parse(JSON.stringify(orig));
         WWMState.virtual.gear[slot] = vEq;
@@ -404,19 +454,30 @@
     const onProgress    = opts.onProgress || null;
     const _SLOT6_WEAPON_LIKE = window.WWMSidebar.affix.SLOT6_WEAPON_LIKE;
     const charLv = roleInfo?.level || 95;
+    // 装備 affix の理論 max 値算出には常にコレ (targetLv) を使う。 charLv (キャラ生Lv) をそのまま
+    // 使うと、 まだ大世界Lv未解放の装備tier (例: charLv100 だが大世界Lv16時点はLv96までしか実装
+    // されていない) の max 値を誤って参照してしまう (2026-07-24 兄貴実機発覚: 目標95%設定なのに
+    // 適用後 affix が100%表示になるバグ、 原因 = ②Greedy loop 側の _getAffixMax 呼出し4箇所が
+    // charLv のまま残っており、 ①のみ targetLv 化していた見落とし)。
+    const targetLv = _worldLvCapTier(parseInt(_lvToTier(charLv), 10));
     await _loadEquipMax();
 
     // working clone (原 roleInfo 不可変)
     const working = JSON.parse(JSON.stringify(roleInfo));
 
-    // 装備 Lv UP fix preprocess (2026-06-24 #43):
+    // 装備 Lv UP fix preprocess (2026-06-24 #43、2026-07-24 バグ修正 x3):
     //   現装備 Lv < charLv tier 上限 Lv の場合、 内部的に上限 Lv (= charLv 装備可能最大) に fix。
-    //   base 値 (equip_base_by_lv) + 各 affix 値 (newMax × 元 ratio = 品質 keep) 再算。
-    //   既 OPT logic はこの fix 後 working を前提に affix 最適化提示 = 「装備 Lv UP 込みの推奨ビルド」 になる。
+    //   ①装備 RankUP (base 値更新) = ここで実施。
+    //   affix は既存品質% (d[2]) を無視し、 一律 TARGET_RATIO に fix してから②(Greedy loop)へ渡す
+    //   (兄貴指示 2026-07-24: 「装備の RankUP がある場合は ratio 維持すべきでない、 RankUP が
+    //   ない場合は ratio 維持すべき」。 gear.js 武具対照「新置」プレビューの実機挙動と実測一致:
+    //   既存 100% だった affix (例: 最大外功攻撃強化 63.8[100%]) も RankUP 後は 73.1[94%] に
+    //   "下がる" — 高品質 affix を Math.max で温存する旧実装は過大評価バグだった。
+    //   RankUP が発生しない装備 [= このブロックに入らない、curLv>=targetLv] は既存 ratio 維持が
+    //   正しい仕様のため、 ②(Greedy loop 内の同 statKey value 上げ評価)側は変更しない。
     const _lvFixApplied = [];
     {
       const RANK_TO_TIER = { gold: '5', purple: '4', blue: '3' };
-      const targetLv = parseInt(_lvToTier(charLv), 10);
       const equipBase = window.WWM_EQUIP_BASE_BY_LV;
       if (equipBase) {
         for (const slot of Object.keys(working.wearEquipsDetailed || {})) {
@@ -436,9 +497,10 @@
             const sk = window.WWM_AFFIX?.[d[0]]?.statKey;
             if (!sk) continue;
             const newMax = _getAffixMax(sk, targetLv);
-            if (newMax == null) continue;
-            const ratio = d[2] || 0;
-            d[1] = +(newMax * ratio).toFixed(4);
+            if (newMax == null) continue; // Lv非依存 affix (会心率強化等) = 絶対値据え置き
+            // RankUP発生時 = 既存品質% 無視、 一律 TARGET_RATIO に fix (兄貴指示 2026-07-24)
+            d[1] = +(newMax * TARGET_RATIO).toFixed(4);
+            d[2] = TARGET_RATIO;
           }
           eq.exVo._inferredLv = targetLv;
           _lvFixApplied.push({ slot, fromLv: curLv, toLv: targetLv, rank });
@@ -497,7 +559,7 @@
         const opts2 = _getAffixOptions(seedId, slot, idx, ba, null, _ex?._inferredLv, _ex?._rank);
         const targetOpt = opts2.find(o => o.statKey === overrideIdx5);
         if (!targetOpt) continue;
-        const mv = _getAffixMax(overrideIdx5, charLv);
+        const mv = _getAffixMax(overrideIdx5, targetLv);
         if (mv == null) continue;
         if (!ba[idx]) ba[idx] = {};
         ba[idx].equipmentDetails = [parseInt(targetOpt.id, 10), mv * TARGET_RATIO, TARGET_RATIO, 2, 1];
@@ -574,7 +636,7 @@
 
     // iter loop
     for (let iter = 0; iter < MAX_ITER; iter++) {
-      if (abortCheck()) return { ri: working, startScore, endScore: curScore, steps, aborted: true };
+      if (abortCheck()) return { ri: working, startScore, endScore: curScore, steps, lvFixApplied: _lvFixApplied, aborted: true };
       if (onProgress) onProgress(iter + 1);
       const eqDet = working.wearEquipsDetailed || {};
       const slots = Object.keys(eqDet).filter(s => slotsAllowed.has(s));
@@ -590,12 +652,11 @@
           // zeroBase mode: 元 working に affix 無い枠 skip (= 空 slot に新規 affix 生やさない)
           if (zeroBase && origAffixMemo[slot]?.[idx] == null) continue;
           const curStatKey = window.WWM_AFFIX?.[cur[0]]?.statKey;
-          const isArmorIdx5 = (idx === 5 && _SLOT6_ARMOR.has(slot));
           // overrideIdx5 + 武器系 idx=5 = 固定 = value 上げ + swap 評価 共に skip
           if (overrideIdx5 && _SLOT6_WEAPON_LIKE.has(slot) && idx === 5) continue;
           // 同 statKey value 上げ評価 (全 idx)
           if (curStatKey) {
-            const _maxValSame = _getAffixMax(curStatKey, charLv);
+            const _maxValSame = _getAffixMax(curStatKey, targetLv);
             if (_maxValSame != null && cur[1] < _maxValSame * TARGET_RATIO - 1e-6) {
               const _s0 = cur[0], _s1 = cur[1], _s2 = cur[2], _s3 = cur[3];
               try {
@@ -621,8 +682,6 @@
               }
             }
           }
-          // 防具 idx5 = 武学固有 = swap 探索外 (value 上げのみ評価済)
-          if (isArmorIdx5) continue;
           const _sig = slot + '|' + idx + '|' + affixes.map(a => a?.equipmentDetails?.[0] ?? '-').join(',');
           let options = _optionsCache.get(_sig);
           if (!options) { options = _getAffixOptions(cur[0], slot, idx, affixes, null, eq?.exVo?._inferredLv, eq?.exVo?._rank); _optionsCache.set(_sig, options); }
@@ -630,11 +689,11 @@
             if (!opt.statKey || opt.statKey === '__pvp__') continue;
             if (opt.statKey === curStatKey) continue;
             if (!_alive(opt.statKey)) continue;
-            const maxVal = _getAffixMax(opt.statKey, charLv);
+            const maxVal = _getAffixMax(opt.statKey, targetLv);
             if (maxVal == null) continue;
             if (performance.now() > _sliceDeadline) {
               await _macroYield();
-              if (abortCheck()) return { ri: working, startScore, endScore: curScore, steps, aborted: true };
+              if (abortCheck()) return { ri: working, startScore, endScore: curScore, steps, lvFixApplied: _lvFixApplied, aborted: true };
               _sliceDeadline = performance.now() + SLICE_MS;
             }
             const s0 = cur[0], s1 = cur[1], s2 = cur[2], s3 = cur[3];
@@ -675,7 +734,7 @@
             if (sfxInt === curBowSuffix) continue;
             if (performance.now() > _sliceDeadline) {
               await _macroYield();
-              if (abortCheck()) return { ri: working, startScore, endScore: curScore, steps, aborted: true };
+              if (abortCheck()) return { ri: working, startScore, endScore: curScore, steps, lvFixApplied: _lvFixApplied, aborted: true };
               _sliceDeadline = performance.now() + SLICE_MS;
             }
             const sv9 = bowEq9.exVo.suffix, sv21 = bowEq21.exVo ? bowEq21.exVo.suffix : undefined;
@@ -721,7 +780,7 @@
         working.wearEquipsDetailed['21'].exVo.suffix = best.toSuffix;
       } else {
         const tgt = working.wearEquipsDetailed[best.slot].exVo.baseAffixes[best.idx].equipmentDetails;
-        const tgtMax = _getAffixMax(window.WWM_AFFIX?.[best.toId]?.statKey, charLv);
+        const tgtMax = _getAffixMax(window.WWM_AFFIX?.[best.toId]?.statKey, targetLv);
         tgt[0] = best.toId;
         tgt[1] = tgtMax * TARGET_RATIO;
         tgt[2] = TARGET_RATIO;
@@ -739,7 +798,7 @@
         curScore = _scoreWithBonus(working);
       } catch (_) {}
     }
-    return { ri: working, startScore, endScore: curScore, steps, aborted: false };
+    return { ri: working, startScore, endScore: curScore, steps, lvFixApplied: _lvFixApplied, aborted: false };
   }
 
   // ── ゼロベース比較 OPT (格析 機能、 2026-06-18 兄貴指示 TODO 1) ─────────

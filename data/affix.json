@@ -4379,6 +4379,66 @@
     "internal": 361,
     "statKey": "namelessSpearSpecial"
   },
+  "289751": {
+    "internal": 393,
+    "statKey": "heavenwillGauntletsCharged"
+  },
+  "289752": {
+    "internal": 394,
+    "statKey": "heavenwillGauntletsQ"
+  },
+  "289753": {
+    "internal": 395,
+    "statKey": "heavenwillGauntletsLightVariedCombo"
+  },
+  "289754": {
+    "internal": 396,
+    "statKey": "skygraspRopeDartHeavy"
+  },
+  "289755": {
+    "internal": 397,
+    "statKey": "skygraspRopeDartSpecial"
+  },
+  "289901": {
+    "internal": 400,
+    "statKey": "snowpartingQ"
+  },
+  "289902": {
+    "internal": 401,
+    "statKey": "snowpartingCharged"
+  },
+  "289903": {
+    "internal": 402,
+    "statKey": "snowpartingVariedCombo"
+  },
+  "289904": {
+    "internal": 403,
+    "statKey": "phalanxbaneQ"
+  },
+  "289905": {
+    "internal": 404,
+    "statKey": "phalanxbaneCharged"
+  },
+  "290001": {
+    "internal": 302,
+    "statKey": "namelessSwordQ"
+  },
+  "290002": {
+    "internal": 303,
+    "statKey": "namelessSwordCharged"
+  },
+  "290003": {
+    "internal": 305,
+    "statKey": "namelessSwordSpecial"
+  },
+  "290004": {
+    "internal": 310,
+    "statKey": "namelessSpearCharged"
+  },
+  "290005": {
+    "internal": 361,
+    "statKey": "namelessSpearSpecial"
+  },
   "280101": {
     "internal": 306,
     "statKey": "swordQ"
