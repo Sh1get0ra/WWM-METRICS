@@ -2436,18 +2436,18 @@
     "zh_tw": "計算失敗"
   },
   "optZerobaseConfirm": {
-    "ja": "この構成を採用しますか？\n現在の affix が全 slot で上書きされます (装備本体は keep)。",
-    "en": "Apply this build? All slot affixes will be overwritten (equipment items kept).",
-    "zh": "采用此配置？所有部位 affix 将被覆盖（装备本体保留）。",
-    "ko": "이 구성을 적용하시겠습니까? 모든 슬롯 affix가 덮어씌워집니다 (장비 본체 유지).",
-    "vi": "Áp dụng cấu hình này? Affix của tất cả slot sẽ bị ghi đè (giữ trang bị gốc).",
-    "de": "Dieses Build anwenden? Alle Slot-Affixe werden überschrieben (Ausrüstung bleibt erhalten).",
-    "es": "¿Aplicar este build? Todos los afijos de las casillas se sobrescribirán (el equipo se conserva).",
-    "fr": "Appliquer ce build ? Tous les affixes des emplacements seront écrasés (l'équipement est conservé).",
-    "pt_br": "Aplicar este build? Todos os afixos dos slots serão sobrescritos (equipamento mantido).",
-    "ru": "Применить этот билд? Аффиксы всех слотов будут перезаписаны (сама экипировка сохранится).",
-    "th": "ใช้การจัดชุดนี้หรือไม่? ค่าเสริมทุกช่องจะถูกเขียนทับ (ตัวอุปกรณ์ยังคงเดิม)",
-    "zh_tw": "採用此配置？所有部位 affix 將被覆蓋（裝備本體保留）。"
+    "ja": "この構成を採用しますか？",
+    "en": "Apply this build?",
+    "zh": "采用此配置？",
+    "ko": "이 구성을 적용하시겠습니까?",
+    "vi": "Áp dụng cấu hình này?",
+    "de": "Dieses Build anwenden?",
+    "es": "¿Aplicar este build?",
+    "fr": "Appliquer ce build ?",
+    "pt_br": "Aplicar este build?",
+    "ru": "Применить этот билд?",
+    "th": "ใช้การจัดชุดนี้หรือไม่?",
+    "zh_tw": "採用此配置？"
   },
   "optZerobaseApplied": {
     "ja": "ゼロベース構成を採用しました",

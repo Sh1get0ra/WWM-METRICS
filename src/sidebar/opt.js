@@ -968,7 +968,7 @@
 
   function _applyZbResult(res) {
     const T_ = window.T || {};
-    const msg = T_.optZerobaseConfirm || 'この構成を採用しますか？\n現在の affix が全 slot で上書きされます (装備本体は keep)。';
+    const msg = T_.optZerobaseConfirm || 'この構成を採用しますか？';
     if (!confirm(msg)) return;
     const eqDet = res.ri?.wearEquipsDetailed || {};
     if (!WWMState.virtual.gear) WWMState.virtual.gear = {};
@@ -981,6 +981,14 @@
       cur.exVo = cur.exVo || {};
       cur.exVo.baseAffixes = JSON.parse(JSON.stringify(eqDet[slot]?.exVo?.baseAffixes || []));
       if (eqDet[slot]?.exVo?.suffix !== undefined) cur.exVo.suffix = eqDet[slot].exVo.suffix;
+      // 装備Lv UP fix (runOptimizer L478-509 = ①ブロック、zeroBase でも共通部として実行される)
+      // の結果 (baseAttrs / _inferredLv) も反映する (2026-07-26 バグ修正)。
+      // これが無いと「計算は装備Lv96 前提でスコアを出すのに、採用すると装備が旧Lvのまま」で
+      // 提案スコアと適用後スコアが乖離する (実測: 提案 15,905 → 適用後 15,452、装備Lv 91 のまま)。
+      // opt タブ側の _applyOptSteps は 2026-07-24 に同型修正済みだったが、zb 側へ伝播していなかった。
+      const _srcVo = eqDet[slot]?.exVo;
+      if (_srcVo?.baseAttrs) cur.exVo.baseAttrs = JSON.parse(JSON.stringify(_srcVo.baseAttrs));
+      if (_srcVo?._inferredLv != null) cur.exVo._inferredLv = _srcVo._inferredLv;
       WWMState.virtual.gear[slot] = cur;
     }
     if (typeof window._saveVirtuals === 'function') window._saveVirtuals();

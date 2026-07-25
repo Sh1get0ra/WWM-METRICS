@@ -3352,16 +3352,28 @@
   "603": {
     "modes": {},
     "defaultMode": "default",
-    "description": "汎用 — Cognition stack。 T6 = 貫通系 (条件発動で 0.5× 反映)。 2026-07 実装予定 (新 BambooCut – Kite path)",
+    "description": "汎用 — Cognition(格物) stack。 T0/T3/T6 = 貫通系、 T1/T4 = globalDmgBoost。 T2/T5 以外の全 tier に発動条件 kongfuRequired = 天志の拳(20901) or 浮塵の縄(20701) 装備 (不一致 → 該当 tier effects 全 skip、 globalDmgBoost 分も含む)。 維持は可能だが適用範囲 (武術発動効果ダメージ限定) が狭いため貫通は生値の 0.5× を計上。 天志の追加+2 分は貫通 tier のみ synergyMultiplier 2.0 で表現 (T1/T4 の globalDmgBoost には synergy を掛けない) → 非天志 外功5/属性5、 天志 外功10/属性10",
     "attributeBuff": {
       "tier0": {
         "permanent": true,
+        "kongfuRequired": [
+          20901,
+          20701
+        ],
+        "synergyKongfu": [
+          20901
+        ],
+        "synergyMultiplier": 2,
         "effects": {
-          "globalDmgBoost": 0.01
+          "elemPen": 3
         }
       },
       "tier1": {
         "permanent": true,
+        "kongfuRequired": [
+          20901,
+          20701
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         }
@@ -3380,12 +3392,24 @@
       },
       "tier3": {
         "permanent": true,
+        "kongfuRequired": [
+          20901,
+          20701
+        ],
+        "synergyKongfu": [
+          20901
+        ],
+        "synergyMultiplier": 2,
         "effects": {
-          "globalDmgBoost": 0.01
+          "elemPen": 2
         }
       },
       "tier4": {
         "permanent": true,
+        "kongfuRequired": [
+          20901,
+          20701
+        ],
         "effects": {
           "globalDmgBoost": 0.01
         }
@@ -3398,9 +3422,16 @@
       },
       "tier6": {
         "permanent": true,
+        "kongfuRequired": [
+          20901,
+          20701
+        ],
+        "synergyKongfu": [
+          20901
+        ],
+        "synergyMultiplier": 2,
         "effects": {
-          "outerPen": 1,
-          "elemPen": 1
+          "outerPen": 5
         }
       }
     },
