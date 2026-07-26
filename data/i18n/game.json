@@ -4968,18 +4968,18 @@
       "th": "มีโอกาส#Y30%#E#Yสุ่มได้รับสองเอฟเฟกต์#E"
     },
     "82.tier4": {
-      "ja": "#Y武変技がダメージまたは回復に成功した#E時も効果のランダム発動が可能で、その際に#Y【四季の春】と【四季の冬】#Eを獲得する確率が大幅に低下する。",
+      "ja": "#Y武変技でダメージを与えるか回復に成功した時#E、および行動妨害解除奇術#C清風明月#Eのアクティブ発動完了時にも効果のランダム発動が可能であり、その際ランダムで#Y【四季の春】と【四季の冬】#Eを獲得する確率が大幅に低下する。",
       "en": "#YDealing damage or healing with a Dual-Weapon Skill#E and casting Control-breaking Mystic Skill #CSerene Breeze#E also trigger a random Seasonal Edge effect, with the chance of gaining #YSpring or Winter#E greatly reduced.",
       "zh": "#Y易武技成功造成伤害或治疗#E及解控奇术#C清风霁月#E主动释放完成时也可以触发效果随机，且此次随机获得#Y【四时之春】和【四时之冬】#E的概率将大幅降低。",
-      "zh_tw": "#Y易武技成功造成傷害或治療#E時也可以觸發隨機效果，且此次隨機獲得#Y【四時之春】和【四時之冬】#E的機率將大幅降低。",
-      "ko": "#Y무기 전환 스킬이 피해를 주거나 치유에 성공#E 시에도 효과를 랜덤 발동할 수 있으며, 이때 #Y[사계의 봄]과 [사계의 겨울]#E 획득 확률이 대폭 감소한다.",
-      "vi": "#YKhi kỹ năng thay đổi vũ khí gây sát thương hoặc hồi phục#E và kỳ thuật giải khống chế#C Gió Trong Trăng Sáng#E được phóng thích hoàn thành, cũng có thể kích hoạt hiệu quả ngẫu nhiên, và xác suất nhận được #Y【Mùa Xuân Của Bốn Mùa】 và 【Mùa Đông Của Bốn Mùa】#E sẽ giảm đáng kể.",
-      "de": "#YSchaden verursachen oder mit einer Zweiwaffen-Fertigkeit heilen#E löst ebenfalls einen zufälligen Jahreszeitenklingen-Effekt aus, wobei die Chance, #YFrühling oder Winter#E zu erhalten, stark reduziert ist.",
-      "es": "#YInfligir daño o curar con una Habilidad de Armas Dobles#E también activa un efecto de Filo Estacional aleatorio, con la probabilidad de obtener #YPrimavera o Invierno#E reducida considerablemente.",
-      "fr": "#YInfliger des dégâts ou soigner avec une Compétence à Deux Armes#E déclenche également un effet Tranchant Saisonnier aléatoire, la chance d'obtenir #YPrintemps ou Hiver#E étant grandement réduite.",
-      "pt_br": "#YCausar dano ou curar com uma Habilidade de Armas Duplas#E também ativa um efeito aleatório de Gume Sazonal, com a chance de obter #YPrimavera ou Inverno#E drasticamente reduzida.",
-      "ru": "#YНанесение урона или лечение с помощью навыка двуручного оружия#E также активирует случайный эффект Сезонного Лезвия, при этом шанс получить #YВесну или Зиму#E значительно снижается.",
-      "th": "#Yเมื่อท่าต่อสู้แปรเปลี่ยนสร้างความเสียหายหรือรักษาสำเร็จ#Eก็สามารถสุ่มเอฟเฟกต์ได้เช่นกัน และโอกาสสุ่มได้#Y【ฤดูใบไม้ผลิแห่งสี่ฤดู】และ【ฤดูหนาวแห่งสี่ฤดู】#Eจะลดลงอย่างมาก"
+      "zh_tw": "#Y易武技成功造成傷害或治療#E及解控奇術#C清風霽月#E主動釋放完成時也可以觸發隨機效果，且此次隨機獲得#Y【四時之春】和【四時之冬】#E的機率將大幅降低。",
+      "ko": "#Y무기 전환 스킬로 피해를 주거나 치유 성공 시#E, 또는 제어 해제 비결 #C청풍제월#E을 직접 시전 완료 시 랜덤 효과를 획득할 수 있다. 이때 #Y[사계의 봄]과 [사계의 겨울]#E 획득 확률이 대폭 감소한다.",
+      "vi": "#YKỹ năng thay đổi vũ khí thành công gây sát thương hoặc hồi phục#E và giải khống chế kỳ thuật#C Gió Trong Trăng Sáng#E khi chủ động phóng thích hoàn thành cũng có thể kích hoạt hiệu quả ngẫu nhiên, và lần ngẫu nhiên này xác suất nhận được#Y【Mùa Xuân Của Bốn Mùa】và【Mùa Đông Của Bốn Mùa】#E sẽ giảm đáng kể.",
+      "de": "#YSchaden verursachen oder mit einer Zweiwaffen-Fertigkeit heilen#E und die kontrollbrechende Mystische Fertigkeit #CSanfte Brise#E wirken, lösen ebenfalls einen zufälligen Jahreszeitenklingen-Effekt aus, wobei die Chance, #YFrühling oder Winter#E zu erhalten, stark reduziert ist.",
+      "es": "#YInfligir daño o realizar curación con una Habilidad de Armas Dobles#E y lanzar la Habilidad Mística rompecontrol #CBrisa Serena#E también activan un efecto de Filo Estacional aleatorio, con la probabilidad de obtener #YPrimavera o Invierno#E reducida considerablemente.",
+      "fr": "#YInfliger des dégâts ou effectuer un soin avec une Compétence à Deux Armes#E et lancer la Compétence Mystique de rupture de contrôle #CBrise sereine#E déclenche également un effet Tranchant Saisonnier aléatoire, avec une chance fortement réduite d'obtenir #YPrintemps ou Hiver#E.",
+      "pt_br": "#YCausar dano ou cura com uma Habilidade de Armas Duplas#E e lançar a Habilidade Mística que quebra Controle #CBrisa Serena#E também desencadeiam um efeito aleatório de Gume Sazonal, com a chance de obter #YPrimavera ou Inverno#E grandemente reduzida.",
+      "ru": "#YНанесение урона или исцеление с помощью навыка двуручного оружия#E, а также применение мистического навыка, пробивающего контроль, #CТихий Ветерок#E, также запускают случайный эффект Сезонного Лезвия, при этом шанс получения #YВесны или Зимы#E значительно снижается.",
+      "th": "#Yทักษะเปลี่ยนอาวุธสำเร็จสร้างความเสียหายหรือการรักษา#Eและปลดสถานะควบคุมศาสตร์ลึกลับ#Cสายลมบริสุทธิ์และจันทร์กระจ่าง#Eเมื่อเชิงรุกปลดปล่อยสำเร็จสามารถกระตุ้นผลลัพธ์แบบสุ่มได้เช่นกัน และในการสุ่มครั้งนี้โอกาสได้รับ#Y【ฤดูใบไม้ผลิแห่งสี่ฤดู】และ【ฤดูหนาวแห่งสี่ฤดู】#Eจะลดลงอย่างมาก"
     },
     "82.tier5": {
       "ja": "<外功攻撃強化|780|#C|160>+2.8%",
@@ -4996,18 +4996,18 @@
       "th": "<โบนัสความเสียหายพลังภายนอก|780|#C|160>เพิ่มขึ้น2.8%."
     },
     "82.tier6": {
-      "ja": "#Y15%#Eの確率でランダムに3つの効果を獲得し、さらに#Y5%#Eの確率で4つすべての効果を獲得する。武変技が距離#Y5#Em未満の対象にダメージを与えた時、#Y【四季の冬】は絶対に獲得しない#E。",
-      "en": "There is a #Y15%#E chance to gain three effects, and a #Y5%#E chance to gain all four. When the Dual-Weapon Skill deals damage to a target within #Y5#E meters, #Yyou won't gain Frost#E.",
+      "ja": "#Y15%#Eの確率でランダムに3つの効果を獲得し、#Y5%#Eの確率で4つの効果すべてを獲得する。武変技が距離#Y5#Eメートル未満の対象にダメージを与えた時、および行動妨害解除奇術#C清風明月#Eのアクティブ発動完了時、#Y【四季の冬】を獲得することは絶対にない#E。",
+      "en": "There is a #Y15%#E chance to gain three effects, and a #Y5%#E chance to gain all four. When the Dual-Weapon Skill deals damage to a target within #Y5#E meters or Control-breaking Mystic Skill #CSerene Breeze#E is cast, #Yyou won't gain [Winter]#E.",
       "zh": "有#Y15%#E的概率随机获得三个效果，并有#Y5%#E的概率获得全部四个效果。易武技对距离小于#Y5#E米目标造成伤害及解控奇术#C清风霁月#E主动释放完成时，#Y必定不会获得【四时之冬】#E。",
-      "zh_tw": "有#Y15%#E的機率隨機獲得三個效果，並有#Y5%#E有機會獲得全部四個效果。易武技對距離小於#Y5#E公尺目標造成傷害時，#Y必定不會獲得【四時之冬】#E。",
-      "ko": "#Y15%#E 확률로 3개의 효과를 무작위로 획득하며, #Y5%#E 확률로 4개의 효과를 모두 획득한다. 무기 전환 스킬로 #Y5#Em 이내의 목표에게 피해를 입히면 #Y절대 [사계의 겨울]을 획득하지 않는다#E.",
-      "vi": "Có #Y15%#E khả năng ngẫu nhiên nhận được ba hiệu quả, và có #Y5%#E khả năng nhận được toàn bộ bốn hiệu quả. Kỹ năng thay đổi vũ khí gây sát thương và giải khống chế kỳ thuật lên mục tiêu ở khoảng cách nhỏ hơn #Y5#E mét. Khi kỹ năng chủ động #CGió Trong Trăng Sáng#E được phóng thích hoàn thành, #Ychắc chắn sẽ không nhận được 【Mùa Đông Của Bốn Mùa】#E.",
-      "de": "Es besteht eine Chance von #Y15%#E, drei Effekte zu erhalten, und eine Chance von #Y5%#E, alle vier zu erhalten. Wenn die Zweiwaffenfertigkeit einem Ziel innerhalb von #Y5#E Metern Schaden zufügt, #Yerhältst du keinen Frost-Effekt#E.",
-      "es": "Hay un #Y15%#E de probabilidad de obtener tres efectos, y un #Y5%#E de probabilidad de obtener los cuatro. Cuando la Habilidad de Armas Dobles inflige daño a un objetivo dentro de #Y5#E metros, #Yno obtendrás Escarcha#E.",
-      "fr": "Il y a #Y15%#E de chances d'obtenir trois effets, et #Y5%#E de chances d'obtenir les quatre. Lorsque la Compétence à Double Arme inflige des dégâts à une cible dans un rayon de #Y5#E mètres, #Yvous n'obtiendrez pas le Givre#E.",
-      "pt_br": "Há uma chance de #Y15%#E de obter três efeitos e uma chance de #Y5%#E de obter todos os quatro. Quando a Habilidade de Armas Duplas causa dano a um alvo dentro de #Y5#E metros, #Yvocê não ganhará Gelo#E.",
-      "ru": "Есть вероятность #Y15%#E получить три эффекта и вероятность #Y5%#E получить все четыре. Когда Навык двойного оружия наносит урон цели в радиусе #Y5#E метров, #Yвы не получите Мороз#E.",
-      "th": "มีโอกาส#Y15%#Eที่จะสุ่มได้รับสามเอฟเฟกต์ และมีโอกาส#Y5%#Eที่จะได้รับเอฟเฟกต์ทั้งสี่ เมื่อท่าเปลี่ยนอาวุธสร้างความเสียหายแก่เป้าหมายที่อยู่ในระยะน้อยกว่า#Y5#Eเมตร #Yจะไม่ได้รับ【ฤดูหนาวแห่งสี่ฤดู】อย่างแน่นอน#E"
+      "zh_tw": "有#Y15%#E的機率隨機獲得三個效果，並有#Y5%#E的機率獲得全部四個效果。易武技對距離小於#Y5#E米的目標造成傷害及解控奇術#C清風霽月#E主動釋放完成時，#Y必定不會獲得【四時之冬】#E。",
+      "ko": "#Y15%#E 확률로 세 가지 효과를 랜덤 획득하며, #Y5%#E 확률로 네 가지 효과를 모두 획득한다. 무기 전환 스킬로 거리 #Y5#Em 이내의 목표에게 피해를 입히거나, 제어 해제 비결 #C청풍명월#E을 직접 시전 완료한 경우에는 #Y[사계의 겨울]을 획득하지 않는다#E.",
+      "vi": "Có#Y15%#E xác suất ngẫu nhiên nhận được ba hiệu quả, và có#Y5%#E xác suất nhận được toàn bộ bốn hiệu quả. Kỹ năng thay đổi vũ khí gây sát thương cho mục tiêu cách dưới#Y5#E mét và giải khống chế kỳ thuật#C Gió Trong Trăng Sáng#E khi chủ động phóng thích hoàn thành, #Ychắc chắn sẽ không nhận được【Mùa Đông Của Bốn Mùa】#E.",
+      "de": "Es besteht eine Chance von #Y15%#E, drei Effekte zu erhalten, und eine Chance von #Y5%#E, alle vier zu erhalten. Wenn die Zweiwaffen-Fertigkeit einem Ziel innerhalb von #Y5#E Metern Schaden zufügt oder die kontrollbrechende Mystische Fertigkeit #CSanfte Brise#E gewirkt wird, #Yerhält man nicht [Winter]#E.",
+      "es": "Existe una probabilidad del #Y15%#E de obtener tres efectos y una probabilidad del #Y5%#E de obtener los cuatro. Cuando la Habilidad de Armas Dobles inflige daño a un objetivo dentro de #Y5#E metros o se lanza la Habilidad Mística de Romper Control #CBrisa Serena#E, #Yno obtendrás [Invierno]#E.",
+      "fr": "Il y a #Y15%#E de chances d'obtenir trois effets, et #Y5%#E de chances de les obtenir tous les quatre. Lorsque la Compétence à Deux Armes inflige des dégâts à une cible dans un rayon de #Y5#E mètres ou que la Compétence Mystique de rupture de Contrôle #CBrise sereine#E est lancée, #Yvous n'obtiendrez pas [Hiver]#E.",
+      "pt_br": "Há uma chance de #Y15%#E de ganhar três efeitos e uma chance de #Y5%#E de ganhar todos os quatro. Quando a Habilidade de Armas Duplas causa dano a um alvo dentro de #Y5#E metros ou a Habilidade Mística de Quebra de Controle #CBrisa Serena#E é conjurada, #Yvocê não ganhará [Inverno]#E.",
+      "ru": "Существует вероятность #Y15%#E получить три эффекта и вероятность #Y5%#E получить все четыре. Когда навык двуручного оружия наносит урон цели в радиусе #Y5#E метров или применяется ломающий контроль мистический навык #CТихий Ветерок#E, #Yвы не получите [Зиму]#E.",
+      "th": "มีโอกาส#Y15%#Eที่จะสุ่มได้รับผลลัพธ์สามอย่าง และมีโอกาส#Y5%#Eที่จะได้รับผลลัพธ์ทั้งหมดสี่อย่าง เมื่อทักษะเปลี่ยนอาวุธสร้างความเสียหายต่อเป้าหมายที่มีระยะห่างน้อยกว่า#Y5#Eเมตร และปลดสถานะควบคุมศาสตร์ลึกลับ#Cสายลมบริสุทธิ์และจันทร์กระจ่าง#Eเชิงรุกปลดปล่อยสำเร็จ#Yจะไม่มีทางได้รับ【ฤดูหนาวแห่งสี่ฤดู】#Eอย่างแน่นอน"
     },
     "101.tier0": {
       "ja": "無名の槍武術技乾坤定使用時に獲得する長風効果の持続時間が10秒に延長され、その気力消費減少効果が20%に上昇する（疾走、溜め技の気力消費がさらに10%追加で減少する）。",
@@ -6160,16 +6160,16 @@
     "304.tier5": {
       "ja": "<付加会心率|780|#C|149>+4.6%",
       "en": "Increases <Direct Critical Rate|780|#C|149> by 4.6%.",
-      "zh": "<直接会心率|780|#C|149>提升4.6%。",
+      "zh": "<会心伤害加成|780|#C|155>提升4.4%。",
       "zh_tw": "<直接會心率|780|#C|149>提升4.6%。",
       "ko": "<추가 치명타 확률|780|#C|149> 4.6% 증가.",
-      "vi": "Tỷ lệ chí mạng trực tiếp780#C149 tăng4.6%.",
-      "de": "Erhöht <Direkte kritische Trefferrate|780|#C|149> um 4,6%.",
-      "es": "Aumenta la <Tasa de Crítico Directo|780|#C|149> en 4.6%.",
-      "fr": "Augmente le <Taux de Critique Direct|780|#C|149> de 4,6%.",
-      "pt_br": "Aumenta a <Taxa Crítica Direta|780|#C|149> em 4,6%.",
-      "ru": "Увеличивает <Прямой показатель крита|780|#C|149> на 4.6%.",
-      "th": "<อัตราคริติคอลโดยตรง|780|#C|149>เพิ่มขึ้น4.6%."
+      "vi": "<Thêm sát thương chí mạng|780|#C|155> được tăng thêm 4.4%.",
+      "de": "Erhöht <Direkte kritische Trefferrate|780|#C|149> um 4.6%.",
+      "es": "Aumenta el <Critical DMG Bonus|780|#C|155> en un 4.4%.",
+      "fr": "Augmente le <Taux de critique direct|780|#C|149> de 4.6%.",
+      "pt_br": "Aumenta a <Taxa Crítica Direta|780|#C|149> em 4.6%.",
+      "ru": "Увеличивает <Бонус к критическому урону|780|#C|155> на 4.4%.",
+      "th": "โบนัสความเสียหายคริติคอล780#C155เพิ่มขึ้น4.4%"
     },
     "304.tier6": {
       "ja": "武術技<春恨み|781|#C|20601|20601113>は最大#Y3#E回まで溜められ、#Y連続命中#E効果を付与した敵に当たると、クールタイムが即時に-#Y5#E秒短縮。さらに、<繁花|781|#C|20601|20601103>が+#Y25#E。効果はスキル1回ごとに1回発動。",
@@ -7404,18 +7404,18 @@
       "th": "ในระหว่างการปลดปล่อยทักษะซีรีส์ผู้ไร้คุณธรรมสมควรถูกกำจัด หากไม่สร้างความเสียหายแก่ศัตรู จะคืนค่าการใช้เจตจำนงแห่งสวรรค์ 50% และผู้ไร้คุณธรรมสมควรถูกกำจัด·สิ้นสุดจะไม่เข้าสู่การพักฟื้น เหยี่ยวพุ่งไล่ล่าสร้างความเสียหายแก่หัวหน้าหน่วยในสถานะพลังหมด จะล้างการพักฟื้นของผู้ไร้คุณธรรมสมควรถูกกำจัด·สิ้นสุด โดยจะล้างได้มากที่สุดหนึ่งครั้งทุกๆ 30 วินาที"
     },
     "601.tier4": {
-      "ja": "不義天誅・尽が敵にダメージを与えると、1マスの天志が返還される。18秒ごとに最大1回まで返還可能。",
-      "en": "Damaging an enemy with Vile Condemned: End restores 1 bar of Heaven's Will. Cooldown: 18 seconds.",
-      "zh": "无义当诛·尽对敌人造成伤害，将返还1格天志，每18秒最多返还1次。",
-      "zh_tw": "無義當誅·盡對敵人造成傷害，將退還1格天志，每18秒最多退還1次。",
-      "ko": "불의의 단죄(진)으로 적에게 피해를 주면 천의 1칸이 반환된다. 18초마다 최대 1회 반환된다.",
-      "vi": "Không nghĩa thì phải trừng phạt·Hếtgây Sát thương cho Kẻ thù, sẽ hoàn trả1ô Chí trời, mỗi18giây hoàn trả tối đa1lần.",
-      "de": "Das Schädigen eines Feindes mit Vile Condemned: End stellt 1 Balken des Himmelswillens wieder her. Abklingzeit: 18 Sekunden.",
-      "es": "Dañar a un enemigo con Condenación Vil: Final restaura 1 barra de Voluntad Celestial. Tiempo de recarga: 18 segundos.",
-      "fr": "Infliger des dégâts à un ennemi avec Vile Condemned: End restaure 1 barre de Volonté céleste. Temps de recharge : 18 secondes.",
-      "pt_br": "Causar dano a um inimigo com Condenado Vil: Fim restaura 1 barra de Vontade Celestial. Tempo de Recarga: 18 segundos.",
-      "ru": "Нанесение урона врагу с помощью Vile Condemned: End восстанавливает 1 единицу Воли небес. Время восстановления: 18 секунд.",
-      "th": "ผู้ไร้คุณธรรมสมควรถูกกำจัด·สิ้นสุดสร้างความเสียหายแก่ศัตรู จะคืนค่าเจตจำนงแห่งสวรรค์ 1 ช่อง โดยจะคืนค่าได้มากที่สุด 1 ครั้งทุกๆ 18 วินาที"
+      "ja": "#Y不義天誅・尽#Eが敵にダメージを与えると、天志を#Y1#Eマス返還します。18秒につき最大1回まで返還されます。同時に#Y不義天誅シリーズの技#Eによるダメージ集計時の<最終有効会意確率|780|#C|225>が等値の<付加会心率|780|#C|211>に変換されます。最大#Y12%#Eまで変換可能です。",
+      "en": "When #YVile Condemned: End#E damages an enemy, it refunds #Y1#E bar of Heaven's Will, up to once every 18s. When damage from #YVile Condemned Skills#E is calculated, the <final effective Affinity Rate|780|#C|225> is converted at an equal rate into <Direct Critical Rate|780|#C|211> up to #Y12%#E.",
+      "zh": "#Y无义当诛·尽#E对敌人造成伤害，将返还#Y1#E格天志，每18秒最多返还1次。同时#Y无义当诛系列技能#E造成伤害结算时的<最终生效会意概率|780|#C|225>会等值转化为<直接会心率|780|#C|211>，最多转化#Y12%#E。",
+      "zh_tw": "#Y無義當誅·盡#E對敵人造成傷害，將退還#Y1#E格天志，每18秒最多退還1次。同時#Y無義當誅系列技能#E造成傷害結算時的<最終生效會意機率|780|#C|225>會等值轉化為<直接會心率|780|#C|211>，最多轉化#Y12%#E。",
+      "ko": "#Y불의의 단죄(진)#E로 적에게 피해를 입히면 천의를 #Y1칸#E 회복하며, 18초마다 최대 1회 발동한다. 또한 #Y불의의 단죄 시리즈 스킬#E의 피해 결산 시 적용되는 <최종 각성 확률|780|#C|225>은 동일한 수치의 <추가 치명타 확률|780|#C|211>로 전환되며, 최대 #Y12%#E까지 전환된다.",
+      "vi": "#YKhông nghĩa thì phải trừng phạt·Hết#E gây sát thương cho kẻ thù, sẽ hoàn trả #Y1#E ô Chí trời, mỗi 18 giây hoàn trả tối đa 1 lần. Đồng thời #Yloạt kỹ năng Không nghĩa thì phải trừng phạt#E khi thanh toán sát thương gây ra, <xác suất hiểu ý có hiệu lực cuối cùng|780|#C|225> sẽ chuyển hóa thành giá trị tương đương với <Tỷ lệ chí mạng trực tiếp|780|#C|211>, chuyển hóa tối đa #Y12%#E.",
+      "de": "Das Schädigen eines Feindes mit #YVile Condemned: End#E stellt #Y1#E Balken des Himmelswillens wieder her. Abklingzeit: 18 Sekunden.",
+      "es": "Dañar a un enemigo con #YCondenación Vil: Final#E restaura #Y1#E barra de Voluntad Celestial. Tiempo de recarga: 18 segundos.",
+      "fr": "Infliger des dégâts à un ennemi avec #YVile Condemned: End#E restaure #Y1#E barre de Volonté céleste. Temps de recharge : 18 secondes.",
+      "pt_br": "Causar dano a um inimigo com #YCondenado Vil: Fim#E restaura #Y1#E barra de Vontade Celestial. Tempo de Recarga: 18 segundos.",
+      "ru": "Нанесение урона врагу с помощью #YVile Condemned: End#E восстанавливает #Y1#E единицу Воли небес. Время восстановления: 18 секунд.",
+      "th": "#Yผู้ไร้คุณธรรมสมควรถูกกำจัด·สิ้นสุด#Eสร้างความเสียหายแก่ศัตรู จะคืน#Y1#Eช่องเจตจำนงแห่งสวรรค์ คืนได้สูงสุด1ครั้งทุก18วินาที ในขณะเดียวกัน#Yซีรีส์ทักษะผู้ไร้คุณธรรมสมควรถูกกำจัด#Eเมื่อสร้างความเสียหายและทำการสรุปผล <โอกาสความเข้าใจที่มีผลสุดท้าย|780|#C|225>จะถูกแปลงเป็น<อัตราคริติคอลโดยตรง|780|#C|211>ในมูลค่าที่เท่ากัน แปลงได้สูงสุด#Y12%#E"
     },
     "601.tier6": {
       "ja": "天志が4に達した状態で不義天誅・尽を発動すると、天志をすべて消費し、与える気血ダメージ+30%。さらに、会心ダメージが追加で+10%。",
@@ -7432,18 +7432,18 @@
       "th": "เมื่อเทียนจื้อถึง4ช่องแล้วปล่อยอู๋อี้ตังจู·จิ้น จะใช้เทียนจื้อทั้งหมดเพื่อเพิ่มความเสียหายพลังชีวิต30% พร้อมเพิ่มความเสียหายคริติคอลเพิ่มเติม10%"
     },
     "602.tier3": {
-      "ja": "武術天志の拳を同時に装備している時、縛りの索が敵に命中した後、鷹隼追撃を発動して敵に範囲ダメージを1回与えることができる。敵1名に命中するごとに0.25マスの天志を回復し、最大1マスまで回復可能。同時に、鷹隼追撃と不義天誅シリーズの技が首領対象に与える真気ダメージが追加で30%上昇する。",
-      "en": "When Heavenwill Gauntlets is also equipped, hitting an enemy with Sky Grasped triggers Falcon's Pursuit to launch AoE damage once, restoring 0.25 bars of Heaven's Will for each enemy hit (up to 1 bar in total). Falcon's Pursuit and Vile Condemned series skills deal 30% increased Qi damage to Boss units.",
-      "zh": "同时装配武学天志垂象时，索天势命中敌人后，可触发鹰隼追击对敌人造成一次范围伤害，每命中1名敌人回复0.25格天志，最多回复1格。同时，鹰隼追击和无义当诛系列技能对首领目标造成的真气伤害额外提升30%。",
-      "zh_tw": "同時裝配武學天志垂象時，索天勢命中敵人後，可觸發鷹隼追擊對敵人造成一次範圍傷害，每命中1名敵人回復0.25格天志，最多回復1格。同時，鷹隼追擊和無義當誅系列技能對首領目標造成的真氣傷害額外提升30%。",
-      "ko": "무술 천지의 주먹을 함께 장착하면 결박의 기세가 적에게 명중했을 때 참매 추격을 발동하여 범위 피해를 1회 준다. 적 1명을 명중시킬 때마다 천의를 0.25칸 회복하며, 최대 1칸까지 회복한다. 또한, 참매 추격 및 불의의 단죄 시리즈 스킬이 BOSS 목표에게 주는 진기 피해가 추가로 30% 증가한다.",
-      "vi": "Khi đồng thời trang bị Võ học Thiên Chí Rủ Tượng, Thế tìm trời sau khi Đánh trúng Kẻ thù, có thể Kích hoạt Chim ưng truy kích gây Một lần Sát Thương Phạm Vi cho Kẻ thù, mỗi Đánh trúng 1 Kẻ thù hồi phục 0.25 ô Chí trời, tối đa hồi phục 1 ô. Đồng thời, Sát thương Chân khí mà Chim ưng truy kích và Loạt kỹ năng Không nghĩa thì phải trừng phạt gây cho Mục tiêu Thủ lĩnh được tăng thêm 30%.",
-      "de": "Wenn auch Himmelswillens-Panzerhandschuhe ausgerüstet sind, löst ein Treffer auf einen Feind mit Himmelsfalle-Haltung einmal Falkenjagd aus, die Flächenschaden verursacht und für jeden getroffenen Feind 0.25 Balken Himmelswille wiederherstellt (maximal 1 Balken insgesamt). Falkenjagd und die Serie der Verruchten Verdammnis-Fähigkeiten verursachen 30% erhöhten Qi-Schaden gegen Boss-Einheiten.",
-      "es": "Cuando también se equipan los Guanteletes de la Voluntad Celestial, golpear a un enemigo con la Postura Trampa Celestial activa Persecución del Halcón para infligir daño en área una vez, restaurando 0.25 barras de Voluntad Celestial por cada enemigo golpeado (hasta 1 barra en total). Persecución del Halcón y las habilidades de la serie Condenado Vil infligen 30% de daño de Qi aumentado a unidades de Jefe.",
-      "fr": "Lorsque les Gantelets de la Volonté Céleste sont également équipés, porter un <Hit> à un <Ennemi> avec Posture du Piège Céleste déclenche Poursuite du Faucon pour infliger des <Dégâts de Zone> une fois, restaurant 0.25 barres de <Volonté céleste> pour chaque <Ennemi> touché (jusqu'à 1 barre au total). <Poursuite du Faucon> et les <Compétences> de la série <Condamnation Infâme> infligent 30% de <Dégâts de Qi> supplémentaires aux unités de type <Boss>.",
-      "pt_br": "Quando as Manoplas da Vontade Celestial também estiverem equipadas, acertar um inimigo com Postura Ceifadora do Céu ativa Perseguição do Falcão para lançar Dano em Área uma vez, restaurando 0.25 barras de Vontade Celestial para cada inimigo acertado (até 1 barra no total). Perseguição do Falcão e as Habilidades da série Condenação Vil causam 30% de Dano de Qi aumentado contra unidades Chefe.",
-      "ru": "При одновременном использовании Перчаток Воли Небес попадание по врагу с помощью Стойка небесной ловушки активирует Преследование Сокола, наносящее урон по области один раз и восстанавливающее 0.25 единиц Воли Небес за каждого поражённого врага (максимум 1 единиц в сумме). Навыки серии «Преследование Сокола» и «Проклятие Нечестивца» наносят боссам на 30% больше урона Ци.",
-      "th": "เมื่อติดตั้งศิลปะการต่อสู้ฟ้าประทานปริศนาพร้อมกัน หลังจากท่าทะยานฟ้าโจมตีศัตรูอย่างแม่นยำ จะสามารถกระตุ้นเหยี่ยวพุ่งไล่ล่าเพื่อสร้างความเสียหายแบบพื้นที่แก่ศัตรูหนึ่งครั้ง ทุกครั้งที่โจมตีศัตรูอย่างแม่นยำ1ราย จะฟื้นฟูเจตจำนงแห่งสวรรค์0.25ช่อง ฟื้นฟูสูงสุด1ช่อง ในขณะเดียวกัน ทักษะซีรีส์เหยี่ยวพุ่งไล่ล่าและผู้ไร้คุณธรรมสมควรถูกกำจัดจะสร้างความเสียหายพลังลมปราณเพิ่มเติมแก่เป้าหมายระดับหัวหน้าเพิ่มขึ้น30%"
+      "ja": "武術#Y天志の拳#Eを同時に装備している場合、<縛り索|781|#C|20703|20703105>が敵に命中すると、#Y鷹隼追撃#Eを発動して敵に一度の範囲ダメージを与えることができる。敵に1名命中するごとに天志を#Y0.25#Eマス回復し、最大#Y1#Eマス回復できる。同時に、鷹隼追撃と不義天誅シリーズの技による真気ダメージが追加で#Y30%#Eアップする。",
+      "en": "When #YHeavenwill Gauntlets#E is also equipped, hitting an enemy with <Sky Grasped|781|#C|20703|20703105> triggers #YFalcon's Pursuit#E to launch AOE damage once, restoring #Y0.25#E bars of Heaven's Will for each enemy hit (up to #Y1#E bar in total). Falcon's Pursuit and Vile Condemned Skills deal #Y30%#E increased Qi damage to Boss units.",
+      "zh": "同时装配武学#Y天志垂象#E时，<索天势|781|#C|20703|20703105>命中敌人后，可触发#Y鹰隼追击#E对敌人造成一次范围伤害，每命中1名敌人回复#Y0.25#E格天志，最多回复#Y1#E格。同时，鹰隼追击和无义当诛系列技能造成的真气伤害额外提升#Y30%#E。",
+      "zh_tw": "同時裝配武學#Y天志垂象#E時，<索天勢|781|#C|20703|20703105>命中敵人後，可觸發#Y鷹隼追擊#E對敵人造成一次範圍傷害，每命中1名敵人回復#Y0.25#E格天志，最多回復#Y1#E格。同時，鷹隼追擊和無義當誅系列技能造成的真氣傷害額外提升#Y30%#E。",
+      "ko": "무술 #Y천지의 주먹#E을 함께 장착하면 <결박의 기세|781|#C|20703|20703105>가 적에게 명중했을 때 #Y참매 추격#E이 발동하여 적에게 범위 피해를 1회 준다. 적 1명을 명중시킬 때마다 천의를 #Y0.25#E칸 회복하며, 최대 #Y1#E칸까지 회복한다. 또한, 참매 추격 및 불의의 단죄 시리즈 스킬이 주는 진기 피해가 추가로 #Y30%#E 증가한다.",
+      "vi": "Khi đồng thời trang bị Võ học #YThiên Chí Rủ Tượng#E, sau khi <Thế tìm trời|781|#C|20703|20703105> đánh trúng kẻ thù, có thể kích hoạt #YChim ưng truy kích#E gây một lần Sát Thương Phạm Vi cho kẻ thù, mỗi khi đánh trúng 1 kẻ thù hồi phục #Y0.25#E ô Chí trời, hồi phục tối đa #Y1#E ô. Đồng thời, Sát thương Chân khí do Chim ưng truy kích và loạt kỹ năng Không nghĩa thì phải trừng phạt gây ra tăng thêm #Y30%#E.",
+      "de": "Wenn zusätzlich #YHimmelswille-Panzerhandschuhe#E ausgerüstet sind, löst ein Treffer auf einen Feind mit <Himmelsfalle-Haltung|781|#C|20703|20703105> einmalig #YFalkenjagd#E aus, die Flächenschaden verursacht und für jeden getroffenen Feind #Y0.25#E Balken Himmelswille wiederherstellt (maximal #Y1#E Balken insgesamt). Falkenjagd und Fähigkeiten der Reihe \"Verurteilter Schurke\" verursachen #Y30%#E erhöhten Qi-Schaden gegen Boss-Einheiten.",
+      "es": "Cuando también se equipan los #YGuanteletes de la Voluntad Celestial#E, golpear a un enemigo con <Postura Trampa Celestial|781|#C|20703|20703105> activa #YPersecución del halcón#E para infligir daño en área una vez, restaurando #Y0.25#E barras de Voluntad Celestial por cada enemigo golpeado (hasta #Y1#E barra en total). Persecución del halcón y las Habilidades de Condenado Vil infligen #Y30%#E más de Daño de Qi a unidades de Jefe.",
+      "fr": "Lorsque les #YGantelets de la Volonté Céleste#E sont également équipés, porter un <Coup> sur un <Ennemi> avec <Posture du Piège Céleste|781|#C|20703|20703105> déclenche #YPoursuite du Faucon#E pour infliger des <Dégâts de Zone> une fois, restaurant #Y0.25#E barres de <Volonté céleste> pour chaque <Ennemi> touché (jusqu'à #Y1#E barre au total). Poursuite du Faucon et les compétences de la série Vile Condemned infligent #Y30%#E de <Dégâts de Qi> supplémentaires aux unités de type <Boss>.",
+      "pt_br": "Quando as #YManoplas da Vontade Celestial#E também estiverem equipadas, acertar um inimigo com <Postura Ceifadora do Céu|781|#C|20703|20703105> ativa #YPerseguição do Falcão#E para infligir Dano em Área uma vez, restaurando #Y0.25#E barras de Vontade Celestial para cada inimigo atingido (até #Y1#E barra no total). Perseguição do Falcão e as Habilidades da série Condenação Vil causam #Y30%#E de Dano de Qi aumentado contra unidades Chefe.",
+      "ru": "Если также экипированы #YПерчатки Воли Небес#E, то попадание по врагу в <стойке небесной ловушки|781|#C|20703|20703105> активирует #YПреследование сокола#E, наносящее урон по области один раз и восстанавливающее #Y0.25#E ячеек Воли Небес за каждого поражённого врага (но не более #Y1#E ячеек в сумме). Преследование сокола и навыки Проклятого негодяя наносят боссам на #Y30%#E больше урона Ци.",
+      "th": "เมื่อติดตั้งศิลปะการต่อสู้#Yฟ้าประทานปริศนา#Eพร้อมกัน เมื่อ<ท่าทะยานฟ้า|781|#C|20703|20703105>โจมตีโดนศัตรู จะสามารถกระตุ้น#Yเหยี่ยวพุ่งไล่ล่า#Eเพื่อสร้างความเสียหายแบบพื้นที่หนึ่งครั้งแก่ศัตรู ทุกครั้งที่โจมตีโดนศัตรู1ราย จะฟื้นฟูเจตจำนงแห่งสวรรค์#Y0.25#Eช่อง ฟื้นฟูได้สูงสุด#Y1#Eช่อง ในขณะเดียวกัน ความเสียหายพลังลมปราณที่เกิดจากเหยี่ยวพุ่งไล่ล่าและทักษะซีรีส์ผู้ไร้คุณธรรมสมควรถูกกำจัดจะเพิ่มขึ้นอีก#Y30%#E"
     },
     "602.tier4": {
       "ja": "追撃索・断が与える気血ダメージ+20%。敵に命中した場合、自身は天志を0.5回復する。",
@@ -7628,18 +7628,18 @@
       "th": "ความรู้สึกสะท้อนความเสียหายเพิ่มขึ้น20% และดึงศัตรูใกล้เคียงเข้ามา (ไม่ส่งผลต่อหัวหน้า) การดึงเข้ามาสามารถกระตุ้นได้สูงสุด20ครั้งต่อ1วินาที และศัตรูจะถูกดึงเข้ามาจาก20ความรู้สึกสะท้อนใดๆ ได้สูงสุดครั้งใน1วินาที"
     },
     "501.tier6": {
-      "ja": " 武術技紅絢香断で回旋傘を投げるたびに幻影傘を召喚し、幻影傘の生成と同時に一度共鳴が発生する。",
-      "en": "Each returning umbrella thrown by Scarlet Spin summons a phantom umbrella and triggers resonance immediately.",
-      "zh": " 武学技红绡香断每次掷出的回旋伞都会召唤幻影伞，幻影伞生成的瞬间产生一次共鸣。",
-      "zh_tw": "武學技紅綃香斷每次擲出的迴旋傘都會召喚幻影傘，幻影傘生成的瞬間產生一次共鳴。",
-      "ko": " 무술 스킬 적연의 파멸로 회전 우산을 던질 때마다 환영 우산이 소환되며, 환영 우산 생성 시 공명이 1회 발생한다.",
-      "vi": " Kỹ năng võ họcHương đỏ đoạn tìnhMỗi lần ném dù xoay sẽ triệu hồi Ô ảo ảnh, Ô ảo ảnh khi được tạo ra sẽ tạo một lầncộng hưởng.",
-      "de": "Jeder von Scarlet Spin geworfene Rotierende Schirm beschwört einen Phantomschirm und löst sofort Resonanz aus.",
-      "es": "Cada sombrilla giratoria lanzada por Girar Escarlata invoca una sombrilla fantasma y activa resonancia de inmediato.",
-      "fr": "Chaque parapluie tournoyant lancé par Tournoiement Écarlate invoque un parapluie fantôme et déclenche immédiatement une résonance.",
-      "pt_br": "Cada Guirlanda Giratória lançada por Girar Escarlate invoca um Guarda-chuva Fantasma e ativa ressonância imediatamente.",
-      "ru": "Каждый возвращающийся зонт, брошенный Алым Вращением, призывает фантомный зонт и мгновенно активирует резонанс.",
-      "th": " ทักษะศิลปะการต่อสู้กลิ่นหอมแห่งผ้าแดงที่ขาดสะบั้นร่มหมุนที่ถูกโยนทุกครั้งจะอัญเชิญร่มมายา ร่มมายาที่ถูกสร้างขึ้นจะเกิดการสะท้อนหนึ่งครั้ง"
+      "ja": "「紅絢香断|781|#C|20603|20603202」投げる回旋傘が毎回幻影傘を召喚する。幻影傘が召喚される瞬間に一度#Y共鳴#Eが発生する。",
+      "en": "Each returning umbrella thrown by <Scarlet Spin|781|#C|20603|20603202> summons a phantom umbrella and triggers #Yresonance#E immediately.",
+      "zh": "<红消香断|781|#C|20603|20603202>每次掷出的回旋伞都会召唤幻影伞，幻影伞生成的瞬间产生一次#Y共鸣#E。",
+      "zh_tw": "<紅消香斷|781|#C|20603|20603202>每次擲出的迴旋傘都會召喚幻影傘，幻影傘生成的瞬間產生一次#Y共鳴#E。",
+      "ko": "<적연의 파멸|781|#C|20603|20603202>로 회전 우산을 던질 때마다 환영 우산이 소환되며, 환영 우산이 생성되는 순간 #Y공명#E이 1회 발생한다.",
+      "vi": "<Hồng Tiêu Hương Đoạn|781|#C|20603|20603202> Mỗi lần ném Dù xoay đều sẽ triệu hồi Ô ảo ảnh, khoảnh khắc Ô ảo ảnh được tạo ra sẽ sinh ra một lần #Ycộng hưởng#E.",
+      "de": "Jeder vom <Scharlachroter Wirbel|781|#C|20603|20603202> geworfene Rotierende Schirm beschwört einen Phantomschirm und löst #YResonanz#E sofort aus.",
+      "es": "Cada sombrilla giratoria lanzada por <Giro Escarlata|781|#C|20603|20603202> invoca una sombrilla fantasma y activa la #Yresonancia#E inmediatamente.",
+      "fr": "Chaque parapluie tournoyant lancé par <Tour Écarlate|781|#C|20603|20603202> invoque un parapluie fantôme et déclenche une #Yrésonance#E immédiatement.",
+      "pt_br": "Cada guirlanda giratória arremessada por <Giro Escarlate|781|#C|20603|20603202> invoca um guarda-chuva fantasma e ativa o #Yressonância#E imediatamente.",
+      "ru": "Каждый Вращающийся зонт, брошенный с помощью <Алый Вихрь|781|#C|20603|20603202>, призывает фантомный зонт и немедленно вызывает #Yрезонанс#E.",
+      "th": "<<สีจางกลิ่นตัด|781|#C|20603|20603202>ร่มหมุนที่ขว้างออกไปทุกครั้งจะอัญเชิญร่มมายา ในช่วงเวลาที่ร่มมายาถูกสร้างขึ้นจะเกิด#Yความรู้สึกสะท้อน#Eหนึ่งครั้ง"
     },
     "502.tier3": {
       "ja": "力溜め状態鏢行天下のなぎ払い連撃ダメージが上昇する。1－3段は追加で5%のダメージを与え、4－5段は追加で10%のダメージを与え、6－7段は追加で15%のダメージを与える。",
