@@ -29,17 +29,17 @@
    "nameZh": "九曲-主动技-愁无酒-1段",
    "label": {
     "ja": "六酔槍・1～5段目",
-    "en": "Sober Sorrow1",
-    "zh": "愁无酒1",
-    "ko": "허무의 술잔1",
-    "vi": "Buồn Không Rượu1",
-    "de": "Nüchterne Trauer1",
-    "es": "Tristeza Sobria1",
-    "fr": "Tristesse Lucide1",
-    "pt_br": "Tristeza Sóbria1",
-    "ru": "Трезвая Печаль1",
-    "th": "เศร้าไร้สุรา1",
-    "zh_tw": "愁無酒1"
+    "en": "Sober Sorrow - second part deals",
+    "zh": "愁无酒·二段",
+    "ko": "허무의 술잔·2단계",
+    "vi": "Buồn Không Rượu - Đoạn thứ hai",
+    "de": "Nüchterne Trauer - der zweite Teil fügt",
+    "es": "Tristeza Sobria - la segunda parte inflige",
+    "fr": "Tristesse Lucide - la deuxième partie inflige",
+    "pt_br": "Tristeza Sóbria - a segunda parte causa",
+    "ru": "Трезвая Печаль - вторая часть наносит",
+    "th": "เศร้าไร้สุรา - ขั้นที่สอง",
+    "zh_tw": "愁無酒·二段"
    },
    "origin": "kongfu_specific",
    "skillType": "active",
@@ -1020,24 +1020,24 @@
      0.936675
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   },
   "n:九曲-主动技-愁无酒-2段": {
    "skillId": null,
    "nameZh": "九曲-主动技-愁无酒-2段",
    "label": {
     "ja": "六酔槍・第六段",
-    "en": "Sober Sorrow2",
-    "zh": "愁无酒2",
-    "ko": "허무의 술잔2",
-    "vi": "Buồn Không Rượu2",
-    "de": "Nüchterne Trauer2",
-    "es": "Tristeza Sobria2",
-    "fr": "Tristesse Lucide2",
-    "pt_br": "Tristeza Sóbria2",
-    "ru": "Трезвая Печаль2",
-    "th": "เศร้าไร้สุรา2",
-    "zh_tw": "愁無酒2"
+    "en": "Sober Sorrow - third part deals",
+    "zh": "愁无酒·三段",
+    "ko": "허무의 술잔·3단계",
+    "vi": "Buồn Không Rượu - Ba đoạn",
+    "de": "Nüchterne Trauer - der dritte Teil fügt",
+    "es": "Tristeza Sobria - la tercera parte inflige",
+    "fr": "Tristesse Lucide - la troisième partie inflige",
+    "pt_br": "Tristeza Sóbria - a terceira parte causa",
+    "ru": "Трезвая Печаль - третья часть наносит",
+    "th": "เศร้าไร้สุรา - สามขั้น",
+    "zh_tw": "愁無酒·三段"
    },
    "origin": "kongfu_specific",
    "skillType": "active",
@@ -2018,7 +2018,7 @@
      1.561125
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   },
   "n:九曲-特殊技-扫千军-1段": {
    "skillId": null,

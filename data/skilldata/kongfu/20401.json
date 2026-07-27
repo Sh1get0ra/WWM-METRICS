@@ -1020,17 +1020,17 @@
    "nameZh": "嗟夫刀法-轻击蓄力技-风卷残云-1段",
    "label": {
     "ja": "風巻残雲・溜め一段階",
-    "en": "Galecloud Cleave1",
-    "zh": "风卷残云1",
-    "ko": "강풍의 소멸1",
-    "vi": "Gió cuốn mây tan1",
-    "de": "Sturmwolkenhieb1",
-    "es": "Corte del Viento Tempestuoso1",
-    "fr": "Fendage Nuageux1",
-    "pt_br": "Golpe do Vendaval1",
-    "ru": "Рассечение Грозового Облака1",
-    "th": "ลมพัดกวาดเมฆ1",
-    "zh_tw": "風捲殘雲1"
+    "en": "Galecloud Cleave - First tier",
+    "zh": "风卷残云·一档",
+    "ko": "강풍의 소멸·1단계",
+    "vi": "Gió cuốn mây tan - Sát thương mức 1",
+    "de": "Sturmwolkenhieb - Schaden der ersten Stufe",
+    "es": "Corte del Viento Tempestuoso - Daño de primer nivel",
+    "fr": "Fendage Nuageux - Dégâts de premier niveau",
+    "pt_br": "Golpe do Vendaval - Dano do primeiro nível",
+    "ru": "Рассечение Грозового Облака - Урон первого уровня",
+    "th": "ลมพัดกวาดเมฆ - ความเสียหายระดับหนึ่ง",
+    "zh_tw": "風捲殘雲·一檔"
    },
    "origin": "kongfu_specific",
    "skillType": "lightCharged",
@@ -2012,24 +2012,24 @@
      2.77845
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   },
   "n:嗟夫刀法-轻击蓄力技-风卷残云-2段": {
    "skillId": null,
    "nameZh": "嗟夫刀法-轻击蓄力技-风卷残云-2段",
    "label": {
     "ja": "風巻残雲・溜め二段階",
-    "en": "Galecloud Cleave2",
-    "zh": "风卷残云2",
-    "ko": "강풍의 소멸2",
-    "vi": "Gió cuốn mây tan2",
-    "de": "Sturmwolkenhieb2",
-    "es": "Corte del Viento Tempestuoso2",
-    "fr": "Fendage Nuageux2",
-    "pt_br": "Golpe do Vendaval2",
-    "ru": "Рассечение Грозового Облака2",
-    "th": "ลมพัดกวาดเมฆ2",
-    "zh_tw": "風捲殘雲2"
+    "en": "Galecloud Cleave - second tier",
+    "zh": "风卷残云·二档",
+    "ko": "강풍의 소멸·2단계",
+    "vi": "Gió cuốn mây tan - Sát thương mức 2",
+    "de": "Sturmwolkenhieb - Schaden der zweiten Stufe",
+    "es": "Corte del Viento Tempestuoso - daño de segundo nivel",
+    "fr": "Fendage Nuageux - dégâts de deuxième niveau",
+    "pt_br": "Golpe do Vendaval - dano do segundo nível",
+    "ru": "Рассечение Грозового Облака - урон второго уровня",
+    "th": "ลมพัดกวาดเมฆ - ความเสียหายระดับสอง",
+    "zh_tw": "風捲殘雲·二檔"
    },
    "origin": "kongfu_specific",
    "skillType": "lightCharged",
@@ -3011,24 +3011,24 @@
      3.88983
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   },
   "n:嗟夫刀法-轻击蓄力技-风卷残云-3段": {
    "skillId": null,
    "nameZh": "嗟夫刀法-轻击蓄力技-风卷残云-3段",
    "label": {
     "ja": "風巻残雲・溜め三段階（戦意不足時）",
-    "en": "Galecloud Cleave3",
-    "zh": "风卷残云3",
-    "ko": "강풍의 소멸3",
-    "vi": "Gió cuốn mây tan3",
-    "de": "Sturmwolkenhieb3",
-    "es": "Corte del Viento Tempestuoso3",
-    "fr": "Fendage Nuageux3",
-    "pt_br": "Golpe do Vendaval3",
-    "ru": "Рассечение Грозового Облака3",
-    "th": "ลมพัดกวาดเมฆ3",
-    "zh_tw": "風捲殘雲3"
+    "en": "Galecloud Cleave - third tier1",
+    "zh": "风卷残云·三档1",
+    "ko": "강풍의 소멸·3단계1",
+    "vi": "Gió cuốn mây tan - Sát thương mức 31",
+    "de": "Sturmwolkenhieb - Schaden der dritten Stufe1",
+    "es": "Corte del Viento Tempestuoso - daño de tercer nivel1",
+    "fr": "Fendage Nuageux - dégâts de troisième niveau1",
+    "pt_br": "Golpe do Vendaval - dano do terceiro nível1",
+    "ru": "Рассечение Грозового Облака - урон третьего уровня1",
+    "th": "ลมพัดกวาดเมฆ - ความเสียหายระดับสาม1",
+    "zh_tw": "風捲殘雲·三檔1"
    },
    "origin": "kongfu_specific",
    "skillType": "lightCharged",
@@ -4010,24 +4010,24 @@
      4.723365
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (同名衝突のため連番 1) (ja は旧表記を維持)"
   },
   "n:嗟夫刀法-轻击蓄力技-风卷残云-4段": {
    "skillId": null,
    "nameZh": "嗟夫刀法-轻击蓄力技-风卷残云-4段",
    "label": {
     "ja": "風巻残雲・溜め三段階（戦意を1ゲージ消費する時）",
-    "en": "Galecloud Cleave4",
-    "zh": "风卷残云4",
-    "ko": "강풍의 소멸4",
-    "vi": "Gió cuốn mây tan4",
-    "de": "Sturmwolkenhieb4",
-    "es": "Corte del Viento Tempestuoso4",
-    "fr": "Fendage Nuageux4",
-    "pt_br": "Golpe do Vendaval4",
-    "ru": "Рассечение Грозового Облака4",
-    "th": "ลมพัดกวาดเมฆ4",
-    "zh_tw": "風捲殘雲4"
+    "en": "Galecloud Cleave - third tier2",
+    "zh": "风卷残云·三档2",
+    "ko": "강풍의 소멸·3단계2",
+    "vi": "Gió cuốn mây tan - Sát thương mức 32",
+    "de": "Sturmwolkenhieb - Schaden der dritten Stufe2",
+    "es": "Corte del Viento Tempestuoso - daño de tercer nivel2",
+    "fr": "Fendage Nuageux - dégâts de troisième niveau2",
+    "pt_br": "Golpe do Vendaval - dano do terceiro nível2",
+    "ru": "Рассечение Грозового Облака - урон третьего уровня2",
+    "th": "ลมพัดกวาดเมฆ - ความเสียหายระดับสาม2",
+    "zh_tw": "風捲殘雲·三檔2"
    },
    "origin": "kongfu_specific",
    "skillType": "lightCharged",
@@ -5009,24 +5009,24 @@
      5.668038
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (同名衝突のため連番 2) (ja は旧表記を維持)"
   },
   "n:嗟夫刀法-轻击蓄力技-风卷残云-5段": {
    "skillId": null,
    "nameZh": "嗟夫刀法-轻击蓄力技-风卷残云-5段",
    "label": {
     "ja": "風巻残雲・溜め三段階（心法6重かつ戦意を2ゲージ消費する時）",
-    "en": "Galecloud Cleave5",
-    "zh": "风卷残云5",
-    "ko": "강풍의 소멸5",
-    "vi": "Gió cuốn mây tan5",
-    "de": "Sturmwolkenhieb5",
-    "es": "Corte del Viento Tempestuoso5",
-    "fr": "Fendage Nuageux5",
-    "pt_br": "Golpe do Vendaval5",
-    "ru": "Рассечение Грозового Облака5",
-    "th": "ลมพัดกวาดเมฆ5",
-    "zh_tw": "風捲殘雲5"
+    "en": "Galecloud Cleave - third tier 2 stacks Battle Will",
+    "zh": "风卷残云·三档2重战意",
+    "ko": "강풍의 소멸·3단계 2중 전의",
+    "vi": "Gió cuốn mây tan - Mức 3 2 trọng chiến ý",
+    "de": "Sturmwolkenhieb - dritte Stufe 2 stapelt Kampfwille",
+    "es": "Corte del Viento Tempestuoso - acumula 2 Voluntad de Batalla",
+    "fr": "Fendage Nuageux - troisième niveau 2 accumule Volonté de Combat",
+    "pt_br": "Golpe do Vendaval - terceiro nível 2 acumula Vontade de Batalha",
+    "ru": "Рассечение Грозового Облака - третий уровень 2 накапливает Боевую Волю",
+    "th": "ลมพัดกวาดเมฆ - ระดับสาม 2 จิตวิญญาณนักรบหนัก",
+    "zh_tw": "風捲殘雲·三檔2重戰意"
    },
    "origin": "kongfu_specific",
    "skillType": "lightCharged",
@@ -6008,24 +6008,24 @@
      7.085047
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   },
   "n:嗟夫刀法-重击蓄力技-山崩地裂-1段": {
    "skillId": null,
    "nameZh": "嗟夫刀法-重击蓄力技-山崩地裂-1段",
    "label": {
     "ja": "山崩地裂・溜め一段階",
-    "en": "Avalanche1",
-    "zh": "山崩地裂1",
-    "ko": "대지의 분열1",
-    "vi": "Núi lở đất rung1",
-    "de": "Lawine1",
-    "es": "Avalancha1",
-    "fr": "Avalanche1",
-    "pt_br": "Avalanche1",
-    "ru": "Лавина1",
-    "th": "ภูเขาถล่มแผ่นดินแยก1",
-    "zh_tw": "山崩地裂1"
+    "en": "Avalanche - First stage",
+    "zh": "山崩地裂·一档",
+    "ko": "대지의 분열·1단계",
+    "vi": "Núi lở đất rung - Một cấp",
+    "de": "Lawine - Schaden der ersten Stufe",
+    "es": "Avalancha - Daño de primera etapa",
+    "fr": "Avalanche - Dégâts de la première phase",
+    "pt_br": "Avalanche - Dano do primeiro estágio",
+    "ru": "Лавина - Урон первого уровня",
+    "th": "ภูเขาถล่มแผ่นดินแยก - ความเสียหายระดับหนึ่ง",
+    "zh_tw": "山崩地裂·一檔"
    },
    "origin": "kongfu_specific",
    "skillType": "heavyCharged",
@@ -7007,24 +7007,24 @@
      1.2673
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   },
   "n:嗟夫刀法-重击蓄力技-山崩地裂-2段": {
    "skillId": null,
    "nameZh": "嗟夫刀法-重击蓄力技-山崩地裂-2段",
    "label": {
     "ja": "山崩地裂・溜め二段階",
-    "en": "Avalanche2",
-    "zh": "山崩地裂2",
-    "ko": "대지의 분열2",
-    "vi": "Núi lở đất rung2",
-    "de": "Lawine2",
-    "es": "Avalancha2",
-    "fr": "Avalanche2",
-    "pt_br": "Avalanche2",
-    "ru": "Лавина2",
-    "th": "ภูเขาถล่มแผ่นดินแยก2",
-    "zh_tw": "山崩地裂2"
+    "en": "Avalanche - second stage",
+    "zh": "山崩地裂·二档",
+    "ko": "대지의 분열·2단계",
+    "vi": "Núi lở đất rung - Hai cấp",
+    "de": "Lawine - Schaden der zweiten Stufe",
+    "es": "Avalancha - daño de segunda etapa",
+    "fr": "Avalanche - dégâts de la deuxième phase",
+    "pt_br": "Avalanche - dano do segundo estágio",
+    "ru": "Лавина - урон второго уровня",
+    "th": "ภูเขาถล่มแผ่นดินแยก - ความเสียหายระดับสอง",
+    "zh_tw": "山崩地裂·二檔"
    },
    "origin": "kongfu_specific",
    "skillType": "heavyCharged",
@@ -8006,24 +8006,24 @@
      1.77422
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   },
   "n:嗟夫刀法-重击蓄力技-山崩地裂-3段": {
    "skillId": null,
    "nameZh": "嗟夫刀法-重击蓄力技-山崩地裂-3段",
    "label": {
     "ja": "山崩地裂・溜め三段階（戦意不足時）",
-    "en": "Avalanche3",
-    "zh": "山崩地裂3",
-    "ko": "대지의 분열3",
-    "vi": "Núi lở đất rung3",
-    "de": "Lawine3",
-    "es": "Avalancha3",
-    "fr": "Avalanche3",
-    "pt_br": "Avalanche3",
-    "ru": "Лавина3",
-    "th": "ภูเขาถล่มแผ่นดินแยก3",
-    "zh_tw": "山崩地裂3"
+    "en": "Avalanche - third stage1",
+    "zh": "山崩地裂·三档1",
+    "ko": "대지의 분열·3단계1",
+    "vi": "Núi lở đất rung - Ba cấp1",
+    "de": "Lawine - Schaden der dritten Stufe1",
+    "es": "Avalancha - daño de tercera etapa1",
+    "fr": "Avalanche - dégâts de la troisième phase1",
+    "pt_br": "Avalanche - dano do terceiro estágio1",
+    "ru": "Лавина - урон третьего уровня1",
+    "th": "ภูเขาถล่มแผ่นดินแยก - ความเสียหายระดับสาม1",
+    "zh_tw": "山崩地裂·三檔1"
    },
    "origin": "kongfu_specific",
    "skillType": "heavyCharged",
@@ -9005,24 +9005,24 @@
      2.196738
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (同名衝突のため連番 1) (ja は旧表記を維持)"
   },
   "n:嗟夫刀法-重击蓄力技-山崩地裂-4段": {
    "skillId": null,
    "nameZh": "嗟夫刀法-重击蓄力技-山崩地裂-4段",
    "label": {
     "ja": "山崩地裂・溜め三段階（戦意を1ゲージ消費する時）",
-    "en": "Avalanche4",
-    "zh": "山崩地裂4",
-    "ko": "대지의 분열4",
-    "vi": "Núi lở đất rung4",
-    "de": "Lawine4",
-    "es": "Avalancha4",
-    "fr": "Avalanche4",
-    "pt_br": "Avalanche4",
-    "ru": "Лавина4",
-    "th": "ภูเขาถล่มแผ่นดินแยก4",
-    "zh_tw": "山崩地裂4"
+    "en": "Avalanche - third stage2",
+    "zh": "山崩地裂·三档2",
+    "ko": "대지의 분열·3단계2",
+    "vi": "Núi lở đất rung - Ba cấp2",
+    "de": "Lawine - Schaden der dritten Stufe2",
+    "es": "Avalancha - daño de tercera etapa2",
+    "fr": "Avalanche - dégâts de la troisième phase2",
+    "pt_br": "Avalanche - dano do terceiro estágio2",
+    "ru": "Лавина - урон третьего уровня2",
+    "th": "ภูเขาถล่มแผ่นดินแยก - ความเสียหายระดับสาม2",
+    "zh_tw": "山崩地裂·三檔2"
    },
    "origin": "kongfu_specific",
    "skillType": "heavyCharged",
@@ -10004,24 +10004,24 @@
      2.635984
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (同名衝突のため連番 2) (ja は旧表記を維持)"
   },
   "n:嗟夫刀法-重击蓄力技-山崩地裂-5段": {
    "skillId": null,
    "nameZh": "嗟夫刀法-重击蓄力技-山崩地裂-5段",
    "label": {
     "ja": "山崩地裂・溜め三段階（心法6重かつ戦意を2ゲージ消費する時）",
-    "en": "Avalanche5",
-    "zh": "山崩地裂5",
-    "ko": "대지의 분열5",
-    "vi": "Núi lở đất rung5",
-    "de": "Lawine5",
-    "es": "Avalancha5",
-    "fr": "Avalanche5",
-    "pt_br": "Avalanche5",
-    "ru": "Лавина5",
-    "th": "ภูเขาถล่มแผ่นดินแยก5",
-    "zh_tw": "山崩地裂5"
+    "en": "Avalanche - third stage",
+    "zh": "山崩地裂·三档",
+    "ko": "대지의 분열·3단계",
+    "vi": "Núi lở đất rung - Ba cấp",
+    "de": "Lawine - Schaden der dritten Stufe",
+    "es": "Avalancha - daño de tercera etapa",
+    "fr": "Avalanche - dégâts de la troisième phase",
+    "pt_br": "Avalanche - dano do terceiro estágio",
+    "ru": "Лавина - урон третьего уровня",
+    "th": "ภูเขาถล่มแผ่นดินแยก - ความเสียหายระดับสาม",
+    "zh_tw": "山崩地裂·三檔"
    },
    "origin": "kongfu_specific",
    "skillType": "heavyCharged",
@@ -11003,7 +11003,7 @@
      3.29498
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   },
   "n:嗟夫刀法-轻击蓄力派生-1段": {
    "skillId": null,
@@ -13008,17 +13008,17 @@
    "nameZh": "嗟夫刀法-重击蓄力派生-1段",
    "label": {
     "ja": "砕岩穿石劈（戦意を1消費する時）",
-    "en": "Stonebreaker Cleave1",
-    "zh": "破石穿岩劈1",
-    "ko": "파석불기(베기)1",
-    "vi": "Phá đá xuyên núi chẻ1",
-    "de": "Steinbrecher-Spalter1",
-    "es": "Rompepiedras Hendir1",
-    "fr": "Fendoir Briseur de Pierre1",
-    "pt_br": "Quebrador de Pedras - Golpe1",
-    "ru": "Крушитель Камней: Рассечение1",
-    "th": "ฟันทะลุศิลา1",
-    "zh_tw": "破石穿岩劈1"
+    "en": "Stonebreaker Cleave - Varied Combo Damage (Consuming 1 bar of Fighting Spirit) + Ground Slam Damage (1 Bar of Battle Will Be Consumed)",
+    "zh": "破石穿岩劈·派生技伤害（消耗1格战意时） + 砸地伤害（消耗1格战意时）",
+    "ko": "파석불기(베기)·연계 스킬 피해(전의 1칸 소모 시) + 땅 내려치기 피해(전의 1칸 소모 시)",
+    "vi": "Phá đá xuyên núi chẻ - Sát thương kỹ năng phát sinh (khi tiêu hao 1 điểm Chiến ý) + Sát thương Đập đất (Khi tiêu hao 1 ô Chiến ý)",
+    "de": "Steinbrecher-Spalter - Variabler Komboschaden (Verbraucht 1 Balken Kampfgeist) + Bodenstoß-Schaden (1 Balken Kampfwille werden verbraucht)",
+    "es": "Rompepiedras Hendir - Daño de Combo Variado (Consume 1 barra de Espíritu de Combate) + Daño de Golpe en el Suelo (se consumirá 1 barra de Voluntad de Batalla)",
+    "fr": "Fendoir Briseur de Pierre - Dégâts de Combo Variés (Consommation de 1 barre d'Esprit de Combat) + Dégâts de Frappe au Sol (1 barre de Volonté de Combat consommée)",
+    "pt_br": "Quebrador de Pedras - Golpe - Dano de Combinação Variada (Consumindo 1 barra de Espírito de Luta) + Dano do Golpe no Chão (1 Barra de Vontade de Batalha Consumida)",
+    "ru": "Крушитель Камней: Рассечение - Разнообразные комбо: урон (тратится 1 полоска Боевого Духа) + Урон от удара по земле (будет потрачено 1 единиц Боевой Воли)",
+    "th": "ฟันทะลุศิลา - ความเสียหายจากทักษะแตกแขนง (เมื่อใช้จิตวิญญาณนักรบ 1 ช่อง) + ความเสียหายทุบพื้น (เมื่อใช้สิ้นเปลืองพลังต่อสู้1ช่อง)",
+    "zh_tw": "破石穿岩劈·派生技傷害（消耗1格戰意時） + 砸地傷害（消耗1格戰意時）"
    },
    "origin": "kongfu_specific",
    "skillType": "variedCombo",
@@ -14024,24 +14024,24 @@
      1.70846
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   },
   "n:嗟夫刀法-重击蓄力派生-2段": {
    "skillId": null,
    "nameZh": "嗟夫刀法-重击蓄力派生-2段",
    "label": {
     "ja": "砕岩穿石劈（心法6重かつ戦意を2ゲージ消費する時）",
-    "en": "Stonebreaker Cleave2",
-    "zh": "破石穿岩劈2",
-    "ko": "파석불기(베기)2",
-    "vi": "Phá đá xuyên núi chẻ2",
-    "de": "Steinbrecher-Spalter2",
-    "es": "Rompepiedras Hendir2",
-    "fr": "Fendoir Briseur de Pierre2",
-    "pt_br": "Quebrador de Pedras - Golpe2",
-    "ru": "Крушитель Камней: Рассечение2",
-    "th": "ฟันทะลุศิลา2",
-    "zh_tw": "破石穿岩劈2"
+    "en": "Stonebreaker Cleave - Varied Combo Damage (Inner Way Tier 6 & 2 Bars of Battle Will Consumed) + Ground Slam Damage (Inner Way Tier 6 & 2 Bars of Battle Will Be Consumed)",
+    "zh": "破石穿岩劈·派生技伤害（心法六重并消耗2格战意时） + 砸地伤害（心法六重并消耗2格战意时）",
+    "ko": "파석불기(베기)·연계 스킬 피해(6중 심법 및 전의 2칸 소모 시) + 땅 내려치기 피해(6중 심법 및 전의 2칸 소모 시)",
+    "vi": "Phá đá xuyên núi chẻ - Sát thương kỹ năng phát sinh (Tâm pháp sáu tầng và tiêu hao 2 điểm Chiến ý) + Sát thương Đập đất (Khi Tâm pháp Sáu tầng và tiêu hao 2 ô Chiến ý)",
+    "de": "Steinbrecher-Spalter - Variierter Komboschaden (Innerer Weg Stufe 6 & 2 Balken Kampfeswille verbraucht) + Bodenerschütterungsschaden (Innerer Weg Stufe 6 & 2 Balken Kampfwille wird verbraucht)",
+    "es": "Rompepiedras Hendir - Daño de combo variado (Nivel 6 de Camino Interior y 2 barras de Voluntad de Batalla consumidas) + Daño de Golpe al Suelo (Camino Interior Nivel 6 y se consumirán 2 barras de Voluntad de Batalla)",
+    "fr": "Fendoir Briseur de Pierre - Dégâts de Combo Variés (Niveau 6 de Voie Intérieure & 2 Barres de Volonté de Combat Consommées) + Dégâts de Frappe au Sol (Voie Intérieure Niveau 6 & 2 Barres de Volonté de Combat Consommées)",
+    "pt_br": "Quebrador de Pedras - Golpe - Dano de Combo Variado (Caminho Interior Nível 6 & 2 Barras de Vontade de Batalha Consumidas) + Dano do Golpe no Chão (Nível 6 do Caminho Interior & 2 Barras de Vontade de Batalha Consumidas)",
+    "ru": "Крушитель Камней: Рассечение - Разнообразные комбо урон (Внутренний Путь уровень 6 и 2 единицы Воли к Битве) + Урон от удара по земле (Внутренний Путь уровень 6 и будет потрачено 2 делений Боевой Воли)",
+    "th": "ฟันทะลุศิลา - ความเสียหายจากทักษะแตกแขนง (จิตวิชาระดับหกและใช้2จิตวิญญาณนักรบ) + ความเสียหายทุบพื้น (เมื่อจิตวิทยาหกชั้นและใช้พลังต่อสู้2ช่อง)",
+    "zh_tw": "破石穿岩劈·派生技傷害（心法六重並消耗2格戰意時） + 砸地傷害（心法六重並消耗2格戰意時）"
    },
    "origin": "kongfu_specific",
    "skillType": "variedCombo",
@@ -15047,7 +15047,7 @@
      2.135575
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   },
   "n:陌刀-轻击-1段": {
    "skillId": null,

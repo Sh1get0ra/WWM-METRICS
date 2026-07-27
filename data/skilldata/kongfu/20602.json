@@ -5023,17 +5023,17 @@
    "nameZh": "千香引魂蛊-奶伞.蓄力技-1段",
    "label": {
     "ja": "百露凋残・傘押し",
-    "en": "Pale Petal1",
-    "zh": "百露凋残1",
-    "ko": "백로의 이슬1",
-    "vi": "Trăm giọt sương tàn1",
-    "de": "Blasses Blütenblatt1",
-    "es": "Pétalo Pálido1",
-    "fr": "Pâle Pétale1",
-    "pt_br": "Pétala Pálida1",
-    "ru": "Бледный Лепесток1",
-    "th": "หยาดน้ำค้างร่วงโรย1",
-    "zh_tw": "百露凋殘1"
+    "en": "Pale Petal - Umbrella Push",
+    "zh": "百露凋残·推伞",
+    "ko": "백로의 이슬·우산 밀치기",
+    "vi": "Trăm giọt sương tàn - Sát thương đẩy dù",
+    "de": "Blasses Blütenblatt - Schirm-Drücken-Schaden",
+    "es": "Pétalo Pálido - Daño de Empujón con Sombrilla",
+    "fr": "Pâle Pétale - Dégâts de Pousser avec Parapluie",
+    "pt_br": "Pétala Pálida - Dano de Empurrão com Guarda-chuva",
+    "ru": "Бледный Лепесток - Урон от толчка зонтом",
+    "th": "หยาดน้ำค้างร่วงโรย - ความเสียหายจากการผลักร่ม",
+    "zh_tw": "百露凋殘·推傘"
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
@@ -6008,24 +6008,24 @@
      0.243
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明"
   },
   "n:千香引魂蛊-奶伞.蓄力技-2段": {
    "skillId": null,
    "nameZh": "千香引魂蛊-奶伞.蓄力技-2段",
    "label": {
     "ja": "百露凋残・第一段階各段回転",
-    "en": "Pale Petal2",
-    "zh": "百露凋残2",
-    "ko": "백로의 이슬2",
-    "vi": "Trăm giọt sương tàn2",
-    "de": "Blasses Blütenblatt2",
-    "es": "Pétalo Pálido2",
-    "fr": "Pâle Pétale2",
-    "pt_br": "Pétala Pálida2",
-    "ru": "Бледный Лепесток2",
-    "th": "หยาดน้ำค้างร่วงโรย2",
-    "zh_tw": "百露凋殘2"
+    "en": "Pale Petal - Stage Rotation Damage per Hit",
+    "zh": "百露凋残·第一档每段旋转",
+    "ko": "백로의 이슬·1단계 단계별 회전",
+    "vi": "Trăm giọt sương tàn - Sát thương xoay mỗi đoạn mức một",
+    "de": "Blasses Blütenblatt - Drehungsschaden pro Treffer in Stufe",
+    "es": "Pétalo Pálido - Daño por Golpe en Rotación de Etapa",
+    "fr": "Pâle Pétale - Dégâts par Coup lors de la Rotation d'Étape",
+    "pt_br": "Pétala Pálida - Dano de Rotação por Golpe na Fase",
+    "ru": "Бледный Лепесток - Урон за удар на этапе вращения",
+    "th": "หยาดน้ำค้างร่วงโรย - ความเสียหายหมุนแต่ละช่วงของระดับที่หนึ่ง",
+    "zh_tw": "百露凋殘·第一檔每段旋轉"
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
@@ -7000,24 +7000,24 @@
      0.0486
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明"
   },
   "n:千香引魂蛊-奶伞.蓄力技-3段": {
    "skillId": null,
    "nameZh": "千香引魂蛊-奶伞.蓄力技-3段",
    "label": {
     "ja": "百露凋残・第一段階から第二段階への回転",
-    "en": "Pale Petal3",
-    "zh": "百露凋残3",
-    "ko": "백로의 이슬3",
-    "vi": "Trăm giọt sương tàn3",
-    "de": "Blasses Blütenblatt3",
-    "es": "Pétalo Pálido3",
-    "fr": "Pâle Pétale3",
-    "pt_br": "Pétala Pálida3",
-    "ru": "Бледный Лепесток3",
-    "th": "หยาดน้ำค้างร่วงโรย3",
-    "zh_tw": "百露凋殘3"
+    "en": "Pale Petal - Stage 1 to Stage 2 Spin",
+    "zh": "百露凋残·第一档变第二档旋转",
+    "ko": "백로의 이슬·1단계에서 2단계 전환 회전",
+    "vi": "Trăm giọt sương tàn - Sát thương xoay chuyển từ mức một sang mức hai",
+    "de": "Blasses Blütenblatt - Drehungsschaden von Stufe 1 zu Stufe 2",
+    "es": "Pétalo Pálido - Daño de Giro de Etapa 1 a Etapa 2",
+    "fr": "Pâle Pétale - Dégâts de Tournoiement de l'Étape 1 à l'Étape 2",
+    "pt_br": "Pétala Pálida - Dano de Giro da Fase 1 para a Fase 2",
+    "ru": "Бледный Лепесток - Урон от вращения с этапа 1 до этапа 2",
+    "th": "หยาดน้ำค้างร่วงโรย - ความเสียหายหมุนเปลี่ยนจากระดับที่หนึ่งเป็นระดับที่สอง",
+    "zh_tw": "百露凋殘·第一檔變第二檔旋轉"
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
@@ -7992,24 +7992,24 @@
      0.243
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明"
   },
   "n:千香引魂蛊-奶伞.蓄力技-4段": {
    "skillId": null,
    "nameZh": "千香引魂蛊-奶伞.蓄力技-4段",
    "label": {
     "ja": "百露凋残・第二段階各段回転",
-    "en": "Pale Petal4",
-    "zh": "百露凋残4",
-    "ko": "백로의 이슬4",
-    "vi": "Trăm giọt sương tàn4",
-    "de": "Blasses Blütenblatt4",
-    "es": "Pétalo Pálido4",
-    "fr": "Pâle Pétale4",
-    "pt_br": "Pétala Pálida4",
-    "ru": "Бледный Лепесток4",
-    "th": "หยาดน้ำค้างร่วงโรย4",
-    "zh_tw": "百露凋殘4"
+    "en": "Pale Petal - Stage 2 Rotation Damage per Hit",
+    "zh": "百露凋残·第二档每段旋转",
+    "ko": "백로의 이슬·2단계 단계별 회전",
+    "vi": "Trăm giọt sương tàn - Sát thương xoay mỗi đoạn mức hai",
+    "de": "Blasses Blütenblatt - Drehungsschaden pro Treffer in Stufe 2",
+    "es": "Pétalo Pálido - Daño por Golpe en Rotación de Etapa 2",
+    "fr": "Pâle Pétale - Dégâts de rotation par coup à l'étape 2",
+    "pt_br": "Pétala Pálida - Dano por Golpe na Rotação da Fase 2",
+    "ru": "Бледный Лепесток - Урон за удар на этапе 2 вращения",
+    "th": "หยาดน้ำค้างร่วงโรย - ความเสียหายหมุนแต่ละช่วงของระดับที่สอง",
+    "zh_tw": "百露凋殘·第二檔每段旋轉"
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
@@ -8984,24 +8984,24 @@
      0.0729
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明"
   },
   "n:千香引魂蛊-奶伞.蓄力技-5段": {
    "skillId": null,
    "nameZh": "千香引魂蛊-奶伞.蓄力技-5段",
    "label": {
     "ja": "百露凋残・第二段階終了",
-    "en": "Pale Petal5",
-    "zh": "百露凋残5",
-    "ko": "백로의 이슬5",
-    "vi": "Trăm giọt sương tàn5",
-    "de": "Blasses Blütenblatt5",
-    "es": "Pétalo Pálido5",
-    "fr": "Pâle Pétale5",
-    "pt_br": "Pétala Pálida5",
-    "ru": "Бледный Лепесток5",
-    "th": "หยาดน้ำค้างร่วงโรย5",
-    "zh_tw": "百露凋殘5"
+    "en": "Pale Petal - Stage 2 Finisher",
+    "zh": "百露凋残·第二档结尾",
+    "ko": "백로의 이슬·2단계 마무리",
+    "vi": "Trăm giọt sương tàn - Sát thương kết thúc mức hai",
+    "de": "Blasses Blütenblatt - Finaler Schaden in Stufe 2",
+    "es": "Pétalo Pálido - Daño Final de Etapa 2",
+    "fr": "Pâle Pétale - Dégâts finaux à l'étape 2",
+    "pt_br": "Pétala Pálida - Dano Final da Fase 2",
+    "ru": "Бледный Лепесток - Финишный урон на этапе 2",
+    "th": "หยาดน้ำค้างร่วงโรย - ความเสียหายตอนจบของระดับที่สอง",
+    "zh_tw": "百露凋殘·第二檔結尾"
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
@@ -9976,7 +9976,7 @@
      0.972
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明"
   },
   "n:轻击-1段": {
    "skillId": null,

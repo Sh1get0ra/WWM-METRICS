@@ -5766,17 +5766,17 @@
    "nameZh": "绳镖新武学-绳镖.蓄力技新-1段",
    "label": {
     "ja": "乱撃の索1",
-    "en": "Crisscross Stance1",
-    "zh": "纵横势1",
-    "ko": "종횡무진의 기세1",
-    "vi": "Thế tung hoành1",
-    "de": "Kreuzstellung1",
-    "es": "Postura Entrecruzada1",
-    "fr": "Position Croisée1",
-    "pt_br": "Postura Cruzada1",
-    "ru": "Перекрёстная стойка1",
+    "en": "Crisscross Stance - Final strike",
+    "zh": "纵横势·最后一击",
+    "ko": "종횡무진의 기세·최후의 일격",
+    "vi": "Thế tung hoành - Sát thương đòn cuối cùng",
+    "de": "Kreuzstellung - Schaden des finalen Schlags",
+    "es": "Postura Entrecruzada - Daño del Golpe Final",
+    "fr": "Position Croisée - Dégâts de la Frappe Finale",
+    "pt_br": "Postura Cruzada - Dano do Golpe Final",
+    "ru": "Перекрёстная стойка - Урон финального удара",
     "th": "ท่าพุ่งทะลุแนว1",
-    "zh_tw": "縱橫勢1"
+    "zh_tw": "縱橫勢·最後一擊"
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
@@ -6757,24 +6757,24 @@
      0.108801
     ]
    },
-   "nameSource": "本番 skill_name + 段番号"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   },
   "n:绳镖新武学-绳镖.蓄力技新-2段": {
    "skillId": null,
    "nameZh": "绳镖新武学-绳镖.蓄力技新-2段",
    "label": {
     "ja": "乱撃の索2",
-    "en": "Crisscross Stance2",
-    "zh": "纵横势2",
-    "ko": "종횡무진의 기세2",
-    "vi": "Thế tung hoành2",
-    "de": "Kreuzstellung2",
-    "es": "Postura Entrecruzada2",
-    "fr": "Position Croisée2",
-    "pt_br": "Postura Cruzada2",
-    "ru": "Перекрёстная стойка2",
+    "en": "Crisscross Stance - Enhanced",
+    "zh": "纵横势·强化",
+    "ko": "종횡무진의 기세·강화",
+    "vi": "Thế tung hoành - tăng cường",
+    "de": "Kreuzstellung - Verstärkt",
+    "es": "Postura Entrecruzada - Mejorado",
+    "fr": "Position Croisée - Amélioré",
+    "pt_br": "Postura Cruzada - Aprimorado",
+    "ru": "Перекрёстная стойка - Усиленный",
     "th": "ท่าพุ่งทะลุแนว2",
-    "zh_tw": "縱橫勢2"
+    "zh_tw": "縱橫勢·強化"
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
@@ -7755,7 +7755,7 @@
      0.507738
     ]
    },
-   "nameSource": "本番 skill_name + 段番号"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   }
  }
 }

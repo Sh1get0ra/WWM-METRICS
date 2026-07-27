@@ -6930,17 +6930,17 @@
    "nameZh": "九重春色-重击蓄力技-杏花天-1档-1段",
    "label": {
     "ja": "杏花の天・溜め技一段",
-    "en": "Apricot Heaven1",
-    "zh": "九重春色-重击蓄力技-杏花天-1档1",
-    "ko": "봄의 연무1",
+    "en": "Apricot Heaven - Deal",
+    "zh": "九重春色-重击蓄力技-杏花天-1档·蓄力前摇造成",
+    "ko": "봄의 연무·차지 선행 동작 시 피해를",
     "vi": "Trời hoa mơ1",
-    "de": "Aprikosenhimmel1",
-    "es": "Paraíso del Albaricoque1",
-    "fr": "Paradis des Abricots1",
-    "pt_br": "Céu de Damasco1",
-    "ru": "Абрикосовый Рай1",
-    "th": "ดอกแอปริคอตในวันฟ้าใส1",
-    "zh_tw": "杏花天1"
+    "de": "Aprikosenhimmel - Verursache",
+    "es": "Paraíso del Albaricoque - Inflige",
+    "fr": "Paradis des Abricots - Inflige",
+    "pt_br": "Céu de Damasco - Causa",
+    "ru": "Абрикосовый Рай - Наносит",
+    "th": "ดอกแอปริคอตในวันฟ้าใส - การชาร์จพลังช่วงแรกสร้างความเสียหาย",
+    "zh_tw": "杏花天·蓄力前搖造成"
    },
    "origin": "kongfu_specific",
    "skillType": "heavyCharged",
@@ -7921,24 +7921,24 @@
      0.81534
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   },
   "n:九重春色-重击蓄力技-杏花天-1档-2段": {
    "skillId": null,
    "nameZh": "九重春色-重击蓄力技-杏花天-1档-2段",
    "label": {
     "ja": "杏花の天・溜め技二段最低",
-    "en": "Apricot Heaven2",
-    "zh": "九重春色-重击蓄力技-杏花天-1档2",
-    "ko": "봄의 연무2",
+    "en": "Apricot Heaven - then deal",
+    "zh": "九重春色-重击蓄力技-杏花天-1档·蓄力二段根据时长造成",
+    "ko": "봄의 연무·차지 2단계는 시간에 따라 피해를",
     "vi": "Trời hoa mơ2",
-    "de": "Aprikosenhimmel2",
-    "es": "Paraíso del Albaricoque2",
-    "fr": "Paradis des Abricots2",
-    "pt_br": "Céu de Damasco2",
-    "ru": "Абрикосовый Рай2",
-    "th": "ดอกแอปริคอตในวันฟ้าใส2",
-    "zh_tw": "杏花天2"
+    "de": "Aprikosenhimmel - dann verursache",
+    "es": "Paraíso del Albaricoque - luego inflige",
+    "fr": "Paradis des Abricots - puis inflige entre",
+    "pt_br": "Céu de Damasco - depois causa",
+    "ru": "Абрикосовый Рай - затем наносит",
+    "th": "ดอกแอปริคอตในวันฟ้าใส - ถึง",
+    "zh_tw": "杏花天·蓄力二段根據時長造成"
    },
    "origin": "kongfu_specific",
    "skillType": "heavyCharged",
@@ -8919,24 +8919,24 @@
      2.03835
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   },
   "n:九重春色-重击蓄力技-杏花天-1档-3段": {
    "skillId": null,
    "nameZh": "九重春色-重击蓄力技-杏花天-1档-3段",
    "label": {
     "ja": "杏花の天・溜め技二段最大",
-    "en": "Apricot Heaven3",
-    "zh": "九重春色-重击蓄力技-杏花天-1档3",
-    "ko": "봄의 연무3",
+    "en": "Apricot Heaven - damage based on the charge duration",
+    "zh": "九重春色-重击蓄力技-杏花天-1档·的",
+    "ko": "봄의 연무·까지 입힌다",
     "vi": "Trời hoa mơ3",
-    "de": "Aprikosenhimmel3",
-    "es": "Paraíso del Albaricoque3",
-    "fr": "Paradis des Abricots3",
-    "pt_br": "Céu de Damasco3",
-    "ru": "Абрикосовый Рай3",
-    "th": "ดอกแอปริคอตในวันฟ้าใส3",
-    "zh_tw": "杏花天3"
+    "de": "Aprikosenhimmel - Schaden basierend auf der Aufladezeit",
+    "es": "Paraíso del Albaricoque - de daño según la duración de la carga",
+    "fr": "Paradis des Abricots - de dégâts selon la durée de charge",
+    "pt_br": "Céu de Damasco - de dano com base na duração do carregamento",
+    "ru": "Абрикосовый Рай - урона в зависимости от длительности заряда",
+    "th": "ดอกแอปริคอตในวันฟ้าใส - ตามระยะเวลาที่ชาร์จ",
+    "zh_tw": "杏花天·的"
    },
    "origin": "kongfu_specific",
    "skillType": "heavyCharged",
@@ -9917,7 +9917,7 @@
      3.26136
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   },
   "n:九重春色-轻击蓄力技-浮空炮-1段": {
    "skillId": null,
@@ -11920,17 +11920,17 @@
    "nameZh": "九重春色-主动技-眩晕炮-1段",
    "label": {
     "ja": "春恨み・弾道ダメージ(首領以外)",
-    "en": "Cast Spring's Regret1",
-    "zh": "抛春恨1",
-    "ko": "봄의 원한1",
-    "vi": "Vứt bỏ hận xuân1",
-    "de": "Frühlingskummer1",
-    "es": "Pena Primaveral1",
-    "fr": "Chagrin printanier1",
-    "pt_br": "Tristeza da Primavera1",
-    "ru": "Весенняя Печаль1",
-    "th": "ทิ้งความเศร้าของฤดูใบไม้ผลิ1",
-    "zh_tw": "拋春恨1"
+    "en": "Cast Spring's Regret - Non-boss unit",
+    "zh": "抛春恨·非首领单位",
+    "ko": "봄의 원한·BOSS 외 유닛",
+    "vi": "Vứt bỏ hận xuân - Đơn vị không phải thủ lĩnh",
+    "de": "Frühlingskummer - Nicht-Boss Einheit",
+    "es": "Pena Primaveral - Unidad no jefe",
+    "fr": "Chagrin printanier - Unité non-boss",
+    "pt_br": "Tristeza da Primavera - Unidade não-chefe",
+    "ru": "Весенняя Печаль - Обычный юнит",
+    "th": "ทิ้งความเศร้าของฤดูใบไม้ผลิ - หน่วยที่ไม่ใช่หัวหน้า",
+    "zh_tw": "拋春恨·非首領單位"
    },
    "origin": "kongfu_specific",
    "skillType": "active",
@@ -12911,24 +12911,24 @@
      2.1423
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   },
   "n:九重春色-主动技-眩晕炮-2段": {
    "skillId": null,
    "nameZh": "九重春色-主动技-眩晕炮-2段",
    "label": {
     "ja": "春恨み・弾道ダメージ(首領)",
-    "en": "Cast Spring's Regret2",
-    "zh": "抛春恨2",
-    "ko": "봄의 원한2",
-    "vi": "Vứt bỏ hận xuân2",
-    "de": "Frühlingskummer2",
-    "es": "Pena Primaveral2",
-    "fr": "Chagrin printanier2",
-    "pt_br": "Tristeza da Primavera2",
-    "ru": "Весенняя Печаль2",
-    "th": "ทิ้งความเศร้าของฤดูใบไม้ผลิ2",
-    "zh_tw": "拋春恨2"
+    "en": "Cast Spring's Regret - boss unit",
+    "zh": "抛春恨·首领单位",
+    "ko": "봄의 원한·BOSS 유닛",
+    "vi": "Vứt bỏ hận xuân - đơn vị thủ lĩnh",
+    "de": "Frühlingskummer - Boss Einheit",
+    "es": "Pena Primaveral - unidad jefe",
+    "fr": "Chagrin printanier - unité boss",
+    "pt_br": "Tristeza da Primavera - unidade chefe",
+    "ru": "Весенняя Печаль - босс",
+    "th": "ทิ้งความเศร้าของฤดูใบไม้ผลิ - หน่วยหัวหน้า",
+    "zh_tw": "拋春恨·首領單位"
    },
    "origin": "kongfu_specific",
    "skillType": "active",
@@ -13909,7 +13909,7 @@
      3.363411
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "client 段説明 (ja は旧表記を維持)"
   },
   "n:九重春色-袖剑.轻击-1段": {
    "skillId": null,
