@@ -469,7 +469,8 @@
 
   // ── skill tab = 武術技一覧 (data/skilldata/ 由来、Lv dropdown で切替) ──
   // data source = window.WWM_SKILL_DAMAGE (data-store が起動時 eager load、 short key 形)。
-  // 2026-07-27: 由来が単一 skill_damage.json から data/skilldata/ 分割 (weapon 9 + kongfu 18 + index) へ移行。
+  // 2026-07-27: 由来が単一ファイルから data/skilldata/ 分割 (weapon 6 + kongfu 18 + index) へ移行。
+  // 技名は素材 (nameFrom/nameRefId/nameSeq) で持ち、data-store が i18n から 12 言語で組み立てる。
   // data-store.js の fetchSkillDamage() が order を辿って short key 形へ復元するので、本 tab は無変更。
   // schema: { <kongfu_id>: { w: weaponType, s: [{ i: skill_id, n: damage_name(zh), t: type, r: { <lv>: [f1,f2,f3,f4,f5] } }] } }
   // 表示 field = 外功係数(f5=[4]) / 外功付加(f3=[2]) / 属性係数(f5 × 1.5、 才能適用後) の 3 列。
