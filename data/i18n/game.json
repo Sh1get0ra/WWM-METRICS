@@ -9545,7 +9545,7 @@
   "skilltype": {
     "martial": {
       "ja": "武術技",
-      "en": "Q",
+      "en": "Martial Art Skill",
       "zh": "武学技",
       "ko": "무술 스킬",
       "vi": "kỹ năng võ học",
@@ -9593,7 +9593,7 @@
     },
     "special": {
       "ja": "特殊技",
-      "en": "Sp",
+      "en": "Special Skill",
       "zh": "特殊技",
       "ko": "특수 스킬",
       "vi": "kỹ năng đặc biệt",
@@ -9705,7 +9705,7 @@
     },
     "heavy": {
       "ja": "重撃",
-      "en": "HA",
+      "en": "Heavy Attack",
       "zh": "重击",
       "ko": "강공격",
       "vi": "Đánh mạnh",

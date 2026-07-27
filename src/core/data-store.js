@@ -29,7 +29,6 @@
     WWM_GUANYIN_LEVELS:   'guanyin_levels',
     WWM_KONGFU_LADDERS:   'kongfu_talent_ladders',
     WWM_KONGFU_PASSIVES:  'kongfu_passive_skills',
-    WWM_SKILL_DAMAGE:     'skill_damage',
     WWM_XINFA_ICONS:      'xinfa_icons',
     WWM_KONGFU_ICONS:     'kongfu_icons',
     WWM_QISHU_ICONS:      'qishu_icons',
@@ -70,6 +69,134 @@
       if (typeof window !== 'undefined') window[winKey] = d;
     })();
   }
+  // ── 武術技ダメージ = data/skilldata/ 分割 load → 実行時に short key 形へ復元 ──
+  // 旧 `data/skill_damage.json` (1行 1.5MB / 省略キー) を weapon 9 + kongfu 18 に分割した
+  // (生成 = scripts/split-skill-damage.cjs、設計 = run_TODO/skill_damage.jsonスキーマ再設計.md)。
+  // 消費側 (database-kongfu.js) は short key 形のまま扱うので、**ここで元の形に戻す**。
+  // 🚨 `order` を必ず辿ること。database-kongfu.js は `_SKILL_CAT_ORDER` で stable sort するため、
+  //    同カテゴリ内は元の並び順がそのまま画面の並びになる。キー列挙順で組むと表示順が変わる。
+  const _SD_FIELDS = {
+    skillId: 'i', nameZh: 'n', label: 'ln', origin: 't', skillType: 'k',
+    stageMultipliers: 'seg', stageLabels: 'segLabels', bundleTotal: 'segTotal',
+    bundleOf: 'segBundle', bundleIndex: 'segIdx', baseSkillId: 'baseId',
+  };
+  const _SD_COEF = ['skillConst', 'elemAdd', 'physAdd', 'elemCoefBase', 'physCoef'];
+
+  // 技名を **素材から組み立てる** (2026-07-27)。
+  // 🚨 以前は `build_skill_damage.py` が「武器名 + 種別名 + 番号」を文字列連結して data に焼き込んで
+  //    いた。連結先が ja/en/zh/ko の 4 言語しか無かったため、①言語データが i18n の外に出る
+  //    ②12 言語にならない ③「縄鏢・軽撃1」というゲーム内に存在しない名前ができて mining でも
+  //    取れない、が同時に起きていた。**番号は表示時に付けるもの**なので、data 側は
+  //    `nameFrom` / `nameRefId` / `nameSeq` の素材だけ持ち、ここで i18n を引いて組み立てる。
+  //    これで名前は i18n (12 言語) 一本になる。
+  // 「武器名 + 種別名 (+ 段番号)」を組み立てる時の**言語別の語順と区切り**。
+  // 🚨 全言語で「武器・種別」にしてはいけない。旧データの実測 (2026-07-27):
+  //     ja  剣・軽撃1          … 武器 → 種別 / 区切り「・」
+  //     en  Sword - Light Attack1 … 武器 → 種別 / 区切り「 - 」
+  //     zh  轻击·剑1           … **種別 → 武器** / 区切り「·」
+  //     ko  약공격·검1          … **種別 → 武器** / 区切り「·」
+  //   weaponType 合成 49 件のうち 45 件で中韓が逆順だった。
+  //   zh_tw は zh と同系統、それ以外 (de/es/fr/pt_br/ru/th/vi) は en と同じ語順に倒す。
+  //   **素材 (weapontype / skilltype) は全部 12 言語の公式訳**なので、組み立て規則さえ決まれば
+  //   12 言語すべてで出せる。4 言語で妥協しない。
+  const _SD_NAME_STYLE = {
+    _default: { sep: ' - ', typeFirst: false },
+    ja:    { sep: '・', typeFirst: false },
+    zh:    { sep: '·',  typeFirst: true },
+    zh_tw: { sep: '·',  typeFirst: true },
+    ko:    { sep: '·',  typeFirst: true },
+  };
+
+  function _sdLabel(full, weaponType, i18n) {
+    const seq = full.nameSeq;
+    if (full.nameFrom === 'skill') {
+      const e = i18n.skill_name[full.nameRefId];
+      if (!e) return full.label || null;
+      const out = {};
+      for (const [l, v] of Object.entries(e)) if (v) out[l] = seq ? `${v}${seq}` : v;
+      return out;
+    }
+    if (full.nameFrom === 'weaponType') {
+      const w = i18n.weapontype[weaponType];
+      const t = i18n.skilltype[full.skillType];
+      if (!w || !t) return full.label || null;
+      const out = {};
+      for (const [l, wv] of Object.entries(w)) {
+        const tv = t[l];
+        if (!wv || !tv) continue;
+        const r = _SD_NAME_STYLE[l] || _SD_NAME_STYLE._default;
+        out[l] = (r.typeFirst ? `${tv}${r.sep}${wv}` : `${wv}${r.sep}${tv}`) + (seq || '');
+      }
+      return out;
+    }
+    return full.label || null;   // ゲーム内の独自文言 (12 言語化は別途)
+  }
+
+  function _sdToShort(full, weaponType, i18n) {
+    const s = {};
+    for (const [name, short] of Object.entries(_SD_FIELDS)) {
+      if (full[name] !== undefined) s[short] = full[name];
+    }
+    const label = _sdLabel(full, weaponType, i18n);
+    if (label) s.ln = label; else delete s.ln;
+    const bl = full.byLevel;
+    if (bl && bl.lv) {
+      const r = {};
+      for (let i = 0; i < bl.lv.length; i++) {
+        r[String(bl.lv[i])] = _SD_COEF.map(c => bl[c][i]);
+      }
+      s.r = r;
+    }
+    return s;
+  }
+
+  async function fetchSkillDamage(ver) {
+    if (typeof window !== 'undefined' && window.WWM_SKILL_DAMAGE) {
+      calc.skill_damage = window.WWM_SKILL_DAMAGE; // 先行ロード分 (テスト注入等) を尊重
+      return;
+    }
+    const out = Object.create(null);
+    try {
+      // 技名の組み立てに i18n が要る。ready() の i18n load とは並行に走るので、
+      // 未着なら自前で取る (同 URL なのでブラウザ/SW キャッシュに乗り二重負荷にはならない)。
+      let i18n = { skill_name: data.skill_name, weapontype: data.weapontype, skilltype: data.skilltype };
+      if (!i18n.skill_name) {
+        const g = await fetch('data/i18n/game.json?v=' + getVersion())
+          .then(r => (r.ok ? r.json() : {})).catch(() => ({}));
+        i18n = { skill_name: g.skill_name || {}, weapontype: g.weapontype || {}, skilltype: g.skilltype || {} };
+      }
+      const idxRes = await fetch('data/skilldata/index.json?v=' + ver);
+      if (!idxRes.ok) throw new Error('index ' + idxRes.status);
+      const idx = await idxRes.json();
+      const load = (sub, name) => fetch(`data/skilldata/${sub}/${name}.json?v=${ver}`).then(r => {
+        if (!r.ok) throw new Error(`${sub}/${name} ${r.status}`);
+        return r.json();
+      });
+      const [weaponDocs, kongfuDocs] = await Promise.all([
+        Promise.all((idx.weapon || []).map(n => load('weapon', n))),
+        Promise.all((idx.kongfu || []).map(n => load('kongfu', n))),
+      ]);
+      const weapon = Object.create(null);
+      for (const doc of weaponDocs) weapon[doc.weaponType] = doc;
+      for (const doc of kongfuDocs) {
+        const list = [];
+        for (const key of (doc.order || [])) {
+          const w = weapon[doc.weaponType];
+          const full = (doc.skills && doc.skills[key]) || (w && w.skills && w.skills[key]);
+          if (!full) { console.warn('[DataStore] skilldata: key 未解決', doc.kongfuId, key); continue; }
+          const s = _sdToShort(full, doc.weaponType, i18n);
+          delete s.appliesTo; // weapon 側だけが持つ紐付け情報 (復元形には出さない)
+          list.push(s);
+        }
+        out[doc.kongfuId] = { w: doc.weaponType, s: list };
+      }
+    } catch (e) {
+      console.warn('[DataStore] skilldata load failed:', e);
+    }
+    calc.skill_damage = out;
+    if (typeof window !== 'undefined') window.WWM_SKILL_DAMAGE = out;
+  }
+
   function ensureCalcData() {
     if (calcPromise) return calcPromise;
     const sv = (typeof window !== 'undefined' && window.WWM_SCORE_VERSION) || 7;
@@ -77,6 +204,9 @@
     calcPromise = Promise.all([
       ...Object.entries(CALC_DICTS).map(([winKey, fileName]) => fetchDict(winKey, fileName, sv)),
       ...Object.entries(DISPLAY_DICTS).map(([winKey, fileName]) => fetchDict(winKey, fileName, dv)),
+      // 武術技DB の表示専用データ (calc.js からの参照 0) なので DISPLAY_VERSION 側で cache bust する。
+      // SCORE_VERSION を使うと計算に影響しない変更で baseline 無効化 (再import 促し) が走ってしまう。
+      fetchSkillDamage(dv),
     ]).then(function () {});
     return calcPromise;
   }
