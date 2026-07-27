@@ -359,6 +359,23 @@
     return new Set(list);
   }
 
+  // statKey → affix ID lookup (affix_selector.json の ids、2026-07-27 追加)。
+  // その装備 Lv/部位/tier/slot で実際に出現する affix ID を master から引く。
+  // 未収録 (Lv71 / ATTUNE / 弓等) は null → 呼び出し側で従来の prefix 照合へフォールバック。
+  function _selectorAffixIds(slot, idx, equipLv, equipRank, roleInfo, kongfuIdOverride) {
+    if (idx < 0 || idx > 4) return null;
+    const wdbCat = _slotToWdbCategory(slot, roleInfo, kongfuIdOverride);
+    if (!wdbCat) return null;
+    const master = window.WWM_AFFIX_SELECTOR?.data;
+    if (!master) return null;
+    const tier = _RANK_TO_TIER[equipRank] || '5';
+    const lv = equipLv || 91;
+    const ids = master[wdbCat]?.[String(lv)]?.[tier]?.ids;
+    if (!ids) return null;
+    // idx 1-4 は TUNING 共通プールなので slot '1' の表を使う
+    return ids[idx === 0 ? '0' : '1'] || null;
+  }
+
   // ATTUNE(idx5) statKey → 武学固有 kongfuId lookup (master 経由、_matchKongfuSpecific のハードコード代替)
   //   master 未対応 (= null) の場合は呼び出し側で _matchKongfuSpecific にフォールバック
   function _selectorAttuneMartialArt(slot, statKey, equipLv, equipRank, roleInfo, kongfuIdOverride) {
@@ -422,10 +439,18 @@
     //   master 未対応 slot/lv (= 弓/射玦/Thumb Ring 等 / Lv71武器・Lv100-105 idx5) = null = 旧 logic fallback
     const wdbAllowed = _selectorAllowedStatKeys(slot, idx, equipLv, equipRank, WWMState.roleInfo, kongfuIdOverride);
     const chanceMap = _affixChanceMap(slot, idx, equipLv, equipRank, WWMState.roleInfo, kongfuIdOverride);
+    // master が statKey→affixId を持つ場合はそれを正とする (2026-07-27)。
+    // prefix 照合は「現在の affix ID の先頭2桁」で候補を絞るため、装備 Lv を変えると
+    // 世代が合わず選択肢が消えていた (武器 Lv91→96 で無相攻撃力が出ない実バグ)。
+    // prefix は Lv と 1対1 でない (実測: prefix 11 が Lv41/51/56/61 に跨る) ので、
+    // 「その Lv/部位で実際に出る affix ID」は master 側が持つのが正しい。
+    const idMap = _selectorAffixIds(slot, idx, equipLv, equipRank, WWMState.roleInfo, kongfuIdOverride);
     const seen = new Set();
     const opts = [];
     for (const [id, info] of Object.entries(all)) {
-      if (!id.startsWith(prefix)) continue;
+      // master に ID 表がある時は prefix でなく「その statKey に割り当てられた ID か」で判定
+      if (idMap) { if (idMap[info.statKey] !== id) continue; }
+      else if (!id.startsWith(prefix)) continue;
       const sk = info.statKey;
       if (!sk || seen.has(sk)) continue;
       if (isWeaponLike6 && !_SLOT6_PEN_STATS.includes(sk)) continue;
