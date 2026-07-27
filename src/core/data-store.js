@@ -70,8 +70,8 @@
     })();
   }
   // ── 武術技ダメージ = data/skilldata/ 分割 load → 実行時に short key 形へ復元 ──
-  // 旧 `data/skill_damage.json` (1行 1.5MB / 省略キー) を weapon 9 + kongfu 18 に分割した
-  // (生成 = scripts/split-skill-damage.cjs、設計 = run_TODO/skill_damage.jsonスキーマ再設計.md)。
+  // 旧 `data/skill_damage.json` (1行 1.5MB / 省略キー) を weapon 6 + kongfu 18 に分割した
+  // (生成 = scripts/mining/monthly/build_skill_damage.py、設計 = run_TODO/skill_damage.jsonスキーマ再設計.md)。
   // 消費側 (database-kongfu.js) は short key 形のまま扱うので、**ここで元の形に戻す**。
   // 🚨 `order` を必ず辿ること。database-kongfu.js は `_SKILL_CAT_ORDER` で stable sort するため、
   //    同カテゴリ内は元の並び順がそのまま画面の並びになる。キー列挙順で組むと表示順が変わる。

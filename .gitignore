@@ -52,3 +52,6 @@ poc/
 mock/
 .superpowers/
 dist/
+
+# 調査用の一時ファイル (commit しない)
+scratchpad/
