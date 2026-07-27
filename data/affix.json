@@ -2865,1711 +2865,2138 @@
   },
   "200001": {
     "internal": 302,
-    "statKey": "namelessSwordQ"
+    "statKey": "namelessSwordQ",
+    "attackType": "martial"
   },
   "200002": {
     "internal": 303,
-    "statKey": "namelessSwordCharged"
+    "statKey": "namelessSwordCharged",
+    "attackType": "charged"
   },
   "200003": {
     "internal": 305,
-    "statKey": "namelessSwordSpecial"
+    "statKey": "namelessSwordSpecial",
+    "attackType": "special"
   },
   "200004": {
     "internal": 309,
-    "statKey": "namelessSpearQ"
+    "statKey": "namelessSpearQ",
+    "attackType": "martial"
   },
   "200005": {
     "internal": 310,
-    "statKey": "namelessSpearCharged"
+    "statKey": "namelessSpearCharged",
+    "attackType": "charged"
   },
   "200006": {
     "internal": 361,
-    "statKey": "namelessSpearSpecial"
+    "statKey": "namelessSpearSpecial",
+    "attackType": "special"
   },
   "201001": {
     "internal": 306,
-    "statKey": "swordQ"
+    "statKey": "swordQ",
+    "attackType": "martial"
   },
   "201002": {
     "internal": 307,
-    "statKey": "swordCharged"
+    "statKey": "swordCharged",
+    "attackType": "charged"
   },
   "201003": {
     "internal": 308,
-    "statKey": "swordSpecial"
+    "statKey": "swordSpecial",
+    "attackType": "special"
   },
   "201004": {
     "internal": 311,
-    "statKey": "spearQ"
+    "statKey": "spearQ",
+    "attackType": "martial"
   },
   "201005": {
     "internal": 312,
-    "statKey": "spearCharged"
+    "statKey": "spearCharged",
+    "attackType": "charged"
   },
   "201006": {
     "internal": 363,
-    "statKey": "spearSpecial"
+    "statKey": "spearSpecial",
+    "attackType": "special"
   },
   "202001": {
     "internal": 317,
-    "statKey": "moBladeCharged"
+    "statKey": "moBladeCharged",
+    "attackType": "charged"
   },
   "202002": {
     "internal": 318,
-    "statKey": "moBladeSpecial"
+    "statKey": "moBladeSpecial",
+    "attackType": "special"
   },
   "202003": {
     "internal": 327,
-    "statKey": "stormbreakerQ"
+    "statKey": "stormbreakerQ",
+    "attackType": "martial"
   },
   "202004": {
     "internal": 319,
-    "statKey": "stormbreakerCharged"
+    "statKey": "stormbreakerCharged",
+    "attackType": "charged"
   },
   "202005": {
     "internal": 320,
-    "statKey": "stormbreakerSpecial"
+    "statKey": "stormbreakerSpecial",
+    "attackType": "special"
   },
   "203001": {
     "internal": 313,
-    "statKey": "fanQ"
+    "statKey": "fanQ",
+    "attackType": "martial"
   },
   "203002": {
     "internal": 314,
-    "statKey": "fanCharged"
+    "statKey": "fanCharged",
+    "attackType": "charged"
   },
   "203003": {
     "internal": 350,
-    "statKey": "fanSpecial"
+    "statKey": "fanSpecial",
+    "attackType": "special"
   },
   "203004": {
     "internal": 352,
-    "statKey": "umbQ"
+    "statKey": "umbQ",
+    "attackType": "martial"
   },
   "203005": {
     "internal": 353,
-    "statKey": "umbCharged"
+    "statKey": "umbCharged",
+    "attackType": "charged"
   },
   "203006": {
     "internal": 354,
-    "statKey": "umbDrone"
+    "statKey": "umbDrone",
+    "attackType": "special"
   },
   "204001": {
     "internal": 315,
-    "statKey": "panaceaFanQ"
+    "statKey": "panaceaFanQ",
+    "attackType": "healing"
   },
   "204002": {
     "internal": 316,
-    "statKey": "panaceaFanSpecial"
+    "statKey": "panaceaFanSpecial",
+    "attackType": "special"
   },
   "204003": {
     "internal": 358,
-    "statKey": "soulshadeUmbQ"
+    "statKey": "soulshadeUmbQ",
+    "attackType": "healing"
   },
   "204004": {
     "internal": 359,
-    "statKey": "soulshadeUmbCharged"
+    "statKey": "soulshadeUmbCharged",
+    "attackType": "charged"
   },
   "204005": {
     "internal": 360,
-    "statKey": "soulshadeUmbSpecial"
+    "statKey": "soulshadeUmbSpecial",
+    "attackType": "special"
   },
   "205001": {
     "internal": 322,
-    "statKey": "infernalTwinbladesQ"
+    "statKey": "infernalTwinbladesQ",
+    "attackType": "martial"
   },
   "205002": {
     "internal": 362,
-    "statKey": "infernalTwinbladesLight"
+    "statKey": "infernalTwinbladesLight",
+    "attackType": "light"
   },
   "205003": {
     "internal": 321,
-    "statKey": "infernalTwinbladesSpecial"
+    "statKey": "infernalTwinbladesSpecial",
+    "attackType": "special"
   },
   "205004": {
     "internal": 364,
-    "statKey": "mortalRopeDartQ"
+    "statKey": "mortalRopeDartQ",
+    "attackType": "martial"
   },
   "205005": {
     "internal": 365,
-    "statKey": "mortalRopeDartCharged"
+    "statKey": "mortalRopeDartCharged",
+    "attackType": "charged"
   },
   "205006": {
     "internal": 366,
-    "statKey": "mortalRopeDartRodent"
+    "statKey": "mortalRopeDartRodent",
+    "attackType": "rodent"
   },
   "206001": {
     "internal": 228,
-    "statKey": "physPen"
+    "statKey": "physPen",
+    "attackType": null
   },
   "206002": {
     "internal": 230,
-    "statKey": "physResist"
+    "statKey": "physResist",
+    "attackType": null
   },
   "206003": {
     "internal": 144,
-    "statKey": "bellstrikePen"
+    "statKey": "bellstrikePen",
+    "attackType": null
   },
   "206004": {
     "internal": 145,
-    "statKey": "stonesplitPen"
+    "statKey": "stonesplitPen",
+    "attackType": null
   },
   "206005": {
     "internal": 146,
-    "statKey": "silkbindPen"
+    "statKey": "silkbindPen",
+    "attackType": null
   },
   "206006": {
     "internal": 148,
-    "statKey": "bamboocutPen"
+    "statKey": "bamboocutPen",
+    "attackType": null
   },
   "207001": {
     "internal": 373,
-    "statKey": "everspringUmbQ"
+    "statKey": "everspringUmbQ",
+    "attackType": "martial"
   },
   "207002": {
     "internal": 374,
-    "statKey": "everspringUmbCharged"
+    "statKey": "everspringUmbCharged",
+    "attackType": "charged"
   },
   "207003": {
     "internal": 375,
-    "statKey": "everspringUmbSpecial"
+    "statKey": "everspringUmbSpecial",
+    "attackType": "special"
   },
   "207004": {
     "internal": 376,
-    "statKey": "unfetteredRopeDartQ"
+    "statKey": "unfetteredRopeDartQ",
+    "attackType": "martial"
   },
   "207005": {
     "internal": 377,
-    "statKey": "unfetteredRopeDartCharged"
+    "statKey": "unfetteredRopeDartCharged",
+    "attackType": "charged"
   },
   "207006": {
     "internal": 378,
-    "statKey": "unfetteredRopeDartSpecial"
+    "statKey": "unfetteredRopeDartSpecial",
+    "attackType": "special"
   },
   "208001": {
     "internal": 400,
-    "statKey": "snowpartingQ"
+    "statKey": "snowpartingQ",
+    "attackType": "martial"
   },
   "208002": {
     "internal": 401,
-    "statKey": "snowpartingCharged"
+    "statKey": "snowpartingCharged",
+    "attackType": "charged"
   },
   "208003": {
     "internal": 402,
-    "statKey": "snowpartingVariedCombo"
+    "statKey": "snowpartingVariedCombo",
+    "attackType": "lightVariedCombo"
   },
   "208004": {
     "internal": 403,
-    "statKey": "phalanxbaneQ"
+    "statKey": "phalanxbaneQ",
+    "attackType": "martial"
   },
   "208005": {
     "internal": 404,
-    "statKey": "phalanxbaneCharged"
+    "statKey": "phalanxbaneCharged",
+    "attackType": "charged"
   },
   "210001": {
     "internal": 302,
-    "statKey": "namelessSwordQ"
+    "statKey": "namelessSwordQ",
+    "attackType": "martial"
   },
   "210002": {
     "internal": 303,
-    "statKey": "namelessSwordCharged"
+    "statKey": "namelessSwordCharged",
+    "attackType": "charged"
   },
   "210003": {
     "internal": 305,
-    "statKey": "namelessSwordSpecial"
+    "statKey": "namelessSwordSpecial",
+    "attackType": "special"
   },
   "210004": {
     "internal": 309,
-    "statKey": "namelessSpearQ"
+    "statKey": "namelessSpearQ",
+    "attackType": "martial"
   },
   "210005": {
     "internal": 310,
-    "statKey": "namelessSpearCharged"
+    "statKey": "namelessSpearCharged",
+    "attackType": "charged"
   },
   "210006": {
     "internal": 361,
-    "statKey": "namelessSpearSpecial"
+    "statKey": "namelessSpearSpecial",
+    "attackType": "special"
   },
   "211001": {
     "internal": 306,
-    "statKey": "swordQ"
+    "statKey": "swordQ",
+    "attackType": "martial"
   },
   "211002": {
     "internal": 307,
-    "statKey": "swordCharged"
+    "statKey": "swordCharged",
+    "attackType": "charged"
   },
   "211003": {
     "internal": 308,
-    "statKey": "swordSpecial"
+    "statKey": "swordSpecial",
+    "attackType": "special"
   },
   "211004": {
     "internal": 311,
-    "statKey": "spearQ"
+    "statKey": "spearQ",
+    "attackType": "martial"
   },
   "211005": {
     "internal": 312,
-    "statKey": "spearCharged"
+    "statKey": "spearCharged",
+    "attackType": "charged"
   },
   "211006": {
     "internal": 363,
-    "statKey": "spearSpecial"
+    "statKey": "spearSpecial",
+    "attackType": "special"
   },
   "212001": {
     "internal": 317,
-    "statKey": "moBladeCharged"
+    "statKey": "moBladeCharged",
+    "attackType": "charged"
   },
   "212002": {
     "internal": 318,
-    "statKey": "moBladeSpecial"
+    "statKey": "moBladeSpecial",
+    "attackType": "special"
   },
   "212003": {
     "internal": 327,
-    "statKey": "stormbreakerQ"
+    "statKey": "stormbreakerQ",
+    "attackType": "martial"
   },
   "212004": {
     "internal": 319,
-    "statKey": "stormbreakerCharged"
+    "statKey": "stormbreakerCharged",
+    "attackType": "charged"
   },
   "212005": {
     "internal": 320,
-    "statKey": "stormbreakerSpecial"
+    "statKey": "stormbreakerSpecial",
+    "attackType": "special"
   },
   "213001": {
     "internal": 313,
-    "statKey": "fanQ"
+    "statKey": "fanQ",
+    "attackType": "martial"
   },
   "213002": {
     "internal": 314,
-    "statKey": "fanCharged"
+    "statKey": "fanCharged",
+    "attackType": "charged"
   },
   "213003": {
     "internal": 350,
-    "statKey": "fanSpecial"
+    "statKey": "fanSpecial",
+    "attackType": "special"
   },
   "213004": {
     "internal": 352,
-    "statKey": "umbQ"
+    "statKey": "umbQ",
+    "attackType": "martial"
   },
   "213005": {
     "internal": 353,
-    "statKey": "umbCharged"
+    "statKey": "umbCharged",
+    "attackType": "charged"
   },
   "213006": {
     "internal": 354,
-    "statKey": "umbDrone"
+    "statKey": "umbDrone",
+    "attackType": "special"
   },
   "214001": {
     "internal": 315,
-    "statKey": "panaceaFanQ"
+    "statKey": "panaceaFanQ",
+    "attackType": "healing"
   },
   "214002": {
     "internal": 316,
-    "statKey": "panaceaFanSpecial"
+    "statKey": "panaceaFanSpecial",
+    "attackType": "special"
   },
   "214003": {
     "internal": 358,
-    "statKey": "soulshadeUmbQ"
+    "statKey": "soulshadeUmbQ",
+    "attackType": "healing"
   },
   "214004": {
     "internal": 359,
-    "statKey": "soulshadeUmbCharged"
+    "statKey": "soulshadeUmbCharged",
+    "attackType": "charged"
   },
   "214005": {
     "internal": 360,
-    "statKey": "soulshadeUmbSpecial"
+    "statKey": "soulshadeUmbSpecial",
+    "attackType": "special"
   },
   "215001": {
     "internal": 322,
-    "statKey": "infernalTwinbladesQ"
+    "statKey": "infernalTwinbladesQ",
+    "attackType": "martial"
   },
   "215002": {
     "internal": 362,
-    "statKey": "infernalTwinbladesLight"
+    "statKey": "infernalTwinbladesLight",
+    "attackType": "light"
   },
   "215003": {
     "internal": 321,
-    "statKey": "infernalTwinbladesSpecial"
+    "statKey": "infernalTwinbladesSpecial",
+    "attackType": "special"
   },
   "215004": {
     "internal": 364,
-    "statKey": "mortalRopeDartQ"
+    "statKey": "mortalRopeDartQ",
+    "attackType": "martial"
   },
   "215005": {
     "internal": 365,
-    "statKey": "mortalRopeDartCharged"
+    "statKey": "mortalRopeDartCharged",
+    "attackType": "charged"
   },
   "215006": {
     "internal": 366,
-    "statKey": "mortalRopeDartRodent"
+    "statKey": "mortalRopeDartRodent",
+    "attackType": "rodent"
   },
   "216001": {
     "internal": 228,
-    "statKey": "physPen"
+    "statKey": "physPen",
+    "attackType": null
   },
   "216002": {
     "internal": 230,
-    "statKey": "physResist"
+    "statKey": "physResist",
+    "attackType": null
   },
   "216003": {
     "internal": 144,
-    "statKey": "bellstrikePen"
+    "statKey": "bellstrikePen",
+    "attackType": null
   },
   "216004": {
     "internal": 145,
-    "statKey": "stonesplitPen"
+    "statKey": "stonesplitPen",
+    "attackType": null
   },
   "216005": {
     "internal": 146,
-    "statKey": "silkbindPen"
+    "statKey": "silkbindPen",
+    "attackType": null
   },
   "216006": {
     "internal": 148,
-    "statKey": "bamboocutPen"
+    "statKey": "bamboocutPen",
+    "attackType": null
   },
   "217001": {
     "internal": 373,
-    "statKey": "everspringUmbQ"
+    "statKey": "everspringUmbQ",
+    "attackType": "martial"
   },
   "217002": {
     "internal": 374,
-    "statKey": "everspringUmbCharged"
+    "statKey": "everspringUmbCharged",
+    "attackType": "charged"
   },
   "217003": {
     "internal": 375,
-    "statKey": "everspringUmbSpecial"
+    "statKey": "everspringUmbSpecial",
+    "attackType": "special"
   },
   "217004": {
     "internal": 376,
-    "statKey": "unfetteredRopeDartQ"
+    "statKey": "unfetteredRopeDartQ",
+    "attackType": "martial"
   },
   "217005": {
     "internal": 377,
-    "statKey": "unfetteredRopeDartCharged"
+    "statKey": "unfetteredRopeDartCharged",
+    "attackType": "charged"
   },
   "217006": {
     "internal": 378,
-    "statKey": "unfetteredRopeDartSpecial"
+    "statKey": "unfetteredRopeDartSpecial",
+    "attackType": "special"
   },
   "218001": {
     "internal": 400,
-    "statKey": "snowpartingQ"
+    "statKey": "snowpartingQ",
+    "attackType": "martial"
   },
   "218002": {
     "internal": 401,
-    "statKey": "snowpartingCharged"
+    "statKey": "snowpartingCharged",
+    "attackType": "charged"
   },
   "218003": {
     "internal": 402,
-    "statKey": "snowpartingVariedCombo"
+    "statKey": "snowpartingVariedCombo",
+    "attackType": "lightVariedCombo"
   },
   "218004": {
     "internal": 403,
-    "statKey": "phalanxbaneQ"
+    "statKey": "phalanxbaneQ",
+    "attackType": "martial"
   },
   "218005": {
     "internal": 404,
-    "statKey": "phalanxbaneCharged"
+    "statKey": "phalanxbaneCharged",
+    "attackType": "charged"
   },
   "220001": {
     "internal": 302,
-    "statKey": "namelessSwordQ"
+    "statKey": "namelessSwordQ",
+    "attackType": "martial"
   },
   "220002": {
     "internal": 303,
-    "statKey": "namelessSwordCharged"
+    "statKey": "namelessSwordCharged",
+    "attackType": "charged"
   },
   "220003": {
     "internal": 305,
-    "statKey": "namelessSwordSpecial"
+    "statKey": "namelessSwordSpecial",
+    "attackType": "special"
   },
   "220004": {
     "internal": 309,
-    "statKey": "namelessSpearQ"
+    "statKey": "namelessSpearQ",
+    "attackType": "martial"
   },
   "220005": {
     "internal": 310,
-    "statKey": "namelessSpearCharged"
+    "statKey": "namelessSpearCharged",
+    "attackType": "charged"
   },
   "220006": {
     "internal": 361,
-    "statKey": "namelessSpearSpecial"
+    "statKey": "namelessSpearSpecial",
+    "attackType": "special"
   },
   "221001": {
     "internal": 306,
-    "statKey": "swordQ"
+    "statKey": "swordQ",
+    "attackType": "martial"
   },
   "221002": {
     "internal": 307,
-    "statKey": "swordCharged"
+    "statKey": "swordCharged",
+    "attackType": "charged"
   },
   "221003": {
     "internal": 308,
-    "statKey": "swordSpecial"
+    "statKey": "swordSpecial",
+    "attackType": "special"
   },
   "221004": {
     "internal": 311,
-    "statKey": "spearQ"
+    "statKey": "spearQ",
+    "attackType": "martial"
   },
   "221005": {
     "internal": 312,
-    "statKey": "spearCharged"
+    "statKey": "spearCharged",
+    "attackType": "charged"
   },
   "221006": {
     "internal": 363,
-    "statKey": "spearSpecial"
+    "statKey": "spearSpecial",
+    "attackType": "special"
   },
   "222001": {
     "internal": 317,
-    "statKey": "moBladeCharged"
+    "statKey": "moBladeCharged",
+    "attackType": "charged"
   },
   "222002": {
     "internal": 318,
-    "statKey": "moBladeSpecial"
+    "statKey": "moBladeSpecial",
+    "attackType": "special"
   },
   "222003": {
     "internal": 327,
-    "statKey": "stormbreakerQ"
+    "statKey": "stormbreakerQ",
+    "attackType": "martial"
   },
   "222004": {
     "internal": 319,
-    "statKey": "stormbreakerCharged"
+    "statKey": "stormbreakerCharged",
+    "attackType": "charged"
   },
   "222005": {
     "internal": 320,
-    "statKey": "stormbreakerSpecial"
+    "statKey": "stormbreakerSpecial",
+    "attackType": "special"
   },
   "223001": {
     "internal": 313,
-    "statKey": "fanQ"
+    "statKey": "fanQ",
+    "attackType": "martial"
   },
   "223002": {
     "internal": 314,
-    "statKey": "fanCharged"
+    "statKey": "fanCharged",
+    "attackType": "charged"
   },
   "223003": {
     "internal": 350,
-    "statKey": "fanSpecial"
+    "statKey": "fanSpecial",
+    "attackType": "special"
   },
   "223004": {
     "internal": 352,
-    "statKey": "umbQ"
+    "statKey": "umbQ",
+    "attackType": "martial"
   },
   "223005": {
     "internal": 353,
-    "statKey": "umbCharged"
+    "statKey": "umbCharged",
+    "attackType": "charged"
   },
   "223006": {
     "internal": 354,
-    "statKey": "umbDrone"
+    "statKey": "umbDrone",
+    "attackType": "special"
   },
   "224001": {
     "internal": 315,
-    "statKey": "panaceaFanQ"
+    "statKey": "panaceaFanQ",
+    "attackType": "healing"
   },
   "224002": {
     "internal": 316,
-    "statKey": "panaceaFanSpecial"
+    "statKey": "panaceaFanSpecial",
+    "attackType": "special"
   },
   "224003": {
     "internal": 358,
-    "statKey": "soulshadeUmbQ"
+    "statKey": "soulshadeUmbQ",
+    "attackType": "healing"
   },
   "224004": {
     "internal": 359,
-    "statKey": "soulshadeUmbCharged"
+    "statKey": "soulshadeUmbCharged",
+    "attackType": "charged"
   },
   "224005": {
     "internal": 360,
-    "statKey": "soulshadeUmbSpecial"
+    "statKey": "soulshadeUmbSpecial",
+    "attackType": "special"
   },
   "225001": {
     "internal": 322,
-    "statKey": "infernalTwinbladesQ"
+    "statKey": "infernalTwinbladesQ",
+    "attackType": "martial"
   },
   "225002": {
     "internal": 362,
-    "statKey": "infernalTwinbladesLight"
+    "statKey": "infernalTwinbladesLight",
+    "attackType": "light"
   },
   "225003": {
     "internal": 321,
-    "statKey": "infernalTwinbladesSpecial"
+    "statKey": "infernalTwinbladesSpecial",
+    "attackType": "special"
   },
   "225004": {
     "internal": 364,
-    "statKey": "mortalRopeDartQ"
+    "statKey": "mortalRopeDartQ",
+    "attackType": "martial"
   },
   "225005": {
     "internal": 365,
-    "statKey": "mortalRopeDartCharged"
+    "statKey": "mortalRopeDartCharged",
+    "attackType": "charged"
   },
   "225006": {
     "internal": 366,
-    "statKey": "mortalRopeDartRodent"
+    "statKey": "mortalRopeDartRodent",
+    "attackType": "rodent"
   },
   "226001": {
     "internal": 228,
-    "statKey": "physPen"
+    "statKey": "physPen",
+    "attackType": null
   },
   "226002": {
     "internal": 230,
-    "statKey": "physResist"
+    "statKey": "physResist",
+    "attackType": null
   },
   "226003": {
     "internal": 144,
-    "statKey": "bellstrikePen"
+    "statKey": "bellstrikePen",
+    "attackType": null
   },
   "226004": {
     "internal": 145,
-    "statKey": "stonesplitPen"
+    "statKey": "stonesplitPen",
+    "attackType": null
   },
   "226005": {
     "internal": 146,
-    "statKey": "silkbindPen"
+    "statKey": "silkbindPen",
+    "attackType": null
   },
   "226006": {
     "internal": 148,
-    "statKey": "bamboocutPen"
+    "statKey": "bamboocutPen",
+    "attackType": null
   },
   "227001": {
     "internal": 373,
-    "statKey": "everspringUmbQ"
+    "statKey": "everspringUmbQ",
+    "attackType": "martial"
   },
   "227002": {
     "internal": 374,
-    "statKey": "everspringUmbCharged"
+    "statKey": "everspringUmbCharged",
+    "attackType": "charged"
   },
   "227003": {
     "internal": 375,
-    "statKey": "everspringUmbSpecial"
+    "statKey": "everspringUmbSpecial",
+    "attackType": "special"
   },
   "227004": {
     "internal": 376,
-    "statKey": "unfetteredRopeDartQ"
+    "statKey": "unfetteredRopeDartQ",
+    "attackType": "martial"
   },
   "227005": {
     "internal": 377,
-    "statKey": "unfetteredRopeDartCharged"
+    "statKey": "unfetteredRopeDartCharged",
+    "attackType": "charged"
   },
   "227006": {
     "internal": 378,
-    "statKey": "unfetteredRopeDartSpecial"
+    "statKey": "unfetteredRopeDartSpecial",
+    "attackType": "special"
   },
   "228001": {
     "internal": 400,
-    "statKey": "snowpartingQ"
+    "statKey": "snowpartingQ",
+    "attackType": "martial"
   },
   "228002": {
     "internal": 401,
-    "statKey": "snowpartingCharged"
+    "statKey": "snowpartingCharged",
+    "attackType": "charged"
   },
   "228003": {
     "internal": 402,
-    "statKey": "snowpartingVariedCombo"
+    "statKey": "snowpartingVariedCombo",
+    "attackType": "lightVariedCombo"
   },
   "228004": {
     "internal": 403,
-    "statKey": "phalanxbaneQ"
+    "statKey": "phalanxbaneQ",
+    "attackType": "martial"
   },
   "228005": {
     "internal": 404,
-    "statKey": "phalanxbaneCharged"
+    "statKey": "phalanxbaneCharged",
+    "attackType": "charged"
   },
   "239651": {
     "internal": 393,
-    "statKey": "heavenwillGauntletsCharged"
+    "statKey": "heavenwillGauntletsCharged",
+    "attackType": "charged"
   },
   "239652": {
     "internal": 394,
-    "statKey": "heavenwillGauntletsQ"
+    "statKey": "heavenwillGauntletsQ",
+    "attackType": "martial"
   },
   "239653": {
     "internal": 395,
-    "statKey": "heavenwillGauntletsLightVariedCombo"
+    "statKey": "heavenwillGauntletsLightVariedCombo",
+    "attackType": "variedCombo"
   },
   "239654": {
     "internal": 396,
-    "statKey": "skygraspRopeDartHeavy"
+    "statKey": "skygraspRopeDartHeavy",
+    "attackType": "heavy"
   },
   "239655": {
     "internal": 397,
-    "statKey": "skygraspRopeDartSpecial"
+    "statKey": "skygraspRopeDartSpecial",
+    "attackType": "special"
   },
   "239751": {
     "internal": 400,
-    "statKey": "snowpartingQ"
+    "statKey": "snowpartingQ",
+    "attackType": "martial"
   },
   "239752": {
     "internal": 401,
-    "statKey": "snowpartingCharged"
+    "statKey": "snowpartingCharged",
+    "attackType": "charged"
   },
   "239753": {
     "internal": 402,
-    "statKey": "snowpartingVariedCombo"
+    "statKey": "snowpartingVariedCombo",
+    "attackType": "lightVariedCombo"
   },
   "239754": {
     "internal": 403,
-    "statKey": "phalanxbaneQ"
+    "statKey": "phalanxbaneQ",
+    "attackType": "martial"
   },
   "239755": {
     "internal": 404,
-    "statKey": "phalanxbaneCharged"
+    "statKey": "phalanxbaneCharged",
+    "attackType": "charged"
   },
   "239851": {
     "internal": 373,
-    "statKey": "everspringUmbQ"
+    "statKey": "everspringUmbQ",
+    "attackType": "martial"
   },
   "239852": {
     "internal": 374,
-    "statKey": "everspringUmbCharged"
+    "statKey": "everspringUmbCharged",
+    "attackType": "charged"
   },
   "239853": {
     "internal": 375,
-    "statKey": "everspringUmbSpecial"
+    "statKey": "everspringUmbSpecial",
+    "attackType": "special"
   },
   "239854": {
     "internal": 376,
-    "statKey": "unfetteredRopeDartQ"
+    "statKey": "unfetteredRopeDartQ",
+    "attackType": "martial"
   },
   "239855": {
     "internal": 377,
-    "statKey": "unfetteredRopeDartCharged"
+    "statKey": "unfetteredRopeDartCharged",
+    "attackType": "charged"
   },
   "239856": {
     "internal": 378,
-    "statKey": "unfetteredRopeDartSpecial"
+    "statKey": "unfetteredRopeDartSpecial",
+    "attackType": "special"
   },
   "240001": {
     "internal": 302,
-    "statKey": "namelessSwordQ"
+    "statKey": "namelessSwordQ",
+    "attackType": "martial"
   },
   "240002": {
     "internal": 303,
-    "statKey": "namelessSwordCharged"
+    "statKey": "namelessSwordCharged",
+    "attackType": "charged"
   },
   "240003": {
     "internal": 305,
-    "statKey": "namelessSwordSpecial"
+    "statKey": "namelessSwordSpecial",
+    "attackType": "special"
   },
   "240004": {
     "internal": 309,
-    "statKey": "namelessSpearQ"
+    "statKey": "namelessSpearQ",
+    "attackType": "martial"
   },
   "240005": {
     "internal": 310,
-    "statKey": "namelessSpearCharged"
+    "statKey": "namelessSpearCharged",
+    "attackType": "charged"
   },
   "240006": {
     "internal": 361,
-    "statKey": "namelessSpearSpecial"
+    "statKey": "namelessSpearSpecial",
+    "attackType": "special"
   },
   "240101": {
     "internal": 306,
-    "statKey": "swordQ"
+    "statKey": "swordQ",
+    "attackType": "martial"
   },
   "240102": {
     "internal": 307,
-    "statKey": "swordCharged"
+    "statKey": "swordCharged",
+    "attackType": "charged"
   },
   "240103": {
     "internal": 308,
-    "statKey": "swordSpecial"
+    "statKey": "swordSpecial",
+    "attackType": "special"
   },
   "240104": {
     "internal": 311,
-    "statKey": "spearQ"
+    "statKey": "spearQ",
+    "attackType": "martial"
   },
   "240105": {
     "internal": 312,
-    "statKey": "spearCharged"
+    "statKey": "spearCharged",
+    "attackType": "charged"
   },
   "240106": {
     "internal": 363,
-    "statKey": "spearSpecial"
+    "statKey": "spearSpecial",
+    "attackType": "special"
   },
   "240201": {
     "internal": 317,
-    "statKey": "moBladeCharged"
+    "statKey": "moBladeCharged",
+    "attackType": "charged"
   },
   "240202": {
     "internal": 318,
-    "statKey": "moBladeSpecial"
+    "statKey": "moBladeSpecial",
+    "attackType": "special"
   },
   "240203": {
     "internal": 327,
-    "statKey": "stormbreakerQ"
+    "statKey": "stormbreakerQ",
+    "attackType": "martial"
   },
   "240204": {
     "internal": 319,
-    "statKey": "stormbreakerCharged"
+    "statKey": "stormbreakerCharged",
+    "attackType": "charged"
   },
   "240205": {
     "internal": 320,
-    "statKey": "stormbreakerSpecial"
+    "statKey": "stormbreakerSpecial",
+    "attackType": "special"
   },
   "240301": {
     "internal": 313,
-    "statKey": "fanQ"
+    "statKey": "fanQ",
+    "attackType": "martial"
   },
   "240302": {
     "internal": 314,
-    "statKey": "fanCharged"
+    "statKey": "fanCharged",
+    "attackType": "charged"
   },
   "240303": {
     "internal": 350,
-    "statKey": "fanSpecial"
+    "statKey": "fanSpecial",
+    "attackType": "special"
   },
   "240304": {
     "internal": 352,
-    "statKey": "umbQ"
+    "statKey": "umbQ",
+    "attackType": "martial"
   },
   "240305": {
     "internal": 353,
-    "statKey": "umbCharged"
+    "statKey": "umbCharged",
+    "attackType": "charged"
   },
   "240306": {
     "internal": 354,
-    "statKey": "umbDrone"
+    "statKey": "umbDrone",
+    "attackType": "special"
   },
   "240401": {
     "internal": 315,
-    "statKey": "panaceaFanQ"
+    "statKey": "panaceaFanQ",
+    "attackType": "healing"
   },
   "240402": {
     "internal": 316,
-    "statKey": "panaceaFanSpecial"
+    "statKey": "panaceaFanSpecial",
+    "attackType": "special"
   },
   "240403": {
     "internal": 358,
-    "statKey": "soulshadeUmbQ"
+    "statKey": "soulshadeUmbQ",
+    "attackType": "healing"
   },
   "240404": {
     "internal": 359,
-    "statKey": "soulshadeUmbCharged"
+    "statKey": "soulshadeUmbCharged",
+    "attackType": "charged"
   },
   "240405": {
     "internal": 360,
-    "statKey": "soulshadeUmbSpecial"
+    "statKey": "soulshadeUmbSpecial",
+    "attackType": "special"
   },
   "240501": {
     "internal": 322,
-    "statKey": "infernalTwinbladesQ"
+    "statKey": "infernalTwinbladesQ",
+    "attackType": "martial"
   },
   "240502": {
     "internal": 362,
-    "statKey": "infernalTwinbladesLight"
+    "statKey": "infernalTwinbladesLight",
+    "attackType": "light"
   },
   "240503": {
     "internal": 321,
-    "statKey": "infernalTwinbladesSpecial"
+    "statKey": "infernalTwinbladesSpecial",
+    "attackType": "special"
   },
   "240504": {
     "internal": 364,
-    "statKey": "mortalRopeDartQ"
+    "statKey": "mortalRopeDartQ",
+    "attackType": "martial"
   },
   "240505": {
     "internal": 365,
-    "statKey": "mortalRopeDartCharged"
+    "statKey": "mortalRopeDartCharged",
+    "attackType": "charged"
   },
   "240506": {
     "internal": 366,
-    "statKey": "mortalRopeDartRodent"
+    "statKey": "mortalRopeDartRodent",
+    "attackType": "rodent"
   },
   "240601": {
     "internal": 228,
-    "statKey": "physPen"
+    "statKey": "physPen",
+    "attackType": null
   },
   "240602": {
     "internal": 230,
-    "statKey": "physResist"
+    "statKey": "physResist",
+    "attackType": null
   },
   "240603": {
     "internal": 144,
-    "statKey": "bellstrikePen"
+    "statKey": "bellstrikePen",
+    "attackType": null
   },
   "240604": {
     "internal": 145,
-    "statKey": "stonesplitPen"
+    "statKey": "stonesplitPen",
+    "attackType": null
   },
   "240605": {
     "internal": 146,
-    "statKey": "silkbindPen"
+    "statKey": "silkbindPen",
+    "attackType": null
   },
   "240606": {
     "internal": 148,
-    "statKey": "bamboocutPen"
+    "statKey": "bamboocutPen",
+    "attackType": null
   },
   "249751": {
     "internal": 393,
-    "statKey": "heavenwillGauntletsCharged"
+    "statKey": "heavenwillGauntletsCharged",
+    "attackType": "charged"
   },
   "249752": {
     "internal": 394,
-    "statKey": "heavenwillGauntletsQ"
+    "statKey": "heavenwillGauntletsQ",
+    "attackType": "martial"
   },
   "249753": {
     "internal": 395,
-    "statKey": "heavenwillGauntletsLightVariedCombo"
+    "statKey": "heavenwillGauntletsLightVariedCombo",
+    "attackType": "variedCombo"
   },
   "249754": {
     "internal": 396,
-    "statKey": "skygraspRopeDartHeavy"
+    "statKey": "skygraspRopeDartHeavy",
+    "attackType": "heavy"
   },
   "249755": {
     "internal": 397,
-    "statKey": "skygraspRopeDartSpecial"
+    "statKey": "skygraspRopeDartSpecial",
+    "attackType": "special"
   },
   "249901": {
     "internal": 400,
-    "statKey": "snowpartingQ"
+    "statKey": "snowpartingQ",
+    "attackType": "martial"
   },
   "249902": {
     "internal": 401,
-    "statKey": "snowpartingCharged"
+    "statKey": "snowpartingCharged",
+    "attackType": "charged"
   },
   "249903": {
     "internal": 402,
-    "statKey": "snowpartingVariedCombo"
+    "statKey": "snowpartingVariedCombo",
+    "attackType": "lightVariedCombo"
   },
   "249904": {
     "internal": 403,
-    "statKey": "phalanxbaneQ"
+    "statKey": "phalanxbaneQ",
+    "attackType": "martial"
   },
   "249905": {
     "internal": 404,
-    "statKey": "phalanxbaneCharged"
+    "statKey": "phalanxbaneCharged",
+    "attackType": "charged"
   },
   "250001": {
     "internal": 302,
-    "statKey": "namelessSwordQ"
+    "statKey": "namelessSwordQ",
+    "attackType": "martial"
   },
   "250002": {
     "internal": 303,
-    "statKey": "namelessSwordCharged"
+    "statKey": "namelessSwordCharged",
+    "attackType": "charged"
   },
   "250003": {
     "internal": 305,
-    "statKey": "namelessSwordSpecial"
+    "statKey": "namelessSwordSpecial",
+    "attackType": "special"
   },
   "250004": {
     "internal": 309,
-    "statKey": "namelessSpearQ"
+    "statKey": "namelessSpearQ",
+    "attackType": "martial"
   },
   "250005": {
     "internal": 310,
-    "statKey": "namelessSpearCharged"
+    "statKey": "namelessSpearCharged",
+    "attackType": "charged"
   },
   "250006": {
     "internal": 361,
-    "statKey": "namelessSpearSpecial"
+    "statKey": "namelessSpearSpecial",
+    "attackType": "special"
   },
   "250101": {
     "internal": 306,
-    "statKey": "swordQ"
+    "statKey": "swordQ",
+    "attackType": "martial"
   },
   "250102": {
     "internal": 307,
-    "statKey": "swordCharged"
+    "statKey": "swordCharged",
+    "attackType": "charged"
   },
   "250103": {
     "internal": 308,
-    "statKey": "swordSpecial"
+    "statKey": "swordSpecial",
+    "attackType": "special"
   },
   "250104": {
     "internal": 311,
-    "statKey": "spearQ"
+    "statKey": "spearQ",
+    "attackType": "martial"
   },
   "250105": {
     "internal": 312,
-    "statKey": "spearCharged"
+    "statKey": "spearCharged",
+    "attackType": "charged"
   },
   "250106": {
     "internal": 363,
-    "statKey": "spearSpecial"
+    "statKey": "spearSpecial",
+    "attackType": "special"
   },
   "250201": {
     "internal": 317,
-    "statKey": "moBladeCharged"
+    "statKey": "moBladeCharged",
+    "attackType": "charged"
   },
   "250202": {
     "internal": 318,
-    "statKey": "moBladeSpecial"
+    "statKey": "moBladeSpecial",
+    "attackType": "special"
   },
   "250203": {
     "internal": 327,
-    "statKey": "stormbreakerQ"
+    "statKey": "stormbreakerQ",
+    "attackType": "martial"
   },
   "250204": {
     "internal": 319,
-    "statKey": "stormbreakerCharged"
+    "statKey": "stormbreakerCharged",
+    "attackType": "charged"
   },
   "250205": {
     "internal": 320,
-    "statKey": "stormbreakerSpecial"
+    "statKey": "stormbreakerSpecial",
+    "attackType": "special"
   },
   "250301": {
     "internal": 313,
-    "statKey": "fanQ"
+    "statKey": "fanQ",
+    "attackType": "martial"
   },
   "250302": {
     "internal": 314,
-    "statKey": "fanCharged"
+    "statKey": "fanCharged",
+    "attackType": "charged"
   },
   "250303": {
     "internal": 350,
-    "statKey": "fanSpecial"
+    "statKey": "fanSpecial",
+    "attackType": "special"
   },
   "250304": {
     "internal": 352,
-    "statKey": "umbQ"
+    "statKey": "umbQ",
+    "attackType": "martial"
   },
   "250305": {
     "internal": 353,
-    "statKey": "umbCharged"
+    "statKey": "umbCharged",
+    "attackType": "charged"
   },
   "250306": {
     "internal": 354,
-    "statKey": "umbDrone"
+    "statKey": "umbDrone",
+    "attackType": "special"
   },
   "250401": {
     "internal": 315,
-    "statKey": "panaceaFanQ"
+    "statKey": "panaceaFanQ",
+    "attackType": "healing"
   },
   "250402": {
     "internal": 316,
-    "statKey": "panaceaFanSpecial"
+    "statKey": "panaceaFanSpecial",
+    "attackType": "special"
   },
   "250403": {
     "internal": 358,
-    "statKey": "soulshadeUmbQ"
+    "statKey": "soulshadeUmbQ",
+    "attackType": "healing"
   },
   "250404": {
     "internal": 359,
-    "statKey": "soulshadeUmbCharged"
+    "statKey": "soulshadeUmbCharged",
+    "attackType": "charged"
   },
   "250405": {
     "internal": 360,
-    "statKey": "soulshadeUmbSpecial"
+    "statKey": "soulshadeUmbSpecial",
+    "attackType": "special"
   },
   "250501": {
     "internal": 322,
-    "statKey": "infernalTwinbladesQ"
+    "statKey": "infernalTwinbladesQ",
+    "attackType": "martial"
   },
   "250502": {
     "internal": 362,
-    "statKey": "infernalTwinbladesLight"
+    "statKey": "infernalTwinbladesLight",
+    "attackType": "light"
   },
   "250503": {
     "internal": 321,
-    "statKey": "infernalTwinbladesSpecial"
+    "statKey": "infernalTwinbladesSpecial",
+    "attackType": "special"
   },
   "250504": {
     "internal": 364,
-    "statKey": "mortalRopeDartQ"
+    "statKey": "mortalRopeDartQ",
+    "attackType": "martial"
   },
   "250505": {
     "internal": 365,
-    "statKey": "mortalRopeDartCharged"
+    "statKey": "mortalRopeDartCharged",
+    "attackType": "charged"
   },
   "250506": {
     "internal": 366,
-    "statKey": "mortalRopeDartRodent"
+    "statKey": "mortalRopeDartRodent",
+    "attackType": "rodent"
   },
   "250601": {
     "internal": 373,
-    "statKey": "everspringUmbQ"
+    "statKey": "everspringUmbQ",
+    "attackType": "martial"
   },
   "250602": {
     "internal": 374,
-    "statKey": "everspringUmbCharged"
+    "statKey": "everspringUmbCharged",
+    "attackType": "charged"
   },
   "250603": {
     "internal": 375,
-    "statKey": "everspringUmbSpecial"
+    "statKey": "everspringUmbSpecial",
+    "attackType": "special"
   },
   "250604": {
     "internal": 376,
-    "statKey": "unfetteredRopeDartQ"
+    "statKey": "unfetteredRopeDartQ",
+    "attackType": "martial"
   },
   "250605": {
     "internal": 377,
-    "statKey": "unfetteredRopeDartCharged"
+    "statKey": "unfetteredRopeDartCharged",
+    "attackType": "charged"
   },
   "250606": {
     "internal": 378,
-    "statKey": "unfetteredRopeDartSpecial"
+    "statKey": "unfetteredRopeDartSpecial",
+    "attackType": "special"
   },
   "250701": {
     "internal": 228,
-    "statKey": "physPen"
+    "statKey": "physPen",
+    "attackType": null
   },
   "250702": {
     "internal": 230,
-    "statKey": "physResist"
+    "statKey": "physResist",
+    "attackType": null
   },
   "250703": {
     "internal": 144,
-    "statKey": "bellstrikePen"
+    "statKey": "bellstrikePen",
+    "attackType": null
   },
   "250704": {
     "internal": 145,
-    "statKey": "stonesplitPen"
+    "statKey": "stonesplitPen",
+    "attackType": null
   },
   "250705": {
     "internal": 146,
-    "statKey": "silkbindPen"
+    "statKey": "silkbindPen",
+    "attackType": null
   },
   "250706": {
     "internal": 148,
-    "statKey": "bamboocutPen"
+    "statKey": "bamboocutPen",
+    "attackType": null
   },
   "259751": {
     "internal": 393,
-    "statKey": "heavenwillGauntletsCharged"
+    "statKey": "heavenwillGauntletsCharged",
+    "attackType": "charged"
   },
   "259752": {
     "internal": 394,
-    "statKey": "heavenwillGauntletsQ"
+    "statKey": "heavenwillGauntletsQ",
+    "attackType": "martial"
   },
   "259753": {
     "internal": 395,
-    "statKey": "heavenwillGauntletsLightVariedCombo"
+    "statKey": "heavenwillGauntletsLightVariedCombo",
+    "attackType": "variedCombo"
   },
   "259754": {
     "internal": 396,
-    "statKey": "skygraspRopeDartHeavy"
+    "statKey": "skygraspRopeDartHeavy",
+    "attackType": "heavy"
   },
   "259755": {
     "internal": 397,
-    "statKey": "skygraspRopeDartSpecial"
+    "statKey": "skygraspRopeDartSpecial",
+    "attackType": "special"
   },
   "259901": {
     "internal": 400,
-    "statKey": "snowpartingQ"
+    "statKey": "snowpartingQ",
+    "attackType": "martial"
   },
   "259902": {
     "internal": 401,
-    "statKey": "snowpartingCharged"
+    "statKey": "snowpartingCharged",
+    "attackType": "charged"
   },
   "259903": {
     "internal": 402,
-    "statKey": "snowpartingVariedCombo"
+    "statKey": "snowpartingVariedCombo",
+    "attackType": "lightVariedCombo"
   },
   "259904": {
     "internal": 403,
-    "statKey": "phalanxbaneQ"
+    "statKey": "phalanxbaneQ",
+    "attackType": "martial"
   },
   "259905": {
     "internal": 404,
-    "statKey": "phalanxbaneCharged"
+    "statKey": "phalanxbaneCharged",
+    "attackType": "charged"
   },
   "260001": {
     "internal": 302,
-    "statKey": "namelessSwordQ"
+    "statKey": "namelessSwordQ",
+    "attackType": "martial"
   },
   "260002": {
     "internal": 303,
-    "statKey": "namelessSwordCharged"
+    "statKey": "namelessSwordCharged",
+    "attackType": "charged"
   },
   "260003": {
     "internal": 305,
-    "statKey": "namelessSwordSpecial"
+    "statKey": "namelessSwordSpecial",
+    "attackType": "special"
   },
   "260004": {
     "internal": 310,
-    "statKey": "namelessSpearCharged"
+    "statKey": "namelessSpearCharged",
+    "attackType": "charged"
   },
   "260005": {
     "internal": 361,
-    "statKey": "namelessSpearSpecial"
+    "statKey": "namelessSpearSpecial",
+    "attackType": "special"
   },
   "260101": {
     "internal": 306,
-    "statKey": "swordQ"
+    "statKey": "swordQ",
+    "attackType": "martial"
   },
   "260102": {
     "internal": 308,
-    "statKey": "swordSpecial"
+    "statKey": "swordSpecial",
+    "attackType": "special"
   },
   "260103": {
     "internal": 387,
-    "statKey": "bleed"
+    "statKey": "bleed",
+    "attackType": "bleed"
   },
   "260104": {
     "internal": 311,
-    "statKey": "spearQ"
+    "statKey": "spearQ",
+    "attackType": "martial"
   },
   "260105": {
     "internal": 312,
-    "statKey": "spearCharged"
+    "statKey": "spearCharged",
+    "attackType": "charged"
   },
   "260201": {
     "internal": 389,
-    "statKey": "moBladeShield"
+    "statKey": "moBladeShield",
+    "attackType": "shield"
   },
   "260202": {
     "internal": 317,
-    "statKey": "moBladeCharged"
+    "statKey": "moBladeCharged",
+    "attackType": "charged"
   },
   "260203": {
     "internal": 318,
-    "statKey": "moBladeSpecial"
+    "statKey": "moBladeSpecial",
+    "attackType": "special"
   },
   "260204": {
     "internal": 319,
-    "statKey": "stormbreakerCharged"
+    "statKey": "stormbreakerCharged",
+    "attackType": "charged"
   },
   "260205": {
     "internal": 320,
-    "statKey": "stormbreakerSpecial"
+    "statKey": "stormbreakerSpecial",
+    "attackType": "special"
   },
   "260301": {
     "internal": 314,
-    "statKey": "fanCharged"
+    "statKey": "fanCharged",
+    "attackType": "charged"
   },
   "260302": {
     "internal": 350,
-    "statKey": "fanSpecial"
+    "statKey": "fanSpecial",
+    "attackType": "special"
   },
   "260303": {
     "internal": 352,
-    "statKey": "umbQ"
+    "statKey": "umbQ",
+    "attackType": "martial"
   },
   "260304": {
     "internal": 353,
-    "statKey": "umbCharged"
+    "statKey": "umbCharged",
+    "attackType": "charged"
   },
   "260305": {
     "internal": 354,
-    "statKey": "umbDrone"
+    "statKey": "umbDrone",
+    "attackType": "special"
   },
   "260401": {
     "internal": 315,
-    "statKey": "panaceaFanQ"
+    "statKey": "panaceaFanQ",
+    "attackType": "healing"
   },
   "260402": {
     "internal": 316,
-    "statKey": "panaceaFanSpecial"
+    "statKey": "panaceaFanSpecial",
+    "attackType": "special"
   },
   "260403": {
     "internal": 388,
-    "statKey": "panaceaFanHealing"
+    "statKey": "panaceaFanHealing",
+    "attackType": "healing"
   },
   "260404": {
     "internal": 358,
-    "statKey": "soulshadeUmbQ"
+    "statKey": "soulshadeUmbQ",
+    "attackType": "healing"
   },
   "260405": {
     "internal": 360,
-    "statKey": "soulshadeUmbSpecial"
+    "statKey": "soulshadeUmbSpecial",
+    "attackType": "special"
   },
   "260501": {
     "internal": 322,
-    "statKey": "infernalTwinbladesQ"
+    "statKey": "infernalTwinbladesQ",
+    "attackType": "martial"
   },
   "260502": {
     "internal": 362,
-    "statKey": "infernalTwinbladesLight"
+    "statKey": "infernalTwinbladesLight",
+    "attackType": "light"
   },
   "260503": {
     "internal": 321,
-    "statKey": "infernalTwinbladesSpecial"
+    "statKey": "infernalTwinbladesSpecial",
+    "attackType": "special"
   },
   "260504": {
     "internal": 364,
-    "statKey": "mortalRopeDartQ"
+    "statKey": "mortalRopeDartQ",
+    "attackType": "martial"
   },
   "260505": {
     "internal": 366,
-    "statKey": "mortalRopeDartRodent"
+    "statKey": "mortalRopeDartRodent",
+    "attackType": "rodent"
   },
   "260601": {
     "internal": 373,
-    "statKey": "everspringUmbQ"
+    "statKey": "everspringUmbQ",
+    "attackType": "martial"
   },
   "260602": {
     "internal": 375,
-    "statKey": "everspringUmbSpecial"
+    "statKey": "everspringUmbSpecial",
+    "attackType": "special"
   },
   "260603": {
     "internal": 376,
-    "statKey": "unfetteredRopeDartQ"
+    "statKey": "unfetteredRopeDartQ",
+    "attackType": "martial"
   },
   "260604": {
     "internal": 377,
-    "statKey": "unfetteredRopeDartCharged"
+    "statKey": "unfetteredRopeDartCharged",
+    "attackType": "charged"
   },
   "260605": {
     "internal": 378,
-    "statKey": "unfetteredRopeDartSpecial"
+    "statKey": "unfetteredRopeDartSpecial",
+    "attackType": "special"
   },
   "260701": {
     "internal": 228,
-    "statKey": "physPen"
+    "statKey": "physPen",
+    "attackType": null
   },
   "260702": {
     "internal": 230,
-    "statKey": "physResist"
+    "statKey": "physResist",
+    "attackType": null
   },
   "260703": {
     "internal": 144,
-    "statKey": "bellstrikePen"
+    "statKey": "bellstrikePen",
+    "attackType": null
   },
   "260704": {
     "internal": 145,
-    "statKey": "stonesplitPen"
+    "statKey": "stonesplitPen",
+    "attackType": null
   },
   "260705": {
     "internal": 146,
-    "statKey": "silkbindPen"
+    "statKey": "silkbindPen",
+    "attackType": null
   },
   "260706": {
     "internal": 148,
-    "statKey": "bamboocutPen"
+    "statKey": "bamboocutPen",
+    "attackType": null
   },
   "269751": {
     "internal": 393,
-    "statKey": "heavenwillGauntletsCharged"
+    "statKey": "heavenwillGauntletsCharged",
+    "attackType": "charged"
   },
   "269752": {
     "internal": 394,
-    "statKey": "heavenwillGauntletsQ"
+    "statKey": "heavenwillGauntletsQ",
+    "attackType": "martial"
   },
   "269753": {
     "internal": 395,
-    "statKey": "heavenwillGauntletsLightVariedCombo"
+    "statKey": "heavenwillGauntletsLightVariedCombo",
+    "attackType": "variedCombo"
   },
   "269754": {
     "internal": 396,
-    "statKey": "skygraspRopeDartHeavy"
+    "statKey": "skygraspRopeDartHeavy",
+    "attackType": "heavy"
   },
   "269755": {
     "internal": 397,
-    "statKey": "skygraspRopeDartSpecial"
+    "statKey": "skygraspRopeDartSpecial",
+    "attackType": "special"
   },
   "269901": {
     "internal": 400,
-    "statKey": "snowpartingQ"
+    "statKey": "snowpartingQ",
+    "attackType": "martial"
   },
   "269902": {
     "internal": 401,
-    "statKey": "snowpartingCharged"
+    "statKey": "snowpartingCharged",
+    "attackType": "charged"
   },
   "269903": {
     "internal": 402,
-    "statKey": "snowpartingVariedCombo"
+    "statKey": "snowpartingVariedCombo",
+    "attackType": "lightVariedCombo"
   },
   "269904": {
     "internal": 403,
-    "statKey": "phalanxbaneQ"
+    "statKey": "phalanxbaneQ",
+    "attackType": "martial"
   },
   "269905": {
     "internal": 404,
-    "statKey": "phalanxbaneCharged"
+    "statKey": "phalanxbaneCharged",
+    "attackType": "charged"
   },
   "270001": {
     "internal": 302,
-    "statKey": "namelessSwordQ"
+    "statKey": "namelessSwordQ",
+    "attackType": "martial"
   },
   "270002": {
     "internal": 303,
-    "statKey": "namelessSwordCharged"
+    "statKey": "namelessSwordCharged",
+    "attackType": "charged"
   },
   "270003": {
     "internal": 305,
-    "statKey": "namelessSwordSpecial"
+    "statKey": "namelessSwordSpecial",
+    "attackType": "special"
   },
   "270004": {
     "internal": 310,
-    "statKey": "namelessSpearCharged"
+    "statKey": "namelessSpearCharged",
+    "attackType": "charged"
   },
   "270005": {
     "internal": 361,
-    "statKey": "namelessSpearSpecial"
+    "statKey": "namelessSpearSpecial",
+    "attackType": "special"
   },
   "270101": {
     "internal": 306,
-    "statKey": "swordQ"
+    "statKey": "swordQ",
+    "attackType": "martial"
   },
   "270102": {
     "internal": 308,
-    "statKey": "swordSpecial"
+    "statKey": "swordSpecial",
+    "attackType": "special"
   },
   "270103": {
     "internal": 387,
-    "statKey": "bleed"
+    "statKey": "bleed",
+    "attackType": "bleed"
   },
   "270104": {
     "internal": 311,
-    "statKey": "spearQ"
+    "statKey": "spearQ",
+    "attackType": "martial"
   },
   "270105": {
     "internal": 312,
-    "statKey": "spearCharged"
+    "statKey": "spearCharged",
+    "attackType": "charged"
   },
   "270201": {
     "internal": 389,
-    "statKey": "moBladeShield"
+    "statKey": "moBladeShield",
+    "attackType": "shield"
   },
   "270202": {
     "internal": 317,
-    "statKey": "moBladeCharged"
+    "statKey": "moBladeCharged",
+    "attackType": "charged"
   },
   "270203": {
     "internal": 318,
-    "statKey": "moBladeSpecial"
+    "statKey": "moBladeSpecial",
+    "attackType": "special"
   },
   "270204": {
     "internal": 319,
-    "statKey": "stormbreakerCharged"
+    "statKey": "stormbreakerCharged",
+    "attackType": "charged"
   },
   "270205": {
     "internal": 320,
-    "statKey": "stormbreakerSpecial"
+    "statKey": "stormbreakerSpecial",
+    "attackType": "special"
   },
   "270301": {
     "internal": 314,
-    "statKey": "fanCharged"
+    "statKey": "fanCharged",
+    "attackType": "charged"
   },
   "270302": {
     "internal": 350,
-    "statKey": "fanSpecial"
+    "statKey": "fanSpecial",
+    "attackType": "special"
   },
   "270303": {
     "internal": 352,
-    "statKey": "umbQ"
+    "statKey": "umbQ",
+    "attackType": "martial"
   },
   "270304": {
     "internal": 353,
-    "statKey": "umbCharged"
+    "statKey": "umbCharged",
+    "attackType": "charged"
   },
   "270305": {
     "internal": 354,
-    "statKey": "umbDrone"
+    "statKey": "umbDrone",
+    "attackType": "special"
   },
   "270401": {
     "internal": 315,
-    "statKey": "panaceaFanQ"
+    "statKey": "panaceaFanQ",
+    "attackType": "healing"
   },
   "270402": {
     "internal": 316,
-    "statKey": "panaceaFanSpecial"
+    "statKey": "panaceaFanSpecial",
+    "attackType": "special"
   },
   "270403": {
     "internal": 388,
-    "statKey": "panaceaFanHealing"
+    "statKey": "panaceaFanHealing",
+    "attackType": "healing"
   },
   "270404": {
     "internal": 358,
-    "statKey": "soulshadeUmbQ"
+    "statKey": "soulshadeUmbQ",
+    "attackType": "healing"
   },
   "270405": {
     "internal": 360,
-    "statKey": "soulshadeUmbSpecial"
+    "statKey": "soulshadeUmbSpecial",
+    "attackType": "special"
   },
   "270501": {
     "internal": 322,
-    "statKey": "infernalTwinbladesQ"
+    "statKey": "infernalTwinbladesQ",
+    "attackType": "martial"
   },
   "270502": {
     "internal": 362,
-    "statKey": "infernalTwinbladesLight"
+    "statKey": "infernalTwinbladesLight",
+    "attackType": "light"
   },
   "270503": {
     "internal": 321,
-    "statKey": "infernalTwinbladesSpecial"
+    "statKey": "infernalTwinbladesSpecial",
+    "attackType": "special"
   },
   "270504": {
     "internal": 364,
-    "statKey": "mortalRopeDartQ"
+    "statKey": "mortalRopeDartQ",
+    "attackType": "martial"
   },
   "270505": {
     "internal": 366,
-    "statKey": "mortalRopeDartRodent"
+    "statKey": "mortalRopeDartRodent",
+    "attackType": "rodent"
   },
   "270601": {
     "internal": 373,
-    "statKey": "everspringUmbQ"
+    "statKey": "everspringUmbQ",
+    "attackType": "martial"
   },
   "270602": {
     "internal": 375,
-    "statKey": "everspringUmbSpecial"
+    "statKey": "everspringUmbSpecial",
+    "attackType": "special"
   },
   "270603": {
     "internal": 376,
-    "statKey": "unfetteredRopeDartQ"
+    "statKey": "unfetteredRopeDartQ",
+    "attackType": "martial"
   },
   "270604": {
     "internal": 377,
-    "statKey": "unfetteredRopeDartCharged"
+    "statKey": "unfetteredRopeDartCharged",
+    "attackType": "charged"
   },
   "270605": {
     "internal": 378,
-    "statKey": "unfetteredRopeDartSpecial"
+    "statKey": "unfetteredRopeDartSpecial",
+    "attackType": "special"
   },
   "270701": {
     "internal": 228,
-    "statKey": "physPen"
+    "statKey": "physPen",
+    "attackType": null
   },
   "270702": {
     "internal": 230,
-    "statKey": "physResist"
+    "statKey": "physResist",
+    "attackType": null
   },
   "270703": {
     "internal": 392,
-    "statKey": "voidPen"
+    "statKey": "voidPen",
+    "attackType": null
   },
   "279751": {
     "internal": 393,
-    "statKey": "heavenwillGauntletsCharged"
+    "statKey": "heavenwillGauntletsCharged",
+    "attackType": "charged"
   },
   "279752": {
     "internal": 394,
-    "statKey": "heavenwillGauntletsQ"
+    "statKey": "heavenwillGauntletsQ",
+    "attackType": "martial"
   },
   "279753": {
     "internal": 395,
-    "statKey": "heavenwillGauntletsLightVariedCombo"
+    "statKey": "heavenwillGauntletsLightVariedCombo",
+    "attackType": "variedCombo"
   },
   "279754": {
     "internal": 396,
-    "statKey": "skygraspRopeDartHeavy"
+    "statKey": "skygraspRopeDartHeavy",
+    "attackType": "heavy"
   },
   "279755": {
     "internal": 397,
-    "statKey": "skygraspRopeDartSpecial"
+    "statKey": "skygraspRopeDartSpecial",
+    "attackType": "special"
   },
   "279901": {
     "internal": 400,
-    "statKey": "snowpartingQ"
+    "statKey": "snowpartingQ",
+    "attackType": "martial"
   },
   "279902": {
     "internal": 401,
-    "statKey": "snowpartingCharged"
+    "statKey": "snowpartingCharged",
+    "attackType": "charged"
   },
   "279903": {
     "internal": 402,
-    "statKey": "snowpartingVariedCombo"
+    "statKey": "snowpartingVariedCombo",
+    "attackType": "lightVariedCombo"
   },
   "279904": {
     "internal": 403,
-    "statKey": "phalanxbaneQ"
+    "statKey": "phalanxbaneQ",
+    "attackType": "martial"
   },
   "279905": {
     "internal": 404,
-    "statKey": "phalanxbaneCharged"
+    "statKey": "phalanxbaneCharged",
+    "attackType": "charged"
   },
   "280001": {
     "internal": 302,
-    "statKey": "namelessSwordQ"
+    "statKey": "namelessSwordQ",
+    "attackType": "martial"
   },
   "280002": {
     "internal": 303,
-    "statKey": "namelessSwordCharged"
+    "statKey": "namelessSwordCharged",
+    "attackType": "charged"
   },
   "280003": {
     "internal": 305,
-    "statKey": "namelessSwordSpecial"
+    "statKey": "namelessSwordSpecial",
+    "attackType": "special"
   },
   "280004": {
     "internal": 310,
-    "statKey": "namelessSpearCharged"
+    "statKey": "namelessSpearCharged",
+    "attackType": "charged"
   },
   "280005": {
     "internal": 361,
-    "statKey": "namelessSpearSpecial"
+    "statKey": "namelessSpearSpecial",
+    "attackType": "special"
   },
   "289751": {
     "internal": 393,
-    "statKey": "heavenwillGauntletsCharged"
+    "statKey": "heavenwillGauntletsCharged",
+    "attackType": "charged"
   },
   "289752": {
     "internal": 394,
-    "statKey": "heavenwillGauntletsQ"
+    "statKey": "heavenwillGauntletsQ",
+    "attackType": "martial"
   },
   "289753": {
     "internal": 395,
-    "statKey": "heavenwillGauntletsLightVariedCombo"
+    "statKey": "heavenwillGauntletsLightVariedCombo",
+    "attackType": "variedCombo"
   },
   "289754": {
     "internal": 396,
-    "statKey": "skygraspRopeDartHeavy"
+    "statKey": "skygraspRopeDartHeavy",
+    "attackType": "heavy"
   },
   "289755": {
     "internal": 397,
-    "statKey": "skygraspRopeDartSpecial"
+    "statKey": "skygraspRopeDartSpecial",
+    "attackType": "special"
   },
   "289901": {
     "internal": 400,
-    "statKey": "snowpartingQ"
+    "statKey": "snowpartingQ",
+    "attackType": "martial"
   },
   "289902": {
     "internal": 401,
-    "statKey": "snowpartingCharged"
+    "statKey": "snowpartingCharged",
+    "attackType": "charged"
   },
   "289903": {
     "internal": 402,
-    "statKey": "snowpartingVariedCombo"
+    "statKey": "snowpartingVariedCombo",
+    "attackType": "lightVariedCombo"
   },
   "289904": {
     "internal": 403,
-    "statKey": "phalanxbaneQ"
+    "statKey": "phalanxbaneQ",
+    "attackType": "martial"
   },
   "289905": {
     "internal": 404,
-    "statKey": "phalanxbaneCharged"
+    "statKey": "phalanxbaneCharged",
+    "attackType": "charged"
   },
   "290001": {
     "internal": 302,
-    "statKey": "namelessSwordQ"
+    "statKey": "namelessSwordQ",
+    "attackType": "martial"
   },
   "290002": {
     "internal": 303,
-    "statKey": "namelessSwordCharged"
+    "statKey": "namelessSwordCharged",
+    "attackType": "charged"
   },
   "290003": {
     "internal": 305,
-    "statKey": "namelessSwordSpecial"
+    "statKey": "namelessSwordSpecial",
+    "attackType": "special"
   },
   "290004": {
     "internal": 310,
-    "statKey": "namelessSpearCharged"
+    "statKey": "namelessSpearCharged",
+    "attackType": "charged"
   },
   "290005": {
     "internal": 361,
-    "statKey": "namelessSpearSpecial"
+    "statKey": "namelessSpearSpecial",
+    "attackType": "special"
   },
   "280101": {
     "internal": 306,
-    "statKey": "swordQ"
+    "statKey": "swordQ",
+    "attackType": "martial"
   },
   "280102": {
     "internal": 308,
-    "statKey": "swordSpecial"
+    "statKey": "swordSpecial",
+    "attackType": "special"
   },
   "280103": {
     "internal": 387,
-    "statKey": "bleed"
+    "statKey": "bleed",
+    "attackType": "bleed"
   },
   "280104": {
     "internal": 311,
-    "statKey": "spearQ"
+    "statKey": "spearQ",
+    "attackType": "martial"
   },
   "280105": {
     "internal": 312,
-    "statKey": "spearCharged"
+    "statKey": "spearCharged",
+    "attackType": "charged"
   },
   "280201": {
     "internal": 389,
-    "statKey": "moBladeShield"
+    "statKey": "moBladeShield",
+    "attackType": "shield"
   },
   "280202": {
     "internal": 317,
-    "statKey": "moBladeCharged"
+    "statKey": "moBladeCharged",
+    "attackType": "charged"
   },
   "280203": {
     "internal": 318,
-    "statKey": "moBladeSpecial"
+    "statKey": "moBladeSpecial",
+    "attackType": "special"
   },
   "280204": {
     "internal": 319,
-    "statKey": "stormbreakerCharged"
+    "statKey": "stormbreakerCharged",
+    "attackType": "charged"
   },
   "280205": {
     "internal": 320,
-    "statKey": "stormbreakerSpecial"
+    "statKey": "stormbreakerSpecial",
+    "attackType": "special"
   },
   "280301": {
     "internal": 314,
-    "statKey": "fanCharged"
+    "statKey": "fanCharged",
+    "attackType": "charged"
   },
   "280302": {
     "internal": 350,
-    "statKey": "fanSpecial"
+    "statKey": "fanSpecial",
+    "attackType": "special"
   },
   "280303": {
     "internal": 352,
-    "statKey": "umbQ"
+    "statKey": "umbQ",
+    "attackType": "martial"
   },
   "280304": {
     "internal": 353,
-    "statKey": "umbCharged"
+    "statKey": "umbCharged",
+    "attackType": "charged"
   },
   "280305": {
     "internal": 354,
-    "statKey": "umbDrone"
+    "statKey": "umbDrone",
+    "attackType": "special"
   },
   "280401": {
     "internal": 315,
-    "statKey": "panaceaFanQ"
+    "statKey": "panaceaFanQ",
+    "attackType": "healing"
   },
   "280402": {
     "internal": 316,
-    "statKey": "panaceaFanSpecial"
+    "statKey": "panaceaFanSpecial",
+    "attackType": "special"
   },
   "280403": {
     "internal": 388,
-    "statKey": "panaceaFanHealing"
+    "statKey": "panaceaFanHealing",
+    "attackType": "healing"
   },
   "280404": {
     "internal": 358,
-    "statKey": "soulshadeUmbQ"
+    "statKey": "soulshadeUmbQ",
+    "attackType": "healing"
   },
   "280405": {
     "internal": 360,
-    "statKey": "soulshadeUmbSpecial"
+    "statKey": "soulshadeUmbSpecial",
+    "attackType": "special"
   },
   "280501": {
     "internal": 322,
-    "statKey": "infernalTwinbladesQ"
+    "statKey": "infernalTwinbladesQ",
+    "attackType": "martial"
   },
   "280502": {
     "internal": 362,
-    "statKey": "infernalTwinbladesLight"
+    "statKey": "infernalTwinbladesLight",
+    "attackType": "light"
   },
   "280503": {
     "internal": 321,
-    "statKey": "infernalTwinbladesSpecial"
+    "statKey": "infernalTwinbladesSpecial",
+    "attackType": "special"
   },
   "280504": {
     "internal": 364,
-    "statKey": "mortalRopeDartQ"
+    "statKey": "mortalRopeDartQ",
+    "attackType": "martial"
   },
   "280505": {
     "internal": 366,
-    "statKey": "mortalRopeDartRodent"
+    "statKey": "mortalRopeDartRodent",
+    "attackType": "rodent"
   },
   "280601": {
     "internal": 373,
-    "statKey": "everspringUmbQ"
+    "statKey": "everspringUmbQ",
+    "attackType": "martial"
   },
   "280602": {
     "internal": 375,
-    "statKey": "everspringUmbSpecial"
+    "statKey": "everspringUmbSpecial",
+    "attackType": "special"
   },
   "280603": {
     "internal": 376,
-    "statKey": "unfetteredRopeDartQ"
+    "statKey": "unfetteredRopeDartQ",
+    "attackType": "martial"
   },
   "280604": {
     "internal": 377,
-    "statKey": "unfetteredRopeDartCharged"
+    "statKey": "unfetteredRopeDartCharged",
+    "attackType": "charged"
   },
   "280605": {
     "internal": 378,
-    "statKey": "unfetteredRopeDartSpecial"
+    "statKey": "unfetteredRopeDartSpecial",
+    "attackType": "special"
   },
   "280701": {
     "internal": 228,
-    "statKey": "physPen"
+    "statKey": "physPen",
+    "attackType": null
   },
   "280702": {
     "internal": 230,
-    "statKey": "physResist"
+    "statKey": "physResist",
+    "attackType": null
   },
   "280703": {
     "internal": 392,
-    "statKey": "voidPen"
+    "statKey": "voidPen",
+    "attackType": null
   },
   "600001": {
     "internal": 290,
