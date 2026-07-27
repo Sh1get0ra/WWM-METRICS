@@ -1,6 +1,6 @@
 {
   "_schema": "wwmdb 由来 affix selector 統合 master。 build: scripts/wwmdb-build-affix-selector.cjs",
-  "_source": "wwmdb.vlt.fyi equip-items snapshots tbl#0 (INITIAL) + tbl#1 (TUNING 共通プール) + tbl#12 (武器/Disc/Pendant ATTUNE) + tbl#12-20 (防具 ATTUNE 共通プール)",
+  "_source": "client mining (scripts/mining/monthly/build_affix_selector_from_client.py)。Lv71 と ATTUNE(idx5) は client に元データが無いため従来値を引き継ぎ",
   "_builtAt": "2026-06-24T09:30:00Z",
   "_structure": "data[wdbCat][lv][tier][idx] : idx 0-4 = [statKey, ...] (0=INITIAL/1-4=TUNING共通) / idx 5 = [{statKey, martialArt, attackType}, ...] (ATTUNE)",
   "_notes": "chance>0 filter + restrict 解決 (自装備 wdbCat 照合) + Lv71 restrict 補完 + statKey 未登録 ID skip 済 / 2026-07-05: Lv100/105 追加 (client直接抽出mining、scripts/build-affix-selector-lv100-105.cjs、G:/wwm_mining/dmgcalc/affix_appearance_master_data4.json 由来。既存Lv71-96は無変更)",
@@ -3816,7 +3816,8 @@
             "playerUnitDmg",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -3923,7 +3924,8 @@
             "playerUnitDmg",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -4030,7 +4032,8 @@
             "playerUnitDmg",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       },
       "105": {
@@ -4139,7 +4142,8 @@
             "playerUnitDmg",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -4246,7 +4250,8 @@
             "playerUnitDmg",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -4353,7 +4358,8 @@
             "playerUnitDmg",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       }
     },
@@ -8214,7 +8220,8 @@
             "power",
             "precision",
             "stMysticDmg"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -8319,7 +8326,8 @@
             "power",
             "precision",
             "stMysticDmg"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -8424,7 +8432,8 @@
             "power",
             "precision",
             "stMysticDmg"
-          ]
+          ],
+          "5": []
         }
       },
       "105": {
@@ -8531,7 +8540,8 @@
             "power",
             "precision",
             "stMysticDmg"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -8636,7 +8646,8 @@
             "power",
             "precision",
             "stMysticDmg"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -8741,7 +8752,8 @@
             "power",
             "precision",
             "stMysticDmg"
-          ]
+          ],
+          "5": []
         }
       }
     },
@@ -10564,7 +10576,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -10662,7 +10675,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -10760,7 +10774,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       },
       "105": {
@@ -10860,7 +10875,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -10958,7 +10974,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -11056,7 +11073,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       }
     },
@@ -14871,7 +14889,8 @@
             "playerUnitDmg",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -14978,7 +14997,8 @@
             "playerUnitDmg",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -15085,7 +15105,8 @@
             "playerUnitDmg",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       },
       "105": {
@@ -15194,7 +15215,8 @@
             "playerUnitDmg",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -15301,7 +15323,8 @@
             "playerUnitDmg",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -15408,7 +15431,8 @@
             "playerUnitDmg",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       }
     },
@@ -19269,7 +19293,8 @@
             "power",
             "precision",
             "stMysticDmg"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -19374,7 +19399,8 @@
             "power",
             "precision",
             "stMysticDmg"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -19479,7 +19505,8 @@
             "power",
             "precision",
             "stMysticDmg"
-          ]
+          ],
+          "5": []
         }
       },
       "105": {
@@ -19586,7 +19613,8 @@
             "power",
             "precision",
             "stMysticDmg"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -19691,7 +19719,8 @@
             "power",
             "precision",
             "stMysticDmg"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -19796,7 +19825,8 @@
             "power",
             "precision",
             "stMysticDmg"
-          ]
+          ],
+          "5": []
         }
       }
     },
@@ -21619,7 +21649,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -21717,7 +21748,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -21815,7 +21847,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       },
       "105": {
@@ -21915,7 +21948,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -22013,7 +22047,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -22111,7 +22146,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       }
     },
@@ -23858,7 +23894,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -23936,7 +23973,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -24014,7 +24052,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       },
       "105": {
@@ -24094,7 +24133,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -24172,7 +24212,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -24250,7 +24291,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       }
     },
@@ -25997,7 +26039,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -26075,7 +26118,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -26153,7 +26197,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       },
       "105": {
@@ -26233,7 +26278,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -26311,7 +26357,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -26389,7 +26436,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       }
     },
@@ -26673,7 +26721,9 @@
         "3": {
           "0": [
             "agility",
+            "maxBamboocut",
             "maxPhys",
+            "minBamboocut",
             "minPhys",
             "momentum"
           ],
@@ -26774,7 +26824,9 @@
         "4": {
           "0": [
             "agility",
+            "maxBamboocut",
             "maxPhys",
+            "minBamboocut",
             "minPhys",
             "momentum"
           ],
@@ -26906,7 +26958,9 @@
         "5": {
           "0": [
             "agility",
+            "maxBamboocut",
             "maxPhys",
+            "minBamboocut",
             "minPhys",
             "momentum"
           ],
@@ -27040,7 +27094,9 @@
         "3": {
           "0": [
             "agility",
+            "maxBamboocut",
             "maxPhys",
+            "minBamboocut",
             "minPhys",
             "momentum"
           ],
@@ -27141,7 +27197,9 @@
         "4": {
           "0": [
             "agility",
+            "maxBamboocut",
             "maxPhys",
+            "minBamboocut",
             "minPhys",
             "momentum"
           ],
@@ -27273,7 +27331,9 @@
         "5": {
           "0": [
             "agility",
+            "maxBamboocut",
             "maxPhys",
+            "minBamboocut",
             "minPhys",
             "momentum"
           ],
@@ -27407,7 +27467,9 @@
         "3": {
           "0": [
             "agility",
+            "maxBamboocut",
             "maxPhys",
+            "minBamboocut",
             "minPhys",
             "momentum"
           ],
@@ -27508,7 +27570,9 @@
         "4": {
           "0": [
             "agility",
+            "maxBamboocut",
             "maxPhys",
+            "minBamboocut",
             "minPhys",
             "momentum"
           ],
@@ -27625,7 +27689,9 @@
         "5": {
           "0": [
             "agility",
+            "maxBamboocut",
             "maxPhys",
+            "minBamboocut",
             "minPhys",
             "momentum"
           ],
@@ -28088,7 +28154,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -28166,7 +28233,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -28244,7 +28312,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       },
       "105": {
@@ -28324,7 +28393,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -28402,7 +28472,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -28480,7 +28551,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       }
     },
@@ -28765,7 +28837,9 @@
           "0": [
             "agility",
             "maxPhys",
+            "maxStonesplit",
             "minPhys",
+            "minStonesplit",
             "momentum"
           ],
           "1": [
@@ -28866,7 +28940,9 @@
           "0": [
             "agility",
             "maxPhys",
+            "maxStonesplit",
             "minPhys",
+            "minStonesplit",
             "momentum"
           ],
           "1": [
@@ -28998,7 +29074,9 @@
           "0": [
             "agility",
             "maxPhys",
+            "maxStonesplit",
             "minPhys",
+            "minStonesplit",
             "momentum"
           ],
           "1": [
@@ -29132,7 +29210,9 @@
           "0": [
             "agility",
             "maxPhys",
+            "maxStonesplit",
             "minPhys",
+            "minStonesplit",
             "momentum"
           ],
           "1": [
@@ -29233,7 +29313,9 @@
           "0": [
             "agility",
             "maxPhys",
+            "maxStonesplit",
             "minPhys",
+            "minStonesplit",
             "momentum"
           ],
           "1": [
@@ -29365,7 +29447,9 @@
           "0": [
             "agility",
             "maxPhys",
+            "maxStonesplit",
             "minPhys",
+            "minStonesplit",
             "momentum"
           ],
           "1": [
@@ -30185,7 +30269,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -30263,7 +30348,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -30341,7 +30427,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       },
       "105": {
@@ -30421,7 +30508,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -30499,7 +30587,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -30577,7 +30666,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       }
     },
@@ -32324,7 +32414,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -32402,7 +32493,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -32480,7 +32572,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       },
       "105": {
@@ -32560,7 +32653,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -32638,7 +32732,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -32716,7 +32811,8 @@
             "physDef",
             "power",
             "precision"
-          ]
+          ],
+          "5": []
         }
       }
     },
@@ -34463,7 +34559,8 @@
             "power",
             "precision",
             "ropeDartDmg"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -34541,7 +34638,8 @@
             "power",
             "precision",
             "ropeDartDmg"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -34619,7 +34717,8 @@
             "power",
             "precision",
             "ropeDartDmg"
-          ]
+          ],
+          "5": []
         }
       },
       "105": {
@@ -34699,7 +34798,8 @@
             "power",
             "precision",
             "ropeDartDmg"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -34777,7 +34877,8 @@
             "power",
             "precision",
             "ropeDartDmg"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -34855,7 +34956,8 @@
             "power",
             "precision",
             "ropeDartDmg"
-          ]
+          ],
+          "5": []
         }
       }
     },
@@ -36650,7 +36752,8 @@
             "power",
             "precision",
             "spearDmg"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -36728,7 +36831,8 @@
             "power",
             "precision",
             "spearDmg"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -36806,7 +36910,8 @@
             "power",
             "precision",
             "spearDmg"
-          ]
+          ],
+          "5": []
         }
       },
       "105": {
@@ -36886,7 +36991,8 @@
             "power",
             "precision",
             "spearDmg"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -36964,7 +37070,8 @@
             "power",
             "precision",
             "spearDmg"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -37042,7 +37149,8 @@
             "power",
             "precision",
             "spearDmg"
-          ]
+          ],
+          "5": []
         }
       }
     },
@@ -38789,7 +38897,8 @@
             "power",
             "precision",
             "swordDmg"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -38867,7 +38976,8 @@
             "power",
             "precision",
             "swordDmg"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -38945,7 +39055,8 @@
             "power",
             "precision",
             "swordDmg"
-          ]
+          ],
+          "5": []
         }
       },
       "105": {
@@ -39025,7 +39136,8 @@
             "power",
             "precision",
             "swordDmg"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -39103,7 +39215,8 @@
             "power",
             "precision",
             "swordDmg"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -39181,7 +39294,8 @@
             "power",
             "precision",
             "swordDmg"
-          ]
+          ],
+          "5": []
         }
       }
     },
@@ -40976,7 +41090,8 @@
             "power",
             "precision",
             "umbrellaDmg"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -41054,7 +41169,8 @@
             "power",
             "precision",
             "umbrellaDmg"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -41132,7 +41248,8 @@
             "power",
             "precision",
             "umbrellaDmg"
-          ]
+          ],
+          "5": []
         }
       },
       "105": {
@@ -41212,7 +41329,8 @@
             "power",
             "precision",
             "umbrellaDmg"
-          ]
+          ],
+          "5": []
         },
         "4": {
           "0": [
@@ -41290,7 +41408,8 @@
             "power",
             "precision",
             "umbrellaDmg"
-          ]
+          ],
+          "5": []
         },
         "5": {
           "0": [
@@ -41368,7 +41487,8 @@
             "power",
             "precision",
             "umbrellaDmg"
-          ]
+          ],
+          "5": []
         }
       }
     }
