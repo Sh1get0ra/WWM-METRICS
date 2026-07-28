@@ -2027,17 +2027,17 @@
    "nameZh": "九曲-蓄力技-断蓬飞-1段",
    "label": {
     "ja": "断蓬飛び・溜め1段階",
-    "en": "Drifting Thrust - Charged Stage 1",
-    "zh": "断蓬飞・蓄力一段",
-    "ko": "절연의 비상・차지 1단계",
-    "vi": "Cắt Bụi Bay1",
-    "de": "Treibender Stoß1",
-    "es": "Empuje a la Deriva1",
-    "fr": "Estocade Vagabonde1",
-    "pt_br": "Investida à Deriva1",
-    "ru": "Дрейфующий Толчок1",
-    "th": "ตัดสายลมปลิว1",
-    "zh_tw": "斷蓬飛1"
+    "en": "Drifting Thrust - Stage 1 Total Charged",
+    "zh": "断蓬飞·一段蓄力伤害总和",
+    "ko": "절연의 비상·1단 차지 피해 총합",
+    "vi": "Cắt Bụi Bay - Tổng sát thương Một đoạn Tích lực",
+    "de": "Gleitstoß - Stufe 1 Gesamter aufgeladener",
+    "es": "Empuje Deslizante - Etapa 1 Daño Cargado Total",
+    "fr": "Poussée Dérivante - Étape 1 Dégâts chargés totaux",
+    "pt_br": "Investida à Deriva - Fase 1 Dano Carregado Total",
+    "ru": "Дрейфующий Толчок - Этап 1: Общий накопленный",
+    "th": "ตัดสายลมปลิว - ความเสียหายรวมของหนึ่งช่วงชาร์จพลัง",
+    "zh_tw": "斷蓬飛·一段蓄力傷害總和"
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
@@ -3019,24 +3019,24 @@
      0.37134
     ]
    },
-   "nameSource": "表示名で locale 完全一致 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "n:九曲-蓄力技-断蓬飞-2段": {
    "skillId": null,
    "nameZh": "九曲-蓄力技-断蓬飞-2段",
    "label": {
     "ja": "断蓬飛び・溜め2段階",
-    "en": "Drifting Thrust - Charged Stage 2",
-    "zh": "断蓬飞・蓄力二段",
-    "ko": "절연의 비상・차지 2단계",
-    "vi": "Cắt Bụi Bay2",
-    "de": "Treibender Stoß2",
-    "es": "Empuje a la Deriva2",
-    "fr": "Estocade Vagabonde2",
-    "pt_br": "Investida à Deriva2",
-    "ru": "Дрейфующий Толчок2",
-    "th": "ตัดสายลมปลิว2",
-    "zh_tw": "斷蓬飛2"
+    "en": "Drifting Thrust - Stage 2 Total Charged",
+    "zh": "断蓬飞·二段蓄力伤害总和",
+    "ko": "절연의 비상·2단계 차지 피해 총합",
+    "vi": "Cắt Bụi Bay - Tổng Sát thương Đoạn thứ hai tích lực",
+    "de": "Gleitstoß - Stufe 2 Gesamtschaden (aufgeladen)",
+    "es": "Empuje Deslizante - Etapa 2 Daño Total Cargado",
+    "fr": "Poussée Dérivante - Étape 2 Dégâts chargés totaux",
+    "pt_br": "Investida à Deriva - Fase 2 Dano Total Carregado",
+    "ru": "Дрейфующий Толчок - Этап 2 Общий накопленный",
+    "th": "ตัดสายลมปลิว - ความเสียหายรวมชาร์จพลังขั้นที่สอง",
+    "zh_tw": "斷蓬飛·二段蓄力傷害總和"
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
@@ -4018,7 +4018,7 @@
      0.6189
     ]
    },
-   "nameSource": "表示名で locale 完全一致 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "n:九曲-特殊技-扫千军-1段": {
    "skillId": null,

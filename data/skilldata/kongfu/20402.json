@@ -34,7 +34,7 @@
     "de": "Brennendes Herz1",
     "es": "Corazón Ardiente1",
     "fr": "Cœur Brûlant1",
-    "pt_br": "Coração Ardente1",
+    "pt_br": "Coração em Chamas1",
     "ru": "Пылающее Сердце1",
     "th": "เผาไหม้หัวใจนี้1",
     "zh_tw": "焚此心1"
@@ -1040,7 +1040,7 @@
      1.8849
     ]
    },
-   "nameSource": "表示名で locale 完全一致 (同名衝突のため連番 1) (ja は旧表記を維持)"
+   "nameSource": "本番 skill_name の表示名一致 (同名衝突のため連番 1) (ja は旧表記を維持)"
   },
   "20402103": {
    "skillId": 20402103,
@@ -3022,7 +3022,7 @@
     "de": "Brennendes Herz2",
     "es": "Corazón Ardiente2",
     "fr": "Cœur Brûlant2",
-    "pt_br": "Coração Ardente2",
+    "pt_br": "Coração em Chamas2",
     "ru": "Пылающее Сердце2",
     "th": "เผาไหม้หัวใจนี้2",
     "zh_tw": "焚此心2"
@@ -4028,7 +4028,7 @@
      5.723
     ]
    },
-   "nameSource": "表示名で locale 完全一致 (同名衝突のため連番 2) (ja は旧表記を維持)"
+   "nameSource": "本番 skill_name の表示名一致 (同名衝突のため連番 2) (ja は旧表記を維持)"
   },
   "n:狂澜陌刀-蓄力技-三蓄跳劈-1段": {
    "skillId": null,
@@ -4042,7 +4042,7 @@
     "de": "Brennendes Herz - Stufe 3 Aufgeladener Schlag + Flächenschaden",
     "es": "Corazón Ardiente - Etapa 3 Golpe Cargado + Daño en Área",
     "fr": "Cœur Brûlant - Étape 3 : Coup chargé + dégâts de zone",
-    "pt_br": "Coração Ardente - Fase 3: Pancada Carregada + dano em área",
+    "pt_br": "Coração em Chamas - Fase 3: Pancada Carregada + dano em área",
     "ru": "Пылающее Сердце - Этап 3 Заряженный удар + урон по области",
     "th": "เผาไหม้หัวใจนี้1",
     "zh_tw": "焚此心·三段蓄力下砸 + 範圍"
@@ -5065,7 +5065,7 @@
     "de": "Brennendes Herz - Stufe 3 Aufgeladener Schlag (verstärkt) + Flächenschaden (verstärkt)",
     "es": "Corazón Ardiente - Etapa 3 Golpe Cargado (mejorado) + Daño en Área (mejorado)",
     "fr": "Cœur Brûlant - Étape 3 : Coup chargé (renforcé) + dégâts de zone (renforcés)",
-    "pt_br": "Coração Ardente - Fase 3: Pancada Carregada (reforçada) + dano em área (reforçado)",
+    "pt_br": "Coração em Chamas - Fase 3: Pancada Carregada (reforçada) + dano em área (reforçado)",
     "ru": "Пылающее Сердце - Этап 3 Заряженный удар (усиленный) + урон по области (усиленный)",
     "th": "เผาไหม้หัวใจนี้2",
     "zh_tw": "焚此心·三段蓄力下砸強化 + 範圍傷害強化"

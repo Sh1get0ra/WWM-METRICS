@@ -3990,7 +3990,7 @@
      0.30008
     ]
    },
-   "nameSource": "field 0x60 の段ラベル (旧 ja は仮の名前なので公式名を採る)"
+   "nameSource": "field 0x60 の段ラベル"
   },
   "n:无名剑法-主动技-出畏之-三连-2段": {
    "skillId": null,
@@ -4989,7 +4989,7 @@
      0.45012
     ]
    },
-   "nameSource": "field 0x60 の段ラベル (旧 ja は仮の名前なので公式名を採る)"
+   "nameSource": "field 0x60 の段ラベル"
   },
   "n:无名剑法-主动技-出畏之-三连-3段": {
    "skillId": null,
@@ -5988,7 +5988,7 @@
      0.7502
     ]
    },
-   "nameSource": "field 0x60 の段ラベル (旧 ja は仮の名前なので公式名を採る)"
+   "nameSource": "field 0x60 の段ラベル"
   },
   "n:无名剑法-蓄力技-无以为家-2档-1段": {
    "skillId": null,
@@ -6002,7 +6002,7 @@
     "de": "Vagabundenschwert - Schadenswert der zweiten Stufe der aufgeladenen Fähigkeit",
     "es": "Espada Vagabunda - Daño de Nivel 2 de Habilidad Cargada",
     "fr": "Épée Vagabonde - Dégâts de Compétence Chargée Niveau 2",
-    "pt_br": "Espada do Andarilho - Dano do Segundo Nível da Habilidade Carregada",
+    "pt_br": "Espada do Errante - Dano do Segundo Nível da Habilidade Carregada",
     "ru": "Бродячий меч - Урон от Заряжаемого Навыка Второго Уровня",
     "th": "ไร้ที่อยู่อาศัย - ชาร์จพลังระดับสองความเสียหาย (ไม่ได้ติดตั้งเคล็ดวิชาลึกลับ)",
     "zh_tw": "無以為家·蓄力二檔（未裝配無名心法）"
@@ -6797,7 +6797,7 @@
     "de": "Vagabundenschwert - 1. Schwertenergieschaden der 2. Ladeangriffsstufe (mit aktivierter Schwertwandlung)",
     "es": "Espada Vagabunda - Daño de Energía de Espada 1° de Carga en 2° Etapa (con Morfosis de Espada desplegada)",
     "fr": "Épée Vagabonde - Dégâts de la 1ère Énergie d'Épée lors d'une charge au 2ème niveau (avec Métamorphose de l'Épée déployée)",
-    "pt_br": "Espada do Andarilho - 1º Dano de Energia de Espada do 2º Estágio de Carga (com Morfar Espada ativado)",
+    "pt_br": "Espada do Errante - 1º Dano de Energia de Espada do 2º Estágio de Carga (com Morfar Espada ativado)",
     "ru": "Бродячий меч - 1-й Урон от Энергии Меча при 2-м Этапе Заряда (с активированной Трансформацией Меча)",
     "th": "ไร้ที่อยู่อาศัย - ชาร์จพลังระดับสองพลังดาบแรกความเสียหาย (ติดตั้งเคล็ดวิชาลึกลับ)",
     "zh_tw": "無以為家·蓄力二檔第一道劍氣（裝配無名心法）"
@@ -7592,7 +7592,7 @@
     "de": "Vagabundenschwert - 2. Schwertenergieschaden der 2. Ladeangriffsstufe (mit aktivierter Schwertwandlung)",
     "es": "Espada Vagabunda - Daño de Energía de Espada 2° de Carga en 2° Etapa (con Morfosis de Espada desplegada)",
     "fr": "Épée Vagabonde - Dégâts de la 2ème Énergie d'Épée lors d'une charge au 2ème niveau (avec Métamorphose de l'Épée déployée)",
-    "pt_br": "Espada do Andarilho - 2º Dano de Energia de Espada do 2º Estágio de Carga (com Morfar Espada ativado)",
+    "pt_br": "Espada do Errante - 2º Dano de Energia de Espada do 2º Estágio de Carga (com Morfar Espada ativado)",
     "ru": "Бродячий меч - 2-й Урон от Энергии Меча при 2-м Этапе Заряда (с активированной Трансформацией Меча)",
     "th": "ไร้ที่อยู่อาศัย - ความเสียหายจากพลังดาบครั้งที่สองในระดับชาร์จพลังขั้นที่สอง (ติดตั้งเคล็ดวิชาลึกลับอู๋หมิง)",
     "zh_tw": "無以為家·蓄力二檔第二道劍氣（裝配無名心法）"
@@ -8387,7 +8387,7 @@
     "de": "Vagabundenschwert - 3. Schwertenergieschaden der 2. Ladeangriffsstufe (mit aktivierter Schwertwandlung)",
     "es": "Espada Vagabunda - Daño de Energía de Espada 3° de Carga en 2° Etapa (con Morfosis de Espada desplegada)",
     "fr": "Épée Vagabonde - Dégâts de la 3ème Énergie d'Épée lors d'une charge au 2ème niveau (avec Métamorphose de l'Épée déployée)",
-    "pt_br": "Espada do Andarilho - 3º Dano de Energia de Espada do 2º Estágio de Carga (com Morfar Espada ativado)",
+    "pt_br": "Espada do Errante - 3º Dano de Energia de Espada do 2º Estágio de Carga (com Morfar Espada ativado)",
     "ru": "Бродячий меч - 3-й Урон от Энергии Меча при 2-м Этапе Заряда (с активированной Трансформацией Меча)",
     "th": "ไร้ที่อยู่อาศัย - ความเสียหายจากพลังดาบครั้งที่สามในระดับชาร์จพลังขั้นที่สอง (ติดตั้งเคล็ดวิชาลึกลับอู๋หมิง)",
     "zh_tw": "無以為家·蓄力二檔第三道劍氣（裝配無名心法）"
