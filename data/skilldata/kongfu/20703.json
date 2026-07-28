@@ -5765,10 +5765,10 @@
    "skillId": null,
    "nameZh": "绳镖新武学-绳镖.蓄力技新-1段",
    "label": {
-    "ja": "乱撃の索1",
+    "ja": "乱撃の索・縄鏢振り回し各段階ダメージ",
     "en": "Crisscross Stance - Rope Dart Swing Damage Per Hit",
-    "zh": "纵横势·甩动绳镖每段",
-    "ko": "종횡무진의 기세·승표 휘두르기 단계별",
+    "zh": "纵横势·甩动绳镖每段伤害",
+    "ko": "종횡무진의 기세·승표 휘두르기 단계별 피해",
     "vi": "Thế tung hoành - Đòn sát thương mỗi đoạn khi vung dây phi tiêu",
     "de": "Kreuzstellung - Seildolch-Schwung-Schaden pro Treffer",
     "es": "Postura Entrecruzada - Daño por Golpe del Columpio con Dardo con Cuerda",
@@ -5776,10 +5776,10 @@
     "pt_br": "Postura Cruzada - Dano por Golpe do Balanço do Dardo de Corda",
     "ru": "Перекрёстная стойка - Урон за удар при вращении веревочным дротиком",
     "th": "ท่าพุ่งทะลุแนว - ความเสียหายแต่ละช่วงจากการเหวี่ยงเชือกปลายแหลม",
-    "zh_tw": "縱橫勢·甩動繩鏢每段"
+    "zh_tw": "縱橫勢·甩動繩鏢每段傷害"
    },
    "origin": "kongfu_specific",
-   "skillType": "charged",
+   "skillType": "heavy",
    "baseSkillId": 20703006,
    "nameFrom": "literal",
    "frame": null,
@@ -6758,16 +6758,16 @@
      0.108801
     ]
    },
-   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
+   "nameSource": "手動 overlay (ln)"
   },
   "n:绳镖新武学-绳镖.蓄力技新-2段": {
    "skillId": null,
    "nameZh": "绳镖新武学-绳镖.蓄力技新-2段",
    "label": {
-    "ja": "乱撃の索2",
-    "en": "Crisscross Stance - Final Strike",
-    "zh": "纵横势·最后一击",
-    "ko": "종횡무진의 기세·최후의 일격",
+    "ja": "乱撃の索・とどめダメージ",
+    "en": "Crisscross Stance - Final Strike Damage",
+    "zh": "纵横势·最后一击伤害",
+    "ko": "종횡무진의 기세·최후의 일격 피해",
     "vi": "Thế tung hoành - Sát thương đòn cuối cùng",
     "de": "Kreuzstellung - Endschlag-Schaden",
     "es": "Postura Entrecruzada - Daño del Golpe Final",
@@ -6775,10 +6775,10 @@
     "pt_br": "Postura Cruzada - Dano do Golpe Final",
     "ru": "Перекрёстная стойка - Урон от финального удара",
     "th": "ท่าพุ่งทะลุแนว - ความเสียหายจากการโจมตีครั้งสุดท้าย",
-    "zh_tw": "縱橫勢·最後一擊"
+    "zh_tw": "縱橫勢·最後一擊傷害"
    },
    "origin": "kongfu_specific",
-   "skillType": "charged",
+   "skillType": "heavy",
    "baseSkillId": 20703006,
    "nameFrom": "literal",
    "frame": null,
@@ -7757,7 +7757,7 @@
      0.507738
     ]
    },
-   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
+   "nameSource": "手動 overlay (ln)"
   }
  }
 }
