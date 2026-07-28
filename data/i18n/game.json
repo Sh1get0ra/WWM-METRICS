@@ -19223,20 +19223,6 @@
       "th": "ดาบใหญ่·โจมตีหนัก",
       "zh_tw": "陌刀·重擊"
     },
-    "20402002": {
-      "ja": "斬馬刀・重攻撃",
-      "en": "Mo Blade - Heavy Attack",
-      "zh": "陌刀·重击",
-      "ko": "맥도-강공격",
-      "vi": "Đao Mạc · Đánh mạnh",
-      "de": "Mo Klinge - Schwerer Angriff",
-      "es": "Espada Mo - Ataque Pesado",
-      "fr": "Lame Mo - Attaque Lourde",
-      "pt_br": "Lâmina Mo - Ataque Pesado",
-      "ru": "Клинок Мо - Тяжелая атака",
-      "th": "ดาบใหญ่·โจมตีหนัก",
-      "zh_tw": "陌刀·重擊"
-    },
     "20602104": {
       "ja": "傘・重撃",
       "en": "Umbrella - Heavy Attack",
@@ -19362,34 +19348,6 @@
       "ru": "Порочный Осуждённый",
       "th": "ผู้ไร้คุณธรรมสมควรถูกกำจัด",
       "zh_tw": "無義當誅"
-    },
-    "209010041": {
-      "ja": "天欲義",
-      "en": "Righteous Reign",
-      "zh": "天欲义",
-      "ko": "천의의 계율",
-      "vi": "Trời muốn nghĩa",
-      "de": "Himmlische Gerechtigkeit",
-      "es": "Rectitud Celestial",
-      "fr": "Rectitude céleste",
-      "pt_br": "Justiça Celestial",
-      "ru": "Небесная праведность",
-      "th": "สวรรค์ปรารถนาความยุติธรรม",
-      "zh_tw": "天欲義"
-    },
-    "209010061": {
-      "ja": "義の統治",
-      "en": "Virtuous Enthroned",
-      "zh": "有义则治",
-      "ko": "하늘의 질서",
-      "vi": "Có nghĩa thì trị",
-      "de": "Herrschaft der Rechtschaffenheit",
-      "es": "Mandato de la Rectitud",
-      "fr": "Loi de la vertu",
-      "pt_br": "Regra da Justiça",
-      "ru": "Закон праведности",
-      "th": "ผู้มีคุณธรรมย่อมปกครอง",
-      "zh_tw": "有義則治"
     }
   }
 }
