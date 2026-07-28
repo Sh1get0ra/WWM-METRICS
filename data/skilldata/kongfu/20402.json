@@ -65,7 +65,7 @@
    "bundleIndex": 1,
    "nameFrom": "literal",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.1,
    "byLevel": {
     "lv": [
      2,
@@ -1050,7 +1050,7 @@
    "nameFrom": "skill",
    "nameRefId": "20402103",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.2,
    "byLevel": {
     "lv": [
      2,
@@ -2034,7 +2034,7 @@
    "nameFrom": "skill",
    "nameRefId": "20402104",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.2,
    "byLevel": {
     "lv": [
      2,

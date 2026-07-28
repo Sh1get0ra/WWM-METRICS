@@ -9,7 +9,7 @@
    "nameFrom": "weaponType",
    "nameSeq": 1,
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.3,
    "byLevel": {
     "lv": [
      2,
@@ -992,7 +992,7 @@
    "nameFrom": "weaponType",
    "nameSeq": 2,
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.3,
    "byLevel": {
     "lv": [
      2,
@@ -1975,7 +1975,7 @@
    "nameFrom": "weaponType",
    "nameSeq": 3,
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.4,
    "byLevel": {
     "lv": [
      2,
@@ -2958,7 +2958,7 @@
    "nameFrom": "weaponType",
    "nameSeq": 4,
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.2,
    "byLevel": {
     "lv": [
      2,
@@ -3941,7 +3941,7 @@
    "nameFrom": "skill",
    "nameRefId": "20700403",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 3,
    "byLevel": {
     "lv": [
      2,
@@ -4930,7 +4930,7 @@
    "nameFrom": "skill",
    "nameRefId": "20700603",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 5,
    "byLevel": {
     "lv": [
      2,
@@ -5913,7 +5913,7 @@
    "nameFrom": "skill",
    "nameRefId": "20700605",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.5,
    "byLevel": {
     "lv": [],
     "skillConst": [],

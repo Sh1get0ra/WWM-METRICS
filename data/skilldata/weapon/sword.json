@@ -9,7 +9,7 @@
    "nameFrom": "skill",
    "nameRefId": "20201012",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.5,
    "byLevel": {
     "lv": [
      2,
@@ -997,7 +997,7 @@
    "nameFrom": "skill",
    "nameRefId": "20201013",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.8,
    "byLevel": {
     "lv": [
      2,
@@ -1979,7 +1979,7 @@
    "nameFrom": "skill",
    "nameRefId": "20201014",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.5,
    "byLevel": {
     "lv": [],
     "skillConst": [],
@@ -2001,7 +2001,7 @@
    "nameFrom": "skill",
    "nameRefId": "20201103",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 5,
    "byLevel": {
     "lv": [
      2,
@@ -2989,7 +2989,7 @@
    "nameFrom": "skill",
    "nameRefId": "20201105",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.9,
    "byLevel": {
     "lv": [
      2,
@@ -3977,7 +3977,7 @@
    "nameFrom": "skill",
    "nameRefId": "20201107",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 3,
    "byLevel": {
     "lv": [
      2,
@@ -4967,7 +4967,7 @@
    "nameRefId": "20201001",
    "nameSeq": 1,
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.1,
    "byLevel": {
     "lv": [
      2,
@@ -5957,7 +5957,7 @@
    "nameRefId": "20201001",
    "nameSeq": 2,
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.1,
    "byLevel": {
     "lv": [
      2,
@@ -6947,7 +6947,7 @@
    "nameRefId": "20201001",
    "nameSeq": 3,
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.1,
    "byLevel": {
     "lv": [
      2,
@@ -7937,7 +7937,7 @@
    "nameRefId": "20201001",
    "nameSeq": 4,
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.1,
    "byLevel": {
     "lv": [
      2,
@@ -8926,7 +8926,7 @@
    "nameFrom": "weaponType",
    "nameSeq": 1,
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.1,
    "byLevel": {
     "lv": [
      2,
@@ -9915,7 +9915,7 @@
    "nameFrom": "weaponType",
    "nameSeq": 2,
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.1,
    "byLevel": {
     "lv": [
      2,
@@ -10904,7 +10904,7 @@
    "nameFrom": "weaponType",
    "nameSeq": 3,
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.1,
    "byLevel": {
     "lv": [
      2,

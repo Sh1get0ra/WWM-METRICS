@@ -32,7 +32,7 @@
    "nameFrom": "skill",
    "nameRefId": "20301017",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.2,
    "byLevel": {
     "lv": [
      2,
@@ -1016,7 +1016,7 @@
    "nameFrom": "skill",
    "nameRefId": "20301105",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 3,
    "byLevel": {
     "lv": [
      2,
@@ -1994,7 +1994,7 @@
    "nameFrom": "skill",
    "nameRefId": "20302101",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 12,
    "byLevel": {
     "lv": [
      2,
@@ -2978,7 +2978,7 @@
    "nameFrom": "skill",
    "nameRefId": "20302103",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0,
    "byLevel": {
     "lv": [
      2,
@@ -3962,7 +3962,7 @@
    "nameFrom": "skill",
    "nameRefId": "20302104",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0,
    "byLevel": {
     "lv": [
      2,
@@ -4946,7 +4946,7 @@
    "nameFrom": "skill",
    "nameRefId": "20302105",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0,
    "byLevel": {
     "lv": [
      2,
@@ -5930,7 +5930,7 @@
    "nameFrom": "skill",
    "nameRefId": "20302111",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0,
    "byLevel": {
     "lv": [
      2,
@@ -6914,7 +6914,7 @@
    "nameFrom": "skill",
    "nameRefId": "20302116",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 15,
    "byLevel": {
     "lv": [
      2,
@@ -7900,7 +7900,7 @@
    "nameRefId": "20301001",
    "nameSeq": 1,
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.1,
    "byLevel": {
     "lv": [
      2,
@@ -8886,7 +8886,7 @@
    "nameRefId": "20301001",
    "nameSeq": 2,
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.1,
    "byLevel": {
     "lv": [
      2,
@@ -9872,7 +9872,7 @@
    "nameRefId": "20301001",
    "nameSeq": 3,
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.1,
    "byLevel": {
     "lv": [
      2,
@@ -10858,7 +10858,7 @@
    "nameRefId": "20301001",
    "nameSeq": 4,
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.1,
    "byLevel": {
     "lv": [
      2,
@@ -11856,7 +11856,7 @@
    "baseSkillId": 20301005,
    "nameFrom": "literal",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.1,
    "byLevel": {
     "lv": [
      2,
@@ -12849,7 +12849,7 @@
    "baseSkillId": 20301005,
    "nameFrom": "literal",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.1,
    "byLevel": {
     "lv": [
      2,
@@ -13842,7 +13842,7 @@
    "baseSkillId": 20301005,
    "nameFrom": "literal",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.1,
    "byLevel": {
     "lv": [
      2,

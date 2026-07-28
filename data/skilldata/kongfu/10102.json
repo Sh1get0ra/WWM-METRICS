@@ -35,7 +35,7 @@
    "nameFrom": "skill",
    "nameRefId": "20201102",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0,
    "byLevel": {
     "lv": [
      2,
@@ -1019,7 +1019,7 @@
    "nameFrom": "skill",
    "nameRefId": "20201110",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 1,
    "byLevel": {
     "lv": [
      2,
@@ -2016,7 +2016,7 @@
    "skillType": "special",
    "nameFrom": "literal",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 0.9,
    "byLevel": {
     "lv": [
      2,
@@ -3015,7 +3015,7 @@
    "baseSkillId": 20201101,
    "nameFrom": "literal",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 12,
    "byLevel": {
     "lv": [
      2,
@@ -4014,7 +4014,7 @@
    "baseSkillId": 20201101,
    "nameFrom": "literal",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 12,
    "byLevel": {
     "lv": [
      2,
@@ -5013,7 +5013,7 @@
    "baseSkillId": 20201101,
    "nameFrom": "literal",
    "frame": null,
-   "cooldown": null,
+   "cooldown": 12,
    "byLevel": {
     "lv": [
      2,
