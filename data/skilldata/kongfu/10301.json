@@ -96,16 +96,16 @@
    "label": {
     "ja": "扇・跳び斬り",
     "en": "Fan - Jump Strike",
-    "zh": "跳劈·扇",
-    "ko": "도약 베기·부채",
-    "vi": "Quạt - Nhảy bổ",
-    "de": "Fan - Sprungangriff",
-    "es": "Fan - Golpe en Salto",
-    "fr": "Fan - Frappe en Saut",
+    "zh": "扇·跳劈",
+    "ko": "부채-도약 베기",
+    "vi": "Quạt·Nhảy bổ",
+    "de": "Fächer - Sprungschlag",
+    "es": "Abanico - Golpe en Salto",
+    "fr": "Éventail - Frappe en saut",
     "pt_br": "Fan - Golpe no Salto",
     "ru": "Веер - Прыжковый удар",
-    "th": "พัด - กระโดดฟัน",
-    "zh_tw": "跳劈·扇"
+    "th": "พัด·กระโดดฟัน",
+    "zh_tw": "扇·跳劈"
    },
    "origin": "kongfu_specific",
    "skillType": "heavy",
@@ -1086,7 +1086,7 @@
      0.8265
     ]
    },
-   "nameSource": "基本技用語(跳劈) + 武器名"
+   "nameSource": "本番 skill_name"
   },
   "n:轻击": {
    "skillId": null,
@@ -2086,16 +2086,16 @@
    "label": {
     "ja": "扇・突進",
     "en": "Fan - Dash",
-    "zh": "突进·扇",
-    "ko": "돌진·부채",
-    "vi": "Quạt - Đột kích",
-    "de": "Fan - Sprint",
-    "es": "Fan - Carrera",
-    "fr": "Fan - Ruée",
+    "zh": "扇·突进",
+    "ko": "부채-돌진",
+    "vi": "Quạt·Đột kích",
+    "de": "Fächer - Sprint",
+    "es": "Abanico - Arremetida",
+    "fr": "Éventail - Bond",
     "pt_br": "Fan - Arremetida",
     "ru": "Веер - Рывок",
-    "th": "พัด - พุ่งโจมตี",
-    "zh_tw": "突進·扇"
+    "th": "พัด·พุ่งโจมตี",
+    "zh_tw": "扇·突進"
    },
    "origin": "kongfu_specific",
    "skillType": "other",
@@ -3076,7 +3076,7 @@
      0.4027
     ]
    },
-   "nameSource": "基本技用語(突进) + 武器名"
+   "nameSource": "本番 skill_name"
   }
  }
 }
