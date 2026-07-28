@@ -7895,7 +7895,9 @@
    "nameZh": "武器技-扇.轻击-1段",
    "origin": "weapon_common",
    "skillType": "light",
-   "nameFrom": "weaponType",
+   "baseSkillId": 20301001,
+   "nameFrom": "skill",
+   "nameRefId": "20301001",
    "nameSeq": 1,
    "frame": null,
    "cooldown": null,
@@ -8879,7 +8881,9 @@
    "nameZh": "武器技-扇.轻击-2段",
    "origin": "weapon_common",
    "skillType": "light",
-   "nameFrom": "weaponType",
+   "baseSkillId": 20301001,
+   "nameFrom": "skill",
+   "nameRefId": "20301001",
    "nameSeq": 2,
    "frame": null,
    "cooldown": null,
@@ -9863,7 +9867,9 @@
    "nameZh": "武器技-扇.轻击-3段",
    "origin": "weapon_common",
    "skillType": "light",
-   "nameFrom": "weaponType",
+   "baseSkillId": 20301001,
+   "nameFrom": "skill",
+   "nameRefId": "20301001",
    "nameSeq": 3,
    "frame": null,
    "cooldown": null,
@@ -10847,7 +10853,9 @@
    "nameZh": "武器技-扇.轻击-4段",
    "origin": "weapon_common",
    "skillType": "light",
-   "nameFrom": "weaponType",
+   "baseSkillId": 20301001,
+   "nameFrom": "skill",
+   "nameRefId": "20301001",
    "nameSeq": 4,
    "frame": null,
    "cooldown": null,
@@ -11831,20 +11839,21 @@
    "nameZh": "武器技-扇.重击-1段",
    "label": {
     "ja": "扇・重攻撃1",
-    "en": "Fan - Heavy Attack1",
-    "zh": "扇·重击1",
-    "ko": "부채-강공격1",
-    "vi": "Quạt·Đánh mạnh1",
-    "de": "Fan - Schwerer Angriff1",
-    "es": "Fan - Ataque Pesado1",
-    "fr": "Fan - Attaque lourde1",
-    "pt_br": "Fan - Ataque Pesado1",
-    "ru": "Веер - Тяжелая атака1",
-    "th": "พัด·โจมตีหนัก1",
-    "zh_tw": "扇·重擊1"
+    "en": "Fan - Heavy Attack 1st Stage",
+    "zh": "扇·重击一段",
+    "ko": "부채·강공격 1단계",
+    "vi": "Quạt·Đánh mạnh - Sát thương đoạn đầu tiên của đánh mạnh",
+    "de": "Fan - Schwerer Angriff - Schaden der 1. Stufe schwerer Angriffe",
+    "es": "Fan - Daño de Ataque Pesado en 1ª Fase",
+    "fr": "Fan - Attaque lourde - Dégâts de la 1ère étape d'attaque lourde",
+    "pt_br": "Fan - Dano do 1º Estágio do Ataque Pesado",
+    "ru": "Веер - Тяжелая атака 1-го этапа",
+    "th": "พัด - ความเสียหายช่วงแรกจากโจมตีหนัก",
+    "zh_tw": "扇·重擊一段"
    },
    "origin": "weapon_common",
    "skillType": "heavy",
+   "baseSkillId": 20301005,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -12816,27 +12825,28 @@
      0.55145
     ]
    },
-   "nameSource": "本番 skill_name + 段番号"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "n:武器技-扇.重击-2段": {
    "skillId": null,
    "nameZh": "武器技-扇.重击-2段",
    "label": {
     "ja": "扇・重攻撃2",
-    "en": "Fan - Heavy Attack2",
-    "zh": "扇·重击2",
-    "ko": "부채-강공격2",
-    "vi": "Quạt·Đánh mạnh2",
-    "de": "Fan - Schwerer Angriff2",
-    "es": "Fan - Ataque Pesado2",
-    "fr": "Fan - Attaque lourde2",
-    "pt_br": "Fan - Ataque Pesado2",
-    "ru": "Веер - Тяжелая атака2",
-    "th": "พัด·โจมตีหนัก2",
-    "zh_tw": "扇·重擊2"
+    "en": "Fan - Heavy Attack 2nd Stage",
+    "zh": "扇·重击二段",
+    "ko": "부채·강공격 2단계",
+    "vi": "Quạt - Sát thương Đánh mạnh hai đoạn",
+    "de": "Fan - Schwerer Angriff - Schaden der 2. Stufe bei schwerem Angriff",
+    "es": "Fan - Daño de Ataque Pesado en 2da Fase",
+    "fr": "Fan - Attaque lourde - Dégâts de l'Attaque Lourde - 2ème Phase",
+    "pt_br": "Fan - Dano da 2ª Fase do Ataque Pesado",
+    "ru": "Веер - Тяжелая атака 2-го этапа",
+    "th": "พัด - ความเสียหายจากโจมตีหนักสองครั้ง",
+    "zh_tw": "扇·重擊二段"
    },
    "origin": "weapon_common",
    "skillType": "heavy",
+   "baseSkillId": 20301005,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -13808,27 +13818,28 @@
      0.88232
     ]
    },
-   "nameSource": "本番 skill_name + 段番号"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "n:武器技-扇.重击-3段": {
    "skillId": null,
    "nameZh": "武器技-扇.重击-3段",
    "label": {
     "ja": "扇・重攻撃3",
-    "en": "Fan - Heavy Attack3",
-    "zh": "扇·重击3",
-    "ko": "부채-강공격3",
-    "vi": "Quạt·Đánh mạnh3",
-    "de": "Fan - Schwerer Angriff3",
-    "es": "Fan - Ataque Pesado3",
-    "fr": "Fan - Attaque lourde3",
-    "pt_br": "Fan - Ataque Pesado3",
-    "ru": "Веер - Тяжелая атака3",
-    "th": "พัด·โจมตีหนัก3",
-    "zh_tw": "扇·重擊3"
+    "en": "Fan - Heavy Attack 3rd Stage",
+    "zh": "扇·重击三段",
+    "ko": "부채·강공격 3단계",
+    "vi": "Quạt - Sát thương ba đoạn Đánh mạnh",
+    "de": "Fan - Schwerer Angriff Schaden 3. Stufe",
+    "es": "Fan - Daño de Ataque Pesado en 3ª Fase",
+    "fr": "Fan - Attaque lourde - Dégâts de la 3ème phase d'attaque lourde",
+    "pt_br": "Fan - Dano do 3º Estágio do Ataque Pesado",
+    "ru": "Веер - Тяжелая атака 3-го этапа",
+    "th": "พัด - ความเสียหายจากโจมตีหนักสามช่วง",
+    "zh_tw": "扇·重擊三段"
    },
    "origin": "weapon_common",
    "skillType": "heavy",
+   "baseSkillId": 20301005,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -14800,7 +14811,7 @@
      0.77203
     ]
    },
-   "nameSource": "本番 skill_name + 段番号"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "n:跳劈": {
    "skillId": null,
@@ -15804,7 +15815,7 @@
    "skillId": null,
    "nameZh": "轻击",
    "label": {
-    "ja": "軽撃",
+    "ja": "扇・軽撃",
     "en": "Fan - Light Attack",
     "zh": "轻击·扇",
     "ko": "약공격·부채",
@@ -16790,7 +16801,7 @@
      1.9837
     ]
    },
-   "nameSource": "本番 skill_name (ja は旧表記を維持)"
+   "nameSource": "本番 skill_name (旧 ja は仮の名前なので公式名を採る)"
   },
   "n:突进": {
    "skillId": null,

@@ -6,7 +6,6 @@
   "20901002",
   "20901003",
   "20901004",
-  "209010041",
   "20901005",
   "20901006",
   "20901007",
@@ -20,6 +19,7 @@
   "20901108",
   "20901110",
   "20901201",
+  "209010041",
   "209010061",
   "n:手甲新武学-手甲.奥义",
   "n:手甲新武学-手甲.奥义（三格）",
@@ -17777,7 +17777,7 @@
    "skillId": 209010041,
    "nameZh": "手甲新武学-手甲.轻击5",
    "label": {
-    "ja": "天欲義5",
+    "ja": "手甲・軽撃",
     "en": "Gauntlets - Light Attack",
     "zh": "轻击·手甲",
     "ko": "약공격·권갑",
@@ -18769,7 +18769,7 @@
      1.8031
     ]
    },
-   "nameSource": "基本技用語(轻击) + 武器名 (ja は旧表記を維持)"
+   "nameSource": "基本技用語(轻击) + 武器名 (旧 ja は仮の名前なので公式名を採る)"
   },
   "209010061": {
    "skillId": 209010061,
@@ -21412,20 +21412,6 @@
   "n:手甲新武学-手甲.奥义": {
    "skillId": null,
    "nameZh": "手甲新武学-手甲.奥义",
-   "label": {
-    "ja": "手甲・奥義",
-    "en": "Just Verdict",
-    "zh": "无义当诛",
-    "ko": "불의의 단죄",
-    "vi": "Không nghĩa thì phải trừng phạt",
-    "de": "Gerechtes Urteil",
-    "es": "Veredicto Justo",
-    "fr": "Verdict Juste",
-    "pt_br": "Veredito Justo",
-    "ru": "Справедливый приговор",
-    "th": "ผู้ไร้คุณธรรมสมควรถูกกำจัด",
-    "zh_tw": "無義當誅"
-   },
    "origin": "kongfu_specific",
    "skillType": "other",
    "nameFrom": "literal",
@@ -22405,25 +22391,25 @@
      6.9035
     ]
    },
-   "nameSource": "本番 skill_name (ja は旧表記を維持)"
+   "label": {
+    "ja": "不義天誅（2格天志）",
+    "en": "Vile Condemned Damage (2 bars of Heaven's Will)",
+    "zh": "无义当诛（2格天志）",
+    "ko": "불의의 단죄(천의 2칸)",
+    "vi": "Sát thương Không nghĩa thì phải trừng phạt (2 cách Chí trời)",
+    "de": "Verurteilter Niedertracht-Schaden (2 Balken Himmelswille)",
+    "es": "Daño de Condena Vil (2 barras de Voluntad Celestial)",
+    "fr": "Dégâts maudits vils (2 barres de Volonté céleste)",
+    "pt_br": "Dano Condenado Vil (2 barras de Vontade Celestial)",
+    "ru": "Гнусное проклятие: урон (2 деления Воли небес)",
+    "th": "ความเสียหายของอู๋อี้ตังจู (2ช่องเทียนจื้อ)",
+    "zh_tw": "無義當誅（2格天志）"
+   },
+   "nameSource": "field 0x60 の段ラベル (旧 ja は仮の名前なので公式名を採る)"
   },
   "n:手甲新武学-手甲.奥义（三格）": {
    "skillId": null,
    "nameZh": "手甲新武学-手甲.奥义（三格）",
-   "label": {
-    "ja": "手甲・奥義（三格）",
-    "en": "Just Verdict - End1",
-    "zh": "无义当诛·尽1",
-    "ko": "불의의 단죄·끝1",
-    "vi": "Không nghĩa thì phải trừng phạt·Hết1",
-    "de": "Gerechtes Urteil - Ende1",
-    "es": "Veredicto Justo - Final1",
-    "fr": "Verdict juste - Fin1",
-    "pt_br": "Veredito Justo - Fim1",
-    "ru": "Справедливый приговор - Финал1",
-    "th": "ผู้ไร้คุณธรรมสมควรถูกกำจัด·สิ้นสุด1",
-    "zh_tw": "無義當誅·盡1"
-   },
    "origin": "kongfu_specific",
    "skillType": "other",
    "nameFrom": "literal",
@@ -23403,25 +23389,25 @@
      8.9793
     ]
    },
-   "nameSource": "本番 skill_name (同名衝突のため連番 1) (ja は旧表記を維持)"
+   "label": {
+    "ja": "不義天誅・尽（3格天志）",
+    "en": "Vile Condemned: End Damage (3 bar of Heaven's Will)",
+    "zh": "无义当诛·尽（3格天志）",
+    "ko": "불의의 단죄(진)(천의 3칸)",
+    "vi": "Sát thương Không nghĩa thì phải trừng phạt·Hết（3 cách Chí trời）",
+    "de": "Verurteilter Niedertracht: Endschaden (3 Balken Himmelswille)",
+    "es": "Condena Vil: Daño Final (3 barra de Voluntad Celestial)",
+    "fr": "Maudit vil : Dégâts finaux (3 barre de Volonté céleste)",
+    "pt_br": "Condenado Vil: Dano Final (3 barra de Vontade Celestial)",
+    "ru": "Гнусное проклятие: финальный урон (3 деление Воли небес)",
+    "th": "ผู้ไร้คุณธรรมสมควรถูกกำจัด·สิ้นสุดความเสียหาย（3ช่องเจตจำนงแห่งสวรรค์）",
+    "zh_tw": "無義當誅·盡（3格天志）"
+   },
+   "nameSource": "field 0x60 の段ラベル (旧 ja は仮の名前なので公式名を採る)"
   },
   "n:手甲新武学-手甲.奥义（四格）": {
    "skillId": null,
    "nameZh": "手甲新武学-手甲.奥义（四格）",
-   "label": {
-    "ja": "手甲・奥義（四格）",
-    "en": "Just Verdict - End2",
-    "zh": "无义当诛·尽2",
-    "ko": "불의의 단죄·끝2",
-    "vi": "Không nghĩa thì phải trừng phạt·Hết2",
-    "de": "Gerechtes Urteil - Ende2",
-    "es": "Veredicto Justo - Final2",
-    "fr": "Verdict juste - Fin2",
-    "pt_br": "Veredito Justo - Fim2",
-    "ru": "Справедливый приговор - Финал2",
-    "th": "ผู้ไร้คุณธรรมสมควรถูกกำจัด·สิ้นสุด2",
-    "zh_tw": "無義當誅·盡2"
-   },
    "origin": "kongfu_specific",
    "skillType": "other",
    "nameFrom": "literal",
@@ -24395,7 +24381,21 @@
      8.9952
     ]
    },
-   "nameSource": "本番 skill_name (同名衝突のため連番 2) (ja は旧表記を維持)"
+   "label": {
+    "ja": "不義天誅・尽（4格天志）",
+    "en": "Vile Condemned: End Damage (4 bar of Heaven's Will)",
+    "zh": "无义当诛·尽（4格天志）",
+    "ko": "불의의 단죄(진)(천의 4칸)",
+    "vi": "Sát thương Không nghĩa thì phải trừng phạt·Hết (4 bậc Chí trời)",
+    "de": "Verurteilter Schurke: Endschaden (4 Balken Himmelswille)",
+    "es": "Condena Vil: Daño Final (4 barra de Voluntad Celestial)",
+    "fr": "Condamné Vil : Dégâts Finaux (4 barre de Volonté céleste)",
+    "pt_br": "Condenado Vil: Dano Final (4 barra da Vontade Celestial)",
+    "ru": "Проклятый нечестивец: Конечный урон (4 бар Воли небес)",
+    "th": "ผู้ไร้คุณธรรมสมควรถูกกำจัด·สิ้นสุดความเสียหาย（4ช่องเจตจำนงแห่งสวรรค์）",
+    "zh_tw": "無義當誅·盡（4格天志）"
+   },
+   "nameSource": "field 0x60 の段ラベル (旧 ja は仮の名前なので公式名を採る)"
   },
   "n:新手关卡江无浪武学-双斩": {
    "skillId": null,

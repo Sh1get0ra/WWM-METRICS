@@ -2000,17 +2000,17 @@
    "nameZh": "无名剑法-特殊技-退亦有方-突进",
    "label": {
     "ja": "剣・突進 (特殊技)",
-    "en": "Sword - Dash",
-    "zh": "剑·突进",
-    "ko": "검-돌진",
-    "vi": "Kiếm·Đột kích",
-    "de": "Schwert - Sprint",
-    "es": "Espada - Carrera",
-    "fr": "Épée - Ruée",
-    "pt_br": "Espada - Investida",
-    "ru": "Меч - Рывок",
-    "th": "ดาบ·พุ่งโจมตี",
-    "zh_tw": "劍·突進"
+    "en": "Sword - Dash (Sp)",
+    "zh": "剑·突进 (特殊技)",
+    "ko": "검-돌진 (특수 스킬)",
+    "vi": "Kiếm·Đột kích (kỹ năng đặc biệt)",
+    "de": "Schwert - Sprint (Spezialfähigkeit)",
+    "es": "Espada - Carrera (Habilidad Especial)",
+    "fr": "Épée - Ruée (Compétence Spéciale)",
+    "pt_br": "Espada - Investida (Habilidade Especial)",
+    "ru": "Меч - Рывок (Особый навык)",
+    "th": "ดาบ·พุ่งโจมตี (ทักษะพิเศษ)",
+    "zh_tw": "劍·突進 (特殊技)"
    },
    "origin": "kongfu_specific",
    "skillType": "special",
@@ -2997,13 +2997,13 @@
    "skillId": null,
    "nameZh": "无名剑法-主动技-出畏之-三连-1段",
    "label": {
-    "ja": "飛剣",
+    "ja": "畏れの現れ・飛剣",
     "en": "Daunting Strike - Flying Sword",
     "zh": "出畏之·飞剑",
     "ko": "공포의 급습·비검",
     "vi": "Xuất hiện không sợ hãi - Sát thương Kiếm Bay",
-    "de": "Einschüchternder Schlag - Fliegende Schwertschaden",
-    "es": "Golpe Intimidante - Daño de Espada Voladora",
+    "de": "Einschüchternder Schlag - Fliegender Schwertschaden",
+    "es": "Golpe Intimidante - Daño de la Espada Voladora",
     "fr": "Frappe Intimidante - Dégâts d'épée volante",
     "pt_br": "Golpe Intimidador - Dano da Espada Voadora",
     "ru": "Грозный удар - Урон Летающего Меча",
@@ -3012,6 +3012,7 @@
    },
    "origin": "kongfu_specific",
    "skillType": "active",
+   "baseSkillId": 20201101,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -3989,27 +3990,28 @@
      0.30008
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (旧 ja は仮の名前なので公式名を採る)"
   },
   "n:无名剑法-主动技-出畏之-三连-2段": {
    "skillId": null,
    "nameZh": "无名剑法-主动技-出畏之-三连-2段",
    "label": {
-    "ja": "連鎖の執念一段",
+    "ja": "畏れの現れ・連鎖の執念一段",
     "en": "Daunting Strike - Relentless Chase 1st Strike",
     "zh": "出畏之·执讯连连一段",
     "ko": "공포의 급습·심판의 연격 1단계",
-    "vi": "Xuất hiện không sợ hãi - Sát thương đoạn đầu của Liên tục thẩm vấn",
-    "de": "Einschüchternder Schlag - Schaden des 1. Schlags von Unerbittliche Verfolgung",
+    "vi": "Xuất hiện không sợ hãi - Liên tục thẩm vấn sát thương đoạn đầu",
+    "de": "Einschüchternder Schlag - Erster Schaden des Unerbittlichen Verfolgers",
     "es": "Golpe Intimidante - Daño del Primer Golpe de Persecución Implacable",
-    "fr": "Frappe Intimidante - Dégâts de la Première Frappe de Poursuite Implacable",
+    "fr": "Frappe Intimidante - Dégâts du premier coup de Poursuite Implacable",
     "pt_br": "Golpe Intimidador - Dano do 1º Golpe da Perseguição Implacável",
-    "ru": "Грозный удар - Неустанная погоня 1-й удар -",
-    "th": "ออกจากความกลัว - ความเสียหายจากการสอบสวนต่อเนื่องช่วงแรก",
+    "ru": "Грозный удар - Неустанная погоня 1-й удар",
+    "th": "ออกจากความกลัว - การสอบสวนต่อเนื่องความเสียหายช่วงแรก",
     "zh_tw": "出畏之·執訊連連一段"
    },
    "origin": "kongfu_specific",
    "skillType": "active",
+   "baseSkillId": 20201101,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -4987,13 +4989,13 @@
      0.45012
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (旧 ja は仮の名前なので公式名を採る)"
   },
   "n:无名剑法-主动技-出畏之-三连-3段": {
    "skillId": null,
    "nameZh": "无名剑法-主动技-出畏之-三连-3段",
    "label": {
-    "ja": "連鎖の執念二段",
+    "ja": "畏れの現れ・連鎖の執念二段",
     "en": "Daunting Strike - Relentless Chase 2nd Strike",
     "zh": "出畏之·执讯连连二段",
     "ko": "공포의 급습·심판의 연격 2단계",
@@ -5008,6 +5010,7 @@
    },
    "origin": "kongfu_specific",
    "skillType": "active",
+   "baseSkillId": 20201101,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -5985,27 +5988,28 @@
      0.7502
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (旧 ja は仮の名前なので公式名を採る)"
   },
   "n:无名剑法-蓄力技-无以为家-2档-1段": {
    "skillId": null,
    "nameZh": "无名剑法-蓄力技-无以为家-2档-1段",
    "label": {
     "ja": "家無き者・溜め二段階（無名心法未装備）",
-    "en": "Vagrant Sword - Charge Tier 2",
-    "zh": "无以为家·蓄力二档",
-    "ko": "방랑의 검법·차지 스킬 2단계",
-    "vi": "Không nơi nương tựa - sát thương tích lực cấp hai",
-    "de": "Vagabundenschwert - Ladestufe 2",
-    "es": "Espada Vagabunda - Daño de Carga Nivel 2",
-    "fr": "Épée Vagabonde - Niveau de charge 2",
-    "pt_br": "Espada do Andarilho - Dano de Carga Nível 2",
-    "ru": "Бродячий меч - урон заряда уровня 2",
-    "th": "ไร้ที่อยู่อาศัย1",
-    "zh_tw": "無以為家·蓄力二檔"
+    "en": "Vagrant Sword - Charged Skill Second Level",
+    "zh": "无以为家·蓄力二档（未装配无名心法）",
+    "ko": "방랑의 검법·차지 2단계(무명 심법 미장착)",
+    "vi": "Không nơi nương tựa - Tích lực cấp hai sát thương (chưa trang bị Tâm pháp vô danh)",
+    "de": "Vagabundenschwert - Schadenswert der zweiten Stufe der aufgeladenen Fähigkeit",
+    "es": "Espada Vagabunda - Daño de Nivel 2 de Habilidad Cargada",
+    "fr": "Épée Vagabonde - Dégâts de Compétence Chargée Niveau 2",
+    "pt_br": "Espada do Andarilho - Dano do Segundo Nível da Habilidade Carregada",
+    "ru": "Бродячий меч - Урон от Заряжаемого Навыка Второго Уровня",
+    "th": "ไร้ที่อยู่อาศัย - ชาร์จพลังระดับสองความเสียหาย (ไม่ได้ติดตั้งเคล็ดวิชาลึกลับ)",
+    "zh_tw": "無以為家·蓄力二檔（未裝配無名心法）"
    },
    "origin": "weapon_common",
    "skillType": "charged",
+   "baseSkillId": 202011021,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -6779,27 +6783,28 @@
      3.2691
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "n:无名剑法-蓄力技-无以为家-2档-2段": {
    "skillId": null,
    "nameZh": "无名剑法-蓄力技-无以为家-2档-2段",
    "label": {
     "ja": "家無き者・溜め二段階・第1の剣気（無名心法装備時）",
-    "en": "Vagrant Sword - Charge Tier 2 First Sword Energy",
-    "zh": "无以为家·蓄力二档第一道剑气",
-    "ko": "방랑의 검법·차지 스킬 2단계 첫 번째 검기",
-    "vi": "Không nơi nương tựa - sát thương kiếm khí đầu tiên của tích lực cấp hai",
-    "de": "Vagabundenschwert - Ladestufe 2 Erste Schwertenergie",
-    "es": "Espada Vagabunda - Daño de Primera Energía de Espada en Carga Nivel 2",
-    "fr": "Épée Vagabonde - Niveau de charge 2 Première énergie d'épée",
-    "pt_br": "Espada do Andarilho - Dano de Carga Nível 2 Primeira Energia de Espada",
-    "ru": "Бродячий меч - урон первой энергии меча уровня 2",
-    "th": "ไร้ที่อยู่อาศัย2",
-    "zh_tw": "無以為家·蓄力二檔第一道劍氣"
+    "en": "Vagrant Sword - 1st Sword Energy Damage from 2nd Stage Charge (with Sword Morph deployed)",
+    "zh": "无以为家·蓄力二档第一道剑气（装配无名心法）",
+    "ko": "방랑의 검법·차지 2단계 첫 번째 검기 피해 (무명 심법 장착 시)",
+    "vi": "Không nơi nương tựa - Tích lực cấp hai sát thương kiếm khí đầu tiên (đã trang bị Tâm pháp vô danh)",
+    "de": "Vagabundenschwert - 1. Schwertenergieschaden der 2. Ladeangriffsstufe (mit aktivierter Schwertwandlung)",
+    "es": "Espada Vagabunda - Daño de Energía de Espada 1° de Carga en 2° Etapa (con Morfosis de Espada desplegada)",
+    "fr": "Épée Vagabonde - Dégâts de la 1ère Énergie d'Épée lors d'une charge au 2ème niveau (avec Métamorphose de l'Épée déployée)",
+    "pt_br": "Espada do Andarilho - 1º Dano de Energia de Espada do 2º Estágio de Carga (com Morfar Espada ativado)",
+    "ru": "Бродячий меч - 1-й Урон от Энергии Меча при 2-м Этапе Заряда (с активированной Трансформацией Меча)",
+    "th": "ไร้ที่อยู่อาศัย - ชาร์จพลังระดับสองพลังดาบแรกความเสียหาย (ติดตั้งเคล็ดวิชาลึกลับ)",
+    "zh_tw": "無以為家·蓄力二檔第一道劍氣（裝配無名心法）"
    },
    "origin": "weapon_common",
    "skillType": "charged",
+   "baseSkillId": 202011021,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -7573,27 +7578,28 @@
      1.30764
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "n:无名剑法-蓄力技-无以为家-2档-3段": {
    "skillId": null,
    "nameZh": "无名剑法-蓄力技-无以为家-2档-3段",
    "label": {
     "ja": "家無き者・溜め二段階・第2の剣気（無名心法装備時）",
-    "en": "Vagrant Sword - Charge Tier 2 Second Sword Energy",
-    "zh": "无以为家·蓄力二档第二道剑气",
-    "ko": "방랑의 검법·차지 스킬 2단계 두 번째 검기",
-    "vi": "Không nơi nương tựa - sát thương kiếm khí thứ hai của tích lực cấp hai",
-    "de": "Vagabundenschwert - Ladestufe 2 Zweite Schwertenergie",
-    "es": "Espada Vagabunda - Daño de Segunda Energía de Espada en Carga Nivel 2",
-    "fr": "Épée Vagabonde - Niveau de charge 2 Seconde énergie d'épée",
-    "pt_br": "Espada do Andarilho - Dano de Carga Nível 2 Segunda Energia de Espada",
-    "ru": "Бродячий меч - урон второй энергии меча уровня 2",
-    "th": "ไร้ที่อยู่อาศัย3",
-    "zh_tw": "無以為家·蓄力二檔第二道劍氣"
+    "en": "Vagrant Sword - 2nd Sword Energy Damage from 2nd Stage Charge (with Sword Morph deployedd)",
+    "zh": "无以为家·蓄力二档第二道剑气（装配无名心法）",
+    "ko": "방랑의 검법·차지 2단계 두 번째 검기 피해 (무명 심법 장착 시)",
+    "vi": "Không nơi nương tựa - Sát thương kiếm khí thứ hai ở mức tích lực thứ hai (trang bị Tâm pháp vô danh)",
+    "de": "Vagabundenschwert - 2. Schwertenergieschaden der 2. Ladeangriffsstufe (mit aktivierter Schwertwandlung)",
+    "es": "Espada Vagabunda - Daño de Energía de Espada 2° de Carga en 2° Etapa (con Morfosis de Espada desplegada)",
+    "fr": "Épée Vagabonde - Dégâts de la 2ème Énergie d'Épée lors d'une charge au 2ème niveau (avec Métamorphose de l'Épée déployée)",
+    "pt_br": "Espada do Andarilho - 2º Dano de Energia de Espada do 2º Estágio de Carga (com Morfar Espada ativado)",
+    "ru": "Бродячий меч - 2-й Урон от Энергии Меча при 2-м Этапе Заряда (с активированной Трансформацией Меча)",
+    "th": "ไร้ที่อยู่อาศัย - ความเสียหายจากพลังดาบครั้งที่สองในระดับชาร์จพลังขั้นที่สอง (ติดตั้งเคล็ดวิชาลึกลับอู๋หมิง)",
+    "zh_tw": "無以為家·蓄力二檔第二道劍氣（裝配無名心法）"
    },
    "origin": "weapon_common",
    "skillType": "charged",
+   "baseSkillId": 202011021,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -8367,24 +8373,24 @@
      1.569168
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "n:无名剑法-蓄力技-无以为家-2档-4段": {
    "skillId": null,
    "nameZh": "无名剑法-蓄力技-无以为家-2档-4段",
    "label": {
     "ja": "家無き者・溜め二段階・第3の剣気（無名心法装備時）",
-    "en": "Vagrant Sword - Charge Tier 2 Third Sword Energy",
-    "zh": "无以为家·蓄力二档第三道剑气",
-    "ko": "방랑의 검법·차지 스킬 2단계 세 번째 검기",
-    "vi": "Không nơi nương tựa - sát thương kiếm khí thứ ba của tích lực cấp hai",
-    "de": "Vagabundenschwert - Ladestufe 2 Dritte Schwertenergie",
-    "es": "Espada Vagabunda - Daño de Tercera Energía de Espada en Carga Nivel 2",
-    "fr": "Épée Vagabonde - Niveau de charge 2 Troisième énergie d'épée",
-    "pt_br": "Espada do Andarilho - Dano de Carga Nível 2 Terceira Energia de Espada",
-    "ru": "Бродячий меч - урон третьей энергии меча уровня 2",
-    "th": "ไร้ที่อยู่อาศัย4",
-    "zh_tw": "無以為家·蓄力二檔第三道劍氣"
+    "en": "Vagrant Sword - 3rd Sword Energy Damage from 2nd Stage Charge (with Sword Morph deployed)",
+    "zh": "无以为家·蓄力二档第三道剑气（装配无名心法）",
+    "ko": "방랑의 검법·차지 2단계 세 번째 검기 피해 (무명 심법 장착 시)",
+    "vi": "Không nơi nương tựa - Sát thương kiếm khí thứ ba ở mức tích lực thứ hai (trang bị Tâm pháp vô danh)",
+    "de": "Vagabundenschwert - 3. Schwertenergieschaden der 2. Ladeangriffsstufe (mit aktivierter Schwertwandlung)",
+    "es": "Espada Vagabunda - Daño de Energía de Espada 3° de Carga en 2° Etapa (con Morfosis de Espada desplegada)",
+    "fr": "Épée Vagabonde - Dégâts de la 3ème Énergie d'Épée lors d'une charge au 2ème niveau (avec Métamorphose de l'Épée déployée)",
+    "pt_br": "Espada do Andarilho - 3º Dano de Energia de Espada do 2º Estágio de Carga (com Morfar Espada ativado)",
+    "ru": "Бродячий меч - 3-й Урон от Энергии Меча при 2-м Этапе Заряда (с активированной Трансформацией Меча)",
+    "th": "ไร้ที่อยู่อาศัย - ความเสียหายจากพลังดาบครั้งที่สามในระดับชาร์จพลังขั้นที่สอง (ติดตั้งเคล็ดวิชาลึกลับอู๋หมิง)",
+    "zh_tw": "無以為家·蓄力二檔第三道劍氣（裝配無名心法）"
    },
    "origin": "weapon_common",
    "skillType": "charged",
@@ -9161,7 +9167,7 @@
      1.830696
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   }
  }
 }

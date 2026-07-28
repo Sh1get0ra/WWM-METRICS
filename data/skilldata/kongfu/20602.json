@@ -4024,7 +4024,7 @@
    "skillId": 20602104,
    "nameZh": "重击1",
    "label": {
-    "ja": "重撃1",
+    "ja": "傘・重撃",
     "en": "Umbrella - Heavy Attack",
     "zh": "重击·伞",
     "ko": "강공격·우산",
@@ -5016,7 +5016,7 @@
      2.4845
     ]
    },
-   "nameSource": "基本技用語(重击) + 武器名 (ja は旧表記を維持)"
+   "nameSource": "基本技用語(重击) + 武器名 (旧 ja は仮の名前なので公式名を採る)"
   },
   "n:千香引魂蛊-奶伞.蓄力技-1段": {
    "skillId": null,
@@ -5027,16 +5027,17 @@
     "zh": "百露凋残·推伞",
     "ko": "백로의 이슬·우산 밀치기",
     "vi": "Trăm giọt sương tàn - Sát thương đẩy dù",
-    "de": "Blasses Blütenblatt - Schirm-Drücken-Schaden",
+    "de": "Blasses Blütenblatt - Schirm-Druck-Schaden",
     "es": "Pétalo Pálido - Daño de Empujón con Sombrilla",
-    "fr": "Pâle Pétale - Dégâts de Pousser avec Parapluie",
-    "pt_br": "Pétala Pálida - Dano de Empurrão com Guarda-chuva",
+    "fr": "Pâle Pétale - Dégâts de Poussée de Parapluie",
+    "pt_br": "Pétala Pálida - Dano do Empurrão com Guarda-chuva",
     "ru": "Бледный Лепесток - Урон от толчка зонтом",
     "th": "หยาดน้ำค้างร่วงโรย - ความเสียหายจากการผลักร่ม",
     "zh_tw": "百露凋殘·推傘"
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
+   "baseSkillId": 20602102,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -6008,7 +6009,7 @@
      0.243
     ]
    },
-   "nameSource": "client 段説明"
+   "nameSource": "field 0x60 の段ラベル"
   },
   "n:千香引魂蛊-奶伞.蓄力技-2段": {
    "skillId": null,
@@ -6021,14 +6022,15 @@
     "vi": "Trăm giọt sương tàn - Sát thương xoay mỗi đoạn mức một",
     "de": "Blasses Blütenblatt - Drehungsschaden pro Treffer in Stufe",
     "es": "Pétalo Pálido - Daño por Golpe en Rotación de Etapa",
-    "fr": "Pâle Pétale - Dégâts par Coup lors de la Rotation d'Étape",
-    "pt_br": "Pétala Pálida - Dano de Rotação por Golpe na Fase",
+    "fr": "Pâle Pétale - Dégâts de rotation par coup à l'étape",
+    "pt_br": "Pétala Pálida - Dano por Golpe na Rotação da Fase",
     "ru": "Бледный Лепесток - Урон за удар на этапе вращения",
     "th": "หยาดน้ำค้างร่วงโรย - ความเสียหายหมุนแต่ละช่วงของระดับที่หนึ่ง",
     "zh_tw": "百露凋殘·第一檔每段旋轉"
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
+   "baseSkillId": 20602102,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -7000,7 +7002,7 @@
      0.0486
     ]
    },
-   "nameSource": "client 段説明"
+   "nameSource": "field 0x60 の段ラベル"
   },
   "n:千香引魂蛊-奶伞.蓄力技-3段": {
    "skillId": null,
@@ -7013,7 +7015,7 @@
     "vi": "Trăm giọt sương tàn - Sát thương xoay chuyển từ mức một sang mức hai",
     "de": "Blasses Blütenblatt - Drehungsschaden von Stufe 1 zu Stufe 2",
     "es": "Pétalo Pálido - Daño de Giro de Etapa 1 a Etapa 2",
-    "fr": "Pâle Pétale - Dégâts de Tournoiement de l'Étape 1 à l'Étape 2",
+    "fr": "Pâle Pétale - Dégâts de tournoiement de l'étape 1 à l'étape 2",
     "pt_br": "Pétala Pálida - Dano de Giro da Fase 1 para a Fase 2",
     "ru": "Бледный Лепесток - Урон от вращения с этапа 1 до этапа 2",
     "th": "หยาดน้ำค้างร่วงโรย - ความเสียหายหมุนเปลี่ยนจากระดับที่หนึ่งเป็นระดับที่สอง",
@@ -7021,6 +7023,7 @@
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
+   "baseSkillId": 20602102,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -7992,7 +7995,7 @@
      0.243
     ]
    },
-   "nameSource": "client 段説明"
+   "nameSource": "field 0x60 の段ラベル"
   },
   "n:千香引魂蛊-奶伞.蓄力技-4段": {
    "skillId": null,
@@ -8013,6 +8016,7 @@
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
+   "baseSkillId": 20602102,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -8984,7 +8988,7 @@
      0.0729
     ]
    },
-   "nameSource": "client 段説明"
+   "nameSource": "field 0x60 の段ラベル"
   },
   "n:千香引魂蛊-奶伞.蓄力技-5段": {
    "skillId": null,
@@ -9005,6 +9009,7 @@
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
+   "baseSkillId": 20602102,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -9976,14 +9981,16 @@
      0.972
     ]
    },
-   "nameSource": "client 段説明"
+   "nameSource": "field 0x60 の段ラベル"
   },
   "n:轻击-1段": {
    "skillId": null,
    "nameZh": "轻击-1段",
    "origin": "kongfu_specific",
    "skillType": "light",
-   "nameFrom": "weaponType",
+   "baseSkillId": 20601001,
+   "nameFrom": "skill",
+   "nameRefId": "20601001",
    "nameSeq": 1,
    "frame": null,
    "cooldown": null,
@@ -10967,7 +10974,9 @@
    "nameZh": "轻击-2段",
    "origin": "kongfu_specific",
    "skillType": "light",
-   "nameFrom": "weaponType",
+   "baseSkillId": 20601001,
+   "nameFrom": "skill",
+   "nameRefId": "20601001",
    "nameSeq": 2,
    "frame": null,
    "cooldown": null,
@@ -11951,7 +11960,9 @@
    "nameZh": "轻击-3段",
    "origin": "kongfu_specific",
    "skillType": "light",
-   "nameFrom": "weaponType",
+   "baseSkillId": 20601001,
+   "nameFrom": "skill",
+   "nameRefId": "20601001",
    "nameSeq": 3,
    "frame": null,
    "cooldown": null,
@@ -12934,7 +12945,7 @@
    "skillId": null,
    "nameZh": "跳劈",
    "label": {
-    "ja": "跳び斬り",
+    "ja": "傘・跳び斬り",
     "en": "Umbrella - Jump Strike",
     "zh": "伞·跳劈",
     "ko": "우산·도약 베기",
@@ -13926,13 +13937,13 @@
      0.4895
     ]
    },
-   "nameSource": "本番 skill_name (ja は旧表記を維持)"
+   "nameSource": "本番 skill_name (旧 ja は仮の名前なので公式名を採る)"
   },
   "n:空中轻击": {
    "skillId": null,
    "nameZh": "空中轻击",
    "label": {
-    "ja": "空中軽撃",
+    "ja": "傘・空中軽撃",
     "en": "Umbrella - Aerial Light Attack",
     "zh": "伞·空中轻击",
     "ko": "우산·공중 약공격",
@@ -14924,28 +14935,17 @@
      0.4027
     ]
    },
-   "nameSource": "本番 skill_name (ja は旧表記を維持)"
+   "nameSource": "本番 skill_name (旧 ja は仮の名前なので公式名を採る)"
   },
   "n:九重春色-袖剑.轻击-1段": {
    "skillId": null,
    "nameZh": "九重春色-袖剑.轻击-1段",
-   "label": {
-    "ja": "袖剣・軽撃1",
-    "en": "Hidden Sword - Light Attack1",
-    "zh": "袖剑·轻击1",
-    "ko": "암살검-약공격1",
-    "vi": "Kiếm tay áo·Đánh nhẹ1",
-    "de": "Verborgenes Schwert - Leichter Angriff1",
-    "es": "Espada Oculta - Ataque Ligero1",
-    "fr": "Épée Cachée - Attaque Légère1",
-    "pt_br": "Espada Oculta - Ataque Leve1",
-    "ru": "Скрытый меч - Легкая атака1",
-    "th": "ดาบซ่อนในแขน·โจมตีเบา1",
-    "zh_tw": "袖劍·輕擊1"
-   },
    "origin": "kongfu_specific",
    "skillType": "light",
-   "nameFrom": "literal",
+   "baseSkillId": 20601201,
+   "nameFrom": "skill",
+   "nameRefId": "20601201",
+   "nameSeq": 1,
    "frame": null,
    "cooldown": null,
    "byLevel": {
@@ -15921,29 +15921,17 @@
      0.269775,
      0.298312
     ]
-   },
-   "nameSource": "本番 skill_name + 段番号"
+   }
   },
   "n:九重春色-袖剑.轻击-2段": {
    "skillId": null,
    "nameZh": "九重春色-袖剑.轻击-2段",
-   "label": {
-    "ja": "袖剣・軽撃2",
-    "en": "Hidden Sword - Light Attack2",
-    "zh": "袖剑·轻击2",
-    "ko": "암살검-약공격2",
-    "vi": "Kiếm tay áo·Đánh nhẹ2",
-    "de": "Verborgenes Schwert - Leichter Angriff2",
-    "es": "Espada Oculta - Ataque Ligero2",
-    "fr": "Épée Cachée - Attaque Légère2",
-    "pt_br": "Espada Oculta - Ataque Leve2",
-    "ru": "Скрытый меч - Легкая атака2",
-    "th": "ดาบซ่อนในแขน·โจมตีเบา2",
-    "zh_tw": "袖劍·輕擊2"
-   },
    "origin": "kongfu_specific",
    "skillType": "light",
-   "nameFrom": "literal",
+   "baseSkillId": 20601201,
+   "nameFrom": "skill",
+   "nameRefId": "20601201",
+   "nameSeq": 2,
    "frame": null,
    "cooldown": null,
    "byLevel": {
@@ -16919,29 +16907,17 @@
      0.593505,
      0.656288
     ]
-   },
-   "nameSource": "本番 skill_name + 段番号"
+   }
   },
   "n:九重春色-袖剑.轻击-3段": {
    "skillId": null,
    "nameZh": "九重春色-袖剑.轻击-3段",
-   "label": {
-    "ja": "袖剣・軽撃3",
-    "en": "Hidden Sword - Light Attack3",
-    "zh": "袖剑·轻击3",
-    "ko": "암살검-약공격3",
-    "vi": "Kiếm tay áo·Đánh nhẹ3",
-    "de": "Verborgenes Schwert - Leichter Angriff3",
-    "es": "Espada Oculta - Ataque Ligero3",
-    "fr": "Épée Cachée - Attaque Légère3",
-    "pt_br": "Espada Oculta - Ataque Leve3",
-    "ru": "Скрытый меч - Легкая атака3",
-    "th": "ดาบซ่อนในแขน·โจมตีเบา3",
-    "zh_tw": "袖劍·輕擊3"
-   },
    "origin": "kongfu_specific",
    "skillType": "light",
-   "nameFrom": "literal",
+   "baseSkillId": 20601201,
+   "nameFrom": "skill",
+   "nameRefId": "20601201",
+   "nameSeq": 3,
    "frame": null,
    "cooldown": null,
    "byLevel": {
@@ -17917,29 +17893,17 @@
      0.64746,
      0.71595
     ]
-   },
-   "nameSource": "本番 skill_name + 段番号"
+   }
   },
   "n:九重春色-袖剑.轻击-4段": {
    "skillId": null,
    "nameZh": "九重春色-袖剑.轻击-4段",
-   "label": {
-    "ja": "袖剣・軽撃4",
-    "en": "Hidden Sword - Light Attack4",
-    "zh": "袖剑·轻击4",
-    "ko": "암살검-약공격4",
-    "vi": "Kiếm tay áo·Đánh nhẹ4",
-    "de": "Verborgenes Schwert - Leichter Angriff4",
-    "es": "Espada Oculta - Ataque Ligero4",
-    "fr": "Épée Cachée - Attaque Légère4",
-    "pt_br": "Espada Oculta - Ataque Leve4",
-    "ru": "Скрытый меч - Легкая атака4",
-    "th": "ดาบซ่อนในแขน·โจมตีเบา4",
-    "zh_tw": "袖劍·輕擊4"
-   },
    "origin": "kongfu_specific",
    "skillType": "light",
-   "nameFrom": "literal",
+   "baseSkillId": 20601201,
+   "nameFrom": "skill",
+   "nameRefId": "20601201",
+   "nameSeq": 4,
    "frame": null,
    "cooldown": null,
    "byLevel": {
@@ -18915,28 +18879,28 @@
      0.64746,
      0.71595
     ]
-   },
-   "nameSource": "本番 skill_name + 段番号"
+   }
   },
   "n:九重春色-袖剑.重击-1段": {
    "skillId": null,
    "nameZh": "九重春色-袖剑.重击-1段",
    "label": {
     "ja": "袖剣・重撃1",
-    "en": "Hidden Sword - Heavy Attack1",
+    "en": "Hidden Sword - Heavy Attack - Three attacks that deal",
     "zh": "袖剑·重击1",
     "ko": "암살검-강공격1",
     "vi": "Kiếm tay áo·Đánh mạnh1",
-    "de": "Verborgenes Schwert - Starker Angriff1",
-    "es": "Espada Oculta - Ataque Pesado1",
-    "fr": "Épée cachée - Attaque lourde1",
-    "pt_br": "Espada Oculta - Ataque Pesado1",
-    "ru": "Скрытый меч - Тяжелая атака1",
+    "de": "Verborgenes Schwert - Starker Angriff - Drei Angriffe, die jeweils",
+    "es": "Espada Oculta - Ataque Pesado - Tres ataques que infligen",
+    "fr": "Épée cachée - Attaque lourde - Trois attaques infligeant respectivement",
+    "pt_br": "Espada Oculta - Ataque Pesado - Três ataques que causam",
+    "ru": "Скрытый меч - Тяжелая атака - Три атаки, наносящие",
     "th": "ดาบลับ·โจมตีหนัก1",
     "zh_tw": "袖劍·重擊1"
    },
    "origin": "kongfu_specific",
    "skillType": "heavy",
+   "baseSkillId": 20601206,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -19914,27 +19878,28 @@
      0.15552
     ]
    },
-   "nameSource": "本番 skill_name + 段番号"
+   "nameSource": "client 段説明"
   },
   "n:九重春色-袖剑.重击-2段": {
    "skillId": null,
    "nameZh": "九重春色-袖剑.重击-2段",
    "label": {
     "ja": "袖剣・重撃2",
-    "en": "Hidden Sword - Heavy Attack2",
+    "en": "Hidden Sword - Heavy Attack - and",
     "zh": "袖剑·重击2",
     "ko": "암살검-강공격2",
     "vi": "Kiếm tay áo·Đánh mạnh2",
-    "de": "Verborgenes Schwert - Starker Angriff2",
-    "es": "Espada Oculta - Ataque Pesado2",
-    "fr": "Épée cachée - Attaque lourde2",
-    "pt_br": "Espada Oculta - Ataque Pesado2",
-    "ru": "Скрытый меч - Тяжелая атака2",
+    "de": "Verborgenes Schwert - Starker Angriff - und",
+    "es": "Espada Oculta - Ataque Pesado - y",
+    "fr": "Épée cachée - Attaque lourde - et",
+    "pt_br": "Espada Oculta - Ataque Pesado - e",
+    "ru": "Скрытый меч - Тяжелая атака - и",
     "th": "ดาบลับ·โจมตีหนัก2",
     "zh_tw": "袖劍·重擊2"
    },
    "origin": "kongfu_specific",
    "skillType": "heavy",
+   "baseSkillId": 20601206,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -20912,27 +20877,28 @@
      0.23328
     ]
    },
-   "nameSource": "本番 skill_name + 段番号"
+   "nameSource": "client 段説明"
   },
   "n:九重春色-袖剑.重击-3段": {
    "skillId": null,
    "nameZh": "九重春色-袖剑.重击-3段",
    "label": {
     "ja": "袖剣・重撃3",
-    "en": "Hidden Sword - Heavy Attack3",
+    "en": "Hidden Sword - Heavy Attack - damage respectively",
     "zh": "袖剑·重击3",
     "ko": "암살검-강공격3",
     "vi": "Kiếm tay áo·Đánh mạnh3",
-    "de": "Verborgenes Schwert - Starker Angriff3",
-    "es": "Espada Oculta - Ataque Pesado3",
-    "fr": "Épée cachée - Attaque lourde3",
-    "pt_br": "Espada Oculta - Ataque Pesado3",
-    "ru": "Скрытый меч - Тяжелая атака3",
+    "de": "Verborgenes Schwert - Starker Angriff - Schaden verursachen",
+    "es": "Espada Oculta - Ataque Pesado - de daño respectivamente",
+    "fr": "Épée cachée - Attaque lourde - dégâts",
+    "pt_br": "Espada Oculta - Ataque Pesado - de",
+    "ru": "Скрытый меч - Тяжелая атака - урона соответственно",
     "th": "ดาบลับ·โจมตีหนัก3",
     "zh_tw": "袖劍·重擊3"
    },
    "origin": "kongfu_specific",
    "skillType": "heavy",
+   "baseSkillId": 20601206,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -21910,7 +21876,7 @@
      0.3888
     ]
    },
-   "nameSource": "本番 skill_name + 段番号"
+   "nameSource": "client 段説明"
   }
  }
 }

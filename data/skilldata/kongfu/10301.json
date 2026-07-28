@@ -1092,7 +1092,7 @@
    "skillId": null,
    "nameZh": "轻击",
    "label": {
-    "ja": "軽撃",
+    "ja": "扇・軽撃",
     "en": "Fan - Light Attack",
     "zh": "轻击·扇",
     "ko": "약공격·부채",
@@ -2078,7 +2078,7 @@
      1.9837
     ]
    },
-   "nameSource": "本番 skill_name (ja は旧表記を維持)"
+   "nameSource": "本番 skill_name (旧 ja は仮の名前なので公式名を採る)"
   },
   "n:突进": {
    "skillId": null,

@@ -11,12 +11,12 @@
   "n:绳镖新武学-绳镖.蓄力技新-2段",
   "20703101",
   "20703102",
+  "20703105",
   "20700605",
   "20700001",
   "20700002",
   "20700003",
-  "20700004",
-  "20703105"
+  "20700004"
  ],
  "skills": {
   "20703101": {
@@ -5766,20 +5766,21 @@
    "nameZh": "绳镖新武学-绳镖.蓄力技新-1段",
    "label": {
     "ja": "乱撃の索1",
-    "en": "Crisscross Stance - Final strike",
-    "zh": "纵横势·最后一击",
-    "ko": "종횡무진의 기세·최후의 일격",
-    "vi": "Thế tung hoành - Sát thương đòn cuối cùng",
-    "de": "Kreuzstellung - Schaden des finalen Schlags",
-    "es": "Postura Entrecruzada - Daño del Golpe Final",
-    "fr": "Position Croisée - Dégâts de la Frappe Finale",
-    "pt_br": "Postura Cruzada - Dano do Golpe Final",
-    "ru": "Перекрёстная стойка - Урон финального удара",
-    "th": "ท่าพุ่งทะลุแนว1",
-    "zh_tw": "縱橫勢·最後一擊"
+    "en": "Crisscross Stance - Rope Dart Swing Damage Per Hit",
+    "zh": "纵横势·甩动绳镖每段",
+    "ko": "종횡무진의 기세·승표 휘두르기 단계별",
+    "vi": "Thế tung hoành - Đòn sát thương mỗi đoạn khi vung dây phi tiêu",
+    "de": "Kreuzstellung - Seildolch-Schwung-Schaden pro Treffer",
+    "es": "Postura Entrecruzada - Daño por Golpe del Columpio con Dardo con Cuerda",
+    "fr": "Position Croisée - Dégâts par Coup de Balançoire de Dard-Corde",
+    "pt_br": "Postura Cruzada - Dano por Golpe do Balanço do Dardo de Corda",
+    "ru": "Перекрёстная стойка - Урон за удар при вращении веревочным дротиком",
+    "th": "ท่าพุ่งทะลุแนว - ความเสียหายแต่ละช่วงจากการเหวี่ยงเชือกปลายแหลม",
+    "zh_tw": "縱橫勢·甩動繩鏢每段"
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
+   "baseSkillId": 20703006,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -6757,27 +6758,28 @@
      0.108801
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "n:绳镖新武学-绳镖.蓄力技新-2段": {
    "skillId": null,
    "nameZh": "绳镖新武学-绳镖.蓄力技新-2段",
    "label": {
     "ja": "乱撃の索2",
-    "en": "Crisscross Stance - Enhanced",
-    "zh": "纵横势·强化",
-    "ko": "종횡무진의 기세·강화",
-    "vi": "Thế tung hoành - tăng cường",
-    "de": "Kreuzstellung - Verstärkt",
-    "es": "Postura Entrecruzada - Mejorado",
-    "fr": "Position Croisée - Amélioré",
-    "pt_br": "Postura Cruzada - Aprimorado",
-    "ru": "Перекрёстная стойка - Усиленный",
-    "th": "ท่าพุ่งทะลุแนว2",
-    "zh_tw": "縱橫勢·強化"
+    "en": "Crisscross Stance - Final Strike",
+    "zh": "纵横势·最后一击",
+    "ko": "종횡무진의 기세·최후의 일격",
+    "vi": "Thế tung hoành - Sát thương đòn cuối cùng",
+    "de": "Kreuzstellung - Endschlag-Schaden",
+    "es": "Postura Entrecruzada - Daño del Golpe Final",
+    "fr": "Position Croisée - Dégâts de Frappe Finale",
+    "pt_br": "Postura Cruzada - Dano do Golpe Final",
+    "ru": "Перекрёстная стойка - Урон от финального удара",
+    "th": "ท่าพุ่งทะลุแนว - ความเสียหายจากการโจมตีครั้งสุดท้าย",
+    "zh_tw": "縱橫勢·最後一擊"
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
+   "baseSkillId": 20703006,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -7755,7 +7757,7 @@
      0.507738
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   }
  }
 }

@@ -1012,17 +1012,17 @@
    "nameZh": "无名枪法-蓄力技-扫连山-1档",
    "label": {
     "ja": "連山一掃・一段",
-    "en": "Storm Dance",
-    "zh": "扫连山",
-    "ko": "산해참",
-    "vi": "Quét Liên Sơn",
-    "de": "Sturmtanz",
-    "es": "Danza de la Tormenta",
-    "fr": "Danse de la tempête",
-    "pt_br": "Dança da Tempestade",
-    "ru": "Танец бури",
-    "th": "กวาดภูเขาเชื่อมต่อ",
-    "zh_tw": "掃連山"
+    "en": "Storm Dance - Stage 1 Charged Spear Tip + Stage 1 Charged Spear Butt",
+    "zh": "扫连山·第一段蓄力枪尖 + 第一段蓄力枪尾",
+    "ko": "산해참·1단계 차지 창날 + 1단계 차지 창대 끝",
+    "vi": "Quét Liên Sơn - Sát thương đầu súng tích lực đoạn đầu + Sát thương đuôi súng Tích lực đoạn thứ nhất",
+    "de": "Sturmtanz - Stufe 1 Geladene Speerspitzen-Schaden + Stufe 1 Aufgeladener Speerstoß-Schaden",
+    "es": "Danza de la Tormenta - Daño de Punta de Lanza Cargada en Etapa 1 + Etapa 1 Daño de Punta de Lanza Cargada",
+    "fr": "Danse de la tempête - Dégâts de Pointe de Lance Chargée Étape 1 + Étape 1 Dégâts de Coup de Lance Chargé",
+    "pt_br": "Dança da Tempestade - Dano da Ponta de Lança Carregada na Fase 1 + Fase 1 Dano da Ponta da Lança Carregada",
+    "ru": "Танец бури - Этап 1 Урон заряженного острия копья + Этап 1 Урон от заряженного удара древком копья",
+    "th": "กวาดภูเขาเชื่อมต่อ - หนึ่งช่วงชาร์จพลังปลายหอกความเสียหาย + ความเสียหายปลายหอกชาร์จพลังขั้นที่หนึ่ง",
+    "zh_tw": "掃連山·第一段蓄力槍尖 + 第一段蓄力槍尾"
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
@@ -2025,7 +2025,7 @@
      0.100675
     ]
    },
-   "nameSource": "本番 skill_name (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "20102105": {
    "skillId": 20102105,
@@ -4000,16 +4000,16 @@
    "nameZh": "无名枪法-蓄力技-扫连山-2档-1段",
    "label": {
     "ja": "連山一掃・二段",
-    "en": "Storm Dance - Second stage charge tip + Second stage charge tail",
+    "en": "Storm Dance - Stage 2 Charged Spear Tip + Stage 2 Charged Spear Butt",
     "zh": "扫连山·第二段蓄力枪尖 + 第二段蓄力枪尾",
     "ko": "산해참·2단계 차지 창날 + 2단계 차지 창대 끝",
-    "vi": "Quét Liên Sơn - Đoạn thứ hai tích lực đầu súng + Đoạn thứ hai tích lực đuôi súng",
-    "de": "Sturmtanz - Zweite Stufe Ladungsspitze + Zweite Stufe Ladungsende",
-    "es": "Danza de la Tormenta - Consejo de carga segunda etapa + Cola de carga segunda etapa",
-    "fr": "Danse de la Tempête - Conseil de charge deuxième étape + Fin de charge deuxième étape",
-    "pt_br": "Dança da Tempestade - Dica de carga da segunda fase + Finalização da carga da segunda fase",
-    "ru": "Танец бури - Второй этап заряда (начало) + Второй этап заряда (конец)",
-    "th": "กวาดภูเขาเชื่อมต่อ - ขั้นที่สองชาร์จพลังปลายหอก + ขั้นที่สองชาร์จพลังท้ายหอก",
+    "vi": "Quét Liên Sơn - Sát thương mũi súng Tích lực đoạn thứ hai + Sát thương đuôi súng Tích lực đoạn thứ hai",
+    "de": "Sturmtanz - Stufe 2 Aufgeladener Speerspitzenschaden + Stufe 2 Aufgeladener Speerstoß-Schaden",
+    "es": "Danza de la Tormenta - Etapa 2 Daño de Punta de Lanza Cargada + Etapa 2 Daño de Punta de Lanza Cargada",
+    "fr": "Danse de la Tempête - Étape 2 Dégâts de Pointe de Lance Chargée + Étape 2 Dégâts de Coup de Lance Chargé",
+    "pt_br": "Dança da Tempestade - Fase 2 Dano da Ponta da Lança Carregada + Fase 2 Dano da Ponta da Lança Carregada",
+    "ru": "Танец бури - Этап 2 Урон от заряженного удара острием копья + Этап 2 Урон от заряженного удара древком копья",
+    "th": "กวาดภูเขาเชื่อมต่อ - ความเสียหายปลายหอกชาร์จพลังขั้นที่สอง + ความเสียหายท้ายหอกชาร์จพลังขั้นที่สอง",
     "zh_tw": "掃連山·第二段蓄力槍尖 + 第二段蓄力槍尾"
    },
    "origin": "weapon_common",
@@ -4040,6 +4040,7 @@
     }
    ],
    "bundleIndex": 1,
+   "baseSkillId": 201021021,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -4813,23 +4814,23 @@
      0.22535
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "n:无名枪法-蓄力技-扫连山-2档-2段": {
    "skillId": null,
    "nameZh": "无名枪法-蓄力技-扫连山-2档-2段",
    "label": {
     "ja": "連山一掃・横回転",
-    "en": "Storm Dance - Charged horizontal spin",
+    "en": "Storm Dance - Charged Horizontal Spin",
     "zh": "扫连山·蓄力横转",
     "ko": "산해참·차지 횡회전",
-    "vi": "Quét Liên Sơn - Tích lực xoay ngang",
-    "de": "Sturmtanz - Geladene horizontale Drehung",
-    "es": "Danza de la Tormenta - Giro horizontal cargado",
-    "fr": "Danse de la Tempête - Tournoiement horizontal chargé",
-    "pt_br": "Dança da Tempestade - Giro horizontal carregado",
-    "ru": "Танец бури - Заряженное горизонтальное вращение",
-    "th": "กวาดภูเขาเชื่อมต่อ - ชาร์จพลังหมุนแนวนอน",
+    "vi": "Quét Liên Sơn - Sát thương xoay ngang Tích lực",
+    "de": "Sturmtanz - Aufgeladener Horizontal-Dreh-Schaden",
+    "es": "Danza de la Tormenta - Daño de Giro Horizontal Cargado",
+    "fr": "Danse de la Tempête - Dégâts de Tournoiement Horizontal Chargé",
+    "pt_br": "Dança da Tempestade - Dano do Giro Horizontal Carregado",
+    "ru": "Танец бури - Урон от заряженного горизонтального вращения",
+    "th": "กวาดภูเขาเชื่อมต่อ - ความเสียหายหมุนข้างชาร์จพลัง",
     "zh_tw": "掃連山·蓄力橫轉"
    },
    "origin": "weapon_common",
@@ -4860,6 +4861,7 @@
     }
    ],
    "bundleIndex": 2,
+   "baseSkillId": 201021021,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -5633,23 +5635,23 @@
      1.02432
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "n:无名枪法-蓄力技-扫连山-2档-3段": {
    "skillId": null,
    "nameZh": "无名枪法-蓄力技-扫连山-2档-3段",
    "label": {
     "ja": "連山一掃・突きフィニッシュ",
-    "en": "Storm Dance - Charged forward thrust finisher",
+    "en": "Storm Dance - Charged Forward Thrust Finisher",
     "zh": "扫连山·蓄力前戳终结",
     "ko": "산해참·차지 전방 찌르기 마무리",
-    "vi": "Quét Liên Sơn - Tích lực đâm trước kết thúc",
-    "de": "Sturmtanz - Geladener Vorwärtsstoß-Abschluss",
-    "es": "Danza de la Tormenta - Remate de empuje frontal cargado",
-    "fr": "Danse de la Tempête - Finisseur de poussée avant chargée",
-    "pt_br": "Dança da Tempestade - Finalizador de impulso para frente carregado",
-    "ru": "Танец бури - Заряженный завершающий удар вперед",
-    "th": "กวาดภูเขาเชื่อมต่อ - ชาร์จพลังแทงไปข้างหน้าเพื่อจุดจบ",
+    "vi": "Quét Liên Sơn - Sát thương kết thúc đâm trước Tích lực",
+    "de": "Sturmtanz - Aufgeladener Vorwärtsstoß-Finisher-Schaden",
+    "es": "Danza de la Tormenta - Daño Final de Empuje Frontal Cargado",
+    "fr": "Danse de la Tempête - Dégâts Finaux de Poussée en Avant Chargée",
+    "pt_br": "Dança da Tempestade - Dano Final do Impulso para Frente Carregado",
+    "ru": "Танец бури - Урон от завершающего заряженного прямого удара",
+    "th": "กวาดภูเขาเชื่อมต่อ - ความเสียหายจบท่าแทงหน้าชาร์จพลัง",
     "zh_tw": "掃連山·蓄力前戳終結"
    },
    "origin": "weapon_common",
@@ -5680,6 +5682,7 @@
     }
    ],
    "bundleIndex": 3,
+   "baseSkillId": 201021021,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -6453,7 +6456,7 @@
      2.04864
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   }
  }
 }

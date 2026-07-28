@@ -30,17 +30,17 @@
    "nameZh": "积矩九剑-蓄力技-次二衡径数",
    "label": {
     "ja": "次二衡の径数・溜め2段階",
-    "en": "Second Track Slash2",
-    "zh": "积矩九剑-蓄力技-次二衡径数2",
-    "ko": "내공응결2",
-    "vi": "Đường cân bằng nội bộ hai2",
-    "de": "Zweite Spur-Schlag2",
-    "es": "Tajo de Segunda Vía2",
-    "fr": "Entaille de la seconde voie2",
-    "pt_br": "Golpe de Trilha Secundária2",
-    "ru": "Рассечение второй тропы2",
-    "th": "เส้นทางสมดุลสอง2",
-    "zh_tw": "次二衡徑數2"
+    "en": "Second Track Slash - 2nd Stage Charge",
+    "zh": "次二衡径数·蓄力二档",
+    "ko": "내공응결·차지 스킬 2단계",
+    "vi": "Đường cân bằng nội bộ hai - Tích lực cấp hai",
+    "de": "Zweite Spur-Schlag - Aufladeschaden der 2. Stufe",
+    "es": "Tajo de Segunda Vía - Daño de Carga de la 2ª fase",
+    "fr": "Entaille de la seconde voie - Dégâts de charge de la 2ème étape",
+    "pt_br": "Golpe de Trilha Secundária - Dano de Carga do 2º Estágio",
+    "ru": "Рассечение второй тропы - 2-й этап заряженного урона",
+    "th": "เส้นทางสมดุลสอง - ชาร์จพลังระดับสองความเสียหาย",
+    "zh_tw": "次二衡徑數·蓄力二檔"
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
@@ -1021,7 +1021,7 @@
      0.9719
     ]
    },
-   "nameSource": "本番 skill_name (同名衝突のため連番 2) (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "20202109": {
    "skillId": 20202109,
@@ -2012,20 +2012,21 @@
    "nameZh": "积矩九剑-主动技-内一衡径数-1段",
    "label": {
     "ja": "内一衡の径数・第一段",
-    "en": "Inner Track Slash1",
-    "zh": "内一衡径数1",
-    "ko": "내공운행1",
-    "vi": "Đường cân bằng nội bộ một1",
-    "de": "Innere Spur-Hieb1",
-    "es": "Tajo de Pista Interna1",
-    "fr": "Entaille de la Voie Intérieure1",
-    "pt_br": "Golpe Interno1",
-    "ru": "Рассечение внутренней тропы1",
-    "th": "เส้นทางสมดุลหนึ่ง1",
-    "zh_tw": "內一衡徑數1"
+    "en": "Inner Track Slash - 1st Stage",
+    "zh": "内一衡径数·第一段",
+    "ko": "내공운행·1단계",
+    "vi": "Đường cân bằng nội bộ một - Sát thương giai đoạn đầu",
+    "de": "Innere Spur-Hieb - Schaden der 1. Stufe",
+    "es": "Tajo de Pista Interna - Daño de la 1ª fase",
+    "fr": "Entaille de la Voie Intérieure - Dégâts de la première étape",
+    "pt_br": "Golpe Interno - Dano do 1º Estágio",
+    "ru": "Рассечение внутренней тропы - 1-й этап Урона",
+    "th": "เส้นทางสมดุลหนึ่ง - ความเสียหายช่วงแรก",
+    "zh_tw": "內一衡徑數·第一段"
    },
    "origin": "kongfu_specific",
    "skillType": "active",
+   "baseSkillId": 20202101,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -3003,27 +3004,28 @@
      0.53526
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル"
   },
   "n:积矩九剑-主动技-内一衡径数-2段": {
    "skillId": null,
    "nameZh": "积矩九剑-主动技-内一衡径数-2段",
    "label": {
     "ja": "内一衡の径数・第二段",
-    "en": "Inner Track Slash2",
-    "zh": "内一衡径数2",
-    "ko": "내공운행2",
-    "vi": "Đường cân bằng nội bộ một2",
-    "de": "Innere Spur-Hieb2",
-    "es": "Tajo de Pista Interna2",
-    "fr": "Entaille de la Voie Intérieure2",
-    "pt_br": "Golpe Interno2",
-    "ru": "Рассечение внутренней тропы2",
-    "th": "เส้นทางสมดุลหนึ่ง2",
-    "zh_tw": "內一衡徑數2"
+    "en": "Inner Track Slash - 2nd Stage",
+    "zh": "内一衡径数·第二段",
+    "ko": "내공운행·2단계",
+    "vi": "Đường cân bằng nội bộ một - Sát thương đoạn thứ hai",
+    "de": "Innere Spur-Hieb - Schaden der 2. Stufe",
+    "es": "Tajo de Pista Interna - Daño de la 2ª fase",
+    "fr": "Entaille de la Voie Intérieure - Dégâts de la 2ème phase",
+    "pt_br": "Golpe Interno - Dano do 2º Estágio",
+    "ru": "Рассечение внутренней тропы - 2-й этап Урона",
+    "th": "เส้นทางสมดุลหนึ่ง - ความเสียหายช่วงที่สอง",
+    "zh_tw": "內一衡徑數·第二段"
    },
    "origin": "kongfu_specific",
    "skillType": "active",
+   "baseSkillId": 20202101,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -4001,27 +4003,28 @@
      0.53526
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル"
   },
   "n:积矩九剑-主动技-内一衡径数-3段": {
    "skillId": null,
    "nameZh": "积矩九剑-主动技-内一衡径数-3段",
    "label": {
     "ja": "内一衡の径数・第三段",
-    "en": "Inner Track Slash3",
-    "zh": "内一衡径数3",
-    "ko": "내공운행3",
-    "vi": "Đường cân bằng nội bộ một3",
-    "de": "Innere Spur-Hieb3",
-    "es": "Tajo de Pista Interna3",
-    "fr": "Entaille de la Voie Intérieure3",
-    "pt_br": "Golpe Interno3",
-    "ru": "Рассечение внутренней тропы3",
-    "th": "เส้นทางสมดุลหนึ่ง3",
-    "zh_tw": "內一衡徑數3"
+    "en": "Inner Track Slash - 3rd Stage",
+    "zh": "内一衡径数·第三段",
+    "ko": "내공운행·3단계",
+    "vi": "Đường cân bằng nội bộ một - Sát thương đoạn thứ ba",
+    "de": "Innere Spur-Hieb - Schaden der 3. Stufe",
+    "es": "Tajo de Pista Interna - Daño de 3ra Etapa",
+    "fr": "Entaille de la Voie Intérieure - Dégâts de la 3ème étape",
+    "pt_br": "Golpe Interno - Dano do 3º Estágio",
+    "ru": "Рассечение внутренней тропы - 3-й этап Урона",
+    "th": "เส้นทางสมดุลหนึ่ง - ความเสียหายช่วงที่สาม",
+    "zh_tw": "內一衡徑數·第三段"
    },
    "origin": "kongfu_specific",
    "skillType": "active",
+   "baseSkillId": 20202101,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -4999,27 +5002,28 @@
      0.401445
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル"
   },
   "n:积矩九剑-主动技-内一衡径数-4段": {
    "skillId": null,
    "nameZh": "积矩九剑-主动技-内一衡径数-4段",
    "label": {
     "ja": "内一衡の径数・第四段",
-    "en": "Inner Track Slash4",
-    "zh": "内一衡径数4",
-    "ko": "내공운행4",
-    "vi": "Đường cân bằng nội bộ một4",
-    "de": "Innere Spur-Hieb4",
-    "es": "Tajo de Pista Interna4",
-    "fr": "Entaille de la Voie Intérieure4",
-    "pt_br": "Golpe Interno4",
-    "ru": "Рассечение внутренней тропы4",
-    "th": "เส้นทางสมดุลหนึ่ง4",
-    "zh_tw": "內一衡徑數4"
+    "en": "Inner Track Slash - 4th Stage",
+    "zh": "内一衡径数·第四段",
+    "ko": "내공운행·4단계",
+    "vi": "Đường cân bằng nội bộ một - Sát thương đoạn thứ tư",
+    "de": "Innere Spur-Hieb - Schaden der 4. Stufe",
+    "es": "Tajo de Pista Interna - Daño de la 4ta Fase",
+    "fr": "Entaille de la Voie Intérieure - Dégâts du 4ème Stade",
+    "pt_br": "Golpe Interno - Dano do 4º Estágio",
+    "ru": "Рассечение внутренней тропы - 4-й этап Урона",
+    "th": "เส้นทางสมดุลหนึ่ง - ความเสียหายช่วงที่สี่",
+    "zh_tw": "內一衡徑數·第四段"
    },
    "origin": "kongfu_specific",
    "skillType": "active",
+   "baseSkillId": 20202101,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -5997,27 +6001,28 @@
      0.401445
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル"
   },
   "n:积矩九剑-主动技-内一衡径数-5段": {
    "skillId": null,
    "nameZh": "积矩九剑-主动技-内一衡径数-5段",
    "label": {
     "ja": "内一衡の径数・第五段",
-    "en": "Inner Track Slash5",
-    "zh": "内一衡径数5",
-    "ko": "내공운행5",
-    "vi": "Đường cân bằng nội bộ một5",
-    "de": "Innere Spur-Hieb5",
-    "es": "Tajo de Pista Interna5",
-    "fr": "Entaille de la Voie Intérieure5",
-    "pt_br": "Golpe Interno5",
-    "ru": "Рассечение внутренней тропы5",
-    "th": "เส้นทางสมดุลหนึ่ง5",
-    "zh_tw": "內一衡徑數5"
+    "en": "Inner Track Slash - 5th Stage",
+    "zh": "内一衡径数·第五段",
+    "ko": "내공운행·다섯 번째 단계",
+    "vi": "Đường cân bằng nội bộ một - Sát thương đoạn thứ năm",
+    "de": "Innere Spur-Hieb - Schaden der 5. Stufe",
+    "es": "Tajo de Pista Interna - Daño de la 5ª etapa",
+    "fr": "Entaille de la Voie Intérieure - Dégâts de la 5ème étape",
+    "pt_br": "Golpe Interno - Dano do 5º Estágio",
+    "ru": "Рассечение внутренней тропы - 5-й этап Урона",
+    "th": "เส้นทางสมดุลหนึ่ง - ความเสียหายช่วงที่ห้า",
+    "zh_tw": "內一衡徑數·第五段"
    },
    "origin": "kongfu_specific",
    "skillType": "active",
+   "baseSkillId": 20202101,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -6995,24 +7000,24 @@
      0.80289
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル"
   },
   "n:积矩九剑-蓄力技-次二衡径数": {
    "skillId": null,
    "nameZh": "积矩九剑-蓄力技-次二衡径数",
    "label": {
     "ja": "次二衡の径数・溜め1段階",
-    "en": "Second Track Slash1",
-    "zh": "积矩九剑-蓄力技-次二衡径数1",
-    "ko": "내공응결1",
-    "vi": "Đường cân bằng nội bộ hai1",
-    "de": "Zweite Spur-Schlag1",
-    "es": "Tajo de Segunda Vía1",
-    "fr": "Entaille de la seconde voie1",
-    "pt_br": "Golpe de Trilha Secundária1",
-    "ru": "Рассечение второй тропы1",
-    "th": "เส้นทางสมดุลสอง1",
-    "zh_tw": "次二衡徑數1"
+    "en": "Second Track Slash - 1st Stage Charge",
+    "zh": "次二衡径数·蓄力一档",
+    "ko": "내공응결·차지 스킬 1단계",
+    "vi": "Đường cân bằng nội bộ hai - Tích lực cấp một",
+    "de": "Zweite Spur-Schlag - 1. Stufe Ladeschaden",
+    "es": "Tajo de Segunda Vía - Daño de Carga de 1ª Etapa",
+    "fr": "Entaille de la seconde voie - Dégâts de Charge 1ère Phase",
+    "pt_br": "Golpe de Trilha Secundária - Dano do 1º Estágio de Carga",
+    "ru": "Рассечение второй тропы - 1-й этап заряженного урона",
+    "th": "เส้นทางสมดุลสอง - ชาร์จพลังระดับหนึ่งความเสียหาย",
+    "zh_tw": "次二衡徑數·蓄力一檔"
    },
    "origin": "kongfu_specific",
    "skillType": "charged",
@@ -7993,7 +7998,7 @@
      0.68033
     ]
    },
-   "nameSource": "本番 skill_name (同名衝突のため連番 1) (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   }
  }
 }

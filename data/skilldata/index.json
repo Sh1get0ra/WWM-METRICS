@@ -27,5 +27,5 @@
   "sword",
   "umbrella"
  ],
- "_note": "data-store.js が起動時にこの一覧を見て skilldata を読む。生成 = scripts/split-skill-damage.cjs"
+ "_note": "data-store.js が起動時にこの一覧を見て skilldata を読む。生成 = scripts/mining/monthly/build_skill_damage.py"
 }

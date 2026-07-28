@@ -6930,20 +6930,21 @@
    "nameZh": "九重春色-重击蓄力技-杏花天-1档-1段",
    "label": {
     "ja": "杏花の天・溜め技一段",
-    "en": "Apricot Heaven - Deal",
-    "zh": "九重春色-重击蓄力技-杏花天-1档·蓄力前摇造成",
-    "ko": "봄의 연무·차지 선행 동작 시 피해를",
-    "vi": "Trời hoa mơ1",
-    "de": "Aprikosenhimmel - Verursache",
-    "es": "Paraíso del Albaricoque - Inflige",
-    "fr": "Paradis des Abricots - Inflige",
-    "pt_br": "Céu de Damasco - Causa",
-    "ru": "Абрикосовый Рай - Наносит",
-    "th": "ดอกแอปริคอตในวันฟ้าใส - การชาร์จพลังช่วงแรกสร้างความเสียหาย",
-    "zh_tw": "杏花天·蓄力前搖造成"
+    "en": "Apricot Heaven - Charged Skill 1st Stage",
+    "zh": "杏花天·蓄力技一段",
+    "ko": "봄의 연무·차지 스킬 1단계",
+    "vi": "Trời hoa mơ - Kỹ năng tích lực một đoạn",
+    "de": "Aprikosenhimmel - Aufladefähigkeit - Erststufenschaden",
+    "es": "Paraíso del Albaricoque - Daño de Habilidad Cargada en 1ª Etapa",
+    "fr": "Paradis des Abricots - Dégâts de la 1ère étape de la compétence chargée",
+    "pt_br": "Céu de Damasco - Dano do 1º Estágio de Habilidade Carregada",
+    "ru": "Абрикосовый Рай - Заряжаемый навык 1-й этап урона",
+    "th": "ดอกแอปริคอตในวันฟ้าใส - ทักษะชาร์จพลังระดับแรกความเสียหาย",
+    "zh_tw": "杏花天·蓄力技一段"
    },
    "origin": "kongfu_specific",
    "skillType": "heavyCharged",
+   "baseSkillId": 20601102,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -7921,27 +7922,28 @@
      0.81534
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル"
   },
   "n:九重春色-重击蓄力技-杏花天-1档-2段": {
    "skillId": null,
    "nameZh": "九重春色-重击蓄力技-杏花天-1档-2段",
    "label": {
     "ja": "杏花の天・溜め技二段最低",
-    "en": "Apricot Heaven - then deal",
-    "zh": "九重春色-重击蓄力技-杏花天-1档·蓄力二段根据时长造成",
-    "ko": "봄의 연무·차지 2단계는 시간에 따라 피해를",
-    "vi": "Trời hoa mơ2",
-    "de": "Aprikosenhimmel - dann verursache",
-    "es": "Paraíso del Albaricoque - luego inflige",
-    "fr": "Paradis des Abricots - puis inflige entre",
-    "pt_br": "Céu de Damasco - depois causa",
-    "ru": "Абрикосовый Рай - затем наносит",
-    "th": "ดอกแอปริคอตในวันฟ้าใส - ถึง",
-    "zh_tw": "杏花天·蓄力二段根據時長造成"
+    "en": "Apricot Heaven - Charged Skill 2nd Stage Min",
+    "zh": "杏花天·蓄力技二段最低",
+    "ko": "봄의 연무·차지 스킬 2단계 최소",
+    "vi": "Trời hoa mơ - Sát thương thấp nhất tầng hai kỹ năng tích lực",
+    "de": "Aprikosenhimmel - Minimaler Schaden der 2. Stufe aufgeladener Fähigkeiten",
+    "es": "Paraíso del Albaricoque - Daño Mínimo de 2da Etapa de Habilidad Cargada",
+    "fr": "Paradis des Abricots - Dégâts minimums de la 2ème phase de compétence chargée",
+    "pt_br": "Céu de Damasco - Dano Mínimo do 2º Estágio da Habilidade Carregada",
+    "ru": "Абрикосовый Рай - Заряжаемый навык 2-й этап мин. урона",
+    "th": "ดอกแอปริคอตในวันฟ้าใส - ความเสียหายขั้นต่ำจากทักษะชาร์จพลังสองจังหวะ",
+    "zh_tw": "杏花天·蓄力技二段最低"
    },
    "origin": "kongfu_specific",
    "skillType": "heavyCharged",
+   "baseSkillId": 20601102,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -8919,27 +8921,28 @@
      2.03835
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル"
   },
   "n:九重春色-重击蓄力技-杏花天-1档-3段": {
    "skillId": null,
    "nameZh": "九重春色-重击蓄力技-杏花天-1档-3段",
    "label": {
     "ja": "杏花の天・溜め技二段最大",
-    "en": "Apricot Heaven - damage based on the charge duration",
-    "zh": "九重春色-重击蓄力技-杏花天-1档·的",
-    "ko": "봄의 연무·까지 입힌다",
-    "vi": "Trời hoa mơ3",
-    "de": "Aprikosenhimmel - Schaden basierend auf der Aufladezeit",
-    "es": "Paraíso del Albaricoque - de daño según la duración de la carga",
-    "fr": "Paradis des Abricots - de dégâts selon la durée de charge",
-    "pt_br": "Céu de Damasco - de dano com base na duração do carregamento",
-    "ru": "Абрикосовый Рай - урона в зависимости от длительности заряда",
-    "th": "ดอกแอปริคอตในวันฟ้าใส - ตามระยะเวลาที่ชาร์จ",
-    "zh_tw": "杏花天·的"
+    "en": "Apricot Heaven - Charged Skill 2nd Stage Max",
+    "zh": "杏花天·蓄力技二段最高",
+    "ko": "봄의 연무·차지 스킬 2단계 최대",
+    "vi": "Trời hoa mơ - Sát thương cao nhất đoạn thứ hai kỹ năng tích lực",
+    "de": "Aprikosenhimmel - Maximaler Schaden der 2. Stufe aufgeladener Fähigkeiten",
+    "es": "Paraíso del Albaricoque - Daño Máximo de 2da Etapa de Habilidad Cargada",
+    "fr": "Paradis des Abricots - Dégâts maximums de la 2ème phase de compétence chargée",
+    "pt_br": "Céu de Damasco - Dano Máximo do 2º Estágio da Habilidade Carregada",
+    "ru": "Абрикосовый Рай - Заряжаемый навык 2-й этап макс. урона",
+    "th": "ดอกแอปริคอตในวันฟ้าใส - ความเสียหายสูงสุดช่วงที่สองจากทักษะชาร์จพลัง",
+    "zh_tw": "杏花天·蓄力技二段最高"
    },
    "origin": "kongfu_specific",
    "skillType": "heavyCharged",
+   "baseSkillId": 20601102,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -9917,27 +9920,28 @@
      3.26136
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル"
   },
   "n:九重春色-轻击蓄力技-浮空炮-1段": {
    "skillId": null,
    "nameZh": "九重春色-轻击蓄力技-浮空炮-1段",
    "label": {
     "ja": "春風飛舞・単発ダメージ",
-    "en": "Spring Flies to its End1",
-    "zh": "春飞尽1",
-    "ko": "봄의 비상1",
-    "vi": "Xuân bay hết1",
-    "de": "Frühlingsflucht1",
-    "es": "Salto Primaveral1",
-    "fr": "Fuite printanière1",
-    "pt_br": "Fonte Distante1",
-    "ru": "Весенний Порыв1",
-    "th": "ฤดูใบไม้ผลิที่ล่วงลับ1",
-    "zh_tw": "春飛盡1"
+    "en": "Spring Flies to its End - Ballistic Damage Per Second",
+    "zh": "春飞尽·弹道每秒",
+    "ko": "봄의 비상·탄도 초당",
+    "vi": "Xuân bay hết - Sát thương mỗi giây của đạn đạo",
+    "de": "Frühlingsflucht - Ballistischer Schaden pro Sekunde",
+    "es": "Salto Primaveral - Daño Balístico por Segundo",
+    "fr": "Fuite printanière - Dégâts Ballistiques par Seconde",
+    "pt_br": "Fonte Distante - Dano Balístico por Segundo",
+    "ru": "Весенний Порыв - Урон в секунду (баллистический)",
+    "th": "ฤดูใบไม้ผลิที่ล่วงลับ - ความเสียหายต่อวินาทีของวิถีกระสุน",
+    "zh_tw": "春飛盡·彈道每秒"
    },
    "origin": "kongfu_specific",
    "skillType": "lightCharged",
+   "baseSkillId": 20601112,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -10915,16 +10919,16 @@
      0.059216
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "n:九重春色-轻击蓄力技-浮空炮-2段": {
    "skillId": null,
    "nameZh": "九重春色-轻击蓄力技-浮空炮-2段",
    "label": {
     "ja": "春風飛舞・秒間ダメージ",
-    "en": "Spring Flies to its End2",
-    "zh": "春飞尽2",
-    "ko": "봄의 비상2",
+    "en": "Spring Flies to its End・Per Second",
+    "zh": "春飞尽·每秒伤害",
+    "ko": "봄의 비상·초당 피해",
     "vi": "Xuân bay hết2",
     "de": "Frühlingsflucht2",
     "es": "Salto Primaveral2",
@@ -10936,6 +10940,7 @@
    },
    "origin": "kongfu_specific",
    "skillType": "lightCharged",
+   "baseSkillId": 20601112,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -11920,20 +11925,21 @@
    "nameZh": "九重春色-主动技-眩晕炮-1段",
    "label": {
     "ja": "春恨み・弾道ダメージ(首領以外)",
-    "en": "Cast Spring's Regret - Non-boss unit",
-    "zh": "抛春恨·非首领单位",
-    "ko": "봄의 원한·BOSS 외 유닛",
-    "vi": "Vứt bỏ hận xuân - Đơn vị không phải thủ lĩnh",
-    "de": "Frühlingskummer - Nicht-Boss Einheit",
-    "es": "Pena Primaveral - Unidad no jefe",
-    "fr": "Chagrin printanier - Unité non-boss",
-    "pt_br": "Tristeza da Primavera - Unidade não-chefe",
-    "ru": "Весенняя Печаль - Обычный юнит",
-    "th": "ทิ้งความเศร้าของฤดูใบไม้ผลิ - หน่วยที่ไม่ใช่หัวหน้า",
-    "zh_tw": "拋春恨·非首領單位"
+    "en": "Cast Spring's Regret - Projectile Damage (Hitting Non-Boss)",
+    "zh": "抛春恨·弹道（命中非首领）",
+    "ko": "봄의 원한·투사체(BOSS 이외의 대상 명중)",
+    "vi": "Vứt bỏ hận xuân - Sát thương đạn đạo (đánh trúng không phải thủ lĩnh)",
+    "de": "Frühlingskummer - Projektil-Schaden (Treffer auf Nicht-Boss)",
+    "es": "Pena Primaveral - Daño de proyectil (al golpear a no jefes)",
+    "fr": "Chagrin printanier - Dégâts de projectile (touchant un non-boss)",
+    "pt_br": "Tristeza da Primavera - Dano de Projétil (Acertando Não-Chefes)",
+    "ru": "Весенняя Печаль - Урон снаряда (попадание по не-боссу)",
+    "th": "ทิ้งความเศร้าของฤดูใบไม้ผลิ - ความเสียหายของวิถีกระสุน (การโจมตีที่แม่นยำไม่ใช่หัวหน้า)",
+    "zh_tw": "拋春恨·彈道（命中非首領）"
    },
    "origin": "kongfu_specific",
    "skillType": "active",
+   "baseSkillId": 20601113,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -12911,27 +12917,28 @@
      2.1423
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "n:九重春色-主动技-眩晕炮-2段": {
    "skillId": null,
    "nameZh": "九重春色-主动技-眩晕炮-2段",
    "label": {
     "ja": "春恨み・弾道ダメージ(首領)",
-    "en": "Cast Spring's Regret - boss unit",
-    "zh": "抛春恨·首领单位",
-    "ko": "봄의 원한·BOSS 유닛",
-    "vi": "Vứt bỏ hận xuân - đơn vị thủ lĩnh",
-    "de": "Frühlingskummer - Boss Einheit",
-    "es": "Pena Primaveral - unidad jefe",
-    "fr": "Chagrin printanier - unité boss",
-    "pt_br": "Tristeza da Primavera - unidade chefe",
-    "ru": "Весенняя Печаль - босс",
-    "th": "ทิ้งความเศร้าของฤดูใบไม้ผลิ - หน่วยหัวหน้า",
-    "zh_tw": "拋春恨·首領單位"
+    "en": "Cast Spring's Regret - Projectile Damage (Hitting Boss)",
+    "zh": "抛春恨·弹道（命中首领）",
+    "ko": "봄의 원한·투사체(BOSS 명중)",
+    "vi": "Vứt bỏ hận xuân - Sát thương đường đạn (Đánh trúng Thủ lĩnh)",
+    "de": "Frühlingskummer - Projektil-Schaden (Treffer auf Boss)",
+    "es": "Pena Primaveral - Daño de proyectil (al golpear a jefes)",
+    "fr": "Chagrin printanier - Dégâts de projectile (touchant un boss)",
+    "pt_br": "Tristeza da Primavera - Dano de Projétil (Acertando Chefes)",
+    "ru": "Весенняя Печаль - Урон снаряда (попадание по боссу)",
+    "th": "ทิ้งความเศร้าของฤดูใบไม้ผลิ - ความเสียหายจากวิถีกระสุน (การโจมตีที่แม่นยำต่อหัวหน้า)",
+    "zh_tw": "拋春恨·彈道（命中首領）"
    },
    "origin": "kongfu_specific",
    "skillType": "active",
+   "baseSkillId": 20601113,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -13909,28 +13916,17 @@
      3.363411
     ]
    },
-   "nameSource": "client 段説明 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "n:九重春色-袖剑.轻击-1段": {
    "skillId": null,
    "nameZh": "九重春色-袖剑.轻击-1段",
-   "label": {
-    "ja": "袖剣・軽撃1",
-    "en": "Hidden Sword - Light Attack1",
-    "zh": "袖剑·轻击1",
-    "ko": "암살검-약공격1",
-    "vi": "Kiếm tay áo·Đánh nhẹ1",
-    "de": "Verborgenes Schwert - Leichter Angriff1",
-    "es": "Espada Oculta - Ataque Ligero1",
-    "fr": "Épée Cachée - Attaque Légère1",
-    "pt_br": "Espada Oculta - Ataque Leve1",
-    "ru": "Скрытый меч - Легкая атака1",
-    "th": "ดาบซ่อนในแขน·โจมตีเบา1",
-    "zh_tw": "袖劍·輕擊1"
-   },
    "origin": "kongfu_specific",
    "skillType": "light",
-   "nameFrom": "literal",
+   "baseSkillId": 20601201,
+   "nameFrom": "skill",
+   "nameRefId": "20601201",
+   "nameSeq": 1,
    "frame": null,
    "cooldown": null,
    "byLevel": {
@@ -14906,29 +14902,17 @@
      0.269775,
      0.298312
     ]
-   },
-   "nameSource": "本番 skill_name + 段番号"
+   }
   },
   "n:九重春色-袖剑.轻击-2段": {
    "skillId": null,
    "nameZh": "九重春色-袖剑.轻击-2段",
-   "label": {
-    "ja": "袖剣・軽撃2",
-    "en": "Hidden Sword - Light Attack2",
-    "zh": "袖剑·轻击2",
-    "ko": "암살검-약공격2",
-    "vi": "Kiếm tay áo·Đánh nhẹ2",
-    "de": "Verborgenes Schwert - Leichter Angriff2",
-    "es": "Espada Oculta - Ataque Ligero2",
-    "fr": "Épée Cachée - Attaque Légère2",
-    "pt_br": "Espada Oculta - Ataque Leve2",
-    "ru": "Скрытый меч - Легкая атака2",
-    "th": "ดาบซ่อนในแขน·โจมตีเบา2",
-    "zh_tw": "袖劍·輕擊2"
-   },
    "origin": "kongfu_specific",
    "skillType": "light",
-   "nameFrom": "literal",
+   "baseSkillId": 20601201,
+   "nameFrom": "skill",
+   "nameRefId": "20601201",
+   "nameSeq": 2,
    "frame": null,
    "cooldown": null,
    "byLevel": {
@@ -15904,29 +15888,17 @@
      0.593505,
      0.656288
     ]
-   },
-   "nameSource": "本番 skill_name + 段番号"
+   }
   },
   "n:九重春色-袖剑.轻击-3段": {
    "skillId": null,
    "nameZh": "九重春色-袖剑.轻击-3段",
-   "label": {
-    "ja": "袖剣・軽撃3",
-    "en": "Hidden Sword - Light Attack3",
-    "zh": "袖剑·轻击3",
-    "ko": "암살검-약공격3",
-    "vi": "Kiếm tay áo·Đánh nhẹ3",
-    "de": "Verborgenes Schwert - Leichter Angriff3",
-    "es": "Espada Oculta - Ataque Ligero3",
-    "fr": "Épée Cachée - Attaque Légère3",
-    "pt_br": "Espada Oculta - Ataque Leve3",
-    "ru": "Скрытый меч - Легкая атака3",
-    "th": "ดาบซ่อนในแขน·โจมตีเบา3",
-    "zh_tw": "袖劍·輕擊3"
-   },
    "origin": "kongfu_specific",
    "skillType": "light",
-   "nameFrom": "literal",
+   "baseSkillId": 20601201,
+   "nameFrom": "skill",
+   "nameRefId": "20601201",
+   "nameSeq": 3,
    "frame": null,
    "cooldown": null,
    "byLevel": {
@@ -16902,29 +16874,17 @@
      0.64746,
      0.71595
     ]
-   },
-   "nameSource": "本番 skill_name + 段番号"
+   }
   },
   "n:九重春色-袖剑.轻击-4段": {
    "skillId": null,
    "nameZh": "九重春色-袖剑.轻击-4段",
-   "label": {
-    "ja": "袖剣・軽撃4",
-    "en": "Hidden Sword - Light Attack4",
-    "zh": "袖剑·轻击4",
-    "ko": "암살검-약공격4",
-    "vi": "Kiếm tay áo·Đánh nhẹ4",
-    "de": "Verborgenes Schwert - Leichter Angriff4",
-    "es": "Espada Oculta - Ataque Ligero4",
-    "fr": "Épée Cachée - Attaque Légère4",
-    "pt_br": "Espada Oculta - Ataque Leve4",
-    "ru": "Скрытый меч - Легкая атака4",
-    "th": "ดาบซ่อนในแขน·โจมตีเบา4",
-    "zh_tw": "袖劍·輕擊4"
-   },
    "origin": "kongfu_specific",
    "skillType": "light",
-   "nameFrom": "literal",
+   "baseSkillId": 20601201,
+   "nameFrom": "skill",
+   "nameRefId": "20601201",
+   "nameSeq": 4,
    "frame": null,
    "cooldown": null,
    "byLevel": {
@@ -17900,28 +17860,28 @@
      0.64746,
      0.71595
     ]
-   },
-   "nameSource": "本番 skill_name + 段番号"
+   }
   },
   "n:九重春色-袖剑.重击-1段": {
    "skillId": null,
    "nameZh": "九重春色-袖剑.重击-1段",
    "label": {
     "ja": "袖剣・重撃1",
-    "en": "Hidden Sword - Heavy Attack1",
+    "en": "Hidden Sword - Heavy Attack - Three attacks that deal",
     "zh": "袖剑·重击1",
     "ko": "암살검-강공격1",
     "vi": "Kiếm tay áo·Đánh mạnh1",
-    "de": "Verborgenes Schwert - Starker Angriff1",
-    "es": "Espada Oculta - Ataque Pesado1",
-    "fr": "Épée cachée - Attaque lourde1",
-    "pt_br": "Espada Oculta - Ataque Pesado1",
-    "ru": "Скрытый меч - Тяжелая атака1",
+    "de": "Verborgenes Schwert - Starker Angriff - Drei Angriffe, die jeweils",
+    "es": "Espada Oculta - Ataque Pesado - Tres ataques que infligen",
+    "fr": "Épée cachée - Attaque lourde - Trois attaques infligeant respectivement",
+    "pt_br": "Espada Oculta - Ataque Pesado - Três ataques que causam",
+    "ru": "Скрытый меч - Тяжелая атака - Три атаки, наносящие",
     "th": "ดาบลับ·โจมตีหนัก1",
     "zh_tw": "袖劍·重擊1"
    },
    "origin": "kongfu_specific",
    "skillType": "heavy",
+   "baseSkillId": 20601206,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -18899,27 +18859,28 @@
      0.15552
     ]
    },
-   "nameSource": "本番 skill_name + 段番号"
+   "nameSource": "client 段説明"
   },
   "n:九重春色-袖剑.重击-2段": {
    "skillId": null,
    "nameZh": "九重春色-袖剑.重击-2段",
    "label": {
     "ja": "袖剣・重撃2",
-    "en": "Hidden Sword - Heavy Attack2",
+    "en": "Hidden Sword - Heavy Attack - and",
     "zh": "袖剑·重击2",
     "ko": "암살검-강공격2",
     "vi": "Kiếm tay áo·Đánh mạnh2",
-    "de": "Verborgenes Schwert - Starker Angriff2",
-    "es": "Espada Oculta - Ataque Pesado2",
-    "fr": "Épée cachée - Attaque lourde2",
-    "pt_br": "Espada Oculta - Ataque Pesado2",
-    "ru": "Скрытый меч - Тяжелая атака2",
+    "de": "Verborgenes Schwert - Starker Angriff - und",
+    "es": "Espada Oculta - Ataque Pesado - y",
+    "fr": "Épée cachée - Attaque lourde - et",
+    "pt_br": "Espada Oculta - Ataque Pesado - e",
+    "ru": "Скрытый меч - Тяжелая атака - и",
     "th": "ดาบลับ·โจมตีหนัก2",
     "zh_tw": "袖劍·重擊2"
    },
    "origin": "kongfu_specific",
    "skillType": "heavy",
+   "baseSkillId": 20601206,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -19897,27 +19858,28 @@
      0.23328
     ]
    },
-   "nameSource": "本番 skill_name + 段番号"
+   "nameSource": "client 段説明"
   },
   "n:九重春色-袖剑.重击-3段": {
    "skillId": null,
    "nameZh": "九重春色-袖剑.重击-3段",
    "label": {
     "ja": "袖剣・重撃3",
-    "en": "Hidden Sword - Heavy Attack3",
+    "en": "Hidden Sword - Heavy Attack - damage respectively",
     "zh": "袖剑·重击3",
     "ko": "암살검-강공격3",
     "vi": "Kiếm tay áo·Đánh mạnh3",
-    "de": "Verborgenes Schwert - Starker Angriff3",
-    "es": "Espada Oculta - Ataque Pesado3",
-    "fr": "Épée cachée - Attaque lourde3",
-    "pt_br": "Espada Oculta - Ataque Pesado3",
-    "ru": "Скрытый меч - Тяжелая атака3",
+    "de": "Verborgenes Schwert - Starker Angriff - Schaden verursachen",
+    "es": "Espada Oculta - Ataque Pesado - de daño respectivamente",
+    "fr": "Épée cachée - Attaque lourde - dégâts",
+    "pt_br": "Espada Oculta - Ataque Pesado - de",
+    "ru": "Скрытый меч - Тяжелая атака - урона соответственно",
     "th": "ดาบลับ·โจมตีหนัก3",
     "zh_tw": "袖劍·重擊3"
    },
    "origin": "kongfu_specific",
    "skillType": "heavy",
+   "baseSkillId": 20601206,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -20895,14 +20857,16 @@
      0.3888
     ]
    },
-   "nameSource": "本番 skill_name + 段番号"
+   "nameSource": "client 段説明"
   },
   "n:轻击-1段": {
    "skillId": null,
    "nameZh": "轻击-1段",
    "origin": "kongfu_specific",
    "skillType": "light",
-   "nameFrom": "weaponType",
+   "baseSkillId": 20601001,
+   "nameFrom": "skill",
+   "nameRefId": "20601001",
    "nameSeq": 1,
    "frame": null,
    "cooldown": null,
@@ -21886,7 +21850,9 @@
    "nameZh": "轻击-2段",
    "origin": "kongfu_specific",
    "skillType": "light",
-   "nameFrom": "weaponType",
+   "baseSkillId": 20601001,
+   "nameFrom": "skill",
+   "nameRefId": "20601001",
    "nameSeq": 2,
    "frame": null,
    "cooldown": null,
@@ -22870,7 +22836,9 @@
    "nameZh": "轻击-3段",
    "origin": "kongfu_specific",
    "skillType": "light",
-   "nameFrom": "weaponType",
+   "baseSkillId": 20601001,
+   "nameFrom": "skill",
+   "nameRefId": "20601001",
    "nameSeq": 3,
    "frame": null,
    "cooldown": null,
@@ -23854,20 +23822,21 @@
    "nameZh": "九重春色-特殊技-变形-1段",
    "label": {
     "ja": "常初花・単発ダメージ",
-    "en": "Unwithering Flower1",
-    "zh": "不谢花1",
-    "ko": "불멸의 꽃1",
-    "vi": "Không tạ hoa1",
-    "de": "Unverwelkte Blume1",
-    "es": "Flor Imperecedera1",
-    "fr": "Fleur Impérissable1",
-    "pt_br": "Flor Imperecível1",
-    "ru": "Неувядающий Цветок1",
-    "th": "ไม่โรยดอกไม้1",
-    "zh_tw": "不謝花1"
+    "en": "Unwithering Flower - Ballistic Damage Per Second",
+    "zh": "不谢花·弹道每秒",
+    "ko": "불멸의 꽃·탄도 초당",
+    "vi": "Không tạ hoa - Sát thương mỗi giây của đạn đạo",
+    "de": "Unverwelkte Blume - Ballistischer Schaden pro Sekunde",
+    "es": "Flor Imperecedera - Daño Balístico por Segundo",
+    "fr": "Fleur Impérissable - Dégâts Ballistiques par Seconde",
+    "pt_br": "Flor Imperecível - Dano Balístico por Segundo",
+    "ru": "Неувядающий Цветок - Урон в секунду баллистики",
+    "th": "ไม่โรยดอกไม้ - ความเสียหายต่อวินาทีของวิถีกระสุน",
+    "zh_tw": "不謝花·彈道每秒"
    },
    "origin": "kongfu_specific",
    "skillType": "special",
+   "baseSkillId": 20601103,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
@@ -24845,16 +24814,16 @@
      0.511575
     ]
    },
-   "nameSource": "本番 skill_name + 段番号 (ja は旧表記を維持)"
+   "nameSource": "field 0x60 の段ラベル (ja は旧表記を維持)"
   },
   "n:九重春色-特殊技-变形-2段": {
    "skillId": null,
    "nameZh": "九重春色-特殊技-变形-2段",
    "label": {
     "ja": "常初花・秒間ダメージ",
-    "en": "Unwithering Flower2",
-    "zh": "不谢花2",
-    "ko": "불멸의 꽃2",
+    "en": "Unwithering Flower・Per Second",
+    "zh": "不谢花·每秒伤害",
+    "ko": "불멸의 꽃·초당 피해",
     "vi": "Không tạ hoa2",
     "de": "Unverwelkte Blume2",
     "es": "Flor Imperecedera2",
@@ -24866,6 +24835,7 @@
    },
    "origin": "kongfu_specific",
    "skillType": "special",
+   "baseSkillId": 20601103,
    "nameFrom": "literal",
    "frame": null,
    "cooldown": null,
