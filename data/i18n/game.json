@@ -9732,18 +9732,18 @@
       "th": "ต่อเนื่องจากการโจมตีหนัก"
     },
     "lightEnhanced": {
-      "ja": "強化軽撃",
-      "en": "Enhanced Light",
-      "zh": "强化轻击",
-      "ko": "강화 약공격",
-      "zh_tw": "强化轻击",
-      "vi": "Enhanced Light",
-      "de": "Enhanced Light",
-      "es": "Enhanced Light",
-      "fr": "Enhanced Light",
-      "pt_br": "Enhanced Light",
-      "ru": "Enhanced Light",
-      "th": "Enhanced Light"
+      "ja": "怒炎軽撃",
+      "en": "Flamelash Light Attack",
+      "zh": "嗔焰轻击",
+      "ko": "격노의 화염 약공격",
+      "zh_tw": "嗔焰輕擊",
+      "vi": "Lửa giận bừng cháy đánh nhẹ",
+      "de": "Flammenschlag Leichter Angriff",
+      "es": "Ataque Ligero Llamarada",
+      "fr": "Attaque légère Fouet de flammes",
+      "pt_br": "Ataque Leve do Chicote de Chamas",
+      "ru": "Огненная Плеть - Легкая атака",
+      "th": "เปลวไฟแห่งความโกรธโจมตีเบา"
     },
     "heavyEnhanced": {
       "ja": "強化重撃",
