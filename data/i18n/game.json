@@ -9775,17 +9775,17 @@
     },
     "weapon": {
       "ja": "武変技",
-      "en": "Conversion Skill",
-      "zh": "武变技",
-      "ko": "무기 교체 기술",
-      "zh_tw": "武器技",
-      "vi": "Weapon Skill",
-      "de": "Weapon Skill",
-      "es": "Weapon Skill",
-      "fr": "Weapon Skill",
-      "pt_br": "Weapon Skill",
-      "ru": "Weapon Skill",
-      "th": "Weapon Skill"
+      "en": "Dual-Weapon Skill",
+      "zh": "易武技",
+      "ko": "무기 전환",
+      "zh_tw": "易武技",
+      "vi": "kỹ năng thay đổi vũ khí",
+      "de": "Zweiwaffen-Fertigkeit",
+      "es": "Habilidad de Doble Arma",
+      "fr": "Compétence Double Arme",
+      "pt_br": "Habilidade de Armas Duplas",
+      "ru": "Умение двойного оружия",
+      "th": "ทักษะเปลี่ยนอาวุธ"
     },
     "enhanced": {
       "ja": "強化技",
