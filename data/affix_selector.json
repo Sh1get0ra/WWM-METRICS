@@ -1,6 +1,6 @@
 {
   "_schema": "wwmdb 由来 affix selector 統合 master。 build: scripts/wwmdb-build-affix-selector.cjs",
-  "_source": "client mining (scripts/mining/monthly/build_affix_selector_from_client.py)。Lv71 と ATTUNE(idx5) は client に元データが無いため従来値を引き継ぎ",
+  "_source": "client mining 一本化 (idx0-5 全域)。ATTUNE(idx5) は build_affix_selector_from_client.py の ATTUNE_GROUPS (cat グループ x Lv の 7 エントリ) 由来。Lv71 は group ID が 3 桁の旧体系なので専用判定を通している",
   "_builtAt": "2026-06-24T09:30:00Z",
   "_structure": "data[wdbCat][lv][tier][idx] : idx 0-4 = [statKey, ...] (0=INITIAL/1-4=TUNING共通) / idx 5 = [{statKey, martialArt, attackType}, ...] (ATTUNE) / ids = {slotIdx: {statKey: affixId}} (2026-07-27 追加、Lv 世代をまたぐ選択肢解決用)",
   "_notes": "chance>0 filter + restrict 解決 (自装備 wdbCat 照合) + Lv71 restrict 補完 + statKey 未登録 ID skip 済 / 2026-07-05: Lv100/105 追加 (client直接抽出mining、scripts/build-affix-selector-lv100-105.cjs、G:/wwm_mining/dmgcalc/affix_appearance_master_data4.json 由来。既存Lv71-96は無変更)",
@@ -71,7 +71,30 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "maxHp": "166401",
+              "physDef": "166402",
+              "precision": "166403",
+              "crit": "166404",
+              "affinity": "166405"
+            },
+            "1": {
+              "body": "166801",
+              "power": "166802",
+              "defense": "166803",
+              "agility": "166804",
+              "momentum": "166805",
+              "maxHp": "166806",
+              "minPhys": "166807",
+              "maxPhys": "166808",
+              "physDef": "166809",
+              "precision": "166818",
+              "crit": "166819",
+              "affinity": "166820"
+            }
+          }
         },
         "4": {
           "0": [
@@ -358,7 +381,30 @@
               "martialArt": "20702",
               "attackType": "special"
             }
-          ]
+          ],
+          "ids": {
+            "0": {
+              "maxHp": "166501",
+              "physDef": "166502",
+              "precision": "166503",
+              "crit": "166504",
+              "affinity": "166505"
+            },
+            "1": {
+              "body": "166801",
+              "power": "166802",
+              "defense": "166803",
+              "agility": "166804",
+              "momentum": "166805",
+              "maxHp": "166806",
+              "minPhys": "166807",
+              "maxPhys": "166808",
+              "physDef": "166809",
+              "precision": "166818",
+              "crit": "166819",
+              "affinity": "166820"
+            }
+          }
         },
         "5": {
           "0": [
@@ -645,7 +691,30 @@
               "martialArt": "20702",
               "attackType": "special"
             }
-          ]
+          ],
+          "ids": {
+            "0": {
+              "maxHp": "166601",
+              "physDef": "166602",
+              "precision": "166603",
+              "crit": "166604",
+              "affinity": "166605"
+            },
+            "1": {
+              "body": "167001",
+              "power": "167002",
+              "defense": "167003",
+              "agility": "167004",
+              "momentum": "167005",
+              "maxHp": "167006",
+              "minPhys": "167007",
+              "maxPhys": "167008",
+              "physDef": "167009",
+              "precision": "167018",
+              "crit": "167019",
+              "affinity": "167020"
+            }
+          }
         }
       },
       "81": {
@@ -5059,7 +5128,30 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "maxHp": "166401",
+              "physDef": "166402",
+              "precision": "166403",
+              "crit": "166404",
+              "affinity": "166405"
+            },
+            "1": {
+              "body": "166801",
+              "power": "166802",
+              "defense": "166803",
+              "agility": "166804",
+              "momentum": "166805",
+              "maxHp": "166806",
+              "minPhys": "166807",
+              "maxPhys": "166808",
+              "physDef": "166809",
+              "precision": "166818",
+              "crit": "166819",
+              "affinity": "166820"
+            }
+          }
         },
         "4": {
           "0": [
@@ -5346,7 +5438,30 @@
               "martialArt": "20702",
               "attackType": "special"
             }
-          ]
+          ],
+          "ids": {
+            "0": {
+              "maxHp": "166501",
+              "physDef": "166502",
+              "precision": "166503",
+              "crit": "166504",
+              "affinity": "166505"
+            },
+            "1": {
+              "body": "166801",
+              "power": "166802",
+              "defense": "166803",
+              "agility": "166804",
+              "momentum": "166805",
+              "maxHp": "166806",
+              "minPhys": "166807",
+              "maxPhys": "166808",
+              "physDef": "166809",
+              "precision": "166818",
+              "crit": "166819",
+              "affinity": "166820"
+            }
+          }
         },
         "5": {
           "0": [
@@ -5633,7 +5748,30 @@
               "martialArt": "20702",
               "attackType": "special"
             }
-          ]
+          ],
+          "ids": {
+            "0": {
+              "maxHp": "166601",
+              "physDef": "166602",
+              "precision": "166603",
+              "crit": "166604",
+              "affinity": "166605"
+            },
+            "1": {
+              "body": "167001",
+              "power": "167002",
+              "defense": "167003",
+              "agility": "167004",
+              "momentum": "167005",
+              "maxHp": "167006",
+              "minPhys": "167007",
+              "maxPhys": "167008",
+              "physDef": "167009",
+              "precision": "167018",
+              "crit": "167019",
+              "affinity": "167020"
+            }
+          }
         }
       },
       "81": {
@@ -10090,7 +10228,34 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166101",
+              "maxPhys": "166102"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "4": {
           "0": [
@@ -10212,7 +10377,34 @@
               "martialArt": "10101",
               "attackType": "special"
             }
-          ]
+          ],
+          "ids": {
+            "0": {
+              "minPhys": "166201",
+              "maxPhys": "166202"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "5": {
           "0": [
@@ -10334,7 +10526,34 @@
               "martialArt": "10101",
               "attackType": "special"
             }
-          ]
+          ],
+          "ids": {
+            "0": {
+              "minPhys": "166301",
+              "maxPhys": "166302"
+            },
+            "1": {
+              "body": "166901",
+              "power": "166902",
+              "defense": "166903",
+              "agility": "166904",
+              "momentum": "166905",
+              "maxHp": "166906",
+              "minPhys": "166907",
+              "maxPhys": "166908",
+              "physDef": "166909",
+              "precision": "166918",
+              "crit": "166919",
+              "affinity": "166920",
+              "lightAtkDmg": "166921",
+              "heavyAtkDmg": "166922",
+              "airborneLightAtkDmg": "166923",
+              "jumpStrikeDmg": "166924",
+              "dualWeaponSkillDmg": "166925",
+              "executionDmg": "166926",
+              "dashDmg": "166927"
+            }
+          }
         }
       },
       "81": {
@@ -12908,7 +13127,30 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "maxHp": "166401",
+              "physDef": "166402",
+              "precision": "166403",
+              "crit": "166404",
+              "affinity": "166405"
+            },
+            "1": {
+              "body": "166801",
+              "power": "166802",
+              "defense": "166803",
+              "agility": "166804",
+              "momentum": "166805",
+              "maxHp": "166806",
+              "minPhys": "166807",
+              "maxPhys": "166808",
+              "physDef": "166809",
+              "precision": "166818",
+              "crit": "166819",
+              "affinity": "166820"
+            }
+          }
         },
         "4": {
           "0": [
@@ -13195,7 +13437,30 @@
               "martialArt": "20702",
               "attackType": "special"
             }
-          ]
+          ],
+          "ids": {
+            "0": {
+              "maxHp": "166501",
+              "physDef": "166502",
+              "precision": "166503",
+              "crit": "166504",
+              "affinity": "166505"
+            },
+            "1": {
+              "body": "166801",
+              "power": "166802",
+              "defense": "166803",
+              "agility": "166804",
+              "momentum": "166805",
+              "maxHp": "166806",
+              "minPhys": "166807",
+              "maxPhys": "166808",
+              "physDef": "166809",
+              "precision": "166818",
+              "crit": "166819",
+              "affinity": "166820"
+            }
+          }
         },
         "5": {
           "0": [
@@ -13482,7 +13747,30 @@
               "martialArt": "20702",
               "attackType": "special"
             }
-          ]
+          ],
+          "ids": {
+            "0": {
+              "maxHp": "166601",
+              "physDef": "166602",
+              "precision": "166603",
+              "crit": "166604",
+              "affinity": "166605"
+            },
+            "1": {
+              "body": "167001",
+              "power": "167002",
+              "defense": "167003",
+              "agility": "167004",
+              "momentum": "167005",
+              "maxHp": "167006",
+              "minPhys": "167007",
+              "maxPhys": "167008",
+              "physDef": "167009",
+              "precision": "167018",
+              "crit": "167019",
+              "affinity": "167020"
+            }
+          }
         }
       },
       "81": {
@@ -17896,7 +18184,30 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "maxHp": "166401",
+              "physDef": "166402",
+              "precision": "166403",
+              "crit": "166404",
+              "affinity": "166405"
+            },
+            "1": {
+              "body": "166801",
+              "power": "166802",
+              "defense": "166803",
+              "agility": "166804",
+              "momentum": "166805",
+              "maxHp": "166806",
+              "minPhys": "166807",
+              "maxPhys": "166808",
+              "physDef": "166809",
+              "precision": "166818",
+              "crit": "166819",
+              "affinity": "166820"
+            }
+          }
         },
         "4": {
           "0": [
@@ -18183,7 +18494,30 @@
               "martialArt": "20702",
               "attackType": "special"
             }
-          ]
+          ],
+          "ids": {
+            "0": {
+              "maxHp": "166501",
+              "physDef": "166502",
+              "precision": "166503",
+              "crit": "166504",
+              "affinity": "166505"
+            },
+            "1": {
+              "body": "166801",
+              "power": "166802",
+              "defense": "166803",
+              "agility": "166804",
+              "momentum": "166805",
+              "maxHp": "166806",
+              "minPhys": "166807",
+              "maxPhys": "166808",
+              "physDef": "166809",
+              "precision": "166818",
+              "crit": "166819",
+              "affinity": "166820"
+            }
+          }
         },
         "5": {
           "0": [
@@ -18470,7 +18804,30 @@
               "martialArt": "20702",
               "attackType": "special"
             }
-          ]
+          ],
+          "ids": {
+            "0": {
+              "maxHp": "166601",
+              "physDef": "166602",
+              "precision": "166603",
+              "crit": "166604",
+              "affinity": "166605"
+            },
+            "1": {
+              "body": "167001",
+              "power": "167002",
+              "defense": "167003",
+              "agility": "167004",
+              "momentum": "167005",
+              "maxHp": "167006",
+              "minPhys": "167007",
+              "maxPhys": "167008",
+              "physDef": "167009",
+              "precision": "167018",
+              "crit": "167019",
+              "affinity": "167020"
+            }
+          }
         }
       },
       "81": {
@@ -22927,7 +23284,34 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166101",
+              "maxPhys": "166102"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "4": {
           "0": [
@@ -23049,7 +23433,34 @@
               "martialArt": "10101",
               "attackType": "special"
             }
-          ]
+          ],
+          "ids": {
+            "0": {
+              "minPhys": "166201",
+              "maxPhys": "166202"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "5": {
           "0": [
@@ -23171,7 +23582,34 @@
               "martialArt": "10101",
               "attackType": "special"
             }
-          ]
+          ],
+          "ids": {
+            "0": {
+              "minPhys": "166301",
+              "maxPhys": "166302"
+            },
+            "1": {
+              "body": "166901",
+              "power": "166902",
+              "defense": "166903",
+              "agility": "166904",
+              "momentum": "166905",
+              "maxHp": "166906",
+              "minPhys": "166907",
+              "maxPhys": "166908",
+              "physDef": "166909",
+              "precision": "166918",
+              "crit": "166919",
+              "affinity": "166920",
+              "lightAtkDmg": "166921",
+              "heavyAtkDmg": "166922",
+              "airborneLightAtkDmg": "166923",
+              "jumpStrikeDmg": "166924",
+              "dualWeaponSkillDmg": "166925",
+              "executionDmg": "166926",
+              "dashDmg": "166927"
+            }
+          }
         }
       },
       "81": {
@@ -25780,7 +26218,38 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166101",
+              "maxPhys": "166102",
+              "minBamboocut": "166109",
+              "maxBamboocut": "166110"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "minBamboocut": "166716",
+              "maxBamboocut": "166717",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "4": {
           "0": [
@@ -25881,7 +26350,38 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166201",
+              "maxPhys": "166202",
+              "minBamboocut": "166209",
+              "maxBamboocut": "166210"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "minBamboocut": "166716",
+              "maxBamboocut": "166717",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "5": {
           "0": [
@@ -25982,7 +26482,38 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166301",
+              "maxPhys": "166302",
+              "minBamboocut": "166309",
+              "maxBamboocut": "166310"
+            },
+            "1": {
+              "body": "166901",
+              "power": "166902",
+              "defense": "166903",
+              "agility": "166904",
+              "momentum": "166905",
+              "maxHp": "166906",
+              "minPhys": "166907",
+              "maxPhys": "166908",
+              "physDef": "166909",
+              "minBamboocut": "166916",
+              "maxBamboocut": "166917",
+              "precision": "166918",
+              "crit": "166919",
+              "affinity": "166920",
+              "lightAtkDmg": "166921",
+              "heavyAtkDmg": "166922",
+              "airborneLightAtkDmg": "166923",
+              "jumpStrikeDmg": "166924",
+              "dualWeaponSkillDmg": "166925",
+              "executionDmg": "166926",
+              "dashDmg": "166927"
+            }
+          }
         }
       },
       "81": {
@@ -28465,7 +28996,38 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166101",
+              "maxPhys": "166102",
+              "minSilkbind": "166107",
+              "maxSilkbind": "166108"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "minSilkbind": "166714",
+              "maxSilkbind": "166715",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "4": {
           "0": [
@@ -28566,7 +29128,38 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166201",
+              "maxPhys": "166202",
+              "minSilkbind": "166207",
+              "maxSilkbind": "166208"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "minSilkbind": "166714",
+              "maxSilkbind": "166715",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "5": {
           "0": [
@@ -28667,7 +29260,38 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166301",
+              "maxPhys": "166302",
+              "minSilkbind": "166307",
+              "maxSilkbind": "166308"
+            },
+            "1": {
+              "body": "166901",
+              "power": "166902",
+              "defense": "166903",
+              "agility": "166904",
+              "momentum": "166905",
+              "maxHp": "166906",
+              "minPhys": "166907",
+              "maxPhys": "166908",
+              "physDef": "166909",
+              "minSilkbind": "166914",
+              "maxSilkbind": "166915",
+              "precision": "166918",
+              "crit": "166919",
+              "affinity": "166920",
+              "lightAtkDmg": "166921",
+              "heavyAtkDmg": "166922",
+              "airborneLightAtkDmg": "166923",
+              "jumpStrikeDmg": "166924",
+              "dualWeaponSkillDmg": "166925",
+              "executionDmg": "166926",
+              "dashDmg": "166927"
+            }
+          }
         }
       },
       "81": {
@@ -31140,7 +31764,34 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166101",
+              "maxPhys": "166102"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "4": {
           "0": [
@@ -31231,7 +31882,34 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166201",
+              "maxPhys": "166202"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "5": {
           "0": [
@@ -31322,7 +32000,34 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166301",
+              "maxPhys": "166302"
+            },
+            "1": {
+              "body": "166901",
+              "power": "166902",
+              "defense": "166903",
+              "agility": "166904",
+              "momentum": "166905",
+              "maxHp": "166906",
+              "minPhys": "166907",
+              "maxPhys": "166908",
+              "physDef": "166909",
+              "precision": "166918",
+              "crit": "166919",
+              "affinity": "166920",
+              "lightAtkDmg": "166921",
+              "heavyAtkDmg": "166922",
+              "airborneLightAtkDmg": "166923",
+              "jumpStrikeDmg": "166924",
+              "dualWeaponSkillDmg": "166925",
+              "executionDmg": "166926",
+              "dashDmg": "166927"
+            }
+          }
         }
       },
       "81": {
@@ -33795,7 +34500,34 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166101",
+              "maxPhys": "166102"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "4": {
           "0": [
@@ -33886,7 +34618,34 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166201",
+              "maxPhys": "166202"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "5": {
           "0": [
@@ -33977,7 +34736,34 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166301",
+              "maxPhys": "166302"
+            },
+            "1": {
+              "body": "166901",
+              "power": "166902",
+              "defense": "166903",
+              "agility": "166904",
+              "momentum": "166905",
+              "maxHp": "166906",
+              "minPhys": "166907",
+              "maxPhys": "166908",
+              "physDef": "166909",
+              "precision": "166918",
+              "crit": "166919",
+              "affinity": "166920",
+              "lightAtkDmg": "166921",
+              "heavyAtkDmg": "166922",
+              "airborneLightAtkDmg": "166923",
+              "jumpStrikeDmg": "166924",
+              "dualWeaponSkillDmg": "166925",
+              "executionDmg": "166926",
+              "dashDmg": "166927"
+            }
+          }
         }
       },
       "81": {
@@ -36460,7 +37246,38 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166101",
+              "maxPhys": "166102",
+              "minStonesplit": "166105",
+              "maxStonesplit": "166106"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "minStonesplit": "166712",
+              "maxStonesplit": "166713",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "4": {
           "0": [
@@ -36561,7 +37378,38 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166201",
+              "maxPhys": "166202",
+              "minStonesplit": "166205",
+              "maxStonesplit": "166206"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "minStonesplit": "166712",
+              "maxStonesplit": "166713",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "5": {
           "0": [
@@ -36662,7 +37510,38 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166301",
+              "maxPhys": "166302",
+              "minStonesplit": "166305",
+              "maxStonesplit": "166306"
+            },
+            "1": {
+              "body": "166901",
+              "power": "166902",
+              "defense": "166903",
+              "agility": "166904",
+              "momentum": "166905",
+              "maxHp": "166906",
+              "minPhys": "166907",
+              "maxPhys": "166908",
+              "physDef": "166909",
+              "minStonesplit": "166912",
+              "maxStonesplit": "166913",
+              "precision": "166918",
+              "crit": "166919",
+              "affinity": "166920",
+              "lightAtkDmg": "166921",
+              "heavyAtkDmg": "166922",
+              "airborneLightAtkDmg": "166923",
+              "jumpStrikeDmg": "166924",
+              "dualWeaponSkillDmg": "166925",
+              "executionDmg": "166926",
+              "dashDmg": "166927"
+            }
+          }
         }
       },
       "81": {
@@ -39145,7 +40024,38 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166101",
+              "maxPhys": "166102",
+              "minBamboocut": "166109",
+              "maxBamboocut": "166110"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "minBamboocut": "166716",
+              "maxBamboocut": "166717",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "4": {
           "0": [
@@ -39246,7 +40156,38 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166201",
+              "maxPhys": "166202",
+              "minBamboocut": "166209",
+              "maxBamboocut": "166210"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "minBamboocut": "166716",
+              "maxBamboocut": "166717",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "5": {
           "0": [
@@ -39347,7 +40288,38 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166301",
+              "maxPhys": "166302",
+              "minBamboocut": "166309",
+              "maxBamboocut": "166310"
+            },
+            "1": {
+              "body": "166901",
+              "power": "166902",
+              "defense": "166903",
+              "agility": "166904",
+              "momentum": "166905",
+              "maxHp": "166906",
+              "minPhys": "166907",
+              "maxPhys": "166908",
+              "physDef": "166909",
+              "minBamboocut": "166916",
+              "maxBamboocut": "166917",
+              "precision": "166918",
+              "crit": "166919",
+              "affinity": "166920",
+              "lightAtkDmg": "166921",
+              "heavyAtkDmg": "166922",
+              "airborneLightAtkDmg": "166923",
+              "jumpStrikeDmg": "166924",
+              "dualWeaponSkillDmg": "166925",
+              "executionDmg": "166926",
+              "dashDmg": "166927"
+            }
+          }
         }
       },
       "81": {
@@ -41840,7 +42812,42 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166101",
+              "maxPhys": "166102",
+              "minBellstrike": "166103",
+              "maxBellstrike": "166104",
+              "minStonesplit": "166105",
+              "maxStonesplit": "166106"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "minBellstrike": "166710",
+              "maxBellstrike": "166711",
+              "minStonesplit": "166712",
+              "maxStonesplit": "166713",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "4": {
           "0": [
@@ -41951,7 +42958,42 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166201",
+              "maxPhys": "166202",
+              "minBellstrike": "166203",
+              "maxBellstrike": "166204",
+              "minStonesplit": "166205",
+              "maxStonesplit": "166206"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "minBellstrike": "166710",
+              "maxBellstrike": "166711",
+              "minStonesplit": "166712",
+              "maxStonesplit": "166713",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "5": {
           "0": [
@@ -42062,7 +43104,42 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166301",
+              "maxPhys": "166302",
+              "minBellstrike": "166303",
+              "maxBellstrike": "166304",
+              "minStonesplit": "166305",
+              "maxStonesplit": "166306"
+            },
+            "1": {
+              "body": "166901",
+              "power": "166902",
+              "defense": "166903",
+              "agility": "166904",
+              "momentum": "166905",
+              "maxHp": "166906",
+              "minPhys": "166907",
+              "maxPhys": "166908",
+              "physDef": "166909",
+              "minBellstrike": "166910",
+              "maxBellstrike": "166911",
+              "minStonesplit": "166912",
+              "maxStonesplit": "166913",
+              "precision": "166918",
+              "crit": "166919",
+              "affinity": "166920",
+              "lightAtkDmg": "166921",
+              "heavyAtkDmg": "166922",
+              "airborneLightAtkDmg": "166923",
+              "jumpStrikeDmg": "166924",
+              "dualWeaponSkillDmg": "166925",
+              "executionDmg": "166926",
+              "dashDmg": "166927"
+            }
+          }
         }
       },
       "81": {
@@ -44581,7 +45658,38 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166101",
+              "maxPhys": "166102",
+              "minBellstrike": "166103",
+              "maxBellstrike": "166104"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "minBellstrike": "166710",
+              "maxBellstrike": "166711",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "4": {
           "0": [
@@ -44682,7 +45790,38 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166201",
+              "maxPhys": "166202",
+              "minBellstrike": "166203",
+              "maxBellstrike": "166204"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "minBellstrike": "166710",
+              "maxBellstrike": "166711",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "5": {
           "0": [
@@ -44783,7 +45922,38 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166301",
+              "maxPhys": "166302",
+              "minBellstrike": "166303",
+              "maxBellstrike": "166304"
+            },
+            "1": {
+              "body": "166901",
+              "power": "166902",
+              "defense": "166903",
+              "agility": "166904",
+              "momentum": "166905",
+              "maxHp": "166906",
+              "minPhys": "166907",
+              "maxPhys": "166908",
+              "physDef": "166909",
+              "minBellstrike": "166910",
+              "maxBellstrike": "166911",
+              "precision": "166918",
+              "crit": "166919",
+              "affinity": "166920",
+              "lightAtkDmg": "166921",
+              "heavyAtkDmg": "166922",
+              "airborneLightAtkDmg": "166923",
+              "jumpStrikeDmg": "166924",
+              "dualWeaponSkillDmg": "166925",
+              "executionDmg": "166926",
+              "dashDmg": "166927"
+            }
+          }
         }
       },
       "81": {
@@ -47276,7 +48446,42 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166101",
+              "maxPhys": "166102",
+              "minSilkbind": "166107",
+              "maxSilkbind": "166108",
+              "minBamboocut": "166109",
+              "maxBamboocut": "166110"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "minSilkbind": "166714",
+              "maxSilkbind": "166715",
+              "minBamboocut": "166716",
+              "maxBamboocut": "166717",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "4": {
           "0": [
@@ -47387,7 +48592,42 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166201",
+              "maxPhys": "166202",
+              "minSilkbind": "166207",
+              "maxSilkbind": "166208",
+              "minBamboocut": "166209",
+              "maxBamboocut": "166210"
+            },
+            "1": {
+              "body": "166701",
+              "power": "166702",
+              "defense": "166703",
+              "agility": "166704",
+              "momentum": "166705",
+              "maxHp": "166706",
+              "minPhys": "166707",
+              "maxPhys": "166708",
+              "physDef": "166709",
+              "minSilkbind": "166714",
+              "maxSilkbind": "166715",
+              "minBamboocut": "166716",
+              "maxBamboocut": "166717",
+              "precision": "166718",
+              "crit": "166719",
+              "affinity": "166720",
+              "lightAtkDmg": "166721",
+              "heavyAtkDmg": "166722",
+              "airborneLightAtkDmg": "166723",
+              "jumpStrikeDmg": "166724",
+              "dualWeaponSkillDmg": "166725",
+              "executionDmg": "166726",
+              "dashDmg": "166727"
+            }
+          }
         },
         "5": {
           "0": [
@@ -47498,7 +48738,42 @@
             "power",
             "precision"
           ],
-          "5": []
+          "5": [],
+          "ids": {
+            "0": {
+              "minPhys": "166301",
+              "maxPhys": "166302",
+              "minSilkbind": "166307",
+              "maxSilkbind": "166308",
+              "minBamboocut": "166309",
+              "maxBamboocut": "166310"
+            },
+            "1": {
+              "body": "166901",
+              "power": "166902",
+              "defense": "166903",
+              "agility": "166904",
+              "momentum": "166905",
+              "maxHp": "166906",
+              "minPhys": "166907",
+              "maxPhys": "166908",
+              "physDef": "166909",
+              "minSilkbind": "166914",
+              "maxSilkbind": "166915",
+              "minBamboocut": "166916",
+              "maxBamboocut": "166917",
+              "precision": "166918",
+              "crit": "166919",
+              "affinity": "166920",
+              "lightAtkDmg": "166921",
+              "heavyAtkDmg": "166922",
+              "airborneLightAtkDmg": "166923",
+              "jumpStrikeDmg": "166924",
+              "dualWeaponSkillDmg": "166925",
+              "executionDmg": "166926",
+              "dashDmg": "166927"
+            }
+          }
         }
       },
       "81": {

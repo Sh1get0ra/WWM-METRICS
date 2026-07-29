@@ -1,6 +1,6 @@
 {
   "_schema": "affix 選択肢 表示用 出現確率(%)。 data[wdbCat][lv][tier][idx][statKey] = pct",
-  "_source": "client mining (scripts/mining/monthly/build_affix_selector_from_client.py)。Lv71 と ATTUNE(idx5) は client に元データが無いため従来値を引き継ぎ",
+  "_source": "client mining 一本化 (idx0-5 全域)。ATTUNE(idx5) は build_affix_selector_from_client.py の ATTUNE_GROUPS (cat グループ x Lv の 7 エントリ) 由来。Lv71 は group ID が 3 桁の旧体系なので専用判定を通している",
   "_builtAt": "2026-07-04",
   "_notes": "素材アイテム(name===slot)除外済み。 idx 5 (ATTUNE) は対象外 (流派別プール、別構造) / 2026-07-05: Lv100/105 追加 (client直接抽出mining、scripts/build-affix-selector-lv100-105.cjs 由来。既存Lv71-96は無変更)",
   "data": {
