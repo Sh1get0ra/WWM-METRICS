@@ -32,6 +32,9 @@
   // affix 差替が発生した slot のみのため、affix 最適余地の無かった slot [例: 弓/射玦] は
   // LvUP 自体が適用処理から漏れ、提案スコアと適用後スコアがまだ僅かに乖離していた)。
   let _OPT_LAST_LVFIX = null;
+  // 装備Lv UP fix の「表示専用 固定行」HTML (2026-07-30)。_OPT_resortRows が body.innerHTML を
+  // 全置換するため、ここに保持しておかないと sort 切替でこの行だけ消える。
+  let _OPT_LAST_LVFIX_ROW = '';
   // 装備部位 sort用 order map (renderOptimization + _OPT_resortRows 共通)
   const _OPT_SLOT_ORDER = { '1':0,'2':1,'3':2,'4':3,'5':4,'8':5,'10':6,'11':7,'9,21':99,'9':99,'21':99 };
 
@@ -81,7 +84,8 @@
       const pct = ratio != null ? `(${Math.round(ratio*100)}%)` : '';
       return `${name} ${v}${pct}`;
     };
-    body.innerHTML = view.map((s) => {
+    // 装備Lv UP の固定行は sort 対象外 = 常に先頭に置き直す (steps に含まれないため view に乗らない)
+    body.innerHTML = _OPT_LAST_LVFIX_ROW + view.map((s) => {
       const isBow = s.kind === 'bowSet';
       const slotCol = isBow ? s.slotLabel : `${s.slotLabel}#${s.idx+1}`;
       const changeCol = isBow
@@ -293,7 +297,36 @@
         return (a.idx || 0) - (b.idx || 0);
       });
     }
-    const rows = stepsView.length ? stepsView.map((s) => {
+    // 装備Lv UP fix (①ブロック) の寄与を「表示専用の固定行」として先頭に出す (2026-07-30)。
+    // この分は steps に入らない (steps = ② Greedy の affix 差替のみ) のに totalDelta には
+    // 含まれるため、行の delta を全部足しても summary と合わない状態だった
+    // (実測: charLv96 + 装備Lv91 で差 956.05、内訳不明の残差は 0.00 = 全部これ)。
+    // 🚨 checkbox は付けない。_applyOptSteps (L377-384) が lvFixApplied を選択と無関係に
+    // 必ず適用するので、外せる UI にすると嘘になる。steps 配列にも入れない
+    // (_origIdx / data-opt-step の添字がずれる + exportSteps の schema が変わるため)。
+    const _lvFixDelta = startScore - displayStartScore;
+    const _lvFixes = optResult.lvFixApplied || [];
+    const lvFixRow = (_lvFixes.length && _lvFixDelta >= 0.5) ? (() => {
+      const fromLv = Math.min(..._lvFixes.map((f) => f.fromLv));
+      const toLv = _lvFixes[0].toLv;
+      const _t = (k, def) => (window.T && window.T[k]) || def;
+      const label = _t('optLvUpLabel', '装備Lv');
+      const fromTxt = _t('optLvUpSlots', '{0} ({1}部位)')
+        .replace('{0}', fromLv).replace('{1}', _lvFixes.length);
+      // DOM 構造は step 行と完全に同じ (mobile の .wwm-opt-change{display:contents} +
+      // grid-area from/to がそのまま効くので CSS 追加不要)
+      return `
+      <div class="wwm-opt-row">
+        <span class="wwm-opt-pos">—</span>
+        <span class="wwm-opt-slot">${label}</span>
+        <span class="wwm-opt-change"><span class="wwm-opt-from">${fromTxt}</span><span class="wwm-opt-to">▶ ${toLv}</span></span>
+        <span class="wwm-opt-delta">+${Math.round(_lvFixDelta).toLocaleString()}</span>
+        <span></span>
+        <span class="wwm-opt-check-wrap"></span>
+      </div>
+    `;
+    })() : '';
+    const stepRows = stepsView.length ? stepsView.map((s) => {
       const isBow = s.kind === 'bowSet';
       const slotCol = isBow ? s.slotLabel : `${s.slotLabel}#${s.idx+1}`;
       const changeCol = isBow
@@ -308,9 +341,14 @@
         ${s.tierUp ? `<span class="wwm-opt-tierup">★ ${s.tierUp}</span>` : '<span></span>'}
         <label class="wwm-opt-check-wrap" title="${(window.T&&T.optSelectOne)||'選択'}"><input type="checkbox" class="wwm-opt-check" data-opt-step="${s._origIdx}" checked></label>
       </div>
-    `;}).join('') : `<div class="wwm-opt-empty">${(window.T&&window.T.optNoImprovement)||'改善余地なし'}</div>`;
+    `;}).join('') : '';
+    // 「改善余地なし」は lvFix 行も affix 提案も両方無い時だけ出す
+    // (装備Lv UP だけ発生して affix 差替が 0 件、というケースで空表示にしないため)
+    const rows = (lvFixRow + stepRows)
+      || `<div class="wwm-opt-empty">${(window.T&&window.T.optNoImprovement)||'改善余地なし'}</div>`;
     // 結果 cache (export 用)
     _OPT_LAST_STEPS = steps;
+    _OPT_LAST_LVFIX_ROW = lvFixRow;  // sort 切替 (_OPT_resortRows) で消えないよう保持
     _OPT_LAST_SCORES = { start: Math.round(displayStartScore), end: Math.round(curScore), delta: totalDelta, ratio: TARGET_RATIO };
     // Tier 基準: 最適化最大スコア (= curScore) は import 時に1回だけ確定保存。以降の opt 再計算では値を更新しない。
     // ※ applyImport で localStorage 削除 + LOCKED 解除 → 再 import で再確定する。

@@ -3247,6 +3247,34 @@
     "th": "กำลังคำนวณ... (รอบที่ {0})",
     "zh_tw": "計算中... (第{0}次)"
   },
+  "optLvUpLabel": {
+    "ja": "装備Lv",
+    "en": "Gear Lv",
+    "zh": "装备Lv",
+    "ko": "장비 Lv",
+    "vi": "Lv trang bị",
+    "de": "Ausrüst.-Lv",
+    "es": "Lv equipo",
+    "fr": "Lv équip.",
+    "pt_br": "Lv equip.",
+    "ru": "Lv экип.",
+    "th": "Lv อุปกรณ์",
+    "zh_tw": "裝備Lv"
+  },
+  "optLvUpSlots": {
+    "ja": "{0} ({1}部位)",
+    "en": "{0} ({1} slots)",
+    "zh": "{0} ({1}部位)",
+    "ko": "{0} ({1}부위)",
+    "vi": "{0} ({1} vị trí)",
+    "de": "{0} ({1} Slots)",
+    "es": "{0} ({1} ranuras)",
+    "fr": "{0} ({1} empl.)",
+    "pt_br": "{0} ({1} slots)",
+    "ru": "{0} ({1} слот.)",
+    "th": "{0} ({1} ช่อง)",
+    "zh_tw": "{0} ({1}欄位)"
+  },
   "tipAffixUseful": {
     "ja": "ゲーム内 👍 マーク (火力寄与)",
     "en": "In-game 👍 mark (DMG contributor)",
