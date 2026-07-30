@@ -1,6 +1,6 @@
 {
-  "_schema": "心法 effect (path × statType × rank) 単位 master (T2 値 WorldLv 1-21 別精密値)。 wdb inner-ways/{id} hidden DOM 抽出。 心法 ID 別でなく effect 集約 = メンテ性 (バランス調整で値更新時 1 箇所)。",
-  "_source": "wwmdb.vlt.fyi inner-ways/{id} F12 hidden DOM Attributes (WL1-4のみ、他はclient mining) + client mining (data8#3731-3735 直接抽出、WL5-21、2026-07-04 build_xinfa_t2t5_values.py 検証済み oracle 23系列全一致 ng=0、2026-07-14 apply_xinfa_t2t5_values.py で本番反映)",
+  "_schema": "心法 effect (path × statType × rank) 単位 master (T2 値 WorldLv 1-21 別精密値)。 取得済みスナップショット由来。 心法 ID 別でなく effect 集約 = メンテ性 (バランス調整で値更新時 1 箇所)。",
+  "_source": "取得済みスナップショット (WL1-4) (WL1-4のみ、他はclient mining) + client mining (data8#3731-3735 直接抽出、WL5-21、2026-07-04 build_xinfa_t2t5_values.py 検証済み oracle 23系列全一致 ng=0、2026-07-14 apply_xinfa_t2t5_values.py で本番反映)",
   "_lastUpdated": "2026-07-14",
   "effects": {
     "phys_min_blue": {

@@ -5965,6 +5965,6 @@
   },
   "_schema": "ARENA ATTUNE 発動効果系 = PvP 専用定音テーブル。 affix.json と分離 = 計算寄与ゼロ + 将来 PvP コンボシミュ用解析土台 (2026-06-24)。",
   "_lastUpdated": "2026-06-24",
-  "_source": "wwmdb.vlt.fyi equip-items snapshot (Lv71-96 × t3/t4/t5)",
+  "_source": "取得済みスナップショット (Lv71-96 × t3/t4/t5)",
   "_note": "兄貴方針: 表示は全 entry「PvP専用定音」 ja で fallback 統一、計算寄与ゼロ keep。 将来戦律コンテンツ時期に個別ラベル化 + PvP コンボシミュ実装予定。 name_en = 公式 ja 翻訳採取まで原文 keep。"
 }

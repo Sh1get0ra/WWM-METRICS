@@ -1,5 +1,5 @@
 {
-  "_schema": "wwmdb 由来 affix selector 統合 master。 build: scripts/wwmdb-build-affix-selector.cjs",
+  "_schema": "affix selector 統合 master (client mining 由来、2026-07-27 一本化)",
   "_source": "client mining 一本化 (idx0-5 全域)。ATTUNE(idx5) は build_affix_selector_from_client.py の ATTUNE_GROUPS (cat グループ x Lv の 7 エントリ) 由来。Lv71 は group ID が 3 桁の旧体系なので専用判定を通している",
   "_builtAt": "2026-06-24T09:30:00Z",
   "_structure": "data[wdbCat][lv][tier][idx] : idx 0-4 = [statKey, ...] (0=INITIAL/1-4=TUNING共通) / idx 5 = [{statKey, martialArt, attackType}, ...] (ATTUNE) / ids = {slotIdx: {statKey: affixId}} (2026-07-27 追加、Lv 世代をまたぐ選択肢解決用)",

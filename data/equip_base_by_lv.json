@@ -1,6 +1,6 @@
 {
-  "_schema": "全 Lv × 全 Tier × 全 slot base stat マスタ。 wdb 実値 mode 採用、 算式廃止 ([[equipment-quality-rank-formula]] 紫=round(金×0.9) は ±1 ズレ で wdb と不一致 = 廃止)。",
-  "_source": "wwmdb.vlt.fyi equip-items snapshot (Lv71-96、 mode 採用) + client直接抽出 (Lv71-96 全slot完全一致検証済み、 Lv100/105 = 装備item master group id経由の先行データ)",
+  "_schema": "全 Lv × 全 Tier × 全 slot base stat マスタ。 取得済み実値の mode 採用、 算式廃止 ([[equipment-quality-rank-formula]] 紫=round(金×0.9) は ±1 ズレ で 実値と不一致 = 廃止)。",
+  "_source": "取得済みスナップショット (Lv71-96、 mode 採用) + client直接抽出 (Lv71-96 全slot完全一致検証済み、 Lv100/105 = 装備item master group id経由の先行データ)",
   "_lastUpdated": "2026-07-04",
   "_lvList": [
     71,
