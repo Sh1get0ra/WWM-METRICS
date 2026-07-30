@@ -300,7 +300,7 @@
   //   汎用武器種ダメ除外用に使用、 idx 0-4 は master 1 本化済)
   const _WEAPON_DMG_KEYS = new Set(['swordDmg','spearDmg','fanDmg','umbrellaDmg','moBladeDmg','dualBladesDmg','ropeDartDmg','hengBladeDmg','gauntletDmg']);
 
-  // INITIAL (affix#1) 候補 master (wwmdb 由来 = data/affix_candidates_initial.json) 経由 filter
+  // INITIAL (affix#1) 候補 master (data/affix_candidates_initial.json) 経由 filter
   // slot 別 装備カテゴリ判定 (防具+装飾品 = 直 mapping。 武器/弓 slot は master 経由 filter 無効 = 旧経路 keep)
   // ツール slot ↔ wdb category 対応 (静的):
   //   '3'/'4'/'5'/'8' = 防具 4 種 / '10' = 環 (wdb Disc) / '11' = 佩 (wdb Pendant)
