@@ -8,6 +8,9 @@
   // stat_short/skilltype_short/kongfu_short/xinfa_tier_label は data/i18n/game.json に統合済。
   // ui (Layer3=ツール独自UI文言) / noClientData (Layer2=mining不可ゲーム用語) のみ個別ファイルとして残置。
   const CATS = ['ui', 'noClientData'];
+  // noClientData.json 内で cat 階層を持つ key (= mining 対象外と決めて game.json から移した cat)。
+  // ready() 内で data トップへ展開するので name(cat, id) の引き方は移設前と変わらない。
+  const NCD_NESTED_CATS = ['skilltype', 'skilltype_short'];
   // t() lookup chain: ui (常用語) → game_lexicon (ゲーム内用語、zh anchor mining対象31キー) → stat (パネル表示59項目、2026-07-03 affix分離済) → affix_stat (affix専用) → noClientData (mining 不可 隔離、係数系ツール独自5キーは 2026-07-04 game_lexicon から移管) → xinfa_tier_label (心法 tier effect text)
   const T_CHAIN = ['ui', 'game_lexicon', 'stat', 'affix_stat', 'noClientData', 'xinfa_tier_label'];
   // 動的 getter 化 (2026-06-25 真因 fix): 旧 const は module 読込時 1 回評価で
@@ -333,10 +336,20 @@
         const res = await fetch('data/i18n/' + cat + '.json?v=' + getVersion());
         if (!res.ok) throw new Error('DataStore: failed to fetch ' + cat + '.json (' + res.status + ')');
         data[cat] = await res.json();
+        // noClientData だけ 2 構造が混在する。 従来の 7 key (probSympathy 等) は key 直下が
+        // lang map の flat 形で、 t() の T_CHAIN から直接引く。 NCD_NESTED_CATS は cat 階層を
+        // 持つ入れ子形で、 data トップへ展開して name(cat, id) から引けるようにする
+        // (2026-07-29: mining 対象外と決めた cat を game.json から移した際に追加、 data-schema.md 参照)。
+        if (cat === 'noClientData') {
+          for (const nested of NCD_NESTED_CATS) {
+            if (data[cat] && data[cat][nested]) data[nested] = data[cat][nested];
+          }
+        }
       }),
       (async () => {
         // 2026-07-01: stat/path (Phase1) + kongfu/kongfu_short/xinfa/xinfa_tier_label/sets/qishu/
-        // skilltype/skilltype_short/weapontype/game_lexicon/stat_short (Phase2) 統合 (data/i18n/game.json)
+        // weapontype/game_lexicon/stat_short (Phase2) 統合 (data/i18n/game.json)
+        // 🚨 skilltype/skilltype_short は 2026-07-29 に noClientData.json へ移した (mining 対象外化)
         const res = await fetch('data/i18n/game.json?v=' + getVersion());
         if (!res.ok) throw new Error('DataStore: failed to fetch game.json (' + res.status + ')');
         const game = await res.json();
@@ -409,14 +422,19 @@
     const suffix = key.slice(def.prefix.length);
     const skillKey = SUFFIX_TO_SKILL[suffix];
     if (!skillKey) return null;
-    // vi 時 = kongfu/skilltype 両方 短縮版優先 (武具対照 modal + import preview + 防具 affix6
-    // dropdown の武術固有 affix 文字切れ救済)。 真実源 (kongfu.json/skilltype.json 公式 lexicon)
-    // 不変 keep、 表示時 fallback only。 short miss 時は通常 lookup chain。
-    let weap = null;
-    if (lang === 'vi') weap = _lookup('kongfu_short', def.id, 'vi');
+    // 短縮版優先 (武具対照 modal + import preview + 防具 affix6 dropdown の
+    // 武術固有 affix 文字切れ救済)。 真実源 (kongfu/skilltype cat) 不変 keep、
+    // 表示時 fallback only。 short miss 時は通常 lookup chain。
+    //
+    // 2026-07-29: skilltype_short を **全言語** 参照に変更 (旧: vi 時のみ)。
+    // DB 画面 chip 用に skilltype 側へ「技」相当を付けた (軽撃派生 → 軽撃派生技) が、
+    // attune affix 名は「kongfu 名 + 種別名」の合成なので同じ語を使うと伸びる
+    // (es/fr/pt_br で +13〜14 字)。**chip = skilltype / attune = skilltype_short** に
+    // 役割分担させ、attune 側は「技」なしの短い語を引く。
+    // kongfu_short は vi にしか値が無いので実挙動は従来どおり (miss → kongfu へ fallback)。
+    let weap = _lookup('kongfu_short', def.id, lang);
     if (!weap) weap = _lookup('kongfu', def.id, lang);
-    let tip = null;
-    if (lang === 'vi') tip = _lookup('skilltype_short', skillKey, 'vi');
+    let tip = _lookup('skilltype_short', skillKey, lang);
     if (!tip) tip = _lookup('skilltype', skillKey, lang);
     if (!weap || !tip) return null;
     if (lang === 'en') {

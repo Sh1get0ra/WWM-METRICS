@@ -9542,313 +9542,6 @@
       "zh_ko_vi_extracted_at": "2026-06-13T12:03:19.608Z"
     }
   },
-  "skilltype": {
-    "martial": {
-      "ja": "武術技",
-      "en": "Martial Art Skill",
-      "zh": "武学技",
-      "ko": "무술 스킬",
-      "vi": "kỹ năng võ học",
-      "de": "Kampfkunst-Fertigkeit",
-      "es": "Habilidad de Arte Marcial",
-      "fr": "Compétence d'Art Martial",
-      "pt_br": "Habilidade de Arte Marcial",
-      "ru": "Навык боевого искусства",
-      "th": "ทักษะศิลปะการต่อสู้",
-      "zh_tw": "武學技"
-    },
-    "charged": {
-      "ja": "溜め技",
-      "en": "Charged Skill",
-      "zh": "蓄力技",
-      "ko": "차지 스킬",
-      "vi": "kỹ năng tích lực",
-      "de": "Geladene Fähigkeit",
-      "es": "Habilidad Cargada",
-      "fr": "Compétence Chargée",
-      "pt_br": "Habilidade Carregada",
-      "ru": "Заряжаемый навык",
-      "th": "ทักษะชาร์จพลัง",
-      "zh_tw": "蓄力技"
-    },
-    "lightCharged": {
-      "ja": "軽撃・溜め",
-      "en": "Light Attack Charged",
-      "zh": "轻击蓄力",
-      "ko": "약공격 차지",
-      "zh_tw": "輕擊蓄力",
-      "de": "Geladener Leichter Angriff",
-      "es": "Ataque Ligero Cargado",
-      "fr": "Attaque légère chargée",
-      "pt_br": "Ataque Leve Carregado",
-      "ru": "Заряженная лёгкая атака",
-      "th": "โจมตีเบาชาร์จพลัง"
-    },
-    "heavyCharged": {
-      "ja": "重撃・溜め",
-      "en": "Heavy Attack Charged",
-      "zh": "重击蓄力",
-      "ko": "강공격 차지",
-      "zh_tw": "重擊蓄力"
-    },
-    "special": {
-      "ja": "特殊技",
-      "en": "Special Skill",
-      "zh": "特殊技",
-      "ko": "특수 스킬",
-      "vi": "kỹ năng đặc biệt",
-      "de": "Spezialfähigkeit",
-      "es": "Habilidad Especial",
-      "fr": "Compétence Spéciale",
-      "pt_br": "Habilidade Especial",
-      "ru": "Особый навык",
-      "th": "ทักษะพิเศษ",
-      "zh_tw": "特殊技"
-    },
-    "drone": {
-      "ja": "特殊技",
-      "en": "Drone",
-      "zh": "特殊技",
-      "ko": "특수 스킬",
-      "vi": "kỹ năng đặc biệt",
-      "de": "Spezialfähigkeit",
-      "es": "Habilidad Especial",
-      "fr": "Compétence Spéciale",
-      "pt_br": "Habilidade Especial",
-      "ru": "Особый навык",
-      "th": "ทักษะพิเศษ",
-      "zh_tw": "特殊技"
-    },
-    "light": {
-      "ja": "軽撃",
-      "en": "Light Attack",
-      "zh": "轻击",
-      "zh_tw": "輕擊",
-      "ko": "약공격",
-      "vi": "Đánh nhẹ",
-      "de": "Leichter Angriff",
-      "es": "Ataque Ligero",
-      "fr": "Attaque Légère",
-      "pt_br": "Ataque Leve",
-      "ru": "Легкая атака",
-      "th": "โจมตีเบา"
-    },
-    "rodent": {
-      "ja": "鼠",
-      "en": "Rat",
-      "zh": "鼠",
-      "ko": "쥐",
-      "vi": "Chuột",
-      "de": "Ratte",
-      "es": "Rata",
-      "fr": "Rat",
-      "pt_br": "Rato",
-      "ru": "Крыса",
-      "th": "หนู",
-      "zh_tw": "鼠"
-    },
-    "shield": {
-      "ja": "シールド効果強化",
-      "en": "Shield Boost",
-      "zh": "护盾增效",
-      "ko": "보호막 효과 증가",
-      "vi": "Hộ thuẫn tăng hiệu quả",
-      "de": "Schildschub",
-      "es": "Impulso de Escudo",
-      "fr": "Boost de Bouclier",
-      "pt_br": "Impulso de Escudo",
-      "ru": "Усиление щита",
-      "th": "เกราะป้องกันเพิ่มประสิทธิภาพ",
-      "zh_tw": "護盾增效"
-    },
-    "healing": {
-      "ja": "治癒",
-      "en": "Cure",
-      "zh": "愈合",
-      "zh_tw": "癒合",
-      "ko": "재생",
-      "vi": "Hồi phục",
-      "de": "Heilung",
-      "es": "Cura",
-      "fr": "Soin",
-      "pt_br": "Cura",
-      "ru": "Исцеление",
-      "th": "การฟื้นตัว"
-    },
-    "bleed": {
-      "ja": "流血",
-      "en": "Bleeding",
-      "zh": "流血",
-      "ko": "출혈",
-      "vi": "Chảy máu",
-      "de": "Blutung",
-      "es": "Sangrado",
-      "fr": "Saignement",
-      "pt_br": "Sangramento",
-      "ru": "Кровотечение",
-      "th": "เลือดไหล",
-      "zh_tw": "流血"
-    },
-    "lightVariedCombo": {
-      "ja": "軽撃派生",
-      "en": "Light Attack Varied Combo",
-      "zh": "轻击派生",
-      "zh_tw": "輕擊派生",
-      "ko": "약공격 연계",
-      "vi": "Phái sinh đòn nhẹ",
-      "de": "Variierter Leichter-Angriff-Combo",
-      "es": "Combo Variado de Ataque Ligero",
-      "fr": "Combo Varié d'Attaque Légère",
-      "pt_br": "Combo Variado de Ataque Leve",
-      "ru": "Вариативная комбо лёгких атак",
-      "th": "ต่อเนื่องจากการโจมตีเบา"
-    },
-    "heavy": {
-      "ja": "重撃",
-      "en": "Heavy Attack",
-      "zh": "重击",
-      "ko": "강공격",
-      "vi": "Đánh mạnh",
-      "de": "Schwerer Angriff",
-      "es": "Ataque Pesado",
-      "fr": "Attaque Lourde",
-      "pt_br": "Ataque Pesado",
-      "ru": "Тяжелая атака",
-      "th": "โจมตีหนัก",
-      "zh_tw": "重擊"
-    },
-    "variedCombo": {
-      "ja": "重撃派生",
-      "en": "Heavy Attack Varied Combo",
-      "zh": "重击派生",
-      "zh_tw": "重擊派生",
-      "ko": "강공격 연계",
-      "vi": "Phái sinh đòn mạnh",
-      "de": "Variierter Schwerer-Angriff-Combo",
-      "es": "Combo Variado de Ataque Pesado",
-      "fr": "Combo Varié d'Attaque Lourde",
-      "pt_br": "Combo Variado de Ataque Pesado",
-      "ru": "Вариативная комбо тяжёлых атак",
-      "th": "ต่อเนื่องจากการโจมตีหนัก"
-    },
-    "lightEnhanced": {
-      "ja": "怒炎軽撃",
-      "en": "Flamelash Light Attack",
-      "zh": "嗔焰轻击",
-      "ko": "격노의 화염 약공격",
-      "zh_tw": "嗔焰輕擊",
-      "vi": "Lửa giận bừng cháy đánh nhẹ",
-      "de": "Flammenschlag Leichter Angriff",
-      "es": "Ataque Ligero Llamarada",
-      "fr": "Attaque légère Fouet de flammes",
-      "pt_br": "Ataque Leve do Chicote de Chamas",
-      "ru": "Огненная Плеть - Легкая атака",
-      "th": "เปลวไฟแห่งความโกรธโจมตีเบา"
-    },
-    "heavyEnhanced": {
-      "ja": "強化重撃",
-      "en": "Enhanced Heavy",
-      "zh": "强化重击",
-      "ko": "강화 강공격",
-      "zh_tw": "强化重击",
-      "vi": "Enhanced Heavy",
-      "de": "Enhanced Heavy",
-      "es": "Enhanced Heavy",
-      "fr": "Enhanced Heavy",
-      "pt_br": "Enhanced Heavy",
-      "ru": "Enhanced Heavy",
-      "th": "Enhanced Heavy"
-    },
-    "active": {
-      "ja": "武術技",
-      "en": "Martial Art Skill",
-      "zh": "武学技",
-      "ko": "무술 스킬",
-      "zh_tw": "武學技",
-      "vi": "kỹ năng võ học",
-      "de": "Kampfkunst-Fertigkeit",
-      "es": "Habilidad de Arte Marcial",
-      "fr": "Compétence d'Art Martial",
-      "pt_br": "Habilidade de Arte Marcial",
-      "ru": "Навык боевого искусства",
-      "th": "ทักษะศิลปะการต่อสู้"
-    },
-    "weapon": {
-      "ja": "武変技",
-      "en": "Dual-Weapon Skill",
-      "zh": "易武技",
-      "ko": "무기 전환",
-      "zh_tw": "易武技",
-      "vi": "kỹ năng thay đổi vũ khí",
-      "de": "Zweiwaffen-Fertigkeit",
-      "es": "Habilidad de Doble Arma",
-      "fr": "Compétence Double Arme",
-      "pt_br": "Habilidade de Armas Duplas",
-      "ru": "Умение двойного оружия",
-      "th": "ทักษะเปลี่ยนอาวุธ"
-    },
-    "enhanced": {
-      "ja": "強化技",
-      "en": "Enhanced Skill",
-      "zh": "强化技",
-      "ko": "강화 기술",
-      "zh_tw": "強化技",
-      "vi": "Enhanced Skill",
-      "de": "Verstärkte Fähigkeit",
-      "es": "Habilidad Mejorada",
-      "fr": "Compétence Améliorée",
-      "pt_br": "Habilidade Aprimorada",
-      "ru": "Усиленный навык",
-      "th": "ทักษะเสริมพลัง"
-    },
-    "other": {
-      "ja": "その他",
-      "en": "Other",
-      "zh": "其他",
-      "ko": "기타",
-      "zh_tw": "其他",
-      "vi": "Other",
-      "de": "Andere",
-      "es": "Otro",
-      "fr": "Autre",
-      "pt_br": "Outro",
-      "ru": "Другое",
-      "th": "อื่นๆ"
-    }
-  },
-  "skilltype_short": {
-    "_meta": "vi 短縮表記辞書 (2026-06-18 着手)。 skilltype.json vi 公式表記が「kỹ năng XX」 等長文 → 武術固有合成 affix (例 panaceaFanSpecial = Dược Điển Minh Xuyên + skilltype.special.vi) で文字切れ。 真実源 skilltype.json 不変、 _martialAffix 経路 vi 時のみ skilltype_short 優先。 kongfu 名 (=公式 lexicon) は短縮しない。 兄貴目視校正前提。",
-    "martial": {
-      "vi": "Võ học"
-    },
-    "charged": {
-      "vi": "Tích lực"
-    },
-    "special": {
-      "vi": "Đặc biệt"
-    },
-    "drone": {
-      "vi": "Đặc biệt"
-    },
-    "light": {
-      "vi": "Nhẹ mạnh"
-    },
-    "rodent": {
-      "vi": "Chuột"
-    },
-    "shield": {
-      "vi": "Hộ thuẫn"
-    },
-    "healing": {
-      "vi": "Hồi phục"
-    },
-    "bleed": {
-      "vi": "Chảy máu"
-    },
-    "variedCombo": {
-      "vi": "Nhẹ/Mạnh phát sinh"
-    }
-  },
   "weapontype": {
     "sword": {
       "ja": "剣",
@@ -16450,6 +16143,20 @@
       "vi": "Buồn Không Rượu",
       "zh_tw": "愁無酒"
     },
+    "20101102": {
+      "ja": "断蓬飛び",
+      "en": "Drifting Thrust",
+      "zh": "断蓬飞",
+      "ko": "절연의 비상",
+      "vi": "Cắt Bụi Bay",
+      "de": "Gleitstoß",
+      "es": "Empuje Deslizante",
+      "fr": "Poussée Dérivante",
+      "pt_br": "Investida à Deriva",
+      "ru": "Дрейфующий Толчок",
+      "th": "ตัดสายลมปลิว",
+      "zh_tw": "斷蓬飛"
+    },
     "20101103": {
       "ja": "槍・突進",
       "en": "Spear - Dash",
@@ -16904,6 +16611,20 @@
       "vi": "Quạt·Đánh nhẹ trên không",
       "zh_tw": "扇·空中輕擊"
     },
+    "20301020": {
+      "ja": "扇・跳び斬り",
+      "en": "Fan - Jump Strike",
+      "zh": "扇·跳劈",
+      "ko": "부채-도약 베기",
+      "vi": "Quạt·Nhảy bổ",
+      "de": "Fächer - Sprungschlag",
+      "es": "Abanico - Golpe en Salto",
+      "fr": "Éventail - Frappe en saut",
+      "pt_br": "Fan - Golpe no Salto",
+      "ru": "Веер - Прыжковый удар",
+      "th": "พัด·กระโดดฟัน",
+      "zh_tw": "扇·跳劈"
+    },
     "20301030": {
       "zh": "扇·起身",
       "ja": "扇・起き上がり",
@@ -16959,6 +16680,20 @@
       "th": "ฝนยามเช้าปัดฝุ่นเบา",
       "vi": "Mưa Sớm Nhẹ Bụi",
       "zh_tw": "朝雨輕塵"
+    },
+    "20301103": {
+      "ja": "扇・突進",
+      "en": "Fan - Dash",
+      "zh": "扇·突进",
+      "ko": "부채-돌진",
+      "vi": "Quạt·Đột kích",
+      "de": "Fächer - Sprint",
+      "es": "Abanico - Arremetida",
+      "fr": "Éventail - Bond",
+      "pt_br": "Fan - Arremetida",
+      "ru": "Веер - Рывок",
+      "th": "พัด·พุ่งโจมตี",
+      "zh_tw": "扇·突進"
     },
     "20301104": {
       "ja": "カウンター",
@@ -17141,6 +16876,20 @@
       "th": "ดาบใหญ่·โจมตีเบา",
       "vi": "Đao Mạc·Đánh nhẹ",
       "zh_tw": "陌刀·輕擊"
+    },
+    "20401004": {
+      "ja": "斬馬刀・重撃",
+      "en": "Mo Blade - Heavy Attack",
+      "zh": "陌刀·重击",
+      "ko": "맥도-강공격",
+      "vi": "Đao Mạc·Đánh mạnh",
+      "de": "Mo-Klinge - Schwerer Angriff",
+      "es": "Espada Mo - Ataque Pesado",
+      "fr": "Mo Blade - Attaque Lourde",
+      "pt_br": "Lâmina Mo - Ataque Pesado",
+      "ru": "Клинок Мо - Тяжелая атака",
+      "th": "ดาบใหญ่·โจมตีหนัก",
+      "zh_tw": "陌刀·重擊"
     },
     "20401010": {
       "ja": "斬馬刀・とどめ",
@@ -17982,6 +17731,20 @@
       "vi": "Ngàn âm vang dư",
       "zh_tw": "千蒔餘響"
     },
+    "20602104": {
+      "ja": "傘・重撃",
+      "en": "Umbrella - Heavy Attack",
+      "zh": "伞·重击",
+      "ko": "우산-강공격",
+      "vi": "Dù·Đánh mạnh",
+      "de": "Schirm - Schwerer Angriff",
+      "es": "Sombrilla - Ataque Pesado",
+      "fr": "Parapluie - Attaque lourde",
+      "pt_br": "Guarda-chuva - Ataque Pesado",
+      "ru": "Зонт - Тяжелая атака",
+      "th": "ร่ม·โจมตีหนัก",
+      "zh_tw": "傘·重擊"
+    },
     "20603102": {
       "ja": "流風回雪",
       "en": "Cyclone Waltz",
@@ -18080,6 +17843,62 @@
       "vi": "Hương đỏ đoạn tình",
       "zh_tw": "紅綃香斷"
     },
+    "20700001": {
+      "ja": "縄鏢・軽撃",
+      "en": "Rope Dart - Light Attack",
+      "zh": "绳镖·轻击",
+      "ko": "승표-약공격",
+      "vi": "Dây phi tiêu·Đánh nhẹ",
+      "de": "Seildolch - Leichter Angriff",
+      "es": "Dardo con Cuerda - Ataque Ligero",
+      "fr": "Dard à Corde - Attaque Légère",
+      "pt_br": "Dardo de Corda - Ataque Leve",
+      "ru": "Веревочный дротик - Легкая атака",
+      "th": "เชือกปลายแหลม·โจมตีเบา",
+      "zh_tw": "繩鏢·輕擊"
+    },
+    "20700002": {
+      "ja": "縄鏢・軽撃",
+      "en": "Rope Dart - Light Attack",
+      "zh": "绳镖·轻击",
+      "ko": "승표-약공격",
+      "vi": "Dây phi tiêu·Đánh nhẹ",
+      "de": "Seildolch - Leichter Angriff",
+      "es": "Dardo con Cuerda - Ataque Ligero",
+      "fr": "Rope Dart - Attaque légère",
+      "pt_br": "Dardo de Corda - Ataque Leve",
+      "ru": "Веревочный дротик - Легкая атака",
+      "th": "เชือกปลายแหลม·โจมตีเบา",
+      "zh_tw": "繩鏢·輕擊"
+    },
+    "20700003": {
+      "ja": "縄鏢・軽撃",
+      "en": "Rope Dart - Light Attack",
+      "zh": "绳镖·轻击",
+      "ko": "승표-약공격",
+      "vi": "Dây phi tiêu·Đánh nhẹ",
+      "de": "Seildolch - Leichter Angriff",
+      "es": "Dardo con Cuerda - Ataque Ligero",
+      "fr": "Rope Dart - Attaque légère",
+      "pt_br": "Dardo de Corda - Ataque Leve",
+      "ru": "Веревочный дротик - Легкая атака",
+      "th": "เชือกปลายแหลม·โจมตีเบา",
+      "zh_tw": "繩鏢·輕擊"
+    },
+    "20700004": {
+      "ja": "縄鏢・軽撃",
+      "en": "Rope Dart - Light Attack",
+      "zh": "绳镖·轻击",
+      "ko": "승표-약공격",
+      "vi": "Dây phi tiêu·Đánh nhẹ",
+      "de": "Seildolch - Leichter Angriff",
+      "es": "Dardo con Cuerda - Ataque Ligero",
+      "fr": "Rope Dart - Attaque légère",
+      "pt_br": "Dardo de Corda - Ataque Leve",
+      "ru": "Веревочный дротик - Легкая атака",
+      "th": "เชือกปลายแหลม·โจมตีเบา",
+      "zh_tw": "繩鏢·輕擊"
+    },
     "20700101": {
       "ja": "伏鼠の縛",
       "en": "Rodent's Resilience",
@@ -18107,6 +17926,48 @@
       "th": "พันธนาการแห่งหนู",
       "vi": "Trói chuột phục",
       "zh_tw": "伏鼠之縛"
+    },
+    "20700301": {
+      "ja": "縄鏢・空中軽撃",
+      "en": "Rope Dart - Airborne Light Attack",
+      "zh": "绳镖·空中轻击",
+      "ko": "승표-공중 약공격",
+      "vi": "Dây phi tiêu·Đánh nhẹ trên không",
+      "de": "Seildolch - Leichter Luftangriff",
+      "es": "Dardo con Cuerda - Ataque Ligero Aéreo",
+      "fr": "Dard à Corde - Attaque Légère Aérienne",
+      "pt_br": "Dardo de Corda - Ataque Leve Aéreo",
+      "ru": "Веревочный дротик - Воздушная лёгкая атака",
+      "th": "เชือกปลายแหลม·โจมตีเบาในอากาศ",
+      "zh_tw": "繩鏢·空中輕擊"
+    },
+    "20700305": {
+      "ja": "縄鏢・跳び斬り",
+      "en": "Rope Dart - Jump Strike",
+      "zh": "绳镖·跳劈",
+      "ko": "승표-도약 베기",
+      "vi": "Dây phi tiêu·Nhảy bổ",
+      "de": "Seildolch - Sprungschlag",
+      "es": "Dardo con Cuerda - Golpe en Salto",
+      "fr": "Dard à Corde - Frappe en Saut",
+      "pt_br": "Dardo de Corda - Golpe no Salto",
+      "ru": "Веревочный дротик - Прыжковый удар",
+      "th": "เชือกปลายแหลม·กระโดดฟัน",
+      "zh_tw": "繩鏢·跳劈"
+    },
+    "20700401": {
+      "ja": "縄鏢・突進",
+      "en": "Rope Dart - Dash",
+      "zh": "绳镖·突进",
+      "ko": "승표-돌진",
+      "vi": "Dây phi tiêu·Đột kích",
+      "de": "Seildolch - Sprint",
+      "es": "Dardo con Cuerda - Carrera",
+      "fr": "Dard à Corde - Ruée",
+      "pt_br": "Dardo de Corda - Arremetida",
+      "ru": "Веревочный дротик - Рывок",
+      "th": "เชือกปลายแหลม·พุ่งโจมตี",
+      "zh_tw": "繩鏢·突進"
     },
     "20700402": {
       "zh": "绳镖·起身",
@@ -18822,6 +18683,20 @@
       "vi": "Thiên hạ quy nghĩa",
       "zh_tw": "天下歸義"
     },
+    "20901109": {
+      "ja": "不義天誅",
+      "en": "Vile Condemned",
+      "zh": "无义当诛",
+      "ko": "불의의 단죄",
+      "vi": "Không nghĩa thì phải trừng phạt",
+      "de": "Verruchte Verdammte",
+      "es": "Condenado Vil",
+      "fr": "Condamné Infâme",
+      "pt_br": "Condenado Vil",
+      "ru": "Порочный Осуждённый",
+      "th": "ผู้ไร้คุณธรรมสมควรถูกกำจัด",
+      "zh_tw": "無義當誅"
+    },
     "20901110": {
       "ja": "手甲・武変",
       "en": "Gauntlets - Conversion",
@@ -19166,188 +19041,6 @@
       "th": "ฤดูใบไม้ผลิสิ้นสุดภูเขาว่างเปล่า",
       "vi": "Xuân Tàn Núi Trống",
       "zh_tw": "春盡山空"
-    },
-    "20101102": {
-      "ja": "断蓬飛び",
-      "en": "Drifting Thrust",
-      "zh": "断蓬飞",
-      "ko": "절연의 비상",
-      "vi": "Cắt Bụi Bay",
-      "de": "Gleitstoß",
-      "es": "Empuje Deslizante",
-      "fr": "Poussée Dérivante",
-      "pt_br": "Investida à Deriva",
-      "ru": "Дрейфующий Толчок",
-      "th": "ตัดสายลมปลิว",
-      "zh_tw": "斷蓬飛"
-    },
-    "20301020": {
-      "ja": "扇・跳び斬り",
-      "en": "Fan - Jump Strike",
-      "zh": "扇·跳劈",
-      "ko": "부채-도약 베기",
-      "vi": "Quạt·Nhảy bổ",
-      "de": "Fächer - Sprungschlag",
-      "es": "Abanico - Golpe en Salto",
-      "fr": "Éventail - Frappe en saut",
-      "pt_br": "Fan - Golpe no Salto",
-      "ru": "Веер - Прыжковый удар",
-      "th": "พัด·กระโดดฟัน",
-      "zh_tw": "扇·跳劈"
-    },
-    "20301103": {
-      "ja": "扇・突進",
-      "en": "Fan - Dash",
-      "zh": "扇·突进",
-      "ko": "부채-돌진",
-      "vi": "Quạt·Đột kích",
-      "de": "Fächer - Sprint",
-      "es": "Abanico - Arremetida",
-      "fr": "Éventail - Bond",
-      "pt_br": "Fan - Arremetida",
-      "ru": "Веер - Рывок",
-      "th": "พัด·พุ่งโจมตี",
-      "zh_tw": "扇·突進"
-    },
-    "20401004": {
-      "ja": "斬馬刀・重撃",
-      "en": "Mo Blade - Heavy Attack",
-      "zh": "陌刀·重击",
-      "ko": "맥도-강공격",
-      "vi": "Đao Mạc·Đánh mạnh",
-      "de": "Mo-Klinge - Schwerer Angriff",
-      "es": "Espada Mo - Ataque Pesado",
-      "fr": "Mo Blade - Attaque Lourde",
-      "pt_br": "Lâmina Mo - Ataque Pesado",
-      "ru": "Клинок Мо - Тяжелая атака",
-      "th": "ดาบใหญ่·โจมตีหนัก",
-      "zh_tw": "陌刀·重擊"
-    },
-    "20602104": {
-      "ja": "傘・重撃",
-      "en": "Umbrella - Heavy Attack",
-      "zh": "伞·重击",
-      "ko": "우산-강공격",
-      "vi": "Dù·Đánh mạnh",
-      "de": "Schirm - Schwerer Angriff",
-      "es": "Sombrilla - Ataque Pesado",
-      "fr": "Parapluie - Attaque lourde",
-      "pt_br": "Guarda-chuva - Ataque Pesado",
-      "ru": "Зонт - Тяжелая атака",
-      "th": "ร่ม·โจมตีหนัก",
-      "zh_tw": "傘·重擊"
-    },
-    "20700001": {
-      "ja": "縄鏢・軽撃",
-      "en": "Rope Dart - Light Attack",
-      "zh": "绳镖·轻击",
-      "ko": "승표-약공격",
-      "vi": "Dây phi tiêu·Đánh nhẹ",
-      "de": "Seildolch - Leichter Angriff",
-      "es": "Dardo con Cuerda - Ataque Ligero",
-      "fr": "Dard à Corde - Attaque Légère",
-      "pt_br": "Dardo de Corda - Ataque Leve",
-      "ru": "Веревочный дротик - Легкая атака",
-      "th": "เชือกปลายแหลม·โจมตีเบา",
-      "zh_tw": "繩鏢·輕擊"
-    },
-    "20700002": {
-      "ja": "縄鏢・軽撃",
-      "en": "Rope Dart - Light Attack",
-      "zh": "绳镖·轻击",
-      "ko": "승표-약공격",
-      "vi": "Dây phi tiêu·Đánh nhẹ",
-      "de": "Seildolch - Leichter Angriff",
-      "es": "Dardo con Cuerda - Ataque Ligero",
-      "fr": "Rope Dart - Attaque légère",
-      "pt_br": "Dardo de Corda - Ataque Leve",
-      "ru": "Веревочный дротик - Легкая атака",
-      "th": "เชือกปลายแหลม·โจมตีเบา",
-      "zh_tw": "繩鏢·輕擊"
-    },
-    "20700003": {
-      "ja": "縄鏢・軽撃",
-      "en": "Rope Dart - Light Attack",
-      "zh": "绳镖·轻击",
-      "ko": "승표-약공격",
-      "vi": "Dây phi tiêu·Đánh nhẹ",
-      "de": "Seildolch - Leichter Angriff",
-      "es": "Dardo con Cuerda - Ataque Ligero",
-      "fr": "Rope Dart - Attaque légère",
-      "pt_br": "Dardo de Corda - Ataque Leve",
-      "ru": "Веревочный дротик - Легкая атака",
-      "th": "เชือกปลายแหลม·โจมตีเบา",
-      "zh_tw": "繩鏢·輕擊"
-    },
-    "20700004": {
-      "ja": "縄鏢・軽撃",
-      "en": "Rope Dart - Light Attack",
-      "zh": "绳镖·轻击",
-      "ko": "승표-약공격",
-      "vi": "Dây phi tiêu·Đánh nhẹ",
-      "de": "Seildolch - Leichter Angriff",
-      "es": "Dardo con Cuerda - Ataque Ligero",
-      "fr": "Rope Dart - Attaque légère",
-      "pt_br": "Dardo de Corda - Ataque Leve",
-      "ru": "Веревочный дротик - Легкая атака",
-      "th": "เชือกปลายแหลม·โจมตีเบา",
-      "zh_tw": "繩鏢·輕擊"
-    },
-    "20700301": {
-      "ja": "縄鏢・空中軽撃",
-      "en": "Rope Dart - Airborne Light Attack",
-      "zh": "绳镖·空中轻击",
-      "ko": "승표-공중 약공격",
-      "vi": "Dây phi tiêu·Đánh nhẹ trên không",
-      "de": "Seildolch - Leichter Luftangriff",
-      "es": "Dardo con Cuerda - Ataque Ligero Aéreo",
-      "fr": "Dard à Corde - Attaque Légère Aérienne",
-      "pt_br": "Dardo de Corda - Ataque Leve Aéreo",
-      "ru": "Веревочный дротик - Воздушная лёгкая атака",
-      "th": "เชือกปลายแหลม·โจมตีเบาในอากาศ",
-      "zh_tw": "繩鏢·空中輕擊"
-    },
-    "20700305": {
-      "ja": "縄鏢・跳び斬り",
-      "en": "Rope Dart - Jump Strike",
-      "zh": "绳镖·跳劈",
-      "ko": "승표-도약 베기",
-      "vi": "Dây phi tiêu·Nhảy bổ",
-      "de": "Seildolch - Sprungschlag",
-      "es": "Dardo con Cuerda - Golpe en Salto",
-      "fr": "Dard à Corde - Frappe en Saut",
-      "pt_br": "Dardo de Corda - Golpe no Salto",
-      "ru": "Веревочный дротик - Прыжковый удар",
-      "th": "เชือกปลายแหลม·กระโดดฟัน",
-      "zh_tw": "繩鏢·跳劈"
-    },
-    "20700401": {
-      "ja": "縄鏢・突進",
-      "en": "Rope Dart - Dash",
-      "zh": "绳镖·突进",
-      "ko": "승표-돌진",
-      "vi": "Dây phi tiêu·Đột kích",
-      "de": "Seildolch - Sprint",
-      "es": "Dardo con Cuerda - Carrera",
-      "fr": "Dard à Corde - Ruée",
-      "pt_br": "Dardo de Corda - Arremetida",
-      "ru": "Веревочный дротик - Рывок",
-      "th": "เชือกปลายแหลม·พุ่งโจมตี",
-      "zh_tw": "繩鏢·突進"
-    },
-    "20901109": {
-      "ja": "不義天誅",
-      "en": "Vile Condemned",
-      "zh": "无义当诛",
-      "ko": "불의의 단죄",
-      "vi": "Không nghĩa thì phải trừng phạt",
-      "de": "Verruchte Verdammte",
-      "es": "Condenado Vil",
-      "fr": "Condamné Infâme",
-      "pt_br": "Condenado Vil",
-      "ru": "Порочный Осуждённый",
-      "th": "ผู้ไร้คุณธรรมสมควรถูกกำจัด",
-      "zh_tw": "無義當誅"
     }
   }
 }

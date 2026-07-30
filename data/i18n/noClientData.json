@@ -1,5 +1,5 @@
 {
-  "_meta": "noClientData = mining 対象 cat の no_hit entry 隔離。 ゲーム内用語性質保持 (= Claude 翻訳 NG)、 兄貴決定 ja 表記。 ui.json (= 常用語) と性質区別。 2026-06-29 確定、 詳細 [[no-noclientdata-2026-06-29]]。",
+  "_meta": "noClientData = mining 対象 cat の no_hit entry 隔離 + mining 対象外と決めた cat の置き場。 ゲーム内用語性質保持 (= Claude 翻訳 NG)、 兄貴決定 ja 表記。 ui.json (= 常用語) と性質区別。 2026-06-29 確定、 詳細 [[no-noclientdata-2026-06-29]]。 🚨 2026-07-29: 構造が 2 種類混在するようになった —— 従来の 7 key (probSympathy 等) は key 直下に lang map を持つフラット形、 skilltype / skilltype_short は cat 階層を持つ入れ子形。 入れ子形は data-store.js の NCD_NESTED_CATS に列挙して data トップへ展開しており、 WWM_DS.name(cat, id) の引き方は game.json 時代と変わらない。 skilltype を移した理由 = ツールの分類軸 (light/heavy × charged/varied/enhanced) が client の ラベル体系と 1:1 対応せず mining 対象から恒久除外したため (詳細 = run_TODO「技種別ラベルが実機と食い違う件.md」)。",
   "probSympathy": {
     "ja": "会意",
     "en": "Affinity",
@@ -97,5 +97,345 @@
     "pt_br": "Outros Danos de Atributo",
     "ru": "Другой Урон Атрибутами",
     "th": "ความเสียหายจากคุณสมบัติอื่น"
+  },
+  "skilltype": {
+    "martial": {
+      "ja": "武術技",
+      "en": "Martial Art Skill",
+      "zh": "武学技",
+      "ko": "무술 스킬",
+      "vi": "kỹ năng võ học",
+      "de": "Kampfkunst-Fertigkeit",
+      "es": "Habilidad de Arte Marcial",
+      "fr": "Compétence d'Art Martial",
+      "pt_br": "Habilidade de Arte Marcial",
+      "ru": "Навык боевого искусства",
+      "th": "ทักษะศิลปะการต่อสู้",
+      "zh_tw": "武學技"
+    },
+    "charged": {
+      "ja": "溜め技",
+      "en": "Charged Skill",
+      "zh": "蓄力技",
+      "ko": "차지 스킬",
+      "vi": "kỹ năng tích lực",
+      "de": "Geladene Fähigkeit",
+      "es": "Habilidad Cargada",
+      "fr": "Compétence Chargée",
+      "pt_br": "Habilidade Carregada",
+      "ru": "Заряжаемый навык",
+      "th": "ทักษะชาร์จพลัง",
+      "zh_tw": "蓄力技"
+    },
+    "lightCharged": {
+      "ja": "軽撃溜め技",
+      "en": "Light Attack Charged Skill",
+      "zh": "轻击蓄力技",
+      "ko": "약공격 차지 스킬",
+      "zh_tw": "輕擊蓄力技",
+      "de": "Leichtangriff-Aufladung",
+      "es": "Habilidad Cargada de Ataque Ligero",
+      "fr": "Compétence Chargée d'Attaque Légère",
+      "pt_br": "Habilidade Carregada de Ataque Leve",
+      "ru": "Заряд лёгкой атаки",
+      "th": "ทักษะชาร์จพลังโจมตีเบา",
+      "vi": "kỹ năng đánh nhẹ tích lực"
+    },
+    "heavyCharged": {
+      "ja": "重撃溜め技",
+      "en": "Heavy Attack Charged Skill",
+      "zh": "重击蓄力技",
+      "ko": "강공격 차지 스킬",
+      "zh_tw": "重擊蓄力技",
+      "de": "Schwerangriff-Aufladung",
+      "es": "Habilidad Cargada de Ataque Pesado",
+      "fr": "Compétence Chargée d'Attaque Lourde",
+      "pt_br": "Habilidade Carregada de Ataque Pesado",
+      "ru": "Заряд тяжёлой атаки",
+      "th": "ทักษะชาร์จพลังโจมตีหนัก",
+      "vi": "kỹ năng đánh mạnh tích lực"
+    },
+    "special": {
+      "ja": "特殊技",
+      "en": "Special Skill",
+      "zh": "特殊技",
+      "ko": "특수 스킬",
+      "vi": "kỹ năng đặc biệt",
+      "de": "Spezialfähigkeit",
+      "es": "Habilidad Especial",
+      "fr": "Compétence Spéciale",
+      "pt_br": "Habilidade Especial",
+      "ru": "Особый навык",
+      "th": "ทักษะพิเศษ",
+      "zh_tw": "特殊技"
+    },
+    "drone": {
+      "ja": "特殊技",
+      "en": "Drone",
+      "zh": "特殊技",
+      "ko": "특수 스킬",
+      "vi": "kỹ năng đặc biệt",
+      "de": "Spezialfähigkeit",
+      "es": "Habilidad Especial",
+      "fr": "Compétence Spéciale",
+      "pt_br": "Habilidade Especial",
+      "ru": "Особый навык",
+      "th": "ทักษะพิเศษ",
+      "zh_tw": "特殊技"
+    },
+    "light": {
+      "ja": "軽撃",
+      "en": "Light Attack",
+      "zh": "轻击",
+      "zh_tw": "輕擊",
+      "ko": "약공격",
+      "vi": "Đánh nhẹ",
+      "de": "Leichter Angriff",
+      "es": "Ataque Ligero",
+      "fr": "Attaque Légère",
+      "pt_br": "Ataque Leve",
+      "ru": "Легкая атака",
+      "th": "โจมตีเบา"
+    },
+    "rodent": {
+      "ja": "鼠",
+      "en": "Rat",
+      "zh": "鼠",
+      "ko": "쥐",
+      "vi": "Chuột",
+      "de": "Ratte",
+      "es": "Rata",
+      "fr": "Rat",
+      "pt_br": "Rato",
+      "ru": "Крыса",
+      "th": "หนู",
+      "zh_tw": "鼠"
+    },
+    "shield": {
+      "ja": "シールド効果強化",
+      "en": "Shield Boost",
+      "zh": "护盾增效",
+      "ko": "보호막 효과 증가",
+      "vi": "Hộ thuẫn tăng hiệu quả",
+      "de": "Schildschub",
+      "es": "Impulso de Escudo",
+      "fr": "Boost de Bouclier",
+      "pt_br": "Impulso de Escudo",
+      "ru": "Усиление щита",
+      "th": "เกราะป้องกันเพิ่มประสิทธิภาพ",
+      "zh_tw": "護盾增效"
+    },
+    "healing": {
+      "ja": "治癒",
+      "en": "Cure",
+      "zh": "愈合",
+      "zh_tw": "癒合",
+      "ko": "재생",
+      "vi": "Hồi phục",
+      "de": "Heilung",
+      "es": "Cura",
+      "fr": "Soin",
+      "pt_br": "Cura",
+      "ru": "Исцеление",
+      "th": "การฟื้นตัว"
+    },
+    "bleed": {
+      "ja": "流血",
+      "en": "Bleeding",
+      "zh": "流血",
+      "ko": "출혈",
+      "vi": "Chảy máu",
+      "de": "Blutung",
+      "es": "Sangrado",
+      "fr": "Saignement",
+      "pt_br": "Sangramento",
+      "ru": "Кровотечение",
+      "th": "เลือดไหล",
+      "zh_tw": "流血"
+    },
+    "lightVariedCombo": {
+      "ja": "軽撃派生技",
+      "en": "Light Attack Varied Combo Skill",
+      "zh": "轻击派生技",
+      "zh_tw": "輕擊派生技",
+      "ko": "약공격 연계 스킬",
+      "vi": "kỹ năng phái sinh đòn nhẹ",
+      "de": "Leichtangriff-Kombo",
+      "es": "Habilidad de Combo Variado de Ataque Ligero",
+      "fr": "Compétence de Combo Varié d'Attaque Légère",
+      "pt_br": "Habilidade de Combo Variado de Ataque Leve",
+      "ru": "Комбо лёгких атак",
+      "th": "ทักษะต่อเนื่องจากการโจมตีเบา"
+    },
+    "heavy": {
+      "ja": "重撃",
+      "en": "Heavy Attack",
+      "zh": "重击",
+      "ko": "강공격",
+      "vi": "Đánh mạnh",
+      "de": "Schwerer Angriff",
+      "es": "Ataque Pesado",
+      "fr": "Attaque Lourde",
+      "pt_br": "Ataque Pesado",
+      "ru": "Тяжелая атака",
+      "th": "โจมตีหนัก",
+      "zh_tw": "重擊"
+    },
+    "variedCombo": {
+      "ja": "重撃派生技",
+      "en": "Heavy Attack Varied Combo Skill",
+      "zh": "重击派生技",
+      "zh_tw": "重擊派生技",
+      "ko": "강공격 연계 스킬",
+      "vi": "kỹ năng phái sinh đòn mạnh",
+      "de": "Schwerangriff-Kombo",
+      "es": "Habilidad de Combo Variado de Ataque Pesado",
+      "fr": "Compétence de Combo Varié d'Attaque Lourde",
+      "pt_br": "Habilidade de Combo Variado de Ataque Pesado",
+      "ru": "Комбо тяжёлых атак",
+      "th": "ทักษะต่อเนื่องจากการโจมตีหนัก"
+    },
+    "lightEnhanced": {
+      "ja": "怒炎軽撃",
+      "en": "Flamelash Light Attack",
+      "zh": "嗔焰轻击",
+      "ko": "격노의 화염 약공격",
+      "zh_tw": "嗔焰輕擊",
+      "vi": "Lửa giận bừng cháy đánh nhẹ",
+      "de": "Flammenschlag Leichter Angriff",
+      "es": "Ataque Ligero Llamarada",
+      "fr": "Attaque légère Fouet de flammes",
+      "pt_br": "Ataque Leve do Chicote de Chamas",
+      "ru": "Огненная Плеть - Легкая атака",
+      "th": "เปลวไฟแห่งความโกรธโจมตีเบา"
+    },
+    "heavyEnhanced": {
+      "ja": "強化重撃",
+      "en": "Enhanced Heavy",
+      "zh": "强化重击",
+      "ko": "강화 강공격",
+      "zh_tw": "強化重擊",
+      "vi": "Đánh mạnh tăng cường",
+      "de": "Verstärkter Schwerer Angriff",
+      "es": "Ataque Pesado Mejorado",
+      "fr": "Attaque Lourde Améliorée",
+      "pt_br": "Ataque Pesado Aprimorado",
+      "ru": "Усиленная тяжелая атака",
+      "th": "โจมตีหนักเสริมพลัง"
+    },
+    "active": {
+      "ja": "武術技",
+      "en": "Martial Art Skill",
+      "zh": "武学技",
+      "ko": "무술 스킬",
+      "zh_tw": "武學技",
+      "vi": "kỹ năng võ học",
+      "de": "Kampfkunst-Fertigkeit",
+      "es": "Habilidad de Arte Marcial",
+      "fr": "Compétence d'Art Martial",
+      "pt_br": "Habilidade de Arte Marcial",
+      "ru": "Навык боевого искусства",
+      "th": "ทักษะศิลปะการต่อสู้"
+    },
+    "weapon": {
+      "ja": "武変技",
+      "en": "Dual-Weapon Skill",
+      "zh": "易武技",
+      "ko": "무기 전환",
+      "zh_tw": "易武技",
+      "vi": "kỹ năng thay đổi vũ khí",
+      "de": "Zweiwaffen-Fertigkeit",
+      "es": "Habilidad de Doble Arma",
+      "fr": "Compétence Double Arme",
+      "pt_br": "Habilidade de Armas Duplas",
+      "ru": "Умение двойного оружия",
+      "th": "ทักษะเปลี่ยนอาวุธ"
+    },
+    "enhanced": {
+      "ja": "強化技",
+      "en": "Enhanced Skill",
+      "zh": "强化技",
+      "ko": "강화 기술",
+      "zh_tw": "強化技",
+      "vi": "kỹ năng tăng cường",
+      "de": "Verstärkte Fähigkeit",
+      "es": "Habilidad Mejorada",
+      "fr": "Compétence Améliorée",
+      "pt_br": "Habilidade Aprimorada",
+      "ru": "Усиленный навык",
+      "th": "ทักษะเสริมพลัง"
+    },
+    "other": {
+      "ja": "その他",
+      "en": "Other",
+      "zh": "其他",
+      "ko": "기타",
+      "zh_tw": "其他",
+      "vi": "Khác",
+      "de": "Andere",
+      "es": "Otro",
+      "fr": "Autre",
+      "pt_br": "Outro",
+      "ru": "Другое",
+      "th": "อื่นๆ"
+    }
+  },
+  "skilltype_short": {
+    "_meta": "attune affix 名 (_martialAffix 経路) 専用の短縮表記辞書。 元は vi 専用だった (2026-06-18 着手、 skilltype vi 公式表記が「kỹ năng XX」 等長文 → 武術固有合成 affix 例 panaceaFanSpecial = Dược Điển Minh Xuyên + skilltype.special.vi で文字切れ)。 2026-07-29 に **全言語参照** へ拡張 = DB 画面 chip 用に skilltype 側へ「技」相当を付けた (軽撃派生 → 軽撃派生技) が、 attune 名は「kongfu 名 + 種別名」の合成なので同じ語だと伸びる (es/fr/pt_br で +13〜14 字) ため、 chip = skilltype / attune = skilltype_short に役割分担させた。 lightVariedCombo/variedCombo が 12 言語持つのはこの分離用 (値 = 「技」を付ける前の skilltype、 de/ru は複合語化で短縮した版)。 他 key は vi のみで、 他言語は miss して skilltype へ fallback = 従来どおり。 真実源 skilltype 不変。 kongfu 名 (=公式 lexicon) は短縮しない。 兄貴目視校正前提。",
+    "martial": {
+      "vi": "Võ học"
+    },
+    "charged": {
+      "vi": "Tích lực"
+    },
+    "special": {
+      "vi": "Đặc biệt"
+    },
+    "drone": {
+      "vi": "Đặc biệt"
+    },
+    "light": {
+      "vi": "Nhẹ mạnh"
+    },
+    "rodent": {
+      "vi": "Chuột"
+    },
+    "shield": {
+      "vi": "Hộ thuẫn"
+    },
+    "healing": {
+      "vi": "Hồi phục"
+    },
+    "bleed": {
+      "vi": "Chảy máu"
+    },
+    "lightVariedCombo": {
+      "ja": "軽撃派生",
+      "en": "Light Attack Varied Combo",
+      "zh": "轻击派生",
+      "zh_tw": "輕擊派生",
+      "ko": "약공격 연계",
+      "vi": "Phái sinh đòn nhẹ",
+      "de": "Leichtangriff-Kombo",
+      "es": "Combo Variado de Ataque Ligero",
+      "fr": "Combo Varié d'Attaque Légère",
+      "pt_br": "Combo Variado de Ataque Leve",
+      "ru": "Комбо лёгких атак",
+      "th": "ต่อเนื่องจากการโจมตีเบา"
+    },
+    "variedCombo": {
+      "ja": "重撃派生",
+      "en": "Heavy Attack Varied Combo",
+      "zh": "重击派生",
+      "zh_tw": "重擊派生",
+      "ko": "강공격 연계",
+      "vi": "Nhẹ/Mạnh phát sinh",
+      "de": "Schwerangriff-Kombo",
+      "es": "Combo Variado de Ataque Pesado",
+      "fr": "Combo Varié d'Attaque Lourde",
+      "pt_br": "Combo Variado de Ataque Pesado",
+      "ru": "Комбо тяжёлых атак",
+      "th": "ต่อเนื่องจากการโจมตีหนัก"
+    }
   }
 }
