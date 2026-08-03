@@ -22,6 +22,11 @@
       .replace(/<([^<>|]{1,64})>/g, '$1');
   }
   function _curLang() { return (window.currentLang) || 'ja'; }
+  // 🚨 表見出しの補足括弧が全角固定で、en/de/ru でも「Threshold（Agility）」と出ていた
+  //    (2026-08-03)。全角を使うのは ja/zh/zh_tw だけ。ko は半角が通例。
+  function _paren(inner) {
+    return ['ja', 'zh', 'zh_tw'].indexOf(_curLang()) !== -1 ? `（${inner}）` : ` (${inner})`;
+  }
   // ratio(小数、 例 0.81315) → "81.32%" 表示文字列。 (ratio*100).toFixed(2) は IEEE754 誤差で
   // x.xx5 境界値 (例 0.81315) を切り捨て相当に丸める既知バグあり (兄貴 SS 実測 81.32% vs 表示 81.31% で発覚)。
   // Math.round を先に噛ませて整数域で丸めることで誤差回避。
@@ -90,30 +95,38 @@
   // "weaponSpecific":"bamboocut" (game.json 側の実データ = 瞬嵐固有貫通) と確認済 →
   // 'bamboocutPen' (game.json:1433「瞬嵐貫通」) へ alias。bamboocutPen 自体を appliesTo に
   // 持つ passive は現状0件 (elemPen が実質の内部表記)。
-  const _APPLIES_TO_ALIAS = { critRate: 'crit', sympathyRate: 'affinity', maxPhysATK: 'physAtkLabel', minPhysATK: 'physAtkLabel', elemPen: 'bamboocutPen' };
+  // 🚨 maxPhysATK / minPhysATK の physAtkLabel alias は 2026-08-03 に外した。
+  //    alias 先が min/max を潰した「外功攻撃」だったため、呼び側が
+  //    `${prefix}${base}力` と ja 決め打ちで組み直しており ko に漢字「力」が出ていた。
+  //    今は stat cat に client 公式訳 (MIN_W_ATK / MAX_W_ATK) を持たせて直引きする。
+  const _APPLIES_TO_ALIAS = { critRate: 'crit', sympathyRate: 'affinity', elemPen: 'bamboocutPen' };
   function _appliesToLabel(key) {
     if (!key) return '';
     const alias = _APPLIES_TO_ALIAS[key] || key;
     const label = window.WWM_DS.t(alias);
     return (label && label !== alias) ? label : key;
   }
-  // minPhysATK/maxPhysATK は _appliesToLabel だと「外功攻撃」= min/max 区別付かず何が上がるか不明瞭
-  // (2026-07-15 兄貴指摘、以前「外功攻撃力」統一は指示意図でない = 実際に上がる値を見出しにする) →
-  // 「最小/最大」接頭辞 + 語尾「力」(ja/zh/zh_tw/ko のみ、他言語は英語風スペース区切り) 付与
+  // minPhysATK/maxPhysATK は min/max を区別して見出しにする (2026-07-15 兄貴指摘、
+  // 「外功攻撃力」統一は指示意図でない = 実際に上がる値を見出しにする)。
+  // 🚨 以前はここで `${prefix}${base}力` と ja 決め打ちで組んでおり、ko に漢字「力」が
+  //    出ていた (2026-08-03 兄貴指摘)。今は stat cat の client 公式訳
+  //    (MIN_W_ATK「最小外功攻撃 / 최소 외공 공격」) が min/max を含むので合成不要。
   function _appliesToLabelFull(key) {
-    const base = _appliesToLabel(key);
-    if (key === 'minPhysATK' || key === 'maxPhysATK') {
-      const T = window.T || {};
-      const prefix = (key === 'minPhysATK' ? T.labelMin : T.labelMax) || '';
-      const lang = _curLang();
-      const isCjk = ['ja', 'zh', 'zh_tw', 'ko'].indexOf(lang) !== -1;
-      return isCjk ? `${prefix}${base}力` : `${prefix} ${base}`;
-    }
-    return base;
+    return _appliesToLabel(key);
   }
   // path 攻撃力 label (S3 固定加算列見出し = 「鋼鳴/砕岩/糸操/瞬嵐攻撃力」)
+  // 🚨 以前は `_pathLabel(path) + '攻撃力'` と ja 決め打ちで合成しており、
+  //    en/de/ru で「Bellstrike攻撃力」「Удар колокола攻撃力」と出ていた (2026-08-03 兄貴指摘)。
+  //    client 公式訳が 12 言語そろっているので stat cat のキーから引く
+  //    (反映 = scripts/mining/apply/apply_stat_names.py の PRO_ATK_A/B/C/E)。
+  const _PATH_ATK_KEY = {
+    bellstrike: 'bellstrikeATK', stonesplit: 'stonesplitATK',
+    silkbind: 'silkbindATK', bamboocut: 'bamboocutATK',
+  };
   function _pathAttackLabel(path) {
-    return _pathLabel(path) + '攻撃力';
+    const key = _PATH_ATK_KEY[path];
+    const label = key && window.WWM_DS.t(key);
+    return (label && label !== key) ? label : _pathLabel(path);
   }
   // S3 の閾値 fromStat (minBamboocut 等) は 'stat' cat 内 name 経由で「最小瞬嵐攻撃力」形式取得
   // 「力」suffix 付き = 'stat' cat 実データが持っている。 _fromStatLabel (t 経由「最小瞬嵐攻撃」) と別分岐
@@ -173,6 +186,13 @@
     return String(v);
   }
 
+  // 🚨 S2/S5 の effect には負値がある (千紅の傘 20601 s5 = W_ATK_PEN_RDC -20 =
+  //    「対象の外功耐性 20 を無効化」)。`+${_formatCap(v)}` だと `+-20` と出る。
+  function _signedCap(v, isPct) {
+    const t = _formatCap(v, isPct);
+    return String(t).charAt(0) === '-' ? t : `+${t}`;
+  }
+
   const _STAGE_JA = ['一重', '二重', '三重', '四重', '五重', '六重', '七重', '八重', '九重', '十重', '十一重', '十二重', '十三重', '十四重', '十五重', '十六重', '十七重'];
   // stage=0 = client 実データの「初出重0」case (S5 rank1 等) = Task 1 兄貴決定 B により「初期解放」表示
   function _stageLabel(stage) {
@@ -214,7 +234,7 @@
           <thead><tr>
             <th>${_esc((window.T && window.T.dbKongfuColStage) || '突破段階')}</th>
             <th>${_esc((window.T && window.T.dbKongfuColLvCap) || 'Lv上限')}</th>
-            <th>${_esc((window.T && window.T.dbKongfuColThreshold) || '閾値')}（${_esc(fromLabel)}）</th>
+            <th>${_esc((window.T && window.T.dbKongfuColThreshold) || '閾値')}${_esc(_paren(fromLabel))}</th>
             <th>${_esc(applyLabel)}</th>
           </tr></thead>
           <tbody>${rows}</tbody>
@@ -268,7 +288,7 @@
           <thead><tr>
             <th>${_esc((window.T && window.T.dbKongfuColStage) || '突破段階')}</th>
             <th>${_esc((window.T && window.T.dbKongfuColLvCap) || 'Lv上限')}</th>
-            <th>${_esc((window.T && window.T.dbKongfuColThreshold) || '閾値')}（${_esc(s3FromLabel)}）</th>
+            <th>${_esc((window.T && window.T.dbKongfuColThreshold) || '閾値')}${_esc(_paren(s3FromLabel))}</th>
             <th>${_esc(pathAttackLabel)}</th>
             <th>${_esc(applyLabel)}</th>
           </tr></thead>
@@ -299,6 +319,83 @@
   // data/i18n/game.json の kongfu_talent_title / kongfu_talent_desc cat と突合 (Task 3 成果物)。
   // lookup miss = WWM_DS.name() fallback '[cat:id]' 形式 ('[' 始まりで判定、data-store.js:297-320 確認済) →
   // title は #rank に fallback、 desc は空 (非表示) に fallback ──
+  // ── S2/S5 の効果量 (2026-08-03 追加)。data/kongfu_passive_skills.json の
+  // s2/s5[].effects に client 実データが入るようになった。出所は
+  //   才能 psid -> passive_skills.buff_id -> buff.passive_effect -> buff_passive_data
+  // 2 形ある:
+  //   kind='ref'   参照ステ依存。効果量 = min(floor(参照ステ / step) * per, cap)
+  //   kind='fixed' 固定値。効果量 = value
+  // 🚨 ゲージ上限増加 / 状態付与 / スタック管理 の才能は effects が空 (欠落ではない)。
+  //    その場合は何も描かず、従来どおり title/desc の箇条書きだけになる。
+  function _renderS2S5Effects(r) {
+    const eff = (r && r.effects) || [];
+    if (!eff.length) return '';
+    const rows = eff.map(e => {
+      // 🚨 ABR_AVOID_PROB は上昇量でなく **軽傷 (擦り傷) 回避の ON/OFF フラグ** (2026-08-03)。
+      //    client 実データは全件 value=1.0。desc は「重撃溜め技・不義天誅シリーズの技は
+      //    必ず軽傷にならない」(天志の拳 20901 s5) /「溜め技とその派生技は軽傷を与えられない」
+      //    (断魂 20401 s5)。断魂の tooltip だけ「必ず命中し」と書かれているが ja 訳の揺れで、
+      //    desc 側の「軽傷」が実体。パーセント扱いすると「+1」と出て意味不明になる。
+      if (e.stat === 'ABR_AVOID_PROB') {
+        if (!e.value) return '';
+        const t = (window.T && window.T.dbKongfuNoGraze) || '軽傷にならない';
+        return `<div class="wwm-db-kongfu-bullet-eff">${_esc(t)}</div>`;
+      }
+      const label = _appliesToLabelFull(_statKeyOf(e.stat));
+      if (e.kind === 'fixed') {
+        return `<div class="wwm-db-kongfu-bullet-eff">${_esc(label)} ${_esc(_signedCap(e.value, true))}</div>`;
+      }
+      const refLabel = _appliesToLabelFull(_statKeyOf(e.ref));
+      const capTxt = _signedCap(e.cap, true);
+      // 🚨 need は **上限に達するのに要る参照ステの量**で、上がる値ではない (2026-08-03 兄貴指摘)。
+      //    「/ 最大外功攻撃力 1000」だと最大外功攻撃力が 1000 上がるように読める。
+      //    tooltip の言い方も「1000 の<最大外功攻撃力>が必要」。S1/S3 の表と同じ「閾値」を付ける。
+      const thLabel = (window.T && window.T.dbKongfuColThreshold) || '閾値';
+      const needTxt = e.need == null ? ''
+        : ` / ${_esc(thLabel)} ${_esc(refLabel)} ${_esc(String(Math.round(e.need)))}`;
+      return `<div class="wwm-db-kongfu-bullet-eff">${_esc(label)} ${_esc(capTxt)}${needTxt}</div>`;
+    }).join('');
+    return `<div class="wwm-db-kongfu-bullet-effs">${rows}</div>`;
+  }
+
+  // client の内部 stat 名 -> tool の statKey。表示ラベル解決に使う。
+  // 対応が無いものは内部名のまま出す (欠落を隠さない)。
+  // 🚨 右辺は `data/i18n/game.json` に **実在するキー**であること。
+  //    physDmgBoost / bamboocutDmgBoost / outerPen は game.json に無く、
+  //    それぞれ weaponBonusLabel / elemDmgBamboocutLabel / physPen が対応する
+  //    (2026-08-03 に stat / affix_stat / stat_short を grep して確認)。
+  const _CLIENT_STAT_TO_KEY = {
+    MIN_W_ATK: 'minPhysATK', MAX_W_ATK: 'maxPhysATK',
+    W_ATK_CRI_UP: 'critBoost', BASH_UP: 'sympathyBoost',
+    ADD_CRI_PROB: 'addCritRate', CRI_PROB: 'critRate', BASH_PROB: 'sympathyRate',
+    W_ATK_SCALE: 'weaponBonusLabel', PRO_ATK_E_SCALE: 'elemDmgBamboocutLabel',
+    W_ATK_PEN: 'physPen', PRO_PEN_A: 'bellstrikePen', PRO_PEN_B: 'stonesplitPen',
+    HP_MAX: 'maxHp',
+    // 2026-08-03 追加。公式訳は心法 tier テキストの用語タグ <会心治療強化|780|#C|157> /
+    // <外功治療強化|780|#C|162> から 12 言語ぶん引いて data/i18n/game.json の stat cat へ入れた。
+    HEAL_CRI_UP: 'statHealCritBoost', W_HEAL_SCALE: 'statPhysHealBoost',
+    // 外功耐性 = 既存の affix_stat.physResist (統計ID 158、才能 tooltip の
+    // 「20 の<外功耐性|780|#C|158>を無効化する」と一致)
+    W_ATK_PEN_RDC: 'physResist',
+    // 2026-08-03 追加。用語タグ <名前|780|#C|統計ID> は locale 全体で 30 統計 ID しか無く、
+    // この 3 種はそこに載っていない。`scripts/mining/formula/build_stat_name_sids.py` が
+    // client の `02 10 <sid> 03 20 <len><internal 名>` を構造から読んで 382 名の
+    // 表示名 sid を出すので、そこから 12 言語ぶん引いて stat cat へ入れた
+    // (反映 = `scripts/mining/apply/apply_stat_names.py`)。
+    // 🚨 GP_DMG_IND の公式訳「真気ダメージパラメータ」は **画面に無い名前**だった
+    //    (兄貴確認 2026-08-03)。同じ表に「探索能力」「皇宮通常敵向け手段」等の
+    //    画面に出ない項目も混ざっている = 構造から引けた ≠ 画面の名前。
+    //    兄貴 GO により ZHENQI_DAMAGE「真気ダメージ」の訳を借りて出す。
+    //    DAMAGE_UP も同様で、公式訳「気血ダメージ増幅」は画面に無く、実機は
+    //    「気血ダメージ強化」(兄貴 SS)。この文言は stat 表示名テーブルの外にしか無いので
+    //    apply_stat_names.py の SID_ADD で sid 直指定して入れている。
+    PRO_HEAL_SCALE: 'statElemHealBoost',
+    GP_DMG_IND: 'statQiDmg', DAMAGE_UP: 'statHpDmgUp',
+  };
+  function _statKeyOf(name) {
+    return _CLIENT_STAT_TO_KEY[name] || name;
+  }
+
   function _renderSlotS2S5(id, kf, lang, slotKey) {
     const passives = _passivesMap()[id];
     const items = passives && passives[slotKey];
@@ -309,12 +406,14 @@
       const titleShown = title.indexOf('[') === 0 ? `#${r.rank}` : _stripGameMarkup(title);
       const descShown = desc.indexOf('[') === 0 ? '' : _stripGameMarkup(desc);
       const unlockText = _unlockText(r.unlockStage);
+      const effHtml = _renderS2S5Effects(r);
       return `<li class="wwm-db-kongfu-bullet">
         <div class="wwm-db-kongfu-bullet-head">
           <span class="wwm-db-kongfu-bullet-title">${_esc(titleShown)}</span>
           <span class="wwm-db-kongfu-bullet-unlock">(${_esc(unlockText)})</span>
         </div>
         ${descShown ? `<div class="wwm-db-kongfu-bullet-desc">${_esc(descShown)}</div>` : ''}
+        ${effHtml}
       </li>`;
     }).join('');
     const slotFallback = slotKey === 's2' ? '固有才能' : '固有才能 (第2)';
@@ -360,8 +459,10 @@
     if (!s6) return '';
     const slotFallback = (window.T && window.T.dbKongfuSlotS6) || '付加攻撃強化 (汎用)';
     const futureNote = (window.T && window.T.dbKongfuS6Future) || '※ 十四重解放 (現行未実装)';
+    // 🚨 以前は見出しが `rank` / `rank${i+1}` の英字ハードコードで全言語そのまま出ていた
+    //    (2026-08-03)。S1 と同じく **列見出しを i18n し、行見出しは数字だけ**にする。
     const rows = (s6.caps || []).map((cap, i) => `<tr>
-      <th scope="row">rank${i + 1}</th>
+      <th scope="row">${i + 1}</th>
       <td>+${_pctStr(cap)}</td>
     </tr>`).join('');
     return `
@@ -369,7 +470,7 @@
         <h4 class="wwm-db-kongfu-slot-title">${_esc(_slotTitle(id, 's6', lang, slotFallback))}</h4>
         <p class="wwm-db-kongfu-future-note">${_esc(futureNote)}</p>
         <table class="wwm-db-kongfu-table wwm-db-kongfu-table-s6">
-          <thead><tr><th>rank</th><th>${_esc((window.T && window.T.dbKongfuColCap) || '上昇量')}</th></tr></thead>
+          <thead><tr><th>${_esc((window.T && window.T.dbKongfuColRank) || 'ランク')}</th><th>${_esc((window.T && window.T.dbKongfuColCap) || '上昇量')}</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
       </section>

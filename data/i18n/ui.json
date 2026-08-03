@@ -5417,6 +5417,20 @@
     "ru": "Этап",
     "th": "ขั้นตอน"
   },
+  "dbKongfuColRank": {
+    "ja": "ランク",
+    "en": "Rank",
+    "zh": "等级",
+    "zh_tw": "等級",
+    "ko": "랭크",
+    "vi": "Bậc",
+    "de": "Rang",
+    "es": "Rango",
+    "fr": "Rang",
+    "pt_br": "Nível",
+    "ru": "Ранг",
+    "th": "อันดับ"
+  },
   "dbKongfuColLvCap": {
     "ja": "Lv上限",
     "en": "Lv Cap",
@@ -5836,6 +5850,48 @@
     "pt_br": "Estágio 17",
     "ru": "Ступень 17",
     "th": "ขั้นที่ 17"
+  },
+  "dbKongfuStage18": {
+    "ja": "十八重",
+    "en": "18th Stage",
+    "zh": "十八重",
+    "zh_tw": "十八重",
+    "ko": "18중",
+    "vi": "Tầng 18",
+    "de": "Stufe 18",
+    "es": "Etapa 18",
+    "fr": "Palier 18",
+    "pt_br": "Estágio 18",
+    "ru": "Ступень 18",
+    "th": "ขั้นที่ 18"
+  },
+  "dbKongfuStage19": {
+    "ja": "十九重",
+    "en": "19th Stage",
+    "zh": "十九重",
+    "zh_tw": "十九重",
+    "ko": "19중",
+    "vi": "Tầng 19",
+    "de": "Stufe 19",
+    "es": "Etapa 19",
+    "fr": "Palier 19",
+    "pt_br": "Estágio 19",
+    "ru": "Ступень 19",
+    "th": "ขั้นที่ 19"
+  },
+  "dbKongfuNoGraze": {
+    "ja": "軽傷にならない",
+    "en": "Cannot be grazed",
+    "zh": "不会被擦伤",
+    "zh_tw": "不會被擦傷",
+    "ko": "찰과상을 입지 않음",
+    "vi": "Không bị vết xước",
+    "de": "Kann nicht abgenutzt werden",
+    "es": "No puede sufrir abrasión",
+    "fr": "Ne peut pas subir d'abrasion",
+    "pt_br": "Não pode sofrer abrasão",
+    "ru": "Не получает износ",
+    "th": "ไม่ได้รับบาดแผล"
   },
   "dbKongfuS6Future": {
     "ja": "※ 十四重解放 (現行未実装)",

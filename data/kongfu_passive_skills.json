@@ -13,7 +13,38 @@
         "descKey": "10101_s2_1",
         "titleSid": "c4b8af6bf0aa3dd9",
         "descSid": "1c1dc460ef362f97",
-        "psid": 300201
+        "psid": 300201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_PEN",
+            "ref": "MAX_W_ATK",
+            "per": 1,
+            "step": 100,
+            "cap": 5,
+            "need": 500
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_PEN_A",
+            "ref": "MAX_W_ATK",
+            "per": 1,
+            "step": 100,
+            "cap": 5,
+            "need": 500
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                2038006
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -22,7 +53,38 @@
         "descKey": "10101_s2_2",
         "titleSid": "db5a99b6169910b4",
         "descSid": "37e8bbdc2c29c906",
-        "psid": 300202
+        "psid": 300202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_PEN",
+            "ref": "MAX_W_ATK",
+            "per": 1,
+            "step": 100,
+            "cap": 10,
+            "need": 1000
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_PEN_A",
+            "ref": "MAX_W_ATK",
+            "per": 1,
+            "step": 100,
+            "cap": 10,
+            "need": 1000
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                2038006
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -31,7 +93,38 @@
         "descKey": "10101_s2_3",
         "titleSid": "12d136c55653be1e",
         "descSid": "6303c54d52696d92",
-        "psid": 300203
+        "psid": 300203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_PEN",
+            "ref": "MAX_W_ATK",
+            "per": 1,
+            "step": 100,
+            "cap": 15,
+            "need": 1500
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_PEN_A",
+            "ref": "MAX_W_ATK",
+            "per": 1,
+            "step": 100,
+            "cap": 15,
+            "need": 1500
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                2038006
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -55,7 +148,48 @@
         "descKey": "10101_s5_1",
         "titleSid": "581c9fac5fdceed0",
         "descSid": "7fa2f01839d56ba3",
-        "psid": 300501
+        "psid": 300501,
+        "effects": [],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 21,
+              "name": "skill",
+              "args": [
+                20202110,
+                20202111,
+                20202112
+              ]
+            },
+            {
+              "code": 22,
+              "name": "skill_stage",
+              "args": [
+                2020210901,
+                2020210902,
+                2020210903
+              ]
+            },
+            {
+              "code": 22,
+              "name": "skill_stage",
+              "args": [
+                2020210904
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 1,
+              "name": "target_buff_stack",
+              "args": [
+                109619,
+                1,
+                5
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -64,7 +198,75 @@
         "descKey": "10101_s5_2",
         "titleSid": "c2fc9c1769b4a69d",
         "descSid": "4aa5fa3e1cd5aca8",
-        "psid": 300502
+        "psid": 300502,
+        "effects": [],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 21,
+              "name": "skill",
+              "args": [
+                20202110,
+                20202111,
+                20202112
+              ]
+            },
+            {
+              "code": 22,
+              "name": "skill_stage",
+              "args": [
+                2020210901,
+                2020210902,
+                2020210903
+              ]
+            },
+            {
+              "code": 21,
+              "name": "skill",
+              "args": [
+                20202109,
+                20202110,
+                20202111,
+                20202112
+              ]
+            },
+            {
+              "code": 31,
+              "name": "unknown_31",
+              "args": [
+                109704,
+                1
+              ]
+            },
+            {
+              "code": 22,
+              "name": "skill_stage",
+              "args": [
+                2020210904
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 1,
+              "name": "target_buff_stack",
+              "args": [
+                109619,
+                1,
+                5
+              ]
+            },
+            {
+              "code": 1,
+              "name": "target_buff_stack",
+              "args": [
+                109619,
+                1,
+                4
+              ]
+            }
+          ]
+        }
       }
     ],
     "s6": {
@@ -91,7 +293,47 @@
         "descKey": "10102_s2_1",
         "titleSid": "73d74c5d9688105c",
         "descSid": "4b04df6b605b8b33",
-        "psid": 307201
+        "psid": 307201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "BASH_UP",
+            "ref": "MAX_W_ATK",
+            "per": 0.012,
+            "step": 100,
+            "cap": 0.06,
+            "need": 500
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                1001
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 25,
+              "name": "target_resource_threshold",
+              "args": [
+                2,
+                2,
+                20
+              ]
+            },
+            {
+              "code": 1,
+              "name": "target_buff_stack",
+              "args": [
+                200200
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -100,7 +342,47 @@
         "descKey": "10102_s2_2",
         "titleSid": "9a14dc6cc193283f",
         "descSid": "b13616c303ec02d5",
-        "psid": 307202
+        "psid": 307202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "BASH_UP",
+            "ref": "MAX_W_ATK",
+            "per": 0.012,
+            "step": 100,
+            "cap": 0.12,
+            "need": 1000
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                1001
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 25,
+              "name": "target_resource_threshold",
+              "args": [
+                2,
+                2,
+                30
+              ]
+            },
+            {
+              "code": 1,
+              "name": "target_buff_stack",
+              "args": [
+                200200
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -109,7 +391,47 @@
         "descKey": "10102_s2_3",
         "titleSid": "dfe3a548d90239e3",
         "descSid": "d1e4a0b01a9b4a03",
-        "psid": 307203
+        "psid": 307203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "BASH_UP",
+            "ref": "MAX_W_ATK",
+            "per": 0.012,
+            "step": 100,
+            "cap": 0.18,
+            "need": 1500
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                1001
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 25,
+              "name": "target_resource_threshold",
+              "args": [
+                2,
+                2,
+                40
+              ]
+            },
+            {
+              "code": 1,
+              "name": "target_buff_stack",
+              "args": [
+                200200
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -133,7 +455,9 @@
         "descKey": "10102_s5_1",
         "titleSid": "baffdf366880b40c",
         "descSid": "3e9f712b27996721",
-        "psid": 307501
+        "psid": 307501,
+        "effects": [],
+        "conds": {}
       },
       {
         "rank": 2,
@@ -142,7 +466,54 @@
         "descKey": "10102_s5_2",
         "titleSid": "f4140e4db3b792db",
         "descSid": "73be768d5024c291",
-        "psid": 307502
+        "psid": 307502,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "GP_DMG_IND",
+            "ref": "MAX_W_ATK",
+            "per": 0.02,
+            "step": 100,
+            "cap": 0.2,
+            "need": 1000
+          },
+          {
+            "kind": "ref",
+            "stat": "DAMAGE_UP",
+            "ref": "MAX_W_ATK",
+            "per": 0.02,
+            "step": 100,
+            "cap": 0.2,
+            "need": 1000
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                1001
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 12,
+              "name": "target_kind",
+              "args": [
+                6
+              ]
+            },
+            {
+              "code": 12,
+              "name": "target_kind",
+              "args": [
+                8
+              ]
+            }
+          ]
+        }
       }
     ],
     "s6": {
@@ -169,7 +540,29 @@
         "descKey": "10201_s2_1",
         "titleSid": "e420fa1e5fcd3795",
         "descSid": "b51b708fee87a082",
-        "psid": 301201
+        "psid": 301201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "BASH_UP",
+            "ref": "MAX_W_ATK",
+            "per": 0.012,
+            "step": 100,
+            "cap": 0.06,
+            "need": 500
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                1106
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -178,7 +571,29 @@
         "descKey": "10201_s2_2",
         "titleSid": "7f2350801d356dce",
         "descSid": "f88a57c9526939f8",
-        "psid": 301202
+        "psid": 301202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "BASH_UP",
+            "ref": "MAX_W_ATK",
+            "per": 0.012,
+            "step": 100,
+            "cap": 0.12,
+            "need": 1000
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                1106
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -187,7 +602,29 @@
         "descKey": "10201_s2_3",
         "titleSid": "8fb3913100b9ee57",
         "descSid": "c071e2e6a060ede9",
-        "psid": 301203
+        "psid": 301203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "BASH_UP",
+            "ref": "MAX_W_ATK",
+            "per": 0.012,
+            "step": 100,
+            "cap": 0.18,
+            "need": 1500
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                1106
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -211,7 +648,23 @@
         "descKey": "10201_s5_1",
         "titleSid": "6e62a22e522abf5a",
         "descSid": "8d755646f00dc128",
-        "psid": 301501
+        "psid": 301501,
+        "effects": [],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 22,
+              "name": "skill_stage",
+              "args": [
+                2010110201,
+                2010110202,
+                2010110203,
+                2010110204,
+                2010110205
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -220,7 +673,23 @@
         "descKey": "10201_s5_2",
         "titleSid": "042c6a05e9895c1f",
         "descSid": "b88103e50e8e7dc9",
-        "psid": 301502
+        "psid": 301502,
+        "effects": [],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 22,
+              "name": "skill_stage",
+              "args": [
+                2010110201,
+                2010110202,
+                2010110203,
+                2010110204,
+                2010110205
+              ]
+            }
+          ]
+        }
       }
     ],
     "s6": {
@@ -247,7 +716,38 @@
         "descKey": "10202_s2_1",
         "titleSid": "74ee49d53be76020",
         "descSid": "9d342ab56c3c3598",
-        "psid": 308201
+        "psid": 308201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "BASH_UP",
+            "ref": "BASH_PROB",
+            "per": 0.006,
+            "step": 0.01,
+            "cap": 0.06,
+            "need": 0.1
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 25,
+              "name": "resource_threshold",
+              "args": [
+                5,
+                2,
+                60
+              ]
+            },
+            {
+              "code": 23,
+              "name": "resource_threshold2",
+              "args": [
+                55
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -256,7 +756,38 @@
         "descKey": "10202_s2_2",
         "titleSid": "fb32302fd232247a",
         "descSid": "70e555e2cd9d081f",
-        "psid": 308202
+        "psid": 308202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "BASH_UP",
+            "ref": "BASH_PROB",
+            "per": 0.006,
+            "step": 0.01,
+            "cap": 0.12,
+            "need": 0.2
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 25,
+              "name": "resource_threshold",
+              "args": [
+                5,
+                2,
+                60
+              ]
+            },
+            {
+              "code": 23,
+              "name": "resource_threshold2",
+              "args": [
+                55
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -265,7 +796,38 @@
         "descKey": "10202_s2_3",
         "titleSid": "23c32ff6d9e5a021",
         "descSid": "5dad2821f47e37c8",
-        "psid": 308203
+        "psid": 308203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "BASH_UP",
+            "ref": "BASH_PROB",
+            "per": 0.006,
+            "step": 0.01,
+            "cap": 0.18,
+            "need": 0.3
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 25,
+              "name": "resource_threshold",
+              "args": [
+                5,
+                2,
+                60
+              ]
+            },
+            {
+              "code": 23,
+              "name": "resource_threshold2",
+              "args": [
+                55
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -289,7 +851,9 @@
         "descKey": "10202_s5_1",
         "titleSid": "69fd762769bc3e4a",
         "descSid": "bacd6a9c9dd2c9a9",
-        "psid": 308501
+        "psid": 308501,
+        "effects": [],
+        "conds": {}
       },
       {
         "rank": 2,
@@ -298,7 +862,9 @@
         "descKey": "10202_s5_2",
         "titleSid": "d69953232e039c6b",
         "descSid": "088c59b84888d697",
-        "psid": 308502
+        "psid": 308502,
+        "effects": [],
+        "conds": {}
       }
     ],
     "s6": {
@@ -325,7 +891,48 @@
         "descKey": "10301_s2_1",
         "titleSid": "c2771731a02a3ab3",
         "descSid": "49c68816e2a60f44",
-        "psid": 309201
+        "psid": 309201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_HEAL_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 50,
+            "cap": 0.05,
+            "need": 250
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_HEAL_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 50,
+            "cap": 0.05,
+            "need": 250
+          },
+          {
+            "kind": "fixed",
+            "stat": "W_HEAL_SCALE",
+            "value": 0.05
+          },
+          {
+            "kind": "fixed",
+            "stat": "PRO_HEAL_SCALE",
+            "value": 0.05
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 9,
+              "name": "skill_kind2",
+              "args": [
+                102
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -334,7 +941,48 @@
         "descKey": "10301_s2_2",
         "titleSid": "d152a6f40d380b64",
         "descSid": "87c0f517da676566",
-        "psid": 309202
+        "psid": 309202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_HEAL_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.015,
+            "step": 50,
+            "cap": 0.15,
+            "need": 500
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_HEAL_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.015,
+            "step": 50,
+            "cap": 0.15,
+            "need": 500
+          },
+          {
+            "kind": "fixed",
+            "stat": "W_HEAL_SCALE",
+            "value": 0.05
+          },
+          {
+            "kind": "fixed",
+            "stat": "PRO_HEAL_SCALE",
+            "value": 0.05
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 9,
+              "name": "skill_kind2",
+              "args": [
+                102
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -343,7 +991,48 @@
         "descKey": "10301_s2_3",
         "titleSid": "8017841cbff6b8c5",
         "descSid": "079a04822ed23834",
-        "psid": 309203
+        "psid": 309203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_HEAL_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01666,
+            "step": 50,
+            "cap": 0.25,
+            "need": 750.3001200480192
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_HEAL_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01666,
+            "step": 50,
+            "cap": 0.25,
+            "need": 750.3001200480192
+          },
+          {
+            "kind": "fixed",
+            "stat": "W_HEAL_SCALE",
+            "value": 0.05
+          },
+          {
+            "kind": "fixed",
+            "stat": "PRO_HEAL_SCALE",
+            "value": 0.05
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 9,
+              "name": "skill_kind2",
+              "args": [
+                102
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -367,7 +1056,9 @@
         "descKey": "10301_s5_1",
         "titleSid": "fa3e55e9ff17b980",
         "descSid": "bbaae4edb21f5799",
-        "psid": 309501
+        "psid": 309501,
+        "effects": [],
+        "conds": {}
       },
       {
         "rank": 2,
@@ -376,7 +1067,26 @@
         "descKey": "10301_s5_2",
         "titleSid": "a508ca09da077c96",
         "descSid": "4385915bcab4be0d",
-        "psid": 309502
+        "psid": 309502,
+        "effects": [],
+        "conds": {
+          "cond_target": [
+            {
+              "code": 2,
+              "name": "target_hp_threshold",
+              "args": [
+                30
+              ]
+            },
+            {
+              "code": 22,
+              "name": "target_skill",
+              "args": [
+                2030110101
+              ]
+            }
+          ]
+        }
       }
     ],
     "s6": {
@@ -403,7 +1113,43 @@
         "descKey": "10302_s2_1",
         "titleSid": "f2e5a1b239bbfd80",
         "descSid": "2bcdcc5dc004d26c",
-        "psid": 304201
+        "psid": 304201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "MIN_W_ATK",
+            "per": 0.024,
+            "step": 50,
+            "cap": 0.12,
+            "need": 250
+          },
+          {
+            "kind": "fixed",
+            "stat": "ADD_CRI_PROB",
+            "value": 0.3
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 21,
+              "name": "skill",
+              "args": [
+                20302105
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 12,
+              "name": "target_kind",
+              "args": [
+                7
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -412,7 +1158,52 @@
         "descKey": "10302_s2_2",
         "titleSid": "51dfbbc7d714ee33",
         "descSid": "56a30cc0027e480e",
-        "psid": 304202
+        "psid": 304202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "MIN_W_ATK",
+            "per": 0.024,
+            "step": 50,
+            "cap": 0.24,
+            "need": 500
+          },
+          {
+            "kind": "fixed",
+            "stat": "ADD_CRI_PROB",
+            "value": 0.3
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 21,
+              "name": "skill",
+              "args": [
+                20302105
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 25,
+              "name": "target_resource_threshold",
+              "args": [
+                2,
+                2,
+                30
+              ]
+            },
+            {
+              "code": 12,
+              "name": "target_kind",
+              "args": [
+                7
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -421,7 +1212,45 @@
         "descKey": "10302_s2_3",
         "titleSid": "4eb68a7168435e98",
         "descSid": "d301e0f8fb50deb0",
-        "psid": 304203
+        "psid": 304203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "MIN_W_ATK",
+            "per": 0.024,
+            "step": 50,
+            "cap": 0.36,
+            "need": 750
+          },
+          {
+            "kind": "fixed",
+            "stat": "ADD_CRI_PROB",
+            "value": 0.3
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 21,
+              "name": "skill",
+              "args": [
+                20302105
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 25,
+              "name": "target_resource_threshold",
+              "args": [
+                2,
+                2,
+                30
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -445,7 +1274,43 @@
         "descKey": "10302_s5_1",
         "titleSid": "9eebfd2a0be90bca",
         "descSid": "4e2fe57c41ea9741",
-        "psid": 304501
+        "psid": 304501,
+        "effects": [
+          {
+            "kind": "fixed",
+            "stat": "ADD_CRI_PROB",
+            "value": 0.3
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 21,
+              "name": "skill",
+              "args": [
+                20302105
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 25,
+              "name": "target_resource_threshold",
+              "args": [
+                2,
+                2,
+                30
+              ]
+            },
+            {
+              "code": 12,
+              "name": "target_kind",
+              "args": [
+                7
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -454,7 +1319,43 @@
         "descKey": "10302_s5_2",
         "titleSid": "0d54e5acc1f5fff6",
         "descSid": "4c3339f0489ff839",
-        "psid": 304502
+        "psid": 304502,
+        "effects": [
+          {
+            "kind": "fixed",
+            "stat": "ADD_CRI_PROB",
+            "value": 0.3
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 21,
+              "name": "skill",
+              "args": [
+                20302105
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 25,
+              "name": "target_resource_threshold",
+              "args": [
+                2,
+                2,
+                30
+              ]
+            },
+            {
+              "code": 12,
+              "name": "target_kind",
+              "args": [
+                7
+              ]
+            }
+          ]
+        }
       }
     ],
     "s6": {
@@ -481,7 +1382,19 @@
         "descKey": "20103_s2_1",
         "titleSid": "f98a0ec9d797144f",
         "descSid": "fddac86a4b2997af",
-        "psid": 306201
+        "psid": 306201,
+        "effects": [],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 13,
+              "name": "skill_kind",
+              "args": [
+                104
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -490,7 +1403,19 @@
         "descKey": "20103_s2_2",
         "titleSid": "0a1d4cbfa4800821",
         "descSid": "3df893e0b6b36641",
-        "psid": 306202
+        "psid": 306202,
+        "effects": [],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 13,
+              "name": "skill_kind",
+              "args": [
+                104
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -499,7 +1424,19 @@
         "descKey": "20103_s2_3",
         "titleSid": "635f447a2efdbb0a",
         "descSid": "34fc0ba4190b9654",
-        "psid": 306203
+        "psid": 306203,
+        "effects": [],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 13,
+              "name": "skill_kind",
+              "args": [
+                104
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -523,7 +1460,9 @@
         "descKey": "20103_s5_1",
         "titleSid": "c10c3291be0e7969",
         "descSid": "dce78353d1040a04",
-        "psid": 306501
+        "psid": 306501,
+        "effects": [],
+        "conds": {}
       },
       {
         "rank": 2,
@@ -532,7 +1471,9 @@
         "descKey": "20103_s5_2",
         "titleSid": "90c68fdfb9698203",
         "descSid": "faa0d1fff115532f",
-        "psid": 306502
+        "psid": 306502,
+        "effects": [],
+        "conds": {}
       }
     ],
     "s6": {
@@ -548,7 +1489,7 @@
   "20401": {
     "s1": {
       "fromStatKey": "max(body,power)",
-      "appliesTo": "critRate",
+      "appliesTo": "maxPhysATK",
       "unlockStage": 1
     },
     "s2": [
@@ -559,7 +1500,41 @@
         "descKey": "20401_s2_1",
         "titleSid": "29f814377257aa84",
         "descSid": "df9997bd18a1908a",
-        "psid": 305201
+        "psid": 305201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "ADD_CRI_PROB",
+            "ref": "HP_MAX",
+            "per": 0.01,
+            "step": 6000,
+            "cap": 0.05,
+            "need": 30000
+          },
+          {
+            "kind": "fixed",
+            "stat": "ADD_CRI_PROB",
+            "value": 0.03
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 13,
+              "name": "skill_kind",
+              "args": [
+                104
+              ]
+            },
+            {
+              "code": 24,
+              "name": "wield_kongfu",
+              "args": [
+                20401
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -568,7 +1543,41 @@
         "descKey": "20401_s2_2",
         "titleSid": "2221ec2f0789ebda",
         "descSid": "09affc490c4849e7",
-        "psid": 305202
+        "psid": 305202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "ADD_CRI_PROB",
+            "ref": "HP_MAX",
+            "per": 0.01,
+            "step": 6000,
+            "cap": 0.1,
+            "need": 60000
+          },
+          {
+            "kind": "fixed",
+            "stat": "ADD_CRI_PROB",
+            "value": 0.06
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 13,
+              "name": "skill_kind",
+              "args": [
+                104
+              ]
+            },
+            {
+              "code": 24,
+              "name": "wield_kongfu",
+              "args": [
+                20401
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -577,7 +1586,41 @@
         "descKey": "20401_s2_3",
         "titleSid": "ac87adaf7a3bceb2",
         "descSid": "387512519c90f396",
-        "psid": 305203
+        "psid": 305203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "ADD_CRI_PROB",
+            "ref": "HP_MAX",
+            "per": 0.01,
+            "step": 6000,
+            "cap": 0.15,
+            "need": 90000
+          },
+          {
+            "kind": "fixed",
+            "stat": "ADD_CRI_PROB",
+            "value": 0.09
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 13,
+              "name": "skill_kind",
+              "args": [
+                104
+              ]
+            },
+            {
+              "code": 24,
+              "name": "wield_kongfu",
+              "args": [
+                20401
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -601,7 +1644,37 @@
         "descKey": "20401_s5_1",
         "titleSid": "923638ce7f59df9c",
         "descSid": "c45cb660090bebf9",
-        "psid": 305501
+        "psid": 305501,
+        "effects": [
+          {
+            "kind": "fixed",
+            "stat": "ABR_AVOID_PROB",
+            "value": 1
+          },
+          {
+            "kind": "fixed",
+            "stat": "W_ATK_CRI_UP",
+            "value": 0.1
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 13,
+              "name": "skill_kind",
+              "args": [
+                104
+              ]
+            },
+            {
+              "code": 24,
+              "name": "wield_kongfu",
+              "args": [
+                20401
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -610,7 +1683,46 @@
         "descKey": "20401_s5_2",
         "titleSid": "35821c26816f5b56",
         "descSid": "01c29c46265cb08b",
-        "psid": 305502
+        "psid": 305502,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "MAX_W_ATK",
+            "ref": "HP_MAX",
+            "per": 4,
+            "step": 5000,
+            "cap": 120,
+            "need": 150000
+          },
+          {
+            "kind": "fixed",
+            "stat": "ABR_AVOID_PROB",
+            "value": 1
+          },
+          {
+            "kind": "fixed",
+            "stat": "W_ATK_CRI_UP",
+            "value": 0.1
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 13,
+              "name": "skill_kind",
+              "args": [
+                104
+              ]
+            },
+            {
+              "code": 24,
+              "name": "wield_kongfu",
+              "args": [
+                20401
+              ]
+            }
+          ]
+        }
       }
     ],
     "s6": {
@@ -637,7 +1749,38 @@
         "descKey": "20402_s2_1",
         "titleSid": "bbdb2e2b574e73d0",
         "descSid": "4404155811f1289d",
-        "psid": 314201
+        "psid": 314201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_PEN",
+            "ref": "MAX_W_ATK",
+            "per": 1,
+            "step": 62.5,
+            "cap": 4,
+            "need": 250
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_PEN_B",
+            "ref": "MAX_W_ATK",
+            "per": 1,
+            "step": 62.5,
+            "cap": 4,
+            "need": 250
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 1,
+              "name": "state_tag",
+              "args": [
+                200153
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -646,7 +1789,38 @@
         "descKey": "20402_s2_2",
         "titleSid": "2d8e7b441bc1f411",
         "descSid": "319256836cc8f620",
-        "psid": 314202
+        "psid": 314202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_PEN",
+            "ref": "MAX_W_ATK",
+            "per": 1,
+            "step": 62.5,
+            "cap": 8,
+            "need": 500
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_PEN_B",
+            "ref": "MAX_W_ATK",
+            "per": 1,
+            "step": 62.5,
+            "cap": 8,
+            "need": 500
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 1,
+              "name": "state_tag",
+              "args": [
+                200153
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -655,7 +1829,38 @@
         "descKey": "20402_s2_3",
         "titleSid": "de9c4e7aef6b2199",
         "descSid": "35c64f2818dccfa0",
-        "psid": 314203
+        "psid": 314203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_PEN",
+            "ref": "MAX_W_ATK",
+            "per": 1,
+            "step": 62.5,
+            "cap": 12,
+            "need": 750
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_PEN_B",
+            "ref": "MAX_W_ATK",
+            "per": 1,
+            "step": 62.5,
+            "cap": 12,
+            "need": 750
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 1,
+              "name": "state_tag",
+              "args": [
+                200153
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -679,7 +1884,9 @@
         "descKey": "20402_s5_1",
         "titleSid": "a6c59b5c5e68d716",
         "descSid": "7165a1a52945a594",
-        "psid": 314501
+        "psid": 314501,
+        "effects": [],
+        "conds": {}
       },
       {
         "rank": 2,
@@ -688,7 +1895,26 @@
         "descKey": "20402_s5_2",
         "titleSid": "945479329806e03d",
         "descSid": "4bea75f6624c44c6",
-        "psid": 314502
+        "psid": 314502,
+        "effects": [],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 22,
+              "name": "skill_stage",
+              "args": [
+                2040210302,
+                2040210303,
+                2040200205,
+                2040200206,
+                2040210201,
+                2040210202,
+                2040210203,
+                2040210204
+              ]
+            }
+          ]
+        }
       }
     ],
     "s6": {
@@ -715,7 +1941,34 @@
         "descKey": "20501_s2_1",
         "titleSid": "8f7e10bfa91128cf",
         "descSid": "e3bee3be42466ef4",
-        "psid": 302201
+        "psid": 302201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 50,
+            "cap": 0.05,
+            "need": 250
+          },
+          {
+            "kind": "fixed",
+            "stat": "W_ATK_CRI_UP",
+            "value": 0.05
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 1,
+              "name": "state_tag",
+              "args": [
+                410001
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -724,7 +1977,34 @@
         "descKey": "20501_s2_2",
         "titleSid": "553754b5ebfbaa63",
         "descSid": "ce051abcc60c5e99",
-        "psid": 302202
+        "psid": 302202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "MIN_W_ATK",
+            "per": 0.015,
+            "step": 50,
+            "cap": 0.15,
+            "need": 500
+          },
+          {
+            "kind": "fixed",
+            "stat": "W_ATK_CRI_UP",
+            "value": 0.05
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 1,
+              "name": "state_tag",
+              "args": [
+                410001
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -733,7 +2013,34 @@
         "descKey": "20501_s2_3",
         "titleSid": "ad391e6a56663e84",
         "descSid": "cc117e8423a2fc6b",
-        "psid": 302203
+        "psid": 302203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "MIN_W_ATK",
+            "per": 0.01666,
+            "step": 50,
+            "cap": 0.25,
+            "need": 750.3001200480192
+          },
+          {
+            "kind": "fixed",
+            "stat": "W_ATK_CRI_UP",
+            "value": 0.05
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 1,
+              "name": "state_tag",
+              "args": [
+                410001
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -757,7 +2064,9 @@
         "descKey": "20501_s5_1",
         "titleSid": "13d4026428bbf6cd",
         "descSid": "83bdbfc116e6e3c7",
-        "psid": 302501
+        "psid": 302501,
+        "effects": [],
+        "conds": {}
       },
       {
         "rank": 2,
@@ -766,7 +2075,9 @@
         "descKey": "20501_s5_2",
         "titleSid": "6c936878b79e957b",
         "descSid": "9f9dfcb75f170c84",
-        "psid": 302502
+        "psid": 302502,
+        "effects": [],
+        "conds": {}
       }
     ],
     "s6": {
@@ -793,7 +2104,29 @@
         "descKey": "20601_s2_1",
         "titleSid": "f4b057f78b82f814",
         "descSid": "1bd716bcf969482e",
-        "psid": 303201
+        "psid": 303201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "MIN_W_ATK",
+            "per": 0.024,
+            "step": 50,
+            "cap": 0.12,
+            "need": 250
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                1006
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -802,7 +2135,29 @@
         "descKey": "20601_s2_2",
         "titleSid": "fab1661d62901b02",
         "descSid": "53050563e9ea8a19",
-        "psid": 303202
+        "psid": 303202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "MIN_W_ATK",
+            "per": 0.024,
+            "step": 50,
+            "cap": 0.24,
+            "need": 500
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                1006
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -811,7 +2166,29 @@
         "descKey": "20601_s2_3",
         "titleSid": "be806ddb6f5a5121",
         "descSid": "bd49e11da0c1533c",
-        "psid": 303203
+        "psid": 303203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "MIN_W_ATK",
+            "per": 0.024,
+            "step": 50,
+            "cap": 0.36,
+            "need": 750
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                1006
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -835,7 +2212,37 @@
         "descKey": "20601_s5_1",
         "titleSid": "94e12c6bd635fd70",
         "descSid": "33e5cd4298599c7a",
-        "psid": 303501
+        "psid": 303501,
+        "effects": [
+          {
+            "kind": "fixed",
+            "stat": "W_ATK_PEN_RDC",
+            "value": -20
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                1006
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 3,
+              "name": "target_state3",
+              "args": []
+            },
+            {
+              "code": 5,
+              "name": "target_state5",
+              "args": []
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -844,7 +2251,71 @@
         "descKey": "20601_s5_2",
         "titleSid": "720da2e72c62dc44",
         "descSid": "a3509262d728ee05",
-        "psid": 303502
+        "psid": 303502,
+        "effects": [
+          {
+            "kind": "fixed",
+            "stat": "W_ATK_PEN_RDC",
+            "value": -20
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 22,
+              "name": "skill_stage",
+              "args": [
+                2060110301,
+                2060110302
+              ]
+            },
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                1006
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 3,
+              "name": "target_state3",
+              "args": []
+            },
+            {
+              "code": 12,
+              "name": "target_kind",
+              "args": [
+                2
+              ]
+            },
+            {
+              "code": 5,
+              "name": "target_state5",
+              "args": []
+            },
+            {
+              "code": 4,
+              "name": "target_state4",
+              "args": []
+            },
+            {
+              "code": 12,
+              "name": "target_kind",
+              "args": [
+                3
+              ]
+            },
+            {
+              "code": 12,
+              "name": "target_kind",
+              "args": [
+                6
+              ]
+            }
+          ]
+        }
       }
     ],
     "s6": {
@@ -871,7 +2342,34 @@
         "descKey": "20602_s2_1",
         "titleSid": "6137583fbf9777a5",
         "descSid": "bd85b51d1d2ea723",
-        "psid": 311201
+        "psid": 311201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "HEAL_CRI_UP",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 50,
+            "cap": 0.05,
+            "need": 250
+          },
+          {
+            "kind": "fixed",
+            "stat": "HEAL_CRI_UP",
+            "value": 0.05
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                20602103011
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -880,7 +2378,34 @@
         "descKey": "20602_s2_2",
         "titleSid": "d0449cfd41b9f342",
         "descSid": "e28a036b1d683c8a",
-        "psid": 311202
+        "psid": 311202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "HEAL_CRI_UP",
+            "ref": "MIN_W_ATK",
+            "per": 0.015,
+            "step": 50,
+            "cap": 0.15,
+            "need": 500
+          },
+          {
+            "kind": "fixed",
+            "stat": "HEAL_CRI_UP",
+            "value": 0.05
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                20602103011
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -889,7 +2414,34 @@
         "descKey": "20602_s2_3",
         "titleSid": "d665774a9792c157",
         "descSid": "85100e3b5e14822e",
-        "psid": 311203
+        "psid": 311203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "HEAL_CRI_UP",
+            "ref": "MIN_W_ATK",
+            "per": 0.01666,
+            "step": 50,
+            "cap": 0.25,
+            "need": 750.3001200480192
+          },
+          {
+            "kind": "fixed",
+            "stat": "HEAL_CRI_UP",
+            "value": 0.05
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                20602103011
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -913,7 +2465,46 @@
         "descKey": "20602_s5_1",
         "titleSid": "9d750196b7f0050f",
         "descSid": "bad06863febfad5d",
-        "psid": 311501
+        "psid": 311501,
+        "effects": [
+          {
+            "kind": "fixed",
+            "stat": "ABR_AVOID_PROB",
+            "value": 1
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 21,
+              "name": "skill",
+              "args": [
+                20602101
+              ]
+            },
+            {
+              "code": 9,
+              "name": "skill_kind2",
+              "args": [
+                2
+              ]
+            },
+            {
+              "code": 32,
+              "name": "equip_kongfu",
+              "args": [
+                20602
+              ]
+            },
+            {
+              "code": 32,
+              "name": "equip_kongfu",
+              "args": [
+                10301
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -922,7 +2513,46 @@
         "descKey": "20602_s5_2",
         "titleSid": "d6fa70d1c42e6e87",
         "descSid": "26b02358bed6b3c0",
-        "psid": 311502
+        "psid": 311502,
+        "effects": [
+          {
+            "kind": "fixed",
+            "stat": "ABR_AVOID_PROB",
+            "value": 1
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 21,
+              "name": "skill",
+              "args": [
+                20602101
+              ]
+            },
+            {
+              "code": 9,
+              "name": "skill_kind2",
+              "args": [
+                2
+              ]
+            },
+            {
+              "code": 32,
+              "name": "equip_kongfu",
+              "args": [
+                20602
+              ]
+            },
+            {
+              "code": 32,
+              "name": "equip_kongfu",
+              "args": [
+                10301
+              ]
+            }
+          ]
+        }
       }
     ],
     "s6": {
@@ -949,7 +2579,45 @@
         "descKey": "20603_s2_1",
         "titleSid": "1f25e8b7f4e76a87",
         "descSid": "684797ca1543e466",
-        "psid": 312201
+        "psid": 312201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 62.5,
+            "cap": 0.04,
+            "need": 250
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_ATK_E_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 62.5,
+            "cap": 0.04,
+            "need": 250
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 9,
+              "name": "skill_kind2",
+              "args": [
+                108
+              ]
+            },
+            {
+              "code": 24,
+              "name": "wield_kongfu",
+              "args": [
+                20603
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -958,7 +2626,45 @@
         "descKey": "20603_s2_2",
         "titleSid": "ae6b4c81c8a60ad2",
         "descSid": "a8d3596b20b431a8",
-        "psid": 312202
+        "psid": 312202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 62.5,
+            "cap": 0.08,
+            "need": 500
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_ATK_E_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 62.5,
+            "cap": 0.08,
+            "need": 500
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 9,
+              "name": "skill_kind2",
+              "args": [
+                108
+              ]
+            },
+            {
+              "code": 24,
+              "name": "wield_kongfu",
+              "args": [
+                20603
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -967,7 +2673,45 @@
         "descKey": "20603_s2_3",
         "titleSid": "bc6660343f75ed9f",
         "descSid": "071de0cbb0b3e9e7",
-        "psid": 312203
+        "psid": 312203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 62.5,
+            "cap": 0.12,
+            "need": 750
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_ATK_E_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 62.5,
+            "cap": 0.12,
+            "need": 750
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 9,
+              "name": "skill_kind2",
+              "args": [
+                108
+              ]
+            },
+            {
+              "code": 24,
+              "name": "wield_kongfu",
+              "args": [
+                20603
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -991,7 +2735,9 @@
         "descKey": "20603_s5_1",
         "titleSid": "91c17bb6f7bcd054",
         "descSid": "3a3475692c561177",
-        "psid": 312501
+        "psid": 312501,
+        "effects": [],
+        "conds": {}
       },
       {
         "rank": 2,
@@ -1000,7 +2746,9 @@
         "descKey": "20603_s5_2",
         "titleSid": "b8712d9bc3a8abb9",
         "descSid": "80ae10812186111a",
-        "psid": 312502
+        "psid": 312502,
+        "effects": [],
+        "conds": {}
       }
     ],
     "s6": {
@@ -1027,7 +2775,53 @@
         "descKey": "20701_s2_1",
         "titleSid": "0bcae6415bf5c011",
         "descSid": "9fbddee7aedc3183",
-        "psid": 310201
+        "psid": 310201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 62.5,
+            "cap": 0.04,
+            "need": 250
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_ATK_E_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 62.5,
+            "cap": 0.04,
+            "need": 250
+          },
+          {
+            "kind": "fixed",
+            "stat": "W_ATK_SCALE",
+            "value": 0.03
+          },
+          {
+            "kind": "fixed",
+            "stat": "PRO_ATK_E_SCALE",
+            "value": 0.03
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 22,
+              "name": "skill_stage",
+              "args": [
+                2070000102,
+                2070000103,
+                2070000104,
+                2070000105,
+                2070000106,
+                2070000107
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -1036,7 +2830,53 @@
         "descKey": "20701_s2_2",
         "titleSid": "4d6616341f1e22ba",
         "descSid": "9ee973446454639a",
-        "psid": 310202
+        "psid": 310202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 62.5,
+            "cap": 0.08,
+            "need": 500
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_ATK_E_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 62.5,
+            "cap": 0.08,
+            "need": 500
+          },
+          {
+            "kind": "fixed",
+            "stat": "W_ATK_SCALE",
+            "value": 0.06
+          },
+          {
+            "kind": "fixed",
+            "stat": "PRO_ATK_E_SCALE",
+            "value": 0.06
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 22,
+              "name": "skill_stage",
+              "args": [
+                2070000102,
+                2070000103,
+                2070000104,
+                2070000105,
+                2070000106,
+                2070000107
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -1045,7 +2885,53 @@
         "descKey": "20701_s2_3",
         "titleSid": "7a3ef1f61303290a",
         "descSid": "8297681fbdaef5f7",
-        "psid": 310203
+        "psid": 310203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 62.5,
+            "cap": 0.12,
+            "need": 750
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_ATK_E_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 62.5,
+            "cap": 0.12,
+            "need": 750
+          },
+          {
+            "kind": "fixed",
+            "stat": "W_ATK_SCALE",
+            "value": 0.09
+          },
+          {
+            "kind": "fixed",
+            "stat": "PRO_ATK_E_SCALE",
+            "value": 0.09
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 22,
+              "name": "skill_stage",
+              "args": [
+                2070000102,
+                2070000103,
+                2070000104,
+                2070000105,
+                2070000106,
+                2070000107
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -1069,7 +2955,20 @@
         "descKey": "20701_s5_1",
         "titleSid": "5a8ba244b2c4f7ef",
         "descSid": "3a9fb251ba2eb2cc",
-        "psid": 310501
+        "psid": 310501,
+        "effects": [],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 21,
+              "name": "skill",
+              "args": [
+                20701002,
+                20701003
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -1078,7 +2977,37 @@
         "descKey": "20701_s5_2",
         "titleSid": "3287fd49b5034f90",
         "descSid": "d4a90254994c99cf",
-        "psid": 310502
+        "psid": 310502,
+        "effects": [],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 21,
+              "name": "skill",
+              "args": [
+                20701002,
+                20701003
+              ]
+            },
+            {
+              "code": 9,
+              "name": "skill_kind2",
+              "args": [
+                101
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 1,
+              "name": "target_buff_stack",
+              "args": [
+                10245411,
+                1
+              ]
+            }
+          ]
+        }
       }
     ],
     "s6": {
@@ -1105,7 +3034,30 @@
         "descKey": "20702_s2_1",
         "titleSid": "2e9b86021bd61609",
         "descSid": "dcbc42e328c8fc72",
-        "psid": 313201
+        "psid": 313201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "CRI_PROB",
+            "per": 0.018,
+            "step": 0.04,
+            "cap": 0.09,
+            "need": 0.2
+          }
+        ],
+        "conds": {
+          "cond_target": [
+            {
+              "code": 1,
+              "name": "target_buff_stack",
+              "args": [
+                431204,
+                1
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -1114,7 +3066,30 @@
         "descKey": "20702_s2_2",
         "titleSid": "df040e2ee8fe8ef6",
         "descSid": "f322cd3267beb0f1",
-        "psid": 313202
+        "psid": 313202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "CRI_PROB",
+            "per": 0.018,
+            "step": 0.04,
+            "cap": 0.18,
+            "need": 0.4
+          }
+        ],
+        "conds": {
+          "cond_target": [
+            {
+              "code": 1,
+              "name": "target_buff_stack",
+              "args": [
+                431204,
+                1
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -1123,7 +3098,30 @@
         "descKey": "20702_s2_3",
         "titleSid": "fa61344e2a9dea37",
         "descSid": "4e10a9c493a29693",
-        "psid": 313203
+        "psid": 313203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "CRI_PROB",
+            "per": 0.018,
+            "step": 0.04,
+            "cap": 0.27,
+            "need": 0.6000000000000001
+          }
+        ],
+        "conds": {
+          "cond_target": [
+            {
+              "code": 1,
+              "name": "target_buff_stack",
+              "args": [
+                431204,
+                1
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -1147,7 +3145,9 @@
         "descKey": "20702_s5_1",
         "titleSid": "8670d7100797c6b0",
         "descSid": "3e2b7ddbf8180288",
-        "psid": 313501
+        "psid": 313501,
+        "effects": [],
+        "conds": {}
       },
       {
         "rank": 2,
@@ -1156,7 +3156,19 @@
         "descKey": "20702_s5_2",
         "titleSid": "82988fe5050f03c5",
         "descSid": "5cd067156549ef1f",
-        "psid": 313502
+        "psid": 313502,
+        "effects": [],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                3135021
+              ]
+            }
+          ]
+        }
       }
     ],
     "s6": {
@@ -1183,7 +3195,40 @@
         "descKey": "20703_s2_1",
         "titleSid": "2c64b02fc9a02d4a",
         "descSid": "a54be7c884fb63cb",
-        "psid": 317201
+        "psid": 317201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 83.33,
+            "cap": 0.03,
+            "need": 249.99
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_ATK_E_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 83.33,
+            "cap": 0.03,
+            "need": 249.99
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 25,
+              "name": "resource_threshold",
+              "args": [
+                105,
+                1,
+                156
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -1192,7 +3237,40 @@
         "descKey": "20703_s2_2",
         "titleSid": "77d5e302167cf27a",
         "descSid": "8e152170ac5ca980",
-        "psid": 317202
+        "psid": 317202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 83.33,
+            "cap": 0.06,
+            "need": 499.98
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_ATK_E_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 83.33,
+            "cap": 0.06,
+            "need": 499.98
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 25,
+              "name": "resource_threshold",
+              "args": [
+                105,
+                1,
+                156
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -1201,7 +3279,40 @@
         "descKey": "20703_s2_3",
         "titleSid": "151f42df9ac312dc",
         "descSid": "86ff8b2e9f7b4386",
-        "psid": 317203
+        "psid": 317203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 83.33,
+            "cap": 0.09,
+            "need": 749.97
+          },
+          {
+            "kind": "ref",
+            "stat": "PRO_ATK_E_SCALE",
+            "ref": "MIN_W_ATK",
+            "per": 0.01,
+            "step": 83.33,
+            "cap": 0.09,
+            "need": 749.97
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 25,
+              "name": "resource_threshold",
+              "args": [
+                105,
+                1,
+                156
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -1225,7 +3336,9 @@
         "descKey": "20703_s5_1",
         "titleSid": "9460d602debc2c08",
         "descSid": "e8d461fc4fd9d780",
-        "psid": 317501
+        "psid": 317501,
+        "effects": [],
+        "conds": {}
       },
       {
         "rank": 2,
@@ -1234,7 +3347,9 @@
         "descKey": "20703_s5_2",
         "titleSid": "f0fc6e9a08f45b64",
         "descSid": "7bdc4a77e1a50894",
-        "psid": 317502
+        "psid": 317502,
+        "effects": [],
+        "conds": {}
       }
     ],
     "s6": {
@@ -1261,7 +3376,48 @@
         "descKey": "20801_s2_1",
         "titleSid": "b12e99eb4d4432db",
         "descSid": "4b5f607929f9bd65",
-        "psid": 315201
+        "psid": 315201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "CRI_PROB",
+            "per": 0.014,
+            "step": 0.04,
+            "cap": 0.07,
+            "need": 0.2
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 25,
+              "name": "resource_threshold",
+              "args": [
+                88,
+                1,
+                231
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 12,
+              "name": "target_kind",
+              "args": [
+                3
+              ]
+            },
+            {
+              "code": 1,
+              "name": "target_buff_stack",
+              "args": [
+                200180,
+                1
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -1270,7 +3426,48 @@
         "descKey": "20801_s2_2",
         "titleSid": "52452a36b6bca995",
         "descSid": "9b1d4e74b840e4dd",
-        "psid": 315202
+        "psid": 315202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "CRI_PROB",
+            "per": 0.014,
+            "step": 0.04,
+            "cap": 0.14,
+            "need": 0.4
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 25,
+              "name": "resource_threshold",
+              "args": [
+                88,
+                1,
+                231
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 12,
+              "name": "target_kind",
+              "args": [
+                3
+              ]
+            },
+            {
+              "code": 1,
+              "name": "target_buff_stack",
+              "args": [
+                200180,
+                1
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -1279,7 +3476,48 @@
         "descKey": "20801_s2_3",
         "titleSid": "0fc93a07257b090c",
         "descSid": "6eb4043a5b8ee29b",
-        "psid": 315203
+        "psid": 315203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "CRI_PROB",
+            "per": 0.014,
+            "step": 0.04,
+            "cap": 0.21,
+            "need": 0.6
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 25,
+              "name": "resource_threshold",
+              "args": [
+                88,
+                1,
+                231
+              ]
+            }
+          ],
+          "cond_target": [
+            {
+              "code": 12,
+              "name": "target_kind",
+              "args": [
+                3
+              ]
+            },
+            {
+              "code": 1,
+              "name": "target_buff_stack",
+              "args": [
+                200180,
+                1
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -1303,7 +3541,9 @@
         "descKey": "20801_s5_1",
         "titleSid": "cd1718ada3d29840",
         "descSid": "828021e44c6fcb59",
-        "psid": 315501
+        "psid": 315501,
+        "effects": [],
+        "conds": {}
       },
       {
         "rank": 2,
@@ -1312,7 +3552,27 @@
         "descKey": "20801_s5_2",
         "titleSid": "48da9beb9c113c3f",
         "descSid": "59eda83dfaf02a13",
-        "psid": 315502
+        "psid": 315502,
+        "effects": [],
+        "conds": {
+          "cond_target": [
+            {
+              "code": 12,
+              "name": "target_kind",
+              "args": [
+                3
+              ]
+            },
+            {
+              "code": 1,
+              "name": "target_buff_stack",
+              "args": [
+                200180,
+                1
+              ]
+            }
+          ]
+        }
       }
     ],
     "s6": {
@@ -1339,7 +3599,34 @@
         "descKey": "20901_s2_1",
         "titleSid": "486acc6a4ee45926",
         "descSid": "e1daeb7241562164",
-        "psid": 316201
+        "psid": 316201,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "MIN_W_ATK",
+            "per": 0.02,
+            "step": 50,
+            "cap": 0.1,
+            "need": 250
+          },
+          {
+            "kind": "fixed",
+            "stat": "ABR_AVOID_PROB",
+            "value": 1
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                3162011
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -1348,7 +3635,34 @@
         "descKey": "20901_s2_2",
         "titleSid": "af4d7c7abcbc2b38",
         "descSid": "d279d6b02c55a287",
-        "psid": 316202
+        "psid": 316202,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "MIN_W_ATK",
+            "per": 0.02,
+            "step": 50,
+            "cap": 0.2,
+            "need": 500
+          },
+          {
+            "kind": "fixed",
+            "stat": "ABR_AVOID_PROB",
+            "value": 1
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                3162011
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 3,
@@ -1357,7 +3671,34 @@
         "descKey": "20901_s2_3",
         "titleSid": "65c1240a3eb1e8a8",
         "descSid": "8452f44e1e843704",
-        "psid": 316203
+        "psid": 316203,
+        "effects": [
+          {
+            "kind": "ref",
+            "stat": "W_ATK_CRI_UP",
+            "ref": "MIN_W_ATK",
+            "per": 0.02,
+            "step": 50,
+            "cap": 0.3,
+            "need": 750
+          },
+          {
+            "kind": "fixed",
+            "stat": "ABR_AVOID_PROB",
+            "value": 1
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 26,
+              "name": "buff_held",
+              "args": [
+                3162011
+              ]
+            }
+          ]
+        }
       }
     ],
     "s3": {
@@ -1381,7 +3722,27 @@
         "descKey": "20901_s5_1",
         "titleSid": "f1e30fb823f2cc9b",
         "descSid": "420a2cb4dec29d78",
-        "psid": 316501
+        "psid": 316501,
+        "effects": [
+          {
+            "kind": "fixed",
+            "stat": "ABR_AVOID_PROB",
+            "value": 1
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 21,
+              "name": "skill",
+              "args": [
+                209011092,
+                209011093,
+                209011094
+              ]
+            }
+          ]
+        }
       },
       {
         "rank": 2,
@@ -1390,7 +3751,27 @@
         "descKey": "20901_s5_2",
         "titleSid": "cfac95c079d6c61a",
         "descSid": "7b112b7f72218ae5",
-        "psid": 316502
+        "psid": 316502,
+        "effects": [
+          {
+            "kind": "fixed",
+            "stat": "ABR_AVOID_PROB",
+            "value": 1
+          }
+        ],
+        "conds": {
+          "cond_self": [
+            {
+              "code": 21,
+              "name": "skill",
+              "args": [
+                209011092,
+                209011093,
+                209011094
+              ]
+            }
+          ]
+        }
       }
     ],
     "s6": {

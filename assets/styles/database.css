@@ -978,6 +978,25 @@
     color: var(--kami-fg);
     line-height: 1.55;
   }
+  /* S2/S5 の効果量 (2026-08-03 追加)。client の buff_passive_data 由来。
+     1 才能が複数の効果を持つ (例: 断魂 溜め会心強化 = 固定 +3% と 気血依存 +5%) ので
+     行ごとに分ける。分けないと「付加会心率 +5.0% / 気血最大値 30000付加会心率 +3.0%」と繋がって読めない */
+  .wwm-db-kongfu-bullet-effs {
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 6px;
+  }
+  .wwm-db-kongfu-bullet-eff {
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--kami-fg);
+    /* 同 file の既存慣例に合わせる = color-mix は in oklab、radius は DESIGN.md「角丸 0〜2px」 */
+    background: color-mix(in oklab, var(--kami-fg) 5%, transparent);
+    border-radius: 2px;
+    padding: 2px 6px;
+    white-space: nowrap;
+  }
   /* S6 = 十四重解放 (現行未実装) */
   .wwm-db-kongfu-slot-future {
     opacity: 0.72;
