@@ -784,7 +784,11 @@
           const _raw = maxTbl[maxKey];
           const maxVal = typeof _raw === 'number' ? _raw : _raw?.max;
           if (maxVal != null) {
-            d[1] = +(maxVal * 0.94).toFixed(4);
+            // 🚨 丸めない。d[1] は stats.js が計算にそのまま加算する値 (表示用ではない)。
+            //    パーセント系 affix は比率 (0.0977…) で持つため toFixed(4) の刻みが
+            //    そのまま statusScore に効く (equip_max.json の 254 値中 213 で桁が落ちる)。
+            //    現値側 (roleInfo 由来 d[1]) は生値なので、仮想側だけ粗いと精度が揃わない。
+            d[1] = maxVal * 0.94;
             d[2] = 0.94;
           }
         });
@@ -1223,7 +1227,7 @@
           const _raw = maxTbl[maxKey];
           const maxVal = typeof _raw === 'number' ? _raw : _raw?.max;
           if (maxVal == null) continue;
-          d[1] = +(maxVal * 0.94).toFixed(4);
+          d[1] = maxVal * 0.94;   // 🚨 丸めない (理由 = 上の同型箇所のコメント)
           d[2] = 0.94;
           d[3] = _deriveRank(0.94);
         }

@@ -537,7 +537,9 @@
             const newMax = _getAffixMax(sk, targetLv);
             if (newMax == null) continue; // Lv非依存 affix (会心率強化等) = 絶対値据え置き
             // RankUP発生時 = 既存品質% 無視、 一律 TARGET_RATIO に fix (兄貴指示 2026-07-24)
-            d[1] = +(newMax * TARGET_RATIO).toFixed(4);
+            // 🚨 丸めない。d[1] は stats.js が計算にそのまま加算する値。同 file の
+            //    701 / 740 行の同型箇所は元から生値で、ここだけ toFixed(4) で粗かった
+            d[1] = newMax * TARGET_RATIO;
             d[2] = TARGET_RATIO;
           }
           eq.exVo._inferredLv = targetLv;
