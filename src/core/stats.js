@@ -741,20 +741,55 @@ function buildStatParamsSync(roleInfo, state) {
   // 2026-07-23 バグ修正: 元々 12 適用値セクションより後 (maxPhysATK 付近) にあったため、
   // r.judgeRes 確定前に appliedHit/appliedCrit/appliedSympathy が computed され、常に
   // fallback 1.45 (敵Lv91相当) を使ってしまってた。r.judgeRes 依存の計算より前に移動。
+  // 敵Lv 解放条件 = キャラLv条件 AND 現在大世界Lv条件 (2026-08-03、兄貴指示
+  // 「charLv+worldLv分岐になるよ。これは前に装備modalのセレクターでやってる」)。
+  // 装備 tier 側の同型実装 = `src/sidebar/opt.js` の `_worldLvCapTier` / `_TIER_WORLDLV_REQ`。
+  // 🚨 **敵Lv105-120 は特殊コンテンツ専用** (兄貴 2026-08-03)。通常の cap 対象ではないので
+  //    自動選択の候補に入れない。`data/enemy_table.json` には client にある全段 (1..120) が
+  //    入っているが、ここで引くのは 91 / 96 / 100 だけ。
+  //    105 以上を出すなら別 UI で明示的に選ばせる形にする (未実装)。
+  //    一度 105 を通常段として扱い、装備 tier 側の仮値 (大世界Lv20) をコピーしていたが誤り。
+  // 値の真実源 = `data/enemy_table.json` (2026-08-03 ファイル化、兄貴指示)。
+  // `data-store.js` の `CALC_DICTS.WWM_ENEMY_TABLE` 経由で `window.WWM_ENEMY_TABLE` に入る。
+  // 生成/突合 = `scripts/mining/monthly/build_enemy_table.py` (client の monster_attrs 由来)。
+  // 🚨 fetch 前に呼ばれた時のために内蔵 fallback を残す。使われたら warn を出す
+  //    (黙って古い値で計算されるのを防ぐ)。
+  const _EJ = (typeof window !== 'undefined' && window.WWM_ENEMY_TABLE) || null;
+  if (!_EJ || !_EJ.byEnemyLv) {
+    console.warn('[stats] data/enemy_table.json 未ロード → 内蔵 fallback で計算');
+  }
+  const ENEMY_WORLDLV_REQ = (_EJ && _EJ.worldLvReq) || { 100: 18 };
   let enemyLv;
-  if (charLv >= 96) enemyLv = 96;
-  else enemyLv = 91;
-  // 敵Lv テーブル (DEF / 審判耐性)
-  const ENEMY_TABLE = {
-    16:  { def: 10,  jr: 1.0 },
-    51:  { def: 29,  jr: 1.0 },
-    81:  { def: 270, jr: 1.15 },
-    86:  { def: 307, jr: 1.3 },
-    91:  { def: 350, jr: 1.45 },
-    96:  { def: 405, jr: 1.65 },
-    100: { def: 498, jr: 1.85 }
-  };
-  const eRow = ENEMY_TABLE[enemyLv] || ENEMY_TABLE[91];
+  {
+    const wl = window.WWM_CURRENT_WORLD_LV || 16;
+    // キャラLv からの理論上限 (装備 tier の _lvToTier と同じ刻み、105 以上は対象外)
+    let theoretical;
+    if (charLv < 96) theoretical = 91;
+    else if (charLv < 100) theoretical = 96;
+    else theoretical = 100;
+    enemyLv = theoretical;
+    for (const t of [100, 96, 91]) {
+      if (theoretical < t) continue;
+      const req = ENEMY_WORLDLV_REQ[t];
+      if (req == null || wl >= req) { enemyLv = t; break; }
+    }
+  }
+  // 敵Lv テーブル (DEF / 審判耐性)。真実源 = data/enemy_table.json (敵Lv 1..120 の全段)。
+  //   def = client `monster_attrs` の W_DEF 列 / jr = JUDGE_ATTR_CORRECT_PARA 列 + 1
+  //   🚨 敵Lv100 だけ **world level で値が変わる** (client key = 10000 + world level)。
+  //      素の Lv100 と同値でない wLv だけが `lv100ByWorldLv` に入っている
+  //   🚨 **下の fallback に全段を書かない。**json と二重管理になり、片方だけ古くなる。
+  //      ここは fetch 前に呼ばれた時に計算が死なないための最小限 (warn 済み)。
+  //      値は敵Lv91 = 現行の既定段のみ
+  const ENEMY_TABLE = (_EJ && _EJ.byEnemyLv) || { 91: { def: 351, jr: 1.45 } };
+  const ENEMY_LV100_BY_WLV = (_EJ && _EJ.lv100ByWorldLv) || {};
+  // 敵Lv100 だけ大世界Lv で値が変わる (client key = 10000 + wLv)。
+  // ENEMY_TABLE[100] は wLv17 以下の値なので、wLv18 以上は上書きする
+  let eRow = ENEMY_TABLE[enemyLv] || ENEMY_TABLE[91];
+  if (enemyLv === 100) {
+    eRow = ENEMY_LV100_BY_WLV[window.WWM_CURRENT_WORLD_LV || 16] || eRow;
+  }
+  r.enemyLv    = enemyLv;   // どの段を引いたか (regression #13 の突合対象)
   r.physDef    = eRow.def;
   r.judgeRes   = eRow.jr;
   r.physRes    = 0;

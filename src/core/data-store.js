@@ -38,7 +38,11 @@
     WWM_QISHU_CATEGORIES: 'qishu_categories',
     WWM_AVATAR_ICONS:     'avatar_icons',
     WWM_GEAR_SLOT_ICONS:  'gear_slot_icons',
-    WWM_GEAR_RECIPE:      'gear_recipe'
+    WWM_GEAR_RECIPE:      'gear_recipe',
+    // 敵Lv別 physDef / judgeRes (2026-08-03 ファイル化)。stats.js の ENEMY_TABLE が読む。
+    // 生成/突合 = scripts/mining/monthly/build_enemy_table.py (client の monster_attrs 由来)。
+    // 計算に直接効くので SCORE_VERSION 側 (DISPLAY_DICTS に移さないこと)
+    WWM_ENEMY_TABLE:      'enemy_table'
   };
   // affix 選択肢 master (affix_selector/affix_selector_chance) = 選択肢候補の表示/フィルタ用データで
   // スコア計算式そのものは変えない (2026-07-15 ATTUNE master化で判明)。 cache buster は
