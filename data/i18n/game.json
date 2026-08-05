@@ -19603,6 +19603,20 @@
       "pt_br": "Impulso da Lâmina",
       "ru": "Импульс Клинка",
       "th": "พลังดาบ"
+    },
+    "resource30": {
+      "ja": "繁華",
+      "en": "Blossoms",
+      "zh": "繁花",
+      "zh_tw": "繁花",
+      "ko": "번화",
+      "vi": "Hoa rực rỡ",
+      "de": "Blüten",
+      "es": "Flores",
+      "fr": "Floraison",
+      "pt_br": "Flores",
+      "ru": "Цветение",
+      "th": "ดอกไม้บาน"
     }
   },
   "talent_cond_buff": {
