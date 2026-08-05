@@ -10,7 +10,18 @@ window.WWM_SCORE_VERSION = 25;
 // スコア計算を変えずラベル/表示参照だけ変えた時に +1 → baseline 無効化(再import促し)を起こさず反映。
 // 2026-08-03: DB 武術タブの S2/S5 に効果量を表示。data/kongfu_passive_skills.json の
 // s2/s5 に effects/conds を追加 (client の buff_passive_data 由来)。スコア計算は不変。
-window.WWM_DISPLAY_VERSION = 198;
+// 2026-08-05: S2/S5 の `buffField` (buff 本体の効果 field) を画面に出す + 武術をまたいで
+// 共有される buff 由来の誤混入を除去 + path 別耐性 (PRO_DEF_A〜E) の公式訳を stat cat へ。
+// 併せて `condOnly` (効果量を持たない行の発動条件) を DB 武術タブに出す。
+// game.json に `talent_cond_term` cat 新設 (力尽き / 真気 / 気力)、ui.json に条件語 3 key 追加。
+// 🚨 同日追記: `effect_normal [103, 種別, 0, 量]` = リソース付与を新規に拾う (kind='resource')。
+//    build がこの field を「次の buff へ降りる」ためだけに読んでいたので、
+//    10101 S5 r2「10 の気力が回復する」/ 20601 S5 r2「繁華値 3 返還」など 11 件が
+//    data に存在しなかった。リソース名は `talent_cond_term.resource<N>` へ 3 種追加
+//    (露 / 恩文字の札 / 刀勢、12 言語 client 由来)。resource30 (繁花値) だけは
+//    client に単独 record が無く名前を確定できないので値だけ出す。
+// data/kongfu_passive_skills.json / data/i18n/game.json / ui.json が変わる。スコア計算は不変。
+window.WWM_DISPLAY_VERSION = 199;
 
 // 現在のゲーム大世界Lv (アップデート追従で書換、 stats.js r.worldLv と opt.js 装備tier上限判定の
 // single source of truth、 2026-07-24 導入)。 大世界Lv アップデートのたびにここを更新すること。
