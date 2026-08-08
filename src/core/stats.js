@@ -74,6 +74,27 @@ function _resolveDerivedRung(d, stage) {
   return null;
 }
 
+// charLv 96+ の基礎ステ成長。**Lv95 からの累積増分** (差分でなく累積)。
+// 出所 = client `avatar_base_attrs` の Lv 別 base 実測 (2026-08-08)。
+//   Lv95 229/437 → 96 235/450 → 97 242/463 → 98 248/476 → 99 255/490 → 100 263/505
+// 🚨 **増分は一定でない** (min +6/+7/+6/+7/+8 / max +13/+13/+13/+14/+15) ので係数では表せない。
+//    旧実装は `lvGrowth*6.5 / *13` = Lv95→97 の 2 レベル平均で、当時の観測 (min+13/max+26) は
+//    client と一致していたが、線形と仮定したため上ほど過小になり charLv 100 で min -1.5 / max -3。
+// 🚨 **キャラ Lv 上限が解放されたらここを更新する。**
+//    `python scripts/mining/formula/read_bin_table.py avatar_base_attrs --cols MIN_W_ATK,MAX_W_ATK`
+//    (key = charLv。key=1000 の行は Lv でない別用途なので使わない)。詳細 = RUNBOOK 8.7 / 8.3b。
+// 🚨 W_DEF / HP_MAX も client では Lv 連動する (Lv95→100 で +18 / +7681) が、
+//    physDef は stats.js 後段で敵値に上書きされ、maxHp は synergy 閾値判定にしか使わないので
+//    ここでは足していない (2026-08-08 時点の判断)。
+const _LV_GROWTH_FROM_95 = {
+  96:  [6, 13],
+  97:  [13, 26],
+  98:  [19, 39],
+  99:  [26, 53],
+  100: [34, 68]
+};
+const _LV_GROWTH_MAX_LV = 100;
+
 function _resolvePath(kongfuMain) {
   const k = window.WWM_KONGFU?.[kongfuMain];
   return k?.path || 'bamboocut';
@@ -83,6 +104,11 @@ function _acc(r, key, val) {
   if (key == null || val == null || isNaN(val)) return;
   if (r[key] === undefined) r[key] = 0;
   r[key] += val;
+  // 内訳トレース (既定 off。console で window.__ACC_ON = true にしてから
+  // buildStatParams を呼ぶと __ACC_TRACE に 1 加算ずつ積む)。実機値と合わない時の切り分け用
+  if (window.__ACC_ON) {
+    (window.__ACC_TRACE = window.__ACC_TRACE || []).push({ key, val, after: r[key], at: new Error().stack.split('\n').slice(2, 5).map(s => s.trim()).join(' <- ') });
+  }
 }
 
 // calc.js / xinfa / sets が使う key → WWM display key 変換
@@ -210,12 +236,15 @@ function buildAffixAliveJudge(roleInfo) {
       }
     }
   }
+  // 🚨 minVoid/maxVoid (無相攻撃) はここに入れない。active path に加算されて常に生
+  //    (2026-08-07 兄貴 SS で確定)。voidPen が PATH_PEN に無いのと同じ理由で、
+  //    末尾の `return true` に落として生扱いにする。voidPath を持つ武術は 0 件なので、
+  //    ここに入れると `PATH_MINMAX[sk] === activePath` が恒常 false = 死に枠と誤判定される。
   const PATH_MINMAX = {
     minBellstrike: 'bellstrike', maxBellstrike: 'bellstrike',
     minStonesplit: 'stonesplit', maxStonesplit: 'stonesplit',
     minSilkbind:   'silkbind',   maxSilkbind:   'silkbind',
-    minBamboocut:  'bamboocut',  maxBamboocut:  'bamboocut',
-    minVoid:       'voidPath',   maxVoid:       'voidPath'
+    minBamboocut:  'bamboocut',  maxBamboocut:  'bamboocut'
   };
   const PATH_PEN = { bellstrikePen: 'bellstrike', stonesplitPen: 'stonesplit', silkbindPen: 'silkbind', bamboocutPen: 'bamboocut' };
   const DEAD_ALWAYS = new Set(['maxHp', 'physDef', 'physResist']);
@@ -412,7 +441,11 @@ function buildStatParamsSync(roleInfo, state) {
       if (tk === 'tier2' && def.effectId) {
         const masterStats = window.WWM_XINFA_EFFECTS?.effects?.[def.effectId]?.stats;
         if (masterStats) {
-          const wl = String(state?.worldLv || roleInfo?.worldLv || 16);
+          // 🚨 最終 fallback は必ず window.WWM_CURRENT_WORLD_LV を経由する。
+          //    state / roleInfo は worldLv を持っていない (import に無い) ので、
+          //    ここをリテラル 16 にすると大世界Lv が上がった時にこの経路だけ取り残される
+          //    (敵Lv100 の段 L816 と装備 tier 上限 opt.js は定数を見ているので追従する)。
+          const wl = String(state?.worldLv || roleInfo?.worldLv || window.WWM_CURRENT_WORLD_LV || 16);
           const lookup = {};
           for (const [sk, wlMap] of Object.entries(masterStats)) {
             if (wlMap[wl] != null) lookup[sk] = wlMap[wl];
@@ -493,27 +526,49 @@ function buildStatParamsSync(roleInfo, state) {
 
   // 気血最大値 正式集計 (装備 maxHp affix / 心法 buff 込み合算) 未実装のため、
   // 断魂×嵐雷 synergy の hpThreshold cap 判定 (L727 付近) 用に仮固定値 +50000 を基礎ステータスへ上乗せ (2026-07-15 兄貴指示、暫定措置)
-  // 2026-07-23: formula_player.ft `attr_first_level_trans` テーブル(config()呼び出し9件)発見時、
-  // 一旦 physDef 0.5→0.57 / minPhys力側 0.225→0.22 に変更したが、実際に MIN_W_ATK/MAX_W_ATK の
-  // formula chain を辿って参照有無を検証した結果、このテーブルは外功攻撃力の計算に一切使われて
-  // いないと判明(別 formula 専用の係数、偶然名前が近いだけ)。誤った適用だったため旧値に revert。
-  _acc(r, 'maxHp',    dBody*60 + dDefense*17 + 50000);
-  _acc(r, 'physDef',  dDefense*0.5);
-  _acc(r, 'minPhys',  dAgility*0.9 + dPower*0.225);          // 速*0.9 + 力*0.225
-  _acc(r, 'maxPhys',  dMomentum*0.9 + dPower*1.36);          // 会*0.9 + 力*1.36
-  _acc(r, 'crit',     dAgility*0.00076);   // 速 → 会心率 only
-  _acc(r, 'affinity', dMomentum*0.00038);  // 会 → 会意率 only
+  // 5行 derived の係数 9 件 = client `attr_first_level_trans` の実値 (2026-08-08 兄貴 GO)。
+  // 内部名と 5 行ステの対応は client の表示名 sid から確定:
+  //   STR=力/劲 CON=体 AGI=防/御 CRI=速/敏 BAS=会/势
+  // 9 件のうち 7 件は旧値 (Yoka 系譜) と一致していて、client と食い違っていたのは
+  // `STR_PATK_MIN_X` 0.225→0.22 と `AGI_PDEF_X` 0.5→0.57 の 2 件だけ。
+  //
+  // 🚨 2026-07-23 に同じ 2 件を client 値へ直した後、「この表は外功攻撃力の計算に一切使われて
+  //    いない (別 formula 専用の係数、偶然名前が近いだけ)」として旧値へ revert した。
+  //    **この判定が誤り。**2026-08-08 に 3 経路で裏を取り直した:
+  //      1. bin table 実体 `data2#854+10330` の生バイトが double 0.57 / 0.22 (行は key=1 の 1 本のみ、
+  //         Lv 別でも段階別でもない)
+  //      2. formula chain が MIN_W_ATK まで届く
+  //         `ATTR_MIN_W_ATK = STR_PATK_MIN_X × STEADY_STR + CRI_PATK_MIN_X × STEADY_CRI`
+  //         → STEADY_MIN_W_ATK → EFFECTIVE_MIN_W_ATK → FIXED_MIN_W_ATK → MIN_W_ATK
+  //      3. 9 係数を参照する record を全 6250 走査 → すべて `ATTR_*` / `VARI_ATTR_*` /
+  //         `MIJING_ATTR_*` 行き。他系統への流用ゼロ
+  //    読み方 = `scripts/mining/formula/read_ft_formula.py` (RUNBOOK 8.3b)。
+  // 🚨 **この 2 件は画面では判別できない** (力 271 で minPhys 差 0.59 = 表示の floor に埋もれる)。
+  //    実機と突き合わせて決めようとしないこと。根拠は上の client 側 3 経路。
+  _acc(r, 'maxHp',    dBody*60 + dDefense*17 + 50000);  // CON_HP_X 60 / AGI_HP_X 17
+  _acc(r, 'physDef',  dDefense*0.57);                   // AGI_PDEF_X
+  _acc(r, 'minPhys',  dAgility*0.9 + dPower*0.22);      // CRI_PATK_MIN_X / STR_PATK_MIN_X
+  _acc(r, 'maxPhys',  dMomentum*0.9 + dPower*1.36);     // BAS_PATK_MAX_X / STR_PATK_MAX_X
+  _acc(r, 'crit',     dAgility*0.00076);                // CRI_CRI_PROB_X (速 → 会心率 only)
+  _acc(r, 'affinity', dMomentum*0.00038);               // BAS_BASH_PROB_X (会 → 会意率 only)
 
-  // 7.5 Lv96+ 動的成長加算 (2026-07-23 兄貴合意)
-  // lv95_base.json は Lv95 固定値。avatar_base_attrs (client 側 Lv成長テーブル) は
-  // MANIFEST chunk 位置未解明で直接取得不可のため、Lv96 以降は実測ベース近似値で動的加算する暫定対応。
-  // 成長率 min+6.5/lv, max+13/lv は Lv96→97 実測差分1点のみからの推定値 (推測、Lv98以降の線形継続は未検証)。
+  // 7.5 Lv96+ 成長加算 (2026-07-23 兄貴合意、2026-08-08 client 実測へ差し替え)
+  // lv95_base.json は Lv95 固定値。charLv が 96 以上のぶんを _LV_GROWTH_FROM_95 で足す。
   // 才能/観音(鍛音)/五音太平楽は変更なし、既存ロジックのままカンスト前提。
   const charLv = roleInfo?.level || 95;
   if (charLv > 95) {
-    const lvGrowth = charLv - 95;
-    _acc(r, 'minPhys', lvGrowth * 6.5);
-    _acc(r, 'maxPhys', lvGrowth * 13);
+    const g = _LV_GROWTH_FROM_95[charLv];
+    if (g) {
+      _acc(r, 'minPhys', g[0]);
+      _acc(r, 'maxPhys', g[1]);
+    } else {
+      // 🚨 黙って線形外挿しない。上限解放で表を更新し忘れたことに気づけなくなる
+      const top = _LV_GROWTH_MAX_LV;
+      console.warn(`[stats] charLv ${charLv} の成長値が _LV_GROWTH_FROM_95 に無い。`
+        + `Lv${top} の値で頭打ちにした。read_bin_table.py avatar_base_attrs で表を更新すること`);
+      _acc(r, 'minPhys', _LV_GROWTH_FROM_95[top][0]);
+      _acc(r, 'maxPhys', _LV_GROWTH_FROM_95[top][1]);
+    }
   }
 
   // 8. active path → minElemMain/maxElemMain
@@ -634,17 +689,18 @@ function buildStatParamsSync(roleInfo, state) {
   }
 
   // 8.7 無駄属性ATK警告 (副path に有意な属性ATK)
+  // 🚨 無相 (minVoid/maxVoid) は対象外。active path に加算されて計算に乗るため「無駄」ではない
+  //    (2026-08-07 兄貴 SS で確定、L905 付近の加算処理を参照)。副path 4種のみ警告する。
   r._wasteWarnings = {};
   const _PATH_ATK_DISPLAY = {
     bellstrike: ['minBellstrike','maxBellstrike','bellstrike'],
     stonesplit: ['minStonesplit','maxStonesplit','stonesplit'],
     silkbind:   ['minSilkbind','maxSilkbind','silkbind'],
-    bamboocut:  ['minBamboocut','maxBamboocut','bamboocut'],
-    voidAtk:    ['minVoid','maxVoid','voidPath']
+    bamboocut:  ['minBamboocut','maxBamboocut','bamboocut']
   };
   let _subPathTotal = 0;
   const _subPathLabels = [];
-  const _PATH_LABEL_JA = { bellstrike:'鋼鳴', stonesplit:'砕岩', silkbind:'糸操', bamboocut:'瞬嵐', voidAtk:'無相' };
+  const _PATH_LABEL_JA = { bellstrike:'鋼鳴', stonesplit:'砕岩', silkbind:'糸操', bamboocut:'瞬嵐' };
   for (const [displayKey, [mk, mxk, pathId]] of Object.entries(_PATH_ATK_DISPLAY)) {
     if (pathId === activePath) continue;
     const total = (r[mk] || 0) + (r[mxk] || 0);
@@ -907,6 +963,19 @@ function buildStatParamsSync(roleInfo, state) {
   if (r.minPhysATK > r.maxPhysATK) r.maxPhysATK = r.minPhysATK;
   if (r.minElemMain > r.maxElemMain) r.maxElemMain = r.minElemMain;
   if (r.minElemSub > r.maxElemSub)   r.maxElemSub  = r.minElemSub;
+
+  // 無相攻撃 (minVoid/maxVoid) = active path の属性攻撃に加算 (2026-08-07 兄貴 SS で確定)
+  //   実機ツールチップ「無相攻撃力: 0-41 (使用中の武学に応じて、対応する流儀のステータス攻撃を
+  //   上昇させる)」/ 実測 砕岩 372-714 + 無相 0-41 = パネル「属性攻撃 372-755」と一致。
+  //   voidPen が全path共通で elemPen に常時加算されるのと同じ扱い (L857)。
+  // 🚨 加算は min>max clamp の **後**。実機ツールチップ「無相攻撃を除くステータス攻撃について、
+  //   無相攻撃による動的上昇を考慮しない場合、最小ステータス攻撃が最大ステータス攻撃を
+  //   上回るときは、最小値で固定ダメージを与える」= clamp は無相を除いた値で判定する。
+  //   先に足すと結果が変わる (active 500-480 + 無相 0-41 → 実機 500-541 / 誤順序 500-500)。
+  // 🚨 副path の属性ATK は乗せない。パネルは全path合計を表示するがダメージ寄与は主path のみ
+  //   (2026-08-07 兄貴判断「副 path の属性ATK は無駄だね。価値は低いかと」)。無相だけが別扱い。
+  r.minElemMain = (r.minElemMain || 0) + (r.minVoid || 0);
+  r.maxElemMain = (r.maxElemMain || 0) + (r.maxVoid || 0);
   // 5path 各 attack も同様
   const _PATH_MIN_MAX = [
     ['minBellstrike','maxBellstrike'],

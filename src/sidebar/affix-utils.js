@@ -135,8 +135,10 @@
       return kfSpecific.includes(km) || kfSpecific.includes(ks);
     }
     if (!_USEFUL_KEYS.has(sk)) return false;
-    // 無相貫通 確定 useful (path 制限外)
-    if (sk === 'voidPen') return true;
+    // 無相貫通 / 無相攻撃 確定 useful (path 制限外)
+    // 無相攻撃 = active path の属性攻撃に加算されるので常に有効 (2026-08-07 兄貴 SS で確定)。
+    // 下の 5path ループに落とすと voidPath を持つ武術が 0 件のため恒常 false になる
+    if (sk === 'voidPen' || sk === 'minVoid' || sk === 'maxVoid') return true;
     // 5path stat は active path のみ useful
     for (const p of ['Bellstrike','Stonesplit','Silkbind','Bamboocut','Void']) {
       const lower = p.charAt(0).toLowerCase() + p.slice(1);

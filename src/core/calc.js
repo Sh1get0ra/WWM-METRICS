@@ -4,7 +4,17 @@
 // 2026-08-03: 敵Lv別 physDef / judgeRes を client 実データへ差し替え (data/enemy_table.json 新設)。
 // 武格指数そのものは変わらないが baseline は `expected` (期待ダメージ) も持っており、
 // physDef が変わると expected が変わるので bump 必須 (兄貴指摘)。
-window.WWM_SCORE_VERSION = 25;
+// 2026-08-08: 5行ステ→派生ステの変換係数 2 件を client `attr_first_level_trans` の実値へ。
+// `力→最小外功` 0.225→0.22 / `防→外功防御` 0.5→0.57。詳細と裏取り 3 経路 = stats.js の 7 節。
+// 併せて Lv96+ の成長加算を client `avatar_base_attrs` の Lv 別実測へ (stats.js `_LV_GROWTH_FROM_95`)。
+// 旧 `lvGrowth*6.5 / *13` は線形近似で charLv 100 で min -1.5 / max -3 過小だった。
+// 2026-08-08 その2: 心法 T2 の値 (data/xinfa_effects.json) 4 系列を正しい client family へ。
+// 会心率 purple が blue の値を、命中率 purple が**会心率**の値を、無相 min/max purple が
+// gold の値を引いていた (WL16 で 会心率 6.9%→7.7% / 無相 min 14.1→12.7 max 28.1→25.3)。
+// 原因 = build が effect→family を「既存 data と値が一致する family の総当たり」で決めており、
+// 導出元と検証先が同じなので誤対応でも ng=0 で通っていた。rank+stat key から構造で引く形に改修。
+// 発覚 = 兄貴の実機ツールチップ「会心率 7.7%」とツール表示 (会心率 127.5% vs 実機 128.3%) の差。
+window.WWM_SCORE_VERSION = 27;
 
 // 表示ラベル/calcKey (stat_display.json 等) の cache buster。 SCORE_VERSION と独立。
 // スコア計算を変えずラベル/表示参照だけ変えた時に +1 → baseline 無効化(再import促し)を起こさず反映。
@@ -21,7 +31,25 @@ window.WWM_SCORE_VERSION = 25;
 //    (露 / 恩文字の札 / 刀勢、12 言語 client 由来)。resource30 (繁花値) だけは
 //    client に単独 record が無く名前を確定できないので値だけ出す。
 // data/kongfu_passive_skills.json / data/i18n/game.json / ui.json が変わる。スコア計算は不変。
-window.WWM_DISPLAY_VERSION = 199;
+// 2026-08-07: DB 武術タブ 才能表の「ダメージ種別」列を直した (兄貴「ダメージ種別がおかしい」)。
+//    `cond_attack` 第3要素 == 1 を「直接ダメージ」と読んでいたのが誤りで 97 セルから外した
+//    (才能 90 rank の client tooltip に `直接伤害` 0 件 / 偏るのは第1要素 == 2 の側)。
+//    併せて 才能自身の常時 buff を「状態」列から外し、`target_exhausted`「力尽き」と
+//    `target_hp_threshold`「対象の気血最大値 N% 未満」の落ちていた条件を出し、
+//    `target_skill` が技名で引けた分 (薬川の扇「坐雲の観」) を拾い、
+//    列見出し ja「敵の状態」を他 11 言語に合わせて「対象の状態」にした。
+//    併せて 付与 buff を表の外の「流れ」へ出し、`equip_kongfu`「装備中の武術」/
+//    `resource_threshold2`「長風・強靭」/ `target_state10`「自分が付与した状態」を追加した
+//    (`.vrt/cond_impl_gap.mjs` = data の条件 21 種すべてを表示側が扱う状態にした)。
+//    `talent_cond_term` に `state_tenacity` / `state_endless_gale` を 12 言語で追加。
+//    スコア計算は不変。
+// 2026-08-07 追記: 武術才能 S2/S5 の effect 193 本に `applyTo` (calc.js のどの項へ行くか) /
+//    `dmgUnit` (どの攻撃タイプに乗るか) / `condMode` (常時で計算してよいか) の 3 field を
+//    付けた。判断の表 = scripts/mining/formula/talent_apply_map.json、埋めるのは
+//    build_kongfu_talent_s2s5_effects.py、検査は audit_talent_apply_map.py。
+//    🚨 **注釈を足しただけで calc への実装はしていない。**この 3 field を読む code は
+//    まだ 1 行も無いのでスコア計算は不変 (regression #13 で固定値突合済み)。
+window.WWM_DISPLAY_VERSION = 202;
 
 // 現在のゲーム大世界Lv (アップデート追従で書換、 stats.js r.worldLv と opt.js 装備tier上限判定の
 // single source of truth、 2026-07-24 導入)。 大世界Lv アップデートのたびにここを更新すること。
@@ -148,7 +176,9 @@ function computeExpected(pIn) {
   const statusScore = statusScoreRaw + (p._fixedScoreBonus || 0);
 
   // tier 判定
-  const worldLv = p.worldLv || 1;
+  // 🚨 fallback を 1 にすると閾値が 6700*0.8^13 まで落ちて誰でも SS になる。
+  //    params が worldLv を持たない経路が出た時に黙って壊れないよう定数を経由させる
+  const worldLv = p.worldLv || window.WWM_CURRENT_WORLD_LV || 16;
   const ssThr = 6700 * Math.pow(0.8, 14 - worldLv);
   let tier;
   if      (statusScore >= ssThr)        tier = 'SS';

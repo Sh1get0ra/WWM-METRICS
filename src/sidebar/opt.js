@@ -234,7 +234,7 @@
     const state = WWMHelpers.storage.loadJSON('wwm_last_state_v1');
     await _loadEquipMax();
     // tier 表示用 SS閾値 (worldLv 由来)
-    const wl = params?.worldLv || 16;
+    const wl = params?.worldLv || window.WWM_CURRENT_WORLD_LV || 16;
     const ssThr = 6700 * Math.pow(0.8, 14 - wl);
     // 共通最適化エンジン runOptimizer 経由 (2026-06-18 TODO 6 共通化)
     const optResult = await runOptimizer(roleInfo, state, {

@@ -353,7 +353,9 @@
       if (t === 2 && def.effectId) {
         const masterStats = window.WWM_XINFA_EFFECTS?.effects?.[def.effectId]?.stats;
         if (masterStats) {
-          const wl = String(effRi?.worldLv || 16);
+          // 🚨 fallback は window.WWM_CURRENT_WORLD_LV 経由 (stats.js の同経路と揃える)。
+          //    リテラル 16 のままだと大世界Lv が上がった時に表示だけ古い値で残る
+          const wl = String(effRi?.worldLv || window.WWM_CURRENT_WORLD_LV || 16);
           const lookup = {};
           for (const [sk, wlMap] of Object.entries(masterStats)) {
             if (wlMap[wl] != null) lookup[sk] = wlMap[wl];
