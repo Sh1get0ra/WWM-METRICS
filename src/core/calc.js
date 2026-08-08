@@ -49,7 +49,8 @@ window.WWM_SCORE_VERSION = 27;
 //    build_kongfu_talent_s2s5_effects.py、検査は audit_talent_apply_map.py。
 //    🚨 **注釈を足しただけで calc への実装はしていない。**この 3 field を読む code は
 //    まだ 1 行も無いのでスコア計算は不変 (regression #13 で固定値突合済み)。
-window.WWM_DISPLAY_VERSION = 202;
+// 2026-08-08: changelog に v2.6.2 を追加 (data/changelog.json は ?v=DISPLAY_VERSION で取るので bump 必須)。
+window.WWM_DISPLAY_VERSION = 203;
 
 // 現在のゲーム大世界Lv (アップデート追従で書換、 stats.js r.worldLv と opt.js 装備tier上限判定の
 // single source of truth、 2026-07-24 導入)。 大世界Lv アップデートのたびにここを更新すること。

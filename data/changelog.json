@@ -1,6 +1,42 @@
 {
-  "current": "2.6.1",
+  "current": "2.6.2",
   "entries": [
+    {
+      "version": "2.6.2",
+      "date": "2026-08-08",
+      "items": [
+        {
+          "featured": true,
+          "ja": "心法の階層効果とキャラクター基礎ステータスの換算値を、ゲーム内の表記に合わせて修正しました。会心率・命中率・攻撃力の精度が上がります。",
+          "en": "Corrected Inner Way tier effects and character base stat conversion values to match in-game figures, improving Critical Rate, Precision Rate, and Attack accuracy.",
+          "zh": "修正了心法阶层效果与角色基础属性的换算值, 使其与游戏内数值一致, 提升了会心率、命中率与攻击力的精度。",
+          "ko": "심법 계층 효과와 캐릭터 기본 스탯의 환산값을 게임 내 수치에 맞게 수정하여, 회심율·명중율·공격력의 정확도가 향상되었습니다.",
+          "vi": "Đã sửa hiệu quả bậc Tâm Pháp và giá trị quy đổi chỉ số cơ bản nhân vật cho khớp với số liệu trong game, cải thiện độ chính xác của Tỷ lệ Chí mạng, Tỷ lệ Chính xác và Công kích.",
+          "de": "Stufeneffekte der Inneren Wege und die Umrechnungswerte der Charakter-Basiswerte wurden an die Angaben im Spiel angepasst, wodurch die Genauigkeit von kritischer Rate, Trefferrate und Angriff steigt.",
+          "es": "Se corrigieron los efectos de nivel de las Vías Internas y los valores de conversión de las estadísticas base del personaje para que coincidan con los del juego, mejorando la precisión de Tasa Crítica, Tasa de Precisión y Ataque.",
+          "fr": "Les effets de palier des Voies Intérieures et les valeurs de conversion des statistiques de base du personnage ont été corrigés pour correspondre au jeu, améliorant la précision du Taux Critique, du Taux de Précision et de l'Attaque.",
+          "pt_br": "Os efeitos de nível dos Caminhos Interiores e os valores de conversão dos atributos base do personagem foram corrigidos para corresponder ao jogo, melhorando a precisão de Taxa Crítica, Taxa de Precisão e Ataque.",
+          "ru": "Эффекты ступеней внутренних техник и коэффициенты пересчёта базовых характеристик персонажа приведены в соответствие с игрой, что повысило точность шанса крит. удара, меткости и атаки.",
+          "th": "แก้ไขเอฟเฟกต์ระดับของวิชาภายในและค่าการแปลงสถานะพื้นฐานของตัวละครให้ตรงกับในเกม ทำให้ความแม่นยำของอัตราคริติคอล อัตราแม่นยำ และพลังโจมตีดีขึ้น",
+          "zh_tw": "修正了心法階層效果與角色基礎屬性的換算值, 使其與遊戲內數值一致, 提升了會心率、命中率與攻擊力的精度。"
+        },
+        {
+          "featured": false,
+          "ja": "無相攻撃力が計算に反映されるようになりました。使用中の武学に対応する属性攻撃へ加算されます。",
+          "en": "Formless Attack is now included in calculations. It is added to the elemental attack matching your equipped martial art.",
+          "zh": "无相攻击力现已计入计算, 会加算到当前武学对应的属性攻击上。",
+          "ko": "무상 공격력이 계산에 반영됩니다. 사용 중인 무학에 대응하는 속성 공격에 가산됩니다.",
+          "vi": "Công kích Vô Tướng giờ đã được tính vào công thức, cộng dồn vào công kích thuộc tính tương ứng với võ học đang dùng.",
+          "de": "Der formlose Angriff fließt nun in die Berechnung ein und wird dem Elementarangriff der ausgerüsteten Kampfkunst hinzugefügt.",
+          "es": "El Ataque Sin Forma ahora se incluye en el cálculo y se suma al ataque elemental correspondiente al arte marcial equipado.",
+          "fr": "L'Attaque Sans Forme est désormais prise en compte dans le calcul et s'ajoute à l'attaque élémentaire correspondant à l'art martial équipé.",
+          "pt_br": "O Ataque Sem Forma agora entra no cálculo e é somado ao ataque elemental correspondente à arte marcial equipada.",
+          "ru": "Бесформенная атака теперь учитывается в расчётах и прибавляется к стихийной атаке используемого боевого искусства.",
+          "th": "พลังโจมตีไร้รูปถูกนำมาคำนวณแล้ว โดยจะบวกเข้ากับพลังโจมตีธาตุที่ตรงกับวิชายุทธ์ที่ใช้อยู่",
+          "zh_tw": "無相攻擊力現已計入計算, 會加算到當前武學對應的屬性攻擊上。"
+        }
+      ]
+    },
     {
       "version": "2.6.1",
       "date": "2026-07-25",
