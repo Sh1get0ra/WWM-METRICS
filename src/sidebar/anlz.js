@@ -55,8 +55,13 @@
       const keys = Array.isArray(item.calcKey) ? item.calcKey : [item.calcKey];
       const minV = params[keys[0]] || 0;
       const maxV = params[keys[1] || keys[0]] || 0;
-      // ゲーム実機表示: min=floor / max=ceil (攻撃力は大きく見せる仕様、 2026-06-18 兄貴+フレ実測一致)
-      return `${Math.floor(minV).toLocaleString()}-${Math.ceil(maxV).toLocaleString()}`;
+      // ゲーム実機表示 = 四捨五入。client の表示フォーマット定義 2 経路で確定 (2026-08-08):
+      //   player_attr_window_item_config  ['STEADY_MIN_W_ATK','STEADY_MAX_W_ATK'] -> "{0:.0f}-{1:.0f}"
+      //   formula_base_avatar_attrs       MIN_W_ATK / MAX_W_ATK の show_class_attrs_form -> "{0:.0f}"
+      // `.0f` は四捨五入。client の formula/Lua/表示定義のどこにも ceil は存在しない。
+      // 🚨 旧実装は min=floor / max=ceil (2026-06-18「攻撃力は大きく見せる仕様」) だったが、
+      //    client 実データと食い違っており、外功 min が -1 / path 攻撃力 max が +1 ずれる原因だった。
+      return `${Math.round(minV).toLocaleString()}-${Math.round(maxV).toLocaleString()}`;
     }
     if (item.format === 'rateApplied') {
       const raw = params[item.calcKey];
